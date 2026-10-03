@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Catrobat コミュニティ
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: "Catrobat で作られたクリエイティブなプロジェクトを共有、発見、リミックスしましょう。ゲーム、アニメーション、アプリを作る若いクリエイターの世界的なコミュニティに参加しましょう。"
+meta.description.media.library: "Catrobat の無料メディア素材（サウンド、画像など）を閲覧・ダウンロードして、プロジェクトに使いましょう。"
+meta.og.title.login: "Catrobat にログイン"
+meta.og.description.login: "ログインして、Catrobat のプロジェクトをコミュニティと共有しましょう。"
+meta.og.title.register: "Catrobat アカウントを作成"
+meta.og.description.register: "Catrobat コミュニティに参加して、今日からクリエイティブなプロジェクトを共有しましょう。"
+meta.og.description.profile: "Catrobat の %username% – プロジェクトや実績を見てみましょう。"
 localLanguage: 英語
 username: ユーザー名
 password: パスワード
@@ -18,15 +18,15 @@ aboutPocketCode: ポケットコードについて
 about: キャトロバットについて
 education: 教育
 chat: チャットとフォーラム
-privacyGuide: Privacy Awareness Guide
+privacyGuide: "プライバシー意識ガイド"
 others: その他
 tutorials: ヘルプ
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
-discordChat: Discord chat
+discordChat: "Discord チャット"
 passwordsNoMatch: パスワードが一致しませんでした。
-error: Oops!
+error: "おっと！"
 cancel: キャンセル
 confirm: 確認
 report: 不適切として報告する
@@ -42,19 +42,19 @@ noDescription: 説明はありません。
 credits: ノートとクレジット
 noCredits: 利用可能なメモとクレジットはありません。
 notesAndCreditsDescription: どのようにしてこのプロジェクトを作ったのですか? アイデア、スクリプト、または他の人々のアートワークを使ったのですか?
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+projectImportedFromScratch: "このプロジェクトは MIT Scratch からインポートされました。元のプロジェクトはこちらで確認できます："
+scratchImportedProjectLinkHere: "ここ。"
 country: 国
 loginText: ログイン
 privacyPolicy: プライバシーポリシー
 imprint: インプリント
 projectDetails: 詳細
 somethingWentWrong: '何か間違っています。'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: "ログインしていること、およびアカウントのメールアドレスが確認済みであることを確認してください。"
+accountSuspended: "コミュニティからの報告により、あなたのアカウントは停止されました。プロフィールからこの決定に異議を申し立てることができます。"
+doesNotExist: "リクエストされたリソースは存在しません。"
 pleaseTryAgain: 'もう一度やり直してください。'
-tryAgainButton: 'Try again'
+tryAgainButton: "もう一度試す"
 oldVersionError: 'ポケット コードの最新のバージョンにアップデートしてください!'
 more: '詳細'
 less: '少ない'
@@ -80,21 +80,21 @@ notificationsUnauthorizedError: "ユーザーを承認できません"
 notificationsClearError: "通知を既読にできません!"
 pleaseWait: "しばらくお待ちください..."
 projects: "プログラム"
-users: "User"
-studios: "Studios"
+users: "ユーザー"
+studios: "スタジオ"
 oauthPopUpTitle: "外部アカウントのサインイン情報"
-oauthInfo: '外部アカウントを使用してログインしました。ランダムなユーザー名を作成しました。 ユーザー名を変更したい場合、またはアカウントの新しいパスワードを作成したい場合は、プロフィールページにアクセスしてください。 ここで %link_start% をクリックして %link_end% プロフィールページに移動'
+oauthInfo: '外部アカウントを使用してログインしました。ランダムなユーザー名を作成しました。 ユーザー名を変更したい場合、またはアカウントの新しいパスワードを作成したい場合は、プロフィールページにアクセスしてください。'
 oauthHere: "ここ"
 statistics: "統計情報"
-languageSelection: "Language selection"
+languageSelection: "言語の選択"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: "テーマ"
+  auto: "システム"
+  auto_description: "デバイスの設定に合わせる"
+  light: "ライト"
+  light_description: "明るい表示"
+  dark: "ダーク"
+  dark_description: "暗い表示"
   apply: '適用'
 indexPage:
   recommendedSection:
@@ -117,63 +117,58 @@ follower:
   unfollowButton: "%username% のフォローを解除"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
+    title: "Catrobat の %theme% へようこそ"
+    title_mindstorms: "Catrobat の Mindstorms EV3・NXT 向けサイトへようこそ"
+    subtitle: "ストーリーやゲームなどを作りましょう..."
+    subtitle_embroidery: "Tシャツ、バッグ、ズボン、スマホケースに自分だけの模様を刺しゅうしましょう！"
+    subtitle_mindstorms: "Lego Mindstorms EV3・NXT ロボットで自分だけのプロジェクトを作りましょう"
+    download: "アプリをダウンロード"
+    statistics: "その他の統計"
   featured: おすすめ
   open: 開く 
   download: ダウンロード
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "プロジェクトをアップロード"
+    drop_here: ".catrobat ファイルをここにドラッグ＆ドロップしてください"
+    or_browse: "またはクリックして選択"
+    button: "アップロード"
+    uploading: "アップロード中..."
+    success: "プロジェクトのアップロードに成功しました！"
+    view_project: "プロジェクトを見る"
+    upload_another: "別のプロジェクトをアップロード"
+    invalid_file: ".catrobat ファイルを選択してください"
+    file_too_large: "ファイルが大きすぎます"
+    error: "アップロードに失敗しました。もう一度お試しください。"
+    unauthorized: "アップロードするにはログインが必要です。"
+    rate_limited: "アップロードが多すぎます。しばらくしてからもう一度お試しください。"
+    selected_file: "選択したファイル："
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+      file_size: "ファイルサイズの上限は 100 MB です。"
+      app_upload: "Pocket Code アプリから直接プロジェクトをアップロードすることもできます。なお、アプリは現在作り直し中のため、今のところウェブからのアップロードには対応していません。"
+      retention: "アップロードされたプロジェクトは、一定期間アクティビティがないと自動的に削除されます。定期的にログインするか、プロジェクトをダウンロードしてもらうと、保存期間が延長されます。"
+      protection: "特に優れたプロジェクトや人気のプロジェクトは、モデレーターによって自動削除から保護される場合があります。"
+  example: "サンプル"
+  newest: "最新のプロジェクト"
+  recommended: "おすすめのプロジェクト"
+  scratchremixes: "Scratch リミックス"
+  noProjects: "現在、プロジェクトはありません。"
   shareAction: 共有
   deleteAction: プロジェクトを削除
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+  deleteConfirmation: "よろしいですか？\n「%programName%」を削除してもよろしいですか？\nこの操作は元に戻せません！\nはい、削除します！\nキャンセル\n"
+  deleteConfirmText: "この操作は元に戻せません。プロジェクトは完全に削除されます。"
   deleteConfirmationTitle: よろしいですか？
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+  deleteNotFoundError: "削除するプロジェクトがあなたのアカウントに見つかりませんでした。"
+  private: "非公開"
+  public: "公開"
+  setPrivateAction: "非公開にする"
+  setPublicAction: "公開する"
+  setPrivateConfirm: "このプロジェクトを非公開にしますか？検索結果に表示されなくなります。"
+  setPublicConfirm: "このプロジェクトを公開しますか？すべての人が見られるようになります。"
+  markNotForKidsConfirm: "このプロジェクトを子ども向けではないとマークしますか？"
+  markSafeForKidsConfirm: "このプロジェクトの「子ども向けではない」マークを外しますか？"
+  nfkModeratorLocked: "この設定はモデレーターによってロックされています。"
+  confirmSetPrivate: "このプロジェクトを非公開にしてもよろしいですか？検索結果に表示されなくなります。"
+  confirmSetPublic: "このプロジェクトを公開してもよろしいですか？すべての人が見られるようになります。"
   changeVisibility: |+
     本当にいいの？
     %programName%」をプライベートに設定すると、他のユーザーが見たり見つけたりすることはありません。
@@ -182,131 +177,126 @@ project:
     はい、公開に設定されています。
     はい、プライベートに設定
     いいえ
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
+  reportCommentConfirmation: "このコメントを報告してもよろしいですか？"
+  deleteCommentConfirmation: "このコメントを削除してもよろしいですか？"
+  deleteAccountConfirmation: "アカウントを削除しますか？\nアカウントを削除してもよろしいですか？アップロードしたプロジェクトとコメントもすべて削除されます！\nこの操作は元に戻せません！\nはい、削除します！\nキャンセル\n"
+  tooLongName: "プロジェクト名が長すぎます！"
+  tooLongDescription: "プロジェクトの説明が長すぎます！"
+  tooLongCredits: "プロジェクトのメモとクレジットが長すぎます！"
   my_projects: 私のプロジェクト
-  trending: Trending projects
-  popular: Popular projects
+  trending: "話題のプロジェクト"
+  popular: "人気のプロジェクト"
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
-  random: Random projects
-  related: Related projects
+  random: "ランダムなプロジェクト"
+  related: "関連プロジェクト"
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: "プロジェクトを探す"
+    no_projects: "まだプロジェクトを作成していません"
+    no_explore: "プロジェクトが見つかりません"
+    load_more: "もっと読み込む"
+    upload: "プロジェクトをアップロード"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: "保護済み"
+    day_left: "残り 1 日"
+    days_left: "残り %days% 日"
+    tooltip: "プロジェクトは一定期間アクティビティがないと自動的に削除されます。ダウンロード数を増やすか、定期的にログインすると保存期間が延長されます。"
+    tooltip_protected: "このプロジェクトは保護されているため、自動的に削除されることはありません。"
+  downloads: "%downloads% 回ダウンロード"
+  sample: "サンプルプロジェクト"
+  views: "%views% 回表示"
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "このプロジェクトにリアクションした人"
     all: "すべて"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  remixes: "{0}0 件のリミックス |{1}1 件のリミックス |]1,Inf]%remixes% 件のリミックス"
+  newRemixesNotificationTitle: "|{1}「%programName%」に 1 件の新しいリミックスがあります： |]1,Inf] 「%programName%」に %remixes% 件の新しいリミックスがあります："
+  submitted: "投稿されたプロジェクト"
+  uploaded: "アップロードされたプロジェクト"
   reportAsInappropriate: 不適切として報告します。
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  reportProgram: "プロジェクトを報告"
+  languageVersion: "Catrobat 言語バージョン：%languageVersion%"
+  reportLoginText: "このプロジェクトを報告するには %login% してください。"
+  reportDialogHeader: "このプロジェクトを報告する理由は何ですか？"
+  reportDialogReason: "理由を入力してください"
+  reportRadioButtonInappropriate: "不適切な内容です"
+  reportRadioButtonCopyright: "著作権の侵害"
+  reportRadioButtonSpam: "スパムです"
+  reportRadioButtonDislike: "気に入りません"
+  reportOwnProgram: "自分のプロジェクトを報告することはできません。"
+  reportAlready: "このプロジェクトはすでに報告済みです。"
+  reportDone: "このプロジェクトを報告しました！"
+  updateAppHeaderDownload: "ダウンロードできません"
+  updateAppTextDownload: "アプリを最新バージョンに更新してください。なお、Android のすべての機能が IOS で使えるわけではありません。"
+  updateAppTextDownloadApk: "APK のダウンロードは現在 Android でのみ利用でき、IOS では利用できません。"
+  updateAppHeader: "アプリを更新"
+  updateAppText: "アプリを最新バージョンに更新してください。"
   btnClosePopup: OK
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: "この Catrobat プロジェクトを見てみてください"
+  show_more: "もっと見る"
   comments: コメント
-  send: Send
+  send: "送信"
   delete: 削除
   report: 不適切として報告する
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: "返信"
+  report_popup: "コメントを報告しました。"
+  report_popup_header: "報告済み"
+  deleted_popup: "コメントを削除しました。"
+  deleted_popup_header: "削除済み"
+  noAdminRights: "管理者権限がありません。管理者としてログインしてください。"
+  editProject: "プロジェクトを編集"
+  closeProjectEditor: "プロジェクトエディターを閉じる"
   closeEditorPrompt: 変更内容を保存しますか？
   btnDiscard: 破棄
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: "コメントを書く"
+  thumbsUp: "いいね！"
+  smile: "スマイル！"
+  love: "大好き！"
+  wow: "すごーい！"
+  linkTitle: "リンク"
+  link: "プロジェクトのリンクをクリップボードにコピー"
   reactionsText: リアクション
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: "プロジェクトのダウンロード中にエラーが発生しました。しばらくしてからもう一度お試しください。"
+  downloadStartText: "ダウンロードを開始しました..."
+  downloading: "ダウンロード中..."
+  openInApp: "Pocket Code で開く"
+  downloaded: "ダウンロード済み"
+  showTranslation: "翻訳を表示"
+  hideTranslation: "翻訳を非表示"
+  translatedByLine: "%provider% により %sourceLanguage% から %targetLanguage% に翻訳"
+  googleTranslate: "Google 翻訳"
+  confrimDelete: "この翻訳を削除してもよろしいですか？"
   default: デフォルト
   save: 保存
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: "%language% の翻訳"
+  editDefault: "デフォルトを編集"
+  editTranslation: "%language% の翻訳を編集"
+  translations: "翻訳"
+  createTranslation: "翻訳を作成"
+  deletedComment: "**削除済み**"
+  replyLabel: "件の返信"
+  repliesLabel: "件の返信"
+  notForKids: "子ども向けではありません"
 remixGraph:
   title: リミックス
   showRemixGraph: 'リミックスのグラフを表示'
   by: 'によって'
   open: '開く '
   showPaths: 'パスを表示'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: "リミックスグラフを読み込み中..."
+  error: "リミックスグラフを読み込めませんでした。"
+  empty: "このプロジェクトのリミックスグラフのデータはまだありません。"
   remixesLabel: 'リミックス'
   projectsLabel: 'プログラム'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  scratchLabel: "Scratch の元プロジェクト"
+  interactHint: "ノードを選択すると、プロジェクトを開いたり、そのリミックスの経路を強調表示したりできます。"
+  zoomIn: "拡大"
+  zoomOut: "縮小"
+  resetView: "表示をリセット"
+  projectNotAvailableErrorTitle: "ごめんなさい..."
+  projectNotAvailableErrorDescription: "このプロジェクトはもう利用できません！"
+  projectNotAvailable: "利用できません"
+  projectUnknownUser: "不明なユーザー"
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -317,92 +307,82 @@ accountConfirmation:
     このリンクは、お客様のアカウントを認証するために一度だけ使用することができます。
     よろしくお願いいたします。
     あなたの Catrobat チーム。
-  messageHtml: |
-    <p>
-    Dear %username%.<br>。
-    <br>
-    アカウントのアクティベーションを完了するには、<a href=%confirmationUrl%>ここをクリックしてください。</a><br>
-    <br>
-    このリンクはお客様のアカウントを認証するために一度だけ使用することができます。<br>
-    <br>
-    よろしくお願いします。
-    <br>よろしくお願いします。
-    </p>
+  messageHtml: "<p>\n%username% 様<br>\n<br>\nアカウントの有効化を完了するには、<a href=\"%confirmationUrl%\">ここをクリックしてください。</a><br>\nこのリンクは、アカウントを確認するために一度だけ使用できます。<br>\n<br>\nよろしくお願いいたします。<br>\nCatrobat チーム\n</p>\n"
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "メールアドレスを確認してください"
+  welcome: "Catrobat へようこそ！"
+  greeting: "ご登録ありがとうございます！始めるには、メールアドレスを確認してください。"
+  message: "下のボタンをクリックしてメールアドレスを確認してください。このリンクは %time% まで有効で、一度だけ使用できます。"
+  button: "メールアドレスを確認"
+  ignore: "Catrobat アカウントを作成していない場合は、このメールを無視してかまいません。"
+  autoDelete: "確認されていないアカウントは 30 日後に自動的に削除されます。"
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "お子さまの Catrobat アカウントに保護者の同意が必要です"
+    title: "保護者の同意が必要です"
+    greeting: "こんにちは。"
+    message: "お子さまの %username% さんが Catrobat でアカウントを作成し、メールアドレスを確認しました。"
+    explanation: "Catrobat は、若い人たちがアプリ、ゲーム、アニメーションを作りながらプログラミングを学べる無料の教育プラットフォームです。EU の児童保護規則により、お子さまがコミュニティに完全に参加する前に、保護者の同意が必要です。下のボタンをクリックして同意してください。"
+    button: "保護者として同意する"
+    ignore: "このメールに心当たりがない場合は、無視してかまいません。同意がない場合、アカウントの機能は制限されます。"
+    whatIsCatrobat: "Catrobat は、無料の非営利の教育用プログラミングプラットフォームです。詳しくは catrobat.org をご覧ください。"
+    manageLink: "お子さまのアカウントは、<a href=\"%portalUrl%\" style=\"color: #00acc1;\">保護者ポータル</a>からいつでも管理できます。<a href=\"%infoUrl%\" style=\"color: #00acc1;\">保護者の権利</a>について詳しくはこちらをご覧ください。"
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "同意が完了しました"
+    message: "ありがとうございます！%username% さんのアカウントが完全に有効になりました。"
+    continueButton: "プロジェクトを探す"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "保護者の方へ"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "保護者の方へのご案内"
+    intro: "Catrobat は、若いユーザーの安全とプライバシーを真剣に考えています。このページでは、お子さまをどのように守っているか、また保護者にどのような権利があるかを説明します。"
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Catrobat とは？"
+      text: "Catrobat は、若い人たちが自分でアプリ、ゲーム、アニメーションを作りながらプログラミングを学べる、無料の非営利の教育プラットフォームです。世界中で利用でき、教育の現場でも使われています。"
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "どのようなデータを収集していますか？"
+      text: "プラットフォームの運営に必要な最小限のデータのみを収集しています：ユーザー名、メールアドレス、生年月日、そしてお子さまが作成・アップロードしたプロジェクトです。14 歳未満のユーザーについては、同意を得るために保護者のメールアドレスも保存します。個人データを販売したり、第三者と共有したりすることはありません。"
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "保護者の権利"
+      text: "EU の児童保護規則（GDPR）および COPPA に基づき、保護者には次の権利があります：お子さまについて当社が保有するデータの確認、そのデータのコピーの請求、いつでも同意を取り消すこと（アカウントは制限されます）、そしてお子さまのアカウントとすべての関連データの完全な削除の請求です。"
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "未成年のアカウントにはどのような制限がありますか？"
+      text: "16 歳未満のユーザーは、コメントの投稿や閲覧、他のユーザーのフォロー、子ども向けではないとマークされたコンテンツの閲覧ができません。プロジェクトの作成やアップロード、公開プロジェクトの閲覧、「いいね」でのリアクションは引き続きできます。これらの制限は、安全な学習環境を提供するためのものです。"
+    manageButton: "お子さまのアカウントを管理"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "保護者ポータル"
+    description: "メールアドレスを入力すると、お子さまの Catrobat アカウントを管理するための安全なリンクが届きます。リンクは登録時に入力されたメールアドレスに送信されます。"
+    emailLabel: "あなたのメールアドレス"
+    submitButton: "管理用リンクを送信"
+    infoLink: "詳しく見る"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "受信トレイを確認してください"
+      message: "このメールアドレスに関連付けられたアカウントがある場合、管理用リンクを送信しました。受信トレイを確認し、リンクからお子さまのアカウントを管理してください。"
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "お子さまのアカウントを管理"
+    description: "%email% に関連付けられたアカウントを管理しています。"
+    consentStatus: "同意の状況"
+    accountCreated: "アカウント作成日"
+    email: "お子さまのメールアドレス"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "同意済み"
+      pending: "保留中"
+      revoked: "取り消し済み"
+    grantButton: "同意する"
+    revokeButton: "同意を取り消す"
+    revokeConfirm: "同意を取り消してもよろしいですか？アカウントの機能が制限されます。"
+    exportButton: "データをエクスポート"
+    deleteButton: "アカウントを削除"
+    deleteConfirm: "このアカウントを完全に削除してもよろしいですか？この操作は元に戻せません。"
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "お子さまの Catrobat アカウントの管理"
+      title: "アカウント管理"
+      greeting: "こんにちは。"
+      message: "お子さまの Catrobat アカウント（%usernames%）を管理するためのリンクがリクエストされました。下のボタンをクリックして、アカウントを確認・管理してください。"
+      button: "アカウントを管理"
+      ignore: "このリクエストに心当たりがない場合は、このメールを無視してかまいません。"
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
   message: |
@@ -415,25 +395,10 @@ passwordRecovery:
     プロフィールの詳細を編集するには、このページにアクセスしてください。%profilePage%
     よろしくお願いします。
     Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>。
-    <br>
-    パスワードを忘れてしまったため、<a href=%appplication_url%>Pocket Code</a>のパスワードのリセットをリクエストしました。
-    リクエストしていない場合は、無視してください。24時間後には期限切れとなり、使えなくなります。<br>。
-    <br>。
-    パスワードをリセットして、新しいパスワードを作成するには、<a href=%confirmationUrl%>ここをクリックしてください。</a><br>
-    <br>
-    ユーザー名とパスワードは、いつでも<a href=%appplication_url%>Pocket Code</a>のコミュニティにアクセスすることができます。<br>
-    そのためには、次のページにアクセスすればいいのです。<a href=%loginPage%>Login Page</a><br>。
-    プロフィールの詳細を編集するには、この<a href=%profilePage%>ページ</a>にアクセスしてください.<br>。
-    <br>
-    よろしくお願いします。<br>
-    Your Catrobat Teamです。
-    </p>
+  messageHtml: "<p>\n%username% 様<br>\n<br>\nパスワードをお忘れになったため、<a href=\"%appplication_url%\">Pocket Code</a> のパスワードの再設定がリクエストされました。\nリクエストしていない場合は、このメールを無視してください。24 時間後に期限切れとなり、使えなくなります。<br>\n<br>\nパスワードを再設定して新しいパスワードを作成するには、<a href=\"%confirmationUrl%\">ここをクリックしてください。</a><br>\n<br>\nユーザー名とパスワードを使って、いつでも <a href=\"%appplication_url%\">Pocket Code</a> コミュニティにアクセスできます。<br>\n次のページにアクセスしてください：<a href=\"%loginPage%\">ログインページ</a><br>\nプロフィールの詳細を編集するには、こちらの<a href=\"%profilePage%\">ページ</a>にアクセスしてください。<br>\n<br>\nよろしくお願いいたします。<br>\nCatrobat チーム\n</p>\n"
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: "自己紹介"
+  currentlyWorkingOn: "現在取り組んでいること"
   edit: プロフィールを編集
   saveChanges: 変更を保存します。
   newPass: 新しいパスワード
@@ -462,16 +427,16 @@ profile:
     submitSuccess: 保存しました！
   reallyDeleteProgram: 本当にプロジェクトを削除しますか？
   programsOf: プロジェクト
-  picture: Profile picture
+  picture: "プロフィール画像"
   changePicture: 写真を変更
   goToScratchProfile: スクラッチのプロフィール
 myprofile:
-  userSettings: User settings
+  userSettings: "ユーザー設定"
   profileSettings: プロファイルを編集
   securitySettings: パスワードを変更する
   accountSettings: アカウント設定
-  accountVerification: Verify account
-  account: Account
+  accountVerification: "アカウントを確認"
+  account: "アカウント"
   editProfile: プロファイルを編集
   edit: 編集
   done: 完了
@@ -480,22 +445,19 @@ myprofile:
   avatar: アバター
   email: Eメールアドレス
   deleteAccount: アカウントを削除
-  deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+  deleteAccountWarning: "ご注意ください：\nあなたは %num_projects% 件のプロジェクトを作成し、%num_followers% 人のフォロワーがいます。すべてのプロジェクトが削除されます。今後ログインできなくなり、プロジェクトはすべての一覧から消えます。プロフィールの削除は元に戻せません！\n本当に退会しますか？\n"
+  exportData: "自分のデータをダウンロード"
+  exportDataDescription: "あなたには、自分の個人データのコピーを受け取る権利があります。これには、プロフィール情報、プロジェクト、コメント、リアクション、フォロワーが含まれます。"
+  exportDataLoading: "ダウンロード中..."
+  exportDataError: "データのエクスポート中に問題が発生しました。しばらくしてからもう一度お試しください。"
+  exportDataRateLimited: "データのエクスポートは 1 日 1 回までです。明日もう一度お試しください。"
   editAccountSettings: アカウント設定を編集
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  profileChangeSuccess: "プロフィールを変更しました。"
+  unspecifiedError: "プロフィールの変更中に問題が発生しました。もう一度お試しいただき、問題が続く場合はお知らせください！"
+  verifyAccountText: "アカウントを確認するためのリンクを記載したメールをお送りします。1 時間以内にリンクをクリックしてください。メールのリクエストは 1 日 1 回までです。"
+  verifyAccountButton: "メールを送信"
+  verifyAccountMailSent: "メールを送信しました。受信トレイを確認してください"
+  verifyAccountMailFailed: "メールのリクエストは 1 日 1 回までです"
 licenseToPlay:
   link: '再生するライセンス'
   title: 'プレーするライセンス - クレジットと共有を与えます'
@@ -547,16 +509,16 @@ termsOfUse:
   version: バージョン 1.3、2014/3/4
 search:
   dotdotdot: 検索...
-  search: Search projects, users & studios
+  search: "プロジェクト、ユーザー、スタジオを検索"
   inMediaLib: メディアライブラリ内で検索
-  inMediaCategory: Search in media category
+  inMediaCategory: "メディアカテゴリ内を検索"
   results: 検索結果
   resultcount: 検索結果は %count% です
   fail: 少なくとも1つの検索語を入力してください
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noUsers: "ユーザーが見つかりません"
+  noProjects: "プロジェクトが見つかりません"
+  noStudios: "スタジオが見つかりません"
+  sameSearchMessage: "もうこのページにいるようです！別のキーワードで検索してみませんか？"
 menu:
   profile: マイプロフィール
   login: ログイン
@@ -566,19 +528,19 @@ menu:
   helpAndTutorials: ヘルプとチュートリアル
   followersAndFollowing: フォロワー
   mediaLibrary: メディア ライブラリー
-  studio: Studios
+  studio: "スタジオ"
   language: 言語
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: "利用できる言語オプションはありません。"
 login:
   login: ログイン
   button:
-    loginNow: Login now
+    loginNow: "今すぐログイン"
     createAccount: アカウントを作成
-    forgetPassword: Forget password?
+    forgetPassword: "パスワードをお忘れですか？"
   oauth:
-    title: Or you can join with
+    title: "または次の方法で参加"
   passOrUser: ユーザー名またはパスワードが正しくありません。
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: "あなたのアカウントは停止されています。誤りだと思われる場合は、サポートにお問い合わせください。"
   noUsername: あなたのユーザー名または電子メール アドレスが見つかりませんでした。
   forgotPass: パスワードまたはユーザ名を忘れましたか?
   recoverPassSend: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。
@@ -595,69 +557,69 @@ login:
   passwordFirst: パスワード
   passwordSecond: パスワード確認
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: "新規登録"
+  subText: "続行すると、Catrobat コミュニティのアカウントが作成され、%var1% と %var2% に同意したことになります。"
+  dateOfBirth: "生年月日"
+  dateOfBirthInfo: "EU の児童保護規則（GDPR/COPPA）を守り、年少のユーザーに安全な環境を提供するために、生年月日をお尋ねしています。"
+  parentEmail: "保護者のメールアドレス"
+  parentEmailInfo: "14 歳未満のユーザーは必須です。このアドレスに同意のリクエストを送信します。"
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: "登録を完了してください"
+    info: "プラットフォームを引き続き利用するには、生年月日を入力してください。"
     submit: 続行
   button:
     cancel: キャンセル
     createAccount: アカウントを作成
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "受信トレイを確認してください！"
+    message: "確認メールを送信しました。メール内のリンクをクリックして、アカウントを有効にしてください。"
+    helpTitle: "メールが届きませんか？"
+    hint: "迷惑メールフォルダを確認してください。リンクの有効期限は 24 時間です。"
+    resendButton: "確認メールを再送信"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "保護者の同意を待っています"
+    message: "メールアドレスが確認されました！プラットフォームを完全に利用するには、保護者の同意が必要です。"
+    sentTo: "同意のリクエストを %email% に送信しました"
+    helpTitle: "メールが届きませんか？お困りですか？"
+    hint: "保護者の方に迷惑メールフォルダを確認してもらってください。リンクの有効期限は 24 時間です。"
+    resendButton: "同意メールを再送信"
+    wrongEmail: "保護者のメールアドレスを間違えて入力しましたか？"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "保護者の同意が取り消されました"
+    message: "保護者があなたのアカウントへの同意を取り消しました。再び同意されるまで、アカウントの機能は制限されます。"
+    newEmailPlaceholder: "新しい保護者のメールアドレス"
+    changeButton: "更新して再送信"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: "アカウントの復旧"
+  description: "アカウントのメールアドレスまたはユーザー名を覚えていれば、パスワードを再設定するためのリンクをお送りできます。"
   button:
     cancel: キャンセル
-    submit: Recover password
+    submit: "パスワードを復旧"
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "パスワードの再設定"
+    description: "アカウントのメールアドレスを覚えていれば、パスワードを再設定するためのリンクをお送りできます。"
     button:
-      submit: "Send reset email"
+      submit: "再設定メールを送信"
       cancel: "キャンセル"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "メールを確認してください"
+    description: "あなたのメールアドレスに一致するアカウントがある場合、パスワードを再設定するためのリンクを記載したメールを送信しました。このリンクは %time% 後に無効になります。"
+    descriptionTwo: "パスワードの再設定は %throttleLimit% 時間ごとにリクエストできます。"
+    descriptionThree: "メールが届かない場合は、迷惑メールフォルダを確認するか、サポート（%email-webmaster%）までメールでお問い合わせください。"
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "パスワードを再設定するには、次のリンクにアクセスしてください"
+    expire: "このリンクは %time% 後に無効になります。"
+    cheers: "よろしくお願いします！"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "パスワードの再設定"
+    content: "最近、Catrobat アカウントのパスワード再設定がリクエストされました。下のボタンをクリックして、新しいパスワードを設定してください。このリクエストに心当たりがない場合は、このメールを無視してかまいません。"
+    visitLink: "パスワードを再設定"
+    expire: "このリンクは %time% の間有効で、一度だけ使用できます。"
   reset:
-    title: "Reset your password"
+    title: "パスワードの再設定"
     button:
       submit: "パスワードのリセット"
 apk:
@@ -669,7 +631,7 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: "問題が発生しました。もう一度お試しいただき、問題が続く場合はお知らせください！"
   username:
     blank: ユーザー名を空白にできません
     invalid: あなたのユーザー名は有効ではありません
@@ -705,13 +667,13 @@ errors:
   token: '失敗したデバイス認証： 認証トークンが無効です!'
   uploadTokenAuthFailed: 'トークンのアップロードに失敗しました。'
   project:
-    invalid: Invalid project.
+    invalid: "無効なプロジェクトです。"
   languageversion:
     tooold: '申し訳ありませんが、あなたのプロジェクトには Catrobat 言語の古いバージョンが含まれています! ポケットコードの最新バージョンを使用していますか?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "申し訳ありませんが、古いバージョンの Pocket Code をお使いです。最新バージョンに更新してください。"
   authentication:
-    title: Login did not work
+    title: "ログインできませんでした"
     webview: |
       ユーザーの資格情報が間違っています。
       アプリでもう一度ログインしてみてください。
@@ -732,7 +694,7 @@ failure:
   upload: アプリのアップロード中にエラーが発生しました。
 user:
   verification:
-    email: 'Verify your email'
+    email: "メールアドレスを確認してください"
 api:
   registerUser:
     emailMissing: 'メールアドレスがありません'
@@ -751,46 +713,46 @@ api:
     passwordTooLong: 'パスワードが長すぎます'
     passwordInvalidChars: 'パスワードに無効な文字が含まれています'
     usernameContainsEmail: "ユーザー名にメールアドレスを含めることはできません"
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: "ユーザー名にリンクを含めることはできません"
     countryCodeInvalid: "国コードが無効です"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    pictureInvalid: "プロフィール画像が無効か、サポートされていません"
+    dateOfBirthMissing: "生年月日は必須です"
+    dateOfBirthInvalid: "生年月日が無効です"
+    tooYoung: "アカウントを作成するには 3 歳以上である必要があります"
+    parentEmailMissing: "14 歳未満のユーザーは保護者のメールアドレスが必須です"
+    parentEmailInvalid: "保護者のメールアドレスが無効です"
+    parentEmailSameAsUser: "保護者のメールアドレスは、あなた自身のメールアドレスとは別のものにしてください"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "現在のパスワードが入力されていません"
+    currentPasswordWrong: "現在のパスワードが正しくありません"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: "名前を空にすることはできません"
+    nameTooLong: "名前が長すぎます"
+    descriptionTooLong: "説明が長すぎます"
+    creditsTooLong: "メモとクレジットが長すぎます"
+    screenshotInvalid: "プロジェクトのスクリーンショットが無効か、サポートされていません"
   projectsPost:
     invalid_checksum: 'チェックサムが無効です。もう一度アップロードしてください！'
     upload_error: 'アップロード中にエラーが発生しました。もう一度アップロードしてください！'
     creating_error: 'プロジェクトエンティティの作成中にエラーが発生しました。もう一度アップロードしてください！'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "プロジェクトの詳細を保存できませんでした。"
+    screenshotError: "スクリーンショットの読み込み、変換、または保存に失敗しました。入力内容を確認してください。"
+    notFound: "変更するプロジェクトが見つかりませんでした。"
+    forbidden: "プロジェクトを変更する権限がありません。ログインしたままですか？"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: "名前がありません"
+    nameEmpty: "名前を空にすることはできません"
+    nameTooShort: "名前が短すぎます"
+    nameTooLong: "名前が長すぎます"
+    nameAlreadyInUse: "この名前はすでに使われています"
+    descriptionMissing: "説明がありません"
+    descriptionEmpty: "説明が空です"
+    descriptionTooShort: "説明が短すぎます"
+    descriptionTooLong: "説明が長すぎます"
+    imageFileInvalid: "画像ファイルが無効です"
+    imageFileInvalidType: "画像ファイルの形式が無効です"
+    imageFileTooLarge: "画像ファイルが大きすぎます"
 #languages and countries
 language:
   arabic: アラビア語
@@ -889,11 +851,11 @@ codeview:
   dataBricks: 'データブロック'
   specialBricks: '特別なブロック'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: "コードビュー"
+  loading: "コードビューを読み込み中..."
+  error: "コードビューを読み込めませんでした。"
+  retry: "もう一度試す"
+  empty: "このプロジェクトにはコードがありません。"
   scripts: 'スクリプト'
   looks: '外見'
   sounds: 'サウンド'
@@ -911,21 +873,21 @@ codeStatistics:
   dataBricks: 'データ'
   deviceBricks: 'デバイス'
   specialBricks: 'スペシャル'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: "あなたのスコア："
+  points: "ポイント"
+  abstraction: "抽象化と問題の分解"
+  parallelism: "並列処理"
+  logicalThinking: "論理的思考"
+  synchronization: "同期"
+  flowControl: "フロー制御"
+  userInteractivity: "ユーザーとのやり取り"
+  dataRepresentation: "データ表現"
+  level: "レベル"
+  loading: "読み込み中..."
+  bonus: "ボーナス"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "%user_count% 人以上のクリエイターの仲間になりましょう！"
+  text: "すでに %project_count% 件の素晴らしいプロジェクトが共有されています。次はあなたの番かもしれません。アプリをダウンロードして、今日から作り始めましょう"
 privacy-policy:
   header: プライバシーポリシー
   version: バージョン 2.2、2019 年 10 月 17 日
@@ -946,9 +908,9 @@ catro-notifications:
   noComments: "コメント通知がないようです。"
   noReactions: "リアクション通知がないようです。"
   noRemixes: "リミックス通知がないようです。"
-  noStudios: "It looks like you don't have any studio notifications."
+  noStudios: "スタジオの通知はないようです。"
   tab:
-    studio: Studio
+    studio: "スタジオ"
     project: プログラム
   comment:
     message: '%user_link% が %program_link% にコメントしました。'
@@ -957,25 +919,25 @@ catro-notifications:
   follow:
     message: '%user_link% さんがあなたをフォローしています。'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% さんが新しいゲーム %program_link% を作成しました。"
   remix:
     message: '%user_link% があなたのゲーム %program_link% のリミックス %remix_program_link% を作成しました。'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% さんがスタジオ %studio_name% にコメントしました。"
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% さんが %program_link% をスタジオ %studio_name% に追加しました。"
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "スタジオ %studio_name% への参加リクエストが承認されました。"
+    declined: "スタジオ %studio_name% への参加リクエストが拒否されました。"
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "あなたのプロジェクト %program_link% は %days% 日後に自動的に削除されます。残すには、新しいバージョンをアップロードするか、ダウンロード数を増やしてください。"
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "あなたのプロジェクト「%project_name%」は、アクティビティがなかったため自動的に削除されました。まだ共有したい場合は、もう一度アップロードしてください。"
+  noProjects: "プロジェクトの通知はないようです。"
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: "リンクをクリップボードにコピーしました！"
+  success_project: "プロジェクトへのリンクをクリップボードにコピーしました！"
+  success_user: "ユーザーへのリンクをクリップボードにコピーしました！"
   fail: クリップボードへのリンクのコピーに失敗しました！ :(
 next: 次へ
 previous: 前
@@ -1000,13 +962,13 @@ flavor:
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. すべての権利は留保されています。'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "このウェブサイトを使うには JavaScript が必要です。ブラウザで JavaScript を有効にするか、大人の人に手伝ってもらってください。"
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: "サービス向上のために Cookie を使用しています。データを販売したり共有したりすることはありません。"
   accept: "同意する"
   decline: "同意しない"
   privacy-link: "プライバシーポリシー"
-  settings-link: "Cookie Settings"
+  settings-link: "Cookie 設定"
 agree: 同意する
 disagree: 同意しない
 profileLoader:
@@ -1019,19 +981,19 @@ share:
   success: '共有に成功しました'
 copy: 'リンクをコピー'
 checkOutProject: 'このプロジェクトをチェックしてください:'
-checkOutUser: 'Check out this user:'
+checkOutUser: "このユーザーを見てみてください："
 community: 'Catrobat コミュニティ'
 back_to_app: 'コミュニティを終了'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: "最新のプロジェクト"
+  random: "ランダムなプロジェクト"
   most_viewed: よく見られているもの
   most_downloaded: 最もダウンロードされているもの
   example: 例
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  scratch: "Scratch リミックス"
+  recommended: "おすすめのプロジェクト"
+  popular: "一番人気"
+  trending: "話題のプロジェクト"
 achievements:
   sidebar:
     title: '実績'
@@ -1076,21 +1038,21 @@ achievements:
         description: 'ユーザーアカウントを作成'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Coding Jam 2021 の参加者"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "バイリンガル"
+        description: "プロジェクトを 2 つの言語に翻訳する"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "トライリンガル"
+        description: "プロジェクトを 3 つの言語に翻訳する"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "言語の達人"
+        description: "プロジェクトを 5 つの言語に翻訳する"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "確認済み"
+        description: "アカウントを確認する"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: "{0} |{1} タグ |]1,Inf] タグ"
   tag:
     game:
       title: ゲーム
@@ -1109,7 +1071,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '拡張機能'
+  title: "{0} |{1} 拡張機能 |]1,Inf] 拡張機能"
   extension:
     arduino:
       title: Arduino
@@ -1124,59 +1086,59 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: "マルチプレイヤー"
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: "スタジオ"
+  singular: "スタジオ"
+  create_studio: "スタジオを作成"
+  delete_studio: "スタジオを削除"
   cancel_studio: 'キャンセル'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: "スタジオ名"
+  studio_description: "スタジオの説明"
+  is_public: "公開しますか？"
+  enable_comments: "コメントを有効にしますか？"
+  cover_image: "カバー画像をアップロード"
+  cover_image_empty: "画像が選択されていません。"
+  cover_image_hint: "最大 1 MB。対応形式：JPEG、PNG、GIF、WebP。"
+  cover_image_compressed: "1 MB の上限に収まるよう、画像を自動的に圧縮しました。"
+  cover_image_compressing: "画像を圧縮中..."
+  cover_image_still_too_large: "圧縮しても画像が大きすぎます。もっと小さいファイルを選んでください。"
+  cover_image_invalid_type: "画像の形式が無効です。JPEG、PNG、GIF、WebP のいずれかを使用してください。"
+  cover_image_compression_failed: "画像を処理できませんでした。別のファイルをお試しください。"
+  cover_image_alt: "あなたのカバー画像"
+  cover_image_remove: "画像を削除"
+  popular: "人気のスタジオ"
+  join: "参加する"
+  leave: "退出する"
   report: '不適切として報告する'
-  public: 'public'
-  private: 'Invite-only'
+  public: "公開"
+  private: "招待制"
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: "参加中のスタジオ"
+    public_studios: "公開スタジオ"
+    private_studios: "招待制のスタジオ"
+    no_studios: "まだスタジオはありません"
+    my_studios: "マイスタジオ"
+    explore: "スタジオを探す"
+    no_joined: "まだどのスタジオにも参加していません"
+    joined: "参加中"
+    load_more: "もっと読み込む"
     open: '開く '
     share: '共有'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: "リンクをクリップボードにコピーしました！"
+    leave_confirm_title: "このスタジオから退出しますか？"
     cancel: 'キャンセル'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: "リクエストを取り消す"
+    cancel_request_confirm_title: "参加リクエストを取り消しますか？"
     admin: '管理者'
-    member: 'Member'
+    member: "メンバー"
   details:
-    add_project: 'click to add the project'
+    add_project: "クリックしてプロジェクトを追加"
     add: '追加'
     showMore: '詳細を表示'
     showLess: 'ショーアップ'
     are_you_sure: 'よろしいですか？'
-    no_way_of_return: 'This cannot be undone.'
+    no_way_of_return: "この操作は元に戻せません。"
     delete_it: '削除'
     remove_project: 'スタジオから削除'
     remove_project_error: 'スタジオからのプロジェクトの削除に失敗しました。'
@@ -1184,68 +1146,68 @@ studio:
     no_projects: 'スタジオにはまだプロジェクトがありません'
     projects:
       title: 'プログラム'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: "プロジェクトを追加"
+      open_project: "プロジェクトを開く"
       download: 'ダウンロード'
       share: '共有'
       remove_from_studio: 'スタジオから削除'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio_title: "スタジオからプロジェクトを削除しますか？"
+      remove_from_studio_text: "気が変わったら、あとでもう一度追加できます。"
+      share_success: "リンクをクリップボードにコピーしました！"
+      share_fail: "リンクをコピーできませんでした。"
+      no_projects_empty_state: "追加できるプロジェクトがまだありません。まずは Pocket Code で作ってみましょう！"
+      add_selected: "選択したものを追加"
+    no_available_projects: "追加できるプロジェクトはありません。"
     updateCoverError: 'スタジオカバーの更新中に何か問題が発生しました'
-    join: 'Join'
-    leave: 'Leave'
+    join: "参加する"
+    leave: "退出する"
     report: '不適切として報告する'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: "保留中"
+    decline: "拒否されました"
     comments:
       title: 'コメント'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: "何か入力してください"
+      replies: "件の返信"
+      send: "送信"
+      no_comments: "このスタジオにはまだコメントがありません。"
+      disabled_comments: "このスタジオではコメントが無効になっています。"
+      remove_comment: "コメントを削除"
+      post_error: "コメントの投稿中に問題が発生しました。しばらくしてからもう一度お試しください。"
+      remove_error: "コメントの削除中に問題が発生しました。しばらくしてからもう一度お試しください。"
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: "アクティビティ"
+      join_studio: "%user% さんがスタジオに参加しました。"
+      add_project: "%user% さんがプロジェクトを追加しました。"
+      add_comment: "%user% さんがコメントしました。"
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: "スタジオのメンバー"
+      project_count: "{0} スタジオのプロジェクトはありません |{1} スタジオのプロジェクト 1 件 |]1,Inf] スタジオのプロジェクト %count% 件"
+      no_studio_projects: "スタジオのプロジェクトはありません"
+      one_studio_project: "スタジオのプロジェクト 1 件"
+      n_studio_projects: "スタジオのプロジェクト %count% 件"
+      promote_member: "メンバーを管理者にする"
+      promotion_failed: "このメンバーを管理者にする際に問題が発生しました。しばらくしてからもう一度お試しください。"
+      ban_member: "メンバーをスタジオから追放"
+      ban_failed: "このメンバーを追放する際に問題が発生しました。しばらくしてからもう一度お試しください。"
+      demote_member: "管理者をメンバーに戻す"
+      demotion_failed: "この管理者をメンバーに戻す際に問題が発生しました。しばらくしてからもう一度お試しください。"
+      last_admin: "このスタジオの最後の管理者をメンバーに戻すことはできません。"
     join_requests:
-      title: 'Join Requests'
+      title: "参加リクエスト"
       accept: '同意する'
       decline: '同意しない'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: "参加リクエストを承認しました。"
+      decline_success: "参加リクエストを拒否しました。"
+      error: "問題が発生しました。もう一度お試しください。"
+      no_requests: "保留中の参加リクエストはありません。"
     show_more: '詳細を表示'
     show_less: '表示を減らす'
     admin_settings:
       title: '設定'
-      studio_name: 'Studio Name'
+      studio_name: "スタジオ名"
       studio_description: '説明'
       toggle_allow_comments: 'コメント'
-      toggle_privacy: 'Public'
+      toggle_privacy: "公開"
 media_library:
   file:
     size: 'サイズ：%size%。'
@@ -1255,72 +1217,72 @@ media_library:
       sound: 'タイプ：サウンド'
       movie: 'タイプ：ビデオ'
       default: 'タイプ：不明'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: "メディアカテゴリはまだありません。"
+  no_results: "結果が見つかりません。"
+  assets_count: "件の素材"
+  view_all: "すべて表示"
+  view_all_category: "%category% をすべて表示"
+  back_to_app: "アプリに戻る"
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: "リクエストされたプロジェクトは利用できません"
+  project_not_for_kids: "このプロジェクトは子ども向けではないとマークされました！"
+  project_safe_for_kids: "このプロジェクトは子ども向けとしてマークされました！"
+  project_not_for_kids_moderator: "このプロジェクトはモデレーターによってマークされました。元に戻すことはできません！"
+  project_set_private: "プロジェクトを非公開にしました。"
+  project_set_public: "プロジェクトを公開しました。"
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "追加情報：additionalInfo"
+    feature_1: "機能 featureName は maintenanceStart から maintenanceEnd まで利用できません"
+    feature_2: "機能"
+    feature_3: "機能"
+MarkNotForKids: "子ども向けではないとマーク"
+MarkSafeForKids: "子ども向けとしてマーク"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "確認"
+  confirmMark: "このプロジェクトを子ども向けではないとマークしてもよろしいですか？"
+  confirmUnmark: "このプロジェクトの「子ども向けではない」マークを外してもよろしいですか？"
+  confirmYes: "はい、続けます！"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "この%content_type%を報告"
+    reason_placeholder: "報告する理由を説明してください..."
+    submit: "報告を送信"
+    success: "報告を送信しました。ありがとうございます。"
+    error: "問題が発生しました。もう一度お試しください。"
+    duplicate: "このコンテンツはすでに報告済みです。"
+    trust_too_low: "アカウントが新しすぎるため、まだ報告できません。"
+    unverified: "ログインしていること、およびアカウントのメールアドレスが確認済みであることを確認してください。"
+    rate_limited: "報告の送信が速すぎます。少し待ってからもう一度お試しください。"
+    suspended: "あなたのアカウントは停止されています。"
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "異議を申し立てる"
+    title: "この決定に異議を申し立てる"
+    placeholder: "このコンテンツを非表示にすべきでない理由を説明してください..."
+    submit: "異議申し立てを送信"
     cancel: "キャンセル"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "異議申し立てを送信しました。審査をお待ちください。"
+    already_pending: "すでに保留中の異議申し立てがあります。"
+    error: "問題が発生しました。もう一度お試しください。"
+    rate_limited: "異議申し立ての送信が速すぎます。少し待ってからもう一度お試しください。"
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "コメントの投稿が速すぎます。少しお待ちください。"
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "リアクションが速すぎます。少しお待ちください。"
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "フォロー／フォロー解除が速すぎます。少しお待ちください。"
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "スタジオの操作が速すぎます。少しお待ちください。"
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "コミュニティからの報告により、このプロジェクトは非表示になりました。"
+    comment: "コミュニティからの報告により、このコメントは非表示になりました。"
+    user: "コミュニティからの報告により、このプロフィールは非表示になりました。"
+    user_own: "コミュニティからの報告により、あなたのアカウントは停止されました。この決定に異議を申し立てることができます。"
+    studio: "コミュニティからの報告により、このスタジオは非表示になりました。"
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "コミュニティからの報告により、あなたの%content_type%は非表示になりました。この決定に異議を申し立てることができます。"
+    appeal_approved: "異議申し立てが認められました。あなたのコンテンツは再び表示されています。"
+    appeal_rejected: "異議申し立てを審査した結果、コンテンツを非表示にする決定は変わりませんでした。"
+    admin_review_needed: "コンテンツが自動的に非表示になりました。確認が必要です。"
+Reports: "報告"
+members: "メンバー"
