@@ -1,451 +1,451 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: Angličtina
+title: Komunita Catrobat
+meta.description: Sdílej, objevuj a remixuj kreativní projekty vytvořené v Catrobatu. Přidej se ke globální komunitě mladých tvůrců, kteří tvoří hry, animace a aplikace.
+meta.description.media.library: 'Procházej a stahuj bezplatná média pro Catrobat — zvuky, obrázky a další pro tvé projekty.'
+meta.og.title.login: Přihlas se do Catrobatu
+meta.og.description.login: Přihlas se a sdílej své projekty Catrobat s komunitou.
+meta.og.title.register: Vytvoř si účet Catrobat
+meta.og.description.register: Přidej se ke komunitě Catrobat a začni ještě dnes sdílet své kreativní projekty.
+meta.og.description.profile: '%username% na Catrobatu – prohlédni si jeho projekty a úspěchy.'
+localLanguage: Čeština
 username: Uživatelské jméno
 password: Heslo
-createNewPassword: Create new password
+createNewPassword: Vytvořit nové heslo
 accountSettings: Account Settings
 email: E-mail
 aboutPocketCode: O Pocket Code
 about: O Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
+education: Vzdělávání
+chat: Chat a fóra
+privacyGuide: Průvodce ochranou soukromí
+others: Ostatní
 tutorials: Nápověda
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
 discordChat: Discord chat
 passwordsNoMatch: Hesla se neshodují.
-error: Oops!
+error: Jejda!
 cancel: Zrušit
 confirm: Potvrdit
 report: Nahlásit
 report.title: Nahlásit
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: Ano, smazat!
+reportIt: Ano, nahlásit!
+areYouSure: Jsi si jistý?
+noWayOfReturn: Tuto akci nelze vrátit zpět!
 download: Stáhnout
 name: Jméno
 description: Popis
 noDescription: Žádný popis není k dispozici
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+notesAndCreditsDescription: Jak jsi tento projekt vytvořil? Použil jsi nápady, skripty nebo grafiku od jiných lidí? Poděkuj jim tady.
+projectImportedFromScratch: Tento projekt byl importován z MIT Scratch. Původní projekt si můžeš prohlédnout
+scratchImportedProjectLinkHere: zde.
 country: Stát
 loginText: Přihlásit
 privacyPolicy: Ochrana soukromí
 imprint: Tiráž
 projectDetails: Podrobnosti
 somethingWentWrong: 'Ooooops něco se pokazilo.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: 'Ujisti se, že jsi přihlášený a e-mail tvého účtu je ověřený.'
+accountSuspended: 'Tvůj účet byl pozastaven kvůli nahlášením od komunity. Proti tomuto rozhodnutí se můžeš odvolat ve svém profilu.'
+doesNotExist: 'Požadovaný zdroj neexistuje.'
 pleaseTryAgain: 'Prosím, zkuste to znovu!'
-tryAgainButton: 'Try again'
+tryAgainButton: 'Zkusit znovu'
 oldVersionError: 'Aktualizujte na nejnovější verzi Pocket Code!'
 more: 'více'
 less: 'Méně'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
+more-information: 'Více informací'
+less-information: 'Méně informací'
 ok: Rozumím
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Ukázkový projekt si stáhneš kliknutím %link_start% sem %link_end%.'
 registrationError: 'Uživatelské jméno nebo e-mailová adresa je již použita.'
 notifications: 'Oznámení'
 allNotifications: 'Všechny'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'Sledující'
+LikeNotifications: 'Reakce'
 CommentNotifications: 'Komentáře'
 RemixNotifications: 'Remixy'
 wellDone: "Výborně!"
 done: "Hotovo!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Ano, smazat"
 cancelMessage: "Zrušit"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "Uživatele nelze autorizovat"
 notificationsClearError: "Nelze označit oznámení jako přečtené!"
 pleaseWait: "Prosím čekejte..."
 projects: "Programy"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+users: "Uživatel"
+studios: "Studia"
+oauthPopUpTitle: "Informace o přihlášení externím účtem"
+oauthInfo: 'Právě ses přihlásil pomocí externího účtu. Vytvořili jsme ti náhodné uživatelské jméno. Pokud chceš změnit své uživatelské jméno nebo si vytvořit nové heslo, přejdi na stránku svého profilu.'
+oauthHere: "zde"
+statistics: "Statistiky"
+languageSelection: "Výběr jazyka"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: 'Motiv'
+  auto: 'Systém'
+  auto_description: 'Podle nastavení zařízení'
+  light: 'Světlý'
+  light_description: 'Světlý vzhled'
+  dark: 'Tmavý'
+  dark_description: 'Tmavý vzhled'
+  apply: 'Použít'
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Jaké projekty se tu doporučují?'
+      description: 'Čím více reakcí (palec nahoru, úsměv ...) tvůj projekt dostane, tím výš se v tomto seznamu zobrazí.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: Sleduji
+  followers: Sledující
+  follow: Sledovat
+  username: Uživatel
+  followsMe: Sleduje mě
+  noFollowing: Momentálně nikoho nesleduješ.
+  noFollowers: Momentálně nemáš žádné sledující.
+  noOtherFollowing: Momentálně nejsou žádní sledovaní uživatelé.
+  noOtherFollowers: Momentálně nejsou žádní sledující.
+  followError: " Tohoto uživatele teď nemůžeme sledovat."
+  unfollowError: " Sledování tohoto uživatele teď nemůžeme zrušit."
+  unfollowQuestion: "Opravdu chceš přestat sledovat tohoto uživatele?"
+  unfollowButton: "Přestat sledovat %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: Vítej na Catrobat %theme%
+    title_mindstorms: Vítej na stránce Catrobatu pro Mindstorms EV3 a NXT
+    subtitle: Vytvářej příběhy, hry a mnohem víc...
+    subtitle_embroidery: Vyšívej vlastní vzory na trička, tašky, kalhoty nebo obal na mobil!
+    subtitle_mindstorms: Vytvářej vlastní projekty se svými roboty Lego Mindstorms EV3 a NXT
+    download: Stáhni si aplikaci
+    statistics: Další statistiky
+  featured: Doporučené
   open: Otevřít 
   download: Stáhnout
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: Nahrát projekt
+    drop_here: Přetáhni sem svůj soubor .catrobat
+    or_browse: nebo klikni a vyber ho
+    button: Nahrát
+    uploading: Nahrávání...
+    success: Projekt byl úspěšně nahrán!
+    view_project: Zobrazit projekt
+    upload_another: Nahrát další
+    invalid_file: Vyber soubor .catrobat
+    file_too_large: Soubor je příliš velký
+    error: Nahrávání selhalo. Zkus to prosím znovu.
+    unauthorized: Pro nahrávání musíš být přihlášený.
+    rate_limited: Příliš mnoho nahrávání. Zkus to prosím později.
+    selected_file: 'Vybraný soubor:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+      file_size: Maximální velikost souboru je 100 MB.
+      app_upload: Projekty můžeš nahrávat také přímo z aplikace Pocket Code. Aplikace se ale momentálně předělávají a nahrávání přes web zatím nepodporují.
+      retention: Nahrané projekty se po určité době nečinnosti automaticky odstraní. Přihlašuj se pravidelně nebo získej stažení svého projektu, aby vydržel déle.
+      protection: Obzvlášť dobré nebo oblíbené projekty mohou moderátoři ochránit před automatickým smazáním.
+  example: Příklady
+  newest: Nejnovější projekty
+  recommended: Doporučené projekty
+  scratchremixes: Scratch remixy
+  noProjects: Momentálně tu nejsou žádné projekty.
+  shareAction: Sdílet
+  deleteAction: Smazat projekt
+  deleteConfirmation: |
+    Jsi si jistý?
+    Opravdu chceš smazat "%programName%"?
+    Tuto akci nelze vrátit zpět!
+    Ano, smazat!
+    Zrušit
+  deleteConfirmText: Tuto akci nelze vrátit zpět. Tvůj projekt bude trvale smazán.
+  deleteConfirmationTitle: Jsi si jistý?
+  deleteNotFoundError: Projekt, který chceš smazat, se pod tvým účtem nenašel.
+  private: soukromý
+  public: veřejný
+  setPrivateAction: Nastavit jako soukromý
+  setPublicAction: Nastavit jako veřejný
+  setPrivateConfirm: "Nastavit tento projekt jako soukromý? Už se nebude zobrazovat ve výsledcích hledání."
+  setPublicConfirm: "Zveřejnit tento projekt? Uvidí ho všichni."
+  markNotForKidsConfirm: "Označit tento projekt jako nevhodný pro děti?"
+  markSafeForKidsConfirm: "Odebrat z tohoto projektu označení „nevhodné pro děti“?"
+  nfkModeratorLocked: "Toto nastavení zamkl moderátor."
+  confirmSetPrivate: Opravdu chceš nastavit tento projekt jako soukromý? Už se nebude zobrazovat ve výsledcích hledání.
+  confirmSetPublic: Opravdu chceš tento projekt zveřejnit? Uvidí ho všichni.
+  changeVisibility: |
+    Jsi si jistý?
+    Pokud nastavíš '%programName%' jako soukromý, ostatní uživatelé ho neuvidí ani nenajdou.
+    Odkaz na projekt můžeš ale dál sdílet s kamarády. Viditelnost přepneš klepnutím na ikonu zámku.
+    Pokud nastavíš "%programName%" jako veřejný, ostatní uživatelé ho uvidí a najdou.
+    Ano, nastavit jako veřejný
+    Ano, nastavit jako soukromý
+    Ne
+  reportCommentConfirmation: Opravdu chceš nahlásit tento komentář?
+  deleteCommentConfirmation: Opravdu chceš smazat tento komentář?
+  deleteAccountConfirmation: |
+    Smazat účet?
+    Opravdu chceš smazat svůj účet? Smažou se tím i tvoje nahrané projekty a komentáře!
+    Tuto akci nelze vrátit zpět!
+    Ano, smazat!
+    Zrušit
+  tooLongName: Název projektu je příliš dlouhý!
+  tooLongDescription: Popis projektu je příliš dlouhý!
+  tooLongCredits: Poznámky a zásluhy projektu jsou příliš dlouhé!
+  my_projects: Moje sdílené projekty
+  trending: Populární teď
+  popular: Oblíbené projekty
   most:
     viewed: Nejnavštěvovanější
     downloaded: Nejvíce stahované
-  random: Random projects
-  related: Related projects
+  random: Náhodné projekty
+  related: Související projekty
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'Prozkoumat projekty'
+    no_projects: "Zatím jsi nevytvořil žádné projekty"
+    no_explore: 'Nenašly se žádné projekty'
+    load_more: 'Načíst další'
+    upload: 'Nahrát projekt'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'Chráněný'
+    day_left: 'Zbývá 1 den'
+    days_left: 'Zbývá dní: %days%'
+    tooltip: 'Projekty se po určité době nečinnosti automaticky odstraní. Získej víc stažení nebo se pravidelně přihlašuj, aby vydržely déle.'
+    tooltip_protected: 'Tento projekt je chráněný a nebude automaticky smazán.'
+  downloads: 'Stažení: %downloads%'
+  sample: Ukázkové projekty
+  views: 'Zobrazení: %views%'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Lidé, kteří na projekt reagovali"
     all: "Všechny"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: '{0}0 remixů |{1}1 remix |]1,Inf]%remixes% remixů'
+  newRemixesNotificationTitle: '|{1}"%programName%" má 1 nový remix: |]1,Inf] "%programName%" má nové remixy (%remixes%):'
+  submitted: Odeslané projekty
+  uploaded: Nahrané projekty
+  reportAsInappropriate: Nahlásit jako nevhodné
+  reportProgram: Nahlásit projekt
+  languageVersion: 'Verze jazyka Catrobat: %languageVersion%'
+  reportLoginText: Pro nahlášení projektu se prosím %login%.
+  reportDialogHeader: Proč chceš tento projekt nahlásit?
+  reportDialogReason: Zadej důvod
+  reportRadioButtonInappropriate: Je nevhodný
+  reportRadioButtonCopyright: Porušení autorských práv
+  reportRadioButtonSpam: Je to spam
+  reportRadioButtonDislike: Nelíbí se mi
+  reportOwnProgram: Vlastní projekt nahlásit nemůžeš.
+  reportAlready: Tento projekt jsi už nahlásil.
+  reportDone: Nahlásil jsi tento projekt!
+  updateAppHeaderDownload: Stažení není možné
+  updateAppTextDownload: Aktualizuj si prosím aplikaci na nejnovější verzi. Pamatuj, že ne všechny funkce z Androidu jsou už dostupné na iOS.
+  updateAppTextDownloadApk: Stažení APK je momentálně dostupné jen na Androidu, ne na iOS.
+  updateAppHeader: Aktualizovat aplikaci
+  updateAppText: Aktualizuj si prosím aplikaci na nejnovější verzi.
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: Mrkni na tento projekt Catrobat
+  show_more: Zobrazit více
   comments: Komentáře
-  send: Send
+  send: Odeslat
   delete: Smazat
   report: Nahlásit
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: Odpovědět
+  report_popup: Komentář byl úspěšně nahlášen.
+  report_popup_header: Nahlášeno
+  deleted_popup: Komentář byl úspěšně smazán.
+  deleted_popup_header: Smazáno
+  noAdminRights: Nemáš administrátorská práva. Přihlas se prosím jako administrátor.
+  editProject: Upravit projekt
+  closeProjectEditor: Zavřít editor projektu
   closeEditorPrompt: Chcete uložit provedené změny?
   btnDiscard: Zrušit
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  addComment: Napiš komentář
+  thumbsUp: Palec nahoru!
+  smile: Úsměv!
+  love: Láska!
+  wow: Páni!
+  linkTitle: Odkaz
+  link: Zkopírovat odkaz na projekt do schránky
+  reactionsText: Reakce
+  downloadErrorText: Při stahování projektu došlo k chybě. Zkus to prosím později.
+  downloadStartText: Stahování začalo...
+  downloading: Stahování...
+  openInApp: Otevřít v Pocket Code
+  downloaded: Staženo
+  showTranslation: Zobrazit překlad
+  hideTranslation: Skrýt překlad
+  translatedByLine: Přeloženo službou %provider% z jazyka %sourceLanguage% do jazyka %targetLanguage%
+  googleTranslate: Překladač Google
+  confrimDelete: Opravdu chceš smazat tento překlad?
   default: Výchozí
   save: Uložit
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: 'Překlad: %language%'
+  editDefault: Upravit výchozí
+  editTranslation: 'Upravit překlad: %language%'
+  translations: Překlady
+  createTranslation: Vytvořit překlad
+  deletedComment: '**Smazáno**'
+  replyLabel: odpověď
+  repliesLabel: odpovědi
+  notForKids: Nevhodné pro děti
 remixGraph:
   title: Remixy
   showRemixGraph: 'Zobrazit graf Remixů'
   by: 'o'
   open: 'Otevřít '
   showPaths: 'Zobrazit dráhy'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: 'Načítání grafu remixů...'
+  error: 'Graf remixů se nepodařilo načíst.'
+  empty: 'Pro tento projekt zatím nejsou k dispozici žádná data grafu remixů.'
   remixesLabel: 'Remixy'
   projectsLabel: 'Programy'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  scratchLabel: 'Kořeny ze Scratche'
+  interactHint: 'Vyber uzel, abys otevřel projekt nebo zvýraznil jeho cestu remixů.'
+  zoomIn: 'Přiblížit'
+  zoomOut: 'Oddálit'
+  resetView: 'Obnovit zobrazení'
+  projectNotAvailableErrorTitle: 'Promiň...'
+  projectNotAvailableErrorDescription: 'Projekt už není dostupný!'
+  projectNotAvailable: 'Není k dispozici'
+  projectUnknownUser: 'Neznámý uživatel'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Ahoj %username%,
+    k dokončení aktivace účtu prosím navštiv %confirmationUrl%
+    Tento odkaz lze k ověření účtu použít jen jednou.
+    S pozdravem
+    tvůj tým Catrobat
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Ahoj %username%,<br>
     <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
+    k dokončení aktivace účtu prosím klikni <a href="%confirmationUrl%">sem.</a><br>
+    Tento odkaz lze k ověření účtu použít jen jednou.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    S pozdravem<br>
+    tvůj tým Catrobat
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "Ověř svou e-mailovou adresu"
+  welcome: "Vítej na Catrobatu!"
+  greeting: "Díky za registraci! Ověř prosím svou e-mailovou adresu, abys mohl začít."
+  message: "Kliknutím na tlačítko níže potvrdíš svůj e-mail. Odkaz platí do %time% a lze ho použít jen jednou."
+  button: "Ověřit e-mailovou adresu"
+  ignore: "Pokud sis účet Catrobat nevytvořil, můžeš tento e-mail klidně ignorovat."
+  autoDelete: "Neověřené účty se po 30 dnech automaticky smažou."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "Pro účet Catrobat tvého dítěte je potřeba souhlas rodiče"
+    title: "Je potřeba souhlas rodiče"
+    greeting: "Dobrý den,"
+    message: "Tvé dítě %username% si vytvořilo účet na Catrobatu a ověřilo svou e-mailovou adresu."
+    explanation: "Catrobat je bezplatná vzdělávací platforma, kde se mladí lidé učí programovat tvorbou aplikací, her a animací. Podle předpisů EU na ochranu dětí potřebujeme tvůj souhlas, než se tvé dítě bude moci plně zapojit do komunity. Klikni prosím na tlačítko níže a dej souhlas."
+    button: "Dát souhlas rodiče"
+    ignore: "Pokud jsi tento e-mail nečekal, můžeš ho klidně ignorovat. Bez souhlasu bude mít účet omezené funkce."
+    whatIsCatrobat: "Catrobat je bezplatná nezisková vzdělávací programovací platforma. Více se dozvíš na catrobat.org."
+    manageLink: 'Účet svého dítěte můžeš kdykoli spravovat přes náš <a href="%portalUrl%" style="color: #00acc1;">portál pro rodiče</a>. Zjisti víc o <a href="%infoUrl%" style="color: #00acc1;">svých právech jako rodič</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "Souhlas udělen"
+    message: "Děkujeme! Účet uživatele %username% je teď plně aktivovaný."
+    continueButton: "Objevuj projekty"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Rodiče a opatrovníci"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Informace pro rodiče a opatrovníky"
+    intro: "Catrobat bere bezpečnost a soukromí mladých uživatelů vážně. Tato stránka vysvětluje, jak chráníme tvé dítě a jaká máš práva."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Co je Catrobat?"
+      text: "Catrobat je bezplatná nezisková vzdělávací platforma, kde se mladí lidé učí programovat tvorbou vlastních aplikací, her a animací. Platforma je dostupná po celém světě a používá se ve vzdělávání."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Jaká data shromažďujeme?"
+      text: "Shromažďujeme jen minimum dat potřebných k provozu platformy: uživatelské jméno, e-mailovou adresu, datum narození a projekty, které tvé dítě vytvoří a nahraje. U uživatelů mladších 14 let ukládáme kvůli souhlasu také e-mailovou adresu rodiče/opatrovníka. Osobní údaje neprodáváme ani nesdílíme se třetími stranami."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Tvá práva jako rodiče nebo opatrovníka"
+      text: "Podle předpisů EU na ochranu dětí (GDPR) a COPPA máš právo: nahlédnout do dat, která o tvém dítěti uchováváme, požádat o kopii těchto dat, kdykoli odvolat svůj souhlas (čímž se účet omezí) a požádat o trvalé smazání účtu tvého dítěte a všech souvisejících dat."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Jaká omezení platí pro účty nezletilých?"
+      text: "Uživatelé mladší 16 let nemohou psát ani číst komentáře, sledovat jiné uživatele ani zobrazovat obsah označený jako nevhodný pro děti. Stále mohou vytvářet a nahrávat projekty, procházet veřejné projekty a reagovat na projekty lajky. Tato omezení zajišťují bezpečné prostředí pro učení."
+    manageButton: "Spravovat účet svého dítěte"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Portál pro rodiče"
+    description: "Zadej svou e-mailovou adresu a dostaneš zabezpečený odkaz pro správu účtu Catrobat svého dítěte. Odkaz bude odeslán na e-mailovou adresu, kterou jsi uvedl při registraci."
+    emailLabel: "Tvá e-mailová adresa"
+    submitButton: "Poslat odkaz pro správu"
+    infoLink: "Zjistit více"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Zkontroluj svou schránku"
+      message: "Pokud je s tímto e-mailem spojený nějaký účet, poslali jsme odkaz pro správu. Zkontroluj prosím svou schránku a pokračuj přes odkaz ke správě účtu svého dítěte."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Spravovat účty dětí"
+    description: "Spravuješ účty spojené s adresou %email%."
+    consentStatus: "Stav souhlasu"
+    accountCreated: "Účet vytvořen"
+    email: "E-mail dítěte"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "Udělen"
+      pending: "Čeká se"
+      revoked: "Odvolán"
+    grantButton: "Udělit souhlas"
+    revokeButton: "Odvolat souhlas"
+    revokeConfirm: "Opravdu chceš odvolat souhlas? Účet bude mít omezené funkce."
+    exportButton: "Exportovat data"
+    deleteButton: "Smazat účet"
+    deleteConfirm: "Opravdu chceš tento účet trvale smazat? Tuto akci nelze vrátit zpět."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Spravuj účet Catrobat svého dítěte"
+      title: "Správa účtu"
+      greeting: "Dobrý den,"
+      message: "Požádal jsi o odkaz ke správě účtu Catrobat svého dítěte (%usernames%). Kliknutím na tlačítko níže si účet zobrazíš a můžeš ho spravovat."
+      button: "Spravovat účet"
+      ignore: "Pokud jsi o to nežádal, můžeš tento e-mail klidně ignorovat."
 passwordRecovery:
   subject: Vaše Catrobat heslo obnovení
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Ahoj %username%,
+    požádal jsi o obnovení hesla na %appplication_url%, protože jsi heslo zapomněl.
+    Pokud jsi o to nežádal, tento e-mail ignoruj. Za 24 hodin vyprší a nebude už platný.
+    Pro obnovení hesla a vytvoření nového navštiv tuto stránku: %confirmationUrl%
+    Své uživatelské jméno a heslo můžeš kdykoli použít pro přístup do komunity %appplication_url%.
+    Stačí navštívit tuto stránku: %loginPage%
+    Údaje svého profilu upravíš na této stránce: %profilePage%
+    S pozdravem
+    tvůj tým Catrobat
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Ahoj %username%,<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    požádal jsi o obnovení hesla na <a href="%appplication_url%">Pocket Code</a>, protože jsi heslo zapomněl.
+    Pokud jsi o to nežádal, tento e-mail ignoruj. Za 24 hodin vyprší a nebude už platný.<br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Pro obnovení hesla a vytvoření nového klikni <a href="%confirmationUrl%">sem.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    Své uživatelské jméno a heslo můžeš kdykoli použít pro přístup do komunity <a href="%appplication_url%">Pocket Code</a>.<br>
+    Stačí navštívit tuto stránku: <a href="%loginPage%">Přihlášení</a><br>
+    Údaje svého profilu upravíš na této <a href="%profilePage%">stránce</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    S pozdravem<br>
+    tvůj tým Catrobat
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
+  aboutMe: O mně
+  currentlyWorkingOn: Momentálně pracuji na
+  edit: Uprav svůj profil
   saveChanges: Uložit změny
   newPass: nové heslo
   repeatPass: Opakujte heslo
-  oldPass: old password
+  oldPass: staré heslo
   firstEmail: Můj první email
   secondEmail: Můj druhý e-mail
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: Moje projekty
+  follows: Sleduje
+  follower: Sledující
+  unfollowUser: Přestat sledovat tohoto uživatele!
+  followUser: Sledovat tohoto uživatele!
+  amountOfPrograms: Počet projektů
   form:
     passwordTooShort: Nové heslo musí mít alespoň %length% znaků.
     passwordTooLong: Nové heslo může mít maximálně %length% znaků.
@@ -454,51 +454,51 @@ profile:
     emailNotValid: Tato e-mailová adresa není platná.
     emailMissing: Chyba při aktualizaci této e-mailové adresy. Musíš mít alespoň jednu ověřenou e-mailovou adresu.
     emailExists: Tato e-mailová adresa je již zaregistrována.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameNotValid: Toto uživatelské jméno není platné.
+    usernameMissing: Musíš mít uživatelské jméno.
+    usernameExists: Toto uživatelské jméno už existuje.
+    usernameContainsEmail: Uživatelské jméno nesmí obsahovat e-mailovou adresu.
     submitSuccess: Uloženo!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
+  reallyDeleteProgram: Opravdu chceš smazat svůj projekt
+  programsOf: Projekty uživatele
+  picture: Profilový obrázek
   changePicture: Změnit obrázek
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Profil na Scratchi
 myprofile:
-  userSettings: User settings
+  userSettings: Uživatelská nastavení
   profileSettings: Upravit profil
-  securitySettings: Change password
+  securitySettings: Změnit heslo
   accountSettings: Account Settings
-  accountVerification: Verify account
-  account: Account
+  accountVerification: Ověřit účet
+  account: Účet
   editProfile: Upravit profil
   edit: Úpravy
   done: Hotovo
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
+  checkMail: Na tvou e-mailovou adresu byl odeslán e-mail. Zkontroluj prosím svou schránku.
+  passwordUpdated: Tvé heslo bylo úspěšně změněno.
   avatar: Obrázek
   email: E-mail
   deleteAccount: Smazat účet
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    Pozor:
+    Vytvořil jsi tyto projekty: %num_projects% a máš tyto sledující: %num_followers%. Všechny tvé projekty budou odstraněny. Už se nebudeš moci přihlásit a tvé projekty zmizí ze všech seznamů. Smazání profilu nelze vrátit zpět!
+    Opravdu nás chceš opustit?
+  exportData: Stáhnout moje data
+  exportDataDescription: Máš právo získat kopii svých osobních údajů. Patří sem informace z profilu, projekty, komentáře, reakce a sledující.
+  exportDataLoading: Stahování...
+  exportDataError: Při exportu tvých dat se něco pokazilo. Zkus to prosím později.
+  exportDataRateLimited: Svá data můžeš exportovat jen jednou denně. Zkus to prosím zítra.
+  editAccountSettings: Upravit nastavení účtu
+  profileChangeSuccess: Tvůj profil byl úspěšně změněn.
+  unspecifiedError: Při změně profilu něco nefungovalo. Zkus to prosím znovu nebo nám dej vědět, pokud se to bude opakovat!
+  verifyAccountText: Pošleme ti e-mail s odkazem k ověření účtu. Nezapomeň na odkaz kliknout do hodiny – o e-mail si můžeš požádat jen jednou denně.
+  verifyAccountButton: Odeslat e-mail
+  verifyAccountMailSent: E-mail byl úspěšně odeslán. Zkontroluj prosím svou schránku
+  verifyAccountMailFailed: O e-mail si můžeš požádat jen jednou denně
 licenseToPlay:
   link: 'Licence'
   title: 'Licence k hraní - cituj zdroje a sdílej'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: Představ si, že každý projekt Catrobat je dort, úplně zvláštní dort, ke kterému patří i recept (programovací bloky). Všichni členové komunity Catrobat sdílejí své dorty i s recepty. To znamená, že si dorty můžeš vychutnat a naučit se je péct sám!
   text2: 'Neexistují žádné tajné recepty: návody jak upéct tyto dortíky jsou otevřeny pro každého, k použití, předělání, úpravě a slouží jako inspirace pro nové nápady... Mám na mysli dortíky.'
   text3: "Můžeš jíst tyto dortíky, stejně jako kopírovat recepty jiných lidí k vytvoření vlastního, možná s jinými přísadami. Tato svoboda je podmíněna dvěma malými požadavky:"
   text4: "Při zakládání komunity Catrobat jsme se rozhodli přijmout tento přístup, protože jsme přesvědčeni, že podporuje učení a tvořivost v rámci komunity. Sdílením receptů a ingrediencí (skriptů a kreseb) mohou lidé stavět na nápadech jiných a prospěch z toho budou mít všichni."
@@ -511,216 +511,216 @@ licenseToPlay:
 termsOfUse:
   title: Podmínky použití
   headline: Vítejte do Catrobot Community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'Jako součást komunity Catrobat sdílíš projekty a nápady s lidmi:'
   text2: "Potřebujeme vaši pomoc, aby se tato komunita stala podpůrným místem pro každého člena. Zde je, jak můžete pomoci:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: "Projektem Catrobat chceme podporovat spolupráci a umožnit, aby se kreativita všech spojila ve prospěch celého lidstva. I ty se můžeš stát aktivním členem komunity Catrobat tím, že své projekty dáš komunitě darem, stejně jako ti své projekty dávají ostatní aktivní členové:"
   text4: 'Náš dárek pro vás:'
   text5: 'Naše podmínky používání a služby:'
   list1:
     item1: z mnoha různých zemí a kultur
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item2: všech věkových skupin (od malých dětí po teenagery a prarodiče)
+    item3: s jakoukoli úrovní zkušeností
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: Buď ohleduplný. Při sdílení projektů pamatuj, že tvé příspěvky uvidí lidé mnoha různých věkových skupin a z různého prostředí.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "Buďte upřímní. Nevydávejte se za někoho, kdo nejste nebo neklamte komunitu."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item4: "Chraň své osobní údaje. Nesdílej svou e-mailovou adresu, telefonní číslo ani jiné osobní kontaktní údaje."
+    item5: "Pomoz udržet stránku přátelskou. Pokud si myslíš, že by ostatní mohli projekt nebo komentář považovat za zlý, urážlivý, příliš násilný nebo jinak nevhodný, klikni na tlačítko 'nahlásit jako nevhodné' a přidej krátké vysvětlení. Tým Catrobat tvé nahlášení prověří a může jakýkoli projekt, komentář nebo příspěvek odstranit."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Nahráním projektu na naše webové stránky souhlasíš s tím, že toto dílo dáš pod určité svobodné licence pro nahrané projekty Catrobat. Podobně jako svobodné licence, pod kterými máš k dispozici samotný systém Catrobat, dávají tyto svobodné licence nahraných projektů Catrobat každému právo učit se z děl, která dříve nahráli jiní, a upravovat je a remixovat, aby z nich vytvořil vlastní nové úžasné hry, animace a další projekty. Díky tomu může každý 'stát na ramenou svých vrstevníků' – a jedním z nich jsi i ty! Tvé dílo tak bude přínosem pro celý svět a zůstane volně k použití pro všechny, trochu podobně jako texty a obrázky, které do Wikipedie zdarma přispívají dobrovolníci z celého světa. Ber to jako svůj dar lidstvu: ty dáváš všem a všichni ostatní, kdo nahrávají svá díla na naše stránky, dávají tobě. Nahraný projekt je tedy dar velké hodnoty, který ti jeho vlastník dává zdarma, pod podmínkou, že se do komunity zapojíš za stejných podmínek."
+    item2: Dar přijmout nemusíš; pokud ho přijmeš, platí určitá pravidla. Výhodou těchto pravidel je, že se z díla můžeš učit a stavět na něm a vytvořit ještě lepší věci, které pak můžeš např. znovu nahrát na naše stránky jako své vlastní. Další výhodou je, že tyto licence zajišťují, že nemůžeš nést odpovědnost za žádné problémy, které ostatním vzniknou používáním tvého projektu.
+    item3: "Jednou důležitou doplňující podmínkou je, že jasně uvedeš autory, na jejichž dílech jsi své dílo založil. Zároveň se budeme snažit, aby ostatní jasně ocenili, že dílo pochází od tebe – uvedením jedinečného jména, které sis svobodně zvolil jako svou identitu v komunitě Catrobat, a tím, že ostatním dáme možnost veřejně ti poděkovat za to, že jsi své dílo dal všem, a zvlášť jim."
+    item4: 'Přesné právní podmínky najdeš na %link-licenseUploaded%.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "Veškerý náš vlastní software a internetové zdroje související se systémem Catrobat, např. software napsaný týmem Catrobat, naše webové stránky a internetové zdroje, náš vlastní zdrojový kód související se systémem Catrobat a všechny další přiložené materiály, jako např. obrázky, zvuky a texty, ti nyní i v budoucnu nabízíme pod svobodnými licencemi Catrobatu."
+    item2: Díky těmto licencím jsou všechny části Catrobatu pro tebe zdarma a zároveň svobodné v tom smyslu, že je můžeš používat, jak chceš, jen s několika omezeními, která mimo jiné zajišťují, že systém Catrobat zůstane navždy svobodný a užitečný pro všechny.
+    item3: 'Přesné právní podmínky najdeš na %link-licenseToPlay%. Zdrojový kód systému Catrobat i mnoho dalších dokumentů a zdrojů je dostupných přes %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: 'Pokud ty, nebo – pokud je ti méně než 13 let – tvoji rodiče či zákonní zástupci, jste spojeni s organizací, která se podílí na plošném narušování soukromí a/nebo hromadném či masovém sledování nebo za ně odpovídá, nesmíš používat naše softwarové aplikace ani přistupovat k našim službám. Přesné podrobnosti tohoto omezení a určité výjimky z něj jsou popsány v oddílech 4.a a 4.b na stránce %link-termsOfUse%.'
+    item2: Pokud je ti méně než 13 let, musíš se zeptat svých rodičů nebo zákonných zástupců, zda ti dovolí používat softwarové aplikace a služby Catrobatu.
+    item3: "Vyhrazujeme si právo kdykoli podle vlastního uvážení odmítnout, smazat nebo skrýt projekty, uživatelské účty a jakékoli digitální materiály nahrané na webové stránky Catrobatu, například pokud zjistíme, že projekt obsahuje nevhodný materiál nebo že uživatel porušuje práva jiných osob."
+    item4: "Veškerý software a internetové zdroje Catrobatu jsou nabízeny v naději, že budou užitečné, ale bez jakékoli záruky."
+    item5: 'Přesné znění výše uvedených bodů a některé další právní podmínky najdeš na %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service.'
+  bottom1: Občas se sem vrať, protože se naše podmínky použití neustále snažíme zlepšovat.
+  bottom2: 'Jakékoli návrhy k těmto podmínkám použití posílej na %email-webmaster%.'
+  version: Verze 1.3, 4. března 2014
 search:
   dotdotdot: Hledat...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
+  search: Hledej projekty, uživatele a studia
+  inMediaLib: Hledat v knihovně médií
+  inMediaCategory: Hledat v kategorii médií
   results: Výsledky vyhledávání
   resultcount: Bylo nalezeno %count% výsledků
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  fail: Zadej prosím alespoň jeden hledaný výraz
+  noUsers: Nenašli se žádní uživatelé
+  noProjects: Nenašly se žádné projekty
+  noStudios: Nenašla se žádná studia
+  sameSearchMessage: "Vypadá to, že už tu jsi! Zkusíš jiné hledání?"
 menu:
   profile: Můj profil
   login: Přihlásit se
   logout: Odhlásit se
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  admin: Administrace
+  home: Domů
+  helpAndTutorials: Nápověda a návody
+  followersAndFollowing: Sledující
   mediaLibrary: Knihovna médií
-  studio: Studios
+  studio: Studia
   language: Jazyk
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: Nejsou k dispozici žádné jazykové možnosti.
 login:
   login: Přihlásit se
   button:
-    loginNow: Login now
+    loginNow: Přihlásit se
     createAccount: Vytvořit účet
-    forgetPassword: Forget password?
+    forgetPassword: Zapomněl jsi heslo?
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+    title: Nebo se přidej přes
+  passOrUser: Tvé heslo nebo uživatelské jméno bylo nesprávné.
+  accountSuspended: 'Tvůj účet byl pozastaven. Pokud si myslíš, že jde o chybu, kontaktuj prosím podporu.'
+  noUsername: Tvé uživatelské jméno nebo e-mailová adresa nebyly nalezeny.
+  forgotPass: Zapomněl jsi heslo nebo uživatelské jméno?
+  recoverPassSend: Na tvou e-mailovou adresu byl odeslán e-mail. Zkontroluj prosím svou schránku.
+  alreadyReset: Heslo pro tohoto uživatele už bylo během posledních 24 hodin vyžádáno.
+  confirmationSend: Na tvou e-mailovou adresu byl odeslán e-mail k potvrzení registrace. Zkontroluj prosím svou schránku a aktivuj svůj účet.
+  userOrEmail: Uživatelské jméno nebo e-mail
+  changePass: Změnit heslo
+  createAccount: Vytvořit účet
+  noAccount: Nemáš účet?
+  alreadyAccount: Už máš účet?
   or: OR
   username: Uživatelské jméno
   email: E-mail
   passwordFirst: Heslo
   passwordSecond: Password Confirm
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: Registrovat se
+  subText: "Pokračováním si zakládáš účet v komunitě Catrobat a souhlasíš s našimi %var1% a %var2%."
+  dateOfBirth: Datum narození
+  dateOfBirthInfo: "Na datum narození se ptáme kvůli dodržení předpisů EU na ochranu dětí (GDPR/COPPA) a abychom mladším uživatelům zajistili bezpečné prostředí."
+  parentEmail: "E-mail rodiče/opatrovníka"
+  parentEmailInfo: "Povinné pro uživatele mladší 14 let. Na tuto adresu pošleme žádost o souhlas."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: Dokonči registraci
+    info: "Pro další používání platformy prosím zadej své datum narození."
     submit: Pokračovat
   button:
     cancel: Zrušit
     createAccount: Vytvořit účet
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Zkontroluj svou schránku!"
+    message: "Poslali jsme ti ověřovací e-mail. Klikni na odkaz v e-mailu a aktivuj svůj účet."
+    helpTitle: "Nepřišel ti e-mail?"
+    hint: "Zkontroluj složku se spamem. Odkaz platí 24 hodin."
+    resendButton: "Znovu poslat ověřovací e-mail"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "Čeká se na souhlas rodiče"
+    message: "Tvůj e-mail je ověřený! Než budeš moci platformu plně používat, musí rodič nebo opatrovník dát souhlas."
+    sentTo: "Žádost o souhlas byla odeslána na %email%"
+    helpTitle: "Nepřišel e-mail? Potřebuješ pomoc?"
+    hint: "Požádej rodiče, ať zkontroluje složku se spamem. Odkaz platí 24 hodin."
+    resendButton: "Znovu poslat e-mail se souhlasem"
+    wrongEmail: "Zadal jsi špatný e-mail rodiče?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "Souhlas rodiče byl odvolán"
+    message: "Tvůj rodič nebo opatrovník odvolal souhlas pro tvůj účet. Dokud nebude souhlas znovu udělen, má tvůj účet omezené funkce."
+    newEmailPlaceholder: "Nový e-mail rodiče"
+    changeButton: "Aktualizovat a znovu poslat"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Obnovení účtu
+  description: Pokud si pamatuješ e-mail nebo uživatelské jméno svého účtu, můžeme ti poslat odkaz pro obnovení hesla.
   button:
     cancel: Zrušit
-    submit: Recover password
+    submit: Obnovit heslo
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Obnov si heslo"
+    description: "Pokud si pamatuješ e-mail svého účtu, můžeme ti poslat odkaz pro obnovení hesla."
     button:
-      submit: "Send reset email"
+      submit: "Poslat e-mail pro obnovení"
       cancel: "Zrušit"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "Zkontroluj své e-maily"
+    description: "Pokud existuje účet s tvým e-mailem, právě jsme ti poslali e-mail s odkazem, kterým si můžeš obnovit heslo. Platnost odkazu vyprší za %time%."
+    descriptionTwo: "O nové obnovení hesla můžeš požádat každých %throttleLimit% hodin."
+    descriptionThree: "Pokud ti e-mail nepřišel, zkontroluj prosím složku se spamem nebo napiš naší podpoře na %email-webmaster%."
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "Pro obnovení hesla prosím navštiv tento odkaz"
+    expire: "Platnost odkazu vyprší za %time%."
+    cheers: "Měj se!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "Obnov si heslo"
+    content: "Nedávno jsi požádal o obnovení hesla ke svému účtu Catrobat. Kliknutím na tlačítko níže si zvolíš nové heslo. Pokud jsi o to nežádal, můžeš tento e-mail klidně ignorovat."
+    visitLink: "Obnovit heslo"
+    expire: "Odkaz platí %time% a lze ho použít jen jednou."
   reset:
-    title: "Reset your password"
+    title: "Obnov si heslo"
     button:
-      submit: "Reset password"
+      submit: "Obnovit heslo"
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: Stáhnout jako aplikaci
+  prepare: 'Získat jako aplikaci'
+  preparing: 'Připravuje se aplikace'
+  text: 'Může to chvíli trvat'
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: Něco nefungovalo. Zkus to prosím znovu nebo nám dej vědět, pokud se to bude opakovat!
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: Uživatelské jméno nesmí být prázdné
+    invalid: Tvé uživatelské jméno je neplatné
+    exists: Toto uživatelské jméno už existuje.
+    not_exists: Toto uživatelské jméno neexistuje.
+    not_email: Uživatelské jméno nesmí být e-mailová adresa.
+    size: Uživatelské jméno musí mít alespoň 3 a nejvýše 180 znaků
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: Chybí heslo.
+    short: 'Tvé heslo musí mít alespoň {{ limit }} znaků.'
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: Chybí země.
+    invalid: Neplatná země
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: E-mail nesmí být prázdný
+    invalid: Tvůj e-mail se zdá být neplatný
     exists: Tato e-mailová adresa je již zaregistrována.
   id:
     blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
+  login: Heslo nebo uživatelské jméno bylo nesprávné.
   post-data: POST-Data not correct or missing!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: Klient neposlal fileChecksum! Nepoužíváš zastaralou verzi Pocket Code?
+    invalid: neplatný kontrolní součet
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: neplatný XML kód
+    missing: 'neznámá chyba: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: nalezen neočekávaný soubor
+    invalid: neplatný soubor
+  image.missing: XML projektu odkazuje na soubor, který ve složce projektu neexistuje
+  unknown: neznámá chyba
+  token: 'Ověření zařízení selhalo: neplatný auth-token!'
+  uploadTokenAuthFailed: 'Ověření nahrávacího tokenu selhalo.'
   project:
-    invalid: Invalid project.
+    invalid: Neplatný projekt.
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'Promiň, tvůj projekt obsahuje starou verzi jazyka Catrobat! Používáš nejnovější verzi Pocket Code?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'Promiň, používáš starou verzi Pocket Code. Aktualizuj prosím na nejnovější verzi.'
   authentication:
-    title: Login did not work
+    title: Přihlášení nefungovalo
     webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+      Vypadá to, že tvé uživatelské jméno nebo heslo nebylo správné.
+      Zkus se prosím znovu přihlásit v aplikaci.
 success:
-  text: Success
-  registration: Registration successful!
+  text: Hotovo
+  registration: Registrace proběhla úspěšně!
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: Tvůj projekt byl úspěšně nahrán!
+  imgUpload: Tvůj obrázek byl úspěšně nahrán!
+  report: Tvé nahlášení bylo úspěšně odesláno!
 time:
   minutes.ago: 'Před {0} < 1 minutou |Před {1}1 |] 1, Inf] %count% min'
   hours.ago: 'Před {1}1 hodinou|] 1, Inf] %count% hodinami'
@@ -728,155 +728,155 @@ time:
   months.ago: 'Před {1}1 měsícem |]1,Inf] %count% měsíci'
   years.ago: 'Před {1}1 rokem |] 1, Inf] více než 1 rokem'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: Při nahrávání tvé aplikace došlo k chybě.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Ověř svůj e-mail'
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: 'Chybí e-mail'
+    emailEmpty: 'E-mail nesmí být prázdný'
+    emailInvalid: 'Neplatný e-mail'
+    emailAlreadyInUse: 'E-mail už se používá'
+    usernameMissing: 'Chybí uživatelské jméno'
+    usernameTooShort: 'Uživatelské jméno je příliš krátké'
+    usernameTooLong: 'Uživatelské jméno je příliš dlouhé'
+    usernameEmpty: 'Uživatelské jméno nesmí být prázdné'
+    usernameAlreadyInUse: 'Uživatelské jméno už se používá'
+    usernameInvalid: 'Neplatné uživatelské jméno'
+    passwordMissing: 'Chybí heslo'
+    passwordEmpty: 'Heslo nesmí být prázdné'
+    passwordTooShort: 'Heslo je příliš krátké'
+    passwordTooLong: 'Heslo je příliš dlouhé'
+    passwordInvalidChars: 'Heslo obsahuje neplatné znaky'
+    usernameContainsEmail: "Uživatelské jméno nesmí obsahovat e-mailovou adresu"
+    usernameContainsLink: "Uživatelské jméno nesmí obsahovat odkaz"
+    countryCodeInvalid: "Neplatný kód země"
+    pictureInvalid: "Profilový obrázek je neplatný nebo není podporovaný"
+    dateOfBirthMissing: "Datum narození je povinné"
+    dateOfBirthInvalid: "Datum narození je neplatné"
+    tooYoung: "K vytvoření účtu ti musí být alespoň 3 roky"
+    parentEmailMissing: "Pro uživatele mladší 14 let je e-mail rodiče povinný"
+    parentEmailInvalid: "E-mail rodiče je neplatný"
+    parentEmailSameAsUser: "E-mail rodiče se musí lišit od tvé vlastní e-mailové adresy"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Chybí aktuální heslo"
+    currentPasswordWrong: "Aktuální heslo je špatně"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Název nesmí být prázdný'
+    nameTooLong: 'Název je příliš dlouhý'
+    descriptionTooLong: 'Popis je příliš dlouhý'
+    creditsTooLong: 'Poznámky a zásluhy jsou příliš dlouhé'
+    screenshotInvalid: 'Snímek obrazovky projektu je neplatný nebo není podporovaný'
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
+    invalid_checksum: 'Neplatný kontrolní součet. Zkus projekt nahrát znovu!'
+    upload_error: 'Chyba při nahrávání. Zkus projekt nahrát znovu!'
     creating_error: 'Error while creating Program Entity. Try uploading again!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Uložení podrobností projektu selhalo.'
+    screenshotError: 'Načtení, převod nebo uložení snímku obrazovky selhalo. Zkontroluj prosím svůj vstup.'
+    notFound: 'Projekt ke změně se nepodařilo najít.'
+    forbidden: 'Změna projektu není povolena. Jsi ještě přihlášený?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'Chybí název'
+    nameEmpty: 'Název nesmí být prázdný'
+    nameTooShort: 'Název je příliš krátký'
+    nameTooLong: 'Název je příliš dlouhý'
+    nameAlreadyInUse: 'Název už se používá'
+    descriptionMissing: 'Chybí popis'
+    descriptionEmpty: 'Popis je prázdný'
+    descriptionTooShort: 'Popis je příliš krátký'
+    descriptionTooLong: 'Popis je příliš dlouhý'
+    imageFileInvalid: 'Neplatný soubor obrázku'
+    imageFileInvalidType: 'Neplatný typ souboru obrázku'
+    imageFileTooLarge: 'Soubor obrázku je příliš velký'
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  arabic: Arabština
+  bulgarian: Bulharština
+  catalan: Katalánština
+  chinese_simplified_han: Čínština (zjednodušená)
+  chinese_traditional_han: Čínština (tradiční)
+  croatian: Chorvatština
+  czech: Čeština
+  danish: Dánština
+  dutch: Nizozemština
+  english_united_kingdom: Angličtina (Spojené království)
+  english_united_states: Angličtina (Spojené státy)
+  estonian: Estonština
+  filipino: Filipínština
+  finnish: Finština
+  french: Francouzština
+  german: Němčina
+  greek: Řečtina
+  hebrew: Hebrejština
+  hindi: Hindština
+  hungarian: Maďarština
+  indonesian: Indonéština
+  italian: Italština
+  japanese: Japonština
+  korean: Korejština
+  latvian: Lotyština
+  lithuanian: Litevština
+  malay: Malajština
+  norwegian: Norština
+  persian: Perština
+  polish: Polština
+  portuguese_brazil: Portugalština (Brazílie)
+  portuguese_portugal: Portugalština (Portugalsko)
+  romanian: Rumunština
+  russian: Ruština
+  serbian: Srbština
+  slovak: Slovenština
+  slovenian: Slovinština
+  spanish_latin_america: Španělština (Latinská Amerika)
+  spanish_spain: Španělština (Španělsko)
+  swedish: Švédština
+  thai: Thajština
+  turkish: Turečtina
+  ukrainian: Ukrajinština
+  vietnamese: Vietnamština
 ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: Údržba disku
+    ramMaintenance: Údržba RAM
+    noRemovableObjects: Nejsou k dispozici žádné odstranitelné objekty.
+    removableObjects: Odstranitelné objekty
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: Podobné projekty
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: Další od %username%
 pmd:
-  submitBtn: Submit your project
+  submitBtn: Odeslat svůj projekt
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: Odeslání
+    text: Chystáš se odeslat svůj projekt. Zadej prosím kód projektu a klikni na odeslat.
+    btnText: Odeslat
   successful:
-    text: Your project upload was successful.
+    text: Tvůj projekt byl úspěšně nahrán.
   failed:
-    text: Project upload failed.
+    text: Nahrání projektu selhalo.
 codeview:
   title: 'Code View'
   showCode: 'Zobrazit zdrojový kód'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
+  hideCode: 'Skrýt kód'
+  showStatistics: 'Zobrazit statistiky kódu'
+  hideStatistics: 'Skrýt statistiky kódu'
+  cantDisplayCode: "Kód nelze zobrazit"
+  cantDisplayStatistics: "Kód nelze zobrazit"
+  totalNumberOf: 'Celkový počet'
+  scenes: 'Scény'
   scripts: 'Skript'
   bricks: 'Bloky'
-  objects: 'Actors and objects'
+  objects: 'Postavy a objekty'
   looks: 'Vzhledy'
   sounds: 'Zvuky'
-  globals: 'Globals'
-  locals: 'Locals'
+  globals: 'Globální'
+  locals: 'Lokální'
   globalVariables: 'Global Variables'
   localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
@@ -888,18 +888,18 @@ codeview:
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'Zobrazení kódu'
+  loading: 'Načítání zobrazení kódu...'
+  error: 'Zobrazení kódu se nepodařilo načíst.'
+  retry: 'Zkusit znovu'
+  empty: 'Tento projekt nemá žádný kód.'
   scripts: 'Skript'
   looks: 'Vzhledy'
   sounds: 'Zvuky'
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
-  general: 'General'
+  general: 'Obecné'
   bricks: 'Bloky'
   eventBricks: 'Událost'
   controlBricks: 'Ovládání'
@@ -908,28 +908,28 @@ codeStatistics:
   looksBricks: 'Vzhledy'
   penBricks: 'Pero'
   dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
+  deviceBricks: 'Zařízení'
+  specialBricks: 'Speciální'
+  yourScore: 'Tvé skóre:'
+  points: 'bodů'
+  abstraction: 'Abstrakce a rozklad problému'
+  parallelism: 'Paralelismus'
+  logicalThinking: 'Logické myšlení'
+  synchronization: 'Synchronizace'
+  flowControl: 'Řízení toku'
+  userInteractivity: 'Interaktivita s uživatelem'
+  dataRepresentation: 'Reprezentace dat'
+  level: 'Úroveň'
+  loading: 'Načítání...'
   bonus: 'Bonus'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Přidej se k více než %user_count% kreativním hlavám!"
+  text: "Už bylo sdíleno %project_count% úžasných projektů a ten další může být tvůj. Stáhni si naši aplikaci a začni tvořit ještě dnes"
 privacy-policy:
   header: Ochrana soukromí
-  version: Version 2.2, 17 October 2019
+  version: Verze 2.2, 17. října 2019
   text1: Abychom ti mohli nabídnout všechny výhody našich služeb a vytvořit související účet, musíme od tebe shromáždit některá data.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text2: Abychom mohli udržovat a zlepšovat naše služby (aplikace a webové stránky) a provádět vědecký výzkum v oblasti vzdělávání v ICT a STEM/STEAM, používáme Google Analytics, Crashlytics a Firebase, vše od společnosti Google LLC (USA), a také Dynatrace od společnosti Dynatrace LLC (USA), abychom získali metadata o používání našich služeb, např. informace o pádech, časová razítka, navštívené stránky/obrazovky, používání našich aplikací a služeb, použitý operační systém a informace o poskytovateli sítě. Tato analýza a shromážděná data nejsou propojena s tvým profilem a neobsahují žádné osobní údaje (poslední bity IP adresy jsou anonymizovány). Shromážděná data však budou předána poskytovatelům služeb (Google LLC, USA a Dynatrace LLC, USA). Zpracování dat je založeno na smlouvách se společnostmi Google LLC a Dynatrace LLC. Tento vztah s poskytovateli služeb odpovídá obecnému nařízení Evropské unie o ochraně osobních údajů (EU GDPR) a dohodě EU-USA "Privacy Shield".
   text3: K vytvoření a používání účtu v našich systémech a k tvému informování o nezbytných změnách tvého účtu e-mailem, např. aktualizacích nebo porušení našich smluvních podmínek, pravidel komunity nebo naší politiky budeme uchovávat tvé uživatelské jméno a e-mailovou adresu, pokud nám ji poskytneš. Pokud jsi připojil svůj účet přes Google Plus nebo Facebook, uchováváme navíc identifikační klíč spojený s tvým účtem na těchto službách. Nepoužijeme tato data k jiným účelům (např. marketingovým), pokud nám to výslovně nedovolíš.
   text4: Na stránce svého účtu na naší sdílející platformě nám můžeš dobrovolně poskytnout zemi svého pobytu. Bude zobrazena u tvého veřejného profilu a bude použita pouze pro naše statistické a výzkumné účely. Můžeš ji kdykoliv odebrat v nastavení svého profilu.
   text5: Můžeš kdykoliv zrušit využití svých osobních dat náležících k tvému účtu smazáním svého účtu přes svou profilovou stránku na https://share.catrob.at/. Po smazání svého účtu budeš stále moci využívat poskytované služby, ale nebudeš moci spolupracovat např. nahráváním programy, komentováním nebo lajkováním. Také veškerý poskytnutý obsah spojený s tvým účtem, např. nahrané programy, komentáře atd. bude smazán.
@@ -937,15 +937,15 @@ privacy-policy:
   text7: Na stránce https://catrob.at/newsletter se můžeš dobrovolně přihlásit k odběru Catrobat Newsletteru, poskytovaného námi prostřednictvím služby MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Na tvou e-mailovou adresu ti budou zasílány informace o projektech Catrobatu a jeho službách. Můžeš se kdykoliv odhlásit z jeho odběru pomocí "unsubscribe" linku v zápatí každého newsletteru. Tento newsletter poskytuje MailChimp, s nímž máme dohodu o zpracování dat a který podléhá Obecnému nařízení EU na ochranu osobních údajů a dohodě EU-USA "Privacy Shield". Pro více informací o MailChimp se prosím podívej na stránku MailChimp na sekci Privacy Policy and Terms of Use.
   text8: Všechny služby jsou poskytovány open source projektem Catrobat pod hlavičkou International Catrobat Association – Verein zur Förderung freier Software, neziskovou nevládní organizací registrovanou v Grazu, Rakousko, Evropská unie. Naše politika respektuje zákony EU a Rakouska o ochraně dat (GDPR). Pokud nás chceš kontaktovat, pošli prosím e-mail na adresu contact@catrobat.org nebo napiš na adresu Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: V případě, že jsi mladší 14 let, tak musí být tyto podmínky přijaty tvým zákonným zástupcem (obvykle rodičem).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  text10: Oficiální anglické znění zásad ochrany osobních údajů Catrobatu je k dispozici na webu na %privacy_policy%.
+  disagree-text: Bez souhlasu nemůžeme vytvořit účet, ale hlavní funkce jsou dál dostupné.
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: "Označit jako přečtené"
+  noFollowers: "Vypadá to, že nemáš žádná oznámení o sledujících."
+  noComments: "Vypadá to, že nemáš žádná oznámení o komentářích."
+  noReactions: "Vypadá to, že nemáš žádná oznámení o reakcích."
+  noRemixes: "Vypadá to, že nemáš žádná oznámení o remixech."
+  noStudios: "Vypadá to, že nemáš žádná oznámení ze studií."
   tab:
     studio: Studio
     project: Programy
@@ -956,40 +956,40 @@ catro-notifications:
   follow:
     message: 'User %user_link% follows you now.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% vytvořil novou hru %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% přidal komentář ve studiu %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% přidal %program_link% do studia %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'Tvá žádost o vstup do studia %studio_name% byla přijata.'
+    declined: 'Tvá žádost o vstup do studia %studio_name% byla zamítnuta.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'Tvůj projekt %program_link% bude automaticky smazán za %days% dní. Nahraj novou verzi nebo získej víc stažení, aby zůstal zachován.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'Tvůj projekt "%project_name%" byl kvůli nečinnosti automaticky odstraněn. Pokud ho chceš dál sdílet, nahraj ho znovu.'
+  noProjects: "Vypadá to, že nemáš žádná oznámení o projektech."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
+  success: Odkaz zkopírován do schránky!
+  success_project: Odkaz na projekt zkopírován do schránky!
+  success_user: Odkaz na uživatele zkopírován do schránky!
+  fail: Odkaz se nepodařilo zkopírovat do schránky! :(
 next: Další
-previous: Previous
+previous: Předchozí
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: Knihovna médií
+  description: V následujících kategoriích najdeš postavy a objekty, které můžeš přidat do svých projektů.
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: Velikost náhledu
+    sm: malý
+    md: střední
+    lg: velký
+  theme-special: "Speciální motiv %flavor%"
+  search-results: Výsledky hledání v knihovně médií
+  no-results: Tvé hledání nenašlo žádné výsledky. Používej prosím jen anglické hledané výrazy.
+  download_these_files: uložit
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +997,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Všechna práva vyhrazena.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Tento web potřebuje ke svému fungování JavaScript. Zapni prosím JavaScript ve svém prohlížeči nebo požádej o pomoc dospělého."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
+  message: "Používáme cookies, abychom mohli zlepšovat naše služby. Žádná data neprodáváme ani nesdílíme."
+  accept: "Přijmout"
+  decline: "Odmítnout"
   privacy-link: "Ochrana soukromí"
-  settings-link: "Cookie Settings"
+  settings-link: "Nastavení cookies"
 agree: Souhlasím
 disagree: Nesouhlasím
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: Momentálně tu nejsou žádné profily.
+element: 'Prvek'
+elements: 'Prvky'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: 'Sdílet'
+  error: 'Sdílení selhalo'
+  success: 'Sdílení proběhlo úspěšně'
+copy: 'Kopírovat odkaz'
+checkOutProject: 'Mrkni na tento projekt:'
+checkOutUser: 'Mrkni na tohoto uživatele:'
+community: 'Komunita Catrobat'
+back_to_app: 'Opustit komunitu'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: Nejnovější projekty
+  random: Náhodné projekty
   most_viewed: Nejnavštěvovanější
   most_downloaded: Nejvíce stahované
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  example: Příklad
+  scratch: Scratch remixy
+  recommended: Doporučené projekty
+  popular: Nejoblíbenější
+  trending: Populární teď
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: 'Úspěchy'
     badge: 'new'
   overview:
-    header: 'Achievements'
+    header: 'Úspěchy'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Nejnovější úspěch'
+      x_out_of_y: 'Odemčeno %unlocked% z %total%'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Odemčené'
+      empty: "Zatím jsi neodemkl žádné úspěchy."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Zamčené'
+      empty: "Už jsi odemkl všechny úspěchy."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Gratulujeme!'
+      subtitle: "Získal jsi odznak"
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: 'Úspěchy'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Učeň'
+        description: 'Začni někoho sledovat a nahraj projekt'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Řemeslník'
+        description: 'Aktivní člen déle než 1 rok'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Mistr'
+        description: 'Aktivní člen déle než 4 roky'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Velmistr'
+        description: 'Aktivní člen déle než 7 let'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Iniciativa'
+        description: 'Přidej svůj první profilový obrázek'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Nováček'
+        description: 'Vytvoř si uživatelský účet'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Účastník Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Dvojjazyčný"
+        description: "Přelož své projekty do 2 jazyků"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Trojjazyčný"
+        description: "Přelož své projekty do 3 jazyků"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Lingvista"
+        description: "Přelož své projekty do 5 jazyků"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Ověřený"
+        description: "Ověř svůj účet"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Štítek |]1,Inf] Štítky'
   tag:
     game:
-      title: Game
+      title: Hra
     animation:
-      title: Animation
+      title: Animace
     story:
-      title: Story
+      title: Příběh
     music:
-      title: Music
+      title: Hudba
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: Experimentální
     tutorial:
-      title: Tutorial
+      title: Návod
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Rozšíření |]1,Inf] Rozšíření'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: Dron
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: Vyšívání
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: Hra více hráčů
 studio:
-  title: 'Studios'
+  title: 'Studia'
   singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  create_studio: 'Vytvořit studio'
+  delete_studio: 'Smazat studio'
   cancel_studio: 'Zrušit'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: 'Název studia'
+  studio_description: 'Popis studia'
+  is_public: 'Zveřejnit?'
+  enable_comments: 'Povolit komentáře?'
+  cover_image: 'Nahrát obálku'
+  cover_image_empty: 'Není vybrán žádný obrázek.'
+  cover_image_hint: 'Max. 1 MB. Podporované formáty: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'Obrázek byl automaticky zmenšen, aby se vešel do limitu 1 MB.'
+  cover_image_compressing: 'Komprimace obrázku...'
+  cover_image_still_too_large: 'Obrázek je i po kompresi příliš velký. Vyber prosím menší soubor.'
+  cover_image_invalid_type: 'Neplatný typ obrázku. Použij prosím JPEG, PNG, GIF nebo WebP.'
+  cover_image_compression_failed: 'Obrázek se nepodařilo zpracovat. Zkus prosím jiný soubor.'
+  cover_image_alt: 'Tvůj obrázek obálky'
+  cover_image_remove: 'Odebrat obrázek'
+  popular: 'Oblíbená studia'
+  join: 'Přidat se'
+  leave: 'Opustit'
   report: 'Nahlásit'
-  public: 'public'
-  private: 'Invite-only'
+  public: 'veřejné'
+  private: 'Jen na pozvánku'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: 'Studia, kde jsem členem'
+    public_studios: 'Veřejná studia'
+    private_studios: 'Studia jen na pozvánku'
+    no_studios: 'Zatím žádná studia'
+    my_studios: 'Moje studia'
+    explore: 'Prozkoumat studia'
+    no_joined: "Zatím ses nepřidal k žádnému studiu"
+    joined: 'Člen'
+    load_more: 'Načíst další'
     open: 'Otevřít '
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share: 'Sdílet'
+    share_success: 'Odkaz zkopírován do schránky!'
+    leave_confirm_title: 'Opustit toto studio?'
     cancel: 'Zrušit'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    cancel_request: 'Zrušit žádost'
+    cancel_request_confirm_title: 'Zrušit žádost o vstup?'
+    admin: 'Administrátor'
+    member: 'Člen'
   details:
-    add_project: 'click to add the project'
+    add_project: 'klikni pro přidání projektu'
     add: 'Přidat'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
+    showMore: 'zobrazit více'
+    showLess: 'zobrazit méně'
+    are_you_sure: 'Jsi si jistý?'
+    no_way_of_return: 'Tuto akci nelze vrátit zpět.'
     delete_it: 'Smazat'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    remove_project: 'Odebrat ze studia'
+    remove_project_error: 'Projekt se nepodařilo odebrat ze studia.'
+    remove_project_success: 'Projekt byl úspěšně odebrán ze studia.'
+    no_projects: 'Studio zatím neobsahuje žádné projekty.'
     projects:
       title: 'Programy'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: 'Přidat projekty'
+      open_project: 'Otevřít projekt'
       download: 'Stáhnout'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
+      share: 'Sdílet'
+      remove_from_studio: 'Odebrat ze studia'
+      remove_from_studio_title: 'Odebrat projekt ze studia?'
+      remove_from_studio_text: 'Pokud si to rozmyslíš, můžeš ho později přidat znovu.'
+      share_success: 'Odkaz zkopírován do schránky!'
+      share_fail: 'Odkaz se nepodařilo zkopírovat.'
+      no_projects_empty_state: 'Zatím nemáš žádné projekty k přidání. Nejdřív si nějaký vytvoř v Pocket Code!'
+      add_selected: 'Přidat vybrané'
+    no_available_projects: 'Nejsou k dispozici žádné projekty k přidání.'
+    updateCoverError: 'Při aktualizaci obálky studia se něco pokazilo.'
+    join: 'Přidat se'
+    leave: 'Opustit'
     report: 'Nahlásit'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'Čeká se'
+    decline: 'Zamítnuto'
     comments:
       title: 'Komentáře'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Napiš něco'
+      replies: 'odpovědi'
+      send: 'odeslat'
+      no_comments: 'Toto studio zatím nemá žádné komentáře.'
+      disabled_comments: 'Komentáře jsou v tomto studiu vypnuté.'
+      remove_comment: 'Odebrat komentář'
+      post_error: 'Při odesílání komentáře se něco pokazilo. Zkus to později.'
+      remove_error: 'Při odebírání komentáře se něco pokazilo. Zkus to později.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'Aktivity'
+      join_studio: '%user% se přidal do studia.'
+      add_project: '%user% přidal projekt.'
+      add_comment: '%user% napsal komentář.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'Členové studia'
+      project_count: '{0} Žádné projekty ve studiu |{1} 1 projekt ve studiu |]1,Inf] Projekty ve studiu: %count%'
+      no_studio_projects: 'Žádné projekty ve studiu'
+      one_studio_project: '1 projekt ve studiu'
+      n_studio_projects: 'Projekty ve studiu: %count%'
+      promote_member: 'Povýšit člena na administrátora'
+      promotion_failed: 'Při povyšování tohoto člena se něco pokazilo. Zkus to později.'
+      ban_member: 'Vykázat člena ze studia'
+      ban_failed: 'Při vykazování tohoto člena se něco pokazilo. Zkus to později.'
+      demote_member: 'Snížit administrátora na člena'
+      demotion_failed: 'Při snižování tohoto administrátora se něco pokazilo. Zkus to později.'
+      last_admin: 'Posledního administrátora tohoto studia nelze snížit na člena.'
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      title: 'Žádosti o vstup'
+      accept: 'Přijmout'
+      decline: 'Odmítnout'
+      accept_success: 'Žádost o vstup přijata.'
+      decline_success: 'Žádost o vstup zamítnuta.'
+      error: 'Něco se pokazilo. Zkus to prosím znovu.'
+      no_requests: 'Žádné čekající žádosti o vstup.'
     show_more: 'More information'
     show_less: 'Less information'
     admin_settings:
       title: 'Nastavení'
-      studio_name: 'Studio Name'
+      studio_name: 'Název studia'
       studio_description: 'Popis'
       toggle_allow_comments: 'Komentáře'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Veřejné'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Velikost: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: 'Typ: obrázek'
+      project: 'Typ: projekt'
+      sound: 'Typ: zvuk'
+      movie: 'Typ: video'
+      default: 'Typ: neznámý'
+  no_categories: 'Zatím nejsou k dispozici žádné kategorie médií.'
+  no_results: 'Nic nenalezeno.'
+  assets_count: 'položek'
+  view_all: 'Zobrazit vše'
+  view_all_category: 'Zobrazit vše: %category%'
+  back_to_app: 'Zpět do aplikace'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'Požadovaný projekt není dostupný'
+  project_not_for_kids: 'Projekt byl označen jako nevhodný pro děti!'
+  project_safe_for_kids: 'Projekt byl označen jako vhodný pro děti!'
+  project_not_for_kids_moderator: 'Projekt označil moderátor. Tuto akci nemůžeš vrátit zpět!'
+  project_set_private: 'Projekt byl nastaven jako soukromý.'
+  project_set_public: 'Projekt byl nastaven jako veřejný.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'Další informace: additionalInfo'
+    feature_1: 'Funkce featureName není dostupná od maintenanceStart do maintenanceEnd'
+    feature_2: 'Funkce'
+    feature_3: 'Funkce'
+MarkNotForKids: Označit jako nevhodné pro děti
+MarkSafeForKids: Označit jako vhodné pro děti
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: Potvrzení
+  confirmMark: Opravdu chceš označit tento projekt jako nevhodný pro děti?
+  confirmUnmark: Opravdu chceš z tohoto projektu odebrat označení „nevhodné pro děti“?
+  confirmYes: 'Ano, pokračovat!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Nahlásit: %content_type%"
+    reason_placeholder: "Popiš prosím, proč to nahlašuješ..."
+    submit: "Odeslat nahlášení"
+    success: "Tvé nahlášení bylo odesláno. Děkujeme."
+    error: "Něco se pokazilo. Zkus to prosím znovu."
+    duplicate: "Tento obsah jsi už nahlásil."
+    trust_too_low: "Tvůj účet je příliš nový na to, abys mohl něco nahlašovat."
+    unverified: "Ujisti se, že jsi přihlášený a e-mail tvého účtu je ověřený."
+    rate_limited: "Odesíláš nahlášení příliš rychle. Chvíli počkej a zkus to znovu."
+    suspended: "Tvůj účet je pozastavený."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "Odvolat se"
+    title: "Odvolat se proti tomuto rozhodnutí"
+    placeholder: "Vysvětli, proč by tento obsah neměl být skrytý..."
+    submit: "Odeslat odvolání"
     cancel: "Zrušit"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "Tvé odvolání bylo odesláno k posouzení."
+    already_pending: "Už máš jedno odvolání, které čeká na vyřízení."
+    error: "Něco se pokazilo. Zkus to prosím znovu."
+    rate_limited: "Odesíláš odvolání příliš rychle. Chvíli počkej a zkus to znovu."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Píšeš komentáře příliš rychle. Chvíli počkej."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Reaguješ příliš rychle. Chvíli počkej."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Sleduješ/přestáváš sledovat příliš rychle. Chvíli počkej."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Provádíš akce ve studiu příliš rychle. Chvíli počkej."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "Tento projekt byl skryt kvůli nahlášením od komunity."
+    comment: "Tento komentář byl skryt kvůli nahlášením od komunity."
+    user: "Tento profil byl skryt kvůli nahlášením od komunity."
+    user_own: "Tvůj účet byl pozastaven kvůli nahlášením od komunity. Proti tomuto rozhodnutí se můžeš odvolat."
+    studio: "Toto studio bylo skryto kvůli nahlášením od komunity."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "Tvůj obsah (%content_type%) byl skryt kvůli nahlášením od komunity. Proti tomuto rozhodnutí se můžeš odvolat."
+    appeal_approved: "Tvé odvolání bylo schváleno. Tvůj obsah je znovu viditelný."
+    appeal_rejected: "Tvé odvolání bylo posouzeno a rozhodnutí o skrytí tvého obsahu zůstává v platnosti."
+    admin_review_needed: "Obsah byl automaticky skryt a je potřeba ho posoudit."
+Reports: Nahlášení
+members: členové

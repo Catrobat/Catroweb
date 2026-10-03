@@ -1,508 +1,508 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: Tiếng Anh
+title: 'Cộng đồng Catrobat'
+meta.description: 'Chia sẻ, khám phá và remix các dự án sáng tạo được làm bằng Catrobat. Tham gia cộng đồng toàn cầu của những nhà sáng tạo trẻ đang xây dựng trò chơi, hoạt hình và ứng dụng.'
+meta.description.media.library: 'Duyệt và tải về miễn phí tài nguyên đa phương tiện cho Catrobat — âm thanh, hình ảnh và nhiều thứ khác cho dự án của bạn.'
+meta.og.title.login: 'Đăng nhập vào Catrobat'
+meta.og.description.login: 'Đăng nhập để chia sẻ các dự án Catrobat của bạn với cộng đồng.'
+meta.og.title.register: 'Tạo tài khoản Catrobat'
+meta.og.description.register: 'Tham gia cộng đồng Catrobat và bắt đầu chia sẻ các dự án sáng tạo của bạn ngay hôm nay.'
+meta.og.description.profile: '%username% trên Catrobat – xem các dự án và thành tích của bạn ấy.'
+localLanguage: 'Tiếng Việt'
 username: Tên đăng nhập
 password: Mật khẩu
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
+createNewPassword: 'Tạo mật khẩu mới'
+accountSettings: 'Cài đặt tài khoản'
+email: 'Email'
 aboutPocketCode: Về Pocket Code
 about: Về Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
+education: 'Giáo dục'
+chat: 'Trò chuyện và diễn đàn'
+privacyGuide: 'Hướng dẫn về quyền riêng tư'
+others: 'Khác'
 tutorials: Trợ giúp
 googlePlay: googlePlay
 iosAppStore: IOS App store
 instagram: Instagram
-discordChat: Discord chat
+discordChat: 'Trò chuyện trên Discord'
 passwordsNoMatch: Mật khẩu không khớp.
-error: Oops!
+error: 'Ối!'
 cancel: Hủy bỏ
-confirm: Confirm
+confirm: 'Xác nhận'
 report: Báo cáo
 report.title: Báo cáo
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: 'Đúng, xóa nó đi!'
+reportIt: 'Đúng, báo cáo nó!'
+areYouSure: 'Bạn có chắc không?'
+noWayOfReturn: 'Bạn sẽ không thể hoàn tác thao tác này!'
 download: Tải về
 name: Tên
 description: Mô tả
 noDescription: Không có mô tả.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+credits: 'Ghi chú và ghi công'
+noCredits: 'Chưa có ghi chú và ghi công nào.'
+notesAndCreditsDescription: 'Bạn đã tạo dự án này như thế nào? Bạn có dùng ý tưởng, kịch bản hay hình ảnh của người khác không? Hãy cảm ơn họ ở đây.'
+projectImportedFromScratch: 'Dự án này được nhập từ MIT Scratch. Bạn có thể xem dự án gốc'
+scratchImportedProjectLinkHere: 'tại đây.'
 country: Quốc gia
 loginText: Đăng nhập
 privacyPolicy: Chính sách bảo mật
 imprint: Nhà xuất bản
 projectDetails: Chi tiêt
 somethingWentWrong: 'Thao tác sai.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: 'Hãy đảm bảo bạn đã đăng nhập và email tài khoản của bạn đã được xác minh.'
+accountSuspended: 'Tài khoản của bạn đã bị tạm khóa do bị cộng đồng báo cáo. Bạn có thể kháng nghị quyết định này từ trang hồ sơ của mình.'
+doesNotExist: 'Tài nguyên được yêu cầu không tồn tại.'
 pleaseTryAgain: 'Làm ơn hãy thử lại!'
-tryAgainButton: 'Try again'
+tryAgainButton: 'Thử lại'
 oldVersionError: 'Làm ơn hãy cập nhật phiên bản Pocket Code mới nhất!'
 more: 'hơn/thêm/nhiều hơn'
 less: 'ít hơn'
-show-more: 'More information'
-show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+show-more: 'Xem thêm'
+show-less: 'Thu gọn'
+more-information: 'Thêm thông tin'
+less-information: 'Ít thông tin hơn'
+ok: 'Đã hiểu'
+clickToDownloadProgram: 'Để tải dự án mẫu, hãy nhấn %link_start% vào đây %link_end%.'
 registrationError: 'Tên người dùng hoặc địa chỉ email đã được sử dụng.'
 notifications: 'Thông báo'
 allNotifications: 'Tất cả'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
+FollowersNotifications: 'Người theo dõi'
+LikeNotifications: 'Cảm xúc'
+CommentNotifications: 'Bình luận'
+RemixNotifications: 'Bản remix'
 wellDone: "Làm tốt lắm!"
 done: "Đã hoàn thành!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+notificationsReadMessage: 'Có vẻ bạn chưa có thông báo nào.'
+confirmMessage: 'Đúng, xóa nó đi'
 cancelMessage: "Hủy bỏ"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+notificationsUnauthorizedError: 'Không thể xác thực người dùng'
+notificationsClearError: 'Không thể đánh dấu thông báo là đã đọc!'
+pleaseWait: 'Vui lòng chờ...'
 projects: "Các chương trình"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+users: 'Người dùng'
+studios: 'Studio'
+oauthPopUpTitle: 'Thông tin đăng nhập bằng tài khoản bên ngoài'
+oauthInfo: 'Bạn vừa đăng nhập bằng một tài khoản bên ngoài. Chúng mình đã tạo một tên đăng nhập ngẫu nhiên cho bạn. Nếu bạn muốn đổi tên đăng nhập hoặc tạo mật khẩu mới cho tài khoản, hãy vào trang hồ sơ của bạn.'
+oauthHere: 'tại đây'
+statistics: 'Thống kê'
+languageSelection: 'Chọn ngôn ngữ'
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: 'Giao diện'
+  auto: 'Hệ thống'
+  auto_description: 'Theo cài đặt của thiết bị'
+  light: 'Sáng'
+  light_description: 'Giao diện sáng'
+  dark: 'Tối'
+  dark_description: 'Giao diện tối'
+  apply: 'Áp dụng'
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Những dự án nào được đề xuất ở đây?'
+      description: 'Dự án của bạn nhận được càng nhiều cảm xúc (Thích, Cười ...) thì càng xuất hiện cao hơn trong danh sách này.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: 'Đang theo dõi'
+  followers: 'Người theo dõi'
+  follow: 'Theo dõi'
+  username: 'Người dùng'
+  followsMe: 'Theo dõi mình'
+  noFollowing: 'Hiện tại bạn chưa theo dõi ai.'
+  noFollowers: 'Hiện tại bạn chưa có người theo dõi nào.'
+  noOtherFollowing: 'Hiện tại chưa theo dõi người dùng nào.'
+  noOtherFollowers: 'Hiện tại chưa có người theo dõi nào.'
+  followError: ' Hiện tại chúng mình không thể theo dõi người dùng này.'
+  unfollowError: ' Hiện tại chúng mình không thể bỏ theo dõi người dùng này.'
+  unfollowQuestion: 'Bạn có chắc muốn bỏ theo dõi người dùng này không?'
+  unfollowButton: 'Bỏ theo dõi %username%'
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: 'Chào mừng bạn đến với %theme% của Catrobat'
+    title_mindstorms: 'Chào mừng bạn đến với trang Catrobat dành cho Mindstorms EV3 và NXT'
+    subtitle: 'Tạo truyện, trò chơi và nhiều thứ khác...'
+    subtitle_embroidery: 'Thêu hoa văn của riêng bạn lên áo phông, túi, quần hoặc ốp điện thoại!'
+    subtitle_mindstorms: 'Tạo dự án của riêng bạn với robot Lego Mindstorms EV3 và NXT'
+    download: 'Tải ứng dụng'
+    statistics: 'Thêm thống kê'
+  featured: 'Nổi bật'
   open: Mở 
   download: Tải về
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: 'Tải lên dự án'
+    drop_here: 'Kéo và thả tệp .catrobat của bạn vào đây'
+    or_browse: 'hoặc nhấn để chọn tệp'
+    button: 'Tải lên'
+    uploading: 'Đang tải lên...'
+    success: 'Tải dự án lên thành công!'
+    view_project: 'Xem dự án'
+    upload_another: 'Tải lên dự án khác'
+    invalid_file: 'Hãy chọn một tệp .catrobat'
+    file_too_large: 'Tệp quá lớn'
+    error: 'Tải lên thất bại. Hãy thử lại.'
+    unauthorized: 'Bạn phải đăng nhập để tải lên.'
+    rate_limited: 'Quá nhiều lượt tải lên. Hãy thử lại sau.'
+    selected_file: 'Tệp đã chọn:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
+      file_size: 'Kích thước tệp tối đa là 100 MB.'
+      app_upload: 'Bạn cũng có thể tải dự án lên trực tiếp từ ứng dụng Pocket Code. Lưu ý rằng các ứng dụng hiện đang được làm lại và tạm thời chưa hỗ trợ tải lên web.'
+      retention: 'Các dự án đã tải lên sẽ tự động bị xóa sau một thời gian không hoạt động. Hãy đăng nhập thường xuyên hoặc có thêm lượt tải về cho dự án để giữ nó lâu hơn.'
+      protection: 'Những dự án đặc biệt hay hoặc phổ biến có thể được người kiểm duyệt bảo vệ khỏi việc tự động xóa.'
+  example: 'Ví dụ'
+  newest: 'Dự án mới nhất'
+  recommended: 'Dự án được đề xuất'
+  scratchremixes: 'Bản remix từ Scratch'
+  noProjects: 'Hiện tại chưa có dự án nào.'
+  shareAction: 'Chia sẻ'
+  deleteAction: 'Xóa dự án'
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+    Bạn có chắc không?
+    Bạn có chắc muốn xóa "%programName%" không?
+    Bạn sẽ không thể hoàn tác thao tác này!
+    Đúng, xóa nó đi!
+    Hủy
+  deleteConfirmText: 'Thao tác này không thể hoàn tác. Dự án của bạn sẽ bị xóa vĩnh viễn.'
+  deleteConfirmationTitle: 'Bạn có chắc không?'
+  deleteNotFoundError: 'Không tìm thấy dự án cần xóa trong tài khoản của bạn.'
+  private: 'riêng tư'
+  public: 'công khai'
+  setPrivateAction: 'Đặt riêng tư'
+  setPublicAction: 'Đặt công khai'
+  setPrivateConfirm: 'Đặt dự án này thành riêng tư? Nó sẽ không còn xuất hiện trong kết quả tìm kiếm.'
+  setPublicConfirm: 'Đặt dự án này thành công khai? Mọi người đều sẽ thấy nó.'
+  markNotForKidsConfirm: 'Đánh dấu dự án này là không phù hợp với trẻ em?'
+  markSafeForKidsConfirm: 'Gỡ dấu không phù hợp với trẻ em khỏi dự án này?'
+  nfkModeratorLocked: 'Cài đặt này đã bị người kiểm duyệt khóa.'
+  confirmSetPrivate: 'Bạn có chắc muốn đặt dự án này thành riêng tư không? Nó sẽ không còn xuất hiện trong kết quả tìm kiếm.'
+  confirmSetPublic: 'Bạn có chắc muốn đặt dự án này thành công khai không? Mọi người đều sẽ thấy nó.'
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Bạn có chắc không?
+    Nếu bạn đặt '%programName%' thành riêng tư, người dùng khác sẽ không thấy hoặc tìm thấy nó.
+    Bạn vẫn có thể chia sẻ liên kết dự án với bạn bè. Bạn có thể đổi chế độ hiển thị bằng cách nhấn vào biểu tượng ổ khóa.
+    Nếu bạn đặt "%programName%" thành công khai, người dùng khác có thể thấy và tìm thấy nó.
+    Đúng, đặt thành công khai
+    Đúng, đặt thành riêng tư
+    Không
+  reportCommentConfirmation: 'Bạn có chắc muốn báo cáo bình luận này không?'
+  deleteCommentConfirmation: 'Bạn có chắc muốn xóa bình luận này không?'
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+    Xóa tài khoản?
+    Bạn có chắc muốn xóa tài khoản của mình không? Việc này cũng sẽ xóa các dự án và bình luận bạn đã đăng!
+    Bạn sẽ không thể hoàn tác thao tác này!
+    Đúng, xóa nó đi!
+    Hủy
+  tooLongName: 'Tên dự án quá dài!'
+  tooLongDescription: 'Mô tả dự án quá dài!'
+  tooLongCredits: 'Ghi chú và ghi công của dự án quá dài!'
+  my_projects: 'Dự án mình đã chia sẻ'
+  trending: 'Dự án thịnh hành'
+  popular: 'Dự án phổ biến'
   most:
     viewed: Xem nhiều nhất
     downloaded: Tải về nhiều nhất
-  random: Random projects
-  related: Related projects
+  random: 'Dự án ngẫu nhiên'
+  related: 'Dự án liên quan'
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'Khám phá dự án'
+    no_projects: 'Bạn chưa tạo dự án nào'
+    no_explore: 'Không tìm thấy dự án nào'
+    load_more: 'Tải thêm'
+    upload: 'Tải lên dự án'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'Được bảo vệ'
+    day_left: 'Còn 1 ngày'
+    days_left: 'Còn %days% ngày'
+    tooltip: 'Dự án sẽ tự động bị xóa sau một thời gian không hoạt động. Hãy có thêm lượt tải về hoặc đăng nhập thường xuyên để giữ dự án lâu hơn.'
+    tooltip_protected: 'Dự án này được bảo vệ và sẽ không bị tự động xóa.'
+  downloads: '%downloads% lượt tải về'
+  sample: 'Dự án mẫu'
+  views: '%views% lượt xem'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: 'Những người đã bày tỏ cảm xúc với dự án này'
     all: "Tất cả"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: '{0}0 bản remix |{1}1 bản remix |]1,Inf]%remixes% bản remix'
+  newRemixesNotificationTitle: '|{1}"%programName%" có 1 bản remix mới: |]1,Inf] "%programName%" có %remixes% bản remix mới:'
+  submitted: 'Dự án đã nộp'
+  uploaded: 'Dự án đã tải lên'
+  reportAsInappropriate: 'Báo cáo là không phù hợp'
+  reportProgram: 'Báo cáo dự án'
+  languageVersion: 'Phiên bản ngôn ngữ Catrobat: %languageVersion%'
+  reportLoginText: 'Hãy %login% để báo cáo dự án này.'
+  reportDialogHeader: 'Vì sao bạn muốn báo cáo dự án này?'
+  reportDialogReason: 'Nhập lý do'
+  reportRadioButtonInappropriate: 'Nội dung không phù hợp'
+  reportRadioButtonCopyright: 'Vi phạm bản quyền'
+  reportRadioButtonSpam: 'Đây là spam'
+  reportRadioButtonDislike: 'Mình không thích nó'
+  reportOwnProgram: 'Bạn không thể báo cáo dự án của chính mình.'
+  reportAlready: 'Bạn đã báo cáo dự án này rồi.'
+  reportDone: 'Bạn đã báo cáo dự án này!'
+  updateAppHeaderDownload: 'Không thể tải về'
+  updateAppTextDownload: 'Hãy cập nhật ứng dụng lên phiên bản mới nhất. Lưu ý rằng không phải tất cả tính năng Android đều đã có trên iOS.'
+  updateAppTextDownloadApk: 'Tải APK hiện chỉ có trên Android, không có trên iOS.'
+  updateAppHeader: 'Cập nhật ứng dụng'
+  updateAppText: 'Hãy cập nhật ứng dụng lên phiên bản mới nhất.'
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
+  checkout_this_project: 'Xem dự án Catrobat này'
+  show_more: 'Xem thêm'
+  comments: 'Bình luận'
+  send: 'Gửi'
   delete: Xóa
   report: Báo cáo
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: 'Trả lời'
+  report_popup: 'Đã báo cáo bình luận thành công.'
+  report_popup_header: 'Đã báo cáo'
+  deleted_popup: 'Đã xóa bình luận thành công.'
+  deleted_popup_header: 'Đã xóa'
+  noAdminRights: 'Bạn không có quyền quản trị. Hãy đăng nhập bằng tài khoản quản trị viên.'
+  editProject: 'Chỉnh sửa dự án'
+  closeProjectEditor: 'Đóng trình chỉnh sửa dự án'
   closeEditorPrompt: Bạn có muốn lưu thay đổi của mình?
   btnDiscard: Loại bỏ
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
+  addComment: 'Viết bình luận'
+  thumbsUp: 'Thích!'
+  smile: 'Cười!'
+  love: 'Yêu thích!'
+  wow: 'Wooow!'
+  linkTitle: 'Liên kết'
+  link: 'Sao chép liên kết dự án vào bộ nhớ tạm'
+  reactionsText: 'Cảm xúc'
+  downloadErrorText: 'Đã xảy ra lỗi khi tải dự án về. Hãy thử lại sau.'
+  downloadStartText: 'Đã bắt đầu tải về...'
+  downloading: 'Đang tải về...'
+  openInApp: 'Mở trong Pocket Code'
+  downloaded: 'Đã tải về'
+  showTranslation: 'Hiện bản dịch'
+  hideTranslation: 'Ẩn bản dịch'
+  translatedByLine: 'Được %provider% dịch từ %sourceLanguage% sang %targetLanguage%'
+  googleTranslate: 'Google Dịch'
+  confrimDelete: 'Bạn có chắc muốn xóa bản dịch này không?'
+  default: 'Mặc định'
   save: Lưu
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: 'Bản dịch %language%'
+  editDefault: 'Sửa bản mặc định'
+  editTranslation: 'Sửa bản dịch %language%'
+  translations: 'Bản dịch'
+  createTranslation: 'Tạo bản dịch'
+  deletedComment: '**Đã xóa**'
+  replyLabel: 'trả lời'
+  repliesLabel: 'trả lời'
+  notForKids: 'Không phù hợp với trẻ em'
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
+  title: 'Bản remix'
+  showRemixGraph: 'Sơ đồ remix'
   by: 'bởi'
   open: 'Mở '
-  showPaths: 'Show Paths'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
+  showPaths: 'Hiện đường đi'
+  loading: 'Đang tải sơ đồ remix...'
+  error: 'Không thể tải sơ đồ remix.'
+  empty: 'Dự án này chưa có dữ liệu sơ đồ remix.'
+  remixesLabel: 'Bản remix'
   projectsLabel: 'Các chương trình'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  scratchLabel: 'Gốc Scratch'
+  interactHint: 'Chọn một nút để mở dự án hoặc làm nổi bật đường remix của nó.'
+  zoomIn: 'Phóng to'
+  zoomOut: 'Thu nhỏ'
+  resetView: 'Đặt lại khung nhìn'
+  projectNotAvailableErrorTitle: 'Xin lỗi...'
+  projectNotAvailableErrorDescription: 'Dự án này không còn nữa!'
+  projectNotAvailable: 'Không có sẵn'
+  projectUnknownUser: 'Người dùng không xác định'
 noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  Đây là tin nhắn tự động - Vui lòng không trả lời trực tiếp email này.
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: 'Xác nhận tài khoản Catrobat của bạn'
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Chào %username%,
+    Để hoàn tất kích hoạt tài khoản, hãy truy cập %confirmationUrl%
+    Liên kết này chỉ dùng được một lần để xác thực tài khoản của bạn.
+    Thân mến,
+    Đội ngũ Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Chào %username%,<br>
     <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
+    Để hoàn tất kích hoạt tài khoản, hãy nhấn <a href="%confirmationUrl%">vào đây.</a><br>
+    Liên kết này chỉ dùng được một lần để xác thực tài khoản của bạn.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Thân mến,<br>
+    Đội ngũ Catrobat.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: 'Xác minh địa chỉ email của bạn'
+  welcome: 'Chào mừng bạn đến với Catrobat!'
+  greeting: 'Cảm ơn bạn đã đăng ký! Hãy xác minh địa chỉ email để bắt đầu.'
+  message: 'Nhấn nút bên dưới để xác nhận email của bạn. Liên kết này có hiệu lực đến %time% và chỉ dùng được một lần.'
+  button: 'Xác minh địa chỉ email'
+  ignore: 'Nếu bạn không tạo tài khoản Catrobat, bạn có thể bỏ qua email này.'
+  autoDelete: 'Tài khoản chưa xác minh sẽ tự động bị xóa sau 30 ngày.'
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: 'Cần sự đồng ý của phụ huynh cho tài khoản Catrobat của con bạn'
+    title: 'Cần sự đồng ý của phụ huynh'
+    greeting: 'Xin chào,'
+    message: 'Con của bạn, %username%, đã tạo tài khoản trên Catrobat và đã xác minh địa chỉ email.'
+    explanation: 'Catrobat là nền tảng giáo dục miễn phí, nơi các bạn trẻ học lập trình bằng cách tạo ứng dụng, trò chơi và hoạt hình. Theo quy định bảo vệ trẻ em của EU, chúng mình cần sự đồng ý của bạn trước khi con bạn có thể tham gia đầy đủ vào cộng đồng. Hãy nhấn nút bên dưới để đồng ý.'
+    button: 'Đồng ý với tư cách phụ huynh'
+    ignore: 'Nếu bạn không mong đợi email này, bạn có thể bỏ qua nó. Nếu không có sự đồng ý, tài khoản sẽ bị giới hạn chức năng.'
+    whatIsCatrobat: 'Catrobat là nền tảng lập trình giáo dục miễn phí, phi lợi nhuận. Tìm hiểu thêm tại catrobat.org.'
+    manageLink: 'Bạn có thể quản lý tài khoản của con bất cứ lúc nào qua <a href="%portalUrl%" style="color: #00acc1;">Cổng phụ huynh</a>. Tìm hiểu thêm về <a href="%infoUrl%" style="color: #00acc1;">quyền của bạn với tư cách phụ huynh</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: 'Đã đồng ý'
+    message: 'Cảm ơn bạn! Tài khoản của %username% giờ đã được kích hoạt đầy đủ.'
+    continueButton: 'Khám phá dự án'
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: 'Phụ huynh & người giám hộ'
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: 'Thông tin dành cho phụ huynh & người giám hộ'
+    intro: 'Catrobat rất coi trọng sự an toàn và quyền riêng tư của người dùng nhỏ tuổi. Trang này giải thích cách chúng mình bảo vệ con bạn và bạn có những quyền gì.'
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: 'Catrobat là gì?'
+      text: 'Catrobat là nền tảng giáo dục miễn phí, phi lợi nhuận, nơi các bạn trẻ học lập trình bằng cách tạo ứng dụng, trò chơi và hoạt hình của riêng mình. Nền tảng có mặt trên toàn thế giới và được dùng trong môi trường giáo dục.'
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: 'Chúng mình thu thập dữ liệu gì?'
+      text: 'Chúng mình chỉ thu thập lượng dữ liệu tối thiểu cần để vận hành nền tảng: tên đăng nhập, địa chỉ email, ngày sinh và các dự án con bạn tạo và tải lên. Với người dùng dưới 14 tuổi, chúng mình cũng lưu địa chỉ email của phụ huynh/người giám hộ cho mục đích xin đồng ý. Chúng mình không bán hay chia sẻ dữ liệu cá nhân với bên thứ ba.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: 'Quyền của bạn với tư cách phụ huynh hoặc người giám hộ'
+      text: 'Theo quy định bảo vệ trẻ em của EU (GDPR) và COPPA, bạn có quyền: xem dữ liệu chúng mình lưu về con bạn, yêu cầu bản sao dữ liệu đó, rút lại sự đồng ý bất cứ lúc nào (khi đó tài khoản sẽ bị giới hạn) và yêu cầu xóa vĩnh viễn tài khoản của con bạn cùng mọi dữ liệu liên quan.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: 'Tài khoản của trẻ vị thành niên có những giới hạn nào?'
+      text: 'Người dùng dưới 16 tuổi không thể đăng hoặc đọc bình luận, theo dõi người dùng khác hay xem nội dung được đánh dấu là không phù hợp với trẻ em. Các bạn vẫn có thể tạo và tải lên dự án, duyệt các dự án công khai và bày tỏ cảm xúc với dự án bằng lượt thích. Những giới hạn này nhằm tạo ra một môi trường học tập an toàn.'
+    manageButton: 'Quản lý tài khoản của con bạn'
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: 'Cổng phụ huynh'
+    description: 'Nhập địa chỉ email của bạn để nhận một liên kết an toàn giúp quản lý tài khoản Catrobat của con bạn. Liên kết sẽ được gửi đến địa chỉ email bạn đã cung cấp khi đăng ký.'
+    emailLabel: 'Địa chỉ email của bạn'
+    submitButton: 'Gửi liên kết quản lý'
+    infoLink: 'Tìm hiểu thêm'
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: 'Hãy kiểm tra hộp thư'
+      message: 'Nếu có tài khoản liên kết với email này, chúng mình đã gửi một liên kết quản lý. Hãy kiểm tra hộp thư và mở liên kết để quản lý tài khoản của con bạn.'
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: 'Quản lý tài khoản của con'
+    description: 'Bạn đang quản lý các tài khoản liên kết với %email%.'
+    consentStatus: 'Trạng thái đồng ý'
+    accountCreated: 'Ngày tạo tài khoản'
+    email: 'Email của con'
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: 'Đã đồng ý'
+      pending: 'Đang chờ'
+      revoked: 'Đã rút lại'
+    grantButton: 'Đồng ý'
+    revokeButton: 'Rút lại sự đồng ý'
+    revokeConfirm: 'Bạn có chắc muốn rút lại sự đồng ý không? Tài khoản sẽ bị giới hạn chức năng.'
+    exportButton: 'Xuất dữ liệu'
+    deleteButton: 'Xóa tài khoản'
+    deleteConfirm: 'Bạn có chắc muốn xóa vĩnh viễn tài khoản này không? Thao tác này không thể hoàn tác.'
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: 'Quản lý tài khoản Catrobat của con bạn'
+      title: 'Quản lý tài khoản'
+      greeting: 'Xin chào,'
+      message: 'Bạn đã yêu cầu liên kết để quản lý tài khoản Catrobat của con bạn (%usernames%). Nhấn nút bên dưới để xem và quản lý tài khoản.'
+      button: 'Quản lý tài khoản'
+      ignore: 'Nếu bạn không yêu cầu việc này, bạn có thể bỏ qua email này.'
 passwordRecovery:
   subject: Mật khẩu Catrobat của bạn đã được phục hồi
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Chào %username%,
+    Bạn đã yêu cầu đặt lại mật khẩu trên %appplication_url% vì bạn quên mật khẩu.
+    Nếu bạn không yêu cầu việc này, hãy bỏ qua email. Yêu cầu sẽ hết hạn và không còn tác dụng sau 24 giờ.
+    Để đặt lại mật khẩu và tạo mật khẩu mới, hãy truy cập trang sau: %confirmationUrl%
+    Bạn có thể dùng tên đăng nhập và mật khẩu của mình bất cứ lúc nào để vào cộng đồng %appplication_url%.
+    Để làm vậy, chỉ cần truy cập trang sau: %loginPage%
+    Để sửa thông tin hồ sơ, hãy vào trang này: %profilePage%
+    Thân mến,
+    Đội ngũ Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Chào %username%,<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Bạn đã yêu cầu đặt lại mật khẩu trên <a href="%appplication_url%">Pocket Code</a> vì bạn quên mật khẩu.
+    Nếu bạn không yêu cầu việc này, hãy bỏ qua email. Yêu cầu sẽ hết hạn và không còn tác dụng sau 24 giờ.<br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Để đặt lại mật khẩu và tạo mật khẩu mới, hãy nhấn <a href="%confirmationUrl%">vào đây.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    Bạn có thể dùng tên đăng nhập và mật khẩu của mình bất cứ lúc nào để vào cộng đồng <a href="%appplication_url%">Pocket Code</a>.<br>
+    Để làm vậy, chỉ cần truy cập trang sau: <a href="%loginPage%">Trang đăng nhập</a><br>
+    Để sửa thông tin hồ sơ, hãy vào <a href="%profilePage%">trang này</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Thân mến,<br>
+    Đội ngũ Catrobat.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
+  aboutMe: 'Về mình'
+  currentlyWorkingOn: 'Đang thực hiện'
+  edit: 'Chỉnh sửa hồ sơ'
   saveChanges: lưu thay đổi
   newPass: mật khẩu mới
   repeatPass: nhắc lại mật khẩu
-  oldPass: old password
+  oldPass: 'mật khẩu cũ'
   firstEmail: Email đầu tiên của tôi
   secondEmail: Email thứ hai của tôi
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: 'Dự án của mình'
+  follows: 'Đang theo dõi'
+  follower: 'Người theo dõi'
+  unfollowUser: 'Bỏ theo dõi người dùng này!'
+  followUser: 'Theo dõi người dùng này!'
+  amountOfPrograms: 'Số lượng dự án'
   form:
     passwordTooShort: Mật khẩu mới phải có ít nhất %length% kí tự.
     passwordTooLong: Mật khẩu mới có nhiều nhất %length% kí tự.
     passwordIsUsername: Mật khẩu phải khác với tên đăng nhập.
-    passwordWrong: Wrong password
+    passwordWrong: 'Sai mật khẩu'
     emailNotValid: Địa chỉ email này không phù hợp.
     emailMissing: Lỗi trong khi cập nhật địa chỉ email. Bạn phải có ít nhất một địa chỉ email hợp lệ.
     emailExists: Địa chỉ email này đã tồn tại.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: 'Tên đăng nhập này không hợp lệ.'
+    usernameMissing: 'Bạn phải có tên đăng nhập.'
     usernameExists: Tên người dùng này đã tồn tại.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: 'Tên đăng nhập không được chứa địa chỉ email.'
     submitSuccess: đã lưu!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
+  reallyDeleteProgram: 'Bạn có thật sự muốn xóa dự án của mình không'
+  programsOf: 'Dự án của'
+  picture: 'Ảnh đại diện'
   changePicture: Thay đổi hình ảnh
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: 'Hồ sơ trên Scratch'
 myprofile:
-  userSettings: User settings
-  profileSettings: Edit profile
+  userSettings: 'Cài đặt người dùng'
+  profileSettings: 'Chỉnh sửa hồ sơ'
   securitySettings: Thay đổi mật khẩu
-  accountSettings: Account settings
-  accountVerification: Verify account
-  account: Account
-  editProfile: Edit profile
+  accountSettings: 'Cài đặt tài khoản'
+  accountVerification: 'Xác minh tài khoản'
+  account: 'Tài khoản'
+  editProfile: 'Chỉnh sửa hồ sơ'
   edit: Chỉnh sửa
   done: Đã Thực hiện
   checkMail: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
+  passwordUpdated: 'Đã cập nhật mật khẩu thành công.'
+  avatar: 'Ảnh đại diện'
   email: Thư điện tử
-  deleteAccount: Delete account
+  deleteAccount: 'Xóa tài khoản'
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    Lưu ý:
+    Bạn đã tạo %num_projects% dự án và có %num_followers% người theo dõi. Tất cả dự án của bạn sẽ bị xóa. Bạn sẽ không thể đăng nhập nữa và các dự án của bạn sẽ biến mất khỏi mọi danh sách. Việc xóa hồ sơ không thể hoàn tác!
+    Bạn có chắc muốn rời xa chúng mình không?
+  exportData: 'Tải về dữ liệu của mình'
+  exportDataDescription: 'Bạn có quyền nhận bản sao dữ liệu cá nhân của mình. Dữ liệu bao gồm thông tin hồ sơ, dự án, bình luận, cảm xúc và người theo dõi.'
+  exportDataLoading: 'Đang tải về...'
+  exportDataError: 'Đã xảy ra lỗi khi xuất dữ liệu của bạn. Hãy thử lại sau.'
+  exportDataRateLimited: 'Bạn chỉ có thể xuất dữ liệu mỗi ngày một lần. Hãy thử lại vào ngày mai.'
+  editAccountSettings: 'Chỉnh sửa cài đặt tài khoản'
+  profileChangeSuccess: 'Đã thay đổi hồ sơ của bạn thành công.'
+  unspecifiedError: 'Đã có lỗi khi thay đổi hồ sơ của bạn. Hãy thử lại hoặc báo cho chúng mình nếu lỗi vẫn tiếp diễn!'
+  verifyAccountText: 'Chúng mình sẽ gửi cho bạn một email có liên kết để xác minh tài khoản. Hãy nhấn vào liên kết trong vòng một giờ; mỗi ngày bạn chỉ được yêu cầu một email.'
+  verifyAccountButton: 'Gửi email'
+  verifyAccountMailSent: 'Đã gửi email thành công. Hãy kiểm tra hộp thư của bạn'
+  verifyAccountMailFailed: 'Mỗi ngày bạn chỉ có thể yêu cầu một email'
 licenseToPlay:
   link: 'Giấy phép để chơi'
   title: 'Giấy phép để chơi - cung cấp bản quyền và chia sẻ'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: 'Hãy tưởng tượng mỗi dự án Catrobat là một chiếc bánh, một chiếc bánh rất đặc biệt đi kèm công thức của nó (các khối lập trình). Mọi thành viên trong cộng đồng Catrobat đều chia sẻ bánh của mình cùng với công thức. Nghĩa là bạn vừa được thưởng thức bánh, vừa học được cách tự làm chúng!'
   text2: 'Không có bất kỳ công thức nấu ăn bí mật nào: hướng dẫn để làm các loại bánh được mở cho bất cứ ai sử dụng, tái sử dụng, sửa đổi, và phục vụ như là nguồn cảm hứng cho những ý tưởng mới... Ý tôi là bánh.'
   text3: "Bạn có thể ăn các loại bánh, cũng như sao chép công thức nấu ăn của người khác để làm một chiếc cho riêng bạn, có lẽ với các thành phần khác. Sự tự do này đi kèm với hai yêu cầu đơn giản:"
   text4: "Trong việc thiết lập cộng đồng Catrobat, chúng tôi đã quyết định áp dụng phương pháp này kể từ khi chúng tôi tin rằng nó sẽ hỗ trợ quá trình học tập và sáng tạo trong cộng đồng. Bằng cách chia sẻ công thức nấu ăn và các nguyên liệu (tập lệnh và hình ảnh), người sử dụng có thể xây dựng dựa trên ý tưởng của nhau và tất cả mọi người sẽ được hưởng lợi."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
+  text5: 'Khi thiết kế trang web Catrobat, chúng mình đã thêm các tính năng khuyến khích mọi người chia sẻ và ghi công cho người khác. Trên mỗi trang dự án, bạn luôn có thể tải về các kịch bản gốc của dự án. Nếu bạn remix một dự án (sửa kịch bản hoặc hình ảnh rồi chia sẻ kết quả), chúng mình khuyến khích bạn ghi công trong phần ghi chú của dự án, nhắc đến những người và dự án đã truyền cảm hứng cho bạn.'
   text6: 'Tìm hiểu thêm về các điều khoản sử dụng của cộng đồng trực tuyến Catrobat trên %link-termsOfUse%.'
   list1:
     item1: chia sẻ chiếc bánh của bạn cùng với công thức
@@ -511,9 +511,9 @@ licenseToPlay:
 termsOfUse:
   title: Điều khoản sử dụng
   headline: Chào mừng đến với cộng đồng Catrobat!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'Là một phần của cộng đồng Catrobat, bạn đang chia sẻ dự án và ý tưởng với mọi người:'
   text2: "Chúng tôi cần sự giúp đỡ của bạn để làm cho cộng đồng này thành một nơi hỗ trợ cho mọi thành viên. Dưới đây là cách bạn có thể giúp:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: 'Thông qua dự án Catrobat, chúng mình muốn thúc đẩy sự hợp tác và để sức sáng tạo của mọi người kết hợp lại vì lợi ích của toàn nhân loại. Bạn cũng có thể trở thành thành viên tích cực của cộng đồng Catrobat bằng cách tặng lại dự án của mình cho cộng đồng như một món quà, giống như các thành viên tích cực khác đang tặng dự án của họ cho bạn:'
   text4: 'Món quà của chúng tôi cho bạn:'
   text5: 'Điều khoản sử dụng và dịch vụ của chúng tôi:'
   list1:
@@ -521,14 +521,14 @@ termsOfUse:
     item2: ở mọi lứa tuổi (từ trẻ em đến thiếu niên và người cao tuổi)
     item3: với tất cả các cấp kinh nghiệm
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item1: 'Hãy tôn trọng người khác. Khi chia sẻ dự án, hãy nhớ rằng những người ở nhiều độ tuổi và hoàn cảnh khác nhau sẽ xem đóng góp của bạn.'
+    item2: 'Hãy ghi công. Bạn cứ thoải mái tạo phiên bản chỉnh sửa từ dự án của người khác - chỉ cần nhớ ghi công cho họ. Một nơi để ghi công là phần ghi chú và ghi công của dự án. Hãy xem đoạn văn bên dưới danh sách này để biết chi tiết về việc chỉnh sửa dự án của người dùng khác.'
     item3: "Hãy trung thực. Đừng giả vờ là bất cứ ai ngoài chính bạn hoặc cố gắng để lừa dối cộng đồng."
     item4: "Giữ thông tin cá nhân riêng tư. Đừng chia sẻ địa chỉ email, số điện thoại hoặc thông tin liên lạc cá nhân khác."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item5: "Hãy giúp giữ cho trang web thân thiện. Nếu bạn thấy một dự án hoặc bình luận có thể gây tổn thương, xúc phạm, quá bạo lực hoặc không phù hợp theo cách nào đó, chỉ cần nhấn nút 'báo cáo là không phù hợp' và để lại lời giải thích ngắn. Đội ngũ Catrobat sẽ xem xét báo cáo của bạn và có thể xóa bất kỳ dự án, bình luận hoặc bài đăng nào."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item1: "Khi tải một dự án lên các trang web của chúng mình, bạn chấp nhận và đồng ý đặt tác phẩm này dưới một số giấy phép tự do dành cho các dự án Catrobat được tải lên. Tương tự như các giấy phép tự do mà nhờ đó bạn được dùng chính hệ thống Catrobat, các giấy phép tự do này cho mọi người quyền học hỏi từ những tác phẩm người khác đã tải lên trước đó, đồng thời chỉnh sửa và remix chúng để tạo ra những trò chơi, hoạt hình và dự án mới thú vị của riêng mình. Điều này cho phép mọi người 'đứng trên vai những người bạn đồng hành', và một trong số đó chính là bạn! Nhờ vậy tác phẩm của bạn sẽ mang lại lợi ích cho cả thế giới và luôn miễn phí cho mọi người sử dụng, phần nào giống như các văn bản và hình ảnh được tình nguyện viên khắp thế giới đóng góp miễn phí cho Wikipedia. Hãy xem đó là món quà của bạn dành cho nhân loại: bạn tặng cho mọi người, và tất cả những người khác tải tác phẩm của họ lên trang web của chúng mình cũng tặng cho bạn. Vì vậy, một dự án được tải lên là một món quà rất giá trị mà chủ sở hữu tặng miễn phí cho bạn, với điều kiện bạn tham gia cộng đồng theo cùng các điều khoản đó."
+    item2: 'Bạn không bắt buộc phải nhận món quà; nếu nhận, một số quy tắc sẽ được áp dụng. Lợi ích của các quy tắc này là bạn có thể học hỏi từ tác phẩm và phát triển tiếp để tự làm ra những thứ còn tuyệt hơn, ví dụ như sau đó bạn có thể tải chúng lên trang web của chúng mình như tác phẩm của bạn. Một lợi ích khác là các giấy phép này đảm bảo bạn không phải chịu trách nhiệm về bất kỳ vấn đề nào phát sinh với người khác khi họ sử dụng dự án của bạn.'
     item3: "Một trong những điều kiện quan trọng bổ sung là bạn rõ ràng đã đóng góp tới những tác giả, người đã làm việc dựa trên tác phẩm của riêng bạn. Cùng lúc đó, chúng tôi sẽ làm việc chăm chỉ để những công việc, đóng góp của bạn sẽ được trân trọng bởi những người dùng khác, bằng cách tự do lựa chọn cho mình một cái tên độc nhất sẽ đại diện cho bạn trong cộng đồng của Catrobat, và bằng cách cho những người khác cơ hội để thể hiện lòng biết ơn của họ tới bạn một cách công khai khi mà bạn cống hiến công việc của bạn để tất cả mọi người, và đặc biệt cho họ."
     item4: 'Xin vui lòng tham khảo ý kiến %link-licenseUploaded% cho các điều kiện và điều khoản pháp lý.'
   list4:
@@ -538,7 +538,7 @@ termsOfUse:
   list5:
     item1: 'Nếu bạn dưới 13 tuổi, hoặc cha mẹ bạn hoặc người giám hộ hợp pháp của bạn, hợp tác với một tổ chức nào đó tham gia vào hoặc chịu trách nhiệm cho các loại hành vi vi phạm bảo mật và/hoặc đang bị giám sát, thì bạn không được phép sử dụng các ứng dụng phần mềm và truy cập vào dịch vụ của chúng tôi. Các chi tiết chính xác của hạn chế này và các ngoại lệ nhất định được phân chia trong phần 4.a và 4.b trên %link-termsOfUse% của chúng tôi.'
     item2: Nếu bạn là dưới 13 tuổi, sau đó bạn cần phải hỏi cha mẹ hoặc người giám hộ hợp pháp của bạn xem họ có cho phép bạn sử dụng phần mềm và dịch vụ của Catrobat hay không.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item3: 'Chúng mình có quyền từ chối, xóa hoặc ẩn dự án, tài khoản người dùng và mọi tài liệu kỹ thuật số được tải lên các trang web của Catrobat vào bất cứ lúc nào theo quyết định riêng của chúng mình, ví dụ khi phát hiện một dự án chứa nội dung không phù hợp hoặc một người dùng xâm phạm quyền của người khác.'
     item4: "Tất cả các phần mềm của Catrobat và tài nguyên Internet được cung cấp với hy vọng rằng chúng sẽ hữu ích, nhưng không có bất kỳ bảo đảm."
     item5: 'Xin vui lòng tham khảo ý kiến của chúng tôi developer.catrobat.org/terms_of_use_and_service %link-termsOfUse% về các qui định chính xác cho các điểm trên cũng như một số các điều khoản và điều kiện bổ sung hợp pháp.'
   bottom1: Hãy ghé thăm lại tại mọi thời điểm, vì chúng tôi luôn luôn cố gắng hoàn thiện điều khoản sử dụng của mình.
@@ -546,119 +546,119 @@ termsOfUse:
   version: Phiên bản 1.3, Ngày 4 Tháng 3 Năm 2014
 search:
   dotdotdot: Tìm kiếm...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
+  search: 'Tìm dự án, người dùng & studio'
+  inMediaLib: 'Tìm trong thư viện đa phương tiện'
+  inMediaCategory: 'Tìm trong danh mục đa phương tiện'
   results: Kết quả tìm kiếm
   resultcount: Kết quá tìm kiếm của bạn %count%
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  fail: 'Hãy nhập ít nhất một từ khóa tìm kiếm'
+  noUsers: 'Không tìm thấy người dùng nào'
+  noProjects: 'Không tìm thấy dự án nào'
+  noStudios: 'Không tìm thấy studio nào'
+  sameSearchMessage: 'Có vẻ bạn đang ở đây rồi! Thử tìm từ khác nhé?'
 menu:
   profile: Hồ sơ của Tôi
   login: Đăng nhập
   logout: Đăng xuất
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
-  language: Language
-  languageOptionsNotAvailable: No language options available.
+  admin: 'Quản trị'
+  home: 'Trang chủ'
+  helpAndTutorials: 'Trợ giúp & hướng dẫn'
+  followersAndFollowing: 'Người theo dõi'
+  mediaLibrary: 'Thư viện đa phương tiện'
+  studio: 'Studio'
+  language: 'Ngôn ngữ'
+  languageOptionsNotAvailable: 'Không có tùy chọn ngôn ngữ nào.'
 login:
   login: Đăng nhập
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: 'Đăng nhập ngay'
+    createAccount: 'Tạo tài khoản'
+    forgetPassword: 'Quên mật khẩu?'
   oauth:
-    title: Or you can join with
+    title: 'Hoặc bạn có thể tham gia bằng'
   passOrUser: Mật khẩu hoặc tên người dùng của bạn không chính xác.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: 'Tài khoản của bạn đã bị tạm khóa. Nếu bạn nghĩ đây là nhầm lẫn, hãy liên hệ bộ phận hỗ trợ.'
   noUsername: Không tìm thấy địa chỉ email hoặc tên người dùng của bạn.
   forgotPass: Quên mật khẩu hoặc tên người dùng?
   recoverPassSend: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  alreadyReset: 'Mật khẩu của người dùng này đã được yêu cầu đặt lại trong 24 giờ qua.'
+  confirmationSend: 'Một email xác nhận đăng ký đã được gửi đến địa chỉ email của bạn. Hãy kiểm tra hộp thư và kích hoạt tài khoản.'
   userOrEmail: Tên đăng nhập hoặc Email
   changePass: Thay đổi mật khẩu
   createAccount: Tạo tài khoản mới
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  noAccount: 'Chưa có tài khoản?'
+  alreadyAccount: 'Đã có tài khoản?'
   or: HOẶC
   username: Tên đăng nhập
   email: Thư điện tử
   passwordFirst: Mật khẩu
-  passwordSecond: Password confirm
+  passwordSecond: 'Xác nhận mật khẩu'
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: 'Đăng ký'
+  subText: 'Khi tiếp tục, bạn sẽ tạo một tài khoản cộng đồng Catrobat và đồng ý với %var1% và %var2% của chúng mình.'
+  dateOfBirth: 'Ngày sinh'
+  dateOfBirthInfo: 'Chúng mình hỏi ngày sinh của bạn để tuân thủ quy định bảo vệ trẻ em của EU (GDPR/COPPA) và mang lại trải nghiệm an toàn cho người dùng nhỏ tuổi.'
+  parentEmail: 'Email của phụ huynh/người giám hộ'
+  parentEmailInfo: 'Bắt buộc với người dùng dưới 14 tuổi. Chúng mình sẽ gửi yêu cầu đồng ý đến địa chỉ này.'
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: 'Hoàn tất đăng ký'
+    info: 'Hãy cung cấp ngày sinh của bạn để tiếp tục sử dụng nền tảng.'
     submit: Tiếp tục
   button:
     cancel: Hủy bỏ
-    createAccount: Create account
+    createAccount: 'Tạo tài khoản'
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: 'Hãy kiểm tra hộp thư!'
+    message: 'Chúng mình đã gửi cho bạn một email xác minh. Nhấn vào liên kết trong email để kích hoạt tài khoản.'
+    helpTitle: 'Không nhận được email?'
+    hint: 'Hãy kiểm tra thư mục thư rác. Liên kết có hiệu lực trong 24 giờ.'
+    resendButton: 'Gửi lại email xác minh'
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: 'Đang chờ phụ huynh đồng ý'
+    message: 'Email của bạn đã được xác minh! Trước khi bạn có thể dùng đầy đủ nền tảng, phụ huynh hoặc người giám hộ cần đồng ý.'
+    sentTo: 'Yêu cầu đồng ý đã được gửi đến %email%'
+    helpTitle: 'Không nhận được email? Cần trợ giúp?'
+    hint: 'Hãy nhờ phụ huynh kiểm tra thư mục thư rác. Liên kết có hiệu lực trong 24 giờ.'
+    resendButton: 'Gửi lại email xin đồng ý'
+    wrongEmail: 'Nhập sai email của phụ huynh?'
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: 'Phụ huynh đã rút lại sự đồng ý'
+    message: 'Phụ huynh hoặc người giám hộ của bạn đã rút lại sự đồng ý cho tài khoản của bạn. Tài khoản sẽ bị giới hạn chức năng cho đến khi được đồng ý lại.'
+    newEmailPlaceholder: 'Email mới của phụ huynh'
+    changeButton: 'Cập nhật & gửi lại'
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: 'Khôi phục tài khoản'
+  description: 'Nếu bạn nhớ email hoặc tên đăng nhập của tài khoản, chúng mình có thể gửi cho bạn liên kết để đặt lại mật khẩu.'
   button:
     cancel: Hủy bỏ
-    submit: Recover password
+    submit: 'Khôi phục mật khẩu'
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: 'Đặt lại mật khẩu'
+    description: 'Nếu bạn nhớ email của tài khoản, chúng mình có thể gửi cho bạn liên kết để đặt lại mật khẩu.'
     button:
-      submit: "Send reset email"
+      submit: 'Gửi email đặt lại'
       cancel: "Hủy bỏ"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: 'Hãy kiểm tra email'
+    description: 'Nếu có tài khoản khớp với email của bạn, một email chứa liên kết để đặt lại mật khẩu vừa được gửi đi. Liên kết này sẽ hết hạn sau %time%.'
+    descriptionTwo: 'Bạn có thể yêu cầu đặt lại mật khẩu mới sau mỗi %throttleLimit% giờ.'
+    descriptionThree: 'Nếu bạn không nhận được email, hãy kiểm tra thư mục thư rác hoặc gửi email cho bộ phận hỗ trợ của chúng mình tại %email-webmaster%.'
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: 'Để đặt lại mật khẩu, hãy truy cập liên kết sau'
+    expire: 'Liên kết này sẽ hết hạn sau %time%.'
+    cheers: 'Chúc bạn một ngày vui!'
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: 'Đặt lại mật khẩu'
+    content: 'Gần đây bạn đã yêu cầu đặt lại mật khẩu cho tài khoản Catrobat. Nhấn nút bên dưới để chọn mật khẩu mới. Nếu bạn không yêu cầu việc này, bạn có thể bỏ qua email này.'
+    visitLink: 'Đặt lại mật khẩu'
+    expire: 'Liên kết này có hiệu lực trong %time% và chỉ dùng được một lần.'
   reset:
-    title: "Reset your password"
+    title: 'Đặt lại mật khẩu'
     button:
-      submit: "Reset password"
+      submit: 'Đặt lại mật khẩu'
 apk:
   download: Tải về ứng dụng
   prepare: 'Chuẩn bị ứng dụng'
@@ -668,14 +668,14 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: 'Đã có lỗi xảy ra. Hãy thử lại hoặc báo cho chúng mình nếu lỗi vẫn tiếp diễn!'
   username:
     blank: Tên người dùng không được để trống
     invalid: Tên người dùng của bạn không hợp lệ
     exists: Tên người dùng này đã tồn tại.
     not_exists: Tên người dùng này không tồn tại.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    not_email: 'Tên đăng nhập không được là địa chỉ email.'
+    size: 'Tên đăng nhập phải có ít nhất 3 ký tự và không quá 180 ký tự'
   password:
     blank: Thiếu mật khẩu.
     short: 'Mật khẩu của bạn phải có ít nhất {{ limit }} ký tự.'
@@ -702,24 +702,24 @@ errors:
   image.missing: Dự án XML đề cập đến một tập tin không tồn tại trong thư mục dự án
   unknown: lỗi không xác định
   token: 'Xác thực thiết bị thất bại: auth mã thông báo không hợp lệ!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  uploadTokenAuthFailed: 'Xác thực mã tải lên thất bại.'
   project:
-    invalid: Invalid project.
+    invalid: 'Dự án không hợp lệ.'
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'Xin lỗi, dự án của bạn dùng phiên bản cũ của ngôn ngữ Catrobat! Bạn có đang dùng phiên bản Pocket Code mới nhất không?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'Xin lỗi, bạn đang dùng phiên bản Pocket Code cũ. Hãy cập nhật lên phiên bản mới nhất.'
   authentication:
-    title: Login did not work
+    title: 'Đăng nhập không thành công'
     webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+      Có vẻ tên đăng nhập hoặc mật khẩu của bạn chưa đúng.
+      Hãy thử đăng nhập lại trong ứng dụng.
 success:
-  text: Success
+  text: 'Thành công'
   registration: Đăng ký thành công!
   token: Đồng ý
   upload: Dự án của bạn được tải lên thành công!
-  imgUpload: Your image was uploaded successfully!
+  imgUpload: 'Đã tải ảnh của bạn lên thành công!'
   report: Báo cáo của bạn được gửi thành công!
 time:
   minutes.ago: '{0} < 1 phút trước |{1}1 phút trước |] 1, Inf] %count% phút trước'
@@ -728,73 +728,73 @@ time:
   months.ago: '{1}1 tháng trước |] 1, Inf] %count% tháng trước'
   years.ago: '{1}1 năm trước |] 1, Inf] nhiều hơn một năm trước'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: 'Đã xảy ra lỗi khi tải ứng dụng của bạn lên.'
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Xác minh email của bạn'
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: 'Thiếu email'
+    emailEmpty: 'Email không được để trống'
+    emailInvalid: 'Email không hợp lệ'
+    emailAlreadyInUse: 'Email đã được sử dụng'
+    usernameMissing: 'Thiếu tên đăng nhập'
+    usernameTooShort: 'Tên đăng nhập quá ngắn'
+    usernameTooLong: 'Tên đăng nhập quá dài'
+    usernameEmpty: 'Tên đăng nhập không được để trống'
+    usernameAlreadyInUse: 'Tên đăng nhập đã được sử dụng'
+    usernameInvalid: 'Tên đăng nhập không hợp lệ'
+    passwordMissing: 'Thiếu mật khẩu'
+    passwordEmpty: 'Mật khẩu không được để trống'
+    passwordTooShort: 'Mật khẩu quá ngắn'
+    passwordTooLong: 'Mật khẩu quá dài'
+    passwordInvalidChars: 'Mật khẩu chứa ký tự không hợp lệ'
+    usernameContainsEmail: 'Tên đăng nhập không được chứa địa chỉ email'
+    usernameContainsLink: 'Tên đăng nhập không được chứa liên kết'
+    countryCodeInvalid: 'Mã quốc gia không hợp lệ'
+    pictureInvalid: 'Ảnh đại diện không hợp lệ hoặc không được hỗ trợ'
+    dateOfBirthMissing: 'Bắt buộc nhập ngày sinh'
+    dateOfBirthInvalid: 'Ngày sinh không hợp lệ'
+    tooYoung: 'Bạn phải từ 3 tuổi trở lên để tạo tài khoản'
+    parentEmailMissing: 'Người dùng dưới 14 tuổi bắt buộc phải có email của phụ huynh'
+    parentEmailInvalid: 'Email của phụ huynh không hợp lệ'
+    parentEmailSameAsUser: 'Email của phụ huynh phải khác địa chỉ email của bạn'
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: 'Thiếu mật khẩu hiện tại'
+    currentPasswordWrong: 'Mật khẩu hiện tại không đúng'
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Tên không được để trống'
+    nameTooLong: 'Tên quá dài'
+    descriptionTooLong: 'Mô tả quá dài'
+    creditsTooLong: 'Ghi chú và ghi công quá dài'
+    screenshotInvalid: 'Ảnh chụp màn hình dự án không hợp lệ hoặc không được hỗ trợ'
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating project entity. Try uploading again!'
+    invalid_checksum: 'Mã kiểm tra không hợp lệ. Hãy thử tải lên lại!'
+    upload_error: 'Lỗi khi tải lên. Hãy thử tải lên lại!'
+    creating_error: 'Lỗi khi tạo dự án. Hãy thử tải lên lại!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Không lưu được thông tin chi tiết của dự án.'
+    screenshotError: 'Không thể đọc, chuyển đổi hoặc lưu ảnh chụp màn hình. Hãy kiểm tra dữ liệu bạn nhập.'
+    notFound: 'Không tìm thấy dự án cần thay đổi.'
+    forbidden: 'Không được phép thay đổi dự án. Bạn vẫn còn đăng nhập chứ?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'Thiếu tên'
+    nameEmpty: 'Tên không được để trống'
+    nameTooShort: 'Tên quá ngắn'
+    nameTooLong: 'Tên quá dài'
+    nameAlreadyInUse: 'Tên đã được sử dụng'
+    descriptionMissing: 'Thiếu mô tả'
+    descriptionEmpty: 'Mô tả trống'
+    descriptionTooShort: 'Mô tả quá ngắn'
+    descriptionTooLong: 'Mô tả quá dài'
+    imageFileInvalid: 'Tệp ảnh không hợp lệ'
+    imageFileInvalidType: 'Loại tệp ảnh không hợp lệ'
+    imageFileTooLarge: 'Tệp ảnh quá lớn'
 #languages and countries
 language:
   arabic: Ả rập
   bulgarian: Bun-ga-ri
-  catalan: Catalan
+  catalan: 'Tiếng Catalan'
   chinese_simplified_han: Trung Quốc (giản thể Han)
   chinese_traditional_han: Trung Quốc (truyền thống Han)
   croatian: Croatia
@@ -842,154 +842,154 @@ ci:
   download: Tải về Apk
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: 'Bảo trì ổ đĩa'
+    ramMaintenance: 'Bảo trì RAM'
+    noRemovableObjects: 'Không có đối tượng nào có thể xóa.'
+    removableObjects: 'Đối tượng có thể xóa'
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: 'Dự án tương tự'
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Những người tải dự án này cũng đã tải'
+  moreFromThisUser: 'Thêm từ %username%'
 pmd:
-  submitBtn: Submit your project
+  submitBtn: 'Nộp dự án của bạn'
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: 'Nộp bài'
+    text: 'Bạn sắp nộp dự án của mình. Hãy nhập mã dự án và nhấn gửi.'
+    btnText: 'Nộp'
   successful:
-    text: Your project upload was successful.
+    text: 'Đã tải dự án của bạn lên thành công.'
   failed:
-    text: Project upload failed.
+    text: 'Tải dự án lên thất bại.'
 codeview:
-  title: 'Code view'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
+  title: 'Xem mã'
+  showCode: 'Hiện mã'
+  hideCode: 'Ẩn mã'
+  showStatistics: 'Hiện thống kê mã'
+  hideStatistics: 'Ẩn thống kê mã'
+  cantDisplayCode: 'Không thể hiển thị mã'
+  cantDisplayStatistics: 'Không thể hiển thị mã'
+  totalNumberOf: 'Tổng số'
+  scenes: 'Cảnh'
   scripts: 'Các kịch bản'
   bricks: 'Gạch'
-  objects: 'Actors and objects'
+  objects: 'Nhân vật và đối tượng'
   looks: 'Các giao diện'
   sounds: 'Âm thanh'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
-  eventBricks: 'Event bricks'
-  controlBricks: 'Control bricks'
-  motionBricks: 'Motion bricks'
-  soundBricks: 'Sound bricks'
-  looksBricks: 'Looks bricks'
-  penBricks: 'Pen bricks'
-  dataBricks: 'Data bricks'
-  specialBricks: 'Special bricks'
+  globals: 'Toàn cục'
+  locals: 'Cục bộ'
+  globalVariables: 'Biến toàn cục'
+  localVariables: 'Biến cục bộ'
+  eventBricks: 'Khối sự kiện'
+  controlBricks: 'Khối điều khiển'
+  motionBricks: 'Khối chuyển động'
+  soundBricks: 'Khối âm thanh'
+  looksBricks: 'Khối hiển thị'
+  penBricks: 'Khối bút vẽ'
+  dataBricks: 'Khối dữ liệu'
+  specialBricks: 'Khối đặc biệt'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'Xem mã'
+  loading: 'Đang tải phần xem mã...'
+  error: 'Không thể tải phần xem mã.'
+  retry: 'Thử lại'
+  empty: 'Dự án này không có mã.'
   scripts: 'Các kịch bản'
   looks: 'Các giao diện'
   sounds: 'Âm thanh'
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
+  title: 'Thống kê mã'
+  error: 'Không thể hiển thị thống kê mã.'
+  general: 'Tổng quan'
   bricks: 'Gạch'
-  eventBricks: 'Event'
+  eventBricks: 'Sự kiện'
   controlBricks: 'Điều khiển'
   motionBricks: 'Chuyển động'
   soundBricks: 'Âm thanh'
   looksBricks: 'Các giao diện'
   penBricks: 'Pen'
   dataBricks: 'Dữ liệu'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  deviceBricks: 'Thiết bị'
+  specialBricks: 'Đặc biệt'
+  yourScore: 'Điểm của bạn:'
+  points: 'điểm'
+  abstraction: 'Trừu tượng hóa và phân rã vấn đề'
+  parallelism: 'Xử lý song song'
+  logicalThinking: 'Tư duy logic'
+  synchronization: 'Đồng bộ hóa'
+  flowControl: 'Điều khiển luồng'
+  userInteractivity: 'Tương tác người dùng'
+  dataRepresentation: 'Biểu diễn dữ liệu'
+  level: 'Cấp độ'
+  loading: 'Đang tải...'
+  bonus: 'Điểm thưởng'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: 'Hãy tham gia cùng hơn %user_count% nhà sáng tạo!'
+  text: 'Đã có %project_count% dự án tuyệt vời được chia sẻ, dự án tiếp theo có thể là của bạn. Tải ứng dụng của chúng mình và bắt đầu sáng tạo ngay hôm nay'
 privacy-policy:
-  header: Privacy policy
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  header: 'Chính sách quyền riêng tư'
+  version: 'Phiên bản 2.2, ngày 17 tháng 10 năm 2019'
+  text1: 'Để mang đến cho bạn mọi lợi ích từ dịch vụ của chúng mình và tài khoản đi kèm, chúng mình cần thu thập một số dữ liệu của bạn.'
+  text2: 'Để duy trì và cải thiện dịch vụ (ứng dụng và trang web) cũng như nghiên cứu khoa học về giáo dục ICT và STEM/STEAM, chúng mình sử dụng Google Analytics, Crashlytics và Firebase, đều của Google LLC (Mỹ), cùng Dynatrace của Dynatrace LLC (Mỹ) để thu thập siêu dữ liệu về việc sử dụng dịch vụ, ví dụ thông tin sự cố, dấu thời gian, các trang/màn hình đã truy cập, cách sử dụng ứng dụng và dịch vụ, hệ điều hành đang dùng và thông tin về nhà cung cấp mạng. Việc phân tích này và dữ liệu thu thập được không liên kết với hồ sơ của bạn và không chứa thông tin cá nhân nào (các bit cuối của địa chỉ IP được ẩn danh). Tuy nhiên, dữ liệu thu thập được sẽ được chuyển cho các nhà cung cấp dịch vụ (Google LLC, Mỹ và Dynatrace LLC, Mỹ). Việc xử lý dữ liệu dựa trên thỏa thuận với Google LLC và Dynatrace LLC. Mối quan hệ với các nhà cung cấp dịch vụ này tuân thủ Quy định chung về bảo vệ dữ liệu của Liên minh châu Âu (EU GDPR) và thỏa thuận "Privacy Shield" giữa EU và Mỹ.'
+  text3: 'Để tạo và sử dụng tài khoản trong hệ thống của chúng mình, cũng như thông báo cho bạn qua email về những thay đổi cần thiết liên quan đến tài khoản, ví dụ cập nhật hoặc vi phạm Điều khoản sử dụng và dịch vụ, quy tắc cộng đồng hay chính sách của chúng mình, chúng mình sẽ lưu tên đăng nhập và, nếu bạn cung cấp, địa chỉ email của bạn. Nếu bạn đã kết nối tài khoản qua Google Plus hoặc Facebook, chúng mình còn lưu thêm một mã định danh gắn với tài khoản của bạn trên các dịch vụ đó. Chúng mình sẽ không dùng dữ liệu này cho bất kỳ mục đích nào khác (ví dụ tiếp thị), trừ khi bạn cho phép rõ ràng.'
+  text4: 'Trên cơ sở tự nguyện, bạn có thể cho chúng mình biết quốc gia bạn đang sống qua trang tài khoản trên trang chia sẻ. Thông tin này sẽ hiển thị trên hồ sơ công khai của bạn và chỉ được chúng mình dùng cho mục đích thống kê và nghiên cứu. Bạn có thể xóa nó bất cứ lúc nào trong cài đặt hồ sơ.'
+  text5: 'Bạn có thể rút lại việc sử dụng dữ liệu cá nhân thuộc tài khoản của mình bất cứ lúc nào bằng cách xóa tài khoản qua trang hồ sơ trên https://share.catrob.at/. Sau khi xóa tài khoản, bạn vẫn có thể dùng các dịch vụ được cung cấp nhưng không thể cộng tác, ví dụ như tải lên chương trình, bình luận hay bày tỏ cảm xúc. Ngoài ra, mọi nội dung liên kết với tài khoản của bạn, ví dụ chương trình đã tải lên, bình luận, v.v., cũng sẽ bị xóa.'
+  text6: 'Để tránh việc lạm dụng dịch vụ, ví dụ qua các nội dung tải lên hoặc bình luận của người dùng nhằm mục đích bất hợp pháp, mọi dữ liệu công khai do người dùng tạo ra (nội dung tải lên, bình luận) sẽ được lưu nội bộ trong cơ sở dữ liệu, kèm dấu thời gian và địa chỉ internet đã dùng. Dữ liệu này sẽ không được bất kỳ tổ chức nào sử dụng hoặc chuyển cho bất kỳ tổ chức nào, trừ khi có nghi ngờ hợp lý về hành vi bất hợp pháp đủ nghiêm trọng và các cơ quan pháp luật có thẩm quyền chính thức yêu cầu dựa trên luật hiện hành. Mỗi trường hợp sẽ được chúng mình kiểm tra kỹ lưỡng trước, trên cơ sở từng trường hợp riêng.'
+  text7: 'Bạn có thể tự nguyện đăng ký nhận Bản tin Catrobat tại https://catrob.at/newsletter, do chúng mình cung cấp qua dịch vụ MailChimp (The Rocket Science Group LLC d/b/a MailChimp, Mỹ). Khi đó bạn sẽ nhận được thông tin cập nhật về dự án Catrobat và các dịch vụ của nó qua địa chỉ email bạn đã cung cấp. Bạn có thể hủy đăng ký bản tin bất cứ lúc nào bằng liên kết "unsubscribe" ở cuối mỗi bản tin. Bản tin này được cung cấp bởi MailChimp, bên đã ký thỏa thuận xử lý dữ liệu với chúng mình và cam kết tuân thủ Quy định chung về bảo vệ dữ liệu của EU cũng như "Privacy Shield" giữa EU và Mỹ. Để biết thêm chi tiết về MailChimp, bạn cũng có thể xem Chính sách quyền riêng tư và Điều khoản sử dụng của MailChimp.'
+  text8: 'Mọi dịch vụ đều được cung cấp bởi dự án mã nguồn mở miễn phí Catrobat, trực thuộc International Catrobat Association – Verein zur Förderung freier Software, một tổ chức phi chính phủ phi lợi nhuận được thành lập tại Graz, Áo (Liên minh châu Âu). Các chính sách của chúng mình tôn trọng luật bảo vệ dữ liệu của EU và Áo (GDPR). Để liên hệ với chúng mình, hãy gửi email đến contact@catrobat.org hoặc gửi thư đến Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).'
+  text9: 'Nếu bạn dưới 14 tuổi, chính sách này phải được người giám hộ hợp pháp (thường là cha mẹ) chấp nhận.'
+  text10: 'Chính sách quyền riêng tư chính thức bằng tiếng Anh của Catrobat có trên web tại %privacy_policy%.'
+  disagree-text: 'Nếu không có sự đồng ý, chúng mình không thể tạo tài khoản, nhưng bạn vẫn có thể dùng các tính năng chính.'
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: 'Đánh dấu là đã đọc'
+  noFollowers: 'Có vẻ bạn chưa có thông báo nào về người theo dõi.'
+  noComments: 'Có vẻ bạn chưa có thông báo nào về bình luận.'
+  noReactions: 'Có vẻ bạn chưa có thông báo nào về cảm xúc.'
+  noRemixes: 'Có vẻ bạn chưa có thông báo nào về remix.'
+  noStudios: 'Có vẻ bạn chưa có thông báo nào về studio.'
   tab:
-    studio: Studio
+    studio: 'Studio'
     project: Các chương trình
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% đã bình luận về %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% đã bày tỏ cảm xúc với %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% đang theo dõi bạn.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% đã tạo trò chơi mới %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% đã tạo bản remix %program_link% từ trò chơi %remix_program_link% của bạn.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% đã bình luận trong studio %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% đã thêm %program_link% vào studio %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'Yêu cầu tham gia studio %studio_name% của bạn đã được chấp nhận.'
+    declined: 'Yêu cầu tham gia studio %studio_name% của bạn đã bị từ chối.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'Dự án %program_link% của bạn sẽ tự động bị xóa sau %days% ngày. Hãy tải lên phiên bản mới hoặc có thêm lượt tải về để giữ nó.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'Dự án "%project_name%" của bạn đã tự động bị xóa do không hoạt động. Hãy tải lên lại nếu bạn vẫn muốn chia sẻ nó.'
+  noProjects: 'Có vẻ bạn chưa có thông báo nào về dự án.'
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: 'Đã sao chép liên kết vào bộ nhớ tạm!'
+  success_project: 'Đã sao chép liên kết dự án vào bộ nhớ tạm!'
+  success_user: 'Đã sao chép liên kết người dùng vào bộ nhớ tạm!'
+  fail: 'Không thể sao chép liên kết vào bộ nhớ tạm! :('
+next: 'Tiếp'
+previous: 'Trước'
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: 'Thư viện đa phương tiện'
+  description: 'Trong các danh mục sau, bạn có thể tìm thấy nhân vật và đối tượng để thêm vào dự án của mình.'
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: 'Kích thước xem trước'
+    sm: 'nhỏ'
+    md: 'vừa'
+    lg: 'lớn'
+  theme-special: 'Chủ đề đặc biệt %flavor%'
+  search-results: 'Kết quả tìm kiếm trong thư viện đa phương tiện'
+  no-results: 'Không tìm thấy kết quả nào. Hãy chỉ dùng từ khóa tìm kiếm bằng tiếng Anh.'
+  download_these_files: 'lưu'
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +997,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Bản quyền &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Bảo lưu mọi quyền.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: 'Trang web này cần JavaScript để hoạt động. Hãy bật JavaScript trong trình duyệt hoặc nhờ người lớn giúp bạn.'
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
+  message: 'Chúng mình dùng cookie để giúp cải thiện dịch vụ. Không có dữ liệu nào bị bán hay chia sẻ.'
+  accept: 'Chấp nhận'
+  decline: 'Từ chối'
   privacy-link: "Chính sách bảo mật"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  settings-link: 'Cài đặt cookie'
+agree: 'Đồng ý'
+disagree: 'Không đồng ý'
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: 'Hiện tại chưa có hồ sơ nào.'
+element: 'Phần tử'
+elements: 'Phần tử'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: 'Chia sẻ'
+  error: 'Chia sẻ thất bại'
+  success: 'Chia sẻ thành công'
+copy: 'Sao chép liên kết'
+checkOutProject: 'Xem dự án này:'
+checkOutUser: 'Xem người dùng này:'
+community: 'Cộng đồng Catrobat'
+back_to_app: 'Rời cộng đồng'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: 'Dự án mới nhất'
+  random: 'Dự án ngẫu nhiên'
   most_viewed: Xem nhiều nhất
   most_downloaded: Tải về nhiều nhất
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  example: 'Ví dụ'
+  scratch: 'Bản remix từ Scratch'
+  recommended: 'Dự án được đề xuất'
+  popular: 'Phổ biến nhất'
+  trending: 'Dự án thịnh hành'
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: 'Thành tích'
     badge: 'new'
   overview:
-    header: 'Achievements'
+    header: 'Thành tích'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Thành tích mới nhất'
+      x_out_of_y: 'Đã mở khóa %unlocked% trên %total%'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Đã mở khóa'
+      empty: 'Bạn chưa mở khóa thành tích nào.'
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Chưa mở khóa'
+      empty: 'Bạn đã mở khóa tất cả thành tích rồi.'
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Chúc mừng bạn!'
+      subtitle: 'Bạn vừa nhận được một huy hiệu'
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: 'Thành tích'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Người học việc'
+        description: 'Theo dõi ai đó và tải lên một dự án'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Thợ lành nghề'
+        description: 'Thành viên tích cực hơn 1 năm'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Bậc thầy'
+        description: 'Thành viên tích cực hơn 4 năm'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Đại sư'
+        description: 'Thành viên tích cực hơn 7 năm'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Chủ động'
+        description: 'Thêm ảnh đại diện đầu tiên của bạn'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Người mới'
+        description: 'Tạo tài khoản người dùng'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: 'Người tham gia Coding Jam 2021'
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: 'Song ngữ'
+        description: 'Dịch dự án của bạn sang 2 ngôn ngữ'
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: 'Tam ngữ'
+        description: 'Dịch dự án của bạn sang 3 ngôn ngữ'
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: 'Nhà ngôn ngữ học'
+        description: 'Dịch dự án của bạn sang 5 ngôn ngữ'
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: 'Đã xác minh'
+        description: 'Xác minh tài khoản của bạn'
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Thẻ |]1,Inf] Thẻ'
   tag:
     game:
-      title: Game
+      title: 'Trò chơi'
     animation:
-      title: Animation
+      title: 'Hoạt hình'
     story:
-      title: Story
+      title: 'Câu chuyện'
     music:
-      title: Music
+      title: 'Âm nhạc'
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: 'Thử nghiệm'
     tutorial:
-      title: Tutorial
+      title: 'Hướng dẫn'
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Tiện ích mở rộng |]1,Inf] Tiện ích mở rộng'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: 'Máy bay không người lái'
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: 'Thêu'
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: 'Nhiều người chơi'
 studio:
-  title: 'Studios'
+  title: 'Studio'
   singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  create_studio: 'Tạo studio'
+  delete_studio: 'Xóa studio'
   cancel_studio: 'Hủy bỏ'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: 'Tên studio'
+  studio_description: 'Mô tả studio'
+  is_public: 'Đặt công khai?'
+  enable_comments: 'Bật bình luận?'
+  cover_image: 'Tải ảnh bìa lên'
+  cover_image_empty: 'Chưa chọn ảnh.'
+  cover_image_hint: 'Tối đa 1 MB. Định dạng được chấp nhận: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'Ảnh đã được tự động nén để vừa giới hạn 1 MB.'
+  cover_image_compressing: 'Đang nén ảnh...'
+  cover_image_still_too_large: 'Ảnh vẫn quá lớn ngay cả sau khi nén. Hãy chọn tệp nhỏ hơn.'
+  cover_image_invalid_type: 'Loại ảnh không hợp lệ. Hãy dùng JPEG, PNG, GIF hoặc WebP.'
+  cover_image_compression_failed: 'Không xử lý được ảnh. Hãy thử tệp khác.'
+  cover_image_alt: 'Ảnh bìa của bạn'
+  cover_image_remove: 'Xóa ảnh'
+  popular: 'Studio phổ biến'
+  join: 'Tham gia'
+  leave: 'Rời khỏi'
   report: 'Báo cáo'
-  public: 'public'
-  private: 'Invite-only'
+  public: 'công khai'
+  private: 'Chỉ theo lời mời'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: 'Studio đã tham gia'
+    public_studios: 'Studio công khai'
+    private_studios: 'Studio chỉ theo lời mời'
+    no_studios: 'Chưa có studio nào'
+    my_studios: 'Studio của mình'
+    explore: 'Khám phá studio'
+    no_joined: 'Bạn chưa tham gia studio nào'
+    joined: 'Đã tham gia'
+    load_more: 'Tải thêm'
     open: 'Mở '
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share: 'Chia sẻ'
+    share_success: 'Đã sao chép liên kết vào bộ nhớ tạm!'
+    leave_confirm_title: 'Rời khỏi studio này?'
     cancel: 'Hủy bỏ'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    cancel_request: 'Hủy yêu cầu'
+    cancel_request_confirm_title: 'Hủy yêu cầu tham gia?'
+    admin: 'Quản trị viên'
+    member: 'Thành viên'
   details:
-    add_project: 'click to add the project'
+    add_project: 'nhấn để thêm dự án'
     add: 'Thêm'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
+    showMore: 'xem thêm'
+    showLess: 'thu gọn'
+    are_you_sure: 'Bạn có chắc không?'
+    no_way_of_return: 'Thao tác này không thể hoàn tác.'
     delete_it: 'Xóa'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    remove_project: 'Gỡ khỏi studio'
+    remove_project_error: 'Không thể gỡ dự án khỏi studio.'
+    remove_project_success: 'Đã gỡ dự án khỏi studio thành công.'
+    no_projects: 'Studio chưa có dự án nào.'
     projects:
       title: 'Các chương trình'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: 'Thêm dự án'
+      open_project: 'Mở dự án'
       download: 'Tải về'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
+      share: 'Chia sẻ'
+      remove_from_studio: 'Gỡ khỏi studio'
+      remove_from_studio_title: 'Gỡ dự án khỏi studio?'
+      remove_from_studio_text: 'Bạn có thể thêm lại sau nếu đổi ý.'
+      share_success: 'Đã sao chép liên kết vào bộ nhớ tạm!'
+      share_fail: 'Không thể sao chép liên kết.'
+      no_projects_empty_state: 'Bạn chưa có dự án nào để thêm. Hãy tạo một dự án trong Pocket Code trước nhé!'
+      add_selected: 'Thêm mục đã chọn'
+    no_available_projects: 'Không có dự án nào để thêm.'
+    updateCoverError: 'Đã có lỗi khi cập nhật ảnh bìa studio.'
+    join: 'Tham gia'
+    leave: 'Rời khỏi'
     report: 'Báo cáo'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'Đang chờ'
+    decline: 'Đã từ chối'
     comments:
-      title: 'Comments'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      title: 'Bình luận'
+      type_something: 'Nhập gì đó'
+      replies: 'trả lời'
+      send: 'gửi'
+      no_comments: 'Studio này chưa có bình luận nào.'
+      disabled_comments: 'Bình luận đã bị tắt cho studio này.'
+      remove_comment: 'Xóa bình luận'
+      post_error: 'Đã có lỗi khi đăng bình luận của bạn. Hãy thử lại sau.'
+      remove_error: 'Đã có lỗi khi xóa bình luận. Hãy thử lại sau.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'Hoạt động'
+      join_studio: '%user% đã tham gia studio.'
+      add_project: '%user% đã thêm một dự án.'
+      add_comment: '%user% đã để lại một bình luận.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'Thành viên studio'
+      project_count: '{0} Chưa có dự án studio nào |{1} 1 dự án studio |]1,Inf] %count% dự án studio'
+      no_studio_projects: 'Chưa có dự án studio nào'
+      one_studio_project: '1 dự án studio'
+      n_studio_projects: '%count% dự án studio'
+      promote_member: 'Nâng thành viên lên quản trị viên'
+      promotion_failed: 'Đã có lỗi khi nâng quyền thành viên này. Hãy thử lại sau.'
+      ban_member: 'Cấm thành viên khỏi studio'
+      ban_failed: 'Đã có lỗi khi cấm thành viên này. Hãy thử lại sau.'
+      demote_member: 'Hạ quản trị viên xuống thành viên'
+      demotion_failed: 'Đã có lỗi khi hạ quyền quản trị viên này. Hãy thử lại sau.'
+      last_admin: 'Không thể hạ quyền quản trị viên cuối cùng của studio này.'
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
-    show_more: 'More information'
-    show_less: 'Less information'
+      title: 'Yêu cầu tham gia'
+      accept: 'Chấp nhận'
+      decline: 'Từ chối'
+      accept_success: 'Đã chấp nhận yêu cầu tham gia.'
+      decline_success: 'Đã từ chối yêu cầu tham gia.'
+      error: 'Đã có lỗi xảy ra. Hãy thử lại.'
+      no_requests: 'Không có yêu cầu tham gia nào đang chờ.'
+    show_more: 'Xem thêm'
+    show_less: 'Thu gọn'
     admin_settings:
       title: 'Cài đặt'
-      studio_name: 'Studio Name'
+      studio_name: 'Tên studio'
       studio_description: 'Mô tả'
-      toggle_allow_comments: 'Comments'
-      toggle_privacy: 'Public'
+      toggle_allow_comments: 'Bình luận'
+      toggle_privacy: 'Công khai'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Kích thước: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: 'Loại: hình ảnh'
+      project: 'Loại: dự án'
+      sound: 'Loại: âm thanh'
+      movie: 'Loại: video'
+      default: 'Loại: không xác định'
+  no_categories: 'Chưa có danh mục đa phương tiện nào.'
+  no_results: 'Không tìm thấy kết quả nào.'
+  assets_count: 'tài nguyên'
+  view_all: 'Xem tất cả'
+  view_all_category: 'Xem tất cả %category%'
+  back_to_app: 'Quay lại ứng dụng'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'Dự án được yêu cầu không có sẵn'
+  project_not_for_kids: 'Dự án đã được đánh dấu là không phù hợp với trẻ em!'
+  project_safe_for_kids: 'Dự án đã được đánh dấu là phù hợp với trẻ em!'
+  project_not_for_kids_moderator: 'Dự án đã được người kiểm duyệt đánh dấu. Bạn không thể hoàn tác việc này!'
+  project_set_private: 'Dự án đã được đặt thành riêng tư.'
+  project_set_public: 'Dự án đã được đặt thành công khai.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'Thông tin thêm: additionalInfo'
+    feature_1: 'Tính năng featureName sẽ không khả dụng từ maintenanceStart đến maintenanceEnd'
+    feature_2: 'Tính năng'
+    feature_3: 'Tính năng'
+MarkNotForKids: 'Đánh dấu là không phù hợp với trẻ em'
+MarkSafeForKids: 'Đánh dấu là phù hợp với trẻ em'
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: 'Xác nhận'
+  confirmMark: 'Bạn có chắc muốn đánh dấu dự án này là không phù hợp với trẻ em không?'
+  confirmUnmark: 'Bạn có chắc muốn gỡ dấu không phù hợp với trẻ em khỏi dự án này không?'
+  confirmYes: 'Đúng, tiếp tục!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'Báo cáo %content_type% này'
+    reason_placeholder: 'Hãy mô tả lý do bạn báo cáo nội dung này...'
+    submit: 'Gửi báo cáo'
+    success: 'Báo cáo của bạn đã được gửi. Cảm ơn bạn.'
+    error: 'Đã có lỗi xảy ra. Hãy thử lại.'
+    duplicate: 'Bạn đã báo cáo nội dung này rồi.'
+    trust_too_low: 'Tài khoản của bạn còn quá mới để gửi báo cáo.'
+    unverified: 'Hãy đảm bảo bạn đã đăng nhập và email tài khoản của bạn đã được xác minh.'
+    rate_limited: 'Bạn đang gửi báo cáo quá nhanh. Hãy chờ một chút rồi thử lại.'
+    suspended: 'Tài khoản của bạn đã bị tạm khóa.'
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: 'Kháng nghị'
+    title: 'Kháng nghị quyết định này'
+    placeholder: 'Hãy giải thích vì sao nội dung này không nên bị ẩn...'
+    submit: 'Gửi kháng nghị'
     cancel: "Hủy bỏ"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: 'Kháng nghị của bạn đã được gửi để xem xét.'
+    already_pending: 'Bạn đã có một kháng nghị đang chờ xử lý.'
+    error: 'Đã có lỗi xảy ra. Hãy thử lại.'
+    rate_limited: 'Bạn đang gửi kháng nghị quá nhanh. Hãy chờ một chút rồi thử lại.'
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: 'Bạn đang đăng bình luận quá nhanh. Hãy chờ một chút.'
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: 'Bạn đang bày tỏ cảm xúc quá nhanh. Hãy chờ một chút.'
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: 'Bạn đang theo dõi/bỏ theo dõi quá nhanh. Hãy chờ một chút.'
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: 'Bạn đang thực hiện thao tác với studio quá nhanh. Hãy chờ một chút.'
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: 'Dự án này đã bị ẩn do bị cộng đồng báo cáo.'
+    comment: 'Bình luận này đã bị ẩn do bị cộng đồng báo cáo.'
+    user: 'Hồ sơ này đã bị ẩn do bị cộng đồng báo cáo.'
+    user_own: 'Tài khoản của bạn đã bị tạm khóa do bị cộng đồng báo cáo. Bạn có thể kháng nghị quyết định này.'
+    studio: 'Studio này đã bị ẩn do bị cộng đồng báo cáo.'
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: '%content_type% của bạn đã bị ẩn do bị cộng đồng báo cáo. Bạn có thể kháng nghị quyết định này.'
+    appeal_approved: 'Kháng nghị của bạn đã được chấp thuận. Nội dung của bạn đã hiển thị trở lại.'
+    appeal_rejected: 'Kháng nghị của bạn đã được xem xét và quyết định ẩn nội dung vẫn được giữ nguyên.'
+    admin_review_needed: 'Nội dung đã bị tự động ẩn và cần được xem xét.'
+Reports: 'Báo cáo'
+members: 'thành viên'

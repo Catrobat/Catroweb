@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Catrobat समुदाय
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: "Catrobat से बने रचनात्मक प्रोजेक्ट शेयर करो, खोजो और रीमिक्स करो। गेम, एनिमेशन और ऐप बनाने वाले युवा रचनाकारों के वैश्विक समुदाय से जुड़ो।"
+meta.description.media.library: "Catrobat के लिए मुफ़्त मीडिया एसेट देखो और डाउनलोड करो — तुम्हारे प्रोजेक्ट के लिए आवाज़ें, चित्र और बहुत कुछ।"
+meta.og.title.login: "Catrobat में साइन इन करो"
+meta.og.description.login: "अपने Catrobat प्रोजेक्ट समुदाय के साथ शेयर करने के लिए साइन इन करो।"
+meta.og.title.register: "Catrobat खाता बनाओ"
+meta.og.description.register: "Catrobat समुदाय से जुड़ो और आज ही अपने रचनात्मक प्रोजेक्ट शेयर करना शुरू करो।"
+meta.og.description.profile: "Catrobat पर %username% – उनके प्रोजेक्ट और उपलब्धियाँ देखो।"
 localLanguage: अंग्रेजी
 username: 'उपयोगकर्ता नाम:'
 password: 'पारण शब्द:'
@@ -18,7 +18,7 @@ aboutPocketCode: पॉकेट कोड के बारे में
 about: कैटरोबैट के बारे में
 education: शिक्षा
 chat: चैट और फ़ोरम
-privacyGuide: Privacy Awareness Guide
+privacyGuide: "गोपनीयता जागरूकता गाइड"
 others: अन्य
 tutorials: मदद
 googlePlay: गूगल प्ले स्टोर
@@ -26,13 +26,13 @@ iosAppStore: IOS App store
 instagram: इंस्टाग्राम
 discordChat: डिस्कॉर्ड चैट
 passwordsNoMatch: पासवर्ड मेल नहीं खाते।
-error: Oops!
-cancel: रद्द करें
-confirm: पुष्टि करें
+error: "उफ़!"
+cancel: "रद्द करो"
+confirm: "पुष्टि करो"
 report: विवरण
 report.title: विवरण
-deleteIt: हाँ, इसे हटा दें!
-reportIt: हाँ, रिपोर्ट करें!
+deleteIt: "हाँ, इसे हटा दो!"
+reportIt: "हाँ, रिपोर्ट करो!"
 areYouSure: वाकई में?
 noWayOfReturn: इसे दोबारा नहीं बदला जाएगा!
 download: डाउन्लोड
@@ -41,21 +41,21 @@ description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
 credits: इसका श्रेय
 noCredits: कोई श्रेय उपलब्ध नहीं है।
-notesAndCreditsDescription: आपने यह प्रोजेक्ट कैसे बनाया? क्या आपने अन्य लोगों से विचारों, लिपियों या कलाकृति का उपयोग किया था? उन्हें यहाँ धन्यवाद।
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+notesAndCreditsDescription: "तुमने यह प्रोजेक्ट कैसे बनाया? क्या तुमने अन्य लोगों से विचारों, लिपियों या कलाकृति का उपयोग किया था? उन्हें यहाँ धन्यवाद।"
+projectImportedFromScratch: "यह प्रोजेक्ट MIT Scratch से आयात किया गया था। तुम मूल प्रोजेक्ट देख सकते हो"
+scratchImportedProjectLinkHere: "यहाँ।"
 country: देश
 loginText: प्रवेश करे
 privacyPolicy: गोपनीयता नीति
 imprint: मोहर
 projectDetails: विवरण
 somethingWentWrong: 'ओह, कुछ गलत हो गया।'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
+accountNotVerified: "पक्का करो कि तुम लॉग इन हो और तुम्हारे खाते का ईमेल सत्यापित है।"
+accountSuspended: "समुदाय की रिपोर्टों के कारण तुम्हारा खाता निलंबित कर दिया गया है। तुम अपनी प्रोफ़ाइल से इस फ़ैसले के ख़िलाफ़ अपील कर सकते हो।"
 doesNotExist: 'अनुरोधित संसाधन मौजूद नहीं है।'
-pleaseTryAgain: 'कृपया फिर से कोशिश करें!'
-tryAgainButton: 'Try again'
-oldVersionError: 'कृपया पॉकेट कोड को सबसे नए वर्जन में अपडेट करें!'
+pleaseTryAgain: "कृपया फिर से कोशिश करो!"
+tryAgainButton: "फिर से कोशिश करो"
+oldVersionError: "कृपया पॉकेट कोड को सबसे नए वर्जन में अपडेट करो!"
 more: 'अधिक'
 less: 'कम'
 show-more: 'और दिखाओ'
@@ -63,7 +63,7 @@ show-less: 'कम दिखाएं'
 more-information: 'अधिक जानकारी'
 less-information: 'कम जानकारी'
 ok: ठीक है
-clickToDownloadProgram: 'उदाहरण की परियोजना को डाउनलोड करने के लिए %link_start% यहाँ %link_end% क्लिक करें।'
+clickToDownloadProgram: "उदाहरण की परियोजना को डाउनलोड करने के लिए %link_start% यहाँ %link_end% क्लिक करो।"
 registrationError: 'उपभोक्ता का नाम या ईमेल पहले से उपयोग में है।'
 notifications: 'सूचनाएँ'
 allNotifications: 'सब'
@@ -73,369 +73,351 @@ CommentNotifications: 'टिप्पणियाँ'
 RemixNotifications: 'रीमिक्स'
 wellDone: "बहुत ख़ूब!"
 done: "हो गया!"
-notificationsReadMessage: "ऐसा लगता है कि आपके पास कोई सूचना नहीं है।"
-confirmMessage: "हाँ, इसे हटा दें"
-cancelMessage: "रद्द करें"
+notificationsReadMessage: "ऐसा लगता है कि तुम्हारे पास कोई सूचना नहीं है।"
+confirmMessage: "हाँ, इसे हटा दो"
+cancelMessage: "रद्द करो"
 notificationsUnauthorizedError: "उपयोगकर्ता को अधिकृत करने में असमर्थ"
 notificationsClearError: "सूचना को पढ़कर मार्क करने में असमर्थ!"
-pleaseWait: "कृपया प्रतीक्षा करें..."
+pleaseWait: "कृपया प्रतीक्षा करो..."
 projects: "प्रोग्राम्स"
 users: "उपयोगकर्ता"
-studios: "Studios"
+studios: "स्टूडियो"
 oauthPopUpTitle: "बाहरी अकाउंट में प्रवेश की जानकारी"
-oauthInfo: "\nआपने अभी प्रवेश करने के लिए किसी बाहरी अकाउंट का उपयोग किया है। हमने आपके लिए नया उपभोक्ता नाम बनाया है। अगर आप अपना उपभोक्ता नाम बदलना चाहते हैं या नया पासवर्ड बनाना चाहते हैं तो अपने प्रोफाइल पेज पर जाएं।"
+oauthInfo: "\nतुमने अभी प्रवेश करने के लिए किसी बाहरी अकाउंट का उपयोग किया है। हमने तुम्हारे लिए नया उपभोक्ता नाम बनाया है। अगर तुम अपना उपभोक्ता नाम बदलना चाहते हो या नया पासवर्ड बनाना चाहते हो तो अपने प्रोफाइल पेज पर जाओ।"
 oauthHere: "यहां"
 statistics: "आंकड़े"
-languageSelection: "Language selection"
+languageSelection: "भाषा चयन"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'लागू करें'
+  title: "थीम"
+  auto: "सिस्टम"
+  auto_description: "अपने डिवाइस की सेटिंग अपनाओ"
+  light: "हल्का"
+  light_description: "चमकीला रूप"
+  dark: "गहरा"
+  dark_description: "गहरा रूप"
+  apply: "लागू करो"
 indexPage:
   recommendedSection:
     info:
       title: 'यहां किन प्रोजेक्ट की सिफारिश की गई है?'
-      description: 'आपके प्रोजेक्ट को जितनी अधिक प्रतिक्रियाएँ (पसंद, मुस्कान ...) प्राप्त होंगी, वह इस सूची में उतना ही ऊपर दिखाई देगा।'
+      description: "तुम्हारे प्रोजेक्ट को जितनी अधिक प्रतिक्रियाएँ (पसंद, मुस्कान ...) प्राप्त होंगी, वह इस सूची में उतना ही ऊपर दिखाई देगा।"
 follower:
   follows: आदर्श
   followers: समर्थक
-  follow: अनुसरण करें
+  follow: "अनुसरण करो"
   username: उपभोक्ता
   followsMe: मेरा अनुसरण करता है
-  noFollowing: अभी आप किसी का अनुसरण नहीं कर रहे हैं
-  noFollowers: अभी आपके कोई अनुयायी नहीं हैं।
+  noFollowing: "अभी तुम किसी का अनुसरण नहीं कर रहे हो"
+  noFollowers: "अभी तुम्हारे कोई अनुयायी नहीं हैं।"
   noOtherFollowing: वर्तमान में निम्नलिखित उपयोगकर्ता नहीं हैं।
   noOtherFollowers: वर्तमान में कोई अनुयायी उपयोगकर्ता नहीं हैं।
   followError: "इस उपभोक्ता का अनुसरण करने में असमर्थ!"
-  unfollowError: "इस उपभोक्ता को आपके आदर्शों में से हटाने में असमर्थ!"
-  unfollowQuestion: "क्या आप वाकई इस उपभोक्ता को अपने आदर्शों से हटाना चाहते हैं?"
-  unfollowButton: "%username% का अनुसरण न करें"
+  unfollowError: "इस उपभोक्ता को तुम्हारे आदर्शों में से हटाने में असमर्थ!"
+  unfollowQuestion: "क्या तुम वाकई इस उपभोक्ता को अपने आदर्शों से हटाना चाहते हो?"
+  unfollowButton: "%username% का अनुसरण न करो"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: "Catrobat के %theme% में स्वागत है"
+    title_mindstorms: "Mindstorms EV3 और NXT के लिए Catrobat की साइट पर स्वागत है"
+    subtitle: "कहानियाँ, गेम और बहुत कुछ बनाओ..."
+    subtitle_embroidery: "अपनी टी-शर्ट, बैग, पैंट या स्मार्टफ़ोन कवर पर अपने ख़ुद के पैटर्न सिलो!"
+    subtitle_mindstorms: "अपने Lego Mindstorms EV3 और NXT रोबोट के साथ अपने ख़ुद के प्रोजेक्ट बनाओ"
+    download: "ऐप डाउनलोड करो"
+    statistics: "और आँकड़े"
+  featured: "चुनिंदा"
   open: खुला हुआ
   download: डाउन्लोड
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "प्रोजेक्ट अपलोड करो"
+    drop_here: "अपनी .catrobat फ़ाइल यहाँ खींचकर छोड़ो"
+    or_browse: "या ब्राउज़ करने के लिए क्लिक करो"
+    button: "अपलोड"
+    uploading: "अपलोड हो रहा है..."
+    success: "प्रोजेक्ट सफलतापूर्वक अपलोड हो गया!"
+    view_project: "प्रोजेक्ट देखो"
+    upload_another: "एक और अपलोड करो"
+    invalid_file: "कृपया एक .catrobat फ़ाइल चुनो"
+    file_too_large: "फ़ाइल बहुत बड़ी है"
+    error: "अपलोड विफल रहा। कृपया फिर से कोशिश करो।"
+    unauthorized: "अपलोड करने के लिए तुम्हें लॉग इन करना होगा।"
+    rate_limited: "बहुत ज़्यादा अपलोड। कृपया बाद में फिर से कोशिश करो।"
+    selected_file: "चुनी गई फ़ाइल:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+      file_size: "फ़ाइल का अधिकतम आकार 100 MB है।"
+      app_upload: "तुम Pocket Code ऐप से भी सीधे प्रोजेक्ट अपलोड कर सकते हो। ध्यान दो कि ऐप्स को अभी नए सिरे से बनाया जा रहा है और फ़िलहाल वे वेब अपलोड का समर्थन नहीं करते।"
+      retention: "अपलोड किए गए प्रोजेक्ट कुछ समय तक निष्क्रिय रहने के बाद अपने-आप हटा दिए जाते हैं। उसे लंबे समय तक रखने के लिए नियमित रूप से लॉग इन करो या अपने प्रोजेक्ट पर डाउनलोड पाओ।"
+      protection: "ख़ास तौर पर अच्छे या लोकप्रिय प्रोजेक्ट को मॉडरेटर अपने-आप हटने से बचा सकते हैं।"
+  example: "उदाहरण"
+  newest: "सबसे नए प्रोजेक्ट"
+  recommended: "सुझाए गए प्रोजेक्ट"
+  scratchremixes: "Scratch रीमिक्स"
+  noProjects: "अभी कोई प्रोजेक्ट नहीं है।"
   shareAction: शेयर
   deleteAction: प्रोजेक्ट हटाएं
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+  deleteConfirmation: "क्या तुम्हें यक़ीन है?\nक्या तुम सच में \"%programName%\" को हटाना चाहते हो?\nइसे वापस लाने का कोई तरीका नहीं है!\nहाँ, हटा दो!\nरद्द करो\n"
+  deleteConfirmText: "इसे पूर्ववत नहीं किया जा सकता। तुम्हारा प्रोजेक्ट हमेशा के लिए हटा दिया जाएगा।"
   deleteConfirmationTitle: वाकई में?
-  deleteNotFoundError: हटाया जाने वाला प्रोजेक्ट आपके उपयोगकर्ता के अंतर्गत नहीं पाया जा सका।
+  deleteNotFoundError: "हटाया जाने वाला प्रोजेक्ट तुम्हारे उपयोगकर्ता के अंतर्गत नहीं पाया जा सका।"
   private: "\nनिजी"
   public: सार्वजनिक
-  setPrivateAction: "\nनिजी सेट करें"
-  setPublicAction: सार्वजनिक सेट करें
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+  setPrivateAction: "\nनिजी सेट करो"
+  setPublicAction: "सार्वजनिक सेट करो"
+  setPrivateConfirm: "इस प्रोजेक्ट को निजी बनाना है? यह अब खोज परिणामों में नहीं दिखेगा।"
+  setPublicConfirm: "इस प्रोजेक्ट को सार्वजनिक बनाना है? यह सभी को दिखेगा।"
+  markNotForKidsConfirm: "इस प्रोजेक्ट को बच्चों के लिए अनुपयुक्त चिह्नित करना है?"
+  markSafeForKidsConfirm: "इस प्रोजेक्ट से 'बच्चों के लिए नहीं' का निशान हटाना है?"
+  nfkModeratorLocked: "यह सेटिंग एक मॉडरेटर ने लॉक कर दी है।"
+  confirmSetPrivate: "क्या तुम सच में इस प्रोजेक्ट को निजी बनाना चाहते हो? यह अब खोज परिणामों में नहीं दिखेगा।"
+  confirmSetPublic: "क्या तुम सच में इस प्रोजेक्ट को सार्वजनिक बनाना चाहते हो? यह सभी को दिखेगा।"
+  changeVisibility: "क्या तुम्हें यक़ीन है?\nअगर तुम '%programName%' को निजी करते हो, तो दूसरे उपयोगकर्ता इसे देख या खोज नहीं पाएँगे।\nतुम फिर भी अपने प्रोजेक्ट का लिंक अपने दोस्तों के साथ शेयर कर सकते हो। ताले वाले आइकन पर टैप करके तुम दृश्यता बदल सकते हो।\nअगर तुम \"%programName%\" को सार्वजनिक करते हो, तो दूसरे उपयोगकर्ता इसे देख और खोज सकते हैं।\nहाँ, सार्वजनिक करो\nहाँ, निजी करो\nनहीं\n"
+  reportCommentConfirmation: "क्या तुम सच में इस टिप्पणी की रिपोर्ट करना चाहते हो?"
+  deleteCommentConfirmation: "क्या तुम सच में इस टिप्पणी को हटाना चाहते हो?"
+  deleteAccountConfirmation: "खाता हटाना है?\nक्या तुम सच में अपना खाता हटाना चाहते हो? इससे तुम्हारे अपलोड किए गए प्रोजेक्ट और टिप्पणियाँ भी हट जाएँगी!\nइसे वापस लाने का कोई तरीका नहीं है!\nहाँ, हटा दो!\nरद्द करो\n"
   tooLongName: प्रोजेक्ट का नाम बहुत बड़ा है!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
+  tooLongDescription: "प्रोजेक्ट का विवरण बहुत लंबा है!"
+  tooLongCredits: "प्रोजेक्ट के नोट्स और श्रेय बहुत लंबे हैं!"
   my_projects: मेरे प्रोजेक्ट
-  trending: Trending projects
-  popular: Popular projects
+  trending: "ट्रेंडिंग प्रोजेक्ट"
+  popular: "लोकप्रिय प्रोजेक्ट"
   most:
     viewed: सबसे ज्यादा देखा गया
     downloaded: सबसे ज्यादा डाउनलोड किया हुआ
-  random: Random projects
-  related: Related projects
+  random: "बेतरतीब प्रोजेक्ट"
+  related: "मिलते-जुलते प्रोजेक्ट"
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: "प्रोजेक्ट खोजो"
+    no_projects: "तुमने अभी तक कोई प्रोजेक्ट नहीं बनाया है"
+    no_explore: "कोई प्रोजेक्ट नहीं मिला"
+    load_more: "और लोड करो"
+    upload: "प्रोजेक्ट अपलोड करो"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: "सुरक्षित"
+    day_left: "1 दिन बाकी"
+    days_left: "%days% दिन बाकी"
+    tooltip: "प्रोजेक्ट कुछ समय तक निष्क्रिय रहने के बाद अपने-आप हटा दिए जाते हैं। उन्हें लंबे समय तक रखने के लिए ज़्यादा डाउनलोड पाओ या नियमित रूप से लॉग इन करो।"
+    tooltip_protected: "यह प्रोजेक्ट सुरक्षित है और अपने-आप नहीं हटाया जाएगा।"
+  downloads: "%downloads% डाउनलोड"
+  sample: "उदाहरण प्रोजेक्ट"
+  views: "%views% बार देखा गया"
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "इस प्रोजेक्ट पर प्रतिक्रिया देने वाले लोग"
     all: "सब"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  remixes: "{0}0 रीमिक्स |{1}1 रीमिक्स |]1,Inf]%remixes% रीमिक्स"
+  newRemixesNotificationTitle: "|{1}\"%programName%\" का 1 नया रीमिक्स है: |]1,Inf] \"%programName%\" के %remixes% नए रीमिक्स हैं:"
+  submitted: "जमा किए गए प्रोजेक्ट"
+  uploaded: "अपलोड किए गए प्रोजेक्ट"
+  reportAsInappropriate: "अनुचित के रूप में रिपोर्ट करो"
+  reportProgram: "प्रोजेक्ट की रिपोर्ट करो"
+  languageVersion: "Catrobat भाषा संस्करण: %languageVersion%"
+  reportLoginText: "इस प्रोजेक्ट की रिपोर्ट करने के लिए कृपया %login% करो।"
+  reportDialogHeader: "तुम इस प्रोजेक्ट की रिपोर्ट क्यों करना चाहते हो?"
+  reportDialogReason: "कारण लिखो"
+  reportRadioButtonInappropriate: "यह अनुचित है"
+  reportRadioButtonCopyright: "कॉपीराइट का उल्लंघन"
+  reportRadioButtonSpam: "यह स्पैम है"
+  reportRadioButtonDislike: "मुझे यह पसंद नहीं है"
+  reportOwnProgram: "तुम अपने ही प्रोजेक्ट को चिह्नित नहीं कर सकते।"
+  reportAlready: "तुम इस प्रोजेक्ट को पहले ही चिह्नित कर चुके हो।"
+  reportDone: "तुमने इस प्रोजेक्ट की रिपोर्ट कर दी!"
   updateAppHeaderDownload: डाउनलोड संभव नहीं है
-  updateAppTextDownload: कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करें। सावधान रहें कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।
+  updateAppTextDownload: "कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करो। सावधान रहो कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।"
   updateAppTextDownloadApk: एपीके डाउनलोड वर्तमान में केवल एंड्रॉइड पर उपलब्ध है, आईओएस पर नहीं।
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  updateAppHeader: "ऐप अपडेट करो"
+  updateAppText: "कृपया अपना ऐप नए संस्करण में अपडेट करो।"
   btnClosePopup: ठीक है
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: "यह Catrobat प्रोजेक्ट देखो"
+  show_more: "और दिखाओ"
   comments: टिप्पणियाँ
-  send: Send
-  delete: मिटायें
+  send: "भेजो"
+  delete: "मिटाओ"
   report: विवरण
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: प्रोजेक्ट संपादित करें
-  closeProjectEditor: "\nप्रोजेक्ट एडिटर बंद करें"
-  closeEditorPrompt: क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?
-  btnDiscard: रद्द करें
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  reply: "जवाब दो"
+  report_popup: "टिप्पणी की रिपोर्ट सफलतापूर्वक हो गई।"
+  report_popup_header: "रिपोर्ट किया गया"
+  deleted_popup: "टिप्पणी सफलतापूर्वक हटा दी गई।"
+  deleted_popup_header: "हटाया गया"
+  noAdminRights: "तुम्हारे पास एडमिन अधिकार नहीं हैं। कृपया एडमिन के रूप में लॉग इन करो।"
+  editProject: "प्रोजेक्ट संपादित करो"
+  closeProjectEditor: "\nप्रोजेक्ट एडिटर बंद करो"
+  closeEditorPrompt: "क्या तुम अपने परिवर्तनों को सहेजना चाहते हो?"
+  btnDiscard: "रद्द करो"
+  addComment: "टिप्पणी लिखो"
+  thumbsUp: "बहुत बढ़िया!"
+  smile: "मुस्कान!"
+  love: "प्यार!"
+  wow: "वाह!"
+  linkTitle: "लिंक"
+  link: "प्रोजेक्ट का लिंक क्लिपबोर्ड पर कॉपी करो"
   reactionsText: प्रतिक्रियाएं
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadErrorText: "प्रोजेक्ट डाउनलोड करते समय गड़बड़ी हुई। कृपया बाद में फिर से कोशिश करो।"
+  downloadStartText: "डाउनलोड शुरू हो गया है..."
+  downloading: "डाउनलोड हो रहा है..."
+  openInApp: "Pocket Code में खोलो"
+  downloaded: "डाउनलोड हो गया"
+  showTranslation: "अनुवाद दिखाओ"
+  hideTranslation: "अनुवाद छिपाओ"
+  translatedByLine: "%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित"
   googleTranslate: गूगल ट्रांसलेट
-  confrimDelete: क्या आप वाकई अनुवाद हटाना चाहते हैं?
+  confrimDelete: "क्या तुम वाकई अनुवाद हटाना चाहते हो?"
   default: पूर्व निर्धारित
-  save: सहेजें
+  save: "सहेजो"
   translationTitle: '%language% अनुवाद'
-  editDefault: "\nडिफ़ॉल्ट संपादित करें"
-  editTranslation: '%language% अनुवाद संपादित करें '
+  editDefault: "\nडिफ़ॉल्ट संपादित करो"
+  editTranslation: "%language% अनुवाद संपादित करो "
   translations: "\nअनुवाद"
-  createTranslation: "\nअनुवाद करें"
-  deletedComment: '**Deleted**'
+  createTranslation: "\nअनुवाद करो"
+  deletedComment: "**हटाया गया**"
   replyLabel: "\nजवाब"
   repliesLabel: जवाब
-  notForKids: Not safe for kids
+  notForKids: "बच्चों के लिए सुरक्षित नहीं"
 remixGraph:
   title: रीमिक्स
   showRemixGraph: 'रीमिक्स ग्राफ'
   by: 'द्वारा द्वारा'
   open: 'खुला हुआ'
   showPaths: 'पथ दिखाएं'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: "रीमिक्स ग्राफ़ लोड हो रहा है..."
+  error: "रीमिक्स ग्राफ़ लोड नहीं हो सका।"
+  empty: "इस प्रोजेक्ट के लिए अभी कोई रीमिक्स ग्राफ़ डेटा उपलब्ध नहीं है।"
   remixesLabel: 'रीमिक्स'
   projectsLabel: 'प्रोग्राम्स'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  scratchLabel: "Scratch मूल"
+  interactHint: "प्रोजेक्ट खोलने या उसका रीमिक्स पथ हाइलाइट करने के लिए कोई नोड चुनो।"
+  zoomIn: "ज़ूम इन"
+  zoomOut: "ज़ूम आउट"
+  resetView: "दृश्य रीसेट करो"
+  projectNotAvailableErrorTitle: "माफ़ करना..."
+  projectNotAvailableErrorDescription: "यह प्रोजेक्ट अब उपलब्ध नहीं है!"
+  projectNotAvailable: "उपलब्ध नहीं"
+  projectUnknownUser: "अज्ञात उपयोगकर्ता"
 noReply:
-  - यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे उत्तर न दें।
+  - यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे जवाब न दो।
 accountConfirmation:
-  subject: आपका Catrobat खाता पुष्टिकरण
+  subject: तुम्हारे Catrobat खाते की पुष्टि
   message: |
-    प्रिय %username%।
-    अपने खाते को सक्रिय करने के लिए - कृपया देखें %confirmationUrl%
-    इस लिंक का उपयोग केवल एक बार अपने खाते को मान्य करने के लिए किया जा सकता है।
-    सादर,
-    आपकी कैटोबैट टीम।
+    प्रिय %username%,
+    अपना खाता सक्रिय करना पूरा करने के लिए कृपया यह लिंक खोलो: %confirmationUrl%
+    इस लिंक का इस्तेमाल तुम्हारे खाते को सत्यापित करने के लिए सिर्फ़ एक बार किया जा सकता है।
+    शुभकामनाओं सहित,
+    तुम्हारी Catrobat टीम।
   messageHtml: |
     <p>
-    प्रिय %username%। <br>
+    प्रिय %username%,<br>
     <br>
-    अपने खाते को सक्रिय करने के लिए - कृपया <a href=%confirmationUrl%> यहां </a> <br> पर क्लिक करें
+    अपना खाता सक्रिय करना पूरा करने के लिए कृपया <a href="%confirmationUrl%">यहाँ</a> क्लिक करो।<br>
+    इस लिंक का इस्तेमाल तुम्हारे खाते को सत्यापित करने के लिए सिर्फ़ एक बार किया जा सकता है।<br>
     <br>
-    इस लिंक का उपयोग केवल एक बार अपने खाते को मान्य करने के लिए किया जा सकता है। <br>
-    <br>
-    सादर, <br>
-    आपकी कैटोबैट टीम।
+    शुभकामनाओं सहित,<br>
+    तुम्हारी Catrobat टीम।
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "अपना ईमेल पता सत्यापित करो"
+  welcome: "Catrobat में स्वागत है!"
+  greeting: "साइन अप करने के लिए धन्यवाद! शुरू करने के लिए कृपया अपना ईमेल पता सत्यापित करो।"
+  message: "अपने ईमेल की पुष्टि करने के लिए नीचे दिए बटन पर क्लिक करो। यह लिंक %time% तक मान्य है और सिर्फ़ एक बार इस्तेमाल किया जा सकता है।"
+  button: "ईमेल पता सत्यापित करो"
+  ignore: "अगर तुमने Catrobat खाता नहीं बनाया है, तो तुम इस ईमेल को बेझिझक अनदेखा कर सकते हो।"
+  autoDelete: "असत्यापित खाते 30 दिनों के बाद अपने-आप हटा दिए जाते हैं।"
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "तुम्हारे बच्चे के Catrobat खाते के लिए माता-पिता की सहमति चाहिए"
+    title: "माता-पिता की सहमति ज़रूरी है"
+    greeting: "नमस्ते,"
+    message: "तुम्हारे बच्चे %username% ने Catrobat पर खाता बनाया है और अपना ईमेल पता सत्यापित कर लिया है।"
+    explanation: "Catrobat एक मुफ़्त शैक्षिक प्लेटफ़ॉर्म है, जहाँ युवा ऐप, गेम और एनिमेशन बनाकर कोडिंग सीखते हैं। EU के बाल संरक्षण नियमों के तहत, तुम्हारा बच्चा समुदाय में पूरी तरह हिस्सा ले सके, इससे पहले हमें तुम्हारी सहमति चाहिए। सहमति देने के लिए कृपया नीचे दिए बटन पर क्लिक करो।"
+    button: "माता-पिता की सहमति दो"
+    ignore: "अगर तुम्हें इस ईमेल की उम्मीद नहीं थी, तो तुम इसे बेझिझक अनदेखा कर सकते हो। सहमति के बिना खाते की सुविधाएँ सीमित रहेंगी।"
+    whatIsCatrobat: "Catrobat एक मुफ़्त, गैर-लाभकारी शैक्षिक प्रोग्रामिंग प्लेटफ़ॉर्म है। catrobat.org पर और जानो।"
+    manageLink: "तुम हमारे <a href=\"%portalUrl%\" style=\"color: #00acc1;\">अभिभावक पोर्टल</a> के ज़रिए कभी भी अपने बच्चे का खाता संभाल सकते हो। <a href=\"%infoUrl%\" style=\"color: #00acc1;\">माता-पिता के रूप में तुम्हारे अधिकारों</a> के बारे में और जानो।"
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "सहमति दे दी गई"
+    message: "धन्यवाद! %username% का खाता अब पूरी तरह सक्रिय है।"
+    continueButton: "प्रोजेक्ट खोजो"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "माता-पिता और अभिभावक"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "माता-पिता और अभिभावकों के लिए जानकारी"
+    intro: "Catrobat युवा उपयोगकर्ताओं की सुरक्षा और गोपनीयता को गंभीरता से लेता है। यह पेज बताता है कि हम तुम्हारे बच्चे की सुरक्षा कैसे करते हैं और तुम्हारे क्या अधिकार हैं।"
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Catrobat क्या है?"
+      text: "Catrobat एक मुफ़्त, गैर-लाभकारी शैक्षिक प्लेटफ़ॉर्म है, जहाँ युवा अपने ख़ुद के ऐप, गेम और एनिमेशन बनाकर प्रोग्रामिंग सीखते हैं। यह प्लेटफ़ॉर्म दुनिया भर में उपलब्ध है और शिक्षा में इस्तेमाल होता है।"
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "हम कौन-सा डेटा इकट्ठा करते हैं?"
+      text: "हम प्लेटफ़ॉर्म चलाने के लिए ज़रूरी न्यूनतम डेटा इकट्ठा करते हैं: उपयोगकर्ता नाम, ईमेल पता, जन्मतिथि, और तुम्हारा बच्चा जो भी प्रोजेक्ट बनाता और अपलोड करता है। 14 साल से कम उम्र के उपयोगकर्ताओं के लिए हम सहमति के उद्देश्य से माता-पिता/अभिभावक का ईमेल पता भी रखते हैं। हम निजी डेटा न बेचते हैं, न ही किसी तीसरे पक्ष के साथ शेयर करते हैं।"
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "माता-पिता या अभिभावक के रूप में तुम्हारे अधिकार"
+      text: "EU के बाल संरक्षण नियमों (GDPR) और COPPA के तहत तुम्हें ये अधिकार हैं: हमारे पास तुम्हारे बच्चे का जो डेटा है उसे देखना, उस डेटा की कॉपी माँगना, कभी भी अपनी सहमति वापस लेना (जिससे खाता सीमित हो जाता है), और अपने बच्चे के खाते और उससे जुड़े सारे डेटा को हमेशा के लिए हटाने का अनुरोध करना।"
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "नाबालिगों के खातों पर कौन-सी पाबंदियाँ लागू होती हैं?"
+      text: "16 साल से कम उम्र के उपयोगकर्ता टिप्पणियाँ न लिख सकते हैं न पढ़ सकते हैं, दूसरे उपयोगकर्ताओं को फ़ॉलो नहीं कर सकते, और बच्चों के लिए अनुपयुक्त चिह्नित सामग्री नहीं देख सकते। वे फिर भी प्रोजेक्ट बना और अपलोड कर सकते हैं, सार्वजनिक प्रोजेक्ट देख सकते हैं और लाइक से प्रोजेक्ट पर प्रतिक्रिया दे सकते हैं। ये पाबंदियाँ सीखने का सुरक्षित माहौल देने के लिए हैं।"
+    manageButton: "अपने बच्चे का खाता संभालो"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "अभिभावक पोर्टल"
+    description: "अपने बच्चे का Catrobat खाता संभालने के लिए सुरक्षित लिंक पाने के लिए अपना ईमेल पता डालो। लिंक उसी ईमेल पते पर भेजा जाएगा जो तुमने पंजीकरण के समय दिया था।"
+    emailLabel: "तुम्हारा ईमेल पता"
+    submitButton: "प्रबंधन लिंक भेजो"
+    infoLink: "और जानो"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "अपना इनबॉक्स देखो"
+      message: "अगर इस ईमेल से कोई खाता जुड़ा है, तो हमने एक प्रबंधन लिंक भेज दिया है। कृपया अपना इनबॉक्स देखो और अपने बच्चे का खाता संभालने के लिए लिंक खोलो।"
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "बच्चों के खाते संभालो"
+    description: "तुम %email% से जुड़े खाते संभाल रहे हो।"
+    consentStatus: "सहमति की स्थिति"
+    accountCreated: "खाता बनाया गया"
+    email: "बच्चे का ईमेल"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "दी गई"
+      pending: "बाकी"
+      revoked: "वापस ली गई"
+    grantButton: "सहमति दो"
+    revokeButton: "सहमति वापस लो"
+    revokeConfirm: "क्या तुम सच में सहमति वापस लेना चाहते हो? खाते की सुविधाएँ सीमित हो जाएँगी।"
+    exportButton: "डेटा निर्यात करो"
+    deleteButton: "खाता हटाओ"
+    deleteConfirm: "क्या तुम सच में इस खाते को हमेशा के लिए हटाना चाहते हो? इसे पूर्ववत नहीं किया जा सकता।"
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "अपने बच्चे का Catrobat खाता संभालो"
+      title: "खाता प्रबंधन"
+      greeting: "नमस्ते,"
+      message: "तुमने अपने बच्चे का Catrobat खाता (%usernames%) संभालने के लिए लिंक माँगा था। खाता देखने और संभालने के लिए नीचे दिए बटन पर क्लिक करो।"
+      button: "खाता संभालो"
+      ignore: "अगर तुमने यह अनुरोध नहीं किया, तो तुम इस ईमेल को बेझिझक अनदेखा कर सकते हो।"
 passwordRecovery:
-  subject: आपका Catrobat पारण शब्द वसूली
+  subject: तुम्हारे Catrobat पासवर्ड की पुनर्प्राप्ति
   message: |
-    प्रिय %username%।
-    आपने अपना पासवर्ड %appplication_url% पर रीसेट करने का अनुरोध किया है क्योंकि आप अपना पासवर्ड भूल गए हैं।
-    यदि आपने यह अनुरोध नहीं किया है, तो कृपया इसे अनदेखा करें। यह 24 घंटे के समय में समाप्त हो जाएगा और बेकार हो जाएगा।
-    अपना पासवर्ड रीसेट करने और नया बनाने के लिए, कृपया निम्न पृष्ठ पर जाएं: %confirmationUrl%
-    %appplication_url% समुदाय तक पहुँचने के लिए आप किसी भी समय अपने उपयोगकर्ता नाम और अपने पासवर्ड का उपयोग कर सकते हैं।
-    ऐसा करने के लिए, बस निम्नलिखित पृष्ठ पर जाएँ: %loginPage%
-    अपना प्रोफ़ाइल विवरण संपादित करने के लिए, इस पृष्ठ पर जाएं:%profilePage%
-    सादर,
-    आपकी कैटोबैट टीम।
+    प्रिय %username%,
+    तुमने %appplication_url% पर अपना पासवर्ड रीसेट करने का अनुरोध किया है, क्योंकि तुम अपना पासवर्ड भूल गए हो।
+    अगर तुमने यह अनुरोध नहीं किया, तो कृपया इसे अनदेखा करो। यह 24 घंटे में समाप्त होकर बेकार हो जाएगा।
+    अपना पासवर्ड रीसेट करने और नया बनाने के लिए कृपया यह पेज खोलो: %confirmationUrl%
+    तुम कभी भी अपने उपयोगकर्ता नाम और पासवर्ड से %appplication_url% समुदाय में आ सकते हो।
+    इसके लिए बस यह पेज खोलो: %loginPage%
+    अपनी प्रोफ़ाइल का विवरण बदलने के लिए यह पेज खोलो: %profilePage%
+    शुभकामनाओं सहित,
+    तुम्हारी Catrobat टीम।
   messageHtml: |
     <p>
-    प्रिय %username%। <br>
+    प्रिय %username%,<br>
     <br>
-    आपने अपना पासवर्ड <a href=%appplication_url%> Pocket Code </a> पर रीसेट करने का अनुरोध किया है क्योंकि आप अपना पासवर्ड भूल गए हैं।
-    यदि आपने यह अनुरोध नहीं किया है, तो कृपया इसे अनदेखा करें। यह 24 घंटे के समय में समाप्त हो जाएगा और बेकार हो जाएगा। <br>
+    तुमने <a href="%appplication_url%">Pocket Code</a> पर अपना पासवर्ड रीसेट करने का अनुरोध किया है, क्योंकि तुम अपना पासवर्ड भूल गए हो।
+    अगर तुमने यह अनुरोध नहीं किया, तो कृपया इसे अनदेखा करो। यह 24 घंटे में समाप्त होकर बेकार हो जाएगा।<br>
     <br>
-    अपना पासवर्ड रीसेट करने और एक नया बनाने के लिए, कृपया <a href=%confirmationUrl%> यहाँ क्लिक करें। </a> <br>
+    अपना पासवर्ड रीसेट करने और नया बनाने के लिए कृपया <a href="%confirmationUrl%">यहाँ</a> क्लिक करो।<br>
     <br>
-    आप किसी भी समय <a href=%appplication_url%> संग्रहण कोड समुदाय </a> का उपयोग करने के लिए अपने उपयोगकर्ता नाम और अपने पासवर्ड का उपयोग कर सकते हैं। <br>
-    ऐसा करने के लिए, बस निम्नलिखित पृष्ठ पर जाएं: <a href=%loginPage%> लॉगिन पृष्ठ </a> <br>
-    अपना प्रोफ़ाइल विवरण संपादित करने के लिए, इस <a href=%profilePage%> पेज </a> पर जाएं। <br>
+    तुम कभी भी अपने उपयोगकर्ता नाम और पासवर्ड से <a href="%appplication_url%">Pocket Code</a> समुदाय में आ सकते हो।<br>
+    इसके लिए बस यह पेज खोलो: <a href="%loginPage%">लॉग इन पेज</a><br>
+    अपनी प्रोफ़ाइल का विवरण बदलने के लिए यह <a href="%profilePage%">पेज</a> खोलो।<br>
     <br>
-    सादर, <br>
-    आपकी कैटोबैट टीम।
+    शुभकामनाओं सहित,<br>
+    तुम्हारी Catrobat टीम।
     </p>
 profile:
   aboutMe: मेरे बारे मेँ
-  currentlyWorkingOn: Currently working on
-  edit: अपने प्रोफ़ाइल संपादित करें
-  saveChanges: परिवर्तन सहेजें
+  currentlyWorkingOn: "अभी इस पर काम कर रहा/रही हूँ"
+  edit: "अपने प्रोफ़ाइल संपादित करो"
+  saveChanges: "परिवर्तन सहेजो"
   newPass: नया पासवर्ड
   repeatPass: अपना पासवर्ड दोहराएं
   oldPass: पुराना पासवर्ड
@@ -444,8 +426,8 @@ profile:
   myPrograms: मेरे प्रोजेक्ट
   follows: इस प्रकार है
   follower: अनुगामी
-  unfollowUser: इस उपयोगकर्ता को अनफ़ॉलो करें!
-  followUser: इस उपयोगकर्ता का पालन करें!
+  unfollowUser: "इस उपयोगकर्ता को अनफ़ॉलो करो!"
+  followUser: "इस उपयोगकर्ता का पालन करो!"
   amountOfPrograms: परियोजनाओं की राशि
   form:
     passwordTooShort: नए पासवर्ड में कम से %length% अक्षर होने चाहिए ।
@@ -453,14 +435,14 @@ profile:
     passwordIsUsername: पासवर्ड उपयोगकर्ता नाम से अलग होना चाहिए।
     passwordWrong: गलत पारण शब्द
     emailNotValid: यह ए-मेल सही नही है
-    emailMissing: इस ई-मेल पते को अद्यतन करते समय त्रुटि । आपके पास ंयूनतम एक मांय ई-मेल पता होना चाहिए ।
+    emailMissing: "इस ई-मेल पते को अद्यतन करते समय त्रुटि । तुम्हारे पास ंयूनतम एक मांय ई-मेल पता होना चाहिए ।"
     emailExists: यह ईमेल पहले से मौजूद है
     usernameNotValid: यह उपयोगकर्ता नाम मान्य नहीं है।
-    usernameMissing: आपके पास एक उपयोगकर्ता नाम होना चाहिए।
+    usernameMissing: "तुम्हारे पास एक उपयोगकर्ता नाम होना चाहिए।"
     usernameExists: यह उपयोगकर्तानाम पहले से मौजूद है।
     usernameContainsEmail: उपयोगकर्ता नाम में ईमेल पता नहीं होना चाहिए।
     submitSuccess: सहेज दिया गया !
-  reallyDeleteProgram: क्या आप वास्तव में अपने प्रोजेक्ट को हटाना चाहते हैं
+  reallyDeleteProgram: "क्या तुम वास्तव में अपने प्रोजेक्ट को हटाना चाहते हो"
   programsOf: की परियोजनाएँ
   picture: प्रोफ़ाइल फोटो
   changePicture: चित्र बदले
@@ -470,93 +452,90 @@ myprofile:
   profileSettings: "\nपार्श्वचित्र समायोजन"
   securitySettings: "\nसुरक्षा सेटिंग्स"
   accountSettings: अकाउंट सेटिंग
-  accountVerification: Verify account
+  accountVerification: "खाता सत्यापित करो"
   account: "\nअकाउंट"
-  editProfile: अर्द्ध मुख संपादित करें
-  edit: बदलें
+  editProfile: "अर्द्ध मुख संपादित करो"
+  edit: "बदलो"
   done: हो गया
-  checkMail: एक ईमेल आपके ईमेल पते पर भेजा गया था। कृपया अपने इनबॉक्स की जाँच करें।
-  passwordUpdated: आपका पासवर्ड सफलतापूर्वक अपडेट किया गया था।
+  checkMail: "एक ईमेल तुम्हारे ईमेल पते पर भेजा गया था। कृपया अपने इनबॉक्स की जाँच करो।"
+  passwordUpdated: "तुम्हारा पासवर्ड सफलतापूर्वक अपडेट किया गया था।"
   avatar: अवतार
   email: ईमेल
-  deleteAccount: खाता नष्ट करें
-  deleteAccountWarning: |
-    चेतावनी:
-    आपने %num_projects% प्रोजेक्ट बनाया और आपके %num_followers% फ़ॉलोअर हैं। आपके सभी प्रोजेक्ट हटा दिए जाएंगे. अब आप लॉगिन नहीं कर पाएंगे और आपके प्रोजेक्ट सभी सूचियों से गायब हो जाएंगे। आपकी प्रोफ़ाइल को हटाना पूर्ववत नहीं किया जा सकता!
-    क्या आप वाकई हमें छोड़ना चाहते हैं?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: खाता सेटिंग संपादित करें
-  profileChangeSuccess: आपकी प्रोफ़ाइल सफलतापूर्वक बदल दी गई है।
-  unspecifiedError: आपकी प्रोफ़ाइल बदलते समय एक अज्ञात त्रुटि हुई। कृपया हमसे संपर्क करें।
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  deleteAccount: "खाता नष्ट करो"
+  deleteAccountWarning: "चेतावनी:\nतुमने %num_projects% प्रोजेक्ट बनाया और तुम्हारे %num_followers% फ़ॉलोअर हैं। तुम्हारे सभी प्रोजेक्ट हटा दिए जाएंगे. अब तुम लॉगिन नहीं कर पाओगे और तुम्हारे प्रोजेक्ट सभी सूचियों से गायब हो जाएंगे। तुम्हारी प्रोफ़ाइल को हटाना पूर्ववत नहीं किया जा सकता!\nक्या तुम वाकई हमें छोड़ना चाहते हो?\n"
+  exportData: "मेरा डेटा डाउनलोड करो"
+  exportDataDescription: "तुम्हें अपने निजी डेटा की कॉपी पाने का अधिकार है। इसमें तुम्हारी प्रोफ़ाइल जानकारी, प्रोजेक्ट, टिप्पणियाँ, प्रतिक्रियाएँ और फ़ॉलोअर शामिल हैं।"
+  exportDataLoading: "डाउनलोड हो रहा है..."
+  exportDataError: "तुम्हारा डेटा निर्यात करते समय कुछ गड़बड़ हो गई। कृपया बाद में फिर से कोशिश करो।"
+  exportDataRateLimited: "तुम दिन में सिर्फ़ एक बार अपना डेटा निर्यात कर सकते हो। कृपया कल फिर से कोशिश करो।"
+  editAccountSettings: "खाता सेटिंग संपादित करो"
+  profileChangeSuccess: "तुम्हारी प्रोफ़ाइल सफलतापूर्वक बदल दी गई है।"
+  unspecifiedError: "तुम्हारी प्रोफ़ाइल बदलते समय एक अज्ञात त्रुटि हुई। कृपया हमसे संपर्क करो।"
+  verifyAccountText: "हम तुम्हें तुम्हारा खाता सत्यापित करने के लिए एक लिंक के साथ ईमेल भेजेंगे। अगले एक घंटे के अंदर लिंक पर क्लिक करना न भूलो, तुम दिन में सिर्फ़ एक ईमेल माँग सकते हो।"
+  verifyAccountButton: "ईमेल भेजो"
+  verifyAccountMailSent: "ईमेल सफलतापूर्वक भेज दिया गया। कृपया अपना इनबॉक्स देखो"
+  verifyAccountMailFailed: "तुम दिन में सिर्फ़ एक ईमेल माँग सकते हो"
 licenseToPlay:
   link: 'चलाने के लिए लाइसेंस'
-  title: 'खेलने के लिए लाइसेंस - श्रेय दे और साझा करें'
-  text1: कल्पना करें कि प्रत्येक कैटरोबैट परियोजना एक केक है, एक बहुत ही विशेष केक है जो इसके नुस्खा (प्रोग्रामिंग ब्लॉक) के साथ आता है। कैटरोबैट समुदाय के सभी सदस्य अपने व्यंजनों के साथ अपने केक साझा करते हैं। इसका मतलब है कि आप केक का आनंद ले सकते हैं और उन्हें खुद बनाना सीख सकते हैं!
+  title: "खेलने के लिए लाइसेंस - श्रेय दो और साझा करो"
+  text1: "कल्पना करो कि प्रत्येक कैटरोबैट परियोजना एक केक है, एक बहुत ही विशेष केक है जो इसके नुस्खा (प्रोग्रामिंग ब्लॉक) के साथ आता है। कैटरोबैट समुदाय के सभी सदस्य अपने व्यंजनों के साथ अपने केक साझा करते हैं। इसका मतलब है कि तुम केक का आनंद ले सकते हो और उन्हें खुद बनाना सीख सकते हो!"
   text2: 'कोई गुप्त व्यंजन नहीं हैं: इन केक बनाने के निर्देश, किसी के लिए उपयोग करने, पुन: उपयोग, संशोधित करने और नए विचारों के लिए प्रेरणा के रूप में प्रदान करने के लिए खुले हैं... मेरा अर्थ है केक।'
-  text3: "आप केक खा सकते हैं और साथ ही साथ अन्य सामग्रियों के साथ खुद को बनाने के लिए अन्य लोगों के व्यंजनों की प्रतिलिपि बना सकते हैं। यह स्वतंत्रता दो सरल आवश्यकताओं के साथ आता है:"
+  text3: "तुम केक खा सकते हो और साथ ही साथ अन्य सामग्रियों के साथ खुद को बनाने के लिए अन्य लोगों के व्यंजनों की प्रतिलिपि बना सकते हो। यह स्वतंत्रता दो सरल आवश्यकताओं के साथ आता है:"
   text4: "कैट्रबैट समुदाय की स्थापना में, हमने इस दृष्टिकोण को अपनाने का निर्णय लिया क्योंकि हमारा मानना ​​है कि यह समुदाय के भीतर सीखने और रचनात्मकता का समर्थन करता है। व्यंजनों और सामग्री (स्क्रिप्ट और कलाकृति) साझा करके, लोग एक दूसरे के विचारों पर बना सकते हैं और हर कोई लाभ होगा।"
-  text5: कैटोबैट वेबसाइट डिजाइन करने में, हमने लोगों को साझा करने के लिए प्रोत्साहित करने और दूसरों को श्रेय देने के लिए सुविधाओं को शामिल किया। प्रत्येक प्रोजेक्ट पृष्ठ पर, आप हमेशा प्रोजेक्ट के लिए मूल स्क्रिप्ट डाउनलोड कर सकते हैं। यदि आप किसी प्रोजेक्ट को रीमिक्स करते हैं (स्क्रिप्ट या कलाकृति को संशोधित करना और परिणाम साझा करना), तो हम आपको प्रोजेक्ट नोट्स में उन लोगों और प्रोजेक्ट का उल्लेख करते हुए क्रेडिट देने के लिए प्रोत्साहित करते हैं, जिन्होंने आपको प्रेरित किया।
-  text6: '%link-termsOfUse% पर Catrobat ऑनलाइन समुदाय के उपयोग की शर्तों के बारे में अधिक जानें।'
+  text5: "कैटोबैट वेबसाइट डिजाइन करने में, हमने लोगों को साझा करने के लिए प्रोत्साहित करने और दूसरों को श्रेय देने के लिए सुविधाओं को शामिल किया। प्रत्येक प्रोजेक्ट पृष्ठ पर, तुम हमेशा प्रोजेक्ट के लिए मूल स्क्रिप्ट डाउनलोड कर सकते हो। यदि तुम किसी प्रोजेक्ट को रीमिक्स करते हो (स्क्रिप्ट या कलाकृति को संशोधित करना और परिणाम साझा करना), तो हम तुम्हें प्रोजेक्ट नोट्स में उन लोगों और प्रोजेक्ट का उल्लेख करते हुए क्रेडिट देने के लिए प्रोत्साहित करते हैं, जिन्होंने तुम्हें प्रेरित किया।"
+  text6: "%link-termsOfUse% पर Catrobat ऑनलाइन समुदाय के उपयोग की शर्तों के बारे में अधिक जानो।"
   list1:
-    item1: नुस्खा के साथ अपने केक साझा करें
-    item2: जो आप्को प्रेरित करते है उन्हे श्रेय दे
+    item1: "नुस्खा के साथ अपने केक साझा करो"
+    item2: "जो तुम्हें प्रेरित करते हैं उन्हे श्रेय दो"
   version: संस्करण 1.1, 2 अप्रैल 2013
 termsOfUse:
   title: उपयोग की शर्ते
-  headline: कैट्रोबैट सम्प्रदाय में आप्का बहौत बहौत स्वागत है
-  text1: 'कैटोबैट समुदाय के हिस्से के रूप में, आप लोगों के साथ प्रोजेक्ट और विचार साझा कर रहे हैं:'
-  text2: "हम आपकी मदद से इस समुदाय को सभी सदस्यों के लिए सहयोग देने वाली जगह बनाना चाहते है|"
-  text3: "कैटरोबैट परियोजना के माध्यम से हम सहयोग को बढ़ावा देना चाहते हैं और सभी की रचनात्मकता को मानवता के सभी के लाभ के लिए संयोजित करना चाहते हैं। आप अपनी परियोजनाओं को उपहार के रूप में समुदाय को वापस देकर कैटोबैट समुदाय के एक सक्रिय सदस्य बन सकते हैं, उसी तरह जैसे अन्य सक्रिय सदस्य अपनी परियोजनाओं को आपको दे रहे हैं:"
-  text4: 'हमारे तरफ़ से आप के लिए उपहार:'
+  headline: "कैट्रोबैट सम्प्रदाय में तुम्हारा बहौत बहौत स्वागत है"
+  text1: "कैटोबैट समुदाय के हिस्से के रूप में, तुम लोगों के साथ प्रोजेक्ट और विचार साझा कर रहे हो:"
+  text2: "हम तुम्हारी मदद से इस समुदाय को सभी सदस्यों के लिए सहयोग देने वाली जगह बनाना चाहते है|"
+  text3: "कैटरोबैट परियोजना के माध्यम से हम सहयोग को बढ़ावा देना चाहते हैं और सभी की रचनात्मकता को मानवता के सभी के लाभ के लिए संयोजित करना चाहते हैं। तुम अपनी परियोजनाओं को उपहार के रूप में समुदाय को वापस देकर कैटोबैट समुदाय के एक सक्रिय सदस्य बन सकते हो, उसी तरह जैसे अन्य सक्रिय सदस्य अपनी परियोजनाओं को तुम्हें दे रहे हैं:"
+  text4: "हमारे तरफ़ से तुम्हारे लिए उपहार:"
   text5: 'हमारी उपयोग और सेवा की शर्तें:'
   list1:
     item1: कई अलग देशों और संस्कृतियों से
     item2: सभी उम्र के (किशोर से लेके युवा बच्चों और वरिष्ट नागरिक)
     item3: अनुभव के सभी स्तरों के साथ
   list2:
-    item1: सम्मान से रहो। परियोजनाओं को साझा करते समय, कृपया याद रखें कि कई अलग-अलग उम्र और पृष्ठभूमि के लोग आपके योगदान देखेंगे।
-    item2: "श्रेय दो। बेझिझक अन्य लोगों की परियोजनाओं के संशोधित संस्करण बनाएं - बस उन्हें श्रेय देना सुनिश्चित करें। क्रेडिट देने का एक स्थान आपके प्रोजेक्ट के नोट्स और क्रेडिट अनुभाग में है। कृपया अन्य उपयोगकर्ताओं की परियोजनाओं को संशोधित करने के विवरण के लिए इस बिंदीदार सूची के नीचे पैराग्राफ देखें।"
-    item3: "ईमानदार रहें। आप जैसे है वैसे ही रहें और कोई दूसरा बन कर समुदाय को नुक्सान ना पहुंचाए।"
-    item4: "व्यक्तिगत जानकारी को निजी रखें। आप अपनी ईमेल आईडी, फोन नंबर, या अन्य व्यक्तिगत संपर्क जानकारी लोगों से ना बाँटे।"
-    item5: "साइट को अनुकूल रखने में मदद करें। यदि आपको लगता है कि दूसरों को एक परियोजना या टिप्पणी का मतलब मिलेगा, अपमानजनक, बहुत हिंसक, या अन्यथा अनुचित, तो बस 'रिपोर्ट को अनुपयुक्त' बटन पर क्लिक करें और एक संक्षिप्त विवरण छोड़ दें। Catrobat टीम आपकी रिपोर्ट की समीक्षा करेगी और किसी भी परियोजना, टिप्पणी या पोस्ट को हटा सकती है।"
+    item1: "सम्मान से रहो। परियोजनाओं को साझा करते समय, कृपया याद रखो कि कई अलग-अलग उम्र और पृष्ठभूमि के लोग तुम्हारे योगदान देखेंगे।"
+    item2: "श्रेय दो। बेझिझक अन्य लोगों की परियोजनाओं के संशोधित संस्करण बनाओ - बस उन्हें श्रेय देना सुनिश्चित करो। क्रेडिट देने का एक स्थान तुम्हारे प्रोजेक्ट के नोट्स और क्रेडिट अनुभाग में है। कृपया अन्य उपयोगकर्ताओं की परियोजनाओं को संशोधित करने के विवरण के लिए इस बिंदीदार सूची के नीचे पैराग्राफ देखो।"
+    item3: "ईमानदार रहो। तुम जैसे हो वैसे ही रहो और कोई दूसरा बन कर समुदाय को नुक्सान ना पहुँचाओ।"
+    item4: "व्यक्तिगत जानकारी को निजी रखो। तुम अपनी ईमेल आईडी, फोन नंबर, या अन्य व्यक्तिगत संपर्क जानकारी लोगों से ना बाँटो।"
+    item5: "साइट को अनुकूल रखने में मदद करो। यदि तुम्हें लगता है कि दूसरों को एक परियोजना या टिप्पणी का मतलब मिलेगा, अपमानजनक, बहुत हिंसक, या अन्यथा अनुचित, तो बस 'रिपोर्ट को अनुपयुक्त' बटन पर क्लिक करो और एक संक्षिप्त विवरण छोड़ दो। Catrobat टीम तुम्हारी रिपोर्ट की समीक्षा करेगी और किसी भी परियोजना, टिप्पणी या पोस्ट को हटा सकती है।"
   list3:
-    item1: "हमारी वेबसाइट पर एक परियोजना अपलोड करके, आप इस काम को अपलोड किए गए कैटरोबैट परियोजनाओं के कुछ निश्चित लाइसेंस के तहत स्वीकार करते हैं और सहमत होते हैं। उन नि: शुल्क लाइसेंसों के समान, जिनके तहत कैटोबैट सिस्टम स्वयं आपके लिए उपलब्ध है, अपलोड किए गए कैट्रोबैट प्रोजेक्ट्स के ये मुफ्त लाइसेंस सभी को पहले अपलोड किए गए काम से सीखने का अधिकार देते हैं और अपने स्वयं के नए आकर्षक गेम बनाने के लिए काम करने और अनुकूलित करने का अधिकार देते हैं, एनिमेशन, और अन्य परियोजनाएं। यह सभी को 'एक के कंधों पर खड़े होने' की अनुमति देता है, उनमें से एक आप हैं! इस प्रकार आपके काम से पूरी दुनिया को फायदा होगा और सभी के उपयोग के लिए सभी स्वतंत्र रहेंगे, दुनिया भर के स्वयंसेवकों द्वारा विकिपीडिया पर स्वतंत्र रूप से दिए गए पाठ और चित्रों के समान ही। इसे मानवता के लिए अपने वर्तमान के रूप में सोचें: आप सभी को देते हैं, और अन्य सभी जो हमारी वेबसाइट पर अपना काम अपलोड करते हैं, आपको देते हैं। इस प्रकार एक अपलोड की गई परियोजना महान मूल्य का एक उपहार है जो उसके मालिक आपको मुफ्त में दे रहे हैं, इस शर्त के साथ कि आप उसी शर्तों पर समुदाय में भाग लेते हैं।"
-    item2: आपको उपहार स्वीकार करने की आवश्यकता नहीं है; यदि आप करते हैं, तो कुछ नियम लागू होते हैं। इन नियमों का लाभ यह है कि आप काम से सीख सकते हैं और उस पर निर्माण कर सकते हैं ताकि आप खुद भी कूलर सामान बना सकें, जिसे आप अपनी वेबसाइट के रूप में फिर से अपनी वेबसाइट पर अपलोड कर सकते हैं। एक और लाभ यह है कि ये लाइसेंस सुनिश्चित करते हैं कि आप अपनी परियोजना के उपयोग के माध्यम से दूसरों को होने वाली किसी भी समस्या के लिए उत्तरदायी नहीं ठहराया जा सकता है।
-    item3: "एक महत्वपूर्ण अतिरिक्त शर्तों है कि आप स्पष्ट रूप से लेखकों को जिनके काम पर आपका अपना काम आधारित है उन्हें श्रेय दे। आपका काम स्पष्ट रूप से दुसरो के द्वारा प्रोत्साहित हो इसकी हम पूरी कोशिश करेंगे ,इतना ही नहीं, दुसरे आपका काम आपके एकमात्र नाम, जिस से आप कैटरोबैट समुदाय में जाने जाते है, के माध्यम से आपको श्रेय देंगे, और आपको अन्य सार्वनिक तरीको से धन्यवाद देंगे।"
-    item4: 'कृपया सटीक कानूनी नियमों और शर्तों के लिए %link-licenseUploaded% से परामर्श करें।'
+    item1: "हमारी वेबसाइट पर एक परियोजना अपलोड करके, तुम इस काम को अपलोड किए गए कैटरोबैट परियोजनाओं के कुछ निश्चित लाइसेंस के तहत स्वीकार करते हो और सहमत होते हो। उन नि: शुल्क लाइसेंसों के समान, जिनके तहत कैटोबैट सिस्टम स्वयं तुम्हारे लिए उपलब्ध है, अपलोड किए गए कैट्रोबैट प्रोजेक्ट्स के ये मुफ्त लाइसेंस सभी को पहले अपलोड किए गए काम से सीखने का अधिकार देते हैं और अपने स्वयं के नए आकर्षक गेम बनाने के लिए काम करने और अनुकूलित करने का अधिकार देते हैं, एनिमेशन, और अन्य परियोजनाएं। यह सभी को 'एक के कंधों पर खड़े होने' की अनुमति देता है, उनमें से एक तुम हो! इस प्रकार तुम्हारे काम से पूरी दुनिया को फायदा होगा और सभी के उपयोग के लिए सभी स्वतंत्र रहेंगे, दुनिया भर के स्वयंसेवकों द्वारा विकिपीडिया पर स्वतंत्र रूप से दिए गए पाठ और चित्रों के समान ही। इसे मानवता के लिए अपने वर्तमान के रूप में सोचो: तुम सभी को देते हो, और अन्य सभी जो हमारी वेबसाइट पर अपना काम अपलोड करते हैं, तुम्हें देते हैं। इस प्रकार एक अपलोड की गई परियोजना महान मूल्य का एक उपहार है जो उसके मालिक तुम्हें मुफ्त में दे रहे हैं, इस शर्त के साथ कि तुम उसी शर्तों पर समुदाय में भाग लेते हो।"
+    item2: "तुम्हें उपहार स्वीकार करने की आवश्यकता नहीं है; यदि तुम करते हो, तो कुछ नियम लागू होते हैं। इन नियमों का लाभ यह है कि तुम काम से सीख सकते हो और उस पर निर्माण कर सकते हो ताकि तुम खुद भी कूलर सामान बना सको, जिसे तुम अपनी वेबसाइट के रूप में फिर से अपनी वेबसाइट पर अपलोड कर सकते हो। एक और लाभ यह है कि ये लाइसेंस सुनिश्चित करते हैं कि तुम्हें अपनी परियोजना के उपयोग के माध्यम से दूसरों को होने वाली किसी भी समस्या के लिए उत्तरदायी नहीं ठहराया जा सकता है।"
+    item3: "एक महत्वपूर्ण अतिरिक्त शर्तों है कि तुम स्पष्ट रूप से लेखकों को जिनके काम पर तुम्हारा अपना काम आधारित है उन्हें श्रेय दो। तुम्हारा काम स्पष्ट रूप से दुसरो के द्वारा प्रोत्साहित हो इसकी हम पूरी कोशिश करेंगे ,इतना ही नहीं, दुसरे तुम्हारा काम तुम्हारे एकमात्र नाम, जिस से तुम कैटरोबैट समुदाय में जाने जाते हो, के माध्यम से तुम्हें श्रेय देंगे, और तुम्हें अन्य सार्वनिक तरीको से धन्यवाद देंगे।"
+    item4: "कृपया सटीक कानूनी नियमों और शर्तों के लिए %link-licenseUploaded% से परामर्श करो।"
   list4:
-    item1: "हम हमारे कैटरोबैट प्रणाली से संबंधित, सॉफ्टवेयर और इंटरनेट संसाधन, उदाहरण के लिए, कैटरोबैट दल द्वारा लिखित सॉफ्टवेयर, हमारे वेबसाइटें और इंटरनेट संसाधन, कैटरोबैट प्रणाली संबंधित कोड की पेशकश करते हैं और अतिरिक्त सामग्री जैसे कि, चित्रों, ध्वनियों और ग्रंथों को वर्त्तमान और भविष्य मे कैटरोबैट के मुफ्त लाइसेंस के अंतर्गत आपके लिए पेश किये जाते है।"
-    item2: 'ये लाइसेंस कैटरोबैट प्रणाली को नि: शुल्क बनाता है एवम् आपको इसका प्रयोग किसी भी रूप में करने की आजादी देता है, परन्तु कुछ प्रतिबंध के साथ | कैटरोबैट हमेशा नि: शुल्क  और सबके लिए उपयोगी रहेगा |'
-    item3: 'कृपया सटीक कानूनी नियमों और शर्तों के लिए %link-licenseToPlay% से परामर्श करें। Catrobat प्रणाली का स्रोत कोड और साथ ही कई अन्य दस्तावेज़ और संसाधन %link-developer% के माध्यम से उपलब्ध हैं।'
+    item1: "हम हमारे कैटरोबैट प्रणाली से संबंधित, सॉफ्टवेयर और इंटरनेट संसाधन, उदाहरण के लिए, कैटरोबैट दल द्वारा लिखित सॉफ्टवेयर, हमारे वेबसाइटें और इंटरनेट संसाधन, कैटरोबैट प्रणाली संबंधित कोड की पेशकश करते हैं और अतिरिक्त सामग्री जैसे कि, चित्रों, ध्वनियों और ग्रंथों को वर्त्तमान और भविष्य मे कैटरोबैट के मुफ्त लाइसेंस के अंतर्गत तुम्हारे लिए पेश किये जाते है।"
+    item2: "ये लाइसेंस कैटरोबैट प्रणाली को नि: शुल्क बनाता है एवम् तुम्हें इसका प्रयोग किसी भी रूप में करने की आजादी देता है, परन्तु कुछ प्रतिबंध के साथ | कैटरोबैट हमेशा नि: शुल्क  और सबके लिए उपयोगी रहेगा |"
+    item3: "कृपया सटीक कानूनी नियमों और शर्तों के लिए %link-licenseToPlay% से परामर्श करो। Catrobat प्रणाली का स्रोत कोड और साथ ही कई अन्य दस्तावेज़ और संसाधन %link-developer% के माध्यम से उपलब्ध हैं।"
   list5:
-    item1: 'यदि आप, या, यदि आप उंर के 13 साल से नीचे हैं, अपने माता पिता या कानूनी संरक्षक, एक में शामिल संगठन या dragnet प्रकार गोपनीयता के उल्लंघन के लिए जिंमेदार के साथ जुड़े रहे है या थोक या सामूहिक निगरानी, तो आप हमारे सॉफ्टवेयर अनुप्रयोगों का उपयोग करने की अनुमति नहीं है और हमारी सेवाओं का उपयोग करने के लिए । इस प्रतिबंध का सटीक विवरण और इसे करने के लिए कुछ अपवाद अनुभागों में देलिएन्टेड है 4. a और 4. b हमारे %link-termsOfUse% पर ।'
-    item2: यदि आप अगर तेरा साल से कम उम्र के है, तो आपको अपनी माता पिता या लीगल गार्डियन की क्या वो आपको अनुमति दे कि आप कैतरोबत सॉफ्टवेयर के ऍप्लिकेशन्स और सर्विसेज
+    item1: "यदि तुम, या, यदि तुम उंर के 13 साल से नीचे हो, अपने माता पिता या कानूनी संरक्षक, एक में शामिल संगठन या dragnet प्रकार गोपनीयता के उल्लंघन के लिए जिंमेदार के साथ जुड़े रहे हो या थोक या सामूहिक निगरानी, तो तुम्हें हमारे सॉफ्टवेयर अनुप्रयोगों का उपयोग करने की अनुमति नहीं है और हमारी सेवाओं का उपयोग करने के लिए । इस प्रतिबंध का सटीक विवरण और इसे करने के लिए कुछ अपवाद अनुभागों में देलिएन्टेड है 4. a और 4. b हमारे %link-termsOfUse% पर ।"
+    item2: "यदि तुम अगर तेरा साल से कम उम्र के हो, तो तुम्हें अपनी माता पिता या लीगल गार्डियन की क्या वो तुम्हें अनुमति दे कि तुम कैतरोबत सॉफ्टवेयर के ऍप्लिकेशन्स और सर्विसेज"
     item3: "हम अपने एकमात्र विवेकाधिकार में किसी भी समय Catrobat की वेबसाइटों पर अपलोड किए गए प्रोजेक्ट्स, उपयोगकर्ता खातों, और किसी भी डिजिटल सामग्री को अस्वीकार करने, हटाने या छिपाने के अधिकार सुरक्षित रखते हैं, उदाहरण के लिए यदि हमें पता चलता है कि किसी परियोजना में अनुचित सामग्री है या वह उपयोगकर्ता का उल्लंघन करता है अन्य व्यक्तियों के अधिकार।"
     item4: "सभी कैटरोबैट के सॉफ्टवेयर और इंटरनेट संसाधनों की पेशकश इस उम्मीद से कि है की वे उपयोगी साबित होंगे, लेकिन किसी भी वारंटी के बिना।"
-    item5: 'उपरोक्त बिंदुओं और कुछ अतिरिक्त कानूनी नियमों और शर्तों के सटीक योगों के लिए कृपया हमारे %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service से परामर्श करें।'
-  bottom1: समय-समय पर यहां वापस देखें, क्योंकि हम हमेशा हमारी उपयोग की शर्तों को बेहतर बनाने की कोशिश कर रहे हैं।
-  bottom2: 'कृपया इन उपयोग की शर्तों के बारे में कोई सुझाव मेल करें %email-webmaster%।'
+    item5: "उपरोक्त बिंदुओं और कुछ अतिरिक्त कानूनी नियमों और शर्तों के सटीक योगों के लिए कृपया हमारे %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service से परामर्श करो।"
+  bottom1: "समय-समय पर यहां वापस देखो, क्योंकि हम हमेशा हमारी उपयोग की शर्तों को बेहतर बनाने की कोशिश कर रहे हैं।"
+  bottom2: "कृपया इन उपयोग की शर्तों के बारे में कोई सुझाव मेल करो %email-webmaster%।"
   version: संस्करण 1.3, 4 मार्च 2014
 search:
   dotdotdot: खोज़े...
-  search: Search projects, users & studios
-  inMediaLib: मीडिया लाइब्रेरी में खोजें
-  inMediaCategory: Search in media category
+  search: "प्रोजेक्ट, उपयोगकर्ता और स्टूडियो खोजो"
+  inMediaLib: "मीडिया लाइब्रेरी में खोजो"
+  inMediaCategory: "मीडिया श्रेणी में खोजो"
   results: खोज परिणाम
-  resultcount: आपकी खोज ने %count% परिणाम लौटा दिए
-  fail: कृपया कम से कम एक खोज शब्द दर्ज करें
+  resultcount: "तुम्हारी खोज ने %count% परिणाम लौटा दिए"
+  fail: "कृपया कम से कम एक खोज शब्द दर्ज करो"
   noUsers: कोई उपयोग्कर्ता नहीं मिले।
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noProjects: "कोई प्रोजेक्ट नहीं मिला"
+  noStudios: "कोई स्टूडियो नहीं मिला"
+  sameSearchMessage: "लगता है तुम पहले से यहीं हो! कुछ और खोजकर देखो?"
 menu:
   profile: मेरी पार्श्वचित्र
   login: प्रवेश करे
@@ -566,24 +545,24 @@ menu:
   helpAndTutorials: सहायता और ट्यूटोरियल
   followersAndFollowing: अनुगामी
   mediaLibrary: मीडिया लाइब्रेरी
-  studio: Studios
+  studio: "स्टूडियो"
   language: भाषा
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: "कोई भाषा विकल्प उपलब्ध नहीं है।"
 login:
   login: प्रवेश करे
   button:
-    loginNow: Login now
+    loginNow: "अभी लॉग इन करो"
     createAccount: खाता बनाएँ
-    forgetPassword: Forget password?
+    forgetPassword: "पासवर्ड भूल गए?"
   oauth:
-    title: Or you can join with
-  passOrUser: आपका पासवर्ड या उपयोगकर्ता नाम गलत था।
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: आपका उपयोगकर्ता नाम या ईमेल पता नहीं मिला।
-  forgotPass: आप पारण शब्द या उपयोगकर्ता नाम भूल चुके हैं ?
-  recoverPassSend: एक ईमेल आपके ईमेल पते पर भेजा गया था। कृपया अपने इनबॉक्स की जाँच करें।
+    title: "या इनसे जुड़ो"
+  passOrUser: "तुम्हारा पासवर्ड या उपयोगकर्ता नाम गलत था।"
+  accountSuspended: "तुम्हारा खाता निलंबित कर दिया गया है। अगर तुम्हें लगता है कि यह गलती है, तो कृपया सहायता टीम से संपर्क करो।"
+  noUsername: "तुम्हारा उपयोगकर्ता नाम या ईमेल पता नहीं मिला।"
+  forgotPass: "तुम पारण शब्द या उपयोगकर्ता नाम भूल चुके हो ?"
+  recoverPassSend: "एक ईमेल तुम्हारे ईमेल पते पर भेजा गया था। कृपया अपने इनबॉक्स की जाँच करो।"
   alreadyReset: पिछले 24 घंटों के भीतर इस उपयोगकर्ता के लिए पासवर्ड पहले ही मांगे जा चुके हैं।
-  confirmationSend: आपके पंजीकरण की पुष्टि करने के लिए एक ईमेल आपके मेल पते पर भेजा गया था। कृपया अपना इनबॉक्स देखें और अपना खाता सक्रिय करें।
+  confirmationSend: "तुम्हारे पंजीकरण की पुष्टि करने के लिए एक ईमेल तुम्हारे मेल पते पर भेजा गया था। कृपया अपना इनबॉक्स देखो और अपना खाता सक्रिय करो।"
   userOrEmail: उपयोगकर्ता नाम या ईमेल
   changePass: पारण शब्द बदले
   createAccount: खाता बनाएं
@@ -593,106 +572,106 @@ login:
   username: 'उपयोगकर्ता नाम:'
   email: ईमेल
   passwordFirst: 'पारण शब्द:'
-  passwordSecond: पासवर्ड की पुष्टि करें
+  passwordSecond: "पासवर्ड की पुष्टि करो"
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: "साइन अप"
+  subText: "आगे बढ़कर तुम एक Catrobat समुदाय खाता बना रहे हो और हमारी %var1% और %var2% से सहमत हो।"
+  dateOfBirth: "जन्मतिथि"
+  dateOfBirthInfo: "हम EU के बाल संरक्षण नियमों (GDPR/COPPA) का पालन करने और छोटे उपयोगकर्ताओं को सुरक्षित अनुभव देने के लिए तुम्हारी जन्मतिथि पूछते हैं।"
+  parentEmail: "माता-पिता/अभिभावक का ईमेल"
+  parentEmailInfo: "14 साल से कम उम्र के उपयोगकर्ताओं के लिए ज़रूरी। हम इस पते पर सहमति का अनुरोध भेजेंगे।"
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: जारी रखें
+    title: "अपना पंजीकरण पूरा करो"
+    info: "प्लेटफ़ॉर्म का इस्तेमाल जारी रखने के लिए कृपया अपनी जन्मतिथि बताओ।"
+    submit: "जारी रखो"
   button:
-    cancel: रद्द करें
+    cancel: "रद्द करो"
     createAccount: खाता बनाएँ
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "अपना इनबॉक्स देखो!"
+    message: "हमने तुम्हें सत्यापन ईमेल भेजा है। अपना खाता सक्रिय करने के लिए ईमेल में दिए लिंक पर क्लिक करो।"
+    helpTitle: "ईमेल नहीं मिला?"
+    hint: "अपना स्पैम फ़ोल्डर देखो। लिंक 24 घंटे तक मान्य है।"
+    resendButton: "सत्यापन ईमेल फिर से भेजो"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "माता-पिता की सहमति का इंतज़ार है"
+    message: "तुम्हारा ईमेल सत्यापित हो गया! प्लेटफ़ॉर्म का पूरा इस्तेमाल करने से पहले माता-पिता या अभिभावक को सहमति देनी होगी।"
+    sentTo: "सहमति का अनुरोध %email% पर भेजा गया"
+    helpTitle: "ईमेल नहीं मिला? मदद चाहिए?"
+    hint: "अपने माता-पिता से उनका स्पैम फ़ोल्डर देखने को कहो। लिंक 24 घंटे तक मान्य है।"
+    resendButton: "सहमति ईमेल फिर से भेजो"
+    wrongEmail: "माता-पिता का गलत ईमेल डाल दिया?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "माता-पिता की सहमति वापस ले ली गई"
+    message: "तुम्हारे माता-पिता या अभिभावक ने तुम्हारे खाते के लिए सहमति वापस ले ली है। जब तक फिर से सहमति नहीं दी जाती, तुम्हारे खाते की सुविधाएँ सीमित रहेंगी।"
+    newEmailPlaceholder: "माता-पिता का नया ईमेल"
+    changeButton: "अपडेट करो और फिर से भेजो"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: "खाता पुनर्प्राप्ति"
+  description: "अगर तुम्हें अपने खाते का ईमेल या उपयोगकर्ता नाम याद है, तो हम तुम्हें पासवर्ड रीसेट करने का लिंक भेज सकते हैं।"
   button:
-    cancel: रद्द करें
-    submit: Recover password
+    cancel: "रद्द करो"
+    submit: "पासवर्ड वापस पाओ"
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "अपना पासवर्ड रीसेट करो"
+    description: "अगर तुम्हें अपने खाते का ईमेल याद है, तो हम तुम्हें पासवर्ड रीसेट करने का लिंक भेज सकते हैं।"
     button:
-      submit: "Send reset email"
-      cancel: "रद्द करें"
+      submit: "रीसेट ईमेल भेजो"
+      cancel: "रद्द करो"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "अपने ईमेल देखो"
+    description: "अगर तुम्हारे ईमेल से मेल खाता कोई खाता है, तो अभी एक ईमेल भेजा गया है जिसमें पासवर्ड रीसेट करने का लिंक है। यह लिंक %time% में समाप्त हो जाएगा।"
+    descriptionTwo: "तुम हर %throttleLimit% घंटे में नया पासवर्ड रीसेट माँग सकते हो।"
+    descriptionThree: "अगर तुम्हें ईमेल नहीं मिला, तो कृपया अपना स्पैम फ़ोल्डर देखो या हमारी सहायता टीम को %email-webmaster% पर ईमेल लिखो।"
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "अपना पासवर्ड रीसेट करने के लिए कृपया यह लिंक खोलो"
+    expire: "यह लिंक %time% में समाप्त हो जाएगा।"
+    cheers: "शुभकामनाएँ!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "अपना पासवर्ड रीसेट करो"
+    content: "तुमने हाल ही में अपने Catrobat खाते का पासवर्ड रीसेट करने का अनुरोध किया। नया पासवर्ड चुनने के लिए नीचे दिए बटन पर क्लिक करो। अगर तुमने यह अनुरोध नहीं किया, तो तुम इस ईमेल को बेझिझक अनदेखा कर सकते हो।"
+    visitLink: "पासवर्ड रीसेट करो"
+    expire: "यह लिंक %time% तक मान्य है और सिर्फ़ एक बार इस्तेमाल किया जा सकता है।"
   reset:
-    title: "Reset your password"
+    title: "अपना पासवर्ड रीसेट करो"
     button:
       submit: "पासवर्ड रीसेट"
 apk:
-  download: ऐप के रूप में डाउनलोड करें
-  prepare: 'एप्लिकेशन तैयार करें'
+  download: "ऐप के रूप में डाउनलोड करो"
+  prepare: "एप्लिकेशन तैयार करो"
   preparing: 'ऐप तैयार कर रहे हैं'
   text: 'प्रक्रिया में कुछ समय लग सकता है'
 format:
   million_abbreviation: म
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: "कुछ काम नहीं किया। कृपया फिर से कोशिश करो, या अगर ऐसा बार-बार हो तो हमें बताओ!"
   username:
     blank: यूजरनेम रिक्त नहीं होना चाहिए.
-    invalid: आपका उपयोगकर्ता नाम अमान्य है
+    invalid: "तुम्हारा उपयोगकर्ता नाम अमान्य है"
     exists: यह उपयोगकर्तानाम पहले से मौजूद है।
     not_exists: यह उपयोगकर्ता नाम मौजूद नहीं है।
     not_email: उपयोगकर्ता नाम एक ईमेल पता नहीं होना चाहिए।
     size: उपयोगकर्ता नाम में कम से कम 3 वर्ण और 180 से अधिक नहीं होना चाहिए
   password:
     blank: पासवर्ड गायब है।
-    short: 'आपके पासवर्ड में कम से कम {{ limit }} अक्षर होने चाहिए।'
+    short: "तुम्हारे पासवर्ड में कम से कम {{ limit }} अक्षर होने चाहिए।"
   country:
     blank: देश गायब है।
     invalid: अमान्य देश
   email:
     blank: यूजरनेम रिक्त नहीं होना चाहिए.
-    invalid: आपका ईमेल अमान्य लगता है
+    invalid: "तुम्हारा ईमेल अमान्य लगता है"
     exists: यह ईमेल पहले से मौजूद है
   id:
     blank: ओपन प्रमाणीकरण आईडी रिक्त नहीं होनी चाहिए
   login: पासवर्ड या उपयोगकर्ता नाम गलत था।
   post-data: पोस्ट-डेटा सही या गायब नहीं है!
   checksum:
-    missing: क्लाइंट ने फ़ाइल चेकसम नहीं भेजा! क्या आप पॉकेट कोड के पुराने संस्करण का उपयोग कर रहे हैं?
+    missing: "क्लाइंट ने फ़ाइल चेकसम नहीं भेजा! क्या तुम पॉकेट कोड के पुराने संस्करण का उपयोग कर रहे हो?"
     invalid: अमान्य चेकसम
   xml:
     invalid: अमान्य कोड xml
@@ -703,25 +682,23 @@ errors:
   image.missing: प्रोजेक्ट XML में एक फाइल का उल्लेख है जो प्रोजेक्ट-फोल्डर में मौजूद नहीं है
   unknown: अज्ञात गल्ती
   token: 'उपकरण का प्रमाणीकरण विफल हुआ: अमान्य स्थिति-टोकन!'
-  uploadTokenAuthFailed: 'टोकन को अपलोड करें विफल।'
+  uploadTokenAuthFailed: "अपलोड टोकन का प्रमाणीकरण विफल।"
   project:
-    invalid: Invalid project.
+    invalid: "अमान्य प्रोजेक्ट।"
   languageversion:
-    tooold: 'क्षमा करें, आपकी परियोजना में कैटरोबैट भाषा का एक पुराना संस्करण है! क्या आप पॉकेट कोड के नवीनतम संस्करण का उपयोग कर रहे हैं?'
+    tooold: "माफ़ करना, तुम्हारी परियोजना में कैटरोबैट भाषा का एक पुराना संस्करण है! क्या तुम पॉकेट कोड के नवीनतम संस्करण का उपयोग कर रहे हो?"
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "माफ़ करना, तुम Pocket Code का पुराना संस्करण इस्तेमाल कर रहे हो। कृपया नए संस्करण में अपडेट करो।"
   authentication:
-    title: Login did not work
-    webview: |
-      आपके उपयोगकर्ता क्रेडेंशियल्स गलत हैं।
-      कृपया एप्लिकेशन में फिर से लॉग इन करने का प्रयास करें।
+    title: "लॉग इन नहीं हो पाया"
+    webview: "तुम्हारे उपयोगकर्ता क्रेडेंशियल्स गलत हैं।\nकृपया एप्लिकेशन में फिर से लॉग इन करने का प्रयास करो।\n"
 success:
   text: सफलता
   registration: पंजीकरण सफल हो गया|
   token: ठीक है
-  upload: आपका प्रोजेक्ट सफलतापूर्वक अपलोड किया गया था!
-  imgUpload: आपकी छवि सफलतापूर्वक अपलोड की गई थी!
-  report: आपकी रिपोर्ट सफलतापूर्वक भेजी गई थी!
+  upload: "तुम्हारा प्रोजेक्ट सफलतापूर्वक अपलोड किया गया था!"
+  imgUpload: "तुम्हारी छवि सफलतापूर्वक अपलोड की गई थी!"
+  report: "तुम्हारी रिपोर्ट सफलतापूर्वक भेजी गई थी!"
 time:
   minutes.ago: '{0} <1 मिनट पहले | {1}1 मिनट पहले |]1, Inf] %count% मिनट पहले'
   hours.ago: '{1}1 घंटा पहले |]1, Inf] %count% घंटे पहले'
@@ -729,10 +706,10 @@ time:
   months.ago: '{1} 1 महीना पहले |] 1, Inf] %count% महीने पहले'
   years.ago: '{1}1 साल पहले |] 1, Inf] एक साल से अधिक समय पहले'
 failure:
-  upload: आपके ऐप के अपलोड के दौरान एक त्रुटि हुई थी।
+  upload: "तुम्हारे ऐप के अपलोड के दौरान एक त्रुटि हुई थी।"
 user:
   verification:
-    email: 'Verify your email'
+    email: "अपना ईमेल सत्यापित करो"
 api:
   registerUser:
     emailMissing: 'ईमेल गायब है'
@@ -751,46 +728,46 @@ api:
     passwordTooLong: 'पासवर्ड बहुत लंबा है'
     passwordInvalidChars: 'पासवर्ड में अमान्य वर्ण हैं'
     usernameContainsEmail: "उपयोगकर्ता नाम में ईमेल पता नहीं होना चाहिए"
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: "उपयोगकर्ता नाम में लिंक नहीं होना चाहिए"
     countryCodeInvalid: "देश कोड अमान्य है"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    pictureInvalid: "प्रोफ़ाइल चित्र अमान्य है या समर्थित नहीं है"
+    dateOfBirthMissing: "जन्मतिथि ज़रूरी है"
+    dateOfBirthInvalid: "जन्मतिथि अमान्य है"
+    tooYoung: "खाता बनाने के लिए तुम्हारी उम्र कम से कम 3 साल होनी चाहिए"
+    parentEmailMissing: "14 साल से कम उम्र के उपयोगकर्ताओं के लिए माता-पिता का ईमेल ज़रूरी है"
+    parentEmailInvalid: "माता-पिता का ईमेल अमान्य है"
+    parentEmailSameAsUser: "माता-पिता का ईमेल तुम्हारे अपने ईमेल पते से अलग होना चाहिए"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "मौजूदा पासवर्ड नहीं दिया गया"
+    currentPasswordWrong: "मौजूदा पासवर्ड गलत है"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: "नाम खाली नहीं हो सकता"
+    nameTooLong: "नाम बहुत लंबा है"
+    descriptionTooLong: "विवरण बहुत लंबा है"
+    creditsTooLong: "नोट्स और श्रेय बहुत लंबे हैं"
+    screenshotInvalid: "प्रोजेक्ट का स्क्रीनशॉट अमान्य है या समर्थित नहीं है"
   projectsPost:
-    invalid_checksum: 'अमान्य चेकसम। फिर से अपलोड करने का प्रयास करें!'
-    upload_error: 'अपलोड करते समय त्रुटि। फिर से अपलोड करने का प्रयास करें!'
-    creating_error: 'प्रोजेक्ट एंटिटी बनाते समय त्रुटि। फिर से अपलोड करने का प्रयास करें!'
+    invalid_checksum: "अमान्य चेकसम। फिर से अपलोड करने का प्रयास करो!"
+    upload_error: "अपलोड करते समय त्रुटि। फिर से अपलोड करने का प्रयास करो!"
+    creating_error: "प्रोजेक्ट एंटिटी बनाते समय त्रुटि। फिर से अपलोड करने का प्रयास करो!"
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "प्रोजेक्ट का विवरण सहेजने में विफल।"
+    screenshotError: "स्क्रीनशॉट को पढ़ने, बदलने या सहेजने में विफल। कृपया अपना इनपुट जाँचो।"
+    notFound: "बदला जाने वाला प्रोजेक्ट नहीं मिला।"
+    forbidden: "प्रोजेक्ट बदलने की अनुमति नहीं है। क्या तुम अभी भी लॉग इन हो?"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: "नाम नहीं दिया गया"
+    nameEmpty: "नाम खाली नहीं हो सकता"
+    nameTooShort: "नाम बहुत छोटा है"
+    nameTooLong: "नाम बहुत लंबा है"
+    nameAlreadyInUse: "यह नाम पहले से इस्तेमाल में है"
+    descriptionMissing: "विवरण नहीं दिया गया"
+    descriptionEmpty: "विवरण खाली है"
+    descriptionTooShort: "विवरण बहुत छोटा है"
+    descriptionTooLong: "विवरण बहुत लंबा है"
+    imageFileInvalid: "चित्र फ़ाइल अमान्य है"
+    imageFileInvalidType: "चित्र फ़ाइल का प्रकार अमान्य है"
+    imageFileTooLarge: "चित्र फ़ाइल बहुत बड़ी है"
 #languages and countries
 language:
   arabic: अरबी
@@ -838,7 +815,7 @@ language:
   ukrainian: यूक्रेनियाई
   vietnamese: वियतनामी
 ci:
-  generate: एपीके जनरेट करें
+  generate: "एपीके जनरेट करो"
   pending: एपीके जनरेट कर रहा है
   download: Apk डाउनलोड करे
 admin:
@@ -852,13 +829,13 @@ recommender:
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: इस परियोजना को डाउनलोड करने वाले उपयोगकर्ताओं ने भी डाउनलोड किया
   moreFromThisUser: '%username% से अधिक'
 pmd:
-  submitBtn: अपना प्रोजेक्ट सबमिट करें
+  submitBtn: "अपना प्रोजेक्ट सबमिट करो"
   submitBox:
     header: प्रस्तुत करने
-    text: आप अपना प्रोजेक्ट सबमिट करने वाले हैं। कृपया प्रोजेक्ट कोड दर्ज करें और भेजें पर क्लिक करें।
-    btnText: सबमिट करें
+    text: "तुम अपना प्रोजेक्ट सबमिट करने वाले हो। कृपया प्रोजेक्ट कोड दर्ज करो और भेजो पर क्लिक करो।"
+    btnText: "सबमिट करो"
   successful:
-    text: आपका प्रोजेक्ट अपलोड सफल रहा
+    text: "तुम्हारा प्रोजेक्ट अपलोड सफल रहा"
   failed:
     text: प्रोजेक्ट अपलोड विफल रहा।
 codeview:
@@ -881,7 +858,7 @@ codeview:
   globalVariables: 'सार्वत्रिक चर'
   localVariables: 'स्थानीय चर'
   eventBricks: 'घटना की ईंटें'
-  controlBricks: 'ईंटों पर नियंत्रण करें'
+  controlBricks: "नियंत्रण ईंटें"
   motionBricks: 'मोशन ईंटें'
   soundBricks: 'ध्वनि ईंटों'
   looksBricks: 'ईंटें लगती हैं'
@@ -889,11 +866,11 @@ codeview:
   dataBricks: 'डाटब्रिक्स'
   specialBricks: 'विशेष ईंटें'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: "कोड दृश्य"
+  loading: "कोड दृश्य लोड हो रहा है..."
+  error: "कोड दृश्य लोड नहीं हो सका।"
+  retry: "फिर से कोशिश करो"
+  empty: "इस प्रोजेक्ट में कोई कोड नहीं है।"
   scripts: 'लिपिया:'
   looks: 'नज़ारे:'
   sounds: 'ध्वनियाँ'
@@ -911,77 +888,77 @@ codeStatistics:
   dataBricks: 'डेटा'
   deviceBricks: 'युक्ति'
   specialBricks: 'विशेष'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: "तुम्हारा स्कोर:"
+  points: "अंक"
+  abstraction: "अमूर्तन और समस्या को हिस्सों में बाँटना"
+  parallelism: "समानांतरता"
+  logicalThinking: "तार्किक सोच"
+  synchronization: "तालमेल (सिंक्रोनाइज़ेशन)"
+  flowControl: "प्रवाह नियंत्रण"
+  userInteractivity: "उपयोगकर्ता संवादात्मकता"
+  dataRepresentation: "डेटा प्रस्तुति"
+  level: "स्तर"
+  loading: "लोड हो रहा है..."
+  bonus: "बोनस"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "%user_count% से ज़्यादा रचनात्मक लोगों से जुड़ो!"
+  text: "%project_count% शानदार प्रोजेक्ट पहले ही शेयर हो चुके हैं, अगला तुम्हारा हो सकता है। हमारा ऐप डाउनलोड करो और आज ही बनाना शुरू करो"
 privacy-policy:
   header: गोपनीयता नीति
   version: संस्करण 2.2, 17 अक्टूबर 2019
-  text1: आपको हमारी सेवाओं और संबंधित खाते के सभी लाभ प्रदान करने के लिए, आपके द्वारा कुछ डेटा एकत्र करना आवश्यक है।
-  text2: अपनी सेवाओं (ऐप्स और वेबसाइटों) को बनाए रखने और सुधारने के लिए और आईसीटी और एसटीईएम / स्टैम शिक्षा पर वैज्ञानिक शोध करने के लिए, हम Google Analytics (क्रैश) और फायरबेस का उपयोग करते हैं, सभी Google LLC (यूएसए) द्वारा, साथ ही डायनाट्रेस LLC द्वारा डायनाट्रेस यूएसए) हमारी सेवाओं के उपयोग के बारे में मेटाडेटा प्राप्त करने के लिए, उदाहरण के लिए, क्रैश जानकारी, टाइमस्टैम्प, विज़िट किए गए पृष्ठ / स्क्रीन, हमारे एप्लिकेशन और सेवाओं का उपयोग, ऑपरेटिंग सिस्टम का उपयोग, और नेटवर्क प्रदाता के बारे में जानकारी। यह विश्लेषण और एकत्र किया गया डेटा आपके प्रोफ़ाइल से लिंक नहीं है और इसमें कोई भी व्यक्तिगत जानकारी नहीं है (आईपी पते के अंतिम बिट अनाम हो जाते हैं)। हालांकि, एकत्रित डेटा सेवा-प्रदाताओं (Google LLC, USA और डायनाट्रेस LLC, USA) को हस्तांतरित हो जाएगा। डेटा प्रोसेसिंग Google LLC और डायनाट्रेस LLC के साथ समझौतों पर आधारित है। सेवा प्रदाताओं के लिए यह संबंध यूरोपीय संघ के सामान्य डेटा संरक्षण विनियमन (EU GDPR) और EU-USA "गोपनीयता शील्ड" समझौते के अनुरूप है।
-  text3: हमारे सिस्टम में एक खाता बनाने और उपयोग करने के लिए, और आपको प्रति ई-मेल के बारे में आवश्यक परिवर्तनों के बारे में सूचित करने के लिए, उदाहरण के लिए, हमारी उपयोग की शर्तों और सेवा, हमारे समुदाय के नियमों या हमारी नीतियों के अपडेट या उल्लंघन, हम आपके स्टोर करेंगे उपयोगकर्ता नाम और, यदि आपके द्वारा प्रदान किया गया है, तो आपका ई-मेल पता। यदि आपने गूगल प्लस या फेसबुक के माध्यम से अपना खाता कनेक्ट किया है, तो हम इन सेवाओं पर आपके खाते से जुड़े एक पहचान कुंजी को अतिरिक्त रूप से स्टोर करते हैं। हम इस डेटा का उपयोग किसी अन्य (उदाहरण के लिए, मार्केटिंग) उद्देश्यों के लिए नहीं करेंगे, जब तक कि आपने हमें ऐसा करने की अनुमति नहीं दी।
-  text4: एक स्वैच्छिक आधार पर, आप हमें साझा साइट पर अपने खाता पृष्ठ के माध्यम से अपने निवास का देश दे सकते हैं । यह आपके सार्वजनिक प्रोफ़ाइल पर प्रदर्शित हो जाएगा और केवल हमारे द्वारा सांख्यिकीय और अनुसंधान प्रयोजनों के लिए इस्तेमाल किया जाएगा । यह आपकी प्रोफ़ाइल सेटिंग में किसी भी समय निकाला जा सकता है ।
-  text5: आप https://share.catrob.at/पर अपने प्रोफ़ाइल पृष्ठ के माध्यम से अपने खाते को हटा कर किसी भी समय अपने खाते से संबंधित व्यक्तिगत डेटा का उपयोग वापस ले सकते हैं । अपने खाते को हटाने के बाद आप अभी भी प्रदान की गई सेवाओं का उपयोग करने के लिए सक्षम हो जाएगा, लेकिन सहयोग करने के लिए नहीं, जैसे, अपलोड कार्यक्रमों के माध्यम से, टिप्पणी, या पसंद. साथ ही, आपके खाते से लिंक की गई सभी सामग्री, जैसे, अपलोड किए गए प्रोग्राम, टिप्पणियाँ आदि, को हटा दिया जाएगा.
+  text1: "तुम्हें हमारी सेवाओं और संबंधित खाते के सभी लाभ प्रदान करने के लिए, तुम्हारे द्वारा कुछ डेटा एकत्र करना आवश्यक है।"
+  text2: "अपनी सेवाओं (ऐप्स और वेबसाइटों) को बनाए रखने और सुधारने के लिए और आईसीटी और एसटीईएम / स्टैम शिक्षा पर वैज्ञानिक शोध करने के लिए, हम Google Analytics (क्रैश) और फायरबेस का उपयोग करते हैं, सभी Google LLC (यूएसए) द्वारा, साथ ही डायनाट्रेस LLC द्वारा डायनाट्रेस यूएसए) हमारी सेवाओं के उपयोग के बारे में मेटाडेटा प्राप्त करने के लिए, उदाहरण के लिए, क्रैश जानकारी, टाइमस्टैम्प, विज़िट किए गए पृष्ठ / स्क्रीन, हमारे एप्लिकेशन और सेवाओं का उपयोग, ऑपरेटिंग सिस्टम का उपयोग, और नेटवर्क प्रदाता के बारे में जानकारी। यह विश्लेषण और एकत्र किया गया डेटा तुम्हारे प्रोफ़ाइल से लिंक नहीं है और इसमें कोई भी व्यक्तिगत जानकारी नहीं है (आईपी पते के अंतिम बिट अनाम हो जाते हैं)। हालांकि, एकत्रित डेटा सेवा-प्रदाताओं (Google LLC, USA और डायनाट्रेस LLC, USA) को हस्तांतरित हो जाएगा। डेटा प्रोसेसिंग Google LLC और डायनाट्रेस LLC के साथ समझौतों पर आधारित है। सेवा प्रदाताओं के लिए यह संबंध यूरोपीय संघ के सामान्य डेटा संरक्षण विनियमन (EU GDPR) और EU-USA \"गोपनीयता शील्ड\" समझौते के अनुरूप है।"
+  text3: "हमारे सिस्टम में एक खाता बनाने और उपयोग करने के लिए, और तुम्हें प्रति ई-मेल के बारे में आवश्यक परिवर्तनों के बारे में सूचित करने के लिए, उदाहरण के लिए, हमारी उपयोग की शर्तों और सेवा, हमारे समुदाय के नियमों या हमारी नीतियों के अपडेट या उल्लंघन, हम तुम्हारे स्टोर करेंगे उपयोगकर्ता नाम और, यदि तुम्हारे द्वारा प्रदान किया गया है, तो तुम्हारा ई-मेल पता। यदि तुमने गूगल प्लस या फेसबुक के माध्यम से अपना खाता कनेक्ट किया है, तो हम इन सेवाओं पर तुम्हारे खाते से जुड़े एक पहचान कुंजी को अतिरिक्त रूप से स्टोर करते हैं। हम इस डेटा का उपयोग किसी अन्य (उदाहरण के लिए, मार्केटिंग) उद्देश्यों के लिए नहीं करेंगे, जब तक कि तुमने हमें ऐसा करने की अनुमति नहीं दी।"
+  text4: "एक स्वैच्छिक आधार पर, तुम हमें साझा साइट पर अपने खाता पृष्ठ के माध्यम से अपने निवास का देश दे सकते हो । यह तुम्हारे सार्वजनिक प्रोफ़ाइल पर प्रदर्शित हो जाएगा और केवल हमारे द्वारा सांख्यिकीय और अनुसंधान प्रयोजनों के लिए इस्तेमाल किया जाएगा । यह तुम्हारी प्रोफ़ाइल सेटिंग में किसी भी समय निकाला जा सकता है ।"
+  text5: "तुम https://share.catrob.at/पर अपने प्रोफ़ाइल पृष्ठ के माध्यम से अपने खाते को हटा कर किसी भी समय अपने खाते से संबंधित व्यक्तिगत डेटा का उपयोग वापस ले सकते हो । अपने खाते को हटाने के बाद तुम अभी भी प्रदान की गई सेवाओं का उपयोग कर सकोगे, लेकिन सहयोग करने के लिए नहीं, जैसे, अपलोड कार्यक्रमों के माध्यम से, टिप्पणी, या पसंद. साथ ही, तुम्हारे खाते से लिंक की गई सभी सामग्री, जैसे, अपलोड किए गए प्रोग्राम, टिप्पणियाँ आदि, को हटा दिया जाएगा."
   text6: हमारी सेवाओं के दुरुपयोग से बचने के लिए, उदाहरण के लिए, उपयोगकर्ता के माध्यम से अपलोड या अवैध प्रयोजनों के लिए टिप्पणी योगदान, सभी उपयोगकर्ता सार्वजनिक डेटा उत्पंन (अपलोड, टिप्पणियां) एक डेटाबेस में आंतरिक रूप से संग्रहीत किया जाएगा, एक साथ एक टाइमस्टैंप और इस्तेमाल इंटरनेट पते के साथ । इस डेटा का उपयोग किसी भी संस्थान द्वारा या अग्रेषित नहीं किया जाएगा, जब तक कि पर्याप्त गैरकानूनी कार्रवाइयां यथोचित रूप से संदिग्ध न हों और आधिकारिक रूप से कानूनी संस्थाएं इसे लागू कानून के आधार पर अनुरोध करती हैं । प्रत्येक मामले को अच्छी तरह से हमारे द्वारा पहली बार एक व्यक्तिगत आधार पर जांच की जाएगी ।
-  text7: आप स्वेच्छा से Catrobat ंयूज़लेटर के लिए सदस्यता ले सकते हैं, https://catrob.at/newsletter पर MailChimp सेवा के माध्यम से हमारे द्वारा प्रदान की (रॉकेट विज्ञान समूह LLC डी/ इसके बाद आपको Catrobat प्रोजेक्ट और उसकी सेवाओं पर आपके द्वारा प्रदत्त ई-मेल पता पर अद्यतन प्राप्त होंगे । आप हर ंयूजलेटर के पाद लेख में "सदस्यता समाप्त" लिंक का उपयोग करके किसी भी समय ंयूजलेटर वापस ले सकते हैं । इस ंयूजलेटर MailChimp द्वारा प्रदान की है जिनके साथ हम एक डेटा प्रसंस्करण समझौते है और जो यूरोपीय संघ के जनरल डाटा Prodection विनियमन और यूरोपीय संघ के लिए प्रतिबद्ध संयुक्त राज्य अमेरिका "गोपनीयता शील्ड" । MailChimp पर अधिक जानकारी के लिए कृपया यह भी MailChimp की गोपनीयता नीति और उपयोग की शर्तों को देखो ।
+  text7: "तुम स्वेच्छा से Catrobat ंयूज़लेटर के लिए सदस्यता ले सकते हो, https://catrob.at/newsletter पर MailChimp सेवा के माध्यम से हमारे द्वारा प्रदान की (रॉकेट विज्ञान समूह LLC डी/ इसके बाद तुम्हें Catrobat प्रोजेक्ट और उसकी सेवाओं पर तुम्हारे द्वारा प्रदत्त ई-मेल पता पर अद्यतन प्राप्त होंगे । तुम हर ंयूजलेटर के पाद लेख में \"सदस्यता समाप्त\" लिंक का उपयोग करके किसी भी समय ंयूजलेटर वापस ले सकते हो । इस ंयूजलेटर MailChimp द्वारा प्रदान की है जिनके साथ हम एक डेटा प्रसंस्करण समझौते है और जो यूरोपीय संघ के जनरल डाटा Prodection विनियमन और यूरोपीय संघ के लिए प्रतिबद्ध संयुक्त राज्य अमेरिका \"गोपनीयता शील्ड\" । MailChimp पर अधिक जानकारी के लिए कृपया यह भी MailChimp की गोपनीयता नीति और उपयोग की शर्तों को देखो ।"
   text8: सभी सेवाएं अंतर्राष्ट्रीय Catrobat संघ की छतरी के नीचे मुक्त खुला स्रोत Catrobat परियोजना द्वारा प्रदान की जाती है – Verein zur Förderung freier सॉफ्टवेयर, एक गैर लाभ चरने, ऑस्ट्रिया (यूरोपीय संघ) में शामिल एनजीओ । हमारी नीतियां यूरोपीय संघ और ऑस्ट्रिया के डेटा संरक्षण कानून (GDPR) को संमान देते हैं । हमारे साथ संपर्क में पाने के लिए, कृपया एक ई मेल भेजने के लिए contact@catrobat.org या हमें catrobat, सी/ओ सॉफ्टवेयर प्रौद्योगिकी के संस्थान, चराई प्रौद्योगिकी विश्वविद्यालय, Inffeldgasse 16b, ए-८०१० चराई, ऑस्ट्रिया (यूरोपीय संघ) ।
-  text9: यदि आपकी आयु 14 वर्ष से कम है, तो यह पॉलिसी कानूनी अभिभावक (आमतौर पर माता-पिता) द्वारा स्वीकार की जानी चाहिए।
+  text9: "यदि तुम्हारी आयु 14 वर्ष से कम है, तो यह पॉलिसी कानूनी अभिभावक (आमतौर पर माता-पिता) द्वारा स्वीकार की जानी चाहिए।"
   text10: Catrobat की आधिकारिक अंग्रेजी भाषा की गोपनीयता नीति %privacy_policy% के तहत वेब पर उपलब्ध है।
   disagree-text: अनुमोदन के बिना, हम एक खाता नहीं बना सकते हैं लेकिन मूल विशेषताएं अभी भी उपलब्ध हैं।
 catro-notifications:
   markAsRead: "पढ़े हुए का चिह्न"
-  noFollowers: "ऐसा लगता है कि आपके पास कोई अनुयायी सूचनाएं नहीं हैं।"
-  noComments: "ऐसा लगता है कि आपके पास कोई टिप्पणी सूचना नहीं है।"
-  noReactions: "ऐसा लगता है कि आपके पास कोई प्रतिक्रिया सूचना नहीं है।"
-  noRemixes: "ऐसा लगता है कि आपके पास कोई रीमिक्स सूचनाएं नहीं हैं।"
-  noStudios: "It looks like you don't have any studio notifications."
+  noFollowers: "ऐसा लगता है कि तुम्हारे पास कोई अनुयायी सूचनाएं नहीं हैं।"
+  noComments: "ऐसा लगता है कि तुम्हारे पास कोई टिप्पणी सूचना नहीं है।"
+  noReactions: "ऐसा लगता है कि तुम्हारे पास कोई प्रतिक्रिया सूचना नहीं है।"
+  noRemixes: "ऐसा लगता है कि तुम्हारे पास कोई रीमिक्स सूचनाएं नहीं हैं।"
+  noStudios: "लगता है तुम्हारे पास कोई स्टूडियो सूचना नहीं है।"
   tab:
-    studio: Studio
+    studio: "स्टूडियो"
     project: प्रोग्राम्स
   comment:
     message: '%user_link% ने %program_link% पर टिप्पणी की।'
   like:
     message: '%user_link% ने %program_link% पर प्रतिक्रिया दी।'
   follow:
-    message: '%user_link% अब आपका अनुसरण कर रहा है।'
+    message: "%user_link% अब तुम्हारा अनुसरण कर रहा है।"
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% ने एक नया गेम %program_link% बनाया।"
   remix:
-    message: '%user_link% ने आपके गेम %remix_program_link% का रीमिक्स %program_link% बनाया है।'
+    message: "%user_link% ने तुम्हारे गेम %remix_program_link% का रीमिक्स %program_link% बनाया है।"
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% ने स्टूडियो %studio_name% में टिप्पणी की।"
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% ने %program_link% को स्टूडियो %studio_name% में जोड़ा।"
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "स्टूडियो %studio_name% में शामिल होने का तुम्हारा अनुरोध स्वीकार कर लिया गया।"
+    declined: "स्टूडियो %studio_name% में शामिल होने का तुम्हारा अनुरोध अस्वीकार कर दिया गया।"
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "तुम्हारा प्रोजेक्ट %program_link% %days% दिनों में अपने-आप हटा दिया जाएगा। उसे बनाए रखने के लिए नया संस्करण अपलोड करो या ज़्यादा डाउनलोड पाओ।"
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "तुम्हारा प्रोजेक्ट \"%project_name%\" निष्क्रियता के कारण अपने-आप हटा दिया गया। अगर तुम उसे अब भी शेयर करना चाहते हो, तो उसे फिर से अपलोड करो।"
+  noProjects: "लगता है तुम्हारे पास कोई प्रोजेक्ट सूचना नहीं है।"
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: "लिंक क्लिपबोर्ड पर कॉपी हो गया!"
+  success_project: "प्रोजेक्ट का लिंक क्लिपबोर्ड पर कॉपी हो गया!"
+  success_user: "उपयोगकर्ता का लिंक क्लिपबोर्ड पर कॉपी हो गया!"
   fail: क्लिपबोर्ड की लिंक कॉपी करने में विफल! :(
 next: अगला
 previous: पहले का
 media-packages:
   title: मीडिया-संकुल
-  description: निम्नलिखित श्रेणियों में आप पॉकेटकोड परियोजनाओं को जोड़ने के लिए अतिरिक्त अभिनेताओं और वस्तुओं को पा सकते हैं।
+  description: "निम्नलिखित श्रेणियों में तुम पॉकेटकोड परियोजनाओं को जोड़ने के लिए अतिरिक्त अभिनेताओं और वस्तुओं को पा सकते हो।"
   thumb-size:
     description: पूर्वावलोकन आकार
     sm: छोटा
@@ -989,7 +966,7 @@ media-packages:
     lg: विशाल
   theme-special: "%flavor% थीम विशेष"
   search-results: मीडिया लाइब्रेरी खोज परिणाम
-  no-results: आपकी खोज के शून्य परिणाम मिले। कृपया केवल अंग्रेजी खोज शब्दों का उपयोग करें।
+  no-results: "तुम्हारी खोज के शून्य परिणाम मिले। कृपया केवल अंग्रेजी खोज शब्दों का उपयोग करो।"
   download_these_files: बचा ले
 flavor:
   pocketcode: पॉकेट कोड
@@ -1000,13 +977,13 @@ flavor:
   create@school: '@ स्कूल बनाएँ'
 copyright: 'कॉपीराइट &copy; %year% <a href="http://www.catrobat.org"> Catrobat </a>। सर्वाधिकार सुरक्षित।'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "इस वेबसाइट को चलने के लिए JavaScript चाहिए। कृपया अपने ब्राउज़र में JavaScript चालू करो या किसी बड़े से मदद माँगो।"
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: "हम अपनी सेवाओं को बेहतर बनाने के लिए कुकीज़ का इस्तेमाल करते हैं। कोई डेटा बेचा या शेयर नहीं किया जाता।"
   accept: "स्वीकार करना"
   decline: "अस्वीकार करना"
   privacy-link: "गोपनीयता नीति"
-  settings-link: "Cookie Settings"
+  settings-link: "कुकी सेटिंग"
 agree: सहमत
 disagree: असहमत
 profileLoader:
@@ -1016,22 +993,22 @@ elements: 'तत्वों'
 share:
   text: 'शेयर'
   error: 'शेयर विफल रहा'
-  success: 'सफल साझा करें'
-copy: 'लिंक की प्रतिलिपि करें'
-checkOutProject: 'इस परियोजना की जाँच करें'
-checkOutUser: 'Check out this user:'
+  success: "सफलतापूर्वक शेयर किया गया"
+copy: "लिंक की प्रतिलिपि करो"
+checkOutProject: "इस परियोजना की जाँच करो"
+checkOutUser: "इस उपयोगकर्ता को देखो:"
 community: 'Catrobat समुदाय'
-back_to_app: 'समुदाय से बाहर निकलें'
+back_to_app: "समुदाय से बाहर निकलो"
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: "सबसे नए प्रोजेक्ट"
+  random: "बेतरतीब प्रोजेक्ट"
   most_viewed: सबसे ज्यादा देखा गया
   most_downloaded: सबसे ज्यादा डाउनलोड किया हुआ
   example: उदाहरण
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  scratch: "Scratch रीमिक्स"
+  recommended: "सुझाए गए प्रोजेक्ट"
+  popular: "सबसे लोकप्रिय"
+  trending: "ट्रेंडिंग प्रोजेक्ट"
 achievements:
   sidebar:
     title: 'उपलब्धियां'
@@ -1043,14 +1020,14 @@ achievements:
       x_out_of_y: '%unlocked% में से %total% अनलॉक'
     tab_unlocked:
       title: 'अनलॉक किया'
-      empty: "आपने अभी तक कोई उपलब्धि अनलॉक नहीं की है."
+      empty: "तुमने अभी तक कोई उपलब्धि अनलॉक नहीं की है."
     tab_locked:
       title: 'बंद'
-      empty: "आपने पहले ही सभी उपलब्धियों को अनलॉक कर दिया है।"
+      empty: "तुमने पहले ही सभी उपलब्धियों को अनलॉक कर दिया है।"
   popup:
     new:
       title: 'बधाई हो!'
-      subtitle: "आपने एक बैज अर्जित किया है"
+      subtitle: "तुमने एक बैज अर्जित किया है"
       confirm: "ठीक है"
   profile:
     title: 'उपलब्धियां'
@@ -1058,7 +1035,7 @@ achievements:
     type:
       bronze_user:
         title: 'शिक्षु'
-        description: 'किसी का अनुसरण करें और प्रोजेक्ट अपलोड करें'
+        description: "किसी का अनुसरण करो और प्रोजेक्ट अपलोड करो"
       silver_user:
         title: 'शिल्पकार'
         description: '> 1 वर्ष के लिए सक्रिय सदस्य'
@@ -1070,7 +1047,7 @@ achievements:
         description: '> 7 वर्षों के लिए सक्रिय सदस्य'
       perfect_profile:
         title: 'पहल'
-        description: 'अपना पहला प्रोफ़ाइल चित्र जोड़ें'
+        description: "अपना पहला प्रोफ़ाइल चित्र जोड़ो"
       verified_developer:
         title: 'नौसिखिए'
         description: 'एक उपयोगकर्ता खाता बनाएँ'
@@ -1078,19 +1055,19 @@ achievements:
         title: "Coding Jam '21"
         description: "Coding Jam 2021 के प्रतिभागी"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "द्विभाषी"
+        description: "अपने प्रोजेक्ट का 2 भाषाओं में अनुवाद करो"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "त्रिभाषी"
+        description: "अपने प्रोजेक्ट का 3 भाषाओं में अनुवाद करो"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "भाषाविद"
+        description: "अपने प्रोजेक्ट का 5 भाषाओं में अनुवाद करो"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "सत्यापित"
+        description: "अपना खाता सत्यापित करो"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: "{0} |{1} टैग |]1,Inf] टैग"
   tag:
     game:
       title: खेल
@@ -1109,7 +1086,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: 'एक्सटेंशन'
+  title: "{0} |{1} एक्सटेंशन |]1,Inf] एक्सटेंशन"
   extension:
     arduino:
       title: Arduino
@@ -1124,94 +1101,94 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: "मल्टीप्लेयर"
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  cancel_studio: 'रद्द करें'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  title: "स्टूडियो"
+  singular: "स्टूडियो"
+  create_studio: "स्टूडियो बनाओ"
+  delete_studio: "स्टूडियो हटाओ"
+  cancel_studio: "रद्द करो"
+  studio_name: "स्टूडियो का नाम"
+  studio_description: "स्टूडियो का विवरण"
+  is_public: "सार्वजनिक बनाना है?"
+  enable_comments: "टिप्पणियाँ चालू करनी हैं?"
+  cover_image: "कवर अपलोड करो"
+  cover_image_empty: "कोई चित्र नहीं चुना गया।"
+  cover_image_hint: "अधिकतम 1 MB। मान्य फ़ॉर्मैट: JPEG, PNG, GIF, WebP।"
+  cover_image_compressed: "1 MB की सीमा में लाने के लिए चित्र अपने-आप छोटा (कंप्रेस) कर दिया गया।"
+  cover_image_compressing: "चित्र कंप्रेस हो रहा है..."
+  cover_image_still_too_large: "कंप्रेस करने के बाद भी चित्र बहुत बड़ा है। कृपया छोटी फ़ाइल चुनो।"
+  cover_image_invalid_type: "अमान्य चित्र प्रकार। कृपया JPEG, PNG, GIF या WebP इस्तेमाल करो।"
+  cover_image_compression_failed: "चित्र प्रोसेस नहीं हो सका। कृपया कोई दूसरी फ़ाइल आज़माओ।"
+  cover_image_alt: "तुम्हारा कवर चित्र"
+  cover_image_remove: "चित्र हटाओ"
+  popular: "लोकप्रिय स्टूडियो"
+  join: "शामिल हो"
+  leave: "छोड़ो"
   report: 'विवरण'
   public: 'सार्वजनिक'
   private: "\nनिजी"
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: "शामिल हुए स्टूडियो"
+    public_studios: "सार्वजनिक स्टूडियो"
+    private_studios: "केवल आमंत्रण वाले स्टूडियो"
+    no_studios: "अभी कोई स्टूडियो नहीं"
+    my_studios: "मेरे स्टूडियो"
+    explore: "स्टूडियो खोजो"
+    no_joined: "तुम अभी तक किसी स्टूडियो में शामिल नहीं हुए हो"
+    joined: "शामिल"
+    load_more: "और लोड करो"
     open: 'खुला हुआ'
     share: 'शेयर'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
-    cancel: 'रद्द करें'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    share_success: "लिंक क्लिपबोर्ड पर कॉपी हो गया!"
+    leave_confirm_title: "यह स्टूडियो छोड़ना है?"
+    cancel: "रद्द करो"
+    cancel_request: "अनुरोध रद्द करो"
+    cancel_request_confirm_title: "शामिल होने का अनुरोध रद्द करना है?"
     admin: 'व्यवस्थापक'
-    member: 'Member'
+    member: "सदस्य"
   details:
-    add_project: 'click to add the project'
+    add_project: "प्रोजेक्ट जोड़ने के लिए क्लिक करो"
     add: 'जोड़ना'
     showMore: 'और दिखाओ'
     showLess: 'कम दिखाएं'
     are_you_sure: 'वाकई में?'
-    no_way_of_return: 'This cannot be undone.'
-    delete_it: 'मिटायें'
-    remove_project: 'स्टूडियो से निकालें'
+    no_way_of_return: "इसे पूर्ववत नहीं किया जा सकता।"
+    delete_it: "मिटाओ"
+    remove_project: "स्टूडियो से निकालो"
     remove_project_error: 'स्टूडियो से प्रोजेक्ट निकालने में विफल!'
     remove_project_success: 'स्टूडियो से प्रोजेक्ट सफलतापूर्वक निकाला गया!'
     no_projects: 'स्टूडियो में अभी तक कोई प्रोजेक्ट नहीं है'
     projects:
       title: 'प्रोजेक्ट'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: "प्रोजेक्ट जोड़ो"
+      open_project: "प्रोजेक्ट खोलो"
       download: 'डाउन्लोड'
       share: 'शेयर'
-      remove_from_studio: 'स्टूडियो से निकालें'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio: "स्टूडियो से निकालो"
+      remove_from_studio_title: "प्रोजेक्ट को स्टूडियो से हटाना है?"
+      remove_from_studio_text: "अगर तुम्हारा मन बदले, तो तुम इसे बाद में फिर से जोड़ सकते हो।"
+      share_success: "लिंक क्लिपबोर्ड पर कॉपी हो गया!"
+      share_fail: "लिंक कॉपी नहीं हो सका।"
+      no_projects_empty_state: "तुम्हारे पास अभी जोड़ने के लिए कोई प्रोजेक्ट नहीं है। पहले Pocket Code में एक बनाओ!"
+      add_selected: "चुने हुए जोड़ो"
+    no_available_projects: "जोड़ने के लिए कोई प्रोजेक्ट उपलब्ध नहीं है।"
     updateCoverError: 'स्टूडियो कवर को अपडेट करते समय कुछ गलत हुआ!'
-    join: 'Join'
-    leave: 'Leave'
+    join: "शामिल हो"
+    leave: "छोड़ो"
     report: 'विवरण'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: "बाकी"
+    decline: "अस्वीकृत"
     comments:
       title: 'टिप्पणियाँ'
-      type_something: 'कुछ लिखें'
+      type_something: "कुछ लिखो"
       replies: 'जवाब'
-      send: 'भेजें'
+      send: "भेजो"
       no_comments: 'इस स्टूडियो में अभी तक कोई टिप्पणी नहीं है।'
       disabled_comments: 'इस स्टूडियो के लिए टिप्पणियां बंद कर दी गई हैं।'
-      remove_comment: 'Remove comment'
-      post_error: 'आपकी टिप्पणी डालते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_comment: "टिप्पणी हटाओ"
+      post_error: "तुम्हारी टिप्पणी डालते समय कुछ गड़बड़ हुई। दोबारा कोशिश करो।"
+      remove_error: "टिप्पणी हटाते समय कुछ गड़बड़ हो गई। बाद में फिर से कोशिश करो।"
     activity_list:
       title: 'गतिविधियां'
       join_studio: '%user% स्टूडियो में शामिल हुए।'
@@ -1220,24 +1197,24 @@ studio:
     members_list:
       title: 'स्टूडियो के सदस्य'
       project_count: '{0} कोई स्टूडियो प्रोजेक्ट नहीं |{1} 1 स्टूडियो प्रोजेक्ट |]1,Inf] %count% स्टूडियो प्रोजेक्ट'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
+      no_studio_projects: "कोई स्टूडियो प्रोजेक्ट नहीं"
+      one_studio_project: "1 स्टूडियो प्रोजेक्ट"
+      n_studio_projects: "%count% स्टूडियो प्रोजेक्ट"
       promote_member: 'सदस्य से व्यवस्थापक में पदवृद्धि'
-      promotion_failed: 'इस सदस्य की पदवृद्धि करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
-      ban_member: 'स्टूडियो से सदस्य को प्रतिबंधित करें'
-      ban_failed: 'स्टूडियो से इस सदस्य को प्रतिबंधित करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      promotion_failed: "इस सदस्य की पदवृद्धि करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करो।"
+      ban_member: "स्टूडियो से सदस्य को प्रतिबंधित करो"
+      ban_failed: "स्टूडियो से इस सदस्य को प्रतिबंधित करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करो।"
+      demote_member: "एडमिन को सदस्य बनाओ"
+      demotion_failed: "इस एडमिन का दर्जा घटाते समय कुछ गड़बड़ हो गई। बाद में फिर से कोशिश करो।"
+      last_admin: "इस स्टूडियो के आख़िरी एडमिन का दर्जा नहीं घटाया जा सकता।"
     join_requests:
-      title: 'Join Requests'
+      title: "शामिल होने के अनुरोध"
       accept: 'स्वीकार करना'
       decline: 'अस्वीकार करना'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: "शामिल होने का अनुरोध स्वीकार कर लिया गया।"
+      decline_success: "शामिल होने का अनुरोध अस्वीकार कर दिया गया।"
+      error: "कुछ गड़बड़ हो गई। कृपया फिर से कोशिश करो।"
+      no_requests: "शामिल होने का कोई अनुरोध बाकी नहीं है।"
     show_more: 'और दिखाओ'
     show_less: 'कम दिखाएं'
     admin_settings:
@@ -1255,72 +1232,72 @@ media_library:
       sound: 'प्रकार: ध्वनि'
       movie: 'प्रकार: वीडियो'
       default: 'प्रकार: अज्ञात'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: "अभी कोई मीडिया श्रेणी उपलब्ध नहीं है।"
+  no_results: "कोई परिणाम नहीं मिला।"
+  assets_count: "एसेट"
+  view_all: "सब देखो"
+  view_all_category: "सभी %category% देखो"
+  back_to_app: "ऐप पर वापस जाओ"
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: "माँगा गया प्रोजेक्ट उपलब्ध नहीं है"
+  project_not_for_kids: "प्रोजेक्ट को बच्चों के लिए असुरक्षित चिह्नित किया गया!"
+  project_safe_for_kids: "प्रोजेक्ट को बच्चों के लिए सुरक्षित चिह्नित किया गया!"
+  project_not_for_kids_moderator: "इस प्रोजेक्ट को एक मॉडरेटर ने चिह्नित किया है। तुम इसे पूर्ववत नहीं कर सकते!"
+  project_set_private: "प्रोजेक्ट को निजी कर दिया गया है।"
+  project_set_public: "प्रोजेक्ट को सार्वजनिक कर दिया गया है।"
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "अतिरिक्त जानकारी: additionalInfo"
+    feature_1: "सुविधा featureName maintenanceStart से maintenanceEnd तक उपलब्ध नहीं है"
+    feature_2: "सुविधा"
+    feature_3: "सुविधा"
+MarkNotForKids: "बच्चों के लिए असुरक्षित चिह्नित करो"
+MarkSafeForKids: "बच्चों के लिए सुरक्षित चिह्नित करो"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "पुष्टि"
+  confirmMark: "क्या तुम सच में इस प्रोजेक्ट को बच्चों के लिए असुरक्षित चिह्नित करना चाहते हो?"
+  confirmUnmark: "क्या तुम सच में इस प्रोजेक्ट से 'बच्चों के लिए नहीं' का निशान हटाना चाहते हो?"
+  confirmYes: "हाँ, आगे बढ़ो!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "इस %content_type% की रिपोर्ट करो"
+    reason_placeholder: "कृपया बताओ कि तुम इसकी रिपोर्ट क्यों कर रहे हो..."
+    submit: "रिपोर्ट भेजो"
+    success: "तुम्हारी रिपोर्ट भेज दी गई है। धन्यवाद।"
+    error: "कुछ गड़बड़ हो गई। कृपया फिर से कोशिश करो।"
+    duplicate: "तुम इस सामग्री की पहले ही रिपोर्ट कर चुके हो।"
+    trust_too_low: "तुम्हारा खाता रिपोर्ट करने के लिए अभी बहुत नया है।"
+    unverified: "पक्का करो कि तुम लॉग इन हो और तुम्हारे खाते का ईमेल सत्यापित है।"
+    rate_limited: "तुम बहुत जल्दी-जल्दी रिपोर्ट भेज रहे हो। कृपया थोड़ा रुककर फिर से कोशिश करो।"
+    suspended: "तुम्हारा खाता निलंबित है।"
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
-    cancel: "रद्द करें"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    button: "अपील"
+    title: "इस फ़ैसले के ख़िलाफ़ अपील करो"
+    placeholder: "बताओ कि यह सामग्री क्यों नहीं छिपाई जानी चाहिए..."
+    submit: "अपील भेजो"
+    cancel: "रद्द करो"
+    success: "तुम्हारी अपील समीक्षा के लिए भेज दी गई है।"
+    already_pending: "तुम्हारी एक अपील पहले से बाकी है।"
+    error: "कुछ गड़बड़ हो गई। कृपया फिर से कोशिश करो।"
+    rate_limited: "तुम बहुत जल्दी-जल्दी अपील भेज रहे हो। कृपया थोड़ा रुककर फिर से कोशिश करो।"
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "तुम बहुत जल्दी-जल्दी टिप्पणियाँ लिख रहे हो। कृपया थोड़ा रुको।"
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "तुम बहुत जल्दी-जल्दी प्रतिक्रिया दे रहे हो। कृपया थोड़ा रुको।"
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "तुम बहुत जल्दी-जल्दी फ़ॉलो/अनफ़ॉलो कर रहे हो। कृपया थोड़ा रुको।"
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "तुम स्टूडियो में बहुत जल्दी-जल्दी काम कर रहे हो। कृपया थोड़ा रुको।"
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "समुदाय की रिपोर्टों के कारण यह प्रोजेक्ट छिपा दिया गया है।"
+    comment: "समुदाय की रिपोर्टों के कारण यह टिप्पणी छिपा दी गई है।"
+    user: "समुदाय की रिपोर्टों के कारण यह प्रोफ़ाइल छिपा दी गई है।"
+    user_own: "समुदाय की रिपोर्टों के कारण तुम्हारा खाता निलंबित कर दिया गया है। तुम इस फ़ैसले के ख़िलाफ़ अपील कर सकते हो।"
+    studio: "समुदाय की रिपोर्टों के कारण यह स्टूडियो छिपा दिया गया है।"
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "समुदाय की रिपोर्टों के कारण तुम्हारा %content_type% छिपा दिया गया है। तुम इस फ़ैसले के ख़िलाफ़ अपील कर सकते हो।"
+    appeal_approved: "तुम्हारी अपील मंज़ूर हो गई है। तुम्हारी सामग्री फिर से दिख रही है।"
+    appeal_rejected: "तुम्हारी अपील की समीक्षा हो गई है और तुम्हारी सामग्री छिपाने का फ़ैसला बना रहेगा।"
+    admin_review_needed: "सामग्री अपने-आप छिपा दी गई है और उसकी समीक्षा ज़रूरी है।"
+Reports: "रिपोर्ट"
+members: "सदस्य"
