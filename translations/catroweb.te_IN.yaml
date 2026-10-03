@@ -1,849 +1,846 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: ఆంగ్లము
-username: వినియోగదారుని పేరు
-password: పాస్వర్డ్
-createNewPassword: కొత్త పాస్‌వర్డ్‌ను సృష్టించండి
+title: Catrobat కమ్యూనిటీ
+meta.description: Catrobatతో చేసిన సృజనాత్మక ప్రాజెక్ట్‌లను షేర్ చేయి, కనుగొను, రీమిక్స్ చేయి. గేమ్‌లు, యానిమేషన్‌లు, యాప్‌లు తయారు చేసే యువ సృష్టికర్తల ప్రపంచవ్యాప్త కమ్యూనిటీలో చేరు.
+meta.description.media.library: 'Catrobat కోసం ఉచిత మీడియా ఫైళ్లను చూడు, డౌన్‌లోడ్ చేయి — నీ ప్రాజెక్ట్‌ల కోసం శబ్దాలు, చిత్రాలు ఇంకా మరెన్నో.'
+meta.og.title.login: Catrobatలో సైన్ ఇన్ చేయి
+meta.og.description.login: నీ Catrobat ప్రాజెక్ట్‌లను కమ్యూనిటీతో షేర్ చేయడానికి సైన్ ఇన్ చేయి.
+meta.og.title.register: Catrobat ఖాతాను సృష్టించు
+meta.og.description.register: Catrobat కమ్యూనిటీలో చేరి, ఈరోజే నీ సృజనాత్మక ప్రాజెక్ట్‌లను షేర్ చేయడం మొదలుపెట్టు.
+meta.og.description.profile: 'Catrobatలో %username% – వారి ప్రాజెక్ట్‌లు, విజయాలు చూడు.'
+localLanguage: తెలుగు
+username: వినియోగదారు పేరు
+password: పాస్‌వర్డ్
+createNewPassword: కొత్త పాస్‌వర్డ్ సృష్టించు
 accountSettings: ఖాతా సెట్టింగ్‌లు
 email: ఇ-మెయిల్
-aboutPocketCode: పాకెట్ కొడ్ గురించి
-about: About Catrobat
-education: చదువు
+aboutPocketCode: Pocket Code గురించి
+about: Catrobat గురించి
+education: విద్య
 chat: చాట్ మరియు ఫోరమ్‌లు
-privacyGuide: Privacy Awareness Guide
+privacyGuide: గోప్యతా అవగాహన గైడ్
 others: ఇతరులు
-tutorials: Help
-googlePlay: గూగ్లె ప్లే
-iosAppStore: IOS App store
+tutorials: సహాయం
+googlePlay: Google Play Store
+iosAppStore: iOS App Store
 instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: పాస్వర్ద్ సరిచుసుకొండి.
-error: Oops!
-cancel: రద్దు చేయు
-confirm: నిర్ధారించండి
-report: రిపొర్ట్
-report.title: రిపొర్ట్
-deleteIt: అవును, దాన్ని తొలగించండి!
-reportIt: అవును, నివేదించండి!
-areYouSure: మీరు చెప్పేది నిజమా?
-noWayOfReturn: మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
-download: డౌన్‌లోడ్ చేయండి
-name: Name
+discordChat: Discord చాట్
+passwordsNoMatch: పాస్‌వర్డ్‌లు సరిపోలలేదు.
+error: అయ్యో!
+cancel: రద్దు చేయి
+confirm: నిర్ధారించు
+report: రిపోర్ట్ చేయి
+report.title: రిపోర్ట్ చేయి
+deleteIt: అవును, తొలగించు!
+reportIt: అవును, రిపోర్ట్ చేయి!
+areYouSure: నువ్వు ఖచ్చితంగా అనుకుంటున్నావా?
+noWayOfReturn: నీ చర్యలను తిరిగి వెనక్కి తీసుకోవడానికి మార్గం లేదు!
+download: డౌన్‌లోడ్ చేయి
+name: పేరు
 description: వివరణ
-noDescription: డిస్క్రిప్షన్ అంధుబాటులొ లెదు.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: మీరు ఈ ప్రాజెక్ట్‌ను ఎలా సృష్టించారు? మీరు ఇతర వ్యక్తుల నుండి ఆలోచనలు, స్క్రిప్ట్‌లు లేదా కళాకృతులను ఉపయోగించారా? వారికి ఇక్కడ ధన్యవాదాలు.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+noDescription: వివరణ అందుబాటులో లేదు.
+credits: గమనికలు మరియు క్రెడిట్స్
+noCredits: గమనికలు మరియు క్రెడిట్స్ అందుబాటులో లేవు.
+notesAndCreditsDescription: నువ్వు ఈ ప్రాజెక్ట్‌ను ఎలా సృష్టించావు? ఇతరుల ఆలోచనలు, స్క్రిప్ట్‌లు లేదా కళాకృతులను ఉపయోగించావా? వారికి ఇక్కడ ధన్యవాదాలు చెప్పు.
+projectImportedFromScratch: ఈ ప్రాజెక్ట్ MIT Scratch నుండి దిగుమతి చేయబడింది. అసలు ప్రాజెక్ట్‌ను నువ్వు చూడవచ్చు
+scratchImportedProjectLinkHere: ఇక్కడ.
 country: దేశం
 loginText: లాగిన్
-privacyPolicy: ప్రయివసి పాలిసి
+privacyPolicy: గోప్యతా విధానం
 imprint: ఇంప్రింట్
 projectDetails: వివరాలు
-somethingWentWrong: 'ఊప్స్ ఎధొ తప్పు జరిగొనది.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'మళ్ళి ప్రయత్నించండి!'
-tryAgainButton: 'Try again'
-oldVersionError: 'కొత్త పాకెట్ కొడ్ వర్షెన్ కి అప్గ్రెడ్ చెసుకొండి!'
+somethingWentWrong: 'అయ్యో, ఏదో పని చేయలేదు. దయచేసి మళ్ళీ ప్రయత్నించు!'
+accountNotVerified: 'నువ్వు లాగిన్ అయ్యావని, నీ ఖాతా ఇమెయిల్ ధృవీకరించబడిందని నిర్ధారించుకో.'
+accountSuspended: 'కమ్యూనిటీ రిపోర్ట్‌ల కారణంగా నీ ఖాతా నిలిపివేయబడింది. నీ ప్రొఫైల్ నుండి ఈ నిర్ణయంపై అప్పీల్ చేయవచ్చు.'
+doesNotExist: 'నువ్వు అడిగిన వనరు ఉనికిలో లేదు.'
+pleaseTryAgain: 'దయచేసి మళ్ళీ ప్రయత్నించు!'
+tryAgainButton: 'మళ్ళీ ప్రయత్నించు'
+oldVersionError: 'దయచేసి Pocket Code కొత్త వెర్షన్‌కు అప్‌డేట్ చేసుకో!'
 more: 'ఎక్కువ'
 less: 'తక్కువ'
-show-more: 'More information'
-show-less: 'Less information'
+show-more: 'ఇంకా చూపించు'
+show-less: 'తక్కువ చూపించు'
 more-information: 'మరింత సమాచారం'
 less-information: 'తక్కువ సమాచారం'
-ok: అలాగే
-clickToDownloadProgram: 'ఉదాహరణ ప్రాజెక్ట్ డౌన్‌లోడ్ చేయడానికి క్లిక్ చేయండి%link_start%ఇక్కడ%link_end%'
-registrationError: 'మీరు ఉపయోగిస్తున్న పేరు లేదా ఇమెయిల్ ఇప్పటికే ఉపయోగంలో ఉంది.'
-notifications: 'ప్రకటనలు'
-allNotifications: 'అన్ని'
-FollowersNotifications: 'అనుచరులు'
-LikeNotifications: 'ప్రతిచర్యలు'
+ok: అర్థమైంది
+clickToDownloadProgram: 'ఉదాహరణ ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేయడానికి %link_start% ఇక్కడ %link_end% క్లిక్ చేయి.'
+registrationError: 'వినియోగదారు పేరు లేదా ఇమెయిల్ చిరునామా ఇప్పటికే వాడుకలో ఉంది.'
+notifications: 'నోటిఫికేషన్‌లు'
+allNotifications: 'అన్నీ'
+FollowersNotifications: 'ఫాలోవర్లు'
+LikeNotifications: 'ప్రతిస్పందనలు'
 CommentNotifications: 'వ్యాఖ్యలు'
 RemixNotifications: 'రీమిక్స్‌లు'
-wellDone: "చాలా బాగా చేసావు!"
-done: "అయింది!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "అవును, దాన్ని తొలగించండి"
-cancelMessage: "రద్దు చేయు"
-notificationsUnauthorizedError: "వినియోగదారుని ప్రామాణీకరించడం సాధ్యపడలేదు"
-notificationsClearError: "ప్రకటనలను చదివినట్లు గుర్తించలేకపోతుంది!"
-pleaseWait: "దయచేసి వేచి ఉండండి..."
-projects: "Projects"
-users: "User"
-studios: "Studios"
+wellDone: "చాలా బాగా చేశావు!"
+done: "అయిపోయింది!"
+notificationsReadMessage: "నీకు ఎలాంటి నోటిఫికేషన్‌లు లేనట్లు కనిపిస్తోంది."
+confirmMessage: "అవును, తొలగించు"
+cancelMessage: "రద్దు చేయి"
+notificationsUnauthorizedError: "వినియోగదారుని ప్రామాణీకరించడం సాధ్యం కాలేదు"
+notificationsClearError: "నోటిఫికేషన్‌లను చదివినట్లు గుర్తించడం సాధ్యం కాలేదు!"
+pleaseWait: "దయచేసి వేచి ఉండు..."
+projects: "ప్రాజెక్ట్‌లు"
+users: "వినియోగదారులు"
+studios: "స్టూడియోలు"
 oauthPopUpTitle: "బాహ్య ఖాతా సైన్ ఇన్ సమాచారం"
-oauthInfo: 'మీరు ఇప్పుడే లాగిన్ అవ్వడానికి ఒక బాహ్య ఖాతాను ఉపయోగించారు. మేము మీ కోసం యాదృచ్ఛిక వినియోగదారు పేరును సృష్టించాము. మీరు మీ యూజర్ పేరును మార్చాలనుకుంటే లేదా మీ ఖాతా కోసం కొత్త పాస్‌వర్డ్‌ని సృష్టించాలనుకుంటే దయచేసి నా ప్రొఫైల్ పేజీకి వెళ్లండి. క్లిక్ చేయండి%link_start%ఇక్కడ%link_end%మీ ప్రొఫైల్ పేజీకి వెళ్లడానికి'
+oauthInfo: 'నువ్వు ఇప్పుడే లాగిన్ అవ్వడానికి ఒక బాహ్య ఖాతాను ఉపయోగించావు. మేము నీ కోసం ఒక యాదృచ్ఛిక వినియోగదారు పేరును సృష్టించాము. నీ వినియోగదారు పేరు మార్చాలనుకుంటే లేదా నీ ఖాతాకు కొత్త పాస్‌వర్డ్ సృష్టించాలనుకుంటే, దయచేసి నీ ప్రొఫైల్ పేజీకి వెళ్ళు.'
 oauthHere: "ఇక్కడ"
 statistics: "గణాంకాలు"
-languageSelection: "Language selection"
+languageSelection: "భాష ఎంపిక"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: 'థీమ్'
+  auto: 'సిస్టమ్'
+  auto_description: 'నీ పరికర సెట్టింగ్‌ను అనుసరించు'
+  light: 'లైట్'
+  light_description: 'ప్రకాశవంతమైన రూపం'
+  dark: 'డార్క్'
+  dark_description: 'ముదురు రూపం'
+  apply: 'వర్తింపజేయి'
 indexPage:
   recommendedSection:
     info:
-      title: 'ఇక్కడ ఏ ప్రాజెక్టులు సిఫార్సు చేయబడ్డాయి?'
-      description: 'మీ ప్రాజెక్ట్ అందుకున్న ప్రతిస్పందనలు (థంబ్స్ అప్, స్మైల్ ...), ఈ జాబితాలో అది ఎక్కువగా కనిపిస్తుంది.'
+      title: 'ఇక్కడ ఏ ప్రాజెక్ట్‌లు సిఫార్సు చేయబడ్డాయి?'
+      description: 'నీ ప్రాజెక్ట్‌కు ఎన్ని ఎక్కువ ప్రతిస్పందనలు (థంబ్స్ అప్, స్మైల్ ...) వస్తే, అది ఈ జాబితాలో అంత పైన కనిపిస్తుంది.'
 follower:
-  follows: ఫాలోయింగ్
-  followers: అనుచరులు
-  follow: అనుసరించండి
+  follows: ఫాలో అవుతున్నవారు
+  followers: ఫాలోవర్లు
+  follow: ఫాలో చేయి
   username: వినియోగదారు
-  followsMe: నన్ను అనుసరిస్తుంది
-  noFollowing: మీరు ప్రస్తుతం ఎవరినీ అనుసరించడం లేదు.
-  noFollowers: మీకు ప్రస్తుతం అనుచరులు లేరు.
-  noOtherFollowing: ప్రస్తుతం కింది వినియోగదారులు లేరు.
-  noOtherFollowers: ప్రస్తుతం అనుచరులు లేరు.
-  followError: "కావలసిన వినియోగదారుని అనుసరించడం సాధ్యపడలేదు!"
-  unfollowError: "కావలసిన వినియోగదారుని అనుసరించడం సాధ్యం కాలేదు!"
-  unfollowQuestion: "మీరు ఖచ్చితంగా ఈ వినియోగదారుని అనుసరించకూడదనుకుంటున్నారా?"
-  unfollowButton: "అనుసరించవద్దు%username%"
+  followsMe: నన్ను ఫాలో అవుతున్నారు
+  noFollowing: నువ్వు ప్రస్తుతం ఎవరినీ ఫాలో అవ్వడం లేదు.
+  noFollowers: నీకు ప్రస్తుతం ఫాలోవర్లు ఎవరూ లేరు.
+  noOtherFollowing: ప్రస్తుతం ఫాలో అవుతున్న వినియోగదారులు ఎవరూ లేరు.
+  noOtherFollowers: ప్రస్తుతం ఫాలోవర్లు ఎవరూ లేరు.
+  followError: "ప్రస్తుతం ఈ వినియోగదారుని ఫాలో చేయలేకపోయాము."
+  unfollowError: "ప్రస్తుతం ఈ వినియోగదారుని అన్‌ఫాలో చేయలేకపోయాము."
+  unfollowQuestion: "నువ్వు ఖచ్చితంగా ఈ వినియోగదారుని అన్‌ఫాలో చేయాలనుకుంటున్నావా?"
+  unfollowButton: "%username%ని అన్‌ఫాలో చేయి"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: తెరవండి
-  download: డౌన్‌లోడ్ చేయండి
+    title: Catrobat యొక్క %theme%కి స్వాగతం
+    title_mindstorms: Mindstorms EV3 మరియు NXT కోసం Catrobat సైట్‌కు స్వాగతం
+    subtitle: కథలు, గేమ్‌లు ఇంకా మరెన్నో సృష్టించు...
+    subtitle_embroidery: నీ టీ-షర్టులు, బ్యాగులు, ప్యాంట్లు లేదా స్మార్ట్‌ఫోన్ కేస్‌పై నీ సొంత డిజైన్‌లను కుట్టు!
+    subtitle_mindstorms: నీ Lego Mindstorms EV3 మరియు NXT రోబోట్‌లతో నీ సొంత ప్రాజెక్ట్‌లను సృష్టించు
+    download: యాప్‌ను డౌన్‌లోడ్ చేయి
+    statistics: మరిన్ని గణాంకాలు
+  featured: ప్రత్యేకమైనవి
+  open: తెరువు
+  download: డౌన్‌లోడ్ చేయి
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: ప్రాజెక్ట్ అప్‌లోడ్ చేయి
+    drop_here: నీ .catrobat ఫైల్‌ను ఇక్కడ లాగి వదులు
+    or_browse: లేదా బ్రౌజ్ చేయడానికి క్లిక్ చేయి
+    button: అప్‌లోడ్ చేయి
+    uploading: అప్‌లోడ్ అవుతోంది...
+    success: ప్రాజెక్ట్ విజయవంతంగా అప్‌లోడ్ అయింది!
+    view_project: ప్రాజెక్ట్ చూడు
+    upload_another: ఇంకొకటి అప్‌లోడ్ చేయి
+    invalid_file: దయచేసి ఒక .catrobat ఫైల్‌ను ఎంచుకో
+    file_too_large: ఫైల్ చాలా పెద్దదిగా ఉంది
+    error: అప్‌లోడ్ విఫలమైంది. దయచేసి మళ్ళీ ప్రయత్నించు.
+    unauthorized: అప్‌లోడ్ చేయడానికి నువ్వు లాగిన్ అయి ఉండాలి.
+    rate_limited: చాలా ఎక్కువ అప్‌లోడ్‌లు. దయచేసి కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.
+    selected_file: 'ఎంచుకున్న ఫైల్:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
+      file_size: గరిష్ట ఫైల్ పరిమాణం 100 MB.
+      app_upload: నువ్వు Pocket Code యాప్ నుండి కూడా నేరుగా ప్రాజెక్ట్‌లను అప్‌లోడ్ చేయవచ్చు. యాప్‌లను ప్రస్తుతం మళ్ళీ తయారు చేస్తున్నారు, కాబట్టి ఇప్పుడు అవి వెబ్ అప్‌లోడ్‌కు సపోర్ట్ చేయవు.
+      retention: అప్‌లోడ్ చేసిన ప్రాజెక్ట్‌లు కొంతకాలం ఎలాంటి కార్యకలాపం లేకపోతే ఆటోమేటిక్‌గా తీసివేయబడతాయి. వాటిని ఎక్కువ కాలం ఉంచడానికి తరచుగా లాగిన్ అవ్వు లేదా నీ ప్రాజెక్ట్‌కు డౌన్‌లోడ్‌లు సంపాదించు.
+      protection: బాగా నచ్చిన లేదా ప్రజాదరణ పొందిన ప్రాజెక్ట్‌లను మోడరేటర్లు ఆటోమేటిక్ తొలగింపు నుండి రక్షించవచ్చు.
+  example: ఉదాహరణలు
+  newest: కొత్త ప్రాజెక్ట్‌లు
+  recommended: సిఫార్సు చేసిన ప్రాజెక్ట్‌లు
+  scratchremixes: Scratch రీమిక్స్‌లు
+  noProjects: ప్రస్తుతం ప్రాజెక్ట్‌లు ఏవీ లేవు.
+  shareAction: షేర్ చేయి
+  deleteAction: ప్రాజెక్ట్ తొలగించు
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: మీరు చెప్పేది నిజమా?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+    నువ్వు ఖచ్చితంగా అనుకుంటున్నావా?
+    నువ్వు ఖచ్చితంగా "%programName%"ని తొలగించాలనుకుంటున్నావా?
+    నీ చర్యలను తిరిగి వెనక్కి తీసుకోవడానికి మార్గం లేదు!
+    అవును, తొలగించు!
+    రద్దు చేయి
+  deleteConfirmText: ఈ చర్యను వెనక్కి తీసుకోలేము. నీ ప్రాజెక్ట్ శాశ్వతంగా తొలగించబడుతుంది.
+  deleteConfirmationTitle: నువ్వు ఖచ్చితంగా అనుకుంటున్నావా?
+  deleteNotFoundError: తొలగించాల్సిన ప్రాజెక్ట్ నీ వినియోగదారు ఖాతాలో కనబడలేదు.
+  private: ప్రైవేట్
+  public: పబ్లిక్
+  setPrivateAction: ప్రైవేట్‌గా సెట్ చేయి
+  setPublicAction: పబ్లిక్‌గా సెట్ చేయి
+  setPrivateConfirm: "ఈ ప్రాజెక్ట్‌ను ప్రైవేట్‌గా సెట్ చేయాలా? ఇది ఇకపై శోధన ఫలితాలలో కనిపించదు."
+  setPublicConfirm: "ఈ ప్రాజెక్ట్‌ను పబ్లిక్ చేయాలా? ఇది అందరికీ కనిపిస్తుంది."
+  markNotForKidsConfirm: "ఈ ప్రాజెక్ట్‌ను పిల్లలకు తగినది కాదని గుర్తించాలా?"
+  markSafeForKidsConfirm: "ఈ ప్రాజెక్ట్ నుండి 'పిల్లలకు తగినది కాదు' గుర్తును తీసివేయాలా?"
+  nfkModeratorLocked: "ఈ సెట్టింగ్‌ను ఒక మోడరేటర్ లాక్ చేశారు."
+  confirmSetPrivate: నువ్వు ఖచ్చితంగా ఈ ప్రాజెక్ట్‌ను ప్రైవేట్‌గా సెట్ చేయాలనుకుంటున్నావా? ఇది ఇకపై శోధన ఫలితాలలో కనిపించదు.
+  confirmSetPublic: నువ్వు ఖచ్చితంగా ఈ ప్రాజెక్ట్‌ను పబ్లిక్ చేయాలనుకుంటున్నావా? ఇది అందరికీ కనిపిస్తుంది.
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    నువ్వు ఖచ్చితంగా అనుకుంటున్నావా?
+    నువ్వు '%programName%'ని ప్రైవేట్‌గా సెట్ చేస్తే, ఇతర వినియోగదారులు దాన్ని చూడలేరు, కనుగొనలేరు.
+    అయినా నీ ప్రాజెక్ట్ లింక్‌ను నీ స్నేహితులతో షేర్ చేయవచ్చు. తాళం గుర్తును నొక్కి దృశ్యమానతను మార్చవచ్చు.
+    నువ్వు "%programName%"ని పబ్లిక్‌గా సెట్ చేస్తే, ఇతర వినియోగదారులు దాన్ని చూడగలరు, కనుగొనగలరు.
+    అవును, పబ్లిక్‌గా సెట్ చేయి
+    అవును, ప్రైవేట్‌గా సెట్ చేయి
+    వద్దు
+  reportCommentConfirmation: నువ్వు ఖచ్చితంగా ఈ వ్యాఖ్యను రిపోర్ట్ చేయాలనుకుంటున్నావా?
+  deleteCommentConfirmation: నువ్వు ఖచ్చితంగా ఈ వ్యాఖ్యను తొలగించాలనుకుంటున్నావా?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: నా ప్రాజెక్ట్‌లు
-  trending: Trending projects
-  popular: Popular projects
+    ఖాతా తొలగించాలా?
+    నువ్వు ఖచ్చితంగా నీ ఖాతాను తొలగించాలనుకుంటున్నావా? దీనితో నువ్వు అప్‌లోడ్ చేసిన ప్రాజెక్ట్‌లు, వ్యాఖ్యలు కూడా తొలగించబడతాయి!
+    నీ చర్యలను తిరిగి వెనక్కి తీసుకోవడానికి మార్గం లేదు!
+    అవును, తొలగించు!
+    రద్దు చేయి
+  tooLongName: ప్రాజెక్ట్ పేరు చాలా పొడవుగా ఉంది!
+  tooLongDescription: ప్రాజెక్ట్ వివరణ చాలా పొడవుగా ఉంది!
+  tooLongCredits: ప్రాజెక్ట్ గమనికలు మరియు క్రెడిట్స్ చాలా పొడవుగా ఉన్నాయి!
+  my_projects: నేను షేర్ చేసిన ప్రాజెక్ట్‌లు
+  trending: ట్రెండింగ్ ప్రాజెక్ట్‌లు
+  popular: ప్రజాదరణ పొందిన ప్రాజెక్ట్‌లు
   most:
-    viewed: ఎక్కువ చుడబడినవి
-    downloaded: ఎక్కువ డౌన్లొడుచెయబడినవి
-  random: Random projects
-  related: Related projects
+    viewed: ఎక్కువగా చూసినవి
+    downloaded: ఎక్కువగా డౌన్‌లోడ్ చేసినవి
+  random: యాదృచ్ఛిక ప్రాజెక్ట్‌లు
+  related: సంబంధిత ప్రాజెక్ట్‌లు
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'ప్రాజెక్ట్‌లను అన్వేషించు'
+    no_projects: "నువ్వు ఇంకా ఏ ప్రాజెక్ట్‌లూ సృష్టించలేదు"
+    no_explore: 'ప్రాజెక్ట్‌లు ఏవీ కనబడలేదు'
+    load_more: 'మరిన్ని లోడ్ చేయి'
+    upload: 'ప్రాజెక్ట్ అప్‌లోడ్ చేయి'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'రక్షించబడింది'
+    day_left: '1 రోజు మిగిలి ఉంది'
+    days_left: '%days% రోజులు మిగిలి ఉన్నాయి'
+    tooltip: 'కొంతకాలం ఎలాంటి కార్యకలాపం లేకపోతే ప్రాజెక్ట్‌లు ఆటోమేటిక్‌గా తీసివేయబడతాయి. ఎక్కువ కాలం ఉంచడానికి మరిన్ని డౌన్‌లోడ్‌లు సంపాదించు లేదా తరచుగా లాగిన్ అవ్వు.'
+    tooltip_protected: 'ఈ ప్రాజెక్ట్ రక్షించబడింది, ఇది ఆటోమేటిక్‌గా తొలగించబడదు.'
+  downloads: '%downloads% డౌన్‌లోడ్‌లు'
+  sample: ఉదాహరణ ప్రాజెక్ట్‌లు
+  views: '%views% వీక్షణలు'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "అన్ని"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
-  btnClosePopup: అలాగే
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+    likersTitle: "ఈ ప్రాజెక్ట్‌కు ప్రతిస్పందించినవారు"
+    all: "అన్నీ"
+  remixes: '{0}0 రీమిక్స్‌లు |{1}1 రీమిక్స్ |]1,Inf]%remixes% రీమిక్స్‌లు'
+  newRemixesNotificationTitle: '|{1}"%programName%"కి 1 కొత్త రీమిక్స్ ఉంది: |]1,Inf] "%programName%"కి %remixes% కొత్త రీమిక్స్‌లు ఉన్నాయి:'
+  submitted: సమర్పించిన ప్రాజెక్ట్‌లు
+  uploaded: అప్‌లోడ్ చేసిన ప్రాజెక్ట్‌లు
+  reportAsInappropriate: అనుచితమైనదిగా రిపోర్ట్ చేయి
+  reportProgram: ప్రాజెక్ట్‌ను రిపోర్ట్ చేయి
+  languageVersion: 'Catrobat భాష వెర్షన్: %languageVersion%'
+  reportLoginText: ఈ ప్రాజెక్ట్‌ను రిపోర్ట్ చేయడానికి దయచేసి %login% చేయి.
+  reportDialogHeader: ఈ ప్రాజెక్ట్‌ను ఎందుకు రిపోర్ట్ చేయాలనుకుంటున్నావు?
+  reportDialogReason: ఒక కారణం రాయి
+  reportRadioButtonInappropriate: ఇది అనుచితమైనది
+  reportRadioButtonCopyright: కాపీరైట్ ఉల్లంఘన
+  reportRadioButtonSpam: ఇది స్పామ్
+  reportRadioButtonDislike: ఇది నాకు నచ్చలేదు
+  reportOwnProgram: నీ సొంత ప్రాజెక్ట్‌ను నువ్వు రిపోర్ట్ చేయలేవు.
+  reportAlready: నువ్వు ఇప్పటికే ఈ ప్రాజెక్ట్‌ను రిపోర్ట్ చేశావు.
+  reportDone: నువ్వు ఈ ప్రాజెక్ట్‌ను రిపోర్ట్ చేశావు!
+  updateAppHeaderDownload: డౌన్‌లోడ్ సాధ్యం కాదు
+  updateAppTextDownload: దయచేసి నీ యాప్‌ను కొత్త వెర్షన్‌కు అప్‌డేట్ చేయి. Androidలోని అన్ని ఫీచర్లు ఇంకా iOSలో అందుబాటులో లేవని గుర్తుంచుకో.
+  updateAppTextDownloadApk: APK డౌన్‌లోడ్ ప్రస్తుతం Androidలో మాత్రమే అందుబాటులో ఉంది, iOSలో లేదు.
+  updateAppHeader: యాప్‌ను అప్‌డేట్ చేయి
+  updateAppText: దయచేసి నీ యాప్‌ను కొత్త వెర్షన్‌కు అప్‌డేట్ చేయి.
+  btnClosePopup: సరే
+  checkout_this_project: ఈ Catrobat ప్రాజెక్ట్‌ను చూడు
+  show_more: ఇంకా చూపించు
   comments: వ్యాఖ్యలు
-  send: Send
+  send: పంపు
   delete: తొలగించు
-  report: రిపొర్ట్
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: ప్రతిచర్యలు
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  report: రిపోర్ట్ చేయి
+  reply: జవాబు ఇవ్వు
+  report_popup: వ్యాఖ్య విజయవంతంగా రిపోర్ట్ చేయబడింది.
+  report_popup_header: రిపోర్ట్ చేయబడింది
+  deleted_popup: వ్యాఖ్య విజయవంతంగా తొలగించబడింది.
+  deleted_popup_header: తొలగించబడింది
+  noAdminRights: నీకు అడ్మిన్ హక్కులు లేవు. దయచేసి అడ్మిన్‌గా లాగిన్ అవ్వు.
+  editProject: ప్రాజెక్ట్‌ను సవరించు
+  closeProjectEditor: ప్రాజెక్ట్ ఎడిటర్‌ను మూసివేయి
+  closeEditorPrompt: నీ మార్పులను సేవ్ చేయాలనుకుంటున్నావా?
+  btnDiscard: వదిలేయి
+  addComment: ఒక వ్యాఖ్య రాయి
+  thumbsUp: థంబ్స్ అప్!
+  smile: స్మైల్!
+  love: ప్రేమ!
+  wow: వావ్!
+  linkTitle: లింక్
+  link: ప్రాజెక్ట్ లింక్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయి
+  reactionsText: ప్రతిస్పందనలు
+  downloadErrorText: ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేస్తున్నప్పుడు లోపం జరిగింది. దయచేసి కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.
+  downloadStartText: డౌన్‌లోడ్ మొదలైంది...
+  downloading: డౌన్‌లోడ్ అవుతోంది...
+  openInApp: Pocket Codeలో తెరువు
+  downloaded: డౌన్‌లోడ్ అయింది
+  showTranslation: అనువాదం చూపించు
+  hideTranslation: అనువాదం దాచు
+  translatedByLine: '%provider% ద్వారా %sourceLanguage% నుండి %targetLanguage%కి అనువదించబడింది'
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  confrimDelete: నువ్వు ఖచ్చితంగా ఈ అనువాదాన్ని తొలగించాలనుకుంటున్నావా?
+  default: డిఫాల్ట్
+  save: సేవ్ చేయి
+  translationTitle: '%language% అనువాదం'
+  editDefault: డిఫాల్ట్‌ను సవరించు
+  editTranslation: '%language% అనువాదాన్ని సవరించు'
+  translations: అనువాదాలు
+  createTranslation: అనువాదం సృష్టించు
+  deletedComment: '**తొలగించబడింది**'
+  replyLabel: జవాబు
+  repliesLabel: జవాబులు
+  notForKids: పిల్లలకు తగినది కాదు
 remixGraph:
   title: రీమిక్స్‌లు
   showRemixGraph: 'రీమిక్స్ గ్రాఫ్'
-  by: 'ద్వారా'
-  open: 'తెరవండి'
+  by: 'రూపొందించినవారు'
+  open: 'తెరువు'
   showPaths: 'మార్గాలు చూపించు'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: 'రీమిక్స్ గ్రాఫ్ లోడ్ అవుతోంది...'
+  error: 'రీమిక్స్ గ్రాఫ్‌ను లోడ్ చేయలేకపోయాము.'
+  empty: 'ఈ ప్రాజెక్ట్‌కు ఇంకా రీమిక్స్ గ్రాఫ్ డేటా అందుబాటులో లేదు.'
   remixesLabel: 'రీమిక్స్‌లు'
-  projectsLabel: 'Projects'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  projectsLabel: 'ప్రాజెక్ట్‌లు'
+  scratchLabel: 'Scratch మూలాలు'
+  interactHint: 'ప్రాజెక్ట్‌ను తెరవడానికి లేదా దాని రీమిక్స్ మార్గాన్ని హైలైట్ చేయడానికి ఒక నోడ్‌ను ఎంచుకో.'
+  zoomIn: 'జూమ్ ఇన్'
+  zoomOut: 'జూమ్ అవుట్'
+  resetView: 'వీక్షణను రీసెట్ చేయి'
+  projectNotAvailableErrorTitle: 'క్షమించు...'
+  projectNotAvailableErrorDescription: 'ఈ ప్రాజెక్ట్ ఇకపై అందుబాటులో లేదు!'
+  projectNotAvailable: 'అందుబాటులో లేదు'
+  projectUnknownUser: 'తెలియని వినియోగదారు'
 noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  ఇది ఆటోమేటిక్ సందేశం - దయచేసి ఈ ఇమెయిల్‌కు నేరుగా జవాబు ఇవ్వకు.
 accountConfirmation:
-  subject: మీ కాట్రోబాట్ ఖాతా నిర్ధారణ
+  subject: నీ Catrobat ఖాతా నిర్ధారణ
   message: |
-
-    ప్రియమైన%username%.
-    మీ ఖాతాను సక్రియం చేయడం పూర్తి చేయడానికి - దయచేసి సందర్శించండి%confirmationUrl%
-    మీ ఖాతాను ధృవీకరించడానికి ఈ లింక్ ఒక్కసారి మాత్రమే ఉపయోగించబడుతుంది.
-    శుభాకాంక్షలు,
-    మీ కాట్రోబాట్ బృందం.
+    ప్రియమైన %username%.
+    నీ ఖాతా యాక్టివేషన్ పూర్తి చేయడానికి - దయచేసి %confirmationUrl% సందర్శించు
+    నీ ఖాతాను ధృవీకరించడానికి ఈ లింక్‌ను ఒక్కసారి మాత్రమే ఉపయోగించవచ్చు.
+    శుభాకాంక్షలతో,
+    నీ Catrobat బృందం.
   messageHtml: |
     <p>
-    ప్రియమైన%username%.<br>
+    ప్రియమైన %username%.<br>
     <br>
-    మీ ఖాతాను సక్రియం చేయడం పూర్తి చేయడానికి - దయచేసి క్లిక్ చేయండి<a href=%confirmationUrl%>ఇక్కడ.</a><br>
+    నీ ఖాతా యాక్టివేషన్ పూర్తి చేయడానికి - దయచేసి <a href="%confirmationUrl%">ఇక్కడ</a> క్లిక్ చేయి.<br>
+    నీ ఖాతాను ధృవీకరించడానికి ఈ లింక్‌ను ఒక్కసారి మాత్రమే ఉపయోగించవచ్చు.<br>
     <br>
-    మీ ఖాతాను ధృవీకరించడానికి ఈ లింక్ ఒక్కసారి మాత్రమే ఉపయోగించబడుతుంది.<br>
-    <br>
-    Best regards,<br>
-    మీ కాట్రోబాట్ బృందం.
+    శుభాకాంక్షలతో,<br>
+    నీ Catrobat బృందం.
     </p>
 
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "నీ ఇమెయిల్ చిరునామాను ధృవీకరించు"
+  welcome: "Catrobatకి స్వాగతం!"
+  greeting: "సైన్ అప్ చేసినందుకు ధన్యవాదాలు! మొదలుపెట్టడానికి దయచేసి నీ ఇమెయిల్ చిరునామాను ధృవీకరించు."
+  message: "నీ ఇమెయిల్‌ను నిర్ధారించడానికి కింది బటన్‌ను క్లిక్ చేయి. ఈ లింక్ %time% వరకు చెల్లుతుంది, ఒక్కసారి మాత్రమే ఉపయోగించవచ్చు."
+  button: "ఇమెయిల్ చిరునామాను ధృవీకరించు"
+  ignore: "నువ్వు Catrobat ఖాతాను సృష్టించకపోతే, ఈ ఇమెయిల్‌ను నిశ్చింతగా పట్టించుకోకు."
+  autoDelete: "ధృవీకరించని ఖాతాలు 30 రోజుల తర్వాత ఆటోమేటిక్‌గా తొలగించబడతాయి."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "నీ పిల్లల Catrobat ఖాతాకు తల్లిదండ్రుల సమ్మతి అవసరం"
+    title: "తల్లిదండ్రుల సమ్మతి అవసరం"
+    greeting: "నమస్తే,"
+    message: "నీ పిల్లలు %username% Catrobatలో ఒక ఖాతాను సృష్టించి, వారి ఇమెయిల్ చిరునామాను ధృవీకరించారు."
+    explanation: "Catrobat ఒక ఉచిత విద్యా వేదిక, ఇక్కడ యువత యాప్‌లు, గేమ్‌లు, యానిమేషన్‌లు సృష్టిస్తూ కోడింగ్ నేర్చుకుంటారు. EU బాలల రక్షణ నిబంధనల ప్రకారం, నీ పిల్లలు కమ్యూనిటీలో పూర్తిగా పాల్గొనే ముందు మాకు నీ సమ్మతి అవసరం. సమ్మతి ఇవ్వడానికి దయచేసి కింది బటన్‌ను క్లిక్ చేయి."
+    button: "తల్లిదండ్రుల సమ్మతి ఇవ్వు"
+    ignore: "నువ్వు ఈ ఇమెయిల్‌ను ఊహించకపోతే, దీన్ని నిశ్చింతగా పట్టించుకోకు. సమ్మతి లేకుండా ఖాతాకు పరిమిత సౌకర్యాలు మాత్రమే ఉంటాయి."
+    whatIsCatrobat: "Catrobat ఒక ఉచిత, లాభాపేక్ష లేని విద్యా ప్రోగ్రామింగ్ వేదిక. catrobat.orgలో మరింత తెలుసుకో."
+    manageLink: 'నువ్వు ఎప్పుడైనా మా <a href="%portalUrl%" style="color: #00acc1;">తల్లిదండ్రుల పోర్టల్</a> ద్వారా నీ పిల్లల ఖాతాను నిర్వహించవచ్చు. <a href="%infoUrl%" style="color: #00acc1;">తల్లిదండ్రిగా నీ హక్కుల</a> గురించి మరింత తెలుసుకో.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "సమ్మతి ఇవ్వబడింది"
+    message: "ధన్యవాదాలు! %username% ఖాతా ఇప్పుడు పూర్తిగా యాక్టివేట్ అయింది."
+    continueButton: "ప్రాజెక్ట్‌లను కనుగొను"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "తల్లిదండ్రులు & సంరక్షకులు"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "తల్లిదండ్రులు & సంరక్షకుల కోసం సమాచారం"
+    intro: "Catrobat చిన్న వినియోగదారుల భద్రత, గోప్యతను తీవ్రంగా పరిగణిస్తుంది. మేము నీ పిల్లలను ఎలా రక్షిస్తామో, నీకు ఏ హక్కులు ఉన్నాయో ఈ పేజీ వివరిస్తుంది."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Catrobat అంటే ఏమిటి?"
+      text: "Catrobat ఒక ఉచిత, లాభాపేక్ష లేని విద్యా వేదిక, ఇక్కడ యువత తమ సొంత యాప్‌లు, గేమ్‌లు, యానిమేషన్‌లు సృష్టిస్తూ ప్రోగ్రామింగ్ నేర్చుకుంటారు. ఈ వేదిక ప్రపంచవ్యాప్తంగా అందుబాటులో ఉంది, విద్యా సంస్థలలో ఉపయోగించబడుతుంది."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "మేము ఏ డేటాను సేకరిస్తాము?"
+      text: "వేదికను నడపడానికి అవసరమైన కనీస డేటాను మాత్రమే మేము సేకరిస్తాము: వినియోగదారు పేరు, ఇమెయిల్ చిరునామా, పుట్టిన తేదీ, నీ పిల్లలు సృష్టించి అప్‌లోడ్ చేసే ప్రాజెక్ట్‌లు. 14 ఏళ్ల లోపు వినియోగదారుల కోసం, సమ్మతి కోసం తల్లిదండ్రులు/సంరక్షకుల ఇమెయిల్ చిరునామాను కూడా నిల్వ చేస్తాము. మేము వ్యక్తిగత డేటాను మూడవ పక్షాలకు అమ్మము లేదా షేర్ చేయము."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "తల్లిదండ్రిగా లేదా సంరక్షకుడిగా నీ హక్కులు"
+      text: "EU బాలల రక్షణ నిబంధనలు (GDPR) మరియు COPPA ప్రకారం, నీకు ఈ హక్కులు ఉన్నాయి: నీ పిల్లల గురించి మా వద్ద ఉన్న డేటాను చూడటం, ఆ డేటా కాపీని అడగటం, ఎప్పుడైనా నీ సమ్మతిని ఉపసంహరించుకోవడం (దీనితో ఖాతా పరిమితం అవుతుంది), నీ పిల్లల ఖాతాను, దానికి సంబంధించిన మొత్తం డేటాను శాశ్వతంగా తొలగించమని అడగటం."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "మైనర్ ఖాతాలకు ఏ పరిమితులు వర్తిస్తాయి?"
+      text: "16 ఏళ్ల లోపు వినియోగదారులు వ్యాఖ్యలు పోస్ట్ చేయలేరు లేదా చదవలేరు, ఇతర వినియోగదారులను ఫాలో చేయలేరు, పిల్లలకు తగినది కాదని గుర్తించిన కంటెంట్‌ను చూడలేరు. అయినా వారు ప్రాజెక్ట్‌లను సృష్టించి అప్‌లోడ్ చేయవచ్చు, పబ్లిక్ ప్రాజెక్ట్‌లను చూడవచ్చు, లైక్‌లతో ప్రతిస్పందించవచ్చు. సురక్షితమైన అభ్యాస వాతావరణం కోసం ఈ పరిమితులు ఉన్నాయి."
+    manageButton: "నీ పిల్లల ఖాతాను నిర్వహించు"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "తల్లిదండ్రుల పోర్టల్"
+    description: "నీ పిల్లల Catrobat ఖాతాను నిర్వహించడానికి సురక్షితమైన లింక్ పొందడానికి నీ ఇమెయిల్ చిరునామాను నమోదు చేయి. రిజిస్ట్రేషన్ సమయంలో నువ్వు ఇచ్చిన ఇమెయిల్ చిరునామాకు లింక్ పంపబడుతుంది."
+    emailLabel: "నీ ఇమెయిల్ చిరునామా"
+    submitButton: "నిర్వహణ లింక్ పంపు"
+    infoLink: "మరింత తెలుసుకో"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "నీ ఇన్‌బాక్స్ చూడు"
+      message: "ఈ ఇమెయిల్‌తో ఏదైనా ఖాతా ముడిపడి ఉంటే, మేము నిర్వహణ లింక్ పంపాము. దయచేసి నీ ఇన్‌బాక్స్ చూసి, నీ పిల్లల ఖాతాను నిర్వహించడానికి ఆ లింక్‌ను అనుసరించు."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "పిల్లల ఖాతాలను నిర్వహించు"
+    description: "నువ్వు %email%తో ముడిపడిన ఖాతాలను నిర్వహిస్తున్నావు."
+    consentStatus: "సమ్మతి స్థితి"
+    accountCreated: "ఖాతా సృష్టించబడింది"
+    email: "పిల్లల ఇమెయిల్"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "ఇవ్వబడింది"
+      pending: "పెండింగ్‌లో ఉంది"
+      revoked: "ఉపసంహరించబడింది"
+    grantButton: "సమ్మతి ఇవ్వు"
+    revokeButton: "సమ్మతి ఉపసంహరించు"
+    revokeConfirm: "నువ్వు ఖచ్చితంగా సమ్మతిని ఉపసంహరించాలనుకుంటున్నావా? ఖాతాకు పరిమిత సౌకర్యాలు మాత్రమే ఉంటాయి."
+    exportButton: "డేటా ఎగుమతి చేయి"
+    deleteButton: "ఖాతా తొలగించు"
+    deleteConfirm: "నువ్వు ఖచ్చితంగా ఈ ఖాతాను శాశ్వతంగా తొలగించాలనుకుంటున్నావా? దీన్ని వెనక్కి తీసుకోలేము."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "నీ పిల్లల Catrobat ఖాతాను నిర్వహించు"
+      title: "ఖాతా నిర్వహణ"
+      greeting: "నమస్తే,"
+      message: "నీ పిల్లల Catrobat ఖాతా (%usernames%) నిర్వహించడానికి నువ్వు ఒక లింక్ అడిగావు. ఖాతాను చూడటానికి, నిర్వహించడానికి కింది బటన్‌ను క్లిక్ చేయి."
+      button: "ఖాతాను నిర్వహించు"
+      ignore: "నువ్వు దీన్ని అడగకపోతే, ఈ ఇమెయిల్‌ను నిశ్చింతగా పట్టించుకోకు."
 passwordRecovery:
-  subject: మీ కాట్రోబాట్ పాస్‌వర్డ్ రికవరీ
+  subject: నీ Catrobat పాస్‌వర్డ్ రికవరీ
   message: |
-    ప్రియమైన%username%
-    మీ పాస్‌వర్డ్‌ని రీసెట్ చేయడానికి మీరు అభ్యర్థించారు%appplication_url%ఎందుకంటే మీరు మీ పాస్‌వర్డ్ మర్చిపోయారు.
-    మీరు దీన్ని అభ్యర్థించకపోతే, దయచేసి దానిని విస్మరించండి. ఇది గడువు ముగిసి 24 గంటల సమయంలో నిరుపయోగంగా మారుతుంది.
-    మీ పాస్‌వర్డ్‌ను రీసెట్ చేయడానికి మరియు క్రొత్తదాన్ని సృష్టించడానికి, దయచేసి క్రింది పేజీని సందర్శించండి:
-    %confirmationUrl%
-    యాక్సెస్ చేయడానికి మీరు ఎప్పుడైనా మీ యూజర్ నేమ్ మరియు మీ పాస్‌వర్డ్‌ను ఉపయోగించవచ్చు%appplication_url%సంఘం.
-    అలా చేయడానికి, కింది పేజీని సందర్శించండి:%loginPage%
-    మీ ప్రొఫైల్ వివరాలను సవరించడానికి, ఈ పేజీకి వెళ్లండి:%profilePage%
-    శుభాకాంక్షలు,
-    మీ కాట్రోబాట్ బృందం.
+    ప్రియమైన %username%.
+    నువ్వు నీ పాస్‌వర్డ్ మర్చిపోయినందున %appplication_url%లో పాస్‌వర్డ్ రీసెట్ చేయమని అడిగావు.
+    నువ్వు దీన్ని అడగకపోతే, దయచేసి పట్టించుకోకు. ఇది 24 గంటల్లో గడువు ముగిసి పనికిరాకుండా పోతుంది.
+    నీ పాస్‌వర్డ్ రీసెట్ చేసి కొత్తది సృష్టించడానికి, దయచేసి ఈ పేజీని సందర్శించు: %confirmationUrl%
+    %appplication_url% కమ్యూనిటీని యాక్సెస్ చేయడానికి నువ్వు ఎప్పుడైనా నీ వినియోగదారు పేరు, పాస్‌వర్డ్ ఉపయోగించవచ్చు.
+    అందుకోసం ఈ పేజీని సందర్శించు: %loginPage%
+    నీ ప్రొఫైల్ వివరాలను సవరించడానికి, ఈ పేజీకి వెళ్ళు: %profilePage%
+    శుభాకాంక్షలతో,
+    నీ Catrobat బృందం.
   messageHtml: |
     <p>
-    ప్రియమైన%username%<br>
+    ప్రియమైన %username%.<br>
     <br>
-    మీ పాస్‌వర్డ్‌ని రీసెట్ చేయడానికి మీరు అభ్యర్థించారు<a href=%appplication_url%>పాకెట్ కోడ్ </a> ఎందుకంటే మీరు మీ పాస్‌వర్డ్ మర్చిపోయారు.
-    మీరు దీన్ని అభ్యర్థించకపోతే, దయచేసి దానిని విస్మరించండి. ఇది గడువు ముగిసి 24 గంటల సమయంలో నిరుపయోగంగా మారుతుంది.<br>
+    నువ్వు నీ పాస్‌వర్డ్ మర్చిపోయినందున <a href="%appplication_url%">Pocket Code</a>లో పాస్‌వర్డ్ రీసెట్ చేయమని అడిగావు.
+    నువ్వు దీన్ని అడగకపోతే, దయచేసి పట్టించుకోకు. ఇది 24 గంటల్లో గడువు ముగిసి పనికిరాకుండా పోతుంది.<br>
     <br>
-    మీ పాస్‌వర్డ్‌ను రీసెట్ చేయడానికి మరియు క్రొత్తదాన్ని సృష్టించడానికి, దయచేసి క్లిక్ చేయండి<a href=%confirmationUrl%>ఇక్కడ.</a><br>
+    నీ పాస్‌వర్డ్ రీసెట్ చేసి కొత్తది సృష్టించడానికి, దయచేసి <a href="%confirmationUrl%">ఇక్కడ</a> క్లిక్ చేయి.<br>
     <br>
-    యాక్సెస్ చేయడానికి మీరు ఎప్పుడైనా మీ యూజర్ నేమ్ మరియు మీ పాస్‌వర్డ్‌ను ఉపయోగించవచ్చు<a href=%appplication_url%>పాకెట్ కోడ్ </a> సంఘం. <br>
-    అలా చేయడానికి, కింది పేజీని సందర్శించండి:<a href=%loginPage%>లాగిన్ పేజీ </a> <br>
-    మీ ప్రొఫైల్ వివరాలను సవరించడానికి, దీనికి వెళ్లండి<a href=%profilePage%>పేజీ </a>. <br>
+    <a href="%appplication_url%">Pocket Code</a> కమ్యూనిటీని యాక్సెస్ చేయడానికి నువ్వు ఎప్పుడైనా నీ వినియోగదారు పేరు, పాస్‌వర్డ్ ఉపయోగించవచ్చు.<br>
+    అందుకోసం ఈ పేజీని సందర్శించు: <a href="%loginPage%">లాగిన్ పేజీ</a><br>
+    నీ ప్రొఫైల్ వివరాలను సవరించడానికి, ఈ <a href="%profilePage%">పేజీకి</a> వెళ్ళు.<br>
     <br>
-    శుభాకాంక్షలు, <br>
-    మీ కాట్రోబాట్ బృందం.
+    శుభాకాంక్షలతో,<br>
+    నీ Catrobat బృందం.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: మీ ప్రొఫైల్ సవరించండి
-  saveChanges: మార్పులను ఊంచు
-  newPass: కొత్త పాసువర్డ్
-  repeatPass: పాస్ వర్డ్ ను మళ్లీ వ్రాయండి
-  oldPass: పాత పాస్వర్డ్
+  aboutMe: నా గురించి
+  currentlyWorkingOn: ప్రస్తుతం చేస్తున్న పని
+  edit: నీ ప్రొఫైల్‌ను సవరించు
+  saveChanges: మార్పులను సేవ్ చేయి
+  newPass: కొత్త పాస్‌వర్డ్
+  repeatPass: పాస్‌వర్డ్ మళ్ళీ రాయి
+  oldPass: పాత పాస్‌వర్డ్
   firstEmail: నా మొదటి ఇమెయిల్
-  secondEmail: నా మొదటి ఇమెయిల్
+  secondEmail: నా రెండవ ఇమెయిల్
   myPrograms: నా ప్రాజెక్ట్‌లు
-  follows: అనుసరిస్తుంది
-  follower: అనుచరుడు
-  unfollowUser: ఈ వినియోగదారుని అనుసరించవద్దు!
-  followUser: ఈ వినియోగదారుని అనుసరించండి!
-  amountOfPrograms: ప్రాజెక్టుల మొత్తం
+  follows: ఫాలో అవుతున్నవారు
+  follower: ఫాలోవర్
+  unfollowUser: ఈ వినియోగదారుని అన్‌ఫాలో చేయి!
+  followUser: ఈ వినియోగదారుని ఫాలో చేయి!
+  amountOfPrograms: ప్రాజెక్ట్‌ల సంఖ్య
   form:
-    passwordTooShort: కొత్త పాస్‌వర్డ్ కనీసం ఉండాలి%length%పాత్రలు.
-    passwordTooLong: కొత్త పాస్‌వర్డ్ గరిష్టంగా ఉంటుంది%length%పాత్రలు.
-    passwordIsUsername: పాస్‌వర్డ్ తప్పనిసరిగా వినియోగదారు పేరు నుండి భిన్నంగా ఉండాలి.
-    passwordWrong: తప్పు గుర్తింపు అక్షరము
+    passwordTooShort: కొత్త పాస్‌వర్డ్‌లో కనీసం %length% అక్షరాలు ఉండాలి.
+    passwordTooLong: కొత్త పాస్‌వర్డ్‌లో గరిష్టంగా %length% అక్షరాలు ఉండవచ్చు.
+    passwordIsUsername: పాస్‌వర్డ్ వినియోగదారు పేరు కంటే భిన్నంగా ఉండాలి.
+    passwordWrong: తప్పు పాస్‌వర్డ్
     emailNotValid: ఈ ఇమెయిల్ చిరునామా చెల్లదు.
-    emailMissing: ఈ ఇమెయిల్ చిరునామాను నవీకరిస్తున్నప్పుడు లోపం. మీరు కనీసం ఒక ధృవీకరించబడిన ఇమెయిల్ చిరునామాను కలిగి ఉండాలి.
+    emailMissing: ఈ ఇమెయిల్ చిరునామాను అప్‌డేట్ చేస్తున్నప్పుడు లోపం. నీకు కనీసం ఒక ధృవీకరించబడిన ఇమెయిల్ చిరునామా ఉండాలి.
     emailExists: ఈ ఇమెయిల్ చిరునామా ఇప్పటికే ఉంది.
     usernameNotValid: ఈ వినియోగదారు పేరు చెల్లదు.
-    usernameMissing: మీరు తప్పనిసరిగా ఒక వినియోగదారు పేరును కలిగి ఉండాలి.
-    usernameExists: ఈ పేరు ఇంతకుముందే వాడేశారు.
+    usernameMissing: నీకు ఒక వినియోగదారు పేరు ఉండాలి.
+    usernameExists: ఈ వినియోగదారు పేరు ఇప్పటికే ఉంది.
     usernameContainsEmail: వినియోగదారు పేరులో ఇమెయిల్ చిరునామా ఉండకూడదు.
-    submitSuccess: రక్షించబడింది!
-  reallyDeleteProgram: మీరు నిజంగా మీ ప్రాజెక్ట్‌ను తొలగించాలనుకుంటున్నారా
-  programsOf: యొక్క ప్రాజెక్టులు
-  picture: Profile picture
-  changePicture: బొమ్మ మార్చండి
-  goToScratchProfile: స్క్రాచ్‌పై ప్రొఫైల్
+    submitSuccess: సేవ్ అయింది!
+  reallyDeleteProgram: నువ్వు నిజంగా నీ ప్రాజెక్ట్‌ను తొలగించాలనుకుంటున్నావా
+  programsOf: వీరి ప్రాజెక్ట్‌లు
+  picture: ప్రొఫైల్ చిత్రం
+  changePicture: చిత్రం మార్చు
+  goToScratchProfile: Scratchలో ప్రొఫైల్
 myprofile:
-  userSettings: User settings
-  profileSettings: అర్ధముఖము సవరించండి
-  securitySettings: పాస్వర్డ్ మార్చండి
+  userSettings: వినియోగదారు సెట్టింగ్‌లు
+  profileSettings: ప్రొఫైల్ సవరించు
+  securitySettings: పాస్‌వర్డ్ మార్చు
   accountSettings: ఖాతా సెట్టింగ్‌లు
-  accountVerification: Verify account
-  account: Account
-  editProfile: అర్ధముఖము సవరించండి
+  accountVerification: ఖాతాను ధృవీకరించు
+  account: ఖాతా
+  editProfile: ప్రొఫైల్ సవరించు
   edit: సవరించు
-  done: Done
-  checkMail: మీ ఇమెయిల్ చిరునామాకు ఒక ఇమెయిల్ పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ని చెక్ చేయండి.
-  passwordUpdated: మీ పాస్‌వర్డ్ విజయవంతంగా అప్‌డేట్ చేయబడింది.
+  done: పూర్తయింది
+  checkMail: నీ ఇమెయిల్ చిరునామాకు ఒక ఇమెయిల్ పంపబడింది. దయచేసి నీ ఇన్‌బాక్స్ చూడు.
+  passwordUpdated: నీ పాస్‌వర్డ్ విజయవంతంగా అప్‌డేట్ అయింది.
   avatar: అవతార్
   email: ఇమెయిల్
-  deleteAccount: ఖాతాను తొలగించండి
+  deleteAccount: ఖాతా తొలగించు
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: ఖాతా సెట్టింగ్‌లను సవరించండి
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    జాగ్రత్త:
+    నువ్వు %num_projects% ప్రాజెక్ట్(లు) సృష్టించావు, నీకు %num_followers% ఫాలోవర్(లు) ఉన్నారు. నీ ప్రాజెక్ట్‌లన్నీ తీసివేయబడతాయి. నువ్వు ఇకపై లాగిన్ అవ్వలేవు, నీ ప్రాజెక్ట్‌లు అన్ని జాబితాల నుండి మాయమవుతాయి. నీ ప్రొఫైల్‌ను తొలగించడాన్ని వెనక్కి తీసుకోలేము!
+    నువ్వు నిజంగా మమ్మల్ని వదిలి వెళ్ళాలనుకుంటున్నావా?
+  exportData: నా డేటాను డౌన్‌లోడ్ చేయి
+  exportDataDescription: నీ వ్యక్తిగత డేటా కాపీని పొందే హక్కు నీకు ఉంది. ఇందులో నీ ప్రొఫైల్ సమాచారం, ప్రాజెక్ట్‌లు, వ్యాఖ్యలు, ప్రతిస్పందనలు, ఫాలోవర్లు ఉంటాయి.
+  exportDataLoading: డౌన్‌లోడ్ అవుతోంది...
+  exportDataError: నీ డేటాను ఎగుమతి చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది. దయచేసి కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.
+  exportDataRateLimited: నువ్వు రోజుకు ఒక్కసారి మాత్రమే నీ డేటాను ఎగుమతి చేయగలవు. దయచేసి రేపు మళ్ళీ ప్రయత్నించు.
+  editAccountSettings: ఖాతా సెట్టింగ్‌లను సవరించు
+  profileChangeSuccess: నీ ప్రొఫైల్ విజయవంతంగా మార్చబడింది.
+  unspecifiedError: నీ ప్రొఫైల్‌ను మార్చేటప్పుడు ఏదో పని చేయలేదు. దయచేసి మళ్ళీ ప్రయత్నించు, ఇలాగే జరుగుతూ ఉంటే మాకు తెలియజేయి!
+  verifyAccountText: నీ ఖాతాను ధృవీకరించడానికి మేము నీకు ఒక లింక్‌తో ఇమెయిల్ పంపుతాము. తర్వాతి గంటలోపు లింక్‌పై క్లిక్ చేయడం మర్చిపోకు, రోజుకు ఒక్క ఇమెయిల్ మాత్రమే అడగవచ్చు.
+  verifyAccountButton: ఇమెయిల్ పంపు
+  verifyAccountMailSent: ఇమెయిల్ విజయవంతంగా పంపబడింది. దయచేసి నీ ఇన్‌బాక్స్ చూడు
+  verifyAccountMailFailed: నువ్వు రోజుకు ఒక్క ఇమెయిల్ మాత్రమే అడగవచ్చు
 licenseToPlay:
   link: 'ఆడటానికి లైసెన్స్'
-  title: 'ఆడటానికి లైసెన్స్ - క్రెడిట్ మరియు షేర్ ఇవ్వండి'
-  text1: ప్రతి కాట్రోబాట్ ప్రాజెక్ట్ ఒక కేక్ అని ఊహించుకోండి, దాని రెసిపీ (ప్రోగ్రామింగ్ బ్లాక్స్) తో వచ్చే చాలా ప్రత్యేకమైన కేక్. కాట్రోబాట్ కమ్యూనిటీ సభ్యులందరూ వారి వంటకాలతో పాటు వారి కేక్‌లను పంచుకుంటారు. దీని అర్థం మీరు కేక్‌లను ఆస్వాదించవచ్చు మరియు వాటిని మీరే ఎలా తయారు చేయాలో నేర్చుకోవచ్చు!
-  text2: 'రహస్య వంటకాలు లేవు: ఈ కేక్‌లను ఎలా తయారు చేయాలో సూచనలు ఎవరైనా ఉపయోగించడానికి, తిరిగి ఉపయోగించడానికి, సవరించడానికి మరియు కొత్త ఆలోచనలకు ప్రేరణగా ఉపయోగపడతాయి ... అంటే కేకులు.'
-  text3: "మీరు కేక్‌లను తినవచ్చు అలాగే మీ స్వంతం చేసుకోవడానికి ఇతరుల వంటకాలను కాపీ చేయవచ్చు, బహుశా వివిధ పదార్ధాలతో. ఈ స్వేచ్ఛ రెండు సాధారణ అవసరాలతో వస్తుంది:"
-  text4: "కాట్రోబాట్ కమ్యూనిటీని ఏర్పాటు చేయడంలో, కమ్యూనిటీలో నేర్చుకోవడం మరియు సృజనాత్మకతకు మద్దతు ఇస్తుందని మేము విశ్వసిస్తున్నందున ఈ విధానాన్ని అవలంబించాలని మేము నిర్ణయించుకున్నాము. వంటకాలు మరియు పదార్థాలు (స్క్రిప్ట్‌లు మరియు కళాకృతులు) పంచుకోవడం ద్వారా, ప్రజలు ఒకరి ఆలోచనలను మరొకరు నిర్మించుకోవచ్చు మరియు ప్రతిఒక్కరూ ప్రయోజనం పొందుతారు."
-  text5: కాట్రోబాట్ వెబ్‌సైట్ రూపకల్పనలో, వ్యక్తులను భాగస్వామ్యం చేయడానికి మరియు ఇతరులకు క్రెడిట్ ఇవ్వడానికి ప్రోత్సహించడానికి మేము ఫీచర్లను చేర్చాము. ప్రతి ప్రాజెక్ట్ పేజీలో, మీరు ఎల్లప్పుడూ ప్రాజెక్ట్ కోసం అసలు స్క్రిప్ట్‌లను డౌన్‌లోడ్ చేసుకోవచ్చు. మీరు ఒక ప్రాజెక్ట్‌ను రీమిక్స్ చేస్తే (స్క్రిప్ట్‌లు లేదా కళాకృతులను సవరించడం మరియు ఫలితాన్ని పంచుకోవడం), మీకు స్ఫూర్తినిచ్చిన వ్యక్తుల గురించి మరియు ప్రాజెక్ట్ గురించి పేర్కొంటూ, ప్రాజెక్ట్ నోట్స్‌లో క్రెడిట్ ఇవ్వమని మేము మిమ్మల్ని ప్రోత్సహిస్తాము.
-  text6: 'కాట్రోబాట్ ఆన్‌లైన్ కమ్యూనిటీ ఉపయోగ నిబంధనల గురించి మరింత తెలుసుకోండి %link-termsOfUse%.'
+  title: 'ఆడటానికి లైసెన్స్ - క్రెడిట్ ఇవ్వు, షేర్ చేయి'
+  text1: ప్రతి Catrobat ప్రాజెక్ట్ ఒక కేక్ అని ఊహించుకో, దాని రెసిపీతో (ప్రోగ్రామింగ్ బ్లాక్‌లు) వచ్చే చాలా ప్రత్యేకమైన కేక్. Catrobat కమ్యూనిటీ సభ్యులందరూ తమ కేక్‌లను వాటి రెసిపీలతో సహా షేర్ చేస్తారు. అంటే నువ్వు కేక్‌లను ఆస్వాదించవచ్చు, వాటిని నువ్వే ఎలా తయారు చేయాలో నేర్చుకోవచ్చు!
+  text2: 'రహస్య రెసిపీలు ఏవీ లేవు: ఈ కేక్‌లను ఎలా తయారు చేయాలో సూచనలు ఎవరైనా ఉపయోగించడానికి, మళ్ళీ ఉపయోగించడానికి, మార్చడానికి, కొత్త ఆలోచనలకు ప్రేరణగా తీసుకోవడానికి తెరిచి ఉంటాయి... అంటే కేక్‌లు.'
+  text3: "నువ్వు కేక్‌లను తినవచ్చు, అలాగే నీ సొంతది తయారు చేయడానికి ఇతరుల రెసిపీలను కాపీ చేయవచ్చు, బహుశా వేరే పదార్థాలతో. ఈ స్వేచ్ఛతో పాటు రెండు సాధారణ షరతులు ఉన్నాయి:"
+  text4: "Catrobat కమ్యూనిటీని ఏర్పాటు చేసేటప్పుడు, ఈ విధానం కమ్యూనిటీలో నేర్చుకోవడానికి, సృజనాత్మకతకు తోడ్పడుతుందని నమ్మి మేము దీన్ని అనుసరించాలని నిర్ణయించుకున్నాము. రెసిపీలు, పదార్థాలు (స్క్రిప్ట్‌లు, కళాకృతులు) షేర్ చేయడం ద్వారా, అందరూ ఒకరి ఆలోచనలపై మరొకరు నిర్మించవచ్చు, అందరికీ ప్రయోజనం కలుగుతుంది."
+  text5: Catrobat వెబ్‌సైట్‌ను రూపొందించేటప్పుడు, షేర్ చేయడానికి, ఇతరులకు క్రెడిట్ ఇవ్వడానికి ప్రోత్సహించే ఫీచర్లను మేము చేర్చాము. ప్రతి ప్రాజెక్ట్ పేజీలో, నువ్వు ఎప్పుడైనా ఆ ప్రాజెక్ట్ అసలు స్క్రిప్ట్‌లను డౌన్‌లోడ్ చేసుకోవచ్చు. నువ్వు ఒక ప్రాజెక్ట్‌ను రీమిక్స్ చేస్తే (స్క్రిప్ట్‌లు లేదా కళాకృతులను మార్చి, ఫలితాన్ని షేర్ చేస్తే), నీకు ప్రేరణ ఇచ్చిన వ్యక్తులను, ప్రాజెక్ట్‌ను పేర్కొంటూ ప్రాజెక్ట్ గమనికలలో క్రెడిట్ ఇవ్వమని మేము నిన్ను ప్రోత్సహిస్తాము.
+  text6: 'Catrobat ఆన్‌లైన్ కమ్యూనిటీ ఉపయోగ నిబంధనల గురించి %link-termsOfUse%లో మరింత తెలుసుకో.'
   list1:
-    item1: రెసిపీతో పాటు మీ కేక్‌లను పంచుకోండి
-    item2: మీకు స్ఫూర్తినిచ్చిన వారికి క్రెడిట్ ఇవ్వండి
+    item1: నీ కేక్‌లను రెసిపీతో సహా షేర్ చేయి
+    item2: నీకు ప్రేరణ ఇచ్చినవారికి క్రెడిట్ ఇవ్వు
   version: వెర్షన్ 1.1, 2 ఏప్రిల్ 2013
 termsOfUse:
   title: ఉపయోగ నిబంధనలు
-  headline: కాట్రోబాట్ కమ్యూనిటీకి స్వాగతం!
-  text1: 'కాట్రోబాట్ కమ్యూనిటీలో భాగంగా, మీరు ప్రజలతో ప్రాజెక్ట్‌లు మరియు ఆలోచనలను పంచుకుంటున్నారు:'
-  text2: "ఈ సంఘాన్ని ప్రతి సభ్యుడికి సహాయక ప్రదేశంగా మార్చడానికి మాకు మీ సహాయం కావాలి. మీరు ఎలా సహాయపడగలరో ఇక్కడ ఉంది:"
-  text3: "కాట్రోబాట్ ప్రాజెక్ట్ ద్వారా మేము సహకారాన్ని పెంపొందించుకోవాలనుకుంటున్నాము మరియు మానవజాతి మొత్తం ప్రయోజనం కోసం అందరి సృజనాత్మకతను మిళితం చేయాలనుకుంటున్నాము. ఇతర క్రియాశీల సభ్యులు తమ ప్రాజెక్ట్‌లను మీకు అందించే విధంగానే, మీ ప్రాజెక్టులను బహుమతిగా సమాజానికి తిరిగి ఇవ్వడం ద్వారా మీరు క్యాట్రోబాట్ కమ్యూనిటీలో క్రియాశీల సభ్యుడిగా కూడా మారవచ్చు:"
-  text4: 'మీకు మా బహుమతి:'
-  text5: 'మా ఉపయోగ నిబంధనలు మరియు సేవ:'
+  headline: Catrobat కమ్యూనిటీకి స్వాగతం!
+  text1: 'Catrobat కమ్యూనిటీలో భాగంగా, నువ్వు ఈ వ్యక్తులతో ప్రాజెక్ట్‌లు, ఆలోచనలు షేర్ చేస్తున్నావు:'
+  text2: "ఈ కమ్యూనిటీని ప్రతి సభ్యుడికీ తోడ్పాటునిచ్చే ప్రదేశంగా చేయడానికి మాకు నీ సహాయం కావాలి. నువ్వు ఇలా సహాయం చేయవచ్చు:"
+  text3: "Catrobat ప్రాజెక్ట్ ద్వారా మేము సహకారాన్ని పెంపొందించాలని, మొత్తం మానవాళి ప్రయోజనం కోసం అందరి సృజనాత్మకత కలవాలని కోరుకుంటున్నాము. ఇతర క్రియాశీల సభ్యులు తమ ప్రాజెక్ట్‌లను నీకు ఇచ్చినట్లే, నీ ప్రాజెక్ట్‌లను కమ్యూనిటీకి బహుమతిగా తిరిగి ఇవ్వడం ద్వారా నువ్వు కూడా Catrobat కమ్యూనిటీలో క్రియాశీల సభ్యుడివి కావచ్చు:"
+  text4: 'నీకు మా బహుమతి:'
+  text5: 'మా ఉపయోగ మరియు సేవా నిబంధనలు:'
   list1:
-    item1: అనేక దేశాలు మరియు సంస్కృతుల నుండి
-    item2: అన్ని వయసుల వారు (చిన్న పిల్లల నుండి టీనేజ్ మరియు తాతల వరకు)
-    item3: అన్ని స్థాయిల అనుభవంతో
+    item1: అనేక దేశాలు, సంస్కృతుల నుండి
+    item2: అన్ని వయసుల వారు (చిన్న పిల్లల నుండి టీనేజర్లు, తాతయ్యలు, అమ్మమ్మల వరకు)
+    item3: అన్ని స్థాయిల అనుభవం ఉన్నవారు
   list2:
-    item1: గౌరవంగా వుండు. ప్రాజెక్ట్‌లను పంచుకునేటప్పుడు, దయచేసి వివిధ వయసుల మరియు నేపథ్యాల వ్యక్తులు మీ సహకారాన్ని చూస్తారని గుర్తుంచుకోండి.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "నిజాయితీగా ఉండు. మీరు ఎవరో కాకుండా వేరొకరిలా నటించవద్దు లేదా సమాజాన్ని మోసగించడానికి ప్రయత్నించవద్దు."
-    item4: "వ్యక్తిగత సమాచారాన్ని గోప్యంగా ఉంచండి. మీ ఇమెయిల్ చిరునామా, ఫోన్ నంబర్ లేదా ఇతర వ్యక్తిగత సంప్రదింపు సమాచారాన్ని పంచుకోవద్దు."
-    item5: "సైట్‌ను స్నేహపూర్వకంగా ఉంచడంలో సహాయపడండి. ఇతరులు ఒక ప్రాజెక్ట్ లేదా వ్యాఖ్య అర్థం, అవమానకరమైనది, చాలా హింసాత్మకమైనది, లేదా తగనిదిగా భావిస్తారని మీకు అనిపిస్తే, 'తగనిదిగా నివేదించు' బటన్‌ని క్లిక్ చేసి, చిన్న వివరణ ఇవ్వండి. కాట్రోబాట్ బృందం మీ నివేదికను సమీక్షిస్తుంది మరియు ఏదైనా ప్రాజెక్ట్, వ్యాఖ్య లేదా పోస్ట్‌ను తీసివేయవచ్చు."
+    item1: గౌరవంగా ఉండు. ప్రాజెక్ట్‌లను షేర్ చేసేటప్పుడు, వివిధ వయసులు, నేపథ్యాల వ్యక్తులు నీ రచనలను చూస్తారని దయచేసి గుర్తుంచుకో.
+    item2: "క్రెడిట్ ఇవ్వు. ఇతరుల ప్రాజెక్ట్‌లను మార్చి నీ సొంత వెర్షన్‌లు తయారు చేసుకోవచ్చు - వారికి క్రెడిట్ ఇవ్వడం మాత్రం మర్చిపోకు. క్రెడిట్ ఇవ్వడానికి ఒక చోటు నీ ప్రాజెక్ట్ గమనికలు మరియు క్రెడిట్స్ విభాగం. ఇతర వినియోగదారుల ప్రాజెక్ట్‌లను మార్చడం గురించిన వివరాల కోసం దయచేసి ఈ జాబితా కింది పేరాను చూడు."
+    item3: "నిజాయితీగా ఉండు. నువ్వు కానివారిలా నటించకు, కమ్యూనిటీని మోసం చేయడానికి ప్రయత్నించకు."
+    item4: "వ్యక్తిగత సమాచారాన్ని గోప్యంగా ఉంచు. నీ ఇమెయిల్ చిరునామా, ఫోన్ నంబర్ లేదా ఇతర వ్యక్తిగత సంప్రదింపు సమాచారాన్ని షేర్ చేయకు."
+    item5: "సైట్‌ను స్నేహపూర్వకంగా ఉంచడంలో సహాయం చేయి. ఒక ప్రాజెక్ట్ లేదా వ్యాఖ్య ఇతరులకు దురుసుగా, అవమానకరంగా, అతి హింసాత్మకంగా లేదా మరేదైనా విధంగా అనుచితంగా అనిపిస్తుందని నీకు అనిపిస్తే, 'అనుచితమైనదిగా రిపోర్ట్ చేయి' బటన్‌ను క్లిక్ చేసి చిన్న వివరణ రాయి. Catrobat బృందం నీ రిపోర్ట్‌ను పరిశీలించి, ఏదైనా ప్రాజెక్ట్, వ్యాఖ్య లేదా పోస్ట్‌ను తీసివేయవచ్చు."
   list3:
-    item1: "మా వెబ్‌సైట్‌లకు ఒక ప్రాజెక్ట్‌ను అప్‌లోడ్ చేయడం ద్వారా, మీరు ఈ పనిని అప్‌లోడ్ చేసిన కాట్రోబాట్ ప్రాజెక్ట్‌ల యొక్క కొన్ని ఉచిత లైసెన్సుల కింద ఉంచడానికి అంగీకరిస్తున్నారు మరియు అంగీకరిస్తున్నారు. కాట్రోబాట్ సిస్టమ్ మీకు అందుబాటులో ఉన్న ఉచిత లైసెన్స్‌ల మాదిరిగానే, అప్‌లోడ్ చేసిన కాట్రోబాట్ ప్రాజెక్ట్‌ల యొక్క ఉచిత లైసెన్సులు ప్రతిఒక్కరూ గతంలో ఇతరులు అప్‌లోడ్ చేసిన పని నుండి నేర్చుకునే హక్కును అందిస్తారు మరియు వారి స్వంత కొత్త మనోహరమైన ఆటలను నిర్మించడానికి ఆ పనిని స్వీకరించడానికి మరియు రీమిక్స్ చేయడానికి, యానిమేషన్‌లు మరియు ఇతర ప్రాజెక్ట్‌లు. ఇది ప్రతి ఒక్కరినీ 'ఒకరి తోటివారి భుజాలపై నిలబెట్టడానికి' అనుమతిస్తుంది, వారిలో ఒకరు మీరు! మీ పని ప్రపంచం మొత్తానికి ప్రయోజనం చేకూరుస్తుంది మరియు ప్రతిఒక్కరూ ఉపయోగించడానికి స్వేచ్ఛగా ఉంటుంది, ప్రపంచవ్యాప్తంగా ఉన్న వాలంటీర్లు వికీపీడియాకు ఉచితంగా అందించిన వచనం మరియు చిత్రాలను పోలి ఉంటుంది. మానవత్వానికి మీ బహుమతిగా భావించండి: మీరు అందరికీ ఇస్తారు, మరియు మా వెబ్‌సైట్‌లకు వారి పనిని అప్‌లోడ్ చేసే ఇతరులందరూ మీకు ఇస్తారు. ఆ విధంగా అప్‌లోడ్ చేసిన ప్రాజెక్ట్ అనేది గొప్ప విలువ కలిగిన బహుమతి, దాని యజమాని మీకు ఉచితంగా ఇస్తున్నారు, అదే నిబంధనలతో మీరు సంఘంలో పాల్గొనే షరతుతో."
-    item2: మీరు బహుమతిని అంగీకరించాల్సిన అవసరం లేదు; మీరు చేస్తే, కొన్ని నియమాలు వర్తిస్తాయి. ఈ నియమాల యొక్క ప్రయోజనాలు ఏమిటంటే, మీరు పని నుండి నేర్చుకోవచ్చు మరియు మరింత చల్లగా ఉండే వస్తువులను మీరే తయారు చేసుకోవచ్చు, తర్వాత మీరు మా వెబ్‌సైట్‌లకు మీ స్వంతం వలె అప్‌లోడ్ చేయవచ్చు. మరొక ప్రయోజనం ఏమిటంటే, ఈ లైసెన్స్‌లు మీ ప్రాజెక్ట్‌ను ఉపయోగించడం ద్వారా ఇతరులకు ఎదురయ్యే ఏవైనా సమస్యలకు మీరు బాధ్యత వహించలేరని నిర్ధారించుకోవడం.
-    item3: "ఒక ముఖ్యమైన అదనపు షరతు ఏమిటంటే, మీ స్వంత పని ఆధారంగా మీరు ఎవరి రచనలపై రచయితలకు స్పష్టంగా ఆపాదిస్తున్నారు. అదే సమయంలో, కాట్రోబాట్ కమ్యూనిటీలో మీకు ప్రాతినిధ్యం వహించడానికి మీరు స్వేచ్ఛగా ఎంచుకున్న ఏకైక పేరుకు ఆపాదన ఇవ్వడం ద్వారా మరియు ఇతరులకు అవకాశం ఇవ్వడం ద్వారా, మీ పనిని ఇతరులు అందించినందుకు మీ పనిని స్పష్టంగా ప్రశంసించేలా మేము కృషి చేస్తాము. ప్రతిఒక్కరికీ మరియు ప్రత్యేకించి వారికి మీ పనిని అందించినందుకు పబ్లిక్ మార్గాల్లో మీకు కృతజ్ఞతలు తెలియజేయడానికి."
-    item4: 'దయచేసి సంప్రదించండి %link-licenseUploaded% ఖచ్చితమైన చట్టపరమైన నిబంధనలు మరియు షరతుల కోసం.'
+    item1: "మా వెబ్‌సైట్‌లకు ఒక ప్రాజెక్ట్‌ను అప్‌లోడ్ చేయడం ద్వారా, ఆ పనిని అప్‌లోడ్ చేసిన Catrobat ప్రాజెక్ట్‌ల కొన్ని ఉచిత లైసెన్స్‌ల కింద ఉంచడానికి నువ్వు అంగీకరిస్తున్నావు. Catrobat సిస్టమ్ నీకు అందుబాటులో ఉన్న ఉచిత లైసెన్స్‌ల లాగానే, అప్‌లోడ్ చేసిన Catrobat ప్రాజెక్ట్‌ల ఈ ఉచిత లైసెన్స్‌లు ఇతరులు ఇంతకు ముందు అప్‌లోడ్ చేసిన పని నుండి నేర్చుకునే హక్కును, ఆ పనిని మార్చి రీమిక్స్ చేసి తమ సొంత కొత్త ఆసక్తికరమైన గేమ్‌లు, యానిమేషన్‌లు, ఇతర ప్రాజెక్ట్‌లు నిర్మించుకునే హక్కును అందరికీ ఇస్తాయి. దీనివల్ల ప్రతి ఒక్కరూ 'తోటివారి భుజాలపై నిలబడగలరు', వారిలో ఒకరు నువ్వే! నీ పని ఈ విధంగా మొత్తం ప్రపంచానికి ఉపయోగపడుతుంది, అందరూ ఉచితంగా ఉపయోగించుకునేలా ఉంటుంది, ప్రపంచవ్యాప్తంగా వాలంటీర్లు వికీపీడియాకు ఉచితంగా అందించే పాఠ్యం, చిత్రాల లాగా. దీన్ని మానవాళికి నీ బహుమతిగా భావించు: నువ్వు అందరికీ ఇస్తావు, మా వెబ్‌సైట్‌లకు తమ పనిని అప్‌లోడ్ చేసే ఇతరులందరూ నీకు ఇస్తారు. కాబట్టి అప్‌లోడ్ చేసిన ప్రాజెక్ట్ గొప్ప విలువైన బహుమతి, దాని యజమాని దాన్ని నీకు ఉచితంగా ఇస్తున్నారు, నువ్వు కూడా అదే నిబంధనలతో కమ్యూనిటీలో పాల్గొనాలనే షరతుతో."
+    item2: నువ్వు ఆ బహుమతిని స్వీకరించాల్సిన అవసరం లేదు; స్వీకరిస్తే, కొన్ని నియమాలు వర్తిస్తాయి. ఈ నియమాల ప్రయోజనం ఏమిటంటే, నువ్వు ఆ పని నుండి నేర్చుకుని, దానిపై నిర్మించి ఇంకా అద్భుతమైనవి నువ్వే తయారు చేయవచ్చు, వాటిని ఉదాహరణకు మళ్ళీ నీ సొంత పనిగా మా వెబ్‌సైట్‌లకు అప్‌లోడ్ చేయవచ్చు. మరో ప్రయోజనం ఏమిటంటే, నీ ప్రాజెక్ట్‌ను ఇతరులు ఉపయోగించడం వల్ల వారికి కలిగే ఏ సమస్యలకూ నిన్ను బాధ్యుడిని చేయలేరని ఈ లైసెన్స్‌లు నిర్ధారిస్తాయి.
+    item3: "ఒక ముఖ్యమైన అదనపు షరతు ఏమిటంటే, నువ్వు ఎవరి పనుల ఆధారంగా నీ పనిని చేశావో ఆ రచయితలకు స్పష్టంగా క్రెడిట్ ఇవ్వాలి. అదే సమయంలో, Catrobat కమ్యూనిటీలో నిన్ను సూచించడానికి నువ్వు స్వేచ్ఛగా ఎంచుకున్న ప్రత్యేక పేరుకు క్రెడిట్ ఇవ్వడం ద్వారా, నీ పనిని అందరికీ, ముఖ్యంగా వారికి ఇచ్చినందుకు నీకు బహిరంగంగా కృతజ్ఞతలు తెలిపే అవకాశం ఇతరులకు ఇవ్వడం ద్వారా, నీ పని నువ్వే అందించావని ఇతరులు స్పష్టంగా గుర్తించేలా మేము కృషి చేస్తాము."
+    item4: 'ఖచ్చితమైన చట్టపరమైన నిబంధనలు, షరతుల కోసం దయచేసి %link-licenseUploaded% చూడు.'
   list4:
-    item1: "మేము కాట్రోబాట్ సిస్టమ్‌కు సంబంధించిన మా స్వంత సాఫ్ట్‌వేర్ మరియు ఇంటర్నెట్ వనరులను అందిస్తాము, ఉదా., కాట్రోబాట్ బృందం రాసిన సాఫ్ట్‌వేర్, మా వెబ్‌సైట్లు మరియు ఇంటర్నెట్ వనరులు, కాట్రోబాట్ సిస్టమ్‌కు సంబంధించిన మా స్వంత సోర్స్ కోడ్ మరియు ఉదా. , చిత్రాలు, శబ్దాలు మరియు పాఠాలు, ఇప్పుడు మరియు భవిష్యత్తులో కాట్రోబాట్ యొక్క ఉచిత లైసెన్సుల కింద మీకు."
-    item2: ఈ లైసెన్సులు కాట్రోబాట్ యొక్క అన్ని భాగాలను మీకు ఉచితంగా మరియు మీకు నచ్చిన విధంగా ఉపయోగించడానికి మీకు స్వేచ్ఛను అందించే కోణంలో ఉచితంగా చేస్తాయి, మరికొన్నింటిలో, క్యాట్రోబాట్ వ్యవస్థ ఎప్పటికీ స్వేచ్ఛగా ఉంటుందని నిర్ధారిస్తుంది. మరియు అందరికీ ఉపయోగపడుతుంది.
-    item3: 'దయచేసి సంప్రదించండి %link-licenseToPlay% ఖచ్చితమైన చట్టపరమైన నిబంధనలు మరియు షరతుల కోసం. కాట్రోబాట్ వ్యవస్థ యొక్క సోర్స్ కోడ్‌తో పాటు అనేక ఇతర పత్రాలు మరియు వనరులు అందుబాటులో ఉన్నాయి %link-developer%.'
+    item1: "Catrobat సిస్టమ్‌కు సంబంధించిన మా సొంత సాఫ్ట్‌వేర్, ఇంటర్నెట్ వనరులన్నింటినీ, ఉదాహరణకు Catrobat బృందం రాసిన సాఫ్ట్‌వేర్, మా వెబ్‌సైట్‌లు, ఇంటర్నెట్ వనరులు, Catrobat సిస్టమ్‌కు సంబంధించిన మా సొంత సోర్స్ కోడ్, అలాగే చిత్రాలు, శబ్దాలు, పాఠ్యాలు వంటి అదనపు సామగ్రిని, ఇప్పుడు మరియు భవిష్యత్తులో Catrobat ఉచిత లైసెన్స్‌ల కింద నీకు అందిస్తాము."
+    item2: ఈ లైసెన్స్‌లు Catrobat అన్ని భాగాలను నీకు ఉచితంగా అందిస్తాయి, అంతేకాకుండా వాటిని నీకు నచ్చినట్లు ఉపయోగించుకునే స్వేచ్ఛనూ ఇస్తాయి. కొన్ని పరిమితులు మాత్రమే ఉంటాయి, ఇవి ఇతర విషయాలతో పాటు Catrobat సిస్టమ్ ఎప్పటికీ ఉచితంగా, అందరికీ ఉపయోగకరంగా ఉండేలా చూస్తాయి.
+    item3: 'ఖచ్చితమైన చట్టపరమైన నిబంధనలు, షరతుల కోసం దయచేసి %link-licenseToPlay% చూడు. Catrobat సిస్టమ్ సోర్స్ కోడ్‌తో పాటు అనేక ఇతర పత్రాలు, వనరులు %link-developer% ద్వారా అందుబాటులో ఉన్నాయి.'
   list5:
-    item1: 'మీరు, లేదా, మీరు 13 సంవత్సరాల కంటే తక్కువ వయస్సు ఉన్నట్లయితే, మీ తల్లిదండ్రులు లేదా చట్టపరమైన సంరక్షకులు, డ్రాగనెట్ రకం గోప్యతా ఉల్లంఘనలు మరియు/లేదా బల్క్ లేదా సామూహిక పర్యవేక్షణలో పాల్గొన్న లేదా బాధ్యత వహించే సంస్థతో సంబంధం కలిగి ఉంటే, మీరు మా ఉపయోగించడానికి అనుమతించబడరు సాఫ్ట్‌వేర్ అప్లికేషన్‌లు మరియు మా సేవలను యాక్సెస్ చేయడానికి. ఈ పరిమితి యొక్క ఖచ్చితమైన వివరాలు మరియు దానికి కొన్ని మినహాయింపులు సెక్షన్ 4.a మరియు 4.b లో వివరించబడ్డాయి %link-termsOfUse%.'
-    item2: మీరు 13 ఏళ్లలోపు వారైతే, మీ తల్లిదండ్రులు లేదా చట్టపరమైన సంరక్షకులను మీరు కాట్రోబాట్ సాఫ్ట్‌వేర్ అప్లికేషన్‌లు మరియు సేవలను ఉపయోగించడానికి అనుమతిస్తారా అని అడగాలి.
-    item3: "ప్రాజెక్ట్‌లు, వినియోగదారు ఖాతాలు మరియు ఏవైనా డిజిటల్ మెటీరియల్‌లను మా స్వంత అభీష్టానుసారం ఎప్పుడైనా తిరస్కరించడం, తొలగించడం లేదా దాచడం వంటి హక్కులను మేము కలిగి ఉన్నాము, ఉదాహరణకు ఒక ప్రాజెక్ట్‌లో తగని మెటీరియల్ ఉందని లేదా ఒకవేళ యూజర్ ఉల్లంఘించినట్లు అనిపిస్తే ఇతర వ్యక్తుల హక్కులు."
-    item4: "కాట్రోబాట్ యొక్క అన్ని సాఫ్ట్‌వేర్ మరియు ఇంటర్నెట్ వనరులు ఉపయోగకరంగా ఉంటాయనే ఆశతో అందించబడతాయి, కానీ ఎలాంటి వారంటీ లేకుండా."
-    item5: 'దయచేసి మమ్మల్ని సంప్రదించండి %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service పై పాయింట్ల ఖచ్చితమైన సూత్రీకరణలు మరియు కొన్ని అదనపు చట్టపరమైన నిబంధనలు మరియు షరతుల కోసం.'
-  bottom1: ఎప్పటికప్పుడు ఇక్కడ తిరిగి తనిఖీ చేయండి, ఎందుకంటే మేము ఎల్లప్పుడూ మా ఉపయోగ నిబంధనలను మెరుగుపరచడానికి ప్రయత్నిస్తున్నాము.
-  bottom2: 'దయచేసి ఈ ఉపయోగ నిబంధనలకు సంబంధించి ఏవైనా సలహాలను పంపండి %email-webmaster%.'
+    item1: 'నువ్వు, లేదా నీ వయసు 13 ఏళ్ల కంటే తక్కువైతే నీ తల్లిదండ్రులు లేదా చట్టపరమైన సంరక్షకులు, డ్రాగ్‌నెట్ తరహా గోప్యతా ఉల్లంఘనలు మరియు/లేదా భారీ లేదా సామూహిక నిఘాలో పాల్గొనే లేదా దానికి బాధ్యత వహించే సంస్థతో సంబంధం కలిగి ఉంటే, నువ్వు మా సాఫ్ట్‌వేర్ అప్లికేషన్‌లను ఉపయోగించడానికి, మా సేవలను యాక్సెస్ చేయడానికి అనుమతి లేదు. ఈ పరిమితి ఖచ్చితమైన వివరాలు, దానికి కొన్ని మినహాయింపులు మా %link-termsOfUse%లోని సెక్షన్లు 4.a మరియు 4.bలో వివరించబడ్డాయి.'
+    item2: నీ వయసు 13 ఏళ్ల కంటే తక్కువైతే, Catrobat సాఫ్ట్‌వేర్ అప్లికేషన్‌లు, సేవలను ఉపయోగించడానికి వారు అనుమతిస్తారా అని నువ్వు నీ తల్లిదండ్రులను లేదా చట్టపరమైన సంరక్షకులను అడగాలి.
+    item3: "Catrobat వెబ్‌సైట్‌లకు అప్‌లోడ్ చేసిన ప్రాజెక్ట్‌లు, వినియోగదారు ఖాతాలు, ఏదైనా డిజిటల్ సామగ్రిని ఎప్పుడైనా మా సొంత విచక్షణతో తిరస్కరించే, తొలగించే లేదా దాచే హక్కులు మాకు ఉన్నాయి, ఉదాహరణకు ఒక ప్రాజెక్ట్‌లో అనుచితమైన సామగ్రి ఉందని లేదా ఒక వినియోగదారు ఇతరుల హక్కులను ఉల్లంఘిస్తున్నారని మేము గుర్తిస్తే."
+    item4: "Catrobat సాఫ్ట్‌వేర్, ఇంటర్నెట్ వనరులన్నీ ఉపయోగకరంగా ఉంటాయనే ఆశతో అందించబడతాయి, కానీ ఎలాంటి వారంటీ లేకుండా."
+    item5: 'పై అంశాల ఖచ్చితమైన వివరణలు, కొన్ని అదనపు చట్టపరమైన నిబంధనలు, షరతుల కోసం దయచేసి మా %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service చూడు.'
+  bottom1: మా ఉపయోగ నిబంధనలను మెరుగుపరచడానికి మేము ఎప్పుడూ ప్రయత్నిస్తుంటాము కాబట్టి, అప్పుడప్పుడు ఇక్కడ మళ్ళీ చూస్తూ ఉండు.
+  bottom2: 'ఈ ఉపయోగ నిబంధనల గురించి ఏవైనా సూచనలు ఉంటే దయచేసి %email-webmaster%కి పంపు.'
   version: వెర్షన్ 1.3, 4 మార్చి 2014
 search:
-  dotdotdot: వెతకండి...
-  search: Search projects, users & studios
-  inMediaLib: మీడియా లైబ్రరీలో వెతకండి
-  inMediaCategory: Search in media category
-  results: శోధన ఫలితాలు
-  resultcount: మీ శోధన తిరిగి వచ్చింది%count% ఫలితాలు
-  fail: దయచేసి కనీసం ఒక్క శోధన పదాన్ని నమోదు చేయండి
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  dotdotdot: వెతుకు...
+  search: ప్రాజెక్ట్‌లు, వినియోగదారులు & స్టూడియోలను వెతుకు
+  inMediaLib: మీడియా లైబ్రరీలో వెతుకు
+  inMediaCategory: మీడియా వర్గంలో వెతుకు
+  results: వీటికి ఫలితాలు
+  resultcount: నీ శోధనకు %count% ఫలితాలు వచ్చాయి
+  fail: దయచేసి కనీసం ఒక శోధన పదాన్ని నమోదు చేయి
+  noUsers: వినియోగదారులు ఎవరూ కనబడలేదు
+  noProjects: ప్రాజెక్ట్‌లు ఏవీ కనబడలేదు
+  noStudios: స్టూడియోలు ఏవీ కనబడలేదు
+  sameSearchMessage: "నువ్వు ఇప్పటికే ఇక్కడే ఉన్నావు! వేరే శోధన ప్రయత్నించు?"
 menu:
-  profile: నా జీవన వివరణ
-  login: ప్రవేశించండి
+  profile: ప్రొఫైల్
+  login: లాగిన్
   logout: లాగ్ అవుట్
   admin: అడ్మిన్
   home: హోమ్
   helpAndTutorials: సహాయం & ట్యుటోరియల్స్
-  followersAndFollowing: అనుచరుడు
-  mediaLibrary: Media library
-  studio: Studios
+  followersAndFollowing: ఫాలోవర్
+  mediaLibrary: మీడియా లైబ్రరీ
+  studio: స్టూడియోలు
   language: భాష
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: భాష ఎంపికలు ఏవీ అందుబాటులో లేవు.
 login:
-  login: ప్రవేశించండి
+  login: లాగిన్
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: ఇప్పుడే లాగిన్ అవ్వు
+    createAccount: ఖాతా సృష్టించు
+    forgetPassword: పాస్‌వర్డ్ మర్చిపోయావా?
   oauth:
-    title: Or you can join with
-  passOrUser: మీ పాస్‌వర్డ్ లేదా వినియోగదారు పేరు తప్పు.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: మీ వినియోగదారు పేరు లేదా ఇమెయిల్ చిరునామా కనుగొనబడలేదు.
-  forgotPass: పాస్‌వర్డ్ లేదా వినియోగదారు పేరు మర్చిపోయారా?
-  recoverPassSend: మీ ఇమెయిల్ చిరునామాకు ఒక ఇమెయిల్ పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ని చెక్ చేయండి.
-  alreadyReset: ఈ వినియోగదారు కోసం పాస్‌వర్డ్ ఇప్పటికే గత 24 గంటల్లో అభ్యర్థించబడింది.
-  confirmationSend: మీ నమోదును నిర్ధారించడానికి ఒక ఇమెయిల్ మీ మెయిల్ చిరునామాకు పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ను తనిఖీ చేయండి మరియు మీ ఖాతాను సక్రియం చేయండి.
-  userOrEmail: వాడుకపేరు లేదా ఈమెయిల్
-  changePass: పాస్వర్డ్ మార్చండి
-  createAccount: ఒక ఖాతాను సృష్టించండి
-  noAccount: ఖాతా లేదు!
+    title: లేదా వీటితో చేరవచ్చు
+  passOrUser: నీ పాస్‌వర్డ్ లేదా వినియోగదారు పేరు తప్పు.
+  accountSuspended: 'నీ ఖాతా నిలిపివేయబడింది. ఇది పొరపాటు అని నువ్వు అనుకుంటే, దయచేసి సపోర్ట్‌ను సంప్రదించు.'
+  noUsername: నీ వినియోగదారు పేరు లేదా ఇమెయిల్ చిరునామా కనబడలేదు.
+  forgotPass: పాస్‌వర్డ్ లేదా వినియోగదారు పేరు మర్చిపోయావా?
+  recoverPassSend: నీ ఇమెయిల్ చిరునామాకు ఒక ఇమెయిల్ పంపబడింది. దయచేసి నీ ఇన్‌బాక్స్ చూడు.
+  alreadyReset: ఈ వినియోగదారు కోసం గత 24 గంటల్లో ఇప్పటికే పాస్‌వర్డ్ అడగబడింది.
+  confirmationSend: నీ రిజిస్ట్రేషన్‌ను నిర్ధారించడానికి నీ మెయిల్ చిరునామాకు ఒక ఇమెయిల్ పంపబడింది. దయచేసి నీ ఇన్‌బాక్స్ చూసి నీ ఖాతాను యాక్టివేట్ చేయి.
+  userOrEmail: వినియోగదారు పేరు లేదా ఇమెయిల్
+  changePass: పాస్‌వర్డ్ మార్చు
+  createAccount: ఒక ఖాతా సృష్టించు
+  noAccount: ఖాతా లేదా?
   alreadyAccount: ఇప్పటికే ఖాతా ఉందా?
   or: లేదా
-  username: వినియోగదారుని పేరు
+  username: వినియోగదారు పేరు
   email: ఇమెయిల్
-  passwordFirst: పాస్వర్డ్
-  passwordSecond: పాస్వర్డ్ ధృవీకరించబడింది
+  passwordFirst: పాస్‌వర్డ్
+  passwordSecond: పాస్‌వర్డ్ నిర్ధారణ
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: సైన్ అప్
+  subText: "కొనసాగించడం ద్వారా, నువ్వు Catrobat కమ్యూనిటీ ఖాతాను సృష్టిస్తున్నావు, మా %var1% మరియు %var2%కి అంగీకరిస్తున్నావు."
+  dateOfBirth: పుట్టిన తేదీ
+  dateOfBirthInfo: "EU బాలల రక్షణ నిబంధనలను (GDPR/COPPA) పాటించడానికి, చిన్న వినియోగదారులకు సురక్షితమైన అనుభవం అందించడానికి మేము నీ పుట్టిన తేదీని అడుగుతాము."
+  parentEmail: "తల్లిదండ్రులు/సంరక్షకుల ఇమెయిల్"
+  parentEmailInfo: "14 ఏళ్ల లోపు వినియోగదారులకు అవసరం. మేము ఈ చిరునామాకు సమ్మతి అభ్యర్థన పంపుతాము."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: కొనసాగించడానికి
+    title: నీ రిజిస్ట్రేషన్ పూర్తి చేయి
+    info: "వేదికను ఉపయోగించడం కొనసాగించడానికి దయచేసి నీ పుట్టిన తేదీని ఇవ్వు."
+    submit: కొనసాగించు
   button:
-    cancel: రద్దు చేయు
-    createAccount: Create account
+    cancel: రద్దు చేయి
+    createAccount: ఖాతా సృష్టించు
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "నీ ఇన్‌బాక్స్ చూడు!"
+    message: "మేము నీకు ధృవీకరణ ఇమెయిల్ పంపాము. నీ ఖాతాను యాక్టివేట్ చేయడానికి ఇమెయిల్‌లోని లింక్‌ను క్లిక్ చేయి."
+    helpTitle: "ఇమెయిల్ రాలేదా?"
+    hint: "నీ స్పామ్ ఫోల్డర్ చూడు. లింక్ 24 గంటల పాటు చెల్లుతుంది."
+    resendButton: "ధృవీకరణ ఇమెయిల్ మళ్ళీ పంపు"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "తల్లిదండ్రుల సమ్మతి కోసం వేచి ఉంది"
+    message: "నీ ఇమెయిల్ ధృవీకరించబడింది! నువ్వు వేదికను పూర్తిగా ఉపయోగించే ముందు, తల్లిదండ్రులు లేదా సంరక్షకులు సమ్మతి ఇవ్వాలి."
+    sentTo: "%email%కి సమ్మతి అభ్యర్థన పంపబడింది"
+    helpTitle: "ఇమెయిల్ రాలేదా? సహాయం కావాలా?"
+    hint: "వారి స్పామ్ ఫోల్డర్ చూడమని నీ తల్లిదండ్రులను అడుగు. లింక్ 24 గంటల పాటు చెల్లుతుంది."
+    resendButton: "సమ్మతి ఇమెయిల్ మళ్ళీ పంపు"
+    wrongEmail: "తల్లిదండ్రుల ఇమెయిల్ తప్పుగా ఇచ్చావా?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "తల్లిదండ్రుల సమ్మతి ఉపసంహరించబడింది"
+    message: "నీ తల్లిదండ్రులు లేదా సంరక్షకులు నీ ఖాతాకు సమ్మతిని ఉపసంహరించారు. మళ్ళీ సమ్మతి ఇచ్చే వరకు నీ ఖాతాకు పరిమిత సౌకర్యాలు మాత్రమే ఉంటాయి."
+    newEmailPlaceholder: "తల్లిదండ్రుల కొత్త ఇమెయిల్"
+    changeButton: "అప్‌డేట్ చేసి మళ్ళీ పంపు"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: ఖాతా రికవరీ
+  description: నీ ఖాతా ఇమెయిల్ లేదా వినియోగదారు పేరు గుర్తుంటే, నీ పాస్‌వర్డ్ రీసెట్ చేయడానికి మేము నీకు ఒక లింక్ పంపగలము.
   button:
-    cancel: రద్దు చేయు
-    submit: Recover password
+    cancel: రద్దు చేయి
+    submit: పాస్‌వర్డ్ తిరిగి పొందు
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "నీ పాస్‌వర్డ్ రీసెట్ చేయి"
+    description: "నీ ఖాతా ఇమెయిల్ గుర్తుంటే, నీ పాస్‌వర్డ్ రీసెట్ చేయడానికి మేము నీకు ఒక లింక్ పంపగలము."
     button:
-      submit: "Send reset email"
-      cancel: "రద్దు చేయు"
+      submit: "రీసెట్ ఇమెయిల్ పంపు"
+      cancel: "రద్దు చేయి"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "నీ ఇమెయిల్‌లు చూడు"
+    description: "నీ ఇమెయిల్‌తో సరిపోలే ఖాతా ఉంటే, నీ పాస్‌వర్డ్ రీసెట్ చేయడానికి ఉపయోగించగల లింక్‌తో ఇప్పుడే ఒక ఇమెయిల్ పంపబడింది. ఈ లింక్ గడువు %time%లో ముగుస్తుంది."
+    descriptionTwo: "నువ్వు ప్రతి %throttleLimit% గంటలకు ఒకసారి కొత్త పాస్‌వర్డ్ రీసెట్ అడగవచ్చు."
+    descriptionThree: "నీకు ఇమెయిల్ రాకపోతే, దయచేసి నీ స్పామ్ ఫోల్డర్ చూడు లేదా %email-webmaster%లో మా సపోర్ట్‌కు ఇమెయిల్ రాయి."
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "హాయ్!"
+    visitLink: "నీ పాస్‌వర్డ్ రీసెట్ చేయడానికి, దయచేసి కింది లింక్‌ను సందర్శించు"
+    expire: "ఈ లింక్ గడువు %time%లో ముగుస్తుంది."
+    cheers: "చీర్స్!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "నీ పాస్‌వర్డ్ రీసెట్ చేయి"
+    content: "నువ్వు ఇటీవల నీ Catrobat ఖాతాకు పాస్‌వర్డ్ రీసెట్ అడిగావు. కొత్త పాస్‌వర్డ్ ఎంచుకోవడానికి కింది బటన్‌ను క్లిక్ చేయి. నువ్వు దీన్ని అడగకపోతే, ఈ ఇమెయిల్‌ను నిశ్చింతగా పట్టించుకోకు."
+    visitLink: "పాస్‌వర్డ్ రీసెట్ చేయి"
+    expire: "ఈ లింక్ %time% పాటు చెల్లుతుంది, ఒక్కసారి మాత్రమే ఉపయోగించవచ్చు."
   reset:
-    title: "Reset your password"
+    title: "నీ పాస్‌వర్డ్ రీసెట్ చేయి"
     button:
-      submit: "Reset password"
+      submit: "పాస్‌వర్డ్ రీసెట్ చేయి"
 apk:
-  download: యాప్‌గా డౌన్‌లోడ్ చేయండి
-  prepare: 'యాప్‌గా పొందండి'
-  preparing: 'యాప్‌ను సిద్ధం చేస్తోంది'
-  text: 'ప్రక్రియకు కొంత సమయం పట్టవచ్చు'
+  download: యాప్‌గా డౌన్‌లోడ్ చేయి
+  prepare: 'యాప్‌గా పొందు'
+  preparing: 'యాప్ సిద్ధమవుతోంది'
+  text: 'ఈ ప్రక్రియకు కొంత సమయం పట్టవచ్చు'
 format:
-  million_abbreviation: ఎమ్
+  million_abbreviation: మి
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: ఏదో పని చేయలేదు. దయచేసి మళ్ళీ ప్రయత్నించు, ఇలాగే జరుగుతూ ఉంటే మాకు తెలియజేయి!
   username:
     blank: వినియోగదారు పేరు ఖాళీగా ఉండకూడదు
-    invalid: మీ వినియోగదారు పేరు చెల్లదు
-    exists: ఈ పేరు ఇంతకుముందే వాడేశారు.
+    invalid: నీ వినియోగదారు పేరు చెల్లదు
+    exists: ఈ వినియోగదారు పేరు ఇప్పటికే ఉంది.
     not_exists: ఈ వినియోగదారు పేరు ఉనికిలో లేదు.
-    not_email: వినియోగదారు పేరు ఇమెయిల్ చిరునామాగా ఉండకూడదు.
-    size: వినియోగదారు పేరు కనీసం 3 అక్షరాలను కలిగి ఉండాలి మరియు 180 కంటే ఎక్కువ కాదు
+    not_email: వినియోగదారు పేరు ఇమెయిల్ చిరునామా కాకూడదు.
+    size: వినియోగదారు పేరులో కనీసం 3, గరిష్టంగా 180 అక్షరాలు ఉండాలి
   password:
     blank: పాస్‌వర్డ్ లేదు.
-    short: 'మీ పాస్‌వర్డ్ కనీసం ఉండాలి {{ limit }} పాత్రలు.'
+    short: 'నీ పాస్‌వర్డ్‌లో కనీసం {{ limit }} అక్షరాలు ఉండాలి.'
   country:
     blank: దేశం లేదు.
     invalid: చెల్లని దేశం
   email:
     blank: ఇమెయిల్ ఖాళీగా ఉండకూడదు
-    invalid: మీ ఇమెయిల్ చెల్లదు
+    invalid: నీ ఇమెయిల్ చెల్లనట్లు కనిపిస్తోంది
     exists: ఈ ఇమెయిల్ చిరునామా ఇప్పటికే ఉంది.
   id:
     blank: ఓపెన్ ప్రామాణీకరణ ID ఖాళీగా ఉండకూడదు
   login: పాస్‌వర్డ్ లేదా వినియోగదారు పేరు తప్పు.
-  post-data: POST- డేటా సరికాదు లేదా లేదు!
+  post-data: POST-డేటా సరిగా లేదు లేదా లేదు!
   checksum:
-    missing: క్లయింట్ ఫైల్‌చెక్సమ్‌ను పంపలేదు! మీరు పాకెట్ కోడ్ యొక్క పాత వెర్షన్‌ని ఉపయోగిస్తున్నారా?
-    invalid: చెల్లని చెక్సమ్
+    missing: క్లయింట్ fileChecksum పంపలేదు! నువ్వు Pocket Code పాత వెర్షన్ ఉపయోగిస్తున్నావా?
+    invalid: చెల్లని చెక్‌సమ్
   xml:
     invalid: చెల్లని కోడ్ xml
-    missing: 'తెలియని లోపం: Project_xml_not_found!'
+    missing: 'తెలియని లోపం: project_xml_not_found!'
   file:
-    unexpected: ఊహించని ఫైల్ కనుగొనబడింది
-    invalid: చెల్లని ఫైల్
-  image.missing: ప్రాజెక్ట్-ఫోల్డర్‌లో లేని ఫైల్‌ని ప్రాజెక్ట్ XML ప్రస్తావించింది
-  unknown: గుర్తించలేని పొరపాటు
-  token: 'పరికరం యొక్క ప్రామాణీకరణ విఫలమైంది: చెల్లని ఆత్-టోకెన్!'
-  uploadTokenAuthFailed: 'అప్‌లోడ్ టోకెన్ ఆత్ విఫలమైంది.'
+    unexpected: ఊహించని ఫైల్ కనబడింది
+    invalid: చెల్లని ఫైల్
+  image.missing: ప్రాజెక్ట్ ఫోల్డర్‌లో లేని ఫైల్‌ను ప్రాజెక్ట్ XML ప్రస్తావిస్తోంది
+  unknown: తెలియని లోపం
+  token: 'పరికర ప్రామాణీకరణ విఫలమైంది: చెల్లని auth-token!'
+  uploadTokenAuthFailed: 'అప్‌లోడ్ టోకెన్ ప్రామాణీకరణ విఫలమైంది.'
   project:
-    invalid: Invalid project.
+    invalid: చెల్లని ప్రాజెక్ట్.
   languageversion:
-    tooold: 'క్షమించండి, మీ ప్రాజెక్ట్ క్యాట్రోబాట్ భాష యొక్క పాత వెర్షన్‌ను కలిగి ఉంది! మీరు పాకెట్ కోడ్ యొక్క తాజా వెర్షన్‌ను ఉపయోగిస్తున్నారా?'
+    tooold: 'క్షమించు, నీ ప్రాజెక్ట్‌లో Catrobat భాష పాత వెర్షన్ ఉంది! నువ్వు Pocket Code తాజా వెర్షన్ ఉపయోగిస్తున్నావా?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'క్షమించు, నువ్వు Pocket Code పాత వెర్షన్ ఉపయోగిస్తున్నావు. దయచేసి తాజా వెర్షన్‌కు అప్‌డేట్ చేయి.'
   authentication:
-    title: Login did not work
+    title: లాగిన్ పని చేయలేదు
     webview: |
-      మీ యూజర్ ఆధారాలు తప్పు.
-      దయచేసి యాప్‌లో మళ్లీ లాగిన్ చేయడానికి ప్రయత్నించండి.
+      నీ వినియోగదారు పేరు లేదా పాస్‌వర్డ్ సరిగా లేనట్లు కనిపిస్తోంది.
+      దయచేసి యాప్‌లో మళ్ళీ లాగిన్ అవ్వడానికి ప్రయత్నించు.
 success:
   text: విజయం
-  registration: నమోదు విజయవంతమైంది!
-  token: అలాగే
-  upload: మీ ప్రాజెక్ట్ విజయవంతంగా అప్‌లోడ్ చేయబడింది!
-  imgUpload: మీ చిత్రం విజయవంతంగా అప్‌లోడ్ చేయబడింది!
-  report: మీ నివేదిక విజయవంతంగా పంపబడింది!
+  registration: రిజిస్ట్రేషన్ విజయవంతమైంది!
+  token: సరే
+  upload: నీ ప్రాజెక్ట్ విజయవంతంగా అప్‌లోడ్ అయింది!
+  imgUpload: నీ చిత్రం విజయవంతంగా అప్‌లోడ్ అయింది!
+  report: నీ రిపోర్ట్ విజయవంతంగా పంపబడింది!
 time:
-  minutes.ago: '{0}<1 నిమిషం క్రితం |{1} 1 నిమిషం క్రితం |] 1, Inf] %count% నిమిషాల ముందు'
+  minutes.ago: '{0} < 1 నిమిషం క్రితం |{1}1 నిమిషం క్రితం |]1,Inf] %count% నిమిషాల క్రితం'
   hours.ago: '{1}1 గంట క్రితం |]1,Inf] %count% గంటల క్రితం'
   days.ago: '{1}1 రోజు క్రితం |]1,Inf] %count% రోజుల క్రితం'
-  months.ago: '{1} 1 నెల క్రితం |]1,Inf] %count% నెలల క్రితం'
-  years.ago: '{1}1 సంవత్సరం క్రితం |] 1, Inf] ఒకటి కంటే ఎక్కువ సంవత్సరాల క్రితం'
+  months.ago: '{1}1 నెల క్రితం |]1,Inf] %count% నెలల క్రితం'
+  years.ago: '{1}1 సంవత్సరం క్రితం |]1,Inf] ఒక సంవత్సరం కంటే ఎక్కువ క్రితం'
 failure:
-  upload: మీ యాప్ అప్‌లోడ్ చేస్తున్నప్పుడు లోపం ఏర్పడింది.
+  upload: నీ యాప్‌ను అప్‌లోడ్ చేస్తున్నప్పుడు లోపం జరిగింది.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'నీ ఇమెయిల్‌ను ధృవీకరించు'
 api:
   registerUser:
     emailMissing: 'ఇమెయిల్ లేదు'
     emailEmpty: 'ఇమెయిల్ ఖాళీగా ఉండకూడదు'
     emailInvalid: 'ఇమెయిల్ చెల్లదు'
-    emailAlreadyInUse: 'ఈ మెయిల్ వాడుకలో ఉంది'
+    emailAlreadyInUse: 'ఇమెయిల్ ఇప్పటికే వాడుకలో ఉంది'
     usernameMissing: 'వినియోగదారు పేరు లేదు'
     usernameTooShort: 'వినియోగదారు పేరు చాలా చిన్నది'
     usernameTooLong: 'వినియోగదారు పేరు చాలా పొడవుగా ఉంది'
     usernameEmpty: 'వినియోగదారు పేరు ఖాళీగా ఉండకూడదు'
-    usernameAlreadyInUse: 'వినియోగదారు పేరు ఇప్పటికే ఉపయోగంలో ఉంది'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    usernameAlreadyInUse: 'వినియోగదారు పేరు ఇప్పటికే వాడుకలో ఉంది'
+    usernameInvalid: 'వినియోగదారు పేరు చెల్లదు'
+    passwordMissing: 'పాస్‌వర్డ్ లేదు'
+    passwordEmpty: 'పాస్‌వర్డ్ ఖాళీగా ఉండకూడదు'
+    passwordTooShort: 'పాస్‌వర్డ్ చాలా చిన్నది'
+    passwordTooLong: 'పాస్‌వర్డ్ చాలా పొడవుగా ఉంది'
+    passwordInvalidChars: 'పాస్‌వర్డ్‌లో చెల్లని అక్షరాలు ఉన్నాయి'
+    usernameContainsEmail: "వినియోగదారు పేరులో ఇమెయిల్ చిరునామా ఉండకూడదు"
+    usernameContainsLink: "వినియోగదారు పేరులో లింక్ ఉండకూడదు"
+    countryCodeInvalid: "దేశ కోడ్ చెల్లదు"
+    pictureInvalid: "ప్రొఫైల్ చిత్రం చెల్లదు లేదా సపోర్ట్ చేయబడదు"
+    dateOfBirthMissing: "పుట్టిన తేదీ అవసరం"
+    dateOfBirthInvalid: "పుట్టిన తేదీ చెల్లదు"
+    tooYoung: "ఖాతా సృష్టించడానికి నీకు కనీసం 3 ఏళ్లు ఉండాలి"
+    parentEmailMissing: "14 ఏళ్ల లోపు వినియోగదారులకు తల్లిదండ్రుల ఇమెయిల్ అవసరం"
+    parentEmailInvalid: "తల్లిదండ్రుల ఇమెయిల్ చెల్లదు"
+    parentEmailSameAsUser: "తల్లిదండ్రుల ఇమెయిల్ నీ సొంత ఇమెయిల్ చిరునామా కంటే భిన్నంగా ఉండాలి"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "ప్రస్తుత పాస్‌వర్డ్ లేదు"
+    currentPasswordWrong: "ప్రస్తుత పాస్‌వర్డ్ తప్పు"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'పేరు ఖాళీగా ఉండకూడదు'
+    nameTooLong: 'పేరు చాలా పొడవుగా ఉంది'
+    descriptionTooLong: 'వివరణ చాలా పొడవుగా ఉంది'
+    creditsTooLong: 'గమనికలు మరియు క్రెడిట్స్ చాలా పొడవుగా ఉన్నాయి'
+    screenshotInvalid: 'ప్రాజెక్ట్ స్క్రీన్‌షాట్ చెల్లదు లేదా సపోర్ట్ చేయబడదు'
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating project entity. Try uploading again!'
+    invalid_checksum: 'చెల్లని చెక్‌సమ్. మళ్ళీ అప్‌లోడ్ చేయడానికి ప్రయత్నించు!'
+    upload_error: 'అప్‌లోడ్ చేస్తున్నప్పుడు లోపం. మళ్ళీ అప్‌లోడ్ చేయడానికి ప్రయత్నించు!'
+    creating_error: 'ప్రాజెక్ట్ ఎంటిటీని సృష్టిస్తున్నప్పుడు లోపం. మళ్ళీ అప్‌లోడ్ చేయడానికి ప్రయత్నించు!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'ప్రాజెక్ట్ వివరాలను సేవ్ చేయడం విఫలమైంది.'
+    screenshotError: 'స్క్రీన్‌షాట్‌ను చదవడం, మార్చడం లేదా నిల్వ చేయడం విఫలమైంది. దయచేసి నీ ఇన్‌పుట్‌ను తనిఖీ చేయి.'
+    notFound: 'మార్చాల్సిన ప్రాజెక్ట్ కనబడలేదు.'
+    forbidden: 'ప్రాజెక్ట్‌ను మార్చడానికి అనుమతి లేదు. నువ్వు ఇంకా లాగిన్ అయి ఉన్నావా?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'పేరు లేదు'
+    nameEmpty: 'పేరు ఖాళీగా ఉండకూడదు'
+    nameTooShort: 'పేరు చాలా చిన్నది'
+    nameTooLong: 'పేరు చాలా పొడవుగా ఉంది'
+    nameAlreadyInUse: 'పేరు ఇప్పటికే వాడుకలో ఉంది'
+    descriptionMissing: 'వివరణ లేదు'
+    descriptionEmpty: 'వివరణ ఖాళీగా ఉంది'
+    descriptionTooShort: 'వివరణ చాలా చిన్నది'
+    descriptionTooLong: 'వివరణ చాలా పొడవుగా ఉంది'
+    imageFileInvalid: 'చిత్ర ఫైల్ చెల్లదు'
+    imageFileInvalidType: 'చిత్ర ఫైల్ రకం చెల్లదు'
+    imageFileTooLarge: 'చిత్ర ఫైల్ చాలా పెద్దది'
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
+  arabic: అరబిక్
+  bulgarian: బల్గేరియన్
+  catalan: కాటలాన్
+  chinese_simplified_han: చైనీస్ (సరళీకృత హాన్)
+  chinese_traditional_han: చైనీస్ (సాంప్రదాయ హాన్)
+  croatian: క్రొయేషియన్
+  czech: చెక్
+  danish: డానిష్
+  dutch: డచ్
+  english_united_kingdom: ఇంగ్లీష్ (యునైటెడ్ కింగ్‌డమ్)
+  english_united_states: ఇంగ్లీష్ (యునైటెడ్ స్టేట్స్)
+  estonian: ఎస్టోనియన్
+  filipino: ఫిలిపినో
+  finnish: ఫిన్నిష్
+  french: ఫ్రెంచ్
+  german: జర్మన్
+  greek: గ్రీక్
+  hebrew: హీబ్రూ
+  hindi: హిందీ
+  hungarian: హంగేరియన్
+  indonesian: ఇండోనేషియన్
+  italian: ఇటాలియన్
+  japanese: జపనీస్
+  korean: కొరియన్
+  latvian: లాట్వియన్
+  lithuanian: లిథువేనియన్
+  malay: మలయ్
+  norwegian: నార్వేజియన్
+  persian: పర్షియన్
+  polish: పోలిష్
+  portuguese_brazil: పోర్చుగీస్ (బ్రెజిల్)
+  portuguese_portugal: పోర్చుగీస్ (పోర్చుగల్)
+  romanian: రొమేనియన్
+  russian: రష్యన్
+  serbian: సెర్బియన్
+  slovak: స్లోవాక్
+  slovenian: స్లోవేనియన్
+  spanish_latin_america: స్పానిష్ (లాటిన్ అమెరికా)
+  spanish_spain: స్పానిష్ (స్పెయిన్)
   swedish: స్వీడిష్
   thai: థాయ్
   turkish: టర్కిష్
   ukrainian: ఉక్రేనియన్
   vietnamese: వియత్నామీస్
 ci:
-  generate: Apk ని రూపొందించండి
-  pending: Apk ని ఉత్పత్తి చేస్తోంది
-  download: Apk ని డౌన్‌లోడ్ చేయండి
+  generate: APK రూపొందించు
+  pending: APK రూపొందుతోంది
+  download: APK డౌన్‌లోడ్ చేయి
 admin:
   maintain:
     diskMaintenance: డిస్క్ నిర్వహణ
@@ -851,404 +848,404 @@ admin:
     noRemovableObjects: తొలగించగల వస్తువులు అందుబాటులో లేవు.
     removableObjects: తొలగించగల వస్తువులు
 recommender:
-  similarPrograms: ఇలాంటి ప్రాజెక్టులు
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: ఈ ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేసిన వినియోగదారులు కూడా డౌన్‌లోడ్ చేసుకున్నారు
-  moreFromThisUser: నుండి మరిన్ని %username%
+  similarPrograms: ఇలాంటి ప్రాజెక్ట్‌లు
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: ఈ ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేసిన వినియోగదారులు వీటిని కూడా డౌన్‌లోడ్ చేశారు
+  moreFromThisUser: '%username% నుండి మరిన్ని'
 pmd:
-  submitBtn: మీ ప్రాజెక్ట్ సమర్పించండి
+  submitBtn: నీ ప్రాజెక్ట్‌ను సమర్పించు
   submitBox:
     header: సమర్పణ
-    text: మీరు మీ ప్రాజెక్ట్‌ను సమర్పించబోతున్నారు. దయచేసి ప్రాజెక్ట్ కోడ్‌ను నమోదు చేసి, పంపండి క్లిక్ చేయండి.
-    btnText: సమర్పించండి
+    text: నువ్వు నీ ప్రాజెక్ట్‌ను సమర్పించబోతున్నావు. దయచేసి ప్రాజెక్ట్ కోడ్‌ను నమోదు చేసి, పంపు క్లిక్ చేయి.
+    btnText: సమర్పించు
   successful:
-    text: మీ ప్రాజెక్ట్ అప్‌లోడ్ విజయవంతమైంది.
+    text: నీ ప్రాజెక్ట్ అప్‌లోడ్ విజయవంతమైంది.
   failed:
     text: ప్రాజెక్ట్ అప్‌లోడ్ విఫలమైంది.
 codeview:
   title: 'కోడ్ వీక్షణ'
   showCode: 'కోడ్ చూపించు'
-  hideCode: 'కోడ్‌ని దాచు'
-  showStatistics: 'కోడ్ గణాంకాలను చూపు'
-  hideStatistics: 'కోడ్ గణాంకాలను దాచు'
-  cantDisplayCode: "కోడ్ ప్రదర్శించబడదు"
-  cantDisplayStatistics: "కోడ్ ప్రదర్శించబడదు"
+  hideCode: 'కోడ్ దాచు'
+  showStatistics: 'కోడ్ గణాంకాలు చూపించు'
+  hideStatistics: 'కోడ్ గణాంకాలు దాచు'
+  cantDisplayCode: "కోడ్‌ను చూపించలేము"
+  cantDisplayStatistics: "కోడ్‌ను చూపించలేము"
   totalNumberOf: 'మొత్తం సంఖ్య'
   scenes: 'దృశ్యాలు'
   scripts: 'స్క్రిప్ట్‌లు'
-  bricks: 'ఇటుకలు'
+  bricks: 'బ్రిక్‌లు'
   objects: 'నటులు మరియు వస్తువులు'
-  looks: 'కనిపిస్తోంది'
+  looks: 'రూపాలు'
   sounds: 'శబ్దాలు'
   globals: 'గ్లోబల్స్'
-  locals: 'స్థానికులు'
+  locals: 'లోకల్స్'
   globalVariables: 'గ్లోబల్ వేరియబుల్స్'
-  localVariables: 'స్థానిక వేరియబుల్స్'
-  eventBricks: 'ఈవెంట్ ఇటుకలు'
-  controlBricks: 'ఇటుకలను నియంత్రించండి'
-  motionBricks: 'మోషన్ ఇటుకలు'
-  soundBricks: 'ధ్వని ఇటుకలు'
-  looksBricks: 'ఇటుకలు కనిపిస్తున్నాయి'
-  penBricks: 'పెన్ ఇటుకలు'
-  dataBricks: 'డాటాబ్రిక్స్'
-  specialBricks: 'ప్రత్యేక ఇటుకలు'
+  localVariables: 'లోకల్ వేరియబుల్స్'
+  eventBricks: 'ఈవెంట్ బ్రిక్‌లు'
+  controlBricks: 'కంట్రోల్ బ్రిక్‌లు'
+  motionBricks: 'మోషన్ బ్రిక్‌లు'
+  soundBricks: 'సౌండ్ బ్రిక్‌లు'
+  looksBricks: 'రూపాల బ్రిక్‌లు'
+  penBricks: 'పెన్ బ్రిక్‌లు'
+  dataBricks: 'డేటా బ్రిక్‌లు'
+  specialBricks: 'ప్రత్యేక బ్రిక్‌లు'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'కోడ్ వీక్షణ'
+  loading: 'కోడ్ వీక్షణ లోడ్ అవుతోంది...'
+  error: 'కోడ్ వీక్షణను లోడ్ చేయలేకపోయాము.'
+  retry: 'మళ్ళీ ప్రయత్నించు'
+  empty: 'ఈ ప్రాజెక్ట్‌లో కోడ్ లేదు.'
   scripts: 'స్క్రిప్ట్‌లు'
-  looks: 'కనిపిస్తోంది'
+  looks: 'రూపాలు'
   sounds: 'శబ్దాలు'
 codeStatistics:
   title: "కోడ్ గణాంకాలు"
-  error: "కోడ్ గణాంకాలు ప్రదర్శించబడవు."
-  general: 'జనరల్'
-  bricks: 'ఇటుకలు'
+  error: "కోడ్ గణాంకాలను చూపించలేము."
+  general: 'సాధారణం'
+  bricks: 'బ్రిక్‌లు'
   eventBricks: 'ఈవెంట్'
-  controlBricks: 'నియంత్రణ'
-  motionBricks: 'చలనం'
-  soundBricks: 'ధ్వని'
-  looksBricks: 'కనిపిస్తోంది'
+  controlBricks: 'కంట్రోల్'
+  motionBricks: 'మోషన్'
+  soundBricks: 'సౌండ్'
+  looksBricks: 'రూపాలు'
   penBricks: 'పెన్'
-  dataBricks: 'సమాచారం'
+  dataBricks: 'డేటా'
   deviceBricks: 'పరికరం'
-  specialBricks: 'ప్రత్యేక'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  specialBricks: 'ప్రత్యేకం'
+  yourScore: 'నీ స్కోర్:'
+  points: 'పాయింట్లు'
+  abstraction: 'సంగ్రహణ మరియు సమస్య విభజన'
+  parallelism: 'సమాంతరత'
+  logicalThinking: 'తార్కిక ఆలోచన'
+  synchronization: 'సమకాలీకరణ'
+  flowControl: 'ఫ్లో కంట్రోల్'
+  userInteractivity: 'వినియోగదారు ఇంటరాక్టివిటీ'
+  dataRepresentation: 'డేటా ప్రాతినిధ్యం'
+  level: 'స్థాయి'
+  loading: 'లోడ్ అవుతోంది...'
+  bonus: 'బోనస్'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "%user_count% కంటే ఎక్కువ సృజనాత్మక మనసులతో చేరు!"
+  text: "ఇప్పటికే %project_count% అద్భుతమైన ప్రాజెక్ట్‌లు షేర్ అయ్యాయి, తర్వాతిది నీదే కావచ్చు. మా యాప్‌ను డౌన్‌లోడ్ చేసి ఈరోజే సృష్టించడం మొదలుపెట్టు"
 privacy-policy:
   header: గోప్యతా విధానం
   version: వెర్షన్ 2.2, 17 అక్టోబర్ 2019
-  text1: మా సేవలు మరియు అనుబంధ ఖాతా యొక్క అన్ని ప్రయోజనాలను మీకు అందించడానికి, మీ నుండి నిర్దిష్ట డేటాను సేకరించడం అవసరం.
-  text2: మా సేవలు (యాప్‌లు మరియు వెబ్‌సైట్‌లు) నిర్వహించడానికి మరియు మెరుగుపరచడానికి మరియు ICT మరియు STEM/STEAM విద్యపై శాస్త్రీయ పరిశోధన చేయడానికి, మేము Google Analytics, Crashlytics మరియు Firebase ని ఉపయోగిస్తాము, అన్నీ Google LLC (USA), అలాగే డైనట్రాస్ LLC ద్వారా ( USA) మా సేవల వినియోగం, ఉదా. క్రాష్ సమాచారం, టైమ్‌స్టాంప్‌లు, సందర్శించిన పేజీలు/స్క్రీన్‌లు, మా యాప్‌లు మరియు సేవల వినియోగం, ఉపయోగించిన ఆపరేటింగ్ సిస్టమ్ మరియు నెట్‌వర్క్ ప్రొవైడర్ గురించిన సమాచారం గురించి మెటాడేటా పొందడానికి. ఈ విశ్లేషణ మరియు సేకరించిన డేటా మీ ప్రొఫైల్‌కి లింక్ చేయబడలేదు మరియు ఎలాంటి వ్యక్తిగత సమాచారాన్ని కలిగి ఉండవు (IP చిరునామా యొక్క చివరి బిట్‌లు అనామకమవుతాయి). అయితే, సేకరించిన డేటా సర్వీస్ ప్రొవైడర్లకు బదిలీ చేయబడుతుంది (Google LLC, USA మరియు Dynatrace LLC, USA). డేటా ప్రాసెసింగ్ అనేది Google LLC మరియు Dynatrace LLC తో ఒప్పందాలపై ఆధారపడి ఉంటుంది. సర్వీస్ ప్రొవైడర్లకు ఈ సంబంధం యూరోపియన్ యూనియన్ జనరల్ డేటా ప్రొటెక్షన్ రెగ్యులేషన్ (EU GDPR) మరియు EU-USA "ప్రైవసీ షీల్డ్" ఒప్పందానికి అనుగుణంగా ఉంటుంది.
-  text3: మా సిస్టమ్‌లలో ఒక ఖాతాను సృష్టించడానికి మరియు ఉపయోగించడానికి మరియు ఇ-మెయిల్ ద్వారా మీ ఖాతా గురించి అవసరమైన మార్పుల గురించి మీకు తెలియజేయడానికి, ఉదా., అప్‌డేట్‌లు లేదా మా వినియోగ నిబంధనలు మరియు సేవా నిబంధనలు, మా కమ్యూనిటీ నియమాలు లేదా మా పాలసీల ఉల్లంఘనలు వినియోగదారు పేరు మరియు, మీరు అందించినట్లయితే, మీ ఇ-మెయిల్ చిరునామా. మీరు గూగుల్ ప్లస్ లేదా ఫేస్‌బుక్ ద్వారా మీ అకౌంట్‌ని కనెక్ట్ చేసి ఉంటే, మేము అదనంగా మీ ఖాతాకు కనెక్ట్ చేయబడిన ఐడెంటిఫికేషన్ కీని ఈ సర్వీసుల్లో స్టోర్ చేస్తాము. మీరు మాకు స్పష్టంగా అనుమతించకపోతే, మేము ఈ డేటాను ఇతర (ఉదా., మార్కెటింగ్) ప్రయోజనాల కోసం ఉపయోగించము.
-  text4: స్వచ్ఛంద ప్రాతిపదికన, మీరు షేరింగ్ సైట్‌లోని మీ ఖాతా పేజీ ద్వారా మీ నివాస దేశాన్ని మాకు ఇవ్వవచ్చు. ఇది మీ పబ్లిక్ ప్రొఫైల్‌లో ప్రదర్శించబడుతుంది మరియు మా ద్వారా గణాంక మరియు పరిశోధన ప్రయోజనాల కోసం మాత్రమే ఉపయోగించబడుతుంది. ఇది మీ ప్రొఫైల్ సెట్టింగ్‌లలో ఎప్పుడైనా తీసివేయబడుతుంది.
-  text5: Https://share.catrob.at/ లోని మీ ప్రొఫైల్ పేజీ ద్వారా మీ ఖాతాను తొలగించడం ద్వారా మీరు ఎప్పుడైనా మీ ఖాతాకు సంబంధించిన వ్యక్తిగత డేటా వినియోగాన్ని ఉపసంహరించుకోవచ్చు. మీ ఖాతాను తొలగించిన తర్వాత కూడా మీరు అందించిన సేవలను ఉపయోగించగలరు, కానీ సహకరించడానికి కాదు, ఉదా., అప్‌లోడ్ ప్రోగ్రామ్‌లు, వ్యాఖ్యానించడం లేదా ఇష్టపడటం ద్వారా. అలాగే, మీ ఖాతాకు లింక్ చేయబడిన మొత్తం కంటెంట్, ఉదా., అప్‌లోడ్ చేసిన ప్రోగ్రామ్‌లు, వ్యాఖ్యలు మొదలైనవి తొలగించబడతాయి.
-  text6: మా సేవల దుర్వినియోగాన్ని నివారించడానికి, ఉదా., చట్టపరమైన ప్రయోజనాల కోసం వినియోగదారు అందించిన అప్‌లోడ్‌లు లేదా వ్యాఖ్యల ద్వారా, వినియోగదారు సృష్టించిన పబ్లిక్ డేటా (అప్‌లోడ్‌లు, వ్యాఖ్యలు) అంతర్గతంగా ఒక డేటాబేస్‌లో నిల్వ చేయబడుతుంది, టైమ్‌స్టాంప్ మరియు ఉపయోగించిన ఇంటర్నెట్ చిరునామా. తగినంత చట్టవిరుద్ధమైన చర్యలు సహేతుకంగా అనుమానించబడితే మరియు అధికారికంగా అర్హత కలిగిన చట్టపరమైన సంస్థలు వర్తించే చట్టం ఆధారంగా అభ్యర్థించకపోతే ఈ డేటాను ఏ సంస్థలూ ఉపయోగించరు లేదా ఫార్వార్డ్ చేయరు. ప్రతి కేసును వ్యక్తిగతంగా మేము ముందుగా పూర్తిగా తనిఖీ చేస్తాము.
-  text7: MailChimp సర్వీస్ (ది రాకెట్ సైన్స్ గ్రూప్ LLC d/b/a MailChimp, USA) ద్వారా మేము అందించిన https://catrob.at/newsletter లో మీరు స్వచ్ఛందంగా కాట్రోబాట్ న్యూస్‌లెటర్‌కు సభ్యత్వాన్ని పొందవచ్చు. మీరు అందించిన ఇమెయిల్ చిరునామాకు కాట్రోబాట్ ప్రాజెక్ట్ మరియు దాని సేవలకు సంబంధించిన అప్‌డేట్‌లను అందుకుంటారు. ప్రతి వార్తాలేఖ యొక్క ఫుటర్‌లోని "చందాను తొలగించు" లింక్‌ని ఉపయోగించడం ద్వారా మీరు ఎప్పుడైనా వార్తాలేఖను ఉపసంహరించుకోవచ్చు. ఈ వార్తాలేఖ MailChimp ద్వారా అందించబడుతుంది, వీరితో మాకు డేటా ప్రాసెసింగ్ ఒప్పందం ఉంది మరియు EU జనరల్ డేటా ప్రొడక్షన్ రెగ్యులేషన్ మరియు EU-USA "ప్రైవసీ షీల్డ్" కు కట్టుబడి ఉంది. MailChimp పై మరిన్ని వివరాల కోసం దయచేసి MailChimp గోప్యతా విధానం మరియు ఉపయోగ నిబంధనలను కూడా చూడండి.
-  text8: ఇంటర్నేషనల్ కాట్రోబాట్ అసోసియేషన్-వెరెయిన్ జుర్ ఫార్డెరుంగ్ ఫ్రీయర్ సాఫ్ట్‌వేర్ కింద ఉచిత ఓపెన్ సోర్స్ కాట్రోబాట్ ప్రాజెక్ట్ ద్వారా అన్ని సేవలు అందించబడతాయి, లాభాపేక్షలేని ఎన్‌జిఓ గ్రాజ్, ఆస్ట్రియా (యూరోపియన్ యూనియన్) లో విలీనం చేయబడింది. మా విధానాలు EU మరియు ఆస్ట్రియన్ డేటా ప్రొటెక్షన్ లా (GDPR) కి గౌరవం ఇస్తాయి. మాతో సన్నిహితంగా ఉండటానికి, దయచేసి contact@catrobat.org కి ఇమెయిల్ పంపండి లేదా కాట్రోబాట్, c/o ఇన్స్టిట్యూట్ ఆఫ్ సాఫ్ట్‌వేర్ టెక్నాలజీ, గ్రాజ్ యూనివర్శిటీ ఆఫ్ టెక్నాలజీ, ఇన్‌ఫెల్డ్‌గాస్సే 16b, A-8010 గ్రాజ్, ఆస్ట్రియా (యూరోపియన్ యూనియన్) కు ఇమెయిల్ పంపండి. 
-  text9: ఒకవేళ మీరు 14 సంవత్సరాల కంటే తక్కువ వయస్సు ఉన్నట్లయితే, ఈ పాలసీని చట్టపరమైన సంరక్షకుడు (సాధారణంగా తల్లిదండ్రులు) అంగీకరించాలి.
-  text10: కాట్రోబాట్ యొక్క అధికారిక ఆంగ్ల భాష గోప్యతా విధానం కింద వెబ్‌లో అందుబాటులో ఉంది %privacy_policy%.
-  disagree-text: ఆమోదం లేకుండా, మేము ఖాతాను సృష్టించలేము కానీ ప్రధాన ఫీచర్‌లు ఇప్పటికీ అందుబాటులో ఉంటాయి.
+  text1: మా సేవలు, దానికి సంబంధించిన ఖాతా అందించే అన్ని ప్రయోజనాలను నీకు అందించడానికి, నీ నుండి కొంత డేటాను సేకరించడం అవసరం.
+  text2: 'మా సేవలను (యాప్‌లు, వెబ్‌సైట్‌లు) నిర్వహించడానికి, మెరుగుపరచడానికి, ICT మరియు STEM/STEAM విద్యపై శాస్త్రీయ పరిశోధన చేయడానికి, మా సేవల వినియోగం గురించి మెటాడేటా పొందేందుకు మేము Google LLC (USA) అందించే Google Analytics, Crashlytics, Firebase, అలాగే Dynatrace LLC (USA) అందించే Dynatrace ఉపయోగిస్తాము, ఉదాహరణకు క్రాష్ సమాచారం, టైమ్‌స్టాంప్‌లు, సందర్శించిన పేజీలు/స్క్రీన్‌లు, మా యాప్‌లు మరియు సేవల వినియోగం, ఉపయోగించిన ఆపరేటింగ్ సిస్టమ్, నెట్‌వర్క్ ప్రొవైడర్ గురించిన సమాచారం. ఈ విశ్లేషణ, సేకరించిన డేటా నీ ప్రొఫైల్‌కు లింక్ చేయబడవు, వాటిలో ఎలాంటి వ్యక్తిగత సమాచారం ఉండదు (IP చిరునామా చివరి బిట్‌లు అనామకం చేయబడతాయి). అయితే, సేకరించిన డేటా సేవా ప్రొవైడర్లకు (Google LLC, USA మరియు Dynatrace LLC, USA) బదిలీ చేయబడుతుంది. డేటా ప్రాసెసింగ్ Google LLC, Dynatrace LLCతో ఒప్పందాలపై ఆధారపడి ఉంటుంది. సేవా ప్రొవైడర్లతో ఈ సంబంధం యూరోపియన్ యూనియన్ జనరల్ డేటా ప్రొటెక్షన్ రెగ్యులేషన్ (EU GDPR), EU-USA "Privacy Shield" ఒప్పందానికి అనుగుణంగా ఉంటుంది.'
+  text3: మా సిస్టమ్‌లలో ఖాతాను సృష్టించి ఉపయోగించడానికి, నీ ఖాతాకు సంబంధించిన అవసరమైన మార్పుల గురించి, ఉదాహరణకు అప్‌డేట్‌లు లేదా మా ఉపయోగ మరియు సేవా నిబంధనలు, కమ్యూనిటీ నియమాలు, విధానాల ఉల్లంఘనల గురించి ఇ-మెయిల్ ద్వారా నీకు తెలియజేయడానికి, మేము నీ వినియోగదారు పేరును, నువ్వు ఇచ్చి ఉంటే నీ ఇ-మెయిల్ చిరునామాను నిల్వ చేస్తాము. నువ్వు నీ ఖాతాను Google Plus లేదా Facebook ద్వారా కనెక్ట్ చేసి ఉంటే, ఈ సేవల్లోని నీ ఖాతాకు కనెక్ట్ అయిన గుర్తింపు కీని కూడా నిల్వ చేస్తాము. నువ్వు స్పష్టంగా అనుమతిస్తే తప్ప, మేము ఈ డేటాను ఇతర (ఉదా. మార్కెటింగ్) ప్రయోజనాల కోసం ఉపయోగించము.
+  text4: నువ్వు ఇష్టపడితే, షేరింగ్ సైట్‌లోని నీ ఖాతా పేజీ ద్వారా నీ నివాస దేశాన్ని మాకు ఇవ్వవచ్చు. ఇది నీ పబ్లిక్ ప్రొఫైల్‌లో చూపబడుతుంది, మేము దీన్ని గణాంక, పరిశోధన ప్రయోజనాల కోసం మాత్రమే ఉపయోగిస్తాము. నీ ప్రొఫైల్ సెట్టింగ్‌లలో దీన్ని ఎప్పుడైనా తీసివేయవచ్చు.
+  text5: https://share.catrob.at/లోని నీ ప్రొఫైల్ పేజీ ద్వారా నీ ఖాతాను తొలగించి, నీ ఖాతాకు చెందిన వ్యక్తిగత డేటా వినియోగాన్ని ఎప్పుడైనా ఉపసంహరించుకోవచ్చు. నీ ఖాతాను తొలగించిన తర్వాత కూడా నువ్వు అందించిన సేవలను ఉపయోగించగలవు, కానీ సహకరించలేవు, ఉదాహరణకు ప్రోగ్రామ్‌లను అప్‌లోడ్ చేయడం, వ్యాఖ్యానించడం లేదా లైక్ చేయడం. అలాగే, నీ ఖాతాకు లింక్ అయిన మొత్తం కంటెంట్, ఉదాహరణకు అప్‌లోడ్ చేసిన ప్రోగ్రామ్‌లు, వ్యాఖ్యలు మొదలైనవి తొలగించబడతాయి.
+  text6: మా సేవల దుర్వినియోగాన్ని నివారించడానికి, ఉదాహరణకు చట్టవిరుద్ధ ప్రయోజనాల కోసం వినియోగదారులు చేసే అప్‌లోడ్‌లు లేదా వ్యాఖ్యల ద్వారా, వినియోగదారులు సృష్టించిన పబ్లిక్ డేటా అంతా (అప్‌లోడ్‌లు, వ్యాఖ్యలు) టైమ్‌స్టాంప్, ఉపయోగించిన ఇంటర్నెట్ చిరునామాతో పాటు ఒక డేటాబేస్‌లో అంతర్గతంగా నిల్వ చేయబడుతుంది. తగినంత చట్టవిరుద్ధమైన చర్యలు జరిగాయని సహేతుకంగా అనుమానించబడి, అధికారికంగా అర్హత ఉన్న చట్టపరమైన సంస్థలు వర్తించే చట్టం ఆధారంగా అభ్యర్థిస్తే తప్ప, ఈ డేటాను ఏ సంస్థలూ ఉపయోగించవు, వాటికి పంపబడదు. ప్రతి కేసును మేము ముందుగా వ్యక్తిగతంగా క్షుణ్ణంగా తనిఖీ చేస్తాము.
+  text7: MailChimp సేవ (The Rocket Science Group LLC d/b/a MailChimp, USA) ద్వారా మేము అందించే https://catrob.at/newsletterలో నువ్వు ఇష్టపడితే Catrobat న్యూస్‌లెటర్‌కు సబ్‌స్క్రైబ్ చేయవచ్చు. అప్పుడు నువ్వు ఇచ్చిన ఇ-మెయిల్ చిరునామాకు Catrobat ప్రాజెక్ట్, దాని సేవల గురించి అప్‌డేట్‌లు అందుకుంటావు. ప్రతి న్యూస్‌లెటర్ ఫుటర్‌లోని "unsubscribe" లింక్ ఉపయోగించి ఎప్పుడైనా న్యూస్‌లెటర్‌ను ఆపివేయవచ్చు. ఈ న్యూస్‌లెటర్‌ను MailChimp అందిస్తుంది, వారితో మాకు డేటా ప్రాసెసింగ్ ఒప్పందం ఉంది, వారు EU జనరల్ డేటా ప్రొటెక్షన్ రెగ్యులేషన్, EU-USA "Privacy Shield"కి కట్టుబడి ఉన్నారు. MailChimp గురించి మరిన్ని వివరాల కోసం దయచేసి MailChimp గోప్యతా విధానం, ఉపయోగ నిబంధనలను కూడా చూడు.
+  text8: అన్ని సేవలు International Catrobat Association – Verein zur Förderung freier Software ఆధ్వర్యంలోని ఉచిత ఓపెన్ సోర్స్ Catrobat ప్రాజెక్ట్ ద్వారా అందించబడతాయి, ఇది గ్రాజ్, ఆస్ట్రియా (యూరోపియన్ యూనియన్)లో నమోదైన లాభాపేక్ష లేని NGO. మా విధానాలు EU, ఆస్ట్రియన్ డేటా రక్షణ చట్టాన్ని (GDPR) గౌరవిస్తాయి. మమ్మల్ని సంప్రదించడానికి, దయచేసి contact@catrobat.orgకి ఇ-మెయిల్ పంపు లేదా Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)కి ఉత్తరం పంపు.
+  text9: నీ వయసు 14 ఏళ్ల కంటే తక్కువైతే, ఈ విధానాన్ని చట్టపరమైన సంరక్షకులు (సాధారణంగా తల్లిదండ్రులు) అంగీకరించాలి.
+  text10: Catrobat అధికారిక ఆంగ్ల గోప్యతా విధానం వెబ్‌లో %privacy_policy% వద్ద అందుబాటులో ఉంది.
+  disagree-text: ఆమోదం లేకుండా మేము ఖాతాను సృష్టించలేము, కానీ ప్రధాన ఫీచర్లు అప్పటికీ అందుబాటులో ఉంటాయి.
 catro-notifications:
   markAsRead: "చదివినట్లుగా గుర్తించు"
-  noFollowers: "మీకు ఫాలోయర్ నోటిఫికేషన్‌లు లేనట్లు కనిపిస్తోంది."
-  noComments: "మీకు ఎలాంటి వ్యాఖ్య నోటిఫికేషన్‌లు లేనట్లు కనిపిస్తోంది."
-  noReactions: "మీకు ఎలాంటి రియాక్షన్ నోటిఫికేషన్‌లు లేనట్లు కనిపిస్తోంది."
-  noRemixes: "మీకు రీమిక్స్ నోటిఫికేషన్‌లు లేనట్లు కనిపిస్తోంది."
-  noStudios: "It looks like you don't have any studio notifications."
+  noFollowers: "నీకు ఫాలోవర్ నోటిఫికేషన్‌లు ఏవీ లేనట్లు కనిపిస్తోంది."
+  noComments: "నీకు వ్యాఖ్య నోటిఫికేషన్‌లు ఏవీ లేనట్లు కనిపిస్తోంది."
+  noReactions: "నీకు ప్రతిస్పందన నోటిఫికేషన్‌లు ఏవీ లేనట్లు కనిపిస్తోంది."
+  noRemixes: "నీకు రీమిక్స్ నోటిఫికేషన్‌లు ఏవీ లేనట్లు కనిపిస్తోంది."
+  noStudios: "నీకు స్టూడియో నోటిఫికేషన్‌లు ఏవీ లేనట్లు కనిపిస్తోంది."
   tab:
-    studio: Studio
-    project: Projects
+    studio: స్టూడియో
+    project: ప్రాజెక్ట్‌లు
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% %program_link%పై వ్యాఖ్యానించారు.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% %program_link%కి ప్రతిస్పందించారు.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% ఇప్పుడు నిన్ను ఫాలో అవుతున్నారు.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% ఒక కొత్త గేమ్ %program_link% సృష్టించారు.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% నీ గేమ్ %remix_program_link%కి రీమిక్స్ %program_link% సృష్టించారు.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% స్టూడియో %studio_name%లో వ్యాఖ్యానించారు.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% %program_link%ని స్టూడియో %studio_name%కి జోడించారు.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'స్టూడియో %studio_name%లో చేరాలనే నీ అభ్యర్థన ఆమోదించబడింది.'
+    declined: 'స్టూడియో %studio_name%లో చేరాలనే నీ అభ్యర్థన తిరస్కరించబడింది.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'నీ ప్రాజెక్ట్ %program_link% %days% రోజుల్లో ఆటోమేటిక్‌గా తొలగించబడుతుంది. దాన్ని ఉంచుకోవడానికి కొత్త వెర్షన్ అప్‌లోడ్ చేయి లేదా మరిన్ని డౌన్‌లోడ్‌లు సంపాదించు.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'కార్యకలాపం లేనందున నీ ప్రాజెక్ట్ "%project_name%" ఆటోమేటిక్‌గా తీసివేయబడింది. ఇంకా షేర్ చేయాలనుకుంటే మళ్ళీ అప్‌లోడ్ చేయి.'
+  noProjects: "నీకు ప్రాజెక్ట్ నోటిఫికేషన్‌లు ఏవీ లేనట్లు కనిపిస్తోంది."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: లింక్ క్లిప్‌బోర్డ్‌కు కాపీ అయింది!
+  success_project: ప్రాజెక్ట్ లింక్ క్లిప్‌బోర్డ్‌కు కాపీ అయింది!
+  success_user: వినియోగదారు లింక్ క్లిప్‌బోర్డ్‌కు కాపీ అయింది!
   fail: లింక్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయడం విఫలమైంది! :(
-next: తరువాత
+next: తర్వాత
 previous: మునుపటి
 media-packages:
-  title: మీడియా-ప్యాకేజీలు
-  description: కింది వర్గాలలో మీరు PocketCode ప్రాజెక్ట్‌లను జోడించడానికి అదనపు నటులు మరియు వస్తువులను కనుగొనవచ్చు.
+  title: మీడియా లైబ్రరీ
+  description: కింది వర్గాలలో నీ ప్రాజెక్ట్‌లకు జోడించడానికి నటులు, వస్తువులను నువ్వు కనుగొనవచ్చు.
   thumb-size:
-    description: పరిదృశ్యం పరిమాణం
+    description: ప్రివ్యూ పరిమాణం
     sm: చిన్న
     md: మధ్యస్థం
     lg: పెద్ద
   theme-special: "%flavor% థీమ్ స్పెషల్"
   search-results: మీడియా లైబ్రరీ శోధన ఫలితాలు
-  no-results: మీ శోధన 0 ఫలితాలను అందించింది. దయచేసి ఆంగ్ల శోధన పదాలను మాత్రమే ఉపయోగించండి.
-  download_these_files: సేవ్
+  no-results: నీ శోధనకు 0 ఫలితాలు వచ్చాయి. దయచేసి ఆంగ్ల శోధన పదాలను మాత్రమే ఉపయోగించు.
+  download_these_files: సేవ్ చేయి
 flavor:
-  pocketcode: పాకెట్ కోడ్
-  pocketalice: పాకెట్ ఆలిస్
-  pocketgalaxy: గెలాక్సీ జామ్
-  phirocode: ఫిరోకోడ్
-  luna: లూనా & పిల్లి
-  create@school: '@స్కూల్ సృష్టించు'
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
+  pocketgalaxy: Galaxy Jam
+  phirocode: PhiroCode
+  luna: Luna & Cat
+  create@school: Create@School
+copyright: 'కాపీరైట్ &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. అన్ని హక్కులూ ప్రత్యేకించబడ్డాయి.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "ఈ వెబ్‌సైట్ పని చేయడానికి JavaScript అవసరం. దయచేసి నీ బ్రౌజర్‌లో JavaScript ఆన్ చేయి లేదా సహాయం కోసం ఒక పెద్దవారిని అడుగు."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
-  privacy-link: "ప్రయివసి పాలిసి"
-  settings-link: "Cookie Settings"
-agree: అంగీకరిస్తున్నారు
-disagree: విభేదిస్తున్నారు
+  message: "మా సేవలను మెరుగుపరచడానికి మేము కుకీలను ఉపయోగిస్తాము. ఏ డేటా అమ్మబడదు లేదా షేర్ చేయబడదు."
+  accept: "అంగీకరించు"
+  decline: "తిరస్కరించు"
+  privacy-link: "గోప్యతా విధానం"
+  settings-link: "కుకీ సెట్టింగ్‌లు"
+agree: అంగీకరిస్తున్నాను
+disagree: అంగీకరించను
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: ప్రస్తుతం ప్రొఫైల్‌లు ఏవీ లేవు.
+element: 'అంశం'
+elements: 'అంశాలు'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: 'షేర్ చేయి'
+  error: 'షేర్ చేయడం విఫలమైంది'
+  success: 'విజయవంతంగా షేర్ అయింది'
+copy: 'లింక్ కాపీ చేయి'
+checkOutProject: 'ఈ ప్రాజెక్ట్‌ను చూడు:'
+checkOutUser: 'ఈ వినియోగదారుని చూడు:'
+community: 'Catrobat కమ్యూనిటీ'
+back_to_app: 'కమ్యూనిటీ నుండి బయటకు వెళ్ళు'
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: ఎక్కువ చుడబడినవి
-  most_downloaded: ఎక్కువ డౌన్లొడుచెయబడినవి
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: కొత్త ప్రాజెక్ట్‌లు
+  random: యాదృచ్ఛిక ప్రాజెక్ట్‌లు
+  most_viewed: ఎక్కువగా చూసినవి
+  most_downloaded: ఎక్కువగా డౌన్‌లోడ్ చేసినవి
+  example: ఉదాహరణ
+  scratch: Scratch రీమిక్స్‌లు
+  recommended: సిఫార్సు చేసిన ప్రాజెక్ట్‌లు
+  popular: అత్యంత ప్రజాదరణ పొందినవి
+  trending: ట్రెండింగ్ ప్రాజెక్ట్‌లు
 achievements:
   sidebar:
-    title: 'Achievements'
-    badge: 'new'
+    title: 'విజయాలు'
+    badge: 'కొత్తది'
   overview:
-    header: 'Achievements'
+    header: 'విజయాలు'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'తాజా విజయం'
+      x_out_of_y: '%total%లో %unlocked% అన్‌లాక్ అయ్యాయి'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'అన్‌లాక్ అయినవి'
+      empty: "నువ్వు ఇంకా ఏ విజయాలూ అన్‌లాక్ చేయలేదు."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'లాక్ అయినవి'
+      empty: "నువ్వు ఇప్పటికే అన్ని విజయాలనూ అన్‌లాక్ చేశావు."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
-      confirm: "అలాగే"
+      title: 'అభినందనలు!'
+      subtitle: "నువ్వు ఒక బ్యాడ్జ్ సంపాదించావు"
+      confirm: "సరే"
   profile:
-    title: 'Achievements'
+    title: 'విజయాలు'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'శిష్యుడు'
+        description: 'ఎవరినైనా ఫాలో చేసి, ఒక ప్రాజెక్ట్ అప్‌లోడ్ చేయి'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'కళాకారుడు'
+        description: '1 సంవత్సరం కంటే ఎక్కువ కాలంగా క్రియాశీల సభ్యుడు'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'మాస్టర్'
+        description: '4 సంవత్సరాల కంటే ఎక్కువ కాలంగా క్రియాశీల సభ్యుడు'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'గ్రాండ్ మాస్టర్'
+        description: '7 సంవత్సరాల కంటే ఎక్కువ కాలంగా క్రియాశీల సభ్యుడు'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'చొరవ'
+        description: 'నీ మొదటి ప్రొఫైల్ చిత్రాన్ని జోడించు'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'నూతన సభ్యుడు'
+        description: 'ఒక వినియోగదారు ఖాతా సృష్టించు'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Coding Jam 2021లో పాల్గొన్నవారు"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "ద్విభాషి"
+        description: "నీ ప్రాజెక్ట్‌లను 2 భాషల్లోకి అనువదించు"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "త్రిభాషి"
+        description: "నీ ప్రాజెక్ట్‌లను 3 భాషల్లోకి అనువదించు"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "బహుభాషా నిపుణుడు"
+        description: "నీ ప్రాజెక్ట్‌లను 5 భాషల్లోకి అనువదించు"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "ధృవీకరించబడింది"
+        description: "నీ ఖాతాను ధృవీకరించు"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} ట్యాగ్ |]1,Inf] ట్యాగ్‌లు'
   tag:
     game:
-      title: Game
+      title: గేమ్
     animation:
-      title: Animation
+      title: యానిమేషన్
     story:
-      title: Story
+      title: కథ
     music:
-      title: Music
+      title: సంగీతం
     art:
-      title: Art
+      title: కళ
     experimental:
-      title: Experimental
+      title: ప్రయోగాత్మకం
     tutorial:
-      title: Tutorial
+      title: ట్యుటోరియల్
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} ఎక్స్‌టెన్షన్ |]1,Inf] ఎక్స్‌టెన్షన్‌లు'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: డ్రోన్
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: ఎంబ్రాయిడరీ
     mindstorms:
-      title: మనస్సు తుఫానులు
+      title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: మల్టీప్లేయర్
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  cancel_studio: 'రద్దు చేయు'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
-  report: 'రిపొర్ట్'
-  public: 'public'
-  private: 'Invite-only'
+  title: 'స్టూడియోలు'
+  singular: 'స్టూడియో'
+  create_studio: 'స్టూడియో సృష్టించు'
+  delete_studio: 'స్టూడియో తొలగించు'
+  cancel_studio: 'రద్దు చేయి'
+  studio_name: 'స్టూడియో పేరు'
+  studio_description: 'స్టూడియో వివరణ'
+  is_public: 'పబ్లిక్ చేయాలా?'
+  enable_comments: 'వ్యాఖ్యలను అనుమతించాలా?'
+  cover_image: 'కవర్ అప్‌లోడ్ చేయి'
+  cover_image_empty: 'చిత్రం ఏదీ ఎంచుకోలేదు.'
+  cover_image_hint: 'గరిష్టంగా 1 MB. అనుమతించే ఫార్మాట్‌లు: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: '1 MB పరిమితిలో సరిపోయేలా చిత్రం ఆటోమేటిక్‌గా కుదించబడింది.'
+  cover_image_compressing: 'చిత్రం కుదించబడుతోంది...'
+  cover_image_still_too_large: 'కుదించిన తర్వాత కూడా చిత్రం చాలా పెద్దదిగా ఉంది. దయచేసి చిన్న ఫైల్‌ను ఎంచుకో.'
+  cover_image_invalid_type: 'చెల్లని చిత్ర రకం. దయచేసి JPEG, PNG, GIF లేదా WebP ఉపయోగించు.'
+  cover_image_compression_failed: 'చిత్రాన్ని ప్రాసెస్ చేయడం విఫలమైంది. దయచేసి వేరే ఫైల్ ప్రయత్నించు.'
+  cover_image_alt: 'నీ కవర్ చిత్రం'
+  cover_image_remove: 'చిత్రాన్ని తీసివేయి'
+  popular: 'ప్రజాదరణ పొందిన స్టూడియోలు'
+  join: 'చేరు'
+  leave: 'వదిలి వెళ్ళు'
+  report: 'రిపోర్ట్ చేయి'
+  public: 'పబ్లిక్'
+  private: 'ఆహ్వానితులకు మాత్రమే'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'తెరవండి'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
-    cancel: 'రద్దు చేయు'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    joined_studios: 'చేరిన స్టూడియోలు'
+    public_studios: 'పబ్లిక్ స్టూడియోలు'
+    private_studios: 'ఆహ్వానితులకు మాత్రమే స్టూడియోలు'
+    no_studios: 'ఇంకా స్టూడియోలు లేవు'
+    my_studios: 'నా స్టూడియోలు'
+    explore: 'స్టూడియోలను అన్వేషించు'
+    no_joined: "నువ్వు ఇంకా ఏ స్టూడియోలోనూ చేరలేదు"
+    joined: 'చేరావు'
+    load_more: 'మరిన్ని లోడ్ చేయి'
+    open: 'తెరువు'
+    share: 'షేర్ చేయి'
+    share_success: 'లింక్ క్లిప్‌బోర్డ్‌కు కాపీ అయింది!'
+    leave_confirm_title: 'ఈ స్టూడియో నుండి వెళ్ళిపోవాలా?'
+    cancel: 'రద్దు చేయి'
+    cancel_request: 'అభ్యర్థన రద్దు చేయి'
+    cancel_request_confirm_title: 'చేరే అభ్యర్థనను రద్దు చేయాలా?'
     admin: 'అడ్మిన్'
-    member: 'Member'
+    member: 'సభ్యుడు'
   details:
-    add_project: 'click to add the project'
-    add: 'Add'
+    add_project: 'ప్రాజెక్ట్‌ను జోడించడానికి క్లిక్ చేయి'
+    add: 'జోడించు'
     showMore: 'ఇంకా చూపించు'
     showLess: 'తక్కువ చూపించు'
-    are_you_sure: 'మీరు చెప్పేది నిజమా?'
-    no_way_of_return: 'This cannot be undone.'
+    are_you_sure: 'నువ్వు ఖచ్చితంగా అనుకుంటున్నావా?'
+    no_way_of_return: 'దీన్ని వెనక్కి తీసుకోలేము.'
     delete_it: 'తొలగించు'
-    remove_project: 'స్టూడియో నుండి తీసివేయండి'
-    remove_project_error: 'స్టూడియో నుండి ప్రాజెక్ట్‌ను తీసివేయడంలో విఫలమైంది!'
-    remove_project_success: 'ప్రాజెక్ట్ స్టూడియో నుండి విజయవంతంగా తీసివేయబడింది!'
-    no_projects: 'స్టూడియోలో ఇంకా ఏ ప్రాజెక్ట్‌లు లేవు'
+    remove_project: 'స్టూడియో నుండి తీసివేయి'
+    remove_project_error: 'స్టూడియో నుండి ప్రాజెక్ట్‌ను తీసివేయడం విఫలమైంది.'
+    remove_project_success: 'ప్రాజెక్ట్ స్టూడియో నుండి విజయవంతంగా తీసివేయబడింది.'
+    no_projects: 'స్టూడియోలో ఇంకా ప్రాజెక్ట్‌లు ఏవీ లేవు.'
     projects:
-      title: 'Projects'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
-      download: 'డౌన్‌లోడ్ చేయండి'
-      share: 'Share'
-      remove_from_studio: 'స్టూడియో నుండి తీసివేయండి'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'స్టూడియో కవర్‌ని అప్‌డేట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది!'
-    join: 'Join'
-    leave: 'Leave'
-    report: 'రిపొర్ట్'
-    pending: 'Pending'
-    decline: 'Declined'
+      title: 'ప్రాజెక్ట్‌లు'
+      addProject: 'ప్రాజెక్ట్‌లను జోడించు'
+      open_project: 'ప్రాజెక్ట్ తెరువు'
+      download: 'డౌన్‌లోడ్ చేయి'
+      share: 'షేర్ చేయి'
+      remove_from_studio: 'స్టూడియో నుండి తీసివేయి'
+      remove_from_studio_title: 'ప్రాజెక్ట్‌ను స్టూడియో నుండి తీసివేయాలా?'
+      remove_from_studio_text: 'నీ మనసు మారితే దాన్ని తర్వాత మళ్ళీ జోడించవచ్చు.'
+      share_success: 'లింక్ క్లిప్‌బోర్డ్‌కు కాపీ అయింది!'
+      share_fail: 'లింక్ కాపీ చేయడం విఫలమైంది.'
+      no_projects_empty_state: 'జోడించడానికి నీకు ఇంకా ప్రాజెక్ట్‌లు లేవు. ముందు Pocket Codeలో ఒకటి సృష్టించు!'
+      add_selected: 'ఎంచుకున్నవి జోడించు'
+    no_available_projects: 'జోడించడానికి ప్రాజెక్ట్‌లు ఏవీ అందుబాటులో లేవు.'
+    updateCoverError: 'స్టూడియో కవర్‌ను అప్‌డేట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది.'
+    join: 'చేరు'
+    leave: 'వదిలి వెళ్ళు'
+    report: 'రిపోర్ట్ చేయి'
+    pending: 'పెండింగ్‌లో ఉంది'
+    decline: 'తిరస్కరించబడింది'
     comments:
       title: 'వ్యాఖ్యలు'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'ఏదైనా రాయి'
+      replies: 'జవాబులు'
+      send: 'పంపు'
+      no_comments: 'ఈ స్టూడియోలో ఇంకా వ్యాఖ్యలు లేవు.'
+      disabled_comments: 'ఈ స్టూడియోకి వ్యాఖ్యలు ఆపివేయబడ్డాయి.'
+      remove_comment: 'వ్యాఖ్యను తీసివేయి'
+      post_error: 'నీ వ్యాఖ్యను పోస్ట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది. కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.'
+      remove_error: 'వ్యాఖ్యను తీసివేస్తున్నప్పుడు ఏదో తప్పు జరిగింది. కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'కార్యకలాపాలు'
+      join_studio: '%user% స్టూడియోలో చేరారు.'
+      add_project: '%user% ఒక ప్రాజెక్ట్‌ను జోడించారు.'
+      add_comment: '%user% ఒక వ్యాఖ్య రాశారు.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'స్టూడియో సభ్యులు'
+      project_count: '{0} స్టూడియో ప్రాజెక్ట్‌లు లేవు |{1} 1 స్టూడియో ప్రాజెక్ట్ |]1,Inf] %count% స్టూడియో ప్రాజెక్ట్‌లు'
+      no_studio_projects: 'స్టూడియో ప్రాజెక్ట్‌లు లేవు'
+      one_studio_project: '1 స్టూడియో ప్రాజెక్ట్'
+      n_studio_projects: '%count% స్టూడియో ప్రాజెక్ట్‌లు'
+      promote_member: 'సభ్యుడిని అడ్మిన్‌గా చేయి'
+      promotion_failed: 'ఈ సభ్యుడిని అడ్మిన్‌గా చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది. కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.'
+      ban_member: 'సభ్యుడిని స్టూడియో నుండి నిషేధించు'
+      ban_failed: 'ఈ సభ్యుడిని నిషేధిస్తున్నప్పుడు ఏదో తప్పు జరిగింది. కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.'
+      demote_member: 'అడ్మిన్‌ను సభ్యుడిగా మార్చు'
+      demotion_failed: 'ఈ అడ్మిన్‌ను సభ్యుడిగా మార్చేటప్పుడు ఏదో తప్పు జరిగింది. కాసేపటి తర్వాత మళ్ళీ ప్రయత్నించు.'
+      last_admin: 'ఈ స్టూడియో చివరి అడ్మిన్‌ను సభ్యుడిగా మార్చలేము.'
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
-    show_more: 'More information'
-    show_less: 'Less information'
+      title: 'చేరే అభ్యర్థనలు'
+      accept: 'అంగీకరించు'
+      decline: 'తిరస్కరించు'
+      accept_success: 'చేరే అభ్యర్థన ఆమోదించబడింది.'
+      decline_success: 'చేరే అభ్యర్థన తిరస్కరించబడింది.'
+      error: 'ఏదో తప్పు జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించు.'
+      no_requests: 'పెండింగ్‌లో ఉన్న చేరే అభ్యర్థనలు లేవు.'
+    show_more: 'ఇంకా చూపించు'
+    show_less: 'తక్కువ చూపించు'
     admin_settings:
-      title: 'అమరికలు'
-      studio_name: 'Studio Name'
+      title: 'సెట్టింగ్‌లు'
+      studio_name: 'స్టూడియో పేరు'
       studio_description: 'వివరణ'
       toggle_allow_comments: 'వ్యాఖ్యలు'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'పబ్లిక్'
 media_library:
   file:
     size: 'పరిమాణం: %size%'
@@ -1258,72 +1255,72 @@ media_library:
       sound: 'రకం: ధ్వని'
       movie: 'రకం: వీడియో'
       default: 'రకం: తెలియదు'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: 'ఇంకా మీడియా వర్గాలు ఏవీ అందుబాటులో లేవు.'
+  no_results: 'ఫలితాలు ఏవీ కనబడలేదు.'
+  assets_count: 'ఫైళ్లు'
+  view_all: 'అన్నీ చూడు'
+  view_all_category: '%category% అన్నీ చూడు'
+  back_to_app: 'యాప్‌కు తిరిగి వెళ్ళు'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'నువ్వు అడిగిన ప్రాజెక్ట్ అందుబాటులో లేదు'
+  project_not_for_kids: 'ప్రాజెక్ట్ పిల్లలకు తగినది కాదని గుర్తించబడింది!'
+  project_safe_for_kids: 'ప్రాజెక్ట్ పిల్లలకు సురక్షితమైనదిగా గుర్తించబడింది!'
+  project_not_for_kids_moderator: 'ఈ ప్రాజెక్ట్‌ను ఒక మోడరేటర్ గుర్తించారు. నువ్వు దీన్ని మార్చలేవు!'
+  project_set_private: 'ప్రాజెక్ట్ ప్రైవేట్‌గా సెట్ చేయబడింది.'
+  project_set_public: 'ప్రాజెక్ట్ పబ్లిక్‌గా సెట్ చేయబడింది.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'అదనపు సమాచారం: additionalInfo'
+    feature_1: 'featureName ఫీచర్ maintenanceStart నుండి maintenanceEnd వరకు అందుబాటులో ఉండదు'
+    feature_2: 'ఫీచర్'
+    feature_3: 'ఫీచర్'
+MarkNotForKids: పిల్లలకు తగినది కాదని గుర్తించు
+MarkSafeForKids: పిల్లలకు సురక్షితమైనదిగా గుర్తించు
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: నిర్ధారణ
+  confirmMark: నువ్వు ఖచ్చితంగా ఈ ప్రాజెక్ట్‌ను పిల్లలకు తగినది కాదని గుర్తించాలనుకుంటున్నావా?
+  confirmUnmark: నువ్వు ఖచ్చితంగా ఈ ప్రాజెక్ట్ నుండి 'పిల్లలకు తగినది కాదు' గుర్తును తీసివేయాలనుకుంటున్నావా?
+  confirmYes: 'అవును, కొనసాగించు!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "ఈ %content_type%ని రిపోర్ట్ చేయి"
+    reason_placeholder: "దీన్ని ఎందుకు రిపోర్ట్ చేస్తున్నావో దయచేసి వివరించు..."
+    submit: "రిపోర్ట్ సమర్పించు"
+    success: "నీ రిపోర్ట్ సమర్పించబడింది. ధన్యవాదాలు."
+    error: "ఏదో తప్పు జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించు."
+    duplicate: "నువ్వు ఇప్పటికే ఈ కంటెంట్‌ను రిపోర్ట్ చేశావు."
+    trust_too_low: "రిపోర్ట్‌లు చేయడానికి నీ ఖాతా ఇంకా చాలా కొత్తది."
+    unverified: "నువ్వు లాగిన్ అయ్యావని, నీ ఖాతా ఇమెయిల్ ధృవీకరించబడిందని నిర్ధారించుకో."
+    rate_limited: "నువ్వు చాలా వేగంగా రిపోర్ట్‌లు సమర్పిస్తున్నావు. దయచేసి కాసేపు ఆగి మళ్ళీ ప్రయత్నించు."
+    suspended: "నీ ఖాతా నిలిపివేయబడింది."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
-    cancel: "రద్దు చేయు"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    button: "అప్పీల్ చేయి"
+    title: "ఈ నిర్ణయంపై అప్పీల్ చేయి"
+    placeholder: "ఈ కంటెంట్‌ను ఎందుకు దాచకూడదో వివరించు..."
+    submit: "అప్పీల్ సమర్పించు"
+    cancel: "రద్దు చేయి"
+    success: "నీ అప్పీల్ సమీక్ష కోసం సమర్పించబడింది."
+    already_pending: "నీకు ఇప్పటికే ఒక అప్పీల్ పెండింగ్‌లో ఉంది."
+    error: "ఏదో తప్పు జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించు."
+    rate_limited: "నువ్వు చాలా వేగంగా అప్పీల్‌లు సమర్పిస్తున్నావు. దయచేసి కాసేపు ఆగి మళ్ళీ ప్రయత్నించు."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "నువ్వు చాలా వేగంగా వ్యాఖ్యలు పోస్ట్ చేస్తున్నావు. దయచేసి కొంచెం ఆగు."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "నువ్వు చాలా వేగంగా ప్రతిస్పందిస్తున్నావు. దయచేసి కొంచెం ఆగు."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "నువ్వు చాలా వేగంగా ఫాలో/అన్‌ఫాలో చేస్తున్నావు. దయచేసి కొంచెం ఆగు."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "నువ్వు చాలా వేగంగా స్టూడియో చర్యలు చేస్తున్నావు. దయచేసి కొంచెం ఆగు."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "కమ్యూనిటీ రిపోర్ట్‌ల కారణంగా ఈ ప్రాజెక్ట్ దాచబడింది."
+    comment: "కమ్యూనిటీ రిపోర్ట్‌ల కారణంగా ఈ వ్యాఖ్య దాచబడింది."
+    user: "కమ్యూనిటీ రిపోర్ట్‌ల కారణంగా ఈ ప్రొఫైల్ దాచబడింది."
+    user_own: "కమ్యూనిటీ రిపోర్ట్‌ల కారణంగా నీ ఖాతా నిలిపివేయబడింది. నువ్వు ఈ నిర్ణయంపై అప్పీల్ చేయవచ్చు."
+    studio: "కమ్యూనిటీ రిపోర్ట్‌ల కారణంగా ఈ స్టూడియో దాచబడింది."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "కమ్యూనిటీ రిపోర్ట్‌ల కారణంగా నీ %content_type% దాచబడింది. నువ్వు ఈ నిర్ణయంపై అప్పీల్ చేయవచ్చు."
+    appeal_approved: "నీ అప్పీల్ ఆమోదించబడింది. నీ కంటెంట్ ఇప్పుడు మళ్ళీ కనిపిస్తుంది."
+    appeal_rejected: "నీ అప్పీల్ సమీక్షించబడింది, నీ కంటెంట్‌ను దాచే నిర్ణయం అలాగే ఉంటుంది."
+    admin_review_needed: "కంటెంట్ ఆటోమేటిక్‌గా దాచబడింది, దీనికి సమీక్ష అవసరం."
+Reports: రిపోర్ట్‌లు
+members: సభ్యులు

@@ -1,995 +1,995 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+title: Catrobat ප්‍රජාව
+meta.description: Catrobat එකෙන් හදපු නිර්මාණශීලී ව්‍යාපෘති බෙදාගන්න, හොයාගන්න, රීමික්ස් කරන්න. ක්‍රීඩා, සජීවිකරණ සහ යෙදුම් හදන තරුණ නිර්මාණකරුවන්ගේ ලෝක ප්‍රජාවට එකතු වෙන්න.
+meta.description.media.library: Catrobat සඳහා නොමිලේ මාධ්‍ය බලන්න සහ බාගන්න — ඔයාගේ ව්‍යාපෘති වලට ශබ්ද, රූප සහ තවත් දේ.
+meta.og.title.login: Catrobat වෙත පුරනය වෙන්න
+meta.og.description.login: ඔයාගේ Catrobat ව්‍යාපෘති ප්‍රජාව එක්ක බෙදාගන්න පුරනය වෙන්න.
+meta.og.title.register: Catrobat ගිණුමක් හදන්න
+meta.og.description.register: Catrobat ප්‍රජාවට එකතු වෙලා අදම ඔයාගේ නිර්මාණශීලී ව්‍යාපෘති බෙදාගන්න පටන් ගන්න.
+meta.og.description.profile: Catrobat හි %username% – ඔවුන්ගේ ව්‍යාපෘති සහ ජයග්‍රහණ බලන්න.
 localLanguage: ඉංග්‍රීසි
 username: පරිශීලක නාමය
 password: මුරපදය
-createNewPassword: Create new password
+createNewPassword: අලුත් මුරපදයක් හදන්න
 accountSettings: ගිණුමේ සැකසුම්
 email: විද්‍යුත් තැපෑල
-aboutPocketCode: About Pocket Code
-about: About Catrobat
+aboutPocketCode: Pocket Code ගැන
+about: Catrobat ගැන
 education: අධ්‍යාපනය
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
+chat: කතාබහ සහ සංසද
+privacyGuide: රහස්‍යතා දැනුවත් කිරීමේ මාර්ගෝපදේශය
+others: වෙනත්
 tutorials: උපකාර
 googlePlay: ගූගල් ප්ලේ ස්ටෝර්
 iosAppStore: අයිඕඑස් ඇප් ස්ටෝර්
 instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: The passwords didn't match.
-error: Oops!
+discordChat: Discord කතාබහ
+passwordsNoMatch: මුරපද ගැළපුණේ නැහැ.
+error: අයියෝ!
 cancel: අවලංගු කරන්න
-confirm: Confirm
-report: Report
-report.title: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+confirm: තහවුරු කරන්න
+report: වාර්තා කරන්න
+report.title: වාර්තා කරන්න
+deleteIt: ඔව්, මකන්න!
+reportIt: ඔව්, වාර්තා කරන්න!
+areYouSure: ඔයාට විශ්වාසද?
+noWayOfReturn: මේ ක්‍රියාව ආපසු හරවන්න බැහැ!
 download: බාගන්න
-name: Name
-description: Description
-noDescription: No description available.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+name: නම
+description: විස්තරය
+noDescription: විස්තරයක් නැහැ.
+credits: සටහන් සහ ස්තූතිය
+noCredits: සටහන් සහ ස්තූතිය නැහැ.
+notesAndCreditsDescription: ඔයා මේ ව්‍යාපෘතිය හැදුවේ කොහොමද? වෙන අයගේ අදහස්, ස්ක්‍රිප්ට් හෝ චිත්‍ර පාවිච්චි කළාද? මෙතන ඔවුන්ට ස්තූති කරන්න.
+projectImportedFromScratch: මේ ව්‍යාපෘතිය MIT Scratch එකෙන් ආනයනය කළේ. මුල් ව්‍යාපෘතිය බලන්න පුළුවන්
+scratchImportedProjectLinkHere: මෙතැනින්.
 country: රට
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
+loginText: පුරනය වෙන්න
+privacyPolicy: රහස්‍යතා ප්‍රතිපත්තිය
+imprint: ප්‍රකාශන තොරතුරු
 projectDetails: විස්තර
-somethingWentWrong: 'Oops, something did not work. Please try again!'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+somethingWentWrong: අයියෝ, මොකක්හරි වැඩ කළේ නැහැ. ආයෙත් උත්සාහ කරන්න!
+accountNotVerified: ඔයා පුරනය වෙලා ඉන්නවද සහ ඔයාගේ ගිණුමේ විද්‍යුත් තැපෑල තහවුරු කරලාද කියලා බලන්න.
+accountSuspended: ප්‍රජා වාර්තා නිසා ඔයාගේ ගිණුම අත්හිටුවලා තියෙනවා. ඔයාගේ පැතිකඩෙන් මේ තීරණයට අභියාචනා කරන්න පුළුවන්.
+doesNotExist: ඉල්ලපු දේ නැහැ.
 pleaseTryAgain: 'කරුණාකර නැවත උත්සාහ කරන්න!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+tryAgainButton: ආයෙත් උත්සාහ කරන්න
+oldVersionError: කරුණාකර අලුත්ම Pocket Code අනුවාදයට යාවත්කාල කරන්න!
+more: තව
+less: අඩුවෙන්
 show-more: 'තව පෙන්වන්න'
-show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+show-less: අඩුවෙන් පෙන්වන්න
+more-information: තව තොරතුරු
+less-information: අඩු තොරතුරු
+ok: හරි, තේරුණා
+clickToDownloadProgram: උදාහරණ ව්‍යාපෘතිය බාගන්න %link_start% මෙතන %link_end% ක්ලික් කරන්න.
+registrationError: පරිශීලක නාමය හෝ විද්‍යුත් තැපැල් ලිපිනය දැනටමත් පාවිච්චි වෙනවා.
+notifications: දැනුම්දීම්
 allNotifications: 'සියල්ල'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+FollowersNotifications: අනුගාමිකයන්
+LikeNotifications: ප්‍රතිචාර
+CommentNotifications: අදහස්
+RemixNotifications: රීමික්ස්
+wellDone: නියමයි!
+done: ඉවරයි!
+notificationsReadMessage: ඔයාට කිසිම දැනුම්දීමක් නැහැ වගේ.
+confirmMessage: ඔව්, මකන්න
 cancelMessage: "අවලංගු කරන්න"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
+notificationsUnauthorizedError: පරිශීලකයාට අවසර දෙන්න බැරි වුණා
+notificationsClearError: දැනුම්දීම් කියවූ ලෙස ලකුණු කරන්න බැරි වුණා!
 pleaseWait: "කරුණාකර රැඳෙන්න..."
-projects: "Projects"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+projects: ව්‍යාපෘති
+users: පරිශීලකයා
+studios: ස්ටූඩියෝ
+oauthPopUpTitle: බාහිර ගිණුමකින් පුරනය වීම ගැන තොරතුරු
+oauthInfo: ඔයා දැන් බාහිර ගිණුමකින් පුරනය වුණා. අපි ඔයාට අහඹු පරිශීලක නාමයක් හැදුවා. ඔයාගේ පරිශීලක නාමය වෙනස් කරන්න හෝ ගිණුමට අලුත් මුරපදයක් හදන්න ඕන නම් ඔයාගේ පැතිකඩ පිටුවට යන්න.
+oauthHere: මෙතන
+statistics: සංඛ්‍යාලේඛන
+languageSelection: භාෂාව තෝරන්න
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: තේමාව
+  auto: පද්ධතිය
+  auto_description: ඔයාගේ උපාංගයේ සැකසුම අනුගමනය කරන්න
+  light: ආලෝකමත්
+  light_description: දීප්තිමත් පෙනුම
+  dark: අඳුරු
+  dark_description: අඳුරු පෙනුම
+  apply: යොදන්න
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: මෙතන නිර්දේශ කරන්නේ මොන ව්‍යාපෘතිද?
+      description: ඔයාගේ ව්‍යාපෘතියට ප්‍රතිචාර (ඇඟිල්ල උඩට, සිනහව ...) වැඩියෙන් ලැබෙන තරමට, මේ ලැයිස්තුවේ ඒක උඩින් පෙන්වනවා.
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: අනුගමනය කරන
+  followers: අනුගාමිකයන්
+  follow: අනුගමනය කරන්න
+  username: පරිශීලකයා
+  followsMe: මාව අනුගමනය කරනවා
+  noFollowing: ඔයා දැනට කිසිවෙකු අනුගමනය කරන්නේ නැහැ.
+  noFollowers: ඔයාට දැනට අනුගාමිකයන් නැහැ.
+  noOtherFollowing: දැනට අනුගමනය කරන පරිශීලකයන් නැහැ.
+  noOtherFollowers: දැනට අනුගාමික පරිශීලකයන් නැහැ.
+  followError: ' අපිට දැන් මේ පරිශීලකයා අනුගමනය කරන්න බැරි වුණා.'
+  unfollowError: ' අපිට දැන් මේ පරිශීලකයා අනුගමනය කිරීම නවත්වන්න බැරි වුණා.'
+  unfollowQuestion: ඔයාට ඇත්තටම මේ පරිශීලකයා අනුගමනය කිරීම නවත්වන්න ඕනද?
+  unfollowButton: '%username% අනුගමනය කිරීම නවත්වන්න'
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: Open
+    title: Catrobat හි %theme% වෙත සාදරයෙන් පිළිගන්නවා
+    title_mindstorms: Mindstorms EV3 සහ NXT සඳහා Catrobat අඩවියට සාදරයෙන් පිළිගන්නවා
+    subtitle: කතා, ක්‍රීඩා සහ තවත් දේ හදන්න...
+    subtitle_embroidery: ඔයාගේ ටී-ෂර්ට්, බෑග්, කලිසම් හෝ ස්මාර්ට්ෆෝන් කවරය මත ඔයාගේම රටා මහන්න!
+    subtitle_mindstorms: ඔයාගේ Lego Mindstorms EV3 සහ NXT රොබෝ එක්ක ඔයාගේම ව්‍යාපෘති හදන්න
+    download: යෙදුම බාගන්න
+    statistics: තව සංඛ්‍යාලේඛන
+  featured: විශේෂාංග
+  open: විවෘත කරන්න
   download: බාගන්න
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: ව්‍යාපෘතිය උඩුගත කරන්න
+    drop_here: ඔයාගේ .catrobat ගොනුව මෙතනට ඇදලා දාන්න
+    or_browse: නැත්නම් ගොනුවක් තෝරන්න ක්ලික් කරන්න
+    button: උඩුගත කරන්න
+    uploading: උඩුගත කරමින්...
+    success: ව්‍යාපෘතිය සාර්ථකව උඩුගත කළා!
+    view_project: ව්‍යාපෘතිය බලන්න
+    upload_another: තවත් එකක් උඩුගත කරන්න
+    invalid_file: කරුණාකර .catrobat ගොනුවක් තෝරන්න
+    file_too_large: ගොනුව ලොකු වැඩියි
+    error: උඩුගත කිරීම අසාර්ථකයි. ආයෙත් උත්සාහ කරන්න.
+    unauthorized: උඩුගත කරන්න ඔයා පුරනය වෙලා ඉන්න ඕන.
+    rate_limited: උඩුගත කිරීම් වැඩියි. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
+    selected_file: 'තෝරාගත් ගොනුව:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
+      file_size: උපරිම ගොනු ප්‍රමාණය 100 MB.
+      app_upload: ඔයාට Pocket Code යෙදුමෙන් කෙලින්ම ව්‍යාපෘති උඩුගත කරන්නත් පුළුවන්. දැනට යෙදුම් අලුතින් හදමින් ඉන්න නිසා මේ වෙලාවේ වෙබ් උඩුගත කිරීමට සහාය නැහැ.
+      retention: උඩුගත කළ ව්‍යාපෘති අක්‍රිය කාලයකට පස්සේ ස්වයංක්‍රීයව ඉවත් වෙනවා. ඔයාගේ ව්‍යාපෘතිය තවත් කාලයක් තියාගන්න නිතර පුරනය වෙන්න හෝ ඒකට බාගැනීම් ලබාගන්න.
+      protection: ගොඩක් හොඳ හෝ ජනප්‍රිය ව්‍යාපෘති ස්වයංක්‍රීය මැකීමෙන් මොඩරේටර්ලා ආරක්ෂා කරන්න පුළුවන්.
+  example: උදාහරණ
+  newest: අලුත්ම ව්‍යාපෘති
+  recommended: නිර්දේශිත ව්‍යාපෘති
+  scratchremixes: Scratch රීමික්ස්
+  noProjects: දැනට ව්‍යාපෘති නැහැ.
+  shareAction: බෙදාගන්න
+  deleteAction: ව්‍යාපෘතිය මකන්න
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+    ඔයාට විශ්වාසද?
+    ඔයාට ඇත්තටම "%programName%" මකන්න ඕනද?
+    මේ ක්‍රියාව ආපසු හරවන්න බැහැ!
+    ඔව්, මකන්න!
+    අවලංගු කරන්න
+  deleteConfirmText: මේ ක්‍රියාව ආපසු හරවන්න බැහැ. ඔයාගේ ව්‍යාපෘතිය සදහටම මැකෙනවා.
+  deleteConfirmationTitle: ඔයාට විශ්වාසද?
+  deleteNotFoundError: මකන්න ඕන ව්‍යාපෘතිය ඔයාගේ පරිශීලක ගිණුම යටතේ හොයාගන්න බැරි වුණා.
+  private: පෞද්ගලික
+  public: පොදු
+  setPrivateAction: පෞද්ගලික කරන්න
+  setPublicAction: පොදු කරන්න
+  setPrivateConfirm: මේ ව්‍යාපෘතිය පෞද්ගලික කරන්නද? ඊට පස්සේ ඒක සෙවුම් ප්‍රතිඵලවල පෙන්වන්නේ නැහැ.
+  setPublicConfirm: මේ ව්‍යාපෘතිය පොදු කරන්නද? ඒක හැමෝටම පෙනෙයි.
+  markNotForKidsConfirm: මේ ව්‍යාපෘතිය ළමයින්ට සුදුසු නැහැ කියලා ලකුණු කරන්නද?
+  markSafeForKidsConfirm: මේ ව්‍යාපෘතියෙන් "ළමයින්ට නොවේ" ලකුණ ඉවත් කරන්නද?
+  nfkModeratorLocked: මේ සැකසුම මොඩරේටර් කෙනෙක් අගුළු දාලා.
+  confirmSetPrivate: ඔයාට ඇත්තටම මේ ව්‍යාපෘතිය පෞද්ගලික කරන්න ඕනද? ඊට පස්සේ ඒක සෙවුම් ප්‍රතිඵලවල පෙන්වන්නේ නැහැ.
+  confirmSetPublic: ඔයාට ඇත්තටම මේ ව්‍යාපෘතිය පොදු කරන්න ඕනද? ඒක හැමෝටම පෙනෙයි.
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    ඔයාට විශ්වාසද?
+    ඔයා '%programName%' පෞද්ගලික කළොත්, වෙන පරිශීලකයන්ට ඒක පේන්නේ හෝ හොයාගන්න බැහැ.
+    ඔයාට තවමත් ඔයාගේ ව්‍යාපෘතියේ සබැඳිය යාළුවෝ එක්ක බෙදාගන්න පුළුවන්. අගුළු නිරූපකය තට්ටු කරලා දෘශ්‍යතාව මාරු කරන්න පුළුවන්.
+    ඔයා "%programName%" පොදු කළොත්, වෙන පරිශීලකයන්ට ඒක බලන්න සහ හොයාගන්න පුළුවන්.
+    ඔව්, පොදු කරන්න
+    ඔව්, පෞද්ගලික කරන්න
+    නැහැ
+  reportCommentConfirmation: ඔයාට ඇත්තටම මේ අදහස වාර්තා කරන්න ඕනද?
+  deleteCommentConfirmation: ඔයාට ඇත්තටම මේ අදහස මකන්න ඕනද?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+    ගිණුම මකන්නද?
+    ඔයාට ඇත්තටම ඔයාගේ ගිණුම මකන්න ඕනද? ඒකෙන් ඔයා උඩුගත කළ ව්‍යාපෘති සහ අදහස් ත් මැකෙනවා!
+    මේ ක්‍රියාව ආපසු හරවන්න බැහැ!
+    ඔව්, මකන්න!
+    අවලංගු කරන්න
+  tooLongName: ව්‍යාපෘතියේ නම දිග වැඩියි!
+  tooLongDescription: ව්‍යාපෘතියේ විස්තරය දිග වැඩියි!
+  tooLongCredits: ව්‍යාපෘතියේ සටහන් සහ ස්තූතිය දිග වැඩියි!
+  my_projects: මම බෙදාගත් ව්‍යාපෘති
+  trending: ප්‍රවණතා ව්‍යාපෘති
+  popular: ජනප්‍රිය ව්‍යාපෘති
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
+    viewed: වැඩියෙන්ම බැලූ
+    downloaded: වැඩියෙන්ම බාගත්
+  random: අහඹු ව්‍යාපෘති
+  related: අදාළ ව්‍යාපෘති
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: ව්‍යාපෘති ගවේෂණය කරන්න
+    no_projects: ඔයා තවම කිසිම ව්‍යාපෘතියක් හදලා නැහැ
+    no_explore: ව්‍යාපෘති හමු වුණේ නැහැ
+    load_more: තව පූරණය කරන්න
+    upload: ව්‍යාපෘතිය උඩුගත කරන්න
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: ආරක්ෂිතයි
+    day_left: දවස් 1ක් ඉතුරුයි
+    days_left: දවස් %days%ක් ඉතුරුයි
+    tooltip: ව්‍යාපෘති අක්‍රිය කාලයකට පස්සේ ස්වයංක්‍රීයව ඉවත් වෙනවා. තවත් කාලයක් තියාගන්න වැඩියෙන් බාගැනීම් ලබාගන්න හෝ නිතර පුරනය වෙන්න.
+    tooltip_protected: මේ ව්‍යාපෘතිය ආරක්ෂිතයි, ඒක ස්වයංක්‍රීයව මැකෙන්නේ නැහැ.
+  downloads: බාගැනීම් %downloads%
+  sample: උදාහරණ ව්‍යාපෘති
+  views: බැලීම් %views%
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: මේ ව්‍යාපෘතියට ප්‍රතිචාර දැක්වූ අය
     all: "සියල්ල"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  remixes: '{0}රීමික්ස් 0 |{1}රීමික්ස් 1 |]1,Inf]රීමික්ස් %remixes%'
+  newRemixesNotificationTitle: '|{1}"%programName%" ට අලුත් රීමික්ස් 1ක් තියෙනවා: |]1,Inf] "%programName%" ට අලුත් රීමික්ස් %remixes%ක් තියෙනවා:'
   submitted: ඉදිරිපත් කළ ව්‍යාපෘති
   uploaded: උඩුගත කළ ව්‍යාපෘති
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'කැට්‍රොබැට් භාෂා අනුවාදය: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  reportAsInappropriate: නුසුදුසු ලෙස වාර්තා කරන්න
+  reportProgram: ව්‍යාපෘතිය වාර්තා කරන්න
+  languageVersion: 'Catrobat භාෂා අනුවාදය: %languageVersion%'
+  reportLoginText: මේ ව්‍යාපෘතිය වාර්තා කරන්න කරුණාකර %login%.
+  reportDialogHeader: ඔයාට මේ ව්‍යාපෘතිය වාර්තා කරන්න ඕන ඇයි?
+  reportDialogReason: හේතුවක් ඇතුළත් කරන්න
+  reportRadioButtonInappropriate: ඒක නුසුදුසුයි
+  reportRadioButtonCopyright: ප්‍රකාශන හිමිකම් උල්ලංඝනය
+  reportRadioButtonSpam: ඒක ස්පෑම්
+  reportRadioButtonDislike: මට ඒක කැමති නැහැ
+  reportOwnProgram: ඔයාට ඔයාගේම ව්‍යාපෘතිය වාර්තා කරන්න බැහැ.
+  reportAlready: ඔයා දැනටමත් මේ ව්‍යාපෘතිය වාර්තා කරලා.
+  reportDone: ඔයා මේ ව්‍යාපෘතිය වාර්තා කළා!
+  updateAppHeaderDownload: බාගන්න බැහැ
+  updateAppTextDownload: කරුණාකර ඔයාගේ යෙදුම අලුත්ම අනුවාදයට යාවත්කාල කරන්න. Android හි තියෙන හැම විශේෂාංගයක්ම තවම iOS හි නැහැ කියලා මතක තියාගන්න.
+  updateAppTextDownloadApk: APK බාගැනීම දැනට Android වල විතරයි, iOS වල නැහැ.
   updateAppHeader: යෙදුම යාවත්කාල කරන්න
-  updateAppText: Please update your app to the newest version.
+  updateAppText: කරුණාකර ඔයාගේ යෙදුම අලුත්ම අනුවාදයට යාවත්කාල කරන්න.
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Report
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
+  checkout_this_project: මේ Catrobat ව්‍යාපෘතිය බලන්න
+  show_more: තව පෙන්වන්න
+  comments: අදහස්
+  send: යවන්න
+  delete: මකන්න
+  report: වාර්තා කරන්න
+  reply: පිළිතුරු දෙන්න
+  report_popup: අදහස සාර්ථකව වාර්තා කළා.
+  report_popup_header: වාර්තා කළා
+  deleted_popup: අදහස සාර්ථකව මැකුවා.
+  deleted_popup_header: මැකුවා
+  noAdminRights: ඔයාට පරිපාලක අයිතිවාසිකම් නැහැ. කරුණාකර පරිපාලකයෙක් ලෙස පුරනය වෙන්න.
+  editProject: ව්‍යාපෘතිය සංස්කරණය කරන්න
+  closeProjectEditor: ව්‍යාපෘති සංස්කාරකය වසන්න
+  closeEditorPrompt: ඔයාගේ වෙනස්කම් සුරකින්න ඕනද?
+  btnDiscard: ඉවත ලන්න
+  addComment: අදහසක් ලියන්න
+  thumbsUp: ඇඟිල්ල උඩට!
+  smile: සිනහව!
+  love: ආදරෙයි!
+  wow: වාව්!
+  linkTitle: සබැඳිය
+  link: ව්‍යාපෘති සබැඳිය පසුරු පුවරුවට පිටපත් කරන්න
+  reactionsText: ප්‍රතිචාර
+  downloadErrorText: ව්‍යාපෘතිය බාගන්නකොට දෝෂයක් ආවා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
+  downloadStartText: බාගැනීම පටන් ගත්තා...
+  downloading: බාගනිමින්...
+  openInApp: Pocket Code හි විවෘත කරන්න
+  downloaded: බාගත්තා
+  showTranslation: පරිවර්තනය පෙන්වන්න
+  hideTranslation: පරිවර්තනය සඟවන්න
+  translatedByLine: '%provider% මගින් %sourceLanguage% සිට %targetLanguage% දක්වා පරිවර්තනය කළා'
+  googleTranslate: Google පරිවර්තන
+  confrimDelete: ඔයාට ඇත්තටම පරිවර්තනය මකන්න ඕනද?
+  default: පෙරනිමි
   save: සුරකින්න
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: '%language% පරිවර්තනය'
+  editDefault: පෙරනිමිය සංස්කරණය කරන්න
+  editTranslation: '%language% පරිවර්තනය සංස්කරණය කරන්න'
+  translations: පරිවර්තන
+  createTranslation: පරිවර්තනයක් හදන්න
+  deletedComment: '**මකා දැමුවා**'
+  replyLabel: පිළිතුර
+  repliesLabel: පිළිතුරු
+  notForKids: ළමයින්ට ආරක්ෂිත නැහැ
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
+  title: රීමික්ස්
+  showRemixGraph: රීමික්ස් ප්‍රස්තාරය
   by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
-  projectsLabel: 'Projects'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
+  open: විවෘත කරන්න
+  showPaths: මාර්ග පෙන්වන්න
+  loading: රීමික්ස් ප්‍රස්තාරය පූරණය කරමින්...
+  error: රීමික්ස් ප්‍රස්තාරය පූරණය කරන්න බැරි වුණා.
+  empty: මේ ව්‍යාපෘතියට තවම රීමික්ස් ප්‍රස්තාර දත්ත නැහැ.
+  remixesLabel: රීමික්ස්
+  projectsLabel: ව්‍යාපෘති
+  scratchLabel: Scratch මූලයන්
+  interactHint: ව්‍යාපෘතිය විවෘත කරන්න හෝ ඒකේ රීමික්ස් මාර්ගය ඉස්මතු කරන්න නෝඩ් එකක් තෝරන්න.
+  zoomIn: විශාලනය කරන්න
+  zoomOut: කුඩා කරන්න
+  resetView: දසුන යළි සකසන්න
+  projectNotAvailableErrorTitle: සමාවෙන්න...
+  projectNotAvailableErrorDescription: මේ ව්‍යාපෘතිය තවදුරටත් නැහැ!
+  projectNotAvailable: ලබාගත නොහැක
   projectUnknownUser: 'නොදන්නා පරිශීලකයෙකි'
 noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  මේක ස්වයංක්‍රීය පණිවිඩයක් - කරුණාකර මේ විද්‍යුත් තැපෑලට කෙලින්ම පිළිතුරු දෙන්න එපා.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: ඔයාගේ Catrobat ගිණුම තහවුරු කිරීම
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    ආදරණීය %username%,
+    ඔයාගේ ගිණුම සක්‍රිය කිරීම අවසන් කරන්න - කරුණාකර %confirmationUrl% වෙත යන්න
+    මේ සබැඳිය ඔයාගේ ගිණුම තහවුරු කරන්න එක් වරක් විතරයි පාවිච්චි කරන්න පුළුවන්.
+    සුබ පැතුම්,
+    ඔයාගේ Catrobat කණ්ඩායම.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    ආදරණීය %username%,<br>
     <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
+    ඔයාගේ ගිණුම සක්‍රිය කිරීම අවසන් කරන්න - කරුණාකර <a href="%confirmationUrl%">මෙතන</a> ක්ලික් කරන්න.<br>
+    මේ සබැඳිය ඔයාගේ ගිණුම තහවුරු කරන්න එක් වරක් විතරයි පාවිච්චි කරන්න පුළුවන්.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    සුබ පැතුම්,<br>
+    ඔයාගේ Catrobat කණ්ඩායම.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය තහවුරු කරන්න
+  welcome: Catrobat වෙත සාදරයෙන් පිළිගන්නවා!
+  greeting: ලියාපදිංචි වුණාට ස්තූතියි! පටන් ගන්න කරුණාකර ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය තහවුරු කරන්න.
+  message: ඔයාගේ විද්‍යුත් තැපෑල තහවුරු කරන්න පහළ බොත්තම ක්ලික් කරන්න. මේ සබැඳිය %time% දක්වා වලංගුයි, එක් වරක් විතරයි පාවිච්චි කරන්න පුළුවන්.
+  button: විද්‍යුත් තැපැල් ලිපිනය තහවුරු කරන්න
+  ignore: ඔයා Catrobat ගිණුමක් හැදුවේ නැත්නම්, මේ විද්‍යුත් තැපෑල නොසලකා හරින්න පුළුවන්.
+  autoDelete: තහවුරු නොකළ ගිණුම් දින 30කට පස්සේ ස්වයංක්‍රීයව මැකෙනවා.
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: ඔයාගේ දරුවාගේ Catrobat ගිණුමට දෙමාපිය කැමැත්ත අවශ්‍යයි
+    title: දෙමාපිය කැමැත්ත අවශ්‍යයි
+    greeting: ආයුබෝවන්,
+    message: ඔයාගේ දරුවා %username% Catrobat හි ගිණුමක් හදලා, ඔවුන්ගේ විද්‍යුත් තැපැල් ලිපිනය තහවුරු කරලා තියෙනවා.
+    explanation: Catrobat කියන්නේ තරුණ අය යෙදුම්, ක්‍රීඩා සහ සජීවිකරණ හදමින් කේතනය ඉගෙනගන්න නොමිලේ අධ්‍යාපනික වේදිකාවක්. EU ළමා ආරක්ෂණ රෙගුලාසි යටතේ, ඔයාගේ දරුවාට ප්‍රජාවට සම්පූර්ණයෙන් සහභාගී වෙන්න කලින් අපිට ඔයාගේ කැමැත්ත ඕන. කැමැත්ත දෙන්න කරුණාකර පහළ බොත්තම ක්ලික් කරන්න.
+    button: දෙමාපිය කැමැත්ත දෙන්න
+    ignore: ඔයා මේ විද්‍යුත් තැපෑල බලාපොරොත්තු වුණේ නැත්නම්, ඒක නොසලකා හරින්න පුළුවන්. කැමැත්ත නැතිව ගිණුමට සීමිත ක්‍රියාකාරිත්වයක් තියෙන්නේ.
+    whatIsCatrobat: Catrobat කියන්නේ නොමිලේ, ලාභ නොලබන අධ්‍යාපනික ක්‍රමලේඛන වේදිකාවක්. වැඩි විස්තර catrobat.org හි.
+    manageLink: 'ඔයාට ඕනම වෙලාවක අපේ <a href="%portalUrl%" style="color: #00acc1;">දෙමාපිය ද්වාරය</a> හරහා ඔයාගේ දරුවාගේ ගිණුම කළමනාකරණය කරන්න පුළුවන්. <a href="%infoUrl%" style="color: #00acc1;">දෙමාපියෙක් ලෙස ඔයාගේ අයිතිවාසිකම්</a> ගැන වැඩිදුර දැනගන්න.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: කැමැත්ත දුන්නා
+    message: ස්තූතියි! %username% ගේ ගිණුම දැන් සම්පූර්ණයෙන් සක්‍රියයි.
+    continueButton: ව්‍යාපෘති හොයාගන්න
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: දෙමාපියන් සහ භාරකරුවන්
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: දෙමාපියන් සහ භාරකරුවන් සඳහා තොරතුරු
+    intro: Catrobat තරුණ පරිශීලකයන්ගේ ආරක්ෂාව සහ රහස්‍යතාව බැරෑරුම් ලෙස සලකනවා. අපි ඔයාගේ දරුවා ආරක්ෂා කරන්නේ කොහොමද, ඔයාට තියෙන අයිතිවාසිකම් මොනවද කියලා මේ පිටුවෙන් පැහැදිලි කරනවා.
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: Catrobat කියන්නේ මොකක්ද?
+      text: Catrobat කියන්නේ තරුණ අය තමන්ගේම යෙදුම්, ක්‍රීඩා සහ සජීවිකරණ හදමින් ක්‍රමලේඛනය ඉගෙනගන්න නොමිලේ, ලාභ නොලබන අධ්‍යාපනික වේදිකාවක්. මේ වේදිකාව ලොව පුරා තියෙනවා, අධ්‍යාපන පරිසරවලත් පාවිච්චි කරනවා.
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: අපි මොන දත්තද එකතු කරන්නේ?
+      text: 'අපි වේදිකාව ක්‍රියාත්මක කරන්න අවශ්‍ය අවම දත්ත විතරයි එකතු කරන්නේ: පරිශීලක නාමය, විද්‍යුත් තැපැල් ලිපිනය, උපන් දිනය, සහ ඔයාගේ දරුවා හදලා උඩුගත කරන ව්‍යාපෘති. වයස අවුරුදු 14ට අඩු පරිශීලකයන් සඳහා, කැමැත්ත ලබාගන්න දෙමාපිය/භාරකරු විද්‍යුත් තැපැල් ලිපිනයකුත් අපි ගබඩා කරනවා. අපි පෞද්ගලික දත්ත තෙවන පාර්ශවයන්ට විකුණන්නේ හෝ බෙදාගන්නේ නැහැ.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: දෙමාපියෙක් හෝ භාරකරුවෙක් ලෙස ඔයාගේ අයිතිවාසිකම්
+      text: 'EU ළමා ආරක්ෂණ රෙගුලාසි (GDPR) සහ COPPA යටතේ ඔයාට මේ අයිතිවාසිකම් තියෙනවා: ඔයාගේ දරුවා ගැන අපි ළඟ තියෙන දත්ත බලන්න, ඒ දත්තවල පිටපතක් ඉල්ලන්න, ඕනම වෙලාවක ඔයාගේ කැමැත්ත අවලංගු කරන්න (එතකොට ගිණුම සීමා වෙනවා), සහ ඔයාගේ දරුවාගේ ගිණුම සහ ඒකට අදාළ හැම දත්තයක්ම සදහටම මකන්න ඉල්ලන්න.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: බාල වයස්කරුවන්ගේ ගිණුම්වලට මොන සීමාද තියෙන්නේ?
+      text: අවුරුදු 16ට අඩු පරිශීලකයන්ට අදහස් පළ කරන්න හෝ කියවන්න, වෙන පරිශීලකයන් අනුගමනය කරන්න, හෝ ළමයින්ට සුදුසු නැහැ කියලා ලකුණු කළ අන්තර්ගතය බලන්න බැහැ. ඒත් ඔවුන්ට ව්‍යාපෘති හදලා උඩුගත කරන්න, පොදු ව්‍යාපෘති බලන්න, සහ කැමැත්තෙන් ව්‍යාපෘතිවලට ප්‍රතිචාර දක්වන්න පුළුවන්. ආරක්ෂිත ඉගෙනුම් පරිසරයක් දෙන්න තමයි මේ සීමා තියෙන්නේ.
+    manageButton: ඔයාගේ දරුවාගේ ගිණුම කළමනාකරණය කරන්න
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: දෙමාපිය ද්වාරය
+    description: ඔයාගේ දරුවාගේ Catrobat ගිණුම කළමනාකරණය කරන්න ආරක්ෂිත සබැඳියක් ලබාගන්න ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය ඇතුළත් කරන්න. ලියාපදිංචියේදී ඔයා දුන්න විද්‍යුත් තැපැල් ලිපිනයට සබැඳිය එවනවා.
+    emailLabel: ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය
+    submitButton: කළමනාකරණ සබැඳිය එවන්න
+    infoLink: වැඩිදුර දැනගන්න
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: ඔයාගේ එන ලිපි පරීක්ෂා කරන්න
+      message: මේ විද්‍යුත් තැපෑලට ගිණුමක් සම්බන්ධ නම්, අපි කළමනාකරණ සබැඳියක් එව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරලා ඔයාගේ දරුවාගේ ගිණුම කළමනාකරණය කරන්න සබැඳිය අනුගමනය කරන්න.
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: දරුවන්ගේ ගිණුම් කළමනාකරණය කරන්න
+    description: ඔයා කළමනාකරණය කරන්නේ %email% එක්ක සම්බන්ධ ගිණුම්.
+    consentStatus: කැමැත්තේ තත්ත්වය
+    accountCreated: ගිණුම හැදුවේ
+    email: දරුවාගේ විද්‍යුත් තැපෑල
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: දුන්නා
+      pending: බලාපොරොත්තුවෙන්
+      revoked: අවලංගු කළා
+    grantButton: කැමැත්ත දෙන්න
+    revokeButton: කැමැත්ත අවලංගු කරන්න
+    revokeConfirm: ඔයාට ඇත්තටම කැමැත්ත අවලංගු කරන්න ඕනද? එතකොට ගිණුමට සීමිත ක්‍රියාකාරිත්වයක් තියෙන්නේ.
+    exportButton: දත්ත අපනයනය කරන්න
+    deleteButton: ගිණුම මකන්න
+    deleteConfirm: ඔයාට ඇත්තටම මේ ගිණුම සදහටම මකන්න ඕනද? මේක ආපසු හරවන්න බැහැ.
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: ඔයාගේ දරුවාගේ Catrobat ගිණුම කළමනාකරණය කරන්න
+      title: ගිණුම් කළමනාකරණය
+      greeting: ආයුබෝවන්,
+      message: ඔයාගේ දරුවාගේ Catrobat ගිණුම (%usernames%) කළමනාකරණය කරන්න ඔයා සබැඳියක් ඉල්ලුවා. ගිණුම බලන්න සහ කළමනාකරණය කරන්න පහළ බොත්තම ක්ලික් කරන්න.
+      button: ගිණුම කළමනාකරණය කරන්න
+      ignore: ඔයා මේක ඉල්ලුවේ නැත්නම්, මේ විද්‍යුත් තැපෑල නොසලකා හරින්න පුළුවන්.
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: ඔයාගේ Catrobat මුරපද ප්‍රතිසාධනය
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    ආදරණීය %username%,
+    ඔයාට මුරපදය අමතක වුණු නිසා %appplication_url% හි ඔයාගේ මුරපදය යළි සකසන්න ඔයා ඉල්ලුවා.
+    ඔයා මේක ඉල්ලුවේ නැත්නම්, කරුණාකර නොසලකා හරින්න. ඒක පැය 24කින් කල් ඉකුත් වෙලා නිෂ්ඵල වෙනවා.
+    ඔයාගේ මුරපදය යළි සකසලා අලුත් එකක් හදන්න, කරුණාකර මේ පිටුවට යන්න: %confirmationUrl%
+    %appplication_url% ප්‍රජාවට පිවිසෙන්න ඔයාට ඕනම වෙලාවක ඔයාගේ පරිශීලක නාමය සහ මුරපදය පාවිච්චි කරන්න පුළුවන්.
+    ඒකට, මේ පිටුවට යන්න: %loginPage%
+    ඔයාගේ පැතිකඩ විස්තර සංස්කරණය කරන්න, මේ පිටුවට යන්න: %profilePage%
+    සුබ පැතුම්,
+    ඔයාගේ Catrobat කණ්ඩායම.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    ආදරණීය %username%,<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    ඔයාට මුරපදය අමතක වුණු නිසා <a href="%appplication_url%">Pocket Code</a> හි ඔයාගේ මුරපදය යළි සකසන්න ඔයා ඉල්ලුවා.
+    ඔයා මේක ඉල්ලුවේ නැත්නම්, කරුණාකර නොසලකා හරින්න. ඒක පැය 24කින් කල් ඉකුත් වෙලා නිෂ්ඵල වෙනවා.<br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    ඔයාගේ මුරපදය යළි සකසලා අලුත් එකක් හදන්න, කරුණාකර <a href="%confirmationUrl%">මෙතන</a> ක්ලික් කරන්න.<br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    <a href="%appplication_url%">Pocket Code</a> ප්‍රජාවට පිවිසෙන්න ඔයාට ඕනම වෙලාවක ඔයාගේ පරිශීලක නාමය සහ මුරපදය පාවිච්චි කරන්න පුළුවන්.<br>
+    ඒකට, මේ පිටුවට යන්න: <a href="%loginPage%">පුරනය වීමේ පිටුව</a><br>
+    ඔයාගේ පැතිකඩ විස්තර සංස්කරණය කරන්න, මේ <a href="%profilePage%">පිටුවට</a> යන්න.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    සුබ පැතුම්,<br>
+    ඔයාගේ Catrobat කණ්ඩායම.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  aboutMe: මා ගැන
+  currentlyWorkingOn: දැනට කරන දේ
+  edit: ඔයාගේ පැතිකඩ සංස්කරණය කරන්න
+  saveChanges: වෙනස්කම් සුරකින්න
+  newPass: අලුත් මුරපදය
+  repeatPass: මුරපදය නැවත දාන්න
+  oldPass: පරණ මුරපදය
+  firstEmail: මගේ පළමු විද්‍යුත් තැපෑල
+  secondEmail: මගේ දෙවන විද්‍යුත් තැපෑල
+  myPrograms: මගේ ව්‍යාපෘති
+  follows: අනුගමනය කරන
+  follower: අනුගාමිකයා
+  unfollowUser: මේ පරිශීලකයා අනුගමනය කිරීම නවත්වන්න!
+  followUser: මේ පරිශීලකයා අනුගමනය කරන්න!
+  amountOfPrograms: ව්‍යාපෘති ගණන
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
-  changePicture: Change picture
-  goToScratchProfile: Profile on Scratch
+    passwordTooShort: අලුත් මුරපදයේ අඩුම තරමින් අකුරු %length%ක් තියෙන්න ඕන.
+    passwordTooLong: අලුත් මුරපදයේ උපරිම අකුරු %length%ක් තියෙන්න පුළුවන්.
+    passwordIsUsername: මුරපදය පරිශීලක නාමයට වඩා වෙනස් වෙන්න ඕන.
+    passwordWrong: වැරදි මුරපදය
+    emailNotValid: මේ විද්‍යුත් තැපැල් ලිපිනය වලංගු නැහැ.
+    emailMissing: මේ විද්‍යුත් තැපැල් ලිපිනය යාවත්කාල කරද්දී දෝෂයක්. ඔයාට අඩුම තරමින් තහවුරු කළ විද්‍යුත් තැපැල් ලිපිනයක් තියෙන්න ඕන.
+    emailExists: මේ විද්‍යුත් තැපැල් ලිපිනය දැනටමත් තියෙනවා.
+    usernameNotValid: මේ පරිශීලක නාමය වලංගු නැහැ.
+    usernameMissing: ඔයාට පරිශීලක නාමයක් තියෙන්න ඕන.
+    usernameExists: මේ පරිශීලක නාමය දැනටමත් තියෙනවා.
+    usernameContainsEmail: පරිශීලක නාමයේ විද්‍යුත් තැපැල් ලිපිනයක් තියෙන්න හොඳ නැහැ.
+    submitSuccess: සුරැකුවා!
+  reallyDeleteProgram: ඔයාට ඇත්තටම ඔයාගේ ව්‍යාපෘතිය මකන්න ඕනද
+  programsOf: 'ව්‍යාපෘති:'
+  picture: පැතිකඩ පින්තූරය
+  changePicture: පින්තූරය වෙනස් කරන්න
+  goToScratchProfile: Scratch හි පැතිකඩ
 myprofile:
-  userSettings: User settings
-  profileSettings: Edit profile
-  securitySettings: Change password
+  userSettings: පරිශීලක සැකසුම්
+  profileSettings: පැතිකඩ සංස්කරණය කරන්න
+  securitySettings: මුරපදය වෙනස් කරන්න
   accountSettings: ගිණුමේ සැකසුම්
-  accountVerification: Verify account
-  account: Account
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
+  accountVerification: ගිණුම තහවුරු කරන්න
+  account: ගිණුම
+  editProfile: පැතිකඩ සංස්කරණය කරන්න
+  edit: සංස්කරණය කරන්න
+  done: ඉවරයි
+  checkMail: ඔයාගේ විද්‍යුත් තැපැල් ලිපිනයට විද්‍යුත් තැපෑලක් එව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරන්න.
+  passwordUpdated: ඔයාගේ මුරපදය සාර්ථකව යාවත්කාල කළා.
+  avatar: අවතාරය
   email: විද්‍යුත් තැපෑල
-  deleteAccount: Delete Account
+  deleteAccount: ගිණුම මකන්න
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    අවධානයෙන්:
+    ඔයා ව්‍යාපෘති %num_projects%ක් හදලා, ඔයාට අනුගාමිකයන් %num_followers%ක් ඉන්නවා. ඔයාගේ හැම ව්‍යාපෘතියක්ම ඉවත් වෙනවා. ඔයාට තවදුරටත් පුරනය වෙන්න බැහැ, ඔයාගේ ව්‍යාපෘති හැම ලැයිස්තුවකින්ම අතුරුදහන් වෙනවා. ඔයාගේ පැතිකඩ මැකීම ආපසු හරවන්න බැහැ!
+    ඔයාට ඇත්තටම අපිව දාලා යන්න ඕනද?
+  exportData: මගේ දත්ත බාගන්න
+  exportDataDescription: ඔයාගේ පෞද්ගලික දත්තවල පිටපතක් ලබාගන්න ඔයාට අයිතියක් තියෙනවා. ඒකට ඔයාගේ පැතිකඩ තොරතුරු, ව්‍යාපෘති, අදහස්, ප්‍රතිචාර සහ අනුගාමිකයන් ඇතුළත්.
+  exportDataLoading: බාගනිමින්...
+  exportDataError: ඔයාගේ දත්ත අපනයනය කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
+  exportDataRateLimited: ඔයාට දවසකට එක් වරක් විතරයි ඔයාගේ දත්ත අපනයනය කරන්න පුළුවන්. හෙට ආයෙත් උත්සාහ කරන්න.
+  editAccountSettings: ගිණුම් සැකසුම් සංස්කරණය කරන්න
+  profileChangeSuccess: ඔයාගේ පැතිකඩ සාර්ථකව වෙනස් කළා.
+  unspecifiedError: ඔයාගේ පැතිකඩ වෙනස් කරද්දී මොකක්හරි වැඩ කළේ නැහැ. ආයෙත් උත්සාහ කරන්න, නැත්නම් දිගටම මෙහෙම වෙනවා නම් අපිට කියන්න!
+  verifyAccountText: ඔයාගේ ගිණුම තහවුරු කරන්න සබැඳියක් එක්ක අපි ඔයාට විද්‍යුත් තැපෑලක් එවනවා. ඊළඟ පැය ඇතුළත සබැඳිය ක්ලික් කරන්න මතක තියාගන්න, ඔයාට දවසකට එක විද්‍යුත් තැපෑලක් විතරයි ඉල්ලන්න පුළුවන්.
+  verifyAccountButton: විද්‍යුත් තැපෑල යවන්න
+  verifyAccountMailSent: විද්‍යුත් තැපෑල සාර්ථකව යැව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරන්න
+  verifyAccountMailFailed: ඔයාට දවසකට එක විද්‍යුත් තැපෑලක් විතරයි ඉල්ලන්න පුළුවන්
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: සෙල්ලම් කිරීමේ බලපත්‍රය
+  title: සෙල්ලම් කිරීමේ බලපත්‍රය - ගෞරවය දීලා බෙදාගන්න
+  text1: හැම Catrobat ව්‍යාපෘතියක්ම කේක් එකක් කියලා හිතන්න, ඒකේ වට්ටෝරුවත් (ක්‍රමලේඛන කැට) එක්කම එන හරිම විශේෂ කේක් එකක්. Catrobat ප්‍රජාවේ හැම සාමාජිකයෙක්ම තමන්ගේ කේක් වට්ටෝරු එක්කම බෙදාගන්නවා. ඒ කියන්නේ ඔයාට කේක් රස විඳින්නත්, ඒවා ඔයාම හදන්න ඉගෙනගන්නත් පුළුවන්!
+  text2: 'රහස් වට්ටෝරු නැහැ: මේ කේක් හදන උපදෙස් ඕනම කෙනෙකුට පාවිච්චි කරන්න, නැවත පාවිච්චි කරන්න, වෙනස් කරන්න සහ අලුත් අදහස්වලට... මම කියන්නේ කේක්වලට... ආශ්වාදයක් විදිහට ගන්න විවෘතයි.'
+  text3: 'ඔයාට කේක් කන්නත් පුළුවන්, වෙන අයගේ වට්ටෝරු පිටපත් කරලා ඔයාගේම ඒවා හදන්නත් පුළුවන්, සමහරවිට වෙනස් අමුද්‍රව්‍ය එක්ක. මේ නිදහසට සරල කොන්දේසි දෙකක් තියෙනවා:'
+  text4: Catrobat ප්‍රජාව හදද්දී, ප්‍රජාව ඇතුළේ ඉගෙනීමට සහ නිර්මාණශීලීත්වයට ඒක උදව් වෙනවා කියලා අපි විශ්වාස කරන නිසා අපි මේ ක්‍රමය තෝරාගත්තා. වට්ටෝරු සහ අමුද්‍රව්‍ය (ස්ක්‍රිප්ට් සහ චිත්‍ර) බෙදාගැනීමෙන්, අයට එකිනෙකාගේ අදහස් මත ගොඩනගන්න පුළුවන්, හැමෝටම ඒකෙන් වාසියක් වෙනවා.
+  text5: Catrobat වෙබ් අඩවිය හදද්දී, අය බෙදාගන්න සහ වෙන අයට ගෞරවය දෙන්න දිරිමත් කරන විශේෂාංග අපි එකතු කළා. හැම ව්‍යාපෘති පිටුවකින්ම ඔයාට ඒ ව්‍යාපෘතියේ මුල් ස්ක්‍රිප්ට් ඕනම වෙලාවක බාගන්න පුළුවන්. ඔයා ව්‍යාපෘතියක් රීමික්ස් කරනවා නම් (ස්ක්‍රිප්ට් හෝ චිත්‍ර වෙනස් කරලා, ප්‍රතිඵලය බෙදාගන්නවා නම්), ඔයාට ආශ්වාදයක් දුන්න අය සහ ව්‍යාපෘතිය සඳහන් කරලා ව්‍යාපෘති සටහන්වල ගෞරවය දෙන්න අපි ඔයාව දිරිමත් කරනවා.
+  text6: Catrobat මාර්ගගත ප්‍රජාවේ භාවිත නියම ගැන වැඩිදුර %link-termsOfUse% හි දැනගන්න.
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: ඔයාගේ කේක් වට්ටෝරුවත් එක්කම බෙදාගන්න
+    item2: ඔයාට ආශ්වාදයක් දුන්න අයට ගෞරවය දෙන්න
+  version: අනුවාදය 1.1, 2013 අප්‍රේල් 2
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  title: භාවිත නියම
+  headline: Catrobat ප්‍රජාවට සාදරයෙන් පිළිගන්නවා!
+  text1: 'Catrobat ප්‍රජාවේ කොටසක් විදිහට, ඔයා ව්‍යාපෘති සහ අදහස් බෙදාගන්නේ මේ වගේ අය එක්ක:'
+  text2: 'මේ ප්‍රජාව හැම සාමාජිකයෙකුටම සහාය දෙන තැනක් කරන්න අපිට ඔයාගේ උදව් ඕන. ඔයාට උදව් කරන්න පුළුවන් විදිහ මෙන්න:'
+  text3: 'Catrobat ව්‍යාපෘතිය හරහා අපිට ඕන සහයෝගීතාව දිරිමත් කරලා, මුළු මනුෂ්‍ය වර්ගයාගේම යහපත වෙනුවෙන් හැමෝගේම නිර්මාණශීලීත්වය එකතු වෙන්න ඉඩ දෙන්න. වෙන ක්‍රියාශීලී සාමාජිකයන් ඔවුන්ගේ ව්‍යාපෘති ඔයාට දෙනවා වගේම, ඔයාගේ ව්‍යාපෘති තෑග්ගක් විදිහට ප්‍රජාවට ආපහු දීලා ඔයාටත් Catrobat ප්‍රජාවේ ක්‍රියාශීලී සාමාජිකයෙක් වෙන්න පුළුවන්:'
+  text4: 'අපෙන් ඔයාට තෑග්ග:'
+  text5: 'අපේ භාවිත සහ සේවා නියම:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: ගොඩක් වෙනස් රටවල් සහ සංස්කෘතිවලින්
+    item2: හැම වයසකම (පොඩි ළමයින්ගේ ඉඳන් යෞවනයන් සහ ආච්චි සීයලා දක්වා)
+    item3: හැම මට්ටමකම අත්දැකීම් තියෙන
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item1: ගෞරවයෙන් ඉන්න. ව්‍යාපෘති බෙදාගද්දී, ගොඩක් වෙනස් වයස්වල සහ පසුබිම්වල අය ඔයාගේ දායකත්වය දකිනවා කියලා මතක තියාගන්න.
+    item2: ගෞරවය දෙන්න. වෙන අයගේ ව්‍යාපෘතිවල වෙනස් කළ අනුවාද හදන්න නිදහසේ පුළුවන් - ඔවුන්ට ගෞරවය දෙන්න විතරක් අමතක කරන්න එපා. ගෞරවය දෙන්න පුළුවන් එක තැනක් තමයි ඔයාගේ ව්‍යාපෘතියේ සටහන් සහ ස්තූතිය කොටස. වෙන පරිශීලකයන්ගේ ව්‍යාපෘති වෙනස් කිරීම ගැන විස්තර සඳහා කරුණාකර මේ ලැයිස්තුවට පහළින් තියෙන ඡේදය බලන්න.
+    item3: අවංක වෙන්න. ඔයා නොවන කෙනෙක් වගේ පෙන්නන්න හෝ ප්‍රජාව රවට්ටන්න එපා.
+    item4: පෞද්ගලික තොරතුරු පෞද්ගලිකව තියාගන්න. ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය, දුරකථන අංකය හෝ වෙනත් පෞද්ගලික සම්බන්ධතා තොරතුරු බෙදාගන්න එපා.
+    item5: අඩවිය මිත්‍රශීලීව තියාගන්න උදව් කරන්න. ව්‍යාපෘතියක් හෝ අදහසක් නපුරු, අපහාසාත්මක, ප්‍රචණ්ඩ වැඩි, හෝ වෙනත් විදිහකින් නුසුදුසුයි කියලා වෙන අයට හිතෙයි කියලා ඔයාට දැනෙනවා නම්, 'නුසුදුසු ලෙස වාර්තා කරන්න' බොත්තම ක්ලික් කරලා කෙටි පැහැදිලි කිරීමක් ලියන්න. Catrobat කණ්ඩායම ඔයාගේ වාර්තාව සමාලෝචනය කරලා ඕනම ව්‍යාපෘතියක්, අදහසක් හෝ පළ කිරීමක් ඉවත් කරන්න පුළුවන්.
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: 'අපේ වෙබ් අඩවිවලට ව්‍යාපෘතියක් උඩුගත කිරීමෙන්, උඩුගත කළ Catrobat ව්‍යාපෘති සඳහා වන යම් නිදහස් බලපත්‍ර යටතේ මේ නිර්මාණය තියන්න ඔයා පිළිගන්නවා සහ එකඟ වෙනවා. Catrobat පද්ධතියම ඔයාට ලැබෙන නිදහස් බලපත්‍ර වගේම, උඩුගත කළ Catrobat ව්‍යාපෘතිවල මේ නිදහස් බලපත්‍ර හැමෝටම අයිතියක් දෙනවා වෙන අය කලින් උඩුගත කළ නිර්මාණවලින් ඉගෙනගන්න සහ ඒ නිර්මාණ අනුවර්තනය කරලා රීමික්ස් කරලා තමන්ගේම අලුත් පුදුම ක්‍රීඩා, සජීවිකරණ සහ වෙනත් ව්‍යාපෘති හදන්න. මේකෙන් හැමෝටම ''තමන්ගේ සගයන්ගේ උරහිස් මත නැගී සිටින්න'' පුළුවන්, ඔවුන්ගෙන් කෙනෙක් ඔයා! ඒ නිසා ඔයාගේ නිර්මාණය මුළු ලෝකයටම වාසියක් වෙනවා, හැමෝටම පාවිච්චි කරන්න නිදහසේ තියෙනවා, ලොව පුරා ස්වේච්ඡා සේවකයන් Wikipedia එකට නිදහසේ දායක කරන පෙළ සහ පින්තූර වගේ. ඒක මනුෂ්‍ය වර්ගයාට ඔයාගේ තෑග්ගක් කියලා හිතන්න: ඔයා හැමෝටම දෙනවා, අපේ වෙබ් අඩවිවලට තමන්ගේ නිර්මාණ උඩුගත කරන අනිත් හැමෝම ඔයාට දෙනවා. ඉතින් උඩුගත කළ ව්‍යාපෘතියක් කියන්නේ ඒකේ අයිතිකරු ඔයාට නොමිලේ දෙන ගොඩක් වටිනා තෑග්ගක්, ඔයාත් ඒ නියමයන් යටතේම ප්‍රජාවට සහභාගී වෙනවා කියන කොන්දේසිය එක්ක.'
+    item2: ඔයාට තෑග්ග පිළිගන්න ඕන නැහැ; පිළිගත්තොත්, යම් නීති අදාළ වෙනවා. මේ නීතිවල වාසිය තමයි ඔයාට නිර්මාණයෙන් ඉගෙනගෙන ඒ මත ගොඩනගලා ඔයාම තවත් නියම දේවල් හදන්න පුළුවන් වීම, ඒවා ඔයාට උදාහරණයක් විදිහට ආයෙත් ඔයාගේම නිර්මාණ ලෙස අපේ වෙබ් අඩවිවලට උඩුගත කරන්න පුළුවන්. තවත් වාසියක් තමයි වෙන අය ඔයාගේ ව්‍යාපෘතිය පාවිච්චි කිරීමෙන් ඔවුන්ට ඇතිවෙන කිසිම ප්‍රශ්නයකට ඔයාව වගකිවයුතු කරන්න බැරි බව මේ බලපත්‍ර සහතික කිරීම.
+    item3: එක වැදගත් අමතර කොන්දේසියක් තමයි ඔයාගේ නිර්මාණයට පදනම් කරගත් නිර්මාණවල කතුවරුන්ට ඔයා පැහැදිලිව ගෞරවය දෙන්න ඕන කියන එක. ඒ එක්කම, Catrobat ප්‍රජාවේ ඔයාව නියෝජනය කරන්න ඔයා නිදහසේ තෝරාගත් අනන්‍ය නමට ගෞරවය දීමෙන්, සහ ඔයාගේ නිර්මාණය හැමෝටම, විශේෂයෙන්ම ඔවුන්ට, දීම ගැන ඔයාට ප්‍රසිද්ධියේ කෘතඥතාව පළ කරන්න වෙන අයට අවස්ථාව දීමෙන්, ඔයාගේ නිර්මාණය ඔයාගේ දායකත්වයක් කියලා වෙන අය පැහැදිලිව අගය කරන විදිහට අපි මහන්සි වෙලා වැඩ කරනවා.
+    item4: නිවැරදි නීතිමය නියම සහ කොන්දේසි සඳහා කරුණාකර %link-licenseUploaded% බලන්න.
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: Catrobat පද්ධතියට අදාළ අපේම මෘදුකාංග සහ අන්තර්ජාල සම්පත් ඔක්කොම, උදාහරණයක් විදිහට Catrobat කණ්ඩායම ලියපු මෘදුකාංග, අපේ වෙබ් අඩවි සහ අන්තර්ජාල සම්පත්, Catrobat පද්ධතියට අදාළ අපේම මූලාශ්‍ර කේතය, සහ පින්තූර, ශබ්ද සහ පෙළ වගේ ඇතුළත් අමතර ද්‍රව්‍ය ඔක්කොම, දැනුත් අනාගතයේදීත් Catrobat හි නිදහස් බලපත්‍ර යටතේ අපි ඔයාට දෙනවා.
+    item2: මේ බලපත්‍ර නිසා Catrobat හි හැම කොටසක්ම ඔයාට නොමිලේ ලැබෙනවා වගේම, ඔයාට කැමති විදිහට පාවිච්චි කරන්න නිදහසත් දෙනවා, Catrobat පද්ධතිය හැමදාම හැමෝටම නිදහස් සහ ප්‍රයෝජනවත් වෙලා තියෙන්න සහතික කරන සීමා කිහිපයක් විතරක් එක්ක.
+    item3: නිවැරදි නීතිමය නියම සහ කොන්දේසි සඳහා කරුණාකර %link-licenseToPlay% බලන්න. Catrobat පද්ධතියේ මූලාශ්‍ර කේතය සහ තවත් ගොඩක් ලේඛන සහ සම්පත් %link-developer% හරහා ලබාගන්න පුළුවන්.
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: ඔයා, හෝ ඔයා අවුරුදු 13ට අඩු නම් ඔයාගේ දෙමාපියන් හෝ නීත්‍යානුකූල භාරකරුවන්, දැල් දමන ආකාරයේ රහස්‍යතා උල්ලංඝනයන්ට සහ/හෝ තොග හෝ මහා පරිමාණ නිරීක්ෂණයට සම්බන්ධ හෝ වගකිව යුතු සංවිධානයක් එක්ක සම්බන්ධ නම්, ඔයාට අපේ මෘදුකාංග යෙදුම් පාවිච්චි කරන්න සහ අපේ සේවාවලට පිවිසෙන්න අවසර නැහැ. මේ සීමාවේ නිවැරදි විස්තර සහ ඒකට යම් ව්‍යතිරේක අපේ %link-termsOfUse% හි 4.a සහ 4.b කොටස්වල දක්වලා තියෙනවා.
+    item2: ඔයා අවුරුදු 13ට අඩු නම්, Catrobat හි මෘදුකාංග යෙදුම් සහ සේවා පාවිච්චි කරන්න ඔවුන් ඉඩ දෙනවද කියලා ඔයාගේ දෙමාපියන්ගෙන් හෝ නීත්‍යානුකූල භාරකරුවන්ගෙන් අහන්න ඕන.
+    item3: අපේ තනි අභිමතය පරිදි ඕනම වෙලාවක, උදාහරණයක් විදිහට ව්‍යාපෘතියක නුසුදුසු දේවල් තියෙනවා කියලා හෝ පරිශීලකයෙක් වෙන අයගේ අයිතිවාසිකම් උල්ලංඝනය කරනවා කියලා අපිට පෙනුණොත්, Catrobat හි වෙබ් අඩවිවලට උඩුගත කළ ව්‍යාපෘති, පරිශීලක ගිණුම් සහ ඕනම ඩිජිටල් ද්‍රව්‍යයක් ප්‍රතික්ෂේප කරන්න, මකන්න හෝ සඟවන්න අපිට අයිතිය තියෙනවා.
+    item4: Catrobat හි මෘදුකාංග සහ අන්තර්ජාල සම්පත් ඔක්කොම දෙන්නේ ඒවා ප්‍රයෝජනවත් වෙයි කියන බලාපොරොත්තුවෙන්, ඒත් කිසිම වගකීමක් නැතිව.
+    item5: ඉහත කරුණුවල නිවැරදි සූත්‍රගත කිරීම් සහ තවත් නීතිමය නියම සහ කොන්දේසි සඳහා කරුණාකර අපේ %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service බලන්න.
+  bottom1: අපි හැමවෙලේම අපේ භාවිත නියම දියුණු කරන්න උත්සාහ කරන නිසා, වරින් වර මෙතන බලන්න.
+  bottom2: මේ භාවිත නියම ගැන ඕනම යෝජනාවක් කරුණාකර %email-webmaster% වෙත එවන්න.
+  version: අනුවාදය 1.3, 2014 මාර්තු 4
 search:
-  dotdotdot: Search...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
+  dotdotdot: සොයන්න...
+  search: ව්‍යාපෘති, පරිශීලකයන් සහ ස්ටූඩියෝ සොයන්න
+  inMediaLib: මාධ්‍ය පුස්තකාලයේ සොයන්න
+  inMediaCategory: මාධ්‍ය කාණ්ඩයේ සොයන්න
   results: සෙවුම් ප්‍රතිඵල
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  resultcount: ඔයාගේ සෙවුමට ප්‍රතිඵල %count%ක් ලැබුණා
+  fail: කරුණාකර අඩුම තරමින් එක සෙවුම් පදයක්වත් ඇතුළත් කරන්න
+  noUsers: පරිශීලකයන් හමු වුණේ නැහැ
+  noProjects: ව්‍යාපෘති හමු වුණේ නැහැ
+  noStudios: ස්ටූඩියෝ හමු වුණේ නැහැ
+  sameSearchMessage: ඔයා දැනටමත් මෙතන ඉන්නවා වගේ! වෙනස් සෙවුමක් කරලා බලමුද?
 menu:
-  profile: Profile
-  login: Login
-  logout: Logout
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
+  profile: පැතිකඩ
+  login: පුරනය වෙන්න
+  logout: ඉවත් වෙන්න
+  admin: පරිපාලක
+  home: මුල් පිටුව
+  helpAndTutorials: උදව් සහ නිබන්ධන
+  followersAndFollowing: අනුගාමිකයන්
+  mediaLibrary: මාධ්‍ය පුස්තකාලය
+  studio: ස්ටූඩියෝ
   language: භාෂාව
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: භාෂා විකල්ප නැහැ.
 login:
-  login: Login
+  login: පුරනය වෙන්න
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: දැන් පුරනය වෙන්න
+    createAccount: ගිණුමක් හදන්න
+    forgetPassword: මුරපදය අමතකද?
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+    title: නැත්නම් මේකෙන් එකතු වෙන්න
+  passOrUser: ඔයාගේ මුරපදය හෝ පරිශීලක නාමය වැරදියි.
+  accountSuspended: ඔයාගේ ගිණුම අත්හිටුවලා. මේක වැරැද්දක් කියලා ඔයා හිතනවා නම්, කරුණාකර සහාය කණ්ඩායම අමතන්න.
+  noUsername: ඔයාගේ පරිශීලක නාමය හෝ විද්‍යුත් තැපැල් ලිපිනය හමු වුණේ නැහැ.
+  forgotPass: මුරපදය හෝ පරිශීලක නාමය අමතකද?
+  recoverPassSend: ඔයාගේ විද්‍යුත් තැපැල් ලිපිනයට විද්‍යුත් තැපෑලක් එව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරන්න.
+  alreadyReset: මේ පරිශීලකයාගේ මුරපදය පසුගිය පැය 24 ඇතුළත දැනටමත් ඉල්ලලා තියෙනවා.
+  confirmationSend: ඔයාගේ ලියාපදිංචිය තහවුරු කරන්න ඔයාගේ විද්‍යුත් තැපැල් ලිපිනයට විද්‍යුත් තැපෑලක් එව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරලා ගිණුම සක්‍රිය කරන්න.
+  userOrEmail: පරිශීලක නාමය හෝ විද්‍යුත් තැපෑල
+  changePass: මුරපදය වෙනස් කරන්න
+  createAccount: ගිණුමක් හදන්න
+  noAccount: ගිණුමක් නැද්ද?
+  alreadyAccount: දැනටමත් ගිණුමක් තියෙනවද?
   or: OR
   username: පරිශීලක නාමය
   email: විද්‍යුත් තැපෑල
   passwordFirst: මුරපදය
   passwordSecond: මුරපදය තහවුරු කරන්න
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: ලියාපදිංචි වෙන්න
+  subText: දිගටම යාමෙන්, ඔයා Catrobat ප්‍රජා ගිණුමක් හදනවා, සහ අපේ %var1% සහ %var2% වලට එකඟ වෙනවා.
+  dateOfBirth: උපන් දිනය
+  dateOfBirthInfo: EU ළමා ආරක්ෂණ රෙගුලාසිවලට (GDPR/COPPA) අනුකූල වෙන්න සහ බාල පරිශීලකයන්ට ආරක්ෂිත අත්දැකීමක් දෙන්න අපි ඔයාගේ උපන් දිනය අහනවා.
+  parentEmail: දෙමාපිය/භාරකරුගේ විද්‍යුත් තැපෑල
+  parentEmailInfo: අවුරුදු 14ට අඩු පරිශීලකයන්ට අවශ්‍යයි. අපි මේ ලිපිනයට කැමැත්ත ඉල්ලීමක් එවනවා.
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: Continue
+    title: ඔයාගේ ලියාපදිංචිය සම්පූර්ණ කරන්න
+    info: වේදිකාව දිගටම පාවිච්චි කරන්න කරුණාකර ඔයාගේ උපන් දිනය දෙන්න.
+    submit: දිගටම යන්න
   button:
     cancel: අවලංගු කරන්න
-    createAccount: Create account
+    createAccount: ගිණුමක් හදන්න
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: ඔයාගේ එන ලිපි පරීක්ෂා කරන්න!
+    message: අපි ඔයාට තහවුරු කිරීමේ විද්‍යුත් තැපෑලක් එව්වා. ඔයාගේ ගිණුම සක්‍රිය කරන්න විද්‍යුත් තැපෑලේ තියෙන සබැඳිය ක්ලික් කරන්න.
+    helpTitle: විද්‍යුත් තැපෑල ලැබුණේ නැද්ද?
+    hint: ඔයාගේ ස්පෑම් ෆෝල්ඩරය බලන්න. සබැඳිය පැය 24ක් වලංගුයි.
+    resendButton: තහවුරු කිරීමේ විද්‍යුත් තැපෑල ආයෙත් එවන්න
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: දෙමාපිය කැමැත්ත එනකම් බලාගෙන ඉන්නවා
+    message: ඔයාගේ විද්‍යුත් තැපෑල තහවුරුයි! වේදිකාව සම්පූර්ණයෙන් පාවිච්චි කරන්න කලින්, දෙමාපියෙක් හෝ භාරකරුවෙක් කැමැත්ත දෙන්න ඕන.
+    sentTo: කැමැත්ත ඉල්ලීමක් %email% වෙත එව්වා
+    helpTitle: විද්‍යුත් තැපෑල ලැබුණේ නැද්ද? උදව් ඕනද?
+    hint: ඔයාගේ දෙමාපියන්ට ඔවුන්ගේ ස්පෑම් ෆෝල්ඩරය බලන්න කියන්න. සබැඳිය පැය 24ක් වලංගුයි.
+    resendButton: කැමැත්ත ඉල්ලීමේ විද්‍යුත් තැපෑල ආයෙත් එවන්න
+    wrongEmail: වැරදි දෙමාපිය විද්‍යුත් තැපෑලක් දැම්මද?
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: දෙමාපිය කැමැත්ත අවලංගු කළා
+    message: ඔයාගේ දෙමාපියෙක් හෝ භාරකරුවෙක් ඔයාගේ ගිණුමට දුන්න කැමැත්ත අවලංගු කළා. ආයෙත් කැමැත්ත දෙනකම් ඔයාගේ ගිණුමට සීමිත ක්‍රියාකාරිත්වයක් තියෙන්නේ.
+    newEmailPlaceholder: අලුත් දෙමාපිය විද්‍යුත් තැපෑල
+    changeButton: යාවත්කාල කරලා ආයෙත් එවන්න
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: ගිණුම ප්‍රතිසාධනය
+  description: ඔයාගේ ගිණුමේ විද්‍යුත් තැපෑල හෝ පරිශීලක නාමය මතක නම්, ඔයාගේ මුරපදය යළි සකසන්න අපිට සබැඳියක් එවන්න පුළුවන්.
   button:
     cancel: අවලංගු කරන්න
-    submit: Recover password
+    submit: මුරපදය ප්‍රතිසාධනය කරන්න
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: ඔයාගේ මුරපදය යළි සකසන්න
+    description: ඔයාගේ ගිණුමේ විද්‍යුත් තැපෑල මතක නම්, ඔයාගේ මුරපදය යළි සකසන්න අපිට සබැඳියක් එවන්න පුළුවන්.
     button:
-      submit: "Send reset email"
+      submit: යළි සැකසීමේ විද්‍යුත් තැපෑල එවන්න
       cancel: "අවලංගු කරන්න"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: ඔයාගේ විද්‍යුත් තැපැල් බලන්න
+    description: ඔයාගේ විද්‍යුත් තැපෑලට ගැළපෙන ගිණුමක් තියෙනවා නම්, ඔයාගේ මුරපදය යළි සකසන්න පාවිච්චි කරන්න පුළුවන් සබැඳියක් එක්ක විද්‍යුත් තැපෑලක් දැන් එව්වා. මේ සබැඳිය %time% කින් කල් ඉකුත් වෙනවා.
+    descriptionTwo: ඔයාට පැය %throttleLimit%කට වරක් අලුත් මුරපද යළි සැකසීමක් ඉල්ලන්න පුළුවන්.
+    descriptionThree: ඔයාට විද්‍යුත් තැපෑලක් ලැබුණේ නැත්නම් කරුණාකර ඔයාගේ ස්පෑම් ෆෝල්ඩරය බලන්න, නැත්නම් %email-webmaster% හි අපේ සහාය කණ්ඩායමට විද්‍යුත් තැපෑලක් ලියන්න.
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: ඔයාගේ මුරපදය යළි සකසන්න, කරුණාකර මේ සබැඳියට යන්න
+    expire: මේ සබැඳිය %time% කින් කල් ඉකුත් වෙනවා.
+    cheers: ජය වේවා!
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: ඔයාගේ මුරපදය යළි සකසන්න
+    content: ඔයා මෑතකදී ඔයාගේ Catrobat ගිණුමේ මුරපදය යළි සකසන්න ඉල්ලුවා. අලුත් මුරපදයක් තෝරන්න පහළ බොත්තම ක්ලික් කරන්න. ඔයා මේක ඉල්ලුවේ නැත්නම්, මේ විද්‍යුත් තැපෑල නොසලකා හරින්න පුළුවන්.
+    visitLink: මුරපදය යළි සකසන්න
+    expire: මේ සබැඳිය %time% ක් වලංගුයි, එක් වරක් විතරයි පාවිච්චි කරන්න පුළුවන්.
   reset:
-    title: "Reset your password"
+    title: ඔයාගේ මුරපදය යළි සකසන්න
     button:
-      submit: "Reset password"
+      submit: මුරපදය යළි සකසන්න
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: යෙදුමක් ලෙස බාගන්න
+  prepare: යෙදුමක් ලෙස ගන්න
+  preparing: යෙදුම සූදානම් කරමින්
+  text: මේකට ටික වෙලාවක් යන්න පුළුවන්
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: මොකක්හරි වැඩ කළේ නැහැ. ආයෙත් උත්සාහ කරන්න, නැත්නම් දිගටම මෙහෙම වෙනවා නම් අපිට කියන්න!
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: පරිශීලක නාමය හිස් වෙන්න බැහැ
+    invalid: ඔයාගේ පරිශීලක නාමය වලංගු නැහැ
+    exists: මේ පරිශීලක නාමය දැනටමත් තියෙනවා.
+    not_exists: මේ පරිශීලක නාමය නැහැ.
+    not_email: පරිශීලක නාමය විද්‍යුත් තැපැල් ලිපිනයක් වෙන්න බැහැ.
+    size: පරිශීලක නාමයේ අඩුම තරමින් අකුරු 3ක් තියෙන්න ඕන, 180ට වඩා තියෙන්න බැහැ
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: මුරපදය නැහැ.
+    short: ඔයාගේ මුරපදයේ අඩුම තරමින් අකුරු {{ limit }}ක් තියෙන්න ඕන.
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: රට නැහැ.
+    invalid: වලංගු නොවන රට
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    blank: විද්‍යුත් තැපෑල හිස් වෙන්න බැහැ
+    invalid: ඔයාගේ විද්‍යුත් තැපෑල වලංගු නැහැ වගේ
+    exists: මේ විද්‍යුත් තැපැල් ලිපිනය දැනටමත් තියෙනවා.
   id:
-    blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+    blank: විවෘත සත්‍යාපන ID හිස් වෙන්න බැහැ
+  login: මුරපදය හෝ පරිශීලක නාමය වැරදියි.
+  post-data: POST-දත්ත නිවැරදි නැහැ හෝ නැහැ!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: සේවාදායකයා fileChecksum එවලා නැහැ! ඔයා පාවිච්චි කරන්නේ Pocket Code හි පරණ අනුවාදයක්ද?
+    invalid: වලංගු නොවන checksum
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: වලංගු නොවන කේත xml
+    missing: 'නොදන්නා දෝෂය: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: බලාපොරොත්තු නොවූ ගොනුවක් හමු වුණා
+    invalid: වලංගු නොවන ගොනුව
+  image.missing: ව්‍යාපෘති XML එකේ ව්‍යාපෘති ෆෝල්ඩරයේ නැති ගොනුවක් සඳහන් වෙනවා
+  unknown: නොදන්නා දෝෂය
+  token: 'උපාංගය සත්‍යාපනය අසාර්ථකයි: වලංගු නොවන auth-token!'
+  uploadTokenAuthFailed: උඩුගත කිරීමේ ටෝකන් සත්‍යාපනය අසාර්ථකයි.
   project:
-    invalid: Invalid project.
+    invalid: වලංගු නොවන ව්‍යාපෘතිය.
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: සමාවෙන්න, ඔයාගේ ව්‍යාපෘතියේ Catrobat භාෂාවේ පරණ අනුවාදයක් තියෙනවා! ඔයා පාවිච්චි කරන්නේ Pocket Code හි අලුත්ම අනුවාදයද?
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: සමාවෙන්න, ඔයා පාවිච්චි කරන්නේ Pocket Code හි පරණ අනුවාදයක්. කරුණාකර අලුත්ම අනුවාදයට යාවත්කාල කරන්න.
   authentication:
-    title: Login did not work
+    title: පුරනය වීම වැඩ කළේ නැහැ
     webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+      ඔයාගේ පරිශීලක නාමය හෝ මුරපදය හරි නැහැ වගේ.
+      කරුණාකර යෙදුමේ ආයෙත් පුරනය වෙන්න උත්සාහ කරන්න.
 success:
-  text: Success
-  registration: Registration successful!
+  text: සාර්ථකයි
+  registration: ලියාපදිංචිය සාර්ථකයි!
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: ඔයාගේ ව්‍යාපෘතිය සාර්ථකව උඩුගත කළා!
+  imgUpload: ඔයාගේ පින්තූරය සාර්ථකව උඩුගත කළා!
+  report: ඔයාගේ වාර්තාව සාර්ථකව යැව්වා!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} විනාඩි 1කට අඩු කලකට පෙර |{1}විනාඩි 1කට පෙර |]1,Inf] විනාඩි %count%කට පෙර'
+  hours.ago: '{1}පැය 1කට පෙර |]1,Inf] පැය %count%කට පෙර'
+  days.ago: '{1}දින 1කට පෙර |]1,Inf] දින %count%කට පෙර'
+  months.ago: '{1}මාස 1කට පෙර |]1,Inf] මාස %count%කට පෙර'
+  years.ago: '{1}අවුරුද්දකට පෙර |]1,Inf] අවුරුද්දකට වඩා කලකට පෙර'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: ඔයාගේ යෙදුම උඩුගත කරද්දී දෝෂයක් ආවා.
 user:
   verification:
-    email: 'Verify your email'
+    email: ඔයාගේ විද්‍යුත් තැපෑල තහවුරු කරන්න
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: විද්‍යුත් තැපෑල නැහැ
+    emailEmpty: විද්‍යුත් තැපෑල හිස් වෙන්න බැහැ
+    emailInvalid: විද්‍යුත් තැපෑල වලංගු නැහැ
+    emailAlreadyInUse: විද්‍යුත් තැපෑල දැනටමත් පාවිච්චි වෙනවා
+    usernameMissing: පරිශීලක නාමය නැහැ
+    usernameTooShort: පරිශීලක නාමය කෙටි වැඩියි
+    usernameTooLong: පරිශීලක නාමය දිග වැඩියි
+    usernameEmpty: පරිශීලක නාමය හිස් වෙන්න බැහැ
+    usernameAlreadyInUse: පරිශීලක නාමය දැනටමත් පාවිච්චි වෙනවා
+    usernameInvalid: පරිශීලක නාමය වලංගු නැහැ
+    passwordMissing: මුරපදය නැහැ
+    passwordEmpty: මුරපදය හිස් වෙන්න බැහැ
+    passwordTooShort: මුරපදය කෙටි වැඩියි
+    passwordTooLong: මුරපදය දිග වැඩියි
+    passwordInvalidChars: මුරපදයේ වලංගු නොවන අකුරු තියෙනවා
+    usernameContainsEmail: පරිශීලක නාමයේ විද්‍යුත් තැපැල් ලිපිනයක් තියෙන්න බැහැ
+    usernameContainsLink: පරිශීලක නාමයේ සබැඳියක් තියෙන්න බැහැ
+    countryCodeInvalid: රට කේතය වලංගු නැහැ
+    pictureInvalid: පැතිකඩ පින්තූරය වලංගු නැහැ හෝ සහාය නැහැ
+    dateOfBirthMissing: උපන් දිනය අවශ්‍යයි
+    dateOfBirthInvalid: උපන් දිනය වලංගු නැහැ
+    tooYoung: ගිණුමක් හදන්න ඔයාට අඩුම තරමින් අවුරුදු 3ක් වෙන්න ඕන
+    parentEmailMissing: අවුරුදු 14ට අඩු පරිශීලකයන්ට දෙමාපිය විද්‍යුත් තැපෑල අවශ්‍යයි
+    parentEmailInvalid: දෙමාපිය විද්‍යුත් තැපෑල වලංගු නැහැ
+    parentEmailSameAsUser: දෙමාපිය විද්‍යුත් තැපෑල ඔයාගේම විද්‍යුත් තැපැල් ලිපිනයට වඩා වෙනස් වෙන්න ඕන
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: වත්මන් මුරපදය නැහැ
+    currentPasswordWrong: වත්මන් මුරපදය වැරදියි
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: නම හිස් වෙන්න බැහැ
+    nameTooLong: නම දිග වැඩියි
+    descriptionTooLong: විස්තරය දිග වැඩියි
+    creditsTooLong: සටහන් සහ ස්තූතිය දිග වැඩියි
+    screenshotInvalid: ව්‍යාපෘති තිර රුව වලංගු නැහැ හෝ සහාය නැහැ
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    invalid_checksum: වලංගු නොවන checksum. ආයෙත් උඩුගත කරලා බලන්න!
+    upload_error: උඩුගත කරද්දී දෝෂයක්. ආයෙත් උඩුගත කරලා බලන්න!
+    creating_error: ව්‍යාපෘති ඒකකය හදද්දී දෝෂයක්. ආයෙත් උඩුගත කරලා බලන්න!
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: ව්‍යාපෘතියේ විස්තර සුරකින්න බැරි වුණා.
+    screenshotError: තිර රුව කියවන්න, පරිවර්තනය කරන්න හෝ ගබඩා කරන්න බැරි වුණා. කරුණාකර ඔයාගේ ආදානය පරීක්ෂා කරන්න.
+    notFound: වෙනස් කරන්න ඕන ව්‍යාපෘතිය හොයාගන්න බැරි වුණා.
+    forbidden: ව්‍යාපෘතිය වෙනස් කරන්න අවසර නැහැ. ඔයා තවමත් පුරනය වෙලාද ඉන්නේ?
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: නම නැහැ
+    nameEmpty: නම හිස් වෙන්න බැහැ
+    nameTooShort: නම කෙටි වැඩියි
+    nameTooLong: නම දිග වැඩියි
+    nameAlreadyInUse: නම දැනටමත් පාවිච්චි වෙනවා
+    descriptionMissing: විස්තරය නැහැ
+    descriptionEmpty: විස්තරය හිස්
+    descriptionTooShort: විස්තරය කෙටි වැඩියි
+    descriptionTooLong: විස්තරය දිග වැඩියි
+    imageFileInvalid: පින්තූර ගොනුව වලංගු නැහැ
+    imageFileInvalidType: පින්තූර ගොනු වර්ගය වලංගු නැහැ
+    imageFileTooLarge: පින්තූර ගොනුව ලොකු වැඩියි
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  arabic: අරාබි
+  bulgarian: බල්ගේරියානු
+  catalan: කැටලන්
+  chinese_simplified_han: චීන (සරල හාන්)
+  chinese_traditional_han: චීන (සාම්ප්‍රදායික හාන්)
+  croatian: ක්‍රොඒෂියානු
+  czech: චෙක්
+  danish: ඩෙන්මාර්ක
+  dutch: ලන්දේසි
+  english_united_kingdom: ඉංග්‍රීසි (එක්සත් රාජධානිය)
+  english_united_states: ඉංග්‍රීසි (එක්සත් ජනපදය)
+  estonian: එස්තෝනියානු
+  filipino: පිලිපීන
+  finnish: ෆින්ලන්ත
+  french: ප්‍රංශ
+  german: ජර්මන්
+  greek: ග්‍රීක
+  hebrew: හීබ්‍රු
+  hindi: හින්දි
+  hungarian: හංගේරියානු
+  indonesian: ඉන්දුනීසියානු
+  italian: ඉතාලි
+  japanese: ජපන්
+  korean: කොරියානු
+  latvian: ලැට්වියානු
+  lithuanian: ලිතුවේනියානු
+  malay: මැලේ
+  norwegian: නෝර්වීජියානු
+  persian: පර්සියානු
+  polish: පෝලන්ත
+  portuguese_brazil: පෘතුගීසි (බ්‍රසීලය)
+  portuguese_portugal: පෘතුගීසි (පෘතුගාලය)
+  romanian: රුමේනියානු
+  russian: රුසියානු
+  serbian: සර්බියානු
+  slovak: ස්ලෝවැක්
+  slovenian: ස්ලෝවේනියානු
+  spanish_latin_america: ස්පාඤ්ඤ (ලතින් ඇමරිකාව)
+  spanish_spain: ස්පාඤ්ඤ (ස්පාඤ්ඤය)
+  swedish: ස්වීඩන්
+  thai: තායි
+  turkish: තුර්කි
+  ukrainian: යුක්රේනියානු
+  vietnamese: වියට්නාම
 ci:
   generate: apk ජනනය කරන්න
   pending: apk ජනනය කරමින්
   download: apk බාගන්න
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: තැටි නඩත්තුව
+    ramMaintenance: RAM නඩත්තුව
+    noRemovableObjects: ඉවත් කළ හැකි වස්තු නැහැ.
+    removableObjects: ඉවත් කළ හැකි වස්තු
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: සමාන ව්‍යාපෘති
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: මේ ව්‍යාපෘතිය බාගත් අය මේවත් බාගත්තා
+  moreFromThisUser: '%username% ගෙන් තවත්'
 pmd:
-  submitBtn: Submit your project
+  submitBtn: ඔයාගේ ව්‍යාපෘතිය ඉදිරිපත් කරන්න
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: ඉදිරිපත් කිරීම
+    text: ඔයා ඔයාගේ ව්‍යාපෘතිය ඉදිරිපත් කරන්න යනවා. කරුණාකර ව්‍යාපෘති කේතය ඇතුළත් කරලා යවන්න ක්ලික් කරන්න.
+    btnText: ඉදිරිපත් කරන්න
   successful:
-    text: Your project upload was successful.
+    text: ඔයාගේ ව්‍යාපෘතිය සාර්ථකව උඩුගත කළා.
   failed:
-    text: Project upload failed.
+    text: ව්‍යාපෘතිය උඩුගත කිරීම අසාර්ථකයි.
 codeview:
-  title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  title: කේත දසුන
+  showCode: කේතය පෙන්වන්න
+  hideCode: කේතය සඟවන්න
+  showStatistics: කේත සංඛ්‍යාලේඛන පෙන්වන්න
+  hideStatistics: කේත සංඛ්‍යාලේඛන සඟවන්න
+  cantDisplayCode: කේතය පෙන්වන්න බැහැ
+  cantDisplayStatistics: කේතය පෙන්වන්න බැහැ
+  totalNumberOf: 'මුළු ගණන:'
+  scenes: දර්ශන
+  scripts: ස්ක්‍රිප්ට්
+  bricks: කැට
+  objects: චරිත සහ වස්තු
+  looks: පෙනුම්
+  sounds: ශබ්ද
+  globals: ගෝලීය
+  locals: ස්ථානීය
+  globalVariables: ගෝලීය විචල්‍ය
+  localVariables: ස්ථානීය විචල්‍ය
+  eventBricks: සිදුවීම් කැට
+  controlBricks: පාලන කැට
+  motionBricks: චලන කැට
+  soundBricks: ශබ්ද කැට
+  looksBricks: පෙනුම් කැට
+  penBricks: පෑන් කැට
+  dataBricks: දත්ත කැට
+  specialBricks: විශේෂ කැට
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
-  scripts: 'Scripts'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  title: කේත දසුන
+  loading: කේත දසුන පූරණය කරමින්...
+  error: කේත දසුන පූරණය කරන්න බැරි වුණා.
+  retry: ආයෙත් උත්සාහ කරන්න
+  empty: මේ ව්‍යාපෘතියේ කේතයක් නැහැ.
+  scripts: ස්ක්‍රිප්ට්
+  looks: පෙනුම්
+  sounds: ශබ්ද
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
+  title: කේත සංඛ්‍යාලේඛන
+  error: කේත සංඛ්‍යාලේඛන පෙන්වන්න බැහැ.
+  general: සාමාන්‍ය
+  bricks: කැට
+  eventBricks: සිදුවීම්
+  controlBricks: පාලනය
+  motionBricks: චලනය
   soundBricks: 'ශබ්දය'
-  looksBricks: 'Looks'
+  looksBricks: පෙනුම්
   penBricks: 'Pen'
   dataBricks: 'දත්ත'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  deviceBricks: උපාංගය
+  specialBricks: විශේෂ
+  yourScore: 'ඔයාගේ ලකුණු:'
+  points: ලකුණු
+  abstraction: වියුක්තකරණය සහ ගැටලු බෙදීම
+  parallelism: සමාන්තරකරණය
+  logicalThinking: තාර්කික චින්තනය
+  synchronization: සමමුහුර්තකරණය
+  flowControl: ප්‍රවාහ පාලනය
+  userInteractivity: පරිශීලක අන්තර්ක්‍රියාව
+  dataRepresentation: දත්ත නිරූපණය
+  level: මට්ටම
+  loading: පූරණය කරමින්...
+  bonus: ප්‍රසාද
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: නිර්මාණශීලී මනස් %user_count% කට වඩා එක්ක එකතු වෙන්න!
+  text: නියම ව්‍යාපෘති %project_count%ක් දැනටමත් බෙදාගෙන තියෙනවා, ඊළඟ එක ඔයාගේ වෙන්න පුළුවන්. අපේ යෙදුම බාගෙන අදම හදන්න පටන් ගන්න
 privacy-policy:
   header: රහස්‍යතා ප්‍රතිපත්තිය
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: අනුවාදය 2.2, 2019 ඔක්තෝබර් 17
+  text1: අපේ සේවාවල සහ ඒකට අදාළ ගිණුමේ හැම වාසියක්ම ඔයාට දෙන්න, ඔයාගෙන් යම් දත්ත එකතු කරන්න අවශ්‍යයි.
+  text2: අපේ සේවා (යෙදුම් සහ වෙබ් අඩවි) නඩත්තු කරන්න සහ දියුණු කරන්න, සහ ICT සහ STEM/STEAM අධ්‍යාපනය ගැන විද්‍යාත්මක පර්යේෂණ කරන්න, අපේ සේවා පාවිච්චිය ගැන පාරදත්ත ලබාගන්න අපි Google LLC (USA) හි Google Analytics, Crashlytics සහ Firebase, සහ Dynatrace LLC (USA) හි Dynatrace පාවිච්චි කරනවා, උදාහරණයක් විදිහට බිඳවැටීම් තොරතුරු, කාල මුද්‍රා, බැලූ පිටු/තිර, අපේ යෙදුම් සහ සේවා පාවිච්චිය, පාවිච්චි කළ මෙහෙයුම් පද්ධතිය, සහ ජාල සපයන්නා ගැන තොරතුරු. මේ විශ්ලේෂණය සහ එකතු කළ දත්ත ඔයාගේ පැතිකඩට සම්බන්ධ නැහැ, කිසිම පෞද්ගලික තොරතුරක් ඇතුළත් නැහැ (IP ලිපිනයේ අවසාන බිටු නිර්නාමික කරනවා). කෙසේ වෙතත්, එකතු කළ දත්ත සේවා සපයන්නන්ට (Google LLC, USA සහ Dynatrace LLC, USA) මාරු කරනවා. දත්ත සැකසීම Google LLC සහ Dynatrace LLC එක්ක ඇති ගිවිසුම් මත පදනම් වෙලා තියෙනවා. සේවා සපයන්නන් එක්ක ඇති මේ සම්බන්ධතාව යුරෝපා සංගමයේ සාමාන්‍ය දත්ත ආරක්ෂණ රෙගුලාසියට (EU GDPR) සහ EU-USA "Privacy Shield" ගිවිසුමට අනුකූලයි.
+  text3: 'අපේ පද්ධතිවල ගිණුමක් හදලා පාවිච්චි කරන්න, සහ ඔයාගේ ගිණුම ගැන අවශ්‍ය වෙනස්කම් ගැන, උදාහරණයක් විදිහට යාවත්කාලීන කිරීම් හෝ අපේ භාවිත සහ සේවා නියම, ප්‍රජා නීති හෝ ප්‍රතිපත්ති උල්ලංඝනය කිරීම් ගැන, ඔයාට විද්‍යුත් තැපෑලෙන් දැනුම් දෙන්න, අපි ඔයාගේ පරිශීලක නාමය සහ, ඔයා දුන්නොත්, ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය ගබඩා කරනවා. ඔයා Google Plus හෝ Facebook හරහා ඔයාගේ ගිණුම සම්බන්ධ කරලා නම්, ඒ සේවාවල ඔයාගේ ගිණුමට සම්බන්ධ හඳුනාගැනීමේ යතුරකුත් අපි ගබඩා කරනවා. ඔයා පැහැදිලිවම අවසර දුන්නේ නැත්නම්, අපි මේ දත්ත වෙනත් කිසිම (උදා: අලෙවිකරණ) අරමුණකට පාවිච්චි කරන්නේ නැහැ.'
+  text4: ස්වේච්ඡාවෙන්, බෙදාගැනීමේ අඩවියේ ඔයාගේ ගිණුම් පිටුව හරහා ඔයා ජීවත් වෙන රට අපිට දෙන්න පුළුවන්. ඒක ඔයාගේ පොදු පැතිකඩේ පෙන්වනවා, අපි ඒක පාවිච්චි කරන්නේ සංඛ්‍යාලේඛන සහ පර්යේෂණ අරමුණු සඳහා විතරයි. ඔයාගේ පැතිකඩ සැකසුම්වලින් ඕනම වෙලාවක ඒක ඉවත් කරන්න පුළුවන්.
+  text5: https://share.catrob.at/ හි ඔයාගේ පැතිකඩ පිටුව හරහා ඔයාගේ ගිණුම මකලා, ඔයාගේ ගිණුමට අයත් පෞද්ගලික දත්ත පාවිච්චිය ඕනම වෙලාවක ඉල්ලා අස්කරගන්න පුළුවන්. ඔයාගේ ගිණුම මැකුවට පස්සෙත් ඔයාට සපයන සේවා පාවිච්චි කරන්න පුළුවන්, ඒත් සහයෝගයෙන් වැඩ කරන්න බැහැ, උදාහරණයක් විදිහට වැඩසටහන් උඩුගත කරන්න, අදහස් දක්වන්න හෝ කැමැත්ත පළ කරන්න. ඒ වගේම, ඔයාගේ ගිණුමට සම්බන්ධ සපයපු හැම අන්තර්ගතයක්ම, උදාහරණයක් විදිහට උඩුගත කළ වැඩසටහන්, අදහස් ආදිය මැකෙනවා.
+  text6: අපේ සේවා අනිසි ලෙස පාවිච්චි කිරීම වළක්වන්න, උදාහරණයක් විදිහට නීති විරෝධී අරමුණු සඳහා පරිශීලකයන් දායක කරන උඩුගත කිරීම් හෝ අදහස් හරහා, පරිශීලකයන් හදන හැම පොදු දත්තයක්ම (උඩුගත කිරීම්, අදහස්) කාල මුද්‍රාවක් සහ පාවිච්චි කළ අන්තර්ජාල ලිපිනය එක්ක දත්ත ගබඩාවක අභ්‍යන්තරව ගබඩා කරනවා. ප්‍රමාණවත් නීති විරෝධී ක්‍රියා ගැන සාධාරණ සැකයක් තියෙන්නේ නැත්නම් සහ නිල වශයෙන් බලය ලත් නීතිමය ආයතන අදාළ නීතිය මත එය ඉල්ලන්නේ නැත්නම්, මේ දත්ත කිසිම ආයතනයක් පාවිච්චි කරන්නේ හෝ ඔවුන්ට යවන්නේ නැහැ. හැම අවස්ථාවක්ම මුලින්ම අපි තනි තනිව හොඳින් පරීක්ෂා කරනවා.
+  text7: ඔයාට ස්වේච්ඡාවෙන් https://catrob.at/newsletter හි Catrobat පුවත් ලිපියට දායක වෙන්න පුළුවන්, අපි ඒක MailChimp සේවාව (The Rocket Science Group LLC d/b/a MailChimp, USA) හරහා සපයනවා. එතකොට ඔයා දුන්න විද්‍යුත් තැපැල් ලිපිනයට Catrobat ව්‍යාපෘතිය සහ ඒකේ සේවා ගැන යාවත්කාලීන ලැබෙනවා. හැම පුවත් ලිපියකම පාදකයේ තියෙන "unsubscribe" සබැඳිය පාවිච්චි කරලා ඕනම වෙලාවක පුවත් ලිපියෙන් ඉවත් වෙන්න පුළුවන්. මේ පුවත් ලිපිය සපයන්නේ MailChimp, ඔවුන් එක්ක අපිට දත්ත සැකසීමේ ගිවිසුමක් තියෙනවා, ඔවුන් EU සාමාන්‍ය දත්ත ආරක්ෂණ රෙගුලාසියට සහ EU-USA "Privacy Shield" එකට කැපවෙලා ඉන්නවා. MailChimp ගැන වැඩි විස්තර සඳහා කරුණාකර MailChimp හි රහස්‍යතා ප්‍රතිපත්තිය සහ භාවිත නියමත් බලන්න.
+  text8: හැම සේවාවක්ම සපයන්නේ නොමිලේ විවෘත මූලාශ්‍ර Catrobat ව්‍යාපෘතිය, International Catrobat Association – Verein zur Förderung freier Software යටතේ, ඒක ඔස්ට්‍රියාවේ (යුරෝපා සංගමය) ග්‍රාස් හි සංස්ථාගත ලාභ නොලබන රාජ්‍ය නොවන සංවිධානයක්. අපේ ප්‍රතිපත්ති EU සහ ඔස්ට්‍රියානු දත්ත ආරක්ෂණ නීතියට (GDPR) ගරු කරනවා. අපිව සම්බන්ධ කරගන්න, කරුණාකර contact@catrobat.org වෙත විද්‍යුත් තැපෑලක් එවන්න හෝ Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union) වෙත ලිපියක් එවන්න.
+  text9: ඔයා අවුරුදු 14ට අඩු නම්, මේ ප්‍රතිපත්තිය නීත්‍යානුකූල භාරකරුවෙක් (සාමාන්‍යයෙන් දෙමාපියෙක්) පිළිගන්න ඕන.
+  text10: Catrobat හි නිල ඉංග්‍රීසි භාෂා රහස්‍යතා ප්‍රතිපත්තිය වෙබ් එකේ %privacy_policy% යටතේ තියෙනවා.
+  disagree-text: අනුමැතිය නැතිව අපිට ගිණුමක් හදන්න බැහැ, ඒත් ප්‍රධාන විශේෂාංග තවමත් පාවිච්චි කරන්න පුළුවන්.
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: කියවූ ලෙස ලකුණු කරන්න
+  noFollowers: ඔයාට අනුගාමික දැනුම්දීම් කිසිවක් නැහැ වගේ.
+  noComments: ඔයාට අදහස් දැනුම්දීම් කිසිවක් නැහැ වගේ.
+  noReactions: ඔයාට ප්‍රතිචාර දැනුම්දීම් කිසිවක් නැහැ වගේ.
+  noRemixes: ඔයාට රීමික්ස් දැනුම්දීම් කිසිවක් නැහැ වගේ.
+  noStudios: ඔයාට ස්ටූඩියෝ දැනුම්දීම් කිසිවක් නැහැ වගේ.
   tab:
-    studio: Studio
-    project: Projects
+    studio: ස්ටූඩියෝ
+    project: ව්‍යාපෘති
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% %program_link% ගැන අදහසක් දැක්වුවා.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% %program_link% වෙත ප්‍රතිචාර දැක්වුවා.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% දැන් ඔයාව අනුගමනය කරනවා.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% අලුත් ක්‍රීඩාවක් හැදුවා: %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% ඔයාගේ ක්‍රීඩාව %remix_program_link% හි රීමික්ස් එකක් හැදුවා: %program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% %studio_name% ස්ටූඩියෝවේ අදහසක් දැක්වුවා.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% %program_link% ව්‍යාපෘතිය %studio_name% ස්ටූඩියෝවට එකතු කළා.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: '%studio_name% ස්ටූඩියෝවට එකතු වෙන්න ඔයා කළ ඉල්ලීම පිළිගත්තා.'
+    declined: '%studio_name% ස්ටූඩියෝවට එකතු වෙන්න ඔයා කළ ඉල්ලීම ප්‍රතික්ෂේප කළා.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: ඔයාගේ ව්‍යාපෘතිය %program_link% දින %days%කින් ස්වයංක්‍රීයව මැකෙනවා. ඒක තියාගන්න අලුත් අනුවාදයක් උඩුගත කරන්න හෝ වැඩියෙන් බාගැනීම් ලබාගන්න.
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: ඔයාගේ ව්‍යාපෘතිය "%project_name%" අක්‍රියතාව නිසා ස්වයංක්‍රීයව ඉවත් කළා. ඔයාට තවමත් ඒක බෙදාගන්න ඕන නම් ආයෙත් උඩුගත කරන්න.
+  noProjects: ඔයාට ව්‍යාපෘති දැනුම්දීම් කිසිවක් නැහැ වගේ.
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
+  success_project: ව්‍යාපෘතියේ සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
+  success_user: පරිශීලකයාගේ සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
+  fail: සබැඳිය පසුරු පුවරුවට පිටපත් කරන්න බැරි වුණා! :(
+next: ඊළඟ
+previous: කලින්
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: මාධ්‍ය පුස්තකාලය
+  description: පහත කාණ්ඩවල ඔයාගේ ව්‍යාපෘතිවලට එකතු කරන්න චරිත සහ වස්තු හොයාගන්න පුළුවන්.
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: පෙරදසුන් ප්‍රමාණය
+    sm: කුඩා
+    md: මධ්‍යම
+    lg: විශාල
+  theme-special: '%flavor% විශේෂ තේමාව'
+  search-results: මාධ්‍ය පුස්තකාල සෙවුම් ප්‍රතිඵල
+  no-results: ඔයාගේ සෙවුමට ප්‍රතිඵල 0ක් ලැබුණා. කරුණාකර ඉංග්‍රීසි සෙවුම් පද විතරක් පාවිච්චි කරන්න.
+  download_these_files: සුරකින්න
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +997,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: ප්‍රකාශන හිමිකම &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. සියලු හිමිකම් ඇවිරිණි.
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: මේ වෙබ් අඩවිය වැඩ කරන්න JavaScript ඕන. කරුණාකර ඔයාගේ බ්‍රව්සරයේ JavaScript සක්‍රිය කරන්න, නැත්නම් වැඩිහිටියෙකුගෙන් උදව් ඉල්ලන්න.
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
-  privacy-link: "Privacy Policy"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  message: අපේ සේවා දියුණු කරන්න අපි කුකීස් පාවිච්චි කරනවා. කිසිම දත්තයක් විකුණන්නේ හෝ බෙදාගන්නේ නැහැ.
+  accept: පිළිගන්න
+  decline: ප්‍රතික්ෂේප කරන්න
+  privacy-link: රහස්‍යතා ප්‍රතිපත්තිය
+  settings-link: කුකී සැකසුම්
+agree: එකඟයි
+disagree: එකඟ නැහැ
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: දැනට පැතිකඩ නැහැ.
+element: අංගය
+elements: අංග
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: බෙදාගන්න
+  error: බෙදාගැනීම අසාර්ථකයි
+  success: බෙදාගැනීම සාර්ථකයි
+copy: සබැඳිය පිටපත් කරන්න
+checkOutProject: 'මේ ව්‍යාපෘතිය බලන්න:'
+checkOutUser: 'මේ පරිශීලකයා බලන්න:'
+community: Catrobat ප්‍රජාව
+back_to_app: ප්‍රජාවෙන් ඉවත් වෙන්න
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: අලුත්ම ව්‍යාපෘති
+  random: අහඹු ව්‍යාපෘති
+  most_viewed: වැඩියෙන්ම බැලූ
+  most_downloaded: වැඩියෙන්ම බාගත්
+  example: උදාහරණ
+  scratch: Scratch රීමික්ස්
+  recommended: නිර්දේශිත ව්‍යාපෘති
+  popular: වඩාත්ම ජනප්‍රිය
+  trending: ප්‍රවණතා ව්‍යාපෘති
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: ජයග්‍රහණ
     badge: 'new'
   overview:
-    header: 'Achievements'
+    header: ජයග්‍රහණ
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: අලුත්ම ජයග්‍රහණය
+      x_out_of_y: '%total% න් %unlocked%ක් අගුළු හැරලා'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: අගුළු හැරපු
+      empty: ඔයා තවම කිසිම ජයග්‍රහණයක් අගුළු හැරලා නැහැ.
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: අගුළු දාපු
+      empty: ඔයා දැනටමත් හැම ජයග්‍රහණයක්ම අගුළු හැරලා.
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: සුබ පැතුම්!
+      subtitle: ඔයාට ලාංඡනයක් ලැබුණා
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: ජයග්‍රහණ
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: ආධුනිකයා
+        description: කෙනෙක්ව අනුගමනය කරලා ව්‍යාපෘතියක් උඩුගත කරන්න
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: ශිල්පියා
+        description: අවුරුද්දකට වැඩි කාලයක් ක්‍රියාශීලී සාමාජිකයෙක්
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: ප්‍රවීණයා
+        description: අවුරුදු 4කට වැඩි කාලයක් ක්‍රියාශීලී සාමාජිකයෙක්
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: මහා ප්‍රවීණයා
+        description: අවුරුදු 7කට වැඩි කාලයක් ක්‍රියාශීලී සාමාජිකයෙක්
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: මුලපිරීම
+        description: ඔයාගේ පළමු පැතිකඩ පින්තූරය එකතු කරන්න
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: නවකයා
+        description: පරිශීලක ගිණුමක් හදන්න
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: Coding Jam 2021 හි සහභාගිකයෙක්
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: ද්විභාෂික
+        description: ඔයාගේ ව්‍යාපෘති භාෂා 2කට පරිවර්තනය කරන්න
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: ත්‍රිභාෂික
+        description: ඔයාගේ ව්‍යාපෘති භාෂා 3කට පරිවර්තනය කරන්න
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: භාෂාවේදියා
+        description: ඔයාගේ ව්‍යාපෘති භාෂා 5කට පරිවර්තනය කරන්න
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: තහවුරුයි
+        description: ඔයාගේ ගිණුම තහවුරු කරන්න
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} ටැගය |]1,Inf] ටැග්'
   tag:
     game:
-      title: Game
+      title: ක්‍රීඩාව
     animation:
-      title: Animation
+      title: සජීවිකරණය
     story:
-      title: Story
+      title: කතාව
     music:
-      title: Music
+      title: සංගීතය
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: පර්යේෂණාත්මක
     tutorial:
-      title: Tutorial
+      title: නිබන්ධනය
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} දිගුව |]1,Inf] දිගු'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: ඩ්‍රෝනය
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: එම්බ්‍රොයිඩරි
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: බහු ක්‍රීඩක
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: ස්ටූඩියෝ
+  singular: ස්ටූඩියෝව
+  create_studio: ස්ටූඩියෝවක් හදන්න
+  delete_studio: ස්ටූඩියෝව මකන්න
   cancel_studio: 'අවලංගු කරන්න'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
-  report: 'Report'
-  public: 'public'
-  private: 'Invite-only'
+  studio_name: ස්ටූඩියෝවේ නම
+  studio_description: ස්ටූඩියෝවේ විස්තරය
+  is_public: පොදු කරන්නද?
+  enable_comments: අදහස් සක්‍රිය කරන්නද?
+  cover_image: කවර පින්තූරය උඩුගත කරන්න
+  cover_image_empty: පින්තූරයක් තෝරලා නැහැ.
+  cover_image_hint: 'උපරිම 1 MB. පිළිගන්නා ආකෘති: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 1 MB සීමාවට ගැළපෙන්න පින්තූරය ස්වයංක්‍රීයව සම්පීඩනය කළා.
+  cover_image_compressing: පින්තූරය සම්පීඩනය කරමින්...
+  cover_image_still_too_large: සම්පීඩනයෙන් පස්සෙත් පින්තූරය ලොකු වැඩියි. කරුණාකර කුඩා ගොනුවක් තෝරන්න.
+  cover_image_invalid_type: වලංගු නොවන පින්තූර වර්ගය. කරුණාකර JPEG, PNG, GIF හෝ WebP පාවිච්චි කරන්න.
+  cover_image_compression_failed: පින්තූරය සකසන්න බැරි වුණා. කරුණාකර වෙනත් ගොනුවක් උත්සාහ කරන්න.
+  cover_image_alt: ඔයාගේ කවර පින්තූරය
+  cover_image_remove: පින්තූරය ඉවත් කරන්න
+  popular: ජනප්‍රිය ස්ටූඩියෝ
+  join: එකතු වෙන්න
+  leave: ඉවත් වෙන්න
+  report: වාර්තා කරන්න
+  public: පොදු
+  private: ආරාධනයෙන් පමණයි
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'Open'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    joined_studios: එකතු වුණු ස්ටූඩියෝ
+    public_studios: පොදු ස්ටූඩියෝ
+    private_studios: ආරාධනයෙන් පමණක් ස්ටූඩියෝ
+    no_studios: තවම ස්ටූඩියෝ නැහැ
+    my_studios: මගේ ස්ටූඩියෝ
+    explore: ස්ටූඩියෝ ගවේෂණය කරන්න
+    no_joined: ඔයා තවම කිසිම ස්ටූඩියෝවකට එකතු වෙලා නැහැ
+    joined: එකතු වුණා
+    load_more: තව පූරණය කරන්න
+    open: විවෘත කරන්න
+    share: බෙදාගන්න
+    share_success: සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
+    leave_confirm_title: මේ ස්ටූඩියෝවෙන් ඉවත් වෙන්නද?
     cancel: 'අවලංගු කරන්න'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    cancel_request: ඉල්ලීම අවලංගු කරන්න
+    cancel_request_confirm_title: එකතු වීමේ ඉල්ලීම අවලංගු කරන්නද?
+    admin: පරිපාලක
+    member: සාමාජික
   details:
-    add_project: 'click to add the project'
+    add_project: ව්‍යාපෘතිය එකතු කරන්න ක්ලික් කරන්න
     add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
-    delete_it: 'Delete'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    showMore: තව පෙන්වන්න
+    showLess: අඩුවෙන් පෙන්වන්න
+    are_you_sure: ඔයාට විශ්වාසද?
+    no_way_of_return: මේක ආපසු හරවන්න බැහැ.
+    delete_it: මකන්න
+    remove_project: ස්ටූඩියෝවෙන් ඉවත් කරන්න
+    remove_project_error: ස්ටූඩියෝවෙන් ව්‍යාපෘතිය ඉවත් කරන්න බැරි වුණා.
+    remove_project_success: ව්‍යාපෘතිය ස්ටූඩියෝවෙන් සාර්ථකව ඉවත් කළා.
+    no_projects: ස්ටූඩියෝවේ තවම කිසිම ව්‍යාපෘතියක් නැහැ.
     projects:
-      title: 'Projects'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      title: ව්‍යාපෘති
+      addProject: ව්‍යාපෘති එකතු කරන්න
+      open_project: ව්‍යාපෘතිය විවෘත කරන්න
       download: 'බාගන්න'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
-    report: 'Report'
-    pending: 'Pending'
-    decline: 'Declined'
+      share: බෙදාගන්න
+      remove_from_studio: ස්ටූඩියෝවෙන් ඉවත් කරන්න
+      remove_from_studio_title: ව්‍යාපෘතිය ස්ටූඩියෝවෙන් ඉවත් කරන්නද?
+      remove_from_studio_text: ඔයාගේ අදහස වෙනස් වුණොත් පස්සේ ආයෙත් එකතු කරන්න පුළුවන්.
+      share_success: සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
+      share_fail: සබැඳිය පිටපත් කරන්න බැරි වුණා.
+      no_projects_empty_state: ඔයාට තවම එකතු කරන්න ව්‍යාපෘති නැහැ. මුලින්ම Pocket Code හි එකක් හදන්න!
+      add_selected: තෝරාගත් ඒවා එකතු කරන්න
+    no_available_projects: එකතු කරන්න ව්‍යාපෘති නැහැ.
+    updateCoverError: ස්ටූඩියෝ කවරය යාවත්කාල කරද්දී මොකක්හරි වැරදුණා.
+    join: එකතු වෙන්න
+    leave: ඉවත් වෙන්න
+    report: වාර්තා කරන්න
+    pending: බලාපොරොත්තුවෙන්
+    decline: ප්‍රතික්ෂේප කළා
     comments:
-      title: 'Comments'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      title: අදහස්
+      type_something: මොනවහරි ලියන්න
+      replies: පිළිතුරු
+      send: යවන්න
+      no_comments: මේ ස්ටූඩියෝවට තවම අදහස් නැහැ.
+      disabled_comments: මේ ස්ටූඩියෝවට අදහස් අක්‍රිය කරලා.
+      remove_comment: අදහස ඉවත් කරන්න
+      post_error: ඔයාගේ අදහස පළ කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
+      remove_error: අදහස ඉවත් කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: ක්‍රියාකාරකම්
+      join_studio: '%user% ස්ටූඩියෝවට එකතු වුණා.'
+      add_project: '%user% ව්‍යාපෘතියක් එකතු කළා.'
+      add_comment: '%user% අදහසක් දැක්වුවා.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: ස්ටූඩියෝ සාමාජිකයන්
+      project_count: '{0} ස්ටූඩියෝ ව්‍යාපෘති නැහැ |{1} ස්ටූඩියෝ ව්‍යාපෘති 1ක් |]1,Inf] ස්ටූඩියෝ ව්‍යාපෘති %count%ක්'
+      no_studio_projects: ස්ටූඩියෝ ව්‍යාපෘති නැහැ
+      one_studio_project: ස්ටූඩියෝ ව්‍යාපෘති 1ක්
+      n_studio_projects: ස්ටූඩියෝ ව්‍යාපෘති %count%ක්
+      promote_member: සාමාජිකයා පරිපාලකයෙක් කරන්න
+      promotion_failed: මේ සාමාජිකයා උසස් කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
+      ban_member: සාමාජිකයා ස්ටූඩියෝවෙන් තහනම් කරන්න
+      ban_failed: මේ සාමාජිකයා තහනම් කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
+      demote_member: පරිපාලකයා සාමාජිකයෙක් කරන්න
+      demotion_failed: මේ පරිපාලකයා පහත් කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
+      last_admin: මේ ස්ටූඩියෝවේ අන්තිම පරිපාලකයා පහත් කරන්න බැහැ.
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      title: එකතු වීමේ ඉල්ලීම්
+      accept: පිළිගන්න
+      decline: ප්‍රතික්ෂේප කරන්න
+      accept_success: එකතු වීමේ ඉල්ලීම පිළිගත්තා.
+      decline_success: එකතු වීමේ ඉල්ලීම ප්‍රතික්ෂේප කළා.
+      error: මොකක්හරි වැරදුණා. කරුණාකර ආයෙත් උත්සාහ කරන්න.
+      no_requests: බලාපොරොත්තුවෙන් ඉන්න එකතු වීමේ ඉල්ලීම් නැහැ.
     show_more: 'තව පෙන්වන්න'
-    show_less: 'Less information'
+    show_less: අඩුවෙන් පෙන්වන්න
     admin_settings:
-      title: 'Settings'
-      studio_name: 'Studio Name'
-      studio_description: 'Description'
-      toggle_allow_comments: 'Comments'
-      toggle_privacy: 'Public'
+      title: සැකසුම්
+      studio_name: ස්ටූඩියෝවේ නම
+      studio_description: විස්තරය
+      toggle_allow_comments: අදහස්
+      toggle_privacy: පොදු
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'ප්‍රමාණය: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: 'වර්ගය: පින්තූරය'
+      project: 'වර්ගය: ව්‍යාපෘතිය'
+      sound: 'වර්ගය: ශබ්දය'
+      movie: 'වර්ගය: වීඩියෝව'
+      default: 'වර්ගය: නොදන්නා'
+  no_categories: තවම මාධ්‍ය කාණ්ඩ නැහැ.
+  no_results: ප්‍රතිඵල හමු වුණේ නැහැ.
+  assets_count: වත්කම්
+  view_all: ඔක්කොම බලන්න
+  view_all_category: '%category% ඔක්කොම බලන්න'
+  back_to_app: යෙදුමට ආපසු
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: ඉල්ලපු ව්‍යාපෘතිය නැහැ
+  project_not_for_kids: ව්‍යාපෘතිය ළමයින්ට ආරක්ෂිත නැහැ කියලා ලකුණු කළා!
+  project_safe_for_kids: ව්‍යාපෘතිය ළමයින්ට ආරක්ෂිතයි කියලා ලකුණු කළා!
+  project_not_for_kids_moderator: ව්‍යාපෘතිය මොඩරේටර් කෙනෙක් ලකුණු කළා. ඔයාට මේක ආපසු හරවන්න බැහැ!
+  project_set_private: ව්‍යාපෘතිය පෞද්ගලික කළා.
+  project_set_public: ව්‍යාපෘතිය පොදු කළා.
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'අමතර තොරතුරු: additionalInfo'
+    feature_1: featureName විශේෂාංගය maintenanceStart සිට maintenanceEnd දක්වා ලබාගත නොහැක
+    feature_2: විශේෂාංගය
+    feature_3: විශේෂාංගය
+MarkNotForKids: ළමයින්ට ආරක්ෂිත නැහැ ලෙස ලකුණු කරන්න
+MarkSafeForKids: ළමයින්ට ආරක්ෂිතයි ලෙස ලකුණු කරන්න
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: තහවුරු කිරීම
+  confirmMark: ඔයාට ඇත්තටම මේ ව්‍යාපෘතිය ළමයින්ට ආරක්ෂිත නැහැ ලෙස ලකුණු කරන්න ඕනද?
+  confirmUnmark: ඔයාට ඇත්තටම මේ ව්‍යාපෘතියෙන් "ළමයින්ට නොවේ" සලකුණ ඉවත් කරන්න ඕනද?
+  confirmYes: ඔව්, දිගටම යන්න!
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: මේ %content_type% වාර්තා කරන්න
+    reason_placeholder: ඔයා මේක වාර්තා කරන්නේ ඇයි කියලා කරුණාකර විස්තර කරන්න...
+    submit: වාර්තාව ඉදිරිපත් කරන්න
+    success: ඔයාගේ වාර්තාව ඉදිරිපත් කළා. ස්තූතියි.
+    error: මොකක්හරි වැරදුණා. කරුණාකර ආයෙත් උත්සාහ කරන්න.
+    duplicate: ඔයා දැනටමත් මේ අන්තර්ගතය වාර්තා කරලා.
+    trust_too_low: වාර්තා ඉදිරිපත් කරන්න ඔයාගේ ගිණුම අලුත් වැඩියි.
+    unverified: ඔයා පුරනය වෙලා ඉන්නවද සහ ඔයාගේ ගිණුමේ විද්‍යුත් තැපෑල තහවුරු කරලාද කියලා බලන්න.
+    rate_limited: ඔයා ඉක්මනින් වැඩියි වාර්තා යවන්නේ. ටිකක් ඉඳලා ආයෙත් උත්සාහ කරන්න.
+    suspended: ඔයාගේ ගිණුම අත්හිටුවලා.
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: අභියාචනා කරන්න
+    title: මේ තීරණයට අභියාචනා කරන්න
+    placeholder: මේ අන්තර්ගතය සඟවන්න හොඳ නැත්තේ ඇයි කියලා පැහැදිලි කරන්න...
+    submit: අභියාචනය ඉදිරිපත් කරන්න
     cancel: "අවලංගු කරන්න"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: ඔයාගේ අභියාචනය සමාලෝචනයට ඉදිරිපත් කළා.
+    already_pending: ඔයාට දැනටමත් බලාපොරොත්තුවෙන් ඉන්න අභියාචනයක් තියෙනවා.
+    error: මොකක්හරි වැරදුණා. කරුණාකර ආයෙත් උත්සාහ කරන්න.
+    rate_limited: ඔයා ඉක්මනින් වැඩියි අභියාචනා යවන්නේ. ටිකක් ඉඳලා ආයෙත් උත්සාහ කරන්න.
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: ඔයා ඉක්මනින් වැඩියි අදහස් පළ කරන්නේ. පොඩ්ඩක් ඉන්න.
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: ඔයා ඉක්මනින් වැඩියි ප්‍රතිචාර දක්වන්නේ. පොඩ්ඩක් ඉන්න.
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: ඔයා ඉක්මනින් වැඩියි අනුගමනය කරන්නේ/නවත්වන්නේ. පොඩ්ඩක් ඉන්න.
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: ඔයා ඉක්මනින් වැඩියි ස්ටූඩියෝ ක්‍රියා කරන්නේ. පොඩ්ඩක් ඉන්න.
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: ප්‍රජා වාර්තා නිසා මේ ව්‍යාපෘතිය සඟවලා.
+    comment: ප්‍රජා වාර්තා නිසා මේ අදහස සඟවලා.
+    user: ප්‍රජා වාර්තා නිසා මේ පැතිකඩ සඟවලා.
+    user_own: ප්‍රජා වාර්තා නිසා ඔයාගේ ගිණුම අත්හිටුවලා. ඔයාට මේ තීරණයට අභියාචනා කරන්න පුළුවන්.
+    studio: ප්‍රජා වාර්තා නිසා මේ ස්ටූඩියෝව සඟවලා.
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: ප්‍රජා වාර්තා නිසා ඔයාගේ %content_type% සඟවලා. ඔයාට මේ තීරණයට අභියාචනා කරන්න පුළුවන්.
+    appeal_approved: ඔයාගේ අභියාචනය අනුමත කළා. ඔයාගේ අන්තර්ගතය දැන් ආයෙත් පේනවා.
+    appeal_rejected: ඔයාගේ අභියාචනය සමාලෝචනය කළා, ඔයාගේ අන්තර්ගතය සඟවන තීරණය එලෙසම පවතිනවා.
+    admin_review_needed: අන්තර්ගතය ස්වයංක්‍රීයව සඟවලා, සමාලෝචනයක් අවශ්‍යයි.
+Reports: වාර්තා
+members: සාමාජිකයන්
