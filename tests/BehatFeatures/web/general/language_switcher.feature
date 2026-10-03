@@ -48,7 +48,7 @@ Feature: Users can choose between multiple languages. Text should be automatical
     When I switch the language to "French"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then one of the ".project-list__title" elements should contain "Popular projects"
+    Then one of the ".project-list__title" elements should contain "Projets populaires"
     And the element "#home-projects__popular" should be visible
     When I switch the language to "Deutsch"
     And I wait for the page to be loaded
