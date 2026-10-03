@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Сообщество Catrobat
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: 'Делитесь, находите и делайте ремиксы творческих проектов, созданных в Catrobat. Присоединяйтесь к мировому сообществу юных авторов, которые создают игры, анимации и приложения.'
+meta.description.media.library: 'Просматривайте и скачивайте бесплатные медиафайлы для Catrobat — звуки, изображения и многое другое для ваших проектов.'
+meta.og.title.login: 'Вход в Catrobat'
+meta.og.description.login: 'Войдите, чтобы делиться своими проектами Catrobat с сообществом.'
+meta.og.title.register: 'Создать аккаунт Catrobat'
+meta.og.description.register: 'Присоединяйтесь к сообществу Catrobat и начните делиться своими творческими проектами уже сегодня.'
+meta.og.description.profile: '%username% в Catrobat – проекты и достижения.'
 localLanguage: Английский
 username: Имя пользователя
 password: Пароль
@@ -26,7 +26,7 @@ iosAppStore: iOS App Store
 instagram: Инстаграм
 discordChat: Чат Discord
 passwordsNoMatch: Пароли не совпадают.
-error: Oops!
+error: 'Упс!'
 cancel: Отменить
 confirm: Подтвердить
 report: Отчет
@@ -50,11 +50,11 @@ privacyPolicy: Политика конфиденциальности
 imprint: Импринт
 projectDetails: Подробности
 somethingWentWrong: 'Упс, что-то пошло не так.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
+accountNotVerified: 'Убедитесь, что вы вошли в систему и адрес электронной почты вашего аккаунта подтверждён.'
+accountSuspended: 'Ваш аккаунт заблокирован из-за жалоб сообщества. Вы можете обжаловать это решение в своём профиле.'
 doesNotExist: 'Запрошенный ресурс не существует.'
 pleaseTryAgain: 'Пожалуйста, попробуйте еще раз!'
-tryAgainButton: 'Try again'
+tryAgainButton: 'Попробовать снова'
 oldVersionError: 'Пожалуйста, обновите Pocket Code до последней версии!'
 more: 'больше'
 less: 'скрыть'
@@ -88,13 +88,13 @@ oauthHere: "здесь"
 statistics: "Статистика"
 languageSelection: "Выбор языка"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
+  title: 'Тема'
+  auto: 'Системная'
+  auto_description: 'Как в настройках устройства'
   light: 'Светлая тема'
-  light_description: 'Bright appearance'
+  light_description: 'Светлое оформление'
   dark: 'Темная тема'
-  dark_description: 'Dark appearance'
+  dark_description: 'Тёмное оформление'
   apply: 'Применить'
 indexPage:
   recommendedSection:
@@ -128,25 +128,25 @@ project:
   open: Открыть 
   download: Скачать
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: 'Загрузить проект'
+    drop_here: 'Перетащите сюда файл .catrobat'
+    or_browse: 'или нажмите, чтобы выбрать'
+    button: 'Загрузить'
+    uploading: 'Загрузка...'
+    success: 'Проект успешно загружен!'
+    view_project: 'Открыть проект'
+    upload_another: 'Загрузить ещё'
+    invalid_file: 'Выберите файл .catrobat'
+    file_too_large: 'Файл слишком большой'
+    error: 'Не удалось загрузить. Попробуйте ещё раз.'
+    unauthorized: 'Чтобы загружать проекты, нужно войти в систему.'
+    rate_limited: 'Слишком много загрузок. Попробуйте позже.'
+    selected_file: 'Выбранный файл:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
+      file_size: 'Максимальный размер файла — 100 МБ.'
+      app_upload: 'Проекты также можно загружать прямо из приложения Pocket Code. Обратите внимание: приложения сейчас перерабатываются и пока не поддерживают загрузку через веб.'
+      retention: 'Загруженные проекты автоматически удаляются после периода неактивности. Регулярно входите в систему или набирайте скачивания, чтобы проект хранился дольше.'
+      protection: 'Особенно хорошие или популярные проекты модераторы могут защитить от автоматического удаления.'
   example: Примеры
   newest: Самые новые проекты
   recommended: Рекомендуемые проекты
@@ -160,20 +160,20 @@ project:
     Отменить ваши действия будет нельзя!
     Да, удалить это!
     Отмена
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+  deleteConfirmText: 'Это действие нельзя отменить. Ваш проект будет удалён навсегда.'
   deleteConfirmationTitle: Вы уверены?
   deleteNotFoundError: Проект который вы хотите удалить не был найден в вашем аккаунте. 
   private: приватный
   public: публичный
   setPrivateAction: Сделать приватным
   setPublicAction: Сделать публичным
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+  setPrivateConfirm: 'Сделать этот проект приватным? Он больше не будет появляться в результатах поиска.'
+  setPublicConfirm: 'Сделать этот проект общедоступным? Его смогут видеть все.'
+  markNotForKidsConfirm: 'Отметить этот проект как неподходящий для детей?'
+  markSafeForKidsConfirm: 'Снять с этого проекта отметку «не для детей»?'
+  nfkModeratorLocked: 'Эта настройка заблокирована модератором.'
+  confirmSetPrivate: 'Вы уверены, что хотите сделать этот проект приватным? Он больше не будет появляться в результатах поиска.'
+  confirmSetPublic: 'Вы уверены, что хотите сделать этот проект общедоступным? Его смогут видеть все.'
   changeVisibility: |+
     Вы уверены?
     Если вы установите для "%programName%" приватный доступ, другие пользователи не увидят и не найдут его.
@@ -202,17 +202,17 @@ project:
   random: Случайные проекты
   related: Похожие проекты
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
+    explore: 'Обзор проектов'
+    no_projects: 'Вы ещё не создали ни одного проекта'
     no_explore: 'Проекты не найдены'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    load_more: 'Загрузить ещё'
+    upload: 'Загрузить проект'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
+    protected: 'Защищён'
+    day_left: 'Остался 1 день'
+    days_left: 'Осталось дней: %days%'
+    tooltip: 'Проекты автоматически удаляются после периода неактивности. Набирайте больше скачиваний или регулярно входите в систему, чтобы проект хранился дольше.'
+    tooltip_protected: 'Этот проект защищён и не будет удалён автоматически.'
   downloads: '%downloads% скачиваний'
   sample: Примеры проектов
   views: '%views% просмотр(а/ов)'
@@ -268,9 +268,9 @@ project:
   reactionsText: Реакции
   downloadErrorText: Во время скачивания проекта произошла ошибка. Повторите попытку позже.
   downloadStartText: Скачивание началось...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
+  downloading: 'Скачивание...'
+  openInApp: 'Открыть в Pocket Code'
+  downloaded: 'Скачано'
   showTranslation: Показать перевод
   hideTranslation: Скрыть перевод
   translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
@@ -293,16 +293,16 @@ remixGraph:
   by: 'на'
   open: 'Открыть '
   showPaths: 'Показать Пути'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: 'Загрузка графа ремиксов...'
+  error: 'Не удалось загрузить граф ремиксов.'
+  empty: 'Для этого проекта пока нет данных о ремиксах.'
   remixesLabel: 'Ремиксы'
   projectsLabel: 'Проекты'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
+  scratchLabel: 'Исходные проекты Scratch'
+  interactHint: 'Выберите узел, чтобы открыть проект или выделить его путь ремиксов.'
+  zoomIn: 'Приблизить'
+  zoomOut: 'Отдалить'
+  resetView: 'Сбросить вид'
   projectNotAvailableErrorTitle: 'Извините...'
   projectNotAvailableErrorDescription: 'Этот проект больше недоступен!'
   projectNotAvailable: 'Недоступно'
@@ -321,7 +321,7 @@ accountConfirmation:
     <p>
     Уважаемый %username%.<br>
     <br>
-    Чтобы закончить активацию вашего аккаунта - пожалуйста, нажмите <a href=%confirmationUrl%>здесь.</a><br>
+    Чтобы закончить активацию вашего аккаунта - пожалуйста, нажмите <a href="%confirmationUrl%">здесь.</a><br>
     Эта ссылка может быть использована только один раз для подтверждения вашего аккаунта.<br>
     <br>
     С наилучшими пожеланиями,<br>
@@ -330,78 +330,78 @@ accountConfirmation:
 newAccountConfirmation:
   subject: "Пожалуйста, подтвердите ваш адрес электронной почты"
   welcome: "Добро пожаловать в Сообщество Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
+  greeting: 'Спасибо за регистрацию! Подтвердите свой адрес электронной почты, чтобы начать.'
   message: "Пожалуйста, подтвердите ваш адрес электронной почты\nДобро пожаловать в Сообщество Catrobat\nВсего один клик по кнопке ниже позволит вам подтвердить вашу регистрацию в Catrobat.\nЭта ссылка действительна до %time% и может быть\nиспользована только один раз для подтверждения вашего адреса электронной почты."
   button: "ПОДТВЕРДИТЬ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  ignore: 'Если вы не создавали аккаунт Catrobat, просто проигнорируйте это письмо.'
+  autoDelete: 'Неподтверждённые аккаунты автоматически удаляются через 30 дней.'
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: 'Нужно согласие родителей для аккаунта вашего ребёнка в Catrobat'
+    title: 'Требуется согласие родителей'
+    greeting: 'Здравствуйте!'
+    message: 'Ваш ребёнок %username% создал аккаунт в Catrobat и подтвердил свой адрес электронной почты.'
+    explanation: 'Catrobat — бесплатная образовательная платформа, на которой молодые люди учатся программировать, создавая приложения, игры и анимации. Согласно правилам ЕС о защите детей, нам нужно ваше согласие, прежде чем ваш ребёнок сможет полноценно участвовать в сообществе. Нажмите кнопку ниже, чтобы дать согласие.'
+    button: 'Дать согласие родителей'
+    ignore: 'Если вы не ожидали этого письма, просто проигнорируйте его. Без согласия функции аккаунта будут ограничены.'
+    whatIsCatrobat: 'Catrobat — бесплатная некоммерческая образовательная платформа для программирования. Подробнее на catrobat.org.'
+    manageLink: 'Вы можете в любое время управлять аккаунтом своего ребёнка через наш <a href="%portalUrl%" style="color: #00acc1;">Портал для родителей</a>. Узнайте больше о <a href="%infoUrl%" style="color: #00acc1;">ваших правах как родителя</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: 'Согласие получено'
+    message: 'Спасибо! Аккаунт %username% теперь полностью активирован.'
+    continueButton: 'Смотреть проекты'
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: 'Родителям и опекунам'
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: 'Информация для родителей и опекунов'
+    intro: 'Catrobat серьёзно относится к безопасности и конфиденциальности юных пользователей. На этой странице объясняется, как мы защищаем вашего ребёнка и какие у вас есть права.'
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: 'Что такое Catrobat?'
+      text: 'Catrobat — бесплатная некоммерческая образовательная платформа, на которой молодые люди учатся программированию, создавая собственные приложения, игры и анимации. Платформа доступна по всему миру и используется в образовательных учреждениях.'
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: 'Какие данные мы собираем?'
+      text: 'Мы собираем минимум данных, необходимых для работы платформы: имя пользователя, адрес электронной почты, дату рождения и проекты, которые ваш ребёнок создаёт и загружает. Для пользователей младше 14 лет мы также храним адрес электронной почты родителя или опекуна для получения согласия. Мы не продаём и не передаём персональные данные третьим лицам.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: 'Ваши права как родителя или опекуна'
+      text: 'Согласно правилам ЕС о защите детей (GDPR) и COPPA, вы имеете право: просматривать данные о вашем ребёнке, которые мы храним, запросить копию этих данных, в любое время отозвать своё согласие (что ограничит аккаунт) и потребовать окончательного удаления аккаунта вашего ребёнка и всех связанных с ним данных.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: 'Какие ограничения действуют для аккаунтов несовершеннолетних?'
+      text: 'Пользователи младше 16 лет не могут писать и читать комментарии, подписываться на других пользователей или просматривать контент, отмеченный как неподходящий для детей. При этом они могут создавать и загружать проекты, просматривать общедоступные проекты и ставить проектам лайки. Эти ограничения нужны, чтобы обеспечить безопасную среду для обучения.'
+    manageButton: 'Управлять аккаунтом ребёнка'
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: 'Портал для родителей'
+    description: 'Введите свой адрес электронной почты, чтобы получить защищённую ссылку для управления аккаунтом вашего ребёнка в Catrobat. Ссылка будет отправлена на адрес, указанный при регистрации.'
+    emailLabel: 'Ваш адрес электронной почты'
+    submitButton: 'Отправить ссылку для управления'
+    infoLink: 'Подробнее'
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: 'Проверьте почту'
+      message: 'Если с этим адресом связан аккаунт, мы отправили ссылку для управления. Проверьте почту и перейдите по ссылке, чтобы управлять аккаунтом вашего ребёнка.'
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: 'Управление аккаунтами детей'
+    description: 'Вы управляете аккаунтами, связанными с адресом %email%.'
+    consentStatus: 'Статус согласия'
+    accountCreated: 'Аккаунт создан'
+    email: 'Эл. почта ребёнка'
     status:
-      granted: "Granted"
+      granted: 'Дано'
       pending: "В обработке"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      revoked: 'Отозвано'
+    grantButton: 'Дать согласие'
+    revokeButton: 'Отозвать согласие'
+    revokeConfirm: 'Вы уверены, что хотите отозвать согласие? Функции аккаунта будут ограничены.'
+    exportButton: 'Экспортировать данные'
+    deleteButton: 'Удалить аккаунт'
+    deleteConfirm: 'Вы уверены, что хотите навсегда удалить этот аккаунт? Это нельзя отменить.'
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: 'Управление аккаунтом вашего ребёнка в Catrobat'
+      title: 'Управление аккаунтом'
+      greeting: 'Здравствуйте!'
+      message: 'Вы запросили ссылку для управления аккаунтом вашего ребёнка в Catrobat (%usernames%). Нажмите кнопку ниже, чтобы просмотреть аккаунт и управлять им.'
+      button: 'Управлять аккаунтом'
+      ignore: 'Если вы этого не запрашивали, просто проигнорируйте это письмо.'
 passwordRecovery:
   subject: Восстановление пароля от вашего аккаунта Catrobat
   message: |
@@ -419,15 +419,15 @@ passwordRecovery:
     <p>
     Уважаемый(-ая) %username%.<br>
     <br>
-    Мы получили запрос на восстановления вашего пароля на <a href=%appplication_url%>Pocket Code</a>.
+    Мы получили запрос на восстановления вашего пароля на <a href="%appplication_url%">Pocket Code</a>.
     Если вы не отправляли такой запрос, пожалуйста проигнорируйте данное письмо. Срок действия ссылки закончится через 24 часа.<br>
     <br>
-    Для изменения пароля пройдите по <a href=%confirmationUrl%>ссылке.</a><br>
+    Для изменения пароля пройдите по <a href="%confirmationUrl%">ссылке.</a><br>
     <br>
-    Вы можете использовать свое имя пользователя и пароль для доступа к сообществу <a href=%appplication_url%>Pocket Code</a> в любое время.
+    Вы можете использовать свое имя пользователя и пароль для доступа к сообществу <a href="%appplication_url%">Pocket Code</a> в любое время.
     <br>
-    Для этого просто перейдите по <a href=%loginPage%>этой ссылке</a><br>
-    Если вы хотите изменить свой профиль, перейдите на <a href=%profilePage%">эту страницу</a>.<br>
+    Для этого просто перейдите по <a href="%loginPage%">этой ссылке</a><br>
+    Если вы хотите изменить свой профиль, перейдите на <a href="%profilePage%">эту страницу</a>.<br>
     <br>
     С наилучшими пожеланиями,<br>
     Команда Catrobat.
@@ -485,11 +485,11 @@ myprofile:
     Будьте осторожны:
     Вы создали %num_projects% проект(ов) и вы имеете %num_followers% подписчика(ов). Все ваши проекты будут удалены. Вы больше не сможете войти в аккаунт и ваши проекты исчезнут из всех списков. Удаление профиля не может быть отменено!
     Вы уверены, что хотите покинуть нас?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+  exportData: 'Скачать мои данные'
+  exportDataDescription: 'Вы имеете право получить копию своих персональных данных. Сюда входят данные профиля, проекты, комментарии, реакции и подписчики.'
+  exportDataLoading: 'Скачивание...'
+  exportDataError: 'При экспорте данных что-то пошло не так. Попробуйте позже.'
+  exportDataRateLimited: 'Экспортировать данные можно только раз в день. Попробуйте завтра.'
   editAccountSettings: Изменить настройки аккаунта
   profileChangeSuccess: Ваш профиль был успешно изменен.
   unspecifiedError: Произошла неизвестная ошибка во время изменения вашего профиля. Пожалуйста, свяжитесь с нами.
@@ -548,7 +548,7 @@ termsOfUse:
   version: Версия 1.3, 4 марта 2014 года
 search:
   dotdotdot: Поиск...
-  search: Search projects, users & studios
+  search: 'Поиск проектов, пользователей и студий'
   inMediaLib: Поиск в медиатеке
   inMediaCategory: Искать в категории медиа
   results: Результаты поиска
@@ -556,7 +556,7 @@ search:
   fail: Пожалуйста, введите хотя бы один поисковый запрос
   noUsers: Пользователи не найдены
   noProjects: Проекты не найдены
-  noStudios: No studios found
+  noStudios: 'Студии не найдены'
   sameSearchMessage: "Похоже, вы уже достигли конца! Стоит ли ввести другой запрос в поисковую строку?"
 menu:
   profile: Мой профиль
@@ -579,7 +579,7 @@ login:
   oauth:
     title: Или вы можете присоединиться используя
   passOrUser: Неверный пароль или имя пользователя.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: 'Ваш аккаунт заблокирован. Если вы считаете, что это ошибка, обратитесь в поддержку.'
   noUsername: Ваше имя пользователя или адрес электронной почты не были найдены.
   forgotPass: Забыли пароль или имя пользователя?
   recoverPassSend: На ваш адрес электронной почты было отправлено письмо. Пожалуйста, проверьте входящие письма.
@@ -598,37 +598,37 @@ login:
 register:
   title: Регистрация
   subText: "Продолжая, вы создаете аккаунт сообщества Catrobat и соглашаетесь с нашими %var1% и %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  dateOfBirth: 'Дата рождения'
+  dateOfBirthInfo: 'Мы спрашиваем дату рождения, чтобы соблюдать правила ЕС о защите детей (GDPR/COPPA) и обеспечить безопасность младших пользователей.'
+  parentEmail: 'Эл. почта родителя/опекуна'
+  parentEmailInfo: 'Обязательно для пользователей младше 14 лет. Мы отправим запрос на согласие на этот адрес.'
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: 'Завершите регистрацию'
+    info: 'Укажите дату рождения, чтобы продолжить пользоваться платформой.'
     submit: Продолжить
   button:
     cancel: Отменить
     createAccount: Зарегистрироваться
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: 'Проверьте почту!'
+    message: 'Мы отправили вам письмо для подтверждения. Перейдите по ссылке в письме, чтобы активировать аккаунт.'
+    helpTitle: 'Не пришло письмо?'
+    hint: 'Проверьте папку «Спам». Ссылка действительна 24 часа.'
+    resendButton: 'Отправить письмо ещё раз'
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: 'Ожидаем согласия родителей'
+    message: 'Ваша почта подтверждена! Прежде чем вы сможете полностью пользоваться платформой, родитель или опекун должен дать согласие.'
+    sentTo: 'Запрос на согласие отправлен на адрес %email%'
+    helpTitle: 'Не пришло письмо? Нужна помощь?'
+    hint: 'Попросите родителя проверить папку «Спам». Ссылка действительна 24 часа.'
+    resendButton: 'Отправить запрос ещё раз'
+    wrongEmail: 'Указали неверный адрес родителя?'
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: 'Согласие родителей отозвано'
+    message: 'Ваш родитель или опекун отозвал согласие для вашего аккаунта. Функции аккаунта ограничены, пока согласие не будет дано снова.'
+    newEmailPlaceholder: 'Новый адрес родителя'
+    changeButton: 'Обновить и отправить снова'
 accountRecovery:
   title: Восстановление аккаунта
   description: Если вы помните электронную почту или имя пользователя от вашего аккаунта, мы можем отправить вам ссылку для сброса пароля.
@@ -654,7 +654,7 @@ resetPassword:
     cheers: "Ура!"
   newemail:
     title: "Сбросить ваш пароль"
-    content: "<p> Вы получаете это письмо потому что вы<br> недавно запросили сброс пароля для<br> вашего аккаунта Catrovat. Перейдите по ссылку<br> ниде чтобы изменить свой пароль<br><br> Если вы не запрашивали изменение пароля,<br> вы можете проигнорировать это письмо.<br> </p>"
+    content: 'Недавно вы запросили сброс пароля для своего аккаунта Catrobat. Нажмите кнопку ниже, чтобы выбрать новый пароль. Если вы этого не запрашивали, просто проигнорируйте это письмо.'
     visitLink: "СБРОСИТЬ ПАРОЛЬ"
     expire: "Эта ссылка действительна %time% - и может использоваться только один раз!"
   reset:
@@ -712,7 +712,7 @@ errors:
   projectversion:
     tooold: 'К сожалению, Вы используете старую версию Pocket Code. Пожалуйста, обновите его до последней версии.'
   authentication:
-    title: Login did not work
+    title: 'Не удалось войти'
     webview: |
       Ваши учетные данные неверны. 
       Пожалуйста, попробуйте войти в аккаунт снова.
@@ -752,15 +752,15 @@ api:
     passwordTooLong: 'Пароль слишком длинный'
     passwordInvalidChars: 'Пароль содержит недопустимые символы'
     usernameContainsEmail: "Имя пользователя не должно содержать адрес электронной почты."
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: 'Имя пользователя не должно содержать ссылку'
     countryCodeInvalid: "Неверный код страны"
     pictureInvalid: "Аватарка профиля недопустима или не поддерживается"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    dateOfBirthMissing: 'Укажите дату рождения'
+    dateOfBirthInvalid: 'Неверная дата рождения'
+    tooYoung: 'Чтобы создать аккаунт, вам должно быть не меньше 3 лет'
+    parentEmailMissing: 'Для пользователей младше 14 лет нужен адрес эл. почты родителя'
+    parentEmailInvalid: 'Неверный адрес эл. почты родителя'
+    parentEmailSameAsUser: 'Адрес родителя должен отличаться от вашего собственного адреса эл. почты'
   updateUser:
     currentPasswordMissing: "Текущий пароль отсутствует"
     currentPasswordWrong: "Текущий пароль неправильный"
@@ -890,11 +890,11 @@ codeview:
   dataBricks: 'Блоки данных'
   specialBricks: 'Специальные блоки'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'Просмотр кода'
+  loading: 'Загрузка кода...'
+  error: 'Не удалось загрузить код.'
+  retry: 'Попробовать снова'
+  empty: 'В этом проекте нет кода.'
   scripts: 'Скрипты'
   looks: 'Образы'
   sounds: 'Звуки'
@@ -912,18 +912,18 @@ codeStatistics:
   dataBricks: 'Данные'
   deviceBricks: 'Устройство'
   specialBricks: 'Особые'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: 'Ваш результат:'
+  points: 'очков'
+  abstraction: 'Абстракция и декомпозиция задач'
+  parallelism: 'Параллелизм'
+  logicalThinking: 'Логическое мышление'
+  synchronization: 'Синхронизация'
+  flowControl: 'Управление потоком'
+  userInteractivity: 'Взаимодействие с пользователем'
+  dataRepresentation: 'Представление данных'
+  level: 'Уровень'
+  loading: 'Загрузка...'
+  bonus: 'Бонус'
 footer:
   title: "Присоединяйтесь к более чем %user_count% творческих умов!"
   text: "С %project_count% уже опубликованными великолепными проектами, следующим может быть ваш. Скачайте наше приложение и начните создавать сегодня"
@@ -947,7 +947,7 @@ catro-notifications:
   noComments: "Похоже, у вас нет уведомлений о комментариях."
   noReactions: "Похоже, что у вас нет уведомлений о реакциях."
   noRemixes: "Похоже, что у вас нет уведомлений о ремиксах."
-  noStudios: "It looks like you don't have any studio notifications."
+  noStudios: 'Похоже, у вас нет уведомлений от студий.'
   tab:
     studio: Студия
     project: Проекты
@@ -962,19 +962,19 @@ catro-notifications:
   remix:
     message: '%user_link% создал ремикс %program_link% вашей игры %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% оставил(а) комментарий в студии %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% добавил(а) %program_link% в студию %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'Ваш запрос на вступление в студию %studio_name% принят.'
+    declined: 'Ваш запрос на вступление в студию %studio_name% отклонён.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'Ваш проект %program_link% будет автоматически удалён через %days% дн. Загрузите новую версию или наберите больше скачиваний, чтобы сохранить его.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'Ваш проект «%project_name%» был автоматически удалён из-за неактивности. Загрузите его снова, если всё ещё хотите им поделиться.'
+  noProjects: 'Похоже, у вас нет уведомлений о проектах.'
 clipboard:
-  success: Link copied to clipboard!
+  success: 'Ссылка скопирована в буфер обмена!'
   success_project: Ссылка на проект скопирована в буфер обмена!
   success_user: Ссылка на пользователя скопирована в буфер обмена!
   fail: Не удалось скопировать ссылку в буфер обмена! :(
@@ -1001,13 +1001,13 @@ flavor:
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Все права защищены.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: 'Для работы этого сайта нужен JavaScript. Включите JavaScript в браузере или попросите взрослого помочь.'
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: 'Мы используем файлы cookie, чтобы улучшать наши сервисы. Данные не продаются и не передаются третьим лицам.'
   accept: "Принять"
   decline: "Отклонить"
   privacy-link: "Политика конфиденциальности"
-  settings-link: "Cookie Settings"
+  settings-link: 'Настройки cookie'
 agree: Принять
 disagree: Отклонить
 profileLoader:
@@ -1138,15 +1138,15 @@ studio:
   enable_comments: 'Включить комментарии?'
   cover_image: 'Загрузить обложку'
   cover_image_empty: 'Изображение не выбрано. Размер файла должен быть менее 1 мегабайта.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
+  cover_image_hint: 'Не более 1 МБ. Форматы: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'Изображение автоматически сжато до 1 МБ.'
+  cover_image_compressing: 'Сжатие изображения...'
+  cover_image_still_too_large: 'Изображение слишком большое даже после сжатия. Выберите файл поменьше.'
+  cover_image_invalid_type: 'Неподдерживаемый формат. Используйте JPEG, PNG, GIF или WebP.'
+  cover_image_compression_failed: 'Не удалось обработать изображение. Попробуйте другой файл.'
   cover_image_alt: 'Изображение вашей обложки'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
+  cover_image_remove: 'Удалить изображение'
+  popular: 'Популярные студии'
   join: 'Присоединиться'
   leave: 'Покинуть'
   report: 'Отчет'
@@ -1156,28 +1156,28 @@ studio:
     joined_studios: 'Участие в студиях'
     public_studios: 'Публичные студии'
     private_studios: 'Частные студии'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    no_studios: 'Студий пока нет'
+    my_studios: 'Мои студии'
+    explore: 'Обзор студий'
+    no_joined: 'Вы ещё не вступили ни в одну студию'
+    joined: 'Вы участник'
+    load_more: 'Загрузить ещё'
     open: 'Открыть '
     share: 'Поделиться'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: 'Ссылка скопирована в буфер обмена!'
+    leave_confirm_title: 'Покинуть эту студию?'
     cancel: 'Отменить'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: 'Отменить запрос'
+    cancel_request_confirm_title: 'Отменить запрос на вступление?'
     admin: 'Админ'
-    member: 'Member'
+    member: 'Участник'
   details:
     add_project: 'нажмите, чтобы добавить проект'
     add: 'Добавить'
     showMore: 'показать больше'
     showLess: 'свернуть'
     are_you_sure: 'Вы уверены?'
-    no_way_of_return: 'This cannot be undone.'
+    no_way_of_return: 'Это нельзя отменить.'
     delete_it: 'Удалить'
     remove_project: 'Удалить из студии'
     remove_project_error: 'Не удалось удалить проект из студии.'
@@ -1186,17 +1186,17 @@ studio:
     projects:
       title: 'Проекты'
       addProject: 'Добавить свои собственные проекты'
-      open_project: 'Open project'
+      open_project: 'Открыть проект'
       download: 'Скачать'
       share: 'Поделиться'
       remove_from_studio: 'Удалить из студии'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio_title: 'Убрать проект из студии?'
+      remove_from_studio_text: 'Если передумаете, вы сможете добавить его снова позже.'
+      share_success: 'Ссылка скопирована в буфер обмена!'
+      share_fail: 'Не удалось скопировать ссылку.'
+      no_projects_empty_state: 'У вас пока нет проектов для добавления. Сначала создайте проект в Pocket Code!'
+      add_selected: 'Добавить выбранные'
+    no_available_projects: 'Нет проектов, доступных для добавления.'
     updateCoverError: 'Что-то пошло не так при обновлении обложки студии.'
     join: 'Присоединиться'
     leave: 'Покинуть'
@@ -1221,24 +1221,24 @@ studio:
     members_list:
       title: 'Участники студии'
       project_count: '{0} Нет студийных проектов |{1} 1 проект |]1,Inf] %count% студийных проектов'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
+      no_studio_projects: 'Нет проектов в студии'
+      one_studio_project: '1 проект в студии'
+      n_studio_projects: 'Проектов в студии: %count%'
       promote_member: 'Повысить участника до администратора'
       promotion_failed: 'Что-то пошло не так во время повышения ранга этого участника. Повторите попытку позже.'
       ban_member: 'Забанить участника из студии'
       ban_failed: 'Что-то пошло не так во время блокировки этого участника. Повторите попытку позже.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      demote_member: 'Понизить администратора до участника'
+      demotion_failed: 'Не удалось понизить этого администратора. Попробуйте позже.'
+      last_admin: 'Нельзя понизить последнего администратора этой студии.'
     join_requests:
-      title: 'Join Requests'
+      title: 'Запросы на вступление'
       accept: 'Принять'
       decline: 'Отклонить'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: 'Запрос на вступление принят.'
+      decline_success: 'Запрос на вступление отклонён.'
+      error: 'Что-то пошло не так. Попробуйте ещё раз.'
+      no_requests: 'Нет ожидающих запросов на вступление.'
     show_more: 'Показать еще'
     show_less: 'Скрыть'
     admin_settings:
@@ -1261,14 +1261,14 @@ media_library:
   assets_count: 'ресурсы'
   view_all: 'Показать все'
   view_all_category: 'Показать все %category%'
-  back_to_app: 'Back to app'
+  back_to_app: 'Назад в приложение'
 snackbar:
   project_not_found: 'Запрошенный проект недоступен'
   project_not_for_kids: 'Проект был отмечен как небезопасный для детей!'
   project_safe_for_kids: 'Проект был отмечен безопасным для детей!'
   project_not_for_kids_moderator: 'Проект был отмечен модератором. Вы не можете отменить это!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_set_private: 'Проект теперь приватный.'
+  project_set_public: 'Проект теперь общедоступный.'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Дополнительная информация: additionalinfo'
@@ -1278,50 +1278,50 @@ maintenanceinformations:
 MarkNotForKids: Отметить как небезопасный для детей
 MarkSafeForKids: Отметить как безопасный для детей
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: 'Подтверждение'
+  confirmMark: 'Вы уверены, что хотите отметить этот проект как неподходящий для детей?'
+  confirmUnmark: 'Вы уверены, что хотите снять с этого проекта отметку «не для детей»?'
+  confirmYes: 'Да, продолжить!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'Пожаловаться: %content_type%'
+    reason_placeholder: 'Опишите, почему вы отправляете жалобу...'
+    submit: 'Отправить жалобу'
+    success: 'Ваша жалоба отправлена. Спасибо!'
+    error: 'Что-то пошло не так. Попробуйте ещё раз.'
+    duplicate: 'Вы уже пожаловались на этот контент.'
+    trust_too_low: 'Ваш аккаунт слишком новый, чтобы отправлять жалобы.'
+    unverified: 'Убедитесь, что вы вошли в систему и адрес электронной почты вашего аккаунта подтверждён.'
+    rate_limited: 'Вы отправляете жалобы слишком часто. Подождите и попробуйте снова.'
+    suspended: 'Ваш аккаунт заблокирован.'
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: 'Обжаловать'
+    title: 'Обжаловать это решение'
+    placeholder: 'Объясните, почему этот контент не следует скрывать...'
+    submit: 'Отправить апелляцию'
     cancel: "Отменить"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: 'Ваша апелляция отправлена на рассмотрение.'
+    already_pending: 'У вас уже есть апелляция на рассмотрении.'
+    error: 'Что-то пошло не так. Попробуйте ещё раз.'
+    rate_limited: 'Вы отправляете апелляции слишком часто. Подождите и попробуйте снова.'
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: 'Вы пишете комментарии слишком часто. Подождите немного.'
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: 'Вы ставите реакции слишком часто. Подождите немного.'
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: 'Вы подписываетесь и отписываетесь слишком часто. Подождите немного.'
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: 'Вы выполняете действия в студии слишком часто. Подождите немного.'
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: 'Этот проект скрыт из-за жалоб сообщества.'
+    comment: 'Этот комментарий скрыт из-за жалоб сообщества.'
+    user: 'Этот профиль скрыт из-за жалоб сообщества.'
+    user_own: 'Ваш аккаунт заблокирован из-за жалоб сообщества. Вы можете обжаловать это решение.'
+    studio: 'Эта студия скрыта из-за жалоб сообщества.'
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: 'Ваш контент (%content_type%) скрыт из-за жалоб сообщества. Вы можете обжаловать это решение.'
+    appeal_approved: 'Ваша апелляция одобрена. Ваш контент снова виден.'
+    appeal_rejected: 'Ваша апелляция рассмотрена, решение скрыть ваш контент остаётся в силе.'
+    admin_review_needed: 'Контент автоматически скрыт и требует проверки.'
+Reports: 'Жалобы'
+members: 'участников'

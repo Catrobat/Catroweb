@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Communauté Catrobat
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: Partagez, découvrez et remixez des projets créatifs réalisés avec Catrobat. Rejoignez une communauté mondiale de jeunes créateurs qui conçoivent des jeux, des animations et des applications.
+meta.description.media.library: 'Parcourez et téléchargez des médias gratuits pour Catrobat — sons, images et plus encore pour vos projets.'
+meta.og.title.login: Se connecter à Catrobat
+meta.og.description.login: Connectez-vous pour partager vos projets Catrobat avec la communauté.
+meta.og.title.register: Créer un compte Catrobat
+meta.og.description.register: Rejoignez la communauté Catrobat et commencez dès aujourd'hui à partager vos projets créatifs.
+meta.og.description.profile: '%username% sur Catrobat – découvrez ses projets et ses succès.'
 localLanguage: anglais
 username: Nom d'utilisateur
 password: Mot de passe
@@ -18,15 +18,15 @@ aboutPocketCode: À propos de Pocket Code
 about: A propos de Catrobat
 education: Éducation
 chat: Chat et forums
-privacyGuide: Privacy Awareness Guide
+privacyGuide: Guide de sensibilisation à la vie privée
 others: Autres
 tutorials: Aide
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Chat Discord
 passwordsNoMatch: Les mots de passe ne sont pas identiques.
-error: Oops!
+error: Oups !
 cancel: Annuler
 confirm: Confirmer
 report: Signaler
@@ -42,19 +42,19 @@ noDescription: Aucune description disponible.
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: Comment avez-vous créé ce projet ? Avez-vous utilisé des idées, des scripts ou des œuvres d'art d'autres personnes ? Merci ici.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+projectImportedFromScratch: Ce projet a été importé depuis MIT Scratch. Vous pouvez consulter le projet original
+scratchImportedProjectLinkHere: ici.
 country: Pays
 loginText: Identifiant
 privacyPolicy: Politique de confidentialité
 imprint: Mentions légales
 projectDetails: Détails du produit
 somethingWentWrong: 'Ooooops, quelque chose s''est mal passé.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: 'Veuillez vérifier que vous êtes connecté(e) et que l''adresse e-mail de votre compte est vérifiée.'
+accountSuspended: 'Votre compte a été suspendu à la suite de signalements de la communauté. Vous pouvez contester cette décision depuis votre profil.'
+doesNotExist: 'La ressource demandée n''existe pas.'
 pleaseTryAgain: 'Essayez à nouveau !'
-tryAgainButton: 'Try again'
+tryAgainButton: 'Réessayer'
 oldVersionError: 'Veuillez mettre à jour vers la dernière version de Pocket Code !'
 more: 'plus'
 less: 'moins'
@@ -70,7 +70,7 @@ allNotifications: 'Tous'
 FollowersNotifications: 'Abonnés'
 LikeNotifications: 'Réactions'
 CommentNotifications: 'Commentaires'
-RemixNotifications: 'Remixes'
+RemixNotifications: 'Remix'
 wellDone: "Bien joué !"
 done: "Terminé!"
 notificationsReadMessage: "It looks like you dont have any notifications."
@@ -80,21 +80,21 @@ notificationsUnauthorizedError: "Impossible d'autoriser l'utilisateur"
 notificationsClearError: "Impossible de marquer les notifications comme lues !"
 pleaseWait: "Merci de patienter..."
 projects: "Programmes"
-users: "User"
+users: "Utilisateur"
 studios: "Studios"
 oauthPopUpTitle: "Informations de connexion de compte externe"
-oauthInfo: 'Vous venez d''utiliser un compte externe pour vous connecter. Nous avons créé un nom d''utilisateur aléatoire. Si vous voulez changer votre nom d''utilisateur ou créer un nouveau mot de passe pour votre compte, veuillez vous rendre sur ma page de profil. Cliquez %link_start% ici %link_end% pour accéder à votre page de profil'
+oauthInfo: 'Vous venez d''utiliser un compte externe pour vous connecter. Nous avons créé un nom d''utilisateur aléatoire pour vous. Si vous voulez changer votre nom d''utilisateur ou créer un nouveau mot de passe pour votre compte, veuillez vous rendre sur votre page de profil.'
 oauthHere: "ici"
 statistics: "Statistiques"
-languageSelection: "Language selection"
+languageSelection: "Choix de la langue"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: 'Thème'
+  auto: 'Système'
+  auto_description: 'Suivre le réglage de votre appareil'
+  light: 'Clair'
+  light_description: 'Apparence lumineuse'
+  dark: 'Sombre'
+  dark_description: 'Apparence sombre'
   apply: 'Appliquer'
 indexPage:
   recommendedSection:
@@ -117,41 +117,41 @@ follower:
   unfollowButton: "Ne plus suivre %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: Bienvenue sur le %theme% de Catrobat
+    title_mindstorms: Bienvenue sur le site de Catrobat pour Mindstorms EV3 et NXT
+    subtitle: Créez des histoires, des jeux et plus encore...
+    subtitle_embroidery: Brodez vos propres motifs sur vos t-shirts, sacs, pantalons ou coques de smartphone !
+    subtitle_mindstorms: Créez vos propres projets avec vos robots Lego Mindstorms EV3 et NXT
+    download: Télécharger l'application
+    statistics: Plus de statistiques
+  featured: À la une
   open: Ouvrir 
   download: Télécharger
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: Publier un projet
+    drop_here: Glissez-déposez votre fichier .catrobat ici
+    or_browse: ou cliquez pour parcourir
+    button: Publier
+    uploading: Envoi en cours...
+    success: Projet publié avec succès !
+    view_project: Voir le projet
+    upload_another: En publier un autre
+    invalid_file: Veuillez sélectionner un fichier .catrobat
+    file_too_large: Le fichier est trop volumineux
+    error: L'envoi a échoué. Veuillez réessayer.
+    unauthorized: Vous devez être connecté(e) pour publier.
+    rate_limited: Trop d'envois. Veuillez réessayer plus tard.
+    selected_file: 'Fichier sélectionné :'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+      file_size: La taille maximale du fichier est de 100 Mo.
+      app_upload: Vous pouvez aussi publier des projets directement depuis l'application Pocket Code. Notez que les applications sont en cours de refonte et ne prennent pas en charge l'envoi via le web pour le moment.
+      retention: Les projets publiés sont supprimés automatiquement après une période d'inactivité. Connectez-vous régulièrement ou faites télécharger votre projet pour prolonger sa conservation.
+      protection: Les projets particulièrement réussis ou populaires peuvent être protégés de la suppression automatique par les modérateurs.
+  example: Exemples
+  newest: Projets les plus récents
+  recommended: Projets recommandés
+  scratchremixes: Remix Scratch
+  noProjects: Il n'y a actuellement aucun projet.
   shareAction: Partager
   deleteAction: Supprimer le projet
   deleteConfirmation: |+
@@ -160,153 +160,153 @@ project:
     Il n'y a aucun moyen de restaurer vos actions !
     Oui, supprimez-le !
     Annuler
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+  deleteConfirmText: Cette action est irréversible. Votre projet sera définitivement supprimé.
   deleteConfirmationTitle: Êtes-vous sûr(e) ?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
+  deleteNotFoundError: Le projet à supprimer est introuvable parmi vos projets.
+  private: privé
   public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+  setPrivateAction: Rendre privé
+  setPublicAction: Rendre public
+  setPrivateConfirm: "Rendre ce projet privé ? Il n'apparaîtra plus dans les résultats de recherche."
+  setPublicConfirm: "Rendre ce projet public ? Il sera visible par tout le monde."
+  markNotForKidsConfirm: "Marquer ce projet comme inadapté aux enfants ?"
+  markSafeForKidsConfirm: "Retirer la mention « inadapté aux enfants » de ce projet ?"
+  nfkModeratorLocked: "Ce réglage a été verrouillé par un modérateur."
+  confirmSetPrivate: Voulez-vous vraiment rendre ce projet privé ? Il n'apparaîtra plus dans les résultats de recherche.
+  confirmSetPublic: Voulez-vous vraiment rendre ce projet public ? Il sera visible par tout le monde.
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Êtes-vous sûr(e) ?
+    Si vous rendez '%programName%' privé, il ne pourra plus être vu ni trouvé par les autres utilisateurs.
+    Vous pouvez toujours partager le lien de votre projet avec vos amis. Vous pouvez changer la visibilité en touchant l'icône du cadenas.
+    Si vous rendez "%programName%" public, il pourra être vu et trouvé par les autres utilisateurs.
+    Oui, rendre public
+    Oui, rendre privé
+    Non
+  reportCommentConfirmation: Voulez-vous vraiment signaler ce commentaire ?
+  deleteCommentConfirmation: Voulez-vous vraiment supprimer ce commentaire ?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
+    Supprimer le compte ?
+    Voulez-vous vraiment supprimer votre compte ? Cela supprimera aussi vos projets publiés et vos commentaires !
+    Cette action est irréversible !
+    Oui, supprimer !
+    Annuler
+  tooLongName: Le nom du projet est trop long !
+  tooLongDescription: La description du projet est trop longue !
+  tooLongCredits: Les notes et crédits du projet sont trop longs !
   my_projects: Mes projets
-  trending: Trending projects
-  popular: Popular projects
+  trending: Projets tendance
+  popular: Projets populaires
   most:
     viewed: Les plus populaires
     downloaded: Les plus téléchargés
-  random: Random projects
-  related: Related projects
+  random: Projets au hasard
+  related: Projets similaires
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'Explorer les projets'
+    no_projects: "Vous n'avez encore créé aucun projet"
+    no_explore: 'Aucun projet trouvé'
+    load_more: 'Charger plus'
+    upload: 'Publier un projet'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'Protégé'
+    day_left: '1 jour restant'
+    days_left: '%days% jours restants'
+    tooltip: 'Les projets sont supprimés automatiquement après une période d''inactivité. Obtenez plus de téléchargements ou connectez-vous régulièrement pour prolonger leur conservation.'
+    tooltip_protected: 'Ce projet est protégé et ne sera pas supprimé automatiquement.'
+  downloads: '%downloads% téléchargements'
+  sample: Projets d'exemple
+  views: '%views% vues'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Personnes ayant réagi à ce projet"
     all: "Tous"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: '{0}0 remix |{1}1 remix |]1,Inf]%remixes% remix'
+  newRemixesNotificationTitle: '|{1}"%programName%" a 1 nouveau remix : |]1,Inf] "%programName%" a %remixes% nouveaux remix :'
+  submitted: Projets soumis
+  uploaded: Projets publiés
+  reportAsInappropriate: Signaler comme inapproprié
+  reportProgram: Signaler le projet
+  languageVersion: 'Version du langage Catrobat : %languageVersion%'
+  reportLoginText: Veuillez vous %login% pour signaler ce projet.
+  reportDialogHeader: Pourquoi voulez-vous signaler ce projet ?
+  reportDialogReason: Indiquez une raison
+  reportRadioButtonInappropriate: C'est inapproprié
+  reportRadioButtonCopyright: Violation du droit d'auteur
+  reportRadioButtonSpam: C'est du spam
+  reportRadioButtonDislike: Je n'aime pas
+  reportOwnProgram: Vous ne pouvez pas signaler votre propre projet.
+  reportAlready: Vous avez déjà signalé ce projet.
+  reportDone: Vous avez signalé ce projet !
+  updateAppHeaderDownload: Téléchargement impossible
+  updateAppTextDownload: 'Veuillez mettre à jour votre application vers la dernière version. Attention : toutes les fonctionnalités Android ne sont pas encore disponibles sur iOS.'
+  updateAppTextDownloadApk: Le téléchargement de l'APK n'est actuellement disponible que sur Android, pas sur iOS.
+  updateAppHeader: Mettre à jour l'application
+  updateAppText: Veuillez mettre à jour votre application vers la dernière version.
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: Découvrez ce projet Catrobat
+  show_more: Afficher plus
   comments: Commentaires
-  send: Send
+  send: Envoyer
   delete: supprimer
   report: Signaler
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: Répondre
+  report_popup: Le commentaire a bien été signalé.
+  report_popup_header: Signalé
+  deleted_popup: Le commentaire a bien été supprimé.
+  deleted_popup_header: Supprimé
+  noAdminRights: Vous n'avez pas les droits d'administration. Veuillez vous connecter en tant qu'administrateur.
+  editProject: Modifier le projet
+  closeProjectEditor: Fermer l'éditeur de projet
   closeEditorPrompt: Voulez-vous enregistrer vos modifications?
   btnDiscard: Abandonner
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: Écrire un commentaire
+  thumbsUp: Pouce levé !
+  smile: Sourire !
+  love: J'adore !
+  wow: Waouh !
+  linkTitle: Lien
+  link: Copier le lien du projet dans le presse-papiers
   reactionsText: Réactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadErrorText: Une erreur est survenue lors du téléchargement du projet. Veuillez réessayer plus tard.
+  downloadStartText: Le téléchargement a commencé...
+  downloading: Téléchargement...
+  openInApp: Ouvrir dans Pocket Code
+  downloaded: Téléchargé
+  showTranslation: Afficher la traduction
+  hideTranslation: Masquer la traduction
+  translatedByLine: Traduit par %provider% de %sourceLanguage% vers %targetLanguage%
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  confrimDelete: Voulez-vous vraiment supprimer la traduction ?
   default: Par défaut
   save: Enregistrer
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: 'Traduction en %language%'
+  editDefault: Modifier la version par défaut
+  editTranslation: Modifier la traduction en %language%
+  translations: Traductions
+  createTranslation: Créer une traduction
+  deletedComment: '**Supprimé**'
+  replyLabel: réponse
+  repliesLabel: réponses
+  notForKids: Inadapté aux enfants
 remixGraph:
-  title: Remixes
+  title: Remix
   showRemixGraph: 'Graphique de remix'
   by: 'par'
   open: 'Ouvrir '
   showPaths: 'Afficher les chemins d''accès'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
+  loading: 'Chargement du graphe des remix...'
+  error: 'Impossible de charger le graphe des remix.'
+  empty: 'Aucune donnée de graphe des remix n''est encore disponible pour ce projet.'
+  remixesLabel: 'Remix'
   projectsLabel: 'Programmes'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  scratchLabel: 'Origines Scratch'
+  interactHint: 'Sélectionnez un nœud pour ouvrir le projet ou mettre en évidence son chemin de remix.'
+  zoomIn: 'Zoom avant'
+  zoomOut: 'Zoom arrière'
+  resetView: 'Réinitialiser la vue'
+  projectNotAvailableErrorTitle: 'Désolé...'
+  projectNotAvailableErrorDescription: 'Ce projet n''est plus disponible !'
+  projectNotAvailable: 'Indisponible'
+  projectUnknownUser: 'Utilisateur inconnu'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -321,88 +321,87 @@ accountConfirmation:
     <p>
     Cher %username%.<br>
     <br>
-    Pour terminer l'activation de votre compte - veuillez cliquer sur <a href=%confirmationUrl%>ici.</a><br>.
-    <br>
+    Pour terminer l'activation de votre compte - veuillez cliquer sur <a href="%confirmationUrl%">ici.</a><br>
     Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.<br>
     <br>
     Meilleures salutations,<br>
     Votre équipe Catrobat.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "Vérifiez votre adresse e-mail"
+  welcome: "Bienvenue sur Catrobat !"
+  greeting: "Merci pour votre inscription ! Veuillez vérifier votre adresse e-mail pour commencer."
+  message: "Cliquez sur le bouton ci-dessous pour confirmer votre adresse e-mail. Ce lien est valable jusqu'à %time% et ne peut être utilisé qu'une seule fois."
+  button: "Vérifier l'adresse e-mail"
+  ignore: "Si vous n'avez pas créé de compte Catrobat, vous pouvez ignorer cet e-mail."
+  autoDelete: "Les comptes non vérifiés sont supprimés automatiquement après 30 jours."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "Consentement parental requis pour le compte Catrobat de votre enfant"
+    title: "Consentement parental requis"
+    greeting: "Bonjour,"
+    message: "Votre enfant %username% a créé un compte sur Catrobat et a vérifié son adresse e-mail."
+    explanation: "Catrobat est une plateforme éducative gratuite où les jeunes apprennent à programmer en créant des applications, des jeux et des animations. Conformément à la réglementation européenne sur la protection des enfants, nous avons besoin de votre consentement avant que votre enfant puisse participer pleinement à la communauté. Veuillez cliquer sur le bouton ci-dessous pour donner votre consentement."
+    button: "Donner le consentement parental"
+    ignore: "Si vous n'attendiez pas cet e-mail, vous pouvez l'ignorer. Sans consentement, le compte aura des fonctionnalités limitées."
+    whatIsCatrobat: "Catrobat est une plateforme éducative de programmation gratuite et à but non lucratif. Pour en savoir plus : catrobat.org."
+    manageLink: 'Vous pouvez gérer le compte de votre enfant à tout moment via notre <a href="%portalUrl%" style="color: #00acc1;">Espace parents</a>. En savoir plus sur <a href="%infoUrl%" style="color: #00acc1;">vos droits en tant que parent</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "Consentement accordé"
+    message: "Merci ! Le compte de %username% est maintenant entièrement activé."
+    continueButton: "Découvrir des projets"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Parents et tuteurs"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Informations pour les parents et tuteurs"
+    intro: "Catrobat prend au sérieux la sécurité et la vie privée des jeunes utilisateurs. Cette page explique comment nous protégeons votre enfant et quels sont vos droits."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Qu'est-ce que Catrobat ?"
+      text: "Catrobat est une plateforme éducative gratuite et à but non lucratif où les jeunes apprennent la programmation en créant leurs propres applications, jeux et animations. La plateforme est disponible dans le monde entier et utilisée dans des contextes éducatifs."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Quelles données collectons-nous ?"
+      text: "Nous collectons uniquement les données nécessaires au fonctionnement de la plateforme : nom d'utilisateur, adresse e-mail, date de naissance et les projets que votre enfant crée et publie. Pour les utilisateurs de moins de 14 ans, nous enregistrons également l'adresse e-mail d'un parent ou tuteur à des fins de consentement. Nous ne vendons ni ne partageons aucune donnée personnelle avec des tiers."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Vos droits en tant que parent ou tuteur"
+      text: "Conformément à la réglementation européenne sur la protection des enfants (RGPD) et à la COPPA, vous avez le droit de : consulter les données que nous détenons sur votre enfant, en demander une copie, retirer votre consentement à tout moment (ce qui restreint le compte) et demander la suppression définitive du compte de votre enfant et de toutes les données associées."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Quelles restrictions s'appliquent aux comptes de mineurs ?"
+      text: "Les utilisateurs de moins de 16 ans ne peuvent pas publier ni lire de commentaires, suivre d'autres utilisateurs ou voir les contenus marqués comme inadaptés aux enfants. Ils peuvent toujours créer et publier des projets, parcourir les projets publics et réagir aux projets avec des « j'aime ». Ces restrictions visent à offrir un environnement d'apprentissage sûr."
+    manageButton: "Gérer le compte de votre enfant"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Espace parents"
+    description: "Saisissez votre adresse e-mail pour recevoir un lien sécurisé permettant de gérer le compte Catrobat de votre enfant. Le lien sera envoyé à l'adresse e-mail indiquée lors de l'inscription."
+    emailLabel: "Votre adresse e-mail"
+    submitButton: "Envoyer le lien de gestion"
+    infoLink: "En savoir plus"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Consultez votre boîte de réception"
+      message: "Si un compte est associé à cette adresse e-mail, nous avons envoyé un lien de gestion. Veuillez consulter votre boîte de réception et suivre le lien pour gérer le compte de votre enfant."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Gérer les comptes enfants"
+    description: "Vous gérez les comptes associés à %email%."
+    consentStatus: "Statut du consentement"
+    accountCreated: "Compte créé"
+    email: "E-mail de l'enfant"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "Accordé"
+      pending: "En attente"
+      revoked: "Retiré"
+    grantButton: "Accorder le consentement"
+    revokeButton: "Retirer le consentement"
+    revokeConfirm: "Voulez-vous vraiment retirer votre consentement ? Le compte aura des fonctionnalités limitées."
+    exportButton: "Exporter les données"
+    deleteButton: "Supprimer le compte"
+    deleteConfirm: "Voulez-vous vraiment supprimer définitivement ce compte ? Cette action est irréversible."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Gérer le compte Catrobat de votre enfant"
+      title: "Gestion du compte"
+      greeting: "Bonjour,"
+      message: "Vous avez demandé un lien pour gérer le compte Catrobat de votre enfant (%usernames%). Cliquez sur le bouton ci-dessous pour consulter et gérer le compte."
+      button: "Gérer le compte"
+      ignore: "Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet e-mail."
 passwordRecovery:
   subject: Votre récupération de mot de passe Catrobat
   message: |
@@ -419,21 +418,21 @@ passwordRecovery:
     <p>
     Cher %username%.<br>
     <br>
-    Vous avez demandé la réinitialisation de votre mot de passe sur <a href=%appplication_url%>Pocket Code</a> car vous avez oublié votre mot de passe.
+    Vous avez demandé la réinitialisation de votre mot de passe sur <a href="%appplication_url%">Pocket Code</a> car vous avez oublié votre mot de passe.
     Si vous n'avez pas fait cette demande, veuillez l'ignorer. Il expirera et deviendra inutile dans 24 heures.<br>
     <br>
-    Pour réinitialiser votre mot de passe et en créer un nouveau, veuillez cliquer sur <a href=%confirmationUrl%>ici.</a><br>.
+    Pour réinitialiser votre mot de passe et en créer un nouveau, veuillez cliquer sur <a href="%confirmationUrl%">ici.</a><br>
     <br>
-    Vous pouvez utiliser votre nom d'utilisateur et votre mot de passe à tout moment pour accéder à la communauté<a href=%appplication_url%>Pocket Code</a>.<br>
-    Pour ce faire, il vous suffit de vous rendre sur la page suivante : <a href=%loginPage%>Login Page</a><br>.
-    Pour modifier les détails de votre profil, rendez-vous sur cette <a href=%profilePage%>page</a>.<br>
+    Vous pouvez utiliser votre nom d'utilisateur et votre mot de passe à tout moment pour accéder à la communauté <a href="%appplication_url%">Pocket Code</a>.<br>
+    Pour ce faire, il vous suffit de vous rendre sur la page suivante : <a href="%loginPage%">Page de connexion</a><br>
+    Pour modifier les détails de votre profil, rendez-vous sur cette <a href="%profilePage%">page</a>.<br>
     <br>
     Meilleures salutations,<br>
     Votre équipe Catrobat.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: À propos de moi
+  currentlyWorkingOn: Travaille actuellement sur
   edit: Modifier votre profil
   saveChanges: enregistrer les changements
   newPass: nouveau mot de passe
@@ -462,16 +461,16 @@ profile:
     submitSuccess: enregistré!
   reallyDeleteProgram: Voulez-vous vraiment supprimer votre projet
   programsOf: Projets de
-  picture: Profile picture
+  picture: Photo de profil
   changePicture: Changer l'image
   goToScratchProfile: Profil sur Scratch
 myprofile:
-  userSettings: User settings
+  userSettings: Paramètres utilisateur
   profileSettings: Éditer le profil
   securitySettings: Modifier le mot de passe
   accountSettings: Paramètres du compte
-  accountVerification: Verify account
-  account: Account
+  accountVerification: Vérifier le compte
+  account: Compte
   editProfile: Éditer le profil
   edit: Éditer
   done: Terminé
@@ -481,21 +480,21 @@ myprofile:
   email: Courriel
   deleteAccount: Supprimer mon compte
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+    Attention :
+    Vous avez créé %num_projects% projet(s) et avez %num_followers% abonné(s). Tous vos projets seront supprimés. Vous ne pourrez plus vous connecter et vos projets disparaîtront de toutes les listes. La suppression de votre profil est irréversible !
+    Voulez-vous vraiment nous quitter ?
+  exportData: Télécharger mes données
+  exportDataDescription: Vous avez le droit de recevoir une copie de vos données personnelles. Cela comprend les informations de votre profil, vos projets, commentaires, réactions et abonnés.
+  exportDataLoading: Téléchargement...
+  exportDataError: Une erreur est survenue lors de l'export de vos données. Veuillez réessayer plus tard.
+  exportDataRateLimited: Vous ne pouvez exporter vos données qu'une fois par jour. Veuillez réessayer demain.
   editAccountSettings: Modifier les paramètres du compte
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  profileChangeSuccess: Votre profil a bien été modifié.
+  unspecifiedError: La modification de votre profil n'a pas fonctionné. Veuillez réessayer ou nous prévenir si le problème persiste !
+  verifyAccountText: Nous allons vous envoyer un e-mail contenant un lien pour vérifier votre compte. Cliquez sur ce lien dans l'heure qui suit ; vous ne pouvez demander qu'un seul e-mail par jour.
+  verifyAccountButton: Envoyer l'e-mail
+  verifyAccountMailSent: E-mail envoyé. Veuillez consulter votre boîte de réception
+  verifyAccountMailFailed: Vous ne pouvez demander qu'un seul e-mail par jour
 licenseToPlay:
   link: 'Licence pour jouer'
   title: 'Licence de jeu - Partagez et créditez'
@@ -547,16 +546,16 @@ termsOfUse:
   version: Version 1.3, 4 mars 2014
 search:
   dotdotdot: Recherche...
-  search: Search projects, users & studios
+  search: Rechercher des projets, utilisateurs et studios
   inMediaLib: Rechercher dans la médiathèque
-  inMediaCategory: Search in media category
+  inMediaCategory: Rechercher dans la catégorie de médias
   results: Résultats de recherche
   resultcount: Votre recherche a retourné %count% résultats
   fail: Veuillez saisir au moins un seul terme de recherche
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noUsers: Aucun utilisateur trouvé
+  noProjects: Aucun projet trouvé
+  noStudios: Aucun studio trouvé
+  sameSearchMessage: "On dirait que vous y êtes déjà ! Essayez une autre recherche ?"
 menu:
   profile: Mon profil
   login: Se connecter
@@ -568,17 +567,17 @@ menu:
   mediaLibrary: Bibliothèque multimédia
   studio: Studios
   language: Langue
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: Aucune option de langue disponible.
 login:
   login: Se connecter
   button:
-    loginNow: Login now
+    loginNow: Se connecter
     createAccount: Créer un compte
-    forgetPassword: Forget password?
+    forgetPassword: Mot de passe oublié ?
   oauth:
-    title: Or you can join with
+    title: Ou inscrivez-vous avec
   passOrUser: Votre mot de passe ou votre nom d'utilisateur est incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: 'Votre compte a été suspendu. Si vous pensez qu''il s''agit d''une erreur, veuillez contacter le support.'
   noUsername: Votre nom d'utilisateur ou votre adresse e-mail n'a pas été trouvé.
   forgotPass: Identifiants oubliés?
   recoverPassSend: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
@@ -595,69 +594,69 @@ login:
   passwordFirst: Mot de passe
   passwordSecond: Confirmation du mot de passe
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: S'inscrire
+  subText: "En continuant, vous créez un compte sur la communauté Catrobat et acceptez nos %var1% et %var2%."
+  dateOfBirth: Date de naissance
+  dateOfBirthInfo: "Nous demandons votre date de naissance pour respecter la réglementation européenne sur la protection des enfants (RGPD/COPPA) et offrir une expérience sûre aux plus jeunes."
+  parentEmail: "E-mail du parent/tuteur"
+  parentEmailInfo: "Obligatoire pour les utilisateurs de moins de 14 ans. Nous enverrons une demande de consentement à cette adresse."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: Finalisez votre inscription
+    info: "Veuillez indiquer votre date de naissance pour continuer à utiliser la plateforme."
     submit: Continuer
   button:
     cancel: Annuler
     createAccount: Créer un compte
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Consultez votre boîte de réception !"
+    message: "Nous vous avons envoyé un e-mail de vérification. Cliquez sur le lien qu'il contient pour activer votre compte."
+    helpTitle: "Vous n'avez pas reçu l'e-mail ?"
+    hint: "Vérifiez votre dossier de spam. Le lien est valable 24 heures."
+    resendButton: "Renvoyer l'e-mail de vérification"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "En attente du consentement parental"
+    message: "Votre adresse e-mail est vérifiée ! Avant de pouvoir utiliser pleinement la plateforme, un parent ou tuteur doit donner son consentement."
+    sentTo: "Une demande de consentement a été envoyée à %email%"
+    helpTitle: "Vous n'avez pas reçu l'e-mail ? Besoin d'aide ?"
+    hint: "Demandez à votre parent de vérifier son dossier de spam. Le lien est valable 24 heures."
+    resendButton: "Renvoyer l'e-mail de consentement"
+    wrongEmail: "Vous avez saisi une mauvaise adresse e-mail parentale ?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "Le consentement parental a été retiré"
+    message: "Votre parent ou tuteur a retiré son consentement pour votre compte. Votre compte a des fonctionnalités limitées jusqu'à ce que le consentement soit à nouveau accordé."
+    newEmailPlaceholder: "Nouvel e-mail du parent"
+    changeButton: "Mettre à jour et renvoyer"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Récupération du compte
+  description: Si vous vous souvenez de l'adresse e-mail ou du nom d'utilisateur de votre compte, nous pouvons vous envoyer un lien pour réinitialiser votre mot de passe.
   button:
     cancel: Annuler
-    submit: Recover password
+    submit: Récupérer le mot de passe
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Réinitialiser votre mot de passe"
+    description: "Si vous vous souvenez de l'adresse e-mail de votre compte, nous pouvons vous envoyer un lien pour réinitialiser votre mot de passe."
     button:
-      submit: "Send reset email"
+      submit: "Envoyer l'e-mail de réinitialisation"
       cancel: "Annuler"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "Consultez vos e-mails"
+    description: "Si un compte correspond à votre adresse e-mail, un e-mail contenant un lien pour réinitialiser votre mot de passe vient d'être envoyé. Ce lien expirera dans %time%."
+    descriptionTwo: "Vous pouvez demander une nouvelle réinitialisation du mot de passe toutes les %throttleLimit% heures."
+    descriptionThree: "Si vous n'avez reçu aucun e-mail, veuillez vérifier votre dossier de spam ou écrire à notre support à l'adresse %email-webmaster%."
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "Pour réinitialiser votre mot de passe, veuillez suivre le lien suivant"
+    expire: "Ce lien expirera dans %time%."
+    cheers: "À bientôt !"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "Réinitialiser votre mot de passe"
+    content: "Vous avez récemment demandé la réinitialisation du mot de passe de votre compte Catrobat. Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe. Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet e-mail."
+    visitLink: "Réinitialiser le mot de passe"
+    expire: "Ce lien est valable %time% et ne peut être utilisé qu'une seule fois."
   reset:
-    title: "Reset your password"
+    title: "Réinitialiser votre mot de passe"
     button:
       submit: "Réinitialiser le mot de passe"
 apk:
@@ -669,7 +668,7 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: Quelque chose n'a pas fonctionné. Veuillez réessayer ou nous prévenir si le problème persiste !
   username:
     blank: Le pseudo ne doit pas être vide
     invalid: Ce nom d'utilisateur est invalide
@@ -705,13 +704,13 @@ errors:
   token: 'Échec de l''authentification de l''appareil : jeton d''authentification invalide !'
   uploadTokenAuthFailed: 'Échec de l''authentification du jeton de téléchargement.'
   project:
-    invalid: Invalid project.
+    invalid: Projet invalide.
   languageversion:
     tooold: 'Désolé, votre projet contient une ancienne version de la langue Catrobat ! Utilisez-vous la dernière version de Pocket Code ?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'Désolé, vous utilisez une ancienne version de Pocket Code. Veuillez mettre à jour vers la dernière version.'
   authentication:
-    title: Login did not work
+    title: La connexion n'a pas fonctionné
     webview: |
       Vos identifiants d'utilisateur sont incorrects.
       Veuillez essayer de vous connecter à nouveau dans l'application.
@@ -732,7 +731,7 @@ failure:
   upload: Il y a eu une erreur lors du téléchargement de votre application.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Vérifiez votre adresse e-mail'
 api:
   registerUser:
     emailMissing: 'Courriel manquant'
@@ -751,46 +750,46 @@ api:
     passwordTooLong: 'Mot de passe trop long'
     passwordInvalidChars: 'Le mot de passe contient des caractères invalides'
     usernameContainsEmail: "Le nom d'utilisateur ne doit pas contenir d'adresse e-mail"
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: "Le nom d'utilisateur ne doit pas contenir de lien"
     countryCodeInvalid: "Code pays invalide"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    pictureInvalid: "Photo de profil invalide ou non prise en charge"
+    dateOfBirthMissing: "La date de naissance est obligatoire"
+    dateOfBirthInvalid: "La date de naissance n'est pas valide"
+    tooYoung: "Vous devez avoir au moins 3 ans pour créer un compte"
+    parentEmailMissing: "L'adresse e-mail d'un parent est obligatoire pour les utilisateurs de moins de 14 ans"
+    parentEmailInvalid: "L'adresse e-mail du parent n'est pas valide"
+    parentEmailSameAsUser: "L'adresse e-mail du parent doit être différente de la vôtre"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Le mot de passe actuel est manquant"
+    currentPasswordWrong: "Le mot de passe actuel est incorrect"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Le nom ne peut pas être vide'
+    nameTooLong: 'Nom trop long'
+    descriptionTooLong: 'Description trop longue'
+    creditsTooLong: 'Notes et crédits trop longs'
+    screenshotInvalid: 'Capture d''écran du projet invalide ou non prise en charge'
   projectsPost:
     invalid_checksum: 'Somme de contrôle invalide. Essayez de télécharger à nouveau !'
     upload_error: 'Erreur lors du téléchargement. Essayez de télécharger à nouveau !'
     creating_error: 'Erreur lors de la création de l''entité du projet. Essayez de télécharger à nouveau !'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Échec de l''enregistrement des détails du projet.'
+    screenshotError: 'Échec de la lecture, de la conversion ou de l''enregistrement de la capture d''écran. Veuillez vérifier votre saisie.'
+    notFound: 'Le projet à modifier est introuvable.'
+    forbidden: 'Modification du projet non autorisée. Êtes-vous toujours connecté(e) ?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'Nom manquant'
+    nameEmpty: 'Le nom ne peut pas être vide'
+    nameTooShort: 'Nom trop court'
+    nameTooLong: 'Nom trop long'
+    nameAlreadyInUse: 'Nom déjà utilisé'
+    descriptionMissing: 'Description manquante'
+    descriptionEmpty: 'Description vide'
+    descriptionTooShort: 'Description trop courte'
+    descriptionTooLong: 'Description trop longue'
+    imageFileInvalid: 'Fichier image invalide'
+    imageFileInvalidType: 'Type de fichier image invalide'
+    imageFileTooLarge: 'Fichier image trop volumineux'
 #languages and countries
 language:
   arabic: Arabe
@@ -803,7 +802,7 @@ language:
   danish: Danois
   dutch: Hollandais
   english_united_kingdom: Anglais (Royaume-Uni)
-  english_united_states: English (United States)
+  english_united_states: Anglais (États-Unis)
   estonian: Estonien
   filipino: Filipino
   finnish: Finlandais
@@ -874,7 +873,7 @@ codeview:
   scripts: 'Scripts'
   bricks: 'Briques'
   objects: 'Acteurs et objets'
-  looks: 'Looks'
+  looks: 'Apparences'
   sounds: 'Sons'
   globals: 'Globaux'
   locals: 'Locaux'
@@ -889,13 +888,13 @@ codeview:
   dataBricks: 'Briques de données'
   specialBricks: 'Briques spéciales'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'Vue du code'
+  loading: 'Chargement de la vue du code...'
+  error: 'Impossible de charger la vue du code.'
+  retry: 'Réessayer'
+  empty: 'Ce projet ne contient pas de code.'
   scripts: 'Scripts'
-  looks: 'Looks'
+  looks: 'Apparences'
   sounds: 'Sons'
 codeStatistics:
   title: "Statistiques du code"
@@ -906,26 +905,26 @@ codeStatistics:
   controlBricks: 'Contrôle'
   motionBricks: 'Mouvement'
   soundBricks: 'Sons'
-  looksBricks: 'Looks'
+  looksBricks: 'Apparences'
   penBricks: 'Stylo'
   dataBricks: 'Données'
   deviceBricks: 'Appareil'
   specialBricks: 'Spécial'
-  yourScore: 'Your score:'
+  yourScore: 'Votre score :'
   points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
+  abstraction: 'Abstraction et décomposition des problèmes'
+  parallelism: 'Parallélisme'
+  logicalThinking: 'Pensée logique'
+  synchronization: 'Synchronisation'
+  flowControl: 'Contrôle du flux'
+  userInteractivity: 'Interactivité utilisateur'
+  dataRepresentation: 'Représentation des données'
+  level: 'Niveau'
+  loading: 'Chargement...'
   bonus: 'Bonus'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Rejoignez plus de %user_count% esprits créatifs !"
+  text: "Avec déjà %project_count% projets incroyables partagés, le prochain pourrait être le vôtre. Téléchargez notre application et commencez à créer dès aujourd'hui"
 privacy-policy:
   header: Politique de confidentialité
   version: Version 2.2, 17 Octobre 2019
@@ -946,7 +945,7 @@ catro-notifications:
   noComments: "Il semble que vous n'ayez aucune notification de commentaire."
   noReactions: "Il semble que vous n'ayez aucune notification de réaction."
   noRemixes: "Il semble que vous n'ayez aucune notification de remixage."
-  noStudios: "It looks like you don't have any studio notifications."
+  noStudios: "Il semble que vous n'ayez aucune notification de studio."
   tab:
     studio: Studio
     project: Programmes
@@ -957,25 +956,25 @@ catro-notifications:
   follow:
     message: 'User %user_link% follows you now.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% a créé un nouveau jeu %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% a commenté dans le studio %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% a ajouté %program_link% au studio %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'Votre demande pour rejoindre le studio %studio_name% a été acceptée.'
+    declined: 'Votre demande pour rejoindre le studio %studio_name% a été refusée.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'Votre projet %program_link% sera supprimé automatiquement dans %days% jours. Publiez une nouvelle version ou obtenez plus de téléchargements pour le conserver.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'Votre projet "%project_name%" a été supprimé automatiquement pour cause d''inactivité. Publiez-le à nouveau si vous souhaitez toujours le partager.'
+  noProjects: "Il semble que vous n'ayez aucune notification de projet."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: Lien copié dans le presse-papiers !
+  success_project: Lien du projet copié dans le presse-papiers !
+  success_user: Lien de l'utilisateur copié dans le presse-papiers !
   fail: Impossible de copier le lien dans le presse-papiers ! :(
 next: Suivant
 previous: Précédent
@@ -1000,13 +999,13 @@ flavor:
   create@school: Créer@École
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Tous droits réservés.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Ce site a besoin de JavaScript pour fonctionner. Veuillez activer JavaScript dans votre navigateur ou demander de l'aide à un adulte."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: "Nous utilisons des cookies pour améliorer nos services. Aucune donnée n'est vendue ni partagée."
   accept: "Accepter"
   decline: "Refuser"
   privacy-link: "Politique de confidentialité"
-  settings-link: "Cookie Settings"
+  settings-link: "Paramètres des cookies"
 agree: Accepter
 disagree: Refuser
 profileLoader:
@@ -1019,19 +1018,19 @@ share:
   success: 'Partage réussi'
 copy: 'Copier le lien'
 checkOutProject: 'Jetez un œil à ce projet :'
-checkOutUser: 'Check out this user:'
+checkOutUser: 'Découvrez cet utilisateur :'
 community: 'Communauté Catrobat'
 back_to_app: 'Quitter la communauté'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: Projets les plus récents
+  random: Projets au hasard
   most_viewed: Les plus populaires
   most_downloaded: Les plus téléchargés
   example: Exemple
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  scratch: Remix Scratch
+  recommended: Projets recommandés
+  popular: Les plus populaires
+  trending: Projets tendance
 achievements:
   sidebar:
     title: 'Réalisations'
@@ -1076,19 +1075,19 @@ achievements:
         description: 'Créer un compte utilisateur'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Participant(e) à la Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Bilingue"
+        description: "Traduisez vos projets dans 2 langues"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Trilingue"
+        description: "Traduisez vos projets dans 3 langues"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Linguiste"
+        description: "Traduisez vos projets dans 5 langues"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Vérifié"
+        description: "Vérifiez votre compte"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -1109,7 +1108,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: 'Extensions'
+  title: '{0} |{1} Extension |]1,Inf] Extensions'
   extension:
     arduino:
       title: Arduino
@@ -1124,59 +1123,59 @@ extensions:
     mindstorms:
       title: Tempêtes mentales
     multiplayer:
-      title: Multiplayer
+      title: Multijoueur
 studio:
   title: 'Studios'
   singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  create_studio: 'Créer un studio'
+  delete_studio: 'Supprimer le studio'
   cancel_studio: 'Annuler'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: 'Nom du studio'
+  studio_description: 'Description du studio'
+  is_public: 'Le rendre public ?'
+  enable_comments: 'Activer les commentaires ?'
+  cover_image: 'Ajouter une image de couverture'
+  cover_image_empty: 'Aucune image choisie.'
+  cover_image_hint: '1 Mo max. Formats acceptés : JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'L''image a été compressée automatiquement pour respecter la limite de 1 Mo.'
+  cover_image_compressing: 'Compression de l''image...'
+  cover_image_still_too_large: 'L''image est trop volumineuse même après compression. Veuillez choisir un fichier plus petit.'
+  cover_image_invalid_type: 'Type d''image invalide. Veuillez utiliser JPEG, PNG, GIF ou WebP.'
+  cover_image_compression_failed: 'Impossible de traiter l''image. Veuillez essayer un autre fichier.'
+  cover_image_alt: 'Votre image de couverture'
+  cover_image_remove: 'Supprimer l''image'
+  popular: 'Studios populaires'
+  join: 'Rejoindre'
+  leave: 'Quitter'
   report: 'Signaler'
   public: 'public'
-  private: 'Invite-only'
+  private: 'Sur invitation'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: 'Studios rejoints'
+    public_studios: 'Studios publics'
+    private_studios: 'Studios sur invitation'
+    no_studios: 'Aucun studio pour l''instant'
+    my_studios: 'Mes studios'
+    explore: 'Explorer les studios'
+    no_joined: "Vous n'avez encore rejoint aucun studio"
+    joined: 'Rejoint'
+    load_more: 'Charger plus'
     open: 'Ouvrir '
     share: 'Partager'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: 'Lien copié dans le presse-papiers !'
+    leave_confirm_title: 'Quitter ce studio ?'
     cancel: 'Annuler'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: 'Annuler la demande'
+    cancel_request_confirm_title: 'Annuler la demande d''adhésion ?'
     admin: 'Administrateur'
-    member: 'Member'
+    member: 'Membre'
   details:
-    add_project: 'click to add the project'
+    add_project: 'cliquez pour ajouter le projet'
     add: 'Ajouter'
     showMore: 'afficher plus'
     showLess: 'montrer moins'
     are_you_sure: 'Êtes-vous sûr(e) ?'
-    no_way_of_return: 'This cannot be undone.'
+    no_way_of_return: 'Cette action est irréversible.'
     delete_it: 'supprimer'
     remove_project: 'Retirer du studio'
     remove_project_error: 'Impossible de supprimer le projet du studio!'
@@ -1184,65 +1183,65 @@ studio:
     no_projects: 'Studio ne contient pas encore de projets'
     projects:
       title: 'Programmes'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: 'Ajouter des projets'
+      open_project: 'Ouvrir le projet'
       download: 'Télécharger'
       share: 'Partager'
       remove_from_studio: 'Retirer du studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio_title: 'Retirer le projet du studio ?'
+      remove_from_studio_text: 'Vous pourrez l''ajouter de nouveau plus tard si vous changez d''avis.'
+      share_success: 'Lien copié dans le presse-papiers !'
+      share_fail: 'Impossible de copier le lien.'
+      no_projects_empty_state: 'Vous n''avez encore aucun projet à ajouter. Créez-en d''abord un dans Pocket Code !'
+      add_selected: 'Ajouter la sélection'
+    no_available_projects: 'Aucun projet disponible à ajouter.'
     updateCoverError: 'Un problème est survenu lors de la mise à jour de la couverture du studio !'
-    join: 'Join'
-    leave: 'Leave'
+    join: 'Rejoindre'
+    leave: 'Quitter'
     report: 'Signaler'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'En attente'
+    decline: 'Refusé'
     comments:
       title: 'Commentaires'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Écrivez quelque chose'
+      replies: 'réponses'
+      send: 'envoyer'
+      no_comments: 'Ce studio n''a encore aucun commentaire.'
+      disabled_comments: 'Les commentaires ont été désactivés pour ce studio.'
+      remove_comment: 'Supprimer le commentaire'
+      post_error: 'Une erreur est survenue lors de la publication de votre commentaire. Réessayez plus tard.'
+      remove_error: 'Une erreur est survenue lors de la suppression du commentaire. Réessayez plus tard.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'Activités'
+      join_studio: '%user% a rejoint le studio.'
+      add_project: '%user% a ajouté un projet.'
+      add_comment: '%user% a laissé un commentaire.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'Membres du studio'
+      project_count: '{0} Aucun projet de studio |{1} 1 projet de studio |]1,Inf] %count% projets de studio'
+      no_studio_projects: 'Aucun projet de studio'
+      one_studio_project: '1 projet de studio'
+      n_studio_projects: '%count% projets de studio'
+      promote_member: 'Promouvoir le membre administrateur'
+      promotion_failed: 'Une erreur est survenue lors de la promotion de ce membre. Réessayez plus tard.'
+      ban_member: 'Bannir le membre du studio'
+      ban_failed: 'Une erreur est survenue lors du bannissement de ce membre. Réessayez plus tard.'
+      demote_member: 'Rétrograder l''administrateur en membre'
+      demotion_failed: 'Une erreur est survenue lors de la rétrogradation de cet administrateur. Réessayez plus tard.'
+      last_admin: 'Impossible de rétrograder le dernier administrateur de ce studio.'
     join_requests:
-      title: 'Join Requests'
+      title: 'Demandes d''adhésion'
       accept: 'Accepter'
       decline: 'Refuser'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: 'Demande d''adhésion acceptée.'
+      decline_success: 'Demande d''adhésion refusée.'
+      error: 'Une erreur est survenue. Veuillez réessayer.'
+      no_requests: 'Aucune demande d''adhésion en attente.'
     show_more: 'More information'
     show_less: 'Less information'
     admin_settings:
       title: 'Paramètres'
-      studio_name: 'Studio Name'
+      studio_name: 'Nom du studio'
       studio_description: 'Description'
       toggle_allow_comments: 'Commentaires'
       toggle_privacy: 'Public'
@@ -1255,72 +1254,72 @@ media_library:
       sound: 'Type : son'
       movie: 'Type : vidéo'
       default: 'Type : inconnu'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: 'Aucune catégorie de médias disponible pour l''instant.'
+  no_results: 'Aucun résultat trouvé.'
+  assets_count: 'médias'
+  view_all: 'Tout voir'
+  view_all_category: 'Voir tout : %category%'
+  back_to_app: 'Retour à l''application'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'Le projet demandé n''est pas disponible'
+  project_not_for_kids: 'Le projet a été marqué comme inadapté aux enfants !'
+  project_safe_for_kids: 'Le projet a été marqué comme adapté aux enfants !'
+  project_not_for_kids_moderator: 'Le projet a été marqué par un modérateur. Vous ne pouvez pas annuler cela !'
+  project_set_private: 'Le projet est maintenant privé.'
+  project_set_public: 'Le projet est maintenant public.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'Informations complémentaires : additionalInfo'
+    feature_1: 'La fonctionnalité featureName n''est pas disponible de maintenanceStart à maintenanceEnd'
+    feature_2: 'La fonctionnalité'
+    feature_3: 'La fonctionnalité'
+MarkNotForKids: Marquer comme inadapté aux enfants
+MarkSafeForKids: Marquer comme adapté aux enfants
 notForKids:
   confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmMark: Voulez-vous vraiment marquer ce projet comme inadapté aux enfants ?
+  confirmUnmark: Voulez-vous vraiment retirer la mention « inadapté aux enfants » de ce projet ?
+  confirmYes: 'Oui, continuer !'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Signaler ce %content_type%"
+    reason_placeholder: "Veuillez expliquer pourquoi vous faites ce signalement..."
+    submit: "Envoyer le signalement"
+    success: "Votre signalement a été envoyé. Merci."
+    error: "Une erreur est survenue. Veuillez réessayer."
+    duplicate: "Vous avez déjà signalé ce contenu."
+    trust_too_low: "Votre compte est trop récent pour faire des signalements."
+    unverified: "Veuillez vérifier que vous êtes connecté(e) et que l'adresse e-mail de votre compte est vérifiée."
+    rate_limited: "Vous envoyez des signalements trop rapidement. Veuillez patienter et réessayer."
+    suspended: "Votre compte est suspendu."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "Contester"
+    title: "Contester cette décision"
+    placeholder: "Expliquez pourquoi ce contenu ne devrait pas être masqué..."
+    submit: "Envoyer la contestation"
     cancel: "Annuler"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "Votre contestation a été envoyée pour examen."
+    already_pending: "Vous avez déjà une contestation en cours."
+    error: "Une erreur est survenue. Veuillez réessayer."
+    rate_limited: "Vous envoyez des contestations trop rapidement. Veuillez patienter et réessayer."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Vous publiez des commentaires trop rapidement. Veuillez patienter un instant."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Vous réagissez trop rapidement. Veuillez patienter un instant."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Vous vous abonnez/désabonnez trop rapidement. Veuillez patienter un instant."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Vous effectuez des actions de studio trop rapidement. Veuillez patienter un instant."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "Ce projet a été masqué à la suite de signalements de la communauté."
+    comment: "Ce commentaire a été masqué à la suite de signalements de la communauté."
+    user: "Ce profil a été masqué à la suite de signalements de la communauté."
+    user_own: "Votre compte a été suspendu à la suite de signalements de la communauté. Vous pouvez contester cette décision."
+    studio: "Ce studio a été masqué à la suite de signalements de la communauté."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "Votre %content_type% a été masqué à la suite de signalements de la communauté. Vous pouvez contester cette décision."
+    appeal_approved: "Votre contestation a été acceptée. Votre contenu est de nouveau visible."
+    appeal_rejected: "Votre contestation a été examinée et la décision de masquer votre contenu est maintenue."
+    admin_review_needed: "Un contenu a été masqué automatiquement et doit être examiné."
+Reports: Signalements
+members: membres

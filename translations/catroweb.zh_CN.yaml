@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Catrobat社区
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: "分享、发现并改编用 Catrobat 制作的创意项目。加入由年轻创作者组成的全球社区，一起制作游戏、动画和应用。"
+meta.description.media.library: "浏览并下载 Catrobat 的免费媒体素材——声音、图片等，用于你的项目。"
+meta.og.title.login: "登录 Catrobat"
+meta.og.description.login: "登录后即可与社区分享你的 Catrobat 项目。"
+meta.og.title.register: "创建 Catrobat 帐户"
+meta.og.description.register: "加入 Catrobat 社区，今天就开始分享你的创意项目吧。"
+meta.og.description.profile: "%username% 在 Catrobat 上 – 浏览其项目和成就。"
 localLanguage: 英语
 username: 用户名
 password: 密码
@@ -18,7 +18,7 @@ aboutPocketCode: 关于口袋编程
 about: 关于 Catrobat
 education: 教育
 chat: 聊天和论坛
-privacyGuide: Privacy Awareness Guide
+privacyGuide: "隐私意识指南"
 others: 其它
 tutorials: 帮助
 googlePlay: 谷歌 Play 商店
@@ -26,7 +26,7 @@ iosAppStore: IOS 应用商店
 instagram: Instagram
 discordChat: Discord 聊天
 passwordsNoMatch: 两次输入的密码不一样
-error: Oops!
+error: "哎呀！"
 cancel: 取消
 confirm: 确认
 report: 报告
@@ -42,19 +42,19 @@ noDescription: 没有可用的描述
 credits: 说明和版权信息
 noCredits: 没有说明和版权信息
 notesAndCreditsDescription: 您是如何创建这个项目的？是否使用了其他人的想法、脚本或艺术作品？您可以在此对他们表示感谢。
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+projectImportedFromScratch: "此项目从 MIT Scratch 导入。你可以查看原始项目"
+scratchImportedProjectLinkHere: "这里。"
 country: 国家
 loginText: 登录
 privacyPolicy: Chính sách bảo mật
 imprint: 版权信息
 projectDetails: 详细信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
+accountNotVerified: "请确保您已登录，并且帐户的电子邮箱已验证。"
+accountSuspended: "由于社区举报，您的帐户已被暂停。您可以在个人资料中对此决定提出申诉。"
 doesNotExist: '请求的资源不存在。'
 pleaseTryAgain: '再试一次吧！'
-tryAgainButton: 'Try again'
+tryAgainButton: "重试"
 oldVersionError: '请更新到最新版的口袋编程！'
 more: '更多'
 less: '更少'
@@ -79,22 +79,22 @@ cancelMessage: "取消"
 notificationsUnauthorizedError: "无法授权用户"
 notificationsClearError: "无法将通知标记为已读 ！"
 pleaseWait: "请等待..."
-projects: "Các chương trình"
+projects: "项目"
 users: "用户"
 studios: "工作室"
 oauthPopUpTitle: "外部帐户登录信息"
-oauthInfo: '您刚刚使用了一个外部帐户登录。我们为您创建了一个随机用户名。 如果你想要更改你的用户名或为你的帐户创建一个新的密码，请访问我的个人资料页面。 点击 %link_start% 这里 %link_end% 去您的个人资料页面'
+oauthInfo: '您刚刚使用了一个外部帐户登录。我们为您创建了一个随机用户名。 如果你想要更改你的用户名或为你的帐户创建一个新的密码，请访问我的个人资料页面。'
 oauthHere: "此处"
 statistics: "统计"
-languageSelection: "Language selection"
+languageSelection: "语言选择"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: "主题"
+  auto: "跟随系统"
+  auto_description: "跟随设备设置"
+  light: "浅色"
+  light_description: "明亮外观"
+  dark: "深色"
+  dark_description: "深色外观"
   apply: '申请'
 indexPage:
   recommendedSection:
@@ -117,165 +117,148 @@ follower:
   unfollowButton: "取消关注 %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
+    title: "欢迎来到 Catrobat 的 %theme%"
+    title_mindstorms: "欢迎来到 Catrobat 的 Mindstorms EV3 和 NXT 专区"
+    subtitle: "创作故事、游戏等更多内容……"
+    subtitle_embroidery: "把你自己的图案绣到 T 恤、包、裤子或手机壳上！"
+    subtitle_mindstorms: "用你的 Lego Mindstorms EV3 和 NXT 机器人创建自己的项目"
+    download: "下载应用"
+    statistics: "更多统计"
   featured: 精选
   open: 打开 
   download: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "上传项目"
+    drop_here: "将你的 .catrobat 文件拖放到这里"
+    or_browse: "或点击浏览"
+    button: "上传"
+    uploading: "正在上传……"
+    success: "项目上传成功！"
+    view_project: "查看项目"
+    upload_another: "再上传一个"
+    invalid_file: "请选择一个 .catrobat 文件"
+    file_too_large: "文件太大"
+    error: "上传失败，请重试。"
+    unauthorized: "你必须登录才能上传。"
+    rate_limited: "上传次数过多，请稍后再试。"
+    selected_file: "已选文件："
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
+      file_size: "文件大小上限为 100 MB。"
+      app_upload: "你也可以直接从 Pocket Code 应用上传项目。请注意，应用目前正在重新开发，暂时不支持网页上传。"
+      retention: "上传的项目在一段时间不活跃后会被自动删除。定期登录或让你的项目获得下载，即可延长保留时间。"
+      protection: "特别优秀或受欢迎的项目可能会被版主保护，不会被自动删除。"
   example: 示例
   newest: 最新项目
   recommended: 推荐的项目
-  scratchremixes: Scratch remixes
+  scratchremixes: "Scratch 改编"
   noProjects: 目前没有项目。
   shareAction: 分享
   deleteAction: 删除项目
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+  deleteConfirmation: "您确定吗？\n您确定要删除“%programName%”吗？\n此操作无法撤销！\n是的，删除！\n取消\n"
+  deleteConfirmText: "此操作无法撤销。你的项目将被永久删除。"
   deleteConfirmationTitle: 您确定吗？
   deleteNotFoundError: 在您的账户下找不到要删除的项目。
   private: 私有的
   public: 公开的
   setPrivateAction: 设为私有
   setPublicAction: 设为公开
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+  setPrivateConfirm: "将此项目设为私密？它将不再出现在搜索结果中。"
+  setPublicConfirm: "将此项目设为公开？所有人都能看到它。"
+  markNotForKidsConfirm: "将此项目标记为不适合儿童？"
+  markSafeForKidsConfirm: "移除此项目的“不适合儿童”标记？"
+  nfkModeratorLocked: "此设置已被版主锁定。"
+  confirmSetPrivate: "您确定要将此项目设为私密吗？它将不再出现在搜索结果中。"
+  confirmSetPublic: "您确定要将此项目设为公开吗？所有人都能看到它。"
+  changeVisibility: "您确定吗？\n如果您将“%programName%”设为私密，其他用户将无法看到或找到它。\n您仍然可以把项目链接分享给朋友。点击挂锁图标即可切换可见性。\n如果您将“%programName%”设为公开，其他用户就可以看到并找到它。\n是的，设为公开\n是的，设为私密\n否\n"
+  reportCommentConfirmation: "您确定要举报这条评论吗？"
+  deleteCommentConfirmation: "您确定要删除这条评论吗？"
+  deleteAccountConfirmation: "删除帐户？\n您确定要删除您的帐户吗？这也会删除您上传的项目和评论！\n此操作无法撤销！\n是的，删除！\n取消\n"
   tooLongName: 项目名称太长！
   tooLongDescription: 项目描述太长！
-  tooLongCredits: The project notes and credits are too long!
+  tooLongCredits: "项目备注和致谢太长！"
   my_projects: 我的项目
-  trending: Trending projects
-  popular: Popular projects
+  trending: "热门趋势项目"
+  popular: "热门项目"
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
   random: 随机项目
   related: 相关项目
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
+    explore: "探索项目"
+    no_projects: "你还没有创建任何项目"
     no_explore: '未找到项目'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    load_more: "加载更多"
+    upload: "上传项目"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
+    protected: "受保护"
+    day_left: "剩余 1 天"
+    days_left: "剩余 %days% 天"
+    tooltip: "项目在一段时间不活跃后会被自动删除。获得更多下载或定期登录即可延长保留时间。"
+    tooltip_protected: "此项目受保护，不会被自动删除。"
+  downloads: "%downloads% 次下载"
   sample: 示例项目
-  views: '%views% views'
+  views: "%views% 次浏览"
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "对此项目做出反应的人"
     all: "所有"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  remixes: "{0}0 次改编 |{1}1 次改编 |]1,Inf]%remixes% 次改编"
+  newRemixesNotificationTitle: "|{1}“%programName%”有 1 个新改编： |]1,Inf] “%programName%”有 %remixes% 个新改编："
   submitted: 已提交的项目
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  uploaded: "已上传的项目"
+  reportAsInappropriate: "举报为不当内容"
+  reportProgram: "举报项目"
+  languageVersion: "Catrobat 语言版本：%languageVersion%"
+  reportLoginText: "请 %login% 后举报此项目。"
+  reportDialogHeader: "你为什么要举报这个项目？"
+  reportDialogReason: "请输入原因"
+  reportRadioButtonInappropriate: "内容不当"
+  reportRadioButtonCopyright: "侵犯版权"
+  reportRadioButtonSpam: "垃圾内容"
+  reportRadioButtonDislike: "我不喜欢它"
+  reportOwnProgram: "你不能举报自己的项目。"
+  reportAlready: "你已经举报过这个项目了。"
+  reportDone: "你已举报此项目！"
+  updateAppHeaderDownload: "无法下载"
+  updateAppTextDownload: "请将应用更新到最新版本。请注意，并非所有 Android 功能都已在 IOS 上提供。"
+  updateAppTextDownloadApk: "APK 下载目前仅适用于 Android，不适用于 IOS。"
+  updateAppHeader: "更新应用"
+  updateAppText: "请将应用更新到最新版本。"
   btnClosePopup: 好
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: "来看看这个 Catrobat 项目"
+  show_more: "显示更多"
   comments: 评论
-  send: Send
+  send: "发送"
   delete: 删除
   report: 报告
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: "回复"
+  report_popup: "评论已成功举报。"
+  report_popup_header: "已举报"
+  deleted_popup: "评论已成功删除。"
+  deleted_popup_header: "已删除"
+  noAdminRights: "您没有管理员权限。请以管理员身份登录。"
+  editProject: "编辑项目"
+  closeProjectEditor: "关闭项目编辑器"
   closeEditorPrompt: 您要保存这些更改吗？
   btnDiscard: 放弃
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: "写评论"
+  thumbsUp: "点赞！"
+  smile: "微笑！"
+  love: "喜爱！"
+  wow: "哇哦！"
+  linkTitle: "链接"
+  link: "复制项目链接到剪贴板"
   reactionsText: 我喜欢的
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: "下载项目时出错，请稍后再试。"
+  downloadStartText: "下载已开始……"
+  downloading: "正在下载……"
+  openInApp: "在 Pocket Code 中打开"
+  downloaded: "已下载"
+  showTranslation: "显示翻译"
+  hideTranslation: "隐藏翻译"
+  translatedByLine: "由 %provider% 从%sourceLanguage%翻译为%targetLanguage%"
+  googleTranslate: "Google 翻译"
+  confrimDelete: "您确定要删除此翻译吗？"
   default: 默认
   save: 保存
   translationTitle: '%language% 翻译'
@@ -293,20 +276,20 @@ remixGraph:
   by: 'bởi'
   open: '打开 '
   showPaths: '显示路径'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: "正在加载改编关系图……"
+  error: "无法加载改编关系图。"
+  empty: "此项目暂时没有改编关系图数据。"
   remixesLabel: '调制'
   projectsLabel: 'Các chương trình'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  scratchLabel: "Scratch 来源"
+  interactHint: "选择一个节点即可打开项目或高亮显示其改编路径。"
+  zoomIn: "放大"
+  zoomOut: "缩小"
+  resetView: "重置视图"
+  projectNotAvailableErrorTitle: "抱歉……"
+  projectNotAvailableErrorDescription: "该项目已不再可用！"
+  projectNotAvailable: "不可用"
+  projectUnknownUser: "未知用户"
 noReply:
   - 这是自动发送的消息 - 请不要直接回复此邮件。
 accountConfirmation:
@@ -317,92 +300,82 @@ accountConfirmation:
     此链接只能使用一次验证您的帐户。
     最好的祝福，
     您的 Catrobat 团队
-  messageHtml: |
-    <p>
-    亲爱的 %username%。<br>
-    <br>
-    要完成激活您的帐户，请点击这里 <a href=%confirmationUrl%></a><br>
-    <br>
-    此链接只能用来验证您的帐户。<br>
-    <br>
-    最好的祝福，<br>
-    您的 Catrobat 团队。
-    </p>
+  messageHtml: "<p>\n亲爱的 %username%：<br>\n<br>\n要完成帐户激活，请点击<a href=\"%confirmationUrl%\">这里。</a><br>\n此链接只能使用一次，用于验证您的帐户。<br>\n<br>\n此致敬礼，<br>\n您的 Catrobat 团队。\n</p>\n"
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "验证你的电子邮箱地址"
+  welcome: "欢迎来到 Catrobat！"
+  greeting: "感谢注册！请验证你的电子邮箱地址以开始使用。"
+  message: "点击下方按钮确认你的电子邮箱。此链接在 %time% 之前有效，且只能使用一次。"
+  button: "验证电子邮箱地址"
+  ignore: "如果你没有创建 Catrobat 帐户，可以放心忽略这封邮件。"
+  autoDelete: "未验证的帐户将在 30 天后自动删除。"
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "您孩子的 Catrobat 帐户需要家长同意"
+    title: "需要家长同意"
+    greeting: "您好，"
+    message: "您的孩子 %username% 已在 Catrobat 上创建了帐户，并验证了电子邮箱地址。"
+    explanation: "Catrobat 是一个免费的教育平台，年轻人可以通过制作应用、游戏和动画来学习编程。根据欧盟儿童保护法规，在您的孩子完全参与社区之前，我们需要获得您的同意。请点击下方按钮表示同意。"
+    button: "给予家长同意"
+    ignore: "如果您没有预料到这封邮件，可以放心忽略。未经同意，该帐户的功能将受到限制。"
+    whatIsCatrobat: "Catrobat 是一个免费的非营利教育编程平台。在 catrobat.org 了解更多。"
+    manageLink: "您可以随时通过我们的<a href=\"%portalUrl%\" style=\"color: #00acc1;\">家长门户</a>管理您孩子的帐户。了解更多关于<a href=\"%infoUrl%\" style=\"color: #00acc1;\">您作为家长的权利</a>。"
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "已给予同意"
+    message: "谢谢！%username% 的帐户现已完全激活。"
+    continueButton: "发现项目"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "家长与监护人"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "家长与监护人须知"
+    intro: "Catrobat 非常重视年轻用户的安全和隐私。本页面说明我们如何保护您的孩子，以及您享有哪些权利。"
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "什么是 Catrobat？"
+      text: "Catrobat 是一个免费的非营利教育平台，年轻人可以通过制作自己的应用、游戏和动画来学习编程。该平台面向全球开放，并被用于教育场景。"
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "我们收集哪些数据？"
+      text: "我们只收集运营平台所需的最少数据：用户名、电子邮箱地址、出生日期，以及您的孩子创建和上传的项目。对于 14 岁以下的用户，我们还会存储家长/监护人的电子邮箱地址，用于征求同意。我们不会出售个人数据，也不会与第三方共享。"
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "您作为家长或监护人的权利"
+      text: "根据欧盟儿童保护法规（GDPR）和 COPPA，您有权：查看我们持有的关于您孩子的数据、索取这些数据的副本、随时撤回您的同意（这会限制该帐户），以及要求永久删除您孩子的帐户和所有相关数据。"
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "未成年人帐户有哪些限制？"
+      text: "16 岁以下的用户不能发表或阅读评论、关注其他用户，也不能查看被标记为不适合儿童的内容。他们仍然可以创建和上传项目、浏览公开项目，并通过点赞对项目做出反应。这些限制是为了提供一个安全的学习环境。"
+    manageButton: "管理您孩子的帐户"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "家长门户"
+    description: "输入您的电子邮箱地址，即可收到一个用于管理您孩子 Catrobat 帐户的安全链接。该链接将发送到您在注册时提供的电子邮箱地址。"
+    emailLabel: "您的电子邮箱地址"
+    submitButton: "发送管理链接"
+    infoLink: "了解更多"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "请查看您的收件箱"
+      message: "如果有帐户与此电子邮箱关联，我们已发送了管理链接。请查看您的收件箱，并点击链接管理您孩子的帐户。"
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "管理孩子帐户"
+    description: "您正在管理与 %email% 关联的帐户。"
+    consentStatus: "同意状态"
+    accountCreated: "帐户创建时间"
+    email: "孩子的电子邮箱"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "已同意"
+      pending: "待处理"
+      revoked: "已撤回"
+    grantButton: "给予同意"
+    revokeButton: "撤回同意"
+    revokeConfirm: "您确定要撤回同意吗？该帐户的功能将受到限制。"
+    exportButton: "导出数据"
+    deleteButton: "删除帐户"
+    deleteConfirm: "您确定要永久删除此帐户吗？此操作无法撤销。"
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "管理您孩子的 Catrobat 帐户"
+      title: "帐户管理"
+      greeting: "您好，"
+      message: "您请求了一个用于管理您孩子 Catrobat 帐户（%usernames%）的链接。点击下方按钮即可查看和管理该帐户。"
+      button: "管理帐户"
+      ignore: "如果这不是您本人的请求，可以放心忽略这封邮件。"
 passwordRecovery:
   subject: 密码找回
   message: |
@@ -420,22 +393,7 @@ passwordRecovery:
 
     最好的祝福,
     您的Catrobat 团队.
-  messageHtml: |
-    <p>
-    亲爱的%username%.<br>
-    <br>
-    由于您忘记了您的密码，您已要求在<a href=%appplication_url%>Pocket Code</a>上重置密码。
-    如果您没有提出要求，请忽略它。它将在24小时内过期并变得毫无用处。<br>
-    <br>
-    要重新设置密码和创建新密码，请点击<<a href=%confirmationUrl%>这里。</a><br>。
-    <br>
-    您可以随时使用您的用户名和密码访问<a href=%appplication_url%>Pocket Code</a>社区<br>。
-    要做到这一点，只需访问以下页面。<a href=%loginPage%>登录页面</a><br>。
-    要编辑您的个人资料，请到这个<a href=%profilePage%>页面</a>.<br>。
-    <br>
-    问候，<br>
-    你的杂技团。
-    </p>
+  messageHtml: "<p>\n亲爱的 %username%：<br>\n<br>\n由于您忘记了密码，您已申请在 <a href=\"%appplication_url%\">Pocket Code</a> 上重置密码。\n如果这不是您本人的请求，请忽略此邮件。该请求将在 24 小时后失效。<br>\n<br>\n要重置密码并创建新密码，请点击<a href=\"%confirmationUrl%\">这里。</a><br>\n<br>\n您可以随时使用您的用户名和密码访问 <a href=\"%appplication_url%\">Pocket Code</a> 社区。<br>\n只需访问以下页面：<a href=\"%loginPage%\">登录页面</a><br>\n要编辑您的个人资料，请前往此<a href=\"%profilePage%\">页面</a>。<br>\n<br>\n此致敬礼，<br>\n您的 Catrobat 团队。\n</p>\n"
 profile:
   aboutMe: 个人简介
   currentlyWorkingOn: 目前工作
@@ -475,7 +433,7 @@ myprofile:
   profileSettings: 个人资料设置
   securitySettings: 安全设置
   accountSettings: 账户设置
-  accountVerification: Verify account
+  accountVerification: "验证帐户"
   account: 帐户
   editProfile: 编辑档案
   edit: 编辑
@@ -489,18 +447,18 @@ myprofile:
     请注意：
     您创建了 %num_projects% 个项目，有 %num_followers% 个关注者。您的所有项目都将被删除。 您将无法登录，并且您的项目将从所有列表中移除。 您个人资料的删除操作无法撤销！
     您确定要离开我们吗？
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+  exportData: "下载我的数据"
+  exportDataDescription: "您有权获得您个人数据的副本，其中包括您的个人资料信息、项目、评论、反应和关注者。"
+  exportDataLoading: "正在下载……"
+  exportDataError: "导出数据时出了点问题，请稍后再试。"
+  exportDataRateLimited: "您每天只能导出一次数据，请明天再试。"
   editAccountSettings: 编辑帐户设置
   profileChangeSuccess: 您的个人资料已成功更改。
   unspecifiedError: 更改您的个人资料时发生未知错误。请联系我们。
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  verifyAccountText: "我们会给您发送一封包含验证链接的邮件。请务必在一小时内点击该链接，每天只能申请一封邮件。"
+  verifyAccountButton: "发送邮件"
+  verifyAccountMailSent: "邮件发送成功，请查看您的收件箱"
+  verifyAccountMailFailed: "每天只能申请一封邮件"
 licenseToPlay:
   link: '授权'
   title: '授权执行-评分并分享'
@@ -552,16 +510,16 @@ termsOfUse:
   version: 版本 1.3，2014 年 3 月 4 日
 search:
   dotdotdot: 搜索。。。
-  search: Search projects, users & studios
+  search: "搜索项目、用户和工作室"
   inMediaLib: 在媒体库中搜索
-  inMediaCategory: Search in media category
+  inMediaCategory: "在媒体分类中搜索"
   results: 搜索结果
   resultcount: 搜索未返回%count%个结果
   fail: 请输入至少一个搜索字词
   noUsers: 未找到用户
   noProjects: 未找到项目
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noStudios: "未找到工作室"
+  sameSearchMessage: "看起来你已经在这里了！换个搜索试试？"
 menu:
   profile: 我的个人资料
   login: 登录
@@ -573,7 +531,7 @@ menu:
   mediaLibrary: 媒体库
   studio: 工作室
   language: 语言
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: "没有可用的语言选项。"
 login:
   login: 登录
   button:
@@ -583,7 +541,7 @@ login:
   oauth:
     title: 或者您可以加入
   passOrUser: 您的密码或用户名不正确。
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: "您的帐户已被暂停。如果您认为这是错误，请联系支持团队。"
   noUsername: 找不到您的用户名或电子邮件地址。
   forgotPass: 忘记了密码或用户名？
   recoverPassSend: 一封电子邮件已发送到您的电子邮件地址。请检查您的收件箱。
@@ -602,37 +560,37 @@ login:
 register:
   title: 注册
   subText: "如果继续，表示您将会创建一个Catrobat社区帐户并同意我们的 %var1% 和 %var2%。"
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  dateOfBirth: "出生日期"
+  dateOfBirthInfo: "我们询问您的出生日期是为了遵守欧盟儿童保护法规（GDPR/COPPA），并为年龄较小的用户提供安全的体验。"
+  parentEmail: "家长/监护人电子邮箱"
+  parentEmailInfo: "14 岁以下用户必填。我们会向此地址发送同意请求。"
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: "完成注册"
+    info: "请提供您的出生日期以继续使用本平台。"
     submit: 继续
   button:
     cancel: 取消
     createAccount: 创造帐户
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "请查看你的收件箱！"
+    message: "我们已给你发送了一封验证邮件。点击邮件中的链接即可激活你的帐户。"
+    helpTitle: "没有收到邮件？"
+    hint: "请检查你的垃圾邮件文件夹。该链接 24 小时内有效。"
+    resendButton: "重新发送验证邮件"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "正在等待家长同意"
+    message: "你的电子邮箱已验证！在你完全使用本平台之前，需要家长或监护人给予同意。"
+    sentTo: "同意请求已发送至 %email%"
+    helpTitle: "没有收到邮件？需要帮助？"
+    hint: "请让你的家长检查垃圾邮件文件夹。该链接 24 小时内有效。"
+    resendButton: "重新发送同意邮件"
+    wrongEmail: "家长电子邮箱填错了？"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "家长已撤回同意"
+    message: "你的家长或监护人已撤回对你帐户的同意。在重新获得同意之前，你的帐户功能将受到限制。"
+    newEmailPlaceholder: "新的家长电子邮箱"
+    changeButton: "更新并重新发送"
 accountRecovery:
   title: 账户恢复
   description: 如果您记得您帐户的电子邮件或用户名，我们可以给您发送一个链接来重置您的密码。
@@ -658,9 +616,9 @@ resetPassword:
     cheers: "恭喜！"
   newemail:
     title: "重置您的密码"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    content: "您最近申请重置 Catrobat 帐户的密码。点击下方按钮选择新密码。如果这不是您本人的请求，可以放心忽略这封邮件。"
+    visitLink: "重置密码"
+    expire: "此链接在 %time% 内有效，且只能使用一次。"
   reset:
     title: "重置您的密码"
     button:
@@ -710,13 +668,13 @@ errors:
   token: '设备验证失败： 无效的验证标记！'
   uploadTokenAuthFailed: '上传令牌认证失败。'
   project:
-    invalid: Invalid project.
+    invalid: "无效的项目。"
   languageversion:
     tooold: '对不起，您的项目包含旧版本的 Catrobat 语言！您是否使用最新版本的口袋编程？'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "抱歉，您使用的 Pocket Code 版本过旧，请更新到最新版本。"
   authentication:
-    title: Login did not work
+    title: "登录失败"
     webview: |
       您的用户凭据错误。
       请尝试在应用程序中重新登录。
@@ -756,15 +714,15 @@ api:
     passwordTooLong: '密码太长'
     passwordInvalidChars: '密码包含无效字符'
     usernameContainsEmail: "用户名不能包含电子邮件地址"
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: "用户名不能包含链接"
     countryCodeInvalid: "国家代码无效"
     pictureInvalid: "个人资料图片无效或不支持"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    dateOfBirthMissing: "出生日期为必填项"
+    dateOfBirthInvalid: "出生日期无效"
+    tooYoung: "你必须年满 3 岁才能创建帐户"
+    parentEmailMissing: "14 岁以下用户必须填写家长电子邮箱"
+    parentEmailInvalid: "家长电子邮箱无效"
+    parentEmailSameAsUser: "家长电子邮箱必须与你自己的电子邮箱地址不同"
   updateUser:
     currentPasswordMissing: "当前密码为空"
     currentPasswordWrong: "当前密码错误"
@@ -784,18 +742,18 @@ api:
     notFound: '找不到要更改的项目。'
     forbidden: '无法更改项目。请确认您是否仍然处于登录状态？'
   createStudio:
-    nameMissing: 'Name missing'
+    nameMissing: "缺少名称"
     nameEmpty: '名字不能为空'
-    nameTooShort: 'Name too short'
+    nameTooShort: "名称太短"
     nameTooLong: '名字太长'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
+    nameAlreadyInUse: "名称已被使用"
+    descriptionMissing: "缺少描述"
+    descriptionEmpty: "描述为空"
+    descriptionTooShort: "描述太短"
     descriptionTooLong: '描述太长'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    imageFileInvalid: "图片文件无效"
+    imageFileInvalidType: "图片文件类型无效"
+    imageFileTooLarge: "图片文件太大"
 #languages and countries
 language:
   arabic: 阿拉伯语
@@ -841,7 +799,7 @@ language:
   thai: 泰文
   turkish: 土耳其语
   ukrainian: 乌克兰语
-  vietnamese: Vietnamese
+  vietnamese: "越南语"
 ci:
   generate: 生成apk
   pending: 生成apk
@@ -881,7 +839,7 @@ codeview:
   objects: '对象和物体'
   looks: '外观'
   sounds: '声音'
-  globals: 'Globals'
+  globals: "全局变量"
   locals: '局域网'
   globalVariables: '全局变量'
   localVariables: '本地变量'
@@ -894,11 +852,11 @@ codeview:
   dataBricks: '积木数据'
   specialBricks: '特殊砖块'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: "代码视图"
+  loading: "正在加载代码视图……"
+  error: "无法加载代码视图。"
+  retry: "重试"
+  empty: "此项目没有代码。"
   scripts: '脚本'
   looks: '外观'
   sounds: '声音'
@@ -916,21 +874,21 @@ codeStatistics:
   dataBricks: '数据'
   deviceBricks: '设备'
   specialBricks: '特殊的'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: "你的得分："
+  points: "分"
+  abstraction: "抽象与问题分解"
+  parallelism: "并行"
+  logicalThinking: "逻辑思维"
+  synchronization: "同步"
+  flowControl: "流程控制"
+  userInteractivity: "用户交互"
+  dataRepresentation: "数据表示"
+  level: "等级"
+  loading: "正在加载……"
+  bonus: "奖励"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "加入超过 %user_count% 位创意达人！"
+  text: "已经有 %project_count% 个精彩项目被分享，下一个可能就是你的。下载我们的应用，今天就开始创作吧"
 privacy-policy:
   header: 隐私策略
   version: 第2.2版，2019年10月17日
@@ -951,7 +909,7 @@ catro-notifications:
   noComments: "您似乎没有任何评论通知。"
   noReactions: "看起来你没有任何反应通知。"
   noRemixes: "看起来您没有任何重组合通知。"
-  noStudios: "It looks like you don't have any studio notifications."
+  noStudios: "看起来你没有任何工作室通知。"
   tab:
     studio: 工作室
     project: Các chương trình
@@ -962,23 +920,23 @@ catro-notifications:
   follow:
     message: 'User %user_link% follows you now.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% 创建了一个新游戏 %program_link%。"
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% 在工作室 %studio_name% 中发表了评论。"
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% 将 %program_link% 添加到了工作室 %studio_name%。"
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "你加入工作室 %studio_name% 的请求已被接受。"
+    declined: "你加入工作室 %studio_name% 的请求已被拒绝。"
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "你的项目 %program_link% 将在 %days% 天后被自动删除。上传新版本或获得更多下载即可保留它。"
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "你的项目“%project_name%”因长期不活跃已被自动删除。如果你仍想分享它，请重新上传。"
+  noProjects: "看起来你没有任何项目通知。"
 clipboard:
-  success: Link copied to clipboard!
+  success: "链接已复制到剪贴板！"
   success_project: 项目链接已复制到剪贴板！
   success_user: 用户链接已复制到剪贴板！
   fail: 复制链接到剪贴板失败！ :(
@@ -1005,13 +963,13 @@ flavor:
   create@school: Create@school
 copyright: '版权所有 &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>保留所有权利。'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "本网站需要 JavaScript 才能运行。请在浏览器中启用 JavaScript，或请大人帮忙。"
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: "我们使用 Cookie 来帮助改进我们的服务。我们不会出售或共享任何数据。"
   accept: "接受"
   decline: "拒绝"
   privacy-link: "Chính sách bảo mật"
-  settings-link: "Cookie Settings"
+  settings-link: "Cookie 设置"
 agree: 同意
 disagree: 不同意
 profileLoader:
@@ -1033,10 +991,10 @@ category:
   most_viewed: 看得最多的
   most_downloaded: 下载得最多的
   example: 示例
-  scratch: Scratch remixes
+  scratch: "Scratch 改编"
   recommended: 推荐的项目
-  popular: Most popular
-  trending: Trending projects
+  popular: "最受欢迎"
+  trending: "热门趋势项目"
 achievements:
   sidebar:
     title: '成就'
@@ -1092,8 +1050,8 @@ achievements:
         title: "语言学家"
         description: "将您的项目翻译成5种语言"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "已验证"
+        description: "验证你的帐户"
 tags:
   title: '{0} |{1} 标签 |]1,Inf] 标签'
   tag:
@@ -1114,7 +1072,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '扩展'
+  title: "{0} |{1} 扩展 |]1,Inf] 扩展"
   extension:
     arduino:
       title: Arduino
@@ -1137,20 +1095,20 @@ studio:
   delete_studio: '删除工作室'
   cancel_studio: '取消'
   studio_name: '工作室名称'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
+  studio_description: "工作室描述"
+  is_public: "设为公开？"
+  enable_comments: "启用评论？"
+  cover_image: "上传封面"
+  cover_image_empty: "未选择图片。"
+  cover_image_hint: "最大 1 MB。支持的格式：JPEG、PNG、GIF、WebP。"
+  cover_image_compressed: "图片已自动压缩，以符合 1 MB 的限制。"
+  cover_image_compressing: "正在压缩图片……"
+  cover_image_still_too_large: "压缩后图片仍然太大，请选择一个更小的文件。"
+  cover_image_invalid_type: "图片类型无效，请使用 JPEG、PNG、GIF 或 WebP。"
+  cover_image_compression_failed: "处理图片失败，请尝试其他文件。"
+  cover_image_alt: "你的封面图片"
+  cover_image_remove: "移除图片"
+  popular: "热门工作室"
   join: '加入'
   leave: '退出'
   report: '报告'
@@ -1159,29 +1117,29 @@ studio:
   overview:
     joined_studios: '加入的工作室'
     public_studios: '公开的工作室'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    private_studios: "仅限邀请的工作室"
+    no_studios: "还没有工作室"
+    my_studios: "我的工作室"
+    explore: "探索工作室"
+    no_joined: "你还没有加入任何工作室"
+    joined: "已加入"
+    load_more: "加载更多"
     open: '打开 '
     share: '分享'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: "链接已复制到剪贴板！"
+    leave_confirm_title: "退出这个工作室？"
     cancel: '取消'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: "取消请求"
+    cancel_request_confirm_title: "取消加入请求？"
     admin: '管理人员'
-    member: 'Member'
+    member: "成员"
   details:
-    add_project: 'click to add the project'
+    add_project: "点击添加项目"
     add: '添加'
     showMore: '显示更多'
     showLess: '显示更多'
     are_you_sure: '您确定吗？'
-    no_way_of_return: 'This cannot be undone.'
+    no_way_of_return: "此操作无法撤销。"
     delete_it: '删除'
     remove_project: '从工作室移除'
     remove_project_error: '从工作室中删除项目失败！'
@@ -1189,24 +1147,24 @@ studio:
     no_projects: '工作室尚未包含任何项目'
     projects:
       title: '项目'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: "添加项目"
+      open_project: "打开项目"
       download: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
       share: '分享'
       remove_from_studio: '从工作室移除'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio_title: "从工作室中移除项目？"
+      remove_from_studio_text: "如果你改变主意，以后还可以再添加。"
+      share_success: "链接已复制到剪贴板！"
+      share_fail: "复制链接失败。"
+      no_projects_empty_state: "你还没有可以添加的项目。先在 Pocket Code 中创建一个吧！"
+      add_selected: "添加所选项目"
+    no_available_projects: "没有可添加的项目。"
     updateCoverError: '更新工作室封面时出了错！'
     join: '加入'
     leave: '退出'
     report: '报告'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: "待处理"
+    decline: "已拒绝"
     comments:
       title: '评论'
       type_something: '输入内容'
@@ -1225,24 +1183,24 @@ studio:
     members_list:
       title: '工作室成员'
       project_count: '{0} 没有工作室项目 |{1} 1个工作室项目 |]1，Inf] %count% 个工作室项目'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
+      no_studio_projects: "没有工作室项目"
+      one_studio_project: "1 个工作室项目"
+      n_studio_projects: "%count% 个工作室项目"
       promote_member: '将成员提升为管理员。'
       promotion_failed: '该成员升级过程出错。请稍后再试。'
       ban_member: '禁止工作室成员'
       ban_failed: '禁用此成员时出错。请稍后再试。'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      demote_member: "将管理员降为成员"
+      demotion_failed: "降级该管理员时出了点问题，请稍后再试。"
+      last_admin: "无法降级此工作室的最后一位管理员。"
     join_requests:
-      title: 'Join Requests'
+      title: "加入请求"
       accept: '接受'
       decline: '拒绝'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: "已接受加入请求。"
+      decline_success: "已拒绝加入请求。"
+      error: "出了点问题，请重试。"
+      no_requests: "没有待处理的加入请求。"
     show_more: '显示更多'
     show_less: '隐藏显示'
     admin_settings:
@@ -1260,72 +1218,72 @@ media_library:
       sound: '类型：声音'
       movie: '类型：视频'
       default: '类型：未知'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: "暂时还没有媒体分类。"
+  no_results: "未找到结果。"
+  assets_count: "个素材"
+  view_all: "查看全部"
+  view_all_category: "查看全部%category%"
+  back_to_app: "返回应用"
 snackbar:
   project_not_found: '请求的项目不可用'
   project_not_for_kids: '该项目被标记为对儿童不安全！'
   project_safe_for_kids: '该项目被标记为对儿童是安全的！'
   project_not_for_kids_moderator: '这个项目已被版主标记。您无法取消标记！'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_set_private: "该项目已设为私密。"
+  project_set_public: "该项目已设为公开。"
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
+    additional_info: "附加信息：additionalInfo"
+    feature_1: "功能 featureName 在 maintenanceStart 至 maintenanceEnd 期间不可用"
+    feature_2: "功能"
+    feature_3: "功能"
 MarkNotForKids: 标记为对儿童不安全
 MarkSafeForKids: 标记为对儿童是安全的
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "确认"
+  confirmMark: "您确定要将此项目标记为不适合儿童吗？"
+  confirmUnmark: "您确定要移除此项目的“不适合儿童”标记吗？"
+  confirmYes: "是的，继续！"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "举报此%content_type%"
+    reason_placeholder: "请描述你举报的原因……"
+    submit: "提交举报"
+    success: "你的举报已提交。谢谢。"
+    error: "出了点问题，请重试。"
+    duplicate: "你已经举报过此内容了。"
+    trust_too_low: "你的帐户太新，暂时无法举报。"
+    unverified: "请确保你已登录，并且帐户的电子邮箱已验证。"
+    rate_limited: "你提交举报的速度太快了，请稍等后再试。"
+    suspended: "你的帐户已被暂停。"
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "申诉"
+    title: "对此决定提出申诉"
+    placeholder: "请说明为什么此内容不应被隐藏……"
+    submit: "提交申诉"
     cancel: "取消"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "你的申诉已提交审核。"
+    already_pending: "你已经有一个待处理的申诉。"
+    error: "出了点问题，请重试。"
+    rate_limited: "你提交申诉的速度太快了，请稍等后再试。"
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "你发表评论的速度太快了，请稍等片刻。"
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "你做出反应的速度太快了，请稍等片刻。"
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "你关注/取消关注的速度太快了，请稍等片刻。"
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "你执行工作室操作的速度太快了，请稍等片刻。"
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "由于社区举报，此项目已被隐藏。"
+    comment: "由于社区举报，此评论已被隐藏。"
+    user: "由于社区举报，此个人资料已被隐藏。"
+    user_own: "由于社区举报，你的帐户已被暂停。你可以对此决定提出申诉。"
+    studio: "由于社区举报，此工作室已被隐藏。"
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "由于社区举报，你的%content_type%已被隐藏。你可以对此决定提出申诉。"
+    appeal_approved: "你的申诉已通过。你的内容现在重新可见。"
+    appeal_rejected: "你的申诉已审核完毕，隐藏你内容的决定维持不变。"
+    admin_review_needed: "内容已被自动隐藏，需要审核。"
+Reports: "举报"
+members: "成员"
