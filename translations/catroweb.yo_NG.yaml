@@ -1,995 +1,934 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
-tutorials: Help
+title: "Àwùjọ Catrobat"
+meta.description: "Pín, ṣàwárí, kí o sì tún àwọn iṣẹ́ àtinúdá tí a fi Catrobat ṣe ṣe. Darapọ̀ mọ́ àwùjọ àgbáyé ti àwọn ọ̀dọ́ olùdá tí ń kọ́ eré, eré ìdárayá àwòrán, àti àwọn áàpù."
+meta.description.media.library: "Ṣàwárí kí o sì ṣe ìgbàsílẹ̀ àwọn ohun èlò mídíà ọ̀fẹ́ fún Catrobat — ohùn, àwòrán, àti púpọ̀ sí i fún àwọn iṣẹ́ rẹ."
+meta.og.title.login: "Wọlé sí Catrobat"
+meta.og.description.login: "Wọlé láti pín àwọn iṣẹ́ Catrobat rẹ pẹ̀lú àwùjọ."
+meta.og.title.register: "Ṣẹ̀dá àkáǹtì Catrobat"
+meta.og.description.register: "Darapọ̀ mọ́ àwùjọ Catrobat kí o sì bẹ̀rẹ̀ sí í pín àwọn iṣẹ́ àtinúdá rẹ lónìí."
+meta.og.description.profile: "%username% lórí Catrobat – wo àwọn iṣẹ́ àti àṣeyọrí wọn."
+localLanguage: "Yorùbá"
+username: "Orúkọ olùmúlò"
+password: "Ọ̀rọ̀ aṣínà"
+createNewPassword: "Ṣẹ̀dá ọ̀rọ̀ aṣínà tuntun"
+accountSettings: "Ètò àkáǹtì"
+email: "Ímeèlì"
+aboutPocketCode: "Nípa Pocket Code"
+about: "Nípa Catrobat"
+education: "Ẹ̀kọ́"
+chat: "Ìjíròrò àti àwọn àpéjọ"
+privacyGuide: "Ìtọ́sọ́nà Ìmọ̀ Ìpamọ́"
+others: "Àwọn mìíràn"
+tutorials: "Ìrànlọ́wọ́"
 googlePlay: Google Play Store
-iosAppStore: iOS App store
+iosAppStore: "iOS App Store"
 instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: The passwords didn't match.
-error: Oops!
-cancel: Cancel
-confirm: Confirm
-report: Report
-report.title: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-name: Name
-description: Description
-noDescription: No description available.
-credits: Notes and credits
-noCredits: No notes and credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-projectDetails: Details
-somethingWentWrong: 'Oops, something did not work. Please try again!'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'Please try again!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+discordChat: "Ìjíròrò Discord"
+passwordsNoMatch: "Àwọn ọ̀rọ̀ aṣínà kò bára mu."
+error: "Háà!"
+cancel: "Fagilé"
+confirm: "Jẹ́rìí"
+report: "Jábọ̀"
+report.title: "Jábọ̀"
+deleteIt: "Bẹ́ẹ̀ ni, pa á rẹ́!"
+reportIt: "Bẹ́ẹ̀ ni, jábọ̀ rẹ̀!"
+areYouSure: "Ṣé o dájú?"
+noWayOfReturn: "Kò sí ọ̀nà láti mú ìgbésẹ̀ rẹ padà!"
+download: "Ṣe ìgbàsílẹ̀"
+name: "Orúkọ"
+description: "Àpèjúwe"
+noDescription: "Kò sí àpèjúwe."
+credits: "Àkọsílẹ̀ àti ìdúpẹ́"
+noCredits: "Kò sí àkọsílẹ̀ àti ìdúpẹ́."
+notesAndCreditsDescription: "Báwo ni o ṣe ṣẹ̀dá iṣẹ́ yìí? Ṣé o lo èrò, ìwé àfọwọ́kọ tàbí iṣẹ́ ọnà àwọn ẹlòmíràn? Dúpẹ́ lọ́wọ́ wọn níbí."
+projectImportedFromScratch: "A kó iṣẹ́ yìí wọlé láti MIT Scratch. O lè wo iṣẹ́ àtilẹ̀wá náà"
+scratchImportedProjectLinkHere: "níbí."
+country: "Orílẹ̀-èdè"
+loginText: "wọlé"
+privacyPolicy: "Ìlànà Ìpamọ́"
+imprint: "Àlàyé olùtẹ̀jáde"
+projectDetails: "Àlàyé"
+somethingWentWrong: "Háà, nǹkan kan kò ṣiṣẹ́. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i!"
+accountNotVerified: "Jọ̀wọ́ rí i dájú pé o ti wọlé àti pé a ti jẹ́rìí ímeèlì àkáǹtì rẹ."
+accountSuspended: "A ti dá àkáǹtì rẹ dúró nítorí ìròyìn láti ọ̀dọ̀ àwùjọ. O lè pe ẹjọ́ ìpinnu yìí láti inú profaili rẹ."
+doesNotExist: "Ohun tí o béèrè kò sí."
+pleaseTryAgain: "Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i!"
+tryAgainButton: "Gbìyànjú lẹ́ẹ̀kan sí i"
+oldVersionError: "Jọ̀wọ́ ṣe ìmúdójúìwọ̀n sí ẹ̀yà Pocket Code tuntun jùlọ!"
+more: "síi"
+less: "dínkù"
+show-more: "Fi púpọ̀ hàn"
+show-less: "Fi díẹ̀ hàn"
+more-information: "Àlàyé síwájú sí i"
+less-information: "Àlàyé díẹ̀"
+ok: "Ó yé mi"
+clickToDownloadProgram: "Láti ṣe ìgbàsílẹ̀ iṣẹ́ àpẹẹrẹ, tẹ %link_start% ibí %link_end%."
+registrationError: "Orúkọ olùmúlò tàbí àdírẹ́sì ímeèlì ti wà ní lílò."
+notifications: "Ìfitónilétí"
 allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "It looks like you don't have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
-projects: "Projects"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+FollowersNotifications: "Àwọn olùtẹ̀lé"
+LikeNotifications: "Ìhùwàsí"
+CommentNotifications: "Àwọn àsọyé"
+RemixNotifications: "Àwọn àtúnṣe"
+wellDone: "O ṣe dáadáa!"
+done: "Ó ti parí!"
+notificationsReadMessage: "Ó dàbí pé o kò ní ìfitónilétí kankan."
+confirmMessage: "Bẹ́ẹ̀ ni, pa á rẹ́"
+cancelMessage: "Fagilé"
+notificationsUnauthorizedError: "A kò lè fún olùmúlò ní àṣẹ"
+notificationsClearError: "A kò lè sàmì sí àwọn ìfitónilétí bí èyí tí a ti kà!"
+pleaseWait: "Jọ̀wọ́ dúró..."
+projects: "Àwọn iṣẹ́"
+users: "Olùmúlò"
+studios: "Àwọn ilé-iṣẹ́ ọnà"
+oauthPopUpTitle: "Àlàyé ìwọlé pẹ̀lú àkáǹtì òde"
+oauthInfo: "O ṣẹ̀ṣẹ̀ lo àkáǹtì òde láti wọlé. A ṣẹ̀dá orúkọ olùmúlò àìròtẹ́lẹ̀ fún ọ. Tí o bá fẹ́ yí orúkọ olùmúlò rẹ padà tàbí ṣẹ̀dá ọ̀rọ̀ aṣínà tuntun fún àkáǹtì rẹ, jọ̀wọ́ lọ sí ojú-ìwé profaili rẹ."
+oauthHere: "níbí"
+statistics: "Ìṣirò"
+languageSelection: "Yíyan èdè"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: "Àwọ̀"
+  auto: "Ẹ̀rọ"
+  auto_description: "Tẹ̀lé ètò ẹ̀rọ rẹ"
+  light: "Ìmọ́lẹ̀"
+  light_description: "Ìrísí tí ó mọ́lẹ̀"
+  dark: "Òkùnkùn"
+  dark_description: "Ìrísí òkùnkùn"
+  apply: "Lò ó"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: "Àwọn iṣẹ́ wo ni a dámọ̀ràn níbí?"
+      description: "Bí ìhùwàsí (Àtàǹpàkò sókè, Ẹ̀rín ...) tí iṣẹ́ rẹ bá gbà ṣe pọ̀ tó, bẹ́ẹ̀ ni yóò ṣe ga tó nínú àtòjọ yìí."
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: "Ń tẹ̀lé"
+  followers: "Àwọn olùtẹ̀lé"
+  follow: "Tẹ̀lé"
+  username: "Olùmúlò"
+  followsMe: "Ń tẹ̀lé mi"
+  noFollowing: "O kò tẹ̀lé ẹnikẹ́ni lọ́wọ́lọ́wọ́."
+  noFollowers: "O kò ní olùtẹ̀lé lọ́wọ́lọ́wọ́."
+  noOtherFollowing: "Kò sí olùmúlò tí a ń tẹ̀lé lọ́wọ́lọ́wọ́."
+  noOtherFollowers: "Kò sí olùtẹ̀lé lọ́wọ́lọ́wọ́."
+  followError: "A kò lè tẹ̀lé olùmúlò yìí báyìí."
+  unfollowError: "A kò lè dẹ́kun títẹ̀lé olùmúlò yìí báyìí."
+  unfollowQuestion: "Ṣé o dájú pé o fẹ́ dẹ́kun títẹ̀lé olùmúlò yìí?"
+  unfollowButton: "Dẹ́kun títẹ̀lé %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: Open
-  download: Download
+    title: "Káàbọ̀ sí %theme% ti Catrobat"
+    title_mindstorms: "Káàbọ̀ sí ojú-ìwé Catrobat fún Mindstorms EV3 àti NXT"
+    subtitle: "Ṣẹ̀dá ìtàn, eré àti púpọ̀ sí i..."
+    subtitle_embroidery: "Rán àwọn àpẹẹrẹ tìrẹ sórí ẹ̀wù T-shirt, àpò, ṣòkòtò, tàbí àpò fóònù rẹ!"
+    subtitle_mindstorms: "Ṣẹ̀dá àwọn iṣẹ́ tìrẹ pẹ̀lú àwọn rọ́bọ́ọ̀tì Lego Mindstorms EV3 àti NXT rẹ"
+    download: "Ṣe ìgbàsílẹ̀ áàpù náà"
+    statistics: "Ìṣirò síwájú sí i"
+  featured: "Àṣàyàn"
+  open: "Ṣí i"
+  download: "Ṣe ìgbàsílẹ̀"
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "Gbé Iṣẹ́ Sókè"
+    drop_here: "Fà kí o sì ju fáìlì .catrobat rẹ síbí"
+    or_browse: "tàbí tẹ̀ láti wá a"
+    button: "Gbé sókè"
+    uploading: "Ń gbé sókè..."
+    success: "A ti gbé iṣẹ́ náà sókè ní àṣeyọrí!"
+    view_project: "Wo Iṣẹ́"
+    upload_another: "Gbé Òmíràn Sókè"
+    invalid_file: "Jọ̀wọ́ yan fáìlì .catrobat kan"
+    file_too_large: "Fáìlì náà tóbi jù"
+    error: "Gbígbé sókè kùnà. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
+    unauthorized: "O gbọ́dọ̀ wọlé láti gbé sókè."
+    rate_limited: "Gbígbé sókè ti pọ̀ jù. Jọ̀wọ́ gbìyànjú lẹ́yìn náà."
+    selected_file: "Fáìlì tí a yàn:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+      file_size: "Ìwọ̀n fáìlì tó pọ̀ jùlọ jẹ́ 100 MB."
+      app_upload: "O tún lè gbé àwọn iṣẹ́ sókè tààrà láti inú áàpù Pocket Code. Ṣàkíyèsí pé à ń tún àwọn áàpù ṣe lọ́wọ́lọ́wọ́, wọn kò sì ṣe àtìlẹ́yìn fún gbígbé sókè lórí wẹ́ẹ̀bù báyìí."
+      retention: "A óò yọ àwọn iṣẹ́ tí a gbé sókè kúrò fúnra rẹ̀ lẹ́yìn àkókò àìṣiṣẹ́. Máa wọlé déédéé tàbí jẹ́ kí wọ́n ṣe ìgbàsílẹ̀ iṣẹ́ rẹ láti fa àkókò ìpamọ́ rẹ̀ gùn."
+      protection: "Àwọn alábòójútó lè dáàbò bo àwọn iṣẹ́ tí ó dára gan-an tàbí tí ó gbajúmọ̀ kúrò lọ́wọ́ píparẹ́ aládàáṣe."
+  example: "Àwọn àpẹẹrẹ"
+  newest: "Àwọn iṣẹ́ tuntun jùlọ"
+  recommended: "Àwọn iṣẹ́ tí a dámọ̀ràn"
+  scratchremixes: "Àwọn àtúnṣe Scratch"
+  noProjects: "Kò sí iṣẹ́ kankan lọ́wọ́lọ́wọ́."
+  shareAction: "Pín"
+  deleteAction: "Pa iṣẹ́ rẹ́"
+  deleteConfirmation: "Ṣé o dájú?\nṢé o dájú pé o fẹ́ pa \"%programName%\" rẹ́?\nKò sí ọ̀nà láti mú ìgbésẹ̀ rẹ padà!\nBẹ́ẹ̀ ni, pa á rẹ́!\nFagilé\n"
+  deleteConfirmText: "A kò lè yí ìgbésẹ̀ yìí padà. A óò pa iṣẹ́ rẹ rẹ́ pátápátá."
+  deleteConfirmationTitle: "Ṣé o dájú?"
+  deleteNotFoundError: "A kò rí iṣẹ́ tí a fẹ́ pa rẹ́ lábẹ́ olùmúlò rẹ."
+  private: "àdáni"
+  public: "gbangba"
+  setPrivateAction: "Ṣe é ní àdáni"
+  setPublicAction: "Ṣe é ní gbangba"
+  setPrivateConfirm: "Ṣe iṣẹ́ yìí ní àdáni? Kò ní hàn nínú àbájáde ìwádìí mọ́."
+  setPublicConfirm: "Ṣe iṣẹ́ yìí ní gbangba? Gbogbo ènìyàn ni yóò rí i."
+  markNotForKidsConfirm: "Sàmì sí iṣẹ́ yìí pé kò yẹ fún àwọn ọmọdé?"
+  markSafeForKidsConfirm: "Yọ àmì àìyẹ-fún-ọmọdé kúrò lórí iṣẹ́ yìí?"
+  nfkModeratorLocked: "Alábòójútó kan ti tì ètò yìí pa."
+  confirmSetPrivate: "Ṣé o dájú pé o fẹ́ ṣe iṣẹ́ yìí ní àdáni? Kò ní hàn nínú àbájáde ìwádìí mọ́."
+  confirmSetPublic: "Ṣé o dájú pé o fẹ́ ṣe iṣẹ́ yìí ní gbangba? Gbogbo ènìyàn ni yóò rí i."
+  changeVisibility: "Ṣé o dájú?\nTí o bá ṣe '%programName%' ní àdáni, àwọn olùmúlò mìíràn kò ní rí i tàbí ṣàwárí rẹ̀.\nO ṣì lè pín ìjápọ̀ iṣẹ́ rẹ pẹ̀lú àwọn ọ̀rẹ́ rẹ. O lè yí ìhàn padà nípa títẹ àmì àgádágodo.\nTí o bá ṣe \"%programName%\" ní gbangba, àwọn olùmúlò mìíràn lè rí i kí wọ́n sì ṣàwárí rẹ̀.\nBẹ́ẹ̀ ni, ṣe é ní gbangba\nBẹ́ẹ̀ ni, ṣe é ní àdáni\nRárá\n"
+  reportCommentConfirmation: "Ṣé o dájú pé o fẹ́ jábọ̀ àsọyé yìí?"
+  deleteCommentConfirmation: "Ṣé o dájú pé o fẹ́ pa àsọyé yìí rẹ́?"
+  deleteAccountConfirmation: "Pípa àkáǹtì rẹ́?\nṢé o dájú pé o fẹ́ pa àkáǹtì rẹ rẹ́? Èyí yóò tún pa àwọn iṣẹ́ tí o gbé sókè àti àwọn àsọyé rẹ rẹ́!\nKò sí ọ̀nà láti mú ìgbésẹ̀ rẹ padà!\nBẹ́ẹ̀ ni, pa á rẹ́!\nFagilé\n"
+  tooLongName: "Orúkọ iṣẹ́ náà ti gùn jù!"
+  tooLongDescription: "Àpèjúwe iṣẹ́ náà ti gùn jù!"
+  tooLongCredits: "Àkọsílẹ̀ àti ìdúpẹ́ iṣẹ́ náà ti gùn jù!"
+  my_projects: "Àwọn iṣẹ́ tí mo pín"
+  trending: "Àwọn iṣẹ́ tí ń gbajúmọ̀"
+  popular: "Àwọn iṣẹ́ olókìkí"
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
+    viewed: "Tí a wò jùlọ"
+    downloaded: "Tí a ṣe ìgbàsílẹ̀ jùlọ"
+  random: "Àwọn iṣẹ́ àìròtẹ́lẹ̀"
+  related: "Àwọn iṣẹ́ tó jọmọ́"
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: "Ṣàwárí Àwọn Iṣẹ́"
+    no_projects: "O kò tíì ṣẹ̀dá iṣẹ́ kankan"
+    no_explore: "A kò rí iṣẹ́ kankan"
+    load_more: "Gbé Púpọ̀ Sí I"
+    upload: "Gbé Iṣẹ́ Sókè"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: "Ní ààbò"
+    day_left: "Ọjọ́ 1 ló kù"
+    days_left: "Ọjọ́ %days% ló kù"
+    tooltip: "A máa ń yọ àwọn iṣẹ́ kúrò fúnra rẹ̀ lẹ́yìn àkókò àìṣiṣẹ́. Gba ìgbàsílẹ̀ púpọ̀ sí i tàbí máa wọlé déédéé láti fa àkókò ìpamọ́ gùn."
+    tooltip_protected: "Iṣẹ́ yìí wà ní ààbò, a kò sì ní pa á rẹ́ fúnra rẹ̀."
+  downloads: "Ìgbàsílẹ̀ %downloads%"
+  sample: "Àwọn iṣẹ́ àpẹẹrẹ"
+  views: "Ìwò %views%"
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Àwọn ènìyàn tí ó hùwà sí iṣẹ́ yẹn"
     all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: "{0}Àtúnṣe 0 |{1}Àtúnṣe 1 |]1,Inf]Àtúnṣe %remixes%"
+  newRemixesNotificationTitle: "|{1}\"%programName%\" ní àtúnṣe tuntun 1: |]1,Inf] \"%programName%\" ní àtúnṣe tuntun %remixes%:"
+  submitted: "Àwọn iṣẹ́ tí a fi sílẹ̀"
+  uploaded: "Àwọn iṣẹ́ tí a gbé sókè"
+  reportAsInappropriate: "Jábọ̀ pé kò yẹ"
+  reportProgram: "Jábọ̀ iṣẹ́"
+  languageVersion: "Ẹ̀yà èdè Catrobat: %languageVersion%"
+  reportLoginText: "Jọ̀wọ́ %login% láti jábọ̀ iṣẹ́ yìí."
+  reportDialogHeader: "Kí ló dé tí o fẹ́ jábọ̀ iṣẹ́ yìí?"
+  reportDialogReason: "Kọ ìdí kan"
+  reportRadioButtonInappropriate: "Kò yẹ"
+  reportRadioButtonCopyright: "Rírú ẹ̀tọ́ àdàkọ"
+  reportRadioButtonSpam: "Spam ni"
+  reportRadioButtonDislike: "Kò wù mí"
+  reportOwnProgram: "O kò lè jábọ̀ iṣẹ́ tìrẹ."
+  reportAlready: "O ti jábọ̀ iṣẹ́ yìí tẹ́lẹ̀."
+  reportDone: "O ti jábọ̀ iṣẹ́ yìí!"
+  updateAppHeaderDownload: "Ìgbàsílẹ̀ kò ṣeé ṣe"
+  updateAppTextDownload: "Jọ̀wọ́ ṣe ìmúdójúìwọ̀n áàpù rẹ sí ẹ̀yà tuntun jùlọ. Mọ̀ pé kì í ṣe gbogbo ẹ̀yà Android ló ti wà lórí iOS."
+  updateAppTextDownloadApk: "Ìgbàsílẹ̀ APK wà lórí Android nìkan lọ́wọ́lọ́wọ́, kò sí lórí iOS."
+  updateAppHeader: "Ṣe ìmúdójúìwọ̀n áàpù"
+  updateAppText: "Jọ̀wọ́ ṣe ìmúdójúìwọ̀n áàpù rẹ sí ẹ̀yà tuntun jùlọ."
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Report
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  checkout_this_project: "Wo iṣẹ́ Catrobat yìí"
+  show_more: "Fi Púpọ̀ Hàn"
+  comments: "Àwọn àsọyé"
+  send: "Fi ránṣẹ́"
+  delete: "Pa rẹ́"
+  report: "Jábọ̀"
+  reply: "Fèsì"
+  report_popup: "A ti jábọ̀ àsọyé náà ní àṣeyọrí."
+  report_popup_header: "A ti jábọ̀"
+  deleted_popup: "A ti pa àsọyé náà rẹ́ ní àṣeyọrí."
+  deleted_popup_header: "A ti pa á rẹ́"
+  noAdminRights: "O kò ní ẹ̀tọ́ alábòójútó. Jọ̀wọ́ wọlé gẹ́gẹ́ bí Alábòójútó."
+  editProject: "Ṣàtúnkọ iṣẹ́ náà"
+  closeProjectEditor: "Pa olóòtú iṣẹ́ dé"
+  closeEditorPrompt: "Ṣé o fẹ́ fi àwọn àyípadà rẹ pamọ́?"
+  btnDiscard: "Jù ú sílẹ̀"
+  addComment: "Kọ àsọyé kan"
+  thumbsUp: "Àtàǹpàkò sókè!"
+  smile: "Rẹ́rìn-ín!"
+  love: "Ìfẹ́!"
+  wow: "Háà!"
+  linkTitle: "Ìjápọ̀"
+  link: "Da ìjápọ̀ iṣẹ́ kọ sí pátákó àgékọ"
+  reactionsText: "Ìhùwàsí"
+  downloadErrorText: "Àṣìṣe ṣẹlẹ̀ nígbà tí a ń ṣe ìgbàsílẹ̀ iṣẹ́ náà. Jọ̀wọ́ gbìyànjú lẹ́yìn náà."
+  downloadStartText: "Ìgbàsílẹ̀ ti bẹ̀rẹ̀..."
+  downloading: "Ń ṣe ìgbàsílẹ̀..."
+  openInApp: "Ṣí i nínú Pocket Code"
+  downloaded: "A ti ṣe ìgbàsílẹ̀"
+  showTranslation: "Fi ìtumọ̀ hàn"
+  hideTranslation: "Fi ìtumọ̀ pamọ́"
+  translatedByLine: "%provider% ló túmọ̀ rẹ̀ láti %sourceLanguage% sí %targetLanguage%"
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  confrimDelete: "Ṣé o dájú pé o fẹ́ pa ìtumọ̀ náà rẹ́?"
+  default: "Àtilẹ̀wá"
+  save: "Fi pamọ́"
+  translationTitle: "Ìtumọ̀ %language%"
+  editDefault: "Ṣàtúnkọ àtilẹ̀wá"
+  editTranslation: "Ṣàtúnkọ ìtumọ̀ %language%"
+  translations: "Àwọn ìtumọ̀"
+  createTranslation: "Ṣẹ̀dá ìtumọ̀"
+  deletedComment: "**A ti pa á rẹ́**"
+  replyLabel: "ìfèsì"
+  repliesLabel: "àwọn ìfèsì"
+  notForKids: "Kò yẹ fún àwọn ọmọdé"
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
+  title: "Àwọn àtúnṣe"
+  showRemixGraph: "Àwòrán àtúnṣe"
   by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
-  projectsLabel: 'Projects'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  open: "Ṣí i"
+  showPaths: "Fi Àwọn Ọ̀nà Hàn"
+  loading: "Ń gbé àwòrán àtúnṣe..."
+  error: "A kò lè gbé àwòrán àtúnṣe náà."
+  empty: "Kò sí dátà àwòrán àtúnṣe fún iṣẹ́ yìí síbẹ̀."
+  remixesLabel: "Àwọn àtúnṣe"
+  projectsLabel: "Àwọn iṣẹ́"
+  scratchLabel: "Àwọn gbòǹgbò Scratch"
+  interactHint: "Yan ojú ìpàdé kan láti ṣí iṣẹ́ náà tàbí láti tan ìmọ́lẹ̀ sí ọ̀nà àtúnṣe rẹ̀."
+  zoomIn: "Sún mọ́"
+  zoomOut: "Sún jìnnà"
+  resetView: "Tún ìwò ṣe"
+  projectNotAvailableErrorTitle: "Má bínú..."
+  projectNotAvailableErrorDescription: "Iṣẹ́ náà kò sí mọ́!"
+  projectNotAvailable: "Kò sí"
+  projectUnknownUser: "Olùmúlò àìmọ̀"
+noReply: "Ìfiránṣẹ́ aládàáṣe ni èyí - Jọ̀wọ́ má ṣe fèsì sí ímeèlì yìí tààrà."
 accountConfirmation:
-  subject: Your Catrobat account confirmation
-  message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  subject: "Ìjẹ́rìísí àkáǹtì Catrobat rẹ"
+  message: "%username% ọ̀wọ́n.\nLáti parí mímú àkáǹtì rẹ ṣiṣẹ́ - jọ̀wọ́ lọ sí %confirmationUrl%\nÌjápọ̀ yìí ṣeé lò lẹ́ẹ̀kan ṣoṣo láti jẹ́rìí àkáǹtì rẹ.\nÌkíni tó dára jùlọ,\nẸgbẹ́ Catrobat rẹ.\n"
+  messageHtml: "<p>\n%username% ọ̀wọ́n.<br>\n<br>\nLáti parí mímú àkáǹtì rẹ ṣiṣẹ́ - jọ̀wọ́ tẹ <a href=\"%confirmationUrl%\">ibí.</a><br>\nÌjápọ̀ yìí ṣeé lò lẹ́ẹ̀kan ṣoṣo láti jẹ́rìí àkáǹtì rẹ.<br>\n<br>\nÌkíni tó dára jùlọ,<br>\nẸgbẹ́ Catrobat rẹ.\n</p>\n"
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "Jẹ́rìí àdírẹ́sì ímeèlì rẹ"
+  welcome: "Káàbọ̀ sí Catrobat!"
+  greeting: "O ṣé fún ìforúkọsílẹ̀! Jọ̀wọ́ jẹ́rìí àdírẹ́sì ímeèlì rẹ láti bẹ̀rẹ̀."
+  message: "Tẹ bọ́tìnnì ìsàlẹ̀ yìí láti jẹ́rìí ímeèlì rẹ. Ìjápọ̀ yìí wúlò títí di %time%, ó sì ṣeé lò lẹ́ẹ̀kan ṣoṣo."
+  button: "Jẹ́rìí Àdírẹ́sì Ímeèlì"
+  ignore: "Tí kì í bá ṣe ìwọ ló ṣẹ̀dá àkáǹtì Catrobat, o lè fojú fo ímeèlì yìí láìléwu."
+  autoDelete: "A máa ń pa àwọn àkáǹtì tí a kò jẹ́rìí rẹ́ fúnra rẹ̀ lẹ́yìn ọgbọ̀n ọjọ́."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "A nílò ìfọwọ́sí òbí fún àkáǹtì Catrobat ọmọ rẹ"
+    title: "A Nílò Ìfọwọ́sí Òbí"
+    greeting: "Pẹ̀lẹ́ o,"
+    message: "Ọmọ rẹ %username% ti ṣẹ̀dá àkáǹtì lórí Catrobat, ó sì ti jẹ́rìí àdírẹ́sì ímeèlì rẹ̀."
+    explanation: "Catrobat jẹ́ pẹpẹ ẹ̀kọ́ ọ̀fẹ́ níbi tí àwọn ọ̀dọ́ ti ń kọ́ ìṣètò kọ̀ǹpútà nípa ṣíṣẹ̀dá áàpù, eré, àti eré ìdárayá àwòrán. Lábẹ́ ìlànà ààbò ọmọdé ti EU, a nílò ìfọwọ́sí rẹ kí ọmọ rẹ tó lè kópa ní kíkún nínú àwùjọ. Jọ̀wọ́ tẹ bọ́tìnnì ìsàlẹ̀ yìí láti fún wa ní ìfọwọ́sí."
+    button: "Fún Ìfọwọ́sí Òbí"
+    ignore: "Tí o kò bá retí ímeèlì yìí, o lè fojú fò ó láìléwu. Láìsí ìfọwọ́sí, àkáǹtì náà yóò ní iṣẹ́ tó lópin."
+    whatIsCatrobat: "Catrobat jẹ́ pẹpẹ ẹ̀kọ́ ìṣètò kọ̀ǹpútà ọ̀fẹ́ tí kì í ṣe fún èrè. Kọ́ síwájú sí i ní catrobat.org."
+    manageLink: "O lè ṣàkóso àkáǹtì ọmọ rẹ nígbàkúùgbà nípasẹ̀ <a href=\"%portalUrl%\" style=\"color: #00acc1;\">Ẹnu-ọ̀nà Òbí</a> wa. Kọ́ síwájú sí i nípa <a href=\"%infoUrl%\" style=\"color: #00acc1;\">ẹ̀tọ́ rẹ gẹ́gẹ́ bí òbí</a>."
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "A Ti Fún Ní Ìfọwọ́sí"
+    message: "O ṣé! Àkáǹtì %username% ti ṣiṣẹ́ ní kíkún báyìí."
+    continueButton: "Ṣàwárí àwọn iṣẹ́"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Àwọn Òbí & Alágbàtọ́"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Àlàyé fún Àwọn Òbí & Alágbàtọ́"
+    intro: "Catrobat ka ààbò àti ìpamọ́ àwọn ọ̀dọ́ olùmúlò sí pàtàkì. Ojú-ìwé yìí ṣàlàyé bí a ṣe ń dáàbò bo ọmọ rẹ àti ẹ̀tọ́ tí o ní."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Kí ni Catrobat?"
+      text: "Catrobat jẹ́ pẹpẹ ẹ̀kọ́ ọ̀fẹ́ tí kì í ṣe fún èrè, níbi tí àwọn ọ̀dọ́ ti ń kọ́ ìṣètò kọ̀ǹpútà nípa ṣíṣẹ̀dá áàpù, eré, àti eré ìdárayá àwòrán tiwọn. Pẹpẹ náà wà káàkiri àgbáyé, a sì ń lò ó ní àwọn ibi ẹ̀kọ́."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Dátà wo ni a ń gbà?"
+      text: "A ń gba dátà tó kéré jùlọ tí a nílò láti ṣiṣẹ́ pẹpẹ náà: orúkọ olùmúlò, àdírẹ́sì ímeèlì, ọjọ́ ìbí, àti àwọn iṣẹ́ tí ọmọ rẹ ṣẹ̀dá tí ó sì gbé sókè. Fún àwọn olùmúlò tí kò tíì pé ọmọ ọdún 14, a tún ń tọ́jú àdírẹ́sì ímeèlì òbí/alágbàtọ́ fún ìdí ìfọwọ́sí. A kì í ta tàbí pín dátà ara ẹni pẹ̀lú ẹnikẹ́ta."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Ẹ̀tọ́ rẹ gẹ́gẹ́ bí òbí tàbí alágbàtọ́"
+      text: "Lábẹ́ ìlànà ààbò ọmọdé ti EU (GDPR) àti COPPA, o ní ẹ̀tọ́ láti: ṣàyẹ̀wò dátà tí a ní nípa ọmọ rẹ, béèrè ẹ̀dà dátà náà, fagilé ìfọwọ́sí rẹ nígbàkúùgbà (èyí tí yóò dín àkáǹtì náà kù), àti béèrè pípa àkáǹtì ọmọ rẹ àti gbogbo dátà tó jẹmọ́ rẹ̀ rẹ́ pátápátá."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Àwọn ìdíwọ̀n wo ló kan àkáǹtì àwọn ọmọdé?"
+      text: "Àwọn olùmúlò tí kò tíì pé ọmọ ọdún 16 kò lè fi àsọyé ránṣẹ́ tàbí kà á, tẹ̀lé àwọn olùmúlò mìíràn, tàbí wo àkóónú tí a sàmì sí pé kò yẹ fún ọmọdé. Wọ́n ṣì lè ṣẹ̀dá àti gbé àwọn iṣẹ́ sókè, wo àwọn iṣẹ́ gbangba, kí wọ́n sì hùwà sí àwọn iṣẹ́ pẹ̀lú ìfẹ́ràn. Àwọn ìdíwọ̀n yìí wà láti pèsè àyíká ẹ̀kọ́ tó ní ààbò."
+    manageButton: "Ṣàkóso Àkáǹtì Ọmọ Rẹ"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Ẹnu-ọ̀nà Òbí"
+    description: "Tẹ àdírẹ́sì ímeèlì rẹ láti gba ìjápọ̀ tó ní ààbò fún ṣíṣàkóso àkáǹtì Catrobat ọmọ rẹ. A óò fi ìjápọ̀ náà ránṣẹ́ sí àdírẹ́sì ímeèlì tí o pèsè nígbà ìforúkọsílẹ̀."
+    emailLabel: "Àdírẹ́sì ímeèlì rẹ"
+    submitButton: "Fi Ìjápọ̀ Ìṣàkóso Ránṣẹ́"
+    infoLink: "Kọ́ Síwájú Sí I"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Ṣàyẹ̀wò àpótí ímeèlì rẹ"
+      message: "Tí àkáǹtì kan bá jẹmọ́ ímeèlì yìí, a ti fi ìjápọ̀ ìṣàkóso ránṣẹ́. Jọ̀wọ́ ṣàyẹ̀wò àpótí ímeèlì rẹ kí o sì tẹ̀lé ìjápọ̀ náà láti ṣàkóso àkáǹtì ọmọ rẹ."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Ṣàkóso Àwọn Àkáǹtì Ọmọ"
+    description: "Ò ń ṣàkóso àwọn àkáǹtì tó jẹmọ́ %email%."
+    consentStatus: "Ipò ìfọwọ́sí"
+    accountCreated: "A ṣẹ̀dá àkáǹtì"
+    email: "Ímeèlì ọmọ"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "A ti fún ní"
+      pending: "Ó ń dúró"
+      revoked: "A ti fagilé"
+    grantButton: "Fún Ní Ìfọwọ́sí"
+    revokeButton: "Fagilé Ìfọwọ́sí"
+    revokeConfirm: "Ṣé o dájú pé o fẹ́ fagilé ìfọwọ́sí? Àkáǹtì náà yóò ní iṣẹ́ tó lópin."
+    exportButton: "Kó Dátà Jáde"
+    deleteButton: "Pa Àkáǹtì Rẹ́"
+    deleteConfirm: "Ṣé o dájú pé o fẹ́ pa àkáǹtì yìí rẹ́ pátápátá? A kò lè yí èyí padà."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Ṣàkóso àkáǹtì Catrobat ọmọ rẹ"
+      title: "Ìṣàkóso Àkáǹtì"
+      greeting: "Pẹ̀lẹ́ o,"
+      message: "O béèrè fún ìjápọ̀ láti ṣàkóso àkáǹtì Catrobat ọmọ rẹ (%usernames%). Tẹ bọ́tìnnì ìsàlẹ̀ yìí láti wo àti ṣàkóso àkáǹtì náà."
+      button: "Ṣàkóso Àkáǹtì"
+      ignore: "Tí kì í bá ṣe ìwọ ló béèrè èyí, o lè fojú fo ímeèlì yìí láìléwu."
 passwordRecovery:
-  subject: Your Catrobat password recovery
-  message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
-    <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
-    <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  subject: "Ìgbàpadà ọ̀rọ̀ aṣínà Catrobat rẹ"
+  message: "%username% ọ̀wọ́n.\nO béèrè láti tún ọ̀rọ̀ aṣínà rẹ ṣe lórí %appplication_url% nítorí pé o gbàgbé ọ̀rọ̀ aṣínà rẹ.\nTí kì í bá ṣe ìwọ ló béèrè èyí, jọ̀wọ́ fojú fò ó. Yóò parí, kò sì ní wúlò mọ́ lẹ́yìn wákàtí 24.\nLáti tún ọ̀rọ̀ aṣínà rẹ ṣe kí o sì ṣẹ̀dá tuntun, jọ̀wọ́ lọ sí ojú-ìwé yìí: %confirmationUrl%\nO lè lo orúkọ olùmúlò àti ọ̀rọ̀ aṣínà rẹ nígbàkúùgbà láti wọ àwùjọ %appplication_url%.\nLáti ṣe bẹ́ẹ̀, kàn lọ sí ojú-ìwé yìí: %loginPage%\nLáti ṣàtúnkọ àlàyé profaili rẹ, lọ sí ojú-ìwé yìí: %profilePage%\nÌkíni tó dára jùlọ,\nẸgbẹ́ Catrobat rẹ.\n"
+  messageHtml: "<p>\n%username% ọ̀wọ́n.<br>\n<br>\nO béèrè láti tún ọ̀rọ̀ aṣínà rẹ ṣe lórí <a href=\"%appplication_url%\">Pocket Code</a> nítorí pé o gbàgbé ọ̀rọ̀ aṣínà rẹ.\nTí kì í bá ṣe ìwọ ló béèrè èyí, jọ̀wọ́ fojú fò ó. Yóò parí, kò sì ní wúlò mọ́ lẹ́yìn wákàtí 24.<br>\n<br>\nLáti tún ọ̀rọ̀ aṣínà rẹ ṣe kí o sì ṣẹ̀dá tuntun, jọ̀wọ́ tẹ <a href=\"%confirmationUrl%\">ibí.</a><br>\n<br>\nO lè lo orúkọ olùmúlò àti ọ̀rọ̀ aṣínà rẹ nígbàkúùgbà láti wọ àwùjọ <a href=\"%appplication_url%\">Pocket Code</a>.<br>\nLáti ṣe bẹ́ẹ̀, kàn lọ sí ojú-ìwé yìí: <a href=\"%loginPage%\">Ojú-ìwé Ìwọlé</a><br>\nLáti ṣàtúnkọ àlàyé profaili rẹ, lọ sí <a href=\"%profilePage%\">ojú-ìwé</a> yìí.<br>\n<br>\nÌkíni tó dára jùlọ,<br>\nẸgbẹ́ Catrobat rẹ.\n</p>\n"
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  aboutMe: "Nípa mi"
+  currentlyWorkingOn: "Ohun tí mò ń ṣiṣẹ́ lé lórí lọ́wọ́lọ́wọ́"
+  edit: "Ṣàtúnkọ profaili rẹ"
+  saveChanges: "fi àwọn àyípadà pamọ́"
+  newPass: "ọ̀rọ̀ aṣínà tuntun"
+  repeatPass: "tún ọ̀rọ̀ aṣínà tẹ̀"
+  oldPass: "ọ̀rọ̀ aṣínà àtijọ́"
+  firstEmail: "Ímeèlì àkọ́kọ́ mi"
+  secondEmail: "Ímeèlì kejì mi"
+  myPrograms: "Àwọn iṣẹ́ mi"
+  follows: "Ń tẹ̀lé"
+  follower: "Olùtẹ̀lé"
+  unfollowUser: "Dẹ́kun títẹ̀lé olùmúlò yìí!"
+  followUser: "Tẹ̀lé olùmúlò yìí!"
+  amountOfPrograms: "Iye àwọn iṣẹ́"
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
-  changePicture: Change picture
-  goToScratchProfile: Profile on Scratch
+    passwordTooShort: "Ọ̀rọ̀ aṣínà tuntun gbọ́dọ̀ ní ó kéré tán %length% ohun kíkọ."
+    passwordTooLong: "Ọ̀rọ̀ aṣínà tuntun lè ní %length% ohun kíkọ ní pupọ̀ jùlọ."
+    passwordIsUsername: "Ọ̀rọ̀ aṣínà gbọ́dọ̀ yàtọ̀ sí orúkọ olùmúlò."
+    passwordWrong: "Ọ̀rọ̀ aṣínà kò tọ́"
+    emailNotValid: "Àdírẹ́sì ímeèlì yìí kò wúlò."
+    emailMissing: "Àṣìṣe nígbà tí a ń ṣe ìmúdójúìwọ̀n àdírẹ́sì ímeèlì yìí. O gbọ́dọ̀ ní ó kéré tán àdírẹ́sì ímeèlì kan tí a ti jẹ́rìí."
+    emailExists: "Àdírẹ́sì ímeèlì yìí ti wà tẹ́lẹ̀."
+    usernameNotValid: "Orúkọ olùmúlò yìí kò wúlò."
+    usernameMissing: "O gbọ́dọ̀ ní orúkọ olùmúlò."
+    usernameExists: "Orúkọ olùmúlò yìí ti wà tẹ́lẹ̀."
+    usernameContainsEmail: "Orúkọ olùmúlò kò gbọ́dọ̀ ní àdírẹ́sì ímeèlì nínú."
+    submitSuccess: "a ti fi pamọ́!"
+  reallyDeleteProgram: "Ṣé o fẹ́ pa iṣẹ́ rẹ rẹ́ lóòótọ́"
+  programsOf: "Àwọn iṣẹ́ ti"
+  picture: "Àwòrán profaili"
+  changePicture: "Yí àwòrán padà"
+  goToScratchProfile: "Profaili lórí Scratch"
 myprofile:
-  userSettings: User settings
-  profileSettings: Edit profile
-  securitySettings: Change password
-  accountSettings: Account settings
-  accountVerification: Verify account
-  account: Account
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
-  email: Email
-  deleteAccount: Delete account
-  deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  userSettings: "Ètò olùmúlò"
+  profileSettings: "Ṣàtúnkọ profaili"
+  securitySettings: "Yí ọ̀rọ̀ aṣínà padà"
+  accountSettings: "Ètò àkáǹtì"
+  accountVerification: "Jẹ́rìí àkáǹtì"
+  account: "Àkáǹtì"
+  editProfile: "Ṣàtúnkọ profaili"
+  edit: "Ṣàtúnkọ"
+  done: "Ó ti parí"
+  checkMail: "A ti fi ímeèlì kan ránṣẹ́ sí àdírẹ́sì ímeèlì rẹ. Jọ̀wọ́ ṣàyẹ̀wò àpótí ímeèlì rẹ."
+  passwordUpdated: "A ti ṣe ìmúdójúìwọ̀n ọ̀rọ̀ aṣínà rẹ ní àṣeyọrí."
+  avatar: "Àwòrán àmì"
+  email: "Ímeèlì"
+  deleteAccount: "Pa àkáǹtì rẹ́"
+  deleteAccountWarning: "Ṣọ́ra:\nO ṣẹ̀dá iṣẹ́ %num_projects%, o sì ní olùtẹ̀lé %num_followers%. A óò yọ gbogbo iṣẹ́ rẹ kúrò. O kò ní lè wọlé mọ́, àwọn iṣẹ́ rẹ yóò sì pòórá kúrò nínú gbogbo àtòjọ. A kò lè yí pípa profaili rẹ padà!\nṢé o dájú pé o fẹ́ fi wá sílẹ̀?\n"
+  exportData: "Ṣe ìgbàsílẹ̀ dátà mi"
+  exportDataDescription: "O ní ẹ̀tọ́ láti gba ẹ̀dà dátà ara ẹni rẹ. Èyí ní àlàyé profaili rẹ, àwọn iṣẹ́, àsọyé, ìhùwàsí, àti àwọn olùtẹ̀lé nínú."
+  exportDataLoading: "Ń ṣe ìgbàsílẹ̀..."
+  exportDataError: "Nǹkan kan ṣàṣìṣe nígbà tí a ń kó dátà rẹ jáde. Jọ̀wọ́ gbìyànjú lẹ́yìn náà."
+  exportDataRateLimited: "O lè kó dátà rẹ jáde lẹ́ẹ̀kan lójúmọ́ nìkan. Jọ̀wọ́ gbìyànjú lọ́la."
+  editAccountSettings: "Ṣàtúnkọ ètò àkáǹtì"
+  profileChangeSuccess: "A ti yí profaili rẹ padà ní àṣeyọrí."
+  unspecifiedError: "Nǹkan kan kò ṣiṣẹ́ nígbà tí a ń yí profaili rẹ padà. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i tàbí jẹ́ ká mọ̀ tí ó bá ń ṣẹlẹ̀ lemọ́lemọ́!"
+  verifyAccountText: "A óò fi ímeèlì kan tó ní ìjápọ̀ ránṣẹ́ sí ọ láti jẹ́rìí àkáǹtì rẹ. Rí i dájú pé o tẹ ìjápọ̀ náà láàrin wákàtí kan, ímeèlì kan ṣoṣo ni o lè béèrè lójúmọ́."
+  verifyAccountButton: "Fi ímeèlì ránṣẹ́"
+  verifyAccountMailSent: "A ti fi ímeèlì ránṣẹ́ ní àṣeyọrí. Jọ̀wọ́ ṣàyẹ̀wò àpótí ímeèlì rẹ"
+  verifyAccountMailFailed: "Ímeèlì kan ṣoṣo ni o lè béèrè lójúmọ́"
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: "Ìwé àṣẹ láti ṣeré"
+  title: "Ìwé àṣẹ láti ṣeré - Fún ní ìdúpẹ́ kí o sì pín"
+  text1: "Fojú inú wò ó pé iṣẹ́ Catrobat kọ̀ọ̀kan jẹ́ kéèkì, kéèkì àrà ọ̀tọ̀ kan tó wá pẹ̀lú ìlànà sísè rẹ̀ (àwọn búlọ́ọ̀kù ìṣètò). Gbogbo ọmọ ẹgbẹ́ àwùjọ Catrobat ń pín kéèkì wọn pẹ̀lú ìlànà sísè wọn. Èyí túmọ̀ sí pé o lè gbádùn àwọn kéèkì náà kí o sì kọ́ bí o ṣe lè ṣe wọ́n fúnra rẹ!"
+  text2: "Kò sí ìlànà sísè àṣírí: ìtọ́sọ́nà bí a ṣe ń ṣe àwọn kéèkì wọ̀nyí ṣí sílẹ̀ fún ẹnikẹ́ni láti lò, tún lò, yí padà, kí ó sì jẹ́ ìmísí fún èrò tuntun... mo ní kéèkì."
+  text3: "O lè jẹ àwọn kéèkì náà, o sì lè da ìlànà sísè àwọn ẹlòmíràn kọ láti ṣe tìrẹ, bóyá pẹ̀lú èròjà mìíràn. Òmìnira yìí wá pẹ̀lú ohun méjì tí ó rọrùn:"
+  text4: "Nígbà tí a ń dá àwùjọ Catrobat sílẹ̀, a pinnu láti gba ọ̀nà yìí nítorí a gbàgbọ́ pé ó ń ṣe àtìlẹ́yìn fún ẹ̀kọ́ àti àtinúdá nínú àwùjọ. Nípa pínpín ìlànà sísè àti èròjà (ìwé àfọwọ́kọ àti iṣẹ́ ọnà), àwọn ènìyàn lè kọ́ lé èrò ara wọn, gbogbo ènìyàn yóò sì jàǹfààní."
+  text5: "Nígbà tí a ń ṣe ọ̀nà wẹ́ẹ̀bùsáìtì Catrobat, a fi àwọn ẹ̀yà kún un láti gba àwọn ènìyàn níyànjú láti pín àti láti dúpẹ́ lọ́wọ́ àwọn ẹlòmíràn. Lórí ojú-ìwé iṣẹ́ kọ̀ọ̀kan, o lè máa ṣe ìgbàsílẹ̀ ìwé àfọwọ́kọ àtilẹ̀wá iṣẹ́ náà nígbà gbogbo. Tí o bá tún iṣẹ́ kan ṣe (yí ìwé àfọwọ́kọ tàbí iṣẹ́ ọnà padà, kí o sì pín àbájáde rẹ̀), a gbà ọ́ níyànjú láti dúpẹ́ nínú àkọsílẹ̀ iṣẹ́ náà, kí o dárúkọ àwọn ènìyàn àti iṣẹ́ tó fún ọ ní ìmísí."
+  text6: "Kọ́ síwájú sí i nípa àwọn òfin lílò àwùjọ orí ayélujára Catrobat lórí %link-termsOfUse%."
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: "pín àwọn kéèkì rẹ pẹ̀lú ìlànà sísè wọn"
+    item2: "dúpẹ́ lọ́wọ́ àwọn tó fún ọ ní ìmísí"
+  version: "Ẹ̀yà 1.1, 2 Oṣù Kẹrin 2013"
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  title: "Àwọn Òfin Lílò"
+  headline: "Káàbọ̀ sí àwùjọ Catrobat!"
+  text1: "Gẹ́gẹ́ bí apá kan àwùjọ Catrobat, ò ń pín àwọn iṣẹ́ àti èrò pẹ̀lú àwọn ènìyàn:"
+  text2: "A nílò ìrànlọ́wọ́ rẹ láti sọ àwùjọ yìí di ibi àtìlẹ́yìn fún gbogbo ọmọ ẹgbẹ́. Báyìí ni o ṣe lè ṣèrànlọ́wọ́:"
+  text3: "Nípasẹ̀ iṣẹ́ àkànṣe Catrobat, a fẹ́ gbé ìfọwọ́sowọ́pọ̀ lárugẹ kí a sì jẹ́ kí àtinúdá gbogbo ènìyàn papọ̀ fún àǹfààní gbogbo ọmọ aráyé. Ìwọ náà lè di ọmọ ẹgbẹ́ aláàpọn nínú àwùjọ Catrobat nípa fífi àwọn iṣẹ́ rẹ fún àwùjọ gẹ́gẹ́ bí ẹ̀bùn, bí àwọn ọmọ ẹgbẹ́ aláàpọn mìíràn ṣe ń fi àwọn iṣẹ́ wọn fún ọ:"
+  text4: "Ẹ̀bùn wa fún ọ:"
+  text5: "Àwọn Òfin Lílò àti Iṣẹ́ wa:"
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: "láti oríṣiríṣi orílẹ̀-èdè àti àṣà"
+    item2: "ti gbogbo ọjọ́ orí (láti ọmọ kékeré dé ọ̀dọ́ àti àwọn bàbá àgbà àti ìyá àgbà)"
+    item3: "pẹ̀lú gbogbo ìpele ìrírí"
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's notes and credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item1: "Ní ọ̀wọ̀. Nígbà tí o bá ń pín àwọn iṣẹ́, jọ̀wọ́ rántí pé àwọn ènìyàn oríṣiríṣi ọjọ́ orí àti ìpìlẹ̀ ni yóò rí ohun tí o fi kún un."
+    item2: "Fún ní ìdúpẹ́. Lómìnira láti ṣe ẹ̀yà tí a yí padà ti iṣẹ́ àwọn ẹlòmíràn - kàn rí i dájú pé o dúpẹ́ lọ́wọ́ wọn. Ibi kan láti dúpẹ́ ni apá àkọsílẹ̀ àti ìdúpẹ́ iṣẹ́ rẹ. Jọ̀wọ́ wo ìpínrọ̀ tó wà nísàlẹ̀ àtòjọ yìí fún àlàyé nípa yíyí àwọn iṣẹ́ olùmúlò mìíràn padà."
+    item3: "Jẹ́ olóòótọ́. Má ṣe díbọ́n pé o jẹ́ ẹlòmíràn tàbí gbìyànjú láti tan àwùjọ jẹ."
+    item4: "Pa àlàyé ara ẹni mọ́ ní àdáni. Má ṣe pín àdírẹ́sì ímeèlì rẹ, nọ́mbà fóònù, tàbí àlàyé ìkànsí ara ẹni mìíràn."
+    item5: "Ṣèrànlọ́wọ́ láti jẹ́ kí ojú-òpó náà jẹ́ ọ̀rẹ́. Tí o bá rò pé àwọn ẹlòmíràn yóò rí iṣẹ́ tàbí àsọyé kan bí ìkà, ẹ̀gàn, ìwà ipá jù, tàbí èyí tí kò yẹ, kàn tẹ bọ́tìnnì 'jábọ̀ pé kò yẹ' kí o sì fi àlàyé kúkúrú sílẹ̀. Ẹgbẹ́ Catrobat yóò ṣàyẹ̀wò ìròyìn rẹ, wọ́n sì lè yọ iṣẹ́, àsọyé, tàbí ìfiránṣẹ́ èyíkéyìí kúrò."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Nípa gbígbé iṣẹ́ kan sókè sí àwọn wẹ́ẹ̀bùsáìtì wa, o gbà láti fi iṣẹ́ yìí sábẹ́ àwọn ìwé àṣẹ ọ̀fẹ́ kan fún àwọn iṣẹ́ Catrobat tí a gbé sókè. Bí àwọn ìwé àṣẹ ọ̀fẹ́ tí ètò Catrobat fúnra rẹ̀ fi wà fún ọ, àwọn ìwé àṣẹ ọ̀fẹ́ wọ̀nyí fún gbogbo ènìyàn ní ẹ̀tọ́ láti kọ́ láti inú iṣẹ́ tí àwọn ẹlòmíràn ti gbé sókè tẹ́lẹ̀, kí wọ́n sì ṣe àtúnṣe rẹ̀ láti kọ́ eré tuntun tó fani mọ́ra, eré ìdárayá àwòrán, àti àwọn iṣẹ́ mìíràn. Èyí jẹ́ kí gbogbo ènìyàn 'dúró lé èjìká àwọn ẹgbẹ́ wọn', ọ̀kan nínú wọn sì ni ìwọ! Iṣẹ́ rẹ yóò ṣe gbogbo ayé láǹfààní, yóò sì wà ní ọ̀fẹ́ fún gbogbo ènìyàn láti lò, bí ọ̀rọ̀ àti àwòrán tí àwọn olùyọ̀ǹda láti gbogbo àgbáyé fi fún Wikipedia lọ́fẹ̀ẹ́. Rò ó bí ẹ̀bùn rẹ fún ọmọ aráyé: o fún gbogbo ènìyàn, gbogbo àwọn tó gbé iṣẹ́ wọn sókè sí àwọn wẹ́ẹ̀bùsáìtì wa sì fún ọ. Nítorí náà iṣẹ́ tí a gbé sókè jẹ́ ẹ̀bùn tó ní iye ńlá tí olúwa rẹ̀ ń fún ọ lọ́fẹ̀ẹ́, pẹ̀lú àdéhùn pé o kópa nínú àwùjọ lórí òfin kan náà."
+    item2: "O kò ní láti gba ẹ̀bùn náà; tí o bá gbà á, àwọn òfin kan yóò wúlò. Àǹfààní àwọn òfin wọ̀nyí ni pé o lè kọ́ láti inú iṣẹ́ náà kí o sì kọ́ lé e láti ṣe ohun tó dára jù fúnra rẹ, èyí tí o lè, fún àpẹẹrẹ, tún gbé sókè sí àwọn wẹ́ẹ̀bùsáìtì wa gẹ́gẹ́ bí tìrẹ. Àǹfààní mìíràn ni pé àwọn ìwé àṣẹ wọ̀nyí rí i dájú pé a kò lè dá ọ lẹ́bi fún ìṣòro èyíkéyìí tó bá ṣẹlẹ̀ sí àwọn ẹlòmíràn nípa lílò iṣẹ́ rẹ."
+    item3: "Àdéhùn pàtàkì mìíràn ni pé o gbọ́dọ̀ dárúkọ àwọn òǹkọ̀wé tí o gbé iṣẹ́ rẹ ka iṣẹ́ wọn ní kedere. Ní àkókò kan náà, a óò ṣiṣẹ́ takuntakun kí àwọn ẹlòmíràn lè mọrírì pé ìwọ ló fi iṣẹ́ rẹ kún un, nípa dídárúkọ orúkọ àrà ọ̀tọ̀ tí o yàn láti ṣojú rẹ nínú àwùjọ Catrobat, àti nípa fífún àwọn ẹlòmíràn ní àǹfààní láti fi ìmọrírì wọn hàn sí ọ ní gbangba fún fífi iṣẹ́ rẹ fún gbogbo ènìyàn, àti fún wọn ní pàtàkì."
+    item4: "Jọ̀wọ́ wo %link-licenseUploaded% fún àwọn òfin àti àdéhùn òfin pàtó."
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "A ń fún ọ ní gbogbo sọ́fítíwọ̀ọ̀ àti ohun èlò Íńtánẹ́ẹ̀tì tiwa tó jẹmọ́ ètò Catrobat, fún àpẹẹrẹ, sọ́fítíwọ̀ọ̀ tí ẹgbẹ́ Catrobat kọ, àwọn wẹ́ẹ̀bùsáìtì àti ohun èlò Íńtánẹ́ẹ̀tì wa, kóòdù orísun wa tó jẹmọ́ ètò Catrobat, àti gbogbo ohun èlò àfikún bí àwòrán, ohùn, àti ọ̀rọ̀, nísinsìnyí àti lọ́jọ́ iwájú, lábẹ́ àwọn ìwé àṣẹ ọ̀fẹ́ Catrobat."
+    item2: "Àwọn ìwé àṣẹ wọ̀nyí jẹ́ kí gbogbo apá Catrobat jẹ́ ọ̀fẹ́ fún ọ, láìsanwó àti ní ti òmìnira láti lò wọ́n bí o ṣe fẹ́, pẹ̀lú ìdíwọ̀n díẹ̀ péré tó ń rí i dájú, lára àwọn mìíràn, pé ètò Catrobat yóò wà ní ọ̀fẹ́ àti wúlò fún gbogbo ènìyàn títí láé."
+    item3: "Jọ̀wọ́ wo %link-licenseToPlay% fún àwọn òfin àti àdéhùn òfin pàtó. Kóòdù orísun ètò Catrobat àti ọ̀pọ̀ ìwé àti ohun èlò mìíràn wà nípasẹ̀ %link-developer%."
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: "Tí ìwọ, tàbí, tí o kò bá tíì pé ọmọ ọdún 13, àwọn òbí tàbí alágbàtọ́ rẹ, bá jẹmọ́ àjọ kan tó ń kópa nínú tàbí tó ń ṣe ìrúfin ìpamọ́ oníàwọ̀n àti/tàbí ìṣọ́ ènìyàn lọ́pọ̀lọpọ̀, a kò gbà ọ́ láàyè láti lo àwọn áàpù sọ́fítíwọ̀ọ̀ wa tàbí láti wọ àwọn iṣẹ́ wa. Àlàyé pàtó ìdíwọ̀n yìí àti àwọn àyàfi kan wà ní Apá 4.a àti 4.b lórí %link-termsOfUse% wa."
+    item2: "Tí o kò bá tíì pé ọmọ ọdún 13, o ní láti béèrè lọ́wọ́ àwọn òbí tàbí alágbàtọ́ rẹ bóyá wọ́n gbà ọ́ láàyè láti lo Àwọn Áàpù Sọ́fítíwọ̀ọ̀ àti Iṣẹ́ Catrobat."
+    item3: "A ní ẹ̀tọ́ láti kọ̀, pa rẹ́, tàbí fi pamọ́ àwọn iṣẹ́, àkáǹtì olùmúlò, àti ohun èlò díjítà èyíkéyìí tí a gbé sókè sí àwọn wẹ́ẹ̀bùsáìtì Catrobat nígbàkúùgbà gẹ́gẹ́ bí a ṣe pinnu, fún àpẹẹrẹ tí a bá rí i pé iṣẹ́ kan ní ohun èlò tí kò yẹ tàbí pé olùmúlò kan ń rú ẹ̀tọ́ àwọn ẹlòmíràn."
+    item4: "A ń fún ọ ní gbogbo sọ́fítíwọ̀ọ̀ àti ohun èlò Íńtánẹ́ẹ̀tì Catrobat pẹ̀lú ìrètí pé wọn yóò wúlò, ṣùgbọ́n láìsí ìdánilójú kankan."
+    item5: "Jọ̀wọ́ wo %link-termsOfUse% wa developer.catrobat.org/terms_of_use_and_service fún àlàyé pàtó àwọn kókó òkè yìí àti àwọn òfin àti àdéhùn òfin àfikún."
+  bottom1: "Máa padà wá wo ibí láti ìgbà dé ìgbà, nítorí à ń gbìyànjú nígbà gbogbo láti mú Àwọn Òfin Lílò wa dára sí i."
+  bottom2: "Jọ̀wọ́ fi àbá èyíkéyìí nípa Àwọn Òfin Lílò wọ̀nyí ránṣẹ́ sí %email-webmaster%."
+  version: "Ẹ̀yà 1.3, 4 Oṣù Kẹta 2014"
 search:
-  dotdotdot: Search...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
-  results: Results for
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  dotdotdot: "Wá..."
+  search: "Wá àwọn iṣẹ́, olùmúlò & ilé-iṣẹ́ ọnà"
+  inMediaLib: "Wá nínú ibi ìkówèésí mídíà"
+  inMediaCategory: "Wá nínú ẹ̀ka mídíà"
+  results: "Àbájáde fún"
+  resultcount: "Ìwádìí rẹ mú àbájáde %count% wá"
+  fail: "Jọ̀wọ́ tẹ ó kéré tán ọ̀rọ̀ ìwádìí kan"
+  noUsers: "A kò rí olùmúlò kankan"
+  noProjects: "A kò rí iṣẹ́ kankan"
+  noStudios: "A kò rí ilé-iṣẹ́ ọnà kankan"
+  sameSearchMessage: "Ó dàbí pé o ti wà níbí tẹ́lẹ̀! Gbìyànjú ìwádìí mìíràn?"
 menu:
-  profile: Profile
-  login: Login
-  logout: Logout
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
-  language: Language
-  languageOptionsNotAvailable: No language options available.
+  profile: "Profaili"
+  login: "Wọlé"
+  logout: "Jáde"
+  admin: "Alábòójútó"
+  home: "Ilé"
+  helpAndTutorials: "Ìrànlọ́wọ́ & ẹ̀kọ́"
+  followersAndFollowing: "Olùtẹ̀lé"
+  mediaLibrary: "Ibi ìkówèésí mídíà"
+  studio: "Àwọn ilé-iṣẹ́ ọnà"
+  language: "Èdè"
+  languageOptionsNotAvailable: "Kò sí àṣàyàn èdè kankan."
 login:
-  login: Login
+  login: "Wọlé"
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: "Wọlé báyìí"
+    createAccount: "Ṣẹ̀dá àkáǹtì"
+    forgetPassword: "Ṣé o gbàgbé ọ̀rọ̀ aṣínà?"
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+    title: "Tàbí o lè darapọ̀ pẹ̀lú"
+  passOrUser: "Ọ̀rọ̀ aṣínà tàbí orúkọ olùmúlò rẹ kò tọ́."
+  accountSuspended: "A ti dá àkáǹtì rẹ dúró. Tí o bá gbàgbọ́ pé àṣìṣe ni èyí, jọ̀wọ́ kàn sí ìrànlọ́wọ́."
+  noUsername: "A kò rí orúkọ olùmúlò tàbí àdírẹ́sì ímeèlì rẹ."
+  forgotPass: "Ṣé o gbàgbé ọ̀rọ̀ aṣínà tàbí orúkọ olùmúlò?"
+  recoverPassSend: "A ti fi ímeèlì kan ránṣẹ́ sí àdírẹ́sì ímeèlì rẹ. Jọ̀wọ́ ṣàyẹ̀wò àpótí ímeèlì rẹ."
+  alreadyReset: "A ti béèrè ọ̀rọ̀ aṣínà fún olùmúlò yìí láàrin wákàtí 24 sẹ́yìn."
+  confirmationSend: "A ti fi ímeèlì ìjẹ́rìísí ìforúkọsílẹ̀ rẹ ránṣẹ́ sí àdírẹ́sì ímeèlì rẹ. Jọ̀wọ́ ṣàyẹ̀wò àpótí ímeèlì rẹ kí o sì mú àkáǹtì rẹ ṣiṣẹ́."
+  userOrEmail: "Orúkọ olùmúlò tàbí Ímeèlì"
+  changePass: "Yí ọ̀rọ̀ aṣínà padà"
+  createAccount: "Ṣẹ̀dá àkáǹtì kan"
+  noAccount: "Ṣé o kò ní àkáǹtì?"
+  alreadyAccount: "Ṣé o ti ní àkáǹtì?"
   or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
-  passwordSecond: Password confirm
+  username: "Orúkọ olùmúlò"
+  email: "Ímeèlì"
+  passwordFirst: "Ọ̀rọ̀ aṣínà"
+  passwordSecond: "Jẹ́rìí ọ̀rọ̀ aṣínà"
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: "Forúkọ sílẹ̀"
+  subText: "Nípa títẹ̀síwájú, ò ń ṣẹ̀dá àkáǹtì àwùjọ Catrobat, o sì gbà sí %var1% àti %var2% wa."
+  dateOfBirth: "Ọjọ́ ìbí"
+  dateOfBirthInfo: "A ń béèrè ọjọ́ ìbí rẹ láti tẹ̀lé ìlànà ààbò ọmọdé ti EU (GDPR/COPPA) àti láti pèsè ìrírí tó ní ààbò fún àwọn olùmúlò kékeré."
+  parentEmail: "Ímeèlì Òbí/Alágbàtọ́"
+  parentEmailInfo: "A nílò rẹ̀ fún àwọn olùmúlò tí kò tíì pé ọmọ ọdún 14. A óò fi ìbéèrè ìfọwọ́sí ránṣẹ́ sí àdírẹ́sì yìí."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: Continue
+    title: "Parí ìforúkọsílẹ̀ rẹ"
+    info: "Jọ̀wọ́ pèsè ọjọ́ ìbí rẹ láti máa bá lílo pẹpẹ náà lọ."
+    submit: "Tẹ̀síwájú"
   button:
-    cancel: Cancel
-    createAccount: Create account
+    cancel: "Fagilé"
+    createAccount: "Ṣẹ̀dá àkáǹtì"
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Ṣàyẹ̀wò àpótí ímeèlì rẹ!"
+    message: "A ti fi ímeèlì ìjẹ́rìísí ránṣẹ́ sí ọ. Tẹ ìjápọ̀ inú ímeèlì náà láti mú àkáǹtì rẹ ṣiṣẹ́."
+    helpTitle: "Ṣé o kò rí ímeèlì náà gbà?"
+    hint: "Ṣàyẹ̀wò fódà spam rẹ. Ìjápọ̀ náà wúlò fún wákàtí 24."
+    resendButton: "Tún ímeèlì ìjẹ́rìísí ránṣẹ́"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "À ń dúró de ìfọwọ́sí òbí"
+    message: "A ti jẹ́rìí ímeèlì rẹ! Kí o tó lè lo pẹpẹ náà ní kíkún, òbí tàbí alágbàtọ́ kan gbọ́dọ̀ fún ní ìfọwọ́sí."
+    sentTo: "A ti fi ìbéèrè ìfọwọ́sí ránṣẹ́ sí %email%"
+    helpTitle: "Ṣé o kò rí ímeèlì náà gbà? Ṣé o nílò ìrànlọ́wọ́?"
+    hint: "Ní kí òbí rẹ ṣàyẹ̀wò fódà spam wọn. Ìjápọ̀ náà wúlò fún wákàtí 24."
+    resendButton: "Tún ímeèlì ìfọwọ́sí ránṣẹ́"
+    wrongEmail: "Ṣé o tẹ ímeèlì òbí tí kò tọ́?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "A ti fagilé ìfọwọ́sí òbí"
+    message: "Òbí tàbí alágbàtọ́ rẹ ti fagilé ìfọwọ́sí fún àkáǹtì rẹ. Àkáǹtì rẹ yóò ní iṣẹ́ tó lópin títí wọn yóò fi tún fún ní ìfọwọ́sí."
+    newEmailPlaceholder: "Ímeèlì òbí tuntun"
+    changeButton: "Ṣe ìmúdójúìwọ̀n & tún fi ránṣẹ́"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: "Ìgbàpadà àkáǹtì"
+  description: "Tí o bá rántí ímeèlì tàbí orúkọ olùmúlò àkáǹtì rẹ, a lè fi ìjápọ̀ ránṣẹ́ sí ọ láti tún ọ̀rọ̀ aṣínà rẹ ṣe."
   button:
-    cancel: Cancel
-    submit: Recover password
+    cancel: "Fagilé"
+    submit: "Gba ọ̀rọ̀ aṣínà padà"
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Tún ọ̀rọ̀ aṣínà rẹ ṣe"
+    description: "Tí o bá rántí ímeèlì àkáǹtì rẹ, a lè fi ìjápọ̀ ránṣẹ́ sí ọ láti tún ọ̀rọ̀ aṣínà rẹ ṣe."
     button:
-      submit: "Send reset email"
-      cancel: "Cancel"
+      submit: "Fi ímeèlì àtúnṣe ránṣẹ́"
+      cancel: "Fagilé"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "Ṣàyẹ̀wò àwọn ímeèlì rẹ"
+    description: "Tí àkáǹtì kan tó bá ímeèlì rẹ mu bá wà, a ṣẹ̀ṣẹ̀ fi ímeèlì kan ránṣẹ́ tó ní ìjápọ̀ tí o lè lò láti tún ọ̀rọ̀ aṣínà rẹ ṣe. Ìjápọ̀ yìí yóò parí ní %time%."
+    descriptionTwo: "O lè béèrè àtúnṣe ọ̀rọ̀ aṣínà tuntun ní gbogbo wákàtí %throttleLimit%."
+    descriptionThree: "Tí o kò bá rí ímeèlì gbà, jọ̀wọ́ ṣàyẹ̀wò fódà spam rẹ tàbí kọ ímeèlì sí ẹ̀ka ìrànlọ́wọ́ wa ní %email-webmaster%."
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "Láti tún ọ̀rọ̀ aṣínà rẹ ṣe, jọ̀wọ́ lọ sí ìjápọ̀ yìí"
+    expire: "Ìjápọ̀ yìí yóò parí ní %time%."
+    cheers: "Ó dàbọ̀!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "Tún ọ̀rọ̀ aṣínà rẹ ṣe"
+    content: "O ṣẹ̀ṣẹ̀ béèrè àtúnṣe ọ̀rọ̀ aṣínà fún àkáǹtì Catrobat rẹ. Tẹ bọ́tìnnì ìsàlẹ̀ yìí láti yan ọ̀rọ̀ aṣínà tuntun. Tí kì í bá ṣe ìwọ ló béèrè èyí, o lè fojú fo ímeèlì yìí láìléwu."
+    visitLink: "Tún Ọ̀rọ̀ Aṣínà Ṣe"
+    expire: "Ìjápọ̀ yìí wúlò fún %time%, ó sì ṣeé lò lẹ́ẹ̀kan ṣoṣo."
   reset:
-    title: "Reset your password"
+    title: "Tún ọ̀rọ̀ aṣínà rẹ ṣe"
     button:
-      submit: "Reset password"
+      submit: "Tún ọ̀rọ̀ aṣínà ṣe"
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: "Ṣe ìgbàsílẹ̀ gẹ́gẹ́ bí áàpù"
+  prepare: "Gbà á gẹ́gẹ́ bí áàpù"
+  preparing: "À ń pèsè áàpù"
+  text: "Ìlànà náà lè gba àkókò díẹ̀"
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: "Nǹkan kan kò ṣiṣẹ́. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i tàbí jẹ́ ká mọ̀ tí ó bá ń ṣẹlẹ̀ lemọ́lemọ́!"
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: "Orúkọ olùmúlò kò gbọ́dọ̀ ṣófo"
+    invalid: "Orúkọ olùmúlò rẹ kò wúlò"
+    exists: "Orúkọ olùmúlò yìí ti wà tẹ́lẹ̀."
+    not_exists: "Orúkọ olùmúlò yìí kò sí."
+    not_email: "Orúkọ olùmúlò kò gbọ́dọ̀ jẹ́ àdírẹ́sì ímeèlì."
+    size: "Orúkọ olùmúlò gbọ́dọ̀ ní ó kéré tán ohun kíkọ 3, kò sì gbọ́dọ̀ ju 180 lọ"
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: "Ọ̀rọ̀ aṣínà kò sí."
+    short: "Ọ̀rọ̀ aṣínà rẹ gbọ́dọ̀ ní ó kéré tán {{ limit }} ohun kíkọ."
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: "Orílẹ̀-èdè kò sí."
+    invalid: "Orílẹ̀-èdè kò wúlò"
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    blank: "Ímeèlì kò gbọ́dọ̀ ṣófo"
+    invalid: "Ó dàbí pé ímeèlì rẹ kò wúlò"
+    exists: "Àdírẹ́sì ímeèlì yìí ti wà tẹ́lẹ̀."
   id:
-    blank: Open authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-data not correct or missing!
+    blank: "ID ìjẹ́rìísí ṣíṣí kò gbọ́dọ̀ ṣófo"
+  login: "Ọ̀rọ̀ aṣínà tàbí orúkọ olùmúlò kò tọ́."
+  post-data: "Dátà POST kò tọ́ tàbí kò sí!"
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: "Oníbàárà kò fi fileChecksum ránṣẹ́! Ṣé ò ń lo ẹ̀yà Pocket Code àtijọ́?"
+    invalid: "checksum kò wúlò"
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: "xml kóòdù kò wúlò"
+    missing: "àṣìṣe àìmọ̀: project_xml_not_found!"
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: "a rí fáìlì àìròtẹ́lẹ̀"
+    invalid: "fáìlì kò wúlò"
+  image.missing: "XML iṣẹ́ náà mẹ́nu ba fáìlì kan tí kò sí nínú fódà iṣẹ́"
+  unknown: "àṣìṣe àìmọ̀"
+  token: "Ìjẹ́rìísí ẹ̀rọ kùnà: auth-token kò wúlò!"
+  uploadTokenAuthFailed: "Ìjẹ́rìísí Upload Token kùnà."
   project:
-    invalid: Invalid project.
+    invalid: "Iṣẹ́ kò wúlò."
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: "Má bínú, iṣẹ́ rẹ ní ẹ̀yà àtijọ́ ti èdè Catrobat! Ṣé ò ń lo ẹ̀yà Pocket Code tuntun jùlọ?"
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "Má bínú, ò ń lo ẹ̀yà Pocket Code àtijọ́. Jọ̀wọ́ ṣe ìmúdójúìwọ̀n sí ẹ̀yà tuntun jùlọ."
   authentication:
-    title: Login did not work
-    webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+    title: "Ìwọlé kò ṣiṣẹ́"
+    webview: "Ó dàbí pé orúkọ olùmúlò tàbí ọ̀rọ̀ aṣínà rẹ kò tọ́.\nJọ̀wọ́ gbìyànjú láti wọlé lẹ́ẹ̀kan sí i nínú áàpù.\n"
 success:
-  text: Success
-  registration: Registration successful!
+  text: "Àṣeyọrí"
+  registration: "Ìforúkọsílẹ̀ ṣàṣeyọrí!"
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: "A ti gbé iṣẹ́ rẹ sókè ní àṣeyọrí!"
+  imgUpload: "A ti gbé àwòrán rẹ sókè ní àṣeyọrí!"
+  report: "A ti fi ìròyìn rẹ ránṣẹ́ ní àṣeyọrí!"
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: "{0} < ìṣẹ́jú 1 sẹ́yìn |{1}ìṣẹ́jú 1 sẹ́yìn |]1,Inf] ìṣẹ́jú %count% sẹ́yìn"
+  hours.ago: "{1}wákàtí 1 sẹ́yìn |]1,Inf] wákàtí %count% sẹ́yìn"
+  days.ago: "{1}ọjọ́ 1 sẹ́yìn |]1,Inf] ọjọ́ %count% sẹ́yìn"
+  months.ago: "{1}oṣù 1 sẹ́yìn |]1,Inf] oṣù %count% sẹ́yìn"
+  years.ago: "{1}ọdún 1 sẹ́yìn |]1,Inf] ó ju ọdún kan lọ sẹ́yìn"
 failure:
-  upload: There was an error during the upload of your app.
+  upload: "Àṣìṣe kan ṣẹlẹ̀ nígbà gbígbé áàpù rẹ sókè."
 user:
   verification:
-    email: 'Verify your email'
+    email: "Jẹ́rìí ímeèlì rẹ"
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: "Ímeèlì kò sí"
+    emailEmpty: "Ímeèlì kò lè ṣófo"
+    emailInvalid: "Ímeèlì kò wúlò"
+    emailAlreadyInUse: "Ímeèlì ti wà ní lílò"
+    usernameMissing: "Orúkọ olùmúlò kò sí"
+    usernameTooShort: "Orúkọ olùmúlò kúrú jù"
+    usernameTooLong: "Orúkọ olùmúlò gùn jù"
+    usernameEmpty: "Orúkọ olùmúlò kò lè ṣófo"
+    usernameAlreadyInUse: "Orúkọ olùmúlò ti wà ní lílò"
+    usernameInvalid: "Orúkọ olùmúlò kò wúlò"
+    passwordMissing: "Ọ̀rọ̀ aṣínà kò sí"
+    passwordEmpty: "Ọ̀rọ̀ aṣínà kò lè ṣófo"
+    passwordTooShort: "Ọ̀rọ̀ aṣínà kúrú jù"
+    passwordTooLong: "Ọ̀rọ̀ aṣínà gùn jù"
+    passwordInvalidChars: "Ọ̀rọ̀ aṣínà ní ohun kíkọ tí kò wúlò"
+    usernameContainsEmail: "Orúkọ olùmúlò kò gbọ́dọ̀ ní àdírẹ́sì ímeèlì nínú"
+    usernameContainsLink: "Orúkọ olùmúlò kò gbọ́dọ̀ ní ìjápọ̀ nínú"
+    countryCodeInvalid: "Kóòdù orílẹ̀-èdè kò wúlò"
+    pictureInvalid: "Àwòrán profaili kò wúlò tàbí a kò ṣe àtìlẹ́yìn fún un"
+    dateOfBirthMissing: "A nílò ọjọ́ ìbí"
+    dateOfBirthInvalid: "Ọjọ́ ìbí kò wúlò"
+    tooYoung: "O gbọ́dọ̀ ti pé ọmọ ọdún 3 ó kéré tán láti ṣẹ̀dá àkáǹtì"
+    parentEmailMissing: "A nílò ímeèlì òbí fún àwọn olùmúlò tí kò tíì pé ọmọ ọdún 14"
+    parentEmailInvalid: "Ímeèlì òbí kò wúlò"
+    parentEmailSameAsUser: "Ímeèlì òbí gbọ́dọ̀ yàtọ̀ sí àdírẹ́sì ímeèlì tìrẹ"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Ọ̀rọ̀ aṣínà lọ́wọ́lọ́wọ́ kò sí"
+    currentPasswordWrong: "Ọ̀rọ̀ aṣínà lọ́wọ́lọ́wọ́ kò tọ́"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: "Orúkọ kò lè ṣófo"
+    nameTooLong: "Orúkọ gùn jù"
+    descriptionTooLong: "Àpèjúwe gùn jù"
+    creditsTooLong: "Àkọsílẹ̀ àti ìdúpẹ́ gùn jù"
+    screenshotInvalid: "Àwòrán iboju iṣẹ́ kò wúlò tàbí a kò ṣe àtìlẹ́yìn fún un"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating project entity. Try uploading again!'
+    invalid_checksum: "Checksum kò wúlò. Gbìyànjú láti gbé sókè lẹ́ẹ̀kan sí i!"
+    upload_error: "Àṣìṣe nígbà gbígbé sókè. Gbìyànjú láti gbé sókè lẹ́ẹ̀kan sí i!"
+    creating_error: "Àṣìṣe nígbà ṣíṣẹ̀dá iṣẹ́ náà. Gbìyànjú láti gbé sókè lẹ́ẹ̀kan sí i!"
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "Fífi àlàyé iṣẹ́ náà pamọ́ kùnà."
+    screenshotError: "Kíkà, yíyípadà tàbí fífi àwòrán iboju pamọ́ kùnà. Jọ̀wọ́ ṣàyẹ̀wò ohun tí o tẹ̀."
+    notFound: "A kò rí iṣẹ́ tí a fẹ́ yí padà."
+    forbidden: "A kò gbà láàyè láti yí iṣẹ́ náà padà. Ṣé o ṣì wọlé?"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: "Orúkọ kò sí"
+    nameEmpty: "Orúkọ kò lè ṣófo"
+    nameTooShort: "Orúkọ kúrú jù"
+    nameTooLong: "Orúkọ gùn jù"
+    nameAlreadyInUse: "Orúkọ ti wà ní lílò"
+    descriptionMissing: "Àpèjúwe kò sí"
+    descriptionEmpty: "Àpèjúwe ṣófo"
+    descriptionTooShort: "Àpèjúwe kúrú jù"
+    descriptionTooLong: "Àpèjúwe gùn jù"
+    imageFileInvalid: "Fáìlì àwòrán kò wúlò"
+    imageFileInvalidType: "Irú fáìlì àwòrán kò wúlò"
+    imageFileTooLarge: "Fáìlì àwòrán tóbi jù"
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  arabic: "Lárúbáwá"
+  bulgarian: "Bùlgáríà"
+  catalan: "Kàtálàn"
+  chinese_simplified_han: "Ṣáínà (Han Ìrọ̀rùn)"
+  chinese_traditional_han: "Ṣáínà (Han Ìbílẹ̀)"
+  croatian: "Króátíà"
+  czech: "Ṣẹ́ẹ̀kì"
+  danish: "Dáníṣì"
+  dutch: "Dọ́ọ̀ṣì"
+  english_united_kingdom: "Gẹ̀ẹ́sì (Ìjọba Gẹ̀ẹ́sì)"
+  english_united_states: "Gẹ̀ẹ́sì (Amẹ́ríkà)"
+  estonian: "Ẹstóníà"
+  filipino: "Fílípínò"
+  finnish: "Fínìṣì"
+  french: "Faransé"
+  german: "Jámánì"
+  greek: "Gíríìkì"
+  hebrew: "Hébérù"
+  hindi: "Híndì"
+  hungarian: "Họ̀ngáríà"
+  indonesian: "Indonéṣíà"
+  italian: "Ítálì"
+  japanese: "Jàpáànù"
+  korean: "Kòríà"
+  latvian: "Látúvíà"
+  lithuanian: "Lìtúéníà"
+  malay: "Málàyì"
+  norwegian: "Nọ̀wẹ́jíànì"
+  persian: "Páṣíà"
+  polish: "Pólándì"
+  portuguese_brazil: "Pọtogí (Bràsíl)"
+  portuguese_portugal: "Pọtogí (Pọ́túgà)"
+  romanian: "Ròmáníà"
+  russian: "Rọ́ṣíà"
+  serbian: "Sàbíà"
+  slovak: "Slofákì"
+  slovenian: "Slofẹ́níà"
+  spanish_latin_america: "Sípáníìṣì (Látín Amẹ́ríkà)"
+  spanish_spain: "Sípáníìṣì (Sípéènì)"
+  swedish: "Swídìṣì"
+  thai: "Táì"
+  turkish: "Tọ́kìṣì"
+  ukrainian: "Ukiréníà"
+  vietnamese: "Fẹtinámíìsì"
 ci:
-  generate: Generate apk
-  pending: Generating apk
-  download: Download apk
+  generate: "Ṣẹ̀dá apk"
+  pending: "À ń ṣẹ̀dá apk"
+  download: "Ṣe ìgbàsílẹ̀ apk"
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: "Ìtọ́jú dísíkì"
+    ramMaintenance: "Ìtọ́jú RAM"
+    noRemovableObjects: "Kò sí ohun tí a lè yọ kúrò."
+    removableObjects: "Àwọn ohun tí a lè yọ kúrò"
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: "Àwọn iṣẹ́ tó jọra"
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: "Àwọn olùmúlò tí ó ṣe ìgbàsílẹ̀ iṣẹ́ yìí tún ṣe ìgbàsílẹ̀"
+  moreFromThisUser: "Púpọ̀ sí i láti ọ̀dọ̀ %username%"
 pmd:
-  submitBtn: Submit your project
+  submitBtn: "Fi iṣẹ́ rẹ sílẹ̀"
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: "Ìfisílẹ̀"
+    text: "O fẹ́ fi iṣẹ́ rẹ sílẹ̀. Jọ̀wọ́ tẹ kóòdù iṣẹ́ náà kí o sì tẹ fi ránṣẹ́."
+    btnText: "Fi sílẹ̀"
   successful:
-    text: Your project upload was successful.
+    text: "Gbígbé iṣẹ́ rẹ sókè ṣàṣeyọrí."
   failed:
-    text: Project upload failed.
+    text: "Gbígbé iṣẹ́ sókè kùnà."
 codeview:
-  title: 'Code view'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
-  eventBricks: 'Event bricks'
-  controlBricks: 'Control bricks'
-  motionBricks: 'Motion bricks'
-  soundBricks: 'Sound bricks'
-  looksBricks: 'Looks bricks'
-  penBricks: 'Pen bricks'
-  dataBricks: 'Data bricks'
-  specialBricks: 'Special bricks'
+  title: "Ìwò kóòdù"
+  showCode: "Fi kóòdù hàn"
+  hideCode: "Fi kóòdù pamọ́"
+  showStatistics: "Fi ìṣirò kóòdù hàn"
+  hideStatistics: "Fi ìṣirò kóòdù pamọ́"
+  cantDisplayCode: "A kò lè fi kóòdù hàn"
+  cantDisplayStatistics: "A kò lè fi ìṣirò kóòdù hàn"
+  totalNumberOf: "Àpapọ̀ iye"
+  scenes: "Àwọn ìran"
+  scripts: "Àwọn ìwé àfọwọ́kọ"
+  bricks: "Àwọn búlọ́ọ̀kù"
+  objects: "Àwọn òṣèré àti ohun"
+  looks: "Àwọn ìrísí"
+  sounds: "Àwọn ohùn"
+  globals: "Gbogbogbò"
+  locals: "Agbègbè"
+  globalVariables: "Àwọn oníyípadà gbogbogbò"
+  localVariables: "Àwọn oníyípadà agbègbè"
+  eventBricks: "Búlọ́ọ̀kù ìṣẹ̀lẹ̀"
+  controlBricks: "Búlọ́ọ̀kù ìdarí"
+  motionBricks: "Búlọ́ọ̀kù ìṣíkiri"
+  soundBricks: "Búlọ́ọ̀kù ohùn"
+  looksBricks: "Búlọ́ọ̀kù ìrísí"
+  penBricks: "Búlọ́ọ̀kù kálámù"
+  dataBricks: "Búlọ́ọ̀kù dátà"
+  specialBricks: "Búlọ́ọ̀kù pàtàkì"
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
-  scripts: 'Scripts'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  title: "Ìwò Kóòdù"
+  loading: "Ń gbé ìwò kóòdù..."
+  error: "A kò lè gbé ìwò kóòdù."
+  retry: "Gbìyànjú lẹ́ẹ̀kan sí i"
+  empty: "Iṣẹ́ yìí kò ní kóòdù."
+  scripts: "Àwọn ìwé àfọwọ́kọ"
+  looks: "Àwọn ìrísí"
+  sounds: "Àwọn ohùn"
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
+  title: "Ìṣirò kóòdù"
+  error: "A kò lè fi ìṣirò kóòdù hàn."
+  general: "Gbogbogbò"
+  bricks: "Àwọn búlọ́ọ̀kù"
+  eventBricks: "Ìṣẹ̀lẹ̀"
+  controlBricks: "Ìdarí"
+  motionBricks: "Ìṣíkiri"
+  soundBricks: "Ohùn"
+  looksBricks: "Ìrísí"
   penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  dataBricks: "Dátà"
+  deviceBricks: "Ẹ̀rọ"
+  specialBricks: "Pàtàkì"
+  yourScore: "Máàkì rẹ:"
+  points: "máàkì"
+  abstraction: "Àfojúinú àti pípín ìṣòro sí wẹ́wẹ́"
+  parallelism: "Ìṣiṣẹ́pọ̀"
+  logicalThinking: "Ìrònú ọgbọ́n"
+  synchronization: "Ìmúṣiṣẹ́pọ̀"
+  flowControl: "Ìdarí ìṣàn"
+  userInteractivity: "Ìbáṣepọ̀ olùmúlò"
+  dataRepresentation: "Ìṣojú dátà"
+  level: "Ìpele"
+  loading: "Ó ń gbé..."
+  bonus: "Àjẹmọ́nú"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Darapọ̀ Mọ́ Àwọn Olùdá Tí Ó Ju %user_count% Lọ!"
+  text: "Pẹ̀lú Àwọn Iṣẹ́ Àgbàyanu %project_count% tí a ti pín, èyí tó kàn lè jẹ́ tìrẹ. Ṣe ìgbàsílẹ̀ áàpù wa kí o sì bẹ̀rẹ̀ sí í ṣẹ̀dá lónìí"
 privacy-policy:
-  header: Privacy policy
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  header: "Ìlànà ìpamọ́"
+  version: "Ẹ̀yà 2.2, 17 Oṣù Kẹwàá 2019"
+  text1: "Láti fún ọ ní gbogbo àǹfààní àwọn iṣẹ́ wa àti àkáǹtì tó jẹmọ́ wọn, ó pọndandan láti gba àwọn dátà kan lọ́wọ́ rẹ."
+  text2: "Láti tọ́jú àti mú àwọn iṣẹ́ wa (áàpù àti wẹ́ẹ̀bùsáìtì) dára sí i àti láti ṣe ìwádìí ìmọ̀ sáyẹ́ǹsì lórí ẹ̀kọ́ ICT àti STEM/STEAM, a ń lo Google Analytics, Crashlytics, àti Firebase, gbogbo wọn láti ọ̀dọ̀ Google LLC (USA), àti Dynatrace láti ọ̀dọ̀ Dynatrace LLC (USA) láti gba metadata nípa lílò àwọn iṣẹ́ wa, fún àpẹẹrẹ, àlàyé jàǹbá, àkókò, àwọn ojú-ìwé/iboju tí a bẹ̀wò, lílò àwọn áàpù àti iṣẹ́ wa, ẹ̀rọ ìṣiṣẹ́ tí a lò, àti àlàyé nípa olùpèsè nẹ́tíwọ́ọ̀kì. Ìtúpalẹ̀ yìí àti dátà tí a gbà kò so mọ́ profaili rẹ, kò sì ní àlàyé ara ẹni kankan (a ń fi àwọn díjítì ìkẹyìn àdírẹ́sì IP pamọ́). Síbẹ̀, a óò gbé dátà tí a gbà lọ sọ́dọ̀ àwọn olùpèsè iṣẹ́ (Google LLC, USA àti Dynatrace LLC, USA). Ṣíṣe dátà dá lórí àdéhùn pẹ̀lú Google LLC àti Dynatrace LLC. Àjọṣe yìí pẹ̀lú àwọn olùpèsè iṣẹ́ bá Ìlànà Gbogbogbò Ààbò Dátà ti Ìṣọ̀kan Yúróòpù (EU GDPR) àti àdéhùn EU-USA \"Privacy Shield\" mu."
+  text3: "Láti ṣẹ̀dá àti lo àkáǹtì nínú ètò wa, àti láti sọ fún ọ nípa àwọn àyípadà pàtàkì nípa àkáǹtì rẹ nípasẹ̀ ímeèlì, fún àpẹẹrẹ, ìmúdójúìwọ̀n tàbí rírú Àwọn Òfin Lílò àti Iṣẹ́ wa, àwọn òfin àwùjọ wa, tàbí àwọn ìlànà wa, a óò tọ́jú orúkọ olùmúlò rẹ àti, tí o bá pèsè rẹ̀, àdírẹ́sì ímeèlì rẹ. Tí o bá so àkáǹtì rẹ pọ̀ nípasẹ̀ Google Plus tàbí Facebook, a tún ń tọ́jú kọ́kọ́rọ́ ìdánimọ̀ tó so mọ́ àkáǹtì rẹ lórí àwọn iṣẹ́ wọ̀nyí. A kò ní lo dátà yìí fún èrò mìíràn (fún àpẹẹrẹ, ìpolówó), àyàfi tí o bá fún wa ní àṣẹ ní kedere."
+  text4: "Tí o bá fẹ́, o lè fún wa ní orílẹ̀-èdè tí o ń gbé nípasẹ̀ ojú-ìwé àkáǹtì rẹ lórí ojú-òpó pínpín. Èyí yóò hàn lórí profaili gbangba rẹ, a ó sì lò ó fún ìṣirò àti ìwádìí nìkan. O lè yọ ọ́ kúrò nígbàkúùgbà nínú ètò profaili rẹ."
+  text5: "O lè fagilé lílò dátà ara ẹni tó jẹ́ ti àkáǹtì rẹ nígbàkúùgbà nípa pípa àkáǹtì rẹ rẹ́ nípasẹ̀ ojú-ìwé profaili rẹ lórí https://share.catrob.at/. Lẹ́yìn pípa àkáǹtì rẹ rẹ́, o ṣì lè lo àwọn iṣẹ́ tí a pèsè, ṣùgbọ́n o kò ní lè kópa, fún àpẹẹrẹ, nípa gbígbé ètò sókè, sísọ àsọyé, tàbí fífẹ́ràn. Bákan náà, a óò pa gbogbo àkóónú tó so mọ́ àkáǹtì rẹ rẹ́, fún àpẹẹrẹ, àwọn ètò tí a gbé sókè, àsọyé, abbl."
+  text6: "Láti yàgò fún ìlòkulò àwọn iṣẹ́ wa, fún àpẹẹrẹ, nípasẹ̀ ohun tí olùmúlò gbé sókè tàbí àsọyé fún èrò tí kò bófin mu, a óò tọ́jú gbogbo dátà gbangba tí olùmúlò ṣẹ̀dá (ohun tí a gbé sókè, àsọyé) sínú ibi ìpamọ́ dátà inú, pẹ̀lú àkókò àti àdírẹ́sì íńtánẹ́ẹ̀tì tí a lò. A kò ní lo dátà yìí tàbí fi ránṣẹ́ sí ilé-iṣẹ́ kankan, àyàfi tí a bá fura sí ìwà tí kò bófin mu tó, tí àwọn ilé-iṣẹ́ òfin tó ní àṣẹ sì béèrè fún un gẹ́gẹ́ bí òfin. A óò kọ́kọ́ ṣàyẹ̀wò ọ̀rọ̀ kọ̀ọ̀kan dáadáa."
+  text7: "O lè forúkọ sílẹ̀ fún Ìwé Ìròyìn Catrobat tí o bá fẹ́, lórí https://catrob.at/newsletter tí a pèsè nípasẹ̀ iṣẹ́ MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Ìwọ yóò máa gba ìròyìn nípa iṣẹ́ àkànṣe Catrobat àti àwọn iṣẹ́ rẹ̀ sí àdírẹ́sì ímeèlì tí o pèsè. O lè dẹ́kun gbígba ìwé ìròyìn náà nígbàkúùgbà nípa lílo ìjápọ̀ \"unsubscribe\" ní ìsàlẹ̀ ìwé ìròyìn kọ̀ọ̀kan. MailChimp ló ń pèsè ìwé ìròyìn yìí, a sì ní àdéhùn ṣíṣe dátà pẹ̀lú wọn, wọ́n sì ti fi ara wọn jì fún Ìlànà Gbogbogbò Ààbò Dátà EU àti EU-USA \"Privacy Shield\". Fún àlàyé síwájú sí i nípa MailChimp, jọ̀wọ́ wo Ìlànà Ìpamọ́ àti Òfin Lílò MailChimp."
+  text8: "Gbogbo Iṣẹ́ ni iṣẹ́ àkànṣe Catrobat orísun ṣíṣí ọ̀fẹ́ ń pèsè lábẹ́ International Catrobat Association – Verein zur Förderung freier Software, NGO tí kì í ṣe fún èrè tí a dá sílẹ̀ ní Graz, Austria (Ìṣọ̀kan Yúróòpù). Àwọn ìlànà wa bọ̀wọ̀ fún òfin ààbò dátà EU àti Austria (GDPR). Láti kàn sí wa, jọ̀wọ́ fi ímeèlì ránṣẹ́ sí contact@catrobat.org tàbí kọ lẹ́tà sí Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Ìṣọ̀kan Yúróòpù)."
+  text9: "Tí o kò bá tíì pé ọmọ ọdún 14, alágbàtọ́ lábẹ́ òfin (nígbà púpọ̀ òbí) gbọ́dọ̀ gba ìlànà yìí."
+  text10: "Ìlànà ìpamọ́ èdè Gẹ̀ẹ́sì ti Catrobat wà lórí wẹ́ẹ̀bù ní %privacy_policy%."
+  disagree-text: "Láìsí ìfọwọ́sí, a kò lè ṣẹ̀dá àkáǹtì, ṣùgbọ́n àwọn ẹ̀yà pàtàkì ṣì wà ní àrọ́wọ́tó."
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: "Sàmì sí bí èyí tí a ti kà"
+  noFollowers: "Ó dàbí pé o kò ní ìfitónilétí olùtẹ̀lé kankan."
+  noComments: "Ó dàbí pé o kò ní ìfitónilétí àsọyé kankan."
+  noReactions: "Ó dàbí pé o kò ní ìfitónilétí ìhùwàsí kankan."
+  noRemixes: "Ó dàbí pé o kò ní ìfitónilétí àtúnṣe kankan."
+  noStudios: "Ó dàbí pé o kò ní ìfitónilétí ilé-iṣẹ́ ọnà kankan."
   tab:
-    studio: Studio
-    project: Projects
+    studio: "Ilé-iṣẹ́ ọnà"
+    project: "Àwọn iṣẹ́"
   comment:
-    message: '%user_link% commented on %program_link%.'
+    message: "%user_link% sọ àsọyé lórí %program_link%."
   like:
-    message: '%user_link% reacted to %program_link%.'
+    message: "%user_link% hùwà sí %program_link%."
   follow:
-    message: '%user_link% is now following you.'
+    message: "%user_link% ti ń tẹ̀lé ọ báyìí."
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% ṣẹ̀dá eré tuntun %program_link%."
   remix:
-    message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
+    message: "%user_link% ṣẹ̀dá àtúnṣe %program_link% ti eré rẹ %remix_program_link%."
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% sọ àsọyé nínú ilé-iṣẹ́ ọnà %studio_name%."
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% fi %program_link% kún ilé-iṣẹ́ ọnà %studio_name%."
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "A ti gba ìbéèrè rẹ láti darapọ̀ mọ́ ilé-iṣẹ́ ọnà %studio_name%."
+    declined: "A ti kọ ìbéèrè rẹ láti darapọ̀ mọ́ ilé-iṣẹ́ ọnà %studio_name%."
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "A óò pa iṣẹ́ rẹ %program_link% rẹ́ fúnra rẹ̀ ní ọjọ́ %days%. Gbé ẹ̀yà tuntun sókè tàbí gba ìgbàsílẹ̀ púpọ̀ sí i láti pa á mọ́."
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "A ti yọ iṣẹ́ rẹ \"%project_name%\" kúrò fúnra rẹ̀ nítorí àìṣiṣẹ́. Tún gbé e sókè tí o bá ṣì fẹ́ pín in."
+  noProjects: "Ó dàbí pé o kò ní ìfitónilétí iṣẹ́ kankan."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: "A ti da ìjápọ̀ kọ sí pátákó àgékọ!"
+  success_project: "A ti da ìjápọ̀ iṣẹ́ kọ sí pátákó àgékọ!"
+  success_user: "A ti da ìjápọ̀ olùmúlò kọ sí pátákó àgékọ!"
+  fail: "Dída ìjápọ̀ kọ sí pátákó àgékọ kùnà! :("
+next: "Èyí tó kàn"
+previous: "Ti tẹ́lẹ̀"
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: "Ibi Ìkówèésí Mídíà"
+  description: "Nínú àwọn ẹ̀ka wọ̀nyí, o lè rí àwọn òṣèré àti ohun láti fi kún àwọn iṣẹ́ rẹ."
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: "Ìwọ̀n àwòtẹ́lẹ̀"
+    sm: "kékeré"
+    md: "àárín"
+    lg: "ńlá"
+  theme-special: "Àkànṣe Àwọ̀ %flavor%"
+  search-results: "Àbájáde ìwádìí ibi ìkówèésí mídíà"
+  no-results: "Ìwádìí rẹ kò mú àbájáde kankan wá. Jọ̀wọ́ lo ọ̀rọ̀ ìwádìí èdè Gẹ̀ẹ́sì nìkan."
+  download_these_files: "fi pamọ́"
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +936,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: "Ẹ̀tọ́ àdàkọ &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. Gbogbo ẹ̀tọ́ wà ní ìpamọ́."
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Wẹ́ẹ̀bùsáìtì yìí nílò JavaScript láti ṣiṣẹ́. Jọ̀wọ́ tan JavaScript nínú aṣàwákiri rẹ tàbí ní kí àgbàlagbà kan ràn ọ́ lọ́wọ́."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
-  privacy-link: "Privacy Policy"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  message: "A ń lo kúkì láti mú àwọn iṣẹ́ wa dára sí i. A kì í ta tàbí pín dátà kankan."
+  accept: "Gbà á"
+  decline: "Kọ̀ ọ́"
+  privacy-link: "Ìlànà Ìpamọ́"
+  settings-link: "Ètò Kúkì"
+agree: "Mo gbà"
+disagree: "Mi ò gbà"
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: "Kò sí profaili kankan lọ́wọ́lọ́wọ́."
+element: "Èròjà"
+elements: "Àwọn èròjà"
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: "Pín"
+  error: "Pínpín kùnà"
+  success: "Pínpín ṣàṣeyọrí"
+copy: "Da ìjápọ̀ kọ"
+checkOutProject: "Wo iṣẹ́ yìí:"
+checkOutUser: "Wo olùmúlò yìí:"
+community: "Àwùjọ Catrobat"
+back_to_app: "Jáde kúrò nínú àwùjọ"
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: "Àwọn iṣẹ́ tuntun jùlọ"
+  random: "Àwọn iṣẹ́ àìròtẹ́lẹ̀"
+  most_viewed: "Tí a wò jùlọ"
+  most_downloaded: "Tí a ṣe ìgbàsílẹ̀ jùlọ"
+  example: "Àpẹẹrẹ"
+  scratch: "Àwọn àtúnṣe Scratch"
+  recommended: "Àwọn iṣẹ́ tí a dámọ̀ràn"
+  popular: "Olókìkí jùlọ"
+  trending: "Àwọn iṣẹ́ tí ń gbajúmọ̀"
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: "Àwọn àṣeyọrí"
     badge: 'new'
   overview:
-    header: 'Achievements'
+    header: "Àwọn àṣeyọrí"
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: "Àṣeyọrí Tuntun Jùlọ"
+      x_out_of_y: "%unlocked% nínú %total% ti ṣí"
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: "Ti ṣí"
+      empty: "O kò tíì ṣí àṣeyọrí kankan."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: "Ti tì"
+      empty: "O ti ṣí gbogbo àṣeyọrí."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: "Ẹ kú oríire!"
+      subtitle: "O ti gba àmì ẹ̀yẹ kan"
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: "Àwọn àṣeyọrí"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: "Ọmọ-iṣẹ́"
+        description: "Tẹ̀lé ẹnìkan kí o sì gbé iṣẹ́ kan sókè"
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: "Oníṣẹ́ ọnà"
+        description: "Ọmọ ẹgbẹ́ aláàpọn fún > ọdún 1"
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: "Ọ̀gá"
+        description: "Ọmọ ẹgbẹ́ aláàpọn fún > ọdún 4"
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: "Ọ̀gá àgbà"
+        description: "Ọmọ ẹgbẹ́ aláàpọn fún > ọdún 7"
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: "Ìdánúṣe"
+        description: "Fi àwòrán profaili àkọ́kọ́ rẹ kún un"
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: "Olùbẹ̀rẹ̀"
+        description: "Ṣẹ̀dá àkáǹtì olùmúlò"
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Olùkópa nínú Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Onídè méjì"
+        description: "Túmọ̀ àwọn iṣẹ́ rẹ sí èdè 2"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Onídè mẹ́ta"
+        description: "Túmọ̀ àwọn iṣẹ́ rẹ sí èdè 3"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Onímọ̀ èdè"
+        description: "Túmọ̀ àwọn iṣẹ́ rẹ sí èdè 5"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "A ti jẹ́rìí"
+        description: "Jẹ́rìí Àkáǹtì rẹ"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: "{0} |{1} Àmì |]1,Inf] Àwọn àmì"
   tag:
     game:
-      title: Game
+      title: "Eré"
     animation:
-      title: Animation
+      title: "Eré ìdárayá àwòrán"
     story:
-      title: Story
+      title: "Ìtàn"
     music:
-      title: Music
+      title: "Orin"
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: "Àdánwò"
     tutorial:
-      title: Tutorial
+      title: "Ẹ̀kọ́"
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: "{0} |{1} Àfikún |]1,Inf] Àwọn àfikún"
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: "Dírónù"
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: "Iṣẹ́ ọnà abẹ́rẹ́"
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: "Ẹlẹ́rọ̀ọ̀ púpọ̀"
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  cancel_studio: 'Cancel'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
-  report: 'Report'
-  public: 'public'
-  private: 'Invite-only'
+  title: "Àwọn ilé-iṣẹ́ ọnà"
+  singular: "Ilé-iṣẹ́ ọnà"
+  create_studio: "Ṣẹ̀dá ilé-iṣẹ́ ọnà"
+  delete_studio: "Pa ilé-iṣẹ́ ọnà rẹ́"
+  cancel_studio: "Fagilé"
+  studio_name: "Orúkọ ilé-iṣẹ́ ọnà"
+  studio_description: "Àpèjúwe ilé-iṣẹ́ ọnà"
+  is_public: "Ṣe é ní gbangba?"
+  enable_comments: "Gba àsọyé láàyè?"
+  cover_image: "Gbé àwòrán ìbòrí sókè"
+  cover_image_empty: "A kò yan àwòrán kankan."
+  cover_image_hint: "Tó pọ̀ jùlọ 1 MB. Àwọn ọ̀nà tí a gbà: JPEG, PNG, GIF, WebP."
+  cover_image_compressed: "A ti dín àwòrán náà kù fúnra rẹ̀ láti bá ààlà 1 MB mu."
+  cover_image_compressing: "Ń dín àwòrán kù..."
+  cover_image_still_too_large: "Àwòrán náà ṣì tóbi jù lẹ́yìn dídín kù. Jọ̀wọ́ yan fáìlì tó kéré jù."
+  cover_image_invalid_type: "Irú àwòrán kò wúlò. Jọ̀wọ́ lo JPEG, PNG, GIF, tàbí WebP."
+  cover_image_compression_failed: "Ṣíṣe àwòrán náà kùnà. Jọ̀wọ́ gbìyànjú fáìlì mìíràn."
+  cover_image_alt: "Àwòrán ìbòrí rẹ"
+  cover_image_remove: "Yọ àwòrán kúrò"
+  popular: "Àwọn Ilé-iṣẹ́ Ọnà Olókìkí"
+  join: "Darapọ̀"
+  leave: "Kúrò"
+  report: "Jábọ̀"
+  public: "gbangba"
+  private: "Nípasẹ̀ ìpè nìkan"
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'Open'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
-    cancel: 'Cancel'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    joined_studios: "Àwọn ilé-iṣẹ́ ọnà tí o darapọ̀ mọ́"
+    public_studios: "Àwọn ilé-iṣẹ́ ọnà gbangba"
+    private_studios: "Àwọn ilé-iṣẹ́ ọnà ìpè nìkan"
+    no_studios: "Kò sí ilé-iṣẹ́ ọnà kankan síbẹ̀"
+    my_studios: "Àwọn Ilé-iṣẹ́ Ọnà Mi"
+    explore: "Ṣàwárí Àwọn Ilé-iṣẹ́ Ọnà"
+    no_joined: "O kò tíì darapọ̀ mọ́ ilé-iṣẹ́ ọnà kankan"
+    joined: "Ti darapọ̀"
+    load_more: "Gbé Púpọ̀ Sí I"
+    open: "Ṣí i"
+    share: "Pín"
+    share_success: "A ti da ìjápọ̀ kọ sí pátákó àgékọ!"
+    leave_confirm_title: "Kúrò nínú ilé-iṣẹ́ ọnà yìí?"
+    cancel: "Fagilé"
+    cancel_request: "Fagilé Ìbéèrè"
+    cancel_request_confirm_title: "Fagilé ìbéèrè láti darapọ̀?"
+    admin: "Alábòójútó"
+    member: "Ọmọ ẹgbẹ́"
   details:
-    add_project: 'click to add the project'
+    add_project: "tẹ̀ láti fi iṣẹ́ náà kún un"
     add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
-    delete_it: 'Delete'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    showMore: "fi púpọ̀ hàn"
+    showLess: "fi díẹ̀ hàn"
+    are_you_sure: "Ṣé o dájú?"
+    no_way_of_return: "A kò lè yí èyí padà."
+    delete_it: "Pa rẹ́"
+    remove_project: "Yọ kúrò nínú ilé-iṣẹ́ ọnà"
+    remove_project_error: "Yíyọ iṣẹ́ kúrò nínú ilé-iṣẹ́ ọnà kùnà."
+    remove_project_success: "A ti yọ iṣẹ́ náà kúrò nínú ilé-iṣẹ́ ọnà ní àṣeyọrí."
+    no_projects: "Ilé-iṣẹ́ ọnà náà kò tíì ní iṣẹ́ kankan."
     projects:
-      title: 'Projects'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
-      download: 'Download'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
-    report: 'Report'
-    pending: 'Pending'
-    decline: 'Declined'
+      title: "Àwọn iṣẹ́"
+      addProject: "Fi Àwọn Iṣẹ́ Kún Un"
+      open_project: "Ṣí iṣẹ́"
+      download: "Ṣe ìgbàsílẹ̀"
+      share: "Pín"
+      remove_from_studio: "Yọ kúrò nínú ilé-iṣẹ́ ọnà"
+      remove_from_studio_title: "Yọ iṣẹ́ kúrò nínú ilé-iṣẹ́ ọnà?"
+      remove_from_studio_text: "O lè tún fi kún un lẹ́yìn náà tí o bá yí ọkàn rẹ padà."
+      share_success: "A ti da ìjápọ̀ kọ sí pátákó àgékọ!"
+      share_fail: "Dída ìjápọ̀ kọ kùnà."
+      no_projects_empty_state: "O kò tíì ní iṣẹ́ kankan láti fi kún un. Kọ́kọ́ ṣẹ̀dá ọ̀kan nínú Pocket Code!"
+      add_selected: "Fi Àwọn Tí A Yàn Kún Un"
+    no_available_projects: "Kò sí iṣẹ́ kankan láti fi kún un."
+    updateCoverError: "Nǹkan kan ṣàṣìṣe nígbà tí a ń ṣe ìmúdójúìwọ̀n àwòrán ìbòrí ilé-iṣẹ́ ọnà."
+    join: "Darapọ̀"
+    leave: "Kúrò"
+    report: "Jábọ̀"
+    pending: "Ó ń dúró"
+    decline: "A ti kọ̀ ọ́"
     comments:
-      title: 'Comments'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      title: "Àwọn àsọyé"
+      type_something: "Tẹ nǹkan kan"
+      replies: "àwọn ìfèsì"
+      send: "fi ránṣẹ́"
+      no_comments: "Ilé-iṣẹ́ ọnà yìí kò tíì ní àsọyé kankan."
+      disabled_comments: "A ti pa àsọyé fún ilé-iṣẹ́ ọnà yìí."
+      remove_comment: "Yọ àsọyé kúrò"
+      post_error: "Nǹkan kan ṣàṣìṣe nígbà tí a ń fi àsọyé rẹ ránṣẹ́. Gbìyànjú lẹ́yìn náà."
+      remove_error: "Nǹkan kan ṣàṣìṣe nígbà tí a ń yọ àsọyé náà kúrò. Gbìyànjú lẹ́yìn náà."
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: "Àwọn ìṣẹ̀lẹ̀"
+      join_studio: "%user% darapọ̀ mọ́ ilé-iṣẹ́ ọnà náà."
+      add_project: "%user% fi iṣẹ́ kan kún un."
+      add_comment: "%user% fi àsọyé kan sílẹ̀."
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: "Àwọn ọmọ ẹgbẹ́ ilé-iṣẹ́ ọnà"
+      project_count: "{0} Kò sí iṣẹ́ ilé-iṣẹ́ ọnà |{1} Iṣẹ́ ilé-iṣẹ́ ọnà 1 |]1,Inf] Iṣẹ́ ilé-iṣẹ́ ọnà %count%"
+      no_studio_projects: "Kò sí iṣẹ́ ilé-iṣẹ́ ọnà"
+      one_studio_project: "Iṣẹ́ ilé-iṣẹ́ ọnà 1"
+      n_studio_projects: "Iṣẹ́ ilé-iṣẹ́ ọnà %count%"
+      promote_member: "Gbé ọmọ ẹgbẹ́ ga sí alábòójútó"
+      promotion_failed: "Nǹkan kan ṣàṣìṣe nígbà gbígbé ọmọ ẹgbẹ́ yìí ga. Gbìyànjú lẹ́yìn náà."
+      ban_member: "Lé ọmọ ẹgbẹ́ kúrò nínú ilé-iṣẹ́ ọnà"
+      ban_failed: "Nǹkan kan ṣàṣìṣe nígbà lílé ọmọ ẹgbẹ́ yìí kúrò. Gbìyànjú lẹ́yìn náà."
+      demote_member: "Sọ alábòójútó kalẹ̀ sí ọmọ ẹgbẹ́"
+      demotion_failed: "Nǹkan kan ṣàṣìṣe nígbà sísọ alábòójútó yìí kalẹ̀. Gbìyànjú lẹ́yìn náà."
+      last_admin: "A kò lè sọ alábòójútó ìkẹyìn ilé-iṣẹ́ ọnà yìí kalẹ̀."
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
-    show_more: 'Show more'
-    show_less: 'Show less'
+      title: "Àwọn Ìbéèrè Láti Darapọ̀"
+      accept: "Gbà á"
+      decline: "Kọ̀ ọ́"
+      accept_success: "A ti gba ìbéèrè láti darapọ̀."
+      decline_success: "A ti kọ ìbéèrè láti darapọ̀."
+      error: "Nǹkan kan ṣàṣìṣe. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
+      no_requests: "Kò sí ìbéèrè láti darapọ̀ tí ó ń dúró."
+    show_more: "Fi púpọ̀ hàn"
+    show_less: "Fi díẹ̀ hàn"
     admin_settings:
-      title: 'Settings'
-      studio_name: 'Studio Name'
-      studio_description: 'Description'
-      toggle_allow_comments: 'Comments'
-      toggle_privacy: 'Public'
+      title: "Ètò"
+      studio_name: "Orúkọ Ilé-iṣẹ́ Ọnà"
+      studio_description: "Àpèjúwe"
+      toggle_allow_comments: "Àwọn àsọyé"
+      toggle_privacy: "Gbangba"
 media_library:
   file:
-    size: 'Size: %size%'
+    size: "Ìwọ̀n: %size%"
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: "Irú: àwòrán"
+      project: "Irú: iṣẹ́"
+      sound: "Irú: ohùn"
+      movie: "Irú: fídíò"
+      default: "Irú: àìmọ̀"
+  no_categories: "Kò sí ẹ̀ka mídíà kankan síbẹ̀."
+  no_results: "A kò rí àbájáde kankan."
+  assets_count: "àwọn ohun èlò"
+  view_all: "Wo gbogbo rẹ̀"
+  view_all_category: "Wo gbogbo %category%"
+  back_to_app: "Padà sí áàpù"
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: "Iṣẹ́ tí o béèrè kò sí"
+  project_not_for_kids: "A ti sàmì sí iṣẹ́ náà pé kò yẹ fún àwọn ọmọdé!"
+  project_safe_for_kids: "A ti sàmì sí iṣẹ́ náà pé ó yẹ fún àwọn ọmọdé!"
+  project_not_for_kids_moderator: "Alábòójútó kan ló sàmì sí iṣẹ́ náà. O kò lè yí èyí padà!"
+  project_set_private: "A ti ṣe iṣẹ́ náà ní àdáni."
+  project_set_public: "A ti ṣe iṣẹ́ náà ní gbangba."
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "Àlàyé àfikún: additionalInfo"
+    feature_1: "Ẹ̀yà featureName kò sí láti maintenanceStart títí di maintenanceEnd"
+    feature_2: "Ẹ̀yà náà"
+    feature_3: "Ẹ̀yà náà"
+MarkNotForKids: "Sàmì sí pé kò yẹ fún àwọn ọmọdé"
+MarkSafeForKids: "Sàmì sí pé ó yẹ fún àwọn ọmọdé"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "Ìjẹ́rìísí"
+  confirmMark: "Ṣé o dájú pé o fẹ́ sàmì sí iṣẹ́ yìí pé kò yẹ fún àwọn ọmọdé?"
+  confirmUnmark: "Ṣé o dájú pé o fẹ́ yọ àmì àìyẹ-fún-ọmọdé kúrò lórí iṣẹ́ yìí?"
+  confirmYes: "Bẹ́ẹ̀ ni, tẹ̀síwájú!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Jábọ̀ %content_type% yìí"
+    reason_placeholder: "Jọ̀wọ́ ṣàlàyé ìdí tí o fi ń jábọ̀ èyí..."
+    submit: "Fi Ìròyìn Ránṣẹ́"
+    success: "A ti fi ìròyìn rẹ ránṣẹ́. O ṣé."
+    error: "Nǹkan kan ṣàṣìṣe. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
+    duplicate: "O ti jábọ̀ àkóónú yìí tẹ́lẹ̀."
+    trust_too_low: "Àkáǹtì rẹ ṣì tuntun jù láti fi ìròyìn ránṣẹ́."
+    unverified: "Jọ̀wọ́ rí i dájú pé o ti wọlé àti pé a ti jẹ́rìí ímeèlì àkáǹtì rẹ."
+    rate_limited: "Ò ń fi ìròyìn ránṣẹ́ ní kíákíá jù. Jọ̀wọ́ dúró kí o sì gbìyànjú lẹ́ẹ̀kan sí i."
+    suspended: "A ti dá àkáǹtì rẹ dúró."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
-    cancel: "Cancel"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    button: "Pe ẹjọ́"
+    title: "Pe ẹjọ́ ìpinnu yìí"
+    placeholder: "Ṣàlàyé ìdí tí kò fi yẹ kí a fi àkóónú yìí pamọ́..."
+    submit: "Fi Ẹ̀bẹ̀ Ránṣẹ́"
+    cancel: "Fagilé"
+    success: "A ti fi ẹ̀bẹ̀ rẹ ránṣẹ́ fún àyẹ̀wò."
+    already_pending: "O ti ní ẹ̀bẹ̀ kan tí ó ń dúró."
+    error: "Nǹkan kan ṣàṣìṣe. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
+    rate_limited: "Ò ń fi ẹ̀bẹ̀ ránṣẹ́ ní kíákíá jù. Jọ̀wọ́ dúró kí o sì gbìyànjú lẹ́ẹ̀kan sí i."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Ò ń fi àsọyé ránṣẹ́ ní kíákíá jù. Jọ̀wọ́ dúró díẹ̀."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Ò ń hùwà ní kíákíá jù. Jọ̀wọ́ dúró díẹ̀."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Ò ń tẹ̀lé/dẹ́kun títẹ̀lé ní kíákíá jù. Jọ̀wọ́ dúró díẹ̀."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Ò ń ṣe ìgbésẹ̀ ilé-iṣẹ́ ọnà ní kíákíá jù. Jọ̀wọ́ dúró díẹ̀."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "A ti fi iṣẹ́ yìí pamọ́ nítorí ìròyìn láti ọ̀dọ̀ àwùjọ."
+    comment: "A ti fi àsọyé yìí pamọ́ nítorí ìròyìn láti ọ̀dọ̀ àwùjọ."
+    user: "A ti fi profaili yìí pamọ́ nítorí ìròyìn láti ọ̀dọ̀ àwùjọ."
+    user_own: "A ti dá àkáǹtì rẹ dúró nítorí ìròyìn láti ọ̀dọ̀ àwùjọ. O lè pe ẹjọ́ ìpinnu yìí."
+    studio: "A ti fi ilé-iṣẹ́ ọnà yìí pamọ́ nítorí ìròyìn láti ọ̀dọ̀ àwùjọ."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "A ti fi %content_type% rẹ pamọ́ nítorí ìròyìn láti ọ̀dọ̀ àwùjọ. O lè pe ẹjọ́ ìpinnu yìí."
+    appeal_approved: "A ti fọwọ́ sí ẹ̀bẹ̀ rẹ. Àkóónú rẹ ti ń hàn lẹ́ẹ̀kan sí i báyìí."
+    appeal_rejected: "A ti ṣàyẹ̀wò ẹ̀bẹ̀ rẹ, ìpinnu láti fi àkóónú rẹ pamọ́ sì dúró."
+    admin_review_needed: "A ti fi àkóónú pamọ́ fúnra rẹ̀, ó sì nílò àyẹ̀wò."
+Reports: "Àwọn ìròyìn"
+members: "àwọn ọmọ ẹgbẹ́"
