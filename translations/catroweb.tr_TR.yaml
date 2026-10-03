@@ -307,8 +307,7 @@ remixGraph:
   projectNotAvailableErrorDescription: 'Bu proje artık mevcut değil!'
   projectNotAvailable: 'Mevcut değil'
   projectUnknownUser: 'Bilinmeyen kullanıcı'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+noReply: 'Bu otomatik bir mesajdır – lütfen bu e-postayı doğrudan yanıtlama.'
 accountConfirmation:
   subject: Catrobat hesap onayınız
   message: |
