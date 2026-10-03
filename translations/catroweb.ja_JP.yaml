@@ -297,8 +297,7 @@ remixGraph:
   projectNotAvailableErrorDescription: "このプロジェクトはもう利用できません！"
   projectNotAvailable: "利用できません"
   projectUnknownUser: "不明なユーザー"
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+noReply: 'This is an automated message - Please do not reply directly to this email.'
 accountConfirmation:
   subject: Catrobat アカウントの確認
   message: |

@@ -290,8 +290,7 @@ remixGraph:
   projectNotAvailableErrorDescription: "该项目已不再可用！"
   projectNotAvailable: "不可用"
   projectUnknownUser: "未知用户"
-noReply:
-  - 这是自动发送的消息 - 请不要直接回复此邮件。
+noReply: '这是自动发送的消息 - 请不要直接回复此邮件。'
 accountConfirmation:
   subject: 您的 Catrobat 帐户确认
   message: |
