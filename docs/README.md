@@ -21,6 +21,7 @@ The previous wiki structure has been consolidated and sorted into topic-based fo
 - [Coding Standard](./contributor-guide/Coding-Standard.md)
 - [How to Test](./contributor-guide/How-To-Test.md)
 - [Behat Test Guidelines](./contributor-guide/Behat-Test-Guidelines.md)
+- [Translations](./contributor-guide/Translations.md)
 
 ## Development Topics
 
