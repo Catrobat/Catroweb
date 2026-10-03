@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: مجتمع كاتروبات
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: "شارك المشاريع الإبداعية المصنوعة باستخدام Catrobat واكتشفها وأعد مزجها. انضم إلى مجتمع عالمي من المبدعين الشباب الذين يصنعون الألعاب والرسوم المتحركة والتطبيقات."
+meta.description.media.library: "تصفّح وحمّل موارد وسائط مجانية لـ Catrobat — أصوات وصور والمزيد لمشاريعك."
+meta.og.title.login: "سجّل الدخول إلى Catrobat"
+meta.og.description.login: "سجّل الدخول لمشاركة مشاريع Catrobat الخاصة بك مع المجتمع."
+meta.og.title.register: "أنشئ حسابًا في Catrobat"
+meta.og.description.register: "انضم إلى مجتمع Catrobat وابدأ بمشاركة مشاريعك الإبداعية اليوم."
+meta.og.description.profile: "%username% على Catrobat – تصفّح مشاريعه وإنجازاته."
 localLanguage: اللغة الإنجليزية
 username: اسم المستخدم
 password: كلمة المرور
@@ -18,7 +18,7 @@ aboutPocketCode: حول تطبيق بوكت بينت
 about: حول كاتروبات
 education: التعليم
 chat: المحادثات والمنتديات
-privacyGuide: Privacy Awareness Guide
+privacyGuide: "دليل التوعية بالخصوصية"
 others: الآخرين
 tutorials: المساعدة
 googlePlay: متجرجوجل
@@ -26,7 +26,7 @@ iosAppStore: IOS App store
 instagram: إنستغرام
 discordChat: دردشة ديسكورد
 passwordsNoMatch: لا تتطابق كلمات المرور.
-error: Oops!
+error: "عفوًا!"
 cancel: إلغاء
 confirm: تأكيد
 report: تقرير
@@ -42,19 +42,19 @@ noDescription: لا يوجد أي وصف .
 credits: الملاحظات والاعتمادات
 noCredits: لا توجد ملاحظات أو أرصدة متاحة.
 notesAndCreditsDescription: كيف قمت بإنشاء هذا المشروع؟ هل استخدمت الأفكار أو البرامج النصية أو الأعمال الفنية من أشخاص آخرين؟ شكراً لهم هنا.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+projectImportedFromScratch: "تم استيراد هذا المشروع من MIT Scratch. يمكنك الاطلاع على المشروع الأصلي"
+scratchImportedProjectLinkHere: "هنا."
 country: البلد
 loginText: تسجيل الدخول
 privacyPolicy: سياسة الخصوصية
 imprint: بصمة
 projectDetails: التفاصيل
 somethingWentWrong: 'عذرا, هناك شيء خاطئ.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: "يرجى التأكد من أنك مسجّل الدخول وأن البريد الإلكتروني لحسابك مُؤكَّد."
+accountSuspended: "تم تعليق حسابك بسبب بلاغات من المجتمع. يمكنك الطعن في هذا القرار من ملفك الشخصي."
+doesNotExist: "المورد المطلوب غير موجود."
 pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
-tryAgainButton: 'Try again'
+tryAgainButton: "حاول مرة أخرى"
 oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
 more: 'المزيد'
 less: 'أقل'
@@ -80,21 +80,21 @@ notificationsUnauthorizedError: "غير قادر على تصريح المستخ�
 notificationsClearError: "غير قادر على تحديد الإشعارات كـ مقروءة!"
 pleaseWait: "يرجى الانتظار..."
 projects: "البرامج"
-users: "User"
-studios: "Studios"
+users: "المستخدم"
+studios: "الاستوديوهات"
 oauthPopUpTitle: "معلومات تسجيل الدخول للحساب الخارجي"
-oauthInfo: 'لقد استخدمت للتو حساب خارجي لتسجيل الدخول. قمنا بإنشاء اسم مستخدم عشوائي لك. إذا كنت ترغب في تغيير اسم المستخدم الخاص بك أو إنشاء كلمة مرور جديدة للحساب الخاص بك يرجى الذهاب إلى صفحة ملفي الشخصي. انقر على %link_start% هنا %link_end% للذهاب إلى الصفحة الشخصية الخاصة بك'
+oauthInfo: 'لقد استخدمت للتو حساب خارجي لتسجيل الدخول. قمنا بإنشاء اسم مستخدم عشوائي لك. إذا كنت ترغب في تغيير اسم المستخدم الخاص بك أو إنشاء كلمة مرور جديدة للحساب الخاص بك يرجى الذهاب إلى صفحة ملفي الشخصي.'
 oauthHere: "هنا"
 statistics: "الإحصائيات"
-languageSelection: "Language selection"
+languageSelection: "اختيار اللغة"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: "المظهر"
+  auto: "النظام"
+  auto_description: "اتبع إعداد جهازك"
+  light: "فاتح"
+  light_description: "مظهر مضيء"
+  dark: "داكن"
+  dark_description: "مظهر داكن"
   apply: 'تطبيق'
 indexPage:
   recommendedSection:
@@ -117,196 +117,196 @@ follower:
   unfollowButton: "إلغاء متابعة %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: "مرحبًا بك في %theme% من Catrobat"
+    title_mindstorms: "مرحبًا بك في موقع Catrobat الخاص بـ Mindstorms EV3 وNXT"
+    subtitle: "اصنع قصصًا وألعابًا والمزيد..."
+    subtitle_embroidery: "اطرز نقوشك الخاصة على قمصانك وحقائبك وسراويلك أو غطاء هاتفك الذكي!"
+    subtitle_mindstorms: "اصنع مشاريعك الخاصة باستخدام روبوتات Lego Mindstorms EV3 وNXT"
+    download: "حمّل التطبيق"
+    statistics: "المزيد من الإحصائيات"
+  featured: "مميّز"
   open: فتح
   download: تحميل
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "رفع مشروع"
+    drop_here: "اسحب ملف .catrobat وأفلته هنا"
+    or_browse: "أو انقر للتصفّح"
+    button: "رفع"
+    uploading: "جارٍ الرفع..."
+    success: "تم رفع المشروع بنجاح!"
+    view_project: "عرض المشروع"
+    upload_another: "رفع مشروع آخر"
+    invalid_file: "يرجى اختيار ملف .catrobat"
+    file_too_large: "الملف كبير جدًا"
+    error: "فشل الرفع. يرجى المحاولة مرة أخرى."
+    unauthorized: "يجب أن تكون مسجّل الدخول لتتمكن من الرفع."
+    rate_limited: "عمليات رفع كثيرة جدًا. يرجى المحاولة لاحقًا."
+    selected_file: "الملف المحدد:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+      file_size: "الحد الأقصى لحجم الملف هو 100 ميغابايت."
+      app_upload: "يمكنك أيضًا رفع المشاريع مباشرة من تطبيق Pocket Code. لاحظ أن التطبيقات قيد إعادة التطوير حاليًا ولا تدعم الرفع عبر الويب في الوقت الحالي."
+      retention: "ستُحذف المشاريع المرفوعة تلقائيًا بعد فترة من عدم النشاط. سجّل الدخول بانتظام أو احصل على تنزيلات لمشروعك لتمديد مدة الاحتفاظ به."
+      protection: "قد يحمي المشرفون المشاريع الجيدة أو الشائعة بشكل خاص من الحذف التلقائي."
+  example: "أمثلة"
+  newest: "أحدث المشاريع"
+  recommended: "مشاريع مقترحة"
+  scratchremixes: "إعادات مزج Scratch"
+  noProjects: "لا توجد مشاريع حاليًا."
   shareAction: مشاركة
   deleteAction: حذف المشروع
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+      هل أنت متأكد؟
+      هل أنت متأكد أنك تريد حذف "%programName%"؟
+      لا توجد طريقة للتراجع عن هذا الإجراء!
+      نعم، احذفه!
+      إلغاء
+  deleteConfirmText: "لا يمكن التراجع عن هذا الإجراء. سيُحذف مشروعك نهائيًا."
   deleteConfirmationTitle: هل أنت متأكد؟
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+  deleteNotFoundError: "تعذّر العثور على المشروع المراد حذفه ضمن حسابك."
+  private: "خاص"
+  public: "عام"
+  setPrivateAction: "اجعله خاصًا"
+  setPublicAction: "اجعله عامًا"
+  setPrivateConfirm: "هل تريد جعل هذا المشروع خاصًا؟ لن يظهر بعد ذلك في نتائج البحث."
+  setPublicConfirm: "هل تريد جعل هذا المشروع عامًا؟ سيكون مرئيًا للجميع."
+  markNotForKidsConfirm: "هل تريد وضع علامة على هذا المشروع بأنه غير مناسب للأطفال؟"
+  markSafeForKidsConfirm: "هل تريد إزالة علامة \"غير مناسب للأطفال\" من هذا المشروع؟"
+  nfkModeratorLocked: "تم قفل هذا الإعداد من قِبل أحد المشرفين."
+  confirmSetPrivate: "هل أنت متأكد أنك تريد جعل هذا المشروع خاصًا؟ لن يظهر بعد ذلك في نتائج البحث."
+  confirmSetPublic: "هل أنت متأكد أنك تريد جعل هذا المشروع عامًا؟ سيكون مرئيًا للجميع."
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+      هل أنت متأكد؟
+      إذا جعلت '%programName%' خاصًا، فلن يتمكن المستخدمون الآخرون من رؤيته أو العثور عليه.
+      لا يزال بإمكانك مشاركة رابط مشروعك مع أصدقائك. يمكنك تبديل الظهور بالنقر على أيقونة القفل.
+      إذا جعلت "%programName%" عامًا، فسيتمكن المستخدمون الآخرون من رؤيته والعثور عليه.
+      نعم، اجعله عامًا
+      نعم، اجعله خاصًا
+      لا
+  reportCommentConfirmation: "هل أنت متأكد أنك تريد الإبلاغ عن هذا التعليق؟"
+  deleteCommentConfirmation: "هل أنت متأكد أنك تريد حذف هذا التعليق؟"
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
+      حذف الحساب؟
+      هل أنت متأكد أنك تريد حذف حسابك؟ سيؤدي ذلك أيضًا إلى حذف مشاريعك المرفوعة وتعليقاتك!
+      لا توجد طريقة للتراجع عن هذا الإجراء!
+      نعم، احذفه!
+      إلغاء
+  tooLongName: "اسم المشروع طويل جدًا!"
+  tooLongDescription: "وصف المشروع طويل جدًا!"
+  tooLongCredits: "ملاحظات المشروع والإشادات طويلة جدًا!"
   my_projects: مشاريعي
-  trending: Trending projects
-  popular: Popular projects
+  trending: "المشاريع الرائجة"
+  popular: "المشاريع الشائعة"
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
-  random: Random projects
-  related: Related projects
+  random: "مشاريع عشوائية"
+  related: "مشاريع ذات صلة"
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: "استكشف المشاريع"
+    no_projects: "لم تنشئ أي مشاريع بعد"
+    no_explore: "لم يتم العثور على مشاريع"
+    load_more: "تحميل المزيد"
+    upload: "رفع مشروع"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: "محمي"
+    day_left: "تبقّى يوم واحد"
+    days_left: "تبقّى %days% يومًا"
+    tooltip: "تُحذف المشاريع تلقائيًا بعد فترة من عدم النشاط. احصل على المزيد من التنزيلات أو سجّل الدخول بانتظام لتمديد مدة الاحتفاظ."
+    tooltip_protected: "هذا المشروع محمي ولن يُحذف تلقائيًا."
+  downloads: "%downloads% تنزيل"
+  sample: "مشاريع نموذجية"
+  views: "%views% مشاهدة"
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "الأشخاص الذين تفاعلوا مع هذا المشروع"
     all: "جميع"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: "{0}0 إعادة مزج |{1}إعادة مزج واحدة |]1,Inf]%remixes% إعادات مزج"
+  newRemixesNotificationTitle: "|{1}لدى \"%programName%\" إعادة مزج جديدة واحدة: |]1,Inf] لدى \"%programName%\" %remixes% إعادات مزج جديدة:"
+  submitted: "المشاريع المُرسَلة"
+  uploaded: "المشاريع المرفوعة"
+  reportAsInappropriate: "الإبلاغ عنه كمحتوى غير لائق"
+  reportProgram: "الإبلاغ عن المشروع"
+  languageVersion: "إصدار لغة Catrobat: %languageVersion%"
+  reportLoginText: "يرجى %login% للإبلاغ عن هذا المشروع."
+  reportDialogHeader: "لماذا تريد الإبلاغ عن هذا المشروع؟"
+  reportDialogReason: "أدخل سببًا"
+  reportRadioButtonInappropriate: "إنه غير لائق"
+  reportRadioButtonCopyright: "انتهاك حقوق النشر"
+  reportRadioButtonSpam: "إنه رسائل مزعجة"
+  reportRadioButtonDislike: "لا يعجبني"
+  reportOwnProgram: "لا يمكنك الإبلاغ عن مشروعك الخاص."
+  reportAlready: "لقد أبلغت عن هذا المشروع بالفعل."
+  reportDone: "لقد أبلغت عن هذا المشروع!"
+  updateAppHeaderDownload: "التنزيل غير ممكن"
+  updateAppTextDownload: "يرجى تحديث تطبيقك إلى أحدث إصدار. انتبه إلى أن ليست كل ميزات Android متوفرة بعد على iOS."
+  updateAppTextDownloadApk: "تنزيل ملف APK متاح حاليًا على Android فقط وليس على iOS."
+  updateAppHeader: "تحديث التطبيق"
+  updateAppText: "يرجى تحديث تطبيقك إلى أحدث إصدار."
   btnClosePopup: موافق
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: "اطّلع على مشروع Catrobat هذا"
+  show_more: "عرض المزيد"
   comments: التعليقات
-  send: Send
+  send: "إرسال"
   delete: حذف
   report: تقرير
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: "رد"
+  report_popup: "تم الإبلاغ عن التعليق بنجاح."
+  report_popup_header: "تم الإبلاغ"
+  deleted_popup: "تم حذف التعليق بنجاح."
+  deleted_popup_header: "تم الحذف"
+  noAdminRights: "ليست لديك صلاحيات المسؤول. يرجى تسجيل الدخول كمسؤول."
+  editProject: "تعديل المشروع"
+  closeProjectEditor: "إغلاق محرر المشروع"
   closeEditorPrompt: هل تريد حفظ التغييرات؟
   btnDiscard: تجاهل
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: "اكتب تعليقًا"
+  thumbsUp: "أحسنت!"
+  smile: "ابتسم!"
+  love: "أحببته!"
+  wow: "رائع!"
+  linkTitle: "رابط"
+  link: "نسخ رابط المشروع إلى الحافظة"
   reactionsText: ردود الفعل
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: "حدث خطأ أثناء تنزيل المشروع. يرجى المحاولة لاحقًا."
+  downloadStartText: "بدأ التنزيل..."
+  downloading: "جارٍ التنزيل..."
+  openInApp: "افتح في Pocket Code"
+  downloaded: "تم التنزيل"
+  showTranslation: "إظهار الترجمة"
+  hideTranslation: "إخفاء الترجمة"
+  translatedByLine: "ترجمة %provider% من %sourceLanguage% إلى %targetLanguage%"
+  googleTranslate: "ترجمة Google"
+  confrimDelete: "هل أنت متأكد أنك تريد حذف الترجمة؟"
   default: افتراضي
   save: حفظ
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: "الترجمة إلى %language%"
+  editDefault: "تعديل الافتراضي"
+  editTranslation: "تعديل الترجمة إلى %language%"
+  translations: "الترجمات"
+  createTranslation: "إنشاء ترجمة"
+  deletedComment: "**محذوف**"
+  replyLabel: "رد"
   repliesLabel: ردود
-  notForKids: Not safe for kids
+  notForKids: "غير مناسب للأطفال"
 remixGraph:
   title: رِمكسات(خليط مُعدل)
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'
   by: 'بمقدار'
   open: 'فتح'
   showPaths: 'إظهار المسارات'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: "جارٍ تحميل مخطط إعادة المزج..."
+  error: "تعذّر تحميل مخطط إعادة المزج."
+  empty: "لا تتوفر بيانات مخطط إعادة المزج لهذا المشروع بعد."
   remixesLabel: 'رِمكسات(خليط مُعدل)'
   projectsLabel: 'البرامج'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  scratchLabel: "جذور Scratch"
+  interactHint: "اختر عقدة لفتح المشروع أو لإبراز مسار إعادة المزج الخاص به."
+  zoomIn: "تكبير"
+  zoomOut: "تصغير"
+  resetView: "إعادة ضبط العرض"
+  projectNotAvailableErrorTitle: "عذرًا..."
+  projectNotAvailableErrorDescription: "المشروع لم يعد متاحًا!"
+  projectNotAvailable: "غير متاح"
+  projectUnknownUser: "مستخدم غير معروف"
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -321,7 +321,7 @@ accountConfirmation:
     <p>
     عزيزي %username%.<br>
     <br>
-    لإنهاء تنشيط حسابك - الرجاء النقر فوق <a href=%confirmationUrl%>هنا.</a><br>
+    لإنهاء تنشيط حسابك - الرجاء النقر فوق <a href="%confirmationUrl%">هنا.</a><br>
     <br>
     لا يمكن استخدام هذا الرابط إلا مرة واحدة للتحقق من صحة حسابك.<br>
     <br>
@@ -329,80 +329,80 @@ accountConfirmation:
     فريق كاتروبات الخاص بك.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "أكّد عنوان بريدك الإلكتروني"
+  welcome: "مرحبًا بك في Catrobat!"
+  greeting: "شكرًا لتسجيلك! يرجى تأكيد عنوان بريدك الإلكتروني للبدء."
+  message: "انقر على الزر أدناه لتأكيد بريدك الإلكتروني. هذا الرابط صالح حتى %time% ولا يمكن استخدامه إلا مرة واحدة."
+  button: "تأكيد عنوان البريد الإلكتروني"
+  ignore: "إذا لم تنشئ حسابًا في Catrobat، يمكنك تجاهل هذا البريد الإلكتروني بأمان."
+  autoDelete: "تُحذف الحسابات غير المؤكدة تلقائيًا بعد 30 يومًا."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "مطلوب موافقة ولي الأمر لحساب طفلك في Catrobat"
+    title: "موافقة ولي الأمر مطلوبة"
+    greeting: "مرحبًا،"
+    message: "أنشأ طفلك %username% حسابًا في Catrobat وأكّد عنوان بريده الإلكتروني."
+    explanation: "Catrobat منصة تعليمية مجانية يتعلم فيها الشباب البرمجة من خلال إنشاء التطبيقات والألعاب والرسوم المتحركة. بموجب لوائح حماية الطفل في الاتحاد الأوروبي، نحتاج إلى موافقتك قبل أن يتمكن طفلك من المشاركة الكاملة في المجتمع. يرجى النقر على الزر أدناه لإعطاء الموافقة."
+    button: "إعطاء موافقة ولي الأمر"
+    ignore: "إذا لم تكن تتوقع هذا البريد الإلكتروني، يمكنك تجاهله بأمان. بدون الموافقة، ستكون وظائف الحساب محدودة."
+    whatIsCatrobat: "Catrobat منصة تعليمية مجانية وغير ربحية للبرمجة. اعرف المزيد على catrobat.org."
+    manageLink: "يمكنك إدارة حساب طفلك في أي وقت عبر <a href=\"%portalUrl%\" style=\"color: #00acc1;\">بوابة أولياء الأمور</a>. اعرف المزيد عن <a href=\"%infoUrl%\" style=\"color: #00acc1;\">حقوقك كولي أمر</a>."
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "تم منح الموافقة"
+    message: "شكرًا لك! تم تفعيل حساب %username% بالكامل الآن."
+    continueButton: "اكتشف المشاريع"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "أولياء الأمور والأوصياء"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "معلومات لأولياء الأمور والأوصياء"
+    intro: "تأخذ Catrobat سلامة وخصوصية المستخدمين الصغار على محمل الجد. تشرح هذه الصفحة كيف نحمي طفلك وما هي الحقوق التي تملكها."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "ما هي Catrobat؟"
+      text: "Catrobat منصة تعليمية مجانية وغير ربحية يتعلم فيها الشباب البرمجة من خلال إنشاء تطبيقاتهم وألعابهم ورسومهم المتحركة الخاصة. المنصة متاحة في جميع أنحاء العالم وتُستخدم في البيئات التعليمية."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "ما البيانات التي نجمعها؟"
+      text: "نجمع الحد الأدنى من البيانات اللازمة لتشغيل المنصة: اسم المستخدم وعنوان البريد الإلكتروني وتاريخ الميلاد وأي مشاريع ينشئها طفلك ويرفعها. بالنسبة للمستخدمين الذين تقل أعمارهم عن 14 عامًا، نحفظ أيضًا عنوان البريد الإلكتروني لولي الأمر أو الوصي لأغراض الموافقة. لا نبيع البيانات الشخصية ولا نشاركها مع أطراف ثالثة."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "حقوقك كولي أمر أو وصي"
+      text: "بموجب لوائح حماية الطفل في الاتحاد الأوروبي (GDPR) وقانون COPPA، يحق لك: مراجعة البيانات التي نحتفظ بها عن طفلك، وطلب نسخة من تلك البيانات، وسحب موافقتك في أي وقت (مما يقيّد الحساب)، وطلب الحذف النهائي لحساب طفلك وجميع البيانات المرتبطة به."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "ما القيود التي تنطبق على حسابات القاصرين؟"
+      text: "لا يمكن للمستخدمين الذين تقل أعمارهم عن 16 عامًا نشر التعليقات أو قراءتها، أو متابعة مستخدمين آخرين، أو مشاهدة المحتوى المصنّف بأنه غير مناسب للأطفال. لا يزال بإمكانهم إنشاء المشاريع ورفعها، وتصفّح المشاريع العامة، والتفاعل مع المشاريع بالإعجابات. هذه القيود موجودة لتوفير بيئة تعلّم آمنة."
+    manageButton: "إدارة حساب طفلك"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "بوابة أولياء الأمور"
+    description: "أدخل عنوان بريدك الإلكتروني لتتلقى رابطًا آمنًا لإدارة حساب طفلك في Catrobat. سيُرسل الرابط إلى عنوان البريد الإلكتروني الذي قدّمته أثناء التسجيل."
+    emailLabel: "عنوان بريدك الإلكتروني"
+    submitButton: "إرسال رابط الإدارة"
+    infoLink: "اعرف المزيد"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "تحقق من بريدك الوارد"
+      message: "إذا كان هناك حساب مرتبط بهذا البريد الإلكتروني، فقد أرسلنا رابط إدارة. يرجى التحقق من بريدك الوارد واتباع الرابط لإدارة حساب طفلك."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "إدارة حسابات الأطفال"
+    description: "أنت تدير الحسابات المرتبطة بـ %email%."
+    consentStatus: "حالة الموافقة"
+    accountCreated: "تاريخ إنشاء الحساب"
+    email: "البريد الإلكتروني للطفل"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "ممنوحة"
+      pending: "قيد الانتظار"
+      revoked: "مسحوبة"
+    grantButton: "منح الموافقة"
+    revokeButton: "سحب الموافقة"
+    revokeConfirm: "هل أنت متأكد أنك تريد سحب الموافقة؟ ستكون وظائف الحساب محدودة."
+    exportButton: "تصدير البيانات"
+    deleteButton: "حذف الحساب"
+    deleteConfirm: "هل أنت متأكد أنك تريد حذف هذا الحساب نهائيًا؟ لا يمكن التراجع عن ذلك."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "إدارة حساب طفلك في Catrobat"
+      title: "إدارة الحساب"
+      greeting: "مرحبًا،"
+      message: "لقد طلبت رابطًا لإدارة حساب طفلك في Catrobat (%usernames%). انقر على الزر أدناه لعرض الحساب وإدارته."
+      button: "إدارة الحساب"
+      ignore: "إذا لم تطلب ذلك، يمكنك تجاهل هذا البريد الإلكتروني بأمان."
 passwordRecovery:
   subject: استعادة كلمة سر كاتروبات الخاصة بك
   message: |
@@ -419,21 +419,21 @@ passwordRecovery:
     <p>
     عزيزي %username%.<br>
     <br>
-    لقد طلبت إعادة تعيين كلمة المرور الخاصة بك في <a href=%appplication_url%>بوكت كوود</a> لأنك نسيت كلمة المرور الخاصة بك.
+    لقد طلبت إعادة تعيين كلمة المرور الخاصة بك في <a href="%appplication_url%">Pocket Code</a> لأنك نسيت كلمة المرور الخاصة بك.
     إذا لم تطلب ذلك، يرجى تجاهله. ستنتهي صلاحيتها وتصبح عديمة الفائدة في غضون 24 ساعة.<br>
     <br>
-    لإعادة تعيين كلمة المرور الخاصة بك وإنشاء كلمة مرور جديدة، الرجاء النقر فوق <a href=%confirmationUrl%>هنا.</a><br>
+    لإعادة تعيين كلمة المرور الخاصة بك وإنشاء كلمة مرور جديدة، الرجاء النقر فوق <a href="%confirmationUrl%">هنا.</a><br>
     <br>
-    يمكنك استخدام اسم المستخدم وكلمة المرور الخاصة بك في أي وقت للوصول إلى المجتمع <a href=%appplication_url%>بوكت كوود</a> .<br>
-    للقيام بذلك، فقط قم بزيارة الصفحة التالية: <a href=%loginPage%>صفحة تسجيل الدخول</a><br>
-    لتحرير تفاصيل ملفك الشخصي، اذهب إلى هذه الصفحة <a href=%profilePage%></a>.<br>
+    يمكنك استخدام اسم المستخدم وكلمة المرور الخاصة بك في أي وقت للوصول إلى المجتمع <a href="%appplication_url%">Pocket Code</a> .<br>
+    للقيام بذلك، فقط قم بزيارة الصفحة التالية: <a href="%loginPage%">صفحة تسجيل الدخول</a><br>
+    لتحرير تفاصيل ملفك الشخصي، اذهب إلى هذه <a href="%profilePage%">الصفحة</a>.<br>
     <br>
     أطيب التحيات،<br>
     فريق كاتروبات الخاص بك.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: "نبذة عني"
+  currentlyWorkingOn: "أعمل حاليًا على"
   edit: تعديل ملفك الشخصي
   saveChanges: حفظ التغييرات؟
   newPass: كلمة المرور الجديدة
@@ -462,16 +462,16 @@ profile:
     submitSuccess: حفظ!
   reallyDeleteProgram: هل تريد حقاً حذف مشروعك
   programsOf: مشاريع
-  picture: Profile picture
+  picture: "صورة الملف الشخصي"
   changePicture: تغيير الصورة
   goToScratchProfile: الملف الشخصي على Scratch
 myprofile:
-  userSettings: User settings
+  userSettings: "إعدادات المستخدم"
   profileSettings: تحرير الملف الشخصي
   securitySettings: تغيير كلمة السر
   accountSettings: إعدادت الحساب
-  accountVerification: Verify account
-  account: Account
+  accountVerification: "تأكيد الحساب"
+  account: "الحساب"
   editProfile: تحرير الملف الشخصي
   edit: تحرير
   done: موافق
@@ -481,21 +481,21 @@ myprofile:
   email: البريد الألكتروني
   deleteAccount: حذف الحساب
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+      انتبه:
+      لقد أنشأت %num_projects% مشروعًا ولديك %num_followers% متابعًا. ستُزال جميع مشاريعك. لن تتمكن من تسجيل الدخول بعد الآن وستختفي مشاريعك من جميع القوائم. لا يمكن التراجع عن حذف ملفك الشخصي!
+      هل أنت متأكد أنك تريد مغادرتنا؟
+  exportData: "تنزيل بياناتي"
+  exportDataDescription: "يحق لك الحصول على نسخة من بياناتك الشخصية. يشمل ذلك معلومات ملفك الشخصي ومشاريعك وتعليقاتك وتفاعلاتك ومتابعيك."
+  exportDataLoading: "جارٍ التنزيل..."
+  exportDataError: "حدث خطأ أثناء تصدير بياناتك. يرجى المحاولة لاحقًا."
+  exportDataRateLimited: "يمكنك تصدير بياناتك مرة واحدة فقط في اليوم. يرجى المحاولة غدًا."
   editAccountSettings: تعديل إعدادات الحساب
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  profileChangeSuccess: "تم تغيير ملفك الشخصي بنجاح."
+  unspecifiedError: "حدث خطأ أثناء تغيير ملفك الشخصي. يرجى المحاولة مرة أخرى أو إخبارنا إذا استمر حدوث ذلك!"
+  verifyAccountText: "سنرسل إليك بريدًا إلكترونيًا يحتوي على رابط لتأكيد حسابك. تأكد من النقر على الرابط خلال الساعة القادمة، ويُسمح لك بطلب بريد إلكتروني واحد فقط في اليوم."
+  verifyAccountButton: "إرسال بريد إلكتروني"
+  verifyAccountMailSent: "تم إرسال البريد الإلكتروني بنجاح. يرجى التحقق من بريدك الوارد"
+  verifyAccountMailFailed: "يمكنك طلب بريد إلكتروني واحد فقط في اليوم"
 licenseToPlay:
   link: 'ترخيص لتشغيل'
   title: 'ترخيص للتشغيل--منح الائتمان والمشاركة'
@@ -547,16 +547,16 @@ termsOfUse:
   version: الإصدار 1، 3، 4 مارس 2014
 search:
   dotdotdot: بحث...
-  search: Search projects, users & studios
+  search: "ابحث عن مشاريع ومستخدمين واستوديوهات"
   inMediaLib: البحث في مكتبة الوسائط
-  inMediaCategory: Search in media category
+  inMediaCategory: "البحث في فئة الوسائط"
   results: نتائج البحث
   resultcount: نتائج البحث الذي قمت به %count% نتيجة
   fail: الرجاء إدخال مصطلح بحث واحد على الأقل
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noUsers: "لم يتم العثور على مستخدمين"
+  noProjects: "لم يتم العثور على مشاريع"
+  noStudios: "لم يتم العثور على استوديوهات"
+  sameSearchMessage: "يبدو أنك هنا بالفعل! هل تجرّب بحثًا مختلفًا؟"
 menu:
   profile: الصفحة الشخصية
   login: تسجيل الدخول
@@ -566,9 +566,9 @@ menu:
   helpAndTutorials: تعليمات ودروس
   followersAndFollowing: متابع
   mediaLibrary: مكتبة الوسائط
-  studio: Studios
+  studio: "الاستوديوهات"
   language: اللغة
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: "لا توجد خيارات لغة متاحة."
 login:
   login: تسجيل الدخول
   button:
@@ -578,7 +578,7 @@ login:
   oauth:
     title: أو يمكنك الانضمام مع
   passOrUser: كلمة المرور أو اسم المستخدم غير صحيح.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: "تم تعليق حسابك. إذا كنت تعتقد أن هذا خطأ، يرجى التواصل مع الدعم."
   noUsername: لم يتم العثور على عنوان البريد الإلكتروني أو اسم المستخدم الخاص بك.
   forgotPass: نسيت كلمة المرور أو اسم المستخدم؟
   recoverPassSend: تم إرسال بريد إلكتروني إلى عنوان البريد الإلكتروني الخاص بك. الرجاء التحقق من علبة البريد الخاصة بك.
@@ -596,38 +596,38 @@ login:
   passwordSecond: تأكيد كلمة المرور
 register:
   title: تسجيل الدخول
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  subText: "بالمتابعة، أنت تنشئ حسابًا في مجتمع Catrobat وتوافق على %var1% و%var2%."
+  dateOfBirth: "تاريخ الميلاد"
+  dateOfBirthInfo: "نطلب تاريخ ميلادك للامتثال للوائح حماية الطفل في الاتحاد الأوروبي (GDPR/COPPA) ولتوفير تجربة آمنة للمستخدمين الأصغر سنًا."
+  parentEmail: "البريد الإلكتروني لولي الأمر/الوصي"
+  parentEmailInfo: "مطلوب للمستخدمين الذين تقل أعمارهم عن 14 عامًا. سنرسل طلب موافقة إلى هذا العنوان."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: "أكمل تسجيلك"
+    info: "يرجى إدخال تاريخ ميلادك لمواصلة استخدام المنصة."
     submit: متابعة
   button:
     cancel: إلغاء
     createAccount: إنشاء حساب
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "تحقق من بريدك الوارد!"
+    message: "لقد أرسلنا إليك بريدًا إلكترونيًا للتأكيد. انقر على الرابط في البريد لتفعيل حسابك."
+    helpTitle: "ألم يصلك البريد الإلكتروني؟"
+    hint: "تحقق من مجلد الرسائل غير المرغوب فيها. الرابط صالح لمدة 24 ساعة."
+    resendButton: "إعادة إرسال بريد التأكيد"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "في انتظار موافقة ولي الأمر"
+    message: "تم تأكيد بريدك الإلكتروني! قبل أن تتمكن من استخدام المنصة بالكامل، يجب أن يعطي أحد الوالدين أو الوصي موافقته."
+    sentTo: "تم إرسال طلب موافقة إلى %email%"
+    helpTitle: "ألم يصلك البريد الإلكتروني؟ هل تحتاج إلى مساعدة؟"
+    hint: "اطلب من والديك التحقق من مجلد الرسائل غير المرغوب فيها. الرابط صالح لمدة 24 ساعة."
+    resendButton: "إعادة إرسال بريد الموافقة"
+    wrongEmail: "هل أدخلت بريدًا إلكترونيًا خاطئًا لولي الأمر؟"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "تم سحب موافقة ولي الأمر"
+    message: "سحب والدك أو وصيّك الموافقة على حسابك. ستكون وظائف حسابك محدودة إلى أن تُمنح الموافقة مرة أخرى."
+    newEmailPlaceholder: "البريد الإلكتروني الجديد لولي الأمر"
+    changeButton: "تحديث وإعادة الإرسال"
 accountRecovery:
   title: استرداد الحساب
   description: إذا كنت تتذكر البريد الإلكتروني أو اسم المستخدم لحسابك ، فيمكننا أن نرسل لك رابطًا لإعادة تعيين كلمة المرور الخاصة بك.
@@ -636,28 +636,28 @@ accountRecovery:
     submit: استعادة كلمة المرور
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "إعادة تعيين كلمة المرور"
+    description: "إذا كنت تتذكر البريد الإلكتروني لحسابك، يمكننا أن نرسل إليك رابطًا لإعادة تعيين كلمة المرور."
     button:
-      submit: "Send reset email"
+      submit: "إرسال بريد إعادة التعيين"
       cancel: "إلغاء"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "تحقق من بريدك الإلكتروني"
+    description: "إذا كان هناك حساب مطابق لبريدك الإلكتروني، فقد أُرسل للتو بريد إلكتروني يحتوي على رابط يمكنك استخدامه لإعادة تعيين كلمة المرور. ستنتهي صلاحية هذا الرابط خلال %time%."
+    descriptionTwo: "يمكنك طلب إعادة تعيين جديدة لكلمة المرور كل %throttleLimit% ساعة."
+    descriptionThree: "إذا لم يصلك بريد إلكتروني، يرجى التحقق من مجلد الرسائل غير المرغوب فيها أو مراسلة فريق الدعم على %email-webmaster%."
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "لإعادة تعيين كلمة المرور، يرجى زيارة الرابط التالي"
+    expire: "ستنتهي صلاحية هذا الرابط خلال %time%."
+    cheers: "مع أطيب التحيات!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "إعادة تعيين كلمة المرور"
+    content: "لقد طلبت مؤخرًا إعادة تعيين كلمة المرور لحسابك في Catrobat. انقر على الزر أدناه لاختيار كلمة مرور جديدة. إذا لم تطلب ذلك، يمكنك تجاهل هذا البريد الإلكتروني بأمان."
+    visitLink: "إعادة تعيين كلمة المرور"
+    expire: "هذا الرابط صالح لمدة %time% ولا يمكن استخدامه إلا مرة واحدة."
   reset:
-    title: "Reset your password"
+    title: "إعادة تعيين كلمة المرور"
     button:
       submit: "إعادة تعيين كلمة المرور"
 apk:
@@ -669,7 +669,7 @@ format:
   million_abbreviation: م
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: "حدث خطأ ما. يرجى المحاولة مرة أخرى أو إخبارنا إذا استمر حدوث ذلك!"
   username:
     blank: يجب أن لا يكون اسم المستخدم فارغ
     invalid: اسم المستخدم غير صالح
@@ -705,13 +705,13 @@ errors:
   token: 'لقد فشل التحقق من الجهاز : رمز مميز غير صالح!'
   uploadTokenAuthFailed: 'فشل تحميل مصادقة الرمز المميز.'
   project:
-    invalid: Invalid project.
+    invalid: "مشروع غير صالح."
   languageversion:
     tooold: 'عذراً، يحتوي مشروعك على نسخة قديمة من لغة كاتروبات! هل تستخدم أحدث إصدار من بوكت كوود؟'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "عذرًا، أنت تستخدم إصدارًا قديمًا من Pocket Code. يرجى التحديث إلى أحدث إصدار."
   authentication:
-    title: Login did not work
+    title: "فشل تسجيل الدخول"
     webview: |
       بيانات اعتماد المستخدم الخاصة بك خاطئة.
       الرجاء محاولة تسجيل الدخول مرة أخرى في التطبيق.
@@ -732,7 +732,7 @@ failure:
   upload: حدث خطأ أثناء رفع التطبيق الخاص بك.
 user:
   verification:
-    email: 'Verify your email'
+    email: "أكّد بريدك الإلكتروني"
 api:
   registerUser:
     emailMissing: 'البريد الإلكتروني مفقود'
@@ -751,46 +751,46 @@ api:
     passwordTooLong: 'كلمة المرور طويلة جداً'
     passwordInvalidChars: 'كلمة المرور تحتوي على أحرف غير صالحة'
     usernameContainsEmail: "اسم المستخدم يجب أن لا يحتوي على عنوان بريد إلكتروني"
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: "يجب ألا يحتوي اسم المستخدم على رابط"
     countryCodeInvalid: "رمز البلد غير صالح"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    pictureInvalid: "صورة الملف الشخصي غير صالحة أو غير مدعومة"
+    dateOfBirthMissing: "تاريخ الميلاد مطلوب"
+    dateOfBirthInvalid: "تاريخ الميلاد غير صالح"
+    tooYoung: "يجب أن يكون عمرك 3 سنوات على الأقل لإنشاء حساب"
+    parentEmailMissing: "البريد الإلكتروني لولي الأمر مطلوب للمستخدمين الذين تقل أعمارهم عن 14 عامًا"
+    parentEmailInvalid: "البريد الإلكتروني لولي الأمر غير صالح"
+    parentEmailSameAsUser: "يجب أن يكون البريد الإلكتروني لولي الأمر مختلفًا عن بريدك الإلكتروني"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "كلمة المرور الحالية مفقودة"
+    currentPasswordWrong: "كلمة المرور الحالية خاطئة"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: "لا يمكن أن يكون الاسم فارغًا"
+    nameTooLong: "الاسم طويل جدًا"
+    descriptionTooLong: "الوصف طويل جدًا"
+    creditsTooLong: "الملاحظات والإشادات طويلة جدًا"
+    screenshotInvalid: "لقطة شاشة المشروع غير صالحة أو غير مدعومة"
   projectsPost:
     invalid_checksum: 'المجموع الاختباري غير صالح. حاول التحميل مرة أخرى!'
     upload_error: 'حدث خطأ أثناء التحميل. حاول التحميل مرة أخرى!'
     creating_error: 'حدث خطأ أثناء إنشاء كيان المشروع. حاول التحميل مرة أخرى!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "فشل حفظ تفاصيل المشروع."
+    screenshotError: "فشلت قراءة لقطة الشاشة أو تحويلها أو حفظها. يرجى التحقق من مدخلاتك."
+    notFound: "تعذّر العثور على المشروع المراد تغييره."
+    forbidden: "تغيير المشروع غير مسموح. هل ما زلت مسجّل الدخول؟"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: "الاسم مفقود"
+    nameEmpty: "لا يمكن أن يكون الاسم فارغًا"
+    nameTooShort: "الاسم قصير جدًا"
+    nameTooLong: "الاسم طويل جدًا"
+    nameAlreadyInUse: "الاسم مستخدم بالفعل"
+    descriptionMissing: "الوصف مفقود"
+    descriptionEmpty: "الوصف فارغ"
+    descriptionTooShort: "الوصف قصير جدًا"
+    descriptionTooLong: "الوصف طويل جدًا"
+    imageFileInvalid: "ملف الصورة غير صالح"
+    imageFileInvalidType: "نوع ملف الصورة غير صالح"
+    imageFileTooLarge: "ملف الصورة كبير جدًا"
 #languages and countries
 language:
   arabic: العربية
@@ -889,11 +889,11 @@ codeview:
   dataBricks: 'طوب البيانات'
   specialBricks: 'الطوب الخاص'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: "عرض الكود"
+  loading: "جارٍ تحميل عرض الكود..."
+  error: "تعذّر تحميل عرض الكود."
+  retry: "حاول مرة أخرى"
+  empty: "لا يحتوي هذا المشروع على كود."
   scripts: 'النص البرمجي'
   looks: 'المناظر'
   sounds: 'الأصوات'
@@ -911,21 +911,21 @@ codeStatistics:
   dataBricks: 'البيانات'
   deviceBricks: 'الجهاز'
   specialBricks: 'مميز'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: "نتيجتك:"
+  points: "نقاط"
+  abstraction: "التجريد وتحليل المشكلات"
+  parallelism: "التوازي"
+  logicalThinking: "التفكير المنطقي"
+  synchronization: "التزامن"
+  flowControl: "التحكم في التدفق"
+  userInteractivity: "تفاعل المستخدم"
+  dataRepresentation: "تمثيل البيانات"
+  level: "المستوى"
+  loading: "جارٍ التحميل..."
+  bonus: "مكافأة"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "انضم إلى أكثر من %user_count% عقل مبدع!"
+  text: "مع %project_count% مشروعًا رائعًا تمت مشاركته بالفعل، قد يكون المشروع التالي مشروعك. حمّل تطبيقنا وابدأ الإبداع اليوم"
 privacy-policy:
   header: سياسة الخصوصية
   version: الإصدار 2.2، 17 تشرين الأول/أكتوبر 2019
@@ -946,9 +946,9 @@ catro-notifications:
   noComments: "يبدو أنك لا تملك أي إشعارات تعليق."
   noReactions: "يبدو أنك لا تملك أي إشعارات رد فعل."
   noRemixes: "يبدو أنك لا تملك أي إشعارات ريمكس."
-  noStudios: "It looks like you don't have any studio notifications."
+  noStudios: "يبدو أنه ليست لديك أي إشعارات استوديو."
   tab:
-    studio: Studio
+    studio: "استوديو"
     project: البرامج
   comment:
     message: 'علق %user_link% على %program_link%.'
@@ -957,25 +957,25 @@ catro-notifications:
   follow:
     message: '%user_link% يتابعك الآن.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "أنشأ %user_link% لعبة جديدة %program_link%."
   remix:
     message: 'أنشأ %user_link% ريمكس %program_link% من لعبتك %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "علّق %user_link% في الاستوديو %studio_name%."
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "أضاف %user_link% المشروع %program_link% إلى الاستوديو %studio_name%."
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "تم قبول طلبك للانضمام إلى الاستوديو %studio_name%."
+    declined: "تم رفض طلبك للانضمام إلى الاستوديو %studio_name%."
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "سيُحذف مشروعك %program_link% تلقائيًا خلال %days% يومًا. ارفع إصدارًا جديدًا أو احصل على المزيد من التنزيلات للاحتفاظ به."
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "أُزيل مشروعك \"%project_name%\" تلقائيًا بسبب عدم النشاط. أعد رفعه إذا كنت لا تزال تريد مشاركته."
+  noProjects: "يبدو أنه ليست لديك أي إشعارات مشاريع."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: "تم نسخ الرابط إلى الحافظة!"
+  success_project: "تم نسخ رابط المشروع إلى الحافظة!"
+  success_user: "تم نسخ رابط المستخدم إلى الحافظة!"
   fail: فشل نسخ الرابط إلى الحافظة! :(
 next: التالي
 previous: السابق
@@ -1000,13 +1000,13 @@ flavor:
   create@school: إنشاء@مدرسة
 copyright: 'حقوق الطبع والنشر &copy; %year% <a href="http://www.catrobat.org">كاتروبات</a>. جميع الحقوق محفوظة.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "يحتاج هذا الموقع إلى JavaScript ليعمل. يرجى تفعيل JavaScript في متصفحك أو طلب المساعدة من شخص بالغ."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: "نستخدم ملفات تعريف الارتباط لتحسين خدماتنا. لا نبيع أي بيانات ولا نشاركها."
   accept: "قبول"
   decline: "رفض"
   privacy-link: "سياسة الخصوصية"
-  settings-link: "Cookie Settings"
+  settings-link: "إعدادات ملفات تعريف الارتباط"
 agree: موافق
 disagree: غير موافق
 profileLoader:
@@ -1019,19 +1019,19 @@ share:
   success: 'تم المشاركة بنجاح'
 copy: 'نسخ الرابط'
 checkOutProject: 'تحقق من هذا المشروع:'
-checkOutUser: 'Check out this user:'
+checkOutUser: "اطّلع على هذا المستخدم:"
 community: 'مجتمع كاتروبات'
 back_to_app: 'الخروج من المجتمع'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: "أحدث المشاريع"
+  random: "مشاريع عشوائية"
   most_viewed: الأكثر عرضاً
   most_downloaded: الأكثر تنزيلا
   example: مثال
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  scratch: "إعادات مزج Scratch"
+  recommended: "مشاريع مقترحة"
+  popular: "الأكثر شيوعًا"
+  trending: "المشاريع الرائجة"
 achievements:
   sidebar:
     title: 'إنجازات'
@@ -1076,21 +1076,21 @@ achievements:
         description: 'قم بإنشاء حساب مستخدم'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "مشارك في Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "ثنائي اللغة"
+        description: "ترجم مشاريعك إلى لغتين"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "ثلاثي اللغة"
+        description: "ترجم مشاريعك إلى 3 لغات"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "لغوي"
+        description: "ترجم مشاريعك إلى 5 لغات"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "موثّق"
+        description: "أكّد حسابك"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: "{0} |{1} وسم |]1,Inf] وسوم"
   tag:
     game:
       title: لعبة
@@ -1109,7 +1109,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: 'ملحقات'
+  title: "{0} |{1} ملحق |]1,Inf] ملحقات"
   extension:
     arduino:
       title: الاردوينو
@@ -1124,59 +1124,59 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: "متعدد اللاعبين"
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: "الاستوديوهات"
+  singular: "استوديو"
+  create_studio: "إنشاء استوديو"
+  delete_studio: "حذف الاستوديو"
   cancel_studio: 'إلغاء'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: "اسم الاستوديو"
+  studio_description: "وصف الاستوديو"
+  is_public: "هل تريد جعله عامًا؟"
+  enable_comments: "هل تريد تفعيل التعليقات؟"
+  cover_image: "رفع صورة الغلاف"
+  cover_image_empty: "لم يتم اختيار صورة."
+  cover_image_hint: "الحد الأقصى 1 ميغابايت. الصيغ المقبولة: JPEG وPNG وGIF وWebP."
+  cover_image_compressed: "تم ضغط الصورة تلقائيًا لتناسب حد 1 ميغابايت."
+  cover_image_compressing: "جارٍ ضغط الصورة..."
+  cover_image_still_too_large: "الصورة كبيرة جدًا حتى بعد الضغط. يرجى اختيار ملف أصغر."
+  cover_image_invalid_type: "نوع الصورة غير صالح. يرجى استخدام JPEG أو PNG أو GIF أو WebP."
+  cover_image_compression_failed: "فشلت معالجة الصورة. يرجى تجربة ملف مختلف."
+  cover_image_alt: "صورة الغلاف الخاصة بك"
+  cover_image_remove: "إزالة الصورة"
+  popular: "الاستوديوهات الشائعة"
+  join: "انضمام"
+  leave: "مغادرة"
   report: 'تقرير'
-  public: 'public'
-  private: 'Invite-only'
+  public: "عام"
+  private: "بالدعوة فقط"
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: "الاستوديوهات المنضم إليها"
+    public_studios: "استوديوهات عامة"
+    private_studios: "استوديوهات بالدعوة فقط"
+    no_studios: "لا توجد استوديوهات بعد"
+    my_studios: "استوديوهاتي"
+    explore: "استكشف الاستوديوهات"
+    no_joined: "لم تنضم إلى أي استوديو بعد"
+    joined: "منضم"
+    load_more: "تحميل المزيد"
     open: 'فتح'
     share: 'مشاركة'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: "تم نسخ الرابط إلى الحافظة!"
+    leave_confirm_title: "هل تريد مغادرة هذا الاستوديو؟"
     cancel: 'إلغاء'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: "إلغاء الطلب"
+    cancel_request_confirm_title: "هل تريد إلغاء طلب الانضمام؟"
     admin: 'المشرف'
-    member: 'Member'
+    member: "عضو"
   details:
-    add_project: 'click to add the project'
+    add_project: "انقر لإضافة المشروع"
     add: 'إضافة'
     showMore: 'أظهر المزيد'
     showLess: 'تظهر أقل'
     are_you_sure: 'هل أنت متأكد؟'
-    no_way_of_return: 'This cannot be undone.'
+    no_way_of_return: "لا يمكن التراجع عن ذلك."
     delete_it: 'حذف'
     remove_project: 'إزالة من الاستوديو'
     remove_project_error: 'فشل إزالة المشروع من الاستوديو!'
@@ -1184,60 +1184,60 @@ studio:
     no_projects: 'لا يحتوي الاستوديو على أي مشاريع حتى الآن'
     projects:
       title: 'المشاريع'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: "إضافة مشاريع"
+      open_project: "فتح المشروع"
       download: 'تحميل'
       share: 'مشاركة'
       remove_from_studio: 'إزالة من الاستوديو'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio_title: "هل تريد إزالة المشروع من الاستوديو؟"
+      remove_from_studio_text: "يمكنك إضافته مرة أخرى لاحقًا إذا غيّرت رأيك."
+      share_success: "تم نسخ الرابط إلى الحافظة!"
+      share_fail: "فشل نسخ الرابط."
+      no_projects_empty_state: "ليست لديك مشاريع لإضافتها بعد. أنشئ مشروعًا في Pocket Code أولًا!"
+      add_selected: "إضافة المحدد"
+    no_available_projects: "لا توجد مشاريع متاحة للإضافة."
     updateCoverError: 'حدث خطأ ما أثناء تحديث غلاف الاستوديو!'
-    join: 'Join'
-    leave: 'Leave'
+    join: "انضمام"
+    leave: "مغادرة"
     report: 'تقرير'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: "قيد الانتظار"
+    decline: "مرفوض"
     comments:
       title: 'التعليقات'
       type_something: 'اكتب شيئًا'
       replies: 'ردود'
       send: 'إرسال'
       no_comments: 'هذا الاستوديو ليس لديه تعليقات حتى الآن.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      disabled_comments: "تم تعطيل التعليقات في هذا الاستوديو."
+      remove_comment: "إزالة التعليق"
+      post_error: "حدث خطأ أثناء نشر تعليقك. حاول مرة أخرى لاحقًا."
+      remove_error: "حدث خطأ أثناء إزالة التعليق. حاول مرة أخرى لاحقًا."
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: "الأنشطة"
+      join_studio: "انضم %user% إلى الاستوديو."
+      add_project: "أضاف %user% مشروعًا."
+      add_comment: "ترك %user% تعليقًا."
     members_list:
       title: 'أعضاء الاستوديو'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      project_count: "{0} لا توجد مشاريع في الاستوديو |{1} مشروع واحد في الاستوديو |]1,Inf] %count% مشاريع في الاستوديو"
+      no_studio_projects: "لا توجد مشاريع في الاستوديو"
+      one_studio_project: "مشروع واحد في الاستوديو"
+      n_studio_projects: "%count% مشاريع في الاستوديو"
+      promote_member: "ترقية العضو إلى مسؤول"
+      promotion_failed: "حدث خطأ أثناء ترقية هذا العضو. حاول مرة أخرى لاحقًا."
+      ban_member: "حظر العضو من الاستوديو"
+      ban_failed: "حدث خطأ أثناء حظر هذا العضو. حاول مرة أخرى لاحقًا."
+      demote_member: "تخفيض المسؤول إلى عضو"
+      demotion_failed: "حدث خطأ أثناء تخفيض رتبة هذا المسؤول. حاول مرة أخرى لاحقًا."
+      last_admin: "لا يمكن تخفيض رتبة آخر مسؤول في هذا الاستوديو."
     join_requests:
-      title: 'Join Requests'
+      title: "طلبات الانضمام"
       accept: 'قبول'
       decline: 'رفض'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: "تم قبول طلب الانضمام."
+      decline_success: "تم رفض طلب الانضمام."
+      error: "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+      no_requests: "لا توجد طلبات انضمام معلّقة."
     show_more: 'إظهار المزيد'
     show_less: 'إظهار أقل'
     admin_settings:
@@ -1255,72 +1255,72 @@ media_library:
       sound: 'النوع: صوت'
       movie: 'النوع: video'
       default: 'النوع: غير معروف'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: "لا توجد فئات وسائط متاحة بعد."
+  no_results: "لم يتم العثور على نتائج."
+  assets_count: "موارد"
+  view_all: "عرض الكل"
+  view_all_category: "عرض كل %category%"
+  back_to_app: "العودة إلى التطبيق"
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: "المشروع المطلوب غير متاح"
+  project_not_for_kids: "تم تصنيف المشروع بأنه غير مناسب للأطفال!"
+  project_safe_for_kids: "تم تصنيف المشروع بأنه مناسب للأطفال!"
+  project_not_for_kids_moderator: "تم تصنيف المشروع من قِبل أحد المشرفين. لا يمكنك التراجع عن ذلك!"
+  project_set_private: "تم جعل المشروع خاصًا."
+  project_set_public: "تم جعل المشروع عامًا."
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "معلومات إضافية: additionalInfo"
+    feature_1: "الميزة featureName غير متاحة من maintenanceStart حتى maintenanceEnd"
+    feature_2: "الميزة"
+    feature_3: "الميزة"
+MarkNotForKids: "تصنيف كغير مناسب للأطفال"
+MarkSafeForKids: "تصنيف كمناسب للأطفال"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "تأكيد"
+  confirmMark: "هل أنت متأكد أنك تريد تصنيف هذا المشروع بأنه غير مناسب للأطفال؟"
+  confirmUnmark: "هل أنت متأكد أنك تريد إزالة علامة \"غير مناسب للأطفال\" من هذا المشروع؟"
+  confirmYes: "نعم، تابع!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "الإبلاغ عن %content_type%"
+    reason_placeholder: "يرجى وصف سبب إبلاغك عن هذا..."
+    submit: "إرسال البلاغ"
+    success: "تم إرسال بلاغك. شكرًا لك."
+    error: "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+    duplicate: "لقد أبلغت عن هذا المحتوى بالفعل."
+    trust_too_low: "حسابك جديد جدًا لتقديم البلاغات."
+    unverified: "يرجى التأكد من أنك مسجّل الدخول وأن البريد الإلكتروني لحسابك مُؤكَّد."
+    rate_limited: "أنت ترسل البلاغات بسرعة كبيرة. يرجى الانتظار والمحاولة مرة أخرى."
+    suspended: "حسابك معلّق."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "طعن"
+    title: "الطعن في هذا القرار"
+    placeholder: "اشرح لماذا لا ينبغي إخفاء هذا المحتوى..."
+    submit: "إرسال الطعن"
     cancel: "إلغاء"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "تم إرسال طعنك للمراجعة."
+    already_pending: "لديك بالفعل طعن قيد الانتظار."
+    error: "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+    rate_limited: "أنت ترسل الطعون بسرعة كبيرة. يرجى الانتظار والمحاولة مرة أخرى."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "أنت تنشر التعليقات بسرعة كبيرة. يرجى الانتظار قليلًا."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "أنت تتفاعل بسرعة كبيرة. يرجى الانتظار قليلًا."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "أنت تتابع/تلغي المتابعة بسرعة كبيرة. يرجى الانتظار قليلًا."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "أنت تنفّذ إجراءات الاستوديو بسرعة كبيرة. يرجى الانتظار قليلًا."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "تم إخفاء هذا المشروع بسبب بلاغات من المجتمع."
+    comment: "تم إخفاء هذا التعليق بسبب بلاغات من المجتمع."
+    user: "تم إخفاء هذا الملف الشخصي بسبب بلاغات من المجتمع."
+    user_own: "تم تعليق حسابك بسبب بلاغات من المجتمع. يمكنك الطعن في هذا القرار."
+    studio: "تم إخفاء هذا الاستوديو بسبب بلاغات من المجتمع."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "تم إخفاء %content_type% الخاص بك بسبب بلاغات من المجتمع. يمكنك الطعن في هذا القرار."
+    appeal_approved: "تمت الموافقة على طعنك. أصبح المحتوى الخاص بك مرئيًا مرة أخرى."
+    appeal_rejected: "تمت مراجعة طعنك وبقي قرار إخفاء المحتوى الخاص بك قائمًا."
+    admin_review_needed: "تم إخفاء المحتوى تلقائيًا ويتطلب مراجعة."
+Reports: "البلاغات"
+members: "أعضاء"

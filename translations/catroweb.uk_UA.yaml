@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Спільнота Catrobat
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: "Ділися, відкривай і реміксуй творчі проєкти, створені з Catrobat. Приєднуйся до світової спільноти юних авторів, які створюють ігри, анімації та застосунки."
+meta.description.media.library: "Переглядай і завантажуй безкоштовні медіаресурси для Catrobat — звуки, зображення та інше для твоїх проєктів."
+meta.og.title.login: "Увійти в Catrobat"
+meta.og.description.login: "Увійди, щоб ділитися своїми проєктами Catrobat зі спільнотою."
+meta.og.title.register: "Створити обліковий запис Catrobat"
+meta.og.description.register: "Приєднуйся до спільноти Catrobat і почни ділитися своїми творчими проєктами вже сьогодні."
+meta.og.description.profile: "%username% у Catrobat – переглянь проєкти та досягнення."
 localLanguage: Англійська
 username: Імʼя користувача
 password: Пароль
@@ -22,7 +22,7 @@ privacyGuide: Посібник з питань конфіденційності
 others: Інше
 tutorials: Довідка
 googlePlay: Google Play Store
-iosAppStore: iOS App store
+iosAppStore: "iOS App Store"
 instagram: Instagram
 discordChat: Чат в Discord
 passwordsNoMatch: Паролі не збігаються.
@@ -33,7 +33,7 @@ report: Поскаржитись
 report.title: Скарга
 deleteIt: Так, видалити це!
 reportIt: Так, поскаржитись на це!
-areYouSure: Ви впевнені?
+areYouSure: Ти впевнений(-а)?
 noWayOfReturn: Відновити свої дії буде неможливо!
 download: Завантажити
 name: Назва
@@ -41,8 +41,8 @@ description: Опис
 noDescription: Опис відсутній.
 credits: Примітки та автори
 noCredits: Немає доступних приміток та авторів.
-notesAndCreditsDescription: Як ви створили цей проєкт? Чи використовували ідеї, скрипти чи витвори інших людей? Скажіть їм спасибі тут.
-projectImportedFromScratch: Цей проєкт імпортовано з MIT Scratch. Ви можете переглянути оригінальний проєкт
+notesAndCreditsDescription: Як ти створив(-ла) цей проєкт? Чи використовував(-ла) ідеї, скрипти чи витвори інших людей? Скажи їм спасибі тут.
+projectImportedFromScratch: Цей проєкт імпортовано з MIT Scratch. Ти можеш переглянути оригінальний проєкт
 scratchImportedProjectLinkHere: тут.
 country: Країна
 loginText: Увійти в обліковий запис
@@ -50,12 +50,12 @@ privacyPolicy: Політика конфіденційності
 imprint: Контактні дані
 projectDetails: Подробиці
 somethingWentWrong: 'Упс, щось пішло не так.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
+accountNotVerified: "Переконайся, що ти увійшов(-ла) в систему і твою електронну пошту підтверджено."
+accountSuspended: "Твій обліковий запис заблоковано через скарги спільноти. Ти можеш оскаржити це рішення у своєму профілі."
 doesNotExist: 'Наведеного ресурсу не існує.'
-pleaseTryAgain: 'Будь ласка, спробуйте ще раз!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Будь ласка, оновіть до останньої версії Pocket Code!'
+pleaseTryAgain: 'Будь ласка, спробуй ще раз!'
+tryAgainButton: "Спробувати ще раз"
+oldVersionError: 'Будь ласка, онови до останньої версії Pocket Code!'
 more: 'більше'
 less: 'менше'
 show-more: 'Показати більше'
@@ -63,7 +63,7 @@ show-less: 'Показати менше'
 more-information: 'Більше інформації'
 less-information: 'Менше інформації'
 ok: Гаразд
-clickToDownloadProgram: 'Щоб завантажити приклад проєкту, натисніть %link_start% тут %link_end%.'
+clickToDownloadProgram: 'Щоб завантажити приклад проєкту, натисни %link_start% тут %link_end%.'
 registrationError: 'Ім''я користувача або електронна адреса вже використовуються.'
 notifications: 'Сповіщення'
 allNotifications: 'Усі'
@@ -73,80 +73,80 @@ CommentNotifications: 'Коментарі'
 RemixNotifications: 'Ремікси'
 wellDone: "Чудово!"
 done: "Готово!"
-notificationsReadMessage: "Схоже, у вас немає сповіщень."
+notificationsReadMessage: "Схоже, у тебе немає сповіщень."
 confirmMessage: "Так, видалити це"
 cancelMessage: "Скасувати"
 notificationsUnauthorizedError: "Не вдалося авторизувати користувача"
 notificationsClearError: "Не вдалося позначити сповіщення як прочитане!"
-pleaseWait: "Будь ласка, зачекайте..."
+pleaseWait: "Будь ласка, зачекай..."
 projects: "Проєкти на пристрої"
 users: "Користувачі"
 studios: "Студії"
 oauthPopUpTitle: "Інформація про вхід через зовнішній обліковий запис"
-oauthInfo: 'Ви щойно використали зовнішній обліковий запис для входу. Ми створили для вас випадкове ім’я користувача. Якщо ви хочете змінити ім’я користувача або створити новий пароль для свого облікового запису, перейдіть на сторінку свого профілю.'
+oauthInfo: 'Ти щойно використав(-ла) зовнішній обліковий запис для входу. Ми створили для тебе випадкове ім’я користувача. Якщо хочеш змінити ім’я користувача або створити новий пароль для свого облікового запису, перейди на сторінку свого профілю.'
 oauthHere: "тут"
 statistics: "Показники"
 languageSelection: "Вибір мови"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: "Тема"
+  auto: "Системна"
+  auto_description: "Як у налаштуваннях пристрою"
+  light: "Світла"
+  light_description: "Світлий вигляд"
+  dark: "Темна"
+  dark_description: "Темний вигляд"
   apply: 'Застосувати'
 indexPage:
   recommendedSection:
     info:
       title: 'Які проєкти тут рекомендовано?'
-      description: 'Чим більше реакцій (палець угору, усмішка...) отримує ваш проєкт, тим вище він буде в цьому списку.'
+      description: 'Чим більше реакцій (палець угору, усмішка...) отримує твій проєкт, тим вище він буде в цьому списку.'
 follower:
   follows: Підписки
   followers: Підписники
   follow: Підписатись
   username: Користувач
   followsMe: Підписаний на мене
-  noFollowing: Зараз у вас немає підписок.
-  noFollowers: Зараз у вас немає підписників.
+  noFollowing: Зараз у тебе немає підписок.
+  noFollowers: Зараз у тебе немає підписників.
   noOtherFollowing: Зараз немає підписаних користувачів.
   noOtherFollowers: Зараз немає жодного підписника.
   followError: "Не вдалося підписатися на даного користувача!"
   unfollowError: "Не вдалося відписатися від даного користувача!"
-  unfollowQuestion: "Ви дійсно хочете відписатися від цього користувача?"
+  unfollowQuestion: "Ти справді хочеш відписатися від цього користувача?"
   unfollowButton: "Відписатися від %username%"
 project:
   welcome:
     title: Ласкаво просимо на вебсайт %theme% від Catrobat
     title_mindstorms: Ласкаво просимо на вебсайт Mindstorms EV3 та NXT від Catrobat
-    subtitle: Створюйте історії, ігри та багато іншого...
-    subtitle_embroidery: Зшивайте власні візерунки на футболках, сумках, штанах чи чохлах для смартфонів!
-    subtitle_mindstorms: Створюйте власні проєкти з роботами Лего Mindstorms EV3 та NXT
+    subtitle: Створюй історії, ігри та багато іншого...
+    subtitle_embroidery: Зшивай власні візерунки на футболках, сумках, штанах чи чохлах для смартфонів!
+    subtitle_mindstorms: Створюй власні проєкти з роботами Лего Mindstorms EV3 та NXT
     download: Завантажити застосунок
     statistics: Більше статистики
   featured: Популярне
   open: Відкрити
   download: Завантажити
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "Завантажити проєкт"
+    drop_here: "Перетягни сюди свій файл .catrobat"
+    or_browse: "або натисни, щоб вибрати"
+    button: "Завантажити"
+    uploading: "Завантаження..."
+    success: "Проєкт успішно завантажено!"
+    view_project: "Переглянути проєкт"
+    upload_another: "Завантажити ще один"
+    invalid_file: "Вибери файл .catrobat"
+    file_too_large: "Файл завеликий"
+    error: "Не вдалося завантажити. Спробуй ще раз."
+    unauthorized: "Щоб завантажувати, потрібно увійти."
+    rate_limited: "Забагато завантажень. Спробуй пізніше."
+    selected_file: "Вибраний файл:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
+      file_size: "Максимальний розмір файлу — 100 МБ."
+      app_upload: "Ти також можеш завантажувати проєкти безпосередньо із застосунку Pocket Code. Зверни увагу: застосунки зараз переробляються і поки не підтримують завантаження через вебсайт."
+      retention: "Завантажені проєкти автоматично видаляються після певного періоду неактивності. Регулярно входь або збирай завантаження свого проєкту, щоб продовжити термін його зберігання."
+      protection: "Особливо вдалі або популярні проєкти модератори можуть захистити від автоматичного видалення."
   example: Приклади
   newest: Недавні проєкти
   recommended: Рекомендовані проєкти
@@ -155,39 +155,39 @@ project:
   shareAction: Поділитися
   deleteAction: Видалити проєкт
   deleteConfirmation: |+
-    Ви впевнені?
-    Ви дійсно бажаєте видалити «%programName%»?
+    Ти впевнений(-а)?
+    Ти справді хочеш видалити «%programName%»?
     Відновити свої дії буде неможливо!
     Так, видалити!
     Скасувати
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Ви впевнені?
-  deleteNotFoundError: Проєкт, який потрібно видалити, не було знайдено під вашим ім’ям користувача.
+  deleteConfirmText: "Цю дію не можна скасувати. Твій проєкт буде видалено назавжди."
+  deleteConfirmationTitle: Ти впевнений(-а)?
+  deleteNotFoundError: Проєкт, який потрібно видалити, не було знайдено під твоїм ім’ям користувача.
   private: приватний
   public: публічний
   setPrivateAction: Зробити приватним
   setPublicAction: Зробити публічним
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+  setPrivateConfirm: "Зробити цей проєкт приватним? Він більше не з’являтиметься в результатах пошуку."
+  setPublicConfirm: "Зробити цей проєкт публічним? Його бачитимуть усі."
+  markNotForKidsConfirm: "Позначити цей проєкт як непридатний для дітей?"
+  markSafeForKidsConfirm: "Зняти з цього проєкту позначку «не для дітей»?"
+  nfkModeratorLocked: "Це налаштування заблоковано модератором."
+  confirmSetPrivate: "Ти справді хочеш зробити цей проєкт приватним? Він більше не з’являтиметься в результатах пошуку."
+  confirmSetPublic: "Ти справді хочеш зробити цей проєкт публічним? Його бачитимуть усі."
   changeVisibility: |+
-    Ви впевнені?
+    Ти впевнений(-а)?
     Якщо задати проєкт «%programName%» як приватний, його не побачать і не знайдуть інші користувачі.
-    Ви все ще можете поділитися посиланням на свій проєкт зі своїми друзями. Ви можете перемикати видимість, натиснувши піктограму замка.
+    Ти все ще можеш поділитися посиланням на свій проєкт зі своїми друзями. Ти можеш перемикати видимість, натиснувши піктограму замка.
     Якщо задати проєкт «%programName%» як публічний, його зможуть побачити та знайти інші користувачі.
     Так, задати як публічний
     Так, задати як приватний
     Ні
-  reportCommentConfirmation: Ви дійсно бажаєте повідомити про цей коментар?
-  deleteCommentConfirmation: Ви дійсно бажаєте видалити цей коментар?
+  reportCommentConfirmation: Ти справді хочеш повідомити про цей коментар?
+  deleteCommentConfirmation: Ти справді хочеш видалити цей коментар?
   deleteAccountConfirmation: |+
     Видалення облікового запису? 
-    Ви дійсно бажаєте видалити свій обліковий запис? 
-    Це також видалить ваші вивантажені проєкти та коментарі! 
+    Ти справді хочеш видалити свій обліковий запис? 
+    Це також видалить твої вивантажені проєкти та коментарі! 
     Відновити свої дії буде неможливо! 
     Так, видалити! 
     Скасувати
@@ -203,17 +203,17 @@ project:
   random: Випадкові проєкти
   related: Пов’язані проєкти
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
+    explore: "Огляд проєктів"
+    no_projects: "Ти ще не створив(-ла) жодного проєкту"
     no_explore: 'Проєктів не знайдено'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    load_more: "Завантажити ще"
+    upload: "Завантажити проєкт"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
+    protected: "Захищено"
+    day_left: "Залишився 1 день"
+    days_left: "Залишилося днів: %days%"
+    tooltip: "Проєкти автоматично видаляються після певного періоду неактивності. Збирай більше завантажень або регулярно входь, щоб продовжити термін зберігання."
+    tooltip_protected: "Цей проєкт захищено, і його не буде видалено автоматично."
   downloads: '%downloads% завантажень'
   sample: Приклади проєктів
   views: '%views% перегляд(-ів)'
@@ -227,39 +227,39 @@ project:
   reportAsInappropriate: Повідомити як недоречний
   reportProgram: Повідомити про проєкт
   languageVersion: 'Версія мови Catrobat: %languageVersion%'
-  reportLoginText: Будь ласка, увійдіть в %login%, щоб повідомити про цей проєкт.
-  reportDialogHeader: Чому ви хочете повідомити на це проєкт?
-  reportDialogReason: Уведіть причину
+  reportLoginText: Будь ласка, увійди в %login%, щоб повідомити про цей проєкт.
+  reportDialogHeader: Чому ти хочеш поскаржитися на цей проєкт?
+  reportDialogReason: Введи причину
   reportRadioButtonInappropriate: Це недоречно
   reportRadioButtonCopyright: Порушення авторських прав
   reportRadioButtonSpam: Це спам
   reportRadioButtonDislike: Мені це не сподобалось
-  reportOwnProgram: Ви не можете поскаржитись на свій власний проєкт. 
-  reportAlready: Ви вже поскаржились на це проєкт.
-  reportDone: Ви поскаржились на цей проєкт!
+  reportOwnProgram: Ти не можеш поскаржитись на свій власний проєкт. 
+  reportAlready: Ти вже поскаржився(-лася) на цей проєкт.
+  reportDone: Ти поскаржився(-лася) на цей проєкт!
   updateAppHeaderDownload: Завантажити неможливо
-  updateAppTextDownload: Будь ласка, оновіть додаток до найновішої версії. Майте на увазі, що не всі функції Android вже доступні на IOS.
+  updateAppTextDownload: Будь ласка, онови додаток до найновішої версії. Май на увазі, що не всі функції Android вже доступні на IOS.
   updateAppTextDownloadApk: Завантаження APK наразі доступне лише на Android, а не на IOS.
   updateAppHeader: Оновити застосунок
-  updateAppText: Будь ласка, оновіть додаток до найновішої версії.
+  updateAppText: Будь ласка, онови додаток до найновішої версії.
   btnClosePopup: Гаразд
-  checkout_this_project: Оцініть цей проєкт Catrobat
+  checkout_this_project: Оціни цей проєкт Catrobat
   show_more: Показати більше
   comments: Коментарі
   send: Надіслати
   delete: Видалити
   report: Скарга
-  reply: Reply
+  reply: "Відповісти"
   report_popup: На коментар успішно поскаржилися.
   report_popup_header: Скарга була відправлена
   deleted_popup: Коментар успішно видалено.
   deleted_popup_header: Видалено
-  noAdminRights: Ви не маєте прав Адміністратора.Будь ласка, увійдіть як Адміністратор
+  noAdminRights: Ти не маєш прав Адміністратора.Будь ласка, увійди як Адміністратор
   editProject: Редагувати проєкт
   closeProjectEditor: Закрити редактор
-  closeEditorPrompt: Бажаєте зберегти свої зміни?
+  closeEditorPrompt: Зберегти зміни?
   btnDiscard: Скасувати
-  addComment: Напишіть коментар
+  addComment: Напиши коментар
   thumbsUp: Палець вверх!
   smile: Усмішка!
   love: Люблю!
@@ -267,16 +267,16 @@ project:
   linkTitle: Посилання
   link: Скопіювати посилання проєкту у буфер обміну
   reactionsText: Реакції
-  downloadErrorText: Під час завантаження проєкту сталася помилка. Повторіть спробу пізніше.
+  downloadErrorText: Під час завантаження проєкту сталася помилка. Повтори спробу пізніше.
   downloadStartText: Завантаження розпочалось... 
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
+  downloading: "Завантаження..."
+  openInApp: "Відкрити в Pocket Code"
+  downloaded: "Завантажено"
   showTranslation: Показати переклад
   hideTranslation: Сховати переклад
   translatedByLine: Використано %provider%, перекладено з %sourceLanguage% на %targetLanguage%
   googleTranslate: Google Перекладачем
-  confrimDelete: Ви дійсно бажаєте видалити переклад?
+  confrimDelete: Ти справді хочеш видалити переклад?
   default: Стандартний
   save: Зберегти
   translationTitle: 'Переклад мовою: %language%'
@@ -294,139 +294,139 @@ remixGraph:
   by: 'від'
   open: 'Відкрити'
   showPaths: 'Показати контури'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: "Завантаження графа реміксів..."
+  error: "Не вдалося завантажити граф реміксів."
+  empty: "Для цього проєкту ще немає даних графа реміксів."
   remixesLabel: 'Ремікси'
   projectsLabel: 'Проєкти на пристрої'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Вибачте...'
+  scratchLabel: "Корені зі Scratch"
+  interactHint: "Вибери вузол, щоб відкрити проєкт або підсвітити його шлях реміксів."
+  zoomIn: "Збільшити"
+  zoomOut: "Зменшити"
+  resetView: "Скинути вигляд"
+  projectNotAvailableErrorTitle: 'Вибач...'
   projectNotAvailableErrorDescription: 'Проєкт більше не доступний!'
   projectNotAvailable: 'Недоступно'
   projectUnknownUser: 'Невідомий користувач'
 noReply:
-  - Це автоматичне повідомлення - Будь ласка, не відповідайте безпосередньо на цей електронний лист.
+  - Це автоматичне повідомлення - Будь ласка, не відповідай безпосередньо на цей електронний лист.
 accountConfirmation:
   subject: Підтвердження облікового запису Catrobat
   message: |
-    Шановний %username%.
-    Щоб завершити активацію облікового запису - відвідайте %confirmationUrl%
-    Це посилання можна використовувати лише один раз для перевірки вашого облікового запису.
+    Привіт, %username%!
+    Щоб завершити активацію облікового запису, перейди за посиланням %confirmationUrl%
+    Це посилання можна використати лише один раз для підтвердження твого облікового запису.
     З найщирішими побажаннями
     Команда Catrobat.
   messageHtml: |
     <p>
-    Шановний %username%. <br>
+    Привіт, %username%!<br>
     <br>
-    Щоб завершити активацію облікового запису - натисніть <a href="%%confirmationUrl%">here.</a> <br>
-    Це посилання можна використовувати лише один раз для перевірки вашого облікового запису. <br>
+    Щоб завершити активацію облікового запису, натисни <a href="%confirmationUrl%">тут.</a><br>
+    Це посилання можна використати лише один раз для підтвердження твого облікового запису.<br>
     <br>
     З найщирішими побажаннями,<br>
     Команда Catrobat.
     </p>
 newAccountConfirmation:
-  subject: "Будь ласка, підтвердьте свою адресу ел. пошти"
+  subject: "Будь ласка, підтвердь свою адресу ел. пошти"
   welcome: "Вітаємо в спільноті Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Будь ласка, підтвердьте свою ел. адресу\nЛаскаво просимо до спільноти Catrobat\nЛише одним натисканням на кнопку нижче\nви можете підтвердити свою реєстрацію на Catrobat.\nЦе посилання чинне до %time% і може бути\nвикористане лише один раз для підтвердження адреси ел. пошти."
+  greeting: "Дякуємо за реєстрацію! Підтверди свою адресу електронної пошти, щоб почати."
+  message: "Будь ласка, підтвердь свою ел. адресу\nЛаскаво просимо до спільноти Catrobat\nЛише одним натисканням на кнопку нижче\nти можеш підтвердити свою реєстрацію на Catrobat.\nЦе посилання чинне до %time% і може бути\nвикористане лише один раз для підтвердження адреси ел. пошти."
   button: "ПІДТВЕРДИТИ ПОШТУ"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  ignore: "Якщо ти не створював(-ла) обліковий запис Catrobat, просто проігноруй цей лист."
+  autoDelete: "Непідтверджені облікові записи автоматично видаляються через 30 днів."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "Потрібна батьківська згода для облікового запису Catrobat твоєї дитини"
+    title: "Потрібна згода батьків"
+    greeting: "Привіт!"
+    message: "Твоя дитина %username% створила обліковий запис у Catrobat і підтвердила свою адресу електронної пошти."
+    explanation: "Catrobat — це безкоштовна освітня платформа, де молодь вчиться програмувати, створюючи застосунки, ігри та анімації. Відповідно до правил ЄС щодо захисту дітей нам потрібна твоя згода, перш ніж твоя дитина зможе повноцінно брати участь у спільноті. Натисни кнопку нижче, щоб надати згоду."
+    button: "Надати батьківську згоду"
+    ignore: "Якщо ти не очікував(-ла) цього листа, просто проігноруй його. Без згоди функції облікового запису будуть обмежені."
+    whatIsCatrobat: "Catrobat — це безкоштовна некомерційна освітня платформа для програмування. Дізнайся більше на catrobat.org."
+    manageLink: "Ти можеш будь-коли керувати обліковим записом своєї дитини через наш <a href=\"%portalUrl%\" style=\"color: #00acc1;\">Портал для батьків</a>. Дізнайся більше про <a href=\"%infoUrl%\" style=\"color: #00acc1;\">свої права як батька чи матері</a>."
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "Згоду надано"
+    message: "Дякуємо! Обліковий запис %username% тепер повністю активовано."
+    continueButton: "Відкривати проєкти"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Батькам і опікунам"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Інформація для батьків і опікунів"
+    intro: "Catrobat серйозно ставиться до безпеки та конфіденційності юних користувачів. На цій сторінці пояснено, як ми захищаємо твою дитину і які права ти маєш."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Що таке Catrobat?"
+      text: "Catrobat — це безкоштовна некомерційна освітня платформа, де молодь вчиться програмувати, створюючи власні застосунки, ігри та анімації. Платформа доступна в усьому світі й використовується в навчальних закладах."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Які дані ми збираємо?"
+      text: "Ми збираємо лише мінімум даних, потрібних для роботи платформи: ім’я користувача, адресу електронної пошти, дату народження та проєкти, які твоя дитина створює й завантажує. Для користувачів, молодших за 14 років, ми також зберігаємо адресу електронної пошти батьків чи опікуна для отримання згоди. Ми не продаємо і не передаємо персональні дані третім особам."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Твої права як батьків чи опікуна"
+      text: "Відповідно до правил ЄС щодо захисту дітей (GDPR) та COPPA ти маєш право: переглянути дані, які ми зберігаємо про твою дитину, запросити копію цих даних, будь-коли відкликати свою згоду (що обмежує обліковий запис) і вимагати остаточного видалення облікового запису дитини та всіх пов’язаних даних."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Які обмеження діють для облікових записів неповнолітніх?"
+      text: "Користувачі, молодші за 16 років, не можуть писати й читати коментарі, підписуватися на інших користувачів або переглядати вміст, позначений як непридатний для дітей. Вони й надалі можуть створювати та завантажувати проєкти, переглядати публічні проєкти й ставити вподобайки. Ці обмеження діють, щоб забезпечити безпечне середовище для навчання."
+    manageButton: "Керувати обліковим записом дитини"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Портал для батьків"
+    description: "Введи свою адресу електронної пошти, щоб отримати захищене посилання для керування обліковим записом Catrobat твоєї дитини. Посилання буде надіслано на адресу, яку вказали під час реєстрації."
+    emailLabel: "Твоя адреса електронної пошти"
+    submitButton: "Надіслати посилання для керування"
+    infoLink: "Дізнатися більше"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Перевір свою пошту"
+      message: "Якщо з цією адресою пов’язано обліковий запис, ми надіслали посилання для керування. Перевір пошту й перейди за посиланням, щоб керувати обліковим записом своєї дитини."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Керування обліковими записами дітей"
+    description: "Ти керуєш обліковими записами, пов’язаними з %email%."
+    consentStatus: "Статус згоди"
+    accountCreated: "Обліковий запис створено"
+    email: "Електронна пошта дитини"
     status:
-      granted: "Granted"
+      granted: "Надано"
       pending: "На розгляді"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      revoked: "Відкликано"
+    grantButton: "Надати згоду"
+    revokeButton: "Відкликати згоду"
+    revokeConfirm: "Ти справді хочеш відкликати згоду? Функції облікового запису будуть обмежені."
+    exportButton: "Експортувати дані"
+    deleteButton: "Видалити обліковий запис"
+    deleteConfirm: "Ти справді хочеш остаточно видалити цей обліковий запис? Цю дію не можна скасувати."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Керування обліковим записом Catrobat твоєї дитини"
+      title: "Керування обліковим записом"
+      greeting: "Привіт!"
+      message: "Ти запросив(-ла) посилання для керування обліковим записом Catrobat своєї дитини (%usernames%). Натисни кнопку нижче, щоб переглянути обліковий запис і керувати ним."
+      button: "Керувати обліковим записом"
+      ignore: "Якщо ти цього не запитував(-ла), просто проігноруй цей лист."
 passwordRecovery:
   subject: Відновлення пароля Catrobat
   message: |
-    Шановний(-на) %username%.
-    Ви попросили скинути пароль на %appplication_url%, оскільки забули його.
-    Якщо ви цього не просили, будь ласка, проігноруйте це. Він закінчиться і стане марним через 24 години.
-    Щоб скинути пароль і створити новий, відвідайте наступну сторінку: %confirmationUrl%
-    Ви можете будь-коли використовувати своє імʼя користувача та пароль для доступу до спільноти %appplication_url%.
-    Для цього просто відвідайте наступну сторінку: %loginPage%
-    Щоб змінити відомості про профіль, перейдіть на цю сторінку: %profilePage%
+    Привіт, %username%!
+    Ти попросив(-ла) скинути пароль на %appplication_url%, оскільки забув(-ла) його.
+    Якщо ти цього не просив(-ла), будь ласка, проігноруй це. Він закінчиться і стане марним через 24 години.
+    Щоб скинути пароль і створити новий, відвідай наступну сторінку: %confirmationUrl%
+    Ти можеш будь-коли використовувати своє імʼя користувача та пароль для доступу до спільноти %appplication_url%.
+    Для цього просто відвідай наступну сторінку: %loginPage%
+    Щоб змінити відомості про профіль, перейди на цю сторінку: %profilePage%
     З найщирішими побажаннями
     Команда Catrobat.
   messageHtml: |
     <p>
-    Шановний(а) %username%.<br>
+    Привіт, %username%!<br>
     <br>
-    Ви запросили скинути пароль в <a href="%appplication_url%">Pocket Code</a>, оскільки забули його.
-    Якщо ви цього не просили, будь ласка, проігноруйте це. Він закінчиться і стане марним через 24 години. <br>
+    Ти запросив(-ла) скинути пароль в <a href="%appplication_url%">Pocket Code</a>, оскільки забув(-ла) його.
+    Якщо ти цього не просив(-ла), будь ласка, проігноруй це. Він закінчиться і стане марним через 24 години. <br>
     <br>
-    Щоб скинути пароль і створити новий, натисніть <a href="%confirmationUrl%">тут</a>.<br>
+    Щоб скинути пароль і створити новий, натисни <a href="%confirmationUrl%">тут</a>.<br>
     <br>
-    Ви можете використовувати своє імʼя користувача та пароль у будь-який час для доступу до спільноти <a href="%appplication_url%">Pocket Code</a>.<br>
-    Для цього просто відвідайте наступну сторінку: <a href="%loginPage%">Сторінка входу</a><br>
-    Щоб змінити відомості профілю, перейдіть на цю <a href="%profilePage%">сторінку</a>.<br>
+    Ти можеш використовувати своє імʼя користувача та пароль у будь-який час для доступу до спільноти <a href="%appplication_url%">Pocket Code</a>.<br>
+    Для цього просто відвідай наступну сторінку: <a href="%loginPage%">Сторінка входу</a><br>
+    Щоб змінити відомості профілю, перейди на цю <a href="%profilePage%">сторінку</a>.<br>
     <br>
     З найщирішими побажаннями<br>
     Команда Catrobat.
@@ -437,7 +437,7 @@ profile:
   edit: Редагувати свій профіль
   saveChanges: Зберегти зміни
   newPass: Новий пароль
-  repeatPass: Повторіть пароль
+  repeatPass: Повтори пароль
   oldPass: Старий пароль
   firstEmail: Моя перша електронна пошта
   secondEmail: Моя друга електронна пошта
@@ -456,11 +456,11 @@ profile:
     emailMissing: Помилка під час оновлення цієї адреси електронної пошти. Потрібно мати принаймні одну перевірену адресу електронної пошти.
     emailExists: Ця адреса електронної пошти вже існує.
     usernameNotValid: Це імʼя користувача недійсне.
-    usernameMissing: Ви повинні мати імʼя користувача.
+    usernameMissing: Ти повинен(-на) мати імʼя користувача.
     usernameExists: Це імʼя користувача вже існує.
     usernameContainsEmail: Імʼя користувача не повинно містити адресу електронної пошти
     submitSuccess: Збережено!
-  reallyDeleteProgram: Ви справді бажаєте видалити свій проєкт?
+  reallyDeleteProgram: Ти справді хочеш видалити свій проєкт?
   programsOf: Проєкти
   picture: Зображення профілю
   changePicture: Змінити зображення
@@ -475,88 +475,88 @@ myprofile:
   editProfile: Редагувати профіль
   edit: Редагувати
   done: Готово
-  checkMail: На вашу електронну адресу було надіслано електронний лист. Будь ласка, перевірте свою поштову скриньку.
-  passwordUpdated: Ваш пароль було успішно оновлено.
+  checkMail: На твою електронну адресу було надіслано електронний лист. Будь ласка, перевір свою поштову скриньку.
+  passwordUpdated: Твій пароль було успішно оновлено.
   avatar: Аватар
   email: Електронна пошта
   deleteAccount: Видалення облікового запису
   deleteAccountWarning: |
-    Памʼятайте:
-    Ви створили %num_projects% проєкт(-ів) і маєте %num_followers% підписника(-ів). Усі ваші проєкти будуть видалені. Ви більше не зможете увійти, і ваші проєкти зникнуть з усіх списків. Видалення профілю неможливо скасувати!
-    Ви впевнені, що хочеш покинути нас?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+    Памʼятай:
+    Ти створив(-ла) %num_projects% проєкт(-ів) і маєш %num_followers% підписника(-ів). Усі твої проєкти будуть видалені. Ти більше не зможеш увійти, і твої проєкти зникнуть з усіх списків. Видалення профілю неможливо скасувати!
+    Ти впевнений(-а), що хочеш покинути нас?
+  exportData: "Завантажити мої дані"
+  exportDataDescription: "Ти маєш право отримати копію своїх персональних даних. Вона містить інформацію профілю, проєкти, коментарі, реакції та підписників."
+  exportDataLoading: "Завантаження..."
+  exportDataError: "Під час експорту даних щось пішло не так. Спробуй пізніше."
+  exportDataRateLimited: "Експортувати дані можна лише раз на день. Спробуй завтра."
   editAccountSettings: Змінити налаштування облікового запису
-  profileChangeSuccess: Ваш профіль успішно змінено.
-  unspecifiedError: Під час змінень профілю сталася невідома помилка. Будь ласка, зв'яжіться з нами.
-  verifyAccountText: Ми відправимо вам електронного листа з посиланням для верифікації вашого облікового запису. Переконайтеся, що ви перейшли за посиланням протягом наступної години, оскільки ви маєте право запитувати лише один лист на день.
+  profileChangeSuccess: Твій профіль успішно змінено.
+  unspecifiedError: Під час змінень профілю сталася невідома помилка. Будь ласка, зв'яжися з нами.
+  verifyAccountText: Ми відправимо тобі електронного листа з посиланням для верифікації твого облікового запису. Переконайся, що перейдеш за посиланням протягом наступної години, оскільки ти маєш право запитувати лише один лист на день.
   verifyAccountButton: Відправити лист
-  verifyAccountMailSent: Лист успішно відправлено. Будь ласка, перевірте свої вхідні листи
-  verifyAccountMailFailed: Ви можете запитувати лише один лист на день
+  verifyAccountMailSent: Лист успішно відправлено. Будь ласка, перевір свої вхідні листи
+  verifyAccountMailFailed: Ти можеш запитувати лише один лист на день
 licenseToPlay:
   link: 'Ліцензія на гру'
-  title: 'Ліцензія на гру — вказуйте джерело і діліться'
-  text1: Уявіть собі, що кожен проєкт Catrobat - це торт, дуже особливий торт, який поставляється зі своїм рецептом (блоками програмування). Всі члени спільноти Catrobat діляться своїми тортами разом зі своїми рецептами. Це означає, що ви можете насолоджуватися тортами й навчитися робити їх самостійно!
+  title: "Ліцензія на гру — вказуй джерело і ділися"
+  text1: "Уяви собі, що кожен проєкт Catrobat — це торт, дуже особливий торт, який поставляється зі своїм рецептом (блоками програмування). Усі члени спільноти Catrobat діляться своїми тортами разом зі своїми рецептами. Це означає, що ти можеш насолоджуватися тортами й навчитися робити їх самостійно!"
   text2: 'Немає ніяких секретних рецептів: інструкція про те, як зробити ці торти, відкрита для будь-кого, щоб використовувати, повторно використовувати, модифікувати та служити натхненням для нових ідей ... Я маю на увазі торти.'
-  text3: "Ви можете їсти торти, а також копіювати чужі рецепти, щоб зробити свій власний, можливо, з різними інгредієнтами. Ця свобода має дві прості вимоги:"
+  text3: "Ти можеш їсти торти, а також копіювати чужі рецепти, щоб зробити свій власний, можливо, з іншими інгредієнтами. Ця свобода має дві прості вимоги:"
   text4: "Створюючи спільноту Catrobat, ми вирішили прийняти цей підхід, оскільки вважаємо, що він підтримує навчання та творчість у спільноті. Ділячись рецептами та інгредієнтами (скриптами та виглядами), люди можуть спиратися на ідеї один одного, і кожен отримає користь."
-  text5: При розробці сайту Catrobat ми включили функції, які заохочують людей ділитися та віддавати належне іншим. На кожній сторінці проєкту ви завжди можете завантажити оригінальні скрипти для проєкту. Якщо ви робите ремікс проєкту (змінюєте скрипти чи вигляди та ділитеся результатом), ми рекомендуємо вам відзначати в примітках проєкту, людей та проєкт, які вас надихнули.
-  text6: 'Дізнайтеся більше про умови використання онлайн-спільноти Catrobat по цьому посиланні %link-termsOfUse%.'
+  text5: "Розробляючи сайт Catrobat, ми додали функції, які заохочують людей ділитися та віддавати належне іншим. На кожній сторінці проєкту ти завжди можеш завантажити оригінальні скрипти проєкту. Якщо ти робиш ремікс проєкту (змінюєш скрипти чи вигляди та ділишся результатом), ми радимо тобі відзначити в примітках проєкту людей і проєкт, які тебе надихнули."
+  text6: "Дізнайся більше про умови використання онлайн-спільноти Catrobat за цим посиланням: %link-termsOfUse%."
   list1:
-    item1: Поділіться своїми тортами разом з рецептом
-    item2: Віддайте належне тим, хто надихнув вас
+    item1: "Ділися своїми тортами разом з рецептом"
+    item2: "Віддай належне тим, хто тебе надихнув"
   version: Версія 1.1, 2 квітня 2013 р.
 termsOfUse:
   title: Умови використання
   headline: Ласкаво просимо до спільноти Catrobat
-  text1: 'Як частина спільноти Catrobat, ви ділитеся проєктами та ідеями з людьми:'
-  text2: "Нам потрібна ваша допомога, щоб зробити цю спільноту сприятливим місцем для кожного учасника. Ось як ви можете допомогти:"
-  text3: "Завдяки проєкту Catrobat ми хочемо сприяти співпраці та дозволити творчості кожного об'єднатися на благо всього людства. Ви також можете стати активним членом спільноти Catrobat, віддаючи свої проєкти назад до спільноти у якості подарунка, так само як інші активні учасники дають вам свої проєкти:"
-  text4: 'Наш подарунок вам:'
+  text1: "Як частина спільноти Catrobat, ти ділишся проєктами та ідеями з людьми:"
+  text2: "Нам потрібна твоя допомога, щоб зробити цю спільноту приємним місцем для кожного учасника. Ось як ти можеш допомогти:"
+  text3: "Завдяки проєкту Catrobat ми хочемо сприяти співпраці та дозволити творчості кожного об'єднатися на благо всього людства. Ти також можеш стати активним членом спільноти Catrobat, віддаючи свої проєкти назад спільноті як подарунок, так само як інші активні учасники дають тобі свої проєкти:"
+  text4: "Наш подарунок тобі:"
   text5: 'Наші умови використання та послуги:'
   list1:
     item1: З різних країн і культур
     item2: Будь-якого віку (від маленьких дітей до підлітків і бабусь і дідусів)
     item3: з усіма рівнями досвіду
   list2:
-    item1: Будьте шанобливі. При обміні проєктами, будь ласка, пам'ятайте, що люди різного віку та походження побачать ваш внесок.
-    item2: "Не забувайте про авторів. Не соромтеся створювати модифіковані версії проєктів інших людей - просто не забудьте віддати їм належне. Одне місце, де можна віддати належне, — у розділі приміток та авторів вашого проєкту. Будь ласка, дивіться параграф під цим пунктирним списком, щоб дізнатися більше про зміни проєктів інших користувачів."
-    item3: "Будьте чесними. Не прикидайтеся кимось іншим, крім того, хто ви є, або не намагайтеся обдурити спільноту."
-    item4: "Зберігайте особисту інформацію приватною. Не діліться своєю адресою електронної пошти, номером телефону або іншою особистою контактною інформацією."
-    item5: "Допоможіть зберегти сайт дружнім. Якщо ви відчуваєте, що інші вважають, що проєкт або коментар підлий, образливий, занадто жорстокий або іншим чином недоречний, просто натисніть кнопку «поскаржитись як недоречний» і залиште коротке пояснення. Команда Catrobat перегляне вашу скаргу і зможе видалити будь-який проєкт, коментар або публікацію."
+    item1: "Будь шанобливим(-ою). Ділячись проєктами, пам'ятай, що твій внесок побачать люди різного віку та походження."
+    item2: "Не забувай про авторів. Не соромся створювати змінені версії проєктів інших людей — просто не забудь віддати їм належне. Одне з місць, де можна віддати належне, — розділ приміток та авторів твого проєкту. Дивись абзац під цим маркованим списком, щоб дізнатися більше про зміну проєктів інших користувачів."
+    item3: "Будь чесним(-ою). Не прикидайся кимось іншим і не намагайся обдурити спільноту."
+    item4: "Зберігай особисту інформацію приватною. Не ділися своєю адресою електронної пошти, номером телефону або іншою особистою контактною інформацією."
+    item5: "Допоможи зберегти сайт дружнім. Якщо ти вважаєш, що проєкт або коментар підлий, образливий, занадто жорстокий або іншим чином недоречний, просто натисни кнопку «поскаржитись як недоречний» і залиш коротке пояснення. Команда Catrobat перегляне твою скаргу і зможе видалити будь-який проєкт, коментар або публікацію."
   list3:
-    item1: "Завантажуючи проєкт на наші веб-сайти, ви приймаєте та погоджуєтеся розмістити цю роботу під певними безкоштовними ліцензіями завантажених проєктів Catrobat. Подібно до безкоштовних ліцензій, за якими вам доступна сама система Catrobat, ці безкоштовні ліцензії на завантажені проєкти Catrobat дають кожному право вчитися на роботі, раніше завантаженій іншими, а також адаптуватися та реміксувати, які працюють над створенням власних нових захоплюючих ігор, анімацій та інших проєктів.Це дозволяє кожному «стояти на плечах своїх однолітків», одним з них є ви! Таким чином, ваша робота принесе користь всьому світу і залишиться вільною для всіх, трохи схожою на текст і фотографії, вільно внесені до Вікіпедії волонтерами з усього світу. Подумайте про це як про свій подарунок людству: ви даєте всім, і всі інші, які завантажують свою роботу на наші веб-сайти, дають вам. Таким чином, завантажений проєкт - це подарунок великої цінності, який його власник дарує вам безкоштовного,з умовою, що ви берете участь у спільноті на тих же умовах."
-    item2: Вам не потрібно приймати подарунок; Якщо ви це зробите, застосовуються певні правила. Переваги цих правил полягають у тому, що ви можете вчитися на роботі і спиратися на неї, щоб зробити ще більш круті речі самостійно, які ви можете потім, наприклад, знову завантажити на наші веб-сайти як свої власні. Ще одна перевага полягає в тому, що ці ліцензії гарантують, що ви не можете нести відповідальність за будь-які проблеми, що виникають перед іншими через використання вашого проєкту.
-    item3: "Однією з важливих додаткових умов є те, що ви чітко даєте атрибуцію авторам, на роботах яких ви засновували власну роботу. У той же час ми будемо наполегливо працювати, щоб ваша робота була чітко оцінена іншими за те, що ви внесли свій внесок, даючи атрибуцію унікальному імені, яке ви вільно вибрали представляти вас у спільноті Catrobat, і даючи іншим можливість висловити свою вдячність вам публічно за те, що ви дали свою роботу всім, і особливо до них."
-    item4: 'Будь ласка, зверніться до %link-licenseUploaded% для отримання точних юридичних умов.'
+    item1: "Завантажуючи проєкт на наші вебсайти, ти приймаєш умову і погоджуєшся розмістити цю роботу під певними вільними ліцензіями для завантажених проєктів Catrobat. Подібно до вільних ліцензій, за якими тобі доступна сама система Catrobat, ці вільні ліцензії на завантажені проєкти Catrobat дають кожному право вчитися на роботах, раніше завантажених іншими, а також адаптувати й реміксувати їх, працюючи над створенням власних нових захопливих ігор, анімацій та інших проєктів. Це дозволяє кожному «стояти на плечах своїх однолітків», і один з них — ти! Таким чином твоя робота принесе користь усьому світу і залишиться вільною для всіх, трохи схоже на тексти й фотографії, які волонтери з усього світу вільно додають до Вікіпедії. Думай про це як про свій подарунок людству: ти даєш усім, і всі інші, хто завантажує свою роботу на наші вебсайти, дають тобі. Отже, завантажений проєкт — це подарунок великої цінності, який його власник безкоштовно дарує тобі з умовою, що ти береш участь у спільноті на тих самих умовах."
+    item2: "Ти не зобов’язаний(-а) приймати подарунок; якщо ти це зробиш, діють певні правила. Перевага цих правил у тому, що ти можеш вчитися на роботі й спиратися на неї, щоб самостійно створити ще крутіші речі, які потім можеш, наприклад, знову завантажити на наші вебсайти як свої власні. Ще одна перевага в тому, що ці ліцензії гарантують, що ти не нестимеш відповідальності за будь-які проблеми, які виникнуть в інших через використання твого проєкту."
+    item3: "Однією з важливих додаткових умов є те, що ти чітко вказуєш авторів, на роботах яких ґрунтується твоя власна робота. Водночас ми докладемо всіх зусиль, щоб інші чітко визнавали твій внесок, вказуючи унікальне ім’я, яке ти вільно обрав(-ла), щоб представляти себе в спільноті Catrobat, і даючи іншим можливість публічно висловити тобі вдячність за те, що ти поділився(-лася) своєю роботою з усіма, і особливо з ними."
+    item4: "Точні юридичні умови дивись тут: %link-licenseUploaded%."
   list4:
-    item1: "Ми пропонуємо все наше власне програмне забезпечення та інтернет-ресурси, пов'язані з системою Catrobat, наприклад, програмне забезпечення, написане командою Catrobat, наші веб-сайти та інтернет-ресурси, наш власний вихідний код, пов'язаний з системою Catrobat, і всі додаткові матеріали, такі як, наприклад, зображення, звуки та тексти, зараз і в майбутньому для вас за безкоштовними ліцензіями Catrobat."
-    item2: Ці ліцензії роблять всі частини Catrobat як безплатними для вас, так і безплатними в сенсі надання вам свободи, використовуєте їх так, як вам подобається, лише з кількома обмеженнями, що гарантують, серед іншого, що система Catrobat назавжди залишиться безплатною та корисною для всіх.
-    item3: 'Будь ласка, проконсультуйтеся з %link-licenseToPlay% для отримання точних юридичних умов. Вихідний код системи Catrobat, а також багато інших документів і ресурсів доступні через %link-developer%.'
+    item1: "Ми пропонуємо тобі все наше власне програмне забезпечення та інтернет-ресурси, пов'язані з системою Catrobat, наприклад програмне забезпечення, написане командою Catrobat, наші вебсайти та інтернет-ресурси, наш власний вихідний код, пов'язаний з системою Catrobat, і всі додаткові матеріали, як-от зображення, звуки та тексти, зараз і в майбутньому, за вільними ліцензіями Catrobat."
+    item2: "Ці ліцензії роблять усі частини Catrobat безплатними для тебе і водночас вільними — тобто дають тобі свободу використовувати їх так, як тобі подобається, лише з кількома обмеженнями, які гарантують, серед іншого, що система Catrobat назавжди залишиться вільною та корисною для всіх."
+    item3: "Точні юридичні умови дивись тут: %link-licenseToPlay%. Вихідний код системи Catrobat, а також багато інших документів і ресурсів доступні через %link-developer%."
   list5:
-    item1: 'Якщо вам або, якщо вам не виповнилося 13 років, ваші батьки або законні опікуни повʼязані з організацією, яка бере участь або несе відповідальність за порушення конфіденційності типу Dragnet та / або масове спостереження, то вам не дозволяється використовувати наші програмні додатки та отримувати доступ до наших послуг. Точні деталі цього обмеження та деякі винятки з нього окреслені в розділах 4.a та 4.b на наших %link-termsOfUse%.'
-    item2: Якщо вам не виповнилося 13 років, то ви повинні запитати своїх батьків або законних опікунів, чи дозволяють вони вам використовувати програмні додатки та послуги Catrobat.
+    item1: "Якщо ти або (якщо тобі ще не виповнилося 13 років) твої батьки чи законні опікуни пов’язані з організацією, яка бере участь у масовому порушенні конфіденційності типу Dragnet та/або масовому стеженні чи несе за це відповідальність, тобі не дозволяється використовувати наші програмні застосунки та отримувати доступ до наших послуг. Точні деталі цього обмеження та деякі винятки з нього описано в розділах 4.a та 4.b наших %link-termsOfUse%."
+    item2: "Якщо тобі ще не виповнилося 13 років, ти маєш запитати своїх батьків або законних опікунів, чи дозволяють вони тобі використовувати програмні застосунки та послуги Catrobat."
     item3: "Ми залишаємо за собою право відхиляти, видаляти або приховувати проєкти, облікові записи користувачів і будь-які цифрові матеріали, завантажені на сайти Catrobat в будь-який час на власний розсуд, наприклад, якщо ми виявимо, що проєкт містить невідповідні матеріали або що користувач порушує права інших осіб."
     item4: "Все програмне забезпечення та інтернет-ресурси Catrobat пропонуються в надії, що вони будуть корисні, але без будь-яких гарантій."
-    item5: 'Будь ласка, ознайомтеся з нашими процентними термінами %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service для точних формулювань вищенаведених пунктів та деяких додаткових юридичних положень та умов.'
-  bottom1: Час від часу перевіряйте тут, тому що ми завжди намагаємося покращити наші умови використання.
-  bottom2: 'Будь ласка, надішліть будь-які пропозиції щодо цих Умов використання на %email-webmaster%.'
+    item5: "Ознайомся з нашими повними умовами %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service, щоб побачити точні формулювання наведених вище пунктів та деякі додаткові юридичні положення й умови."
+  bottom1: "Час від часу заглядай сюди, бо ми постійно намагаємося покращувати наші умови використання."
+  bottom2: 'Надсилай будь-які пропозиції щодо цих Умов використання на %email-webmaster%.'
   version: Версія 1.3, 4 березня 2014
 search:
   dotdotdot: Пошук...
   search: Пошук
   inMediaLib: Пошук у медіатеці
-  inMediaCategory: Search in media category
+  inMediaCategory: "Пошук у медіакатегорії"
   results: Результати пошуку
   resultcount: Пошук повернув %count% результатів
-  fail: Введіть принаймні один пошуковий термін
+  fail: Введи принаймні один пошуковий термін
   noUsers: Користувачів не знайдено
   noProjects: Проєктів не знайдено
-  noStudios: No studios found
-  sameSearchMessage: "Схоже ви вже тут! Спробувати пошукати інше?"
+  noStudios: "Студій не знайдено"
+  sameSearchMessage: "Схоже, ти вже тут! Спробувати пошукати інше?"
 menu:
   profile: Мій профіль
   login: Увійти в обліковий запис
@@ -577,83 +577,83 @@ login:
     forgetPassword: Забули пароль?
   oauth:
     title: Або ти можеш увійти за допомогою
-  passOrUser: Ваш пароль або імʼя користувача некоректне.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Ваше імʼя користувача або адрес електронної пошти не знайдено.
+  passOrUser: Твій пароль або імʼя користувача некоректне.
+  accountSuspended: "Твій обліковий запис заблоковано. Якщо вважаєш, що це помилка, звернися до служби підтримки."
+  noUsername: Твоє імʼя користувача або адрес електронної пошти не знайдено.
   forgotPass: Забули пароль або імʼя користувача?
-  recoverPassSend: На вашу електронну адресу було надіслано електронний лист. Будь ласка, перевірте свою поштову скриньку.
+  recoverPassSend: На твою електронну адресу було надіслано електронний лист. Будь ласка, перевір свою поштову скриньку.
   alreadyReset: Пароль для цього користувача було вже запитано протягом останніх 24 годин.
-  confirmationSend: На вашу поштову адресу було надіслано електронний лист для підтвердження вашої реєстрації. Будь ласка, перевірте теку "Вхідні" та активуйте свій обліковий запис.
+  confirmationSend: На твою поштову адресу було надіслано електронний лист для підтвердження твоєї реєстрації. Будь ласка, перевір теку "Вхідні" та активуй свій обліковий запис.
   userOrEmail: Імʼя користувача або електронна пошта
   changePass: Змінити пароль
   createAccount: Створити обліковий запис
-  noAccount: У вас немає облікового запису!
-  alreadyAccount: Вже маєте обліковий запис?
+  noAccount: У тебе немає облікового запису!
+  alreadyAccount: Вже маєш обліковий запис?
   or: АБО
   username: Імʼя користувача
   email: Електронна пошта
   passwordFirst: Пароль
-  passwordSecond: Підтвердьте пароль
+  passwordSecond: Підтвердь пароль
 register:
   title: Зареєструватися
-  subText: "Продовжуючи, ви налаштовуєте обліковий запис спільноти Catrobat та погоджуєтеся з нашими %var1% та %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  subText: "Продовжуючи, ти налаштовуєш обліковий запис спільноти Catrobat та погоджуєшся з нашими %var1% та %var2%."
+  dateOfBirth: "Дата народження"
+  dateOfBirthInfo: "Ми запитуємо дату народження, щоб дотримуватися правил ЄС щодо захисту дітей (GDPR/COPPA) і забезпечити безпечний досвід для молодших користувачів."
+  parentEmail: "Електронна пошта батьків/опікуна"
+  parentEmailInfo: "Обов’язково для користувачів, молодших за 14 років. Ми надішлемо запит на згоду на цю адресу."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: "Заверши реєстрацію"
+    info: "Вкажи свою дату народження, щоб і далі користуватися платформою."
     submit: Продовжити
   button:
     cancel: Скасувати
     createAccount: Створити обліковий запис
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Перевір свою пошту!"
+    message: "Ми надіслали тобі лист для підтвердження. Перейди за посиланням у листі, щоб активувати обліковий запис."
+    helpTitle: "Не отримав(-ла) листа?"
+    hint: "Перевір папку «Спам». Посилання дійсне 24 години."
+    resendButton: "Надіслати лист підтвердження ще раз"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "Очікуємо згоди батьків"
+    message: "Твою пошту підтверджено! Перш ніж ти зможеш повноцінно користуватися платформою, батьки або опікун мають надати згоду."
+    sentTo: "Запит на згоду надіслано на %email%"
+    helpTitle: "Лист не прийшов? Потрібна допомога?"
+    hint: "Попроси батьків перевірити папку «Спам». Посилання дійсне 24 години."
+    resendButton: "Надіслати лист зі згодою ще раз"
+    wrongEmail: "Ввів(-ла) неправильну пошту батьків?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "Батьківську згоду відкликано"
+    message: "Твої батьки або опікун відкликали згоду для твого облікового запису. Доки згоду не буде надано знову, функції облікового запису обмежені."
+    newEmailPlaceholder: "Нова пошта батьків"
+    changeButton: "Оновити й надіслати ще раз"
 accountRecovery:
   title: Відновити обліковий запис
-  description: Якщо ви памʼятаєте електронну пошту або імʼя користувача вашого облікового запису, ми можемо надіслати вам посилання для скидання пароля.
+  description: Якщо ти памʼятаєш електронну пошту або імʼя користувача твого облікового запису, ми можемо надіслати тобі посилання для скидання пароля.
   button:
     cancel: Скасувати
     submit: Відновити пароль
 resetPassword:
   request:
     title: "Скинути свій пароль"
-    description: "Якщо ви пам'ятаєте електронну пошту свого облікового запису, ми можемо надіслати вам посилання для скидання пароля."
+    description: "Якщо ти пам'ятаєш електронну пошту свого облікового запису, ми можемо надіслати тобі посилання для скидання пароля."
     button:
       submit: "Надіслати скидання електронної пошти "
       cancel: "Скасувати"
   check:
-    title: "Перевірте свої електронні листи"
-    description: "Якщо обліковий запис, який відповідає вашій електронній пошті, існує, то щойно було надіслано електронний лист, який містить посилання, яке можна використовувати для скидання пароля. Термін дії цього посилання минає через %time%."
-    descriptionTwo: "Ви можете запитувати скидання нового пароля кожні %throttleLimit% години."
-    descriptionThree: "Якщо ви не отримали електронний лист, будь ласка, перевірте папку «Спам» або напишіть листа нашій службі підтримки на %email-webmaster%."
+    title: "Перевір свої електронні листи"
+    description: "Якщо обліковий запис, який відповідає твоїй електронній пошті, існує, то щойно було надіслано електронний лист, який містить посилання, яке можна використовувати для скидання пароля. Термін дії цього посилання минає через %time%."
+    descriptionTwo: "Ти можеш запитувати скидання нового пароля кожні %throttleLimit% години."
+    descriptionThree: "Якщо ти не отримав(-ла) електронний лист, будь ласка, перевір папку «Спам» або напиши листа нашій службі підтримки на %email-webmaster%."
   email:
     title: "Привіт!"
-    visitLink: "Щоб скинути пароль, відвідайте наступне посилання"
+    visitLink: "Щоб скинути пароль, відвідай наступне посилання"
     expire: "Термін дії цього посилання минає через %time%."
     cheers: "Бувай!"
   newemail:
     title: "Скинути свій пароль"
-    content: "<p> Ви отримуєте цей лист, тому що нещодавно<br> ви надіслали запит на зміну пароля для<br> вашого облікового запису Catrobat. Щоб змінити пароль,<br> перейдіть за посиланням нижче<br><br> Якщо ви не надіслали запит на зміну пароля,<br> ви можете проігнорувати цей лист.<br> </p>"
+    content: "Ти нещодавно запросив(-ла) скидання пароля для свого облікового запису Catrobat. Натисни кнопку нижче, щоб вибрати новий пароль. Якщо ти цього не запитував(-ла), просто проігноруй цей лист."
     visitLink: "СКИНУТИ ПАРОЛЬ"
     expire: "Посилання дійсне протягом %time% — лише на один раз!"
   reset:
@@ -669,10 +669,10 @@ format:
   million_abbreviation: М
 #api
 errors:
-  unspecified: Сталася невідома помилка. Будь ласка, зв'яжіться з нами.
+  unspecified: Сталася невідома помилка. Будь ласка, зв'яжися з нами.
   username:
     blank: Імʼя користувача не повинно бути порожнім
-    invalid: Ваше імʼя користувача недійсне
+    invalid: Твоє імʼя користувача недійсне
     exists: Це імʼя користувача вже існує.
     not_exists: Цього імені користувача не існує.
     not_email: Імʼя користувача не повинно бути адресою електронної пошти.
@@ -685,14 +685,14 @@ errors:
     invalid: Неприпустима країна
   email:
     blank: електронна пошта не повинна бути пустою
-    invalid: Ваша електронна пошта здається недійсною
+    invalid: Твоя електронна пошта здається недійсною
     exists: Ця адреса електронної пошти вже існує.
   id:
     blank: Ідентифікатор відкритої автентифікації не повинен бути порожнім
   login: Неправильний пароль або імʼя користувача.
   post-data: POST-дані неправильні або відсутні!
   checksum:
-    missing: Клієнт не надіслав файл контрольної суми! Ви використовуєте застарілу версію Pocket Code?
+    missing: Клієнт не надіслав файл контрольної суми! Ти використовуєш застарілу версію Pocket Code?
     invalid: Неприпустима контрольна сума
   xml:
     invalid: Неприпустимий xml-код
@@ -707,21 +707,21 @@ errors:
   project:
     invalid: Недійсний проєкт.
   languageversion:
-    tooold: 'Вибачте, ваш проєкт містить стару версію мови Catrobat! Ви використовуєте останню версію Pocket Code? '
+    tooold: 'Вибач, твій проєкт містить стару версію мови Catrobat! Ти використовуєш останню версію Pocket Code? '
   projectversion:
-    tooold: 'Ви використовуєте стару версію Pocket Code. Будь ласка, оновіть застосунок до останньої версії.'
+    tooold: 'Ти використовуєш стару версію Pocket Code. Будь ласка, онови застосунок до останньої версії.'
   authentication:
-    title: Login did not work
+    title: "Не вдалося увійти"
     webview: |
       Облікові дані користувача неправильні.
-      Спробуйте ввійти ще раз у додаток.
+      Спробуй ввійти ще раз у додаток.
 success:
   text: Успішно
   registration: Реєстрацію завершено!
   token: ок
-  upload: Ваш проєкт успішно вивантажено!
-  imgUpload: Ваше зображення було успішно завантажено!
-  report: Вашу скаргу було успішно надіслано!
+  upload: Твій проєкт успішно вивантажено!
+  imgUpload: Твоє зображення було успішно завантажено!
+  report: Твою скаргу було успішно надіслано!
 time:
   minutes.ago: '{0} < 1 хвилини тому |{1}1 хвилину тому |]1,Inf] %count% хвилин(-и) тому '
   hours.ago: '{1}1 годину тому |] 1,Inf] %count% год. тому'
@@ -732,7 +732,7 @@ failure:
   upload: Під час вивантаження застосунку сталася помилка.
 user:
   verification:
-    email: 'Підтвердьте свою електронну пошту'
+    email: 'Підтвердь свою електронну пошту'
 api:
   registerUser:
     emailMissing: 'Електронна пошта відсутня'
@@ -751,15 +751,15 @@ api:
     passwordTooLong: 'Пароль занадто довгий'
     passwordInvalidChars: 'Пароль містить неприпустимі символи'
     usernameContainsEmail: "Імʼя користувача не повинно містити адресу електронної пошти"
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: "Ім’я користувача не повинно містити посилання"
     countryCodeInvalid: "Неприпустимий код країни"
     pictureInvalid: "Неприпустиме зображення профілю або не підтримується"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    dateOfBirthMissing: "Потрібно вказати дату народження"
+    dateOfBirthInvalid: "Неправильна дата народження"
+    tooYoung: "Щоб створити обліковий запис, тобі має бути щонайменше 3 роки"
+    parentEmailMissing: "Для користувачів, молодших за 14 років, потрібна пошта батьків"
+    parentEmailInvalid: "Неправильна пошта батьків"
+    parentEmailSameAsUser: "Пошта батьків має відрізнятися від твоєї власної адреси"
   updateUser:
     currentPasswordMissing: "Поточний пароль відсутній"
     currentPasswordWrong: "Поточний пароль неправильний"
@@ -770,14 +770,14 @@ api:
     creditsTooLong: 'Поле «Примітки та автори» занадто довге'
     screenshotInvalid: 'Знімок екрана проєкту неприпустимий або не підтримується'
   projectsPost:
-    invalid_checksum: 'Неприпустима контрольна сума. Спробуйте вивантажити ще раз!'
-    upload_error: 'Помилка під час вивантаження. Спробуйте завантажити ще раз!'
-    creating_error: 'Помилка під час створення сутності проєкту. Спробуйте вивантажити ще раз!'
+    invalid_checksum: 'Неприпустима контрольна сума. Спробуй вивантажити ще раз!'
+    upload_error: 'Помилка під час вивантаження. Спробуй завантажити ще раз!'
+    creating_error: 'Помилка під час створення сутності проєкту. Спробуй вивантажити ще раз!'
   updateProject:
     xmlError: 'Не вдалося зберегти інформацію про проєкт.'
-    screenshotError: 'Не вдалося прочитати, перетворити або зберегти знімок екрана. Будь ласка, перевірте свій внесок.'
+    screenshotError: 'Не вдалося прочитати, перетворити або зберегти знімок екрана. Будь ласка, перевір свій внесок.'
     notFound: 'Не вдалося знайти проєкт, який потрібно змінити.'
-    forbidden: 'Зміна проєкту не дозволяється. Ви все ще ввійшли в систему?'
+    forbidden: 'Зміна проєкту не дозволяється. Ти все ще в системі?'
   createStudio:
     nameMissing: 'Назва відсутня'
     nameEmpty: 'Назва не може бути порожньою'
@@ -852,13 +852,13 @@ recommender:
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Користувачі, які завантажили цей проєкт, також завантажили
   moreFromThisUser: Більше від %username%
 pmd:
-  submitBtn: Подайте свій проєкт
+  submitBtn: Подай свій проєкт
   submitBox:
     header: Подання
-    text: Ви збираєтеся подати свій проєкт. Будь ласка, введіть код проєкту та натисніть «Надіслати».
+    text: Ти збираєшся подати свій проєкт. Будь ласка, введи код проєкту та натисни «Надіслати».
     btnText: Надіслати
   successful:
-    text: Вивантаження вашого проєкту пройшло успішно.
+    text: Вивантаження твого проєкту пройшло успішно.
   failed:
     text: Не вдалося вивантажити проєкт.
 codeview:
@@ -889,11 +889,11 @@ codeview:
   dataBricks: 'Блоки даних'
   specialBricks: 'Користувацькі блоки'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: "Перегляд коду"
+  loading: "Завантаження перегляду коду..."
+  error: "Не вдалося завантажити перегляд коду."
+  retry: "Спробувати ще раз"
+  empty: "У цьому проєкті немає коду."
   scripts: 'Скрипти'
   looks: 'Вигляди'
   sounds: 'Звуки'
@@ -911,42 +911,42 @@ codeStatistics:
   dataBricks: 'Дані'
   deviceBricks: 'Пристрій'
   specialBricks: 'Користувацькі'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: "Твій результат:"
+  points: "балів"
+  abstraction: "Абстракція та декомпозиція задач"
+  parallelism: "Паралелізм"
+  logicalThinking: "Логічне мислення"
+  synchronization: "Синхронізація"
+  flowControl: "Керування потоком"
+  userInteractivity: "Інтерактивність"
+  dataRepresentation: "Подання даних"
+  level: "Рівень"
+  loading: "Завантаження..."
+  bonus: "Бонус"
 footer:
   title: "Долучайтесь до понад %user_count% творчих умів!"
-  text: "Ми вже поділилися %project_count% дивовижними проєктами, і наступний може стати вашим. Завантажте наш застосунок і почніть творити вже сьогодні"
+  text: "Ми вже поділилися %project_count% дивовижними проєктами, і наступний може стати твоїм. Завантаж наш застосунок і почни творити вже сьогодні"
 privacy-policy:
   header: Політика конфіденційності
   version: Версія 2.2, 17 жовтня 2019 року
-  text1: Щоб запропонувати вам всі переваги наших послуг і пов'язаного з ним облікового запису, необхідно зібрати від вас певні дані. 
-  text2: Для підтримки та вдосконалення наших послуг (додатків та веб-сайтів) та наукових досліджень з ІКТ та STEM/STEAM освіти ми використовуємо Google Analytics, Crashlytics та Firebase, все це від Google LLC (США), а також Dynatrace від Dynatrace LLC (США), щоб отримати метадані про використання наших послуг, наприклад, інформацію про збій, позначки часу, відвідані сторінки / екрани,  використання наших додатків і послуг, використовуваної операційної системи та інформації про постачальника мережі. Цей аналіз і зібрані дані не пов'язані з вашим профілем і не містять ніякої особистої інформації (останні біти IP-адреси анонімізуються). Однак зібрані дані будуть передані постачальникам послуг (Google LLC, США і Dynatrace LLC, США). Обробка даних ґрунтується на договорах з ТОВ «Гугл» і ТОВ «Дінатраче». Ці відносини з постачальниками послуг відповідають Загальному регламенту Європейського Союзу про захист даних (GDPR ЄС) та угоді «Щит конфіденційності» між ЄС та США.
-  text3: Для створення та використання облікового запису в наших системах, а також для інформування вас про необхідні зміни щодо вашого облікового запису на електронну пошту, наприклад, оновлення або порушення наших Умов використання та послуг, наших правил спільноти або нашої політики, ми зберігатимемо ваше ім'я користувача та, якщо це передбачено вами, вашу адресу електронної пошти. Якщо ви підключили свій обліковий запис через Google Plus або Facebook, ми додатково зберігаємо ідентифікаційний ключ, підключений до вашого облікового запису, у цих службах. Ми не будемо використовувати ці дані для будь-яких інших (наприклад, маркетингових) цілей, якщо ви явно не дозволили нам це зробити.
-  text4: На добровільній основі ви можете надати нам свою країну проживання через сторінку свого облікового запису на сайті спільного використання. Це буде відображатися у вашому публічному профілі і буде використовуватися тільки для статистичних і дослідницьких цілей нами. Його можна видалити в будь-який час у налаштуваннях вашого профілю.
-  text5: Ви можете будь-коли зняти використання персональних даних, що належать вашому обліковому запису, видаливши свій обліковий запис через сторінку профілю на https://share.catrob.at/. Після видалення облікового запису ви все одно зможете користуватися наданими послугами, але не співпрацювати, наприклад, за допомогою завантаження програм, коментування або симпатії. Крім того, весь наданий вміст, пов'язаний з вашим обліковим записом, наприклад, завантажені програми, коментарі тощо, буде видалено.
+  text1: "Щоб запропонувати тобі всі переваги наших послуг і пов'язаного з ними облікового запису, нам потрібно зібрати від тебе певні дані."
+  text2: "Для підтримки та вдосконалення наших послуг (застосунків та вебсайтів) і наукових досліджень з ІКТ та STEM/STEAM-освіти ми використовуємо Google Analytics, Crashlytics та Firebase, усі від Google LLC (США), а також Dynatrace від Dynatrace LLC (США), щоб отримувати метадані про використання наших послуг, наприклад інформацію про збої, позначки часу, відвідані сторінки/екрани, використання наших застосунків і послуг, операційну систему та інформацію про постачальника мережі. Цей аналіз і зібрані дані не пов'язані з твоїм профілем і не містять жодної особистої інформації (останні біти IP-адреси анонімізуються). Однак зібрані дані буде передано постачальникам послуг (Google LLC, США, і Dynatrace LLC, США). Обробка даних ґрунтується на договорах з Google LLC і Dynatrace LLC. Ці відносини з постачальниками послуг відповідають Загальному регламенту ЄС про захист даних (GDPR) та угоді «Щит конфіденційності» між ЄС та США."
+  text3: "Для створення та використання облікового запису в наших системах, а також щоб повідомляти тебе електронною поштою про важливі зміни щодо твого облікового запису, наприклад оновлення або порушення наших Умов використання та послуг, наших правил спільноти чи нашої політики, ми зберігатимемо твоє ім'я користувача та, якщо ти її надав(-ла), твою адресу електронної пошти. Якщо ти підключив(-ла) свій обліковий запис через Google Plus або Facebook, ми додатково зберігаємо ідентифікаційний ключ, пов'язаний з твоїм обліковим записом у цих службах. Ми не використовуватимемо ці дані для жодних інших (наприклад, маркетингових) цілей, якщо ти явно не дозволиш нам це."
+  text4: "За бажанням ти можеш вказати свою країну проживання на сторінці свого облікового запису на сайті. Вона відображатиметься у твоєму публічному профілі, і ми використовуватимемо її лише для статистичних і дослідницьких цілей. Її можна будь-коли видалити в налаштуваннях профілю."
+  text5: "Ти можеш будь-коли припинити використання персональних даних, що належать твоєму обліковому запису, видаливши свій обліковий запис на сторінці профілю на https://share.catrob.at/. Після видалення облікового запису ти й надалі зможеш користуватися наданими послугами, але не зможеш долучатися, наприклад, завантажувати програми, коментувати чи ставити вподобайки. Крім того, весь наданий вміст, пов'язаний з твоїм обліковим записом, наприклад завантажені програми, коментарі тощо, буде видалено."
   text6: Щоб уникнути неправильного використання наших послуг, наприклад, за допомогою завантажень або коментарів користувачів для незаконних цілей, усі створені користувачем публічні дані (завантаження, коментарі) будуть зберігатися усередині бази даних разом із міткою часу та використаною інтернет-адресою. Ці дані не будуть використовуватися або передаватися будь-яким установам, якщо тільки в достатній мірі незаконні дії не будуть обґрунтовано підозрювані і офіційно уповноважені юридичні установи вимагатимуть їх на основі чинного законодавства. Кожен випадок буде ретельно перевірений на індивідуальній основі нами в першу чергу.
-  text7: Ви можете добровільно підписатися на розсилку новин Catrobat, на https://catrob.at/newsletter, що надаються нами через сервіс MailChimp (The Rocket Science Group LLC d/b/a MailChimp, США). Потім ви отримаєте оновлення про проєкт Catrobat та його послуги на надану адресу електронної пошти. Ви можете відписатися від розсилки новин у будь-який час, використовуючи посилання «скасувати підписку» в нижньому колонтитулі кожної розсилки новин. Ця розсилка новин надається MailChimp, з яким ми маємо угоду про обробку даних і які взяли на себе зобовʼязання щодо Загального регламенту ЄС про розвиток даних та «Щит конфіденційності» між ЄС та США. Для отримання додаткової інформації про MailChimp, будь ласка, перегляньте політику конфіденційності MailChimp та умови використання.
-  text8: Всі послуги надаються безкоштовним проєктом Catrobat з відкритим вихідним кодом під егідою Міжнародної асоціації Catrobat – Verein zur Förderung freier Software, некомерційної неурядової організації, зареєстрованої в Граці, Австрія (Європейський Союз). Наша політика стосується законодавства ЄС та Австрії про захист даних (GDPR). Щоб зв'язатися з нами, будь ласка, надішліть електронного листа на contact@catrobat.org або надішліть нам електронного листа до Catrobat, Інституту програмних технологій, Технологічного університету Граца, Inffeldgasse 16b, A-8010 Graz, Австрія (Європейський Союз).
-  text9: Якщо вам не виповнилося 14 років, ця політика повинна бути прийнята законним опікуном (як правило, батьком).
+  text7: "Ти можеш за бажанням підписатися на розсилку новин Catrobat на https://catrob.at/newsletter, яку ми надаємо через сервіс MailChimp (The Rocket Science Group LLC d/b/a MailChimp, США). Тоді ти отримуватимеш новини про проєкт Catrobat та його послуги на вказану адресу електронної пошти. Ти можеш будь-коли відписатися від розсилки за посиланням «скасувати підписку» внизу кожного листа розсилки. Розсилку надає MailChimp, з яким у нас є угода про обробку даних і який взяв на себе зобов’язання щодо Загального регламенту ЄС про захист даних та «Щита конфіденційності» між ЄС та США. Більше інформації про MailChimp дивись у політиці конфіденційності та умовах використання MailChimp."
+  text8: "Усі послуги надає безкоштовний проєкт Catrobat з відкритим вихідним кодом під егідою Міжнародної асоціації Catrobat – Verein zur Förderung freier Software, некомерційної неурядової організації, зареєстрованої в Граці, Австрія (Європейський Союз). Наша політика ґрунтується на законодавстві ЄС та Австрії про захист даних (GDPR). Щоб зв'язатися з нами, напиши на contact@catrobat.org або надішли нам листа на адресу: Catrobat, Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Австрія (Європейський Союз)."
+  text9: "Якщо тобі ще не виповнилося 14 років, цю політику має прийняти твій законний опікун (як правило, один із батьків)."
   text10: Офіційна політика конфіденційності Catrobat англійською мовою доступна в Інтернеті під %privacy_policy%.
   disagree-text: Без схвалення ми не можемо створити обліковий запис, але основні функції усе ще доступні.
 catro-notifications:
   markAsRead: "Позначити як прочитане"
-  noFollowers: "Схоже, у вас немає сповіщень."
-  noComments: "Схоже, у вас немає сповіщень про коментарі."
-  noReactions: "Схоже, у вас немає сповіщень про реакцію."
-  noRemixes: "Схоже, у вас немає сповіщень про ремікс."
-  noStudios: "It looks like you don't have any studio notifications."
+  noFollowers: "Схоже, у тебе немає сповіщень."
+  noComments: "Схоже, у тебе немає сповіщень про коментарі."
+  noReactions: "Схоже, у тебе немає сповіщень про реакцію."
+  noRemixes: "Схоже, у тебе немає сповіщень про ремікс."
+  noStudios: "Схоже, у тебе немає сповіщень зі студій."
   tab:
     studio: Студія
     project: Проєкти на пристрої
@@ -955,25 +955,25 @@ catro-notifications:
   like:
     message: '%user_link% реагує в %program_link%.'
   follow:
-    message: '%user_link% підписується на вас.'
+    message: '%user_link% підписується на тебе.'
   project-upload:
     message: '%user_link% опубліковує нову гру %program_link%.'
   remix:
-    message: '%user_link% опубліковує ремікс %program_link% вашої гри %remix_program_link%.'
+    message: '%user_link% опубліковує ремікс %program_link% твоєї гри %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% прокоментував(-ла) у студії %studio_name%."
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% додав(-ла) %program_link% до студії %studio_name%."
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "Твій запит на вступ до студії %studio_name% прийнято."
+    declined: "Твій запит на вступ до студії %studio_name% відхилено."
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "Твій проєкт %program_link% буде автоматично видалено через %days% дн. Завантаж нову версію або збери більше завантажень, щоб зберегти його."
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "Твій проєкт «%project_name%» було автоматично видалено через неактивність. Завантаж його знову, якщо все ще хочеш ним поділитися."
+  noProjects: "Схоже, у тебе немає сповіщень про проєкти."
 clipboard:
-  success: Link copied to clipboard!
+  success: "Посилання скопійовано в буфер обміну!"
   success_project: Посилання на проєкт, скопійовано до буфера обміну!
   success_user: Посилання на користувача, скопійовано до буфера обміну!
   fail: Не вдалося скопіювати посилання на буфер обміну! :(
@@ -981,7 +981,7 @@ next: Далі
 previous: Попередній
 media-packages:
   title: Медіа пакети
-  description: У наступних категоріях ви можете знайти додаткових персонажів й об’єктів, щоб додати у свої проєкти Pocket Code.
+  description: У наступних категоріях ти можеш знайти додаткових персонажів й об’єктів, щоб додати у свої проєкти Pocket Code.
   thumb-size:
     description: Розмір ескізу
     sm: малий
@@ -989,7 +989,7 @@ media-packages:
     lg: великий
   theme-special: "Спеціальна тема %flavor%"
   search-results: Результати пошуку медіатеки
-  no-results: Пошук повернув 0 результатів. Використовуйте тільки англійські пошукові терміни.
+  no-results: Пошук повернув 0 результатів. Використовуй тільки англійські пошукові терміни.
   download_these_files: зберегти
 flavor:
   pocketcode: Pocket Code
@@ -1000,13 +1000,13 @@ flavor:
   create@school: Create@School
 copyright: 'Авторське право &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Всі права захищені.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Для роботи цього сайту потрібен JavaScript. Увімкни JavaScript у браузері або попроси дорослого допомогти."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: "Ми використовуємо файли cookie, щоб покращувати наші сервіси. Жодні дані не продаються і не передаються."
   accept: "Прийняти"
   decline: "Відхилити"
   privacy-link: "Політика конфіденційності"
-  settings-link: "Cookie Settings"
+  settings-link: "Налаштування cookie"
 agree: Погоджуюся
 disagree: Не погоджуюся
 profileLoader:
@@ -1018,8 +1018,8 @@ share:
   error: 'Не вдалося поділитися'
   success: 'Успішно передано'
 copy: 'Копіювати посилання'
-checkOutProject: 'Оцініть цей проєкт:'
-checkOutUser: 'Оцініть цього користувача:'
+checkOutProject: 'Оціни цей проєкт:'
+checkOutUser: 'Оціни цього користувача:'
 community: 'Спільнота Catrobat'
 back_to_app: 'Вийти із спільноти'
 category:
@@ -1043,14 +1043,14 @@ achievements:
       x_out_of_y: '%unlocked% з %total% розблоковано'
     tab_unlocked:
       title: 'Розблоковано'
-      empty: "Ви ще не розблокували ніяких досягнень."
+      empty: "Ти ще не розблокували ніяких досягнень."
     tab_locked:
       title: 'Заблоковано'
-      empty: "Ви вже розблокували всі досягнення."
+      empty: "Ти вже розблокували всі досягнення."
   popup:
     new:
       title: 'Вітаємо!'
-      subtitle: "Ви заробили значок"
+      subtitle: "Ти заробив(-ла) значок"
       confirm: "Гаразд"
   profile:
     title: 'Досягнення'
@@ -1109,7 +1109,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} | {1} розширення |] 1,Inf] розширень'
+  title: "{0} |{1} розширення |]1,Inf] розширень"
   extension:
     arduino:
       title: Arduino
@@ -1137,15 +1137,15 @@ studio:
   enable_comments: 'Увімкнути коментарі?'
   cover_image: 'Вивантажити банер'
   cover_image_empty: 'Зображення не вибрано. Розмір файлу повинен бути менш як 1 мегабайта.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
+  cover_image_hint: "Макс. 1 МБ. Підтримувані формати: JPEG, PNG, GIF, WebP."
+  cover_image_compressed: "Зображення автоматично стиснуто до ліміту 1 МБ."
+  cover_image_compressing: "Стискання зображення..."
+  cover_image_still_too_large: "Зображення завелике навіть після стискання. Вибери менший файл."
+  cover_image_invalid_type: "Непідтримуваний тип зображення. Використовуй JPEG, PNG, GIF або WebP."
+  cover_image_compression_failed: "Не вдалося обробити зображення. Спробуй інший файл."
   cover_image_alt: 'Ваше зображення банера'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
+  cover_image_remove: "Видалити зображення"
+  popular: "Популярні студії"
   join: 'Долучитися'
   leave: 'Покинути'
   report: 'Скарга'
@@ -1155,28 +1155,28 @@ studio:
     joined_studios: 'Приєднані студії'
     public_studios: 'Публічні студії'
     private_studios: 'Приватні студії'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    no_studios: "Студій ще немає"
+    my_studios: "Мої студії"
+    explore: "Огляд студій"
+    no_joined: "Ти ще не приєднався(-лася) до жодної студії"
+    joined: "Приєднані"
+    load_more: "Завантажити ще"
     open: 'Відкрити'
     share: 'Поділитися'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: "Посилання скопійовано в буфер обміну!"
+    leave_confirm_title: "Покинути цю студію?"
     cancel: 'Скасувати'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: "Скасувати запит"
+    cancel_request_confirm_title: "Скасувати запит на вступ?"
     admin: 'Адмін'
-    member: 'Member'
+    member: "Учасник"
   details:
-    add_project: 'натисніть, щоб додати проєкт'
+    add_project: 'натисни, щоб додати проєкт'
     add: 'Додати'
     showMore: 'Показати більше'
     showLess: 'Показати менше'
-    are_you_sure: 'Ви впевнені?'
-    no_way_of_return: 'This cannot be undone.'
+    are_you_sure: 'Ти впевнений(-а)?'
+    no_way_of_return: "Цю дію не можна скасувати."
     delete_it: 'Видалити'
     remove_project: 'Видалити зі студії'
     remove_project_error: 'Не вдалося видалити проєкт зі студії!'
@@ -1184,18 +1184,18 @@ studio:
     no_projects: 'Студія ще не містить жодних проєктів'
     projects:
       title: 'проєкти'
-      addProject: 'Додайте власні проєкти'
-      open_project: 'Open project'
+      addProject: 'Додай власні проєкти'
+      open_project: "Відкрити проєкт"
       download: 'Завантажити'
       share: 'Поділитися'
       remove_from_studio: 'Видалити зі студії'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio_title: "Видалити проєкт зі студії?"
+      remove_from_studio_text: "Якщо передумаєш, зможеш додати його знову пізніше."
+      share_success: "Посилання скопійовано в буфер обміну!"
+      share_fail: "Не вдалося скопіювати посилання."
+      no_projects_empty_state: "У тебе ще немає проєктів, які можна додати. Спершу створи проєкт у Pocket Code!"
+      add_selected: "Додати вибрані"
+    no_available_projects: "Немає проєктів, доступних для додавання."
     updateCoverError: 'Під час оновлення зображення сталася помилка!'
     join: 'Долучитися'
     leave: 'Покинути'
@@ -1204,14 +1204,14 @@ studio:
     decline: 'Відхилено'
     comments:
       title: 'Коментарі'
-      type_something: 'Введіть щось'
+      type_something: 'Введи щось'
       replies: 'відповіді'
       send: 'надіслати'
       no_comments: 'У студії поки немає коментарів.'
       disabled_comments: 'Коментарі для цієї студії вимкнуто.'
       remove_comment: 'Видалити коментар'
-      post_error: 'Під час публікації вашого коментаря сталася помилка. Спробуйте ще раз пізніше.'
-      remove_error: 'Під час видалення коментаря сталася помилка. Спробуйте ще раз пізніше.'
+      post_error: 'Під час публікації твого коментаря сталася помилка. Спробуй ще раз пізніше.'
+      remove_error: 'Під час видалення коментаря сталася помилка. Спробуй ще раз пізніше.'
     activity_list:
       title: 'Діяльність'
       join_studio: '%user% долучається до студії.'
@@ -1220,24 +1220,24 @@ studio:
     members_list:
       title: 'Учасники студії'
       project_count: '{0} жодних студійних проєктів |{1} 1 студійний проєкт |] 1,Inf] %count% студійних проєктів'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
+      no_studio_projects: "Немає проєктів у студії"
+      one_studio_project: "1 проєкт у студії"
+      n_studio_projects: "Проєктів у студії: %count%"
       promote_member: 'Підвищити учасника до адміністратора'
-      promotion_failed: 'Під час підвищування цього учасника сталася помилка. Спробуйте ще раз пізніше.'
+      promotion_failed: 'Під час підвищування цього учасника сталася помилка. Спробуй ще раз пізніше.'
       ban_member: 'Заблокувати учасника в студії'
-      ban_failed: 'Під час блокування цього учасника сталася помилка. Спробуйте ще раз пізніше.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      ban_failed: 'Під час блокування цього учасника сталася помилка. Спробуй ще раз пізніше.'
+      demote_member: "Понизити адміністратора до учасника"
+      demotion_failed: "Під час пониження адміністратора щось пішло не так. Спробуй пізніше."
+      last_admin: "Не можна понизити останнього адміністратора цієї студії."
     join_requests:
-      title: 'Join Requests'
+      title: "Запити на вступ"
       accept: 'Прийняти'
       decline: 'Відхилити'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: "Запит на вступ прийнято."
+      decline_success: "Запит на вступ відхилено."
+      error: "Щось пішло не так. Спробуй ще раз."
+      no_requests: "Немає запитів на вступ, що очікують."
     show_more: 'Показати більше'
     show_less: 'Показати менше'
     admin_settings:
@@ -1255,19 +1255,19 @@ media_library:
       sound: 'Тип: звук'
       movie: 'Тип: відео'
       default: 'Тип: невідомо'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: "Медіакатегорій ще немає."
+  no_results: "Нічого не знайдено."
+  assets_count: "ресурсів"
+  view_all: "Переглянути всі"
+  view_all_category: "Переглянути всі: %category%"
+  back_to_app: "Назад до застосунку"
 snackbar:
   project_not_found: 'Потрібний проєкт недоступний'
   project_not_for_kids: 'Проєкт був позначений як не безпечний для дітей!'
   project_safe_for_kids: 'Проєкт був позначений як безпечний для дітей!'
-  project_not_for_kids_moderator: 'Проєкт був позначений модератором. Ви не можете це скасувати!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_for_kids_moderator: 'Проєкт був позначений модератором. Ти не можеш це скасувати!'
+  project_set_private: "Проєкт став приватним."
+  project_set_public: "Проєкт став публічним."
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Додаткові відомості: additionalInfo'
@@ -1277,50 +1277,50 @@ maintenanceinformations:
 MarkNotForKids: Позначити як не безпечний для дітей
 MarkSafeForKids: Позначити як безпечний для дітей
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "Підтвердження"
+  confirmMark: "Ти справді хочеш позначити цей проєкт як небезпечний для дітей?"
+  confirmUnmark: "Ти справді хочеш зняти з цього проєкту позначку «не для дітей»?"
+  confirmYes: "Так, продовжити!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Поскаржитися: %content_type%"
+    reason_placeholder: "Опиши, чому ти скаржишся на це..."
+    submit: "Надіслати скаргу"
+    success: "Твою скаргу надіслано. Дякуємо!"
+    error: "Щось пішло не так. Спробуй ще раз."
+    duplicate: "Ти вже скаржився(-лася) на цей вміст."
+    trust_too_low: "Твій обліковий запис надто новий, щоб надсилати скарги."
+    unverified: "Переконайся, що ти увійшов(-ла) в систему і твою електронну пошту підтверджено."
+    rate_limited: "Ти надсилаєш скарги надто часто. Зачекай і спробуй ще раз."
+    suspended: "Твій обліковий запис заблоковано."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "Оскаржити"
+    title: "Оскаржити це рішення"
+    placeholder: "Поясни, чому цей вміст не слід приховувати..."
+    submit: "Надіслати апеляцію"
     cancel: "Скасувати"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "Твою апеляцію надіслано на розгляд."
+    already_pending: "У тебе вже є апеляція на розгляді."
+    error: "Щось пішло не так. Спробуй ще раз."
+    rate_limited: "Ти надсилаєш апеляції надто часто. Зачекай і спробуй ще раз."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Ти пишеш коментарі надто часто. Зачекай трохи."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Ти реагуєш надто часто. Зачекай трохи."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Ти надто часто підписуєшся/відписуєшся. Зачекай трохи."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Ти виконуєш дії в студіях надто часто. Зачекай трохи."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "Цей проєкт приховано через скарги спільноти."
+    comment: "Цей коментар приховано через скарги спільноти."
+    user: "Цей профіль приховано через скарги спільноти."
+    user_own: "Твій обліковий запис заблоковано через скарги спільноти. Ти можеш оскаржити це рішення."
+    studio: "Цю студію приховано через скарги спільноти."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "Твій вміст (%content_type%) приховано через скарги спільноти. Ти можеш оскаржити це рішення."
+    appeal_approved: "Твою апеляцію схвалено. Твій вміст знову видно."
+    appeal_rejected: "Твою апеляцію розглянуто, рішення про приховування вмісту залишається в силі."
+    admin_review_needed: "Вміст автоматично приховано, і він потребує перевірки."
+Reports: "Скарги"
+members: "учасників"
