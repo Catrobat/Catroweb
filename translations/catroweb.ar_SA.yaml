@@ -307,8 +307,7 @@ remixGraph:
   projectNotAvailableErrorDescription: "المشروع لم يعد متاحًا!"
   projectNotAvailable: "غير متاح"
   projectUnknownUser: "مستخدم غير معروف"
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+noReply: 'This is an automated message - Please do not reply directly to this email.'
 accountConfirmation:
   subject: تأكيد حسابك في كاتروبات
   message: |

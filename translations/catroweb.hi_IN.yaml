@@ -290,8 +290,7 @@ remixGraph:
   projectNotAvailableErrorDescription: "यह प्रोजेक्ट अब उपलब्ध नहीं है!"
   projectNotAvailable: "उपलब्ध नहीं"
   projectUnknownUser: "अज्ञात उपयोगकर्ता"
-noReply:
-  - यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे जवाब न दो।
+noReply: 'यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे जवाब न दो।'
 accountConfirmation:
   subject: तुम्हारे Catrobat खाते की पुष्टि
   message: |

@@ -308,8 +308,7 @@ remixGraph:
   projectNotAvailableErrorDescription: 'Проєкт більше не доступний!'
   projectNotAvailable: 'Недоступно'
   projectUnknownUser: 'Невідомий користувач'
-noReply:
-  - Це автоматичне повідомлення - Будь ласка, не відповідай безпосередньо на цей електронний лист.
+noReply: 'Це автоматичне повідомлення - Будь ласка, не відповідай безпосередньо на цей електронний лист.'
 accountConfirmation:
   subject: Підтвердження облікового запису Catrobat
   message: |

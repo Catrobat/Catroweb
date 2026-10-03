@@ -290,8 +290,7 @@ remixGraph:
   projectNotAvailableErrorDescription: "이 프로젝트는 더 이상 볼 수 없어요!"
   projectNotAvailable: "볼 수 없음"
   projectUnknownUser: "알 수 없는 사용자"
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+noReply: 'This is an automated message - Please do not reply directly to this email.'
 accountConfirmation:
   subject: Catrobat 계정 확인
   message: |

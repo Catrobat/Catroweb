@@ -290,8 +290,7 @@ remixGraph:
   projectNotAvailableErrorDescription: 'Proyek ini sudah tidak tersedia lagi!'
   projectNotAvailable: 'Tidak tersedia'
   projectUnknownUser: 'Pengguna tidak dikenal'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+noReply: 'This is an automated message - Please do not reply directly to this email.'
 accountConfirmation:
   subject: Konfirmasi akun Catrobat kamu
   message: |

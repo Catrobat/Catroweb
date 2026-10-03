@@ -307,8 +307,7 @@ remixGraph:
   projectNotAvailableErrorDescription: 'Het project is niet meer beschikbaar!'
   projectNotAvailable: 'Niet beschikbaar'
   projectUnknownUser: 'Onbekende gebruiker'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+noReply: 'This is an automated message - Please do not reply directly to this email.'
 accountConfirmation:
   subject: 'Bevestiging van je Catrobat-account'
   message: |
