@@ -1,882 +1,821 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
+title: "Al'ummar Catrobat"
+meta.description: "Raba, gano, kuma yi remix na ayyukan kirkira da aka yi da Catrobat. Shiga al'ummar duniya ta matasa masu kirkira da ke gina wasanni, zane-zane masu motsi da manhajoji."
+meta.description.media.library: "Bincika kuma sauke kayan kafofin watsa labarai kyauta don Catrobat — sautuka, hotuna da sauransu don ayyukanka."
+meta.og.title.login: "Shiga Catrobat"
+meta.og.description.login: "Shiga don raba ayyukanka na Catrobat da al'umma."
+meta.og.title.register: "Ƙirƙiri asusun Catrobat"
+meta.og.description.register: "Shiga al'ummar Catrobat kuma fara raba ayyukanka na kirkira yau."
+meta.og.description.profile: "%username% a Catrobat – duba ayyukansu da nasarorinsu."
+localLanguage: "Hausa"
+username: "Sunan mai amfani"
+password: "Kalmar sirri"
+createNewPassword: "Ƙirƙiri sabuwar kalmar sirri"
 accountSettings: Account Settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
-tutorials: Help
+email: "Imel"
+aboutPocketCode: "Game da Pocket Code"
+about: "Game da Catrobat"
+education: "Ilimi"
+chat: "Hira da dandali"
+privacyGuide: "Jagorar Wayar da Kai kan Sirri"
+others: "Sauran"
+tutorials: "Taimako"
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: The passwords didn't match.
-error: Oops!
-cancel: Cancel
-confirm: Confirm
-report: Report
-report.title: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-name: Name
-description: Description
-noDescription: No description available.
+discordChat: "Hirar Discord"
+passwordsNoMatch: "Kalmomin sirrin ba su yi daidai ba."
+error: "Kai!"
+cancel: "Soke"
+confirm: "Tabbatar"
+report: "Kai rahoto"
+report.title: "Kai rahoto"
+deleteIt: "Eh, goge shi!"
+reportIt: "Eh, kai rahotonsa!"
+areYouSure: "Ka tabbata?"
+noWayOfReturn: "Babu hanyar dawo da abin da ka yi!"
+download: "Sauke"
+name: "Suna"
+description: "Bayani"
+noDescription: "Babu bayani."
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-projectDetails: Details
-somethingWentWrong: 'Oops, something did not work. Please try again!'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'Please try again!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+notesAndCreditsDescription: "Yaya ka ƙirƙiri wannan aikin? Ka yi amfani da ra'ayoyi, rubuce-rubuce ko zane-zane na wasu mutane? Gode musu a nan."
+projectImportedFromScratch: "An shigo da wannan aikin daga MIT Scratch. Za ka iya duba asalin aikin"
+scratchImportedProjectLinkHere: "a nan."
+country: "Ƙasa"
+loginText: "shiga"
+privacyPolicy: "Manufar Sirri"
+imprint: "Bayanan Mawallafi"
+projectDetails: "Cikakkun bayanai"
+somethingWentWrong: "Kai, wani abu bai yi aiki ba. Don Allah sake gwadawa!"
+accountNotVerified: "Don Allah tabbatar ka shiga kuma an tabbatar da imel na asusunka."
+accountSuspended: "An dakatar da asusunka saboda rahotannin al'umma. Za ka iya ɗaukaka ƙara kan wannan hukunci daga bayananka."
+doesNotExist: "Abin da aka nema babu shi."
+pleaseTryAgain: "Don Allah sake gwadawa!"
+tryAgainButton: "Sake gwadawa"
+oldVersionError: "Don Allah sabunta zuwa sabuwar sigar Pocket Code!"
+more: "ƙari"
+less: "kaɗan"
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+more-information: "Ƙarin bayani"
+less-information: "Ƙarancin bayani"
+ok: "Na gane"
+clickToDownloadProgram: "Don sauke aikin misali danna %link_start% nan %link_end%."
+registrationError: "Ana amfani da sunan mai amfani ko adireshin imel ɗin."
+notifications: "Sanarwa"
 allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
+FollowersNotifications: "Mabiya"
+LikeNotifications: "Martani"
+CommentNotifications: "Sharhi"
+RemixNotifications: "Remix"
+wellDone: "Madalla!"
+done: "An gama!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
-projects: "Projects"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+confirmMessage: "Eh, goge shi"
+cancelMessage: "Soke"
+notificationsUnauthorizedError: "Ba a iya ba mai amfani izini ba"
+notificationsClearError: "Ba a iya yiwa sanarwa alamar an karanta ba!"
+pleaseWait: "Don Allah jira..."
+projects: "Ayyuka"
+users: "Masu amfani"
+studios: "Situdiyo"
+oauthPopUpTitle: "Bayanin shiga da asusun waje"
+oauthInfo: "Yanzu ka yi amfani da asusun waje don shiga. Mun ƙirƙira maka sunan mai amfani na bazuwar. Idan kana son canza sunan mai amfani ko ƙirƙirar sabuwar kalmar sirri don asusunka, don Allah je shafin bayananka."
+oauthHere: "nan"
+statistics: "Ƙididdiga"
+languageSelection: "Zaɓin harshe"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: "Jigo"
+  auto: "Tsarin na'ura"
+  auto_description: "Bi saitin na'urarka"
+  light: "Haske"
+  light_description: "Kamanni mai haske"
+  dark: "Duhu"
+  dark_description: "Kamanni mai duhu"
+  apply: "Aiwatar"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: "Waɗanne ayyuka ake ba da shawara a nan?"
+      description: "Yawan martanin (Babban yatsa, Murmushi ...) da aikinka ya samu, haka zai ƙara hawa a wannan jerin."
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: "Ana bi"
+  followers: "Mabiya"
+  follow: "Bi"
+  username: "Mai amfani"
+  followsMe: "Yana bina"
+  noFollowing: "A yanzu ba ka bin kowa."
+  noFollowers: "A yanzu ba ka da mabiya."
+  noOtherFollowing: "A yanzu babu masu amfani da ake bi."
+  noOtherFollowers: "A yanzu babu mabiya."
+  followError: " Ba mu iya bin wannan mai amfani a yanzu ba."
+  unfollowError: " Ba mu iya daina bin wannan mai amfani a yanzu ba."
+  unfollowQuestion: "Ka tabbata kana son daina bin wannan mai amfani?"
+  unfollowButton: "Daina bin %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: Open
-  download: Download
+    title: "Barka da zuwa %theme% na Catrobat"
+    title_mindstorms: "Barka da zuwa shafin Catrobat don Mindstorms EV3 da NXT"
+    subtitle: "Ƙirƙiri labarai, wasanni da sauransu..."
+    subtitle_embroidery: "Ɗinka naka zane-zane a kan rigunanka, jakunkuna, wanduna, ko murfin wayarka!"
+    subtitle_mindstorms: "Ƙirƙiri naka ayyuka da robobinka na Lego Mindstorms EV3 da NXT"
+    download: "Sauke manhajar"
+    statistics: "Ƙarin ƙididdiga"
+  featured: "Fitattu"
+  open: "Buɗe"
+  download: "Sauke"
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "Ɗora Aiki"
+    drop_here: "Ja ka saki fayil ɗinka na .catrobat a nan"
+    or_browse: "ko danna don bincika"
+    button: "Ɗora"
+    uploading: "Ana ɗorawa..."
+    success: "An ɗora aikin cikin nasara!"
+    view_project: "Duba Aiki"
+    upload_another: "Ɗora Wani"
+    invalid_file: "Don Allah zaɓi fayil na .catrobat"
+    file_too_large: "Fayil ɗin ya yi girma da yawa"
+    error: "Ɗorawa ta gaza. Don Allah sake gwadawa."
+    unauthorized: "Dole ne ka shiga don ɗorawa."
+    rate_limited: "Ɗorawa sun yi yawa. Don Allah sake gwadawa daga baya."
+    selected_file: "Fayil da aka zaɓa:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+      file_size: "Matsakaicin girman fayil shine 100 MB."
+      app_upload: "Za ka iya kuma ɗora ayyuka kai tsaye daga manhajar Pocket Code. Lura cewa ana sake gina manhajojin a yanzu kuma ba sa goyon bayan ɗorawa ta yanar gizo a wannan lokaci."
+      retention: "Za a cire ayyukan da aka ɗora ta atomatik bayan wani lokaci na rashin aiki. Shiga akai-akai ko samu saukewa a aikinka don tsawaita adana shi."
+      protection: "Masu daidaitawa za su iya kare ayyuka masu kyau ko shahararru musamman daga gogewa ta atomatik."
+  example: "Misalai"
+  newest: "Sababbin ayyuka"
+  recommended: "Ayyukan da aka ba da shawara"
+  scratchremixes: "Remix na Scratch"
+  noProjects: "A yanzu babu ayyuka."
+  shareAction: "Raba"
+  deleteAction: "Goge aiki"
+  deleteConfirmation: "Ka tabbata?\nKa tabbata kana son goge \"%programName%\"?\nBabu hanyar dawo da abin da ka yi!\nEh, goge shi!\nSoke\n"
+  deleteConfirmText: "Ba za a iya soke wannan aiki ba. Za a goge aikinka har abada."
+  deleteConfirmationTitle: "Ka tabbata?"
+  deleteNotFoundError: "Ba a sami aikin da za a goge ba a ƙarƙashin asusunka."
+  private: "na sirri"
+  public: "na jama'a"
+  setPrivateAction: "Saita na sirri"
+  setPublicAction: "Saita na jama'a"
+  setPrivateConfirm: "Saita wannan aikin na sirri? Ba zai ƙara bayyana a sakamakon bincike ba."
+  setPublicConfirm: "Mayar da wannan aikin na jama'a? Kowa zai iya ganinsa."
+  markNotForKidsConfirm: "Yiwa wannan aikin alamar bai dace da yara ba?"
+  markSafeForKidsConfirm: "Cire alamar bai dace da yara ba daga wannan aikin?"
+  nfkModeratorLocked: "Mai daidaitawa ya kulle wannan saitin."
+  confirmSetPrivate: "Ka tabbata kana son saita wannan aikin na sirri? Ba zai ƙara bayyana a sakamakon bincike ba."
+  confirmSetPublic: "Ka tabbata kana son mayar da wannan aikin na jama'a? Kowa zai iya ganinsa."
+  changeVisibility: "Ka tabbata?\nIdan ka saita '%programName%' na sirri, sauran masu amfani ba za su gan shi ko su same shi ba.\nZa ka iya har yanzu raba hanyar haɗin aikinka da abokanka. Za ka iya canza ganuwa ta danna alamar makulli.\nIdan ka saita \"%programName%\" na jama'a, sauran masu amfani za su iya ganinsa da samunsa.\nEh, saita na jama'a\nEh, saita na sirri\nA'a\n"
+  reportCommentConfirmation: "Ka tabbata kana son kai rahoton wannan sharhi?"
+  deleteCommentConfirmation: "Ka tabbata kana son goge wannan sharhi?"
+  deleteAccountConfirmation: "Goge asusu?\nKa tabbata kana son goge asusunka? Wannan zai goge ayyukan da ka ɗora da sharhinka ma!\nBabu hanyar dawo da abin da ka yi!\nEh, goge shi!\nSoke\n"
+  tooLongName: "Sunan aikin ya yi tsayi da yawa!"
+  tooLongDescription: "Bayanin aikin ya yi tsayi da yawa!"
+  tooLongCredits: "Bayanan kula da godiyar aikin sun yi tsayi da yawa!"
+  my_projects: "Ayyukana da na raba"
+  trending: "Ayyuka masu tasowa"
+  popular: "Shahararrun ayyuka"
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
+    viewed: "Mafi yawan kallo"
+    downloaded: "Mafi yawan saukewa"
+  random: "Ayyukan bazuwar"
+  related: "Ayyuka masu alaƙa"
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: "Bincika Ayyuka"
+    no_projects: "Har yanzu ba ka ƙirƙiri wani aiki ba"
+    no_explore: "Ba a sami ayyuka ba"
+    load_more: "Loda Ƙari"
+    upload: "Ɗora Aiki"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: "An kare"
+    day_left: "Saura kwana 1"
+    days_left: "Saura kwanaki %days%"
+    tooltip: "Ana cire ayyuka ta atomatik bayan wani lokaci na rashin aiki. Samu ƙarin saukewa ko shiga akai-akai don tsawaita adanawa."
+    tooltip_protected: "An kare wannan aikin kuma ba za a goge shi ta atomatik ba."
+  downloads: "Saukewa %downloads%"
+  sample: "Ayyukan misali"
+  views: "Kallo %views%"
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Mutanen da suka yi martani ga wannan aikin"
     all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: "{0}Remix 0 |{1}Remix 1 |]1,Inf]Remix %remixes%"
+  newRemixesNotificationTitle: "|{1}\"%programName%\" yana da sabon remix 1: |]1,Inf] \"%programName%\" yana da sababbin remix %remixes%:"
+  submitted: "Ayyukan da aka miƙa"
+  uploaded: "Ayyukan da aka ɗora"
+  reportAsInappropriate: "Kai rahoto a matsayin bai dace ba"
+  reportProgram: "Kai rahoton aiki"
+  languageVersion: "Sigar harshen Catrobat: %languageVersion%"
+  reportLoginText: "Don Allah %login% don kai rahoton wannan aikin."
+  reportDialogHeader: "Me yasa kake son kai rahoton wannan aikin?"
+  reportDialogReason: "Shigar da dalili"
+  reportRadioButtonInappropriate: "Bai dace ba"
+  reportRadioButtonCopyright: "Keta haƙƙin mallaka"
+  reportRadioButtonSpam: "Saƙon banza ne"
+  reportRadioButtonDislike: "Ba na son shi"
+  reportOwnProgram: "Ba za ka iya kai rahoton aikinka ba."
+  reportAlready: "Ka riga ka kai rahoton wannan aikin."
+  reportDone: "Ka kai rahoton wannan aikin!"
+  updateAppHeaderDownload: "Saukewa ba zai yiwu ba"
+  updateAppTextDownload: "Don Allah sabunta manhajarka zuwa sabuwar sigar. Ka sani cewa ba duk fasalolin Android ne ke samuwa a IOS ba tukuna."
+  updateAppTextDownloadApk: "Saukar da APK a yanzu yana samuwa ne kawai a Android ba a IOS ba."
+  updateAppHeader: "Sabunta manhaja"
+  updateAppText: "Don Allah sabunta manhajarka zuwa sabuwar sigar."
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Report
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  checkout_this_project: "Duba wannan aikin Catrobat"
+  show_more: "Nuna Ƙari"
+  comments: "Sharhi"
+  send: "Aika"
+  delete: "Goge"
+  report: "Kai rahoto"
+  reply: "Amsa"
+  report_popup: "An kai rahoton sharhin cikin nasara."
+  report_popup_header: "An kai rahoto"
+  deleted_popup: "An goge sharhin cikin nasara."
+  deleted_popup_header: "An goge"
+  noAdminRights: "Ba ka da haƙƙin mai gudanarwa. Don Allah shiga a matsayin Mai gudanarwa."
+  editProject: "Gyara aikin"
+  closeProjectEditor: "Rufe editan aiki"
+  closeEditorPrompt: "Kana son adana canje-canjenka?"
+  btnDiscard: "Watsar"
+  addComment: "Rubuta sharhi"
+  thumbsUp: "Babban yatsa!"
+  smile: "Murmushi!"
+  love: "Ƙauna!"
+  wow: "Kai!"
+  linkTitle: "Hanyar haɗi"
+  link: "Kwafi hanyar haɗin aiki zuwa allo"
+  reactionsText: "Martani"
+  downloadErrorText: "Kuskure ya faru yayin saukar da aikin. Don Allah sake gwadawa daga baya."
+  downloadStartText: "Saukewa ya fara..."
+  downloading: "Ana saukewa..."
+  openInApp: "Buɗe a Pocket Code"
+  downloaded: "An sauke"
+  showTranslation: "Nuna fassara"
+  hideTranslation: "Ɓoye fassara"
+  translatedByLine: "%provider% ya fassara daga %sourceLanguage% zuwa %targetLanguage%"
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  confrimDelete: "Ka tabbata kana son goge fassarar?"
+  default: "Tsoho"
+  save: "Adana"
+  translationTitle: "Fassarar %language%"
+  editDefault: "Gyara tsoho"
+  editTranslation: "Gyara fassarar %language%"
+  translations: "Fassarori"
+  createTranslation: "Ƙirƙiri fassara"
+  deletedComment: "**An goge**"
+  replyLabel: "amsa"
+  repliesLabel: "amsoshi"
+  notForKids: "Bai dace da yara ba"
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
+  title: "Remix"
+  showRemixGraph: "Jadawalin remix"
   by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
-  projectsLabel: 'Projects'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  open: "Buɗe"
+  showPaths: "Nuna Hanyoyi"
+  loading: "Ana loda jadawalin remix..."
+  error: "Ba a iya loda jadawalin remix ba."
+  empty: "Har yanzu babu bayanan jadawalin remix don wannan aikin."
+  remixesLabel: "Remix"
+  projectsLabel: "Ayyuka"
+  scratchLabel: "Tushen Scratch"
+  interactHint: "Zaɓi wani kumburi don buɗe aikin ko haskaka hanyar remix ɗinsa."
+  zoomIn: "Zuƙowa ciki"
+  zoomOut: "Zuƙowa waje"
+  resetView: "Sake saita kallo"
+  projectNotAvailableErrorTitle: "Yi haƙuri..."
+  projectNotAvailableErrorDescription: "Aikin baya samuwa kuma!"
+  projectNotAvailable: "Baya samuwa"
+  projectUnknownUser: "Mai amfani da ba a sani ba"
+noReply: "Wannan saƙo ne na atomatik - Don Allah kada ka amsa wannan imel kai tsaye."
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
-  message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  message: "Masoyi %username%.\nDon kammala kunna asusunka - don Allah ziyarci %confirmationUrl%\nZa a iya amfani da wannan hanyar haɗi sau ɗaya kawai don tabbatar da asusunka.\nGaisuwa mafi kyau,\nƘungiyar Catrobat.\n"
+  messageHtml: "<p>\nMasoyi %username%.<br>\n<br>\nDon kammala kunna asusunka - don Allah danna <a href=\"%confirmationUrl%\">nan.</a><br>\nZa a iya amfani da wannan hanyar haɗi sau ɗaya kawai don tabbatar da asusunka.<br>\n<br>\nGaisuwa mafi kyau,<br>\nƘungiyar Catrobat.\n</p>\n"
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "Tabbatar da adireshin imel ɗinka"
+  welcome: "Barka da zuwa Catrobat!"
+  greeting: "Na gode da yin rajista! Don Allah tabbatar da adireshin imel ɗinka don farawa."
+  message: "Danna maɓallin da ke ƙasa don tabbatar da imel ɗinka. Wannan hanyar haɗi tana aiki har zuwa %time% kuma za a iya amfani da ita sau ɗaya kawai."
+  button: "Tabbatar da Adireshin Imel"
+  ignore: "Idan ba kai ka ƙirƙiri asusun Catrobat ba, za ka iya watsi da wannan imel."
+  autoDelete: "Ana goge asusun da ba a tabbatar ba ta atomatik bayan kwanaki 30."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "Ana buƙatar izinin iyaye don asusun Catrobat na ɗanka"
+    title: "Ana Buƙatar Izinin Iyaye"
+    greeting: "Sannu,"
+    message: "Ɗanka %username% ya ƙirƙiri asusu a Catrobat kuma ya tabbatar da adireshin imel ɗinsa."
+    explanation: "Catrobat dandali ne na ilimi kyauta inda matasa ke koyon shirye-shirye ta hanyar ƙirƙirar manhajoji, wasanni da zane-zane masu motsi. Ƙarƙashin dokokin kare yara na EU, muna buƙatar izininka kafin ɗanka ya iya shiga cikin al'umma gaba ɗaya. Don Allah danna maɓallin da ke ƙasa don ba da izini."
+    button: "Ba da Izinin Iyaye"
+    ignore: "Idan ba ka yi tsammanin wannan imel ba, za ka iya watsi da shi. Ba tare da izini ba, asusun zai sami iyakantaccen aiki."
+    whatIsCatrobat: "Catrobat dandali ne na koyon shirye-shirye kyauta, mara riba. Ƙara koyo a catrobat.org."
+    manageLink: "Za ka iya sarrafa asusun ɗanka a kowane lokaci ta <a href=\"%portalUrl%\" style=\"color: #00acc1;\">Shafin Iyaye</a>. Ƙara koyo game da <a href=\"%infoUrl%\" style=\"color: #00acc1;\">haƙƙoƙinka a matsayin iyaye</a>."
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "An Ba da Izini"
+    message: "Na gode! An kunna asusun %username% gaba ɗaya yanzu."
+    continueButton: "Gano ayyuka"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Iyaye & Masu Kula"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Bayani ga Iyaye & Masu Kula"
+    intro: "Catrobat tana ɗaukar tsaro da sirrin matasa masu amfani da muhimmanci. Wannan shafi yana bayyana yadda muke kare ɗanka da haƙƙoƙin da kake da su."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Menene Catrobat?"
+      text: "Catrobat dandali ne na ilimi kyauta, mara riba inda matasa ke koyon shirye-shirye ta hanyar ƙirƙirar nasu manhajoji, wasanni da zane-zane masu motsi. Dandalin yana samuwa a duk duniya kuma ana amfani da shi a wuraren ilimi."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Waɗanne bayanai muke tattarawa?"
+      text: "Muna tattara mafi ƙarancin bayanan da ake buƙata don gudanar da dandalin: sunan mai amfani, adireshin imel, ranar haihuwa, da duk ayyukan da ɗanka ya ƙirƙira ya ɗora. Ga masu amfani ƙasa da shekara 14, muna kuma adana adireshin imel na iyaye/mai kula don dalilan izini. Ba ma sayar ko raba bayanan sirri da wasu."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Haƙƙoƙinka a matsayin iyaye ko mai kula"
+      text: "Ƙarƙashin dokokin kare yara na EU (GDPR) da COPPA, kana da haƙƙin: duba bayanan da muke riƙe game da ɗanka, neman kwafin waɗannan bayanai, janye izininka a kowane lokaci (wanda zai takaita asusun), da neman goge asusun ɗanka da duk bayanan da ke da alaƙa har abada."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Waɗanne iyakoki ne ke aiki ga asusun ƙananan yara?"
+      text: "Masu amfani ƙasa da shekara 16 ba za su iya rubuta ko karanta sharhi ba, bin wasu masu amfani, ko duba abubuwan da aka yiwa alamar ba su dace da yara ba. Har yanzu za su iya ƙirƙira da ɗora ayyuka, bincika ayyukan jama'a, da yin martani ga ayyuka. Waɗannan iyakoki suna nan don samar da yanayin koyo mai aminci."
+    manageButton: "Sarrafa Asusun Ɗanka"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Shafin Iyaye"
+    description: "Shigar da adireshin imel ɗinka don karɓar amintacciyar hanyar haɗi don sarrafa asusun Catrobat na ɗanka. Za a aika hanyar haɗin zuwa adireshin imel da ka bayar yayin rajista."
+    emailLabel: "Adireshin imel ɗinka"
+    submitButton: "Aika Hanyar Haɗin Sarrafawa"
+    infoLink: "Ƙara Koyo"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Duba akwatin saƙonka"
+      message: "Idan akwai asusun da ke da alaƙa da wannan imel, mun aika hanyar haɗin sarrafawa. Don Allah duba akwatin saƙonka kuma bi hanyar haɗin don sarrafa asusun ɗanka."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Sarrafa Asusun Yara"
+    description: "Kana sarrafa asusun da ke da alaƙa da %email%."
+    consentStatus: "Matsayin izini"
+    accountCreated: "An ƙirƙiri asusu"
+    email: "Imel na yaro"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "An ba da"
+      pending: "Ana jira"
+      revoked: "An janye"
+    grantButton: "Ba da Izini"
+    revokeButton: "Janye Izini"
+    revokeConfirm: "Ka tabbata kana son janye izini? Asusun zai sami iyakantaccen aiki."
+    exportButton: "Fitar da Bayanai"
+    deleteButton: "Goge Asusu"
+    deleteConfirm: "Ka tabbata kana son goge wannan asusu har abada? Ba za a iya soke wannan ba."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Sarrafa asusun Catrobat na ɗanka"
+      title: "Sarrafa Asusu"
+      greeting: "Sannu,"
+      message: "Ka nemi hanyar haɗi don sarrafa asusun Catrobat na ɗanka (%usernames%). Danna maɓallin da ke ƙasa don duba da sarrafa asusun."
+      button: "Sarrafa Asusu"
+      ignore: "Idan ba kai ka nema ba, za ka iya watsi da wannan imel."
 passwordRecovery:
   subject: Your Catrobat Password Recovery
-  message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
-    <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
-    <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  message: "Masoyi %username%.\nKa nemi sake saita kalmar sirrinka a %appplication_url% saboda ka manta kalmar sirrinka.\nIdan ba kai ka nema ba, don Allah ka yi watsi da shi. Zai ƙare kuma ya zama mara amfani cikin awanni 24.\nDon sake saita kalmar sirrinka da ƙirƙirar sabuwa, don Allah ziyarci shafi mai zuwa: %confirmationUrl%\nZa ka iya amfani da sunan mai amfani da kalmar sirrinka a kowane lokaci don shiga al'ummar %appplication_url%.\nDon yin haka, kawai ziyarci shafi mai zuwa: %loginPage%\nDon gyara bayanan bayananka, je wannan shafi: %profilePage%\nGaisuwa mafi kyau,\nƘungiyar Catrobat.\n"
+  messageHtml: "<p>\nMasoyi %username%.<br>\n<br>\nKa nemi sake saita kalmar sirrinka a <a href=\"%appplication_url%\">Pocket Code</a> saboda ka manta kalmar sirrinka.\nIdan ba kai ka nema ba, don Allah ka yi watsi da shi. Zai ƙare kuma ya zama mara amfani cikin awanni 24.<br>\n<br>\nDon sake saita kalmar sirrinka da ƙirƙirar sabuwa, don Allah danna <a href=\"%confirmationUrl%\">nan.</a><br>\n<br>\nZa ka iya amfani da sunan mai amfani da kalmar sirrinka a kowane lokaci don shiga al'ummar <a href=\"%appplication_url%\">Pocket Code</a>.<br>\nDon yin haka, kawai ziyarci shafi mai zuwa: <a href=\"%loginPage%\">Shafin Shiga</a><br>\nDon gyara bayanan bayananka, je wannan <a href=\"%profilePage%\">shafi</a>.<br>\n<br>\nGaisuwa mafi kyau,<br>\nƘungiyar Catrobat.\n</p>\n"
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  aboutMe: "Game da ni"
+  currentlyWorkingOn: "Abin da nake aiki a kai yanzu"
+  edit: "Gyara bayananka"
+  saveChanges: "adana canje-canje"
+  newPass: "sabuwar kalmar sirri"
+  repeatPass: "maimaita kalmar sirri"
+  oldPass: "tsohuwar kalmar sirri"
+  firstEmail: "Imel ɗina na farko"
+  secondEmail: "Imel ɗina na biyu"
+  myPrograms: "Ayyukana"
+  follows: "Yana bi"
+  follower: "Mabiyi"
+  unfollowUser: "Daina bin wannan mai amfani!"
+  followUser: "Bi wannan mai amfani!"
+  amountOfPrograms: "Adadin ayyuka"
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
-  changePicture: Change picture
-  goToScratchProfile: Profile on Scratch
+    passwordTooShort: "Sabuwar kalmar sirri dole ta kasance da aƙalla haruffa %length%."
+    passwordTooLong: "Sabuwar kalmar sirri za ta iya samun haruffa %length% a mafi yawa."
+    passwordIsUsername: "Kalmar sirri dole ta bambanta da sunan mai amfani."
+    passwordWrong: "Kalmar sirri ba daidai ba ce"
+    emailNotValid: "Wannan adireshin imel bai inganta ba."
+    emailMissing: "Kuskure yayin sabunta wannan adireshin imel. Dole ne ka sami aƙalla adireshin imel ɗaya da aka tabbatar."
+    emailExists: "Wannan adireshin imel ya riga ya wanzu."
+    usernameNotValid: "Wannan sunan mai amfani bai inganta ba."
+    usernameMissing: "Dole ne ka sami sunan mai amfani."
+    usernameExists: "Wannan sunan mai amfani ya riga ya wanzu."
+    usernameContainsEmail: "Sunan mai amfani bai kamata ya ƙunshi adireshin imel ba."
+    submitSuccess: "an adana!"
+  reallyDeleteProgram: "Da gaske kana son goge aikinka"
+  programsOf: "Ayyukan"
+  picture: "Hoton bayanai"
+  changePicture: "Canza hoto"
+  goToScratchProfile: "Bayanai a Scratch"
 myprofile:
-  userSettings: User settings
-  profileSettings: Edit profile
-  securitySettings: Change password
+  userSettings: "Saitunan mai amfani"
+  profileSettings: "Gyara bayanai"
+  securitySettings: "Canza kalmar sirri"
   accountSettings: Account Settings
-  accountVerification: Verify account
-  account: Account
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
-  email: Email
+  accountVerification: "Tabbatar da asusu"
+  account: "Asusu"
+  editProfile: "Gyara bayanai"
+  edit: "Gyara"
+  done: "An gama"
+  checkMail: "An aika imel zuwa adireshin imel ɗinka. Don Allah duba akwatin saƙonka."
+  passwordUpdated: "An sabunta kalmar sirrinka cikin nasara."
+  avatar: "Hoton wakilci"
+  email: "Imel"
   deleteAccount: Delete Account
-  deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  deleteAccountWarning: "Ka sani:\nKa ƙirƙiri aiki(ayyuka) %num_projects% kuma kana da mabiyi(mabiya) %num_followers%. Za a cire duk ayyukanka. Ba za ka iya shiga kuma ba kuma ayyukanka za su ɓace daga duk jerin. Ba za a iya soke goge bayananka ba!\nKa tabbata kana son barin mu?\n"
+  exportData: "Sauke bayanai na"
+  exportDataDescription: "Kana da haƙƙin karɓar kwafin bayananka na sirri. Wannan ya haɗa da bayanan bayananka, ayyuka, sharhi, martani da mabiya."
+  exportDataLoading: "Ana saukewa..."
+  exportDataError: "Wani abu ya faru ba daidai ba yayin fitar da bayananka. Don Allah sake gwadawa daga baya."
+  exportDataRateLimited: "Za ka iya fitar da bayananka sau ɗaya kawai a rana. Don Allah sake gwadawa gobe."
+  editAccountSettings: "Gyara saitunan asusu"
+  profileChangeSuccess: "An canza bayananka cikin nasara."
+  unspecifiedError: "Wani abu bai yi aiki ba yayin canza bayananka. Don Allah sake gwadawa ko sanar da mu idan ya ci gaba da faruwa!"
+  verifyAccountText: "Za mu aika maka imel tare da hanyar haɗi don tabbatar da asusunka. Tabbatar ka danna hanyar haɗin cikin awa ɗaya mai zuwa, an ba ka damar neman imel ɗaya kawai a rana."
+  verifyAccountButton: "Aika imel"
+  verifyAccountMailSent: "An aika imel cikin nasara. Don Allah duba akwatin saƙonka"
+  verifyAccountMailFailed: "Za ka iya neman imel ɗaya kawai a rana"
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  link: "Lasisin yin wasa"
+  title: "Lasisin yin wasa - Ba da yabo kuma raba"
+  text1: "Ka yi tunanin kowane aikin Catrobat wainar biki ne, waina ta musamman da ta zo da girke-girkenta (tubalan shirye-shirye). Duk membobin al'ummar Catrobat suna raba wainarsu tare da girke-girkensu. Wannan yana nufin za ka iya jin daɗin wainar kuma ka koyi yadda za ka yi su da kanka!"
+  text2: "Babu girke-girke na sirri: umarnin yadda ake yin waɗannan waina a buɗe suke ga kowa ya yi amfani da su, sake amfani, gyara, kuma su zama abin ƙarfafa sabbin ra'ayoyi... wato waina."
+  text3: "Za ka iya cin wainar kuma ka kwafi girke-girken wasu don yin naka, wataƙila da sinadarai daban. Wannan 'yanci ya zo da buƙatu biyu masu sauƙi:"
+  text4: "Wajen kafa al'ummar Catrobat, mun yanke shawarar ɗaukar wannan hanya saboda mun yi imani tana tallafa wa koyo da kirkira a cikin al'umma. Ta hanyar raba girke-girke da sinadarai (rubuce-rubuce da zane-zane), mutane za su iya gina kan ra'ayoyin juna kuma kowa zai amfana."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: "Ƙara koyo game da sharuɗɗan amfani na al'ummar Catrobat ta yanar gizo a %link-termsOfUse%."
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: "raba wainarka tare da girke-girken"
+    item2: "ba da yabo ga waɗanda suka ƙarfafa ka"
+  version: "Siga 1.1, 2 ga Afrilu 2013"
 termsOfUse:
-  title: Terms of Use
+  title: "Sharuɗɗan Amfani"
   headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text1: "A matsayin ɓangare na al'ummar Catrobat, kana raba ayyuka da ra'ayoyi da mutane:"
+  text2: "Muna buƙatar taimakonka don sanya wannan al'umma wuri mai tallafi ga kowane memba. Ga yadda za ka taimaka:"
+  text3: "Ta hanyar aikin Catrobat muna son haɓaka haɗin kai da ba da damar kirkirar kowa ta haɗu don amfanin dukan bil'adama. Kai ma za ka iya zama memba mai himma na al'ummar Catrobat ta hanyar mayar da ayyukanka ga al'umma a matsayin kyauta, kamar yadda sauran membobi masu himma ke ba ka ayyukansu:"
+  text4: "Kyautarmu gare ka:"
+  text5: "Sharuɗɗanmu na Amfani da Sabis:"
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: "daga ƙasashe da al'adu daban-daban"
+    item2: "na kowane shekaru (daga ƙananan yara zuwa matasa da kakanni)"
+    item3: "da kowane matakin ƙwarewa"
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: "Ka kasance mai girmamawa. Yayin raba ayyuka, don Allah ka tuna cewa mutane masu shekaru da asali daban-daban za su ga gudummawarka."
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item3: "Ka kasance mai gaskiya. Kada ka yi kamar wani ne ba kai ba ko ka yi ƙoƙarin yaudarar al'umma."
+    item4: "Ka kiyaye bayananka na sirri. Kada ka raba adireshin imel ɗinka, lambar wayarka ko wasu bayanan tuntuɓar sirri."
+    item5: "Taimaka wajen kiyaye shafin abokantaka. Idan kana jin wasu za su ɗauki wani aiki ko sharhi a matsayin mugunta, zagi, tashin hankali da yawa, ko bai dace ba ta wata hanya, kawai danna maɓallin 'kai rahoto a matsayin bai dace ba' kuma bar ɗan gajeren bayani. Ƙungiyar Catrobat za ta duba rahotonka kuma za ta iya cire kowane aiki, sharhi ko rubutu."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Ta hanyar ɗora aiki zuwa shafukanmu, ka yarda kuma ka amince da sanya wannan aiki ƙarƙashin wasu lasisoshi kyauta na ayyukan Catrobat da aka ɗora. Kamar lasisoshin kyauta da tsarin Catrobat kansa ke samuwa gare ka, waɗannan lasisoshin kyauta suna ba kowa haƙƙin koyo daga aikin da wasu suka ɗora a baya da daidaita da yin remix na wannan aiki don gina nasu sabbin wasanni masu ban sha'awa, zane-zane masu motsi, da sauran ayyuka. Wannan yana ba kowa damar 'tsayawa a kan kafaɗun takwarorinsa', ɗaya daga cikinsu kai ne! Aikinka zai amfani dukan duniya kuma ya kasance kyauta ga kowa ya yi amfani da shi, ɗan kama da rubutu da hotuna da masu sa kai daga ko'ina cikin duniya ke ba da gudummawa kyauta ga Wikipedia. Ka ɗauke shi a matsayin kyautarka ga bil'adama: kana ba kowa, kuma duk sauran da ke ɗora aikinsu zuwa shafukanmu suna ba ka. Don haka aikin da aka ɗora kyauta ce mai daraja da mai shi ke ba ka kyauta, da sharaɗin ka shiga cikin al'umma bisa sharuɗɗa iri ɗaya."
+    item2: "Ba dole ne ka karɓi kyautar ba; idan ka karɓa, wasu dokoki suna aiki. Amfanin waɗannan dokoki shine za ka iya koyo daga aikin kuma ka gina a kai don yin abubuwa masu kyau fiye da haka da kanka, waɗanda za ka iya, misali, sake ɗorawa zuwa shafukanmu a matsayin naka. Wani amfani kuma shine waɗannan lasisoshi suna tabbatar da cewa ba za a ɗora maka alhakin duk wata matsala da ta taso ga wasu ta hanyar amfani da aikinka ba."
+    item3: "Wani muhimmin ƙarin sharaɗi shine ka ba da yabo a fili ga marubutan da ka gina aikinka a kan ayyukansu. A lokaci guda, za mu yi aiki tuƙuru don wasu su gane a fili cewa kai ne ka ba da gudummawar aikinka, ta hanyar ba da yabo ga sunan musamman da ka zaɓa da kanka don wakiltar ka a al'ummar Catrobat, da kuma ba wasu damar nuna godiyarsu gare ka a bainar jama'a saboda ba da aikinka ga kowa, musamman gare su."
+    item4: "Don Allah duba %link-licenseUploaded% don ainihin sharuɗɗan doka."
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "Muna ba ka duk namu manhajoji da albarkatun Intanet masu alaƙa da tsarin Catrobat, misali, manhajojin da ƙungiyar Catrobat ta rubuta, shafukanmu da albarkatun Intanet, namu lambar tushe mai alaƙa da tsarin Catrobat, da duk ƙarin kayan da aka haɗa kamar, misali, hotuna, sautuka da rubutu, yanzu da nan gaba ƙarƙashin lasisoshin kyauta na Catrobat."
+    item2: "Waɗannan lasisoshi suna sanya duk sassan Catrobat kyauta gare ka da kuma 'yanci ta ma'anar ba ka 'yancin amfani da su yadda kake so, tare da 'yan iyakoki kaɗan da ke tabbatar, a tsakanin wasu, cewa tsarin Catrobat zai kasance kyauta kuma mai amfani ga kowa har abada."
+    item3: "Don Allah duba %link-licenseToPlay% don ainihin sharuɗɗan doka. Lambar tushe ta tsarin Catrobat da sauran takardu da albarkatu da yawa suna samuwa ta %link-developer%."
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: "Idan kai, ko, idan shekarunka ƙasa da 13, iyayenka ko masu kula da kai na doka, kuna da alaƙa da wata ƙungiya da ke da hannu ko alhakin keta sirri irin na taru da/ko sa ido na gama-gari, to ba a ba ka damar amfani da manhajojinmu da samun damar ayyukanmu ba. Ainihin cikakkun bayanai na wannan iyaka da wasu keɓancewa an bayyana su a Sashe 4.a da 4.b a %link-termsOfUse%."
+    item2: "Idan shekarunka ƙasa da 13, to dole ne ka tambayi iyayenka ko masu kula da kai na doka ko sun ba ka damar amfani da Manhajoji da Ayyukan Catrobat."
+    item3: "Muna da haƙƙin ƙin karɓa, goge, ko ɓoye ayyuka, asusun masu amfani, da duk wani kayan dijital da aka ɗora zuwa shafukan Catrobat a kowane lokaci bisa ra'ayinmu kaɗai, misali idan muka gano cewa aiki ya ƙunshi abubuwan da ba su dace ba ko mai amfani yana keta haƙƙoƙin wasu mutane."
+    item4: "Ana ba da duk manhajoji da albarkatun Intanet na Catrobat da fatan za su zama masu amfani, amma ba tare da wani garanti ba."
+    item5: "Don Allah duba %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service don ainihin bayanin abubuwan da ke sama da wasu ƙarin sharuɗɗan doka."
+  bottom1: "Ka dawo nan lokaci zuwa lokaci, saboda koyaushe muna ƙoƙarin inganta Sharuɗɗanmu na Amfani."
+  bottom2: "Don Allah aika duk wata shawara game da waɗannan Sharuɗɗan Amfani zuwa %email-webmaster%."
+  version: "Siga 1.3, 4 ga Maris 2014"
 search:
-  dotdotdot: Search...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
+  dotdotdot: "Bincika..."
+  search: "Bincika ayyuka, masu amfani & situdiyo"
+  inMediaLib: "Bincika a ɗakin kafofin watsa labarai"
+  inMediaCategory: "Bincika a rukunin kafofin watsa labarai"
   results: Search Results
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  resultcount: "Bincikenka ya dawo da sakamako %count%"
+  fail: "Don Allah shigar da aƙalla kalmar bincike ɗaya"
+  noUsers: "Ba a sami masu amfani ba"
+  noProjects: "Ba a sami ayyuka ba"
+  noStudios: "Ba a sami situdiyo ba"
+  sameSearchMessage: "Da alama kana nan riga! Gwada wani bincike daban?"
 menu:
-  profile: Profile
-  login: Login
-  logout: Logout
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
-  language: Language
-  languageOptionsNotAvailable: No language options available.
+  profile: "Bayanai"
+  login: "Shiga"
+  logout: "Fita"
+  admin: "Mai gudanarwa"
+  home: "Gida"
+  helpAndTutorials: "Taimako & koyarwa"
+  followersAndFollowing: "Mabiya"
+  mediaLibrary: "Ɗakin kafofin watsa labarai"
+  studio: "Situdiyo"
+  language: "Harshe"
+  languageOptionsNotAvailable: "Babu zaɓuɓɓukan harshe."
 login:
-  login: Login
+  login: "Shiga"
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: "Shiga yanzu"
+    createAccount: "Ƙirƙiri asusu"
+    forgetPassword: "Ka manta kalmar sirri?"
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+    title: "Ko za ka iya shiga da"
+  passOrUser: "Kalmar sirrinka ko sunan mai amfani ba daidai ba ne."
+  accountSuspended: "An dakatar da asusunka. Idan kana ganin kuskure ne, don Allah tuntuɓi tallafi."
+  noUsername: "Ba a sami sunan mai amfani ko adireshin imel ɗinka ba."
+  forgotPass: "Ka manta kalmar sirri ko sunan mai amfani?"
+  recoverPassSend: "An aika imel zuwa adireshin imel ɗinka. Don Allah duba akwatin saƙonka."
+  alreadyReset: "An riga an nemi kalmar sirri don wannan mai amfani a cikin awanni 24 da suka gabata."
+  confirmationSend: "An aika imel don tabbatar da rajistarka zuwa adireshin imel ɗinka. Don Allah duba akwatin saƙonka kuma kunna asusunka."
+  userOrEmail: "Sunan mai amfani ko Imel"
+  changePass: "Canza kalmar sirri"
+  createAccount: "Ƙirƙiri asusu"
+  noAccount: "Ba ka da asusu?"
+  alreadyAccount: "Kana da asusu riga?"
   or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
+  username: "Sunan mai amfani"
+  email: "Imel"
+  passwordFirst: "Kalmar sirri"
   passwordSecond: Password Confirm
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: "Yi rajista"
+  subText: "Ta hanyar ci gaba, kana kafa asusun al'ummar Catrobat kuma ka amince da %var1% da %var2% ɗinmu."
+  dateOfBirth: "Ranar haihuwa"
+  dateOfBirthInfo: "Muna tambayar ranar haihuwarka don bin dokokin kare yara na EU (GDPR/COPPA) da samar da ƙwarewa mai aminci ga ƙananan masu amfani."
+  parentEmail: "Imel na iyaye/mai kula"
+  parentEmailInfo: "Ana buƙata ga masu amfani ƙasa da shekara 14. Za mu aika buƙatar izini zuwa wannan adireshi."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: Continue
+    title: "Kammala rajistarka"
+    info: "Don Allah bayar da ranar haihuwarka don ci gaba da amfani da dandalin."
+    submit: "Ci gaba"
   button:
-    cancel: Cancel
-    createAccount: Create account
+    cancel: "Soke"
+    createAccount: "Ƙirƙiri asusu"
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Duba akwatin saƙonka!"
+    message: "Mun aika maka imel na tabbatarwa. Danna hanyar haɗin da ke cikin imel don kunna asusunka."
+    helpTitle: "Ba ka sami imel ba?"
+    hint: "Duba babban fayil na spam. Hanyar haɗin tana aiki na awanni 24."
+    resendButton: "Sake aika imel na tabbatarwa"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "Ana jiran izinin iyaye"
+    message: "An tabbatar da imel ɗinka! Kafin ka iya amfani da dandalin gaba ɗaya, iyaye ko mai kula yana buƙatar ba da izini."
+    sentTo: "An aika buƙatar izini zuwa %email%"
+    helpTitle: "Ba ka sami imel ba? Kana buƙatar taimako?"
+    hint: "Ka tambayi iyayenka su duba babban fayil na spam. Hanyar haɗin tana aiki na awanni 24."
+    resendButton: "Sake aika imel na izini"
+    wrongEmail: "Ka shigar da imel na iyaye ba daidai ba?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "An janye izinin iyaye"
+    message: "Iyayenka ko mai kula da kai ya janye izini don asusunka. Asusunka yana da iyakantaccen aiki har sai an sake ba da izini."
+    newEmailPlaceholder: "Sabon imel na iyaye"
+    changeButton: "Sabunta & sake aikawa"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: "Dawo da asusu"
+  description: "Idan ka tuna imel ko sunan mai amfani na asusunka za mu iya aika maka hanyar haɗi don sake saita kalmar sirrinka."
   button:
-    cancel: Cancel
-    submit: Recover password
+    cancel: "Soke"
+    submit: "Dawo da kalmar sirri"
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Sake saita kalmar sirrinka"
+    description: "Idan ka tuna imel na asusunka za mu iya aika maka hanyar haɗi don sake saita kalmar sirrinka."
     button:
-      submit: "Send reset email"
-      cancel: "Cancel"
+      submit: "Aika imel na sake saitawa"
+      cancel: "Soke"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "Duba imel ɗinka"
+    description: "Idan akwai asusun da ya dace da imel ɗinka, to yanzu an aika imel da ke ƙunshe da hanyar haɗi da za ka iya amfani da ita don sake saita kalmar sirrinka. Wannan hanyar haɗi za ta ƙare cikin %time%."
+    descriptionTwo: "Za ka iya neman sabon sake saita kalmar sirri kowane awanni %throttleLimit%."
+    descriptionThree: "Idan ba ka sami imel ba don Allah duba babban fayil na spam ko rubuta imel zuwa tallafinmu a %email-webmaster%."
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "Don sake saita kalmar sirrinka, don Allah ziyarci hanyar haɗi mai zuwa"
+    expire: "Wannan hanyar haɗi za ta ƙare cikin %time%."
+    cheers: "Sai anjima!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "Sake saita kalmar sirrinka"
+    content: "Kwanan nan ka nemi sake saita kalmar sirri don asusunka na Catrobat. Danna maɓallin da ke ƙasa don zaɓar sabuwar kalmar sirri. Idan ba kai ka nema ba, za ka iya watsi da wannan imel."
+    visitLink: "Sake Saita Kalmar Sirri"
+    expire: "Wannan hanyar haɗi tana aiki na %time% kuma za a iya amfani da ita sau ɗaya kawai."
   reset:
-    title: "Reset your password"
+    title: "Sake saita kalmar sirrinka"
     button:
-      submit: "Reset password"
+      submit: "Sake saita kalmar sirri"
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: "Sauke a matsayin manhaja"
+  prepare: "Samu a matsayin manhaja"
+  preparing: "Ana shirya manhaja"
+  text: "Aikin zai iya ɗaukar ɗan lokaci"
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: "Wani abu bai yi aiki ba. Don Allah sake gwadawa ko sanar da mu idan ya ci gaba da faruwa!"
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: "Sunan mai amfani ba zai zama fanko ba"
+    invalid: "Sunan mai amfaninka bai inganta ba"
+    exists: "Wannan sunan mai amfani ya riga ya wanzu."
+    not_exists: "Wannan sunan mai amfani bai wanzu ba."
+    not_email: "Sunan mai amfani ba zai zama adireshin imel ba."
+    size: "Sunan mai amfani dole ya kasance da aƙalla haruffa 3 kuma bai wuce 180 ba"
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: "Babu kalmar sirri."
+    short: "Kalmar sirrinka dole ta kasance da aƙalla haruffa {{ limit }}."
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: "Babu ƙasa."
+    invalid: "Ƙasa ba ta inganta ba"
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    blank: "imel ba zai zama fanko ba"
+    invalid: "Da alama imel ɗinka bai inganta ba"
+    exists: "Wannan adireshin imel ya riga ya wanzu."
   id:
     blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
+  login: "Kalmar sirri ko sunan mai amfani ba daidai ba ne."
   post-data: POST-Data not correct or missing!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: "Abokin ciniki bai aika fileChecksum ba! Shin kana amfani da tsohuwar sigar Pocket Code?"
+    invalid: "checksum bai inganta ba"
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: "lambar xml ba ta inganta ba"
+    missing: "kuskure da ba a sani ba: project_xml_not_found!"
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: "an sami fayil da ba a zata ba"
+    invalid: "fayil bai inganta ba"
+  image.missing: "XML na aiki ya ambaci fayil da babu shi a babban fayil na aiki"
+  unknown: "kuskure da ba a sani ba"
+  token: "Tantance na'ura ya gaza: auth-token bai inganta ba!"
+  uploadTokenAuthFailed: "Tantance alamar ɗorawa ya gaza."
   project:
-    invalid: Invalid project.
+    invalid: "Aiki bai inganta ba."
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: "Yi haƙuri, aikinka ya ƙunshi tsohuwar sigar harshen Catrobat! Shin kana amfani da sabuwar sigar Pocket Code?"
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "Yi haƙuri, kana amfani da tsohuwar sigar Pocket Code. Don Allah sabunta zuwa sabuwar sigar."
   authentication:
-    title: Login did not work
-    webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+    title: "Shiga bai yi aiki ba"
+    webview: "Da alama sunan mai amfani ko kalmar sirrinka ba daidai ba ne.\nDon Allah sake gwada shiga a cikin manhajar.\n"
 success:
-  text: Success
-  registration: Registration successful!
+  text: "Nasara"
+  registration: "Rajista ta yi nasara!"
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: "An ɗora aikinka cikin nasara!"
+  imgUpload: "An ɗora hotonka cikin nasara!"
+  report: "An aika rahotonka cikin nasara!"
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: "{0} < minti 1 da ya wuce |{1}minti 1 da ya wuce |]1,Inf] mintuna %count% da suka wuce"
+  hours.ago: "{1}awa 1 da ya wuce |]1,Inf] awanni %count% da suka wuce"
+  days.ago: "{1}kwana 1 da ya wuce |]1,Inf] kwanaki %count% da suka wuce"
+  months.ago: "{1}wata 1 da ya wuce |]1,Inf] watanni %count% da suka wuce"
+  years.ago: "{1}shekara 1 da ya wuce |]1,Inf] fiye da shekara ɗaya da ya wuce"
 failure:
-  upload: There was an error during the upload of your app.
+  upload: "An sami kuskure yayin ɗora manhajarka."
 user:
   verification:
-    email: 'Verify your email'
+    email: "Tabbatar da imel ɗinka"
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: "Babu imel"
+    emailEmpty: "Imel ba zai zama fanko ba"
+    emailInvalid: "Imel bai inganta ba"
+    emailAlreadyInUse: "Ana amfani da imel riga"
+    usernameMissing: "Babu sunan mai amfani"
+    usernameTooShort: "Sunan mai amfani ya yi gajere da yawa"
+    usernameTooLong: "Sunan mai amfani ya yi tsayi da yawa"
+    usernameEmpty: "Sunan mai amfani ba zai zama fanko ba"
+    usernameAlreadyInUse: "Ana amfani da sunan mai amfani riga"
+    usernameInvalid: "Sunan mai amfani bai inganta ba"
+    passwordMissing: "Babu kalmar sirri"
+    passwordEmpty: "Kalmar sirri ba za ta zama fanko ba"
+    passwordTooShort: "Kalmar sirri ta yi gajere da yawa"
+    passwordTooLong: "Kalmar sirri ta yi tsayi da yawa"
+    passwordInvalidChars: "Kalmar sirri tana ƙunshe da haruffa marasa inganci"
+    usernameContainsEmail: "Sunan mai amfani bai kamata ya ƙunshi adireshin imel ba"
+    usernameContainsLink: "Sunan mai amfani bai kamata ya ƙunshi hanyar haɗi ba"
+    countryCodeInvalid: "Lambar ƙasa ba ta inganta ba"
+    pictureInvalid: "Hoton bayanai bai inganta ba ko ba a goyon bayansa"
+    dateOfBirthMissing: "Ana buƙatar ranar haihuwa"
+    dateOfBirthInvalid: "Ranar haihuwa ba ta inganta ba"
+    tooYoung: "Dole ne ka kasance aƙalla shekara 3 don ƙirƙirar asusu"
+    parentEmailMissing: "Ana buƙatar imel na iyaye ga masu amfani ƙasa da shekara 14"
+    parentEmailInvalid: "Imel na iyaye bai inganta ba"
+    parentEmailSameAsUser: "Imel na iyaye dole ya bambanta da naka adireshin imel"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Babu kalmar sirri ta yanzu"
+    currentPasswordWrong: "Kalmar sirri ta yanzu ba daidai ba ce"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: "Suna ba zai zama fanko ba"
+    nameTooLong: "Suna ya yi tsayi da yawa"
+    descriptionTooLong: "Bayani ya yi tsayi da yawa"
+    creditsTooLong: "Bayanan kula da godiya sun yi tsayi da yawa"
+    screenshotInvalid: "Hoton allo na aiki bai inganta ba ko ba a goyon bayansa"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
+    invalid_checksum: "Checksum bai inganta ba. Sake gwada ɗorawa!"
+    upload_error: "Kuskure yayin ɗorawa. Sake gwada ɗorawa!"
     creating_error: 'Error while creating Program Entity. Try uploading again!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "An kasa adana bayanan aikin."
+    screenshotError: "An kasa karanta, canza ko adana hoton allo. Don Allah duba abin da ka shigar."
+    notFound: "Ba a sami aikin da za a canza ba."
+    forbidden: "Ba a ba da izinin canza aikin ba. Shin har yanzu kana cikin shiga?"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: "Babu suna"
+    nameEmpty: "Suna ba zai zama fanko ba"
+    nameTooShort: "Suna ya yi gajere da yawa"
+    nameTooLong: "Suna ya yi tsayi da yawa"
+    nameAlreadyInUse: "Ana amfani da suna riga"
+    descriptionMissing: "Babu bayani"
+    descriptionEmpty: "Bayani fanko ne"
+    descriptionTooShort: "Bayani ya yi gajere da yawa"
+    descriptionTooLong: "Bayani ya yi tsayi da yawa"
+    imageFileInvalid: "Fayil na hoto bai inganta ba"
+    imageFileInvalidType: "Nau'in fayil na hoto bai inganta ba"
+    imageFileTooLarge: "Fayil na hoto ya yi girma da yawa"
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  arabic: "Larabci"
+  bulgarian: "Bulgaranci"
+  catalan: "Katalanci"
+  chinese_simplified_han: "Sinanci (Han mai sauƙi)"
+  chinese_traditional_han: "Sinanci (Han na gargajiya)"
+  croatian: "Kuroshiyanci"
+  czech: "Cek"
+  danish: "Danishanci"
+  dutch: "Holanci"
+  english_united_kingdom: "Turanci (Birtaniya)"
+  english_united_states: "Turanci (Amurka)"
+  estonian: "Istoniyanci"
+  filipino: "Filipinanci"
+  finnish: "Finlanci"
+  french: "Faransanci"
+  german: "Jamusanci"
+  greek: "Girkanci"
+  hebrew: "Ibrananci"
+  hindi: "Harshen Hindi"
+  hungarian: "Harshen Hungari"
+  indonesian: "Harshen Indonesiya"
+  italian: "Italiyanci"
+  japanese: "Japananci"
+  korean: "Koreanci"
+  latvian: "Harshen Latbiya"
+  lithuanian: "Harshen Lituweniya"
+  malay: "Harshen Malai"
+  norwegian: "Harshen Norway"
+  persian: "Farisanci"
+  polish: "Harshen Polan"
+  portuguese_brazil: "Harshen Portugal (Brazil)"
+  portuguese_portugal: "Harshen Portugal (Portugal)"
+  romanian: "Romaniyanci"
+  russian: "Rashanci"
+  serbian: "Sabiyanci"
+  slovak: "Harshen Slobakiya"
+  slovenian: "Harshen Sloveniya"
+  spanish_latin_america: "Sifaniyanci (Latin Amurka)"
+  spanish_spain: "Sifaniyanci (Sifaniya)"
+  swedish: "Harshen Suwedan"
+  thai: "Harshen Thai"
+  turkish: "Turkanci"
+  ukrainian: "Harshen Yukaran"
+  vietnamese: "Harshen Biyetinam"
 ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: "Kula da faifai"
+    ramMaintenance: "Kula da RAM"
+    noRemovableObjects: "Babu abubuwan da za a iya cirewa."
+    removableObjects: "Abubuwan da za a iya cirewa"
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: "Ayyuka masu kama"
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: "Ƙari daga %username%"
 pmd:
-  submitBtn: Submit your project
+  submitBtn: "Miƙa aikinka"
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: "Miƙawa"
+    text: "Kana gab da miƙa aikinka. Don Allah shigar da lambar aikin kuma danna aika."
+    btnText: "Miƙa"
   successful:
-    text: Your project upload was successful.
+    text: "Ɗora aikinka ya yi nasara."
   failed:
-    text: Project upload failed.
+    text: "Ɗora aiki ya gaza."
 codeview:
   title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
-  globals: 'Globals'
-  locals: 'Locals'
+  showCode: "Nuna lamba"
+  hideCode: "Ɓoye lamba"
+  showStatistics: "Nuna ƙididdigar lamba"
+  hideStatistics: "Ɓoye ƙididdigar lamba"
+  cantDisplayCode: "Ba za a iya nuna lamba ba"
+  cantDisplayStatistics: "Ba za a iya nuna ƙididdiga ba"
+  totalNumberOf: "Jimillar adadin"
+  scenes: "Fage"
+  scripts: "Rubutun umarni"
+  bricks: "Tubali"
+  objects: "'Yan wasa da abubuwa"
+  looks: "Kamanni"
+  sounds: "Sautuka"
+  globals: "Na duniya"
+  locals: "Na gida"
   globalVariables: 'Global Variables'
   localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
@@ -888,67 +827,67 @@ codeview:
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
-  scripts: 'Scripts'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  title: "Kallon Lamba"
+  loading: "Ana loda kallon lamba..."
+  error: "Ba a iya loda kallon lamba ba."
+  retry: "Sake gwadawa"
+  empty: "Wannan aikin ba shi da lamba."
+  scripts: "Rubutun umarni"
+  looks: "Kamanni"
+  sounds: "Sautuka"
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
+  general: "Gaba ɗaya"
+  bricks: "Tubali"
+  eventBricks: "Abin da ya faru"
+  controlBricks: "Sarrafawa"
+  motionBricks: "Motsi"
+  soundBricks: "Sauti"
+  looksBricks: "Kamanni"
   penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  dataBricks: "Bayanai"
+  deviceBricks: "Na'ura"
+  specialBricks: "Na musamman"
+  yourScore: "Makinka:"
+  points: "maki"
+  abstraction: "Ɓoye cikakkun bayanai da rarraba matsala"
+  parallelism: "Aiki a lokaci ɗaya"
+  logicalThinking: "Tunani mai ma'ana"
+  synchronization: "Daidaitawa"
+  flowControl: "Sarrafa gudana"
+  userInteractivity: "Hulɗar mai amfani"
+  dataRepresentation: "Wakilcin bayanai"
+  level: "Mataki"
+  loading: "Ana lodawa..."
+  bonus: "Kari"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Shiga Tare da Masu Kirkira Fiye da %user_count%!"
+  text: "Tare da Ayyuka Masu Ban Mamaki %project_count% da aka riga aka raba, na gaba zai iya zama naka. Sauke manhajarmu kuma fara ƙirƙira yau"
 privacy-policy:
   header: Privacy Policy
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: "Siga 2.2, 17 ga Oktoba 2019"
+  text1: "Don ba ka duk amfanin ayyukanmu da asusun da ke tare da su, ya zama dole mu tattara wasu bayanai daga gare ka."
+  text2: "Don kula da inganta ayyukanmu (manhajoji da shafukan yanar gizo) da yin bincike na kimiyya kan ilimin ICT da STEM/STEAM, muna amfani da Google Analytics, Crashlytics, da Firebase, duk na Google LLC (Amurka), da kuma Dynatrace na Dynatrace LLC (Amurka) don samun bayanai game da amfani da ayyukanmu, misali, bayanan faɗuwa, lokuta, shafuka/allunan da aka ziyarta, amfani da manhajojinmu da ayyukanmu, tsarin aiki da aka yi amfani da shi, da bayani game da mai ba da hanyar sadarwa. Wannan bincike da bayanan da aka tattara ba su da alaƙa da bayananka kuma ba su ƙunshi wani bayanin sirri ba (ana ɓoye ƙarshen adireshin IP). Duk da haka, za a tura bayanan da aka tattara zuwa masu ba da sabis (Google LLC, Amurka da Dynatrace LLC, Amurka). Sarrafa bayanai ya dogara ne da yarjejeniyoyi da Google LLC da Dynatrace LLC. Wannan dangantaka da masu ba da sabis ta yi daidai da Dokar Kare Bayanai ta Tarayyar Turai (EU GDPR) da yarjejeniyar EU-USA \"Privacy Shield\"."
+  text3: "Don ƙirƙira da amfani da asusu a tsarinmu, da sanar da kai game da canje-canje masu muhimmanci game da asusunka ta imel, misali, sabuntawa ko keta Sharuɗɗanmu na Amfani da Sabis, dokokin al'ummarmu, ko manufofinmu, za mu adana sunan mai amfaninka kuma, idan ka bayar, adireshin imel ɗinka. Idan ka haɗa asusunka ta Google Plus ko Facebook, muna kuma adana maɓallin ganewa da ke da alaƙa da asusunka a waɗannan ayyuka. Ba za mu yi amfani da waɗannan bayanai don wani dalili (misali, tallace-tallace) ba, sai dai idan ka ba mu izini a fili."
+  text4: "Bisa son rai, za ka iya ba mu ƙasar da kake zaune ta shafin asusunka a shafin rabawa. Za a nuna wannan a bayananka na jama'a kuma za mu yi amfani da shi kawai don dalilan ƙididdiga da bincike. Za a iya cire shi a kowane lokaci a saitunan bayananka."
+  text5: "Za ka iya janye amfani da bayanan sirri na asusunka a kowane lokaci ta hanyar goge asusunka ta shafin bayananka a https://share.catrob.at/. Bayan goge asusunka har yanzu za ka iya amfani da ayyukan da aka bayar, amma ba za ka iya haɗa kai ba, misali, ta ɗora shirye-shirye, yin sharhi, ko so. Haka kuma, za a goge duk abubuwan da aka bayar masu alaƙa da asusunka, misali, shirye-shiryen da aka ɗora, sharhi, da sauransu."
+  text6: "Don guje wa amfani da ayyukanmu ba daidai ba, misali, ta abubuwan da masu amfani suka ɗora ko sharhi don dalilai na haram, za a adana duk bayanan jama'a da masu amfani suka samar (ɗorawa, sharhi) a cikin rumbun bayanai, tare da lokaci da adireshin intanet da aka yi amfani da shi. Ba za a yi amfani da waɗannan bayanai ko tura su ga wata cibiya ba, sai dai idan ana zargin ayyukan haram sosai kuma cibiyoyin doka masu izini a hukumance suka nema bisa dokar da ta dace. Za mu fara bincika kowace shari'a sosai daban-daban."
+  text7: "Za ka iya yin rajista bisa son rai ga Wasiƙar Labarai ta Catrobat, a https://catrob.at/newsletter da muke bayarwa ta sabis ɗin MailChimp (The Rocket Science Group LLC d/b/a MailChimp, Amurka). Daga nan za ka karɓi sabuntawa game da aikin Catrobat da ayyukansa zuwa adireshin imel da ka bayar. Za ka iya janye wasiƙar labarai a kowane lokaci ta amfani da hanyar haɗin \"unsubscribe\" a ƙasan kowace wasiƙar labarai. MailChimp ne ke bayar da wannan wasiƙar labarai, wanda muke da yarjejeniyar sarrafa bayanai da shi kuma ya yi alƙawarin bin Dokar Kare Bayanai ta EU da EU-USA \"Privacy Shield\". Don ƙarin bayani game da MailChimp don Allah duba Manufar Sirri da Sharuɗɗan Amfani na MailChimp."
+  text8: "Aikin Catrobat na buɗaɗɗen tushe kyauta ne ke bayar da duk Ayyukan ƙarƙashin laimar International Catrobat Association – Verein zur Förderung freier Software, ƙungiya mara riba mai zaman kanta da aka kafa a Graz, Austria (Tarayyar Turai). Manufofinmu suna girmama dokar kare bayanai ta EU da Austria (GDPR). Don tuntuɓar mu, don Allah aika imel zuwa contact@catrobat.org ko aika mana wasiƙa zuwa Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Tarayyar Turai)."
+  text9: "Idan shekarunka ƙasa da 14, dole ne mai kula da kai na doka (yawanci iyaye) ya amince da wannan manufar."
+  text10: "Manufar sirri ta hukuma ta Catrobat a harshen Turanci tana samuwa a yanar gizo a %privacy_policy%."
+  disagree-text: "Ba tare da amincewa ba, ba za mu iya ƙirƙirar asusu ba amma ainihin fasalolin har yanzu suna samuwa."
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: "Yiwa alamar an karanta"
+  noFollowers: "Da alama ba ka da sanarwar mabiya."
+  noComments: "Da alama ba ka da sanarwar sharhi."
+  noReactions: "Da alama ba ka da sanarwar martani."
+  noRemixes: "Da alama ba ka da sanarwar remix."
+  noStudios: "Da alama ba ka da sanarwar situdiyo."
   tab:
-    studio: Studio
-    project: Projects
+    studio: "Situdiyo"
+    project: "Ayyuka"
   comment:
     message: 'User %user_link% commented on your project %program_link%.'
   like:
@@ -956,40 +895,40 @@ catro-notifications:
   follow:
     message: 'User %user_link% follows you now.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% ya ƙirƙiri sabon wasa %program_link%."
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% ya yi sharhi a situdiyo %studio_name%."
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% ya ƙara %program_link% zuwa situdiyo %studio_name%."
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "An karɓi buƙatarka ta shiga situdiyo %studio_name%."
+    declined: "An ƙi buƙatarka ta shiga situdiyo %studio_name%."
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "Za a goge aikinka %program_link% ta atomatik cikin kwanaki %days%. Ɗora sabuwar siga ko samu ƙarin saukewa don adana shi."
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "An cire aikinka \"%project_name%\" ta atomatik saboda rashin aiki. Sake ɗora shi idan har yanzu kana son raba shi."
+  noProjects: "Da alama ba ka da sanarwar ayyuka."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: "An kwafi hanyar haɗi zuwa allo!"
+  success_project: "An kwafi hanyar haɗin aiki zuwa allo!"
+  success_user: "An kwafi hanyar haɗin mai amfani zuwa allo!"
+  fail: "An kasa kwafin hanyar haɗi zuwa allo! :("
+next: "Na gaba"
+previous: "Na baya"
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: "Ɗakin Kafofin Watsa Labarai"
+  description: "A cikin rukunan da ke biye za ka iya samun 'yan wasa da abubuwa don ƙarawa ga ayyukanka."
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: "Girman samfoti"
+    sm: "ƙarami"
+    md: "matsakaici"
+    lg: "babba"
+  theme-special: "Na Musamman na Jigon %flavor%"
+  search-results: "Sakamakon bincike a ɗakin kafofin watsa labarai"
+  no-results: "Bincikenka ya dawo da sakamako 0. Don Allah yi amfani da kalmomin bincike na Turanci kawai."
+  download_these_files: "adana"
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +936,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: "Haƙƙin mallaka &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. An kiyaye duk haƙƙoƙi."
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Wannan shafin yana buƙatar JavaScript don yin aiki. Don Allah kunna JavaScript a burauzarka ko ka nemi babba ya taimake ka."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
-  privacy-link: "Privacy Policy"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  message: "Muna amfani da kukis don taimakawa inganta ayyukanmu. Ba a sayar ko raba wani bayani."
+  accept: "Karɓa"
+  decline: "Ƙi"
+  privacy-link: "Manufar Sirri"
+  settings-link: "Saitunan Kukis"
+agree: "Na amince"
+disagree: "Ban amince ba"
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: "A yanzu babu bayanan masu amfani."
+element: "Abu"
+elements: "Abubuwa"
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: "Raba"
+  error: "Rabawa ya gaza"
+  success: "Rabawa ya yi nasara"
+copy: "Kwafi hanyar haɗi"
+checkOutProject: "Duba wannan aikin:"
+checkOutUser: "Duba wannan mai amfani:"
+community: "Al'ummar Catrobat"
+back_to_app: "Fita daga al'umma"
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: "Sababbin ayyuka"
+  random: "Ayyukan bazuwar"
+  most_viewed: "Mafi yawan kallo"
+  most_downloaded: "Mafi yawan saukewa"
+  example: "Misali"
+  scratch: "Remix na Scratch"
+  recommended: "Ayyukan da aka ba da shawara"
+  popular: "Mafi shahara"
+  trending: "Ayyuka masu tasowa"
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: "Nasarori"
     badge: 'new'
   overview:
-    header: 'Achievements'
+    header: "Nasarori"
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: "Sabuwar Nasara"
+      x_out_of_y: "An buɗe %unlocked% daga cikin %total%"
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: "An buɗe"
+      empty: "Har yanzu ba ka buɗe wata nasara ba."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: "A kulle"
+      empty: "Ka riga ka buɗe duk nasarori."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: "Taya murna!"
+      subtitle: "Ka sami lamba"
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: "Nasarori"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: "Mai koyon sana'a"
+        description: "Bi wani kuma ɗora aiki"
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: "Ma'aikacin sana'a"
+        description: "Memba mai himma fiye da shekara 1"
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: "Gwani"
+        description: "Memba mai himma fiye da shekaru 4"
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: "Babban gwani"
+        description: "Memba mai himma fiye da shekaru 7"
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: "Ƙoƙari"
+        description: "Ƙara hoton bayananka na farko"
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: "Sabon shiga"
+        description: "Ƙirƙiri asusun mai amfani"
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Mahalarcin Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Mai harshe biyu"
+        description: "Fassara ayyukanka zuwa harsuna 2"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Mai harshe uku"
+        description: "Fassara ayyukanka zuwa harsuna 3"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Masanin harsuna"
+        description: "Fassara ayyukanka zuwa harsuna 5"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "An tabbatar"
+        description: "Tabbatar da Asusunka"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: "{0} |{1} Alama |]1,Inf] Alamomi"
   tag:
     game:
-      title: Game
+      title: "Wasa"
     animation:
-      title: Animation
+      title: "Zane mai motsi"
     story:
-      title: Story
+      title: "Labari"
     music:
-      title: Music
+      title: "Kiɗa"
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: "Na gwaji"
     tutorial:
-      title: Tutorial
+      title: "Koyarwa"
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: "{0} |{1} Ƙari |]1,Inf] Ƙarin abubuwa"
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: "Jirgi mara matuƙi"
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: "Ɗinkin ado"
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: "'Yan wasa da yawa"
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  cancel_studio: 'Cancel'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
-  report: 'Report'
-  public: 'public'
-  private: 'Invite-only'
+  title: "Situdiyo"
+  singular: "Situdiyo"
+  create_studio: "Ƙirƙiri situdiyo"
+  delete_studio: "Goge situdiyo"
+  cancel_studio: "Soke"
+  studio_name: "Sunan situdiyo"
+  studio_description: "Bayanin situdiyo"
+  is_public: "Mayar da shi na jama'a?"
+  enable_comments: "Kunna sharhi?"
+  cover_image: "Ɗora hoton murfi"
+  cover_image_empty: "Ba a zaɓi hoto ba."
+  cover_image_hint: "Mafi yawa 1 MB. Tsarukan da aka karɓa: JPEG, PNG, GIF, WebP."
+  cover_image_compressed: "An matsa hoton ta atomatik don dacewa da iyakar 1 MB."
+  cover_image_compressing: "Ana matsa hoto..."
+  cover_image_still_too_large: "Hoton ya yi girma da yawa ko bayan matsawa. Don Allah zaɓi ƙaramin fayil."
+  cover_image_invalid_type: "Nau'in hoto bai inganta ba. Don Allah yi amfani da JPEG, PNG, GIF, ko WebP."
+  cover_image_compression_failed: "An kasa sarrafa hoton. Don Allah gwada wani fayil daban."
+  cover_image_alt: "Hoton murfinka"
+  cover_image_remove: "Cire hoto"
+  popular: "Shahararrun Situdiyo"
+  join: "Shiga"
+  leave: "Bari"
+  report: "Kai rahoto"
+  public: "na jama'a"
+  private: "Ta gayyata kawai"
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'Open'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
-    cancel: 'Cancel'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    joined_studios: "Situdiyon da aka shiga"
+    public_studios: "Situdiyon jama'a"
+    private_studios: "Situdiyon ta gayyata kawai"
+    no_studios: "Babu situdiyo tukuna"
+    my_studios: "Situdiyona"
+    explore: "Bincika Situdiyo"
+    no_joined: "Har yanzu ba ka shiga wani situdiyo ba"
+    joined: "An shiga"
+    load_more: "Loda Ƙari"
+    open: "Buɗe"
+    share: "Raba"
+    share_success: "An kwafi hanyar haɗi zuwa allo!"
+    leave_confirm_title: "Bar wannan situdiyo?"
+    cancel: "Soke"
+    cancel_request: "Soke Buƙata"
+    cancel_request_confirm_title: "Soke buƙatar shiga?"
+    admin: "Mai gudanarwa"
+    member: "Memba"
   details:
-    add_project: 'click to add the project'
+    add_project: "danna don ƙara aikin"
     add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
-    delete_it: 'Delete'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    showMore: "nuna ƙari"
+    showLess: "nuna kaɗan"
+    are_you_sure: "Ka tabbata?"
+    no_way_of_return: "Ba za a iya soke wannan ba."
+    delete_it: "Goge"
+    remove_project: "Cire daga situdiyo"
+    remove_project_error: "An kasa cire aiki daga situdiyo."
+    remove_project_success: "An cire aiki daga situdiyo cikin nasara."
+    no_projects: "Situdiyo bai ƙunshi wani aiki ba tukuna."
     projects:
-      title: 'Projects'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
-      download: 'Download'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
-    report: 'Report'
-    pending: 'Pending'
-    decline: 'Declined'
+      title: "Ayyuka"
+      addProject: "Ƙara Ayyuka"
+      open_project: "Buɗe aiki"
+      download: "Sauke"
+      share: "Raba"
+      remove_from_studio: "Cire daga situdiyo"
+      remove_from_studio_title: "Cire aiki daga situdiyo?"
+      remove_from_studio_text: "Za ka iya sake ƙara shi daga baya idan ka canza ra'ayi."
+      share_success: "An kwafi hanyar haɗi zuwa allo!"
+      share_fail: "An kasa kwafin hanyar haɗi."
+      no_projects_empty_state: "Ba ka da ayyukan da za ka ƙara tukuna. Fara ƙirƙirar ɗaya a Pocket Code!"
+      add_selected: "Ƙara Waɗanda Aka Zaɓa"
+    no_available_projects: "Babu ayyukan da za a ƙara."
+    updateCoverError: "Wani abu ya faru ba daidai ba yayin sabunta murfin situdiyo."
+    join: "Shiga"
+    leave: "Bari"
+    report: "Kai rahoto"
+    pending: "Ana jira"
+    decline: "An ƙi"
     comments:
-      title: 'Comments'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      title: "Sharhi"
+      type_something: "Rubuta wani abu"
+      replies: "amsoshi"
+      send: "aika"
+      no_comments: "Wannan situdiyo ba shi da sharhi tukuna."
+      disabled_comments: "An kashe sharhi don wannan situdiyo."
+      remove_comment: "Cire sharhi"
+      post_error: "Wani abu ya faru ba daidai ba yayin aika sharhinka. Sake gwadawa daga baya."
+      remove_error: "Wani abu ya faru ba daidai ba yayin cire sharhin. Sake gwadawa daga baya."
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: "Ayyukan da aka yi"
+      join_studio: "%user% ya shiga situdiyo."
+      add_project: "%user% ya ƙara aiki."
+      add_comment: "%user% ya bar sharhi."
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: "Membobin situdiyo"
+      project_count: "{0} Babu ayyukan situdiyo |{1} Aikin situdiyo 1 |]1,Inf] Ayyukan situdiyo %count%"
+      no_studio_projects: "Babu ayyukan situdiyo"
+      one_studio_project: "Aikin situdiyo 1"
+      n_studio_projects: "Ayyukan situdiyo %count%"
+      promote_member: "Ɗaga memba zuwa mai gudanarwa"
+      promotion_failed: "Wani abu ya faru ba daidai ba yayin ɗaga wannan memba. Sake gwadawa daga baya."
+      ban_member: "Hana memba daga situdiyo"
+      ban_failed: "Wani abu ya faru ba daidai ba yayin hana wannan memba. Sake gwadawa daga baya."
+      demote_member: "Sauke mai gudanarwa zuwa memba"
+      demotion_failed: "Wani abu ya faru ba daidai ba yayin sauke wannan mai gudanarwa. Sake gwadawa daga baya."
+      last_admin: "Ba za a iya sauke mai gudanarwa na ƙarshe na wannan situdiyo ba."
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      title: "Buƙatun Shiga"
+      accept: "Karɓa"
+      decline: "Ƙi"
+      accept_success: "An karɓi buƙatar shiga."
+      decline_success: "An ƙi buƙatar shiga."
+      error: "Wani abu ya faru ba daidai ba. Don Allah sake gwadawa."
+      no_requests: "Babu buƙatun shiga da ke jira."
     show_more: 'More information'
     show_less: 'Less information'
     admin_settings:
-      title: 'Settings'
-      studio_name: 'Studio Name'
-      studio_description: 'Description'
-      toggle_allow_comments: 'Comments'
-      toggle_privacy: 'Public'
+      title: "Saituna"
+      studio_name: "Sunan Situdiyo"
+      studio_description: "Bayani"
+      toggle_allow_comments: "Sharhi"
+      toggle_privacy: "Na jama'a"
 media_library:
   file:
-    size: 'Size: %size%'
+    size: "Girma: %size%"
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: "Nau'i: hoto"
+      project: "Nau'i: aiki"
+      sound: "Nau'i: sauti"
+      movie: "Nau'i: bidiyo"
+      default: "Nau'i: ba a sani ba"
+  no_categories: "Babu rukunan kafofin watsa labarai tukuna."
+  no_results: "Ba a sami sakamako ba."
+  assets_count: "kayayyaki"
+  view_all: "Duba duka"
+  view_all_category: "Duba duk %category%"
+  back_to_app: "Koma manhaja"
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: "Aikin da aka nema baya samuwa"
+  project_not_for_kids: "An yiwa aikin alamar bai dace da yara ba!"
+  project_safe_for_kids: "An yiwa aikin alamar ya dace da yara!"
+  project_not_for_kids_moderator: "Mai daidaitawa ne ya yiwa aikin alama. Ba za ka iya soke wannan ba!"
+  project_set_private: "An saita aikin na sirri."
+  project_set_public: "An saita aikin na jama'a."
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "Ƙarin bayani: additionalInfo"
+    feature_1: "Fasalin featureName baya samuwa daga maintenanceStart har zuwa maintenanceEnd"
+    feature_2: "Fasalin"
+    feature_3: "Fasalin"
+MarkNotForKids: "Yiwa alamar bai dace da yara ba"
+MarkSafeForKids: "Yiwa alamar ya dace da yara"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "Tabbatarwa"
+  confirmMark: "Ka tabbata kana son yiwa wannan aikin alamar bai dace da yara ba?"
+  confirmUnmark: "Ka tabbata kana son cire alamar bai dace da yara ba daga wannan aikin?"
+  confirmYes: "Eh, ci gaba!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Kai rahoton wannan %content_type%"
+    reason_placeholder: "Don Allah bayyana dalilin da yasa kake kai rahoton wannan..."
+    submit: "Aika Rahoto"
+    success: "An aika rahotonka. Na gode."
+    error: "Wani abu ya faru ba daidai ba. Don Allah sake gwadawa."
+    duplicate: "Ka riga ka kai rahoton wannan abun."
+    trust_too_low: "Asusunka sabo ne sosai don kai rahotanni."
+    unverified: "Don Allah tabbatar ka shiga kuma an tabbatar da imel na asusunka."
+    rate_limited: "Kana aika rahotanni da sauri sosai. Don Allah jira ka sake gwadawa."
+    suspended: "An dakatar da asusunka."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
-    cancel: "Cancel"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    button: "Ɗaukaka ƙara"
+    title: "Ɗaukaka ƙara kan wannan hukunci"
+    placeholder: "Bayyana dalilin da yasa bai kamata a ɓoye wannan abun ba..."
+    submit: "Aika Ƙara"
+    cancel: "Soke"
+    success: "An aika ƙararka don dubawa."
+    already_pending: "Kana da ƙara da ke jira riga."
+    error: "Wani abu ya faru ba daidai ba. Don Allah sake gwadawa."
+    rate_limited: "Kana aika ƙararraki da sauri sosai. Don Allah jira ka sake gwadawa."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Kana aika sharhi da sauri sosai. Don Allah jira ɗan lokaci."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Kana yin martani da sauri sosai. Don Allah jira ɗan lokaci."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Kana bi/daina bi da sauri sosai. Don Allah jira ɗan lokaci."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Kana yin ayyukan situdiyo da sauri sosai. Don Allah jira ɗan lokaci."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "An ɓoye wannan aikin saboda rahotannin al'umma."
+    comment: "An ɓoye wannan sharhi saboda rahotannin al'umma."
+    user: "An ɓoye wannan bayanin mai amfani saboda rahotannin al'umma."
+    user_own: "An dakatar da asusunka saboda rahotannin al'umma. Za ka iya ɗaukaka ƙara kan wannan hukunci."
+    studio: "An ɓoye wannan situdiyo saboda rahotannin al'umma."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "An ɓoye %content_type% ɗinka saboda rahotannin al'umma. Za ka iya ɗaukaka ƙara kan wannan hukunci."
+    appeal_approved: "An amince da ƙararka. Abunka yana bayyane kuma yanzu."
+    appeal_rejected: "An duba ƙararka kuma hukuncin ɓoye abunka yana nan."
+    admin_review_needed: "An ɓoye abu ta atomatik kuma yana buƙatar dubawa."
+Reports: "Rahotanni"
+members: "membobi"
