@@ -1,831 +1,829 @@
 ---
 #homepage translation
 title: Catrobat заједница
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: Дели, откривај и ремиксуј креативне пројекте направљене уз Catrobat. Придружи се светској заједници младих стваралаца који праве игре, анимације и апликације.
+meta.description.media.library: Прегледај и преузми бесплатне медије за Catrobat — звукове, слике и још много тога за своје пројекте.
+meta.og.title.login: Пријави се на Catrobat
+meta.og.description.login: Пријави се да би делио своје Catrobat пројекте са заједницом.
+meta.og.title.register: Направи Catrobat налог
+meta.og.description.register: Придружи се Catrobat заједници и почни још данас да делиш своје креативне пројекте.
+meta.og.description.profile: '%username% на Catrobat-у – погледај пројекте и достигнућа.'
 localLanguage: Енглески
 username: Корисничко име
 password: Лозинка
-createNewPassword: Create new password
+createNewPassword: Направи нову лозинку
 accountSettings: Подешавања налога
-email: E-Мail
+email: Имејл
 aboutPocketCode: О Pocket Code
 about: О Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
+education: Образовање
+chat: Ћаскање и форуми
+privacyGuide: Водич за свест о приватности
+others: Остало
 tutorials: Помоћ
-googlePlay: Гугл продавница
-iosAppStore: IOS продавница апликација
+googlePlay: Google Play Store
+iosAppStore: iOS App Store
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Discord ћаскање
 passwordsNoMatch: Лозинке се не подударају.
-error: Oops!
+error: Упс!
 cancel: Откажи
 confirm: Потврди
 report: Пријави
 report.title: Пријави
-deleteIt: Да, избришите!
-reportIt: Да, пријавите!
-areYouSure: Да ли сте сигурни?
-noWayOfReturn: Нема начина да обновите своје поступке!
+deleteIt: Да, обриши!
+reportIt: Да, пријави!
+areYouSure: Да ли си сигуран?
+noWayOfReturn: Ово не може да се поништи!
 download: Преузми
 name: Име
-description: Description
+description: Опис
 noDescription: Нема доступног описа.
-credits: "Заслуге\n"
-noCredits: Нема доступних кредита
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+credits: Белешке и заслуге
+noCredits: Нема белешки и заслуга.
+notesAndCreditsDescription: Како си направио овај пројекат? Да ли си користио идеје, скрипте или графику других људи? Захвали им се овде.
+projectImportedFromScratch: Овај пројекат је увезен из MIT Scratch-а. Оригинални пројекат можеш погледати
+scratchImportedProjectLinkHere: овде.
 country: Држава
-loginText: пријава
+loginText: пријави се
 privacyPolicy: Правила о приватности
-imprint: Утисак
+imprint: Импресум
 projectDetails: Детаљи
-somethingWentWrong: 'Упс, дошло је до грешке.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'Молимо покушајте поново!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Ажурирајте на најновију верзију Pocket Code!'
+somethingWentWrong: Упс, нешто није успело. Покушај поново!
+accountNotVerified: Провери да ли си пријављен и да ли је имејл твог налога потврђен.
+accountSuspended: Твој налог је суспендован због пријава заједнице. На ову одлуку можеш уложити жалбу са свог профила.
+doesNotExist: Тражени ресурс не постоји.
+pleaseTryAgain: Покушај поново!
+tryAgainButton: Покушај поново
+oldVersionError: Ажурирај на најновију верзију Pocket Code-а!
 more: 'још'
 less: 'мање'
 show-more: 'Прикажи више'
 show-less: 'Прикажи мање'
 more-information: 'Више информација'
-less-information: 'Less information'
-ok: Ок
-clickToDownloadProgram: 'Да бисте преузели пример програма, кликните %link_start% овде %link_end%.'
-registrationError: 'Корисничко име или адреса е-поште је већ у употреби.'
+less-information: Мање информација
+ok: Разумем
+clickToDownloadProgram: Да би преузео пример пројекта, кликни %link_start% овде %link_end%.
+registrationError: Корисничко име или имејл адреса су већ у употреби.
 notifications: 'Обавештења'
 allNotifications: 'Све'
 FollowersNotifications: 'Пратиоци'
-LikeNotifications: 'Реакција'
-CommentNotifications: 'коментари'
-RemixNotifications: 'Remixes'
+LikeNotifications: Реакције
+CommentNotifications: Коментари
+RemixNotifications: Ремикси
 wellDone: "Добро урађено!"
 done: "Завршено!"
-notificationsReadMessage: "Изгледа као да немате никаква обавјештења"
-confirmMessage: "Да, избриши."
+notificationsReadMessage: Изгледа да немаш обавештења.
+confirmMessage: Да, обриши
 cancelMessage: "Откажи"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Обавештења нису могућа да се означе као прочитана!"
-pleaseWait: "Молимо сачекајте..."
-projects: "Пројекти на уређају"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+notificationsUnauthorizedError: Није могуће овластити корисника
+notificationsClearError: Обавештења није могуће означити као прочитана!
+pleaseWait: Сачекај...
+projects: Пројекти
+users: Корисник
+studios: Студији
+oauthPopUpTitle: Информације о пријави спољним налогом
+oauthInfo: Управо си се пријавио помоћу спољног налога. Направили смо ти насумично корисничко име. Ако желиш да промениш корисничко име или направиш нову лозинку за свој налог, иди на страницу свог профила.
+oauthHere: овде
+statistics: Статистика
+languageSelection: Избор језика
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: Тема
+  auto: Систем
+  auto_description: Прати подешавање уређаја
+  light: Светла
+  light_description: Светао изглед
+  dark: Тамна
+  dark_description: Таман изглед
   apply: 'Примени'
 indexPage:
   recommendedSection:
     info:
-      title: 'Који се програми препоручују овде?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: Који пројекти се овде препоручују?
+      description: Што више реакција (палац горе, осмех ...) твој пројекат добије, то је више на овој листи.
 follower:
-  follows: Following
+  follows: Пратиш
   followers: Пратиоци
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follow: Прати
+  username: Корисник
+  followsMe: Прати ме
+  noFollowing: Тренутно никога не пратиш.
+  noFollowers: Тренутно немаш пратиоце.
+  noOtherFollowing: Тренутно нема корисника које прати.
+  noOtherFollowers: Тренутно нема пратилаца.
+  followError: ' Тренутно нисмо могли да запратимо овог корисника.'
+  unfollowError: ' Тренутно нисмо могли да престанемо да пратимо овог корисника.'
+  unfollowQuestion: Да ли си сигуран да желиш да престанеш да пратиш овог корисника?
+  unfollowButton: Престани да пратиш %username%
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: Добро дошао на Catrobat %theme%
+    title_mindstorms: Добро дошао на Catrobat сајт за Mindstorms EV3 и NXT
+    subtitle: Прави приче, игре и још много тога...
+    subtitle_embroidery: Извези сопствене шаре на мајицама, торбама, панталонама или маски за телефон!
+    subtitle_mindstorms: Прави сопствене пројекте са својим Lego Mindstorms EV3 и NXT роботима
+    download: Преузми апликацију
+    statistics: Још статистике
+  featured: Истакнуто
   open: Отвори
   download: Преузми
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: Отпреми пројекат
+    drop_here: Превуци и пусти своју .catrobat датотеку овде
+    or_browse: или кликни да изабереш
+    button: Отпреми
+    uploading: Отпремање...
+    success: Пројекат је успешно отпремљен!
+    view_project: Погледај пројекат
+    upload_another: Отпреми још један
+    invalid_file: Изабери .catrobat датотеку
+    file_too_large: Датотека је превелика
+    error: Отпремање није успело. Покушај поново.
+    unauthorized: Мораш бити пријављен да би отпремао.
+    rate_limited: Превише отпремања. Покушај поново касније.
+    selected_file: 'Изабрана датотека:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Да ли сте сигурни?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+      file_size: Највећа величина датотеке је 100 MB.
+      app_upload: Пројекте можеш отпремити и директно из Pocket Code апликације. Имај у виду да се апликације тренутно прерађују и за сада не подржавају отпремање преко веба.
+      retention: Отпремљени пројекти се аутоматски уклањају после периода неактивности. Редовно се пријављуј или скупљај преузимања свог пројекта да би продужио његово чување.
+      protection: Модератори могу заштитити посебно добре или популарне пројекте од аутоматског брисања.
+  example: Примери
+  newest: Најновији пројекти
+  recommended: Препоручени пројекти
+  scratchremixes: Scratch ремикси
+  noProjects: Тренутно нема пројеката.
+  shareAction: Подели
+  deleteAction: Обриши пројекат
+  deleteConfirmation: |
+    Да ли си сигуран?
+    Да ли си сигуран да желиш да обришеш „%programName%“?
+    Ово не може да се поништи!
+    Да, обриши!
+    Откажи
+  deleteConfirmText: Ова радња не може да се поништи. Твој пројекат ће бити трајно обрисан.
+  deleteConfirmationTitle: Да ли си сигуран?
+  deleteNotFoundError: Пројекат за брисање није пронађен међу твојим пројектима.
+  private: приватно
+  public: јавно
+  setPrivateAction: Постави као приватно
+  setPublicAction: Постави као јавно
+  setPrivateConfirm: Поставити овај пројекат као приватан? Више се неће појављивати у резултатима претраге.
+  setPublicConfirm: Учинити овај пројекат јавним? Биће видљив свима.
+  markNotForKidsConfirm: Означити овај пројекат као неприкладан за децу?
+  markSafeForKidsConfirm: Уклонити ознаку „није за децу“ са овог пројекта?
+  nfkModeratorLocked: Ово подешавање је закључао модератор.
+  confirmSetPrivate: Да ли си сигуран да желиш да поставиш овај пројекат као приватан? Више се неће појављивати у резултатима претраге.
+  confirmSetPublic: Да ли си сигуран да желиш да учиниш овај пројекат јавним? Биће видљив свима.
+  changeVisibility: |
+    Да ли си сигуран?
+    Ако поставиш „%programName%“ као приватан, други корисници неће моћи да га виде ни пронађу.
+    Линк свог пројекта и даље можеш делити са пријатељима. Видљивост можеш променити додиром на иконицу катанца.
+    Ако поставиш „%programName%“ као јаван, други корисници ће моћи да га виде и пронађу.
+    Да, постави као јавно
+    Да, постави као приватно
+    Не
+  reportCommentConfirmation: Да ли си сигуран да желиш да пријавиш овај коментар?
+  deleteCommentConfirmation: Да ли си сигуран да желиш да обришеш овај коментар?
+  deleteAccountConfirmation: |
+    Брисање налога?
+    Да ли си сигуран да желиш да обришеш свој налог? Тиме ћеш обрисати и своје отпремљене пројекте и коментаре!
+    Ово не може да се поништи!
+    Да, обриши!
+    Откажи
+  tooLongName: Назив пројекта је предугачак!
+  tooLongDescription: Опис пројекта је предугачак!
+  tooLongCredits: Белешке и заслуге пројекта су предугачке!
+  my_projects: Моји подељени пројекти
+  trending: Пројекти у тренду
+  popular: Популарни пројекти
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
+    viewed: Највише прегледа
+    downloaded: Највише преузимања
+  random: Насумични пројекти
+  related: Слични пројекти
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: Истражи пројекте
+    no_projects: Још ниси направио ниједан пројекат
+    no_explore: Нису пронађени пројекти
+    load_more: Учитај још
+    upload: Отпреми пројекат
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: Заштићено
+    day_left: Још 1 дан
+    days_left: Још %days% дана
+    tooltip: Пројекти се аутоматски уклањају после периода неактивности. Скупљај више преузимања или се редовно пријављуј да би продужио чување.
+    tooltip_protected: Овај пројекат је заштићен и неће бити аутоматски обрисан.
+  downloads: '%downloads% преузимања'
+  sample: Примери пројеката
+  views: '%views% прегледа'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: Људи који су реаговали на овај пројекат
     all: "Све"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: '{0}0 ремикса |{1}1 ремикс |]1,Inf]%remixes% ремикса'
+  newRemixesNotificationTitle: '|{1}„%programName%“ има 1 нови ремикс: |]1,Inf] „%programName%“ има %remixes% нових ремикса:'
+  submitted: Предати пројекти
+  uploaded: Отпремљени пројекти
+  reportAsInappropriate: Пријави као неприкладно
+  reportProgram: Пријави пројекат
+  languageVersion: 'Верзија Catrobat језика: %languageVersion%'
+  reportLoginText: '%login% да би пријавио овај пројекат.'
+  reportDialogHeader: Зашто желиш да пријавиш овај пројекат?
+  reportDialogReason: Унеси разлог
+  reportRadioButtonInappropriate: Неприкладно је
+  reportRadioButtonCopyright: Кршење ауторских права
+  reportRadioButtonSpam: Ово је спам
+  reportRadioButtonDislike: Не свиђа ми се
+  reportOwnProgram: Не можеш пријавити сопствени пројекат.
+  reportAlready: Већ си пријавио овај пројекат.
+  reportDone: Пријавио си овај пројекат!
+  updateAppHeaderDownload: Преузимање није могуће
+  updateAppTextDownload: Ажурирај апликацију на најновију верзију. Имај у виду да све Android функције још нису доступне на iOS-у.
+  updateAppTextDownloadApk: Преузимање APK-а је тренутно доступно само на Android-у, а не на iOS-у.
+  updateAppHeader: Ажурирај апликацију
+  updateAppText: Ажурирај апликацију на најновију верзију.
   btnClosePopup: Ок
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
-  comments: коментари
-  send: Send
+  checkout_this_project: Погледај овај Catrobat пројекат
+  show_more: Прикажи више
+  comments: Коментари
+  send: Пошаљи
   delete: Обриши
   report: Пријави
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Да ли желите да сачувате своје измене?
+  reply: Одговори
+  report_popup: Коментар је успешно пријављен.
+  report_popup_header: Пријављено
+  deleted_popup: Коментар је успешно обрисан.
+  deleted_popup_header: Обрисано
+  noAdminRights: Немаш администраторска права. Пријави се као администратор.
+  editProject: Уреди пројекат
+  closeProjectEditor: Затвори уређивач пројекта
+  closeEditorPrompt: Да ли желиш да сачуваш измене?
   btnDiscard: Одбаци
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Реакција
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
+  addComment: Напиши коментар
+  thumbsUp: Палац горе!
+  smile: Осмех!
+  love: Љубав!
+  wow: Вауу!
+  linkTitle: Линк
+  link: Копирај линк пројекта у оставу
+  reactionsText: Реакције
+  downloadErrorText: Дошло је до грешке при преузимању пројекта. Покушај поново касније.
+  downloadStartText: Преузимање је почело...
+  downloading: Преузимање...
+  openInApp: Отвори у Pocket Code-у
+  downloaded: Преузето
+  showTranslation: Прикажи превод
+  hideTranslation: Сакриј превод
+  translatedByLine: Превео %provider% са језика %sourceLanguage% на %targetLanguage%
+  googleTranslate: Google преводилац
+  confrimDelete: Да ли си сигуран да желиш да обришеш превод?
+  default: Подразумевано
   save: Сачувај
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: 'Превод: %language%'
+  editDefault: Уреди подразумевано
+  editTranslation: 'Уреди превод: %language%'
+  translations: Преводи
+  createTranslation: Направи превод
+  deletedComment: '**Обрисано**'
+  replyLabel: одговор
+  repliesLabel: одговора
+  notForKids: Није безбедно за децу
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
-  by: 'by'
+  title: Ремикси
+  showRemixGraph: Граф ремикса
+  by: од
   open: 'Отвори'
-  showPaths: 'Show Paths'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
-  projectsLabel: 'Пројекти на уређају'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  showPaths: Прикажи путање
+  loading: Учитавање графа ремикса...
+  error: Граф ремикса није могао да се учита.
+  empty: За овај пројекат још нема података о графу ремикса.
+  remixesLabel: Ремикси
+  projectsLabel: Пројекти
+  scratchLabel: Scratch корени
+  interactHint: Изабери чвор да би отворио пројекат или истакао његову путању ремикса.
+  zoomIn: Увећај
+  zoomOut: Умањи
+  resetView: Ресетуј приказ
+  projectNotAvailableErrorTitle: Жао нам је...
+  projectNotAvailableErrorDescription: Пројекат више није доступан!
+  projectNotAvailable: Није доступно
+  projectUnknownUser: Непознат корисник
+noReply: Ово је аутоматска порука – немој одговарати директно на овај имејл.
 accountConfirmation:
-  subject: Потврда вашег Catrobat налога
+  subject: Потврда твог Catrobat налога
   message: |
-    Поштовани %username%.
-    Да бисте довршили активирање свог налога - посетите %confirmationUrl%
-    Ова веза се може користити само једном за потврђивање налога.
+    Здраво %username%,
+    Да би довршио активирање налога, посети %confirmationUrl%
+    Овај линк се може користити само једном за потврду налога.
     Срдачан поздрав,
-    Ваш Catrobat тим.
+    Твој Catrobat тим.
   messageHtml: |
     <p>
-    Поштовани %username%.<br>
+    Здраво %username%,<br>
     <br>
-    Да бисте довршили активирање свог налога - посетите <a href=%confirmationUrl%>овде.</a><br>
-    <br>
-    Ова веза се може користити само једном за потврђивање налога.<br>
+    Да би довршио активирање налога, кликни <a href="%confirmationUrl%">овде.</a><br>
+    Овај линк се може користити само једном за потврду налога.<br>
     <br>
     Срдачан поздрав,<br>
-    Ваш Catrobat тим.
+    Твој Catrobat тим.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: Потврди своју имејл адресу
+  welcome: Добро дошао на Catrobat!
+  greeting: Хвала на регистрацији! Потврди своју имејл адресу да би почео.
+  message: Кликни на дугме испод да би потврдио свој имејл. Овај линк важи до %time% и може се користити само једном.
+  button: Потврди имејл адресу
+  ignore: Ако ниси направио Catrobat налог, слободно занемари овај имејл.
+  autoDelete: Непотврђени налози се аутоматски бришу после 30 дана.
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: Потребна је родитељска сагласност за Catrobat налог твог детета
+    title: Потребна је родитељска сагласност
+    greeting: Здраво,
+    message: Твоје дете %username% је направило налог на Catrobat-у и потврдило своју имејл адресу.
+    explanation: Catrobat је бесплатна образовна платформа на којој млади уче програмирање правећи апликације, игре и анимације. Према прописима ЕУ о заштити деце, потребна нам је твоја сагласност пре него што твоје дете може у потпуности да учествује у заједници. Кликни на дугме испод да би дао сагласност.
+    button: Дај родитељску сагласност
+    ignore: Ако ниси очекивао овај имејл, слободно га занемари. Без сагласности налог ће имати ограничене функције.
+    whatIsCatrobat: Catrobat је бесплатна, непрофитна образовна платформа за програмирање. Сазнај више на catrobat.org.
+    manageLink: 'Налогом свог детета можеш управљати у било ком тренутку преко нашег <a href="%portalUrl%" style="color: #00acc1;">Портала за родитеље</a>. Сазнај више о <a href="%infoUrl%" style="color: #00acc1;">својим правима као родитеља</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: Сагласност је дата
+    message: Хвала! Налог корисника %username% је сада потпуно активиран.
+    continueButton: Откриј пројекте
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: Родитељи и старатељи
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: Информације за родитеље и старатеље
+    intro: Catrobat озбиљно схвата безбедност и приватност младих корисника. Ова страница објашњава како штитимо твоје дете и која права имаш.
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: Шта је Catrobat?
+      text: Catrobat је бесплатна, непрофитна образовна платформа на којој млади уче програмирање правећи сопствене апликације, игре и анимације. Платформа је доступна широм света и користи се у образовању.
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: Које податке прикупљамо?
+      text: 'Прикупљамо најмање податке потребне за рад платформе: корисничко име, имејл адресу, датум рођења и пројекте које твоје дете направи и отпреми. За кориснике млађе од 14 година чувамо и имејл адресу родитеља/старатеља ради сагласности. Личне податке не продајемо нити делимо са трећим лицима.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: Твоја права као родитеља или старатеља
+      text: 'Према прописима ЕУ о заштити деце (GDPR) и COPPA, имаш право да: прегледаш податке које чувамо о твом детету, затражиш копију тих података, повучеш сагласност у било ком тренутку (што ограничава налог) и затражиш трајно брисање налога свог детета и свих повезаних података.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: Која ограничења важе за налоге малолетника?
+      text: Корисници млађи од 16 година не могу да пишу ни читају коментаре, прате друге кориснике нити гледају садржај означен као неприкладан за децу. И даље могу да праве и отпремају пројекте, прегледају јавне пројекте и реагују на пројекте лајковима. Ова ограничења постоје да би се обезбедило безбедно окружење за учење.
+    manageButton: Управљај налогом свог детета
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: Портал за родитеље
+    description: Унеси своју имејл адресу да би добио безбедан линк за управљање Catrobat налогом свог детета. Линк ће бити послат на имејл адресу коју си навео при регистрацији.
+    emailLabel: Твоја имејл адреса
+    submitButton: Пошаљи линк за управљање
+    infoLink: Сазнај више
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: Провери пријемно сандуче
+      message: Ако је са овим имејлом повезан неки налог, послали смо линк за управљање. Провери пријемно сандуче и прати линк да би управљао налогом свог детета.
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: Управљање налозима деце
+    description: Управљаш налозима повезаним са %email%.
+    consentStatus: Статус сагласности
+    accountCreated: Налог направљен
+    email: Имејл детета
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: Дата
+      pending: На чекању
+      revoked: Повучена
+    grantButton: Дај сагласност
+    revokeButton: Повуци сагласност
+    revokeConfirm: Да ли си сигуран да желиш да повучеш сагласност? Налог ће имати ограничене функције.
+    exportButton: Извези податке
+    deleteButton: Обриши налог
+    deleteConfirm: Да ли си сигуран да желиш трајно да обришеш овај налог? Ово не може да се поништи.
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: Управљај Catrobat налогом свог детета
+      title: Управљање налогом
+      greeting: Здраво,
+      message: Затражио си линк за управљање Catrobat налогом свог детета (%usernames%). Кликни на дугме испод да би прегледао налог и управљао њиме.
+      button: Управљај налогом
+      ignore: Ако ово ниси затражио, слободно занемари овај имејл.
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Опоравак твоје Catrobat лозинке
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Здраво %username%,
+    Затражио си ресетовање лозинке на %appplication_url% јер си је заборавио.
+    Ако ово ниси затражио, занемари ову поруку. Захтев ће истећи и постати неважећи за 24 сата.
+    Да би ресетовао лозинку и направио нову, посети следећу страницу: %confirmationUrl%
+    Својим корисничким именом и лозинком можеш у било ком тренутку приступити заједници %appplication_url%.
+    Да би то урадио, само посети следећу страницу: %loginPage%
+    Да би уредио податке свог профила, иди на ову страницу: %profilePage%
+    Срдачан поздрав,
+    Твој Catrobat тим.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Здраво %username%,<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Затражио си ресетовање лозинке на <a href="%appplication_url%">Pocket Code</a> јер си је заборавио.
+    Ако ово ниси затражио, занемари ову поруку. Захтев ће истећи и постати неважећи за 24 сата.<br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Да би ресетовао лозинку и направио нову, кликни <a href="%confirmationUrl%">овде.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    Својим корисничким именом и лозинком можеш у било ком тренутку приступити <a href="%appplication_url%">Pocket Code</a> заједници.<br>
+    Да би то урадио, само посети следећу страницу: <a href="%loginPage%">Страница за пријаву</a><br>
+    Да би уредио податке свог профила, иди на ову <a href="%profilePage%">страницу</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Срдачан поздрав,<br>
+    Твој Catrobat тим.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Уредите свој профил
+  aboutMe: О мени
+  currentlyWorkingOn: Тренутно радим на
+  edit: Уреди свој профил
   saveChanges: сачувај измене
   newPass: нова лозинка
-  repeatPass: поновите лозинку
+  repeatPass: поново унеси лозинку
   oldPass: стара лозинка
-  firstEmail: Мој први емаил
-  secondEmail: Мој други емаил
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  firstEmail: Мој први имејл
+  secondEmail: Мој други имејл
+  myPrograms: Моји пројекти
+  follows: Прати
+  follower: Пратилац
+  unfollowUser: Престани да пратиш овог корисника!
+  followUser: Прати овог корисника!
+  amountOfPrograms: Број пројеката
   form:
     passwordTooShort: Нова лозинка мора имати најмање %length% карактера.
     passwordTooLong: Нова лозинка може имати највише %length% знакова.
     passwordIsUsername: Лозинка мора да се разликује од корисничког имена.
     passwordWrong: Погрешна лозинка
-    emailNotValid: Ова адреса е-поште није важећа.
-    emailMissing: Грешка током ажурирања ове адресе е-поште. Морате имати најмање једну потврђену адресу е-поште.
-    emailExists: Ова адреса е-поште већ постоји.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    emailNotValid: Ова имејл адреса није важећа.
+    emailMissing: Грешка при ажурирању ове имејл адресе. Мораш имати најмање једну потврђену имејл адресу.
+    emailExists: Ова имејл адреса већ постоји.
+    usernameNotValid: Ово корисничко име није важеће.
+    usernameMissing: Мораш имати корисничко име.
     usernameExists: Ово корисничко име већ постоји.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: Корисничко име не би требало да садржи имејл адресу.
     submitSuccess: сачувано!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
+  reallyDeleteProgram: Да ли стварно желиш да обришеш свој пројекат
+  programsOf: Пројекти корисника
+  picture: Слика профила
   changePicture: Измени слику
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Профил на Scratch-у
 myprofile:
-  userSettings: User settings
+  userSettings: Корисничка подешавања
   profileSettings: Уреди профил
-  securitySettings: Change password
+  securitySettings: Промени лозинку
   accountSettings: Подешавања налога
-  accountVerification: Verify account
-  account: Account
+  accountVerification: Потврди налог
+  account: Налог
   editProfile: Уреди профил
   edit: Измени
   done: Готово
-  checkMail: На вашу адресу е-поште послата је е-пошта. Проверите своје сандуче.
-  passwordUpdated: Ваша лозинка је успешно ажурирана.
-  avatar: Avatar
-  email: Е-пошта
+  checkMail: Имејл је послат на твоју адресу. Провери пријемно сандуче.
+  passwordUpdated: Твоја лозинка је успешно ажурирана.
+  avatar: Аватар
+  email: Имејл
   deleteAccount: Избриши налог
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Измените подешавања налога
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    Пази:
+    Направио си %num_projects% пројекат(а) и имаш %num_followers% пратилац(а). Сви твоји пројекти биће уклоњени. Више нећеш моћи да се пријавиш и твоји пројекти ће нестати са свих листа. Брисање профила не може да се поништи!
+    Да ли си сигуран да желиш да нас напустиш?
+  exportData: Преузми моје податке
+  exportDataDescription: Имаш право да добијеш копију својих личних података. То обухвата податке профила, пројекте, коментаре, реакције и пратиоце.
+  exportDataLoading: Преузимање...
+  exportDataError: Нешто је пошло наопако при извозу твојих података. Покушај поново касније.
+  exportDataRateLimited: Своје податке можеш извести само једном дневно. Покушај поново сутра.
+  editAccountSettings: Уреди подешавања налога
+  profileChangeSuccess: Твој профил је успешно измењен.
+  unspecifiedError: Нешто није успело при измени твог профила. Покушај поново или нам јави ако се ово понавља!
+  verifyAccountText: Послаћемо ти имејл са линком за потврду налога. Обавезно кликни на линк у року од сат времена; можеш затражити само један имејл дневно.
+  verifyAccountButton: Пошаљи имејл
+  verifyAccountMailSent: Имејл је успешно послат. Провери пријемно сандуче
+  verifyAccountMailFailed: Можеш затражити само један имејл дневно
 licenseToPlay:
   link: 'Лиценца за игру'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  title: Лиценца за игру – наведи заслуге и дели
+  text1: Замисли да је сваки Catrobat пројекат колач, веома посебан колач који долази са својим рецептом (програмским блоковима). Сви чланови Catrobat заједнице деле своје колаче заједно са рецептима. То значи да можеш уживати у колачима и научити да их сам правиш!
   text2: 'Нема тајних рецепата: упутства о томе како направити ове колаче су отворена за свакога ко их користи, поново користи, мења и служи као инспирација за нове идеје... Мислим на колаче.'
-  text3: "Можете јести колаче, као и копирати туђе рецепте како бисте направили своје, можда са различитим састојцима. Ова слобода долази са два једноставна захтева:"
+  text3: 'Можеш да једеш колаче, али и да копираш туђе рецепте да би направио своје, можда са другачијим састојцима. Ова слобода долази са два једноставна захтева:'
   text4: "Успостављајући Catrobat заједницу, одлучили смо се за овај приступ јер верујемо да подржава учење и креативност у заједници. Дељењем рецепата и састојака (скрипте и уметничка дела) људи могу надоградити идеје других и сви ће имати користи."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Сазнајте више о условима коришћења Catrobat мрежне заједнице на %link-termsOfUse%.'
+  text5: При осмишљавању Catrobat сајта додали смо функције које подстичу људе да деле и да наводе заслуге других. На страници сваког пројекта увек можеш преузети оригиналне скрипте пројекта. Ако ремиксујеш пројекат (измениш скрипте или графику и поделиш резултат), подстичемо те да наведеш заслуге у белешкама пројекта и поменеш људе и пројекат који су те инспирисали.
+  text6: Сазнај више о условима коришћења Catrobat онлајн заједнице на %link-termsOfUse%.
   list1:
-    item1: поделите своје колаче заједно са рецептом
-    item2: помените оне који су вас инспирисали
-  version: Верзија 1.1, 1. април 2013
+    item1: подели своје колаче заједно са рецептом
+    item2: наведи оне који су те инспирисали
+  version: Верзија 1.1, 2. април 2013.
 termsOfUse:
   title: Услови коришћења
   headline: Добродошли у Catrobat заједницу!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "Потребна нам је ваша помоћ како би ова заједница постала место за подршку сваком члану. Ево како можете да помогнете:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Наш поклон за вас:'
-  text5: 'Наши услови коришћена и услуге:'
+  text1: 'Као део Catrobat заједнице, делиш пројекте и идеје са људима:'
+  text2: 'Потребна нам је твоја помоћ да ова заједница постане место подршке за сваког члана. Ево како можеш да помогнеш:'
+  text3: 'Кроз пројекат Catrobat желимо да подстакнемо сарадњу и омогућимо да се креативност свих споји на добробит целог човечанства. И ти можеш постати активан члан Catrobat заједнице тако што ћеш своје пројекте поклонити заједници, на исти начин на који ти други активни чланови поклањају своје пројекте:'
+  text4: 'Наш поклон теби:'
+  text5: 'Наши Услови коришћења и услуге:'
   list1:
     item1: из многих разних земаља и култура
     item2: свих узраста (од мале деце до тинејџера и бака и дека)
     item3: са свим нивоима искуства
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Буди искрен. Немојте се претварати да сте неко други осим онога што јесте или покушавати преварити заједницу."
-    item4: "Чувајте своје личне податке. Не делите своју адресу е-поште, телефонски број или друге личне податке за контакт."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item1: Буди пун поштовања. Када делиш пројекте, имај на уму да ће твоје доприносе видети људи различитих узраста и порекла.
+    item2: Наведи заслуге. Слободно прави измењене верзије туђих пројеката – само обавезно наведи њихове ауторе. Једно место за то је одељак белешки и заслуга твог пројекта. Детаље о мењању пројеката других корисника прочитај у пасусу испод ове листе.
+    item3: Буди искрен. Немој да се претвараш да си неко други или да покушаваш да превариш заједницу.
+    item4: Чувај своје личне податке. Немој да делиш своју имејл адресу, број телефона или друге личне контакт податке.
+    item5: Помози да сајт остане пријатељски. Ако мислиш да би други неки пројекат или коментар сматрали злобним, увредљивим, превише насилним или на други начин неприкладним, само кликни на дугме „пријави као неприкладно“ и остави кратко објашњење. Catrobat тим ће прегледати твоју пријаву и може уклонити било који пројекат, коментар или објаву.
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: 'Отпремањем пројекта на наше сајтове прихваташ и пристајеш да ово дело ставиш под одређене слободне лиценце за отпремљене Catrobat пројекте. Слично слободним лиценцама под којима ти је доступан сам Catrobat систем, ове слободне лиценце отпремљених Catrobat пројеката свакоме дају право да учи из дела која су други раније отпремили и да та дела прилагођава и ремиксује како би направио сопствене нове, фасцинантне игре, анимације и друге пројекте. Тако свако може да „стоји на раменима својих вршњака“, а један од њих си и ти! Твоје дело ће тако користити целом свету и остати слободно за коришћење свима, слично тексту и сликама које добровољци из целог света слободно доприносе Википедији. Замисли то као свој поклон човечанству: ти дајеш свима, а сви остали који отпремају своја дела на наше сајтове дају теби. Отпремљени пројекат је зато поклон велике вредности који ти његов власник даје бесплатно, под условом да учествујеш у заједници под истим условима.'
+    item2: Не мораш да прихватиш поклон; ако га прихватиш, важе одређена правила. Предност ових правила је што можеш да учиш из дела и надограђујеш га да би сам направио још кул ствари, које онда можеш, на пример, поново отпремити на наше сајтове као своје. Још једна предност је што ове лиценце обезбеђују да не можеш бити одговоран за проблеме који настану другима коришћењем твог пројекта.
+    item3: Један важан додатни услов је да јасно наведеш ауторе на чијим делима си засновао своје дело. Истовремено ћемо се потрудити да други јасно цене твој допринос, тако што ћемо навести јединствено име које си слободно изабрао да те представља у Catrobat заједници и тако што ћемо другима пружити прилику да ти јавно изразе захвалност што си своје дело дао свима, а посебно њима.
+    item4: За тачне правне услове погледај %link-licenseUploaded%.
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: Сав наш софтвер и интернет ресурсе повезане са Catrobat системом, нпр. софтвер који је написао Catrobat тим, наше сајтове и интернет ресурсе, наш изворни код повезан са Catrobat системом и све додатне укључене материјале као што су, нпр., слике, звукови и текстови, нудимо ти сада и у будућности под Catrobat слободним лиценцама.
+    item2: Ове лиценце чине све делове Catrobat-а бесплатним за тебе, али и слободним у смислу да ти дају слободу да их користиш како год желиш, уз само неколико ограничења која, између осталог, обезбеђују да Catrobat систем заувек остане слободан и користан за све.
+    item3: За тачне правне услове погледај %link-licenseToPlay%. Изворни код Catrobat система, као и многи други документи и ресурси, доступни су преко %link-developer%.
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Верзија 1.3, 4. март 2014
+    item1: Ако си ти, или, ако си млађи од 13 година, твоји родитељи или законски старатељи, повезан са организацијом која учествује у масовном кршењу приватности и/или масовном надзору или је за њега одговорна, онда ти није дозвољено да користиш наше софтверске апликације и приступаш нашим услугама. Тачни детаљи овог ограничења и одређени изузеци од њега наведени су у одељцима 4.a и 4.b на нашим %link-termsOfUse%.
+    item2: Ако си млађи од 13 година, мораш питати своје родитеље или законске старатеље да ли ти дозвољавају да користиш Catrobat софтверске апликације и услуге.
+    item3: Задржавамо право да у било ком тренутку, по сопственом нахођењу, одбијемо, обришемо или сакријемо пројекте, корисничке налоге и било какве дигиталне материјале отпремљене на Catrobat сајтове, на пример ако утврдимо да пројекат садржи неприкладан материјал или да корисник крши права других особа.
+    item4: Сав Catrobat софтвер и интернет ресурси нуде се у нади да ће бити корисни, али без икакве гаранције.
+    item5: За тачне формулације горњих тачака и неке додатне правне услове погледај наше %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service.
+  bottom1: Повремено се врати овде, јер стално покушавамо да побољшамо наше Услове коришћења.
+  bottom2: Предлоге у вези са овим Условима коришћења пошаљи на %email-webmaster%.
+  version: Верзија 1.3, 4. март 2014.
 search:
   dotdotdot: Тражи...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
-  results: Резултати претраге
-  resultcount: Ваша претрага је вратила %count% резултата
-  fail: Унесите барем један термин за претрагу
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  search: Претражи пројекте, кориснике и студије
+  inMediaLib: Претражи медијатеку
+  inMediaCategory: Претражи категорију медија
+  results: Резултати за
+  resultcount: Твоја претрага је дала %count% резултата
+  fail: Унеси бар један појам за претрагу
+  noUsers: Нису пронађени корисници
+  noProjects: Нису пронађени пројекти
+  noStudios: Нису пронађени студији
+  sameSearchMessage: Изгледа да си већ овде! Пробај другачију претрагу?
 menu:
-  profile: Мој профил
-  login: Login
+  profile: Профил
+  login: Пријава
   logout: Одјави се
   admin: Админ
   home: Почетна
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
+  helpAndTutorials: Помоћ и туторијали
+  followersAndFollowing: Пратиоци
+  mediaLibrary: Медијатека
+  studio: Студији
   language: Језик
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: Нема доступних језичких опција.
 login:
-  login: Login
+  login: Пријава
   button:
-    loginNow: Login now
+    loginNow: Пријави се сада
     createAccount: Направи налог
-    forgetPassword: Forget password?
+    forgetPassword: Заборавио си лозинку?
   oauth:
-    title: Or you can join with
-  passOrUser: Лозинка или корисничко име су погрешни.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Ваше корисничко име или адреса е-поште није пронађена.
-  forgotPass: Заборавили сте лозинку или корисничко име?
-  recoverPassSend: На вашу адресу е-поште послата је е-пошта. Проверите своје сандуче.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
-  or: OR
+    title: Или се придружи помоћу
+  passOrUser: Твоја лозинка или корисничко име нису тачни.
+  accountSuspended: Твој налог је суспендован. Ако мислиш да је ово грешка, обрати се подршци.
+  noUsername: Твоје корисничко име или имејл адреса нису пронађени.
+  forgotPass: Заборавио си лозинку или корисничко име?
+  recoverPassSend: Имејл је послат на твоју адресу. Провери пријемно сандуче.
+  alreadyReset: Лозинка за овог корисника је већ затражена у последња 24 сата.
+  confirmationSend: Имејл за потврду регистрације послат је на твоју адресу. Провери пријемно сандуче и активирај свој налог.
+  userOrEmail: Корисничко име или имејл
+  changePass: Промени лозинку
+  createAccount: Направи налог
+  noAccount: Немаш налог?
+  alreadyAccount: Већ имаш налог?
+  or: ИЛИ
   username: Корисничко име
-  email: Е-пошта
+  email: Имејл
   passwordFirst: Лозинка
-  passwordSecond: Password Confirm
+  passwordSecond: Потврда лозинке
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: Региструј се
+  subText: Ако наставиш, правиш налог у Catrobat заједници и прихваташ наше %var1% и %var2%.
+  dateOfBirth: Датум рођења
+  dateOfBirthInfo: Питамо за твој датум рођења да бисмо поштовали прописе ЕУ о заштити деце (GDPR/COPPA) и обезбедили безбедно искуство млађим корисницима.
+  parentEmail: Имејл родитеља/старатеља
+  parentEmailInfo: Обавезно за кориснике млађе од 14 година. На ову адресу ћемо послати захтев за сагласност.
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: Заврши регистрацију
+    info: Унеси свој датум рођења да би наставио да користиш платформу.
     submit: Настави
   button:
     cancel: Откажи
     createAccount: Направи налог
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: Провери пријемно сандуче!
+    message: Послали смо ти имејл за потврду. Кликни на линк у имејлу да би активирао налог.
+    helpTitle: Ниси добио имејл?
+    hint: Провери фасциклу за спам. Линк важи 24 сата.
+    resendButton: Поново пошаљи имејл за потврду
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: Чека се родитељска сагласност
+    message: Твој имејл је потврђен! Пре него што будеш могао у потпуности да користиш платформу, родитељ или старатељ мора да да сагласност.
+    sentTo: Захтев за сагласност послат је на %email%
+    helpTitle: Ниси добио имејл? Треба ти помоћ?
+    hint: Замоли родитеља да провери фасциклу за спам. Линк важи 24 сата.
+    resendButton: Поново пошаљи имејл за сагласност
+    wrongEmail: Унео си погрешан имејл родитеља?
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: Родитељска сагласност је повучена
+    message: Твој родитељ или старатељ је повукао сагласност за твој налог. Твој налог има ограничене функције док се сагласност поново не да.
+    newEmailPlaceholder: Нови имејл родитеља
+    changeButton: Ажурирај и поново пошаљи
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Опоравак налога
+  description: Ако се сећаш имејла или корисничког имена свог налога, можемо ти послати линк за ресетовање лозинке.
   button:
     cancel: Откажи
-    submit: Recover password
+    submit: Опорави лозинку
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: Ресетуј лозинку
+    description: Ако се сећаш имејла свог налога, можемо ти послати линк за ресетовање лозинке.
     button:
-      submit: "Send reset email"
+      submit: Пошаљи имејл за ресетовање
       cancel: "Откажи"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: Провери имејлове
+    description: Ако постоји налог са твојим имејлом, управо је послат имејл са линком који можеш користити за ресетовање лозинке. Овај линк истиче за %time%.
+    descriptionTwo: Ново ресетовање лозинке можеш затражити сваких %throttleLimit% сати.
+    descriptionThree: Ако ниси добио имејл, провери фасциклу за спам или пиши нашој подршци на %email-webmaster%.
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: Здраво!
+    visitLink: Да би ресетовао лозинку, посети следећи линк
+    expire: Овај линк истиче за %time%.
+    cheers: Поздрав!
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: Ресетуј лозинку
+    content: Недавно си затражио ресетовање лозинке за свој Catrobat налог. Кликни на дугме испод да би изабрао нову лозинку. Ако ово ниси затражио, слободно занемари овај имејл.
+    visitLink: Ресетуј лозинку
+    expire: Овај линк важи %time% и може се користити само једном.
   reset:
-    title: "Reset your password"
+    title: Ресетуј лозинку
     button:
-      submit: "Reset password"
+      submit: Ресетуј лозинку
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
+  download: Преузми као апликацију
+  prepare: Набави као апликацију
+  preparing: Припрема апликације
   text: 'Процес може потрајати неко време'
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: Нешто није успело. Покушај поново или нам јави ако се ово понавља!
   username:
     blank: Корисничко име не сме да буде празно
-    invalid: Ваше корисничко име је неважеће
+    invalid: Твоје корисничко име није важеће
     exists: Ово корисничко име већ постоји.
     not_exists: Корисничко име не постоји.
-    not_email: Корисничко име не сме да буде адреса е-поште.
+    not_email: Корисничко име не сме бити имејл адреса.
     size: Корисничко име мора имати најмање 3 знака и не више од 180
   password:
     blank: Недостаје лозинка.
-    short: 'Лозинка мора да има најманје {{ limit }} знакова.'
+    short: Лозинка мора да има најмање {{ limit }} знакова.
   country:
     blank: Држава недостаје.
     invalid: Неважећа држава
   email:
-    blank: поље за е-пошту не сме бити празно
-    invalid: Ваша емаил адреса изгледа неважећа
-    exists: Ова адреса е-поште већ постоји.
+    blank: Имејл не сме бити празан
+    invalid: Твој имејл изгледа неважеће
+    exists: Ова имејл адреса већ постоји.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: ID за отворену потврду идентитета не сме бити празан
   login: Корисничко име или лозинка су погрешни.
-  post-data: POST-Data not correct or missing!
+  post-data: POST подаци нису исправни или недостају!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: Клијент није послао fileChecksum! Да ли користиш застарелу верзију Pocket Code-а?
+    invalid: неважећи контролни збир
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: неважећи XML кода
+    missing: 'непозната грешка: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: пронађена је неочекивана датотека
+    invalid: неважећа датотека
+  image.missing: XML пројекта помиње датотеку која не постоји у фасцикли пројекта
+  unknown: непозната грешка
+  token: 'Потврда идентитета уређаја није успела: неважећи auth-token!'
+  uploadTokenAuthFailed: Потврда токена за отпремање није успела.
   project:
-    invalid: Invalid project.
+    invalid: Неважећи пројекат.
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: Жао нам је, твој пројекат садржи стару верзију Catrobat језика! Да ли користиш најновију верзију Pocket Code-а?
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: Жао нам је, користиш стару верзију Pocket Code-а. Ажурирај на најновију верзију.
   authentication:
-    title: Login did not work
+    title: Пријава није успела
     webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+      Изгледа да корисничко име или лозинка нису тачни.
+      Покушај поново да се пријавиш у апликацији.
 success:
   text: Успешно
   registration: Успешна регистрација!
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: Твој пројекат је успешно отпремљен!
+  imgUpload: Твоја слика је успешно отпремљена!
+  report: Твоја пријава је успешно послата!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} пре < 1 минута |{1}пре 1 минута |]1,Inf] пре %count% минута'
+  hours.ago: '{1}пре 1 сата |]1,Inf] пре %count% сати'
+  days.ago: '{1}пре 1 дана |]1,Inf] пре %count% дана'
+  months.ago: '{1}пре 1 месеца |]1,Inf] пре %count% месеци'
+  years.ago: '{1}пре 1 године |]1,Inf] пре више од годину дана'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: Дошло је до грешке при отпремању твоје апликације.
 user:
   verification:
-    email: 'Verify your email'
+    email: Потврди свој имејл
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: Недостаје имејл
+    emailEmpty: Имејл не сме бити празан
+    emailInvalid: Неважећи имејл
+    emailAlreadyInUse: Имејл је већ у употреби
+    usernameMissing: Недостаје корисничко име
+    usernameTooShort: Корисничко име је прекратко
+    usernameTooLong: Корисничко име је предугачко
+    usernameEmpty: Корисничко име не сме бити празно
+    usernameAlreadyInUse: Корисничко име је већ у употреби
+    usernameInvalid: Неважеће корисничко име
+    passwordMissing: Недостаје лозинка
+    passwordEmpty: Лозинка не сме бити празна
+    passwordTooShort: Лозинка је прекратка
+    passwordTooLong: Лозинка је предугачка
+    passwordInvalidChars: Лозинка садржи неважеће знакове
+    usernameContainsEmail: Корисничко име не сме да садржи имејл адресу
+    usernameContainsLink: Корисничко име не сме да садржи линк
+    countryCodeInvalid: Неважећи код државе
+    pictureInvalid: Слика профила је неважећа или није подржана
+    dateOfBirthMissing: Датум рођења је обавезан
+    dateOfBirthInvalid: Датум рођења је неважећи
+    tooYoung: Мораш имати најмање 3 године да би направио налог
+    parentEmailMissing: Имејл родитеља је обавезан за кориснике млађе од 14 година
+    parentEmailInvalid: Имејл родитеља је неважећи
+    parentEmailSameAsUser: Имејл родитеља мора бити другачији од твоје имејл адресе
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: Недостаје тренутна лозинка
+    currentPasswordWrong: Тренутна лозинка је погрешна
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: Назив не сме бити празан
+    nameTooLong: Назив је предугачак
+    descriptionTooLong: Опис је предугачак
+    creditsTooLong: Белешке и заслуге су предугачке
+    screenshotInvalid: Снимак екрана пројекта је неважећи или није подржан
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    invalid_checksum: Неважећи контролни збир. Покушај поново да отпремиш!
+    upload_error: Грешка при отпремању. Покушај поново да отпремиш!
+    creating_error: Грешка при прављењу ентитета пројекта. Покушај поново да отпремиш!
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: Чување детаља пројекта није успело.
+    screenshotError: Читање, претварање или чување снимка екрана није успело. Провери свој унос.
+    notFound: Пројекат за измену није пронађен.
+    forbidden: Измена пројекта није дозвољена. Да ли си још пријављен?
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: Недостаје назив
+    nameEmpty: Назив не сме бити празан
+    nameTooShort: Назив је прекратак
+    nameTooLong: Назив је предугачак
+    nameAlreadyInUse: Назив је већ у употреби
+    descriptionMissing: Недостаје опис
+    descriptionEmpty: Опис је празан
+    descriptionTooShort: Опис је прекратак
+    descriptionTooLong: Опис је предугачак
+    imageFileInvalid: Неважећа датотека слике
+    imageFileInvalidType: Неважећи тип датотеке слике
+    imageFileTooLarge: Датотека слике је превелика
 #languages and countries
 language:
   arabic: Арапски
   bulgarian: Бугарски
   catalan: Каталонски
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
+  chinese_simplified_han: Кинески (поједностављени)
+  chinese_traditional_han: Кинески (традиционални)
   croatian: Хрватски
   czech: Чешки
   danish: Дански
   dutch: Холандски
-  english_united_kingdom: Енглески(Уједињено Краљевство)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
+  english_united_kingdom: Енглески (Уједињено Краљевство)
+  english_united_states: Енглески (Сједињене Државе)
+  estonian: Естонски
+  filipino: Филипински
+  finnish: Фински
+  french: Француски
+  german: Немачки
+  greek: Грчки
+  hebrew: Хебрејски
+  hindi: Хинди
+  hungarian: Мађарски
+  indonesian: Индонежански
+  italian: Италијански
+  japanese: Јапански
+  korean: Корејски
+  latvian: Летонски
+  lithuanian: Литвански
+  malay: Малајски
+  norwegian: Норвешки
+  persian: Персијски
+  polish: Пољски
+  portuguese_brazil: Португалски (Бразил)
+  portuguese_portugal: Португалски (Португалија)
+  romanian: Румунски
   russian: Руски
   serbian: Српски
   slovak: Словачки
@@ -838,159 +836,159 @@ language:
   ukrainian: Украјински
   vietnamese: Вијетнамски
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Генериши APK
+  pending: Генерисање APK-а
+  download: Преузми APK
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: Одржавање диска
+    ramMaintenance: Одржавање RAM-а
+    noRemovableObjects: Нема објеката за уклањање.
+    removableObjects: Објекти за уклањање
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: Слични пројекти
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Корисници који су преузели овај пројекат преузели су и
+  moreFromThisUser: Још од корисника %username%
 pmd:
   submitBtn: Пошаљи свој пројекат
   submitBox:
     header: Слање
-    text: You are about to submit your project. Please enter the project code and click send.
+    text: Управо ћеш предати свој пројекат. Унеси код пројекта и кликни на пошаљи.
     btnText: Предај
   successful:
-    text: Your project upload was successful.
+    text: Твој пројекат је успешно отпремљен.
   failed:
-    text: Project upload failed.
+    text: Отпремање пројекта није успело.
 codeview:
-  title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors и objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  title: Приказ кода
+  showCode: Прикажи код
+  hideCode: Сакриј код
+  showStatistics: Прикажи статистику кода
+  hideStatistics: Сакриј статистику кода
+  cantDisplayCode: Код не може да се прикаже
+  cantDisplayStatistics: Код не може да се прикаже
+  totalNumberOf: Укупан број
+  scenes: Сцене
+  scripts: Скрипте
+  bricks: Блокови
+  objects: Ликови и објекти
+  looks: Изгледи
+  sounds: Звукови
+  globals: Глобалне
+  locals: Локалне
+  globalVariables: Глобалне променљиве
+  localVariables: Локалне променљиве
+  eventBricks: Блокови догађаја
+  controlBricks: Блокови контроле
+  motionBricks: Блокови кретања
+  soundBricks: Блокови звука
+  looksBricks: Блокови изгледа
+  penBricks: Блокови оловке
+  dataBricks: Блокови података
+  specialBricks: Посебни блокови
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
-  scripts: 'Scripts'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  title: Приказ кода
+  loading: Учитавање приказа кода...
+  error: Приказ кода није могао да се учита.
+  retry: Покушај поново
+  empty: Овај пројекат нема код.
+  scripts: Скрипте
+  looks: Изгледи
+  sounds: Звукови
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
+  title: Статистика кода
+  error: Статистика кода не може да се прикаже.
+  general: Опште
+  bricks: Блокови
   eventBricks: 'Догађај'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
-  penBricks: 'Pen'
+  controlBricks: Контрола
+  motionBricks: Кретање
+  soundBricks: Звук
+  looksBricks: Изгледи
+  penBricks: Оловка
   dataBricks: 'Подаци'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  deviceBricks: Уређај
+  specialBricks: Посебно
+  yourScore: 'Твој резултат:'
+  points: поена
+  abstraction: Апстракција и разлагање проблема
+  parallelism: Паралелизам
+  logicalThinking: Логичко размишљање
+  synchronization: Синхронизација
+  flowControl: Контрола тока
+  userInteractivity: Интерактивност са корисником
+  dataRepresentation: Представљање података
+  level: Ниво
+  loading: Учитавање...
+  bonus: Бонус
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: Придружи се преко %user_count% креативних умова!
+  text: Већ је подељено %project_count% невероватних пројеката, а следећи би могао бити твој. Преузми нашу апликацију и почни да ствараш још данас
 privacy-policy:
   header: Правила о приватности
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: Верзија 2.2, 17. октобар 2019.
+  text1: Да бисмо ти понудили све предности наших услуга и припадајућег налога, неопходно је да прикупимо одређене податке о теби.
+  text2: Да бисмо одржавали и унапређивали наше услуге (апликације и сајтове) и спроводили научна истраживања о ИКТ и STEM/STEAM образовању, користимо Google Analytics, Crashlytics и Firebase, све од компаније Google LLC (САД), као и Dynatrace компаније Dynatrace LLC (САД), да бисмо добили метаподатке о коришћењу наших услуга, нпр. информације о падовима, временске ознаке, посећене странице/екране, коришћење наших апликација и услуга, коришћени оперативни систем и информације о мрежном провајдеру. Ова анализа и прикупљени подаци нису повезани са твојим профилом и не садрже личне податке (последњи делови IP адресе се анонимизују). Међутим, прикупљени подаци се преносе пружаоцима услуга (Google LLC, САД и Dynatrace LLC, САД). Обрада података се заснива на уговорима са Google LLC и Dynatrace LLC. Овај однос са пружаоцима услуга усклађен је са Општом уредбом Европске уније о заштити података (EU GDPR) и споразумом ЕУ–САД „Privacy Shield“.
+  text3: Да бисмо направили и користили налог у нашим системима и обавештавали те имејлом о неопходним променама у вези са твојим налогом, нпр. ажурирањима или кршењима наших Услова коришћења и услуге, правила заједнице или наших политика, чуваћемо твоје корисничко име и, ако си је навео, твоју имејл адресу. Ако си повезао свој налог преко Google Plus-а или Facebook-а, додатно чувамо идентификациони кључ повезан са твојим налогом на тим услугама. Ове податке нећемо користити ни у какве друге сврхе (нпр. маркетинг), осим ако нам то изричито не дозволиш.
+  text4: Добровољно нам можеш навести државу у којој живиш преко странице свог налога на сајту за дељење. Она ће бити приказана на твом јавном профилу и користићемо је само у статистичке и истраживачке сврхе. Можеш је уклонити у било ком тренутку у подешавањима профила.
+  text5: Коришћење личних података који припадају твом налогу можеш повући у било ком тренутку брисањем налога преко странице свог профила на https://share.catrob.at/. Након брисања налога и даље ћеш моћи да користиш понуђене услуге, али не и да сарађујеш, нпр. отпремањем програма, коментарисањем или лајковањем. Такође, сав садржај повезан са твојим налогом, нпр. отпремљени програми, коментари итд., биће обрисан.
+  text6: Да бисмо спречили злоупотребу наших услуга, нпр. кроз отпремања или коментаре корисника у незаконите сврхе, сви јавни подаци које генеришу корисници (отпремања, коментари) чувају се интерно у бази података, заједно са временском ознаком и коришћеном интернет адресом. Ови подаци се неће користити нити прослеђивати ниједној институцији, осим ако постоји основана сумња на довољно незаконите радње и ако их службено овлашћене правне институције затраже на основу важећег закона. Сваки случај ћемо најпре појединачно и темељно проверити.
+  text7: Можеш се добровољно претплатити на Catrobat билтен на https://catrob.at/newsletter, који пружамо преко услуге MailChimp (The Rocket Science Group LLC d/b/a MailChimp, САД). Тада ћеш на имејл адресу коју си навео добијати новости о пројекту Catrobat и његовим услугама. Билтен можеш отказати у било ком тренутку помоћу линка „unsubscribe“ у подножју сваког билтена. Билтен пружа MailChimp, са којим имамо уговор о обради података и који се обавезао на Општу уредбу ЕУ о заштити података и „Privacy Shield“ ЕУ–САД. За више детаља о MailChimp-у погледај и MailChimp-ову Политику приватности и Услове коришћења.
+  text8: Све услуге пружа бесплатни пројекат отвореног кода Catrobat под окриљем удружења International Catrobat Association – Verein zur Förderung freier Software, непрофитне невладине организације регистроване у Грацу, Аустрија (Европска унија). Наше политике поштују закон ЕУ и Аустрије о заштити података (GDPR). Да би нас контактирао, пошаљи имејл на contact@catrobat.org или нам пиши на адресу Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Европска унија).
+  text9: Ако си млађи од 14 година, ову политику мора да прихвати законски старатељ (обично родитељ).
+  text10: Званична Catrobat политика приватности на енглеском језику доступна је на вебу на %privacy_policy%.
+  disagree-text: Без сагласности не можемо да направимо налог, али основне функције су и даље доступне.
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: Означи као прочитано
+  noFollowers: Изгледа да немаш обавештења о пратиоцима.
+  noComments: Изгледа да немаш обавештења о коментарима.
+  noReactions: Изгледа да немаш обавештења о реакцијама.
+  noRemixes: Изгледа да немаш обавештења о ремиксима.
+  noStudios: Изгледа да немаш обавештења о студијима.
   tab:
-    studio: Studio
-    project: Пројекти на уређају
+    studio: Студио
+    project: Пројекти
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% је коментарисао %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% је реаговао на %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% те сада прати.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% је направио нову игру %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% је направио ремикс %program_link% твоје игре %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% је коментарисао у студију %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% је додао %program_link% у студио %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: Твој захтев за придруживање студију %studio_name% је прихваћен.
+    declined: Твој захтев за придруживање студију %studio_name% је одбијен.
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: Твој пројекат %program_link% биће аутоматски обрисан за %days% дана. Отпреми нову верзију или скупи више преузимања да би га задржао.
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: Твој пројекат „%project_name%“ је аутоматски уклоњен због неактивности. Отпреми га поново ако и даље желиш да га делиш.
+  noProjects: Изгледа да немаш обавештења о пројектима.
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
+  success: Линк је копиран у оставу!
+  success_project: Линк до пројекта је копиран у оставу!
+  success_user: Линк до корисника је копиран у оставу!
+  fail: Копирање линка у оставу није успело! :(
 next: Даље
 previous: Претходно
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: Медијатека
+  description: У следећим категоријама можеш пронаћи ликове и објекте које можеш додати у своје пројекте.
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: Величина прегледа
+    sm: мало
+    md: средње
+    lg: велико
+  theme-special: '%flavor% тематски специјал'
+  search-results: Резултати претраге медијатеке
+  no-results: Твоја претрага није дала резултате. Користи само појмове на енглеском.
+  download_these_files: сачувај
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -998,329 +996,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: Ауторска права &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Сва права задржана.
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: Овом сајту је потребан JavaScript да би радио. Укључи JavaScript у свом прегледачу или замоли одраслу особу да ти помогне.
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
+  message: Користимо колачиће да бисмо унапредили наше услуге. Никакви подаци се не продају нити деле.
+  accept: Прихвати
+  decline: Одбиј
   privacy-link: "Правила о приватности"
-  settings-link: "Cookie Settings"
+  settings-link: Подешавања колачића
 agree: Прихватам
 disagree: Не прихватам
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: Тренутно нема профила.
+element: Елемент
+elements: Елементи
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
+  text: Подели
+  error: Дељење није успело
+  success: Успешно подељено
+copy: Копирај линк
+checkOutProject: 'Погледај овај пројекат:'
+checkOutUser: 'Погледај овог корисника:'
 community: 'Catrobat заједница'
-back_to_app: 'Exit community'
+back_to_app: Изађи из заједнице
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: Најновији пројекти
+  random: Насумични пројекти
+  most_viewed: Највише прегледа
+  most_downloaded: Највише преузимања
+  example: Пример
+  scratch: Scratch ремикси
+  recommended: Препоручени пројекти
+  popular: Најпопуларније
+  trending: Пројекти у тренду
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: Достигнућа
     badge: 'ново'
   overview:
-    header: 'Achievements'
+    header: Достигнућа
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: Најновије достигнуће
+      x_out_of_y: Откључано %unlocked% од %total%
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: Откључано
+      empty: Још ниси откључао ниједно достигнуће.
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: Закључано
+      empty: Већ си откључао сва достигнућа.
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: Честитамо!
+      subtitle: Освојио си значку
       confirm: "Ок"
   profile:
-    title: 'Achievements'
+    title: Достигнућа
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: Шегрт
+        description: Запрати некога и отпреми пројекат
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: Занатлија
+        description: Активан члан дуже од 1 године
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: Мајстор
+        description: Активан члан дуже од 4 године
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: Велемајстор
+        description: Активан члан дуже од 7 година
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: Иницијатива
+        description: Додај своју прву слику профила
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: Почетник
+        description: Направи кориснички налог
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: Учесник Coding Jam-а 2021
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: Двојезичан
+        description: Преведи своје пројекте на 2 језика
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: Тројезичан
+        description: Преведи своје пројекте на 3 језика
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: Лингвиста
+        description: Преведи своје пројекте на 5 језика
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: Потврђен
+        description: Потврди свој налог
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Ознака |]1,Inf] Ознаке'
   tag:
     game:
-      title: Game
+      title: Игра
     animation:
-      title: Animation
+      title: Анимација
     story:
-      title: Story
+      title: Прича
     music:
-      title: Music
+      title: Музика
     art:
-      title: Art
+      title: Уметност
     experimental:
-      title: Experimental
+      title: Експериментално
     tutorial:
-      title: Tutorial
+      title: Туторијал
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Проширење |]1,Inf] Проширења'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: Дрон
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: Вез
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: Више играча
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: Студији
+  singular: Студио
+  create_studio: Направи студио
+  delete_studio: Обриши студио
   cancel_studio: 'Откажи'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: Назив студија
+  studio_description: Опис студија
+  is_public: Учинити јавним?
+  enable_comments: Укључити коментаре?
+  cover_image: Отпреми насловну слику
+  cover_image_empty: Слика није изабрана.
+  cover_image_hint: 'Највише 1 MB. Подржани формати: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: Слика је аутоматски компресована да би стала у ограничење од 1 MB.
+  cover_image_compressing: Компресовање слике...
+  cover_image_still_too_large: Слика је превелика и након компресије. Изабери мању датотеку.
+  cover_image_invalid_type: Неважећи тип слике. Користи JPEG, PNG, GIF или WebP.
+  cover_image_compression_failed: Обрада слике није успела. Пробај другу датотеку.
+  cover_image_alt: Твоја насловна слика
+  cover_image_remove: Уклони слику
+  popular: Популарни студији
+  join: Придружи се
+  leave: Напусти
   report: 'Пријави'
-  public: 'public'
-  private: 'Invite-only'
+  public: јавно
+  private: Само уз позив
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: Студији којима си се придружио
+    public_studios: Јавни студији
+    private_studios: Студији само уз позив
+    no_studios: Још нема студија
+    my_studios: Моји студији
+    explore: Истражи студије
+    no_joined: Још се ниси придружио ниједном студију
+    joined: Придружен
+    load_more: Учитај још
     open: 'Отвори'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share: Подели
+    share_success: Линк је копиран у оставу!
+    leave_confirm_title: Напустити овај студио?
     cancel: 'Откажи'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: Откажи захтев
+    cancel_request_confirm_title: Отказати захтев за придруживање?
     admin: 'Админ'
-    member: 'Member'
+    member: Члан
   details:
-    add_project: 'click to add the project'
-    add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Да ли сте сигурни?'
-    no_way_of_return: 'This cannot be undone.'
+    add_project: кликни да додаш пројекат
+    add: Додај
+    showMore: прикажи више
+    showLess: прикажи мање
+    are_you_sure: Да ли си сигуран?
+    no_way_of_return: Ово не може да се поништи.
     delete_it: 'Обриши'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    remove_project: Уклони из студија
+    remove_project_error: Уклањање пројекта из студија није успело.
+    remove_project_success: Пројекат је успешно уклоњен из студија.
+    no_projects: Студио још не садржи ниједан пројекат.
     projects:
-      title: 'Пројекти на уређају'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      title: Пројекти
+      addProject: Додај пројекте
+      open_project: Отвори пројекат
       download: 'Преузми'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
+      share: Подели
+      remove_from_studio: Уклони из студија
+      remove_from_studio_title: Уклонити пројекат из студија?
+      remove_from_studio_text: Можеш га поново додати касније ако се предомислиш.
+      share_success: Линк је копиран у оставу!
+      share_fail: Копирање линка није успело.
+      no_projects_empty_state: Још немаш пројекте за додавање. Прво направи један у Pocket Code-у!
+      add_selected: Додај изабрано
+    no_available_projects: Нема доступних пројеката за додавање.
+    updateCoverError: Нешто је пошло наопако при ажурирању насловне слике студија.
+    join: Придружи се
+    leave: Напусти
     report: 'Пријави'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: На чекању
+    decline: Одбијено
     comments:
-      title: 'коментари'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      title: Коментари
+      type_something: Напиши нешто
+      replies: одговори
+      send: пошаљи
+      no_comments: Овај студио још нема коментаре.
+      disabled_comments: Коментари су искључени за овај студио.
+      remove_comment: Уклони коментар
+      post_error: Нешто је пошло наопако при објављивању твог коментара. Покушај поново касније.
+      remove_error: Нешто је пошло наопако при уклањању коментара. Покушај поново касније.
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: Активности
+      join_studio: '%user% се придружио студију.'
+      add_project: '%user% је додао пројекат.'
+      add_comment: '%user% је оставио коментар.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: Чланови студија
+      project_count: '{0} Нема пројеката у студију |{1} 1 пројекат у студију |]1,Inf] %count% пројеката у студију'
+      no_studio_projects: Нема пројеката у студију
+      one_studio_project: 1 пројекат у студију
+      n_studio_projects: '%count% пројеката у студију'
+      promote_member: Унапреди члана у администратора
+      promotion_failed: Нешто је пошло наопако при унапређењу овог члана. Покушај поново касније.
+      ban_member: Забрани члану приступ студију
+      ban_failed: Нешто је пошло наопако при забрани овог члана. Покушај поново касније.
+      demote_member: Врати администратора у члана
+      demotion_failed: Нешто је пошло наопако при враћању овог администратора у члана. Покушај поново касније.
+      last_admin: Последњи администратор овог студија не може бити враћен у члана.
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      title: Захтеви за придруживање
+      accept: Прихвати
+      decline: Одбиј
+      accept_success: Захтев за придруживање је прихваћен.
+      decline_success: Захтев за придруживање је одбијен.
+      error: Нешто је пошло наопако. Покушај поново.
+      no_requests: Нема захтева за придруживање на чекању.
     show_more: 'Прикажи више'
     show_less: 'Прикажи мање'
     admin_settings:
       title: 'Подешавања'
-      studio_name: 'Studio Name'
-      studio_description: 'Description'
-      toggle_allow_comments: 'коментари'
-      toggle_privacy: 'Public'
+      studio_name: Назив студија
+      studio_description: Опис
+      toggle_allow_comments: Коментари
+      toggle_privacy: Јавно
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Величина: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: 'Тип: слика'
+      project: 'Тип: пројекат'
+      sound: 'Тип: звук'
+      movie: 'Тип: видео'
+      default: 'Тип: непознат'
+  no_categories: Још нема доступних категорија медија.
+  no_results: Нема резултата.
+  assets_count: ставки
+  view_all: Прикажи све
+  view_all_category: 'Прикажи све: %category%'
+  back_to_app: Назад у апликацију
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: Тражени пројекат није доступан
+  project_not_for_kids: Пројекат је означен као небезбедан за децу!
+  project_safe_for_kids: Пројекат је означен као безбедан за децу!
+  project_not_for_kids_moderator: Пројекат је означио модератор. Ово не можеш да поништиш!
+  project_set_private: Пројекат је постављен као приватан.
+  project_set_public: Пројекат је постављен као јаван.
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'Додатне информације: additionalInfo'
+    feature_1: Функција featureName није доступна од maintenanceStart до maintenanceEnd
+    feature_2: Функција
+    feature_3: Функција
+MarkNotForKids: Означи као небезбедно за децу
+MarkSafeForKids: Означи као безбедно за децу
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: Потврда
+  confirmMark: Да ли си сигуран да желиш да означиш овај пројекат као небезбедан за децу?
+  confirmUnmark: Да ли си сигуран да желиш да уклониш ознаку „није за децу“ са овог пројекта?
+  confirmYes: Да, настави!
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'Пријави: %content_type%'
+    reason_placeholder: Опиши зашто ово пријављујеш...
+    submit: Пошаљи пријаву
+    success: Твоја пријава је послата. Хвала ти.
+    error: Нешто је пошло наопако. Покушај поново.
+    duplicate: Већ си пријавио овај садржај.
+    trust_too_low: Твој налог је превише нов да би слао пријаве.
+    unverified: Провери да ли си пријављен и да ли је имејл твог налога потврђен.
+    rate_limited: Пребрзо шаљеш пријаве. Сачекај мало и покушај поново.
+    suspended: Твој налог је суспендован.
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: Жалба
+    title: Уложи жалбу на ову одлуку
+    placeholder: Објасни зашто овај садржај не би требало да буде сакривен...
+    submit: Пошаљи жалбу
     cancel: "Откажи"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: Твоја жалба је послата на преглед.
+    already_pending: Већ имаш жалбу на чекању.
+    error: Нешто је пошло наопако. Покушај поново.
+    rate_limited: Пребрзо шаљеш жалбе. Сачекај мало и покушај поново.
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: Пребрзо објављујеш коментаре. Сачекај тренутак.
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: Пребрзо реагујеш. Сачекај тренутак.
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: Пребрзо пратиш/престајеш да пратиш. Сачекај тренутак.
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: Пребрзо обављаш радње у студију. Сачекај тренутак.
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: Овај пројекат је сакривен због пријава заједнице.
+    comment: Овај коментар је сакривен због пријава заједнице.
+    user: Овај профил је сакривен због пријава заједнице.
+    user_own: Твој налог је суспендован због пријава заједнице. На ову одлуку можеш уложити жалбу.
+    studio: Овај студио је сакривен због пријава заједнице.
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: Твој садржај (%content_type%) је сакривен због пријава заједнице. На ову одлуку можеш уложити жалбу.
+    appeal_approved: Твоја жалба је усвојена. Твој садржај је поново видљив.
+    appeal_rejected: Твоја жалба је прегледана и одлука о сакривању твог садржаја остаје на снази.
+    admin_review_needed: Садржај је аутоматски сакривен и потребан је преглед.
+Reports: Пријаве
+members: чланови

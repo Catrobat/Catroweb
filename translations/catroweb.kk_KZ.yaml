@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Catrobat қауымдастығы
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: "Catrobat-та жасалған шығармашылық жобалармен бөліс, оларды тап және ремикс жаса. Ойындар, анимациялар мен қолданбалар жасайтын жас авторлардың әлемдік қауымдастығына қосыл."
+meta.description.media.library: "Catrobat үшін тегін медиа ресурстарды қарап шық және жүктеп ал — жобаларыңа арналған дыбыстар, суреттер және тағы басқалар."
+meta.og.title.login: "Catrobat-қа кіру"
+meta.og.description.login: "Catrobat жобаларыңды қауымдастықпен бөлісу үшін жүйеге кір."
+meta.og.title.register: "Catrobat аккаунтын ашу"
+meta.og.description.register: "Catrobat қауымдастығына қосылып, шығармашылық жобаларыңмен бүгін-ақ бөлісе баста."
+meta.og.description.profile: "%username% Catrobat-та – оның жобалары мен жетістіктерін қарап шық."
 localLanguage: Ағылшын
 username: Пайдаланушы аты
 password: Құпиясөз
@@ -18,11 +18,11 @@ aboutPocketCode: Pocket Code туралы
 about: Туралы
 education: Білім
 chat: Чаттар мен форумдар
-privacyGuide: Privacy Awareness Guide
+privacyGuide: "Құпиялылық туралы нұсқаулық"
 others: Басқалар
 tutorials: Қөмек
 googlePlay: Google Play Store
-iosAppStore: IOS App store
+iosAppStore: "iOS App Store"
 instagram: Instagram
 discordChat: Discord чат
 passwordsNoMatch: Құпия сөздер сәйкес келмеді.
@@ -31,31 +31,31 @@ cancel: Болдырмау
 confirm: Растау
 report: Есеп беру
 report.title: Есеп беру
-deleteIt: Иә, жойыңыз!
-reportIt: Иә, хабарлаңыз!
-areYouSure: Сіз сенімдісіз бе?
-noWayOfReturn: Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
+deleteIt: Иә, жой!
+reportIt: Иә, хабарла!
+areYouSure: Сенімдісің бе?
+noWayOfReturn: Әрекеттеріңді қайтару мүмкін емес!
 download: Жүктеп алу
 name: Аты
 description: Сипаттама
 noDescription: Сипаттама жоқ.
 credits: 'Ескертулер мен несиелер:'
 noCredits: Жазбалар мен кредиттер жоқ.
-notesAndCreditsDescription: Бұл жобаны қалай жасадыңыз? Сіз басқа адамдардың идеяларын, сценарийлерін немесе өнер туындыларын қолдандыңыз ба? Мұнда оларға рахмет.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+notesAndCreditsDescription: Бұл жобаны қалай жасадың? Басқа адамдардың идеяларын, сценарийлерін немесе өнер туындыларын қолдандың ба? Осы жерде оларға алғыс айт.
+projectImportedFromScratch: "Бұл жоба MIT Scratch-тан импортталған. Түпнұсқа жобаны мына жерден көре аласың:"
+scratchImportedProjectLinkHere: "мұнда."
 country: Ел
 loginText: кіру
 privacyPolicy: Құпиялық саясаты
 imprint: Басып шығару
 projectDetails: Детальдар
 somethingWentWrong: 'Бірдеңе дұрыс болмады.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
+accountNotVerified: "Жүйеге кіргеніңе және аккаунтыңның эл. поштасы расталғанына көз жеткіз."
+accountSuspended: "Қауымдастық шағымдарына байланысты аккаунтың тоқтатылды. Бұл шешімге профиліңнен шағымдана аласың."
 doesNotExist: 'Сұралған ресурс жоқ.'
-pleaseTryAgain: 'Қайталап көріңіз!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Pocket Code ең жаңа нұсқасына жаңартыңыз!'
+pleaseTryAgain: 'Қайталап көр!'
+tryAgainButton: "Қайталап көру"
+oldVersionError: 'Pocket Code-ты ең жаңа нұсқасына жаңарт!'
 more: 'Көбірек'
 less: 'Аздау'
 show-more: 'Көбірек көрсет'
@@ -63,7 +63,7 @@ show-less: 'Азырақ көрсету'
 more-information: 'Көбірек ақпарат'
 less-information: 'Аз ақпарат'
 ok: Ок
-clickToDownloadProgram: 'Мысал жобаны жүктеп алу үшін басыңыз %link_start% мұнда %link_end%.'
+clickToDownloadProgram: 'Мысал жобаны жүктеп алу үшін %link_start% мұнда %link_end% бас.'
 registrationError: 'Пайдаланушы аты немесе эл. пошта мекенжайы бұрыннан қолданыста.'
 notifications: 'Хабарландырулар'
 allNotifications: 'Барлық'
@@ -73,80 +73,80 @@ CommentNotifications: 'Пікірлер'
 RemixNotifications: 'Ремикстер'
 wellDone: "Жарайсың!"
 done: "Дайын!"
-notificationsReadMessage: "Сізде ешқандай хабарландырулар жоқ сияқты."
-confirmMessage: "Иә, жойыңыз"
+notificationsReadMessage: "Сенде ешқандай хабарландыру жоқ сияқты."
+confirmMessage: "Иә, жой"
 cancelMessage: "Болдырмау"
 notificationsUnauthorizedError: "Пайдаланушыны авторизациялау мүмкін емес"
 notificationsClearError: "Хабарландыруларды оқылған деп белгілеу мүмкін емес!"
-pleaseWait: "Өтінемін күте тұрыңыз..."
+pleaseWait: "Күте тұр..."
 projects: "Құрылғыдағы жобалар"
 users: "Пайдаланушылар"
-studios: "Studios"
+studios: "Студиялар"
 oauthPopUpTitle: "Сыртқы тіркелгіге кіру ақпараты"
-oauthInfo: 'Жүйеге кіру үшін жаңа ғана сыртқы тіркелгіні пайдаландыңыз. Біз сіз үшін кездейсоқ пайдаланушы атын жасадық. Пайдаланушы атыңызды өзгерткіңіз немесе тіркелгіңізге жаңа құпия сөз жасағыңыз келсе, профиль бетіне өтіңіз.'
+oauthInfo: 'Жүйеге кіру үшін жаңа ғана сыртқы аккаунтты пайдаландың. Біз сен үшін кездейсоқ пайдаланушы атын жасадық. Пайдаланушы атыңды өзгерткің немесе аккаунтыңа жаңа құпиясөз жасағың келсе, профиль бетіне өт.'
 oauthHere: "мұнда"
 statistics: "Статисткалар"
-languageSelection: "Language selection"
+languageSelection: "Тілді таңдау"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: "Тақырып"
+  auto: "Жүйелік"
+  auto_description: "Құрылғы баптауына сәйкес"
+  light: "Ашық"
+  light_description: "Ашық түсті көрініс"
+  dark: "Қараңғы"
+  dark_description: "Қараңғы түсті көрініс"
   apply: 'Қолдану'
 indexPage:
   recommendedSection:
     info:
       title: 'Мұнда қандай жобалар ұсынылады?'
-      description: 'Сіздің жобаңыз неғұрлым көп реакциялар (Бас бармақ, күлімсіреу ...) алса, ол осы тізімде соғұрлым жоғарырақ көрінеді.'
+      description: 'Жобаң неғұрлым көп реакция (бас бармақ, күлімсіреу ...) алса, ол осы тізімде соғұрлым жоғары көрінеді.'
 follower:
   follows: Бақылау
   followers: Жазылушылар
-  follow: Бақылаңыз
+  follow: Жазылу
   username: Пайдаланушы
   followsMe: Артымнан ереді
-  noFollowing: Сіз қазір ешкімді бақыламайсыз.
-  noFollowers: Қазіргі уақытта сіздің жазылушыларыңыз жоқ.
+  noFollowing: Сен қазір ешкімді бақыламайсың.
+  noFollowers: Қазір сенің жазылушыларың жоқ.
   noOtherFollowing: Қазіргі уақытта келесі пайдаланушылар жоқ.
   noOtherFollowers: Қазіргі уақытта жазылушы пайдаланушылар жоқ.
   followError: "Қажетті пайдаланушыға жазылу мүмкін емес!"
   unfollowError: "Қажетті пайдаланушыға жазылудан бас тарту мүмкін емес!"
-  unfollowQuestion: "Осы пайдаланушыға жазылудан бас тартқыңыз келетініне сенімдісіз бе?"
+  unfollowQuestion: "Осы пайдаланушыға жазылудан бас тартқың келетініне сенімдісің бе?"
   unfollowButton: "Жазылудан бас тарту %username%"
 project:
   welcome:
-    title: Catrobat's %theme% сайтына қош келдіңіз 
-    title_mindstorms: Mindstorms EV3 және NXT үшін Catrobat сайтына қош келдіңіз
+    title: Catrobat %theme% сайтына қош келдің
+    title_mindstorms: Mindstorms EV3 және NXT үшін Catrobat сайтына қош келдің
     subtitle: Әңгімелер, ойындар және т.б. жасау...
-    subtitle_embroidery: Өзіңіздің үлгілеріңізді футболкаларыңызға, сөмкелеріңізге, шалбарларыңызға немесе смартфондарыңызға тігіңіз!
-    subtitle_mindstorms: Lego Mindstorms EV3 және NXT роботтарымен жеке жобаларыңызды жасаңыз
-    download: Қолданбаны жүктеп алыңыз
-    statistics: More statistics
+    subtitle_embroidery: Өз үлгілеріңді футболкаларыңа, сөмкелеріңе, шалбарларыңа немесе смартфондарыңа тік!
+    subtitle_mindstorms: Lego Mindstorms EV3 және NXT роботтарымен өз жобаларыңды жаса
+    download: Қолданбаны жүктеп ал
+    statistics: "Толығырақ статистика"
   featured: Таңдаулы
   open: Ашу
   download: Жүктеп алу
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "Жобаны жүктеп салу"
+    drop_here: ".catrobat файлын осында сүйреп әкел"
+    or_browse: "немесе файлды таңдау үшін бас"
+    button: "Жүктеп салу"
+    uploading: "Жүктелуде..."
+    success: "Жоба сәтті жүктелді!"
+    view_project: "Жобаны көру"
+    upload_another: "Тағы біреуін жүктеу"
+    invalid_file: ".catrobat файлын таңда"
+    file_too_large: "Файл тым үлкен"
+    error: "Жүктеу сәтсіз аяқталды. Қайталап көр."
+    unauthorized: "Жүктеу үшін жүйеге кіруің керек."
+    rate_limited: "Жүктеулер тым көп. Кейінірек қайталап көр."
+    selected_file: "Таңдалған файл:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
+      file_size: "Файлдың ең үлкен өлшемі – 100 МБ."
+      app_upload: "Жобаларды тікелей Pocket Code қолданбасынан да жүктей аласың. Қолданбалар қазір қайта жасалып жатыр және әзірге веб арқылы жүктеуді қолдамайды."
+      retention: "Жүктелген жобалар белсенділік болмаған белгілі бір уақыттан кейін автоматты түрде жойылады. Жобаның сақталу мерзімін ұзарту үшін жүйеге жиі кіріп тұр немесе жобаң жүктеп алынсын."
+      protection: "Ерекше жақсы немесе танымал жобаларды модераторлар автоматты жоюдан қорғай алады."
   example: Мысалдар
   newest: Ең жаңа жобалар
   recommended: Ұсынылған жобалар
@@ -155,65 +155,65 @@ project:
   shareAction: Бөлісу
   deleteAction: Жобаны жою
   deleteConfirmation: |+
-    Сіз сенімдісіз бе?
-    Жойғыңыз келетініне сенімдісіз бе "%programName%"?
-    Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
-    Иә, жойыңыз!
+    Сенімдісің бе?
+    "%programName%" жобасын жойғың келетініне сенімдісің бе?
+    Әрекеттеріңді қайтару мүмкін емес!
+    Иә, жой!
     Болдырмау
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Сіз сенімдісіз бе?
-  deleteNotFoundError: Жойылатын жоба сіздің пайдаланушыңыздан табылмады.
+  deleteConfirmText: "Бұл әрекетті қайтару мүмкін емес. Жобаң біржола жойылады."
+  deleteConfirmationTitle: Сенімдісің бе?
+  deleteNotFoundError: Жойылатын жоба сенің аккаунтыңнан табылмады.
   private: жеке
   public: қоғамдық
   setPrivateAction: Жеке қою
   setPublicAction: Қоғамдық кою
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+  setPrivateConfirm: "Бұл жобаны жеке ету керек пе? Ол іздеу нәтижелерінде енді көрінбейді."
+  setPublicConfirm: "Бұл жобаны жалпыға ашық ету керек пе? Оны бәрі көре алады."
+  markNotForKidsConfirm: "Бұл жобаны балаларға жарамсыз деп белгілеу керек пе?"
+  markSafeForKidsConfirm: "Бұл жобадан «балаларға арналмаған» белгісін алып тастау керек пе?"
+  nfkModeratorLocked: "Бұл баптауды модератор құлыптаған."
+  confirmSetPrivate: "Бұл жобаны шынымен жеке еткің келе ме? Ол іздеу нәтижелерінде енді көрінбейді."
+  confirmSetPublic: "Бұл жобаны шынымен жалпыға ашық еткің келе ме? Оны бәрі көре алады."
   changeVisibility: |+
-    Сіз сенімдісіз бе?
-    Егер сіз %programName% жеке болуға орнатсаңыз, оны басқа пайдаланушылар көрмейді немесе таппайды.
-    Жобаның сілтемесін әлі де достарыңызбен бөлісе аласыз. Құлып белгішесін түрту арқылы көрінуді ауыстыра аласыз.
-    Егер сіз %programName% жалпыға ортақ орнатсаңыз, оны басқа пайдаланушылар көре алады және таба алады.
+    Сенімдісің бе?
+    Егер %programName% жобасын жеке етсең, оны басқа пайдаланушылар көрмейді және таппайды.
+    Жобаның сілтемесін бәрібір достарыңмен бөлісе аласың. Көрінуді құлып белгішесін түртіп ауыстыра аласың.
+    Егер %programName% жобасын жалпыға ашық етсең, оны басқа пайдаланушылар көріп, таба алады.
     Иә, жалпыға орнату
     Иә, жеке
     Жоқ күйіне орнату
 
   reportCommentConfirmation: Осы пікірді шынымен хабарлау керек пе?
-  deleteCommentConfirmation: Осы пікірді шынымен жойғыңыз келе ме?
+  deleteCommentConfirmation: Осы пікірді шынымен жойғың келе ме?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Аккаунтты жою керек пе?
+    Аккаунтыңды шынымен жойғың келе ме? Бұл сенің жүктелген жобаларың мен пікірлеріңді де жояды!
+    Әрекеттеріңді қайтару мүмкін емес!
+    Иә, жой!
+    Болдырмау
   tooLongName: Жоба атауы тым ұзын!
   tooLongDescription: Жобаның сипаттамасы тым ұзақ!
-  tooLongCredits: The project notes and credits are too long!
+  tooLongCredits: "Жоба жазбалары мен алғыстар тым ұзын!"
   my_projects: Менім жобалар
-  trending: Trending projects
-  popular: Popular projects
+  trending: "Трендтегі жобалар"
+  popular: "Танымал жобалар"
   most:
     viewed: Ең көп қаралды
     downloaded: Ең көп жүктелген
   random: Кездейсоқ жобалар
   related: Қатысты жобалар
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
+    explore: "Жобаларды шолу"
+    no_projects: "Сен әлі ешқандай жоба жасаған жоқсың"
     no_explore: 'Ешқандай жоба табылмады'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    load_more: "Тағы жүктеу"
+    upload: "Жобаны жүктеп салу"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
+    protected: "Қорғалған"
+    day_left: "1 күн қалды"
+    days_left: "%days% күн қалды"
+    tooltip: "Белсенділік болмаған белгілі бір уақыттан кейін жобалар автоматты түрде жойылады. Сақталу мерзімін ұзарту үшін көбірек жүктеп алу жина немесе жүйеге жиі кір."
+    tooltip_protected: "Бұл жоба қорғалған және автоматты түрде жойылмайды."
   downloads: '%downloads% жүктеп алулар'
   sample: Мысал жобалар
   views: '%views% көріністер'
@@ -222,61 +222,61 @@ project:
     all: "Барлық"
   remixes: '{0} 0 ремикс |{1}1 ремикс |]1,Inf]%remixes%ремикстер'
   newRemixesNotificationTitle: '|{1}"%programName%" 1 ремикс бар : |]1,Inf] "%programName%" %remixes% жаңа ремикстер бар:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: "Жіберілген жобалар"
+  uploaded: "Жүктелген жобалар"
   reportAsInappropriate: Орынсыз деп хабарлау
   reportProgram: Есеп жобасы
-  languageVersion: 'Catrobat language version: %languageVersion%'
+  languageVersion: "Catrobat тілінің нұсқасы: %languageVersion%"
   reportLoginText: Өтінем %login% осы жобаны хабарлау үшін.
-  reportDialogHeader: Неліктен бұл жоба туралы хабарлағыңыз келеді?
-  reportDialogReason: Себебін енгізіңіз
+  reportDialogHeader: Неліктен бұл жоба туралы хабарлағың келеді?
+  reportDialogReason: Себебін енгіз
   reportRadioButtonInappropriate: Бұл орынсыз
   reportRadioButtonCopyright: Авторлық құқықты бұзу
   reportRadioButtonSpam: Бұл спам
   reportRadioButtonDislike: Осыны ұнатпаймын
-  reportOwnProgram: Сіз өзіңіздің жобаңызды белгілей алмайсыз.
-  reportAlready: Сіз бұл жобаны әлдеқашан белгілеп қойдыңыз.
-  reportDone: Сіз бұл жоба туралы хабарладыңыз!
+  reportOwnProgram: Өз жобаңды белгілей алмайсың.
+  reportAlready: Сен бұл жобаны әлдеқашан белгілеп қойдың.
+  reportDone: Сен бұл жоба туралы хабарладың!
   updateAppHeaderDownload: Жүктеп алу мүмкін емес
-  updateAppTextDownload: Қолданбаңызды ең жаңа нұсқаға жаңартыңыз. Барлық Android мүмкіндіктері IOS жүйесінде бұрыннан қол жетімді емес екенін ескеріңіз.
+  updateAppTextDownload: Қолданбаңды ең жаңа нұсқаға жаңарт. Android-тағы барлық мүмкіндіктер iOS жүйесінде әлі қолжетімді емес екенін ескер.
   updateAppTextDownloadApk: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
-  updateAppHeader: Update app
+  updateAppHeader: "Қолданбаны жаңарту"
   updateAppText: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
   btnClosePopup: Ок
-  checkout_this_project: Осы Catrobat жобасын тексеріңіз
+  checkout_this_project: Осы Catrobat жобасын қарап шық
   show_more: Көбірек көрсету
   comments: Пікірлер
   send: Жіберу
   delete: Жою
   report: Есеп беру
-  reply: Reply
+  reply: "Жауап беру"
   report_popup: Пікір сәтті хабарланды.
   report_popup_header: Хабарланды
   deleted_popup: Пікір сәтті жойылды.
   deleted_popup_header: Жойылды
-  noAdminRights: Әкімші құқықтарыңыз жоқ. Әкімші ретінде жүйеге кіріңіз.
+  noAdminRights: Сенде әкімші құқықтары жоқ. Әкімші ретінде жүйеге кір.
   editProject: Жобаны өзгеру
   closeProjectEditor: Жоба редакторын жабу
-  closeEditorPrompt: Өзгерістерді сақтағыңыз келе ме?
+  closeEditorPrompt: Өзгерістерді сақтағың келе ме?
   btnDiscard: Жою
-  addComment: Пікір жазыңыз
+  addComment: Пікір жаз
   thumbsUp: Бәрекелді!
   smile: Күлімсіре!
   love: Махаббат!
   wow: Уау!
   linkTitle: Сілтеме
-  link: Жоба сілтемесін алмасу буферіне көшіріңіз
+  link: Жоба сілтемесін алмасу буферіне көшір
   reactionsText: Реакциялар
-  downloadErrorText: Жобаны жүктеп алу кезінде қате орын алды. Тағы жасауды сәл кейінірек көріңізді өтінеміз.
+  downloadErrorText: Жобаны жүктеп алу кезінде қате орын алды. Кейінірек қайталап көр.
   downloadStartText: Жүктеп алу басталды...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
+  downloading: "Жүктеп алынуда..."
+  openInApp: "Pocket Code-та ашу"
+  downloaded: "Жүктеп алынды"
   showTranslation: Аударманы көрсету
   hideTranslation: Аударманы жасыру
   translatedByLine: Аударған %provider% %sourceLanguage%-нан %targetLanguage% дейін
   googleTranslate: Google аудармашы
-  confrimDelete: Аударманы шынымен жойғыңыз келе ме?
+  confrimDelete: Аударманы шынымен жойғың келе ме?
   default: Бастапқы
   save: Сақтау
   translationTitle: '%language% аударма'
@@ -287,156 +287,156 @@ project:
   deletedComment: '**Кетірілген**'
   replyLabel: жауап беру
   repliesLabel: жауаптар
-  notForKids: Not safe for kids
+  notForKids: "Балаларға арналмаған"
 remixGraph:
   title: Ремикстер
   showRemixGraph: 'Ремикс графигі'
   by: 'арқылы'
   open: 'Ашу'
   showPaths: 'Жолды көрсету'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: "Ремикс графы жүктелуде..."
+  error: "Ремикс графын жүктеу мүмкін болмады."
+  empty: "Бұл жоба үшін әзірге ремикс графының деректері жоқ."
   remixesLabel: 'Ремикстер'
   projectsLabel: 'Құрылғыдағы жобалар'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
+  scratchLabel: "Scratch түпнұсқалары"
+  interactHint: "Жобаны ашу немесе оның ремикс жолын белгілеу үшін түйінді таңда."
+  zoomIn: "Үлкейту"
+  zoomOut: "Кішірейту"
+  resetView: "Көріністі қалпына келтіру"
   projectNotAvailableErrorTitle: 'Кешір...'
   projectNotAvailableErrorDescription: 'Жоба енді қолжетімді емес!'
   projectNotAvailable: 'Қолжетімсіз'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - Бұл автоматтандырылған хабарлама - бұл эл. поштаға тікелей жауап бермеңіз
+  projectUnknownUser: "Белгісіз пайдаланушы"
+noReply: Бұл автоматты хабарлама - бұл хатқа тікелей жауап берме.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Catrobat аккаунтыңды растау
   message: |
     Құрметті %username%.
-    Тіркеліну белсендіру аяқтау үшін - %confirmationUrl% өтіңіз
-    Бұл сілтеме тіркелгіңіз растау үшін тек бір рет пайдалануға мүмкін.
-    Ең жақсы тілектер,
-    Сіздің Catrobat командасы.
+    Аккаунтыңды белсендіруді аяқтау үшін мына сілтемеге өт: %confirmationUrl%
+    Бұл сілтемені аккаунтты растау үшін тек бір рет пайдалануға болады.
+    Ең жақсы тілектермен,
+    Catrobat командасы.
   messageHtml: |
     <p>
     Құрметті %username%.<br>
     <br>
-    Аккаунтыңызды қосу үшін <a href="%confirmationUrl%">мына жерді</a><br> басыңыз.
-    Бұл сілтеме аккаунтты бір мезгілге қосуға арналады.<br>
+    Аккаунтыңды белсендіруді аяқтау үшін <a href="%confirmationUrl%">мұнда</a> бас.<br>
+    Бұл сілтемені аккаунтты растау үшін тек бір рет пайдалануға болады.<br>
     <br>
     Құрметпен,<br>
-    Сіздің Catrobat командаңыз.
+    Catrobat командасы.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "Эл. пошта мекенжайыңды раста"
+  welcome: "Catrobat-қа қош келдің!"
+  greeting: "Тіркелгенің үшін рахмет! Бастау үшін эл. пошта мекенжайыңды раста."
+  message: "Эл. поштаңды растау үшін төмендегі түймені бас. Бұл сілтеме %time% дейін жарамды және оны тек бір рет пайдалануға болады."
+  button: "Эл. поштаны растау"
+  ignore: "Егер сен Catrobat аккаунтын ашпаған болсаң, бұл хатты елемей-ақ қой."
+  autoDelete: "Расталмаған аккаунттар 30 күннен кейін автоматты түрде жойылады."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "Балаңның Catrobat аккаунтына ата-ананың келісімі қажет"
+    title: "Ата-ананың келісімі қажет"
+    greeting: "Сәлем,"
+    message: "Балаң %username% Catrobat-та аккаунт ашып, эл. пошта мекенжайын растады."
+    explanation: "Catrobat – жастар қолданбалар, ойындар мен анимациялар жасай отырып бағдарламалауды үйренетін тегін білім беру платформасы. ЕО-ның балаларды қорғау ережелеріне сәйкес балаң қауымдастыққа толық қатыса алуы үшін бізге сенің келісімің қажет. Келісім беру үшін төмендегі түймені бас."
+    button: "Ата-ана келісімін беру"
+    ignore: "Егер бұл хатты күтпеген болсаң, оны елемей-ақ қой. Келісімсіз аккаунттың мүмкіндіктері шектеулі болады."
+    whatIsCatrobat: "Catrobat – тегін, коммерциялық емес білім беру бағдарламалау платформасы. Толығырақ: catrobat.org."
+    manageLink: "Балаңның аккаунтын кез келген уақытта біздің <a href=\"%portalUrl%\" style=\"color: #00acc1;\">Ата-ана порталы</a> арқылы басқара аласың. <a href=\"%infoUrl%\" style=\"color: #00acc1;\">Ата-ана ретіндегі құқықтарың</a> туралы толығырақ біл."
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "Келісім берілді"
+    message: "Рахмет! %username% аккаунты енді толық белсендірілді."
+    continueButton: "Жобаларды шолу"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Ата-аналар мен қамқоршылар"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Ата-аналар мен қамқоршыларға арналған ақпарат"
+    intro: "Catrobat жас пайдаланушылардың қауіпсіздігі мен құпиялылығына мұқият қарайды. Бұл бетте балаңды қалай қорғайтынымыз және сенің қандай құқықтарың бар екені түсіндіріледі."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Catrobat деген не?"
+      text: "Catrobat – жастар өз қолданбаларын, ойындары мен анимацияларын жасай отырып бағдарламалауды үйренетін тегін, коммерциялық емес білім беру платформасы. Платформа бүкіл әлемде қолжетімді және оқу орындарында қолданылады."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Біз қандай деректерді жинаймыз?"
+      text: "Біз платформаның жұмысына қажетті ең аз деректерді жинаймыз: пайдаланушы аты, эл. пошта мекенжайы, туған күні және балаң жасап, жүктеген жобалар. 14 жасқа толмаған пайдаланушылар үшін келісім алу мақсатында ата-ананың/қамқоршының эл. пошта мекенжайын да сақтаймыз. Біз жеке деректерді сатпаймыз және үшінші тараптарға бермейміз."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Ата-ана немесе қамқоршы ретіндегі құқықтарың"
+      text: "ЕО-ның балаларды қорғау ережелеріне (GDPR) және COPPA-ға сәйкес сенің мына құқықтарың бар: балаң туралы бізде сақталған деректерді қарау, сол деректердің көшірмесін сұрау, келісіміңді кез келген уақытта қайтарып алу (бұл аккаунтты шектейді) және балаңның аккаунты мен оған байланысты барлық деректерді біржола жоюды сұрау."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Кәмелетке толмағандардың аккаунттарына қандай шектеулер қолданылады?"
+      text: "16 жасқа толмаған пайдаланушылар пікір жаза да, оқи да алмайды, басқа пайдаланушыларға жазыла алмайды және балаларға жарамсыз деп белгіленген мазмұнды көре алмайды. Олар бәрібір жобалар жасап, жүктей алады, жалпыға ашық жобаларды қарай алады және жобаларға лайк басып реакция білдіре алады. Бұл шектеулер оқуға қауіпсіз орта қамтамасыз ету үшін енгізілген."
+    manageButton: "Балаңның аккаунтын басқару"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Ата-ана порталы"
+    description: "Балаңның Catrobat аккаунтын басқаруға арналған қауіпсіз сілтемені алу үшін эл. пошта мекенжайыңды енгіз. Сілтеме тіркелу кезінде көрсетілген эл. пошта мекенжайына жіберіледі."
+    emailLabel: "Эл. пошта мекенжайың"
+    submitButton: "Басқару сілтемесін жіберу"
+    infoLink: "Толығырақ"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Кіріс жәшігіңді тексер"
+      message: "Егер бұл эл. поштаға аккаунт байланған болса, біз басқару сілтемесін жібердік. Кіріс жәшігіңді тексеріп, балаңның аккаунтын басқару үшін сілтемеге өт."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Балалардың аккаунттарын басқару"
+    description: "Сен %email% мекенжайына байланған аккаунттарды басқарып отырсың."
+    consentStatus: "Келісім күйі"
+    accountCreated: "Аккаунт ашылған күн"
+    email: "Баланың эл. поштасы"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "Берілді"
+      pending: "Күтуде"
+      revoked: "Қайтарып алынды"
+    grantButton: "Келісім беру"
+    revokeButton: "Келісімді қайтарып алу"
+    revokeConfirm: "Келісімді шынымен қайтарып алғың келе ме? Аккаунттың мүмкіндіктері шектеулі болады."
+    exportButton: "Деректерді экспорттау"
+    deleteButton: "Аккаунтты жою"
+    deleteConfirm: "Бұл аккаунтты шынымен біржола жойғың келе ме? Мұны қайтару мүмкін емес."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Балаңның Catrobat аккаунтын басқару"
+      title: "Аккаунтты басқару"
+      greeting: "Сәлем,"
+      message: "Сен балаңның Catrobat аккаунтын (%usernames%) басқару сілтемесін сұрадың. Аккаунтты қарап, басқару үшін төмендегі түймені бас."
+      button: "Аккаунтты басқару"
+      ignore: "Егер мұны сұрамаған болсаң, бұл хатты елемей-ақ қой."
 passwordRecovery:
   subject: Catrobat құпия сөзін қалпына келтіру
   message: |
     Құрметті %username%.
-    Құпия сөзіңізді ұмытып қалғандықтан, %appplication_url% паролін қалпына келтіруді сұрадыңыз.
-    Егер сіз мұны сұрамаған болсаңыз, онда бұл хатты жабыңыз. Ол 24 сағат ішінде жарамдылық мерзімі бітеді және жарамсыз болады.
-    Құпия сөзді қалпына келтіру және жаңасын жасау үшін келесі бетке өтіңіз: %confirmationUrl%
-    %appplication_url% қауымдастығына кіру үшін пайдаланушы атыңызды және құпия сөзіңізді кез келген уақытта пайдалана аласыз.
-    Ол үшін келесі бетке өтіңіз: %loginPage%
-    Профиль мәліметтерін өңдеу үшін мына бетке өтіңіз: %profilePage%
+    Құпиясөзіңді ұмытып қалғандықтан, %appplication_url% сайтында құпиясөзді қалпына келтіруді сұрадың.
+    Егер мұны сұрамаған болсаң, бұл хатты елеме. Сілтеменің мерзімі 24 сағаттан кейін бітеді.
+    Құпия сөзді қалпына келтіру және жаңасын жасау үшін мына бетке өт: %confirmationUrl%
+    %appplication_url% қауымдастығына кіру үшін пайдаланушы атың мен құпиясөзіңді кез келген уақытта пайдалана аласың.
+    Ол үшін мына бетке өт: %loginPage%
+    Профиль мәліметтерін өңдеу үшін мына бетке өт: %profilePage%
     Ең жақсы тілектермен,
-    Сіздің Катробат командаңыз.
+    Catrobat командасы.
   messageHtml: |
     <p>
     Құрметті %username%.<br>
     <br>
-    Құпия сөзіңізді ұмытып қалғандықтан, <a href="%appplication_url%">Pocket Code</a> паролін қалпына келтіруді сұрадыңыз.
+    Құпиясөзіңді ұмытып қалғандықтан, <a href="%appplication_url%">Pocket Code</a> сайтында құпиясөзді қалпына келтіруді сұрадың.
+    Егер мұны сұрамаған болсаң, бұл хатты елеме. Сілтеменің мерзімі 24 сағаттан кейін бітеді.<br>
     <br>
-    Егер сіз мұны сұрамаған болсаңыз, онда бұл хатты жабыңыз. Ол 24 сағат ішінде жарамдылық мерзімі бітеді және жарамсыз болады.<br>
-    Құпия сөзді қалпына келтіру және жаңасын жасау үшін мына сілтемені басыңыз: <a href="%confirmationUrl%">
-    <a href="%appplication_url%">Pocket Code</a> қауымдастығына кіру үшін пайдаланушы атыңызды және құпия сөзіңізді кез келген уақытта пайдалана аласыз.<br>
-    Ол үшін келесі бетке өтіңіз: <a href="%loginPage%">Логин парақшасы</a>
-    Профиль мәліметтерін өңдеу үшін мына бетке өтіңіз: <a href="%profilePage%">парақша</a><br>
+    Құпиясөзді қалпына келтіріп, жаңасын жасау үшін <a href="%confirmationUrl%">мұнда</a> бас.<br>
+    <br>
+    <a href="%appplication_url%">Pocket Code</a> қауымдастығына кіру үшін пайдаланушы атың мен құпиясөзіңді кез келген уақытта пайдалана аласың.<br>
+    Ол үшін мына бетке өт: <a href="%loginPage%">Кіру беті</a><br>
+    Профиль мәліметтерін өңдеу үшін мына <a href="%profilePage%">бетке</a> өт.<br>
     <br>
     Ең жақсы тілектермен,<br>
-    Сіздің Катробат командаңыз.
+    Catrobat командасы.
     </p>
 profile:
   aboutMe: Мен туралы
   currentlyWorkingOn: 'Жұмыс жасауда:'
-  edit: Профильді өңдеңіз
+  edit: Профильді өңдеу
   saveChanges: өзгерістер сақтау
   newPass: жаңа құпиясөз
-  repeatPass: Құпиясөзді қайталаңыз
+  repeatPass: Құпиясөзді қайтала
   oldPass: Ескі құпиясөз
   firstEmail: Менім бірінші эл. пошта
   secondEmail: Менім екінші эл. пошта
@@ -452,14 +452,14 @@ profile:
     passwordIsUsername: Құпиясөз атынан басқаша болуы керек.
     passwordWrong: Дұрыс емес құпиясөз
     emailNotValid: Бұл эл. пошта мекенжайы жарамсыз.
-    emailMissing: Осы эл. пошта мекенжайы жаңарту кезінде қате. Сізде кем дегенде бір расталған эл. пошта мекенжайы болуы керек.
+    emailMissing: Эл. пошта мекенжайын жаңарту кезінде қате. Сенде кемінде бір расталған эл. пошта мекенжайы болуы керек.
     emailExists: Мынау эл. пошта мекенжайы бұрыннан бар.
     usernameNotValid: Бұл аты жарамсыз.
-    usernameMissing: Сізде аты болуы керек.
+    usernameMissing: Сенде пайдаланушы аты болуы керек.
     usernameExists: Мынау ат бұрыннан бар.
     usernameContainsEmail: Атында эл. пошта мекенжайы болмауы керек.
     submitSuccess: сақталды!
-  reallyDeleteProgram: Сіз шынымен жобаңы жоюға келе ме?
+  reallyDeleteProgram: Жобаңды шынымен жойғың келе ме?
   programsOf: Жобалар
   picture: Профиль суреті
   changePicture: Суретті өзгеру
@@ -469,93 +469,93 @@ myprofile:
   profileSettings: Профиль Параметрлер
   securitySettings: Қауіпсіздік Параметрлер
   accountSettings: Аккаунт параметрлері
-  accountVerification: Verify account
+  accountVerification: "Аккаунтты растау"
   account: Аккаунт
   editProfile: Профильді өңдеу
   edit: Өңдеу
   done: Дайын
-  checkMail: Сіздің эл. пошта мекенжайына хат жіберілді. Кіріс жәшігіңізді тексеріңіз.
-  passwordUpdated: Сіздің құпиясөзі сәтті жаңартылды.
+  checkMail: Эл. пошта мекенжайыңа хат жіберілді. Кіріс жәшігіңді тексер.
+  passwordUpdated: Құпиясөзің сәтті жаңартылды.
   avatar: Аватар
   email: Эл. пошта
-  deleteAccount: Delete Account
+  deleteAccount: "Аккаунтты жою"
   deleteAccountWarning: |
-    Біліңіз:
-    Сіз %num_projects% жоба жасадыңыз және %num_followers% жазылушыларыңыз бар. Барлық жобаларыңыз бір жолаға жойылады. Сіз енді бұл аккаунтқа кіре алмайсыз және жобаларыңыз барлық тізімдерден жоғалады. Профильді жоюды қайтару мүмкін емес!
-    Бізді тастап кететініңізге сенімдісіз бе?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+    Біліп қой:
+    Сен %num_projects% жоба жасадың және сенің %num_followers% жазылушың бар. Барлық жобаларың біржола жойылады. Сен енді бұл аккаунтқа кіре алмайсың және жобаларың барлық тізімдерден жоғалады. Профильді жоюды қайтару мүмкін емес!
+    Бізді тастап кететініңе сенімдісің бе?
+  exportData: "Деректерімді жүктеп алу"
+  exportDataDescription: "Сенің жеке деректеріңнің көшірмесін алуға құқығың бар. Оған профиль ақпаратың, жобаларың, пікірлерің, реакцияларың және жазылушыларың кіреді."
+  exportDataLoading: "Жүктеп алынуда..."
+  exportDataError: "Деректеріңді экспорттау кезінде қате кетті. Кейінірек қайталап көр."
+  exportDataRateLimited: "Деректеріңді күніне бір рет қана экспорттай аласың. Ертең қайталап көр."
   editAccountSettings: Есептік жазба параметрлерін өңдеу
-  profileChangeSuccess: Сіздің профиліңіз сәтті өзгертілді.
-  unspecifiedError: Профильді өзгерту кезінде анықталмаған қате орын алды. Өтінеміз, бізге хабарласыңыз.
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  profileChangeSuccess: Профилің сәтті өзгертілді.
+  unspecifiedError: Профильді өзгерту кезінде белгісіз қате орын алды. Бізге хабарлас.
+  verifyAccountText: "Біз саған аккаунтыңды растауға арналған сілтемесі бар хат жібереміз. Сілтемені келесі бір сағат ішінде басуды ұмытпа, күніне тек бір хат сұрай аласың."
+  verifyAccountButton: "Хат жіберу"
+  verifyAccountMailSent: "Хат сәтті жіберілді. Кіріс жәшігіңді тексер"
+  verifyAccountMailFailed: "Күніне тек бір хат сұрай аласың"
 licenseToPlay:
   link: 'Ойынға лицензия'
-  title: 'Ойынға лицензия - авторларды белгілеп, бөлісіңіз'
-  text1: Әрбір Catrobat жобасы - бұл торт, оның рецептімен (бағдарламалау блоктары) келетін өте ерекше торт екенін елестетіп көріңіз. Катробат қауымдастығының барлық мүшелері рецепттерімен бірге торттарын бөліседі. Бұл торттардан ләззат алуға және оларды өзіңіз жасауды үйренуге болатынын білдіреді!
+  title: 'Ойынға лицензия - авторларды белгілеп, бөліс'
+  text1: Әрбір Catrobat жобасы - бұл торт, оның рецептімен (бағдарламалау блоктары) келетін өте ерекше торт екенін елестетіп көр. Catrobat қауымдастығының барлық мүшелері рецепттерімен бірге торттарын бөліседі. Бұл торттардан ләззат алуға және оларды өзің жасауды үйренуге болатынын білдіреді!
   text2: 'Ешқандай құпия рецепттер жоқ: бұл бәліштерді жасау туралы нұсқаулар кез келген адам үшін ашық, қолдануға, қайта пайдалануға, өзгертуге және жаңа идеяларға шабыт ретінде қызмет етеді... Бәліштерді айтамын.'
-  text3: "Бәліштерді жеуге болады, сондай-ақ басқа адамдардың рецепттерін көшіріп, өзіңіз дайындауға болады, мүмкін әртүрлі ингредиенттермен. Бұл еркіндік екі қарапайым нәрсе талап етеді:"
+  text3: "Бәліштерді жеуге болады, сондай-ақ басқа адамдардың рецепттерін көшіріп, өзің дайындауға болады, мүмкін әртүрлі ингредиенттермен. Бұл еркіндік екі қарапайым нәрсе талап етеді:"
   text4: "Catrobat қауымдастығын құру кезінде біз бұл әдісті қолдануды шештік, өйткені ол қауымдастықтағы оқу мен шығармашылықты қолдайды деп есептейміз. Рецепттер мен ингредиенттерді (скрипттер мен өнер туындылары) бөлісу арқылы адамдар бір-бірінің идеяларына сүйене алады және барлығына пайда көреді."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: '%link-termsOfUse% сайтында Catrobat желілік қауымдастығының пайдалану шарттары туралы көбірек біліңіз.'
+  text5: "Catrobat веб-сайтын жасағанда біз адамдарды бөлісуге және басқалардың авторлығын көрсетуге ынталандыратын мүмкіндіктерді қостық. Әр жоба бетінде жобаның түпнұсқа скрипттерін әрқашан жүктеп ала аласың. Егер жобаны ремикстесең (скрипттерді немесе суреттерді өзгертіп, нәтижесімен бөліссең), жоба жазбаларында сені шабыттандырған адамдар мен жобаны атап, олардың авторлығын көрсетуге шақырамыз."
+  text6: '%link-termsOfUse% сайтында Catrobat желілік қауымдастығының пайдалану шарттары туралы көбірек біл.'
   list1:
-    item1: бәлішіңіздің рецептімен бірге бөлісіңіз
-    item2: сізді шабыттандырған адамды белгілеңіз
+    item1: бәлішіңнің рецептімен бірге бөліс
+    item2: сені шабыттандырған адамды белгіле
   version: Версия 1.1, 2 Сәуір 2013
 termsOfUse:
   title: Қолдану ережелері
-  headline: Catrobat қауымдастығына қош келдіңіз!
-  text1: 'Catrobat қауымдастығында сіз жобаларыңызбен идеяларыңызды адамдарға бөлісесіз'
-  text2: "Бұл қауымдастықтың әрбір мүшесіне қолдау көрсететін орынға айналдыру үшін бізге сіздің көмегіңіз қажет.  Сіздің бізге қалай көмектесу керектігі:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Сізге сыйлығымыз:'
+  headline: Catrobat қауымдастығына қош келдің!
+  text1: 'Catrobat қауымдастығында сен жобаларың мен идеяларыңды адамдармен бөлісесің'
+  text2: "Бұл қауымдастықты әрбір мүшеге қолдау көрсететін орынға айналдыру үшін бізге сенің көмегің қажет. Бізге былай көмектесе аласың:"
+  text3: "Catrobat жобасы арқылы біз ынтымақтастықты дамытып, бүкіл адамзаттың игілігі үшін әркімнің шығармашылығын біріктіргіміз келеді. Сен де басқа белсенді мүшелер өз жобаларын саған бергендей, өз жобаларыңды қауымдастыққа сыйлық ретінде қайтара отырып, Catrobat қауымдастығының белсенді мүшесі бола аласың:"
+  text4: 'Саған сыйлығымыз:'
   text5: 'Біздің пайдалану және қызмет көрсету шарттары:'
   list1:
     item1: көптеген елдер мен мәдениеттерден
     item2: барлық жастағы (жас балалардан жасөспірімдерге және ата-әжелер)
     item3: барлық деңгейдегі тәжірибемен
   list2:
-    item1: Құрметті бол. Жобалармен бөліскен кезде, әр түрлі жастағы және әртүрлі ортадағы адамдар сіздің үлестер көретінін есте сақтаңыз.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Адал бол. Өзіңізді басқа біреу деп көрсетпеңіз немесе қоғамды алдауға тырыспаңыз."
-    item4: "Жеке ақпаратты құпия сақтаңыз. Эл. пошта мекенжайыңызды, телефон нөміріңізді немесе басқа жеке байланыс ақпаратыңызды бөліспеңіз."
-    item5: "Сайттың ыңғайлы болуына көмектесіңіз. Басқалар жобаны немесе түсініктемені қорлайтын, тым зорлық-зомбылық немесе басқаша орынсыз деп тапса, жай ғана «орынсыз деп хабарлау» түймесін басып, қысқаша түсініктеме қалдырыңыз. Catrobat командасы сіздің есебіңізді қарап шығады және кез келген жобаны, түсініктемені немесе жазбаны жоюы мүмкін."
+    item1: Құрметті бол. Жобалармен бөліскен кезде, оларды әр жастағы және әртүрлі ортадан шыққан адамдар көретінін есте сақта.
+    item2: "Авторын көрсет. Басқа адамдардың жобаларының өзгертілген нұсқаларын еркін жасай бер – тек олардың авторлығын көрсетуді ұмытпа. Авторлықты жобаңның «Жазбалар мен алғыстар» бөлімінде көрсетуге болады. Басқа пайдаланушылардың жобаларын өзгерту туралы толығырақ осы тізімнің астындағы абзацтан оқы."
+    item3: "Адал бол. Өзіңді басқа біреу етіп көрсетпе және қауымдастықты алдауға тырыспа."
+    item4: "Жеке ақпаратты құпия сақта. Эл. пошта мекенжайыңды, телефон нөміріңді немесе басқа жеке байланыс ақпаратыңды бөліспе."
+    item5: "Сайттың ыңғайлы болуына көмектес. Басқалар жобаны немесе түсініктемені қорлайтын, тым зорлық-зомбылық немесе басқаша орынсыз деп тапсаң, жай ғана «орынсыз деп хабарлау» түймесін басып, қысқаша түсініктеме қалдыр. Catrobat командасы сенің хабарламаңды қарап шығады және кез келген жобаны, түсініктемені немесе жазбаны жоюы мүмкін."
   list3:
-    item1: "Жобаны біздің веб-сайттарымызға жүктеп салу арқылы сіз бұл жұмысты жүктеп салынған Catrobat жобаларының белгілі бір тегін лицензиялары бойынша қоюға келісесіз және келісесіз. Catrobat жүйесінің өзі қол жетімді болатын тегін лицензиялар сияқты, жүктеп салынған Catrobat жобаларының осы тегін лицензиялары барлығына бұрын басқалар жүктеп салған жұмыстан үйренуге және осы жұмысты өздерінің жаңа қызықты ойындарын құруға бейімдеу және ремикстеу құқығын береді, анимациялар және басқа жобалар. Бұл әркімге «өз құрдастарының иығында тұруға» мүмкіндік береді, олардың бірі сізсіз! Осылайша, сіздің жұмысыңыз бүкіл әлемге пайда әкеледі және әркім үшін тегін болып қалады. Оны адамзатқа сый ретінде қарастырыңыз: сіз бәріне бересіз, ал өз жұмысын біздің веб-сайттарымызға жүктегендердің барлығы сізге береді. Осылайша, жүктеп салынған жоба - оның иесі сізге бірдей шарттармен қауымдастыққа қатысу шартымен тегін беретін үлкен құнды сыйлық."
-    item2: 'Сыйлықты қабылдаудың қажеті жоқ; жасасаңыз, белгілі бір ережелер қолданылады. Бұл ережелердің артықшылығы мынада: сіз жұмыстан үйреніп, соған сүйене отырып, одан да жақсырақ нәрселерді өзіңіз жасай аласыз, содан кейін оны, мысалы, біздің веб-сайттарға қайтадан жүктей аласыз. Тағы бір артықшылығы - бұл лицензиялар сіздің жобаңызды пайдалану арқылы басқалардың алдында туындайтын кез келген мәселелер үшін жауапты болмайтыныңызға көз жеткізеді.'
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Жобаны біздің веб-сайттарымызға жүктеп салу арқылы сен бұл жұмысты жүктеп салынған Catrobat жобаларының белгілі бір тегін лицензиялары бойынша беруге келісесің. Catrobat жүйесінің өзі қол жетімді болатын тегін лицензиялар сияқты, жүктеп салынған Catrobat жобаларының осы тегін лицензиялары барлығына бұрын басқалар жүктеп салған жұмыстан үйренуге және осы жұмысты өздерінің жаңа қызықты ойындарын құруға бейімдеу және ремикстеу құқығын береді, анимациялар және басқа жобалар. Бұл әркімге «өз құрдастарының иығында тұруға» мүмкіндік береді, солардың бірі – сенсің! Осылайша, сенің жұмысың бүкіл әлемге пайда әкеледі және әркім үшін тегін болып қалады. Оны адамзатқа сый ретінде қарастыр: сен бәріне бересің, ал өз жұмысын біздің веб-сайттарымызға жүктегендердің барлығы саған береді. Осылайша, жүктеп салынған жоба - оның иесі саған бірдей шарттармен қауымдастыққа қатысу шартымен тегін беретін үлкен құнды сыйлық."
+    item2: 'Сыйлықты қабылдаудың қажеті жоқ; қабылдасаң, белгілі бір ережелер қолданылады. Бұл ережелердің артықшылығы мынада: сен жұмыстан үйреніп, соған сүйене отырып, одан да жақсырақ нәрселерді өзің жасай аласың, содан кейін оны, мысалы, біздің веб-сайттарға қайтадан жүктей аласың. Тағы бір артықшылығы - бұл лицензиялар сенің жобаңды пайдалану арқылы басқалардың алдында туындайтын кез келген мәселелер үшін жауапты болмайтыныңа көз жеткізеді.'
+    item3: "Маңызды қосымша шарт – өз жұмысыңа негіз болған туындылардың авторларын анық көрсету. Сонымен бірге біз сенің жұмысыңның сенікі екенін басқалар анық бағалауы үшін күш саламыз: Catrobat қауымдастығында өзіңді білдіру үшін еркін таңдаған бірегей атыңды көрсетеміз және басқаларға жұмысыңды барлығына, әсіресе соларға бергенің үшін саған көпшілік алдында алғыс айтуға мүмкіндік береміз."
+    item4: "Нақты заңды шарттар үшін %link-licenseUploaded% қара."
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "Біз Catrobat жүйесіне қатысты өз бағдарламалық жасақтамамыз бен интернет ресурстарымыздың барлығын, мысалы, Catrobat командасы жазған бағдарламаларды, веб-сайттарымыз бен интернет ресурстарымызды, Catrobat жүйесіне қатысты өз бастапқы кодымызды және суреттер, дыбыстар, мәтіндер сияқты барлық қосымша материалдарды қазір де, болашақта да саған Catrobat-тың тегін лицензиялары бойынша ұсынамыз."
+    item2: "Бұл лицензиялар Catrobat-тың барлық бөліктерін саған тегін етеді және оларды қалағаныңша пайдалану еркіндігін береді; бірнеше шектеу ғана бар, олар басқа нәрселермен қатар Catrobat жүйесінің әрқашан тегін және барлығына пайдалы болып қалуын қамтамасыз етеді."
+    item3: "Нақты заңды шарттар үшін %link-licenseToPlay% қара. Catrobat жүйесінің бастапқы коды, сондай-ақ көптеген басқа құжаттар мен ресурстар %link-developer% арқылы қолжетімді."
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+    item1: "Егер сен немесе, 13 жасқа толмаған болсаң, сенің ата-анаң не заңды қамқоршыларың жаппай бақылау немесе құпиялылықты жаппай бұзуға қатысатын не соған жауапты ұйыммен байланысты болса, біздің бағдарламалық қолданбаларымызды пайдалануға және қызметтерімізге кіруге рұқсат етілмейді. Бұл шектеудің нақты мәліметтері мен кейбір ерекшеліктері біздің %link-termsOfUse% құжатымыздың 4.a және 4.b бөлімдерінде сипатталған."
+    item2: "Егер саған 13 жас толмаған болса, Catrobat бағдарламалық қолданбалары мен қызметтерін пайдалануға рұқсат бере ме, деп ата-анаңнан немесе заңды қамқоршыларыңнан сұрауың керек."
+    item3: "Біз Catrobat веб-сайттарына жүктелген жобаларды, пайдаланушы аккаунттарын және кез келген цифрлық материалдарды кез келген уақытта өз қалауымызбен қабылдамауға, жоюға немесе жасыруға құқылымыз, мысалы, жобада орынсыз материал бар екенін немесе пайдаланушы басқа адамдардың құқықтарын бұзатынын анықтасақ."
+    item4: "Catrobat-тың барлық бағдарламалық жасақтамасы мен интернет ресурстары пайдалы болады деген үмітпен, бірақ ешқандай кепілдіксіз ұсынылады."
+    item5: "Жоғарыдағы тармақтардың нақты тұжырымдары мен кейбір қосымша заңды шарттар үшін біздің %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service бетін қара."
+  bottom1: "Мұнда анда-санда қайта кіріп тұр, өйткені біз Пайдалану шарттарымызды үнемі жақсартуға тырысамыз."
+  bottom2: "Осы Пайдалану шарттарына қатысты кез келген ұсынысыңды %email-webmaster% мекенжайына жібер."
   version: 1.3 нұсқасы, 4 наурыз 2014 ж
 search:
   dotdotdot: Іздеу...
   search: Іздеу
   inMediaLib: Медиаханадан іздеу
-  inMediaCategory: Search in media category
-  results: Search Results
-  resultcount: Іздеуіңіз %count% нәтиже берді
-  fail: Кем дегенде бір іздеу сөзін енгізіңіз
+  inMediaCategory: "Медиа санатынан іздеу"
+  results: "Іздеу нәтижелері:"
+  resultcount: Іздеуің %count% нәтиже берді
+  fail: Кем дегенде бір іздеу сөзін енгіз
   noUsers: Ешқандай қолданылушылар табылмады
   noProjects: Ешқандай жоба табылмады
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noStudios: "Студиялар табылмады"
+  sameSearchMessage: "Сен осы жердесің ғой! Басқаша іздеп көресің бе?"
 menu:
   profile: Менің профайылым
   login: Кіру
@@ -565,96 +565,96 @@ menu:
   helpAndTutorials: Анықтама және туториалдар
   followersAndFollowing: Бақылау
   mediaLibrary: Медиатека
-  studio: Studios
+  studio: "Студиялар"
   language: Тіл
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: "Тіл нұсқалары жоқ."
 login:
   login: Кіру
   button:
     loginNow: Қазір кіру
     createAccount: Аккаунт ашу
-    forgetPassword: Құпия сөзді ұмыттыңыз ба?
+    forgetPassword: Құпия сөзді ұмыттың ба?
   oauth:
-    title: Немесе бұлар арқылы кіре аласыз
+    title: Немесе бұлар арқылы кіре аласың
   passOrUser: Құпиясөз немесе пайдаланушы аты дұрыс емес.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Сіздің атыңыз немесе электрондық поштаңыз табылмады.
-  forgotPass: Құпиясөз немесе пайдаланушы атыңызды ұмыттыңыз ба?
-  recoverPassSend: Сіздің эл. пошта мекенжайына хат жіберілді. Кіріс жәшігіңізді тексеріңіз.
+  accountSuspended: "Аккаунтың тоқтатылды. Егер бұл қате деп ойласаң, қолдау қызметіне хабарлас."
+  noUsername: Сенің атың немесе эл. поштаң табылмады.
+  forgotPass: Құпиясөзді немесе пайдаланушы атыңды ұмыттың ба?
+  recoverPassSend: Эл. пошта мекенжайыңа хат жіберілді. Кіріс жәшігіңді тексер.
   alreadyReset: Бұл пайдаланушының құпиясөзі соңғы 24 сағат ішінде сұралған.
-  confirmationSend: Тіркеуіңізді растау үшін электрондық поштаңызға хат жіберілді. Кіріс жәшігіңізді тексеріп, аккаунтты тіркеңіз.
+  confirmationSend: Тіркелуіңді растау үшін эл. поштаңа хат жіберілді. Кіріс жәшігіңді тексеріп, аккаунтыңды раста.
   userOrEmail: Пайдаланушы аты немесе электрондық пошта
   changePass: Құпиясөзді өзгерту
   createAccount: Аккаунт ашу
   noAccount: Аккаунт жоқ!
-  alreadyAccount: Сізде аккаунт барма?
+  alreadyAccount: Аккаунтың бар ма?
   or: НЕМЕСЕ
   username: Пайдаланушы аты
   email: Эл. пошта
   passwordFirst: Құпиясөз
-  passwordSecond: Password Confirm
+  passwordSecond: "Құпиясөзді растау"
 register:
   title: Тіркелу
-  subText: "Жалғастыру арқылы сіз Catrobat қауымдастығы аккаунтын орнатып жатырсыз және %var1% және %var2% шарттарымен келісесіз."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  subText: "Жалғастыру арқылы сен Catrobat қауымдастығында аккаунт ашып жатырсың және %var1% және %var2% шарттарымен келісесің."
+  dateOfBirth: "Туған күні"
+  dateOfBirthInfo: "Біз ЕО-ның балаларды қорғау ережелерін (GDPR/COPPA) сақтау және жас пайдаланушыларға қауіпсіз орта ұсыну үшін туған күніңді сұраймыз."
+  parentEmail: "Ата-ананың/қамқоршының эл. поштасы"
+  parentEmailInfo: "14 жасқа толмаған пайдаланушылар үшін міндетті. Біз осы мекенжайға келісім сұрауын жібереміз."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: Continue
+    title: "Тіркелуді аяқта"
+    info: "Платформаны әрі қарай пайдалану үшін туған күніңді көрсет."
+    submit: "Жалғастыру"
   button:
     cancel: Болдырмау
     createAccount: Аккаунт ашу
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Кіріс жәшігіңді тексер!"
+    message: "Біз саған растау хатын жібердік. Аккаунтыңды белсендіру үшін хаттағы сілтемені бас."
+    helpTitle: "Хат келмеді ме?"
+    hint: "Спам қалтасын тексер. Сілтеме 24 сағат бойы жарамды."
+    resendButton: "Растау хатын қайта жіберу"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "Ата-ананың келісімі күтілуде"
+    message: "Эл. поштаң расталды! Платформаны толық пайдалану үшін ата-анаң немесе қамқоршың келісім беруі керек."
+    sentTo: "Келісім сұрауы %email% мекенжайына жіберілді"
+    helpTitle: "Хат келмеді ме? Көмек керек пе?"
+    hint: "Ата-анаңнан спам қалтасын тексеруді сұра. Сілтеме 24 сағат бойы жарамды."
+    resendButton: "Келісім хатын қайта жіберу"
+    wrongEmail: "Ата-ананың эл. поштасын қате енгіздің бе?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "Ата-ананың келісімі қайтарып алынды"
+    message: "Ата-анаң немесе қамқоршың аккаунтыңа берген келісімін қайтарып алды. Келісім қайта берілгенше аккаунтыңның мүмкіндіктері шектеулі болады."
+    newEmailPlaceholder: "Ата-ананың жаңа эл. поштасы"
+    changeButton: "Жаңарту және қайта жіберу"
 accountRecovery:
   title: Аккаунтты қалпына келтіру
-  description: Аккаунттың электрондық поштасы немесе пайдаланушы аты есіңізде болса, біз сізге құпиясөзді қалпына келтіруге сілтеме жібере аламыз.
+  description: Аккаунттың электрондық поштасы немесе пайдаланушы аты есіңде болса, біз саған құпиясөзді қалпына келтіруге сілтеме жібере аламыз.
   button:
     cancel: Болдырмау
     submit: Құпиясөзді қалпына келтіру
 resetPassword:
   request:
     title: "Құпиясөзді қалпына келтіру"
-    description: "Аккаунттың электрондық поштасы есіңізде болса, біз сізге құпиясөзді қалпына келтіруге сілтеме жібере аламыз."
+    description: "Аккаунттың электрондық поштасы есіңде болса, біз саған құпиясөзді қалпына келтіруге сілтеме жібере аламыз."
     button:
       submit: "Құпиясөзді қалпына келтіру хатын поштаға жіберу"
       cancel: "Болдырмау"
   check:
-    title: "Электрондық поштаңызды тексеріңіз"
-    description: "Электрондық поштаңызға сәйкес аккаунт бар болса, құпия сөзді қалпына келтіру үшін пайдалануға болатын сілтемесі бар электрондық пошта жаңа ғана жіберілді. Бұл сілтеменің мерзімі %time% де аяқталады."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "Эл. поштаңды тексер"
+    description: "Эл. поштаңа сәйкес аккаунт бар болса, құпия сөзді қалпына келтіру үшін пайдалануға болатын сілтемесі бар электрондық пошта жаңа ғана жіберілді. Бұл сілтеменің мерзімі %time% де аяқталады."
+    descriptionTwo: "Құпиясөзді қалпына келтіруді әр %throttleLimit% сағат сайын қайта сұрай аласың."
+    descriptionThree: "Хат келмесе, спам қалтасын тексер немесе %email-webmaster% мекенжайындағы қолдау қызметімізге хат жаз."
   email:
     title: "Сәлем!"
-    visitLink: "Құпия сөзді қалпына келтіру үшін мына сілтемеге өтіңіз"
+    visitLink: "Құпия сөзді қалпына келтіру үшін мына сілтемеге өт"
     expire: "Бұл сілтеменің мерзімі %time% аяқталады."
     cheers: "Ура!"
   newemail:
     title: "Құпиясөзді қалпына келтіру"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    content: "Жақында сен Catrobat аккаунтыңның құпиясөзін қалпына келтіруді сұрадың. Жаңа құпиясөз таңдау үшін төмендегі түймені бас. Егер мұны сұрамаған болсаң, бұл хатты елемей-ақ қой."
+    visitLink: "Құпиясөзді қалпына келтіру"
+    expire: "Бұл сілтеме %time% бойы жарамды және оны тек бір рет пайдалануға болады."
   reset:
     title: "Құпиясөзді қалпына келтіру"
     button:
@@ -668,10 +668,10 @@ format:
   million_abbreviation: М
 #api
 errors:
-  unspecified: Белгісіз қате орын алды. Өтінеміз, бізге хабарласыңыз.
+  unspecified: Белгісіз қате орын алды. Бізге хабарлас.
   username:
-    blank: Пайдаланушы атыңыз бос болмауы керек.
-    invalid: Пайдаланушы атыңыз жарамсыз
+    blank: Пайдаланушы атың бос болмауы керек.
+    invalid: Пайдаланушы атың жарамсыз
     exists: Мынау ат бұрыннан бар.
     not_exists: Мұндай пайдаланушы аты жоқ.
     not_email: Пайдаланушы аты электрондық пошта болмауы керек.
@@ -683,44 +683,44 @@ errors:
     blank: Бұл ел мұнда жоқ.
     invalid: Қате ел
   email:
-    blank: email поштаңыз бос болмауы керек.
-    invalid: Электрондық поштаңыз жарамсыз сияқты
+    blank: Эл. поштаң бос болмауы керек.
+    invalid: Эл. поштаң жарамсыз сияқты
     exists: Мынау эл. пошта мекенжайы бұрыннан бар.
   id:
-    blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+    blank: "Open Authentication ID бос болмауы керек"
+  login: "Құпиясөз немесе пайдаланушы аты қате."
+  post-data: "POST деректері қате немесе жоқ!"
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: "Клиент fileChecksum жібермеді! Pocket Code-тың ескі нұсқасын пайдаланып жүрсің бе?"
+    invalid: "бақылау сомасы жарамсыз"
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: "код XML-і жарамсыз"
+    missing: "белгісіз қате: project_xml_not_found!"
   file:
-    unexpected: unexpected file found
+    unexpected: "күтпеген файл табылды"
     invalid: жарамсыз файл
-  image.missing: Project XML mentions a file which does not exist in project-folder
+  image.missing: "Жоба XML-інде жоба қалтасында жоқ файл аталған"
   unknown: белгісіз қате
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  token: "Құрылғының аутентификациясы сәтсіз: auth-token жарамсыз!"
+  uploadTokenAuthFailed: "Жүктеу токенінің аутентификациясы сәтсіз."
   project:
     invalid: Қате жоба.
   languageversion:
-    tooold: 'Кешіріңіз, жобаңызда Катробат тілінің ескі нұсқасы бар! Сіз Pocket Code-тың соңғы нұсқасын пайдаланасыз ба?'
+    tooold: 'Кешір, жобаңда Catrobat тілінің ескі нұсқасы бар! Сен Pocket Code-тың соңғы нұсқасын пайдаланып жүрсің бе?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "Кешір, сен Pocket Code-тың ескі нұсқасын пайдаланып жүрсің. Оны ең жаңа нұсқаға жаңарт."
   authentication:
     title: Аутентификация орындамалды
     webview: |
-      Пайдаланушы тіркелгі деректеріңіз дұрыс емес.
-      Қолданбаға қайта кіріп көріңіз.
+      Пайдаланушы деректерің дұрыс емес.
+      Қолданбаға қайта кіріп көр.
 success:
   text: Сәтті
   registration: Тіркелу сәтті өтті!
   token: жарайды
-  upload: Жобаңыз сәтті салынды!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: Жобаң сәтті жүктелді!
+  imgUpload: "Суретің сәтті жүктелді!"
+  report: "Шағымың сәтті жіберілді!"
 time:
   minutes.ago: '{0} < 1 минут бұрын |{1}1 минут бұрын |]1,Inf] %count% минут бұрын'
   hours.ago: '{1}1 сағат бұрын |]1,Inf] %count% сағат бұрын'
@@ -728,10 +728,10 @@ time:
   months.ago: '{1}1 ай бұрын |]1,Inf] %count% ай бұрын'
   years.ago: '{1}1 жыл бұрын |]1,Inf] бір жылдан астам бұрын'
 failure:
-  upload: Қолданбаңызды жүктеу кезінде қате орын алды.
+  upload: Қолданбаңды жүктеу кезінде қате орын алды.
 user:
   verification:
-    email: 'Электрондық поштаңызды растаңыз'
+    email: 'Эл. поштаңды раста'
 api:
   registerUser:
     emailMissing: 'Электрондық пошта жоқ'
@@ -750,46 +750,46 @@ api:
     passwordTooLong: 'Құпия сөз тым ұзақ'
     passwordInvalidChars: 'Құпия сөзде жарамсыз таңбалар бар'
     usernameContainsEmail: "Пайдаланушы атында эл. пошта мекенжайы болмауы керек."
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: "Пайдаланушы атында сілтеме болмауы керек"
     countryCodeInvalid: "Ел коды жарамсыз"
     pictureInvalid: "Профиль суреті жарамсыз"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    dateOfBirthMissing: "Туған күні міндетті"
+    dateOfBirthInvalid: "Туған күні жарамсыз"
+    tooYoung: "Аккаунт ашу үшін кемінде 3 жаста болуың керек"
+    parentEmailMissing: "14 жасқа толмаған пайдаланушылар үшін ата-ананың эл. поштасы міндетті"
+    parentEmailInvalid: "Ата-ананың эл. поштасы жарамсыз"
+    parentEmailSameAsUser: "Ата-ананың эл. поштасы сенің эл. пошта мекенжайыңнан өзгеше болуы керек"
   updateUser:
     currentPasswordMissing: "Қазіргі құпия сөз жоқ."
     currentPasswordWrong: "Қазіргі құпиясөз қате"
   project:
-    nameEmpty: 'Name cannot be empty'
+    nameEmpty: "Атауы бос болмауы керек"
     nameTooLong: 'Аты тым ұзын'
     descriptionTooLong: 'Сипаттамасы өте ұзақ'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    creditsTooLong: "Жазбалар мен алғыстар тым ұзын"
+    screenshotInvalid: "Жоба скриншоты жарамсыз немесе қолдау көрсетілмейді"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    invalid_checksum: "Бақылау сомасы жарамсыз. Қайта жүктеп көр!"
+    upload_error: "Жүктеу кезінде қате. Қайта жүктеп көр!"
+    creating_error: "Жоба нысанын жасау кезінде қате. Қайта жүктеп көр!"
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "Жоба мәліметтерін сақтау сәтсіз аяқталды."
+    screenshotError: "Скриншотты оқу, түрлендіру немесе сақтау сәтсіз аяқталды. Енгізгеніңді тексер."
+    notFound: "Өзгертілетін жоба табылмады."
+    forbidden: "Жобаны өзгертуге рұқсат жоқ. Жүйеде әлі барсың ба?"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
+    nameMissing: "Атауы жоқ"
+    nameEmpty: "Атауы бос болмауы керек"
+    nameTooShort: "Атауы тым қысқа"
     nameTooLong: 'Аты тым ұзын'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
+    nameAlreadyInUse: "Бұл атау бос емес"
+    descriptionMissing: "Сипаттамасы жоқ"
+    descriptionEmpty: "Сипаттамасы бос"
+    descriptionTooShort: "Сипаттамасы тым қысқа"
     descriptionTooLong: 'Сипаттамасы өте ұзақ'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    imageFileInvalid: "Сурет файлы жарамсыз"
+    imageFileInvalidType: "Сурет файлының түрі жарамсыз"
+    imageFileTooLarge: "Сурет файлы тым үлкен"
 #languages and countries
 language:
   arabic: Арабша
@@ -837,9 +837,9 @@ language:
   ukrainian: Украин
   vietnamese: Вьетнам
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: "APK жасау"
+  pending: "APK жасалуда"
+  download: "APK жүктеп алу"
 admin:
   maintain:
     diskMaintenance: Дискіге техникалық қызмет көрсету
@@ -848,20 +848,20 @@ admin:
     removableObjects: Кетірілетін обьекттер
 recommender:
   similarPrograms: Ұқсас жобалар
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: "Бұл жобаны жүктеп алған пайдаланушылар мыналарды да жүктеп алды"
   moreFromThisUser: '%username% басқа жобалары'
 pmd:
-  submitBtn: Жобаңызды жіберіңіз
+  submitBtn: Жобаңды жібер
   submitBox:
     header: Жіберу
-    text: Сіз жобаңызды жібергелі жатырсыз. Жоба кодын енгізіп, жіберу батырмасын басыңыз.
+    text: Сен жобаңды жібергелі жатырсың. Жоба кодын енгізіп, жіберу батырмасын бас.
     btnText: Жіберу
   successful:
     text: Жобаны жүктеу сәтті аяқталды.
   failed:
     text: Жобаны жүктеу сәтсіз аяқталды.
 codeview:
-  title: 'Code View'
+  title: "Код көрінісі"
   showCode: 'Кодты көрсету'
   hideCode: 'Кодты жасыру'
   showStatistics: 'Код статистикасын көрсету'
@@ -877,28 +877,28 @@ codeview:
   sounds: 'Дыбыстар'
   globals: 'Ғаламдық'
   locals: 'Жергілікті'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  globalVariables: "Глобалды айнымалылар"
+  localVariables: "Жергілікті айнымалылар"
+  eventBricks: "Оқиға блоктары"
+  controlBricks: "Басқару блоктары"
+  motionBricks: "Қозғалыс блоктары"
+  soundBricks: "Дыбыс блоктары"
+  looksBricks: "Сыртқы түр блоктары"
+  penBricks: "Қалам блоктары"
+  dataBricks: "Дерек блоктары"
+  specialBricks: "Арнайы блоктар"
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: "Код көрінісі"
+  loading: "Код көрінісі жүктелуде..."
+  error: "Код көрінісін жүктеу мүмкін болмады."
+  retry: "Қайталап көру"
+  empty: "Бұл жобада код жоқ."
   scripts: 'Скрипттер'
   looks: 'Көрініс'
   sounds: 'Дыбыстар'
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
+  title: "Код статистикасы"
+  error: "Код статистикасын көрсету мүмкін емес."
   general: 'Басты'
   bricks: 'Блоктар'
   eventBricks: 'Оқиға'
@@ -910,85 +910,85 @@ codeStatistics:
   dataBricks: 'Деректер'
   deviceBricks: 'Құрылғы'
   specialBricks: 'Арнайы'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: "Сенің ұпайың:"
+  points: "ұпай"
+  abstraction: "Абстракция және есепті бөліктерге бөлу"
+  parallelism: "Параллельдік"
+  logicalThinking: "Логикалық ойлау"
+  synchronization: "Синхрондау"
+  flowControl: "Ағынды басқару"
+  userInteractivity: "Пайдаланушымен өзара әрекет"
+  dataRepresentation: "Деректерді ұсыну"
+  level: "Деңгей"
+  loading: "Жүктелуде..."
+  bonus: "Бонус"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "%user_count% шығармашыл адамға қосыл!"
+  text: "%project_count% керемет жоба бөлісіліп қойды, келесісі сенікі болуы мүмкін. Қолданбамызды жүктеп алып, бүгін-ақ жасай баста"
 privacy-policy:
-  header: Privacy Policy
-  version: Version 2.2, 17 October 2019
-  text1: Сізге біздің қызметтеріміздің және онымен байланысты аккаунттың барлық артықшылықтарын ұсыну үшін сізден белгілі бір деректерді жинау қажет.
-  text2: Қызметтерімізді (қолданбалар мен веб-сайттар) қолдау және жақсарту, сондай-ақ АКТ және STEM/STEAM білімі бойынша ғылыми зерттеулер жүргізу үшін Google LLC (АҚШ), сонымен қатар Dynatrace by Dynatrace LLC (АҚШ) ұсынған Google Analytics, Crashlytics және Firebase қолданбаларын пайдаланамыз. АҚШ) қызметтерімізді пайдалану туралы метадеректерді алу үшін, мысалы, бұзылу туралы ақпарат, уақыт белгілері, кірген беттер/экрандар, қолданбалар мен қызметтерді пайдалану, пайдаланылған операциялық жүйе және желі провайдері туралы ақпарат. Бұл талдау және жиналған деректер сіздің профиліңізге байланысты емес және ешқандай жеке ақпаратты қамтымайды (IP мекенжайының соңғы биттері анонимді болады). Дегенмен, жиналған деректер қызмет провайдерлеріне (Google LLC, АҚШ және Dynatrace LLC, АҚШ) жіберіледі. Деректерді өңдеу Google LLC және Dynatrace LLC келісімдеріне негізделген. Бұл қызмет жеткізушілерімен қарым-қатынас Еуропалық Одақтың Деректерді қорғаудың жалпы ережесіне (ЕО GDPR) және ЕО-АҚШ «Құпиялылық қалқаны» келісіміне сәйкес келеді.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  header: "Құпиялылық саясаты"
+  version: "2.2 нұсқасы, 2019 жылғы 17 қазан"
+  text1: Саған қызметтеріміздің және онымен байланысты аккаунттың барлық артықшылықтарын ұсыну үшін сенен белгілі бір деректерді жинауымыз қажет.
+  text2: Қызметтерімізді (қолданбалар мен веб-сайттар) қолдау және жақсарту, сондай-ақ АКТ және STEM/STEAM білімі бойынша ғылыми зерттеулер жүргізу үшін Google LLC (АҚШ), сонымен қатар Dynatrace by Dynatrace LLC (АҚШ) ұсынған Google Analytics, Crashlytics және Firebase қолданбаларын пайдаланамыз. АҚШ) қызметтерімізді пайдалану туралы метадеректерді алу үшін, мысалы, бұзылу туралы ақпарат, уақыт белгілері, кірген беттер/экрандар, қолданбалар мен қызметтерді пайдалану, пайдаланылған операциялық жүйе және желі провайдері туралы ақпарат. Бұл талдау және жиналған деректер сенің профиліңе байланысты емес және ешқандай жеке ақпаратты қамтымайды (IP мекенжайының соңғы биттері анонимді болады). Дегенмен, жиналған деректер қызмет провайдерлеріне (Google LLC, АҚШ және Dynatrace LLC, АҚШ) жіберіледі. Деректерді өңдеу Google LLC және Dynatrace LLC келісімдеріне негізделген. Бұл қызмет жеткізушілерімен қарым-қатынас Еуропалық Одақтың Деректерді қорғаудың жалпы ережесіне (ЕО GDPR) және ЕО-АҚШ «Құпиялылық қалқаны» келісіміне сәйкес келеді.
+  text3: "Біздің жүйелерде аккаунт ашу және пайдалану үшін, сондай-ақ аккаунтыңа қатысты қажетті өзгерістер туралы, мысалы, жаңартулар немесе Пайдалану шарттарымызды, қауымдастық ережелерімізді не саясаттарымызды бұзу туралы саған эл. пошта арқылы хабарлау үшін біз сенің пайдаланушы атыңды және, егер көрсетсең, эл. пошта мекенжайыңды сақтаймыз. Егер аккаунтыңды Google Plus немесе Facebook арқылы байланыстырған болсаң, осы қызметтердегі аккаунтыңа байланған сәйкестендіру кілтін де сақтаймыз. Біз бұл деректерді сен анық рұқсат бермейінше басқа ешқандай (мысалы, маркетингтік) мақсаттарға пайдаланбаймыз."
+  text4: "Өз еркіңмен бөлісу сайтындағы аккаунт бетің арқылы тұратын еліңді көрсете аласың. Ол жалпыға ашық профиліңде көрсетіледі және біз оны тек статистикалық және ғылыми мақсаттарда пайдаланамыз. Оны профиль баптауларынан кез келген уақытта өшіре аласың."
+  text5: "Аккаунтыңа тиесілі жеке деректерді пайдалануға берген келісіміңді кез келген уақытта https://share.catrob.at/ сайтындағы профиль бетің арқылы аккаунтыңды жою арқылы қайтарып ала аласың. Аккаунтыңды жойғаннан кейін ұсынылған қызметтерді пайдалана беруге болады, бірақ бағдарламаларды жүктеу, пікір жазу немесе лайк басу сияқты бірлескен әрекеттер қолжетімсіз болады. Сондай-ақ аккаунтыңа байланған барлық мазмұн, мысалы, жүктелген бағдарламалар, пікірлер және т.б. жойылады."
+  text6: "Қызметтерімізді теріс пайдаланудың, мысалы, пайдаланушылар жүктеген материалдарды немесе пікірлерді заңсыз мақсаттарда пайдаланудың алдын алу үшін пайдаланушылар жасаған барлық жалпыға ашық деректер (жүктеулер, пікірлер) уақыт белгісімен және пайдаланылған интернет мекенжайымен бірге ішкі дерекқорда сақталады. Бұл деректер жеткілікті негізде заңсыз әрекеттерге күдік туындап, ресми уәкілетті құқықтық органдар қолданыстағы заңға сүйеніп оларды сұрамайынша, ешқандай мекемеге берілмейді және пайдаланылмайды. Әр жағдайды алдымен біз жеке-жеке мұқият тексереміз."
+  text7: "Сен https://catrob.at/newsletter сайтында MailChimp қызметі (The Rocket Science Group LLC d/b/a MailChimp, АҚШ) арқылы ұсынылатын Catrobat жаңалықтар таратылымына өз еркіңмен жазыла аласың. Сонда сен көрсеткен эл. пошта мекенжайыңа Catrobat жобасы мен оның қызметтері туралы жаңалықтар келіп тұрады. Әр хаттың төменгі жағындағы «unsubscribe» сілтемесі арқылы таратылымнан кез келген уақытта бас тарта аласың. Бұл таратылымды бізбен деректерді өңдеу туралы келісімі бар және ЕО-ның Деректерді қорғаудың жалпы ережесі мен ЕО-АҚШ «Privacy Shield» келісімін сақтауға міндеттенген MailChimp ұсынады. MailChimp туралы толығырақ MailChimp-тің Құпиялылық саясаты мен Пайдалану шарттарынан қара."
+  text8: "Барлық қызметтерді International Catrobat Association – Verein zur Förderung freier Software (Грац, Австрия, Еуропалық Одақ қаласында тіркелген коммерциялық емес ҮЕҰ) аясындағы тегін ашық бастапқы кодты Catrobat жобасы ұсынады. Біздің саясаттарымыз ЕО мен Австрияның деректерді қорғау туралы заңдарын (GDPR) сақтайды. Бізбен байланысу үшін contact@catrobat.org мекенжайына эл. хат жібер немесе мына мекенжайға хат жаз: Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)."
+  text9: "Егер саған 14 жас толмаған болса, бұл саясатты заңды қамқоршың (әдетте ата-анаң) қабылдауы керек."
+  text10: "Catrobat-тың ресми ағылшын тіліндегі құпиялылық саясаты интернетте %privacy_policy% мекенжайында қолжетімді."
   disagree-text: Мақұлдаусыз біз аккаунтты жасай алмаймыз, бірақ негізгі мүмкіндіктер әлі де қолжетімді.
 catro-notifications:
   markAsRead: "Оқылған ретінде белгілеу"
-  noFollowers: "Сізде ешқандай жазылушы хабарландырулары жоқ сияқты."
-  noComments: "Сізде ешқандай пікір хабарландырулар жоқ сияқты."
-  noReactions: "Сізде реакция туралы хабарландырулар жоқ сияқты."
-  noRemixes: "Сізде ремикс хабарландырулары жоқ сияқты."
-  noStudios: "It looks like you don't have any studio notifications."
+  noFollowers: "Сенде ешқандай жазылушы хабарландырулары жоқ сияқты."
+  noComments: "Сенде ешқандай пікір хабарландырулар жоқ сияқты."
+  noReactions: "Сенде реакция туралы хабарландырулар жоқ сияқты."
+  noRemixes: "Сенде ремикс хабарландырулары жоқ сияқты."
+  noStudios: "Сенде студия хабарландырулары жоқ сияқты."
   tab:
-    studio: Studio
+    studio: "Студия"
     project: Құрылғыдағы жобалар
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: "%user_link% %program_link% жобасына пікір қалдырды."
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: "%user_link% %program_link% жобасына реакция білдірді."
   follow:
-    message: 'User %user_link% follows you now.'
+    message: "%user_link% енді саған жазылды."
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% жаңа %program_link% ойынын жасады."
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: "%user_link% сенің %remix_program_link% ойыныңның %program_link% ремиксін жасады."
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% %studio_name% студиясында пікір қалдырды."
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% %program_link% жобасын %studio_name% студиясына қосты."
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "Сенің %studio_name% студиясына қосылу сұрауың қабылданды."
+    declined: "Сенің %studio_name% студиясына қосылу сұрауың қабылданбады."
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "Сенің %program_link% жобаң %days% күннен кейін автоматты түрде жойылады. Оны сақтап қалу үшін жаңа нұсқасын жүктеп сал немесе көбірек жүктеп алу жина."
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "Сенің \"%project_name%\" жобаң белсенділік болмағандықтан автоматты түрде жойылды. Әлі де бөліскің келсе, оны қайта жүктеп сал."
+  noProjects: "Сенде жоба хабарландырулары жоқ сияқты."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: "Сілтеме алмасу буферіне көшірілді!"
+  success_project: "Жоба сілтемесі алмасу буферіне көшірілді!"
+  success_user: "Пайдаланушы сілтемесі алмасу буферіне көшірілді!"
   fail: Сілтемені алмасу буферіне көшіру мүмкін болмады! :(
 next: Келесі
 previous: Алдыңғы
 media-packages:
   title: Медиа-пакеттер
-  description: Келесі категорияларда Pocket Code жобаларына қосу үшін қосымша актерлер мен спрайттарды таба аласыз.
+  description: Келесі категорияларда Pocket Code жобаларына қосу үшін қосымша актерлер мен спрайттарды таба аласың.
   thumb-size:
     description: Алдын ала қарау өлшемі
     sm: құттай
     md: орташа
     lg: үлкен
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
+  theme-special: "%flavor% тақырыбы бойынша арнайы"
+  search-results: "Медиа кітапханадан іздеу нәтижелері"
+  no-results: "Іздеуің 0 нәтиже берді. Тек ағылшынша іздеу сөздерін пайдалан."
   download_these_files: сақтау
 flavor:
   pocketcode: Pocket Code
@@ -997,28 +997,28 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: "Copyright &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. Барлық құқықтар қорғалған."
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Бұл веб-сайт жұмыс істеуі үшін JavaScript қажет. Браузеріңде JavaScript-ті қос немесе үлкен адамнан көмек сұра."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: "Біз қызметтерімізді жақсарту үшін cookie файлдарын пайдаланамыз. Ешқандай дерек сатылмайды және ешкімге берілмейді."
   accept: "Қабылдау"
   decline: "Бас тарту"
   privacy-link: "Құпиялық саясаты"
-  settings-link: "Cookie Settings"
+  settings-link: "Cookie баптаулары"
 agree: Келісу
 disagree: Келіспеу
 profileLoader:
-  noProfiles: There are currently no profiles.
+  noProfiles: "Қазір ешқандай профиль жоқ."
 element: 'Элемент'
 elements: 'Элементтер'
 share:
   text: 'Бөлісу'
   error: 'Бөлісу сәтсіз аяқталды'
-  success: 'Бөліскеніңіз үшін рахмет!'
+  success: 'Бөліскенің үшін рахмет!'
 copy: 'Сілтемені көшіру'
-checkOutProject: 'Мына жобаны қарап кетіңіз:'
-checkOutUser: 'Мына пайдаланушыны қарап кетіңіз:'
+checkOutProject: 'Мына жобаны қарап шық:'
+checkOutUser: 'Мына пайдаланушыны қарап шық:'
 community: 'Catrobat қауымдастығы'
 back_to_app: 'Қауымдастықтан шығу'
 category:
@@ -1029,8 +1029,8 @@ category:
   example: Мысал
   scratch: Scratch ремикстері
   recommended: Ұсынылған жобалар
-  popular: Most popular
-  trending: Trending projects
+  popular: "Ең танымал"
+  trending: "Трендтегі жобалар"
 achievements:
   sidebar:
     title: 'Жетістіктер:'
@@ -1042,14 +1042,14 @@ achievements:
       x_out_of_y: '%unlocked% ішінен %total% ашылған'
     tab_unlocked:
       title: 'Ашылған'
-      empty: "Сіз ешқандай жетістіктерге жеткен жоқсыз."
+      empty: "Сен әлі ешқандай жетістікке жеткен жоқсың."
     tab_locked:
       title: 'Құлпталды'
-      empty: "Сіз барлық жетістіктерге жеттіңіз."
+      empty: "Сен барлық жетістіктерге жеттің."
   popup:
     new:
       title: 'Құттықтаймыз!'
-      subtitle: "Сіз белгішені алдыңыз"
+      subtitle: "Сен белгіше алдың"
       confirm: "Ок"
   profile:
     title: 'Жетістіктер:'
@@ -1057,7 +1057,7 @@ achievements:
     type:
       bronze_user:
         title: 'Шәкірт'
-        description: 'Follow someone and upload a project'
+        description: "Біреуге жазылып, жоба жүктеп сал"
       silver_user:
         title: 'Қолөнерші'
         description: 'Белсенді мүше > 1 жыл'
@@ -1069,25 +1069,25 @@ achievements:
         description: 'Белсенді мүше > 7 жыл'
       perfect_profile:
         title: 'Белсенді'
-        description: 'Бірінші профиль суретін қосыңыз'
+        description: 'Алғашқы профиль суретін қос'
       verified_developer:
         title: 'Жаңадан бастаушы'
-        description: 'Жаңа аккаунт құрыңыз'
+        description: 'Жаңа аккаунт құр'
       coding_jam_09_2021:
         title: "Coding Jam '21"
         description: "Coding Jam 2021 қатысушысы"
       bilingual:
         title: "Екітілді"
-        description: "Жобаңызды 2 тілге аударыңыз"
+        description: "Жобаңды 2 тілге аудар"
       trilingual:
         title: "Үштілді"
-        description: "Жобаңызды 3 тілге аударыңыз"
+        description: "Жобаңды 3 тілге аудар"
       linguist:
         title: "Тіл маманы"
-        description: "Жобаңызды 5 тілге аударыңыз"
+        description: "Жобаңды 5 тілге аудар"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Расталған"
+        description: "Аккаунтыңды раста"
 tags:
   title: '{0} |{1} Белгі |]1,Inf] Белгілер'
   tag:
@@ -1125,92 +1125,92 @@ extensions:
     multiplayer:
       title: Көп-ойыншы
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: "Студиялар"
+  singular: "Студия"
+  create_studio: "Студия құру"
+  delete_studio: "Студияны жою"
   cancel_studio: 'Болдырмау'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
+  studio_name: "Студия атауы"
+  studio_description: "Студия сипаттамасы"
+  is_public: "Жалпыға ашық ету керек пе?"
+  enable_comments: "Пікірлерді қосу керек пе?"
+  cover_image: "Мұқаба жүктеу"
+  cover_image_empty: "Сурет таңдалмаған."
+  cover_image_hint: "Ең көбі 1 МБ. Қолдау көрсетілетін пішімдер: JPEG, PNG, GIF, WebP."
+  cover_image_compressed: "Сурет 1 МБ шегіне сыю үшін автоматты түрде сығылды."
+  cover_image_compressing: "Сурет сығылуда..."
+  cover_image_still_too_large: "Сурет сығылғаннан кейін де тым үлкен. Кішірек файл таңда."
+  cover_image_invalid_type: "Сурет түрі жарамсыз. JPEG, PNG, GIF немесе WebP пайдалан."
+  cover_image_compression_failed: "Суретті өңдеу сәтсіз аяқталды. Басқа файлды байқап көр."
+  cover_image_alt: "Мұқаба суретің"
+  cover_image_remove: "Суретті алып тастау"
+  popular: "Танымал студиялар"
   join: 'Кіру'
   leave: 'Шығу'
   report: 'Есеп беру'
   public: 'қоғамдық'
   private: 'жеке'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: "Қосылған студиялар"
+    public_studios: "Жалпыға ашық студиялар"
+    private_studios: "Тек шақыру арқылы кіретін студиялар"
+    no_studios: "Әзірге студиялар жоқ"
+    my_studios: "Менің студияларым"
+    explore: "Студияларды шолу"
+    no_joined: "Сен әлі ешқандай студияға қосылған жоқсың"
+    joined: "Қосылдың"
+    load_more: "Тағы жүктеу"
     open: 'Ашу'
     share: 'Бөлісу'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: "Сілтеме алмасу буферіне көшірілді!"
+    leave_confirm_title: "Бұл студиядан шығу керек пе?"
     cancel: 'Болдырмау'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: "Сұрауды болдырмау"
+    cancel_request_confirm_title: "Қосылу сұрауын болдырмау керек пе?"
     admin: 'Админ'
-    member: 'Member'
+    member: "Мүше"
   details:
-    add_project: 'click to add the project'
+    add_project: "жобаны қосу үшін бас"
     add: 'Қосу'
     showMore: 'көбірек көру'
     showLess: 'азырақ көру'
-    are_you_sure: 'Сіз сенімдісіз бе?'
-    no_way_of_return: 'This cannot be undone.'
+    are_you_sure: 'Сенімдісің бе?'
+    no_way_of_return: "Мұны қайтару мүмкін емес."
     delete_it: 'Жою'
     remove_project: 'Студиядан жою'
     remove_project_error: 'Жобаны студиядан жою мүмкін болмады!'
     remove_project_success: 'жоба студиядан сәттілік жойылды!'
-    no_projects: 'Studio does not contain any projects yet.'
+    no_projects: "Студияда әлі ешқандай жоба жоқ."
     projects:
       title: 'жобалар'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: "Жобаларды қосу"
+      open_project: "Жобаны ашу"
       download: 'Жүктеп алу'
       share: 'Бөлісу'
       remove_from_studio: 'Студиядан жою'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
+      remove_from_studio_title: "Жобаны студиядан алып тастау керек пе?"
+      remove_from_studio_text: "Ойыңды өзгертсең, оны кейін қайта қоса аласың."
+      share_success: "Сілтеме алмасу буферіне көшірілді!"
+      share_fail: "Сілтемені көшіру сәтсіз аяқталды."
+      no_projects_empty_state: "Сенде әзірге қосатын жоба жоқ. Алдымен Pocket Code-та біреуін жаса!"
+      add_selected: "Таңдалғандарды қосу"
+    no_available_projects: "Қосуға болатын жобалар жоқ."
+    updateCoverError: "Студия мұқабасын жаңарту кезінде қате кетті."
     join: 'Кіру'
     leave: 'Шығу'
     report: 'Есеп беру'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: "Күтуде"
+    decline: "Қабылданбады"
     comments:
       title: 'Пікірлер'
-      type_something: 'Бірдеңе теріңіз'
+      type_something: 'Бірдеңе жаз'
       replies: 'жауаптар'
       send: 'жіберу'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Пікір қалдыру кезінде бір нәрсе қате кетті. Кейінірек қайталап көріңіз.'
+      no_comments: "Бұл студияда әлі пікір жоқ."
+      disabled_comments: "Бұл студияда пікірлер өшірілген."
+      remove_comment: "Пікірді өшіру"
+      post_error: "Пікіріңді жариялау кезінде қате кетті. Кейінірек қайталап көр."
+      remove_error: 'Пікірді өшіру кезінде қате кетті. Кейінірек қайталап көр.'
     activity_list:
       title: 'Іс-шаралар'
       join_studio: '%user% студияға қосылды'
@@ -1219,24 +1219,24 @@ studio:
     members_list:
       title: 'Студияның мүшелері'
       project_count: '{0} Студиялық жобалар жоқ |{1} 1 студиялық жоба |]1,Inf] %count% студиялық жобалар'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Мүшені админге көтеріңіз'
-      promotion_failed: 'Бұл мүшені көтеру кезінде бірдеңе дұрыс болмады. Әрекетті кейінірек қайталаңыз.'
+      no_studio_projects: "Студия жобалары жоқ"
+      one_studio_project: "1 студия жобасы"
+      n_studio_projects: "%count% студия жобасы"
+      promote_member: 'Мүшені админге көтер'
+      promotion_failed: 'Бұл мүшені көтеру кезінде бірдеңе дұрыс болмады. Әрекетті кейінірек қайтала.'
       ban_member: 'Мүшеге студиядан тыйым салу'
-      ban_failed: 'Бұл мүшені кілттеу кезінде бірдеңе дұрыс болмады. Әрекетті кейінірек қайталаңыз.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      ban_failed: 'Бұл мүшені кілттеу кезінде бірдеңе дұрыс болмады. Әрекетті кейінірек қайтала.'
+      demote_member: "Админді мүшеге түсіру"
+      demotion_failed: "Бұл админді түсіру кезінде қате кетті. Кейінірек қайталап көр."
+      last_admin: "Бұл студияның соңғы админін түсіру мүмкін емес."
     join_requests:
-      title: 'Join Requests'
+      title: "Қосылу сұраулары"
       accept: 'Қабылдау'
       decline: 'Бас тарту'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: "Қосылу сұрауы қабылданды."
+      decline_success: "Қосылу сұрауы қабылданбады."
+      error: "Қате кетті. Қайталап көр."
+      no_requests: "Күтудегі қосылу сұраулары жоқ."
     show_more: 'Көбірек көрсет'
     show_less: 'Азырақ көрсету'
     admin_settings:
@@ -1254,72 +1254,72 @@ media_library:
       sound: 'Түрі: дыбыс'
       movie: 'Түрі: видео'
       default: 'Түрі: белгісіз'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: "Әзірге медиа санаттары жоқ."
+  no_results: "Ештеңе табылмады."
+  assets_count: "ресурс"
+  view_all: "Барлығын көру"
+  view_all_category: "%category% – барлығын көру"
+  back_to_app: "Қолданбаға оралу"
 snackbar:
   project_not_found: 'Сұралған жоба қолжетімді емес'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_for_kids: "Жоба балаларға арналмаған деп белгіленді!"
+  project_safe_for_kids: "Жоба балаларға қауіпсіз деп белгіленді!"
+  project_not_for_kids_moderator: "Жобаны модератор белгіледі. Мұны қайтара алмайсың!"
+  project_set_private: "Жоба жеке етілді."
+  project_set_public: "Жоба жалпыға ашық етілді."
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "Қосымша ақпарат: additionalInfo"
+    feature_1: "featureName функциясы maintenanceStart бастап maintenanceEnd дейін қолжетімсіз"
+    feature_2: "Функция"
+    feature_3: "Функция"
+MarkNotForKids: "Балаларға арналмаған деп белгілеу"
+MarkSafeForKids: "Балаларға қауіпсіз деп белгілеу"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "Растау"
+  confirmMark: "Бұл жобаны шынымен балаларға арналмаған деп белгілегің келе ме?"
+  confirmUnmark: "Бұл жобадан «балаларға арналмаған» белгісін шынымен алып тастағың келе ме?"
+  confirmYes: "Иә, жалғастыру!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Бұл %content_type% туралы шағымдану"
+    reason_placeholder: "Неге шағымданып жатқаныңды сипатта..."
+    submit: "Шағым жіберу"
+    success: "Шағымың жіберілді. Рахмет."
+    error: "Қате кетті. Қайталап көр."
+    duplicate: "Сен бұл мазмұнға әлдеқашан шағымдандың."
+    trust_too_low: "Аккаунтың шағым жіберу үшін тым жаңа."
+    unverified: "Жүйеге кіргеніңе және аккаунтыңның эл. поштасы расталғанына көз жеткіз."
+    rate_limited: "Сен шағымдарды тым жиі жіберіп жатырсың. Біраз күтіп, қайталап көр."
+    suspended: "Аккаунтың тоқтатылған."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "Шағымдану"
+    title: "Бұл шешімге шағымдану"
+    placeholder: "Бұл мазмұн неге жасырылмауы керек екенін түсіндір..."
+    submit: "Апелляция жіберу"
     cancel: "Болдырмау"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "Апелляцияң қарауға жіберілді."
+    already_pending: "Сенде қаралып жатқан апелляция бар."
+    error: "Қате кетті. Қайталап көр."
+    rate_limited: "Сен апелляцияларды тым жиі жіберіп жатырсың. Біраз күтіп, қайталап көр."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Сен пікірлерді тым жиі жазып жатырсың. Сәл күте тұр."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Сен тым жиі реакция білдіріп жатырсың. Сәл күте тұр."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Сен тым жиі жазылып/жазылудан бас тартып жатырсың. Сәл күте тұр."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Сен студия әрекеттерін тым жиі орындап жатырсың. Сәл күте тұр."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "Бұл жоба қауымдастық шағымдарына байланысты жасырылды."
+    comment: "Бұл пікір қауымдастық шағымдарына байланысты жасырылды."
+    user: "Бұл профиль қауымдастық шағымдарына байланысты жасырылды."
+    user_own: "Қауымдастық шағымдарына байланысты аккаунтың тоқтатылды. Бұл шешімге шағымдана аласың."
+    studio: "Бұл студия қауымдастық шағымдарына байланысты жасырылды."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "Сенің %content_type% қауымдастық шағымдарына байланысты жасырылды. Бұл шешімге шағымдана аласың."
+    appeal_approved: "Апелляцияң мақұлданды. Мазмұның қайтадан көрінеді."
+    appeal_rejected: "Апелляцияң қаралды, мазмұныңды жасыру туралы шешім өзгеріссіз қалды."
+    admin_review_needed: "Мазмұн автоматты түрде жасырылды және тексеруді қажет етеді."
+Reports: "Шағымдар"
+members: "мүше"
