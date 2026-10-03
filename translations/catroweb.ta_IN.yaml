@@ -1,32 +1,32 @@
 ---
 #homepage translation
 title: கற்றோபாட்டுச் சமூகம்
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: 'Catrobat மூலம் உருவாக்கப்பட்ட படைப்புத் திட்டங்களைப் பகிர், கண்டறி, ரீமிக்ஸ் செய். விளையாட்டுகள், அனிமேஷன்கள், செயலிகளை உருவாக்கும் இளம் படைப்பாளர்களின் உலகளாவிய சமூகத்தில் சேர்.'
+meta.description.media.library: 'Catrobat-க்கான இலவச மீடியா சொத்துகளை உலாவிப் பதிவிறக்கு — உன் திட்டங்களுக்கான ஒலிகள், படங்கள் மற்றும் பல.'
+meta.og.title.login: 'Catrobat-இல் உள்நுழை'
+meta.og.description.login: 'உன் Catrobat திட்டங்களைச் சமூகத்துடன் பகிர உள்நுழை.'
+meta.og.title.register: 'Catrobat கணக்கை உருவாக்கு'
+meta.og.description.register: 'Catrobat சமூகத்தில் சேர்ந்து இன்றே உன் படைப்புத் திட்டங்களைப் பகிரத் தொடங்கு.'
+meta.og.description.profile: 'Catrobat-இல் %username% – அவர்களின் திட்டங்களையும் சாதனைகளையும் பார்.'
 localLanguage: ஆங்கிலம்
 username: பயனர் பெயர்
 password: கடவுச்சொல்
 createNewPassword: புதிய கடவுச்சொல்லை உருவாக்குக
 accountSettings: கணக்கு செயலமைப்புகள்
 email: மின்னஞ்சல்
-aboutPocketCode: பற்றி பாக்கெட் குறியீடு
+aboutPocketCode: 'Pocket Code பற்றி'
 about: கேட்ரோபாட் பற்றி
 education: கல்வி
 chat: அரட்டை மற்றும் மன்றங்கள்
-privacyGuide: Privacy Awareness Guide
+privacyGuide: 'தனியுரிமை விழிப்புணர்வு வழிகாட்டி'
 others: மற்றவைகள்
 tutorials: உதவி
 googlePlay: கூகுள் பிளே அங்காடி
 iosAppStore: iOS பயனி அங்காடி
 instagram: Instagram
-discordChat: Discord chat
+discordChat: 'Discord அரட்டை'
 passwordsNoMatch: கடவுச்சொற்கள் பொருந்தவில்லை.
-error: Oops!
+error: 'அச்சச்சோ!'
 cancel: தவிர்
 confirm: உறுதிபடுத்து
 report: அறிக்கையிடு
@@ -41,20 +41,20 @@ description: விளக்கம்
 noDescription: விளக்கவுரை ஏதும் கிடைக்கவில்லை.
 credits: குறிப்புகளும் பொதுவொப்புதல்களும்
 noCredits: எந்த குறிப்புகளும் பொதுவொப்புதல்களும் கிடைக்கவில்லை
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+notesAndCreditsDescription: 'இந்தத் திட்டத்தை நீ எப்படி உருவாக்கினாய்? மற்றவர்களின் யோசனைகள், ஸ்கிரிப்டுகள் அல்லது படங்களைப் பயன்படுத்தினாயா? இங்கே அவர்களுக்கு நன்றி சொல்.'
+projectImportedFromScratch: 'இந்தத் திட்டம் MIT Scratch-இலிருந்து இறக்குமதி செய்யப்பட்டது. அசல் திட்டத்தை நீ பார்க்கலாம்'
+scratchImportedProjectLinkHere: 'இங்கே.'
 country: நாடு
 loginText: உள்நுழைவு
 privacyPolicy: சுய செயலிட கொள்கை
 imprint: அச்சிடு
 projectDetails: விவரங்கள்
 somethingWentWrong: 'ஐய்யோ! ஏதோ தவறாய் நிகழ்ந்து விட்டது.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: 'நீ உள்நுழைந்திருப்பதையும் உன் கணக்கின் மின்னஞ்சல் சரிபார்க்கப்பட்டிருப்பதையும் உறுதிசெய்.'
+accountSuspended: 'சமூகப் புகார்களால் உன் கணக்கு இடைநிறுத்தப்பட்டுள்ளது. உன் சுயவிவரத்திலிருந்து இந்த முடிவுக்கு மேல்முறையீடு செய்யலாம்.'
+doesNotExist: 'கோரப்பட்ட வளம் இல்லை.'
 pleaseTryAgain: 'தயவுசெய்து மீண்டும் முயற்சிக்கவும்!'
-tryAgainButton: 'Try again'
+tryAgainButton: 'மீண்டும் முயற்சி செய்'
 oldVersionError: 'தயவு செய்து மிகப் புதிய Pocket Code பதிப்புக்கு புதிப்பிக்கவும்!'
 more: 'மிகுதி'
 less: 'குறைவு'
@@ -71,30 +71,30 @@ FollowersNotifications: 'பின்தொடர்பவர்கள்'
 LikeNotifications: 'மறுமொழிகள்'
 CommentNotifications: 'பின்கருத்துக்கள்'
 RemixNotifications: 'ரீமிக்ஸ்கள்'
-wellDone: "சிறப்பு!"
-done: "முடிந்தது!"
-notificationsReadMessage: "உங்களிடம் எந்த அறிவிப்புகளும் இல்லை என்று தெரிகிறது."
-confirmMessage: "ஆம், நீக்கு"
-cancelMessage: "தவிர்"
-notificationsUnauthorizedError: "பயனரை அங்கீகரிக்க முடியவில்லை"
-notificationsClearError: "அறிவிப்புகளை படித்ததாக குறியிட இயலவில்லை!"
-pleaseWait: "தயவு செய்து காத்திருக்கவும்..."
-projects: "சாதனத்தில் உள்ள திட்டங்கள்"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "வெளிக் கணக்கு உள்நுழைவு தகவல்"
+wellDone: 'சிறப்பு!'
+done: 'முடிந்தது!'
+notificationsReadMessage: 'உங்களிடம் எந்த அறிவிப்புகளும் இல்லை என்று தெரிகிறது.'
+confirmMessage: 'ஆம், நீக்கு'
+cancelMessage: 'தவிர்'
+notificationsUnauthorizedError: 'பயனரை அங்கீகரிக்க முடியவில்லை'
+notificationsClearError: 'அறிவிப்புகளை படித்ததாக குறியிட இயலவில்லை!'
+pleaseWait: 'தயவு செய்து காத்திருக்கவும்...'
+projects: 'சாதனத்தில் உள்ள திட்டங்கள்'
+users: 'பயனர்'
+studios: 'ஸ்டுடியோக்கள்'
+oauthPopUpTitle: 'வெளிக் கணக்கு உள்நுழைவு தகவல்'
 oauthInfo: 'தற்போது நீங்கள் உள்நுழைய ஒரு வெளிக் கணக்கைப் பயன்படுத்தியுள்ளீர்கள். உங்களுக்காக ஒரு சீரற்ற பயனர்பெயரை நாங்கள் உருவாக்கியுள்ளோம்.  உங்கள் பயனர்பெயரை மாற்ற விரும்பினால் அல்லது உங்கள் கணக்கிற்கு புதிய கடவுச்சொல்லை உருவாக்க விரும்பினால் எனது சுயவிவரப் பக்கத்திற்குச் செல்லவும்.  உங்கள் சுயவிவரப் பக்கத்திற்குச் செல்ல %link_start% இங்கே %link_end% தோட்டு எடுங்கள்'
-oauthHere: "இங்கு"
-statistics: "புள்ளிவிவரம்"
-languageSelection: "Language selection"
+oauthHere: 'இங்கு'
+statistics: 'புள்ளிவிவரம்'
+languageSelection: 'மொழித் தேர்வு'
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
+  title: 'தீம்'
+  auto: 'கணினி'
+  auto_description: 'உன் சாதன அமைப்பைப் பின்பற்று'
+  light: 'வெளிர்'
+  light_description: 'பிரகாசமான தோற்றம்'
+  dark: 'இருள்'
+  dark_description: 'இருண்ட தோற்றம்'
   apply: 'செலுத்து'
 indexPage:
   recommendedSection:
@@ -111,204 +111,186 @@ follower:
   noFollowers: தற்போது உங்களைப் பின்தொடர்பவர்கள் யாரும் இல்லை.
   noOtherFollowing: தற்போது நீங்கள் பின்தொடரும் பயனர்கள் யாரும் இல்லை.
   noOtherFollowers: தற்போது உங்களைப் பின்தொடரும் பயனர்கள் யாரும் இல்லை.
-  followError: "விரும்பிய பயனரைப் பின்தொடர முடியவில்லை!"
-  unfollowError: "விரும்பிய பயனரைப் பின்தொடர்வதில் இருந்து பின்வாங்க முடியவில்லை!"
-  unfollowQuestion: "நீங்கள் இப் பயனரைப் பின்தொடர்வதில் இருந்து உறுதியாக பின்வாங்க விரும்புகிறீர்களா?"
-  unfollowButton: "%username%-ஐ பின்தொடருவதில் இருந்து பின்வாங்கு"
+  followError: 'விரும்பிய பயனரைப் பின்தொடர முடியவில்லை!'
+  unfollowError: 'விரும்பிய பயனரைப் பின்தொடர்வதில் இருந்து பின்வாங்க முடியவில்லை!'
+  unfollowQuestion: 'நீங்கள் இப் பயனரைப் பின்தொடர்வதில் இருந்து உறுதியாக பின்வாங்க விரும்புகிறீர்களா?'
+  unfollowButton: '%username%-ஐ பின்தொடருவதில் இருந்து பின்வாங்கு'
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: 'Catrobat-இன் %theme%-க்கு வரவேற்கிறோம்'
+    title_mindstorms: 'Mindstorms EV3 மற்றும் NXT-க்கான Catrobat தளத்துக்கு வரவேற்கிறோம்'
+    subtitle: 'கதைகள், விளையாட்டுகள் மற்றும் பலவற்றை உருவாக்கு...'
+    subtitle_embroidery: 'உன் டி-சர்ட், பை, கால்சட்டை அல்லது ஸ்மார்ட்போன் உறையில் உன் சொந்த வடிவங்களைத் தைத்திடு!'
+    subtitle_mindstorms: 'உன் Lego Mindstorms EV3 மற்றும் NXT ரோபோக்களுடன் உன் சொந்தத் திட்டங்களை உருவாக்கு'
+    download: 'செயலியைப் பதிவிறக்கு'
+    statistics: 'மேலும் புள்ளிவிவரங்கள்'
+  featured: 'சிறப்புத் திட்டங்கள்'
   open: திறந்த
   download: பதிவிறக்கம்
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: 'திட்டத்தைப் பதிவேற்று'
+    drop_here: 'உன் .catrobat கோப்பை இங்கே இழுத்து விடு'
+    or_browse: 'அல்லது உலாவ கிளிக் செய்'
+    button: 'பதிவேற்று'
+    uploading: 'பதிவேற்றுகிறது...'
+    success: 'திட்டம் வெற்றிகரமாகப் பதிவேற்றப்பட்டது!'
+    view_project: 'திட்டத்தைப் பார்'
+    upload_another: 'இன்னொன்றைப் பதிவேற்று'
+    invalid_file: 'ஒரு .catrobat கோப்பைத் தேர்ந்தெடு'
+    file_too_large: 'கோப்பு மிகப் பெரியது'
+    error: 'பதிவேற்றம் தோல்வியடைந்தது. மீண்டும் முயற்சி செய்.'
+    unauthorized: 'பதிவேற்ற நீ உள்நுழைந்திருக்க வேண்டும்.'
+    rate_limited: 'அதிகமான பதிவேற்றங்கள். பிறகு மீண்டும் முயற்சி செய்.'
+    selected_file: 'தேர்ந்தெடுத்த கோப்பு:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+      file_size: 'அதிகபட்ச கோப்பு அளவு 100 MB.'
+      app_upload: 'Pocket Code செயலியிலிருந்தும் நேரடியாகத் திட்டங்களைப் பதிவேற்றலாம். செயலிகள் தற்போது மறுவடிவமைக்கப்படுவதால் இப்போது வலைப் பதிவேற்றத்தை ஆதரிக்கவில்லை என்பதைக் கவனி.'
+      retention: 'பதிவேற்றிய திட்டங்கள் சிறிது காலம் செயலற்று இருந்தால் தானாக நீக்கப்படும். அதை நீட்டிக்க அடிக்கடி உள்நுழை அல்லது உன் திட்டத்துக்குப் பதிவிறக்கங்களைப் பெறு.'
+      protection: 'மிகச் சிறந்த அல்லது பிரபலமான திட்டங்களை மதிப்பீட்டாளர்கள் தானியங்கு நீக்கத்திலிருந்து பாதுகாக்கலாம்.'
+  example: 'எடுத்துக்காட்டுகள்'
+  newest: 'புதிய திட்டங்கள்'
+  recommended: 'பரிந்துரைக்கப்பட்ட திட்டங்கள்'
+  scratchremixes: 'Scratch ரீமிக்ஸ்கள்'
+  noProjects: 'தற்போது எந்தத் திட்டமும் இல்லை.'
   shareAction: பகிர்
   deleteAction: செயல்திட்டத்தை நீக்கு
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+  deleteConfirmation: "உறுதியா?\n\"%programName%\"-ஐ நீக்க விரும்புகிறாயா?\nஇதைத் திரும்பப் பெற வழியில்லை!\nஆம், நீக்கு!\nரத்து செய்\n"
+  deleteConfirmText: 'இந்தச் செயலைத் திரும்பப் பெற முடியாது. உன் திட்டம் நிரந்தரமாக நீக்கப்படும்.'
   deleteConfirmationTitle: உறுதியாகவா?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
+  deleteNotFoundError: 'நீக்க வேண்டிய திட்டம் உன் பயனர் கணக்கில் காணப்படவில்லை.'
+  private: 'தனிப்பட்டது'
+  public: 'பொது'
+  setPrivateAction: 'தனிப்பட்டதாக்கு'
+  setPublicAction: 'பொதுவாக்கு'
+  setPrivateConfirm: 'இந்தத் திட்டத்தைத் தனிப்பட்டதாக்கவா? இனி தேடல் முடிவுகளில் தோன்றாது.'
+  setPublicConfirm: 'இந்தத் திட்டத்தைப் பொதுவாக்கவா? அனைவருக்கும் தெரியும்.'
+  markNotForKidsConfirm: 'இந்தத் திட்டத்தைக் குழந்தைகளுக்கு ஏற்றதல்ல எனக் குறிக்கவா?'
+  markSafeForKidsConfirm: "இந்தத் திட்டத்திலிருந்து 'குழந்தைகளுக்கு ஏற்றதல்ல' குறியை நீக்கவா?"
+  nfkModeratorLocked: 'இந்த அமைப்பை ஒரு மதிப்பீட்டாளர் பூட்டியுள்ளார்.'
+  confirmSetPrivate: 'இந்தத் திட்டத்தைத் தனிப்பட்டதாக்க உறுதியா? இனி தேடல் முடிவுகளில் தோன்றாது.'
+  confirmSetPublic: 'இந்தத் திட்டத்தைப் பொதுவாக்க உறுதியா? அனைவருக்கும் தெரியும்.'
+  changeVisibility: "உறுதியா?\n'%programName%'-ஐத் தனிப்பட்டதாக்கினால், மற்ற பயனர்கள் அதைப் பார்க்கவோ கண்டுபிடிக்கவோ முடியாது.\nஉன் திட்ட இணைப்பை நண்பர்களுடன் இன்னும் பகிரலாம். பூட்டு ஐகானைத் தட்டித் தெரிவுநிலையை மாற்றலாம்.\n\"%programName%\"-ஐப் பொதுவாக்கினால், மற்ற பயனர்கள் அதைப் பார்க்கவும் கண்டுபிடிக்கவும் முடியும்.\nஆம், பொதுவாக்கு\nஆம், தனிப்பட்டதாக்கு\nஇல்லை\n"
+  reportCommentConfirmation: 'இந்தக் கருத்தைப் புகாரளிக்க உறுதியா?'
+  deleteCommentConfirmation: 'இந்தக் கருத்தை நீக்க உறுதியா?'
+  deleteAccountConfirmation: "கணக்கை நீக்கவா?\nஉன் கணக்கை நீக்க உறுதியா? இது நீ பதிவேற்றிய திட்டங்களையும் கருத்துகளையும் நீக்கிவிடும்!\nஇதைத் திரும்பப் பெற வழியில்லை!\nஆம், நீக்கு!\nரத்து செய்\n"
+  tooLongName: 'திட்டப் பெயர் மிக நீளமாக உள்ளது!'
+  tooLongDescription: 'திட்ட விளக்கம் மிக நீளமாக உள்ளது!'
+  tooLongCredits: 'திட்டக் குறிப்புகளும் நன்றிகளும் மிக நீளமாக உள்ளன!'
   my_projects: எனது செயற்திட்டங்கள்
-  trending: Trending projects
-  popular: Popular projects
+  trending: 'டிரெண்டிங் திட்டங்கள்'
+  popular: 'பிரபலமான திட்டங்கள்'
   most:
     viewed: அதிகமாக பார்க்கபட்டது
     downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
-  random: Random projects
-  related: Related projects
+  random: 'சீரற்ற திட்டங்கள்'
+  related: 'தொடர்புடைய திட்டங்கள்'
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'திட்டங்களை ஆராய்'
+    no_projects: 'நீ இன்னும் எந்தத் திட்டத்தையும் உருவாக்கவில்லை'
+    no_explore: 'திட்டங்கள் எதுவும் கிடைக்கவில்லை'
+    load_more: 'மேலும் ஏற்று'
+    upload: 'திட்டத்தைப் பதிவேற்று'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'பாதுகாக்கப்பட்டது'
+    day_left: '1 நாள் மீதம்'
+    days_left: '%days% நாட்கள் மீதம்'
+    tooltip: 'செயலற்ற காலத்துக்குப் பிறகு திட்டங்கள் தானாக நீக்கப்படும். அதை நீட்டிக்க அதிக பதிவிறக்கங்களைப் பெறு அல்லது அடிக்கடி உள்நுழை.'
+    tooltip_protected: 'இந்தத் திட்டம் பாதுகாக்கப்பட்டது, தானாக நீக்கப்படாது.'
+  downloads: '%downloads% பதிவிறக்கங்கள்'
+  sample: 'எடுத்துக்காட்டுத் திட்டங்கள்'
+  views: '%views% பார்வைகள்'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "அனைத்தும்"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+    likersTitle: 'இந்தத் திட்டத்துக்கு எதிர்வினையாற்றியவர்கள்'
+    all: 'அனைத்தும்'
+  remixes: '{0}0 ரீமிக்ஸ்கள் |{1}1 ரீமிக்ஸ் |]1,Inf]%remixes% ரீமிக்ஸ்கள்'
+  newRemixesNotificationTitle: '|{1}"%programName%"-க்கு 1 புதிய ரீமிக்ஸ்: |]1,Inf] "%programName%"-க்கு %remixes% புதிய ரீமிக்ஸ்கள்:'
+  submitted: 'சமர்ப்பித்த திட்டங்கள்'
+  uploaded: 'பதிவேற்றிய திட்டங்கள்'
+  reportAsInappropriate: 'பொருத்தமற்றது எனப் புகாரளி'
+  reportProgram: 'திட்டத்தைப் புகாரளி'
+  languageVersion: 'Catrobat மொழிப் பதிப்பு: %languageVersion%'
+  reportLoginText: 'இந்தத் திட்டத்தைப் புகாரளிக்க %login% செய்.'
+  reportDialogHeader: 'இந்தத் திட்டத்தை ஏன் புகாரளிக்க விரும்புகிறாய்?'
+  reportDialogReason: 'காரணத்தை உள்ளிடு'
+  reportRadioButtonInappropriate: 'இது பொருத்தமற்றது'
+  reportRadioButtonCopyright: 'பதிப்புரிமை மீறல்'
+  reportRadioButtonSpam: 'இது ஸ்பேம்'
+  reportRadioButtonDislike: 'எனக்கு இது பிடிக்கவில்லை'
+  reportOwnProgram: 'உன் சொந்தத் திட்டத்தைப் புகாரளிக்க முடியாது.'
+  reportAlready: 'இந்தத் திட்டத்தை நீ ஏற்கனவே புகாரளித்துவிட்டாய்.'
+  reportDone: 'இந்தத் திட்டத்தைப் புகாரளித்தாய்!'
+  updateAppHeaderDownload: 'பதிவிறக்கம் சாத்தியமில்லை'
+  updateAppTextDownload: 'உன் செயலியைச் சமீபத்திய பதிப்புக்குப் புதுப்பி. எல்லா Android அம்சங்களும் iOS-இல் இன்னும் கிடைக்கவில்லை என்பதைக் கவனி.'
+  updateAppTextDownloadApk: 'APK பதிவிறக்கம் தற்போது Android-இல் மட்டுமே கிடைக்கும், iOS-இல் அல்ல.'
+  updateAppHeader: 'செயலியைப் புதுப்பி'
+  updateAppText: 'உன் செயலியைச் சமீபத்திய பதிப்புக்குப் புதுப்பி.'
   btnClosePopup: ஆம்
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: 'இந்த Catrobat திட்டத்தைப் பார்'
+  show_more: 'மேலும் காட்டு'
   comments: பின்கருத்துக்கள்
-  send: Send
+  send: 'அனுப்பு'
   delete: அழித்துவிடு
   report: அறிக்கையிடு
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: 'பதிலளி'
+  report_popup: 'கருத்து வெற்றிகரமாகப் புகாரளிக்கப்பட்டது.'
+  report_popup_header: 'புகாரளிக்கப்பட்டது'
+  deleted_popup: 'கருத்து வெற்றிகரமாக நீக்கப்பட்டது.'
+  deleted_popup_header: 'நீக்கப்பட்டது'
+  noAdminRights: 'உனக்கு நிர்வாக உரிமைகள் இல்லை. நிர்வாகியாக உள்நுழை.'
+  editProject: 'திட்டத்தைத் திருத்து'
+  closeProjectEditor: 'திட்டத் திருத்தியை மூடு'
   closeEditorPrompt: மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?
   btnDiscard: புறக்கணி
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: 'ஒரு கருத்தை எழுது'
+  thumbsUp: 'அருமை!'
+  smile: 'புன்னகை!'
+  love: 'அன்பு!'
+  wow: 'வாவ்!'
+  linkTitle: 'இணைப்பு'
+  link: 'திட்ட இணைப்பைக் கிளிப்போர்டுக்கு நகலெடு'
   reactionsText: மறுமொழிகள்
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadErrorText: 'திட்டத்தைப் பதிவிறக்கும்போது பிழை ஏற்பட்டது. பிறகு மீண்டும் முயற்சி செய்.'
+  downloadStartText: 'பதிவிறக்கம் தொடங்கியது...'
+  downloading: 'பதிவிறக்குகிறது...'
+  openInApp: 'Pocket Code-இல் திற'
+  downloaded: 'பதிவிறக்கப்பட்டது'
+  showTranslation: 'மொழிபெயர்ப்பைக் காட்டு'
+  hideTranslation: 'மொழிபெயர்ப்பை மறை'
+  translatedByLine: '%provider% மூலம் %sourceLanguage%-இலிருந்து %targetLanguage%-க்கு மொழிபெயர்க்கப்பட்டது'
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  confrimDelete: 'மொழிபெயர்ப்பை நீக்க உறுதியா?'
   default: இயல்புநிலை
   save: சேமி
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: '%language% மொழிபெயர்ப்பு'
+  editDefault: 'இயல்புநிலையைத் திருத்து'
+  editTranslation: '%language% மொழிபெயர்ப்பைத் திருத்து'
+  translations: 'மொழிபெயர்ப்புகள்'
+  createTranslation: 'மொழிபெயர்ப்பை உருவாக்கு'
+  deletedComment: '**நீக்கப்பட்டது**'
+  replyLabel: 'பதில்'
+  repliesLabel: 'பதில்கள்'
+  notForKids: 'குழந்தைகளுக்குப் பாதுகாப்பானதல்ல'
 remixGraph:
   title: ரீமிக்ஸ்கள்
   showRemixGraph: 'ரீமிக்ஸ் வரைபடத்தைக் காட்டு'
   by: 'மூலம்'
   open: 'திறந்த'
   showPaths: 'பாதைகளைக் காட்டு'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: 'ரீமிக்ஸ் வரைபடம் ஏற்றப்படுகிறது...'
+  error: 'ரீமிக்ஸ் வரைபடத்தை ஏற்ற முடியவில்லை.'
+  empty: 'இந்தத் திட்டத்துக்கு இன்னும் ரீமிக்ஸ் வரைபடத் தரவு இல்லை.'
   remixesLabel: 'ரீமிக்ஸ்கள்'
   projectsLabel: 'சாதனத்தில் உள்ள திட்டங்கள்'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  scratchLabel: 'Scratch மூலங்கள்'
+  interactHint: 'திட்டத்தைத் திறக்க அல்லது அதன் ரீமிக்ஸ் பாதையை முன்னிலைப்படுத்த ஒரு முனையைத் தேர்ந்தெடு.'
+  zoomIn: 'பெரிதாக்கு'
+  zoomOut: 'சிறிதாக்கு'
+  resetView: 'பார்வையை மீட்டமை'
+  projectNotAvailableErrorTitle: 'மன்னிக்கவும்...'
+  projectNotAvailableErrorDescription: 'இந்தத் திட்டம் இப்போது கிடைக்கவில்லை!'
+  projectNotAvailable: 'கிடைக்கவில்லை'
+  projectUnknownUser: 'தெரியாத பயனர்'
+noReply: 'இது ஒரு தானியங்கு செய்தி - இந்த மின்னஞ்சலுக்கு நேரடியாகப் பதிலளிக்காதே.'
 accountConfirmation:
   subject: உங்கள் கேட்ரோபேட் கணக்கு உறுதிப்படுத்தல்
   message: |
@@ -321,7 +303,7 @@ accountConfirmation:
     <p>
      அன்புள்ள %username%. <br>
      <br>
-     உங்கள் கணக்கைச் செயல்படுத்துவதை முடிக்க - <a href=<a href=%confirmationUrl%> இங்கே கிளிக் செய்க. </a><br>
+     உங்கள் கணக்கைச் செயல்படுத்துவதை முடிக்க - <a href="%confirmationUrl%"> இங்கே கிளிக் செய்க. </a><br>
      <br>
      உங்கள் கணக்கை சரிபார்க்க இந்த இணைப்பு ஒரு முறை மட்டுமே பயன்படுத்தப்பட முடியும். <br>
      <br>
@@ -329,80 +311,80 @@ accountConfirmation:
      உங்கள் கேட்ரோபாட் குழு.
      </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: 'உன் மின்னஞ்சல் முகவரியைச் சரிபார்'
+  welcome: 'Catrobat-க்கு வரவேற்கிறோம்!'
+  greeting: 'பதிவு செய்ததற்கு நன்றி! தொடங்க உன் மின்னஞ்சல் முகவரியைச் சரிபார்.'
+  message: 'உன் மின்னஞ்சலை உறுதிப்படுத்த கீழே உள்ள பொத்தானைக் கிளிக் செய். இந்த இணைப்பு %time% வரை செல்லுபடியாகும், ஒரு முறை மட்டுமே பயன்படுத்த முடியும்.'
+  button: 'மின்னஞ்சல் முகவரியைச் சரிபார்'
+  ignore: 'நீ Catrobat கணக்கை உருவாக்கவில்லை என்றால், இந்த மின்னஞ்சலைப் பாதுகாப்பாகப் புறக்கணிக்கலாம்.'
+  autoDelete: 'சரிபார்க்கப்படாத கணக்குகள் 30 நாட்களுக்குப் பிறகு தானாக நீக்கப்படும்.'
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: 'உன் குழந்தையின் Catrobat கணக்குக்குப் பெற்றோர் ஒப்புதல் தேவை'
+    title: 'பெற்றோர் ஒப்புதல் தேவை'
+    greeting: 'வணக்கம்,'
+    message: 'உன் குழந்தை %username% Catrobat-இல் ஒரு கணக்கை உருவாக்கி, தங்கள் மின்னஞ்சல் முகவரியைச் சரிபார்த்துள்ளது.'
+    explanation: 'Catrobat என்பது இளைஞர்கள் செயலிகள், விளையாட்டுகள், அனிமேஷன்களை உருவாக்கி நிரலாக்கம் கற்கும் இலவசக் கல்வித் தளம். EU குழந்தைப் பாதுகாப்பு விதிமுறைகளின்படி, உன் குழந்தை சமூகத்தில் முழுமையாகப் பங்கேற்கும் முன் உன் ஒப்புதல் தேவை. ஒப்புதல் அளிக்க கீழே உள்ள பொத்தானைக் கிளிக் செய்.'
+    button: 'பெற்றோர் ஒப்புதல் அளி'
+    ignore: 'இந்த மின்னஞ்சலை நீ எதிர்பார்க்கவில்லை என்றால், பாதுகாப்பாகப் புறக்கணிக்கலாம். ஒப்புதல் இல்லாமல் கணக்கின் செயல்பாடுகள் குறைவாக இருக்கும்.'
+    whatIsCatrobat: 'Catrobat என்பது இலவச, இலாப நோக்கற்ற கல்வி நிரலாக்கத் தளம். மேலும் அறிய catrobat.org-ஐப் பார்.'
+    manageLink: 'எப்போது வேண்டுமானாலும் எங்கள் <a href="%portalUrl%" style="color: #00acc1;">பெற்றோர் போர்ட்டல்</a> மூலம் உன் குழந்தையின் கணக்கை நிர்வகிக்கலாம். <a href="%infoUrl%" style="color: #00acc1;">பெற்றோராக உன் உரிமைகள்</a> பற்றி மேலும் அறி.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: 'ஒப்புதல் அளிக்கப்பட்டது'
+    message: 'நன்றி! %username%-இன் கணக்கு இப்போது முழுமையாகச் செயல்படுத்தப்பட்டது.'
+    continueButton: 'திட்டங்களைக் கண்டறி'
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: 'பெற்றோர் & பாதுகாவலர்கள்'
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: 'பெற்றோர் & பாதுகாவலர்களுக்கான தகவல்'
+    intro: 'Catrobat இளம் பயனர்களின் பாதுகாப்பையும் தனியுரிமையையும் தீவிரமாகக் கருதுகிறது. உன் குழந்தையை நாங்கள் எப்படிப் பாதுகாக்கிறோம், உனக்கு என்ன உரிமைகள் உள்ளன என்பதை இந்தப் பக்கம் விளக்குகிறது.'
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: 'Catrobat என்றால் என்ன?'
+      text: 'Catrobat என்பது இளைஞர்கள் தங்கள் சொந்தச் செயலிகள், விளையாட்டுகள், அனிமேஷன்களை உருவாக்கி நிரலாக்கம் கற்கும் இலவச, இலாப நோக்கற்ற கல்வித் தளம். இந்தத் தளம் உலகம் முழுவதும் கிடைக்கிறது, கல்விச் சூழல்களில் பயன்படுத்தப்படுகிறது.'
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: 'நாங்கள் என்ன தரவைச் சேகரிக்கிறோம்?'
+      text: 'தளத்தை இயக்கத் தேவையான குறைந்தபட்சத் தரவை மட்டுமே சேகரிக்கிறோம்: பயனர் பெயர், மின்னஞ்சல் முகவரி, பிறந்த தேதி, உன் குழந்தை உருவாக்கிப் பதிவேற்றும் திட்டங்கள். 14 வயதுக்குட்பட்ட பயனர்களுக்கு, ஒப்புதலுக்காகப் பெற்றோர்/பாதுகாவலர் மின்னஞ்சல் முகவரியையும் சேமிக்கிறோம். தனிப்பட்ட தரவை மூன்றாம் தரப்பினருக்கு விற்கவோ பகிரவோ மாட்டோம்.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: 'பெற்றோர் அல்லது பாதுகாவலராக உன் உரிமைகள்'
+      text: 'EU குழந்தைப் பாதுகாப்பு விதிமுறைகள் (GDPR) மற்றும் COPPA-இன் கீழ், உனக்கு இந்த உரிமைகள் உள்ளன: உன் குழந்தை பற்றி நாங்கள் வைத்திருக்கும் தரவைப் பார்ப்பது, அந்தத் தரவின் நகலைக் கோருவது, எப்போது வேண்டுமானாலும் உன் ஒப்புதலைத் திரும்பப் பெறுவது (இது கணக்கைக் கட்டுப்படுத்தும்), உன் குழந்தையின் கணக்கையும் தொடர்புடைய எல்லாத் தரவையும் நிரந்தரமாக நீக்கக் கோருவது.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: 'சிறார் கணக்குகளுக்கு என்ன கட்டுப்பாடுகள் உள்ளன?'
+      text: '16 வயதுக்குட்பட்ட பயனர்கள் கருத்துகளை இடவோ படிக்கவோ, மற்ற பயனர்களைப் பின்தொடரவோ, குழந்தைகளுக்கு ஏற்றதல்ல எனக் குறிக்கப்பட்ட உள்ளடக்கத்தைப் பார்க்கவோ முடியாது. அவர்கள் இன்னும் திட்டங்களை உருவாக்கிப் பதிவேற்றலாம், பொதுத் திட்டங்களை உலாவலாம், திட்டங்களுக்கு லைக் மூலம் எதிர்வினையாற்றலாம். பாதுகாப்பான கற்றல் சூழலை வழங்க இந்தக் கட்டுப்பாடுகள் உள்ளன.'
+    manageButton: 'உன் குழந்தையின் கணக்கை நிர்வகி'
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: 'பெற்றோர் போர்ட்டல்'
+    description: 'உன் குழந்தையின் Catrobat கணக்கை நிர்வகிக்க ஒரு பாதுகாப்பான இணைப்பைப் பெற உன் மின்னஞ்சல் முகவரியை உள்ளிடு. பதிவின்போது நீ வழங்கிய மின்னஞ்சல் முகவரிக்கு இணைப்பு அனுப்பப்படும்.'
+    emailLabel: 'உன் மின்னஞ்சல் முகவரி'
+    submitButton: 'நிர்வாக இணைப்பை அனுப்பு'
+    infoLink: 'மேலும் அறி'
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: 'உன் இன்பாக்ஸைச் சரிபார்'
+      message: 'இந்த மின்னஞ்சலுடன் ஒரு கணக்கு இணைக்கப்பட்டிருந்தால், நிர்வாக இணைப்பை அனுப்பியுள்ளோம். உன் இன்பாக்ஸைச் சரிபார்த்து, உன் குழந்தையின் கணக்கை நிர்வகிக்க இணைப்பைப் பின்பற்று.'
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: 'குழந்தைக் கணக்குகளை நிர்வகி'
+    description: '%email%-உடன் இணைக்கப்பட்ட கணக்குகளை நீ நிர்வகிக்கிறாய்.'
+    consentStatus: 'ஒப்புதல் நிலை'
+    accountCreated: 'கணக்கு உருவாக்கப்பட்டது'
+    email: 'குழந்தையின் மின்னஞ்சல்'
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: 'அளிக்கப்பட்டது'
+      pending: 'நிலுவையில்'
+      revoked: 'திரும்பப் பெறப்பட்டது'
+    grantButton: 'ஒப்புதல் அளி'
+    revokeButton: 'ஒப்புதலைத் திரும்பப் பெறு'
+    revokeConfirm: 'ஒப்புதலைத் திரும்பப் பெற உறுதியா? கணக்கின் செயல்பாடுகள் குறைவாக இருக்கும்.'
+    exportButton: 'தரவை ஏற்றுமதி செய்'
+    deleteButton: 'கணக்கை நீக்கு'
+    deleteConfirm: 'இந்தக் கணக்கை நிரந்தரமாக நீக்க உறுதியா? இதைத் திரும்பப் பெற முடியாது.'
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: 'உன் குழந்தையின் Catrobat கணக்கை நிர்வகி'
+      title: 'கணக்கு நிர்வாகம்'
+      greeting: 'வணக்கம்,'
+      message: 'உன் குழந்தையின் Catrobat கணக்கை (%usernames%) நிர்வகிக்க ஒரு இணைப்பைக் கோரினாய். கணக்கைப் பார்த்து நிர்வகிக்க கீழே உள்ள பொத்தானைக் கிளிக் செய்.'
+      button: 'கணக்கை நிர்வகி'
+      ignore: 'நீ இதைக் கோரவில்லை என்றால், இந்த மின்னஞ்சலைப் பாதுகாப்பாகப் புறக்கணிக்கலாம்.'
 passwordRecovery:
   subject: உங்கள் கேட்ரோபாட் கடவுச்சொல் மீட்பு
   message: |
@@ -423,21 +405,21 @@ passwordRecovery:
     <p>
      அன்புள்ள %username%. <br>
      <br>
-     உங்கள் கடவுச்சொல்லை மறந்துவிட்டதால், உங்கள் கடவுச்சொல்லை <a href=%appplication_url%> பாக்கெட் குறியீடு </a> இல் மீட்டமைக்க கோரியுள்ளீர்கள்.
+     உங்கள் கடவுச்சொல்லை மறந்துவிட்டதால், உங்கள் கடவுச்சொல்லை <a href="%appplication_url%"> Pocket Code </a> இல் மீட்டமைக்க கோரியுள்ளீர்கள்.
      இதை நீங்கள் கோரவில்லை என்றால், தயவுசெய்து புறக்கணிக்கவும். இது 24 மணி நேரத்தில் காலாவதியாகி பயனற்றதாகிவிடும். <br>
      <br>
-     உங்கள் கடவுச்சொல்லை மீட்டமைத்து புதிய ஒன்றை உருவாக்க, தயவுசெய்து இங்கே <a href=%confirmationUrl%> ஐக் கிளிக் செய்க. </a> <br>
+     உங்கள் கடவுச்சொல்லை மீட்டமைத்து புதிய ஒன்றை உருவாக்க, தயவுசெய்து இங்கே <a href="%confirmationUrl%"> ஐக் கிளிக் செய்க. </a> <br>
      <br>
-     <a href=%appplication_url%> பாக்கெட் குறியீடு </a> சமூகத்தை அணுக எந்த நேரத்திலும் உங்கள் பயனர்பெயர் மற்றும் கடவுச்சொல்லைப் பயன்படுத்தலாம். <br>
-     அவ்வாறு செய்ய, பின்வரும் பக்கத்தைப் பார்வையிடவும்: <a href=%loginPage%> உள்நுழைவு பக்கம் </a> <br>
-     உங்கள் சுயவிவர விவரங்களைத் திருத்த, இந்த <a href=%profilePage%> பக்கத்திற்கு </a> செல்லவும். <br>
+     <a href="%appplication_url%"> Pocket Code </a> சமூகத்தை அணுக எந்த நேரத்திலும் உங்கள் பயனர்பெயர் மற்றும் கடவுச்சொல்லைப் பயன்படுத்தலாம். <br>
+     அவ்வாறு செய்ய, பின்வரும் பக்கத்தைப் பார்வையிடவும்: <a href="%loginPage%"> உள்நுழைவு பக்கம் </a> <br>
+     உங்கள் சுயவிவர விவரங்களைத் திருத்த, இந்த <a href="%profilePage%"> பக்கத்திற்கு </a> செல்லவும். <br>
      <br>
      வாழ்த்துக்கள், <br>
      உங்கள் கேட்ரோபாட் குழு.
      </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: 'என்னைப் பற்றி'
+  currentlyWorkingOn: 'தற்போது செய்துகொண்டிருப்பது'
   edit: உங்கள் சுயவிவ திருத்தம்
   saveChanges: திருத்தங்களை சேமியுங்கள்
   newPass: புதிய கடவுச்சொல்
@@ -454,7 +436,7 @@ profile:
   form:
     passwordTooShort: புதிய கடவுச்சொல்லில் %length% எழுத்துக்களாவது இருக்க வேண்டும்.
     passwordTooLong: புதிய கடவுச்சொல்லில் %length% எழுத்துகள் மட்டுமெ இடம்பெர முடியும்.
-    passwordIsUsername: கடவுச்சொல்லும் பயனப்பெயரும் வெவ்வேறாக இருக்க வேண்டும். 
+    passwordIsUsername: கடவுச்சொல்லும் பயனப்பெயரும் வெவ்வேறாக இருக்க வேண்டும்.
     passwordWrong: தவறான கடவுச்சொல்
     emailNotValid: இந்த மின்னஞ்சல் முகவரி செல்லுபடியாகாது.
     emailMissing: இந்த மின்னஞ்சல் முகவரியைப் புதுப்பிக்கும்போது பிழை. உங்களிடம் குறைந்தபட்சம் ஒரு சரிபார்க்கப்பட்ட மின்னஞ்சல் முகவரி இருக்க வேண்டும்.
@@ -466,16 +448,16 @@ profile:
     submitSuccess: சேமிக்கப்பட்டது!
   reallyDeleteProgram: உங்கள் திட்டத்தை நீக்க விரும்புகிறீர்களா
   programsOf: திட்டங்கள்
-  picture: Profile picture
+  picture: 'சுயவிவரப் படம்'
   changePicture: படத்தை மாற்றுக
   goToScratchProfile: Scratch-இல்‌ உள்ள சுயவிவரம்
 myprofile:
-  userSettings: User settings
+  userSettings: 'பயனர் அமைப்புகள்'
   profileSettings: சுயவிவர திருத்தம்
   securitySettings: கடவுச்சொல்லை மாற்றவும்
   accountSettings: கணக்கு செயலமைப்புகள்
-  accountVerification: Verify account
-  account: Account
+  accountVerification: 'கணக்கைச் சரிபார்'
+  account: 'கணக்கு'
   editProfile: சுயவிவர திருத்தம்
   edit: திருத்து
   done: முடிந்தது
@@ -484,29 +466,26 @@ myprofile:
   avatar: அவத்தார்
   email: மின்னஞ்சல்
   deleteAccount: கணக்கை நீக்கு
-  deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+  deleteAccountWarning: "கவனி:\nநீ %num_projects% திட்டம்(கள்) உருவாக்கியுள்ளாய், உனக்கு %num_followers% பின்தொடர்பவர்(கள்) உள்ளனர். உன் எல்லாத் திட்டங்களும் நீக்கப்படும். இனி உன்னால் உள்நுழைய முடியாது, உன் திட்டங்கள் எல்லாப் பட்டியல்களிலிருந்தும் மறைந்துவிடும். சுயவிவரத்தை நீக்குவதைத் திரும்பப் பெற முடியாது!\nஎங்களை விட்டுப் போக உறுதியா?\n"
+  exportData: 'என் தரவைப் பதிவிறக்கு'
+  exportDataDescription: 'உன் தனிப்பட்ட தரவின் நகலைப் பெற உனக்கு உரிமை உண்டு. இதில் உன் சுயவிவரத் தகவல், திட்டங்கள், கருத்துகள், எதிர்வினைகள், பின்தொடர்பவர்கள் அடங்கும்.'
+  exportDataLoading: 'பதிவிறக்குகிறது...'
+  exportDataError: 'உன் தரவை ஏற்றுமதி செய்யும்போது ஏதோ தவறு நடந்தது. பிறகு மீண்டும் முயற்சி செய்.'
+  exportDataRateLimited: 'நாளுக்கு ஒரு முறை மட்டுமே உன் தரவை ஏற்றுமதி செய்யலாம். நாளை மீண்டும் முயற்சி செய்.'
   editAccountSettings: கணக்கு அமைப்புகளைத் திருத்தவும்
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  profileChangeSuccess: 'உன் சுயவிவரம் வெற்றிகரமாக மாற்றப்பட்டது.'
+  unspecifiedError: 'உன் சுயவிவரத்தை மாற்றும்போது ஏதோ வேலை செய்யவில்லை. மீண்டும் முயற்சி செய், அல்லது தொடர்ந்து நடந்தால் எங்களுக்குத் தெரியப்படுத்து!'
+  verifyAccountText: 'உன் கணக்கைச் சரிபார்க்க ஒரு இணைப்புடன் மின்னஞ்சல் அனுப்புவோம். அடுத்த ஒரு மணி நேரத்துக்குள் இணைப்பைக் கிளிக் செய்; நாளுக்கு ஒரு மின்னஞ்சல் மட்டுமே கோர முடியும்.'
+  verifyAccountButton: 'மின்னஞ்சல் அனுப்பு'
+  verifyAccountMailSent: 'மின்னஞ்சல் வெற்றிகரமாக அனுப்பப்பட்டது. உன் இன்பாக்ஸைச் சரிபார்'
+  verifyAccountMailFailed: 'நாளுக்கு ஒரு மின்னஞ்சல் மட்டுமே கோர முடியும்'
 licenseToPlay:
   link: 'விளையாட உரிமம்'
   title: 'விளையாட உரிமம் - கடன் மற்றும் பங்கு கொடுங்கள்'
   text1: ஒவ்வொரு கேட்ரோபாட் திட்டமும் ஒரு கேக் என்று கற்பனை செய்து பாருங்கள், அதன் செய்முறையுடன் (நிரலாக்க தொகுதிகள்) வரும் ஒரு சிறப்பு கேக். கேட்ரோபாட் சமூகத்தின் அனைத்து உறுப்பினர்களும் தங்கள் சமையல் குறிப்புகளுடன் தங்கள் கேக்குகளைப் பகிர்ந்து கொள்கிறார்கள். இதன் பொருள் நீங்கள் கேக்குகளை ரசிக்கலாம் மற்றும் அவற்றை நீங்களே உருவாக்குவது எப்படி என்பதை அறியலாம்!
   text2: 'இரகசிய சமையல் வகைகள் எதுவும் இல்லை: இந்த கேக்குகளை எவ்வாறு தயாரிப்பது என்பதற்கான வழிமுறைகள் யாருக்கும் பயன்படுத்த, மறுபயன்பாடு செய்ய, மாற்றியமைக்க மற்றும் புதிய யோசனைகளுக்கு உத்வேகமாக செயல்படுகின்றன... அதாவது கேக்குகள்.'
-  text3: "நீங்கள் கேக்குகளை சாப்பிடலாம், மற்றவர்களின் சமையல் குறிப்புகளை உங்கள் சொந்தமாக நகலெடுக்கலாம், ஒருவேளை வெவ்வேறு பொருட்களுடன். இந்த சுதந்திரம் இரண்டு எளிய தேவைகளுடன் வருகிறது:"
-  text4: "கேட்ரோபாட் சமூகத்தை அமைப்பதில், இந்த அணுகுமுறையை சமூகத்தில் கற்றல் மற்றும் படைப்பாற்றலை ஆதரிக்கிறது என்று நாங்கள் நம்புகிறோம். சமையல் மற்றும் பொருட்கள் (ஸ்கிரிப்டுகள் மற்றும் கலைப்படைப்புகள்) பகிர்வதன் மூலம், மக்கள் ஒருவருக்கொருவர் யோசனைகளை உருவாக்க முடியும், மேலும் அனைவருக்கும் பயனளிக்கும்."
+  text3: 'நீங்கள் கேக்குகளை சாப்பிடலாம், மற்றவர்களின் சமையல் குறிப்புகளை உங்கள் சொந்தமாக நகலெடுக்கலாம், ஒருவேளை வெவ்வேறு பொருட்களுடன். இந்த சுதந்திரம் இரண்டு எளிய தேவைகளுடன் வருகிறது:'
+  text4: 'கேட்ரோபாட் சமூகத்தை அமைப்பதில், இந்த அணுகுமுறையை சமூகத்தில் கற்றல் மற்றும் படைப்பாற்றலை ஆதரிக்கிறது என்று நாங்கள் நம்புகிறோம். சமையல் மற்றும் பொருட்கள் (ஸ்கிரிப்டுகள் மற்றும் கலைப்படைப்புகள்) பகிர்வதன் மூலம், மக்கள் ஒருவருக்கொருவர் யோசனைகளை உருவாக்க முடியும், மேலும் அனைவருக்கும் பயனளிக்கும்.'
   text5: கேட்ரோபேட் வலைத்தளத்தை வடிவமைப்பதில், மக்களைப் பகிர ஊக்குவிப்பதற்கும் மற்றவர்களுக்கு கடன் வழங்குவதற்கும் அம்சங்களை நாங்கள் சேர்த்துள்ளோம். ஒவ்வொரு திட்டப்பக்கத்திலும், திட்டத்திற்கான அசல் ஸ்கிரிப்ட்களை நீங்கள் எப்போதும் பதிவிறக்கலாம். நீங்கள் ஒரு திட்டத்தை ரீமிக்ஸ் செய்தால் (ஸ்கிரிப்டுகள் அல்லது கலைப்படைப்புகளை மாற்றியமைத்தல் மற்றும் முடிவைப் பகிர்வது), திட்டக் குறிப்புகளில் கடன் வழங்க நாங்கள் உங்களை ஊக்குவிக்கிறோம், உங்களை ஊக்குவித்த நபர்களையும் திட்டத்தையும் குறிப்பிடுகிறோம்.
   text6: 'கேட்ரோபாட் ஆன்லைன் சமூகத்தின் பயன்பாட்டு விதிமுறைகளைப் பற்றி %link-termsOfUse% இல் மேலும் அறிக.'
   list1:
@@ -517,8 +496,8 @@ termsOfUse:
   title: பயன்பாட்டு விதிமுறைகள்
   headline: Catrobat சமூகத்திற்கு வரவேற்கிறோம்!
   text1: 'கேட்ரோபாட் சமூகத்தின் ஒரு பகுதியாக, நீங்கள் திட்டங்களையும் யோசனைகளையும் மக்களுடன் பகிர்ந்து கொள்கிறீர்கள்:'
-  text2: "ஒவ்வொரு சமுதாயத்திற்கும் இந்த சமூகத்தை ஒரு ஆதாரமான இடமாக மாற்றுவதற்கு எங்களுக்கு உங்கள் உதவி தேவை. நீங்கள் எப்படி உதவ முடியும்?"
-  text3: "கேட்ரோபாட் திட்டத்தின் மூலம் நாங்கள் ஒத்துழைப்பை வளர்க்க விரும்புகிறோம், மேலும் அனைவரின் படைப்பாற்றலையும் மனிதகுலத்தின் நன்மைக்காக ஒன்றிணைக்க அனுமதிக்கிறோம். மற்ற செயலில் உள்ள உறுப்பினர்கள் தங்கள் திட்டங்களை உங்களுக்கு வழங்குவதைப் போலவே, உங்கள் திட்டங்களை சமூகத்திற்கு ஒரு பரிசாக வழங்குவதன் மூலம் நீங்கள் கேட்ரோபாட் சமூகத்தின் செயலில் உறுப்பினராக முடியும்:"
+  text2: 'ஒவ்வொரு சமுதாயத்திற்கும் இந்த சமூகத்தை ஒரு ஆதாரமான இடமாக மாற்றுவதற்கு எங்களுக்கு உங்கள் உதவி தேவை. நீங்கள் எப்படி உதவ முடியும்?'
+  text3: 'கேட்ரோபாட் திட்டத்தின் மூலம் நாங்கள் ஒத்துழைப்பை வளர்க்க விரும்புகிறோம், மேலும் அனைவரின் படைப்பாற்றலையும் மனிதகுலத்தின் நன்மைக்காக ஒன்றிணைக்க அனுமதிக்கிறோம். மற்ற செயலில் உள்ள உறுப்பினர்கள் தங்கள் திட்டங்களை உங்களுக்கு வழங்குவதைப் போலவே, உங்கள் திட்டங்களை சமூகத்திற்கு ஒரு பரிசாக வழங்குவதன் மூலம் நீங்கள் கேட்ரோபாட் சமூகத்தின் செயலில் உறுப்பினராக முடியும்:'
   text4: 'உங்களுக்கக எங்களின் பரிசு:'
   text5: 'எங்கள் பயன்பாட்டு விதிமுறைகள் மட்ற்றும் சேவை:'
   list1:
@@ -527,40 +506,40 @@ termsOfUse:
     item3: அனைத்து மட்ட அனுபவங்களுடனும்
   list2:
     item1: மரியாதையுடன் இருக்கவும். திட்டங்களைப் பகிரும்போது, ​​பல்வேறு வயது மற்றும் பின்னணியைச் சேர்ந்தவர்கள் உங்கள் பங்களிப்புகளைப் பார்ப்பார்கள் என்பதை நினைவில் கொள்க.
-    item2: "நன் மதிப்பளியுங்கள். மற்றவர்களின் திட்டங்களின் மாற்றியமைக்கப்பட்ட பதிப்புகளை உருவாக்க தயங்க வேண்டியதில்லை - அவர்களுக்கு நன் மதிப்ப வழங்குவதை உறுதிப்படுத்திக் கொள்ளுங்கள். நன் மதிப்பு வழங்குவதற்கான ஒரு இடம் உங்கள் திட்டத்தின் நன் மதிப்புப் பிரிவில் உள்ளது. பிற பயனர்களின் திட்டங்களை மாற்றுவது குறித்த விவரங்களுக்கு இந்த புள்ளியிடப்பட்ட பட்டியலின் கீழே உள்ள பத்தியைப் பார்க்கவும்."
-    item3: "நேர்மையாக இருக்கவும். நீங்கள் யார் என்பதைத் தவிர வேறு யாராக நடிக்காதீர்கள் அல்லது சமூகத்தை ஏமாற்ற முயற்சிக்காதீர்கள்."
-    item4: "உங்கள் சுயவிவரங்களை ரகசியமாக வைத்துக்கஒள்ளவும். உங்கள் மின்னஞ்சல் முகவரி, கைப்பேசி எண், அல்லது மற்ற சுய தகவல்களை பகிர்ந்துக் கொள்ளாதீர்கள்."
+    item2: 'நன் மதிப்பளியுங்கள். மற்றவர்களின் திட்டங்களின் மாற்றியமைக்கப்பட்ட பதிப்புகளை உருவாக்க தயங்க வேண்டியதில்லை - அவர்களுக்கு நன் மதிப்ப வழங்குவதை உறுதிப்படுத்திக் கொள்ளுங்கள். நன் மதிப்பு வழங்குவதற்கான ஒரு இடம் உங்கள் திட்டத்தின் நன் மதிப்புப் பிரிவில் உள்ளது. பிற பயனர்களின் திட்டங்களை மாற்றுவது குறித்த விவரங்களுக்கு இந்த புள்ளியிடப்பட்ட பட்டியலின் கீழே உள்ள பத்தியைப் பார்க்கவும்.'
+    item3: 'நேர்மையாக இருக்கவும். நீங்கள் யார் என்பதைத் தவிர வேறு யாராக நடிக்காதீர்கள் அல்லது சமூகத்தை ஏமாற்ற முயற்சிக்காதீர்கள்.'
+    item4: 'உங்கள் சுயவிவரங்களை ரகசியமாக வைத்துக்கஒள்ளவும். உங்கள் மின்னஞ்சல் முகவரி, கைப்பேசி எண், அல்லது மற்ற சுய தகவல்களை பகிர்ந்துக் கொள்ளாதீர்கள்.'
     item5: "தளத்தை நட்பாக வைத்திருக்க உதவுங்கள். மற்றவர்கள் ஒரு திட்டம் அல்லது கருத்து சராசரி, அவமதிப்பு, மிகவும் வன்முறை அல்லது பொருத்தமற்றது என்று நீங்கள் நினைத்தால், 'பொருத்தமற்றது என புகாரளிக்கவும்' பொத்தானைக் கிளிக் செய்து ஒரு குறுகிய விளக்கத்தை விடுங்கள். கேட்ரோபாட் குழு உங்கள் அறிக்கையை மதிப்பாய்வு செய்யும் மற்றும் எந்தவொரு திட்டம், கருத்து அல்லது இடுகையையும் அகற்றக்கூடும்."
   list3:
     item1: "எங்கள் வலைத்தளங்களில் ஒரு திட்டத்தை பதிவேற்றுவதன் மூலம், பதிவேற்றிய கேட்ரோபாட் திட்டங்களின் சில இலவச உரிமங்களின் கீழ் இந்த வேலையை வைக்க ஒப்புக்கொள்கிறீர்கள், ஒப்புக்கொள்கிறீர்கள். கேட்ரோபாட் அமைப்பு உங்களுக்கு கிடைக்கக்கூடிய இலவச உரிமங்களைப் போலவே, பதிவேற்றிய கேட்ரோபாட் திட்டங்களின் இந்த இலவச உரிமங்கள் மற்றவர்களால் முன்னர் பதிவேற்றப்பட்ட வேலையிலிருந்து கற்றுக்கொள்ளவும், தங்களின் புதிய கவர்ச்சிகரமான விளையாட்டுகளை உருவாக்க அந்த வேலையைத் தழுவி ரீமிக்ஸ் செய்யவும் அனைவருக்கும் உரிமை அளிக்கிறது, அனிமேஷன்கள் மற்றும் பிற திட்டங்கள். இது அனைவரையும் 'ஒருவரின் தோழர்களின் தோள்களில் நிற்க' அனுமதிக்கிறது, அவர்களில் ஒருவர் நீங்கள்! உங்கள் பணி இதனால் உலகம் முழுவதற்கும் பயனளிக்கும் மற்றும் அனைவருக்கும் பயன்படுத்த இலவசமாக இருக்கும், உரை மற்றும் படங்களுக்கு சற்று ஒத்திருக்கிறது, விக்கிபீடியாவிற்கு உலகம் முழுவதிலுமிருந்து வரும் தன்னார்வலர்களால் இலவசமாக பங்களிப்பு செய்யப்படுகிறது. இதை நீங்கள் மனிதகுலத்திற்கு வழங்குவதாக நினைத்துப் பாருங்கள்: நீங்கள் அனைவருக்கும் கொடுக்கிறீர்கள், மேலும் எங்கள் வலைத்தளங்களில் தங்கள் படைப்புகளைப் பதிவேற்றும் மற்ற அனைவருக்கும் உங்களுக்குக் கொடுக்கிறது. இவ்வாறு பதிவேற்றிய திட்டம் என்பது அதன் உரிமையாளர் உங்களுக்கு இலவசமாக வழங்கும் பெரும் மதிப்பின் பரிசாகும், அதே விதிமுறைகளில் நீங்கள் சமூகத்தில் பங்கேற்க வேண்டும் என்ற நிபந்தனையுடன்."
     item2: "நீங்கள் பரிசுகளை ஏற்றுக் கொள்ளவேண்டிய அவசியம் இல்லை; அவ்வாறு செய்தால், சில விதிமுறைகள் பொருந்தும். நீங்கள் உங்கள் வேலைகளின் வாயிலாகக் கற்றுக்கொண்டு இன்னும் சுவாரசியமாக மேம்படச் செய்யலாம். அதை நீங்கள்,எடுத்துக்காட்டக, எங்கள் வலைதளத்தில் உங்களுடையதாக படிவேற்றலாம். இவையே இவ்விதிமுறைகளின் பயண்கள். மேலும் உங்கள் திட்டத்தினால் உங்களுக்கு எவ்வித பிரச்சனைகளும் வராத படி\nவடிவமைக்கப் பட்டுள்ளாது."
-    item3: "ஒரு முக்கியமான கூடுதல் நிபந்தனை என்னவென்றால், உங்கள் சொந்த படைப்புகளை அடிப்படையாகக் கொண்ட ஆசிரியர்களின் படைப்புகளை நீங்கள் தெளிவாகக் கூறுகிறீர்கள். அதே சமயம், நாங்கள் கடுமையாக உழைப்போம், இதன்மூலம் உங்கள் பங்களிப்பு மற்றவர்களால் உங்களால் வழங்கப்பட்டதற்கு தெளிவாகப் பாராட்டப்படும், கேட்ரோபாட்டின் சமூகத்தில் உங்களைப் பிரதிநிதித்துவப்படுத்த நீங்கள் சுதந்திரமாகத் தேர்ந்தெடுத்த தனித்துவமான பெயருக்கு பண்புக்கூறு வழங்குவதன் மூலமும், மற்றவர்களுக்கு வாய்ப்பளிப்பதன் மூலமும் உங்கள் வேலையை அனைவருக்கும், குறிப்பாக அவர்களுக்கு வழங்கிய பொது வழிகளில் உங்களுக்கு நன்றி தெரிவிக்க."
+    item3: 'ஒரு முக்கியமான கூடுதல் நிபந்தனை என்னவென்றால், உங்கள் சொந்த படைப்புகளை அடிப்படையாகக் கொண்ட ஆசிரியர்களின் படைப்புகளை நீங்கள் தெளிவாகக் கூறுகிறீர்கள். அதே சமயம், நாங்கள் கடுமையாக உழைப்போம், இதன்மூலம் உங்கள் பங்களிப்பு மற்றவர்களால் உங்களால் வழங்கப்பட்டதற்கு தெளிவாகப் பாராட்டப்படும், கேட்ரோபாட்டின் சமூகத்தில் உங்களைப் பிரதிநிதித்துவப்படுத்த நீங்கள் சுதந்திரமாகத் தேர்ந்தெடுத்த தனித்துவமான பெயருக்கு பண்புக்கூறு வழங்குவதன் மூலமும், மற்றவர்களுக்கு வாய்ப்பளிப்பதன் மூலமும் உங்கள் வேலையை அனைவருக்கும், குறிப்பாக அவர்களுக்கு வழங்கிய பொது வழிகளில் உங்களுக்கு நன்றி தெரிவிக்க.'
     item4: 'சரியான சட்டரீதியான நிபந்தனைகளுக்கும் விதிமுறைக்கும் %link-licenseUploaded% யை அனுகி ஆலோசிக்கவும்.'
   list4:
-    item1: "கேட்ரோபாட் அமைப்பு தொடர்பான எங்களுடைய சொந்த மென்பொருள் மற்றும் இணைய வளங்களை நாங்கள் வழங்குகிறோம், எ.கா., கேட்ரோபாட் குழு எழுதிய மென்பொருள், எங்கள் வலைத்தளங்கள் மற்றும் இணைய வளங்கள், கேட்ரோபாட் அமைப்பு தொடர்பான எங்கள் சொந்த மூலக் குறியீடு மற்றும் கூடுதல் சேர்க்கப்பட்ட அனைத்து பொருட்களும், எ.கா., படங்கள், ஒலிகள் மற்றும் உரைகள், இப்போது மற்றும் எதிர்காலத்தில் கேட்ரோபாட்டின் இலவச உரிமங்களின் கீழ் உங்களுக்கு."
+    item1: 'கேட்ரோபாட் அமைப்பு தொடர்பான எங்களுடைய சொந்த மென்பொருள் மற்றும் இணைய வளங்களை நாங்கள் வழங்குகிறோம், எ.கா., கேட்ரோபாட் குழு எழுதிய மென்பொருள், எங்கள் வலைத்தளங்கள் மற்றும் இணைய வளங்கள், கேட்ரோபாட் அமைப்பு தொடர்பான எங்கள் சொந்த மூலக் குறியீடு மற்றும் கூடுதல் சேர்க்கப்பட்ட அனைத்து பொருட்களும், எ.கா., படங்கள், ஒலிகள் மற்றும் உரைகள், இப்போது மற்றும் எதிர்காலத்தில் கேட்ரோபாட்டின் இலவச உரிமங்களின் கீழ் உங்களுக்கு.'
     item2: இந்த உரிமங்கள் கேட்ரோபாட்டின் அனைத்து பகுதிகளையும் உங்களுக்கு இலவசமாகவும், நீங்கள் விரும்பும் விதத்தில் அவற்றைப் பயன்படுத்துவதற்கான சுதந்திரத்தை உங்களுக்கு வழங்குவதிலும் இலவசமாக ஆக்குகின்றன, சில கட்டுப்பாடுகள் மட்டுமே, மற்றவற்றுடன், கேட்ரோபாட் அமைப்பு எப்போதும் இலவசமாக இருக்கும் என்பதை உறுதி செய்கிறது மற்றும் அனைவருக்கும் பயனுள்ளதாக இருக்கும்.
     item3: 'துல்லியமான சட்ட விதிமுறைகள் மற்றும் நிபந்தனைகளுக்கு %link-licenseToPlay% ஐ அணுகவும். கேட்ரோபாட் அமைப்பின் மூல குறியீடு மற்றும் பல ஆவணங்கள் மற்றும் ஆதாரங்கள் %link-developer% வழியாக கிடைக்கின்றன.'
   list5:
     item1: 'நீங்கள், அல்லது, நீங்கள் 13 வயதிற்குட்பட்டவராக இருந்தால், உங்கள் பெற்றோர் அல்லது சட்டப்பூர்வ பாதுகாவலர்கள், இழுவை வகை தனியுரிமை மீறல்கள் மற்றும் / அல்லது மொத்தமாக அல்லது வெகுஜன கண்காணிப்புக்கு சம்பந்தப்பட்ட அல்லது பொறுப்பான ஒரு நிறுவனத்துடன் தொடர்புடையவர்கள் என்றால், நீங்கள் எங்கள் பயன்படுத்த அனுமதிக்கப்படுவதில்லை மென்பொருள் பயன்பாடுகள் மற்றும் எங்கள் சேவைகளை அணுக. இந்த கட்டுப்பாட்டின் துல்லியமான விவரங்கள் மற்றும் அதற்கான சில விதிவிலக்குகள் எங்கள் %link-termsOfUse% இல் 4.a மற்றும் 4.b பிரிவுகளில் வரையறுக்கப்பட்டுள்ளன.'
     item2: நீங்கள் 13 வயதிற்கு குறைவாக இருந்தால், தங்களது பெற்றோர் அல்லது சட்டபூர்வ பாதுகாப்பாளர் இடம் கேட்டு, அவர்கள் அனுமதி வழங்கினால், Catrobat மென்பொருள் பயன்பாடுகள் மற்றும் சேவைகளை உபயோகிக்கவும்.
-    item3: "திட்டங்கள், பயனர் கணக்குகள் மற்றும் எந்த டிஜிட்டல் பொருட்களையும் எங்கள் சொந்த விருப்பப்படி எந்த நேரத்திலும் நிராகரிக்க, நீக்க அல்லது மறைக்க உரிமைகளை நாங்கள் வைத்திருக்கிறோம், உதாரணமாக ஒரு திட்டத்தில் பொருத்தமற்ற பொருள் இருப்பதைக் கண்டறிந்தால் அல்லது ஒரு பயனர் மீறுகிறார் பிற நபர்களின் உரிமைகள்."
-    item4: "கேட்ரோபாட்டின் அனைத்து மென்பொருள் மற்றும் இணைய வளங்களும் அவை பயனுள்ளதாக இருக்கும் என்ற நம்பிக்கையில் வழங்கப்படுகின்றன, ஆனால் எந்த உத்தரவாதமும் இல்லாமல்."
+    item3: 'திட்டங்கள், பயனர் கணக்குகள் மற்றும் எந்த டிஜிட்டல் பொருட்களையும் எங்கள் சொந்த விருப்பப்படி எந்த நேரத்திலும் நிராகரிக்க, நீக்க அல்லது மறைக்க உரிமைகளை நாங்கள் வைத்திருக்கிறோம், உதாரணமாக ஒரு திட்டத்தில் பொருத்தமற்ற பொருள் இருப்பதைக் கண்டறிந்தால் அல்லது ஒரு பயனர் மீறுகிறார் பிற நபர்களின் உரிமைகள்.'
+    item4: 'கேட்ரோபாட்டின் அனைத்து மென்பொருள் மற்றும் இணைய வளங்களும் அவை பயனுள்ளதாக இருக்கும் என்ற நம்பிக்கையில் வழங்கப்படுகின்றன, ஆனால் எந்த உத்தரவாதமும் இல்லாமல்.'
     item5: 'மேலே உள்ள புள்ளிகளின் துல்லியமான சூத்திரங்கள் மற்றும் சில கூடுதல் சட்ட விதிமுறைகள் மற்றும் நிபந்தனைகளுக்கு எங்கள் %link-termsOfUse% டெவலப்பர்.காட்ரோபாட்.ஆர்ஜ் / டெர்ம்ஸ்_ஆஃப்_யூஸ்_ஆன்ட்_சேவை அணுகவும்.'
   bottom1: அவ்வப்போது இங்கு மீண்டும் சரிபார்க்கவும், ஏனென்றால் நாங்கள் எப்போதும் எங்கள் பயன்பாட்டு விதிமுறைகளை மேம்படுத்த முயற்சிக்கிறோம்.
   bottom2: 'இந்த பயன்பாட்டு விதிமுறைகள் தொடர்பான ஏதேனும் பரிந்துரைகளை %email-webmaster% க்கு அனுப்பவும்.'
   version: பதிப்பு 1.3, 4 மார்ச் 2014
 search:
   dotdotdot: தேடுதல்...
-  search: Search projects, users & studios
+  search: 'திட்டங்கள், பயனர்கள் & ஸ்டுடியோக்களைத் தேடு'
   inMediaLib: ஊடக நூலகத்தில் தேடுங்கள்
-  inMediaCategory: Search in media category
+  inMediaCategory: 'மீடியா வகையில் தேடு'
   results: தேடுதலின் முடிவு
   resultcount: உங்கள் தேடல் %count% முடிவுகளை அளித்தது
   fail: தயவுசெய்து ஒரு தேடல் காலத்தையாவது உள்ளிடவும்
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noUsers: 'பயனர்கள் எவரும் கிடைக்கவில்லை'
+  noProjects: 'திட்டங்கள் எதுவும் கிடைக்கவில்லை'
+  noStudios: 'ஸ்டுடியோக்கள் எதுவும் கிடைக்கவில்லை'
+  sameSearchMessage: 'நீ ஏற்கனவே இங்கேதான் இருக்கிறாய்! வேறு தேடலை முயற்சிக்கவா?'
 menu:
   profile: என் சுயவிவரம்
   login: உள்நுழை
@@ -570,19 +549,19 @@ menu:
   helpAndTutorials: உதவி & பயிற்சிகள்
   followersAndFollowing: பின்பற்றுபவர்
   mediaLibrary: ஊடக நூலகம்
-  studio: Studios
+  studio: 'ஸ்டுடியோக்கள்'
   language: மொழி
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: 'மொழி விருப்பங்கள் எதுவும் இல்லை.'
 login:
   login: உள்நுழை
   button:
-    loginNow: Login now
+    loginNow: 'இப்போது உள்நுழை'
     createAccount: கணக்கை உருவாக்கவும்
-    forgetPassword: Forget password?
+    forgetPassword: 'கடவுச்சொல் மறந்துவிட்டதா?'
   oauth:
-    title: Or you can join with
+    title: 'அல்லது இதன் மூலம் சேரலாம்'
   passOrUser: உங்கள் கடவுச்சொல் அல்லது பயனர்பெயர் தவறானது.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: 'உன் கணக்கு இடைநிறுத்தப்பட்டுள்ளது. இது பிழை என நீ நினைத்தால், ஆதரவைத் தொடர்புகொள்.'
   noUsername: உங்கள் பயனர்பெயர் அல்லது மின்னஞ்சல் முகவரி கிடைக்கவில்லை.
   forgotPass: கடவுச்சொல் அல்லது பயனர்பெயரை மறந்துவிட்டீர்களா?
   recoverPassSend: உங்கள் மின்னஞ்சல் முகவரிக்கு ஒரு மின்னஞ்சல் அனுப்பப்பட்டது. உங்கள் இன்பாக்ஸை சரிபார்க்கவும்.
@@ -599,71 +578,71 @@ login:
   passwordFirst: கடவுச்சொல்
   passwordSecond: கடவுச்சொல்லை உறுதிப்படுத்து
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: 'பதிவு செய்'
+  subText: 'தொடர்வதன் மூலம், நீ ஒரு Catrobat சமூகக் கணக்கை அமைக்கிறாய், எங்கள் %var1% மற்றும் %var2%-க்கு ஒப்புக்கொள்கிறாய்.'
+  dateOfBirth: 'பிறந்த தேதி'
+  dateOfBirthInfo: 'EU குழந்தைப் பாதுகாப்பு விதிமுறைகளுக்கு (GDPR/COPPA) இணங்கவும் இளைய பயனர்களுக்குப் பாதுகாப்பான அனுபவத்தை வழங்கவும் உன் பிறந்த தேதியைக் கேட்கிறோம்.'
+  parentEmail: 'பெற்றோர்/பாதுகாவலர் மின்னஞ்சல்'
+  parentEmailInfo: '14 வயதுக்குட்பட்ட பயனர்களுக்குத் தேவை. இந்த முகவரிக்கு ஒப்புதல் கோரிக்கையை அனுப்புவோம்.'
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: 'உன் பதிவை முடி'
+    info: 'தளத்தைத் தொடர்ந்து பயன்படுத்த உன் பிறந்த தேதியை வழங்கு.'
     submit: தொடர்ந்து
   button:
     cancel: தவிர்
     createAccount: கணக்கை உருவாக்கவும்
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: 'உன் இன்பாக்ஸைச் சரிபார்!'
+    message: 'உனக்கு ஒரு சரிபார்ப்பு மின்னஞ்சல் அனுப்பியுள்ளோம். உன் கணக்கைச் செயல்படுத்த மின்னஞ்சலில் உள்ள இணைப்பைக் கிளிக் செய்.'
+    helpTitle: 'மின்னஞ்சல் வரவில்லையா?'
+    hint: 'உன் ஸ்பேம் கோப்புறையைச் சரிபார். இணைப்பு 24 மணி நேரம் செல்லுபடியாகும்.'
+    resendButton: 'சரிபார்ப்பு மின்னஞ்சலை மீண்டும் அனுப்பு'
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: 'பெற்றோர் ஒப்புதலுக்காகக் காத்திருக்கிறது'
+    message: 'உன் மின்னஞ்சல் சரிபார்க்கப்பட்டது! தளத்தை முழுமையாகப் பயன்படுத்தும் முன், ஒரு பெற்றோர் அல்லது பாதுகாவலர் ஒப்புதல் அளிக்க வேண்டும்.'
+    sentTo: '%email%-க்கு ஒப்புதல் கோரிக்கை அனுப்பப்பட்டது'
+    helpTitle: 'மின்னஞ்சல் வரவில்லையா? உதவி வேண்டுமா?'
+    hint: 'உன் பெற்றோரிடம் அவர்களின் ஸ்பேம் கோப்புறையைச் சரிபார்க்கச் சொல். இணைப்பு 24 மணி நேரம் செல்லுபடியாகும்.'
+    resendButton: 'ஒப்புதல் மின்னஞ்சலை மீண்டும் அனுப்பு'
+    wrongEmail: 'தவறான பெற்றோர் மின்னஞ்சலை உள்ளிட்டாயா?'
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: 'பெற்றோர் ஒப்புதல் திரும்பப் பெறப்பட்டது'
+    message: 'உன் பெற்றோர் அல்லது பாதுகாவலர் உன் கணக்குக்கான ஒப்புதலைத் திரும்பப் பெற்றுள்ளார். மீண்டும் ஒப்புதல் அளிக்கப்படும் வரை உன் கணக்கின் செயல்பாடுகள் குறைவாக இருக்கும்.'
+    newEmailPlaceholder: 'புதிய பெற்றோர் மின்னஞ்சல்'
+    changeButton: 'புதுப்பித்து மீண்டும் அனுப்பு'
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: 'கணக்கு மீட்பு'
+  description: 'உன் கணக்கின் மின்னஞ்சல் அல்லது பயனர் பெயர் நினைவிருந்தால், உன் கடவுச்சொல்லை மீட்டமைக்க ஒரு இணைப்பை அனுப்பலாம்.'
   button:
     cancel: தவிர்
-    submit: Recover password
+    submit: 'கடவுச்சொல்லை மீட்டெடு'
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: 'உன் கடவுச்சொல்லை மீட்டமை'
+    description: 'உன் கணக்கின் மின்னஞ்சல் நினைவிருந்தால், உன் கடவுச்சொல்லை மீட்டமைக்க ஒரு இணைப்பை அனுப்பலாம்.'
     button:
-      submit: "Send reset email"
-      cancel: "தவிர்"
+      submit: 'மீட்டமைப்பு மின்னஞ்சலை அனுப்பு'
+      cancel: 'தவிர்'
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: 'உன் மின்னஞ்சல்களைச் சரிபார்'
+    description: 'உன் மின்னஞ்சலுடன் பொருந்தும் கணக்கு இருந்தால், உன் கடவுச்சொல்லை மீட்டமைக்கப் பயன்படுத்தக்கூடிய இணைப்புடன் ஒரு மின்னஞ்சல் இப்போது அனுப்பப்பட்டது. இந்த இணைப்பு %time%-இல் காலாவதியாகும்.'
+    descriptionTwo: 'ஒவ்வொரு %throttleLimit% மணி நேரத்துக்கும் ஒரு முறை புதிய கடவுச்சொல் மீட்டமைப்பைக் கோரலாம்.'
+    descriptionThree: 'உனக்கு மின்னஞ்சல் வரவில்லை என்றால், உன் ஸ்பேம் கோப்புறையைச் சரிபார், அல்லது %email-webmaster% என்ற எங்கள் ஆதரவு முகவரிக்கு மின்னஞ்சல் எழுது.'
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: 'Hi!'
+    visitLink: 'உன் கடவுச்சொல்லை மீட்டமைக்க, பின்வரும் இணைப்புக்குச் செல்'
+    expire: 'இந்த இணைப்பு %time%-இல் காலாவதியாகும்.'
+    cheers: 'வாழ்த்துகள்!'
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: 'உன் கடவுச்சொல்லை மீட்டமை'
+    content: 'உன் Catrobat கணக்குக்குக் கடவுச்சொல் மீட்டமைப்பை நீ சமீபத்தில் கோரினாய். புதிய கடவுச்சொல்லைத் தேர்ந்தெடுக்க கீழே உள்ள பொத்தானைக் கிளிக் செய். நீ இதைக் கோரவில்லை என்றால், இந்த மின்னஞ்சலைப் பாதுகாப்பாகப் புறக்கணிக்கலாம்.'
+    visitLink: 'கடவுச்சொல்லை மீட்டமை'
+    expire: 'இந்த இணைப்பு %time% செல்லுபடியாகும், ஒரு முறை மட்டுமே பயன்படுத்த முடியும்.'
   reset:
-    title: "Reset your password"
+    title: 'உன் கடவுச்சொல்லை மீட்டமை'
     button:
-      submit: "Reset password"
+      submit: 'கடவுச்சொல்லை மீட்டமை'
 apk:
   download: செயலியை பதிவிறக்கவும்
   prepare: 'செயலியை தயாரிக்கவும்'
@@ -673,7 +652,7 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: 'ஏதோ வேலை செய்யவில்லை. மீண்டும் முயற்சி செய், அல்லது தொடர்ந்து நடந்தால் எங்களுக்குத் தெரியப்படுத்து!'
   username:
     blank: பயனர்பெயர் காலியாக இருக்கக்கூடாது
     invalid: உங்கள் பயனர்பெயர் தவறானது
@@ -696,7 +675,7 @@ errors:
   login: கடவுச்சொல் அல்லது பயனர்பெயர் தவறானது.
   post-data: இடுகை-தரவு சரியானதல்ல அல்லது காணவில்லை!
   checksum:
-    missing: வாடிக்கையாளர் filechecksum ஐ அனுப்பவில்லை! நீங்கள் பாக்கெட் குறியீட்டின் காலாவதியான பதிப்பைப் பயன்படுத்துகிறீர்களா?
+    missing: வாடிக்கையாளர் filechecksum ஐ அனுப்பவில்லை! நீங்கள் Pocket Code-இன் காலாவதியான பதிப்பைப் பயன்படுத்துகிறீர்களா?
     invalid: தவறான செக்சம்
   xml:
     invalid: தவறான xml குறியீடு
@@ -709,13 +688,13 @@ errors:
   token: 'சாதனத்தின் அங்கீகாரம் தோல்வியுற்றது: தவறான அங்கீகார டோக்கன்!'
   uploadTokenAuthFailed: 'டோக்கன் பதிவேற்ற அங்கீகாரம் தோல்வியுற்றது.'
   project:
-    invalid: Invalid project.
+    invalid: 'தவறான திட்டம்.'
   languageversion:
-    tooold: 'மன்னிக்கவும், உங்கள் திட்டத்தில் கேட்ரோபாட் மொழியின் பழைய பதிப்பு உள்ளது! பாக்கெட் குறியீட்டின் சமீபத்திய பதிப்பைப் பயன்படுத்துகிறீர்களா?'
+    tooold: 'மன்னிக்கவும், உங்கள் திட்டத்தில் கேட்ரோபாட் மொழியின் பழைய பதிப்பு உள்ளது! Pocket Code-இன் சமீபத்திய பதிப்பைப் பயன்படுத்துகிறீர்களா?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'மன்னிக்கவும், நீ Pocket Code-இன் பழைய பதிப்பைப் பயன்படுத்துகிறாய். சமீபத்திய பதிப்புக்குப் புதுப்பி.'
   authentication:
-    title: Login did not work
+    title: 'உள்நுழைவு வேலை செய்யவில்லை'
     webview: |
       உங்கள் பயனர் நற்சான்றிதழ்கள் தவறானவை.
        பயன்பாட்டில் மீண்டும் உள்நுழைய முயற்சிக்கவும்.
@@ -736,7 +715,7 @@ failure:
   upload: உங்கள் app இன் பதிவேற்றத்தின் போது பிழை ஏற்பட்டது.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'உன் மின்னஞ்சலைச் சரிபார்'
 api:
   registerUser:
     emailMissing: 'மின்னஞ்சல் காணவில்லை'
@@ -754,47 +733,47 @@ api:
     passwordTooShort: 'கடவுச்சொல் மிகக் குறைவு'
     passwordTooLong: 'கடவுச்சொல் மிக நீளமானது'
     passwordInvalidChars: 'கடவுச்சொல் தவறான எழுத்துக்களைக் கொண்டுள்ளது'
-    usernameContainsEmail: "பயனர்பெயரில் மின்னஞ்சல் முகவரி இருக்கக்கூடாது"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "நாட்டின் குறியீடு தவறானது"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    usernameContainsEmail: 'பயனர்பெயரில் மின்னஞ்சல் முகவரி இருக்கக்கூடாது'
+    usernameContainsLink: 'பயனர் பெயரில் இணைப்பு இருக்கக்கூடாது'
+    countryCodeInvalid: 'நாட்டின் குறியீடு தவறானது'
+    pictureInvalid: 'சுயவிவரப் படம் தவறானது அல்லது ஆதரிக்கப்படவில்லை'
+    dateOfBirthMissing: 'பிறந்த தேதி தேவை'
+    dateOfBirthInvalid: 'பிறந்த தேதி தவறானது'
+    tooYoung: 'கணக்கை உருவாக்க உனக்குக் குறைந்தது 3 வயது இருக்க வேண்டும்'
+    parentEmailMissing: '14 வயதுக்குட்பட்ட பயனர்களுக்குப் பெற்றோர் மின்னஞ்சல் தேவை'
+    parentEmailInvalid: 'பெற்றோர் மின்னஞ்சல் தவறானது'
+    parentEmailSameAsUser: 'பெற்றோர் மின்னஞ்சல் உன் சொந்த மின்னஞ்சல் முகவரியிலிருந்து வேறுபட்டதாக இருக்க வேண்டும்'
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: 'தற்போதைய கடவுச்சொல் இல்லை'
+    currentPasswordWrong: 'தற்போதைய கடவுச்சொல் தவறு'
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'பெயர் காலியாக இருக்கக்கூடாது'
+    nameTooLong: 'பெயர் மிக நீளம்'
+    descriptionTooLong: 'விளக்கம் மிக நீளம்'
+    creditsTooLong: 'குறிப்புகளும் நன்றிகளும் மிக நீளம்'
+    screenshotInvalid: 'திட்டத் திரைப்பிடிப்பு தவறானது அல்லது ஆதரிக்கப்படவில்லை'
   projectsPost:
     invalid_checksum: 'தவறான செக்சம்.  மீண்டும் பதிவேற்ற முயற்சிக்கவும்!'
     upload_error: 'பதிவேற்றும்போது பிழை.  மீண்டும் பதிவேற்ற முயற்சிக்கவும்!'
     creating_error: 'திட்ட நிறுவனத்தை உருவாக்கும்போது பிழை.  மீண்டும் பதிவேற்ற முயற்சிக்கவும்!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'திட்டத்தின் விவரங்களைச் சேமிக்க முடியவில்லை.'
+    screenshotError: 'திரைப்பிடிப்பைப் படிக்கவோ மாற்றவோ சேமிக்கவோ முடியவில்லை. உன் உள்ளீட்டைச் சரிபார்.'
+    notFound: 'மாற்ற வேண்டிய திட்டம் காணப்படவில்லை.'
+    forbidden: 'திட்டத்தை மாற்ற அனுமதியில்லை. நீ இன்னும் உள்நுழைந்திருக்கிறாயா?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'பெயர் இல்லை'
+    nameEmpty: 'பெயர் காலியாக இருக்கக்கூடாது'
+    nameTooShort: 'பெயர் மிகச் சிறியது'
+    nameTooLong: 'பெயர் மிக நீளம்'
+    nameAlreadyInUse: 'பெயர் ஏற்கனவே பயன்பாட்டில் உள்ளது'
+    descriptionMissing: 'விளக்கம் இல்லை'
+    descriptionEmpty: 'விளக்கம் காலியாக உள்ளது'
+    descriptionTooShort: 'விளக்கம் மிகச் சிறியது'
+    descriptionTooLong: 'விளக்கம் மிக நீளம்'
+    imageFileInvalid: 'படக் கோப்பு தவறானது'
+    imageFileInvalidType: 'படக் கோப்பு வகை தவறானது'
+    imageFileTooLarge: 'படக் கோப்பு மிகப் பெரியது'
 #languages and countries
 language:
   arabic: அரபு
@@ -871,8 +850,8 @@ codeview:
   hideCode: 'குறியீட்டை மறைக்கவும்'
   showStatistics: 'குறியீடு புள்ளிவிவரங்களைக் காட்டவும்'
   hideStatistics: 'குறியீடு புள்ளிவிவரங்களைக் மறைக்கவும்'
-  cantDisplayCode: "குறியீட்டைக் காட்ட இயலாது"
-  cantDisplayStatistics: "குறியீட்டைக் காட்ட இயலாது"
+  cantDisplayCode: 'குறியீட்டைக் காட்ட இயலாது'
+  cantDisplayStatistics: 'குறியீட்டைக் காட்ட இயலாது'
   totalNumberOf: 'மொத்த எண்ணிக்கை'
   scenes: 'காட்சிகள்'
   scripts: 'ஸ்கிரிப்ட்கள்'
@@ -893,17 +872,17 @@ codeview:
   dataBricks: 'தகவல் செங்கற்கள்'
   specialBricks: 'சிறப்பு செங்கற்கள்'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'குறியீட்டுக் காட்சி'
+  loading: 'குறியீட்டுக் காட்சி ஏற்றப்படுகிறது...'
+  error: 'குறியீட்டுக் காட்சியை ஏற்ற முடியவில்லை.'
+  retry: 'மீண்டும் முயற்சி செய்'
+  empty: 'இந்தத் திட்டத்தில் குறியீடு இல்லை.'
   scripts: 'ஸ்கிரிப்ட்கள்'
   looks: 'தோற்றம்'
   sounds: 'ஒலிகள்'
 codeStatistics:
-  title: "குறியீடு புள்ளிவிவரங்கள்"
-  error: "குறியீடு புள்ளிவிவரங்களைக் காட்ட முடியாது."
+  title: 'குறியீடு புள்ளிவிவரங்கள்'
+  error: 'குறியீடு புள்ளிவிவரங்களைக் காட்ட முடியாது.'
   general: 'பொது'
   bricks: 'செங்கல்'
   eventBricks: 'நிகழ்வு'
@@ -913,23 +892,23 @@ codeStatistics:
   looksBricks: 'தோற்றம்'
   penBricks: 'பேனா'
   dataBricks: 'தகவல்கள்'
-  deviceBricks: 'Device'
+  deviceBricks: 'சாதனம்'
   specialBricks: 'சிறப்பு'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  yourScore: 'உன் மதிப்பெண்:'
+  points: 'புள்ளிகள்'
+  abstraction: 'சுருக்கமும் சிக்கல் பிரிப்பும்'
+  parallelism: 'இணைச் செயலாக்கம்'
+  logicalThinking: 'தர்க்கச் சிந்தனை'
+  synchronization: 'ஒத்திசைவு'
+  flowControl: 'ஓட்டக் கட்டுப்பாடு'
+  userInteractivity: 'பயனர் ஊடாடல்'
+  dataRepresentation: 'தரவுப் பிரதிநிதித்துவம்'
+  level: 'நிலை'
+  loading: 'ஏற்றுகிறது...'
+  bonus: 'போனஸ்'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: '%user_count%-க்கும் மேற்பட்ட படைப்பாளர்களுடன் சேர்!'
+  text: '%project_count% அற்புதமான திட்டங்கள் ஏற்கனவே பகிரப்பட்டுள்ளன, அடுத்தது உன்னுடையதாக இருக்கலாம். எங்கள் செயலியைப் பதிவிறக்கி இன்றே உருவாக்கத் தொடங்கு'
 privacy-policy:
   header: தனிமனித உரிமை கொள்கை
   version: பதிப்பு 2.2, 17 அக்டோபர் 2019
@@ -945,14 +924,14 @@ privacy-policy:
   text10: கேட்ரோபாட்டின் அதிகாரப்பூர்வ ஆங்கில மொழி தனியுரிமைக் கொள்கை இணையத்தில் %privacy_policy% இணைப்பின் கீழ் கிடைக்கிறது.
   disagree-text: ஒப்புதல் இல்லாமல், எங்களால் ஒரு கணக்கை உருவாக்க முடியாது, ஆனால் முக்கிய அம்சங்கள் இன்னும் அணுகக்கூடியவை.
 catro-notifications:
-  markAsRead: "படித்ததாகக் குறியிடு"
-  noFollowers: "உங்களிடம் பின்தொடர்பவர் அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது."
-  noComments: "உங்களிடம் கருத்து அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது."
-  noReactions: "உங்களிடம் எந்த எதிர்வினை அறிவிப்புகளும் இல்லை என்று தெரிகிறது."
-  noRemixes: "உங்களிடம் ரீமிக்ஸ் அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: 'படித்ததாகக் குறியிடு'
+  noFollowers: 'உங்களிடம் பின்தொடர்பவர் அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது.'
+  noComments: 'உங்களிடம் கருத்து அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது.'
+  noReactions: 'உங்களிடம் எந்த எதிர்வினை அறிவிப்புகளும் இல்லை என்று தெரிகிறது.'
+  noRemixes: 'உங்களிடம் ரீமிக்ஸ் அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது.'
+  noStudios: 'உனக்கு ஸ்டுடியோ அறிவிப்புகள் எதுவும் இல்லை போலிருக்கிறது.'
   tab:
-    studio: Studio
+    studio: 'ஸ்டுடியோ'
     project: சாதனத்தில் உள்ள திட்டங்கள்
   comment:
     message: 'பயனர் %user_link% உங்கள் %program_link% திட்டத்தில் கருத்து தெரிவித்தார்.'
@@ -961,56 +940,56 @@ catro-notifications:
   follow:
     message: 'பயனர் %user_link% இப்போது உங்களைப் பின்தொடர்கிறார்.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% ஒரு புதிய விளையாட்டை உருவாக்கினார்: %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% ஸ்டுடியோ %studio_name%-இல் கருத்து தெரிவித்தார்.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% %program_link%-ஐ ஸ்டுடியோ %studio_name%-இல் சேர்த்தார்.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'ஸ்டுடியோ %studio_name%-இல் சேர உன் கோரிக்கை ஏற்கப்பட்டது.'
+    declined: 'ஸ்டுடியோ %studio_name%-இல் சேர உன் கோரிக்கை நிராகரிக்கப்பட்டது.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'உன் திட்டம் %program_link% %days% நாட்களில் தானாக நீக்கப்படும். அதை வைத்திருக்க புதிய பதிப்பைப் பதிவேற்று அல்லது அதிக பதிவிறக்கங்களைப் பெறு.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'உன் திட்டம் "%project_name%" செயலற்ற காரணத்தால் தானாக நீக்கப்பட்டது. இன்னும் பகிர விரும்பினால் மீண்டும் பதிவேற்று.'
+  noProjects: 'உனக்குத் திட்ட அறிவிப்புகள் எதுவும் இல்லை போலிருக்கிறது.'
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: 'இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!'
+  success_project: 'திட்ட இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!'
+  success_user: 'பயனர் இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!'
   fail: இனைப்பை கிளிப்போர்டுக்கு நகலெடுப்பது தோல்வி :(
 next: அடுத்து
 previous: முந்தைய
 media-packages:
   title: மீடியா-தொகுப்புகள்
-  description: பின்வரும் வகைகளில் நீங்கள் உங்கல் பாக்கெட் குறியீடு திட்டங்கலில் சேர்க்க கூடுதல் நடிகர்கள் மற்றும் பொருள்களைக் காணலாம்.
+  description: பின்வரும் வகைகளில் நீங்கள் உங்கல் Pocket Code திட்டங்கலில் சேர்க்க கூடுதல் நடிகர்கள் மற்றும் பொருள்களைக் காணலாம்.
   thumb-size:
     description: அளவை முன்கான்க
     sm: சிறிய
     md: நடுத்தரம்
     lg: பெரிய
-  theme-special: "%flavor% சிறப்பு தீம்"
+  theme-special: '%flavor% சிறப்பு தீம்'
   search-results: ஊடக நூலக தேடல் முடிவுகள்
   no-results: உங்கள் தேடல் 0 முடிவுகளை அளித்தது.  ஆங்கில தேடல் சொற்களை மட்டும் பயன்படுத்தவும்.
   download_these_files: சேமி
 flavor:
-  pocketcode: பாக்கெட் கோட்
-  pocketalice: பாக்கெட் ஆலிஸ்
+  pocketcode: Pocket Code
+  pocketalice: Pocket Alice
   pocketgalaxy: கேலக்ஸி ஜாம்
-  phirocode: பைரோ கோட் PhiroCode
+  phirocode: PhiroCode
   luna: லூனா & பூனை
   create@school: உருவாக்கம்@பள்ளி
 copyright: 'பதிப்புரிமை &copy; %year%<a href="http://www.catrobat.org">காட்ரோபாட்</a>.அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: 'இந்த இணையதளம் வேலை செய்ய JavaScript தேவை. உன் உலாவியில் JavaScript-ஐ இயக்கு, அல்லது ஒரு பெரியவரிடம் உதவி கேள்.'
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "ஏற்றுக்கொள்"
-  decline: "மறுத்துவிடு"
-  privacy-link: "சுய செயலிட கொள்கை"
-  settings-link: "Cookie Settings"
+  message: 'எங்கள் சேவைகளை மேம்படுத்த குக்கீகளைப் பயன்படுத்துகிறோம். எந்தத் தரவும் விற்கப்படவோ பகிரப்படவோ இல்லை.'
+  accept: 'ஏற்றுக்கொள்'
+  decline: 'மறுத்துவிடு'
+  privacy-link: 'சுய செயலிட கொள்கை'
+  settings-link: 'குக்கீ அமைப்புகள்'
 agree: ஏற்கிறேன்
 disagree: மறுக்கிறேன்
 profileLoader:
@@ -1023,19 +1002,19 @@ share:
   success: 'பகிர்வு வெற்றியடைந்தது'
 copy: 'இணைப்பை நகலெடு'
 checkOutProject: 'இந்த திட்டத்தைப் பாருங்கள்:'
-checkOutUser: 'Check out this user:'
+checkOutUser: 'இந்தப் பயனரைப் பார்:'
 community: 'கற்றோபாட்டுச் சமூகம்'
 back_to_app: 'சமூகத்திலிருந்து வெளியேறு'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: 'புதிய திட்டங்கள்'
+  random: 'சீரற்ற திட்டங்கள்'
   most_viewed: அதிகமாக பார்க்கபட்டது
   most_downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
   example: உதாரணம்
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  scratch: 'Scratch ரீமிக்ஸ்கள்'
+  recommended: 'பரிந்துரைக்கப்பட்ட திட்டங்கள்'
+  popular: 'மிகப் பிரபலமானவை'
+  trending: 'டிரெண்டிங் திட்டங்கள்'
 achievements:
   sidebar:
     title: 'சாதனைகள்'
@@ -1047,15 +1026,15 @@ achievements:
       x_out_of_y: '%unlocked% %total%திறக்கப்பட்டது'
     tab_unlocked:
       title: 'திறக்கப்பட்டது'
-      empty: "நீங்கள் இதுவரை எந்த சாதனைகளையும் திறக்கவில்லை."
+      empty: 'நீங்கள் இதுவரை எந்த சாதனைகளையும் திறக்கவில்லை.'
     tab_locked:
       title: 'பூட்டப்பட்டது'
-      empty: "நீங்கள் ஏற்கனவே அனைத்து சாதனைகளையும் திறந்துவிட்டீர்கள்."
+      empty: 'நீங்கள் ஏற்கனவே அனைத்து சாதனைகளையும் திறந்துவிட்டீர்கள்.'
   popup:
     new:
       title: 'வாழ்த்துக்கள்!'
-      subtitle: "நீங்கள் பேட்ஜைப் பெற்றுள்ளீர்கள்"
-      confirm: "ஆம்"
+      subtitle: 'நீங்கள் பேட்ஜைப் பெற்றுள்ளீர்கள்'
+      confirm: 'ஆம்'
   profile:
     title: 'சாதனைகள்'
   achievement:
@@ -1080,21 +1059,21 @@ achievements:
         description: 'ஒரு பயனர் கணக்கை உருவாக்கவும்'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: 'Coding Jam 2021-இல் பங்கேற்றவர்'
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: 'இருமொழியாளர்'
+        description: 'உன் திட்டங்களை 2 மொழிகளில் மொழிபெயர்'
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: 'மும்மொழியாளர்'
+        description: 'உன் திட்டங்களை 3 மொழிகளில் மொழிபெயர்'
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: 'மொழியியலாளர்'
+        description: 'உன் திட்டங்களை 5 மொழிகளில் மொழிபெயர்'
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: 'சரிபார்க்கப்பட்டது'
+        description: 'உன் கணக்கைச் சரிபார்'
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} குறிச்சொல் |]1,Inf] குறிச்சொற்கள்'
   tag:
     game:
       title: விளையாட்டு
@@ -1111,9 +1090,9 @@ tags:
     tutorial:
       title: பயிற்சி
     coding_jam_09_2021:
-      title: "#catrobatfestival2021"
+      title: '#catrobatfestival2021'
 extensions:
-  title: 'நீட்டிப்புகள்'
+  title: '{0} |{1} நீட்டிப்பு |]1,Inf] நீட்டிப்புகள்'
   extension:
     arduino:
       title: ஆர்டுயினோ
@@ -1128,59 +1107,59 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: 'பலர் விளையாட்டு'
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: 'ஸ்டுடியோக்கள்'
+  singular: 'ஸ்டுடியோ'
+  create_studio: 'ஸ்டுடியோவை உருவாக்கு'
+  delete_studio: 'ஸ்டுடியோவை நீக்கு'
   cancel_studio: 'தவிர்'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: 'ஸ்டுடியோ பெயர்'
+  studio_description: 'ஸ்டுடியோ விளக்கம்'
+  is_public: 'பொதுவாக்கவா?'
+  enable_comments: 'கருத்துகளை இயக்கவா?'
+  cover_image: 'அட்டைப் படத்தைப் பதிவேற்று'
+  cover_image_empty: 'படம் எதுவும் தேர்ந்தெடுக்கப்படவில்லை.'
+  cover_image_hint: 'அதிகபட்சம் 1 MB. ஏற்கப்படும் வடிவங்கள்: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: '1 MB வரம்புக்குள் பொருந்தப் படம் தானாகச் சுருக்கப்பட்டது.'
+  cover_image_compressing: 'படம் சுருக்கப்படுகிறது...'
+  cover_image_still_too_large: 'சுருக்கிய பிறகும் படம் மிகப் பெரியது. சிறிய கோப்பைத் தேர்ந்தெடு.'
+  cover_image_invalid_type: 'தவறான பட வகை. JPEG, PNG, GIF அல்லது WebP-ஐப் பயன்படுத்து.'
+  cover_image_compression_failed: 'படத்தைச் செயலாக்க முடியவில்லை. வேறு கோப்பை முயற்சி செய்.'
+  cover_image_alt: 'உன் அட்டைப் படம்'
+  cover_image_remove: 'படத்தை நீக்கு'
+  popular: 'பிரபலமான ஸ்டுடியோக்கள்'
+  join: 'சேர்'
+  leave: 'வெளியேறு'
   report: 'அறிக்கையிடு'
-  public: 'public'
-  private: 'Invite-only'
+  public: 'பொது'
+  private: 'அழைப்பு மட்டும்'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: 'சேர்ந்த ஸ்டுடியோக்கள்'
+    public_studios: 'பொது ஸ்டுடியோக்கள்'
+    private_studios: 'அழைப்பு மட்டுமான ஸ்டுடியோக்கள்'
+    no_studios: 'இன்னும் ஸ்டுடியோக்கள் இல்லை'
+    my_studios: 'என் ஸ்டுடியோக்கள்'
+    explore: 'ஸ்டுடியோக்களை ஆராய்'
+    no_joined: 'நீ இன்னும் எந்த ஸ்டுடியோவிலும் சேரவில்லை'
+    joined: 'சேர்ந்தாய்'
+    load_more: 'மேலும் ஏற்று'
     open: 'திறந்த'
     share: 'பகிர்'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: 'இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!'
+    leave_confirm_title: 'இந்த ஸ்டுடியோவிலிருந்து வெளியேறவா?'
     cancel: 'தவிர்'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: 'கோரிக்கையை ரத்து செய்'
+    cancel_request_confirm_title: 'சேர்வதற்கான கோரிக்கையை ரத்து செய்யவா?'
     admin: 'நிர்வாகி'
-    member: 'Member'
+    member: 'உறுப்பினர்'
   details:
-    add_project: 'click to add the project'
+    add_project: 'திட்டத்தைச் சேர்க்க கிளிக் செய்'
     add: 'கூட்டு'
     showMore: 'மேலும் காட்ட'
     showLess: 'குறைவாக காட்டு'
     are_you_sure: 'உறுதியாகவா?'
-    no_way_of_return: 'This cannot be undone.'
+    no_way_of_return: 'இதைத் திரும்பப் பெற முடியாது.'
     delete_it: 'அழித்துவிடு'
     remove_project: 'ஸ்டுடியோவிலிருந்து அகற்று'
     remove_project_error: 'ஸ்டுடியோவிலிருந்து திட்டத்தை அகற்ற முடியவில்லை!'
@@ -1188,68 +1167,68 @@ studio:
     no_projects: 'ஸ்டுடியோவில் இதுவரை எந்த திட்டமும் இல்லை'
     projects:
       title: 'சாதனத்தில் உள்ள திட்டங்கள்'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: 'திட்டங்களைச் சேர்'
+      open_project: 'திட்டத்தைத் திற'
       download: 'பதிவிறக்கம்'
       share: 'பகிர்'
       remove_from_studio: 'ஸ்டுடியோவிலிருந்து அகற்று'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
+      remove_from_studio_title: 'ஸ்டுடியோவிலிருந்து திட்டத்தை நீக்கவா?'
+      remove_from_studio_text: 'மனம் மாறினால் பிறகு மீண்டும் சேர்க்கலாம்.'
+      share_success: 'இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!'
+      share_fail: 'இணைப்பை நகலெடுக்க முடியவில்லை.'
+      no_projects_empty_state: 'சேர்க்க உன்னிடம் இன்னும் திட்டங்கள் இல்லை. முதலில் Pocket Code-இல் ஒன்றை உருவாக்கு!'
+      add_selected: 'தேர்ந்தெடுத்தவற்றைச் சேர்'
+    no_available_projects: 'சேர்க்கத் திட்டங்கள் எதுவும் இல்லை.'
     updateCoverError: 'ஸ்டுடியோ அட்டையைப் புதுப்பிக்கும் போது ஏதோ தவறு ஏற்பட்டது!'
-    join: 'Join'
-    leave: 'Leave'
+    join: 'சேர்'
+    leave: 'வெளியேறு'
     report: 'அறிக்கையிடு'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'நிலுவையில்'
+    decline: 'நிராகரிக்கப்பட்டது'
     comments:
       title: 'பின்கருத்துக்கள்'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'ஏதாவது தட்டச்சு செய்'
+      replies: 'பதில்கள்'
+      send: 'அனுப்பு'
+      no_comments: 'இந்த ஸ்டுடியோவில் இன்னும் கருத்துகள் இல்லை.'
+      disabled_comments: 'இந்த ஸ்டுடியோவுக்குக் கருத்துகள் முடக்கப்பட்டுள்ளன.'
+      remove_comment: 'கருத்தை நீக்கு'
+      post_error: 'உன் கருத்தை இடும்போது ஏதோ தவறு நடந்தது. பிறகு மீண்டும் முயற்சி செய்.'
+      remove_error: 'கருத்தை நீக்கும்போது ஏதோ தவறு நடந்தது. பிறகு மீண்டும் முயற்சி செய்.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'செயல்பாடுகள்'
+      join_studio: '%user% ஸ்டுடியோவில் சேர்ந்தார்.'
+      add_project: '%user% ஒரு திட்டத்தைச் சேர்த்தார்.'
+      add_comment: '%user% ஒரு கருத்தை இட்டார்.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'ஸ்டுடியோ உறுப்பினர்கள்'
+      project_count: '{0} ஸ்டுடியோ திட்டங்கள் இல்லை |{1} 1 ஸ்டுடியோ திட்டம் |]1,Inf] %count% ஸ்டுடியோ திட்டங்கள்'
+      no_studio_projects: 'ஸ்டுடியோ திட்டங்கள் இல்லை'
+      one_studio_project: '1 ஸ்டுடியோ திட்டம்'
+      n_studio_projects: '%count% ஸ்டுடியோ திட்டங்கள்'
+      promote_member: 'உறுப்பினரை நிர்வாகியாக உயர்த்து'
+      promotion_failed: 'இந்த உறுப்பினரை உயர்த்தும்போது ஏதோ தவறு நடந்தது. பிறகு மீண்டும் முயற்சி செய்.'
+      ban_member: 'உறுப்பினரை ஸ்டுடியோவிலிருந்து தடை செய்'
+      ban_failed: 'இந்த உறுப்பினரைத் தடை செய்யும்போது ஏதோ தவறு நடந்தது. பிறகு மீண்டும் முயற்சி செய்.'
+      demote_member: 'நிர்வாகியை உறுப்பினராகக் குறை'
+      demotion_failed: 'இந்த நிர்வாகியைக் குறைக்கும்போது ஏதோ தவறு நடந்தது. பிறகு மீண்டும் முயற்சி செய்.'
+      last_admin: 'இந்த ஸ்டுடியோவின் கடைசி நிர்வாகியைக் குறைக்க முடியாது.'
     join_requests:
-      title: 'Join Requests'
+      title: 'சேர்வதற்கான கோரிக்கைகள்'
       accept: 'ஏற்றுக்கொள்'
       decline: 'மறுத்துவிடு'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: 'சேர்வதற்கான கோரிக்கை ஏற்கப்பட்டது.'
+      decline_success: 'சேர்வதற்கான கோரிக்கை நிராகரிக்கப்பட்டது.'
+      error: 'ஏதோ தவறு நடந்தது. மீண்டும் முயற்சி செய்.'
+      no_requests: 'நிலுவையில் உள்ள கோரிக்கைகள் இல்லை.'
     show_more: 'மேலும் காட்டுக'
     show_less: 'குறைவாக காட்டுக'
     admin_settings:
       title: 'அமைவுகள்'
-      studio_name: 'Studio Name'
+      studio_name: 'ஸ்டுடியோ பெயர்'
       studio_description: 'விளக்கம்'
       toggle_allow_comments: 'பின்கருத்துக்கள்'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'பொது'
 media_library:
   file:
     size: 'அளவு: %size%'
@@ -1259,72 +1238,72 @@ media_library:
       sound: 'வகை: ஒலி'
       movie: 'வகை: வீடியோ'
       default: 'வகை: தெரியவில்லை'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+  no_categories: 'இன்னும் மீடியா வகைகள் இல்லை.'
+  no_results: 'முடிவுகள் எதுவும் கிடைக்கவில்லை.'
+  assets_count: 'சொத்துகள்'
+  view_all: 'அனைத்தையும் பார்'
+  view_all_category: '%category% அனைத்தையும் பார்'
+  back_to_app: 'செயலிக்குத் திரும்பு'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'கோரப்பட்ட திட்டம் கிடைக்கவில்லை'
+  project_not_for_kids: 'திட்டம் குழந்தைகளுக்குப் பாதுகாப்பானதல்ல எனக் குறிக்கப்பட்டது!'
+  project_safe_for_kids: 'திட்டம் குழந்தைகளுக்குப் பாதுகாப்பானது எனக் குறிக்கப்பட்டது!'
+  project_not_for_kids_moderator: 'இந்தத் திட்டத்தை ஒரு மதிப்பீட்டாளர் குறித்துள்ளார். இதை உன்னால் மாற்ற முடியாது!'
+  project_set_private: 'திட்டம் தனிப்பட்டதாக அமைக்கப்பட்டது.'
+  project_set_public: 'திட்டம் பொதுவாக அமைக்கப்பட்டது.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'கூடுதல் தகவல்: additionalInfo'
+    feature_1: 'featureName அம்சம் maintenanceStart முதல் maintenanceEnd வரை கிடைக்காது'
+    feature_2: 'அம்சம்'
+    feature_3: 'அம்சம்'
+MarkNotForKids: 'குழந்தைகளுக்குப் பாதுகாப்பானதல்ல எனக் குறி'
+MarkSafeForKids: 'குழந்தைகளுக்குப் பாதுகாப்பானது எனக் குறி'
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: 'உறுதிப்படுத்தல்'
+  confirmMark: 'இந்தத் திட்டத்தைக் குழந்தைகளுக்குப் பாதுகாப்பானதல்ல எனக் குறிக்க உறுதியா?'
+  confirmUnmark: "இந்தத் திட்டத்திலிருந்து 'குழந்தைகளுக்கு ஏற்றதல்ல' குறியை நீக்க உறுதியா?"
+  confirmYes: 'ஆம், தொடர்!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'இந்த %content_type%-ஐப் புகாரளி'
+    reason_placeholder: 'இதை ஏன் புகாரளிக்கிறாய் என்று விவரி...'
+    submit: 'புகாரைச் சமர்ப்பி'
+    success: 'உன் புகார் சமர்ப்பிக்கப்பட்டது. நன்றி.'
+    error: 'ஏதோ தவறு நடந்தது. மீண்டும் முயற்சி செய்.'
+    duplicate: 'இந்த உள்ளடக்கத்தை நீ ஏற்கனவே புகாரளித்துவிட்டாய்.'
+    trust_too_low: 'புகாரளிக்க உன் கணக்கு மிகப் புதியது.'
+    unverified: 'நீ உள்நுழைந்திருப்பதையும் உன் கணக்கின் மின்னஞ்சல் சரிபார்க்கப்பட்டிருப்பதையும் உறுதிசெய்.'
+    rate_limited: 'நீ மிக விரைவாகப் புகாரளிக்கிறாய். சிறிது காத்திருந்து மீண்டும் முயற்சி செய்.'
+    suspended: 'உன் கணக்கு இடைநிறுத்தப்பட்டுள்ளது.'
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
-    cancel: "தவிர்"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    button: 'மேல்முறையீடு'
+    title: 'இந்த முடிவுக்கு மேல்முறையீடு செய்'
+    placeholder: 'இந்த உள்ளடக்கம் ஏன் மறைக்கப்படக்கூடாது என்று விளக்கு...'
+    submit: 'மேல்முறையீட்டைச் சமர்ப்பி'
+    cancel: 'தவிர்'
+    success: 'உன் மேல்முறையீடு மதிப்பாய்வுக்குச் சமர்ப்பிக்கப்பட்டது.'
+    already_pending: 'உன்னிடம் ஏற்கனவே நிலுவையில் உள்ள மேல்முறையீடு உள்ளது.'
+    error: 'ஏதோ தவறு நடந்தது. மீண்டும் முயற்சி செய்.'
+    rate_limited: 'நீ மிக விரைவாக மேல்முறையீடு செய்கிறாய். சிறிது காத்திருந்து மீண்டும் முயற்சி செய்.'
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: 'நீ மிக விரைவாகக் கருத்துகளை இடுகிறாய். சிறிது காத்திரு.'
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: 'நீ மிக விரைவாக எதிர்வினையாற்றுகிறாய். சிறிது காத்திரு.'
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: 'நீ மிக விரைவாகப் பின்தொடர்கிறாய்/பின்தொடர்வதை நிறுத்துகிறாய். சிறிது காத்திரு.'
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: 'நீ மிக விரைவாக ஸ்டுடியோ செயல்களைச் செய்கிறாய். சிறிது காத்திரு.'
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: 'சமூகப் புகார்களால் இந்தத் திட்டம் மறைக்கப்பட்டுள்ளது.'
+    comment: 'சமூகப் புகார்களால் இந்தக் கருத்து மறைக்கப்பட்டுள்ளது.'
+    user: 'சமூகப் புகார்களால் இந்தச் சுயவிவரம் மறைக்கப்பட்டுள்ளது.'
+    user_own: 'சமூகப் புகார்களால் உன் கணக்கு இடைநிறுத்தப்பட்டுள்ளது. இந்த முடிவுக்கு நீ மேல்முறையீடு செய்யலாம்.'
+    studio: 'சமூகப் புகார்களால் இந்த ஸ்டுடியோ மறைக்கப்பட்டுள்ளது.'
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: 'சமூகப் புகார்களால் உன் %content_type% மறைக்கப்பட்டுள்ளது. இந்த முடிவுக்கு நீ மேல்முறையீடு செய்யலாம்.'
+    appeal_approved: 'உன் மேல்முறையீடு ஏற்கப்பட்டது. உன் உள்ளடக்கம் இப்போது மீண்டும் தெரியும்.'
+    appeal_rejected: 'உன் மேல்முறையீடு மதிப்பாய்வு செய்யப்பட்டது, உன் உள்ளடக்கத்தை மறைக்கும் முடிவு மாறாது.'
+    admin_review_needed: 'உள்ளடக்கம் தானாக மறைக்கப்பட்டது, மதிப்பாய்வு தேவை.'
+Reports: 'புகார்கள்'
+members: 'உறுப்பினர்கள்'

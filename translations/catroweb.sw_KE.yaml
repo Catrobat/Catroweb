@@ -1,795 +1,734 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+title: "Jumuiya ya Catrobat"
+meta.description: "Shiriki, gundua na remix miradi ya ubunifu iliyotengenezwa kwa Catrobat. Jiunge na jumuiya ya kimataifa ya waundaji wachanga wanaotengeneza michezo, uhuishaji na programu."
+meta.description.media.library: "Vinjari na upakue rasilimali za media bila malipo kwa Catrobat — sauti, picha na zaidi kwa miradi yako."
+meta.og.title.login: "Ingia kwenye Catrobat"
+meta.og.description.login: "Ingia ili kushiriki miradi yako ya Catrobat na jumuiya."
+meta.og.title.register: "Fungua akaunti ya Catrobat"
+meta.og.description.register: "Jiunge na jumuiya ya Catrobat na uanze kushiriki miradi yako ya ubunifu leo."
+meta.og.description.profile: "%username% kwenye Catrobat – vinjari miradi na mafanikio yake."
 localLanguage: Kiswahili
 username: Jina la mtumiaji
 password: Nenosiri
-createNewPassword: Create new password
+createNewPassword: "Unda nenosiri jipya"
 accountSettings: Account Settings
 email: Barua pepe
 aboutPocketCode: Kuhusu Msimbo wa Mfukoni
 about: Kuhusu Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
+education: "Elimu"
+chat: "Gumzo na majukwaa"
+privacyGuide: "Mwongozo wa Ufahamu wa Faragha"
+others: "Mengineyo"
 tutorials: Msaada
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
-discordChat: Discord chat
+discordChat: "Gumzo la Discord"
 passwordsNoMatch: Manenosiri hayafanani.
-error: Oops!
+error: "Lo!"
 cancel: Sitisha
 confirm: Thibitisha
 report: Ripoti
 report.title: Ripoti
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: "Ndiyo, ifute!"
+reportIt: "Ndiyo, iripoti!"
+areYouSure: "Una uhakika?"
+noWayOfReturn: "Hakuna njia ya kurejesha vitendo vyako!"
 download: Pakua
 name: Jina
 description: Maelezo
 noDescription: Hakuna maelezo.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+notesAndCreditsDescription: "Uliundaje mradi huu? Je, ulitumia mawazo, hati au michoro ya watu wengine? Washukuru hapa."
+projectImportedFromScratch: "Mradi huu uliletwa kutoka MIT Scratch. Unaweza kuangalia mradi asili"
+scratchImportedProjectLinkHere: "hapa."
 country: Nchi
 loginText: ingia
 privacyPolicy: Sera ya Faragha
-imprint: Imprint
+imprint: "Taarifa za kisheria"
 projectDetails: Maelezo
 somethingWentWrong: 'Ooooops kitu kilienda vibaya.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: "Hakikisha umeingia na barua pepe ya akaunti yako imethibitishwa."
+accountSuspended: "Akaunti yako imesimamishwa kwa sababu ya ripoti za jumuiya. Unaweza kukata rufaa uamuzi huu kutoka kwenye wasifu wako."
+doesNotExist: "Rasilimali uliyoomba haipo."
 pleaseTryAgain: 'Tafadhali jaribu tena!'
-tryAgainButton: 'Try again'
+tryAgainButton: "Jaribu tena"
 oldVersionError: 'Tafadhali Sasisha toleo jipya zaidi la Msimbo Mfuko!'
 more: 'zaidi'
-less: 'less'
+less: "kidogo"
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
+more-information: "Maelezo zaidi"
+less-information: "Maelezo machache"
 ok: Nimeelewa
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: "Ili kupakua mradi wa mfano bofya %link_start% hapa %link_end%."
 registrationError: 'Jina la mtumiaji au anuani ya barua pepe tayari inatumika.'
 notifications: 'Taarifa'
 allNotifications: 'Vyote/Yote'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: "Wafuasi"
+LikeNotifications: "Maoni"
 CommentNotifications: 'Maoni'
 RemixNotifications: 'Michanganyo mipya'
 wellDone: "Umefanya vyema!"
 done: "Maliza!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Ndiyo, ifute"
 cancelMessage: "Sitisha"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "Imeshindwa kumthibitisha mtumiaji"
 notificationsClearError: "Haiwezi kuweka alama kwenye taarifa kama iliyosomwa!"
 pleaseWait: "Tafadhali subiri..."
 projects: "Programu"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+users: "Watumiaji"
+studios: "Studio"
+oauthPopUpTitle: "Taarifa za kuingia kwa akaunti ya nje"
+oauthInfo: "Umetumia akaunti ya nje kuingia. Tumekuundia jina la mtumiaji la nasibu. Ukitaka kubadilisha jina lako la mtumiaji au kuunda nenosiri jipya la akaunti yako, nenda kwenye ukurasa wako wa wasifu."
+oauthHere: "hapa"
+statistics: "Takwimu"
+languageSelection: "Uchaguzi wa lugha"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: "Mandhari"
+  auto: "Mfumo"
+  auto_description: "Fuata mpangilio wa kifaa chako"
+  light: "Mwanga"
+  light_description: "Mwonekano angavu"
+  dark: "Giza"
+  dark_description: "Mwonekano wa giza"
+  apply: "Tumia"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: "Ni miradi gani inapendekezwa hapa?"
+      description: "Kadiri mradi wako unavyopata maoni mengi (Dole gumba, Tabasamu ...), ndivyo unavyoonekana juu zaidi kwenye orodha hii."
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: "Unaowafuata"
+  followers: "Wafuasi"
+  follow: "Fuata"
+  username: "Mtumiaji"
+  followsMe: "Ananifuata"
+  noFollowing: "Kwa sasa humfuati mtu yeyote."
+  noFollowers: "Kwa sasa huna wafuasi."
+  noOtherFollowing: "Kwa sasa hakuna watumiaji wanaofuatwa."
+  noOtherFollowers: "Kwa sasa hakuna wafuasi."
+  followError: " Hatukuweza kumfuata mtumiaji huyu sasa hivi."
+  unfollowError: " Hatukuweza kuacha kumfuata mtumiaji huyu sasa hivi."
+  unfollowQuestion: "Una uhakika unataka kuacha kumfuata mtumiaji huyu?"
+  unfollowButton: "Acha kumfuata %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: "Karibu kwenye %theme% ya Catrobat"
+    title_mindstorms: "Karibu kwenye tovuti ya Catrobat ya Mindstorms EV3 na NXT"
+    subtitle: "Unda hadithi, michezo na zaidi..."
+    subtitle_embroidery: "Shona michoro yako mwenyewe kwenye fulana, mifuko, suruali au kasha la simu yako!"
+    subtitle_mindstorms: "Unda miradi yako mwenyewe kwa roboti zako za Lego Mindstorms EV3 na NXT"
+    download: "Pakua programu"
+    statistics: "Takwimu zaidi"
+  featured: "Iliyoangaziwa"
   open: Fungua 
   download: Pakua
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "Pakia Mradi"
+    drop_here: "Buruta na udondoshe faili yako ya .catrobat hapa"
+    or_browse: "au bofya kuvinjari"
+    button: "Pakia"
+    uploading: "Inapakia..."
+    success: "Mradi umepakiwa kikamilifu!"
+    view_project: "Tazama Mradi"
+    upload_another: "Pakia Mwingine"
+    invalid_file: "Tafadhali chagua faili ya .catrobat"
+    file_too_large: "Faili ni kubwa mno"
+    error: "Upakiaji umeshindwa. Tafadhali jaribu tena."
+    unauthorized: "Lazima uingie ili kupakia."
+    rate_limited: "Upakiaji mwingi mno. Tafadhali jaribu tena baadaye."
+    selected_file: "Faili iliyochaguliwa:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+      file_size: "Ukubwa wa juu wa faili ni MB 100."
+      app_upload: "Unaweza pia kupakia miradi moja kwa moja kutoka programu ya Pocket Code. Kumbuka kwamba programu zinarekebishwa kwa sasa na hazitumii upakiaji wa wavuti kwa wakati huu."
+      retention: "Miradi iliyopakiwa itaondolewa kiotomatiki baada ya kipindi cha kutotumika. Ingia mara kwa mara au pata vipakuliwa kwenye mradi wako ili kuongeza muda wake wa kuhifadhiwa."
+      protection: "Miradi mizuri sana au maarufu inaweza kulindwa na wasimamizi dhidi ya kufutwa kiotomatiki."
+  example: "Mifano"
+  newest: "Miradi mipya zaidi"
+  recommended: "Miradi inayopendekezwa"
+  scratchremixes: "Remix za Scratch"
+  noProjects: "Kwa sasa hakuna miradi."
+  shareAction: "Shiriki"
+  deleteAction: "Futa mradi"
+  deleteConfirmation: "Una uhakika?\nUna uhakika unataka kufuta \"%programName%\"?\nHakuna njia ya kurejesha vitendo vyako!\nNdiyo, ifute!\nSitisha\n"
+  deleteConfirmText: "Kitendo hiki hakiwezi kutenduliwa. Mradi wako utafutwa kabisa."
+  deleteConfirmationTitle: "Una uhakika?"
+  deleteNotFoundError: "Mradi wa kufutwa haukupatikana chini ya mtumiaji wako."
+  private: "binafsi"
+  public: "wa umma"
+  setPrivateAction: "Fanya binafsi"
+  setPublicAction: "Fanya wa umma"
+  setPrivateConfirm: "Ufanye mradi huu kuwa binafsi? Hautaonekana tena kwenye matokeo ya utafutaji."
+  setPublicConfirm: "Ufanye mradi huu kuwa wa umma? Utaonekana kwa kila mtu."
+  markNotForKidsConfirm: "Uweke alama mradi huu kuwa haufai kwa watoto?"
+  markSafeForKidsConfirm: "Uondoe alama ya haufai-kwa-watoto kwenye mradi huu?"
+  nfkModeratorLocked: "Mpangilio huu umefungwa na msimamizi."
+  confirmSetPrivate: "Una uhakika unataka kufanya mradi huu kuwa binafsi? Hautaonekana tena kwenye matokeo ya utafutaji."
+  confirmSetPublic: "Una uhakika unataka kufanya mradi huu kuwa wa umma? Utaonekana kwa kila mtu."
+  changeVisibility: "Una uhakika?\nUkiweka '%programName%' kuwa binafsi, hautaonekana wala kupatikana na watumiaji wengine.\nBado unaweza kushiriki kiungo cha mradi wako na marafiki zako. Unaweza kubadilisha mwonekano kwa kugusa ikoni ya kufuli.\nUkiweka \"%programName%\" kuwa wa umma, unaweza kuonekana na kupatikana na watumiaji wengine.\nNdiyo, fanya wa umma\nNdiyo, fanya binafsi\nHapana\n"
+  reportCommentConfirmation: "Una uhakika unataka kuripoti maoni haya?"
+  deleteCommentConfirmation: "Una uhakika unataka kufuta maoni haya?"
+  deleteAccountConfirmation: "Kufuta akaunti?\nUna uhakika unataka kufuta akaunti yako? Hii itafuta pia miradi na maoni uliyopakia!\nHakuna njia ya kurejesha vitendo vyako!\nNdiyo, ifute!\nSitisha\n"
+  tooLongName: "Jina la mradi ni refu mno!"
+  tooLongDescription: "Maelezo ya mradi ni marefu mno!"
+  tooLongCredits: "Maelezo na shukrani za mradi ni marefu mno!"
+  my_projects: "Miradi yangu niliyoshiriki"
+  trending: "Miradi inayovuma"
+  popular: "Miradi maarufu"
   most:
     viewed: Zilizoangaliwa zaidi
     downloaded: Zilizopakuliwa zaidi
-  random: Random projects
-  related: Related projects
+  random: "Miradi ya nasibu"
+  related: "Miradi inayohusiana"
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: "Gundua Miradi"
+    no_projects: "Bado hujaunda mradi wowote"
+    no_explore: "Hakuna miradi iliyopatikana"
+    load_more: "Pakia Zaidi"
+    upload: "Pakia Mradi"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: "Imelindwa"
+    day_left: "Imebaki siku 1"
+    days_left: "Zimebaki siku %days%"
+    tooltip: "Miradi huondolewa kiotomatiki baada ya kipindi cha kutotumika. Pata vipakuliwa zaidi au ingia mara kwa mara ili kuongeza muda wa kuhifadhiwa."
+    tooltip_protected: "Mradi huu umelindwa na hautafutwa kiotomatiki."
+  downloads: "Vipakuliwa %downloads%"
+  sample: "Miradi ya mfano"
+  views: "Mitazamo %views%"
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Watu walioitikia mradi huo"
     all: "Vyote/Yote"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: "{0}remix 0 |{1}remix 1 |]1,Inf]remix %remixes%"
+  newRemixesNotificationTitle: "|{1}\"%programName%\" ina remix 1 mpya: |]1,Inf] \"%programName%\" ina remix %remixes% mpya:"
+  submitted: "Miradi iliyowasilishwa"
+  uploaded: "Miradi iliyopakiwa"
+  reportAsInappropriate: "Ripoti kuwa haufai"
+  reportProgram: "Ripoti mradi"
+  languageVersion: "Toleo la lugha ya Catrobat: %languageVersion%"
+  reportLoginText: "Tafadhali %login% ili kuripoti mradi huu."
+  reportDialogHeader: "Kwa nini unataka kuripoti mradi huu?"
+  reportDialogReason: "Andika sababu"
+  reportRadioButtonInappropriate: "Haufai"
+  reportRadioButtonCopyright: "Ukiukaji wa hakimiliki"
+  reportRadioButtonSpam: "Ni barua taka"
+  reportRadioButtonDislike: "Siupendi"
+  reportOwnProgram: "Huwezi kuripoti mradi wako mwenyewe."
+  reportAlready: "Tayari umeripoti mradi huu."
+  reportDone: "Umeripoti mradi huu!"
+  updateAppHeaderDownload: "Kupakua hakuwezekani"
+  updateAppTextDownload: "Tafadhali sasisha programu yako hadi toleo jipya zaidi. Fahamu kwamba si vipengele vyote vya Android vinapatikana tayari kwenye IOS."
+  updateAppTextDownloadApk: "Upakuaji wa APK kwa sasa unapatikana kwenye Android pekee na si kwenye IOS."
+  updateAppHeader: "Sasisha programu"
+  updateAppText: "Tafadhali sasisha programu yako hadi toleo jipya zaidi."
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: "Angalia mradi huu wa Catrobat"
+  show_more: "Onyesha Zaidi"
   comments: Maoni
-  send: Send
+  send: "Tuma"
   delete: Futa
   report: Ripoti
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: "Jibu"
+  report_popup: "Maoni yameripotiwa kikamilifu."
+  report_popup_header: "Imeripotiwa"
+  deleted_popup: "Maoni yamefutwa kikamilifu."
+  deleted_popup_header: "Imefutwa"
+  noAdminRights: "Huna haki za msimamizi. Tafadhali ingia kama Msimamizi."
+  editProject: "Hariri mradi"
+  closeProjectEditor: "Funga kihariri cha mradi"
   closeEditorPrompt: Je, unataka kuhifadhi madiliko yako?
   btnDiscard: Tupa
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  addComment: "Andika maoni"
+  thumbsUp: "Dole gumba!"
+  smile: "Tabasamu!"
+  love: "Upendo!"
+  wow: "Wooow!"
+  linkTitle: "Kiungo"
+  link: "Nakili kiungo cha mradi kwenye ubao wa kunakili"
+  reactionsText: "Maoni"
+  downloadErrorText: "Hitilafu imetokea wakati wa kupakua mradi. Tafadhali jaribu tena baadaye."
+  downloadStartText: "Upakuaji umeanza..."
+  downloading: "Inapakua..."
+  openInApp: "Fungua katika Pocket Code"
+  downloaded: "Imepakuliwa"
+  showTranslation: "Onyesha tafsiri"
+  hideTranslation: "Ficha tafsiri"
+  translatedByLine: "Imetafsiriwa na %provider% kutoka %sourceLanguage% kwenda %targetLanguage%"
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
+  confrimDelete: "Una uhakika unataka kufuta tafsiri?"
+  default: "Chaguo-msingi"
   save: Hifadhi
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: "Tafsiri ya %language%"
+  editDefault: "Hariri chaguo-msingi"
+  editTranslation: "Hariri tafsiri ya %language%"
+  translations: "Tafsiri"
+  createTranslation: "Unda tafsiri"
+  deletedComment: "**Imefutwa**"
+  replyLabel: "jibu"
+  repliesLabel: "majibu"
+  notForKids: "Haufai kwa watoto"
 remixGraph:
   title: Michanganyo mipya
-  showRemixGraph: 'Remix graph'
+  showRemixGraph: "Grafu ya remix"
   by: 'na'
   open: 'Fungua '
   showPaths: 'Onyesha njia'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: "Inapakia grafu ya remix..."
+  error: "Imeshindwa kupakia grafu ya remix."
+  empty: "Bado hakuna data ya grafu ya remix kwa mradi huu."
   remixesLabel: 'Michanganyo mipya'
   projectsLabel: 'Programu'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  scratchLabel: "Mizizi ya Scratch"
+  interactHint: "Chagua nodi ili kufungua mradi au kuangazia njia yake ya remix."
+  zoomIn: "Kuza"
+  zoomOut: "Kuza nje"
+  resetView: "Rejesha mwonekano"
+  projectNotAvailableErrorTitle: "Samahani..."
+  projectNotAvailableErrorDescription: "Mradi huu haupatikani tena!"
+  projectNotAvailable: "Haupatikani"
+  projectUnknownUser: "Mtumiaji asiyejulikana"
+noReply: "Huu ni ujumbe wa kiotomatiki - tafadhali usijibu barua pepe hii moja kwa moja."
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
-  message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  message: "Mpendwa %username%.\nIli kumaliza kuwezesha akaunti yako, tafadhali tembelea %confirmationUrl%\nKiungo hiki kinaweza kutumika mara moja tu kuthibitisha akaunti yako.\nSalamu za dhati,\nTimu yako ya Catrobat.\n"
+  messageHtml: "<p>\nMpendwa %username%.<br>\n<br>\nIli kumaliza kuwezesha akaunti yako, tafadhali bofya <a href=\"%confirmationUrl%\">hapa.</a><br>\nKiungo hiki kinaweza kutumika mara moja tu kuthibitisha akaunti yako.<br>\n<br>\nSalamu za dhati,<br>\nTimu yako ya Catrobat.\n</p>\n"
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "Thibitisha anwani yako ya barua pepe"
+  welcome: "Karibu Catrobat!"
+  greeting: "Asante kwa kujisajili! Tafadhali thibitisha anwani yako ya barua pepe ili kuanza."
+  message: "Bofya kitufe hapa chini kuthibitisha barua pepe yako. Kiungo hiki ni halali hadi %time% na kinaweza kutumika mara moja tu."
+  button: "Thibitisha Barua Pepe"
+  ignore: "Kama hukufungua akaunti ya Catrobat, unaweza kupuuza barua pepe hii bila wasiwasi."
+  autoDelete: "Akaunti ambazo hazijathibitishwa hufutwa kiotomatiki baada ya siku 30."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "Idhini ya mzazi inahitajika kwa akaunti ya Catrobat ya mtoto wako"
+    title: "Idhini ya Mzazi Inahitajika"
+    greeting: "Habari,"
+    message: "Mtoto wako %username% amefungua akaunti kwenye Catrobat na amethibitisha anwani yake ya barua pepe."
+    explanation: "Catrobat ni jukwaa la elimu la bure ambapo vijana hujifunza kuandika programu kwa kuunda programu, michezo na uhuishaji. Chini ya kanuni za EU za ulinzi wa watoto, tunahitaji idhini yako kabla mtoto wako hajashiriki kikamilifu katika jumuiya. Tafadhali bofya kitufe hapa chini kutoa idhini."
+    button: "Toa Idhini ya Mzazi"
+    ignore: "Kama hukutarajia barua pepe hii, unaweza kuipuuza bila wasiwasi. Bila idhini, akaunti itakuwa na vipengele vichache."
+    whatIsCatrobat: "Catrobat ni jukwaa la bure la elimu ya programu lisilo la kibiashara. Jifunze zaidi kwenye catrobat.org."
+    manageLink: "Unaweza kusimamia akaunti ya mtoto wako wakati wowote kupitia <a href=\"%portalUrl%\" style=\"color: #00acc1;\">Lango la Wazazi</a>. Jifunze zaidi kuhusu <a href=\"%infoUrl%\" style=\"color: #00acc1;\">haki zako kama mzazi</a>."
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "Idhini Imetolewa"
+    message: "Asante! Akaunti ya %username% sasa imewezeshwa kikamilifu."
+    continueButton: "Gundua miradi"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Wazazi na Walezi"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Taarifa kwa Wazazi na Walezi"
+    intro: "Catrobat inachukulia kwa uzito usalama na faragha ya watumiaji wachanga. Ukurasa huu unaeleza jinsi tunavyomlinda mtoto wako na haki ulizo nazo."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Catrobat ni nini?"
+      text: "Catrobat ni jukwaa la elimu la bure lisilo la kibiashara ambapo vijana hujifunza programu kwa kuunda programu, michezo na uhuishaji wao wenyewe. Jukwaa linapatikana duniani kote na linatumika katika mazingira ya elimu."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Tunakusanya data gani?"
+      text: "Tunakusanya data ya chini kabisa inayohitajika kuendesha jukwaa: jina la mtumiaji, anwani ya barua pepe, tarehe ya kuzaliwa, na miradi yoyote ambayo mtoto wako anaunda na kupakia. Kwa watumiaji walio chini ya miaka 14, tunahifadhi pia anwani ya barua pepe ya mzazi/mlezi kwa madhumuni ya idhini. Hatuuzi wala kushiriki data binafsi na wahusika wengine."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Haki zako kama mzazi au mlezi"
+      text: "Chini ya kanuni za EU za ulinzi wa watoto (GDPR) na COPPA, una haki ya: kukagua data tuliyo nayo kuhusu mtoto wako, kuomba nakala ya data hiyo, kubatilisha idhini yako wakati wowote (jambo linalozuia akaunti), na kuomba kufutwa kwa kudumu kwa akaunti ya mtoto wako na data zote zinazohusiana."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Ni vikwazo gani vinavyotumika kwa akaunti za watoto?"
+      text: "Watumiaji walio chini ya miaka 16 hawawezi kuandika au kusoma maoni, kufuata watumiaji wengine, au kuona maudhui yaliyowekwa alama kuwa hayafai kwa watoto. Bado wanaweza kuunda na kupakia miradi, kuvinjari miradi ya umma, na kuitikia miradi kwa kupenda. Vikwazo hivi vipo ili kutoa mazingira salama ya kujifunza."
+    manageButton: "Simamia Akaunti ya Mtoto Wako"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Lango la Wazazi"
+    description: "Weka anwani yako ya barua pepe ili kupokea kiungo salama cha kusimamia akaunti ya Catrobat ya mtoto wako. Kiungo kitatumwa kwa anwani ya barua pepe uliyotoa wakati wa usajili."
+    emailLabel: "Anwani yako ya barua pepe"
+    submitButton: "Tuma Kiungo cha Usimamizi"
+    infoLink: "Jifunze Zaidi"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Angalia kikasha chako"
+      message: "Kama kuna akaunti inayohusishwa na barua pepe hii, tumetuma kiungo cha usimamizi. Tafadhali angalia kikasha chako na ufuate kiungo kusimamia akaunti ya mtoto wako."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Simamia Akaunti za Watoto"
+    description: "Unasimamia akaunti zinazohusishwa na %email%."
+    consentStatus: "Hali ya idhini"
+    accountCreated: "Akaunti imefunguliwa"
+    email: "Barua pepe ya mtoto"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "Imetolewa"
+      pending: "Inasubiri"
+      revoked: "Imebatilishwa"
+    grantButton: "Toa Idhini"
+    revokeButton: "Batilisha Idhini"
+    revokeConfirm: "Una uhakika unataka kubatilisha idhini? Akaunti itakuwa na vipengele vichache."
+    exportButton: "Hamisha Data"
+    deleteButton: "Futa Akaunti"
+    deleteConfirm: "Una uhakika unataka kufuta akaunti hii kabisa? Hili haliwezi kutenduliwa."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Simamia akaunti ya Catrobat ya mtoto wako"
+      title: "Usimamizi wa Akaunti"
+      greeting: "Habari,"
+      message: "Uliomba kiungo cha kusimamia akaunti ya Catrobat ya mtoto wako (%usernames%). Bofya kitufe hapa chini kuona na kusimamia akaunti."
+      button: "Simamia Akaunti"
+      ignore: "Kama hukuomba hili, unaweza kupuuza barua pepe hii bila wasiwasi."
 passwordRecovery:
   subject: Your Catrobat Password Recovery
-  message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
-    <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
-    <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  message: "Mpendwa %username%.\nUmeomba kuweka upya nenosiri lako kwenye %appplication_url% kwa sababu umesahau nenosiri lako.\nKama hukuomba hili, tafadhali lipuuze. Litaisha muda na kukosa matumizi baada ya saa 24.\nIli kuweka upya nenosiri lako na kuunda jipya, tafadhali tembelea ukurasa ufuatao: %confirmationUrl%\nUnaweza kutumia jina lako la mtumiaji na nenosiri lako wakati wowote kufikia jumuiya ya %appplication_url%.\nIli kufanya hivyo, tembelea ukurasa ufuatao: %loginPage%\nIli kuhariri maelezo ya wasifu wako, nenda kwenye ukurasa huu: %profilePage%\nSalamu za dhati,\nTimu yako ya Catrobat.\n"
+  messageHtml: "<p>\nMpendwa %username%.<br>\n<br>\nUmeomba kuweka upya nenosiri lako kwenye <a href=\"%appplication_url%\">Pocket Code</a> kwa sababu umesahau nenosiri lako.\nKama hukuomba hili, tafadhali lipuuze. Litaisha muda na kukosa matumizi baada ya saa 24.<br>\n<br>\nIli kuweka upya nenosiri lako na kuunda jipya, tafadhali bofya <a href=\"%confirmationUrl%\">hapa.</a><br>\n<br>\nUnaweza kutumia jina lako la mtumiaji na nenosiri lako wakati wowote kufikia jumuiya ya <a href=\"%appplication_url%\">Pocket Code</a>.<br>\nIli kufanya hivyo, tembelea ukurasa ufuatao: <a href=\"%loginPage%\">Ukurasa wa Kuingia</a><br>\nIli kuhariri maelezo ya wasifu wako, nenda kwenye <a href=\"%profilePage%\">ukurasa</a> huu.<br>\n<br>\nSalamu za dhati,<br>\nTimu yako ya Catrobat.\n</p>\n"
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
+  aboutMe: "Kuhusu mimi"
+  currentlyWorkingOn: "Ninachofanyia kazi sasa"
+  edit: "Hariri wasifu wako"
   saveChanges: hifadhi mabadiliko
   newPass: nenosiri jipya
   repeatPass: rudia nenosiri
-  oldPass: old password
+  oldPass: "nenosiri la zamani"
   firstEmail: Baruapepe yangu ya kwanza
   secondEmail: Baruapepe yangu ya pili
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: "Miradi yangu"
+  follows: "Anaowafuata"
+  follower: "Wafuasi"
+  unfollowUser: "Acha kumfuata mtumiaji huyu!"
+  followUser: "Mfuate mtumiaji huyu!"
+  amountOfPrograms: "Idadi ya miradi"
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
+    passwordTooShort: "Nenosiri jipya lazima liwe na angalau herufi %length%."
+    passwordTooLong: "Nenosiri jipya linaweza kuwa na herufi %length% zaidi."
+    passwordIsUsername: "Nenosiri lazima litofautiane na jina la mtumiaji."
     passwordWrong: Nenosiri siyo sahihi
     emailNotValid: Anwani ya baruapepe hii sio halali.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    emailMissing: "Hitilafu wakati wa kusasisha anwani hii ya barua pepe. Lazima uwe na angalau anwani moja ya barua pepe iliyothibitishwa."
     emailExists: Anuani ya baruapepe hii imeshatumika.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameNotValid: "Jina hili la mtumiaji si halali."
+    usernameMissing: "Lazima uwe na jina la mtumiaji."
+    usernameExists: "Jina hili la mtumiaji tayari lipo."
+    usernameContainsEmail: "Jina la mtumiaji lisiwe na anwani ya barua pepe."
     submitSuccess: imeifadhiwa!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
+  reallyDeleteProgram: "Kweli unataka kufuta mradi wako"
+  programsOf: "Miradi ya"
+  picture: "Picha ya wasifu"
   changePicture: Badili picha
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: "Wasifu kwenye Scratch"
 myprofile:
-  userSettings: User settings
+  userSettings: "Mipangilio ya mtumiaji"
   profileSettings: Hariri wasifu
   securitySettings: Badili nenosiri
   accountSettings: Account Settings
-  accountVerification: Verify account
-  account: Account
+  accountVerification: "Thibitisha akaunti"
+  account: "Akaunti"
   editProfile: Hariri wasifu
   edit: Hariri
   done: Maliza
   checkMail: Barua pepe imetumwa kwenye anauani ya barua pepe yako. Tafadhali angalia akaunti yako.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
+  passwordUpdated: "Nenosiri lako limesasishwa kwa mafanikio."
+  avatar: "Picha ya avatari"
   email: Baruapepe
   deleteAccount: Futa akaunti
-  deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  deleteAccountWarning: "Kumbuka:\nUmeunda mradi/miradi %num_projects% na una mfuasi/wafuasi %num_followers%. Miradi yako yote itaondolewa. Hutaweza kuingia tena na miradi yako itatoweka kwenye orodha zote. Kufuta wasifu wako hakuwezi kutenduliwa!\nUna uhakika unataka kutuacha?\n"
+  exportData: "Pakua data yangu"
+  exportDataDescription: "Una haki ya kupokea nakala ya data yako binafsi. Hii inajumuisha taarifa za wasifu wako, miradi, maoni, maitikio na wafuasi."
+  exportDataLoading: "Inapakua..."
+  exportDataError: "Kuna kitu kimeharibika wakati wa kuhamisha data yako. Tafadhali jaribu tena baadaye."
+  exportDataRateLimited: "Unaweza kuhamisha data yako mara moja tu kwa siku. Tafadhali jaribu tena kesho."
+  editAccountSettings: "Hariri mipangilio ya akaunti"
+  profileChangeSuccess: "Wasifu wako umebadilishwa kwa mafanikio."
+  unspecifiedError: "Kuna kitu hakikufanya kazi wakati wa kubadilisha wasifu wako. Tafadhali jaribu tena au utujulishe kama kinaendelea kutokea!"
+  verifyAccountText: "Tutakutumia barua pepe yenye kiungo cha kuthibitisha akaunti yako. Hakikisha unabofya kiungo ndani ya saa moja ijayo; unaruhusiwa kuomba barua pepe moja tu kwa siku."
+  verifyAccountButton: "Tuma barua pepe"
+  verifyAccountMailSent: "Barua pepe imetumwa kwa mafanikio. Tafadhali angalia kikasha chako"
+  verifyAccountMailFailed: "Unaweza kuomba barua pepe moja tu kwa siku"
 licenseToPlay:
   link: 'Leseni ya kuchezesha'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  title: "Leseni ya kucheza - Toa sifa na ushiriki"
+  text1: "Fikiria kwamba kila mradi wa Catrobat ni keki, keki maalum sana inayokuja na mapishi yake (vitalu vya programu). Wanachama wote wa jumuiya ya Catrobat hushiriki keki zao pamoja na mapishi yao. Hii inamaanisha unaweza kufurahia keki na kujifunza jinsi ya kuzitengeneza mwenyewe!"
+  text2: "Hakuna mapishi ya siri: maelekezo ya jinsi ya kutengeneza keki hizi yako wazi kwa mtu yeyote kutumia, kutumia tena, kubadilisha, na kutumika kama msukumo wa mawazo mapya... yaani keki."
+  text3: "Unaweza kula keki na pia kunakili mapishi ya watu wengine kutengeneza yako mwenyewe, labda kwa viungo tofauti. Uhuru huu unakuja na masharti mawili rahisi:"
+  text4: "Tulipoanzisha jumuiya ya Catrobat, tuliamua kutumia mtazamo huu kwa sababu tunaamini unasaidia kujifunza na ubunifu ndani ya jumuiya. Kwa kushiriki mapishi na viungo (hati na kazi za sanaa), watu wanaweza kujenga juu ya mawazo ya wengine na kila mtu atanufaika."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: "Jifunze zaidi kuhusu masharti ya matumizi ya jumuiya ya mtandaoni ya Catrobat kwenye %link-termsOfUse%."
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
+    item1: "shiriki keki zako pamoja na mapishi"
+    item2: "toa sifa kwa waliokuhamasisha"
   version: Toleo 1.1, 2 Aprili 2013
 termsOfUse:
   title: Masharti ya matumizi
   headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text1: "Kama sehemu ya jumuiya ya Catrobat, unashiriki miradi na mawazo na watu:"
+  text2: "Tunahitaji msaada wako kufanya jumuiya hii kuwa mahali pa kusaidiana kwa kila mwanachama. Hivi ndivyo unavyoweza kusaidia:"
+  text3: "Kupitia mradi wa Catrobat tunataka kukuza ushirikiano na kuruhusu ubunifu wa kila mtu kuungana kwa manufaa ya binadamu wote. Wewe pia unaweza kuwa mwanachama hai wa jumuiya ya Catrobat kwa kurudisha miradi yako kwa jumuiya kama zawadi, kama wanachama wengine hai wanavyokupa miradi yao:"
   text4: 'Zawadi yetu kwako:'
   text5: 'Masharti ya matumizi na Huduma:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: "kutoka nchi na tamaduni nyingi tofauti"
+    item2: "wa umri wote (kuanzia watoto wadogo hadi vijana na babu na bibi)"
+    item3: "wenye viwango vyote vya uzoefu"
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: "Kuwa na heshima. Unaposhiriki miradi, tafadhali kumbuka kwamba watu wa umri na asili nyingi tofauti wataona michango yako."
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item3: "Kuwa mkweli. Usijifanye kuwa mtu mwingine au kujaribu kudanganya jumuiya."
+    item4: "Weka taarifa binafsi kuwa siri. Usishiriki anwani yako ya barua pepe, nambari ya simu, au taarifa nyingine binafsi za mawasiliano."
+    item5: "Saidia kuweka tovuti kuwa ya kirafiki. Kama unahisi wengine wangeona mradi au maoni kuwa mabaya, ya matusi, yenye vurugu nyingi, au yasiyofaa kwa njia nyingine, bofya tu kitufe cha 'ripoti kuwa haifai' na uache maelezo mafupi. Timu ya Catrobat itakagua ripoti yako na inaweza kuondoa mradi, maoni au chapisho lolote."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Kwa kupakia mradi kwenye tovuti zetu, unakubali kuweka kazi hii chini ya leseni fulani huru za miradi ya Catrobat iliyopakiwa. Kama leseni huru ambazo mfumo wa Catrobat wenyewe unapatikana kwako, leseni hizi huru za miradi iliyopakiwa humpa kila mtu haki ya kujifunza kutokana na kazi iliyopakiwa awali na wengine na kuirekebisha na kuichanganya upya ili kujenga michezo mipya ya kuvutia, uhuishaji na miradi mingine. Hii inamruhusu kila mtu 'kusimama juu ya mabega ya wenzake', mmoja wao akiwa wewe! Kazi yako itanufaisha dunia nzima na kubaki huru kwa kila mtu kutumia, kidogo kama maandishi na picha zinazochangiwa bure kwenye Wikipedia na watu wa kujitolea kutoka kote duniani. Ifikirie kama zawadi yako kwa binadamu: unampa kila mtu, na wengine wote wanaopakia kazi zao kwenye tovuti zetu wanakupa wewe. Hivyo mradi uliopakiwa ni zawadi ya thamani kubwa ambayo mmiliki wake anakupa bure, kwa sharti kwamba ushiriki katika jumuiya kwa masharti hayo hayo."
+    item2: "Huna lazima ya kukubali zawadi; ukikubali, sheria fulani zinatumika. Faida za sheria hizi ni kwamba unaweza kujifunza kutokana na kazi na kujenga juu yake kutengeneza vitu vizuri zaidi mwenyewe, ambavyo unaweza, kwa mfano, kupakia tena kwenye tovuti zetu kama vyako. Faida nyingine ni kwamba leseni hizi zinahakikisha huwezi kuwajibishwa kwa matatizo yoyote yanayowapata wengine kupitia matumizi yao ya mradi wako."
+    item3: "Sharti moja muhimu la ziada ni kwamba utoe sifa wazi kwa waandishi ambao kazi zao ulizitumia kama msingi wa kazi yako. Wakati huo huo, tutafanya kazi kwa bidii ili kazi yako itambuliwe wazi na wengine kuwa ni mchango wako, kwa kutoa sifa kwa jina la kipekee ulilochagua kwa hiari kukuwakilisha katika jumuiya ya Catrobat, na kwa kuwapa wengine nafasi ya kukushukuru hadharani kwa kutoa kazi yako kwa kila mtu, na hasa kwao."
+    item4: "Tafadhali angalia %link-licenseUploaded% kwa masharti kamili ya kisheria."
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "Tunakupa programu zetu zote na rasilimali za mtandao zinazohusiana na mfumo wa Catrobat, kwa mfano, programu zilizoandikwa na timu ya Catrobat, tovuti zetu na rasilimali za mtandao, msimbo wetu wa chanzo unaohusiana na mfumo wa Catrobat, na nyenzo zote za ziada kama, kwa mfano, picha, sauti na maandishi, sasa na siku zijazo chini ya leseni huru za Catrobat."
+    item2: "Leseni hizi hufanya sehemu zote za Catrobat kuwa bure kwako na pia huru kwa maana ya kukupa uhuru wa kuzitumia upendavyo, kwa vikwazo vichache tu vinavyohakikisha, miongoni mwa mengine, kwamba mfumo wa Catrobat utabaki huru na wenye manufaa kwa kila mtu milele."
+    item3: "Tafadhali angalia %link-licenseToPlay% kwa masharti kamili ya kisheria. Msimbo wa chanzo wa mfumo wa Catrobat pamoja na nyaraka na rasilimali nyingine nyingi zinapatikana kupitia %link-developer%."
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+    item1: "Kama wewe, au, kama uko chini ya miaka 13, wazazi au walezi wako wa kisheria, mnahusishwa na shirika linalohusika au kuwajibika kwa ukiukaji wa faragha wa aina ya upekuzi mpana na/au ufuatiliaji wa watu wengi, basi huruhusiwi kutumia programu zetu na kufikia huduma zetu. Maelezo kamili ya kizuizi hiki na baadhi ya vighairi vyake yameelezwa katika Vifungu 4.a na 4.b kwenye %link-termsOfUse% yetu."
+    item2: "Kama uko chini ya miaka 13, basi lazima uwaulize wazazi au walezi wako wa kisheria kama wanakuruhusu kutumia Programu na Huduma za Catrobat."
+    item3: "Tunahifadhi haki ya kukataa, kufuta au kuficha miradi, akaunti za watumiaji, na nyenzo zozote za kidijitali zilizopakiwa kwenye tovuti za Catrobat wakati wowote kwa uamuzi wetu pekee, kwa mfano kama tutagundua kuwa mradi una maudhui yasiyofaa au mtumiaji anakiuka haki za watu wengine."
+    item4: "Programu zote na rasilimali za mtandao za Catrobat zinatolewa kwa matumaini kwamba zitakuwa na manufaa, lakini bila dhamana yoyote."
+    item5: "Tafadhali angalia %link-termsOfUse% yetu developer.catrobat.org/terms_of_use_and_service kwa maelezo kamili ya hoja zilizo hapo juu na baadhi ya masharti ya ziada ya kisheria."
+  bottom1: "Rudi hapa mara kwa mara, kwa sababu tunajaribu kila wakati kuboresha Masharti yetu ya Matumizi."
+  bottom2: "Tafadhali tuma mapendekezo yoyote kuhusu Masharti haya ya Matumizi kwa %email-webmaster%."
   version: Toleo 1.1, 2 Aprili 2013
 search:
   dotdotdot: Tafutiza...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
+  search: "Tafuta miradi, watumiaji na studio"
+  inMediaLib: "Tafuta kwenye maktaba ya media"
+  inMediaCategory: "Tafuta kwenye kategoria ya media"
   results: Matokeo yaliyotafutwa
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  resultcount: "Utafutaji wako umepata matokeo %count%"
+  fail: "Tafadhali weka angalau neno moja la kutafuta"
+  noUsers: "Hakuna watumiaji waliopatikana"
+  noProjects: "Hakuna miradi iliyopatikana"
+  noStudios: "Hakuna studio zilizopatikana"
+  sameSearchMessage: "Inaonekana tayari uko hapa! Jaribu utafutaji mwingine?"
 menu:
   profile: Wasifu wangu
   login: Ingia
   logout: Kutoka
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  admin: "Msimamizi"
+  home: "Nyumbani"
+  helpAndTutorials: "Msaada na mafunzo"
+  followersAndFollowing: "Wafuasi"
   mediaLibrary: Maktaba ya midia
-  studio: Studios
+  studio: "Studio"
   language: Lugha
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: "Hakuna chaguo za lugha zinazopatikana."
 login:
   login: Ingia
   button:
-    loginNow: Login now
+    loginNow: "Ingia sasa"
     createAccount: Unda akaunti
-    forgetPassword: Forget password?
+    forgetPassword: "Umesahau nenosiri?"
   oauth:
-    title: Or you can join with
+    title: "Au unaweza kujiunga kwa"
   passOrUser: Jina la mtumiji au nenosiri havikuwa sahihi.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
+  accountSuspended: "Akaunti yako imesimamishwa. Kama unaamini hii ni hitilafu, tafadhali wasiliana na msaada."
+  noUsername: "Jina lako la mtumiaji au anwani ya barua pepe haikupatikana."
   forgotPass: Umesahau nenosiri au jina la mtumiaji?
   recoverPassSend: Barua pepe imetumwa kwenye anauani ya barua pepe yako. Tafadhali angalia akaunti yako.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  alreadyReset: "Nenosiri la mtumiaji huyu tayari limeombwa ndani ya saa 24 zilizopita."
+  confirmationSend: "Barua pepe ya kuthibitisha usajili wako imetumwa kwa anwani yako. Tafadhali angalia kikasha chako na uwezeshe akaunti yako."
   userOrEmail: Jina la mtumiaji au barua pepe
   changePass: Badili nenosiri
   createAccount: Unda akaunti
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  noAccount: "Huna akaunti?"
+  alreadyAccount: "Tayari una akaunti?"
   or: AU
   username: Jina la mtumiaji
   email: Baruapepe
   passwordFirst: Nenosiri
   passwordSecond: Password Confirm
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: "Jisajili"
+  subText: "Kwa kuendelea, unafungua akaunti ya jumuiya ya Catrobat na unakubali %var1% na %var2% zetu."
+  dateOfBirth: "Tarehe ya kuzaliwa"
+  dateOfBirthInfo: "Tunauliza tarehe yako ya kuzaliwa ili kutii kanuni za EU za ulinzi wa watoto (GDPR/COPPA) na kutoa uzoefu salama kwa watumiaji wachanga."
+  parentEmail: "Barua pepe ya Mzazi/Mlezi"
+  parentEmailInfo: "Inahitajika kwa watumiaji walio chini ya miaka 14. Tutatuma ombi la idhini kwa anwani hii."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: "Kamilisha usajili wako"
+    info: "Tafadhali toa tarehe yako ya kuzaliwa ili kuendelea kutumia jukwaa."
     submit: Endelea
   button:
     cancel: Sitisha
     createAccount: Unda akaunti
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Angalia kikasha chako!"
+    message: "Tumekutumia barua pepe ya uthibitisho. Bofya kiungo kwenye barua pepe kuwezesha akaunti yako."
+    helpTitle: "Hukupata barua pepe?"
+    hint: "Angalia folda yako ya barua taka. Kiungo ni halali kwa saa 24."
+    resendButton: "Tuma tena barua pepe ya uthibitisho"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "Inasubiri idhini ya mzazi"
+    message: "Barua pepe yako imethibitishwa! Kabla hujaweza kutumia jukwaa kikamilifu, mzazi au mlezi anahitaji kutoa idhini."
+    sentTo: "Ombi la idhini limetumwa kwa %email%"
+    helpTitle: "Hukupata barua pepe? Unahitaji msaada?"
+    hint: "Mwombe mzazi wako aangalie folda ya barua taka. Kiungo ni halali kwa saa 24."
+    resendButton: "Tuma tena barua pepe ya idhini"
+    wrongEmail: "Umeweka barua pepe ya mzazi isiyo sahihi?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "Idhini ya mzazi imebatilishwa"
+    message: "Mzazi au mlezi wako amebatilisha idhini ya akaunti yako. Akaunti yako ina vipengele vichache hadi idhini itolewe tena."
+    newEmailPlaceholder: "Barua pepe mpya ya mzazi"
+    changeButton: "Sasisha na utume tena"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: "Kurejesha akaunti"
+  description: "Kama unakumbuka barua pepe au jina la mtumiaji la akaunti yako tunaweza kukutumia kiungo cha kuweka upya nenosiri lako."
   button:
     cancel: Sitisha
-    submit: Recover password
+    submit: "Rejesha nenosiri"
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Weka upya nenosiri lako"
+    description: "Kama unakumbuka barua pepe ya akaunti yako tunaweza kukutumia kiungo cha kuweka upya nenosiri lako."
     button:
-      submit: "Send reset email"
+      submit: "Tuma barua pepe ya kuweka upya"
       cancel: "Sitisha"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "Angalia barua pepe zako"
+    description: "Kama akaunti inayolingana na barua pepe yako ipo, basi barua pepe imetumwa sasa hivi ikiwa na kiungo unachoweza kutumia kuweka upya nenosiri lako. Kiungo hiki kitaisha muda baada ya %time%."
+    descriptionTwo: "Unaweza kuomba kuweka upya nenosiri tena kila baada ya saa %throttleLimit%."
+    descriptionThree: "Kama hukupokea barua pepe tafadhali angalia folda yako ya barua taka au tuma barua pepe kwa msaada wetu kwenye %email-webmaster%."
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "Ili kuweka upya nenosiri lako, tafadhali tembelea kiungo kifuatacho"
+    expire: "Kiungo hiki kitaisha muda baada ya %time%."
+    cheers: "Kila la heri!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "Weka upya nenosiri lako"
+    content: "Hivi karibuni uliomba kuweka upya nenosiri la akaunti yako ya Catrobat. Bofya kitufe hapa chini kuchagua nenosiri jipya. Kama hukuomba hili, unaweza kupuuza barua pepe hii bila wasiwasi."
+    visitLink: "Weka Upya Nenosiri"
+    expire: "Kiungo hiki ni halali kwa %time% na kinaweza kutumika mara moja tu."
   reset:
-    title: "Reset your password"
+    title: "Weka upya nenosiri lako"
     button:
-      submit: "Reset password"
+      submit: "Weka upya nenosiri"
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: "Pakua kama programu"
+  prepare: "Pata kama programu"
+  preparing: "Inaandaa programu"
+  text: "Mchakato huu unaweza kuchukua muda"
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: "Kuna kitu hakikufanya kazi. Tafadhali jaribu tena au utujulishe kama kitaendelea kutokea!"
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
+    blank: "Jina la mtumiaji lisiwe tupu"
+    invalid: "Jina lako la mtumiaji si sahihi"
+    exists: "Jina hili la mtumiaji tayari lipo."
+    not_exists: "Jina hili la mtumiaji halipo."
     not_email: Jina la mtumiaji halitakiwi kuwa anuani ya barua pepe.
-    size: The username must have at least 3 character and not more than 180
+    size: "Jina la mtumiaji lazima liwe na angalau herufi 3 na zisizozidi 180"
   password:
     blank: Nenosiri limekosekana.
-    short: 'Your password must have at least {{ limit }} characters.'
+    short: "Nenosiri lako lazima liwe na angalau herufi {{ limit }}."
   country:
-    blank: The country is missing.
+    blank: "Nchi haijajazwa."
     invalid: Nchi siyo sahihi
   email:
     blank: barua pepe lazima isiwe wazi
-    invalid: Your email seems to be invalid
+    invalid: "Barua pepe yako inaonekana si sahihi"
     exists: Anuani ya baruapepe hii imeshatumika.
   id:
     blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
+  login: "Nenosiri au jina la mtumiaji si sahihi."
   post-data: POST-Data not correct or missing!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: "Mteja hakutuma fileChecksum! Je, unatumia toleo la zamani la Pocket Code?"
+    invalid: "checksum si sahihi"
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: "xml ya msimbo si sahihi"
+    missing: "hitilafu isiyojulikana: project_xml_not_found!"
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: "faili isiyotarajiwa imepatikana"
+    invalid: "faili si sahihi"
+  image.missing: "XML ya mradi inataja faili ambayo haipo kwenye folda ya mradi"
+  unknown: "hitilafu isiyojulikana"
+  token: "Uthibitishaji wa kifaa umeshindikana: auth-token si sahihi!"
+  uploadTokenAuthFailed: "Uthibitishaji wa tokeni ya kupakia umeshindikana."
   project:
-    invalid: Invalid project.
+    invalid: "Mradi si sahihi."
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: "Samahani, mradi wako una toleo la zamani la lugha ya Catrobat! Je, unatumia toleo jipya zaidi la Pocket Code?"
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "Samahani, unatumia toleo la zamani la Pocket Code. Tafadhali sasisha hadi toleo jipya zaidi."
   authentication:
-    title: Login did not work
-    webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+    title: "Kuingia hakukufanikiwa"
+    webview: "Inaonekana jina lako la mtumiaji au nenosiri halikuwa sahihi.\nTafadhali jaribu kuingia tena kwenye programu.\n"
 success:
-  text: Success
+  text: "Imefanikiwa"
   registration: Usajili umefanikiwa!
   token: sawa
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: "Mradi wako umepakiwa kwa mafanikio!"
+  imgUpload: "Picha yako imepakiwa kwa mafanikio!"
+  report: "Ripoti yako imetumwa kwa mafanikio!"
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: "{0} chini ya dakika 1 iliyopita |{1}dakika 1 iliyopita |]1,Inf] dakika %count% zilizopita"
+  hours.ago: "{1}saa 1 iliyopita |]1,Inf] saa %count% zilizopita"
+  days.ago: "{1}siku 1 iliyopita |]1,Inf] siku %count% zilizopita"
+  months.ago: "{1}mwezi 1 uliopita |]1,Inf] miezi %count% iliyopita"
+  years.ago: "{1}mwaka 1 uliopita |]1,Inf] zaidi ya mwaka mmoja uliopita"
 failure:
-  upload: There was an error during the upload of your app.
+  upload: "Kulikuwa na hitilafu wakati wa kupakia programu yako."
 user:
   verification:
-    email: 'Verify your email'
+    email: "Thibitisha barua pepe yako"
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: "Barua pepe haipo"
+    emailEmpty: "Barua pepe haiwezi kuwa tupu"
+    emailInvalid: "Barua pepe si sahihi"
+    emailAlreadyInUse: "Barua pepe tayari inatumika"
+    usernameMissing: "Jina la mtumiaji halipo"
+    usernameTooShort: "Jina la mtumiaji ni fupi mno"
+    usernameTooLong: "Jina la mtumiaji ni refu mno"
+    usernameEmpty: "Jina la mtumiaji haliwezi kuwa tupu"
+    usernameAlreadyInUse: "Jina la mtumiaji tayari linatumika"
+    usernameInvalid: "Jina la mtumiaji si sahihi"
+    passwordMissing: "Nenosiri halipo"
+    passwordEmpty: "Nenosiri haliwezi kuwa tupu"
+    passwordTooShort: "Nenosiri ni fupi mno"
+    passwordTooLong: "Nenosiri ni refu mno"
+    passwordInvalidChars: "Nenosiri lina herufi zisizoruhusiwa"
+    usernameContainsEmail: "Jina la mtumiaji lisiwe na anwani ya barua pepe"
+    usernameContainsLink: "Jina la mtumiaji lisiwe na kiungo"
+    countryCodeInvalid: "Msimbo wa nchi si sahihi"
+    pictureInvalid: "Picha ya wasifu si sahihi au haitumiki"
+    dateOfBirthMissing: "Tarehe ya kuzaliwa inahitajika"
+    dateOfBirthInvalid: "Tarehe ya kuzaliwa si sahihi"
+    tooYoung: "Lazima uwe na angalau miaka 3 ili kufungua akaunti"
+    parentEmailMissing: "Barua pepe ya mzazi inahitajika kwa watumiaji walio chini ya miaka 14"
+    parentEmailInvalid: "Barua pepe ya mzazi si sahihi"
+    parentEmailSameAsUser: "Barua pepe ya mzazi lazima iwe tofauti na barua pepe yako"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Nenosiri la sasa halipo"
+    currentPasswordWrong: "Nenosiri la sasa si sahihi"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: "Jina haliwezi kuwa tupu"
+    nameTooLong: "Jina ni refu mno"
+    descriptionTooLong: "Maelezo ni marefu mno"
+    creditsTooLong: "Maelezo na shukrani ni marefu mno"
+    screenshotInvalid: "Picha ya skrini ya mradi si sahihi au haitumiki"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
+    invalid_checksum: "Checksum si sahihi. Jaribu kupakia tena!"
+    upload_error: "Hitilafu wakati wa kupakia. Jaribu kupakia tena!"
     creating_error: 'Error while creating Program Entity. Try uploading again!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "Imeshindikana kuhifadhi maelezo ya mradi."
+    screenshotError: "Imeshindikana kusoma, kubadilisha au kuhifadhi picha ya skrini. Tafadhali angalia ulichoweka."
+    notFound: "Mradi wa kubadilisha haukupatikana."
+    forbidden: "Kubadilisha mradi hakuruhusiwi. Je, bado umeingia?"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: "Jina halipo"
+    nameEmpty: "Jina haliwezi kuwa tupu"
+    nameTooShort: "Jina ni fupi mno"
+    nameTooLong: "Jina ni refu mno"
+    nameAlreadyInUse: "Jina tayari linatumika"
+    descriptionMissing: "Maelezo hayapo"
+    descriptionEmpty: "Maelezo ni tupu"
+    descriptionTooShort: "Maelezo ni mafupi mno"
+    descriptionTooLong: "Maelezo ni marefu mno"
+    imageFileInvalid: "Faili ya picha si sahihi"
+    imageFileInvalidType: "Aina ya faili ya picha si sahihi"
+    imageFileTooLarge: "Faili ya picha ni kubwa mno"
 #languages and countries
 language:
   arabic: Kiarabu
@@ -842,41 +781,41 @@ ci:
   download: Pakua Apk
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: "Matengenezo ya diski"
+    ramMaintenance: "Matengenezo ya RAM"
+    noRemovableObjects: "Hakuna vitu vinavyoweza kuondolewa."
+    removableObjects: "Vitu vinavyoweza kuondolewa"
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: "Miradi inayofanana"
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: "Zaidi kutoka kwa %username%"
 pmd:
-  submitBtn: Submit your project
+  submitBtn: "Wasilisha mradi wako"
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
+    header: "Uwasilishaji"
+    text: "Unakaribia kuwasilisha mradi wako. Tafadhali weka msimbo wa mradi na ubofye tuma."
     btnText: Wasilisha
   successful:
-    text: Your project upload was successful.
+    text: "Mradi wako umepakiwa kwa mafanikio."
   failed:
-    text: Project upload failed.
+    text: "Kupakia mradi kumeshindikana."
 codeview:
   title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
+  showCode: "Onyesha msimbo"
+  hideCode: "Ficha msimbo"
+  showStatistics: "Onyesha takwimu za msimbo"
+  hideStatistics: "Ficha takwimu za msimbo"
+  cantDisplayCode: "Msimbo hauwezi kuonyeshwa"
+  cantDisplayStatistics: "Takwimu za msimbo haziwezi kuonyeshwa"
+  totalNumberOf: "Jumla ya"
+  scenes: "Matukio"
   scripts: 'Hati'
   bricks: 'Matofali'
-  objects: 'Actors and objects'
+  objects: "Wahusika na vitu"
   looks: 'Muonekano'
   sounds: 'Sauti'
-  globals: 'Globals'
-  locals: 'Locals'
+  globals: "Vya jumla"
+  locals: "Vya ndani"
   globalVariables: 'Global Variables'
   localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
@@ -888,18 +827,18 @@ codeview:
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: "Mwonekano wa msimbo"
+  loading: "Inapakia mwonekano wa msimbo..."
+  error: "Imeshindikana kupakia mwonekano wa msimbo."
+  retry: "Jaribu tena"
+  empty: "Mradi huu hauna msimbo."
   scripts: 'Hati'
   looks: 'Muonekano'
   sounds: 'Sauti'
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
-  general: 'General'
+  general: "Jumla"
   bricks: 'Matofali'
   eventBricks: 'Tukio'
   controlBricks: 'Dhibiti'
@@ -907,45 +846,45 @@ codeStatistics:
   soundBricks: 'Sauti'
   looksBricks: 'Muonekano'
   penBricks: 'Kalamu'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  dataBricks: "Data"
+  deviceBricks: "Kifaa"
+  specialBricks: "Maalum"
+  yourScore: "Alama zako:"
+  points: "pointi"
+  abstraction: "Ufupisho na ugawaji wa tatizo"
+  parallelism: "Usambamba"
+  logicalThinking: "Kufikiri kimantiki"
+  synchronization: "Ulinganishaji"
+  flowControl: "Udhibiti wa mtiririko"
+  userInteractivity: "Mwingiliano wa mtumiaji"
+  dataRepresentation: "Uwakilishi wa data"
+  level: "Kiwango"
+  loading: "Inapakia..."
+  bonus: "Ziada"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Jiunge na Zaidi ya Wabunifu %user_count%!"
+  text: "Tayari Miradi %project_count% ya Kustaajabisha imeshirikiwa, unaofuata unaweza kuwa wako. Pakua programu yetu na uanze kubuni leo"
 privacy-policy:
   header: Sera ya Faragha
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: "Toleo 2.2, 17 Oktoba 2019"
+  text1: "Ili kukupa faida zote za huduma zetu na akaunti inayohusiana, ni lazima tukusanye data fulani kutoka kwako."
+  text2: "Ili kudumisha na kuboresha huduma zetu (programu na tovuti) na kufanya utafiti wa kisayansi kuhusu elimu ya TEHAMA na STEM/STEAM, tunatumia Google Analytics, Crashlytics na Firebase, zote za Google LLC (Marekani), pamoja na Dynatrace ya Dynatrace LLC (Marekani) kupata metadata kuhusu matumizi ya huduma zetu, k.m. taarifa za kuanguka kwa programu, muda, kurasa/skrini ulizotembelea, matumizi ya programu na huduma zetu, mfumo wa uendeshaji uliotumika, na taarifa kuhusu mtoa huduma wa mtandao. Uchambuzi huu na data iliyokusanywa haihusishwi na wasifu wako na haina taarifa yoyote binafsi (tarakimu za mwisho za anwani ya IP hufichwa). Hata hivyo, data iliyokusanywa itahamishiwa kwa watoa huduma (Google LLC, Marekani na Dynatrace LLC, Marekani). Uchakataji wa data unategemea makubaliano na Google LLC na Dynatrace LLC. Uhusiano huu na watoa huduma unafuata Kanuni ya Jumla ya Ulinzi wa Data ya Umoja wa Ulaya (EU GDPR) na makubaliano ya EU-Marekani \"Privacy Shield\"."
+  text3: "Ili kufungua na kutumia akaunti katika mifumo yetu, na kukujulisha kwa barua pepe kuhusu mabadiliko muhimu ya akaunti yako, k.m. masasisho au ukiukaji wa Masharti yetu ya Matumizi na Huduma, sheria za jumuiya yetu, au sera zetu, tutahifadhi jina lako la mtumiaji na, ukitupatia, anwani yako ya barua pepe. Ikiwa umeunganisha akaunti yako kupitia Google Plus au Facebook, pia tunahifadhi ufunguo wa utambulisho unaohusiana na akaunti yako kwenye huduma hizo. Hatutatumia data hii kwa madhumuni mengine yoyote (k.m. matangazo), isipokuwa umetuuruhusu waziwazi."
+  text4: "Kwa hiari, unaweza kutupa nchi unayoishi kupitia ukurasa wa akaunti yako kwenye tovuti ya kushiriki. Hii itaonyeshwa kwenye wasifu wako wa umma na itatumiwa nasi kwa madhumuni ya takwimu na utafiti tu. Unaweza kuiondoa wakati wowote katika mipangilio ya wasifu wako."
+  text5: "Unaweza kusitisha matumizi ya data binafsi ya akaunti yako wakati wowote kwa kufuta akaunti yako kupitia ukurasa wa wasifu wako kwenye https://share.catrob.at/. Baada ya kufuta akaunti yako bado utaweza kutumia huduma zinazotolewa, lakini hutaweza kushirikiana, k.m. kwa kupakia programu, kutoa maoni au kupenda. Pia, maudhui yote yanayohusiana na akaunti yako, k.m. programu zilizopakiwa, maoni, n.k., yatafutwa."
+  text6: "Ili kuzuia matumizi mabaya ya huduma zetu, k.m. kupitia upakiaji au maoni ya watumiaji kwa madhumuni haramu, data yote ya umma inayotolewa na watumiaji (upakiaji, maoni) itahifadhiwa ndani ya hifadhidata, pamoja na muda na anwani ya mtandao iliyotumika. Data hii haitatumiwa na wala kupelekwa kwa taasisi yoyote, isipokuwa kuna mashaka ya kutosha ya vitendo haramu na taasisi za kisheria zenye mamlaka rasmi ziiombe kwa mujibu wa sheria. Kila kesi itachunguzwa kwanza kwa makini na sisi mmoja mmoja."
+  text7: "Unaweza kujiandikisha kwa hiari kupokea Jarida la Catrobat kwenye https://catrob.at/newsletter linalotolewa nasi kupitia huduma ya MailChimp (The Rocket Science Group LLC d/b/a MailChimp, Marekani). Kisha utapokea habari kuhusu mradi wa Catrobat na huduma zake kwenye anwani ya barua pepe uliyotoa. Unaweza kujiondoa kwenye jarida wakati wowote kwa kutumia kiungo cha \"unsubscribe\" chini ya kila jarida. Jarida hili linatolewa na MailChimp ambao tuna makubaliano nao ya uchakataji wa data na ambao wamejitolea kufuata Kanuni ya Jumla ya Ulinzi wa Data ya EU na \"Privacy Shield\" ya EU-Marekani. Kwa maelezo zaidi kuhusu MailChimp tafadhali angalia pia Sera ya Faragha na Masharti ya Matumizi ya MailChimp."
+  text8: "Huduma zote zinatolewa na mradi huria wa bure wa Catrobat chini ya mwavuli wa International Catrobat Association – Verein zur Förderung freier Software, shirika lisilo la kiserikali na lisilo la faida lililosajiliwa Graz, Austria (Umoja wa Ulaya). Sera zetu zinaheshimu sheria za ulinzi wa data za EU na Austria (GDPR). Ili kuwasiliana nasi, tafadhali tuma barua pepe kwa contact@catrobat.org au utuandikie kwa Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Umoja wa Ulaya)."
+  text9: "Ikiwa una umri wa chini ya miaka 14, sera hii lazima ikubaliwe na mlezi wa kisheria (kwa kawaida mzazi)."
+  text10: "Sera rasmi ya faragha ya Catrobat kwa lugha ya Kiingereza inapatikana mtandaoni kwenye %privacy_policy%."
+  disagree-text: "Bila idhini, hatuwezi kufungua akaunti lakini vipengele vikuu bado vinapatikana."
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: "Weka alama kuwa imesomwa"
+  noFollowers: "Inaonekana huna arifa zozote za wafuasi."
+  noComments: "Inaonekana huna arifa zozote za maoni."
+  noReactions: "Inaonekana huna arifa zozote za maitikio."
+  noRemixes: "Inaonekana huna arifa zozote za remix."
+  noStudios: "Inaonekana huna arifa zozote za studio."
   tab:
     studio: Studio
     project: Programu
@@ -956,40 +895,40 @@ catro-notifications:
   follow:
     message: 'User %user_link% follows you now.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% ameunda mchezo mpya %program_link%."
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% ametoa maoni kwenye studio %studio_name%."
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% ameongeza %program_link% kwenye studio %studio_name%."
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "Ombi lako la kujiunga na studio %studio_name% limekubaliwa."
+    declined: "Ombi lako la kujiunga na studio %studio_name% limekataliwa."
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "Mradi wako %program_link% utafutwa kiotomatiki baada ya siku %days%. Pakia toleo jipya au pata upakuaji zaidi ili kuuhifadhi."
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "Mradi wako \"%project_name%\" umeondolewa kiotomatiki kwa sababu ya kutotumika. Upakie tena kama bado unataka kuushiriki."
+  noProjects: "Inaonekana huna arifa zozote za miradi."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
+  success: "Kiungo kimenakiliwa kwenye ubao wa kunakili!"
+  success_project: "Kiungo cha mradi kimenakiliwa kwenye ubao wa kunakili!"
+  success_user: "Kiungo cha mtumiaji kimenakiliwa kwenye ubao wa kunakili!"
+  fail: "Imeshindikana kunakili kiungo kwenye ubao wa kunakili! :("
 next: Ifuatayo
-previous: Previous
+previous: "Iliyotangulia"
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: "Maktaba ya Media"
+  description: "Katika kategoria zifuatazo unaweza kupata wahusika na vitu vya kuongeza kwenye miradi yako."
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: "Ukubwa wa onyesho"
+    sm: "ndogo"
+    md: "wastani"
+    lg: "kubwa"
+  theme-special: "Maalum ya Mandhari ya %flavor%"
+  search-results: "Matokeo ya utafutaji wa maktaba ya media"
+  no-results: "Utafutaji wako haukupata matokeo yoyote. Tafadhali tumia maneno ya utafutaji ya Kiingereza tu."
+  download_these_files: "hifadhi"
 flavor:
   pocketcode: Msimbo Mfuko
   pocketalice: Pocket Alice
@@ -997,329 +936,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: "Hakimiliki &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. Haki zote zimehifadhiwa."
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Tovuti hii inahitaji JavaScript ili ifanye kazi. Tafadhali washa JavaScript kwenye kivinjari chako au muombe mtu mzima akusaidie."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
+  message: "Tunatumia vidakuzi kusaidia kuboresha huduma zetu. Hakuna data inayouzwa au kushirikiwa."
+  accept: "Kubali"
+  decline: "Kataa"
   privacy-link: "Sera ya Faragha"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  settings-link: "Mipangilio ya Vidakuzi"
+agree: "Nakubali"
+disagree: "Sikubali"
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: "Kwa sasa hakuna wasifu wowote."
+element: "Kipengele"
+elements: "Vipengele"
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: "Shiriki"
+  error: "Kushiriki kumeshindikana"
+  success: "Imeshirikiwa kwa mafanikio"
+copy: "Nakili kiungo"
+checkOutProject: "Angalia mradi huu:"
+checkOutUser: "Angalia mtumiaji huyu:"
+community: "Jumuiya ya Catrobat"
+back_to_app: "Toka kwenye jumuiya"
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: "Miradi mipya zaidi"
+  random: "Miradi ya nasibu"
   most_viewed: Zilizoangaliwa zaidi
   most_downloaded: Zilizopakuliwa zaidi
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  example: "Mfano"
+  scratch: "Remix za Scratch"
+  recommended: "Miradi inayopendekezwa"
+  popular: "Maarufu zaidi"
+  trending: "Miradi inayovuma"
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: "Mafanikio"
     badge: 'new'
   overview:
-    header: 'Achievements'
+    header: "Mafanikio"
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: "Mafanikio Mapya Zaidi"
+      x_out_of_y: "%unlocked% kati ya %total% yamefunguliwa"
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: "Yamefunguliwa"
+      empty: "Bado hujafungua mafanikio yoyote."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: "Yamefungwa"
+      empty: "Tayari umefungua mafanikio yote."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: "Hongera!"
+      subtitle: "Umepata beji"
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: "Mafanikio"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: "Mwanafunzi"
+        description: "Mfuate mtu na upakie mradi"
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: "Fundi"
+        description: "Mwanachama hai kwa zaidi ya mwaka 1"
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: "Bingwa"
+        description: "Mwanachama hai kwa zaidi ya miaka 4"
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: "Bingwa mkuu"
+        description: "Mwanachama hai kwa zaidi ya miaka 7"
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: "Hatua ya kwanza"
+        description: "Ongeza picha yako ya kwanza ya wasifu"
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: "Mwanzilishi"
+        description: "Fungua akaunti ya mtumiaji"
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Mshiriki wa Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Lugha mbili"
+        description: "Tafsiri miradi yako kwa lugha 2"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Lugha tatu"
+        description: "Tafsiri miradi yako kwa lugha 3"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Mwanaisimu"
+        description: "Tafsiri miradi yako kwa lugha 5"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Imethibitishwa"
+        description: "Thibitisha akaunti yako"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: "{0} |{1} Lebo |]1,Inf] Lebo"
   tag:
     game:
-      title: Game
+      title: "Mchezo"
     animation:
-      title: Animation
+      title: "Uhuishaji"
     story:
-      title: Story
+      title: "Hadithi"
     music:
-      title: Music
+      title: "Muziki"
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: "Majaribio"
     tutorial:
-      title: Tutorial
+      title: "Mafunzo"
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: "{0} |{1} Kiendelezi |]1,Inf] Viendelezi"
   extension:
     arduino:
-      title: Arduino
+      title: "Arduino"
     drone:
       title: Ndengenyuki
     phiro:
-      title: Phiro
+      title: "Phiro"
     raspberry_pi:
-      title: Raspberry PI
+      title: "Raspberry PI"
     embroidery:
-      title: Embroidery
+      title: "Ushonaji wa nakshi"
     mindstorms:
-      title: Mindstorms
+      title: "Mindstorms"
     multiplayer:
-      title: Multiplayer
+      title: "Wachezaji wengi"
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: "Studio"
+  singular: "Studio"
+  create_studio: "Unda studio"
+  delete_studio: "Futa studio"
   cancel_studio: 'Sitisha'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: "Jina la studio"
+  studio_description: "Maelezo ya studio"
+  is_public: "Iwe ya umma?"
+  enable_comments: "Ruhusu maoni?"
+  cover_image: "Pakia picha ya jalada"
+  cover_image_empty: "Hakuna picha iliyochaguliwa."
+  cover_image_hint: "Upeo MB 1. Miundo inayokubalika: JPEG, PNG, GIF, WebP."
+  cover_image_compressed: "Picha imebanwa kiotomatiki ili isizidi kikomo cha MB 1."
+  cover_image_compressing: "Inabana picha..."
+  cover_image_still_too_large: "Picha bado ni kubwa mno hata baada ya kubanwa. Tafadhali chagua faili ndogo zaidi."
+  cover_image_invalid_type: "Aina ya picha si sahihi. Tafadhali tumia JPEG, PNG, GIF au WebP."
+  cover_image_compression_failed: "Imeshindwa kuchakata picha. Tafadhali jaribu faili nyingine."
+  cover_image_alt: "Picha yako ya jalada"
+  cover_image_remove: "Ondoa picha"
+  popular: "Studio Maarufu"
+  join: "Jiunge"
+  leave: "Ondoka"
   report: 'Ripoti'
-  public: 'public'
-  private: 'Invite-only'
+  public: "ya umma"
+  private: "Kwa mwaliko tu"
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: "Studio ulizojiunga nazo"
+    public_studios: "Studio za umma"
+    private_studios: "Studio za mwaliko tu"
+    no_studios: "Bado hakuna studio"
+    my_studios: "Studio Zangu"
+    explore: "Gundua Studio"
+    no_joined: "Bado hujajiunga na studio yoyote"
+    joined: "Umejiunga"
+    load_more: "Pakia Zaidi"
     open: 'Fungua '
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share: "Shiriki"
+    share_success: "Kiungo kimenakiliwa!"
+    leave_confirm_title: "Uondoke kwenye studio hii?"
     cancel: 'Sitisha'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    cancel_request: "Ghairi Ombi"
+    cancel_request_confirm_title: "Ughairi ombi la kujiunga?"
+    admin: "Msimamizi"
+    member: "Mwanachama"
   details:
-    add_project: 'click to add the project'
+    add_project: "bofya ili kuongeza mradi"
     add: 'Ongeza'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
+    showMore: "onyesha zaidi"
+    showLess: "onyesha kidogo"
+    are_you_sure: "Una uhakika?"
+    no_way_of_return: "Hili haliwezi kutenduliwa."
     delete_it: 'Futa'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    remove_project: "Ondoa kwenye studio"
+    remove_project_error: "Imeshindwa kuondoa mradi kwenye studio."
+    remove_project_success: "Mradi umeondolewa kwenye studio."
+    no_projects: "Studio bado haina miradi yoyote."
     projects:
       title: 'Programu'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: "Ongeza Miradi"
+      open_project: "Fungua mradi"
       download: 'Pakua'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
+      share: "Shiriki"
+      remove_from_studio: "Ondoa kwenye studio"
+      remove_from_studio_title: "Uondoe mradi kwenye studio?"
+      remove_from_studio_text: "Unaweza kuuongeza tena baadaye ukibadili nia."
+      share_success: "Kiungo kimenakiliwa!"
+      share_fail: "Imeshindwa kunakili kiungo."
+      no_projects_empty_state: "Bado huna miradi ya kuongeza. Unda mmoja kwanza kwenye Pocket Code!"
+      add_selected: "Ongeza Uliyochagua"
+    no_available_projects: "Hakuna miradi inayopatikana kuongezwa."
+    updateCoverError: "Kuna hitilafu wakati wa kusasisha jalada la studio."
+    join: "Jiunge"
+    leave: "Ondoka"
     report: 'Ripoti'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: "Inasubiri"
+    decline: "Imekataliwa"
     comments:
       title: 'Maoni'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: "Andika kitu"
+      replies: "majibu"
+      send: "tuma"
+      no_comments: "Studio hii bado haina maoni."
+      disabled_comments: "Maoni yamezimwa kwa studio hii."
+      remove_comment: "Ondoa maoni"
+      post_error: "Kuna hitilafu wakati wa kutuma maoni yako. Jaribu tena baadaye."
+      remove_error: "Kuna hitilafu wakati wa kuondoa maoni. Jaribu tena baadaye."
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: "Shughuli"
+      join_studio: "%user% amejiunga na studio."
+      add_project: "%user% ameongeza mradi."
+      add_comment: "%user% ameacha maoni."
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: "Wanachama wa studio"
+      project_count: "{0} Hakuna miradi ya studio |{1} Mradi 1 wa studio |]1,Inf] Miradi %count% ya studio"
+      no_studio_projects: "Hakuna miradi ya studio"
+      one_studio_project: "Mradi 1 wa studio"
+      n_studio_projects: "Miradi %count% ya studio"
+      promote_member: "Mpandishe mwanachama kuwa msimamizi"
+      promotion_failed: "Kuna hitilafu wakati wa kumpandisha mwanachama huyu. Jaribu tena baadaye."
+      ban_member: "Mpige marufuku mwanachama kwenye studio"
+      ban_failed: "Kuna hitilafu wakati wa kumpiga marufuku mwanachama huyu. Jaribu tena baadaye."
+      demote_member: "Mshushe msimamizi kuwa mwanachama"
+      demotion_failed: "Kuna hitilafu wakati wa kumshusha msimamizi huyu. Jaribu tena baadaye."
+      last_admin: "Huwezi kumshusha msimamizi wa mwisho wa studio hii."
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      title: "Maombi ya Kujiunga"
+      accept: "Kubali"
+      decline: "Kataa"
+      accept_success: "Ombi la kujiunga limekubaliwa."
+      decline_success: "Ombi la kujiunga limekataliwa."
+      error: "Kuna hitilafu. Tafadhali jaribu tena."
+      no_requests: "Hakuna maombi ya kujiunga yanayosubiri."
     show_more: 'More information'
     show_less: 'Less information'
     admin_settings:
       title: 'Mipangilio'
-      studio_name: 'Studio Name'
+      studio_name: "Jina la Studio"
       studio_description: 'Maelezo'
       toggle_allow_comments: 'Maoni'
-      toggle_privacy: 'Public'
+      toggle_privacy: "Ya umma"
 media_library:
   file:
-    size: 'Size: %size%'
+    size: "Ukubwa: %size%"
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: "Aina: picha"
+      project: "Aina: mradi"
+      sound: "Aina: sauti"
+      movie: "Aina: video"
+      default: "Aina: haijulikani"
+  no_categories: "Bado hakuna kategoria za media."
+  no_results: "Hakuna matokeo yaliyopatikana."
+  assets_count: "faili"
+  view_all: "Tazama zote"
+  view_all_category: "Tazama zote za %category%"
+  back_to_app: "Rudi kwenye programu"
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: "Mradi ulioombwa haupatikani"
+  project_not_for_kids: "Mradi umewekwa alama kuwa si salama kwa watoto!"
+  project_safe_for_kids: "Mradi umewekwa alama kuwa salama kwa watoto!"
+  project_not_for_kids_moderator: "Mradi umewekwa alama na msimamizi. Huwezi kutendua hili!"
+  project_set_private: "Mradi umewekwa kuwa wa faragha."
+  project_set_public: "Mradi umewekwa kuwa wa umma."
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "Maelezo zaidi: additionalInfo"
+    feature_1: "Kipengele featureName hakipatikani kuanzia maintenanceStart hadi maintenanceEnd"
+    feature_2: "Kipengele"
+    feature_3: "Kipengele"
+MarkNotForKids: "Weka alama si salama kwa watoto"
+MarkSafeForKids: "Weka alama salama kwa watoto"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "Uthibitisho"
+  confirmMark: "Una uhakika unataka kuweka alama kwamba mradi huu si salama kwa watoto?"
+  confirmUnmark: "Una uhakika unataka kuondoa alama ya si-kwa-watoto kwenye mradi huu?"
+  confirmYes: "Ndiyo, endelea!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Ripoti %content_type% hii"
+    reason_placeholder: "Tafadhali eleza kwa nini unaripoti hili..."
+    submit: "Tuma Ripoti"
+    success: "Ripoti yako imetumwa. Asante."
+    error: "Kuna hitilafu. Tafadhali jaribu tena."
+    duplicate: "Tayari umeripoti maudhui haya."
+    trust_too_low: "Akaunti yako ni mpya mno kuweza kutuma ripoti."
+    unverified: "Tafadhali hakikisha umeingia na barua pepe ya akaunti yako imethibitishwa."
+    rate_limited: "Unatuma ripoti haraka mno. Tafadhali subiri kisha ujaribu tena."
+    suspended: "Akaunti yako imesimamishwa."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "Kata rufaa"
+    title: "Kata rufaa dhidi ya uamuzi huu"
+    placeholder: "Eleza kwa nini maudhui haya hayapaswi kufichwa..."
+    submit: "Tuma Rufaa"
     cancel: "Sitisha"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "Rufaa yako imetumwa ili ikaguliwe."
+    already_pending: "Tayari una rufaa inayosubiri."
+    error: "Kuna hitilafu. Tafadhali jaribu tena."
+    rate_limited: "Unatuma rufaa haraka mno. Tafadhali subiri kisha ujaribu tena."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Unatuma maoni haraka mno. Tafadhali subiri kidogo."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Unaitikia haraka mno. Tafadhali subiri kidogo."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Unafuata/kuacha kufuata haraka mno. Tafadhali subiri kidogo."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Unafanya vitendo vya studio haraka mno. Tafadhali subiri kidogo."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "Mradi huu umefichwa kutokana na ripoti za jumuiya."
+    comment: "Maoni haya yamefichwa kutokana na ripoti za jumuiya."
+    user: "Wasifu huu umefichwa kutokana na ripoti za jumuiya."
+    user_own: "Akaunti yako imesimamishwa kutokana na ripoti za jumuiya. Unaweza kukata rufaa dhidi ya uamuzi huu."
+    studio: "Studio hii imefichwa kutokana na ripoti za jumuiya."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "%content_type% yako imefichwa kutokana na ripoti za jumuiya. Unaweza kukata rufaa dhidi ya uamuzi huu."
+    appeal_approved: "Rufaa yako imekubaliwa. Maudhui yako yanaonekana tena."
+    appeal_rejected: "Rufaa yako imekaguliwa na uamuzi wa kuficha maudhui yako unabaki."
+    admin_review_needed: "Maudhui yamefichwa kiotomatiki na yanahitaji kukaguliwa."
+Reports: "Ripoti"
+members: "wanachama"
