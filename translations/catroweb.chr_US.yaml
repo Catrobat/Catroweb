@@ -1,882 +1,821 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
+title: 'Catrobat ᎦᏚᎲ'
+meta.description: 'ᏕᎯᏁᎳ, ᏲᎦ, ᎠᎴ ᎢᏤ ᏁᏍᎦ ᏚᎸᏫᏍᏓᏁᎸᎯ Catrobat ᎬᏗ ᏅᏔᏅᎯ. ᏫᏴᎭ ᎡᎶᎯ ᎦᏚᎲ ᏗᏂᏲᎵ ᎤᎾᏙᏢᏒ ᏗᏁᏍᎨᏍᏗ, ᏗᏟᎶᏍᏔᏅ ᏓᏅᏃᏍᎩ, ᎠᎴ ᏗᎦᎸᏫᏍᏓᏁᏗ.'
+meta.description.media.library: 'ᎯᎦᏔ ᎠᎴ ᎯᏯᏅ ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᏧᏓᎴᏅᏓ Catrobat ᎨᏒ — ᏗᎧᏁᎬ, ᏗᏟᎶᏍᏔᏅ, ᎠᎴ ᎤᏟ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᎨᏒ.'
+meta.og.title.login: 'Catrobat ᏫᏴᎭ'
+meta.og.description.login: 'ᏫᏴᎭ ᏕᎯᏁᎳ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ Catrobat ᎦᏚᎲ ᏗᏁᎶᏗ.'
+meta.og.title.register: 'Catrobat ᏕᏣᏙᎥ ᏫᏂᏯ'
+meta.og.description.register: 'Catrobat ᎦᏚᎲ ᏫᏴᎭ ᎠᎴ ᎪᎯ ᎢᎦ ᏕᎯᏁᎳ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ.'
+meta.og.description.profile: '%username% Catrobat ᎾᎿᎢ – ᎯᎦᏔ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᎴ ᏚᏓᏂᎸᏤᎸ.'
+localLanguage: 'ᏣᎳᎩ'
+username: 'ᏕᏣᏙᎥ'
+password: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ'
+createNewPassword: 'ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏙᏢ'
 accountSettings: Account Settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
-tutorials: Help
+email: 'Email'
+aboutPocketCode: 'Pocket Code ᎧᏃᎮᏛ'
+about: 'Catrobat ᎧᏃᎮᏛ'
+education: 'ᏗᏕᎶᏆᏍᏗ'
+chat: 'ᏗᎦᏬᏂᏍᏗ ᎠᎴ ᏗᎦᎳᏫᎢᏍᏗ'
+privacyGuide: 'ᎤᏕᎵᏛ ᏗᏍᏆᏂᎪᏗ ᏗᏕᏲᏗ'
+others: 'ᏅᏩᏓᎴ'
+tutorials: 'ᏗᏍᏕᎸᏗ'
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: The passwords didn't match.
-error: Oops!
-cancel: Cancel
-confirm: Confirm
-report: Report
-report.title: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-name: Name
-description: Description
-noDescription: No description available.
+discordChat: 'Discord ᏗᎦᏬᏂᏍᏗ'
+passwordsNoMatch: 'ᎤᏕᎵᏛ ᏗᎧᏁᎢᏍᏗ ᎥᏝ ᏱᏚᏠᎾᏍᏗ.'
+error: 'ᎤᏲ!'
+cancel: 'ᎯᏲᏍᏓ'
+confirm: 'ᎤᏙᎯᏳ'
+report: 'ᎯᏃᎲᏏ'
+report.title: 'ᎯᏃᎲᏏ'
+deleteIt: 'ᎥᎥ, ᎯᏍᏆᏓ!'
+reportIt: 'ᎥᎥ, ᎯᏃᎲᏏ!'
+areYouSure: 'ᏂᎯ ᎤᏙᎯᏳᏍᎪ?'
+noWayOfReturn: 'ᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ ᏂᏣᏛᏁᎸᎢ!'
+download: 'ᎯᏯᏅ'
+name: 'ᏚᏙᎥ'
+description: 'ᎧᏃᎮᏛ'
+noDescription: 'ᎥᏝ ᎧᏃᎮᏛ ᏱᎩ.'
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-projectDetails: Details
-somethingWentWrong: 'Oops, something did not work. Please try again!'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'Please try again!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+notesAndCreditsDescription: 'ᎢᏳᏍᏗ ᏂᏣᏛᏁᎸ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ? ᏅᏩᏓᎴ ᏴᏫ ᎤᏁᎳᏅᎯ ᎤᎾᏓᏅᏖᏗ, ᏗᎪᏪᎵ ᎠᎴᏱᎩ ᏗᏟᎶᏍᏔᏅ ᏣᏛᏁᎸᎢ? ᎠᏂ ᏩᏙ ᏫᎾᏕᏥᏪᏏ.'
+projectImportedFromScratch: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ MIT Scratch ᏅᏓᏳᏓᎴᏅᎯ. ᎯᎦᏔᏰᏏ ᎢᎬᏱᏱ ᏚᎸᏫᏍᏓᏁᎸ'
+scratchImportedProjectLinkHere: 'ᎠᏂ.'
+country: 'ᎦᏙᎯ'
+loginText: 'ᏫᏴᎭ'
+privacyPolicy: 'ᎤᏕᎵᏛ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ'
+imprint: 'ᎾᏍᎩ ᎢᏳᏍᏗ ᏗᏅᏂᏍᎩ'
+projectDetails: 'ᏗᎧᏃᎮᏛ'
+somethingWentWrong: 'ᎤᏲ, ᎪᎱᏍᏗ ᎥᏝ ᏳᏍᏆᏛ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ!'
+accountNotVerified: 'ᏫᏴᎭ ᎠᎴ ᏣᏓᏍᏆᏂᎪᏗ ᏕᏣᏙᎥ email ᎤᏙᎯᏳ ᎨᏎᏍᏗ.'
+accountSuspended: 'ᏕᏣᏙᎥ ᎠᎦᏘᏴᏒ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ. ᏰᎵ ᏙᏣᏬᏂᏍᎨᏍᏗ ᎯᎠ ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎾᎿᎢ.'
+doesNotExist: 'ᎯᎠ ᎪᎱᏍᏗ ᏣᏲᎲ ᎥᏝ ᏰᎭ.'
+pleaseTryAgain: 'ᏔᎵᏁ ᎯᏯᏛᏁᎢ!'
+tryAgainButton: 'ᏔᎵᏁ ᎯᏯᏛᏁᎢ'
+oldVersionError: 'ᎢᏤ Pocket Code ᎯᏯᏅ!'
+more: 'ᎤᏟ'
+less: 'ᎤᏍᏗ'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+more-information: 'ᎤᏟ ᎧᏃᎮᏛ'
+less-information: 'ᎤᏍᏗ ᎧᏃᎮᏛ'
+ok: 'ᎣᏏ'
+clickToDownloadProgram: 'ᎯᏯᏅ ᎢᏳᏍᏗ ᏚᎸᏫᏍᏓᏁᎸ %link_start% ᎠᏂ %link_end% ᏣᏁᏍᏛᏂ.'
+registrationError: 'ᎯᎠ ᏚᏙᎥ ᎠᎴᏱᎩ email ᎦᏳᎳ ᎠᏂᏁᏗ.'
+notifications: 'ᏗᎦᏃᎮᎵᏍᎩ'
 allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
-projects: "Projects"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+FollowersNotifications: 'ᎠᏂᏍᏓᏩᏗᏙᎯ'
+LikeNotifications: 'ᏄᏛᏁᎸ'
+CommentNotifications: 'ᎧᏃᎮᏛ'
+RemixNotifications: 'ᎢᏤ ᏂᏛᏁᎸ'
+wellDone: 'ᎣᏍᏓ ᏂᏣᏛᏁᎸ!'
+done: 'ᎤᎵᏍᏆᏛ!'
+notificationsReadMessage: 'ᎥᏝ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
+confirmMessage: 'ᎥᎥ, ᎯᏍᏆᏓ'
+cancelMessage: 'ᎯᏲᏍᏓ'
+notificationsUnauthorizedError: 'ᎥᏝ ᏰᎵ ᏴᏫ ᏳᏁᎳᏅ'
+notificationsClearError: 'ᎥᏝ ᏰᎵ ᏗᎦᏃᎮᎵᏍᎩ ᎪᎵᏯᏅ ᏱᏂᎬᏁᏗ!'
+pleaseWait: 'ᎯᎦᏘᏓ...'
+projects: 'ᏚᎸᏫᏍᏓᏁᎸᎯ'
+users: 'ᏴᏫ'
+studios: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+oauthPopUpTitle: 'ᏐᎢ ᏕᏣᏙᎥ ᏫᏴᎭ ᎧᏃᎮᏛ'
+oauthInfo: 'ᏐᎢ ᏕᏣᏙᎥ ᏣᏁᏅ ᏫᏴᎯᎲᎢ. ᎪᎱᏍᏗ ᏚᏙᎥ ᏙᏨᏯᏙᏢᏏ. ᎢᏳᏃ ᏕᏣᏙᎥ ᏣᏁᏟᏴᏍᏗ ᎠᎴᏱᎩ ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏣᏙᏢᏍᏗ ᏣᏚᎵᏍᎨᏍᏗ, ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᏫᎷᎩ.'
+oauthHere: 'ᎠᏂ'
+statistics: 'ᏗᏎᏍᏗ'
+languageSelection: 'ᎦᏬᏂᎯᏍᏗ ᎯᏑᏰᏍᏓ'
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: 'ᏓᎦᎸᏉᏗ ᎤᏍᏗᎩᏛ'
+  auto: 'ᏗᎦᎾᏌᎢᏍᏗ'
+  auto_description: 'ᏣᎾᏌᎢᏍᏗ ᏄᏍᏛ ᏍᏓᏩᏗᏓ'
+  light: 'ᎢᎦᎦᏛ'
+  light_description: 'ᎢᎦᎦᏛ ᎤᏍᏗᎩᏛ'
+  dark: 'ᎤᎵᏏᎬ'
+  dark_description: 'ᎤᎵᏏᎬ ᎤᏍᏗᎩᏛ'
+  apply: 'ᎯᏁᏟᏴᏍᏓ'
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'ᎦᏙ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᏂ ᎣᏏᏳ ᎠᏂᏪᏍᎪ?'
+      description: 'ᎤᏟ ᏧᏈᏯ ᏄᏛᏁᎸ (ᎤᏬᏰᏂ ᎦᏚᎢᏢ, ᎤᏓᏪᎵᎩᏍᏗ ...) ᏚᎸᏫᏍᏓᏁᎸ ᎤᏩᏛᎲᎢ, ᎤᏟ ᎦᎸᎳᏗ ᎦᏙᎨᏍᏗ ᎯᎠ ᎪᏪᎵ.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: 'ᏍᏓᏩᏗᏙᎰ'
+  followers: 'ᎠᏂᏍᏓᏩᏗᏙᎯ'
+  follow: 'ᏍᏓᏩᏗᏓ'
+  username: 'ᏴᏫ'
+  followsMe: 'ᎠᏆᏍᏓᏩᏗᏙᎰ'
+  noFollowing: 'ᎪᎯ ᎥᏝ ᎩᎶ ᏱᏍᏓᏩᏗᏙᎰ.'
+  noFollowers: 'ᎪᎯ ᎥᏝ ᎩᎶ ᏱᏣᏍᏓᏩᏗᏙᎰ.'
+  noOtherFollowing: 'ᎪᎯ ᎥᏝ ᎩᎶ ᏱᎦᏍᏓᏩᏗᏙᎰ.'
+  noOtherFollowers: 'ᎪᎯ ᎥᏝ ᎠᏂᏍᏓᏩᏗᏙᎯ ᏱᎩ.'
+  followError: ' ᎪᎯ ᎥᏝ ᏰᎵ ᎯᎠ ᏴᏫ ᏲᎩᏍᏓᏩᏗᏓ.'
+  unfollowError: ' ᎪᎯ ᎥᏝ ᏰᎵ ᎯᎠ ᏴᏫ ᏲᎩᏍᏓᏩᏗᏓ ᏳᎩᏲᏍᏓ.'
+  unfollowQuestion: 'ᎤᏙᎯᏳᏍᎪ ᎯᎠ ᏴᏫ ᎥᏝ ᏱᏍᏓᏩᏗᏙᎮᏍᏗ ᏣᏚᎵ?'
+  unfollowButton: '%username% ᏞᏍᏗ ᏍᏓᏩᏗᏙᎮᏍᏗ'
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: Open
-  download: Download
+    title: 'ᎣᏏᏲ, Catrobat %theme% ᏩᏍᏆᎸᎾ'
+    title_mindstorms: 'ᎣᏏᏲ, Catrobat Mindstorms EV3 ᎠᎴ NXT ᎾᎿᎢ ᏩᏍᏆᎸᎾ'
+    subtitle: 'ᏗᎧᏃᎮᏛ, ᏗᏁᏍᎨᏍᏗ ᎠᎴ ᎤᏟ ᏙᏢ...'
+    subtitle_embroidery: 'ᏗᏣᏄᏬ, ᏗᎦᏁᏍᏚᎢ, ᏗᏣᏓᏍᏚᎶ ᎠᎴᏱᎩ ᏣᎾᏌᎢᏍᏗ ᏗᏟᎶᏍᏔᏅ ᏕᎯᏍᏚᏢᏍᎨᏍᏗ!'
+    subtitle_mindstorms: 'Lego Mindstorms EV3 ᎠᎴ NXT ᏗᎦᎸᏫᏍᏓᏁᏗ ᏗᎾᎦᎾᏌᎢᏍᏗ ᎬᏗ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏙᏢ'
+    download: 'app ᎯᏯᏅ'
+    statistics: 'ᎤᏟ ᏗᏎᏍᏗ'
+  featured: 'ᎦᏌᏆᎸ'
+  open: 'ᏍᏚᎢᎦ'
+  download: 'ᎯᏯᏅ'
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᏅᏍᏓ'
+    drop_here: '.catrobat ᎪᏪᎵ ᎠᏂ ᎯᏯᏅ ᎠᎴ ᎯᎧᎲᏓ'
+    or_browse: 'ᎠᎴᏱᎩ ᎯᏯᏁᏍᏛᏂ ᏣᏲᎢᏍᏗ'
+    button: 'ᎯᏅᏍᏓ'
+    uploading: 'ᎦᏅᏍᏗᎭ...'
+    success: 'ᏚᎸᏫᏍᏓᏁᎸ ᎣᏍᏓ ᎤᏅᏍᏔᏅ!'
+    view_project: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᎦᏔ'
+    upload_another: 'ᏐᎢ ᎯᏅᏍᏓ'
+    invalid_file: '.catrobat ᎪᏪᎵ ᎯᏑᏰᏍᏓ'
+    file_too_large: 'ᎪᏪᎵ ᎤᏣᏘ ᎡᏆ'
+    error: 'ᎥᏝ ᏳᏅᏍᏔᏅ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+    unauthorized: 'ᏫᏴᎭ ᎢᎬᏱ ᎯᏅᏍᏓ ᏣᏚᎵᏍᎨᏍᏗ.'
+    rate_limited: 'ᎤᏣᏘ ᏂᎪᎯᎸ ᏣᏅᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+    selected_file: 'ᏣᏑᏰᏒ ᎪᏪᎵ:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
-  deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
-  changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
-  deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+      file_size: 'ᎪᏪᎵ ᎤᏟ ᎢᏯᏆ 100 MB.'
+      app_upload: 'ᎾᏍᏉ Pocket Code app ᎬᏗ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏰᎵ ᎯᏅᏍᏗ. ᎪᎯ apps ᎢᏤ ᏓᏅᏁᎭ ᎠᎴ ᎥᏝ web ᎦᏅᏍᏗ ᏱᏓᏍᏕᎵᏍᎪ.'
+      retention: 'ᏚᏅᏍᏔᏅ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎤᏩᏒ ᏛᎦᏛᏔᏂ ᎢᏳᏃ ᎪᎯᏗᏳ ᎥᏝ ᎪᎱᏍᏗ ᏱᏄᎵᏍᏔᏁᎮᏍᏗ. ᏂᎪᎯᎸ ᏫᏴᎭ ᎠᎴᏱᎩ ᏚᎸᏫᏍᏓᏁᎸ ᎤᏂᏯᏅ ᎨᏎᏍᏗ ᎤᏟ ᎪᎯᏗᏳ ᎤᏍᏆᏂᎪᏙᏗ.'
+      protection: 'ᎤᏟ ᎣᏍᏓ ᎠᎴᏱᎩ ᎤᎾᏓᏂᎸᏨ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᏂᎦᏘᏯ ᏰᎵ ᏧᏂᏍᏆᏂᎪᏙᏗ ᎤᏩᏒ ᏗᎦᏛᏗ ᏂᎨᏒᎾ.'
+  example: 'ᎢᏳᏍᏗ ᏂᎦᎵᏍᏙᏗ'
+  newest: 'ᎢᏤ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  recommended: 'ᎣᏏᏳ ᎠᏂᏪᏍᎩ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  scratchremixes: 'Scratch ᎢᏤ ᏂᏛᏁᎸ'
+  noProjects: 'ᎪᎯ ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏱᏓᏁᎭ.'
+  shareAction: 'ᏕᎯᏁᎳ'
+  deleteAction: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᏍᏆᏓ'
+  deleteConfirmation: "ᎤᏙᎯᏳᏍᎪ?\nᎤᏙᎯᏳᏍᎪ \"%programName%\" ᎯᏍᏆᏓ ᏣᏚᎵ?\nᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ ᏂᏣᏛᏁᎸᎢ!\nᎥᎥ, ᎯᏍᏆᏓ!\nᎯᏲᏍᏓ\n"
+  deleteConfirmText: 'ᎯᎠ ᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ. ᏚᎸᏫᏍᏓᏁᎸ ᏂᎪᎯᎸ ᏛᎦᏛᏔᏂ.'
+  deleteConfirmationTitle: 'ᎤᏙᎯᏳᏍᎪ?'
+  deleteNotFoundError: 'ᏚᎸᏫᏍᏓᏁᎸ ᎦᏛᏗ ᎥᏝ ᏳᏩᏛ ᏕᏣᏙᎥ ᎾᎿᎢ.'
+  private: 'ᎤᏕᎵᏛ'
+  public: 'ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ'
+  setPrivateAction: 'ᎤᏕᎵᏛ ᏂᎬᏁᎸ'
+  setPublicAction: 'ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏂᎬᏁᎸ'
+  setPrivateConfirm: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎤᏕᎵᏛ ᏂᎬᏁᎸᏍᎪ? ᎥᏝ ᎿᏉ ᏲᎲᏍᎬ ᎾᎿᎢ ᏱᎦᎾᏄᎪᎢᏍᏗ.'
+  setPublicConfirm: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏂᎬᏁᎸᏍᎪ? ᏂᎦᏛ ᏴᏫ ᏓᏂᎪᏩᏛᏂ.'
+  markNotForKidsConfirm: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᏂᎬᏁᎸᏍᎪ?'
+  markSafeForKidsConfirm: 'ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᎪᏪᎸ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎯᏍᏆᏓᏍᎪ?'
+  nfkModeratorLocked: 'ᎯᎠ ᎠᎦᏘᏯ ᎤᏍᏚᏅ.'
+  confirmSetPrivate: 'ᎤᏙᎯᏳᏍᎪ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎤᏕᎵᏛ ᏂᎬᏁᏗ ᏣᏚᎵ? ᎥᏝ ᎿᏉ ᏲᎲᏍᎬ ᎾᎿᎢ ᏱᎦᎾᏄᎪᎢᏍᏗ.'
+  confirmSetPublic: 'ᎤᏙᎯᏳᏍᎪ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏂᎬᏁᏗ ᏣᏚᎵ? ᏂᎦᏛ ᏴᏫ ᏓᏂᎪᏩᏛᏂ.'
+  changeVisibility: "ᎤᏙᎯᏳᏍᎪ?\nᎢᏳᏃ '%programName%' ᎤᏕᎵᏛ ᏂᎬᏁᎸᎭ, ᏅᏩᏓᎴ ᏴᏫ ᎥᏝ ᏴᎬᏂᎪᏩᏛ ᎠᎴ ᏴᎬᏂᏩᏛ.\nᎠᏏᏉ ᏕᎯᏁᎳᏗ ᏚᎸᏫᏍᏓᏁᎸ ᎤᏯᏅᏗ ᏗᏍᏓᏓᏅᏟ. ᎯᏁᏟᏴᏍᏗ ᎤᏍᏚᏗ ᏗᏟᎶᏍᏔᏅ ᎯᏯᏁᏍᏛᏂ.\nᎢᏳᏃ \"%programName%\" ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏂᎬᏁᎸᎭ, ᏅᏩᏓᎴ ᏴᏫ ᏓᏂᎪᏩᏛᏂ ᎠᎴ ᏓᏂᏩᏛᎯ.\nᎥᎥ, ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ\nᎥᎥ, ᎤᏕᎵᏛ\nᎥᏝ\n"
+  reportCommentConfirmation: 'ᎤᏙᎯᏳᏍᎪ ᎯᎠ ᎧᏃᎮᏛ ᎯᏃᎲᏏ ᏣᏚᎵ?'
+  deleteCommentConfirmation: 'ᎤᏙᎯᏳᏍᎪ ᎯᎠ ᎧᏃᎮᏛ ᎯᏍᏆᏓ ᏣᏚᎵ?'
+  deleteAccountConfirmation: "ᏕᏣᏙᎥ ᎯᏍᏆᏓᏍᎪ?\nᎤᏙᎯᏳᏍᎪ ᏕᏣᏙᎥ ᎯᏍᏆᏓ ᏣᏚᎵ? ᎾᏍᏉ ᏕᏣᏅᏍᏔᏅ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᎴ ᎧᏃᎮᏛ ᏛᎦᏛᏔᏂ!\nᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ ᏂᏣᏛᏁᎸᎢ!\nᎥᎥ, ᎯᏍᏆᏓ!\nᎯᏲᏍᏓ\n"
+  tooLongName: 'ᏚᎸᏫᏍᏓᏁᎸ ᏚᏙᎥ ᎤᏣᏘ ᎦᏅᎯᏛ!'
+  tooLongDescription: 'ᏚᎸᏫᏍᏓᏁᎸ ᎧᏃᎮᏛ ᎤᏣᏘ ᎦᏅᎯᏛ!'
+  tooLongCredits: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᎪᏪᎸ ᎠᎴ ᏩᏙ ᎤᏣᏘ ᎦᏅᎯᏛ!'
+  my_projects: 'ᏕᏥᏁᎳᏅ ᏓᎩᎸᏫᏍᏓᏁᎸᎯ'
+  trending: 'ᎪᎯ ᎤᎾᏓᏂᎸᏨ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  popular: 'ᎤᎾᏓᏂᎸᏨ ᏚᎸᏫᏍᏓᏁᎸᎯ'
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
+    viewed: 'ᎤᏟ ᎤᏂᎪᎲ'
+    downloaded: 'ᎤᏟ ᎤᏂᏯᏅ'
+  random: 'ᎪᎱᏍᏗ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  related: 'ᏚᏓᏠᎯᏍᏛ ᏚᎸᏫᏍᏓᏁᎸᎯ'
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'ᏚᎸᏫᏍᏓᏁᎸᎯ ᏲᎦ'
+    no_projects: 'ᎠᏏ ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏱᏙᏣᏙᏢᏒ'
+    no_explore: 'ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏳᏩᏛ'
+    load_more: 'ᎤᏟ ᎾᎬᏁ'
+    upload: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᏅᏍᏓ'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'ᎦᏍᏆᏂᎪᏛ'
+    day_left: '1 ᎢᎦ ᎠᏗᏒ'
+    days_left: '%days% ᏧᏒᎯᏛ ᎠᏗᏒ'
+    tooltip: 'ᏚᎸᏫᏍᏓᏁᎸᎯ ᎤᏩᏒ ᏓᎦᏛᏔᏂ ᎢᏳᏃ ᎪᎯᏗᏳ ᎥᏝ ᎪᎱᏍᏗ ᏱᏄᎵᏍᏔᏁᎮᏍᏗ. ᎤᏟ ᎤᏂᏯᏅ ᎨᏎᏍᏗ ᎠᎴᏱᎩ ᏂᎪᎯᎸ ᏫᏴᎭ ᎤᏟ ᎪᎯᏗᏳ ᎤᏍᏆᏂᎪᏙᏗ.'
+    tooltip_protected: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎦᏍᏆᏂᎪᏛ ᎠᎴ ᎥᏝ ᎤᏩᏒ ᏴᎦᏛᏔᏂ.'
+  downloads: '%downloads% ᎤᏂᏯᏅ'
+  sample: 'ᎢᏳᏍᏗ ᏂᎦᎵᏍᏙᏗ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  views: '%views% ᎤᏂᎪᎲ'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+    likersTitle: 'ᏴᏫ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏄᏛᏁᎸ'
+    all: 'All'
+  remixes: '{0}0 ᎢᏤ ᏂᏛᏁᎸ |{1}1 ᎢᏤ ᏂᏛᏁᎸ |]1,Inf]%remixes% ᎢᏤ ᏂᏛᏁᎸ'
+  newRemixesNotificationTitle: '|{1}"%programName%" 1 ᎢᏤ ᏂᏛᏁᎸ ᎤᏩᏛ: |]1,Inf] "%programName%" %remixes% ᎢᏤ ᏂᏛᏁᎸ ᎤᏩᏛ:'
+  submitted: 'ᏚᏅᏍᏔᏅ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  uploaded: 'ᏚᏅᏍᏔᏅ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  reportAsInappropriate: 'ᎥᏝ ᎣᏏᏳ ᎯᏃᎲᏏ'
+  reportProgram: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᏃᎲᏏ'
+  languageVersion: 'Catrobat ᎦᏬᏂᎯᏍᏗ ᎢᏳᏓᎴᎩ: %languageVersion%'
+  reportLoginText: '%login% ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎯᏃᎲᏏᏍᏗ.'
+  reportDialogHeader: 'ᎦᏙᏃ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎯᏃᎲᏏ ᏣᏚᎵ?'
+  reportDialogReason: 'ᎦᏙᏃ ᎪᏪᎳ'
+  reportRadioButtonInappropriate: 'ᎥᏝ ᎣᏏᏳ ᏱᎩ'
+  reportRadioButtonCopyright: 'ᏅᏩᏓᎴ ᎤᏤᎵ ᎤᏃᏍᎩᏛ'
+  reportRadioButtonSpam: 'Spam'
+  reportRadioButtonDislike: 'ᎥᏝ ᎣᏏᏳ ᏯᏆᏰᎸᎾ'
+  reportOwnProgram: 'ᎥᏝ ᏰᎵ ᏣᏤᎵ ᏚᎸᏫᏍᏓᏁᎸ ᏱᏦᏃᎲᏏ.'
+  reportAlready: 'ᎦᏳᎳ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏣᏃᎲᏎᎸ.'
+  reportDone: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏣᏃᎲᏎᎸ!'
+  updateAppHeaderDownload: 'ᎥᏝ ᏰᎵ ᏱᎦᏯᏅ'
+  updateAppTextDownload: 'ᎢᏤ app ᎯᏯᏅ. ᎥᏝ ᏂᎦᏛ Android ᎪᎱᏍᏗ ᎠᏏ IOS ᎾᎿᎢ ᏱᏓᏁᎭ.'
+  updateAppTextDownloadApk: 'APK ᎦᏯᏅᏗ ᎪᎯ Android ᎤᏩᏒ ᎾᎿᎢ, ᎥᏝ IOS ᎾᎿᎢ.'
+  updateAppHeader: 'app ᎢᏤ ᏂᎬᏁᎸ'
+  updateAppText: 'ᎢᏤ app ᎯᏯᏅ.'
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Report
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  checkout_this_project: 'ᎯᎠ Catrobat ᏚᎸᏫᏍᏓᏁᎸ ᎯᎦᏔ'
+  show_more: 'ᎤᏟ ᎾᎬᏁ'
+  comments: 'ᎧᏃᎮᏛ'
+  send: 'ᎯᏅᏍᏓ'
+  delete: 'ᎯᏍᏆᏓ'
+  report: 'ᎯᏃᎲᏏ'
+  reply: 'ᎯᏁᏤ'
+  report_popup: 'ᎧᏃᎮᏛ ᎣᏍᏓ ᎦᏃᎲᏎᎸ.'
+  report_popup_header: 'ᎦᏃᎲᏎᎸ'
+  deleted_popup: 'ᎧᏃᎮᏛ ᎣᏍᏓ ᎦᏛᏔᏅ.'
+  deleted_popup_header: 'ᎦᏛᏔᏅ'
+  noAdminRights: 'ᎥᏝ ᎠᎦᏘᏯ ᏱᎩ. ᎠᎦᏘᏯ ᎢᏯᏛᏁᎵᏓᏍᏗ ᏫᏴᎭ.'
+  editProject: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᏁᏟᏴᏍᏓ'
+  closeProjectEditor: 'ᏚᎸᏫᏍᏓᏁᎸ ᎦᏁᏟᏴᏍᏗ ᏍᏚᎦ'
+  closeEditorPrompt: 'ᏂᏣᏁᏟᏴᏒ ᎯᏍᏆᏂᎪᏓ ᏣᏚᎵᏍᎪ?'
+  btnDiscard: 'ᎯᏁᎢ'
+  addComment: 'ᎧᏃᎮᏛ ᎪᏪᎳ'
+  thumbsUp: 'ᎣᏏᏳ!'
+  smile: 'ᎯᏓᏪᎵᎩ!'
+  love: 'ᎨᏳᎢ!'
+  wow: 'ᎤᏍᏆᏂᎩᏗ!'
+  linkTitle: 'ᎤᏯᏅᏗ'
+  link: 'ᏚᎸᏫᏍᏓᏁᎸ ᎤᏯᏅᏗ ᎯᏯᏅ'
+  reactionsText: 'ᏄᏛᏁᎸ'
+  downloadErrorText: 'ᏚᎸᏫᏍᏓᏁᎸ ᎦᏯᏅᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+  downloadStartText: 'ᎦᏯᏅᏗ ᎤᎴᏅ...'
+  downloading: 'ᎦᏯᏅᎭ...'
+  openInApp: 'Pocket Code ᎾᎿᎢ ᏍᏚᎢᎦ'
+  downloaded: 'ᎦᏯᏅ'
+  showTranslation: 'ᎦᏁᏟᏴᏛ ᎾᎬᏁ'
+  hideTranslation: 'ᎦᏁᏟᏴᏛ ᎯᏍᎦᎳ'
+  translatedByLine: '%provider% ᎤᏁᏟᏴᏔᏅ %sourceLanguage% ᏅᏓᏳᏓᎴᏅᎯ %targetLanguage% ᏫᏚᏳᎪᏛ'
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  confrimDelete: 'ᎤᏙᎯᏳᏍᎪ ᎦᏁᏟᏴᏛ ᎯᏍᏆᏓ ᏣᏚᎵ?'
+  default: 'ᎢᎬᏱᏱ ᏄᏍᏛ'
+  save: 'ᎯᏍᏆᏂᎪᏓ'
+  translationTitle: '%language% ᎦᏁᏟᏴᏛ'
+  editDefault: 'ᎢᎬᏱᏱ ᏄᏍᏛ ᎯᏁᏟᏴᏍᏓ'
+  editTranslation: '%language% ᎦᏁᏟᏴᏛ ᎯᏁᏟᏴᏍᏓ'
+  translations: 'ᏗᎦᏁᏟᏴᏛ'
+  createTranslation: 'ᎦᏁᏟᏴᏛ ᏙᏢ'
+  deletedComment: '**ᎦᏛᏔᏅ**'
+  replyLabel: 'ᎦᏁᏤᎸ'
+  repliesLabel: 'ᏓᏁᏤᎸ'
+  notForKids: 'ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ'
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
+  title: 'ᎢᏤ ᏂᏛᏁᎸ'
+  showRemixGraph: 'ᎢᏤ ᏂᏛᏁᎸ ᏗᏟᎶᏍᏔᏅ'
   by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
-  projectsLabel: 'Projects'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  open: 'ᏍᏚᎢᎦ'
+  showPaths: 'ᏗᏅᏅ ᎾᎬᏁ'
+  loading: 'ᎢᏤ ᏂᏛᏁᎸ ᏗᏟᎶᏍᏔᏅ ᎦᎷᎯᏍᏗᎭ...'
+  error: 'ᎢᏤ ᏂᏛᏁᎸ ᏗᏟᎶᏍᏔᏅ ᎥᏝ ᏰᎵ ᏳᎷᏨ.'
+  empty: 'ᎠᏏ ᎥᏝ ᎢᏤ ᏂᏛᏁᎸ ᎧᏃᎮᏛ ᏱᎩ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ.'
+  remixesLabel: 'ᎢᏤ ᏂᏛᏁᎸ'
+  projectsLabel: 'ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  scratchLabel: 'Scratch ᏚᏍᏕᏍᏗ'
+  interactHint: 'ᎠᏍᏓᏯ ᎯᏑᏰᏍᏓ ᏚᎸᏫᏍᏓᏁᎸ ᏣᏍᏚᎢᏍᏗ ᎠᎴᏱᎩ ᎢᏤ ᏂᏛᏁᎸ ᎦᏅᏅ ᏣᎾᏄᎪᏫᏍᏗ.'
+  zoomIn: 'ᎤᏟ ᎡᏆ ᎾᎬᏁ'
+  zoomOut: 'ᎤᏟ ᎤᏍᏗ ᎾᎬᏁ'
+  resetView: 'ᎢᎬᏱᏱ ᏄᏍᏛ ᎾᎬᏁ'
+  projectNotAvailableErrorTitle: 'ᎤᏲ...'
+  projectNotAvailableErrorDescription: 'ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᎿᏉ ᏰᎭ!'
+  projectNotAvailable: 'ᎥᏝ ᏰᎭ'
+  projectUnknownUser: 'ᎾᏂᎦᏔᎲᎾ ᏴᏫ'
+noReply: 'ᎯᎠ ᎤᏩᏒ ᎦᏅᏍᏔᏅ ᎧᏃᎮᏛ - ᏞᏍᏗ ᎯᎠ email ᏱᏣᏁᏤᎮᏍᏗ.'
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
-  message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  subject: 'Catrobat ᏕᏣᏙᎥ ᎤᏙᎯᏳ ᏂᎬᏁᏗ'
+  message: "ᎣᏏᏲ %username%.\nᏕᏣᏙᎥ ᏣᎵᏍᏆᏗᏍᏗ - %confirmationUrl% ᏫᎷᎩ\nᎯᎠ ᎤᏯᏅᏗ ᏑᏓᎴᎩ ᎤᏩᏒ ᏰᎵ ᎬᏗ.\nᏩᏙ,\nCatrobat ᏗᎦᎸᏫᏍᏓᏁᎯ.\n"
+  messageHtml: "<p>\nᎣᏏᏲ %username%.<br>\n<br>\nᏕᏣᏙᎥ ᏣᎵᏍᏆᏗᏍᏗ - <a href=\"%confirmationUrl%\">ᎠᏂ</a> ᎯᏯᏁᏍᏛᏂ.<br>\nᎯᎠ ᎤᏯᏅᏗ ᏑᏓᎴᎩ ᎤᏩᏒ ᏰᎵ ᎬᏗ.<br>\n<br>\nᏩᏙ,<br>\nCatrobat ᏗᎦᎸᏫᏍᏓᏁᎯ.\n</p>\n"
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: 'ᏣᏤᎵ email ᎤᏙᎯᏳ ᏂᎬᏁᎸ'
+  welcome: 'ᎣᏏᏲ, Catrobat ᏩᏍᏆᎸᎾ!'
+  greeting: 'ᏩᏙ ᏕᏣᏙᎥ ᏣᏁᏅ! ᏣᏤᎵ email ᎤᏙᎯᏳ ᏂᎬᏁᎸ ᏣᎴᏅᏗ.'
+  message: 'ᎡᎳᏗ ᎦᏁᏍᏛᏗ ᎯᏯᏁᏍᏛᏂ ᏣᏤᎵ email ᎤᏙᎯᏳ ᏂᎬᏁᏗ. ᎯᎠ ᎤᏯᏅᏗ %time% ᎢᏯᏍᏗ ᎣᏏᏳ ᎠᎴ ᏑᏓᎴᎩ ᎤᏩᏒ ᏰᎵ ᎬᏗ.'
+  button: 'Email ᎤᏙᎯᏳ ᏂᎬᏁᎸ'
+  ignore: 'ᎢᏳᏃ Catrobat ᏕᏣᏙᎥ ᎥᏝ ᏱᏣᏁᏅ, ᎯᎠ email ᎯᏁᎢ.'
+  autoDelete: 'ᎤᏙᎯᏳ ᏂᎨᏒᎾ ᏕᎦᏙᎥ ᎤᏩᏒ ᏓᎦᏛᏔᏂ 30 ᏧᏒᎯᏛ ᎣᏂ.'
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: 'ᏣᏤᎵ ᎠᏲᎵ Catrobat ᏚᏙᎥ ᎤᏂᏙᏓ ᎤᎵᏍᎨᏓ ᎤᏚᎵ'
+    title: 'ᎤᏂᏙᏓ ᎤᎵᏍᎨᏓ ᎤᏚᎵ'
+    greeting: 'ᎣᏏᏲ,'
+    message: 'ᏣᏤᎵ ᎠᏲᎵ %username% Catrobat ᎾᎿᎢ ᏚᏙᎥ ᎤᏁᏅ ᎠᎴ ᎤᏤᎵ email ᎤᏙᎯᏳ ᏄᏩᏁᎸ.'
+    explanation: 'Catrobat ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᏗᏕᎶᏆᏍᏗᏱ, ᎾᎿ ᏗᏂᏲᎵ ᏓᏕᎶᏆᎮ ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᏓᏃᏢᏍᎬ apps, ᏗᏁᏍᎨᏍᏗ, ᎠᎴ ᏗᏟᎶᏍᏔᏅ ᏓᏅᏃᏍᎩ. EU ᏗᏂᏲᎵ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ, ᏣᎵᏍᎨᏓ ᎣᎦᏚᎵ ᎠᏏᏉ ᏣᏤᎵ ᎠᏲᎵ ᏂᎦᎥ ᏳᏂᏴᏍᏗ ᎦᏚᎲ. ᎡᎳᏗ ᎦᏁᏍᏛᏗ ᎯᏯᏁᏍᏛᏂ ᏣᎵᏍᎨᏓ ᏣᏁᏗ.'
+    button: 'ᎤᏂᏙᏓ ᎤᎵᏍᎨᏓ ᎯᏁᎥ'
+    ignore: 'ᎢᏳᏃ ᎯᎠ email ᎥᏝ ᏱᏣᏚᎵᏍᎨ, ᎯᏁᎢ. ᎤᎵᏍᎨᏓ ᏂᎨᏒᎾ, ᏚᏙᎥ ᎤᏍᏗ ᏂᏓᏛᏁᎰ.'
+    whatIsCatrobat: 'Catrobat ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ, ᎥᏝ ᎠᏕᎳ ᏱᎦᏲᎮ ᏗᏕᎶᏆᏍᏗᏱ ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎪᏪᎵᏍᏗ. ᎤᏟ ᎯᎦᏔ catrobat.org.'
+    manageLink: 'ᏂᎪᎯᎸ ᏰᎵ ᏣᎦᏌᏯᏍᏗ ᏣᏤᎵ ᎠᏲᎵ ᏚᏙᎥ <a href="%portalUrl%" style="color: #00acc1;">ᎤᏂᏙᏓ ᎤᏂᏤᎵ ᎦᎶᎯᏍᏗ</a> ᎬᏗ. ᎤᏟ ᎯᎦᏔ <a href="%infoUrl%" style="color: #00acc1;">ᏣᏤᎵ ᏗᎧᎿᏩᏛᏍᏗ ᏣᏙᏓ ᎨᏒ</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: 'ᎤᎵᏍᎨᏓ ᎦᏁᎸ'
+    message: 'ᏩᏙ! %username% ᏚᏙᎥ ᎿᏉ ᏂᎦᎥ ᎠᏍᏆᏛ.'
+    continueButton: 'ᏚᎸᏫᏍᏓᏁᎸᎯ ᏲᎦ'
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: 'ᎤᏂᏙᏓ ᎠᎴ ᎠᏂᎦᏘᏯ'
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: 'ᎤᏂᏙᏓ ᎠᎴ ᎠᏂᎦᏘᏯ ᎤᏂᏤᎵ ᎧᏃᎮᏛ'
+    intro: 'Catrobat ᎤᏙᎯᏳ ᏓᏍᏆᏂᎪᏗᏍᎪ ᏗᏂᏲᎵ ᎠᎴ ᎤᏂᏤᎵ ᎤᏕᎵᏛ. ᎯᎠ ᎪᏪᎵ ᎦᏃᎮᏍᎪ ᎢᏳᏍᏗ ᏙᏍᏆᏂᎪᏗᏍᎬ ᏣᏤᎵ ᎠᏲᎵ ᎠᎴ ᎦᏙ ᏗᎧᎿᏩᏛᏍᏗ ᏣᎭ.'
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: 'ᎦᏙ Catrobat?'
+      text: 'Catrobat ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ, ᎥᏝ ᎠᏕᎳ ᏱᎦᏲᎮ ᏗᏕᎶᏆᏍᏗᏱ, ᎾᎿ ᏗᏂᏲᎵ ᏓᏕᎶᏆᎮ ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎤᏅᏒ apps, ᏗᏁᏍᎨᏍᏗ, ᎠᎴ ᏗᏟᎶᏍᏔᏅ ᏓᏃᏢᏍᎬ. ᏂᎬᎾᏛ ᎡᎶᎯ ᏰᎭ ᎠᎴ ᏗᏕᎶᏆᏍᏗᏱ ᎠᏂᏁᎰ.'
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: 'ᎦᏙ ᎧᏃᎮᏛ ᏙᏥᏟᏏᏍᎪ?'
+      text: 'ᎤᏍᏗ ᎤᏩᏒ ᎧᏃᎮᏛ ᏙᏥᏟᏏᏍᎪ: ᏚᏙᎥ, email, ᎢᎪᎯᏛ ᎤᏕᏅ, ᎠᎴ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏣᏤᎵ ᎠᏲᎵ ᏧᏃᏢᏅ ᎠᎴ ᏧᏅᏍᏔᏅ. 14 ᎢᏴ ᎢᏯᏂᏛᎾ ᏴᏫ, ᎾᏍᏉ ᎤᏂᏙᏓ/ᎠᏂᎦᏘᏯ email ᏗᏍᏆᏂᎪᏗᏍᎪ ᎤᎵᏍᎨᏓ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ. ᎥᏝ ᎧᏃᎮᏛ ᏱᏙᏥᎾᏗᏅᏍᎪ ᎠᎴ ᎥᏝ ᏅᏩᏓᎴ ᏱᏓᏥᏁᎰ.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: 'ᏣᏤᎵ ᏗᎧᎿᏩᏛᏍᏗ ᏣᏙᏓ ᎠᎴᏱᎩ ᏣᎦᏘᏯ ᎨᏒ'
+      text: 'EU ᏗᏂᏲᎵ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ (GDPR) ᎠᎴ COPPA ᏅᏗᎦᎵᏍᏙᏗᏍᎬ, ᏰᎵ: ᏣᎪᏩᏛᏗ ᎧᏃᎮᏛ ᏣᏤᎵ ᎠᏲᎵ ᎤᏤᎵ, ᎾᏍᎩ ᎤᏠᏱ ᏣᏔᏲᎯᏍᏗ, ᏂᎪᎯᎸ ᏣᎵᏍᎨᏓ ᏣᏲᏍᏙᏗ (ᎾᏍᎩ ᏚᏙᎥ ᎤᏍᏗ ᏂᏓᏛᏁᎰ), ᎠᎴ ᏣᏔᏲᎯᏍᏗ ᏂᎪᎯᎸ ᎦᏛᏗ ᏣᏤᎵ ᎠᏲᎵ ᏚᏙᎥ ᎠᎴ ᏂᎦᏛ ᎤᏤᎵ ᎧᏃᎮᏛ.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: 'ᎦᏙ ᏗᎧᎿᏩᏛᏍᏗ ᏗᏂᏲᎵ ᏕᎤᏂᏙᎥ ᎤᏂᏤᎵ?'
+      text: '16 ᎢᏴ ᎢᏯᏂᏛᎾ ᏴᏫ ᎥᏝ ᏰᎵ ᎧᏃᎮᏛ ᏱᏓᏃᏪᎳᏁ ᎠᎴᏱᎩ ᏱᏓᏃᎮᎵᏍᎨ, ᏅᏩᏓᎴ ᏴᏫ ᏱᏓᏂᏍᏓᏩᏗᏙᎮ, ᎠᎴᏱᎩ ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᏱᏓᏂᎪᏩᏘᏍᎨ. ᎠᏏᏉ ᏰᎵ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏓᏃᏢᏍᎨᏍᏗ ᎠᎴ ᏓᏅᏍᏗᏍᎨᏍᏗ, ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏓᏂᎪᏩᏘᏍᎨᏍᏗ, ᎠᎴ ᏄᏛᏁᎸ ᏓᏁᎨᏍᏗ. ᎯᎠ ᏗᎧᎿᏩᏛᏍᏗ ᏓᏍᏆᏂᎪᏗᏍᎪ ᏗᏕᎶᏆᏍᏗᏱ.'
+    manageButton: 'ᏣᏤᎵ ᎠᏲᎵ ᏚᏙᎥ ᎯᎦᏌᏯᏍᏓ'
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: 'ᎤᏂᏙᏓ ᎤᏂᏤᎵ ᎦᎶᎯᏍᏗ'
+    description: 'ᏣᏤᎵ email ᎪᏪᎳ ᎤᏯᏅᏗ ᏣᏩᏛᏗ ᏣᏤᎵ ᎠᏲᎵ Catrobat ᏚᏙᎥ ᏣᎦᏌᏯᏍᏗ. ᎤᏯᏅᏗ ᏓᎦᏅᏍᏔᏂ email ᏚᏙᎥ ᏣᏁᏅ ᏣᏁᎸᎢ.'
+    emailLabel: 'ᏣᏤᎵ email'
+    submitButton: 'ᎦᎦᏌᏯᏍᏗ ᎤᏯᏅᏗ ᎯᏅᏍᏓ'
+    infoLink: 'ᎤᏟ ᎯᎦᏔ'
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: 'ᏣᏤᎵ email ᎯᎦᏔ'
+      message: 'ᎢᏳᏃ ᏚᏙᎥ ᎯᎠ email ᏚᏓᏠᎯᏍᏛ ᎨᏎᏍᏗ, ᎦᎦᏌᏯᏍᏗ ᎤᏯᏅᏗ ᏙᏥᏅᏍᏔᏅ. ᏣᏤᎵ email ᎯᎦᏔ ᎠᎴ ᎤᏯᏅᏗ ᏍᏓᏩᏗᏓ.'
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: 'ᏗᏂᏲᎵ ᏕᎤᏂᏙᎥ ᎯᎦᏌᏯᏍᏓ'
+    description: 'ᏕᎦᏙᎥ %email% ᏚᏓᏠᎯᏍᏛ ᏕᎭᎦᏌᏯᏍᎦ.'
+    consentStatus: 'ᎤᎵᏍᎨᏓ ᏄᏍᏛ'
+    accountCreated: 'ᏚᏙᎥ ᎤᏁᏅ'
+    email: 'ᎠᏲᎵ ᎤᏤᎵ email'
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: 'ᎦᏁᎸ'
+      pending: 'ᎠᏏ ᎠᎦᏘᏍᎪ'
+      revoked: 'ᎦᏲᏍᏔᏅ'
+    grantButton: 'ᎤᎵᏍᎨᏓ ᎯᏁᎥ'
+    revokeButton: 'ᎤᎵᏍᎨᏓ ᎯᏲᏍᏓ'
+    revokeConfirm: 'ᎤᏙᎯᏳᏍᎪ ᎤᎵᏍᎨᏓ ᎯᏲᏍᏓ ᏣᏚᎵ? ᏚᏙᎥ ᎤᏍᏗ ᏂᏓᏛᏁᎵ.'
+    exportButton: 'ᎧᏃᎮᏛ ᎯᏯᏅ'
+    deleteButton: 'ᏚᏙᎥ ᎯᏍᏆᏓ'
+    deleteConfirm: 'ᎤᏙᎯᏳᏍᎪ ᎯᎠ ᏚᏙᎥ ᏂᎪᎯᎸ ᎯᏍᏆᏓ ᏣᏚᎵ? ᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ.'
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: 'ᏣᏤᎵ ᎠᏲᎵ Catrobat ᏚᏙᎥ ᎯᎦᏌᏯᏍᏓ'
+      title: 'ᏚᏙᎥ ᎦᎦᏌᏯᏍᏗ'
+      greeting: 'ᎣᏏᏲ,'
+      message: 'ᎤᏯᏅᏗ ᏣᏔᏲᏒ ᏣᏤᎵ ᎠᏲᎵ Catrobat ᏚᏙᎥ ᏣᎦᏌᏯᏍᏗ (%usernames%). ᎡᎳᏗ ᎦᏁᏍᏛᏗ ᎯᏯᏁᏍᏛᏂ ᏚᏙᎥ ᏣᎪᏩᏛᏗ ᎠᎴ ᏣᎦᏌᏯᏍᏗ.'
+      button: 'ᏚᏙᎥ ᎯᎦᏌᏯᏍᏓ'
+      ignore: 'ᎢᏳᏃ ᎯᎠ ᎥᏝ ᏱᏣᏔᏲᏎ, ᎯᎠ email ᎯᏁᎢ.'
 passwordRecovery:
   subject: Your Catrobat Password Recovery
-  message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
-  messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
-    <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
-    <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+  message: "ᎣᏏᏲ %username%.\n%appplication_url% ᎾᎿᎢ ᏣᏤᎵ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᏗ ᏣᏔᏲᏒ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ ᏣᏓᏅᏛᎮᎸ.\nᎢᏳᏃ ᎯᎠ ᎥᏝ ᏱᏣᏔᏲᏎ, ᎯᏁᎢ. 24 ᏧᏒᎯᏛ ᎢᏳᏟᎶᏛ ᎤᏍᏆᏗᏍᏗ.\nᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏣᏙᏢᏍᏗ, ᎯᎠ ᎪᏪᎵ ᏫᎷᎩ: %confirmationUrl%\nᏂᎪᎯᎸ ᏕᏣᏙᎥ ᎠᎴ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏰᎵ ᎬᏗ %appplication_url% ᎦᏚᎲ ᏣᏴᏍᏗ.\nᎯᎠ ᎪᏪᎵ ᏫᎷᎩ: %loginPage%\nᏕᏣᏙᎥ ᏗᎪᏪᎵ ᏣᏁᏟᏴᏍᏗ, ᎯᎠ ᎪᏪᎵ ᏫᎷᎩ: %profilePage%\nᏩᏙ,\nCatrobat ᏗᎦᎸᏫᏍᏓᏁᎯ.\n"
+  messageHtml: "<p>\nᎣᏏᏲ %username%.<br>\n<br>\n<a href=\"%appplication_url%\">Pocket Code</a> ᎾᎿᎢ ᏣᏤᎵ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᏗ ᏣᏔᏲᏒ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ ᏣᏓᏅᏛᎮᎸ.\nᎢᏳᏃ ᎯᎠ ᎥᏝ ᏱᏣᏔᏲᏎ, ᎯᏁᎢ. 24 ᏧᏒᎯᏛ ᎢᏳᏟᎶᏛ ᎤᏍᏆᏗᏍᏗ.<br>\n<br>\nᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏣᏙᏢᏍᏗ, <a href=\"%confirmationUrl%\">ᎠᏂ</a> ᎯᏯᏁᏍᏛᏂ.<br>\n<br>\nᏂᎪᎯᎸ ᏕᏣᏙᎥ ᎠᎴ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏰᎵ ᎬᏗ <a href=\"%appplication_url%\">Pocket Code</a> ᎦᏚᎲ ᏣᏴᏍᏗ.<br>\nᎯᎠ ᎪᏪᎵ ᏫᎷᎩ: <a href=\"%loginPage%\">ᏫᏴᎭ ᎪᏪᎵ</a><br>\nᏕᏣᏙᎥ ᏗᎪᏪᎵ ᏣᏁᏟᏴᏍᏗ, ᎯᎠ <a href=\"%profilePage%\">ᎪᏪᎵ</a> ᏫᎷᎩ.<br>\n<br>\nᏩᏙ,<br>\nCatrobat ᏗᎦᎸᏫᏍᏓᏁᎯ.\n</p>\n"
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  aboutMe: 'ᎠᏴ ᎧᏃᎮᏛ'
+  currentlyWorkingOn: 'ᎪᎯ ᏓᎩᎸᏫᏍᏓᏁᎭ'
+  edit: 'ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎯᏁᏟᏴᏍᏓ'
+  saveChanges: 'ᏂᏣᏁᏟᏴᏒ ᎯᏍᏆᏂᎪᏓ'
+  newPass: 'ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ'
+  repeatPass: 'ᏔᎵᏁ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ'
+  oldPass: 'ᎤᏪᏘ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ'
+  firstEmail: 'ᎢᎬᏱᏱ email'
+  secondEmail: 'ᏔᎵᏁ email'
+  myPrograms: 'ᏓᎩᎸᏫᏍᏓᏁᎸᎯ'
+  follows: 'ᏍᏓᏩᏗᏙᎰ'
+  follower: 'ᎠᏍᏓᏩᏗᏙᎯ'
+  unfollowUser: 'ᎯᎠ ᏴᏫ ᏞᏍᏗ ᏍᏓᏩᏗᏙᎮᏍᏗ!'
+  followUser: 'ᎯᎠ ᏴᏫ ᏍᏓᏩᏗᏓ!'
+  amountOfPrograms: 'ᏚᎸᏫᏍᏓᏁᎸᎯ ᎢᏯᏂᎢ'
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
-  changePicture: Change picture
-  goToScratchProfile: Profile on Scratch
+    passwordTooShort: 'ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎤᏍᏗᏉ %length% ᏗᎪᏪᎸ ᎤᏚᎵ.'
+    passwordTooLong: 'ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎤᏟ ᎢᏯᏆ %length% ᏗᎪᏪᎸ ᏰᎵ.'
+    passwordIsUsername: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏕᏣᏙᎥ ᎤᏓᎴᏗ ᎨᏎᏍᏗ.'
+    passwordWrong: 'ᎤᏲ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ'
+    emailNotValid: 'ᎯᎠ email ᎥᏝ ᎣᏏᏳ ᏱᎩ.'
+    emailMissing: 'ᎯᎠ email ᎦᏁᏟᏴᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏑᏓᎴᎩ ᎤᏙᎯᏳ email ᎤᏍᏗᏉ ᏣᎮᏍᏗ.'
+    emailExists: 'ᎯᎠ email ᎦᏳᎳ ᏰᎭ.'
+    usernameNotValid: 'ᎯᎠ ᏚᏙᎥ ᎥᏝ ᎣᏏᏳ ᏱᎩ.'
+    usernameMissing: 'ᏕᏣᏙᎥ ᏣᎮᏍᏗ.'
+    usernameExists: 'ᎯᎠ ᏚᏙᎥ ᎦᏳᎳ ᏰᎭ.'
+    usernameContainsEmail: 'ᏕᏣᏙᎥ ᎥᏝ email ᏱᎦᏁᎮᏍᏗ.'
+    submitSuccess: 'ᎦᏍᏆᏂᎪᏛ!'
+  reallyDeleteProgram: 'ᎤᏙᎯᏳᏍᎪ ᏚᎸᏫᏍᏓᏁᎸ ᎯᏍᏆᏓ ᏣᏚᎵ'
+  programsOf: 'ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  picture: 'ᏕᏣᏙᎥ ᏗᏟᎶᏍᏔᏅ'
+  changePicture: 'ᏗᏟᎶᏍᏔᏅ ᎯᏁᏟᏴᏍᏓ'
+  goToScratchProfile: 'Scratch ᎾᎿᎢ ᏚᏙᎥ ᏗᎪᏪᎵ'
 myprofile:
-  userSettings: User settings
-  profileSettings: Edit profile
-  securitySettings: Change password
+  userSettings: 'ᏴᏫ ᏄᏍᏛ'
+  profileSettings: 'ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎯᏁᏟᏴᏍᏓ'
+  securitySettings: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎯᏁᏟᏴᏍᏓ'
   accountSettings: Account Settings
-  accountVerification: Verify account
-  account: Account
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
-  email: Email
+  accountVerification: 'ᏕᏣᏙᎥ ᎤᏙᎯᏳ ᏂᎬᏁᎸ'
+  account: 'ᏕᏣᏙᎥ'
+  editProfile: 'ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎯᏁᏟᏴᏍᏓ'
+  edit: 'ᎯᏁᏟᏴᏍᏓ'
+  done: 'ᎤᎵᏍᏆᏛ'
+  checkMail: 'Email ᏣᏅᏍᏔᏅ. ᏣᏤᎵ email ᎯᎦᏔ.'
+  passwordUpdated: 'ᏣᏤᎵ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎣᏍᏓ ᎦᏁᏟᏴᏛ.'
+  avatar: 'ᏗᏟᎶᏍᏔᏅ'
+  email: 'Email'
   deleteAccount: Delete Account
-  deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  deleteAccountWarning: "ᎯᎦᏔᎮᏍᏗ:\n%num_projects% ᏚᎸᏫᏍᏓᏁᎸᎯ ᏙᏣᏙᏢᏒ ᎠᎴ %num_followers% ᎠᏂᏍᏓᏩᏗᏙᎯ ᏣᎭ. ᏂᎦᏛ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏓᎦᏛᏔᏂ. ᎥᏝ ᎿᏉ ᏰᎵ ᏫᏴᎯᏍᏗ ᏱᎨᏎᏍᏗ ᎠᎴ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏛᏂᎶᏏ. ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎦᏛᏗ ᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ!\nᎤᏙᎯᏳᏍᎪ ᏍᎩᏯᏕᏗ ᏣᏚᎵ?\n"
+  exportData: 'ᏓᎩᏃᎮᏛ ᎯᏯᏅ'
+  exportDataDescription: 'ᏰᎵ ᏣᏩᏛᏗ ᎤᏠᏱ ᏣᏤᎵ ᎧᏃᎮᏛ. ᎯᎠ ᎦᏁᎭ ᏕᏣᏙᎥ ᏗᎪᏪᎵ, ᏚᎸᏫᏍᏓᏁᎸᎯ, ᎧᏃᎮᏛ, ᏄᏛᏁᎸ, ᎠᎴ ᎠᏂᏍᏓᏩᏗᏙᎯ.'
+  exportDataLoading: 'ᎦᏯᏅᎭ...'
+  exportDataError: 'ᏣᏤᎵ ᎧᏃᎮᏛ ᎦᏯᏅᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+  exportDataRateLimited: 'ᏑᏓᎴᎩ ᎢᎦ ᏑᏓᎴᎩ ᎤᏩᏒ ᏣᏤᎵ ᎧᏃᎮᏛ ᏰᎵ ᎯᏯᏅᏗ. ᏑᎾᎴᎢ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+  editAccountSettings: 'ᏕᏣᏙᎥ ᏄᏍᏛ ᎯᏁᏟᏴᏍᏓ'
+  profileChangeSuccess: 'ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎣᏍᏓ ᎦᏁᏟᏴᏛ.'
+  unspecifiedError: 'ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎦᏁᏟᏴᏍᎬ ᎪᎱᏍᏗ ᎥᏝ ᏳᏍᏆᏛ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ ᎠᎴᏱᎩ ᏍᎩᏃᎲᏏ ᎢᏳᏃ ᏔᎵᏁ ᏂᎦᎵᏍᏗᏍᎨᏍᏗ!'
+  verifyAccountText: 'Email ᎤᏯᏅᏗ ᎦᏁᎭ ᏓᏨᏯᏅᏍᏔᏂ ᏕᏣᏙᎥ ᎤᏙᎯᏳ ᏂᎬᏁᏗ. ᎤᏯᏅᏗ ᎯᏯᏁᏍᏛᏂ ᏑᏟᎶᏛ ᎢᏳᏟᎶᏛ ᎠᏰᎵ; ᏑᏓᎴᎩ ᎢᎦ ᏑᏓᎴᎩ email ᎤᏩᏒ ᏰᎵ ᏣᏔᏲᎯᏍᏗ.'
+  verifyAccountButton: 'Email ᎯᏅᏍᏓ'
+  verifyAccountMailSent: 'Email ᎣᏍᏓ ᎦᏅᏍᏔᏅ. ᏣᏤᎵ email ᎯᎦᏔ'
+  verifyAccountMailFailed: 'ᏑᏓᎴᎩ ᎢᎦ ᏑᏓᎴᎩ email ᎤᏩᏒ ᏰᎵ ᏣᏔᏲᎯᏍᏗ'
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: 'ᎦᏁᏍᎨᏍᏗ ᎤᏁᎳᏅᎯ'
+  title: 'ᎦᏁᏍᎨᏍᏗ ᎤᏁᎳᏅᎯ - ᏩᏙ ᎯᏪᏍᏗ ᎠᎴ ᏕᎯᏁᎳ'
+  text1: 'ᎯᏰᎵᏎᎦ ᏂᎦᏛ Catrobat ᏚᎸᏫᏍᏓᏁᎸᎯ ᎦᏚ ᎤᎦᎾᏍᏓ, ᎤᏓᏁᏟᏴᏛ ᎦᏚ ᎤᏁᏓ ᎢᏳᏍᏗ ᏂᎦᏛᏁᏗ ᎪᏪᎸ (ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᏗᎦᎫᏍᏛᏗ). ᏂᎦᏛ Catrobat ᎦᏚᎲ ᎠᏁᎯ ᏓᏁᎳ ᎤᏂᏤᎵ ᎦᏚ ᎠᎴ ᎤᏂᏤᎵ ᎪᏪᎸ. ᎾᏍᎩ ᎢᏳᏍᏗ ᏰᎵ ᎦᏚ ᏣᎵᎮᎵᏍᏗ ᎠᎴ ᏣᏕᎶᏆᏍᏗ ᎢᏳᏍᏗ ᏨᏒ ᏂᏣᏛᏁᏗ!'
+  text2: 'ᎥᏝ ᎤᏕᎵᏛ ᎪᏪᎸ ᏱᎩ: ᎢᏳᏍᏗ ᎦᏚ ᏂᎦᏛᏁᏗ ᏂᎦᏛ ᏴᏫ ᏰᎵ ᎬᏗ, ᏔᎵᏁ ᎬᏗ, ᎤᏁᏟᏴᏍᏗ, ᎠᎴ ᎢᏤ ᎤᎾᏓᏅᏖᏗ ᎤᏂᏍᏕᎸᏗ... ᎦᏚ ᏥᏁᎦ.'
+  text3: 'ᏰᎵ ᎦᏚ ᏣᎵᏍᏓᏴᏗ ᎠᎴ ᏅᏩᏓᎴ ᏴᏫ ᎤᏂᏤᎵ ᎪᏪᎸ ᏰᎵ ᎯᏯᏅᏗ ᏨᏒ ᏣᏤᎵ ᏣᏙᏢᏍᏗ, ᎤᏓᎴᏗ ᏧᏓᎴᏅᏓ ᎬᏗ. ᎯᎠ ᏂᏓᎬᏩᎶᏛ ᏔᎵ ᏗᎧᎿᏩᏛᏍᏗ ᎦᏁᎭ:'
+  text4: 'Catrobat ᎦᏚᎲ ᎣᏤᏅ, ᎯᎠ ᎢᏳᏍᏗ ᎣᎦᏑᏰᏒ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ ᎣᎦᏓᏅᏖᏍᎬ ᏗᏕᎶᏆᏍᏗ ᎠᎴ ᎢᏤ ᎤᎾᏓᏅᏖᏗ ᏓᏍᏕᎵᏍᎪ ᎦᏚᎲ. ᎪᏪᎸ ᎠᎴ ᏧᏓᎴᏅᏓ (ᏗᎪᏪᎵ ᎠᎴ ᏗᏟᎶᏍᏔᏅ) ᏓᏁᎳᏗᏍᎬ, ᏴᏫ ᏰᎵ ᏚᏂᏍᏕᎸᏗ ᎤᎾᏓᏅᏖᏗ ᎠᎴ ᏂᎦᏛ ᎣᏍᏓ ᏓᎾᎵᏍᏓᏁᎵ.'
+  text5: 'Catrobat website ᎣᏤᏅ, ᏴᏫ ᏚᏂᏁᎳᏗᏍᏗ ᎠᎴ ᏩᏙ ᎤᏂᏪᏍᏗ ᏅᏩᏓᎴ ᏴᏫ ᎢᏳᏍᏗ ᎣᏤᏅ. ᏂᎦᏛ ᏚᎸᏫᏍᏓᏁᎸ ᎪᏪᎵ ᎾᎿᎢ, ᏂᎪᎯᎸ ᏰᎵ ᎢᎬᏱᏱ ᏗᎪᏪᎵ ᎯᏯᏅᏗ. ᎢᏳᏃ ᏚᎸᏫᏍᏓᏁᎸ ᎢᏤ ᏂᎬᏁᎸᎭ (ᏗᎪᏪᎵ ᎠᎴᏱᎩ ᏗᏟᎶᏍᏔᏅ ᏣᏁᏟᏴᏒ ᎠᎴ ᏕᎯᏁᎳᏅ), ᏚᎸᏫᏍᏓᏁᎸ ᏗᎪᏪᎸ ᎾᎿᎢ ᏩᏙ ᏫᎾᏕᏥᏪᏏ ᏴᏫ ᎠᎴ ᏚᎸᏫᏍᏓᏁᎸ ᏣᏍᏕᎸᎯ.'
+  text6: 'Catrobat ᎦᏚᎲ ᏗᎧᎿᏩᏛᏍᏗ ᎤᏟ ᎯᎦᏔ %link-termsOfUse% ᎾᎿᎢ.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: 'ᏣᏤᎵ ᎦᏚ ᎠᎴ ᎪᏪᎸ ᏕᎯᏁᎳ'
+    item2: 'ᏩᏙ ᏫᎾᏕᏥᏪᏏ ᏣᏍᏕᎸᎯ'
+  version: 'ᎢᏳᏓᎴᎩ 1.1, 2 ᎧᏬᏂ 2013'
 termsOfUse:
-  title: Terms of Use
+  title: 'ᎬᏗ ᏗᎧᎿᏩᏛᏍᏗ'
   headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text1: 'Catrobat ᎦᏚᎲ ᏣᏁᎯ ᎨᏒ, ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᎴ ᎤᎾᏓᏅᏖᏗ ᏕᎯᏁᎳ ᏴᏫ:'
+  text2: 'ᏍᎩᏍᏕᎸᏗ ᎣᎦᏚᎵ ᎯᎠ ᎦᏚᎲ ᎣᏍᏓ ᎤᏍᏕᎸᏗ ᏂᎦᏛ ᎠᏁᎯ. ᎯᎠ ᎢᏳᏍᏗ ᏰᎵ ᏣᏍᏕᎸᏗ:'
+  text3: 'Catrobat ᏚᎸᏫᏍᏓᏁᎸ ᎬᏗ ᏗᏂᏍᏕᎵᏍᎩ ᎢᏳᎾᏛᏁᏗ ᎣᎦᏚᎵ ᎠᎴ ᏂᎦᏛ ᏴᏫ ᎤᎾᏓᏅᏖᏗ ᏧᏓᏟᏌᏗ ᏂᎦᏛ ᏴᏫ ᎤᏂᏍᏕᎸᏗ. ᎾᏍᏉ ᏰᎵ ᏣᏁᎯ Catrobat ᎦᏚᎲ ᏱᎩ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᎦᏚᎲ ᏕᏣᏁᎲ ᎠᏓᏁᏗ ᎢᏯᏛᏁᏗ, ᏅᏩᏓᎴ ᎠᏁᎯ ᏚᏂᏤᎵ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏕᏣᏁᎲ ᎾᏍᎩᏯ:'
+  text4: 'ᎣᎦᏤᎵ ᎠᏓᏁᏗ ᏂᎯ ᏣᏤᎵ:'
+  text5: 'ᎣᎦᏤᎵ ᎬᏗ ᏗᎧᎿᏩᏛᏍᏗ:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: 'ᎤᏣᏘ ᏧᏓᎴᏅᏛ ᏓᎶᏂᎨ ᎠᎴ ᎢᏳᎾᏍᏗ'
+    item2: 'ᏂᎦᏛ ᎢᏳᎾᏕᏘᏴᏛ (ᏗᏂᏲᎵ ᎢᏳᏓᎴᏅᏛ ᎤᏂᏛᎦᏴ ᎢᏯᏍᏗ)'
+    item3: 'ᏂᎦᏛ ᎢᏳᎾᎦᏙᎥᏒ'
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item1: 'ᎣᏍᏛ ᏕᎭᏓᏅᏓᏗᏍᏗᏍᎨᏍᏗ. ᏚᎸᏫᏍᏓᏁᎸᎯ ᏕᎯᏁᎳᏗᏍᎬ, ᎯᏰᎵᏎᎮᏍᏗ ᎤᏣᏘ ᏧᏓᎴᏅᏛ ᎢᏳᎾᏕᏘᏴᏛ ᏴᏫ ᏓᏂᎪᏩᏘᏍᎨᏍᏗ ᏂᏣᏛᏁᎸ.'
+    item2: 'ᏩᏙ ᎯᏪᏍᎨᏍᏗ. ᏰᎵ ᏅᏩᏓᎴ ᏴᏫ ᏚᏂᎸᏫᏍᏓᏁᎸ ᏣᏁᏟᏴᏍᏗ - ᎠᏎᏃ ᏩᏙ ᏫᎾᏕᏥᏪᏏ. ᏚᎸᏫᏍᏓᏁᎸ ᏗᎪᏪᎸ ᎠᎴ ᏩᏙ ᎾᎿᎢ ᏰᎵ ᏩᏙ ᎯᏪᏍᏗ. ᎡᎳᏗ ᎪᏪᎸ ᎯᎦᏔ ᏅᏩᏓᎴ ᏴᏫ ᏚᏂᎸᏫᏍᏓᏁᎸ ᎦᏁᏟᏴᏍᏗ ᎧᏃᎮᏛ.'
+    item3: 'ᎤᏙᎯᏳ ᎯᏬᏂᏍᎨᏍᏗ. ᏞᏍᏗ ᏅᏩᏓᎴ ᏴᏫ ᏂᏣᎵᏍᏗᏍᎨᏍᏗ ᎠᎴ ᏞᏍᏗ ᎦᏚᎲ ᏱᏙᎯᎶᏄᎮᎮᏍᏗ.'
+    item4: 'ᏣᏤᎵ ᎧᏃᎮᏛ ᎤᏕᎵᏛ ᎨᏎᏍᏗ. ᏞᏍᏗ ᏣᏤᎵ email, ᏗᏯᏂᏍᏗ ᏗᏎᏍᏗ, ᎠᎴᏱᎩ ᏅᏩᏓᎴ ᏣᏤᎵ ᎧᏃᎮᏛ ᏱᏕᎯᏁᎳᏗᏍᎨᏍᏗ.'
+    item5: "ᎯᎠ ᎦᏚᎲ ᎣᏍᏓ ᏗᏍᏆᏂᎪᏙᏗ ᎯᏍᏕᎸ. ᎢᏳᏃ ᏣᏓᏅᏖᏍᎨᏍᏗ ᏚᎸᏫᏍᏓᏁᎸ ᎠᎴᏱᎩ ᎧᏃᎮᏛ ᎤᏲ, ᎤᏂᏐᏢᏗ, ᎤᏣᏘ ᎤᏍᎦᏎᏗ, ᎠᎴᏱᎩ ᎥᏝ ᎣᏏᏳ ᏱᎩ, 'ᎥᏝ ᎣᏏᏳ ᎯᏃᎲᏏ' ᎦᏁᏍᏛᏗ ᎯᏯᏁᏍᏛᏂ ᎠᎴ ᎤᏍᏗ ᎧᏃᎮᏛ ᎪᏪᎳ. Catrobat ᏗᎦᎸᏫᏍᏓᏁᎯ ᏓᏂᎦᏔᏂ ᏣᏃᎲᏎᎸ ᎠᎴ ᏰᎵ ᏚᏂᏛᏔᏗ ᏚᎸᏫᏍᏓᏁᎸ, ᎧᏃᎮᏛ, ᎠᎴᏱᎩ ᎪᏪᎸ."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "ᏚᎸᏫᏍᏓᏁᎸ ᏦᎦᏤᎵ websites ᏣᏅᏍᏔᏅ, ᎣᏏᏳ ᏣᏰᎸᏗ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᏗᎧᎿᏩᏛᏍᏗ ᎡᎳᏗ ᎨᏒᎢ. Catrobat ᏂᏓᎬᏩᎶᏛ ᏣᎩᏍᏗ ᎾᏍᎩᏯ, ᎯᎠ ᏗᎧᎿᏩᏛᏍᏗ ᏂᎦᏛ ᏴᏫ ᏰᎵ ᏓᏕᎶᏆᎮᏍᏗ ᏅᏩᏓᎴ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᎴ ᎢᏤ ᏂᏓᏅᏁᎮᏍᏗ ᎤᏅᏒ ᏗᏁᏍᎨᏍᏗ, ᏗᏟᎶᏍᏔᏅ ᏓᏅᏃᏍᎩ, ᎠᎴ ᏅᏩᏓᎴ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏧᏃᏢᏍᏗ. ᎾᏍᎩ ᎢᏳᏍᏗ ᏂᎦᏛ ᏴᏫ 'ᏚᏂᏍᏕᎸᏗ ᎤᎾᎵᎪᎯ', ᏂᎯ ᎾᏍᏉ! ᏕᏣᎸᏫᏍᏓᏁᎸ ᏂᎬᎾᏛ ᎡᎶᎯ ᏓᏍᏕᎵᏍᎨᏍᏗ ᎠᎴ ᏂᎦᏛ ᏴᏫ ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᎬᏗ ᎨᏎᏍᏗ, Wikipedia ᎾᏍᎩᏯ. ᎠᏓᏁᏗ ᏴᏫ ᏣᏁᎲ ᎢᏯᏛᏁᏗ ᎯᏰᎵᏎᎮᏍᏗ: ᏂᎦᏛ ᏕᎯᏁᎰ, ᎠᎴ ᏂᎦᏛ ᏅᏩᏓᎴ ᏦᎦᏤᎵ websites ᏓᏅᏍᏗᏍᎩ ᏕᏣᏁᎰ. ᏚᏅᏍᏔᏅ ᏚᎸᏫᏍᏓᏁᎸ ᎤᏣᏘ ᎦᎸᏉᏗᏳ ᎠᏓᏁᏗ, ᎤᏤᎵ ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᏣᏁᎰ, ᎦᏚᎲ ᎾᏍᎩᏯ ᏗᎧᎿᏩᏛᏍᏗ ᏣᏁᏴᏍᏗ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ."
+    item2: 'ᎥᏝ ᎠᏓᏁᏗ ᏯᏚᎵ ᏣᏓᏂᎸᏍᏗ; ᎢᏳᏃ ᏣᏓᏂᎸᏍᎨᏍᏗ, ᎩᎶ ᏗᎧᎿᏩᏛᏍᏗ ᎦᏁᎭ. ᎯᎠ ᏗᎧᎿᏩᏛᏍᏗ ᎣᏍᏓ ᏂᎦᎵᏍᏗᏍᎪ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ ᏰᎵ ᏣᏕᎶᏆᏍᏗ ᎠᎴ ᎤᏟ ᎣᏍᏓ ᏣᏙᏢᏍᏗ, ᎾᏍᎩ ᏔᎵᏁ ᏦᎦᏤᎵ websites ᏣᏤᎵ ᎢᏯᏛᏁᏗ ᏰᎵ ᎯᏅᏍᏗ. ᎾᏍᏉ ᎯᎠ ᏗᎧᎿᏩᏛᏍᏗ ᏓᏍᏆᏂᎪᏗᏍᎪ ᎥᏝ ᏰᎵ ᏣᏍᎦᏅᏨ ᏱᎦᎬᏁᏗ ᎢᏳᏃ ᏅᏩᏓᎴ ᏴᏫ ᏚᎸᏫᏍᏓᏁᎸ ᎬᏗᏍᎬ ᎤᏲ ᏳᎵᏍᏓᏁᎴᏍᏗ.'
+    item3: 'ᎤᏣᏘ ᎦᎸᏉᏗᏳ ᏗᎧᎿᏩᏛᏍᏗ: ᎤᏙᎯᏳ ᏚᏙᎥ ᎪᏪᎳ ᏴᏫ ᏚᏂᎸᏫᏍᏓᏁᎸ ᏣᏍᏕᎸᎯ. ᎾᏍᏉ ᎣᏍᏓ ᏙᏓᏲᎦᎸᏫᏍᏓᏁᎵ ᏅᏩᏓᎴ ᏴᏫ ᎤᏂᎦᏙᎥᎯᏍᏗ ᏂᎯ ᏣᏙᏢᏅ, ᏕᏣᏙᎥ Catrobat ᎦᏚᎲ ᏣᏑᏰᏒ ᎪᏪᎸ ᎨᏒ, ᎠᎴ ᏅᏩᏓᎴ ᏴᏫ ᏰᎵ ᏩᏙ ᏫᏂᏣᏪᏏ ᏂᎦᏛ ᏴᏫ ᏕᏣᏁᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ.'
+    item4: 'ᎤᏙᎯᏳ ᏗᎧᎿᏩᏛᏍᏗ %link-licenseUploaded% ᎯᎦᏔ.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: 'ᏂᎦᏛ ᎣᎦᏤᎵ software ᎠᎴ Internet ᎪᎱᏍᏗ Catrobat ᏚᏓᏠᎯᏍᏛ, Catrobat ᏗᎦᎸᏫᏍᏓᏁᎯ ᎤᏃᏪᎳᏅ software, ᎣᎦᏤᎵ websites, ᎣᎦᏤᎵ ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ, ᎠᎴ ᏂᎦᏛ ᏅᏩᏓᎴ ᏧᏓᎴᏅᏓ ᏗᏟᎶᏍᏔᏅ, ᏗᎧᏁᎬ, ᎠᎴ ᏗᎪᏪᎵ ᎾᏍᎩᏯ, ᎪᎯ ᎠᎴ ᎤᎵᏍᏆᎸᏗ ᏕᏨᏁᎰ Catrobat ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᏗᎧᎿᏩᏛᏍᏗ ᎬᏗ.'
+    item2: 'ᎯᎠ ᏗᎧᎿᏩᏛᏍᏗ ᏂᎦᏛ Catrobat ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᏂᏓᏛᏁᎰ ᎠᎴ ᏰᎵ ᏂᎦᎥ ᏣᏚᎵᏍᎬ ᎬᏗ, ᎤᏍᏗ ᏗᎧᎿᏩᏛᏍᏗ ᎤᏩᏒ ᏓᏍᏆᏂᎪᏗᏍᎪ Catrobat ᏂᎪᎯᎸ ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ ᎠᎴ ᎣᏏᏳ ᎬᏗ ᎨᏒ ᏂᎦᏛ ᏴᏫ.'
+    item3: 'ᎤᏙᎯᏳ ᏗᎧᎿᏩᏛᏍᏗ %link-licenseToPlay% ᎯᎦᏔ. Catrobat ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎠᎴ ᎤᏣᏘ ᏅᏩᏓᎴ ᏗᎪᏪᎵ %link-developer% ᎾᎿᎢ ᏓᏁᎭ.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: 'ᎢᏳᏃ ᏂᎯ, ᎠᎴᏱᎩ 13 ᎢᏴ ᎢᏣᏛᎾ ᎢᎨᏎᏍᏗ, ᏣᏙᏓ ᎠᎴᏱᎩ ᏣᎦᏘᏯ, ᏧᏓᏠᎯᏍᏛ ᎨᏎᏍᏗ ᏗᎾᏓᏡᏩᏗᏍᎩ ᎤᏂᏣᏘ ᏴᏫ ᎤᏕᎵᏛ ᏓᏂᎦᏂᏯᏍᎬ ᎠᎴᏱᎩ ᏓᏂᎦᏂᏯᏍᎬ, ᎥᏝ ᏰᎵ ᏦᎦᏤᎵ software ᎠᎴ ᏗᏍᏕᎸᏗ ᏱᏣᏁᏗ. ᎤᏙᎯᏳ ᎯᎠ ᏗᎧᎿᏩᏛᏍᏗ 4.a ᎠᎴ 4.b ᎾᎿᎢ %link-termsOfUse% ᎪᏪᎸ.'
+    item2: 'ᎢᏳᏃ 13 ᎢᏴ ᎢᏣᏛᎾ ᎢᎨᏎᏍᏗ, ᏣᏙᏓ ᎠᎴᏱᎩ ᏣᎦᏘᏯ ᎯᏯᏛᏛᏂ ᏰᎵ Catrobat ᏣᏁᏗ.'
+    item3: 'ᏂᎪᎯᎸ ᏰᎵ ᏙᏥᏲᏍᏙᏗ, ᏙᏥᏛᏔᏗ, ᎠᎴᏱᎩ ᏙᏥᏍᎦᎳᏗ ᏚᎸᏫᏍᏓᏁᎸᎯ, ᏕᎦᏙᎥ, ᎠᎴ ᏂᎦᏛ Catrobat websites ᏚᏅᏍᏔᏅ, ᎢᏳᏃ ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᎣᏏᏳ ᏱᎦᏁᎭ ᎠᎴᏱᎩ ᏴᏫ ᏅᏩᏓᎴ ᏴᏫ ᎤᏂᏤᎵ ᏗᎧᎿᏩᏛᏍᏗ ᏱᎤᏲᏍᏔᏁᎭ.'
+    item4: 'ᏂᎦᏛ Catrobat software ᎠᎴ Internet ᎪᎱᏍᏗ ᏕᏨᏁᎰ ᎣᏏᏳ ᎬᏗ ᎨᏒ ᎣᎦᏚᎵᏍᎬ, ᎠᏎᏃ ᎥᏝ ᏳᏙᎯᏳᎯ.'
+    item5: 'ᎤᏙᎯᏳ ᏗᎧᎿᏩᏛᏍᏗ ᎠᎴ ᏅᏩᏓᎴ ᏗᎧᎿᏩᏛᏍᏗ %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service ᎯᎦᏔ.'
+  bottom1: 'ᏂᎪᎯᎸ ᎠᏂ ᎯᎦᏔ, ᏂᎪᎯᎸ ᎤᏟ ᎣᏍᏓ ᏙᎦᏁᏟᏴᏍᎪ ᎣᎦᏤᎵ ᎬᏗ ᏗᎧᎿᏩᏛᏍᏗ.'
+  bottom2: 'ᎯᎠ ᎬᏗ ᏗᎧᎿᏩᏛᏍᏗ ᏣᏓᏅᏖᏍᎬ %email-webmaster% ᎯᏅᏍᏓ.'
+  version: 'ᎢᏳᏓᎴᎩ 1.3, 4 ᎠᏅᏱ 2014'
 search:
-  dotdotdot: Search...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
+  dotdotdot: 'ᏲᎦ...'
+  search: 'ᏚᎸᏫᏍᏓᏁᎸᎯ, ᏴᏫ ᎠᎴ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏲᎦ'
+  inMediaLib: 'ᏗᏟᎶᏍᏔᏅ ᎠᎴ ᏗᎧᏁᎬ ᏗᏍᏆᏂᎪᏗᏱ ᏲᎦ'
+  inMediaCategory: 'ᎯᎠ ᏄᏍᏛ ᏲᎦ'
   results: Search Results
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  resultcount: '%count% ᏣᏩᏛ'
+  fail: 'ᏑᏓᎴᎩ ᏲᏍᏗ ᎧᏁᎢᏍᏗ ᎤᏍᏗᏉ ᎪᏪᎳ'
+  noUsers: 'ᎥᏝ ᏴᏫ ᏳᏩᏛ'
+  noProjects: 'ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏳᏩᏛ'
+  noStudios: 'ᎥᏝ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏳᏩᏛ'
+  sameSearchMessage: 'ᎦᏳᎳ ᎠᏂ ᏤᎭ! ᏅᏩᏓᎴ ᏲᎦ?'
 menu:
-  profile: Profile
-  login: Login
-  logout: Logout
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
-  language: Language
-  languageOptionsNotAvailable: No language options available.
+  profile: 'ᏕᏣᏙᎥ ᏗᎪᏪᎵ'
+  login: 'ᏫᏴᎭ'
+  logout: 'ᎯᏄᎪᎢ'
+  admin: 'ᎠᎦᏘᏯ'
+  home: 'ᏗᏓᏁᎸ'
+  helpAndTutorials: 'ᏗᏍᏕᎸᏗ ᎠᎴ ᏗᏕᏲᏗ'
+  followersAndFollowing: 'ᎠᏂᏍᏓᏩᏗᏙᎯ'
+  mediaLibrary: 'ᏗᏟᎶᏍᏔᏅ ᎠᎴ ᏗᎧᏁᎬ ᏗᏍᏆᏂᎪᏗᏱ'
+  studio: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+  language: 'ᎦᏬᏂᎯᏍᏗ'
+  languageOptionsNotAvailable: 'ᎥᏝ ᎦᏬᏂᎯᏍᏗ ᏗᏑᏰᏍᏗ ᏱᏓᏁᎭ.'
 login:
-  login: Login
+  login: 'ᏫᏴᎭ'
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: 'ᎪᎯ ᏫᏴᎭ'
+    createAccount: 'ᏕᏣᏙᎥ ᏫᏂᏯ'
+    forgetPassword: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏣᏓᏅᏛᎮᎸᏍᎪ?'
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+    title: 'ᎠᎴᏱᎩ ᎯᎠ ᎬᏗ ᏫᏴᎭ'
+  passOrUser: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎠᎴᏱᎩ ᏕᏣᏙᎥ ᎥᏝ ᎣᏏᏳ ᏱᎩ.'
+  accountSuspended: 'ᏕᏣᏙᎥ ᎠᎦᏘᏴᏒ. ᎢᏳᏃ ᎤᏲ ᏣᏓᏅᏖᏍᎨᏍᏗ, ᏗᏍᏕᎵᏍᎩ ᎯᏬᏁᏓ.'
+  noUsername: 'ᏕᏣᏙᎥ ᎠᎴᏱᎩ email ᎥᏝ ᏳᏩᏛ.'
+  forgotPass: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎠᎴᏱᎩ ᏕᏣᏙᎥ ᏣᏓᏅᏛᎮᎸᏍᎪ?'
+  recoverPassSend: 'Email ᏣᏅᏍᏔᏅ. ᏣᏤᎵ email ᎯᎦᏔ.'
+  alreadyReset: 'ᎯᎠ ᏴᏫ ᎤᏤᎵ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎦᏳᎳ ᎦᏔᏲᏒ 24 ᏧᏒᎯᏛ ᎢᏳᏟᎶᏛ ᎤᏁᏙᎸ.'
+  confirmationSend: 'ᏕᏣᏙᎥ ᎤᏙᎯᏳ ᏂᎬᏁᏗ email ᏣᏅᏍᏔᏅ. ᏣᏤᎵ email ᎯᎦᏔ ᎠᎴ ᏕᏣᏙᎥ ᎯᎴᏍᏓ.'
+  userOrEmail: 'ᏕᏣᏙᎥ ᎠᎴᏱᎩ Email'
+  changePass: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎯᏁᏟᏴᏍᏓ'
+  createAccount: 'ᏕᏣᏙᎥ ᏫᏂᏯ'
+  noAccount: 'ᏕᏣᏙᎥ ᎥᏝ ᏱᏣᎭ?'
+  alreadyAccount: 'ᎦᏳᎳ ᏕᏣᏙᎥ ᏣᎭᏍᎪ?'
   or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
+  username: 'ᏕᏣᏙᎥ'
+  email: 'Email'
+  passwordFirst: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ'
   passwordSecond: Password Confirm
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: 'ᏕᏣᏙᎥ ᏫᏂᏯ'
+  subText: 'ᏣᏍᏆᏗᏍᎬᎾ, Catrobat ᎦᏚᎲ ᏕᏣᏙᎥ ᏫᏂᏯᎭ ᎠᎴ %var1% ᎠᎴ %var2% ᎣᏏᏳ ᏣᏰᎸᏗ.'
+  dateOfBirth: 'ᎢᎪᎯᏛ ᏣᏕᏅ'
+  dateOfBirthInfo: 'ᎢᎪᎯᏛ ᏣᏕᏅ ᏗᏨᏔᏲᏎᎭ EU ᏗᏂᏲᎵ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ (GDPR/COPPA) ᏅᏗᎦᎵᏍᏙᏗᏍᎬ ᎠᎴ ᏗᏂᏲᎵ ᏗᏍᏆᏂᎪᏙᏗ.'
+  parentEmail: 'ᏣᏙᏓ/ᏣᎦᏘᏯ email'
+  parentEmailInfo: '14 ᎢᏴ ᎢᏯᏂᏛᎾ ᏴᏫ ᎤᏂᏚᎵ. ᎯᎠ email ᎤᎵᏍᎨᏓ ᎦᏔᏲᏍᏗ ᏓᏥᏅᏍᏔᏂ.'
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: Continue
+    title: 'ᏕᏣᏙᎥ ᏫᏂᏯ ᎯᏍᏆᏓ'
+    info: 'ᎢᎪᎯᏛ ᏣᏕᏅ ᎪᏪᎳ ᏣᏁᏍᏗ ᏣᏚᎵᏍᎨᏍᏗ.'
+    submit: 'ᎮᎾ'
   button:
-    cancel: Cancel
-    createAccount: Create account
+    cancel: 'ᎯᏲᏍᏓ'
+    createAccount: 'ᏕᏣᏙᎥ ᏫᏂᏯ'
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: 'ᏣᏤᎵ email ᎯᎦᏔ!'
+    message: 'ᎤᏙᎯᏳ ᏂᎬᏁᏗ email ᏓᏨᏅᏍᏔᏅ. ᎤᏯᏅᏗ ᎯᏯᏁᏍᏛᏂ ᏕᏣᏙᎥ ᏣᎴᏍᏗ.'
+    helpTitle: 'Email ᎥᏝ ᏱᏣᏩᏛ?'
+    hint: 'Spam ᎾᎿᎢ ᎯᎦᏔ. ᎤᏯᏅᏗ 24 ᏧᏒᎯᏛ ᎢᏳᏟᎶᏛ ᎣᏏᏳ.'
+    resendButton: 'ᏔᎵᏁ ᎤᏙᎯᏳ ᏂᎬᏁᏗ email ᎯᏅᏍᏓ'
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: 'ᎤᏂᏙᏓ ᎤᏂᎵᏍᎨᏓ ᎠᎦᏘᏍᎪ'
+    message: 'ᏣᏤᎵ email ᎤᏙᎯᏳ! ᎠᏏᏉ ᏂᎦᎥ ᏣᏁᏗ, ᏣᏙᏓ ᎠᎴᏱᎩ ᏣᎦᏘᏯ ᎤᎵᏍᎨᏓ ᎤᏁᏗ ᎤᏚᎵ.'
+    sentTo: 'ᎤᎵᏍᎨᏓ ᎦᏔᏲᏍᏗ %email% ᎦᏅᏍᏔᏅ'
+    helpTitle: 'Email ᎥᏝ ᏱᏣᏩᏛ? ᏗᏍᏕᎸᏗ ᏣᏚᎵᏍᎪ?'
+    hint: 'ᏣᏙᏓ ᎯᏯᏛᏛᏂ spam ᎾᎿᎢ ᎤᎦᏙᏗ. ᎤᏯᏅᏗ 24 ᏧᏒᎯᏛ ᎢᏳᏟᎶᏛ ᎣᏏᏳ.'
+    resendButton: 'ᏔᎵᏁ ᎤᎵᏍᎨᏓ email ᎯᏅᏍᏓ'
+    wrongEmail: 'ᎤᏲ ᏣᏙᏓ email ᏣᏬᏪᎳᏅᏍᎪ?'
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: 'ᎤᏂᏙᏓ ᎤᏂᎵᏍᎨᏓ ᎦᏲᏍᏔᏅ'
+    message: 'ᏣᏙᏓ ᎠᎴᏱᎩ ᏣᎦᏘᏯ ᎤᎵᏍᎨᏓ ᎤᏲᏍᏔᏅ. ᏕᏣᏙᎥ ᎤᏍᏗ ᏂᏓᏛᏁᎰ ᎬᏂ ᏔᎵᏁ ᎤᎵᏍᎨᏓ ᎦᏁᎸ.'
+    newEmailPlaceholder: 'ᎢᏤ ᏣᏙᏓ email'
+    changeButton: 'ᎯᏁᏟᏴᏍᏓ ᎠᎴ ᏔᎵᏁ ᎯᏅᏍᏓ'
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: 'ᏕᏣᏙᎥ ᏔᎵᏁ ᏣᏩᏛᏗ'
+  description: 'ᎢᏳᏃ ᏕᏣᏙᎥ ᎠᎴᏱᎩ email ᏣᏅᏓᏗᏍᎨᏍᏗ, ᎤᏯᏅᏗ ᏰᎵ ᏓᏨᏯᏅᏍᏔᏂ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏣᏙᏢᏍᏗ.'
   button:
-    cancel: Cancel
-    submit: Recover password
+    cancel: 'ᎯᏲᏍᏓ'
+    submit: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏔᎵᏁ ᎯᏩᏛ'
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᎸ'
+    description: 'ᎢᏳᏃ ᏕᏣᏙᎥ email ᏣᏅᏓᏗᏍᎨᏍᏗ, ᎤᏯᏅᏗ ᏰᎵ ᏓᏨᏯᏅᏍᏔᏂ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏣᏙᏢᏍᏗ.'
     button:
-      submit: "Send reset email"
-      cancel: "Cancel"
+      submit: 'ᎢᏤ ᏂᎬᏁᏗ email ᎯᏅᏍᏓ'
+      cancel: 'ᎯᏲᏍᏓ'
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: 'ᏣᏤᎵ email ᎯᎦᏔ'
+    description: 'ᎢᏳᏃ ᏕᏣᏙᎥ ᎯᎠ email ᏚᏓᏠᎯᏍᏛ ᎨᏎᏍᏗ, email ᎤᏯᏅᏗ ᎦᏁᎭ ᎦᏅᏍᏔᏅ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏣᏙᏢᏍᏗ. ᎯᎠ ᎤᏯᏅᏗ %time% ᎤᏍᏆᏗᏍᏗ.'
+    descriptionTwo: '%throttleLimit% ᎢᏳᏟᎶᏛ ᏑᏓᎴᎩ ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏰᎵ ᏣᏔᏲᎯᏍᏗ.'
+    descriptionThree: 'ᎢᏳᏃ email ᎥᏝ ᏱᏣᏩᏛ, spam ᎾᎿᎢ ᎯᎦᏔ ᎠᎴᏱᎩ ᏗᏍᏕᎵᏍᎩ %email-webmaster% email ᎯᏅᏍᏓ.'
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: 'Hi!'
+    visitLink: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏣᏙᏢᏍᏗ, ᎯᎠ ᎤᏯᏅᏗ ᏫᎷᎩ'
+    expire: 'ᎯᎠ ᎤᏯᏅᏗ %time% ᎤᏍᏆᏗᏍᏗ.'
+    cheers: 'ᏩᏙ!'
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᎸ'
+    content: 'ᎪᎯᏉ Catrobat ᏕᏣᏙᎥ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᏗ ᏣᏔᏲᏒ. ᎡᎳᏗ ᎦᏁᏍᏛᏗ ᎯᏯᏁᏍᏛᏂ ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏣᏑᏰᏍᏗ. ᎢᏳᏃ ᎯᎠ ᎥᏝ ᏱᏣᏔᏲᏎ, ᎯᎠ email ᎯᏁᎢ.'
+    visitLink: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᎸ'
+    expire: 'ᎯᎠ ᎤᏯᏅᏗ %time% ᎢᏳᏟᎶᏛ ᎣᏏᏳ ᎠᎴ ᏑᏓᎴᎩ ᎤᏩᏒ ᏰᎵ ᎬᏗ.'
   reset:
-    title: "Reset your password"
+    title: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᎸ'
     button:
-      submit: "Reset password"
+      submit: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎢᏤ ᏂᎬᏁᎸ'
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: 'app ᎾᏍᎩᏯ ᎯᏯᏅ'
+  prepare: 'app ᎾᏍᎩᏯ ᎯᏯᏅ'
+  preparing: 'app ᏓᏛᏅᎢᏍᏗᎭ'
+  text: 'ᎯᎠ ᎪᎯᏗᏳ ᏱᎦᏰᏍᏗ'
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: 'ᎪᎱᏍᏗ ᎥᏝ ᏳᏍᏆᏛ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ ᎠᎴᏱᎩ ᏍᎩᏃᎲᏏ ᎢᏳᏃ ᏔᎵᏁ ᏂᎦᎵᏍᏗᏍᎨᏍᏗ!'
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: 'ᏕᏣᏙᎥ ᎥᏝ ᎠᏒᎭ ᏱᎨᏎᏍᏗ'
+    invalid: 'ᏕᏣᏙᎥ ᎥᏝ ᎣᏏᏳ ᏱᎩ'
+    exists: 'ᎯᎠ ᏚᏙᎥ ᎦᏳᎳ ᏰᎭ.'
+    not_exists: 'ᎯᎠ ᏚᏙᎥ ᎥᏝ ᏰᎭ.'
+    not_email: 'ᏕᏣᏙᎥ ᎥᏝ email ᏱᎨᏎᏍᏗ.'
+    size: 'ᏕᏣᏙᎥ ᎤᏍᏗᏉ 3 ᏗᎪᏪᎸ ᎠᎴ ᎥᏝ ᎤᏟ 180 ᏱᎨᏎᏍᏗ'
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎥᏝ ᏰᎭ.'
+    short: 'ᏣᏤᎵ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎤᏍᏗᏉ {{ limit }} ᏗᎪᏪᎸ ᎤᏚᎵ.'
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: 'ᎦᏙᎯ ᎥᏝ ᏰᎭ.'
+    invalid: 'ᎦᏙᎯ ᎥᏝ ᎣᏏᏳ'
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    blank: 'email ᎥᏝ ᎠᏒᎭ ᏱᎨᏎᏍᏗ'
+    invalid: 'ᏣᏤᎵ email ᎥᏝ ᎣᏏᏳ ᏱᎩ'
+    exists: 'ᎯᎠ email ᎦᏳᎳ ᏰᎭ.'
   id:
     blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+  login: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎠᎴᏱᎩ ᏕᏣᏙᎥ ᎥᏝ ᎣᏏᏳ ᏱᎩ.'
+  post-data: 'POST-data ᎥᏝ ᎣᏏᏳ ᎠᎴᏱᎩ ᎥᏝ ᏰᎭ!'
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: 'fileChecksum ᎥᏝ ᏳᏅᏍᏔᏅ! ᎤᏪᏘ Pocket Code ᏣᏁᎭᏍᎪ?'
+    invalid: 'checksum ᎥᏝ ᎣᏏᏳ'
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: 'xml ᎥᏝ ᎣᏏᏳ'
+    missing: 'ᎾᏂᎦᏔᎲᎾ ᎤᏲ: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: 'ᎾᏂᎦᏔᎲᎾ ᎪᏪᎵ ᎦᏩᏛ'
+    invalid: 'ᎪᏪᎵ ᎥᏝ ᎣᏏᏳ'
+  image.missing: 'ᏚᎸᏫᏍᏓᏁᎸ XML ᎪᏪᎵ ᎦᏃᎮᎭ ᎾᏍᎩ ᎥᏝ ᏰᎭ ᏚᎸᏫᏍᏓᏁᎸ ᎾᎿᎢ'
+  unknown: 'ᎾᏂᎦᏔᎲᎾ ᎤᏲ'
+  token: 'ᎠᎾᏌᎢᏍᏗ ᎥᏝ ᎤᏙᎯᏳ ᏱᎩ: auth-token ᎥᏝ ᎣᏏᏳ!'
+  uploadTokenAuthFailed: 'ᎦᏅᏍᏗ Token ᎥᏝ ᎣᏏᏳ.'
   project:
-    invalid: Invalid project.
+    invalid: 'ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᎣᏏᏳ.'
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'ᎤᏲ, ᏚᎸᏫᏍᏓᏁᎸ ᎤᏪᏘ Catrobat ᎦᏬᏂᎯᏍᏗ ᎦᏁᎭ! ᎢᏤ Pocket Code ᏣᏁᎭᏍᎪ?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'ᎤᏲ, ᎤᏪᏘ Pocket Code ᏣᏁᎭ. ᎢᏤ ᎯᏯᏅ.'
   authentication:
-    title: Login did not work
-    webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+    title: 'ᏫᏴᎯᏍᏗ ᎥᏝ ᏳᏍᏆᏛ'
+    webview: "ᏕᏣᏙᎥ ᎠᎴᏱᎩ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎥᏝ ᎣᏏᏳ ᏱᎨᏎ.\napp ᎾᎿᎢ ᏔᎵᏁ ᏫᏴᎭ.\n"
 success:
-  text: Success
-  registration: Registration successful!
+  text: 'ᎣᏍᏓ ᏄᎵᏍᏔᏅ'
+  registration: 'ᏕᏣᏙᎥ ᎣᏍᏓ ᎦᏁᏅ!'
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: 'ᏚᎸᏫᏍᏓᏁᎸ ᎣᏍᏓ ᎤᏅᏍᏔᏅ!'
+  imgUpload: 'ᏗᏟᎶᏍᏔᏅ ᎣᏍᏓ ᎤᏅᏍᏔᏅ!'
+  report: 'ᏣᏃᎲᏎᎸ ᎣᏍᏓ ᎦᏅᏍᏔᏅ!'
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 ᎢᏯᏔᏬᏍᏔᏅ ᏥᎨᏒ |{1}1 ᎢᏯᏔᏬᏍᏔᏅ ᏥᎨᏒ |]1,Inf] %count% ᎢᏯᏔᏬᏍᏔᏅ ᏥᎨᏒ'
+  hours.ago: '{1}1 ᎢᏳᏟᎶᏛ ᏥᎨᏒ |]1,Inf] %count% ᎢᏳᏟᎶᏛ ᏥᎨᏒ'
+  days.ago: '{1}1 ᎢᎦ ᏥᎨᏒ |]1,Inf] %count% ᏧᏒᎯᏛ ᏥᎨᏒ'
+  months.ago: '{1}1 ᏏᏅᏙ ᏥᎨᏒ |]1,Inf] %count% ᏏᏅᏙ ᏥᎨᏒ'
+  years.ago: '{1}1 ᏑᏕᏘᏴᏛ ᏥᎨᏒ |]1,Inf] ᎤᏟ ᏑᏕᏘᏴᏛ ᏥᎨᏒ'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: 'app ᎦᏅᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ.'
 user:
   verification:
-    email: 'Verify your email'
+    email: 'ᏣᏤᎵ email ᎤᏙᎯᏳ ᏂᎬᏁᎸ'
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: 'Email ᎥᏝ ᏰᎭ'
+    emailEmpty: 'Email ᎥᏝ ᎠᏒᎭ ᏱᎨᏎᏍᏗ'
+    emailInvalid: 'Email ᎥᏝ ᎣᏏᏳ'
+    emailAlreadyInUse: 'Email ᎦᏳᎳ ᎠᏂᏁᎭ'
+    usernameMissing: 'ᏚᏙᎥ ᎥᏝ ᏰᎭ'
+    usernameTooShort: 'ᏚᏙᎥ ᎤᏣᏘ ᎦᏅᎯᏛ ᏂᎨᏒᎾ'
+    usernameTooLong: 'ᏚᏙᎥ ᎤᏣᏘ ᎦᏅᎯᏛ'
+    usernameEmpty: 'ᏚᏙᎥ ᎥᏝ ᎠᏒᎭ ᏱᎨᏎᏍᏗ'
+    usernameAlreadyInUse: 'ᏚᏙᎥ ᎦᏳᎳ ᎠᏂᏁᎭ'
+    usernameInvalid: 'ᏚᏙᎥ ᎥᏝ ᎣᏏᏳ'
+    passwordMissing: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎥᏝ ᏰᎭ'
+    passwordEmpty: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎥᏝ ᎠᏒᎭ ᏱᎨᏎᏍᏗ'
+    passwordTooShort: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎤᏣᏘ ᎦᏅᎯᏛ ᏂᎨᏒᎾ'
+    passwordTooLong: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎤᏣᏘ ᎦᏅᎯᏛ'
+    passwordInvalidChars: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎥᏝ ᎣᏏᏳ ᏗᎪᏪᎸ ᎦᏁᎭ'
+    usernameContainsEmail: 'ᏚᏙᎥ ᎥᏝ email ᏱᎦᏁᎮᏍᏗ'
+    usernameContainsLink: 'ᏚᏙᎥ ᎥᏝ ᎤᏯᏅᏗ ᏱᎦᏁᎮᏍᏗ'
+    countryCodeInvalid: 'ᎦᏙᎯ ᏗᎪᏪᎸ ᎥᏝ ᎣᏏᏳ'
+    pictureInvalid: 'ᏕᏣᏙᎥ ᏗᏟᎶᏍᏔᏅ ᎥᏝ ᎣᏏᏳ'
+    dateOfBirthMissing: 'ᎢᎪᎯᏛ ᏣᏕᏅ ᎤᏚᎵ'
+    dateOfBirthInvalid: 'ᎢᎪᎯᏛ ᏣᏕᏅ ᎥᏝ ᎣᏏᏳ'
+    tooYoung: 'ᎤᏍᏗᏉ 3 ᎢᏧᏕᏘᏴᏛ ᎢᏣᏛᎿᏕᎩ ᎨᏎᏍᏗ ᏕᏣᏙᎥ ᏫᏂᏯᏍᏗ'
+    parentEmailMissing: '14 ᎢᏴ ᎢᏯᏂᏛᎾ ᏴᏫ ᎤᏂᏙᏓ email ᎤᏚᎵ'
+    parentEmailInvalid: 'ᎤᏂᏙᏓ email ᎥᏝ ᎣᏏᏳ'
+    parentEmailSameAsUser: 'ᏣᏙᏓ email ᏣᏤᎵ email ᎤᏓᎴᏗ ᎨᏎᏍᏗ'
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: 'ᎪᎯ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎥᏝ ᏰᎭ'
+    currentPasswordWrong: 'ᎪᎯ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎤᏲ'
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'ᏚᏙᎥ ᎥᏝ ᎠᏒᎭ ᏱᎨᏎᏍᏗ'
+    nameTooLong: 'ᏚᏙᎥ ᎤᏣᏘ ᎦᏅᎯᏛ'
+    descriptionTooLong: 'ᎧᏃᎮᏛ ᎤᏣᏘ ᎦᏅᎯᏛ'
+    creditsTooLong: 'ᏗᎪᏪᎸ ᎠᎴ ᏩᏙ ᎤᏣᏘ ᎦᏅᎯᏛ'
+    screenshotInvalid: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᏟᎶᏍᏔᏅ ᎥᏝ ᎣᏏᏳ'
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    invalid_checksum: 'Checksum ᎥᏝ ᎣᏏᏳ. ᏔᎵᏁ ᎯᏅᏍᏓ!'
+    upload_error: 'ᎦᏅᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏔᎵᏁ ᎯᏅᏍᏓ!'
+    creating_error: 'ᏚᎸᏫᏍᏓᏁᎸ ᎦᏙᏢᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏔᎵᏁ ᎯᏅᏍᏓ!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᎧᏃᎮᏛ ᎥᏝ ᏳᏍᏆᏂᎪᏛ.'
+    screenshotError: 'ᏗᏟᎶᏍᏔᏅ ᎥᏝ ᏰᎵ ᏳᎪᎵᏰᎥ ᎠᎴᏱᎩ ᏳᏍᏆᏂᎪᏛ. ᏣᏁᎸ ᎯᎦᏔ.'
+    notFound: 'ᏚᎸᏫᏍᏓᏁᎸ ᎦᏁᏟᏴᏍᏗ ᎥᏝ ᏳᏩᏛ.'
+    forbidden: 'ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᏰᎵ ᏱᏣᏁᏟᏴᏍᏗ. ᎠᏏᏉ ᏤᎭᏍᎪ?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'ᏚᏙᎥ ᎥᏝ ᏰᎭ'
+    nameEmpty: 'ᏚᏙᎥ ᎥᏝ ᎠᏒᎭ ᏱᎨᏎᏍᏗ'
+    nameTooShort: 'ᏚᏙᎥ ᎤᏣᏘ ᎦᏅᎯᏛ ᏂᎨᏒᎾ'
+    nameTooLong: 'ᏚᏙᎥ ᎤᏣᏘ ᎦᏅᎯᏛ'
+    nameAlreadyInUse: 'ᏚᏙᎥ ᎦᏳᎳ ᎠᏂᏁᎭ'
+    descriptionMissing: 'ᎧᏃᎮᏛ ᎥᏝ ᏰᎭ'
+    descriptionEmpty: 'ᎧᏃᎮᏛ ᎠᏒᎭ'
+    descriptionTooShort: 'ᎧᏃᎮᏛ ᎤᏣᏘ ᎦᏅᎯᏛ ᏂᎨᏒᎾ'
+    descriptionTooLong: 'ᎧᏃᎮᏛ ᎤᏣᏘ ᎦᏅᎯᏛ'
+    imageFileInvalid: 'ᏗᏟᎶᏍᏔᏅ ᎪᏪᎵ ᎥᏝ ᎣᏏᏳ'
+    imageFileInvalidType: 'ᏗᏟᎶᏍᏔᏅ ᎪᏪᎵ ᏄᏍᏛ ᎥᏝ ᎣᏏᏳ'
+    imageFileTooLarge: 'ᏗᏟᎶᏍᏔᏅ ᎪᏪᎵ ᎤᏣᏘ ᎡᏆ'
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  arabic: 'ᎠᎴᏈ'
+  bulgarian: 'ᏆᎵᎨᎵ'
+  catalan: 'ᎦᏔᎳᏂ'
+  chinese_simplified_han: 'ᏓᎶᏂᎨ ᏧᏂᏬᏂᎯᏍᏗ (ᎤᏍᏗ ᏗᎪᏪᎸ)'
+  chinese_traditional_han: 'ᏓᎶᏂᎨ ᏧᏂᏬᏂᎯᏍᏗ (ᎢᎸᎯᏳ ᏗᎪᏪᎸ)'
+  croatian: 'ᎧᎶᎡᏏ'
+  czech: 'ᏤᎩ'
+  danish: 'ᏕᏂᏏ'
+  dutch: 'ᏛᏥ'
+  english_united_kingdom: 'ᏲᏁᎦ (ᎩᎵᏏ)'
+  english_united_states: 'ᏲᏁᎦ (ᎠᎹᏰᏟ)'
+  estonian: 'ᎡᏍᏙᏂ'
+  filipino: 'ᏈᎵᏈᏃ'
+  finnish: 'ᏈᏂᏏ'
+  french: 'ᎠᏂᎦᎸᏥ'
+  german: 'ᏙᎢᏥ'
+  greek: 'ᎠᏂᎪᎢ'
+  hebrew: 'ᎠᏂᏧᏏ'
+  hindi: 'ᎯᏂᏗ'
+  hungarian: 'ᎲᎦᎵ'
+  indonesian: 'ᎢᏂᏙᏂᏏ'
+  italian: 'ᎢᏔᎵ'
+  japanese: 'ᏣᏆᏂ'
+  korean: 'ᎪᎵᏯ'
+  latvian: 'ᎳᏘᏈ'
+  lithuanian: 'ᎵᏚᏩᏂ'
+  malay: 'ᎹᎴ'
+  norwegian: 'ᏃᏪ'
+  persian: 'ᏆᏏ'
+  polish: 'ᏉᎵᏏ'
+  portuguese_brazil: 'ᏉᏥᎦᏏ (ᏆᏏᎵ)'
+  portuguese_portugal: 'ᏉᏥᎦᏏ (ᏉᏥᎦᎵ)'
+  romanian: 'ᎶᎹᏂ'
+  russian: 'ᏲᏂᏏ'
+  serbian: 'ᏒᏈ'
+  slovak: 'ᏍᎶᏩᎩ'
+  slovenian: 'ᏍᎶᏪᏂ'
+  spanish_latin_america: 'ᏍᏆᏂ (ᎠᎹᏰᏟ)'
+  spanish_spain: 'ᏍᏆᏂ (ᏍᏆᏂ)'
+  swedish: 'ᏍᏫᏗᏏ'
+  thai: 'ᏔᏱ'
+  turkish: 'ᏛᎩ'
+  ukrainian: 'ᏳᎦᎴᏂ'
+  vietnamese: 'ᏫᎡᏘᎾᎻ'
 ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: 'Disk ᎦᎦᏌᏯᏍᏗ'
+    ramMaintenance: 'RAM ᎦᎦᏌᏯᏍᏗ'
+    noRemovableObjects: 'ᎥᏝ ᎪᎱᏍᏗ ᎦᏛᏗ ᏱᏓᏁᎭ.'
+    removableObjects: 'ᎦᏛᏗ ᏧᏓᎴᏅᏓ'
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: 'ᎾᏍᎩᏯ ᏚᎸᏫᏍᏓᏁᎸᎯ'
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: '%username% ᎤᏟ ᎤᏤᎵ'
 pmd:
-  submitBtn: Submit your project
+  submitBtn: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᏅᏍᏓ'
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: 'ᎦᏅᏍᏗ'
+    text: 'ᏚᎸᏫᏍᏓᏁᎸ ᎯᏅᏍᏗ ᎠᎵᏍᏓᏴᏗᎭ. ᏚᎸᏫᏍᏓᏁᎸ ᏗᎪᏪᎸ ᎪᏪᎳ ᎠᎴ ᎯᏅᏍᏓ ᎯᏯᏁᏍᏛᏂ.'
+    btnText: 'ᎯᏅᏍᏓ'
   successful:
-    text: Your project upload was successful.
+    text: 'ᏚᎸᏫᏍᏓᏁᎸ ᎣᏍᏓ ᎤᏅᏍᏔᏅ.'
   failed:
-    text: Project upload failed.
+    text: 'ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᏳᏅᏍᏔᏅ.'
 codeview:
   title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
-  globals: 'Globals'
-  locals: 'Locals'
+  showCode: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎾᎬᏁ'
+  hideCode: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎯᏍᎦᎳ'
+  showStatistics: 'ᏗᎪᏪᎵ ᏗᏎᏍᏗ ᎾᎬᏁ'
+  hideStatistics: 'ᏗᎪᏪᎵ ᏗᏎᏍᏗ ᎯᏍᎦᎳ'
+  cantDisplayCode: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎥᏝ ᏰᎵ ᏴᎦᎾᏄᎪᏫᏍᏗ'
+  cantDisplayStatistics: 'ᏗᏎᏍᏗ ᎥᏝ ᏰᎵ ᏴᎦᎾᏄᎪᏫᏍᏗ'
+  totalNumberOf: 'ᏂᎦᏛ ᎢᎦᎢ'
+  scenes: 'ᏗᏟᎶᏍᏔᏅ ᎾᎿᎢ'
+  scripts: 'ᏗᎪᏪᎵ'
+  bricks: 'ᏗᎦᎫᏍᏛᏗ'
+  objects: 'ᎠᏂᏁᎸᏗᏍᎩ ᎠᎴ ᏧᏓᎴᏅᏓ'
+  looks: 'ᏄᏍᏛ ᏗᎪᏩᏛᏗ'
+  sounds: 'ᏗᎧᏁᎬ'
+  globals: 'ᏂᎦᏛ ᎤᏂᏤᎵ'
+  locals: 'ᎤᏩᏒ ᎤᏤᎵ'
   globalVariables: 'Global Variables'
   localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
@@ -888,108 +827,108 @@ codeview:
   dataBricks: 'Data Bricks'
   specialBricks: 'Special Bricks'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
-  scripts: 'Scripts'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  title: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎾᎬᏁ'
+  loading: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎦᎷᎯᏍᏗᎭ...'
+  error: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎥᏝ ᏰᎵ ᏳᎷᏨ.'
+  retry: 'ᏔᎵᏁ ᎯᏯᏛᏁᎢ'
+  empty: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᏗᎪᏪᎵ ᏳᎭ.'
+  scripts: 'ᏗᎪᏪᎵ'
+  looks: 'ᏄᏍᏛ ᏗᎪᏩᏛᏗ'
+  sounds: 'ᏗᎧᏁᎬ'
 codeStatistics:
-  title: "Code Statistics"
+  title: 'Code Statistics'
   error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
+  general: 'ᏂᎦᏛ'
+  bricks: 'ᏗᎦᎫᏍᏛᏗ'
+  eventBricks: 'ᏄᎵᏍᏔᏅ'
+  controlBricks: 'ᎦᏁᎶᏗ'
+  motionBricks: 'ᎦᏖᏆᎶᏗ'
+  soundBricks: 'ᎧᏁᎬ'
+  looksBricks: 'ᏄᏍᏛ ᏗᎪᏩᏛᏗ'
   penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  dataBricks: 'ᎧᏃᎮᏛ'
+  deviceBricks: 'ᎠᎾᏌᎢᏍᏗ'
+  specialBricks: 'ᎤᏓᏁᏟᏴᏛ'
+  yourScore: 'ᏣᏤᎵ ᏗᏎᏍᏗ:'
+  points: 'ᏗᏎᏍᏗ'
+  abstraction: 'ᎢᏳᏍᏗ ᎤᎵᏍᏕᎸᏙᏗ ᎠᎴ ᎪᎱᏍᏗ ᏧᏓᎴᏅᏛ ᏗᎬᏁᏗ'
+  parallelism: 'ᏓᏓᏠᏯᏍᏛ ᏄᎵᏍᏔᏁᎲ'
+  logicalThinking: 'ᎣᏍᏓ ᎠᏓᏅᏖᏍᎬ'
+  synchronization: 'ᏑᏟᎶᏛ ᎤᏍᏆᏂᎪᏗ'
+  flowControl: 'ᎢᏳᏍᏗ ᎦᏁᎶᏗ'
+  userInteractivity: 'ᏴᏫ ᎤᏁᏍᏛᏗ'
+  dataRepresentation: 'ᎧᏃᎮᏛ ᎾᏍᎩᏯ'
+  level: 'ᎢᏳᏩᏂᏌᏛ'
+  loading: 'ᎦᎷᎯᏍᏗᎭ...'
+  bonus: 'ᎤᏟ ᏗᏎᏍᏗ'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: '%user_count% ᎠᏂᏏᎾᏌᏂ ᏴᏫ ᏫᏗᏁᏓᏟᏌ!'
+  text: '%project_count% ᎤᏍᏆᏂᎩᏗ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎦᏳᎳ ᏓᏁᎳᏅ, ᏐᎢ ᏣᏤᎵ ᏱᎨᏎᏍᏗ. ᎣᎦᏤᎵ app ᎯᏯᏅ ᎠᎴ ᎪᎯ ᎢᎦ ᎯᎴᏅ'
 privacy-policy:
   header: Privacy Policy
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: 'ᎢᏳᏓᎴᎩ 2.2, 17 ᏚᏂᏅᏗ 2019'
+  text1: 'ᏂᎦᏛ ᎣᏍᏓ ᏗᏍᏕᎸᏗ ᎠᎴ ᏕᏣᏙᎥ ᏗᏨᏁᏗ, ᎩᎶ ᎧᏃᎮᏛ ᏗᏨᏔᏲᏎᏗ ᎤᏚᎵ.'
+  text2: 'ᎣᎦᏤᎵ ᏗᏍᏕᎸᏗ (apps ᎠᎴ websites) ᎣᏍᏓ ᏗᏍᏆᏂᎪᏙᏗ ᎠᎴ ICT ᎠᎴ STEM/STEAM ᏗᏕᎶᏆᏍᏗ ᏗᏓᏲᏍᏗ, Google Analytics, Crashlytics, ᎠᎴ Firebase (Google LLC, USA), ᎠᎴ Dynatrace (Dynatrace LLC, USA) ᏗᏗᏂᎰ ᎢᏳᏍᏗ ᎠᏂᏁᎲ ᎣᎦᏤᎵ ᏗᏍᏕᎸᏗ ᎦᏙᎥᎯᏍᏗ, ᎾᏍᎩᏯ ᎤᏲ ᏄᎵᏍᏔᏅ, ᎢᎪᎯᏛ, ᏗᎪᏪᎵ ᎤᏂᎪᎲ, ᎠᎾᏌᎢᏍᏗ ᏄᏍᏛ, ᎠᎴ network ᎧᏃᎮᏛ. ᎯᎠ ᎧᏃᎮᏛ ᎥᏝ ᏕᏣᏙᎥ ᏱᏚᏓᏠᎯᏍᏛ ᎠᎴ ᎥᏝ ᏣᏤᎵ ᎤᏕᎵᏛ ᎧᏃᎮᏛ ᏱᎦᏁᎭ (IP ᎤᎵᏍᏆᎸᏗ ᎦᏍᎦᎳ). ᎠᏎᏃ ᎧᏃᎮᏛ ᏓᎦᏅᏍᏔᏂ (Google LLC, USA ᎠᎴ Dynatrace LLC, USA). ᎯᎠ EU GDPR ᎠᎴ EU-USA "Privacy Shield" ᏗᎧᎿᏩᏛᏍᏗ ᎾᏍᎩᏯ.'
+  text3: 'ᏕᏣᏙᎥ ᏣᏁᏗ ᎠᎴ email ᎬᏗ ᎧᏃᎮᏛ ᏗᏨᏃᏁᏗ ᏕᏣᏙᎥ ᏚᏓᏠᎯᏍᏛ (ᎾᏍᎩᏯ ᎢᏤ ᏂᎬᏁᎸ ᎠᎴᏱᎩ ᎬᏗ ᏗᎧᎿᏩᏛᏍᏗ ᎦᏲᏍᏔᏅ), ᏕᏣᏙᎥ ᎠᎴ, ᎢᏳᏃ ᏍᎩᏁᎸ, ᏣᏤᎵ email ᏙᏥᏍᏆᏂᎪᏗᏍᎪ. ᎢᏳᏃ Google Plus ᎠᎴᏱᎩ Facebook ᎬᏗ ᏫᏴᎯᏍᎨᏍᏗ, ᎾᏍᏉ ᎪᎱᏍᏗ ᏗᏟᎶᏍᏔᏅ ᏙᏥᏍᏆᏂᎪᏗᏍᎪ. ᎥᏝ ᏅᏩᏓᎴ ᎢᏳᏍᏗ ᏱᏙᏥᏁᎰ, ᎬᏂ ᏍᎩᏁᎸ.'
+  text4: 'ᏣᏚᎵᏍᎨᏍᏗ, ᎦᏙᎯ ᏤᎲ ᏰᎵ ᏍᎩᏃᎲᏏ ᏕᏣᏙᎥ ᎪᏪᎵ ᎬᏗ. ᎯᎠ ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎾᎿᎢ ᏓᎦᎾᏄᎪᏥ ᎠᎴ ᏗᏎᏍᏗ ᎠᎴ ᏗᏓᏲᏍᏗ ᎤᏩᏒ ᎢᏳᏍᏗ ᏙᏥᏁᎵ. ᏂᎪᎯᎸ ᏰᎵ ᎯᏍᏆᏓᏗ ᏕᏣᏙᎥ ᏄᏍᏛ ᎾᎿᎢ.'
+  text5: 'ᏂᎪᎯᎸ ᏰᎵ ᏣᏤᎵ ᎧᏃᎮᏛ ᎬᏗ ᎯᏲᏍᏙᏗ ᏕᏣᏙᎥ ᎯᏍᏆᏓᏍᎬ ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎾᎿᎢ https://share.catrob.at/. ᏕᏣᏙᎥ ᎦᏛᏅ ᎣᏂ, ᎠᏏᏉ ᏰᎵ ᏗᏍᏕᎸᏗ ᏣᏁᏗ, ᎠᏎᏃ ᎥᏝ ᏰᎵ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏱᏣᏅᏍᏗ, ᎧᏃᎮᏛ ᏱᏣᏬᏪᎳᏁᏗ, ᎠᎴᏱᎩ ᏄᏛᏁᎸ ᏱᏣᏁᏗ. ᎾᏍᏉ ᏂᎦᏛ ᏕᏣᏙᎥ ᏚᏓᏠᎯᏍᏛ, ᎾᏍᎩᏯ ᏚᏅᏍᏔᏅ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᎴ ᎧᏃᎮᏛ, ᏓᎦᏛᏔᏂ.'
+  text6: 'ᎣᎦᏤᎵ ᏗᏍᏕᎸᏗ ᎤᏲ ᎬᏗ ᏂᎨᏒᎾ ᎢᏳᏍᏗ, ᏂᎦᏛ ᏴᏫ ᏚᏅᏍᏔᏅ ᎠᎴ ᎧᏃᎮᏛ ᎤᏃᏪᎳᏅ ᏙᏥᏍᏆᏂᎪᏗᏍᎪ, ᎢᎪᎯᏛ ᎠᎴ internet ᎾᎿᎢ ᎤᎷᏨ ᎢᏧᎳᎭ. ᎯᎠ ᎧᏃᎮᏛ ᎥᏝ ᏅᏩᏓᎴ ᏱᏓᏥᏁᎰ, ᎬᏂ ᎤᏲ ᏄᏛᏁᎸ ᎤᏙᎯᏳ ᎤᏰᎸᏗ ᎨᏎᏍᏗ ᎠᎴ ᏗᎧᎿᏩᏛᏍᏗ ᏗᏂᎦᏘᏯ ᎤᏂᏔᏲᏎᎸ. ᎢᎬᏱ ᏂᎦᏛ ᎣᏍᏓ ᏙᏥᎦᏔᏂ.'
+  text7: 'ᏣᏚᎵᏍᎨᏍᏗ, Catrobat ᎧᏃᎮᏛ ᎪᏪᎵ ᏰᎵ ᏣᏩᏛᏗ https://catrob.at/newsletter ᎾᎿᎢ, MailChimp ᎬᏗ (The Rocket Science Group LLC d/b/a MailChimp, USA). Catrobat ᎧᏃᎮᏛ ᏣᏤᎵ email ᏓᎦᏅᏍᏔᏂ. ᏂᎪᎯᎸ ᏰᎵ ᎯᏲᏍᏙᏗ "unsubscribe" ᎤᏯᏅᏗ ᎬᏗ ᏂᎦᏛ ᎧᏃᎮᏛ ᎪᏪᎵ ᎡᎳᏗ. MailChimp EU GDPR ᎠᎴ EU-USA "Privacy Shield" ᎾᏍᎩᏯ ᎢᏯᏛᏁᏗ ᎤᏁᏨ. MailChimp ᎤᏤᎵ ᏗᎧᎿᏩᏛᏍᏗ ᎾᏍᏉ ᎯᎦᏔ.'
+  text8: 'ᏂᎦᏛ ᏗᏍᏕᎸᏗ Catrobat ᎪᎱᏍᏗ ᏂᏓᎬᏩᎶᏛ open source ᏚᎸᏫᏍᏓᏁᎸ ᏓᏁᎰ, International Catrobat Association – Verein zur Förderung freier Software ᎡᎳᏗ, ᎥᏝ ᎠᏕᎳ ᏱᎦᏲᎮ NGO Graz, Austria (European Union) ᎾᎿᎢ. ᎣᎦᏤᎵ ᏗᎧᎿᏩᏛᏍᏗ EU ᎠᎴ Austria ᎧᏃᎮᏛ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ (GDPR) ᎾᏍᎩᏯ. ᏍᎩᏬᏁᏓ, contact@catrobat.org email ᎯᏅᏍᏓ ᎠᎴᏱᎩ ᎪᏪᎵ ᎯᏅᏍᏓ Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).'
+  text9: 'ᎢᏳᏃ 14 ᎢᏴ ᎢᏣᏛᎾ ᎢᎨᏎᏍᏗ, ᏣᎦᏘᏯ (ᏣᏙᏓ) ᎯᎠ ᏗᎧᎿᏩᏛᏍᏗ ᎣᏏᏳ ᎤᏰᎸᏗ ᎨᏎᏍᏗ.'
+  text10: 'Catrobat ᏲᏁᎦ ᎤᏙᎯᏳ ᎤᏕᎵᏛ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ %privacy_policy% ᎾᎿᎢ ᏰᎭ.'
+  disagree-text: 'ᎣᏏᏳ ᏣᏰᎸᏅᎾ, ᎥᏝ ᏰᎵ ᏕᏣᏙᎥ ᏲᏨᏯᏁᏗ ᎠᏎᏃ ᎤᏣᏘ ᎦᎸᏉᏗᏳ ᎪᎱᏍᏗ ᎠᏏᏉ ᏰᎵ ᏣᏁᏗ.'
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: 'ᎪᎵᏯᏅ ᏂᎬᏁᎸ'
+  noFollowers: 'ᎥᏝ ᎠᏂᏍᏓᏩᏗᏙᎯ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
+  noComments: 'ᎥᏝ ᎧᏃᎮᏛ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
+  noReactions: 'ᎥᏝ ᏄᏛᏁᎸ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
+  noRemixes: 'ᎥᏝ ᎢᏤ ᏂᏛᏁᎸ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
+  noStudios: 'ᎥᏝ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
   tab:
-    studio: Studio
-    project: Projects
+    studio: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+    project: 'ᏚᎸᏫᏍᏓᏁᎸᎯ'
   comment:
     message: 'User %user_link% commented on your project %program_link%.'
   like:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% ᎿᏉ ᏣᏍᏓᏩᏗᏙᎰ.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% ᎢᏤ ᎦᏁᏍᎨᏍᏗ ᎤᏙᏢᏅ %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% ᏣᏤᎵ ᎦᏁᏍᎨᏍᏗ %remix_program_link% ᎢᏤ ᏄᏩᏁᎸ %program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% ᎧᏃᎮᏛ ᎤᏬᏪᎳᏅ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ %studio_name% ᎾᎿᎢ.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% %program_link% ᎤᏟᏌᏅ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ %studio_name% ᎾᎿᎢ.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ %studio_name% ᏣᏴᏍᏗ ᏣᏔᏲᏒ ᎣᏏᏳ ᎤᏰᎸᏅ.'
+    declined: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ %studio_name% ᏣᏴᏍᏗ ᏣᏔᏲᏒ ᎦᏲᏍᏔᏅ.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'ᏚᎸᏫᏍᏓᏁᎸ %program_link% ᎤᏩᏒ ᏛᎦᏛᏔᏂ %days% ᏧᏒᎯᏛ ᎣᏂ. ᎢᏤ ᎯᏅᏍᏓ ᎠᎴᏱᎩ ᎤᏟ ᎤᏂᏯᏅ ᎨᏎᏍᏗ ᎤᏍᏆᏂᎪᏙᏗ.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'ᏚᎸᏫᏍᏓᏁᎸ "%project_name%" ᎤᏩᏒ ᎦᏛᏔᏅ ᎪᎱᏍᏗ ᏄᎵᏍᏔᏅᎾ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ. ᏔᎵᏁ ᎯᏅᏍᏓ ᎢᏳᏃ ᎠᏏᏉ ᏕᎯᏁᎳᏗ ᏣᏚᎵᏍᎨᏍᏗ.'
+  noProjects: 'ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: 'ᎤᏯᏅᏗ ᎦᏯᏅ!'
+  success_project: 'ᏚᎸᏫᏍᏓᏁᎸ ᎤᏯᏅᏗ ᎦᏯᏅ!'
+  success_user: 'ᏴᏫ ᎤᏯᏅᏗ ᎦᏯᏅ!'
+  fail: 'ᎤᏯᏅᏗ ᎥᏝ ᏳᏯᏅ! :('
+next: 'ᏐᎢ'
+previous: 'ᎢᎬᏱᏱ'
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: 'ᏗᏟᎶᏍᏔᏅ ᎠᎴ ᏗᎧᏁᎬ ᏗᏍᏆᏂᎪᏗᏱ'
+  description: 'ᎯᎠ ᏧᏓᎴᏅᏛ ᎾᎿᎢ ᏰᎵ ᏣᏩᏛᏗ ᎠᏂᏁᎸᏗᏍᎩ ᎠᎴ ᏧᏓᎴᏅᏓ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏣᏟᏌᏗ.'
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: 'ᎢᎦᎢ ᏗᎪᏩᏛᏗ'
+    sm: 'ᎤᏍᏗ'
+    md: 'ᎠᏰᎵ'
+    lg: 'ᎡᏆ'
+  theme-special: '%flavor% ᎤᏓᏁᏟᏴᏛ'
+  search-results: 'ᏗᏟᎶᏍᏔᏅ ᎠᎴ ᏗᎧᏁᎬ ᏗᏍᏆᏂᎪᏗᏱ ᏣᏩᏛ'
+  no-results: '0 ᏣᏩᏛ. ᏲᏁᎦ ᏲᏍᏗ ᏗᎧᏁᎢᏍᏗ ᎤᏩᏒ ᎬᏗ.'
+  download_these_files: 'ᎯᏍᏆᏂᎪᏓ'
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +936,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. ᏂᎦᏛ ᏗᎧᎿᏩᏛᏍᏗ ᎦᏍᏆᏂᎪᏛ.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: 'ᎯᎠ website JavaScript ᎤᏚᎵ. JavaScript ᎯᎴᏍᏓ ᏣᏤᎵ browser ᎾᎿᎢ ᎠᎴᏱᎩ ᎠᎦᏴᎵ ᏴᏫ ᎯᏯᏛᏛᏂ ᏣᏍᏕᎸᏗ.'
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
-  privacy-link: "Privacy Policy"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  message: 'Cookies ᏗᏗᏂᎰ ᎣᎦᏤᎵ ᏗᏍᏕᎸᏗ ᎤᏟ ᎣᏍᏓ ᏗᎬᏁᏗ. ᎥᏝ ᎧᏃᎮᏛ ᏱᏙᏥᎾᏗᏅᏍᎪ ᎠᎴ ᏱᏓᏥᏁᎰ.'
+  accept: 'ᎣᏏᏳ'
+  decline: 'ᎥᏝ'
+  privacy-link: 'ᎤᏕᎵᏛ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ'
+  settings-link: 'Cookie ᏄᏍᏛ'
+agree: 'ᎣᏏᏳ'
+disagree: 'ᎥᏝ ᎣᏏᏳ'
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: 'ᎪᎯ ᎥᏝ ᏕᎦᏙᎥ ᏗᎪᏪᎵ ᏱᏓᏁᎭ.'
+element: 'ᎪᎱᏍᏗ'
+elements: 'ᏧᏓᎴᏅᏓ'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: 'ᏕᎯᏁᎳ'
+  error: 'ᎥᏝ ᏳᏁᎳᏅ'
+  success: 'ᎣᏍᏓ ᎤᏁᎳᏅ'
+copy: 'ᎤᏯᏅᏗ ᎯᏯᏅ'
+checkOutProject: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎯᎦᏔ:'
+checkOutUser: 'ᎯᎠ ᏴᏫ ᎯᎦᏔ:'
+community: 'Catrobat ᎦᏚᎲ'
+back_to_app: 'ᎦᏚᎲ ᎯᏄᎪᎢ'
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: 'ᎢᏤ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  random: 'ᎪᎱᏍᏗ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  most_viewed: 'ᎤᏟ ᎤᏂᎪᎲ'
+  most_downloaded: 'ᎤᏟ ᎤᏂᏯᏅ'
+  example: 'ᎢᏳᏍᏗ ᏂᎦᎵᏍᏙᏗ'
+  scratch: 'Scratch ᎢᏤ ᏂᏛᏁᎸ'
+  recommended: 'ᎣᏏᏳ ᎠᏂᏪᏍᎩ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  popular: 'ᎤᏟ ᎤᎾᏓᏂᎸᏨ'
+  trending: 'ᎪᎯ ᎤᎾᏓᏂᎸᏨ ᏚᎸᏫᏍᏓᏁᎸᎯ'
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: 'ᏚᏓᏂᎸᏤᎸ'
     badge: 'new'
   overview:
-    header: 'Achievements'
+    header: 'ᏚᏓᏂᎸᏤᎸ'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'ᎢᏤ ᎤᏓᏂᎸᏤᎸ'
+      x_out_of_y: '%unlocked% %total% ᎢᏳᏓᎴᎩ ᎦᏍᏚᎢᏛ'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'ᎦᏍᏚᎢᏛ'
+      empty: 'ᎠᏏ ᎥᏝ ᏚᏓᏂᎸᏤᎸ ᏱᏙᏍᏚᎢᏒ.'
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'ᎦᏍᏚᏛ'
+      empty: 'ᎦᏳᎳ ᏂᎦᏛ ᏚᏓᏂᎸᏤᎸ ᏙᏍᏚᎢᏒ.'
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
-      confirm: "Ok"
+      title: 'ᎣᏍᏓ ᏂᏣᏛᏁᎸ!'
+      subtitle: 'ᏗᏰᎸᏗ ᏣᏩᏛ'
+      confirm: 'Ok'
   profile:
-    title: 'Achievements'
+    title: 'ᏚᏓᏂᎸᏤᎸ'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'ᎠᏕᎶᏆᏍᎩ'
+        description: 'ᎩᎶ ᏍᏓᏩᏗᏓ ᎠᎴ ᏚᎸᏫᏍᏓᏁᎸ ᎯᏅᏍᏓ'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'ᎠᏏᎾᏌᏂ ᏗᎦᎸᏫᏍᏓᏁᎯ'
+        description: 'ᎤᏟ 1 ᏑᏕᏘᏴᏛ ᎦᏚᎲ ᎠᏁᎯ'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'ᎠᏍᎦᏯ ᎠᏏᎾᏌᏂ'
+        description: 'ᎤᏟ 4 ᏧᏕᏘᏴᏛ ᎦᏚᎲ ᎠᏁᎯ'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'ᎤᏟ ᎠᏍᎦᏯ ᎠᏏᎾᏌᏂ'
+        description: 'ᎤᏟ 7 ᏧᏕᏘᏴᏛ ᎦᏚᎲ ᎠᏁᎯ'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'ᎢᎬᏱ ᎤᎴᏅ'
+        description: 'ᎢᎬᏱᏱ ᏕᏣᏙᎥ ᏗᏟᎶᏍᏔᏅ ᎯᏟᏌ'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'ᎢᏤ ᎤᎴᏅ'
+        description: 'ᏕᏣᏙᎥ ᏫᏂᏯ'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: 'Coding Jam 2021 ᎤᏴᏨ'
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: 'ᏔᎵ ᎦᏬᏂᎯᏍᏗ'
+        description: 'ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏔᎵ ᎦᏬᏂᎯᏍᏗ ᎯᏁᏟᏴᏍᏓ'
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: 'ᏦᎢ ᎦᏬᏂᎯᏍᏗ'
+        description: 'ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏦᎢ ᎦᏬᏂᎯᏍᏗ ᎯᏁᏟᏴᏍᏓ'
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: 'ᎦᏬᏂᎯᏍᏗ ᎠᏏᎾᏌᏂ'
+        description: 'ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᎯᏍᎩ ᎦᏬᏂᎯᏍᏗ ᎯᏁᏟᏴᏍᏓ'
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: 'ᎤᏙᎯᏳ'
+        description: 'ᏕᏣᏙᎥ ᎤᏙᎯᏳ ᏂᎬᏁᎸ'
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} ᏚᏙᎥ ᎪᏪᎸ |]1,Inf] ᏚᏙᎥ ᏗᎪᏪᎸ'
   tag:
     game:
-      title: Game
+      title: 'ᎦᏁᏍᎨᏍᏗ'
     animation:
-      title: Animation
+      title: 'ᏗᏟᎶᏍᏔᏅ ᏓᏅᏃᏍᎩ'
     story:
-      title: Story
+      title: 'ᎧᏃᎮᏛ'
     music:
-      title: Music
+      title: 'ᏗᎧᏃᎩᏍᏗ'
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: 'ᎢᏤ ᎠᏓᏁᏟᏴᏍᏗ'
     tutorial:
-      title: Tutorial
+      title: 'ᏗᏕᏲᏗ'
     coding_jam_09_2021:
-      title: "#catrobatfestival2021"
+      title: '#catrobatfestival2021'
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} ᎤᏟ ᎢᏯᏛᏁᏗ |]1,Inf] ᎤᏟ ᎢᏯᏛᏁᏗ'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: 'ᎤᏩᏒ ᎠᎾᎵᏍᎩ'
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: 'ᎠᏍᏚᏢᏍᏗ'
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: 'ᎤᏂᏣᏘ ᏓᎾᏁᏍᎩ'
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  cancel_studio: 'Cancel'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
-  report: 'Report'
-  public: 'public'
-  private: 'Invite-only'
+  title: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+  singular: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+  create_studio: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏙᏢ'
+  delete_studio: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎯᏍᏆᏓ'
+  cancel_studio: 'ᎯᏲᏍᏓ'
+  studio_name: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᏙᎥ'
+  studio_description: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎧᏃᎮᏛ'
+  is_public: 'ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏂᎬᏁᎸᏍᎪ?'
+  enable_comments: 'ᎧᏃᎮᏛ ᎣᏏᏳ ᏂᎬᏁᎸᏍᎪ?'
+  cover_image: 'ᎢᎬᏱᏱ ᏗᏟᎶᏍᏔᏅ ᎯᏅᏍᏓ'
+  cover_image_empty: 'ᎥᏝ ᏗᏟᎶᏍᏔᏅ ᏱᏣᏑᏰᏎ.'
+  cover_image_hint: 'ᎤᏟ ᎢᏯᏆ 1 MB. JPEG, PNG, GIF, WebP ᎣᏏᏳ.'
+  cover_image_compressed: 'ᏗᏟᎶᏍᏔᏅ ᎤᏩᏒ ᎤᏍᏗ ᏂᎦᎵᏍᏔᏅ 1 MB ᎤᏓᏁᏍᏗ.'
+  cover_image_compressing: 'ᏗᏟᎶᏍᏔᏅ ᎤᏍᏗ ᏂᎦᎵᏍᏗᎭ...'
+  cover_image_still_too_large: 'ᏗᏟᎶᏍᏔᏅ ᎠᏏᏉ ᎤᏣᏘ ᎡᏆ. ᎤᏟ ᎤᏍᏗ ᎪᏪᎵ ᎯᏑᏰᏍᏓ.'
+  cover_image_invalid_type: 'ᏗᏟᎶᏍᏔᏅ ᏄᏍᏛ ᎥᏝ ᎣᏏᏳ. JPEG, PNG, GIF, ᎠᎴᏱᎩ WebP ᎬᏗ.'
+  cover_image_compression_failed: 'ᏗᏟᎶᏍᏔᏅ ᎥᏝ ᏰᎵ ᏱᎦᏛᏁᏗ. ᏅᏩᏓᎴ ᎪᏪᎵ ᎯᏯᏛᏁᎢ.'
+  cover_image_alt: 'ᏣᏤᎵ ᎢᎬᏱᏱ ᏗᏟᎶᏍᏔᏅ'
+  cover_image_remove: 'ᏗᏟᎶᏍᏔᏅ ᎯᏍᏆᏓ'
+  popular: 'ᎤᎾᏓᏂᎸᏨ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+  join: 'ᏫᏴᎭ'
+  leave: 'ᎯᏄᎪᎢ'
+  report: 'ᎯᏃᎲᏏ'
+  public: 'ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ'
+  private: 'ᎦᏯᏂᏍᎬ ᎤᏩᏒ'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'Open'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
-    cancel: 'Cancel'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    joined_studios: 'ᏣᏴᏨ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+    public_studios: 'ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+    private_studios: 'ᎦᏯᏂᏍᎬ ᎤᏩᏒ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+    no_studios: 'ᎠᏏ ᎥᏝ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏱᏓᏁᎭ'
+    my_studios: 'ᎠᏆᏤᎵ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
+    explore: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏲᎦ'
+    no_joined: 'ᎠᏏ ᎥᏝ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏱᏣᏴᏨ'
+    joined: 'ᏣᏴᏨ'
+    load_more: 'ᎤᏟ ᎾᎬᏁ'
+    open: 'ᏍᏚᎢᎦ'
+    share: 'ᏕᎯᏁᎳ'
+    share_success: 'ᎤᏯᏅᏗ ᎦᏯᏅ!'
+    leave_confirm_title: 'ᎯᎠ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎯᏄᎪᎢᏍᎪ?'
+    cancel: 'ᎯᏲᏍᏓ'
+    cancel_request: 'ᏣᏔᏲᏒ ᎯᏲᏍᏓ'
+    cancel_request_confirm_title: 'ᏣᏴᏍᏗ ᏣᏔᏲᏒ ᎯᏲᏍᏓᏍᎪ?'
+    admin: 'ᎠᎦᏘᏯ'
+    member: 'ᎠᏁᎯ'
   details:
-    add_project: 'click to add the project'
+    add_project: 'ᎯᏯᏁᏍᏛᏂ ᏚᎸᏫᏍᏓᏁᎸ ᏣᏟᏌᏗ'
     add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
-    delete_it: 'Delete'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    showMore: 'ᎤᏟ ᎾᎬᏁ'
+    showLess: 'ᎤᏍᏗ ᎾᎬᏁ'
+    are_you_sure: 'ᎤᏙᎯᏳᏍᎪ?'
+    no_way_of_return: 'ᎯᎠ ᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ.'
+    delete_it: 'ᎯᏍᏆᏓ'
+    remove_project: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎯᏄᎪᏩ'
+    remove_project_error: 'ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᏰᎵ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏳᏄᎪᏤ.'
+    remove_project_success: 'ᏚᎸᏫᏍᏓᏁᎸ ᎣᏍᏓ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎤᏄᎪᏤ.'
+    no_projects: 'ᎠᏏ ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏱᏓᏁᎭ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ.'
     projects:
-      title: 'Projects'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
-      download: 'Download'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
-    report: 'Report'
-    pending: 'Pending'
-    decline: 'Declined'
+      title: 'ᏚᎸᏫᏍᏓᏁᎸᎯ'
+      addProject: 'ᏚᎸᏫᏍᏓᏁᎸᎯ ᎯᏟᏌ'
+      open_project: 'ᏚᎸᏫᏍᏓᏁᎸ ᏍᏚᎢᎦ'
+      download: 'ᎯᏯᏅ'
+      share: 'ᏕᎯᏁᎳ'
+      remove_from_studio: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎯᏄᎪᏩ'
+      remove_from_studio_title: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎯᏄᎪᏩᏍᎪ?'
+      remove_from_studio_text: 'ᎣᏂ ᏔᎵᏁ ᏰᎵ ᎯᏟᏌᏗ ᎢᏳᏃ ᏣᏓᏅᏖᏍᎬ ᏣᏁᏟᏴᏍᎨᏍᏗ.'
+      share_success: 'ᎤᏯᏅᏗ ᎦᏯᏅ!'
+      share_fail: 'ᎤᏯᏅᏗ ᎥᏝ ᏳᏯᏅ.'
+      no_projects_empty_state: 'ᎠᏏ ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏣᏟᏌᏗ ᏱᏣᎭ. ᎢᎬᏱ Pocket Code ᎾᎿᎢ ᏑᏓᎴᎩ ᏙᏢ!'
+      add_selected: 'ᏣᏑᏰᏒ ᎯᏟᏌ'
+    no_available_projects: 'ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏣᏟᏌᏗ ᏱᏓᏁᎭ.'
+    updateCoverError: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎢᎬᏱᏱ ᏗᏟᎶᏍᏔᏅ ᎦᏁᏟᏴᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ.'
+    join: 'ᏫᏴᎭ'
+    leave: 'ᎯᏄᎪᎢ'
+    report: 'ᎯᏃᎲᏏ'
+    pending: 'ᎠᏏ ᎠᎦᏘᏍᎪ'
+    decline: 'ᎦᏲᏍᏔᏅ'
     comments:
-      title: 'Comments'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      title: 'ᎧᏃᎮᏛ'
+      type_something: 'ᎪᎱᏍᏗ ᎪᏪᎳ'
+      replies: 'ᏓᏁᏤᎸ'
+      send: 'ᎯᏅᏍᏓ'
+      no_comments: 'ᎠᏏ ᎥᏝ ᎧᏃᎮᏛ ᏱᏓᏁᎭ ᎯᎠ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ.'
+      disabled_comments: 'ᎯᎠ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎧᏃᎮᏛ ᎦᏍᏚᏛ.'
+      remove_comment: 'ᎧᏃᎮᏛ ᎯᏍᏆᏓ'
+      post_error: 'ᏣᏤᎵ ᎧᏃᎮᏛ ᎦᏅᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+      remove_error: 'ᎧᏃᎮᏛ ᎦᏛᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'ᏄᏛᏁᎸ'
+      join_studio: '%user% ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎤᏴᏨ.'
+      add_project: '%user% ᏚᎸᏫᏍᏓᏁᎸ ᎤᏟᏌᏅ.'
+      add_comment: '%user% ᎧᏃᎮᏛ ᎤᏬᏪᎳᏅ.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎠᏁᎯ'
+      project_count: '{0} ᎥᏝ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᎸᏫᏍᏓᏁᎸᎯ |{1} 1 ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᎸᏫᏍᏓᏁᎸ |]1,Inf] %count% ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+      no_studio_projects: 'ᎥᏝ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+      one_studio_project: '1 ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᎸᏫᏍᏓᏁᎸ'
+      n_studio_projects: '%count% ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᎸᏫᏍᏓᏁᎸᎯ'
+      promote_member: 'ᎠᏁᎯ ᎠᎦᏘᏯ ᏂᎬᏁᎸ'
+      promotion_failed: 'ᎯᎠ ᎠᏁᎯ ᎠᎦᏘᏯ ᏂᎬᏁᎲ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+      ban_member: 'ᎠᏁᎯ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎯᏄᎪᏩ'
+      ban_failed: 'ᎯᎠ ᎠᏁᎯ ᎦᏄᎪᏫᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+      demote_member: 'ᎠᎦᏘᏯ ᎠᏁᎯ ᏂᎬᏁᎸ'
+      demotion_failed: 'ᎯᎠ ᎠᎦᏘᏯ ᎠᏁᎯ ᏂᎬᏁᎲ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+      last_admin: 'ᎤᎵᏍᏆᎸᏗ ᎠᎦᏘᏯ ᎥᏝ ᏰᎵ ᎠᏁᎯ ᏱᏂᎬᏁᏗ.'
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      title: 'ᎤᏂᏴᏍᏗ ᎤᏂᏔᏲᏒ'
+      accept: 'ᎣᏏᏳ'
+      decline: 'ᎥᏝ'
+      accept_success: 'ᎤᏴᏍᏗ ᎤᏔᏲᏒ ᎣᏏᏳ ᎤᏰᎸᏅ.'
+      decline_success: 'ᎤᏴᏍᏗ ᎤᏔᏲᏒ ᎦᏲᏍᏔᏅ.'
+      error: 'ᎪᎱᏍᏗ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+      no_requests: 'ᎥᏝ ᎤᏂᏴᏍᏗ ᎤᏂᏔᏲᏒ ᏱᏓᏁᎭ.'
     show_more: 'More information'
     show_less: 'Less information'
     admin_settings:
-      title: 'Settings'
-      studio_name: 'Studio Name'
-      studio_description: 'Description'
-      toggle_allow_comments: 'Comments'
-      toggle_privacy: 'Public'
+      title: 'ᏄᏍᏛ'
+      studio_name: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏚᏙᎥ'
+      studio_description: 'ᎧᏃᎮᏛ'
+      toggle_allow_comments: 'ᎧᏃᎮᏛ'
+      toggle_privacy: 'ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'ᎢᎦᎢ: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: 'ᏄᏍᏛ: ᏗᏟᎶᏍᏔᏅ'
+      project: 'ᏄᏍᏛ: ᏚᎸᏫᏍᏓᏁᎸ'
+      sound: 'ᏄᏍᏛ: ᎧᏁᎬ'
+      movie: 'ᏄᏍᏛ: ᏗᏟᎶᏍᏔᏅ ᏓᏅᏃᏍᎩ'
+      default: 'ᏄᏍᏛ: ᎾᏂᎦᏔᎲᎾ'
+  no_categories: 'ᎠᏏ ᎥᏝ ᏧᏓᎴᏅᏛ ᏱᏓᏁᎭ.'
+  no_results: 'ᎥᏝ ᎪᎱᏍᏗ ᏳᏩᏛ.'
+  assets_count: 'ᏧᏓᎴᏅᏓ'
+  view_all: 'ᏂᎦᏛ ᎯᎦᏔ'
+  view_all_category: 'ᏂᎦᏛ %category% ᎯᎦᏔ'
+  back_to_app: 'app ᏫᏤᎪᎢ'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'ᏣᏲᎲ ᏚᎸᏫᏍᏓᏁᎸ ᎥᏝ ᏰᎭ'
+  project_not_for_kids: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᏂᎬᏁᎸ!'
+  project_safe_for_kids: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᏂᏲᎵ ᎣᏏᏳ ᏂᎬᏁᎸ!'
+  project_not_for_kids_moderator: 'ᎠᎦᏘᏯ ᏚᎸᏫᏍᏓᏁᎸ ᎤᏬᏪᎳᏅ. ᎥᏝ ᏰᎵ ᏔᎵᏁ ᏱᏗᎬᏁᏗ!'
+  project_set_private: 'ᏚᎸᏫᏍᏓᏁᎸ ᎤᏕᎵᏛ ᏂᎬᏁᎸ.'
+  project_set_public: 'ᏚᎸᏫᏍᏓᏁᎸ ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ ᏂᎬᏁᎸ.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'ᎤᏟ ᎧᏃᎮᏛ: additionalInfo'
+    feature_1: 'featureName ᎥᏝ ᏰᎭ maintenanceStart ᏅᏓᏳᏓᎴᏅᎯ maintenanceEnd ᎢᏯᏍᏗ'
+    feature_2: 'ᎪᎱᏍᏗ ᎢᏯᏛᏁᏗ'
+    feature_3: 'ᎪᎱᏍᏗ ᎢᏯᏛᏁᏗ'
+MarkNotForKids: 'ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᏂᎬᏁᎸ'
+MarkSafeForKids: 'ᏗᏂᏲᎵ ᎣᏏᏳ ᏂᎬᏁᎸ'
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: 'ᎤᏙᎯᏳ ᏂᎬᏁᎸ'
+  confirmMark: 'ᎤᏙᎯᏳᏍᎪ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᏂᎬᏁᏗ ᏣᏚᎵ?'
+  confirmUnmark: 'ᎤᏙᎯᏳᏍᎪ ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᎪᏪᎸ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎯᏍᏆᏓ ᏣᏚᎵ?'
+  confirmYes: 'ᎥᎥ, ᎮᎾ!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'ᎯᎠ %content_type% ᎯᏃᎲᏏ'
+    reason_placeholder: 'ᎦᏙᏃ ᎯᎠ ᎯᏃᎲᏏ ᎪᏪᎳ...'
+    submit: 'ᏣᏃᎲᏎᎸ ᎯᏅᏍᏓ'
+    success: 'ᏣᏃᎲᏎᎸ ᎦᏅᏍᏔᏅ. ᏩᏙ.'
+    error: 'ᎪᎱᏍᏗ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+    duplicate: 'ᎦᏳᎳ ᎯᎠ ᏣᏃᎲᏎᎸ.'
+    trust_too_low: 'ᏕᏣᏙᎥ ᎤᏣᏘ ᎢᏤ ᎯᏃᎲᏏᏍᏗ.'
+    unverified: 'ᏫᏴᎭ ᎠᎴ ᏣᏓᏍᏆᏂᎪᏗ ᏕᏣᏙᎥ email ᎤᏙᎯᏳ ᎨᏎᏍᏗ.'
+    rate_limited: 'ᎤᏣᏘ ᏂᏣᎦᏲᎾ ᏕᎯᏃᎲᏍᎦ. ᎯᎦᏘᏓ ᎠᎴ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+    suspended: 'ᏕᏣᏙᎥ ᎠᎦᏘᏴᏒ.'
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
-    cancel: "Cancel"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    button: 'ᎯᏬᏂᏏ'
+    title: 'ᎯᎠ ᎤᏁᏨ ᎯᏬᏂᏏ'
+    placeholder: 'ᎦᏙᏃ ᎯᎠ ᎥᏝ ᎦᏍᎦᎳ ᏱᎨᏎᏍᏗ ᎪᏪᎳ...'
+    submit: 'ᏣᏬᏂᏒ ᎯᏅᏍᏓ'
+    cancel: 'ᎯᏲᏍᏓ'
+    success: 'ᏣᏬᏂᏒ ᎦᏅᏍᏔᏅ ᎦᎦᏙᏗ.'
+    already_pending: 'ᎦᏳᎳ ᏣᏬᏂᏒ ᎠᏏ ᎠᎦᏘᏍᎪ.'
+    error: 'ᎪᎱᏍᏗ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+    rate_limited: 'ᎤᏣᏘ ᏂᏣᎦᏲᎾ ᏕᎯᏬᏂᏍᎦ. ᎯᎦᏘᏓ ᎠᎴ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: 'ᎤᏣᏘ ᏂᏣᎦᏲᎾ ᎧᏃᎮᏛ ᏕᎯᏅᏍᎦ. ᎤᏍᏗ ᎯᎦᏘᏓ.'
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: 'ᎤᏣᏘ ᏂᏣᎦᏲᎾ ᏄᏛᏁᎸ ᏕᎯᏁᎦ. ᎤᏍᏗ ᎯᎦᏘᏓ.'
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: 'ᎤᏣᏘ ᏂᏣᎦᏲᎾ ᏍᏓᏩᏗᏙᎰ/ᏕᎯᏲᏍᏗᏍᎦ. ᎤᏍᏗ ᎯᎦᏘᏓ.'
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: 'ᎤᏣᏘ ᏂᏣᎦᏲᎾ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏕᎭᎸᏫᏍᏓᏁᎭ. ᎤᏍᏗ ᎯᎦᏘᏓ.'
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎦᏍᎦᎳ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ.'
+    comment: 'ᎯᎠ ᎧᏃᎮᏛ ᎦᏍᎦᎳ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ.'
+    user: 'ᎯᎠ ᏚᏙᎥ ᏗᎪᏪᎵ ᎦᏍᎦᎳ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ.'
+    user_own: 'ᏕᏣᏙᎥ ᎠᎦᏘᏴᏒ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ. ᏰᎵ ᎯᎠ ᎤᏁᏨ ᏣᏬᏂᏍᏗ.'
+    studio: 'ᎯᎠ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎦᏍᎦᎳ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ.'
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: 'ᏣᏤᎵ %content_type% ᎦᏍᎦᎳ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ. ᏰᎵ ᎯᎠ ᎤᏁᏨ ᏣᏬᏂᏍᏗ.'
+    appeal_approved: 'ᏣᏬᏂᏒ ᎣᏏᏳ ᎤᏰᎸᏅ. ᏣᏤᎵ ᎿᏉ ᏔᎵᏁ ᎦᎪᏩᏛ.'
+    appeal_rejected: 'ᏣᏬᏂᏒ ᎦᎦᏔᏅ ᎠᎴ ᎦᏍᎦᎳ ᎢᏳᏍᏗ ᎤᏁᏨ ᎠᏏᏉ ᏂᎦᏍᏗ.'
+    admin_review_needed: 'ᎪᎱᏍᏗ ᎤᏩᏒ ᎦᏍᎦᎳ ᎠᎴ ᎦᎦᏙᏗ ᎤᏚᎵ.'
+Reports: 'ᏗᎦᏃᎲᏍᎩ'
+members: 'ᎠᏁᎯ'
