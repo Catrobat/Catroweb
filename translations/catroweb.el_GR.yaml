@@ -1,666 +1,665 @@
 ---
 #homepage translation
 title: Catrobat κοινότητα
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: Αγγλικά
-username: Username
-password: Password
-createNewPassword: Create new password
-accountSettings: Account Settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
+meta.description: 'Μοιράσου, ανακάλυψε και ανακατασκεύασε δημιουργικά έργα φτιαγμένα με το Catrobat. Γίνε μέλος μιας παγκόσμιας κοινότητας νέων δημιουργών που φτιάχνουν παιχνίδια, κινούμενα σχέδια και εφαρμογές.'
+meta.description.media.library: 'Περιηγήσου και κατέβασε δωρεάν πολυμέσα για το Catrobat — ήχους, εικόνες και πολλά άλλα για τα έργα σου.'
+meta.og.title.login: 'Σύνδεση στο Catrobat'
+meta.og.description.login: 'Συνδέσου για να μοιραστείς τα έργα σου στο Catrobat με την κοινότητα.'
+meta.og.title.register: 'Δημιούργησε λογαριασμό Catrobat'
+meta.og.description.register: 'Γίνε μέλος της κοινότητας Catrobat και ξεκίνα σήμερα να μοιράζεσαι τα δημιουργικά σου έργα.'
+meta.og.description.profile: 'Ο χρήστης %username% στο Catrobat – δες τα έργα και τα επιτεύγματά του.'
+localLanguage: 'Ελληνικά'
+username: 'Όνομα χρήστη'
+password: 'Κωδικός πρόσβασης'
+createNewPassword: 'Δημιούργησε νέο κωδικό πρόσβασης'
+accountSettings: 'Ρυθμίσεις λογαριασμού'
+email: 'Email'
+aboutPocketCode: 'Σχετικά με το Pocket Code'
 about: Σχετικά με το Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
-tutorials: Help
+education: 'Εκπαίδευση'
+chat: 'Συνομιλία και φόρουμ'
+privacyGuide: 'Οδηγός ευαισθητοποίησης για το απόρρητο'
+others: 'Άλλα'
+tutorials: 'Βοήθεια'
 googlePlay: Google Play
-iosAppStore: IOS App store
+iosAppStore: 'App Store για iOS'
 instagram: Instagram
-discordChat: Discord chat
+discordChat: 'Συνομιλία στο Discord'
 passwordsNoMatch: Οι κωδικοί πρόσβασης δεν ταιριάζουν.
-error: Oops!
+error: 'Ωχ!'
 cancel: Ακύρωση
 confirm: Επιβεβαίωση
 report: Αναφορά
 report.title: Αναφορά
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-name: Name
-description: Description
+deleteIt: 'Ναι, διάγραψέ το!'
+reportIt: 'Ναι, ανάφερέ το!'
+areYouSure: 'Είσαι σίγουρος/η;'
+noWayOfReturn: 'Οι ενέργειές σου δεν μπορούν να αναιρεθούν!'
+download: 'Λήψη'
+name: 'Όνομα'
+description: 'Περιγραφή'
 noDescription: Δεν υπάρχει διαθέσιμη περιγραφή.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+credits: 'Ευχαριστίες'
+noCredits: 'Δεν υπάρχουν διαθέσιμες ευχαριστίες.'
+notesAndCreditsDescription: 'Πώς δημιούργησες αυτό το έργο; Χρησιμοποίησες ιδέες, σενάρια ή γραφικά από άλλους; Ευχαρίστησέ τους εδώ.'
+projectImportedFromScratch: 'Αυτό το έργο εισήχθη από το MIT Scratch. Μπορείς να δεις το αρχικό έργο'
+scratchImportedProjectLinkHere: 'εδώ.'
 country: Χώρα
 loginText: Σύνδεση
 privacyPolicy: Πολιτική απορρήτου
-imprint: Εντύπωσε
-projectDetails: Details
+imprint: 'Νομικές πληροφορίες'
+projectDetails: 'Λεπτομέρειες'
 somethingWentWrong: 'Ούπς, κάτι πήγε στραβά...'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'Παρακαλώ δοκιμάστε ξανά!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Παρακαλούμε ενημερώστε στην νεότερη έκδοση Pocket Code!'
+accountNotVerified: 'Βεβαιώσου ότι έχεις συνδεθεί και ότι το email του λογαριασμού σου έχει επαληθευτεί.'
+accountSuspended: 'Ο λογαριασμός σου έχει ανασταλεί λόγω αναφορών της κοινότητας. Μπορείς να προσφύγεις κατά αυτής της απόφασης από το προφίλ σου.'
+doesNotExist: 'Το ζητούμενο στοιχείο δεν υπάρχει.'
+pleaseTryAgain: 'Δοκίμασε ξανά!'
+tryAgainButton: 'Δοκίμασε ξανά'
+oldVersionError: 'Ενημέρωσε το Pocket Code στη νεότερη έκδοση!'
 more: 'Περισσότερα'
 less: 'λιγότερο'
-show-more: 'More information'
-show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+show-more: 'Περισσότερες πληροφορίες'
+show-less: 'Λιγότερες πληροφορίες'
+more-information: 'Περισσότερες πληροφορίες'
+less-information: 'Λιγότερες πληροφορίες'
+ok: 'Εντάξει'
+clickToDownloadProgram: 'Για να κατεβάσεις το παράδειγμα, κάνε κλικ %link_start% εδώ %link_end%.'
 registrationError: 'Το όνομα χρήστη ή το email χρησιμοποιούνται ήδη.'
 notifications: 'Ειδοποιήσεις'
-allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+allNotifications: 'Όλες'
+FollowersNotifications: 'Ακόλουθοι'
+LikeNotifications: 'Αντιδράσεις'
 CommentNotifications: 'Σχόλια'
 RemixNotifications: 'Ανακατασκευές'
 wellDone: "Πολύ καλά!"
 done: "Ολοκληρώθηκε!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+notificationsReadMessage: 'Φαίνεται ότι δεν έχεις καμία ειδοποίηση.'
+confirmMessage: 'Ναι, διάγραψέ το'
 cancelMessage: "Ακύρωση"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: 'Δεν ήταν δυνατή η εξουσιοδότηση του χρήστη'
 notificationsClearError: "Δεν είναι δυνατή η επισήμανση των ειδοποιήσεων ως αναγνωσμένες!"
-pleaseWait: "Παρακαλώ περιμένετε..."
-projects: "Προγράμματα"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+pleaseWait: "Περίμενε..."
+projects: 'Έργα'
+users: 'Χρήστες'
+studios: 'Στούντιο'
+oauthPopUpTitle: 'Πληροφορίες σύνδεσης με εξωτερικό λογαριασμό'
+oauthInfo: 'Μόλις συνδέθηκες με εξωτερικό λογαριασμό. Δημιουργήσαμε για σένα ένα τυχαίο όνομα χρήστη. Αν θέλεις να αλλάξεις το όνομα χρήστη ή να ορίσεις νέο κωδικό πρόσβασης για τον λογαριασμό σου, πήγαινε στη σελίδα του προφίλ σου.'
+oauthHere: 'εδώ'
+statistics: 'Στατιστικά'
+languageSelection: 'Επιλογή γλώσσας'
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: 'Θέμα'
+  auto: 'Σύστημα'
+  auto_description: 'Ακολουθεί τη ρύθμιση της συσκευής σου'
+  light: 'Φωτεινό'
+  light_description: 'Φωτεινή εμφάνιση'
+  dark: 'Σκοτεινό'
+  dark_description: 'Σκοτεινή εμφάνιση'
+  apply: 'Εφαρμογή'
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Ποια έργα προτείνονται εδώ;'
+      description: 'Όσο περισσότερες αντιδράσεις (μπράβο, χαμόγελο ...) παίρνει το έργο σου, τόσο πιο ψηλά εμφανίζεται σε αυτή τη λίστα.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: 'Ακολουθείς'
+  followers: 'Ακόλουθοι'
+  follow: 'Ακολούθησε'
+  username: 'Χρήστης'
+  followsMe: 'Με ακολουθεί'
+  noFollowing: 'Δεν ακολουθείς κανέναν προς το παρόν.'
+  noFollowers: 'Δεν έχεις ακόλουθους προς το παρόν.'
+  noOtherFollowing: 'Δεν υπάρχουν χρήστες που ακολουθεί προς το παρόν.'
+  noOtherFollowers: 'Δεν υπάρχουν ακόλουθοι προς το παρόν.'
+  followError: ' Δεν ήταν δυνατό να ακολουθήσεις αυτόν τον χρήστη αυτή τη στιγμή.'
+  unfollowError: ' Δεν ήταν δυνατό να σταματήσεις να ακολουθείς αυτόν τον χρήστη αυτή τη στιγμή.'
+  unfollowQuestion: 'Σίγουρα θέλεις να σταματήσεις να ακολουθείς αυτόν τον χρήστη;'
+  unfollowButton: 'Σταμάτα να ακολουθείς τον %username%'
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: Open
-  download: Download
+    title: 'Καλώς ήρθες στο %theme% του Catrobat'
+    title_mindstorms: 'Καλώς ήρθες στον ιστότοπο του Catrobat για Mindstorms EV3 και NXT'
+    subtitle: 'Δημιούργησε ιστορίες, παιχνίδια και πολλά άλλα...'
+    subtitle_embroidery: 'Κέντησε τα δικά σου σχέδια σε μπλουζάκια, τσάντες, παντελόνια ή θήκες κινητού!'
+    subtitle_mindstorms: 'Δημιούργησε τα δικά σου έργα με τα ρομπότ Lego Mindstorms EV3 και NXT'
+    download: 'Κατέβασε την εφαρμογή'
+    statistics: 'Περισσότερα στατιστικά'
+  featured: 'Προτεινόμενα'
+  open: 'Άνοιγμα'
+  download: 'Λήψη'
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: 'Ανέβασμα έργου'
+    drop_here: 'Σύρε και άφησε το αρχείο .catrobat εδώ'
+    or_browse: 'ή κάνε κλικ για αναζήτηση'
+    button: 'Ανέβασμα'
+    uploading: 'Ανέβασμα...'
+    success: 'Το έργο ανέβηκε με επιτυχία!'
+    view_project: 'Προβολή έργου'
+    upload_another: 'Ανέβασε κι άλλο'
+    invalid_file: 'Επίλεξε ένα αρχείο .catrobat'
+    file_too_large: 'Το αρχείο είναι πολύ μεγάλο'
+    error: 'Το ανέβασμα απέτυχε. Δοκίμασε ξανά.'
+    unauthorized: 'Πρέπει να συνδεθείς για να ανεβάσεις έργα.'
+    rate_limited: 'Πάρα πολλά ανεβάσματα. Δοκίμασε ξανά αργότερα.'
+    selected_file: 'Επιλεγμένο αρχείο:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
+      file_size: 'Το μέγιστο μέγεθος αρχείου είναι 100 MB.'
+      app_upload: 'Μπορείς επίσης να ανεβάσεις έργα απευθείας από την εφαρμογή Pocket Code. Σημείωση: οι εφαρμογές ανανεώνονται αυτή τη στιγμή και δεν υποστηρίζουν προς το παρόν ανέβασμα μέσω web.'
+      retention: 'Τα έργα που ανεβαίνουν αφαιρούνται αυτόματα μετά από ένα διάστημα αδράνειας. Συνδέσου τακτικά ή κέρδισε λήψεις για το έργο σου για να παραταθεί η διατήρησή του.'
+      protection: 'Ιδιαίτερα καλά ή δημοφιλή έργα μπορεί να προστατεύονται από την αυτόματη διαγραφή από τους συντονιστές.'
+  example: 'Παραδείγματα'
+  newest: 'Νεότερα έργα'
+  recommended: 'Προτεινόμενα έργα'
+  scratchremixes: 'Ανακατασκευές από Scratch'
+  noProjects: 'Δεν υπάρχουν έργα προς το παρόν.'
+  shareAction: 'Κοινοποίηση'
+  deleteAction: 'Διαγραφή έργου'
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+    Είσαι σίγουρος/η;
+    Σίγουρα θέλεις να διαγράψεις το «%programName%»;
+    Οι ενέργειές σου δεν μπορούν να αναιρεθούν!
+    Ναι, διάγραψέ το!
+    Ακύρωση
+  deleteConfirmText: 'Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Το έργο σου θα διαγραφεί οριστικά.'
+  deleteConfirmationTitle: 'Είσαι σίγουρος/η;'
+  deleteNotFoundError: 'Το έργο προς διαγραφή δεν βρέθηκε στον λογαριασμό σου.'
+  private: 'ιδιωτικό'
+  public: 'δημόσιο'
+  setPrivateAction: 'Ορισμός ως ιδιωτικό'
+  setPublicAction: 'Ορισμός ως δημόσιο'
+  setPrivateConfirm: 'Να γίνει ιδιωτικό αυτό το έργο; Δεν θα εμφανίζεται πλέον στα αποτελέσματα αναζήτησης.'
+  setPublicConfirm: 'Να γίνει δημόσιο αυτό το έργο; Θα είναι ορατό σε όλους.'
+  markNotForKidsConfirm: 'Να σημειωθεί αυτό το έργο ως ακατάλληλο για παιδιά;'
+  markSafeForKidsConfirm: 'Να αφαιρεθεί η σήμανση «ακατάλληλο για παιδιά» από αυτό το έργο;'
+  nfkModeratorLocked: 'Αυτή η ρύθμιση έχει κλειδωθεί από συντονιστή.'
+  confirmSetPrivate: 'Σίγουρα θέλεις να κάνεις αυτό το έργο ιδιωτικό; Δεν θα εμφανίζεται πλέον στα αποτελέσματα αναζήτησης.'
+  confirmSetPublic: 'Σίγουρα θέλεις να κάνεις αυτό το έργο δημόσιο; Θα είναι ορατό σε όλους.'
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Είσαι σίγουρος/η;
+    Αν κάνεις το «%programName%» ιδιωτικό, άλλοι χρήστες δεν θα μπορούν να το δουν ή να το βρουν.
+    Μπορείς πάντα να μοιραστείς τον σύνδεσμο του έργου σου με τους φίλους σου. Μπορείς να αλλάξεις την ορατότητα πατώντας το εικονίδιο του λουκέτου.
+    Αν κάνεις το «%programName%» δημόσιο, άλλοι χρήστες θα μπορούν να το δουν και να το βρουν.
+    Ναι, κάν' το δημόσιο
+    Ναι, κάν' το ιδιωτικό
+    Όχι
+  reportCommentConfirmation: 'Σίγουρα θέλεις να αναφέρεις αυτό το σχόλιο;'
+  deleteCommentConfirmation: 'Σίγουρα θέλεις να διαγράψεις αυτό το σχόλιο;'
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+    Διαγραφή λογαριασμού;
+    Σίγουρα θέλεις να διαγράψεις τον λογαριασμό σου; Έτσι θα διαγραφούν επίσης τα έργα και τα σχόλια που έχεις ανεβάσει!
+    Οι ενέργειές σου δεν μπορούν να αναιρεθούν!
+    Ναι, διάγραψέ τον!
+    Ακύρωση
+  tooLongName: 'Το όνομα του έργου είναι πολύ μεγάλο!'
+  tooLongDescription: 'Η περιγραφή του έργου είναι πολύ μεγάλη!'
+  tooLongCredits: 'Οι σημειώσεις και οι ευχαριστίες του έργου είναι πολύ μεγάλες!'
+  my_projects: 'Τα κοινοποιημένα έργα μου'
+  trending: 'Δημοφιλή τώρα'
+  popular: 'Δημοφιλή έργα'
   most:
-    viewed: Πιο προβεβλημμένα
+    viewed: 'Πιο προβεβλημένα'
     downloaded: Πιο κατεβασμένα
-  random: Random projects
-  related: Related projects
+  random: 'Τυχαία έργα'
+  related: 'Σχετικά έργα'
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'Εξερεύνηση έργων'
+    no_projects: 'Δεν έχεις δημιουργήσει ακόμα κανένα έργο'
+    no_explore: 'Δεν βρέθηκαν έργα'
+    load_more: 'Φόρτωση περισσότερων'
+    upload: 'Ανέβασμα έργου'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'Προστατευμένο'
+    day_left: 'Απομένει 1 ημέρα'
+    days_left: 'Απομένουν %days% ημέρες'
+    tooltip: 'Τα έργα αφαιρούνται αυτόματα μετά από ένα διάστημα αδράνειας. Κέρδισε περισσότερες λήψεις ή συνδέσου τακτικά για να παραταθεί η διατήρηση.'
+    tooltip_protected: 'Αυτό το έργο είναι προστατευμένο και δεν θα διαγραφεί αυτόματα.'
+  downloads: '%downloads% λήψεις'
+  sample: 'Παραδείγματα έργων'
+  views: '%views% προβολές'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+    likersTitle: 'Άτομα που αντέδρασαν σε αυτό το έργο'
+    all: 'Όλα'
+  remixes: '{0}0 ανακατασκευές |{1}1 ανακατασκευή |]1,Inf]%remixes% ανακατασκευές'
+  newRemixesNotificationTitle: '|{1}Το «%programName%» έχει 1 νέα ανακατασκευή: |]1,Inf] Το «%programName%» έχει %remixes% νέες ανακατασκευές:'
+  submitted: 'Υποβληθέντα έργα'
+  uploaded: 'Ανεβασμένα έργα'
+  reportAsInappropriate: 'Αναφορά ως ακατάλληλο'
+  reportProgram: 'Αναφορά έργου'
+  languageVersion: 'Έκδοση γλώσσας Catrobat: %languageVersion%'
+  reportLoginText: 'Κάνε %login% για να αναφέρεις αυτό το έργο.'
+  reportDialogHeader: 'Γιατί θέλεις να αναφέρεις αυτό το έργο;'
+  reportDialogReason: 'Γράψε έναν λόγο'
+  reportRadioButtonInappropriate: 'Είναι ακατάλληλο'
+  reportRadioButtonCopyright: 'Παραβίαση πνευματικών δικαιωμάτων'
+  reportRadioButtonSpam: 'Είναι spam'
+  reportRadioButtonDislike: 'Δεν μου αρέσει'
+  reportOwnProgram: 'Δεν μπορείς να αναφέρεις το δικό σου έργο.'
+  reportAlready: 'Έχεις ήδη αναφέρει αυτό το έργο.'
+  reportDone: 'Ανέφερες αυτό το έργο!'
+  updateAppHeaderDownload: 'Η λήψη δεν είναι δυνατή'
+  updateAppTextDownload: 'Ενημέρωσε την εφαρμογή σου στη νεότερη έκδοση. Έχε υπόψη ότι δεν είναι ακόμα διαθέσιμες όλες οι λειτουργίες του Android στο iOS.'
+  updateAppTextDownloadApk: 'Η λήψη APK είναι προς το παρόν διαθέσιμη μόνο στο Android και όχι στο iOS.'
+  updateAppHeader: 'Ενημέρωση εφαρμογής'
+  updateAppText: 'Ενημέρωσε την εφαρμογή σου στη νεότερη έκδοση.'
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: 'Δες αυτό το έργο Catrobat'
+  show_more: 'Εμφάνιση περισσότερων'
   comments: Σχόλια
-  send: Send
+  send: 'Αποστολή'
   delete: Διαγραφή
   report: Αναφορά
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  reply: 'Απάντηση'
+  report_popup: 'Το σχόλιο αναφέρθηκε με επιτυχία.'
+  report_popup_header: 'Αναφέρθηκε'
+  deleted_popup: 'Το σχόλιο διαγράφηκε με επιτυχία.'
+  deleted_popup_header: 'Διαγράφηκε'
+  noAdminRights: 'Δεν έχεις δικαιώματα διαχειριστή. Συνδέσου ως διαχειριστής.'
+  editProject: 'Επεξεργασία έργου'
+  closeProjectEditor: 'Κλείσιμο επεξεργασίας έργου'
+  closeEditorPrompt: 'Θέλεις να αποθηκεύσεις τις αλλαγές σου;'
+  btnDiscard: 'Απόρριψη'
+  addComment: 'Γράψε ένα σχόλιο'
+  thumbsUp: 'Μπράβο!'
+  smile: 'Χαμόγελο!'
+  love: 'Αγάπη!'
+  wow: 'Ουάου!'
+  linkTitle: 'Σύνδεσμος'
+  link: 'Αντιγραφή συνδέσμου έργου στο πρόχειρο'
+  reactionsText: 'Αντιδράσεις'
+  downloadErrorText: 'Παρουσιάστηκε σφάλμα κατά τη λήψη του έργου. Δοκίμασε ξανά αργότερα.'
+  downloadStartText: 'Η λήψη ξεκίνησε...'
+  downloading: 'Λήψη...'
+  openInApp: 'Άνοιγμα στο Pocket Code'
+  downloaded: 'Έγινε λήψη'
+  showTranslation: 'Εμφάνιση μετάφρασης'
+  hideTranslation: 'Απόκρυψη μετάφρασης'
+  translatedByLine: 'Μετάφραση από %provider% από %sourceLanguage% σε %targetLanguage%'
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  confrimDelete: 'Σίγουρα θέλεις να διαγράψεις τη μετάφραση;'
+  default: 'Προεπιλογή'
+  save: 'Αποθήκευση'
+  translationTitle: 'Μετάφραση: %language%'
+  editDefault: 'Επεξεργασία προεπιλογής'
+  editTranslation: 'Επεξεργασία μετάφρασης: %language%'
+  translations: 'Μεταφράσεις'
+  createTranslation: 'Δημιουργία μετάφρασης'
+  deletedComment: '**Διαγράφηκε**'
+  replyLabel: 'απάντηση'
+  repliesLabel: 'απαντήσεις'
+  notForKids: 'Ακατάλληλο για παιδιά'
 remixGraph:
   title: Ανακατασκευές
-  showRemixGraph: 'Remix graph'
-  by: 'by'
-  open: 'Open'
+  showRemixGraph: 'Γράφημα ανακατασκευών'
+  by: 'από'
+  open: 'Άνοιγμα'
   showPaths: 'Δείξε Διαδρομές'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: 'Φόρτωση γραφήματος ανακατασκευών...'
+  error: 'Δεν ήταν δυνατή η φόρτωση του γραφήματος ανακατασκευών.'
+  empty: 'Δεν υπάρχουν ακόμα δεδομένα γραφήματος ανακατασκευών για αυτό το έργο.'
   remixesLabel: 'Ανακατασκευές'
-  projectsLabel: 'Προγράμματα'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  projectsLabel: 'Έργα'
+  scratchLabel: 'Ρίζες από Scratch'
+  interactHint: 'Επίλεξε έναν κόμβο για να ανοίξεις το έργο ή να επισημάνεις τη διαδρομή ανακατασκευής του.'
+  zoomIn: 'Μεγέθυνση'
+  zoomOut: 'Σμίκρυνση'
+  resetView: 'Επαναφορά προβολής'
+  projectNotAvailableErrorTitle: 'Λυπούμαστε...'
+  projectNotAvailableErrorDescription: 'Το έργο δεν είναι πλέον διαθέσιμο!'
+  projectNotAvailable: 'Μη διαθέσιμο'
+  projectUnknownUser: 'Άγνωστος χρήστης'
+noReply: 'Αυτό είναι ένα αυτόματο μήνυμα - Μην απαντάς απευθείας σε αυτό το email.'
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: 'Επιβεβαίωση του λογαριασμού σου στο Catrobat'
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Γεια σου %username%.
+    Για να ολοκληρώσεις την ενεργοποίηση του λογαριασμού σου, επισκέψου το %confirmationUrl%
+    Αυτός ο σύνδεσμος μπορεί να χρησιμοποιηθεί μόνο μία φορά για την επαλήθευση του λογαριασμού σου.
+    Με φιλικούς χαιρετισμούς,
+    Η ομάδα του Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Γεια σου %username%.<br>
     <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
+    Για να ολοκληρώσεις την ενεργοποίηση του λογαριασμού σου, κάνε κλικ <a href="%confirmationUrl%">εδώ.</a><br>
+    Αυτός ο σύνδεσμος μπορεί να χρησιμοποιηθεί μόνο μία φορά για την επαλήθευση του λογαριασμού σου.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Με φιλικούς χαιρετισμούς,<br>
+    Η ομάδα του Catrobat.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: 'Επαλήθευσε τη διεύθυνση email σου'
+  welcome: 'Καλώς ήρθες στο Catrobat!'
+  greeting: 'Ευχαριστούμε για την εγγραφή! Επαλήθευσε τη διεύθυνση email σου για να ξεκινήσεις.'
+  message: 'Κάνε κλικ στο παρακάτω κουμπί για να επιβεβαιώσεις το email σου. Αυτός ο σύνδεσμος ισχύει έως %time% και μπορεί να χρησιμοποιηθεί μόνο μία φορά.'
+  button: 'Επαλήθευση διεύθυνσης email'
+  ignore: 'Αν δεν δημιούργησες λογαριασμό Catrobat, μπορείς να αγνοήσεις αυτό το email.'
+  autoDelete: 'Οι μη επαληθευμένοι λογαριασμοί διαγράφονται αυτόματα μετά από 30 ημέρες.'
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: 'Απαιτείται γονική συγκατάθεση για τον λογαριασμό Catrobat του παιδιού σου'
+    title: 'Απαιτείται γονική συγκατάθεση'
+    greeting: 'Γεια σου,'
+    message: 'Το παιδί σου %username% δημιούργησε λογαριασμό στο Catrobat και επαλήθευσε τη διεύθυνση email του.'
+    explanation: 'Το Catrobat είναι μια δωρεάν εκπαιδευτική πλατφόρμα όπου οι νέοι μαθαίνουν προγραμματισμό δημιουργώντας εφαρμογές, παιχνίδια και κινούμενα σχέδια. Σύμφωνα με τους κανονισμούς της ΕΕ για την προστασία των παιδιών, χρειαζόμαστε τη συγκατάθεσή σου για να μπορεί το παιδί σου να συμμετέχει πλήρως στην κοινότητα. Κάνε κλικ στο παρακάτω κουμπί για να δώσεις τη συγκατάθεσή σου.'
+    button: 'Δώσε γονική συγκατάθεση'
+    ignore: 'Αν δεν περίμενες αυτό το email, μπορείς να το αγνοήσεις. Χωρίς συγκατάθεση, ο λογαριασμός θα έχει περιορισμένες λειτουργίες.'
+    whatIsCatrobat: 'Το Catrobat είναι μια δωρεάν, μη κερδοσκοπική εκπαιδευτική πλατφόρμα προγραμματισμού. Μάθε περισσότερα στο catrobat.org.'
+    manageLink: 'Μπορείς να διαχειριστείς τον λογαριασμό του παιδιού σου ανά πάσα στιγμή μέσω της <a href="%portalUrl%" style="color: #00acc1;">Πύλης γονέων</a>. Μάθε περισσότερα για <a href="%infoUrl%" style="color: #00acc1;">τα δικαιώματά σου ως γονέας</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: 'Η συγκατάθεση δόθηκε'
+    message: 'Ευχαριστούμε! Ο λογαριασμός του χρήστη %username% είναι πλέον πλήρως ενεργός.'
+    continueButton: 'Ανακάλυψε έργα'
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: 'Γονείς & κηδεμόνες'
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: 'Πληροφορίες για γονείς & κηδεμόνες'
+    intro: 'Το Catrobat παίρνει στα σοβαρά την ασφάλεια και το απόρρητο των νεαρών χρηστών. Αυτή η σελίδα εξηγεί πώς προστατεύουμε το παιδί σου και ποια δικαιώματα έχεις.'
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: 'Τι είναι το Catrobat;'
+      text: 'Το Catrobat είναι μια δωρεάν, μη κερδοσκοπική εκπαιδευτική πλατφόρμα όπου οι νέοι μαθαίνουν προγραμματισμό δημιουργώντας τις δικές τους εφαρμογές, παιχνίδια και κινούμενα σχέδια. Η πλατφόρμα είναι διαθέσιμη σε όλο τον κόσμο και χρησιμοποιείται στην εκπαίδευση.'
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: 'Ποια δεδομένα συλλέγουμε;'
+      text: 'Συλλέγουμε τα ελάχιστα δεδομένα που χρειάζονται για τη λειτουργία της πλατφόρμας: όνομα χρήστη, διεύθυνση email, ημερομηνία γέννησης και όσα έργα δημιουργεί και ανεβάζει το παιδί σου. Για χρήστες κάτω των 14 ετών αποθηκεύουμε επίσης μια διεύθυνση email γονέα/κηδεμόνα για σκοπούς συγκατάθεσης. Δεν πουλάμε ούτε μοιραζόμαστε προσωπικά δεδομένα με τρίτους.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: 'Τα δικαιώματά σου ως γονέας ή κηδεμόνας'
+      text: 'Σύμφωνα με τους κανονισμούς της ΕΕ για την προστασία των παιδιών (GDPR) και το COPPA, έχεις το δικαίωμα: να δεις τα δεδομένα που διατηρούμε για το παιδί σου, να ζητήσεις αντίγραφο αυτών των δεδομένων, να ανακαλέσεις τη συγκατάθεσή σου ανά πάσα στιγμή (κάτι που περιορίζει τον λογαριασμό) και να ζητήσεις την οριστική διαγραφή του λογαριασμού του παιδιού σου και όλων των σχετικών δεδομένων.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: 'Ποιοι περιορισμοί ισχύουν για λογαριασμούς ανηλίκων;'
+      text: 'Οι χρήστες κάτω των 16 ετών δεν μπορούν να δημοσιεύουν ή να διαβάζουν σχόλια, να ακολουθούν άλλους χρήστες ή να βλέπουν περιεχόμενο που έχει σημειωθεί ως ακατάλληλο για παιδιά. Μπορούν όμως να δημιουργούν και να ανεβάζουν έργα, να περιηγούνται σε δημόσια έργα και να αντιδρούν σε έργα με «μου αρέσει». Αυτοί οι περιορισμοί υπάρχουν για να εξασφαλίζουν ένα ασφαλές περιβάλλον μάθησης.'
+    manageButton: 'Διαχείριση του λογαριασμού του παιδιού σου'
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: 'Πύλη γονέων'
+    description: 'Γράψε τη διεύθυνση email σου για να λάβεις έναν ασφαλή σύνδεσμο για τη διαχείριση του λογαριασμού Catrobat του παιδιού σου. Ο σύνδεσμος θα σταλεί στη διεύθυνση email που δόθηκε κατά την εγγραφή.'
+    emailLabel: 'Η διεύθυνση email σου'
+    submitButton: 'Αποστολή συνδέσμου διαχείρισης'
+    infoLink: 'Μάθε περισσότερα'
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: 'Έλεγξε τα εισερχόμενά σου'
+      message: 'Αν υπάρχει λογαριασμός συνδεδεμένος με αυτό το email, σου στείλαμε έναν σύνδεσμο διαχείρισης. Έλεγξε τα εισερχόμενά σου και ακολούθησε τον σύνδεσμο για να διαχειριστείς τον λογαριασμό του παιδιού σου.'
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: 'Διαχείριση λογαριασμών παιδιών'
+    description: 'Διαχειρίζεσαι λογαριασμούς που συνδέονται με το %email%.'
+    consentStatus: 'Κατάσταση συγκατάθεσης'
+    accountCreated: 'Δημιουργία λογαριασμού'
+    email: 'Email του παιδιού'
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: 'Δόθηκε'
+      pending: 'Σε αναμονή'
+      revoked: 'Ανακλήθηκε'
+    grantButton: 'Δώσε συγκατάθεση'
+    revokeButton: 'Ανάκληση συγκατάθεσης'
+    revokeConfirm: 'Σίγουρα θέλεις να ανακαλέσεις τη συγκατάθεση; Ο λογαριασμός θα έχει περιορισμένες λειτουργίες.'
+    exportButton: 'Εξαγωγή δεδομένων'
+    deleteButton: 'Διαγραφή λογαριασμού'
+    deleteConfirm: 'Σίγουρα θέλεις να διαγράψεις οριστικά αυτόν τον λογαριασμό; Αυτό δεν μπορεί να αναιρεθεί.'
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: 'Διαχειρίσου τον λογαριασμό Catrobat του παιδιού σου'
+      title: 'Διαχείριση λογαριασμού'
+      greeting: 'Γεια σου,'
+      message: 'Ζήτησες έναν σύνδεσμο για τη διαχείριση του λογαριασμού Catrobat του παιδιού σου (%usernames%). Κάνε κλικ στο παρακάτω κουμπί για να δεις και να διαχειριστείς τον λογαριασμό.'
+      button: 'Διαχείριση λογαριασμού'
+      ignore: 'Αν δεν το ζήτησες εσύ, μπορείς να αγνοήσεις αυτό το email.'
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: 'Ανάκτηση κωδικού πρόσβασης Catrobat'
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Γεια σου %username%.
+    Ζήτησες επαναφορά του κωδικού πρόσβασής σου στο %appplication_url% επειδή τον ξέχασες.
+    Αν δεν το ζήτησες εσύ, αγνόησε αυτό το μήνυμα. Θα λήξει και θα πάψει να ισχύει σε 24 ώρες.
+    Για να επαναφέρεις τον κωδικό πρόσβασής σου και να δημιουργήσεις νέο, επισκέψου την παρακάτω σελίδα: %confirmationUrl%
+    Μπορείς να χρησιμοποιείς το όνομα χρήστη και τον κωδικό πρόσβασής σου ανά πάσα στιγμή για να μπεις στην κοινότητα %appplication_url%.
+    Για να το κάνεις, απλώς επισκέψου την παρακάτω σελίδα: %loginPage%
+    Για να επεξεργαστείς τα στοιχεία του προφίλ σου, πήγαινε σε αυτή τη σελίδα: %profilePage%
+    Με φιλικούς χαιρετισμούς,
+    Η ομάδα του Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Γεια σου %username%.<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Ζήτησες επαναφορά του κωδικού πρόσβασής σου στο <a href="%appplication_url%">Pocket Code</a> επειδή τον ξέχασες.
+    Αν δεν το ζήτησες εσύ, αγνόησε αυτό το μήνυμα. Θα λήξει και θα πάψει να ισχύει σε 24 ώρες.<br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Για να επαναφέρεις τον κωδικό πρόσβασής σου και να δημιουργήσεις νέο, κάνε κλικ <a href="%confirmationUrl%">εδώ.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    Μπορείς να χρησιμοποιείς το όνομα χρήστη και τον κωδικό πρόσβασής σου ανά πάσα στιγμή για να μπεις στην κοινότητα του <a href="%appplication_url%">Pocket Code</a>.<br>
+    Για να το κάνεις, απλώς επισκέψου την παρακάτω σελίδα: <a href="%loginPage%">Σελίδα σύνδεσης</a><br>
+    Για να επεξεργαστείς τα στοιχεία του προφίλ σου, πήγαινε σε αυτή τη <a href="%profilePage%">σελίδα</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Με φιλικούς χαιρετισμούς,<br>
+    Η ομάδα του Catrobat.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
+  aboutMe: 'Σχετικά με μένα'
+  currentlyWorkingOn: 'Αυτή τη στιγμή δουλεύω πάνω σε'
+  edit: 'Επεξεργασία προφίλ'
   saveChanges: αποθήκευση αλλαγών
   newPass: νέος κωδικός πρόσβασης
   repeatPass: επανάληψη κωδικού πρόσβασης
-  oldPass: old password
+  oldPass: 'παλιός κωδικός πρόσβασης'
   firstEmail: Το πρώτο μου email
   secondEmail: Το δεύτερο μου email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: 'Τα έργα μου'
+  follows: 'Ακολουθεί'
+  follower: 'Ακόλουθος'
+  unfollowUser: 'Σταμάτα να ακολουθείς αυτόν τον χρήστη!'
+  followUser: 'Ακολούθησε αυτόν τον χρήστη!'
+  amountOfPrograms: 'Αριθμός έργων'
   form:
     passwordTooShort: Ο νέος κωδικός πρόσβασης θα πρέπει να αποτελείται από τουλάχιστον %length% χαρακτήρες.
     passwordTooLong: Ο νέος κωδικός πρόσβασης θα πρέπει να αποτελείται το πολύ από %length% χαρακτήρες.
     passwordIsUsername: Ο κωδικός πρόσβασης πρέπει να διαφέρει από το όνομα χρήστη.
     passwordWrong: Λάθος κωδικός πρόσβασης
     emailNotValid: Αυτή η διεύθυνση e-mail δεν είναι έγκυρη.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
+    emailMissing: 'Σφάλμα κατά την ενημέρωση αυτής της διεύθυνσης email. Πρέπει να έχεις τουλάχιστον μία επαληθευμένη διεύθυνση email.'
     emailExists: Η συγκεκριμένη διεύθυνση email υπάρχει ήδη.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: 'Αυτό το όνομα χρήστη δεν είναι έγκυρο.'
+    usernameMissing: 'Πρέπει να έχεις όνομα χρήστη.'
     usernameExists: Αυτό το όνομα χρήστη υπάρχει ήδη.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: 'Το όνομα χρήστη δεν πρέπει να περιέχει διεύθυνση email.'
     submitSuccess: αποθηκεύτηκε!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
+  reallyDeleteProgram: 'Θέλεις πραγματικά να διαγράψεις το έργο σου'
+  programsOf: 'Έργα του χρήστη'
+  picture: 'Εικόνα προφίλ'
   changePicture: Αλλαγή εικόνας
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: 'Προφίλ στο Scratch'
 myprofile:
-  userSettings: User settings
+  userSettings: 'Ρυθμίσεις χρήστη'
   profileSettings: Επεξεργασία προφίλ
   securitySettings: Αλλαγή κωδικού πρόσβασης
-  accountSettings: Account Settings
-  accountVerification: Verify account
-  account: Account
+  accountSettings: 'Ρυθμίσεις λογαριασμού'
+  accountVerification: 'Επαλήθευση λογαριασμού'
+  account: 'Λογαριασμός'
   editProfile: Επεξεργασία προφίλ
-  edit: Edit
-  done: Done
-  checkMail: Ένα μήνυμα ηλεκτρονικού ταχυδρομείου εστάλη στη διεύθυνση email σας. Παρακαλούμε ελέγξτε τα Εισερχόμενά σας.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
+  edit: 'Επεξεργασία'
+  done: 'Τέλος'
+  checkMail: 'Στάλθηκε ένα email στη διεύθυνσή σου. Έλεγξε τα εισερχόμενά σου.'
+  passwordUpdated: 'Ο κωδικός πρόσβασής σου ενημερώθηκε με επιτυχία.'
+  avatar: 'Άβαταρ'
   email: Email
   deleteAccount: Διαγραφή λογαριασμού
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    Προσοχή:
+    Δημιούργησες %num_projects% έργο(α) και έχεις %num_followers% ακόλουθο(ους). Όλα τα έργα σου θα αφαιρεθούν. Δεν θα μπορείς πια να συνδεθείς και τα έργα σου θα εξαφανιστούν από όλες τις λίστες. Η διαγραφή του προφίλ σου δεν μπορεί να αναιρεθεί!
+    Σίγουρα θέλεις να φύγεις;
+  exportData: 'Λήψη των δεδομένων μου'
+  exportDataDescription: 'Έχεις το δικαίωμα να λάβεις αντίγραφο των προσωπικών σου δεδομένων. Αυτό περιλαμβάνει τις πληροφορίες του προφίλ σου, έργα, σχόλια, αντιδράσεις και ακόλουθους.'
+  exportDataLoading: 'Λήψη...'
+  exportDataError: 'Κάτι πήγε στραβά κατά την εξαγωγή των δεδομένων σου. Δοκίμασε ξανά αργότερα.'
+  exportDataRateLimited: 'Μπορείς να εξάγεις τα δεδομένα σου μόνο μία φορά την ημέρα. Δοκίμασε ξανά αύριο.'
+  editAccountSettings: 'Επεξεργασία ρυθμίσεων λογαριασμού'
+  profileChangeSuccess: 'Το προφίλ σου άλλαξε με επιτυχία.'
+  unspecifiedError: 'Κάτι δεν λειτούργησε κατά την αλλαγή του προφίλ σου. Δοκίμασε ξανά ή ενημέρωσέ μας αν συνεχίσει να συμβαίνει!'
+  verifyAccountText: 'Θα σου στείλουμε ένα email με σύνδεσμο για να επαληθεύσεις τον λογαριασμό σου. Φρόντισε να κάνεις κλικ στον σύνδεσμο μέσα στην επόμενη ώρα· μπορείς να ζητάς μόνο ένα email την ημέρα.'
+  verifyAccountButton: 'Αποστολή email'
+  verifyAccountMailSent: 'Το email στάλθηκε με επιτυχία. Έλεγξε τα εισερχόμενά σου'
+  verifyAccountMailFailed: 'Μπορείς να ζητάς μόνο ένα email την ημέρα'
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Μάθετε περισσότερα για τους όρους χρήσης της διαδικτυακής κοινότητας Catrobat σε %link-termsOfUse%.'
+  link: 'Άδεια για παιχνίδι'
+  title: 'Άδεια για παιχνίδι - Αναγνώρισε τους δημιουργούς και μοιράσου'
+  text1: 'Φαντάσου ότι κάθε έργο Catrobat είναι ένα κέικ, ένα πολύ ξεχωριστό κέικ που έρχεται μαζί με τη συνταγή του (τα τουβλάκια προγραμματισμού). Όλα τα μέλη της κοινότητας Catrobat μοιράζονται τα κέικ τους μαζί με τις συνταγές τους. Αυτό σημαίνει ότι μπορείς να απολαύσεις τα κέικ και να μάθεις να τα φτιάχνεις κι εσύ!'
+  text2: 'Δεν υπάρχουν μυστικές συνταγές: οι οδηγίες για το πώς φτιάχνονται αυτά τα κέικ είναι ανοιχτές σε όλους για να τις χρησιμοποιούν, να τις ξαναχρησιμοποιούν, να τις τροποποιούν και να εμπνέονται για νέες ιδέες... εννοώ κέικ.'
+  text3: 'Μπορείς να φας τα κέικ, αλλά και να αντιγράψεις τις συνταγές άλλων για να φτιάξεις τα δικά σου, ίσως με διαφορετικά υλικά. Αυτή η ελευθερία συνοδεύεται από δύο απλές προϋποθέσεις:'
+  text4: 'Όταν στήσαμε την κοινότητα Catrobat, αποφασίσαμε να υιοθετήσουμε αυτή την προσέγγιση γιατί πιστεύουμε ότι στηρίζει τη μάθηση και τη δημιουργικότητα μέσα στην κοινότητα. Μοιράζοντας συνταγές και υλικά (σενάρια και γραφικά), οι άνθρωποι μπορούν να χτίζουν πάνω στις ιδέες των άλλων και όλοι κερδίζουν.'
+  text5: 'Σχεδιάζοντας τον ιστότοπο του Catrobat, προσθέσαμε λειτουργίες που ενθαρρύνουν τους ανθρώπους να μοιράζονται και να αναγνωρίζουν τους άλλους. Σε κάθε σελίδα έργου μπορείς πάντα να κατεβάσεις τα αρχικά σενάρια του έργου. Αν ανακατασκευάσεις ένα έργο (τροποποιώντας τα σενάρια ή τα γραφικά και μοιράζοντας το αποτέλεσμα), σε ενθαρρύνουμε να αναφέρεις στις σημειώσεις του έργου τους ανθρώπους και το έργο που σε ενέπνευσαν.'
+  text6: 'Μάθε περισσότερα για τους όρους χρήσης της διαδικτυακής κοινότητας Catrobat στο %link-termsOfUse%.'
   list1:
-    item1: μοιραστείτε τα κέικ σας μαζί με την συνταγή
-    item2: αναγνωρήστε αυτούς που σας ενέπνευσαν
-  version: Έκδοση 1.1, 2 Απρίλιος 2013
+    item1: 'μοιράσου τα κέικ σου μαζί με τη συνταγή'
+    item2: 'αναγνώρισε όσους σε ενέπνευσαν'
+  version: 'Έκδοση 1.1, 2 Απριλίου 2013'
 termsOfUse:
   title: Όροι χρήσης
-  headline: Καλώς ήλθατε στην κοινότητα της Catrobat!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "Χρειαζόμαστε τη βοήθειά σας για να κάνουμε αυτή την κοινότητα ένα υποστηρικτικό μέρος για κάθε μέλος. Έτσι μπορείτε να βοηθήσετε:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Το δώρο μας προς εσάς:'
+  headline: 'Καλώς ήρθες στην κοινότητα του Catrobat!'
+  text1: 'Ως μέλος της κοινότητας Catrobat, μοιράζεσαι έργα και ιδέες με ανθρώπους:'
+  text2: 'Χρειαζόμαστε τη βοήθειά σου για να κάνουμε αυτή την κοινότητα ένα υποστηρικτικό μέρος για κάθε μέλος. Να πώς μπορείς να βοηθήσεις:'
+  text3: 'Μέσα από το έργο Catrobat θέλουμε να καλλιεργήσουμε τη συνεργασία και να επιτρέψουμε στη δημιουργικότητα όλων να ενωθεί προς όφελος όλης της ανθρωπότητας. Μπορείς κι εσύ να γίνεις ενεργό μέλος της κοινότητας Catrobat χαρίζοντας τα έργα σου πίσω στην κοινότητα, με τον ίδιο τρόπο που άλλα ενεργά μέλη χαρίζουν τα δικά τους έργα σε σένα:'
+  text4: 'Το δώρο μας προς εσένα:'
   text5: 'Οι όροι χρήσης και υπηρεσιών μας:'
   list1:
     item1: από πολλές διαφορετικές χώρες και πολιτισμούς
-    item2: όλων των ηλικιών (από μικρά παιδιά μλεχρι έφηβους και παππούδες)
+    item2: 'όλων των ηλικιών (από μικρά παιδιά μέχρι εφήβους και παππούδες)'
     item3: με όλα τα επίπεδα εμπειρίας
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Να είστε ειλικρινείς. Μην προσποιήστε πως είστε κάποιος άλλος ή προσπαθήσετε να ξεγελάσετε την κοινότητα."
-    item4: "Διατηρήστε προσωπικές πληροφορίες απόρρητες. Μην μοιράζεστε τη διεύθυνση email σας, τον αριθμό τηλεφώνου ή άλλα προσωπικά στοιχεία επικοινωνίας."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item1: 'Να σέβεσαι τους άλλους. Όταν μοιράζεσαι έργα, θυμήσου ότι θα δουν τη συνεισφορά σου άνθρωποι πολλών διαφορετικών ηλικιών και καταβολών.'
+    item2: 'Να αναφέρεις τους δημιουργούς. Μπορείς ελεύθερα να φτιάχνεις τροποποιημένες εκδοχές έργων άλλων - απλώς φρόντισε να τους αναφέρεις. Ένα σημείο για να το κάνεις είναι η ενότητα ευχαριστιών του έργου σου. Δες την παράγραφο κάτω από αυτή τη λίστα για λεπτομέρειες σχετικά με την τροποποίηση έργων άλλων χρηστών.'
+    item3: 'Να είσαι ειλικρινής. Μην προσποιείσαι ότι είσαι κάποιος άλλος και μην προσπαθείς να ξεγελάσεις την κοινότητα.'
+    item4: 'Κράτα τις προσωπικές πληροφορίες ιδιωτικές. Μη μοιράζεσαι τη διεύθυνση email σου, τον αριθμό τηλεφώνου σου ή άλλα προσωπικά στοιχεία επικοινωνίας.'
+    item5: 'Βοήθησε να μείνει ο ιστότοπος φιλικός. Αν πιστεύεις ότι άλλοι θα έβρισκαν ένα έργο ή σχόλιο κακό, προσβλητικό, υπερβολικά βίαιο ή γενικά ακατάλληλο, απλώς κάνε κλικ στο κουμπί «αναφορά ως ακατάλληλο» και γράψε μια σύντομη εξήγηση. Η ομάδα του Catrobat θα εξετάσει την αναφορά σου και μπορεί να αφαιρέσει οποιοδήποτε έργο, σχόλιο ή ανάρτηση.'
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: 'Ανεβάζοντας ένα έργο στους ιστότοπούς μας, αποδέχεσαι και συμφωνείς να διαθέσεις αυτή τη δουλειά υπό ορισμένες ελεύθερες άδειες για ανεβασμένα έργα Catrobat. Όπως και οι ελεύθερες άδειες με τις οποίες σου διατίθεται το ίδιο το σύστημα Catrobat, αυτές οι ελεύθερες άδειες δίνουν σε όλους το δικαίωμα να μαθαίνουν από δουλειές που έχουν ανεβάσει άλλοι και να τις προσαρμόζουν και να τις ανακατασκευάζουν για να φτιάξουν τα δικά τους νέα, συναρπαστικά παιχνίδια, κινούμενα σχέδια και άλλα έργα. Έτσι ο καθένας μπορεί να «πατάει στους ώμους των συνομηλίκων του», και ένας από αυτούς είσαι εσύ! Η δουλειά σου θα ωφελήσει έτσι όλο τον κόσμο και θα παραμείνει ελεύθερη για όλους, κάπως όπως τα κείμενα και οι εικόνες που προσφέρουν ελεύθερα στη Wikipedia εθελοντές από όλο τον κόσμο. Σκέψου το σαν δώρο σου προς την ανθρωπότητα: εσύ δίνεις σε όλους, και όλοι οι άλλοι που ανεβάζουν τη δουλειά τους στους ιστότοπούς μας δίνουν σε σένα. Ένα ανεβασμένο έργο είναι λοιπόν ένα πολύτιμο δώρο που ο δημιουργός του σου δίνει δωρεάν, με την προϋπόθεση να συμμετέχεις κι εσύ στην κοινότητα με τους ίδιους όρους.'
+    item2: 'Δεν είσαι υποχρεωμένος/η να δεχτείς το δώρο· αν το δεχτείς, ισχύουν ορισμένοι κανόνες. Το όφελος αυτών των κανόνων είναι ότι μπορείς να μάθεις από τη δουλειά και να χτίσεις πάνω της για να φτιάξεις κάτι ακόμα πιο εντυπωσιακό, το οποίο μπορείς μετά, π.χ., να ανεβάσεις ξανά στους ιστότοπούς μας ως δικό σου. Ένα ακόμα όφελος είναι ότι αυτές οι άδειες εξασφαλίζουν ότι δεν μπορείς να θεωρηθείς υπεύθυνος/η για προβλήματα που προκύπτουν σε άλλους από τη χρήση του έργου σου.'
+    item3: 'Μια σημαντική πρόσθετη προϋπόθεση είναι να αναφέρεις με σαφήνεια τους δημιουργούς στα έργα των οποίων βάσισες τη δική σου δουλειά. Παράλληλα, θα κάνουμε ό,τι μπορούμε ώστε οι άλλοι να αναγνωρίζουν ξεκάθαρα ότι η δουλειά σου προέρχεται από σένα, αναφέροντας το μοναδικό όνομα που επέλεξες ελεύθερα για να σε εκπροσωπεί στην κοινότητα του Catrobat, και δίνοντας στους άλλους την ευκαιρία να σου εκφράσουν δημόσια την ευγνωμοσύνη τους που χάρισες τη δουλειά σου σε όλους, και ειδικά σε αυτούς.'
+    item4: 'Δες το %link-licenseUploaded% για τους ακριβείς νομικούς όρους και προϋποθέσεις.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: 'Σου προσφέρουμε, τώρα και στο μέλλον, όλο το δικό μας λογισμικό και τους διαδικτυακούς πόρους που σχετίζονται με το σύστημα Catrobat, π.χ. το λογισμικό που έχει γράψει η ομάδα του Catrobat, τους ιστότοπους και τους διαδικτυακούς μας πόρους, τον δικό μας πηγαίο κώδικα που σχετίζεται με το σύστημα Catrobat και όλο το πρόσθετο υλικό που περιλαμβάνεται, όπως π.χ. εικόνες, ήχους και κείμενα, υπό τις ελεύθερες άδειες του Catrobat.'
+    item2: 'Αυτές οι άδειες κάνουν όλα τα μέρη του Catrobat δωρεάν για σένα, αλλά και ελεύθερα με την έννοια ότι σου δίνουν την ελευθερία να τα χρησιμοποιείς όπως θέλεις, με λίγους μόνο περιορισμούς που εξασφαλίζουν, μεταξύ άλλων, ότι το σύστημα Catrobat θα μείνει για πάντα ελεύθερο και χρήσιμο για όλους.'
+    item3: 'Δες το %link-licenseToPlay% για τους ακριβείς νομικούς όρους και προϋποθέσεις. Ο πηγαίος κώδικας του συστήματος Catrobat, καθώς και πολλά άλλα έγγραφα και πόροι, είναι διαθέσιμα μέσω του %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: Αν είστε κάτω από 13 ετών, πρέπει να ρωτήσετε τους γονείς ή τους κηδεμόνες σας, αν σας επιτρέπουν να χρησιμοποιείτε τις εφαρμογές και υπηρεσίες της Catrobat.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: 'Αν εσύ ή, αν είσαι κάτω των 13 ετών, οι γονείς ή οι νόμιμοι κηδεμόνες σου συνδέεστε με οργανισμό που εμπλέκεται σε ή είναι υπεύθυνος για παραβιάσεις του απορρήτου τύπου «δίχτυ» ή/και μαζική παρακολούθηση, τότε δεν επιτρέπεται να χρησιμοποιείς τις εφαρμογές λογισμικού μας και να έχεις πρόσβαση στις υπηρεσίες μας. Οι ακριβείς λεπτομέρειες αυτού του περιορισμού και ορισμένες εξαιρέσεις του περιγράφονται στις ενότητες 4.a και 4.b των %link-termsOfUse%.'
+    item2: 'Αν είσαι κάτω των 13 ετών, πρέπει να ρωτήσεις τους γονείς ή τους κηδεμόνες σου αν σου επιτρέπουν να χρησιμοποιείς τις εφαρμογές και τις υπηρεσίες του Catrobat.'
+    item3: 'Διατηρούμε το δικαίωμα να απορρίπτουμε, να διαγράφουμε ή να αποκρύπτουμε έργα, λογαριασμούς χρηστών και οποιοδήποτε ψηφιακό υλικό ανεβαίνει στους ιστότοπους του Catrobat ανά πάσα στιγμή και κατά την απόλυτη κρίση μας, για παράδειγμα αν διαπιστώσουμε ότι ένα έργο περιέχει ακατάλληλο υλικό ή ότι ένας χρήστης παραβιάζει τα δικαιώματα άλλων.'
+    item4: 'Όλο το λογισμικό και οι διαδικτυακοί πόροι του Catrobat προσφέρονται με την ελπίδα ότι θα είναι χρήσιμοι, αλλά χωρίς καμία εγγύηση.'
+    item5: 'Δες τους %link-termsOfUse% στο developer.catrobat.org/terms_of_use_and_service για την ακριβή διατύπωση των παραπάνω σημείων και ορισμένους πρόσθετους νομικούς όρους και προϋποθέσεις.'
+  bottom1: 'Έλα ξανά εδώ κάθε τόσο, γιατί προσπαθούμε συνεχώς να βελτιώνουμε τους Όρους Χρήσης μας.'
+  bottom2: 'Στείλε τις προτάσεις σου για αυτούς τους Όρους Χρήσης στο %email-webmaster%.'
+  version: 'Έκδοση 1.3, 4 Μαρτίου 2014'
 search:
   dotdotdot: Αναζήτηση...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
+  search: 'Αναζήτηση έργων, χρηστών & στούντιο'
+  inMediaLib: 'Αναζήτηση στη βιβλιοθήκη πολυμέσων'
+  inMediaCategory: 'Αναζήτηση στην κατηγορία πολυμέσων'
   results: Αποτελέσματα αναζήτησης
-  resultcount: Αναζήτησή σας έχει φέρει %count% αποτελέσματα
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  resultcount: 'Η αναζήτησή σου έφερε %count% αποτελέσματα'
+  fail: 'Γράψε τουλάχιστον έναν όρο αναζήτησης'
+  noUsers: 'Δεν βρέθηκαν χρήστες'
+  noProjects: 'Δεν βρέθηκαν έργα'
+  noStudios: 'Δεν βρέθηκαν στούντιο'
+  sameSearchMessage: 'Φαίνεται ότι είσαι ήδη εδώ! Θέλεις να δοκιμάσεις μια διαφορετική αναζήτηση;'
 menu:
   profile: Το προφίλ μου
   login: Σύνδεση
   logout: Αποσύνδεση
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  admin: 'Διαχείριση'
+  home: 'Αρχική'
+  helpAndTutorials: 'Βοήθεια & οδηγοί'
+  followersAndFollowing: 'Ακόλουθοι'
   mediaLibrary: Βιβλιοθήκη πολυμέσων
-  studio: Studios
+  studio: 'Στούντιο'
   language: Γλώσσα
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: 'Δεν υπάρχουν διαθέσιμες επιλογές γλώσσας.'
 login:
   login: Σύνδεση
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: 'Σύνδεση τώρα'
+    createAccount: 'Δημιουργία λογαριασμού'
+    forgetPassword: 'Ξέχασες τον κωδικό;'
   oauth:
-    title: Or you can join with
+    title: 'Ή μπορείς να συνδεθείς με'
   passOrUser: Ο κωδικός ή το όνομα χρήστη ήταν λανθασμένο.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: 'Ο λογαριασμός σου έχει ανασταλεί. Αν πιστεύεις ότι πρόκειται για λάθος, επικοινώνησε με την υποστήριξη.'
   noUsername: Το όνομα χρήστη ή η διεύθυνση email δεν βρέθηκε.
-  forgotPass: Ξεχάσατε τον κωδικό πρόσβασης ή το όνομα χρήστη;
-  recoverPassSend: Ένα μήνυμα ηλεκτρονικού ταχυδρομείου εστάλη στη διεύθυνση email σας. Παρακαλούμε ελέγξτε τα Εισερχόμενά σας.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  forgotPass: 'Ξέχασες τον κωδικό πρόσβασης ή το όνομα χρήστη;'
+  recoverPassSend: 'Στάλθηκε ένα email στη διεύθυνσή σου. Έλεγξε τα εισερχόμενά σου.'
+  alreadyReset: 'Έχει ήδη ζητηθεί επαναφορά κωδικού για αυτόν τον χρήστη μέσα στις τελευταίες 24 ώρες.'
+  confirmationSend: 'Στάλθηκε ένα email επιβεβαίωσης εγγραφής στη διεύθυνσή σου. Έλεγξε τα εισερχόμενά σου και ενεργοποίησε τον λογαριασμό σου.'
   userOrEmail: Όνομα χρήστη ή email
   changePass: Αλλαγή κωδικού πρόσβασης
-  createAccount: Δημιουργήστε έναν λογαριασμό
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  createAccount: 'Δημιούργησε λογαριασμό'
+  noAccount: 'Δεν έχεις λογαριασμό;'
+  alreadyAccount: 'Έχεις ήδη λογαριασμό;'
   or: Ή
-  username: Username
+  username: 'Όνομα χρήστη'
   email: Email
-  passwordFirst: Password
-  passwordSecond: Password Confirm
+  passwordFirst: 'Κωδικός πρόσβασης'
+  passwordSecond: 'Επιβεβαίωση κωδικού πρόσβασης'
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: 'Εγγραφή'
+  subText: 'Συνεχίζοντας, δημιουργείς λογαριασμό στην κοινότητα Catrobat και συμφωνείς με τους %var1% και την %var2%.'
+  dateOfBirth: 'Ημερομηνία γέννησης'
+  dateOfBirthInfo: 'Ζητάμε την ημερομηνία γέννησής σου για να συμμορφωθούμε με τους κανονισμούς της ΕΕ για την προστασία των παιδιών (GDPR/COPPA) και να προσφέρουμε μια ασφαλή εμπειρία στους νεότερους χρήστες.'
+  parentEmail: 'Email γονέα/κηδεμόνα'
+  parentEmailInfo: 'Απαιτείται για χρήστες κάτω των 14 ετών. Θα στείλουμε αίτημα συγκατάθεσης σε αυτή τη διεύθυνση.'
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: 'Ολοκλήρωσε την εγγραφή σου'
+    info: 'Δώσε την ημερομηνία γέννησής σου για να συνεχίσεις να χρησιμοποιείς την πλατφόρμα.'
     submit: Συνέχεια
   button:
     cancel: Ακύρωση
-    createAccount: Create account
+    createAccount: 'Δημιουργία λογαριασμού'
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: 'Έλεγξε τα εισερχόμενά σου!'
+    message: 'Σου στείλαμε ένα email επαλήθευσης. Κάνε κλικ στον σύνδεσμο του email για να ενεργοποιήσεις τον λογαριασμό σου.'
+    helpTitle: 'Δεν έλαβες το email;'
+    hint: 'Έλεγξε τον φάκελο ανεπιθύμητων. Ο σύνδεσμος ισχύει για 24 ώρες.'
+    resendButton: 'Επαναποστολή email επαλήθευσης'
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: 'Αναμονή για γονική συγκατάθεση'
+    message: 'Το email σου επαληθεύτηκε! Για να μπορείς να χρησιμοποιείς πλήρως την πλατφόρμα, πρέπει πρώτα να δώσει συγκατάθεση ένας γονέας ή κηδεμόνας.'
+    sentTo: 'Στάλθηκε αίτημα συγκατάθεσης στο %email%'
+    helpTitle: 'Δεν έλαβες το email; Χρειάζεσαι βοήθεια;'
+    hint: 'Ζήτα από τον γονέα σου να ελέγξει τον φάκελο ανεπιθύμητων. Ο σύνδεσμος ισχύει για 24 ώρες.'
+    resendButton: 'Επαναποστολή email συγκατάθεσης'
+    wrongEmail: 'Έγραψες λάθος email γονέα;'
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: 'Η γονική συγκατάθεση ανακλήθηκε'
+    message: 'Ο γονέας ή κηδεμόνας σου ανακάλεσε τη συγκατάθεση για τον λογαριασμό σου. Ο λογαριασμός σου έχει περιορισμένες λειτουργίες μέχρι να δοθεί ξανά συγκατάθεση.'
+    newEmailPlaceholder: 'Νέο email γονέα'
+    changeButton: 'Ενημέρωση & επαναποστολή'
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: 'Ανάκτηση λογαριασμού'
+  description: 'Αν θυμάσαι το email ή το όνομα χρήστη του λογαριασμού σου, μπορούμε να σου στείλουμε έναν σύνδεσμο για να επαναφέρεις τον κωδικό πρόσβασής σου.'
   button:
     cancel: Ακύρωση
-    submit: Recover password
+    submit: 'Ανάκτηση κωδικού πρόσβασης'
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: 'Επαναφορά κωδικού πρόσβασης'
+    description: 'Αν θυμάσαι το email του λογαριασμού σου, μπορούμε να σου στείλουμε έναν σύνδεσμο για να επαναφέρεις τον κωδικό πρόσβασής σου.'
     button:
-      submit: "Send reset email"
+      submit: 'Αποστολή email επαναφοράς'
       cancel: "Ακύρωση"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: 'Έλεγξε τα email σου'
+    description: 'Αν υπάρχει λογαριασμός με αυτό το email, μόλις στάλθηκε ένα email με σύνδεσμο που μπορείς να χρησιμοποιήσεις για να επαναφέρεις τον κωδικό πρόσβασής σου. Ο σύνδεσμος θα λήξει σε %time%.'
+    descriptionTwo: 'Μπορείς να ζητάς νέα επαναφορά κωδικού κάθε %throttleLimit% ώρες.'
+    descriptionThree: 'Αν δεν έλαβες email, έλεγξε τον φάκελο ανεπιθύμητων ή γράψε ένα email στην υποστήριξή μας στο %email-webmaster%.'
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: 'Γεια!'
+    visitLink: 'Για να επαναφέρεις τον κωδικό πρόσβασής σου, επισκέψου τον παρακάτω σύνδεσμο'
+    expire: 'Αυτός ο σύνδεσμος θα λήξει σε %time%.'
+    cheers: 'Γεια χαρά!'
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: 'Επαναφορά κωδικού πρόσβασης'
+    content: 'Ζήτησες πρόσφατα επαναφορά του κωδικού πρόσβασης για τον λογαριασμό σου στο Catrobat. Κάνε κλικ στο παρακάτω κουμπί για να επιλέξεις νέο κωδικό. Αν δεν το ζήτησες εσύ, μπορείς να αγνοήσεις αυτό το email.'
+    visitLink: 'Επαναφορά κωδικού'
+    expire: 'Αυτός ο σύνδεσμος ισχύει για %time% και μπορεί να χρησιμοποιηθεί μόνο μία φορά.'
   reset:
-    title: "Reset your password"
+    title: 'Επαναφορά κωδικού πρόσβασης'
     button:
-      submit: "Reset password"
+      submit: 'Επαναφορά κωδικού'
 apk:
-  download: Κατεβάστε ως app
+  download: 'Κατέβασέ το ως εφαρμογή'
   prepare: 'Προετοιμασία εφαρμογής'
   preparing: 'Προετοιμασία εφαρμογής'
   text: 'Η διαδικασία μπορεί να διαρκέσει λίγο'
@@ -668,128 +667,128 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: 'Κάτι δεν λειτούργησε. Δοκίμασε ξανά ή ενημέρωσέ μας αν συνεχίσει να συμβαίνει!'
   username:
     blank: Το όνομα χρήστη δεν πρέπει να είναι κενό
     invalid: Αυτό το όνομα χρήστη δεν είναι έγκυρο
     exists: Αυτό το όνομα χρήστη υπάρχει ήδη.
     not_exists: Αυτό το όνομα χρήστη δεν υπάρχει.
     not_email: Το όνομα χρήστη δεν πρέπει να είναι μια διεύθυνση ηλεκτρονικού ταχυδρομείου.
-    size: The username must have at least 3 character and not more than 180
+    size: 'Το όνομα χρήστη πρέπει να έχει τουλάχιστον 3 και όχι περισσότερους από 180 χαρακτήρες'
   password:
     blank: Λείπει ο κωδικός πρόσβασης.
     short: 'Ο κωδικός πρόσβασης πρέπει να έχει τουλάχιστον {{ limit }} χαρακτήρες.'
   country:
     blank: Λείπει η χώρα.
-    invalid: Invalid country
+    invalid: 'Μη έγκυρη χώρα'
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: 'Το email δεν πρέπει να είναι κενό'
+    invalid: 'Το email σου δεν φαίνεται να είναι έγκυρο'
     exists: Η συγκεκριμένη διεύθυνση email υπάρχει ήδη.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: 'Το Open Authentication ID δεν πρέπει να είναι κενό'
   login: Ο κωδικός ή το όνομα λογαριασμού ήταν λανθασμένο.
-  post-data: POST-Data not correct or missing!
+  post-data: 'Τα δεδομένα POST είναι λανθασμένα ή λείπουν!'
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: 'Ο client δεν έστειλε fileChecksum! Μήπως χρησιμοποιείς παλιά έκδοση του Pocket Code;'
+    invalid: 'μη έγκυρο checksum'
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: 'μη έγκυρο XML κώδικα'
+    missing: 'άγνωστο σφάλμα: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
+    unexpected: 'βρέθηκε μη αναμενόμενο αρχείο'
     invalid: μη έγκυρο αρχείο
-  image.missing: Project XML mentions a file which does not exist in project-folder
+  image.missing: 'Το XML του έργου αναφέρει ένα αρχείο που δεν υπάρχει στον φάκελο του έργου'
   unknown: άγνωστο σφάλμα
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  token: 'Ο έλεγχος ταυτότητας της συσκευής απέτυχε: μη έγκυρο auth-token!'
+  uploadTokenAuthFailed: 'Ο έλεγχος ταυτότητας του token ανεβάσματος απέτυχε.'
   project:
-    invalid: Invalid project.
+    invalid: 'Μη έγκυρο έργο.'
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'Λυπούμαστε, το έργο σου περιέχει παλιά έκδοση της γλώσσας Catrobat! Χρησιμοποιείς την τελευταία έκδοση του Pocket Code;'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'Λυπούμαστε, χρησιμοποιείς παλιά έκδοση του Pocket Code. Ενημέρωσε στην τελευταία έκδοση.'
   authentication:
-    title: Login did not work
+    title: 'Η σύνδεση δεν λειτούργησε'
     webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+      Φαίνεται ότι το όνομα χρήστη ή ο κωδικός πρόσβασης δεν ήταν σωστά.
+      Δοκίμασε να συνδεθείς ξανά στην εφαρμογή.
 success:
-  text: Success
+  text: 'Επιτυχία'
   registration: Εγγραφή επιτυχής!
   token: ΟΚ
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: 'Το έργο σου ανέβηκε με επιτυχία!'
+  imgUpload: 'Η εικόνα σου ανέβηκε με επιτυχία!'
+  report: 'Η αναφορά σου στάλθηκε με επιτυχία!'
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} πριν από < 1 λεπτό |{1}πριν από 1 λεπτό |]1,Inf] πριν από %count% λεπτά'
+  hours.ago: '{1}πριν από 1 ώρα |]1,Inf] πριν από %count% ώρες'
+  days.ago: '{1}πριν από 1 ημέρα |]1,Inf] πριν από %count% ημέρες'
+  months.ago: '{1}πριν από 1 μήνα |]1,Inf] πριν από %count% μήνες'
+  years.ago: '{1}πριν από 1 χρόνο |]1,Inf] πριν από περισσότερο από έναν χρόνο'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: 'Παρουσιάστηκε σφάλμα κατά το ανέβασμα της εφαρμογής σου.'
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Επαλήθευσε το email σου'
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: 'Λείπει το email'
+    emailEmpty: 'Το email δεν μπορεί να είναι κενό'
+    emailInvalid: 'Μη έγκυρο email'
+    emailAlreadyInUse: 'Το email χρησιμοποιείται ήδη'
+    usernameMissing: 'Λείπει το όνομα χρήστη'
+    usernameTooShort: 'Το όνομα χρήστη είναι πολύ σύντομο'
+    usernameTooLong: 'Το όνομα χρήστη είναι πολύ μεγάλο'
+    usernameEmpty: 'Το όνομα χρήστη δεν μπορεί να είναι κενό'
+    usernameAlreadyInUse: 'Το όνομα χρήστη χρησιμοποιείται ήδη'
+    usernameInvalid: 'Μη έγκυρο όνομα χρήστη'
+    passwordMissing: 'Λείπει ο κωδικός πρόσβασης'
+    passwordEmpty: 'Ο κωδικός πρόσβασης δεν μπορεί να είναι κενός'
+    passwordTooShort: 'Ο κωδικός πρόσβασης είναι πολύ σύντομος'
+    passwordTooLong: 'Ο κωδικός πρόσβασης είναι πολύ μεγάλος'
+    passwordInvalidChars: 'Ο κωδικός πρόσβασης περιέχει μη έγκυρους χαρακτήρες'
+    usernameContainsEmail: 'Το όνομα χρήστη δεν πρέπει να περιέχει διεύθυνση email'
+    usernameContainsLink: 'Το όνομα χρήστη δεν πρέπει να περιέχει σύνδεσμο'
+    countryCodeInvalid: 'Μη έγκυρος κωδικός χώρας'
+    pictureInvalid: 'Η εικόνα προφίλ δεν είναι έγκυρη ή δεν υποστηρίζεται'
+    dateOfBirthMissing: 'Η ημερομηνία γέννησης είναι υποχρεωτική'
+    dateOfBirthInvalid: 'Η ημερομηνία γέννησης δεν είναι έγκυρη'
+    tooYoung: 'Πρέπει να είσαι τουλάχιστον 3 ετών για να δημιουργήσεις λογαριασμό'
+    parentEmailMissing: 'Το email γονέα είναι υποχρεωτικό για χρήστες κάτω των 14 ετών'
+    parentEmailInvalid: 'Το email γονέα δεν είναι έγκυρο'
+    parentEmailSameAsUser: 'Το email γονέα πρέπει να διαφέρει από τη δική σου διεύθυνση email'
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: 'Λείπει ο τρέχων κωδικός πρόσβασης'
+    currentPasswordWrong: 'Ο τρέχων κωδικός πρόσβασης είναι λάθος'
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Το όνομα δεν μπορεί να είναι κενό'
+    nameTooLong: 'Το όνομα είναι πολύ μεγάλο'
+    descriptionTooLong: 'Η περιγραφή είναι πολύ μεγάλη'
+    creditsTooLong: 'Οι σημειώσεις και οι ευχαριστίες είναι πολύ μεγάλες'
+    screenshotInvalid: 'Το στιγμιότυπο του έργου δεν είναι έγκυρο ή δεν υποστηρίζεται'
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    invalid_checksum: 'Μη έγκυρο checksum. Δοκίμασε να το ανεβάσεις ξανά!'
+    upload_error: 'Σφάλμα κατά το ανέβασμα. Δοκίμασε να το ανεβάσεις ξανά!'
+    creating_error: 'Σφάλμα κατά τη δημιουργία του έργου. Δοκίμασε να το ανεβάσεις ξανά!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Η αποθήκευση των λεπτομερειών του έργου απέτυχε.'
+    screenshotError: 'Η ανάγνωση, μετατροπή ή αποθήκευση του στιγμιότυπου απέτυχε. Έλεγξε τα δεδομένα σου.'
+    notFound: 'Το έργο προς αλλαγή δεν βρέθηκε.'
+    forbidden: 'Δεν επιτρέπεται η αλλαγή του έργου. Είσαι ακόμα συνδεδεμένος/η;'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'Λείπει το όνομα'
+    nameEmpty: 'Το όνομα δεν μπορεί να είναι κενό'
+    nameTooShort: 'Το όνομα είναι πολύ σύντομο'
+    nameTooLong: 'Το όνομα είναι πολύ μεγάλο'
+    nameAlreadyInUse: 'Το όνομα χρησιμοποιείται ήδη'
+    descriptionMissing: 'Λείπει η περιγραφή'
+    descriptionEmpty: 'Η περιγραφή είναι κενή'
+    descriptionTooShort: 'Η περιγραφή είναι πολύ σύντομη'
+    descriptionTooLong: 'Η περιγραφή είναι πολύ μεγάλη'
+    imageFileInvalid: 'Μη έγκυρο αρχείο εικόνας'
+    imageFileInvalidType: 'Μη έγκυρος τύπος αρχείου εικόνας'
+    imageFileTooLarge: 'Το αρχείο εικόνας είναι πολύ μεγάλο'
 #languages and countries
 language:
   arabic: Αραβικά
@@ -810,15 +809,15 @@ language:
   german: Γερμανικά
   greek: Ελληνικά
   hebrew: Εβραϊκά
-  hindi: Ινδικά
+  hindi: 'Χίντι'
   hungarian: Ουγγρικά
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Μαλάι
+  indonesian: 'Ινδονησιακά'
+  italian: 'Ιταλικά'
+  japanese: 'Ιαπωνικά'
+  korean: 'Κορεατικά'
+  latvian: 'Λετονικά'
+  lithuanian: 'Λιθουανικά'
+  malay: 'Μαλαισιανά'
   norwegian: Νορβηγικά
   persian: Περσικά
   polish: Πολωνικά
@@ -837,70 +836,70 @@ language:
   ukrainian: Ουκρανικά
   vietnamese: Βιετναμικά
 ci:
-  generate: Δημιουργεία Apk
-  pending: Δημιουργεία Apk
+  generate: 'Δημιουργία Apk'
+  pending: 'Δημιουργία Apk'
   download: Λήψη Apk
 admin:
   maintain:
     diskMaintenance: Συντήρηση δίσκου
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    ramMaintenance: 'Συντήρηση RAM'
+    noRemovableObjects: 'Δεν υπάρχουν αντικείμενα προς αφαίρεση.'
+    removableObjects: 'Αντικείμενα προς αφαίρεση'
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: 'Παρόμοια έργα'
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Όσοι κατέβασαν αυτό το έργο κατέβασαν επίσης'
+  moreFromThisUser: 'Περισσότερα από τον χρήστη %username%'
 pmd:
-  submitBtn: Υποβάλετε το έργο σας
+  submitBtn: 'Υπόβαλε το έργο σου'
   submitBox:
     header: Υποβολή
-    text: Είστε έτοιμοι να υποβάλετε το έργο σας. Παρακαλώ εισάγετε τον κωδικό έργου και κάντε κλικ στο κουμπί Αποστολή.
+    text: 'Είσαι έτοιμος/η να υποβάλεις το έργο σου. Γράψε τον κωδικό του έργου και κάνε κλικ στο κουμπί Αποστολή.'
     btnText: Υποβολή
   successful:
-    text: Your project upload was successful.
+    text: 'Το ανέβασμα του έργου σου ολοκληρώθηκε με επιτυχία.'
   failed:
-    text: Project upload failed.
+    text: 'Το ανέβασμα του έργου απέτυχε.'
 codeview:
-  title: 'Code View'
+  title: 'Προβολή κώδικα'
   showCode: 'Εμφάνιση κώδικα'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
+  hideCode: 'Απόκρυψη κώδικα'
+  showStatistics: 'Εμφάνιση στατιστικών κώδικα'
+  hideStatistics: 'Απόκρυψη στατιστικών κώδικα'
+  cantDisplayCode: 'Δεν είναι δυνατή η εμφάνιση του κώδικα'
+  cantDisplayStatistics: 'Δεν είναι δυνατή η εμφάνιση του κώδικα'
+  totalNumberOf: 'Συνολικός αριθμός'
+  scenes: 'Σκηνές'
   scripts: 'Σενάρια'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
+  bricks: 'Τουβλάκια'
+  objects: 'Χαρακτήρες και αντικείμενα'
   looks: 'Όψεις'
   sounds: 'Ήχοι'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  globals: 'Καθολικά'
+  locals: 'Τοπικά'
+  globalVariables: 'Καθολικές μεταβλητές'
+  localVariables: 'Τοπικές μεταβλητές'
+  eventBricks: 'Τουβλάκια συμβάντων'
+  controlBricks: 'Τουβλάκια ελέγχου'
+  motionBricks: 'Τουβλάκια κίνησης'
+  soundBricks: 'Τουβλάκια ήχου'
+  looksBricks: 'Τουβλάκια όψεων'
+  penBricks: 'Τουβλάκια πένας'
+  dataBricks: 'Τουβλάκια δεδομένων'
+  specialBricks: 'Ειδικά τουβλάκια'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'Προβολή κώδικα'
+  loading: 'Φόρτωση προβολής κώδικα...'
+  error: 'Δεν ήταν δυνατή η φόρτωση της προβολής κώδικα.'
+  retry: 'Δοκίμασε ξανά'
+  empty: 'Αυτό το έργο δεν έχει κώδικα.'
   scripts: 'Σενάρια'
   looks: 'Όψεις'
   sounds: 'Ήχοι'
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
+  title: 'Στατιστικά κώδικα'
+  error: 'Δεν είναι δυνατή η εμφάνιση των στατιστικών κώδικα.'
+  general: 'Γενικά'
+  bricks: 'Τουβλάκια'
   eventBricks: 'Συμβάν'
   controlBricks: 'Έλεγχος'
   motionBricks: 'Κίνηση'
@@ -908,88 +907,88 @@ codeStatistics:
   looksBricks: 'Όψεις'
   penBricks: 'Πένα'
   dataBricks: 'Δεδομένα'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  deviceBricks: 'Συσκευή'
+  specialBricks: 'Ειδικά'
+  yourScore: 'Η βαθμολογία σου:'
+  points: 'πόντοι'
+  abstraction: 'Αφαίρεση και αποσύνθεση προβλημάτων'
+  parallelism: 'Παραλληλισμός'
+  logicalThinking: 'Λογική σκέψη'
+  synchronization: 'Συγχρονισμός'
+  flowControl: 'Έλεγχος ροής'
+  userInteractivity: 'Αλληλεπίδραση με τον χρήστη'
+  dataRepresentation: 'Αναπαράσταση δεδομένων'
+  level: 'Επίπεδο'
+  loading: 'Φόρτωση...'
+  bonus: 'Μπόνους'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: 'Γίνε ένα από τα πάνω από %user_count% δημιουργικά μυαλά!'
+  text: 'Με %project_count% καταπληκτικά έργα ήδη κοινοποιημένα, το επόμενο μπορεί να είναι το δικό σου. Κατέβασε την εφαρμογή μας και ξεκίνα να δημιουργείς σήμερα'
 privacy-policy:
   header: Πολιτική απορρήτου
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: 'Έκδοση 2.2, 17 Οκτωβρίου 2019'
+  text1: 'Για να σου προσφέρουμε όλα τα οφέλη των υπηρεσιών μας και του σχετικού λογαριασμού, είναι απαραίτητο να συλλέξουμε ορισμένα δεδομένα από σένα.'
+  text2: 'Για τη διατήρηση και βελτίωση των υπηρεσιών μας (εφαρμογές και ιστότοποι) και για επιστημονική έρευνα στην εκπαίδευση ΤΠΕ και STEM/STEAM, χρησιμοποιούμε τα Google Analytics, Crashlytics και Firebase, όλα της Google LLC (ΗΠΑ), καθώς και το Dynatrace της Dynatrace LLC (ΗΠΑ), για να λαμβάνουμε μεταδεδομένα σχετικά με τη χρήση των υπηρεσιών μας, π.χ. πληροφορίες σφαλμάτων, χρονοσφραγίδες, σελίδες/οθόνες που επισκέφθηκες, χρήση των εφαρμογών και υπηρεσιών μας, το λειτουργικό σύστημα που χρησιμοποιείς και πληροφορίες για τον πάροχο δικτύου. Αυτή η ανάλυση και τα δεδομένα που συλλέγονται δεν συνδέονται με το προφίλ σου και δεν περιέχουν προσωπικές πληροφορίες (τα τελευταία ψηφία της διεύθυνσης IP ανωνυμοποιούνται). Ωστόσο, τα δεδομένα που συλλέγονται διαβιβάζονται στους παρόχους υπηρεσιών (Google LLC, ΗΠΑ και Dynatrace LLC, ΗΠΑ). Η επεξεργασία δεδομένων βασίζεται σε συμφωνίες με την Google LLC και την Dynatrace LLC. Αυτή η σχέση με τους παρόχους υπηρεσιών συμμορφώνεται με τον Γενικό Κανονισμό για την Προστασία Δεδομένων της Ευρωπαϊκής Ένωσης (GDPR) και τη συμφωνία ΕΕ-ΗΠΑ «Privacy Shield».'
+  text3: 'Για να δημιουργήσεις και να χρησιμοποιήσεις λογαριασμό στα συστήματά μας, και για να σε ενημερώνουμε μέσω email για απαραίτητες αλλαγές στον λογαριασμό σου, π.χ. ενημερώσεις ή παραβιάσεις των Όρων Χρήσης και Υπηρεσιών μας, των κανόνων της κοινότητάς μας ή των πολιτικών μας, αποθηκεύουμε το όνομα χρήστη σου και, αν το έχεις δώσει, τη διεύθυνση email σου. Αν έχεις συνδέσει τον λογαριασμό σου μέσω Google Plus ή Facebook, αποθηκεύουμε επιπλέον ένα κλειδί αναγνώρισης που συνδέεται με τον λογαριασμό σου σε αυτές τις υπηρεσίες. Δεν θα χρησιμοποιήσουμε αυτά τα δεδομένα για κανέναν άλλο σκοπό (π.χ. μάρκετινγκ), εκτός αν μας το έχεις επιτρέψει ρητά.'
+  text4: 'Προαιρετικά, μπορείς να μας δηλώσεις τη χώρα διαμονής σου από τη σελίδα του λογαριασμού σου στον ιστότοπο κοινοποίησης. Αυτή θα εμφανίζεται στο δημόσιο προφίλ σου και θα χρησιμοποιείται από εμάς μόνο για στατιστικούς και ερευνητικούς σκοπούς. Μπορείς να την αφαιρέσεις ανά πάσα στιγμή από τις ρυθμίσεις του προφίλ σου.'
+  text5: 'Μπορείς να ανακαλέσεις τη χρήση των προσωπικών δεδομένων του λογαριασμού σου ανά πάσα στιγμή, διαγράφοντας τον λογαριασμό σου από τη σελίδα του προφίλ σου στο https://share.catrob.at/. Μετά τη διαγραφή του λογαριασμού σου θα μπορείς να χρησιμοποιείς ακόμα τις παρεχόμενες υπηρεσίες, αλλά όχι να συνεργάζεσαι, π.χ. ανεβάζοντας προγράμματα, σχολιάζοντας ή δίνοντας «μου αρέσει». Επίσης, όλο το περιεχόμενο που συνδέεται με τον λογαριασμό σου, π.χ. ανεβασμένα προγράμματα, σχόλια κ.λπ., θα διαγραφεί.'
+  text6: 'Για να αποτρέψουμε την κατάχρηση των υπηρεσιών μας, π.χ. μέσω ανεβασμάτων ή σχολίων χρηστών για παράνομους σκοπούς, όλα τα δημόσια δεδομένα που δημιουργούν οι χρήστες (ανεβάσματα, σχόλια) αποθηκεύονται εσωτερικά σε βάση δεδομένων, μαζί με χρονοσφραγίδα και τη διεύθυνση διαδικτύου που χρησιμοποιήθηκε. Αυτά τα δεδομένα δεν θα χρησιμοποιηθούν από κανέναν φορέα ούτε θα διαβιβαστούν σε αυτόν, εκτός αν υπάρχει εύλογη υποψία επαρκώς παράνομων ενεργειών και επίσημα αρμόδιες νομικές αρχές τα ζητήσουν βάσει του ισχύοντος δικαίου. Κάθε περίπτωση θα ελέγχεται πρώτα διεξοδικά από εμάς σε ατομική βάση.'
+  text7: 'Μπορείς προαιρετικά να εγγραφείς στο Newsletter του Catrobat στο https://catrob.at/newsletter, το οποίο παρέχουμε μέσω της υπηρεσίας MailChimp (The Rocket Science Group LLC d/b/a MailChimp, ΗΠΑ). Θα λαμβάνεις τότε ενημερώσεις για το έργο Catrobat και τις υπηρεσίες του στη διεύθυνση email που έδωσες. Μπορείς να διακόψεις τη συνδρομή στο newsletter ανά πάσα στιγμή μέσω του συνδέσμου «unsubscribe» στο κάτω μέρος κάθε newsletter. Αυτό το newsletter παρέχεται από τη MailChimp, με την οποία έχουμε συμφωνία επεξεργασίας δεδομένων και η οποία έχει δεσμευτεί στον Γενικό Κανονισμό για την Προστασία Δεδομένων της ΕΕ και στο «Privacy Shield» ΕΕ-ΗΠΑ. Για περισσότερες λεπτομέρειες σχετικά με τη MailChimp, δες επίσης την Πολιτική Απορρήτου και τους Όρους Χρήσης της MailChimp.'
+  text8: 'Όλες οι υπηρεσίες παρέχονται από το ελεύθερο έργο ανοιχτού κώδικα Catrobat υπό την αιγίδα της International Catrobat Association – Verein zur Förderung freier Software, μιας μη κερδοσκοπικής ΜΚΟ με έδρα στο Γκρατς της Αυστρίας (Ευρωπαϊκή Ένωση). Οι πολιτικές μας σέβονται το δίκαιο προστασίας δεδομένων της ΕΕ και της Αυστρίας (GDPR). Για να επικοινωνήσεις μαζί μας, στείλε email στο contact@catrobat.org ή γράψε μας στη διεύθυνση Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Ευρωπαϊκή Ένωση).'
+  text9: 'Αν είσαι κάτω των 14 ετών, αυτή η πολιτική πρέπει να γίνει αποδεκτή από νόμιμο κηδεμόνα (συνήθως γονέα).'
+  text10: 'Η επίσημη αγγλική πολιτική απορρήτου του Catrobat είναι διαθέσιμη στο διαδίκτυο στο %privacy_policy%.'
+  disagree-text: 'Χωρίς την έγκρισή σου δεν μπορούμε να δημιουργήσουμε λογαριασμό, αλλά οι βασικές λειτουργίες παραμένουν διαθέσιμες.'
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: 'Σήμανση ως αναγνωσμένο'
+  noFollowers: 'Φαίνεται ότι δεν έχεις ειδοποιήσεις για ακόλουθους.'
+  noComments: 'Φαίνεται ότι δεν έχεις ειδοποιήσεις για σχόλια.'
+  noReactions: 'Φαίνεται ότι δεν έχεις ειδοποιήσεις για αντιδράσεις.'
+  noRemixes: 'Φαίνεται ότι δεν έχεις ειδοποιήσεις για ανακατασκευές.'
+  noStudios: 'Φαίνεται ότι δεν έχεις ειδοποιήσεις για στούντιο.'
   tab:
-    studio: Studio
-    project: Προγράμματα
+    studio: 'Στούντιο'
+    project: 'Έργα'
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: 'Ο χρήστης %user_link% σχολίασε το έργο σου %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: 'Ο χρήστης %user_link% αντέδρασε στο έργο σου %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: 'Ο χρήστης %user_link% σε ακολουθεί τώρα.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: 'Ο χρήστης %user_link% δημιούργησε ένα νέο παιχνίδι %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: 'Ο χρήστης %user_link% ανακατασκεύασε το έργο σου %program_link%. Μπορείς να δεις την ανακατασκευή στον παρακάτω σύνδεσμο %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: 'Ο χρήστης %user_link% σχολίασε στο στούντιο %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: 'Ο χρήστης %user_link% πρόσθεσε το %program_link% στο στούντιο %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'Το αίτημά σου να γίνεις μέλος του στούντιο %studio_name% έγινε δεκτό.'
+    declined: 'Το αίτημά σου να γίνεις μέλος του στούντιο %studio_name% απορρίφθηκε.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'Το έργο σου %program_link% θα διαγραφεί αυτόματα σε %days% ημέρες. Ανέβασε μια νέα έκδοση ή κέρδισε περισσότερες λήψεις για να το κρατήσεις.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'Το έργο σου «%project_name%» αφαιρέθηκε αυτόματα λόγω αδράνειας. Ανέβασέ το ξανά αν θέλεις ακόμα να το μοιραστείς.'
+  noProjects: 'Φαίνεται ότι δεν έχεις ειδοποιήσεις για έργα.'
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
+  success: 'Ο σύνδεσμος αντιγράφηκε στο πρόχειρο!'
+  success_project: 'Ο σύνδεσμος του έργου αντιγράφηκε στο πρόχειρο!'
+  success_user: 'Ο σύνδεσμος του χρήστη αντιγράφηκε στο πρόχειρο!'
+  fail: 'Η αντιγραφή του συνδέσμου στο πρόχειρο απέτυχε! :('
 next: Επόμενο
-previous: Previous
+previous: 'Προηγούμενο'
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: 'Βιβλιοθήκη πολυμέσων'
+  description: 'Στις παρακάτω κατηγορίες θα βρεις χαρακτήρες και αντικείμενα για να τα προσθέσεις στα έργα σου.'
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: 'Μέγεθος προεπισκόπησης'
+    sm: 'μικρό'
+    md: 'μεσαίο'
+    lg: 'μεγάλο'
+  theme-special: 'Ειδικό θέμα %flavor%'
+  search-results: 'Αποτελέσματα αναζήτησης στη βιβλιοθήκη πολυμέσων'
+  no-results: 'Η αναζήτησή σου δεν έφερε αποτελέσματα. Χρησιμοποίησε μόνο αγγλικούς όρους αναζήτησης.'
+  download_these_files: 'αποθήκευση'
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +996,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Πνευματικά δικαιώματα &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Με την επιφύλαξη παντός δικαιώματος.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: 'Αυτός ο ιστότοπος χρειάζεται JavaScript για να λειτουργήσει. Ενεργοποίησε τη JavaScript στον browser σου ή ζήτα βοήθεια από έναν ενήλικα.'
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
+  message: 'Χρησιμοποιούμε cookies για να βελτιώνουμε τις υπηρεσίες μας. Κανένα δεδομένο δεν πουλιέται ούτε μοιράζεται.'
+  accept: 'Αποδοχή'
+  decline: 'Απόρριψη'
   privacy-link: "Πολιτική απορρήτου"
-  settings-link: "Cookie Settings"
+  settings-link: 'Ρυθμίσεις cookies'
 agree: Συμφωνώ
 disagree: Διαφωνώ
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: 'Δεν υπάρχουν προφίλ προς το παρόν.'
+element: 'Στοιχείο'
+elements: 'Στοιχεία'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
+  text: 'Κοινοποίηση'
+  error: 'Η κοινοποίηση απέτυχε'
+  success: 'Η κοινοποίηση ολοκληρώθηκε'
+copy: 'Αντιγραφή συνδέσμου'
+checkOutProject: 'Δες αυτό το έργο:'
+checkOutUser: 'Δες αυτόν τον χρήστη:'
 community: 'Catrobat κοινότητα'
-back_to_app: 'Exit community'
+back_to_app: 'Έξοδος από την κοινότητα'
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Πιο προβεβλημμένα
+  recent: 'Νεότερα έργα'
+  random: 'Τυχαία έργα'
+  most_viewed: 'Πιο προβεβλημένα'
   most_downloaded: Πιο κατεβασμένα
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  example: 'Παραδείγματα'
+  scratch: 'Ανακατασκευές από Scratch'
+  recommended: 'Προτεινόμενα έργα'
+  popular: 'Πιο δημοφιλή'
+  trending: 'Δημοφιλή τώρα'
 achievements:
   sidebar:
-    title: 'Achievements'
-    badge: 'new'
+    title: 'Επιτεύγματα'
+    badge: 'νέο'
   overview:
-    header: 'Achievements'
+    header: 'Επιτεύγματα'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Νεότερο επίτευγμα'
+      x_out_of_y: '%unlocked% από %total% ξεκλειδωμένα'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Ξεκλείδωτα'
+      empty: 'Δεν έχεις ξεκλειδώσει ακόμα κανένα επίτευγμα.'
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Κλειδωμένα'
+      empty: 'Έχεις ήδη ξεκλειδώσει όλα τα επιτεύγματα.'
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Συγχαρητήρια!'
+      subtitle: 'Κέρδισες ένα έμβλημα'
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: 'Επιτεύγματα'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Μαθητευόμενος'
+        description: 'Ακολούθησε κάποιον και ανέβασε ένα έργο'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Τεχνίτης'
+        description: 'Ενεργό μέλος για > 1 χρόνο'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Μάστορας'
+        description: 'Ενεργό μέλος για > 4 χρόνια'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Μεγάλος μάστορας'
+        description: 'Ενεργό μέλος για > 7 χρόνια'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Πρωτοβουλία'
+        description: 'Πρόσθεσε την πρώτη σου εικόνα προφίλ'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Αρχάριος'
+        description: 'Δημιούργησε λογαριασμό χρήστη'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: 'Συμμετοχή στο Coding Jam 2021'
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: 'Δίγλωσσος'
+        description: 'Μετάφρασε τα έργα σου σε 2 γλώσσες'
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: 'Τρίγλωσσος'
+        description: 'Μετάφρασε τα έργα σου σε 3 γλώσσες'
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: 'Γλωσσομαθής'
+        description: 'Μετάφρασε τα έργα σου σε 5 γλώσσες'
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: 'Επαληθευμένος'
+        description: 'Επαλήθευσε τον λογαριασμό σου'
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Ετικέτα |]1,Inf] Ετικέτες'
   tag:
     game:
-      title: Game
+      title: 'Παιχνίδι'
     animation:
-      title: Animation
+      title: 'Κινούμενα σχέδια'
     story:
-      title: Story
+      title: 'Ιστορία'
     music:
-      title: Music
+      title: 'Μουσική'
     art:
-      title: Art
+      title: 'Τέχνη'
     experimental:
-      title: Experimental
+      title: 'Πειραματικό'
     tutorial:
-      title: Tutorial
+      title: 'Οδηγός'
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Επέκταση |]1,Inf] Επεκτάσεις'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: 'Ντρόουν'
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: 'Κέντημα'
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: 'Πολλαπλοί παίκτες'
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: 'Στούντιο'
+  singular: 'Στούντιο'
+  create_studio: 'Δημιουργία στούντιο'
+  delete_studio: 'Διαγραφή στούντιο'
   cancel_studio: 'Ακύρωση'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: 'Όνομα στούντιο'
+  studio_description: 'Περιγραφή στούντιο'
+  is_public: 'Να είναι δημόσιο;'
+  enable_comments: 'Ενεργοποίηση σχολίων;'
+  cover_image: 'Ανέβασμα εξωφύλλου'
+  cover_image_empty: 'Δεν επιλέχθηκε εικόνα.'
+  cover_image_hint: 'Έως 1 MB. Αποδεκτές μορφές: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'Η εικόνα συμπιέστηκε αυτόματα για να χωρέσει στο όριο του 1 MB.'
+  cover_image_compressing: 'Συμπίεση εικόνας...'
+  cover_image_still_too_large: 'Η εικόνα είναι πολύ μεγάλη ακόμα και μετά τη συμπίεση. Επίλεξε ένα μικρότερο αρχείο.'
+  cover_image_invalid_type: 'Μη έγκυρος τύπος εικόνας. Χρησιμοποίησε JPEG, PNG, GIF ή WebP.'
+  cover_image_compression_failed: 'Η επεξεργασία της εικόνας απέτυχε. Δοκίμασε ένα διαφορετικό αρχείο.'
+  cover_image_alt: 'Η εικόνα εξωφύλλου σου'
+  cover_image_remove: 'Αφαίρεση εικόνας'
+  popular: 'Δημοφιλή στούντιο'
+  join: 'Γίνε μέλος'
+  leave: 'Αποχώρηση'
   report: 'Αναφορά'
-  public: 'public'
-  private: 'Invite-only'
+  public: 'δημόσιο'
+  private: 'Μόνο με πρόσκληση'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'Open'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    joined_studios: 'Στούντιο όπου είμαι μέλος'
+    public_studios: 'Δημόσια στούντιο'
+    private_studios: 'Στούντιο μόνο με πρόσκληση'
+    no_studios: 'Δεν υπάρχουν ακόμα στούντιο'
+    my_studios: 'Τα στούντιό μου'
+    explore: 'Εξερεύνηση στούντιο'
+    no_joined: 'Δεν έχεις γίνει ακόμα μέλος σε κανένα στούντιο'
+    joined: 'Μέλος'
+    load_more: 'Φόρτωση περισσότερων'
+    open: 'Άνοιγμα'
+    share: 'Κοινοποίηση'
+    share_success: 'Ο σύνδεσμος αντιγράφηκε στο πρόχειρο!'
+    leave_confirm_title: 'Να αποχωρήσεις από αυτό το στούντιο;'
     cancel: 'Ακύρωση'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    cancel_request: 'Ακύρωση αιτήματος'
+    cancel_request_confirm_title: 'Ακύρωση αιτήματος συμμετοχής;'
+    admin: 'Διαχειριστής'
+    member: 'Μέλος'
   details:
-    add_project: 'click to add the project'
-    add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
+    add_project: 'κάνε κλικ για να προσθέσεις το έργο'
+    add: 'Προσθήκη'
+    showMore: 'εμφάνιση περισσότερων'
+    showLess: 'εμφάνιση λιγότερων'
+    are_you_sure: 'Είσαι σίγουρος/η;'
+    no_way_of_return: 'Αυτό δεν μπορεί να αναιρεθεί.'
     delete_it: 'Διαγραφή'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    remove_project: 'Αφαίρεση από το στούντιο'
+    remove_project_error: 'Η αφαίρεση του έργου από το στούντιο απέτυχε.'
+    remove_project_success: 'Το έργο αφαιρέθηκε με επιτυχία από το στούντιο.'
+    no_projects: 'Το στούντιο δεν περιέχει ακόμα έργα.'
     projects:
-      title: 'Προγράμματα'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
-      download: 'Download'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
+      title: 'Έργα'
+      addProject: 'Προσθήκη έργων'
+      open_project: 'Άνοιγμα έργου'
+      download: 'Λήψη'
+      share: 'Κοινοποίηση'
+      remove_from_studio: 'Αφαίρεση από το στούντιο'
+      remove_from_studio_title: 'Αφαίρεση του έργου από το στούντιο;'
+      remove_from_studio_text: 'Μπορείς να το προσθέσεις ξανά αργότερα αν αλλάξεις γνώμη.'
+      share_success: 'Ο σύνδεσμος αντιγράφηκε στο πρόχειρο!'
+      share_fail: 'Η αντιγραφή του συνδέσμου απέτυχε.'
+      no_projects_empty_state: 'Δεν έχεις ακόμα έργα για να προσθέσεις. Δημιούργησε πρώτα ένα στο Pocket Code!'
+      add_selected: 'Προσθήκη επιλεγμένων'
+    no_available_projects: 'Δεν υπάρχουν διαθέσιμα έργα για προσθήκη.'
+    updateCoverError: 'Κάτι πήγε στραβά κατά την ενημέρωση του εξωφύλλου του στούντιο.'
+    join: 'Γίνε μέλος'
+    leave: 'Αποχώρηση'
     report: 'Αναφορά'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'Σε αναμονή'
+    decline: 'Απορρίφθηκε'
     comments:
       title: 'Σχόλια'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Γράψε κάτι'
+      replies: 'απαντήσεις'
+      send: 'αποστολή'
+      no_comments: 'Αυτό το στούντιο δεν έχει ακόμα σχόλια.'
+      disabled_comments: 'Τα σχόλια έχουν απενεργοποιηθεί για αυτό το στούντιο.'
+      remove_comment: 'Αφαίρεση σχολίου'
+      post_error: 'Κάτι πήγε στραβά κατά τη δημοσίευση του σχολίου σου. Δοκίμασε ξανά αργότερα.'
+      remove_error: 'Κάτι πήγε στραβά κατά την αφαίρεση του σχολίου. Δοκίμασε ξανά αργότερα.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'Δραστηριότητες'
+      join_studio: 'Ο χρήστης %user% έγινε μέλος του στούντιο.'
+      add_project: 'Ο χρήστης %user% πρόσθεσε ένα έργο.'
+      add_comment: 'Ο χρήστης %user% άφησε ένα σχόλιο.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'Μέλη στούντιο'
+      project_count: '{0} Κανένα έργο στούντιο |{1} 1 έργο στούντιο |]1,Inf] %count% έργα στούντιο'
+      no_studio_projects: 'Κανένα έργο στούντιο'
+      one_studio_project: '1 έργο στούντιο'
+      n_studio_projects: '%count% έργα στούντιο'
+      promote_member: 'Προαγωγή μέλους σε διαχειριστή'
+      promotion_failed: 'Κάτι πήγε στραβά κατά την προαγωγή αυτού του μέλους. Δοκίμασε ξανά αργότερα.'
+      ban_member: 'Αποκλεισμός μέλους από το στούντιο'
+      ban_failed: 'Κάτι πήγε στραβά κατά τον αποκλεισμό αυτού του μέλους. Δοκίμασε ξανά αργότερα.'
+      demote_member: 'Υποβιβασμός διαχειριστή σε μέλος'
+      demotion_failed: 'Κάτι πήγε στραβά κατά τον υποβιβασμό αυτού του διαχειριστή. Δοκίμασε ξανά αργότερα.'
+      last_admin: 'Δεν μπορείς να υποβιβάσεις τον τελευταίο διαχειριστή αυτού του στούντιο.'
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
-    show_more: 'More information'
-    show_less: 'Less information'
+      title: 'Αιτήματα συμμετοχής'
+      accept: 'Αποδοχή'
+      decline: 'Απόρριψη'
+      accept_success: 'Το αίτημα συμμετοχής έγινε δεκτό.'
+      decline_success: 'Το αίτημα συμμετοχής απορρίφθηκε.'
+      error: 'Κάτι πήγε στραβά. Δοκίμασε ξανά.'
+      no_requests: 'Δεν υπάρχουν εκκρεμή αιτήματα συμμετοχής.'
+    show_more: 'Περισσότερες πληροφορίες'
+    show_less: 'Λιγότερες πληροφορίες'
     admin_settings:
       title: 'Ρυθμίσεις'
-      studio_name: 'Studio Name'
-      studio_description: 'Description'
+      studio_name: 'Όνομα στούντιο'
+      studio_description: 'Περιγραφή'
       toggle_allow_comments: 'Σχόλια'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Δημόσιο'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Μέγεθος: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: 'Τύπος: εικόνα'
+      project: 'Τύπος: έργο'
+      sound: 'Τύπος: ήχος'
+      movie: 'Τύπος: βίντεο'
+      default: 'Τύπος: άγνωστος'
+  no_categories: 'Δεν υπάρχουν ακόμα διαθέσιμες κατηγορίες πολυμέσων.'
+  no_results: 'Δεν βρέθηκαν αποτελέσματα.'
+  assets_count: 'στοιχεία'
+  view_all: 'Προβολή όλων'
+  view_all_category: 'Προβολή όλων: %category%'
+  back_to_app: 'Πίσω στην εφαρμογή'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'Το ζητούμενο έργο δεν είναι διαθέσιμο'
+  project_not_for_kids: 'Το έργο σημειώθηκε ως ακατάλληλο για παιδιά!'
+  project_safe_for_kids: 'Το έργο σημειώθηκε ως κατάλληλο για παιδιά!'
+  project_not_for_kids_moderator: 'Το έργο σημειώθηκε από συντονιστή. Δεν μπορείς να το αναιρέσεις!'
+  project_set_private: 'Το έργο έγινε ιδιωτικό.'
+  project_set_public: 'Το έργο έγινε δημόσιο.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'Πρόσθετες πληροφορίες: additionalInfo'
+    feature_1: 'Η λειτουργία featureName δεν είναι διαθέσιμη από maintenanceStart έως maintenanceEnd'
+    feature_2: 'Η λειτουργία'
+    feature_3: 'Η λειτουργία'
+MarkNotForKids: 'Σήμανση ως ακατάλληλο για παιδιά'
+MarkSafeForKids: 'Σήμανση ως κατάλληλο για παιδιά'
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: 'Επιβεβαίωση'
+  confirmMark: 'Σίγουρα θέλεις να σημειώσεις αυτό το έργο ως ακατάλληλο για παιδιά;'
+  confirmUnmark: 'Σίγουρα θέλεις να αφαιρέσεις τη σήμανση «ακατάλληλο για παιδιά» από αυτό το έργο;'
+  confirmYes: 'Ναι, συνέχεια!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'Αναφορά: %content_type%'
+    reason_placeholder: 'Περίγραψε γιατί το αναφέρεις...'
+    submit: 'Υποβολή αναφοράς'
+    success: 'Η αναφορά σου υποβλήθηκε. Ευχαριστούμε.'
+    error: 'Κάτι πήγε στραβά. Δοκίμασε ξανά.'
+    duplicate: 'Έχεις ήδη αναφέρει αυτό το περιεχόμενο.'
+    trust_too_low: 'Ο λογαριασμός σου είναι πολύ καινούργιος για να κάνει αναφορές.'
+    unverified: 'Βεβαιώσου ότι έχεις συνδεθεί και ότι το email του λογαριασμού σου έχει επαληθευτεί.'
+    rate_limited: 'Υποβάλλεις αναφορές πολύ γρήγορα. Περίμενε λίγο και δοκίμασε ξανά.'
+    suspended: 'Ο λογαριασμός σου έχει ανασταλεί.'
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: 'Προσφυγή'
+    title: 'Προσφυγή κατά αυτής της απόφασης'
+    placeholder: 'Εξήγησε γιατί αυτό το περιεχόμενο δεν πρέπει να κρυφτεί...'
+    submit: 'Υποβολή προσφυγής'
     cancel: "Ακύρωση"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: 'Η προσφυγή σου υποβλήθηκε για εξέταση.'
+    already_pending: 'Έχεις ήδη μια προσφυγή σε εκκρεμότητα.'
+    error: 'Κάτι πήγε στραβά. Δοκίμασε ξανά.'
+    rate_limited: 'Υποβάλλεις προσφυγές πολύ γρήγορα. Περίμενε λίγο και δοκίμασε ξανά.'
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: 'Δημοσιεύεις σχόλια πολύ γρήγορα. Περίμενε μια στιγμή.'
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: 'Αντιδράς πολύ γρήγορα. Περίμενε μια στιγμή.'
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: 'Ακολουθείς/σταματάς να ακολουθείς πολύ γρήγορα. Περίμενε μια στιγμή.'
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: 'Κάνεις ενέργειες στο στούντιο πολύ γρήγορα. Περίμενε μια στιγμή.'
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: 'Αυτό το έργο έχει κρυφτεί λόγω αναφορών της κοινότητας.'
+    comment: 'Αυτό το σχόλιο έχει κρυφτεί λόγω αναφορών της κοινότητας.'
+    user: 'Αυτό το προφίλ έχει κρυφτεί λόγω αναφορών της κοινότητας.'
+    user_own: 'Ο λογαριασμός σου έχει ανασταλεί λόγω αναφορών της κοινότητας. Μπορείς να προσφύγεις κατά αυτής της απόφασης.'
+    studio: 'Αυτό το στούντιο έχει κρυφτεί λόγω αναφορών της κοινότητας.'
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: 'Το περιεχόμενό σου (%content_type%) έχει κρυφτεί λόγω αναφορών της κοινότητας. Μπορείς να προσφύγεις κατά αυτής της απόφασης.'
+    appeal_approved: 'Η προσφυγή σου εγκρίθηκε. Το περιεχόμενό σου είναι πάλι ορατό.'
+    appeal_rejected: 'Η προσφυγή σου εξετάστηκε και η απόφαση να κρυφτεί το περιεχόμενό σου ισχύει.'
+    admin_review_needed: 'Περιεχόμενο κρύφτηκε αυτόματα και χρειάζεται έλεγχο.'
+Reports: 'Αναφορές'
+members: 'μέλη'
