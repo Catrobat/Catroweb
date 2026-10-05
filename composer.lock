@@ -7418,16 +7418,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v8.1.7",
+            "version": "v8.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "47616ab077b5aff4d0f718b96680a48599fc1a3f"
+                "reference": "8888daf06a2fc8440346215d3b52f3c611cc486d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/47616ab077b5aff4d0f718b96680a48599fc1a3f",
-                "reference": "47616ab077b5aff4d0f718b96680a48599fc1a3f",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/8888daf06a2fc8440346215d3b52f3c611cc486d",
+                "reference": "8888daf06a2fc8440346215d3b52f3c611cc486d",
                 "shasum": ""
             },
             "require": {
@@ -7493,7 +7493,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v8.1.7"
+                "source": "https://github.com/symfony/cache/tree/v8.1.8"
             },
             "funding": [
                 {
@@ -7513,7 +7513,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-08T13:39:13+00:00"
+            "time": "2026-09-29T12:38:40+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -12721,16 +12721,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v8.1.7",
+            "version": "v8.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "935b01a01cd0a7eaa8356a8db86d63ff1dce4873"
+                "reference": "828f05cff662bb1661f195daa1b06961642ca9dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/935b01a01cd0a7eaa8356a8db86d63ff1dce4873",
-                "reference": "935b01a01cd0a7eaa8356a8db86d63ff1dce4873",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/828f05cff662bb1661f195daa1b06961642ca9dd",
+                "reference": "828f05cff662bb1661f195daa1b06961642ca9dd",
                 "shasum": ""
             },
             "require": {
@@ -12794,7 +12794,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/v8.1.7"
+                "source": "https://github.com/symfony/validator/tree/v8.1.8"
             },
             "funding": [
                 {
@@ -12814,7 +12814,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-09T19:52:34+00:00"
+            "time": "2026-09-29T12:38:40+00:00"
         },
         {
             "name": "symfony/var-dumper",
