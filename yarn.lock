@@ -959,18 +959,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"auto-changelog@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "auto-changelog@npm:2.6.1"
+"auto-changelog@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "auto-changelog@npm:2.7.0"
   dependencies:
     commander: "npm:^7.2.0"
     handlebars: "npm:^4.7.9"
     import-cwd: "npm:^3.0.0"
     parse-github-url: "npm:^1.0.4"
-    semver: "npm:^7.8.1"
+    semver: "npm:^7.8.5"
   bin:
     auto-changelog: src/index.js
-  checksum: 10c0/ef22cabcc9b26a664def90a3746fcb0bb3cccb1b7c41ba444f509c4c46d98201d8f3d15bb720f9f8ffc65379aef2733e34c7808b92af18eb4d9e1d9b25e03ad5
+  checksum: 10c0/0881939877bb14d7686e86e7ea436ef956edf9102eb4e74c3ced43f97f9cedb17166ee3d82e8a1246a02e7c91658f47eddf60812c958d93a44a375ea06cefc5d
   languageName: node
   linkType: hard
 
@@ -1139,7 +1139,7 @@ __metadata:
     "@openapitools/openapi-generator-cli": "npm:^2.41.0"
     "@popperjs/core": "npm:^2.11.8"
     analytics: "npm:^0.8.19"
-    auto-changelog: "npm:^2.6.1"
+    auto-changelog: "npm:^2.7.0"
     autoprefixer: "npm:^10.6.1"
     bootstrap: "npm:^5.3.8"
     browserslist: "npm:^4.29.2"
@@ -2704,12 +2704,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.8.1":
-  version: 7.8.2
-  resolution: "semver@npm:7.8.2"
+"semver@npm:^7.8.5":
+  version: 7.8.5
+  resolution: "semver@npm:7.8.5"
   bin:
     semver: bin/semver.js
-  checksum: 10c0/8e8c193fa75b938e5b3ccf6707c6447e4b34f73e493e72b03f3185393489f45e049144052f624217c346d6c6e0a301dda8eeab2f14413e337218ecb1cbd2de16
+  checksum: 10c0/b1f3127a5be8125a94f37188b361c212466c292c6910adce3ec106cff5dc211ccaedc4739c11bb70fda59d6fc1f040a9bca289f4e093451521a2372e5231fe0c
   languageName: node
   linkType: hard
 

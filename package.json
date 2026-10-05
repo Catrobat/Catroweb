@@ -43,7 +43,7 @@
     "@biomejs/biome": "2.5.15",
     "@hotwired/stimulus": "^3.2.2",
     "@openapitools/openapi-generator-cli": "^2.41.0",
-    "auto-changelog": "^2.6.1",
+    "auto-changelog": "^2.7.0",
     "autoprefixer": "^10.6.1",
     "browserslist": "^4.29.2",
     "dotenv": "^18.0.5",
