@@ -1077,18 +1077,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.29.2":
-  version: 4.29.2
-  resolution: "browserslist@npm:4.29.2"
+"browserslist@npm:^4.29.3":
+  version: 4.29.3
+  resolution: "browserslist@npm:4.29.3"
   dependencies:
     baseline-browser-mapping: "npm:^2.11.26"
-    caniuse-lite: "npm:^1.0.30001812"
+    caniuse-lite: "npm:^1.0.30001813"
     electron-to-chromium: "npm:^1.5.439"
     node-releases: "npm:^2.0.57"
     update-browserslist-db: "npm:^1.3.3"
   bin:
     browserslist: cli.js
-  checksum: 10c0/eee6d82d9b2c8c16bf8083957c51e639b3d1a769393bfdc66d5f67828cecfef9c4fb31946d239d78b09fcdf7f071da8652d3d6d42f42bba54e1a3b42ec9b570b
+  checksum: 10c0/6e1a1fcae77369260e936fe63e7994105f04c6b7aea4f2139fdf3ecccfcb1eb24d4522c2828c6ed48ef71206a33f4346e11cf714c5aac0f7496cead06bb66bac
   languageName: node
   linkType: hard
 
@@ -1116,10 +1116,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001812":
-  version: 1.0.30001813
-  resolution: "caniuse-lite@npm:1.0.30001813"
-  checksum: 10c0/18b160024af4a7daecf43ce0b4203aad956ec71c2438844810af54194a733c8a203a8a9e6b502a904bce30ca312b173099b3c900327ff1cd7178406ada6b684f
+"caniuse-lite@npm:^1.0.30001813":
+  version: 1.0.30001814
+  resolution: "caniuse-lite@npm:1.0.30001814"
+  checksum: 10c0/c1b93b8cd43528241e1a97d0a683ad0cbbf825a2d5a6a021ac1abaee966a861095d2bbffa9903638ee590534a243b024f18d7440e514d0f9c2bb90cfcf4651fb
   languageName: node
   linkType: hard
 
@@ -1142,7 +1142,7 @@ __metadata:
     auto-changelog: "npm:^2.7.0"
     autoprefixer: "npm:^10.6.1"
     bootstrap: "npm:^5.3.8"
-    browserslist: "npm:^4.29.2"
+    browserslist: "npm:^4.29.3"
     chart.js: "npm:^4.5.1"
     dotenv: "npm:^18.0.5"
     external-svg-loader: "npm:^1.7.1"
