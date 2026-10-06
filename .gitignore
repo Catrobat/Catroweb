@@ -55,7 +55,7 @@ var/cache/**
 var/log/**
 
 ### vendor ###
-vendor/
+/vendor
 
 ### root ###
 *.sh
