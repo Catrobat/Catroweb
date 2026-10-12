@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36bc3a7baddfcd4152b9a32abfd52e7b",
+    "content-hash": "84aaa083b90b3564b07f16c755d6ce9a",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -14940,22 +14940,22 @@
         },
         {
             "name": "dmore/behat-chrome-extension",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/behat-chrome/behat-chrome-extension.git",
-                "reference": "b4262f4bf9ea8a8874eb8684bb982c13aca66d3c"
+                "reference": "9a9cb29b57e69f9737c26d441c06a049f950dbf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fbehat-chrome-extension/repository/archive.zip?sha=b4262f4bf9ea8a8874eb8684bb982c13aca66d3c",
-                "reference": "b4262f4bf9ea8a8874eb8684bb982c13aca66d3c",
+                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fbehat-chrome-extension/repository/archive.zip?sha=9a9cb29b57e69f9737c26d441c06a049f950dbf9",
+                "reference": "9a9cb29b57e69f9737c26d441c06a049f950dbf9",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "^3.0.4",
+                "behat/behat": "^3.0.4 || ^4.0",
                 "dmore/chrome-mink-driver": "^2.4.1",
-                "friends-of-behat/mink-extension": "^2.0",
+                "friends-of-behat/mink-extension": "^2.0 || ^3.0",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -14987,9 +14987,9 @@
             ],
             "support": {
                 "issues": "https://gitlab.com/behat-chrome/behat-chrome-extension/-/issues",
-                "source": "https://gitlab.com/behat-chrome/behat-chrome-extension/-/tree/1.4.1"
+                "source": "https://gitlab.com/behat-chrome/behat-chrome-extension/-/tree/1.5.0"
             },
-            "time": "2025-12-19T06:39:12+00:00"
+            "time": "2026-10-02T23:20:26+00:00"
         },
         {
             "name": "dmore/chrome-mink-driver",
@@ -19539,20 +19539,20 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v7.4.9",
+            "version": "v8.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b75663ed96cf4756e28e3105476f220f92886cc4"
+                "reference": "08e2905152a39cf3fd1745d83f8c483e258887d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b75663ed96cf4756e28e3105476f220f92886cc4",
-                "reference": "b75663ed96cf4756e28e3105476f220f92886cc4",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/08e2905152a39cf3fd1745d83f8c483e258887d9",
+                "reference": "08e2905152a39cf3fd1745d83f8c483e258887d9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2"
+                "php": ">=8.4.1"
             },
             "type": "library",
             "autoload": {
@@ -19584,7 +19584,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v7.4.9"
+                "source": "https://github.com/symfony/css-selector/tree/v8.1.6"
             },
             "funding": [
                 {
@@ -19604,7 +19604,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-18T13:18:21+00:00"
+            "time": "2026-08-23T10:06:25+00:00"
         },
         {
             "name": "symfony/dom-crawler",
