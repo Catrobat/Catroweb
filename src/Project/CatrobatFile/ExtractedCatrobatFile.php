@@ -322,8 +322,6 @@ class ExtractedCatrobatFile
         $parent_upload_time = $remix_data->getProjectId();
         $child_upload_time = $project_id;
 
-        $parent = null;
-        $child = null;
         $parent = $project_repository->find($remix_data->getProjectId());
         $child = $project_repository->find($project_id);
 

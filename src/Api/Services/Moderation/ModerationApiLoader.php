@@ -58,7 +58,7 @@ class ModerationApiLoader extends AbstractApiLoader
   public function loadUserReports(string $user_id, int $limit, ?string $cursor): array
   {
     [$limit, $cursor_created_at, $cursor_id, $legacy_cursor_id] = $this->parseCursorParams($limit, $cursor);
-    [$cursor_created_at, $cursor_id, $legacy_cursor_id] = $this->resolveReportLegacyCursor($cursor_created_at, $cursor_id, $legacy_cursor_id);
+    [$cursor_created_at, $cursor_id] = $this->resolveReportLegacyCursor($cursor_created_at, $cursor_id, $legacy_cursor_id);
 
     $reports = $this->report_repository->findReportsByUser($user_id, $limit, $cursor_created_at, $cursor_id);
 
