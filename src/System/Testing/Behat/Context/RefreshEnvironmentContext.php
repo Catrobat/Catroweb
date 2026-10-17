@@ -9,6 +9,7 @@ use App\System\Testing\Behat\ContextTrait;
 use App\System\Testing\DataFixtures\DataBaseUtils;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\Tools\ToolsException;
+use PHPUnit\Event\Facade as EventFacade;
 use PHPUnit\TextUI\CliArguments\Builder as CliConfigurationBuilder;
 use PHPUnit\TextUI\Configuration\Registry;
 use PHPUnit\TextUI\XmlConfiguration\DefaultConfiguration;
@@ -60,12 +61,15 @@ class RefreshEnvironmentContext implements Context
     }
 
     // Initialize with minimal configuration (using PHPUnit internals intentionally)
+    // PHPUnit 13.4+ requires the event emitter for both, same as PHPUnit's own Application
     // @phpstan-ignore-next-line
-    $cliConfiguration = new CliConfigurationBuilder()->fromParameters([]);
+    $emitter = EventFacade::emitter();
+    // @phpstan-ignore-next-line
+    $cliConfiguration = new CliConfigurationBuilder($emitter)->fromParameters([]);
     // @phpstan-ignore-next-line
     $xmlConfiguration = DefaultConfiguration::create();
     // @phpstan-ignore-next-line
-    Registry::init($cliConfiguration, $xmlConfiguration);
+    Registry::init($cliConfiguration, $xmlConfiguration, $emitter);
   }
 
   /**
