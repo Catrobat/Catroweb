@@ -86,7 +86,7 @@
     "behat/mink": "1.13.*",
     "deployer/deployer": "v8.0.*",
     "dmore/behat-chrome-extension": "1.5.*",
-    "dmore/chrome-mink-driver": "2.10.*",
+    "dmore/chrome-mink-driver": "2.11.*",
     "doctrine/doctrine-fixtures-bundle": "4.3.*",
     "dvdoug/behat-code-coverage": "5.5.*",
     "friends-of-behat/mink-extension": "v2.7.5",
