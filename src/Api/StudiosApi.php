@@ -206,7 +206,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   #[\Override]
   public function studiosIdMembersGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
+    $result = $this->loadStudioForListing($id, $cursor, $responseCode);
     if (null === $result) {
       return null;
     }
@@ -287,7 +287,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   #[\Override]
   public function studiosIdProjectsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
+    $result = $this->loadStudioForListing($id, $cursor, $responseCode);
     if (null === $result) {
       return null;
     }
@@ -483,7 +483,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   #[\Override]
   public function studiosIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
+    $result = $this->loadStudioForListing($id, $cursor, $responseCode);
     if (null === $result) {
       return null;
     }
@@ -789,7 +789,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   /**
    * @return array{studio: Studio, cursor_id: ?string}|null null if response was set (error)
    */
-  private function loadStudioForListing(string $id, int $limit, ?string $cursor, int &$responseCode): ?array
+  private function loadStudioForListing(string $id, ?string $cursor, int &$responseCode): ?array
   {
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (!$studio instanceof Studio) {

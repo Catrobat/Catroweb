@@ -85,7 +85,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project_id, false);
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project_id);
   }
 
   #[\Override]
@@ -127,7 +127,6 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $parent_id = $comment_create_request->getParentId();
-    $parent_comment = null;
     if (null !== $parent_id) {
       $parent_comment = $this->comment_repository->findOneBy(['id' => $parent_id]);
       if (!$parent_comment instanceof UserComment) {
@@ -180,7 +179,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
 
       return null;
     }
-    $response = $this->createCommentResponse($comment_data, $project_id, null !== $parent_id);
+    $response = $this->createCommentResponse($comment_data, $project_id);
     $responseCode = Response::HTTP_CREATED;
 
     return $response;
@@ -273,7 +272,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project_id, true);
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project_id);
   }
 
   #[\Override]
@@ -354,13 +353,13 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     return $response;
   }
 
-  private function createCommentListResponse(array $comments, bool $has_more, string $project_id, bool $are_replies): CommentListResponse
+  private function createCommentListResponse(array $comments, bool $has_more, string $project_id): CommentListResponse
   {
     $response = new CommentListResponse();
     $data = [];
 
     foreach ($comments as $comment_data) {
-      $data[] = $this->createCommentResponse($comment_data, $project_id, $are_replies);
+      $data[] = $this->createCommentResponse($comment_data, $project_id);
     }
 
     $next_cursor = null;
@@ -376,7 +375,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     return $response;
   }
 
-  private function createCommentResponse(array $comment_data, string $project_id, bool $are_replies): CommentResponse
+  private function createCommentResponse(array $comment_data, string $project_id): CommentResponse
   {
     $response = new CommentResponse();
     $response->setId((string) $comment_data['id']);

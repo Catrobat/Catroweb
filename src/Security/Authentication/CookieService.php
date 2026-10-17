@@ -66,7 +66,7 @@ readonly class CookieService
       $this->isSecureCookie(),
       true,
       false,
-      $this->getSameSite($cookie)
+      $this->getSameSite()
     );
   }
 
@@ -89,7 +89,7 @@ readonly class CookieService
   public function clearCookie(string $cookie): void
   {
     if (isset($_COOKIE[$cookie])) {
-      $same_site = $this->getSameSite($cookie);
+      $same_site = $this->getSameSite();
 
       setcookie($cookie, '', ['expires' => time() - 3600, 'path' => $this->getCookiePath(), 'secure' => $this->isSecureCookie(), 'httponly' => true, 'samesite' => $same_site]);
       setcookie($cookie, '', ['expires' => time() - 3600, 'path' => '/', 'secure' => $this->isSecureCookie(), 'httponly' => true, 'samesite' => $same_site]);
@@ -110,7 +110,7 @@ readonly class CookieService
   /**
    * @return 'lax'|'strict'
    */
-  private function getSameSite(string $cookie): string
+  private function getSameSite(): string
   {
     return Cookie::SAMESITE_LAX;
   }

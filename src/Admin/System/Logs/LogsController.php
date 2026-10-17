@@ -172,7 +172,6 @@ class LogsController extends CRUDController
   private function parseDeprecationLog(string $logLine): array
   {
     $result = [
-      'message' => '',
       'ip' => '',
       'user' => '',
       'context' => '',

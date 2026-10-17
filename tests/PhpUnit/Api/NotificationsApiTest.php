@@ -223,11 +223,11 @@ class NotificationsApiTest extends TestCase
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
     // Test with 0 limit (should normalize to default 20)
-    $response = $this->object->notificationsGet('en', 0, null, 'all', $response_code, $response_headers);
+    $this->object->notificationsGet('en', 0, null, 'all', $response_code, $response_headers);
     $this->assertEquals(Response::HTTP_OK, $response_code);
 
     // Test with negative limit (should normalize to default 20)
-    $response = $this->object->notificationsGet('en', -5, null, 'all', $response_code, $response_headers);
+    $this->object->notificationsGet('en', -5, null, 'all', $response_code, $response_headers);
     $this->assertEquals(Response::HTTP_OK, $response_code);
 
     // Test with excessive limit (should cap at 50)

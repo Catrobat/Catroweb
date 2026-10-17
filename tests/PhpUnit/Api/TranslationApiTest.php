@@ -115,7 +115,6 @@ final class TranslationApiTest extends TestCase
     $loader = $this->createStub(TranslationApiLoader::class);
     $loader->method('translateProject')->willReturn(null);
 
-    $facade = $this->createDefaultFacade();
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
 
