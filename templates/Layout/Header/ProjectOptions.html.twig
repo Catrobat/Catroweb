@@ -42,6 +42,18 @@
         {{ project.notForKids ? 'MarkSafeForKids'|trans({}, 'catroweb') : 'MarkNotForKids'|trans({}, 'catroweb') }}
       </span>
     </md-menu-item>
+    <md-menu-item id="top-app-bar__btn-custom-url"
+        data-project-id="{{ project.id }}"
+        data-slug="{{ project.slug }}"
+        data-url-prefix="{{ url('project', {id: 'x'})|slice(0, -1) }}"
+        data-trans-title="{{ 'project.customUrl.title'|trans({}, 'catroweb') }}"
+        data-trans-hint="{{ 'project.customUrl.hint'|trans({}, 'catroweb') }}"
+        data-trans-save="{{ 'project.save'|trans({}, 'catroweb') }}"
+        data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+        data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}">
+      <span slot="start" class="material-icons">link</span>
+      <span slot="headline">{{ 'project.customUrl.title'|trans({}, 'catroweb') }}</span>
+    </md-menu-item>
     <md-menu-item id="top-app-bar__btn-delete-project"
         data-project-id="{{ project.id }}"
         data-trans-confirm-title="{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}"

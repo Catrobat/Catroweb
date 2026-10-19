@@ -171,6 +171,9 @@ project:
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
+  customUrl:
+    title: Custom URL
+    hint: 'Choose a short name for this project''s link: 3-50 lowercase letters, digits or hyphens. Leave empty to remove it.'
   setPrivateAction: Set private
   setPublicAction: Set public
   setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
@@ -803,6 +806,9 @@ api:
     descriptionTooLong: 'Description too long'
     creditsTooLong: 'Notes and credits too long'
     screenshotInvalid: 'Project screenshot invalid or not supported'
+    slugInvalid: 'Custom URL must be 3-50 lowercase letters, digits or single hyphens, with at least one letter'
+    slugReserved: 'This custom URL is reserved'
+    slugTaken: 'This custom URL is already taken'
 
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'

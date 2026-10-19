@@ -4,6 +4,7 @@ import '@material/web/iconbutton/icon-button.js'
 import '@material/web/menu/menu-item.js'
 import '@material/web/menu/menu.js'
 import ProjectApi from '../Api/ProjectApi'
+import { escapeHtml } from '../Components/HtmlEscape'
 import { redirect } from '../Components/RedirectButton'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 
@@ -787,7 +788,50 @@ function updateMenuItemUI(item, iconName, textContent) {
   if (text) text.textContent = textContent
 }
 
+async function editCustomUrl(item) {
+  const { default: Swal } = await import('sweetalert2')
+  const baseUrl = document.querySelector('#js-api-routing').dataset.baseUrl
+  Swal.fire({
+    title: item.dataset.transTitle,
+    html: `<p>${escapeHtml(item.dataset.transHint)}</p><p class="text-break"><small>${escapeHtml(item.dataset.urlPrefix)}</small></p>`,
+    input: 'text',
+    inputValue: item.dataset.slug,
+    inputAttributes: { maxlength: '50', autocapitalize: 'off', autocorrect: 'off' },
+    showCancelButton: true,
+    customClass: {
+      confirmButton: 'btn btn-primary',
+      cancelButton: 'btn btn-outline-primary',
+    },
+    buttonsStyling: false,
+    confirmButtonText: item.dataset.transSave,
+    cancelButtonText: item.dataset.transCancel,
+    showLoaderOnConfirm: true,
+    preConfirm: async (value) => {
+      const slug = value.trim().toLowerCase()
+      const response = await fetch(`${baseUrl}/api/projects/${item.dataset.projectId}`, {
+        method: 'PATCH',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug }),
+      })
+      if (response.ok) return slug
+      const data = await response.json().catch(() => ({}))
+      const detail = data?.error?.details?.find((d) => d.field === 'slug')
+      Swal.showValidationMessage(detail?.message || item.dataset.transError)
+      return false
+    },
+  }).then((result) => {
+    if (!result.isConfirmed) return
+    window.location.href = item.dataset.urlPrefix + (result.value || item.dataset.projectId)
+  })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  const customUrlItem = document.getElementById('top-app-bar__btn-custom-url')
+  if (customUrlItem) {
+    customUrlItem.addEventListener('click', () => editCustomUrl(customUrlItem))
+  }
+
   const nfkItem = document.getElementById('top-app-bar__btn-toggle-not-for-kids')
   if (nfkItem) {
     nfkItem.addEventListener('click', () => {

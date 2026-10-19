@@ -84,6 +84,8 @@
         <md-menu-item id="top-app-bar__btn-share-page"
             {% if page_context == 'my_profile' and app.user.id|default(false) %}
               data-share-url="{{ url('profile', {id: app.user.id}) }}"
+            {% elseif page_context == 'project' and project.slug|default(null) %}
+              data-share-url="{{ url('project', {id: project.slug}) }}"
             {% endif %}
             data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
             data-trans-clipboard-success="{{ 'clipboard.success'|trans({}, 'catroweb') }}"

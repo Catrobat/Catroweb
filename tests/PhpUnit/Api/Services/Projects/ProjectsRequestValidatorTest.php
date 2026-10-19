@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api\Services\Projects;
 
 use App\Api\Services\Projects\ProjectsRequestValidator;
+use App\DB\Entity\Project\Project;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\User\UserManager;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -22,6 +24,8 @@ final class ProjectsRequestValidatorTest extends TestCase
 {
   private ProjectsRequestValidator $validator;
 
+  private Project $taken_slug_project;
+
   #[\Override]
   protected function setUp(): void
   {
@@ -29,8 +33,13 @@ final class ProjectsRequestValidatorTest extends TestCase
     $translator = $this->createStub(TranslatorInterface::class);
     $translator->method('trans')->willReturnArgument(0);
     $user_manager = $this->createStub(UserManager::class);
+    $this->taken_slug_project = $this->createStub(Project::class);
+    $project_repository = $this->createStub(ProjectRepository::class);
+    $project_repository->method('findOneBy')->willReturnCallback(
+      fn (array $criteria): ?Project => 'taken-slug' === $criteria['slug'] ? $this->taken_slug_project : null
+    );
 
-    $this->validator = new ProjectsRequestValidator($symfony_validator, $translator, $user_manager);
+    $this->validator = new ProjectsRequestValidator($symfony_validator, $translator, $user_manager, $project_repository);
   }
 
   /**
@@ -284,5 +293,45 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->assertSame('api.project.descriptionTooLong', $result->getError('description'));
     $this->assertSame('api.project.creditsTooLong', $result->getError('credits'));
     $this->assertSame('api.project.screenshotInvalid', $result->getError('screenshot'));
+  }
+
+  #[Group('unit')]
+  #[DataProvider('slugProvider')]
+  public function testValidateSlug(string $slug, ?string $expected_error): void
+  {
+    $result = $this->validator->validateUpdateRequest(new UpdateProjectRequest(['slug' => $slug]), 'en', $this->createStub(Project::class));
+
+    $this->assertSame(null === $expected_error ? [] : ['slug' => $expected_error], $result->getErrors(), "slug '{$slug}'");
+  }
+
+  public static function slugProvider(): array
+  {
+    return [
+      'simple' => ['my-cool-game', null],
+      'uppercase is normalized' => ['My-Cool-Game', null],
+      'surrounding spaces are trimmed' => ['  game1 ', null],
+      'min length' => ['abc', null],
+      'max length' => [str_repeat('a', 50), null],
+      'empty removes the slug' => ['', null],
+      'too short' => ['ab', 'api.project.slugInvalid'],
+      'too long' => [str_repeat('a', 51), 'api.project.slugInvalid'],
+      'underscore' => ['my_game', 'api.project.slugInvalid'],
+      'leading hyphen' => ['-game', 'api.project.slugInvalid'],
+      'double hyphen' => ['my--game', 'api.project.slugInvalid'],
+      'non ascii' => ['spiel-für-alle', 'api.project.slugInvalid'],
+      'digits only' => ['12345', 'api.project.slugInvalid'],
+      'uuid shaped' => ['3d49a458-4421-42e9-9fdc-804dfb6ad342', 'api.project.slugInvalid'],
+      'reserved route' => ['upload', 'api.project.slugReserved'],
+      'reserved word uppercase' => ['Admin', 'api.project.slugReserved'],
+      'taken by another project' => ['taken-slug', 'api.project.slugTaken'],
+    ];
+  }
+
+  #[Group('unit')]
+  public function testOwnSlugIsNotTaken(): void
+  {
+    $result = $this->validator->validateUpdateRequest(new UpdateProjectRequest(['slug' => 'taken-slug']), 'en', $this->taken_slug_project);
+
+    $this->assertFalse($result->hasError());
   }
 }

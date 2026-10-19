@@ -108,6 +108,17 @@ class UpdateProjectRequest
   protected ?bool $not_for_kids = null;
 
   /**
+   * Custom short URL name: the project is then also reachable at /app/project/{slug}. 3-50 characters, lowercase letters, digits and single hyphens, at least one letter, unique. An empty string removes it.
+   *
+   * @SerializedName("slug")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $slug = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -121,6 +132,7 @@ class UpdateProjectRequest
       $this->private = array_key_exists('private', $data) ? $data['private'] : $this->private;
       $this->screenshot = array_key_exists('screenshot', $data) ? $data['screenshot'] : $this->screenshot;
       $this->not_for_kids = array_key_exists('not_for_kids', $data) ? $data['not_for_kids'] : $this->not_for_kids;
+      $this->slug = array_key_exists('slug', $data) ? $data['slug'] : $this->slug;
     }
   }
 
@@ -252,6 +264,28 @@ class UpdateProjectRequest
   public function setNotForKids(?bool $not_for_kids = null): self
   {
     $this->not_for_kids = $not_for_kids;
+
+    return $this;
+  }
+
+  /**
+   * Gets slug.
+   */
+  public function getSlug(): ?string
+  {
+    return $this->slug;
+  }
+
+  /**
+   * Sets slug.
+   *
+   * @param string|null $slug Custom short URL name: the project is then also reachable at /app/project/{slug}. 3-50 characters, lowercase letters, digits and single hyphens, at least one letter, unique. An empty string removes it.
+   *
+   * @return $this
+   */
+  public function setSlug(?string $slug = null): self
+  {
+    $this->slug = $slug;
 
     return $this;
   }

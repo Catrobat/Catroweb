@@ -65,7 +65,10 @@ class ProjectController extends AbstractController
   #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]
   public function project(Request $request, string $id): Response
   {
-    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
+    // {id} is a project id or its custom slug; slugs are never UUID-shaped, so the two can't collide
+    $project = $this->project_manager->findProjectIfVisibleToCurrentUser(
+      $this->project_manager->findProjectBySlug($id)?->getId() ?? $id
+    );
     if (!$project instanceof Project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 

@@ -4377,6 +4377,10 @@ components:
           type: boolean
           example: false
           description: 'Mark the project as not suitable for kids (true) or safe for kids (false). Cannot be changed if set by a moderator.'
+        slug:
+          type: string
+          example: my-cool-game
+          description: 'Custom short URL name: the project is then also reachable at /app/project/{slug}. 3-50 characters, lowercase letters, digits and single hyphens, at least one letter, unique. An empty string removes it.'
 
     ## Response
 
