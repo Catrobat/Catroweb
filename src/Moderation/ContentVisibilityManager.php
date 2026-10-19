@@ -178,24 +178,30 @@ class ContentVisibilityManager
   }
 
   /**
-   * Bulk-hides all projects and comments by a user (used during ban cascade).
+   * Hides all projects and comments by a user (used during ban cascade).
+   *
+   * Projects are changed through their entities, not a bulk UPDATE, so the FOSElastica listener re-indexes
+   * them on flush; a bulk UPDATE would leave the search index showing them as visible.
    */
   private function hideAllUserContent(User $user): void
   {
-    foreach ([Project::class, UserComment::class] as $entity_class) {
-      $alias = Project::class === $entity_class ? 'p' : 'c';
-      $this->entity_manager->createQueryBuilder()
-        ->update($entity_class, $alias)
-        ->set($alias.'.auto_hidden', ':target')
-        ->where($alias.'.user = :user')
-        ->andWhere($alias.'.auto_hidden = :current')
-        ->setParameter('target', true)
-        ->setParameter('current', false)
-        ->setParameter('user', $user)
-        ->getQuery()
-        ->execute()
-      ;
+    // ponytail: loads every project of the user; batch with iterate()/clear() if banned accounts with
+    // thousands of projects make this slow.
+    foreach ($this->entity_manager->getRepository(Project::class)->findBy(['user' => $user, 'auto_hidden' => false]) as $project) {
+      $project->setAutoHidden(true);
     }
+
+    $this->entity_manager->createQueryBuilder()
+      ->update(UserComment::class, 'c')
+      ->set('c.auto_hidden', ':target')
+      ->where('c.user = :user')
+      ->andWhere('c.auto_hidden = :current')
+      ->setParameter('target', true)
+      ->setParameter('current', false)
+      ->setParameter('user', $user)
+      ->getQuery()
+      ->execute()
+    ;
   }
 
   /**
@@ -250,6 +256,18 @@ class ContentVisibilityManager
         ->getSingleColumnResult()
       ;
 
+      if (Project::class === $entity_class) {
+        // Through the entities so the search index follows (see hideAllUserContent()).
+        $restore_ids = array_values(array_diff($user_content_ids, $reported_ids));
+        if ([] !== $restore_ids) {
+          foreach ($this->entity_manager->getRepository(Project::class)->findBy(['id' => $restore_ids]) as $project) {
+            $project->setAutoHidden(false);
+          }
+        }
+
+        continue;
+      }
+
       $qb = $this->entity_manager->createQueryBuilder()
         ->update($entity_class, $alias)
         ->set($alias.'.auto_hidden', ':target')
@@ -261,12 +279,8 @@ class ContentVisibilityManager
       ;
 
       if ([] !== $reported_ids) {
-        $typed_ids = UserComment::class === $entity_class
-          ? array_map(intval(...), $reported_ids)
-          : $reported_ids;
-
         $qb->andWhere($qb->expr()->notIn($alias.'.id', ':reported_ids'))
-          ->setParameter('reported_ids', $typed_ids)
+          ->setParameter('reported_ids', array_map(intval(...), $reported_ids))
         ;
       }
 
