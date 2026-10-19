@@ -55,6 +55,18 @@ Feature: As studio admin I must be able to configure a studio
     And I wait 500 milliseconds
     Then the element "#top-app-bar__btn-edit-studio" should not be visible
 
+  Scenario: A banned admin must not see the button to open the settings modal
+    Given there are studio users:
+      | id                                   | user     | studio_id | role  | status |
+      | 00000000-0000-0000-0000-000000000011 | Catrobat2 | 1         | admin | banned |
+    And I log in as "Catrobat2"
+    And I am on "/app/studio/1"
+    And I wait for the page to be loaded
+    And I wait for the element ".member_count" to be visible
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    Then the element "#top-app-bar__btn-edit-studio" should not be visible
+
   Scenario: If I am the admin of the studio, I have access to an settings modal
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"

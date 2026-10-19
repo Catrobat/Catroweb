@@ -184,11 +184,33 @@ final class StudioApiTest extends TestCase
     $this->loader->method('loadVisibleStudio')->willReturn($studio);
 
     $studioUser = $this->createStub(StudioUser::class);
-    $this->loader->method('loadStudioUser')->willReturn($studioUser);
+    $studioUser->method('isActive')->willReturn(true);
+    $this->loader->method('loadStudioUserAnyStatus')->willReturn($studioUser);
 
     $this->api->studiosIdJoinPost('some-id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CONFLICT, $response_code);
+  }
+
+  #[Group('unit')]
+  public function testJoinStudioBannedReturnsForbidden(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $user = $this->createStub(User::class);
+    $this->auth_manager->method('getAuthenticatedUser')->willReturn($user);
+
+    $studio = $this->createStub(Studio::class);
+    $this->loader->method('loadVisibleStudio')->willReturn($studio);
+
+    $studioUser = $this->createStub(StudioUser::class);
+    $studioUser->method('isActive')->willReturn(false);
+    $this->loader->method('loadStudioUserAnyStatus')->willReturn($studioUser);
+
+    $this->api->studiosIdJoinPost('some-id', 'en', $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
   }
 
   #[Group('unit')]
