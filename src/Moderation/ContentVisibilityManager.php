@@ -185,7 +185,7 @@ class ContentVisibilityManager
    */
   private function hideAllUserContent(User $user): void
   {
-    // ponytail: loads every project of the user; batch with iterate()/clear() if banned accounts with
+    // ponytail: loads every project of the user; batch with toIterable()/clear() if banned accounts with
     // thousands of projects make this slow.
     foreach ($this->entity_manager->getRepository(Project::class)->findBy(['user' => $user, 'auto_hidden' => false]) as $project) {
       $project->setAutoHidden(true);
