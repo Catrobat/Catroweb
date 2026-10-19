@@ -8006,16 +8006,16 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v8.1.8",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "29ba9e0b21f3ac0f7f73d2d2b7b7755a4ff557e7"
+                "reference": "1ada49a9fd7484e39b6831472a62a2c3d61000dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/29ba9e0b21f3ac0f7f73d2d2b7b7755a4ff557e7",
-                "reference": "29ba9e0b21f3ac0f7f73d2d2b7b7755a4ff557e7",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/1ada49a9fd7484e39b6831472a62a2c3d61000dc",
+                "reference": "1ada49a9fd7484e39b6831472a62a2c3d61000dc",
                 "shasum": ""
             },
             "require": {
@@ -8087,7 +8087,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v8.1.8"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -8107,7 +8107,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-28T19:13:15+00:00"
+            "time": "2026-10-13T17:38:22+00:00"
         },
         {
             "name": "symfony/dotenv",
@@ -12721,16 +12721,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v8.1.8",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "828f05cff662bb1661f195daa1b06961642ca9dd"
+                "reference": "020b0f92a34367a36ffad5956501f971545a3b9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/828f05cff662bb1661f195daa1b06961642ca9dd",
-                "reference": "828f05cff662bb1661f195daa1b06961642ca9dd",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/020b0f92a34367a36ffad5956501f971545a3b9b",
+                "reference": "020b0f92a34367a36ffad5956501f971545a3b9b",
                 "shasum": ""
             },
             "require": {
@@ -12794,7 +12794,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/v8.1.8"
+                "source": "https://github.com/symfony/validator/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -12814,7 +12814,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-29T12:38:40+00:00"
+            "time": "2026-10-13T16:18:12+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -19468,16 +19468,16 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v8.1.5",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "f6766c9fb232e72897d6d55cf8f6aec38db2dbbf"
+                "reference": "90f77a846d0772aaf3dec24456410d160d06e6d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/f6766c9fb232e72897d6d55cf8f6aec38db2dbbf",
-                "reference": "f6766c9fb232e72897d6d55cf8f6aec38db2dbbf",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/90f77a846d0772aaf3dec24456410d160d06e6d0",
+                "reference": "90f77a846d0772aaf3dec24456410d160d06e6d0",
                 "shasum": ""
             },
             "require": {
@@ -19516,7 +19516,7 @@
             "description": "Simulates the behavior of a web browser, allowing you to make requests, click on links and submit forms programmatically",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/browser-kit/tree/v8.1.5"
+                "source": "https://github.com/symfony/browser-kit/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -19536,7 +19536,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-21T17:47:34+00:00"
+            "time": "2026-10-13T12:55:44+00:00"
         },
         {
             "name": "symfony/css-selector",
