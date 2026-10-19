@@ -13,10 +13,20 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Contracts\HttpClient\Exception\ExceptionInterface as HttpClientExceptionInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsCommand(name: 'catrobat:import:share', description: 'Imports the specified amount of recent projects from share.catrobat.org')]
 class ImportProjectsFromShare extends Command
 {
+  private const string PROJECTS_API_URL = 'https://share.catrobat.org/api/projects';
+
+  public function __construct(
+    private readonly HttpClientInterface $http_client,
+  ) {
+    parent::__construct();
+  }
+
   #[\Override]
   protected function configure(): void
   {
@@ -25,7 +35,7 @@ class ImportProjectsFromShare extends Command
         'The limit of projects that should be downloaded and imported',
         '20')
       ->addOption('category', 'c', InputOption::VALUE_REQUIRED,
-        'Downloading projects of a specific category (random, recent)',
+        'Downloading projects of a specific category of GET /api/projects (e.g. recent, random, most_downloaded)',
         'recent')
       ->addOption('user', 'u', InputOption::VALUE_REQUIRED,
         'User who should be the owner of the projects',
@@ -45,7 +55,7 @@ class ImportProjectsFromShare extends Command
   {
     $number_of_projects_to_download = intval($input->getOption('limit'));
     $project_owner = (string) $input->getOption('user');
-    $download_url = $this->getDownloadUrl((string) $input->getOption('category'));
+    $category = (string) $input->getOption('category');
     $remix_layout = intval($input->getOption('remix-layout'));
 
     $temp_dir = sys_get_temp_dir().'/catrobat.program.import/';
@@ -53,53 +63,51 @@ class ImportProjectsFromShare extends Command
     $filesystem = new Filesystem();
     $filesystem->mkdir($temp_dir);
 
-    $this->downloadProjects($temp_dir, $number_of_projects_to_download, $download_url, $output);
+    $this->downloadProjects($temp_dir, $number_of_projects_to_download, $category, $output);
     $this->importProjects($temp_dir, $project_owner, $remix_layout, $output);
 
     return 0;
   }
 
-  private function getDownloadUrl(string $category): string
-  {
-    return match ($category) {
-      'random' => 'https://share.catrobat.org/app/api/projects/randomProjects.json',
-      default => 'https://share.catrobat.org/app/api/projects/recent.json',
-    };
-  }
-
   /**
-   * @throws \JsonException
+   * Pages through GET /api/projects of the share and saves each project's .catrobat file into $dir.
    */
-  private function downloadProjects(string $dir, int $limit, string $url, OutputInterface $output): void
+  private function downloadProjects(string $dir, int $limit, string $category, OutputInterface $output): void
   {
-    $downloads_left = $limit;
-    while ($downloads_left > 0) {
-      $projects = @file_get_contents($url.'?limit='.$downloads_left);
-      if (false === $projects) {
-        --$downloads_left;
-        continue;
+    $cursor = null;
+    while ($limit > 0) {
+      try {
+        $page = $this->http_client->request('GET', self::PROJECTS_API_URL, ['query' => array_filter([
+          'category' => $category,
+          'limit' => $limit,
+          'attributes' => 'id,download_url',
+          'cursor' => $cursor,
+        ], static fn (mixed $value): bool => null !== $value)])->toArray();
+      } catch (HttpClientExceptionInterface $e) {
+        $output->writeln('<error>Listing projects from <'.self::PROJECTS_API_URL.'> failed: '.$e->getMessage().'</error>');
+
+        return;
       }
 
-      $server_json = json_decode($projects, true, 512, JSON_THROW_ON_ERROR);
+      foreach ($page['data'] ?? [] as $project) {
+        if ($limit <= 0) {
+          return;
+        }
 
-      $base_url = $server_json['CatrobatInformation']['BaseUrl'];
-      foreach ($server_json['CatrobatProjects'] as $project) {
-        $project_url = $base_url.$project['DownloadUrl'];
-        $name = $dir.$project['ProjectId'].'.catrobat';
+        $project_url = (string) $project['download_url'];
+        $name = $dir.basename((string) $project['id']).'.catrobat';
         $output->writeln('Saving <'.$project_url.'> to <'.$name.'>');
         try {
-          $project_json = @file_get_contents($project_url);
-          file_put_contents($name, $project_json);
-          --$downloads_left;
-          if (false === $project_json) {
-            continue;
-          }
-        } catch (\Exception $e) {
-          $output->writeln('File <'.$project_url.'> download failed');
-          $output->writeln('Error code: '.$e->getCode());
-          $output->writeln('Error message: '.$e->getMessage());
-          $output->writeln('continuing...');
+          file_put_contents($name, $this->http_client->request('GET', $project_url)->getContent());
+          --$limit;
+        } catch (HttpClientExceptionInterface $e) {
+          $output->writeln('File <'.$project_url.'> download failed: '.$e->getMessage().', continuing...');
         }
+      }
+
+      $cursor = $page['next_cursor'] ?? null;
+      if (true !== ($page['has_more'] ?? false) || !is_string($cursor)) {
+        return;
       }
     }
   }

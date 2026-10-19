@@ -429,9 +429,6 @@
     </PossiblyNullPropertyFetch>
   </file>
   <file src="src/System/Commands/ImportProjects/ImportProjectsFromShare.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$project_json]]></code>
-    </PossiblyFalseArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$this->getApplication()]]></code>
     </PossiblyNullArgument>
