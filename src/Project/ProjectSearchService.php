@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project;
 
+use App\Utils\ElasticsearchPagination;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Query\Range;
@@ -24,7 +25,7 @@ class ProjectSearchService
   {
     $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
-    return $this->program_finder->find($project_query, $limit, ['from' => $offset]);
+    return ElasticsearchPagination::find($this->program_finder, $project_query, $limit, $offset);
   }
 
   public function searchCount(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): int

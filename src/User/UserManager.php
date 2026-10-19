@@ -10,6 +10,7 @@ use App\DB\EntityRepository\User\UserRepository;
 use App\Project\ProjectManager;
 use App\Security\PasswordGenerator;
 use App\Utils\CanonicalFieldsUpdater;
+use App\Utils\ElasticsearchPagination;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -125,7 +126,7 @@ class UserManager
   {
     $project_query = $this->userSearchQuery($query);
 
-    return $this->user_finder->find($project_query, $limit, ['from' => $offset]);
+    return ElasticsearchPagination::find($this->user_finder, $project_query, $limit, $offset);
   }
 
   public function searchCount(string $query): int

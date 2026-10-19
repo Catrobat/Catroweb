@@ -98,3 +98,17 @@ Feature: Search users
       "has_more": false
     }
     """
+
+  Scenario: A cursor beyond Elasticsearch's result window returns an empty page instead of an error
+
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/users/search?query=Catro&cursor=MTAwMDA%3D"
+    Then the response status code should be "200"
+    Then I should get the json object:
+      """
+      {
+        "data": [],
+
+        "has_more": false
+      }
+      """
