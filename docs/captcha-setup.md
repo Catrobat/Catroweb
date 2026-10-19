@@ -4,13 +4,13 @@ Catroweb uses [Cap](https://capjs.js.org/) for CAPTCHA protection on registratio
 
 ## Environment Variables
 
-| Variable               | Purpose                                       | Example                 |
-| ---------------------- | --------------------------------------------- | ----------------------- |
-| `CAPTCHA_ENABLED`      | Enable/disable CAPTCHA verification           | `true` / `false`        |
-| `CAPTCHA_API_ENDPOINT` | Backend URL for siteverify (server-to-server) | `http://127.0.0.1:3000` |
-| `CAPTCHA_PUBLIC_URL`   | Frontend URL for widget (browser-to-Cap)      | `https://cap.catrob.at` |
-| `CAPTCHA_SITE_KEY`     | Site key from Cap dashboard                   | `8c8e6f1e89`            |
-| `CAPTCHA_SECRET`       | Secret key from Cap dashboard                 | `pS6bY...`              |
+| Variable               | Purpose                                       | Example                    |
+| ---------------------- | --------------------------------------------- | -------------------------- |
+| `CAPTCHA_ENABLED`      | Enable/disable CAPTCHA verification           | `true` / `false`           |
+| `CAPTCHA_API_ENDPOINT` | Backend URL for siteverify (server-to-server) | `http://127.0.0.1:3000`    |
+| `CAPTCHA_PUBLIC_URL`   | Frontend URL for widget (browser-to-Cap)      | `https://cap.catrobat.org` |
+| `CAPTCHA_SITE_KEY`     | Site key from Cap dashboard                   | `8c8e6f1e89`               |
+| `CAPTCHA_SECRET`       | Secret key from Cap dashboard                 | `pS6bY...`                 |
 
 **Why two URLs?** The backend verifies tokens via `CAPTCHA_API_ENDPOINT` (localhost, no DNS roundtrip). The browser widget loads from `CAPTCHA_PUBLIC_URL` (public HTTPS URL via nginx). In development both point to `http://localhost:3000`.
 
@@ -36,14 +36,14 @@ CAPTCHA_SECRET='<secret-from-dashboard>'
 
 ## Production Setup
 
-Production server: `<ip4>` (`share.catrob.at`), running nginx with Cloudflare origin certs.
+Production server: `<ip4>` (`share.catrobat.org`), running nginx with Cloudflare origin certs.
 
 ### Current Infrastructure
 
 | Component      | Location                      | Details                                                 |
 | -------------- | ----------------------------- | ------------------------------------------------------- |
 | Cap container  | `127.0.0.1:3000`              | `docker run -d --name cap --restart unless-stopped ...` |
-| nginx proxy    | `cap.catrob.at`               | `/etc/nginx/sites-enabled/cap`                          |
+| nginx proxy    | `cap.catrobat.org`            | `/etc/nginx/sites-enabled/cap`                          |
 | Docker compose | `/opt/cap/docker-compose.yml` | Reference only (docker-compose-plugin not installed)    |
 | Cap data       | Docker volume `cap-data`      | Persistent SQLite data                                  |
 
@@ -67,14 +67,14 @@ docker run -d \
 
 Config: `/etc/nginx/sites-enabled/cap`
 
-- Serves `cap.catrob.at` on ports 80 and 443 (Cloudflare origin certs)
+- Serves `cap.catrobat.org` on ports 80 and 443 (Cloudflare origin certs)
 - Admin routes (`/`, `/auth/`, `/server/`) are blocked with `deny all`
 - Only the widget JS, challenge API, and siteverify endpoints are publicly accessible
 - TLS termination is handled by Cloudflare (origin cert on the server)
 
 ### DNS (Cloudflare)
 
-A record for `cap.catrob.at` → `<ip4>` (proxied through Cloudflare).
+A record for `cap.catrobat.org` → `<ip4>` (proxied through Cloudflare).
 
 ### Environment Configuration
 
@@ -83,7 +83,7 @@ Production secrets are in `/var/www/share/shared/.env.prod.local` (symlinked int
 ```env
 CAPTCHA_ENABLED=true
 CAPTCHA_API_ENDPOINT='http://127.0.0.1:3000'
-CAPTCHA_PUBLIC_URL='https://cap.catrob.at'
+CAPTCHA_PUBLIC_URL='https://cap.catrobat.org'
 CAPTCHA_SITE_KEY='<site-key>'
 CAPTCHA_SECRET='<secret-key>'
 ```
@@ -134,7 +134,7 @@ curl -s -X POST 'http://127.0.0.1:3000/auth/login' \
    curl -s -X POST 'http://127.0.0.1:3000/server/keys' \
      -H "Authorization: Bearer $BEARER" \
      -H 'Content-Type: application/json' \
-     -d '{"name": "share.catrob.at"}'
+     -d '{"name": "share.catrobat.org"}'
    ```
 
 ## How It Works
@@ -165,4 +165,4 @@ curl -s -X POST 'http://127.0.0.1:3000/auth/login' \
 | 403 on registration             | Check `X-Captcha-Result` header; verify Cap is running and `CAPTCHA_SECRET` matches |
 | Cap dashboard unreachable       | Check Docker container: `docker ps \| grep cap`                                     |
 | "Token not found" on siteverify | Token already used or expired — Cap tokens are single-use                           |
-| CORS errors in browser          | Configure CORS in Cap dashboard to allow `share.catrob.at` origin                   |
+| CORS errors in browser          | Configure CORS in Cap dashboard to allow `share.catrobat.org` origin                |

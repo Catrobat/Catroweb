@@ -3,17 +3,15 @@ info:
   title: 'Catroweb API'
   description: 'API for the Catrobat Share Platform'
   version: 'v2.0.0'
-  termsOfService: 'https://share.catrob.at/pocketcode/termsOfUse'
+  termsOfService: 'https://share.catrobat.org/pocketcode/termsOfUse'
   contact:
     name: 'Catrobat'
-    url: 'https://share.catrob.at'
+    url: 'https://share.catrobat.org'
     email: 'webmaster@catrobat.org'
 
 servers:
-  - url: 'https://share.catrob.at/api'
+  - url: 'https://share.catrobat.org/api'
     description: 'Main production server'
-  - url: 'https://web-test.catrob.at/api'
-    description: 'Our test server (might be unstable)'
   - url: 'http://localhost/api'
     description: 'Local test server (postman help)'
 
@@ -481,7 +479,7 @@ paths:
             Location:
               schema:
                 type: string
-                example: 'https://share.catrob.at/app/user/3ef85528-5f08-11ea-a2ae-000c292a0f49'
+                example: 'https://share.catrobat.org/app/user/3ef85528-5f08-11ea-a2ae-000c292a0f49'
               description: Resource location on server
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -649,7 +647,7 @@ paths:
             Location:
               schema:
                 type: string
-                example: 'https://share.catrob.at/app/project/63768cf1-5f07-11ea-a2ae-000c292a0f49'
+                example: 'https://share.catrobat.org/app/project/63768cf1-5f07-11ea-a2ae-000c292a0f49'
               description: 'Resource location on server'
           content:
             application/json:
@@ -2379,7 +2377,7 @@ paths:
               schema:
                 type: string
                 example: >-
-                  https://share.catrob.at/app/studio/63768cf1-5f07-11ea-a2ae-000c292a0f49
+                  https://share.catrobat.org/app/studio/63768cf1-5f07-11ea-a2ae-000c292a0f49
               description: Resource location on server
           content:
             application/json:
@@ -2420,7 +2418,7 @@ paths:
             Location:
               schema:
                 type: string
-                example: https://share.catrob.at/app/studio/63768cf1-5f07-11ea-a2ae-000c292a0f49
+                example: https://share.catrobat.org/app/studio/63768cf1-5f07-11ea-a2ae-000c292a0f49
               description: Resource location on server
           content:
             application/json:
@@ -2474,7 +2472,7 @@ paths:
             Location:
               schema:
                 type: string
-                example: https://share.catrob.at/app/studio/63768cf1-5f07-11ea-a2ae-000c292a0f49
+                example: https://share.catrobat.org/app/studio/63768cf1-5f07-11ea-a2ae-000c292a0f49
               description: Resource location on server
           content:
             application/json:
@@ -3605,7 +3603,7 @@ components:
           format: uri
           nullable: true
           description: 'AVIF encoded at 1x device-pixel ratio'
-          example: 'https://share.catrob.at/resources/images/users/abc-thumb@1x.avif'
+          example: 'https://share.catrobat.org/resources/images/users/abc-thumb@1x.avif'
         avif_2x:
           type: string
           format: uri
@@ -3885,7 +3883,7 @@ components:
           example: ['pocketcode', 'luna']
         download_url:
           type: string
-          example: 'https://share.catrob.at/api/media/123e4567-e89b-12d3-a456-426614174000.png'
+          example: 'https://share.catrobat.org/api/media/123e4567-e89b-12d3-a456-426614174000.png'
         thumbnail:
           $ref: '#/components/schemas/ImageVariants'
 
@@ -4007,7 +4005,7 @@ components:
         email:
           type: string
           format: email
-          example: 'foo.bar@catrob.at'
+          example: 'foo.bar@catrobat.org'
           description: 'Email of the user'
         username:
           type: string
@@ -4039,7 +4037,7 @@ components:
         email:
           type: string
           format: email
-          example: 'foo.bar@catrob.at'
+          example: 'foo.bar@catrobat.org'
           description: 'Email of the user'
         captcha_token:
           type: string
@@ -4159,7 +4157,7 @@ components:
             email:
               type: string
               format: email
-              example: 'foo.bar@catrob.at'
+              example: 'foo.bar@catrobat.org'
               description: 'EMail of the user'
 
     UserDataExportResponse:
@@ -4540,11 +4538,11 @@ components:
         project_url:
           type: string
           description: 'The url to the project on our official share community platform'
-          example: 'https://share.catrob.at/pocketcode/project/1234abcd-12ab-12ab-12ab-123456abcdef'
+          example: 'https://share.catrobat.org/pocketcode/project/1234abcd-12ab-12ab-12ab-123456abcdef'
         download_url:
           type: string
           description: 'The url to GET the catrobat file of this project'
-          example: 'https://share.catrob.at/api/projects/1234abcd-12ab-12ab-12ab-123456abcdef/catrobat'
+          example: 'https://share.catrobat.org/api/projects/1234abcd-12ab-12ab-12ab-123456abcdef/catrobat'
         filesize:
           type: number
           example: 0.14381762458251943

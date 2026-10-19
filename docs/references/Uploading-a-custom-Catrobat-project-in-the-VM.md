@@ -1,4 +1,4 @@
-1. Download any Catrobat project either from local SHARE or share.catrob.at
+1. Download any Catrobat project either from local SHARE or share.catrobat.org
 2. The downloaded file is a zip archive and has the .catrobat extension
 3. Copy the .catrobat file into any folder. (E.g ~/share_projects)
 4. Invoke the import command: `bin/console catrobat:import ~/share_projects catroweb`

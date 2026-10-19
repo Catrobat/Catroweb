@@ -324,7 +324,7 @@ class MigrateRemixGraphsCommand extends Command
     }
 
     // ignore remix parents of old Catrobat projects, Catroid had a bug until Catrobat Language Version 0.992
-    // For more details on this, please have a look at: https://jira.catrob.at/browse/CAT-2149
+    // For more details on this, please have a look at: Jira CAT-2149
     /** @var string $resultLanguageVersion */
     $resultLanguageVersion = $result['languageVersion'];
     if (version_compare($resultLanguageVersion, '0.992', '<=') && (count($result['fullRemixData']) >= 2)) {

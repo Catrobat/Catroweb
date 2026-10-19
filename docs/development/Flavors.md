@@ -7,7 +7,7 @@ If no flavor is specified, `pocketcode` is used by default.
 
 All routes in our project are prefixed with a theme.
 
-To allow a route like share.catrob.at/newThemeName, the new theme must be added to the themes array in
+To allow a route like share.catrobat.org/newThemeName, the new theme must be added to the themes array in
 _config/packages/liip_theme.yaml_ first.
 
 ### Theme Templates

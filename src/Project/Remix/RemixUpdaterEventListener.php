@@ -57,7 +57,7 @@ class RemixUpdaterEventListener
     $remix_url_string = $file->getRemixUrlsString();
 
     // ignore remix parents of old Catrobat projects, Catroid had a bug until Catrobat Language Version 0.992
-    // For more details on this, please have a look at: https://jira.catrob.at/browse/CAT-2149
+    // For more details on this, please have a look at: Jira CAT-2149
     if (version_compare($file->getLanguageVersion(), '0.992', '<=') && (count($remixes_data) >= 2)) {
       $remixes_data = [];
       $remix_url_string = '';

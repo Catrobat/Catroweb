@@ -23,7 +23,7 @@ Make sure to check them out if you have any questions, before asking a project m
 
 ##### 6. Create a Pull Request:
 
-Also, make sure that every commit has the **correct commit message layout** so it shows up on [JIRA](https://jira.catrob.at/).<br/>
+Also, make sure that every commit has the **correct commit message layout** so it shows up on JIRA.<br/>
 must read: [How to Write a Git Commit Message, by Chirs Beams](http://chris.beams.io/posts/git-commit/)
 
 ```

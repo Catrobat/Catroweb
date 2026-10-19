@@ -54,7 +54,7 @@ class SecurityHeadersSubscriberTest extends TestCase
 
   public function testCaptchaCspWhitelistsWidgetSourcesWhenEnabled(): void
   {
-    $subscriber = new SecurityHeadersSubscriber('prod', true, 'https://cap.catrob.at');
+    $subscriber = new SecurityHeadersSubscriber('prod', true, 'https://cap.catrobat.org');
     $event = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
 
     $subscriber->onKernelResponse($event);
@@ -63,7 +63,7 @@ class SecurityHeadersSubscriberTest extends TestCase
     // Backend origin is derived from the configured public URL, so connect-src
     // always matches the widget's actual endpoint.
     $this->assertStringContainsString('connect-src ', $csp);
-    $this->assertStringContainsString('https://cap.catrob.at', $csp);
+    $this->assertStringContainsString('https://cap.catrobat.org', $csp);
     // WASM solver CDN and the blob: worker the widget spawns.
     $this->assertStringContainsString('https://cdn.jsdelivr.net', $csp);
     $this->assertStringContainsString("worker-src 'self' blob:", $csp);

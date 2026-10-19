@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-#[AsCommand(name: 'catrobat:import:share', description: 'Imports the specified amount of recent projects from share.catrob.at')]
+#[AsCommand(name: 'catrobat:import:share', description: 'Imports the specified amount of recent projects from share.catrobat.org')]
 class ImportProjectsFromShare extends Command
 {
   #[\Override]
@@ -62,8 +62,8 @@ class ImportProjectsFromShare extends Command
   private function getDownloadUrl(string $category): string
   {
     return match ($category) {
-      'random' => 'https://share.catrob.at/app/api/projects/randomProjects.json',
-      default => 'https://share.catrob.at/app/api/projects/recent.json',
+      'random' => 'https://share.catrobat.org/app/api/projects/randomProjects.json',
+      default => 'https://share.catrobat.org/app/api/projects/recent.json',
     };
   }
 
