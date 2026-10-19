@@ -47,7 +47,7 @@ That's it! Now you can start working on your ticket.
 
 **Test everything!** When tests are failing the PR will not be accepted.
 
-Also, make sure that every commit has the **correct commit message layout** so it shows up on [JIRA](https://jira.catrob.at/).
+Also, make sure that every commit has the **correct commit message layout** so it shows up on JIRA.
 
 Must read: [How to Write a Git Commit Message, by Chirs Beams](http://chris.beams.io/posts/git-commit/)
 

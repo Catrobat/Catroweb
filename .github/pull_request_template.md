@@ -14,9 +14,9 @@ Please review the [contributing guidelines](./contributing.md) and [wiki pages](
 - [ ] Perform a self-review of the changes
 - [ ] Stick to the project’s git workflow (rebase and squash your commits)
 - [ ] Verify that your changes do not have any conflicts with the base branch
-- [ ] Put your ticket into the `Code Review` section in [Jira](https://jira.catrob.at/)
+- [ ] Put your ticket into the `Code Review` section in Jira
 - [ ] Ask for a code reviewer
-- [ ] Check that your pull request has been successfully deployed to https://web-test-1.catrob.at/
+- [ ] Check that your pull request has been successfully deployed to a test server
 
 ### Additional Description
 

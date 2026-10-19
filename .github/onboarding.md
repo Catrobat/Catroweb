@@ -35,7 +35,7 @@ You can find more information about using Catroweb with Docker [here](../docs/Do
 
 ## c. Setup Verification
 
-Now you should be able to [run Catroweb in Docker](../docs/Docker.md#running-catroweb-dev-in-docker) to display the sharing platform similar to our [current version online](https://share.catrob.at/app/).
+Now you should be able to [run Catroweb in Docker](../docs/Docker.md#running-catroweb-dev-in-docker) to display the sharing platform similar to our [current version online](https://share.catrobat.org/app/).
 
 Note: Make sure that you run the commands through [Git Bash in PhpStorm](https://medium.com/code-complete/using-git-bash-with-phpstorm-10f8d54a96da).
 
@@ -43,13 +43,13 @@ Note: Make sure that you run the commands through [Git Bash in PhpStorm](https:/
 
 ## a. Catrobat's Jira Workflow
 
-At Catrobat, we use Jira to keep track of all issues (stories, tasks, and bugs) in our projects. You can find the Jira project of Catroweb [here](https://jira.catrob.at/projects/SHARE/issues/SHARE-527?filter=allopenissues).
+At Catrobat, we use Jira to keep track of all issues (stories, tasks, and bugs) in our projects. You can find the Jira project of Catroweb here.
 If you click "Kanban Board" on the left menu in Jira, you will get an overview of what we are currently working on. You can see that different issues have different statuses (e.g., "Ready for Development"). The collection of all statuses makes up our Jira workflow that transparently shows the project's current state to every team member. You can find an overview of our Jira workflow if you click on an issue and the "(View Workflow)" next to the status field.
 It is crucial to follow this workflow to keep the team informed about what you are currently working on.
 
 ## b. Choosing a suitable Ticket
 
-We prepared a [beginner ticket](https://jira.catrob.at/browse/SHARE-532) for our newcomers that should be easy to implement. You will find all the necessary information in the ticket.
+We prepared a beginner ticket for our newcomers that should be easy to implement. You will find all the necessary information in the ticket.
 
 ## c. Informing the Community
 

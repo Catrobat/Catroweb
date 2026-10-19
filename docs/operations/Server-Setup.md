@@ -180,10 +180,10 @@ sudo chmod -R 0777 /var/www/share
 9. Deploy onto the server. For more details look into the "How to Deploy" section.
 
 Make sure to use the correct db name, and define a secret! Credentials can only be found on Confluence.
-(https://confluence.catrob.at/display/MAN/%5BCredentials%5D+Catroweb+Servers+Parameters#space-menu-link-content)
+(the Catrobat Confluence (no longer online))
 
     The same accounts for the local .env files. (.env.dev.local  .env.prod.local).
-    (E.g. the mail system -> https://confluence.catrob.at/display/MAN/%5BCredentials%5D+No-Reply+Mail)
+    (E.g. the mail system -> the Catrobat Confluence (no longer online))
 
 Those files keep the same content between every deployment and will not be overwritten!
 

@@ -60,8 +60,6 @@ Your tech stack should cover **most** of them — but don’t worry if something
 
 ### Knowledge Repository
 
-[![Confluence](https://img.shields.io/badge/Confluence-orange)](https://confluence.catrob.at/)
-
 ### Communication
 
 [![Slack](https://img.shields.io/badge/Slack-green)](https://slack.com/)

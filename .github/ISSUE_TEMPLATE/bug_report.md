@@ -11,7 +11,7 @@ If your app crashes, projects load infinitely in the app, or app physics act wei
 👉 [Catroid Repository Issues](https://github.com/Catrobat/Catroid/issues)
 
 **Describe the Catroweb bug**
-A clear and concise description of what the bug is on the web platform (http://share.catrob.at/).
+A clear and concise description of what the bug is on the web platform (http://share.catrobat.org/).
 
 **To Reproduce**
 Steps to reproduce the behavior:

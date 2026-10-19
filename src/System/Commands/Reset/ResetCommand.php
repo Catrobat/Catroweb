@@ -156,7 +156,7 @@ class ResetCommand extends Command
     $this->markNotForKids($program_names, $output);
     $this->addStatistics();
 
-    // https://share.catrob.at/app/api/project/{id_of_project}/remix-graph to inspect remixes
+    // https://share.catrobat.org/app/api/project/{id_of_project}/remix-graph to inspect remixes
 
     // Creating sample Media Samples
     CommandHelper::executeShellCommand(

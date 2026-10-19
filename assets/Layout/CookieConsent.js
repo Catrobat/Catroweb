@@ -23,7 +23,7 @@ function initGTM() {
   Promise.all([import('analytics'), import('@analytics/google-tag-manager')]).then(
     ([{ Analytics }, { default: googleTagManager }]) => {
       const analytics = Analytics({
-        app: 'share.catrob.at',
+        app: 'share.catrobat.org',
         plugins: [googleTagManager({ containerId: gtmContainerId })],
       })
       analytics.page()
