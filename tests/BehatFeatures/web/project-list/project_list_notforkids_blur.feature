@@ -10,7 +10,7 @@ Feature: Not-for-kids project thumbnails are blurred in project lists and search
       | id | name          | owned by | not_for_kids |
       | 1  | safe project  | Catrobat | 0            |
       | 2  | adult project | User2    | 1            |
-    And I wait 500 milliseconds
+    And I wait for the search index to be updated
 
   Scenario: Explore section blurs not-for-kids thumbnails
     Given I am on "/app/projects"

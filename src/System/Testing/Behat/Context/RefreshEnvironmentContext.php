@@ -9,6 +9,8 @@ use App\System\Testing\Behat\ContextTrait;
 use App\System\Testing\DataFixtures\DataBaseUtils;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\Tools\ToolsException;
+use Elastica\Query\MatchAll;
+use FOS\ElasticaBundle\Index\IndexManager;
 use PHPUnit\Event\Facade as EventFacade;
 use PHPUnit\TextUI\CliArguments\Builder as CliConfigurationBuilder;
 use PHPUnit\TextUI\Configuration\Registry;
@@ -97,6 +99,21 @@ class RefreshEnvironmentContext implements Context
   public function databaseRollback(): void
   {
     DataBaseUtils::databaseRollback();
+  }
+
+  /**
+   * The DB rollback does not touch Elasticsearch, so documents of the previous scenario stay searchable. When a
+   * scenario then reuses fewer ids, search hits a document whose row is gone and the finder throws (500).
+   *
+   * @BeforeScenario
+   */
+  public function emptySearchIndex(): void
+  {
+    /** @var IndexManager $index_manager */
+    $index_manager = $this->getContainer()->get('fos_elastica.index_manager');
+    foreach ($index_manager->getAllIndexes() as $index) {
+      $index->deleteByQuery(new MatchAll(), ['refresh' => true, 'conflicts' => 'proceed']);
+    }
   }
 
   /**

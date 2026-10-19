@@ -20,7 +20,7 @@ Feature: Search users
       | id        | name     | owned by | version | private | visible |
       | isxs-adkt | Webteam  | Catroweb | 0.8.5   | false   | true    |
       | tvut-irkw | Catroweb | NewUser  | 0.8.5   | false   | true    |
-    And I wait 500 milliseconds
+    And I wait for the search index to be updated
 
   Scenario: Search for users with specific word in username
 

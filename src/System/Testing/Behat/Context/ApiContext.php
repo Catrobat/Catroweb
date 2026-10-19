@@ -2656,12 +2656,4 @@ class ApiContext implements Context
       }
     }
   }
-
-  /**
-   * @When /^I wait for the search index to be updated$/
-   */
-  public function waitForSearchIndex(): void
-  {
-    sleep(1); // wait for search index to be updated
-  }
 }

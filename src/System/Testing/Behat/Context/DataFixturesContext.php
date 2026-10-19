@@ -51,6 +51,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Exception\ORMException;
+use FOS\ElasticaBundle\Index\IndexManager;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
@@ -1727,6 +1728,22 @@ class DataFixturesContext implements Context
       ['timeout' => 60],
       'Populating Elasticsearch index'
     );
+  }
+
+  /**
+   * Makes every document indexed so far searchable. The Doctrine listener writes to Elasticsearch on flush,
+   * but a document only becomes visible after the next index refresh (1 s by default, longer right after
+   * the @BeforeFeature reset), so a fixed sleep races on slow CI runners.
+   *
+   * @Given I wait for the search index to be updated
+   */
+  public function iWaitForTheSearchIndexToBeUpdated(): void
+  {
+    /** @var IndexManager $index_manager */
+    $index_manager = $this->getContainer()->get('fos_elastica.index_manager');
+    foreach ($index_manager->getAllIndexes() as $index) {
+      $index->refresh();
+    }
   }
 
   /**
