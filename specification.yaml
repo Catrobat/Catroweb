@@ -430,13 +430,29 @@ paths:
       tags:
         - 'Users'
       summary: 'Get users'
-      description: 'Get all users with their corresponding data. When query is provided, filters by keyword. Uses cursor-based pagination.'
+      description: '
+        Get all users with their corresponding data. When query is provided, filters by keyword. Uses cursor-based pagination.
+
+        With order_by=rank (all-time) or order_by=rank_recent (last 7 days) the endpoint returns the leaderboard:
+        only users with a positive score, highest first, ties broken by user id. Suspended and disabled users and
+        users awaiting parental consent are left out. Scores are recomputed daily by `catrobat:update:userranking`.
+        order_by cannot be combined with query. The leaderboard is public; the default listing requires authentication.
+        '
       parameters:
         - name: query
           in: query
           required: false
           schema:
             type: string
+        - name: order_by
+          in: query
+          required: false
+          description: 'Leaderboard order. Omit for the default listing (newest users first).'
+          schema:
+            type: string
+            enum:
+              - rank
+              - rank_recent
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Cursor'
       responses:
@@ -453,6 +469,8 @@ paths:
               $ref: '#/components/headers/Content-Language'
         '400':
           $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
@@ -4132,7 +4150,11 @@ components:
         ranking_score:
           type: integer
           example: 151
-          description: 'Ranking score of this user'
+          description: 'All-time leaderboard score of this user (smoothed average downloads per public project)'
+        ranking_score_recent:
+          type: integer
+          example: 12
+          description: 'Leaderboard score of this user over the last 7 days (only populated for the rank_recent leaderboard)'
         is_verified:
           type: boolean
           example: true
