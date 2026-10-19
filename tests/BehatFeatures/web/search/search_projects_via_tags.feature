@@ -16,7 +16,7 @@ Feature: Searching for projects with tags
       | 1  | project 1 | Catrobat | game, animation |
       | 2  | project 2 | Catrobat | animation       |
       | 3  | project 3 | User1    | story           |
-    And I wait 500 milliseconds
+    And I wait for the search index to be updated
 
   Scenario: Searching other projects with the same tag
     Given I am on "/app/project/1"
