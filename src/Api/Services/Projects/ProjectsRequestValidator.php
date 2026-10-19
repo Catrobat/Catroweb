@@ -7,7 +7,9 @@ namespace App\Api\Services\Projects;
 use App\Api\Services\Base\AbstractRequestValidator;
 use App\Api\Services\GeneralValidator;
 use App\Api\Services\ValidationWrapper;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\User\UserManager;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -28,7 +30,20 @@ class ProjectsRequestValidator extends AbstractRequestValidator
 
   final public const int MAX_UPLOAD_SIZE_BYTES = 100 * 1_024 * 1_024; // 100 MB
 
-  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager)
+  final public const int MIN_SLUG_LENGTH = 3;
+
+  final public const int MAX_SLUG_LENGTH = 50;
+
+  /**
+   * Slugs live at /project/{slug}; block siblings of that route and words that would confuse users.
+   */
+  final public const array RESERVED_SLUGS = [
+    'about', 'admin', 'api', 'app', 'catrobat', 'comment', 'comments', 'delete', 'details', 'edit', 'explore',
+    'help', 'login', 'logout', 'new', 'null', 'pocketcode', 'program', 'project', 'projects', 'register',
+    'search', 'settings', 'studio', 'studios', 'undefined', 'upload', 'user', 'users',
+  ];
+
+  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager, private readonly ProjectRepository $project_repository)
   {
     parent::__construct($validator, $translator);
   }
@@ -73,7 +88,7 @@ class ProjectsRequestValidator extends AbstractRequestValidator
     return $this->getValidationWrapper();
   }
 
-  public function validateUpdateRequest(UpdateProjectRequest $request, string $locale): ValidationWrapper
+  public function validateUpdateRequest(UpdateProjectRequest $request, string $locale, ?Project $project = null): ValidationWrapper
   {
     if (!is_null($request->getName())) {
       $this->validateName($request->getName(), $locale);
@@ -89,6 +104,11 @@ class ProjectsRequestValidator extends AbstractRequestValidator
 
     if (!is_null($request->getScreenshot())) {
       $this->validateScreenshot($request->getScreenshot(), $locale);
+    }
+
+    $slug = $request->getSlug();
+    if (!is_null($slug)) {
+      $this->validateSlug($slug, $project, $locale);
     }
 
     return $this->getValidationWrapper();
@@ -128,6 +148,41 @@ class ProjectsRequestValidator extends AbstractRequestValidator
     $KEY = 'screenshot';
     if (false === GeneralValidator::validateImageDataUrl($screenshot)) {
       $this->getValidationWrapper()->addError($this->__('api.project.screenshotInvalid', [], $locale), $KEY);
+    }
+  }
+
+  /**
+   * Lowercases and trims; an empty slug removes the custom URL.
+   */
+  public static function normalizeSlug(string $slug): ?string
+  {
+    $slug = strtolower(trim($slug));
+
+    return '' === $slug ? null : $slug;
+  }
+
+  private function validateSlug(string $slug, ?Project $project, string $locale): void
+  {
+    $KEY = 'slug';
+    $slug = self::normalizeSlug($slug);
+    if (null === $slug) {
+      return;
+    }
+
+    // Letters, digits and single inner hyphens; at least one letter so a slug never looks like a numeric
+    // legacy id, and never UUID-shaped so it can't shadow a project id.
+    if (strlen($slug) < self::MIN_SLUG_LENGTH || strlen($slug) > self::MAX_SLUG_LENGTH
+      || 1 !== preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug)
+      || 1 !== preg_match('/[a-z]/', $slug)
+      || 1 === preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $slug)) {
+      $this->getValidationWrapper()->addError($this->__('api.project.slugInvalid', [], $locale), $KEY);
+    } elseif (in_array($slug, self::RESERVED_SLUGS, true)) {
+      $this->getValidationWrapper()->addError($this->__('api.project.slugReserved', [], $locale), $KEY);
+    } else {
+      $owner = $this->project_repository->findOneBy(['slug' => $slug]);
+      if ($owner instanceof Project && $owner !== $project) {
+        $this->getValidationWrapper()->addError($this->__('api.project.slugTaken', [], $locale), $KEY);
+      }
     }
   }
 }

@@ -104,6 +104,12 @@ class ProjectsApiProcessor extends AbstractApiProcessor
       $project_touched = true;
     }
 
+    $slug = $request->getSlug();
+    if (!is_null($slug)) {
+      $project->setSlug(ProjectsRequestValidator::normalizeSlug($slug));
+      $project_touched = true;
+    }
+
     if (!is_null($request->isNotForKids())) {
       if (2 !== $project->getNotForKids()) {
         $project->setNotForKids($request->isNotForKids() ? 1 : 0);

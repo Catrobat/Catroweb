@@ -103,7 +103,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($update_project_request, $accept_language);
+    $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($update_project_request, $accept_language, $project);
 
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;

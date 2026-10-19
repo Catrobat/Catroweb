@@ -496,6 +496,11 @@ class ProjectManager
     return $this->project_repository->find($id);
   }
 
+  public function findProjectBySlug(string $slug): ?Project
+  {
+    return $this->project_repository->findOneBy(['slug' => strtolower($slug)]);
+  }
+
   public function findProjectIfVisibleToCurrentUser(?string $id): ?Project
   {
     if (null === $id) {

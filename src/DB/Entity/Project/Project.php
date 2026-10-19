@@ -256,6 +256,12 @@ class Project implements \Stringable
   protected bool $has_missing_files = false;
 
   /**
+   * Optional owner-chosen short name for the project URL (/project/{slug}); rules in ProjectsRequestValidator.
+   */
+  #[ORM\Column(type: Types::STRING, length: 50, unique: true, nullable: true)]
+  protected ?string $slug = null;
+
+  /**
    * No ORM entry.
    */
   private bool $should_invalidate_translation_cache = false;
@@ -910,6 +916,18 @@ class Project implements \Stringable
   public function setHasMissingFiles(bool $has_missing_files): Project
   {
     $this->has_missing_files = $has_missing_files;
+
+    return $this;
+  }
+
+  public function getSlug(): ?string
+  {
+    return $this->slug;
+  }
+
+  public function setSlug(?string $slug): Project
+  {
+    $this->slug = $slug;
 
     return $this;
   }
