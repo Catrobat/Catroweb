@@ -41,7 +41,7 @@ Two facts shape the scope:
 
 Measured from `gh run list --workflow tests.yaml --branch main` and the jobs API:
 
-- Wall clock per run: **15.7–26.7 min** (median ≈ 18 min).
+- Wall clock per run: **15.3–26.7 min** (median ≈ 18 min, run created → updated).
 - Behat job time per run: median **172.8 job-minutes** (min 166.6, max 180.1) out of 178.1 for the whole
   workflow.
 - The `bin/behat` steps themselves: **≈ 86 job-min for web suites and ≈ 47 for API suites** per run. The rest
@@ -50,22 +50,23 @@ Measured from `gh run list --workflow tests.yaml --branch main` and the jobs API
   `api-achievements…api-studio` group 11.5, `web-studio` 11.2, `api-projects-get` 10.6.
 
 If the PoC's 4× speed-up held for every web suite, a full migration would save at most ≈ 64 of the 172.8
-Behat job-minutes per run. Wall clock would barely move: it is bounded by the slowest matrix jobs, and two of
+Behat job-minutes per run. Wall clock would barely move: it is bounded by the slowest matrix jobs, and three of
 the five slowest are API suites.
 
 ### Flakiness signals
 
 - **Every one of the 15 nightly runs needed at least one Behat rerun.** 29 of 315 suite jobs needed the 1st
-  rerun, 3 the 2nd, 3 the 3rd (`Rerun Behat Tests (n)` steps in `tests.yaml`, which also have fallbacks for
-  missing/pending steps and `StreamReadException`).
+  rerun, 3 the 2nd, 3 the 3rd (`Rerun Behat Tests (n)` steps in `tests.yaml`; missing/pending steps fail the job outright, and a
+  `StreamReadException` triggers one full-suite rerun).
 - By job: `api-search api-translation` **15/15** runs, `web-search web-top-bar` 6, `web-translation` 5,
   `web-general web-notifications` 2, `web-authentication web-media-library` 1.
 - The 15/15 offender is an **API** suite. `api/search/search.feature:100` returns HTTP 500 on the first run
   and passes on rerun, so it is search-index timing (Elasticsearch), not the browser driver.
 - Both red nightlies in the window (2026-10-09, 2026-10-19) were `web/search/search.feature:38` failing all
-  4 attempts with "project 1 was not found". Its background waits a fixed `500 milliseconds` instead of
-  `I wait for the search index to be updated`. That is a search-index race again, which Playwright's auto-wait
-  would not fix.
+  4 attempts with "project 1 was not found". Its background waits a fixed `500 milliseconds`. The step other search features use,
+  `I wait for the search index to be updated`, is only a `sleep(1)` too (`ApiContext::waitForSearchIndex()`),
+  so neither is a readiness check. That is a search-index race again, which Playwright's auto-wait would not
+  fix.
 - Driver-level breakage exists but was ours: chrome-mink-driver 2.11 stopped hiding a redundant
   `Session::start()` in `BrowserContext::setup()`, so tabs leaked until Chrome crashed. The fix was a one-line
   guard ([#7363](https://github.com/Catrobat/Catroweb/pull/7363), merged 2026-10-19).
@@ -75,12 +76,12 @@ the five slowest are API suites.
 
 ## Options
 
-| Option                                                                                                        | Cost                                                                                                                                                            | Gains                                                                            | Risks                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **A. Stay on Behat, fix the flake sources**                                                                   | Days: replace fixed sleeps in search backgrounds with the index wait, find the `api-search` 500, then work down the 125 fixed sleeps                            | Removes the measured reruns and the red nightlies; no new stack                  | Keeps Mink's weaker waiting model and debugging (no trace viewer)                                                            |
-| **B. Playwright + Cucumber (`playwright-bdd` or `@cucumber/cucumber`) for web suites, keep `.feature` files** | Re-implement 124 browser steps plus every fixture step the 137 web features use, behind a new out-of-process seeding API; run both stacks in CI during the move | Faster local runs, auto-waiting locators, trace viewer, parallel workers per job | Two test stacks for months; fixture parity bugs; Node and PHP fixtures drifting apart; the issue's own estimate is 6–8 weeks |
-| **C. Plain Playwright specs (no Gherkin), as in #6374**                                                       | Rewrite 668 web scenarios as code                                                                                                                               | Most idiomatic Playwright, fastest                                               | Loses the readable feature files contributors know; biggest rewrite                                                          |
-| **D. Hybrid: API on Behat forever, Playwright only for new or very flaky web suites**                         | One seeding path plus the steps one suite needs                                                                                                                 | Lets us measure B on real suites without committing to it                        | Two stacks indefinitely if it stalls halfway                                                                                 |
+| Option                                                                                                        | Cost                                                                                                                                                                                      | Gains                                                                            | Risks                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **A. Stay on Behat, fix the flake sources**                                                                   | Days: make the search-index wait real (force an index refresh or poll until the fixture is searchable) instead of `sleep`, find the `api-search` 500, then work down the 125 fixed sleeps | Removes the measured reruns and the red nightlies; no new stack                  | Keeps Mink's weaker waiting model and debugging (no trace viewer)                                                            |
+| **B. Playwright + Cucumber (`playwright-bdd` or `@cucumber/cucumber`) for web suites, keep `.feature` files** | Re-implement 124 browser steps plus every fixture step the 137 web features use, behind a new out-of-process seeding API; run both stacks in CI during the move                           | Faster local runs, auto-waiting locators, trace viewer, parallel workers per job | Two test stacks for months; fixture parity bugs; Node and PHP fixtures drifting apart; the issue's own estimate is 6–8 weeks |
+| **C. Plain Playwright specs (no Gherkin), as in #6374**                                                       | Rewrite 668 web scenarios as code                                                                                                                                                         | Most idiomatic Playwright, fastest                                               | Loses the readable feature files contributors know; biggest rewrite                                                          |
+| **D. Hybrid: API on Behat forever, Playwright only for new or very flaky web suites**                         | One seeding path plus the steps one suite needs                                                                                                                                           | Lets us measure B on real suites without committing to it                        | Two stacks indefinitely if it stalls halfway                                                                                 |
 
 ### Fixture seeding (needed for B, C, D)
 
@@ -101,7 +102,9 @@ Both keep the fixture code in PHP. The #6374 path, a seeder class per suite, sho
 **Do not start a full migration now. Do A first, then decide on a D pilot with data.**
 
 1. **A, now (small):** fix the two measured search-index races (`web/search/search.feature`,
-   `api/search/search.feature:100`). They cause every nightly rerun and both red runs. Neither is a Behat/Mink
+   `api/search/search.feature:100`) by turning `waitForSearchIndex()` into a real index refresh/poll and using
+   it in every search background. They cause the most frequent reruns (api-search 15/15, web-search 6/15) and
+   both red runs. Neither is a Behat/Mink
    problem, so neither would disappear in Playwright.
 2. **D pilot, only if DX is still the goal after A:** port one browser-heavy suite (`web-search web-top-bar`
    or `web-general`) with `playwright-bdd`, reusing its `.feature` files unchanged. Seed fixtures through the
