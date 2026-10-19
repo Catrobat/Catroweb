@@ -47,9 +47,9 @@ class ProjectsApiLoader extends AbstractApiLoader
 
   public function findProjectByID(string $id, bool $include_private = false): ?Project
   {
-    $projects = $this->findProjectsByID($id, $include_private);
+    $project = $this->findProjectsByID($id, $include_private)[0] ?? null;
 
-    return [] === $projects ? null : $projects[0];
+    return $project instanceof Project && !$this->project_manager->isHiddenFromCurrentMinor($project) ? $project : null;
   }
 
   public function searchProjects(string $query, int $limit, int $offset, string $max_version, string $flavor): array
