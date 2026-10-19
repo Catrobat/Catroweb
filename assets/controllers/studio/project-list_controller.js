@@ -187,7 +187,8 @@ export default class extends Controller {
         '/images/default/screenshot-card@1x.webp',
         'class="projects-list-item--image" alt="' +
           escapeAttr(project.name || '') +
-          '" width="360" height="360" loading="lazy"',
+          '" width="360" height="360" loading="lazy"' +
+          (isNfk ? ' style="filter: blur(10px)"' : ''),
       ) +
       (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
       (isNfk

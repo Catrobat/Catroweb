@@ -149,6 +149,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
                 project.name || '',
                 'calendar_today',
                 project.uploaded_string || '',
+                project.not_for_kids,
               ),
             )
           })
@@ -250,6 +251,7 @@ function renderProjects(section, projects, theme, trans) {
       project.name || '',
       'calendar_today',
       project.uploaded_string || '',
+      project.not_for_kids,
     )
     items.appendChild(card)
   })
@@ -311,7 +313,7 @@ function renderStudios(section, studios, baseUrl, trans) {
   })
 }
 
-function createCard(url, variants, size, fallback, name, metaIcon, metaText) {
+function createCard(url, variants, size, fallback, name, metaIcon, metaText, blur = false) {
   const a = document.createElement('a')
   a.className = 'search-card'
   a.href = url
@@ -320,7 +322,11 @@ function createCard(url, variants, size, fallback, name, metaIcon, metaText) {
     variants,
     size,
     fallback,
-    { class: 'search-card__image lazyload', alt: name },
+    {
+      class: 'search-card__image lazyload',
+      alt: name,
+      ...(blur ? { style: 'filter: blur(10px)' } : {}),
+    },
     { lazy: true },
   )
   a.appendChild(picture)
