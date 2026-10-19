@@ -7,6 +7,7 @@ namespace App\Api\Services\Projects;
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectCodeStatistics;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
@@ -18,7 +19,6 @@ use App\Project\CodeStatistics\CodeStatisticsService;
 use App\Project\ProjectManager;
 use App\Project\ProjectSearchService;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -36,24 +36,8 @@ class ProjectsApiLoader extends AbstractApiLoader
     protected ProjectFileRepository $file_repository,
     protected ExtractedFileRepository $extracted_file_repository,
     protected LoggerInterface $logger,
-    private readonly Security $security,
     private readonly ProjectZipReconstructor $zip_reconstructor,
   ) {
-  }
-
-  /**
-   * @param array<Project> $projects
-   *
-   * @return array<Project>
-   */
-  private function filterNotSafeForMinors(array $projects): array
-  {
-    $user = $this->security->getUser();
-    if (!$user instanceof User || !$user->isMinor()) {
-      return $projects;
-    }
-
-    return array_values(array_filter($projects, static fn (Project $p): bool => 0 === $p->getNotForKids() || $p->getUser() === $user));
   }
 
   public function findProjectsByID(string $id, bool $include_private = false): array
@@ -74,7 +58,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       return [];
     }
 
-    return $this->filterNotSafeForMinors($this->project_search_service->search($query, $limit, $offset, $max_version, $flavor));
+    return $this->project_manager->filterNotSafeForMinors($this->project_search_service->search($query, $limit, $offset, $max_version, $flavor));
   }
 
   public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, ?User $user = null): array
@@ -83,7 +67,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       return []; // Feature removed
     }
 
-    return $this->filterNotSafeForMinors($this->project_manager->getProjects($category, $max_version, $limit, $offset, $flavor));
+    return $this->project_manager->filterNotSafeForMinors($this->project_manager->getProjects($category, $max_version, $limit, $offset, $flavor));
   }
 
   public function getFeaturedProjects(?string $flavor, int $limit, int $offset, string $platform, string $max_version): mixed
@@ -105,7 +89,7 @@ class ProjectsApiLoader extends AbstractApiLoader
         $project = $project->isExample() ? $project->getProject() : $project;
         $project_user_id = $project->getUser()->getId();
 
-        return $this->filterNotSafeForMinors($this->project_manager->getMoreProjectsFromUser($project_user_id, $project_id, $limit, $offset, $flavor, $max_version));
+        return $this->project_manager->filterNotSafeForMinors($this->project_manager->getMoreProjectsFromUser($project_user_id, $project_id, $limit, $offset, $flavor, $max_version));
     }
 
     return [];
@@ -113,7 +97,7 @@ class ProjectsApiLoader extends AbstractApiLoader
 
   public function getUserProjects(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
   {
-    return $this->filterNotSafeForMinors($this->project_manager->getUserProjects($user_id, $limit, $offset, $flavor, $max_version));
+    return $this->project_manager->filterNotSafeForMinors($this->project_manager->getUserProjects($user_id, $limit, $offset, $flavor, $max_version));
   }
 
   public function getUserPublicProjects(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
@@ -132,7 +116,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       default => 'uploaded_at',
     };
 
-    return $this->filterNotSafeForMinors(
+    return $this->project_manager->filterNotSafeForMinors(
       $this->project_manager->getProjectsKeyset($order_by, $flavor, $max_version, $limit, $cursor_date, $cursor_value, $cursor_id)
     );
   }
@@ -142,7 +126,16 @@ class ProjectsApiLoader extends AbstractApiLoader
    */
   public function getFeaturedProjectsKeyset(?string $flavor, int $limit, string $platform, string $max_version, ?int $cursor_priority = null, ?int $cursor_id = null): array
   {
-    return $this->featured_repository->getFeaturedProgramsKeyset($flavor, $limit, $platform, $max_version, $cursor_priority, $cursor_id);
+    $featured = $this->featured_repository->getFeaturedProgramsKeyset($flavor, $limit, $platform, $max_version, $cursor_priority, $cursor_id);
+
+    return array_values(array_filter(
+      $featured,
+      function (FeaturedProject $featured): bool {
+        $project = $featured->getProject();
+
+        return !$project instanceof Project || !$this->project_manager->isHiddenFromCurrentMinor($project);
+      }
+    ));
   }
 
   /**
@@ -150,7 +143,7 @@ class ProjectsApiLoader extends AbstractApiLoader
    */
   public function getUserProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
-    return $this->filterNotSafeForMinors(
+    return $this->project_manager->filterNotSafeForMinors(
       $this->project_manager->getUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id)
     );
   }
@@ -160,7 +153,7 @@ class ProjectsApiLoader extends AbstractApiLoader
    */
   public function getUserPublicProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
-    return $this->filterNotSafeForMinors(
+    return $this->project_manager->filterNotSafeForMinors(
       $this->project_manager->getPublicUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id)
     );
   }
@@ -186,7 +179,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       return [];
     }
 
-    return $this->filterNotSafeForMinors(
+    return $this->project_manager->filterNotSafeForMinors(
       $this->project_manager->getMoreProjectsFromUserKeyset(
         $user_id, $project_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id
       )

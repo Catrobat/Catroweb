@@ -122,9 +122,11 @@ class StudioApiLoader extends AbstractApiLoader
   }
 
   /**
+   * @param User|null $viewer minors only see not-for-kids projects they own
+   *
    * @return array{projects: StudioProject[], has_more: bool}
    */
-  public function loadProjectsPage(Studio $studio, int $limit, ?string $cursor_id): array
+  public function loadProjectsPage(Studio $studio, int $limit, ?string $cursor_id, ?User $viewer = null): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('sp')
@@ -139,6 +141,12 @@ class StudioApiLoader extends AbstractApiLoader
       ->addOrderBy('sp.id', 'DESC')
       ->setMaxResults($limit + 1)
     ;
+
+    if ($viewer instanceof User && $viewer->isMinor()) {
+      $qb->andWhere('p.not_for_kids = 0 OR p.user = :viewer')
+        ->setParameter('viewer', $viewer)
+      ;
+    }
 
     if (null !== $cursor_id) {
       $qb->andWhere('sp.id < :cursor_id')
