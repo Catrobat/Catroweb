@@ -89,6 +89,13 @@ Feature: A studio ban takes away every membership right
     When I request "POST" "/api/studios/1/members/1/ban"
     Then the response status code should be "403"
 
+  Scenario: The last active admin cannot ban themselves
+    Given I use a valid JWT Bearer token for "StudioAdmin"
+    When I request "POST" "/api/studios/1/members/1/ban"
+    Then the response status code should be "403"
+    When I request "GET" "/api/studios/1"
+    Then the client response should contain "pending_join_requests_count"
+
   Scenario: A banned admin cannot read the activity log
     Given I use a valid JWT Bearer token for "BannedAdmin"
     When I request "GET" "/api/studios/1/activities"

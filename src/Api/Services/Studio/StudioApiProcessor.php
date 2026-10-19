@@ -179,6 +179,15 @@ class StudioApiProcessor extends AbstractApiProcessor
 
   public function banMember(User $admin, Studio $studio, User $target): ?StudioUser
   {
+    // A ban is permanent (there is no unban), so it must never leave the studio without an admin.
+    if ($admin->getId() === $target->getId()) {
+      return null;
+    }
+    $target_studio_user = $this->studio_manager->findStudioUser($target, $studio);
+    if (true === $target_studio_user?->isAdmin() && $this->studio_manager->countStudioAdmins($studio) <= 1) {
+      return null;
+    }
+
     $result = $this->studio_manager->changeStudioUserStatus($admin, $studio, $target, StudioUser::STATUS_BANNED);
     if ($result instanceof StudioUser && StudioUser::STATUS_BANNED === $result->getStatus()) {
       return $result;
