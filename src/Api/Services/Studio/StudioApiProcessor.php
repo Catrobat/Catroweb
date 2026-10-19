@@ -127,6 +127,12 @@ class StudioApiProcessor extends AbstractApiProcessor
       return 'not_found';
     }
 
+    // Someone else's hidden or private project must not be published through a studio.
+    $is_own = $project->getUser()?->getId() === $user->getId();
+    if (!$is_own && (!$project->isVisible() || $project->getAutoHidden() || $project->getPrivate())) {
+      return 'not_found';
+    }
+
     $existing = $this->studio_manager->findStudioProject($studio, $project);
     if (null !== $existing) {
       return 'conflict';
