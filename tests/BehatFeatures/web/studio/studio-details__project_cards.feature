@@ -101,3 +101,12 @@ Feature: Studio project cards display metadata and action menus
     And I wait 500 milliseconds
     Then I should see "Open project"
     And I should not see "Remove from studio"
+
+  Scenario: Not-for-kids project thumbnails are blurred in the studio project list
+    Given the not-for-kids status of project "2" is set to "1"
+    And I am on "/app/studio/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "[data-studio--project-list-target='container']" to contain "project 2"
+    Then the element ".projects-list-item-wrapper[data-project-id='2'] img[style*='blur']" should exist
+    And the element ".projects-list-item-wrapper[data-project-id='1'] img[style*='blur']" should not exist

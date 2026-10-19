@@ -333,7 +333,8 @@ export class ProjectList {
         '/images/default/screenshot-card@1x.webp',
         'class="projects-list-item--image" alt="' +
           escapeAttr(data.name || '') +
-          '" width="360" height="360" loading="lazy"',
+          '" width="360" height="360" loading="lazy"' +
+          (isNfk && !this.isOwnProfile ? ' style="filter: blur(10px)"' : ''),
       ) +
       (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
       (isNfk

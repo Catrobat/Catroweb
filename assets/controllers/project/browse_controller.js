@@ -102,7 +102,7 @@ export default class extends Controller {
       category: 'random',
       limit: '20',
       attributes:
-        'id,name,author,screenshot,downloads,views,uploaded_string,retention_days,retention_expiry,private',
+        'id,name,author,screenshot,downloads,views,uploaded_string,retention_days,retention_expiry,private,not_for_kids',
     })
     if (this.exploreCursor) {
       params.set('cursor', this.exploreCursor)
