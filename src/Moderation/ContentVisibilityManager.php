@@ -63,6 +63,7 @@ class ContentVisibilityManager
     } else {
       $entity->setProfileHidden(false);
       $this->restoreUserContentNotIndependentlyReported($entity);
+      $this->restoreStudiosNotIndependentlyReported($entity);
     }
   }
 
@@ -178,9 +179,9 @@ class ContentVisibilityManager
   }
 
   /**
-   * Hides all projects and comments by a user (used during ban cascade).
+   * Hides all projects, comments and owned studios of a user (used during ban cascade).
    *
-   * Projects are changed through their entities, not a bulk UPDATE, so the FOSElastica listener re-indexes
+   * Projects and studios are changed through their entities, not a bulk UPDATE, so the FOSElastica listener re-indexes
    * them on flush; a bulk UPDATE would leave the search index showing them as visible.
    */
   private function hideAllUserContent(User $user): void
@@ -189,6 +190,10 @@ class ContentVisibilityManager
     // thousands of projects make this slow.
     foreach ($this->entity_manager->getRepository(Project::class)->findBy(['user' => $user, 'auto_hidden' => false]) as $project) {
       $project->setAutoHidden(true);
+    }
+
+    foreach ($this->findStudiosOwnedBy($user) as $studio) {
+      $studio->setAutoHidden(true);
     }
 
     $this->entity_manager->createQueryBuilder()
@@ -285,6 +290,61 @@ class ContentVisibilityManager
       }
 
       $qb->getQuery()->execute();
+    }
+  }
+
+  /**
+   * Studios whose owner is the user — the same earliest-active-admin rule getContentOwnerId() applies, so a
+   * studio the user only co-administers stays visible.
+   *
+   * @return array<Studio>
+   */
+  private function findStudiosOwnedBy(User $user): array
+  {
+    $admin_memberships = $this->entity_manager->getRepository(StudioUser::class)->findBy([
+      'user' => $user,
+      'role' => StudioUser::ROLE_ADMIN,
+      'status' => StudioUser::STATUS_ACTIVE,
+    ]);
+
+    $studios = [];
+    foreach ($admin_memberships as $membership) {
+      $studio = $membership->getStudio();
+      if ($user->getId() === $this->getContentOwnerId(ContentType::Studio, (string) $studio->getId())) {
+        $studios[] = $studio;
+      }
+    }
+
+    return $studios;
+  }
+
+  /**
+   * Unhides the user's studios hidden by the ban, except those with an active report of their own.
+   */
+  private function restoreStudiosNotIndependentlyReported(User $user): void
+  {
+    $hidden = array_filter($this->findStudiosOwnedBy($user), static fn (Studio $studio): bool => $studio->getAutoHidden());
+    if ([] === $hidden) {
+      return;
+    }
+
+    $reported_ids = $this->entity_manager->createQueryBuilder()
+      ->select('r.content_id')
+      ->from(ContentReport::class, 'r')
+      ->where('r.content_type = :content_type')
+      ->andWhere('r.content_id IN (:ids)')
+      ->andWhere('r.state IN (:active_states)')
+      ->setParameter('content_type', ContentType::Studio->value)
+      ->setParameter('ids', array_map(static fn (Studio $studio): string => (string) $studio->getId(), $hidden))
+      ->setParameter('active_states', [ReportState::New->value, ReportState::Accepted->value])
+      ->getQuery()
+      ->getSingleColumnResult()
+    ;
+
+    foreach ($hidden as $studio) {
+      if (!in_array($studio->getId(), $reported_ids, true)) {
+        $studio->setAutoHidden(false);
+      }
     }
   }
 
