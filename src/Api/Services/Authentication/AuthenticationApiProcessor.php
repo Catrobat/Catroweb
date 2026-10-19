@@ -111,8 +111,9 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $PEM = $jwkConverter->toPEM($public_key);
     $payload = JWT::decode($id_token, new Key($PEM, 'RS256'));
 
+    // Apple identifies the user by the standard `sub` claim; there is no `user_id` claim.
     return [
-      'id' => $payload->user_id,
+      'id' => $payload->sub,
       'email' => $payload->email,
     ];
   }
@@ -133,6 +134,11 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $user_id = $payload['id'];
     $email = $payload['email'];
     $name = $payload['name'] ?? '';
+
+    // A missing id would turn the lookup below into `<owner>_id IS NULL` and match an arbitrary account.
+    if (!is_string($user_id) || '' === $user_id || !is_string($email) || '' === $email) {
+      throw new \RuntimeException(sprintf('The %s id token has no user id or email', $resource_owner));
+    }
 
     /** @var User|null $user */
     $user = $this->user_manager->findOneBy([$resource_owner.'_id' => $user_id]);
