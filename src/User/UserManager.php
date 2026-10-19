@@ -85,7 +85,9 @@ class UserManager
   /**
    * An unverified account with the email of an OAuth sign-in may have been registered by someone else.
    * Only when the provider confirms it verified that email, the account is claimed for the sign-in:
-   * marked verified, password replaced, other provider links and every refresh token revoked.
+   * marked verified, password replaced, other provider links and every refresh token revoked, and the
+   * age/parental-consent data reset so the new owner completes registration like a new OAuth user
+   * (otherwise the previous holder's parent email could still manage or delete the account).
    * Otherwise linking is refused. Verified accounts are left untouched.
    *
    * @throws CustomUserMessageAccountStatusException when the account is unverified and the provider did not verify the email
@@ -110,6 +112,10 @@ class UserManager
     $user->setFacebookAccessToken(null);
     $user->setAppleId(null);
     $user->setAppleAccessToken(null);
+    $user->setDateOfBirth(null);
+    $user->setMinor(false);
+    $user->setConsentStatus('not_required');
+    $user->setParentEmail(null);
     $this->entity_manager->createQueryBuilder()
       ->delete(RefreshToken::class, 't')
       ->where('t.username = :username')

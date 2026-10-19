@@ -127,6 +127,10 @@ json;
   {
     $squatter = $this->createUserWithRefreshToken('squatter7393', 'victim7393@localhost.org', false);
     $squatter->setFacebookId('squatters-own-facebook');
+    $squatter->setDateOfBirth(new \DateTime('-10 years'));
+    $squatter->setMinor(true);
+    $squatter->setConsentStatus('pending');
+    $squatter->setParentEmail('squatter-parent@localhost.org');
     $this->user_manager->updateUser($squatter);
 
     $user = $this->object->loadUserByOAuthUserResponse($this->googleResponse('google-7393-a', 'victim7393@localhost.org'));
@@ -138,6 +142,10 @@ json;
     $this->assertFalse($this->user_manager->isPasswordValid($user, 'squatter-password'), 'the previous password must stop working');
     $this->assertSame(0, $this->countRefreshTokens('squatter7393'), 'refresh tokens of the previous holder must be revoked');
     $this->assertNull($user->getFacebookId(), 'provider identities linked by the previous holder must be removed');
+    $this->assertNull($user->getParentEmail(), 'the previous holder\'s parent email must lose control of the account');
+    $this->assertNull($user->getDateOfBirth(), 'the new owner completes registration again');
+    $this->assertFalse($user->isMinor());
+    $this->assertSame('not_required', $user->getConsentStatus());
   }
 
   public function testSignInRefusesAnUnverifiedAccountWhenTheProviderDidNotVerifyTheEmail(): void
