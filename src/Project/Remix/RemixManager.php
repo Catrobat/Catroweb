@@ -139,6 +139,7 @@ class RemixManager
         'available' => array_key_exists((string) $node_id, $catrobat_nodes_data),
         'name' => $catrobat_nodes_data[$node_id]['name'] ?? null,
         'username' => $catrobat_nodes_data[$node_id]['username'] ?? null,
+        'notForKids' => ($catrobat_nodes_data[$node_id]['not_for_kids'] ?? 0) > 0,
       ];
     }
 

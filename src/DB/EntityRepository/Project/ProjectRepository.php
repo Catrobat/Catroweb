@@ -464,7 +464,7 @@ class ProjectRepository extends ServiceEntityRepository
     }
 
     return $this->createQueryBuilder('e')
-      ->select(['e.id', 'e.name', 'e.uploaded_at', 'u.username'])
+      ->select(['e.id', 'e.name', 'e.uploaded_at', 'e.not_for_kids', 'u.username'])
       ->innerJoin('e.user', 'u')
       ->andWhere('e.id IN (:program_ids)')
       ->setParameter('program_ids', $program_ids)

@@ -58,6 +58,15 @@ Feature: Get project remix graph
     And the client response should contain "project 3"
     And the client response should contain "Catrobat"
 
+  Scenario: Get remix graph hides not-for-kids thumbnails
+    Given the not-for-kids status of project "3" is set to "1"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/projects/3/remix-graph"
+    Then the response status code should be "200"
+    And the client response should contain "catrobat_3"
+    And the client response should contain "not_available.png"
+    And the client response should not contain "thumbnail-card@1x.webp"
+
   Scenario: Get remix graph returns correct node structure
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/2/remix-graph"

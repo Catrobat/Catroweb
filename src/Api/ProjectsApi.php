@@ -863,7 +863,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $nodes = array_map(function (array $node): array {
-      if (!$node['available']) {
+      // vis-network draws node images on a canvas, so not-for-kids thumbnails can't be CSS-blurred
+      if (!$node['available'] || ($node['notForKids'] ?? false)) {
         $node['thumbnailUrl'] = self::IMAGE_NOT_AVAILABLE_URL;
 
         return $node;

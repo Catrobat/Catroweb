@@ -199,6 +199,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setScreenshot(null !== $programId ? $this->project_manager->getScreenshotVariants($programId) : null)
       ->setAuthor($project->getUser()?->getUsername())
       ->setAuthorId($project->getUser()?->getId())
+      ->setNotForKids($project->getNotForKids())
     ;
   }
 
