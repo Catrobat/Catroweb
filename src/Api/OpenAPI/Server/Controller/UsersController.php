@@ -218,6 +218,7 @@ class UsersController extends Controller
       $message = match ($responseCode) {
         200 => 'OK',
         400 => 'Bad request (Invalid, or missing parameters)',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         406 => 'Not acceptable - client must accept application/json as content type',
         default => '',
       };

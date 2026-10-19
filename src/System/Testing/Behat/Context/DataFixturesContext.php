@@ -1570,6 +1570,8 @@ class DataFixturesContext implements Context
       [],
       'Updating user rankings'
     );
+    // The command wrote in its own process; drop the users cached by the fixtures.
+    $this->getManager()->clear();
   }
 
   /**

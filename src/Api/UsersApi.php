@@ -355,6 +355,12 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
       return $response;
     }
 
+    if (!$this->facade->getAuthenticationManager()->getAuthenticatedUser() instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
     // With search query: Elasticsearch only supports offset-based pagination
     if (null !== $query && '' !== trim($query)) {
       $offset = $this->decodeCursorToOffset($cursor);

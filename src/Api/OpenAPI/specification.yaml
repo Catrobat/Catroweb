@@ -438,7 +438,7 @@ paths:
         With order_by=rank (all-time) or order_by=rank_recent (last 7 days) the endpoint returns the leaderboard:
         only users with a positive score, highest first, ties broken by username. Suspended and disabled users and
         users awaiting parental consent are left out. Scores are recomputed daily by `catrobat:update:userranking`.
-        order_by cannot be combined with query.
+        order_by cannot be combined with query. The leaderboard is public; the default listing requires authentication.
         '
       parameters:
         - name: query
@@ -471,6 +471,8 @@ paths:
               $ref: '#/components/headers/Content-Language'
         '400':
           $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '406':
           $ref: '#/components/responses/NotAcceptable'
 

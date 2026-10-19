@@ -162,7 +162,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         [
           'path' => '^/api/users/?$',
           'roles' => 'PUBLIC_ACCESS',
-          'methods' => ['POST'],
+          'methods' => ['GET', 'POST'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
