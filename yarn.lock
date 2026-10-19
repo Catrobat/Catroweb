@@ -189,12 +189,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/browser@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@bugsnag/browser@npm:9.0.0"
+"@bugsnag/browser@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "@bugsnag/browser@npm:9.1.0"
   dependencies:
-    "@bugsnag/core": "npm:^9.0.0"
-  checksum: 10c0/8ebc8458d7a016616a7e67fd9ec454d22a63937da41f7ad17f01abf33bbd41321e8fe8d39bc14fc748bc61c654073a96e7a078f037330f72fba1779fbf2871ca
+    "@bugsnag/core": "npm:^9.1.0"
+  checksum: 10c0/65dda1ce10e0f81bb4c74e9ab03b9193760f8c19c11342931dfb810b50212068724d783543a3c2017b82f8b79fd210a4e71cda7162e2cb35900cb75badd6e91a
   languageName: node
   linkType: hard
 
@@ -207,16 +207,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/core@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@bugsnag/core@npm:9.0.0"
+"@bugsnag/core@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "@bugsnag/core@npm:9.1.0"
   dependencies:
     "@bugsnag/cuid": "npm:^3.2.1"
     "@bugsnag/safe-json-stringify": "npm:^6.0.0"
     error-stack-parser: "npm:^2.0.3"
     iserror: "npm:^0.0.2"
     stack-generator: "npm:^2.0.3"
-  checksum: 10c0/26dcf4840559143423c1cd4b49e33e2e8ef9530825a9dbe4895ae45a698384740dcfc875e5a7ddcc0ca0296cb0395d04994e2e97effe9bfc1d4dcaf42ed35bf6
+  checksum: 10c0/6fdb53e97d426eef9f9526b71e9b632f8c44ba72dfea9b4f0d19b7d83a0366d564a27d94887f70a26edad2273a0a1c822288e586e37b3e4d5aa9007161d220b8
   languageName: node
   linkType: hard
 
@@ -236,27 +236,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/js@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@bugsnag/js@npm:9.0.0"
+"@bugsnag/js@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "@bugsnag/js@npm:9.1.0"
   dependencies:
-    "@bugsnag/browser": "npm:^9.0.0"
-    "@bugsnag/node": "npm:^9.0.0"
-  checksum: 10c0/b6611d07a0bc750823a76d3026b2546fdbea11f7819886dae0a4ea164003185ddc14ab375cb3a1c1f7d10dcb3f56ffe600d3ea7462b92e67270f03e7aade9fa4
+    "@bugsnag/browser": "npm:^9.1.0"
+    "@bugsnag/node": "npm:^9.1.0"
+  checksum: 10c0/fe4869659a1a8491b5974d3a0a10d211b6ee0243f7f8a6e7223ec0b51018bec4a86f3a5031ed7be590ca636de56170ab627e437455c000583933617aca46e123
   languageName: node
   linkType: hard
 
-"@bugsnag/node@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@bugsnag/node@npm:9.0.0"
+"@bugsnag/node@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "@bugsnag/node@npm:9.1.0"
   dependencies:
-    "@bugsnag/core": "npm:^9.0.0"
+    "@bugsnag/core": "npm:^9.1.0"
     byline: "npm:^5.0.0"
     error-stack-parser: "npm:^2.0.3"
     iserror: "npm:^0.0.2"
     pump: "npm:^3.0.0"
     stack-generator: "npm:^2.0.3"
-  checksum: 10c0/1eff214a5795ba7792c333d7eded17b9984caf8938894ccb8993c68d5635271531fe4934252fd07b5cacfd615bc641553b39a098782dcfbb6c058e3a5bda6d2d
+  checksum: 10c0/ef7b9a8340007448422129adf9b971ae9e564cf66d38e93fd7c6fdae8afaced5535f2b17cd2d7d8adc6ede83bb44dc96c8fcdc014fb9ab55537877526510e5e9
   languageName: node
   linkType: hard
 
@@ -1130,7 +1130,7 @@ __metadata:
     "@analytics/google-tag-manager": "npm:^0.6.0"
     "@biomejs/biome": "npm:2.5.15"
     "@bugsnag/browser-performance": "npm:^3.4.1"
-    "@bugsnag/js": "npm:^9.0.0"
+    "@bugsnag/js": "npm:^9.1.0"
     "@cap.js/widget": "npm:^0.1.58"
     "@fontsource/roboto": "npm:^5.3.0"
     "@hotwired/stimulus": "npm:^3.2.2"
