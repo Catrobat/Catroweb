@@ -77,6 +77,7 @@ interface UsersApiInterface
    * Get users
    *
    * @param string|null $query           (optional)
+   * @param string|null $order_by        Leaderboard order. Omit for the default listing (newest users first). (optional)
    * @param int         $limit           (optional, default to 20)
    * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
    * @param int         &$responseCode   The HTTP Response Code
@@ -84,6 +85,7 @@ interface UsersApiInterface
    */
   public function usersGet(
     ?string $query,
+    ?string $order_by,
     int $limit,
     ?string $cursor,
     int &$responseCode,

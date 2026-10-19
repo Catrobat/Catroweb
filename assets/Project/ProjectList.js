@@ -43,7 +43,7 @@ export class ProjectList {
     this.$body = document.body
     this.$chevronLeft = container.querySelector('.project-list__chevrons__left')
     this.$chevronRight = container.querySelector('.project-list__chevrons__right')
-    if (this.cardType === 'studio') {
+    if (this.cardType === 'studio' || this.cardType === 'user') {
       const sep = apiUrl.includes('?') ? '&' : '?'
       this.apiUrl = apiUrl + sep
     } else {
@@ -122,10 +122,14 @@ export class ProjectList {
 
         items.forEach((item) => {
           if (item.id) this.projectsData[item.id] = item
-          const el =
-            this.cardType === 'studio'
-              ? this.generateStudioElement(item)
-              : this.generateProjectElement(item)
+          let el
+          if (this.cardType === 'studio') {
+            el = this.generateStudioElement(item)
+          } else if (this.cardType === 'user') {
+            el = this.generateUserElement(item)
+          } else {
+            el = this.generateProjectElement(item)
+          }
           this.projectsContainer.appendChild(el)
         })
 
@@ -621,6 +625,43 @@ export class ProjectList {
     valueSpan.textContent = `${data.members_count || 0} ${transMembers}`
     propDiv.appendChild(valueSpan)
 
+    el.appendChild(propDiv)
+
+    return el
+  }
+
+  generateUserElement(data) {
+    const el = document.createElement('a')
+    el.className = 'project-list__project project-list__project--user'
+    el.href = `/app/user/${encodeURIComponent(data.id)}`
+    el.dataset.id = data.id
+
+    el.appendChild(
+      createPictureElement(data.avatar, 'card', '/images/default/avatar_default-card@1x.webp', {
+        class: 'project-list__project__image',
+        alt: data.username || '',
+        width: 360,
+        height: 360,
+        loading: 'lazy',
+      }),
+    )
+
+    const nameSpan = document.createElement('span')
+    nameSpan.className = 'project-list__project__name'
+    nameSpan.textContent = data.username || ''
+    el.appendChild(nameSpan)
+
+    const propDiv = document.createElement('div')
+    propDiv.className = 'project-list__project__property project-list__project__property-score'
+    const icon = document.createElement('i')
+    icon.className = 'material-icons'
+    icon.textContent = 'emoji_events'
+    propDiv.appendChild(icon)
+    const valueSpan = document.createElement('span')
+    valueSpan.className = 'project-list__project__property__value'
+    const score = data[this.propertyToShow] ?? 0
+    valueSpan.textContent = `${score} ${this.container.dataset.transPoints || 'points'}`
+    propDiv.appendChild(valueSpan)
     el.appendChild(propDiv)
 
     return el

@@ -128,7 +128,7 @@ class BasicUserDataResponse
   protected ?int $following = null;
 
   /**
-   * Ranking score of this user.
+   * All-time leaderboard score of this user (smoothed average downloads per public project).
    *
    * @SerializedName("ranking_score")
    *
@@ -137,6 +137,17 @@ class BasicUserDataResponse
    * @Type("int")
    */
   protected ?int $ranking_score = null;
+
+  /**
+   * Leaderboard score of this user over the last 7 days (only populated for the rank_recent leaderboard).
+   *
+   * @SerializedName("ranking_score_recent")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $ranking_score_recent = null;
 
   /**
    * Whether the user account is verified (only populated for GET /users/{id}).
@@ -188,6 +199,7 @@ class BasicUserDataResponse
       $this->followers = array_key_exists('followers', $data) ? $data['followers'] : $this->followers;
       $this->following = array_key_exists('following', $data) ? $data['following'] : $this->following;
       $this->ranking_score = array_key_exists('ranking_score', $data) ? $data['ranking_score'] : $this->ranking_score;
+      $this->ranking_score_recent = array_key_exists('ranking_score_recent', $data) ? $data['ranking_score_recent'] : $this->ranking_score_recent;
       $this->is_verified = array_key_exists('is_verified', $data) ? $data['is_verified'] : $this->is_verified;
       $this->scratch_username = array_key_exists('scratch_username', $data) ? $data['scratch_username'] : $this->scratch_username;
       $this->is_followed_by_viewer = array_key_exists('is_followed_by_viewer', $data) ? $data['is_followed_by_viewer'] : $this->is_followed_by_viewer;
@@ -379,13 +391,35 @@ class BasicUserDataResponse
   /**
    * Sets ranking_score.
    *
-   * @param int|null $ranking_score Ranking score of this user
+   * @param int|null $ranking_score All-time leaderboard score of this user (smoothed average downloads per public project)
    *
    * @return $this
    */
   public function setRankingScore(?int $ranking_score = null): self
   {
     $this->ranking_score = $ranking_score;
+
+    return $this;
+  }
+
+  /**
+   * Gets ranking_score_recent.
+   */
+  public function getRankingScoreRecent(): ?int
+  {
+    return $this->ranking_score_recent;
+  }
+
+  /**
+   * Sets ranking_score_recent.
+   *
+   * @param int|null $ranking_score_recent Leaderboard score of this user over the last 7 days (only populated for the rank_recent leaderboard)
+   *
+   * @return $this
+   */
+  public function setRankingScoreRecent(?int $ranking_score_recent = null): self
+  {
+    $this->ranking_score_recent = $ranking_score_recent;
 
     return $this;
   }

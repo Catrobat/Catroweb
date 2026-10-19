@@ -8,6 +8,11 @@ The previous wiki structure has been consolidated and sorted into topic-based fo
 - [Developer Quickstart](./setup/Developer-Quickstart.md)
 - [Architecture Overview](./architecture/Architecture-Overview.md)
 
+## Architecture Decisions
+
+- [API v2 Standardization](./architecture/adr-api-v2-standardization.md)
+- [User Leaderboard Score](./architecture/adr-user-leaderboard-score.md)
+
 ## Setup
 
 - [Docker Setup](./setup/Docker.md)

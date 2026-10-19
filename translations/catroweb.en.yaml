@@ -768,6 +768,10 @@ failure:
 user:
   verification:
     email: 'Verify your email'
+  leaderboard:
+    all_time: 'Top creators'
+    this_week: 'Top creators this week'
+    points: 'points'
 
 api:
   registerUser:

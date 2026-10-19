@@ -80,6 +80,7 @@
         ['random', 'random', 'uploaded'],
         ['_studios_', null, null],
         ['popular', 'popular', 'author'],
+        ['_top_users_', null, null],
         ['example', 'example', 'author'],
       ] %}
     {% elseif app.user %}
@@ -87,6 +88,7 @@
         ['trending', 'trending', 'author'],
         ['_studios_', null, null],
         ['popular', 'popular', 'author'],
+        ['_top_users_', null, null],
         ['example', 'example', 'author'],
       ] %}
     {% else %}
@@ -95,6 +97,7 @@
         ['random', 'random', 'uploaded'],
         ['_studios_', null, null],
         ['popular', 'popular', 'author'],
+        ['_top_users_', null, null],
         ['example', 'example', 'author'],
       ] %}
     {% endif %}
@@ -179,6 +182,44 @@
             </div>
           </div>
         </div>
+      {% elseif category[0] == '_top_users_' %}
+        {# Leaderboards — same ProjectList component with card-type=user #}
+        {% for board in [['rank', 'ranking_score', 'user.leaderboard.all_time'], ['rank_recent', 'ranking_score_recent', 'user.leaderboard.this_week']] %}
+          <div id="home-users__{{ board[0] }}" data-category="top_users_{{ board[0] }}" data-property="{{ board[1] }}"
+               data-card-type="user" data-theme="{{ theme() }}" data-flavor="{{ flavor() }}"
+               data-base-url="{{ app.request.getBaseURL() }}"
+               data-url="{{ app.request.getBaseURL() }}/api/users?order_by={{ board[0] }}"
+               data-fetch-count="10"
+               data-trans-points="{{ 'user.leaderboard.points'|trans({}, 'catroweb') }}"
+               class="project-list home-section loading horizontal">
+            <div class="container">
+              <div class="project-list__title">
+                <h2>{{ board[2]|trans({}, 'catroweb') }}</h2>
+                <div class="project-list__title__btn-toggle btn-view-open">
+                  <div class="project-list__title__btn-toggle__text">{{ 'show-more'|trans({}, 'catroweb') }}</div>
+                  <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
+                </div>
+              </div>
+              <div class="lazyloaded project-list__wrapper">
+                <div class="lazyloaded projects-container">
+                  {% for i in range(0, 5) %}
+                    <div class="project-list__project">
+                      <img src="{{ placeholder_svg }}" class="project-list__project__image" alt="" width="360" height="360">
+                      <span class="project-list__project__name"><span class="skeleton-bar skeleton-bar--lg" style="width: 65%"></span></span>
+                      <div class="project-list__project__property lazyloaded">
+                        <span class="skeleton-bar" style="width: 50%"></span>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="lazyloaded project-list__chevrons">
+                  <div class="lazyloaded project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">chevron_left</div>
+                  <div class="lazyloaded project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
       {% else %}
         <div id="home-projects__{{ category[0] }}" data-category="{{ category[0] }}" data-property="{{ category[2] }}"
              data-theme="{{ theme() }}" data-flavor="{{ flavor() }}" data-base-url="{{ app.request.getBaseURL() }}"

@@ -93,6 +93,14 @@ class UserResponseManager extends AbstractResponseManager
       $data['following'] = $user->getFollowing()->count();
     }
 
+    if (in_array('ranking_score', $attributes_list, true)) {
+      $data['ranking_score'] = $user->getRankingScore() ?? 0;
+    }
+
+    if (in_array('ranking_score_recent', $attributes_list, true)) {
+      $data['ranking_score_recent'] = $user->getRankingScoreRecent();
+    }
+
     return $data;
   }
 
