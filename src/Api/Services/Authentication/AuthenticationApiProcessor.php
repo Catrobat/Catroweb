@@ -18,6 +18,9 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
@@ -56,6 +59,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
       'id' => $payload['sub'],
       'email' => $payload['email'],
       'name' => $payload['name'],
+      'email_verified' => $payload['email_verified'] ?? false,
     ];
   }
 
@@ -115,6 +119,8 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     return [
       'id' => $payload->sub,
       'email' => $payload->email,
+      // Apple sends the flag as a boolean or as the string "true"
+      'email_verified' => $payload->email_verified ?? false,
     ];
   }
 
@@ -151,7 +157,11 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $user = $this->user_manager->findUserByEmail($email);
     if ($user) {
       // User already exists but is not connected to this service
-      $this->user_manager->claimUnverifiedAccountForOAuth($user);
+      try {
+        $this->user_manager->claimUnverifiedAccountForOAuth($user, filter_var($payload['email_verified'] ?? false, FILTER_VALIDATE_BOOLEAN));
+      } catch (CustomUserMessageAccountStatusException $e) {
+        throw new HttpException(Response::HTTP_UNAUTHORIZED, $e->getMessageKey(), $e);
+      }
       $user->{$set_id}($user_id);
       $this->user_manager->updateUser($user);
 

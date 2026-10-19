@@ -62,7 +62,9 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
         $user->setVerified(true);
         $isNewUser = true;
       } else {
-        $this->user_manager->claimUnverifiedAccountForOAuth($user);
+        // Google's v1 userinfo says "verified_email"; Apple's id token says "email_verified" (bool or "true")
+        $data = $response->getData();
+        $this->user_manager->claimUnverifiedAccountForOAuth($user, filter_var($data['email_verified'] ?? $data['verified_email'] ?? false, FILTER_VALIDATE_BOOLEAN));
       }
 
       $user->{$setter_id}($username);

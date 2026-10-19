@@ -24,6 +24,7 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 
 class UserManager
 {
@@ -82,20 +83,33 @@ class UserManager
   }
 
   /**
-   * An OAuth sign-in proves ownership of the email, but an unverified account with that email may have
-   * been registered by someone else. Before linking, lock that person out: mark the account verified,
-   * replace its password and revoke every refresh token. Verified accounts are left untouched.
+   * An unverified account with the email of an OAuth sign-in may have been registered by someone else.
+   * Only when the provider confirms it verified that email, the account is claimed for the sign-in:
+   * marked verified, password replaced, other provider links and every refresh token revoked.
+   * Otherwise linking is refused. Verified accounts are left untouched.
+   *
+   * @throws CustomUserMessageAccountStatusException when the account is unverified and the provider did not verify the email
    */
-  public function claimUnverifiedAccountForOAuth(User $user): void
+  public function claimUnverifiedAccountForOAuth(User $user, bool $email_verified_by_provider): void
   {
     if ($user->isVerified()) {
       return;
+    }
+
+    if (!$email_verified_by_provider) {
+      throw new CustomUserMessageAccountStatusException('An account with this email exists but is not verified. Log in with your password and verify your email first.');
     }
 
     $user->setVerified(true);
     $user->setOauthUser(true);
     $user->setPlainPassword(null);
     $user->setPassword(PasswordGenerator::generateRandomPassword());
+    $user->setGoogleId(null);
+    $user->setGoogleAccessToken(null);
+    $user->setFacebookId(null);
+    $user->setFacebookAccessToken(null);
+    $user->setAppleId(null);
+    $user->setAppleAccessToken(null);
     $this->entity_manager->createQueryBuilder()
       ->delete(RefreshToken::class, 't')
       ->where('t.username = :username')

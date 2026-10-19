@@ -18,6 +18,7 @@ use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -125,6 +126,8 @@ json;
   public function testSignInClaimsAnUnverifiedAccountWithTheSameEmail(): void
   {
     $squatter = $this->createUserWithRefreshToken('squatter7393', 'victim7393@localhost.org', false);
+    $squatter->setFacebookId('squatters-own-facebook');
+    $this->user_manager->updateUser($squatter);
 
     $user = $this->object->loadUserByOAuthUserResponse($this->googleResponse('google-7393-a', 'victim7393@localhost.org'));
 
@@ -134,6 +137,25 @@ json;
     $this->assertTrue($user->isVerified());
     $this->assertFalse($this->user_manager->isPasswordValid($user, 'squatter-password'), 'the previous password must stop working');
     $this->assertSame(0, $this->countRefreshTokens('squatter7393'), 'refresh tokens of the previous holder must be revoked');
+    $this->assertNull($user->getFacebookId(), 'provider identities linked by the previous holder must be removed');
+  }
+
+  public function testSignInRefusesAnUnverifiedAccountWhenTheProviderDidNotVerifyTheEmail(): void
+  {
+    $this->createUserWithRefreshToken('unverified7393', 'unverified7393@localhost.org', false);
+
+    try {
+      $this->object->loadUserByOAuthUserResponse($this->googleResponse('google-7393-c', 'unverified7393@localhost.org', false));
+      $this->fail('linking must be refused');
+    } catch (CustomUserMessageAccountStatusException) {
+    }
+
+    $this->entityManager()->clear();
+    $user = $this->user_manager->findUserByUsername('unverified7393');
+    $this->assertInstanceOf(User::class, $user);
+    $this->assertNull($user->getGoogleId());
+    $this->assertFalse($user->isVerified());
+    $this->assertTrue($this->user_manager->isPasswordValid($user, 'squatter-password'));
   }
 
   public function testSignInKeepsTheCredentialsOfAVerifiedAccount(): void
@@ -181,7 +203,7 @@ json;
     return $entity_manager;
   }
 
-  private function googleResponse(string $google_id, string $email): PathUserResponse
+  private function googleResponse(string $google_id, string $email, bool $email_verified = true): PathUserResponse
   {
     $resourceOwner = new GoogleResourceOwner(
       $this->createStub(HttpClientInterface::class),
@@ -195,7 +217,7 @@ json;
     $response = new PathUserResponse();
     $response->setResourceOwner($resourceOwner);
     $response->setPaths($this->paths);
-    $response->setData(json_encode(['id' => $google_id, 'email' => $email, 'first_name' => 'a', 'last_name' => 'b'], JSON_THROW_ON_ERROR));
+    $response->setData(json_encode(['id' => $google_id, 'email' => $email, 'verified_email' => $email_verified, 'first_name' => 'a', 'last_name' => 'b'], JSON_THROW_ON_ERROR));
     $response->setOAuthToken(new OAuthToken($this->tokenData));
 
     return $response;
