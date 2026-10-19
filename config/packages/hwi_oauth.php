@@ -42,11 +42,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'apple' => [
           'type' => 'apple',
           'client_id' => '%env(APPLE_ID)%',
+          // 'auto' signs a fresh client secret per login from the .p8 key; a static JWT expires after <= 6 months
           'client_secret' => '%env(APPLE_SECRET)%',
           'scope' => 'name email',
           'options' => [
             'display' => 'popup',
             'csrf' => true,
+            'auth_key' => '%env(APPLE_AUTH_KEY)%',
+            'key_id' => '%env(APPLE_KEY_ID)%',
+            'team_id' => '%env(APPLE_TEAM_ID)%',
           ],
         ],
       ],
