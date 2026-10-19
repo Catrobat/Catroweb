@@ -211,7 +211,13 @@ class BrowserContext extends MinkContext implements Context
    */
   public function setup(): void
   {
-    $this->getSession()->start();
+    // Mink only resets (not stops) the session between scenarios. Starting an already started
+    // chrome-mink-driver session opens a new browser context + tab and orphans the old one;
+    // since driver 2.11 reset() no longer closes tabs of other contexts, so they pile up until
+    // Chrome runs out of memory ("Page not loaded", "Browser crashed").
+    if (!$this->getSession()->isStarted()) {
+      $this->getSession()->start();
+    }
     $this->getSession()->resizeWindow(412, 823);
     $this->getSession()->visit($this->getMinkParameter('base_url'));
     $this->getSession()->executeScript("localStorage.removeItem('oauthSignIn')");
