@@ -46,10 +46,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
 
     switch ($type) {
       case 'projects':
-        $projects = $this->facade->getProjectSearchService()->search($query, $limit, $offset);
-        $projects_total = $this->facade->getProjectSearchService()->searchCount($query);
-
-        $result = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
+        $result = $this->searchProjects($query, $limit, $offset);
         break;
       case 'users':
         $users = $this->facade->getUserManager()->search($query, $limit, $offset);
@@ -63,9 +60,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         break;
       case 'all':
       default:
-        $projects = $this->facade->getProjectSearchService()->search($query, $limit, $offset);
-        $projects_total = $this->facade->getProjectSearchService()->searchCount($query);
-        $projects_response = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
+        $projects_response = $this->searchProjects($query, $limit, $offset);
 
         $users = $this->facade->getUserManager()->search($query, $limit, $offset);
         $users_total = $this->facade->getUserManager()->searchCount($query);
@@ -83,5 +78,17 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
     $responseCode = Response::HTTP_OK;
 
     return $result;
+  }
+
+  private function searchProjects(string $query, int $limit, int $offset): array
+  {
+    // ponytail: post-filter, so a minor's page can be shorter and the total still counts not-for-kids
+    // projects; filter in the ES query once not_for_kids and the owner id are indexed.
+    $projects = $this->facade->getProjectManager()->filterNotSafeForMinors(
+      $this->facade->getProjectSearchService()->search($query, $limit, $offset)
+    );
+    $projects_total = $this->facade->getProjectSearchService()->searchCount($query);
+
+    return $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
   }
 }

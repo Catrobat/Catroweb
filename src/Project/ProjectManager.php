@@ -82,6 +82,26 @@ class ProjectManager
   }
 
   /**
+   * Minor users cannot see projects marked as not safe for kids, except their own.
+   */
+  public function isHiddenFromCurrentMinor(Project $project): bool
+  {
+    $user = $this->security->getUser();
+
+    return $user instanceof User && $user->isMinor() && $project->getNotForKids() > 0 && $project->getUser() !== $user;
+  }
+
+  /**
+   * @param array<Project> $projects
+   *
+   * @return array<Project>
+   */
+  public function filterNotSafeForMinors(array $projects): array
+  {
+    return array_values(array_filter($projects, fn (Project $p): bool => !$this->isHiddenFromCurrentMinor($p)));
+  }
+
+  /**
    * Check visibility of the given project for the current user.
    */
   protected function isProjectVisibleForCurrentUser(Project $project): bool
@@ -108,8 +128,7 @@ class ProjectManager
       return $this->security->isGranted('ROLE_ADMIN');
     }
 
-    // Minor users cannot see projects marked as not safe for kids, except their own
-    if ($project->getNotForKids() > 0 && null !== $user && $user->isMinor() && $project->getUser() !== $user) {
+    if ($this->isHiddenFromCurrentMinor($project)) {
       return false;
     }
 

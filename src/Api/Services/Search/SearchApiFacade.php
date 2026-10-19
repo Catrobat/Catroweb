@@ -6,6 +6,7 @@ namespace App\Api\Services\Search;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
+use App\Project\ProjectManager;
 use App\Project\ProjectSearchService;
 use App\Storage\ImageRepository;
 use App\Studio\StudioSearchService;
@@ -25,6 +26,7 @@ class SearchApiFacade extends AbstractApiFacade
     private readonly SearchApiProcessor $processor,
     private readonly SearchRequestValidator $request_validator,
     private readonly ProjectSearchService $project_search_service,
+    private readonly ProjectManager $project_manager,
     private readonly UserManager $user_manager,
     private readonly StudioSearchService $studio_search_service,
     private readonly TranslatorInterface $translator,
@@ -64,6 +66,11 @@ class SearchApiFacade extends AbstractApiFacade
   public function getProjectSearchService(): ProjectSearchService
   {
     return $this->project_search_service;
+  }
+
+  public function getProjectManager(): ProjectManager
+  {
+    return $this->project_manager;
   }
 
   public function getUserManager(): UserManager

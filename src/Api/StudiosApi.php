@@ -292,7 +292,12 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       return null;
     }
 
-    $page = $this->facade->getLoader()->loadProjectsPage($result['studio'], $this->normalizeLimit($limit), $result['cursor_id']);
+    $page = $this->facade->getLoader()->loadProjectsPage(
+      $result['studio'],
+      $this->normalizeLimit($limit),
+      $result['cursor_id'],
+      $this->facade->getAuthenticationManager()->getAuthenticatedUser(),
+    );
 
     $responseCode = Response::HTTP_OK;
 
