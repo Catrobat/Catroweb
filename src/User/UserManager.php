@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\User;
 
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\RefreshToken;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\UserRepository;
 use App\Project\ProjectManager;
@@ -78,6 +79,30 @@ class UserManager
     }
 
     return $response_data;
+  }
+
+  /**
+   * An OAuth sign-in proves ownership of the email, but an unverified account with that email may have
+   * been registered by someone else. Before linking, lock that person out: mark the account verified,
+   * replace its password and revoke every refresh token. Verified accounts are left untouched.
+   */
+  public function claimUnverifiedAccountForOAuth(User $user): void
+  {
+    if ($user->isVerified()) {
+      return;
+    }
+
+    $user->setVerified(true);
+    $user->setOauthUser(true);
+    $user->setPlainPassword(null);
+    $user->setPassword(PasswordGenerator::generateRandomPassword());
+    $this->entity_manager->createQueryBuilder()
+      ->delete(RefreshToken::class, 't')
+      ->where('t.username = :username')
+      ->setParameter('username', $user->getUserIdentifier())
+      ->getQuery()
+      ->execute()
+    ;
   }
 
   public function updateUser(User $user, bool $andFlush = true): void

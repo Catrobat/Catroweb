@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Api\Services\Authentication;
 
 use App\Api\Services\Authentication\AuthenticationApiProcessor;
 use App\Api\Services\AuthenticationManager;
+use App\DB\Entity\User\User;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -58,5 +59,26 @@ class AuthenticationApiProcessorTest extends TestCase
       'empty id' => [['id' => '', 'email' => 'someone@example.com']],
       'no email' => [['id' => '001234.abcd', 'email' => null]],
     ];
+  }
+
+  public function testClaimsTheAccountMatchedByEmailBeforeLinkingIt(): void
+  {
+    $existing = new User();
+    $user_manager = $this->createMock(UserManager::class);
+    $user_manager->method('findOneBy')->willReturn(null);
+    $user_manager->method('findUserByEmail')->willReturn($existing);
+    $user_manager->expects($this->once())->method('claimUnverifiedAccountForOAuth')->with($existing);
+    $user_manager->expects($this->once())->method('updateUser')->with($existing);
+
+    $processor = new class($user_manager, $this->createStub(AuthenticationManager::class), $this->createStub(AchievementManager::class)) extends AuthenticationApiProcessor {
+      #[\Override]
+      protected function getPayloadFromAppleIdToken(string $id_token): array
+      {
+        return ['id' => '001234.abcd', 'email' => 'someone@example.com'];
+      }
+    };
+
+    $this->assertSame($existing, $processor->connectUserToAccount('token', 'apple'));
+    $this->assertSame('001234.abcd', $existing->getAppleId());
   }
 }

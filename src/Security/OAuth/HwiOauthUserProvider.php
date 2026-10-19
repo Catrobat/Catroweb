@@ -61,6 +61,8 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
         $user->setOauthUser(true);
         $user->setVerified(true);
         $isNewUser = true;
+      } else {
+        $this->user_manager->claimUnverifiedAccountForOAuth($user);
       }
 
       $user->{$setter_id}($username);

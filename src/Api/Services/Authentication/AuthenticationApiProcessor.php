@@ -151,6 +151,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $user = $this->user_manager->findUserByEmail($email);
     if ($user) {
       // User already exists but is not connected to this service
+      $this->user_manager->claimUnverifiedAccountForOAuth($user);
       $user->{$set_id}($user_id);
       $this->user_manager->updateUser($user);
 

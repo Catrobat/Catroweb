@@ -81,6 +81,7 @@ class FakeOAuthController extends AbstractController
         $isNew = true;
       } else {
         $isNew = false;
+        $this->user_manager->claimUnverifiedAccountForOAuth($user);
       }
 
       $user->setGoogleId($fakeGoogleId);
