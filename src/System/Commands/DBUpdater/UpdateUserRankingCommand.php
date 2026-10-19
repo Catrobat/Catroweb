@@ -37,6 +37,8 @@ class UpdateUserRankingCommand extends Command
 
   final public const int SCORE_SCALE = 100;
 
+  final public const int WRITE_BATCH_SIZE = 1000;
+
   public function __construct(protected EntityManagerInterface $entity_manager)
   {
     parent::__construct();
@@ -66,10 +68,8 @@ class UpdateUserRankingCommand extends Command
       return Command::SUCCESS;
     }
 
-    $this->entity_manager->wrapInTransaction(function () use ($all_time, $recent): void {
-      $this->writeScores('ranking_score', $all_time);
-      $this->writeScores('ranking_score_recent', $recent);
-    });
+    $this->writeScores('ranking_score', $all_time);
+    $this->writeScores('ranking_score_recent', $recent);
 
     $output->writeln('User rankings have been updated.');
 
@@ -147,19 +147,44 @@ class UpdateUserRankingCommand extends Command
   }
 
   /**
+   * Writes in short auto-committed batches (no long transaction holding fos_user row locks) and never zeroes
+   * everyone first, so readers see old or new scores, never an empty board.
+   *
    * @param array<string, int> $scores
    */
-  private function writeScores(string $field, array $scores): void
+  private function writeScores(string $column, array $scores): void
   {
-    $this->entity_manager
-      ->createQuery(sprintf('UPDATE %s u SET u.%s = 0 WHERE u.%s > 0', User::class, $field, $field))
-      ->execute()
-    ;
+    $connection = $this->entity_manager->getConnection();
+    $table = $this->entity_manager->getClassMetadata(User::class)->getTableName();
 
-    // ponytail: one UPDATE per scored user; batch with CASE WHEN if the nightly run gets too slow
-    $query = $this->entity_manager->createQuery(sprintf('UPDATE %s u SET u.%s = :score WHERE u.id = :id', User::class, $field));
-    foreach ($scores as $user_id => $score) {
-      $query->setParameter('score', $score)->setParameter('id', (string) $user_id)->execute();
+    foreach (array_chunk($scores, self::WRITE_BATCH_SIZE, true) as $batch) {
+      $cases = '';
+      $case_params = [];
+      $ids = [];
+      foreach ($batch as $user_id => $score) {
+        $cases .= ' WHEN ? THEN ?';
+        $case_params[] = (string) $user_id;
+        $case_params[] = $score;
+        $ids[] = (string) $user_id;
+      }
+
+      $connection->executeStatement(
+        sprintf('UPDATE %s SET %s = CASE id%s END WHERE id IN (%s)', $table, $column, $cases, implode(',', array_fill(0, count($ids), '?'))),
+        [...$case_params, ...$ids]
+      );
+    }
+
+    // Users who dropped off the board (no downloads any more, or none in the window).
+    $scored = array_fill_keys(array_map(strval(...), array_keys($scores)), true);
+    $stale = array_values(array_filter(
+      $connection->fetchFirstColumn(sprintf('SELECT id FROM %s WHERE %s > 0', $table, $column)),
+      static fn (mixed $id): bool => !isset($scored[(string) $id])
+    ));
+    foreach (array_chunk($stale, self::WRITE_BATCH_SIZE) as $ids) {
+      $connection->executeStatement(
+        sprintf('UPDATE %s SET %s = 0 WHERE id IN (%s)', $table, $column, implode(',', array_fill(0, count($ids), '?'))),
+        $ids
+      );
     }
   }
 

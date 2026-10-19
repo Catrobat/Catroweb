@@ -35,11 +35,12 @@ Option 2, as suggested in the issue:
 - Scores are stored in hundredths so the small weekly numbers do not collapse into ties.
 - Users without any download get no score and are not listed.
 - Read-time filter: disabled users, suspended users (`profile_hidden`) and users whose parental consent is
-  `pending`/`revoked` are never listed, even between recomputes. Ties are broken by username.
+  `pending`/`revoked` are never listed, even between recomputes. Ties are broken by user id (keeps the query on the score index).
 - Scores are global (not per flavor), like the rest of `GET /api/users`.
 
 ## Consequences
 
 - One indexed column per board on `fos_user`; listing is a plain indexed `ORDER BY`.
-- The command rewrites all scores in one transaction; `--dry-run` prints the top 10 without writing.
+- The command writes scores in batches of 1,000 auto-committed `UPDATE … CASE` statements (no long lock on
+  `fos_user`, no window where everyone reads 0); `--dry-run` prints the top 10 without writing.
 - Changing `k`, the window or adding signals only touches `UpdateUserRankingCommand`.

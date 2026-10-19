@@ -90,7 +90,9 @@ class UserApiLoader extends AbstractApiLoader
       ->andWhere('u.consent_status NOT IN (:blocked_consent)')
       ->setParameter('blocked_consent', ['pending', 'revoked'])
       ->orderBy($score, 'DESC')
-      ->addOrderBy('u.username', 'ASC')
+      // id DESC: InnoDB secondary indexes carry the primary key, so (score DESC, id DESC) is a backward scan
+      // of the score index that stops after $limit rows instead of a filesort over every ranked user.
+      ->addOrderBy('u.id', 'DESC')
       ->setFirstResult($offset)
       ->setMaxResults($limit)
       ->getQuery()

@@ -436,7 +436,7 @@ paths:
         Get all users with their corresponding data. When query is provided, filters by keyword. Uses cursor-based pagination.
 
         With order_by=rank (all-time) or order_by=rank_recent (last 7 days) the endpoint returns the leaderboard:
-        only users with a positive score, highest first, ties broken by username. Suspended and disabled users and
+        only users with a positive score, highest first, ties broken by user id. Suspended and disabled users and
         users awaiting parental consent are left out. Scores are recomputed daily by `catrobat:update:userranking`.
         order_by cannot be combined with query. The leaderboard is public; the default listing requires authentication.
         '
