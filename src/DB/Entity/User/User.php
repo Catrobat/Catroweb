@@ -30,6 +30,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Index(name: 'google_id_idx', columns: ['google_id'])]
 #[ORM\Index(name: 'facebook_id_idx', columns: ['facebook_id'])]
 #[ORM\Index(name: 'apple_id_idx', columns: ['apple_id'])]
+#[ORM\Index(name: 'ranking_score_idx', columns: ['ranking_score'])]
+#[ORM\Index(name: 'ranking_score_recent_idx', columns: ['ranking_score_recent'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
@@ -214,6 +216,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
   #[ORM\Column(type: Types::INTEGER, nullable: true)]
   protected ?int $ranking_score = null;
+
+  #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
+  protected int $ranking_score_recent = 0;
 
   #[ORM\Column(type: 'string', length: 180, nullable: false)]
   protected ?string $username = null;
@@ -603,6 +608,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   public function setRankingScore(?int $ranking_score): void
   {
     $this->ranking_score = $ranking_score;
+  }
+
+  public function getRankingScoreRecent(): int
+  {
+    return $this->ranking_score_recent;
+  }
+
+  public function setRankingScoreRecent(int $ranking_score_recent): void
+  {
+    $this->ranking_score_recent = $ranking_score_recent;
   }
 
   #[ORM\PrePersist]

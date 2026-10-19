@@ -324,9 +324,36 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
   }
 
   #[\Override]
-  public function usersGet(?string $query, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function usersGet(?string $query, ?string $order_by, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $limit = min(max($limit, 1), self::MAX_LIMIT);
+
+    if (null !== $order_by && '' !== $order_by) {
+      if (null !== $query && '' !== trim($query)) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return null;
+      }
+
+      $recent = 'rank_recent' === $order_by;
+      $offset = $this->decodeCursorToOffset($cursor);
+      $users = $this->facade->getLoader()->getRankedUsers($recent, $limit + 1, $offset);
+
+      $has_more = count($users) > $limit;
+      if ($has_more) {
+        array_pop($users);
+      }
+
+      $next_cursor = $has_more ? base64_encode((string) ($offset + $limit)) : null;
+      $attributes = 'id,username,avatar,'.($recent ? 'ranking_score_recent' : 'ranking_score');
+
+      $responseCode = Response::HTTP_OK;
+      $response = $this->facade->getResponseManager()->createUsersListResponse($users, $has_more, $next_cursor, $attributes);
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $response;
+    }
 
     // With search query: Elasticsearch only supports offset-based pagination
     if (null !== $query && '' !== trim($query)) {

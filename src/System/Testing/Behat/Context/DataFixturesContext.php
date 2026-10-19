@@ -12,6 +12,7 @@ use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectCodeStatistics;
+use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
@@ -1557,6 +1558,37 @@ class DataFixturesContext implements Context
       [],
       'Creating Flavors'
     );
+  }
+
+  /**
+   * @Given I run the update user ranking command
+   */
+  public function iRunTheUpdateUserRankingCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:userranking'],
+      [],
+      'Updating user rankings'
+    );
+  }
+
+  /**
+   * @Given there are project downloads:
+   */
+  public function thereAreProjectDownloads(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      $project = $this->getProjectManager()->findOneByName($config['project']);
+      Assert::assertNotNull($project, sprintf('Project "%s" not found', $config['project']));
+      $download = new ProjectDownloads();
+      $download->setProject($project);
+      $download->setUser($this->getUserManager()->findUserByUsername($config['downloaded by']));
+      $download->setType(ProjectDownloads::TYPE_PROJECT);
+      $download->setDownloadedAt(new \DateTime(sprintf('-%d days', (int) $config['days ago'])));
+      $this->getManager()->persist($download);
+    }
+
+    $this->getManager()->flush();
   }
 
   /**

@@ -162,6 +162,7 @@ class UsersController extends Controller
 
     // Read out all input parameter values into variables
     $query = $request->query->get('query');
+    $order_by = $request->query->get('order_by');
     $limit = $request->query->get('limit', 20);
     $cursor = $request->query->get('cursor');
 
@@ -170,6 +171,7 @@ class UsersController extends Controller
     // Deserialize the input values that needs it
     try {
       $query = $this->deserialize($query, 'string', 'string');
+      $order_by = $this->deserialize($order_by, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $cursor = $this->deserialize($cursor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
@@ -180,6 +182,13 @@ class UsersController extends Controller
     $asserts = [];
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($query, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Choice(choices: ['rank', 'rank_recent']);
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($order_by, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -204,7 +213,7 @@ class UsersController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->usersGet($query, $limit, $cursor, $responseCode, $responseHeaders);
+      $result = $handler->usersGet($query, $order_by, $limit, $cursor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',

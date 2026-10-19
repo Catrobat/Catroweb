@@ -599,3 +599,7 @@
   margin: 0.25rem 0;
   background: light-dark(#dee2e6, #3a3a4a);
 }
+
+.project-list__project--user .project-list__project__image {
+  border-radius: 50%;
+}

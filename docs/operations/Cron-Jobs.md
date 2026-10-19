@@ -65,7 +65,7 @@ Jobs only appear in the admin UI after their first execution.
 | Job                            | Command                                            | Interval |
 | ------------------------------ | -------------------------------------------------- | -------- |
 | Update popularity scores       | `catrobat:update:popularity`                       | 6 hours  |
-| Update user rankings           | `catrobat:update:userranking`                      | 1 day    |
+| Update user leaderboard scores | `catrobat:update:userranking`                      | 1 day    |
 | Refresh project extensions     | `catrobat:workflow:project:refresh_extensions`     | 1 year   |
 | Update random project category | `catrobat:workflow:update_random_project_category` | 1 week   |
 | Detect broken projects         | `catrobat:workflow:detect_broken_projects`         | 1 day    |

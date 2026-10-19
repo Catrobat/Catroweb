@@ -71,6 +71,34 @@ class UserApiLoader extends AbstractApiLoader
   }
 
   /**
+   * Leaderboard: users with a positive score, highest first. Suspended (profile hidden) and disabled users
+   * and users whose parental consent is pending or revoked are excluded at read time, so a suspension
+   * takes effect before the next nightly recompute.
+   *
+   * @return User[]
+   */
+  public function getRankedUsers(bool $recent, int $limit, int $offset): array
+  {
+    $score = $recent ? 'u.ranking_score_recent' : 'u.ranking_score';
+
+    return $this->entity_manager->createQueryBuilder()
+      ->select('u')
+      ->from(User::class, 'u')
+      ->where($score.' > 0')
+      ->andWhere('u.enabled = true')
+      ->andWhere('u.profile_hidden = false')
+      ->andWhere('u.consent_status NOT IN (:blocked_consent)')
+      ->setParameter('blocked_consent', ['pending', 'revoked'])
+      ->orderBy($score, 'DESC')
+      ->addOrderBy('u.username', 'ASC')
+      ->setFirstResult($offset)
+      ->setMaxResults($limit)
+      ->getQuery()
+      ->getResult()
+    ;
+  }
+
+  /**
    * Keyset cursor query for all users ordered by createdAt DESC, id DESC.
    *
    * @return User[]
