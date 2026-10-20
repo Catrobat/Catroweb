@@ -173,11 +173,42 @@ class ApiContext implements Context
     $this->getJwtManager()->parse($bearer->getValue());
   }
 
+  /** @Given I set authentication cookie :name to :value */
+  public function iSetAuthenticationCookie(string $name, string $value): void
+  {
+    Assert::assertContains($name, ['BEARER', 'REFRESH_TOKEN']);
+    $service = $this->getSymfonyService(\App\Security\Authentication\CookieService::class);
+    Assert::assertInstanceOf(\App\Security\Authentication\CookieService::class, $service);
+    $cookie = 'BEARER' === $name ? $service->createBearerTokenCookie($value) : $service->createRefreshTokenCookie($value);
+    $host = $this->getKernelBrowser()->getServerParameter('HTTP_HOST', 'localhost');
+    Assert::assertIsString($host);
+    // A hostless synthetic jar cookie is a different cookie from a host-scoped response cookie.
+    $uri = ($cookie->isSecure() ? 'https://' : 'http://').$host.'/';
+    $this->getKernelBrowser()->getCookieJar()->set(Cookie::fromString((string) $cookie, $uri));
+  }
+
   /** @Then the API authentication cookies should be cleared */
   public function apiAuthenticationCookiesShouldBeCleared(): void
   {
-    Assert::assertNull($this->getKernelBrowser()->getCookieJar()->get('REFRESH_TOKEN'));
-    Assert::assertNull($this->getKernelBrowser()->getCookieJar()->get('BEARER'));
+    $service = $this->getSymfonyService(\App\Security\Authentication\CookieService::class);
+    Assert::assertInstanceOf(\App\Security\Authentication\CookieService::class, $service);
+    $client = $this->getKernelBrowser();
+    $actual_cookies = $client->getResponse()->headers->getCookies();
+    foreach ($service->createClearedAuthenticationCookies() as $expected) {
+      $matching = array_values(array_filter($actual_cookies, static fn (\Symfony\Component\HttpFoundation\Cookie $cookie): bool => $cookie->getName() === $expected->getName()));
+      Assert::assertCount(1, $matching);
+      $actual = $matching[0];
+      Assert::assertSame($expected->getPath(), $actual->getPath());
+      Assert::assertSame($expected->getDomain(), $actual->getDomain());
+      // Symfony serializes an empty clearing value as the expired sentinel "deleted".
+      Assert::assertContains($actual->getValue(), ['', 'deleted', null]);
+      Assert::assertLessThan(time(), $actual->getExpiresTime());
+      Assert::assertSame(0, $actual->getMaxAge());
+      Assert::assertTrue($actual->isHttpOnly());
+      Assert::assertSame($expected->isSecure(), $actual->isSecure());
+      Assert::assertSame($expected->getSameSite(), $actual->getSameSite());
+      Assert::assertNull($client->getCookieJar()->get($expected->getName(), $expected->getPath(), $client->getRequest()->getHost()));
+    }
   }
 
   private function getResponseContent(): string

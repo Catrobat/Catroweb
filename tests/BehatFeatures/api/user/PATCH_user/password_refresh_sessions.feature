@@ -13,7 +13,7 @@ Feature: Password changes revoke refresh sessions and rotate only a verified cur
     And I have a request header "CONTENT_TYPE" with value "application/json"
 
   Scenario: Current cookie proof rotates the current session and rejects every old refresh token
-    Given I set cookie "REFRESH_TOKEN" to "current-session"
+    Given I set authentication cookie "REFRESH_TOKEN" to "current-session"
     And I have the following JSON request body:
       """
       {"current_password":"Old12345","password":"NewPassword123"}
@@ -30,7 +30,7 @@ Feature: Password changes revoke refresh sessions and rotate only a verified cur
     Then the response status code should be "200"
 
   Scenario Outline: Unproved current sessions preserve no refresh tokens
-    Given I set cookie "REFRESH_TOKEN" to "<proof>"
+    Given I set authentication cookie "REFRESH_TOKEN" to "<proof>"
     And I have the following JSON request body:
       """
       {"current_password":"Old12345","password":"NewPassword123"}
@@ -48,7 +48,7 @@ Feature: Password changes revoke refresh sessions and rotate only a verified cur
       | missing-session |
 
   Scenario: A dry run and an invalid current password keep refresh sessions
-    Given I set cookie "REFRESH_TOKEN" to "current-session"
+    Given I set authentication cookie "REFRESH_TOKEN" to "current-session"
     And I have the following JSON request body:
       """
       {"dry_run":true,"current_password":"Old12345","password":"NewPassword123"}

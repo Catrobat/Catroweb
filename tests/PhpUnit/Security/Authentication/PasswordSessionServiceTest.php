@@ -350,6 +350,62 @@ final class PasswordSessionServiceTest extends KernelTestCase
     $this->assertSame($this->user->getUserIdentifier(), $jwt->parse($refreshed)['username']);
   }
 
+  #[DataProvider('unprovedPasswordSessions')]
+  public function testHttpPasswordChangeClearsCorrectlyScopedCookiesForUnprovedSessions(string $proof): void
+  {
+    $this->user->setVerified(true);
+    $this->user->setEnabled(true);
+    $this->user->setPlainPassword('OldPassword123');
+    $manager = self::getContainer()->get(UserManager::class);
+    $this->assertInstanceOf(UserManager::class, $manager);
+    $manager->updateUser($this->user);
+    $other = new User();
+    $other->setUsername($this->user->getUserIdentifier().'-other');
+    $other->setEmail($other->getUsername().'@localhost.org');
+    $other->setPassword('other-password');
+    $this->entity_manager->persist($other);
+    $foreign_proof = $this->token('foreign-proof');
+    $expired_proof = $this->token('expired-proof');
+    $cookie_proof = match ($proof) {
+      'foreign-proof' => $foreign_proof,
+      'expired-proof' => $expired_proof,
+      default => $proof,
+    };
+    $this->entity_manager->persist(RefreshToken::createForUserWithTtl($foreign_proof, $other, 3600));
+    $this->entity_manager->persist(RefreshToken::createForUserWithTtl($expired_proof, $this->user, -3600));
+    $this->entity_manager->flush();
+    $kernel = self::$kernel;
+    $this->assertNotNull($kernel);
+    $context = new \App\System\Testing\Behat\Context\ApiContext($kernel);
+    $client = $context->getKernelBrowser();
+    $client->disableReboot();
+    $jwt = self::getContainer()->get(JWTTokenManagerInterface::class);
+    $this->assertInstanceOf(JWTTokenManagerInterface::class, $jwt);
+    $bearer = $jwt->create($this->user);
+    $context->iSetAuthenticationCookie('BEARER', $bearer);
+    $context->iSetAuthenticationCookie('REFRESH_TOKEN', $cookie_proof);
+    $client->request('PATCH', '/api/users/me', [], [], [
+      'HTTP_AUTHORIZATION' => 'Bearer '.$bearer, 'HTTP_ACCEPT' => 'application/json',
+      'CONTENT_TYPE' => 'application/json',
+    ], '{"current_password":"OldPassword123","password":"NewPassword123"}');
+    $this->assertSame(204, $client->getResponse()->getStatusCode());
+    // Invoke the exact Behat assertion against the actual generated-controller response and jar.
+    $context->apiAuthenticationCookiesShouldBeCleared();
+    $this->assertSame(0, $this->countTokens());
+    $this->assertSame(1, $this->entity_manager->getRepository(RefreshToken::class)->count(['username' => $other->getUserIdentifier()]));
+    $client->request('GET', '/api/users/me', [], [], ['HTTP_ACCEPT' => 'application/json']);
+    $this->assertSame(401, $client->getResponse()->getStatusCode(), 'no authentication cookie may survive the successful password change without proof');
+  }
+
+  /** @return iterable<string, array{string}> */
+  public static function unprovedPasswordSessions(): iterable
+  {
+    yield 'empty proof' => [''];
+    yield 'unknown proof' => ['missing-proof'];
+    yield 'foreign account proof' => ['foreign-proof'];
+    yield 'expired proof' => ['expired-proof'];
+  }
+
   private function token(string $suffix): string
   {
     return $this->user->getUserIdentifier().'-'.$suffix;
