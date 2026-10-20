@@ -61,12 +61,13 @@ class SystemHealthService
     $conn = $this->entityManager->getConnection();
     $table = $this->entityManager->getClassMetadata(Project::class)->getTableName();
 
-    /** @var array{total: string, visible: string, private_count: string, hidden: string} $result */
+    /** @var array{total: string, visible: string, private_count: string, hidden: string, missing_files: string} $result */
     $result = $conn->fetchAssociative(sprintf(
       'SELECT COUNT(*) AS total,
               SUM(visible = 1 AND auto_hidden = 0 AND private = 0) AS visible,
               SUM(private = 1) AS private_count,
-              SUM(visible = 0 OR auto_hidden = 1) AS hidden
+              SUM(visible = 0 OR auto_hidden = 1) AS hidden,
+              SUM(has_missing_files = 1) AS missing_files
        FROM %s',
       $table,
     ));
@@ -76,6 +77,7 @@ class SystemHealthService
       'visible' => (int) $result['visible'],
       'private' => (int) $result['private_count'],
       'hidden' => (int) $result['hidden'],
+      'missing_files' => (int) $result['missing_files'],
     ];
   }
 

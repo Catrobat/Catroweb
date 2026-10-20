@@ -307,7 +307,7 @@ class ScreenshotRepository
   /**
    * @throws \ImagickException
    */
-  private function saveThumbnail(string $filepath, string $id): void
+  public function saveThumbnail(string $filepath, string $id): void
   {
     $thumb = $this->getImagick();
     $thumb->readImage($filepath);
