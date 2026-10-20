@@ -313,7 +313,7 @@ class StudioManager
     }
 
     $studio_user = $this->findStudioUser($target, $studio);
-    if (StudioUser::STATUS_BANNED !== $studio_user?->getStatus()) {
+    if (!$studio_user instanceof StudioUser || StudioUser::STATUS_BANNED !== $studio_user->getStatus()) {
       return false;
     }
 
