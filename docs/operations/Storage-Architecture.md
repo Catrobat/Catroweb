@@ -84,6 +84,10 @@ $container->setParameter('catrobat.screenshot.dir', '%catrobat.pubdir%resources/
 $container->setParameter('catrobat.thumbnail.dir', '%catrobat.pubdir%resources/thumbnails/');
 ```
 
+## Project-file access
+
+Archives and extracted previews are delivered through authorized application routes. Raw program/project/extract/CAS paths must be denied by the coordinated web-server configuration. The shared resource-root symlink remains supported; nested project-file symlinks are rejected. See [Protected project files](Protected-Project-Files.md) for the existing visibility-policy differences, PHP fallback, internal nginx delivery and separately approved rollout.
+
 ## Backup Strategy
 
 Resources should be backed up via `rsync` to a separate disk or remote storage.

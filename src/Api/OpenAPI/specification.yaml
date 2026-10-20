@@ -6172,7 +6172,8 @@ components:
         url:
           type: string
           nullable: true
-          example: '/resources/extract/abc123/images/cat_look.png'
+          description: Project-authorized file URL; follows the project page access policy.
+          example: '/project-files/abc123/assets/images/cat_look.png'
 
     CodeViewScript:
       type: object

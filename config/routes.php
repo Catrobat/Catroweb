@@ -35,6 +35,30 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->requirements(['id' => '^[a-zA-Z0-9\\\-]+$'])
   ;
 
+  $routingConfigurator->add('protected_project_archive', '/project-files/{id}/archive')
+    ->controller([OverwriteController::class, 'projectsIdCatrobatGet'])
+    ->methods(['GET', 'HEAD'])
+    ->requirements(['id' => '[a-zA-Z0-9-]+'])
+  ;
+
+  $routingConfigurator->add('protected_project_asset', '/project-files/{id}/assets/{path}')
+    ->controller([App\Project\Controller\ProjectFilesController::class, 'asset'])
+    ->methods(['GET', 'HEAD'])
+    ->requirements(['id' => '[a-zA-Z0-9-]+', 'path' => '.+'])
+  ;
+
+  $routingConfigurator->add('deny_legacy_project_files', '/{resource_root}/{storage}/{path}')
+    ->controller([App\Project\Controller\ProjectFilesController::class, 'deny'])
+    ->defaults(['path' => ''])
+    ->requirements(['resource_root' => 'resources|resources_test', 'storage' => 'programs|projects|extract|assets', 'path' => '.*'])
+  ;
+
+  $routingConfigurator->add('deny_legacy_project_extract', '/{storage}/{path}')
+    ->controller([App\Project\Controller\ProjectFilesController::class, 'deny'])
+    ->defaults(['path' => ''])
+    ->requirements(['storage' => 'extract|programs|__protected-project-resources', 'path' => '.*'])
+  ;
+
   $routingConfigurator->add('legacy_hour_of_code_route', '/hourOfCode')
     ->controller([RedirectController::class, 'hourOfCode'])
     ->methods(['GET'])

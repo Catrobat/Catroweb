@@ -11,12 +11,11 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ExtractedFileRepository
 {
   private readonly string $local_path;
-
-  private readonly string $web_path;
 
   private readonly string $storage_path;
 
@@ -26,12 +25,11 @@ class ExtractedFileRepository
   public function __construct(ParameterBagInterface $parameter_bag,
     private readonly ProjectManager $project_manager,
     private readonly CatrobatFileExtractor $file_extractor,
-    private readonly LoggerInterface $logger)
+    private readonly LoggerInterface $logger,
+    private readonly RequestStack $request_stack)
   {
     /** @var string $local_extracted_path */
     $local_extracted_path = $parameter_bag->get('catrobat.file.extract.dir');
-    /** @var string $web_extracted_path */
-    $web_extracted_path = $parameter_bag->get('catrobat.file.extract.path');
     /** @var string $local_storage_path */
     $local_storage_path = $parameter_bag->get('catrobat.file.storage.dir');
 
@@ -39,7 +37,6 @@ class ExtractedFileRepository
     FileHelper::verifyDirectoryExists($local_storage_path);
 
     $this->local_path = $local_extracted_path;
-    $this->web_path = $web_extracted_path;
     $this->storage_path = $local_storage_path;
   }
 
@@ -62,7 +59,10 @@ class ExtractedFileRepository
         $this->reExtractProject($project_id);
       }
 
-      return new ExtractedCatrobatFile($base_dir, $this->web_path.$project_id.'/', $project_id);
+      $base_url = trim($this->request_stack->getCurrentRequest()?->getBaseUrl() ?? '', '/');
+      $web_path = ('' === $base_url ? '' : $base_url.'/').'project-files/'.$project_id.'/assets/';
+
+      return new ExtractedCatrobatFile($base_dir, $web_path, $project_id);
     } catch (InvalidCatrobatFileException) {
       return null;
     }

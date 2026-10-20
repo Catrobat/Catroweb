@@ -51,6 +51,8 @@ class CodeViewAsset
   protected ?string $name = null;
 
   /**
+   * Project-authorized file URL; follows the project page access policy.
+   *
    * @SerializedName("url")
    *
    * @Assert\Type("string")
