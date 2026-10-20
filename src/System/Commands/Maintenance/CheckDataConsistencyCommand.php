@@ -141,13 +141,13 @@ class CheckDataConsistencyCommand extends Command
       if ($missing_count > $scanned * self::HIDE_MAX_RATIO && !$input->getOption('force')) {
         // Zips and extracted dirs are caches that cron cleans up; a mass hit
         // usually means a storage problem, not a mass of broken projects.
-        $io->error(sprintf('Refusing to hide %d of %d projects (> %d%%). Check storage, then use --force or --project.', $missing_count, $scanned, (int) (self::HIDE_MAX_RATIO * 100)));
+        $io->error(sprintf('Refusing to hide %d of %d projects (> %d%%). Check storage first; --force overrides.', $missing_count, $scanned, (int) (self::HIDE_MAX_RATIO * 100)));
         $hide_failed = true;
       } else {
         foreach (array_chunk($found['missing_project_file'], self::BATCH_SIZE) as $chunk) {
           foreach ($this->hideProjects($chunk) as $hidden_id) {
             // Always printed: this is the record of what --hide changed, for an undo.
-            $output->writeln('hidden: '.$hidden_id);
+            $output->writeln('hidden: '.$hidden_id, OutputInterface::VERBOSITY_QUIET);
           }
         }
       }
