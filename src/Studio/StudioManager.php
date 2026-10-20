@@ -306,6 +306,24 @@ class StudioManager
     return $studioUser;
   }
 
+  public function unbanStudioUser(User $admin, Studio $studio, User $target): bool
+  {
+    if (!$this->isUserAStudioAdmin($admin, $studio)) {
+      return false;
+    }
+
+    $studio_user = $this->findStudioUser($target, $studio);
+    if (StudioUser::STATUS_BANNED !== $studio_user?->getStatus()) {
+      return false;
+    }
+
+    // Remove the ban without restoring membership or the previous admin role.
+    $this->entity_manager->remove($studio_user);
+    $this->entity_manager->flush();
+
+    return true;
+  }
+
   public function changeStudioUserRole(User $admin, Studio $studio, User $user_to_change, string $role): ?StudioUser
   {
     if (!$this->isUserInStudio($admin, $studio) || !$this->isUserAStudioAdmin($admin, $studio)) {

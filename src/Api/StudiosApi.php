@@ -626,6 +626,44 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   }
 
   #[\Override]
+  public function studiosIdBannedMembersGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $context = $this->loadStudioAdminContext($id, $responseCode);
+    if (null === $context) {
+      return null;
+    }
+    $cursor_id = $this->decodeIdCursor($cursor);
+    if (null !== $cursor && null === $cursor_id) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $page = $this->facade->getLoader()->loadMembersPage($context['studio'], $this->normalizeLimit($limit), $cursor_id, StudioUser::STATUS_BANNED);
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->createMemberListResponse($page['members'], $page['has_more']);
+  }
+
+  #[\Override]
+  public function studiosIdMembersUserIdUnbanPost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadStudioAdminContext($id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $target = $this->facade->getLoader()->loadUserById($user_id);
+    if (!$target instanceof User || !$this->facade->getProcessor()->unbanMember($context['user'], $context['studio'], $target)) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
   public function studiosIdActivitiesGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $logged_in_user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -940,6 +978,35 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     $limit = $limit > 0 ? $limit : self::DEFAULT_LIMIT;
 
     return min($limit, self::MAX_LIMIT);
+  }
+
+  /**
+   * @return array{user: User, studio: Studio}|null
+   */
+  private function loadStudioAdminContext(string $id, int &$responseCode): ?array
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $membership = $this->facade->getLoader()->loadStudioUser($user, $studio);
+    if (true !== $membership?->isAdmin()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    return ['user' => $user, 'studio' => $studio];
   }
 
   /**

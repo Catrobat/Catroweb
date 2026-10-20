@@ -201,7 +201,7 @@ class StudioApiProcessor extends AbstractApiProcessor
 
   public function banMember(User $admin, Studio $studio, User $target): ?StudioUser
   {
-    // A ban is permanent (there is no unban), so it must never leave the studio without an admin.
+    // A ban must never leave the studio without an active admin.
     if ($admin->getId() === $target->getId()) {
       return null;
     }
@@ -216,6 +216,11 @@ class StudioApiProcessor extends AbstractApiProcessor
     }
 
     return null;
+  }
+
+  public function unbanMember(User $admin, Studio $studio, User $target): bool
+  {
+    return $this->studio_manager->unbanStudioUser($admin, $studio, $target);
   }
 
   public function addComment(User $user, Studio $studio, string $text, string $parent_id): ?UserComment

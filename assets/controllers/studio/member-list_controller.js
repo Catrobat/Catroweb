@@ -8,6 +8,8 @@ import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
+  static targets = ['bannedSection', 'bannedList', 'bannedLoadMore']
+
   static values = {
     membersUrl: String,
     studioId: String,
@@ -40,8 +42,71 @@ export default class extends Controller {
           listElement.appendChild(this._renderMember(member, isStudioAdmin))
         })
       }
+      if (this.hasBannedListTarget) {
+        this.bannedListTarget.innerHTML = ''
+        this.bannedCursor = null
+        await this.loadBannedMembers()
+      }
     } catch (e) {
       console.error('Failed to load members:', e)
+    }
+  }
+
+  async loadBannedMembers() {
+    if (this._loadingBans) return
+    this._loadingBans = true
+    try {
+      const url = new URL(
+        this.membersUrlValue.replace(/\/members$/, '/banned-members'),
+        window.location.origin,
+      )
+      url.searchParams.set('limit', '50')
+      if (this.bannedCursor) url.searchParams.set('cursor', this.bannedCursor)
+      const response = await fetch(url, { credentials: 'same-origin' })
+      if (!response.ok) throw new Error('Could not load banned members')
+      const data = await response.json()
+      data.data.forEach((member) => {
+        const li = document.createElement('li')
+        li.className = 'studio-banned-member d-flex align-items-center gap-3 my-2'
+        const userId = encodeURIComponent(member.user_id)
+        li.innerHTML = `
+          <a href="/app/user/${escapeAttr(userId)}">${escapeHtml(member.username)}</a>
+          <button type="button" class="btn btn-outline-primary"
+                  data-action="studio--member-list#unbanMember"
+                  data-url="${escapeAttr(`${this.membersUrlValue}/${userId}/unban`)}">
+            ${escapeHtml(this.element.dataset.transUnbanMember)}
+          </button>`
+        this.bannedListTarget.appendChild(li)
+      })
+      this.bannedCursor = data.has_more ? data.next_cursor : null
+      this.bannedLoadMoreTarget.hidden = !this.bannedCursor
+      this.bannedSectionTarget.hidden = this.bannedListTarget.children.length === 0
+    } catch (e) {
+      console.error('Failed to load banned members:', e)
+      showSnackbar('#share-snackbar', this.element.dataset.transUnbanFailed, SnackbarDuration.error)
+    } finally {
+      this._loadingBans = false
+    }
+  }
+
+  async unbanMember(event) {
+    const button = event.currentTarget
+    if (button.disabled) return
+    button.disabled = true
+    try {
+      const response = await fetch(button.dataset.url, {
+        method: 'POST',
+        credentials: 'same-origin',
+      })
+      if (response.status !== 204) throw new Error('Could not remove studio ban')
+      button.closest('.studio-banned-member').remove()
+      this.bannedSectionTarget.hidden =
+        this.bannedListTarget.children.length === 0 && !this.bannedCursor
+    } catch (e) {
+      console.error('Failed to remove studio ban:', e)
+      showSnackbar('#share-snackbar', this.element.dataset.transUnbanFailed, SnackbarDuration.error)
+    } finally {
+      button.disabled = false
     }
   }
 

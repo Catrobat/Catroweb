@@ -415,4 +415,59 @@ final class StudioApiTest extends TestCase
 
     $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
   }
+
+  #[Group('unit')]
+  public function testUnbanRequiresAuthentication(): void
+  {
+    $code = 200;
+    $headers = [];
+    $this->api->studiosIdMembersUserIdUnbanPost('studio', 'target', 'en', $code, $headers);
+    self::assertSame(Response::HTTP_UNAUTHORIZED, $code);
+  }
+
+  #[Group('unit')]
+  public function testBannedAdminCannotUnbanOrListBans(): void
+  {
+    $this->auth_manager->method('getAuthenticatedUser')->willReturn(new User());
+    $this->loader->method('loadVisibleStudio')->willReturn(new Studio());
+    // The loader returns only active memberships, even for someone whose old role was admin.
+    $this->loader->method('loadStudioUser')->willReturn(null);
+    $code = 200;
+    $headers = [];
+    $this->api->studiosIdMembersUserIdUnbanPost('studio', 'target', 'en', $code, $headers);
+    self::assertSame(Response::HTTP_FORBIDDEN, $code);
+    $result = $this->api->studiosIdBannedMembersGet('studio', 'en', 20, null, $code, $headers);
+    self::assertSame(Response::HTTP_FORBIDDEN, $code);
+    self::assertNull($result);
+  }
+
+  #[Group('unit')]
+  public function testAdminCanUnban(): void
+  {
+    $admin = new User();
+    $studio = new Studio();
+    $this->auth_manager->method('getAuthenticatedUser')->willReturn($admin);
+    $this->loader->method('loadVisibleStudio')->willReturn($studio);
+    $this->loader->method('loadStudioUser')->willReturn((new StudioUser())->setRole(StudioUser::ROLE_ADMIN)->setStatus(StudioUser::STATUS_ACTIVE));
+    $this->loader->method('loadUserById')->willReturn(new User());
+    $this->processor->method('unbanMember')->willReturn(true);
+    $code = 200;
+    $headers = [];
+    $this->api->studiosIdMembersUserIdUnbanPost('studio', 'target', 'en', $code, $headers);
+    self::assertSame(Response::HTTP_NO_CONTENT, $code);
+  }
+
+  #[Group('unit')]
+  public function testAdminUnbanWithoutExistingBanReturnsNotFound(): void
+  {
+    $this->auth_manager->method('getAuthenticatedUser')->willReturn(new User());
+    $this->loader->method('loadVisibleStudio')->willReturn(new Studio());
+    $this->loader->method('loadStudioUser')->willReturn((new StudioUser())->setRole(StudioUser::ROLE_ADMIN)->setStatus(StudioUser::STATUS_ACTIVE));
+    $this->loader->method('loadUserById')->willReturn(new User());
+    $this->processor->method('unbanMember')->willReturn(false);
+    $code = 200;
+    $headers = [];
+    $this->api->studiosIdMembersUserIdUnbanPost('studio', 'target', 'en', $code, $headers);
+    self::assertSame(Response::HTTP_NOT_FOUND, $code);
+  }
 }
