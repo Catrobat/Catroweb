@@ -7,6 +7,7 @@ namespace App\Studio;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioInvite;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
@@ -18,6 +19,7 @@ use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
+use App\DB\EntityRepository\Studios\StudioInviteRepository;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
 use App\DB\EntityRepository\Studios\StudioProjectRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
@@ -37,6 +39,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class StudioManager
 {
+  // No 0/O, 1/I/L: pupils copy codes from a projector. 31^10 ≈ 2^49 combinations.
+  private const string INVITE_CODE_ALPHABET = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
+
+  private const int INVITE_CODE_LENGTH = 10;
+
+  public const int MAX_INVITES_PER_STUDIO = 20;
+
+  public const string INVITE_JOINED = 'joined';
+
+  public const string INVITE_INVALID = 'invalid';
+
+  public const string INVITE_BANNED = 'banned';
+
+  public const string INVITE_ALREADY_MEMBER = 'member';
+
   protected readonly LoggerInterface $logger;
 
   public function __construct(
@@ -52,6 +69,7 @@ class StudioManager
     protected NotificationManager $notification_manager,
     protected ImageVariantGenerator $image_variant_generator,
     protected ImageVariantUrlBuilder $image_variant_url_builder,
+    protected StudioInviteRepository $studio_invite_repository,
     ?LoggerInterface $logger = null,
   ) {
     $this->logger = $logger ?? new NullLogger();
@@ -676,6 +694,89 @@ class StudioManager
     $this->entity_manager->refresh($joinRequest);
 
     return $joinRequest;
+  }
+
+  /**
+   * @return StudioInvite[]
+   */
+  public function findStudioInvites(Studio $studio): array
+  {
+    return $this->studio_invite_repository->findByStudio($studio);
+  }
+
+  public function createStudioInvite(User $admin, Studio $studio, ?int $max_uses, ?\DateTime $expires_at): ?StudioInvite
+  {
+    if (!$this->isUserAStudioAdmin($admin, $studio)
+      || count($this->studio_invite_repository->findByStudio($studio)) >= self::MAX_INVITES_PER_STUDIO) {
+      return null;
+    }
+
+    do {
+      $code = '';
+      for ($i = 0; $i < self::INVITE_CODE_LENGTH; ++$i) {
+        $code .= self::INVITE_CODE_ALPHABET[random_int(0, strlen(self::INVITE_CODE_ALPHABET) - 1)];
+      }
+    } while ($this->studio_invite_repository->findOneByCode($code) instanceof StudioInvite);
+
+    $invite = new StudioInvite($studio, $code, $admin, $max_uses, $expires_at);
+    $this->entity_manager->persist($invite);
+    $this->entity_manager->flush();
+
+    return $invite;
+  }
+
+  public function revokeStudioInvite(StudioInvite $invite): void
+  {
+    $this->entity_manager->remove($invite);
+    $this->entity_manager->flush();
+  }
+
+  /**
+   * Unknown, revoked, expired and used-up codes all come back as null, so a caller cannot tell them apart.
+   */
+  public function findUsableStudioInvite(string $code): ?StudioInvite
+  {
+    $code = strtoupper(preg_replace('/[\s-]+/', '', $code) ?? '');
+    if ('' === $code) {
+      return null;
+    }
+
+    $invite = $this->studio_invite_repository->findOneByCode($code);
+    if (!$invite instanceof StudioInvite || !$invite->isUsable()) {
+      return null;
+    }
+
+    $studio = $invite->getStudio();
+
+    return $studio->isIsEnabled() && !$studio->getAutoHidden() ? $invite : null;
+  }
+
+  /**
+   * Adds the user as member without an approval step. A banned user stays out: the ban row is kept.
+   *
+   * @return string one of the INVITE_JOINED/INVALID/BANNED/ALREADY_MEMBER constants
+   */
+  public function joinStudioWithInvite(User $user, StudioInvite $invite): string
+  {
+    $studio = $invite->getStudio();
+    $studio_user = $this->findStudioUser($user, $studio);
+    if ($studio_user instanceof StudioUser) {
+      return $studio_user->isActive() ? self::INVITE_ALREADY_MEMBER : self::INVITE_BANNED;
+    }
+
+    if (!$this->studio_invite_repository->consumeUse($invite)) {
+      return self::INVITE_INVALID;
+    }
+
+    $activity = $this->createActivity($user, $studio, StudioActivity::TYPE_USER);
+    $this->createStudioUser($user, $studio, $activity, StudioUser::ROLE_MEMBER);
+
+    $join_request = $this->findJoinRequestByUserAndStudio($user, $studio);
+    if ($join_request instanceof StudioJoinRequest) {
+      $this->removeJoinRequest($join_request);
+    }
+
+    return self::INVITE_JOINED;
   }
 
   public function getUserProjects(User $user): array

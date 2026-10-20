@@ -7,6 +7,7 @@ namespace App\Api\Services\Studio;
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioInvite;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
@@ -386,6 +387,24 @@ class StudioApiLoader extends AbstractApiLoader
       'join_requests' => $joinRequests,
       'has_more' => $has_more,
     ];
+  }
+
+  /**
+   * @return StudioInvite[]
+   */
+  public function loadStudioInvites(Studio $studio): array
+  {
+    return $this->studio_manager->findStudioInvites($studio);
+  }
+
+  public function loadStudioInviteById(string $id): ?StudioInvite
+  {
+    return $this->entity_manager->getRepository(StudioInvite::class)->find($id);
+  }
+
+  public function loadUsableStudioInvite(string $code): ?StudioInvite
+  {
+    return $this->studio_manager->findUsableStudioInvite($code);
   }
 
   public function loadJoinRequestById(string $id): ?StudioJoinRequest

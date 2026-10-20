@@ -8,15 +8,19 @@ use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Studio\StudioApiFacade;
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioInvite;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\User;
+use App\Studio\StudioManager;
 use OpenAPI\Server\Api\StudiosApiInterface;
 use OpenAPI\Server\Model\StudioAddProjectRequest;
 use OpenAPI\Server\Model\StudioBatchAddProjectsRequest;
 use OpenAPI\Server\Model\StudioBatchAddProjectsResponse;
 use OpenAPI\Server\Model\StudioBatchAddProjectsResponseFailedInner;
 use OpenAPI\Server\Model\StudioCommentCreateRequest;
+use OpenAPI\Server\Model\StudioInviteCreateRequest;
+use OpenAPI\Server\Model\StudioJoinWithCodeRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
@@ -32,6 +36,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     private readonly StudioApiFacade $facade,
     private readonly RateLimiterFactory $studioCreateDailyLimiter,
     private readonly RateLimiterFactory $studioCommentBurstLimiter,
+    private readonly RateLimiterFactory $studioInviteRedeemBurstLimiter,
   ) {
   }
 
@@ -734,6 +739,113 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
 
     $this->facade->getProcessor()->declineJoinRequest($result['join_request']);
     $responseCode = Response::HTTP_OK;
+  }
+
+  #[\Override]
+  public function studiosIdInvitesGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $context = $this->loadAdminContext($id, $responseCode);
+    if (null === $context) {
+      return null;
+    }
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->createInviteListResponse(
+      $this->facade->getLoader()->loadStudioInvites($context['studio'])
+    );
+  }
+
+  #[\Override]
+  public function studiosIdInvitesPost(string $id, string $accept_language, ?StudioInviteCreateRequest $studio_invite_create_request, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $context = $this->loadAdminContext($id, $responseCode);
+    if (null === $context) {
+      return null;
+    }
+
+    $expires_at = $studio_invite_create_request?->getExpiresAt();
+    if ($expires_at instanceof \DateTime && $expires_at <= new \DateTime()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    $invite = $this->facade->getProcessor()->createInvite(
+      $context['user'],
+      $context['studio'],
+      $studio_invite_create_request?->getMaxUses(),
+      $expires_at,
+    );
+    if (!$invite instanceof StudioInvite) {
+      // Only reachable when the studio already has the maximum number of invites.
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    $responseCode = Response::HTTP_CREATED;
+
+    return $this->facade->getResponseManager()->createInviteResponse($invite);
+  }
+
+  #[\Override]
+  public function studiosIdInvitesInviteIdDelete(string $id, string $invite_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadAdminContext($id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $invite = $this->facade->getLoader()->loadStudioInviteById($invite_id);
+    if (!$invite instanceof StudioInvite || $invite->getStudio()->getId() !== $context['studio']->getId()) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    $this->facade->getProcessor()->revokeInvite($invite);
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function studiosJoinWithCodePost(StudioJoinWithCodeRequest $studio_join_with_code_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    // Every attempt counts, successful or not: the limit is what keeps codes from being guessed.
+    if (null === $this->checkUserRateLimit($user, $this->studioInviteRedeemBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $invite = $this->facade->getLoader()->loadUsableStudioInvite($studio_join_with_code_request->getCode() ?? '');
+    if (!$invite instanceof StudioInvite) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $responseCode = match ($this->facade->getProcessor()->joinStudioWithInvite($user, $invite)) {
+      StudioManager::INVITE_JOINED => Response::HTTP_OK,
+      StudioManager::INVITE_ALREADY_MEMBER => Response::HTTP_CONFLICT,
+      StudioManager::INVITE_BANNED => Response::HTTP_FORBIDDEN,
+      default => Response::HTTP_NOT_FOUND,
+    };
+    if (Response::HTTP_OK !== $responseCode && Response::HTTP_CONFLICT !== $responseCode) {
+      return null;
+    }
+
+    $response = $this->facade->getResponseManager()->createStudioResponseWithUserContext($invite->getStudio(), $user);
+    $this->facade->getResponseManager()->addStudioContentLocationToHeaders($responseHeaders, $invite->getStudio());
+
+    return $response;
   }
 
   /**

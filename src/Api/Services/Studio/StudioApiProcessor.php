@@ -7,6 +7,7 @@ namespace App\Api\Services\Studio;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioInvite;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
@@ -72,6 +73,21 @@ class StudioApiProcessor extends AbstractApiProcessor
     }
 
     return true;
+  }
+
+  public function createInvite(User $admin, Studio $studio, ?int $max_uses, ?\DateTime $expires_at): ?StudioInvite
+  {
+    return $this->studio_manager->createStudioInvite($admin, $studio, $max_uses, $expires_at);
+  }
+
+  public function revokeInvite(StudioInvite $invite): void
+  {
+    $this->studio_manager->revokeStudioInvite($invite);
+  }
+
+  public function joinStudioWithInvite(User $user, StudioInvite $invite): string
+  {
+    return $this->studio_manager->joinStudioWithInvite($user, $invite);
   }
 
   public function leaveStudio(User $user, Studio $studio): void

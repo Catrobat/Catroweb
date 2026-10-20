@@ -77,6 +77,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 5,
         'interval' => '24 hours',
       ],
+      'studio_invite_redeem_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 10,
+        'interval' => '15 minutes',
+      ],
       'studio_comment_burst' => [
         'policy' => 'sliding_window',
         'limit' => 10,

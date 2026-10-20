@@ -33,6 +33,7 @@ export const jsEntries = {
   studio_detail_page: './assets/Studio/StudioDetailPage.js',
   studios_page: './assets/Studio/StudiosPage.js',
   studio_create_page: './assets/Studio/CreatePage.js',
+  studio_join_with_code_page: './assets/Studio/JoinWithCodePage.js',
 
   admin_standard_layout: './assets/Admin/Layout.js',
   admin_user_communication_broadcast_notification:

@@ -7,6 +7,7 @@ namespace Tests\PhpUnit\Studio;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioInvite;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
@@ -14,6 +15,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
+use App\DB\EntityRepository\Studios\StudioInviteRepository;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
 use App\DB\EntityRepository\Studios\StudioProjectRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
@@ -75,6 +77,8 @@ class StudioManagerTest extends KernelTestCase
     $studio_join_request_repository = $this->entity_manager->getRepository(StudioJoinRequest::class);
     /** @var ProjectRepository $studio_program_repository */
     $studio_program_repository = $this->entity_manager->getRepository(Project::class);
+    /** @var StudioInviteRepository $studio_invite_repository */
+    $studio_invite_repository = $this->entity_manager->getRepository(StudioInvite::class);
     $parameter_bag = $this->createStub(ParameterBagInterface::class);
     $notification_manager = $this->createStub(NotificationManager::class);
     $image_variant_generator = $this->createStub(\App\Storage\Images\ImageVariantGenerator::class);
@@ -92,6 +96,7 @@ class StudioManagerTest extends KernelTestCase
       $notification_manager,
       $image_variant_generator,
       $image_variant_url_builder,
+      $studio_invite_repository,
     );
     $user_manager = $container->get(UserManager::class);
     \assert($user_manager instanceof UserManager);
