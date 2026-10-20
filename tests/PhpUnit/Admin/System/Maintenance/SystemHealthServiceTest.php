@@ -47,6 +47,7 @@ class SystemHealthServiceTest extends TestCase
       'visible' => '80',
       'private_count' => '10',
       'hidden' => '15',
+      'missing_files' => '3',
     ]);
 
     $metadata = $this->createStub(ClassMetadata::class);
@@ -89,6 +90,7 @@ class SystemHealthServiceTest extends TestCase
     self::assertSame(80, $projects['visible']);
     self::assertSame(10, $projects['private']);
     self::assertSame(15, $projects['hidden']);
+    self::assertSame(3, $projects['missing_files']);
   }
 
   #[DataProvider('storagePressureProvider')]
