@@ -415,20 +415,6 @@ export default class extends Controller {
     }
   }
 
-  async addProject(projectId) {
-    const url = this.addProjectUrlValue
-    try {
-      await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ project_id: projectId }),
-      })
-    } catch (e) {
-      console.error('Failed to add project:', e)
-    }
-  }
-
   async batchAddProjects(projectIds) {
     const url = this.batchAddProjectsUrlValue
     try {

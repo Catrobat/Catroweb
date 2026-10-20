@@ -553,3 +553,5 @@ After form login, `FormLoginSuccessHandler` sets BEARER+REFRESH_TOKEN cookies (p
 ### Studio Project Tab Counts
 
 The project tab lives in the header, outside the projects-pane Stimulus controller; its unique `projects-count` ID is used for updates. It displays parenthesized counts (for example, `(5)`). Keep that format when updating the count after removal, and increment batch additions by the API response's `added` IDs so failed additions are excluded.
+
+Studio project additions use the batch endpoint only; keep the unused single-add helper removed so count updates have one path.
