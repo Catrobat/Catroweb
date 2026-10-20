@@ -559,3 +559,5 @@ Studio project additions use the batch endpoint only; keep the unused single-add
 ### Studio Unbans
 
 Only active studio admins may list banned members or remove bans. Unbanning deletes the banned membership row; it restores neither membership nor a former admin role. Public joins, private join requests, and invite codes keep their normal rules.
+
+Unban authorization checks the acting membership with `isAdmin()` directly; a stored admin role on banned/pending membership grants no authority. Manager tests cover this boundary without relying on an API guard.

@@ -308,7 +308,7 @@ class StudioManager
 
   public function unbanStudioUser(User $admin, Studio $studio, User $target): bool
   {
-    if (!$this->isUserAStudioAdmin($admin, $studio)) {
+    if (true !== $this->findStudioUser($admin, $studio)?->isAdmin()) {
       return false;
     }
 
