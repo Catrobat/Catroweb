@@ -26,8 +26,10 @@ final class PublicImageSourceResolverTest extends TestCase
     foreach (['images', 'resources/screenshots', 'resources/extract', 'resources/assets', 'private'] as $dir) {
       mkdir($this->root.'/'.$dir, 0o700, true);
     }
+    $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a8V0AAAAASUVORK5CYII=', true);
+    self::assertIsString($png);
     foreach (['images/picture.png', 'resources/screenshots/picture.png', 'resources/extract/private.png', 'resources/assets/private.png', 'private/secret.png'] as $path) {
-      file_put_contents($this->root.'/'.$path, base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a8V0AAAAASUVORK5CYII=', true));
+      file_put_contents($this->root.'/'.$path, $png);
     }
   }
 
@@ -39,9 +41,11 @@ final class PublicImageSourceResolverTest extends TestCase
 
   public function testPublicImageIsResolvedWithAnAdjacentDestination(): void
   {
+    $images = realpath($this->root.'/images');
+    self::assertIsString($images);
     self::assertSame([
       'source' => realpath($this->root.'/images/picture.png'),
-      'destination' => realpath($this->root.'/images').'/picture.webp',
+      'destination' => $images.'/picture.webp',
     ], $this->resolver->resolve($this->root, $this->root.'/images/picture.png'));
   }
 
