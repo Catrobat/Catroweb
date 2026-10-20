@@ -2532,6 +2532,36 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/studios/{id}/banned-members':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studios
+      summary: List banned studio members
+      description: Only active studio admins may read this list.
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Banned studio members
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioMemberListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   '/studios/{id}/join':
     parameters:
       - $ref: '#/components/parameters/Uuid'
@@ -2803,6 +2833,32 @@ paths:
       tags:
         - Studios
       summary: Ban a studio member
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studios/{id}/members/{userId}/unban':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studios
+      summary: Remove a studio member ban
+      description: Only active studio admins may remove a ban. The user remains outside the studio and must rejoin normally; previous roles are not restored.
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
