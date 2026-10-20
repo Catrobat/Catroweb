@@ -18,6 +18,7 @@ use OpenAPI\Server\Model\StudioAddProjectRequest;
 use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use OpenAPI\Server\Model\StudioCommentListResponse;
 use OpenAPI\Server\Model\StudioCommentResponse;
+use OpenAPI\Server\Model\StudioJoinWithCodeRequest;
 use OpenAPI\Server\Model\StudioListResponse;
 use OpenAPI\Server\Model\StudioMemberListResponse;
 use OpenAPI\Server\Model\StudioProjectListResponse;
@@ -59,7 +60,32 @@ final class StudioApiTest extends TestCase
       $this->facade,
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
     );
+  }
+
+  #[Group('unit')]
+  public function testJoinWithCodeIsRateLimitedPerUser(): void
+  {
+    $user = $this->createStub(User::class);
+    $user->method('getId')->willReturn('user-1');
+    $this->auth_manager->method('getAuthenticatedUser')->willReturn($user);
+    $api = new StudiosApi(
+      $this->facade,
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'redeem', 'policy' => 'fixed_window', 'limit' => 1, 'interval' => '15 minutes'], new InMemoryStorage()),
+    );
+    $request = new StudioJoinWithCodeRequest(['code' => 'NOSUCHCODE']);
+    $response_headers = [];
+
+    $response_code = 200;
+    $api->studiosJoinWithCodePost($request, 'en', $response_code, $response_headers);
+    $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
+
+    $response_code = 200;
+    $api->studiosJoinWithCodePost($request, 'en', $response_code, $response_headers);
+    $this->assertSame(Response::HTTP_TOO_MANY_REQUESTS, $response_code);
   }
 
   #[Group('unit')]
