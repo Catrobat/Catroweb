@@ -31,11 +31,16 @@ use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 final class RemixGraphMinorMetadataTest extends TestCase
 {
   #[DataProvider('viewers')]
-  public function testRestrictedMetadataDependsOnViewerWithoutChangingTopology(?string $username, bool $minor, bool $hidden): void
+  public function testRestrictedMetadataDependsOnViewerWithoutChangingTopology(?string $username, ?string $id, bool $minor, bool $hidden): void
   {
+    $owner = new User();
+    $owner->setUsername('Owner');
+    $owner->setId('owner-id');
     $viewer = null;
     if (null !== $username) {
       $viewer = new User();
+      $this->assertNotNull($id);
+      $viewer->setId($id);
       $viewer->setUsername($username);
       $viewer->setMinor($minor);
     }
@@ -49,7 +54,7 @@ final class RemixGraphMinorMetadataTest extends TestCase
     $graph = [
       'projectId' => 'safe', 'projectCount' => 2, 'scratchCount' => 0, 'remixCount' => 1,
       'nodes' => [
-        ['id' => 'catrobat_nfk', 'projectId' => 'nfk', 'source' => 'catrobat', 'available' => true, 'name' => 'Restricted', 'username' => 'Owner', 'notForKids' => true],
+        ['id' => 'catrobat_nfk', 'projectId' => 'nfk', 'source' => 'catrobat', 'available' => true, 'name' => 'Restricted', 'username' => $owner->getUserIdentifier(), '_ownerId' => $owner->getId(), 'notForKids' => true],
         ['id' => 'catrobat_safe', 'projectId' => 'safe', 'source' => 'catrobat', 'available' => true, 'name' => 'Safe', 'username' => 'Other', 'notForKids' => false],
       ],
       'edges' => [['id' => 'edge_0', 'from' => 'catrobat_nfk', 'to' => 'catrobat_safe']],
@@ -63,6 +68,7 @@ final class RemixGraphMinorMetadataTest extends TestCase
     $result = $api->projectsIdRemixGraphGet('safe', $code, $headers);
     $this->assertSame(200, $code);
     $this->assertIsArray($result);
+    $this->assertArrayNotHasKey('_ownerId', $result['nodes'][0]);
     $this->assertSame(!$hidden, $result['nodes'][0]['available']);
     $this->assertSame($hidden ? null : 'Restricted', $result['nodes'][0]['name']);
     $this->assertSame($hidden ? null : 'Owner', $result['nodes'][0]['username']);
@@ -87,6 +93,7 @@ final class RemixGraphMinorMetadataTest extends TestCase
     $this->assertSame(200, $response->getStatusCode());
     $this->assertSame('no-store, private', $response->headers->get('Cache-Control'));
     $wire = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $this->assertArrayNotHasKey('_ownerId', $wire['nodes'][0]);
     $this->assertSame(!$hidden, $wire['nodes'][0]['available']);
     if ($hidden) {
       $this->assertArrayNotHasKey('name', $wire['nodes'][0]);
@@ -107,13 +114,14 @@ final class RemixGraphMinorMetadataTest extends TestCase
   }
 
   /**
-   * @return iterable<string, array{?string, bool, bool}>
+   * @return iterable<string, array{?string, ?string, bool, bool}>
    */
   public static function viewers(): iterable
   {
-    yield 'minor viewer' => ['Minor', true, true];
-    yield 'minor owner' => ['Owner', true, false];
-    yield 'adult viewer' => ['Adult', false, false];
-    yield 'guest' => [null, false, false];
+    yield 'minor viewer' => ['Minor', 'minor-id', true, true];
+    yield 'minor owner' => ['Owner', 'owner-id', true, false];
+    yield 'same username on a different account' => ['Owner', 'different-id', true, true];
+    yield 'adult viewer' => ['Adult', 'adult-id', false, false];
+    yield 'guest' => [null, null, false, false];
   }
 }

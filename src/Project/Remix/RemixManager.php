@@ -121,6 +121,9 @@ class RemixManager
     $catrobat_nodes_data = [];
     $projects_data = $this->project_repository->getProjectDataByIdsUnfiltered($catrobat_ids_of_whole_graph);
     foreach ($projects_data as $project_data) {
+      if (!\is_array($project_data) || !\is_string($project_data['id'] ?? null) || !\is_string($project_data['ownerId'] ?? null)) {
+        throw new \UnexpectedValueException('Remix project data must identify its project and owner.');
+      }
       $catrobat_nodes_data[$project_data['id']] = $project_data;
     }
 
@@ -139,6 +142,7 @@ class RemixManager
         'available' => array_key_exists((string) $node_id, $catrobat_nodes_data),
         'name' => $catrobat_nodes_data[$node_id]['name'] ?? null,
         'username' => $catrobat_nodes_data[$node_id]['username'] ?? null,
+        '_ownerId' => $catrobat_nodes_data[$node_id]['ownerId'] ?? null,
         'notForKids' => ($catrobat_nodes_data[$node_id]['not_for_kids'] ?? 0) > 0,
       ];
     }

@@ -864,7 +864,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $viewer = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $nodes = array_map(function (array $node) use ($viewer): array {
-      if ($viewer?->isMinor() && ($node['notForKids'] ?? false) && $node['username'] !== $viewer->getUserIdentifier()) {
+      $owner_id = $node['_ownerId'] ?? null;
+      $is_owner = \is_string($owner_id) && '' !== $owner_id && $owner_id === $viewer?->getId();
+      unset($node['_ownerId']);
+      if ($viewer?->isMinor() && ($node['notForKids'] ?? false) && !$is_owner) {
         $node['available'] = false;
         $node['name'] = null;
         $node['username'] = null;
