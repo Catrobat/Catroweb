@@ -40,8 +40,10 @@ final class CredentialCutoffPersistenceTest extends KernelTestCase
         $entity_manager->clear();
         $hydrated = $entity_manager->find(User::class, $id);
         $this->assertInstanceOf(User::class, $hydrated);
-        $this->assertSame($cutoff->getTimestamp(), $hydrated->getCredentialsChangedAt()?->getTimestamp());
-        $this->assertSame('UTC', $hydrated->getCredentialsChangedAt()->getTimezone()->getName());
+        $hydrated_cutoff = $hydrated->getCredentialsChangedAt();
+        $this->assertNotNull($hydrated_cutoff);
+        $this->assertSame($cutoff->getTimestamp(), $hydrated_cutoff->getTimestamp());
+        $this->assertSame('UTC', $hydrated_cutoff->getTimezone()->getName());
         $entity_manager->remove($hydrated);
         $entity_manager->flush();
       }

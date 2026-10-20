@@ -67,7 +67,9 @@ final class UtcDateTimeTypeTest extends TestCase
       $user = new User();
       $user->setPassword('first');
       $user->setPassword('second');
-      $this->assertSame('UTC', $user->getCredentialsChangedAt()->getTimezone()->getName());
+      $cutoff = $user->getCredentialsChangedAt();
+      $this->assertNotNull($cutoff);
+      $this->assertSame('UTC', $cutoff->getTimezone()->getName());
     } finally {
       date_default_timezone_set($default_timezone);
     }
