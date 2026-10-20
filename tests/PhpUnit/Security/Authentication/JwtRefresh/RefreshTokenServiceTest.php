@@ -101,6 +101,25 @@ final class RefreshTokenServiceTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testRefreshRequestAuthenticationTreatsAnEmptyAuthorizationHeaderAsAbsent(): void
+  {
+    $request = Request::create('/app/user', 'GET');
+    $request->headers->set('Authorization', '');
+    $request->cookies->set('REFRESH_TOKEN', 'refresh-cookie');
+
+    $refresh_token = $this->createStub(RefreshTokenInterface::class);
+    $refresh_token->method('isValid')->willReturn(true);
+    $refresh_token->method('getUsername')->willReturn('cookie-user');
+    $this->refresh_manager->expects($this->once())->method('get')->willReturn($refresh_token);
+    $this->user_manager->expects($this->once())->method('findUserByUsername')->willReturn($this->createStub(User::class));
+    $this->jwt_manager->expects($this->once())->method('create')->willReturn('new-bearer-token');
+
+    $this->service->refreshRequestAuthentication($request);
+
+    $this->assertSame('Bearer new-bearer-token', $request->headers->get('Authorization'));
+  }
+
+  #[Group('unit')]
   public function testRefreshRequestAuthenticationSkipsBearerParsingWithoutRefreshCookie(): void
   {
     $request = Request::create('/api/projects', 'GET');

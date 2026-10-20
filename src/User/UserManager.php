@@ -89,9 +89,10 @@ class UserManager
    * marked verified, password replaced, other provider links and every refresh token revoked, and the
    * age/parental-consent data reset so the new owner completes registration like a new OAuth user
    * (otherwise the previous holder's parent email could still manage or delete the account).
-   * Otherwise linking is refused. Verified accounts are left untouched.
+   * Otherwise, or when a parent revoked consent for the account, linking is refused. Verified accounts are left untouched.
+   * Replacing the password also rejects every access token issued before the claim (see JWTDecodedEventListener).
    *
-   * @throws CustomUserMessageAccountStatusException when the account is unverified and the provider did not verify the email
+   * @throws CustomUserMessageAccountStatusException when the account is unverified and the provider did not verify the email or consent was revoked
    */
   public function claimUnverifiedAccountForOAuth(User $user, bool $email_verified_by_provider): void
   {
@@ -103,8 +104,14 @@ class UserManager
       throw new CustomUserMessageAccountStatusException('An account with this email exists but is not verified. Log in with your password and verify your email first.');
     }
 
+    // Claiming resets the parental-consent data, which would undo a parent's revocation.
+    if ('revoked' === $user->getConsentStatus()) {
+      throw new CustomUserMessageAccountStatusException('An account with this email exists, but a parent revoked consent for it. It cannot be used to sign in.');
+    }
+
     $user->setVerified(true);
     $user->setOauthUser(true);
+    $user->setOauthPasswordCreated(false);
     $user->setPlainPassword(null);
     $user->setPassword(PasswordGenerator::generateRandomPassword());
     $user->setGoogleId(null);
@@ -249,9 +256,9 @@ class UserManager
       return;
     }
 
-    $password = $this->userPasswordHasher->hashPassword($user, $plainPassword);
-
-    $user->setPassword($password);
+    $user->setPassword($this->userPasswordHasher->hashPassword($user, $plainPassword));
+    // Hash once: a later updateUser() must not re-hash it and count as another credential change.
+    $user->setPlainPassword(null);
   }
 
   public function findUserByUsername(string $username): ?User

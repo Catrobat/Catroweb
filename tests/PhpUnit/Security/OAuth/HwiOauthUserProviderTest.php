@@ -131,7 +131,9 @@ json;
     $squatter->setMinor(true);
     $squatter->setConsentStatus('pending');
     $squatter->setParentEmail('squatter-parent@localhost.org');
+    $squatter->setOauthPasswordCreated(true);
     $this->user_manager->updateUser($squatter);
+    $claim_started = time();
 
     $user = $this->object->loadUserByOAuthUserResponse($this->googleResponse('google-7393-a', 'victim7393@localhost.org'));
 
@@ -146,6 +148,30 @@ json;
     $this->assertNull($user->getDateOfBirth(), 'the new owner completes registration again');
     $this->assertFalse($user->isMinor());
     $this->assertSame('not_required', $user->getConsentStatus());
+    $this->assertFalse($user->isOauthPasswordCreated(), 'the new owner must be asked to create a password');
+    $this->assertGreaterThanOrEqual($claim_started, $user->getCredentialsChangedAt()?->getTimestamp(), 'access tokens issued before the claim must be rejected');
+  }
+
+  public function testSignInRefusesAnUnverifiedAccountWhoseParentRevokedConsent(): void
+  {
+    $minor = $this->createUserWithRefreshToken('revoked7402', 'revoked7402@localhost.org', false);
+    $minor->setMinor(true);
+    $minor->setConsentStatus('revoked');
+    $minor->setParentEmail('parent7402@localhost.org');
+    $this->user_manager->updateUser($minor);
+
+    try {
+      $this->object->loadUserByOAuthUserResponse($this->googleResponse('google-7402-a', 'revoked7402@localhost.org'));
+      $this->fail('linking must be refused');
+    } catch (CustomUserMessageAccountStatusException) {
+    }
+
+    $this->entityManager()->clear();
+    $user = $this->user_manager->findUserByUsername('revoked7402');
+    $this->assertInstanceOf(User::class, $user);
+    $this->assertNull($user->getGoogleId());
+    $this->assertSame('revoked', $user->getConsentStatus());
+    $this->assertSame('parent7402@localhost.org', $user->getParentEmail());
   }
 
   public function testSignInRefusesAnUnverifiedAccountWhenTheProviderDidNotVerifyTheEmail(): void

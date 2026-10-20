@@ -258,6 +258,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   #[ORM\Column(name: 'password_requested_at', type: 'datetime', nullable: true)]
   protected ?\DateTimeInterface $password_requested_at = null;
 
+  /**
+   * Access tokens (JWTs) issued before this moment are rejected, see JWTDecodedEventListener.
+   */
+  #[ORM\Column(name: 'credentials_changed_at', type: 'datetime', nullable: true)]
+  protected ?\DateTimeInterface $credentials_changed_at = null;
+
   #[ORM\Column(name: 'created_at', type: 'datetime')]
   protected \DateTimeInterface $createdAt;
 
@@ -819,7 +825,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
   public function setPassword(?string $password): void
   {
+    // Every password change (reset, change, claim) goes through here; setting the first one is none.
+    if (null !== $this->password && $password !== $this->password) {
+      $this->markCredentialsChanged();
+    }
+
     $this->password = $password;
+  }
+
+  public function markCredentialsChanged(): void
+  {
+    // Real time, not TimeUtils: it is compared with the JWT "iat", which the JWT library takes from the real clock.
+    $this->credentials_changed_at = new \DateTime();
+  }
+
+  public function getCredentialsChangedAt(): ?\DateTimeInterface
+  {
+    return $this->credentials_changed_at;
   }
 
   public function setSuperAdmin(bool $boolean): void
