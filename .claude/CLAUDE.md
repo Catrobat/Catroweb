@@ -555,3 +555,11 @@ After form login, `FormLoginSuccessHandler` sets BEARER+REFRESH_TOKEN cookies (p
 The project tab lives in the header, outside the projects-pane Stimulus controller; its unique `projects-count` ID is used for updates. It displays parenthesized counts (for example, `(5)`). Keep that format when updating the count after removal, and increment batch additions by the API response's `added` IDs so failed additions are excluded.
 
 Studio project additions use the batch endpoint only; keep the unused single-add helper removed so count updates have one path.
+
+### Studio Unbans
+
+Only active studio admins may list banned members or remove bans. Unbanning deletes the banned membership row; it restores neither membership nor a former admin role. Public joins, private join requests, and invite codes keep their normal rules.
+
+Unban authorization checks the acting membership with `isAdmin()` directly; a stored admin role on banned/pending membership grants no authority. Manager tests cover this boundary without relying on an API guard.
+
+The `the JSON response field :path should be :expected` Behat helper compares JSON-encoded values. String expectations need a JSON string literal inside single Gherkin quotes (for example `should be '"member"'`); booleans and numbers retain their existing literals.

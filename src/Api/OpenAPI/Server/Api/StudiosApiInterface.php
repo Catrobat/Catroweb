@@ -577,4 +577,31 @@ interface StudiosApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
+
+  /**
+   * Operation studiosIdBannedMembersGet.
+   *
+   * List banned studio members
+   *
+   * @param string      $id              (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studiosIdBannedMembersGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null;
+
+  /**
+   * Operation studiosIdMembersUserIdUnbanPost.
+   *
+   * Remove a studio member ban
+   *
+   * @param string $id              (required)
+   * @param string $user_id         (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studiosIdMembersUserIdUnbanPost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void;
 }

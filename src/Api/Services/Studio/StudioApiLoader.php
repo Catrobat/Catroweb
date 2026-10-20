@@ -100,7 +100,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{members: StudioUser[], has_more: bool}
    */
-  public function loadMembersPage(Studio $studio, int $limit, ?string $cursor_id): array
+  public function loadMembersPage(Studio $studio, int $limit, ?string $cursor_id, string $status = StudioUser::STATUS_ACTIVE): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('su')
@@ -110,11 +110,15 @@ class StudioApiLoader extends AbstractApiLoader
       ->where('su.studio = :studio')
       ->andWhere('su.status = :status')
       ->setParameter('studio', $studio)
-      ->setParameter('status', StudioUser::STATUS_ACTIVE)
+      ->setParameter('status', $status)
       ->orderBy('su.created_on', 'ASC')
       ->addOrderBy('su.id', 'ASC')
       ->setMaxResults($limit + 1)
     ;
+
+    if (StudioUser::STATUS_BANNED === $status) {
+      $qb->orderBy('su.id', 'ASC');
+    }
 
     if (null !== $cursor_id) {
       $qb->andWhere('su.id > :cursor_id')

@@ -873,3 +873,20 @@ open_api_server_utility_surveylangcodeget:
     _controller: open_api_server.controller.utility::surveyLangCodeGetAction
   requirements:
     lang_code: '[a-z0-9]+'
+
+open_api_server_studios_studiosidbannedmembersget:
+  path: /studios/{id}/banned-members
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.studios::studiosIdBannedMembersGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_studios_studiosidmembersuseridunbanpost:
+  path: /studios/{id}/members/{user_id}/unban
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.studios::studiosIdMembersUserIdUnbanPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+    user_id: '^[a-zA-Z0-9\\-]+$'

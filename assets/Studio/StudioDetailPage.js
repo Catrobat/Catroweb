@@ -391,6 +391,8 @@ function renderMembersSection(header, studio, baseUrl, studioId, isLoggedIn) {
            data-is-studio-admin="${isAdmin ? 'true' : 'false'}"
            data-trans-promote-member="${escapeHtml(header.dataset.transPromoteMember)}"
            data-trans-ban-member="${escapeHtml(header.dataset.transBanMember)}"
+           data-trans-unban-member="${escapeHtml(header.dataset.transUnbanMember)}"
+           data-trans-unban-failed="${escapeHtml(header.dataset.transUnbanFailed)}"
            data-trans-promotion-failed="${escapeHtml(header.dataset.transPromotionFailed)}"
            data-trans-ban-failed="${escapeHtml(header.dataset.transBanFailed)}"
            data-trans-demote-member="${escapeHtml(header.dataset.transDemoteMember)}"
@@ -407,7 +409,24 @@ function renderMembersSection(header, studio, baseUrl, studioId, isLoggedIn) {
         >
           <span class="material-icons">person</span><span class="ms-2 member_count">${studio.members_count ?? 0}</span>
         </a>
-        ${createModalHtml(modalId, header.dataset.transMembersTitle, listId)}
+        ${createModalHtml(
+          modalId,
+          header.dataset.transMembersTitle,
+          listId,
+          isAdmin
+            ? `
+          <section data-studio--member-list-target="bannedSection" hidden>
+            <h2>${escapeHtml(header.dataset.transBannedMembers)}</h2>
+            <p>${escapeHtml(header.dataset.transUnbanHint)}</p>
+            <ul data-studio--member-list-target="bannedList"></ul>
+            <button type="button" class="btn btn-outline-primary"
+                    data-studio--member-list-target="bannedLoadMore"
+                    data-action="studio--member-list#loadBannedMembers" hidden>
+              ${escapeHtml(header.dataset.transLoadMore)}
+            </button>
+          </section>`
+            : '',
+        )}
       </div>
     `
   } else {
@@ -567,7 +586,7 @@ function renderActionButton(header, studio, baseUrl, studioId, isLoggedIn, isAdm
   })
 }
 
-function createModalHtml(modalId, title, listId) {
+function createModalHtml(modalId, title, listId, extraHtml = '') {
   return `
     <div class="modal fade modal-full" id="${modalId}" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog full-modal-dialog" role="document">
@@ -584,6 +603,7 @@ function createModalHtml(modalId, title, listId) {
           </div>
           <div class="container">
             <ul id="${listId}"></ul>
+            ${extraHtml}
           </div>
         </div>
       </div>
