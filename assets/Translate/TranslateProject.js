@@ -8,8 +8,9 @@ export class TranslateProject extends Translation {
     hasDescription,
     hasCredit,
     baseUrl = '',
+    refreshLabel = undefined,
   ) {
-    super(translatedByLine, googleTranslateDisplayName)
+    super(translatedByLine, googleTranslateDisplayName, refreshLabel)
     this.projectId = projectId
     this.baseUrl = baseUrl
     this.hasDescription = hasDescription
@@ -91,7 +92,10 @@ export class TranslateProject extends Translation {
       document.getElementById('project-translation-second-language'),
     )
 
-    this.setTranslationCredit(data, byLineElements)
+    this.setTranslationCredit(data, byLineElements, (sourceLanguage, targetLanguage) => {
+      document.getElementById('project-translation-loading-spinner').style.display = 'block'
+      this.translateProject(sourceLanguage, targetLanguage)
+    })
   }
 
   openTranslatedProject() {
@@ -125,7 +129,7 @@ export class TranslateProject extends Translation {
     }
   }
 
-  projectNotTranslated() {
+  projectNotTranslated(sourceLanguage = 'auto', targetLanguage = this.targetLanguage) {
     document.getElementById('project-translation-loading-spinner').style.display = 'none'
     document.getElementById('project-translation-button').style.display = 'block'
 
@@ -139,27 +143,26 @@ export class TranslateProject extends Translation {
       text += `\n\n${document.getElementById('credits').innerText}`
     }
 
-    this.openGoogleTranslatePage(text)
+    this.openGoogleTranslatePage(text, sourceLanguage, targetLanguage)
   }
 
-  translateProject() {
-    fetch(
-      this.baseUrl +
-        '/api/projects/' +
-        this.projectId +
-        '/translation?target_language=' +
-        this.targetLanguage,
-      {
-        method: 'GET',
-      },
-    )
-      .then((response) => response.json())
+  translateProject(sourceLanguage = null, targetLanguage = this.targetLanguage) {
+    const params = new URLSearchParams({ target_language: targetLanguage })
+    if (sourceLanguage) params.set('source_language', sourceLanguage)
+
+    fetch(`${this.baseUrl}/api/projects/${this.projectId}/translation?${params}`, {
+      method: 'GET',
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Translation failed: ${response.status}`)
+        return response.json()
+      })
       .then((data) => {
         this.setTranslatedProjectData(data)
         this.openTranslatedProject()
       })
       .catch(() => {
-        this.projectNotTranslated()
+        this.projectNotTranslated(sourceLanguage || 'auto', targetLanguage)
       })
   }
 }

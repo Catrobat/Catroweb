@@ -1,12 +1,13 @@
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateComments extends Translation {
-  constructor(translatedByLine, googleTranslateDisplayName) {
-    super(translatedByLine, googleTranslateDisplayName)
+  constructor(translatedByLine, googleTranslateDisplayName, refreshLabel = undefined) {
+    super(translatedByLine, googleTranslateDisplayName, refreshLabel)
     this._initListeners()
   }
 
   _initListeners() {
+    this.translateCommentUrls = {}
     const commentsWrapper = document.querySelector('#comments-wrapper')
 
     if (commentsWrapper) {
@@ -19,6 +20,7 @@ export class TranslateComments extends Translation {
             `.comment-translation[data-translate-comment-id="translate-comment-${commentId}"]`,
           )
           const translateCommentUrl = matchingContainer.dataset.pathTranslateComment
+          this.translateCommentUrls[commentId] = translateCommentUrl
 
           button.style.display = 'none'
 
@@ -58,7 +60,16 @@ export class TranslateComments extends Translation {
       document.getElementById(`comment-translation-second-language-${commentId}`),
     )
 
-    this.setTranslationCredit(data, byLineElements)
+    this.setTranslationCredit(data, byLineElements, (sourceLanguage, targetLanguage) => {
+      document.getElementById(`comment-translation-loading-spinner-${commentId}`).style.display =
+        'block'
+      this.translateComment(
+        this.translateCommentUrls[commentId],
+        commentId,
+        sourceLanguage,
+        targetLanguage,
+      )
+    })
   }
 
   openTranslatedComment(commentId) {
@@ -70,24 +81,39 @@ export class TranslateComments extends Translation {
     document.getElementById(`comment-text-wrapper-${commentId}`).style.display = 'none'
   }
 
-  commentNotTranslated(commentId) {
+  commentNotTranslated(commentId, sourceLanguage = 'auto', targetLanguage = this.targetLanguage) {
     document.getElementById(`comment-translation-loading-spinner-${commentId}`).style.display =
       'none'
     document.getElementById(`comment-translation-button-${commentId}`).style.display = 'block'
-    this.openGoogleTranslatePage(document.getElementById(`comment-text-${commentId}`).innerText)
+    this.openGoogleTranslatePage(
+      document.getElementById(`comment-text-${commentId}`).innerText,
+      sourceLanguage,
+      targetLanguage,
+    )
   }
 
-  translateComment(translateCommentUrl, commentId) {
-    fetch(`${translateCommentUrl}?target_language=${this.targetLanguage}`, {
+  translateComment(
+    translateCommentUrl,
+    commentId,
+    sourceLanguage = null,
+    targetLanguage = this.targetLanguage,
+  ) {
+    const params = new URLSearchParams({ target_language: targetLanguage })
+    if (sourceLanguage) params.set('source_language', sourceLanguage)
+
+    fetch(`${translateCommentUrl}?${params}`, {
       method: 'GET',
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error(`Translation failed: ${response.status}`)
+        return response.json()
+      })
       .then((data) => {
         this.setTranslatedCommentData(commentId, data)
         this.openTranslatedComment(commentId)
       })
       .catch(() => {
-        this.commentNotTranslated(commentId)
+        this.commentNotTranslated(commentId, sourceLanguage || 'auto', targetLanguage)
       })
   }
 }

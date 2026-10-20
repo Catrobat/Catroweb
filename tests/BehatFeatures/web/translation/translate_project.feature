@@ -101,6 +101,7 @@ Feature: Project title, description and credits should be translatable via a but
     And the "#project-translation-before-languages" element should contain "Translated by"
     And the "#project-translation-before-languages" element should contain "iTranslate"
     And the "#project-translation-first-language" element should contain "English"
+    And the "project-translation-first-language-select" field should contain "en"
     And the "#project-translation-between-languages" element should contain "to"
     And the "#project-translation-second-language" element should contain "English"
     And the "#project-translation-after-languages" element should contain ""
@@ -181,3 +182,20 @@ Feature: Project title, description and credits should be translatable via a but
     And the "#description-translation" element should contain "cached description4"
     And the element "#credits-translation" should be visible
     And the "#credits-translation" element should contain "cached credit4"
+
+  Scenario: Source and target language can be changed and the project translated again
+    Given I am on "/app/project/2"
+    And I wait for the page to be loaded
+    When I click "#project-translation-button"
+    And I wait for AJAX to finish
+    Then the "project-translation-first-language-select" field should contain "en"
+    And the element ".translation-refresh-button" should not be visible
+    When I select "fr" from "project-translation-first-language-select"
+    Then the element ".translation-refresh-button" should be visible
+    And the element "#project-translation-second-language-select option[value='fr']" should be disabled
+    When I click ".translation-refresh-button"
+    And I wait for AJAX to finish
+    Then the element "#name-translation" should be visible
+    And the "project-translation-first-language-select" field should contain "fr"
+    And the "#description-translation" element should contain "translated mydescription"
+    And the element ".translation-refresh-button" should not be visible

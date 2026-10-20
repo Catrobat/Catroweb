@@ -623,6 +623,7 @@ function initComponents(data, earlyInits) {
   new TranslateComments(
     projectElement.dataset.translatedByLine,
     projectElement.dataset.googleTranslateDisplayName,
+    projectElement.dataset.transTranslateAgain,
   )
 
   ProjectComments({
@@ -646,6 +647,7 @@ function initComponents(data, earlyInits) {
     projectElement.dataset.hasDescription === 'true',
     projectElement.dataset.hasCredits === 'true',
     baseUrl,
+    projectElement.dataset.transTranslateAgain,
   )
 }
 

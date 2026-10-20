@@ -1,5 +1,6 @@
 import '@material/web/select/outlined-select.js'
 import '@material/web/select/select-option.js'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { showCustomTopBarTitle } from '../Layout/TopBar'
 import { ProjectEditorDialog } from './ProjectEditorDialog'
 import { DIALOG } from './ProjectEditorModel'
@@ -27,6 +28,16 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
 
   document.getElementById('edit-delete-button').addEventListener('click', model.deleteTranslation)
 
+  this.machineTranslationButton = document.getElementById('edit-machine-translation-button')
+  this.machineTranslationButton.addEventListener('click', model.prefillWithMachineTranslation)
+  model.setOnMachineTranslationFailed(() => {
+    showSnackbar(
+      '#share-snackbar',
+      projectDescriptionCredits.dataset.transMachineTranslationFailed,
+      SnackbarDuration.error,
+    )
+  })
+
   if (this.languageSelect) {
     this.languageSelect.addEventListener('change', () => {
       if (!this.editTextUI.classList.contains('d-none')) {
@@ -52,6 +63,9 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
     } else {
       languageSelectElement.classList.add('d-none')
     }
+
+    // Only translations can be pre-filled; the default text is the source.
+    this.machineTranslationButton.classList.toggle('d-none', language === 'default')
 
     const deleteButtonElement = document.getElementById('edit-delete-button')
     if (this.showDeleteButton) {

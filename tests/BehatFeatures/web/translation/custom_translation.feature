@@ -147,3 +147,38 @@ Feature: Projects should have an editor a custom translation can be defined
     And I wait for AJAX to finish
     Then there should be project custom translations:
       | project_id | language | name | description | credit |
+
+  Scenario: A new custom translation can be pre-filled with the machine translation
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
+    When I click "#add-translation-button"
+    And I wait for AJAX to finish
+    And I wait for the element "#edit-language-selector" to be visible
+    Then I choose "French" from selector "#edit-language-selector"
+    And I wait for AJAX to finish
+    Then the element "#edit-machine-translation-button" should be visible
+    And the element "#edit-submit-button" should be disabled
+    When I click "#edit-machine-translation-button"
+    And I wait for AJAX to finish
+    Then the "edit-name-text" field should contain "translated project 1"
+    And the "edit-description-text" field should contain "translated my description"
+    And the "edit-credits-text" field should contain "translated my credits"
+    And the element "#edit-submit-button" should not be disabled
+
+  Scenario: The default text cannot be pre-filled with a machine translation
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
+    Then the element "#edit-text-ui" should be visible
+    And the element "#edit-machine-translation-button" should not be visible
