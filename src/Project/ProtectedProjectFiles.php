@@ -51,31 +51,49 @@ final class ProtectedProjectFiles
     }
     $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
     $mime = (new \finfo(FILEINFO_MIME_TYPE))->file($file);
-    $allowed = match ($extension) {
-      'png' => ['image/png'],
-      'jpg', 'jpeg' => ['image/jpeg'],
-      'gif' => ['image/gif'],
-      'webp' => ['image/webp'],
-      'avif' => ['image/avif'],
-      'bmp' => ['image/bmp', 'image/x-ms-bmp'],
-      'svg' => ['image/svg+xml', 'application/xml', 'text/xml'],
-      'wav' => ['audio/wav', 'audio/x-wav', 'audio/vnd.wave'],
-      'mp3' => ['audio/mpeg', 'audio/mp3'],
-      'ogg' => ['audio/ogg', 'application/ogg'],
-      'm4a' => ['audio/mp4', 'video/mp4', 'audio/x-m4a'],
-      'aac' => ['audio/aac', 'audio/x-hx-aac-adts'],
-      'flac' => ['audio/flac', 'audio/x-flac'],
-      'xml' => $is_metadata ? ['application/xml', 'text/xml', 'text/plain'] : [],
-      default => [],
-    };
-    if (!is_string($mime) || !in_array($mime, $allowed, true)) {
-      return null;
+    $is_sound = $is_asset && 'sounds' === $parts[count($parts) - 2];
+    if ($is_sound) {
+      // Catroid preserves imported names and records MPEG-4/AAC as extensionless "recording".
+      // Canonical media types keep container aliases inert without trusting the filename.
+      $mime = match ($mime) {
+        'audio/wav', 'audio/x-wav', 'audio/vnd.wave' => 'audio/wav',
+        'audio/mpeg', 'audio/mp3' => 'audio/mpeg',
+        'audio/ogg', 'application/ogg' => 'audio/ogg',
+        'audio/mp4', 'video/mp4', 'audio/x-m4a' => 'audio/mp4',
+        'audio/aac', 'audio/x-hx-aac-adts' => 'audio/aac',
+        'audio/flac', 'audio/x-flac' => 'audio/flac',
+        default => null,
+      };
+      if (null === $mime) {
+        return null;
+      }
+    } else {
+      $allowed = match ($extension) {
+        'png' => ['image/png'],
+        'jpg', 'jpeg' => ['image/jpeg'],
+        'gif' => ['image/gif'],
+        // Catroid converts imported WebP to PNG while retaining its original filename.
+        'webp' => ['image/webp', 'image/png'],
+        'avif' => ['image/avif'],
+        'bmp' => ['image/bmp', 'image/x-ms-bmp'],
+        // Imported raster looks may have no extension; active documents are excluded.
+        '' => $is_asset ? ['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/avif', 'image/bmp', 'image/x-ms-bmp'] : [],
+        'svg' => ['image/svg+xml', 'application/xml', 'text/xml'],
+        'xml' => $is_metadata ? ['application/xml', 'text/xml', 'text/plain'] : [],
+        default => [],
+      };
+      if (!is_string($mime) || !in_array($mime, $allowed, true)) {
+        return null;
+      }
+      if ('image/x-ms-bmp' === $mime) {
+        $mime = 'image/bmp';
+      }
     }
     // XML and SVG are downloadable data, never active same-origin documents.
-    $attachment = $is_metadata || 'svg' === $extension;
+    $attachment = $is_metadata || (!$is_sound && 'svg' === $extension);
     $uri = '/__protected-project-resources/extract/'.$id.'/'.implode('/', array_map(rawurlencode(...), $parts));
     $response = new ProtectedProjectFileResponse($file, $uri, $attachment ? 'application/octet-stream' : $mime);
-    $response->setContentDisposition($attachment ? ResponseHeaderBag::DISPOSITION_ATTACHMENT : ResponseHeaderBag::DISPOSITION_INLINE, basename($file), 'asset.'.$extension);
+    $response->setContentDisposition($attachment ? ResponseHeaderBag::DISPOSITION_ATTACHMENT : ResponseHeaderBag::DISPOSITION_INLINE, basename($file), '' === $extension ? 'asset' : 'asset.'.$extension);
 
     return $response;
   }

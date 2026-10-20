@@ -11,7 +11,9 @@ This is a prepared application/server change. Deployment and CDN actions require
 
 Only recognized raster/audio assets, project screenshots and `code.xml` can be delivered from the requested project's extracted directory. File IDs, path segments, real paths and MIME types are checked. Project-directory and nested symlinks are rejected; configured resource-root symlinks remain supported. The current deduplicator copies extracted assets, so it needs no escaping symlinks. Raw content-addressed storage URLs are denied; sharing a hash never grants access to another project's files.
 
-XML and SVG use an attachment disposition, an inert content type and `nosniff`. HTML, scripts, unsupported extensions and mismatched image contents are rejected. Every delivered file is `private, no-store`.
+XML and SVG use an attachment disposition, an inert content type and `nosniff`. HTML, scripts and unrecognized content are rejected. Raster filenames must match their detected MIME, except extensionless raster looks and PNG bytes stored with a `.webp` suffix (Catroid converts imported WebP without renaming). The response always uses the detected canonical raster type. Every delivered file is `private, no-store`.
+
+Sound-directory assets use a bounded detected MIME list independent of their filename: WAV, MP3, Ogg, MP4/M4A, AAC and FLAC. Catroid records MPEG-4/AAC as extensionless `recording` and preserves imported URI names; its unresolved-name `.wav` fallback does not transcode. Safe container aliases (`video/mp4`, `application/ogg`) are delivered as `audio/mp4` and `audio/ogg` with inline disposition and `nosniff`; an actual video track does not become active HTML/script content. Format recognition does not guarantee codec support in every browser. Other types, including HTML/XML/SVG and raster images placed in `sounds`, are rejected.
 
 ## PHP fallback and nginx offload
 

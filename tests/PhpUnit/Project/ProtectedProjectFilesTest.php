@@ -137,6 +137,79 @@ final class ProtectedProjectFilesTest extends TestCase
     self::assertNull($this->files->asset('one', 'other.xml'));
   }
 
+  public function testClientAudioFormatsUseDetectedCanonicalTypesRegardlessOfFilename(): void
+  {
+    $formats = [
+      'wav' => 'audio/wav', 'mp3' => 'audio/mpeg', 'ogg' => 'audio/ogg',
+      'm4a' => 'audio/mp4', 'mp4' => 'audio/mp4', 'aac' => 'audio/aac', 'flac' => 'audio/flac',
+    ];
+    foreach ($formats as $extension => $expected_mime) {
+      foreach (['recording', 'fallback.wav', 'imported.'.$extension, 'misnamed.html'] as $filename) {
+        $fixture = __DIR__.'/../../TestData/ProtectedProjectFiles/tone.'.$extension;
+        copy($fixture, $this->root.'/extract/one/sounds/'.$filename);
+        $response = $this->files->asset('one', 'sounds/'.$filename);
+        self::assertNotNull($response, $extension.' content named '.$filename);
+        self::assertSame($expected_mime, $response->headers->get('Content-Type'));
+        self::assertSame('nosniff', $response->headers->get('X-Content-Type-Options'));
+        self::assertStringStartsWith('inline;', (string) $response->headers->get('Content-Disposition'));
+        self::assertTrue($response->headers->hasCacheControlDirective('no-store'));
+        $response->prepare(Request::create('/project-files/one/assets/sounds/'.$filename));
+        ob_start();
+        $response->sendContent();
+        self::assertSame(file_get_contents($fixture), ob_get_clean());
+      }
+    }
+  }
+
+  public function testSceneRecordingsAlsoSupportPrivateRangesAndAcceleration(): void
+  {
+    mkdir($this->root.'/extract/one/Scene/sounds', 0o700, true);
+    $fixture = __DIR__.'/../../TestData/ProtectedProjectFiles/tone.mp4';
+    copy($fixture, $this->root.'/extract/one/Scene/sounds/recording');
+    $response = $this->files->asset('one', 'Scene/sounds/recording');
+    self::assertNotNull($response);
+    $response->prepare(Request::create('/project-files/one/assets/Scene/sounds/recording', server: ['HTTP_RANGE' => 'bytes=0-7']));
+    self::assertSame(206, $response->getStatusCode());
+    self::assertSame('audio/mp4', $response->headers->get('Content-Type'));
+    ob_start();
+    $response->sendContent();
+    self::assertSame(file_get_contents($fixture, length: 8), ob_get_clean());
+    $response = $this->files->asset('one', 'Scene/sounds/recording');
+    self::assertNotNull($response);
+    $response->prepare(Request::create('/project-files/one/assets/Scene/sounds/recording', server: ['PROJECT_FILE_ACCEL' => '1']));
+    self::assertSame('/__protected-project-resources/extract/one/Scene/sounds/recording', $response->headers->get('X-Accel-Redirect'));
+    self::assertSame('audio/mp4', $response->headers->get('Content-Type'));
+  }
+
+  public function testSoundsRejectActiveContentAndNonAudioEvenWithAudioNames(): void
+  {
+    foreach (['<html><script>alert(1)</script></html>', '<?php echo "active";', '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>', '<?xml version="1.0"?><program/>', 'unrecognized data'] as $content) {
+      foreach (['recording', 'fake.wav', 'fake.mp4', 'fake.svg'] as $filename) {
+        file_put_contents($this->root.'/extract/one/sounds/'.$filename, $content);
+        self::assertNull($this->files->asset('one', 'sounds/'.$filename));
+      }
+    }
+    copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/sounds/fake.wav');
+    self::assertNull($this->files->asset('one', 'sounds/fake.wav'));
+  }
+
+  public function testClientExtensionlessRasterAndWebpConvertedToPngUseDetectedType(): void
+  {
+    foreach (['imported', 'converted.webp'] as $filename) {
+      copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/'.$filename);
+      $response = $this->files->asset('one', 'images/'.$filename);
+      self::assertNotNull($response);
+      self::assertSame('image/png', $response->headers->get('Content-Type'));
+      self::assertSame('nosniff', $response->headers->get('X-Content-Type-Options'));
+    }
+    copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/misnamed.jpg');
+    self::assertNull($this->files->asset('one', 'images/misnamed.jpg'));
+    foreach (['<html><script>alert(1)</script></html>', '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>'] as $content) {
+      file_put_contents($this->root.'/extract/one/images/imported', $content);
+      self::assertNull($this->files->asset('one', 'images/imported'));
+    }
+  }
+
   public function testArchiveIsBoundToTheRequestedIdAndKeepsItsDisposition(): void
   {
     $original = new BinaryFileResponse($this->root.'/programs/one.catrobat');
