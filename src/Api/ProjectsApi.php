@@ -862,7 +862,17 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $nodes = array_map(function (array $node): array {
+    $viewer = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    $nodes = array_map(function (array $node) use ($viewer): array {
+      $owner_id = $node['_ownerId'] ?? null;
+      $is_owner = \is_string($owner_id) && '' !== $owner_id && $owner_id === $viewer?->getId();
+      unset($node['_ownerId']);
+      if ($viewer?->isMinor() && ($node['notForKids'] ?? false) && !$is_owner) {
+        $node['available'] = false;
+        $node['name'] = null;
+        $node['username'] = null;
+      }
+
       // vis-network draws node images on a canvas, so not-for-kids thumbnails can't be CSS-blurred
       if (!$node['available'] || ($node['notForKids'] ?? false)) {
         $node['thumbnailUrl'] = self::IMAGE_NOT_AVAILABLE_URL;
@@ -882,7 +892,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }, $remix_graph['nodes']);
 
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'private, max-age=300';
+    $responseHeaders['Cache-Control'] = 'private, no-store';
 
     return [
       ...$remix_graph,
