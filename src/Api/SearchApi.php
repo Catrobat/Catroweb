@@ -58,6 +58,9 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         $studios_total = $this->facade->getStudioSearchService()->searchCount($query);
         $result = $this->facade->getResponseManager()->getStudiosSearchResponse($studios, $studios_total, $this->facade->getAuthenticationManager()->getAuthenticatedUser());
         break;
+      case 'scratch':
+        $result = $this->searchScratchProjects($query, $limit, $offset);
+        break;
       case 'all':
       default:
         $projects_response = $this->searchProjects($query, $limit, $offset);
@@ -70,7 +73,12 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         $studios_total = $this->facade->getStudioSearchService()->searchCount($query);
         $studios_response = $this->facade->getResponseManager()->getStudiosSearchResponse($studios, $studios_total, $this->facade->getAuthenticationManager()->getAuthenticatedUser());
 
-        $result = $this->facade->getResponseManager()->getSearchResponse($projects_response, $users_response, $studios_response);
+        $result = $this->facade->getResponseManager()->getSearchResponse(
+          $projects_response,
+          $users_response,
+          $studios_response,
+          $this->searchScratchProjects($query, $limit, $offset),
+        );
         break;
     }
 
@@ -90,5 +98,15 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
     $projects_total = $this->facade->getProjectSearchService()->searchCount($query);
 
     return $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
+  }
+
+  private function searchScratchProjects(string $query, int $limit, int $offset): array
+  {
+    $repository = $this->facade->getScratchProjectRepository();
+
+    return $this->facade->getResponseManager()->getScratchProjectsSearchResponse(
+      $repository->search($query, $limit, $offset),
+      $repository->searchCount($query),
+    );
   }
 }

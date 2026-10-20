@@ -7,6 +7,7 @@ namespace App\Api\Services\Search;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Projects\ProjectsResponseManager;
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Scratch\ScratchProject;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
@@ -14,6 +15,7 @@ use App\User\UserAvatarService;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\SearchResponse;
+use OpenAPI\Server\Model\SearchResponseScratchProjectsInner;
 use OpenAPI\Server\Model\SearchResponseStudiosInner;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -31,7 +33,7 @@ class SearchResponseManager extends AbstractResponseManager
     parent::__construct($translator, $serializer, $cache);
   }
 
-  public function getSearchResponse(array $projects_response, array $users_response, array $studios_response = []): SearchResponse
+  public function getSearchResponse(array $projects_response, array $users_response, array $studios_response = [], array $scratch_response = []): SearchResponse
   {
     return new SearchResponse([
       'projects' => $projects_response['projects'],
@@ -40,6 +42,8 @@ class SearchResponseManager extends AbstractResponseManager
       'users_total' => $users_response['users_total'],
       'studios' => $studios_response['studios'] ?? [],
       'studios_total' => $studios_response['studios_total'] ?? 0,
+      'scratch_projects' => $scratch_response['scratch_projects'] ?? [],
+      'scratch_projects_total' => $scratch_response['scratch_projects_total'] ?? 0,
     ]);
   }
 
@@ -90,6 +94,21 @@ class SearchResponseManager extends AbstractResponseManager
     }
 
     return $studios_data_response;
+  }
+
+  /**
+   * @param ScratchProject[] $scratch_projects
+   */
+  public function getScratchProjectsSearchResponse(array $scratch_projects, int $total): array
+  {
+    return [
+      'scratch_projects' => array_map(static fn (ScratchProject $project): SearchResponseScratchProjectsInner => new SearchResponseScratchProjectsInner([
+        'id' => $project->getId(),
+        'name' => $project->getName(),
+        'username' => $project->getUsername(),
+      ]), $scratch_projects),
+      'scratch_projects_total' => $total,
+    ];
   }
 
   public function getProjectsSearchResponse(array $projects, int $total): array

@@ -1527,6 +1527,18 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then the search response should contain :count scratch_projects
+   */
+  public function theSearchResponseShouldContainScratchProjects(int $count): void
+  {
+    $data = json_decode($this->getKernelBrowser()->getResponse()->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+
+    Assert::assertIsArray($data['scratch_projects'] ?? null);
+    Assert::assertCount($count, $data['scratch_projects'], "Expected {$count} Scratch projects in response.");
+    Assert::assertSame($count, $data['scratch_projects_total'] ?? null);
+  }
+
+  /**
    * @Then the search response should contain the following studios:
    */
   public function theSearchResponseShouldContainTheFollowingStudios(TableNode $table): void

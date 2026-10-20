@@ -159,3 +159,25 @@ Feature: Searching for projects & users
     And I wait for AJAX to finish
     Then I should see "Test advanced app"
     Then I should see "No users found"
+
+  Scenario: Scratch projects show up with a badge and link to their Scratch page
+    Given there are Scratch projects:
+      | id       | name             | username   |
+      | 70058680 | Gamma Ray Racer  | scratchcat |
+    And I am on "/app/search/Gamma"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    Then I should see "Scratch projects"
+    And I should see "Gamma Ray Racer"
+    And I should see "scratchcat"
+    And the element "#search-scratch-projects .search-card__badge" should be visible
+    And the element "#search-scratch-projects .search-card__badge" should contain "Scratch"
+    And the element "#search-scratch-projects a.search-card[href$='/app/scratch/project/70058680']" should exist
+
+  Scenario: No Scratch section without Scratch matches
+    Given I am on "/app/search/gmail"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then I should see "No projects found"
+    And the element "#search-scratch-projects" should not be visible

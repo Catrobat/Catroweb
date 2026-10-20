@@ -14,6 +14,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\Project\ProjectLike;
+use App\DB\Entity\Project\Scratch\ScratchProject;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
@@ -954,6 +955,28 @@ class DataFixturesContext implements Context
   {
     foreach ($table->getHash() as $config) {
       $this->insertBackwardRemixRelation($config, false);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
+   * Columns: id, name, username, and optionally "imported as" (the id of the Catrobat project imported from it).
+   *
+   * @Given /^there are Scratch projects:$/
+   */
+  public function thereAreScratchProjects(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      $scratch_project = new ScratchProject((string) $config['id']);
+      $scratch_project->setName($config['name'] ?? null)->setUsername($config['username'] ?? null);
+      $this->getManager()->persist($scratch_project);
+
+      if ('' !== ($config['imported as'] ?? '')) {
+        $project = $this->getProjectManager()->find((string) $config['imported as']);
+        Assert::assertNotNull($project, 'project '.$config['imported as'].' not found');
+        $project->setScratchId((int) $config['id']);
+      }
     }
 
     $this->getManager()->flush();
