@@ -17,6 +17,7 @@ use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioInvite;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\System\MaintenanceInformation;
@@ -352,6 +353,35 @@ class DataFixturesContext implements Context
     }
 
     $em->flush();
+  }
+
+  /**
+   * @Given /^there are studio invites:$/
+   *
+   * @throws \DateMalformedStringException
+   */
+  public function thereAreStudioInvites(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      $studio = $this->getManager()->getRepository(Studio::class)->findOneBy(['name' => $config['studio_name']]);
+      if (!$studio instanceof Studio) {
+        throw new \RuntimeException('Studio not found: '.$config['studio_name']);
+      }
+
+      if (isset($config['id'])) {
+        MyUuidGenerator::setNextValue($config['id']);
+      }
+
+      $this->getManager()->persist(new StudioInvite(
+        $studio,
+        $config['code'],
+        null,
+        isset($config['max_uses']) && '' !== $config['max_uses'] ? (int) $config['max_uses'] : null,
+        isset($config['expires_at']) && '' !== $config['expires_at'] ? new \DateTime($config['expires_at']) : null,
+      ));
+    }
+
+    $this->getManager()->flush();
   }
 
   // -------------------------------------------------------------------------------------------------------------------

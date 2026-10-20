@@ -66,6 +66,33 @@
             name: 'is_public',
           },
         }) }}
+
+        <section id="studio-invites" class="mt-4"
+                 data-trans-uses="{{ 'studio.details.invites.uses'|trans({'%uses%': '%uses%'}, 'catroweb') }}"
+                 data-trans-uses-max="{{ 'studio.details.invites.uses_max'|trans({'%uses%': '%uses%', '%max%': '%max%'}, 'catroweb') }}"
+                 data-trans-expires="{{ 'studio.details.invites.expires'|trans({'%date%': '%date%'}, 'catroweb') }}"
+                 data-trans-copy="{{ 'studio.details.invites.copy_link'|trans({}, 'catroweb') }}"
+                 data-trans-copied="{{ 'studio.details.invites.copied'|trans({}, 'catroweb') }}"
+                 data-trans-revoke="{{ 'studio.details.invites.revoke'|trans({}, 'catroweb') }}"
+                 data-trans-none="{{ 'studio.details.invites.none'|trans({}, 'catroweb') }}"
+                 data-trans-error="{{ 'studio.details.invites.error'|trans({}, 'catroweb') }}">
+          <h3 class="h6">{{ 'studio.details.invites.title'|trans({}, 'catroweb') }}</h3>
+          <p class="text-muted small">{{ 'studio.details.invites.hint'|trans({}, 'catroweb') }}</p>
+          <div class="d-flex flex-wrap gap-2 align-items-end">
+            <label class="small">
+              {{ 'studio.details.invites.expires_on'|trans({}, 'catroweb') }}
+              <input type="date" id="studio-invite-expires" class="form-control">
+            </label>
+            <label class="small">
+              {{ 'studio.details.invites.max_uses'|trans({}, 'catroweb') }}
+              <input type="number" id="studio-invite-max-uses" class="form-control" min="1" max="1000">
+            </label>
+            <button type="button" id="studio-invite-create" class="btn btn-outline-primary">
+              {{ 'studio.details.invites.create'|trans({}, 'catroweb') }}
+            </button>
+          </div>
+          <ul id="studio-invite-list" class="list-unstyled mt-3"></ul>
+        </section>
       </div>
     </div>
   </div>

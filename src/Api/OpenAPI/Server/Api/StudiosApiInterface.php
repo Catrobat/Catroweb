@@ -33,6 +33,8 @@ namespace OpenAPI\Server\Api;
 use OpenAPI\Server\Model\StudioAddProjectRequest;
 use OpenAPI\Server\Model\StudioBatchAddProjectsRequest;
 use OpenAPI\Server\Model\StudioCommentCreateRequest;
+use OpenAPI\Server\Model\StudioInviteCreateRequest;
+use OpenAPI\Server\Model\StudioJoinWithCodeRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -201,6 +203,61 @@ interface StudiosApiInterface
   public function studiosIdGet(
     string $id,
     string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studiosIdInvitesGet.
+   *
+   * List the invite codes of a studio (admin only)
+   *
+   * @param string $id              (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studiosIdInvitesGet(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studiosIdInvitesInviteIdDelete.
+   *
+   * Revoke an invite code (admin only). Members who already joined with it stay.
+   *
+   * @param string $id              (required)
+   * @param string $invite_id       (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studiosIdInvitesInviteIdDelete(
+    string $id,
+    string $invite_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studiosIdInvitesPost.
+   *
+   * Create an invite code for a studio (admin only)
+   *
+   * @param string                         $id                           (required)
+   * @param string                         $accept_language              (optional, default to 'en')
+   * @param StudioInviteCreateRequest|null $studio_invite_create_request (optional)
+   * @param int                            &$responseCode                The HTTP Response Code
+   * @param array                          $responseHeaders              Additional HTTP headers to return with the response ()
+   */
+  public function studiosIdInvitesPost(
+    string $id,
+    string $accept_language,
+    ?StudioInviteCreateRequest $studio_invite_create_request,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
@@ -474,6 +531,23 @@ interface StudiosApiInterface
    */
   public function studiosIdUserProjectsGet(
     string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studiosJoinWithCodePost.
+   *
+   * Join a studio with an invite code
+   *
+   * @param StudioJoinWithCodeRequest $studio_join_with_code_request (required)
+   * @param string                    $accept_language               (optional, default to 'en')
+   * @param int                       &$responseCode                 The HTTP Response Code
+   * @param array                     $responseHeaders               Additional HTTP headers to return with the response ()
+   */
+  public function studiosJoinWithCodePost(
+    StudioJoinWithCodeRequest $studio_join_with_code_request,
     string $accept_language,
     int &$responseCode,
     array &$responseHeaders,

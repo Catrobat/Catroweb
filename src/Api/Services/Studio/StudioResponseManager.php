@@ -7,6 +7,7 @@ namespace App\Api\Services\Studio;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioInvite;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
@@ -19,6 +20,8 @@ use OpenAPI\Server\Model\StudioActivityListResponse;
 use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
 use OpenAPI\Server\Model\StudioCommentResponse;
+use OpenAPI\Server\Model\StudioInviteListResponse;
+use OpenAPI\Server\Model\StudioInviteResponse;
 use OpenAPI\Server\Model\StudioJoinRequestListResponse;
 use OpenAPI\Server\Model\StudioJoinRequestResponse;
 use OpenAPI\Server\Model\StudioListResponse;
@@ -354,6 +357,33 @@ class StudioResponseManager extends AbstractResponseManager
   public function addStudioContentLocationToHeaders(array &$responseHeaders, Studio $studio): void
   {
     $responseHeaders['Content-Location'] = $this->createStudioLocation($studio);
+  }
+
+  /**
+   * @param StudioInvite[] $invites
+   */
+  public function createInviteListResponse(array $invites): StudioInviteListResponse
+  {
+    return (new StudioInviteListResponse())
+      ->setData(array_map($this->createInviteResponse(...), $invites))
+    ;
+  }
+
+  public function createInviteResponse(StudioInvite $invite): StudioInviteResponse
+  {
+    return (new StudioInviteResponse())
+      ->setId($invite->getId())
+      ->setCode($invite->getCode())
+      ->setUrl($this->url_generator->generate(
+        'studio_join_with_code',
+        ['theme' => $this->parameter_bag->get('umbrellaTheme'), 'code' => $invite->getCode()],
+        UrlGeneratorInterface::ABSOLUTE_URL
+      ))
+      ->setUses($invite->getUses())
+      ->setMaxUses($invite->getMaxUses())
+      ->setExpiresAt($invite->getExpiresAt())
+      ->setCreatedAt($invite->getCreatedOn())
+    ;
   }
 
   protected function createStudioLocation(Studio $studio): string

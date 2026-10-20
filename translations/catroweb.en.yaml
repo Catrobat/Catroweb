@@ -1229,6 +1229,14 @@ studio:
   public: 'public'
   private: 'Invite-only'
 
+  join_with_code:
+    title: 'Join with a code'
+    hint: 'Got an invite code from your teacher or a studio admin? Enter it here to join the studio.'
+    code: 'Invite code'
+    invalid: 'This code is not valid. It may have expired or been revoked.'
+    banned: 'You have been banned from this studio.'
+    rate_limited: 'Too many attempts. Please wait a few minutes and try again.'
+
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
@@ -1313,6 +1321,21 @@ studio:
       demote_member: 'Demote admin to member'
       demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
       last_admin: 'Cannot demote the last admin of this studio.'
+
+    invites:
+      title: 'Invite codes'
+      hint: 'Anyone with the code or link joins this studio right away, no approval needed. Revoking a code keeps the members who already joined.'
+      expires_on: 'Expires on (optional)'
+      max_uses: 'Max. uses (optional)'
+      create: 'Create invite code'
+      uses: 'Used %uses% times'
+      uses_max: 'Used %uses% of %max% times'
+      expires: 'Expires %date%'
+      copy_link: 'Copy link'
+      copied: 'Invite link copied to clipboard!'
+      revoke: 'Revoke'
+      none: 'No invite codes yet.'
+      error: 'Something went wrong with the invite code. Please try again.'
 
     join_requests:
       title: 'Join Requests'

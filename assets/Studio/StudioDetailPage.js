@@ -606,3 +606,122 @@ function makeAjaxRequest(url, method) {
       console.error('There was an error with the fetch operation:', error)
     })
 }
+
+// Invite codes (admin settings modal). The API enforces admin rights; the modal only loads them.
+const invitesSection = document.getElementById('studio-invites')
+if (invitesSection) {
+  document
+    .getElementById('studio-admin-settings-modal')
+    ?.addEventListener('show.bs.modal', () => loadInvites())
+  document.getElementById('studio-invite-create')?.addEventListener('click', () => createInvite())
+}
+
+function invitesUrl() {
+  const studioId = document.getElementById('studio-admin-settings-modal').dataset.studioId
+  return `${document.getElementById('js-api-routing').dataset.baseUrl}/api/studios/${studioId}/invites`
+}
+
+function inviteError() {
+  showSnackbar('#share-snackbar', invitesSection.dataset.transError, SnackbarDuration.error)
+}
+
+async function loadInvites() {
+  const response = await fetch(invitesUrl(), {
+    credentials: 'same-origin',
+    headers: { Accept: 'application/json' },
+  })
+  if (!response.ok) {
+    inviteError()
+    return
+  }
+  const { data } = await response.json()
+  const list = document.getElementById('studio-invite-list')
+  list.replaceChildren(...data.map(renderInvite))
+  if (data.length === 0) {
+    const empty = document.createElement('li')
+    empty.className = 'text-muted small studio-invite__empty'
+    empty.textContent = invitesSection.dataset.transNone
+    list.appendChild(empty)
+  }
+}
+
+async function createInvite() {
+  const expires = document.getElementById('studio-invite-expires').value
+  const maxUses = document.getElementById('studio-invite-max-uses').value
+  const body = {}
+  // The chosen day still counts: the code works until its end, in the admin's time zone.
+  if (expires) body.expires_at = new Date(`${expires}T23:59:59`).toISOString()
+  if (maxUses) body.max_uses = Number.parseInt(maxUses, 10)
+
+  const response = await fetch(invitesUrl(), {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  if (response.status !== 201) {
+    inviteError()
+    return
+  }
+  await loadInvites()
+}
+
+function renderInvite(invite) {
+  const ds = invitesSection.dataset
+  const li = document.createElement('li')
+  li.className = 'studio-invite border rounded p-2 mb-2'
+  li.id = `studio-invite-${invite.id}`
+
+  const code = document.createElement('div')
+  code.className = 'studio-invite__code fs-4 font-monospace'
+  code.textContent = invite.code
+
+  const link = document.createElement('div')
+  link.className = 'studio-invite__url small text-break'
+  link.textContent = invite.url
+
+  const meta = document.createElement('div')
+  meta.className = 'small text-muted'
+  const uses =
+    invite.max_uses === null || invite.max_uses === undefined
+      ? ds.transUses.replace('%uses%', invite.uses)
+      : ds.transUsesMax.replace('%uses%', invite.uses).replace('%max%', invite.max_uses)
+  meta.textContent = invite.expires_at
+    ? `${uses} · ${ds.transExpires.replace('%date%', new Date(invite.expires_at).toLocaleDateString())}`
+    : uses
+
+  const copy = document.createElement('button')
+  copy.type = 'button'
+  copy.className = 'btn btn-sm btn-outline-primary me-2 studio-invite__copy'
+  copy.textContent = ds.transCopy
+  copy.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(invite.url)
+      showSnackbar('#share-snackbar', ds.transCopied, SnackbarDuration.short)
+    } catch {
+      inviteError()
+    }
+  })
+
+  const revoke = document.createElement('button')
+  revoke.type = 'button'
+  revoke.className = 'btn btn-sm btn-outline-danger studio-invite__revoke'
+  revoke.textContent = ds.transRevoke
+  revoke.addEventListener('click', async () => {
+    const response = await fetch(`${invitesUrl()}/${invite.id}`, {
+      method: 'DELETE',
+      credentials: 'same-origin',
+    })
+    if (response.status !== 204) {
+      inviteError()
+      return
+    }
+    await loadInvites()
+  })
+
+  const actions = document.createElement('div')
+  actions.className = 'mt-2'
+  actions.append(copy, revoke)
+  li.append(code, link, meta, actions)
+  return li
+}

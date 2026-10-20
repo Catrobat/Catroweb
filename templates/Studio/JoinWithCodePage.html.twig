@@ -1,0 +1,40 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ 'studio.join_with_code.title'|trans({}, 'catroweb') }}{% endblock %}
+{% block top_bar_back_path %}{{ path('studios_overview') }}{% endblock %}
+
+{% block head %}
+  {{ vite_entry_link_tags('studio_join_with_code_page') }}
+{% endblock %}
+
+{% block body %}
+  <form id="studio-join-with-code-form" class="container mt-3"
+        data-studio-path="{{ path('studio_details', {id: '__ID__'}) }}"
+        data-trans-invalid="{{ 'studio.join_with_code.invalid'|trans({}, 'catroweb') }}"
+        data-trans-banned="{{ 'studio.join_with_code.banned'|trans({}, 'catroweb') }}"
+        data-trans-rate-limited="{{ 'studio.join_with_code.rate_limited'|trans({}, 'catroweb') }}"
+        data-trans-error="{{ 'studio.details.join_requests.error'|trans({}, 'catroweb') }}">
+    <p>{{ 'studio.join_with_code.hint'|trans({}, 'catroweb') }}</p>
+
+    {{ include('Components/TextField.html.twig', {
+      text_field:
+      {
+        id: 'studio-join-code',
+        label: '' ~ 'studio.join_with_code.code'|trans({}, 'catroweb'),
+        name: 'code',
+        value: code,
+        leading_icon: 'vpn_key',
+        autocomplete: 'off',
+      },
+    }) }}
+
+    <p id="studio-join-with-code-error" class="text-danger" role="alert" style="display: none"></p>
+
+    <button id="studio-join-with-code-submit" type="submit" class="btn btn-primary">
+      {{ 'studio.join'|trans({}, 'catroweb') }}
+    </button>
+  </form>
+{% endblock %}
+
+{% block javascript %}
+  {{ vite_entry_script_tags('studio_join_with_code_page') }}
+{% endblock %}
