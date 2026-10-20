@@ -43,7 +43,20 @@ class StudioApiLoader extends AbstractApiLoader
     return $studio;
   }
 
+  /**
+   * Active membership only: a banned row grants nothing.
+   */
   public function loadStudioUser(?User $user, Studio $studio): ?StudioUser
+  {
+    $studio_user = $this->studio_manager->findStudioUser($user, $studio);
+
+    return true === $studio_user?->isActive() ? $studio_user : null;
+  }
+
+  /**
+   * Any membership row, banned included.
+   */
+  public function loadStudioUserAnyStatus(?User $user, Studio $studio): ?StudioUser
   {
     return $this->studio_manager->findStudioUser($user, $studio);
   }

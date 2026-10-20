@@ -238,9 +238,9 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       return;
     }
 
-    $existingMember = $this->facade->getLoader()->loadStudioUser($user, $studio);
+    $existingMember = $this->facade->getLoader()->loadStudioUserAnyStatus($user, $studio);
     if ($existingMember instanceof StudioUser) {
-      $responseCode = Response::HTTP_CONFLICT;
+      $responseCode = $existingMember->isActive() ? Response::HTTP_CONFLICT : Response::HTTP_FORBIDDEN;
 
       return;
     }

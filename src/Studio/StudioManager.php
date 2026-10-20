@@ -211,7 +211,7 @@ class StudioManager
   public function addUserToStudio(User $admin, Studio $studio, User $newUser, string $role = StudioUser::ROLE_MEMBER): ?StudioUser
   {
     if (($this->isUserInStudio($admin, $studio) && $this->isUserAStudioAdmin($admin, $studio))
-      && (!$this->isUserInStudio($newUser, $studio) && StudioUser::ROLE_ADMIN !== $role)) {
+      && (null === $this->findStudioUser($newUser, $studio) && StudioUser::ROLE_ADMIN !== $role)) {
       $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
 
       return $this->createStudioUser($newUser, $studio, $activity, $role);
@@ -222,7 +222,7 @@ class StudioManager
 
   public function addAdminToStudio(User $admin, Studio $studio, string $role = StudioUser::ROLE_ADMIN): ?StudioUser
   {
-    if (!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN === $role) {
+    if (null === $this->findStudioUser($admin, $studio) && StudioUser::ROLE_ADMIN === $role) {
       $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
 
       return $this->createStudioUser($admin, $studio, $activity, $role);
@@ -325,7 +325,8 @@ class StudioManager
   public function deleteUserFromStudio(User $admin, Studio $studio, User $user_to_remove): void
   {
     $studio_user = $this->findStudioUser($user_to_remove, $studio);
-    if (($this->isUserAStudioAdmin($admin, $studio) || $admin === $user_to_remove) && !is_null($studio_user)) {
+    // A banned user must not delete their own row: that would lift the ban.
+    if (!is_null($studio_user) && ($this->isUserAStudioAdmin($admin, $studio) || ($admin === $user_to_remove && $studio_user->isActive()))) {
       $this->entity_manager->remove($studio_user);
       $this->entity_manager->flush();
     }
@@ -510,7 +511,7 @@ class StudioManager
   public function getStudioUserRole(?User $user, Studio $studio): ?string
   {
     $studio_user = $this->findStudioUser($user, $studio);
-    if (is_null($studio_user)) {
+    if (is_null($studio_user) || !$studio_user->isActive()) {
       return null;
     }
 
@@ -579,7 +580,7 @@ class StudioManager
 
   public function isUserInStudio(User $user, Studio $studio): bool
   {
-    return !is_null($this->findStudioUser($user, $studio));
+    return true === $this->findStudioUser($user, $studio)?->isActive();
   }
 
   public function isUserAStudioAdmin(User $user, Studio $studio): bool

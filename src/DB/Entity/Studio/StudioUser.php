@@ -166,9 +166,14 @@ class StudioUser
     return $this;
   }
 
+  public function isActive(): bool
+  {
+    return StudioUser::STATUS_ACTIVE === $this->status;
+  }
+
   public function isAdmin(): bool
   {
-    return StudioUser::ROLE_ADMIN === $this->getRole();
+    return StudioUser::ROLE_ADMIN === $this->getRole() && $this->isActive();
   }
 
   public function isMember(): bool

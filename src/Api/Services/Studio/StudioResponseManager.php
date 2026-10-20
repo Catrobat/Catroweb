@@ -78,8 +78,7 @@ class StudioResponseManager extends AbstractResponseManager
     $response = $this->createStudioResponse($studio, $preloaded_counts);
 
     if ($user instanceof User) {
-      $studioUser = $this->studio_manager->findStudioUser($user, $studio);
-      $response->setIsMember($studioUser instanceof StudioUser);
+      $response->setIsMember($this->studio_manager->isUserInStudio($user, $studio));
 
       $userRole = $this->studio_manager->getStudioUserRole($user, $studio);
       $response->setUserRole($userRole);
