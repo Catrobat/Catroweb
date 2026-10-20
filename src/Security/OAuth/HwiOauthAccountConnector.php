@@ -43,7 +43,7 @@ class HwiOauthAccountConnector implements AccountConnectorInterface
     if (($previousUser = $this->user_manager->findOneBy([$property => $username])) instanceof User) {
       $previousUser->{$setter_id}(null);
       $previousUser->{$setter_access_token}(null);
-      $this->user_manager->updateUser($user);
+      $this->user_manager->updateUser($previousUser);
     }
 
     // username is a unique integer

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\User;
 
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\RefreshToken;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\UserRepository;
 use App\Project\ProjectManager;
@@ -24,6 +25,7 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 
 class UserManager
 {
@@ -79,6 +81,49 @@ class UserManager
     }
 
     return $response_data;
+  }
+
+  /**
+   * An unverified account with the email of an OAuth sign-in may have been registered by someone else.
+   * Only when the provider confirms it verified that email, the account is claimed for the sign-in:
+   * marked verified, password replaced, other provider links and every refresh token revoked, and the
+   * age/parental-consent data reset so the new owner completes registration like a new OAuth user
+   * (otherwise the previous holder's parent email could still manage or delete the account).
+   * Otherwise linking is refused. Verified accounts are left untouched.
+   *
+   * @throws CustomUserMessageAccountStatusException when the account is unverified and the provider did not verify the email
+   */
+  public function claimUnverifiedAccountForOAuth(User $user, bool $email_verified_by_provider): void
+  {
+    if ($user->isVerified()) {
+      return;
+    }
+
+    if (!$email_verified_by_provider) {
+      throw new CustomUserMessageAccountStatusException('An account with this email exists but is not verified. Log in with your password and verify your email first.');
+    }
+
+    $user->setVerified(true);
+    $user->setOauthUser(true);
+    $user->setPlainPassword(null);
+    $user->setPassword(PasswordGenerator::generateRandomPassword());
+    $user->setGoogleId(null);
+    $user->setGoogleAccessToken(null);
+    $user->setFacebookId(null);
+    $user->setFacebookAccessToken(null);
+    $user->setAppleId(null);
+    $user->setAppleAccessToken(null);
+    $user->setDateOfBirth(null);
+    $user->setMinor(false);
+    $user->setConsentStatus('not_required');
+    $user->setParentEmail(null);
+    $this->entity_manager->createQueryBuilder()
+      ->delete(RefreshToken::class, 't')
+      ->where('t.username = :username')
+      ->setParameter('username', $user->getUserIdentifier())
+      ->getQuery()
+      ->execute()
+    ;
   }
 
   public function updateUser(User $user, bool $andFlush = true): void
