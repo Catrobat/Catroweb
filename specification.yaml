@@ -2974,6 +2974,123 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
+  '/studios/{id}/invites':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studios
+      summary: List the invite codes of a studio (admin only)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioInviteListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studios
+      summary: Create an invite code for a studio (admin only)
+      description: Anyone with the code joins the studio as a member without an approval step.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudioInviteCreateRequest'
+      responses:
+        '201':
+          description: Invite created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioInviteResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/studios/{id}/invites/{invite_id}':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: invite_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studios
+      summary: Revoke an invite code (admin only). Members who already joined with it stay.
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studios/join-with-code':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studios
+      summary: Join a studio with an invite code
+      description: Adds the authenticated user as a member directly. Unknown, revoked, expired and used-up codes all answer 404.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudioJoinWithCodeRequest'
+      responses:
+        '200':
+          description: Joined; the studio the code belongs to
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Banned from this studio
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Already a member; the studio the code belongs to
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
   ##############################################
   # Followers
   ###
@@ -5235,6 +5352,63 @@ components:
         next_cursor:
           type: string
           nullable: true
+
+    StudioInviteCreateRequest:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The code stops working after this point in time. Omit for no expiry.
+        max_uses:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          nullable: true
+          description: The code stops working after this many joins. Omit for unlimited.
+
+    StudioInviteResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Invite UUID
+        code:
+          type: string
+          example: 'K7QM2XH9TR'
+        url:
+          type: string
+          description: Web link that joins the studio with this code
+        uses:
+          type: integer
+        max_uses:
+          type: integer
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+
+    StudioInviteListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioInviteResponse'
+
+    StudioJoinWithCodeRequest:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: The invite code; case, spaces and dashes are ignored
 
     ######################################################
     # Utility Schemas
