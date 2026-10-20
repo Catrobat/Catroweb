@@ -707,7 +707,8 @@ class StudioManager
   public function createStudioInvite(User $admin, Studio $studio, ?int $max_uses, ?\DateTime $expires_at): ?StudioInvite
   {
     if (!$this->isUserAStudioAdmin($admin, $studio)
-      || count($this->studio_invite_repository->findByStudio($studio)) >= self::MAX_INVITES_PER_STUDIO) {
+      // Expired and used-up codes don't count against the cap, so admins aren't stuck until they revoke them.
+      || count(array_filter($this->studio_invite_repository->findByStudio($studio), static fn (StudioInvite $i): bool => $i->isUsable())) >= self::MAX_INVITES_PER_STUDIO) {
       return null;
     }
 
