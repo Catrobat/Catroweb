@@ -1291,6 +1291,7 @@ studio:
     report: 'Report'
     pending: 'Pending'
     decline: 'Declined'
+    banned: "You can't join this studio."
 
     comments:
       title: 'Comments'

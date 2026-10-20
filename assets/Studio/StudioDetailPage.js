@@ -528,6 +528,12 @@ function renderActionButton(header, studio, baseUrl, studioId, isLoggedIn, isAdm
         ${escapeHtml(header.dataset.transLeave)}
       </button>
     `
+  } else if (studio.is_banned === true) {
+    container.innerHTML = `
+      <p class="studio-detail__header__details__banned-note text-muted mb-0">
+        ${escapeHtml(header.dataset.transBanned)}
+      </p>
+    `
   } else if (studio.join_request_status === 'pending') {
     container.innerHTML = `
       <button class="studio-detail__header__details__pending-button btn btn-outline-primary btn-block requestPending" disabled>
