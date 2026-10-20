@@ -787,6 +787,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       return null;
     }
 
+    $responseHeaders['Cache-Control'] = 'private, no-store';
     $responseCode = Response::HTTP_OK;
 
     return $this->facade->getResponseManager()->createInviteListResponse(
@@ -822,6 +823,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       return null;
     }
 
+    $responseHeaders['Cache-Control'] = 'private, no-store';
     $responseCode = Response::HTTP_CREATED;
 
     return $this->facade->getResponseManager()->createInviteResponse($invite);

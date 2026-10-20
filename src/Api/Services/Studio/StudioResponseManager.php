@@ -16,6 +16,8 @@ use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\Studio\StudioManager;
 use App\User\UserAvatarService;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\SvgWriter;
 use OpenAPI\Server\Model\StudioActivityListResponse;
 use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
@@ -374,14 +376,20 @@ class StudioResponseManager extends AbstractResponseManager
 
   public function createInviteResponse(StudioInvite $invite): StudioInviteResponse
   {
+    $url = $this->url_generator->generate(
+      'studio_join_with_code',
+      ['theme' => $this->parameter_bag->get('umbrellaTheme'), 'code' => $invite->getCode()],
+      UrlGeneratorInterface::ABSOLUTE_URL
+    );
+    $qr_code = $invite->isUsable()
+      ? (new SvgWriter())->write(new QrCode(data: $url, size: 240, margin: 24))->getDataUri()
+      : null;
+
     return (new StudioInviteResponse())
       ->setId($invite->getId())
       ->setCode($invite->getCode())
-      ->setUrl($this->url_generator->generate(
-        'studio_join_with_code',
-        ['theme' => $this->parameter_bag->get('umbrellaTheme'), 'code' => $invite->getCode()],
-        UrlGeneratorInterface::ABSOLUTE_URL
-      ))
+      ->setUrl($url)
+      ->setQrCode($qr_code)
       ->setUses($invite->getUses())
       ->setMaxUses($invite->getMaxUses())
       ->setExpiresAt($invite->getExpiresAt())

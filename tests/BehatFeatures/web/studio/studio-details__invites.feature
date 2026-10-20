@@ -29,9 +29,11 @@ Feature: Studio admins hand out invite codes, pupils join private studios with t
     And I wait for the element "#studio-admin-settings-modal" to be visible
     And I wait for AJAX to finish
     Then the element "#studio-invite-list" should contain "CLASS1CODE"
+    And the element ".studio-invite__qr" should be visible
     When I click "#studio-invite-create"
     And I wait for AJAX to finish
     Then I should see 2 ".studio-invite"
+    And I should see 2 ".studio-invite__qr"
     And the element "#studio-invite-list" should contain "/studio/join/"
 
   Scenario: Opening an invite link while logged out leads to the login page
@@ -73,3 +75,19 @@ Feature: Studio admins hand out invite codes, pupils join private studios with t
     When I click "#studios-join-with-code"
     And I wait for the page to be loaded
     Then I should be on "/app/studio/join"
+
+  Scenario: Revoking an invite removes its QR code
+    Given I log in as "StudioAdmin"
+    And I am on "/app/studio/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
+    And I wait for the element "#studio-admin-settings-modal" to be visible
+    And I wait for AJAX to finish
+    Then the element ".studio-invite__qr" should be visible
+    When I click ".studio-invite__revoke"
+    And I wait for AJAX to finish
+    Then the element ".studio-invite__qr" should not exist
+    And the element "#studio-invite-list" should not contain "CLASS1CODE"

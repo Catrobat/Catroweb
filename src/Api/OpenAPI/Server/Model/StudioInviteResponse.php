@@ -73,6 +73,17 @@ class StudioInviteResponse
   protected ?string $url = null;
 
   /**
+   * Locally generated SVG image as a data URI for the invite URL. Present only while the invite is usable; returned only to active studio admins, with no shared cache.
+   *
+   * @SerializedName("qr_code")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $qr_code = null;
+
+  /**
    * @SerializedName("uses")
    *
    * @Assert\Type("int")
@@ -119,6 +130,7 @@ class StudioInviteResponse
       $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->code = array_key_exists('code', $data) ? $data['code'] : $this->code;
       $this->url = array_key_exists('url', $data) ? $data['url'] : $this->url;
+      $this->qr_code = array_key_exists('qr_code', $data) ? $data['qr_code'] : $this->qr_code;
       $this->uses = array_key_exists('uses', $data) ? $data['uses'] : $this->uses;
       $this->max_uses = array_key_exists('max_uses', $data) ? $data['max_uses'] : $this->max_uses;
       $this->expires_at = array_key_exists('expires_at', $data) ? $data['expires_at'] : $this->expires_at;
@@ -266,6 +278,28 @@ class StudioInviteResponse
   public function setCreatedAt(?\DateTime $created_at = null): self
   {
     $this->created_at = $created_at;
+
+    return $this;
+  }
+
+  /**
+   * Gets qr_code.
+   */
+  public function getQrCode(): ?string
+  {
+    return $this->qr_code;
+  }
+
+  /**
+   * Sets qr_code.
+   *
+   * @param string|null $qr_code Locally generated SVG image as a data URI for the invite URL. Present only while the invite is usable; returned only to active studio admins, with no shared cache.
+   *
+   * @return $this
+   */
+  public function setQrCode(?string $qr_code = null): self
+  {
+    $this->qr_code = $qr_code;
 
     return $this;
   }

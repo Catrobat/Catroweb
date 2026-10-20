@@ -563,3 +563,7 @@ Only active studio admins may list banned members or remove bans. Unbanning dele
 Unban authorization checks the acting membership with `isAdmin()` directly; a stored admin role on banned/pending membership grants no authority. Manager tests cover this boundary without relying on an API guard.
 
 The `the JSON response field :path should be :expected` Behat helper compares JSON-encoded values. String expectations need a JSON string literal inside single Gherkin quotes (for example `should be '"member"'`); booleans and numbers retain their existing literals.
+
+### Studio Invite QR Codes
+
+Admin-only invite responses include a locally generated SVG data URI while the invite is usable. These responses set `Cache-Control: private, no-store`; do not write invite QR images to a shared public cache or send codes to a third-party QR service. Expired, exhausted, and revoked invites retain their existing join restrictions.

@@ -748,6 +748,18 @@ function renderInvite(invite) {
   const actions = document.createElement('div')
   actions.className = 'mt-2'
   actions.append(copy, revoke)
-  li.append(code, link, meta, actions)
+  li.append(code, link)
+  if (invite.qr_code?.startsWith('data:image/svg+xml;base64,')) {
+    const qr = document.createElement('img')
+    qr.className = 'studio-invite__qr d-block my-2'
+    qr.src = invite.qr_code
+    qr.alt = ds.transQrAlt
+    qr.width = 288
+    qr.height = 288
+    qr.style.maxWidth = '100%'
+    qr.style.height = 'auto'
+    li.appendChild(qr)
+  }
+  li.append(meta, actions)
   return li
 }
