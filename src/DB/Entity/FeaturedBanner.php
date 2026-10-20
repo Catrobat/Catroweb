@@ -56,6 +56,12 @@ class FeaturedBanner
   #[ORM\Column(type: Types::JSON, nullable: true)]
   protected ?array $flavors = null;
 
+  /**
+   * @var string[]|null locales (`de`, `de_AT`) this banner is shown for; null = everyone
+   */
+  #[ORM\Column(type: Types::JSON, nullable: true)]
+  protected ?array $locales = null;
+
   #[ORM\Column(type: Types::STRING)]
   protected string $image_type = '';
 
@@ -155,6 +161,38 @@ class FeaturedBanner
     $this->flavors = (null !== $flavors && [] !== $flavors) ? array_values($flavors) : null;
 
     return $this;
+  }
+
+  /**
+   * @return string[]|null
+   */
+  public function getLocales(): ?array
+  {
+    return $this->locales;
+  }
+
+  /**
+   * @param string[]|null $locales
+   */
+  public function setLocales(?array $locales): self
+  {
+    $normalized = array_values(array_unique(array_filter(array_map(self::normalizeLocale(...), $locales ?? []))));
+    $this->locales = [] !== $normalized ? $normalized : null;
+
+    return $this;
+  }
+
+  /**
+   * `de-at`, `DE_AT`, `de-AT,de;q=0.9` → `de_AT`; `DE` → `de`; anything else → null.
+   */
+  public static function normalizeLocale(string $locale): ?string
+  {
+    $tag = trim(explode(';', explode(',', $locale)[0])[0]);
+    if (1 !== preg_match('/^([a-z]{2,3})(?:[-_]([a-z]{2}))?$/i', $tag, $m)) {
+      return null;
+    }
+
+    return strtolower($m[1]).(isset($m[2]) ? '_'.strtoupper($m[2]) : '');
   }
 
   public function getImageType(): string

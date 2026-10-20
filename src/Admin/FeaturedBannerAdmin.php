@@ -17,6 +17,8 @@ use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -147,6 +149,11 @@ class FeaturedBannerAdmin extends AbstractAdmin
         'required' => false,
         'help' => 'Select flavors to show this banner on. Leave empty for all flavors.',
       ])
+      ->add('locales', TextType::class, [
+        'required' => false,
+        'help' => 'Comma-separated languages or locales to show this banner for, e.g. "de, fr_CA". "de" also covers "de_AT". Leave empty for everyone.',
+        'invalid_message' => 'Use language codes like "de" or locales like "de_AT", separated by commas.',
+      ])
       ->add('title', TextType::class, [
         'required' => false,
         'help' => 'Optional overlay title for the banner',
@@ -154,6 +161,18 @@ class FeaturedBannerAdmin extends AbstractAdmin
       ->add('priority', IntegerType::class, ['required' => false])
       ->add('active', CheckboxType::class, ['required' => false])
     ;
+
+    $form->getFormBuilder()->get('locales')->addModelTransformer(new CallbackTransformer(
+      static fn (?array $locales): string => implode(', ', $locales ?? []),
+      static function (?string $input): array {
+        $locales = [];
+        foreach (array_filter(array_map(trim(...), explode(',', (string) $input))) as $entry) {
+          $locales[] = FeaturedBanner::normalizeLocale($entry) ?? throw new TransformationFailedException(sprintf('Invalid locale "%s"', $entry));
+        }
+
+        return $locales;
+      },
+    ));
   }
 
   #[\Override]

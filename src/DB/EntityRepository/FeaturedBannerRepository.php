@@ -21,7 +21,7 @@ class FeaturedBannerRepository extends ServiceEntityRepository
   /**
    * @return FeaturedBanner[]
    */
-  public function findActiveBanners(int $limit = 10, int $offset = 0, ?string $flavor = null): array
+  public function findActiveBanners(int $limit = 10, int $offset = 0, ?string $flavor = null, ?string $locale = null): array
   {
     $qb = $this->createQueryBuilder('fb');
 
@@ -34,6 +34,7 @@ class FeaturedBannerRepository extends ServiceEntityRepository
     ;
 
     $this->addFlavorFilter($qb, $flavor);
+    $this->addLocaleFilter($qb, $locale);
 
     return $qb->getQuery()->getResult();
   }
@@ -43,7 +44,7 @@ class FeaturedBannerRepository extends ServiceEntityRepository
    *
    * @return FeaturedBanner[]
    */
-  public function findActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null, ?string $flavor = null): array
+  public function findActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null, ?string $flavor = null, ?string $locale = null): array
   {
     $qb = $this->createQueryBuilder('fb')
       ->select('fb')
@@ -63,6 +64,7 @@ class FeaturedBannerRepository extends ServiceEntityRepository
     }
 
     $this->addFlavorFilter($qb, $flavor);
+    $this->addLocaleFilter($qb, $locale);
 
     return $qb->getQuery()->getResult();
   }
@@ -76,6 +78,25 @@ class FeaturedBannerRepository extends ServiceEntityRepository
     // JSON column: null = all flavors, otherwise must contain the flavor string
     $qb->andWhere('fb.flavors IS NULL OR fb.flavors LIKE :flavorPattern')
       ->setParameter('flavorPattern', '%"'.$flavor.'"%')
+    ;
+  }
+
+  /**
+   * Global banners (locales = null) are always included; a banner for `de`
+   * matches `de` and `de_AT`, a banner for `de_AT` only `de_AT`.
+   */
+  private function addLocaleFilter(\Doctrine\ORM\QueryBuilder $qb, ?string $locale): void
+  {
+    $normalized = null !== $locale ? FeaturedBanner::normalizeLocale($locale) : null;
+    if (null === $normalized) {
+      $qb->andWhere('fb.locales IS NULL');
+
+      return;
+    }
+
+    $qb->andWhere('fb.locales IS NULL OR fb.locales LIKE :localePattern OR fb.locales LIKE :languagePattern')
+      ->setParameter('localePattern', '%"'.$normalized.'"%')
+      ->setParameter('languagePattern', '%"'.explode('_', $normalized)[0].'"%')
     ;
   }
 }

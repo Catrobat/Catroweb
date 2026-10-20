@@ -1,5 +1,6 @@
 import { Carousel } from 'bootstrap'
 import { createPictureElement } from '../Layout/ImageVariants'
+import AcceptLanguage from '../Api/AcceptLanguage'
 
 export class FeaturedBanner {
   constructor(containerId) {
@@ -16,7 +17,7 @@ export class FeaturedBanner {
     const params = flavor ? `?flavor=${encodeURIComponent(flavor)}` : ''
     const apiUrl = `${baseUrl}/api/featured-banners${params}`
 
-    fetch(apiUrl)
+    fetch(apiUrl, { headers: { 'Accept-Language': new AcceptLanguage().get() } })
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()

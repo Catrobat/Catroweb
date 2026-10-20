@@ -49,7 +49,7 @@ class IndexController extends AbstractController
   {
     try {
       $flavor = $this->getCurrentFlavor();
-      $banners = $this->utilityApiLoader->getActiveBannersKeyset(1, flavor: $flavor);
+      $banners = $this->utilityApiLoader->getActiveBannersKeyset(1, flavor: $flavor, locale: $this->requestStack->getCurrentRequest()?->getLocale());
       if ([] === $banners) {
         return null;
       }

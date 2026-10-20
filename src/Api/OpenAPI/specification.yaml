@@ -291,6 +291,8 @@ paths:
           schema:
             type: string
           description: 'Filter banners by flavor (e.g. pocketcode, luna). Omit for all.'
+        - $ref: '#/components/parameters/Locale'
+      description: 'Banners targeted at specific languages/locales are only returned when the Accept-Language matches (a banner for `de` matches `de` and `de-AT`); banners without targeting are always returned.'
       responses:
         '200':
           description: OK
