@@ -83,7 +83,8 @@ class FeaturedBannerRepository extends ServiceEntityRepository
 
   /**
    * Global banners (locales = null) are always included; a banner for `de`
-   * matches `de` and `de_AT`, a banner for `de_AT` only `de_AT`.
+   * matches `de` and `de_AT`, a banner for `de_AT` only `de_AT`. Unlike the
+   * flavor filter, a null/unparsable locale means "global banners only".
    */
   private function addLocaleFilter(\Doctrine\ORM\QueryBuilder $qb, ?string $locale): void
   {

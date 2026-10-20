@@ -31,6 +31,9 @@ class FeaturedBannerLocalesTest extends TestCase
     yield 'underscore locale' => ['de_AT', 'de_AT'];
     yield 'accept-language list' => ['fr-CA,fr;q=0.9,en;q=0.8', 'fr_CA'];
     yield 'three-letter language' => ['ast', 'ast'];
+    yield 'script subtag' => ['sr_Latn', 'sr'];
+    yield 'numeric region' => ['es-419,es;q=0.9', 'es'];
+    yield 'script and region' => ['zh-Hant-TW', 'zh'];
     yield 'garbage' => ['"de"', null];
     yield 'empty' => ['', null];
     yield 'wildcard' => ['*', null];

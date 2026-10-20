@@ -9,7 +9,7 @@ Feature: GET /api/featured-banners only returns banners targeted at the request 
       | https://austria.test/ | Austria banner | 1      | 2        | link | de_AT   |
       | https://french.test/  | French banner  | 1      | 1        | link | fr,it   |
 
-  Scenario: Without Accept-Language only global and English banners are returned
+  Scenario: Without Accept-Language (defaults to en) only global banners are returned
     When I request "GET" "/api/featured-banners"
     Then the response status code should be "200"
     And the client response should contain "Global banner"

@@ -183,16 +183,20 @@ class FeaturedBanner
   }
 
   /**
-   * `de-at`, `DE_AT`, `de-AT,de;q=0.9` → `de_AT`; `DE` → `de`; anything else → null.
+   * `de-at`, `DE_AT`, `de-AT,de;q=0.9` → `de_AT`; `DE` → `de`; other subtags fall
+   * back to the language (`sr_Latn`, `es-419`, `zh-Hant-TW` → `sr`, `es`, `zh`);
+   * anything else → null.
    */
   public static function normalizeLocale(string $locale): ?string
   {
     $tag = trim(explode(';', explode(',', $locale)[0])[0]);
-    if (1 !== preg_match('/^([a-z]{2,3})(?:[-_]([a-z]{2}))?$/i', $tag, $m)) {
+    if (1 !== preg_match('/^([a-z]{2,3})((?:[-_][a-z0-9]+)*)$/i', $tag, $m)) {
       return null;
     }
 
-    return strtolower($m[1]).(isset($m[2]) ? '_'.strtoupper($m[2]) : '');
+    $region = explode('_', str_replace('-', '_', $m[2]))[1] ?? '';
+
+    return strtolower($m[1]).(1 === preg_match('/^[a-z]{2}$/i', $region) ? '_'.strtoupper($region) : '');
   }
 
   public function getImageType(): string
