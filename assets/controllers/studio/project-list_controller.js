@@ -409,7 +409,6 @@ export default class extends Controller {
         this.containerTarget.innerHTML = ''
         this.cursor = null
         this.loadProjects()
-        this.updateCount()
       }
     } catch (e) {
       console.error('Failed to open add project modal:', e)
@@ -445,7 +444,10 @@ export default class extends Controller {
           this.element.dataset.transAddError || 'Failed to add projects.',
           SnackbarDuration.error,
         )
+        return
       }
+      const data = await response.json()
+      this.updateCount(data.added.length)
     } catch (e) {
       console.error('Failed to batch add projects:', e)
       showSnackbar(
@@ -494,8 +496,8 @@ export default class extends Controller {
 
   updateCount(delta = 0) {
     if (this.hasCountTarget) {
-      const current = parseInt(this.countTarget.textContent, 10) || 0
-      this.countTarget.textContent = String(current + delta)
+      const current = parseInt(this.countTarget.textContent.replace(/[()]/g, ''), 10) || 0
+      this.countTarget.textContent = `(${current + delta})`
     }
   }
 }

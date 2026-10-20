@@ -33,6 +33,7 @@ Feature: A banned member sees that they can't join the studio instead of a Join 
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__banned-note" should be visible
+    And I should see "You can't join this studio."
     And the element ".studio-detail__header__details__join-button" should not exist
 
   Scenario: Other users still see the Join button
@@ -42,3 +43,13 @@ Feature: A banned member sees that they can't join the studio instead of a Join 
     And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__join-button" should be visible
     And the element ".studio-detail__header__details__banned-note" should not exist
+
+  Scenario: A banned member sees no Join action in the overview card menu
+    Given I log in as "BannedMember"
+    And I am on "/app/studios"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn" to be visible
+    When I click ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn"
+    Then I wait for the element "[data-action='share'][data-studio-id='1']" to be visible
+    And the element "[data-action='join'][data-studio-id='1']" should not exist

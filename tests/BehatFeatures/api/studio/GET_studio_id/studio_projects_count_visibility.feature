@@ -21,7 +21,7 @@ Feature: A studio's projects_count counts only the projects its project list sho
     And there are studio users:
       | id | user  | studio_name | role   |
       | 1  | Admin | Studio1     | admin  |
-      | 2  | Owner | Studio1     | member |
+      | 2  | Owner | Studio1     | admin  |
     And there are studio projects:
       | user  | studio_name | project_name   |
       | Admin | Studio1     | ShownProject   |
@@ -68,3 +68,46 @@ Feature: A studio's projects_count counts only the projects its project list sho
     When I GET "/api/users/2/studios"
     Then the response status code should be "200"
     And the JSON response field "data.0.projects_count" should be "2"
+
+  Scenario: Studio search counts only publicly visible projects for guests
+    When I GET "/api/search?query=Studio1&type=studios"
+    Then the response status code should be "200"
+    And the JSON response field "studios.0.projects_count" should be "2"
+
+  Scenario Outline: Studio search counts the viewer's visible projects
+    Given I use a valid JWT Bearer token for "<viewer>"
+    When I GET "/api/search?query=Studio1&type=studios"
+    Then the response status code should be "200"
+    And the JSON response field "studios.0.projects_count" should be "<count>"
+
+    Examples:
+      | viewer    | count |
+      | Owner     | 5     |
+      | Stranger  | 2     |
+      | MinorUser | 1     |
+
+  Scenario Outline: Updating a studio returns the viewer's visible project count
+    Given I use a valid JWT Bearer token for "<viewer>"
+    And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
+    And I have the POST parameters:
+      | name        | value               |
+      | description | Updated description |
+    When I request "PATCH" "/api/studios/1"
+    Then the response status code should be "200"
+    And the JSON response field "projects_count" should be "<count>"
+
+    Examples:
+      | viewer | count |
+      | Owner  | 5     |
+      | Admin  | 2     |
+
+  Scenario: Creating a studio returns an empty project count
+    Given I use a valid JWT Bearer token for "Owner"
+    And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
+    And I have the POST parameters:
+      | name        | value         |
+      | name        | New Studio    |
+      | description | A new studio  |
+    When I request "POST" "/api/studios"
+    Then the response status code should be "201"
+    And the JSON response field "projects_count" should be "0"
