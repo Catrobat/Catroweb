@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 #[Exclude]
 final class ProtectedProjectFileResponse extends BinaryFileResponse
 {
-  public function __construct(string $file, private readonly string $internal_uri, string $mime)
+  public function __construct(string $file, private readonly string $internal_uri, string $mime, private readonly bool $allow_acceleration = true)
   {
     parent::__construct($file, headers: [
       'Content-Type' => $mime,
@@ -28,7 +28,7 @@ final class ProtectedProjectFileResponse extends BinaryFileResponse
     // Client-supplied sendfile headers must never choose a filesystem mapping.
     $safe_request->headers->remove('X-Sendfile-Type');
     $safe_request->headers->remove('X-Accel-Mapping');
-    $accelerated = '1' === $request->server->get('PROJECT_FILE_ACCEL');
+    $accelerated = $this->allow_acceleration && '1' === $request->server->get('PROJECT_FILE_ACCEL');
     if ($accelerated) {
       // nginx applies the original range request to the internal file itself.
       $safe_request->headers->remove('Range');

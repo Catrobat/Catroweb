@@ -38,6 +38,20 @@ class SecurityHeadersSubscriberTest extends TestCase
     $this->assertNotNull($response->headers->get('Content-Security-Policy'));
   }
 
+  public function testRoutePolicyCannotBeOverwrittenOrWeakenTheGlobalBaseline(): void
+  {
+    $event = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
+    $route_policy = "sandbox; default-src 'none'";
+    $event->getResponse()->headers->set('Content-Security-Policy', $route_policy);
+    new SecurityHeadersSubscriber('prod')->onKernelResponse($event);
+    $policies = $event->getResponse()->headers->all('Content-Security-Policy');
+    self::assertCount(2, $policies);
+    self::assertSame($route_policy, $policies[0]);
+    self::assertIsString($policies[1]);
+    self::assertStringContainsString("default-src 'self'", $policies[1]);
+    self::assertStringContainsString("frame-ancestors 'self'", $policies[1]);
+  }
+
   public function testCaptchaCspOmittedWhenDisabled(): void
   {
     $subscriber = new SecurityHeadersSubscriber('prod', false, 'https://cap.example.org');

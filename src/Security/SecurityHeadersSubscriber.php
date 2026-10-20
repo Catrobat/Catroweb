@@ -45,7 +45,8 @@ class SecurityHeadersSubscriber
     // same-site (not same-origin) so resources can be loaded by sibling Catrobat subdomains.
     $headers->set('Cross-Origin-Resource-Policy', 'same-site');
 
-    $headers->set('Content-Security-Policy', $this->buildContentSecurityPolicy());
+    // Multiple CSP policies intersect: route restrictions may tighten, never bypass, the baseline.
+    $headers->set('Content-Security-Policy', $this->buildContentSecurityPolicy(), false);
 
     if ('prod' === $this->kernelEnvironment) {
       $headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');

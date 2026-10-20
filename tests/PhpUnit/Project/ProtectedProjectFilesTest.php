@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 /** @internal */
 #[CoversClass(ProtectedProjectFiles::class)]
 #[CoversClass(ProtectedProjectFileResponse::class)]
+#[CoversClass(\App\Security\SecurityHeadersSubscriber::class)]
 #[CoversClass(\App\Project\Controller\ProjectFilesController::class)]
 #[CoversClass(\App\Project\CatrobatFile\ExtractedFileRepository::class)]
 #[Group('unit')]
@@ -111,7 +112,24 @@ final class ProtectedProjectFilesTest extends TestCase
     self::assertSame("sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:", $svg->headers->get('Content-Security-Policy'));
     self::assertSame('nosniff', $svg->headers->get('X-Content-Type-Options'));
     $svg->prepare(Request::create('/project-files/one/assets/images/active.svg', server: ['PROJECT_FILE_ACCEL' => '1']));
+    self::assertFalse($svg->headers->has('X-Accel-Redirect'));
+    ob_start();
+    $svg->sendContent();
+    self::assertSame(file_get_contents($svg->getFile()->getPathname()), ob_get_clean());
     self::assertSame("sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:", $svg->headers->get('Content-Security-Policy'));
+    $event = new \Symfony\Component\HttpKernel\Event\ResponseEvent(
+      $this->createStub(\Symfony\Component\HttpKernel\HttpKernelInterface::class),
+      Request::create('/project-files/one/assets/images/active.svg'),
+      \Symfony\Component\HttpKernel\HttpKernelInterface::MAIN_REQUEST,
+      $svg,
+    );
+    new \App\Security\SecurityHeadersSubscriber('prod')->onKernelResponse($event);
+    $policies = $svg->headers->all('Content-Security-Policy');
+    self::assertCount(2, $policies);
+    self::assertSame("sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:", $policies[0]);
+    self::assertIsString($policies[1]);
+    self::assertStringContainsString("default-src 'self'", $policies[1]);
+    self::assertSame('DENY', $svg->headers->get('X-Frame-Options'));
   }
 
   public function testInvalidPathsAndIdsCannotEscapeTheProjectDirectory(): void

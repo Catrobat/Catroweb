@@ -585,3 +585,7 @@ Before deploying these routes behind nginx, deploy the routing-only `^~ /project
 Catroid preserves media filenames: MPEG-4/AAC recordings can be extensionless or named `.wav`, imported raster looks can lack extensions, and WebP imports are converted to PNG without renaming. Protected sound delivery uses only bounded detected audio/container MIME types with canonical audio responses; raster checks permit only those proven filename exceptions. Never infer active response types from imported filenames.
 
 Missing project-preview extraction shares the existing per-IP download burst budget; do not rate-limit every already extracted media request. SVG previews retain image MIME under CSP sandbox with external sources/scripts blocked; archive transport must not impose new MIME admission restrictions after the existing authorized archive lookup.
+
+SecurityHeadersSubscriber must append its global CSP baseline rather than overwrite an existing route policy. Multiple CSP policies intersect; protected SVG browser checks must use final subscriber headers and direct top-level navigation, because global X-Frame-Options may independently block iframe tests.
+
+SVG responses must retain PHP streaming even when project-file acceleration is enabled. nginx internal redirects discard upstream security headers; keeping SVG out of offload preserves the final intersecting CSP policies without server header-forwarding rules.

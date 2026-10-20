@@ -93,7 +93,7 @@ final class ProtectedProjectFiles
     $is_svg = !$is_sound && 'svg' === $extension;
     $attachment = $is_metadata;
     $uri = '/__protected-project-resources/extract/'.$id.'/'.implode('/', array_map(rawurlencode(...), $parts));
-    $response = new ProtectedProjectFileResponse($file, $uri, $attachment ? 'application/octet-stream' : ($is_svg ? 'image/svg+xml' : $mime));
+    $response = new ProtectedProjectFileResponse($file, $uri, $attachment ? 'application/octet-stream' : ($is_svg ? 'image/svg+xml' : $mime), allow_acceleration: !$is_svg);
     if ($is_svg) {
       $response->headers->set('Content-Security-Policy', "sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:");
     }
