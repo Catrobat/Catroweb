@@ -470,4 +470,35 @@ final class StudioApiTest extends TestCase
     $this->api->studiosIdMembersUserIdUnbanPost('studio', 'target', 'en', $code, $headers);
     self::assertSame(Response::HTTP_NOT_FOUND, $code);
   }
+
+  #[Group('unit')]
+  public function testInviteListIsPrivateAndNotCached(): void
+  {
+    $this->auth_manager->method('getAuthenticatedUser')->willReturn(new User());
+    $this->loader->method('loadVisibleStudio')->willReturn(new Studio());
+    $this->loader->method('loadStudioUser')->willReturn((new StudioUser())->setRole(StudioUser::ROLE_ADMIN)->setStatus(StudioUser::STATUS_ACTIVE));
+    $this->loader->method('loadStudioInvites')->willReturn([]);
+    $this->response_manager->method('createInviteListResponse')->willReturn(new \OpenAPI\Server\Model\StudioInviteListResponse(['data' => []]));
+    $code = 200;
+    $headers = [];
+    $this->api->studiosIdInvitesGet('studio', 'en', $code, $headers);
+    self::assertSame(Response::HTTP_OK, $code);
+    self::assertSame('private, no-store', $headers['Cache-Control']);
+  }
+
+  #[Group('unit')]
+  public function testCreatedInviteIsPrivateAndNotCached(): void
+  {
+    $studio = new Studio();
+    $this->auth_manager->method('getAuthenticatedUser')->willReturn(new User());
+    $this->loader->method('loadVisibleStudio')->willReturn($studio);
+    $this->loader->method('loadStudioUser')->willReturn((new StudioUser())->setRole(StudioUser::ROLE_ADMIN)->setStatus(StudioUser::STATUS_ACTIVE));
+    $this->processor->method('createInvite')->willReturn(new \App\DB\Entity\Studio\StudioInvite($studio, 'CLASS1CODE', null, null, null));
+    $this->response_manager->method('createInviteResponse')->willReturn(new \OpenAPI\Server\Model\StudioInviteResponse());
+    $code = 200;
+    $headers = [];
+    $this->api->studiosIdInvitesPost('studio', 'en', null, $code, $headers);
+    self::assertSame(Response::HTTP_CREATED, $code);
+    self::assertSame('private, no-store', $headers['Cache-Control']);
+  }
 }

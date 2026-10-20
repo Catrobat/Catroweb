@@ -5441,6 +5441,10 @@ components:
         url:
           type: string
           description: Web link that joins the studio with this code
+        qr_code:
+          type: string
+          nullable: true
+          description: Locally generated SVG image as a data URI for the invite URL. Present only while the invite is usable; returned only to active studio admins, with no shared cache.
         uses:
           type: integer
         max_uses:

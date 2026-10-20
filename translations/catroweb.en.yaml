@@ -1337,6 +1337,7 @@ studio:
       uses: 'Used %uses% times'
       uses_max: 'Used %uses% of %max% times'
       expires: 'Expires %date%'
+      qr_alt: 'Scan this QR code to join the studio'
       copy_link: 'Copy link'
       copied: 'Invite link copied to clipboard!'
       revoke: 'Revoke'

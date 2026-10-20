@@ -52,6 +52,8 @@ Feature: Studio admins manage invite codes
     When I POST "/api/studios/1/invites"
     Then the response status code should be "201"
     And the client response should contain "uses"
+    And the client response should contain "qr_code"
+    And the client response should contain "data:image"
     And the client response should not contain "max_uses"
     And the client response should contain "studio\/join\/"
 

@@ -22,6 +22,7 @@
     "doctrine/doctrine-migrations-bundle": "4.0.*",
     "doctrine/orm": "3.7.*",
     "eightpoints/guzzle-bundle": "^8.5",
+    "endroid/qr-code": "^6.1.3",
     "friendsofsymfony/elastica-bundle": "7.2.*",
     "gesdinet/jwt-refresh-token-bundle": "2.2.*",
     "google/apiclient": "2.20.*",
