@@ -240,6 +240,7 @@ export default class extends Controller {
     const isMember = studio.is_member === true
     const userRole = studio.user_role || null
     const joinRequestStatus = studio.join_request_status || null
+    const isBanned = studio.is_banned === true
 
     const detailUrl = this.studioDetailsPathValue.replace('__ID__', id)
 
@@ -264,6 +265,7 @@ export default class extends Controller {
       isMember,
       userRole,
       joinRequestStatus,
+      isBanned,
     )
 
     return (
@@ -315,7 +317,15 @@ export default class extends Controller {
     )
   }
 
-  _buildActionArea(studioId, detailUrl, isMyStudios, isMember, userRole, joinRequestStatus) {
+  _buildActionArea(
+    studioId,
+    detailUrl,
+    isMyStudios,
+    isMember,
+    userRole,
+    joinRequestStatus,
+    isBanned,
+  ) {
     let menuItems =
       '<a href="' +
       escapeAttr(detailUrl) +
@@ -352,7 +362,13 @@ export default class extends Controller {
         '</button>'
     }
 
-    if (this.isLoggedInValue && !isMyStudios && !isMember && joinRequestStatus !== 'pending') {
+    if (
+      this.isLoggedInValue &&
+      !isMyStudios &&
+      !isMember &&
+      !isBanned &&
+      joinRequestStatus !== 'pending'
+    ) {
       menuItems +=
         '<div class="projects-list-item--dropdown-divider"></div>' +
         '<button class="projects-list-item--dropdown-item fw-medium" style="color: var(--primary);" data-action="join" data-studio-id="' +

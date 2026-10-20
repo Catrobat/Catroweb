@@ -139,6 +139,17 @@ class StudioResponse
   protected ?bool $is_member = null;
 
   /**
+   * Whether the authenticated user is banned from this studio and so cannot join it again (null if not authenticated).
+   *
+   * @SerializedName("is_banned")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
+  protected ?bool $is_banned = null;
+
+  /**
    * Status of the authenticated user&#39;s join request (pending, approved, declined) or null.
    *
    * @SerializedName("join_request_status")
@@ -210,6 +221,7 @@ class StudioResponse
       $this->members_count = array_key_exists('members_count', $data) ? $data['members_count'] : $this->members_count;
       $this->projects_count = array_key_exists('projects_count', $data) ? $data['projects_count'] : $this->projects_count;
       $this->is_member = array_key_exists('is_member', $data) ? $data['is_member'] : $this->is_member;
+      $this->is_banned = array_key_exists('is_banned', $data) ? $data['is_banned'] : $this->is_banned;
       $this->join_request_status = array_key_exists('join_request_status', $data) ? $data['join_request_status'] : $this->join_request_status;
       $this->activities_count = array_key_exists('activities_count', $data) ? $data['activities_count'] : $this->activities_count;
       $this->comments_count = array_key_exists('comments_count', $data) ? $data['comments_count'] : $this->comments_count;
@@ -410,6 +422,28 @@ class StudioResponse
   public function setIsMember(?bool $is_member = null): self
   {
     $this->is_member = $is_member;
+
+    return $this;
+  }
+
+  /**
+   * Gets is_banned.
+   */
+  public function isIsBanned(): ?bool
+  {
+    return $this->is_banned;
+  }
+
+  /**
+   * Sets is_banned.
+   *
+   * @param bool|null $is_banned Whether the authenticated user is banned from this studio and so cannot join it again (null if not authenticated)
+   *
+   * @return $this
+   */
+  public function setIsBanned(?bool $is_banned = null): self
+  {
+    $this->is_banned = $is_banned;
 
     return $this;
   }

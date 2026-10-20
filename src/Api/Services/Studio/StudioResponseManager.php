@@ -81,9 +81,12 @@ class StudioResponseManager extends AbstractResponseManager
     $response = $this->createStudioResponse($studio, $preloaded_counts);
 
     if ($user instanceof User) {
-      $response->setIsMember($this->studio_manager->isUserInStudio($user, $studio));
+      $studio_user = $this->studio_manager->findStudioUser($user, $studio);
+      $is_active = true === $studio_user?->isActive();
+      $response->setIsMember($is_active);
+      $response->setIsBanned(StudioUser::STATUS_BANNED === $studio_user?->getStatus());
 
-      $userRole = $this->studio_manager->getStudioUserRole($user, $studio);
+      $userRole = $is_active ? $studio_user->getRole() : null;
       $response->setUserRole($userRole);
 
       if ('admin' === $userRole) {

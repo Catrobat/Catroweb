@@ -5029,6 +5029,10 @@ components:
           type: boolean
           nullable: true
           description: Whether the authenticated user is a member of this studio (null if not authenticated)
+        is_banned:
+          type: boolean
+          nullable: true
+          description: Whether the authenticated user is banned from this studio and so cannot join it again (null if not authenticated)
         join_request_status:
           type: string
           nullable: true
