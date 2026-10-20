@@ -512,6 +512,24 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then the JSON response should not have field :path
+   *
+   * @throws \JsonException
+   */
+  public function theJsonResponseShouldNotHaveField(string $path): void
+  {
+    $value = json_decode($this->getKernelBrowser()->getResponse()->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $keys = explode('.', $path);
+    foreach (array_slice($keys, 0, -1) as $key) {
+      Assert::assertIsArray($value, sprintf('No JSON parent field "%s"', $path));
+      Assert::assertArrayHasKey($key, $value, sprintf('No JSON parent field "%s"', $path));
+      $value = $value[$key];
+    }
+    Assert::assertIsArray($value);
+    Assert::assertArrayNotHasKey($keys[count($keys) - 1], $value, sprintf('Unexpected JSON field "%s"', $path));
+  }
+
+  /**
    * @Then /^I should get the json object:$/
    *
    * @throws \JsonException

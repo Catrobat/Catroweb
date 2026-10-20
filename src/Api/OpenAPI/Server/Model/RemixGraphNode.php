@@ -96,11 +96,9 @@ class RemixGraphNode
   protected ?bool $available = null;
 
   /**
-   * Project title, or null when unavailable to the current viewer.
+   * Project title; omitted when unavailable to the current viewer.
    *
    * @SerializedName("name")
-   *
-   * @Assert\NotNull()
    *
    * @Assert\Type("string")
    *
@@ -109,11 +107,9 @@ class RemixGraphNode
   protected ?string $name = null;
 
   /**
-   * Username of the project owner, or null when unavailable to the current viewer.
+   * Username of the project owner; omitted when unavailable to the current viewer.
    *
    * @SerializedName("username")
-   *
-   * @Assert\NotNull()
    *
    * @Assert\Type("string")
    *
@@ -251,7 +247,7 @@ class RemixGraphNode
   /**
    * Sets name.
    *
-   * @param string|null $name Project title, or null when unavailable to the current viewer
+   * @param string|null $name Project title; omitted when unavailable to the current viewer
    *
    * @return $this
    */
@@ -273,7 +269,7 @@ class RemixGraphNode
   /**
    * Sets username.
    *
-   * @param string|null $username Username of the project owner, or null when unavailable to the current viewer
+   * @param string|null $username Username of the project owner; omitted when unavailable to the current viewer
    *
    * @return $this
    */

@@ -75,6 +75,35 @@ final class RemixGraphMinorMetadataTest extends TestCase
     $this->assertSame(2, $result['projectCount']);
     $this->assertSame(1, $result['remixCount']);
     $this->assertSame('private, no-store', $headers['Cache-Control']);
+
+    // Exercise the real generated HTTP controller and serializer: null array values are omitted on the wire.
+    $server = new \OpenAPI\Server\Api\ApiServer();
+    $server->addApiHandler('projects', $api);
+    $controller = new \OpenAPI\Server\Controller\ProjectsController();
+    $controller->setApiServer($server);
+    $controller->setSerializer(new \OpenAPI\Server\Service\JmsSerializer());
+    $controller->setValidator(new \OpenAPI\Server\Service\SymfonyValidator(\Symfony\Component\Validator\Validation::createValidator()));
+    $response = $controller->projectsIdRemixGraphGetAction(\Symfony\Component\HttpFoundation\Request::create('/api/projects/safe/remix-graph'), 'safe');
+    $this->assertSame(200, $response->getStatusCode());
+    $this->assertSame('no-store, private', $response->headers->get('Cache-Control'));
+    $wire = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $this->assertSame(!$hidden, $wire['nodes'][0]['available']);
+    if ($hidden) {
+      $this->assertArrayNotHasKey('name', $wire['nodes'][0]);
+      $this->assertArrayNotHasKey('username', $wire['nodes'][0]);
+      $this->assertStringNotContainsString('Restricted', (string) $response->getContent());
+      $this->assertStringNotContainsString('Owner', (string) $response->getContent());
+    } else {
+      $this->assertSame('Restricted', $wire['nodes'][0]['name']);
+      $this->assertSame('Owner', $wire['nodes'][0]['username']);
+    }
+    $this->assertSame('Safe', $wire['nodes'][1]['name']);
+    $this->assertSame('Other', $wire['nodes'][1]['username']);
+    $this->assertSame('catrobat_nfk', $wire['nodes'][0]['id']);
+    $this->assertSame('nfk', $wire['nodes'][0]['projectId']);
+    $this->assertSame($graph['edges'], $wire['edges']);
+    $this->assertSame(2, $wire['projectCount']);
+    $this->assertSame(1, $wire['remixCount']);
   }
 
   /**

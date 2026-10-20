@@ -33,8 +33,8 @@ Feature: Remix graph hides other users' not-for-kids metadata from minors
     And the client response should contain "catrobat_1"
     And the client response should contain "catrobat_2"
     And the JSON response field "nodes.0.available" should be "false"
-    And the JSON response field "nodes.0.name" should be "null"
-    And the JSON response field "nodes.0.username" should be "null"
+    And the JSON response should not have field "nodes.0.name"
+    And the JSON response should not have field "nodes.0.username"
     And the JSON response field "projectCount" should be "2"
     And the JSON response field "remixCount" should be "1"
     And the JSON response field "edges.0.from" should be '"catrobat_1"'
