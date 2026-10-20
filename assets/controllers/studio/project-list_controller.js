@@ -16,7 +16,7 @@ export default class extends Controller {
     isLoggedIn: Boolean,
   }
 
-  static targets = ['container', 'loadMore', 'count', 'noProjects', 'description']
+  static targets = ['container', 'loadMore', 'noProjects', 'description']
 
   cursor = null
   hasMore = false
@@ -495,9 +495,11 @@ export default class extends Controller {
   }
 
   updateCount(delta = 0) {
-    if (this.hasCountTarget) {
-      const current = parseInt(this.countTarget.textContent.replace(/[()]/g, ''), 10) || 0
-      this.countTarget.textContent = `(${current + delta})`
+    // The tab belongs to the header, outside this controller's projects-pane scope.
+    const count = document.getElementById('projects-count')
+    if (count) {
+      const current = parseInt(count.textContent.replace(/[()]/g, ''), 10) || 0
+      count.textContent = `(${current + delta})`
     }
   }
 }
