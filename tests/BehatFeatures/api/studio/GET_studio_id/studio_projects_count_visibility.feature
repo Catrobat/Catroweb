@@ -70,12 +70,14 @@ Feature: A studio's projects_count counts only the projects its project list sho
     And the JSON response field "data.0.projects_count" should be "2"
 
   Scenario: Studio search counts only publicly visible projects for guests
+    Given I wait for the search index to be updated
     When I GET "/api/search?query=Studio1&type=studios"
     Then the response status code should be "200"
     And the JSON response field "studios.0.projects_count" should be "2"
 
   Scenario Outline: Studio search counts the viewer's visible projects
     Given I use a valid JWT Bearer token for "<viewer>"
+    And I wait for the search index to be updated
     When I GET "/api/search?query=Studio1&type=studios"
     Then the response status code should be "200"
     And the JSON response field "studios.0.projects_count" should be "<count>"
