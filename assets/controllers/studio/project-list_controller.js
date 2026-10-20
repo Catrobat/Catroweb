@@ -16,7 +16,7 @@ export default class extends Controller {
     isLoggedIn: Boolean,
   }
 
-  static targets = ['container', 'loadMore', 'count', 'noProjects', 'description']
+  static targets = ['container', 'loadMore', 'noProjects', 'description']
 
   cursor = null
   hasMore = false
@@ -409,24 +409,9 @@ export default class extends Controller {
         this.containerTarget.innerHTML = ''
         this.cursor = null
         this.loadProjects()
-        this.updateCount()
       }
     } catch (e) {
       console.error('Failed to open add project modal:', e)
-    }
-  }
-
-  async addProject(projectId) {
-    const url = this.addProjectUrlValue
-    try {
-      await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ project_id: projectId }),
-      })
-    } catch (e) {
-      console.error('Failed to add project:', e)
     }
   }
 
@@ -445,7 +430,10 @@ export default class extends Controller {
           this.element.dataset.transAddError || 'Failed to add projects.',
           SnackbarDuration.error,
         )
+        return
       }
+      const data = await response.json()
+      this.updateCount(data.added.length)
     } catch (e) {
       console.error('Failed to batch add projects:', e)
       showSnackbar(
@@ -493,9 +481,11 @@ export default class extends Controller {
   }
 
   updateCount(delta = 0) {
-    if (this.hasCountTarget) {
-      const current = parseInt(this.countTarget.textContent, 10) || 0
-      this.countTarget.textContent = String(current + delta)
+    // The tab belongs to the header, outside this controller's projects-pane scope.
+    const count = document.getElementById('projects-count')
+    if (count) {
+      const current = parseInt(count.textContent.replace(/[()]/g, ''), 10) || 0
+      count.textContent = `(${current + delta})`
     }
   }
 }

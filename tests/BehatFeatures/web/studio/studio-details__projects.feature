@@ -42,10 +42,25 @@ Feature: A studio has a project section
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I wait for the element "[data-studio--project-list-target='container']" to contain "project 2"
+    And I wait for the element "#projects-count" to contain "(1)"
     When I click ".projects-list-item--menu-btn"
     And I wait 500 milliseconds
     And I click "[data-menu-action='remove']"
     And I wait 500 milliseconds
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
-    Then the element "[data-studio--project-list-target='container']" should not contain "project 2"
+    Then I wait for the element "#projects-count" to contain "(0)"
+    And the element "[data-studio--project-list-target='container']" should not contain "project 2"
+
+  Scenario: Adding a project updates the tab count without reloading the page
+    Given I log in as "StudioAdmin"
+    And I am on "/app/studio/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#projects-count" to contain "(1)"
+    When I click ".studios-fab"
+    And I wait for the element ".studio-add-project-list" to be visible
+    And I click ".studio-add-project-item"
+    And I click ".swal2-confirm"
+    Then I wait for the element "[data-studio--project-list-target='container']" to contain "project 1"
+    And I wait for the element "#projects-count" to contain "(2)"
