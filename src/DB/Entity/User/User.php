@@ -261,7 +261,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   /**
    * Access tokens (JWTs) issued before this moment are rejected, see JWTDecodedEventListener.
    */
-  #[ORM\Column(name: 'credentials_changed_at', type: 'datetime', nullable: true)]
+  #[ORM\Column(name: 'credentials_changed_at', type: 'utc_datetime', nullable: true)]
   protected ?\DateTimeInterface $credentials_changed_at = null;
 
   #[ORM\Column(name: 'created_at', type: 'datetime')]
@@ -836,7 +836,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   public function markCredentialsChanged(): void
   {
     // Real time, not TimeUtils: it is compared with the JWT "iat", which the JWT library takes from the real clock.
-    $this->credentials_changed_at = new \DateTime();
+    $this->credentials_changed_at = new \DateTime('now', new \DateTimeZone('UTC'));
   }
 
   public function getCredentialsChangedAt(): ?\DateTimeInterface
