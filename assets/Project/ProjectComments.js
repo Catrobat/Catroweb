@@ -85,6 +85,7 @@ export function ProjectComments(config) {
       event.target.closest('.comment-delete-button') ||
       event.target.closest('.comment-translation-actions') ||
       event.target.closest('.remove-comment-translation-button') ||
+      event.target.closest('.translation-credit-wrapper') ||
       event.target.tagName === 'A' ||
       event.target.tagName === 'I'
     ) {
