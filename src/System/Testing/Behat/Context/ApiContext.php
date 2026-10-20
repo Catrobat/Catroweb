@@ -493,6 +493,25 @@ class ApiContext implements Context
   }
 
   /**
+   * Dot path into the JSON response, e.g. "projects_count" or "data.0.projects_count".
+   *
+   * @Then the JSON response field :path should be :expected
+   *
+   * @throws \JsonException
+   */
+  public function theJsonResponseFieldShouldBe(string $path, string $expected): void
+  {
+    $value = json_decode($this->getKernelBrowser()->getResponse()->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    foreach (explode('.', $path) as $key) {
+      Assert::assertIsArray($value, sprintf('No JSON field "%s"', $path));
+      Assert::assertArrayHasKey($key, $value, sprintf('No JSON field "%s"', $path));
+      $value = $value[$key];
+    }
+
+    Assert::assertSame($expected, json_encode($value, JSON_THROW_ON_ERROR), sprintf('JSON field "%s"', $path));
+  }
+
+  /**
    * @Then /^I should get the json object:$/
    *
    * @throws \JsonException

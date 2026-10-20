@@ -126,7 +126,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     );
 
     $responseCode = Response::HTTP_CREATED;
-    $response = $this->facade->getResponseManager()->createStudioResponse($studio);
+    $response = $this->facade->getResponseManager()->createStudioResponse($studio, null, $user);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $this->facade->getResponseManager()->addStudioCreatedLocationToHeaders($responseHeaders, $studio);
@@ -178,7 +178,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createStudioResponse($studio);
+    $response = $this->facade->getResponseManager()->createStudioResponse($studio, null, $user);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $this->facade->getResponseManager()->addStudioContentLocationToHeaders($responseHeaders, $studio);
