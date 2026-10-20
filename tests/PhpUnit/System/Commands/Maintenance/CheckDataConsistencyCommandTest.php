@@ -120,6 +120,7 @@ class CheckDataConsistencyCommandTest extends KernelTestCase
     $this->variant_generator->expects($this->never())->method('generate');
 
     $tester = $this->runCommand([]);
+    $this->assertStringNotContainsString('hidden:', $tester->getDisplay());
     $display = $tester->getDisplay();
 
     $tester->assertCommandIsSuccessful();
@@ -145,9 +146,10 @@ class CheckDataConsistencyCommandTest extends KernelTestCase
       ->with($screenshot, $this->screenshot_dir, 'screen_'.$this->broken_id)
     ;
 
-    $tester = $this->runCommand(['--hide' => true, '--regenerate-thumbnails' => true]);
+    $tester = $this->runCommand(['--hide' => true, '--force' => true, '--regenerate-thumbnails' => true]);
 
     $tester->assertCommandIsSuccessful();
+    $this->assertStringContainsString('hidden: '.$this->broken_id, $tester->getDisplay());
     $this->assertFileExists($this->thumbnail_dir.'screen_'.$this->broken_id.'.png');
     $broken = $this->findProject($this->broken_id);
     $this->assertFalse($broken->getVisible());
@@ -157,8 +159,28 @@ class CheckDataConsistencyCommandTest extends KernelTestCase
     $this->assertNotNull($this->entity_manager->find(ContentReport::class, $this->report_id), 'reports are never deleted');
   }
 
+  public function testHideRefusesWhenTooManyProjectsWouldBeHidden(): void
+  {
+    $this->variant_generator->expects($this->never())->method('generate');
+    // 1 of 3 scanned projects lacks files: far above the 5% safety threshold.
+    $tester = $this->runCommand(['--hide' => true]);
+
+    $this->assertSame(1, $tester->getStatusCode());
+    $this->assertStringContainsString('Refusing to hide', $tester->getDisplay());
+    $this->assertTrue($this->findProject($this->broken_id)->getVisible());
+  }
+
+  public function testExtractedDirWithoutCodeXmlCountsAsMissing(): void
+  {
+    $this->variant_generator->expects($this->never())->method('generate');
+    (new Filesystem())->remove($this->extract_dir.$this->extract_only_id.'/code.xml');
+
+    $tester = $this->runCommand([]);
+    $this->assertStringContainsString('missing_project_file: '.$this->extract_only_id, $tester->getDisplay());
+  }
+
   /**
-   * @param array<string, bool> $options
+   * @param array<string, bool|list<string>> $options
    */
   private function runCommand(array $options): CommandTester
   {
@@ -170,6 +192,9 @@ class CheckDataConsistencyCommandTest extends KernelTestCase
       $this->extract_dir,
       $this->thumbnail_dir,
     ));
+    // Scope the scan to our projects; the test DB is shared with other tests.
+    $options['--project'] = [$this->zip_only_id, $this->extract_only_id, $this->broken_id];
+
     $tester->execute($options, ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
     return $tester;

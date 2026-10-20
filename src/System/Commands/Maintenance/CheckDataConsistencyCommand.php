@@ -9,6 +9,7 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Storage\Images\ImageVariantGenerator;
 use App\Storage\Images\ImageVariantLayout;
 use App\Storage\ScreenshotRepository;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -33,6 +34,9 @@ class CheckDataConsistencyCommand extends Command
 {
   private const int BATCH_SIZE = 500;
 
+  /** --hide refuses to act when more than this share of the scanned projects would be hidden. */
+  private const float HIDE_MAX_RATIO = 0.05;
+
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
     private readonly ProjectFileRepository $project_file_repository,
@@ -52,6 +56,8 @@ class CheckDataConsistencyCommand extends Command
     $this
       ->addOption('hide', null, InputOption::VALUE_NONE, 'Set projects without a project file invisible and flag them as broken (never deletes).')
       ->addOption('regenerate-thumbnails', null, InputOption::VALUE_NONE, 'Regenerate missing thumbnails and image variants where the screenshot exists.')
+      ->addOption('force', null, InputOption::VALUE_NONE, sprintf('Let --hide act even when more than %d%% of the scanned projects would be hidden.', (int) (self::HIDE_MAX_RATIO * 100)))
+      ->addOption('project', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Only check these project ids (repeatable).')
     ;
   }
 
@@ -61,29 +67,33 @@ class CheckDataConsistencyCommand extends Command
     $io = new SymfonyStyle($input, $output);
     $hide = (bool) $input->getOption('hide');
     $regenerate = (bool) $input->getOption('regenerate-thumbnails');
+    /** @var list<string> $only_ids */
+    $only_ids = $input->getOption('project');
     $screenshot_dir = $this->screenshot_repository->getScreenshotDir();
 
     /** @var array<string, list<string>> $found */
     $found = ['missing_project_file' => [], 'missing_screenshot' => [], 'missing_thumbnail' => [], 'missing_variants' => []];
     $regenerated = 0;
     $failed = 0;
-    $hidden = 0;
+    $scanned = 0;
 
     $conn = $this->entity_manager->getConnection();
     $table = $this->entity_manager->getClassMetadata(Project::class)->getTableName();
     $last_id = '';
+    $id_filter = [] !== $only_ids ? ' AND id IN (:only)' : '';
     while ([] !== ($ids = $conn->fetchFirstColumn(
-      sprintf('SELECT id FROM %s WHERE id > ? ORDER BY id LIMIT %d', $table, self::BATCH_SIZE),
-      [$last_id],
+      sprintf('SELECT id FROM %s WHERE id > :last%s ORDER BY id LIMIT %d', $table, $id_filter, self::BATCH_SIZE),
+      [] !== $only_ids ? ['last' => $last_id, 'only' => $only_ids] : ['last' => $last_id],
+      ['only' => ArrayParameterType::STRING],
     ))) {
-      $missing_file_ids = [];
       foreach ($ids as $id) {
         $id = (string) $id;
         $last_id = $id;
+        ++$scanned;
 
-        // The zip and the extracted directory can each be rebuilt from the other.
-        if (!$this->project_file_repository->checkIfProjectZipFileExists($id) && !is_dir($this->extract_dir.$id)) {
-          $missing_file_ids[] = $id;
+        // The zip and the extracted code.xml can each be rebuilt from the other.
+        if (!$this->project_file_repository->checkIfProjectZipFileExists($id) && !is_file($this->extract_dir.$id.'/code.xml')) {
+          $found['missing_project_file'][] = $id;
         }
 
         $screenshot = $screenshot_dir.'screen_'.$id.'.png';
@@ -123,10 +133,23 @@ class CheckDataConsistencyCommand extends Command
           $io->warning(sprintf('Regenerating images for %s failed: %s', $id, $e->getMessage()));
         }
       }
+    }
 
-      $found['missing_project_file'] = [...$found['missing_project_file'], ...$missing_file_ids];
-      if ($hide && [] !== $missing_file_ids) {
-        $hidden += $this->hideProjects($missing_file_ids);
+    $hide_failed = false;
+    $missing_count = count($found['missing_project_file']);
+    if ($hide && $missing_count > 0) {
+      if ($missing_count > $scanned * self::HIDE_MAX_RATIO && !$input->getOption('force')) {
+        // Zips and extracted dirs are caches that cron cleans up; a mass hit
+        // usually means a storage problem, not a mass of broken projects.
+        $io->error(sprintf('Refusing to hide %d of %d projects (> %d%%). Check storage, then use --force or --project.', $missing_count, $scanned, (int) (self::HIDE_MAX_RATIO * 100)));
+        $hide_failed = true;
+      } else {
+        foreach (array_chunk($found['missing_project_file'], self::BATCH_SIZE) as $chunk) {
+          foreach ($this->hideProjects($chunk) as $hidden_id) {
+            // Always printed: this is the record of what --hide changed, for an undo.
+            $output->writeln('hidden: '.$hidden_id);
+          }
+        }
       }
     }
 
@@ -162,10 +185,6 @@ class CheckDataConsistencyCommand extends Command
       }
     }
 
-    if ($hide) {
-      $io->note(sprintf('Hid %d project(s) without project file.', $hidden));
-    }
-
     if ($regenerate) {
       $io->note(sprintf('Regenerated images for %d project(s), %d failed.', $regenerated, $failed));
     }
@@ -174,20 +193,22 @@ class CheckDataConsistencyCommand extends Command
       $io->note('Dry run. Use --hide and/or --regenerate-thumbnails to fix.');
     }
 
-    return $failed > 0 ? Command::FAILURE : Command::SUCCESS;
+    return $failed > 0 || $hide_failed ? Command::FAILURE : Command::SUCCESS;
   }
 
   /**
    * Goes through the ORM so search-index listeners see the change.
    *
    * @param list<string> $ids
+   *
+   * @return list<string> ids that were visible before and are hidden now
    */
-  private function hideProjects(array $ids): int
+  private function hideProjects(array $ids): array
   {
-    $count = 0;
+    $hidden = [];
     foreach ($this->entity_manager->getRepository(Project::class)->findBy(['id' => $ids]) as $project) {
       if ($project->getVisible()) {
-        ++$count;
+        $hidden[] = (string) $project->getId();
       }
 
       $project->setVisible(false);
@@ -197,6 +218,6 @@ class CheckDataConsistencyCommand extends Command
     $this->entity_manager->flush();
     $this->entity_manager->clear();
 
-    return $count;
+    return $hidden;
   }
 }
