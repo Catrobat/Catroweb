@@ -87,7 +87,7 @@ export class Translation {
    * Renders the "Translated by … from X to Y" line. X and Y are selectors; changing one shows a
    * refresh button that calls onRefresh(sourceLanguage, targetLanguage).
    */
-  setTranslationCredit(data, byLineElements, onRefresh = null) {
+  setTranslationCredit(data, byLineElements, onRefresh) {
     byLineElements.before.innerHTML = this.formatProvider(
       this.translatedByLineMap.before,
       this.providerMap[data.provider],
@@ -104,12 +104,6 @@ export class Translation {
     const [sourceElement, targetElement] = this.isSourceLanguageFirst()
       ? [byLineElements.firstLanguage, byLineElements.secondLanguage]
       : [byLineElements.secondLanguage, byLineElements.firstLanguage]
-
-    if (!onRefresh) {
-      sourceElement.textContent = this.displayLanguageMap[data.source_language]
-      targetElement.textContent = this.displayLanguageMap[data.target_language]
-      return
-    }
 
     const sourceSelect = this.createLanguageSelect(data.source_language, 'source')
     const targetSelect = this.createLanguageSelect(data.target_language, 'target')
