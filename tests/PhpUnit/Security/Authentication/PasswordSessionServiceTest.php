@@ -241,7 +241,7 @@ final class PasswordSessionServiceTest extends KernelTestCase
     $this->assertSame(0, $this->countTokens());
   }
 
-  public function testPasswordFlushAndRevocationRollBackTogetherOnFailure(): void
+  public function testPasswordPersistenceRollsBackWhenTheAccountUpdateFails(): void
   {
     $connection = $this->entity_manager->getConnection();
     try {
@@ -256,6 +256,33 @@ final class PasswordSessionServiceTest extends KernelTestCase
     }
     $this->assertSame(2, $this->countTokens());
     $this->assertSame('old-hash', $connection->fetchOne('SELECT password FROM fos_user WHERE id = ?', [$this->user->getId()]));
+  }
+
+  public function testPasswordRevocationAndReplacementRollBackIfAccessTokenIssuanceFails(): void
+  {
+    $refresh_manager = self::getContainer()->get(\Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface::class);
+    $this->assertInstanceOf(\Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface::class, $refresh_manager);
+    $generator = self::getContainer()->get(\Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface::class);
+    $this->assertInstanceOf(\Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface::class, $generator);
+    $jwt = $this->createMock(JWTTokenManagerInterface::class);
+    $jwt->expects($this->once())->method('createFromPayload')->willReturnCallback(function (): string {
+      $this->assertSame(1, $this->countTokens(), 'replacement was persisted after revocation inside the transaction');
+      $this->assertSame(0, $this->entity_manager->getRepository(RefreshToken::class)->count(['refreshToken' => $this->token('current')]));
+      $this->assertSame(0, $this->entity_manager->getRepository(RefreshToken::class)->count(['refreshToken' => $this->token('other')]));
+      throw new \RuntimeException('Simulated signing failure');
+    });
+    $service = new PasswordSessionService($this->entity_manager, $refresh_manager, $generator, $jwt, $this->coordinator, 3600);
+    try {
+      $service->changePassword($this->user, new Request(cookies: ['REFRESH_TOKEN' => $this->token('current')]), function (): void {
+        $this->user->setPassword('failed-hash');
+        $this->entity_manager->flush();
+      });
+      $this->fail('Expected simulated signing failure');
+    } catch (\RuntimeException $exception) {
+      $this->assertSame('Simulated signing failure', $exception->getMessage());
+    }
+    $this->assertSame(2, $this->countTokens());
+    $this->assertSame('old-hash', $this->entity_manager->getConnection()->fetchOne('SELECT password FROM fos_user WHERE id = ?', [$this->user->getId()]));
   }
 
   public function testRejectedStalePasswordChangeLeavesTheEntityManagerOpen(): void
@@ -348,6 +375,77 @@ final class PasswordSessionServiceTest extends KernelTestCase
     $this->assertInstanceOf(JWTTokenManagerInterface::class, $jwt);
     $refreshed = $this->coordinator->withVerifiedRefresh($this->user, $replacement, fn (): string => $jwt->create($this->user));
     $this->assertSame($this->user->getUserIdentifier(), $jwt->parse($refreshed)['username']);
+  }
+
+  #[DataProvider('ordinaryProfileAuthenticationModes')]
+  public function testOrdinaryHttpProfileSavePreservesEveryExistingRefreshSession(bool $cookie_mode): void
+  {
+    $this->user->setVerified(true);
+    $this->user->setEnabled(true);
+    $this->user->setPlainPassword('OldPassword123');
+    $manager = self::getContainer()->get(UserManager::class);
+    $this->assertInstanceOf(UserManager::class, $manager);
+    $manager->updateUser($this->user);
+    $other = new User();
+    $other->setUsername($this->user->getUserIdentifier().'-other');
+    $other->setEmail($other->getUsername().'@localhost.org');
+    $other->setPassword('other-password');
+    $other->setEnabled(true);
+    $other->setVerified(true);
+    $this->entity_manager->persist($other);
+    $foreign_proof = $this->token('foreign-profile-proof');
+    $this->entity_manager->persist(RefreshToken::createForUserWithTtl($foreign_proof, $other, 3600));
+    $this->entity_manager->flush();
+    $kernel = self::$kernel;
+    $this->assertNotNull($kernel);
+    $context = new \App\System\Testing\Behat\Context\ApiContext($kernel);
+    $client = $context->getKernelBrowser();
+    $client->disableReboot();
+    $jwt = self::getContainer()->get(JWTTokenManagerInterface::class);
+    $this->assertInstanceOf(JWTTokenManagerInterface::class, $jwt);
+    $bearer = $jwt->create($this->user);
+    $headers = ['HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json'];
+    if ($cookie_mode) {
+      $context->iSetAuthenticationCookie('BEARER', $bearer);
+      $context->iSetAuthenticationCookie('REFRESH_TOKEN', $this->token('current'));
+    } else {
+      $headers['HTTP_AUTHORIZATION'] = 'Bearer '.$bearer;
+    }
+    $client->request('PATCH', '/api/users/me', [], [], $headers, json_encode([
+      'username' => $this->user->getUserIdentifier(), 'about' => 'Updated biography',
+      'currently_working_on' => 'A new project',
+    ], JSON_THROW_ON_ERROR));
+    $this->assertSame(204, $client->getResponse()->getStatusCode());
+    $this->entity_manager->refresh($this->user);
+    $this->assertSame('Updated biography', $this->user->getAbout());
+    $this->assertSame('A new project', $this->user->getCurrentlyWorkingOn());
+    $this->assertSame(3, $this->countTokens(), 'the two existing sessions plus the legacy fresh-cookie session must remain');
+    $this->assertSame(1, $this->entity_manager->getRepository(RefreshToken::class)->count(['username' => $other->getUserIdentifier()]));
+    $context->authenticationCookiesShouldHoldARotatedSession($this->token('current'));
+    foreach ([
+      [$this->token('current'), $this->user->getUserIdentifier()],
+      [$this->token('other'), $this->user->getUserIdentifier()],
+      [$foreign_proof, $other->getUserIdentifier()],
+    ] as [$proof, $expected_username]) {
+      // Use the old proof itself without any replacement cookie that could mask revocation.
+      $client->getCookieJar()->clear();
+      $client->request('POST', '/api/authentication/refresh', [], [], [
+        'HTTP_ACCEPT' => 'application/json', 'CONTENT_TYPE' => 'application/json',
+      ], json_encode(['refresh_token' => $proof], JSON_THROW_ON_ERROR));
+      $this->assertSame(200, $client->getResponse()->getStatusCode());
+      $response = json_decode((string) $client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
+      $this->assertSame($expected_username, $jwt->parse($response['token'])['username']);
+      $this->assertNull($this->entity_manager->getRepository(RefreshToken::class)->findOneBy(['refreshToken' => $proof]), 'single-use refresh must consume the specific old proof');
+    }
+    $this->assertSame(3, $this->countTokens());
+    $this->assertSame(1, $this->entity_manager->getRepository(RefreshToken::class)->count(['username' => $other->getUserIdentifier()]));
+  }
+
+  /** @return iterable<string, array{bool}> */
+  public static function ordinaryProfileAuthenticationModes(): iterable
+  {
+    yield 'cookie-authenticated profile save' => [true];
+    yield 'bearer-only profile save' => [false];
   }
 
   #[DataProvider('unprovedPasswordSessions')]

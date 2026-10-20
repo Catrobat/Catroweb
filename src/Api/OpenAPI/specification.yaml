@@ -376,9 +376,11 @@ paths:
         cookie belongs to the authenticated account, that session receives new BEARER and REFRESH_TOKEN
         HttpOnly cookies. Without that proof (including bearer-only API requests), no session is preserved:
         authentication cookies are cleared and the caller must sign in again with the new password.
-        A username-only update revokes all refresh tokens under the original and resulting names
+        An actual username change revokes all refresh tokens under the original and resulting names
         and issues replacement BEARER and REFRESH_TOKEN cookies for this authenticated request,
         including bearer-only callers. Username-only updates do not require refresh-cookie proof.
+        Profile saves that submit an unchanged username also receive fresh authentication cookies,
+        but preserve all existing refresh sessions.
         No tokens are returned in the response body. A dry run does not change sessions.
         Password or username updates rejected because credentials changed concurrently return 401
         and clear stale authentication cookies.
@@ -391,7 +393,7 @@ paths:
               $ref: '#/components/schemas/UpdateUserRequest'
       responses:
         '204':
-          description: 'User successfully updated; password changes rotate cookies only with valid current refresh-cookie proof, otherwise require sign-in; username-only changes revoke old-name sessions and issue replacement cookies'
+          description: 'User successfully updated; password changes rotate cookies only with valid current refresh-cookie proof, otherwise require sign-in; actual username changes revoke old-name sessions; unchanged-username profile saves preserve existing sessions and issue fresh cookies'
           # Content hack necessary else OpenAPI-generator will ignore content for error responses (hopefully fixed sometime)
           content:
             application/json:

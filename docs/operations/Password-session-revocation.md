@@ -13,12 +13,15 @@ sign in again with the new password. The endpoint still returns 204. Dry runs
 and rejected password changes leave sessions intact. Combined username/password
 changes revoke tokens under the original and resulting usernames.
 
-A username-only update revokes every refresh token under the original and
+An actual username change revokes every refresh token under the original and
 resulting names before issuing one replacement session for this authenticated
 request, including a bearer-only caller. This keeps the existing successful
 cookie response while preventing old refresh records from following a username
 into a later registration. The new refresh cookie remains usable as proof for
-a later password change.
+a later password change. An ordinary profile save that submits the unchanged
+username still receives fresh authentication cookies as before, while preserving
+all existing refresh sessions, including the previous current-session token.
+Saving biography or currently-working-on fields must not sign out other devices.
 
 Password resets revoke every refresh token, consume the reset proof in the same
 transaction, and clear the reset caller's authentication cookies. A reset link

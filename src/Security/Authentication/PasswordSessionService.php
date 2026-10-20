@@ -34,30 +34,34 @@ class PasswordSessionService
    */
   public function changePassword(User $user, ?Request $request, callable $update): ?array
   {
-    return $this->rotateOnAccountChange($user, $request, $update, true);
+    return $this->updateAccountAndSessions($user, $request, $update, true);
   }
 
   /** @return array{bearer: string, refresh: string}|null */
   public function changeUsername(User $user, ?Request $request, callable $update): ?array
   {
-    return $this->rotateOnAccountChange($user, $request, $update, false);
+    return $this->updateAccountAndSessions($user, $request, $update, false);
   }
 
   /** @return array{bearer: string, refresh: string}|null */
-  private function rotateOnAccountChange(User $user, ?Request $request, callable $update, bool $require_cookie_proof): ?array
+  private function updateAccountAndSessions(User $user, ?Request $request, callable $update, bool $password_change): ?array
   {
-    return $this->coordinator->withVerifiedAccountUpdate($user, function () use ($user, $request, $update, $require_cookie_proof): ?array {
+    return $this->coordinator->withVerifiedAccountUpdate($user, function () use ($user, $request, $update, $password_change): ?array {
       $old_username = $user->getUserIdentifier();
       $cookie = $request?->cookies->get('REFRESH_TOKEN');
       $proof = \is_string($cookie) && '' !== $cookie ? $this->refresh_manager->get($cookie) : null;
       $preserve_current = $proof instanceof RefreshTokenInterface && $this->coordinator->isCurrentProof($user, $proof);
-      $this->revokeAll($old_username);
       $update();
-      // A combined username/password change must also remove tokens under the resulting name.
-      if ($old_username !== $user->getUserIdentifier()) {
-        $this->revokeAll($user->getUserIdentifier());
+      $username_changed = $old_username !== $user->getUserIdentifier();
+      // Profile forms include an unchanged username when saving ordinary biography fields.
+      // Only a password operation or actual rename revokes existing sessions.
+      if ($password_change || $username_changed) {
+        $this->revokeAll($old_username);
+        if ($username_changed) {
+          $this->revokeAll($user->getUserIdentifier());
+        }
       }
-      if ($require_cookie_proof && !$preserve_current) {
+      if ($password_change && !$preserve_current) {
         return null;
       }
       $replacement = $this->generator->createForUserWithTtl($user, $this->refresh_ttl);
