@@ -1,6 +1,6 @@
 import { Carousel } from 'bootstrap'
-import { createPictureElement } from '../Layout/ImageVariants'
 import AcceptLanguage from '../Api/AcceptLanguage'
+import { createPictureElement } from '../Layout/ImageVariants'
 
 export class FeaturedBanner {
   constructor(containerId) {
