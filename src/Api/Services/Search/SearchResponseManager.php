@@ -72,7 +72,7 @@ class SearchResponseManager extends AbstractResponseManager
   /**
    * @param Studio[] $studios
    */
-  public function getStudiosSearchResponse(array $studios, int $total): array
+  public function getStudiosSearchResponse(array $studios, int $total, ?User $viewer = null): array
   {
     $studios_data_response = [];
     $studios_data_response['studios'] = [];
@@ -85,7 +85,7 @@ class SearchResponseManager extends AbstractResponseManager
         'description' => $studio->getDescription(),
         'cover' => $this->studioManager->getCoverVariants($studio),
         'members_count' => $this->studioManager->countStudioUsers($studio),
-        'projects_count' => $this->studioManager->countStudioProjects($studio),
+        'projects_count' => $this->studioManager->countStudioProjects($studio, $viewer),
       ]);
     }
 

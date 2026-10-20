@@ -496,11 +496,11 @@ class StudioManager
    *
    * @return array{users: array<string, int>, projects: array<string, int>, activities: array<string, int>, comments: array<string, int>}
    */
-  public function countStudioStatsBatch(array $studioIds): array
+  public function countStudioStatsBatch(array $studioIds, ?User $viewer = null): array
   {
     return [
       'users' => $this->studio_user_repository->countStudioUsersBatch($studioIds),
-      'projects' => $this->studio_project_repository->countStudioProjectsBatch($studioIds),
+      'projects' => $this->studio_project_repository->countStudioProjectsBatch($studioIds, $viewer),
       'activities' => $this->studio_activity_repository->countStudioActivitiesBatch($studioIds),
       'comments' => $this->user_comment_repository->countStudioCommentsBatch($studioIds),
     ];
@@ -586,9 +586,12 @@ class StudioManager
     return $this->studio_project_repository->findStudioProject($studio, $project);
   }
 
-  public function countStudioProjects(?Studio $studio): int
+  /**
+   * Counts what the studio project list shows this viewer.
+   */
+  public function countStudioProjects(?Studio $studio, ?User $viewer = null): int
   {
-    return $this->studio_project_repository->countStudioProjects($studio);
+    return $this->studio_project_repository->countStudioProjects($studio, $viewer);
   }
 
   public function countStudioUserProjects(?Studio $studio, ?User $user): int

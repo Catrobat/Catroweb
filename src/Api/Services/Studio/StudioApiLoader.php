@@ -13,6 +13,7 @@ use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Studios\StudioProjectRepository;
 use App\Storage\ScreenshotRepository;
 use App\Studio\StudioManager;
 use App\User\UserManager;
@@ -156,20 +157,7 @@ class StudioApiLoader extends AbstractApiLoader
       ->setMaxResults($limit + 1)
     ;
 
-    $publicly_visible = 'p.visible = true AND p.auto_hidden = false AND p.private = false';
-    if ($viewer instanceof User) {
-      $qb->andWhere('('.$publicly_visible.') OR p.user = :viewer')
-        ->setParameter('viewer', $viewer)
-      ;
-    } else {
-      $qb->andWhere($publicly_visible);
-    }
-
-    if ($viewer instanceof User && $viewer->isMinor()) {
-      $qb->andWhere('p.not_for_kids = 0 OR p.user = :viewer')
-        ->setParameter('viewer', $viewer)
-      ;
-    }
+    StudioProjectRepository::applyViewerVisibility($qb, $viewer);
 
     if (null !== $cursor_id) {
       $qb->andWhere('sp.id < :cursor_id')

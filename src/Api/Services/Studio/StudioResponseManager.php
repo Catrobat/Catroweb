@@ -55,7 +55,7 @@ class StudioResponseManager extends AbstractResponseManager
   /**
    * @param array{users: array<string, int>, projects: array<string, int>, activities: array<string, int>, comments: array<string, int>}|null $preloaded_counts
    */
-  public function createStudioResponse(Studio $studio, ?array $preloaded_counts = null): StudioResponse
+  public function createStudioResponse(Studio $studio, ?array $preloaded_counts = null, ?User $viewer = null): StudioResponse
   {
     $id = $studio->getId() ?? '';
 
@@ -67,7 +67,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setEnableComments($studio->isAllowComments())
       ->setCover($this->studio_manager->getCoverVariants($studio))
       ->setMembersCount($preloaded_counts['users'][$id] ?? $this->studio_manager->countStudioUsers($studio))
-      ->setProjectsCount($preloaded_counts['projects'][$id] ?? $this->studio_manager->countStudioProjects($studio))
+      ->setProjectsCount($preloaded_counts['projects'][$id] ?? $this->studio_manager->countStudioProjects($studio, $viewer))
       ->setActivitiesCount($preloaded_counts['activities'][$id] ?? $this->studio_manager->countStudioActivities($studio))
       ->setCommentsCount($preloaded_counts['comments'][$id] ?? $this->studio_manager->countStudioComments($studio))
     ;
@@ -78,7 +78,7 @@ class StudioResponseManager extends AbstractResponseManager
    */
   public function createStudioResponseWithUserContext(Studio $studio, ?User $user, ?array $preloaded_counts = null): StudioResponse
   {
-    $response = $this->createStudioResponse($studio, $preloaded_counts);
+    $response = $this->createStudioResponse($studio, $preloaded_counts, $user);
 
     if ($user instanceof User) {
       $response->setIsMember($this->studio_manager->isUserInStudio($user, $studio));
@@ -105,7 +105,7 @@ class StudioResponseManager extends AbstractResponseManager
   public function createStudioListResponse(array $studios, bool $has_more, ?User $user = null, ?int $current_offset = null): StudioListResponse
   {
     $studioIds = array_filter(array_map(static fn (Studio $s) => $s->getId(), $studios));
-    $preloaded_counts = $this->studio_manager->countStudioStatsBatch($studioIds);
+    $preloaded_counts = $this->studio_manager->countStudioStatsBatch($studioIds, $user);
 
     $data = [];
     foreach ($studios as $studio) {
