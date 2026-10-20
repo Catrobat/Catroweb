@@ -86,6 +86,7 @@ final class UserApiTest extends TestCase
       $this->createStub(StudioApiLoader::class),
       $this->createStub(StudioResponseManager::class),
       $this->createStub(\App\Security\Authentication\AccountSessionCoordinator::class),
+      $this->createStub(\App\Security\Authentication\PasswordSessionService::class),
     );
   }
 
@@ -379,6 +380,7 @@ final class UserApiTest extends TestCase
       $this->createStub(StudioApiLoader::class),
       $this->createStub(StudioResponseManager::class),
       $this->createStub(\App\Security\Authentication\AccountSessionCoordinator::class),
+      $this->createStub(\App\Security\Authentication\PasswordSessionService::class),
     );
 
     $register_request = $this->createStub(RegisterRequest::class);

@@ -6,7 +6,9 @@ namespace App\Application\Controller\Security;
 
 use App\Application\Form\ChangePasswordFormType;
 use App\DB\Entity\User\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Security\Authentication\CookieService;
+use App\Security\Authentication\JwtRefresh\RefreshTokenService;
+use App\Security\Authentication\PasswordSessionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +27,8 @@ class ResetPasswordController extends AbstractController
 
   public function __construct(
     private readonly ResetPasswordHelperInterface $resetPasswordHelper,
-    private readonly EntityManagerInterface $entityManager,
+    private readonly PasswordSessionService $password_sessions,
+    private readonly CookieService $cookie_service,
     private readonly ParameterBagInterface $parameter_bag,
   ) {
   }
@@ -95,19 +98,32 @@ class ResetPasswordController extends AbstractController
     $form = $this->createForm(ChangePasswordFormType::class);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
-      // A password reset token should be used only once, remove it.
-      $this->resetPasswordHelper->removeResetRequest($token);
-
       // Encode(hash) the plain password, and set it.
       $hashedPassword = $user_password_hasher->hashPassword($user, $form->get('plainPassword')->getData());
 
-      $user->setPassword($hashedPassword);
-      $this->entityManager->flush();
+      try {
+        $this->password_sessions->resetPassword($user, $hashedPassword, function () use ($token): void {
+          // Recheck under the account lock so two submissions cannot reuse the same reset token.
+          $this->resetPasswordHelper->validateTokenAndFetchUser($token);
+          $this->resetPasswordHelper->removeResetRequest($token);
+        });
+      } catch (ResetPasswordExceptionInterface $exception) {
+        $this->addFlash('reset_password_error', $exception->getReason());
+
+        return $this->redirectToRoute('app_forgot_password_request');
+      }
 
       // The session is cleaned up after the password has been changed.
       $this->cleanSessionAfterReset();
 
-      return $this->redirectToRoute('index');
+      $request->attributes->remove(RefreshTokenService::REFRESHED_BEARER_COOKIE_ATTRIBUTE);
+      $request->attributes->set(RefreshTokenService::CLEAR_AUTHENTICATION_COOKIES_ATTRIBUTE, true);
+      $response = $this->redirectToRoute('index');
+      foreach ($this->cookie_service->createClearedAuthenticationCookies() as $cookie) {
+        $response->headers->setCookie($cookie);
+      }
+
+      return $response;
     }
 
     return $this->render('Security/ResetPassword/ResetPasswordPage.html.twig', [

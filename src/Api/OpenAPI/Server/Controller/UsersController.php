@@ -579,7 +579,7 @@ class UsersController extends Controller
       $result = $handler->usersMePatch($update_user_request, $accept_language, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
-        204 => 'User successfully updated',
+        204 => 'User successfully updated; password changes rotate cookies only with valid current refresh-cookie proof, otherwise require sign-in; username-only changes revoke old-name sessions and issue replacement cookies',
         401 => 'Invalid credentials',
         406 => 'Not acceptable - client must accept application/json as content type',
         422 => 'Unprocessable Entity',

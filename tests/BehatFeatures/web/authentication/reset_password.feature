@@ -20,6 +20,7 @@ Feature:
     And I should see "If an account matching your email exists"
 
   Scenario: Reset link should show the new password form and change the password
+    Given user "Catrobat" has refresh sessions "reset-session-one,reset-session-two"
     When I open the password reset link for "Catrobat"
     And I wait for the page to be loaded
     Then I should be on "/app/reset-password/reset"
@@ -29,5 +30,8 @@ Feature:
     And I press "Reset password"
     And I wait for the page to be loaded
     Then I should be on "/app/"
+    And user "Catrobat" should have "0" refresh sessions
+    And refresh session "reset-session-one" should be revoked
+    And refresh session "reset-session-two" should be revoked
     When I log in as "Catrobat" with the password "MyNewPassword123"
     Then I should be logged in

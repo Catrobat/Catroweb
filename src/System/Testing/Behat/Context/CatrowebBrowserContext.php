@@ -27,6 +27,27 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
  */
 class CatrowebBrowserContext extends BrowserContext
 {
+  private ?string $remembered_bearer = null;
+  private ?string $remembered_refresh = null;
+
+  /** @Given I remember my authentication cookies */
+  public function iRememberMyAuthenticationCookies(): void
+  {
+    $this->remembered_bearer = $this->getSession()->getCookie('BEARER');
+    $this->remembered_refresh = $this->getSession()->getCookie('REFRESH_TOKEN');
+    Assert::assertNotEmpty($this->remembered_bearer);
+    Assert::assertNotEmpty($this->remembered_refresh);
+  }
+
+  /** @Then my authentication cookies should both be rotated */
+  public function authenticationCookiesShouldBothBeRotated(): void
+  {
+    Assert::assertNotEmpty($this->getSession()->getCookie('BEARER'));
+    Assert::assertNotEmpty($this->getSession()->getCookie('REFRESH_TOKEN'));
+    Assert::assertNotSame($this->remembered_bearer, $this->getSession()->getCookie('BEARER'));
+    Assert::assertNotSame($this->remembered_refresh, $this->getSession()->getCookie('REFRESH_TOKEN'));
+  }
+
   final public const string AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';
 
   final public const string ALREADY_IN_DB_USER = 'AlreadyinDB';

@@ -159,6 +159,27 @@ class ApiContext implements Context
     return $this->kernel_browser;
   }
 
+  /** @Then the authentication cookies should hold a rotated session replacing :old_refresh */
+  public function authenticationCookiesShouldHoldARotatedSession(string $old_refresh): void
+  {
+    $jar = $this->getKernelBrowser()->getCookieJar();
+    $refresh = $jar->get('REFRESH_TOKEN');
+    $bearer = $jar->get('BEARER');
+    Assert::assertNotNull($refresh);
+    Assert::assertNotNull($bearer);
+    Assert::assertNotSame($old_refresh, $refresh->getValue());
+    Assert::assertNotEmpty($bearer->getValue());
+    Assert::assertNotNull($this->getManager()->getRepository(\App\DB\Entity\RefreshToken::class)->findOneBy(['refreshToken' => $refresh->getValue()]));
+    $this->getJwtManager()->parse($bearer->getValue());
+  }
+
+  /** @Then the API authentication cookies should be cleared */
+  public function apiAuthenticationCookiesShouldBeCleared(): void
+  {
+    Assert::assertNull($this->getKernelBrowser()->getCookieJar()->get('REFRESH_TOKEN'));
+    Assert::assertNull($this->getKernelBrowser()->getCookieJar()->get('BEARER'));
+  }
+
   private function getResponseContent(): string
   {
     $content = $this->getKernelBrowser()->getResponse()->getContent();

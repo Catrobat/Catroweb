@@ -571,3 +571,6 @@ Admin-only invite responses include a locally generated SVG data URI while the i
 ## Account authentication coordination
 
 Authentication success handlers run after Symfony installs the authenticated token. If a locked account reload rejects a stale form login, clear the pending main token and `_security_main` entry before propagating the rejection; otherwise the response can persist that same refreshed User. Capture the authenticated password hash, identifier and suspension state before reloading the managed entity. Expected stale-proof rejection should return from the Doctrine transaction callback and throw afterward so the EntityManager remains usable. Query refresh proofs through the mapped entity, because Behat can change table names.
+
+Password changes preserve a refresh session only through a valid stored cookie proof belonging to the authenticated account. Username-only updates keep their existing replacement-cookie response, including bearer-only callers, but revoke every token under the original and resulting usernames atomically. Capture the plain replacement refresh string before saving through a hashing manager. Password-reset proof validation failures must leave the transaction callback before throwing so the remaining response can still use Doctrine.
+
