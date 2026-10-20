@@ -55,7 +55,8 @@ class RefreshTokenService
 
   public function refreshRequestAuthentication(Request $request): void
   {
-    if ($request->headers->has('Authorization') || !$request->cookies->has('REFRESH_TOKEN')) {
+    // Apache's "SetEnvIf Authorization" passes an empty header on every request; that carries no credentials.
+    if ('' !== (string) $request->headers->get('Authorization') || !$request->cookies->has('REFRESH_TOKEN')) {
       return;
     }
 

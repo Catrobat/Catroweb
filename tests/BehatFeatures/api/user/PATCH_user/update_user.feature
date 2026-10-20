@@ -140,6 +140,40 @@ Feature: Update user
       | name     | password |
       | Catrobat | 123456   |
 
+  Scenario: Changing the password rejects access tokens issued before the change
+    Given I use a JWT Bearer token for "Catrobat" issued 60 seconds ago
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "current_password": "12345",
+        "password": "123456"
+      }
+    """
+    And I request "PATCH" "/api/users/me"
+    Then the response code should be "204"
+    When I request "GET" "/api/users/me"
+    Then the response code should be "401"
+    When I use a valid JWT Bearer token for "Catrobat"
+    And I request "GET" "/api/users/me"
+    Then the response code should be "200"
+
+  Scenario: Access tokens keep working when the profile changes without a new password
+    Given I use a JWT Bearer token for "NewUser" issued 60 seconds ago
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "about": "Still me"
+      }
+    """
+    And I request "PATCH" "/api/users/me"
+    Then the response code should be "204"
+    When I request "GET" "/api/users/me"
+    Then the response code should be "200"
+
   Scenario: Update user password without current password
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"

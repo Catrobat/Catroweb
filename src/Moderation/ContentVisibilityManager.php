@@ -34,6 +34,7 @@ class ContentVisibilityManager
       $entity->setAutoHidden(true);
     } else {
       $entity->setProfileHidden(true);
+      $entity->markCredentialsChanged();
       $this->hideAllUserContent($entity);
       $this->refresh_token_service->invalidateRefreshTokenOfUser($entity->getUserIdentifier());
     }

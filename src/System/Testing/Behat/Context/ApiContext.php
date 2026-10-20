@@ -536,6 +536,19 @@ class ApiContext implements Context
   }
 
   /**
+   * @Given I use a JWT Bearer token for :username issued :seconds seconds ago
+   *
+   * @throws JWTEncodeFailureException
+   */
+  public function iUseAJwtBearerTokenForIssuedSecondsAgo(string $username, int $seconds): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertInstanceOf(UserInterface::class, $user);
+    $token = $this->getJwtManager()->createFromPayload($user, ['iat' => time() - $seconds]);
+    $this->request_headers['HTTP_authorization'] = 'Bearer '.$token;
+  }
+
+  /**
    * @Given I use an empty JWT Bearer token
    */
   public function iUseAnEmptyJwtBearerToken(): void
