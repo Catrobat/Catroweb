@@ -66,6 +66,8 @@ All externally-exposed entity IDs become UUID strings:
 
 **Strategy**: Add UUID column, backfill, expose UUID externally, keep integer PK internally.
 
+**Known gap**: `Version20260411120000_uuid_migration` gave comments random UUIDs and remapped only the tables that have a foreign key to `user_comment`. Four columns store the comment as a plain `content_id` string, so they were not remapped: `content_report`, `content_appeal`, `content_moderation_action` and `CatroNotification.moderation_content_id`. Comment rows in them from before the migration still hold the old integer ids. The migration kept no old-id → UUID mapping, so they cannot be remapped. They are not closed either, because both resolved report states change the reporter's trust score. `catrobat:check:data-consistency` lists the orphaned reports. New comment reports always store the UUID. See #7415.
+
 ### 4. Unified Error Response
 
 Kill all endpoint-specific error DTOs. One shape everywhere:

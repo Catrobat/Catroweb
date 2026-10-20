@@ -238,6 +238,26 @@ final class ReportProcessorTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testCommentReportStoresCommentUuid(): void
+  {
+    $uuid = '00000000-0000-0000-0000-000000000010';
+
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->expects($this->once())->method('contentExists')->with(ContentType::Comment, $uuid)->willReturn(true);
+    $visibility->method('getContentOwnerId')->willReturn('other-user');
+
+    $trust = $this->createStub(TrustScoreCalculator::class);
+    $trust->method('calculate')->willReturn(2.0);
+
+    $processor = $this->buildProcessor(trust_calculator: $trust, visibility_manager: $visibility);
+
+    $report = $processor->processReport($this->createUserStub(), ContentType::Comment, $uuid, 'inappropriate')['report'];
+
+    $this->assertSame('comment', $report->getContentType());
+    $this->assertSame($uuid, $report->getContentId());
+  }
+
+  #[Group('unit')]
   public function testAutoHideTriggeredWhenThresholdReached(): void
   {
     $visibility = $this->createStub(ContentVisibilityManager::class);
