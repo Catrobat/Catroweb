@@ -10,6 +10,7 @@ use App\Project\ProtectedProjectFiles;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 #[AsController]
 final class ProjectFilesController
@@ -18,6 +19,7 @@ final class ProjectFilesController
     private readonly ProjectManager $project_manager,
     private readonly ExtractedFileRepository $extracted_files,
     private readonly ProtectedProjectFiles $files,
+    private readonly RateLimiterFactory $downloadBurstLimiter,
   ) {
   }
 
@@ -33,6 +35,14 @@ final class ProjectFilesController
     }
     // Extracted previews use the project-page policy, including its owner/admin exceptions.
     if (!is_dir($this->extracted_files->getBaseDir($id))) {
+      // Reuse the archive download budget before guest-triggerable extraction work.
+      $limit = $this->downloadBurstLimiter->create($request->getClientIp() ?? 'unknown')->consume();
+      if (!$limit->isAccepted()) {
+        return new Response('', Response::HTTP_TOO_MANY_REQUESTS, [
+          'Cache-Control' => 'private, no-store',
+          'Retry-After' => (string) max(1, $limit->getRetryAfter()->getTimestamp() - time()),
+        ]);
+      }
       $this->extracted_files->loadProjectExtractedFile($project);
     }
 

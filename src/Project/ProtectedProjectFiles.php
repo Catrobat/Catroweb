@@ -89,10 +89,14 @@ final class ProtectedProjectFiles
         $mime = 'image/bmp';
       }
     }
-    // XML and SVG are downloadable data, never active same-origin documents.
-    $attachment = $is_metadata || (!$is_sound && 'svg' === $extension);
+    // SVG previews retain an image MIME but are sandboxed even on direct navigation.
+    $is_svg = !$is_sound && 'svg' === $extension;
+    $attachment = $is_metadata;
     $uri = '/__protected-project-resources/extract/'.$id.'/'.implode('/', array_map(rawurlencode(...), $parts));
-    $response = new ProtectedProjectFileResponse($file, $uri, $attachment ? 'application/octet-stream' : $mime);
+    $response = new ProtectedProjectFileResponse($file, $uri, $attachment ? 'application/octet-stream' : ($is_svg ? 'image/svg+xml' : $mime));
+    if ($is_svg) {
+      $response->headers->set('Content-Security-Policy', "sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:");
+    }
     $response->setContentDisposition($attachment ? ResponseHeaderBag::DISPOSITION_ATTACHMENT : ResponseHeaderBag::DISPOSITION_INLINE, basename($file), '' === $extension ? 'asset' : 'asset.'.$extension);
 
     return $response;
@@ -109,9 +113,6 @@ final class ProtectedProjectFiles
     }
     $file = $root.'/'.$id.'.catrobat';
     if (is_link($file) || !is_file($file) || !is_readable($file) || realpath($file) !== $file || $original->getFile()->getRealPath() !== $file) {
-      return null;
-    }
-    if (!in_array((new \finfo(FILEINFO_MIME_TYPE))->file($file), ['application/zip', 'application/x-zip', 'application/x-zip-compressed'], true)) {
       return null;
     }
     $response = new ProtectedProjectFileResponse($file, '/__protected-project-resources/programs/'.$id.'.catrobat', 'application/zip');

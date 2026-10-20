@@ -98,14 +98,20 @@ final class ProtectedProjectFilesTest extends TestCase
     self::assertSame('', ob_get_clean());
   }
 
-  public function testXmlAndSvgAreAttachmentsWithAnInertContentType(): void
+  public function testXmlIsAnInertAttachmentAndSvgIsASandboxedPreview(): void
   {
-    foreach (['code.xml', 'images/active.svg'] as $path) {
-      $response = $this->files->asset('one', $path);
-      self::assertNotNull($response);
-      self::assertSame('application/octet-stream', $response->headers->get('Content-Type'));
-      self::assertStringStartsWith('attachment;', (string) $response->headers->get('Content-Disposition'));
-    }
+    $xml = $this->files->asset('one', 'code.xml');
+    self::assertNotNull($xml);
+    self::assertSame('application/octet-stream', $xml->headers->get('Content-Type'));
+    self::assertStringStartsWith('attachment;', (string) $xml->headers->get('Content-Disposition'));
+    $svg = $this->files->asset('one', 'images/active.svg');
+    self::assertNotNull($svg);
+    self::assertSame('image/svg+xml', $svg->headers->get('Content-Type'));
+    self::assertStringStartsWith('inline;', (string) $svg->headers->get('Content-Disposition'));
+    self::assertSame("sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:", $svg->headers->get('Content-Security-Policy'));
+    self::assertSame('nosniff', $svg->headers->get('X-Content-Type-Options'));
+    $svg->prepare(Request::create('/project-files/one/assets/images/active.svg', server: ['PROJECT_FILE_ACCEL' => '1']));
+    self::assertSame("sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:", $svg->headers->get('Content-Security-Policy'));
   }
 
   public function testInvalidPathsAndIdsCannotEscapeTheProjectDirectory(): void
@@ -210,6 +216,52 @@ final class ProtectedProjectFilesTest extends TestCase
     }
   }
 
+  public function testExtractionUsesTheSharedPerIpDownloadBudgetBeforeReadingAnArchive(): void
+  {
+    $manager = $this->createStub(\App\Project\ProjectManager::class);
+    $manager->method('findProjectIfVisibleToCurrentUser')->willReturn(new \App\DB\Entity\Project\Project());
+    $repository = $this->createMock(\App\Project\CatrobatFile\ExtractedFileRepository::class);
+    $repository->method('getBaseDir')->willReturn($this->root.'/missing-extract');
+    $repository->expects(self::once())->method('loadProjectExtractedFile');
+    $limiter = $this->extractionLimiter();
+    // An archive request already consumed this caller's budget.
+    $limiter->create('192.0.2.1')->consume();
+    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files, $limiter);
+    $limited = $controller->asset(Request::create('/project-files/one/assets/images/look.png', server: ['REMOTE_ADDR' => '192.0.2.1']), 'one', 'images/look.png');
+    self::assertSame(429, $limited->getStatusCode());
+    self::assertTrue($limited->headers->hasCacheControlDirective('no-store'));
+    self::assertGreaterThan(0, (int) $limited->headers->get('Retry-After'));
+    // Another caller has a separate budget and can trigger extraction.
+    $allowed = $controller->asset(Request::create('/project-files/one/assets/images/look.png', server: ['REMOTE_ADDR' => '192.0.2.2']), 'one', 'images/look.png');
+    self::assertSame(200, $allowed->getStatusCode());
+    self::assertFalse($limiter->create('192.0.2.2')->consume()->isAccepted());
+  }
+
+  public function testAlreadyExtractedAssetsDoNotConsumeTheExtractionBudget(): void
+  {
+    $manager = $this->createStub(\App\Project\ProjectManager::class);
+    $manager->method('findProjectIfVisibleToCurrentUser')->willReturn(new \App\DB\Entity\Project\Project());
+    $repository = $this->createStub(\App\Project\CatrobatFile\ExtractedFileRepository::class);
+    $repository->method('getBaseDir')->willReturn($this->root.'/extract/one');
+    $limiter = $this->createMock(\Symfony\Component\RateLimiter\RateLimiterFactoryInterface::class);
+    $limiter->expects(self::never())->method('create');
+    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files, $limiter);
+    self::assertSame(200, $controller->asset(Request::create('/project-files/one/assets/images/look.png'), 'one', 'images/look.png')->getStatusCode());
+  }
+
+  public function testArchivesKeepExistingByteDeliveryWhenMimeDetectionIsGeneric(): void
+  {
+    file_put_contents($this->root.'/programs/one.catrobat', 'opaque archive fixture');
+    $response = $this->files->archive('one', new BinaryFileResponse($this->root.'/programs/one.catrobat'));
+    self::assertNotNull($response);
+    self::assertSame('application/zip', $response->headers->get('Content-Type'));
+    self::assertStringStartsWith('attachment;', (string) $response->headers->get('Content-Disposition'));
+    $response->prepare(Request::create('/project-files/one/archive'));
+    ob_start();
+    $response->sendContent();
+    self::assertSame('opaque archive fixture', ob_get_clean());
+  }
+
   public function testArchiveIsBoundToTheRequestedIdAndKeepsItsDisposition(): void
   {
     $original = new BinaryFileResponse($this->root.'/programs/one.catrobat');
@@ -241,7 +293,7 @@ final class ProtectedProjectFilesTest extends TestCase
     $manager->expects(self::once())->method('findProjectIfVisibleToCurrentUser')->with('one')->willReturn(null);
     $repository = $this->createMock(\App\Project\CatrobatFile\ExtractedFileRepository::class);
     $repository->expects(self::never())->method('loadProjectExtractedFile');
-    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files);
+    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files, $this->extractionLimiter());
     $response = $controller->asset(Request::create('/project-files/one/assets/images/look.png'), 'one', 'images/look.png');
     self::assertSame(404, $response->getStatusCode());
     self::assertTrue($response->headers->hasCacheControlDirective('no-store'));
@@ -252,7 +304,7 @@ final class ProtectedProjectFilesTest extends TestCase
     $manager = $this->createMock(\App\Project\ProjectManager::class);
     $manager->expects(self::never())->method('findProjectIfVisibleToCurrentUser');
     $repository = $this->createStub(\App\Project\CatrobatFile\ExtractedFileRepository::class);
-    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files);
+    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files, $this->extractionLimiter());
     self::assertSame(404, $controller->asset(Request::create('/project-files/one/assets/images%2Flook.png'), 'one', 'images/look.png')->getStatusCode());
   }
 
@@ -263,7 +315,7 @@ final class ProtectedProjectFilesTest extends TestCase
     $repository = $this->createMock(\App\Project\CatrobatFile\ExtractedFileRepository::class);
     $repository->expects(self::once())->method('getBaseDir')->with('one')->willReturn($this->root.'/extract/one');
     $repository->expects(self::never())->method('loadProjectExtractedFile');
-    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files);
+    $controller = new \App\Project\Controller\ProjectFilesController($manager, $repository, $this->files, $this->extractionLimiter());
     $response = $controller->asset(Request::create('/project-files/one/assets/images/look.png'), 'one', 'images/look.png');
     self::assertSame(200, $response->getStatusCode());
     self::assertSame('image/png', $response->headers->get('Content-Type'));
@@ -292,5 +344,12 @@ final class ProtectedProjectFilesTest extends TestCase
     $extracted = $repository->loadProjectExtractedFile($project);
     self::assertNotNull($extracted);
     self::assertSame('index_test.php/project-files/one/assets/', $extracted->getWebPath());
+  }
+
+  private function extractionLimiter(): \Symfony\Component\RateLimiter\RateLimiterFactory
+  {
+    return new \Symfony\Component\RateLimiter\RateLimiterFactory([
+      'id' => 'download_burst', 'policy' => 'fixed_window', 'limit' => 1, 'interval' => '1 minute',
+    ], new \Symfony\Component\RateLimiter\Storage\InMemoryStorage());
   }
 }

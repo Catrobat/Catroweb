@@ -16,7 +16,6 @@ use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +29,6 @@ class ProjectController extends AbstractController
     private readonly ProjectManager $project_manager,
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly TranslatorInterface $translator,
-    private readonly ParameterBagInterface $parameter_bag,
     private readonly EventDispatcherInterface $event_dispatcher,
     private readonly UserCommentRepository $comment_repository,
     private readonly ContentVisibilityManager $content_visibility_manager,
@@ -105,7 +103,6 @@ class ProjectController extends AbstractController
       'auto_hidden' => $project->getAutoHidden(),
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
-      'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
     ]);
   }
 

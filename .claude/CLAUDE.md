@@ -583,3 +583,5 @@ Generated extracted previews use `/project-files/{id}/assets/{path}` and the exi
 Before deploying these routes behind nginx, deploy the routing-only `^~ /project-files/` compatibility prefix: existing immutable image routing otherwise intercepts preview URLs before PHP. Application deployment precedes only the final denial/offload stage, not that routing prerequisite.
 
 Catroid preserves media filenames: MPEG-4/AAC recordings can be extensionless or named `.wav`, imported raster looks can lack extensions, and WebP imports are converted to PNG without renaming. Protected sound delivery uses only bounded detected audio/container MIME types with canonical audio responses; raster checks permit only those proven filename exceptions. Never infer active response types from imported filenames.
+
+Missing project-preview extraction shares the existing per-IP download burst budget; do not rate-limit every already extracted media request. SVG previews retain image MIME under CSP sandbox with external sources/scripts blocked; archive transport must not impose new MIME admission restrictions after the existing authorized archive lookup.
