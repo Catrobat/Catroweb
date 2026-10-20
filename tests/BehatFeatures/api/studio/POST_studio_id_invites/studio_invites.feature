@@ -53,7 +53,7 @@ Feature: Studio admins manage invite codes
     Then the response status code should be "201"
     And the client response should contain "uses"
     And the client response should not contain "max_uses"
-    And the client response should contain "/studio/join/"
+    And the client response should contain "studio\/join\/"
 
   Scenario: An admin creates an invite with expiry and max uses
     Given I use a valid JWT Bearer token for "Admin"
