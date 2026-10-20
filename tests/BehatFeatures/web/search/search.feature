@@ -179,4 +179,5 @@ Feature: Searching for projects & users
     Given I am on "/app/search/gmail"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the element "#search-scratch-projects" should not be visible
+    Then I should see "No projects found"
+    And the element "#search-scratch-projects" should not be visible
