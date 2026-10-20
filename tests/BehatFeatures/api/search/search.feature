@@ -108,3 +108,17 @@ Feature: Search projects and users
     Then the search response should contain the following studios:
       | Name        |
       | Game Makers |
+
+  Scenario: A cursor beyond Elasticsearch's result window returns an empty page instead of an error
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/search?query=Fritz&cursor=MTAwMDA%3D"
+    Then the response code should be "200"
+    Then the search response should contain 0 projects
+    Then the search response should contain 0 users
+
+  Scenario: A cursor whose page would cross the result window still answers
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/search?query=Fritz&limit=20&cursor=OTk5NQ%3D%3D"
+    Then the response code should be "200"
+    Then the search response should contain 0 projects
+    Then the search response should contain 0 users

@@ -9,6 +9,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
 use App\DB\Entity\User\Comment\UserComment;
+use App\Utils\ElasticsearchPagination;
 use App\Utils\RequestHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -82,7 +83,7 @@ class ProjectRepository extends ServiceEntityRepository
       $this->excludeUnavailableAndPrivateProjectsElastica($bool_query, $flavor, $max_version);
       $query = $this->buildElasticaQuery($bool_query, $order_by, $order);
 
-      return $this->program_finder->find($query, $limit, ['from' => $offset]);
+      return ElasticsearchPagination::find($this->program_finder, $query, $limit, $offset);
     }
 
     $query_builder = $this->createQueryAllBuilder();
@@ -117,7 +118,7 @@ class ProjectRepository extends ServiceEntityRepository
       $bool_query->addMust($should_query);
       $query = $this->buildElasticaQuery($bool_query, $order_by, $order);
 
-      return $this->program_finder->find($query, $limit, ['from' => $offset]);
+      return ElasticsearchPagination::find($this->program_finder, $query, $limit, $offset);
     }
 
     $query_builder = $this->createQueryAllBuilder();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Studio;
 
+use App\Utils\ElasticsearchPagination;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Query\Terms;
@@ -23,7 +24,7 @@ class StudioSearchService
   {
     $studio_query = $this->studioSearchQuery($query);
 
-    return $this->studio_finder->find($studio_query, $limit, ['from' => $offset]);
+    return ElasticsearchPagination::find($this->studio_finder, $studio_query, $limit, $offset);
   }
 
   public function searchCount(string $query): int
