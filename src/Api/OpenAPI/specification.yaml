@@ -1145,7 +1145,7 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get remix graph of a project'
-      description: 'Returns remix graph metadata with nodes and directed edges. Each node includes a thumbnailUrl resolved by source and availability.'
+      description: 'Returns remix graph metadata with nodes and directed edges. Nodes hidden from the current minor viewer are unavailable, with null name and username and an unavailable thumbnail; their IDs, edges and graph counts remain intact. Adult viewers and minor owners retain project metadata.'
       parameters:
         - $ref: '#/components/parameters/Uuid'
       responses:
@@ -6321,17 +6321,17 @@ components:
           description: 'Source platform of the node'
         available:
           type: boolean
-          description: 'Whether project metadata is available on the server'
+          description: 'Whether project metadata is available to the current viewer'
           example: true
         name:
           type: string
           nullable: true
-          description: 'Project title, if available'
+          description: 'Project title, or null when unavailable to the current viewer'
           example: 'My Remix'
         username:
           type: string
           nullable: true
-          description: 'Username of the project owner, if available'
+          description: 'Username of the project owner, or null when unavailable to the current viewer'
           example: 'Catrobat'
         thumbnailUrl:
           type: string

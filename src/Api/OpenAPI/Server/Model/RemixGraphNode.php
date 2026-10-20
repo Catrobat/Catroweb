@@ -83,7 +83,7 @@ class RemixGraphNode
   protected ?string $source = null;
 
   /**
-   * Whether project metadata is available on the server.
+   * Whether project metadata is available to the current viewer.
    *
    * @SerializedName("available")
    *
@@ -96,7 +96,7 @@ class RemixGraphNode
   protected ?bool $available = null;
 
   /**
-   * Project title, if available.
+   * Project title, or null when unavailable to the current viewer.
    *
    * @SerializedName("name")
    *
@@ -109,7 +109,7 @@ class RemixGraphNode
   protected ?string $name = null;
 
   /**
-   * Username of the project owner, if available.
+   * Username of the project owner, or null when unavailable to the current viewer.
    *
    * @SerializedName("username")
    *
@@ -229,7 +229,7 @@ class RemixGraphNode
   /**
    * Sets available.
    *
-   * @param bool|null $available Whether project metadata is available on the server
+   * @param bool|null $available Whether project metadata is available to the current viewer
    *
    * @return $this
    */
@@ -251,7 +251,7 @@ class RemixGraphNode
   /**
    * Sets name.
    *
-   * @param string|null $name Project title, if available
+   * @param string|null $name Project title, or null when unavailable to the current viewer
    *
    * @return $this
    */
@@ -273,7 +273,7 @@ class RemixGraphNode
   /**
    * Sets username.
    *
-   * @param string|null $username Username of the project owner, if available
+   * @param string|null $username Username of the project owner, or null when unavailable to the current viewer
    *
    * @return $this
    */

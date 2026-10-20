@@ -862,7 +862,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $nodes = array_map(function (array $node): array {
+    $viewer = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    $nodes = array_map(function (array $node) use ($viewer): array {
+      if ($viewer?->isMinor() && ($node['notForKids'] ?? false) && $node['username'] !== $viewer->getUserIdentifier()) {
+        $node['available'] = false;
+        $node['name'] = null;
+        $node['username'] = null;
+      }
+
       // vis-network draws node images on a canvas, so not-for-kids thumbnails can't be CSS-blurred
       if (!$node['available'] || ($node['notForKids'] ?? false)) {
         $node['thumbnailUrl'] = self::IMAGE_NOT_AVAILABLE_URL;
