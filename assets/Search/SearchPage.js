@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     noStudios: container.dataset.transNoStudios || 'No studios found',
     showMore: container.dataset.transShowMore || 'Show more',
     members: container.dataset.transMembers || 'members',
+    scratchProjects: container.dataset.transScratchProjects || 'Scratch projects',
   }
 
   const searchInput = document.querySelector('#top-app-bar__search-input')
@@ -63,9 +64,19 @@ function renderPage(container, query, theme, baseUrl, trans) {
   const usersSection = createSection('search-users', 'users', trans.users, trans.showMore)
   const studiosSection = createSection('search-studios', 'studios', trans.studios, trans.showMore)
 
+  // Only shown when there are matches: most searches have none, and an empty section is noise.
+  const scratchSection = createSection(
+    'search-scratch-projects',
+    'scratch',
+    trans.scratchProjects,
+    trans.showMore,
+  )
+  scratchSection.classList.add('d-none')
+
   container.appendChild(projectsSection)
   container.appendChild(usersSection)
   container.appendChild(studiosSection)
+  container.appendChild(scratchSection)
 
   if (!query) {
     showEmpty(projectsSection, trans.noProjects)
@@ -90,10 +101,12 @@ function renderPage(container, query, theme, baseUrl, trans) {
       renderProjects(projectsSection, data.projects || [], theme, trans)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
+      renderScratchProjects(scratchSection, data.scratch_projects || [], baseUrl)
 
       wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
       wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
       wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
+      wireShowMore(scratchSection, 'scratch', query, baseUrl, theme, trans)
     })
     .catch((error) => {
       console.error('Search API error:', error)
@@ -134,7 +147,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
         return response.json()
       })
       .then((data) => {
-        const items = data[type] || []
+        const items = data[type === 'scratch' ? 'scratch_projects' : type] || []
         const container = section.querySelector('.search-section__items')
 
         if (type === 'projects') {
@@ -183,6 +196,8 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
               ),
             )
           })
+        } else if (type === 'scratch') {
+          for (const project of items) container.appendChild(createScratchCard(project, baseUrl))
         }
 
         nextOffset += RESULTS_PER_PAGE
@@ -311,6 +326,36 @@ function renderStudios(section, studios, baseUrl, trans) {
     )
     items.appendChild(card)
   })
+}
+
+function renderScratchProjects(section, projects, baseUrl) {
+  if (projects.length === 0) return
+
+  section.classList.remove('d-none')
+  if (projects.length >= RESULTS_PER_PAGE) {
+    section.querySelector('.search-section__title__show-more').classList.remove('d-none')
+  }
+
+  const items = section.querySelector('.search-section__items')
+  for (const project of projects) items.appendChild(createScratchCard(project, baseUrl))
+}
+
+function createScratchCard(project, baseUrl) {
+  const card = createCard(
+    `${baseUrl}/app/scratch/project/${encodeURIComponent(String(project.id))}`,
+    null,
+    'card',
+    '/images/default/screenshot-card@1x.webp',
+    project.name || '',
+    'person',
+    project.username || '',
+  )
+  const badge = document.createElement('span')
+  badge.className = 'search-card__badge'
+  badge.textContent = 'Scratch'
+  card.insertBefore(badge, card.querySelector('.search-card__name'))
+
+  return card
 }
 
 function createCard(url, variants, size, fallback, name, metaIcon, metaText, blur = false) {

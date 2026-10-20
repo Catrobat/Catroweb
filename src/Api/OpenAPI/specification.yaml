@@ -3573,6 +3573,7 @@ components:
           - 'projects'
           - 'users'
           - 'studios'
+          - 'scratch'
 
   ##############################################
   # Response Headers
@@ -5329,6 +5330,24 @@ components:
         studios_total:
           type: integer
           example: 5
+        scratch_projects:
+          type: array
+          description: 'Scratch projects known to this site (remix parents of uploaded projects), searched by name and Scratch username. Open them at /app/scratch/project/{id}.'
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: 'Scratch project id'
+                example: '70058680'
+              name:
+                type: string
+              username:
+                type: string
+                description: 'Scratch username of the author'
+        scratch_projects_total:
+          type: integer
+          example: 3
 
     ######################################################
     # Reaction Schemas

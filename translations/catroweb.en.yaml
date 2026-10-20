@@ -576,6 +576,7 @@ search:
   noUsers: No users found
   noProjects: No projects found
   noStudios: No studios found
+  scratchProjects: Scratch projects
   sameSearchMessage: "Looks like you're already here! Try a different search?"
 
 menu:

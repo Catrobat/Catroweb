@@ -117,6 +117,31 @@ class SearchResponse
   protected ?int $studios_total = null;
 
   /**
+   * Scratch projects known to this site (remix parents of uploaded projects), searched by name and Scratch username. Open them at /app/scratch/project/{id}.
+   *
+   * @var SearchResponseScratchProjectsInner[]|null
+   *
+   * @SerializedName("scratch_projects")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\SearchResponseScratchProjectsInner")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\SearchResponseScratchProjectsInner>")
+   */
+  protected ?array $scratch_projects = null;
+
+  /**
+   * @SerializedName("scratch_projects_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $scratch_projects_total = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -130,6 +155,8 @@ class SearchResponse
       $this->users_total = array_key_exists('users_total', $data) ? $data['users_total'] : $this->users_total;
       $this->studios = array_key_exists('studios', $data) ? $data['studios'] : $this->studios;
       $this->studios_total = array_key_exists('studios_total', $data) ? $data['studios_total'] : $this->studios_total;
+      $this->scratch_projects = array_key_exists('scratch_projects', $data) ? $data['scratch_projects'] : $this->scratch_projects;
+      $this->scratch_projects_total = array_key_exists('scratch_projects_total', $data) ? $data['scratch_projects_total'] : $this->scratch_projects_total;
     }
   }
 
@@ -261,6 +288,50 @@ class SearchResponse
   public function setStudiosTotal(?int $studios_total = null): self
   {
     $this->studios_total = $studios_total;
+
+    return $this;
+  }
+
+  /**
+   * Gets scratch_projects.
+   *
+   * @return SearchResponseScratchProjectsInner[]|null
+   */
+  public function getScratchProjects(): ?array
+  {
+    return $this->scratch_projects;
+  }
+
+  /**
+   * Sets scratch_projects.
+   *
+   * @param SearchResponseScratchProjectsInner[]|null $scratch_projects Scratch projects known to this site (remix parents of uploaded projects), searched by name and Scratch username. Open them at /app/scratch/project/{id}.
+   *
+   * @return $this
+   */
+  public function setScratchProjects(?array $scratch_projects = null): self
+  {
+    $this->scratch_projects = $scratch_projects;
+
+    return $this;
+  }
+
+  /**
+   * Gets scratch_projects_total.
+   */
+  public function getScratchProjectsTotal(): ?int
+  {
+    return $this->scratch_projects_total;
+  }
+
+  /**
+   * Sets scratch_projects_total.
+   *
+   * @return $this
+   */
+  public function setScratchProjectsTotal(?int $scratch_projects_total = null): self
+  {
+    $this->scratch_projects_total = $scratch_projects_total;
 
     return $this;
   }
