@@ -101,10 +101,11 @@ class AuthenticationManager
 
   public function createRefreshTokenByUser(User $user): string
   {
-    return $this->refresh_token_generator
-      ->createForUserWithTtl($user, $this->refresh_token_ttl)
-      ->getRefreshToken() ?? ''
-    ;
+    $token = $this->refresh_token_generator->createForUserWithTtl($user, $this->refresh_token_ttl);
+    $value = $token->getRefreshToken() ?? '';
+    $this->refresh_manager->save($token);
+
+    return $value;
   }
 
   protected function extractTokenFromRequest(): ?string

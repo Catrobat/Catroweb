@@ -176,12 +176,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       service(App\Security\Authentication\AuthenticationModeResolver::class),
       service(App\Security\Authentication\MainFirewallSessionLogin::class),
       service(App\Security\Authentication\AuthenticationSuccessResponseProcessor::class),
+      service(App\Security\Authentication\AccountSessionCoordinator::class),
     ])
   ;
   $services->set(ApiRefreshTokenSuccessHandler::class)
     ->args([
       service('gesdinet_jwt_refresh_token.security.authentication.success_handler'),
       service(App\Security\Authentication\AuthenticationSuccessResponseProcessor::class),
+      service(App\Security\Authentication\AccountSessionCoordinator::class),
     ])
   ;
 

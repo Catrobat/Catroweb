@@ -43,6 +43,8 @@ final class RefreshTokenServiceTest extends TestCase
     $this->jwt_manager = $this->createMock(JWTTokenManagerInterface::class);
     $this->cookie_service = $this->createStub(CookieService::class);
 
+    $account_sessions = $this->createStub(\App\Security\Authentication\AccountSessionCoordinator::class);
+    $account_sessions->method('withVerifiedRefresh')->willReturnCallback(static fn ($user, $proof, callable $issue) => $issue());
     $this->service = new RefreshTokenService(
       2592000,
       $this->refresh_manager,
@@ -50,6 +52,7 @@ final class RefreshTokenServiceTest extends TestCase
       $this->user_manager,
       $this->jwt_manager,
       $this->cookie_service,
+      $account_sessions,
     );
   }
 

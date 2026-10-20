@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Security\Authentication;
 
+use App\DB\Entity\User\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 
 final readonly class ApiAuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterface
@@ -16,21 +18,29 @@ final readonly class ApiAuthenticationSuccessHandler implements AuthenticationSu
     private AuthenticationModeResolver $mode_resolver,
     private MainFirewallSessionLogin $main_firewall_session_login,
     private AuthenticationSuccessResponseProcessor $response_processor,
+    private AccountSessionCoordinator $account_sessions,
   ) {
   }
 
   #[\Override]
   public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
   {
-    $response = $this->inner_handler->onAuthenticationSuccess($request, $token);
-    if (!$response instanceof Response) {
-      return new Response();
+    $user = $token->getUser();
+    if (!$user instanceof User) {
+      throw new BadCredentialsException('No authenticated account.');
     }
 
-    if ($this->mode_resolver->isCookieMode($request)) {
-      $this->main_firewall_session_login->login($request, $token);
-    }
+    return $this->account_sessions->withVerifiedLogin($user, function () use ($request, $token): Response {
+      $response = $this->inner_handler->onAuthenticationSuccess($request, $token);
+      if (!$response instanceof Response) {
+        return new Response();
+      }
 
-    return $this->response_processor->process($request, $response);
+      if ($this->mode_resolver->isCookieMode($request)) {
+        $this->main_firewall_session_login->login($request, $token);
+      }
+
+      return $this->response_processor->process($request, $response);
+    });
   }
 }
