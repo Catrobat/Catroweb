@@ -62,3 +62,10 @@ Everything else should happen magically.
 #### 4) In case of errors
 
 You might need to check the server configs (Take a look into "How to set up a server")
+
+### Production maintenance commands
+
+Run production write commands from the application directory as
+`sudo -n -u www-data /usr/bin/php bin/console ...`, without `nice`, so generated
+files have the correct owner and the invocation matches the sudo rule. See
+[Data consistency checks](Data-consistency.md) for the dry run and repair options.

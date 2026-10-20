@@ -54,6 +54,16 @@ class CheckDataConsistencyCommand extends Command
   protected function configure(): void
   {
     $this
+      ->setHelp(<<<'HELP'
+Reports missing project files, screenshots, thumbnails, variants and dangling reports.
+The default run is read-only. --hide and --regenerate-thumbnails write data or files.
+
+On production, run write commands from the application directory as www-data:
+  sudo -n -u www-data /usr/bin/php bin/console catrobat:check:data-consistency --regenerate-thumbnails
+  sudo -n -u www-data /usr/bin/php bin/console catrobat:check:data-consistency --hide
+Do not add nice: it does not match the production sudo rule. Running as deploy
+can fail because generated files must be owned by www-data.
+HELP)
       ->addOption('hide', null, InputOption::VALUE_NONE, 'Set projects without a project file invisible and flag them as broken (never deletes).')
       ->addOption('regenerate-thumbnails', null, InputOption::VALUE_NONE, 'Regenerate missing thumbnails and image variants where the screenshot exists.')
       ->addOption('force', null, InputOption::VALUE_NONE, sprintf('Let --hide act even when more than %d%% of the scanned projects would be hidden.', (int) (self::HIDE_MAX_RATIO * 100)))
