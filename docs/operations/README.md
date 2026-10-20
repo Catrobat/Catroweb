@@ -3,6 +3,7 @@
 Public operations docs for Catroweb maintainers.
 
 - [Cron-Jobs.md](./Cron-Jobs.md) — How the `catrobat:cronjob` dispatcher schedules and tracks all periodic tasks.
+- [Data-consistency.md](./Data-consistency.md) — Read-only data consistency checks and explicitly approved repairs using the application owner.
 - [Domain-Change.md](./Domain-Change.md) — Procedure for changing the production domain behind Cloudflare + nginx origin.
 - [How-To-Deploy.md](./How-To-Deploy.md) — Deploying the Catroweb app to dev/prod servers via Deployer-PHP.
 - [Malware-Scanning.md](./Malware-Scanning.md) — ClamAV-based scanning of uploaded `.catrobat` files before extraction.
