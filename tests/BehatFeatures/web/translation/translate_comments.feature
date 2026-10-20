@@ -57,6 +57,7 @@ Feature: Project comments should be translatable via a button
     Then the "#comment-translation-before-languages-00000000-0000-0000-0000-000000000001" element should contain "Translated by"
     Then the "#comment-translation-before-languages-00000000-0000-0000-0000-000000000001" element should contain "iTranslate"
     And the "#comment-translation-first-language-00000000-0000-0000-0000-000000000001" element should contain "English"
+    And the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "en"
     And the "#comment-translation-between-languages-00000000-0000-0000-0000-000000000001" element should contain "to"
     And the "#comment-translation-second-language-00000000-0000-0000-0000-000000000001" element should contain "English"
     And the "#comment-translation-after-languages-00000000-0000-0000-0000-000000000001" element should contain ""
@@ -82,3 +83,17 @@ Feature: Project comments should be translatable via a button
     And I wait for the page to be loaded
     Then the element "#comment-translation-button-00000000-0000-0000-0000-000000000001" should be visible
     And the element "#comment-translation-button-00000000-0000-0000-0000-000000000002" should be visible
+
+  Scenario: The source language of a comment translation can be corrected
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    When I click "#comment-translation-button-00000000-0000-0000-0000-000000000001"
+    And I wait for AJAX to finish
+    Then the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "en"
+    When I select "de" from "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select"
+    Then the element "#comment-translation-wrapper-00000000-0000-0000-0000-000000000001 .translation-refresh-button" should be visible
+    When I click "#comment-translation-wrapper-00000000-0000-0000-0000-000000000001 .translation-refresh-button"
+    And I wait for AJAX to finish
+    Then the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "de"
+    And the "#comment-text-translation-00000000-0000-0000-0000-000000000001" element should contain "Fixed translation text"

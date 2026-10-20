@@ -22,4 +22,5 @@ ProjectComments({
 new TranslateComments(
   projectComments.dataset.translatedByLine,
   projectComments.dataset.googleTranslateDisplayName,
+  projectComments.dataset.transTranslateAgain,
 )

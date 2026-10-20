@@ -284,6 +284,9 @@ project:
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
+  translateAgain: Translate again with these languages
+  prefillMachineTranslation: Fill in machine translation
+  machineTranslationFailed: Machine translation is not available right now. Please try again later.
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
   save: Save

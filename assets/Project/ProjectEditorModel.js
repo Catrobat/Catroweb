@@ -48,6 +48,37 @@ export function ProjectEditorModel(programId, textFieldModels, preloadedLanguage
     this.onUnauthorized = onUnauthorized
   }
 
+  this.setOnMachineTranslationFailed = (onMachineTranslationFailed) => {
+    this.onMachineTranslationFailed = onMachineTranslationFailed
+  }
+
+  // Starting point for a custom translation: the owner edits it and saves as usual.
+  this.prefillWithMachineTranslation = () => {
+    const language = this.selectedLanguage
+    if (language === '' || language === 'default') return
+
+    const params = new URLSearchParams({ target_language: language })
+    fetch(`${this.baseUrl}/api/projects/${this.programId}/translation?${params}`)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Translation failed: ${response.status}`)
+        return response.json()
+      })
+      .then((data) => {
+        if (language !== this.selectedLanguage) return
+        const translations = {
+          name: data.translated_title,
+          description: data.translated_description,
+          credits: data.translated_credit,
+        }
+        for (const textField of this.textFieldModels) {
+          const text = translations[textField.programSection]
+          if (textField.enabled && text) textField.fillText(text)
+        }
+        this.onButtonEnabled(!this.areChangesSaved())
+      })
+      .catch(() => this.onMachineTranslationFailed?.())
+  }
+
   this.setLanguage = (language) => {
     this.selectedLanguage = language
   }

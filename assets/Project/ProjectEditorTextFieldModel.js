@@ -75,6 +75,12 @@ export function ProjectEditorTextFieldModel(
     this.text = text
   }
 
+  // Replaces the text as if typed, so it counts as an unsaved change.
+  this.fillText = (text) => {
+    this.setText(text)
+    this.onTextChanged(text)
+  }
+
   this.fetchText = (language) => {
     this.clearError()
 
