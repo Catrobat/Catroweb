@@ -61,16 +61,17 @@ class AccountSessionCoordinator
   private function withUnchangedAuthenticatedAccount(User $user, callable $operation): mixed
   {
     $authenticated_hash = $user->getPassword();
+    $authenticated_identifier = $user->getUserIdentifier();
     $was_suspended = $user->getProfileHidden();
-    $result = $this->withLockedUser($user, function () use ($user, $authenticated_hash, $was_suspended, $operation): array {
-      if ((!$was_suspended && $user->getProfileHidden()) || $authenticated_hash !== $user->getPassword()) {
+    $result = $this->withLockedUser($user, function () use ($user, $authenticated_hash, $authenticated_identifier, $was_suspended, $operation): array {
+      if ((!$was_suspended && $user->getProfileHidden()) || $authenticated_hash !== $user->getPassword() || $authenticated_identifier !== $user->getUserIdentifier()) {
         return ['valid' => false];
       }
 
       return ['valid' => true, 'value' => $operation()];
     });
     if (!\array_key_exists('value', $result)) {
-      throw new BadCredentialsException('Credentials or account status changed during authentication. Sign in again.');
+      throw new BadCredentialsException('Credentials, identifier or account status changed during authentication. Sign in again.');
     }
 
     return $result['value'];

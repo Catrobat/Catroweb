@@ -247,6 +247,67 @@ final class AccountSessionCoordinatorTest extends KernelTestCase
     yield 'ordinary API login stays blocked' => [false];
   }
 
+  public function testHttpAccountUpdateRejectsAnAuthenticationFromBeforeAConcurrentRename(): void
+  {
+    $this->user->setVerified(true);
+    $this->user->setEnabled(true);
+    $this->entity_manager->flush();
+    $old_name = $this->user->getUserIdentifier();
+    $new_name = $old_name.'-concurrent';
+    $concurrent_proof = $old_name.'-concurrent-proof';
+    $jwt = self::getContainer()->get(JWTTokenManagerInterface::class);
+    $this->assertInstanceOf(JWTTokenManagerInterface::class, $jwt);
+    $bearer = $jwt->create($this->user);
+    $dispatcher = self::getContainer()->get('event_dispatcher');
+    $this->assertInstanceOf(\Symfony\Component\EventDispatcher\EventDispatcherInterface::class, $dispatcher);
+    $listener = function (\Symfony\Component\HttpKernel\Event\ControllerEvent $event) use ($old_name, $new_name, $concurrent_proof): void {
+      if ('/api/users/me' !== $event->getRequest()->getPathInfo()) {
+        return;
+      }
+      $this->assertSame($old_name, $this->user->getUserIdentifier(), 'the request authenticated with the original identifier');
+      // Simulate another committed rename after authentication, preserving the password and account ID.
+      $this->entity_manager->createQuery('UPDATE '.User::class.' u SET u.username = :name, u.usernameCanonical = :canonical WHERE u.id = :id')
+        ->setParameters(['name' => $new_name, 'canonical' => strtolower($new_name), 'id' => $this->user->getId()])->execute()
+      ;
+      $this->entity_manager->createQuery('DELETE FROM '.RefreshToken::class.' t WHERE t.username = :name')
+        ->setParameter('name', $old_name)->execute()
+      ;
+      $proof = RefreshToken::createForUserWithTtl($concurrent_proof, $this->user, 3600);
+      $proof->setUsername($new_name);
+      $this->entity_manager->persist($proof);
+      $this->entity_manager->flush();
+      $event->getRequest()->attributes->set(\App\Security\Authentication\JwtRefresh\RefreshTokenService::REFRESHED_BEARER_COOKIE_ATTRIBUTE, 'stale-auto-refresh');
+    };
+    $dispatcher->addListener(\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER, $listener);
+    $client = self::getContainer()->get('test.client');
+    $this->assertInstanceOf(\Symfony\Bundle\FrameworkBundle\KernelBrowser::class, $client);
+    $client->disableReboot();
+    try {
+      $client->request('PATCH', '/api/users/me', [], [], [
+        'HTTP_AUTHORIZATION' => 'Bearer '.$bearer, 'HTTP_ACCEPT' => 'application/json',
+        'CONTENT_TYPE' => 'application/json',
+      ], json_encode(['username' => $old_name, 'about' => 'Must not be saved'], JSON_THROW_ON_ERROR));
+      $this->assertSame(401, $client->getResponse()->getStatusCode());
+      $this->assertTrue($this->entity_manager->isOpen());
+      $this->entity_manager->flush();
+      $row = $this->entity_manager->createQuery('SELECT u.username, u.about FROM '.User::class.' u WHERE u.id = :id')
+        ->setParameter('id', $this->user->getId())->getOneOrNullResult()
+      ;
+      $this->assertIsArray($row);
+      $this->assertSame($new_name, $row['username']);
+      $this->assertNull($row['about'], 'the stale profile callback must not run');
+      $this->assertSame(0, $this->entity_manager->getRepository(RefreshToken::class)->count(['username' => $old_name]));
+      $this->assertSame(1, $this->entity_manager->getRepository(RefreshToken::class)->count(['username' => $new_name]));
+      $this->assertNotNull($this->entity_manager->getRepository(RefreshToken::class)->findOneBy(['refreshToken' => $concurrent_proof]));
+      $this->assertCount(2, $client->getResponse()->headers->getCookies());
+      foreach ($client->getResponse()->headers->getCookies() as $cookie) {
+        $this->assertLessThan(time(), $cookie->getExpiresTime());
+      }
+    } finally {
+      $dispatcher->removeListener(\Symfony\Component\HttpKernel\KernelEvents::CONTROLLER, $listener);
+    }
+  }
+
   private function token(string $suffix): string
   {
     return $this->user->getUserIdentifier().'-'.$suffix;
