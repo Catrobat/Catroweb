@@ -14,6 +14,8 @@ use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
+use App\Security\Authentication\AccountSessionCoordinator;
+use App\Security\Authentication\JwtRefresh\RefreshTokenService;
 use App\Security\Captcha\CaptchaVerifier;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,6 +33,7 @@ use OpenAPI\Server\Model\UserDataExportResponseReactionsInner;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class UsersApi extends AbstractApiController implements UsersApiInterface
 {
@@ -50,6 +53,7 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
     private readonly EntityManagerInterface $entity_manager,
     private readonly StudioApiLoader $studio_api_loader,
     private readonly StudioResponseManager $studio_response_manager,
+    private readonly AccountSessionCoordinator $account_sessions,
   ) {
   }
 
@@ -235,6 +239,13 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
   public function usersMePatch(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+      $this->clearPendingAuthenticationCookieRefresh();
+      $this->facade->getResponseManager()->addClearedAuthenticationCookiesToHeader($responseHeaders);
+
+      return null;
+    }
     $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($user, $update_user_request, $accept_language);
 
     if ($validation_wrapper->hasError()) {
@@ -248,19 +259,34 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
 
     $responseCode = Response::HTTP_NO_CONTENT;
 
-    if (true !== $update_user_request->isDryRun()) {
-      $this->facade->getProcessor()->updateUser(
-        $user, $update_user_request
-      );
+    try {
+      if (true !== $update_user_request->isDryRun()) {
+        if (!is_null($update_user_request->getUsername())) {
+          $this->account_sessions->withVerifiedAccountUpdate($user, function () use ($user, $update_user_request, &$responseHeaders): void {
+            $this->facade->getProcessor()->updateUser($user, $update_user_request);
+            $token = $this->facade->getAuthenticationManager()->createAuthenticationTokenFromUser($user);
+            $refresh_token = $this->facade->getAuthenticationManager()->createRefreshTokenByUser($user);
+            $this->facade->getResponseManager()->addAuthenticationCookiesToHeader($token, $refresh_token, $responseHeaders);
+          });
+          $this->clearPendingAuthenticationCookieRefresh();
 
-      if (!is_null($update_user_request->getUsername())) {
-        $token = $this->facade->getAuthenticationManager()->createAuthenticationTokenFromUser($user);
-        $refresh_token = $this->facade->getAuthenticationManager()->createRefreshTokenByUser($user);
-        $this->facade->getResponseManager()->addAuthenticationCookiesToHeader($token, $refresh_token, $responseHeaders);
+          return null;
+        }
+        $this->account_sessions->withVerifiedAccountUpdate($user, fn () => $this->facade->getProcessor()->updateUser($user, $update_user_request));
       }
+    } catch (BadCredentialsException) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+      $this->clearPendingAuthenticationCookieRefresh();
+      $this->facade->getResponseManager()->addClearedAuthenticationCookiesToHeader($responseHeaders);
     }
 
     return null;
+  }
+
+  private function clearPendingAuthenticationCookieRefresh(): void
+  {
+    $this->request_stack->getCurrentRequest()?->attributes->remove(RefreshTokenService::REFRESHED_BEARER_COOKIE_ATTRIBUTE);
+    $this->request_stack->getCurrentRequest()?->attributes->remove(RefreshTokenService::CLEAR_AUTHENTICATION_COOKIES_ATTRIBUTE);
   }
 
   #[\Override]

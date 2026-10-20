@@ -567,3 +567,6 @@ The `the JSON response field :path should be :expected` Behat helper compares JS
 ### Studio Invite QR Codes
 
 Admin-only invite responses include a locally generated SVG data URI while the invite is usable. These responses set `Cache-Control: private, no-store`; do not write invite QR images to a shared public cache or send codes to a third-party QR service. Expired, exhausted, and revoked invites retain their existing join restrictions.
+## Account authentication coordination
+
+Authentication success handlers run after Symfony installs the authenticated token. If a locked account reload rejects a stale form login, clear the pending main token and `_security_main` entry before propagating the rejection; otherwise the response can persist that same refreshed User. Capture the authenticated password hash and suspension state before reloading the managed entity. Expected stale-proof rejection should return from the Doctrine transaction callback and throw afterward so the EntityManager remains usable. Query refresh proofs through the mapped entity, because Behat can change table names.

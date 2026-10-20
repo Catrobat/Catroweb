@@ -24,6 +24,34 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class AuthenticationManagerTest extends TestCase
 {
   #[Group('unit')]
+  public function testCreatedRefreshTokenIsSavedBeforeReturningItsOriginalValue(): void
+  {
+    $user = new \App\DB\Entity\User\User();
+    $user->setUsername('profile-user');
+    $token = \App\DB\Entity\RefreshToken::createForUserWithTtl('new-profile-session', $user, 3600);
+    $generator = $this->createMock(RefreshTokenGeneratorInterface::class);
+    $generator->expects($this->once())->method('createForUserWithTtl')->with($user, 3600)->willReturn($token);
+    $refresh_manager = $this->createMock(RefreshTokenManagerInterface::class);
+    $refresh_manager->expects($this->once())->method('save')->with($token)
+      ->willReturnCallback(static function (RefreshTokenInterface $stored): void {
+        // Managers may replace the in-memory value with a hash on save.
+        $stored->setRefreshToken('stored-hash');
+      })
+    ;
+    $manager = new AuthenticationManager(
+      $this->createStub(TokenStorageInterface::class),
+      $this->createStub(JWTTokenManagerInterface::class),
+      $this->createStub(UserManager::class),
+      $generator,
+      $refresh_manager,
+      $this->createStub(RequestHelper::class),
+      3600,
+    );
+
+    $this->assertSame('new-profile-session', $manager->createRefreshTokenByUser($user));
+  }
+
+  #[Group('unit')]
   public function testDeleteRefreshTokenFallsBackToRefreshCookie(): void
   {
     $refresh_manager = $this->createMock(RefreshTokenManagerInterface::class);

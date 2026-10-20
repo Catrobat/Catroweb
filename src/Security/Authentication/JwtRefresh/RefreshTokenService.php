@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Security\Authentication\JwtRefresh;
 
 use App\DB\Entity\User\User;
+use App\Security\Authentication\AccountSessionCoordinator;
 use App\Security\Authentication\CookieService;
 use App\User\UserManager;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
@@ -15,6 +16,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class RefreshTokenService
 {
@@ -29,6 +31,7 @@ class RefreshTokenService
     protected UserManager $user_manager,
     protected JWTTokenManagerInterface $jwt_manager,
     protected CookieService $cookie_service,
+    protected AccountSessionCoordinator $account_sessions,
   ) {
   }
 
@@ -42,7 +45,10 @@ class RefreshTokenService
       throw new \InvalidArgumentException(\sprintf('User "%s" not found.', $username));
     }
 
-    return $this->refresh_token_generator->createForUserWithTtl($user, $this->refreshTokenLifetime);
+    $token = $this->refresh_token_generator->createForUserWithTtl($user, $this->refreshTokenLifetime);
+    $this->refresh_manager->save($token);
+
+    return $token;
   }
 
   public function invalidateRefreshTokenOfUser(string $username): void
@@ -65,7 +71,7 @@ class RefreshTokenService
     }
 
     $refresh_token = $this->getRefreshTokenFromRequest($request);
-    if ($this->isValidRefreshToken($refresh_token)) {
+    if ($refresh_token instanceof RefreshTokenInterface && $this->isValidRefreshToken($refresh_token)) {
       /** @var User|null $user */
       $user = $this->user_manager->findUserByUsername($refresh_token->getUsername());
       if (null !== $user) {
@@ -76,7 +82,13 @@ class RefreshTokenService
           return;
         }
 
-        $new_bearer = $this->jwt_manager->create($user);
+        try {
+          $new_bearer = $this->account_sessions->withVerifiedRefresh($user, $refresh_token, fn (): string => $this->jwt_manager->create($user));
+        } catch (BadCredentialsException) {
+          $this->markAuthenticationCookiesForClearing($request);
+
+          return;
+        }
         $request->attributes->set(self::REFRESHED_BEARER_COOKIE_ATTRIBUTE, $new_bearer);
         // Update both Symfony's ParameterBag and the PHP superglobal so that
         // downstream code works regardless of which source it reads from.
