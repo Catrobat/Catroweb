@@ -36,7 +36,7 @@ Feature: Only active studio admins can remove a ban without restoring membership
     Then the response status code should be "403"
     Given I use a valid JWT Bearer token for "Admin"
     When I GET "/api/studios/1/banned-members"
-    Then the JSON response field "data.0.username" should be "Banned"
+    Then the JSON response field "data.0.username" should be '"Banned"'
 
     Examples:
       | viewer      |
@@ -49,11 +49,11 @@ Feature: Only active studio admins can remove a ban without restoring membership
     Given I use a valid JWT Bearer token for "Admin"
     When I GET "/api/studios/1/banned-members?limit=1"
     Then the response status code should be "200"
-    And the JSON response field "data.0.username" should be "Banned"
+    And the JSON response field "data.0.username" should be '"Banned"'
     And the JSON response field "has_more" should be "true"
     When I GET "/api/studios/1/banned-members?limit=1&cursor=Mw=="
     Then the response status code should be "200"
-    And the JSON response field "data.0.username" should be "BannedAdmin"
+    And the JSON response field "data.0.username" should be '"BannedAdmin"'
     And the JSON response field "has_more" should be "false"
 
   Scenario: Invalid ban-list cursors are rejected
@@ -74,7 +74,7 @@ Feature: Only active studio admins can remove a ban without restoring membership
     Then the response status code should be "200"
     When I GET "/api/studios/1"
     Then the JSON response field "is_member" should be "true"
-    And the JSON response field "user_role" should be "member"
+    And the JSON response field "user_role" should be '"member"'
 
   Scenario: A former admin rejoins as a regular member
     Given I use a valid JWT Bearer token for "Admin"
@@ -84,7 +84,7 @@ Feature: Only active studio admins can remove a ban without restoring membership
     When I POST "/api/studios/1/join"
     Then the response status code should be "200"
     When I GET "/api/studios/1"
-    Then the JSON response field "user_role" should be "member"
+    Then the JSON response field "user_role" should be '"member"'
 
   Scenario: An unbanned private-studio user still needs the normal join process
     Given I use a valid JWT Bearer token for "Admin"
