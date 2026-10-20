@@ -135,7 +135,7 @@ class StudioApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @param User|null $viewer minors only see not-for-kids projects they own
+   * @param User|null $viewer sees their own hidden/private projects; minors only see not-for-kids projects they own
    *
    * @return array{projects: StudioProject[], has_more: bool}
    */
@@ -154,6 +154,15 @@ class StudioApiLoader extends AbstractApiLoader
       ->addOrderBy('sp.id', 'DESC')
       ->setMaxResults($limit + 1)
     ;
+
+    $publicly_visible = 'p.visible = true AND p.auto_hidden = false AND p.private = false';
+    if ($viewer instanceof User) {
+      $qb->andWhere('('.$publicly_visible.') OR p.user = :viewer')
+        ->setParameter('viewer', $viewer)
+      ;
+    } else {
+      $qb->andWhere($publicly_visible);
+    }
 
     if ($viewer instanceof User && $viewer->isMinor()) {
       $qb->andWhere('p.not_for_kids = 0 OR p.user = :viewer')
