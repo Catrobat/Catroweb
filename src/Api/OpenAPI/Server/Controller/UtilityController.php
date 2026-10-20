@@ -73,6 +73,7 @@ class UtilityController extends Controller
     $limit = $request->query->get('limit', 20);
     $cursor = $request->query->get('cursor');
     $flavor = $request->query->get('flavor');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
 
     // Use the default value if no value was provided
 
@@ -81,6 +82,7 @@ class UtilityController extends Controller
       $limit = $this->deserialize($limit, 'int', 'string');
       $cursor = $this->deserialize($cursor, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -105,6 +107,12 @@ class UtilityController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -113,7 +121,7 @@ class UtilityController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->featuredBannersGet($limit, $cursor, $flavor, $responseCode, $responseHeaders);
+      $result = $handler->featuredBannersGet($limit, $cursor, $flavor, $accept_language, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',

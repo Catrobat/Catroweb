@@ -556,6 +556,10 @@ trait ContextTrait
       $banner->setUrl($config['url']);
     }
 
+    if (isset($config['locales']) && '' !== $config['locales']) {
+      $banner->setLocales(explode(',', $config['locales']));
+    }
+
     if (isset($config['project_id'])) {
       $project = $this->getProjectManager()->find($config['project_id']);
       $banner->setProject($project);

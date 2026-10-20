@@ -49,6 +49,7 @@ interface UtilityApiInterface
    * @param int         $limit           (optional, default to 20)
    * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
    * @param string|null $flavor          Filter banners by flavor (e.g. pocketcode, luna). Omit for all. (optional)
+   * @param string      $accept_language (optional, default to 'en')
    * @param int         &$responseCode   The HTTP Response Code
    * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
@@ -56,6 +57,7 @@ interface UtilityApiInterface
     int $limit,
     ?string $cursor,
     ?string $flavor,
+    string $accept_language,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
