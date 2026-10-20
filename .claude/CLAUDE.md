@@ -545,3 +545,7 @@ After form login, `FormLoginSuccessHandler` sets BEARER+REFRESH_TOKEN cookies (p
 - **Doctrine ManyToMany inverse collections in Behat**: `$user->getFollowers()` returns empty due to identity map caching. Use DQL JOIN queries instead.
 - **Sidebar `updateBadge()`**: `apiToCall='old'` reads `data.count`, `'new'` reads `data.total`. `badgeText=null` shows count number.
 - **Twig data attributes for client-side**: `data-trans-*` for translations, `data-base-url` for API prefix. Include `escapeHtml()`/`escapeAttr()` in JS.
+
+### Public On-Demand Image Conversion
+
+`PublicImageSourceResolver` restricts the legacy converter to explicit public raster-image roots, matching MIME types and safe conversion destinations. It resolves shared storage roots but rejects files that escape them through links, and rejects protected project/CAS roots even through aliases. Extend the allowlist only for content intentionally served as public images.

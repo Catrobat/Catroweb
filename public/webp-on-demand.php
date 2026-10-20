@@ -1,19 +1,26 @@
 <?php
 
-require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+require_once dirname(__DIR__).'/vendor/autoload.php';
 
+use App\Storage\PublicImageSourceResolver;
 use WebPConvert\WebPConvert;
 
-// Absolute file path to source file. Comes from the server config! (.htaccess no used due performance reasons)
+// Server rewrite input is untrusted: this script is also directly reachable.
 $source = $_GET['source'] ?? '';
 if (!is_string($source) || '' === $source) {
   http_response_code(400);
   exit;
 }
 
-// Store the converted images besides the original images (other options are available!)
-$lastDotPos = strrpos($source, '.');
-$destination = (false !== $lastDotPos ? substr($source, 0, $lastDotPos) : $source).'.webp';
+$paths = (new PublicImageSourceResolver())->resolve(__DIR__, $source);
+if (null === $paths) {
+  header('Cache-Control: private, no-store');
+  http_response_code(404);
+  exit;
+}
+$source = $paths['source'];
+$destination = $paths['destination'];
+header('X-Content-Type-Options: nosniff');
 
 $options = [
   // failure handling
