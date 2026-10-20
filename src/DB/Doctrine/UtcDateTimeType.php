@@ -7,6 +7,7 @@ namespace App\DB\Doctrine;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
 
 /** A DATETIME whose wall time always represents UTC, including during hydration. */
 class UtcDateTimeType extends DateTimeType
@@ -29,6 +30,10 @@ class UtcDateTimeType extends DateTimeType
     }
     if ($value instanceof \DateTime) {
       return (clone $value)->setTimezone(new \DateTimeZone('UTC'));
+    }
+
+    if (!\is_string($value)) {
+      throw InvalidType::new($value, static::class, ['null', \DateTime::class, 'string']);
     }
 
     $date_time = \DateTime::createFromFormat('!'.$platform->getDateTimeFormatString(), $value, new \DateTimeZone('UTC'));

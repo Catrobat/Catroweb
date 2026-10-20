@@ -8,7 +8,9 @@ use App\DB\Doctrine\UtcDateTimeType;
 use App\DB\Entity\User\User;
 use Doctrine\DBAL\Platforms\MariaDBPlatform;
 use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
@@ -57,6 +59,21 @@ final class UtcDateTimeTypeTest extends TestCase
     $platform = new MariaDBPlatform();
     $this->expectException(InvalidFormat::class);
     $type->convertToPHPValue('invalid', $platform);
+  }
+
+  #[DataProvider('nonStringDatabaseValues')]
+  public function testHydrationRejectsNonStringDatabaseValues(mixed $value): void
+  {
+    $this->expectException(InvalidType::class);
+    new UtcDateTimeType()->convertToPHPValue($value, new MariaDBPlatform());
+  }
+
+  /** @return iterable<string, array{mixed}> */
+  public static function nonStringDatabaseValues(): iterable
+  {
+    yield 'integer' => [42];
+    yield 'boolean' => [true];
+    yield 'array' => [[]];
   }
 
   public function testCredentialChangesUseUtcEvenWithALocalDefaultTimezone(): void
