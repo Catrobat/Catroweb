@@ -579,3 +579,5 @@ For asynchronous password-save dialogs, wait for the success message with the bo
 ### Protected Project Files
 
 Generated extracted previews use `/project-files/{id}/assets/{path}` and the existing page visibility policy; archive aliases retain the stricter existing archive API lookup. `ProtectedProjectFiles` validates paths/MIME, and `ProtectedProjectFileResponse` defaults to PHP HEAD/range delivery. Only the server-owned `PROJECT_FILE_ACCEL=1` FastCGI parameter enables the internal nginx location; client sendfile headers are ignored. See `docs/operations/Protected-Project-Files.md` for coordinated rollout and cache limitations.
+
+Before deploying these routes behind nginx, deploy the routing-only `^~ /project-files/` compatibility prefix: existing immutable image routing otherwise intercepts preview URLs before PHP. Application deployment precedes only the final denial/offload stage, not that routing prerequisite.
