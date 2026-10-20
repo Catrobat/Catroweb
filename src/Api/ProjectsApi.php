@@ -889,7 +889,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }, $remix_graph['nodes']);
 
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'private, max-age=300';
+    $responseHeaders['Cache-Control'] = 'private, no-store';
 
     return [
       ...$remix_graph,

@@ -25,6 +25,7 @@ Feature: Remix graph hides other users' not-for-kids metadata from minors
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     When I request "GET" "/api/projects/2/remix-graph"
     Then the response status code should be "200"
+    And the response Header should contain the key "Cache-Control" with the value 'no-store, private'
     And the client response should not contain "RestrictedName"
     And the client response should not contain "MinorOwner"
     And the client response should contain "SafeRemix"
@@ -45,6 +46,7 @@ Feature: Remix graph hides other users' not-for-kids metadata from minors
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     When I request "GET" "/api/projects/2/remix-graph"
     Then the response status code should be "200"
+    And the response Header should contain the key "Cache-Control" with the value 'no-store, private'
     And the client response should contain "RestrictedName"
     And the client response should contain "MinorOwner"
     And the JSON response field "nodes.0.available" should be "true"
@@ -58,5 +60,6 @@ Feature: Remix graph hides other users' not-for-kids metadata from minors
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     When I request "GET" "/api/projects/2/remix-graph"
     Then the response status code should be "200"
+    And the response Header should contain the key "Cache-Control" with the value 'no-store, private'
     And the client response should contain "RestrictedName"
     And the client response should contain "MinorOwner"

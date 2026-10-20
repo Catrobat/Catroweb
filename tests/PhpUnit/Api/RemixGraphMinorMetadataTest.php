@@ -74,7 +74,7 @@ final class RemixGraphMinorMetadataTest extends TestCase
     $this->assertSame($graph['edges'], $result['edges']);
     $this->assertSame(2, $result['projectCount']);
     $this->assertSame(1, $result['remixCount']);
-    $this->assertSame('private, max-age=300', $headers['Cache-Control']);
+    $this->assertSame('private, no-store', $headers['Cache-Control']);
   }
 
   /**
