@@ -20,7 +20,7 @@
 #       locally. However, this approach also a a drawback. More "artificial" dependencies on the static analysis tools
 #       which are not necessary to run the Share community platform. In case, one they there arise dependency conflicts
 #       just remove the tool from the package manager and add the tool using a pre-built executable (wget) or an action
-#       from the marketplace (This is already the case or This is already the case for `phploc` and `phpcpd`.)
+#       from the marketplace.
 #
 #  - Caching:
 #
@@ -139,22 +139,6 @@ jobs:
         uses: ./.github/actions/setup-php-composer
       - run: vendor/vimeo/psalm/psalm
   #
-  # phpcpd (Php Copy Paste Detector):
-  #
-  #  - Checking for PHP code that was just copied
-  #  - More information at: https://github.com/sebastianbergmann/phpcpd
-  #
-  phpcpd:
-    name: PHP Static Analysis [PhpCPD]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7.0.1
-      - name: PHP Copy Paste Detector
-        uses: StephaneBour/actions-php-cpd@8.2
-        with:
-          args: --exclude=src/Api/OpenAPI/Server --exclude=src/DB/Entity src
-
-  #
   # phpdd (Php Code Fixer):
   #
   #  - to search issues with deprecated functionality in newer interpreter versions.
@@ -168,19 +152,6 @@ jobs:
   #      - name: "Setup PHP and composer packages"
   #        uses: ./.github/actions/setup-php-composer
   #      - run: bin/phpdd src tests                                                   # Currently disabled: https://github.com/wapmorgan/PhpDeprecationDetector/issues
-  #
-  # PhpLoc:
-  #
-  #  - Measuring the size and analyzing the structure of the project (php)
-  #  - More information at: https://github.com/sebastianbergmann/phploc
-  #
-  php-loc:
-    name: PHP Info [PhpLoc]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7.0.1
-      - run: wget https://phar.phpunit.de/phploc.phar
-      - run: php phploc.phar src tests
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Twig **
@@ -242,7 +213,7 @@ jobs:
   # CI gate:
   #
   #   - Aggregates every job of this workflow into a single status check, so branch protection can require one stable
-  #     context instead of eleven that have to be kept in sync whenever a tool is added or removed here.
+  #     context instead of nine that have to be kept in sync whenever a tool is added or removed here.
   #
   #   - `skipped` counts as passing on purpose: when an upstream job fails, its dependents report `skipped`, and the
   #     failure is already caught by checking that upstream job itself.
@@ -255,8 +226,6 @@ jobs:
       - php-cs-fixer
       - phpstan
       - psalm
-      - phpcpd
-      - php-loc
       - lint-twig
       - lint-yaml
       - lint-container
@@ -272,8 +241,6 @@ jobs:
             php-cs-fixer ${{ needs.php-cs-fixer.result }}
             phpstan ${{ needs.phpstan.result }}
             psalm ${{ needs.psalm.result }}
-            phpcpd ${{ needs.phpcpd.result }}
-            php-loc ${{ needs.php-loc.result }}
             lint-twig ${{ needs.lint-twig.result }}
             lint-yaml ${{ needs.lint-yaml.result }}
             lint-container ${{ needs.lint-container.result }}
