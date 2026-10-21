@@ -607,3 +607,7 @@ The runtime image's `PHP_MIN_VERSION` must be bumped before the apt-install laye
 ### Public text policy inventory
 
 The proposed [public-text link policy](../docs/architecture/public-text-link-policy.md) includes translations, imported metadata, administrative/media writes and search/remix/notification projections beyond current TextSanitizer callers. Policy preparation does not approve list activation, historical rewriting or source-program edits; keep identifiers and private evidence under their existing validation/access rules.
+
+### App-attestation assessment boundary
+
+The [client-attestation assessment](../docs/architecture/client-attestation-assessment.md) distinguishes configured abuse controls and self-reported client hints from measured abuse or verified client origin. Check the selected provider SDK version and distribution/signing coverage; an assessment does not authorize new telemetry, client changes or enforcement.
