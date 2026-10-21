@@ -589,3 +589,5 @@ Missing project-preview extraction shares the existing per-IP download burst bud
 SecurityHeadersSubscriber must append its global CSP baseline rather than overwrite an existing route policy. Multiple CSP policies intersect; protected SVG browser checks must use final subscriber headers and direct top-level navigation, because global X-Frame-Options may independently block iframe tests.
 
 SVG responses must retain PHP streaming even when project-file acceleration is enabled. nginx internal redirects discard upstream security headers; keeping SVG out of offload preserves the final intersecting CSP policies without server header-forwarding rules.
+
+Mink locatePath prepends the front-controller segment from base_url even for leading-slash paths. Static-file denial tests must request the raw origin over HTTP and assert status, private/no-store and absence of file bytes; visiting the prefixed route only proves Symfony denial, whose body can be empty.
