@@ -18,6 +18,7 @@ Feature: Changing a password keeps the current browser signed in with rotated co
     And I fill in "profile-password" with "NewPassword123"
     And I fill in "profile-repeat-password" with "NewPassword123"
     And I click "#security_settings-save_action"
+    And I wait for the element ".swal2-html-container" to contain "Your password was successfully updated."
     And I wait for the element ".swal2-success" to be visible
     Then my authentication cookies should both be rotated
     And user "Catrobat" should have "1" refresh sessions
