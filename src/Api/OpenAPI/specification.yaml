@@ -373,7 +373,7 @@ paths:
         For example you can update only the username.
         Or you can update multiple attributes at once. E.g. username + email.
         A password change revokes all refresh tokens; only a caller with a valid REFRESH_TOKEN cookie
-        gets new auth cookies, everyone else must sign in again. A username change revokes the old name's tokens.
+        gets new auth cookies, everyone else must sign in again. A username change revokes the tokens of the old name.
         '
       requestBody:
         required: true
