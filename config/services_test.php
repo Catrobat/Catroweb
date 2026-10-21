@@ -40,7 +40,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   // Load additional test-only services:
   $services->load('App\System\Testing\Behat\Context\\', __DIR__.'/../src/System/Testing/Behat/Context/*');
-  $services->get(App\Security\Authentication\FormLoginSuccessHandler::class)->public();
   $services->set(ProjectDataFixtures::class);
   $services->set(UserDataFixtures::class);
 };

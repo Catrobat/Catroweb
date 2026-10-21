@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\Session\SessionAuthenticationStrategyInterface;
@@ -30,9 +31,7 @@ final class ApiAuthenticationSuccessHandlerTest extends TestCase
   public function testDelegatesToInnerHandlerAndProcessesResponse(): void
   {
     $request = Request::create('/api/authentication', 'POST');
-    $user = new \App\DB\Entity\User\User();
-    $user->setUsername('api-user');
-    $token = new UsernamePasswordToken($user, 'api_authentication_login', ['ROLE_USER']);
+    $token = $this->createStub(TokenInterface::class);
     $response = new Response('{}');
 
     $inner_handler = $this->createMock(AuthenticationSuccessHandlerInterface::class);
@@ -48,7 +47,6 @@ final class ApiAuthenticationSuccessHandlerTest extends TestCase
       new AuthenticationModeResolver(),
       $this->createMainFirewallSessionLogin(),
       $this->createResponseProcessor(),
-      $this->accountSessions(),
     );
 
     $this->assertSame($response, $handler->onAuthenticationSuccess($request, $token));
@@ -65,7 +63,7 @@ final class ApiAuthenticationSuccessHandlerTest extends TestCase
     $request->cookies->set($session->getName(), $session->getId());
 
     $token = new UsernamePasswordToken(
-      $this->cookieUser(),
+      new TestUser('cookie-user', ['ROLE_USER']),
       'api_authentication_login',
       ['ROLE_USER'],
     );
@@ -84,7 +82,6 @@ final class ApiAuthenticationSuccessHandlerTest extends TestCase
       new AuthenticationModeResolver(),
       $this->createMainFirewallSessionLogin(),
       $this->createResponseProcessor(),
-      $this->accountSessions(),
     );
 
     $processed_response = $handler->onAuthenticationSuccess($request, $token);
@@ -94,23 +91,6 @@ final class ApiAuthenticationSuccessHandlerTest extends TestCase
     self::assertInstanceOf(UsernamePasswordToken::class, $stored_token);
     self::assertSame('cookie-user', $stored_token->getUserIdentifier());
     self::assertSame('main', $stored_token->getFirewallName());
-  }
-
-  private function cookieUser(): \App\DB\Entity\User\User
-  {
-    $user = new \App\DB\Entity\User\User();
-    $user->setId('cookie-user-id');
-    $user->setUsername('cookie-user');
-
-    return $user;
-  }
-
-  private function accountSessions(): \App\Security\Authentication\AccountSessionCoordinator
-  {
-    $service = $this->createStub(\App\Security\Authentication\AccountSessionCoordinator::class);
-    $service->method('withVerifiedLogin')->willReturnCallback(static fn ($user, callable $issue) => $issue());
-
-    return $service;
   }
 
   private function createMainFirewallSessionLogin(): MainFirewallSessionLogin

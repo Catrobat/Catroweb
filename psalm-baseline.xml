@@ -311,6 +311,9 @@
     <PossiblyNullArgument>
       <code><![CDATA[$refresh_token->getRefreshToken()]]></code>
     </PossiblyNullArgument>
+    <PossiblyNullReference>
+      <code><![CDATA[getUserIdentifier]]></code>
+    </PossiblyNullReference>
   </file>
   <file src="src/Security/Authentication/JwtRefresh/RefreshTokenService.php">
     <PossiblyNullArgument>

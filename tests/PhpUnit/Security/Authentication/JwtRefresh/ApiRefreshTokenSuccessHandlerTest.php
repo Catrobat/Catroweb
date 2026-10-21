@@ -10,6 +10,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Tests\PhpUnit\Security\Authentication\AuthenticationTestFactory;
 
@@ -25,9 +26,7 @@ final class ApiRefreshTokenSuccessHandlerTest extends TestCase
   public function testDelegatesToInnerHandlerAndProcessesResponse(): void
   {
     $request = Request::create('/api/authentication/refresh', 'POST');
-    $user = new \App\DB\Entity\User\User();
-    $proof = $this->createStub(\Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface::class);
-    $token = new \Gesdinet\JWTRefreshTokenBundle\Security\Http\Authenticator\Token\PostRefreshTokenAuthenticationToken($user, 'api', [], $proof);
+    $token = $this->createStub(TokenInterface::class);
     $response = new Response('{}');
 
     $inner_handler = $this->createMock(AuthenticationSuccessHandlerInterface::class);
@@ -38,12 +37,7 @@ final class ApiRefreshTokenSuccessHandlerTest extends TestCase
       ->willReturn($response)
     ;
 
-    $account_sessions = $this->createMock(\App\Security\Authentication\AccountSessionCoordinator::class);
-    $account_sessions->expects($this->once())->method('withVerifiedRefresh')
-      ->with($user, $proof, $this->isCallable())
-      ->willReturnCallback(static fn ($user, $proof, callable $issue) => $issue())
-    ;
-    $handler = new ApiRefreshTokenSuccessHandler($inner_handler, $this->createResponseProcessor(), $account_sessions);
+    $handler = new ApiRefreshTokenSuccessHandler($inner_handler, $this->createResponseProcessor());
 
     $this->assertSame($response, $handler->onAuthenticationSuccess($request, $token));
   }
