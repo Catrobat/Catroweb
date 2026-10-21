@@ -173,7 +173,7 @@ Feature: Searching for projects & users
     And I should see "scratchcat"
     And the element "#search-scratch-projects .search-card__badge" should be visible
     And the element "#search-scratch-projects .search-card__badge" should contain "Scratch"
-    And the element "#search-scratch-projects a.search-card[href$='/app/scratch/project/70058680']" should exist
+    And the element "#search-scratch-projects a.search-card[href='https://scratch.mit.edu/projects/70058680']" should exist
 
   Scenario: No Scratch section without Scratch matches
     Given I am on "/app/search/gmail"

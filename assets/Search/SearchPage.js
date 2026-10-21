@@ -197,7 +197,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
             )
           })
         } else if (type === 'scratch') {
-          for (const project of items) container.appendChild(createScratchCard(project, baseUrl))
+          for (const project of items) container.appendChild(createScratchCard(project))
         }
 
         nextOffset += RESULTS_PER_PAGE
@@ -337,12 +337,13 @@ function renderScratchProjects(section, projects, baseUrl) {
   }
 
   const items = section.querySelector('.search-section__items')
-  for (const project of projects) items.appendChild(createScratchCard(project, baseUrl))
+  for (const project of projects) items.appendChild(createScratchCard(project))
 }
 
-function createScratchCard(project, baseUrl) {
+function createScratchCard(project) {
   const card = createCard(
-    `${baseUrl}/app/scratch/project/${encodeURIComponent(String(project.id))}`,
+    // No converter yet (#7419): link to Scratch instead of creating an empty placeholder project.
+    `https://scratch.mit.edu/projects/${encodeURIComponent(String(project.id))}`,
     null,
     'card',
     '/images/default/screenshot-card@1x.webp',
