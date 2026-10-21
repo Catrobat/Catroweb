@@ -6,7 +6,12 @@ runs:
     - name: 'Setup PHP 8.5'
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.5
+        php-version: 8.5.12
+
+    - name: 'Verify actual patched PHP runtime'
+      shell: bash
+      run: |
+        php -r 'printf("Installed CLI: PHP %s\n", PHP_VERSION); exit(PHP_MAJOR_VERSION === 8 && PHP_MINOR_VERSION === 5 && version_compare(PHP_VERSION, "8.5.12", ">=") ? 0 : 1);'
 
     - name: 'Ensure composer configuration is valid'
       shell: bash

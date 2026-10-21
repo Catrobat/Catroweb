@@ -9,6 +9,7 @@ Public operations docs for Catroweb maintainers.
 - [How-To-Deploy.md](./How-To-Deploy.md) — Deploying the Catroweb app to dev/prod servers via Deployer-PHP.
 - [Malware-Scanning.md](./Malware-Scanning.md) — ClamAV-based scanning of uploaded `.catrobat` files before extraction.
 - [NSFW-Content-Scanning.md](./NSFW-Content-Scanning.md) — Self-hosted AI image moderation for user-uploaded media.
+- [PHP-runtime-security-floor.md](./PHP-runtime-security-floor.md) — Required patched CLI/Apache versions, image-cache invalidation and CI checks.
 - [Redis-Cache.md](./Redis-Cache.md) — Redis as the production application cache backend (Symfony, Doctrine, trust scores).
 - [Secret-Management.md](./Secret-Management.md) — Symfony `.env` hierarchy and how production overrides committed dev defaults.
 - [Server-Setup.md](./Server-Setup.md) — Historical manual server setup notes (see banner; superseded by the private infra repo).

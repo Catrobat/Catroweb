@@ -64,6 +64,9 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Verify image CLI and Apache PHP security floor
+        run: docker run --rm --entrypoint sh app.catroweb docker/app/check-php-runtime.sh
+
       # Same registry flakiness as in the dynamic analysis workflow: pulls from
       # registry-1.docker.io time out and take the whole job down. Retry with backoff.
       - name: Build and start all containers (Docker Compose)

@@ -599,3 +599,7 @@ The locked ExpressionLanguage version must include the complete CVE-2026-109449 
 ## Verified analysis-tool downloads
 
 Use the allowlisted CI helper for PHPLOC/PHPCPD rather than an unversioned PHAR fetch. Check the actual PHP branch/security floor before fetching. HTTP success and the reviewed SHA256 must pass before executing downloaded bytes; then verify the exact version before installation. Initial pins are anchored in the official HTTPS origin, not a claim of PGP verification. Keep existing scan scopes/exclusions and nonzero exit behavior. See `docs/operations/CI-analysis-tools.md`.
+
+## PHP security release floors
+
+The runtime image's `PHP_MIN_VERSION` must be bumped before the apt-install layer so cached builds cannot retain an older interpreter. Update the shared native setup action and disposable-image smoke-check floor together; the latter verifies actual CLI and Apache HTTP versions. See `docs/operations/PHP-runtime-security-floor.md`. Repository images use Debian packages and do not establish a separately managed host's PHP version.

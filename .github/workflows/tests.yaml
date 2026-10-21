@@ -124,6 +124,9 @@ jobs:
           build-args: APP_ENVIRONMENT=test
           cache-from: type=gha
 
+      - name: Verify image CLI and Apache PHP security floor
+        run: docker run --rm --entrypoint sh ${{ steps.meta.outputs.tags }} docker/app/check-php-runtime.sh
+
       - name: Export image as tarball (fork)
         if: steps.fork-check.outputs.is_fork == 'true'
         run: docker save ${{ steps.meta.outputs.tags }} | gzip > /tmp/catroweb-image.tar.gz
