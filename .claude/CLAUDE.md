@@ -603,3 +603,7 @@ Use the allowlisted CI helper for PHPLOC/PHPCPD rather than an unversioned PHAR 
 ## PHP security release floors
 
 The runtime image's `PHP_MIN_VERSION` must be bumped before the apt-install layer so cached builds cannot retain an older interpreter. Update the shared native setup action and disposable-image smoke-check floor together; the latter verifies actual CLI and Apache HTTP versions. See `docs/operations/PHP-runtime-security-floor.md`. Repository images use Debian packages and do not establish a separately managed host's PHP version.
+
+### Public text policy inventory
+
+The proposed [public-text link policy](../docs/architecture/public-text-link-policy.md) includes translations, imported metadata, administrative/media writes and search/remix/notification projections beyond current TextSanitizer callers. Policy preparation does not approve list activation, historical rewriting or source-program edits; keep identifiers and private evidence under their existing validation/access rules.
