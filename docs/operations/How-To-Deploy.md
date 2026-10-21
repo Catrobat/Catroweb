@@ -1,71 +1,27 @@
-# Deployer
+# How to Deploy
 
-> Note: This document covers Catroweb app deployment via Deployer-PHP. Production infrastructure (compose stacks, nginx vhosts, fail2ban, Cockpit, monitoring) is deployed separately from the private [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure) repo on push to its `main` branch.
+The app is deployed with Deployer (`deploy.php`, one `share` stage). Production infrastructure (compose stacks, nginx vhosts, fail2ban, monitoring) is deployed separately from the private [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure) repo on push to its `main`.
 
-We use Deployer to deploy to development and production servers.
+## Production (normal path)
 
-- You may need to modify the file deploy.php. Ask our coordinator if specific settings are unclear.
-- Make sure you are in the correct network. (vpn)
+1. Run the **Create Release PR** workflow. It bumps the version in `.env` and drafts a GitHub release.
+2. Merge the release PR. The **Deployment** workflow (`.github/workflows/deployment.yaml`) runs on `.env` changes to `main` and deploys. It can also be started manually with a branch or tag.
 
-### Slack Webhook
+Deployer's `smoke_test` task checks health on the server after the release is live; a failure fails the deploy but does not roll back (`bin/dep rollback share` does).
 
-We also have a slack webhook for our deployment system. For more information ask our coordinator.
+## Manual deploy
 
-### Credentials
-
-If you need the credentials, ask your coordinator.
-
-### To deploy to the server
-
-#### 1) Update your `.env.local` file with the correct values:
+Set in `.env.local` (credentials from the coordinator; VPN may be required):
 
 ```
-#DEPLOY_GIT=https://github.com/Catrobat/Catroweb.git
-#SLACK_WEBHOOK=
-#DEPLOY_SHARE=
-#DEPLOY_WEBTEST=
-#DEPLOY_WEBTEST_BRANCH=
-#DEPLOY_POREVIEW=
-#DEPLOY_POREVIEW_BRANCH=
-#DEPLOY_CATBLOCKS=
-#DEPLOY_CATBLOCKS_BRANCH=
-```
-
-depending on which server you need to deploy to.
-
-E.g for web-test without credentials:
-
-```
-DEPLOY_GIT=https://github.com/Catrobat/Catroweb.git
+DEPLOY_HOST=_HOST_
+DEPLOY_USER=deploy        # default
+DEPLOY_BRANCH=main        # default
 SLACK_WEBHOOK=https://hooks.slack.com/services/_KEY_
-DEPLOY_WEBTEST=_USERNAME_@_HOST_
-DEPLOY_WEBTEST_BRANCH=main
 ```
 
-#### 2) go into the root directory and run
+Then `bin/dep deploy share`.
 
-`bin/dep deploy <stage_name>`
+## Production maintenance commands
 
-E.g
-
-```
-bin/dep deploy share
-bin/dep deploy web-test
-bin/dep deploy android
-bin/dep deploy catblocks
-```
-
-#### 3) Enter the correct password
-
-Everything else should happen magically.
-
-#### 4) In case of errors
-
-You might need to check the server configs (Take a look into "How to set up a server")
-
-### Production maintenance commands
-
-Run production write commands from the application directory as
-`sudo -n -u www-data /usr/bin/php bin/console ...`, without `nice`, so generated
-files have the correct owner and the invocation matches the sudo rule. See
-[Data consistency checks](Data-consistency.md) for the dry run and repair options.
+Run write commands from the application directory as `sudo -n -u www-data /usr/bin/php bin/console ...`, without `nice`, so generated files have the right owner and the invocation matches the sudo rule. See [Data consistency checks](Data-consistency.md).

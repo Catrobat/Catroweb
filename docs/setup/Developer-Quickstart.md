@@ -1,85 +1,34 @@
 # Developer Quickstart
 
-This page is the fastest path to a productive Catroweb setup.
+Docker is the recommended setup and closest to CI. Native alternatives: [Ubuntu](Setup-guide-Ubuntu.md), [macOS](<./Setup-guide-macOS-(native,-no-Docker).md>).
 
-## Recommended: Docker Dev Setup
-
-1. Clone your fork and add the upstream remote:
+## Docker setup
 
 ```bash
-git clone <your-fork-url>
-cd Catroweb
+git clone <your-fork-url> && cd Catroweb
 git remote add catroweb git@github.com:Catrobat/Catroweb.git
-git checkout main
-git pull catroweb main
-```
-
-2. Start the development stack:
-
-```bash
 cd docker
 docker compose -f docker-compose.dev.yaml up -d --build
-```
-
-3. Open the app:
-
-- App: <http://localhost:8080/>
-- phpMyAdmin: <http://localhost:8081/>
-
-4. Run project reset (inside container):
-
-```bash
 docker exec -it app.catroweb php bin/console catrobat:reset --hard
 ```
 
-## Daily Workflow Commands
+- App: <http://localhost:8080/>, phpMyAdmin: <http://localhost:8081/>, Mailpit (all dev mail): <http://localhost:8025/>
+- `src/`, `assets/`, `templates/`, `config/` and `tests/` are mounted live. `vendor/` and `node_modules/` are built in the image; for IDE indexing copy them out with `sh docker/app/import-container-libraries.sh`.
+- After dependency or Dockerfile changes: `docker compose -f docker-compose.dev.yaml build --no-cache app.catroweb`, then `up -d`.
+- Logs: `docker compose -f docker-compose.dev.yaml logs -f app.catroweb`.
+- CI-like test-only stack: `docker compose -f docker-compose.test.yaml up -d --build`.
 
-Run in the project root unless stated otherwise.
-
-### Pull latest changes from upstream `main`
+## Daily commands
 
 ```bash
-git checkout main
 git pull catroweb main
-```
-
-### Run static checks
-
-```bash
-yarn test-js
-yarn test-css
-yarn test-asset
-yarn test-php
-yarn test-twig
-```
-
-or all in one:
-
-```bash
-yarn test
-```
-
-### Auto-fix supported checks
-
-```bash
-yarn fix
-```
-
-### Run tests
-
-```bash
+yarn test            # all static checks (test-js, test-css, test-asset, test-php, test-twig)
+yarn fix             # auto-fix
 docker exec -it app.catroweb bin/phpunit tests
-docker exec -it app.catroweb bin/behat
+docker exec -it app.catroweb bin/behat -s web-general     # always pass a suite
 ```
 
-## Native Setup (Alternative)
-
-If you explicitly want a non-Docker setup:
-
-- [Setup guide macOS (native, no Docker)](<./Setup-guide-macOS-(native,-no-Docker).md>)
-- [Setup guide Ubuntu](Setup-guide-Ubuntu.md)
-
-## Where to go next
+## Next
 
 - [Workflow](../contributor-guide/Workflow.md)
 - [Coding Standard](../contributor-guide/Coding-Standard.md)

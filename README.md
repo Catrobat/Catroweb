@@ -44,7 +44,7 @@ Your tech stack should cover **most** of them — but don’t worry if something
 ### Languages
 
 [![HTML](http://img.shields.io/badge/HTML-darkblue)](https://www.w3schools.com/html/)
-[![Sass](https://img.shields.io/badge/Sass-darkblue)](https://sass-lang.com/)
+[![CSS](https://img.shields.io/badge/CSS-darkblue)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![PHP](https://img.shields.io/badge/PHP-with_Symfony-green?labelColor=darkblue)](https://www.php.net/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-darkblue)](https://www.w3schools.com/js/)
 [![SQL](https://img.shields.io/badge/SQL-darkblue)](https://www.w3schools.com/sql/)
@@ -57,8 +57,6 @@ Your tech stack should cover **most** of them — but don’t worry if something
 [![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-black)](https://github.com/Catrobat/Catroweb/issues)
 [![Docker](https://img.shields.io/badge/Docker-purple)](https://www.docker.com/)
 [![API Documentation](https://img.shields.io/badge/API-blue)](https://developer.catrobat.org/Catroweb/)
-
-### Knowledge Repository
 
 ### Communication
 

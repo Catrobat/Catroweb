@@ -24,7 +24,6 @@ docker compose -f docker/docker-compose.dev.yaml up -d
 
 - Cap dashboard: `http://localhost:3000` (admin key: `catroweb-dev-admin`)
 - **CAPTCHA is disabled by default** (`CAPTCHA_ENABLED=false` in `.env`) — registration works without any Cap setup
-- New contributors can start the containers and everything works immediately
 
 To enable CAPTCHA locally for testing, start the Cap container, create a site key in the dashboard, then update `.env`:
 
@@ -36,126 +35,36 @@ CAPTCHA_SECRET='<secret-from-dashboard>'
 
 ## Production Setup
 
-Production server: `<ip4>` (`share.catrobat.org`), running nginx with Cloudflare origin certs.
+Production config for self-hosted services is maintained in the private [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure) repo; this section describes the running setup.
 
-### Current Infrastructure
+- Cap runs as a container bound to localhost: `docker run -d --name cap --restart unless-stopped -p 127.0.0.1:3000:3000 -e ADMIN_KEY=<admin-key> -v cap-data:/usr/src/app/.data tiago2/cap:latest` (SQLite data in volume `cap-data`).
+- nginx serves `cap.catrobat.org` (Cloudflare-proxied A record, origin certs, `/etc/nginx/sites-enabled/cap`). Admin routes (`/`, `/auth/`, `/server/`) are `deny all`; only the widget JS, challenge API and siteverify are public.
+- `.env.prod.local`:
 
-| Component      | Location                      | Details                                                 |
-| -------------- | ----------------------------- | ------------------------------------------------------- |
-| Cap container  | `127.0.0.1:3000`              | `docker run -d --name cap --restart unless-stopped ...` |
-| nginx proxy    | `cap.catrobat.org`            | `/etc/nginx/sites-enabled/cap`                          |
-| Docker compose | `/opt/cap/docker-compose.yml` | Reference only (docker-compose-plugin not installed)    |
-| Cap data       | Docker volume `cap-data`      | Persistent SQLite data                                  |
-
-### Cap Container
-
-Cap runs as a Docker container bound to localhost only:
-
-```bash
-docker run -d \
-  --name cap \
-  --restart unless-stopped \
-  -p 127.0.0.1:3000:3000 \
-  -e ADMIN_KEY=<admin-key> \
-  -v cap-data:/usr/src/app/.data \
-  tiago2/cap:latest
-```
-
-**Note**: The `docker-compose-plugin` package is not available on this Ubuntu 24.04 server. The container is managed directly with `docker run`. The `/opt/cap/docker-compose.yml` file exists as documentation but is not used.
-
-### nginx Reverse Proxy
-
-Config: `/etc/nginx/sites-enabled/cap`
-
-- Serves `cap.catrobat.org` on ports 80 and 443 (Cloudflare origin certs)
-- Admin routes (`/`, `/auth/`, `/server/`) are blocked with `deny all`
-- Only the widget JS, challenge API, and siteverify endpoints are publicly accessible
-- TLS termination is handled by Cloudflare (origin cert on the server)
-
-### DNS (Cloudflare)
-
-A record for `cap.catrobat.org` → `<ip4>` (proxied through Cloudflare).
-
-### Environment Configuration
-
-Production secrets are in `/var/www/share/shared/.env.prod.local` (symlinked into each release by Deployer):
-
-```env
-CAPTCHA_ENABLED=true
-CAPTCHA_API_ENDPOINT='http://127.0.0.1:3000'
-CAPTCHA_PUBLIC_URL='https://cap.catrobat.org'
-CAPTCHA_SITE_KEY='<site-key>'
-CAPTCHA_SECRET='<secret-key>'
-```
+  ```env
+  CAPTCHA_ENABLED=true
+  CAPTCHA_API_ENDPOINT='http://127.0.0.1:3000'
+  CAPTCHA_PUBLIC_URL='https://cap.catrobat.org'
+  CAPTCHA_SITE_KEY='<site-key>'
+  CAPTCHA_SECRET='<secret-key>'
+  ```
 
 ### Managing Cap
 
+Status/logs/restart: `docker ps | grep cap`, `docker logs cap --tail 50`, `docker restart cap`. Dashboard via SSH tunnel: `ssh -L 3000:127.0.0.1:3000 <user>@<host>`, then <http://localhost:3000>.
+
+Creating a site key via API:
+
 ```bash
-# SSH to server
-
-# Check status
-docker ps | grep cap
-
-# View logs
-docker logs cap --tail 50
-
-# Restart
-docker restart cap
-
-# Access admin dashboard (via SSH tunnel)
-ssh -L 3000:127.0.0.1:3000 <user>@<ip4>
-# Then open http://localhost:3000 in your browser
-
-# Create a site key via API
-curl -s -X POST 'http://127.0.0.1:3000/auth/login' \
-  -H 'Content-Type: application/json' \
-  -d '{"admin_key": "<ADMIN_KEY>"}'
-# Use the returned session_token + hashed_token to call /server/keys
+curl -s -X POST 'http://127.0.0.1:3000/auth/login' -H 'Content-Type: application/json' -d '{"admin_key": "<ADMIN_KEY>"}'
+BEARER=$(echo -n '{"token":"<session_token>","hash":"<hashed_token>"}' | base64)
+curl -s -X POST 'http://127.0.0.1:3000/server/keys' -H "Authorization: Bearer $BEARER" \
+  -H 'Content-Type: application/json' -d '{"name": "share.catrobat.org"}'
 ```
-
-### Creating a Site Key via API
-
-1. Login to get a session token:
-
-   ```bash
-   curl -s -X POST 'http://127.0.0.1:3000/auth/login' \
-     -H 'Content-Type: application/json' \
-     -d '{"admin_key": "<ADMIN_KEY>"}'
-   ```
-
-2. Base64-encode the auth payload:
-
-   ```bash
-   BEARER=$(echo -n '{"token":"<session_token>","hash":"<hashed_token>"}' | base64)
-   ```
-
-3. Create the key:
-   ```bash
-   curl -s -X POST 'http://127.0.0.1:3000/server/keys' \
-     -H "Authorization: Bearer $BEARER" \
-     -H 'Content-Type: application/json' \
-     -d '{"name": "share.catrobat.org"}'
-   ```
-
-## How It Works
-
-1. The registration/password-reset page renders a `<cap-widget>` web component
-2. The widget issues a SHA-256 proof-of-work challenge from the Cap server (via `CAPTCHA_PUBLIC_URL`)
-3. On solve, the widget emits a `solve` event with a token
-4. The token is sent to the API as `captcha_token` in the request body
-5. The backend verifies the token via `POST CAPTCHA_API_ENDPOINT/CAPTCHA_SITE_KEY/siteverify`
-6. The `X-Captcha-Result` response header indicates the verification outcome
 
 ## Testing
 
-- **Test environment**: `CaptchaVerifier` auto-passes all tokens except `'fail'`
-- **`X-Captcha-Result` header** is always present on registration/reset responses:
-  - `test-auto-pass` — test env, token accepted
-  - `test-forced-failure` — test env, token was `'fail'`
-  - `verified` — production, Cap accepted the token
-  - `verification-failed` — production, Cap rejected the token
-  - `missing-token` — no token provided
-  - `disabled` — CAPTCHA_ENABLED=false
+In the test environment `CaptchaVerifier` accepts every token except `'fail'`. Registration/reset responses always carry an `X-Captcha-Result` header (`verified`, `verification-failed`, `missing-token`, `disabled`, `test-auto-pass`, `test-forced-failure`); check it first when debugging.
 
 ## Troubleshooting
 

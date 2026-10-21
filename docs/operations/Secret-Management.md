@@ -1,21 +1,6 @@
 # Secret Management
 
-## Overview
-
-Catroweb uses Symfony's `.env` file hierarchy for configuration. The committed `.env` file contains
-**intentionally insecure development-only defaults** so that developers can run the project locally
-without any extra setup. These defaults **must be overridden** in production.
-
-## Environment File Hierarchy
-
-Symfony loads environment files in this order (later files override earlier ones):
-
-1. `.env` -- committed, contains dev defaults
-2. `.env.local` -- **gitignored**, local overrides for any environment
-3. `.env.{APP_ENV}` -- committed, environment-specific defaults (e.g., `.env.prod`)
-4. `.env.{APP_ENV}.local` -- **gitignored**, environment-specific local overrides
-
-Real environment variables always take precedence over all `.env` files.
+The committed `.env` holds **intentionally insecure dev-only defaults** so the project runs locally without setup. Production overrides them in `.env.prod.local` (gitignored, a Deployer shared file) or real environment variables, which win over every `.env` file. Never put production secrets in a committed file.
 
 ## Secrets That Must Be Overridden in Production
 
@@ -66,14 +51,6 @@ chmod 644 .jwt/public.pem
 
 **Important:** The `JWT_PASSPHRASE` in `.env.prod.local` must match the passphrase used to generate the keys.
 
-### 3. Generate a Secure `APP_SECRET`
-
-```bash
-php -r "echo bin2hex(random_bytes(16)) . PHP_EOL;"
-```
-
-This secret is used by Symfony for CSRF tokens, remember-me cookies, and other security features.
-
 ## Safety Checks
 
 ### Runtime Warning
@@ -93,35 +70,8 @@ The `bin/check-default-secrets` script runs in CI (Static Analysis workflow) and
 - `.env.prod` does not define sensitive secrets (those belong in `.env.prod.local`)
 - `.env.local` is properly gitignored
 
-### Running Locally
-
-```bash
-bin/check-default-secrets
-```
-
-## What NOT to Do
-
-- **Never** put production secrets in `.env`, `.env.prod`, or any other committed file
-- **Never** commit `.env.local` or `.env.prod.local`
-- **Never** use the default `JWT_PASSPHRASE=catroweb` in production
-- **Never** use the default `APP_SECRET` in production
-- **Never** hardcode the production database password in committed files
+Run it locally with `bin/check-default-secrets`.
 
 ## Deployer Integration
 
-The `deploy.php` file configures these as shared files (persisted across deployments):
-
-```php
-add('shared_files', [
-    '.env.prod.local',
-    'google_cloud_key.json',
-    '.dkim/private.key',
-]);
-
-set('shared_dirs', [
-    '.jwt',  // JWT keys persist across deployments
-]);
-```
-
-This means `.env.prod.local` and `.jwt/` are symlinked from the shared directory into each release,
-so production secrets only need to be set up once.
+`deploy.php` shares `.env.prod.local`, `google_cloud_key.json`, `.dkim/private.key` and the `.jwt/` directory across releases, so production secrets are set up once in `/var/www/share/shared/`.

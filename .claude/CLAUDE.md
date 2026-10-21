@@ -1,550 +1,140 @@
 # Catroweb - Project Guide for Claude
 
-## Important: Keep This Document Updated
+Catroweb is the share/communication platform for the Catrobat community: Symfony PHP app with a Vite frontend.
 
-**Always update CLAUDE.md with new learnings** discovered during development sessions (gotchas, patterns, API quirks, workarounds). Run `yarn run fix-asset` after updating.
-
-## Documentation Maintenance
-
-When code, tooling, workflows, or setup commands change, update related docs in `docs/`, `README.md`, and `.github/*.md` in the same PR.
-
-## Overview
-
-Catroweb is the share/communication platform for the Catrobat community. Symfony-based PHP app with Vite frontend.
+Add real gotchas here when you hit them (not per-feature change notes; nothing the code already says). When code, tooling or setup commands change, update `docs/`, `README.md` and `.github/*.md` in the same PR. Run `yarn run fix-asset` after editing markdown.
 
 ## Tech Stack
 
-- **Backend**: PHP 8.5, Symfony 7.4
-- **Frontend**: JavaScript (ES6+), plain CSS, Vite 8 (via `pentatrion/vite-bundle`)
-- **Database**: MariaDB 10.11
-- **Search**: Elasticsearch 9.4
+- **Backend**: PHP 8.5, Symfony 8.0
+- **Frontend**: JavaScript (ES6+), plain CSS, Vite 8 (via `pentatrion/vite-bundle`), Stimulus
+- **Database**: MariaDB 10.11; **Search**: Elasticsearch 9
 - **CSS**: Bootstrap 5, Material Design Components
-- **Package Managers**: Composer (PHP), Yarn (JS)
-
-## Frontend JS Pattern
-
-- Prefer Stimulus controllers for all new page-level UI behavior.
-- For existing vanilla files, migrate incrementally when touching related code (no big-bang rewrites).
-- Keep page entrypoints lean: avoid new `DOMContentLoaded` bootstrapping when a Stimulus controller can own the lifecycle.
+- **Package Managers**: Composer, Yarn 4 via Corepack (`corepack enable`, `nodeLinker: node-modules`)
 
 ## Command Execution
 
-- **yarn commands**: Run **locally**
-- **PHP commands**: Try **native first** (`bin/phpstan`, `bin/psalm`, etc.), fall back to **Docker** (`docker exec app.catroweb ...`) only when Docker is confirmed running
-- **Native-first rule**: Always prefer native commands (`bin/console`, `bin/phpunit`, `bin/php-cs-fixer`, etc.) before reaching for `docker exec`. The user does not always run Docker. Check if a native binary exists before suggesting Docker.
-
-### Yarn (Berry)
-
-- Corepack (`corepack enable`) manages Yarn 4.12.0
-- `.yarnrc.yml` with `nodeLinker: node-modules`
-- CI: `yarn install --immutable`; avoid `actions/setup-node` with `cache: yarn` (calls system Yarn before Corepack)
+- **yarn commands**: run locally.
+- **PHP commands**: native first (`bin/console`, `bin/phpunit`, `bin/phpstan`, `bin/psalm`, `bin/php-cs-fixer`). Fall back to `docker exec app.catroweb ...` only when Docker is confirmed running — the maintainer does not always run Docker.
+- CI: `yarn install --immutable`; avoid `actions/setup-node` with `cache: yarn` (calls system Yarn before Corepack).
 
 ## Key Commands
 
 ```bash
-# Build
 composer install && yarn install
-yarn run dev          # Dev build (one-shot, ~3s)
-yarn run build        # Prod build (PurgeCSS + Bugsnag sourcemap upload, ~3s)
-yarn run watch        # Vite build --watch (full Rollup rebuild per change)
-yarn run dev-server   # Vite dev server with HMR (sub-200ms updates, port 5173)
+yarn run dev          # Dev build (one-shot)
+yarn run build        # Prod build (PurgeCSS + Bugsnag sourcemap upload)
+yarn run watch        # vite build --watch
+yarn run dev-server   # Vite dev server with HMR on :5173
 
-# Test & Lint
-yarn test             # All
-yarn run test-js      # Biome (JS/JSON)
-yarn run test-css     # Prettier (CSS)
-yarn run test-asset   # Prettier (MD/YAML)
-yarn run test-php     # PHP CS Fixer
-yarn run test-twig    # Twig CS Fixer
+yarn test / yarn run fix                 # all linters / all fixers
+yarn run test-js   / fix-js              # Biome (JS/JSON)
+yarn run test-css  / fix-css             # Biome (CSS)
+yarn run test-asset / fix-asset          # Prettier (MD/YAML)
+yarn run test-php  / fix-php             # PHP CS Fixer
+yarn run test-twig / fix-twig            # Twig CS Fixer
 
-# Fix
-yarn run fix          # All
-yarn run fix-js       # JS/JSON (Biome)
-yarn run fix-css      # CSS (Prettier)
-yarn run fix-asset    # MD/YAML (Prettier)
-yarn run fix-php      # PHP
-yarn run fix-twig     # Twig
-
-# Database reset
-yarn run reset        # or: bin/console catro:reset --hard --limit 20
+yarn run reset        # bin/console catro:reset --hard --limit 20
 ```
+
+After dependency changes: `composer install` / `yarn install`, then rebuild the Docker image if you use Docker.
 
 ## Docker
 
 ```bash
 docker compose -f docker/docker-compose.dev.yaml up -d
-# After dependency changes:
-docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb
+docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb   # after dependency changes
 ```
 
-**ES major upgrades**: Elasticsearch refuses to boot on a data volume written by a non-adjacent major (e.g. 8.17 -> 9.x). Wipe and repopulate: `docker compose -f docker/docker-compose.dev.yaml rm -sf elasticsearch && docker volume rm docker_esdata1`, restart, then `bin/console fos:elastica:populate`.
-
-| Service                 | Port | Description      |
-| ----------------------- | ---- | ---------------- |
-| app.catroweb            | 8080 | Main app         |
-| db.catroweb.dev         | 3306 | MariaDB (dev)    |
-| db.catroweb.test        | 3306 | MariaDB (test)   |
-| phpmyadmin.catroweb.dev | 8081 | phpMyAdmin       |
-| elasticsearch           | 9200 | Elasticsearch    |
-| chrome.catroweb         | 9222 | Headless Chrome  |
-| mailpit.catroweb        | 8025 | Email testing UI |
-
-**Volume-mounted**: `assets/`, `src/`, `templates/`, `config/`, `tests/`
-**NOT mounted**: `node_modules/`, `vendor/` (built inside container), `public/build/`
-
-After dependency changes, rebuild the container. After JS changes:
-
-```bash
-# One-shot build + copy (for Behat tests, prod-like dev):
-yarn run dev
-docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/
-docker exec app.catroweb bin/console cache:clear --env=test
-
-# OR for interactive iteration — HMR via Vite dev-server:
-yarn run dev-server   # serves at :5173, app picks it up via pentatrion_vite
-```
-
-The `pentatrion/vite-bundle` auto-detects the dev server. When `yarn run dev-server` is running, Twig `vite_entry_*` tags point at `http://localhost:5173/build/...` with HMR; otherwise they read `public/build/.vite/manifest.json`.
-
-**Dev DB**: host `db.catroweb.dev`, database `catroweb_dev`, user/password `root`/`root`
-
-**Email testing**: Mailpit catches all outgoing emails in dev. Open http://localhost:8025 to view them (verification emails, parental consent emails, etc.). Configured via `MAILER_DSN=smtp://mailpit:1025` in `.env.dev`.
-
-## Project Structure
-
-```
-Catroweb/
-├── assets/           # Frontend (CSS, JS) — Layout/, Components/, User/, Project/, Themes/
-├── config/           # Symfony config
-├── docker/           # Docker config
-├── migrations/       # DB migrations
-├── public/           # Web root (build/ = compiled assets)
-├── src/              # PHP source
-├── templates/        # Twig templates
-├── tests/            # Tests
-├── translations/     # i18n
-├── vite.config.mjs   # Vite config (40+ entries, 9 themes, PurgeCSS, Stimulus)
-└── package.json      # JS dependencies
-```
-
-## CSS
-
-- Plain CSS only — no Sass/SCSS preprocessing. Vite handles bundling; LightningCSS transforms.
-- Bootstrap comes precompiled via `@import 'bootstrap/dist/css/bootstrap.css'` in `assets/Layout/Base.css`.
-- Shared custom properties live in `assets/Layout/Variables.css`.
-- Formatting and linting are enforced by Biome (`yarn run test-css` / `fix-css`; CSS enabled in biome.json).
-
-## CSS Styling Patterns
-
-### Dark Mode
-
-- Use `light-dark(lightValue, darkValue)` for automatic dark mode color adaptation. Our `:root { color-scheme: light; }` (BootstrapOverwrite.css) + Bootstrap's `[data-bs-theme=dark] { color-scheme: dark; }` drive it — `ColorScheme.js` always sets an explicit `data-bs-theme`.
-- The `:root` color-scheme rule is **required** for Vite 8's LightningCSS `light-dark()` downlevel polyfill: toggle vars are only injected into rules declaring `color-scheme`; without a light-mode declaration, every `light-dark()` value computes to garbage in light mode (footer lost its colors after the Vite 8 bump).
-- `--primary` is `light-dark(#007f8f, #4dd0e1)` — auto-adapts in dark mode for text/borders/links.
-- `--primary-bg: #007f8f` — always dark, for filled backgrounds (topbar, btn-primary, FABs, pills) where `#fff` on-primary text sits on top.
-- `--on-primary: #fff` — text on filled primary surfaces.
-- MDC components use `--mdc-theme-primary: var(--primary-bg, var(--primary))` so MDC buttons/topbar always stay dark.
-- Prefer `light-dark()` over `@media (prefers-color-scheme)` — the latter is overridden by Bootstrap's `data-bs-theme` attribute.
-
-### Contrast Requirements (WCAG AA)
-
-- Normal text: 4.5:1 minimum. Bootstrap `$text-muted` (#6c757d on white) = 4.48:1 — just fails. Use `#5a6374` (≈ 5.1:1) instead, or `light-dark(#5a6374, #a0aec0)`.
-- `#a0aec0` on dark backgrounds (≈ #1a1a2e) passes comfortably.
-- Bootstrap subtle badge variants (`bg-success-subtle`, `bg-danger-subtle`, etc.) may fail in dark mode — override with explicit `light-dark()` colors using `!important`.
-
-### Full-bleed Topbar Overlap Pattern
-
-- The topbar is `position: fixed`; `.page-content` has `margin-top: 64px` (56px mobile) to clear it.
-- Default `.page-content` has `padding: 0.75rem`.
-- To make a hero/banner bleed flush against (or slightly behind) the topbar:
-
-  ```css
-  /* Option A — negative margin on element (featured banner pattern): */
-  .featured-slider {
-    margin: -1.25rem calc(-1 * var(--bs-gutter-x, 0.75rem)) 0;
-  }
-  /* Net: eats 1.25rem up past 0.75rem padding → 0.5rem behind topbar, full-width gutter bleed */
-
-  /* Option B — zero page-content top padding + negative margin on header (studio pattern): */
-  .page-content:has(#studio-header) {
-    padding: 0 0 1.5rem;
-  }
-  .studio-detail__header {
-    margin-top: -0.75rem; /* pulls into topbar area */
-  }
-  ```
-
-### Shared Toggle Class Pattern
-
-- `#remix-graph-toggle`, `#code-stats-toggle`, `#code-view-toggle` all share `.project-section-toggle` class defined in `assets/Layout/LegacyBase.css`.
-- Use a **CSS class** applied in Twig templates.
-- Chevron uses `.project-section-toggle__chevron` (BEM element), rotates 180° on `[aria-expanded='true']`.
-
-### CSS Conventions
-
-- No empty rule blocks — remove the `{}` entirely when content is deleted.
-- Run `yarn run fix-css` before committing; CI checks Biome formatting and lint rules.
-
-## Themes
-
-9 themes in `vite.config.mjs`: pocketcode (default), arduino, create@school, embroidery, luna, phirocode, pocketalice, pocketgalaxy, mindstorms. phirocode/pocketalice/mindstorms/pocketgalaxy are content-identical copies of pocketcode; Rollup dedupes them to one CSS file at the hash level, and the virtual-entry wrapper in `vite/plugins.mjs` keeps a distinct manifest entry per theme name.
-
-## Environment Files
-
-`.env` (base), `.env.dev`, `.env.test`, `.env.prod`
-
-## Common Issues
-
-### Doctrine DQL: Use PHP Property Names
-
-DQL uses PHP property names, NOT column names: `c.isReported` (not `c.is_reported`).
-
-### Forcing IDs in Behat Fixtures
-
-`setId()` after `persist()` is ignored with AUTO_INCREMENT. Use raw DBAL SQL instead. See `insertUserComment()` in `ContextTrait.php`.
-
-### Twig path() Inherits Theme from Request Context
-
-Routes with `/{theme}/...` need explicit theme from API context:
-
-```twig
-{{ path('route', {id: x, theme: request_theme|default('pocketcode')}) }}
-```
-
-### index_test.php Always Uses debug=false
-
-Hardcoded `new Kernel('test', false)`. `APP_DEBUG=1` has no effect. Debug with `file_put_contents('/tmp/debug.txt', ...)`.
-
-### POST Endpoints Require Content-Type in Behat
-
-Always add: `And I have a request header "CONTENT_TYPE" with value "application/json"`
-
-### PHP-CS-Fixer Cache
-
-Always use `--using-cache=no` on generated OpenAPI files. CI runs without cache and catches issues local cache hides.
-
-### DQL INSTANCE OF: No Parameters
-
-```php
-// WRONG: $qb->andWhere('n INSTANCE OF :type')->setParameter('type', Foo::class);
-// CORRECT: $qb->andWhere('n INSTANCE OF '.Foo::class);
-```
-
-### TranslatorAwareTrait
-
-`$translator` is private. Use `$this->trans('key')` (no domain arg; signature: `trans(string $id, array $params = [], ?string $locale = null)`).
-
-### After Changing Dependencies
-
-```bash
-# package.json: rm -rf node_modules yarn.lock && yarn install
-# composer.json: composer install
-# Then rebuild Docker container if using Docker
-```
-
-### Never set `Location` on a 2xx non-201 response
-
-PHP's CGI/FastCGI SAPI rewrites `200 OK + Location: ...` into `302 Found`, even though the framework set status 200. This silently breaks client-side `fetch()` that tries `response.json()` after following the redirect to an HTML page. Symfony's PHP built-in server (cli-server SAPI) doesn't do this rewrite, so dev works while prod is broken.
-
-Use `Content-Location` for descriptive metadata on 2xx non-201 responses. Keep `Location` only on `201 Created`.
-
-### PHP-CS-Fixer: Multiple Files
-
-Run on each file separately: `bin/php-cs-fixer fix file1 && bin/php-cs-fixer fix file2`
-
-### Don't Stub `Request` (Symfony >= 8.1)
-
-Request bag properties (`attributes`, `query`, `request`, ...) are property hooks since http-foundation 8.1, and PHPUnit doubles hooked properties. A `createStub(Request::class)` with a reflection-injected bag mock silently bypasses the mock (expectations record 0 calls). Use a real `Request::create($uri)` (plus real `RequestEvent`/`RequestContext`) and assert resulting state instead.
-
-## PHP Static Analysis & Testing
-
-Run before committing (all four must pass):
-
-1. `bin/php-cs-fixer fix <file>` -- auto-fix style
-2. `bin/phpstan analyse <file>` -- static analysis (level max, `src/` only)
-3. `bin/psalm <file>` -- type checking
-4. `bin/phpunit --filter ClassName` -- unit tests
-
-Use `docker exec app.catroweb` prefix if native commands fail.
-
-**PHPUnit 13**: avoid `expects($this->any())`; don't use `with()` without `expects()`. Prefer `method()` on stubs. See [CLAUDE_PHPUNIT_MOCKING.md](CLAUDE_PHPUNIT_MOCKING.md) for full guidelines.
-
-**Quick Rule**: `createStub()` for return values, `createMock()` only with `expects()`.
-
-## Behat Testing
-
-### Running Tests
-
-**Always use `-s <suite>`** -- without it, hooks run 20+ times per test.
-
-```bash
-docker exec app.catroweb bin/behat -f pretty -s web-admin
-docker exec app.catroweb bin/behat -f pretty -s web-profile tests/BehatFeatures/web/profile/file.feature
-docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/web/admin/file.feature:206"
-```
-
-### Common Suites
-
-| Suite               | Path / Description                                                  |
-| ------------------- | ------------------------------------------------------------------- |
-| api-achievements    | api/achievements                                                    |
-| api-authentication  | api/authentication                                                  |
-| api-comments        | api/comments                                                        |
-| api-followers       | api/followers                                                       |
-| api-media-library   | api/media-library                                                   |
-| api-moderation      | api/moderation                                                      |
-| api-notifications   | api/notifications                                                   |
-| api-projects        | api/projects                                                        |
-| api-projects-get    | api/projects GET\_\* dirs (split)                                   |
-| api-projects-write  | api/projects POST,DELETE,PUT,reactions (split)                      |
-| api-search          | api/search                                                          |
-| api-studio          | api/studio                                                          |
-| api-translation     | api/translation                                                     |
-| api-user            | api/user                                                            |
-| api-utility         | api/utility                                                         |
-| web-achievements    | web/achievements                                                    |
-| web-admin           | web/admin                                                           |
-| web-admin-1         | admin split: projects, featured, approve, login, moderation, maint. |
-| web-admin-2         | admin split: db_updater, example, flags, mail, media, survey etc    |
-| web-general         | web/general                                                         |
-| web-notifications   | web/notifications                                                   |
-| web-profile         | web/profile                                                         |
-| web-profile-1       | profile split: edit, profile, image, data_export                    |
-| web-profile-2       | profile split: follow, user_projects, verification, suspended       |
-| web-project-details | web/project-details                                                 |
-| web-reactions       | web/reactions                                                       |
-| web-reports         | web/reports                                                         |
-| web-translation     | web/translation                                                     |
-
-Suite config in `behat.yaml.dist`. Adding a new suite requires updating: `behat.yaml.dist`, `.github/workflows/tests.yaml` (matrix), and this table.
-
-### Assertion Contexts
-
-- **API** (`ApiContext`): `the client response should contain`
-- **Web** (`CatrowebBrowserContext`): `the response should contain`
-
-### Debugging
-
-Browse test state at `http://localhost:8080/index_test.php/` after a scenario.
-
-### JS Changes + Behat
-
-After JS changes: `yarn run dev` -> `docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/` -> clear cache -> run tests.
-
-### Preventing Flaky Tests
-
-1. **Layer waits after async ops**: spinner wait -> `I wait for AJAX to finish` -> `I wait for the element ".x" to contain "y"` -> assertion
-2. **Wait for content changes**, not just element existence
-3. **`should not exist`** when JS calls `element.remove()` (not `should not be visible`)
-4. **Fixed delays** (`I wait 1000 milliseconds`) only as last resort
-5. High-risk scenarios: visibility toggles, reactions, form submissions, modals, infinite scroll
-
-### Behat Fixtures
-
-- **JSON request body**: use heredoc (`"""`), NOT Gherkin tables
-- **Admin users**: `there are admins:` step (not a column in `there are users:`)
-- **`created_at`**: use `the users are created at:` step separately
-- **Studio IDs**: UUIDs via `MyUuidGenerator`; specify `id` in fixture for deterministic UUIDs
-- **SweetAlert2**: radio `#report-cat-{value}`, textarea `#report-note`, confirm `.swal2-confirm`
-- **Docker**: `behat.yaml.dist` NOT volume-mounted; copy with `docker cp behat.yaml.dist app.catroweb:/var/www/catroweb/behat.yaml` after adding suites
-
-## Development Workflow
-
-| Change Type   | Run                                                 |
-| ------------- | --------------------------------------------------- |
-| PHP src/      | php-cs-fixer -> phpstan -> psalm -> phpunit         |
-| PHP tests/    | php-cs-fixer -> phpstan -> psalm -> phpunit         |
-| JS/CSS/Assets | fix-js -> fix-css -> fix-asset, then `yarn run dev` |
-| API endpoints | PHPUnit + Behat API suite                           |
-| UI/Templates  | Behat web tests                                     |
-
-## JavaScript Patterns
-
-### DOMContentLoaded
-
-Vite emits `<script type="module" defer>` tags (defer via `pentatrion_vite.script_attributes`). Modules execute before `DOMContentLoaded`, so the standard `addEventListener('DOMContentLoaded', fn)` pattern works. Fallback for edge cases:
-
-```javascript
-document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn) : fn()
-```
-
-### Event Delegation
-
-Use `.closest()` not `.matches()` to handle clicks on child elements.
-
-### Guest -> Login -> Action Pattern
-
-Store pending action in `sessionStorage`, redirect to login, execute after login. Key rules:
-
-- `sessionStorage` (not `localStorage`) -- doesn't persist across sessions
-- Validate context (e.g., same project ID) before executing
-- Remove item immediately after reading
-- Execute synchronously during page init
-
-### JS 403 Error Handling
-
-All write API calls must parse 403 body to distinguish:
-
-- `"Email verification required."` -> verify email message
-- `"Your account has been suspended."` -> suspension message
-- Other -> generic error
-
-Data attributes: `data-trans-account-suspended`, `data-trans-report-suspended`
-
-## Git Workflow
-
-- Main branch: `main`
-- Feature branches merged via PR
-- CI: GitHub Actions (static + dynamic analysis)
-
-### Worktrees for New Issues
-
-```bash
-git fetch origin develop
-git worktree add .claude/worktrees/<name> -b feature/<issue>-<desc> origin/develop
-# Work in .claude/worktrees/<name>/
-git worktree remove .claude/worktrees/<name>  # cleanup
-```
-
-### Second Docker from Worktree
-
-Use `-p <project>` with `docker-compose.override.yaml` for unique container names and non-conflicting ports. The `container_name` overrides are required (base compose has hardcoded names). Use `ports: !override` (compose v5+).
+Ports: app 8080, phpMyAdmin 8081, MariaDB 3306 (`db.catroweb.dev` / `catroweb_dev`, `root`/`root`), Elasticsearch 9200, headless Chrome 9222, Mailpit 8025 (catches all dev mail).
+
+- Volume-mounted: `assets/`, `src/`, `templates/`, `config/`, `tests/`. **Not** mounted: `node_modules/`, `vendor/`, `public/build/`, `behat.yaml.dist`.
+- After JS changes for Behat: `yarn run dev && docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/ && docker exec app.catroweb bin/console cache:clear --env=test`.
+- When `yarn run dev-server` runs, `pentatrion/vite-bundle` auto-detects it and serves via HMR; otherwise it reads `public/build/.vite/manifest.json`.
+- **ES major upgrades**: ES refuses a data volume from a non-adjacent major. Wipe: `docker compose -f docker/docker-compose.dev.yaml rm -sf elasticsearch && docker volume rm docker_esdata1`, restart, `bin/console fos:elastica:populate`.
+- **Second stack from a worktree**: `-p <project>` plus a `docker-compose.override.yaml` with `container_name` overrides (base compose hardcodes names) and `ports: !override`.
+
+## Frontend
+
+- New page-level UI behavior goes into Stimulus controllers. Migrate existing vanilla files incrementally when touching them; no new `DOMContentLoaded` bootstrapping where a controller can own the lifecycle.
+- Event delegation: use `.closest()`, not `.matches()`.
+- Twig → JS data: `data-trans-*` for translations, `data-base-url` for the API prefix; escape with `escapeHtml()`/`escapeAttr()`.
+- Write API calls must parse a 403 body: `"Email verification required."` vs `"Your account has been suspended."` vs generic.
+- Guest → login → action: store the pending action in `sessionStorage`, validate context (same project ID), remove it immediately after reading.
+- Web → API auth: JS sends `Authorization: 'Bearer ' + getCookie('BEARER')`; the `api` firewall is stateless.
+
+### CSS
+
+- Plain CSS only (no Sass). Bootstrap is imported precompiled in `assets/Layout/Base.css`; shared custom properties live in `assets/Layout/Variables.css`.
+- Dark mode: use `light-dark(light, dark)`, not `@media (prefers-color-scheme)` (Bootstrap's `data-bs-theme` overrides the media query).
+- The `:root { color-scheme: light; }` rule in BootstrapOverwrite.css is **required**: Vite 8's LightningCSS `light-dark()` polyfill only injects toggle vars into rules declaring `color-scheme`; without it every `light-dark()` value is garbage in light mode.
+- `--primary` adapts to dark mode (text/borders/links); `--primary-bg` is always dark for filled surfaces with `--on-primary` (#fff) text. MDC uses `--mdc-theme-primary: var(--primary-bg, var(--primary))`.
+- WCAG AA: Bootstrap `text-muted` (#6c757d on white, 4.48:1) fails. Use `light-dark(#5a6374, #a0aec0)`. Bootstrap `*-subtle` badges can fail in dark mode; override with explicit `light-dark()` colors.
+- No empty rule blocks.
+
+### Themes
+
+9 themes in `vite.config.mjs`. phirocode/pocketalice/mindstorms/pocketgalaxy are content-identical copies of pocketcode; Rollup dedupes them to one CSS file, and the virtual-entry wrapper in `vite/plugins.mjs` keeps a distinct manifest entry per theme.
+
+## PHP
+
+Before committing (all must pass): `bin/php-cs-fixer fix <file>` → `bin/phpstan analyse <file>` → `bin/psalm <file>` → `bin/phpunit --filter ClassName`.
+
+- PHP-CS-Fixer: one file per invocation; use `--using-cache=no` on generated OpenAPI files (CI runs without cache).
+- PHPUnit 13: `createStub()` for return values, `createMock()` only with `expects()`. See [CLAUDE_PHPUNIT_MOCKING.md](CLAUDE_PHPUNIT_MOCKING.md).
+- Don't stub `Request` (http-foundation ≥ 8.1): request bags are property hooks, a stub with a reflection-injected bag silently bypasses the mock. Use `Request::create($uri)` and assert resulting state.
+- `RateLimiterFactory` is `final`: in tests use a real instance with `no_limit` policy + `InMemoryStorage`.
+- Doctrine DQL uses property names (`c.isReported`), not column names. `INSTANCE OF` takes no parameters: `'n INSTANCE OF '.Foo::class`.
+- Avoid raw SQL in repositories: Behat creates tables via the Doctrine schema tool, names can differ.
+- `TranslatorAwareTrait`: `$translator` is private; use `$this->trans('key')` (no domain arg).
+- Never set `Location` on a 2xx non-201 response: FastCGI rewrites `200 + Location` into `302` (the dev cli-server doesn't, so only prod breaks). Use `Content-Location`.
+- `kernel.terminate` fires in-process in tests; its exceptions propagate.
 
 ## API
 
-- OpenAPI spec in `src/Api/OpenAPI/`
-- Generate: `yarn run generate-api`
+- OpenAPI spec in `src/Api/OpenAPI/`. After `yarn run generate-api`: `bin/rector process src/Api/OpenAPI/Server/ && bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no`, then fix calling code.
+- **Never `$ref` enums in response models** — JMS Serializer emits objects. Inline `type: string` + `enum: [...]`.
+- Feature services live in `src/Api/Services/{Feature}/` (Facade, Loader, Processor, RequestValidator, ResponseManager).
+- **Register every API handler** in `config/services.php`: `$services->set(XxxApi::class)->tag('open_api_server.api', ['api' => 'xxx'])`. Tag = lowercase OpenAPI tag; missing → 500.
+- Cursor pagination: fetch `$limit + 1`, `has_more` if the extra row exists; cursor = `base64_encode((string) $last_id)`; response `{ data, next_cursor, has_more }`.
+- Validation: 400 for query parameters, 422 for request bodies.
+- `config/packages/security.php`: admin rules and explicit `PUBLIC_ACCESS` GET rules must come BEFORE the `^/api` catch-all.
+- `AccountStateEventListener` blocks write calls from unverified/suspended users with 403 (auth, registration, password reset, appeal exempt).
+- Rate limiters: `config/packages/rate_limiter.php`, trait `src/Api/RateLimitTrait.php`. Config key `report_burst` → constructor param `$reportBurstLimiter`; admins usually exempt; 429 with null body.
 
-### After `yarn run generate-api`
+## Moderation
+
+`src/Moderation/`. Non-obvious rules:
+
+- `ContentVisibilityManager` does NOT flush; callers own the transaction.
+- Resolving one report resolves all pending reports for the same content; rejected reports don't whitelist content.
+- `auto_hidden` (community) and `visible` (admin) are independent flags.
+- Polymorphic content uses `content_type` + `content_id` (VARCHAR) instead of Doctrine STI: UUIDs for projects/users/studios, int-as-string for comments.
+- Usernames must not contain links (`LinkDetector`, OAuth-derived names too).
+
+## Behat
+
+**Always pass `-s <suite>`** — without it, hooks run 20+ times per test. Suites are defined in `behat.yaml.dist`; a new suite also needs the matrix in `.github/workflows/tests.yaml`, and in Docker a `docker cp behat.yaml.dist app.catroweb:/var/www/catroweb/behat.yaml`.
 
 ```bash
-bin/rector process src/Api/OpenAPI/Server/
-bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
+docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/web/admin/file.feature:206"
 ```
 
-Then update calling code (method signatures may change).
+- Assertions: API (`ApiContext`) `the client response should contain`; web (`CatrowebBrowserContext`) `the response should contain`.
+- `the JSON response field :path should be :expected` compares JSON-encoded values: `should be '"member"'`.
+- POST endpoints need `And I have a request header "CONTENT_TYPE" with value "application/json"`; JSON bodies go in heredocs (`"""`), not tables.
+- Fixtures: admins via `there are admins:`; `created_at` via `the users are created at:`; give studios an `id` for deterministic UUIDs. `setId()` after `persist()` is ignored with AUTO_INCREMENT — insert via DBAL.
+- Doctrine ManyToMany inverse collections (`$user->getFollowers()`) come back empty due to identity-map caching; query with DQL JOINs.
+- `index_test.php` hardcodes `new Kernel('test', false)`; `APP_DEBUG=1` has no effect. Inspect state at `http://localhost:8080/index_test.php/` after a scenario.
+- Mink `locatePath` prepends the front-controller segment even for leading-slash paths; to test that a static file is denied, request the raw origin over HTTP.
+- Twig `path()` for `/{theme}/...` routes needs `theme: request_theme|default('pocketcode')` when rendered from API context.
+- Flakiness: after async ops wait spinner → `I wait for AJAX to finish` → wait for the element content, then assert. Use `should not exist` when JS calls `element.remove()`. Fixed delays only as last resort.
 
-### OpenAPI Enum Serialization
+## Git
 
-**Never use `$ref` for enums in response models** -- JMS Serializer serializes them as objects. Use inline `type: string` + `enum: [...]` instead.
+- Main branch `main`; feature branches via PR; CI is GitHub Actions.
+- New issue in a worktree: `git worktree add .claude/worktrees/<name> -b feature/<issue>-<desc> origin/main`.
 
-### Architecture
+## Deploy Gotcha
 
-Facade pattern per feature in `src/Api/Services/{Feature}/`:
-
-- `{Feature}ApiFacade.php` -- orchestration
-- `{Feature}ApiLoader.php` -- data loading
-- `{Feature}ApiProcessor.php` -- business logic
-- `{Feature}RequestValidator.php` -- validation
-- `{Feature}ResponseManager.php` -- response formatting
-
-### Registering API Handlers (Critical!)
-
-```php
-$services->set(XxxApi::class)->tag('open_api_server.api', ['api' => 'xxx']);
-```
-
-Tag value must match OpenAPI tag name (lowercase). Without this -> 500.
-
-### Cursor-Based Pagination
-
-Fetch `$limit + 1`; if extra exists, `has_more = true` + `array_pop()`. Cursor = `base64_encode((string) $last_id)`. Response: `{ data, next_cursor, has_more }`. See `CommentsApi`, `NotificationsApi`.
-
-### HTTP Validation Status Codes
-
-- **400**: query parameter failures
-- **422**: request body failures
-
-### Security Config
-
-Admin endpoint rules MUST come BEFORE the `^/api` catch-all in `config/packages/security.php`. Public GET endpoints need explicit `PUBLIC_ACCESS` before the catch-all.
-
-### AccountStateEventListener
-
-`kernel.request` listener blocks write API calls (POST/PUT/DELETE/PATCH) for unverified/suspended users -> 403. Exempt: auth, registration, password reset, appeal endpoints.
-
-### Polymorphic Content Pattern
-
-Moderation uses `content_type` (enum) + `content_id` (VARCHAR) instead of Doctrine STI. UUIDs for projects/users/studios, int-as-string for comments.
-
-### Template Whitelist/Hidden Conditions
-
-Report buttons hidden when whitelisted OR auto-hidden:
-
-- **Project**: `not my_project and not is_whitelisted and not project.autoHidden`
-- **User**: `not profile.approved`
-- **Comment**: `not comment.user_approved|default(false)`
-
-## Moderation System
-
-Located in `src/Moderation/`. Key services: `TrustScoreCalculator`, `ReportProcessor`, `AppealProcessor`, `AutoModerationService`, `ContentVisibilityManager`.
-
-Key rules:
-
-- Auto-hide at cumulative trust >= 10.0; min trust to report = 0.5
-- `ContentVisibilityManager` does NOT flush (callers own transaction)
-- Batch resolution: accepting/rejecting one report resolves ALL pending reports for same content
-- Cascade: banning user hides all their projects and comments (bulk DQL UPDATE)
-- Trust accuracy: +1.5 accepted, -2.0 rejected, clamped [-5.0, +5.0]
-- Rejected reports don't whitelist content
-- `auto_hidden` (community) and `visible` (admin) are independent
-- Usernames must not contain links (`LinkDetector`, also for OAuth-derived names); rename older accounts with `bin/console catro:moderation:rename-link-usernames --dry-run`
-
-## Rate Limiting
-
-Config: `config/packages/rate_limiter.php` (sliding_window). Trait: `src/Api/RateLimitTrait.php`.
-
-| Limiter                | Limit | Interval | Key  |
-| ---------------------- | ----- | -------- | ---- |
-| `report_burst`         | 3     | 15min    | User |
-| `report_daily`         | 10    | 24h      | User |
-| `comment_burst`        | 5     | 5min     | User |
-| `comment_daily`        | 50    | 24h      | User |
-| `reaction_burst`       | 30    | 5min     | User |
-| `follow_burst`         | 20    | 5min     | User |
-| `appeal_daily`         | 3     | 24h      | User |
-| `upload_daily`         | 10    | 24h      | User |
-| `auth_burst`           | 10    | 15min    | IP   |
-| `registration_burst`   | 3     | 1h       | IP   |
-| `password_reset_burst` | 5     | 1h       | IP   |
-| `search_burst`         | 30    | 1min     | IP   |
-| `studio_create_daily`  | 5     | 24h      | User |
-
-Wiring: config key `report_burst` -> constructor param `$reportBurstLimiter`. Admins typically exempt. Return 429 with null body.
-
-**Testing**: `RateLimiterFactory` is `final` -- use real instance with `no_limit` policy + `InMemoryStorage` in tests.
-
-## Web -> API: JWT Authentication
-
-Web pages use `BEARER` cookie. API calls from JS need `Authorization: 'Bearer ' + getCookie('BEARER')`. The `api` firewall is stateless.
-
-After form login, `FormLoginSuccessHandler` sets BEARER+REFRESH_TOKEN cookies (preserves `_target_path` redirect). The `/app/login` page uses `LoginTokenHandler.js` which POSTs to `/api/authentication` directly.
-
-### Login Redirect
-
-`LoginTokenHandler.js` reads `#target-path` value. Accepts absolute same-origin URLs via `new URL(rawValue, origin)` + isSameOrigin check.
-
-## Server-to-Client Migration Pattern
-
-1. Add OpenAPI endpoints + schemas -> `yarn run generate-api` -> CS fix
-2. Create `src/Api/Services/{Feature}/` (Facade, Loader, Processor, ResponseManager, Validator)
-3. Create `src/Api/{Feature}Api.php` implementing generated interface
-4. **Register in `config/services.php`** (easy to forget!)
-5. Strip controller to thin shell, strip Twig to containers with `data-*` attributes
-6. Rewrite JS: fetch API, render DOM client-side
-7. Update sidebar badge to use API count endpoint
-8. Delete dead templates, update Behat tests (add AJAX waits)
-9. Write PHPUnit + API Behat tests
-
-## Miscellaneous Gotchas
-
-- **`kernel.terminate` in tests**: fires in-process, exceptions propagate. Use `$json['key'] ?? null` for optional keys.
-- **Comment pagination**: ASC order (oldest first), cursor uses `gt` condition.
-- **Machine translation URL**: extract comment ID with regex `preg_match('/\/comments\/(\d+)\//', $path, $m)` (not last segment).
-- **Avoid raw SQL in repositories**: Behat creates tables via Doctrine schema tool with potentially different names. Use DQL with entity class references.
-- **Doctrine ManyToMany inverse collections in Behat**: `$user->getFollowers()` returns empty due to identity map caching. Use DQL JOIN queries instead.
-- **Sidebar `updateBadge()`**: `apiToCall='old'` reads `data.count`, `'new'` reads `data.total`. `badgeText=null` shows count number.
-- **Twig data attributes for client-side**: `data-trans-*` for translations, `data-base-url` for API prefix. Include `escapeHtml()`/`escapeAttr()` in JS.
-- **Behat `the JSON response field :path should be :expected`** compares JSON-encoded values: strings need a JSON literal inside the Gherkin quotes (`should be '"member"'`).
-- **Mink `locatePath`** prepends the front-controller segment from `base_url` even for leading-slash paths. To test that a static file is denied, request the raw origin over HTTP.
-- **Protected project files** (`/project-files/{id}/assets/{path}`): before deploying behind nginx, the `^~ /project-files/` routing prefix must already be live. See `docs/operations/Protected-Project-Files.md`.
+Protected project files (`/project-files/{id}/assets/{path}`): the nginx `^~ /project-files/` routing prefix must be live before deploying. See `docs/operations/Protected-Project-Files.md`.

@@ -1,12 +1,8 @@
 # Domain Change Guide
 
-How to change the production domain (e.g., `old.example.com` → `new.example.com`) when using Cloudflare + nginx origin setup.
+How to change the production domain (e.g., `old.example.com` → `new.example.com`).
 
-## Overview
-
-Traffic flow: `User → Cloudflare (public SSL) → nginx (origin SSL) → PHP-FPM`
-
-Each domain needs its own Cloudflare origin certificate for the Cloudflare→nginx connection.
+Traffic flow: `User → Cloudflare (public SSL) → nginx (origin SSL) → PHP-FPM`. Each domain needs its own Cloudflare origin certificate (that is what lets Cloudflare run in Full/strict mode instead of unencrypted "Flexible"). Production nginx vhosts are maintained in the private [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure) repo; apply the nginx changes below there.
 
 ## Steps
 
@@ -56,7 +52,7 @@ server {
     root /var/www/catroweb/current/public/;
     server_name new.example.com;
 
-    # ... (standard location blocks, see Server-Setup.md)
+    # ... (existing location blocks)
 }
 ```
 
@@ -126,8 +122,8 @@ Visit `https://old.example.com/any/path` — should 301 redirect to `https://new
 
 After nginx is working, update any app-level domain references:
 
-- `.env.prod.local`: `APP_URL`, `TRUSTED_HOSTS`, `CORS_ALLOW_ORIGIN`
-- OAuth callback URLs (if any)
+- `.env.prod.local`: any domain-bound values (e.g. `TRUSTED_HOSTS`)
+- OAuth callback URLs at the providers
 - Email templates referencing the old domain
 
 ## Troubleshooting
@@ -138,7 +134,3 @@ After nginx is working, update any app-level domain references:
 | **521**         | Cloudflare can't reach origin at all  | Check nginx is running, firewall allows 443, DNS points to correct IP                    |
 | **525**         | SSL handshake failed                  | Check `ssl_protocols` includes TLSv1.2+, cert/key files are readable by nginx            |
 | Old cert served | `sites-enabled` is a stale copy       | Replace with symlink (step 4), reload nginx                                              |
-
-## Why Origin Certs?
-
-Cloudflare origin certificates authenticate the connection between Cloudflare's edge and your server. Without them, you'd need to set Cloudflare SSL mode to "Flexible" (HTTP between Cloudflare and origin), which is insecure — traffic between Cloudflare and your server would be unencrypted.

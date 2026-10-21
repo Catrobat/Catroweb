@@ -10,7 +10,7 @@ When tests are failing the PR will not be accepted.
 
 ### Guides
 
-There are comprehensive Guides and Cheat Sheets available in our [wiki](../docs/README.md).
+Guides are in [docs](../docs/README.md).
 Make sure to check them out if you have any questions, before asking a project maintainer.
 
 #### Workflow (TDD/BDD)
@@ -21,56 +21,4 @@ Make sure to check them out if you have any questions, before asking a project m
 4. Check that all tests pass
 5. Repeat 1-4 if necessary
 
-##### 6. Create a Pull Request:
-
-Also, make sure that every commit has the **correct commit message layout** so it shows up on JIRA.<br/>
-must read: [How to Write a Git Commit Message, by Chirs Beams](http://chris.beams.io/posts/git-commit/)
-
-```
- Line 1: SHARE-XXX Fitting Title (< 50 chars)
- Line 2: empty line
- Lines 3 - X: actual commit message; first focusing on WHY then focusing on WHAT you have changed.
-```
-
-Squash your commits, there must be only 1 commit! (XX is the number of your commits)
-
-```
-git reset --soft HEAD~XX &&
-git commit
-```
-
-When there is only one commit and you just need to change the commit message you can use:
-
-```
-git commit --amend
-```
-
-Go to GitHub and **create a Pull-Request** from your forked repository into the official repository.<br/>
-
-- check that you create the PR from your correct ticket branch!
-- check that PR targets the `main` branch!
-- enable "allow edits from maintainers", this allows the Seniors to rebase your PR if needed
-
-##### 7. Keep your PR up-to-date and be responsive to requested changes. Make sure the CI tests pass
-
-- **merge-conflicts?** Resolve them and rebase your PR.<br/>
-
-  ```
-  git checkout main
-  git pull catroweb main
-  git checkout SHARE-XX
-  git rebase -i main
-  ```
-
-  Resolve conflicts if necessary (Note: IDE's like Phpstorm have great tools to resolve such conflicts).
-
-  ```
-  git rebase --continue
-  git push -f
-  ```
-
-- **requested changes?**
-
-  Feel free to discuss them with your code reviewer before blindly accepting them.
-  Then if necessary apply the changes.
-  After resolving the changes, don't forget to squash your commits and force push the branch.
+6. Create a pull request and keep it up to date: commit message layout, squashing, rebasing and the PR checks are described in [Workflow](../docs/contributor-guide/Workflow.md). Feel free to discuss requested changes with your reviewer before applying them.
