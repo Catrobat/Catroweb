@@ -595,3 +595,7 @@ Mink locatePath prepends the front-controller segment from base_url even for lea
 ### ExpressionLanguage security dependency
 
 The locked ExpressionLanguage version must include the complete CVE-2026-109449 fix (8.1.9 on the 8.x branch). Earlier nesting fixes were incomplete. The dependency integration test checks normal cached evaluation and bounded excessive expression shapes in subprocesses; it refuses to probe an older installation. No direct untrusted expression entry point was identified in application source during this update; this does not establish that indirect integrations are unreachable. See the [official advisory](https://symfony.com/cve-2026-109449).
+
+## Verified analysis-tool downloads
+
+Use the allowlisted CI helper for PHPLOC/PHPCPD rather than an unversioned PHAR fetch. Check the actual PHP branch/security floor before fetching. HTTP success and the reviewed SHA256 must pass before executing downloaded bytes; then verify the exact version before installation. Initial pins are anchored in the official HTTPS origin, not a claim of PGP verification. Keep existing scan scopes/exclusions and nonzero exit behavior. See `docs/operations/CI-analysis-tools.md`.

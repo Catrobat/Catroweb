@@ -2,6 +2,7 @@
 
 Public operations docs for Catroweb maintainers.
 
+- [CI-analysis-tools.md](./CI-analysis-tools.md) — Pinned official analysis-tool downloads and fail-closed verification.
 - [Cron-Jobs.md](./Cron-Jobs.md) — How the `catrobat:cronjob` dispatcher schedules and tracks all periodic tasks.
 - [Data-consistency.md](./Data-consistency.md) — Read-only data consistency checks and explicitly approved repairs using the application owner.
 - [Domain-Change.md](./Domain-Change.md) — Procedure for changing the production domain behind Cloudflare + nginx origin.

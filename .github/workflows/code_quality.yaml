@@ -149,10 +149,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - name: PHP Copy Paste Detector
-        uses: StephaneBour/actions-php-cpd@8.2
+      - name: Set up PHP for analysis tools
+        uses: shivammathur/setup-php@v2
         with:
-          args: --exclude=src/Api/OpenAPI/Server --exclude=src/DB/Entity src
+          php-version: 8.5.12
+          coverage: none
+      - name: Download verified PHPCPD
+        run: bash .github/scripts/install-analysis-tool.sh phpcpd
+      - name: PHP Copy Paste Detector
+        run: php "$RUNNER_TEMP/analysis-tools/phpcpd.phar" --exclude=src/Api/OpenAPI/Server --exclude=src/DB/Entity src
 
   #
   # phpdd (Php Code Fixer):
@@ -179,8 +184,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - run: wget https://phar.phpunit.de/phploc.phar
-      - run: php phploc.phar src tests
+      - name: Set up PHP for analysis tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5.12
+          coverage: none
+      - name: Download verified PHPLOC
+        run: bash .github/scripts/install-analysis-tool.sh phploc
+      - run: php "$RUNNER_TEMP/analysis-tools/phploc.phar" src tests
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Twig **
