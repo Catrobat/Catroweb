@@ -17,6 +17,8 @@ use Behat\Mink\Exception\ResponseTextException;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
@@ -46,6 +48,39 @@ class CatrowebBrowserContext extends BrowserContext
     Assert::assertNotEmpty($this->getSession()->getCookie('REFRESH_TOKEN'));
     Assert::assertNotSame($this->remembered_bearer, $this->getSession()->getCookie('BEARER'));
     Assert::assertNotSame($this->remembered_refresh, $this->getSession()->getCookie('REFRESH_TOKEN'));
+  }
+
+  /** @Then the raw-origin file :legacy is denied while :authorized is served as :mime */
+  public function rawOriginProjectFileIsDenied(string $legacy, string $authorized, string $mime): void
+  {
+    $base_url = $this->getMinkParameter('base_url');
+    Assert::assertIsString($base_url);
+    Assert::assertStringStartsWith('/', $legacy);
+    $origin = Request::create($base_url)->getSchemeAndHttpHost();
+    $client = HttpClient::create(['max_redirects' => 0, 'timeout' => 10]);
+    // These are network requests to the real web server, never the in-memory API kernel.
+    $allowed = $client->request('GET', $this->locatePath($authorized));
+    Assert::assertSame(200, $allowed->getStatusCode());
+    Assert::assertSame($mime, $allowed->getHeaders(false)['content-type'][0] ?? null);
+    $file_bytes = $allowed->getContent(false);
+    Assert::assertNotEmpty($file_bytes);
+
+    // Deliberately omit the front controller: otherwise Symfony's empty 404 masks Apache routing.
+    $raw_url = $origin.$legacy;
+    $denied = $client->request('GET', $raw_url);
+    Assert::assertSame(404, $denied->getStatusCode());
+    Assert::assertSame($raw_url, $denied->getInfo('url'));
+    foreach ([$allowed, $denied] as $response) {
+      $cache_control = strtolower(implode(',', $response->getHeaders(false)['cache-control'] ?? []));
+      Assert::assertStringContainsString('private', $cache_control);
+      Assert::assertStringContainsString('no-store', $cache_control);
+      Assert::assertStringNotContainsString('public', $cache_control);
+      Assert::assertStringNotContainsString('max-age', $cache_control);
+    }
+    $denied_bytes = $denied->getContent(false);
+    Assert::assertNotSame($file_bytes, $denied_bytes);
+    Assert::assertStringNotContainsString($file_bytes, $denied_bytes);
+    Assert::assertFalse(str_starts_with($denied_bytes, "\x89PNG") || str_starts_with($denied_bytes, "PK\x03\x04"));
   }
 
   final public const string AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';

@@ -575,3 +575,19 @@ Authentication success handlers run after Symfony installs the authenticated tok
 Password changes preserve a refresh session only through a valid stored cookie proof belonging to the authenticated account. Username-only updates keep their existing replacement-cookie response, including bearer-only callers, but an actual rename revokes every token under the original and resulting usernames atomically. Profile forms always submit username, so an unchanged identifier must preserve existing sessions when saving ordinary profile fields. Capture the plain replacement refresh string before saving through a hashing manager. Password-reset proof validation failures must leave the transaction callback before throwing so the remaining response can still use Doctrine.
 
 For asynchronous password-save dialogs, wait for the success message with the bounded element-content helper before asserting the success icon. The generic visibility helper currently skips its polling delay while an element is absent, so it can exhaust its retries before the response arrives; the AJAX helper is only a fixed delay.
+
+### Protected Project Files
+
+Generated extracted previews use `/project-files/{id}/assets/{path}` and the existing page visibility policy; archive aliases retain the stricter existing archive API lookup. `ProtectedProjectFiles` validates paths/MIME, and `ProtectedProjectFileResponse` defaults to PHP HEAD/range delivery. Only the server-owned `PROJECT_FILE_ACCEL=1` FastCGI parameter enables the internal nginx location; client sendfile headers are ignored. See `docs/operations/Protected-Project-Files.md` for coordinated rollout and cache limitations.
+
+Before deploying these routes behind nginx, deploy the routing-only `^~ /project-files/` compatibility prefix: existing immutable image routing otherwise intercepts preview URLs before PHP. Application deployment precedes only the final denial/offload stage, not that routing prerequisite.
+
+Catroid preserves media filenames: MPEG-4/AAC recordings can be extensionless or named `.wav`, imported raster looks can lack extensions, and WebP imports are converted to PNG without renaming. Protected sound delivery uses only bounded detected audio/container MIME types with canonical audio responses; raster checks permit only those proven filename exceptions. Never infer active response types from imported filenames.
+
+Missing project-preview extraction shares the existing per-IP download burst budget; do not rate-limit every already extracted media request. SVG previews retain image MIME under CSP sandbox with external sources/scripts blocked; archive transport must not impose new MIME admission restrictions after the existing authorized archive lookup.
+
+SecurityHeadersSubscriber must append its global CSP baseline rather than overwrite an existing route policy. Multiple CSP policies intersect; protected SVG browser checks must use final subscriber headers and direct top-level navigation, because global X-Frame-Options may independently block iframe tests.
+
+SVG responses must retain PHP streaming even when project-file acceleration is enabled. nginx internal redirects discard upstream security headers; keeping SVG out of offload preserves the final intersecting CSP policies without server header-forwarding rules.
+
+Mink locatePath prepends the front-controller segment from base_url even for leading-slash paths. Static-file denial tests must request the raw origin over HTTP and assert status, private/no-store and absence of file bytes; visiting the prefixed route only proves Symfony denial, whose body can be empty.

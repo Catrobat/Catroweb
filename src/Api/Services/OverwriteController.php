@@ -6,6 +6,7 @@ namespace App\Api\Services;
 
 use App\Api\MediaLibraryApi;
 use App\Api\ProjectsApi;
+use App\Project\ProtectedProjectFiles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ class OverwriteController extends AbstractController
   public function __construct(
     protected ProjectsApi $projectsApi,
     protected MediaLibraryApi $mediaLibraryApi,
+    private readonly ProtectedProjectFiles $project_files,
   ) {
   }
 
@@ -28,7 +30,8 @@ class OverwriteController extends AbstractController
       return new Response(null, $responseCode, $responseHeaders);
     }
 
-    return $result;
+    return $this->project_files->archive($id, $result)
+      ?? new Response('', Response::HTTP_NOT_FOUND, ['Cache-Control' => 'private, no-store']);
   }
 
   public function mediaAssetsIdDownloadGet(string $id): Response

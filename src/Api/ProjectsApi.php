@@ -628,9 +628,11 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $responseCode = Response::HTTP_OK;
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    $this->facade->getEventDispatcher()->dispatch(
-      new ProjectDownloadEvent($user, $project, ProjectDownloads::TYPE_PROJECT)
-    );
+    if (true !== $this->request_stack->getCurrentRequest()?->isMethod('HEAD')) {
+      $this->facade->getEventDispatcher()->dispatch(
+        new ProjectDownloadEvent($user, $project, ProjectDownloads::TYPE_PROJECT)
+      );
+    }
 
     return $response;
   }
