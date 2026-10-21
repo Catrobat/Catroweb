@@ -591,3 +591,7 @@ SecurityHeadersSubscriber must append its global CSP baseline rather than overwr
 SVG responses must retain PHP streaming even when project-file acceleration is enabled. nginx internal redirects discard upstream security headers; keeping SVG out of offload preserves the final intersecting CSP policies without server header-forwarding rules.
 
 Mink locatePath prepends the front-controller segment from base_url even for leading-slash paths. Static-file denial tests must request the raw origin over HTTP and assert status, private/no-store and absence of file bytes; visiting the prefixed route only proves Symfony denial, whose body can be empty.
+
+### ExpressionLanguage security dependency
+
+The locked ExpressionLanguage version must include the complete CVE-2026-109449 fix (8.1.9 on the 8.x branch). Earlier nesting fixes were incomplete. The dependency integration test checks normal cached evaluation and bounded excessive expression shapes in subprocesses; it refuses to probe an older installation. No direct untrusted expression entry point was identified in application source during this update; this does not establish that indirect integrations are unreachable. See the [official advisory](https://symfony.com/cve-2026-109449).
