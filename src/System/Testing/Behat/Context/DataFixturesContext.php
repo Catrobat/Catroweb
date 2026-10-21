@@ -62,6 +62,29 @@ class DataFixturesContext implements Context
 {
   use ContextTrait;
 
+  /** @Given user :username has refresh sessions :tokens */
+  public function userHasRefreshSessions(string $username, string $tokens): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertInstanceOf(User::class, $user);
+    foreach (explode(',', $tokens) as $token) {
+      $this->getManager()->persist(\App\DB\Entity\RefreshToken::createForUserWithTtl(trim($token), $user, 3600));
+    }
+    $this->getManager()->flush();
+  }
+
+  /** @Then user :username should have :count refresh sessions */
+  public function userShouldHaveRefreshSessions(string $username, string $count): void
+  {
+    Assert::assertSame((int) $count, $this->getManager()->getRepository(\App\DB\Entity\RefreshToken::class)->count(['username' => $username]));
+  }
+
+  /** @Then refresh session :token should be revoked */
+  public function refreshSessionShouldBeRevoked(string $token): void
+  {
+    Assert::assertNull($this->getManager()->getRepository(\App\DB\Entity\RefreshToken::class)->findOneBy(['refreshToken' => $token]));
+  }
+
   private array $projects = [];
 
   private array $featured_projects = [];

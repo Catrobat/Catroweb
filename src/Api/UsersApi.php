@@ -16,6 +16,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\AccountSessionCoordinator;
 use App\Security\Authentication\JwtRefresh\RefreshTokenService;
+use App\Security\Authentication\PasswordSessionService;
 use App\Security\Captcha\CaptchaVerifier;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,6 +55,7 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
     private readonly StudioApiLoader $studio_api_loader,
     private readonly StudioResponseManager $studio_response_manager,
     private readonly AccountSessionCoordinator $account_sessions,
+    private readonly PasswordSessionService $password_sessions,
   ) {
   }
 
@@ -261,14 +263,35 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
 
     try {
       if (true !== $update_user_request->isDryRun()) {
-        if (!is_null($update_user_request->getUsername())) {
-          $this->account_sessions->withVerifiedAccountUpdate($user, function () use ($user, $update_user_request, &$responseHeaders): void {
-            $this->facade->getProcessor()->updateUser($user, $update_user_request);
-            $token = $this->facade->getAuthenticationManager()->createAuthenticationTokenFromUser($user);
-            $refresh_token = $this->facade->getAuthenticationManager()->createRefreshTokenByUser($user);
-            $this->facade->getResponseManager()->addAuthenticationCookiesToHeader($token, $refresh_token, $responseHeaders);
-          });
+        if (null !== $update_user_request->getPassword() && '' !== $update_user_request->getPassword() && '0' !== $update_user_request->getPassword()) {
+          $tokens = $this->password_sessions->changePassword(
+            $user,
+            $this->request_stack->getCurrentRequest(),
+            fn () => $this->facade->getProcessor()->updateUser($user, $update_user_request),
+          );
+          // The request listener may have refreshed an expired bearer before the password changed.
+          // Never let its response listener overwrite the new cookies with that earlier token.
           $this->clearPendingAuthenticationCookieRefresh();
+          if (null === $tokens) {
+            $this->facade->getResponseManager()->addClearedAuthenticationCookiesToHeader($responseHeaders);
+          } else {
+            $this->facade->getResponseManager()->addAuthenticationCookiesToHeader($tokens['bearer'], $tokens['refresh'], $responseHeaders);
+          }
+
+          return null;
+        }
+        if (!is_null($update_user_request->getUsername())) {
+          $tokens = $this->password_sessions->changeUsername(
+            $user,
+            $this->request_stack->getCurrentRequest(),
+            fn () => $this->facade->getProcessor()->updateUser($user, $update_user_request),
+          );
+          $this->clearPendingAuthenticationCookieRefresh();
+          if (null === $tokens) {
+            $this->facade->getResponseManager()->addClearedAuthenticationCookiesToHeader($responseHeaders);
+          } else {
+            $this->facade->getResponseManager()->addAuthenticationCookiesToHeader($tokens['bearer'], $tokens['refresh'], $responseHeaders);
+          }
 
           return null;
         }

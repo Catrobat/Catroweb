@@ -333,6 +333,7 @@ default:
                 - tests/BehatFeatures/web/profile/profile.feature
                 - tests/BehatFeatures/web/profile/profile_image.feature
                 - tests/BehatFeatures/web/profile/profile_data_export.feature
+                - tests/BehatFeatures/web/profile/password_refresh_sessions.feature
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
