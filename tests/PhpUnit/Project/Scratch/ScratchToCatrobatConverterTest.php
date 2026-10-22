@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Project\Scratch;
 
 use App\Project\Scratch\Converter\AssetNormalizer;
+use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\Converter\ScratchToCatrobatConverter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -139,6 +140,21 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertInstanceOf(\DOMElement::class, $look);
     $size = getimagesizefromstring((string) $this->zip->getFromName('Scene/images/'.$look->getAttribute('fileName')));
     $this->assertSame([60, 40], [$size[0] ?? 0, $size[1] ?? 0]);
+  }
+
+  public function testAHugeVectorCostumeIsRejectedBeforeRendering(): void
+  {
+    $this->expectException(ScratchConversionException::class);
+    (new AssetNormalizer())->costumeToPng('<svg xmlns="http://www.w3.org/2000/svg" width="20000" height="20000"/>', ['dataFormat' => 'svg'], microtime(true) + 10.0);
+  }
+
+  public function testAnAbsurdRotationCenterDoesNotAllocateAHugeCanvas(): void
+  {
+    $pixel = (string) base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', true);
+    $png = (new AssetNormalizer())->costumeToPng($pixel, ['dataFormat' => 'png', 'rotationCenterX' => 50000, 'rotationCenterY' => 50000], microtime(true) + 10.0);
+    $size = getimagesizefromstring($png);
+    $this->assertLessThanOrEqual(4096, $size[0] ?? PHP_INT_MAX);
+    $this->assertLessThanOrEqual(4096, $size[1] ?? PHP_INT_MAX);
   }
 
   private static function child(\DOMElement $parent, string $step): ?\DOMElement

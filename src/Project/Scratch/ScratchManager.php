@@ -7,13 +7,14 @@ namespace App\Project\Scratch;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Project;
 use App\Project\AddProjectRequest;
+use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\ProjectManager;
 use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\Converter\ScratchFetcher;
 use App\Project\Scratch\Converter\ScratchToCatrobatConverter;
 use App\User\UserManager;
 use App\Utils\TimeUtils;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
@@ -27,8 +28,7 @@ class ScratchManager
     private readonly UserManager $user_manager,
     private readonly ScratchFetcher $fetcher,
     private readonly ScratchToCatrobatConverter $converter,
-    #[Autowire('%kernel.project_dir%/var/scratch-converter.lock')]
-    private readonly string $lock_file,
+    private readonly LoggerInterface $logger,
   ) {
   }
 
@@ -39,36 +39,57 @@ class ScratchManager
    */
   public function importProject(int $scratch_id, callable $before_conversion, ?string $ip): Project
   {
-    $metadata = $this->fetcher->fetchMetadata($scratch_id);
-    $modified = TimeUtils::dateTimeFromScratch((string) ($metadata['history']['modified'] ?? ''));
-
     /** @var Project|null $existing */
     $existing = $this->project_manager->findOneByScratchId($scratch_id);
-    $up_to_date = null !== $existing && $existing->getFilesize() > 0
-      && (!$modified instanceof \DateTime || $existing->getLastModifiedAt()->getTimestamp() >= $modified->getTimestamp());
-    if ($up_to_date) {
-      return $existing;
+    $converted = null !== $existing && $existing->getFilesize() > 0 ? $existing : null;
+
+    try {
+      $metadata = $this->fetcher->fetchMetadata($scratch_id);
+    } catch (ScratchConversionException $exception) {
+      if (null !== $converted) {
+        return $converted; // Scratch is down or the project was unshared: keep serving our copy
+      }
+
+      throw $exception;
+    }
+
+    $modified = TimeUtils::dateTimeFromScratch((string) ($metadata['history']['modified'] ?? ''));
+    if (null !== $converted && (!$modified instanceof \DateTime || $converted->getLastModifiedAt()->getTimestamp() >= $modified->getTimestamp())) {
+      return $converted;
     }
 
     $before_conversion();
     set_time_limit(120);
 
     // ponytail: one conversion at a time per server; a job queue if people regularly see "busy".
-    $lock = fopen($this->lock_file, 'c');
-    if (false === $lock || !flock($lock, LOCK_EX | LOCK_NB)) {
+    $lock = fopen(sys_get_temp_dir().'/catroweb-scratch-converter.lock', 'c');
+    if (false === $lock) {
+      throw new \RuntimeException('The Scratch converter lock file cannot be created.');
+    }
+
+    if (!flock($lock, LOCK_EX | LOCK_NB)) {
+      fclose($lock);
+
       throw new ScratchConversionException('Another Scratch project is being converted right now. Please try again in a minute.');
     }
 
     $temp = (string) tempnam(sys_get_temp_dir(), 'scratch');
     $archive = $temp.'.catrobat';
     try {
-      $project_json = $this->fetcher->fetchProject($scratch_id, $metadata);
-      $this->converter->convert($scratch_id, $project_json, $metadata, $this->fetcher->fetchAssets($project_json), $this->fetcher->fetchThumbnail($scratch_id), $archive);
-
       $user = $existing?->getUser() ?? $this->user_manager->createUserFromScratch($metadata['author'] ?? []);
       if (null === $user) {
         throw new ScratchConversionException('The Scratch author could not be resolved.');
       }
+
+      // Uploads update the author's project of the same name; keep two Scratch projects with one title apart.
+      $title = trim((string) ($metadata['title'] ?? ''));
+      $namesake = '' === $title ? null : $this->project_manager->findOneByNameAndUser($title, $user);
+      if (null !== $namesake && $namesake->getScratchId() !== $scratch_id) {
+        $metadata['title'] = $title.' ('.$scratch_id.')';
+      }
+
+      $project_json = $this->fetcher->fetchProject($scratch_id, $metadata);
+      $this->converter->convert($scratch_id, $project_json, $metadata, $this->fetcher->fetchAssets($project_json), $this->fetcher->fetchThumbnail($scratch_id), $archive);
 
       $project = $this->project_manager->addProject(new AddProjectRequest($user, new File($archive), $ip, null, Flavor::POCKETCODE, $existing?->getId()));
       if (null === $project) {
@@ -76,10 +97,19 @@ class ScratchManager
       }
 
       $project->setScratchId($scratch_id);
-      $project->setLastModifiedAt($modified instanceof \DateTime ? $modified : TimeUtils::getDateTime());
       $this->project_manager->save($project);
 
       return $project;
+    } catch (InvalidCatrobatFileException $exception) {
+      $this->logger->warning('Converted Scratch project rejected by upload validation', ['scratch_id' => $scratch_id, 'error' => $exception->getMessage()]);
+
+      throw new ScratchConversionException('The converted project did not pass the upload checks.', 0, $exception);
+    } catch (ScratchConversionException $exception) {
+      throw $exception;
+    } catch (\Throwable $throwable) {
+      $this->logger->error('Scratch conversion failed', ['scratch_id' => $scratch_id, 'exception' => $throwable]);
+
+      throw new ScratchConversionException('This Scratch project could not be converted.', 0, $throwable);
     } finally {
       @unlink($archive);
       @unlink($temp);

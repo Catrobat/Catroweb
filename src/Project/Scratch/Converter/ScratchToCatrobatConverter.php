@@ -16,6 +16,10 @@ class ScratchToCatrobatConverter
 {
   private const string SCENE = 'Scene';
   private const int MAX_BLOCKS = 100_000;
+  private const int MAX_ASSETS = 2_000;
+  private const int MAX_SECONDS = 90;
+  private const int MAX_DESCRIPTION_BYTES = 10_000; // Catroweb's upload limit
+  private const int MAX_CREDITS_BYTES = 3_000;
   private const int MAX_INITIAL_LIST_ITEMS = 5_000;
   private const string IS_CLONE = '__is_clone';
 
@@ -43,6 +47,13 @@ class ScratchToCatrobatConverter
     if ($block_count > self::MAX_BLOCKS) {
       throw new ScratchConversionException('The Scratch project is too large to convert.');
     }
+
+    $asset_count = array_sum(array_map(static fn (array $t): int => \count($t['costumes'] ?? []) + \count($t['sounds'] ?? []), $targets));
+    if ($asset_count > self::MAX_ASSETS) {
+      throw new ScratchConversionException('The Scratch project has too many costumes and sounds to convert.');
+    }
+
+    $deadline = microtime(true) + self::MAX_SECONDS;
 
     $sprites = array_values(array_filter($targets, static fn (array $t): bool => !($t['isStage'] ?? false)));
     usort($sprites, static fn (array $a, array $b): int => ($a['layerOrder'] ?? 0) <=> ($b['layerOrder'] ?? 0));
@@ -84,7 +95,7 @@ class ScratchToCatrobatConverter
     }
 
     foreach ($keyed as $key => $target) {
-      [$looks, $sounds] = $this->media($target, $assets, $files);
+      [$looks, $sounds] = $this->media($target, $assets, $files, $deadline);
       $model->setLooks($key, $looks);
       $model->setSounds($key, $sounds);
     }
@@ -126,23 +137,26 @@ class ScratchToCatrobatConverter
 
     XStreamReferences::resolve($doc);
 
-    $this->writeArchive($archive_path, (string) $doc->saveXML(), $files, $thumbnail);
+    // Scratch allows control characters in names and texts; XML 1.0 does not, and Pocket Code would reject the file.
+    $xml = (string) preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', '', (string) $doc->saveXML());
+    $this->writeArchive($archive_path, $xml, $files, $thumbnail);
 
     return $model->unsupportedOpcodes();
   }
 
   /**
    * @param array<string, mixed>  $target
-   * @param array<string, string> $assets md5ext => bytes
-   * @param array<string, string> $files  archive path => bytes, filled here
+   * @param array<string, string> $assets   md5ext => bytes
+   * @param array<string, string> $files    archive path => bytes, filled here
+   * @param float                 $deadline microtime(true) after which the conversion gives up
    *
    * @return array{0: list<array{name: string, file: string}>, 1: list<array{name: string, file: string}>}
    */
-  private function media(array $target, array $assets, array &$files): array
+  private function media(array $target, array $assets, array &$files, float $deadline): array
   {
     $looks = [];
     foreach ($target['costumes'] ?? [] as $costume) {
-      $png = $this->assets->costumeToPng($assets[(string) $costume['md5ext']] ?? throw new ScratchConversionException('Missing costume.'), $costume);
+      $png = $this->assets->costumeToPng($assets[(string) $costume['md5ext']] ?? throw new ScratchConversionException('Missing costume.'), $costume, $deadline);
       $file = self::uniqueFile($files, self::SCENE.'/images/', (string) $costume['name'], (string) $costume['assetId'], 'png');
       $files[self::SCENE.'/images/'.$file] = $png;
       $looks[] = ['name' => (string) $costume['name'], 'file' => $file];
@@ -150,7 +164,7 @@ class ScratchToCatrobatConverter
 
     $sounds = [];
     foreach ($target['sounds'] ?? [] as $sound) {
-      [$bytes, $extension] = $this->assets->playableSound($assets[(string) $sound['md5ext']] ?? throw new ScratchConversionException('Missing sound.'), $sound);
+      [$bytes, $extension] = $this->assets->playableSound($assets[(string) $sound['md5ext']] ?? throw new ScratchConversionException('Missing sound.'), $sound, $deadline);
       $file = self::uniqueFile($files, self::SCENE.'/sounds/', (string) $sound['name'], (string) $sound['assetId'], $extension);
       $files[self::SCENE.'/sounds/'.$file] = $bytes;
       $sounds[] = ['name' => (string) $sound['name'], 'file' => $file];
@@ -309,9 +323,9 @@ class ScratchToCatrobatConverter
     $fields = [
       'applicationBuildName' => '', 'applicationBuildNumber' => '0', 'applicationBuildType' => 'signedRelease',
       'applicationName' => 'Pocket Code', 'applicationVersion' => '1.4.1', 'catrobatLanguageVersion' => '1.14',
-      'dateTimeUpload' => '', 'description' => $description, 'deviceName' => 'Scratch converter',
+      'dateTimeUpload' => '', 'description' => mb_strcut($description, 0, self::MAX_DESCRIPTION_BYTES), 'deviceName' => 'Scratch converter',
       'isCastProject' => 'false', 'landscapeMode' => 'true', 'listeningLanguageTag' => '',
-      'mediaLicense' => 'https://developer.catrobat.org/ccbysa_v4', 'notesAndCredits' => $credits,
+      'mediaLicense' => 'https://developer.catrobat.org/ccbysa_v4', 'notesAndCredits' => mb_strcut($credits, 0, self::MAX_CREDITS_BYTES),
       'platform' => 'Android', 'platformVersion' => '33', 'programLicense' => 'https://developer.catrobat.org/agpl_v3',
       'programName' => '' !== trim((string) ($metadata['title'] ?? '')) ? (string) $metadata['title'] : 'Scratch project '.$scratch_id,
       'remixOf' => 'https://scratch.mit.edu/projects/'.$scratch_id, 'scenesEnabled' => 'true',
