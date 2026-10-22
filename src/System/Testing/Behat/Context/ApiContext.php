@@ -1605,7 +1605,8 @@ class ApiContext implements Context
 
     Assert::assertIsArray($data['scratch_projects'] ?? null);
     Assert::assertCount($count, $data['scratch_projects'], "Expected {$count} Scratch projects in response.");
-    Assert::assertSame($count, $data['scratch_projects_total'] ?? null);
+    // The total counts Scratch's page before already imported projects are left out, so it can be larger.
+    Assert::assertGreaterThanOrEqual($count, $data['scratch_projects_total'] ?? null);
   }
 
   /**

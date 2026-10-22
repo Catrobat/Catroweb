@@ -15,7 +15,7 @@ Feature: Open a Scratch project from the search as a Pocket Code project
     When I click "#search-scratch-projects button.search-card"
     # The conversion runs before the page changes; this step polls for up to 10 s.
     Then I wait for the element "#name" to contain "Gamma Ray Racer"
-    And the url should match "#/app/project/#"
+    And the url should match "/app/project/[0-9a-f-]+$"
     And there should be "1" projects in the database
 
   Scenario: A Scratch search result that cannot be converted shows why and stays on the search page
@@ -28,5 +28,5 @@ Feature: Open a Scratch project from the search as a Pocket Code project
     And I wait for the element "#search-scratch-projects .search-card" to be visible
     When I click "#search-scratch-projects button.search-card"
     Then I wait for the element "#share-snackbar-label" to contain "Only Scratch 3 projects can be converted."
-    And the url should match "#/app/search/Old#"
+    And the url should match "/app/search/Old$"
     And there should be "0" projects in the database
