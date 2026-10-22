@@ -248,6 +248,38 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="PLUS"]/leftChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
   }
 
+  public function testKeysBecomeOnScreenButtons(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenkeypressed', 'next' => null, 'topLevel' => true, 'inputs' => [], 'fields' => ['KEY_OPTION' => ['right arrow', null]]],
+      'flag' => ['opcode' => 'event_whenflagclicked', 'next' => 'wait', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'wait' => ['opcode' => 'control_wait_until', 'next' => null, 'inputs' => ['CONDITION' => [2, 'any']], 'fields' => []],
+      'any' => ['opcode' => 'sensing_keypressed', 'inputs' => ['KEY_OPTION' => [1, 'menu']], 'fields' => []],
+      'menu' => ['opcode' => 'sensing_keyoptions', 'shadow' => true, 'inputs' => [], 'fields' => ['KEY_OPTION' => ['any', null]]],
+    ]);
+    $xpath = new \DOMXPath($xml);
+    $held = '__scratch key right arrow';
+    $this->assertSame(1.0, $xpath->evaluate('count(//script[@type="BroadcastScript"][receivedMessage="'.$held.'"])'));
+    $this->assertSame($held, $xpath->evaluate('string(//brick[@type="WaitUntilBrick"]/formulaList/formula[@category="IF_CONDITION"][type="USER_VARIABLE"]/value)'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//programVariableList/userVariable)'));
+    $button = '//object[@name="⌨ right arrow"]';
+    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'/lookList/look)'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//brick[@type="SetVariableBrick"][formulaList/formula/value="COLLIDES_WITH_FINGER"])'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//script[@type="WhenScript"]/brickList/brick[@type="BroadcastBrick"][broadcastMessage="'.$held.'"])'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//brick[@type="RepeatUntilBrick"]//brick[@type="BroadcastBrick"][broadcastMessage="'.$held.'"])'));
+  }
+
+  public function testWasdKeysGetTheirOwnButtonsWithoutArrows(): void
+  {
+    $hat = static fn (string $key): array => ['opcode' => 'event_whenkeypressed', 'next' => null, 'topLevel' => true, 'inputs' => [], 'fields' => ['KEY_OPTION' => [$key, null]]];
+    $xml = self::convertBlocks(['w' => $hat('w'), 'zero' => $hat('0'), 'up' => $hat('up arrow'), 's' => $hat('s')], ['name' => '⌨ s']);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame(1.0, $xpath->evaluate('count(//object[@name="⌨ 0"])'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//object[@name="⌨ up arrow"]//script[@type="WhenScript"]//broadcastMessage[.="__scratch key w"])'));
+    $this->assertSame(0.0, $xpath->evaluate('count(//object[@name="⌨ w"])'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//object[@name="⌨ s 2"])')); // the project's own "⌨ s" keeps its name
+  }
+
   public function testHelperNamesStayClearOfTheProjectsOwnNames(): void
   {
     $xml = self::convertBlocks([
