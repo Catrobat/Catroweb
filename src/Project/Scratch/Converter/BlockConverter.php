@@ -384,7 +384,11 @@ final class BlockConverter
       case 'data_setvariableto': return [$this->brick('SetVariableBrick', ['VARIABLE' => $this->textInput($b, 'VALUE')], [], [$this->variable($b)])];
       case 'data_changevariableby':
         // Catroid's ChangeVariableBrick skips variables that hold text, such as "0" after a set; PLUS reads numeric text.
-        $sum = Formula::op('PLUS', Formula::variable($this->field($b, 'VARIABLE')), $this->number($b, 'VALUE'));
+        // Scratch counts other text as 0 where PLUS gives NaN: var = var + 0 holds only for numbers.
+        // ponytail: the text "NaN" still gives NaN, Catroid's EQUAL treats NaN as equal to itself.
+        $variable = Formula::variable($this->field($b, 'VARIABLE'));
+        $current = Formula::fn('IF_THEN_ELSE', Formula::op('EQUAL', $variable, Formula::op('PLUS', $variable, Formula::number(0))), $variable, Formula::number(0));
+        $sum = Formula::op('PLUS', $current, $this->number($b, 'VALUE'));
 
         return [$this->brick('SetVariableBrick', ['VARIABLE' => $sum], [], [$this->variable($b)])];
       case 'data_showvariable':
