@@ -22,6 +22,7 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\ProjectManager;
 use App\Project\Remix\RemixManager;
+use App\Project\Scratch\ScratchManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\ErrorResponse;
@@ -75,6 +76,10 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createNoLimitRateLimiterFactory('phpunit_projects_download_burst'),
       new \Symfony\Component\HttpFoundation\RequestStack(),
       new \Psr\Log\NullLogger(),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_open_burst'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_burst'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_daily'),
+      $this->createStub(ScratchManager::class),
     );
 
     ProjectsApiTest::bootKernel();

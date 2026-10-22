@@ -257,8 +257,6 @@
       <code><![CDATA[$extracted_file->getScreenshotPath()]]></code>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getScratchId()]]></code>
       <code><![CDATA[$project_id]]></code>
       <code><![CDATA[$project_id]]></code>
       <code><![CDATA[$request->getIp()]]></code>
@@ -267,7 +265,6 @@
       <code><![CDATA[getAbsoluteUrl]]></code>
       <code><![CDATA[getAbsoluteUrl]]></code>
       <code><![CDATA[getFollowers]]></code>
-      <code><![CDATA[getTimestamp]]></code>
     </PossiblyNullReference>
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$_ENV['APP_ENV']]]></code>
@@ -301,11 +298,6 @@
     <PossiblyNullReference>
       <code><![CDATA[getUsername]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/Project/Scratch/ScratchManager.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$user]]></code>
-    </PossiblyNullArgument>
   </file>
   <file src="src/Security/Authentication/FormLoginSuccessHandler.php">
     <PossiblyNullArgument>

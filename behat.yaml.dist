@@ -134,6 +134,7 @@ default:
         api-projects-write:
             paths:
                 - tests/BehatFeatures/api/projects/POST_projects
+                - tests/BehatFeatures/api/projects/POST_projects_scratch
                 - tests/BehatFeatures/api/projects/DELETE_project_id
                 - tests/BehatFeatures/api/projects/PUT_project_id
                 - tests/BehatFeatures/api/projects/reactions

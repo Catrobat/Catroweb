@@ -1,31 +1,48 @@
-@project_page
+@web @search
+# Scratch is faked: "there are Scratch projects" seeds what FakeScratchSearch finds, and FakeScratchFetcher serves
+# the offline project in tests/TestData/ScratchConverter for the ids in its metadata.json (70058682 cannot be
+# converted). Importing itself is covered by api/projects/POST_projects_scratch.
+Feature: Open a Scratch project from the search as a Pocket Code project
 
-Feature: As a visitor I want to see scratch projects
-
-  Scenario: Visit a Scratch program
-    Given I request "GET" "/app/scratch/project/401650420"
-    Then I should be redirected to a catrobat project
+  Scenario: Clicking a Scratch search result converts the project and opens it
+    Given there are Scratch projects:
+      | id       | name            | username   |
+      | 70058680 | Gamma Ray Racer | scratchcat |
+    And I am on "/app/search/Gamma"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    When I click "#search-scratch-projects button.search-card"
+    # The fake conversion still takes a second or two, long enough to see the converting state.
+    Then I wait for the element "#search-scratch-projects .search-card__overlay-label" to contain "Converting for Pocket Code"
+    And I wait for the element "#share-snackbar-label" to contain "Converting “Gamma Ray Racer”"
+    # The conversion runs before the page changes; this step polls for up to 10 s.
+    And I wait for the element "#name" to contain "Gamma Ray Racer"
+    And the url should match "/app/project/[0-9a-f-]+$"
     And there should be "1" projects in the database
-    And there should be "1" users in the database
 
-  Scenario: Visiting a not existing Scratch program
-    Given I am on "/app/scratch/project/1"
-    Then I should be on "/app/"
+  Scenario: A Scratch search result that cannot be converted shows why and stays on the search page
+    Given there are Scratch projects:
+      | id       | name               | username   |
+      | 70058682 | Old Scratch 2 Game | scratchcat |
+    And I am on "/app/search/Old"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    When I click "#search-scratch-projects button.search-card"
+    Then I wait for the element "#share-snackbar-label" to contain "made with an older Scratch version"
+    And the url should match "/app/search/Old$"
     And there should be "0" projects in the database
-    And there should be "0" users in the database
 
-  Scenario: Visiting a Scratch program twice
-    Given I request "GET" "/app/scratch/project/401650420"
-    Then I should be redirected to a catrobat project
-    And  I request "GET" "/app/scratch/project/401650420"
-    Then I should be redirected to a catrobat project
-    And there should be "1" projects in the database
-    And there should be "1" users in the database
-
-  Scenario: Visiting two Scratch programs made by the same user
-    Given I request "GET" "/app/scratch/project/401650420"
-    Then I should be redirected to a catrobat project
-    And I request "GET" "/app/scratch/project/398466654"
-    Then I should be redirected to a catrobat project
-    And there should be "2" projects in the database
-    And there should be "1" users in the database
+  Scenario: The converting label names the app of the current flavor
+    Given there are Scratch projects:
+      | id       | name            | username   |
+      | 70058680 | Gamma Ray Racer | scratchcat |
+    And I am on "/luna/search/Gamma"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    When I click "#search-scratch-projects button.search-card"
+    Then I wait for the element "#search-scratch-projects .search-card__overlay-label" to contain "Converting for Luna & Cat"
+    And I wait for the element "#name" to contain "Gamma Ray Racer"
+    And the url should match "/luna/project/[0-9a-f-]+$"

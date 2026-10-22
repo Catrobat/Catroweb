@@ -7,7 +7,6 @@ namespace App\Api\Services\Search;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Projects\ProjectsResponseManager;
 use App\DB\Entity\Project\Project;
-use App\DB\Entity\Project\Scratch\ScratchProject;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
@@ -97,16 +96,12 @@ class SearchResponseManager extends AbstractResponseManager
   }
 
   /**
-   * @param ScratchProject[] $scratch_projects
+   * @param list<array{id: string, name: string, username: string}> $scratch_projects
    */
   public function getScratchProjectsSearchResponse(array $scratch_projects, int $total): array
   {
     return [
-      'scratch_projects' => array_map(static fn (ScratchProject $project): SearchResponseScratchProjectsInner => new SearchResponseScratchProjectsInner([
-        'id' => $project->getId(),
-        'name' => $project->getName(),
-        'username' => $project->getUsername(),
-      ]), $scratch_projects),
+      'scratch_projects' => array_map(static fn (array $project): SearchResponseScratchProjectsInner => new SearchResponseScratchProjectsInner($project), $scratch_projects),
       'scratch_projects_total' => $total,
     ];
   }

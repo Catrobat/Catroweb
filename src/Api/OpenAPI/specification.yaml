@@ -889,6 +889,85 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  '/projects/scratch/{scratch_id}':
+    post:
+      tags:
+        - 'Projects'
+      summary: 'Import a public Scratch project'
+      description: 'Converts a shared Scratch 3 project into a Pocket Code project owned by a shadow account of its Scratch author. An up-to-date copy is returned without converting again; a project changed on Scratch since is converted again as a new version. Anonymous requests are allowed; they are rate limited per client.'
+      parameters:
+        - name: scratch_id
+          in: path
+          required: true
+          description: 'Scratch project id'
+          schema:
+            type: integer
+            minimum: 1
+            example: 70058680
+      responses:
+        '200':
+          description: 'An up-to-date copy already existed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '201':
+          description: 'The Scratch project was converted'
+          headers:
+            Location:
+              schema:
+                type: string
+                example: 'https://share.catrobat.org/app/project/63768cf1-5f07-11ea-a2ae-000c292a0f49'
+              description: 'Resource location on server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '403':
+          description: 'The request comes from another site (Origin or Sec-Fetch-Site header); browsers may only import from this site'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: 'Scratch does not know the project, or it is not shared'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: 'The project cannot be converted; the message says why and can be shown to the user'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          description: 'The project could not be converted because of an unexpected error on this server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: 'Scratch could not be reached or answered with an error; try again later'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: 'Another Scratch project is being converted right now'
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+                example: 30
+              description: 'Seconds to wait before retrying'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   '/projects/{id}':
     get:
       tags:
@@ -4492,6 +4571,7 @@ components:
                 - 'unprocessable_entity'
                 - 'too_many_requests'
                 - 'internal_error'
+                - 'service_unavailable'
             message:
               type: string
               description: 'Human-readable error summary'
@@ -5572,7 +5652,7 @@ components:
           example: 5
         scratch_projects:
           type: array
-          description: 'Scratch projects known to this site (remix parents of uploaded projects), searched by name and Scratch username. Open them at /app/scratch/project/{id}.'
+          description: "Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it."
           items:
             type: object
             properties:
@@ -5587,6 +5667,7 @@ components:
                 description: 'Scratch username of the author'
         scratch_projects_total:
           type: integer
+          description: "Scratch reports no total: offset plus the size of Scratch's page (counted before imported projects are left out), plus one while that page is full."
           example: 3
 
     ######################################################

@@ -31,7 +31,8 @@ class ProjectAssetMapping
   #[ORM\Column(name: 'original_filename', type: Types::STRING, length: 255)]
   private string $originalFilename;
 
-  #[ORM\Column(name: 'path_in_zip', type: Types::STRING, length: 512)]
+  // Binary collation: file names in a project are case-sensitive, B.png and b.png are two files (unique key below).
+  #[ORM\Column(name: 'path_in_zip', type: Types::STRING, length: 512, options: ['collation' => 'utf8mb4_bin'])]
   private string $pathInZip;
 
   public function __construct(Project $project, ProjectAsset $asset, string $originalFilename, string $pathInZip)

@@ -99,16 +99,18 @@ Feature: Searching for projects & users
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Results for"
-    Then I should see "No projects found"
-    Then I should see "No users found"
+    And I should see "No results for “gmail”"
+    And the element "#search-projects" should not be visible
+    And the element "#search-users" should not be visible
 
   Scenario: search for gmx should find no project
     Given I am on "/app/search/gmx.at"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Results for"
-    Then I should see "No projects found"
-    Then I should see "No users found"
+    And I should see "No results for “gmx.at”"
+    And the element "#search-projects" should not be visible
+    And the element "#search-users" should not be visible
 
 
   Scenario: search for projects, which contain the word "User"
@@ -158,9 +160,10 @@ Feature: Searching for projects & users
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Test advanced app"
-    Then I should see "No users found"
+    And the element "#search-empty-summary" should contain "No users found"
+    And the element "#search-users" should not be visible
 
-  Scenario: Scratch projects show up with a badge and link to their Scratch page
+  Scenario: Scratch projects show up with a badge and open through the converter
     Given there are Scratch projects:
       | id       | name             | username   |
       | 70058680 | Gamma Ray Racer  | scratchcat |
@@ -173,11 +176,12 @@ Feature: Searching for projects & users
     And I should see "scratchcat"
     And the element "#search-scratch-projects .search-card__badge" should be visible
     And the element "#search-scratch-projects .search-card__badge" should contain "Scratch"
-    And the element "#search-scratch-projects a.search-card[href='https://scratch.mit.edu/projects/70058680']" should exist
+    And the element "#search-scratch-projects button.search-card" should exist
+    And the element "#search-scratch-projects img.search-card__image[data-scratch-thumbnail='https://uploads.scratch.mit.edu/get_image/project/70058680_480x360.png']" should exist
 
   Scenario: No Scratch section without Scratch matches
     Given I am on "/app/search/gmail"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "No projects found"
+    Then I should see "No results for"
     And the element "#search-scratch-projects" should not be visible

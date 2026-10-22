@@ -117,7 +117,7 @@ class SearchResponse
   protected ?int $studios_total = null;
 
   /**
-   * Scratch projects known to this site (remix parents of uploaded projects), searched by name and Scratch username. Open them at /app/scratch/project/{id}.
+   * Live results of Scratch&#39;s public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it.
    *
    * @var SearchResponseScratchProjectsInner[]|null
    *
@@ -133,6 +133,8 @@ class SearchResponse
   protected ?array $scratch_projects = null;
 
   /**
+   * Scratch reports no total: offset plus the size of Scratch&#39;s page (counted before imported projects are left out), plus one while that page is full.
+   *
    * @SerializedName("scratch_projects_total")
    *
    * @Assert\Type("int")
@@ -305,7 +307,7 @@ class SearchResponse
   /**
    * Sets scratch_projects.
    *
-   * @param SearchResponseScratchProjectsInner[]|null $scratch_projects Scratch projects known to this site (remix parents of uploaded projects), searched by name and Scratch username. Open them at /app/scratch/project/{id}.
+   * @param SearchResponseScratchProjectsInner[]|null $scratch_projects Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it.
    *
    * @return $this
    */
@@ -326,6 +328,8 @@ class SearchResponse
 
   /**
    * Sets scratch_projects_total.
+   *
+   * @param int|null $scratch_projects_total scratch reports no total: offset plus the size of Scratch's page (counted before imported projects are left out), plus one while that page is full
    *
    * @return $this
    */

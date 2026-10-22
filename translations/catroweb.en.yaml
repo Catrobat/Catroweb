@@ -579,7 +579,10 @@ search:
   noUsers: No users found
   noProjects: No projects found
   noStudios: No studios found
+  noResults: 'No results for “%query%”'
   scratchProjects: Scratch projects
+  scratchConverting: Converting for %app%…
+  scratchConvertingSnackbar: 'Converting “%name%” — this can take a few seconds'
   sameSearchMessage: "Looks like you're already here! Try a different search?"
 
 menu:

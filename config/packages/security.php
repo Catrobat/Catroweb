@@ -244,6 +244,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          // Anyone may import a public Scratch project; ProjectsApi rate limits it per client.
+          'path' => '^/api/projects/scratch/[0-9]+/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['POST'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/projects/[a-zA-Z0-9_-]+/catrobat/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

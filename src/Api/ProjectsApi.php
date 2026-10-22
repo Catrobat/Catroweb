@@ -19,6 +19,8 @@ use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Event\ProjectDownloadEvent;
 use App\Project\Remix\RemixManager;
+use App\Project\Scratch\Converter\ScratchConversionException;
+use App\Project\Scratch\ScratchManager;
 use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\CodeViewResponse;
@@ -58,6 +60,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     private readonly RateLimiterFactory $downloadBurstLimiter,
     private readonly RequestStack $request_stack,
     private readonly LoggerInterface $logger,
+    private readonly RateLimiterFactory $scratchOpenBurstLimiter,
+    private readonly RateLimiterFactory $scratchConvertBurstLimiter,
+    private readonly RateLimiterFactory $scratchConvertDailyLimiter,
+    private readonly ScratchManager $scratch_manager,
   ) {
   }
 
@@ -380,6 +386,77 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
 
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
+  #[\Override]
+  public function projectsScratchScratchIdPost(int $scratch_id, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    // Every request asks Scratch's API, even when our copy is current; converting is limited much harder.
+    if ($this->isCrossSiteRequest()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return ApiErrorResponse::createModel($responseCode, 'forbidden', 'Scratch projects can only be imported from this site.');
+    }
+
+    $ip = $this->facade->getLoader()->getClientIp() ?? 'unknown';
+    $converted = false;
+    try {
+      if (null === $this->checkIpRateLimit($ip, $this->scratchOpenBurstLimiter)) {
+        throw new ScratchConversionException('Too many Scratch projects opened in a short time. Please wait a minute.', ScratchConversionException::RATE_LIMITED);
+      }
+
+      $project = $this->scratch_manager->importProject($scratch_id, function () use ($ip, &$converted): void {
+        $burst = $this->scratchConvertBurstLimiter->create($ip)->consume();
+        $daily = $this->scratchConvertDailyLimiter->create($ip)->consume();
+        if (!$burst->isAccepted() || !$daily->isAccepted()) {
+          throw new ScratchConversionException('You converted many Scratch projects in a short time. Please try again later.', ScratchConversionException::RATE_LIMITED);
+        }
+
+        $converted = true;
+      }, $ip);
+    } catch (ScratchConversionException $exception) {
+      [$responseCode, $type] = match ($exception->getCode()) {
+        ScratchConversionException::NOT_FOUND => [Response::HTTP_NOT_FOUND, 'not_found'],
+        ScratchConversionException::RATE_LIMITED => [Response::HTTP_TOO_MANY_REQUESTS, 'too_many_requests'],
+        ScratchConversionException::BUSY => [Response::HTTP_SERVICE_UNAVAILABLE, 'service_unavailable'],
+        ScratchConversionException::UPSTREAM => [Response::HTTP_BAD_GATEWAY, 'bad_gateway'],
+        ScratchConversionException::INTERNAL => [Response::HTTP_INTERNAL_SERVER_ERROR, 'internal_server_error'],
+        default => [Response::HTTP_UNPROCESSABLE_ENTITY, 'unprocessable_entity'],
+      };
+      if (Response::HTTP_SERVICE_UNAVAILABLE === $responseCode) {
+        $responseHeaders['Retry-After'] = '60';
+      }
+
+      return ApiErrorResponse::createModel($responseCode, $type, $exception->getMessage());
+    }
+
+    $responseCode = $converted ? Response::HTTP_CREATED : Response::HTTP_OK;
+    if ($converted) {
+      $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
+    }
+
+    return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
+  /**
+   * The import needs no login, so a form on another site could make visitors import projects and use up their quota.
+   * Browsers say where a request comes from; apps and scripts send no Origin and are allowed. Hosts, not schemes, are
+   * compared: behind a TLS-terminating proxy the request may look like plain http.
+   */
+  private function isCrossSiteRequest(): bool
+  {
+    $request = $this->request_stack->getCurrentRequest();
+    if (null === $request) {
+      return false;
+    }
+
+    if ('cross-site' === $request->headers->get('Sec-Fetch-Site')) {
+      return true;
+    }
+
+    $origin = $request->headers->get('Origin');
+
+    return null !== $origin && strtolower((string) parse_url($origin, PHP_URL_HOST)) !== strtolower($request->getHost());
   }
 
   #[\Override]

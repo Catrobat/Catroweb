@@ -53,13 +53,26 @@ export function showSnackbar(id, text = '', duration = SnackbarDuration.short) {
   snackbar._hideTimer = hideTimer
 }
 
+// Replaces whatever the snackbar shows right away, e.g. a progress message by its outcome, instead of queueing behind it.
+export function replaceSnackbar(id, text = '', duration = SnackbarDuration.short) {
+  const snackbar = document.querySelector(id)
+  if (snackbar) {
+    clearTimeout(snackbar._hideTimer)
+    clearTimeout(snackbar._fadeTimer)
+    snackbar._hideTimer = null
+    snackbar.style.opacity = '0'
+    snackbar.style.display = 'none'
+  }
+  showSnackbar(id, text, duration)
+}
+
 function hideSnackbar(snackbar) {
   if (snackbar._hideTimer) {
     clearTimeout(snackbar._hideTimer)
     snackbar._hideTimer = null
   }
   snackbar.style.opacity = '0'
-  setTimeout(() => {
+  snackbar._fadeTimer = setTimeout(() => {
     snackbar.style.display = 'none'
     const dismissBtn = snackbar.querySelector('.snackbar-dismiss')
     if (dismissBtn) {

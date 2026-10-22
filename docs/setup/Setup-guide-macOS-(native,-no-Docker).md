@@ -5,7 +5,7 @@ Docker is the recommended path ([Developer Quickstart](Developer-Quickstart.md))
 ## 1. Packages
 
 ```bash
-brew install git php composer nvm mariadb
+brew install git php composer nvm mariadb librsvg sox
 brew services start php        # PHP-FPM on 127.0.0.1:9000 (macOS 12+ has no mod_php)
 brew services start mariadb
 nvm install node && corepack enable   # after adding nvm to ~/.zshrc as brew prints

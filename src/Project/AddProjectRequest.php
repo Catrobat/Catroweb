@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AddProjectRequest
 {
-  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = Flavor::POCKETCODE, private readonly ?string $project_id = null)
+  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = Flavor::POCKETCODE, private readonly ?string $project_id = null, private readonly ?int $scratch_id = null)
   {
   }
 
@@ -57,5 +57,11 @@ class AddProjectRequest
   public function getProjectId(): ?string
   {
     return $this->project_id;
+  }
+
+  /** Set on projects converted from Scratch, so the first persisted row already says where it came from. */
+  public function getScratchId(): ?int
+  {
+    return $this->scratch_id;
   }
 }

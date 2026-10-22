@@ -15,6 +15,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\Remix\RemixManager;
+use App\Project\Scratch\ScratchManager;
 use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\ReactionSummaryResponse;
@@ -60,6 +61,10 @@ final class ReactionsApiTest extends TestCase
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new \Symfony\Component\HttpFoundation\RequestStack(),
       new \Psr\Log\NullLogger(),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      $this->createStub(ScratchManager::class),
     );
   }
 

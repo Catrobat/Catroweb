@@ -220,6 +220,10 @@ class ProjectManager
     $project->setRemixMigratedAt(null);
     $project->setFlavor($request->getFlavor());
     $project->setDebugBuild($extracted_file->isDebugBuild());
+    if (null !== $request->getScratchId()) {
+      $project->setScratchId($request->getScratchId());
+    }
+
     $this->addTags($project, $extracted_file);
 
     $this->event_dispatcher->dispatch(new ProjectBeforePersistEvent($extracted_file, $project));
@@ -330,77 +334,6 @@ class ProjectManager
         'project_id' => $project_id,
         'error' => $e->getMessage(),
       ]);
-    }
-
-    return $project;
-  }
-
-  /**
-   * Adds a new project from a scratch_project. Doesn't add the Project file.
-   *
-   * @throws ORMException
-   * @throws \ImagickException
-   */
-  public function createProjectFromScratch(?Project $project, User $user, array $project_data): Project
-  {
-    $modified_time = TimeUtils::dateTimeFromScratch($project_data['history']['modified']);
-    if (!$project instanceof Project) {
-      $project = new Project();
-      $project->setUser($user);
-      $project->setScratchId($project_data['id']);
-      $project->setDebugBuild(false);
-    } else {
-      // throw new Exception($project->getLastModifiedAt()->format('Y-m-d H:i:s'));
-      if ($project->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp()) {
-        return $project;
-      }
-
-      $project->incrementVersion();
-    }
-
-    $project->setVisible(true);
-    $project->setApproved(false);
-
-    $description_text = '';
-    if ($instructions = $project_data['instructions'] ?? null) {
-      $description_text .= $instructions;
-    }
-
-    if ($description = $project_data['description'] ?? null) {
-      if ($instructions) {
-        $description_text .= "\n\n";
-      }
-
-      $description_text .= $description;
-    }
-
-    $project->setDescription($description_text);
-
-    if ($title = $project_data['title'] ?? null) {
-      $project->setName($title);
-    }
-
-    $shared_time = TimeUtils::dateTimeFromScratch($project_data['history']['shared']);
-    if ($shared_time instanceof \DateTime) {
-      $project->setUploadedAt($shared_time);
-    } else {
-      $project->setUploadedAt(TimeUtils::getDateTime());
-    }
-
-    if ($modified_time instanceof \DateTime) {
-      $project->setLastModifiedAt($modified_time);
-    } else {
-      $project->setLastModifiedAt(TimeUtils::getDateTime());
-    }
-
-    $this->entity_manager->persist($project);
-    $this->entity_manager->flush();
-    $this->entity_manager->refresh($project);
-
-    $this->notifyFollower($project);
-
-    if ($project_data['image'] ?? false) {
-      $this->screenshot_repository->saveScratchScreenshot($project->getScratchId(), $project->getId());
     }
 
     return $project;

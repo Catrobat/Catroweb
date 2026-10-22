@@ -47,6 +47,29 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 10,
         'interval' => '24 hours',
       ],
+      // Every open of a Scratch import link asks Scratch's API, even when the copy on Share is current.
+      'scratch_open_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 30,
+        'interval' => '1 minute',
+      ],
+      // Every search not yet cached asks Scratch's search API live.
+      'scratch_search_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 30,
+        'interval' => '1 minute',
+      ],
+      // Converting a Scratch project downloads and renders all its assets: count only real conversions, not cache hits.
+      'scratch_convert_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 5,
+        'interval' => '15 minutes',
+      ],
+      'scratch_convert_daily' => [
+        'policy' => 'sliding_window',
+        'limit' => 20,
+        'interval' => '24 hours',
+      ],
       'auth_burst' => [
         'policy' => 'sliding_window',
         'limit' => 10,

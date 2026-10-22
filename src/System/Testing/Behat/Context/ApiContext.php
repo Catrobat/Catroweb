@@ -1605,7 +1605,8 @@ class ApiContext implements Context
 
     Assert::assertIsArray($data['scratch_projects'] ?? null);
     Assert::assertCount($count, $data['scratch_projects'], "Expected {$count} Scratch projects in response.");
-    Assert::assertSame($count, $data['scratch_projects_total'] ?? null);
+    // The total counts Scratch's page before already imported projects are left out, so it can be larger.
+    Assert::assertGreaterThanOrEqual($count, $data['scratch_projects_total'] ?? null);
   }
 
   /**
@@ -2177,6 +2178,39 @@ class ApiContext implements Context
     } catch (\Exception) {
       file_put_contents($this->ERROR_DIR.'errors.json', '');
     }
+  }
+
+  /**
+   * @Then the Scratch project :scratch_id should be converted to :name version :version by :scratch_username
+   */
+  public function theScratchProjectShouldBeConvertedTo(int $scratch_id, string $name, int $version, string $scratch_username): void
+  {
+    $project = $this->findProjectConvertedFromScratch($scratch_id);
+    Assert::assertSame($name, $project->getName());
+    Assert::assertSame($version, $project->getVersion());
+    Assert::assertGreaterThan(0, $project->getFilesize());
+    $author = $project->getUser();
+    Assert::assertNotNull($author);
+    Assert::assertNotNull($author->getScratchUserId(), 'The author is not a Scratch shadow user');
+    Assert::assertSame($scratch_username, $author->getScratchUsername());
+  }
+
+  /**
+   * @When I download the project converted from Scratch project :scratch_id
+   */
+  public function iDownloadTheProjectConvertedFromScratchProject(int $scratch_id): void
+  {
+    $this->iRequestWith('GET', '/api/projects/'.$this->findProjectConvertedFromScratch($scratch_id)->getId().'/catrobat');
+  }
+
+  private function findProjectConvertedFromScratch(int $scratch_id): Project
+  {
+    // The request ran in another kernel; don't trust this entity manager's copies.
+    $this->getManager()->clear();
+    $project = $this->getProjectManager()->findOneByScratchId($scratch_id);
+    Assert::assertNotNull($project, 'No project was converted from Scratch project '.$scratch_id);
+
+    return $project;
   }
 
   /**

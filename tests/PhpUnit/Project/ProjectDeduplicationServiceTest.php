@@ -13,6 +13,7 @@ use App\Project\ProjectDeduplicationService;
 use App\Storage\ContentAddressableStore;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -89,7 +90,7 @@ class ProjectDeduplicationServiceTest extends TestCase
       ->willReturn('ab/cd/fakehash')
     ;
 
-    $this->asset_repository->method('findByHash')->willReturn(null);
+    $this->insertAssetsWithSql($this->entity_manager);
 
     $service = new ProjectDeduplicationService(
       $store,
@@ -113,11 +114,11 @@ class ProjectDeduplicationServiceTest extends TestCase
 
     $this->store->method('hashFile')->willReturn(hash('sha256', 'new asset content'));
     $this->store->method('store')->willReturn('ab/cd/hash');
-    $this->asset_repository->method('findByHash')->willReturn(null);
 
     $persisted = [];
     $entity_manager = $this->createMock(EntityManagerInterface::class);
-    $entity_manager->expects($this->exactly(2)) // 1 ProjectAsset + 1 ProjectAssetMapping
+    $inserted = $this->insertAssetsWithSql($entity_manager);
+    $entity_manager->expects($this->once()) // the ProjectAssetMapping; the ProjectAsset is inserted with SQL
       ->method('persist')
       ->willReturnCallback(function (object $entity) use (&$persisted): void {
         $persisted[] = $entity::class;
@@ -134,8 +135,8 @@ class ProjectDeduplicationServiceTest extends TestCase
 
     $service->deduplicateProject($project, $extract_dir);
 
-    $this->assertContains(ProjectAsset::class, $persisted);
-    $this->assertContains(ProjectAssetMapping::class, $persisted);
+    $this->assertArrayHasKey(hash('sha256', 'new asset content'), $inserted->getArrayCopy());
+    $this->assertSame([ProjectAssetMapping::class], $persisted);
   }
 
   #[Group('unit')]
@@ -202,7 +203,7 @@ class ProjectDeduplicationServiceTest extends TestCase
     ;
 
     $store->expects($this->once())->method('store')->willReturn('ab/cd/hash');
-    $this->asset_repository->method('findByHash')->willReturn(null);
+    $this->insertAssetsWithSql($this->entity_manager);
 
     $service = new ProjectDeduplicationService(
       $store,
@@ -263,7 +264,7 @@ class ProjectDeduplicationServiceTest extends TestCase
     ;
 
     $store->expects($this->exactly(3))->method('store')->willReturn('ab/cd/hash');
-    $this->asset_repository->method('findByHash')->willReturn(null);
+    $this->insertAssetsWithSql($this->entity_manager);
 
     $service = new ProjectDeduplicationService(
       $store,
@@ -406,28 +407,9 @@ class ProjectDeduplicationServiceTest extends TestCase
     // Store called once for the first file only
     $store->expects($this->once())->method('store')->willReturn('ab/cd/'.$hash);
 
-    $asset = null;
-    $call_count = 0;
-    $this->asset_repository->method('findByHash')->willReturnCallback(
-      function () use (&$asset, &$call_count) {
-        if (0 === $call_count++) {
-          return null;
-        }
-
-        return $asset;
-      }
-    );
-
     $entity_manager = $this->createMock(EntityManagerInterface::class);
-    // Track the persisted ProjectAsset so we can return it on second lookup
-    $entity_manager->expects($this->exactly(3)) // 1 ProjectAsset + 2 ProjectAssetMapping
-      ->method('persist')
-      ->willReturnCallback(function (object $entity) use (&$asset): void {
-        if ($entity instanceof ProjectAsset) {
-          $asset = $entity;
-        }
-      })
-    ;
+    $inserted = $this->insertAssetsWithSql($entity_manager);
+    $entity_manager->expects($this->exactly(2))->method('persist'); // 2 ProjectAssetMapping
 
     $service = new ProjectDeduplicationService(
       $store,
@@ -438,6 +420,28 @@ class ProjectDeduplicationServiceTest extends TestCase
     );
 
     $service->deduplicateProject($project, $extract_dir);
+
+    $this->assertSame(2, $inserted[$hash]->getReferenceCount());
+  }
+
+  /**
+   * New assets are inserted with SQL; make them visible to later findByHash lookups, like the database would.
+   *
+   * @return \ArrayObject<string, ProjectAsset> inserted assets by hash
+   */
+  private function insertAssetsWithSql(Stub&EntityManagerInterface $entity_manager): \ArrayObject
+  {
+    $assets = new \ArrayObject();
+    $connection = $this->createStub(Connection::class);
+    $connection->method('executeStatement')->willReturnCallback(static function (string $sql, array $params) use ($assets): int {
+      $assets[$params[0]] ??= new ProjectAsset($params[0], $params[1], $params[2], $params[3]);
+
+      return 1;
+    });
+    $entity_manager->method('getConnection')->willReturn($connection);
+    $this->asset_repository->method('findByHash')->willReturnCallback(static fn (string $hash): ?ProjectAsset => $assets[$hash] ?? null);
+
+    return $assets;
   }
 
   private function createProjectStub(): Stub&Project

@@ -17,6 +17,7 @@ docker exec -it app.catroweb php bin/console catrobat:reset --hard
 - After dependency or Dockerfile changes: `docker compose -f docker-compose.dev.yaml build --no-cache app.catroweb`, then `up -d`.
 - Logs: `docker compose -f docker-compose.dev.yaml logs -f app.catroweb`.
 - CI-like test-only stack: `docker compose -f docker-compose.test.yaml up -d --build`.
+- Apple Silicon: if the build fails the PHP version check, Sury's arm64 packages are behind amd64. Add `- PHP_MIN_VERSION=8.5.11` under `build.args` of `app.catroweb` in `docker-compose.dev.yaml` locally (don't commit it) until they catch up.
 
 ## Daily commands
 

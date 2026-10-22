@@ -380,6 +380,21 @@ interface ProjectsApiInterface
   ): array|object|null;
 
   /**
+   * Operation projectsScratchScratchIdPost.
+   *
+   * Import a public Scratch project
+   *
+   * @param int   $scratch_id      Scratch project id (required)
+   * @param int   &$responseCode   The HTTP Response Code
+   * @param array $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectsScratchScratchIdPost(
+    int $scratch_id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation projectsSearchGet.
    *
    * Search for projects associated with a keywords

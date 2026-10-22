@@ -208,6 +208,26 @@ class ProjectManagerTest extends TestCase
     $this->assertInstanceOf(Project::class, $program_manager->addProject($this->request));
   }
 
+  public function testAConvertedScratchProjectHasItsScratchIdFromTheFirstPersist(): void
+  {
+    $this->request->method('getScratchId')->willReturn(10128407);
+    $scratch_ids = [];
+    $entity_manager = $this->createStub(EntityManager::class);
+    $entity_manager->method('persist')->willReturnCallback(static function (object $project) use (&$scratch_ids): void {
+      if ($project instanceof Project) {
+        $scratch_ids[] = $project->getScratchId();
+        $project->setId('1');
+      }
+    });
+    $event_dispatcher = $this->createStub(EventDispatcherInterface::class);
+    $event_dispatcher->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+
+    $this->createProjectManagerWithMocks(entity_manager: $entity_manager, event_dispatcher: $event_dispatcher)->addProject($this->request);
+
+    $this->assertNotEmpty($scratch_ids);
+    $this->assertSame(10128407, $scratch_ids[0]);
+  }
+
   /**
    * @throws ORMException
    * @throws Exception

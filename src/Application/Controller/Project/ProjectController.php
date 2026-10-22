@@ -10,13 +10,11 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
-use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +27,6 @@ class ProjectController extends AbstractController
     private readonly ProjectManager $project_manager,
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly TranslatorInterface $translator,
-    private readonly EventDispatcherInterface $event_dispatcher,
     private readonly UserCommentRepository $comment_repository,
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly ProjectStatisticsService $project_statistics_service,
@@ -74,13 +71,6 @@ class ProjectController extends AbstractController
     }
 
     $projectId = $project->getId() ?? throw new \RuntimeException('Project ID must not be null');
-
-    if ($project->isScratchProgram()) {
-      $scratchId = $project->getScratchId();
-      if (null !== $scratchId) {
-        $this->event_dispatcher->dispatch(new CheckScratchProjectEvent($scratchId));
-      }
-    }
 
     $viewed = $request->getSession()->get('viewed', []);
     $this->checkAndAddViewed($request, $project, $viewed);

@@ -6,9 +6,9 @@ namespace App\Api\Services\Search;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
-use App\DB\EntityRepository\Project\ScratchProjectRepository;
 use App\Project\ProjectManager;
 use App\Project\ProjectSearchService;
+use App\Project\Scratch\ScratchSearch;
 use App\Storage\ImageRepository;
 use App\Studio\StudioSearchService;
 use App\User\UserManager;
@@ -36,7 +36,7 @@ class SearchApiFacade extends AbstractApiFacade
     private readonly JWTTokenManagerInterface $jwt_manager,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly ImageRepository $image_repository,
-    private readonly ScratchProjectRepository $scratch_project_repository,
+    private readonly ScratchSearch $scratch_search,
   ) {
     parent::__construct($authentication_manager);
   }
@@ -85,9 +85,9 @@ class SearchApiFacade extends AbstractApiFacade
     return $this->studio_search_service;
   }
 
-  public function getScratchProjectRepository(): ScratchProjectRepository
+  public function getScratchSearch(): ScratchSearch
   {
-    return $this->scratch_project_repository;
+    return $this->scratch_search;
   }
 
   public function getTranslator(): TranslatorInterface

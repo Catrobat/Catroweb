@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Api;
 
 use App\Api\SearchApi;
 use App\Api\Services\Search\SearchApiFacade;
+use App\Project\Scratch\ScratchSearch;
 use OpenAPI\Server\Model\SearchResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -33,7 +34,10 @@ final class SearchApiTest extends TestCase
   #[\Override]
   protected function setUp(): void
   {
+    $scratch_search = $this->createStub(ScratchSearch::class);
+    $scratch_search->method('search')->willReturn(['projects' => [], 'total' => 0]);
     $this->facade = $this->createStub(SearchApiFacade::class);
+    $this->facade->method('getScratchSearch')->willReturn($scratch_search);
     $this->search_api = new SearchApi(
       $this->facade,
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),

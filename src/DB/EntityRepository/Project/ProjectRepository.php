@@ -402,6 +402,28 @@ class ProjectRepository extends ServiceEntityRepository
   }
 
   /**
+   * @param int[] $scratch_ids
+   *
+   * @return int[] those of the given Scratch ids that were already imported as a project
+   */
+  public function findImportedScratchIds(array $scratch_ids): array
+  {
+    if ([] === $scratch_ids) {
+      return [];
+    }
+
+    $result = $this->createQueryBuilder('p')
+      ->select('p.scratch_id')
+      ->where('p.scratch_id IN (:scratch_ids)')
+      ->setParameter('scratch_ids', $scratch_ids)
+      ->getQuery()
+      ->getSingleColumnResult()
+    ;
+
+    return array_map(intval(...), $result);
+  }
+
+  /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
