@@ -227,7 +227,7 @@ final class ScratchToCatrobatConverterTest extends TestCase
     ]);
   }
 
-  public function testChangeVariableAddsToTextValuesAndNotIsBracketedUnderPlus(): void
+  public function testChangeVariableCountsNonNumericTextAsZeroAndNotIsBracketedUnderPlus(): void
   {
     $xml = self::convertBlocks([
       'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'change', 'topLevel' => true, 'inputs' => [], 'fields' => []],
@@ -240,7 +240,11 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $set = '//script[receivedMessage="__scratch green flag"]//brick[@type="SetVariableBrick"]';
     $this->assertSame(0.0, $xpath->evaluate('count(//brick[@type="ChangeVariableBrick"])'));
     $this->assertSame('PLUS', $xpath->evaluate('string('.$set.'/formulaList/formula/value)'));
-    $this->assertSame('score', $xpath->evaluate('string('.$set.'/formulaList/formula/leftChild[type="USER_VARIABLE"]/value)'));
+    $current = $set.'/formulaList/formula/leftChild[type="FUNCTION" and value="IF_THEN_ELSE"]';
+    $this->assertSame('score', $xpath->evaluate('string('.$current.'/rightChild[type="USER_VARIABLE"]/value)'));
+    $this->assertSame('0', $xpath->evaluate('string('.$current.'/additionalChildren/*[type="NUMBER"]/value)'));
+    $is_number = $current.'/leftChild[value="EQUAL"][leftChild[type="USER_VARIABLE" and value="score"]]';
+    $this->assertSame(1.0, $xpath->evaluate('count('.$is_number.'/rightChild[value="PLUS"][leftChild[value="score"]][rightChild[value="0"]])'));
     $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="PLUS"]/leftChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
   }
 
