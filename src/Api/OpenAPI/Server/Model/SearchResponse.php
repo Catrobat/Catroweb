@@ -117,7 +117,7 @@ class SearchResponse
   protected ?int $studios_total = null;
 
   /**
-   * Live results of Scratch&#39;s public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out; they appear under projects. Import one with POST /projects/scratch/{id}, which converts it.
+   * Live results of Scratch&#39;s public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it.
    *
    * @var SearchResponseScratchProjectsInner[]|null
    *
@@ -307,7 +307,7 @@ class SearchResponse
   /**
    * Sets scratch_projects.
    *
-   * @param SearchResponseScratchProjectsInner[]|null $scratch_projects Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out; they appear under projects. Import one with POST /projects/scratch/{id}, which converts it.
+   * @param SearchResponseScratchProjectsInner[]|null $scratch_projects Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it.
    *
    * @return $this
    */

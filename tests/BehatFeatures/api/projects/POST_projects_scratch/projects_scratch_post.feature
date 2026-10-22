@@ -45,7 +45,7 @@ Feature: Import a public Scratch project as a Pocket Code project
     When I request "POST" "/api/projects/scratch/70058682"
     Then the response code should be "422"
     And the JSON response field "error.code" should be "422"
-    And the client response should contain "Only Scratch 3 projects can be converted."
+    And the client response should contain "made with an older Scratch version"
     And there should be "0" projects in the database
 
   Scenario: Two Scratch projects with the same title by the same author stay two projects

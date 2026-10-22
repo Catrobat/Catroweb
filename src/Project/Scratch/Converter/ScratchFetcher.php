@@ -13,6 +13,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  */
 class ScratchFetcher
 {
+  final public const string OLD_SCRATCH_MESSAGE = 'This project was made with an older Scratch version (before 2019) and can\'t be converted yet.';
   private const int MAX_JSON_BYTES = 16 * 1024 * 1024;
   private const int MAX_ASSET_BYTES = 32 * 1024 * 1024;
   private const int MAX_TOTAL_ASSET_BYTES = 128 * 1024 * 1024;
@@ -43,9 +44,11 @@ class ScratchFetcher
       throw new ScratchConversionException('Scratch did not hand out a project token; the project is probably not shared.', ScratchConversionException::NOT_FOUND);
     }
 
-    $project = $this->getJson('https://projects.scratch.mit.edu/'.$scratch_id.'?token='.rawurlencode($token), self::MAX_JSON_BYTES);
-    if (!isset($project['targets']) || !\is_array($project['targets'])) {
-      throw new ScratchConversionException('Only Scratch 3 projects can be converted.');
+    // Projects not saved since Scratch 3 (2019) still come as Scratch 2 (zip, or JSON without "targets") or Scratch 1.x.
+    $body = $this->get('https://projects.scratch.mit.edu/'.$scratch_id.'?token='.rawurlencode($token), self::MAX_JSON_BYTES);
+    $project = str_starts_with($body, 'PK') || str_starts_with($body, 'ScratchV0') ? null : json_decode($body, true);
+    if (!\is_array($project) || !\is_array($project['targets'] ?? null)) {
+      throw new ScratchConversionException(self::OLD_SCRATCH_MESSAGE);
     }
 
     return $project;

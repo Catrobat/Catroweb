@@ -40,6 +40,6 @@
       "modified": "2024-01-01T00:00:00.000Z"
     },
     "project_token": "fake-token",
-    "fake_error": "Only Scratch 3 projects can be converted."
+    "fake_error": "This project was made with an older Scratch version (before 2019) and can't be converted yet."
   }
 }

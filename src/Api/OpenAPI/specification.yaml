@@ -5652,7 +5652,7 @@ components:
           example: 5
         scratch_projects:
           type: array
-          description: "Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out; they appear under projects. Import one with POST /projects/scratch/{id}, which converts it."
+          description: "Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it."
           items:
             type: object
             properties:

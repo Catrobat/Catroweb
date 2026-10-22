@@ -580,7 +580,7 @@ search:
   noProjects: No projects found
   noStudios: No studios found
   scratchProjects: Scratch projects
-  scratchConverting: Converting for Pocket Code…
+  scratchConverting: Converting for %app%…
   scratchConvertingSnackbar: 'Converting “%name%” — this can take a few seconds'
   sameSearchMessage: "Looks like you're already here! Try a different search?"
 

@@ -21,6 +21,8 @@ class ScratchSearch
   // Scratch rejects larger pages with HTTP 400.
   private const int MAX_LIMIT = 40;
   private const int MAX_BYTES = 1024 * 1024;
+  // Every save since Scratch 3 launched is a Scratch 3 project; older ones are Scratch 2 or 1.x and can't be converted.
+  private const string SCRATCH_3_RELEASE = '2019-01-02';
 
   public function __construct(
     private readonly HttpClientInterface $http_client,
@@ -33,7 +35,7 @@ class ScratchSearch
 
   /**
    * Scratch reports no total: it is offset + the size of Scratch's page, plus one while that page is full, so "show more"
-   * stays offered. Counted before imported projects are left out, which would otherwise shorten a full page.
+   * stays offered. Counted before imported and pre-Scratch-3 projects are left out, which would otherwise shorten a full page.
    *
    * @return array{projects: list<array{id: string, name: string, username: string}>, total: int}
    */
@@ -61,7 +63,12 @@ class ScratchSearch
 
     // Imported projects are real Share projects and show up as such; checked after the cache, as imports happen anytime.
     $imported = $this->project_repository->findImportedScratchIds(array_map(static fn (array $project): int => (int) $project['id'], $page));
-    $projects = array_values(array_filter($page, static fn (array $project): bool => !\in_array((int) $project['id'], $imported, true)));
+    $projects = [];
+    foreach ($page as $project) {
+      if (($project['modified'] ?? self::SCRATCH_3_RELEASE) >= self::SCRATCH_3_RELEASE && !\in_array((int) $project['id'], $imported, true)) {
+        $projects[] = ['id' => $project['id'], 'name' => $project['name'], 'username' => $project['username']];
+      }
+    }
 
     return [
       'projects' => $projects,
@@ -70,7 +77,9 @@ class ScratchSearch
   }
 
   /**
-   * @return list<array{id: string, name: string, username: string}>|null null when Scratch could not answer
+   * modified is the ISO time of the project's last save on Scratch.
+   *
+   * @return list<array{id: string, name: string, username: string, modified?: string}>|null null when Scratch could not answer
    */
   protected function fetch(string $query, int $limit, int $offset): ?array
   {
@@ -100,8 +109,9 @@ class ScratchSearch
       $id = $project['id'] ?? null;
       $name = $project['title'] ?? null;
       $username = $project['author']['username'] ?? null;
+      $modified = $project['history']['modified'] ?? null;
       if (\is_int($id) && \is_string($name) && \is_string($username)) {
-        $projects[] = ['id' => (string) $id, 'name' => $name, 'username' => $username];
+        $projects[] = ['id' => (string) $id, 'name' => $name, 'username' => $username] + (\is_string($modified) ? ['modified' => $modified] : []);
       }
     }
 

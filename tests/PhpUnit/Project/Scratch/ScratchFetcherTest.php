@@ -64,6 +64,25 @@ final class ScratchFetcherTest extends TestCase
     yield 'unreachable' => [new MockResponse('', ['error' => 'Could not resolve host']), ScratchConversionException::UPSTREAM];
   }
 
+  #[DataProvider('olderScratchProjects')]
+  public function testProjectsFromOlderScratchVersionsAreExplained(string $body): void
+  {
+    try {
+      (new ScratchFetcher(new MockHttpClient(new MockResponse($body))))->fetchProject(1, ['project_token' => 't']);
+      $this->fail('An old project was accepted');
+    } catch (ScratchConversionException $exception) {
+      $this->assertSame(ScratchFetcher::OLD_SCRATCH_MESSAGE, $exception->getMessage());
+    }
+  }
+
+  /** @return iterable<string, array{string}> */
+  public static function olderScratchProjects(): iterable
+  {
+    yield 'Scratch 1.x' => ["ScratchV02\x00\x00\x1a"];
+    yield 'Scratch 2 zip' => ["PK\x03\x04"];
+    yield 'Scratch 2 JSON' => ['{"objName": "Stage", "children": []}'];
+  }
+
   public function testAnOversizedDownloadIsTheProjectsFaultNotScratchs(): void
   {
     $client = new MockHttpClient(new MockResponse(str_repeat('x', 2 * 1024 * 1024)));

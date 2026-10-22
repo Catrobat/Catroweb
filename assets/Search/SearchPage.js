@@ -1,6 +1,6 @@
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { createPictureElement } from '../Layout/ImageVariants'
-import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
+import { replaceSnackbar, SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
 import './Search.css'
 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showMore: container.dataset.transShowMore || 'Show more',
     members: container.dataset.transMembers || 'members',
     scratchProjects: container.dataset.transScratchProjects || 'Scratch projects',
-    scratchConverting: container.dataset.transScratchConverting || 'Converting for Pocket Code…',
+    scratchConverting: container.dataset.transScratchConverting || 'Converting…',
     scratchConvertingSnackbar:
       container.dataset.transScratchConvertingSnackbar ||
       'Converting “%name%” — this can take a few seconds',
@@ -429,8 +429,10 @@ function importScratchProject(card, name, scratchId, baseUrl, theme, trans) {
         .json()
         .catch(() => ({}))
         .then((body) => {
-          if (!response.ok) throw new Error(body?.error?.message || `HTTP ${response.status}`)
-          window.location.href = (body.project_url || '').replace('/app/', `/${theme}/`)
+          if (!response.ok || !body?.id) {
+            throw new Error(body?.error?.message || `HTTP ${response.status}`)
+          }
+          window.location.href = `${baseUrl}/${theme}/project/${encodeURIComponent(body.id)}`
         }),
     )
     .catch((error) => {
@@ -439,7 +441,8 @@ function importScratchProject(card, name, scratchId, baseUrl, theme, trans) {
       card.classList.remove('search-card--loading')
       overlay.classList.add('d-none')
       label.textContent = ''
-      showSnackbar('#share-snackbar', error.message, SnackbarDuration.error)
+      // Replace the "Converting…" message at once, so the outcome doesn't wait behind it.
+      replaceSnackbar('#share-snackbar', error.message, SnackbarDuration.error)
     })
 }
 

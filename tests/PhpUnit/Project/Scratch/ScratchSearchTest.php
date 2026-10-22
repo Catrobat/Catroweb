@@ -53,6 +53,19 @@ class ScratchSearchTest extends TestCase
     $this->assertSame(4 + 2 + 1, $result['total']); // the full page counts, so leaving one out keeps "show more"
   }
 
+  public function testProjectsNotSavedSinceScratch3AreLeftOut(): void
+  {
+    $search = $this->createSearch([new MockResponse(json_encode([
+      ['id' => 1, 'title' => 'Nyan', 'author' => ['username' => 'x'], 'history' => ['modified' => '2018-01-09T22:34:11.000Z']],
+      ['id' => 2, 'title' => 'New', 'author' => ['username' => 'y'], 'history' => ['modified' => '2019-01-02T10:00:00.000Z']],
+    ], JSON_THROW_ON_ERROR))]);
+
+    $result = $search->search('a', 2, 0, '1.2.3.4');
+
+    $this->assertSame([['id' => '2', 'name' => 'New', 'username' => 'y']], $result['projects']);
+    $this->assertSame(2 + 1, $result['total']);
+  }
+
   public function testScratchFailureGivesEmptyResultAndIsNotCached(): void
   {
     $search = $this->createSearch([

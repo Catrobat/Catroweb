@@ -30,6 +30,19 @@ Feature: Open a Scratch project from the search as a Pocket Code project
     And I wait for AJAX to finish
     And I wait for the element "#search-scratch-projects .search-card" to be visible
     When I click "#search-scratch-projects button.search-card"
-    Then I wait for the element "#share-snackbar-label" to contain "Only Scratch 3 projects can be converted."
+    Then I wait for the element "#share-snackbar-label" to contain "made with an older Scratch version"
     And the url should match "/app/search/Old$"
     And there should be "0" projects in the database
+
+  Scenario: The converting label names the app of the current flavor
+    Given there are Scratch projects:
+      | id       | name            | username   |
+      | 70058680 | Gamma Ray Racer | scratchcat |
+    And I am on "/luna/search/Gamma"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    When I click "#search-scratch-projects button.search-card"
+    Then I wait for the element "#search-scratch-projects .search-card__overlay-label" to contain "Converting for Luna & Cat"
+    And I wait for the element "#name" to contain "Gamma Ray Racer"
+    And the url should match "/luna/project/[0-9a-f-]+$"
