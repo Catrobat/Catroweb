@@ -334,6 +334,36 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//script[@type="WhenClonedScript"]'.$remember.')'));
   }
 
+  public function testMusicBlocksBecomeMusicBricks(): void
+  {
+    $menu = static fn (string $opcode, string $field, string $value): array => ['opcode' => $opcode, 'shadow' => true, 'inputs' => [], 'fields' => [$field => [$value, null]]];
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'inst', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'inst' => ['opcode' => 'music_setInstrument', 'next' => 'note', 'inputs' => ['INSTRUMENT' => [1, 'im']], 'fields' => []],
+      'im' => $menu('music_menu_INSTRUMENT', 'INSTRUMENT', '3'),
+      'note' => ['opcode' => 'music_playNoteForBeats', 'next' => 'drum', 'inputs' => ['NOTE' => [1, 'nm'], 'BEATS' => [1, [4, '0.5']]], 'fields' => []],
+      'nm' => $menu('note', 'NOTE', '60'),
+      'drum' => ['opcode' => 'music_playDrumForBeats', 'next' => null, 'inputs' => ['DRUM' => [1, 'dm'], 'BEATS' => [1, [4, '0.25']]], 'fields' => []],
+      'dm' => $menu('music_menu_DRUM', 'DRUM', '18'),
+    ]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame('ORGAN', $xpath->evaluate('string(//brick[@type="SetInstrumentBrick"]/instrumentSelection)'));
+    $this->assertSame('60', $xpath->evaluate('string(//brick[@type="PlayNoteForBeatsBrick"]/formulaList/formula[@category="NOTE_TO_PLAY"]/value)'));
+    $this->assertSame('OPEN_CUICA', $xpath->evaluate('string(//brick[@type="PlayDrumForBeatsBrick"]/drumSelection)'));
+  }
+
+  public function testAComputedInstrumentPicksFromTheMenu(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'inst', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'inst' => ['opcode' => 'music_setInstrument', 'next' => null, 'inputs' => ['INSTRUMENT' => [3, [12, 'which', 'v1'], 'im']], 'fields' => []],
+      'im' => ['opcode' => 'music_menu_INSTRUMENT', 'shadow' => true, 'inputs' => [], 'fields' => ['INSTRUMENT' => ['1', null]]],
+    ], ['variables' => ['v1' => ['which', 3]]]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame(21.0, $xpath->evaluate('count(//brick[@type="IfThenLogicBeginBrick"]/ifBranchBricks/brick[@type="SetInstrumentBrick"])'));
+    $this->assertSame('ORGAN', $xpath->evaluate('string(//brick[@type="IfThenLogicBeginBrick"][formulaList/formula/rightChild/value="3"]//instrumentSelection)'));
+  }
+
   public function testHelperNamesStayClearOfTheProjectsOwnNames(): void
   {
     $xml = self::convertBlocks([

@@ -22,6 +22,18 @@ final class BlockConverter
   // Text multiplies with sharing too: one 8 KiB string behind 15 levels of shared reporters is 256 MiB of XML.
   private const int MAX_TEXT_BYTES = 16 * 1024 * 1024;
 
+  /** Catroid's PickableDrum names, in Scratch's drum menu order. */
+  private const array DRUMS = [
+    'SNARE_DRUM', 'BASS_DRUM', 'SIDE_STICK', 'CRASH_CYMBAL', 'OPEN_HI_HAT', 'CLOSED_HI_HAT', 'TAMBOURINE', 'HAND_CLAP', 'CLAVES',
+    'WOOD_BLOCK', 'COWBELL', 'TRIANGLE', 'BONGO', 'CONGA', 'CABASA', 'GUIRO', 'VIBRASLAP', 'OPEN_CUICA',
+  ];
+
+  /** Catroid's PickableMusicalInstrument names, in Scratch's instrument menu order. */
+  private const array INSTRUMENTS = [
+    'PIANO', 'ELECTRIC_PIANO', 'ORGAN', 'GUITAR', 'ELECTRIC_GUITAR', 'BASS', 'PIZZICATO', 'CELLO', 'TROMBONE', 'CLARINET', 'SAXOPHONE',
+    'FLUTE', 'WOODEN_FLUTE', 'BASSOON', 'CHOIR', 'VIBRAPHONE', 'MUSIC_BOX', 'STEEL_DRUM', 'MARIMBA', 'SYNTH_LEAD', 'SYNTH_PAD',
+  ];
+
   /** @var array<string, array<string, mixed>> */
   private array $blocks = [];
 
@@ -340,6 +352,15 @@ final class BlockConverter
       case 'sound_stopallsounds': return [$this->brick('StopAllSoundsBrick')];
       case 'sound_setvolumeto': return [$this->brick('SetVolumeToBrick', ['VOLUME' => $this->number($b, 'VOLUME')])];
       case 'sound_changevolumeby': return [$this->brick('ChangeVolumeByNBrick', ['VOLUME_CHANGE' => $this->number($b, 'VOLUME')])];
+        // music extension; Scratch numbers drums and instruments from 1
+      case 'music_playNoteForBeats': return [$this->brick('PlayNoteForBeatsBrick', ['NOTE_TO_PLAY' => $this->number($b, 'NOTE'), 'BEATS_TO_PLAY_NOTE' => $this->number($b, 'BEATS')])];
+      case 'music_restForBeats': return [$this->brick('PauseForBeatsBrick', ['BEATS_TO_PAUSE' => $this->number($b, 'BEATS')])];
+      case 'music_setTempo': return [$this->brick('SetTempoBrick', ['TEMPO' => $this->number($b, 'TEMPO')])];
+      case 'music_changeTempo': return [$this->brick('ChangeTempoByNBrick', ['TEMPO_CHANGE' => $this->number($b, 'TEMPO')])];
+      case 'music_playDrumForBeats':
+        return $this->pickByNumber($b, 'DRUM', self::DRUMS, fn (string $drum): \DOMElement => $this->brick('PlayDrumForBeatsBrick', ['PLAY_DRUM' => $this->number($b, 'BEATS')], [], [$this->text('drumSelection', $drum)]));
+      case 'music_setInstrument':
+        return $this->pickByNumber($b, 'INSTRUMENT', self::INSTRUMENTS, fn (string $instrument): \DOMElement => $this->brick('SetInstrumentBrick', [], [], [$this->text('instrumentSelection', $instrument)]));
         // events
       case 'event_broadcast':
       case 'event_broadcastandwait':
@@ -827,6 +848,29 @@ final class BlockConverter
     $n = Formula::number(max(1, $count));
 
     return Formula::op('PLUS', Formula::op('MINUS', $zero_based, Formula::op('MULT', $n, Formula::fn('FLOOR', Formula::op('DIVIDE', $zero_based, $n)))), Formula::number(1));
+  }
+
+  /**
+   * A drum or instrument chosen by number. Catroid picks them from a fixed menu, so a computed number becomes one
+   * "if" per choice; Scratch wraps the number around.
+   *
+   * @param list<string>                  $names
+   * @param \Closure(string): \DOMElement $brick
+   *
+   * @return list<\DOMElement>
+   */
+  private function pickByNumber(array $b, string $menu, array $names, \Closure $brick): array
+  {
+    $chosen = $this->menu($b, $menu);
+    if (null !== $chosen) {
+      return [$brick($names[(((int) $chosen - 1) % \count($names) + \count($names)) % \count($names)])];
+    }
+
+    $number = self::wrapped($this->number($b, $menu), \count($names));
+
+    return array_map(fn (string $name, int $i): \DOMElement => $this->brick('IfThenLogicBeginBrick', [
+      'IF_CONDITION' => Formula::op('EQUAL', $number, Formula::number($i + 1)),
+    ], [$this->list('ifBranchBricks', [$brick($name)])]), $names, array_keys($names));
   }
 
   private function unsupportedReporter(string $opcode): Formula
