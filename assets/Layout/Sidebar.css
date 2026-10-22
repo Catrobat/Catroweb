@@ -74,6 +74,10 @@
     left: 250px;
     width: calc(100vw - 250px);
   }
+  .body-with-sidebar #top-app-bar__search {
+    left: 250px;
+    width: calc(100% - 250px);
+  }
 }
 [data-bs-theme='dark'] #sidebar .logo {
   filter: invert(1);
