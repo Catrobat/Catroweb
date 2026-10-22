@@ -8,12 +8,12 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
- * Downloads a public Scratch 3 project: metadata (for the project token), project.json and its assets.
+ * Downloads a public Scratch project (Scratch 2 is translated to 3): metadata (for the project token), project.json and its assets.
  * Every download is size-capped, so a hostile or huge project can't exhaust memory or disk.
  */
 class ScratchFetcher
 {
-  final public const string OLD_SCRATCH_MESSAGE = 'This project was made with an older Scratch version (before 2019) and can\'t be converted yet.';
+  final public const string OLD_SCRATCH_MESSAGE = 'This project was made with an older Scratch version (1.4) and can\'t be converted.';
   private const int MAX_JSON_BYTES = 16 * 1024 * 1024;
   private const int MAX_ASSET_BYTES = 32 * 1024 * 1024;
   private const int MAX_TOTAL_ASSET_BYTES = 128 * 1024 * 1024;
@@ -44,9 +44,13 @@ class ScratchFetcher
       throw new ScratchConversionException('Scratch did not hand out a project token; the project is probably not shared.', ScratchConversionException::NOT_FOUND);
     }
 
-    // Projects not saved since Scratch 3 (2019) still come as Scratch 2 (zip, or JSON without "targets") or Scratch 1.x.
+    // Projects not saved since Scratch 3 (2019) still come as Scratch 2 (JSON with "objName", rarely a zip) or Scratch 1.x.
     $body = $this->get('https://projects.scratch.mit.edu/'.$scratch_id.'?token='.rawurlencode($token), self::MAX_JSON_BYTES);
     $project = str_starts_with($body, 'PK') || str_starts_with($body, 'ScratchV0') ? null : json_decode($body, true);
+    if (\is_array($project) && isset($project['objName'])) {
+      return Scratch2Project::toScratch3($project);
+    }
+
     if (!\is_array($project) || !\is_array($project['targets'] ?? null)) {
       throw new ScratchConversionException(self::OLD_SCRATCH_MESSAGE);
     }
@@ -71,12 +75,15 @@ class ScratchFetcher
           throw new ScratchConversionException('The Scratch project has too many costumes and sounds to convert.');
         }
 
-        $md5ext = (string) ($asset['md5ext'] ?? '');
-        if (1 !== preg_match('/^[0-9a-f]{32}\.(svg|png|jpg|jpeg|gif|bmp|wav|mp3)$/', $md5ext)) {
-          throw new ScratchConversionException('Unexpected asset name: '.$md5ext);
-        }
+        // A Scratch 2 costume may carry a text layer (see Scratch2Project).
+        foreach ([$asset['md5ext'] ?? '', ...isset($asset['textLayerMd5ext']) ? [$asset['textLayerMd5ext']] : []] as $md5ext) {
+          $md5ext = (string) $md5ext;
+          if (1 !== preg_match('/^[0-9a-f]{32}\.(svg|png|jpg|jpeg|gif|bmp|wav|mp3)$/', $md5ext)) {
+            throw new ScratchConversionException('Unexpected asset name: '.$md5ext);
+          }
 
-        $md5exts[$md5ext] = true;
+          $md5exts[$md5ext] = true;
+        }
       }
     }
 

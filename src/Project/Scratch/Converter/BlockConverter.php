@@ -160,8 +160,9 @@ final class BlockConverter
   /** @param list<\DOMElement> $bricks */
   private function conditionScript(Formula $condition, array $bricks): \DOMElement
   {
+    $started = Formula::op('EQUAL', Formula::variable($this->model->helper('started')), Formula::number(1));
     $map = $this->doc->createElement('formulaMap');
-    $map->appendChild($condition->toElement($this->doc, 'formula', ['category' => 'IF_CONDITION']));
+    $map->appendChild(Formula::op('LOGICAL_AND', $started, $condition)->toElement($this->doc, 'formula', ['category' => 'IF_CONDITION']));
 
     return $this->script('WhenConditionScript', $bricks, [$map]);
   }

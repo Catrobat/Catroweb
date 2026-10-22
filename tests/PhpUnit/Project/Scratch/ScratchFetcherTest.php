@@ -80,7 +80,13 @@ final class ScratchFetcherTest extends TestCase
   {
     yield 'Scratch 1.x' => ["ScratchV02\x00\x00\x1a"];
     yield 'Scratch 2 zip' => ["PK\x03\x04"];
-    yield 'Scratch 2 JSON' => ['{"objName": "Stage", "children": []}'];
+  }
+
+  public function testScratch2ProjectsAreTranslated(): void
+  {
+    $project = (new ScratchFetcher(new MockHttpClient(new MockResponse('{"objName": "Stage", "children": [{"objName": "Cat"}]}'))))->fetchProject(1, ['project_token' => 't']);
+
+    $this->assertSame(['Stage', 'Cat'], array_column($project['targets'], 'name'));
   }
 
   public function testAnOversizedDownloadIsTheProjectsFaultNotScratchs(): void

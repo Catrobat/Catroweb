@@ -37,7 +37,11 @@ __init_sprites` restores each sprite's position, size, direction, costume and vi
   `XStreamReferences` then turns all but the first occurrence into back-references, so forward references (which
   fail the load) cannot happen.
 - **Unsupported blocks** become NoteBricks, so the project still loads and shows what was dropped. Examples:
-  keyboard, drag mode, sound effects, list monitors, and graphic effects other than color, ghost and brightness.
+  drag mode, sound effects, list monitors, and graphic effects other than color, ghost and brightness.
+- **Keyboard:** every key a project uses gets an on-screen button sprite that sets the key's variable and broadcasts
+  the key.
+- **Scratch 2** projects (not saved since 2019) are translated to the Scratch 3 shape first (`Scratch2Project`, a
+  port of scratch-vm's `sb2.js`), then converted like any other.
 
 ## Verified
 
@@ -47,7 +51,7 @@ header, bracket placement and costume padding offline.
 
 ## Known gaps
 
-- Scratch 2 projects are rejected; Scratch serves them unconverted.
+- Scratch 1.4 projects are rejected.
 - Some text engines built from custom blocks (Paper Minecraft's settings values) don't render yet.
-- No keyboard: "when key pressed" scripts never fire; on-screen key sprites are a possible next step.
-- Scratch compares strings case-insensitively; Pocket Code compares them case-sensitively.
+- Scratch compares strings case-insensitively; Pocket Code compares them case-sensitively (broadcasts are matched).
+- The start-up takes a frame per generated brick, so projects with long saved lists start a few seconds late.

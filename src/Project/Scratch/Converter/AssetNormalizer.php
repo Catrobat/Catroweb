@@ -220,6 +220,26 @@ class AssetNormalizer
     return $process->isSuccessful() ? $process->getOutput() : null;
   }
 
+  /** A Scratch 2 bitmap costume with its text layer, an image of the same size, drawn over it. */
+  public function withTextLayer(string $costume, string $text): string
+  {
+    \Imagick::setResourceLimit(\Imagick::RESOURCETYPE_MEMORY, 256 * 1024 * 1024);
+    \Imagick::setResourceLimit(\Imagick::RESOURCETYPE_AREA, 4 * self::MAX_SIDE * self::MAX_SIDE);
+
+    try {
+      $image = new \Imagick();
+      $image->readImageBlob($costume);
+      $layer = new \Imagick();
+      $layer->readImageBlob($text);
+      $image->compositeImage($layer, \Imagick::COMPOSITE_OVER, 0, 0);
+      $image->setImageFormat('png32');
+
+      return $image->getImageBlob();
+    } catch (\ImagickException $exception) {
+      throw new ScratchConversionException('A costume could not be read.', 0, $exception);
+    }
+  }
+
   private static function blank(): string
   {
     $blank = new \Imagick();
