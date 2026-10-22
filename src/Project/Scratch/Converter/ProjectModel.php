@@ -41,6 +41,9 @@ final class ProjectModel
 
   private bool $uses_answer = false;
 
+  /** @var list<string> keys that get an on-screen button */
+  private array $keys = [];
+
   /** @var array<string, true> lower-cased broadcast, variable and list names already in use */
   private array $taken = [];
 
@@ -59,7 +62,8 @@ final class ProjectModel
   {
     $this->targets[$key] = $target;
     $this->names[$key] = $name;
-    if (!($target['isStage'] ?? false)) {
+    // Generated key buttons have no Scratch name for blocks to refer to.
+    if (!($target['isStage'] ?? false) && !isset($target['scratchKeys'])) {
       $this->keys_by_name[(string) $target['name']] = $key;
     }
   }
@@ -254,6 +258,18 @@ final class ProjectModel
     $counters = array_map(fn (string $key): string => $this->cloneRequestNames($key)['counter'], array_keys($this->clone_requests));
 
     return array_values(array_unique([...$names, ...array_keys($this->shadows), ...$counters]));
+  }
+
+  /** @param list<string> $keys */
+  public function setKeys(array $keys): void
+  {
+    $this->keys = $keys;
+  }
+
+  /** @return list<string> */
+  public function keys(): array
+  {
+    return $this->keys;
   }
 
   // ---- helper state requested by the block converter ----

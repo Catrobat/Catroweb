@@ -116,9 +116,8 @@ final class BlockConverter
       case 'event_whentouchingobject':
         return $this->conditionScript($this->touching($this->menu($hat, 'TOUCHINGOBJECTMENU')), $body());
       case 'event_whenkeypressed':
-        $key = $this->field($hat, 'KEY_OPTION');
-
-        return $this->script('BroadcastScript', [$this->note('when key "'.$key.'" pressed: Pocket Code has no keyboard'), ...$body()], [$this->text('receivedMessage', '__key_'.$key)]);
+        // The on-screen key buttons broadcast this while pressed.
+        return $this->script('BroadcastScript', $body(), [$this->text('receivedMessage', $this->model->helper('key '.mb_strtolower($this->field($hat, 'KEY_OPTION'))))]);
       case 'procedures_definition':
         return $this->procedureScript($hat, $body);
       default:
@@ -751,7 +750,11 @@ final class BlockConverter
           Formula::fn('POWER', Formula::op('MINUS', $x, Formula::sensor('OBJECT_X')), Formula::number(2)),
           Formula::fn('POWER', Formula::op('MINUS', $y, Formula::sensor('OBJECT_Y')), Formula::number(2))));
       case 'sensing_answer': return Formula::variable($this->model->helper('answer'));
-      case 'sensing_keypressed': return Formula::false();
+      case 'sensing_keypressed':
+        $key = mb_strtolower($this->menu($r, 'KEY_OPTION') ?? '');
+        $held = array_map(fn (string $k): Formula => Formula::variable($this->model->helper('key '.$k)), 'any' === $key ? $this->model->keys() : array_intersect([$key], $this->model->keys()));
+
+        return array_reduce(array_slice($held, 1), static fn (Formula $any, Formula $k): Formula => Formula::op('LOGICAL_OR', $any, $k), $held[0] ?? Formula::false());
       case 'sensing_mousedown': return Formula::sensor('FINGER_TOUCHED');
       case 'sensing_mousex': return Formula::sensor('FINGER_X');
       case 'sensing_mousey': return Formula::sensor('FINGER_Y');

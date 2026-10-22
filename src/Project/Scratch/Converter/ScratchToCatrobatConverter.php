@@ -21,6 +21,11 @@ class ScratchToCatrobatConverter
   private const int MAX_CREDITS_BYTES = 3_000;
   private const int MAX_INITIAL_LIST_ITEMS = 5_000;
 
+  /** Arrow key buttons: position (Scratch stage coordinates), label and WASD twin. */
+  private const array ARROWS = [
+    'up arrow' => [-174, -92, '▲', 'w'], 'left arrow' => [-218, -136, '◀', 'a'], 'down arrow' => [-174, -136, '▼', 's'], 'right arrow' => [-130, -136, '▶', 'd'],
+  ];
+
   public function __construct(private readonly AssetNormalizer $assets)
   {
   }
@@ -62,6 +67,25 @@ class ScratchToCatrobatConverter
     $model = new ProjectModel($doc);
     $model->reserveNames($targets);
     $files = [];
+
+    $keys = self::pressedKeys($targets);
+    $model->setKeys($keys);
+    // An arrow's button also presses its WASD twin, when the project uses both.
+    $twins = [];
+    foreach (self::ARROWS as $arrow => [, , , $twin]) {
+      if (\in_array($arrow, $keys, true) && \in_array($twin, $keys, true)) {
+        $twins[$arrow] = $twin;
+      }
+    }
+
+    $others = 0;
+    foreach ($keys as $key) {
+      $stage['variables'][$model->helper('key '.$key)] = [$model->helper('key '.$key), 0];
+      // ponytail: keys past seven rows of buttons get none, a project with that many keys needs a real keyboard.
+      if (!\in_array($key, $twins, true) && (isset(self::ARROWS[$key]) || $others < 28)) {
+        $sprites[] = self::keyButton($key, isset($twins[$key]) ? [$key, $twins[$key]] : [$key], $others, $assets);
+      }
+    }
 
     $cloned = self::clonedSprites($targets);
     foreach ($targets as $target) {
@@ -213,6 +237,10 @@ class ScratchToCatrobatConverter
       $init = [...$init, ...$this->initialData($c, $model, $key, $target)];
       $scripts[] = $c->script('BroadcastScript', $init, [$c->text('receivedMessage', $model->helper('init sprites'))]);
 
+      if (isset($target['scratchKeys'])) {
+        $scripts = [...$scripts, ...$this->keyScripts($c, $model, $target['scratchKeys'])];
+      }
+
       if ($model->receivesCloneRequests($key)) {
         $scripts = [...$scripts, ...$this->cloneRequestScripts($c, $model, $key)];
       }
@@ -271,6 +299,42 @@ class ScratchToCatrobatConverter
       $c->script('WhenClonedScript', [
         $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number(1)], [], [$model->variableElement($key, $model->helper('is clone'))]),
       ]),
+    ];
+  }
+
+  /**
+   * Pocket Code has no keyboard. Holding a key's button sets the keys' variables, which "key pressed?" reads, and
+   * broadcasts them like a keyboard does: once on the tap, which catches even taps shorter than a frame, then
+   * repeated after half a second.
+   * ponytail: buttons stay below sprites that "go to front", and touching one also counts as "mouse down".
+   *
+   * @param list<string> $keys the button's key and its twin
+   *
+   * @return list<\DOMElement>
+   */
+  private function keyScripts(BlockConverter $c, ProjectModel $model, array $keys): array
+  {
+    $names = array_map(static fn (string $key): string => $model->helper('key '.$key), $keys);
+    $pressed = Formula::variable($names[0]);
+    $send = fn (): array => array_map(
+      static fn (string $name): \DOMElement => $c->brick('BroadcastBrick', [], [], [$c->text('broadcastMessage', $name)]),
+      [...$names, $model->helper('key any')],
+    );
+
+    return [
+      $c->script('WhenScript', $send()),
+      $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', array_map(
+        static fn (string $name): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::sensor('COLLIDES_WITH_FINGER')], [], [$model->variableElement(null, $name)]),
+        $names,
+      ))])]),
+      $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', [
+        $c->brick('WaitUntilBrick', ['IF_CONDITION' => $pressed]),
+        $c->brick('WaitBrick', ['TIME_TO_WAIT_IN_SECONDS' => Formula::number(0.5)]),
+        $c->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => Formula::unary('LOGICAL_NOT', $pressed)], [$c->list('loopBricks', [
+          ...$send(),
+          $c->brick('WaitBrick', ['TIME_TO_WAIT_IN_SECONDS' => Formula::number(0.05)]),
+        ])]),
+      ])])]),
     ];
   }
 
@@ -403,6 +467,71 @@ class ScratchToCatrobatConverter
     }
 
     $zip->close();
+  }
+
+  /**
+   * Keys the project reacts to, arrows first, then space; only "any key" gets the space bar.
+   *
+   * @param list<array<string, mixed>> $targets
+   *
+   * @return list<string>
+   */
+  private static function pressedKeys(array $targets): array
+  {
+    $keys = [];
+    foreach ($targets as $target) {
+      foreach ($target['blocks'] ?? [] as $block) {
+        if (\is_array($block) && \in_array($block['opcode'] ?? null, ['event_whenkeypressed', 'sensing_keyoptions'], true)) {
+          $keys[mb_strtolower((string) ($block['fields']['KEY_OPTION'][0] ?? ''))] = true;
+        }
+      }
+    }
+
+    if (isset($keys['any']) && 1 === \count($keys)) {
+      $keys['space'] = true;
+    }
+
+    unset($keys['any'], $keys['']);
+    $keys = array_keys($keys);
+    $rank = static fn (string $key): array => [isset(self::ARROWS[$key]) ? 0 : ('space' === $key ? 1 : 2), $key];
+    usort($keys, static fn (string $a, string $b): int => $rank($a) <=> $rank($b));
+
+    return array_map(strval(...), $keys);
+  }
+
+  /**
+   * A button sprite for a key: arrows as a cross bottom left, the other keys in rows of four slots bottom right,
+   * space first and two slots wide.
+   *
+   * @param list<string>          $pressed keys the button presses
+   * @param array<string, string> $assets  md5ext => bytes, the button's costume is added
+   *
+   * @return array<string, mixed>
+   */
+  private static function keyButton(string $key, array $pressed, int &$others, array &$assets): array
+  {
+    $width = 'space' === $key ? 88 : 40;
+    if (isset(self::ARROWS[$key])) {
+      [$x, $y, $label] = self::ARROWS[$key];
+      $label .= isset($pressed[1]) ? ' '.mb_strtoupper($pressed[1]) : '';
+    } else {
+      $label = 'space' === $key ? 'space' : mb_strtoupper($key);
+      [$x, $y] = [216 - ($others % 4) * 48 - ('space' === $key ? 24 : 0), -136 + intdiv($others, 4) * 48];
+      $others += 'space' === $key ? 2 : 1;
+    }
+
+    $svg = sprintf(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="%1$d" height="40"><rect x="1" y="1" width="%2$d" height="38" rx="8" fill="#fff" fill-opacity="0.6" stroke="#333" stroke-opacity="0.8" stroke-width="2"/>'
+      .'<text x="%3$d" y="27" font-family="DejaVu Sans, sans-serif" font-size="%4$d" text-anchor="middle" fill="#333">%5$s</text></svg>',
+      $width, $width - 2, $width / 2, mb_strlen($label) > 2 ? 16 : 20, htmlspecialchars($label, ENT_XML1),
+    );
+    $md5 = md5($svg);
+    $assets[$md5.'.svg'] = $svg;
+
+    return [
+      'name' => '⌨ '.$key, 'scratchKeys' => $pressed, 'x' => $x, 'y' => $y, 'rotationStyle' => "don't rotate",
+      'costumes' => [['name' => $key, 'md5ext' => $md5.'.svg', 'assetId' => $md5, 'dataFormat' => 'svg', 'rotationCenterX' => $width / 2, 'rotationCenterY' => 20]],
+    ];
   }
 
   /**
