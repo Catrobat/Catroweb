@@ -28,9 +28,11 @@ use App\Security\Malware\MalwareScanResult;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -125,9 +127,10 @@ class ProjectManagerTest extends TestCase
     ?EventDispatcherInterface $event_dispatcher = null,
     ?ExtractedCatrobatFile $extracted_file = null,
     ?MalwareScanner $malware_scanner = null,
+    ?ProjectRepository $program_repository = null,
   ): ProjectManager {
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
-    $program_repository = $this->createStub(ProjectRepository::class);
+    $program_repository ??= $this->createStub(ProjectRepository::class);
     $tag_repository = $this->createStub(TagRepository::class);
     $featured_repository = $this->createStub(FeaturedRepository::class);
     $example_repository = $this->createStub(ExampleRepository::class);
@@ -313,6 +316,63 @@ class ProjectManagerTest extends TestCase
     );
 
     $program_manager->addProject($this->request);
+  }
+
+  /**
+   * @throws ORMException
+   * @throws Exception
+   */
+  #[DataProvider('provideScreenshotFailures')]
+  public function testAFailedScreenshotRollsBackOnlyThisUpload(bool $is_update): void
+  {
+    $extracted_file = $this->createStub(ExtractedCatrobatFile::class);
+    $extracted_file->method('getName')->willReturn('TestProject');
+    $extracted_file->method('getTags')->willReturn([]);
+    $extracted_file->method('getScreenshotPath')->willReturn('./path/to/screenshot');
+
+    $old_project = new Project();
+    $old_project->setId('1');
+    $program_repository = $this->createStub(ProjectRepository::class);
+    $program_repository->method('findOneBy')->willReturn($is_update ? $old_project : null);
+
+    $entity_manager = $this->createMock(EntityManager::class);
+    $entity_manager->method('persist')->willReturnCallback(static fn (Project $project) => $project->setId('1'));
+    $connection = $this->createStub(Connection::class);
+    $connection->method('isTransactionActive')->willReturn(true);
+    $entity_manager->method('getConnection')->willReturn($connection);
+    $entity_manager->method('isOpen')->willReturn(true);
+    $entity_manager->expects($this->once())->method('beginTransaction');
+    $entity_manager->expects($this->once())->method('rollback');
+    $entity_manager->expects($this->never())->method('commit');
+    $entity_manager->expects($this->never())->method('remove');
+    $entity_manager->expects($this->once())->method('clear');
+
+    $screenshot_repository = $this->createMock(ScreenshotRepository::class);
+    $screenshot_repository->method('makeTempProjectAssetsPerm')->willThrowException(new \RuntimeException('disk full'));
+    $screenshot_repository->expects($is_update ? $this->never() : $this->once())->method('deleteScreenshot')->with('1');
+
+    $event_dispatcher = $this->createStub(EventDispatcherInterface::class);
+    $event_dispatcher->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+
+    $file_repository = $this->createMock(ProjectFileRepository::class);
+    $file_repository->expects($this->never())->method('saveProjectZipFile');
+
+    $result = $this->createProjectManagerWithMocks(
+      file_repository: $file_repository,
+      screenshot_repository: $screenshot_repository,
+      entity_manager: $entity_manager,
+      event_dispatcher: $event_dispatcher,
+      extracted_file: $extracted_file,
+      program_repository: $program_repository,
+    )->addProject($this->request);
+
+    $this->assertNull($result);
+  }
+
+  public static function provideScreenshotFailures(): \Generator
+  {
+    yield 'update' => [true];
+    yield 'new upload' => [false];
   }
 
   /**
