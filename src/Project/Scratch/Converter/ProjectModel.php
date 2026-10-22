@@ -41,6 +41,12 @@ final class ProjectModel
 
   private bool $uses_answer = false;
 
+  /** @var array<string, true> lower-cased broadcast, variable and list names already in use */
+  private array $taken = [];
+
+  /** @var array<string, string> helper purpose => its unique name */
+  private array $helpers = [];
+
   /** @var array<string, int> */
   private array $unsupported = [];
 
@@ -68,6 +74,62 @@ final class ProjectModel
   public function setSounds(string $key, array $sounds): void
   {
     $this->sounds[$key] = $sounds;
+  }
+
+  /**
+   * Helper broadcasts, variables and lists share one namespace with the project's own names; record those first.
+   *
+   * @param list<array<string, mixed>> $targets
+   */
+  public function reserveNames(array $targets): void
+  {
+    $reserve = function (mixed $name): void {
+      if (\is_scalar($name)) {
+        $this->taken[mb_strtolower((string) $name)] = true;
+      }
+    };
+    foreach ($targets as $target) {
+      foreach (['variables', 'lists', 'broadcasts'] as $kind) {
+        foreach ((array) ($target[$kind] ?? []) as $entry) {
+          $reserve(\is_array($entry) ? ($entry[0] ?? null) : $entry);
+        }
+      }
+
+      foreach ((array) ($target['blocks'] ?? []) as $block) {
+        if (!\is_array($block)) {
+          continue;
+        }
+
+        foreach (['BROADCAST_OPTION', 'VARIABLE', 'LIST'] as $field) {
+          $reserve($block['fields'][$field][0] ?? null);
+        }
+
+        // Primitives [11 broadcast | 12 variable | 13 list, name, id]: loose top-level blocks or input values.
+        foreach ([$block, ...array_map(static fn (mixed $input): mixed => \is_array($input) ? ($input[1] ?? null) : null, (array) ($block['inputs'] ?? []))] as $value) {
+          if (\is_array($value) && \in_array($value[0] ?? null, [11, 12, 13], true)) {
+            $reserve($value[1] ?? null);
+          }
+        }
+      }
+    }
+  }
+
+  /** The name of a converter helper (broadcast, variable or list), unique against the project's own names. */
+  public function helper(string $purpose): string
+  {
+    if (isset($this->helpers[$purpose])) {
+      return $this->helpers[$purpose];
+    }
+
+    $base = '__scratch '.$purpose;
+    $name = $base;
+    for ($n = 2; isset($this->taken[mb_strtolower($name)]); ++$n) {
+      $name = $base.' '.$n;
+    }
+
+    $this->taken[mb_strtolower($name)] = true;
+
+    return $this->helpers[$purpose] = $name;
   }
 
   public function isStage(string $key): bool
@@ -148,7 +210,7 @@ final class ProjectModel
    */
   public function variableElement(?string $sprite_key, string $name, ?string $id = null): \DOMElement
   {
-    if (BlockConverter::ANSWER === $name && null === $sprite_key) {
+    if (null === $sprite_key && $this->helper('answer') === $name) {
       $this->uses_answer = true;
     }
 
@@ -186,10 +248,10 @@ final class ProjectModel
   {
     $names = array_map(static fn (array $v): string => (string) $v[0], array_values($this->targets[self::STAGE]['variables'] ?? []));
     if ($this->uses_answer) {
-      $names[] = BlockConverter::ANSWER;
+      $names[] = $this->helper('answer');
     }
 
-    $counters = array_map(fn (string $key): string => self::cloneRequestNames($this->names[$key])['counter'], array_keys($this->clone_requests));
+    $counters = array_map(fn (string $key): string => $this->cloneRequestNames($key)['counter'], array_keys($this->clone_requests));
 
     return array_values(array_unique([...$names, ...array_keys($this->shadows), ...$counters]));
   }
@@ -223,7 +285,7 @@ final class ProjectModel
       return null;
     }
 
-    $name = '__scratch '.$this->names[$key].' '.$property;
+    $name = $this->helper($this->names[$key].' '.$property);
     $this->shadows[$name] = ['sprite' => $key, 'formula' => $source];
 
     return Formula::variable($name);
@@ -250,13 +312,13 @@ final class ProjectModel
 
     $this->clone_requests[$key] = true;
 
-    return self::cloneRequestNames($this->names[$key]);
+    return $this->cloneRequestNames($key);
   }
 
   /** @return array{message: string, counter: string} */
-  public static function cloneRequestNames(string $object_name): array
+  public function cloneRequestNames(string $key): array
   {
-    return ['message' => '__scratch clone '.$object_name, 'counter' => '__scratch clone requests '.$object_name];
+    return ['message' => $this->helper('clone '.$this->names[$key]), 'counter' => $this->helper('clone requests '.$this->names[$key])];
   }
 
   public function receivesCloneRequests(string $key): bool

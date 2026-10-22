@@ -13,18 +13,12 @@ namespace App\Project\Scratch\Converter;
  */
 final class BlockConverter
 {
-  // Helper names share the namespace of the Scratch project's own broadcasts and variables.
-  public const string GREEN_FLAG = '__scratch green flag';
-  public const string INIT_SPRITES = '__scratch init sprites';
-  public const string NEXT_BACKDROP = '__scratch next backdrop';
-  public const string PREVIOUS_BACKDROP = '__scratch previous backdrop';
-  public const string ANSWER = '__scratch answer';
-  public const string COSTUME_NAMES = '__scratch costume names';
-  public const string BACKDROP_NAMES = '__scratch backdrop names';
-
-  /** Untrusted block graphs: bound nesting (each level recurses) and total output. */
+  /**
+   * Untrusted block graphs: bound nesting (each level recurses) and total output. Reporters can be shared, so
+   * output grows with every use of a block, not with the number of blocks; count bricks and formula nodes.
+   */
   private const int MAX_DEPTH = 200;
-  private const int MAX_NODES = 500_000;
+  private const int MAX_NODES = 200_000;
 
   /** @var array<string, array<string, mixed>> */
   private array $blocks = [];
@@ -45,6 +39,7 @@ final class BlockConverter
   public function __construct(
     private readonly \DOMDocument $doc,
     private readonly ProjectModel $model,
+    private readonly float $deadline = INF,
   ) {
   }
 
@@ -98,7 +93,7 @@ final class BlockConverter
 
     switch ($hat['opcode']) {
       case 'event_whenflagclicked':
-        return $this->script('BroadcastScript', $body(), [$this->text('receivedMessage', self::GREEN_FLAG)]);
+        return $this->script('BroadcastScript', $body(), [$this->text('receivedMessage', $this->model->helper('green flag'))]);
       case 'event_whenthisspriteclicked':
       case 'event_whenstageclicked':
         return $this->script('WhenScript', $body());
@@ -182,8 +177,13 @@ final class BlockConverter
   private function stack(mixed $id): array
   {
     $bricks = [];
-    $guard = 0;
-    while (\is_string($id) && isset($this->blocks[$id]) && ++$guard < 100_000) {
+    $seen = [];
+    while (\is_string($id) && isset($this->blocks[$id])) {
+      if (isset($seen[$id])) {
+        throw new ScratchConversionException('The Scratch project contains a script that runs into itself.');
+      }
+
+      $seen[$id] = true;
       foreach ($this->guarded($id, fn (): array => $this->convertBlock($this->blocks[$id])) as $brick) {
         $bricks[] = $brick;
       }
@@ -209,15 +209,23 @@ final class BlockConverter
       throw new ScratchConversionException('The Scratch project contains a block that contains itself.');
     }
 
-    if (\count($this->active) >= self::MAX_DEPTH || ++$this->nodes > self::MAX_NODES) {
+    if (\count($this->active) >= self::MAX_DEPTH) {
       throw new ScratchConversionException('The Scratch project is too large or too deeply nested to convert.');
     }
 
+    $this->spend();
     $this->active[$id] = true;
     try {
       return $convert();
     } finally {
       unset($this->active[$id]);
+    }
+  }
+
+  private function spend(): void
+  {
+    if (++$this->nodes > self::MAX_NODES || (0 === $this->nodes % 1024 && microtime(true) > $this->deadline)) {
+      throw new ScratchConversionException('The Scratch project is too large or too deeply nested to convert.');
     }
   }
 
@@ -281,7 +289,7 @@ final class BlockConverter
           return [$this->brick('SetLookBrick', [], [], [$look])];
         }
 
-        return [$this->brick('SetLookByIndexBrick', ['LOOK_INDEX' => self::byNameOrNumber($this->formulaOfInput($b, 'COSTUME', 'number'), self::COSTUME_NAMES, $this->model->lookCount($this->sprite_key))])];
+        return [$this->brick('SetLookByIndexBrick', ['LOOK_INDEX' => self::byNameOrNumber($this->formulaOfInput($b, 'COSTUME', 'number'), $this->model->helper('costume names'), $this->model->lookCount($this->sprite_key))])];
       case 'looks_nextcostume': return [$this->brick('NextLookBrick')];
       case 'looks_switchbackdropto':
       case 'looks_nextbackdrop':
@@ -364,15 +372,15 @@ final class BlockConverter
       case 'control_delete_this_clone': return [$this->brick('DeleteThisCloneBrick')];
         // sensing
       case 'sensing_askandwait':
-        return [$this->brick('AskBrick', ['ASK_QUESTION' => $this->text_input($b, 'QUESTION')], [], [$this->model->variableElement(null, self::ANSWER)])];
+        return [$this->brick('AskBrick', ['ASK_QUESTION' => $this->text_input($b, 'QUESTION')], [], [$this->model->variableElement(null, $this->model->helper('answer'))])];
       case 'sensing_resettimer': return [$this->brick('ResetTimerBrick')];
         // data
-      case 'data_setvariableto':
+      case 'data_setvariableto': return [$this->brick('SetVariableBrick', ['VARIABLE' => $this->text_input($b, 'VALUE')], [], [$this->variable($b)])];
       case 'data_changevariableby':
-        $variable = $this->variable($b);
-        $set = 'data_setvariableto' === $opcode;
+        // Catroid's ChangeVariableBrick skips variables that hold text, such as "0" after a set; PLUS reads numeric text.
+        $sum = Formula::op('PLUS', Formula::variable($this->field($b, 'VARIABLE')), $this->number($b, 'VALUE'));
 
-        return [$this->brick($set ? 'SetVariableBrick' : 'ChangeVariableBrick', [$set ? 'VARIABLE' : 'VARIABLE_CHANGE' => $set ? $this->text_input($b, 'VALUE') : $this->number($b, 'VALUE')], [], [$variable])];
+        return [$this->brick('SetVariableBrick', ['VARIABLE' => $sum], [], [$this->variable($b)])];
       case 'data_showvariable':
         return [$this->brick('ShowTextBrick', ['X_POSITION' => Formula::number(-220), 'Y_POSITION' => Formula::number(160)], [], [$this->variable($b)])];
       case 'data_hidevariable': return [$this->brick('HideTextBrick', [], [], [$this->variable($b)], formula_list: false)];
@@ -466,7 +474,7 @@ final class BlockConverter
         return [$this->brick('next backdrop' === $lower ? 'NextLookBrick' : 'PreviousLookBrick')];
       }
 
-      $message = 'next backdrop' === $lower ? self::NEXT_BACKDROP : self::PREVIOUS_BACKDROP;
+      $message = $this->model->helper($lower);
 
       return [$this->brick($wait ? 'BroadcastWaitBrick' : 'BroadcastBrick', [], [], [$this->text('broadcastMessage', $message)])];
     }
@@ -482,7 +490,7 @@ final class BlockConverter
       return [$this->brick($wait ? 'SetBackgroundAndWaitBrick' : 'SetBackgroundBrick', [], [], [$look])];
     }
 
-    return [$this->brick($type, [$category => self::byNameOrNumber($this->formulaOfInput($b, 'BACKDROP', 'number'), self::BACKDROP_NAMES, $count)])];
+    return [$this->brick($type, [$category => self::byNameOrNumber($this->formulaOfInput($b, 'BACKDROP', 'number'), $this->model->helper('backdrop names'), $count)])];
   }
 
   /** @return list<\DOMElement> */
@@ -613,6 +621,7 @@ final class BlockConverter
   /** @param 'number'|'text'|'bool' $kind */
   private function formulaOfInput(array $b, string $name, string $kind): Formula
   {
+    $this->spend();
     $input = $b['inputs'][$name] ?? null;
     $value = \is_array($input) ? ($input[1] ?? null) : null;
     $default = match ($kind) {
@@ -728,7 +737,7 @@ final class BlockConverter
         return Formula::fn('SQRT', Formula::op('PLUS',
           Formula::fn('POWER', Formula::op('MINUS', $x, Formula::sensor('OBJECT_X')), Formula::number(2)),
           Formula::fn('POWER', Formula::op('MINUS', $y, Formula::sensor('OBJECT_Y')), Formula::number(2))));
-      case 'sensing_answer': return Formula::variable(self::ANSWER);
+      case 'sensing_answer': return Formula::variable($this->model->helper('answer'));
       case 'sensing_keypressed': return Formula::false();
       case 'sensing_mousedown': return Formula::sensor('FINGER_TOUCHED');
       case 'sensing_mousex': return Formula::sensor('FINGER_X');
@@ -771,8 +780,11 @@ final class BlockConverter
   private static function byNameOrNumber(Formula $value, string $names, int $count): Formula
   {
     $index = Formula::fn('INDEX_OF_ITEM', $value, Formula::userList($names));
-    // Numbers wrap around like in Scratch: costume 4 of 3 is costume 1.
-    $wrapped = Formula::op('PLUS', Formula::fn('MOD', Formula::op('MINUS', Formula::fn('ROUND', $value), Formula::number(1)), Formula::number(max(1, $count))), Formula::number(1));
+    // Numbers wrap around like in Scratch: costume 4 of 3 is costume 1. Not with MOD: Catroid's MOD adds the divisor
+    // in a loop until a negative dividend turns positive, which never ends for -1e20. ((r-1) - n*floor((r-1)/n)) + 1.
+    $zero_based = Formula::op('MINUS', Formula::fn('ROUND', $value), Formula::number(1));
+    $n = Formula::number(max(1, $count));
+    $wrapped = Formula::op('PLUS', Formula::op('MINUS', $zero_based, Formula::op('MULT', $n, Formula::fn('FLOOR', Formula::op('DIVIDE', $zero_based, $n)))), Formula::number(1));
 
     return Formula::fn('IF_THEN_ELSE', Formula::op('GREATER_THAN', $index, Formula::number(0)), $index, $wrapped);
   }

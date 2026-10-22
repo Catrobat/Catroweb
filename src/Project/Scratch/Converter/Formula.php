@@ -141,8 +141,10 @@ final class Formula
       return $child;
     }
 
-    if (null === $child->left) { // a unary child, e.g. not(not(x)): the parser needs brackets after a unary operator
-      return null === $this->left ? new self('BRACKET', null, null, $child) : $child;
+    // A unary child: the parser needs brackets after a unary operator, e.g. not(not(x)). Under a binary operator,
+    // unary minus takes only its one operand, but NOT (priority 4) also swallows a following "+ 1" or "* 2".
+    if (null === $child->left) {
+      return null === $this->left || 'LOGICAL_NOT' === $child->value ? new self('BRACKET', null, null, $child) : $child;
     }
 
     $parent_priority = null === $this->left ? 8 : (self::PRIORITY[$this->value] ?? 0); // unary binds tightest

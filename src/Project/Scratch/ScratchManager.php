@@ -15,6 +15,7 @@ use App\Project\Scratch\Converter\ScratchToCatrobatConverter;
 use App\User\UserManager;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -31,6 +32,7 @@ class ScratchManager
     private readonly ScratchToCatrobatConverter $converter,
     private readonly LoggerInterface $logger,
     private readonly Connection $connection,
+    private readonly EntityManagerInterface $entity_manager,
   ) {
   }
 
@@ -103,6 +105,11 @@ class ScratchManager
 
       return $project;
     } catch (\Throwable $throwable) {
+      // Drop half-applied entity changes, so nothing flushed later in this request writes them.
+      if ($this->entity_manager->isOpen()) {
+        $this->entity_manager->clear();
+      }
+
       if (null !== $existing) {
         $this->markOutdated((string) $existing->getId());
       }

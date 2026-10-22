@@ -16,6 +16,8 @@ class ScratchFetcher
   final public const int MAX_JSON_BYTES = 16 * 1024 * 1024;
   final public const int MAX_ASSET_BYTES = 32 * 1024 * 1024;
   final public const int MAX_TOTAL_ASSET_BYTES = 128 * 1024 * 1024;
+  final public const int MAX_ASSETS = 2_000;
+  private const int PARALLEL_DOWNLOADS = 8;
 
   public function __construct(private readonly HttpClientInterface $http_client)
   {
@@ -50,7 +52,7 @@ class ScratchFetcher
   }
 
   /**
-   * Downloads all assets of a project in parallel, each verified against the MD5 that Scratch uses as its name.
+   * Downloads all assets of a project, a few at a time, each verified against the MD5 that Scratch uses as its name.
    *
    * @param array<string, mixed> $project project.json
    *
@@ -58,32 +60,40 @@ class ScratchFetcher
    */
   public function fetchAssets(array $project): array
   {
-    $responses = [];
+    $md5exts = [];
+    $count = 0;
     foreach ($project['targets'] ?? [] as $target) {
       foreach ([...($target['costumes'] ?? []), ...($target['sounds'] ?? [])] as $asset) {
+        if (++$count > self::MAX_ASSETS) {
+          throw new ScratchConversionException('The Scratch project has too many costumes and sounds to convert.');
+        }
+
         $md5ext = (string) ($asset['md5ext'] ?? '');
         if (1 !== preg_match('/^[0-9a-f]{32}\.(svg|png|jpg|jpeg|gif|bmp|wav|mp3)$/', $md5ext)) {
           throw new ScratchConversionException('Unexpected asset name: '.$md5ext);
         }
 
-        $responses[$md5ext] ??= $this->request('https://assets.scratch.mit.edu/internalapi/asset/'.$md5ext.'/get/', self::MAX_ASSET_BYTES);
+        $md5exts[$md5ext] = true;
       }
     }
 
-    $assets = [];
+    // Shared by all downloads, so the cap holds while they stream, not only once they are in memory.
     $total = 0;
-    foreach ($responses as $md5ext => $response) {
-      $body = $this->content($response);
-      if (md5($body) !== substr($md5ext, 0, 32)) {
-        throw new ScratchConversionException('Asset does not match its checksum: '.$md5ext);
+    $assets = [];
+    foreach (array_chunk(array_keys($md5exts), self::PARALLEL_DOWNLOADS) as $chunk) {
+      $responses = [];
+      foreach ($chunk as $md5ext) {
+        $responses[$md5ext] = $this->request('https://assets.scratch.mit.edu/internalapi/asset/'.$md5ext.'/get/', self::MAX_ASSET_BYTES, $total);
       }
 
-      $total += \strlen($body);
-      if ($total > self::MAX_TOTAL_ASSET_BYTES) {
-        throw new ScratchConversionException('The project\'s assets are too large to convert.');
-      }
+      foreach ($responses as $md5ext => $response) {
+        $body = $this->content($response);
+        if (md5($body) !== substr($md5ext, 0, 32)) {
+          throw new ScratchConversionException('Asset does not match its checksum: '.$md5ext);
+        }
 
-      $assets[$md5ext] = $body;
+        $assets[$md5ext] = $body;
+      }
     }
 
     return $assets;
@@ -124,15 +134,20 @@ class ScratchFetcher
     return $this->content($this->request($url, $max_bytes));
   }
 
-  private function request(string $url, int $max_bytes): ResponseInterface
+  /** @param int $total bytes downloaded so far by all requests sharing this counter */
+  private function request(string $url, int $max_bytes, int &$total = 0): ResponseInterface
   {
+    $seen = 0;
+
     return $this->http_client->request('GET', $url, [
       'timeout' => 15,
       'max_duration' => 60,
       'max_redirects' => 2,
       'headers' => ['User-Agent' => 'Catroweb Scratch converter (+https://share.catrobat.org)'],
-      'on_progress' => static function (int $downloaded) use ($max_bytes): void {
-        if ($downloaded > $max_bytes) {
+      'on_progress' => static function (int $downloaded) use ($max_bytes, &$total, &$seen): void {
+        $total += $downloaded - $seen;
+        $seen = $downloaded;
+        if ($downloaded > $max_bytes || $total > self::MAX_TOTAL_ASSET_BYTES) {
           throw new ScratchConversionException('Download from Scratch is too large.');
         }
       },

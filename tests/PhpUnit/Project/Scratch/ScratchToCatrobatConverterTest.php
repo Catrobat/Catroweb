@@ -181,15 +181,135 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="LOGICAL_NOT"]/rightChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
   }
 
-  /** @param array<string, array<string, mixed>> $blocks blocks of a single sprite */
-  private static function convertBlocks(array $blocks): \DOMDocument
+  public function testSharedReportersThatWouldExplodeAreRejectedQuicklyAndCheaply(): void
+  {
+    // 40 blocks, each using the next one twice: 2^40 formula nodes if every use were converted in full.
+    $blocks = ['hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'say', 'topLevel' => true, 'inputs' => [], 'fields' => []]];
+    $blocks['say'] = ['opcode' => 'looks_say', 'next' => null, 'inputs' => ['MESSAGE' => [3, 'r0', [10, '']]], 'fields' => []];
+    for ($i = 0; $i < 40; ++$i) {
+      $blocks['r'.$i] = ['opcode' => 'operator_add', 'inputs' => ['NUM1' => [3, 'r'.($i + 1), [4, '0']], 'NUM2' => [3, 'r'.($i + 1), [4, '0']]], 'fields' => []];
+    }
+
+    $blocks['r40'] = ['opcode' => 'motion_xposition', 'inputs' => [], 'fields' => []];
+
+    memory_reset_peak_usage();
+    $memory = memory_get_usage();
+    $start = microtime(true);
+    try {
+      self::convertBlocks($blocks);
+      $this->fail('The exploding project was converted');
+    } catch (ScratchConversionException) {
+    }
+
+    $this->assertLessThan(5.0, microtime(true) - $start);
+    $this->assertLessThan(64 * 1024 * 1024, memory_get_peak_usage() - $memory);
+  }
+
+  public function testAScriptThatRunsIntoItselfIsRejected(): void
+  {
+    $this->expectException(ScratchConversionException::class);
+    self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'a', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'a' => ['opcode' => 'motion_ifonedgebounce', 'next' => 'b', 'inputs' => [], 'fields' => []],
+      'b' => ['opcode' => 'motion_ifonedgebounce', 'next' => 'a', 'inputs' => [], 'fields' => []],
+    ]);
+  }
+
+  public function testChangeVariableAddsToTextValuesAndNotIsBracketedUnderPlus(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'change', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'change' => ['opcode' => 'data_changevariableby', 'next' => 'say', 'inputs' => ['VALUE' => [1, [4, '1']]], 'fields' => ['VARIABLE' => ['score', 'v1']]],
+      'say' => ['opcode' => 'looks_say', 'next' => null, 'inputs' => ['MESSAGE' => [3, 'add', [10, '']]], 'fields' => []],
+      'add' => ['opcode' => 'operator_add', 'inputs' => ['NUM1' => [3, 'not', [4, '']], 'NUM2' => [1, [4, '1']]], 'fields' => []],
+      'not' => ['opcode' => 'operator_not', 'inputs' => [], 'fields' => []],
+    ], ['variables' => ['v1' => ['score', '0']]]);
+    $xpath = new \DOMXPath($xml);
+    $set = '//script[receivedMessage="__scratch green flag"]//brick[@type="SetVariableBrick"]';
+    $this->assertSame(0.0, $xpath->evaluate('count(//brick[@type="ChangeVariableBrick"])'));
+    $this->assertSame('PLUS', $xpath->evaluate('string('.$set.'/formulaList/formula/value)'));
+    $this->assertSame('score', $xpath->evaluate('string('.$set.'/formulaList/formula/leftChild[type="USER_VARIABLE"]/value)'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="PLUS"]/leftChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
+  }
+
+  public function testHelperNamesStayClearOfTheProjectsOwnNames(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'ask', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'ask' => ['opcode' => 'sensing_askandwait', 'next' => 'send', 'inputs' => ['QUESTION' => [1, [10, '?']]], 'fields' => []],
+      'send' => ['opcode' => 'event_broadcast', 'next' => null, 'inputs' => ['BROADCAST_INPUT' => [1, [11, '__scratch init sprites', 'b2']]], 'fields' => []],
+      'own' => ['opcode' => 'event_whenbroadcastreceived', 'next' => null, 'topLevel' => true, 'inputs' => [], 'fields' => ['BROADCAST_OPTION' => ['__scratch GREEN FLAG', 'b1']]],
+    ], ['variables' => ['v1' => ['__scratch answer', 0]], 'lists' => ['l1' => ['__scratch answer 2', []]]]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame('__scratch green flag 2', $xpath->evaluate('string(//script[@type="StartScript"]//brick[@type="BroadcastBrick"]/broadcastMessage)'));
+    $this->assertSame('__scratch init sprites 2', $xpath->evaluate('string(//script[@type="StartScript"]//brick[@type="BroadcastWaitBrick"]/broadcastMessage)'));
+    $this->assertSame('__scratch answer 3', $xpath->evaluate('string(//brick[@type="AskBrick"]/userVariable//name)'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//script[receivedMessage="__scratch GREEN FLAG"])'));
+  }
+
+  public function testCostumeNumbersWrapInConstantTime(): void
+  {
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"/>';
+    $costume = static fn (string $name): array => ['name' => $name, 'md5ext' => 'a.svg', 'assetId' => 'a', 'dataFormat' => 'svg'];
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'switch', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'switch' => ['opcode' => 'looks_switchcostumeto', 'next' => null, 'inputs' => ['COSTUME' => [3, 'x', 'menu']], 'fields' => []],
+      'menu' => ['opcode' => 'looks_costume', 'shadow' => true, 'inputs' => [], 'fields' => ['COSTUME' => ['a', null]]],
+      'x' => ['opcode' => 'data_variable', 'inputs' => [], 'fields' => ['VARIABLE' => ['x', 'v1']]],
+    ], ['variables' => ['v1' => ['x', 0]], 'costumes' => [$costume('a'), $costume('b'), $costume('c')]], ['a.svg' => $svg]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame(0.0, $xpath->evaluate('count(//*[type="FUNCTION" and value="MOD"])'));
+    $wrapped = ($xpath->query('//brick[@type="SetLookByIndexBrick"]/formulaList/formula/additionalChildren/*') ?: null)?->item(0);
+    $this->assertInstanceOf(\DOMElement::class, $wrapped);
+
+    // Scratch: costume 0 of 3 is costume 3, -1 is 2, 4 is 1.
+    foreach ([[0.0, 3.0], [-1.0, 2.0], [4.0, 1.0], [2.6, 3.0]] as [$x, $expected]) {
+      $this->assertSame($expected, self::evaluate($wrapped, $x));
+    }
+
+    // Huge values lose precision in doubles, but there is no loop left to stall on.
+    foreach ([-1e20, 1e20, -PHP_FLOAT_MAX] as $x) {
+      $this->assertTrue(is_finite(self::evaluate($wrapped, $x)));
+    }
+  }
+
+  /** Evaluates a formula like Catroid's FormulaElement does, for the few element types the costume wrap uses. */
+  private static function evaluate(\DOMElement $element, float $x): float
+  {
+    $child = static fn (string $name): ?\DOMElement => self::child($element, $name);
+    $value = (string) $child('value')?->textContent;
+    $left_child = $child('leftChild');
+    $right_child = $child('rightChild');
+    $left = null === $left_child ? null : self::evaluate($left_child, $x);
+    $right = null === $right_child ? 0.0 : self::evaluate($right_child, $x);
+
+    return match ((string) $child('type')?->textContent.' '.$value) {
+      'NUMBER '.$value => (float) $value,
+      'USER_VARIABLE x' => $x,
+      'BRACKET ' => $right,
+      'OPERATOR PLUS' => $left + $right,
+      'OPERATOR MINUS' => null === $left ? -$right : $left - $right,
+      'OPERATOR MULT' => $left * $right,
+      'OPERATOR DIVIDE' => $left / $right,
+      'FUNCTION ROUND' => (float) max(PHP_INT_MIN, min(PHP_INT_MAX, floor((float) $left + 0.5))), // Java's Math.round to long
+      'FUNCTION FLOOR' => floor((float) $left),
+      default => throw new \LogicException('Unexpected formula element '.$value),
+    };
+  }
+
+  /**
+   * @param array<string, array<string, mixed>> $blocks blocks of a single sprite
+   * @param array<string, mixed>                $sprite overrides for the sprite target
+   * @param array<string, string>               $assets md5ext => bytes
+   */
+  private static function convertBlocks(array $blocks, array $sprite = [], array $assets = []): \DOMDocument
   {
     $project = ['targets' => [
       ['isStage' => true, 'name' => 'Stage', 'variables' => [], 'lists' => [], 'blocks' => [], 'costumes' => [], 'sounds' => []],
-      ['isStage' => false, 'name' => 'Sprite', 'variables' => [], 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []],
+      [...['isStage' => false, 'name' => 'Sprite', 'variables' => [], 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []], ...$sprite],
     ]];
     $archive = (string) tempnam(sys_get_temp_dir(), 'scratch-test');
-    (new ScratchToCatrobatConverter(new AssetNormalizer()))->convert(1, $project, ['title' => 'Blocks'], [], null, $archive);
+    (new ScratchToCatrobatConverter(new AssetNormalizer()))->convert(1, $project, ['title' => 'Blocks'], $assets, null, $archive);
     $zip = new \ZipArchive();
     $zip->open($archive);
     $xml = new \DOMDocument();

@@ -16,12 +16,10 @@ class ScratchToCatrobatConverter
 {
   private const string SCENE = 'Scene';
   private const int MAX_BLOCKS = 100_000;
-  private const int MAX_ASSETS = 2_000;
   private const int MAX_SECONDS = 90;
   private const int MAX_DESCRIPTION_BYTES = 10_000; // Catroweb's upload limit
   private const int MAX_CREDITS_BYTES = 3_000;
   private const int MAX_INITIAL_LIST_ITEMS = 5_000;
-  private const string IS_CLONE = '__scratch is clone';
 
   public function __construct(private readonly AssetNormalizer $assets)
   {
@@ -49,7 +47,7 @@ class ScratchToCatrobatConverter
     }
 
     $asset_count = array_sum(array_map(static fn (array $t): int => \count($t['costumes'] ?? []) + \count($t['sounds'] ?? []), $targets));
-    if ($asset_count > self::MAX_ASSETS) {
+    if ($asset_count > ScratchFetcher::MAX_ASSETS) {
       throw new ScratchConversionException('The Scratch project has too many costumes and sounds to convert.');
     }
 
@@ -62,13 +60,14 @@ class ScratchToCatrobatConverter
     $doc->xmlStandalone = true;
     $doc->formatOutput = true;
     $model = new ProjectModel($doc);
+    $model->reserveNames($targets);
     $files = [];
 
     // Pocket Code renames any object called like its localized background, so keep "Background" for the stage only.
     $cloned = self::clonedSprites($targets);
     foreach ($targets as $target) {
       if (self::switchesByComputedName($target, 'looks_switchbackdropto', 'BACKDROP') || self::switchesByComputedName($target, 'looks_switchbackdroptoandwait', 'BACKDROP')) {
-        $stage['lists'][BlockConverter::BACKDROP_NAMES] = [BlockConverter::BACKDROP_NAMES, array_column($stage['costumes'] ?? [], 'name')];
+        $stage['lists'][$model->helper('backdrop names')] = [$model->helper('backdrop names'), array_column($stage['costumes'] ?? [], 'name')];
       }
     }
 
@@ -78,10 +77,13 @@ class ScratchToCatrobatConverter
     foreach ($sprites as $i => $sprite) {
       $key = 's'.$i;
       if (isset($cloned[(string) $sprite['name']])) {
-        $sprite['variables'][self::IS_CLONE] = [self::IS_CLONE, 0];
+        foreach (['is clone', 'cloning'] as $purpose) {
+          $sprite['variables'][$model->helper($purpose)] = [$model->helper($purpose), 0];
+        }
       }
+
       if (self::switchesByComputedName($sprite, 'looks_switchcostumeto', 'COSTUME')) {
-        $sprite['lists'][BlockConverter::COSTUME_NAMES] = [BlockConverter::COSTUME_NAMES, array_column($sprite['costumes'] ?? [], 'name')];
+        $sprite['lists'][$model->helper('costume names')] = [$model->helper('costume names'), array_column($sprite['costumes'] ?? [], 'name')];
       }
 
       $name = (string) $sprite['name'];
@@ -100,7 +102,7 @@ class ScratchToCatrobatConverter
       $model->setSounds($key, $sounds);
     }
 
-    $converter = new BlockConverter($doc, $model);
+    $converter = new BlockConverter($doc, $model, $deadline);
     $scripts = [];
     $definitions = [];
     foreach ($keyed as $key => $target) {
@@ -189,11 +191,11 @@ class ScratchToCatrobatConverter
         $init[] = $c->brick('SetBackgroundBrick', [], [], [$model->lookElement($key, $current)]);
       }
 
-      $init[] = $c->brick('BroadcastWaitBrick', [], [], [$c->text('broadcastMessage', BlockConverter::INIT_SPRITES)]);
-      $init[] = $c->brick('BroadcastBrick', [], [], [$c->text('broadcastMessage', BlockConverter::GREEN_FLAG)]);
+      $init[] = $c->brick('BroadcastWaitBrick', [], [], [$c->text('broadcastMessage', $model->helper('init sprites'))]);
+      $init[] = $c->brick('BroadcastBrick', [], [], [$c->text('broadcastMessage', $model->helper('green flag'))]);
       $scripts[] = $c->script('StartScript', $init);
-      $scripts[] = $c->script('BroadcastScript', [$c->brick('NextLookBrick')], [$c->text('receivedMessage', BlockConverter::NEXT_BACKDROP)]);
-      $scripts[] = $c->script('BroadcastScript', [$c->brick('PreviousLookBrick')], [$c->text('receivedMessage', BlockConverter::PREVIOUS_BACKDROP)]);
+      $scripts[] = $c->script('BroadcastScript', [$c->brick('NextLookBrick')], [$c->text('receivedMessage', $model->helper('next backdrop'))]);
+      $scripts[] = $c->script('BroadcastScript', [$c->brick('PreviousLookBrick')], [$c->text('receivedMessage', $model->helper('previous backdrop'))]);
     } else {
       $style = ['left-right' => '0', 'all around' => '1', "don't rotate" => '2'][(string) ($target['rotationStyle'] ?? 'all around')] ?? '1';
       $init = [
@@ -209,24 +211,10 @@ class ScratchToCatrobatConverter
 
       $init[] = $c->brick(false === ($target['visible'] ?? true) ? 'HideBrick' : 'ShowBrick');
       $init = [...$init, ...$this->initialData($c, $model, $key, $target)];
-      $scripts[] = $c->script('BroadcastScript', $init, [$c->text('receivedMessage', BlockConverter::INIT_SPRITES)]);
+      $scripts[] = $c->script('BroadcastScript', $init, [$c->text('receivedMessage', $model->helper('init sprites'))]);
 
       if ($model->receivesCloneRequests($key)) {
-        // Clones hear the broadcast too; only the original may answer it, as in Scratch.
-        $is_original = Formula::op('EQUAL', Formula::variable(self::IS_CLONE), Formula::number(0));
-        $request = ProjectModel::cloneRequestNames($model->objectName($key));
-        $counter = fn (): \DOMElement => $model->variableElement(null, $request['counter']);
-        $scripts[] = $c->script('BroadcastScript', [
-          $c->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => $is_original], [$c->list('ifBranchBricks', [
-            $c->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => Formula::op('SMALLER_THAN', Formula::variable($request['counter']), Formula::number(1))], [$c->list('loopBricks', [
-              $c->brick('CloneBrick'),
-              $c->brick('ChangeVariableBrick', ['VARIABLE_CHANGE' => Formula::unary('MINUS', Formula::number(1))], [], [$counter()]),
-            ])]),
-          ])]),
-        ], [$c->text('receivedMessage', $request['message'])]);
-        $scripts[] = $c->script('WhenClonedScript', [
-          $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number(1)], [], [$model->variableElement($key, self::IS_CLONE)]),
-        ]);
+        $scripts = [...$scripts, ...$this->cloneRequestScripts($c, $model, $key)];
       }
     }
 
@@ -242,6 +230,48 @@ class ScratchToCatrobatConverter
     }
 
     return $scripts;
+  }
+
+  /**
+   * The original sprite clones itself once per counted request ("create clone of <sprite>" from elsewhere).
+   *
+   * Catroid runs one brick of a script per frame, and a new request broadcast restarts this script between frames,
+   * so "clone" and "count it" can't be two steps of the handler: a restart between them would clone twice. The
+   * clone counts itself instead. "cloning" is 1 only around the CloneBrick, the clone inherits it with the other
+   * variables, and its first frame subtracts it from the counter; clones are placed before their original on
+   * stage, so they act first in the next frame, before the handler checks the counter again.
+   * ponytail: another "create clone of myself" by the original in that one frame also counts as a request.
+   *
+   * @return list<\DOMElement>
+   */
+  private function cloneRequestScripts(BlockConverter $c, ProjectModel $model, string $key): array
+  {
+    $request = $model->cloneRequestNames($key);
+    $cloning = fn (): \DOMElement => $model->variableElement($key, $model->helper('cloning'));
+    $set_cloning = fn (int $value): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number($value)], [], [$cloning()]);
+    // Clones hear the broadcast too; only the original may answer it, as in Scratch.
+    $is_original = Formula::op('EQUAL', Formula::variable($model->helper('is clone')), Formula::number(0));
+
+    return [
+      $c->script('BroadcastScript', [
+        $c->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => $is_original], [$c->list('ifBranchBricks', [
+          $set_cloning(0),
+          $c->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => Formula::op('SMALLER_THAN', Formula::variable($request['counter']), Formula::number(1))], [$c->list('loopBricks', [
+            $set_cloning(1),
+            $c->brick('CloneBrick'),
+            $set_cloning(0),
+          ])]),
+        ])]),
+      ], [$c->text('receivedMessage', $request['message'])]),
+      // Separate scripts, so all three run in the clone's first frame, before its own scripts can clone again.
+      $c->script('WhenClonedScript', [
+        $c->brick('ChangeVariableBrick', ['VARIABLE_CHANGE' => Formula::unary('MINUS', Formula::variable($model->helper('cloning')))], [], [$model->variableElement(null, $request['counter'])]),
+      ]),
+      $c->script('WhenClonedScript', [$set_cloning(0)]),
+      $c->script('WhenClonedScript', [
+        $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number(1)], [], [$model->variableElement($key, $model->helper('is clone'))]),
+      ]),
+    ];
   }
 
   /**
