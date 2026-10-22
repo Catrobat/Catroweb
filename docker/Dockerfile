@@ -54,6 +54,8 @@ RUN apt-get update && \
     php8.5-zip \
     php8.5-bcmath \
     libapache2-mod-php8.5 \
+    librsvg2-bin \
+    sox \
     acl \
     make \
     libtool \

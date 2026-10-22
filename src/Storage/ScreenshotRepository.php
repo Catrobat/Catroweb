@@ -164,24 +164,6 @@ class ScreenshotRepository
     }
   }
 
-  /**
-   * @throws \ImagickException
-   */
-  public function saveScratchScreenshot(int $Scratch_id, string $id): void
-  {
-    $screen = $this->getImagick();
-    $url = 'https://cdn2.scratch.mit.edu/get_image/project/'.$Scratch_id.'_480x360.png';
-    $context = stream_context_create(['http' => ['timeout' => 5, 'max_redirects' => 2]]);
-    $image = @file_get_contents($url, false, $context);
-    if (false === $image) {
-      throw new \RuntimeException('Could not download scratch screenshot for project '.$Scratch_id);
-    }
-
-    $screen->readImageBlob($image);
-    $this->saveImagickScreenshot($screen, $id);
-    $screen->destroy();
-  }
-
   public function getScreenshotWebPath(string $id): string
   {
     $filename = $this->screenshot_dir.$this->generateFileNameFromId($id);

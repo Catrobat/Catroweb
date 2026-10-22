@@ -9,7 +9,8 @@ sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 sudo apt update && sudo apt upgrade
 sudo apt install php8.5-common php8.5-ldap php8.5-cli php8.5-curl php8.5-intl php8.5-apcu php8.5-imagick \
   php8.5-mbstring php8.5-xml php8.5-fpm php8.5-mysql php8.5-gd php8.5-zip php8.5-bcmath \
-  composer apache2 libapache2-mod-php curl acl git mariadb-server mariadb-client
+  composer apache2 libapache2-mod-php curl acl git mariadb-server mariadb-client \
+  librsvg2-bin sox   # Scratch converter: vector costumes, compressed sounds
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 nvm install node && corepack enable
 sudo phpenmod mbstring

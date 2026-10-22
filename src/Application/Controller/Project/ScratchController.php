@@ -4,33 +4,44 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Project;
 
-use App\DB\Entity\Project\Project;
-use App\Project\Scratch\AsyncHttpClient;
+use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\ScratchManager;
-use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class ScratchController extends AbstractController
 {
-  protected AsyncHttpClient $async_http_client;
-
-  public function __construct(protected ScratchManager $scratch_manager)
-  {
-    $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
+  public function __construct(
+    private readonly ScratchManager $scratch_manager,
+    private readonly RateLimiterFactoryInterface $scratchConvertBurstLimiter,
+    private readonly RateLimiterFactoryInterface $scratchConvertDailyLimiter,
+  ) {
   }
 
-  /**
-   * @throws \Exception|ORMException
-   */
-  #[Route(path: '/scratch/project/{id}', name: 'scratch_project', methods: ['GET', 'POST'])]
+  /** Opens a Scratch project in Pocket Code form, converting it on first use or when it changed on Scratch. */
+  #[Route(path: '/scratch/project/{id}', name: 'scratch_project', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
   public function scratchProject(Request $request, int $id): Response
   {
-    $project = $this->scratch_manager->createScratchProjectFromId($id);
-    if (!$project instanceof Project) {
-      throw $this->createNotFoundException('Error creating Scratch project');
+    $ip = $request->getClientIp() ?? 'unknown';
+    try {
+      $project = $this->scratch_manager->importProject($id, function () use ($ip): void {
+        $burst = $this->scratchConvertBurstLimiter->create($ip)->consume();
+        $daily = $this->scratchConvertDailyLimiter->create($ip)->consume();
+        if (!$burst->isAccepted() || !$daily->isAccepted()) {
+          throw new ScratchConversionException('You converted many Scratch projects in a short time. Please try again later.');
+        }
+      }, $ip);
+    } catch (ScratchConversionException $exception) {
+      if ($request->isMethod('POST')) {
+        return new Response($exception->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
+      }
+
+      $this->addFlash('snackbar', $exception->getMessage());
+
+      return $this->redirectToRoute('index');
     }
 
     $url = $this->generateUrl('project', ['id' => $project->getId()]);
@@ -38,6 +49,6 @@ class ScratchController extends AbstractController
       return $this->redirect($url);
     }
 
-    return new Response($project->getId(), Response::HTTP_CREATED, ['Location' => $url]);
+    return new Response((string) $project->getId(), Response::HTTP_CREATED, ['Location' => $url]);
   }
 }

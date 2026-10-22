@@ -160,7 +160,7 @@ Feature: Searching for projects & users
     Then I should see "Test advanced app"
     Then I should see "No users found"
 
-  Scenario: Scratch projects show up with a badge and link to their Scratch page
+  Scenario: Scratch projects show up with a badge and open through the converter
     Given there are Scratch projects:
       | id       | name             | username   |
       | 70058680 | Gamma Ray Racer  | scratchcat |
@@ -173,7 +173,7 @@ Feature: Searching for projects & users
     And I should see "scratchcat"
     And the element "#search-scratch-projects .search-card__badge" should be visible
     And the element "#search-scratch-projects .search-card__badge" should contain "Scratch"
-    And the element "#search-scratch-projects a.search-card[href='https://scratch.mit.edu/projects/70058680']" should exist
+    And the element "#search-scratch-projects a.search-card[href$='/app/scratch/project/70058680']" should exist
 
   Scenario: No Scratch section without Scratch matches
     Given I am on "/app/search/gmail"
