@@ -13,8 +13,11 @@ Feature: Open a Scratch project from the search as a Pocket Code project
     And I wait for AJAX to finish
     And I wait for the element "#search-scratch-projects .search-card" to be visible
     When I click "#search-scratch-projects button.search-card"
+    # The fake conversion still takes a second or two, long enough to see the converting state.
+    Then I wait for the element "#search-scratch-projects .search-card__overlay-label" to contain "Converting for Pocket Code"
+    And I wait for the element "#share-snackbar-label" to contain "Converting “Gamma Ray Racer”"
     # The conversion runs before the page changes; this step polls for up to 10 s.
-    Then I wait for the element "#name" to contain "Gamma Ray Racer"
+    And I wait for the element "#name" to contain "Gamma Ray Racer"
     And the url should match "/app/project/[0-9a-f-]+$"
     And there should be "1" projects in the database
 

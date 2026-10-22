@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     showMore: container.dataset.transShowMore || 'Show more',
     members: container.dataset.transMembers || 'members',
     scratchProjects: container.dataset.transScratchProjects || 'Scratch projects',
+    scratchConverting: container.dataset.transScratchConverting || 'Converting for Pocket Code…',
+    scratchConvertingSnackbar:
+      container.dataset.transScratchConvertingSnackbar ||
+      'Converting “%name%” — this can take a few seconds',
   }
 
   const searchInput = document.querySelector('#top-app-bar__search-input')
@@ -108,6 +112,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
         data.scratch_projects_total || 0,
         baseUrl,
         theme,
+        trans,
       )
 
       wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
@@ -205,7 +210,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
           })
         } else if (type === 'scratch') {
           for (const project of items)
-            container.appendChild(createScratchCard(project, baseUrl, theme))
+            container.appendChild(createScratchCard(project, baseUrl, theme, trans))
         }
 
         nextOffset += RESULTS_PER_PAGE
@@ -340,7 +345,7 @@ function renderStudios(section, studios, baseUrl, trans) {
   })
 }
 
-function renderScratchProjects(section, projects, total, baseUrl, theme) {
+function renderScratchProjects(section, projects, total, baseUrl, theme, trans) {
   // The total counts Scratch's full page, before projects already imported here are left out.
   const more = total > RESULTS_PER_PAGE
   if (projects.length === 0 && !more) return
@@ -351,36 +356,68 @@ function renderScratchProjects(section, projects, total, baseUrl, theme) {
   }
 
   const items = section.querySelector('.search-section__items')
-  for (const project of projects) items.appendChild(createScratchCard(project, baseUrl, theme))
+  for (const project of projects)
+    items.appendChild(createScratchCard(project, baseUrl, theme, trans))
 }
 
-function createScratchCard(project, baseUrl, theme) {
+const SCRATCH_PLACEHOLDER = '/images/default/screenshot-card@1x.webp'
+
+function createScratchCard(project, baseUrl, theme, trans) {
   // A button, not a link: the card converts the project through the API instead of leaving for Scratch.
   const card = createCard(
     null,
     null,
     'card',
-    '/images/default/screenshot-card@1x.webp',
+    SCRATCH_PLACEHOLDER,
     project.name || '',
     'person',
     project.username || '',
   )
+  const scratchId = encodeURIComponent(String(project.id))
+
+  // The real thumbnail, straight from Scratch; the placeholder if Scratch has none or is unreachable.
+  const thumbnail = document.createElement('img')
+  thumbnail.className = 'search-card__image'
+  thumbnail.alt = project.name || ''
+  thumbnail.loading = 'lazy'
+  thumbnail.addEventListener('error', () => (thumbnail.src = SCRATCH_PLACEHOLDER), { once: true })
+  // Kept in data-scratch-thumbnail too: the error fallback changes src, this attribute stays.
+  thumbnail.dataset.scratchThumbnail = `https://uploads.scratch.mit.edu/get_image/project/${scratchId}_480x360.png`
+  thumbnail.src = thumbnail.dataset.scratchThumbnail
+  card.querySelector('picture').replaceWith(thumbnail)
+
   const badge = document.createElement('span')
   badge.className = 'search-card__badge'
   badge.textContent = 'Scratch'
   card.insertBefore(badge, card.querySelector('.search-card__name'))
 
-  const scratchId = encodeURIComponent(String(project.id))
-  card.addEventListener('click', () => importScratchProject(card, scratchId, baseUrl, theme))
+  // Present from the start, so screen readers announce the label once it is filled in.
+  const overlay = document.createElement('span')
+  overlay.className = 'search-card__overlay d-none'
+  const label = document.createElement('span')
+  label.className = 'search-card__overlay-label'
+  label.setAttribute('aria-live', 'polite')
+  overlay.append(document.createElement('md-circular-progress'), label)
+  overlay.firstChild.setAttribute('indeterminate', '')
+  card.appendChild(overlay)
+
+  card.addEventListener('click', () =>
+    importScratchProject(card, project.name || '', scratchId, baseUrl, theme, trans),
+  )
 
   return card
 }
 
 // Converting can take seconds: the card shows that it is busy, then the converted project opens.
-function importScratchProject(card, scratchId, baseUrl, theme) {
+function importScratchProject(card, name, scratchId, baseUrl, theme, trans) {
+  const overlay = card.querySelector('.search-card__overlay')
+  const label = card.querySelector('.search-card__overlay-label')
   card.disabled = true
   card.setAttribute('aria-busy', 'true')
   card.classList.add('search-card--loading')
+  overlay.classList.remove('d-none')
+  label.textContent = trans.scratchConverting
+  showSnackbar('#share-snackbar', trans.scratchConvertingSnackbar.replace('%name%', name))
 
   fetch(`${baseUrl}/api/projects/scratch/${scratchId}`, {
     method: 'POST',
@@ -400,6 +437,8 @@ function importScratchProject(card, scratchId, baseUrl, theme) {
       card.disabled = false
       card.removeAttribute('aria-busy')
       card.classList.remove('search-card--loading')
+      overlay.classList.add('d-none')
+      label.textContent = ''
       showSnackbar('#share-snackbar', error.message, SnackbarDuration.error)
     })
 }

@@ -984,8 +984,33 @@ button.search-card {
   cursor: pointer;
 }
 .search-card--loading {
-  opacity: 0.5;
   cursor: progress;
+}
+button.search-card {
+  position: relative;
+}
+/* Covers the thumbnail (square, like .search-card__image) while the project converts. */
+.search-card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0.25rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+.search-card__overlay md-circular-progress {
+  --md-circular-progress-size: 28px;
 }
 .search-card:hover .search-card__image {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
