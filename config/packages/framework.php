@@ -34,6 +34,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'with_constructor_extractor' => true,
       ],
       'profiler' => [
+        // Without this, the key alone switches the profiler on in prod.
+        'enabled' => '%kernel.debug%',
         'collect_serializer_data' => true,
       ],
     ]

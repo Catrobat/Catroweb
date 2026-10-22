@@ -1,124 +1,38 @@
 # How to Test
 
-This page covers practical local testing for Catroweb.
+Setup: [Developer Quickstart](../setup/Developer-Quickstart.md). With Docker, prefix commands with `docker exec -it app.catroweb`. CI runs the same checks (`.github/workflows/`).
 
-## Test Types
+## PHPUnit
 
-- Dynamic tests: PHPUnit + Behat
-- Static analysis: Biome, Prettier, PHP-CS-Fixer, PhpStan, Psalm, and Symfony linters
-
-For CI implementation details, see [GitHub Actions FAQ (Workflow Automation)](<../references/GitHub-Actions-FAQ-(Workflow-Automation).md>) and `.github/workflows/`.
-
-## Prerequisites
-
-Use one of:
-
-- Docker setup: [Docker](../setup/Docker.md)
-- Native setup: [Setup guide Ubuntu](../setup/Setup-guide-Ubuntu.md) or [Setup guide macOS](<../setup/Setup-guide-macOS-(native,-no-Docker).md>)
-
-If you use Docker, run tests inside `app.catroweb`.
-
-## Dynamic Tests
-
-### PHPUnit
-
-Where files live:
-
-- Configuration: `phpunit.xml.dist`
-- Tests: `tests/PhpUnit/`
-
-Run all:
+Config `phpunit.xml.dist`, tests in `tests/PhpUnit/`.
 
 ```bash
 bin/phpunit tests
-```
-
-Run a single test:
-
-```bash
 bin/phpunit tests --filter <method-name> <file-path>
-```
-
-Generate coverage:
-
-```bash
 bin/phpunit --coverage-html tests/TestReports/CoverageReports/PhpUnit \
   --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
 ```
 
-### Behat
+## Behat
 
-Where files live:
-
-- Configuration: `behat.yaml.dist`
-- Feature files: `tests/BehatFeatures/`
-- Context logic: `src/System/Behat/Context/`
-
-Run all suites:
-
-```bash
-bin/behat
-```
-
-Run one suite:
+Config `behat.yaml.dist`, features in `tests/BehatFeatures/`, contexts in `src/System/Testing/Behat/Context/`. Always pass a suite (`-s`); without it hooks run for every suite.
 
 ```bash
 bin/behat -s web-admin
-```
-
-Run one scenario:
-
-```bash
 bin/behat -s web-admin tests/BehatFeatures/web/admin/<file-name>.feature:<line-number>
+bin/behat -s web-admin --rerun      # only previously failed scenarios
 ```
 
-Rerun failed scenarios:
+Failure artifacts: `tests/TestReports/TestScreenshots/`, `tests/TestReports/Behat/`. After JS changes in Docker, rebuild and copy `public/build/` into the container and clear the test cache (`bin/console cache:clear --env=test`).
+
+## Static analysis
 
 ```bash
-bin/behat --rerun
-```
-
-Useful failure artifacts:
-
-- Screenshots: `tests/TestReports/TestScreenshots/`
-- Behat logs: `tests/TestReports/Behat/`
-
-## Static Analysis
-
-### One-by-one
-
-```bash
-yarn test-js
-yarn test-css
-yarn test-asset
-yarn test-php
-yarn test-twig
-```
-
-### All at once
-
-```bash
-yarn test
-```
-
-### Auto-fix supported checks
-
-```bash
+yarn test     # Biome (JS/JSON/CSS), Prettier (MD/YAML), PHP-CS-Fixer, Twig CS Fixer
 yarn fix
-```
-
-## Symfony Linters
-
-```bash
+bin/phpstan analyse
+bin/psalm
 bin/console lint:twig templates/
 bin/console lint:yaml translations/ config/ .github/ docker/ behat.yaml.dist
 bin/console lint:container
-```
-
-## Docker Examples
-
-```bash
-docker exec -it app.catroweb bin/phpunit tests
-docker exec -it app.catroweb bin/behat -s web-general
-docker exec -it app.catroweb php bin/console cache:clear --env=test
 ```

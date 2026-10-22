@@ -1,47 +1,20 @@
 # Workflow
 
-### Forking Workflow
+## Forking Workflow
 
-Do not create any branches on the official public repository. Instead: Fork the project and use Pull Requests to merge back into main.
-[(Atlassian Tutorial explaining this workflow)](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
-
-### Official Public Repository Branches
-
-Never push any changes directly to those branches! Always create Pull Requests!
-
-- **main**: The single integration and production branch. All feature PRs target main. Merging a release PR into main triggers deployment.
-- **release/XYZ**: Created automatically by the release workflow (from _main_). Contains only the version bump. Merging it back into _main_ triggers the deployment.
+Don't create branches on the official repository: fork it and open pull requests against `main`, the single integration and production branch. `release/*` branches are created by the release workflow and only bump the version; merging one into `main` deploys.
 
 ## Checking out the newest version of the project
 
-Before starting to work on your ticket make sure to work with the latest version of the projects official public repository, lets call the remote _catroweb_.
+Start from the latest upstream `main` (remote `catroweb`) and reset the project:
 
 ```
-git checkout main
-git pull catroweb main
-```
-
-Do not forget to reset the project.
-
-```
-# install packages
-composer install
-yarn install
-
-# reset db
+git checkout main && git pull catroweb main
+composer install && yarn install
 bin/console catrobat:reset --hard
-
-# build assets
 yarn dev
-```
-
-Then create and check out a new branch for your ticket XXX.
-
-```
 git checkout -b SHARE-XXX
 ```
-
-That's it! Now you can start working on your ticket.
 
 ## Creating a Pull Request
 

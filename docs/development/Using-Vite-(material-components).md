@@ -1,47 +1,8 @@
-Take a look at the official [documentation](https://material.io/develop/web) by material. However there are some additional steps which are necessary in our project.
+# Adding a JS/CSS entry (Vite)
 
-1. Installation
+Material components come from `@material/*` packages (`yarn add @material/<package>`, then rebuild the Docker image).
 
-```
-yarn add @material/PACKAGE_NAME
-```
-
-2. Rebuild the docker Container
-
-3. Styles
-
-Add CSS imports only where a stylesheet needs a shared dependency; native CSS nesting is supported directly.
-
-4. JavaScript instantiation
-
-Create a JS file in assets/js/ and instantiate the components.
-
-5. Add entry of this file to `vite.config.mjs`
-
-```
-const jsEntries = {
-  // ...
-  ENTRY_NAME: './assets/js/FILE.js',
-}
-```
-
-6. Edit the html.twig file
-   Add the html to your html.twig file.
-   Insert into the js block at the end of the file:
-
-```
-{{ vite_entry_script_tags('ENTRY_NAME') }}
-{{ vite_entry_link_tags('ENTRY_NAME') }}
-```
-
-7. Run the asset build:
-
-```
-docker exec -it app.catroweb yarn dev
-```
-
-Or for live HMR while iterating locally:
-
-```
-yarn run dev-server
-```
+1. Put the module next to its feature in `assets/` (e.g. `assets/Project/MyFeature.js`).
+2. Register it in `jsEntries` (or `cssEntries`) in `vite/entries.mjs`.
+3. In the Twig template: `{{ vite_entry_script_tags('my_feature') }}` / `{{ vite_entry_link_tags('my_feature') }}`.
+4. Build with `yarn dev`, or run `yarn run dev-server` for HMR. New page behavior should be a Stimulus controller in `assets/controllers/` instead of a new entry where possible.

@@ -18,11 +18,9 @@ By the end of this task you will have touched:
 
 Before you start, make sure you have:
 
-1. **Docker environment running** -- follow `docs/setup/Docker.md` to get all containers up
-2. **Local tooling installed** -- Node.js (with Corepack enabled for Yarn), Composer, PHP 8.5
-3. **Dependencies installed** -- `composer install` and `yarn install` have been run
-4. **Assets built** -- `yarn run dev` has been run at least once (or `yarn run watch` is running)
-5. **Basic familiarity** with PHP, HTML, and JavaScript (Symfony experience is helpful but not required)
+1. **Docker environment running** -- follow the [Developer Quickstart](../setup/Developer-Quickstart.md)
+2. **Local tooling installed** -- Node.js (with Corepack enabled for Yarn), Composer, PHP 8.5; `composer install` and `yarn install` run
+3. **Assets built** -- `yarn run dev` run at least once (or `yarn run watch` running)
 
 Verify the app is running:
 
@@ -59,7 +57,7 @@ Controllers live in `src/Application/Controller/`. The project page is handled b
 Open that file and study how existing routes are defined. Symfony uses PHP attributes for routing:
 
 ```php
-#[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
+#[Route(path: '/project/{id}', name: 'project', defaults: ['id' => 0])]
 public function project(Request $request, string $id): Response
 {
     // ...
@@ -92,14 +90,7 @@ public function stealProject(string $id): Response
 }
 ```
 
-Look at the `markNotForKids` method in the same controller for a pattern that:
-
-- Finds a project by ID
-- Modifies it
-- Persists changes with `$this->entity_manager->persist()` and `flush()`
-- Returns a redirect or JSON response
-
-**Hint:** To get the current user, use `$this->getUser()`. To change ownership, look at the `Program` entity (`src/DB/Entity/Project/Program.php`) for a `setUser()` method.
+**Hint:** The controller already has `ProjectManager` injected: `find($id)` loads a project and `save($project)` persists it. To get the current user, use `$this->getUser()`. To change ownership, look at the `Project` entity (`src/DB/Entity/Project/Project.php`) for a `setUser()` method.
 
 For returning JSON (which your JavaScript will expect):
 
@@ -111,24 +102,14 @@ return new JsonResponse(['success' => true, 'message' => 'Project stolen!']);
 
 Templates live in `templates/` and use the Twig templating language. The project page template is at `templates/Project/ProjectPage.html.twig`.
 
-Open it and look for the section where action buttons are rendered (around line 116-132). You will see patterns like:
-
-```twig
-{% if logged_in and my_project %}
-  <div class="mt-3" style="display:flex; align-items: center">
-    {{ include('Project/NotForKidsButton.html.twig') }}
-  </div>
-{% endif %}
-```
-
-Notice the `logged_in` and `my_project` variables -- these are passed from the controller. Your button should appear when the user is logged in but it is **not** their project.
+Open it and look for conditions like `{% if app.user and my_project %}` (around the project name). `my_project` is passed from the controller. Your button should appear when the user is logged in but it is **not** their project.
 
 **Your task:** Add a "Steal" button. You can either:
 
 **Option A:** Add it inline in `ProjectPage.html.twig`:
 
 ```twig
-{% if logged_in and not my_project %}
+{% if app.user and not my_project %}
   <div class="mt-3">
     <button id="btn-steal-project"
             class="btn btn-danger w-100"
@@ -210,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 ### Step 4: Implement the Backend Logic
 
-Go back to your controller method from Step 1 and fill in the implementation. Here is the general pattern, based on how `markNotForKids` works:
+Go back to your controller method from Step 1 and fill in the implementation:
 
 ```php
 public function stealProject(string $id): Response
@@ -224,7 +205,7 @@ public function stealProject(string $id): Response
     }
 
     $project = $this->project_manager->find($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
         return new JsonResponse(
             ['error' => 'Project not found'],
             Response::HTTP_NOT_FOUND
@@ -247,8 +228,8 @@ public function stealProject(string $id): Response
 
 Things to figure out on your own:
 
-- How to change the project's owner (look at the `Program` entity for setter methods)
-- How to persist the change (look at the `markNotForKids` method for the pattern)
+- How to change the project's owner (look at the `Project` entity for setter methods)
+- How to persist the change (`ProjectManager::save()`)
 
 ### Step 5: Add User Feedback
 
@@ -299,7 +280,7 @@ Swal.fire({
 })
 ```
 
-Look at the `askForConfirmation` function in `assets/Project/Project.js` (around line 827) for the exact pattern used in the codebase.
+Look at the `askForConfirmation` function in `assets/Project/ProjectComments.js` for the exact pattern used in the codebase.
 
 **Your task:** Combine confirmation + feedback:
 
@@ -409,107 +390,41 @@ docker exec app.catroweb bin/console cache:clear --env=test
 | `assets/Project/Project.js`                                | Project interactions (likes, downloads, APK)     |
 | `assets/Api/ApiHelper.js`                                  | `ApiFetch` helper for authenticated API calls    |
 | `assets/Layout/Snackbar.js`                                | Snackbar notification helper                     |
-| `src/DB/Entity/Project/Program.php`                        | Project (Program) Doctrine entity                |
+| `src/DB/Entity/Project/Project.php`                        | Project Doctrine entity                          |
 | `src/Project/ProjectManager.php`                           | Service for finding/managing projects            |
 | `vite.config.mjs`                                          | Vite config (entry points, build, themes)        |
 | `tests/BehatFeatures/web/project-details/`                 | Behat tests for the project page                 |
 | `config/routes.yaml`                                       | Route configuration (most routes use attributes) |
 
-## How to Run and Test
-
-### Build assets after JS/CSS changes
-
-```bash
-# One-time build
-yarn run dev
-
-# Or watch for changes (auto-rebuilds)
-yarn run watch
-```
-
-### Linting and code style
-
-```bash
-# Fix everything at once
-yarn run fix
-
-# Or individually:
-yarn run fix-js       # Biome (JavaScript/JSON)
-yarn run fix-css      # Biome (CSS)
-yarn run fix-asset    # Prettier (Markdown/YAML)
-yarn run fix-php      # PHP CS Fixer
-```
-
-### PHP static analysis
-
-```bash
-# Run from Docker (or natively if available)
-docker exec app.catroweb bin/php-cs-fixer fix src/Application/Controller/Project/ProjectController.php
-docker exec app.catroweb bin/phpstan analyse src/Application/Controller/Project/ProjectController.php
-```
-
-### Running Behat tests
-
-```bash
-# Always include -s <suite>
-docker exec app.catroweb bin/behat -f pretty -s web-project-details \
-  tests/BehatFeatures/web/project-details/project_steal.feature
-
-# Run a specific scenario by line number
-docker exec app.catroweb bin/behat -f pretty -s web-project-details \
-  "tests/BehatFeatures/web/project-details/project_steal.feature:25"
-```
-
-### Debugging
+## Debugging
 
 - Browse the test state after a Behat scenario: `http://localhost:8080/index_test.php/`
-- Check Symfony logs: `docker exec app.catroweb cat var/log/dev.log | tail -50`
-- Clear cache if things seem stale: `docker exec app.catroweb bin/console cache:clear`
+- Symfony logs: `docker exec app.catroweb tail -50 var/log/dev.log`
+- Lint before pushing: `yarn run fix && yarn run test`
 
 ## Tips and Common Pitfalls
 
-### 1. Always rebuild assets after JS changes
+### 1. Rebuild, copy and clear after changes
 
-JavaScript and CSS changes in `assets/` are not served directly. You must run `yarn run dev` (or have `yarn run watch` running) to compile them into `public/build/`.
+`assets/` is compiled into `public/build/`, which is not mounted into Docker: run `yarn run dev`, `docker cp` the build (see Step 6) and clear the cache (`bin/console cache:clear`, plus `--env=test` for Behat) after JS, template or config changes.
 
-### 2. Copy assets into Docker after building
-
-The `public/build/` directory is not volume-mounted into Docker. After building:
-
-```bash
-docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/
-```
-
-### 3. Clear the Symfony cache
-
-After template or configuration changes, clear the cache:
-
-```bash
-docker exec app.catroweb bin/console cache:clear
-docker exec app.catroweb bin/console cache:clear --env=test  # for Behat tests
-```
-
-### 4. The `data-*` attribute pattern
+### 2. The `data-*` attribute pattern
 
 The codebase passes server-side data (URLs, translations, configuration) to JavaScript via `data-*` attributes on HTML elements. JavaScript reads them with `element.dataset.propertyName`. This keeps JS decoupled from Twig.
 
-### 5. POST requests need the right Content-Type
+### 3. POST requests need the right Content-Type
 
 When sending JSON from JavaScript, always set `Content-Type: application/json`. The `ApiFetch` helper does this automatically when you pass a `data` argument to the constructor.
 
-### 6. Use the `-s` flag with Behat
-
-Without specifying a suite, Behat runs hooks for all 20+ suites even for a single test file. Always use `-s web-project-details` (or whichever suite applies).
-
-### 7. Twig path() and the theme parameter
+### 4. Twig path() and the theme parameter
 
 Routes with a `/{theme}/` prefix (like the main project page) sometimes need an explicit `theme` parameter in `path()`. If your route does not have a theme prefix, you do not need to worry about this.
 
-### 8. Check the browser console
+### 5. Check the browser console
 
 If something is not working, open the browser developer tools (F12) and check the Console tab for JavaScript errors and the Network tab for failed requests.
 
-### 9. The `index_test.php` endpoint
+### 6. The `index_test.php` endpoint
 
 Behat tests use `/index_test.php/` as the entry point. This runs the app in the `test` environment with `debug=false`. If you get 500 errors during testing with no details, add temporary logging in your controller:
 
@@ -517,7 +432,7 @@ Behat tests use `/index_test.php/` as the entry point. This runs the app in the 
 file_put_contents('/tmp/debug.txt', $exception->getMessage());
 ```
 
-### 10. DOMContentLoaded and deferred scripts
+### 7. DOMContentLoaded and deferred scripts
 
 Vite emits `<script type="module" defer>` tags via the pentatrion bundle. Use `document.addEventListener('DOMContentLoaded', ...)` to ensure the DOM is ready before querying elements. This is the standard pattern used throughout the codebase.
 
@@ -533,25 +448,9 @@ Vite emits `<script type="module" defer>` tags via the pentatrion bundle. Use `d
    git checkout -b feature/steal-project
    ```
 
-2. **Make your changes** and commit with a clear message:
+2. **Commit** with a clear message, after `yarn run fix`, `yarn run test` and `bin/phpstan analyse` on your PHP files pass.
 
-   ```bash
-   git add src/Application/Controller/Project/ProjectController.php
-   git add templates/Project/ProjectPage.html.twig
-   git add assets/Project/ProjectPage.js
-   git add tests/BehatFeatures/web/project-details/project_steal.feature
-   git commit -m "Add steal project button (introduction task)"
-   ```
-
-3. **Run all checks** before pushing:
-
-   ```bash
-   yarn run fix          # Auto-fix code style (JS, CSS, PHP)
-   yarn run test         # Verify no linting errors remain
-   docker exec app.catroweb bin/phpstan analyse src/Application/Controller/Project/ProjectController.php
-   ```
-
-4. **Push and create a PR** against `main`:
+3. **Push and create a PR** against `main`:
 
    ```bash
    git push -u origin feature/steal-project

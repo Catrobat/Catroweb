@@ -2,124 +2,24 @@
 
 **Date**: 2026-04-11
 **Status**: Accepted
-**Authors**: Daniel, Claude
 
 ## Context
 
-The Catroweb API has grown organically. Routes mix singular/plural nouns, pagination is inconsistent (offset vs cursor), response envelopes vary (raw arrays vs wrapped), error responses use endpoint-specific DTOs, and some entities still expose integer IDs externally. Before an official release, we standardize everything in one pass.
+The API grew organically: mixed singular/plural routes, offset and cursor pagination, varying envelopes, endpoint-specific error DTOs, integer IDs exposed externally. Before the first official release everything was standardized in one pass, **without backward compatibility** (no deprecated aliases), since there was no release to stay compatible with.
 
 ## Decisions
 
-### 1. Plural Resource Nouns (Everywhere)
+1. **Plural resource nouns** (`/projects/{id}`, `/studios`, `/users/me`). Actions (`/join`, `/follow`, ...) are POST sub-resources; non-resource endpoints (`/search`, `/health`, `/authentication`) stay as-is.
+2. **Cursor pagination** on all collections: `{ data, next_cursor, has_more }`; no `offset`. Exceptions: count endpoints, the achievements overview (small fixed shape) and static lists (`{data: []}`).
+3. **UUIDs for every externally exposed ID.** Integer PKs stay internal; a UUID column is added and backfilled.
+4. **One error shape** everywhere: `{ "error": { code, type, message, details: [{ field, message }] } }`.
+5. **PATCH for partial updates** (`PATCH /projects/{id}`, `/users/me`, `/studios/{id}`).
+6. **Status codes**: 200 read/mutation with body, 201 created, 204 no body, 400 malformed request, 401 unauthenticated, 403 forbidden, 404, 409 conflict, 422 validation/domain rule, 429 rate limited.
 
-| Old                       | New                        |
-| ------------------------- | -------------------------- |
-| `/project/{id}`           | `/projects/{id}`           |
-| `/studio`                 | `/studios`                 |
-| `/studio/{id}`            | `/studios/{id}`            |
-| `/user` (self)            | `/users/me`                |
-| `/user/{id}`              | `/users/{id}`              |
-| `/notification/{id}/read` | `/notifications/{id}/read` |
+## Known gap: pre-UUID comment references
 
-Action endpoints (`/join`, `/leave`, `/promote`, `/follow`) stay as POST sub-resources under the plural parent.
-Non-resource endpoints (`/search`, `/health`, `/authentication`) stay as-is.
+`Version20260411120000_uuid_migration` gave comments random UUIDs and remapped only tables with a foreign key to `user_comment`. Four columns store comments as a plain `content_id` string and were not remapped: `content_report`, `content_appeal`, `content_moderation_action`, `CatroNotification.moderation_content_id`. No old-id → UUID mapping was kept, so pre-migration rows (integer `content_id`) cannot be remapped except from a pre-migration backup.
 
-### 2. Cursor Pagination Everywhere
-
-All collection endpoints return:
-
-```json
-{
-  "data": [...],
-  "next_cursor": "opaque-string-or-null",
-  "has_more": true
-}
-```
-
-Remove deprecated `offset` parameter from all endpoints.
-Remove `PaginationInfo` schema.
-
-**Exceptions**:
-
-- Aggregate/count endpoints (`/notifications/count`, `/achievements/count`) keep their custom shapes
-- Achievements list keeps its custom `{unlocked, locked, most_recent, ...}` shape (no pagination needed, ~11 items)
-- Static list endpoints (`/projects/extensions`, `/projects/tags`) use `{data: []}` without pagination
-
-### 3. UUID Identifiers Everywhere
-
-All externally-exposed entity IDs become UUID strings:
-
-| Entity                                           | Current | Target           |
-| ------------------------------------------------ | ------- | ---------------- |
-| Program, User, Studio, MediaAsset, MediaCategory | UUID    | UUID (no change) |
-| UserComment                                      | integer | UUID             |
-| CatroNotification (all subtypes)                 | integer | UUID             |
-| Achievement                                      | integer | UUID             |
-| UserAchievement                                  | integer | UUID             |
-| ContentReport                                    | integer | UUID             |
-| ContentAppeal                                    | integer | UUID             |
-| StudioUser (membership)                          | integer | UUID             |
-| StudioJoinRequest                                | integer | UUID             |
-| StudioActivity                                   | integer | UUID             |
-| StudioComment (id, parent_id)                    | integer | UUID             |
-| FeaturedBanner                                   | integer | UUID             |
-
-**Strategy**: Add UUID column, backfill, expose UUID externally, keep integer PK internally.
-
-**Known gap**: `Version20260411120000_uuid_migration` gave comments random UUIDs and remapped only the tables that have a foreign key to `user_comment`. Four columns store the comment as a plain `content_id` string, so they were not remapped: `content_report`, `content_appeal`, `content_moderation_action` and `CatroNotification.moderation_content_id`. Comment rows in them from before the migration would still hold the old integer ids. On production, the 2026-10-20 dry run of `catrobat:check:data-consistency` (v26.10.0) found no dangling reports, so `content_report` is not affected in practice. The live database kept no old-id → UUID mapping, so they cannot be remapped. Only a backup taken before the migration could restore it. They are not closed either, because both resolved report states change the reporter's trust score. Moderators should not accept or reject them in the queue, for the same reason. `catrobat:check:data-consistency` lists the orphaned reports, together with reports on comments that were deleted later. The pre-UUID ones are the ones whose `content_id` is an integer. New comment reports always store the UUID. See #7415.
-
-### 4. Unified Error Response
-
-Kill all endpoint-specific error DTOs. One shape everywhere:
-
-```json
-{
-  "error": {
-    "code": 422,
-    "type": "validation_error",
-    "message": "Validation failed",
-    "details": [{ "field": "email", "message": "Email already in use" }]
-  }
-}
-```
-
-**Removed schemas**: `RegisterErrorResponse`, `UpdateUserErrorResponse`, `ResetPasswordErrorResponse`, `CreateStudioErrorResponse`, `UpdateStudioErrorResponse`, `UploadErrorResponse`, `UpdateProjectErrorResponse`, `UpdateProjectFailureResponse`.
-
-### 5. HTTP Method Cleanup
-
-| Old                          | New                    | Why                                  |
-| ---------------------------- | ---------------------- | ------------------------------------ |
-| `PUT /project/{id}`          | `PATCH /projects/{id}` | Partial update (all fields optional) |
-| `PUT /user`                  | `PATCH /users/me`      | Partial update                       |
-| `POST /studio/{id}` (update) | `PATCH /studios/{id}`  | Was using POST for update            |
-
-### 6. Field Changes
-
-- **Add** `uploaded_at` (ISO 8601 datetime) to `ProjectResponse`
-- **Remove** `uploaded` (unix timestamp) from `ProjectResponse`
-- **Keep** `uploaded_string` (translated relative time)
-- **Remove** deprecated `download` field (use `downloads`)
-
-### 7. Query Parameter Changes
-
-- `/projects` category parameter becomes **optional** (was required). No category = recent projects.
-- `/users` query parameter becomes **optional** (was required). No query = list all users.
-
-### 8. Status Code Rules
-
-| Code | Usage                                 |
-| ---- | ------------------------------------- |
-| 200  | Successful read or mutation with body |
-| 201  | Resource created with body            |
-| 204  | Successful mutation, no body          |
-| 400  | Malformed request                     |
-| 401  | Missing/invalid auth                  |
-| 403  | Authenticated but forbidden           |
-| 404  | Resource not found                    |
-| 409  | Conflict (duplicate)                  |
-| 422  | Validation/domain rule failure        |
-| 429  | Rate limited                          |
-
-## No Backward Compatibility
-
-Since there is no official release yet, we break everything cleanly. No deprecated aliases.
+- They are not auto-closed, and moderators should not accept/reject them: both resolutions change the reporter's trust score.
+- `catrobat:check:data-consistency` lists them. The 2026-10-20 production dry run found no dangling reports.
+- New comment reports always store the UUID. See #7415.

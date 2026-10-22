@@ -101,17 +101,9 @@ class ResetPasswordController extends AbstractController
       // Encode(hash) the plain password, and set it.
       $hashedPassword = $user_password_hasher->hashPassword($user, $form->get('plainPassword')->getData());
 
-      try {
-        $this->password_sessions->resetPassword($user, $hashedPassword, function () use ($token): void {
-          // Recheck under the account lock so two submissions cannot reuse the same reset token.
-          $this->resetPasswordHelper->validateTokenAndFetchUser($token);
-          $this->resetPasswordHelper->removeResetRequest($token);
-        });
-      } catch (ResetPasswordExceptionInterface $exception) {
-        $this->addFlash('reset_password_error', $exception->getReason());
-
-        return $this->redirectToRoute('app_forgot_password_request');
-      }
+      // A password reset token should be used only once, remove it.
+      $this->resetPasswordHelper->removeResetRequest($token);
+      $this->password_sessions->resetPassword($user, $hashedPassword);
 
       // The session is cleaned up after the password has been changed.
       $this->cleanSessionAfterReset();

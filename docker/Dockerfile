@@ -31,6 +31,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Build argument to control xdebug installation (default: true for dev)
 ARG INSTALL_XDEBUG=true
 
+# Minimum PHP patch release (security floor). Bumping it also busts the cached apt layer below.
+ENV PHP_MIN_VERSION=8.5.12
+
 # Install dependencies
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends wget apt-transport-https lsb-release ca-certificates && \
@@ -61,6 +64,7 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends nodejs && \
     corepack enable && \
     corepack prepare yarn@4.12.0 --activate && \
+    php -r 'exit(version_compare(PHP_VERSION, getenv("PHP_MIN_VERSION"), ">=") ? 0 : 1);' && \
     rm -rf /var/lib/apt/lists/*
 
 # Conditionally install xdebug (skip in production for better performance)

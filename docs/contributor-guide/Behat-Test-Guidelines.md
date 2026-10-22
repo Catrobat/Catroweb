@@ -1,3 +1,5 @@
+# Behat Test Guidelines
+
 ### A new Feature must be a new feature file.
 
 - **A feature file** should only test exactly **one feature**.
@@ -9,10 +11,7 @@
 
 ### Prevent those timing issues
 
-Behat tests tend to check for elements before they are loaded from time to time. To prevent such timing issues always wait for objects you reference to be loaded. But only **use wait in combination with conditions**. <br/>
-Don't use something like `I wait for 1000 milliseconds`. Maybe this will increase the testing time unnecessarily or might not even be long enough for the object to load. Just make use of the wait function with a timeout and a condition. This condition defines what has to be fulfilled to continue.
-
-Some examples.
+Always wait for what you reference, and only **wait on a condition**. Don't use `I wait for 1000 milliseconds`: it is either too slow or too short.
 
 - When using stuff like `I am on '/app'` append `I wait for the page to be loaded`
 
@@ -24,8 +23,4 @@ Some examples.
 
 Try not to use simple methods like `I should see 'message'`. Better check that the correct element contains the correct content with methods like `The element '#id' should contain 'message'`.
 
----
-
-### Our context files WIP
-
-The context files define the glue code for our Behat features. Try to reuse existing functionality. Refactor it. Try to make them easier usable. Prevent methods with default parameters. Already implicitly include the wait to get rid of those explicit wait calls in the features. Split the files. Adapt the behat config to use the correct context files. We need to get rid of all this copy/pasted duplicated code.
+When adding steps, reuse and refactor existing context code instead of copying it, and prefer steps that wait implicitly.

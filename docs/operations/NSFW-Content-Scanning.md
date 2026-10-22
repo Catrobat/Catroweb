@@ -1,237 +1,36 @@
 # NSFW Content Scanning
 
-## Overview
+Uploaded profile pictures are scanned by a self-hosted model ([Falconsai/nsfw_image_detection](https://huggingface.co/Falconsai/nsfw_image_detection)) in the `docker/nsfw-scanner/` Flask service. `ContentSafetyScanner` posts the image bytes to `/scan`; a score at or above `CONTENT_SAFETY_THRESHOLD` (default 0.7) rejects the upload with 422. Today the only caller is `UserRequestValidator` (avatars); project images are **not** scanned yet.
 
-Catroweb scans uploaded images for NSFW (Not Safe For Work) content using a self-hosted AI model ([Falconsai/nsfw_image_detection](https://huggingface.co/Falconsai/nsfw_image_detection)). As a children's platform, all user-uploaded images are checked before being stored. NSFW images are rejected with HTTP 422.
+**Fail-open by design:** if the scanner is down or times out (5 s), the upload goes through and `Content safety scanner unavailable` is logged, so the scanner can't take down uploads.
 
-## How It Works
+## Configuration
 
-1. A user uploads an image (avatar, project screenshot, or `.catrobat` project file containing images).
-2. The Symfony `ContentSafetyScanner` service sends the raw image bytes to the NSFW scanner microservice via HTTP POST.
-3. The scanner classifies the image using a Vision Transformer (ViT) model and returns an NSFW score (0.0--1.0).
-4. If the score exceeds the configured threshold (default: 0.7), the upload is rejected.
+| Variable                   | Default                    | Notes                                           |
+| -------------------------- | -------------------------- | ----------------------------------------------- |
+| `CONTENT_SAFETY_URL`       | `http://nsfw-scanner:5000` | prod `.env.prod.local`: `http://127.0.0.1:5000` |
+| `CONTENT_SAFETY_ENABLED`   | `true`                     | `false` in `.env.test`                          |
+| `CONTENT_SAFETY_THRESHOLD` | `0.7`                      | Raise on false positives, lower on misses       |
 
-### Integration Points
+Dev: the scanner starts with `docker/docker-compose.dev.yaml` on port 5050 (`curl http://localhost:5050/health`). The first build downloads the ~500 MB model (~5 min).
 
-| Upload Type     | Integration Point                                  | Behavior                                                            |
-| --------------- | -------------------------------------------------- | ------------------------------------------------------------------- |
-| Profile picture | `UserRequestValidator::validateAndResizePicture()` | Scans the resized image before storing                              |
-| Project images  | `ProjectManager::addProject()`                     | Scans all images extracted from `.catrobat` file after sanitization |
+## Production
 
-### Fail-Open Design
-
-If the scanner microservice is unavailable (down, timeout, network error), uploads are **allowed through** and a warning is logged. This prevents the scanner from becoming a single point of failure for the entire upload pipeline.
-
-## Configuration Reference
-
-| Variable                   | Type    | Default                    | Description                                                              |
-| -------------------------- | ------- | -------------------------- | ------------------------------------------------------------------------ |
-| `CONTENT_SAFETY_URL`       | string  | `http://nsfw-scanner:5000` | URL of the NSFW scanner microservice                                     |
-| `CONTENT_SAFETY_ENABLED`   | boolean | `true`                     | Master switch. Set to `false` to disable scanning.                       |
-| `CONTENT_SAFETY_THRESHOLD` | float   | `0.7`                      | NSFW score threshold (0.0--1.0). Images scoring above this are rejected. |
-
-### Where to Set Values
-
-| Environment | File                            | Typical values                                                               |
-| ----------- | ------------------------------- | ---------------------------------------------------------------------------- |
-| Development | `.env` (committed)              | `CONTENT_SAFETY_ENABLED=true`, `CONTENT_SAFETY_URL=http://nsfw-scanner:5000` |
-| Test        | `.env.test` (committed)         | `CONTENT_SAFETY_ENABLED=false`                                               |
-| Production  | `.env.prod` (committed)         | `CONTENT_SAFETY_ENABLED=true`                                                |
-| Production  | `.env.prod.local` (server only) | `CONTENT_SAFETY_URL=http://127.0.0.1:5000`                                   |
-
-## Docker Development Setup
-
-The NSFW scanner container is defined in `docker/docker-compose.dev.yaml`:
-
-```yaml
-nsfw-scanner:
-  container_name: nsfw-scanner.catroweb
-  build:
-    context: ./nsfw-scanner
-    dockerfile: Dockerfile
-  ports:
-    - '5050:5000'
-  healthcheck:
-    test:
-      [
-        'CMD',
-        'python',
-        '-c',
-        "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')",
-      ]
-    interval: 30s
-    timeout: 10s
-    retries: 3
-```
-
-**First build takes ~5 minutes** (downloads the ~500MB model). Subsequent builds use Docker cache.
+One-time prerequisites (as root):
 
 ```bash
-# Start with the rest of the dev stack
-docker compose -f docker/docker-compose.dev.yaml up -d
-
-# Verify it's running
-curl http://localhost:5050/health
-# {"status": "ok"}
-```
-
-## Production Setup
-
-The NSFW scanner runs as a standalone Docker container on the production server.
-
-### Installation
-
-One-time prerequisites on the production server (run as `root`):
-
-```bash
-# Create the scanner directory and hand it to the deploy user
-mkdir -p /opt/nsfw-scanner
-chown -R deploy:deploy /opt/nsfw-scanner
-
-# Allow the deploy user to manage the container without sudo
+mkdir -p /opt/nsfw-scanner && chown -R deploy:deploy /opt/nsfw-scanner
 usermod -aG docker deploy
 ```
 
-After the next deploy, the `restart:nsfw-scanner` task in `deploy.php` will:
+After that, the `restart:nsfw-scanner` task in `deploy.php` rsyncs `docker/nsfw-scanner/` to `/opt/nsfw-scanner/` and rebuilds the container only when the sources changed. Manual restart: `cd /opt/nsfw-scanner && docker compose -f docker-compose.prod.yaml up -d --build`.
 
-1. `rsync` `docker/nsfw-scanner/` from the release directory into `/opt/nsfw-scanner/`.
-2. Compare a sha256 of the source vs. the deployed tree and skip rebuild when unchanged (the model download is multi-minute).
-3. On the very first run after switching from raw `docker run` to compose, force-remove the legacy container so compose can adopt the `nsfw-scanner` name.
-4. Run `docker compose -f docker-compose.prod.yaml up -d --build` to rebuild and (re)start the container.
-
-Subsequent deploys auto-update the container whenever any file under `docker/nsfw-scanner/` changes.
-
-### Verify
+Check it:
 
 ```bash
-# Check container is running
-docker ps --filter name=nsfw-scanner
-
-# Check health endpoint
-curl http://127.0.0.1:5000/health
-# {"status": "ok"}
-
-# Test with an image
-curl -s -X POST http://127.0.0.1:5000/scan \
-  --data-binary @/path/to/test-image.jpg \
-  -H 'Content-Type: application/octet-stream'
-# {"safe": true, "nsfw_score": 0.05, "safe_score": 0.95, "label": "safe"}
+curl http://127.0.0.1:5000/health          # {"status": "ok"}
+curl -s -X POST http://127.0.0.1:5000/scan --data-binary @image.jpg -H 'Content-Type: application/octet-stream'
+docker logs nsfw-scanner --tail 50 -f
 ```
 
-### Environment Configuration
-
-Add to `.env.prod.local` on the server:
-
-```env
-CONTENT_SAFETY_URL=http://127.0.0.1:5000
-CONTENT_SAFETY_ENABLED=true
-CONTENT_SAFETY_THRESHOLD=0.7
-```
-
-### Updating
-
-Merging a change to any file under `docker/nsfw-scanner/` and triggering a deploy is sufficient — the `restart:nsfw-scanner` task picks it up automatically. Manual intervention is only needed if you have to roll back outside the Deployer workflow:
-
-```bash
-cd /opt/nsfw-scanner
-docker compose -f docker-compose.prod.yaml up -d --build
-```
-
-## Monitoring
-
-### Health Check
-
-```bash
-curl -f http://127.0.0.1:5000/health || echo "NSFW scanner is down"
-```
-
-### Logs
-
-```bash
-docker logs nsfw-scanner
-docker logs nsfw-scanner --tail 50 -f  # follow
-```
-
-### Resource Usage
-
-The scanner uses approximately:
-
-- **Memory**: ~2--3 GB (model loaded in memory)
-- **CPU**: ~50ms per image on modern CPU
-- **Disk**: ~2 GB (Docker image with model)
-
-## Scanner API Reference
-
-### `GET /health`
-
-Returns `{"status": "ok"}` if the service is running and the model is loaded.
-
-### `POST /scan`
-
-Accepts raw image bytes in the request body.
-
-**Request:**
-
-- `Content-Type: application/octet-stream`
-- Body: raw image binary data (JPEG, PNG, GIF, WebP, etc.)
-
-**Response:**
-
-```json
-{
-  "safe": true,
-  "nsfw_score": 0.0468,
-  "safe_score": 0.9528,
-  "label": "safe"
-}
-```
-
-**Error responses:**
-
-- `400`: No image data provided, or invalid image format
-- `500`: Internal error (model failure)
-
-## Troubleshooting
-
-### Scanner returns 500 for very small images
-
-The ViT model requires images with at least 3 color channels (RGB). Single-pixel or grayscale images may fail. The application converts images to RGB before scanning, but edge cases may exist.
-
-### Container won't start (out of memory)
-
-The model requires ~2 GB RAM. Ensure the server has sufficient free memory. The `--memory=4g` flag limits the container to prevent it from consuming all system memory.
-
-### Uploads succeed but scanner is down
-
-This is expected behavior (fail-open). Check application logs for warnings like `Content safety scanner unavailable`. Restart the scanner container:
-
-```bash
-docker restart nsfw-scanner
-```
-
-### Threshold tuning
-
-If you get false positives (safe images being rejected), lower the threshold:
-
-```env
-CONTENT_SAFETY_THRESHOLD=0.6
-```
-
-If you get false negatives (NSFW images getting through), raise it:
-
-```env
-CONTENT_SAFETY_THRESHOLD=0.8
-```
-
-The default (0.7) is conservative and should work well for most cases.
-
-## Source Code
-
-| File                                                  | Purpose                       |
-| ----------------------------------------------------- | ----------------------------- |
-| `docker/nsfw-scanner/app.py`                          | Python Flask microservice     |
-| `docker/nsfw-scanner/Dockerfile`                      | Container build definition    |
-| `docker/nsfw-scanner/requirements.txt`                | Python dependencies           |
-| `src/Security/ContentSafety/ContentSafetyScanner.php` | Symfony service (HTTP client) |
-| `src/Security/ContentSafety/ContentSafetyResult.php`  | Value object for scan results |
-| `tests/PhpUnit/Security/ContentSafetyScannerTest.php` | Unit tests                    |
+Needs ~2–3 GB RAM (model in memory) and ~2 GB disk; ~50 ms per image on CPU. If it won't start, check free memory first.

@@ -1,35 +1,11 @@
-Flavors are themed variants of the website.
+# Flavors
 
-Examples are `pocketcode`, `luna`, and `pocketgalaxy`.
-If no flavor is specified, `pocketcode` is used by default.
+Flavors are themed variants of the site (`pocketcode`, `luna`, `pocketgalaxy`, ...). Every web route is prefixed with a theme; `pocketcode` is the default.
 
-### Routing
+Adding a flavor:
 
-All routes in our project are prefixed with a theme.
+1. Add it to `src/DB/Entity/Flavor.php` and to `themeRoutes` in `config/packages/themes.php`.
+2. Create `assets/Theme/<flavor>.css` (overrides colors, sizes, spacing) and register it in `cssEntries` in `vite/entries.mjs`.
+3. Theme-specific Twig content: `{% if theme() == 'luna' %}`.
 
-To allow a route like share.catrobat.org/newThemeName, the new theme must be added to the themes array in
-_config/packages/liip_theme.yaml_ first.
-
-### Theme Templates
-
-By default, if a flavored URL is accessed, a theme with the same name is loaded.
-In combination with twig, the actual theme can be checked
-
-```
-    {% if theme() == 'luna' %}
-```
-
-This allows us to easily add theme specific content.
-
-### Theme Style
-
-For every theme, there must be a settings file at
-`assets/Theme/<theme_name>.css`.
-In this file, variables for colors, sizes, and spacing can be overridden.
-
-Styles are compiled via Vite (`yarn dev`, `yarn watch`, `yarn build`), so ensure the theme styles are included in the relevant CSS entry files (`vite/entries.mjs`).
-
-### Admin
-
-Flavors are stored as strings for simplicity.
-Keep in mind that SonataAdmin select fields may also need to be updated separately.
+Flavors are stored as plain strings; SonataAdmin select fields may need updating separately.
