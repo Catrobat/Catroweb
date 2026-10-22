@@ -24,6 +24,6 @@ final class Version20261022120000 extends AbstractMigration
   #[\Override]
   public function down(Schema $schema): void
   {
-    $this->addSql('ALTER TABLE project_asset_mapping MODIFY path_in_zip VARCHAR(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL');
+    $this->throwIrreversibleMigrationException('Once B.png and b.png are stored side by side, the case-insensitive unique key cannot be restored.');
   }
 }

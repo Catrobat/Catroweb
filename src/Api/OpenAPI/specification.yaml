@@ -923,6 +923,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectResponse'
+        '403':
+          description: 'The request comes from another site (Origin or Sec-Fetch-Site header); browsers may only import from this site'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: 'Scratch does not know the project, or it is not shared'
           content:
@@ -937,6 +943,18 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '500':
+          description: 'The project could not be converted because of an unexpected error on this server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: 'Scratch could not be reached or answered with an error; try again later'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '503':
           description: 'Another Scratch project is being converted right now'
           headers:
@@ -5649,7 +5667,7 @@ components:
                 description: 'Scratch username of the author'
         scratch_projects_total:
           type: integer
-          description: 'Scratch reports no total: offset plus the results returned, plus one while more may follow.'
+          description: "Scratch reports no total: offset plus the size of Scratch's page (counted before imported projects are left out), plus one while that page is full."
           example: 3
 
     ######################################################

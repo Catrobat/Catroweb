@@ -50,7 +50,7 @@ class ScratchSearchTest extends TestCase
     $result = $search->search('a', 2, 4, '1.2.3.4');
 
     $this->assertSame(['1'], array_column($result['projects'], 'id'));
-    $this->assertSame(4 + 1 + 1, $result['total']);
+    $this->assertSame(4 + 2 + 1, $result['total']); // the full page counts, so leaving one out keeps "show more"
   }
 
   public function testScratchFailureGivesEmptyResultAndIsNotCached(): void

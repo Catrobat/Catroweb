@@ -102,7 +102,13 @@ function renderPage(container, query, theme, baseUrl, trans) {
       renderProjects(projectsSection, data.projects || [], theme, trans)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
-      renderScratchProjects(scratchSection, data.scratch_projects || [], baseUrl, theme)
+      renderScratchProjects(
+        scratchSection,
+        data.scratch_projects || [],
+        data.scratch_projects_total || 0,
+        baseUrl,
+        theme,
+      )
 
       wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
       wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
@@ -204,7 +210,11 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
 
         nextOffset += RESULTS_PER_PAGE
 
-        if (items.length < RESULTS_PER_PAGE) {
+        const more =
+          type === 'scratch'
+            ? (data.scratch_projects_total || 0) > nextOffset
+            : items.length >= RESULTS_PER_PAGE
+        if (!more) {
           btn.classList.add('d-none')
         }
       })
@@ -330,11 +340,13 @@ function renderStudios(section, studios, baseUrl, trans) {
   })
 }
 
-function renderScratchProjects(section, projects, baseUrl, theme) {
-  if (projects.length === 0) return
+function renderScratchProjects(section, projects, total, baseUrl, theme) {
+  // The total counts Scratch's full page, before projects already imported here are left out.
+  const more = total > RESULTS_PER_PAGE
+  if (projects.length === 0 && !more) return
 
   section.classList.remove('d-none')
-  if (projects.length >= RESULTS_PER_PAGE) {
+  if (more) {
     section.querySelector('.search-section__title__show-more').classList.remove('d-none')
   }
 

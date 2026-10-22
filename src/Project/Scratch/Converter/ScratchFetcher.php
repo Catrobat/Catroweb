@@ -163,14 +163,21 @@ class ScratchFetcher
       }
 
       if (200 !== $status) {
-        throw new ScratchConversionException('Scratch answered with HTTP '.$status.'.');
+        throw new ScratchConversionException('Scratch answered with HTTP '.$status.'.', $status >= 500 || 429 === $status ? ScratchConversionException::UPSTREAM : 0);
       }
 
       return $response->getContent();
     } catch (ScratchConversionException $exception) {
       throw $exception;
     } catch (\Throwable $throwable) {
-      throw new ScratchConversionException('Could not download from Scratch: '.$throwable->getMessage(), 0, $throwable);
+      // The HTTP client wraps what on_progress throws (a download over its size cap): that one is the project's fault.
+      for ($cause = $throwable->getPrevious(); null !== $cause; $cause = $cause->getPrevious()) {
+        if ($cause instanceof ScratchConversionException) {
+          throw $cause;
+        }
+      }
+
+      throw new ScratchConversionException('Could not reach Scratch. Please try again later.', ScratchConversionException::UPSTREAM, $throwable);
     }
   }
 }

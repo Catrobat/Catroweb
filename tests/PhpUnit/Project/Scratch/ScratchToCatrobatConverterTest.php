@@ -8,6 +8,7 @@ use App\Project\Scratch\Converter\AssetNormalizer;
 use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\Converter\ScratchToCatrobatConverter;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
 
@@ -181,16 +182,18 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="LOGICAL_NOT"]/rightChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
   }
 
-  public function testSharedReportersThatWouldExplodeAreRejectedQuicklyAndCheaply(): void
+  /** @param array<string, mixed> $last */
+  #[DataProvider('explodingSharedReporters')]
+  public function testSharedReportersThatWouldExplodeAreRejectedQuicklyAndCheaply(string $opcode, int $levels, array $last): void
   {
-    // 40 blocks, each using the next one twice: 2^40 formula nodes if every use were converted in full.
     $blocks = ['hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'say', 'topLevel' => true, 'inputs' => [], 'fields' => []]];
     $blocks['say'] = ['opcode' => 'looks_say', 'next' => null, 'inputs' => ['MESSAGE' => [3, 'r0', [10, '']]], 'fields' => []];
-    for ($i = 0; $i < 40; ++$i) {
-      $blocks['r'.$i] = ['opcode' => 'operator_add', 'inputs' => ['NUM1' => [3, 'r'.($i + 1), [4, '0']], 'NUM2' => [3, 'r'.($i + 1), [4, '0']]], 'fields' => []];
+    [$a, $b] = 'operator_join' === $opcode ? ['STRING1', 'STRING2'] : ['NUM1', 'NUM2'];
+    for ($i = 0; $i < $levels; ++$i) {
+      $blocks['r'.$i] = ['opcode' => $opcode, 'inputs' => [$a => [3, 'r'.($i + 1), [10, '']], $b => [3, 'r'.($i + 1), [10, '']]], 'fields' => []];
     }
 
-    $blocks['r40'] = ['opcode' => 'motion_xposition', 'inputs' => [], 'fields' => []];
+    $blocks['r'.$levels] = $last;
 
     memory_reset_peak_usage();
     $memory = memory_get_usage();
@@ -203,6 +206,15 @@ final class ScratchToCatrobatConverterTest extends TestCase
 
     $this->assertLessThan(5.0, microtime(true) - $start);
     $this->assertLessThan(64 * 1024 * 1024, memory_get_peak_usage() - $memory);
+  }
+
+  /** @return iterable<string, array{string, int, array<string, mixed>}> */
+  public static function explodingSharedReporters(): iterable
+  {
+    // 40 blocks, each using the next one twice: 2^40 formula nodes if every use were converted in full.
+    yield 'nodes' => ['operator_add', 40, ['opcode' => 'motion_xposition', 'inputs' => [], 'fields' => []]];
+    // 15 blocks and one 8 KiB string: few nodes, but 256 MiB of text.
+    yield 'text' => ['operator_join', 15, ['opcode' => 'operator_join', 'inputs' => ['STRING1' => [1, [10, str_repeat('x', 8192)]]], 'fields' => []]];
   }
 
   public function testAScriptThatRunsIntoItselfIsRejected(): void

@@ -143,6 +143,6 @@ class ScratchManager
 
     $this->logger->error('Scratch conversion failed', ['scratch_id' => $scratch_id, 'exception' => $throwable]);
 
-    return new ScratchConversionException('This Scratch project could not be converted.', 0, $throwable);
+    return new ScratchConversionException('This Scratch project could not be converted.', ScratchConversionException::INTERNAL, $throwable);
   }
 }

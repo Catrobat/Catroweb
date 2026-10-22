@@ -392,6 +392,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   public function projectsScratchScratchIdPost(int $scratch_id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Every request asks Scratch's API, even when our copy is current; converting is limited much harder.
+    if ($this->isCrossSiteRequest()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return ApiErrorResponse::createModel($responseCode, 'forbidden', 'Scratch projects can only be imported from this site.');
+    }
+
     $ip = $this->facade->getLoader()->getClientIp() ?? 'unknown';
     $converted = false;
     try {
@@ -413,6 +419,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         ScratchConversionException::NOT_FOUND => [Response::HTTP_NOT_FOUND, 'not_found'],
         ScratchConversionException::RATE_LIMITED => [Response::HTTP_TOO_MANY_REQUESTS, 'too_many_requests'],
         ScratchConversionException::BUSY => [Response::HTTP_SERVICE_UNAVAILABLE, 'service_unavailable'],
+        ScratchConversionException::UPSTREAM => [Response::HTTP_BAD_GATEWAY, 'bad_gateway'],
+        ScratchConversionException::INTERNAL => [Response::HTTP_INTERNAL_SERVER_ERROR, 'internal_server_error'],
         default => [Response::HTTP_UNPROCESSABLE_ENTITY, 'unprocessable_entity'],
       };
       if (Response::HTTP_SERVICE_UNAVAILABLE === $responseCode) {
@@ -428,6 +436,27 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
+  /**
+   * The import needs no login, so a form on another site could make visitors import projects and use up their quota.
+   * Browsers say where a request comes from; apps and scripts send no Origin and are allowed. Hosts, not schemes, are
+   * compared: behind a TLS-terminating proxy the request may look like plain http.
+   */
+  private function isCrossSiteRequest(): bool
+  {
+    $request = $this->request_stack->getCurrentRequest();
+    if (null === $request) {
+      return false;
+    }
+
+    if ('cross-site' === $request->headers->get('Sec-Fetch-Site')) {
+      return true;
+    }
+
+    $origin = $request->headers->get('Origin');
+
+    return null !== $origin && strtolower((string) parse_url($origin, PHP_URL_HOST)) !== strtolower($request->getHost());
   }
 
   #[\Override]

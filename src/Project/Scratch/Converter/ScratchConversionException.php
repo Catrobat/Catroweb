@@ -13,4 +13,7 @@ class ScratchConversionException extends \RuntimeException
   final public const int NOT_FOUND = 404;
   final public const int RATE_LIMITED = 429;
   final public const int BUSY = 503;
+  /** Scratch could not be reached or failed: not the project's fault, worth retrying later. */
+  final public const int UPSTREAM = 502;
+  final public const int INTERNAL = 500;
 }

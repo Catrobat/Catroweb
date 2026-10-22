@@ -19,6 +19,8 @@ final class BlockConverter
    */
   private const int MAX_DEPTH = 200;
   private const int MAX_NODES = 200_000;
+  // Text multiplies with sharing too: one 8 KiB string behind 15 levels of shared reporters is 256 MiB of XML.
+  private const int MAX_TEXT_BYTES = 16 * 1024 * 1024;
 
   /** @var array<string, array<string, mixed>> */
   private array $blocks = [];
@@ -35,6 +37,8 @@ final class BlockConverter
   private array $active = [];
 
   private int $nodes = 0;
+
+  private int $text_bytes = 0;
 
   public function __construct(
     private readonly \DOMDocument $doc,
@@ -213,7 +217,7 @@ final class BlockConverter
       throw new ScratchConversionException('The Scratch project is too large or too deeply nested to convert.');
     }
 
-    $this->spend();
+    $this->spend(self::textBytes($this->blocks[$id] ?? []));
     $this->active[$id] = true;
     try {
       return $convert();
@@ -222,9 +226,11 @@ final class BlockConverter
     }
   }
 
-  private function spend(): void
+  /** @param int $text_bytes text this step writes into the project: its fields, literals and messages */
+  private function spend(int $text_bytes = 0): void
   {
-    if (++$this->nodes > self::MAX_NODES || (0 === $this->nodes % 1024 && microtime(true) > $this->deadline)) {
+    $this->text_bytes += $text_bytes;
+    if (++$this->nodes > self::MAX_NODES || $this->text_bytes > self::MAX_TEXT_BYTES || (0 === $this->nodes % 1024 && microtime(true) > $this->deadline)) {
       throw new ScratchConversionException('The Scratch project is too large or too deeply nested to convert.');
     }
   }
@@ -621,9 +627,12 @@ final class BlockConverter
   /** @param 'number'|'text'|'bool' $kind */
   private function formulaOfInput(array $b, string $name, string $kind): Formula
   {
-    $this->spend();
     $input = $b['inputs'][$name] ?? null;
     $value = \is_array($input) ? ($input[1] ?? null) : null;
+    // Paid once per use: a literal, or a block's fields (a reporter pays again in guarded(), which errs on the safe side).
+    $literal = \is_array($value) ? ($value[1] ?? null) : null;
+    $block_text = \is_string($value) && isset($this->blocks[$value]) ? self::textBytes($this->blocks[$value]) : 0;
+    $this->spend(\is_scalar($literal) ? \strlen((string) $literal) : $block_text);
     $default = match ($kind) {
       'number' => Formula::number(0),
       'text' => Formula::string(''),
@@ -952,6 +961,19 @@ final class BlockConverter
     }
 
     return $element;
+  }
+
+  /** @param array<string, mixed> $block */
+  private static function textBytes(array $block): int
+  {
+    $bytes = \strlen(\is_scalar($block['opcode'] ?? null) ? (string) $block['opcode'] : '');
+    foreach ((array) ($block['fields'] ?? []) as $field) {
+      $bytes += \is_array($field) && \is_scalar($field[0] ?? null) ? \strlen((string) $field[0]) : 0;
+    }
+
+    $proccode = $block['mutation']['proccode'] ?? null;
+
+    return $bytes + (\is_scalar($proccode) ? \strlen((string) $proccode) : 0);
   }
 
   /** @return list<string> */

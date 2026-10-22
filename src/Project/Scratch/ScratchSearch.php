@@ -32,7 +32,8 @@ class ScratchSearch
   }
 
   /**
-   * Scratch reports no total: it is offset + count, plus one while the page is full, so "show more" stays offered.
+   * Scratch reports no total: it is offset + the size of Scratch's page, plus one while that page is full, so "show more"
+   * stays offered. Counted before imported projects are left out, which would otherwise shorten a full page.
    *
    * @return array{projects: list<array{id: string, name: string, username: string}>, total: int}
    */
@@ -64,7 +65,7 @@ class ScratchSearch
 
     return [
       'projects' => $projects,
-      'total' => $offset + \count($projects) + (\count($page) === $limit ? 1 : 0),
+      'total' => $offset + \count($page) + (\count($page) === $limit ? 1 : 0),
     ];
   }
 

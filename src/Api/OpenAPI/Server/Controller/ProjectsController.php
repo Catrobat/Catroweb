@@ -1724,9 +1724,12 @@ class ProjectsController extends Controller
       $message = match ($responseCode) {
         200 => 'An up-to-date copy already existed',
         201 => 'The Scratch project was converted',
+        403 => 'The request comes from another site (Origin or Sec-Fetch-Site header); browsers may only import from this site',
         404 => 'Scratch does not know the project, or it is not shared',
         422 => 'The project cannot be converted; the message says why and can be shown to the user',
         429 => 'Too Many Requests',
+        500 => 'The project could not be converted because of an unexpected error on this server',
+        502 => 'Scratch could not be reached or answered with an error; try again later',
         503 => 'Another Scratch project is being converted right now',
         default => '',
       };

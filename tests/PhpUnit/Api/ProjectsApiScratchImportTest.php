@@ -22,6 +22,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
@@ -87,6 +88,38 @@ final class ProjectsApiScratchImportTest extends TestCase
       'rate limited' => [ScratchConversionException::RATE_LIMITED, 429, 'too_many_requests'],
       'busy' => [ScratchConversionException::BUSY, 503, 'service_unavailable'],
       'unconvertible' => [0, 422, 'unprocessable_entity'],
+      'Scratch unreachable' => [ScratchConversionException::UPSTREAM, 502, 'bad_gateway'],
+      'unexpected failure' => [ScratchConversionException::INTERNAL, 500, 'internal_server_error'],
+    ];
+  }
+
+  /** @param array<string, string> $headers */
+  #[DataProvider('origins')]
+  public function testBrowsersMayOnlyImportFromThisSite(array $headers, int $status): void
+  {
+    $request = Request::create('http://share.catrobat.org/api/projects/scratch/70058680', 'POST');
+    $request->headers->add($headers);
+    $requests = new RequestStack();
+    $requests->push($request);
+
+    [$code, , $result] = $this->import($this->createApi(static fn (): Project => new Project(), requests: $requests));
+
+    $this->assertSame($status, $code);
+    if (403 === $status) {
+      $this->assertInstanceOf(ErrorResponse::class, $result);
+    }
+  }
+
+  /** @return array<string, array{array<string, string>, int}> */
+  public static function origins(): array
+  {
+    return [
+      'app or script, no Origin' => [[], 200],
+      'this site' => [['Origin' => 'https://share.catrobat.org', 'Sec-Fetch-Site' => 'same-origin'], 200],
+      'this site behind a TLS proxy' => [['Origin' => 'https://share.catrobat.org'], 200],
+      'form on another site' => [['Origin' => 'https://evil.example'], 403],
+      'another site, by fetch metadata' => [['Sec-Fetch-Site' => 'cross-site'], 403],
+      'opaque origin' => [['Origin' => 'null'], 403],
     ];
   }
 
@@ -122,7 +155,7 @@ final class ProjectsApiScratchImportTest extends TestCase
     return [$code, $headers, $result];
   }
 
-  private function createApi(\Closure $import, int $open_limit = 100, int $convert_limit = 100): ProjectsApi
+  private function createApi(\Closure $import, int $open_limit = 100, int $convert_limit = 100, RequestStack $requests = new RequestStack()): ProjectsApi
   {
     $loader = $this->createStub(ProjectsApiLoader::class);
     $loader->method('getClientIp')->willReturn('1.2.3.4');
@@ -146,7 +179,7 @@ final class ProjectsApiScratchImportTest extends TestCase
       $unlimited,
       $unlimited,
       $unlimited,
-      new RequestStack(),
+      $requests,
       new NullLogger(),
       $limiter('open', $open_limit),
       $limiter('burst', $convert_limit),

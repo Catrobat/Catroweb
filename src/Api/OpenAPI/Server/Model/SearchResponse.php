@@ -133,7 +133,7 @@ class SearchResponse
   protected ?array $scratch_projects = null;
 
   /**
-   * Scratch reports no total: offset plus the results returned, plus one while more may follow.
+   * Scratch reports no total: offset plus the size of Scratch&#39;s page (counted before imported projects are left out), plus one while that page is full.
    *
    * @SerializedName("scratch_projects_total")
    *
@@ -329,7 +329,7 @@ class SearchResponse
   /**
    * Sets scratch_projects_total.
    *
-   * @param int|null $scratch_projects_total scratch reports no total: offset plus the results returned, plus one while more may follow
+   * @param int|null $scratch_projects_total scratch reports no total: offset plus the size of Scratch's page (counted before imported projects are left out), plus one while that page is full
    *
    * @return $this
    */
