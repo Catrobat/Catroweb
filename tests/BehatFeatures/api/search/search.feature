@@ -123,7 +123,8 @@ Feature: Search projects and users
     Then the search response should contain 0 projects
     Then the search response should contain 0 users
 
-  Scenario: Scratch projects we know are found by name and Scratch username
+  # "there are Scratch projects" seeds what the fake Scratch search API (FakeScratchSearch) finds.
+  Scenario: Scratch's search results leave out projects already imported to Share
     Given there are Scratch projects:
       | id       | name             | username    | imported as |
       | 70058680 | Fritz goes Pong  | scratchcat  |             |

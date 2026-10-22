@@ -53,6 +53,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 30,
         'interval' => '1 minute',
       ],
+      // Every search not yet cached asks Scratch's search API live.
+      'scratch_search_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 30,
+        'interval' => '1 minute',
+      ],
       // Converting a Scratch project downloads and renders all its assets: count only real conversions, not cache hits.
       'scratch_convert_burst' => [
         'policy' => 'sliding_window',
