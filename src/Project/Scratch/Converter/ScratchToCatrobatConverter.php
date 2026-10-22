@@ -249,7 +249,8 @@ class ScratchToCatrobatConverter
         // Scratch's mouse stays where it was released: buttons that click on release ask "touching mouse-pointer?"
         // after the finger is gone, when Pocket Code's "touches finger" is already false. Remember where the sprite
         // was when the last touch hit it; BlockConverter::touching() counts that until the sprite moves.
-        // ponytail: a costume or size change after the release still counts as touching.
+        // ponytail: a costume or size change after the release still counts as touching, and a sprite moving onto
+        // the released spot does not; a touch screen has no resting pointer, so this stays an approximation.
         $remember = fn (): \DOMElement => $c->brick('ForeverBrick', [], [$c->list('loopBricks', [
           $c->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => Formula::sensor('FINGER_TOUCHED')], [$c->list('ifBranchBricks', [
             $c->brick('SetVariableBrick', [
