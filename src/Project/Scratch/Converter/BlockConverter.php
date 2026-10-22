@@ -294,6 +294,16 @@ final class BlockConverter
           return [$this->brick('SetLookBrick', [], [], [$look])];
         }
 
+        // A name that is no costume: Scratch reads it as a number, or does nothing.
+        if (null !== $name) {
+          return match (true) {
+            is_numeric($name) => [$this->brick('SetLookByIndexBrick', ['LOOK_INDEX' => self::wrapped(Formula::number((float) $name), $this->model->lookCount($this->sprite_key))])],
+            'next costume' === strtolower($name) => [$this->brick('NextLookBrick')],
+            'previous costume' === strtolower($name) => [$this->brick('PreviousLookBrick')],
+            default => [$this->note('switch to missing costume "'.$name.'"')],
+          };
+        }
+
         return [$this->brick('SetLookByIndexBrick', ['LOOK_INDEX' => self::byNameOrNumber($this->formulaOfInput($b, 'COSTUME', 'number'), $this->model->helper('costume names'), $this->model->lookCount($this->sprite_key))])];
       case 'looks_nextcostume': return [$this->brick('NextLookBrick')];
       case 'looks_switchbackdropto':
@@ -497,6 +507,11 @@ final class BlockConverter
     $look = null === $name ? null : $this->model->backdropLook($name);
     if (null !== $look) {
       return [$this->brick($wait ? 'SetBackgroundAndWaitBrick' : 'SetBackgroundBrick', [], [], [$look])];
+    }
+
+    // A name that is no backdrop: Scratch reads it as a number, or stays on the current one and fires its scripts again.
+    if (null !== $name) {
+      return [$this->brick($type, [$category => is_numeric($name) ? self::wrapped(Formula::number((float) $name), $count) : Formula::sensor('OBJECT_BACKGROUND_NUMBER')])];
     }
 
     return [$this->brick($type, [$category => self::byNameOrNumber($this->formulaOfInput($b, 'BACKDROP', 'number'), $this->model->helper('backdrop names'), $count)])];
@@ -796,13 +811,20 @@ final class BlockConverter
   private static function byNameOrNumber(Formula $value, string $names, int $count): Formula
   {
     $index = Formula::fn('INDEX_OF_ITEM', $value, Formula::userList($names));
-    // Numbers wrap around like in Scratch: costume 4 of 3 is costume 1. Not with MOD: Catroid's MOD adds the divisor
-    // in a loop until a negative dividend turns positive, which never ends for -1e20. ((r-1) - n*floor((r-1)/n)) + 1.
+
+    return Formula::fn('IF_THEN_ELSE', Formula::op('GREATER_THAN', $index, Formula::number(0)), $index, self::wrapped($value, $count));
+  }
+
+  /**
+   * Numbers wrap around like in Scratch: costume 4 of 3 is costume 1. Not with MOD: Catroid's MOD adds the divisor
+   * in a loop until a negative dividend turns positive, which never ends for -1e20. ((r-1) - n*floor((r-1)/n)) + 1.
+   */
+  private static function wrapped(Formula $value, int $count): Formula
+  {
     $zero_based = Formula::op('MINUS', Formula::fn('ROUND', $value), Formula::number(1));
     $n = Formula::number(max(1, $count));
-    $wrapped = Formula::op('PLUS', Formula::op('MINUS', $zero_based, Formula::op('MULT', $n, Formula::fn('FLOOR', Formula::op('DIVIDE', $zero_based, $n)))), Formula::number(1));
 
-    return Formula::fn('IF_THEN_ELSE', Formula::op('GREATER_THAN', $index, Formula::number(0)), $index, $wrapped);
+    return Formula::op('PLUS', Formula::op('MINUS', $zero_based, Formula::op('MULT', $n, Formula::fn('FLOOR', Formula::op('DIVIDE', $zero_based, $n)))), Formula::number(1));
   }
 
   private function unsupportedReporter(string $opcode): Formula
