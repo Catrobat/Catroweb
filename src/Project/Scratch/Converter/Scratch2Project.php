@@ -8,7 +8,6 @@ namespace App\Project\Scratch\Converter;
  * Turns a Scratch 2 project.json (projects not saved since 2019) into the Scratch 3 shape the converter reads.
  * A port of scratch-vm's src/serialization/sb2.js; the opcode table is generated from its sb2_specmap.js.
  * The format is frozen, so this needs no upkeep.
- * ponytail: costume text layers (Scratch 2 paint editor text) are dropped; scratch-vm renders them onto the costume.
  */
 final class Scratch2Project
 {
@@ -266,6 +265,8 @@ final class Scratch2Project
         'md5ext' => $md5.'.'.$extension, 'dataFormat' => $extension,
         'rotationCenterX' => $stage ? 240 * $resolution : ($costume['rotationCenterX'] ?? 0),
         'rotationCenterY' => $stage ? 180 * $resolution : ($costume['rotationCenterY'] ?? 0),
+        // Text typed in the Scratch 2 paint editor is a separate image drawn over the costume.
+        ...isset($costume['textLayerMD5']) ? ['textLayerMd5ext' => self::asset((string) $costume['textLayerMD5'], 'png')[0].'.png'] : [],
       ];
     }
 
@@ -332,7 +333,9 @@ final class Scratch2Project
 
     $old = $sb2[0];
     $spec = self::SPEC[$old] ?? match ($old) {
-      'whenSensorGreaterThan' => ['event_whengreaterthan', ['f', 'WHENGREATERTHANMENU'], ['i', 'VALUE', 'math_number']],
+      'whenSensorGreaterThan' => 'video motion' === ($sb2[1] ?? null)
+        ? ['videoSensing_whenMotionGreaterThan'] // unsupported, as in Scratch 3
+        : ['event_whengreaterthan', ['f', 'WHENGREATERTHANMENU'], ['i', 'VALUE', 'math_number']],
       default => ['scratch2_'.$old], // unknown: the converter reports it as unsupported
     };
     if ('call' === $old) { // ['call', proc code, ...arguments]

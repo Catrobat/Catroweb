@@ -193,7 +193,13 @@ class ScratchToCatrobatConverter
   {
     $looks = [];
     foreach ($target['costumes'] ?? [] as $costume) {
-      $png = $this->assets->costumeToPng($assets[(string) $costume['md5ext']] ?? throw new ScratchConversionException('Missing costume.'), $costume, $deadline);
+      $bytes = $assets[(string) $costume['md5ext']] ?? throw new ScratchConversionException('Missing costume.');
+      if (isset($costume['textLayerMd5ext'], $assets[(string) $costume['textLayerMd5ext']])) {
+        $bytes = $this->assets->withTextLayer($bytes, $assets[(string) $costume['textLayerMd5ext']]);
+        $costume['dataFormat'] = 'png';
+      }
+
+      $png = $this->assets->costumeToPng($bytes, $costume, $deadline);
       $file = self::uniqueFile($files, self::SCENE.'/images/', (string) $costume['name'], (string) $costume['assetId'], 'png');
       $files[self::SCENE.'/images/'.$file] = $png;
       $looks[] = ['name' => (string) $costume['name'], 'file' => $file];

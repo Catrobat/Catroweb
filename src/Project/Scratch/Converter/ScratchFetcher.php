@@ -75,12 +75,15 @@ class ScratchFetcher
           throw new ScratchConversionException('The Scratch project has too many costumes and sounds to convert.');
         }
 
-        $md5ext = (string) ($asset['md5ext'] ?? '');
-        if (1 !== preg_match('/^[0-9a-f]{32}\.(svg|png|jpg|jpeg|gif|bmp|wav|mp3)$/', $md5ext)) {
-          throw new ScratchConversionException('Unexpected asset name: '.$md5ext);
-        }
+        // A Scratch 2 costume may carry a text layer (see Scratch2Project).
+        foreach ([$asset['md5ext'] ?? '', ...isset($asset['textLayerMd5ext']) ? [$asset['textLayerMd5ext']] : []] as $md5ext) {
+          $md5ext = (string) $md5ext;
+          if (1 !== preg_match('/^[0-9a-f]{32}\.(svg|png|jpg|jpeg|gif|bmp|wav|mp3)$/', $md5ext)) {
+            throw new ScratchConversionException('Unexpected asset name: '.$md5ext);
+          }
 
-        $md5exts[$md5ext] = true;
+          $md5exts[$md5ext] = true;
+        }
       }
     }
 

@@ -156,6 +156,26 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(6, \ord($png[25]), 'PNG color type RGBA; Pocket Code reads grayscale as alpha');
   }
 
+  public function testAScratch2TextLayerIsDrawnOverItsCostume(): void
+  {
+    $png = static function (string $color): string {
+      $image = new \Imagick();
+      $image->newImage(1, 1, new \ImagickPixel($color), 'png');
+
+      return $image->getImageBlob();
+    };
+    $color = static function (string $png): array {
+      $image = new \Imagick();
+      $image->readImageBlob($png);
+
+      return $image->getImagePixelColor(0, 0)->getColor();
+    };
+    $normalizer = new AssetNormalizer();
+
+    $this->assertSame(['r' => 0, 'g' => 0, 'b' => 255, 'a' => 1], $color($normalizer->withTextLayer($png('red'), $png('blue'))));
+    $this->assertSame(['r' => 255, 'g' => 0, 'b' => 0, 'a' => 1], $color($normalizer->withTextLayer($png('red'), $png('transparent'))));
+  }
+
   public function testAnAbsurdRotationCenterDoesNotAllocateAHugeCanvas(): void
   {
     $pixel = (string) base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', true);

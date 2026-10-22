@@ -62,7 +62,7 @@ final class Scratch2ProjectTest extends TestCase
   {
     $project = Scratch2Project::toScratch3(['objName' => 'Stage', 'costumes' => [['costumeName' => 'bg', 'baseLayerMD5' => 'aa.png', 'bitmapResolution' => 2]], 'children' => [
       ['objName' => 'Cat', 'scratchX' => 10, 'scratchY' => -5, 'scale' => 0.5, 'direction' => 270, 'rotationStyle' => 'leftRight',
-        'costumes' => [['costumeName' => 'c', 'baseLayerMD5' => 'bb.svg', 'rotationCenterX' => 3, 'rotationCenterY' => 4]],
+        'costumes' => [['costumeName' => 'c', 'baseLayerMD5' => 'bb.svg', 'rotationCenterX' => 3, 'rotationCenterY' => 4], ['costumeName' => 't', 'baseLayerMD5' => 'dd.png', 'textLayerMD5' => 'ee.png']],
         'sounds' => [['soundName' => 'meow', 'md5' => 'cc.wav']]],
       ['target' => 'Cat', 'cmd' => 'getVar:'], // a watcher, not a sprite
     ]]);
@@ -72,7 +72,15 @@ final class Scratch2ProjectTest extends TestCase
     $this->assertSame([10, -5, 50.0, -90.0, 'left-right'], [$cat['x'], $cat['y'], $cat['size'], $cat['direction'], $cat['rotationStyle']]);
     $this->assertSame(['bb.svg', 'svg'], [$cat['costumes'][0]['md5ext'], $cat['costumes'][0]['dataFormat']]);
     $this->assertSame('cc.wav', $cat['sounds'][0]['md5ext']);
+    $this->assertSame('ee.png', $cat['costumes'][1]['textLayerMd5ext']);
     $this->assertCount(2, $project['targets']);
+  }
+
+  public function testVideoMotionHatsStayUnsupported(): void
+  {
+    $blocks = $this->translate([['whenSensorGreaterThan', 'video motion', 10]])['blocks'];
+
+    $this->assertSame(['videoSensing_whenMotionGreaterThan'], array_column($blocks, 'opcode'));
   }
 
   /**
