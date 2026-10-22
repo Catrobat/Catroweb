@@ -99,16 +99,18 @@ Feature: Searching for projects & users
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Results for"
-    Then I should see "No projects found"
-    Then I should see "No users found"
+    And I should see "No results for “gmail”"
+    And the element "#search-projects" should not be visible
+    And the element "#search-users" should not be visible
 
   Scenario: search for gmx should find no project
     Given I am on "/app/search/gmx.at"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Results for"
-    Then I should see "No projects found"
-    Then I should see "No users found"
+    And I should see "No results for “gmx.at”"
+    And the element "#search-projects" should not be visible
+    And the element "#search-users" should not be visible
 
 
   Scenario: search for projects, which contain the word "User"
@@ -158,7 +160,8 @@ Feature: Searching for projects & users
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Test advanced app"
-    Then I should see "No users found"
+    And the element "#search-empty-summary" should contain "No users found"
+    And the element "#search-users" should not be visible
 
   Scenario: Scratch projects show up with a badge and open through the converter
     Given there are Scratch projects:
@@ -180,5 +183,5 @@ Feature: Searching for projects & users
     Given I am on "/app/search/gmail"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "No projects found"
+    Then I should see "No results for"
     And the element "#search-scratch-projects" should not be visible

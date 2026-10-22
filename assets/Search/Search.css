@@ -947,9 +947,10 @@
   background: rgba(0, 0, 0, 0.15);
   border-radius: 2px;
 }
+/* The empty sections, collapsed into one line below the ones with results. */
 .search-section__empty {
   width: 100%;
-  padding: 1.5rem 1rem;
+  padding: 0.5rem 1rem 1.25rem;
   text-align: center;
   color: var(--bs-secondary-color);
   font-size: 0.9rem;

@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     noProjects: container.dataset.transNoProjects || 'No projects found',
     noUsers: container.dataset.transNoUsers || 'No users found',
     noStudios: container.dataset.transNoStudios || 'No studios found',
+    noResults: container.dataset.transNoResults || 'No results for “%query%”',
     showMore: container.dataset.transShowMore || 'Show more',
     members: container.dataset.transMembers || 'members',
     scratchProjects: container.dataset.transScratchProjects || 'Scratch projects',
@@ -83,10 +84,16 @@ function renderPage(container, query, theme, baseUrl, trans) {
   container.appendChild(studiosSection)
   container.appendChild(scratchSection)
 
+  // Fixed priority, not relevance: scores from different indexes (and Scratch, which has none) don't compare.
+  const sections = [
+    { section: projectsSection, empty: trans.noProjects },
+    { section: scratchSection, empty: null },
+    { section: usersSection, empty: trans.noUsers },
+    { section: studiosSection, empty: trans.noStudios },
+  ]
+
   if (!query) {
-    showEmpty(projectsSection, trans.noProjects)
-    showEmpty(usersSection, trans.noUsers)
-    showEmpty(studiosSection, trans.noStudios)
+    arrangeSections(container, sections, [], query, trans)
     return
   }
 
@@ -103,7 +110,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
       return response.json()
     })
     .then((data) => {
-      renderProjects(projectsSection, data.projects || [], theme, trans)
+      renderProjects(projectsSection, data.projects || [], theme)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
       renderScratchProjects(
@@ -115,6 +122,19 @@ function renderPage(container, query, theme, baseUrl, trans) {
         trans,
       )
 
+      arrangeSections(
+        container,
+        sections,
+        [
+          (data.projects || []).length > 0,
+          !scratchSection.classList.contains('d-none'),
+          (data.users || []).length > 0,
+          (data.studios || []).length > 0,
+        ],
+        query,
+        trans,
+      )
+
       wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
       wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
       wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
@@ -122,10 +142,27 @@ function renderPage(container, query, theme, baseUrl, trans) {
     })
     .catch((error) => {
       console.error('Search API error:', error)
-      showEmpty(projectsSection, trans.noProjects)
-      showEmpty(usersSection, trans.noUsers)
-      showEmpty(studiosSection, trans.noStudios)
+      arrangeSections(container, sections, [], query, trans)
     })
+}
+
+// Sections with results first, in their fixed order; the empty ones collapse into one line at the bottom.
+function arrangeSections(container, sections, hasResults, query, trans) {
+  const empties = []
+  sections.forEach(({ section, empty }, i) => {
+    section.classList.toggle('d-none', !hasResults[i])
+    container.appendChild(section)
+    if (!hasResults[i] && empty) empties.push(empty)
+  })
+
+  const summary = document.createElement('p')
+  summary.id = 'search-empty-summary'
+  summary.className = 'search-section__empty'
+  summary.textContent =
+    query && !hasResults.some(Boolean)
+      ? trans.noResults.replace('%query%', query)
+      : empties.join(' · ')
+  if (summary.textContent) container.appendChild(summary)
 }
 
 function wireShowMore(section, type, query, baseUrl, theme, trans) {
@@ -260,12 +297,11 @@ function createSection(id, variant, title, showMoreText) {
   return section
 }
 
-function renderProjects(section, projects, theme, trans) {
+function renderProjects(section, projects, theme) {
   const items = section.querySelector('.search-section__items')
   items.innerHTML = ''
 
   if (projects.length === 0) {
-    showEmpty(section, trans.noProjects)
     return
   }
 
@@ -294,7 +330,6 @@ function renderUsers(section, users, baseUrl, trans) {
   items.innerHTML = ''
 
   if (users.length === 0) {
-    showEmpty(section, trans.noUsers)
     return
   }
 
@@ -322,7 +357,6 @@ function renderStudios(section, studios, baseUrl, trans) {
   items.innerHTML = ''
 
   if (studios.length === 0) {
-    showEmpty(section, trans.noStudios)
     return
   }
 
@@ -486,15 +520,4 @@ function createCard(url, variants, size, fallback, name, metaIcon, metaText, blu
   a.appendChild(meta)
 
   return a
-}
-
-function showEmpty(section, message) {
-  const items = section.querySelector('.search-section__items')
-  if (items) {
-    items.innerHTML = ''
-    const p = document.createElement('p')
-    p.className = 'search-section__empty'
-    p.textContent = message
-    items.appendChild(p)
-  }
 }
