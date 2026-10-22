@@ -25,9 +25,6 @@ class ProjectAsset
   #[ORM\Column(name: 'mime_type', type: Types::STRING, length: 127)]
   private string $mimeType;
 
-  #[ORM\Column(name: 'reference_count', type: Types::INTEGER, options: ['default' => 0])]
-  private int $referenceCount = 0;
-
   #[ORM\Column(name: 'storage_path', type: Types::STRING, length: 255)]
   private string $storagePath;
 
@@ -58,11 +55,6 @@ class ProjectAsset
     return $this->mimeType;
   }
 
-  public function getReferenceCount(): int
-  {
-    return $this->referenceCount;
-  }
-
   public function getStoragePath(): string
   {
     return $this->storagePath;
@@ -71,15 +63,5 @@ class ProjectAsset
   public function getCreatedAt(): \DateTimeImmutable
   {
     return $this->createdAt;
-  }
-
-  public function incrementReferenceCount(): void
-  {
-    ++$this->referenceCount;
-  }
-
-  public function decrementReferenceCount(): void
-  {
-    $this->referenceCount = max(0, $this->referenceCount - 1);
   }
 }

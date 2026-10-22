@@ -34,7 +34,7 @@ class ContentAddressableStore
    */
   public function store(string $sourceFilePath, string $hash): string
   {
-    $relativePath = $this->buildRelativePath($hash);
+    $relativePath = $this->relativePath($hash);
     $absolutePath = $this->assetsDir.$relativePath;
 
     if (file_exists($absolutePath)) {
@@ -60,7 +60,7 @@ class ContentAddressableStore
 
   public function getAbsolutePath(string $hash): ?string
   {
-    $path = $this->assetsDir.$this->buildRelativePath($hash);
+    $path = $this->assetsDir.$this->relativePath($hash);
 
     return file_exists($path) ? $path : null;
   }
@@ -72,7 +72,7 @@ class ContentAddressableStore
 
   public function delete(string $hash): bool
   {
-    $path = $this->assetsDir.$this->buildRelativePath($hash);
+    $path = $this->assetsDir.$this->relativePath($hash);
     if (!file_exists($path)) {
       return false;
     }
@@ -94,13 +94,13 @@ class ContentAddressableStore
 
   public function exists(string $hash): bool
   {
-    return file_exists($this->assetsDir.$this->buildRelativePath($hash));
+    return file_exists($this->assetsDir.$this->relativePath($hash));
   }
 
   /**
    * Build relative path: {hash[0:2]}/{hash[2:4]}/{hash}.
    */
-  private function buildRelativePath(string $hash): string
+  public function relativePath(string $hash): string
   {
     return substr($hash, 0, 2).'/'.substr($hash, 2, 2).'/'.$hash;
   }
