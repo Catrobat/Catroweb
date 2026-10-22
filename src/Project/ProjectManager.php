@@ -36,7 +36,6 @@ use OpenAPI\Server\Model\ImageVariants;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -226,57 +225,43 @@ class ProjectManager
 
     $this->addTags($project, $extracted_file);
 
-    $this->event_dispatcher->dispatch(new ProjectBeforePersistEvent($extracted_file, $project));
-
-    $this->entity_manager->persist($project);
-    $this->entity_manager->flush();
-    $this->entity_manager->refresh($project);
-
-    // Extensions are added via the ProjectExtensionListener!
-
+    // One transaction for the row and its screenshot (the before-persist listeners flush too): a failure rolls
+    // back only what this upload wrote, so an update keeps the existing project.
+    // ponytail: a replaced screenshot is not restored if promoting its thumbnail fails, back it up if that matters.
+    $this->entity_manager->beginTransaction();
     try {
+      $this->event_dispatcher->dispatch(new ProjectBeforePersistEvent($extracted_file, $project));
+      $this->entity_manager->persist($project);
+      $this->entity_manager->flush();
+      $this->entity_manager->refresh($project);
+      // Extensions are added via the ProjectExtensionListener!
+
       if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->saveProjectAssetsTemp($extracted_file->getScreenshotPath(), $project->getId());
-      }
-    } catch (\Exception $exception) {
-      $this->logger->error('UploadError -> saveProjectAssetsTemp failed!', ['exception' => $exception->getMessage()]);
-      $project_id = $project->getId();
-      $this->entity_manager->remove($project);
-      $this->entity_manager->flush();
-      try {
-        $this->screenshot_repository->deleteTempFilesForProject($project_id);
-      } catch (IOException $error) {
-        $this->logger->error('UploadError -> deleteTempFilesForProject failed!', ['exception' => $error]);
-        throw $error;
-      }
-
-      return null;
-    }
-
-    try {
-      if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->makeTempProjectAssetsPerm($project->getId());
       }
-    } catch (\Exception $exception) {
-      $this->logger->error('UploadError -> makeTempProjectPerm failed!', ['exception' => $exception]);
+
+      $this->entity_manager->commit();
+    } catch (\Throwable $throwable) {
+      if ($this->entity_manager->getConnection()->isTransactionActive()) {
+        $this->entity_manager->rollback();
+      }
+
+      if (!$this->entity_manager->isOpen()) {
+        throw $throwable;
+      }
+
+      // Drop the rejected changes, so nothing flushed later in this request writes them.
+      $this->entity_manager->clear();
+      $this->logger->error('UploadError -> saving the screenshot failed!', ['exception' => $throwable]);
       $project_id = $project->getId();
-      $this->entity_manager->remove($project);
-      $this->entity_manager->flush();
-      try {
-        $this->screenshot_repository->deletePermProjectAssets($project_id);
-      } catch (IOException $error) {
-        $this->logger->error(
-          'UploadError -> deletePermProjectAssets or deleteProjectFile failed!', ['exception' => $error]
-        );
-        throw $error;
+      if (null === $old_project && null !== $project_id) {
+        $this->screenshot_repository->deleteScreenshot($project_id);
+        $this->screenshot_repository->deleteThumbnail($project_id);
       }
 
       return null;
     }
-
-    $this->entity_manager->persist($project);
-    $this->entity_manager->flush();
-    $this->entity_manager->refresh($project);
 
     // Safe file replacement: rename old zip before saving new one, restore on failure
     $project_id = $project->getId() ?? throw new \RuntimeException('Project ID must not be null after persist');

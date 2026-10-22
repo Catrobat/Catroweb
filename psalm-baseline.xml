@@ -257,8 +257,6 @@
       <code><![CDATA[$extracted_file->getScreenshotPath()]]></code>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project_id]]></code>
-      <code><![CDATA[$project_id]]></code>
       <code><![CDATA[$request->getIp()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
