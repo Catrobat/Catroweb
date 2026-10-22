@@ -20,11 +20,11 @@ final class Formula
    * @param list<Formula> $extra additionalChildren (third and later function arguments)
    */
   private function __construct(
-    public readonly string $type,
-    public readonly ?string $value,
-    public readonly ?Formula $left = null,
-    public readonly ?Formula $right = null,
-    public readonly array $extra = [],
+    private readonly string $type,
+    private readonly ?string $value,
+    private readonly ?Formula $left = null,
+    private readonly ?Formula $right = null,
+    private readonly array $extra = [],
   ) {
   }
 

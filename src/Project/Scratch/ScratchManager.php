@@ -43,7 +43,6 @@ class ScratchManager
    */
   public function importProject(int $scratch_id, callable $before_conversion, ?string $ip): Project
   {
-    /** @var Project|null $existing */
     $existing = $this->project_manager->findOneByScratchId($scratch_id);
     $converted = null !== $existing && $existing->getFilesize() > 0 ? $existing : null;
 

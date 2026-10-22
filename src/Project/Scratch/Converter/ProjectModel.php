@@ -33,7 +33,7 @@ final class ProjectModel
   /** @var array<string, string> variable/list key => device key UUID */
   private array $device_keys = [];
 
-  /** @var array<string, array{sprite: ?string, formula: Formula}> program variable name => value source */
+  /** @var array<string, array{sprite: string, formula: Formula}> program variable name => value source */
   private array $shadows = [];
 
   /** @var array<string, true> sprite keys that receive "create clone of" broadcasts */
@@ -291,7 +291,7 @@ final class ProjectModel
     return Formula::variable($name);
   }
 
-  /** @return array<string, array{sprite: ?string, formula: Formula}> */
+  /** @return array<string, array{sprite: string, formula: Formula}> */
   public function shadows(): array
   {
     return $this->shadows;

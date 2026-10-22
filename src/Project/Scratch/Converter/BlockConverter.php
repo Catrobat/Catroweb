@@ -39,7 +39,7 @@ final class BlockConverter
   public function __construct(
     private readonly \DOMDocument $doc,
     private readonly ProjectModel $model,
-    private readonly float $deadline = INF,
+    private readonly float $deadline,
   ) {
   }
 
@@ -110,7 +110,7 @@ final class BlockConverter
 
         return $this->conditionScript(Formula::op('GREATER_THAN', Formula::sensor($sensor), $this->number($hat, 'VALUE')), $body());
       case 'event_whentouchingobject':
-        return $this->conditionScript($this->touching($this->menu($hat, 'TOUCHINGOBJECTMENU', 'TOUCHINGOBJECTMENU')), $body());
+        return $this->conditionScript($this->touching($this->menu($hat, 'TOUCHINGOBJECTMENU')), $body());
       case 'event_whenkeypressed':
         $key = $this->field($hat, 'KEY_OPTION');
 
@@ -246,18 +246,18 @@ final class BlockConverter
       case 'motion_turnleft': return [$this->brick('TurnLeftBrick', ['TURN_LEFT_DEGREES' => $this->number($b, 'DEGREES')])];
       case 'motion_gotoxy': return [$this->brick('PlaceAtBrick', ['X_POSITION' => $this->number($b, 'X'), 'Y_POSITION' => $this->number($b, 'Y')])];
       case 'motion_goto':
-        [$x, $y] = $this->targetPosition($this->menu($b, 'TO', 'TO'));
+        [$x, $y] = $this->targetPosition($this->menu($b, 'TO'));
 
         return [$this->brick('PlaceAtBrick', ['X_POSITION' => $x, 'Y_POSITION' => $y])];
       case 'motion_glidesecstoxy':
         return [$this->brick('GlideToBrick', ['DURATION_IN_SECONDS' => $this->number($b, 'SECS'), 'X_DESTINATION' => $this->number($b, 'X'), 'Y_DESTINATION' => $this->number($b, 'Y')])];
       case 'motion_glideto':
-        [$x, $y] = $this->targetPosition($this->menu($b, 'TO', 'TO'));
+        [$x, $y] = $this->targetPosition($this->menu($b, 'TO'));
 
         return [$this->brick('GlideToBrick', ['DURATION_IN_SECONDS' => $this->number($b, 'SECS'), 'X_DESTINATION' => $x, 'Y_DESTINATION' => $y])];
       case 'motion_pointindirection': return [$this->brick('PointInDirectionBrick', ['DEGREES' => $this->number($b, 'DIRECTION')])];
       case 'motion_pointtowards':
-        $towards = $this->menu($b, 'TOWARDS', 'TOWARDS');
+        $towards = $this->menu($b, 'TOWARDS');
         if ('_random_' === $towards) {
           return [$this->brick('PointInDirectionBrick', ['DEGREES' => Formula::fn('RAND', Formula::number(-180), Formula::number(180))])];
         }
@@ -278,12 +278,12 @@ final class BlockConverter
         return [$this->brick('SetRotationStyleBrick', [], [], [$this->text('selection', $style)])];
 
         // looks
-      case 'looks_say': return [$this->brick('SayBubbleBrick', ['STRING' => $this->text_input($b, 'MESSAGE')])];
-      case 'looks_sayforsecs': return [$this->brick('SayForBubbleBrick', ['STRING' => $this->text_input($b, 'MESSAGE'), 'DURATION_IN_SECONDS' => $this->number($b, 'SECS')])];
-      case 'looks_think': return [$this->brick('ThinkBubbleBrick', ['STRING' => $this->text_input($b, 'MESSAGE')])];
-      case 'looks_thinkforsecs': return [$this->brick('ThinkForBubbleBrick', ['STRING' => $this->text_input($b, 'MESSAGE'), 'DURATION_IN_SECONDS' => $this->number($b, 'SECS')])];
+      case 'looks_say': return [$this->brick('SayBubbleBrick', ['STRING' => $this->textInput($b, 'MESSAGE')])];
+      case 'looks_sayforsecs': return [$this->brick('SayForBubbleBrick', ['STRING' => $this->textInput($b, 'MESSAGE'), 'DURATION_IN_SECONDS' => $this->number($b, 'SECS')])];
+      case 'looks_think': return [$this->brick('ThinkBubbleBrick', ['STRING' => $this->textInput($b, 'MESSAGE')])];
+      case 'looks_thinkforsecs': return [$this->brick('ThinkForBubbleBrick', ['STRING' => $this->textInput($b, 'MESSAGE'), 'DURATION_IN_SECONDS' => $this->number($b, 'SECS')])];
       case 'looks_switchcostumeto':
-        $name = $this->menu($b, 'COSTUME', 'COSTUME');
+        $name = $this->menu($b, 'COSTUME');
         $look = null === $name ? null : $this->model->look($this->sprite_key, $name);
         if (null !== $look) {
           return [$this->brick('SetLookBrick', [], [], [$look])];
@@ -293,9 +293,9 @@ final class BlockConverter
       case 'looks_nextcostume': return [$this->brick('NextLookBrick')];
       case 'looks_switchbackdropto':
       case 'looks_nextbackdrop':
-        return $this->switchBackdrop('looks_nextbackdrop' === $opcode ? 'next backdrop' : $this->menu($b, 'BACKDROP', 'BACKDROP'), $b, false);
+        return $this->switchBackdrop('looks_nextbackdrop' === $opcode ? 'next backdrop' : $this->menu($b, 'BACKDROP'), $b, false);
       case 'looks_switchbackdroptoandwait':
-        return $this->switchBackdrop($this->menu($b, 'BACKDROP', 'BACKDROP'), $b, true);
+        return $this->switchBackdrop($this->menu($b, 'BACKDROP'), $b, true);
       case 'looks_seteffectto':
       case 'looks_changeeffectby':
         return $this->effect($b, 'looks_seteffectto' === $opcode);
@@ -354,7 +354,7 @@ final class BlockConverter
 
         return [$this->brick('StopScriptBrick', [], [], [$this->text('spinnerSelection', $selection)])];
       case 'control_create_clone_of':
-        $of = $this->menu($b, 'CLONE_OPTION', 'CLONE_OPTION');
+        $of = $this->menu($b, 'CLONE_OPTION');
         if (null === $of || '_myself_' === $of) {
           return [$this->brick('CloneBrick')];
         }
@@ -372,10 +372,10 @@ final class BlockConverter
       case 'control_delete_this_clone': return [$this->brick('DeleteThisCloneBrick')];
         // sensing
       case 'sensing_askandwait':
-        return [$this->brick('AskBrick', ['ASK_QUESTION' => $this->text_input($b, 'QUESTION')], [], [$this->model->variableElement(null, $this->model->helper('answer'))])];
+        return [$this->brick('AskBrick', ['ASK_QUESTION' => $this->textInput($b, 'QUESTION')], [], [$this->model->variableElement(null, $this->model->helper('answer'))])];
       case 'sensing_resettimer': return [$this->brick('ResetTimerBrick')];
         // data
-      case 'data_setvariableto': return [$this->brick('SetVariableBrick', ['VARIABLE' => $this->text_input($b, 'VALUE')], [], [$this->variable($b)])];
+      case 'data_setvariableto': return [$this->brick('SetVariableBrick', ['VARIABLE' => $this->textInput($b, 'VALUE')], [], [$this->variable($b)])];
       case 'data_changevariableby':
         // Catroid's ChangeVariableBrick skips variables that hold text, such as "0" after a set; PLUS reads numeric text.
         $sum = Formula::op('PLUS', Formula::variable($this->field($b, 'VARIABLE')), $this->number($b, 'VALUE'));
@@ -383,8 +383,8 @@ final class BlockConverter
         return [$this->brick('SetVariableBrick', ['VARIABLE' => $sum], [], [$this->variable($b)])];
       case 'data_showvariable':
         return [$this->brick('ShowTextBrick', ['X_POSITION' => Formula::number(-220), 'Y_POSITION' => Formula::number(160)], [], [$this->variable($b)])];
-      case 'data_hidevariable': return [$this->brick('HideTextBrick', [], [], [$this->variable($b)], formula_list: false)];
-      case 'data_addtolist': return [$this->brick('AddItemToUserListBrick', ['LIST_ADD_ITEM' => $this->text_input($b, 'ITEM')], [], [$this->userList($b)])];
+      case 'data_hidevariable': return [$this->brick('HideTextBrick', [], [], [$this->variable($b)])];
+      case 'data_addtolist': return [$this->brick('AddItemToUserListBrick', ['LIST_ADD_ITEM' => $this->textInput($b, 'ITEM')], [], [$this->userList($b)])];
       case 'data_deleteoflist':
         $index = $this->listIndex($b, 'INDEX');
 
@@ -394,12 +394,12 @@ final class BlockConverter
       case 'data_deletealloflist': return [$this->brick('ClearUserListBrick', [], [], [$this->userList($b)], formula_list: true)];
       case 'data_insertatlist':
         return [$this->brick('InsertItemIntoUserListBrick', [
-          'INSERT_ITEM_INTO_USERLIST_VALUE' => $this->text_input($b, 'ITEM'),
+          'INSERT_ITEM_INTO_USERLIST_VALUE' => $this->textInput($b, 'ITEM'),
           'INSERT_ITEM_INTO_USERLIST_INDEX' => $this->listIndex($b, 'INDEX', true) ?? Formula::number(1),
         ], [], [$this->userList($b)])];
       case 'data_replaceitemoflist':
         return [$this->brick('ReplaceItemInUserListBrick', [
-          'REPLACE_ITEM_IN_USERLIST_VALUE' => $this->text_input($b, 'ITEM'),
+          'REPLACE_ITEM_IN_USERLIST_VALUE' => $this->textInput($b, 'ITEM'),
           'REPLACE_ITEM_IN_USERLIST_INDEX' => $this->listIndex($b, 'INDEX') ?? Formula::number(1),
         ], [], [$this->userList($b)])];
 
@@ -523,7 +523,7 @@ final class BlockConverter
       $list->appendChild($formula->toElement($this->doc, 'formula', ['input' => $procedure['names'][$i]]));
     }
 
-    $brick = $this->brick('UserDefinedBrick', [], [], [], formula_list: false);
+    $brick = $this->brick('UserDefinedBrick');
     $brick->appendChild($list);
     $brick->appendChild($this->text('isCallingBrick', 'true'));
     $brick->appendChild($this->dataList($proccode));
@@ -608,7 +608,7 @@ final class BlockConverter
     return $this->formulaOfInput($b, $name, 'number');
   }
 
-  private function text_input(array $b, string $name): Formula
+  private function textInput(array $b, string $name): Formula
   {
     return $this->formulaOfInput($b, $name, 'text');
   }
@@ -667,7 +667,7 @@ final class BlockConverter
   {
     $opcode = (string) ($r['opcode'] ?? '');
     $n = fn (string $name): Formula => $this->number($r, $name);
-    $t = fn (string $name): Formula => $this->text_input($r, $name);
+    $t = fn (string $name): Formula => $this->textInput($r, $name);
     $c = fn (string $name): Formula => $this->condition($r, $name);
 
     switch ($opcode) {
@@ -723,11 +723,11 @@ final class BlockConverter
         return $this->model->shadowVariable(null, $name ? 'backdrop name' : 'backdrop #') ?? $this->unsupportedReporter($opcode);
       case 'sound_volume': return Formula::number(100);
         // sensing
-      case 'sensing_touchingobject': return $this->touching($this->menu($r, 'TOUCHINGOBJECTMENU', 'TOUCHINGOBJECTMENU'));
+      case 'sensing_touchingobject': return $this->touching($this->menu($r, 'TOUCHINGOBJECTMENU'));
       case 'sensing_touchingcolor': return Formula::fn('COLLIDES_WITH_COLOR', $t('COLOR'));
       case 'sensing_coloristouchingcolor': return Formula::fn('COLOR_TOUCHES_COLOR', $t('COLOR'), $t('COLOR2'));
       case 'sensing_distanceto':
-        $to = $this->menu($r, 'DISTANCETOMENU', 'DISTANCETOMENU');
+        $to = $this->menu($r, 'DISTANCETOMENU');
         if ('_mouse_' === $to) {
           return Formula::sensor('OBJECT_DISTANCE_TO');
         }
@@ -798,7 +798,7 @@ final class BlockConverter
 
   private function sensingOf(array $r): Formula
   {
-    $object = $this->menu($r, 'OBJECT', 'OBJECT');
+    $object = $this->menu($r, 'OBJECT');
     $property = $this->field($r, 'PROPERTY');
     if (null === $object) {
       return $this->unsupportedReporter('sensing_of');
@@ -883,23 +883,21 @@ final class BlockConverter
       return null;
     }
 
-    $block = $this->blocks[$value];
-
-    $fields = $block['fields'] ?? [];
+    $fields = $this->blocks[$value]['fields'] ?? [];
 
     return [] === $fields ? null : (string) (reset($fields)[0] ?? '');
   }
 
-  /** Selected value of a menu input (its shadow block holds the field), or null if a reporter was dropped in. */
-  private function menu(array $b, string $input, string $field): ?string
+  /** Selected value of a menu input (its shadow block holds the same-named field), or null if a reporter was dropped in. */
+  private function menu(array $b, string $name): ?string
   {
-    if (isset($b['fields'][$field])) {
-      return $this->field($b, $field);
+    if (isset($b['fields'][$name])) {
+      return $this->field($b, $name);
     }
 
-    $block = $this->blocks[$this->inputBlockId($b, $input) ?? ''] ?? null;
+    $block = $this->blocks[$this->inputBlockId($b, $name) ?? ''] ?? null;
 
-    return null !== $block && ($block['shadow'] ?? false) ? $this->field($block, $field) : null;
+    return null !== $block && ($block['shadow'] ?? false) ? $this->field($block, $name) : null;
   }
 
   private function broadcastName(array $b): ?string
@@ -916,7 +914,7 @@ final class BlockConverter
 
   private function soundOf(array $b): ?\DOMElement
   {
-    $name = $this->menu($b, 'SOUND_MENU', 'SOUND_MENU');
+    $name = $this->menu($b, 'SOUND_MENU');
 
     return null === $name ? null : $this->model->sound($this->sprite_key, $name);
   }

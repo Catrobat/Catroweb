@@ -17,9 +17,9 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  */
 class ScratchSearch
 {
-  final public const int CACHE_TTL = 600;
+  private const int CACHE_TTL = 600;
   // Scratch rejects larger pages with HTTP 400.
-  final public const int MAX_LIMIT = 40;
+  private const int MAX_LIMIT = 40;
   private const int MAX_BYTES = 1024 * 1024;
 
   public function __construct(

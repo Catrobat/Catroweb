@@ -63,7 +63,6 @@ class ScratchToCatrobatConverter
     $model->reserveNames($targets);
     $files = [];
 
-    // Pocket Code renames any object called like its localized background, so keep "Background" for the stage only.
     $cloned = self::clonedSprites($targets);
     foreach ($targets as $target) {
       if (self::switchesByComputedName($target, 'looks_switchbackdropto', 'BACKDROP') || self::switchesByComputedName($target, 'looks_switchbackdroptoandwait', 'BACKDROP')) {
@@ -73,6 +72,7 @@ class ScratchToCatrobatConverter
 
     $keyed = [ProjectModel::STAGE => $stage];
     $model->addTarget(ProjectModel::STAGE, $stage, 'Background');
+    // Pocket Code renames any object called like its localized background, so keep "Background" for the stage only.
     $used = ['background' => true];
     foreach ($sprites as $i => $sprite) {
       $key = 's'.$i;
@@ -441,7 +441,7 @@ class ScratchToCatrobatConverter
       }
 
       $value = $block['inputs'][$input][1] ?? null;
-      if (\is_array($value) || !\is_string($value) || !($blocks[$value]['shadow'] ?? false)) {
+      if (!\is_string($value) || !($blocks[$value]['shadow'] ?? false)) {
         return true;
       }
     }
