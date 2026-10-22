@@ -94,24 +94,16 @@ class ScratchManager
       $project_json = $this->fetcher->fetchProject($scratch_id, $metadata);
       $this->converter->convert($scratch_id, $project_json, $metadata, $this->fetcher->fetchAssets($project_json), $this->fetcher->fetchThumbnail($scratch_id), $archive);
 
-      $project = $this->project_manager->addProject(new AddProjectRequest($user, new File($archive), $ip, null, Flavor::POCKETCODE, $existing?->getId()));
-      if (null === $project) {
-        throw new ScratchConversionException('The converted project could not be published.');
-      }
+      $project = $this->project_manager->addProject(new AddProjectRequest($user, new File($archive), $ip, null, Flavor::POCKETCODE, $existing?->getId(), $scratch_id));
 
-      $project->setScratchId($scratch_id);
-      $this->project_manager->save($project);
-
-      return $project;
+      return $project ?? throw new ScratchConversionException('The converted project could not be published.');
     } catch (\Throwable $throwable) {
       // Drop half-applied entity changes, so nothing flushed later in this request writes them.
       if ($this->entity_manager->isOpen()) {
         $this->entity_manager->clear();
       }
 
-      if (null !== $existing) {
-        $this->markOutdated((string) $existing->getId());
-      }
+      $this->markOutdated($scratch_id);
 
       throw $this->userFacing($scratch_id, $throwable);
     } finally {
@@ -123,15 +115,17 @@ class ScratchManager
   }
 
   /**
-   * A failed update may already have stored the new modification time; reset it so the next open converts again
-   * instead of serving the old archive as current. Plain SQL: the EntityManager may be closed by now.
+   * A failed import may already have stored a project with a current modification time: an update of the existing
+   * one, or a new row that addProject persisted before failing. Reset it so the next open converts again instead
+   * of serving it as current. By scratch_id, which addProject sets before the first persist, so it finds both.
+   * Plain SQL: the EntityManager may be closed by now.
    */
-  private function markOutdated(string $project_id): void
+  private function markOutdated(int $scratch_id): void
   {
     try {
-      $this->connection->executeStatement('UPDATE program SET last_modified_at = :epoch WHERE id = :id', ['epoch' => '1970-01-01 00:00:00', 'id' => $project_id]);
+      $this->connection->executeStatement('UPDATE program SET last_modified_at = :epoch WHERE scratch_id = :scratch_id', ['epoch' => '1970-01-01 00:00:00', 'scratch_id' => $scratch_id]);
     } catch (\Throwable $throwable) {
-      $this->logger->error('Could not mark a converted Scratch project as outdated', ['project' => $project_id, 'exception' => $throwable]);
+      $this->logger->error('Could not mark a converted Scratch project as outdated', ['scratch_id' => $scratch_id, 'exception' => $throwable]);
     }
   }
 

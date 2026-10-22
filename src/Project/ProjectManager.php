@@ -220,6 +220,10 @@ class ProjectManager
     $project->setRemixMigratedAt(null);
     $project->setFlavor($request->getFlavor());
     $project->setDebugBuild($extracted_file->isDebugBuild());
+    if (null !== $request->getScratchId()) {
+      $project->setScratchId($request->getScratchId());
+    }
+
     $this->addTags($project, $extracted_file);
 
     $this->event_dispatcher->dispatch(new ProjectBeforePersistEvent($extracted_file, $project));

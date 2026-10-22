@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace App\Project;
 
 use App\DB\Entity\Project\Project;
-use App\DB\Entity\Project\ProjectAsset;
 use App\DB\Entity\Project\ProjectAssetMapping;
 use App\DB\EntityRepository\Project\ProjectAssetMappingRepository;
 use App\DB\EntityRepository\Project\ProjectAssetRepository;
 use App\Storage\ContentAddressableStore;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -52,18 +50,13 @@ class ProjectDeduplicationService
       $asset = $this->assetRepository->findByHash($hash);
       if (null === $asset) {
         $storagePath = $this->store->store($absolutePath, $hash);
-        $asset = new ProjectAsset($hash, $size, $mimeType, $storagePath);
-        try {
-          $this->entityManager->persist($asset);
-          $this->entityManager->flush();
-        } catch (UniqueConstraintViolationException) {
-          $this->entityManager->clear();
-          $asset = $this->assetRepository->findByHash($hash);
-          if (null === $asset) {
-            $this->logger->error('Failed to find asset after UniqueConstraintViolation', ['hash' => $hash]);
-            continue;
-          }
-        }
+        // Plain SQL: a concurrent upload may insert the same hash, and a failed ORM flush would close the
+        // EntityManager for the rest of the request.
+        $this->entityManager->getConnection()->executeStatement(
+          'INSERT INTO project_asset (hash, size, mime_type, reference_count, storage_path, created_at) VALUES (?, ?, ?, 0, ?, ?) ON DUPLICATE KEY UPDATE hash = hash',
+          [$hash, $size, $mimeType, $storagePath, new \DateTimeImmutable()->format('Y-m-d H:i:s')],
+        );
+        $asset = $this->assetRepository->findByHash($hash) ?? throw new \RuntimeException('Asset '.$hash.' vanished after insert');
       }
 
       $asset->incrementReferenceCount();
