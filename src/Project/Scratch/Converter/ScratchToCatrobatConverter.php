@@ -87,6 +87,13 @@ class ScratchToCatrobatConverter
       }
     }
 
+    // "when timer/loudness >" and "when touching" fire as soon as their condition holds, but Scratch sets up a project
+    // in no time; ours takes a frame per generated brick, so they wait for the start-up (a watchdog "when timer > 1.8:
+    // stop all" ended Pokemon Clicker before its green flag).
+    if (self::hasConditionHats($targets)) {
+      $stage['variables'][$model->helper('started')] = [$model->helper('started'), 0];
+    }
+
     $cloned = self::clonedSprites($targets);
     foreach ($targets as $target) {
       if (self::switchesByComputedName($target, 'looks_switchbackdropto', 'BACKDROP') || self::switchesByComputedName($target, 'looks_switchbackdroptoandwait', 'BACKDROP')) {
@@ -220,6 +227,11 @@ class ScratchToCatrobatConverter
       }
 
       $init[] = $c->brick('BroadcastWaitBrick', [], [], [$c->text('broadcastMessage', $model->helper('init sprites'))]);
+      $init[] = $c->brick('ResetTimerBrick'); // the green flag resets Scratch's timer
+      if (isset($stage['variables'][$model->helper('started')])) {
+        $init[] = $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number(1)], [], [$model->variableElement(null, $model->helper('started'))]);
+      }
+
       $init[] = $c->brick('BroadcastBrick', [], [], [$c->text('broadcastMessage', $model->helper('green flag'))]);
       $scripts[] = $c->script('StartScript', $init);
       $scripts[] = $c->script('BroadcastScript', [$c->brick('NextLookBrick')], [$c->text('receivedMessage', $model->helper('next backdrop'))]);
@@ -595,6 +607,20 @@ class ScratchToCatrobatConverter
     }
 
     return $names;
+  }
+
+  /** @param list<array<string, mixed>> $targets */
+  private static function hasConditionHats(array $targets): bool
+  {
+    foreach ($targets as $target) {
+      foreach ($target['blocks'] ?? [] as $block) {
+        if (\is_array($block) && \in_array($block['opcode'] ?? null, ['event_whengreaterthan', 'event_whentouchingobject'], true)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   /** @param array<string, mixed> $target */
