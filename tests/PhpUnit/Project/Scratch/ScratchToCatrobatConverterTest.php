@@ -149,6 +149,13 @@ final class ScratchToCatrobatConverterTest extends TestCase
     (new AssetNormalizer())->costumeToPng('<svg xmlns="http://www.w3.org/2000/svg" width="20000" height="20000"/>', ['dataFormat' => 'svg'], microtime(true) + 10.0);
   }
 
+  public function testABlackAndWhiteCostumeStaysRgba(): void
+  {
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="#000"/></svg>';
+    $png = (new AssetNormalizer())->costumeToPng($svg, ['dataFormat' => 'svg', 'rotationCenterX' => 2, 'rotationCenterY' => 2], microtime(true) + 10.0);
+    $this->assertSame(6, \ord($png[25]), 'PNG color type RGBA; Pocket Code reads grayscale as alpha');
+  }
+
   public function testAnAbsurdRotationCenterDoesNotAllocateAHugeCanvas(): void
   {
     $pixel = (string) base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', true);
@@ -278,6 +285,22 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//object[@name="⌨ up arrow"]//script[@type="WhenScript"]//broadcastMessage[.="__scratch key w"])'));
     $this->assertSame(0.0, $xpath->evaluate('count(//object[@name="⌨ w"])'));
     $this->assertSame(1.0, $xpath->evaluate('count(//object[@name="⌨ s 2"])')); // the project's own "⌨ s" keeps its name
+  }
+
+  public function testSwitchingToAMissingNameNeedsNoNameList(): void
+  {
+    $switch = static fn (string $opcode, string $input, string $menu, string $value, ?string $next): array => ['opcode' => $opcode, 'next' => $next, 'inputs' => [$input => [1, $menu]], 'fields' => []];
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'a', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'a' => $switch('looks_switchbackdropto', 'BACKDROP', 'am', '', 'b'),
+      'am' => ['opcode' => 'looks_backdrops', 'shadow' => true, 'inputs' => [], 'fields' => ['BACKDROP' => ['TITLE SCREEN', null]]],
+      'b' => $switch('looks_switchcostumeto', 'COSTUME', 'bm', '', null),
+      'bm' => ['opcode' => 'looks_costume', 'shadow' => true, 'inputs' => [], 'fields' => ['COSTUME' => ['2', null]]],
+    ]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame(0.0, $xpath->evaluate('count(//*[type="FUNCTION" and value="INDEX_OF_ITEM"])'));
+    $this->assertSame('OBJECT_BACKGROUND_NUMBER', $xpath->evaluate('string(//brick[@type="SetBackgroundByIndexBrick"]/formulaList/formula/value)'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//brick[@type="SetLookByIndexBrick"])'));
   }
 
   public function testHelperNamesStayClearOfTheProjectsOwnNames(): void

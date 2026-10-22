@@ -81,7 +81,8 @@ class AssetNormalizer
       $canvas = new \Imagick();
       $canvas->newImage(max(1, 2 * $half_w), max(1, 2 * $half_h), new \ImagickPixel('transparent'), 'png');
       $canvas->compositeImage($image, \Imagick::COMPOSITE_OVER, (int) round($half_w - $center_x), (int) round($half_h - $center_y));
-      $canvas->setImageFormat('png');
+      // Always RGBA: Pocket Code (libGDX) loads an 8-bit grayscale PNG as alpha only, so black became transparent.
+      $canvas->setImageFormat('png32');
 
       return $canvas->getImageBlob();
     } catch (\ImagickException $exception) {
@@ -222,7 +223,7 @@ class AssetNormalizer
   private static function blank(): string
   {
     $blank = new \Imagick();
-    $blank->newImage(1, 1, new \ImagickPixel('transparent'), 'png');
+    $blank->newImage(1, 1, new \ImagickPixel('transparent'), 'png32');
 
     return $blank->getImageBlob();
   }
