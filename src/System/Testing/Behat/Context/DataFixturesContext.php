@@ -47,6 +47,7 @@ use App\Storage\FileHelper;
 use App\System\Commands\DBUpdater\UpdateAchievementsCommand;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Testing\Behat\ContextTrait;
+use App\System\Testing\FakeScratchFetcher;
 use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
@@ -1003,6 +1004,16 @@ class DataFixturesContext implements Context
     }
 
     $this->getManager()->flush();
+  }
+
+  /**
+   * The fake Scratch (FakeScratchFetcher) reports this modification time from now on, e.g. "2025-01-01T00:00:00.000Z".
+   *
+   * @Given the Scratch project :scratch_id was modified on Scratch at :modified
+   */
+  public function theScratchProjectWasModifiedOnScratchAt(int $scratch_id, string $modified): void
+  {
+    FakeScratchFetcher::setModified($scratch_id, $modified);
   }
 
   /**

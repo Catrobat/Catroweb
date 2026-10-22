@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Project\Scratch\Converter\ScratchFetcher;
 use App\Project\Scratch\ScratchSearch;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
 use App\System\Testing\DataFixtures\UserDataFixtures;
+use App\System\Testing\FakeScratchFetcher;
 use App\System\Testing\FakeScratchSearch;
 use App\System\Testing\FakeTranslationDelegate;
 use App\Translation\TranslationDelegate;
@@ -42,7 +44,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   // Overwrite services to ensure testability
   $services->set(TranslationDelegate::class, FakeTranslationDelegate::class);
-  // Never ask the real Scratch API; no cache, so one scenario's results can't leak into the next.
+  // Never ask the real Scratch API. Imports come from offline fixtures; search has no cache, so one
+  // scenario's results can't leak into the next.
+  $services->set(ScratchFetcher::class, FakeScratchFetcher::class);
   $services->set(ScratchSearch::class, FakeScratchSearch::class)->arg('$cache', inline_service(NullAdapter::class));
 
   // Load additional test-only services:

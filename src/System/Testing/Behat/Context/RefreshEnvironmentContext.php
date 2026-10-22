@@ -7,6 +7,7 @@ namespace App\System\Testing\Behat\Context;
 use App\Storage\FileHelper;
 use App\System\Testing\Behat\ContextTrait;
 use App\System\Testing\DataFixtures\DataBaseUtils;
+use App\System\Testing\FakeScratchFetcher;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\Tools\ToolsException;
 use Elastica\Query\MatchAll;
@@ -130,5 +131,6 @@ class RefreshEnvironmentContext implements Context
     FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.screenshot.dir'));
     FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.thumbnail.dir'));
     FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.featuredimage.dir'));
+    FakeScratchFetcher::reset();
   }
 }

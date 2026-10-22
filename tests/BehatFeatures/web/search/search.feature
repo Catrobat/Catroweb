@@ -175,6 +175,21 @@ Feature: Searching for projects & users
     And the element "#search-scratch-projects .search-card__badge" should contain "Scratch"
     And the element "#search-scratch-projects a.search-card[href$='/app/scratch/project/70058680']" should exist
 
+  # 70058680 is also known to FakeScratchFetcher, so opening the card converts the offline fixture project.
+  Scenario: Clicking a Scratch search result converts the project and opens it
+    Given there are Scratch projects:
+      | id       | name            | username   |
+      | 70058680 | Gamma Ray Racer | scratchcat |
+    And I am on "/app/search/Gamma"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    When I click "#search-scratch-projects a.search-card"
+    And I wait for the page to be loaded
+    Then the url should match "#/app/project/#"
+    And I should see "Gamma Ray Racer"
+    And there should be "1" projects in the database
+
   Scenario: No Scratch section without Scratch matches
     Given I am on "/app/search/gmail"
     And I wait for the page to be loaded
