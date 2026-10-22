@@ -102,7 +102,7 @@ final class BlockConverter
       case 'event_whenstageclicked':
         return $this->script('WhenScript', $body());
       case 'event_whenbroadcastreceived':
-        return $this->script('BroadcastScript', $body(), [$this->text('receivedMessage', $this->field($hat, 'BROADCAST_OPTION'))]);
+        return $this->script('BroadcastScript', $body(), [$this->text('receivedMessage', $this->model->message($this->field($hat, 'BROADCAST_OPTION')))]);
       case 'control_start_as_clone':
         return $this->script('WhenClonedScript', $body());
       case 'event_whenbackdropswitchesto':
@@ -348,7 +348,7 @@ final class BlockConverter
           return [$this->note('broadcast with a computed name is not supported')];
         }
 
-        return [$this->brick('event_broadcast' === $opcode ? 'BroadcastBrick' : 'BroadcastWaitBrick', [], [], [$this->text('broadcastMessage', $message)])];
+        return [$this->brick('event_broadcast' === $opcode ? 'BroadcastBrick' : 'BroadcastWaitBrick', [], [], [$this->text('broadcastMessage', $this->model->message($message))])];
 
         // control
       case 'control_wait': return [$this->brick('WaitBrick', ['TIME_TO_WAIT_IN_SECONDS' => $this->number($b, 'DURATION')])];
@@ -366,8 +366,10 @@ final class BlockConverter
       case 'control_stop':
         $option = strtolower($this->field($b, 'STOP_OPTION'));
         $selection = 'all' === $option ? '1' : ('this script' === $option ? '0' : '2');
+        $stop = $this->brick('StopScriptBrick', [], [], [$this->text('spinnerSelection', $selection)]);
 
-        return [$this->brick('StopScriptBrick', [], [], [$this->text('spinnerSelection', $selection)])];
+        // "Other scripts in sprite" also stops the generated helper loops; they restart on this broadcast.
+        return '2' === $selection ? [$stop, $this->brick('BroadcastBrick', [], [], [$this->text('broadcastMessage', $this->model->helper('restart helpers'))])] : [$stop];
       case 'control_create_clone_of':
         $of = $this->menu($b, 'CLONE_OPTION');
         if (null === $of || '_myself_' === $of) {
@@ -855,11 +857,17 @@ final class BlockConverter
     return $this->model->shadowVariable($object, $property) ?? $this->unsupportedReporter('sensing_of');
   }
 
+  /** The sprite's position as text; "finger on me" holds it from the last touch that hit the sprite. */
+  public static function position(): Formula
+  {
+    return Formula::fn('JOIN3', Formula::sensor('OBJECT_X'), Formula::string(' '), Formula::sensor('OBJECT_Y'));
+  }
+
   private function touching(?string $what): Formula
   {
     return match ($what) {
       null => Formula::false(),
-      '_mouse_' => Formula::sensor('COLLIDES_WITH_FINGER'),
+      '_mouse_' => Formula::op('LOGICAL_OR', Formula::sensor('COLLIDES_WITH_FINGER'), Formula::op('EQUAL', Formula::variable($this->model->helper('finger on me')), self::position())),
       '_edge_' => Formula::sensor('COLLIDES_WITH_EDGE'),
       default => Formula::collision($what),
     };

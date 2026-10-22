@@ -47,6 +47,9 @@ final class ProjectModel
   /** @var array<string, true> lower-cased broadcast, variable and list names already in use */
   private array $taken = [];
 
+  /** @var array<string, string> lower-cased broadcast message => the one spelling all its bricks use */
+  private array $messages = [];
+
   /** @var array<string, string> helper purpose => its unique name */
   private array $helpers = [];
 
@@ -93,6 +96,12 @@ final class ProjectModel
       }
     };
     foreach ($targets as $target) {
+      foreach ((array) ($target['broadcasts'] ?? []) as $message) {
+        if (\is_scalar($message)) {
+          $this->message((string) $message);
+        }
+      }
+
       foreach (['variables', 'lists', 'broadcasts'] as $kind) {
         foreach ((array) ($target[$kind] ?? []) as $entry) {
           $reserve(\is_array($entry) ? ($entry[0] ?? null) : $entry);
@@ -119,6 +128,12 @@ final class ProjectModel
   }
 
   /** The name of a converter helper (broadcast, variable or list), unique against the project's own names. */
+  /** Scratch matches broadcast messages ignoring case, Pocket Code exactly: "start project" must reach "Start Project". */
+  public function message(string $name): string
+  {
+    return $this->messages[mb_strtolower($name)] ??= $name;
+  }
+
   public function helper(string $purpose): string
   {
     if (isset($this->helpers[$purpose])) {

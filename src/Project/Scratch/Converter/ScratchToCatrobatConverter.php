@@ -106,6 +106,10 @@ class ScratchToCatrobatConverter
         }
       }
 
+      if (self::touchesMouse($sprite)) {
+        $sprite['variables'][$model->helper('finger on me')] = [$model->helper('finger on me'), 0];
+      }
+
       if (self::switchesByComputedName($sprite, 'looks_switchcostumeto', 'COSTUME')) {
         $sprite['lists'][$model->helper('costume names')] = [$model->helper('costume names'), array_column($sprite['costumes'] ?? [], 'name')];
       }
@@ -241,6 +245,21 @@ class ScratchToCatrobatConverter
         $scripts = [...$scripts, ...$this->keyScripts($c, $model, $target['scratchKeys'])];
       }
 
+      if (self::touchesMouse($target)) {
+        // Scratch's mouse stays where it was released: buttons that click on release ask "touching mouse-pointer?"
+        // after the finger is gone, when Pocket Code's "touches finger" is already false. Remember where the sprite
+        // was when the last touch hit it; BlockConverter::touching() counts that until the sprite moves.
+        // ponytail: a costume or size change after the release still counts as touching.
+        $remember = fn (): \DOMElement => $c->brick('ForeverBrick', [], [$c->list('loopBricks', [
+          $c->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => Formula::sensor('FINGER_TOUCHED')], [$c->list('ifBranchBricks', [
+            $c->brick('SetVariableBrick', [
+              'VARIABLE' => Formula::fn('IF_THEN_ELSE', Formula::sensor('COLLIDES_WITH_FINGER'), BlockConverter::position(), Formula::string('')),
+            ], [], [$model->variableElement($key, $model->helper('finger on me'))]),
+          ])]),
+        ])]);
+        $scripts = [...$scripts, ...$this->helperLoop($c, $model, $remember)];
+      }
+
       if ($model->receivesCloneRequests($key)) {
         $scripts = [...$scripts, ...$this->cloneRequestScripts($c, $model, $key)];
       }
@@ -254,10 +273,27 @@ class ScratchToCatrobatConverter
     }
 
     if ([] !== $copies) {
+      // ponytail: "stop other scripts in sprite" stops this for good; a restart would need clones to stay out of it.
       $scripts[] = $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', $copies)])]);
     }
 
     return $scripts;
+  }
+
+  /**
+   * A generated loop that runs in the sprite and each of its clones, and restarts after "stop other scripts in sprite".
+   *
+   * @param \Closure(): \DOMElement $loop
+   *
+   * @return list<\DOMElement>
+   */
+  private function helperLoop(BlockConverter $c, ProjectModel $model, \Closure $loop): array
+  {
+    return [
+      $c->script('StartScript', [$loop()]),
+      $c->script('WhenClonedScript', [$loop()]),
+      $c->script('BroadcastScript', [$loop()], [$c->text('receivedMessage', $model->helper('restart helpers'))]),
+    ];
   }
 
   /**
@@ -306,7 +342,8 @@ class ScratchToCatrobatConverter
    * Pocket Code has no keyboard. Holding a key's button sets the keys' variables, which "key pressed?" reads, and
    * broadcasts them like a keyboard does: once on the tap, which catches even taps shorter than a frame, then
    * repeated after half a second.
-   * ponytail: buttons stay below sprites that "go to front", and touching one also counts as "mouse down".
+   * The buttons come to the front every frame, above sprites that "go to front".
+   * ponytail: touching a button also counts as "mouse down".
    *
    * @param list<string> $keys the button's key and its twin
    *
@@ -323,10 +360,13 @@ class ScratchToCatrobatConverter
 
     return [
       $c->script('WhenScript', $send()),
-      $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', array_map(
-        static fn (string $name): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::sensor('COLLIDES_WITH_FINGER')], [], [$model->variableElement(null, $name)]),
-        $names,
-      ))])]),
+      $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', [
+        $c->brick('ComeToFrontBrick'),
+        ...array_map(
+          static fn (string $name): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::sensor('COLLIDES_WITH_FINGER')], [], [$model->variableElement(null, $name)]),
+          $names,
+        ),
+      ])])]),
       $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', [
         $c->brick('WaitUntilBrick', ['IF_CONDITION' => $pressed]),
         $c->brick('WaitBrick', ['TIME_TO_WAIT_IN_SECONDS' => Formula::number(0.5)]),
@@ -554,6 +594,18 @@ class ScratchToCatrobatConverter
     }
 
     return $names;
+  }
+
+  /** @param array<string, mixed> $target */
+  private static function touchesMouse(array $target): bool
+  {
+    foreach ($target['blocks'] ?? [] as $block) {
+      if (\is_array($block) && '_mouse_' === ($block['fields']['TOUCHINGOBJECTMENU'][0] ?? null)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**

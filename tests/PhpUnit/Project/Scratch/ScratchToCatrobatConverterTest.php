@@ -303,6 +303,37 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//brick[@type="SetLookByIndexBrick"])'));
   }
 
+  public function testBroadcastsMatchIgnoringCase(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'send', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'send' => ['opcode' => 'event_broadcast', 'next' => null, 'inputs' => ['BROADCAST_INPUT' => [1, [11, 'start project', 'b1']]], 'fields' => []],
+      'get' => ['opcode' => 'event_whenbroadcastreceived', 'next' => null, 'topLevel' => true, 'inputs' => [], 'fields' => ['BROADCAST_OPTION' => ['Start Project', 'b1']]],
+    ]);
+    $xpath = new \DOMXPath($xml);
+    $received = $xpath->evaluate('string(//script[@type="BroadcastScript"][brickList[not(*)]]/receivedMessage)');
+    $this->assertSame('start project', strtolower($received));
+    $this->assertSame(1.0, $xpath->evaluate('count(//brick[@type="BroadcastBrick"][broadcastMessage="'.$received.'"])'));
+  }
+
+  public function testTouchingTheMouseRemembersTheLastTouch(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'wait', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'wait' => ['opcode' => 'control_wait_until', 'next' => null, 'inputs' => ['CONDITION' => [2, 'touch']], 'fields' => []],
+      'touch' => ['opcode' => 'sensing_touchingobject', 'inputs' => ['TOUCHINGOBJECTMENU' => [1, 'menu']], 'fields' => []],
+      'menu' => ['opcode' => 'sensing_touchingobjectmenu', 'shadow' => true, 'inputs' => [], 'fields' => ['TOUCHINGOBJECTMENU' => ['_mouse_', null]]],
+    ]);
+    $xpath = new \DOMXPath($xml);
+    $condition = '//brick[@type="WaitUntilBrick"]/formulaList/formula[value="LOGICAL_OR"]';
+    $this->assertSame('COLLIDES_WITH_FINGER', $xpath->evaluate('string('.$condition.'/leftChild/value)'));
+    $this->assertSame('__scratch finger on me', $xpath->evaluate('string('.$condition.'/rightChild[value="EQUAL"]/leftChild[type="USER_VARIABLE"]/value)'));
+    // Updated only while the screen is touched, by the sprite and by each of its clones.
+    $remember = '//brick[@type="IfThenLogicBeginBrick"][formulaList/formula/value="FINGER_TOUCHED"]//brick[@type="SetVariableBrick"][formulaList/formula[value="IF_THEN_ELSE"]/leftChild/value="COLLIDES_WITH_FINGER"]';
+    $this->assertSame(1.0, $xpath->evaluate('count(//script[@type="StartScript"]'.$remember.')'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//script[@type="WhenClonedScript"]'.$remember.')'));
+  }
+
   public function testHelperNamesStayClearOfTheProjectsOwnNames(): void
   {
     $xml = self::convertBlocks([
