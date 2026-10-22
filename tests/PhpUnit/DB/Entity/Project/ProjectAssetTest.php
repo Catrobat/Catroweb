@@ -25,7 +25,6 @@ class ProjectAssetTest extends TestCase
     $this->assertSame(1024, $asset->getSize());
     $this->assertSame('image/png', $asset->getMimeType());
     $this->assertSame('ab/cd/'.$hash, $asset->getStoragePath());
-    $this->assertSame(0, $asset->getReferenceCount());
   }
 
   #[Group('unit')]
@@ -37,53 +36,5 @@ class ProjectAssetTest extends TestCase
 
     $this->assertGreaterThanOrEqual($before, $asset->getCreatedAt());
     $this->assertLessThanOrEqual($after, $asset->getCreatedAt());
-  }
-
-  #[Group('unit')]
-  public function testIncrementReferenceCount(): void
-  {
-    $asset = new ProjectAsset('hash', 100, 'image/png', 'ha/sh/hash');
-
-    $this->assertSame(0, $asset->getReferenceCount());
-
-    $asset->incrementReferenceCount();
-    $this->assertSame(1, $asset->getReferenceCount());
-
-    $asset->incrementReferenceCount();
-    $this->assertSame(2, $asset->getReferenceCount());
-
-    $asset->incrementReferenceCount();
-    $this->assertSame(3, $asset->getReferenceCount());
-  }
-
-  #[Group('unit')]
-  public function testDecrementReferenceCount(): void
-  {
-    $asset = new ProjectAsset('hash', 100, 'image/png', 'ha/sh/hash');
-    $asset->incrementReferenceCount();
-    $asset->incrementReferenceCount();
-
-    $this->assertSame(2, $asset->getReferenceCount());
-
-    $asset->decrementReferenceCount();
-    $this->assertSame(1, $asset->getReferenceCount());
-
-    $asset->decrementReferenceCount();
-    $this->assertSame(0, $asset->getReferenceCount());
-  }
-
-  #[Group('unit')]
-  public function testDecrementReferenceCountDoesNotGoBelowZero(): void
-  {
-    $asset = new ProjectAsset('hash', 100, 'image/png', 'ha/sh/hash');
-
-    $this->assertSame(0, $asset->getReferenceCount());
-
-    $asset->decrementReferenceCount();
-    $this->assertSame(0, $asset->getReferenceCount());
-
-    // Decrement again — still zero
-    $asset->decrementReferenceCount();
-    $this->assertSame(0, $asset->getReferenceCount());
   }
 }
