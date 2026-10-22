@@ -157,6 +157,47 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertLessThanOrEqual(4096, $size[1] ?? PHP_INT_MAX);
   }
 
+  public function testABlockThatContainsItselfIsRejected(): void
+  {
+    $this->expectException(ScratchConversionException::class);
+    self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'loop', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'loop' => ['opcode' => 'control_forever', 'next' => null, 'inputs' => ['SUBSTACK' => [2, 'loop']], 'fields' => []],
+    ]);
+  }
+
+  public function testTextStaysTextAndDoubleNotIsBracketed(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'say', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'say' => ['opcode' => 'looks_say', 'next' => 'if', 'inputs' => ['MESSAGE' => [1, [10, '001']]], 'fields' => []],
+      'if' => ['opcode' => 'control_if', 'next' => null, 'inputs' => ['CONDITION' => [2, 'not1']], 'fields' => []],
+      'not1' => ['opcode' => 'operator_not', 'inputs' => ['OPERAND' => [2, 'not2']], 'fields' => []],
+      'not2' => ['opcode' => 'operator_not', 'inputs' => [], 'fields' => []],
+    ]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame('STRING', $xpath->evaluate('string(//brick[@type="SayBubbleBrick"]//formula/type)'));
+    $this->assertSame('001', $xpath->evaluate('string(//brick[@type="SayBubbleBrick"]//formula/value)'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="LOGICAL_NOT"]/rightChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
+  }
+
+  /** @param array<string, array<string, mixed>> $blocks blocks of a single sprite */
+  private static function convertBlocks(array $blocks): \DOMDocument
+  {
+    $project = ['targets' => [
+      ['isStage' => true, 'name' => 'Stage', 'variables' => [], 'lists' => [], 'blocks' => [], 'costumes' => [], 'sounds' => []],
+      ['isStage' => false, 'name' => 'Sprite', 'variables' => [], 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []],
+    ]];
+    $archive = (string) tempnam(sys_get_temp_dir(), 'scratch-test');
+    (new ScratchToCatrobatConverter(new AssetNormalizer()))->convert(1, $project, ['title' => 'Blocks'], [], null, $archive);
+    $zip = new \ZipArchive();
+    $zip->open($archive);
+    $xml = new \DOMDocument();
+    $xml->loadXML((string) $zip->getFromName('code.xml') ?: '<program/>');
+
+    return $xml;
+  }
+
   private static function child(\DOMElement $parent, string $step): ?\DOMElement
   {
     if (1 !== preg_match('/^([^\[]+)(?:\[(\d+)])?$/', $step, $match)) {

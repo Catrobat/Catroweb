@@ -137,8 +137,12 @@ final class Formula
    */
   private function bracketed(self $child): self
   {
-    if ('OPERATOR' !== $this->type || 'OPERATOR' !== $child->type || null === $child->left) {
+    if ('OPERATOR' !== $this->type || 'OPERATOR' !== $child->type) {
       return $child;
+    }
+
+    if (null === $child->left) { // a unary child, e.g. not(not(x)): the parser needs brackets after a unary operator
+      return null === $this->left ? new self('BRACKET', null, null, $child) : $child;
     }
 
     $parent_priority = null === $this->left ? 8 : (self::PRIORITY[$this->value] ?? 0); // unary binds tightest

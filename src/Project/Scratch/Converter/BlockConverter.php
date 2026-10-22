@@ -13,13 +13,18 @@ namespace App\Project\Scratch\Converter;
  */
 final class BlockConverter
 {
-  public const string GREEN_FLAG = '__green_flag';
-  public const string INIT_SPRITES = '__init_sprites';
-  public const string NEXT_BACKDROP = '__next_backdrop';
-  public const string PREVIOUS_BACKDROP = '__previous_backdrop';
-  public const string ANSWER = 'answer';
-  public const string COSTUME_NAMES = '__costume names';
-  public const string BACKDROP_NAMES = '__backdrop names';
+  // Helper names share the namespace of the Scratch project's own broadcasts and variables.
+  public const string GREEN_FLAG = '__scratch green flag';
+  public const string INIT_SPRITES = '__scratch init sprites';
+  public const string NEXT_BACKDROP = '__scratch next backdrop';
+  public const string PREVIOUS_BACKDROP = '__scratch previous backdrop';
+  public const string ANSWER = '__scratch answer';
+  public const string COSTUME_NAMES = '__scratch costume names';
+  public const string BACKDROP_NAMES = '__scratch backdrop names';
+
+  /** Untrusted block graphs: bound nesting (each level recurses) and total output. */
+  private const int MAX_DEPTH = 200;
+  private const int MAX_NODES = 500_000;
 
   /** @var array<string, array<string, mixed>> */
   private array $blocks = [];
@@ -31,6 +36,11 @@ final class BlockConverter
 
   /** @var list<string>|null argument names while converting a procedure body */
   private ?array $arguments = null;
+
+  /** @var array<string, true> blocks being converted right now, to reject cycles */
+  private array $active = [];
+
+  private int $nodes = 0;
 
   public function __construct(
     private readonly \DOMDocument $doc,
@@ -174,7 +184,7 @@ final class BlockConverter
     $bricks = [];
     $guard = 0;
     while (\is_string($id) && isset($this->blocks[$id]) && ++$guard < 100_000) {
-      foreach ($this->convertBlock($this->blocks[$id]) as $brick) {
+      foreach ($this->guarded($id, fn (): array => $this->convertBlock($this->blocks[$id])) as $brick) {
         $bricks[] = $brick;
       }
 
@@ -182,6 +192,33 @@ final class BlockConverter
     }
 
     return $bricks;
+  }
+
+  /**
+   * Runs $convert for block $id, rejecting cycles, too deep nesting and too much output.
+   *
+   * @template T
+   *
+   * @param \Closure(): T $convert
+   *
+   * @return T
+   */
+  private function guarded(string $id, \Closure $convert): mixed
+  {
+    if (isset($this->active[$id])) {
+      throw new ScratchConversionException('The Scratch project contains a block that contains itself.');
+    }
+
+    if (\count($this->active) >= self::MAX_DEPTH || ++$this->nodes > self::MAX_NODES) {
+      throw new ScratchConversionException('The Scratch project is too large or too deeply nested to convert.');
+    }
+
+    $this->active[$id] = true;
+    try {
+      return $convert();
+    } finally {
+      unset($this->active[$id]);
+    }
   }
 
   /**
@@ -244,7 +281,7 @@ final class BlockConverter
           return [$this->brick('SetLookBrick', [], [], [$look])];
         }
 
-        return [$this->brick('SetLookByIndexBrick', ['LOOK_INDEX' => self::byNameOrNumber($this->formulaOfInput($b, 'COSTUME', 'number'), self::COSTUME_NAMES)])];
+        return [$this->brick('SetLookByIndexBrick', ['LOOK_INDEX' => self::byNameOrNumber($this->formulaOfInput($b, 'COSTUME', 'number'), self::COSTUME_NAMES, $this->model->lookCount($this->sprite_key))])];
       case 'looks_nextcostume': return [$this->brick('NextLookBrick')];
       case 'looks_switchbackdropto':
       case 'looks_nextbackdrop':
@@ -314,11 +351,16 @@ final class BlockConverter
           return [$this->brick('CloneBrick')];
         }
 
-        $message = $this->model->cloneRequest($of);
+        $request = $this->model->cloneRequest($of);
+        if (null === $request) {
+          return [$this->note('create clone of an unknown sprite')];
+        }
 
-        return null === $message
-          ? [$this->note('create clone of an unknown sprite')]
-          : [$this->brick('BroadcastBrick', [], [], [$this->text('broadcastMessage', $message)])];
+        // Count the request first: a broadcast that arrives while the handler still runs restarts it.
+        return [
+          $this->brick('ChangeVariableBrick', ['VARIABLE_CHANGE' => Formula::number(1)], [], [$this->model->variableElement(null, $request['counter'])]),
+          $this->brick('BroadcastBrick', [], [], [$this->text('broadcastMessage', $request['message'])]),
+        ];
       case 'control_delete_this_clone': return [$this->brick('DeleteThisCloneBrick')];
         // sensing
       case 'sensing_askandwait':
@@ -440,7 +482,7 @@ final class BlockConverter
       return [$this->brick($wait ? 'SetBackgroundAndWaitBrick' : 'SetBackgroundBrick', [], [], [$look])];
     }
 
-    return [$this->brick($type, [$category => self::byNameOrNumber($this->formulaOfInput($b, 'BACKDROP', 'number'), self::BACKDROP_NAMES)])];
+    return [$this->brick($type, [$category => self::byNameOrNumber($this->formulaOfInput($b, 'BACKDROP', 'number'), self::BACKDROP_NAMES, $count)])];
   }
 
   /** @return list<\DOMElement> */
@@ -580,7 +622,7 @@ final class BlockConverter
     };
 
     if (\is_array($value)) {
-      return $this->primitive($value) ?? $default;
+      return $this->primitive($value, $kind) ?? $default;
     }
 
     if (!\is_string($value) || !isset($this->blocks[$value])) {
@@ -588,17 +630,23 @@ final class BlockConverter
     }
 
     $block = $this->blocks[$value];
+    if ('text' === ($block['opcode'] ?? null) && 'text' === $kind) {
+      return Formula::string($this->field($block, 'TEXT')); // "001" stays text
+    }
+
     if (($block['shadow'] ?? false) && !str_starts_with((string) ($block['opcode'] ?? ''), 'math_') && 'text' !== ($block['opcode'] ?? null) && [] !== ($block['fields'] ?? [])) {
       return Formula::literal((string) (reset($block['fields'])[0] ?? '')); // a menu, e.g. a costume name
     }
 
-    return $this->reporter($block);
+    return $this->guarded($value, fn (): Formula => $this->reporter($block));
   }
 
-  private function primitive(array $value): ?Formula
+  /** @param 'number'|'text'|'bool' $kind */
+  private function primitive(array $value, string $kind): ?Formula
   {
     return match ((int) ($value[0] ?? 0)) {
-      4, 5, 6, 7, 8, 10 => Formula::literal($value[1] ?? ''),
+      4, 5, 6, 7, 8 => Formula::literal($value[1] ?? ''),
+      10 => 'text' === $kind ? Formula::string((string) ($value[1] ?? '')) : Formula::literal($value[1] ?? ''),
       9, 11 => Formula::string((string) ($value[1] ?? '')),
       12 => Formula::variable((string) ($value[1] ?? '')),
       13 => Formula::userList((string) ($value[1] ?? '')),
@@ -720,11 +768,13 @@ final class BlockConverter
    * Scratch switches to the costume with that name, else treats the value as a number. The converter gives
    * such sprites a list of their costume names to look the name up in.
    */
-  private static function byNameOrNumber(Formula $value, string $names): Formula
+  private static function byNameOrNumber(Formula $value, string $names, int $count): Formula
   {
     $index = Formula::fn('INDEX_OF_ITEM', $value, Formula::userList($names));
+    // Numbers wrap around like in Scratch: costume 4 of 3 is costume 1.
+    $wrapped = Formula::op('PLUS', Formula::fn('MOD', Formula::op('MINUS', Formula::fn('ROUND', $value), Formula::number(1)), Formula::number(max(1, $count))), Formula::number(1));
 
-    return Formula::fn('IF_THEN_ELSE', Formula::op('GREATER_THAN', $index, Formula::number(0)), $index, $value);
+    return Formula::fn('IF_THEN_ELSE', Formula::op('GREATER_THAN', $index, Formula::number(0)), $index, $wrapped);
   }
 
   private function unsupportedReporter(string $opcode): Formula

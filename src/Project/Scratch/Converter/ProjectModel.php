@@ -189,7 +189,9 @@ final class ProjectModel
       $names[] = BlockConverter::ANSWER;
     }
 
-    return array_values(array_unique([...$names, ...array_keys($this->shadows)]));
+    $counters = array_map(fn (string $key): string => self::cloneRequestNames($this->names[$key])['counter'], array_keys($this->clone_requests));
+
+    return array_values(array_unique([...$names, ...array_keys($this->shadows), ...$counters]));
   }
 
   // ---- helper state requested by the block converter ----
@@ -221,7 +223,7 @@ final class ProjectModel
       return null;
     }
 
-    $name = '__'.$this->names[$key].'_'.$property;
+    $name = '__scratch '.$this->names[$key].' '.$property;
     $this->shadows[$name] = ['sprite' => $key, 'formula' => $source];
 
     return Formula::variable($name);
@@ -233,8 +235,13 @@ final class ProjectModel
     return $this->shadows;
   }
 
-  /** "create clone of <sprite>" becomes a broadcast that the sprite answers by cloning itself. */
-  public function cloneRequest(string $sprite_name): ?string
+  /**
+   * "create clone of <sprite>" becomes a counted request: the requester increments a counter and broadcasts,
+   * the original sprite clones itself until the counter is back at zero.
+   *
+   * @return array{message: string, counter: string}|null
+   */
+  public function cloneRequest(string $sprite_name): ?array
   {
     $key = $this->keys_by_name[$sprite_name] ?? null;
     if (null === $key) {
@@ -243,7 +250,13 @@ final class ProjectModel
 
     $this->clone_requests[$key] = true;
 
-    return '__clone_'.$this->names[$key];
+    return self::cloneRequestNames($this->names[$key]);
+  }
+
+  /** @return array{message: string, counter: string} */
+  public static function cloneRequestNames(string $object_name): array
+  {
+    return ['message' => '__scratch clone '.$object_name, 'counter' => '__scratch clone requests '.$object_name];
   }
 
   public function receivesCloneRequests(string $key): bool

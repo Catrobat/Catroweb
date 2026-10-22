@@ -16,6 +16,7 @@ class ScratchController extends AbstractController
 {
   public function __construct(
     private readonly ScratchManager $scratch_manager,
+    private readonly RateLimiterFactoryInterface $scratchOpenBurstLimiter,
     private readonly RateLimiterFactoryInterface $scratchConvertBurstLimiter,
     private readonly RateLimiterFactoryInterface $scratchConvertDailyLimiter,
   ) {
@@ -27,6 +28,10 @@ class ScratchController extends AbstractController
   {
     $ip = $request->getClientIp() ?? 'unknown';
     try {
+      if (!$this->scratchOpenBurstLimiter->create($ip)->consume()->isAccepted()) {
+        throw new ScratchConversionException('Too many Scratch projects opened in a short time. Please wait a minute.');
+      }
+
       $project = $this->scratch_manager->importProject($id, function () use ($ip): void {
         $burst = $this->scratchConvertBurstLimiter->create($ip)->consume();
         $daily = $this->scratchConvertDailyLimiter->create($ip)->consume();

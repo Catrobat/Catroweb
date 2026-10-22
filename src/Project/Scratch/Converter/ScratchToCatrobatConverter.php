@@ -21,7 +21,7 @@ class ScratchToCatrobatConverter
   private const int MAX_DESCRIPTION_BYTES = 10_000; // Catroweb's upload limit
   private const int MAX_CREDITS_BYTES = 3_000;
   private const int MAX_INITIAL_LIST_ITEMS = 5_000;
-  private const string IS_CLONE = '__is_clone';
+  private const string IS_CLONE = '__scratch is clone';
 
   public function __construct(private readonly AssetNormalizer $assets)
   {
@@ -214,9 +214,16 @@ class ScratchToCatrobatConverter
       if ($model->receivesCloneRequests($key)) {
         // Clones hear the broadcast too; only the original may answer it, as in Scratch.
         $is_original = Formula::op('EQUAL', Formula::variable(self::IS_CLONE), Formula::number(0));
+        $request = ProjectModel::cloneRequestNames($model->objectName($key));
+        $counter = fn (): \DOMElement => $model->variableElement(null, $request['counter']);
         $scripts[] = $c->script('BroadcastScript', [
-          $c->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => $is_original], [$c->list('ifBranchBricks', [$c->brick('CloneBrick')])]),
-        ], [$c->text('receivedMessage', '__clone_'.$model->objectName($key))]);
+          $c->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => $is_original], [$c->list('ifBranchBricks', [
+            $c->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => Formula::op('SMALLER_THAN', Formula::variable($request['counter']), Formula::number(1))], [$c->list('loopBricks', [
+              $c->brick('CloneBrick'),
+              $c->brick('ChangeVariableBrick', ['VARIABLE_CHANGE' => Formula::unary('MINUS', Formula::number(1))], [], [$counter()]),
+            ])]),
+          ])]),
+        ], [$c->text('receivedMessage', $request['message'])]);
         $scripts[] = $c->script('WhenClonedScript', [
           $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number(1)], [], [$model->variableElement($key, self::IS_CLONE)]),
         ]);
@@ -248,7 +255,7 @@ class ScratchToCatrobatConverter
   {
     $bricks = [];
     foreach ($target['variables'] ?? [] as $id => $variable) {
-      $bricks[] = $c->brick('SetVariableBrick', ['VARIABLE' => Formula::literal($variable[1] ?? 0)], [], [$model->variableElement($key, (string) $variable[0], (string) $id)]);
+      $bricks[] = $c->brick('SetVariableBrick', ['VARIABLE' => self::saved($variable[1] ?? 0)], [], [$model->variableElement($key, (string) $variable[0], (string) $id)]);
     }
 
     $items = 0;
@@ -261,11 +268,17 @@ class ScratchToCatrobatConverter
           break 2;
         }
 
-        $bricks[] = $c->brick('AddItemToUserListBrick', ['LIST_ADD_ITEM' => Formula::literal($item)], [], [$element()]);
+        $bricks[] = $c->brick('AddItemToUserListBrick', ['LIST_ADD_ITEM' => self::saved($item)], [], [$element()]);
       }
     }
 
     return $bricks;
+  }
+
+  /** A saved Scratch value: numbers stay numbers, strings stay strings ("001" is not 1). */
+  private static function saved(mixed $value): Formula
+  {
+    return \is_string($value) ? Formula::string($value) : Formula::literal($value);
   }
 
   /**

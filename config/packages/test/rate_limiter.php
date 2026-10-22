@@ -31,6 +31,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'upload_daily' => [
         'policy' => 'no_limit',
       ],
+      'scratch_open_burst' => [
+        'policy' => 'no_limit',
+      ],
       'scratch_convert_burst' => [
         'policy' => 'no_limit',
       ],

@@ -14,6 +14,7 @@ use App\Project\Scratch\Converter\ScratchFetcher;
 use App\Project\Scratch\Converter\ScratchToCatrobatConverter;
 use App\User\UserManager;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -29,6 +30,7 @@ class ScratchManager
     private readonly ScratchFetcher $fetcher,
     private readonly ScratchToCatrobatConverter $converter,
     private readonly LoggerInterface $logger,
+    private readonly Connection $connection,
   ) {
   }
 
@@ -100,21 +102,47 @@ class ScratchManager
       $this->project_manager->save($project);
 
       return $project;
-    } catch (InvalidCatrobatFileException $exception) {
-      $this->logger->warning('Converted Scratch project rejected by upload validation', ['scratch_id' => $scratch_id, 'error' => $exception->getMessage()]);
-
-      throw new ScratchConversionException('The converted project did not pass the upload checks.', 0, $exception);
-    } catch (ScratchConversionException $exception) {
-      throw $exception;
     } catch (\Throwable $throwable) {
-      $this->logger->error('Scratch conversion failed', ['scratch_id' => $scratch_id, 'exception' => $throwable]);
+      if (null !== $existing) {
+        $this->markOutdated((string) $existing->getId());
+      }
 
-      throw new ScratchConversionException('This Scratch project could not be converted.', 0, $throwable);
+      throw $this->userFacing($scratch_id, $throwable);
     } finally {
       @unlink($archive);
       @unlink($temp);
       flock($lock, LOCK_UN);
       fclose($lock);
     }
+  }
+
+  /**
+   * A failed update may already have stored the new modification time; reset it so the next open converts again
+   * instead of serving the old archive as current. Plain SQL: the EntityManager may be closed by now.
+   */
+  private function markOutdated(string $project_id): void
+  {
+    try {
+      $this->connection->executeStatement('UPDATE program SET last_modified_at = :epoch WHERE id = :id', ['epoch' => '1970-01-01 00:00:00', 'id' => $project_id]);
+    } catch (\Throwable $throwable) {
+      $this->logger->error('Could not mark a converted Scratch project as outdated', ['project' => $project_id, 'exception' => $throwable]);
+    }
+  }
+
+  private function userFacing(int $scratch_id, \Throwable $throwable): ScratchConversionException
+  {
+    if ($throwable instanceof ScratchConversionException) {
+      return $throwable;
+    }
+
+    if ($throwable instanceof InvalidCatrobatFileException) {
+      $this->logger->warning('Converted Scratch project rejected by upload validation', ['scratch_id' => $scratch_id, 'error' => $throwable->getMessage()]);
+
+      return new ScratchConversionException('The converted project did not pass the upload checks.', 0, $throwable);
+    }
+
+    $this->logger->error('Scratch conversion failed', ['scratch_id' => $scratch_id, 'exception' => $throwable]);
+
+    return new ScratchConversionException('This Scratch project could not be converted.', 0, $throwable);
   }
 }
