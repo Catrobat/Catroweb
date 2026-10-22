@@ -61,7 +61,7 @@ class ErrorResponseError
    *
    * @Assert\NotNull()
    *
-   * @Assert\Choice({ "validation_error", "bad_request", "unauthorized", "forbidden", "not_found", "not_acceptable", "unsupported_media_type", "unprocessable_entity", "too_many_requests", "internal_error" })
+   * @Assert\Choice({ "validation_error", "bad_request", "unauthorized", "forbidden", "not_found", "not_acceptable", "unsupported_media_type", "unprocessable_entity", "too_many_requests", "internal_error", "service_unavailable" })
    *
    * @Assert\Type("string")
    *

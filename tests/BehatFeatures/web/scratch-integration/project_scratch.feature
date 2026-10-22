@@ -1,46 +1,32 @@
-@project_page
+@web @search
+# Scratch is faked: "there are Scratch projects" seeds what FakeScratchSearch finds, and FakeScratchFetcher serves
+# the offline project in tests/TestData/ScratchConverter for the ids in its metadata.json (70058682 cannot be
+# converted). Importing itself is covered by api/projects/POST_projects_scratch.
+Feature: Open a Scratch project from the search as a Pocket Code project
 
-# Scratch is faked: FakeScratchFetcher serves the offline project in tests/TestData/ScratchConverter for the ids in
-# its metadata.json (70058680 and 70058681, both "Gamma Ray Racer" by scratchcat). Other ids don't exist.
-Feature: As a visitor I want to open Scratch projects as Pocket Code projects
-
-  Scenario: Opening a Scratch project converts it into a downloadable project of the Scratch author
-    When I request "GET" "/app/scratch/project/70058680"
-    Then I should be redirected to a catrobat project
-    And there should be "1" projects in the database
-    And there should be "1" users in the database
-    And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 1 by "scratchcat"
-    When I download the project converted from Scratch project 70058680
-    Then I should receive an application file
-
-  Scenario: Opening an unchanged Scratch project again does not convert it again
-    When I request "GET" "/app/scratch/project/70058680"
-    And I request "GET" "/app/scratch/project/70058680"
-    Then I should be redirected to a catrobat project
-    And there should be "1" projects in the database
-    And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 1 by "scratchcat"
-
-  Scenario: Opening a Scratch project that changed on Scratch converts it again
-    When I request "GET" "/app/scratch/project/70058680"
-    And the Scratch project 70058680 was modified on Scratch at "2099-01-01T00:00:00.000Z"
-    And I request "GET" "/app/scratch/project/70058680"
-    Then I should be redirected to a catrobat project
-    And there should be "1" projects in the database
-    And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 2 by "scratchcat"
-
-  Scenario: Opening an unknown Scratch project shows an error and creates nothing
-    Given I am on "/app/scratch/project/1"
+  Scenario: Clicking a Scratch search result converts the project and opens it
+    Given there are Scratch projects:
+      | id       | name            | username   |
+      | 70058680 | Gamma Ray Racer | scratchcat |
+    And I am on "/app/search/Gamma"
     And I wait for the page to be loaded
-    Then I should be on "/app/"
-    And I wait for the element "#share-snackbar-label" to contain "does not exist"
-    And there should be "0" projects in the database
-    And there should be "0" users in the database
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    When I click "#search-scratch-projects button.search-card"
+    # The conversion runs before the page changes; this step polls for up to 10 s.
+    Then I wait for the element "#name" to contain "Gamma Ray Racer"
+    And the url should match "#/app/project/#"
+    And there should be "1" projects in the database
 
-  Scenario: Two Scratch projects with the same title by the same author stay two projects
-    When I request "GET" "/app/scratch/project/70058680"
-    And I request "GET" "/app/scratch/project/70058681"
-    Then I should be redirected to a catrobat project
-    And there should be "2" projects in the database
-    And there should be "1" users in the database
-    And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 1 by "scratchcat"
-    And the Scratch project 70058681 should be converted to "Gamma Ray Racer (70058681)" version 1 by "scratchcat"
+  Scenario: A Scratch search result that cannot be converted shows why and stays on the search page
+    Given there are Scratch projects:
+      | id       | name               | username   |
+      | 70058682 | Old Scratch 2 Game | scratchcat |
+    And I am on "/app/search/Old"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    When I click "#search-scratch-projects button.search-card"
+    Then I wait for the element "#share-snackbar-label" to contain "Only Scratch 3 projects can be converted."
+    And the url should match "#/app/search/Old#"
+    And there should be "0" projects in the database

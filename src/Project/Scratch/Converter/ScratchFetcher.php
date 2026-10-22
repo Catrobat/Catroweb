@@ -40,7 +40,7 @@ class ScratchFetcher
   {
     $token = $metadata['project_token'] ?? null;
     if (!\is_string($token) || '' === $token) {
-      throw new ScratchConversionException('Scratch did not hand out a project token; the project is probably not shared.');
+      throw new ScratchConversionException('Scratch did not hand out a project token; the project is probably not shared.', ScratchConversionException::NOT_FOUND);
     }
 
     $project = $this->getJson('https://projects.scratch.mit.edu/'.$scratch_id.'?token='.rawurlencode($token), self::MAX_JSON_BYTES);
@@ -157,8 +157,13 @@ class ScratchFetcher
   private function content(ResponseInterface $response): string
   {
     try {
-      if (200 !== $response->getStatusCode()) {
-        throw new ScratchConversionException('Scratch answered with HTTP '.$response->getStatusCode().'.');
+      $status = $response->getStatusCode();
+      if (404 === $status) {
+        throw new ScratchConversionException('This Scratch project does not exist or is not shared.', ScratchConversionException::NOT_FOUND);
+      }
+
+      if (200 !== $status) {
+        throw new ScratchConversionException('Scratch answered with HTTP '.$status.'.');
       }
 
       return $response->getContent();

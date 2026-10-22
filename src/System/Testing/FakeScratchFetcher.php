@@ -36,7 +36,7 @@ class FakeScratchFetcher extends ScratchFetcher
   {
     $metadata = self::readJson(self::FIXTURES.'metadata.json')[$scratch_id] ?? null;
     if (!\is_array($metadata)) {
-      throw new ScratchConversionException('This Scratch project does not exist or is not shared.');
+      throw new ScratchConversionException('This Scratch project does not exist or is not shared.', ScratchConversionException::NOT_FOUND);
     }
 
     $modified = self::modifiedOverrides()[$scratch_id] ?? null;
@@ -50,7 +50,11 @@ class FakeScratchFetcher extends ScratchFetcher
   #[\Override]
   public function fetchProject(int $scratch_id, array $metadata): array
   {
-    $this->fetchMetadata($scratch_id);
+    // "fake_error" in metadata.json makes a project fail like an unconvertible one on Scratch.
+    $error = $this->fetchMetadata($scratch_id)['fake_error'] ?? null;
+    if (\is_string($error)) {
+      throw new ScratchConversionException($error);
+    }
 
     return self::readJson(self::FIXTURES.'project.json');
   }

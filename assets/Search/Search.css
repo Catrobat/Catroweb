@@ -975,6 +975,18 @@
   text-decoration: none;
   transform: translateY(-2px);
 }
+button.search-card {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+.search-card--loading {
+  opacity: 0.5;
+  cursor: progress;
+}
 .search-card:hover .search-card__image {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }

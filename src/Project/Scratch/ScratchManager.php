@@ -74,7 +74,7 @@ class ScratchManager
     if (!flock($lock, LOCK_EX | LOCK_NB)) {
       fclose($lock);
 
-      throw new ScratchConversionException('Another Scratch project is being converted right now. Please try again in a minute.');
+      throw new ScratchConversionException('Another Scratch project is being converted right now. Please try again in a minute.', ScratchConversionException::BUSY);
     }
 
     $temp = (string) tempnam(sys_get_temp_dir(), 'scratch');

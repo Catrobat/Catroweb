@@ -1670,6 +1670,84 @@ class ProjectsController extends Controller
   }
 
   /**
+   * Operation projectsScratchScratchIdPost.
+   *
+   * Import a public Scratch project
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function projectsScratchScratchIdPostAction(Request $request, $scratch_id): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $scratch_id = $this->deserialize($scratch_id, 'int', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(1);
+    $response = $this->validate($scratch_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->projectsScratchScratchIdPost($scratch_id, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'An up-to-date copy already existed',
+        201 => 'The Scratch project was converted',
+        404 => 'Scratch does not know the project, or it is not shared',
+        422 => 'The project cannot be converted; the message says why and can be shown to the user',
+        429 => 'Too Many Requests',
+        503 => 'Another Scratch project is being converted right now',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation projectsSearchGet.
    *
    * Search for projects associated with a keywords

@@ -1,5 +1,6 @@
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { createPictureElement } from '../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
 import './Search.css'
 
@@ -101,7 +102,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
       renderProjects(projectsSection, data.projects || [], theme, trans)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
-      renderScratchProjects(scratchSection, data.scratch_projects || [], baseUrl)
+      renderScratchProjects(scratchSection, data.scratch_projects || [], baseUrl, theme)
 
       wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
       wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
@@ -197,7 +198,8 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
             )
           })
         } else if (type === 'scratch') {
-          for (const project of items) container.appendChild(createScratchCard(project, baseUrl))
+          for (const project of items)
+            container.appendChild(createScratchCard(project, baseUrl, theme))
         }
 
         nextOffset += RESULTS_PER_PAGE
@@ -328,7 +330,7 @@ function renderStudios(section, studios, baseUrl, trans) {
   })
 }
 
-function renderScratchProjects(section, projects, baseUrl) {
+function renderScratchProjects(section, projects, baseUrl, theme) {
   if (projects.length === 0) return
 
   section.classList.remove('d-none')
@@ -337,13 +339,13 @@ function renderScratchProjects(section, projects, baseUrl) {
   }
 
   const items = section.querySelector('.search-section__items')
-  for (const project of projects) items.appendChild(createScratchCard(project, baseUrl))
+  for (const project of projects) items.appendChild(createScratchCard(project, baseUrl, theme))
 }
 
-function createScratchCard(project, baseUrl) {
+function createScratchCard(project, baseUrl, theme) {
+  // A button, not a link: the card converts the project through the API instead of leaving for Scratch.
   const card = createCard(
-    // Converts the project on first open (rate limited), then shows it as a Pocket Code project.
-    `${baseUrl}/app/scratch/project/${encodeURIComponent(String(project.id))}`,
+    null,
     null,
     'card',
     '/images/default/screenshot-card@1x.webp',
@@ -356,13 +358,46 @@ function createScratchCard(project, baseUrl) {
   badge.textContent = 'Scratch'
   card.insertBefore(badge, card.querySelector('.search-card__name'))
 
+  const scratchId = encodeURIComponent(String(project.id))
+  card.addEventListener('click', () => importScratchProject(card, scratchId, baseUrl, theme))
+
   return card
 }
 
+// Converting can take seconds: the card shows that it is busy, then the converted project opens.
+function importScratchProject(card, scratchId, baseUrl, theme) {
+  card.disabled = true
+  card.setAttribute('aria-busy', 'true')
+  card.classList.add('search-card--loading')
+
+  fetch(`${baseUrl}/api/projects/scratch/${scratchId}`, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { Accept: 'application/json' },
+  })
+    .then((response) =>
+      response
+        .json()
+        .catch(() => ({}))
+        .then((body) => {
+          if (!response.ok) throw new Error(body?.error?.message || `HTTP ${response.status}`)
+          window.location.href = (body.project_url || '').replace('/app/', `/${theme}/`)
+        }),
+    )
+    .catch((error) => {
+      card.disabled = false
+      card.removeAttribute('aria-busy')
+      card.classList.remove('search-card--loading')
+      showSnackbar('#share-snackbar', error.message, SnackbarDuration.error)
+    })
+}
+
+// Without a url the card is a button; its caller handles the click.
 function createCard(url, variants, size, fallback, name, metaIcon, metaText, blur = false) {
-  const a = document.createElement('a')
+  const a = document.createElement(url === null ? 'button' : 'a')
   a.className = 'search-card'
-  a.href = url
+  if (url === null) a.type = 'button'
+  else a.href = url
 
   const picture = createPictureElement(
     variants,

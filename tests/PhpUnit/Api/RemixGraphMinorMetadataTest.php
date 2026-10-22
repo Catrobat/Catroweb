@@ -13,6 +13,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\Remix\RemixManager;
+use App\Project\Scratch\ScratchManager;
 use App\Storage\ScreenshotRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -62,7 +63,7 @@ final class RemixGraphMinorMetadataTest extends TestCase
     $remix = $this->createStub(RemixManager::class);
     $remix->method('getRenderableRemixGraph')->willReturn($graph);
     $limiter = new RateLimiterFactory(['id' => 'remix-test', 'policy' => 'no_limit'], new InMemoryStorage());
-    $api = new ProjectsApi($facade, $this->createStub(ReactionsApiFacade::class), $this->createStub(CodeTreeBuilder::class), $remix, $this->createStub(ScreenshotRepository::class), $limiter, $limiter, $limiter, new RequestStack(), new NullLogger());
+    $api = new ProjectsApi($facade, $this->createStub(ReactionsApiFacade::class), $this->createStub(CodeTreeBuilder::class), $remix, $this->createStub(ScreenshotRepository::class), $limiter, $limiter, $limiter, new RequestStack(), new NullLogger(), $limiter, $limiter, $limiter, $this->createStub(ScratchManager::class));
     $code = 0;
     $headers = [];
     $result = $api->projectsIdRemixGraphGet('safe', $code, $headers);

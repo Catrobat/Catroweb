@@ -19,6 +19,8 @@ use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Event\ProjectDownloadEvent;
 use App\Project\Remix\RemixManager;
+use App\Project\Scratch\Converter\ScratchConversionException;
+use App\Project\Scratch\ScratchManager;
 use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\CodeViewResponse;
@@ -58,6 +60,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     private readonly RateLimiterFactory $downloadBurstLimiter,
     private readonly RequestStack $request_stack,
     private readonly LoggerInterface $logger,
+    private readonly RateLimiterFactory $scratchOpenBurstLimiter,
+    private readonly RateLimiterFactory $scratchConvertBurstLimiter,
+    private readonly RateLimiterFactory $scratchConvertDailyLimiter,
+    private readonly ScratchManager $scratch_manager,
   ) {
   }
 
@@ -378,6 +384,48 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     // Since we have come this far, the project upload is completed
     $responseCode = Response::HTTP_CREATED;
     $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
+
+    return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
+  #[\Override]
+  public function projectsScratchScratchIdPost(int $scratch_id, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    // Every request asks Scratch's API, even when our copy is current; converting is limited much harder.
+    $ip = $this->facade->getLoader()->getClientIp() ?? 'unknown';
+    $converted = false;
+    try {
+      if (null === $this->checkIpRateLimit($ip, $this->scratchOpenBurstLimiter)) {
+        throw new ScratchConversionException('Too many Scratch projects opened in a short time. Please wait a minute.', ScratchConversionException::RATE_LIMITED);
+      }
+
+      $project = $this->scratch_manager->importProject($scratch_id, function () use ($ip, &$converted): void {
+        $burst = $this->scratchConvertBurstLimiter->create($ip)->consume();
+        $daily = $this->scratchConvertDailyLimiter->create($ip)->consume();
+        if (!$burst->isAccepted() || !$daily->isAccepted()) {
+          throw new ScratchConversionException('You converted many Scratch projects in a short time. Please try again later.', ScratchConversionException::RATE_LIMITED);
+        }
+
+        $converted = true;
+      }, $ip);
+    } catch (ScratchConversionException $exception) {
+      [$responseCode, $type] = match ($exception->getCode()) {
+        ScratchConversionException::NOT_FOUND => [Response::HTTP_NOT_FOUND, 'not_found'],
+        ScratchConversionException::RATE_LIMITED => [Response::HTTP_TOO_MANY_REQUESTS, 'too_many_requests'],
+        ScratchConversionException::BUSY => [Response::HTTP_SERVICE_UNAVAILABLE, 'service_unavailable'],
+        default => [Response::HTTP_UNPROCESSABLE_ENTITY, 'unprocessable_entity'],
+      };
+      if (Response::HTTP_SERVICE_UNAVAILABLE === $responseCode) {
+        $responseHeaders['Retry-After'] = '60';
+      }
+
+      return ApiErrorResponse::createModel($responseCode, $type, $exception->getMessage());
+    }
+
+    $responseCode = $converted ? Response::HTTP_CREATED : Response::HTTP_OK;
+    if ($converted) {
+      $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
+    }
 
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
   }

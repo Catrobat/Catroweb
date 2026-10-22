@@ -141,14 +141,14 @@ Feature: Search projects and users
     And the client response should not contain "70058683"
     And the search response should not contain any "projects"
 
-  Scenario: A Scratch project drops out of the Scratch results once it was opened and converted
+  Scenario: A Scratch project drops out of the Scratch results once it was imported
     Given there are Scratch projects:
       | id       | name            | username   |
       | 70058680 | Gamma Ray Racer | scratchcat |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/search?query=Gamma&type=scratch"
     Then the search response should contain 1 scratch_projects
-    When I request "GET" "/app/scratch/project/70058680"
+    When I request "POST" "/api/projects/scratch/70058680"
     And I request "GET" "/api/search?query=Gamma&type=scratch"
     Then the response code should be "200"
     And the search response should contain 0 scratch_projects

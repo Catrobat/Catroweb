@@ -6,7 +6,7 @@
 
 ## Decision
 
-Opening `/app/scratch/project/{id}` converts a public Scratch 3 project into a Catrobat 1.14 archive inside
+`POST /api/projects/scratch/{id}` converts a public Scratch 3 project into a Catrobat 1.14 archive inside
 Catroweb (`src/Project/Scratch/Converter`) and publishes it through the normal upload pipeline (malware scan,
 sanitizer, validation) under a shadow account of the Scratch author. A converted project that is unchanged on
 Scratch is served from Share without converting again.
