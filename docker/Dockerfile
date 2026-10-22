@@ -32,7 +32,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG INSTALL_XDEBUG=true
 
 # Minimum PHP patch release (security floor). Bumping it also busts the cached apt layer below.
-ENV PHP_MIN_VERSION=8.5.12
+# A build arg, so a platform whose packages lag behind (Sury's arm64) can build with a lower floor locally.
+ARG PHP_MIN_VERSION=8.5.12
+ENV PHP_MIN_VERSION=${PHP_MIN_VERSION}
 
 # Install dependencies
 RUN apt-get update && \
