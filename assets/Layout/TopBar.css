@@ -144,8 +144,13 @@
   opacity: 0.32;
 }
 
+#top-app-bar__search .mdc-top-app-bar__section {
+  flex: 1 1 auto;
+}
+
 #top-app-bar__search-form {
   position: relative;
+  flex: 1 1 auto;
   width: 100%;
   height: 100%;
 }
@@ -157,6 +162,11 @@
   background-color: var(--primary-bg, var(--primary));
   border: none;
   outline: none;
+}
+
+/* Enter submits the form; the button only exists for that. */
+#top-app-bar__search-form__submit {
+  display: none;
 }
 
 #top-app-bar__search-form input[required]:invalid + label[placeholder][alt]::before {
