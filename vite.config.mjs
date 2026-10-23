@@ -68,6 +68,8 @@ export default defineConfig(({ mode }) => {
         [
           { src: 'assets/images', dest: '../images' },
           { src: 'assets/images/favicon.ico', dest: '../favicon.ico' },
+          // Default URLs of Pocket Code's look, background and web request bricks.
+          { src: 'assets/brick-defaults', dest: '../brick-defaults' },
         ],
         { rootDir },
       ),
