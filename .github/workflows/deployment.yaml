@@ -52,6 +52,16 @@ jobs:
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
 
+      - name: Java 21 for the browser player
+        uses: actions/setup-java@v6.1.0
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build the browser player
+        working-directory: player
+        run: ./scripts/prepare.sh && ./scripts/build.sh
+
       - name: Deploy Share
         uses: deployphp/action@v1
         with:

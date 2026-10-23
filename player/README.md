@@ -38,6 +38,12 @@ Other pieces:
 - Actions: `compat/GenActions` generates `ActionRegistry`, because the web backend cannot pool actions by reflection.
 - `WebLauncher` does what `StageActivity` and `StageLifeCycleController` do on Android.
 
+## Deployment
+
+The deployment workflow builds the player (about 8 minutes) and `deploy:player` uploads it to
+`public/player/<commit>/`, a new folder per release because nginx caches `.js` for a year.
+`/player/index.html` forwards to the current one.
+
 ## Status
 
 The engine runs a project built in code (a pen drawing a circle). Not yet: loading `.catrobat` files, looks and sounds,

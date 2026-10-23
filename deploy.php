@@ -142,6 +142,20 @@ task('deploy:encore', function () {
   run('export PATH={{release_path}}/.corepack-bin:$PATH && yarn run prod');
 });
 
+task('deploy:player', function () {
+  // Built by the deployment workflow (player/scripts); nginx caches .js for a year, so every release gets its own
+  // folder and player/index.html points at the current one.
+  $build = __DIR__.'/player/build/dist/js/webapp';
+  if (!is_dir($build)) {
+    warning('No browser player build found, skipping it');
+
+    return;
+  }
+  $version = substr(getenv('GITHUB_SHA') ?: date('YmdHis'), 0, 12);
+  upload($build.'/', "{{release_path}}/public/player/{$version}/");
+  run("printf '%s' '<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");
+});
+
 task('deploy:jwt', function () {
   cd('{{release_path}}');
   run('sh docker/app/init-jwt-config.sh');
@@ -214,6 +228,7 @@ task('deploy', [
   'install:assets',
   'install:yarn',
   'deploy:encore',
+  'deploy:player',
   'dump:env',
   'deploy:jwt',
   'deploy:cache:clear',
