@@ -143,15 +143,17 @@ task('deploy:encore', function () {
 });
 
 task('deploy:player', function () {
-  // Built by the deployment workflow (player/scripts); nginx caches .js for a year, so every release gets its own
-  // folder and player/index.html points at the current one.
+  // Built by the deployment workflow's player job; nginx caches .js for a year, so every build gets its own folder
+  // and player/index.html points at the current one. A failed player build must not block a release.
   $build = __DIR__.'/player/build/dist/js/webapp';
-  if (!is_dir($build)) {
-    warning('No browser player build found, skipping it');
+  if (!is_file($build.'/app.js')) {
+    warning('No complete browser player build found, skipping it');
 
     return;
   }
-  $version = substr(getenv('GITHUB_SHA') ?: date('YmdHis'), 0, 12);
+  // Named after the content, so a changed engine never hides behind a cached app.js.
+  $version = substr(sha1_file($build.'/app.js'), 0, 12);
+  run("mkdir -p {{release_path}}/public/player/{$version}"); // rsync creates only the last path segment
   upload($build.'/', "{{release_path}}/public/player/{$version}/");
   run("printf '%s' '<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");
 });

@@ -179,6 +179,8 @@ public final class Rewrite {
 				method.instructions = body;
 				method.tryCatchBlocks.clear();
 				method.localVariables = null;
+				method.visibleLocalVariableAnnotations = null; // they point at labels of the old body
+				method.invisibleLocalVariableAnnotations = null;
 				method.maxStack = 3;
 				method.maxLocals = Math.max(Type.getArgumentsAndReturnSizes(method.desc) >> 2, 1);
 				stats[1]++;

@@ -14,7 +14,8 @@ Needs JDK 21 and the Android SDK (`ANDROID_HOME`).
 ./scripts/build.sh     # patch it for the browser and compile build/dist/js/webapp
 ```
 
-Serve `build/dist/js/webapp` with any static server.
+Serve `build/dist/js/webapp` with any static server. `./scripts/smoke.sh` checks in headless Chrome that the
+engine runs, and `./scripts/export-mapping.sh` dumps Catroid's XStream mapping for the coming project loader.
 
 ## How it works
 
@@ -40,9 +41,9 @@ Other pieces:
 
 ## Deployment
 
-The deployment workflow builds the player (about 8 minutes) and `deploy:player` uploads it to
-`public/player/<commit>/`, a new folder per release because nginx caches `.js` for a year.
-`/player/index.html` forwards to the current one.
+The deployment workflow builds the player in its own job, without secrets, and hands only the built files to the
+deploy job; if the build fails, share deploys without it. `deploy:player` uploads it to `public/player/<hash of app.js>/`,
+a new folder per build because nginx caches `.js` for a year. `/player/index.html` forwards to the current one.
 
 ## Status
 

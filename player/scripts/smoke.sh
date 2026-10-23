@@ -10,7 +10,7 @@ rm -f build/web/smoke.port
 python3 scripts/smoke_server.py build/dist/js/webapp build/web/smoke.port 15 &
 SERVER=$!
 trap 'kill $SERVER' EXIT
-while [ ! -s build/web/smoke.port ]; do sleep 0.2; done
+for _ in $(seq 50); do [ -s build/web/smoke.port ] && break; kill -0 $SERVER; sleep 0.2; done
 PORT=$(cat build/web/smoke.port)
 
 # WebGL runs on SwiftShader without a GPU; smoke_server holds the load event back so the stage gets 15 s to run.

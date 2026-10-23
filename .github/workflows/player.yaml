@@ -51,3 +51,4 @@ jobs:
             player/build/dist/js/webapp
             player/build/web/stub-report.tsv
             player/build/web/smoke.png
+            player/build/web/teavm.log
