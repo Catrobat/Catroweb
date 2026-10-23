@@ -43,10 +43,10 @@ jobs:
       run:
         working-directory: player
     steps:
+      # The workflow's own commit, not inputs.ref: this job runs build code, and a typed ref must not get to run
+      # it in the default branch's context (Actions cache poisoning). The player does not depend on share's code.
       - name: Checkout
         uses: actions/checkout@v7.0.1
-        with:
-          ref: ${{ inputs.ref || 'main' }}
 
       - name: Java 21
         uses: actions/setup-java@v6.1.0
