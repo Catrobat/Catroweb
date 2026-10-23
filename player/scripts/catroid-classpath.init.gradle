@@ -1,0 +1,14 @@
+// Writes Catroid's runtime classpath (Android libraries as plain jars) to $CP_OUT for the web build.
+allprojects {
+    afterEvaluate { p ->
+        if (p.name != 'catroid') return
+        p.tasks.register('printWebClasspath') {
+            doLast {
+                def files = p.configurations.getByName('catroidDebugRuntimeClasspath').incoming.artifactView {
+                    attributes { it.attribute(org.gradle.api.attributes.Attribute.of('artifactType', String), 'android-classes-jar') }
+                }.files.files
+                new File(System.getenv('CP_OUT')).text = files.collect { it.absolutePath }.join('\n') + '\n'
+            }
+        }
+    }
+}
