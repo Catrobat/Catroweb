@@ -97,3 +97,21 @@ Feature: Project list to provides users with different categories of projects
       | category                                                              | title               | page                            |
       | "#home-projects__trending .project-list__title__btn-toggle__icon"     | "Trending projects" | "/app/#home-projects__trending" |
       | "#home-projects__popular .project-list__title__btn-toggle__icon"      | "Popular projects"  | "/app/#home-projects__popular"  |
+
+  Scenario: Going back from a project opened in the full view shows the full view again
+    Given I am on homepage
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    When I click "#home-projects__trending .project-list__title__btn-toggle__icon"
+    And I wait for AJAX to finish
+    And I click "#home-projects__trending .project-list__project"
+    And I wait for the page to be loaded
+    Then I should be on "/app/project/the-only-project"
+    When I move backward one page
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then I should be on "/app/#home-projects__trending"
+    And the "#top-app-bar__title" element should contain "Trending projects"
+    When I click "#top-app-bar__back__btn-back"
+    And I wait for the page to be loaded
+    Then the "#top-app-bar__title" element should contain "Catrobat community"
