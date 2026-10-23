@@ -425,6 +425,24 @@ final class ScratchToCatrobatConverterTest extends TestCase
     }
   }
 
+  public function testSavedListItemsAreStoredWithOneBrickPerList(): void
+  {
+    $xml = self::convertBlocks([], ['lists' => [
+      'l1' => ['items', [5, 'a,b', 'say "hi"', "two\nlines", 'C:\new', '']],
+      'l2' => ['empty', []],
+    ]]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame(0.0, $xpath->evaluate('count(//brick[@type="AddItemToUserListBrick"])'));
+    $this->assertSame('empty', $xpath->evaluate('string(//brick[@type="ClearUserListBrick"]/userList/name)'));
+    $this->assertSame('items', $xpath->evaluate('string(//brick[@type="StoreCSVIntoUserListBrick"]/userList/name)'));
+    $this->assertSame('1', $xpath->evaluate('normalize-space(//brick[@type="StoreCSVIntoUserListBrick"]//formula[@category="STORE_CSV_INTO_USERLIST_COLUMN"]/value)'));
+    // Quotes double and backslashes double: opencsv reads both as escapes.
+    $this->assertSame(
+      "\"5\"\n\"a,b\"\n\"say \"\"hi\"\"\"\n\"two\nlines\"\n\"C:\\\\new\"\n\"\"",
+      $xpath->evaluate('string(//brick[@type="StoreCSVIntoUserListBrick"]//formula[@category="STORE_CSV_INTO_USERLIST_CSV"]/value)'),
+    );
+  }
+
   /** Evaluates a formula like Catroid's FormulaElement does, for the few element types the costume wrap uses. */
   private static function evaluate(\DOMElement $element, float $x): float
   {
