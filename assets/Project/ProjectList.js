@@ -64,6 +64,12 @@ export class ProjectList {
 
     this.fetchMore(true)
     this.initListeners()
+
+    // Coming back from a project opened in the full view reloads this page; reopen the list.
+    const state = window.history.state
+    if (state?.type === 'ProjectList' && state.full && state.id === container.id) {
+      this.openFullView()
+    }
   }
 
   formatApiUrl(apiUrl) {
