@@ -16,7 +16,10 @@ import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TypeInsnNode;
 
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Enumeration;
@@ -63,11 +66,11 @@ public final class Rewrite {
 			Map.entry("kotlin/time/Duration.getInMilliseconds-impl(D)D", "durationMillis"),
 			Map.entry("java/lang/Class.getGenericSuperclass()Ljava/lang/reflect/Type;", "getGenericSuperclass"));
 
-	static java.io.PrintStream REPORT;
+	static PrintStream report;
 
 	public static void main(String[] args) throws Exception {
 		if (null != System.getenv("STUB_REPORT")) {
-			REPORT = new java.io.PrintStream(new java.io.FileOutputStream(System.getenv("STUB_REPORT"), true), true);
+			report = new PrintStream(new FileOutputStream(System.getenv("STUB_REPORT"), true), true);
 		}
 		Set<String> missing = new HashSet<>();
 		for (String line : Files.readAllLines(Path.of(args[0]))) {
@@ -128,8 +131,8 @@ public final class Rewrite {
 
 	static byte[] rewrite(byte[] bytes, Set<String> missing, int[] stats) {
 		ClassNode node = new ClassNode();
-		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(REMAP)), 0);
-		boolean changed = !java.util.Objects.equals(node.superName, new ClassReader(bytes).getSuperName()) || touches(new ClassReader(bytes));
+		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, REMAP)), 0);
+		boolean changed = mentionsRemapped(bytes);
 		if (node.interfaces.removeIf(missing::contains)) {
 			changed = true; // the class works without claiming a type the browser lacks
 		}
@@ -138,11 +141,9 @@ public final class Rewrite {
 			changed = true;
 		}
 		for (MethodNode method : node.methods) {
-			boolean stub = false;
-			String reason = null;
+			String reason = null; // why the method is stubbed: the first missing thing it uses
 			if (0 != (method.access & Opcodes.ACC_NATIVE) && missing.contains(node.name + "." + method.name + method.desc)) {
 				method.access &= ~Opcodes.ACC_NATIVE; // JNI code has no browser counterpart
-				stub = true;
 				reason = "native";
 			}
 			for (AbstractInsnNode insn = method.instructions.getFirst(); null != insn; insn = insn.getNext()) {
@@ -161,22 +162,14 @@ public final class Rewrite {
 						call.itf = false;
 						stats[0]++;
 						changed = true;
-					} else if (missing.contains(call.owner + "." + call.name + call.desc) || missing.contains(call.owner)) {
-						stub = true;
-						reason = null == reason ? call.owner + "." + call.name + call.desc : reason;
+						continue;
 					}
-				} else if (insn instanceof FieldInsnNode field && (missing.contains(field.owner + "." + field.name) || missing.contains(field.owner))) {
-					stub = true;
-					reason = null == reason ? field.owner + "." + field.name : reason;
-				} else if (insn instanceof TypeInsnNode type && missing.contains(type.desc)) {
-					stub = true;
-					reason = null == reason ? type.desc : reason;
-				} else if (insn instanceof LdcInsnNode ldc && ldc.cst instanceof Type t && Type.OBJECT == t.getSort() && missing.contains(t.getInternalName())) {
-					stub = true; // Foo.class of a missing Foo
-					reason = null == reason ? t.getInternalName() + ".class" : reason;
+				}
+				if (null == reason) {
+					reason = missingUse(insn, missing);
 				}
 			}
-			if (stub && 0 == (method.access & Opcodes.ACC_ABSTRACT)) {
+			if (null != reason && 0 == (method.access & Opcodes.ACC_ABSTRACT)) {
 				InsnList body = new InsnList();
 				body.add(new TypeInsnNode(Opcodes.NEW, "java/lang/UnsupportedOperationException"));
 				body.add(new InsnNode(Opcodes.DUP));
@@ -189,8 +182,8 @@ public final class Rewrite {
 				method.maxStack = 3;
 				method.maxLocals = Math.max(Type.getArgumentsAndReturnSizes(method.desc) >> 2, 1);
 				stats[1]++;
-				if (null != REPORT) {
-					REPORT.println(node.name + "." + method.name + method.desc + "\t" + reason);
+				if (null != report) {
+					report.println(node.name + "." + method.name + method.desc + "\t" + reason);
 				}
 				changed = true;
 			}
@@ -203,8 +196,26 @@ public final class Rewrite {
 		return writer.toByteArray();
 	}
 
-	private static boolean touches(ClassReader reader) {
-		String text = new String(reader.b, java.nio.charset.StandardCharsets.ISO_8859_1);
+	/** The missing method, field, class or Foo.class constant an instruction uses, or null. */
+	private static String missingUse(AbstractInsnNode insn, Set<String> missing) {
+		String[] uses = switch (insn) {
+			case MethodInsnNode call -> new String[] {call.owner + "." + call.name + call.desc, call.owner};
+			case FieldInsnNode field -> new String[] {field.owner + "." + field.name, field.owner};
+			case TypeInsnNode type -> new String[] {type.desc};
+			case LdcInsnNode ldc when ldc.cst instanceof Type t && Type.OBJECT == t.getSort() -> new String[] {t.getInternalName()};
+			default -> new String[0];
+		};
+		for (String use : uses) {
+			if (missing.contains(use)) {
+				return use;
+			}
+		}
+		return null;
+	}
+
+	/** Remapped names sit in the constant pool, so a byte search finds every class the remap changes. */
+	private static boolean mentionsRemapped(byte[] bytes) {
+		String text = new String(bytes, StandardCharsets.ISO_8859_1);
 		return REMAP.keySet().stream().anyMatch(text::contains);
 	}
 

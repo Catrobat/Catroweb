@@ -50,6 +50,6 @@ public class FindLdc {
 				}
 			}
 		}
-		refs.forEach((k, v) -> { if (!defined.contains(k)) System.out.println(k + "  <-  " + v.iterator().next() + (v.size() > 1 ? " (+" + (v.size() - 1) + ")" : "")); });
+		refs.forEach((k, v) -> { if (!defined.contains(k)) System.out.println("Class " + k.replace('/', '.') + " was not found, used by " + v.iterator().next() + (v.size() > 1 ? " (+" + (v.size() - 1) + ")" : "")); });
 	}
 }

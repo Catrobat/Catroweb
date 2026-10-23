@@ -39,10 +39,15 @@ jobs:
       - name: Compile the player
         run: ./scripts/build.sh
 
+      - name: Smoke test (the engine runs and draws in headless Chrome)
+        run: ./scripts/smoke.sh
+
       - name: Upload the player
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: player
           path: |
             player/build/dist/js/webapp
             player/build/web/stub-report.tsv
+            player/build/web/smoke.png

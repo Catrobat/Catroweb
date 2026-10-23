@@ -54,7 +54,7 @@ for round in $(seq 1 12); do
   ./gradlew -q compileJava && (cd build/classes/java/main && jar cf ../../../web/own-classes.jar .)
   { echo $W/own-classes.jar; cat $W/patched-classpath.txt; find "${GRADLE_USER_HOME:-$HOME/.gradle}/caches/modules-2" -name '*.jar' \
       \( -path '*gdx-teavm*' -o -path '*org.teavm*' -o -path "*gdx/$GDX_VERSION*" \) ! -name '*sources*'; } > $W/all-jars.txt
-  $JAVA -cp $TOOLS org.catrobat.web.compat.FindLdc $W/all-jars.txt | awk '{gsub("/", ".", $1); print "Class " $1 " was not found"}' > $W/missing-ldc.txt
+  $JAVA -cp $TOOLS org.catrobat.web.compat.FindLdc $W/all-jars.txt > $W/missing-ldc.txt
   if comm -13 $W/missing.txt <(sort -u $W/missing-ldc.txt) | grep -q .; then sort -u $W/missing.txt $W/missing-ldc.txt -o $W/missing.txt; patch; fi
   if ./gradlew gdx_teavm_web_js_build > $W/teavm.log 2>&1; then
     echo "Player built (round $round): $(grep -c '^org/catrobat/catroid' $W/stub-report.tsv) Catroid methods unavailable on the web, see $W/stub-report.tsv"
