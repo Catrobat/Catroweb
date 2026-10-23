@@ -16,7 +16,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             time.sleep(WAIT)
             self.reply(GIF, "image/gif")
         elif self.path == "/":
-            page = open(ROOT + "/index.html", "rb").read()
+            with open(ROOT + "/index.html", "rb") as f:
+                page = f.read()
             # The player starts on "load", which the image now holds back; start it as soon as the DOM is there.
             page = page.replace(b'addEventListener("load", start)', b'addEventListener("DOMContentLoaded", start)')
             self.reply(page.replace(b"</body>", b'<img src="/__wait" width="1" height="1"></body>'), "text/html")

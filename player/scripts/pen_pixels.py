@@ -11,7 +11,8 @@ def paeth(a, b, c):
 
 
 def rows(path):
-    data = open(path, "rb").read()
+    with open(path, "rb") as f:
+        data = f.read()
     assert data[:8] == b"\x89PNG\r\n\x1a\n", "not a PNG"
     pos, idat = 8, b""
     while pos < len(data):
