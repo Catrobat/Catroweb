@@ -35,6 +35,38 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
+  player:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    continue-on-error: true
+    defaults:
+      run:
+        working-directory: player
+    steps:
+      # The workflow's own commit, not inputs.ref: this job runs build code, and a typed ref must not get to run
+      # it in the default branch's context (Actions cache poisoning). The player does not depend on share's code.
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Java 21
+        uses: actions/setup-java@v6.1.0
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build the browser player
+        run: ./scripts/prepare.sh && ./scripts/build.sh
+
+      - name: Check that it runs (headless Chrome)
+        run: ./scripts/smoke.sh
+
+      - name: Hand the player to the deploy job
+        uses: actions/upload-artifact@v7
+        with:
+          name: player-webapp
+          path: player/build/dist/js/webapp
+          retention-days: 1
+
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Deployment:
   #
@@ -42,6 +74,8 @@ jobs:
   #  - Add all credentials hidden in secrets to the configuration files
   #
   deploy:
+    needs: player
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,6 +85,15 @@ jobs:
 
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
+
+      # Built in its own job without secrets: the player build runs a lot of third-party code (Catroid's Gradle
+      # build, TeaVM), which must never share a runner with the production SSH key. If it failed, deploy without it.
+      - name: Download the browser player
+        continue-on-error: true
+        uses: actions/download-artifact@v8
+        with:
+          name: player-webapp
+          path: player/build/dist/js/webapp
 
       - name: Deploy Share
         uses: deployphp/action@v1
