@@ -57,11 +57,15 @@ jobs:
       - name: Build the browser player
         run: ./scripts/prepare.sh && ./scripts/build.sh
 
+      - name: Check that it runs (headless Chrome)
+        run: ./scripts/smoke.sh
+
       - name: Hand the player to the deploy job
         uses: actions/upload-artifact@v7
         with:
           name: player-webapp
           path: player/build/dist/js/webapp
+          retention-days: 1
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Deployment:
