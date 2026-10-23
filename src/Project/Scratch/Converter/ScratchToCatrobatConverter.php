@@ -413,19 +413,38 @@ class ScratchToCatrobatConverter
 
     $items = 0;
     foreach ($target['lists'] ?? [] as $id => $list) {
-      $element = fn (): \DOMElement => $model->listElement($key ?? ProjectModel::STAGE, (string) $list[0], (string) $id);
-      $bricks[] = $c->brick('ClearUserListBrick', [], [], [$element()], formula_list: true);
-      foreach ((array) ($list[1] ?? []) as $item) {
-        if (++$items > self::MAX_INITIAL_LIST_ITEMS) {
-          $bricks[] = $c->note('the remaining saved list items were left out');
-          break 2;
-        }
-
-        $bricks[] = $c->brick('AddItemToUserListBrick', ['LIST_ADD_ITEM' => self::saved($item)], [], [$element()]);
+      $element = $model->listElement($key ?? ProjectModel::STAGE, (string) $list[0], (string) $id);
+      $saved = array_slice((array) ($list[1] ?? []), 0, max(0, self::MAX_INITIAL_LIST_ITEMS - $items));
+      $items += count($saved);
+      // Pocket Code runs one brick per frame, so one brick per item delayed the green flag by seconds for long
+      // lists. The CSV brick fills the whole list in one frame; its items are text, which Pocket Code calculates
+      // with like numbers.
+      $bricks[] = [] === $saved
+        ? $c->brick('ClearUserListBrick', [], [], [$element], formula_list: true)
+        : $c->brick('StoreCSVIntoUserListBrick', [
+          'STORE_CSV_INTO_USERLIST_COLUMN' => Formula::number(1),
+          'STORE_CSV_INTO_USERLIST_CSV' => Formula::string(self::csvColumn($saved)),
+        ], [], [$element]);
+      if (count($saved) < count((array) ($list[1] ?? []))) {
+        $bricks[] = $c->note('the remaining saved list items were left out');
+        break;
       }
     }
 
     return $bricks;
+  }
+
+  /**
+   * One quoted CSV row per item. Pocket Code's parser (opencsv) also treats a backslash as escape character.
+   *
+   * @param array<mixed> $items
+   */
+  private static function csvColumn(array $items): string
+  {
+    return implode("\n", array_map(
+      static fn (mixed $item): string => '"'.str_replace(['\\', '"'], ['\\\\', '""'], is_scalar($item) ? (string) $item : '').'"',
+      $items,
+    ));
   }
 
   /** A saved Scratch value: numbers stay numbers, strings stay strings ("001" is not 1). */
