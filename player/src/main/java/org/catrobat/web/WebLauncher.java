@@ -52,12 +52,16 @@ public class WebLauncher {
 			return;
 		}
 		Project project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
+		if (!projectId.isEmpty()) {
+			ProjectLoader.prefetch(project, projectId);
+		}
 		if (projectId.isEmpty() || Window.current().getLocation().getSearch().contains("autostart")) {
 			Sounds.createContext(); // without a click it may stay muted, which the demo and tests do not mind
 		} else {
 			StartScreen.waitForStart(project.getName());
 		}
 		if (!projectId.isEmpty()) {
+			ProjectLoader.awaitPrefetch();
 			ProjectLoader.loadSounds(project, projectId);
 			Sounds.awaitDecoded();
 		}
