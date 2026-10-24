@@ -13,6 +13,8 @@ import org.catrobat.catroid.io.XstreamSerializer;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSByRef;
 import org.teavm.jso.ajax.XMLHttpRequest;
+import org.teavm.jso.browser.Location;
+import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.xml.DOMParser;
 import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.NodeList;
@@ -28,9 +30,17 @@ public final class ProjectLoader {
 	private ProjectLoader() {
 	}
 
-	/** Share serves the extracted files of visible projects under /project-files/{id}/assets/. */
+	/**
+	 * Share serves the extracted files of visible projects under /project-files/{id}/assets/. The player runs on its
+	 * own host, play.<domain>, so project code never shares an origin with share's login cookies; it reads the files
+	 * from share.<domain>, which allows that origin (PlayerCorsListener). Anywhere else (tests, development) the same
+	 * host serves both.
+	 */
 	private static String assetUrl(String projectId, String path) {
-		return "/project-files/" + projectId + "/assets/" + path;
+		Location location = Window.current().getLocation();
+		String host = location.getHost(); // with the port, if any
+		String share = host.startsWith("play.") ? location.getProtocol() + "//share." + host.substring("play.".length()) : "";
+		return share + "/project-files/" + projectId + "/assets/" + path;
 	}
 
 	public static Project load(String projectId) {
