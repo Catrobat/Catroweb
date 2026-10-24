@@ -19,7 +19,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     defaults:
       run:
         working-directory: player
@@ -42,6 +42,9 @@ jobs:
       - name: Smoke test (the engine runs and draws in headless Chrome)
         run: ./scripts/smoke.sh
 
+      - name: Conformance (Catroid's catrobatTests on the stage, compared with conformance.tsv)
+        run: ./scripts/conformance.sh
+
       - name: Upload the player
         if: always()
         uses: actions/upload-artifact@v7
@@ -54,3 +57,4 @@ jobs:
             player/build/web/teavm.log
             player/build/web/loader-check/page.html
             player/build/web/loader-check/chrome.log
+            player/build/web/conformance/results.tsv

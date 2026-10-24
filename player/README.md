@@ -17,7 +17,10 @@ Needs JDK 21 and the Android SDK (`ANDROID_HOME`).
 Serve `build/dist/js/webapp` with any static server; `index.html#<project id>` loads that project from share's
 `/project-files/<id>/assets/code.xml`. `./scripts/smoke.sh` checks in headless Chrome that the engine runs and that the
 loader reads all of Catroid's `catrobatTests` projects, plus those in `fixtures/`, like the app does
-(`index.html#check`, compared by `scripts/check_loader.py`). `./scripts/export-mapping.sh` dumps Catroid's XStream mapping.
+(`index.html#check`, compared by `scripts/check_loader.py`). `./scripts/export-mapping.sh` dumps Catroid's XStream
+mapping. `./scripts/conformance.sh` plays every `catrobatTests` project on the stage and compares the results with
+`conformance.tsv`, where each test is `pass` or `fail` with its reason: a test that passes there must keep passing (CI
+runs it in the Player workflow). After making more tests pass, record them with `./scripts/conformance.sh --update`.
 
 ## How it works
 
@@ -71,5 +74,5 @@ the files it serves via `X-Accel-Redirect`). Only projects a logged-out visitor 
 `index.html#<project id>` plays share projects from Catrobat language 0.9991 on (older ones need Catroid's legacy
 conversion) with their looks and sounds, after a click on the start screen (browsers only play sound after one).
 Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
-unavailable, as on a device without those sensors. Not yet: all of `catrobatTests` on the stage as a conformance suite;
-the Play button.
+unavailable, as on a device without those sensors. `conformance.tsv` lists which of Catroid's test projects pass on
+the stage. Not yet: the Play button.
