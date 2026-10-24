@@ -2,12 +2,16 @@ package org.catrobat.web.loader;
 
 import com.badlogic.gdx.Gdx;
 
+import org.catrobat.catroid.BuildConfig;
+import org.catrobat.catroid.ProjectManager;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.Scene;
 import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Sprite;
+import org.catrobat.catroid.content.WhenBounceOffScript;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.io.XstreamSerializer;
 import org.teavm.interop.Async;
@@ -56,7 +60,15 @@ public final class ProjectLoader {
 		return project;
 	}
 
+	/** The project as the app plays it: read, then updated to the current language version. */
 	static Project parse(String xml) {
+		Project project = read(xml);
+		updateToCurrentVersion(project);
+		return project;
+	}
+
+	/** The project exactly as code.xml describes it, which LoaderCheck compares with the XML. */
+	static Project read(String xml) {
 		Element root = DOMParser.create().parseFromString(xml, "text/xml").getDocumentElement();
 		if (0 != root.getElementsByTagName("parsererror").getLength()) { // the browser's way of saying it is not XML
 			throw new IllegalArgumentException("code.xml is not valid XML");
@@ -73,6 +85,38 @@ public final class ProjectLoader {
 		}
 		project.checkForInvisibleSprites();
 		return project;
+	}
+
+	/**
+	 * What ProjectManager.loadProject does to a project after reading it, from Catrobat language 0.9991 on: the
+	 * updates to the current language version, then the scripts' parents and bounce-off targets. Left out: the
+	 * permissions file, the background's localised name and the device settings, which concern the app.
+	 */
+	private static void updateToCurrentVersion(Project project) {
+		double version = project.getCatrobatLanguageVersion();
+		if (version <= 0.9993) {
+			ProjectManager.updateScriptsToTreeStructure(project);
+		}
+		if (version <= 0.9999995) {
+			ProjectManager.updateBackgroundIndexTo9999995(project);
+		}
+		if (version < 999.9 && !BuildConfig.FEATURE_LIST_AS_BASIC_DATATYPE) {
+			ProjectManager.flattenAllLists(project);
+		}
+		if (version <= 1.03) {
+			ProjectManager.updateDirectionProperty(project);
+		}
+		project.setCatrobatLanguageVersion(Constants.CURRENT_CATROBAT_LANGUAGE_VERSION);
+		for (Scene scene : project.getSceneList()) {
+			for (Sprite sprite : scene.getSpriteList()) {
+				for (Script script : sprite.getScriptList()) {
+					script.setParents();
+					if (script instanceof WhenBounceOffScript bounceOff) {
+						bounceOff.updateSpriteToCollideWith(scene);
+					}
+				}
+			}
+		}
 	}
 
 	private static double languageVersion(Element root) {
