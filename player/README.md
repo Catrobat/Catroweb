@@ -14,8 +14,10 @@ Needs JDK 21 and the Android SDK (`ANDROID_HOME`).
 ./scripts/build.sh     # patch it for the browser and compile build/dist/js/webapp
 ```
 
-Serve `build/dist/js/webapp` with any static server. `./scripts/smoke.sh` checks in headless Chrome that the
-engine runs, and `./scripts/export-mapping.sh` dumps Catroid's XStream mapping for the coming project loader.
+Serve `build/dist/js/webapp` with any static server; `index.html#<project id>` loads that project from share's
+`/project-files/<id>/assets/code.xml`. `./scripts/smoke.sh` checks in headless Chrome that the engine runs and that the
+loader reads all of Catroid's `catrobatTests` projects, plus those in `fixtures/`, like the app does
+(`index.html#check`, compared by `scripts/check_loader.py`). `./scripts/export-mapping.sh` dumps Catroid's XStream mapping.
 
 ## How it works
 
@@ -38,6 +40,10 @@ Other pieces:
 - Physics: libGDX's pure-Java Box2D emulation (`gdx-box2d-gwt` sources), since native Box2D has no browser version.
 - Actions: `compat/GenActions` generates `ActionRegistry`, because the web backend cannot pool actions by reflection.
 - `WebLauncher` does what `StageActivity` and `StageLifeCycleController` do on Android.
+- Project loader: Catroid's own `XstreamSerializer` setup reads `code.xml` through `loader/BrowserDomReader`, an XStream
+  reader over the browser's `DOMParser`. XStream builds objects by reflection, so `compiler/CatroidReflectionPolicy`
+  grants it Catroid's model, and `compiler/ReflectionLinks` (a TeaVM plugin) works around TeaVM 0.15 leaving the
+  names, constructors and fields of most of those classes out.
 
 ## Deployment
 
@@ -47,5 +53,6 @@ a new folder per build because nginx caches `.js` for a year. `/player/index.htm
 
 ## Status
 
-The engine runs a project built in code (a pen drawing a circle). Not yet: loading `.catrobat` files, looks and sounds,
-Catroid's `catrobatTests` as a conformance suite, and the Play button on share.
+The engine runs a project built in code (a pen drawing a circle), and the loader reads projects from Catrobat language
+0.9991 on (older ones need Catroid's legacy conversion). Not yet: looks and sounds, so loaded projects do not start
+yet; running `catrobatTests` on the stage as a conformance suite; and the Play button on share.

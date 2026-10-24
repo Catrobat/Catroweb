@@ -15,6 +15,7 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TypeInsnNode;
+import org.objectweb.asm.tree.VarInsnNode;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -47,6 +48,9 @@ public final class Rewrite {
 			Map.entry("android/os/SystemClock", "org/catrobat/web/android/SystemClock"),
 			Map.entry("android/util/Log", "org/catrobat/web/android/Log"),
 			Map.entry("android/graphics/PointF", "org/catrobat/web/android/PointF"),
+			Map.entry("java/util/concurrent/locks/Lock", "org/catrobat/web/java/Lock"),
+			Map.entry("java/util/concurrent/locks/ReentrantLock", "org/catrobat/web/java/ReentrantLock"),
+			Map.entry("java/io/ObjectStreamField", "org/catrobat/web/java/ObjectStreamField"),
 			Map.entry("org/catrobat/catroid/web/WebConnectionHolder", "org/catrobat/web/catroid/WebConnectionHolder"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidApplication", "org/catrobat/web/compat/WebAndroidApplication"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidGraphics", "org/catrobat/web/compat/WebAndroidGraphics"),
@@ -64,7 +68,21 @@ public final class Rewrite {
 			Map.entry("android/content/res/Resources.getSystem()Landroid/content/res/Resources;", "systemResources"),
 			Map.entry("kotlin/time/TimeMark.elapsedNow()D", "elapsedNow"),
 			Map.entry("kotlin/time/Duration.getInMilliseconds-impl(D)D", "durationMillis"),
-			Map.entry("java/lang/Class.getGenericSuperclass()Ljava/lang/reflect/Type;", "getGenericSuperclass"));
+			Map.entry("java/lang/Class.forName(Ljava/lang/String;ZLjava/lang/ClassLoader;)Ljava/lang/Class;", "forName"),
+			Map.entry("java/lang/Class.getGenericSuperclass()Ljava/lang/reflect/Type;", "getGenericSuperclass"),
+			Map.entry("java/lang/Class.getGenericInterfaces()[Ljava/lang/reflect/Type;", "getGenericInterfaces"),
+			Map.entry("java/lang/Package.getImplementationVersion()Ljava/lang/String;", "implementationVersion"),
+			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsReadObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
+			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsWriteObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
+			Map.entry("com/thoughtworks/xstream/core/JVM.isAWTAvailable()Z", "unavailable"),
+			Map.entry("com/thoughtworks/xstream/core/JVM.isSwingAvailable()Z", "unavailable"),
+			Map.entry("com/thoughtworks/xstream/core/JVM.isSQLAvailable()Z", "unavailable"),
+			Map.entry("com/thoughtworks/xstream/XStream.alias(Ljava/lang/String;Ljava/lang/Class;)V", "alias"),
+			Map.entry("com/thoughtworks/xstream/XStream.aliasType(Ljava/lang/String;Ljava/lang/Class;)V", "aliasType"),
+			Map.entry("com/thoughtworks/xstream/XStream.allowTypeHierarchy(Ljava/lang/Class;)V", "allowTypeHierarchy"),
+			Map.entry("com/thoughtworks/xstream/XStream.allowTypes([Ljava/lang/Class;)V", "allowTypes"),
+			Map.entry("com/thoughtworks/xstream/XStream.registerConverterDynamically(Ljava/lang/String;I[Ljava/lang/Class;[Ljava/lang/Object;)V",
+					"registerConverterDynamically"));
 
 	static PrintStream report;
 
@@ -82,6 +100,7 @@ public final class Rewrite {
 
 		int[] stats = new int[2];
 		try (ZipFile in = new ZipFile(args[1]); ZipOutputStream out = new ZipOutputStream(Files.newOutputStream(Path.of(args[2])))) {
+			Set<String> noArgConstructors = noArgConstructors(in);
 			for (Enumeration<? extends ZipEntry> e = in.entries(); e.hasMoreElements(); ) {
 				ZipEntry entry = e.nextElement();
 				if (entry.isDirectory()) {
@@ -95,7 +114,7 @@ public final class Rewrite {
 					bytes = s.readAllBytes();
 				}
 				if (entry.getName().endsWith(".class") && !entry.getName().startsWith("META-INF/")) {
-					bytes = rewrite(bytes, missing, stats);
+					bytes = rewrite(bytes, missing, noArgConstructors, stats);
 				}
 				out.putNextEntry(new ZipEntry(entry.getName()));
 				out.write(bytes);
@@ -129,10 +148,10 @@ public final class Rewrite {
 		return head.substring(0, dot).replace('.', '/') + "." + head.substring(dot + 1) + (paren < 0 ? "" : s.substring(paren));
 	}
 
-	static byte[] rewrite(byte[] bytes, Set<String> missing, int[] stats) {
+	static byte[] rewrite(byte[] bytes, Set<String> missing, Set<String> noArgConstructors, int[] stats) {
 		ClassNode node = new ClassNode();
 		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, REMAP)), 0);
-		boolean changed = mentionsRemapped(bytes);
+		boolean changed = mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
 		if (node.interfaces.removeIf(missing::contains)) {
 			changed = true; // the class works without claiming a type the browser lacks
 		}
@@ -147,6 +166,20 @@ public final class Rewrite {
 				reason = "native";
 			}
 			for (AbstractInsnNode insn = method.instructions.getFirst(); null != insn; insn = insn.getNext()) {
+				if (insn instanceof MethodInsnNode call && isClassLookup(call) && previousInstruction(call) instanceof LdcInsnNode name
+						&& name.cst instanceof String className) {
+					// Java 1.4-style Foo.class: ldc "a.b.Foo"; invokestatic class$. TeaVM resolves names only for
+					// classes a reflection policy lists, so turn it back into a real class literal.
+					name.cst = className.startsWith("[") ? Type.getType(className.replace('.', '/')) : Type.getObjectType(className.replace('.', '/'));
+					node.version = Math.max(node.version, Opcodes.V1_5); // ldc of a class needs class file version 49
+					method.instructions.remove(call);
+					insn = name;
+					changed = true;
+					if (null == reason) {
+						reason = missingUse(name, missing); // now a Foo.class constant like any other
+					}
+					continue;
+				}
 				if (insn instanceof MethodInsnNode call) {
 					String target = REDIRECT.get(call.owner + "." + call.name + call.desc);
 					if (null == target && "setContextClassLoader".equals(call.name) && "(Ljava/lang/ClassLoader;)V".equals(call.desc)) {
@@ -196,6 +229,61 @@ public final class Rewrite {
 		ClassWriter writer = new ClassWriter(0);
 		node.accept(writer);
 		return writer.toByteArray();
+	}
+
+	/** Classes in this jar that have a no-argument constructor, plus Object. */
+	private static Set<String> noArgConstructors(ZipFile jar) throws Exception {
+		Set<String> found = new HashSet<>(Set.of("java/lang/Object"));
+		for (Enumeration<? extends ZipEntry> e = jar.entries(); e.hasMoreElements(); ) {
+			ZipEntry entry = e.nextElement();
+			if (!entry.getName().endsWith(".class") || entry.getName().startsWith("META-INF/")) {
+				continue;
+			}
+			try (InputStream s = jar.getInputStream(entry)) {
+				ClassNode node = new ClassNode();
+				new ClassReader(s.readAllBytes()).accept(node, ClassReader.SKIP_CODE);
+				if (node.methods.stream().anyMatch(m -> "<init>".equals(m.name) && "()V".equals(m.desc))) {
+					found.add(node.name);
+				}
+			}
+		}
+		return found;
+	}
+
+	/**
+	 * XStream builds Catroid classes that lack a no-argument constructor through Java serialization, which the browser
+	 * does not have: it skips their constructors and only runs the no-argument one of the first non-Serializable
+	 * superclass. This one runs the direct superclass's instead, so XStream finds a plain no-argument constructor and
+	 * then sets the fields from the XML. The difference: superclass field initializers run, such as
+	 * BrickBaseType.brickId, which XStream then overwrites when the XML has the field.
+	 */
+	private static boolean addNoArgConstructor(ClassNode node, Set<String> noArgConstructors) {
+		if (!node.name.startsWith("org/catrobat/catroid/") || !noArgConstructors.contains(node.superName)
+				|| 0 != (node.access & (Opcodes.ACC_INTERFACE | Opcodes.ACC_ABSTRACT | Opcodes.ACC_ENUM))
+				|| noArgConstructors.contains(node.name)) {
+			return false;
+		}
+		MethodNode constructor = new MethodNode(Opcodes.ACC_PUBLIC, "<init>", "()V", null, null);
+		constructor.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
+		constructor.instructions.add(new MethodInsnNode(Opcodes.INVOKESPECIAL, node.superName, "<init>", "()V", false));
+		constructor.instructions.add(new InsnNode(Opcodes.RETURN));
+		constructor.maxStack = 1;
+		constructor.maxLocals = 1;
+		node.methods.add(constructor);
+		return true;
+	}
+
+	/** Skips labels and line numbers: javac may put a line number between the ldc and its class$ call. */
+	private static AbstractInsnNode previousInstruction(AbstractInsnNode insn) {
+		AbstractInsnNode previous = insn.getPrevious();
+		while (null != previous && previous.getOpcode() < 0) {
+			previous = previous.getPrevious();
+		}
+		return previous;
+	}
+
+	private static boolean isClassLookup(MethodInsnNode call) {
+		return Opcodes.INVOKESTATIC == call.getOpcode() && "class$".equals(call.name) && "(Ljava/lang/String;)Ljava/lang/Class;".equals(call.desc);
 	}
 
 	/** The missing method, field, class or Foo.class constant an instruction uses, or null. */

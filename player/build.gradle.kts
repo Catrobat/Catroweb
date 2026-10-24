@@ -25,6 +25,12 @@ gdxTeaVM {
         obfuscated = false
     }
     js {
+        // Classes the project loader builds by reflection; TeaVM drops constructors nothing calls directly.
+        // Written by scripts/build.sh next to the reflection policy's rules (compiler/CatroidReflectionPolicy).
+        val preserved = file("build/web/preserved-classes.txt")
+        if (preserved.exists()) {
+            preservedClasses.addAll(preserved.readLines().filter { it.isNotBlank() })
+        }
         outOfProcess = true
         processMemory = 12288 // TeaVM needs several GB for the whole engine
     }

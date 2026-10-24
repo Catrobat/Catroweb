@@ -31,6 +31,18 @@ if [ ! -s $W/box2d-web.jar ]; then
   (cd $W/box2d/classes && jar cf ../../box2d-web.jar .)
 fi
 
+# Everything the reflection policy (CatroidReflectionPolicy.isBuiltByXStream, keep the two in step) lets XStream
+# build: TeaVM only keeps constructors of preserved classes.
+{ unzip -Z1 $IN/catroid-classes.jar | grep -E '^org/catrobat/catroid/(content|formulaeditor|common|userbrick)/' \
+    | grep -vE '/actions/|/brickspinner/BrickSpinner' | grep '\.class$' | sed 's|\.class$||; s|/|.|g'
+  printf '%s\n' org.catrobat.catroid.devices.mindstorms.nxt.sensors.NXTSensor\$Sensor \
+    org.catrobat.catroid.devices.mindstorms.ev3.sensors.EV3Sensor\$Sensor \
+    com.thoughtworks.xstream.mapper.EnumMapper com.thoughtworks.xstream.mapper.LambdaMapper \
+    com.thoughtworks.xstream.mapper.AnnotationMapper com.thoughtworks.xstream.converters.reflection.FieldUtil15 java.util.ArrayList java.util.LinkedList java.util.HashMap \
+    java.util.LinkedHashMap java.util.TreeMap java.util.HashSet java.util.LinkedHashSet java.util.TreeSet java.util.Vector \
+    java.util.concurrent.ConcurrentHashMap java.util.concurrent.CopyOnWriteArrayList
+} > $W/preserved-classes.txt
+
 $JAVA -cp $TOOLS org.catrobat.web.compat.GenActions $IN/catroid-classes.jar $W/tools/gdx.jar src/main/java/org/catrobat/web/ActionRegistry.java
 
 jars() {
