@@ -20,11 +20,11 @@ bricks/control/testSoundBricksSlowDownFastLoops.catrobat	pass
 bricks/control/testWait.catrobat	pass	
 bricks/control/testWaitUntil.catrobat	pass	
 bricks/control/testWaitUntilAllOtherScriptsHaveStopped.catrobat	pass	
-bricks/data/StoreCSVIntoUserList/testEmptyLists.catrobat	fail	no result
-bricks/data/StoreCSVIntoUserList/testIncompleteRows.catrobat	fail	no result
-bricks/data/StoreCSVIntoUserList/testMultiplications.catrobat	fail	no result
-bricks/data/StoreCSVIntoUserList/testSeparators.catrobat	fail	no result
-bricks/data/StoreCSVIntoUserList/testStringOperations.catrobat	fail	no result
+bricks/data/StoreCSVIntoUserList/testEmptyLists.catrobat	pass	
+bricks/data/StoreCSVIntoUserList/testIncompleteRows.catrobat	pass	
+bricks/data/StoreCSVIntoUserList/testMultiplications.catrobat	pass	
+bricks/data/StoreCSVIntoUserList/testSeparators.catrobat	pass	
+bricks/data/StoreCSVIntoUserList/testStringOperations.catrobat	pass	
 bricks/data/testReplaceItemInList.catrobat	pass	
 bricks/data/testSeveralLineWebRequest.catrobat	fail	no result
 bricks/device/testResetTimer.catrobat	pass	
