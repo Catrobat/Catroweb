@@ -48,6 +48,8 @@ public final class Rewrite {
 			Map.entry("android/os/SystemClock", "org/catrobat/web/android/SystemClock"),
 			Map.entry("android/util/Log", "org/catrobat/web/android/Log"),
 			Map.entry("android/graphics/PointF", "org/catrobat/web/android/PointF"),
+			Map.entry("android/util/SparseIntArray", "org/catrobat/web/android/SparseIntArray"),
+			Map.entry("android/util/SparseArray", "org/catrobat/web/android/SparseArray"),
 			Map.entry("java/util/concurrent/locks/Lock", "org/catrobat/web/java/Lock"),
 			Map.entry("java/util/concurrent/locks/ReentrantLock", "org/catrobat/web/java/ReentrantLock"),
 			Map.entry("java/io/ObjectStreamField", "org/catrobat/web/java/ObjectStreamField"),

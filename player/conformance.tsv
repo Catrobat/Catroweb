@@ -103,7 +103,7 @@ data/testLocalListsWithSameNameOfDifferentObjects.catrobat	fail	no result
 data/testParallelWrittenListsCanBeReadCorrectly.catrobat	fail	no result
 data/testReadLastValueWrittenToListOnDevice.catrobat	fail	no result
 data/testSetAddVar.catrobat	pass	
-data/testStageIsTouched.catrobat	fail	no result
+data/testStageIsTouched.catrobat	pass	
 data/testWrittenLocalListsInObjectsWithSameNameInDifferentScenesAreReadSeparately.catrobat	fail	no result
 direction/testDirectionLeftRightRotation.catrobat	pass	
 direction/testDirectionNoRotation.catrobat	pass	
@@ -120,8 +120,8 @@ formula/testCeilingFunction.catrobat	pass
 formula/testContainsFunction.catrobat	pass	
 formula/testCorrectStringConversion.catrobat	pass	
 formula/testCosinusFunction.catrobat	pass	
-formula/testCurrentIndexOfTouch.catrobat	fail	no result
-formula/testCurrentNumberOfTouches.catrobat	fail	no result
+formula/testCurrentIndexOfTouch.catrobat	pass	
+formula/testCurrentNumberOfTouches.catrobat	pass	
 formula/testDecimalLogarithmFunction.catrobat	pass	
 formula/testExponentFunction.catrobat	pass	
 formula/testFlattenFunction.catrobat	pass	
@@ -164,7 +164,7 @@ physics/testGravityAndGliding.catrobat	fail	no result
 physics/testRotationStyles.catrobat	fail	no result
 physics/testSetGravityForAllActorsAndObjects.catrobat	fail	no result
 physics/testSynchronousGlideToBricks.catrobat	pass	
-physics/testTouchesActorOrObjectWithRotation.catrobat	fail	no result
+physics/testTouchesActorOrObjectWithRotation.catrobat	fail	on sprite "Cone" Brick at position 1 in "unknown" AssertEqualsError expected: <70> actual: <75.0> deviation: -^
 physics/testVelocityWhileGliding.catrobat	pass	
 physics/testXYVelocity.catrobat	fail	no result
 physics/testXYVelocityWithGravity.catrobat	fail	no result
@@ -173,18 +173,18 @@ sceneTransition/discardSuspendedThreadsOnStartScene.catrobat	fail	no result
 sceneTransition/suspendAllThreadsOnSceneTransition.catrobat	fail	no result
 script/whenBounceOff/testWhenYouBounceOff.catrobat	fail	no result
 script/whenBounceOff/whenBounceOffAnyTriggeredByEdgeBounce.catrobat	fail	no result
-script/whenTappedScript/testTapHiddenSpriteDoesTapBackgroundInstead.catrobat	fail	no result
-script/whenTappedScript/testTapOnCenter.catrobat	fail	no result
-script/whenTappedScript/testTapOnClone.catrobat	fail	no result
-script/whenTappedScript/testTapOnRemovedCloneTapsBackground.catrobat	fail	no result
-script/whenTappedScript/testTapOnSpriteDoesNotTapOnBackground.catrobat	fail	no result
-script/whenTappedScript/testTapOnTransparentInsideLookArea.catrobat	fail	no result
-script/whenTappedScript/testTapOnTransparentLookArea.catrobat	fail	no result
-script/whenTappedScript/testTapOnlyTopSprite.catrobat	fail	no result
-script/whenTappedScript/testTapOutsideSpriteDoesTapOnBackground.catrobat	fail	no result
-script/whenTappedScript/testTapSpriteshowAfterHideDoesTapSprite.catrobat	fail	no result
-script/whenTappedScript/testTapStageNegXPosY.catrobat	fail	no result
-script/whenTappedScript/testTapStagePosXNegY.catrobat	fail	no result
+script/whenTappedScript/testTapHiddenSpriteDoesTapBackgroundInstead.catrobat	pass	
+script/whenTappedScript/testTapOnCenter.catrobat	pass	
+script/whenTappedScript/testTapOnClone.catrobat	pass	
+script/whenTappedScript/testTapOnRemovedCloneTapsBackground.catrobat	pass	
+script/whenTappedScript/testTapOnSpriteDoesNotTapOnBackground.catrobat	pass	
+script/whenTappedScript/testTapOnTransparentInsideLookArea.catrobat	pass	
+script/whenTappedScript/testTapOnTransparentLookArea.catrobat	pass	
+script/whenTappedScript/testTapOnlyTopSprite.catrobat	pass	
+script/whenTappedScript/testTapOutsideSpriteDoesTapOnBackground.catrobat	pass	
+script/whenTappedScript/testTapSpriteshowAfterHideDoesTapSprite.catrobat	pass	
+script/whenTappedScript/testTapStageNegXPosY.catrobat	pass	
+script/whenTappedScript/testTapStagePosXNegY.catrobat	pass	
 sensor/testStageWidthStageHeightSensorPortrait1080x2050.catrobat	pass	
 sensor/testStageWidthStageHeightSensorsMaximized350x3000.catrobat	pass	
 sensor/testStageWidthStageHeightSensorsSquare1080x1080.catrobat	pass	
@@ -197,7 +197,7 @@ touchesActorOrObject/testTouchesActorOrObjectInitialValueIfLogicBeginBrick.catro
 touchesActorOrObject/testTouchesActorOrObjectInitialValueRestartSceneWithClones.catrobat	fail	no result
 touchesActorOrObject/testTouchesActorOrObjectInitialValueSceneRestartContinued.catrobat	fail	no result
 touchesActorOrObject/testTouchesActorOrObjectInitialValueWithClones.catrobat	pass	
-touchesActorOrObject/testTouchesActorOrObjectInitialValueWithSeveralObjects.catrobat	fail	no result
+touchesActorOrObject/testTouchesActorOrObjectInitialValueWithSeveralObjects.catrobat	fail	on sprite "Background" Brick at position 1 in "unknown" AssertEqualsError expected: <true> actual: <false> deviation: ^
 touchesActorOrObject/testTouchesActorOrObjectSceneContinued.catrobat	fail	no result
 touchesActorOrObject/testTouchesActorOrObjectSpecialCharacters.catrobat	pass	
 touchesColor/testColorTouchesColor.catrobat	pass	
