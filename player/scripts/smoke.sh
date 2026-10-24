@@ -42,12 +42,16 @@ mkdir -p $STAGE/project-files/sound-play-and-wait/assets  # fixtures/README.md
 unzip -q fixtures/sound-play-and-wait.catrobat -d $STAGE/project-files/sound-play-and-wait/assets
 for test in $(ls $STAGE/project-files); do
   serve 90 $STAGE  # released as soon as the test reports its result
-  RESULT=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \
-    --window-size=480,800 --timeout=120000 --autoplay-policy=no-user-gesture-required --dump-dom "http://127.0.0.1:$PORT/?autostart#$test" 2> /dev/null \
-    | tr '\n' ' ' | grep -o 'data-test-result="[^"]*"' || true)
+  PAGE=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \
+    --window-size=480,800 --timeout=120000 --autoplay-policy=no-user-gesture-required \
+    --dump-dom "http://127.0.0.1:$PORT/?autostart#$test" 2> /dev/null | tr '\n' ' ')
   kill $SERVER
+  RESULT=$(grep -o 'data-test-result="[^"]*"' <<< "$PAGE" || true)
   echo "$test: ${RESULT:-no result}"
   [[ "$RESULT" == 'data-test-result="7777 '* ]]
+  if [ "$test" = sound-play-and-wait ]; then  # the wait alone only proves the duration; this, that it played
+    grep -q 'data-sounds-started="[1-9]' <<< "$PAGE"
+  fi
 done
 
 # The loader check runs synchronously once the page has loaded; --virtual-time-budget keeps headless Chrome from

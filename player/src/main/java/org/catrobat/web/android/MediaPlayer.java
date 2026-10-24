@@ -1,11 +1,14 @@
 package org.catrobat.web.android;
 
 import org.catrobat.web.loader.Sounds;
+import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
 
 /**
  * android.media.MediaPlayer for the browser (compat/Rewrite remaps it), with the calls Catroid's SoundManager makes.
- * Plays the sounds Sounds decoded when the project loaded, so prepare() has nothing left to do.
+ * Plays the sounds Sounds decoded when the project loaded, so prepare() has nothing left to do. Playing and position
+ * follow the wall clock, not the audio clock: a context the browser keeps suspended is silent, like a muted phone,
+ * but "play sound and wait" still ends and the players get free again.
  */
 public class MediaPlayer {
 	private String path;
@@ -23,20 +26,18 @@ public class MediaPlayer {
 	}
 
 	public void seekTo(int milliseconds) {
-		offset = milliseconds / 1000.0;
+		offset = Math.max(0, milliseconds / 1000.0);
 	}
 
 	public void start() {
 		stopSource();
-		source = Sounds.play(path, offset, volume, () -> playing = false); // Sounds.stop silences a stopped one's end
-		playing = null != source;
-		startedAt = Sounds.now();
+		source = Sounds.play(path, offset, volume);
+		playing = offset < Sounds.duration(path);
+		startedAt = now();
 	}
 
 	public void pause() {
-		if (playing) {
-			offset += Sounds.now() - startedAt;
-		}
+		offset = position();
 		stopSource();
 	}
 
@@ -55,6 +56,9 @@ public class MediaPlayer {
 	}
 
 	public boolean isPlaying() {
+		if (playing && position() >= Sounds.duration(path)) {
+			playing = false;
+		}
 		return playing;
 	}
 
@@ -63,7 +67,7 @@ public class MediaPlayer {
 	}
 
 	public int getCurrentPosition() {
-		return (int) Math.round((playing ? offset + Sounds.now() - startedAt : offset) * 1000);
+		return (int) Math.round(position() * 1000);
 	}
 
 	public void setVolume(float left, float right) {
@@ -71,9 +75,16 @@ public class MediaPlayer {
 		Sounds.setVolume(source, volume);
 	}
 
+	private double position() {
+		return playing ? Math.min(offset + now() - startedAt, Sounds.duration(path)) : offset;
+	}
+
 	private void stopSource() {
 		playing = false;
 		Sounds.stop(source);
 		source = null;
 	}
+
+	@JSBody(script = "return performance.now() / 1000;")
+	private static native double now();
 }

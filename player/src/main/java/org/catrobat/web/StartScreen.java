@@ -23,7 +23,11 @@ public final class StartScreen {
 		});
 	}
 
-	@JSBody(params = {"title", "started"}, script = "var overlay = document.createElement('div');"
+	/** Removes the start screen, which says "Loading…" until the project's sounds and looks are in. */
+	@JSBody(script = "var overlay = document.getElementById('start-screen'); if (overlay) overlay.remove();")
+	public static native void close();
+
+	@JSBody(params = {"title", "started"}, script = "var overlay = document.createElement('div'); overlay.id = 'start-screen';"
 			+ "overlay.style.cssText = 'position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;"
 			+ "justify-content:center;gap:24px;background:rgba(0,0,0,.75);color:#fff;font:600 20px system-ui,sans-serif';"
 			+ "var name = document.createElement('div'); name.textContent = title;"
@@ -31,7 +35,10 @@ public final class StartScreen {
 			+ "button.setAttribute('aria-label', 'Play');"
 			+ "button.style.cssText = 'width:96px;height:96px;border-radius:50%;border:0;background:#007f8f;color:#fff;"
 			+ "font-size:40px;cursor:pointer';"
-			+ "button.onclick = function () { overlay.remove(); started(); };"
+			+ "button.onclick = function () {"
+			+ "  var loading = document.createElement('div'); loading.textContent = 'Loading\u2026';"
+			+ "  loading.setAttribute('role', 'status'); button.replaceWith(loading); started();"
+			+ "};"
 			+ "overlay.append(name, button); document.body.append(overlay); button.focus();")
 	private static native void show(String title, Sounds.Callback started);
 }

@@ -88,6 +88,7 @@ public class WebLauncher {
 				((WebFiles) Gdx.files).localStorage = new MemoryFileStorage();
 				if (!projectId.isEmpty()) {
 					ProjectLoader.loadLooks(project, projectId); // needs Gdx.files, which exists from here on
+					StartScreen.close();
 				}
 				// A fresh Android GL context clears to transparent; the pen and plot buffers rely on it.
 				Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
