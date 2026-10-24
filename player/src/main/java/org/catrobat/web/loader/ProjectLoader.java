@@ -1,15 +1,24 @@
 package org.catrobat.web.loader;
 
+import com.badlogic.gdx.Gdx;
+
+import org.catrobat.catroid.common.LookData;
+import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.Scene;
 import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.io.XstreamSerializer;
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSByRef;
 import org.teavm.jso.ajax.XMLHttpRequest;
 import org.teavm.jso.dom.xml.DOMParser;
 import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.NodeList;
+
+import java.io.File;
+import java.util.Iterator;
 
 /**
  * Loads a share project with Catroid's own XStream setup (its aliases, converters and field order), so the web
@@ -87,6 +96,51 @@ public final class ProjectLoader {
 		String name = object.getClass().getName();
 		return name.substring(name.lastIndexOf('.') + 1);
 	}
+
+	/**
+	 * What XstreamSerializer.setFileReferences does on Android once the project is on disk: each look gets its file,
+	 * looks whose file is missing are dropped. Here the files come from share and go into the browser's memory
+	 * (Gdx.files.local, which Files.absolute is redirected to), so it needs the stage's Gdx.files.
+	 */
+	public static void loadFiles(Project project, String projectId) {
+		project.setDirectory(new File("/projects/" + projectId));
+		for (Scene scene : project.getSceneList()) {
+			String sceneDirectory = scene.getDirectory().getName();
+			for (Sprite sprite : scene.getSpriteList()) {
+				for (Iterator<LookData> looks = sprite.getLookList().iterator(); looks.hasNext(); ) {
+					LookData look = looks.next();
+					String name = look.getXstreamFileName();
+					byte[] bytes = fetchBytes(assetUrl(projectId, encode(sceneDirectory) + "/images/" + encode(name)));
+					if (0 == bytes.length) { // missing on share: the app drops such looks too
+						looks.remove();
+						continue;
+					}
+					File file = new File(new File(scene.getDirectory(), "images"), name);
+					Gdx.files.local(file.getAbsolutePath()).writeBytes(bytes, false);
+					look.setFile(file);
+				}
+				// ponytail: sounds get their file reference but no data until the player can play them.
+				for (SoundInfo sound : sprite.getSoundList()) {
+					sound.setFile(new File(new File(scene.getDirectory(), "sounds"), sound.getXstreamFileName()));
+				}
+			}
+		}
+	}
+
+	@JSBody(params = "segment", script = "return encodeURIComponent(segment);")
+	private static native String encode(String segment);
+
+	/** A synchronous request cannot ask for an ArrayBuffer; the x-user-defined charset keeps each byte in one char. */
+	@JSBody(params = "url", script = "var request = new XMLHttpRequest();"
+			+ "request.open('GET', url, false);"
+			+ "request.overrideMimeType('text/plain; charset=x-user-defined');"
+			+ "request.send();"
+			+ "if (request.status !== 200) return new Int8Array(0);"
+			+ "var text = request.responseText, bytes = new Int8Array(text.length);"
+			+ "for (var i = 0; i < text.length; i++) bytes[i] = text.charCodeAt(i) & 255;"
+			+ "return bytes;")
+	@JSByRef
+	private static native byte[] fetchBytes(String url);
 
 	static String fetch(String url) {
 		XMLHttpRequest request = XMLHttpRequest.create();

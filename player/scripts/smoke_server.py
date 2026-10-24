@@ -6,6 +6,7 @@ import functools
 import http.server
 import sys
 import time
+import urllib.parse
 from pathlib import Path
 
 ROOT, PORT_FILE, WAIT = sys.argv[1], sys.argv[2], float(sys.argv[3])
@@ -27,8 +28,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             # The player starts on "load", which the image now holds back; start it as soon as the DOM is there.
             page = page.replace(b'addEventListener("load", start)', b'addEventListener("DOMContentLoaded", start)')
             self.reply(page.replace(b"</body>", b'<img src="/__wait" width="1" height="1"></body>'), "text/html")
-        elif self.path in PROJECT_FILES:
-            self.reply(PROJECT_FILES[self.path].read_bytes(), "text/plain")
+        elif urllib.parse.unquote(self.path) in PROJECT_FILES:  # share decodes the path the same way
+            self.reply(PROJECT_FILES[urllib.parse.unquote(self.path)].read_bytes(), "application/octet-stream")
         elif self.path.startswith("/project-files/"):
             self.send_error(404)
         else:
