@@ -77,6 +77,10 @@ public final class ProjectLoader {
 		if (0 == root.getElementsByTagName("scenes").getLength() || languageVersion(root) < 0.9991) {
 			throw new IllegalArgumentException("Projects before Catrobat language version 0.9991 cannot be played here yet");
 		}
+		if (languageVersion(root) > Constants.CURRENT_CATROBAT_LANGUAGE_VERSION) { // as the app: made by a newer one
+			throw new IllegalArgumentException("This project needs a newer player (Catrobat language version "
+					+ languageVersion(root) + ")");
+		}
 		// ponytail: the app retries a ConversionException after modifyXMLToSupportUnknownFields (java.io.File + DOM);
 		// not here yet, so such a project fails loudly instead.
 		Project project = (Project) XstreamSerializer.getInstance().getXstream().unmarshal(new BrowserDomReader(root));
