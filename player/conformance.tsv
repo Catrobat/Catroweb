@@ -91,20 +91,20 @@ colorAtXY/testColorAtXYValidParameters.catrobat	pass
 colorAtXY/testColorAtXYWithoutLooks.catrobat	fail	on sprite "Background" Brick at position 1 in "unknown" AssertEqualsError expected: <#ffffff> actual: <#FFFFFF> deviation: -^
 colorEqualsColor/testColorEqualsColorWithTolerance.catrobat	pass	
 colorEqualsColor/testColorEqualsColorWithToleranceInvalidParameters.catrobat	pass	
-data/Variable_ReadFrom-WriteOn_Device.catrobat	fail	no result
+data/Variable_ReadFrom-WriteOn_Device.catrobat	pass	
 data/testDeleteAllElementsFromList.catrobat	pass	
 data/testDeleteItemOfUserList.catrobat	pass	
-data/testGlobalListsThatAreSharedBetweenScenes.catrobat	fail	no result
+data/testGlobalListsThatAreSharedBetweenScenes.catrobat	pass	
 data/testInsertIntoList.catrobat	pass	
-data/testListReadWriteWithComplexItems.catrobat	fail	no result
-data/testListReadWriteWithComplexListNames.catrobat	fail	no result
-data/testListsThatWereReadButNeverWrittenAreEmpty.catrobat	fail	no result
-data/testLocalListsWithSameNameOfDifferentObjects.catrobat	fail	no result
-data/testParallelWrittenListsCanBeReadCorrectly.catrobat	fail	no result
-data/testReadLastValueWrittenToListOnDevice.catrobat	fail	no result
+data/testListReadWriteWithComplexItems.catrobat	pass	
+data/testListReadWriteWithComplexListNames.catrobat	pass	
+data/testListsThatWereReadButNeverWrittenAreEmpty.catrobat	pass	
+data/testLocalListsWithSameNameOfDifferentObjects.catrobat	pass	
+data/testParallelWrittenListsCanBeReadCorrectly.catrobat	pass	
+data/testReadLastValueWrittenToListOnDevice.catrobat	pass	
 data/testSetAddVar.catrobat	pass	
 data/testStageIsTouched.catrobat	pass	
-data/testWrittenLocalListsInObjectsWithSameNameInDifferentScenesAreReadSeparately.catrobat	fail	no result
+data/testWrittenLocalListsInObjectsWithSameNameInDifferentScenesAreReadSeparately.catrobat	pass	
 direction/testDirectionLeftRightRotation.catrobat	pass	
 direction/testDirectionNoRotation.catrobat	pass	
 direction/testDirectionWithRotation.catrobat	pass	
