@@ -23,6 +23,7 @@ import org.catrobat.catroid.utils.Resolution;
 import org.catrobat.web.android.WebContext;
 import org.catrobat.web.loader.LoaderCheck;
 import org.catrobat.web.loader.ProjectLoader;
+import org.catrobat.web.loader.Sounds;
 import org.teavm.jso.browser.Window;
 
 public class WebLauncher {
@@ -51,6 +52,15 @@ public class WebLauncher {
 			return;
 		}
 		Project project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
+		if (projectId.isEmpty() || Window.current().getLocation().getSearch().contains("autostart")) {
+			Sounds.createContext(); // without a click it may stay muted, which the demo and tests do not mind
+		} else {
+			StartScreen.waitForStart(project.getName());
+		}
+		if (!projectId.isEmpty()) {
+			ProjectLoader.loadSounds(project, projectId);
+			Sounds.awaitDecoded();
+		}
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
 		// The canvas takes the project's aspect ratio, fitted into 480x800 (800x480 for landscape), so the stage fills it.
@@ -77,7 +87,8 @@ public class WebLauncher {
 				// gdx-teavm keeps local files in IndexedDB and reloads them on every start; looks are per play.
 				((WebFiles) Gdx.files).localStorage = new MemoryFileStorage();
 				if (!projectId.isEmpty()) {
-					ProjectLoader.loadFiles(project, projectId); // needs Gdx.files, which exists from here on
+					ProjectLoader.loadLooks(project, projectId); // needs Gdx.files, which exists from here on
+					StartScreen.close();
 				}
 				// A fresh Android GL context clears to transparent; the pen and plot buffers rely on it.
 				Gdx.gl.glClearColor(0f, 0f, 0f, 0f);

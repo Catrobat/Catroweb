@@ -37,7 +37,9 @@ public final class ProjectLoader {
 		if (!projectId.matches("[A-Za-z0-9-]+")) { // it comes from the URL and goes into one
 			throw new IllegalArgumentException("Not a project id: " + projectId);
 		}
-		return parse(fetch(assetUrl(projectId, "code.xml")));
+		Project project = parse(fetch(assetUrl(projectId, "code.xml")));
+		project.setDirectory(new File("/projects/" + projectId)); // where the scenes' looks and sounds go
+		return project;
 	}
 
 	static Project parse(String xml) {
@@ -98,34 +100,55 @@ public final class ProjectLoader {
 	}
 
 	/**
-	 * What XstreamSerializer.setFileReferences does on Android once the project is on disk: each look gets its file,
-	 * looks whose file is missing (404) are dropped; any other failure stops the load. Here the files come from share
-	 * and go into the browser's memory (Gdx.files.local, which Files.absolute is redirected to), so it needs the
-	 * stage's Gdx.files.
+	 * What XstreamSerializer.setFileReferences does on Android once the project is on disk, for the looks: each gets
+	 * its file, those missing on share (404) are dropped; any other failure stops the load. They go into the browser's
+	 * memory (Gdx.files.local, which Files.absolute is redirected to), so this needs the stage's Gdx.files.
 	 */
-	public static void loadFiles(Project project, String projectId) {
-		project.setDirectory(new File("/projects/" + projectId));
+	public static void loadLooks(Project project, String projectId) {
 		for (Scene scene : project.getSceneList()) {
-			String sceneDirectory = scene.getDirectory().getName();
 			for (Sprite sprite : scene.getSpriteList()) {
 				for (Iterator<LookData> looks = sprite.getLookList().iterator(); looks.hasNext(); ) {
 					LookData look = looks.next();
-					String name = look.getXstreamFileName();
-					byte[] bytes = fetchBytes(assetUrl(projectId, encode(sceneDirectory) + "/images/" + encode(name)));
-					if (0 == bytes.length) { // missing on share: the app drops such looks too
+					File file = new File(new File(scene.getDirectory(), "images"), look.getXstreamFileName());
+					byte[] bytes = fetchBytes(projectId, file);
+					if (0 == bytes.length) {
 						looks.remove();
 						continue;
 					}
-					File file = new File(new File(scene.getDirectory(), "images"), name);
 					Gdx.files.local(file.getAbsolutePath()).writeBytes(bytes, false);
 					look.setFile(file);
 				}
-				// ponytail: sounds get their file reference but no data until the player can play them.
-				for (SoundInfo sound : sprite.getSoundList()) {
-					sound.setFile(new File(new File(scene.getDirectory(), "sounds"), sound.getXstreamFileName()));
+			}
+		}
+	}
+
+	/**
+	 * The same for the sounds, which Sounds decodes; before the stage exists, because Catroid reads their durations
+	 * while it builds the scripts' actions (Sounds.awaitDecoded).
+	 */
+	public static void loadSounds(Project project, String projectId) {
+		for (Scene scene : project.getSceneList()) {
+			for (Sprite sprite : scene.getSpriteList()) {
+				for (Iterator<SoundInfo> sounds = sprite.getSoundList().iterator(); sounds.hasNext(); ) {
+					SoundInfo sound = sounds.next();
+					File file = new File(new File(scene.getDirectory(), "sounds"), sound.getXstreamFileName());
+					byte[] bytes = fetchBytes(projectId, file);
+					if (0 == bytes.length) {
+						sounds.remove();
+						continue;
+					}
+					Sounds.decode(file.getAbsolutePath(), bytes);
+					sound.setFile(file);
 				}
 			}
 		}
+	}
+
+	/** The file under the project directory, from share: /project-files/{id}/assets/{scene}/{images|sounds}/{name}. */
+	private static byte[] fetchBytes(String projectId, File file) {
+		File folder = file.getParentFile();
+		return fetchBytes(assetUrl(projectId, encode(folder.getParentFile().getName()) + "/" + folder.getName() + "/"
+				+ encode(file.getName())));
 	}
 
 	@JSBody(params = "segment", script = "return encodeURIComponent(segment);")
