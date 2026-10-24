@@ -34,11 +34,13 @@ run() { # <number> <project path under catrobatTests>
 export -f run
 xargs -P "${CONFORMANCE_JOBS:-4}" -L 1 bash -c 'run "$@"' _ < $OUT/list.tsv
 cat $OUT/results/* | sort > $OUT/results.tsv
-if [ "${1:-}" != --update ]; then
-  # A loaded runner can starve one test of time: give those that passed before one more go, alone.
-  python3 scripts/conformance.py $OUT/results.tsv conformance.tsv --regressions | while read -r path; do
-    [ -n "$path" ] && run "$(awk -F'\t' -v p="$path" '$2 == p {print $1}' $OUT/list.tsv)" "$path"
-  done
-  cat $OUT/results/* | sort > $OUT/results.tsv
-fi
+# A loaded runner can starve one test of time: give those that passed before one more go, alone. Paths no longer in
+# catrobatTests (a Catroid update renamed or removed them) are left for conformance.py to report as missing.
+python3 scripts/conformance.py $OUT/results.tsv conformance.tsv --regressions | while read -r path; do
+  id=$(awk -F'\t' -v p="$path" '$2 == p {print $1}' $OUT/list.tsv)
+  if [ -n "$id" ]; then
+    run "$id" "$path" || true
+  fi
+done
+cat $OUT/results/* | sort > $OUT/results.tsv
 python3 scripts/conformance.py $OUT/results.tsv conformance.tsv "$@"

@@ -28,16 +28,20 @@ def main(results_file, baseline_file, update=False, regressions_only=False):
     passed = sum(1 for status, _ in results.values() if "pass" == status)
     if not regressions_only:
         print(f"Conformance: {passed} of {len(results)} Catroid test projects pass on the stage")
+    baseline = {}
+    if Path(baseline_file).exists():
+        for line in Path(baseline_file).read_text().splitlines():
+            name, status, *_ = line.split("\t")
+            baseline[name] = status
     if update:
+        for name in sorted(n for n, s in baseline.items() if "pass" == s and results.get(n, ("fail",))[0] != "pass"):
+            print(f"  no longer marked as passing: {name}: {results.get(name, ('', 'missing'))[1]}")
         Path(baseline_file).write_text("".join(f"{n}\t{s}\t{r}\n" for n, (s, r) in sorted(results.items())))
         return 0
-    baseline = {}
-    for line in Path(baseline_file).read_text().splitlines():
-        name, status, *_ = line.split("\t")
-        baseline[name] = status
     regressions = [n for n, s in baseline.items() if "pass" == s and results.get(n, ("fail", "missing"))[0] != "pass"]
     if regressions_only:
-        print("\n".join(regressions))
+        for name in regressions:
+            print(name)
         return 0
     improved = [n for n, (s, _) in results.items() if "pass" == s and baseline.get(n) != "pass"]
     for name in regressions:
