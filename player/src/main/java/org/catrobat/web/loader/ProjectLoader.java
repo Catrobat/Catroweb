@@ -99,8 +99,9 @@ public final class ProjectLoader {
 
 	/**
 	 * What XstreamSerializer.setFileReferences does on Android once the project is on disk: each look gets its file,
-	 * looks whose file is missing are dropped. Here the files come from share and go into the browser's memory
-	 * (Gdx.files.local, which Files.absolute is redirected to), so it needs the stage's Gdx.files.
+	 * looks whose file is missing (404) are dropped; any other failure stops the load. Here the files come from share
+	 * and go into the browser's memory (Gdx.files.local, which Files.absolute is redirected to), so it needs the
+	 * stage's Gdx.files.
 	 */
 	public static void loadFiles(Project project, String projectId) {
 		project.setDirectory(new File("/projects/" + projectId));
@@ -130,12 +131,16 @@ public final class ProjectLoader {
 	@JSBody(params = "segment", script = "return encodeURIComponent(segment);")
 	private static native String encode(String segment);
 
-	/** A synchronous request cannot ask for an ArrayBuffer; the x-user-defined charset keeps each byte in one char. */
+	/**
+	 * Empty for a file share does not have. A synchronous request cannot ask for an ArrayBuffer; the x-user-defined
+	 * charset keeps each byte in one char.
+	 */
 	@JSBody(params = "url", script = "var request = new XMLHttpRequest();"
 			+ "request.open('GET', url, false);"
 			+ "request.overrideMimeType('text/plain; charset=x-user-defined');"
 			+ "request.send();"
-			+ "if (request.status !== 200) return new Int8Array(0);"
+			+ "if (request.status === 404) return new Int8Array(0);"
+			+ "if (request.status !== 200) throw new Error('Could not load ' + url + ': HTTP ' + request.status);"
 			+ "var text = request.responseText, bytes = new Int8Array(text.length);"
 			+ "for (var i = 0; i < text.length; i++) bytes[i] = text.charCodeAt(i) & 255;"
 			+ "return bytes;")

@@ -3,6 +3,8 @@ package org.catrobat.web;
 import com.badlogic.gdx.Gdx;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
+import com.github.xpenatan.gdx.teavm.backends.web.WebFiles;
+import com.github.xpenatan.gdx.teavm.backends.web.filesystem.MemoryFileStorage;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.common.ScreenValues;
@@ -18,11 +20,10 @@ import org.catrobat.catroid.formulaeditor.SensorHandler;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.stage.StageListener;
 import org.catrobat.catroid.utils.Resolution;
+import org.catrobat.web.android.WebContext;
 import org.catrobat.web.loader.LoaderCheck;
 import org.catrobat.web.loader.ProjectLoader;
 import org.teavm.jso.browser.Window;
-
-import java.lang.reflect.Field;
 
 public class WebLauncher {
 	public static void main(String[] args) {
@@ -33,7 +34,7 @@ public class WebLauncher {
 		}
 		System.setProperty("java.specification.version", "21");
 		ActionRegistry.registerAll();
-		installSensorHandlerWithoutSensors();
+		SensorHandler.getInstance(WebContext.INSTANCE); // StageResourceHolder's job on Android; sensor formulas read it
 		ProjectManager projectManager;
 		try {
 			projectManager = new ProjectManager(null);
@@ -53,10 +54,11 @@ public class WebLauncher {
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
 		// The canvas takes the project's aspect ratio, fitted into 480x800 (800x480 for landscape), so the stage fills it.
-		int width = project.getXmlHeader().getVirtualScreenWidth();
-		int height = project.getXmlHeader().getVirtualScreenHeight();
+		boolean sized = project.getXmlHeader().getVirtualScreenWidth() > 0 && project.getXmlHeader().getVirtualScreenHeight() > 0;
+		int width = sized ? project.getXmlHeader().getVirtualScreenWidth() : 480;
+		int height = sized ? project.getXmlHeader().getVirtualScreenHeight() : 800;
 		float scale = width > height ? Math.min(800f / width, 480f / height) : Math.min(480f / width, 800f / height);
-		Resolution screen = new Resolution(Math.round(width * scale), Math.round(height * scale));
+		Resolution screen = new Resolution(Math.max(1, Math.round(width * scale)), Math.max(1, Math.round(height * scale)));
 		ScreenValues.currentScreenResolution = screen;
 
 		WebApplicationConfiguration config = new WebApplicationConfiguration();
@@ -72,6 +74,8 @@ public class WebLauncher {
 		StageListener stage = new StageListener() {
 			@Override
 			public void create() {
+				// gdx-teavm keeps local files in IndexedDB and reloads them on every start; looks are per play.
+				((WebFiles) Gdx.files).localStorage = new MemoryFileStorage();
 				if (!projectId.isEmpty()) {
 					ProjectLoader.loadFiles(project, projectId); // needs Gdx.files, which exists from here on
 				}
@@ -84,21 +88,6 @@ public class WebLauncher {
 		stage.setMaxViewPort(screen); // StageActivity's job on Android
 		StageActivity.stageListener = stage; // actors reach the stage through it
 		new WebApplication(stage, config);
-	}
-
-	/**
-	 * StageResourceHolder's job on Android: sensor formulas read SensorHandler.instance. Its constructor asks Android
-	 * for sensors, which the web does not have, so build it with the no-argument constructor compat/Rewrite adds. Its
-	 * sensorManager stays null, which getSensorValue answers with 0, as in Catroid's own tests.
-	 */
-	private static void installSensorHandlerWithoutSensors() {
-		try {
-			Field instance = SensorHandler.class.getDeclaredField("instance");
-			instance.setAccessible(true);
-			instance.set(null, SensorHandler.class.getDeclaredConstructor().newInstance());
-		} catch (ReflectiveOperationException e) {
-			throw new IllegalStateException("Catroid's SensorHandler changed", e);
-		}
 	}
 
 	private static Project loadAndReport(String projectId) {

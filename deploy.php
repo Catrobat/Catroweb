@@ -155,7 +155,8 @@ task('deploy:player', function () {
   $version = substr(sha1_file($build.'/app.js'), 0, 12);
   run("mkdir -p {{release_path}}/public/player/{$version}"); // rsync creates only the last path segment
   upload($build.'/', "{{release_path}}/public/player/{$version}/");
-  run("printf '%s' '<!doctype html><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");
+  // A meta refresh drops the #<project id>; the script keeps it.
+  run("printf '%s' '<!doctype html><script>location.replace(\"{$version}/index.html\" + location.hash)</script><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");
 });
 
 task('deploy:jwt', function () {

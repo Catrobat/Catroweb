@@ -19,6 +19,7 @@ import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.sensing.CollisionInformation;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.stage.TestResult;
+import org.teavm.jso.JSBody;
 import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.html.HTMLElement;
 
@@ -187,9 +188,14 @@ public final class WebCompat {
 		if (!body.hasAttribute("data-test-result")) {
 			body.setAttribute("data-test-result", result.getResultCode() + " " + result.getMessage());
 			System.out.println("player: test finished: " + result.getResultCode() + " " + result.getMessage());
+			reportTestFinished();
 		}
 		finishStage();
 	}
+
+	/** Lets scripts/smoke_server.py stop waiting; elsewhere it is a request nobody answers. */
+	@JSBody(script = "fetch('__test-finished').catch(function () {});")
+	private static native void reportTestFinished();
 
 	/**
 	 * Catroid computes collision outlines from the image file with Android's BitmapFactory and PNG metadata.

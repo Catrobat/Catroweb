@@ -37,15 +37,15 @@ for test in colorAtXY/testColorAtXY bricks/looks/testSetTransparency touchesColo
   mkdir -p "$STAGE/project-files/$(basename $test)/assets"
   unzip -q "build/catroid/catroid/src/androidTest/assets/catrobatTests/$test.catrobat" -d "$STAGE/project-files/$(basename $test)/assets"
 done
-serve 15 $STAGE
 for test in $(ls $STAGE/project-files); do
+  serve 90 $STAGE  # released as soon as the test reports its result
   RESULT=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \
-    --window-size=480,800 --timeout=60000 --dump-dom "http://127.0.0.1:$PORT/#$test" 2> /dev/null \
-    | grep -o 'data-test-result="[^"]*"' || true)
+    --window-size=480,800 --timeout=120000 --dump-dom "http://127.0.0.1:$PORT/#$test" 2> /dev/null \
+    | tr '\n' ' ' | grep -o 'data-test-result="[^"]*"' || true)
+  kill $SERVER
   echo "$test: ${RESULT:-no result}"
   [[ "$RESULT" == 'data-test-result="7777 '* ]]
 done
-kill $SERVER
 
 # The loader check runs synchronously once the page has loaded; --virtual-time-budget keeps headless Chrome from
 # dumping the page before it has finished. timeout: a hung renderer must not hold the job until its time limit (macOS
