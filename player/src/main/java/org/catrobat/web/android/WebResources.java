@@ -31,17 +31,21 @@ public final class WebResources extends Resources {
 
 	@Override
 	public String getString(int id) {
-		return string(id);
+		String text = string(id);
+		if (null == text) {
+			throw new NotFoundException("String resource ID #0x" + Integer.toHexString(id)); // as Android
+		}
+		return text;
 	}
 
 	@Override
 	public String getString(int id, Object... formatArgs) {
-		return String.format(string(id), formatArgs);
+		return String.format(getString(id), formatArgs);
 	}
 
 	@Override
 	public CharSequence getText(int id) {
-		return string(id);
+		return getString(id);
 	}
 
 	/** From strings.json (scripts/export_strings.py), fetched on the first string a project asks for. */
