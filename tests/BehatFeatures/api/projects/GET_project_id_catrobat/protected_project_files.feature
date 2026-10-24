@@ -129,3 +129,11 @@ Feature: Project files use the existing preview and archive access policies
       | /project-files/1/assets/images%252flook.png              |
       | /project-files/1/assets/images/%2e%2e/code.xml            |
       | /project-files/1/assets/images%5clook.png                |
+
+  Scenario: The browser player's own host may read project files without credentials
+    When I request "GET" "/project-files/1/assets/code.xml"
+    Then the response status code should be "200"
+    And the response Header should contain the key "Access-Control-Allow-Origin" with the value 'https://play.catrobat.org'
+    When I request "GET" "/project-files/5/assets/code.xml"
+    Then the response status code should be "404"
+    And the response Header should contain the key "Access-Control-Allow-Origin" with the value 'https://play.catrobat.org'

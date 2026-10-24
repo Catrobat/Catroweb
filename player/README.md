@@ -60,10 +60,16 @@ The deployment workflow builds the player in its own job, without secrets, and h
 deploy job; if the build fails, share deploys without it. `deploy:player` uploads it to `public/player/<hash of app.js>/`,
 a new folder per build because nginx caches `.js` for a year. `/player/index.html` forwards to the current one.
 
+The player is meant to run on its own host, `play.catrobat.org`, whose nginx vhost (in the infrastructure repository)
+serves share's `public/player/`: project code then never shares an origin with share's login cookies, which share's API
+accepts. From a `play.<domain>` host the player reads project files from `share.<domain>`, which allows that origin
+without credentials (`PLAYER_ORIGIN`, `App\Project\EventListener\PlayerCorsListener`; nginx sets the same header on
+the files it serves via `X-Accel-Redirect`). Only projects a logged-out visitor may see can be played there.
+
 ## Status
 
 `index.html#<project id>` plays share projects from Catrobat language 0.9991 on (older ones need Catroid's legacy
 conversion) with their looks and sounds, after a click on the start screen (browsers only play sound after one).
 Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
 unavailable, as on a device without those sensors. Not yet: all of `catrobatTests` on the stage as a conformance suite;
-the player's own host; the Play button.
+the Play button.
