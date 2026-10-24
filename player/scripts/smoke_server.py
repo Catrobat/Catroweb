@@ -27,7 +27,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         elif self.path.endswith("/__test-finished"):
             FINISHED.set()
             self.reply(b"", "text/plain")
-        elif self.path == "/":
+        elif self.path.split("?")[0] == "/":
             with open(ROOT + "/index.html", "rb") as f:
                 page = f.read()
             # The player starts on "load", which the image now holds back; start it as soon as the DOM is there.

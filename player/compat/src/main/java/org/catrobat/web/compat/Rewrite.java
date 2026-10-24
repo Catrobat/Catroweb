@@ -51,6 +51,8 @@ public final class Rewrite {
 			Map.entry("java/util/concurrent/locks/Lock", "org/catrobat/web/java/Lock"),
 			Map.entry("java/util/concurrent/locks/ReentrantLock", "org/catrobat/web/java/ReentrantLock"),
 			Map.entry("java/io/ObjectStreamField", "org/catrobat/web/java/ObjectStreamField"),
+			Map.entry("android/media/MediaPlayer", "org/catrobat/web/android/MediaPlayer"),
+			Map.entry("android/media/MediaMetadataRetriever", "org/catrobat/web/android/MediaMetadataRetriever"),
 			Map.entry("org/catrobat/catroid/web/WebConnectionHolder", "org/catrobat/web/catroid/WebConnectionHolder"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidApplication", "org/catrobat/web/compat/WebAndroidApplication"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidGraphics", "org/catrobat/web/compat/WebAndroidGraphics"),

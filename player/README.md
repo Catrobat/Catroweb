@@ -47,6 +47,10 @@ Other pieces:
 - Looks: before the stage starts, `ProjectLoader.loadFiles` fetches each look from share into gdx-teavm's local file
   storage, switched to memory only (Catroid's `Files.absolute` calls are redirected there), as `setFileReferences`
   does on Android.
+- Sounds: `ProjectLoader.loadSounds` fetches them before the stage starts and `loader/Sounds` decodes them with Web
+  Audio, because Catroid reads their durations while it builds the scripts. `android.media.MediaPlayer` and
+  `MediaMetadataRetriever` are remapped to small web versions in `android/`. `StartScreen` waits for the click browsers
+  require before they play sound; `?autostart` skips it.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to
   `data-test-result` on the page (7777 = success), which `smoke.sh` checks for a few test projects with looks.
 
@@ -59,6 +63,7 @@ a new folder per build because nginx caches `.js` for a year. `/player/index.htm
 ## Status
 
 `index.html#<project id>` plays share projects from Catrobat language 0.9991 on (older ones need Catroid's legacy
-conversion) with their looks. Collision outlines are each look's bounding box for now, and acceleration, inclination,
-compass and location are unavailable, as on a device without those sensors. Not
-yet: sounds; all of `catrobatTests` on the stage as a conformance suite; the player's own host; the Play button.
+conversion) with their looks and sounds, after a click on the start screen (browsers only play sound after one).
+Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
+unavailable, as on a device without those sensors. Not yet: all of `catrobatTests` on the stage as a conformance suite;
+the player's own host; the Play button.

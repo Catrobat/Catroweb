@@ -30,17 +30,20 @@ echo "Pen pixels on the stage: $PIXELS"
 kill $SERVER
 
 # Catroid test projects with looks, played on the stage: each reports its result like on Android (7777 = success).
-# testColorAtXY reads the stage's pixels, so it fails if looks are not drawn.
+# testColorAtXY reads the stage's pixels, so it fails if looks are not drawn; sound-play-and-wait asserts that
+# "play sound and wait" waits for the sound's length.
 STAGE=build/web/stage-tests
 rm -rf $STAGE
 for test in colorAtXY/testColorAtXY bricks/looks/testSetTransparency touchesColor/testColorTouchesColor; do
   mkdir -p "$STAGE/project-files/$(basename $test)/assets"
   unzip -q "build/catroid/catroid/src/androidTest/assets/catrobatTests/$test.catrobat" -d "$STAGE/project-files/$(basename $test)/assets"
 done
+mkdir -p $STAGE/project-files/sound-play-and-wait/assets  # fixtures/README.md
+unzip -q fixtures/sound-play-and-wait.catrobat -d $STAGE/project-files/sound-play-and-wait/assets
 for test in $(ls $STAGE/project-files); do
   serve 90 $STAGE  # released as soon as the test reports its result
   RESULT=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \
-    --window-size=480,800 --timeout=120000 --dump-dom "http://127.0.0.1:$PORT/#$test" 2> /dev/null \
+    --window-size=480,800 --timeout=120000 --autoplay-policy=no-user-gesture-required --dump-dom "http://127.0.0.1:$PORT/?autostart#$test" 2> /dev/null \
     | tr '\n' ' ' | grep -o 'data-test-result="[^"]*"' || true)
   kill $SERVER
   echo "$test: ${RESULT:-no result}"
