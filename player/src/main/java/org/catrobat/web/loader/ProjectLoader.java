@@ -191,14 +191,15 @@ public final class ProjectLoader {
 		startPrefetch(urls.toArray(new String[0]));
 	}
 
-	/** A file that failed stays out of the cache: fetchBytes asks again and reports the error. */
+	/** A file that failed or timed out stays out of the cache: fetchBytes asks again and reports the error. */
 	@JSBody(params = "urls", script = "var files = {}, next = 0;"
 			+ "function one() {"
 			+ "  if (next >= urls.length) return Promise.resolve();"
 			+ "  var url = urls[next++];"
-			+ "  return fetch(url).then(function (response) {"
+			+ "  var options = AbortSignal.timeout ? {signal: AbortSignal.timeout(30000)} : {};" // a stalled file must not block the start
+			+ "  return fetch(url, options).then(function (response) {"
 			+ "    if (response.status === 404) files[url] = new Int8Array(0);"
-			+ "    else if (response.ok) return response.arrayBuffer().then(function (b) { files[url] = new Int8Array(b); });"
+			+ "    else if (response.status === 200) return response.arrayBuffer().then(function (b) { files[url] = new Int8Array(b); });"
 			+ "  }).catch(function () {}).then(one);"
 			+ "}"
 			+ "var workers = [];"
