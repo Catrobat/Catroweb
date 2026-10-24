@@ -13,6 +13,7 @@ import org.catrobat.catroid.io.XstreamSerializer;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSByRef;
 import org.teavm.jso.ajax.XMLHttpRequest;
+import org.teavm.jso.browser.Location;
 import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.xml.DOMParser;
 import org.teavm.jso.dom.xml.Element;
@@ -36,8 +37,9 @@ public final class ProjectLoader {
 	 * host serves both.
 	 */
 	private static String assetUrl(String projectId, String path) {
-		String host = Window.current().getLocation().getHostName();
-		String share = host.startsWith("play.") ? "https://share." + host.substring("play.".length()) : "";
+		Location location = Window.current().getLocation();
+		String host = location.getHost(); // with the port, if any
+		String share = host.startsWith("play.") ? location.getProtocol() + "//share." + host.substring("play.".length()) : "";
 		return share + "/project-files/" + projectId + "/assets/" + path;
 	}
 
