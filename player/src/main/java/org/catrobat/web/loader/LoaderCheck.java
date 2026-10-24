@@ -4,8 +4,10 @@ import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.html.HTMLElement;
 
 /**
- * index.html#check: loads every project in /project-files/index.txt and writes one line per project into
- * &lt;pre id="loader-check"&gt;, for scripts/check_loader.py to compare with the XML. No stage is started.
+ * index.html#check: loads every project in /project-files/check.txt (written by scripts/check_loader.py: per project
+ * its id, a newline and its code.xml, separated by NUL characters) and writes one line per project into
+ * &lt;pre id="loader-check"&gt;, for check_loader.py to compare with the XML. No stage is started. One request for all
+ * projects: headless Chrome sometimes never sends the next of many synchronous requests.
  */
 public final class LoaderCheck {
 	private LoaderCheck() {
@@ -13,13 +15,12 @@ public final class LoaderCheck {
 
 	public static void run() {
 		StringBuilder lines = new StringBuilder();
-		for (String id : ProjectLoader.fetch("/project-files/index.txt").split("\n")) {
-			if (id.isBlank()) {
-				continue;
-			}
+		for (String project : ProjectLoader.fetch("/project-files/check.txt").split("\u0000")) {
+			int newline = project.indexOf('\n');
+			String id = project.substring(0, newline);
 			String result;
 			try {
-				result = ProjectLoader.summary(ProjectLoader.load(id));
+				result = ProjectLoader.summary(ProjectLoader.parse(project.substring(newline + 1)));
 			} catch (Throwable e) { // one broken project must not hide the others
 				result = ("error: " + e).replaceAll("\\s*\\n\\s*", " | "); // one line per project
 			}
@@ -29,11 +30,5 @@ public final class LoaderCheck {
 		output.setAttribute("id", "loader-check");
 		output.setTextContent(lines.toString());
 		Window.current().getDocument().getBody().appendChild(output);
-		try {
-			ProjectLoader.fetch("/project-files/done"); // tells scripts/smoke_server.py that the page is done
-		} catch (IllegalStateException e) {
-			// not served by the smoke server
-		}
 	}
-
 }

@@ -31,7 +31,7 @@ public final class ProjectLoader {
 		return parse(fetch(assetUrl(projectId, "code.xml")));
 	}
 
-	private static Project parse(String xml) {
+	static Project parse(String xml) {
 		Element root = DOMParser.create().parseFromString(xml, "text/xml").getDocumentElement();
 		if (0 != root.getElementsByTagName("parsererror").getLength()) { // the browser's way of saying it is not XML
 			throw new IllegalArgumentException("code.xml is not valid XML");
@@ -40,6 +40,8 @@ public final class ProjectLoader {
 		if (0 == root.getElementsByTagName("scenes").getLength() || languageVersion(root) < 0.9991) {
 			throw new IllegalArgumentException("Projects before Catrobat language version 0.9991 cannot be played here yet");
 		}
+		// ponytail: the app retries a ConversionException after modifyXMLToSupportUnknownFields (java.io.File + DOM);
+		// not here yet, so such a project fails loudly instead.
 		Project project = (Project) XstreamSerializer.getInstance().getXstream().unmarshal(new BrowserDomReader(root));
 		for (Scene scene : project.getSceneList()) { // the rest of what loadProject does after reading the XML
 			scene.setProject(project);
@@ -54,7 +56,7 @@ public final class ProjectLoader {
 	}
 
 	/**
-	 * "1 scenes, 9 sprites, 25 scripts, 47 bricks" and then each script and top-level brick class in order:
+	 * "1 scenes, 9 sprites, 25 scripts, 47 bricks" and then each sprite, script and top-level brick class in order:
 	 * what scripts/check_loader.py reads from the XML. The classes catch a brick that loaded as the wrong one.
 	 */
 	public static String summary(Project project) {
@@ -65,7 +67,7 @@ public final class ProjectLoader {
 		for (Scene scene : project.getSceneList()) {
 			for (Sprite sprite : scene.getSpriteList()) {
 				sprites++;
-				classes.append(" sprite:");
+				classes.append(' ').append(simpleName(sprite)).append(':');
 				for (Script script : sprite.getScriptList()) {
 					scripts++;
 					classes.append(' ').append(simpleName(script)).append('(');

@@ -1,4 +1,4 @@
-build/
+/build
 .gradle/
 assets/stage/
 src/main/java/org/catrobat/web/ActionRegistry.java

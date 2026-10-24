@@ -52,3 +52,5 @@ jobs:
             player/build/web/stub-report.tsv
             player/build/web/smoke.png
             player/build/web/teavm.log
+            player/build/web/loader-check/page.html
+            player/build/web/loader-check/chrome.log

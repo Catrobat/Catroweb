@@ -252,8 +252,10 @@ public final class Rewrite {
 
 	/**
 	 * XStream builds Catroid classes that lack a no-argument constructor through Java serialization, which the browser
-	 * does not have: it skips their constructors and only runs the superclass's no-argument one. This constructor does
-	 * the same, so XStream finds a plain no-argument constructor and then sets the fields from the XML.
+	 * does not have: it skips their constructors and only runs the no-argument one of the first non-Serializable
+	 * superclass. This one runs the direct superclass's instead, so XStream finds a plain no-argument constructor and
+	 * then sets the fields from the XML. The difference: superclass field initializers run, such as
+	 * BrickBaseType.brickId, which XStream then overwrites when the XML has the field.
 	 */
 	private static boolean addNoArgConstructor(ClassNode node, Set<String> noArgConstructors) {
 		if (!node.name.startsWith("org/catrobat/catroid/") || !noArgConstructors.contains(node.superName)

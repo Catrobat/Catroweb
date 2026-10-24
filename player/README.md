@@ -16,8 +16,8 @@ Needs JDK 21 and the Android SDK (`ANDROID_HOME`).
 
 Serve `build/dist/js/webapp` with any static server; `index.html#<project id>` loads that project from share's
 `/project-files/<id>/assets/code.xml`. `./scripts/smoke.sh` checks in headless Chrome that the engine runs and that the
-loader reads all of Catroid's `catrobatTests` projects like the app does (`index.html#check`, compared by
-`scripts/check_loader.py`). `./scripts/export-mapping.sh` dumps Catroid's XStream mapping.
+loader reads all of Catroid's `catrobatTests` projects, plus those in `fixtures/`, like the app does
+(`index.html#check`, compared by `scripts/check_loader.py`). `./scripts/export-mapping.sh` dumps Catroid's XStream mapping.
 
 ## How it works
 

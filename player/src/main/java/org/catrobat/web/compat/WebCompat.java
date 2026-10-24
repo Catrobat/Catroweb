@@ -64,8 +64,9 @@ public final class WebCompat {
 	}
 
 	/**
-	 * XStream builds these converters by class name and reflection; the others it registers that way are for JDK types
-	 * the browser lacks (java.time, javax.security, ...) and are left out.
+	 * XStream builds these converters by class name and reflection. The others it registers that way are left out: they
+	 * are for JDK types the browser lacks (java.time, javax.security, ...) or that Catroid projects never contain
+	 * (Currency, Charset, Pattern, Throwable, Optional).
 	 */
 	public static void registerConverterDynamically(com.thoughtworks.xstream.XStream xstream, String className, int priority,
 			Class<?>[] types, Object[] values) {

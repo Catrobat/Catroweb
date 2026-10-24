@@ -9,7 +9,7 @@ SHOT=build/web/smoke.png
 
 CHECK=build/web/loader-check
 rm -rf build/web/smoke.port $CHECK
-python3 scripts/check_loader.py prepare build/catroid/catroid/src/androidTest/assets/catrobatTests $CHECK
+python3 scripts/check_loader.py prepare $CHECK build/catroid/catroid/src/androidTest/assets/catrobatTests fixtures
 
 serve() { # <wait seconds> [fixtures dir]: starts smoke_server, sets PORT
   rm -f build/web/smoke.port
@@ -29,9 +29,11 @@ echo "Pen pixels on the stage: $PIXELS"
 [ "$PIXELS" -gt 300 ]
 kill $SERVER
 
-# The loader check asks for /project-files/done when it has finished, which releases the load event early. Without the
-# throttling flags headless Chrome delays the timers TeaVM's threads yield through until the page has loaded.
-serve 600 $CHECK
-"$CHROME" --headless=new --disable-background-timer-throttling --disable-renderer-backgrounding \
-  --disable-backgrounding-occluded-windows --timeout=660000 --dump-dom "http://127.0.0.1:$PORT/#check" > $CHECK/page.html 2> /dev/null
+# The loader check runs synchronously once the page has loaded; --virtual-time-budget keeps headless Chrome from
+# dumping the page before it has finished. timeout: a hung renderer must not hold the job until its time limit (macOS
+# has no timeout unless coreutils provides gtimeout).
+serve 0 $CHECK
+LIMIT=$(command -v timeout || command -v gtimeout || true)
+${LIMIT:+$LIMIT 900} "$CHROME" --headless=new --virtual-time-budget=600000 --timeout=660000 \
+  --dump-dom "http://127.0.0.1:$PORT/#check" > $CHECK/page.html 2> $CHECK/chrome.log
 python3 scripts/check_loader.py compare $CHECK $CHECK/page.html
