@@ -63,6 +63,7 @@ public class WebLauncher {
 		}
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
+		project.getDirectory().mkdirs(); // the device variables and lists bricks save there, in memory for this play
 		project.getRequiredResources(); // StageResourceHolder's job on Android; gives physics sprites their action factory
 		// The canvas takes the project's aspect ratio, fitted into 480x800 (800x480 for landscape), so the stage fills it.
 		boolean sized = project.getXmlHeader().getVirtualScreenWidth() > 0 && project.getXmlHeader().getVirtualScreenHeight() > 0;
