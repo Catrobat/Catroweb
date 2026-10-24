@@ -44,6 +44,11 @@ Other pieces:
   reader over the browser's `DOMParser`. XStream builds objects by reflection, so `compiler/CatroidReflectionPolicy`
   grants it Catroid's model, and `compiler/ReflectionLinks` (a TeaVM plugin) works around TeaVM 0.15 leaving the
   names, constructors and fields of most of those classes out.
+- Looks: before the stage starts, `ProjectLoader.loadFiles` fetches each look from share into gdx-teavm's local file
+  storage, switched to memory only (Catroid's `Files.absolute` calls are redirected there), as `setFileReferences`
+  does on Android.
+- Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to
+  `data-test-result` on the page (7777 = success), which `smoke.sh` checks for a few test projects with looks.
 
 ## Deployment
 
@@ -53,6 +58,7 @@ a new folder per build because nginx caches `.js` for a year. `/player/index.htm
 
 ## Status
 
-The engine runs a project built in code (a pen drawing a circle), and the loader reads projects from Catrobat language
-0.9991 on (older ones need Catroid's legacy conversion). Not yet: looks and sounds, so loaded projects do not start
-yet; running `catrobatTests` on the stage as a conformance suite; and the Play button on share.
+`index.html#<project id>` plays share projects from Catrobat language 0.9991 on (older ones need Catroid's legacy
+conversion) with their looks. Collision outlines are each look's bounding box for now, and acceleration, inclination,
+compass and location are unavailable, as on a device without those sensors. Not
+yet: sounds; all of `catrobatTests` on the stage as a conformance suite; the player's own host; the Play button.

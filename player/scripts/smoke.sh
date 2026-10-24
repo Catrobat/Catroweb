@@ -29,6 +29,24 @@ echo "Pen pixels on the stage: $PIXELS"
 [ "$PIXELS" -gt 300 ]
 kill $SERVER
 
+# Catroid test projects with looks, played on the stage: each reports its result like on Android (7777 = success).
+# testColorAtXY reads the stage's pixels, so it fails if looks are not drawn.
+STAGE=build/web/stage-tests
+rm -rf $STAGE
+for test in colorAtXY/testColorAtXY bricks/looks/testSetTransparency touchesColor/testColorTouchesColor; do
+  mkdir -p "$STAGE/project-files/$(basename $test)/assets"
+  unzip -q "build/catroid/catroid/src/androidTest/assets/catrobatTests/$test.catrobat" -d "$STAGE/project-files/$(basename $test)/assets"
+done
+for test in $(ls $STAGE/project-files); do
+  serve 90 $STAGE  # released as soon as the test reports its result
+  RESULT=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \
+    --window-size=480,800 --timeout=120000 --dump-dom "http://127.0.0.1:$PORT/#$test" 2> /dev/null \
+    | tr '\n' ' ' | grep -o 'data-test-result="[^"]*"' || true)
+  kill $SERVER
+  echo "$test: ${RESULT:-no result}"
+  [[ "$RESULT" == 'data-test-result="7777 '* ]]
+done
+
 # The loader check runs synchronously once the page has loaded; --virtual-time-budget keeps headless Chrome from
 # dumping the page before it has finished. timeout: a hung renderer must not hold the job until its time limit (macOS
 # has no timeout unless coreutils provides gtimeout).

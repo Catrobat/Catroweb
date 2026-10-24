@@ -1,5 +1,7 @@
 package org.catrobat.web.compat;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.math.Polygon;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
 import com.thoughtworks.xstream.converters.basic.StringBuilderConverter;
@@ -13,6 +15,15 @@ import com.thoughtworks.xstream.converters.extended.AtomicLongConverter;
 import com.thoughtworks.xstream.converters.extended.AtomicReferenceConverter;
 import com.thoughtworks.xstream.core.util.SerializationMembers;
 import com.thoughtworks.xstream.mapper.Mapper;
+import org.catrobat.catroid.common.LookData;
+import org.catrobat.catroid.sensing.CollisionInformation;
+import org.catrobat.catroid.stage.StageActivity;
+import org.catrobat.catroid.stage.TestResult;
+import org.teavm.jso.JSBody;
+import org.teavm.jso.browser.Window;
+import org.teavm.jso.dom.html.HTMLElement;
+
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.Arrays;
@@ -156,5 +167,51 @@ public final class WebCompat {
 	/** No Java serialization in the browser, so no readObject/writeObject hooks: XStream reads the fields instead. */
 	public static boolean noSerializationHook(SerializationMembers members, Class<?> type, boolean includeBaseClasses) {
 		return false;
+	}
+
+	/** gdx-teavm has no absolute files; Catroid's looks and sounds live in its in-memory local storage instead. */
+	public static com.badlogic.gdx.files.FileHandle absolute(com.badlogic.gdx.Files files, String path) {
+		return files.local(path);
+	}
+
+	/** The finish-stage brick: on Android the stage activity closes; here the stage stops. */
+	public static void finishStage() {
+		StageActivity.stageListener.setPaused(true);
+	}
+
+	/**
+	 * Catroid's test projects (catrobatTests) end with an assertion or a finish brick that reports here; the first
+	 * result counts, as on Android where the activity is gone after it. The page keeps it for the conformance runner.
+	 */
+	public static void finishTestWithResult(TestResult result) {
+		HTMLElement body = Window.current().getDocument().getBody();
+		if (!body.hasAttribute("data-test-result")) {
+			body.setAttribute("data-test-result", result.getResultCode() + " " + result.getMessage());
+			System.out.println("player: test finished: " + result.getResultCode() + " " + result.getMessage());
+			reportTestFinished();
+		}
+		finishStage();
+	}
+
+	/** Lets scripts/smoke_server.py stop waiting; elsewhere it is a request nobody answers. */
+	@JSBody(script = "fetch('__test-finished').catch(function () {});")
+	private static native void reportTestFinished();
+
+	/**
+	 * Catroid computes collision outlines from the image file with Android's BitmapFactory and PNG metadata.
+	 * ponytail: the look's bounding box, which Catroid itself uses for images that are not PNG; port the outline
+	 * calculation onto Pixmap when touch and collision bricks need pixel accuracy.
+	 */
+	public static void loadCollisionPolygon(CollisionInformation information) {
+		try {
+			Field lookDataField = CollisionInformation.class.getDeclaredField("lookData");
+			lookDataField.setAccessible(true);
+			Pixmap pixmap = ((LookData) lookDataField.get(information)).getPixmap();
+			float width = pixmap.getWidth();
+			float height = pixmap.getHeight();
+			information.collisionPolygons = new Polygon[] {new Polygon(new float[] {0, 0, width, 0, width, height, 0, height})};
+		} catch (ReflectiveOperationException e) {
+			throw new IllegalStateException("Catroid's CollisionInformation changed", e);
+		}
 	}
 }

@@ -59,7 +59,9 @@ public class CatroidReflectionPolicy extends SimpleReflectionPolicy {
 		if (null == name) {
 			return false;
 		}
-		if (DYNAMIC_MAPPERS.contains(name) || COLLECTIONS.contains(name) || LEGO_SENSORS.contains(name)) {
+		if (DYNAMIC_MAPPERS.contains(name) || COLLECTIONS.contains(name) || LEGO_SENSORS.contains(name)
+				|| "org.catrobat.catroid.sensing.CollisionInformation".equals(name)) { // WebCompat.loadCollisionPolygon
+
 			return true;
 		}
 		// BrickSpinner: UI, not project data; TeaVM also writes broken metadata for its generic inner adapter class

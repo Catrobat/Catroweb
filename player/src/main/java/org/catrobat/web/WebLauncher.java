@@ -3,6 +3,8 @@ package org.catrobat.web;
 import com.badlogic.gdx.Gdx;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
+import com.github.xpenatan.gdx.teavm.backends.web.WebFiles;
+import com.github.xpenatan.gdx.teavm.backends.web.filesystem.MemoryFileStorage;
 
 import org.catrobat.catroid.ProjectManager;
 import org.catrobat.catroid.common.ScreenValues;
@@ -14,9 +16,11 @@ import org.catrobat.catroid.content.bricks.ForeverBrick;
 import org.catrobat.catroid.content.bricks.MoveNStepsBrick;
 import org.catrobat.catroid.content.bricks.PenDownBrick;
 import org.catrobat.catroid.content.bricks.TurnRightBrick;
+import org.catrobat.catroid.formulaeditor.SensorHandler;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.stage.StageListener;
 import org.catrobat.catroid.utils.Resolution;
+import org.catrobat.web.android.WebContext;
 import org.catrobat.web.loader.LoaderCheck;
 import org.catrobat.web.loader.ProjectLoader;
 import org.teavm.jso.browser.Window;
@@ -30,6 +34,7 @@ public class WebLauncher {
 		}
 		System.setProperty("java.specification.version", "21");
 		ActionRegistry.registerAll();
+		SensorHandler.getInstance(WebContext.INSTANCE); // StageResourceHolder's job on Android; sensor formulas read it
 		ProjectManager projectManager;
 		try {
 			projectManager = new ProjectManager(null);
@@ -48,23 +53,39 @@ public class WebLauncher {
 		Project project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
-		ScreenValues.currentScreenResolution = new Resolution(480, 800);
+		// The canvas takes the project's aspect ratio, fitted into 480x800 (800x480 for landscape), so the stage fills it.
+		boolean sized = project.getXmlHeader().getVirtualScreenWidth() > 0 && project.getXmlHeader().getVirtualScreenHeight() > 0;
+		int width = sized ? project.getXmlHeader().getVirtualScreenWidth() : 480;
+		int height = sized ? project.getXmlHeader().getVirtualScreenHeight() : 800;
+		float scale = width > height ? Math.min(800f / width, 480f / height) : Math.min(480f / width, 800f / height);
+		Resolution screen = new Resolution(Math.max(1, Math.round(width * scale)), Math.max(1, Math.round(height * scale)));
+		ScreenValues.currentScreenResolution = screen;
 
 		WebApplicationConfiguration config = new WebApplicationConfiguration();
-		config.width = 480;
-		config.height = 800;
+		config.width = screen.getWidth();
+		config.height = screen.getHeight();
 		config.preserveDrawingBuffer = true; // lets tests read the stage pixels
 		config.alpha = false; // Catroid clears with alpha 0, which Android ignores
+		// gdx-teavm's default keeps the #<project id> in the URL its scripts load from.
+		config.baseUrlProvider = () -> {
+			String url = Window.current().getLocation().getFullURL().split("[#?]", 2)[0];
+			return url.substring(0, url.lastIndexOf('/') + 1);
+		};
 		StageListener stage = new StageListener() {
 			@Override
 			public void create() {
+				// gdx-teavm keeps local files in IndexedDB and reloads them on every start; looks are per play.
+				((WebFiles) Gdx.files).localStorage = new MemoryFileStorage();
+				if (!projectId.isEmpty()) {
+					ProjectLoader.loadFiles(project, projectId); // needs Gdx.files, which exists from here on
+				}
 				// A fresh Android GL context clears to transparent; the pen and plot buffers rely on it.
 				Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
 				super.create();
 				setPaused(false); // StageLifeCycleController resumes the stage on Android once resources are ready
 			}
 		};
-		stage.setMaxViewPort(new Resolution(480, 800)); // StageActivity's job on Android
+		stage.setMaxViewPort(screen); // StageActivity's job on Android
 		StageActivity.stageListener = stage; // actors reach the stage through it
 		new WebApplication(stage, config);
 	}
