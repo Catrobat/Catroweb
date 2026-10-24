@@ -3,8 +3,8 @@ package org.catrobat.web.android;
 import java.util.Arrays;
 
 /**
- * android.util.SparseIntArray for the browser (compat/Rewrite remaps it): replaces the android.jar stub, which keeps no values, so
- * Catroid's TouchUtil saw every pointer as already down. Keys stay sorted, as on Android, so indexes match.
+ * android.util.SparseIntArray for the browser (compat/Rewrite remaps it): replaces the android.jar stub, which keeps
+ * no values, so Catroid's TouchUtil saw every pointer as already down. Keys stay sorted, as on Android, so indexes match.
  */
 public class SparseIntArray {
 	private int[] keys = new int[0];
