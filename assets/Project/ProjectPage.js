@@ -441,14 +441,27 @@ function renderDownloadButtons(data) {
     return html
   }
 
+  // The browser player needs WebGL; without it, downloading for the app stays the way to play.
+  const playerUrl = projectElement.dataset.playerUrl || ''
+  const canvas = document.createElement('canvas')
+  const canPlay =
+    playerUrl && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')) !== null
+  const buildPlayHtml = (suffix) =>
+    canPlay
+      ? `<a id="projectPlayButton${suffix}" class="btn btn-download btn-play mt-2" href="${escapeAttr(playerUrl)}">
+          <i class="material-icons align-bottom">play_arrow</i>
+          <span>${escapeHtml(projectElement.dataset.transPlay || 'Play in browser')}</span>
+        </a>`
+      : ''
+
   const largeWrapper = document.getElementById('download-button-wrapper')
   if (largeWrapper) {
-    largeWrapper.innerHTML = buildButtonHtml('')
+    largeWrapper.innerHTML = buildButtonHtml('') + buildPlayHtml('')
   }
 
   const smallWrapper = document.getElementById('download-button-small-wrapper')
   if (smallWrapper) {
-    smallWrapper.innerHTML = buildButtonHtml('-small')
+    smallWrapper.innerHTML = buildButtonHtml('-small') + buildPlayHtml('-small')
   }
 }
 

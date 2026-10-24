@@ -75,4 +75,5 @@ the files it serves via `X-Accel-Redirect`). Only projects a logged-out visitor 
 conversion) with their looks and sounds, after a click on the start screen (browsers only play sound after one).
 Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
 unavailable, as on a device without those sensors. `conformance.tsv` lists which of Catroid's test projects pass on
-the stage. Not yet: the Play button.
+the stage. Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
+app and only where the browser has WebGL; downloading for the app stays the alternative.
