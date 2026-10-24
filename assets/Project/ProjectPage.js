@@ -443,7 +443,9 @@ function renderDownloadButtons(data) {
 
   // The browser player needs WebGL; without it, downloading for the app stays the way to play.
   const playerUrl = projectElement.dataset.playerUrl || ''
-  const canPlay = playerUrl && document.createElement('canvas').getContext('webgl') !== null
+  const canvas = document.createElement('canvas')
+  const canPlay =
+    playerUrl && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')) !== null
   const buildPlayHtml = (suffix) =>
     canPlay
       ? `<a id="projectPlayButton${suffix}" class="btn btn-download btn-play mt-2" href="${escapeAttr(playerUrl)}">
