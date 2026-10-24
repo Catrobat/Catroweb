@@ -13,9 +13,6 @@ public class SparseIntArray {
 	public SparseIntArray() {
 	}
 
-	public SparseIntArray(int initialCapacity) {
-	}
-
 	public int get(int key) {
 		return get(key, 0);
 	}

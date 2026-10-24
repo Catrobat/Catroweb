@@ -9,9 +9,6 @@ public class SparseArray<E> {
 	public SparseArray() {
 	}
 
-	public SparseArray(int initialCapacity) {
-	}
-
 	public E get(int key) {
 		return entries.get(key);
 	}
