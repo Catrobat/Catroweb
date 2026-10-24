@@ -119,6 +119,9 @@ public final class ProjectLoader {
 			for (Sprite sprite : scene.getSpriteList()) {
 				for (Iterator<LookData> looks = sprite.getLookList().iterator(); looks.hasNext(); ) {
 					LookData look = looks.next();
+					if (null != look.getFile()) {
+						continue; // the same look in several sprites (an XStream reference), already loaded
+					}
 					File file = new File(new File(scene.getDirectory(), "images"), look.getXstreamFileName());
 					byte[] bytes = fetchBytes(projectId, file);
 					if (0 == bytes.length) {
@@ -141,6 +144,9 @@ public final class ProjectLoader {
 			for (Sprite sprite : scene.getSpriteList()) {
 				for (Iterator<SoundInfo> sounds = sprite.getSoundList().iterator(); sounds.hasNext(); ) {
 					SoundInfo sound = sounds.next();
+					if (null != sound.getFile()) {
+						continue;
+					}
 					File file = new File(new File(scene.getDirectory(), "sounds"), sound.getXstreamFileName());
 					byte[] bytes = fetchBytes(projectId, file);
 					if (0 == bytes.length) {

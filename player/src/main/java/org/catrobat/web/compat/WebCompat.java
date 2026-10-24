@@ -17,7 +17,11 @@ import com.thoughtworks.xstream.core.util.SerializationMembers;
 import com.thoughtworks.xstream.mapper.Mapper;
 import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.sensing.CollisionInformation;
+import org.catrobat.catroid.stage.OnSpeechRecognitionResultCallback;
+import org.catrobat.catroid.stage.SpeechRecognitionHolderFactory;
+import org.catrobat.catroid.stage.SpeechRecognitionHolderInterface;
 import org.catrobat.catroid.stage.StageActivity;
+import org.catrobat.catroid.stage.StageResourceHolder;
 import org.catrobat.catroid.stage.TestResult;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.browser.Window;
@@ -133,6 +137,70 @@ public final class WebCompat {
 		}
 		return UUID.fromString(hex.toString()); // TeaVM has no UUID(long, long)
 	}
+
+	/** Catroid hashes images to cache their physics outlines and texts for speech; a real MD5, lower-case hex. */
+	public static String md5Checksum(java.io.File file) {
+		com.badlogic.gdx.files.FileHandle handle = absolute(com.badlogic.gdx.Gdx.files, file.getAbsolutePath());
+		return handle.exists() ? md5Checksum(handle.readBytes()) : null;
+	}
+
+	public static String md5Checksum(String string) {
+		return md5Checksum(string.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+	}
+
+	private static String md5Checksum(byte[] bytes) {
+		StringBuilder hex = new StringBuilder(32);
+		for (byte b : Md5.digest(bytes)) {
+			hex.append(Character.forDigit((b >> 4) & 0xf, 16)).append(Character.forDigit(b & 0xf, 16));
+		}
+		return hex.toString();
+	}
+
+	/**
+	 * The app starts Koin; the player does not. Scene changes look up the speech recognition factory only to stop it,
+	 * which noSpeechRecognition answers; anything else is a feature the player lacks (speech output and input).
+	 */
+	public static Object koinGet(Class<?> type) {
+		if (SpeechRecognitionHolderFactory.class == type) {
+			return null;
+		}
+		throw new UnsupportedOperationException("Not available on the web: " + type.getName());
+	}
+
+	/**
+	 * Scene changes stop speech recognition, which the player does not offer: the factory Koin would have provided is
+	 * missing (koinGet), so there is nothing to stop. A factory that does exist answers for itself.
+	 */
+	public static SpeechRecognitionHolderInterface noSpeechRecognition(SpeechRecognitionHolderFactory factory) {
+		return null == factory ? NO_SPEECH : factory.getInstance();
+	}
+
+	private static final SpeechRecognitionHolderInterface NO_SPEECH = new SpeechRecognitionHolderInterface() {
+		@Override
+		public void forceSetLanguage() {
+		}
+
+		@Override
+		public void initSpeechRecognition(StageActivity stageActivity, StageResourceHolder stageResourceHolder) {
+		}
+
+		@Override
+		public void startListening() {
+		}
+
+		@Override
+		public void destroy() {
+		}
+
+		@Override
+		public OnSpeechRecognitionResultCallback getCallback() {
+			return null;
+		}
+
+		@Override
+		public void setCallback(OnSpeechRecognitionResultCallback callback) {
+		}
+	};
 
 	/** Koin 2.1 was compiled against Kotlin 1.3's double-valued TimeMark; it only measures for debug logs. */
 	public static double elapsedNow(kotlin.time.TimeMark timeMark) {
