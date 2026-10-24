@@ -192,12 +192,12 @@ touchesActorOrObject/testTouchesActorOrObject.catrobat	fail	on sprite "Object1" 
 touchesActorOrObject/testTouchesActorOrObjectBackground.catrobat	fail	on sprite "Object" Brick at position 1 in "unknown" AssertEqualsError expected: <false> actual: <1.0> deviation: ^
 touchesActorOrObject/testTouchesActorOrObjectCloneSimilarName.catrobat	fail	on sprite "objectTouchesClone" Brick at position 1 in "unknown" AssertEqualsError expected: <false> actual: <1.0> deviation: ^
 touchesActorOrObject/testTouchesActorOrObjectCloneSpecialCharacters.catrobat	pass	
-touchesActorOrObject/testTouchesActorOrObjectInitialValue.catrobat	fail	no result
+touchesActorOrObject/testTouchesActorOrObjectInitialValue.catrobat	pass	
 touchesActorOrObject/testTouchesActorOrObjectInitialValueIfLogicBeginBrick.catrobat	pass	
 touchesActorOrObject/testTouchesActorOrObjectInitialValueRestartSceneWithClones.catrobat	fail	no result
-touchesActorOrObject/testTouchesActorOrObjectInitialValueSceneRestartContinued.catrobat	fail	no result
+touchesActorOrObject/testTouchesActorOrObjectInitialValueSceneRestartContinued.catrobat	pass	
 touchesActorOrObject/testTouchesActorOrObjectInitialValueWithClones.catrobat	pass	
-touchesActorOrObject/testTouchesActorOrObjectInitialValueWithSeveralObjects.catrobat	fail	no result
+touchesActorOrObject/testTouchesActorOrObjectInitialValueWithSeveralObjects.catrobat	pass	
 touchesActorOrObject/testTouchesActorOrObjectSceneContinued.catrobat	fail	no result
 touchesActorOrObject/testTouchesActorOrObjectSpecialCharacters.catrobat	pass	
 touchesColor/testColorTouchesColor.catrobat	pass	

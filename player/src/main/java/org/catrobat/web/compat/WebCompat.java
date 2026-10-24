@@ -156,9 +156,15 @@ public final class WebCompat {
 		return hex.toString();
 	}
 
-	/** The app starts Koin; the player does not, so nothing is injected. Callers that need a service are redirected. */
+	/**
+	 * The app starts Koin; the player does not. Scene changes look up the speech recognition factory only to stop it,
+	 * which noSpeechRecognition answers; anything else is a feature the player lacks (speech output and input).
+	 */
 	public static Object koinGet(Class<?> type) {
-		return null;
+		if (SpeechRecognitionHolderFactory.class == type) {
+			return null;
+		}
+		throw new UnsupportedOperationException("Not available on the web: " + type.getName());
 	}
 
 	/** Scene changes stop speech recognition, which the player does not offer. */
