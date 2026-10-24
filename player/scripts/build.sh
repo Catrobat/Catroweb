@@ -70,6 +70,7 @@ for round in $(seq 1 12); do
   if [ -n "$(comm -13 $W/missing.txt <(sort -u $W/missing-ldc.txt))" ]; then sort -u $W/missing.txt $W/missing-ldc.txt -o $W/missing.txt; patch; fi
   if ./gradlew gdx_teavm_web_js_build > $W/teavm.log 2>&1; then
     echo "Player built (round $round): $(grep -c '^org/catrobat/catroid' $W/stub-report.tsv) Catroid methods unavailable on the web, see $W/stub-report.tsv"
+    python3 scripts/export_strings.py ${JAVA_HOME:+$JAVA_HOME/bin/}javap $IN/R.jar build/catroid/catroid/src/main/res/values build/dist/js/webapp/strings.json
     exit 0
   fi
   # Any other TeaVM failure (memory, network, a crash) finds nothing new here and prints the log tail below.

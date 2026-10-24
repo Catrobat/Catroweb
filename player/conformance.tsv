@@ -9,7 +9,7 @@ bricks/control/testForEachInBrick.catrobat	pass
 bricks/control/testForLoopWithChangeVariableBrick.catrobat	pass	
 bricks/control/testForVariableFromToBrick.catrobat	pass	
 bricks/control/testIfElse.catrobat	pass	
-bricks/control/testIfThenBrick.catrobat	fail	no result
+bricks/control/testIfThenBrick.catrobat	pass	
 bricks/control/testIfThenElseBrick.catrobat	pass	
 bricks/control/testLoopDelay.catrobat	pass	
 bricks/control/testLoopingList.catrobat	pass	
@@ -137,7 +137,7 @@ formula/testMinimumOfFunction.catrobat	pass
 formula/testModuloFunction.catrobat	pass	
 formula/testNaturalLogarithmFunction.catrobat	pass	
 formula/testNumberOfItems.catrobat	pass	
-formula/testNumberOfItemsFunction.catrobat	fail	no result
+formula/testNumberOfItemsFunction.catrobat	pass	
 formula/testNumberOfLooks.catrobat	fail	no result
 formula/testPowerFunction.catrobat	pass	
 formula/testRandomFunction.catrobat	pass	
