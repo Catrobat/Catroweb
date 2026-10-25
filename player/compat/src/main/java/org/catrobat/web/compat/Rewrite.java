@@ -160,6 +160,7 @@ public final class Rewrite {
 			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsReadObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
 			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsWriteObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
 			Map.entry("org/catrobat/catroid/formulaeditor/SensorHandler.isDeviceDefaultRotationLandscape()Z", "landscapeDevice"),
+			Map.entry("com/badlogic/gdx/utils/GdxNativesLoader.load()V", "noNatives"),
 			Map.entry("com/thoughtworks/xstream/core/JVM.isAWTAvailable()Z", "unavailable"),
 			Map.entry("com/thoughtworks/xstream/core/JVM.isSwingAvailable()Z", "unavailable"),
 			Map.entry("com/thoughtworks/xstream/core/JVM.isSQLAvailable()Z", "unavailable"),

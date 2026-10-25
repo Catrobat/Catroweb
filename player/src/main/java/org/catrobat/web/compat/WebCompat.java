@@ -396,6 +396,10 @@ public final class WebCompat {
 		return false;
 	}
 
+	/** PhysicsWorld loads libGDX's desktop natives (scripts/gdx.js, a 404): Box2D comes with the web backend. */
+	public static void noNatives() {
+	}
+
 	/** XStream's JVM.isAWTAvailable/isSwingAvailable/isSQLAvailable: none of these exist in the browser. */
 	public static boolean unavailable() {
 		return false;
