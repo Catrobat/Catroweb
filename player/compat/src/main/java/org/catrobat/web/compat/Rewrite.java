@@ -107,6 +107,12 @@ public final class Rewrite {
 			Map.entry("java/lang/Package.getImplementationVersion()Ljava/lang/String;", "implementationVersion"),
 			Map.entry("com/badlogic/gdx/Files.absolute(Ljava/lang/String;)Lcom/badlogic/gdx/files/FileHandle;", "absolute"),
 			Map.entry("org/catrobat/catroid/stage/StageActivity.finishStage()V", "finishStage"),
+			Map.entry("org/catrobat/catroid/content/ActionFactory.createSpeakAction(Lorg/catrobat/catroid/content/Sprite;"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/actions/SequenceAction;Lorg/catrobat/catroid/formulaeditor/Formula;)"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/Action;", "speakAction"),
+			Map.entry("org/catrobat/catroid/content/ActionFactory.createSpeakAndWaitAction(Lorg/catrobat/catroid/content/Sprite;"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/actions/SequenceAction;Lorg/catrobat/catroid/formulaeditor/Formula;)"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/Action;", "speakAndWaitAction"),
 			Map.entry("org/catrobat/catroid/stage/StageActivity.getActiveCameraManager()Lorg/catrobat/catroid/camera/CameraManager;",
 					"noCameraManager"),
 			Map.entry("org/catrobat/catroid/stage/StageActivity.getActiveVibrationManager()Lorg/catrobat/catroid/utils/VibrationManager;",

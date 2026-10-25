@@ -401,6 +401,25 @@ public final class WebCompat {
 		return null;
 	}
 
+	/** The speak brick, with the browser's speech synthesis (WebSpeakAction). */
+	public static com.badlogic.gdx.scenes.scene2d.Action speakAction(org.catrobat.catroid.content.ActionFactory factory,
+			org.catrobat.catroid.content.Sprite sprite, com.badlogic.gdx.scenes.scene2d.actions.SequenceAction sequence,
+			org.catrobat.catroid.formulaeditor.Formula text) {
+		return new org.catrobat.web.catroid.WebSpeakAction(scope(sprite, sequence), text, false);
+	}
+
+	public static com.badlogic.gdx.scenes.scene2d.Action speakAndWaitAction(org.catrobat.catroid.content.ActionFactory factory,
+			org.catrobat.catroid.content.Sprite sprite, com.badlogic.gdx.scenes.scene2d.actions.SequenceAction sequence,
+			org.catrobat.catroid.formulaeditor.Formula text) {
+		return new org.catrobat.web.catroid.WebSpeakAction(scope(sprite, sequence), text, true);
+	}
+
+	private static org.catrobat.catroid.content.Scope scope(org.catrobat.catroid.content.Sprite sprite,
+			com.badlogic.gdx.scenes.scene2d.actions.SequenceAction sequence) {
+		return new org.catrobat.catroid.content.Scope(org.catrobat.catroid.ProjectManager.getInstance().getCurrentProject(),
+				sprite, sequence);
+	}
+
 	/** The finish-stage brick: on Android the stage activity closes; here the stage stops. */
 	public static void finishStage() {
 		StageActivity.stageListener.setPaused(true);

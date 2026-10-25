@@ -8,3 +8,6 @@ Projects for `scripts/check_loader.py` that Catroid's own `catrobatTests` do not
   tone (`Scene (1)/sounds/tone.wav`) and, before its first script's finish brick, reset timer, play sound and wait,
   and an assertion that the timer is past 0.9 s. Made by `scripts/make_sound_fixture.py`; `smoke.sh` plays it on the
   stage.
+- `speak-and-wait.catrobat`: the same project with "speak Hello and wait" before that finish brick, so it only finishes
+  if the browser's speech (or its time-out, where the browser never reports the end) lets the script go on. Made by
+  `scripts/make_speak_fixture.py`; `smoke.sh` plays it on the stage.
