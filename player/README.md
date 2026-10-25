@@ -83,6 +83,8 @@ the files it serves via `X-Accel-Redirect`). Only projects a logged-out visitor 
 `index.html#<project id>` plays share projects from Catrobat language 0.9 on, as the app does, with their looks and
 sounds, after a click on the start screen (browsers only play sound after one).
 Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
-unavailable, as on a device without those sensors. `conformance.tsv` lists which of Catroid's test projects pass on
-the stage. Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
+unavailable, as on a device without those sensors. Web and look requests end with a server error, as on a device
+without network, and toasts are not shown. `conformance.tsv` lists which of Catroid's test projects pass on the
+stage: all but five. Four expect `#ffffff` from "color at x y", which Catroid returns in upper case since its #5041,
+and `testNumberOfLooks` needs looks downloaded from the web. Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
 app and only where the browser has WebGL; downloading for the app stays the alternative.

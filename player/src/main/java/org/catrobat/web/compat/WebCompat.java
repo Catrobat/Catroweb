@@ -299,6 +299,41 @@ public final class WebCompat {
 	@JSBody(params = "x", script = "return Math.fround(x);")
 	public static native float fround(float x);
 
+	/** Math.round as on the JVM, half up: TeaVM rounds half away from zero, so round(-0.5) gave -1 instead of 0. */
+	public static long round(double x) {
+		double floor = Math.floor(x);
+		return (long) (x - floor >= 0.5 ? floor + 1 : floor); // the cast saturates and takes NaN to 0, as Math.round
+	}
+
+	public static int round(float x) {
+		double floor = Math.floor(x);
+		return (int) (x - floor >= 0.5 ? floor + 1 : floor);
+	}
+
+	/**
+	 * StageActivity.messageHandler only exists in the Android activity, so toasts (and whatever else the bricks post to
+	 * it) are dropped on the web instead of failing with a NullPointerException. Bricks that wait for a dialog
+	 * (AskAction, WebAction) check for the missing handler themselves.
+	 */
+	public static android.os.Message obtainMessage(android.os.Handler handler, int what, Object obj) {
+		return null == handler ? new android.os.Message() : handler.obtainMessage(what, obj);
+	}
+
+	/** TrustedDomainManager reads its list with org.json, which TeaVM lacks; nothing is requested anyway (noWebRequest). */
+	public static boolean noTrustedDomains(org.catrobat.catroid.TrustedDomainManager manager, String url) {
+		return false;
+	}
+
+	/**
+	 * WebAction.sendRequest: the web has no OkHttp, so web and look request bricks end as on a device without network,
+	 * with Catroid's server error code (the request variable holds it, a look request keeps the look).
+	 */
+	// ponytail: no requests at all; a fetch()-based one would also need a permission prompt for untrusted domains.
+	public static boolean noWebRequest(org.catrobat.catroid.content.actions.WebAction action) {
+		action.onRequestError(String.valueOf(org.catrobat.catroid.common.Constants.ERROR_SERVER_ERROR));
+		return true;
+	}
+
 	/**
 	 * LookData.getPixmap gives a look whose image is missing a 1x1 transparent pixmap when gdx reports "Couldn't load
 	 * file:", Android's wording; gdx-teavm words it differently, so the look got none and drawing it crashed. Only a
