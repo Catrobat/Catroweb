@@ -81,6 +81,7 @@ public class WebLauncher {
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
 		project.getDirectory().mkdirs(); // the device variables and lists bricks save there, in memory for this play
+		org.catrobat.catroid.common.Constants.EXTERNAL_STORAGE_ROOT_EXPORT_DIRECTORY.mkdirs(); // and the file bricks here
 		project.getRequiredResources(); // StageResourceHolder's job on Android; gives physics sprites their action factory
 		// The canvas takes the project's aspect ratio, fitted into the window in device pixels (at most 2 per CSS pixel
 		// and 1920 on the long side), so the stage is sharp at full screen. The demo and tests keep 480x800 (800x480 for

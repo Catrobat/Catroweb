@@ -26,10 +26,10 @@ bricks/data/StoreCSVIntoUserList/testMultiplications.catrobat	pass
 bricks/data/StoreCSVIntoUserList/testSeparators.catrobat	pass	
 bricks/data/StoreCSVIntoUserList/testStringOperations.catrobat	pass	
 bricks/data/testReplaceItemInList.catrobat	pass	
-bricks/data/testSeveralLineWebRequest.catrobat	fail	no result
+bricks/data/testSeveralLineWebRequest.catrobat	pass
 bricks/device/testResetTimer.catrobat	pass	
-bricks/embroidery/WriteEmbroideryToFile/testEmbroiderySaved.catrobat	fail	no result
-bricks/embroidery/WriteEmbroideryToFile/testNoEmbroiderySaved.catrobat	fail	no result
+bricks/embroidery/WriteEmbroideryToFile/testEmbroiderySaved.catrobat	pass
+bricks/embroidery/WriteEmbroideryToFile/testNoEmbroiderySaved.catrobat	pass
 bricks/events/Broadcast/testBroadcastBrickStage.catrobat	pass	
 bricks/events/Broadcast/testBroadcastSpeed.catrobat	pass	
 bricks/events/BroadcastReceiver/testMultipleBroadcastReceivers.catrobat	pass	
@@ -46,7 +46,7 @@ bricks/events/BroadcastWait/testWaitForSeveralReceivers.catrobat	pass
 bricks/events/testEmptyEvent.catrobat	pass	
 bricks/looks/testBackgroundBrightness.catrobat	pass	
 bricks/looks/testChangeSize.catrobat	fail	on sprite "Background" Brick at position 2 in "StartScript" AssertEqualsError expected: <#ffffff> actual: <#FFFFFF> deviation: -^
-bricks/looks/testDeleteWebLook.catrobat	fail	no result
+bricks/looks/testDeleteWebLook.catrobat	fail	on sprite "sprite" Brick at position 6 in "StartScript" AssertEqualsError expected: <#ffffff> actual: <#FFFFFF> deviation: -^
 bricks/looks/testLookNameAndNumberOfLooks.catrobat	pass	
 bricks/looks/testNextBackgroundMultiple.catrobat	pass	
 bricks/looks/testNextBackgroundNone.catrobat	pass	
@@ -138,11 +138,11 @@ formula/testModuloFunction.catrobat	pass
 formula/testNaturalLogarithmFunction.catrobat	pass	
 formula/testNumberOfItems.catrobat	pass	
 formula/testNumberOfItemsFunction.catrobat	pass	
-formula/testNumberOfLooks.catrobat	fail	no result
+formula/testNumberOfLooks.catrobat	fail	on sprite "Looks downloaded from the web" Brick at position 4 in "StartScript" AssertEqualsError expected: <1> actual: <0.0> deviation: ^
 formula/testPowerFunction.catrobat	pass	
 formula/testRandomFunction.catrobat	pass	
 formula/testRegularExpressionFunction.catrobat	pass	
-formula/testRoundFunction.catrobat	fail	on sprite "Background" Brick at position 2 in "StartScript" AssertEqualsError expected: <true> actual: <false> deviation: ^
+formula/testRoundFunction.catrobat	pass
 formula/testSineFunction.catrobat	pass	
 formula/testSquareRootFunction.catrobat	pass	
 formula/testTangentFunction.catrobat	pass	
