@@ -467,6 +467,31 @@ public final class WebCompat {
 				sprite, sequence);
 	}
 
+	/** The open URL brick: Catroid's action, opened in a new browser tab instead of Android's browser (BrowserHandoff). */
+	public static com.badlogic.gdx.scenes.scene2d.Action openUrlAction(org.catrobat.catroid.content.ActionFactory factory,
+			org.catrobat.catroid.content.Sprite sprite, com.badlogic.gdx.scenes.scene2d.actions.SequenceAction sequence,
+			org.catrobat.catroid.formulaeditor.Formula url) {
+		return new org.catrobat.web.catroid.BrowserHandoff.OpenUrl(
+				(org.catrobat.catroid.content.actions.OpenUrlAction) factory.createOpenUrlAction(sprite, sequence, url));
+	}
+
+	/**
+	 * Save and share plot (and their laser versions, subclasses) write Catroid's own SVG to a file named by the brick
+	 * (SVGPlotGenerator.writeToSVGFile); the browser downloads it instead of the app's file picker or share sheet.
+	 * Where the action has no sprite to plot, it writes nothing, as in the app.
+	 */
+	public static void savePlot(org.catrobat.catroid.content.actions.SavePlotAction action) {
+		action.writePlotDataToFile(new java.io.File(action.getFileName()));
+	}
+
+	public static void sharePlot(org.catrobat.catroid.content.actions.SharePlotAction action) {
+		action.writePlotDataToFile(new java.io.File(action.getFileName()));
+	}
+
+	public static void svg(org.catrobat.catroid.plot.SVGPlotGenerator generator, java.io.File file, String path) {
+		org.catrobat.web.catroid.BrowserHandoff.download(file.getName(), generator.generateSVGContent(path));
+	}
+
 	/** The finish-stage brick: on Android the stage activity closes; here the stage stops. */
 	public static void finishStage() {
 		StageActivity.stageListener.setPaused(true);

@@ -69,6 +69,11 @@ Other pieces:
   screen, a small button in the corner goes back. A project that cannot be loaded says why, with a link back to
   share. `QuickStart`, in gdx-teavm's package, skips the two waits of gdx-teavm's start (its preloader fills its bar
   at 0.9 per second, then it renders only from the 61st frame on), about two seconds.
+- Open URL and save/share plot (and save/share laser, which subclass them): what the app hands to Android goes to the
+  browser (`catroid/BrowserHandoff`). The link opens in a new tab (http and https only, `noopener,noreferrer`); the
+  plot is Catroid's own SVG (`SVGPlotGenerator`, caught by a redirect of `writeToSVGFile`) offered as a download.
+  Browsers allow both only right after a click, so otherwise a prompt at the bottom of the stage asks first; the player
+  page never navigates. The open URL brick skips the app's web request and trust dialog.
 - Screen: the canvas has the project's aspect ratio at the window's size in device pixels (at most 2 per CSS pixel,
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to

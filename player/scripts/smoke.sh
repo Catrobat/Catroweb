@@ -31,7 +31,8 @@ kill $SERVER
 
 # Catroid test projects with looks, played on the stage: each reports its result like on Android (7777 = success).
 # testColorAtXY reads the stage's pixels, so it fails if looks are not drawn; sound-play-and-wait asserts that
-# "play sound and wait" waits for the sound's length; speak-and-wait, that "speak and wait" ends.
+# "play sound and wait" waits for the sound's length; speak-and-wait, that "speak and wait" ends; plot-and-open-url,
+# that a plotted line is on the stage and that saving the plot and opening a link are offered.
 STAGE=build/web/stage-tests
 rm -rf $STAGE
 for test in colorAtXY/testColorAtXY bricks/looks/testSetTransparency touchesColor/testColorTouchesColor; do
@@ -42,6 +43,8 @@ mkdir -p $STAGE/project-files/sound-play-and-wait/assets  # fixtures/README.md
 unzip -q fixtures/sound-play-and-wait.catrobat -d $STAGE/project-files/sound-play-and-wait/assets
 mkdir -p $STAGE/project-files/speak-and-wait/assets
 unzip -q fixtures/speak-and-wait.catrobat -d $STAGE/project-files/speak-and-wait/assets
+mkdir -p $STAGE/project-files/plot-and-open-url/assets
+unzip -q fixtures/plot-and-open-url.catrobat -d $STAGE/project-files/plot-and-open-url/assets
 for test in $(ls $STAGE/project-files); do
   serve 90 $STAGE  # released as soon as the test reports its result
   PAGE=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \
@@ -53,6 +56,10 @@ for test in $(ls $STAGE/project-files); do
   [[ "$RESULT" == 'data-test-result="7777 '* ]]
   if [ "$test" = sound-play-and-wait ]; then  # the wait alone only proves the duration; this, that it played
     grep -q 'data-sounds-started="[1-9]' <<< "$PAGE"
+  fi
+  if [ "$test" = plot-and-open-url ]; then  # without a click, both wait in a prompt over the stage
+    grep -q 'download="plot.svg"' <<< "$PAGE"
+    grep -q 'href="https://example.org/?q=%3Cb%3E"' <<< "$PAGE"
   fi
 done
 
