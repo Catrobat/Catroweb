@@ -280,6 +280,10 @@ project:
   downloading: Downloading...
   openInApp: Open in Pocket Code
   playInBrowser: Play in browser
+  madeWithVersion: Made with app version %app% (Catrobat %language%)
+  oldVersion:
+    title: Made with an older app version
+    text: This project can't be played in the browser yet. Open it in Pocket Code and upload it again to update it.
   downloaded: Downloaded
   showTranslation: Show translation
   hideTranslation: Hide translation
