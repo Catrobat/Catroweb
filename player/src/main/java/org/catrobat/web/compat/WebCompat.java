@@ -202,6 +202,62 @@ public final class WebCompat {
 		}
 	};
 
+	/**
+	 * Catroid hands file work to Dispatchers.IO and comes back on Dispatchers.Main. The browser has one thread and no
+	 * blocking, so both run the coroutine in place (the IO pool's workers would park, which the web cannot).
+	 */
+	public static kotlinx.coroutines.CoroutineDispatcher inPlaceDispatcher() {
+		return kotlinx.coroutines.Dispatchers.getUnconfined();
+	}
+
+	public static kotlinx.coroutines.MainCoroutineDispatcher mainDispatcher() {
+		return MAIN;
+	}
+
+	/** Android's main dispatcher comes from kotlinx-coroutines-android; the browser's main thread is the only one. */
+	private static final kotlinx.coroutines.MainCoroutineDispatcher MAIN = new kotlinx.coroutines.MainCoroutineDispatcher() {
+		@Override
+		public kotlinx.coroutines.MainCoroutineDispatcher getImmediate() {
+			return this;
+		}
+
+		@Override
+		public boolean isDispatchNeeded(kotlin.coroutines.CoroutineContext context) {
+			return false;
+		}
+
+		@Override
+		public void dispatch(kotlin.coroutines.CoroutineContext context, Runnable block) {
+			block.run();
+		}
+	};
+
+	private static final java.util.Map<String, java.util.Map<Object, Object>> DEVICE_DATA = new java.util.HashMap<>();
+
+	/**
+	 * The "on device" variables and lists: Android keeps them as JSON through Gson, whose TypeToken needs generic
+	 * signatures TeaVM drops. Here they stay in memory for this play, one map per accessor (variables, lists), as
+	 * the project has one file each. ponytail: per play; localStorage when projects should remember across plays.
+	 */
+	public static java.util.Map<Object, Object> readDeviceData(org.catrobat.catroid.io.DeviceUserDataAccessor accessor) {
+		java.util.Map<Object, Object> stored = DEVICE_DATA.get(accessor.getClass().getName());
+		return null == stored ? null : copy(stored);
+	}
+
+	public static void writeDeviceData(org.catrobat.catroid.io.DeviceUserDataAccessor accessor, java.util.Map<Object, Object> map) {
+		DEVICE_DATA.put(accessor.getClass().getName(), copy(map));
+	}
+
+	/** Like the JSON round trip, later changes to a list do not reach what was saved. */
+	private static java.util.Map<Object, Object> copy(java.util.Map<Object, Object> map) {
+		java.util.Map<Object, Object> copy = new java.util.HashMap<>();
+		for (java.util.Map.Entry<Object, Object> entry : map.entrySet()) {
+			Object value = entry.getValue();
+			copy.put(entry.getKey(), value instanceof java.util.List<?> list ? new java.util.ArrayList<>(list) : value);
+		}
+		return copy;
+	}
+
 	/** Koin 2.1 was compiled against Kotlin 1.3's double-valued TimeMark; it only measures for debug logs. */
 	public static double elapsedNow(kotlin.time.TimeMark timeMark) {
 		return 0.0;
