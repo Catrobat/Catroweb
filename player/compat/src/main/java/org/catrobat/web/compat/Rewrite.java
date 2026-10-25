@@ -85,6 +85,8 @@ public final class Rewrite {
 			Map.entry("org/catrobat/catroid/stage/StageActivity.finishTestWithResult(Lorg/catrobat/catroid/stage/TestResult;)V",
 					"finishTestWithResult"),
 			Map.entry("org/catrobat/catroid/sensing/CollisionInformation.loadCollisionPolygon()V", "loadCollisionPolygon"),
+			Map.entry("org/catrobat/catroid/utils/ImageEditing.readMetaDataStringFromPNG(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+					"readPngText"),
 			Map.entry("org/catrobat/catroid/utils/Utils.md5Checksum(Ljava/io/File;)Ljava/lang/String;", "md5Checksum"),
 			Map.entry("org/catrobat/catroid/utils/Utils.md5Checksum(Ljava/lang/String;)Ljava/lang/String;", "md5Checksum"),
 			Map.entry("org/koin/java/KoinJavaComponent.get(Ljava/lang/Class;)Ljava/lang/Object;", "koinGet"),

@@ -345,20 +345,155 @@ public final class WebCompat {
 	private static native void reportTestFinished();
 
 	/**
-	 * Catroid computes collision outlines from the image file with Android's BitmapFactory and PNG metadata.
-	 * ponytail: the look's bounding box, which Catroid itself uses for images that are not PNG; port the outline
-	 * calculation onto Pixmap when touch and collision bricks need pixel accuracy.
+	 * Catroid's collision outline of a look, as the app gets it: from the PNG's metadata (the app writes it there, so
+	 * shared projects usually carry it), else computed from the pixels with Catroid's own steps, else the bounding
+	 * box (what the app uses for images that are not PNG). The app reads the image with Android's BitmapFactory;
+	 * here it is the look's Pixmap.
 	 */
 	public static void loadCollisionPolygon(CollisionInformation information) {
+		LookData look;
 		try {
 			Field lookDataField = CollisionInformation.class.getDeclaredField("lookData");
 			lookDataField.setAccessible(true);
-			Pixmap pixmap = ((LookData) lookDataField.get(information)).getPixmap();
-			float width = pixmap.getWidth();
-			float height = pixmap.getHeight();
-			information.collisionPolygons = new Polygon[] {new Polygon(new float[] {0, 0, width, 0, width, height, 0, height})};
+			look = (LookData) lookDataField.get(information);
 		} catch (ReflectiveOperationException e) {
 			throw new IllegalStateException("Catroid's CollisionInformation changed", e);
 		}
+		Pixmap pixmap = look.getPixmap();
+		Polygon[] polygons = new Polygon[0];
+		if (isPng(look.getFile().getAbsolutePath())) {
+			polygons = CollisionInformation.getCollisionPolygonFromPNGMeta(look.getFile().getAbsolutePath());
+			if (0 == polygons.length) {
+				polygons = outline(pixmap);
+			}
+		}
+		if (0 == polygons.length) {
+			float width = pixmap.getWidth();
+			float height = pixmap.getHeight();
+			polygons = new Polygon[] {new Polygon(new float[] {0, 0, width, 0, width, height, 0, height})};
+		}
+		information.collisionPolygons = polygons;
+	}
+
+	/** CollisionInformation.createCollisionPolygon and createBoundingPolygonVertices, on a Pixmap. */
+	private static Polygon[] outline(Pixmap pixmap) {
+		int width = pixmap.getWidth();
+		int height = pixmap.getHeight();
+		boolean[][] grid = new boolean[width][height];
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				grid[x][y] = 0 != pixmap.getPixel(x, height - 1 - y); // flipped like the app's bitmap; 0 is Color.TRANSPARENT
+			}
+		}
+		var vertical = CollisionInformation.createVerticalVertices(grid, width, height);
+		var horizontal = CollisionInformation.createHorizontalVertices(grid, width, height);
+		if (vertical.isEmpty() || horizontal.isEmpty()) {
+			return new Polygon[0];
+		}
+		java.util.List<java.util.ArrayList<org.catrobat.catroid.sensing.CollisionPolygonVertex>> outlines = new java.util.ArrayList<>();
+		outlines.add(new java.util.ArrayList<>(java.util.List.of(vertical.remove(0))));
+		do {
+			var current = outlines.get(outlines.size() - 1);
+			var end = current.get(current.size() - 1);
+			boolean found = false;
+			for (int h = 0; h < horizontal.size(); h++) {
+				if (end.isConnected(horizontal.get(h))) {
+					end = horizontal.remove(h);
+					current.add(end);
+					found = true;
+					break;
+				}
+			}
+			for (int v = 0; v < vertical.size(); v++) {
+				if (end.isConnected(vertical.get(v))) {
+					current.add(vertical.remove(v));
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				outlines.add(new java.util.ArrayList<>(java.util.List.of(vertical.remove(0))));
+			}
+		} while (!horizontal.isEmpty());
+
+		float epsilon = org.catrobat.catroid.common.Constants.COLLISION_POLYGON_CREATION_EPSILON;
+		java.util.List<Polygon> polygons;
+		do {
+			polygons = new java.util.ArrayList<>();
+			for (var outline : outlines) {
+				var points = CollisionInformation.getPointsFromPolygonVertices(outline);
+				var simplified = CollisionInformation.simplifyPolygon(points, 0, points.size() - 1, epsilon);
+				float dx = simplified.get(simplified.size() - 1).x - simplified.get(0).x;
+				float dy = simplified.get(simplified.size() - 1).y - simplified.get(0).y;
+				if (Math.hypot(dx, dy) < epsilon) {
+					simplified.remove(simplified.size() - 1);
+				}
+				if (simplified.size() >= 3) {
+					polygons.add(CollisionInformation.createPolygonFromPoints(simplified));
+				}
+			}
+			epsilon *= 1.2f;
+		} while (vertices(polygons) > org.catrobat.catroid.common.Constants.COLLISION_VERTEX_LIMIT);
+		return polygons.toArray(new Polygon[0]);
+	}
+
+	private static int vertices(java.util.List<Polygon> polygons) {
+		int count = 0;
+		for (Polygon polygon : polygons) {
+			count += polygon.getVertices().length / 2;
+		}
+		return count;
+	}
+
+	private static boolean isPng(String path) {
+		byte[] bytes = com.badlogic.gdx.Gdx.files.local(path).readBytes();
+		return bytes.length > 8 && (bytes[0] & 0xff) == 0x89 && bytes[1] == 'P' && bytes[2] == 'N' && bytes[3] == 'G';
+	}
+
+	/**
+	 * ImageEditing.readMetaDataStringFromPNG without pngj's file access: the text of the PNG's tEXt or (uncompressed)
+	 * iTXt chunk with that keyword, else "".
+	 */
+	public static String readPngText(String path, String key) {
+		byte[] png = com.badlogic.gdx.Gdx.files.local(path).readBytes();
+		byte[] keyword = (key + "\0").getBytes(java.nio.charset.StandardCharsets.ISO_8859_1);
+		for (int i = 8; i + 8 <= png.length; ) {
+			int length = (png[i] & 0xff) << 24 | (png[i + 1] & 0xff) << 16 | (png[i + 2] & 0xff) << 8 | png[i + 3] & 0xff;
+			String type = new String(png, i + 4, 4, java.nio.charset.StandardCharsets.ISO_8859_1);
+			int data = i + 8;
+			if (length < 0 || data + length > png.length) {
+				break;
+			}
+			if (("tEXt".equals(type) || "iTXt".equals(type)) && startsWith(png, data, length, keyword)) {
+				int at = data + keyword.length;
+				if ("tEXt".equals(type)) {
+					return new String(png, at, data + length - at, java.nio.charset.StandardCharsets.ISO_8859_1);
+				}
+				if (0 != png[at]) {
+					return ""; // compressed; the app never writes it so
+				}
+				at += 2; // compression flag and method
+				for (int zeros = 0; zeros < 2 && at < data + length; at++) { // language tag and translated keyword
+					if (0 == png[at]) {
+						zeros++;
+					}
+				}
+				return new String(png, at, data + length - at, java.nio.charset.StandardCharsets.UTF_8);
+			}
+			i = data + length + 4; // and the CRC
+		}
+		return "";
+	}
+
+	private static boolean startsWith(byte[] bytes, int offset, int length, byte[] prefix) {
+		if (length < prefix.length) {
+			return false;
+		}
+		for (int i = 0; i < prefix.length; i++) {
+			if (bytes[offset + i] != prefix[i]) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
