@@ -104,6 +104,9 @@ public class WebLauncher {
 		};
 		stage.setMaxViewPort(screen); // StageActivity's job on Android
 		StageActivity.stageListener = stage; // actors reach the stage through it
+		// No activity on the web. Empty rather than null: the bricks that need one (vibrate, open URL, edit look, ...)
+		// check activeStageActivity.get() and then do nothing, as on a device without the feature.
+		StageActivity.activeStageActivity = new java.lang.ref.WeakReference<>(null);
 		new WebApplication(stage, config);
 	}
 

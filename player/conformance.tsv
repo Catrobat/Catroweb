@@ -55,7 +55,7 @@ bricks/looks/testObjectBrightness.catrobat	pass
 bricks/looks/testSetBackgroundBrick.catrobat	pass	
 bricks/looks/testSetSize.catrobat	pass	
 bricks/looks/testSetTransparency.catrobat	pass	
-bricks/motion/Vibration/testVibrationBrick.catrobat	fail	no result
+bricks/motion/Vibration/testVibrationBrick.catrobat	pass	
 bricks/motion/testChangeXby.catrobat	pass	
 bricks/motion/testPlaceAtXY.catrobat	pass	
 bricks/user/testReportBrick.catrobat	pass	

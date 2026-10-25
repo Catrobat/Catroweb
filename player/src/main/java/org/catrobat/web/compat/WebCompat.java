@@ -389,6 +389,18 @@ public final class WebCompat {
 		return files.local(path);
 	}
 
+	/**
+	 * There is no stage activity on the web (WebLauncher leaves StageActivity.activeStageActivity empty), so neither
+	 * its camera nor its vibration.
+	 */
+	public static org.catrobat.catroid.camera.CameraManager noCameraManager() {
+		return null;
+	}
+
+	public static org.catrobat.catroid.utils.VibrationManager noVibrationManager() {
+		return null;
+	}
+
 	/** The finish-stage brick: on Android the stage activity closes; here the stage stops. */
 	public static void finishStage() {
 		StageActivity.stageListener.setPaused(true);
