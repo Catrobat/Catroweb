@@ -1,6 +1,7 @@
 package org.catrobat.web;
 
 import com.badlogic.gdx.Gdx;
+import com.github.xpenatan.gdx.teavm.backends.web.QuickStart;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
 import com.github.xpenatan.gdx.teavm.backends.web.WebFiles;
@@ -53,9 +54,15 @@ public class WebLauncher {
 			LoaderCheck.run();
 			return;
 		}
-		Project project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
-		if (!projectId.isEmpty()) {
-			ProjectLoader.prefetch(project, projectId);
+		Project project;
+		try {
+			project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
+			if (!projectId.isEmpty()) {
+				ProjectLoader.prefetch(project, projectId);
+			}
+		} catch (RuntimeException e) {
+			StartScreen.fail(e.getMessage());
+			throw e;
 		}
 		boolean interactive = !projectId.isEmpty() && !Window.current().getLocation().getSearch().contains("autostart");
 		if (!interactive) {
@@ -66,8 +73,10 @@ public class WebLauncher {
 		}
 		if (!projectId.isEmpty()) {
 			ProjectLoader.awaitPrefetch();
+			StartScreen.phase("sounds");
 			ProjectLoader.loadSounds(project, projectId);
 			Sounds.awaitDecoded();
+			StartScreen.phase("starting");
 		}
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
@@ -105,12 +114,13 @@ public class WebLauncher {
 				((WebFiles) Gdx.files).localStorage = new MemoryFileStorage();
 				if (!projectId.isEmpty()) {
 					ProjectLoader.loadLooks(project, projectId); // needs Gdx.files, which exists from here on
-					StartScreen.close();
 				}
 				// A fresh Android GL context clears to transparent; the pen and plot buffers rely on it.
 				Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
 				super.create();
 				setPaused(false); // StageLifeCycleController resumes the stage on Android once resources are ready
+				QuickStart.skipWarmup(); // the first frame comes right after this
+				StartScreen.close();
 			}
 		};
 		stage.setMaxViewPort(screen); // StageActivity's job on Android
@@ -118,7 +128,7 @@ public class WebLauncher {
 		// No activity on the web. Empty rather than null: the bricks that need one (vibrate, open URL, edit look, ...)
 		// check activeStageActivity.get() and then do nothing, as on a device without the feature.
 		StageActivity.activeStageActivity = new java.lang.ref.WeakReference<>(null);
-		new WebApplication(stage, config);
+		new WebApplication(stage, QuickStart.preloader(), config);
 		fitCanvas(width, height);
 	}
 
