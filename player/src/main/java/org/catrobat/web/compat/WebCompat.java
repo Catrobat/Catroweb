@@ -49,6 +49,17 @@ public final class WebCompat {
 		return org.catrobat.web.android.WebContext.INSTANCE;
 	}
 
+	/** modifyXMLToSupportUnknownFields edits the browser's DOM of code.xml (Dom.edit), not a file it parses... */
+	public static org.catrobat.web.java.Dom.Document xmlToUpgrade(org.catrobat.catroid.io.BackwardCompatibleCatrobatLanguageXStream xstream,
+			java.io.File file) {
+		return org.catrobat.web.java.Dom.edited();
+	}
+
+	/** ...so there is nothing to write back: the loader reads that DOM again. */
+	public static void upgradedXml(org.catrobat.catroid.io.BackwardCompatibleCatrobatLanguageXStream xstream,
+			org.catrobat.web.java.Dom.Document document, java.io.File file) {
+	}
+
 	/** There is one class loader in the browser; TeaVM resolves only the one-argument form for its reflection policy. */
 	public static Class<?> forName(String name, boolean initialize, ClassLoader loader) throws ClassNotFoundException {
 		return Class.forName(name);
@@ -375,6 +386,14 @@ public final class WebCompat {
 	/** XStream adds its version to conversion errors; there is no jar manifest in the browser. */
 	public static String implementationVersion(Package pkg) {
 		return null;
+	}
+
+	/**
+	 * SensorHandler.isDeviceDefaultRotationLandscape asks the WindowManager, which the web context does not have, so
+	 * inclination and compass formulas threw; the browser counts as a phone whose default orientation is portrait.
+	 */
+	public static boolean landscapeDevice() {
+		return false;
 	}
 
 	/** XStream's JVM.isAWTAvailable/isSwingAvailable/isSQLAvailable: none of these exist in the browser. */

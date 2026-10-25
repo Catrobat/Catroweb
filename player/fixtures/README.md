@@ -12,3 +12,7 @@ Projects for `scripts/check_loader.py` that Catroid's own `catrobatTests` do not
   assertion that the timer is past 0.3 s before that finish brick: it passes only if "speak and wait" waits (for the
   speech, or its time-out where the browser never reports the end). Made by `scripts/make_speak_fixture.py`;
   `smoke.sh` plays it on the stage.
+- `share/`: 23 of share's most downloaded projects, made with Catrobat language 0.9 to 0.999 and named
+  `<language version>-<start of the project id>`, each with only its `code.xml` and the header fields naming the
+  author or device emptied. They cover how `ProjectLoader` reads old projects: without scenes, with the XML upgrade
+  before 0.93 (`modifyXMLToSupportUnknownFields`) and into the legacy classes before 0.9991.

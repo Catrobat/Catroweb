@@ -27,24 +27,50 @@ def resolve(element, parents):
     return element
 
 
-def simple_name(element):
-    """Catroid's converters write the class as type="RepeatBrick"; an element without an alias is named after it."""
-    return element.get("type") or element.tag.rsplit(".", 1)[-1]
+UPGRADE = Path(__file__).parent.parent / "build/catroid/catroid/src/main/java/org/catrobat/catroid/io/BackwardCompatibleCatrobatLanguageXStream.java"
+
+
+def legacy_classes():
+    """Before Catrobat language 0.93 scripts and bricks were elements like <foreverBrick>: Catroid's XML upgrade
+    (modifyXMLToSupportUnknownFields) names their classes from its scriptInfoMap and brickInfoMap."""
+    classes, brick = {"setGhostEffectBrick": "SetTransparencyBrick", "changeGhostEffectByNBrick": "ChangeTransparencyByNBrick"}, None
+    for line in UPGRADE.read_text().splitlines():
+        if found := re.search(r"new BrickInfo\((\w+)\.class", line):
+            brick = found[1]
+        elif found := re.search(r'brickInfoMap\.put\("(\w+)", brickInfo\)', line):
+            classes[found[1]] = brick
+        elif found := re.search(r'scriptInfoMap\.put\("(\w+)", (\w+)\.class', line):
+            classes[found[1]] = found[2]
+    return classes
+
+
+LEGACY = {}
+
+
+def simple_name(element, entry=None):
+    """Catroid's converters write the class as type="RepeatBrick"; an element without an alias is named after it, or
+    in the oldest projects by the alias of its entry in the list (a reference's entry names the class it stands for)."""
+    if element.get("type"):
+        return {"CollisionScript": "WhenBounceOffScript"}.get(element.get("type"), element.get("type"))
+    tag = (element if entry is None else entry).tag
+    if tag[0].islower() and not LEGACY:
+        LEGACY.update(legacy_classes())
+    return LEGACY.get(tag, tag.rsplit(".", 1)[-1])
 
 
 def counts(code_xml):
     root = ET.fromstring(code_xml)
     parents = {child: parent for parent in root.iter() for child in parent}
     children = lambda element, path: [resolve(e, parents) for e in resolve(element, parents).findall(path)]
-    scenes = children(root, "./scenes/*")
+    scenes = children(root, "./scenes/*") or [root]  # before scenes the program held what is now one scene
     sprites, scripts, bricks, classes = 0, 0, 0, ""
     for sprite in (o for s in scenes for o in children(s, "./objectList/*")):
         sprites += 1
-        # Catroid's sprite converter reads the legacy type="SingleSprite" as Sprite
-        classes += " " + simple_name(sprite).replace("SingleSprite", "Sprite") + ":"
+        # Catroid's sprite converter reads the legacy type="SingleSprite", or none at all, as Sprite
+        classes += " " + (sprite.get("type") or "Sprite").replace("SingleSprite", "Sprite") + ":"
         for script in children(sprite, "./scriptList/*"):
             scripts += 1
-            names = [simple_name(b) for b in children(script, "./brickList/*")]
+            names = [simple_name(resolve(b, parents), b) for b in resolve(script, parents).findall("./brickList/*")]
             bricks += len(names)
             classes += f" {simple_name(script)}(" + "".join(" " + n for n in names) + " )"
     return f"{len(scenes)} scenes, {sprites} sprites, {scripts} scripts, {bricks} bricks |{classes}"
