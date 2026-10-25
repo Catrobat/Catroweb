@@ -43,6 +43,8 @@
 {% endblock %}
 
 {% block body %}
+  {# The browser player loads projects from this Catrobat language version on. #}
+  {% set player_min_language_version = 0.9991 %}
   {# Auto-hidden banner (server-rendered since it requires auth context) #}
   {% if auto_hidden and (my_project|default(false) or is_granted('ROLE_ADMIN')) %}
     <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">
@@ -255,6 +257,16 @@
     {{ include('Project/SignAppModal.html.twig') }}
   {% endif %}
 
+  {% if my_project|default(false) and player_origin and project.languageVersion < player_min_language_version %}
+    <div id="old-version-hint" class="alert alert-info d-flex align-items-start mb-3" role="note">
+      <i class="material-icons me-2">update</i>
+      <div>
+        <strong>{{ 'project.oldVersion.title'|trans({}, 'catroweb') }}</strong>
+        <div>{{ 'project.oldVersion.text'|trans({}, 'catroweb') }}</div>
+      </div>
+    </div>
+  {% endif %}
+
   {# Details section -- JS fills content #}
   <div id="details">
     <h2 class="mt-3">
@@ -282,6 +294,12 @@
         <i class="material-icons ">get_app</i>
         <span class="skeleton skeleton--text js-skeleton ms-2" style="width: 90px;"></span>
         <span class="icon-text ms-2" id="details-downloads"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div id="details-version" class="col-12 col-lg-8 mt-2 mb-2 no-overflow mt-lg-3">
+        <i class="material-icons">smartphone</i>
+        <span class="icon-text ms-2">{{ 'project.madeWithVersion'|trans({'%app%': project.catrobatVersionName, '%language%': project.languageVersion}, 'catroweb') }}</span>
       </div>
     </div>
     <div id="details-not-for-kids" class="row d-none">
@@ -401,7 +419,7 @@
        data-trans-play="{{ 'project.playInBrowser'|trans({}, 'catroweb') }}"
        {# The browser player (player/) loads Catrobat language 0.9991 and newer, and only what a logged-out visitor may
           see; inside the app, the app plays it. #}
-       data-player-url="{% if player_origin and not isWebview() and project.languageVersion >= 0.9991 and project.visible and not project.private and not project.autoHidden %}{{ player_origin }}/#{{ project_id }}{% endif %}"
+       data-player-url="{% if player_origin and not isWebview() and project.languageVersion >= player_min_language_version and project.visible and not project.private and not project.autoHidden %}{{ player_origin }}/#{{ project_id }}{% endif %}"
   ></div>
 
   <div class="js-project-description-credits"
