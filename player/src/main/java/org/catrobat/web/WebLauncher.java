@@ -24,6 +24,7 @@ import org.catrobat.web.android.WebContext;
 import org.catrobat.web.loader.LoaderCheck;
 import org.catrobat.web.loader.ProjectLoader;
 import org.catrobat.web.loader.Sounds;
+import org.teavm.jso.JSBody;
 import org.teavm.jso.browser.Window;
 
 public class WebLauncher {
@@ -47,6 +48,7 @@ public class WebLauncher {
 
 		// share.catrobat.org/player/index.html#<project id> plays that project; without one, the built-in demo.
 		String projectId = Window.current().getLocation().getHash().replace("#", "");
+		fitToPhone();
 		if ("check".equals(projectId)) {
 			LoaderCheck.run();
 			return;
@@ -55,10 +57,12 @@ public class WebLauncher {
 		if (!projectId.isEmpty()) {
 			ProjectLoader.prefetch(project, projectId);
 		}
-		if (projectId.isEmpty() || Window.current().getLocation().getSearch().contains("autostart")) {
+		boolean interactive = !projectId.isEmpty() && !Window.current().getLocation().getSearch().contains("autostart");
+		if (!interactive) {
 			Sounds.createContext(); // without a click it may stay muted, which the demo and tests do not mind
 		} else {
-			StartScreen.waitForStart(project.getName());
+			StartScreen.waitForStart(project.getName(),
+					project.getXmlHeader().getVirtualScreenWidth() > project.getXmlHeader().getVirtualScreenHeight());
 		}
 		if (!projectId.isEmpty()) {
 			ProjectLoader.awaitPrefetch();
@@ -69,11 +73,17 @@ public class WebLauncher {
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
 		project.getDirectory().mkdirs(); // the device variables and lists bricks save there, in memory for this play
 		project.getRequiredResources(); // StageResourceHolder's job on Android; gives physics sprites their action factory
-		// The canvas takes the project's aspect ratio, fitted into 480x800 (800x480 for landscape), so the stage fills it.
+		// The canvas takes the project's aspect ratio, fitted into the window in device pixels (at most 2 per CSS pixel
+		// and 1920 on the long side), so the stage is sharp at full screen. The demo and tests keep 480x800 (800x480 for
+		// landscape), so their pixel checks do not depend on the window. CSS keeps it fitted when the window changes.
 		boolean sized = project.getXmlHeader().getVirtualScreenWidth() > 0 && project.getXmlHeader().getVirtualScreenHeight() > 0;
 		int width = sized ? project.getXmlHeader().getVirtualScreenWidth() : 480;
 		int height = sized ? project.getXmlHeader().getVirtualScreenHeight() : 800;
-		float scale = width > height ? Math.min(800f / width, 480f / height) : Math.min(480f / width, 800f / height);
+		boolean landscape = width > height;
+		double pixels = interactive ? Math.min(2, Window.current().getDevicePixelRatio()) : 1;
+		float boxWidth = interactive ? (float) (Window.current().getInnerWidth() * pixels) : landscape ? 800 : 480;
+		float boxHeight = interactive ? (float) (Window.current().getInnerHeight() * pixels) : landscape ? 480 : 800;
+		float scale = Math.min(Math.min(boxWidth / width, boxHeight / height), 1920f / Math.max(width, height));
 		Resolution screen = new Resolution(Math.max(1, Math.round(width * scale)), Math.max(1, Math.round(height * scale)));
 		ScreenValues.currentScreenResolution = screen;
 
@@ -108,7 +118,20 @@ public class WebLauncher {
 		// check activeStageActivity.get() and then do nothing, as on a device without the feature.
 		StageActivity.activeStageActivity = new java.lang.ref.WeakReference<>(null);
 		new WebApplication(stage, config);
+		fitCanvas(width, height);
 	}
+
+	/** gdx-teavm's page has no viewport meta, so phones laid it out 980 px wide and zoomed out. */
+	@JSBody(script = "var meta = document.createElement('meta'); meta.name = 'viewport'; "
+			+ "meta.content = 'width=device-width, initial-scale=1, viewport-fit=cover'; document.head.append(meta);")
+	private static native void fitToPhone();
+
+	/** As large as the window allows at the project's aspect ratio; gdx-teavm maps touches through the CSS scaling. */
+	@JSBody(params = {"width", "height"}, script = "var style = document.createElement('style'); "
+			+ "style.textContent = 'body { height: 100vh; height: 100dvh; } #canvas { display: block; height: auto;"
+			+ " width: min(100vw, 100vh * ' + width + ' / ' + height + '); width: min(100vw, 100dvh * ' + width + ' / '"
+			+ " + height + '); touch-action: none; }'; document.head.append(style);")
+	private static native void fitCanvas(int width, int height);
 
 	private static Project loadAndReport(String projectId) {
 		Project project = ProjectLoader.load(projectId);
