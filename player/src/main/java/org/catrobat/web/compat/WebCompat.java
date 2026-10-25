@@ -319,9 +319,12 @@ public final class WebCompat {
 		return null == handler ? new android.os.Message() : handler.obtainMessage(what, obj);
 	}
 
-	/** TrustedDomainManager reads its list with org.json, which TeaVM lacks; nothing is requested anyway (noWebRequest). */
-	public static boolean noTrustedDomains(org.catrobat.catroid.TrustedDomainManager manager, String url) {
-		return false;
+	/**
+	 * WebAction.checkPermission: TrustedDomainManager reads its list with org.json, which TeaVM lacks, and there is no
+	 * dialog to ask, so access is denied, as Catroid does without a message handler. Nothing is requested anyway.
+	 */
+	public static void noWebAccess(org.catrobat.catroid.content.actions.WebAction action) {
+		action.denyPermission();
 	}
 
 	/**

@@ -167,7 +167,7 @@ public final class Rewrite {
 			Map.entry("java/lang/Math.round(D)J", "round"),
 			Map.entry("java/lang/Math.round(F)I", "round"),
 			Map.entry("android/os/Handler.obtainMessage(ILjava/lang/Object;)Landroid/os/Message;", "obtainMessage"),
-			Map.entry("org/catrobat/catroid/TrustedDomainManager.isURLTrusted(Ljava/lang/String;)Z", "noTrustedDomains"),
+			Map.entry("org/catrobat/catroid/content/actions/WebAction.checkPermission()V", "noWebAccess"),
 			Map.entry("org/catrobat/catroid/content/actions/WebAction.sendRequest()Z", "noWebRequest"),
 			Map.entry("com/thoughtworks/xstream/XStream.alias(Ljava/lang/String;Ljava/lang/Class;)V", "alias"),
 			Map.entry("com/thoughtworks/xstream/XStream.aliasType(Ljava/lang/String;Ljava/lang/Class;)V", "aliasType"),
