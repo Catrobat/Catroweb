@@ -365,6 +365,10 @@ public final class WebCompat {
 			polygons = CollisionInformation.getCollisionPolygonFromPNGMeta(look.getFile().getAbsolutePath());
 			if (0 == polygons.length) {
 				polygons = outline(pixmap);
+				if (null == polygons) { // nothing opaque: like the app, the look touches nothing
+					information.collisionPolygons = new Polygon[0];
+					return;
+				}
 			}
 		}
 		if (0 == polygons.length) {
@@ -375,19 +379,29 @@ public final class WebCompat {
 		information.collisionPolygons = polygons;
 	}
 
-	/** CollisionInformation.createCollisionPolygon and createBoundingPolygonVertices, on a Pixmap. */
+	/**
+	 * CollisionInformation.createCollisionPolygon and createBoundingPolygonVertices, on a Pixmap: null when nothing
+	 * is opaque, empty when the outline simplifies away (both as in the app).
+	 */
 	private static Polygon[] outline(Pixmap pixmap) {
 		int width = pixmap.getWidth();
 		int height = pixmap.getHeight();
 		boolean[][] grid = new boolean[width][height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				grid[x][y] = 0 != pixmap.getPixel(x, height - 1 - y); // flipped like the app's bitmap; 0 is Color.TRANSPARENT
+				// Flipped like the app's bitmap. Android premultiplies alpha, so its Color.TRANSPARENT test means alpha 0;
+				// gdx keeps the colour of fully transparent pixels.
+				grid[x][y] = 0 != (pixmap.getPixel(x, height - 1 - y) & 0xff);
 			}
 		}
 		var vertical = CollisionInformation.createVerticalVertices(grid, width, height);
 		var horizontal = CollisionInformation.createHorizontalVertices(grid, width, height);
 		if (vertical.isEmpty() || horizontal.isEmpty()) {
+			return null;
+		}
+		// ponytail: the joining below is quadratic in edge segments; the app computes it once and stores it in the PNG,
+		// the player on every load. A look this ragged (noisy alpha) collides as its bounding box instead.
+		if (vertical.size() + horizontal.size() > 20000) {
 			return new Polygon[0];
 		}
 		java.util.List<java.util.ArrayList<org.catrobat.catroid.sensing.CollisionPolygonVertex>> outlines = new java.util.ArrayList<>();
@@ -461,24 +475,26 @@ public final class WebCompat {
 			int length = (png[i] & 0xff) << 24 | (png[i + 1] & 0xff) << 16 | (png[i + 2] & 0xff) << 8 | png[i + 3] & 0xff;
 			String type = new String(png, i + 4, 4, java.nio.charset.StandardCharsets.ISO_8859_1);
 			int data = i + 8;
-			if (length < 0 || data + length > png.length) {
-				break;
+			if (length < 0 || length > png.length - data) {
+				break; // malformed: the app's pngj would fail, and the app then computes the outline
 			}
+			int end = data + length;
 			if (("tEXt".equals(type) || "iTXt".equals(type)) && startsWith(png, data, length, keyword)) {
 				int at = data + keyword.length;
 				if ("tEXt".equals(type)) {
-					return new String(png, at, data + length - at, java.nio.charset.StandardCharsets.ISO_8859_1);
+					return new String(png, at, end - at, java.nio.charset.StandardCharsets.ISO_8859_1);
 				}
-				if (0 != png[at]) {
-					return ""; // compressed; the app never writes it so
+				if (at + 2 > end || 0 != png[at]) {
+					return ""; // truncated, or compressed (the app never writes it so)
 				}
 				at += 2; // compression flag and method
-				for (int zeros = 0; zeros < 2 && at < data + length; at++) { // language tag and translated keyword
+				int zeros = 0;
+				for (; zeros < 2 && at < end; at++) { // language tag and translated keyword
 					if (0 == png[at]) {
 						zeros++;
 					}
 				}
-				return new String(png, at, data + length - at, java.nio.charset.StandardCharsets.UTF_8);
+				return 2 == zeros ? new String(png, at, end - at, java.nio.charset.StandardCharsets.UTF_8) : "";
 			}
 			i = data + length + 4; // and the CRC
 		}
