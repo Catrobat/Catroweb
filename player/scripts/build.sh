@@ -72,6 +72,15 @@ for round in $(seq 1 12); do
     echo "Player built (round $round): $(grep -c '^org/catrobat/catroid' $W/stub-report.tsv) Catroid methods unavailable on the web, see $W/stub-report.tsv"
     python3 scripts/export_strings.py ${JAVA_HOME:+$JAVA_HOME/bin/}javap $IN/R.jar build/dist/js/webapp/strings.json \
       build/catroid/catroid/src/main/res/values build/catroid/catroid/src/catroid/res/values
+    # The start screen shows up before app.js is in (web/start.js).
+    cp web/start.js build/dist/js/webapp/start.js
+    python3 - build/dist/js/webapp/index.html <<'EOF'
+import sys
+page = open(sys.argv[1]).read()
+app = '<script type="text/javascript" charset="utf-8" src="app.js">'
+assert app in page, "gdx-teavm's index.html changed: load start.js before app.js"
+open(sys.argv[1], "w").write(page.replace(app, '<script src="start.js"></script>' + app))
+EOF
     exit 0
   fi
   # Any other TeaVM failure (memory, network, a crash) finds nothing new here and prints the log tail below.

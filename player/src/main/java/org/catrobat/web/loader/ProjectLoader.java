@@ -20,12 +20,15 @@ import org.catrobat.catroid.content.backwardcompatibility.ProjectUntilLanguageVe
 import org.catrobat.catroid.content.backwardcompatibility.SceneUntilLanguageVersion0999;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.io.XstreamSerializer;
+import org.catrobat.web.StartScreen;
 import org.catrobat.web.compat.WebCompat;
 import org.catrobat.web.java.Dom;
 import org.teavm.interop.Async;
 import org.teavm.interop.AsyncCallback;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSByRef;
+import org.teavm.jso.JSFunctor;
+import org.teavm.jso.JSObject;
 import org.teavm.jso.ajax.XMLHttpRequest;
 import org.teavm.jso.browser.Location;
 import org.teavm.jso.browser.Window;
@@ -34,8 +37,10 @@ import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.NodeList;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -63,7 +68,13 @@ public final class ProjectLoader {
 		if (!projectId.matches("[A-Za-z0-9-]+")) { // it comes from the URL and goes into one
 			throw new IllegalArgumentException("Not a project id: " + projectId);
 		}
-		Project project = parse(fetch(assetUrl(projectId, "code.xml")));
+		StartScreen.phase("project");
+		String xml = prefetchedCodeXml();
+		if (null == xml) {
+			xml = fetch(assetUrl(projectId, "code.xml"));
+		}
+		StartScreen.phase("preparing");
+		Project project = parse(xml);
 		project.setDirectory(new File("/projects/" + projectId)); // where the scenes' looks and sounds go
 		return project;
 	}
@@ -265,6 +276,7 @@ public final class ProjectLoader {
 	 * memory (Gdx.files.local, which Files.absolute is redirected to), so this needs the stage's Gdx.files.
 	 */
 	public static void loadLooks(Project project, String projectId) {
+		Map<File, Boolean> found = new HashMap<>(); // looks of different sprites may share a file: fetched once
 		for (Scene scene : project.getSceneList()) {
 			for (Sprite sprite : scene.getSpriteList()) {
 				for (Iterator<LookData> looks = sprite.getLookList().iterator(); looks.hasNext(); ) {
@@ -273,12 +285,17 @@ public final class ProjectLoader {
 						continue; // the same look in several sprites (an XStream reference), already loaded
 					}
 					File file = lookFile(scene, look);
-					byte[] bytes = fetchBytes(projectId, file);
-					if (0 == bytes.length) {
+					if (!found.containsKey(file)) {
+						byte[] bytes = fetchBytes(projectId, file);
+						if (0 != bytes.length) {
+							Gdx.files.local(file.getAbsolutePath()).writeBytes(bytes, false);
+						}
+						found.put(file, 0 != bytes.length);
+					}
+					if (!found.get(file)) {
 						looks.remove();
 						continue;
 					}
-					Gdx.files.local(file.getAbsolutePath()).writeBytes(bytes, false);
 					look.setFile(file);
 				}
 			}
@@ -290,6 +307,7 @@ public final class ProjectLoader {
 	 * while it builds the scripts' actions (Sounds.awaitDecoded).
 	 */
 	public static void loadSounds(Project project, String projectId) {
+		Map<File, Boolean> found = new HashMap<>();
 		for (Scene scene : project.getSceneList()) {
 			for (Sprite sprite : scene.getSpriteList()) {
 				for (Iterator<SoundInfo> sounds = sprite.getSoundList().iterator(); sounds.hasNext(); ) {
@@ -298,12 +316,17 @@ public final class ProjectLoader {
 						continue;
 					}
 					File file = soundFile(scene, sound);
-					byte[] bytes = fetchBytes(projectId, file);
-					if (0 == bytes.length) {
+					if (!found.containsKey(file)) {
+						byte[] bytes = fetchBytes(projectId, file);
+						if (0 != bytes.length) {
+							Sounds.decode(file.getAbsolutePath(), bytes);
+						}
+						found.put(file, 0 != bytes.length);
+					}
+					if (!found.get(file)) {
 						sounds.remove();
 						continue;
 					}
-					Sounds.decode(file.getAbsolutePath(), bytes);
 					sound.setFile(file);
 				}
 			}
@@ -337,8 +360,12 @@ public final class ProjectLoader {
 		startPrefetch(urls.toArray(new String[0]));
 	}
 
-	/** A file that failed or timed out stays out of the cache: fetchBytes asks again and reports the error. */
-	@JSBody(params = "urls", script = "var files = {}, next = 0;"
+	/**
+	 * A file that failed or timed out stays out of the cache: fetchBytes asks again and reports the error. The start
+	 * screen counts the files as they come in.
+	 */
+	@JSBody(params = "urls", script = "var files = {}, next = 0, done = 0, bytes = 0, start = window.catrobatStart;"
+			+ "function progress() { if (start) start.files(done, urls.length, bytes); }"
 			+ "function one() {"
 			+ "  if (next >= urls.length) return Promise.resolve();"
 			+ "  var url = urls[next++];"
@@ -346,8 +373,11 @@ public final class ProjectLoader {
 			+ "  return fetch(url, options).then(function (response) {"
 			+ "    if (response.status === 404) files[url] = new Int8Array(0);"
 			+ "    else if (response.status === 200) return response.arrayBuffer().then(function (b) { files[url] = new Int8Array(b); });"
-			+ "  }).catch(function () {}).then(one);"
+			+ "  }).catch(function () {}).then(function () {"
+			+ "    done++; bytes += files[url] ? files[url].length : 0; progress(); return one();"
+			+ "  });"
 			+ "}"
+			+ "progress();"
 			+ "var workers = [];"
 			+ "for (var i = 0; i < 8; i++) workers.push(one());"
 			+ "window.catrobatPrefetch = {files: files, done: Promise.all(workers)};")
@@ -400,9 +430,27 @@ public final class ProjectLoader {
 	@JSByRef
 	private static native byte[] fetchBytes(String url);
 
+	/** code.xml as web/start.js downloads it while the engine loads; null without a start screen (tests). */
+	@Async
+	private static native String prefetchedCodeXml();
+
+	private static void prefetchedCodeXml(AsyncCallback<String> done) {
+		whenCodeXml(done::complete, message -> done.error(new IllegalStateException(message)));
+	}
+
+	@JSFunctor
+	interface TextCallback extends JSObject {
+		void run(String text);
+	}
+
+	@JSBody(params = {"ok", "failed"}, script = "var p = window.catrobatCodeXml;"
+			+ "if (!p) { Promise.resolve().then(function () { ok(null); }); return; }"
+			+ "p.then(function (text) { ok(text); }, function (e) { failed(e.message || String(e)); });")
+	private static native void whenCodeXml(TextCallback ok, TextCallback failed);
+
 	static String fetch(String url) {
 		XMLHttpRequest request = XMLHttpRequest.create();
-		request.open("GET", url, false); // ponytail: synchronous on purpose until the player has a loading screen
+		request.open("GET", url, false); // only without a start screen (tests), where waiting does not matter
 		request.send();
 		if (200 != request.getStatus()) {
 			throw new IllegalStateException("Could not load " + url + ": HTTP " + request.getStatus());
