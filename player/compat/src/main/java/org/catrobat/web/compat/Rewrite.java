@@ -341,7 +341,8 @@ public final class Rewrite {
 	/**
 	 * TeaVM computes Java floats as JavaScript doubles and never rounds them, so 100 steps at 90 degrees end at
 	 * 100.00000000000006 instead of 100. After each float operation, conversion and constant in Catroid's own code,
-	 * WebCompat.fround rounds to float as the JVM does (Math.fround). gdx's own float math stays as TeaVM makes it.
+	 * WebCompat.fround rounds to float as the JVM does (Math.fround), and so after every float that Catroid reads from a
+	 * call or field. gdx's own float math stays as TeaVM makes it.
 	 */
 	private static boolean roundFloats(MethodNode method) {
 		boolean changed = false;
@@ -349,6 +350,10 @@ public final class Rewrite {
 			boolean producesFloat = switch (insn.getOpcode()) {
 				case Opcodes.FADD, Opcodes.FSUB, Opcodes.FMUL, Opcodes.FDIV, Opcodes.FREM, Opcodes.D2F, Opcodes.I2F, Opcodes.L2F -> true;
 				case Opcodes.LDC -> ((LdcInsnNode) insn).cst instanceof Float;
+				// what gdx and the class library hand back, e.g. an actor's x after gdx's own moveBy
+				case Opcodes.INVOKEVIRTUAL, Opcodes.INVOKESTATIC, Opcodes.INVOKEINTERFACE, Opcodes.INVOKESPECIAL ->
+						((MethodInsnNode) insn).desc.endsWith(")F") && !COMPAT.equals(((MethodInsnNode) insn).owner);
+				case Opcodes.GETFIELD, Opcodes.GETSTATIC -> "F".equals(((FieldInsnNode) insn).desc);
 				default -> false;
 			};
 			if (producesFloat) {
