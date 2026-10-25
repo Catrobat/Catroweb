@@ -65,7 +65,7 @@ public class Paint {
 	}
 
 	String font() {
-		return textSize + "px sans-serif";
+		return Math.max(0, textSize) + "px sans-serif"; // a negative size is no CSS font and would be ignored
 	}
 
 	String css() {

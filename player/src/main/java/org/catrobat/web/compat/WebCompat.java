@@ -287,11 +287,12 @@ public final class WebCompat {
 
 	/**
 	 * LookData.getPixmap gives a look whose image is missing a 1x1 transparent pixmap when gdx reports "Couldn't load
-	 * file:", Android's wording; gdx-teavm words it differently, so the look got none and drawing it crashed.
+	 * file:", Android's wording; gdx-teavm words it differently, so the look got none and drawing it crashed. Only a
+	 * missing file, as there: an image that does not decode stays null and the look keeps its costume.
 	 */
 	public static Pixmap lookPixmap(LookData look) {
 		Pixmap pixmap = look.getPixmap();
-		if (null == pixmap) {
+		if (null == pixmap && null != look.getFile() && !com.badlogic.gdx.Gdx.files.local(look.getFile().getAbsolutePath()).exists()) {
 			pixmap = new Pixmap(1, 1, Pixmap.Format.Alpha);
 			look.setPixmap(pixmap);
 		}
