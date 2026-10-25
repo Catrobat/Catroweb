@@ -167,9 +167,12 @@ public final class WebCompat {
 		throw new UnsupportedOperationException("Not available on the web: " + type.getName());
 	}
 
-	/** Scene changes stop speech recognition, which the player does not offer. */
+	/**
+	 * Scene changes stop speech recognition, which the player does not offer: the factory Koin would have provided is
+	 * missing (koinGet), so there is nothing to stop. A factory that does exist answers for itself.
+	 */
 	public static SpeechRecognitionHolderInterface noSpeechRecognition(SpeechRecognitionHolderFactory factory) {
-		return NO_SPEECH;
+		return null == factory ? NO_SPEECH : factory.getInstance();
 	}
 
 	private static final SpeechRecognitionHolderInterface NO_SPEECH = new SpeechRecognitionHolderInterface() {

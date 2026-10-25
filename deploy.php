@@ -154,7 +154,7 @@ task('deploy:player', function () {
   // Named after all its files, so no changed file hides behind the year-long cache of its folder. WEB-INF is the
   // build tool's, not the player's.
   $hashes = [];
-  foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($build, FilesystemIterator::SKIP_DOTS)) as $file) {
+  foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($build, \FilesystemIterator::SKIP_DOTS)) as $file) {
     $relative = substr($file->getPathname(), strlen($build) + 1);
     if (!str_starts_with($relative, 'WEB-INF/')) {
       $hashes[$relative] = sha1_file($file->getPathname());

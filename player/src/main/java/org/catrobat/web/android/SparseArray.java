@@ -2,14 +2,11 @@ package org.catrobat.web.android;
 
 import java.util.TreeMap;
 
-/** android.util.SparseArray for the browser (compat/Rewrite remaps it): the mockable stub keeps no values. */
+/** android.util.SparseArray for the browser (compat/Rewrite remaps it): replaces the android.jar stub, which keeps no values. */
 public class SparseArray<E> {
 	private final TreeMap<Integer, E> entries = new TreeMap<>();
 
 	public SparseArray() {
-	}
-
-	public SparseArray(int initialCapacity) {
 	}
 
 	public E get(int key) {
