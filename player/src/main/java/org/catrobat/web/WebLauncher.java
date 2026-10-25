@@ -52,17 +52,23 @@ public class WebLauncher {
 			return;
 		}
 		Project project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
+		if (!projectId.isEmpty()) {
+			ProjectLoader.prefetch(project, projectId);
+		}
 		if (projectId.isEmpty() || Window.current().getLocation().getSearch().contains("autostart")) {
 			Sounds.createContext(); // without a click it may stay muted, which the demo and tests do not mind
 		} else {
 			StartScreen.waitForStart(project.getName());
 		}
 		if (!projectId.isEmpty()) {
+			ProjectLoader.awaitPrefetch();
 			ProjectLoader.loadSounds(project, projectId);
 			Sounds.awaitDecoded();
 		}
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
+		project.getDirectory().mkdirs(); // the device variables and lists bricks save there, in memory for this play
+		project.getRequiredResources(); // StageResourceHolder's job on Android; gives physics sprites their action factory
 		// The canvas takes the project's aspect ratio, fitted into 480x800 (800x480 for landscape), so the stage fills it.
 		boolean sized = project.getXmlHeader().getVirtualScreenWidth() > 0 && project.getXmlHeader().getVirtualScreenHeight() > 0;
 		int width = sized ? project.getXmlHeader().getVirtualScreenWidth() : 480;
@@ -98,6 +104,9 @@ public class WebLauncher {
 		};
 		stage.setMaxViewPort(screen); // StageActivity's job on Android
 		StageActivity.stageListener = stage; // actors reach the stage through it
+		// No activity on the web. Empty rather than null: the bricks that need one (vibrate, open URL, edit look, ...)
+		// check activeStageActivity.get() and then do nothing, as on a device without the feature.
+		StageActivity.activeStageActivity = new java.lang.ref.WeakReference<>(null);
 		new WebApplication(stage, config);
 	}
 

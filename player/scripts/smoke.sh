@@ -31,7 +31,7 @@ kill $SERVER
 
 # Catroid test projects with looks, played on the stage: each reports its result like on Android (7777 = success).
 # testColorAtXY reads the stage's pixels, so it fails if looks are not drawn; sound-play-and-wait asserts that
-# "play sound and wait" waits for the sound's length.
+# "play sound and wait" waits for the sound's length; speak-and-wait, that "speak and wait" ends.
 STAGE=build/web/stage-tests
 rm -rf $STAGE
 for test in colorAtXY/testColorAtXY bricks/looks/testSetTransparency touchesColor/testColorTouchesColor; do
@@ -40,6 +40,8 @@ for test in colorAtXY/testColorAtXY bricks/looks/testSetTransparency touchesColo
 done
 mkdir -p $STAGE/project-files/sound-play-and-wait/assets  # fixtures/README.md
 unzip -q fixtures/sound-play-and-wait.catrobat -d $STAGE/project-files/sound-play-and-wait/assets
+mkdir -p $STAGE/project-files/speak-and-wait/assets
+unzip -q fixtures/speak-and-wait.catrobat -d $STAGE/project-files/speak-and-wait/assets
 for test in $(ls $STAGE/project-files); do
   serve 90 $STAGE  # released as soon as the test reports its result
   PAGE=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \

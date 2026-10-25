@@ -2,14 +2,20 @@ package org.catrobat.web.loader;
 
 import com.badlogic.gdx.Gdx;
 
+import org.catrobat.catroid.BuildConfig;
+import org.catrobat.catroid.ProjectManager;
+import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.LookData;
 import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.Scene;
 import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Sprite;
+import org.catrobat.catroid.content.WhenBounceOffScript;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.io.XstreamSerializer;
+import org.teavm.interop.Async;
+import org.teavm.interop.AsyncCallback;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSByRef;
 import org.teavm.jso.ajax.XMLHttpRequest;
@@ -21,6 +27,8 @@ import org.teavm.jso.dom.xml.NodeList;
 
 import java.io.File;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Loads a share project with Catroid's own XStream setup (its aliases, converters and field order), so the web
@@ -52,7 +60,15 @@ public final class ProjectLoader {
 		return project;
 	}
 
+	/** The project as the app plays it: read, then updated to the current language version. */
 	static Project parse(String xml) {
+		Project project = read(xml);
+		updateToCurrentVersion(project);
+		return project;
+	}
+
+	/** The project exactly as code.xml describes it, which LoaderCheck compares with the XML. */
+	static Project read(String xml) {
 		Element root = DOMParser.create().parseFromString(xml, "text/xml").getDocumentElement();
 		if (0 != root.getElementsByTagName("parsererror").getLength()) { // the browser's way of saying it is not XML
 			throw new IllegalArgumentException("code.xml is not valid XML");
@@ -60,6 +76,10 @@ public final class ProjectLoader {
 		// XstreamSerializer.loadProject reads older projects into legacy classes and converts them; not yet here.
 		if (0 == root.getElementsByTagName("scenes").getLength() || languageVersion(root) < 0.9991) {
 			throw new IllegalArgumentException("Projects before Catrobat language version 0.9991 cannot be played here yet");
+		}
+		if (languageVersion(root) > Constants.CURRENT_CATROBAT_LANGUAGE_VERSION) { // as the app: made by a newer one
+			throw new IllegalArgumentException("This project needs a newer player (Catrobat language version "
+					+ languageVersion(root) + ")");
 		}
 		// ponytail: the app retries a ConversionException after modifyXMLToSupportUnknownFields (java.io.File + DOM);
 		// not here yet, so such a project fails loudly instead.
@@ -69,6 +89,38 @@ public final class ProjectLoader {
 		}
 		project.checkForInvisibleSprites();
 		return project;
+	}
+
+	/**
+	 * What ProjectManager.loadProject does to a project after reading it, from Catrobat language 0.9991 on: the
+	 * updates to the current language version, then the scripts' parents and bounce-off targets. Left out: the
+	 * permissions file, the background's localised name and the device settings, which concern the app.
+	 */
+	private static void updateToCurrentVersion(Project project) {
+		double version = project.getCatrobatLanguageVersion();
+		if (version <= 0.9993) {
+			ProjectManager.updateScriptsToTreeStructure(project);
+		}
+		if (version <= 0.9999995) {
+			ProjectManager.updateBackgroundIndexTo9999995(project);
+		}
+		if (version < 999.9 && !BuildConfig.FEATURE_LIST_AS_BASIC_DATATYPE) {
+			ProjectManager.flattenAllLists(project);
+		}
+		if (version <= 1.03) {
+			ProjectManager.updateDirectionProperty(project);
+		}
+		project.setCatrobatLanguageVersion(Constants.CURRENT_CATROBAT_LANGUAGE_VERSION);
+		for (Scene scene : project.getSceneList()) {
+			for (Sprite sprite : scene.getSpriteList()) {
+				for (Script script : sprite.getScriptList()) {
+					script.setParents();
+					if (script instanceof WhenBounceOffScript bounceOff) {
+						bounceOff.updateSpriteToCollideWith(scene);
+					}
+				}
+			}
+		}
 	}
 
 	private static double languageVersion(Element root) {
@@ -119,7 +171,10 @@ public final class ProjectLoader {
 			for (Sprite sprite : scene.getSpriteList()) {
 				for (Iterator<LookData> looks = sprite.getLookList().iterator(); looks.hasNext(); ) {
 					LookData look = looks.next();
-					File file = new File(new File(scene.getDirectory(), "images"), look.getXstreamFileName());
+					if (null != look.getFile()) {
+						continue; // the same look in several sprites (an XStream reference), already loaded
+					}
+					File file = lookFile(scene, look);
 					byte[] bytes = fetchBytes(projectId, file);
 					if (0 == bytes.length) {
 						looks.remove();
@@ -141,7 +196,10 @@ public final class ProjectLoader {
 			for (Sprite sprite : scene.getSpriteList()) {
 				for (Iterator<SoundInfo> sounds = sprite.getSoundList().iterator(); sounds.hasNext(); ) {
 					SoundInfo sound = sounds.next();
-					File file = new File(new File(scene.getDirectory(), "sounds"), sound.getXstreamFileName());
+					if (null != sound.getFile()) {
+						continue;
+					}
+					File file = soundFile(scene, sound);
 					byte[] bytes = fetchBytes(projectId, file);
 					if (0 == bytes.length) {
 						sounds.remove();
@@ -154,21 +212,82 @@ public final class ProjectLoader {
 		}
 	}
 
+	private static File lookFile(Scene scene, LookData look) {
+		return new File(new File(scene.getDirectory(), "images"), look.getXstreamFileName());
+	}
+
+	private static File soundFile(Scene scene, SoundInfo sound) {
+		return new File(new File(scene.getDirectory(), "sounds"), sound.getXstreamFileName());
+	}
+
+	/**
+	 * Starts downloading every look and sound, eight at a time, while the start screen waits for its click;
+	 * fetchBytes then takes them from memory instead of one synchronous request after the other.
+	 */
+	public static void prefetch(Project project, String projectId) {
+		Set<String> urls = new LinkedHashSet<>();
+		for (Scene scene : project.getSceneList()) {
+			for (Sprite sprite : scene.getSpriteList()) {
+				for (LookData look : sprite.getLookList()) {
+					urls.add(fileUrl(projectId, lookFile(scene, look)));
+				}
+				for (SoundInfo sound : sprite.getSoundList()) {
+					urls.add(fileUrl(projectId, soundFile(scene, sound)));
+				}
+			}
+		}
+		startPrefetch(urls.toArray(new String[0]));
+	}
+
+	/** A file that failed or timed out stays out of the cache: fetchBytes asks again and reports the error. */
+	@JSBody(params = "urls", script = "var files = {}, next = 0;"
+			+ "function one() {"
+			+ "  if (next >= urls.length) return Promise.resolve();"
+			+ "  var url = urls[next++];"
+			+ "  var options = AbortSignal.timeout ? {signal: AbortSignal.timeout(30000)} : {};" // a stalled file must not block the start
+			+ "  return fetch(url, options).then(function (response) {"
+			+ "    if (response.status === 404) files[url] = new Int8Array(0);"
+			+ "    else if (response.status === 200) return response.arrayBuffer().then(function (b) { files[url] = new Int8Array(b); });"
+			+ "  }).catch(function () {}).then(one);"
+			+ "}"
+			+ "var workers = [];"
+			+ "for (var i = 0; i < 8; i++) workers.push(one());"
+			+ "window.catrobatPrefetch = {files: files, done: Promise.all(workers)};")
+	private static native void startPrefetch(String[] urls);
+
+	/** Blocks the calling TeaVM thread until prefetch has every file (or gave up on it). */
+	@Async
+	public static native Void awaitPrefetch();
+
+	private static void awaitPrefetch(AsyncCallback<Void> done) {
+		whenPrefetched(() -> done.complete(null));
+	}
+
+	@JSBody(params = "ready", script = "var p = window.catrobatPrefetch;"
+			+ "(p ? p.done : Promise.resolve()).then(function () { ready(); });")
+	private static native void whenPrefetched(Sounds.Callback ready);
+
 	/** The file under the project directory, from share: /project-files/{id}/assets/{scene}/{images|sounds}/{name}. */
-	private static byte[] fetchBytes(String projectId, File file) {
+	private static String fileUrl(String projectId, File file) {
 		File folder = file.getParentFile();
-		return fetchBytes(assetUrl(projectId, encode(folder.getParentFile().getName()) + "/" + folder.getName() + "/"
-				+ encode(file.getName())));
+		return assetUrl(projectId, encode(folder.getParentFile().getName()) + "/" + folder.getName() + "/"
+				+ encode(file.getName()));
+	}
+
+	private static byte[] fetchBytes(String projectId, File file) {
+		return fetchBytes(fileUrl(projectId, file));
 	}
 
 	@JSBody(params = "segment", script = "return encodeURIComponent(segment);")
 	private static native String encode(String segment);
 
 	/**
-	 * Empty for a file share does not have. A synchronous request cannot ask for an ArrayBuffer; the x-user-defined
-	 * charset keeps each byte in one char.
+	 * Empty for a file share does not have. From prefetch when it has the file; otherwise a synchronous request,
+	 * which cannot ask for an ArrayBuffer: the x-user-defined charset keeps each byte in one char.
 	 */
-	@JSBody(params = "url", script = "var request = new XMLHttpRequest();"
+	@JSBody(params = "url", script = "var p = window.catrobatPrefetch, cached = p && p.files[url];"
+			+ "if (cached) { delete p.files[url]; return cached; }"
+			+ "var request = new XMLHttpRequest();"
 			+ "request.open('GET', url, false);"
 			+ "request.overrideMimeType('text/plain; charset=x-user-defined');"
 			+ "request.send();"

@@ -48,15 +48,46 @@ public final class Rewrite {
 			Map.entry("android/os/SystemClock", "org/catrobat/web/android/SystemClock"),
 			Map.entry("android/util/Log", "org/catrobat/web/android/Log"),
 			Map.entry("android/graphics/PointF", "org/catrobat/web/android/PointF"),
+			Map.entry("android/util/SparseIntArray", "org/catrobat/web/android/SparseIntArray"),
+			Map.entry("android/util/SparseArray", "org/catrobat/web/android/SparseArray"),
+			Map.entry("android/os/AsyncTask", "org/catrobat/web/android/AsyncTask"),
 			Map.entry("java/util/concurrent/locks/Lock", "org/catrobat/web/java/Lock"),
 			Map.entry("java/util/concurrent/locks/ReentrantLock", "org/catrobat/web/java/ReentrantLock"),
 			Map.entry("java/io/ObjectStreamField", "org/catrobat/web/java/ObjectStreamField"),
+			Map.entry("java/io/CharConversionException", "org/catrobat/web/java/CharConversionException"),
+			Map.entry("java/util/concurrent/atomic/AtomicReferenceArray", "org/catrobat/web/java/AtomicReferenceArray"),
+			Map.entry("java/util/concurrent/atomic/AtomicIntegerArray", "org/catrobat/web/java/AtomicIntegerArray"),
 			Map.entry("android/media/MediaPlayer", "org/catrobat/web/android/MediaPlayer"),
 			Map.entry("android/media/MediaMetadataRetriever", "org/catrobat/web/android/MediaMetadataRetriever"),
 			Map.entry("org/catrobat/catroid/web/WebConnectionHolder", "org/catrobat/web/catroid/WebConnectionHolder"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidApplication", "org/catrobat/web/compat/WebAndroidApplication"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidGraphics", "org/catrobat/web/compat/WebAndroidGraphics"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidApplicationConfiguration", "org/catrobat/web/compat/WebAndroidApplicationConfiguration"));
+
+	/**
+	 * Catroid's text and bubble actors draw with android.graphics; only there those classes become canvas-backed
+	 * web versions. Everywhere else the mockable ones stay (their defaults are what the rest of the stage relies on).
+	 */
+	static final Map<String, String> GRAPHICS = graphics("Bitmap", "Bitmap$Config", "Bitmap$CompressFormat", "Canvas", "Paint",
+			"Paint$Style", "Paint$Align", "Path", "Path$FillType", "Rect", "RectF");
+
+	private static Map<String, String> graphics(String... names) {
+		Map<String, String> remap = new java.util.HashMap<>(REMAP);
+		for (String name : names) {
+			remap.put("android/graphics/" + name, "org/catrobat/web/android/graphics/" + name);
+		}
+		return Map.copyOf(remap);
+	}
+
+	private static boolean drawsWithAndroidGraphics(String className) {
+		for (String actor : new String[] {"org/catrobat/catroid/stage/ShowTextActor", "org/catrobat/catroid/stage/ShowBubbleActor",
+				"org/catrobat/catroid/utils/ShowTextUtils"}) {
+			if (className.equals(actor) || className.startsWith(actor + "$")) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/** owner.name+desc of instance or static JVM methods TeaVM lacks -> WebCompat method (receiver first). */
 	static final Map<String, String> REDIRECT = Map.ofEntries(
@@ -76,9 +107,40 @@ public final class Rewrite {
 			Map.entry("java/lang/Package.getImplementationVersion()Ljava/lang/String;", "implementationVersion"),
 			Map.entry("com/badlogic/gdx/Files.absolute(Ljava/lang/String;)Lcom/badlogic/gdx/files/FileHandle;", "absolute"),
 			Map.entry("org/catrobat/catroid/stage/StageActivity.finishStage()V", "finishStage"),
+			Map.entry("org/catrobat/catroid/io/SoundManager.stopAllSounds()V", "stopAllSounds"),
+			Map.entry("org/catrobat/catroid/io/SoundManager.clear()V", "clearSounds"),
+			Map.entry("org/catrobat/catroid/io/SoundManager.pause()V", "pauseSounds"),
+			Map.entry("org/catrobat/catroid/io/SoundManager.resume()V", "resumeSounds"),
+			Map.entry("org/catrobat/catroid/content/ActionFactory.createSpeakAction(Lorg/catrobat/catroid/content/Sprite;"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/actions/SequenceAction;Lorg/catrobat/catroid/formulaeditor/Formula;)"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/Action;", "speakAction"),
+			Map.entry("org/catrobat/catroid/content/ActionFactory.createSpeakAndWaitAction(Lorg/catrobat/catroid/content/Sprite;"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/actions/SequenceAction;Lorg/catrobat/catroid/formulaeditor/Formula;)"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/Action;", "speakAndWaitAction"),
+			Map.entry("org/catrobat/catroid/stage/StageActivity.getActiveCameraManager()Lorg/catrobat/catroid/camera/CameraManager;",
+					"noCameraManager"),
+			Map.entry("org/catrobat/catroid/stage/StageActivity.getActiveVibrationManager()Lorg/catrobat/catroid/utils/VibrationManager;",
+					"noVibrationManager"),
 			Map.entry("org/catrobat/catroid/stage/StageActivity.finishTestWithResult(Lorg/catrobat/catroid/stage/TestResult;)V",
 					"finishTestWithResult"),
 			Map.entry("org/catrobat/catroid/sensing/CollisionInformation.loadCollisionPolygon()V", "loadCollisionPolygon"),
+			Map.entry("org/catrobat/catroid/common/LookData.getPixmap()Lcom/badlogic/gdx/graphics/Pixmap;", "lookPixmap"),
+			Map.entry("android/opengl/GLUtils.texImage2D(IILorg/catrobat/web/android/graphics/Bitmap;I)V", "texImage2D"),
+			Map.entry("android/opengl/GLES20.glBindTexture(II)V", "glBindTexture"),
+			Map.entry("org/catrobat/catroid/sensing/CollisionInformation.calculateBubblePositions()V", "calculateBubblePositions"),
+			Map.entry("org/catrobat/catroid/utils/ImageEditing.readMetaDataStringFromPNG(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+					"readPngText"),
+			Map.entry("org/catrobat/catroid/utils/Utils.md5Checksum(Ljava/io/File;)Ljava/lang/String;", "md5Checksum"),
+			Map.entry("org/catrobat/catroid/utils/Utils.md5Checksum(Ljava/lang/String;)Ljava/lang/String;", "md5Checksum"),
+			Map.entry("org/koin/java/KoinJavaComponent.get(Ljava/lang/Class;)Ljava/lang/Object;", "koinGet"),
+			Map.entry("org/catrobat/catroid/content/actions/StoreCSVIntoUserListAction.extractOrReplaceSeperator(Ljava/lang/String;)C",
+					"csvSeparator"),
+			Map.entry("org/catrobat/catroid/io/DeviceUserDataAccessor.readMapFromJson()Ljava/util/Map;", "readDeviceData"),
+			Map.entry("org/catrobat/catroid/io/DeviceUserDataAccessor.writeMapToJson(Ljava/util/Map;)V", "writeDeviceData"),
+			Map.entry("kotlinx/coroutines/Dispatchers.getIO()Lkotlinx/coroutines/CoroutineDispatcher;", "inPlaceDispatcher"),
+			Map.entry("kotlinx/coroutines/Dispatchers.getMain()Lkotlinx/coroutines/MainCoroutineDispatcher;", "mainDispatcher"),
+			Map.entry("org/catrobat/catroid/stage/SpeechRecognitionHolderFactory.getInstance()Lorg/catrobat/catroid/stage/SpeechRecognitionHolderInterface;",
+					"noSpeechRecognition"),
 			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsReadObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
 			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsWriteObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
 			Map.entry("com/thoughtworks/xstream/core/JVM.isAWTAvailable()Z", "unavailable"),
@@ -157,8 +219,9 @@ public final class Rewrite {
 
 	static byte[] rewrite(byte[] bytes, Set<String> missing, Set<String> noArgConstructors, int[] stats) {
 		ClassNode node = new ClassNode();
-		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, REMAP)), 0);
-		boolean changed = mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
+		boolean graphics = drawsWithAndroidGraphics(new ClassReader(bytes).getClassName());
+		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, graphics ? GRAPHICS : REMAP)), 0);
+		boolean changed = graphics | mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
 		if (node.interfaces.removeIf(missing::contains)) {
 			changed = true; // the class works without claiming a type the browser lacks
 		}
@@ -171,6 +234,9 @@ public final class Rewrite {
 			if (0 != (method.access & Opcodes.ACC_NATIVE) && missing.contains(node.name + "." + method.name + method.desc)) {
 				method.access &= ~Opcodes.ACC_NATIVE; // JNI code has no browser counterpart
 				reason = "native";
+			}
+			if (node.name.startsWith("org/catrobat/catroid/") && roundFloats(method)) {
+				changed = true;
 			}
 			for (AbstractInsnNode insn = method.instructions.getFirst(); null != insn; insn = insn.getNext()) {
 				if (insn instanceof MethodInsnNode call && isClassLookup(call) && previousInstruction(call) instanceof LdcInsnNode name
@@ -314,6 +380,34 @@ public final class Rewrite {
 	private static boolean mentionsRemapped(byte[] bytes) {
 		String text = new String(bytes, StandardCharsets.ISO_8859_1);
 		return REMAP.keySet().stream().anyMatch(text::contains);
+	}
+
+	/**
+	 * TeaVM computes Java floats as JavaScript doubles and never rounds them, so 100 steps at 90 degrees end at
+	 * 100.00000000000006 instead of 100. After each float operation, conversion and constant in Catroid's own code,
+	 * WebCompat.fround rounds to float as the JVM does (Math.fround), and so after every float that Catroid reads from a
+	 * call or field. gdx's own float math stays as TeaVM makes it.
+	 */
+	private static boolean roundFloats(MethodNode method) {
+		boolean changed = false;
+		for (AbstractInsnNode insn = method.instructions.getFirst(); null != insn; insn = insn.getNext()) {
+			boolean producesFloat = switch (insn.getOpcode()) {
+				case Opcodes.FADD, Opcodes.FSUB, Opcodes.FMUL, Opcodes.FDIV, Opcodes.FREM, Opcodes.D2F, Opcodes.I2F, Opcodes.L2F -> true;
+				case Opcodes.LDC -> ((LdcInsnNode) insn).cst instanceof Float;
+				// what gdx and the class library hand back, e.g. an actor's x after gdx's own moveBy
+				case Opcodes.INVOKEVIRTUAL, Opcodes.INVOKESTATIC, Opcodes.INVOKEINTERFACE, Opcodes.INVOKESPECIAL ->
+						((MethodInsnNode) insn).desc.endsWith(")F") && !COMPAT.equals(((MethodInsnNode) insn).owner);
+				case Opcodes.GETFIELD, Opcodes.GETSTATIC -> "F".equals(((FieldInsnNode) insn).desc);
+				default -> false;
+			};
+			if (producesFloat) {
+				AbstractInsnNode round = new MethodInsnNode(Opcodes.INVOKESTATIC, COMPAT, "fround", "(F)F", false);
+				method.instructions.insert(insn, round);
+				insn = round;
+				changed = true;
+			}
+		}
+		return changed;
 	}
 
 	private static String receiver(String owner, String target) {

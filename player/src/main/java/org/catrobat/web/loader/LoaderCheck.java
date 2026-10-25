@@ -20,7 +20,7 @@ public final class LoaderCheck {
 			String id = project.substring(0, newline);
 			String result;
 			try {
-				result = ProjectLoader.summary(ProjectLoader.parse(project.substring(newline + 1)));
+				result = ProjectLoader.summary(ProjectLoader.read(project.substring(newline + 1)));
 			} catch (Throwable e) { // one broken project must not hide the others
 				result = ("error: " + e).replaceAll("\\s*\\n\\s*", " | "); // one line per project
 			}
