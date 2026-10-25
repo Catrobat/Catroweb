@@ -162,27 +162,34 @@
 
   // Share's API has the name at once; it serves its own screenshots without CORS, so the picture is the project's
   // own screenshot from its files, as a blob (the player's CSP allows blob: images, not share's).
-  fetch(`${share}/api/projects/${id}`)
+  const showPicture = (url) => {
+    picture.onload = () => {
+      picture.classList.add('shown')
+      backdrop.style.backgroundImage = `url("${url}")`
+      backdrop.classList.add('shown')
+    }
+    picture.src = url
+  }
+  const project = fetch(`${share}/api/projects/${id}`)
     .then((response) => (response.ok ? response.json() : null))
-    .then((project) => {
-      if (project?.name && !name.textContent) {
-        name.textContent = project.name
-      }
-    })
-    .catch(() => {})
+    .catch(() => null)
+  project.then((data) => {
+    if (data?.name && !name.textContent) {
+      name.textContent = data.name
+    }
+  })
   ;(async () => {
     for (const file of ['manual_screenshot.png', 'automatic_screenshot.png', 'screenshot.png']) {
       const response = await fetch(asset(file))
       if (response.ok) {
-        const url = URL.createObjectURL(await response.blob())
-        picture.onload = () => {
-          picture.classList.add('shown')
-          backdrop.style.backgroundImage = `url("${url}")`
-          backdrop.classList.add('shown')
-        }
-        picture.src = url
+        showPicture(URL.createObjectURL(await response.blob()))
         return
       }
+    }
+    // Many projects keep no screenshot in their files; share's thumbnail is an <img>, which needs no CORS.
+    const thumbnail = (await project)?.screenshot?.detail?.webp_2x
+    if (thumbnail?.startsWith(`${share}/`) || thumbnail?.startsWith('/')) {
+      showPicture(thumbnail)
     }
   })().catch(() => {})
 
