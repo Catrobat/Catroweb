@@ -66,7 +66,8 @@ Other pieces:
   browsers require before they play sound; `?autostart` has no start screen. The click also goes full screen and, on
   Android, locks the screen to the project's orientation (iPhones have no full screen for pages); after leaving full
   screen, a small button in the corner goes back. A project that cannot be loaded says why, with a link back to
-  share.
+  share. `QuickStart`, in gdx-teavm's package, skips the two waits of gdx-teavm's start (its preloader fills its bar
+  at 0.9 per second, then it renders only from the 61st frame on), about two seconds.
 - Screen: the canvas has the project's aspect ratio at the window's size in device pixels (at most 2 per CSS pixel,
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to
