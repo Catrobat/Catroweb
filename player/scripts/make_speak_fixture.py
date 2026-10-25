@@ -3,7 +3,11 @@ Usage: python3 make_speak_fixture.py <testSetTransparency.catrobat> <out.catroba
 import sys, zipfile
 src, out = sys.argv[1], sys.argv[2]
 x = zipfile.ZipFile(src).read("code.xml").decode()
-bricks = """<brick type="SpeakAndWaitBrick">
+bricks = """<brick type="ResetTimerBrick">
+                  <brickId>00000000-0000-4000-8000-0000000000b0</brickId>
+                  <commentedOut>false</commentedOut>
+                </brick>
+                <brick type="SpeakAndWaitBrick">
                   <brickId>00000000-0000-4000-8000-0000000000b1</brickId>
                   <commentedOut>false</commentedOut>
                   <formulaList>
@@ -11,6 +15,32 @@ bricks = """<brick type="SpeakAndWaitBrick">
                       <additionalChildren/>
                       <type>STRING</type>
                       <value>Hello</value>
+                    </formula>
+                  </formulaList>
+                </brick>
+                <brick type="AssertEqualsBrick">
+                  <brickId>00000000-0000-4000-8000-0000000000b2</brickId>
+                  <commentedOut>false</commentedOut>
+                  <formulaList>
+                    <formula category="ASSERT_EQUALS_EXPECTED">
+                      <additionalChildren/>
+                      <type>FUNCTION</type>
+                      <value>TRUE</value>
+                    </formula>
+                    <formula category="ASSERT_EQUALS_ACTUAL">
+                      <additionalChildren/>
+                      <leftChild>
+                        <additionalChildren/>
+                        <type>SENSOR</type>
+                        <value>TIMER</value>
+                      </leftChild>
+                      <rightChild>
+                        <additionalChildren/>
+                        <type>NUMBER</type>
+                        <value>0.3</value>
+                      </rightChild>
+                      <type>OPERATOR</type>
+                      <value>GREATER_THAN</value>
                     </formula>
                   </formulaList>
                 </brick>

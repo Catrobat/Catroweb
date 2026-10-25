@@ -12,7 +12,9 @@ import org.teavm.jso.JSObject;
 /**
  * The speak and speak-and-wait bricks with the browser's speech synthesis. The app renders the text to a sound file
  * with Google's or Huawei's engine and plays it; neither exists here. "And wait" ends with the speech, or after a
- * time estimated from the text if the browser never reports the end (no voices installed, for one).
+ * time estimated from the text if the browser never reports the end (no voices installed, for one). The app overlaps
+ * spoken sound files; the browser queues utterances, so a new one cancels what is still queued, and speech stops and
+ * pauses with the stage's sounds (WebCompat's SoundManager redirects).
  */
 public final class WebSpeakAction extends Action {
 	private final Scope scope;
@@ -40,13 +42,29 @@ public final class WebSpeakAction extends Action {
 		utterance = null;
 	}
 
-	@JSBody(params = "text", script = "var u = {done: false, until: performance.now() + 1500 + 120 * text.length};"
+	// The time-out counts from the start of the speech; until it starts, from now (the start may never be reported).
+	// u keeps the utterance: Chrome drops onend for one that is garbage-collected.
+	@JSBody(params = "text", script = "var estimate = 1500 + 120 * text.length;"
+			+ "var u = {done: false, until: performance.now() + estimate};"
 			+ "if (!window.speechSynthesis || !text) { u.done = true; return u; }"
-			+ "var speech = new SpeechSynthesisUtterance(text);"
-			+ "speech.onend = speech.onerror = function () { u.done = true; };"
+			+ "var speech = u.speech = new SpeechSynthesisUtterance(text);"
+			+ "speech.onstart = function () { u.until = performance.now() + estimate; };"
+			+ "speech.onend = function () { u.done = true; };"
+			// Without voices the browser fails at once; the script then waits the estimate, as for silent speech.
+			+ "speech.onerror = function (e) { if (e.error === 'canceled' || e.error === 'interrupted') u.done = true; };"
+			+ "window.speechSynthesis.cancel();"
 			+ "window.speechSynthesis.speak(speech);"
 			+ "return u;")
 	private static native JSObject speak(String text);
+
+	@JSBody(script = "if (window.speechSynthesis) window.speechSynthesis.cancel();")
+	public static native void stopAll();
+
+	@JSBody(script = "if (window.speechSynthesis) window.speechSynthesis.pause();")
+	public static native void pauseAll();
+
+	@JSBody(script = "if (window.speechSynthesis) window.speechSynthesis.resume();")
+	public static native void resumeAll();
 
 	@JSBody(params = "u", script = "return u.done || performance.now() > u.until;")
 	private static native boolean done(JSObject u);
