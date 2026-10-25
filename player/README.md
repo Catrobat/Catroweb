@@ -58,9 +58,15 @@ Other pieces:
   does on Android.
 - Sounds: `ProjectLoader.loadSounds` fetches them before the stage starts and `loader/Sounds` decodes them with Web
   Audio, because Catroid reads their durations while it builds the scripts. `android.media.MediaPlayer` and
-  `MediaMetadataRetriever` are remapped to small web versions in `android/`. `StartScreen` waits for the click browsers
-  require before they play sound; `?autostart` skips it. The click also goes full screen and, on Android, locks the
-  screen to the project's orientation (iPhones have no full screen for pages).
+  `MediaMetadataRetriever` are remapped to small web versions in `android/`.
+- Start screen: `web/start.js` (put before `app.js` in `index.html` by `build.sh`) shows the project's screenshot
+  (from its files, as a blob, since the player's CSP allows no images from share), its name (share's API) and what
+  the player is doing: loading the player, downloading `code.xml` (which it starts at once, while `app.js` loads),
+  reading it, downloading the files (N of M), preparing the sounds. `StartScreen` drives it and waits for the click
+  browsers require before they play sound; `?autostart` has no start screen. The click also goes full screen and, on
+  Android, locks the screen to the project's orientation (iPhones have no full screen for pages); after leaving full
+  screen, a small button in the corner goes back. A project that cannot be loaded says why, with a link back to
+  share.
 - Screen: the canvas has the project's aspect ratio at the window's size in device pixels (at most 2 per CSS pixel,
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to

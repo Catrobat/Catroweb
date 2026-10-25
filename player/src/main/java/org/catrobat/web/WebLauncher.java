@@ -53,9 +53,15 @@ public class WebLauncher {
 			LoaderCheck.run();
 			return;
 		}
-		Project project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
-		if (!projectId.isEmpty()) {
-			ProjectLoader.prefetch(project, projectId);
+		Project project;
+		try {
+			project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
+			if (!projectId.isEmpty()) {
+				ProjectLoader.prefetch(project, projectId);
+			}
+		} catch (RuntimeException e) {
+			StartScreen.fail(e.getMessage());
+			throw e;
 		}
 		boolean interactive = !projectId.isEmpty() && !Window.current().getLocation().getSearch().contains("autostart");
 		if (!interactive) {
@@ -66,8 +72,10 @@ public class WebLauncher {
 		}
 		if (!projectId.isEmpty()) {
 			ProjectLoader.awaitPrefetch();
+			StartScreen.phase("sounds");
 			ProjectLoader.loadSounds(project, projectId);
 			Sounds.awaitDecoded();
+			StartScreen.phase("starting");
 		}
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
