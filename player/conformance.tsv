@@ -150,7 +150,7 @@ motion/testChangeXPosition.catrobat	pass
 motion/testChangeYPosition.catrobat	pass	
 motion/testIfOnEdgeBounceOnceRegression.catrobat	pass	
 motion/testIfOnEdgeBouncePhysicsMoveStepsRegression.catrobat	pass	
-motion/testMoveStepsBrick.catrobat	fail	on sprite "Background" Brick at position 9 in "StartScript" AssertEqualsError expected: <100> actual: <100.00000000000006> deviation: ---^
+motion/testMoveStepsBrick.catrobat	pass	
 motion/testMoveXStepsFunction.catrobat	pass	
 motion/testPointInDirectionDegrees.catrobat	pass	
 motion/testSetMassAndBounceOfObject.catrobat	pass	

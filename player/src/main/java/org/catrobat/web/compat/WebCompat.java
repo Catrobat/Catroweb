@@ -281,6 +281,10 @@ public final class WebCompat {
 		return '\n' == c || '\r' == c || '\u0085' == c || '\u2028' == c || '\u2029' == c;
 	}
 
+	/** Rounds to float precision, which TeaVM leaves out (compat/Rewrite inserts the calls). */
+	@JSBody(params = "x", script = "return Math.fround(x);")
+	public static native float fround(float x);
+
 	/** Koin 2.1 was compiled against Kotlin 1.3's double-valued TimeMark; it only measures for debug logs. */
 	public static double elapsedNow(kotlin.time.TimeMark timeMark) {
 		return 0.0;
