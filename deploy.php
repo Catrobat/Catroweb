@@ -165,6 +165,7 @@ task('deploy:player', function () {
   run("mkdir -p {{release_path}}/public/player/{$version}"); // rsync creates only the last path segment
   upload($build.'/', "{{release_path}}/public/player/{$version}/", ['options' => ['--exclude=WEB-INF']]);
   // A meta refresh drops the #<project id>; the script keeps it.
+  run('cp {{release_path}}/public/favicon.ico {{release_path}}/public/player/favicon.ico');
   run("printf '%s' '<!doctype html><script>location.replace(\"{$version}/index.html\" + location.hash)</script><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");
 });
 
