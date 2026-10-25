@@ -13,7 +13,15 @@
     : ''
   const asset = (path) => `${share}/project-files/${id}/assets/${path}`
 
-  const state = { phase: 'player', xmlBytes: 0, done: 0, total: -1, bytes: 0, clicked: false }
+  const state = {
+    phase: 'player',
+    xmlBytes: 0,
+    done: 0,
+    total: -1,
+    bytes: 0,
+    clicked: false,
+    failed: false,
+  }
   let landscape = false
 
   const style = document.createElement('style')
@@ -51,6 +59,7 @@
 #start-screen .bar.unknown div { width: 30%; animation: catrobat-slide 1.2s ease-in-out infinite; }
 #start-screen .bar.hidden { visibility: hidden; }
 #start-screen a { color: #7fe9f2; }
+#start-screen p { margin: 0; }
 #fullscreen-button { position: fixed; z-index: 10; top: max(12px, env(safe-area-inset-top));
   right: max(12px, env(safe-area-inset-right)); width: 44px; height: 44px; padding: 10px; border: 0;
   border-radius: 12px; background: rgba(0,0,0,.5); color: #fff; cursor: pointer;
@@ -86,6 +95,9 @@
   const megabytes = (bytes) => `${(bytes / 1048576).toFixed(1)} MB`
 
   function render() {
+    if (state.failed) {
+      return
+    }
     let text
     let progress = null // null: unknown, so the bar moves on its own
     if (state.phase === 'files' && state.total > 0 && state.done < state.total) {
@@ -218,6 +230,7 @@
     },
 
     fail(message) {
+      state.failed = true
       overlay.removeAttribute('aria-busy')
       button.remove()
       bar.remove()
