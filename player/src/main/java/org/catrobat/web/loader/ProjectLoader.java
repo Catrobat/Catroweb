@@ -1,19 +1,27 @@
 package org.catrobat.web.loader;
 
 import com.badlogic.gdx.Gdx;
+import com.thoughtworks.xstream.converters.ConversionException;
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
+import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.Constants;
 import org.catrobat.catroid.common.LookData;
+import org.catrobat.catroid.common.ScreenModes;
 import org.catrobat.catroid.common.SoundInfo;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.Scene;
 import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.WhenBounceOffScript;
+import org.catrobat.catroid.content.backwardcompatibility.LegacyProjectWithoutScenes;
+import org.catrobat.catroid.content.backwardcompatibility.ProjectUntilLanguageVersion0999;
+import org.catrobat.catroid.content.backwardcompatibility.SceneUntilLanguageVersion0999;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.io.XstreamSerializer;
+import org.catrobat.web.compat.WebCompat;
+import org.catrobat.web.java.Dom;
 import org.teavm.interop.Async;
 import org.teavm.interop.AsyncCallback;
 import org.teavm.jso.JSBody;
@@ -67,37 +75,118 @@ public final class ProjectLoader {
 		return project;
 	}
 
+	/**
+	 * Projects without scenes (before Catrobat language 0.992) keep their looks and sounds in the project's images/
+	 * and sounds/, and share serves them there: only the app moves them into the scene's folder.
+	 * ponytail: one project per page, so the last one read decides; per project if a page ever plays several.
+	 */
+	private static boolean filesWithoutSceneFolder;
+
 	/** The project exactly as code.xml describes it, which LoaderCheck compares with the XML. */
 	static Project read(String xml) {
 		Element root = DOMParser.create().parseFromString(xml, "text/xml").getDocumentElement();
 		if (0 != root.getElementsByTagName("parsererror").getLength()) { // the browser's way of saying it is not XML
 			throw new IllegalArgumentException("code.xml is not valid XML");
 		}
-		// XstreamSerializer.loadProject reads older projects into legacy classes and converts them; not yet here.
-		if (0 == root.getElementsByTagName("scenes").getLength() || languageVersion(root) < 0.9991) {
-			throw new IllegalArgumentException("Projects before Catrobat language version 0.9991 cannot be played here yet");
+		double version = languageVersion(root);
+		if (version > Constants.CURRENT_CATROBAT_LANGUAGE_VERSION) { // as the app: made by a newer one
+			throw new IllegalArgumentException("This project needs a newer player (Catrobat language version " + version + ")");
 		}
-		if (languageVersion(root) > Constants.CURRENT_CATROBAT_LANGUAGE_VERSION) { // as the app: made by a newer one
-			throw new IllegalArgumentException("This project needs a newer player (Catrobat language version "
-					+ languageVersion(root) + ")");
+		if (version < 0.9 && version != 0.8) { // as ProjectManager.loadProject
+			throw new IllegalArgumentException("Projects before Catrobat language version 0.9 cannot be played");
 		}
-		// ponytail: the app retries a ConversionException after modifyXMLToSupportUnknownFields (java.io.File + DOM);
-		// not here yet, so such a project fails loudly instead.
-		Project project = (Project) XstreamSerializer.getInstance().getXstream().unmarshal(new BrowserDomReader(root));
-		for (Scene scene : project.getSceneList()) { // the rest of what loadProject does after reading the XML
-			scene.setProject(project);
+		// What XstreamSerializer.loadProject does: older projects are read into legacy classes and converted.
+		XstreamSerializer serializer = XstreamSerializer.getInstance();
+		boolean scenesEnabled = "true".equals(headerField(root, "scenesEnabled")); // as ProjectMetaDataParser
+		filesWithoutSceneFolder = !scenesEnabled;
+		Project project;
+		if (!scenesEnabled) {
+			project = withoutScenes((LegacyProjectWithoutScenes) unmarshalAs(serializer, root, LegacyProjectWithoutScenes.class,
+					Scene.class));
+		} else if (version < 0.9991) {
+			project = ((ProjectUntilLanguageVersion0999) unmarshalAs(serializer, root, ProjectUntilLanguageVersion0999.class,
+					SceneUntilLanguageVersion0999.class)).toProject();
+		} else {
+			project = (Project) unmarshal(serializer, root);
+			for (Scene scene : project.getSceneList()) {
+				scene.setProject(project);
+			}
 		}
 		project.checkForInvisibleSprites();
 		return project;
 	}
 
+	/** Read with XStream set up for those legacy classes, then back for the current ones. */
+	private static Object unmarshalAs(XstreamSerializer serializer, Element root, Class<?> projectClass, Class<?> sceneClass) {
+		serializer.prepareXstream(projectClass, sceneClass);
+		try {
+			return unmarshal(serializer, root);
+		} finally {
+			serializer.prepareXstream(Project.class, Scene.class);
+		}
+	}
+
 	/**
-	 * What ProjectManager.loadProject does to a project after reading it, from Catrobat language 0.9991 on: the
-	 * updates to the current language version, then the scripts' parents and bounce-off targets. Left out: the
-	 * permissions file, the background's localised name and the device settings, which concern the app.
+	 * BackwardCompatibleCatrobatLanguageXStream.getProjectFromXML: XML XStream cannot read (from before Catrobat
+	 * language 0.93) is upgraded by modifyXMLToSupportUnknownFields and read again.
+	 */
+	private static Object unmarshal(XstreamSerializer serializer, Element root) {
+		try {
+			return serializer.getXstream().unmarshal(new BrowserDomReader(root));
+		} catch (ConversionException e) {
+			Dom.edit(root.getOwnerDocument());
+			serializer.getXstream().modifyXMLToSupportUnknownFields(null); // edits that DOM instead of code.xml's file
+			return serializer.getXstream().unmarshal(new BrowserDomReader(root));
+		}
+	}
+
+	/**
+	 * LegacyProjectWithoutScenes.toProject without its file moves (images/ and sounds/ into the scene's folder), which
+	 * on the web is filesWithoutSceneFolder.
+	 */
+	private static Project withoutScenes(LegacyProjectWithoutScenes legacy) {
+		Project project = new Project();
+		project.setXmlHeader(legacy.getXmlHeader());
+		project.getSettings().addAll(legacy.getSettings());
+		project.getUserVariables().addAll(legacy.getProjectUserVariables());
+		project.getUserLists().addAll(legacy.getProjectUserLists());
+		for (Sprite sprite : legacy.getSpriteList()) {
+			sprite.getUserVariables().addAll(legacy.getSpriteUserVariables(sprite));
+			sprite.getUserLists().addAll(legacy.getSpriteUserLists(sprite));
+		}
+		Scene scene = new Scene(WebCompat.appContext().getString(R.string.default_scene_name), project);
+		scene.getSpriteList().addAll(legacy.getSpriteList());
+		project.addScene(scene);
+		return project;
+	}
+
+	/**
+	 * What ProjectManager.loadProject does to a project after reading it: the updates to the current language
+	 * version, then the scripts' parents and bounce-off targets. Left out: the permissions file, the background's
+	 * localised name and the device settings, which concern the app, and makeShallowCopiesDeepAgain (until 0.999),
+	 * which copies files several looks or sounds share so that editing one leaves the others alone; the stage never
+	 * writes them.
 	 */
 	private static void updateToCurrentVersion(Project project) {
 		double version = project.getCatrobatLanguageVersion();
+		// As in loadProject, the project is the current one during the updates: updateCollisionScriptsTo996 looks
+		// up the sprites in its scene.
+		ProjectManager.getInstance().setCurrentProject(project);
+		if (version <= 0.91) {
+			project.setScreenMode(ScreenModes.STRETCH);
+		}
+		if (version <= 0.992) {
+			ProjectManager.updateCollisionFormulasTo993(project);
+		}
+		if (version <= 0.993) {
+			ProjectManager.updateSetPenColorFormulasTo994(project);
+		}
+		if (version <= 0.994) {
+			ProjectManager.updateArduinoValuesTo995(project);
+		}
+		if (version <= 0.995) {
+			ProjectManager.updateCollisionScriptsTo996(project);
+		}
 		if (version <= 0.9993) {
 			ProjectManager.updateScriptsToTreeStructure(project);
 		}
@@ -124,8 +213,17 @@ public final class ProjectLoader {
 	}
 
 	private static double languageVersion(Element root) {
-		NodeList<? extends Element> version = root.getElementsByTagName("catrobatLanguageVersion");
-		return 0 == version.getLength() ? 0 : Double.parseDouble(version.item(0).getTextContent().trim());
+		String version = headerField(root, "catrobatLanguageVersion");
+		try {
+			return null == version ? 0 : Double.parseDouble(version);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Unknown Catrobat language version: " + version, e);
+		}
+	}
+
+	private static String headerField(Element root, String name) {
+		NodeList<? extends Element> field = root.getElementsByTagName(name);
+		return 0 == field.getLength() ? null : field.item(0).getTextContent().trim();
 	}
 
 	/**
@@ -267,11 +365,14 @@ public final class ProjectLoader {
 			+ "(p ? p.done : Promise.resolve()).then(function () { ready(); });")
 	private static native void whenPrefetched(Sounds.Callback ready);
 
-	/** The file under the project directory, from share: /project-files/{id}/assets/{scene}/{images|sounds}/{name}. */
+	/**
+	 * The file under the project directory, from share: /project-files/{id}/assets/{scene}/{images|sounds}/{name},
+	 * without {scene}/ for a project without scenes.
+	 */
 	private static String fileUrl(String projectId, File file) {
 		File folder = file.getParentFile();
-		return assetUrl(projectId, encode(folder.getParentFile().getName()) + "/" + folder.getName() + "/"
-				+ encode(file.getName()));
+		String scene = filesWithoutSceneFolder ? "" : encode(folder.getParentFile().getName()) + "/";
+		return assetUrl(projectId, scene + folder.getName() + "/" + encode(file.getName()));
 	}
 
 	private static byte[] fetchBytes(String projectId, File file) {

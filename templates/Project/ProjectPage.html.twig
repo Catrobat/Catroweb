@@ -43,8 +43,8 @@
 {% endblock %}
 
 {% block body %}
-  {# The browser player loads projects from this Catrobat language version on. #}
-  {% set player_min_language_version = 0.9991 %}
+  {# The browser player loads projects from this Catrobat language version on, as the app does. #}
+  {% set player_min_language_version = 0.9 %}
   {# Auto-hidden banner (server-rendered since it requires auth context) #}
   {% if auto_hidden and (my_project|default(false) or is_granted('ROLE_ADMIN')) %}
     <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">
@@ -417,7 +417,7 @@
        data-search-url="{{ url('search', {q: '__QUERY__'}) }}"
        data-is-webview="{% if isWebview() %}true{% else %}false{% endif %}"
        data-trans-play="{{ 'project.playInBrowser'|trans({}, 'catroweb') }}"
-       {# The browser player (player/) loads Catrobat language 0.9991 and newer, and only what a logged-out visitor may
+       {# The browser player (player/) loads player_min_language_version and newer, and only what a logged-out visitor may
           see; inside the app, the app plays it. #}
        data-player-url="{% if player_origin and not isWebview() and project.languageVersion >= player_min_language_version and project.visible and not project.private and not project.autoHidden %}{{ player_origin }}/#{{ project_id }}{% endif %}"
   ></div>

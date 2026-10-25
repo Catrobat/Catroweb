@@ -47,6 +47,12 @@ Other pieces:
   reader over the browser's `DOMParser`. XStream builds objects by reflection, so `compiler/CatroidReflectionPolicy`
   grants it Catroid's model, and `compiler/ReflectionLinks` (a TeaVM plugin) works around TeaVM 0.15 leaving the
   names, constructors and fields of most of those classes out.
+- Older projects: as `XstreamSerializer.loadProject`, `ProjectLoader` reads projects without scenes (before Catrobat
+  language 0.992) and those before 0.9991 into Catroid's legacy classes and converts them, then applies
+  `ProjectManager`'s version updates. `Rewrite` makes the private `prepareXstream` and
+  `modifyXMLToSupportUnknownFields` callable; the latter upgrades the XML of projects before 0.93 and, in that class
+  only, edits the browser's DOM through `java/Dom` instead of `org.w3c.dom`. Projects without scenes keep their files
+  in `images/` and `sounds/` without a scene folder, where share serves them.
 - Looks: before the stage starts, `ProjectLoader.loadFiles` fetches each look from share into gdx-teavm's local file
   storage, switched to memory only (Catroid's `Files.absolute` calls are redirected there), as `setFileReferences`
   does on Android.
@@ -74,8 +80,8 @@ the files it serves via `X-Accel-Redirect`). Only projects a logged-out visitor 
 
 ## Status
 
-`index.html#<project id>` plays share projects from Catrobat language 0.9991 on (older ones need Catroid's legacy
-conversion) with their looks and sounds, after a click on the start screen (browsers only play sound after one).
+`index.html#<project id>` plays share projects from Catrobat language 0.9 on, as the app does, with their looks and
+sounds, after a click on the start screen (browsers only play sound after one).
 Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
 unavailable, as on a device without those sensors. `conformance.tsv` lists which of Catroid's test projects pass on
 the stage. Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the

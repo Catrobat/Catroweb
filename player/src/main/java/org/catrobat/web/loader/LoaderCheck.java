@@ -1,5 +1,8 @@
 package org.catrobat.web.loader;
 
+import org.teavm.interop.Async;
+import org.teavm.interop.AsyncCallback;
+import org.teavm.jso.JSBody;
 import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.html.HTMLElement;
 
@@ -14,6 +17,7 @@ public final class LoaderCheck {
 	}
 
 	public static void run() {
+		loadStrings(); // projects without scenes name theirs from strings.json: not a second synchronous request
 		StringBuilder lines = new StringBuilder();
 		for (String project : ProjectLoader.fetch("/project-files/check.txt").split("\u0000")) {
 			int newline = project.indexOf('\n');
@@ -21,6 +25,7 @@ public final class LoaderCheck {
 			String result;
 			try {
 				result = ProjectLoader.summary(ProjectLoader.read(project.substring(newline + 1)));
+				ProjectLoader.parse(project.substring(newline + 1)); // and the updates to the current version run
 			} catch (Throwable e) { // one broken project must not hide the others
 				result = ("error: " + e).replaceAll("\\s*\\n\\s*", " | "); // one line per project
 			}
@@ -31,4 +36,16 @@ public final class LoaderCheck {
 		output.setTextContent(lines.toString());
 		Window.current().getDocument().getBody().appendChild(output);
 	}
+
+	/** Fills window.catrobatStrings, which WebResources otherwise loads synchronously on the first string. */
+	@Async
+	private static native Void loadStrings();
+
+	private static void loadStrings(AsyncCallback<Void> done) {
+		fetchStrings(() -> done.complete(null));
+	}
+
+	@JSBody(params = "ready", script = "fetch('strings.json').then(function (r) { return r.json(); })"
+			+ ".then(function (s) { window.catrobatStrings = s; }).catch(function () {}).then(function () { ready(); });")
+	private static native void fetchStrings(Sounds.Callback ready);
 }

@@ -79,6 +79,22 @@ public final class Rewrite {
 		return Map.copyOf(remap);
 	}
 
+	/**
+	 * The XML upgrade of very old projects (modifyXMLToSupportUnknownFields) edits an org.w3c.dom document, which the
+	 * browser has only as its own DOM: in that class org.w3c.dom becomes web/java/Dom, and android.util.Pair a web one.
+	 */
+	private static final String XML_UPGRADE = "org/catrobat/catroid/io/BackwardCompatibleCatrobatLanguageXStream";
+	static final Map<String, String> DOM = dom("Node", "Element", "Attr", "Document", "NodeList", "NamedNodeMap");
+
+	private static Map<String, String> dom(String... names) {
+		Map<String, String> remap = new java.util.HashMap<>(REMAP);
+		for (String name : names) {
+			remap.put("org/w3c/dom/" + name, "org/catrobat/web/java/Dom$" + name);
+		}
+		remap.put("android/util/Pair", "org/catrobat/web/android/Pair"); // modifyCameraBricks reads its fields
+		return Map.copyOf(remap);
+	}
+
 	private static boolean drawsWithAndroidGraphics(String className) {
 		for (String actor : new String[] {"org/catrobat/catroid/stage/ShowTextActor", "org/catrobat/catroid/stage/ShowBubbleActor",
 				"org/catrobat/catroid/utils/ShowTextUtils"}) {
@@ -143,6 +159,7 @@ public final class Rewrite {
 					"noSpeechRecognition"),
 			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsReadObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
 			Map.entry("com/thoughtworks/xstream/core/util/SerializationMembers.supportsWriteObject(Ljava/lang/Class;Z)Z", "noSerializationHook"),
+			Map.entry("org/catrobat/catroid/formulaeditor/SensorHandler.isDeviceDefaultRotationLandscape()Z", "landscapeDevice"),
 			Map.entry("com/thoughtworks/xstream/core/JVM.isAWTAvailable()Z", "unavailable"),
 			Map.entry("com/thoughtworks/xstream/core/JVM.isSwingAvailable()Z", "unavailable"),
 			Map.entry("com/thoughtworks/xstream/core/JVM.isSQLAvailable()Z", "unavailable"),
@@ -150,8 +167,14 @@ public final class Rewrite {
 			Map.entry("com/thoughtworks/xstream/XStream.aliasType(Ljava/lang/String;Ljava/lang/Class;)V", "aliasType"),
 			Map.entry("com/thoughtworks/xstream/XStream.allowTypeHierarchy(Ljava/lang/Class;)V", "allowTypeHierarchy"),
 			Map.entry("com/thoughtworks/xstream/XStream.allowTypes([Ljava/lang/Class;)V", "allowTypes"),
+			Map.entry(XML_UPGRADE + ".getDocument(Ljava/io/File;)Lorg/catrobat/web/java/Dom$Document;", "xmlToUpgrade"),
+			Map.entry(XML_UPGRADE + ".saveDocument(Lorg/catrobat/web/java/Dom$Document;Ljava/io/File;)V", "upgradedXml"),
 			Map.entry("com/thoughtworks/xstream/XStream.registerConverterDynamically(Ljava/lang/String;I[Ljava/lang/Class;[Ljava/lang/Object;)V",
 					"registerConverterDynamically"));
+
+	/** Private Catroid methods the player calls itself: ProjectLoader reads old projects as loadProject does. */
+	static final Set<String> OPEN = Set.of("org/catrobat/catroid/io/XstreamSerializer.prepareXstream(Ljava/lang/Class;Ljava/lang/Class;)V",
+			XML_UPGRADE + ".modifyXMLToSupportUnknownFields(Ljava/io/File;)V");
 
 	static PrintStream report;
 
@@ -219,9 +242,11 @@ public final class Rewrite {
 
 	static byte[] rewrite(byte[] bytes, Set<String> missing, Set<String> noArgConstructors, int[] stats) {
 		ClassNode node = new ClassNode();
-		boolean graphics = drawsWithAndroidGraphics(new ClassReader(bytes).getClassName());
-		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, graphics ? GRAPHICS : REMAP)), 0);
-		boolean changed = graphics | mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
+		String owner = new ClassReader(bytes).getClassName();
+		boolean graphics = drawsWithAndroidGraphics(owner);
+		boolean dom = XML_UPGRADE.equals(owner);
+		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, graphics ? GRAPHICS : dom ? DOM : REMAP)), 0);
+		boolean changed = graphics | dom | mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
 		if (node.interfaces.removeIf(missing::contains)) {
 			changed = true; // the class works without claiming a type the browser lacks
 		}
@@ -230,6 +255,10 @@ public final class Rewrite {
 			changed = true;
 		}
 		for (MethodNode method : node.methods) {
+			if (OPEN.contains(node.name + "." + method.name + method.desc)) {
+				method.access = method.access & ~Opcodes.ACC_PRIVATE | Opcodes.ACC_PUBLIC;
+				changed = true;
+			}
 			String reason = null; // why the method is stubbed: the first missing thing it uses
 			if (0 != (method.access & Opcodes.ACC_NATIVE) && missing.contains(node.name + "." + method.name + method.desc)) {
 				method.access &= ~Opcodes.ACC_NATIVE; // JNI code has no browser counterpart
