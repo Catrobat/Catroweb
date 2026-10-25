@@ -23,6 +23,17 @@
   font-size: 1.25rem;
 }
 
+.btn-play {
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.btn-play:hover,
+.btn-play:focus-visible {
+  background-color: var(--primary-bg);
+  border-color: var(--primary-bg);
+  color: var(--on-primary);
+}
+
 .btn-download-complete {
   background-color: #2e7d32;
   border-color: #2e7d32;

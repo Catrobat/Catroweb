@@ -279,6 +279,7 @@ project:
   downloadStartText: Download has started...
   downloading: Downloading...
   openInApp: Open in Pocket Code
+  playInBrowser: Play in browser
   downloaded: Downloaded
   showTranslation: Show translation
   hideTranslation: Hide translation
