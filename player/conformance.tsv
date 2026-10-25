@@ -73,7 +73,7 @@ clone/testDeleteCloneInBroadcastAndWait.catrobat	pass
 clone/testDeleteCloneInParentSpriteDoesNothing.catrobat	pass	
 clone/testDeleteCloneScriptStopped.catrobat	pass	
 clone/testDeleteLookInOriginalAndClone.catrobat	pass	
-clone/testObjectTouchesItsClone.catrobat	fail	on sprite "originalTouchingClone" Brick at position 11 in "StartScript" AssertEqualsError expected: <true> actual: <0.0> deviation: ^
+clone/testObjectTouchesItsClone.catrobat	pass	
 clone/testTouchesObjectActorClone.catrobat	pass	
 clone/testWhenStartAsCloneMultiple.catrobat	pass	
 clone/testWhenStartAsCloneOnlyCalledByClone.catrobat	pass	
@@ -164,7 +164,7 @@ physics/testGravityAndGliding.catrobat	pass
 physics/testRotationStyles.catrobat	pass	
 physics/testSetGravityForAllActorsAndObjects.catrobat	pass	
 physics/testSynchronousGlideToBricks.catrobat	pass	
-physics/testTouchesActorOrObjectWithRotation.catrobat	fail	on sprite "Cone" Brick at position 5 in "WhenTouchDownScript" AssertEqualsError expected: <70> actual: <75.0> deviation: -^
+physics/testTouchesActorOrObjectWithRotation.catrobat	pass	
 physics/testVelocityWhileGliding.catrobat	pass	
 physics/testXYVelocity.catrobat	pass	
 physics/testXYVelocityWithGravity.catrobat	pass	
@@ -188,9 +188,9 @@ script/whenTappedScript/testTapStagePosXNegY.catrobat	pass
 sensor/testStageWidthStageHeightSensorPortrait1080x2050.catrobat	pass	
 sensor/testStageWidthStageHeightSensorsMaximized350x3000.catrobat	pass	
 sensor/testStageWidthStageHeightSensorsSquare1080x1080.catrobat	pass	
-touchesActorOrObject/testTouchesActorOrObject.catrobat	fail	on sprite "Object1" Brick at position 3 in "StartScript" AssertEqualsError expected: <false> actual: <1.0> deviation: ^
-touchesActorOrObject/testTouchesActorOrObjectBackground.catrobat	fail	on sprite "Object" Brick at position 3 in "StartScript" AssertEqualsError expected: <false> actual: <1.0> deviation: ^
-touchesActorOrObject/testTouchesActorOrObjectCloneSimilarName.catrobat	fail	on sprite "objectTouchesClone" Brick at position 5 in "StartScript" AssertEqualsError expected: <false> actual: <1.0> deviation: ^
+touchesActorOrObject/testTouchesActorOrObject.catrobat	pass	
+touchesActorOrObject/testTouchesActorOrObjectBackground.catrobat	pass	
+touchesActorOrObject/testTouchesActorOrObjectCloneSimilarName.catrobat	pass	
 touchesActorOrObject/testTouchesActorOrObjectCloneSpecialCharacters.catrobat	pass	
 touchesActorOrObject/testTouchesActorOrObjectInitialValue.catrobat	pass	
 touchesActorOrObject/testTouchesActorOrObjectInitialValueIfLogicBeginBrick.catrobat	pass	
