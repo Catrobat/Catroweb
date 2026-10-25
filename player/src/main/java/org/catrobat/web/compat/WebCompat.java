@@ -401,9 +401,50 @@ public final class WebCompat {
 		return null;
 	}
 
+	/** The app's speech is a sound file; here it is the browser's, so it stops and pauses with the sounds. */
+	public static void stopAllSounds(org.catrobat.catroid.io.SoundManager sounds) {
+		sounds.stopAllSounds();
+		org.catrobat.web.catroid.WebSpeakAction.stopAll();
+	}
+
+	public static void clearSounds(org.catrobat.catroid.io.SoundManager sounds) {
+		sounds.clear();
+		org.catrobat.web.catroid.WebSpeakAction.stopAll();
+	}
+
+	public static void pauseSounds(org.catrobat.catroid.io.SoundManager sounds) {
+		sounds.pause();
+		org.catrobat.web.catroid.WebSpeakAction.pauseAll();
+	}
+
+	public static void resumeSounds(org.catrobat.catroid.io.SoundManager sounds) {
+		sounds.resume();
+		org.catrobat.web.catroid.WebSpeakAction.resumeAll();
+	}
+
+	/** The speak brick, with the browser's speech synthesis (WebSpeakAction). */
+	public static com.badlogic.gdx.scenes.scene2d.Action speakAction(org.catrobat.catroid.content.ActionFactory factory,
+			org.catrobat.catroid.content.Sprite sprite, com.badlogic.gdx.scenes.scene2d.actions.SequenceAction sequence,
+			org.catrobat.catroid.formulaeditor.Formula text) {
+		return new org.catrobat.web.catroid.WebSpeakAction(scope(sprite, sequence), text, false);
+	}
+
+	public static com.badlogic.gdx.scenes.scene2d.Action speakAndWaitAction(org.catrobat.catroid.content.ActionFactory factory,
+			org.catrobat.catroid.content.Sprite sprite, com.badlogic.gdx.scenes.scene2d.actions.SequenceAction sequence,
+			org.catrobat.catroid.formulaeditor.Formula text) {
+		return new org.catrobat.web.catroid.WebSpeakAction(scope(sprite, sequence), text, true);
+	}
+
+	private static org.catrobat.catroid.content.Scope scope(org.catrobat.catroid.content.Sprite sprite,
+			com.badlogic.gdx.scenes.scene2d.actions.SequenceAction sequence) {
+		return new org.catrobat.catroid.content.Scope(org.catrobat.catroid.ProjectManager.getInstance().getCurrentProject(),
+				sprite, sequence);
+	}
+
 	/** The finish-stage brick: on Android the stage activity closes; here the stage stops. */
 	public static void finishStage() {
 		StageActivity.stageListener.setPaused(true);
+		org.catrobat.web.catroid.WebSpeakAction.stopAll();
 	}
 
 	/**
