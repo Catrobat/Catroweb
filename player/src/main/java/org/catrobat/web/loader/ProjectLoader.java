@@ -214,7 +214,11 @@ public final class ProjectLoader {
 
 	private static double languageVersion(Element root) {
 		String version = headerField(root, "catrobatLanguageVersion");
-		return null == version ? 0 : Double.parseDouble(version);
+		try {
+			return null == version ? 0 : Double.parseDouble(version);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Unknown Catrobat language version: " + version, e);
+		}
 	}
 
 	private static String headerField(Element root, String name) {
