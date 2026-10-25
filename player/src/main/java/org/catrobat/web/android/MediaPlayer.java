@@ -71,7 +71,7 @@ public class MediaPlayer {
 	}
 
 	public void setVolume(float left, float right) {
-		volume = (left + right) / 2; // one gain for both channels; Catroid passes the same value for both anyway
+		volume = left; // Catroid always passes the same value for both
 		Sounds.setVolume(source, volume);
 	}
 

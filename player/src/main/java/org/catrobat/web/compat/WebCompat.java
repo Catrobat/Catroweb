@@ -167,12 +167,9 @@ public final class WebCompat {
 		throw new UnsupportedOperationException("Not available on the web: " + type.getName());
 	}
 
-	/**
-	 * Scene changes stop speech recognition, which the player does not offer: the factory Koin would have provided is
-	 * missing (koinGet), so there is nothing to stop. A factory that does exist answers for itself.
-	 */
+	/** Scene changes stop speech recognition, which the player does not offer. */
 	public static SpeechRecognitionHolderInterface noSpeechRecognition(SpeechRecognitionHolderFactory factory) {
-		return null == factory ? NO_SPEECH : factory.getInstance();
+		return NO_SPEECH;
 	}
 
 	private static final SpeechRecognitionHolderInterface NO_SPEECH = new SpeechRecognitionHolderInterface() {
@@ -256,6 +253,32 @@ public final class WebCompat {
 			copy.put(entry.getKey(), value instanceof java.util.List<?> list ? new java.util.ArrayList<>(list) : value);
 		}
 		return copy;
+	}
+
+	/**
+	 * The CSV brick's separator: what Catroid finds with ^(?:".*?"|[^,;]*?)([,;]), without the regex, whose lazy
+	 * quantifiers overflow TeaVM's recursive matcher on a long CSV. A quoted first field ends at the first quote
+	 * followed by a separator on its line; otherwise the first separator counts. Comma when there is none.
+	 */
+	public static char csvSeparator(org.catrobat.catroid.content.actions.StoreCSVIntoUserListAction action, String csv) {
+		if (csv.startsWith("\"")) {
+			for (int i = 1; i + 1 < csv.length() && !isLineTerminator(csv.charAt(i)); i++) {
+				if ('"' == csv.charAt(i) && (',' == csv.charAt(i + 1) || ';' == csv.charAt(i + 1))) {
+					return csv.charAt(i + 1);
+				}
+			}
+		}
+		for (int i = 0; i < csv.length(); i++) {
+			if (',' == csv.charAt(i) || ';' == csv.charAt(i)) {
+				return csv.charAt(i);
+			}
+		}
+		return ',';
+	}
+
+	/** What the regex dot does not match. */
+	private static boolean isLineTerminator(char c) {
+		return '\n' == c || '\r' == c || '\u0085' == c || '\u2028' == c || '\u2029' == c;
 	}
 
 	/** Koin 2.1 was compiled against Kotlin 1.3's double-valued TimeMark; it only measures for debug logs. */

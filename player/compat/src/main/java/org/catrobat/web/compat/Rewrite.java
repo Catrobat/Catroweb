@@ -88,6 +88,8 @@ public final class Rewrite {
 			Map.entry("org/catrobat/catroid/utils/Utils.md5Checksum(Ljava/io/File;)Ljava/lang/String;", "md5Checksum"),
 			Map.entry("org/catrobat/catroid/utils/Utils.md5Checksum(Ljava/lang/String;)Ljava/lang/String;", "md5Checksum"),
 			Map.entry("org/koin/java/KoinJavaComponent.get(Ljava/lang/Class;)Ljava/lang/Object;", "koinGet"),
+			Map.entry("org/catrobat/catroid/content/actions/StoreCSVIntoUserListAction.extractOrReplaceSeperator(Ljava/lang/String;)C",
+					"csvSeparator"),
 			Map.entry("org/catrobat/catroid/io/DeviceUserDataAccessor.readMapFromJson()Ljava/util/Map;", "readDeviceData"),
 			Map.entry("org/catrobat/catroid/io/DeviceUserDataAccessor.writeMapToJson(Ljava/util/Map;)V", "writeDeviceData"),
 			Map.entry("kotlinx/coroutines/Dispatchers.getIO()Lkotlinx/coroutines/CoroutineDispatcher;", "inPlaceDispatcher"),
