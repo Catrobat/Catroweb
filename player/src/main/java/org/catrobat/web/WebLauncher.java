@@ -122,12 +122,12 @@ public class WebLauncher {
 	}
 
 	/** gdx-teavm's page has no viewport meta, so phones laid it out 980 px wide and zoomed out. */
-	@JSBody(script = "var meta = document.createElement('meta'); meta.name = 'viewport';"
+	@JSBody(script = "var meta = document.createElement('meta'); meta.name = 'viewport'; "
 			+ "meta.content = 'width=device-width, initial-scale=1, viewport-fit=cover'; document.head.append(meta);")
 	private static native void fitToPhone();
 
 	/** As large as the window allows at the project's aspect ratio; gdx-teavm maps touches through the CSS scaling. */
-	@JSBody(params = {"width", "height"}, script = "var style = document.createElement('style');"
+	@JSBody(params = {"width", "height"}, script = "var style = document.createElement('style'); "
 			+ "style.textContent = 'body { height: 100vh; height: 100dvh; } #canvas { display: block; height: auto;"
 			+ " width: min(100vw, 100vh * ' + width + ' / ' + height + '); width: min(100vw, 100dvh * ' + width + ' / '"
 			+ " + height + '); touch-action: none; }'; document.head.append(style);")
