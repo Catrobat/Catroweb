@@ -61,6 +61,11 @@ Other pieces:
   `MediaMetadataRetriever` are remapped to small web versions in `android/`. `StartScreen` waits for the click browsers
   require before they play sound; `?autostart` skips it. The click also goes full screen and, on Android, locks the
   screen to the project's orientation (iPhones have no full screen for pages).
+- Open URL and save/share plot (and save/share laser, which subclass them): what the app hands to Android goes to the
+  browser (`catroid/BrowserHandoff`). The link opens in a new tab (http and https only, `noopener,noreferrer`); the
+  plot is Catroid's own SVG (`SVGPlotGenerator`, caught by a redirect of `writeToSVGFile`) offered as a download.
+  Browsers allow both only right after a click, so otherwise a prompt at the bottom of the stage asks first; the player
+  page never navigates. The open URL brick skips the app's web request and trust dialog.
 - Screen: the canvas has the project's aspect ratio at the window's size in device pixels (at most 2 per CSS pixel,
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to

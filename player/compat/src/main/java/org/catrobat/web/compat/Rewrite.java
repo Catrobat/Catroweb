@@ -105,6 +105,8 @@ public final class Rewrite {
 		return false;
 	}
 
+	private static final String PLOT = "org/catrobat/catroid/content/actions/";
+
 	/** owner.name+desc of instance or static JVM methods TeaVM lacks -> WebCompat method (receiver first). */
 	static final Map<String, String> REDIRECT = Map.ofEntries(
 			Map.entry("java/lang/Thread.setContextClassLoader(Ljava/lang/ClassLoader;)V", "setContextClassLoader"),
@@ -133,6 +135,12 @@ public final class Rewrite {
 			Map.entry("org/catrobat/catroid/content/ActionFactory.createSpeakAndWaitAction(Lorg/catrobat/catroid/content/Sprite;"
 					+ "Lcom/badlogic/gdx/scenes/scene2d/actions/SequenceAction;Lorg/catrobat/catroid/formulaeditor/Formula;)"
 					+ "Lcom/badlogic/gdx/scenes/scene2d/Action;", "speakAndWaitAction"),
+			Map.entry("org/catrobat/catroid/content/ActionFactory.createOpenUrlAction(Lorg/catrobat/catroid/content/Sprite;"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/actions/SequenceAction;Lorg/catrobat/catroid/formulaeditor/Formula;)"
+					+ "Lcom/badlogic/gdx/scenes/scene2d/Action;", "openUrlAction"),
+			Map.entry(PLOT + "SavePlotAction.writePlotToFile()V", "savePlot"),
+			Map.entry(PLOT + "SharePlotAction.writeUsingSystemFilePicker()V", "sharePlot"),
+			Map.entry("org/catrobat/catroid/plot/SVGPlotGenerator.writeToSVGFile(Ljava/io/File;Ljava/lang/String;)V", "svg"),
 			Map.entry("org/catrobat/catroid/stage/StageActivity.getActiveCameraManager()Lorg/catrobat/catroid/camera/CameraManager;",
 					"noCameraManager"),
 			Map.entry("org/catrobat/catroid/stage/StageActivity.getActiveVibrationManager()Lorg/catrobat/catroid/utils/VibrationManager;",
@@ -173,9 +181,14 @@ public final class Rewrite {
 			Map.entry("com/thoughtworks/xstream/XStream.registerConverterDynamically(Ljava/lang/String;I[Ljava/lang/Class;[Ljava/lang/Object;)V",
 					"registerConverterDynamically"));
 
-	/** Private Catroid methods the player calls itself: ProjectLoader reads old projects as loadProject does. */
+	/**
+	 * Private Catroid methods the player calls itself: ProjectLoader reads old projects as loadProject does, and
+	 * WebCompat exports plots with the plot actions' file names and SVG.
+	 */
 	static final Set<String> OPEN = Set.of("org/catrobat/catroid/io/XstreamSerializer.prepareXstream(Ljava/lang/Class;Ljava/lang/Class;)V",
-			XML_UPGRADE + ".modifyXMLToSupportUnknownFields(Ljava/io/File;)V");
+			XML_UPGRADE + ".modifyXMLToSupportUnknownFields(Ljava/io/File;)V", PLOT + "SavePlotAction.getFileName()Ljava/lang/String;",
+			PLOT + "SharePlotAction.getFileName()Ljava/lang/String;",
+			"org/catrobat/catroid/plot/SVGPlotGenerator.generateSVGContent(Ljava/lang/String;)Ljava/lang/String;");
 
 	static PrintStream report;
 
