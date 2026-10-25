@@ -14,10 +14,10 @@ public final class StartScreen {
 	}
 
 	@Async
-	public static native Void waitForStart(String title);
+	public static native Void waitForStart(String title, boolean landscape);
 
-	private static void waitForStart(String title, AsyncCallback<Void> started) {
-		show(title, () -> {
+	private static void waitForStart(String title, boolean landscape, AsyncCallback<Void> started) {
+		show(title, landscape, () -> {
 			Sounds.createContext(); // still inside the click, so the browser lets it play
 			started.complete(null);
 		});
@@ -27,7 +27,11 @@ public final class StartScreen {
 	@JSBody(script = "var overlay = document.getElementById('start-screen'); if (overlay) overlay.remove();")
 	public static native void close();
 
-	@JSBody(params = {"title", "started"}, script = "var overlay = document.createElement('div'); overlay.id = 'start-screen';"
+	/**
+	 * The click also goes full screen and, where the browser allows it (Android), turns the screen to the project's
+	 * orientation. iPhones have no full screen for pages; there the game stays in the browser window.
+	 */
+	@JSBody(params = {"title", "landscape", "started"}, script = "var overlay = document.createElement('div'); overlay.id = 'start-screen';"
 			+ "overlay.style.cssText = 'position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;"
 			+ "justify-content:center;gap:24px;background:rgba(0,0,0,.75);color:#fff;font:600 20px system-ui,sans-serif';"
 			+ "var name = document.createElement('div'); name.textContent = title;"
@@ -38,7 +42,11 @@ public final class StartScreen {
 			+ "button.onclick = function () {"
 			+ "  var loading = document.createElement('div'); loading.textContent = 'Loading\u2026';"
 			+ "  loading.setAttribute('role', 'status'); button.replaceWith(loading); started();"
+			+ "  var root = document.documentElement;"
+			+ "  if (root.requestFullscreen) root.requestFullscreen({navigationUI: 'hide'}).then(function () {"
+			+ "    if (screen.orientation && screen.orientation.lock) return screen.orientation.lock(landscape ? 'landscape' : 'portrait');"
+			+ "  }).catch(function () {});"
 			+ "};"
 			+ "overlay.append(name, button); document.body.append(overlay); button.focus();")
-	private static native void show(String title, Sounds.Callback started);
+	private static native void show(String title, boolean landscape, Sounds.Callback started);
 }
