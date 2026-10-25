@@ -183,11 +183,11 @@ public final class Rewrite {
 
 	/**
 	 * Private Catroid methods the player calls itself: ProjectLoader reads old projects as loadProject does, and
-	 * WebCompat exports plots with the plot actions' file names and SVG.
+	 * BrowserHandoff and WebCompat read the open URL brick's URL and export plots with Catroid's file names and SVG.
 	 */
 	static final Set<String> OPEN = Set.of("org/catrobat/catroid/io/XstreamSerializer.prepareXstream(Ljava/lang/Class;Ljava/lang/Class;)V",
 			XML_UPGRADE + ".modifyXMLToSupportUnknownFields(Ljava/io/File;)V", PLOT + "SavePlotAction.getFileName()Ljava/lang/String;",
-			PLOT + "SharePlotAction.getFileName()Ljava/lang/String;",
+			PLOT + "SharePlotAction.getFileName()Ljava/lang/String;", PLOT + "WebAction.interpretUrl()Z",
 			"org/catrobat/catroid/plot/SVGPlotGenerator.generateSVGContent(Ljava/lang/String;)Ljava/lang/String;");
 
 	static PrintStream report;

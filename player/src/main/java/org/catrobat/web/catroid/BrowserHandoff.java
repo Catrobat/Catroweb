@@ -2,9 +2,6 @@ package org.catrobat.web.catroid;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-import org.catrobat.catroid.content.Scope;
-import org.catrobat.catroid.formulaeditor.Formula;
-import org.catrobat.catroid.formulaeditor.InterpretationException;
 import org.teavm.jso.JSBody;
 
 /**
@@ -16,36 +13,24 @@ public final class BrowserHandoff {
 	private BrowserHandoff() {
 	}
 
-	/** The open URL brick without its web request and trust dialog (OpenUrlAction): the browser opens the link. */
+	/**
+	 * The open URL brick without its web request and trust dialog: Catroid's OpenUrlAction only reads the URL
+	 * (WebAction.interpretUrl: https:// unless it says http(s), its first line), and the browser opens it.
+	 */
 	public static final class OpenUrl extends Action {
-		private final Scope scope;
-		private final Formula formula;
+		private final org.catrobat.catroid.content.actions.OpenUrlAction action;
 
-		public OpenUrl(Scope scope, Formula formula) {
-			this.scope = scope;
-			this.formula = formula;
+		public OpenUrl(org.catrobat.catroid.content.actions.OpenUrlAction action) {
+			this.action = action;
 		}
 
 		@Override
 		public boolean act(float delta) {
-			String url;
-			try {
-				url = null == formula ? null : formula.interpretString(scope);
-			} catch (InterpretationException e) {
-				return true; // as WebAction.interpretUrl
-			}
-			if (null != url) {
-				open(url);
+			if (action.interpretUrl()) {
+				hand(action.getUrl(), null, null);
 			}
 			return true;
 		}
-	}
-
-	/** WebAction.interpretUrl: https:// unless the text says http(s), and only its first line. */
-	static void open(String text) {
-		String url = text.startsWith("http://") || text.startsWith("https://") ? text : "https://" + text;
-		int newline = url.indexOf('\n');
-		hand(newline < 0 ? url : url.substring(0, newline), null, null);
 	}
 
 	/** Offers an SVG the project made (save or share plot) as a download. */
