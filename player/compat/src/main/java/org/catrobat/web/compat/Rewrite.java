@@ -64,6 +64,31 @@ public final class Rewrite {
 			Map.entry("com/badlogic/gdx/backends/android/AndroidGraphics", "org/catrobat/web/compat/WebAndroidGraphics"),
 			Map.entry("com/badlogic/gdx/backends/android/AndroidApplicationConfiguration", "org/catrobat/web/compat/WebAndroidApplicationConfiguration"));
 
+	/**
+	 * Catroid's text and bubble actors draw with android.graphics; only there those classes become canvas-backed
+	 * web versions. Everywhere else the mockable ones stay (their defaults are what the rest of the stage relies on).
+	 */
+	static final Map<String, String> GRAPHICS = graphics("Bitmap", "Bitmap$Config", "Bitmap$CompressFormat", "Canvas", "Paint",
+			"Paint$Style", "Paint$Align", "Path", "Path$FillType", "Rect", "RectF");
+
+	private static Map<String, String> graphics(String... names) {
+		Map<String, String> remap = new java.util.HashMap<>(REMAP);
+		for (String name : names) {
+			remap.put("android/graphics/" + name, "org/catrobat/web/android/graphics/" + name);
+		}
+		return Map.copyOf(remap);
+	}
+
+	private static boolean drawsWithAndroidGraphics(String className) {
+		for (String actor : new String[] {"org/catrobat/catroid/stage/ShowTextActor", "org/catrobat/catroid/stage/ShowBubbleActor",
+				"org/catrobat/catroid/utils/ShowTextUtils"}) {
+			if (className.equals(actor) || className.startsWith(actor + "$")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/** owner.name+desc of instance or static JVM methods TeaVM lacks -> WebCompat method (receiver first). */
 	static final Map<String, String> REDIRECT = Map.ofEntries(
 			Map.entry("java/lang/Thread.setContextClassLoader(Ljava/lang/ClassLoader;)V", "setContextClassLoader"),
@@ -85,6 +110,10 @@ public final class Rewrite {
 			Map.entry("org/catrobat/catroid/stage/StageActivity.finishTestWithResult(Lorg/catrobat/catroid/stage/TestResult;)V",
 					"finishTestWithResult"),
 			Map.entry("org/catrobat/catroid/sensing/CollisionInformation.loadCollisionPolygon()V", "loadCollisionPolygon"),
+			Map.entry("org/catrobat/catroid/common/LookData.getPixmap()Lcom/badlogic/gdx/graphics/Pixmap;", "lookPixmap"),
+			Map.entry("android/opengl/GLUtils.texImage2D(IILorg/catrobat/web/android/graphics/Bitmap;I)V", "texImage2D"),
+			Map.entry("android/opengl/GLES20.glBindTexture(II)V", "glBindTexture"),
+			Map.entry("org/catrobat/catroid/sensing/CollisionInformation.calculateBubblePositions()V", "calculateBubblePositions"),
 			Map.entry("org/catrobat/catroid/utils/ImageEditing.readMetaDataStringFromPNG(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
 					"readPngText"),
 			Map.entry("org/catrobat/catroid/utils/Utils.md5Checksum(Ljava/io/File;)Ljava/lang/String;", "md5Checksum"),
@@ -176,8 +205,9 @@ public final class Rewrite {
 
 	static byte[] rewrite(byte[] bytes, Set<String> missing, Set<String> noArgConstructors, int[] stats) {
 		ClassNode node = new ClassNode();
-		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, REMAP)), 0);
-		boolean changed = mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
+		boolean graphics = drawsWithAndroidGraphics(new ClassReader(bytes).getClassName());
+		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, graphics ? GRAPHICS : REMAP)), 0);
+		boolean changed = graphics | mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
 		if (node.interfaces.removeIf(missing::contains)) {
 			changed = true; // the class works without claiming a type the browser lacks
 		}

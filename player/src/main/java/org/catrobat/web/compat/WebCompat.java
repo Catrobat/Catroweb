@@ -285,6 +285,70 @@ public final class WebCompat {
 	@JSBody(params = "x", script = "return Math.fround(x);")
 	public static native float fround(float x);
 
+	/**
+	 * LookData.getPixmap gives a look whose image is missing a 1x1 transparent pixmap when gdx reports "Couldn't load
+	 * file:", Android's wording; gdx-teavm words it differently, so the look got none and drawing it crashed. Only a
+	 * missing file, as there: an image that does not decode stays null and the look keeps its costume.
+	 */
+	public static Pixmap lookPixmap(LookData look) {
+		Pixmap pixmap = look.getPixmap();
+		if (null == pixmap && null != look.getFile() && !com.badlogic.gdx.Gdx.files.local(look.getFile().getAbsolutePath()).exists()) {
+			pixmap = new Pixmap(1, 1, Pixmap.Format.Alpha);
+			look.setPixmap(pixmap);
+		}
+		return pixmap;
+	}
+
+	/** ShowTextActor's upload of its text into the texture it bound (GLUtils.texImage2D on Android). */
+	public static void texImage2D(int target, int level, org.catrobat.web.android.graphics.Bitmap bitmap, int border) {
+		java.nio.ByteBuffer pixels = com.badlogic.gdx.utils.BufferUtils.newByteBuffer(bitmap.getWidth() * bitmap.getHeight() * 4);
+		pixels.put(bitmap.rgba()).flip();
+		com.badlogic.gdx.Gdx.gl.glTexImage2D(target, level, com.badlogic.gdx.graphics.GL20.GL_RGBA, bitmap.getWidth(),
+				bitmap.getHeight(), border, com.badlogic.gdx.graphics.GL20.GL_RGBA, com.badlogic.gdx.graphics.GL20.GL_UNSIGNED_BYTE,
+				pixels);
+	}
+
+	/** Android's GLES20 is the mockable no-op; the stage's GL is gdx's. */
+	public static void glBindTexture(int target, int texture) {
+		com.badlogic.gdx.Gdx.gl.glBindTexture(target, texture);
+	}
+
+	/**
+	 * Where say and think bubbles attach: CollisionInformation.calculateBubblePositions, on the look's Pixmap instead
+	 * of Android's decoded bitmap: in the first row from the top with an opaque pixel, its rightmost and leftmost ones
+	 * (x > 0, as there), relative to the image centre. Opaque means alpha above 0 (see outline).
+	 */
+	public static void calculateBubblePositions(CollisionInformation information) {
+		try {
+			Field lookDataField = CollisionInformation.class.getDeclaredField("lookData");
+			lookDataField.setAccessible(true);
+			Pixmap pixmap = lookPixmap((LookData) lookDataField.get(information));
+			int width = pixmap.getWidth();
+			int height = pixmap.getHeight();
+			androidx.core.util.Pair<Integer, Integer> right = null;
+			androidx.core.util.Pair<Integer, Integer> left = null;
+			for (int y = 0; y < height && null == right; y++) {
+				for (int x = width - 1; x > 0; x--) {
+					if (0 != (pixmap.getPixel(x, y) & 0xff)) {
+						androidx.core.util.Pair<Integer, Integer> position = new androidx.core.util.Pair<>(x - width / 2, height / 2 - y);
+						if (null == right) {
+							right = position;
+						}
+						left = position;
+					}
+				}
+			}
+			Field rightField = CollisionInformation.class.getDeclaredField("rightBubblePos");
+			Field leftField = CollisionInformation.class.getDeclaredField("leftBubblePos");
+			rightField.setAccessible(true);
+			leftField.setAccessible(true);
+			rightField.set(information, right);
+			leftField.set(information, left);
+		} catch (ReflectiveOperationException e) {
+			throw new IllegalStateException("Catroid's CollisionInformation changed", e);
+		}
+	}
+
 	/** Koin 2.1 was compiled against Kotlin 1.3's double-valued TimeMark; it only measures for debug logs. */
 	public static double elapsedNow(kotlin.time.TimeMark timeMark) {
 		return 0.0;
