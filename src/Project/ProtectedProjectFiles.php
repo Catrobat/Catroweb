@@ -71,8 +71,8 @@ final class ProtectedProjectFiles
       $allowed = match ($extension) {
         'png' => ['image/png'],
         'jpg', 'jpeg' => ['image/jpeg'],
-        'gif' => ['image/gif'],
-        // Catroid converts imported WebP to PNG while retaining its original filename.
+        // Catroid converts imported GIF and WebP to PNG while retaining its original filename.
+        'gif' => ['image/gif', 'image/png'],
         'webp' => ['image/webp', 'image/png'],
         'avif' => ['image/avif'],
         'bmp' => ['image/bmp', 'image/x-ms-bmp'],
@@ -97,7 +97,7 @@ final class ProtectedProjectFiles
     if ($is_svg) {
       $response->headers->set('Content-Security-Policy', "sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:");
     }
-    $response->setContentDisposition($attachment ? ResponseHeaderBag::DISPOSITION_ATTACHMENT : ResponseHeaderBag::DISPOSITION_INLINE, basename($file), '' === $extension ? 'asset' : 'asset.'.$extension);
+    $response->setContentDisposition($attachment ? ResponseHeaderBag::DISPOSITION_ATTACHMENT : ResponseHeaderBag::DISPOSITION_INLINE, str_replace('\\', '_', basename($file)), '' === $extension ? 'asset' : 'asset.'.$extension);
 
     return $response;
   }
@@ -133,7 +133,8 @@ final class ProtectedProjectFiles
 
   private function safePath(string $path): bool
   {
-    if ('' === $path || str_contains($path, '\\') || str_contains($path, '%') || preg_match('/[\x00-\x1f\x7f]/', $path)) {
+    // A backslash is an ordinary filename character here (Catroid keeps imported names such as "Files\Enter.ogg").
+    if ('' === $path || str_contains($path, '%') || preg_match('/[\x00-\x1f\x7f]/', $path)) {
       return false;
     }
     foreach (explode('/', $path) as $part) {
