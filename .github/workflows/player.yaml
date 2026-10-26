@@ -49,6 +49,9 @@ jobs:
         env:
           CATROID_COMMIT: ${{ inputs.catroid-commit }}
 
+      - name: Build version follows source inputs
+        run: python3 scripts/test_build_version.py
+
       - name: Compile the player
         run: ./scripts/build.sh
 
