@@ -39,6 +39,11 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Node 22 (runs the code view's export, as share does)
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '22'
+
       - name: Build Catroid at the pinned commit
         run: ./scripts/prepare.sh
         env:
@@ -49,6 +54,9 @@ jobs:
 
       - name: Smoke test (the engine runs and draws in headless Chrome)
         run: ./scripts/smoke.sh
+
+      - name: Code view export (Catroid's catrobatTests and the fixtures show as in the app)
+        run: python3 scripts/check_code_export.py build/dist/js/webapp/code-export build/catroid/catroid/src/androidTest/assets/catrobatTests fixtures
 
       - name: Conformance (Catroid's catrobatTests on the stage, compared with conformance.tsv)
         run: ./scripts/conformance.sh

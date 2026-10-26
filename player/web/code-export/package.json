@@ -1,0 +1,9 @@
+{
+  "name": "catrobat-code-export",
+  "private": true,
+  "description": "Runs the code view's export (codeview/CodeExport, compiled to code-export.js) under Node.",
+  "type": "module",
+  "dependencies": {
+    "@xmldom/xmldom": "0.9.12"
+  }
+}

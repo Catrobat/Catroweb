@@ -41,6 +41,18 @@ updates:
       semver-minor-days: 7
       semver-patch-days: 3
 
+  # The code view's export runs on share with this (player/README.md, "Code view export")
+  - package-ecosystem: 'npm'
+    directory: '/player/web/code-export'
+    schedule:
+      interval: daily
+      time: '04:00'
+      timezone: 'Europe/Vienna'
+    open-pull-requests-limit: 99
+    cooldown:
+      default-days: 7
+      semver-patch-days: 3
+
   - package-ecosystem: 'composer'
     directory: '/'
     schedule:

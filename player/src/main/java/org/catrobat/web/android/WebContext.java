@@ -57,6 +57,12 @@ public final class WebContext extends ContextWrapper {
 		return WebResources.INSTANCE.getText(id);
 	}
 
+	/** No styles on the web: Catroid's BrickLayout reads its spacing from them, and gets the defaults. */
+	@Override
+	public android.content.res.TypedArray obtainStyledAttributes(android.util.AttributeSet set, int[] attrs) {
+		return new android.content.res.WebTypedArray();
+	}
+
 	@Override
 	public String getPackageName() {
 		return "org.catrobat.catroid";

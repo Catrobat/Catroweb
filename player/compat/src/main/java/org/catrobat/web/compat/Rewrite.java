@@ -74,6 +74,41 @@ public final class Rewrite {
 			Map.entry("com/badlogic/gdx/backends/android/AndroidApplicationConfiguration", "org/catrobat/web/compat/WebAndroidApplicationConfiguration"));
 
 	/**
+	 * Android classes whose instances Catroid's own code gets as web subclasses: where it creates or extends one,
+	 * the subclass takes its place. All other uses keep the SDK type, which the subclass still is. They let a brick's
+	 * getView fill views the code export can read (codeview/CodeExport).
+	 */
+	static final Map<String, String> SUBSTITUTE = Map.of(
+			"android/widget/TextView", "org/catrobat/web/codeview/CodeViews$Text",
+			"android/widget/ArrayAdapter", "org/catrobat/web/codeview/CodeArrayAdapter",
+			"android/text/SpannableStringBuilder", "org/catrobat/web/codeview/CodeSpannableStringBuilder");
+
+	/** Creating or extending a SUBSTITUTE class in Catroid's code: the web subclass instead. */
+	private static boolean substitute(ClassNode node) {
+		if (!node.name.startsWith("org/catrobat/catroid/")) {
+			return false;
+		}
+		boolean changed = false;
+		if (SUBSTITUTE.containsKey(node.superName)) {
+			node.superName = SUBSTITUTE.get(node.superName);
+			changed = true;
+		}
+		for (MethodNode method : node.methods) {
+			for (AbstractInsnNode insn = method.instructions.getFirst(); null != insn; insn = insn.getNext()) {
+				if (insn instanceof TypeInsnNode type && Opcodes.NEW == type.getOpcode() && SUBSTITUTE.containsKey(type.desc)) {
+					type.desc = SUBSTITUTE.get(type.desc);
+					changed = true;
+				} else if (insn instanceof MethodInsnNode call && Opcodes.INVOKESPECIAL == call.getOpcode() && "<init>".equals(call.name)
+						&& SUBSTITUTE.containsKey(call.owner)) {
+					call.owner = SUBSTITUTE.get(call.owner);
+					changed = true;
+				}
+			}
+		}
+		return changed;
+	}
+
+	/**
 	 * Catroid's text and bubble actors draw with android.graphics; only there those classes become canvas-backed
 	 * web versions. Everywhere else the mockable ones stay (their defaults are what the rest of the stage relies on).
 	 */
@@ -126,6 +161,15 @@ public final class Rewrite {
 			Map.entry("java/util/UUID.nameUUIDFromBytes([B)Ljava/util/UUID;", "nameUUIDFromBytes"),
 			Map.entry("org/catrobat/catroid/CatroidApplication.getAppContext()Landroid/content/Context;", "appContext"),
 			Map.entry("android/content/res/Resources.getSystem()Landroid/content/res/Resources;", "systemResources"),
+			Map.entry("android/view/LayoutInflater.from(Landroid/content/Context;)Landroid/view/LayoutInflater;", "layoutInflater"),
+			Map.entry("org/catrobat/catroid/formulaeditor/FormulaSpannableStringBuilder.addColoredSquareToColorString("
+					+ "Landroid/content/Context;Ljava/lang/String;FLandroid/text/SpannableStringBuilder;)V", "colorSquare"),
+			// No activity and no fragments on the web: a user-defined brick's getView asks its context for them
+			Map.entry("androidx/fragment/app/FragmentActivity.getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;",
+					"noFragmentManager"),
+			Map.entry("androidx/fragment/app/FragmentManager.findFragmentById(I)Landroidx/fragment/app/Fragment;", "noFragment"),
+			Map.entry("androidx/fragment/app/FragmentManager.findFragmentByTag(Ljava/lang/String;)Landroidx/fragment/app/Fragment;",
+					"noFragment"),
 			Map.entry("kotlin/time/TimeMark.elapsedNow()D", "elapsedNow"),
 			Map.entry("kotlin/time/Duration.getInMilliseconds-impl(D)D", "durationMillis"),
 			Map.entry("java/lang/Class.forName(Ljava/lang/String;ZLjava/lang/ClassLoader;)Ljava/lang/Class;", "forName"),
@@ -297,7 +341,7 @@ public final class Rewrite {
 		boolean graphics = drawsWithAndroidGraphics(owner);
 		boolean dom = XML_UPGRADE.equals(owner);
 		new ClassReader(bytes).accept(new ClassRemapper(node, new SimpleRemapper(Opcodes.ASM9, graphics ? GRAPHICS : dom ? DOM : REMAP)), 0);
-		boolean changed = graphics | dom | mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors);
+		boolean changed = graphics | dom | mentionsRemapped(bytes) | addNoArgConstructor(node, noArgConstructors) | substitute(node);
 		if (node.interfaces.removeIf(missing::contains)) {
 			changed = true; // the class works without claiming a type the browser lacks
 		}
@@ -342,6 +386,10 @@ public final class Rewrite {
 						target = "setContextClassLoader"; // also on Thread subclasses
 					}
 					if (null != target) {
+						if ("noFragmentManager".equals(target) && previousInstruction(call) instanceof TypeInsnNode cast
+								&& Opcodes.CHECKCAST == cast.getOpcode()) {
+							method.instructions.remove(cast); // ((FragmentActivity) context): the web's context is none
+						}
 						if (call.getOpcode() != Opcodes.INVOKESTATIC) {
 							call.desc = "(L" + receiver(call.owner, target) + ";" + call.desc.substring(1);
 						}
@@ -500,6 +548,7 @@ public final class Rewrite {
 			case "keys" -> "java/util/concurrent/ConcurrentHashMap";
 			case "elapsedNow" -> "kotlin/time/TimeMark";
 			case "getGenericSuperclass" -> "java/lang/Class";
+			case "noFragmentManager", "colorSquare" -> "java/lang/Object";
 			default -> owner;
 		};
 	}

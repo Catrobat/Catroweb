@@ -68,12 +68,26 @@ for round in $(seq 1 12); do
       \( -path '*gdx-teavm*' -o -path '*org.teavm*' -o -path "*gdx/$GDX_VERSION*" \) ! -name '*sources*'; } > $W/all-jars.txt
   $JAVA -cp $TOOLS org.catrobat.web.compat.FindLdc $W/all-jars.txt > $W/missing-ldc.txt
   if [ -n "$(comm -13 $W/missing.txt <(sort -u $W/missing-ldc.txt))" ]; then sort -u $W/missing.txt $W/missing-ldc.txt -o $W/missing.txt; patch; fi
-  if ./gradlew gdx_teavm_web_js_build > $W/teavm.log 2>&1; then
+  # The player and the code view's export (codeview/CodeExport) from the same patched jars.
+  if ./gradlew gdx_teavm_web_js_build gdx_teavm_web_js_code_export_build > $W/teavm.log 2>&1; then
     echo "Player built (round $round): $(grep -c '^org/catrobat/catroid' $W/stub-report.tsv) Catroid methods unavailable on the web, see $W/stub-report.tsv"
     python3 scripts/export_strings.py ${JAVA_HOME:+$JAVA_HOME/bin/}javap $IN/R.jar build/dist/js/webapp/strings.json \
       build/catroid/catroid/src/main/res/values build/catroid/catroid/src/catroid/res/values
     python3 scripts/export_strings.py --start build/dist/js/webapp/strings \
       build/catroid/catroid/src/main/res build/catroid/catroid/src/catroid/res
+    # The code view's export (README.md, "Code view export"), which share runs with Node: next to the player, so
+    # deploy:player ships both. version.txt changes with its inputs, so share makes its stored code views again.
+    E=build/dist/js/webapp/code-export
+    rm -rf $E && mkdir -p $E
+    cp build/dist/js/code_export/webapp/code-export.js web/code-export/export.mjs web/code-export/package.json \
+      web/code-export/package-lock.json $E/
+    python3 scripts/export_code_resources.py ${JAVA_HOME:+$JAVA_HOME/bin/}javap $IN/R.jar build/catroid/catroid/src/main/res \
+      build/catroid/catroid/src/catroid/res $E
+    (cd $E && npm ci --omit=dev --ignore-scripts --no-audit --no-fund --silent && rm package.json package-lock.json)
+    # From what the export is built from, not from code-export.js: TeaVM orders its output differently on every build.
+    git ls-files -z catroid.commit build.gradle.kts settings.gradle.kts gradle compat src web/code-export scripts/build.sh \
+      scripts/prepare.sh scripts/export_code_resources.py scripts/catroid-classpath.init.gradle | xargs -0 shasum \
+      | shasum | cut -c1-12 > $E/version.txt
     # The start screen shows up before app.js is in (web/start.js).
     cp web/start.js build/dist/js/webapp/start.js
     python3 - build/dist/js/webapp/index.html <<'EOF'

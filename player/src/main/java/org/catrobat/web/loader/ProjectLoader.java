@@ -80,7 +80,7 @@ public final class ProjectLoader {
 	}
 
 	/** The project as the app plays it: read, then updated to the current language version. */
-	static Project parse(String xml) {
+	public static Project parse(String xml) {
 		Project project = read(xml);
 		updateToCurrentVersion(project);
 		return project;
@@ -92,6 +92,11 @@ public final class ProjectLoader {
 	 * ponytail: one project per page, so the last one read decides; per project if a page ever plays several.
 	 */
 	private static boolean filesWithoutSceneFolder;
+
+	/** Whether the project last read keeps its looks and sounds without a scene folder (see above). */
+	public static boolean filesWithoutSceneFolder() {
+		return filesWithoutSceneFolder;
+	}
 
 	/** The project exactly as code.xml describes it, which LoaderCheck compares with the XML. */
 	static Project read(String xml) {
