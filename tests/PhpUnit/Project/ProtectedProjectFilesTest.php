@@ -319,12 +319,12 @@ final class ProtectedProjectFilesTest extends TestCase
 
   public function testBackslashIsAnOrdinaryFilenameCharacter(): void
   {
-    copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/Files\\look.png');
-    $response = $this->files->asset('one', 'images/Files\\look.png');
+    copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/Files\look.png');
+    $response = $this->files->asset('one', 'images/Files\look.png');
     self::assertNotNull($response);
     self::assertSame('image/png', $response->headers->get('Content-Type'));
     self::assertStringContainsString('Files_look.png', (string) $response->headers->get('Content-Disposition'));
-    self::assertNull($this->files->asset('one', 'images\\look.png'));
+    self::assertNull($this->files->asset('one', 'images\look.png'));
   }
 
   public function testEncodedSeparatorsFailBeforeProjectLookup(): void
