@@ -1,6 +1,6 @@
 # Builds the browser player: Catroid's own engine at the commit in player/catroid.commit, compiled to JavaScript
-# with gdx-teavm (see player/README.md). Runs when the player changes and nightly, so a Catroid develop change that
-# breaks the web build shows up when we bump the pin.
+# with gdx-teavm (see player/README.md). Runs when the player changes and nightly; player-catroid-pin.yaml calls it to
+# run the same checks at Catroid's develop HEAD before it proposes bumping the pin.
 name: Player
 
 permissions:
@@ -15,6 +15,12 @@ on:
   schedule:
     - cron: '0 3 * * *'
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      catroid-commit:
+        description: Catroid commit to build instead of player/catroid.commit
+        type: string
+        required: true
 
 jobs:
   build:
@@ -40,6 +46,8 @@ jobs:
 
       - name: Build Catroid at the pinned commit
         run: ./scripts/prepare.sh
+        env:
+          CATROID_COMMIT: ${{ inputs.catroid-commit }}
 
       - name: Compile the player
         run: ./scripts/build.sh

@@ -217,9 +217,9 @@ final class ProtectedProjectFilesTest extends TestCase
     self::assertNull($this->files->asset('one', 'sounds/fake.wav'));
   }
 
-  public function testClientExtensionlessRasterAndWebpConvertedToPngUseDetectedType(): void
+  public function testClientExtensionlessRasterAndGifOrWebpConvertedToPngUseDetectedType(): void
   {
-    foreach (['imported', 'converted.webp'] as $filename) {
+    foreach (['imported', 'converted.webp', 'converted.gif'] as $filename) {
       copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/'.$filename);
       $response = $this->files->asset('one', 'images/'.$filename);
       self::assertNotNull($response);
@@ -315,6 +315,16 @@ final class ProtectedProjectFilesTest extends TestCase
     $response = $controller->asset(Request::create('/project-files/one/assets/images/look.png'), 'one', 'images/look.png');
     self::assertSame(404, $response->getStatusCode());
     self::assertTrue($response->headers->hasCacheControlDirective('no-store'));
+  }
+
+  public function testBackslashIsAnOrdinaryFilenameCharacter(): void
+  {
+    copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/Files\look.png');
+    $response = $this->files->asset('one', 'images/Files\look.png');
+    self::assertNotNull($response);
+    self::assertSame('image/png', $response->headers->get('Content-Type'));
+    self::assertStringContainsString('Files_look.png', (string) $response->headers->get('Content-Disposition'));
+    self::assertNull($this->files->asset('one', 'images\look.png'));
   }
 
   public function testEncodedSeparatorsFailBeforeProjectLookup(): void

@@ -1,5 +1,6 @@
 package org.catrobat.web;
 
+import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.web.loader.Sounds;
 import org.teavm.interop.Async;
 import org.teavm.interop.AsyncCallback;
@@ -14,11 +15,16 @@ public final class StartScreen {
 	private StartScreen() {
 	}
 
+	/** resources: what the project needs (Project.getRequiredResources), which the start screen tells the player. */
 	@Async
-	public static native Void waitForStart(String title, boolean landscape);
+	public static native Void waitForStart(String title, boolean landscape, Brick.ResourcesSet resources);
 
-	private static void waitForStart(String title, boolean landscape, AsyncCallback<Void> started) {
-		ready(title, landscape, () -> {
+	private static void waitForStart(String title, boolean landscape, Brick.ResourcesSet resources, AsyncCallback<Void> started) {
+		StringBuilder list = new StringBuilder();
+		for (Integer resource : resources) {
+			list.append(list.length() == 0 ? "" : ",").append(resource);
+		}
+		ready(title, landscape, list.toString(), () -> {
 			Sounds.createContext(); // still inside the click, so the browser lets it play
 			started.complete(null);
 		});
@@ -39,8 +45,9 @@ public final class StartScreen {
 			+ "if (s) s.phase(name, shown); else Promise.resolve().then(function () { shown(); });")
 	private static native void showPhase(String name, Sounds.Callback shown);
 
-	@JSBody(params = {"title", "landscape", "started"}, script = "window.catrobatStart.ready(title, landscape, started);")
-	private static native void ready(String title, boolean landscape, Sounds.Callback started);
+	@JSBody(params = {"title", "landscape", "resources", "started"},
+			script = "window.catrobatStart.ready(title, landscape, resources ? resources.split(',').map(Number) : [], started);")
+	private static native void ready(String title, boolean landscape, String resources, Sounds.Callback started);
 
 	/** Instead of the play button: the project cannot be played, and why. */
 	@JSBody(params = "message", script = "var s = window.catrobatStart; if (s) s.fail(message);")
