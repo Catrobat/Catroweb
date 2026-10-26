@@ -312,9 +312,11 @@ final class BlockConverter
       case 'looks_thinkforsecs': return [$this->brick('ThinkForBubbleBrick', ['STRING' => $this->textInput($b, 'MESSAGE'), 'DURATION_IN_SECONDS' => $this->number($b, 'SECS')])];
       case 'looks_switchcostumeto':
         $name = $this->menu($b, 'COSTUME');
-        $look = null === $name ? null : $this->model->look($this->sprite_key, $name);
-        if (null !== $look) {
-          return [$this->brick('SetLookBrick', [], [], [$look])];
+        $index = null === $name ? null : $this->model->lookIndex($this->sprite_key, $name);
+        if (null !== $index) {
+          // Catroid copies a clone's named look references by checksum. Different Scratch costumes can have
+          // identical pixels (e.g. the up/down frames of an animation), so preserve their identity by index.
+          return [$this->brick('SetLookByIndexBrick', ['LOOK_INDEX' => Formula::number($index + 1)])];
         }
 
         // A name that is no costume: Scratch reads it as a number, or does nothing.
@@ -435,8 +437,8 @@ final class BlockConverter
 
         return [$this->brick('SetVariableBrick', ['VARIABLE' => $sum], [], [$this->variable($b)])];
       case 'data_showvariable':
-        return [$this->brick('ShowTextBrick', ['X_POSITION' => Formula::number(-220), 'Y_POSITION' => Formula::number(160)], [], [$this->variable($b)])];
-      case 'data_hidevariable': return [$this->brick('HideTextBrick', [], [], [$this->variable($b)])];
+        return [$this->brick('ShowTextBrick', ['X_POSITION' => Formula::number(-220), 'Y_POSITION' => Formula::number(160)], [], [$this->monitor($b)])];
+      case 'data_hidevariable': return [$this->brick('HideTextBrick', [], [], [$this->monitor($b)])];
       case 'data_addtolist': return [$this->brick('AddItemToUserListBrick', ['LIST_ADD_ITEM' => $this->textInput($b, 'ITEM')], [], [$this->userList($b)])];
       case 'data_deleteoflist':
         $index = $this->listIndex($b, 'INDEX');
@@ -1112,6 +1114,13 @@ final class BlockConverter
     $name = $this->menu($b, 'SOUND_MENU');
 
     return null === $name ? null : $this->model->sound($this->sprite_key, $name);
+  }
+
+  private function monitor(array $b): \DOMElement
+  {
+    $field = $b['fields']['VARIABLE'] ?? ['', null];
+
+    return $this->model->monitorElement($this->sprite_key, (string) $field[0], isset($field[1]) ? (string) $field[1] : null);
   }
 
   private function variable(array $b): \DOMElement

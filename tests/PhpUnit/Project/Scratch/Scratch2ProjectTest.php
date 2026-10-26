@@ -76,6 +76,21 @@ final class Scratch2ProjectTest extends TestCase
     $this->assertCount(2, $project['targets']);
   }
 
+  public function testSavedVariableWatchersKeepTheirOwnerVisibilityAndPosition(): void
+  {
+    $project = Scratch2Project::toScratch3(['objName' => 'Stage', 'variables' => [['name' => 'score', 'value' => 7]], 'children' => [
+      ['objName' => 'Cat', 'variables' => [['name' => 'score', 'value' => 3]]],
+      ['target' => 'Stage', 'cmd' => 'getVar:', 'param' => 'score', 'visible' => true, 'x' => 12, 'y' => 34, 'mode' => 2],
+      ['target' => 'Cat', 'cmd' => 'getVar:', 'param' => 'score', 'visible' => false, 'x' => 56, 'y' => 78],
+    ]]);
+
+    $this->assertCount(2, $project['monitors']);
+    [$global, $local] = $project['monitors'];
+    $this->assertSame([null, true, 12, 34, 'large'], [$global['spriteName'], $global['visible'], $global['x'], $global['y'], $global['mode']]);
+    $this->assertSame(['Cat', false, 56, 78], [$local['spriteName'], $local['visible'], $local['x'], $local['y']]);
+    $this->assertNotSame($global['id'], $local['id']);
+  }
+
   public function testVideoMotionHatsStayUnsupported(): void
   {
     $blocks = $this->translate([['whenSensorGreaterThan', 'video motion', 10]])['blocks'];

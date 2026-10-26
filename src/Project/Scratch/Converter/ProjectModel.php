@@ -66,7 +66,7 @@ final class ProjectModel
     $this->targets[$key] = $target;
     $this->names[$key] = $name;
     // Generated key buttons have no Scratch name for blocks to refer to.
-    if (!($target['isStage'] ?? false) && !isset($target['scratchKeys'])) {
+    if (!($target['isStage'] ?? false) && !isset($target['scratchKeys']) && !isset($target['scratchKeyToggle'])) {
       $this->keys_by_name[(string) $target['name']] = $key;
     }
   }
@@ -200,9 +200,14 @@ final class ProjectModel
 
   public function look(string $key, string $name): ?\DOMElement
   {
-    $index = self::indexByName($this->looks[$key] ?? [], $name);
+    $index = $this->lookIndex($key, $name);
 
     return null === $index ? null : $this->lookElement($key, $index);
+  }
+
+  public function lookIndex(string $key, string $name): ?int
+  {
+    return self::indexByName($this->looks[$key] ?? [], $name);
   }
 
   public function backdropLook(string $name): ?\DOMElement
@@ -227,6 +232,20 @@ final class ProjectModel
   /**
    * A variable used by a brick. Sprite-local if the sprite owns it (by id, then by name), otherwise global.
    */
+  public function monitorElement(?string $sprite_key, string $name, ?string $id = null): \DOMElement
+  {
+    $owner = $this->owner($sprite_key, 'variables', $name, $id);
+    $key = 'program' === $owner ? self::STAGE : $owner;
+    foreach ($this->targets[$key]['scratchMonitors'] ?? [] as $monitor) {
+      $variable = $this->targets[$key]['variables'][$monitor['id'] ?? ''] ?? null;
+      if (isset($monitor['display']) && null !== $variable && $variable[0] === $name) {
+        return $this->variableElement($sprite_key, $monitor['display']);
+      }
+    }
+
+    return $this->variableElement($sprite_key, $name, $id);
+  }
+
   public function variableElement(?string $sprite_key, string $name, ?string $id = null): \DOMElement
   {
     if (null === $sprite_key && $this->helper('answer') === $name) {

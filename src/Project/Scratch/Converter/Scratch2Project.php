@@ -216,7 +216,29 @@ final class Scratch2Project
 
     $targets[0]['broadcasts'] = $self->broadcasts;
 
-    return ['targets' => $targets, 'monitors' => [], 'extensions' => [], 'meta' => ['semver' => '3.0.0']];
+    $monitors = [];
+    foreach ((array) ($sb2['children'] ?? []) as $watcher) {
+      if (!\is_array($watcher) || 'getVar:' !== ($watcher['cmd'] ?? null)) {
+        continue;
+      }
+
+      foreach ($targets as $target) {
+        $owner = $watcher['target'] ?? $sb2['objName'];
+        if ($owner !== ($target['isStage'] ? $sb2['objName'] : $target['name'])) {
+          continue;
+        }
+
+        foreach ($target['variables'] as $id => $variable) {
+          if ($variable[0] === ($watcher['param'] ?? null)) {
+            $monitors[] = ['id' => $id, 'opcode' => 'data_variable', 'params' => ['VARIABLE' => $variable[0]],
+              'spriteName' => $target['isStage'] ? null : $target['name'], 'visible' => (bool) ($watcher['visible'] ?? false),
+              'x' => $watcher['x'] ?? 0, 'y' => $watcher['y'] ?? 0, 'mode' => 2 === ($watcher['mode'] ?? 1) ? 'large' : 'default'];
+          }
+        }
+      }
+    }
+
+    return ['targets' => $targets, 'monitors' => $monitors, 'extensions' => [], 'meta' => ['semver' => '3.0.0']];
   }
 
   /**
@@ -262,7 +284,7 @@ final class Scratch2Project
       [$md5, $extension] = self::asset((string) ($costume['baseLayerMD5'] ?? ''), 'png');
       $costumes[] = [
         'name' => (string) ($costume['costumeName'] ?? ''), 'bitmapResolution' => $resolution, 'assetId' => $md5,
-        'md5ext' => $md5.'.'.$extension, 'dataFormat' => $extension,
+        'md5ext' => $md5.'.'.$extension, 'dataFormat' => $extension, 'scratch2' => true,
         'rotationCenterX' => $stage ? 240 * $resolution : ($costume['rotationCenterX'] ?? 0),
         'rotationCenterY' => $stage ? 180 * $resolution : ($costume['rotationCenterY'] ?? 0),
         // Text typed in the Scratch 2 paint editor is a separate image drawn over the costume.

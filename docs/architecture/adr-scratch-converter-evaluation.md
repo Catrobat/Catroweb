@@ -27,6 +27,16 @@ Scratch is served from Share without converting again.
 - **Stage:** 480×360 with `MAXIMIZE`, so Scratch coordinates are 1:1. Costumes are padded so Scratch's rotation
   center, measured from the SVG viewBox origin, becomes the image center. SVGs are rendered with `rsvg-convert`,
   and IMA-ADPCM wavs are transcoded with `sox`.
+- **Scratch 2 text:** SVG costumes imported from Scratch 2 use its text-positioning rules (obsolete x/y ignored,
+  top-aligned lines). Ordinary Scratch 3 SVGs keep their original coordinates.
+- **Costume identity:** named costume switches become indexed switches. Catroid copies a clone's named look
+  references by checksum; distinct Scratch costumes can have identical rendered images, so an index preserves
+  the costume name and animation order (including Whack-a-Mole's up/down frames).
+- **Variable monitors:** visible saved variable monitors are restored at their saved positions, including
+  Scratch 2 watchers. Default monitors show the variable name and live value; large monitors show the value.
+  Show/hide-variable blocks refer to the same displayed monitor. List monitors remain unsupported.
+- **Touch keys:** a small keyboard icon toggles the generated key buttons. They start hidden so menus and
+  sprites remain visible; hiding them clears held-key state. The stage size and game coordinates stay unchanged.
 - **Start-up state:** Pocket Code stores none. The background sets variables and lists, then `BroadcastWait
 __init_sprites` restores each sprite's position, size, direction, costume and visibility, and only then
   `__green_flag` starts the "when flag clicked" scripts.
@@ -68,4 +78,3 @@ header, bracket placement and costume padding offline.
 - Some text engines built from custom blocks (Paper Minecraft's settings values) don't render yet.
 - Scratch compares strings case-insensitively; Pocket Code compares them case-sensitively (broadcasts are matched).
 - The start-up takes a frame per generated brick, so projects with long saved lists start a few seconds late.
-- Variable monitors that a project shows from the start are not converted, only "show variable" blocks.

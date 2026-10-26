@@ -42,6 +42,9 @@ class AssetNormalizer
     try {
       $image = new \Imagick();
       if ('svg' === $format) {
+        if ($costume['scratch2'] ?? false) {
+          $bytes = self::scratch2Svg($bytes);
+        }
         $size = self::svgSize($bytes);
         if (null === $size) {
           return self::blank(); // Scratch's blank costume is a 0x0 SVG
@@ -140,6 +143,39 @@ class AssetNormalizer
     }
 
     return null;
+  }
+
+  /** Scratch 2 ignores text x/y and uses top-aligned lines; ordinary SVG renderers do not. */
+  private static function scratch2Svg(string $svg): string
+  {
+    $doc = new \DOMDocument();
+    if ('' === $svg || !$doc->loadXML($svg, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
+      throw new ScratchConversionException('A costume could not be read.');
+    }
+
+    foreach ($doc->getElementsByTagNameNS('http://www.w3.org/2000/svg', 'text') as $text) {
+      $text->removeAttribute('x');
+      $text->removeAttribute('y');
+      $text->setAttribute('alignment-baseline', 'text-before-edge');
+      $text->setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:space', 'preserve');
+      if (!$text->hasAttribute('font-size')) {
+        $text->setAttribute('font-size', '18');
+      }
+
+      if (0 === $text->childElementCount) {
+        $lines = explode("\n", $text->textContent);
+        $text->textContent = '';
+        foreach ($lines as $line) {
+          $span = $doc->createElementNS('http://www.w3.org/2000/svg', 'tspan');
+          $span->setAttribute('x', '0');
+          $span->setAttribute('dy', '1.2em');
+          $span->appendChild($doc->createTextNode('' === $line ? ' ' : $line));
+          $text->appendChild($span);
+        }
+      }
+    }
+
+    return (string) $doc->saveXML();
   }
 
   /** @return array{0: float, 1: float, 2: float, 3: float}|null viewBox x, y, width, height */
