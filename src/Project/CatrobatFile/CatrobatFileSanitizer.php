@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace App\Project\CatrobatFile;
 
 use App\Moderation\TextSanitizer;
-use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
-use App\Project\CatrobatCode\Parser\ParsedScene;
-use App\Project\CatrobatCode\Parser\ParsedSceneProject;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -22,7 +19,6 @@ class CatrobatFileSanitizer
   private ?string $extracted_file_root_path = null;
 
   public function __construct(
-    private readonly CatrobatCodeParser $catrobat_code_parser,
     private readonly TextSanitizer $textSanitizer,
   ) {
   }
@@ -146,19 +142,14 @@ class CatrobatFileSanitizer
     return false;
   }
 
+  /**
+   * @return list<string>
+   */
   private function getScenes(ExtractedCatrobatFile $extracted_file): array
   {
-    $scenes = [];
-    $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
-    if ($parsed_project instanceof ParsedSceneProject) {
-      $scenes_array = $parsed_project->getScenes();
-      foreach ($scenes_array as $scene) {
-        /* @var $scene ParsedScene */
-        $scenes[] = $scene->getName();
-      }
-    }
+    $names = $extracted_file->getProjectXmlProperties()->xpath('/program/scenes/scene/name');
 
-    return $scenes;
+    return array_values(array_map(strval(...), is_array($names) ? $names : []));
   }
 
   private function getRelativePath(?string $filepath): string

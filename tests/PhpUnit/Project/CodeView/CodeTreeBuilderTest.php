@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\CodeView;
 
-use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
-use App\Project\CatrobatCode\Parser\Constants;
-use App\Project\CatrobatFile\ExtractedCatrobatFile;
-use App\Project\CatrobatFile\ExtractedFileRepository;
+use App\DB\Entity\Project\Project;
+use App\Project\CodeView\CodeExportRunner;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
-use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use App\Project\CodeView\CodeViewExportStore;
+use App\Project\CodeView\CodeViewLocalizer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
@@ -20,263 +22,107 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(CodeTreeBuilder::class)]
 class CodeTreeBuilderTest extends TestCase
 {
-  private CodeTreeBuilder $builder;
+  private const array EXPORT = [
+    'files_in_scene_folders' => true,
+    'scenes' => [[
+      'name' => 'Scene 1',
+      'objects' => [
+        [
+          'name' => 'Cat',
+          'looks' => [['name' => 'cat', 'file' => 'cat 1.png']],
+          'sounds' => [['name' => 'meow', 'file' => 'meow.mp3']],
+          'scripts' => [[
+            'type' => 'StartScript',
+            'category' => 'event',
+            'commented_out' => false,
+            'parts' => [['kind' => 'label', 'text' => "\x01s:brick_when_started\x02"]],
+            'bricks' => [[
+              'type' => 'IfLogicBeginBrick',
+              'category' => 'control',
+              'commented_out' => true,
+              'parts' => [['kind' => 'label', 'text' => 'If'], ['kind' => 'formula', 'text' => '1 < 2']],
+              'sections' => [
+                ['bricks' => [['type' => 'WaitBrick', 'category' => 'control', 'parts' => [['kind' => 'label', 'text' => "\x01s:brick_wait\x02"]]]]],
+                ['parts' => [['kind' => 'label', 'text' => 'Else']], 'bricks' => []],
+                ['parts' => [['kind' => 'label', 'text' => 'End if']], 'bricks' => []],
+              ],
+            ]],
+          ]],
+        ],
+        ['name' => 'Group', 'looks' => [], 'sounds' => [], 'scripts' => [], 'group' => [
+          ['name' => 'Member', 'looks' => [], 'sounds' => [], 'scripts' => []],
+        ]],
+      ],
+    ]],
+  ];
 
-  #[\Override]
-  protected function setUp(): void
+  public function testTheCodeViewInTheViewersLanguage(): void
   {
-    $extracted_file_repository = $this->createStub(ExtractedFileRepository::class);
-    $this->builder = new CodeTreeBuilder(
-      $extracted_file_repository,
-      new CatrobatCodeParser(),
-    );
+    $tree = $this->builder(self::EXPORT)->buildCodeTree($this->project(), 'de');
+
+    $cat = $tree['scenes'][0]['objects'][0];
+    $this->assertSame('Cat', $cat['name']);
+    $this->assertFalse($cat['is_group']);
+    $script = $cat['scripts'][0];
+    $this->assertSame([['kind' => 'label', 'text' => 'When scene starts']], $script['parts']);
+    $if = $script['bricks'][0];
+    $this->assertSame('IfLogicBeginBrick', $if['type']);
+    $this->assertTrue($if['commented_out']);
+    $this->assertNull($if['bricks']);
+    $this->assertSame('Warte', $if['sections'][0]['bricks'][0]['parts'][0]['text']);
+    $this->assertSame('Else', $if['sections'][1]['parts'][0]['text']);
+    $this->assertCount(3, $if['sections']);
   }
 
-  public function testSimpleProjectReturnsOneScene(): void
+  public function testLooksSoundsAndGroups(): void
   {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/SimpleProject/',
-      '',
-      ''
-    );
+    $tree = $this->builder(self::EXPORT)->buildCodeTree($this->project(), 'en');
 
-    $tree = $this->builder->buildFromExtracted($extracted);
-
-    $this->assertNotEmpty($tree['scenes']);
-    $this->assertCount(1, $tree['scenes']);
-
-    $scene = $tree['scenes'][0];
-    $this->assertSame('default', $scene['name']);
-    $this->assertCount(2, $scene['objects']);
+    $cat = $tree['scenes'][0]['objects'][0];
+    $this->assertSame('/project-files/p1/assets/Scene%201/images/cat%201.png', $cat['looks'][0]['url']);
+    $this->assertSame('/project-files/p1/assets/Scene%201/sounds/meow.mp3', $cat['sounds'][0]['url']);
+    $group = $tree['scenes'][0]['objects'][1];
+    $this->assertTrue($group['is_group']);
+    $this->assertSame('Member', $group['children'][0]['name']);
   }
 
-  public function testSimpleProjectBackgroundObject(): void
+  public function testProjectsWithoutSceneFoldersKeepFilesAtTheTop(): void
   {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/SimpleProject/',
-      '',
-      ''
-    );
+    $tree = $this->builder(['files_in_scene_folders' => false] + self::EXPORT)->buildCodeTree($this->project(), 'en');
 
-    $tree = $this->builder->buildFromExtracted($extracted);
-    $background = $tree['scenes'][0]['objects'][0];
-
-    $this->assertSame('Background', $background['name']);
-    $this->assertFalse($background['is_group']);
-    $this->assertCount(1, $background['scripts']);
-
-    $script = $background['scripts'][0];
-    $this->assertSame(Constants::START_SCRIPT, $script['type']);
-    $this->assertSame('event', $script['category']);
-    $this->assertFalse($script['commented_out']);
-    $this->assertCount(1, $script['bricks']);
-
-    $brick = $script['bricks'][0];
-    $this->assertSame(Constants::WAIT_BRICK, $brick['type']);
-    $this->assertSame('control', $brick['category']);
-    $this->assertNull($brick['children']);
-    $this->assertIsArray($brick['parameters']);
-    $this->assertArrayHasKey('TIME_TO_WAIT_IN_SECONDS', $brick['parameters']);
-    $this->assertSame('1', $brick['parameters']['TIME_TO_WAIT_IN_SECONDS']);
+    $this->assertSame('/project-files/p1/assets/images/cat%201.png', $tree['scenes'][0]['objects'][0]['looks'][0]['url']);
   }
 
-  public function testSimpleProjectSpriteWithMultipleBricks(): void
-  {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/SimpleProject/',
-      '',
-      ''
-    );
-
-    $tree = $this->builder->buildFromExtracted($extracted);
-    $sprite = $tree['scenes'][0]['objects'][1];
-
-    $this->assertSame('Sprite1', $sprite['name']);
-    $this->assertCount(1, $sprite['scripts']);
-    $this->assertCount(3, $sprite['scripts'][0]['bricks']);
-
-    $bricks = $sprite['scripts'][0]['bricks'];
-
-    // PlaceAtBrick with X and Y parameters
-    $this->assertSame(Constants::PLACE_AT_BRICK, $bricks[0]['type']);
-    $this->assertSame('motion', $bricks[0]['category']);
-    $this->assertNotNull($bricks[0]['parameters']);
-    $this->assertSame('100', $bricks[0]['parameters']['X_POSITION']);
-    $this->assertSame('200', $bricks[0]['parameters']['Y_POSITION']);
-    $this->assertNull($bricks[0]['children']);
-
-    // ShowBrick - no parameters, no children
-    $this->assertSame(Constants::SHOW_BRICK, $bricks[1]['type']);
-    $this->assertSame('looks', $bricks[1]['category']);
-    $this->assertNull($bricks[1]['parameters']);
-    $this->assertNull($bricks[1]['children']);
-
-    // HideBrick
-    $this->assertSame(Constants::HIDE_BRICK, $bricks[2]['type']);
-  }
-
-  public function testForeverLoopNesting(): void
-  {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/NestedControlProject/',
-      '',
-      ''
-    );
-
-    $tree = $this->builder->buildFromExtracted($extracted);
-    $sprite = $tree['scenes'][0]['objects'][1];
-    /** @var list<array<string, mixed>> $bricks */
-    $bricks = $sprite['scripts'][0]['bricks'];
-
-    // ForeverBrick with loop_body children
-    $this->assertCount(1, $bricks);
-    $forever = $bricks[0];
-    $this->assertSame(Constants::FOREVER_BRICK, $forever['type']);
-    $this->assertSame('control', $forever['category']);
-    $this->assertIsArray($forever['children']);
-    $this->assertArrayHasKey('loop_body', $forever['children']);
-
-    /** @var list<array<string, mixed>> $loop_body */
-    $loop_body = $forever['children']['loop_body'];
-    $this->assertCount(2, $loop_body);
-    $this->assertSame(Constants::MOVE_N_STEPS_BRICK, $loop_body[0]['type']);
-    $this->assertSame(Constants::WAIT_BRICK, $loop_body[1]['type']);
-  }
-
-  public function testIfElseNesting(): void
-  {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/NestedControlProject/',
-      '',
-      ''
-    );
-
-    $tree = $this->builder->buildFromExtracted($extracted);
-    $sprite = $tree['scenes'][0]['objects'][1];
-    $bricks = $sprite['scripts'][1]['bricks'];
-
-    // IfLogicBeginBrick with if_branch and else_branch
-    $if_brick = $bricks[0];
-    $this->assertSame(Constants::IF_BRICK, $if_brick['type']);
-    $this->assertIsArray($if_brick['children']);
-    $this->assertArrayHasKey('if_branch', $if_brick['children']);
-    $this->assertArrayHasKey('else_branch', $if_brick['children']);
-
-    $this->assertCount(1, $if_brick['children']['if_branch']);
-    $this->assertSame(Constants::SHOW_BRICK, $if_brick['children']['if_branch'][0]['type']);
-
-    $this->assertCount(1, $if_brick['children']['else_branch']);
-    $this->assertSame(Constants::HIDE_BRICK, $if_brick['children']['else_branch'][0]['type']);
-  }
-
-  public function testIfThenWithoutElse(): void
-  {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/NestedControlProject/',
-      '',
-      ''
-    );
-
-    $tree = $this->builder->buildFromExtracted($extracted);
-    $sprite = $tree['scenes'][0]['objects'][1];
-    $bricks = $sprite['scripts'][1]['bricks'];
-
-    // IfThenLogicBeginBrick in XML, but BrickFactory normalizes to IF_BRICK type
-    $if_then = $bricks[1];
-    $this->assertSame(Constants::IF_BRICK, $if_then['type']);
-    $this->assertIsArray($if_then['children']);
-    $this->assertArrayHasKey('if_branch', $if_then['children']);
-    $this->assertArrayNotHasKey('else_branch', $if_then['children']);
-
-    $this->assertCount(1, $if_then['children']['if_branch']);
-    $this->assertSame(Constants::PLACE_AT_BRICK, $if_then['children']['if_branch'][0]['type']);
-  }
-
-  public function testMultiSceneProject(): void
-  {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/SceneProject/',
-      '',
-      ''
-    );
-
-    $tree = $this->builder->buildFromExtracted($extracted);
-
-    $this->assertCount(2, $tree['scenes']);
-
-    $scene1 = $tree['scenes'][0];
-    $this->assertSame('Scene 1', $scene1['name']);
-    $this->assertCount(2, $scene1['objects']);
-    $this->assertSame('Cat', $scene1['objects'][1]['name']);
-
-    $scene2 = $tree['scenes'][1];
-    $this->assertSame('Scene 2', $scene2['name']);
-    $this->assertCount(2, $scene2['objects']);
-    $this->assertSame('Dog', $scene2['objects'][1]['name']);
-  }
-
-  public function testMissingFileThrowsException(): void
+  public function testAProjectWhoseCodeCannotBeShown(): void
   {
     $this->expectException(CodeTreeBuildException::class);
-
-    $extracted_file_repository = $this->createStub(ExtractedFileRepository::class);
-    $extracted_file_repository->method('loadProjectExtractedFile')->willReturn(null);
-
-    $builder = new CodeTreeBuilder(
-      $extracted_file_repository,
-      new CatrobatCodeParser(),
-    );
-
-    $project = $this->createStub(\App\DB\Entity\Project\Project::class);
-    $builder->buildCodeTree($project);
+    $this->builder(['error' => 'code.xml is not valid XML'])->buildCodeTree($this->project());
   }
 
-  public function testInvalidXmlThrowsException(): void
+  public function testAProjectWithoutFiles(): void
   {
-    $this->expectException(\App\Project\CatrobatFile\InvalidCatrobatFileException::class);
-
-    // This directory doesn't exist, so ExtractedCatrobatFile constructor will throw
-    new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/NonExistentProject/',
-      '',
-      ''
-    );
+    $this->expectException(CodeTreeBuildException::class);
+    $this->builder(null)->buildCodeTree($this->project());
   }
 
-  public function testBrickDisplayTextSubstitution(): void
+  /**
+   * @param array<string, mixed>|null $export
+   */
+  private function builder(?array $export): CodeTreeBuilder
   {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/SimpleProject/',
-      '',
-      ''
-    );
+    $store = $this->createStub(CodeViewExportStore::class);
+    $store->method('get')->willReturn($export);
+    $requests = new RequestStack();
+    $requests->push(Request::create('/api/projects/p1/code'));
 
-    $tree = $this->builder->buildFromExtracted($extracted);
-    $sprite = $tree['scenes'][0]['objects'][1];
-    $place_at = $sprite['scripts'][0]['bricks'][0];
-
-    // PlaceAtBrick caption is "Place at X: _ Y: _", with formulas substituted
-    $this->assertStringContainsString('100', $place_at['display_text']);
-    $this->assertStringContainsString('200', $place_at['display_text']);
+    return new CodeTreeBuilder($store, new CodeViewLocalizer(new CodeExportRunner('tests/TestData/CodeExport', new NullLogger())), $requests);
   }
 
-  public function testCommentedOutFlag(): void
+  private function project(): Project
   {
-    $extracted = new ExtractedCatrobatFile(
-      BootstrapExtension::$FIXTURES_DIR.'CodeView/SimpleProject/',
-      '',
-      ''
-    );
+    $project = new Project();
+    $project->setId('p1');
 
-    $tree = $this->builder->buildFromExtracted($extracted);
-    $sprite = $tree['scenes'][0]['objects'][1];
-
-    // None of the bricks in this fixture are commented out
-    foreach ($sprite['scripts'] as $script) {
-      $this->assertFalse($script['commented_out']);
-      foreach ($script['bricks'] as $brick) {
-        $this->assertFalse($brick['commented_out']);
-      }
-    }
+    return $project;
   }
 }

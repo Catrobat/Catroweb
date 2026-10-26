@@ -117,6 +117,10 @@ Other pieces:
   that class only); `Vibrator` is `navigator.vibrate`, and the vibrate brick finds Catroid's `VibrationManager` through
   `WebCompat.vibrationStage`. `WebLauncher` starts only what the project needs (`getRequiredResources`), so the browser
   asks for no permission a project does not use; iPhones ask for motion in the start click.
+- Colour sensors: "touching color", "color touches color" and "color at x y" draw the stage into a small frame buffer
+  through a camera whose viewport Catroid never sizes in projects that are not stretched (`MAXIMIZE`, like converted
+  Scratch projects), so nothing was drawn and they never matched. `Rewrite` redirects that viewport's `apply` in
+  those two classes to `WebCompat.applyColorViewport`, which gives it the size Catroid asks for first.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to
   `data-test-result` on the page (7777 = success), which `smoke.sh` checks for a few test projects with looks.
 

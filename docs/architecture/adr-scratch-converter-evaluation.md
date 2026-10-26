@@ -38,6 +38,19 @@ __init_sprites` restores each sprite's position, size, direction, costume and vi
   fail the load) cannot happen.
 - **Unsupported blocks** become NoteBricks, so the project still loads and shows what was dropped. Examples:
   drag mode, sound effects, list monitors, and graphic effects other than color, ghost and brightness.
+- **Loop pace:** Scratch ends every pass of a loop with a frame (30 per second) once anything on stage changed;
+  Catroid only holds a pass for 0.02 s, and only in loops with motion or look bricks, so variable-only game loops ran
+  hundreds of passes a second. Each loop body therefore ends with a wait until the next tick of a 30 per second
+  clock on the timer (plus one 1/60 s display frame, because the timer runs up to a frame ahead of Catroid's
+  scripts), measured at 30 passes a second in the browser player. Not in "run without screen refresh" custom blocks,
+  not when the body already waits, and not in a counted loop that changes nothing visible right in a script (set-up
+  of lists and counters, which Scratch runs at once when nothing else moves). The converter's own helper loops stay
+  unthrottled: they poll input and copy state.
+- **Converter versions:** `ScratchToCatrobatConverter::VERSION` is stored with each converted project
+  (`program.scratch_converter_version`). A copy from an older version is converted again on its next import;
+  `bin/console catro:scratch:reconvert` converts all of them (`--dry-run` lists them, `--limit`, `--pause` seconds
+  between conversions, default 5). It is idempotent: converted projects are not picked up again, and projects
+  Scratch no longer serves keep their old copy.
 - **Keyboard:** every key a project uses gets an on-screen button sprite that sets the key's variable and broadcasts
   the key.
 - **Scratch 2** projects (not saved since 2019) are translated to the Scratch 3 shape first (`Scratch2Project`, a
@@ -55,3 +68,4 @@ header, bracket placement and costume padding offline.
 - Some text engines built from custom blocks (Paper Minecraft's settings values) don't render yet.
 - Scratch compares strings case-insensitively; Pocket Code compares them case-sensitively (broadcasts are matched).
 - The start-up takes a frame per generated brick, so projects with long saved lists start a few seconds late.
+- Variable monitors that a project shows from the start are not converted, only "show variable" blocks.

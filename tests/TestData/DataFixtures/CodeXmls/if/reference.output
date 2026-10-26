@@ -1,6 +1,0 @@
-    when program started 
-        if (0)
-            set X to (100)
-        else
-            set X to (200)
-        end if

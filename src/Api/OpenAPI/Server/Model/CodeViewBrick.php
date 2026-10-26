@@ -37,11 +37,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the CodeViewBrick model.
  *
+ * A script or brick as the Catroid app shows it, made by Catroid itself (the player&#39;s code export) and in the language of the request.
+ *
  * @author  OpenAPI Generator team
  */
 class CodeViewBrick
 {
   /**
+   * Catroid&#39;s class of the brick or script.
+   *
    * @SerializedName("type")
    *
    * @Assert\Type("string")
@@ -51,6 +55,8 @@ class CodeViewBrick
   protected ?string $type = null;
 
   /**
+   * Catroid&#39;s brick category (its layout style), e.g. event, control, motion, look, sound, pen, uservariables, userlist, device; unknown if the brick could not be shown.
+   *
    * @SerializedName("category")
    *
    * @Assert\Type("string")
@@ -58,15 +64,6 @@ class CodeViewBrick
    * @Type("string")
    */
   protected ?string $category = null;
-
-  /**
-   * @SerializedName("display_text")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
-  protected ?string $display_text = null;
 
   /**
    * @SerializedName("commented_out")
@@ -78,34 +75,52 @@ class CodeViewBrick
   protected ?bool $commented_out = null;
 
   /**
-   * @var string[]|null
+   * The brick&#39;s text in order: labels, formula fields and drop-down choices.
    *
-   * @SerializedName("parameters")
+   * @var CodeViewBrickPart[]|null
+   *
+   * @SerializedName("parts")
    *
    * @Assert\All({
    *
-   *   @Assert\Type("string")
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrickPart")
    * })
    *
-   * @Type("array<string, string>")
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrickPart>")
    */
-  protected ?array $parameters = null;
+  protected ?array $parts = null;
 
   /**
-   * Nested bricks for control-flow structures (if/else, loops).
+   * A script&#39;s bricks.
    *
    * @var CodeViewBrick[]|null
    *
-   * @SerializedName("children")
+   * @SerializedName("bricks")
    *
    * @Assert\All({
    *
    *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrick")
    * })
    *
-   * @Type("array<string, OpenAPI\Server\Model\CodeViewBrick>")
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrick>")
    */
-  protected ?array $children = null;
+  protected ?array $bricks = null;
+
+  /**
+   * A control-flow brick: first the bricks inside it, then the parts that follow (else, end if, end of loop), each with its own bricks.
+   *
+   * @var CodeViewBrickSection[]|null
+   *
+   * @SerializedName("sections")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrickSection")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrickSection>")
+   */
+  protected ?array $sections = null;
 
   /**
    * Constructor.
@@ -117,10 +132,10 @@ class CodeViewBrick
     if (is_array($data)) {
       $this->type = array_key_exists('type', $data) ? $data['type'] : $this->type;
       $this->category = array_key_exists('category', $data) ? $data['category'] : $this->category;
-      $this->display_text = array_key_exists('display_text', $data) ? $data['display_text'] : $this->display_text;
       $this->commented_out = array_key_exists('commented_out', $data) ? $data['commented_out'] : $this->commented_out;
-      $this->parameters = array_key_exists('parameters', $data) ? $data['parameters'] : $this->parameters;
-      $this->children = array_key_exists('children', $data) ? $data['children'] : $this->children;
+      $this->parts = array_key_exists('parts', $data) ? $data['parts'] : $this->parts;
+      $this->bricks = array_key_exists('bricks', $data) ? $data['bricks'] : $this->bricks;
+      $this->sections = array_key_exists('sections', $data) ? $data['sections'] : $this->sections;
     }
   }
 
@@ -134,6 +149,8 @@ class CodeViewBrick
 
   /**
    * Sets type.
+   *
+   * @param string|null $type Catroid's class of the brick or script
    *
    * @return $this
    */
@@ -155,31 +172,13 @@ class CodeViewBrick
   /**
    * Sets category.
    *
+   * @param string|null $category Catroid's brick category (its layout style), e.g. event, control, motion, look, sound, pen, uservariables, userlist, device; unknown if the brick could not be shown
+   *
    * @return $this
    */
   public function setCategory(?string $category = null): self
   {
     $this->category = $category;
-
-    return $this;
-  }
-
-  /**
-   * Gets display_text.
-   */
-  public function getDisplayText(): ?string
-  {
-    return $this->display_text;
-  }
-
-  /**
-   * Sets display_text.
-   *
-   * @return $this
-   */
-  public function setDisplayText(?string $display_text = null): self
-  {
-    $this->display_text = $display_text;
 
     return $this;
   }
@@ -205,49 +204,73 @@ class CodeViewBrick
   }
 
   /**
-   * Gets parameters.
+   * Gets parts.
    *
-   * @return string[]|null
+   * @return CodeViewBrickPart[]|null
    */
-  public function getParameters(): ?array
+  public function getParts(): ?array
   {
-    return $this->parameters;
+    return $this->parts;
   }
 
   /**
-   * Sets parameters.
+   * Sets parts.
    *
-   * @param string[]|null $parameters
+   * @param CodeViewBrickPart[]|null $parts The brick's text in order: labels, formula fields and drop-down choices
    *
    * @return $this
    */
-  public function setParameters(?array $parameters = null): self
+  public function setParts(?array $parts = null): self
   {
-    $this->parameters = $parameters;
+    $this->parts = $parts;
 
     return $this;
   }
 
   /**
-   * Gets children.
+   * Gets bricks.
    *
    * @return CodeViewBrick[]|null
    */
-  public function getChildren(): ?array
+  public function getBricks(): ?array
   {
-    return $this->children;
+    return $this->bricks;
   }
 
   /**
-   * Sets children.
+   * Sets bricks.
    *
-   * @param CodeViewBrick[]|null $children Nested bricks for control-flow structures (if/else, loops)
+   * @param CodeViewBrick[]|null $bricks A script's bricks
    *
    * @return $this
    */
-  public function setChildren(?array $children = null): self
+  public function setBricks(?array $bricks = null): self
   {
-    $this->children = $children;
+    $this->bricks = $bricks;
+
+    return $this;
+  }
+
+  /**
+   * Gets sections.
+   *
+   * @return CodeViewBrickSection[]|null
+   */
+  public function getSections(): ?array
+  {
+    return $this->sections;
+  }
+
+  /**
+   * Sets sections.
+   *
+   * @param CodeViewBrickSection[]|null $sections A control-flow brick: first the bricks inside it, then the parts that follow (else, end if, end of loop), each with its own bricks
+   *
+   * @return $this
+   */
+  public function setSections(?array $sections = null): self
+  {
+    $this->sections = $sections;
 
     return $this;
   }

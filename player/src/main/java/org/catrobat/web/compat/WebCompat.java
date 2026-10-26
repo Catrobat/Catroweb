@@ -695,6 +695,20 @@ public final class WebCompat {
 	}
 
 	/**
+	 * Viewport.apply in ColorCollisionDetection and ColorAtXYDetection ("touching color", "color touches color",
+	 * "color at x y"). ColorDetection.createViewport makes an ExtendViewport for projects that are not stretched
+	 * (MAXIMIZE, as converted Scratch projects are) but never updates it, so apply sizes the camera to its world of 0 by
+	 * 0: the projection divides by zero, nothing is drawn into the colour buffer and the sensors never see a colour.
+	 * Here that world is its minimum, the size Catroid asks for, as the ScalingViewport of stretched projects has it.
+	 */
+	public static void applyColorViewport(com.badlogic.gdx.utils.viewport.Viewport viewport) {
+		if (viewport instanceof com.badlogic.gdx.utils.viewport.ExtendViewport extend && 0 == extend.getWorldWidth()) {
+			extend.setWorldSize(extend.getMinWorldWidth(), extend.getMinWorldHeight());
+		}
+		viewport.apply();
+	}
+
+	/**
 	 * Catroid's collision outline of a look, as the app gets it: from the PNG's metadata (the app writes it there, so
 	 * shared projects usually carry it), else computed from the pixels with Catroid's own steps, else the bounding
 	 * box (what the app uses for images that are not PNG). The app reads the image with Android's BitmapFactory;

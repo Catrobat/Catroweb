@@ -60,16 +60,16 @@ class CodeViewObject
   protected ?bool $is_group = null;
 
   /**
-   * @var CodeViewScript[]|null
+   * @var CodeViewBrick[]|null
    *
    * @SerializedName("scripts")
    *
    * @Assert\All({
    *
-   *   @Assert\Type("OpenAPI\Server\Model\CodeViewScript")
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrick")
    * })
    *
-   * @Type("array<OpenAPI\Server\Model\CodeViewScript>")
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrick>")
    */
   protected ?array $scripts = null;
 
@@ -177,7 +177,7 @@ class CodeViewObject
   /**
    * Gets scripts.
    *
-   * @return CodeViewScript[]|null
+   * @return CodeViewBrick[]|null
    */
   public function getScripts(): ?array
   {
@@ -187,7 +187,7 @@ class CodeViewObject
   /**
    * Sets scripts.
    *
-   * @param CodeViewScript[]|null $scripts
+   * @param CodeViewBrick[]|null $scripts
    *
    * @return $this
    */

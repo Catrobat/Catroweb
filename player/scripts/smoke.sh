@@ -32,7 +32,8 @@ kill $SERVER
 # Catroid test projects with looks, played on the stage: each reports its result like on Android (7777 = success).
 # testColorAtXY reads the stage's pixels, so it fails if looks are not drawn; sound-play-and-wait asserts that
 # "play sound and wait" waits for the sound's length; speak-and-wait, that "speak and wait" ends; plot-and-open-url,
-# that a plotted line is on the stage and that saving the plot and opening a link are offered.
+# that a plotted line is on the stage and that saving the plot and opening a link are offered; touching-color-maximize,
+# that "touching color" and "color at x y" see the stage in a project that is not stretched.
 STAGE=build/web/stage-tests
 rm -rf $STAGE
 # testSetTransparency itself runs only in conformance.sh, which retries: its "test loop delay" assertion fails when a
@@ -47,6 +48,8 @@ mkdir -p $STAGE/project-files/speak-and-wait/assets
 unzip -q fixtures/speak-and-wait.catrobat -d $STAGE/project-files/speak-and-wait/assets
 mkdir -p $STAGE/project-files/plot-and-open-url/assets
 unzip -q fixtures/plot-and-open-url.catrobat -d $STAGE/project-files/plot-and-open-url/assets
+mkdir -p $STAGE/project-files/touching-color-maximize/assets
+unzip -q fixtures/touching-color-maximize.catrobat -d $STAGE/project-files/touching-color-maximize/assets
 for test in $(ls $STAGE/project-files); do
   serve 90 $STAGE  # released as soon as the test reports its result
   PAGE=$("$CHROME" --headless=new --disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader \

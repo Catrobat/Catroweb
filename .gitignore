@@ -14,7 +14,6 @@ phploc.phar
 bin/
 !bin/console
 !bin/borg_restore_share.sh
-!bin/checkCatroidRepositoryForNewBricks
 !bin/x_perm.sh
 !bin/x_reset.sh
 !src/Api/OpenAPI/code-generation.sh

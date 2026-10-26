@@ -29,6 +29,12 @@ fail on what they add.
   -200 + 10 \* counter along y = 0. Made by `scripts/make_restart_fixture.py`; `smoke.sh` plays it with
   `scripts/restart_check.py`, which clicks through the start screen, reads the counter off the line, clicks the restart
   button once it is at 10 or more, and checks that it starts again from 0 and counts again.
+- `touching-color-maximize.catrobat`: Catroid's `catrobatTests/touchesColor/testTouchesColorRotate.catrobat` with
+  screen mode `MAXIMIZE` (as converted Scratch projects have it), a white background with a `#7f6927` floor at the
+  bottom and a dark square as the sprite, both PNGs without Catroid's collision metadata. The sprite, at 80 %, falls
+  until it touches the floor's colour (or has fallen past it), then asserts that it touches it and that "color at x
+  y" in the floor equals `#7f6927` within 2 % (GPUs may round it by one). Made by
+  `scripts/make_touching_color_fixture.py`; `smoke.sh` plays it on the stage.
 - `share/`: 23 of share's most downloaded projects, made with Catrobat language 0.9 to 0.999 and named
   `<language version>-<start of the project id>`, each with only its `code.xml` and the header fields naming the
   author or device emptied. They cover how `ProjectLoader` reads old projects: without scenes, with the XML upgrade

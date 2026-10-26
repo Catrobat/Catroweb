@@ -443,6 +443,89 @@ final class ScratchToCatrobatConverterTest extends TestCase
     );
   }
 
+  /**
+   * @param array<string, array<string, mixed>> $body blocks of the loop body, the first one is "b1"
+   */
+  #[DataProvider('loops')]
+  public function testLoopsYieldAFramePerPassLikeScratch(string $opcode, array $body, bool $yields): void
+  {
+    $inputs = 'control_repeat' === $opcode ? ['TIMES' => [1, [6, '10']]] : [];
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'loop', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'loop' => ['opcode' => $opcode, 'next' => null, 'inputs' => [...$inputs, 'SUBSTACK' => [2, 'b1']], 'fields' => []],
+      ...$body,
+    ], ['variables' => ['v1' => ['v', 0]]]);
+    $last = '//script[receivedMessage="__scratch green flag"]//loopBricks/brick[last()]';
+    $this->assertSame($yields ? 1.0 : 0.0, (new \DOMXPath($xml))->evaluate('count('.$last.'[@type="WaitBrick"][.//value="TIMER"])'));
+  }
+
+  /** @return iterable<string, array{string, array<string, array<string, mixed>>, bool}> */
+  public static function loops(): iterable
+  {
+    $set = ['b1' => ['opcode' => 'data_setvariableto', 'next' => null, 'inputs' => ['VALUE' => [1, [10, '1']]], 'fields' => ['VARIABLE' => ['v', 'v1']]]];
+    $move = ['b1' => ['opcode' => 'motion_changexby', 'next' => null, 'inputs' => ['DX' => [1, [4, '1']]], 'fields' => []]];
+    $wait = static fn (string $seconds): array => ['b1' => ['opcode' => 'control_wait', 'next' => null, 'inputs' => ['DURATION' => [1, [5, $seconds]]], 'fields' => []]];
+    $if = static fn (array $inner): array => [
+      'b1' => ['opcode' => 'control_if', 'next' => null, 'inputs' => ['SUBSTACK' => [2, 'i1']], 'fields' => []],
+      'i1' => $inner,
+    ];
+
+    yield 'forever computing variables' => ['control_forever', $set, true];
+    yield 'repeat until computing variables' => ['control_repeat_until', $set, true];
+    yield 'while moving inside an if' => ['control_while', $if($move['b1']), true];
+    yield 'counted loop moving a sprite' => ['control_repeat', $move, true];
+    yield 'counted loop setting up variables' => ['control_repeat', $set, false];
+    yield 'forever waiting a second' => ['control_forever', $wait('1'), false];
+    yield 'forever with wait 0, which only yields' => ['control_forever', $wait('0'), true];
+    yield 'forever waiting only sometimes' => ['control_forever', $if($wait('1')['b1']), true];
+    yield 'empty forever' => ['control_forever', [], true];
+  }
+
+  public function testALoopWaitsForTheNextTickOfA30PerSecondClock(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'loop', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'loop' => ['opcode' => 'control_forever', 'next' => null, 'inputs' => [], 'fields' => []],
+    ]);
+    $waits = (new \DOMXPath($xml))->query('//brick[@type="ForeverBrick"]/loopBricks/brick[@type="WaitBrick"]/formulaList/formula');
+    $wait = false === $waits ? null : $waits->item(0);
+    $this->assertInstanceOf(\DOMElement::class, $wait);
+    foreach ([0.0, 0.01, 1.0, 12.3456, 3600.02] as $timer) {
+      $seconds = self::evaluate($wait, $timer) - 0.0167; // a display frame after the tick
+      $this->assertGreaterThan(0.0, $seconds);
+      $this->assertLessThanOrEqual(0.0333 + 1e-9, $seconds);
+      $ticks = ($timer + $seconds) / 0.0333;
+      $this->assertEqualsWithDelta(round($ticks), $ticks, 1e-6);
+    }
+  }
+
+  public function testACountedLoopSettingVariablesInsideAnotherLoopYields(): void
+  {
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'forever', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'forever' => ['opcode' => 'control_forever', 'next' => null, 'inputs' => ['SUBSTACK' => [2, 'repeat']], 'fields' => []],
+      'repeat' => ['opcode' => 'control_repeat', 'next' => null, 'inputs' => ['TIMES' => [1, [6, '20']], 'SUBSTACK' => [2, 'set']], 'fields' => []],
+      'set' => ['opcode' => 'data_changevariableby', 'next' => null, 'inputs' => ['VALUE' => [1, [4, '4']]], 'fields' => ['VARIABLE' => ['bounce', 'v1']]],
+    ], ['variables' => ['v1' => ['bounce', 0]]]);
+    $repeat = '//brick[@type="ForeverBrick"]/loopBricks/brick[@type="RepeatBrick"]';
+    $this->assertSame(1.0, (new \DOMXPath($xml))->evaluate('count('.$repeat.'/loopBricks/brick[last()][@type="WaitBrick"][.//value="TIMER"])'));
+  }
+
+  public function testLoopsInABlockWithoutScreenRefreshDoNotYield(): void
+  {
+    $procedure = static fn (string $name, bool $warp): array => [
+      $name.'def' => ['opcode' => 'procedures_definition', 'next' => $name.'loop', 'topLevel' => true, 'inputs' => ['custom_block' => [1, $name.'proto']], 'fields' => []],
+      $name.'proto' => ['opcode' => 'procedures_prototype', 'shadow' => true, 'inputs' => [], 'fields' => [], 'mutation' => ['proccode' => $name, 'argumentids' => '[]', 'argumentnames' => '[]', 'warp' => $warp ? 'true' : 'false']],
+      $name.'loop' => ['opcode' => 'control_forever', 'next' => null, 'inputs' => ['SUBSTACK' => [2, $name.'set']], 'fields' => []],
+      $name.'set' => ['opcode' => 'data_setvariableto', 'next' => null, 'inputs' => ['VALUE' => [1, [10, '1']]], 'fields' => ['VARIABLE' => ['v', 'v1']]],
+    ];
+    $xml = self::convertBlocks([...$procedure('fast', true), ...$procedure('normal', false)], ['variables' => ['v1' => ['v', 0]]]);
+    $xpath = new \DOMXPath($xml);
+    $yields = static fn (string $refresh): float => $xpath->evaluate('count(//script[@type="UserDefinedScript"][screenRefresh="'.$refresh.'"]//loopBricks/brick[last()][@type="WaitBrick"][.//value="TIMER"])');
+    $this->assertSame(0.0, $yields('false'));
+    $this->assertSame(1.0, $yields('true'));
+  }
+
   /** Evaluates a formula like Catroid's FormulaElement does, for the few element types the costume wrap uses. */
   private static function evaluate(\DOMElement $element, float $x): float
   {
@@ -455,7 +538,7 @@ final class ScratchToCatrobatConverterTest extends TestCase
 
     return match ((string) $child('type')?->textContent.' '.$value) {
       'NUMBER '.$value => (float) $value,
-      'USER_VARIABLE x' => $x,
+      'USER_VARIABLE x', 'SENSOR TIMER' => $x,
       'BRACKET ' => $right,
       'OPERATOR PLUS' => $left + $right,
       'OPERATOR MINUS' => null === $left ? -$right : $left - $right,
