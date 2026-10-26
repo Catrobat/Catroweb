@@ -131,7 +131,7 @@ jobs:
               echo "No stub report from main to compare with (run $last)."
             fi
           } > build/pr-body.md
-          cat build/pr-body.md >> "$GITHUB_STEP_SUMMARY"
+          tee -a "$GITHUB_STEP_SUMMARY" < build/pr-body.md
 
       - name: Open or update the PR
         id: pr
