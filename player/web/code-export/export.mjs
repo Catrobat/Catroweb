@@ -73,14 +73,16 @@ teavm.main([])
 // biome-ignore lint/suspicious/noControlCharactersInRegex: these control characters are what it takes out
 const MARKER_CHARACTERS = /[\x01\x02\x1f]|&#(?:0*(?:1|2|31)|[xX]0*(?:1|2|1[fF]));/g
 
+// Outside the try: a file that cannot be read fails Node (share tries again), it does not say the project is broken.
+let xml = readFileSync(process.argv[2], 'utf8')
+// until none is left: taking one out can join a new one ("&&#1;#1;")
+for (let before = ''; before !== xml; ) {
+  before = xml
+  xml = xml.replace(MARKER_CHARACTERS, '')
+}
+
 let json
 try {
-  let xml = readFileSync(process.argv[2], 'utf8')
-  // until none is left: taking one out can join a new one ("&&#1;#1;")
-  for (let before = ''; before !== xml; ) {
-    before = xml
-    xml = xml.replace(MARKER_CHARACTERS, '')
-  }
   json = globalThis.catrobatCodeExport(xml)
 } catch (e) {
   json = JSON.stringify({ error: String(e?.message ?? e) })
