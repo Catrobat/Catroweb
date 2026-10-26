@@ -64,13 +64,13 @@
 #start-screen .needs .missing { margin-top: 8px; padding: 10px 14px; border-radius: 12px; background: rgba(0,0,0,.4); }
 #start-screen .needs ul { margin: 6px 0; padding-inline-start: 20px; }
 #start-screen p { margin: 0; }
-#fullscreen-button { position: fixed; z-index: 10; top: max(12px, env(safe-area-inset-top));
-  right: max(12px, env(safe-area-inset-right)); width: 44px; height: 44px; padding: 10px; border: 0;
-  border-radius: 12px; background: rgba(0,0,0,.5); color: #fff; cursor: pointer;
-  animation: catrobat-fade .4s 3s forwards; }
-#fullscreen-button:hover, #fullscreen-button:focus-visible { animation: none; opacity: 1; }
-#fullscreen-button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
-#fullscreen-button[hidden] { display: none; }
+#stage-buttons { position: fixed; z-index: 10; top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right)); display: flex; gap: 8px; }
+#stage-buttons button { width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 12px;
+  background: rgba(0,0,0,.5); color: #fff; cursor: pointer; animation: catrobat-fade .4s 3s forwards; }
+#stage-buttons button:hover, #stage-buttons button:focus-visible { animation: none; opacity: 1; }
+#stage-buttons button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+#stage-buttons button[hidden] { display: none; }
 @keyframes catrobat-pulse { 0% { box-shadow: 0 0 0 0 rgba(63,216,230,.6), 0 8px 32px rgba(0,180,200,.45); }
   70%, 100% { box-shadow: 0 0 0 22px rgba(63,216,230,0), 0 8px 32px rgba(0,180,200,.45); } }
 @keyframes catrobat-spin { to { transform: rotate(360deg); } }
@@ -376,30 +376,36 @@
       back.focus()
     },
 
-    // The stage is there. Leaving full screen (Esc) leaves a small button to go back.
-    close() {
+    // The stage is there: a restart button, as in the app's stage menu, and after leaving full screen (Esc) a
+    // small button to go back.
+    close(restart) {
       overlay.remove()
-      if (!document.fullscreenEnabled) {
-        return
+      const buttons = document.createElement('div')
+      buttons.id = 'stage-buttons'
+      const add = (label, path, onclick) => {
+        const button = document.createElement('button')
+        button.type = 'button'
+        button.title = label
+        button.setAttribute('aria-label', label)
+        button.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="${path}"/></svg>`
+        button.onclick = () => {
+          button.blur() // the game's keys must not press it again
+          onclick()
+        }
+        buttons.append(button)
+        return button
       }
-      const again = document.createElement('button')
-      again.id = 'fullscreen-button'
-      again.type = 'button'
-      again.title = 'Full screen'
-      again.setAttribute('aria-label', 'Full screen')
-      again.innerHTML =
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>'
-      again.onclick = () => {
-        again.blur() // the game's keys must not press it again
-        goFullScreen()
+      if (document.fullscreenEnabled) {
+        const again = add('Full screen', 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5', goFullScreen)
+        // Hidden is display: none, so the button fades again each time it comes back.
+        const update = () => {
+          again.hidden = Boolean(document.fullscreenElement)
+        }
+        document.addEventListener('fullscreenchange', update)
+        update()
       }
-      // Hidden is display: none, so the button fades again each time it comes back.
-      const update = () => {
-        again.hidden = Boolean(document.fullscreenElement)
-      }
-      document.addEventListener('fullscreenchange', update)
-      update()
-      document.body.append(again)
+      add(text('stage_dialog_restart', 'Restart'), 'M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5', restart)
+      document.body.append(buttons)
     },
   }
 })()

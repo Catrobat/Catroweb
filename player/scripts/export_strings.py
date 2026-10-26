@@ -61,7 +61,7 @@ START = ["prestage_resource_not_available_title", "prestage_resource_not_availab
          "app_name", "google_play_store_logo",
          # its status and buttons, and the player's prompts (catroid/BrowserHandoff)
          "loading", "please_wait", "status_downloading", "main_menu_play", "play", "error_load_project",
-         "stage_dialog_back", "save", "brick_open", "cancel"]
+         "stage_dialog_back", "stage_dialog_restart", "save", "brick_open", "cancel"]
 
 
 def language_tag(qualifier):

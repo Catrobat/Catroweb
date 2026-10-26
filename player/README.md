@@ -86,9 +86,11 @@ Other pieces:
   every language Catroid ships) in the browser's language, English otherwise. `StartScreen` drives it and waits for the click
   browsers require before they play sound; `?autostart` has no start screen. The click also goes full screen and, on
   Android, locks the screen to the project's orientation (iPhones have no full screen for pages); after leaving full
-  screen, a small button in the corner goes back. A project that cannot be loaded says why, with a link back to
-  share. `QuickStart`, in gdx-teavm's package, skips the two waits of gdx-teavm's start (its preloader fills its bar
-  at 0.9 per second, then it renders only from the 61st frame on), about two seconds.
+  screen, a small button in the corner goes back. Next to it, a restart button (Catroid's "Restart") does what the
+  app's stage menu does (`StageDialog.onRestartPressed`): `StageListener.reloadProject`, then the stage runs on.
+  A project that cannot be loaded says why, with a link back to share. The page's icon is Pocket Code's launcher
+  icon from Catroid (`icon.png`, copied by `build.sh`). `QuickStart`, in gdx-teavm's package, skips the two waits of
+  gdx-teavm's start (its preloader fills its bar at 0.9 per second, then it renders only from the 61st frame on), about two seconds.
 - Open URL and save/share plot (and save/share laser, which subclass them): what the app hands to Android goes to the
   browser (`catroid/BrowserHandoff`). The link opens in a new tab (http and https only, `noopener,noreferrer`); the
   plot is Catroid's own SVG (`SVGPlotGenerator`, caught by a redirect of `writeToSVGFile`) offered as a download.

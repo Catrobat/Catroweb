@@ -53,7 +53,7 @@ public final class StartScreen {
 	@JSBody(params = "message", script = "var s = window.catrobatStart; if (s) s.fail(message);")
 	public static native void fail(String message);
 
-	/** Removes the start screen once the stage is there. */
-	@JSBody(script = "var s = window.catrobatStart; if (s) s.close();")
-	public static native void close();
+	/** Removes the start screen once the stage is there and shows the buttons over the stage, restart among them. */
+	@JSBody(params = "restart", script = "var s = window.catrobatStart; if (s) s.close(restart);")
+	public static native void close(Sounds.Callback restart);
 }
