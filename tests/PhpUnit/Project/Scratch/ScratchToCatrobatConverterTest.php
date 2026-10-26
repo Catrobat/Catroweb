@@ -156,6 +156,50 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(6, \ord($png[25]), 'PNG color type RGBA; Pocket Code reads grayscale as alpha');
   }
 
+  public function testScratch2SvgTextUsesItsTransformInsteadOfObsoleteCoordinates(): void
+  {
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="40"><text x="200" y="200" transform="translate(5 0)" font-size="22">Play</text></svg>';
+    $normalizer = new AssetNormalizer();
+    foreach ([false, true] as $legacy) {
+      $png = $normalizer->costumeToPng($svg, ['dataFormat' => 'svg', 'scratch2' => $legacy, 'rotationCenterX' => 40, 'rotationCenterY' => 20], microtime(true) + 10.0);
+      $image = new \Imagick();
+      $image->readImageBlob($png);
+      $alpha = $image->getImageChannelMean(\Imagick::CHANNEL_ALPHA)['mean'];
+      $this->assertSame($legacy, $alpha > 0, 'Only Scratch 2 ignores the obsolete text x/y coordinates.');
+    }
+  }
+
+  public function testCloneCostumeSwitchesKeepDistinctCostumesWithIdenticalImages(): void
+  {
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4"/></svg>';
+    $asset = md5($svg);
+    $costume = ['assetId' => $asset, 'md5ext' => $asset.'.svg', 'dataFormat' => 'svg', 'rotationCenterX' => 2, 'rotationCenterY' => 2];
+    $xml = self::convertBlocks([
+      'clone' => ['opcode' => 'control_start_as_clone', 'topLevel' => true, 'next' => 'switch', 'inputs' => [], 'fields' => []],
+      'switch' => ['opcode' => 'looks_switchcostumeto', 'next' => null, 'inputs' => ['COSTUME' => [1, 'menu']], 'fields' => []],
+      'menu' => ['opcode' => 'looks_costume', 'shadow' => true, 'inputs' => [], 'fields' => ['COSTUME' => ['D1', null]]],
+    ], ['costumes' => [['name' => 'U3', ...$costume], ['name' => 'D1', ...$costume]]], [$asset.'.svg' => $svg]);
+    $xpath = new \DOMXPath($xml);
+    $script = '//script[@type="WhenClonedScript"]';
+    $this->assertSame('2', $xpath->evaluate('string('.$script.'//brick[@type="SetLookByIndexBrick"]/formulaList/formula[@category="LOOK_INDEX"]/value)'));
+    $this->assertSame(0.0, $xpath->evaluate('count('.$script.'//brick[@type="SetLookBrick"])'));
+    $this->assertSame(2.0, $xpath->evaluate('count(//object[@name="Sprite"]/lookList/look)'));
+  }
+
+  public function testSavedVisibleVariableMonitorsAreShownAtTheirSavedPositions(): void
+  {
+    $xml = self::convertBlocks([], ['variables' => ['v' => ['score', 7], 'hidden' => ['secret', 9]]], [], [
+      ['id' => 'v', 'opcode' => 'data_variable', 'spriteName' => 'Sprite', 'visible' => true, 'x' => 20, 'y' => 30],
+      ['id' => 'hidden', 'opcode' => 'data_variable', 'spriteName' => 'Sprite', 'visible' => false],
+    ]);
+    $xpath = new \DOMXPath($xml);
+    $show = '//object[@name="Sprite"]//brick[@type="ShowTextColorSizeAlignmentBrick"]';
+    $this->assertSame(1.0, $xpath->evaluate('count('.$show.')'));
+    $this->assertSame('215', $xpath->evaluate('string('.$show.'/formulaList/formula[@category="X_POSITION"]/rightChild/value)'));
+    $this->assertSame('140', $xpath->evaluate('string('.$show.'/formulaList/formula[@category="Y_POSITION"]/value)'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$show.'/preceding-sibling::brick[@type="SetVariableBrick"])'));
+  }
+
   public function testAScratch2TextLayerIsDrawnOverItsCostume(): void
   {
     $png = static function (string $color): string {
@@ -288,12 +332,16 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $held = '__scratch key right arrow';
     $this->assertSame(1.0, $xpath->evaluate('count(//script[@type="BroadcastScript"][receivedMessage="'.$held.'"])'));
     $this->assertSame($held, $xpath->evaluate('string(//brick[@type="WaitUntilBrick"]/formulaList/formula[@category="IF_CONDITION"][type="USER_VARIABLE"]/value)'));
-    $this->assertSame(1.0, $xpath->evaluate('count(//programVariableList/userVariable)'));
+    $this->assertSame(2.0, $xpath->evaluate('count(//programVariableList/userVariable)'));
     $button = '//object[@name="⌨ right arrow"]';
     $this->assertSame(1.0, $xpath->evaluate('count('.$button.'/lookList/look)'));
-    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//brick[@type="SetVariableBrick"][formulaList/formula/value="COLLIDES_WITH_FINGER"])'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//brick[@type="SetVariableBrick"][formulaList/formula/value="LOGICAL_AND"][.//value="COLLIDES_WITH_FINGER"])'));
     $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//script[@type="WhenScript"]/brickList/brick[@type="BroadcastBrick"][broadcastMessage="'.$held.'"])'));
     $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//brick[@type="RepeatUntilBrick"]//brick[@type="BroadcastBrick"][broadcastMessage="'.$held.'"])'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//script[receivedMessage="__scratch init sprites"]//brick[@type="HideBrick"])'));
+    $toggle = '//object[@name="⌨ Controls"]';
+    $this->assertSame(1.0, $xpath->evaluate('count('.$toggle.'//script[@type="WhenScript"]//brick[@type="BroadcastBrick"][broadcastMessage="__scratch controls toggled"])'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$button.'//script[receivedMessage="__scratch controls toggled"]//elseBranchBricks/brick[@type="HideBrick"])'));
   }
 
   public function testWasdKeysGetTheirOwnButtonsWithoutArrows(): void
@@ -555,12 +603,12 @@ final class ScratchToCatrobatConverterTest extends TestCase
    * @param array<string, mixed>                $sprite overrides for the sprite target
    * @param array<string, string>               $assets md5ext => bytes
    */
-  private static function convertBlocks(array $blocks, array $sprite = [], array $assets = []): \DOMDocument
+  private static function convertBlocks(array $blocks, array $sprite = [], array $assets = [], array $monitors = []): \DOMDocument
   {
     $project = ['targets' => [
       ['isStage' => true, 'name' => 'Stage', 'variables' => [], 'lists' => [], 'blocks' => [], 'costumes' => [], 'sounds' => []],
       [...['isStage' => false, 'name' => 'Sprite', 'variables' => [], 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []], ...$sprite],
-    ]];
+    ], 'monitors' => $monitors];
     $archive = (string) tempnam(sys_get_temp_dir(), 'scratch-test');
     (new ScratchToCatrobatConverter(new AssetNormalizer()))->convert(1, $project, ['title' => 'Blocks'], $assets, null, $archive);
     $zip = new \ZipArchive();

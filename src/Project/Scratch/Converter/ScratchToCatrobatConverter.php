@@ -18,7 +18,7 @@ class ScratchToCatrobatConverter
    * Raise when a change should reach projects converted before it: older copies are converted again on their next
    * import, or all at once with catro:scratch:reconvert. 2: loops yield a frame per pass, like Scratch.
    */
-  public const int VERSION = 2;
+  public const int VERSION = 3;
 
   private const string SCENE = 'Scene';
   private const int MAX_BLOCKS = 100_000;
@@ -92,6 +92,14 @@ class ScratchToCatrobatConverter
         $sprites[] = self::keyButton($key, isset($twins[$key]) ? [$key, $twins[$key]] : [$key], $others, $assets);
       }
     }
+    if ([] !== $keys) {
+      $stage['variables'][$model->helper('controls visible')] = [$model->helper('controls visible'), 0];
+      $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="28"><rect x="1" y="1" width="38" height="26" rx="5" fill="#fff" fill-opacity="0.8" stroke="#333" stroke-width="2"/><path d="M7 8h4m3 0h4m3 0h4m3 0h4M7 14h4m3 0h4m3 0h4m3 0h4M11 21h18" stroke="#333" stroke-width="3"/></svg>';
+      $hash = md5($svg);
+      $assets[$hash.'.svg'] = $svg;
+      $sprites[] = ['name' => '⌨ Controls', 'scratchKeyToggle' => true, 'x' => 214, 'y' => 158, 'rotationStyle' => "don't rotate",
+        'costumes' => [['name' => 'Keyboard', 'md5ext' => $hash.'.svg', 'assetId' => $hash, 'dataFormat' => 'svg', 'rotationCenterX' => 20, 'rotationCenterY' => 14]]];
+    }
 
     // "when timer/loudness >" and "when touching" fire as soon as their condition holds, but Scratch sets up a project
     // in no time; ours takes a frame per generated brick, so they wait for the start-up (a watchdog "when timer > 1.8:
@@ -101,6 +109,31 @@ class ScratchToCatrobatConverter
     }
 
     $cloned = self::clonedSprites($targets);
+    foreach ($project['monitors'] ?? [] as $monitor) {
+      if (!($monitor['visible'] ?? false) || 'data_variable' !== ($monitor['opcode'] ?? null)) {
+        continue;
+      }
+      if ('large' !== ($monitor['mode'] ?? 'default')) {
+        $monitor['display'] = $model->helper('monitor '.($monitor['spriteName'] ?? 'Stage').' '.($monitor['id'] ?? ''));
+      }
+
+      if (null === ($monitor['spriteName'] ?? null)) {
+        $stage['scratchMonitors'][] = $monitor;
+        if (isset($monitor['display'])) {
+          $stage['variables'][$monitor['display']] = [$monitor['display'], ''];
+        }
+      } else {
+        foreach ($sprites as &$sprite) {
+          if ($sprite['name'] === $monitor['spriteName']) {
+            $sprite['scratchMonitors'][] = $monitor;
+            if (isset($monitor['display'])) {
+              $sprite['variables'][$monitor['display']] = [$monitor['display'], ''];
+            }
+          }
+        }
+        unset($sprite);
+      }
+    }
     foreach ($targets as $target) {
       if (self::switchesByComputedName($target, 'looks_switchbackdropto', 'BACKDROP') || self::switchesByComputedName($target, 'looks_switchbackdroptoandwait', 'BACKDROP')) {
         $stage['lists'][$model->helper('backdrop names')] = [$model->helper('backdrop names'), array_column($stage['costumes'] ?? [], 'name')];
@@ -268,6 +301,14 @@ class ScratchToCatrobatConverter
       if (isset($target['scratchKeys'])) {
         $scripts = [...$scripts, ...$this->keyScripts($c, $model, $target['scratchKeys'])];
       }
+      if ($target['scratchKeyToggle'] ?? false) {
+        $visible = $model->helper('controls visible');
+        $scripts[] = $c->script('WhenScript', [
+          $c->brick('SetVariableBrick', ['VARIABLE' => Formula::op('MINUS', Formula::number(1), Formula::variable($visible))], [], [$model->variableElement(null, $visible)]),
+          $c->brick('BroadcastBrick', [], [], [$c->text('broadcastMessage', $model->helper('controls toggled'))]),
+        ]);
+        $scripts[] = $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', [$c->brick('ComeToFrontBrick')])])]);
+      }
 
       if (self::touchesMouse($target)) {
         // Scratch's mouse stays where it was released: buttons that click on release ask "touching mouse-pointer?"
@@ -300,6 +341,17 @@ class ScratchToCatrobatConverter
     if ([] !== $copies) {
       // ponytail: "stop other scripts in sprite" stops this for good; a restart would need clones to stay out of it.
       $scripts[] = $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', $copies)])]);
+    }
+
+    foreach ($target['scratchMonitors'] ?? [] as $monitor) {
+      $variable = $target['variables'][$monitor['id'] ?? ''] ?? null;
+      if (!isset($monitor['display']) || null === $variable) {
+        continue;
+      }
+
+      $scripts[] = $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', [
+        $c->brick('SetVariableBrick', ['VARIABLE' => Formula::fn('JOIN', Formula::string($variable[0].': '), Formula::variable($variable[0]))], [], [$model->variableElement($key, $monitor['display'])]),
+      ])])]);
     }
 
     return $scripts;
@@ -367,7 +419,7 @@ class ScratchToCatrobatConverter
    * Pocket Code has no keyboard. Holding a key's button sets the keys' variables, which "key pressed?" reads, and
    * broadcasts them like a keyboard does: once on the tap, which catches even taps shorter than a frame, then
    * repeated after half a second.
-   * The buttons come to the front every frame, above sprites that "go to front".
+   * The keyboard icon shows/hides the buttons, so menus and game sprites need not stay covered.
    * ponytail: touching a button also counts as "mouse down".
    *
    * @param list<string> $keys the button's key and its twin
@@ -384,11 +436,18 @@ class ScratchToCatrobatConverter
     );
 
     return [
+      $c->script('BroadcastScript', [
+        $c->brick('IfLogicBeginBrick', ['IF_CONDITION' => Formula::variable($model->helper('controls visible'))], [
+          $c->list('ifBranchBricks', [$c->brick('ShowBrick')]),
+          $c->list('elseBranchBricks', [$c->brick('HideBrick')]),
+        ]),
+        ...array_map(static fn (string $name): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number(0)], [], [$model->variableElement(null, $name)]), $names),
+      ], [$c->text('receivedMessage', $model->helper('controls toggled'))]),
       $c->script('WhenScript', $send()),
       $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', [
         $c->brick('ComeToFrontBrick'),
         ...array_map(
-          static fn (string $name): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::sensor('COLLIDES_WITH_FINGER')], [], [$model->variableElement(null, $name)]),
+          static fn (string $name): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::op('LOGICAL_AND', Formula::variable($model->helper('controls visible')), Formula::sensor('COLLIDES_WITH_FINGER'))], [], [$model->variableElement(null, $name)]),
           $names,
         ),
       ])])]),
@@ -415,6 +474,18 @@ class ScratchToCatrobatConverter
     $bricks = [];
     foreach ($target['variables'] ?? [] as $id => $variable) {
       $bricks[] = $c->brick('SetVariableBrick', ['VARIABLE' => self::saved($variable[1] ?? 0)], [], [$model->variableElement($key, (string) $variable[0], (string) $id)]);
+      foreach ($target['scratchMonitors'] ?? [] as $monitor) {
+        if ((string) $id !== (string) ($monitor['id'] ?? '')) {
+          continue;
+        }
+
+        $bricks[] = $c->brick('ShowTextColorSizeAlignmentBrick', [
+          'X_POSITION' => Formula::number(max(-235, min(235, (float) ($monitor['x'] ?? 0) - 235))),
+          'Y_POSITION' => Formula::number(max(-170, min(170, 170 - (float) ($monitor['y'] ?? 0)))),
+          'SIZE' => Formula::number('large' === ($monitor['mode'] ?? '') ? 50 : 30),
+          'COLOR' => Formula::string('#000000'),
+        ], [], [$model->monitorElement($key, (string) $variable[0], (string) $id), $c->text('alignmentSelection', '0')]);
+      }
     }
 
     $items = 0;
@@ -613,7 +684,7 @@ class ScratchToCatrobatConverter
     $assets[$md5.'.svg'] = $svg;
 
     return [
-      'name' => '⌨ '.$key, 'scratchKeys' => $pressed, 'x' => $x, 'y' => $y, 'rotationStyle' => "don't rotate",
+      'name' => '⌨ '.$key, 'scratchKeys' => $pressed, 'visible' => false, 'x' => $x, 'y' => $y, 'rotationStyle' => "don't rotate",
       'costumes' => [['name' => $key, 'md5ext' => $md5.'.svg', 'assetId' => $md5, 'dataFormat' => 'svg', 'rotationCenterX' => $width / 2, 'rotationCenterY' => 20]],
     ];
   }
