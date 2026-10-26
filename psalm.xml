@@ -20,8 +20,6 @@
         <directory name="translations" />
         <ignoreFiles>
             <directory name="vendor" />
-            <!-- Legacy code that will be removed in the future -->
-            <directory name="src/Project/CatrobatCode"/>
             <!-- Generated code -->
             <directory name="src/Api/OpenAPI/Server"/>
             <file name="config/reference.php"/>

@@ -35,6 +35,7 @@ set('writable_mode', 'acl');
 // Shared directories
 set('shared_dirs', [
   'var/log',
+  'var/code-view', // code views made by the player's code export (App\Project\CodeView)
   'var/sessions',
   'public/resources',
   '.jwt',
@@ -51,6 +52,7 @@ add('shared_files', [
 set('writable_dirs', [
   'var/cache',
   'var/log',
+  'var/code-view',
   'var/sessions',
   'public/resources',
 ]);
@@ -147,7 +149,12 @@ task('deploy:player', function () {
   // and player/index.html points at the current one. A failed player build must not block a release.
   $build = __DIR__.'/player/build/dist/js/webapp';
   if (!is_file($build.'/app.js')) {
-    warning('No complete browser player build found, skipping it');
+    // Keep the live release's player and code export, so the player and the code view work as before.
+    warning('No complete browser player build found, keeping the previous release\'s');
+    if (has('previous_release')) {
+      run('if [ -d {{previous_release}}/public/player ]; then cp -a {{previous_release}}/public/player {{release_path}}/public/; fi');
+      run('if [ -d {{previous_release}}/var/code-export ]; then mkdir -p {{release_path}}/var && cp -a {{previous_release}}/var/code-export {{release_path}}/var/; fi');
+    }
 
     return;
   }
@@ -156,14 +163,16 @@ task('deploy:player', function () {
   $hashes = [];
   foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($build, \FilesystemIterator::SKIP_DOTS)) as $file) {
     $relative = substr($file->getPathname(), strlen($build) + 1);
-    if (!str_starts_with($relative, 'WEB-INF/')) {
+    if (!str_starts_with($relative, 'WEB-INF/') && !str_starts_with($relative, 'code-export/')) {
       $hashes[$relative] = sha1_file($file->getPathname());
     }
   }
   ksort($hashes);
   $version = substr(sha1(json_encode($hashes, JSON_THROW_ON_ERROR)), 0, 12);
   run("mkdir -p {{release_path}}/public/player/{$version}"); // rsync creates only the last path segment
-  upload($build.'/', "{{release_path}}/public/player/{$version}/", ['options' => ['--exclude=WEB-INF']]);
+  upload($build.'/', "{{release_path}}/public/player/{$version}/", ['options' => ['--exclude=WEB-INF', '--exclude=code-export']]);
+  // The code view's export, which share runs with Node (App\Project\CodeView\CodeExportRunner): not web-served.
+  upload($build.'/code-export/', '{{release_path}}/var/code-export/');
   // A meta refresh drops the #<project id>; the script keeps it.
   run('cp {{release_path}}/public/favicon.ico {{release_path}}/public/player/favicon.ico');
   run("printf '%s' '<!doctype html><script>location.replace(\"{$version}/index.html\" + location.hash)</script><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");

@@ -1186,7 +1186,7 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the code tree of a project'
-      description: 'Returns a structured tree representation of the project code: scenes > objects > scripts > bricks. Bricks include their type, category, display text, parameters, and nested children for control-flow bricks.'
+      description: "Returns the project code as the Catroid app shows it: scenes > objects > scripts > bricks, made by Catroid's own code (the browser player's code export) for projects from Catrobat language 0.9 on, in the request's language. 422 when the code cannot be shown, 503 when it cannot be made right now."
       parameters:
         - $ref: '#/components/parameters/Uuid'
       responses:
@@ -1200,6 +1200,14 @@ paths:
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+        '503':
+          description: 'The code view cannot be made right now (being made, or the export could not run); try again'
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+                example: 5
+              description: 'Seconds to wait before retrying'
 
   '/projects/{id}/code-statistics':
     get:
@@ -6218,7 +6226,7 @@ components:
         scripts:
           type: array
           items:
-            $ref: '#/components/schemas/CodeViewScript'
+            $ref: '#/components/schemas/CodeViewBrick'
         looks:
           type: array
           items:
@@ -6246,58 +6254,61 @@ components:
           description: Project-authorized file URL; follows the project page access policy.
           example: '/project-files/abc123/assets/images/cat_look.png'
 
-    CodeViewScript:
+    CodeViewBrick:
       type: object
+      description: "A script or brick as the Catroid app shows it, made by Catroid itself (the player's code export) and in the language of the request."
       properties:
         type:
           type: string
-          example: 'StartScript'
+          description: "Catroid's class of the brick or script"
+          example: 'PlaceAtBrick'
         category:
           type: string
-          example: 'event'
-        display_text:
-          type: string
-          example: 'When program started'
+          description: "Catroid's brick category (its layout style), e.g. event, control, motion, look, sound, pen, uservariables, userlist, device; unknown if the brick could not be shown"
+          example: 'motion'
         commented_out:
           type: boolean
           example: false
+        parts:
+          type: array
+          description: "The brick's text in order: labels, formula fields and drop-down choices"
+          items:
+            $ref: '#/components/schemas/CodeViewBrickPart'
+        bricks:
+          type: array
+          nullable: true
+          description: "A script's bricks"
+          items:
+            $ref: '#/components/schemas/CodeViewBrick'
+        sections:
+          type: array
+          nullable: true
+          description: 'A control-flow brick: first the bricks inside it, then the parts that follow (else, end if, end of loop), each with its own bricks'
+          items:
+            $ref: '#/components/schemas/CodeViewBrickSection'
+
+    CodeViewBrickPart:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum: ['label', 'formula', 'choice']
+          example: 'formula'
+        text:
+          type: string
+          example: '100'
+
+    CodeViewBrickSection:
+      type: object
+      properties:
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewBrickPart'
         bricks:
           type: array
           items:
             $ref: '#/components/schemas/CodeViewBrick'
-
-    CodeViewBrick:
-      type: object
-      properties:
-        type:
-          type: string
-          example: 'PlaceAtBrick'
-        category:
-          type: string
-          example: 'motion'
-        display_text:
-          type: string
-          example: 'Place at X: 100 Y: 200'
-        commented_out:
-          type: boolean
-          example: false
-        parameters:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: string
-          example:
-            X_POSITION: '100'
-            Y_POSITION: '200'
-        children:
-          type: object
-          nullable: true
-          description: 'Nested bricks for control-flow structures (if/else, loops)'
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/CodeViewBrick'
-          example: null
 
     CodeStatisticsResponse:
       type: object

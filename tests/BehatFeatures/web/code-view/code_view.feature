@@ -120,11 +120,59 @@ Feature: As a visitor I want to see inline code view on the project page
     When I click "#code-view-toggle"
     Then the element "#code-view-panel" should not be visible
 
-  Scenario: Code view shows error state when no extracted files exist
+  Scenario: Code view shows the bricks as the app does, made by the code export
+    Given project "1" has extracted code xml:
+      """
+      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <program>
+        <header>
+          <programName>TestProject</programName>
+          <catrobatLanguageVersion>0.99</catrobatLanguageVersion>
+        </header>
+        <objectList>
+          <object name="Background">
+            <lookList/>
+            <soundList/>
+            <scriptList>
+              <script type="StartScript">
+                <brickList>
+                  <brick type="WaitBrick"/>
+                </brickList>
+              </script>
+            </scriptList>
+          </object>
+        </objectList>
+      </program>
+      """
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    When I click "#code-view-toggle"
+    And I wait for AJAX to finish
+    Then I wait for the element "#code-view-panel" to contain "When scene starts"
+    And the element ".cv-field" should exist
+    And I should see "Wait"
+    And I should see "second"
+
+  Scenario: Code view says so when a project's code cannot be shown
+    Given project "1" has extracted code xml:
+      """
+      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <program>
+        <!-- BROKEN: the test code export fails on this -->
+        <objectList/>
+      </program>
+      """
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    When I click "#code-view-toggle"
+    And I wait for AJAX to finish
+    Then I wait for the element "#code-view-panel" to contain "code can't be shown"
+    And the element ".cv-retry-btn" should not exist
+
+  Scenario: Code view says so when the project has no files
     Given project "1" has no extracted files
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     When I click "#code-view-toggle"
     And I wait for AJAX to finish
-    Then I wait for the element "#code-view-panel" to contain "Try again"
-    And the element ".cv-retry-btn" should be visible
+    Then I wait for the element "#code-view-panel" to contain "code can't be shown"

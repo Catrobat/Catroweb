@@ -959,6 +959,7 @@ codeView:
   title: 'Code View'
   loading: 'Loading code view...'
   error: 'Could not load code view.'
+  unavailable: "This project's code can't be shown."
   retry: 'Try again'
   empty: 'This project has no code.'
   scripts: 'Scripts'

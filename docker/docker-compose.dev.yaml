@@ -29,7 +29,6 @@ services:
       #
       # bin: We can't share the bin folder since most files(symlinks) are generated during the build process.
       #      If needed, shared files have to be explicitly defined:
-      - ./../bin/checkCatroidRepositoryForNewBricks:/var/www/catroweb/bin/checkCatroidRepositoryForNewBricks:cached
       - ./../bin/console:/var/www/catroweb/bin/console:cached
       - ./../bin/x_perm.sh:/var/www/catroweb/bin/x_perm.sh:cached
       - ./../bin/x_reset.sh:/var/www/catroweb/bin/x_reset.sh:cached

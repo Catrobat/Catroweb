@@ -1,5 +1,6 @@
 # Operations
 
+- [Code-View.md](./Code-View.md) — The project page's code view, made by the player's code export (Catroid's own code) under Node.
 - [Cron-Jobs.md](./Cron-Jobs.md) — How the `catrobat:cronjob` dispatcher schedules and tracks all periodic tasks.
 - [Protected-Project-Files.md](./Protected-Project-Files.md) — Authorized delivery of project files and the nginx rollout order.
 - [Data-consistency.md](./Data-consistency.md) — Read-only data consistency checks and explicitly approved repairs using the application owner.
