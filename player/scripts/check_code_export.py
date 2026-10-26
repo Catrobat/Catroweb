@@ -8,7 +8,6 @@ cutting or joining a marker, which share could then not translate).
 Runs export.mjs under Node like share does (one process per project, with Node's permission model) and prints one line
 per problem, then a summary with the export's start and per-project times."""
 import json
-import os
 import re
 import subprocess
 import sys
