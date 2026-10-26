@@ -158,17 +158,11 @@ task('deploy:player', function () {
 
     return;
   }
-  // Named after all its files, so no changed file hides behind the year-long cache of its folder. WEB-INF is the
-  // build tool's, not the player's.
-  $hashes = [];
-  foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($build, \FilesystemIterator::SKIP_DOTS)) as $file) {
-    $relative = substr($file->getPathname(), strlen($build) + 1);
-    if (!str_starts_with($relative, 'WEB-INF/') && !str_starts_with($relative, 'code-export/')) {
-      $hashes[$relative] = sha1_file($file->getPathname());
-    }
+  // TeaVM output order varies between builds; the build records a version of its source inputs instead.
+  $version = trim((string) file_get_contents($build.'/version.txt'));
+  if (1 !== preg_match('/^[0-9a-f]{12}$/D', $version)) {
+    throw new \RuntimeException('Invalid browser player build version');
   }
-  ksort($hashes);
-  $version = substr(sha1(json_encode($hashes, JSON_THROW_ON_ERROR)), 0, 12);
   run("mkdir -p {{release_path}}/public/player/{$version}"); // rsync creates only the last path segment
   upload($build.'/', "{{release_path}}/public/player/{$version}/", ['options' => ['--exclude=WEB-INF', '--exclude=code-export']]);
   // The code view's export, which share runs with Node (App\Project\CodeView\CodeExportRunner): not web-served.

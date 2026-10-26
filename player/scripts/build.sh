@@ -85,9 +85,8 @@ for round in $(seq 1 12); do
       build/catroid/catroid/src/catroid/res $E
     (cd $E && npm ci --omit=dev --ignore-scripts --no-audit --no-fund --silent && rm package.json package-lock.json)
     # From what the export is built from, not from code-export.js: TeaVM orders its output differently on every build.
-    git ls-files -z catroid.commit build.gradle.kts settings.gradle.kts gradle compat src web/code-export scripts/build.sh \
-      scripts/prepare.sh scripts/export_code_resources.py scripts/catroid-classpath.init.gradle | xargs -0 shasum \
-      | shasum | cut -c1-12 > $E/version.txt
+    python3 scripts/build_version.py > build/dist/js/webapp/version.txt
+    cp build/dist/js/webapp/version.txt $E/version.txt
     # The start screen shows up before app.js is in (web/start.js).
     cp web/start.js build/dist/js/webapp/start.js
     python3 - build/dist/js/webapp/index.html <<'EOF'

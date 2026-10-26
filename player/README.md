@@ -155,8 +155,10 @@ empty environment the export has no secrets to send anywhere.
 ## Deployment
 
 The deployment workflow builds the player in its own job, without secrets, and hands only the built files to the
-deploy job; if the build fails, share deploys without it. `deploy:player` uploads it to `public/player/<hash of app.js>/`,
-a new folder per build because nginx caches `.js` for a year. `/player/index.html` forwards to the current one.
+deploy job; if the build fails, share deploys without it. `scripts/build_version.py` hashes the tracked build inputs
+and the Catroid commit actually built into `version.txt`. `deploy:player` uploads it to `public/player/<version>/`:
+identical inputs keep the same URL despite TeaVM's varying output order; source changes get a new URL because nginx
+caches `.js` for a year. The code export uses the same version. `/player/index.html` forwards to the current one.
 
 The player is meant to run on its own host, `play.catrobat.org`, whose nginx vhost (in the infrastructure repository)
 serves share's `public/player/`: project code then never shares an origin with share's login cookies, which share's API
