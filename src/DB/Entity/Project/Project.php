@@ -64,6 +64,10 @@ class Project implements \Stringable
   #[ORM\Column(type: Types::INTEGER, unique: true, nullable: true)]
   protected ?int $scratch_id = null;
 
+  /** ScratchToCatrobatConverter::VERSION that made this copy; null for copies made before versions were stored */
+  #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+  protected ?int $scratch_converter_version = null;
+
   /**
    * The user owning this Program. If this User gets deleted, this Program gets deleted as well.
    */
@@ -838,6 +842,16 @@ class Project implements \Stringable
   public function getScratchId(): ?int
   {
     return $this->scratch_id;
+  }
+
+  public function setScratchConverterVersion(?int $scratch_converter_version): void
+  {
+    $this->scratch_converter_version = $scratch_converter_version;
+  }
+
+  public function getScratchConverterVersion(): ?int
+  {
+    return $this->scratch_converter_version;
   }
 
   public function isScratchProgram(): bool

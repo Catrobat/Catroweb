@@ -14,6 +14,12 @@ namespace App\Project\Scratch\Converter;
  */
 class ScratchToCatrobatConverter
 {
+  /**
+   * Raise when a change should reach projects converted before it: older copies are converted again on their next
+   * import, or all at once with catro:scratch:reconvert. 2: loops yield a frame per pass, like Scratch.
+   */
+  public const int VERSION = 2;
+
   private const string SCENE = 'Scene';
   private const int MAX_BLOCKS = 100_000;
   private const int MAX_SECONDS = 90;

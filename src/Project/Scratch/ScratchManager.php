@@ -57,7 +57,8 @@ class ScratchManager
     }
 
     $modified = TimeUtils::dateTimeFromScratch((string) ($metadata['history']['modified'] ?? ''));
-    if (null !== $converted && (!$modified instanceof \DateTime || $converted->getLastModifiedAt()->getTimestamp() >= $modified->getTimestamp())) {
+    $current = null !== $converted && ($converted->getScratchConverterVersion() ?? 1) >= ScratchToCatrobatConverter::VERSION;
+    if ($current && (!$modified instanceof \DateTime || $converted->getLastModifiedAt()->getTimestamp() >= $modified->getTimestamp())) {
       return $converted;
     }
 
@@ -94,9 +95,12 @@ class ScratchManager
       $project_json = $this->fetcher->fetchProject($scratch_id, $metadata);
       $this->converter->convert($scratch_id, $project_json, $metadata, $this->fetcher->fetchAssets($project_json), $this->fetcher->fetchThumbnail($scratch_id), $archive);
 
-      $project = $this->project_manager->addProject(new AddProjectRequest($user, new File($archive), $ip, null, Flavor::POCKETCODE, $existing?->getId(), $scratch_id));
+      $project = $this->project_manager->addProject(new AddProjectRequest($user, new File($archive), $ip, null, Flavor::POCKETCODE, $existing?->getId(), $scratch_id))
+        ?? throw new ScratchConversionException('The converted project could not be published.');
+      $project->setScratchConverterVersion(ScratchToCatrobatConverter::VERSION);
+      $this->entity_manager->flush();
 
-      return $project ?? throw new ScratchConversionException('The converted project could not be published.');
+      return $project;
     } catch (\Throwable $throwable) {
       // Drop half-applied entity changes, so nothing flushed later in this request writes them.
       if ($this->entity_manager->isOpen()) {
