@@ -12,7 +12,7 @@ import tempfile
 import time
 
 chrome, url = sys.argv[1], sys.argv[2]
-profile = tempfile.TemporaryDirectory()
+profile = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)  # Chrome's helpers may still write to it after the kill
 
 
 def high(fd):  # clear of 3 and 4, which child_fds fills
