@@ -76,7 +76,7 @@ for round in $(seq 1 12); do
     python3 scripts/export_strings.py --start build/dist/js/webapp/strings \
       build/catroid/catroid/src/main/res build/catroid/catroid/src/catroid/res
     # The code view's export (README.md, "Code view export"), which share runs with Node: next to the player, so
-    # deploy:player ships both. version.txt changes with it, so share makes its stored code views again.
+    # deploy:player ships both. version.txt changes with its inputs, so share makes its stored code views again.
     E=build/dist/js/webapp/code-export
     rm -rf $E && mkdir -p $E
     cp build/dist/js/code_export/webapp/code-export.js web/code-export/export.mjs web/code-export/package.json \
@@ -84,7 +84,10 @@ for round in $(seq 1 12); do
     python3 scripts/export_code_resources.py ${JAVA_HOME:+$JAVA_HOME/bin/}javap $IN/R.jar build/catroid/catroid/src/main/res \
       build/catroid/catroid/src/catroid/res $E
     (cd $E && npm ci --omit=dev --ignore-scripts --no-audit --no-fund --silent && rm package.json package-lock.json)
-    cat $E/code-export.js $E/resources.json $E/export.mjs | shasum | cut -c1-12 > $E/version.txt
+    # From what the export is built from, not from code-export.js: TeaVM orders its output differently on every build.
+    git ls-files -z catroid.commit build.gradle.kts settings.gradle.kts gradle compat src web/code-export scripts/build.sh \
+      scripts/prepare.sh scripts/export_code_resources.py scripts/catroid-classpath.init.gradle | xargs -0 shasum \
+      | shasum | cut -c1-12 > $E/version.txt
     # The start screen shows up before app.js is in (web/start.js).
     cp web/start.js build/dist/js/webapp/start.js
     python3 - build/dist/js/webapp/index.html <<'EOF'
