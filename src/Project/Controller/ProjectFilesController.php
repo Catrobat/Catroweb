@@ -26,7 +26,7 @@ final class ProjectFilesController
   public function asset(Request $request, string $id, string $path): Response
   {
     $raw_path = explode('?', $request->getRequestUri(), 2)[0];
-    if (preg_match('/%(?:2f|5c|00|25)/i', $raw_path)) {
+    if (preg_match('/%(?:2f|00|25)/i', $raw_path)) {
       return $this->deny();
     }
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
