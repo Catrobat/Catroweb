@@ -72,7 +72,7 @@ public final class BrowserHandoff {
 			+ "border-radius:12px;background:#fff;color:#1a1a1a;box-shadow:0 4px 16px rgba(0,0,0,.4);font:16px/1.4 system-ui,sans-serif';"
 			+ "var text = document.createElement('p'); text.style.cssText = 'margin:0 0 12px;overflow-wrap:anywhere';"
 			+ "var name = document.createElement('strong'); name.textContent = target;"
-			+ "text.append(null !== fileName ? 'This project wants to save ' : 'This project wants to open ', name);"
+			+ "text.append(null !== fileName ? t('save', 'Save') : t('brick_open', 'Open'), ': ', name);"
 			+ "var buttons = document.createElement('div'); buttons.style.cssText = 'display:flex;justify-content:flex-end;gap:8px';"
 			+ "var look = 'min-height:44px;padding:0 16px;border-radius:8px;font:600 16px system-ui,sans-serif;cursor:pointer;"
 			+ "display:inline-flex;align-items:center;text-decoration:none;';"

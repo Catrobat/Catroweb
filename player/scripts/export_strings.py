@@ -61,7 +61,7 @@ START = ["prestage_resource_not_available_title", "prestage_resource_not_availab
          "app_name", "google_play_store_logo",
          # its status and buttons, and the player's prompts (catroid/BrowserHandoff)
          "loading", "please_wait", "status_downloading", "main_menu_play", "play", "error_load_project",
-         "stage_dialog_back", "stage_dialog_restart", "save", "brick_open", "cancel"]
+         "stage_dialog_back", "stage_dialog_restart", "save", "brick_open", "cancel", "show_details"]
 
 
 def language_tag(qualifier):
@@ -95,7 +95,10 @@ def export_start(out, *res_dirs):
                 texts = read_strings(values)
                 tags.setdefault(tag, dict(tags["en"])).update({n: texts[n] for n in START if n in texts})
     Path(out).mkdir(parents=True, exist_ok=True)
+    # Browser fullscreen has no Catroid string. Keep its translations alongside the browser UI.
+    fullscreen = json.loads((Path(__file__).resolve().parents[1] / "web/fullscreen.json").read_text())
     for tag, texts in tags.items():
+        texts["web_fullscreen"] = fullscreen.get(tag, fullscreen.get(tag.split("-")[0], fullscreen["en"]))
         (Path(out) / f"{tag}.json").write_text(json.dumps(texts, ensure_ascii=False, separators=(",", ":")))
     (Path(out) / "locales.json").write_text(json.dumps(sorted(tags)))
     print(f"start screen strings in {len(tags)} languages")
