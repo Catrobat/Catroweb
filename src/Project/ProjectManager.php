@@ -211,7 +211,10 @@ class ProjectManager
     $project->setUser($request->getUser());
     $project->setCatrobatVersionName($extracted_file->getApplicationVersion());
     $project->setLanguageVersion($extracted_file->getLanguageVersion());
-    $project->setUploadIp($request->getIp());
+    // Background imports have no visitor IP; keep an existing upload's address in that case.
+    if (null !== $request->getIp()) {
+      $project->setUploadIp($request->getIp());
+    }
     $project->setFilesize($file->getSize());
     $project->setApproved(false);
     $project->setUploadLanguage('en');
