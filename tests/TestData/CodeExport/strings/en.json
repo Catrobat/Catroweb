@@ -1,0 +1,11 @@
+{
+  "a": { "brick_stop_script_spinner": ["this script", "all scripts"] },
+  "p": { "second_plural": { "one": "second", "other": "seconds" } },
+  "s": {
+    "brick_wait": "Wait",
+    "brick_when_started": "When scene starts",
+    "brick_show": "Show",
+    "brick_hide": "Hide",
+    "x_label": "X: %1$s"
+  }
+}

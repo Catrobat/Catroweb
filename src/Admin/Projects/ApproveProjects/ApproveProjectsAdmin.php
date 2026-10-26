@@ -113,22 +113,6 @@ class ApproveProjectsAdmin extends AbstractAdmin
     return $this->extractedProject->getContainingStrings();
   }
 
-  /**
-   * @param mixed|Project $object
-   */
-  public function getContainingCodeObjects(mixed $object): array
-  {
-    if (null === $this->extractedProject) {
-      $this->extractedProject = $this->loadExtractedProject($object);
-    }
-
-    if (null === $this->extractedProject || $this->extractedProject->hasScenes()) {
-      return [];
-    }
-
-    return $this->extractedProject->getContainingCodeObjects();
-  }
-
   #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
@@ -177,7 +161,8 @@ class ApproveProjectsAdmin extends AbstractAdmin
         'template' => 'Admin/Projects/ContainingStrings.html.twig',
       ])
       ->add('Objects', null, [
-        'accessor' => $this->getContainingCodeObjects(...),
+        'accessor' => static function ($subject): void {
+        }, // A link to the project's code view, nothing to "access"!
         'template' => 'Admin/Projects/ContainingCodeObjects.html.twig',
       ])
       ->add('Actions', null, [

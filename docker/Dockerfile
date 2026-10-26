@@ -64,7 +64,7 @@ RUN apt-get update && \
     apache2 \
     git \
     curl && \
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -yq --no-install-recommends nodejs && \
     corepack enable && \
     corepack prepare yarn@4.12.0 --activate && \

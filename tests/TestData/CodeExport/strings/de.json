@@ -1,0 +1,5 @@
+{
+  "a": { "brick_stop_script_spinner": ["dieses Skript"] },
+  "p": { "second_plural": { "one": "Sekunde", "other": "Sekunden" } },
+  "s": { "brick_wait": "Warte", "brick_show": "Zeige dich" }
+}

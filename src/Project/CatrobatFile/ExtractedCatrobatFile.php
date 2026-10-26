@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Project\CatrobatFile;
 
 use App\DB\EntityRepository\Project\ProjectRepository;
-use App\Project\CatrobatCode\CodeObject;
-use App\Project\CatrobatCode\StatementFactory;
 use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixUrlIndicator;
 use App\Project\Remix\RemixUrlParsingState;
@@ -345,35 +343,6 @@ class ExtractedCatrobatFile
     return array_values($unique_remixes);
   }
 
-  public function getContainingCodeObjects(): array
-  {
-    $objects = [];
-    $objectList = $this->getCodeObjects();
-    foreach ($objectList as $object) {
-      $objects = $this->addObjectsToArray($objects, $object->getCodeObjectsRecursively());
-    }
-
-    return $objectList + $objects;
-  }
-
-  public function getCodeObjects(): array
-  {
-    $objects = [];
-    $objectList = $this->project_xml_properties->objectList?->children();
-    if (null === $objectList) {
-      return [];
-    }
-
-    foreach ($objectList as $object) {
-      $newObject = $this->getObject($object);
-      if (null != $newObject) {
-        $objects[] = $newObject;
-      }
-    }
-
-    return $objects;
-  }
-
   public function hasScenes(): bool
   {
     $scenes = $this->project_xml_properties->xpath('//scenes');
@@ -389,22 +358,6 @@ class ExtractedCatrobatFile
     }
 
     return $header;
-  }
-
-  private function getObject(\SimpleXMLElement $objectTree): ?CodeObject
-  {
-    $factory = new StatementFactory();
-
-    return $factory->createObject($objectTree);
-  }
-
-  private function addObjectsToArray(array $objects, mixed $objectsToAdd): array
-  {
-    foreach ($objectsToAdd as $object) {
-      $objects[] = $object;
-    }
-
-    return $objects;
   }
 
   private function createDirectoryInSceneIfNotExist(string $base_path, string $dir_regex, string $dir_name): void

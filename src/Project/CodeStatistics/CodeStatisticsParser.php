@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Project\CodeStatistics;
 
 use App\DB\Entity\Project\ProjectCodeStatistics;
-use App\Project\CatrobatCode\Parser\Constants;
 
 /**
  * @phpstan-type RubricContext array{
@@ -45,45 +44,45 @@ class CodeStatisticsParser
   final public const string LEGACY_SCORING_VERSION = 'legacy_keyword_counts_v1';
 
   private const array ABSTRACTION_TYPES = [
-    Constants::USER_DEFINED_SCRIPT,
+    'UserDefinedScript',
     'UserDefinedBrick',
     'UserDefinedReceiverBrick',
-    Constants::CLONE_BRICK,
-    Constants::DELETE_THIS_CLONE_BRICK,
+    'CloneBrick',
+    'DeleteThisCloneBrick',
   ];
 
   private const array LOGICAL_THINKING_BRICKS = [
-    Constants::IF_BRICK,
-    Constants::IF_THEN_BRICK,
-    Constants::PHIRO_IF_LOGIC_BEGIN_BRICK,
-    Constants::RASPI_IF_LOGIC_BEGIN_BRICK,
+    'IfLogicBeginBrick',
+    'IfThenLogicBeginBrick',
+    'PhiroIfLogicBeginBrick',
+    'RaspiIfLogicBeginBrick',
   ];
 
   private const array FLOW_CONTROL_DEVELOPING_BRICKS = [
-    Constants::FOREVER_BRICK,
-    Constants::REPEAT_BRICK,
+    'ForeverBrick',
+    'RepeatBrick',
   ];
 
   private const array FLOW_CONTROL_PROFICIENCY_BRICKS = [
-    Constants::REPEAT_UNTIL_BRICK,
+    'RepeatUntilBrick',
   ];
 
   private const array DATA_REPRESENTATION_BASIC_BRICKS = [
-    Constants::PLACE_AT_BRICK,
-    Constants::SET_X_BRICK,
-    Constants::SET_Y_BRICK,
-    Constants::GO_TO_BRICK,
-    Constants::CHANGE_X_BY_N_BRICK,
-    Constants::CHANGE_Y_BY_N_BRICK,
-    Constants::MOVE_N_STEPS_BRICK,
-    Constants::SET_SIZE_TO_BRICK,
-    Constants::CHANGE_SIZE_BY_N_BRICK,
-    Constants::SET_LOOK_BRICK,
-    Constants::SET_LOOK_BY_INDEX_BRICK,
-    Constants::NEXT_LOOK_BRICK,
-    Constants::PREV_LOOK_BRICK,
-    Constants::HIDE_BRICK,
-    Constants::SHOW_BRICK,
+    'PlaceAtBrick',
+    'SetXBrick',
+    'SetYBrick',
+    'GoToBrick',
+    'ChangeXByNBrick',
+    'ChangeYByNBrick',
+    'MoveNStepsBrick',
+    'SetSizeToBrick',
+    'ChangeSizeByNBrick',
+    'SetLookBrick',
+    'SetLookByIndexBrick',
+    'NextLookBrick',
+    'PreviousLookBrick',
+    'HideBrick',
+    'ShowBrick',
   ];
 
   private const array DATA_REPRESENTATION_DEVELOPING_BRICKS = [
@@ -100,48 +99,48 @@ class CodeStatisticsParser
   ];
 
   private const array USER_INTERACTIVITY_DEVELOPING_TYPES = [
-    Constants::ASK_BRICK,
-    Constants::WHEN_TOUCH_SCRIPT,
-    Constants::WHEN_TOUCH_BRICK,
+    'AskBrick',
+    'WhenTouchDownScript',
+    'WhenTouchDownBrick',
   ];
 
   private const array USER_INTERACTIVITY_PROFICIENCY_TYPES = [
-    Constants::ASK_SPEECH_BRICK,
-    Constants::START_LISTENING_BRICK,
-    Constants::CAMERA_BRICK,
-    Constants::CHOOSE_CAMERA_BRICK,
+    'AskSpeechBrick',
+    'StartListeningBrick',
+    'CameraBrick',
+    'ChooseCameraBrick',
   ];
 
   private const array SYNCHRONIZATION_BASIC_BRICKS = [
-    Constants::WAIT_BRICK,
+    'WaitBrick',
   ];
 
   private const array SYNCHRONIZATION_DEVELOPING_BRICKS = [
-    Constants::BROADCAST_BRICK,
-    Constants::STOP_SCRIPT_BRICK,
+    'BroadcastBrick',
+    'StopScriptBrick',
   ];
 
   private const array SYNCHRONIZATION_PROFICIENCY_TYPES = [
-    Constants::WAIT_UNTIL_BRICK,
-    Constants::BROADCAST_WAIT_BRICK,
-    Constants::WHEN_BG_CHANGE_SCRIPT,
+    'WaitUntilBrick',
+    'BroadcastWaitBrick',
+    'WhenBackgroundChangesScript',
   ];
 
   private const array PHYSICS_BRICKS = [
-    Constants::SET_PHYSICS_OBJECT_TYPE_BRICK,
-    Constants::SET_VELOCITY_BRICK,
-    Constants::TURN_LEFT_SPEED_BRICK,
-    Constants::TURN_RIGHT_SPEED_BRICK,
-    Constants::SET_GRAVITY_BRICK,
-    Constants::SET_MASS_BRICK,
-    Constants::SET_BOUNCE_BRICK,
-    Constants::SET_FRICTION_BRICK,
+    'SetPhysicsObjectTypeBrick',
+    'SetVelocityBrick',
+    'TurnLeftSpeedBrick',
+    'TurnRightSpeedBrick',
+    'SetGravityBrick',
+    'SetMassBrick',
+    'SetBounceBrick',
+    'SetFrictionBrick',
   ];
 
   private const array LOGICAL_OPERATOR_VALUES = [
-    Constants::AND_OPERATOR,
-    Constants::OR_OPERATOR,
-    Constants::NOT_OPERATOR,
+    'LOGICAL_AND',
+    'LOGICAL_OR',
+    'LOGICAL_NOT',
   ];
 
   private const array DEVELOPING_INTERACTIVITY_SENSOR_VALUES = [
@@ -287,7 +286,7 @@ class CodeStatisticsParser
     $count = 0;
     if (preg_match_all('/<object\s+type="([^"]+)"/', $xml_content, $matches)) {
       foreach ($matches[1] as $type) {
-        if (Constants::SINGLE_SPRITE_TYPE === $type || Constants::GROUP_ITEM_SPRITE_TYPE === $type) {
+        if ('SingleSprite' === $type || 'GroupItemSprite' === $type) {
           ++$count;
         }
       }
@@ -367,11 +366,11 @@ class CodeStatisticsParser
     $stats->setScoreAbstraction($this->sumRubricLevels(
       array_sum($script_counts) > 1,
       $this->hasAnyTypeCount($type_counts, self::ABSTRACTION_TYPES),
-      ($script_counts[Constants::WHEN_CLONED_SCRIPT] ?? 0) > 0,
+      ($script_counts['WhenClonedScript'] ?? 0) > 0,
     ));
 
     $stats->setScoreParallelism($this->sumRubricLevels(
-      ($script_counts[Constants::START_SCRIPT] ?? 0) > 1,
+      ($script_counts['StartScript'] ?? 0) > 1,
       $context['tapped_scripts_same_object'],
       $context['duplicate_broadcast_messages']
         || $context['duplicate_background_targets']
@@ -397,7 +396,7 @@ class CodeStatisticsParser
     ));
 
     $stats->setScoreUserInteractivity($this->sumRubricLevels(
-      ($script_counts[Constants::START_SCRIPT] ?? 0) > 0,
+      ($script_counts['StartScript'] ?? 0) > 0,
       $this->hasAnyTypeCount($type_counts, self::USER_INTERACTIVITY_DEVELOPING_TYPES)
         || $context['tapped_scripts_same_object']
         || $context['has_developing_sensor'],
@@ -459,7 +458,7 @@ class CodeStatisticsParser
     }
 
     $broadcast_counts = [];
-    foreach ($xml->xpath('//script[@type="'.Constants::BROADCAST_SCRIPT.'"]/receivedMessage') ?: [] as $message_node) {
+    foreach ($xml->xpath('//script[@type="BroadcastScript"]/receivedMessage') ?: [] as $message_node) {
       $message = $this->normalizeText((string) $message_node);
       if ('' !== $message) {
         $broadcast_counts[$message] = ($broadcast_counts[$message] ?? 0) + 1;
@@ -468,7 +467,7 @@ class CodeStatisticsParser
     $context['duplicate_broadcast_messages'] = $this->hasDuplicateCount($broadcast_counts);
 
     $background_counts = [];
-    foreach ($xml->xpath('//script[@type="'.Constants::WHEN_BG_CHANGE_SCRIPT.'"]') ?: [] as $script) {
+    foreach ($xml->xpath('//script[@type="WhenBackgroundChangesScript"]') ?: [] as $script) {
       $key = $this->extractBackgroundChangeKey($script);
       if ('' !== $key) {
         $background_counts[$key] = ($background_counts[$key] ?? 0) + 1;
@@ -477,7 +476,7 @@ class CodeStatisticsParser
     $context['duplicate_background_targets'] = $this->hasDuplicateCount($background_counts);
 
     $condition_counts = [];
-    foreach ($xml->xpath('//script[@type="'.Constants::WHEN_CONDITION_SCRIPT.'"]') ?: [] as $script) {
+    foreach ($xml->xpath('//script[@type="WhenConditionScript"]') ?: [] as $script) {
       $formula_nodes = $script->xpath('./formulaMap/formula');
       $formula = is_array($formula_nodes) ? ($formula_nodes[0] ?? null) : null;
       foreach ($this->extractConditionKeys($formula) as $key) {
@@ -523,12 +522,12 @@ class CodeStatisticsParser
         $context['has_script_with_brick'] = true;
       }
 
-      if (Constants::WHEN_TOUCH_SCRIPT === $script_type) {
+      if ('WhenTouchDownScript' === $script_type) {
         ++$tap_script_count;
         continue;
       }
 
-      if (Constants::WHEN_SCRIPT === $script_type) {
+      if ('WhenScript' === $script_type) {
         $action = $this->normalizeText((string) $script->action);
         if ('' === $action || 'Tapped' === $action) {
           ++$tap_script_count;

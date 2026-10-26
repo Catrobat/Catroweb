@@ -111,6 +111,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.featuredimage.path', 'resources/featured/');
   $parameters->set('catrobat.exampleimage.dir', '%catrobat.pubdir%resources/example/');
   $parameters->set('catrobat.exampleimage.path', 'resources/example/');
+  // The player's code export (player/README.md) and the code views made with it (App\Project\CodeView).
+  $parameters->set('catrobat.code_export.dir', '%kernel.project_dir%/public/player/current/code-export');
+  $parameters->set('catrobat.code_view.dir', '%kernel.project_dir%/var/code-view/');
   $parameters->set('catrobat.file.extract.dir', '%kernel.project_dir%/public/resources/extract/');
   $parameters->set('catrobat.file.extract.path', 'resources/extract/');
   $parameters->set('catrobat.file.storage.dir', '%kernel.project_dir%/public/resources/programs/');

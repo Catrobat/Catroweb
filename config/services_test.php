@@ -18,6 +18,8 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\inline_se
 return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
 
+  $parameters->set('catrobat.code_export.dir', '%kernel.project_dir%/tests/TestData/CodeExport');
+  $parameters->set('catrobat.code_view.dir', '%catrobat.pubdir%resources_test/code-view/');
   $parameters->set('catrobat.file.extract.dir', '%catrobat.pubdir%resources_test/extract/');
   $parameters->set('catrobat.file.extract.path', 'resources_test/extract/');
   $parameters->set('catrobat.file.storage.dir', '%catrobat.pubdir%resources_test/projects/');

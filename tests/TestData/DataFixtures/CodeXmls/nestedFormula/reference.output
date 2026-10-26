@@ -1,6 +1,0 @@
-    used looks: 
-        Background-Tutorial4 (filename: 422ab4c672f968eca8c9149359f7d87e_Background-Tutorial4.png)
-    when program started 
-        forever
-            set X to (PLUS(MINUS(MINUS(OBJECT_SIZE, MULT(OBJECT_X, OBJECT_Y)), MOD(COMPASS_DIRECTION, X_INCLINATION)), LOUDNESS))
-        endless loop

@@ -35,6 +35,7 @@ set('writable_mode', 'acl');
 // Shared directories
 set('shared_dirs', [
   'var/log',
+  'var/code-view', // code views made by the player's code export (App\Project\CodeView)
   'var/sessions',
   'public/resources',
   '.jwt',
@@ -51,6 +52,7 @@ add('shared_files', [
 set('writable_dirs', [
   'var/cache',
   'var/log',
+  'var/code-view',
   'var/sessions',
   'public/resources',
 ]);
@@ -166,6 +168,8 @@ task('deploy:player', function () {
   upload($build.'/', "{{release_path}}/public/player/{$version}/", ['options' => ['--exclude=WEB-INF']]);
   // A meta refresh drops the #<project id>; the script keeps it.
   run('cp {{release_path}}/public/favicon.ico {{release_path}}/public/player/favicon.ico');
+  // share runs the code view's export (code-export/) from the current build (App\Project\CodeView\CodeExportRunner).
+  run("ln -sfn {$version} {{release_path}}/public/player/current");
   run("printf '%s' '<!doctype html><script>location.replace(\"{$version}/index.html\" + location.hash)</script><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");
 });
 

@@ -1,4 +1,3 @@
-import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml } from '../Components/HtmlEscape'
 import './CodeViewInline.css'
 
@@ -18,69 +17,71 @@ const COLORS = {
   unknown: '#9E9E9E',
 }
 
-const BRANCH_LABELS = {
-  if_branch: 'if',
-  else_branch: 'else',
-  loop_body: 'repeat',
+// Catroid's brick categories (its layout styles) that share's colors name differently
+const CATEGORY_CLASSES = {
+  look: 'looks',
+  uservariables: 'data',
+  userlist: 'data',
+  userdefinedbrick: 'user_defined',
+  script: 'user_defined',
+  report: 'user_defined',
+  arduino: 'extension',
+  phiro: 'extension',
+  raspi: 'extension',
+  drone: 'extension',
+  jumpingsumo: 'extension',
+  chromecast: 'extension',
+  plot: 'extension',
+  laser: 'extension',
+  test: 'extension',
 }
 
 function categoryClass(category) {
-  return COLORS[category] ? category : 'unknown'
+  const name = CATEGORY_CLASSES[category] || category
+  return COLORS[name] ? name : 'unknown'
+}
+
+// A brick's text as the app shows it: labels, formula fields and drop-down choices
+function renderParts(parts) {
+  if (!Array.isArray(parts)) return ''
+  return parts
+    .map((part) => {
+      const text = escapeHtml(part.text || '')
+      if (part.kind === 'formula') return `<span class="cv-field">${text}</span>`
+      if (part.kind === 'choice') return `<span class="cv-field cv-field--choice">${text}</span>`
+      return text
+    })
+    .join(' ')
+}
+
+function renderBrickList(bricks) {
+  if (!Array.isArray(bricks) || bricks.length === 0) return ''
+  return `<div class="cv-block__children">${bricks.map(renderBrick).join('')}</div>`
 }
 
 function renderBrick(brick) {
   const cat = categoryClass(brick.category || 'unknown')
   const commented = brick.commented_out ? ' cv-block--commented' : ''
-  const text = escapeHtml(brick.display_text || brick.type || '')
+  const text = renderParts(brick.parts) || escapeHtml(brick.type || '')
 
-  let childrenHtml = ''
-  if (brick.children && typeof brick.children === 'object') {
-    const branches = Object.keys(brick.children)
-    for (let i = 0; i < branches.length; i++) {
-      const key = branches[i]
-      const bricks = brick.children[key]
-      if (!Array.isArray(bricks)) continue
-
-      childrenHtml += '<div class="cv-block__children">'
-      if (branches.length > 1) {
-        const label = BRANCH_LABELS[key] || key
-        childrenHtml += `<div class="cv-branch-label">${escapeHtml(label)}</div>`
-      }
-      for (let j = 0; j < bricks.length; j++) {
-        childrenHtml += renderBrick(bricks[j])
-      }
-      childrenHtml += '</div>'
-    }
+  // An if's or loop's bricks, then its else / end if / end of loop with theirs
+  let sections = ''
+  if (Array.isArray(brick.sections)) {
+    brick.sections.forEach((section, i) => {
+      if (i > 0) sections += `<div class="cv-branch-label">${renderParts(section.parts)}</div>`
+      sections += renderBrickList(section.bricks)
+    })
   }
 
-  return `<div class="cv-block cv-block--${cat}${commented}">${text}${childrenHtml}</div>`
+  return `<div class="cv-block cv-block--${cat}${commented}">${text}${sections}</div>`
 }
 
 function renderScript(script) {
   const cat = categoryClass(script.category || 'event')
   const commented = script.commented_out ? ' cv-block--commented' : ''
-  const text = escapeHtml(script.display_text || script.type || '')
+  const text = renderParts(script.parts) || escapeHtml(script.type || '')
 
-  let bricksHtml = ''
-  if (Array.isArray(script.bricks) && script.bricks.length > 0) {
-    bricksHtml += '<div class="cv-block__children">'
-    for (let i = 0; i < script.bricks.length; i++) {
-      bricksHtml += renderBrick(script.bricks[i])
-    }
-    bricksHtml += '</div>'
-  }
-
-  return (
-    '<div class="cv-block cv-block--' +
-    cat +
-    commented +
-    '">' +
-    '<strong>' +
-    text +
-    '</strong>' +
-    bricksHtml +
-    '</div>'
-  )
+  return `<div class="cv-block cv-block--${cat}${commented}"><strong>${text}</strong>${renderBrickList(script.bricks)}</div>`
 }
 
 function renderScriptsTab(scripts) {
@@ -390,28 +391,49 @@ async function loadCodeView(url, container, panel) {
     '</span>' +
     '</div>'
 
+  let response
   try {
-    const data = await new ApiFetch(url, 'GET', undefined, 'json').run()
-    panel.innerHTML = renderCodeView(data, container)
-    bindToggleEvents(panel)
-    return true
+    response = await window.fetch(url, { credentials: 'same-origin' })
   } catch (e) {
     console.error('Failed to load code view', e)
-    panel.innerHTML =
-      '<div class="cv-status">' +
-      '<i class="material-icons">warning</i>' +
-      '<span>' +
-      escapeHtml(container.dataset.transError || 'Could not load code view.') +
-      '</span>' +
-      '<button type="button" class="cv-retry-btn" data-url="' +
-      escapeHtml(url) +
-      '">' +
-      escapeHtml(container.dataset.transRetry || 'Try again') +
-      '</button>' +
-      '</div>'
-    bindToggleEvents(panel)
-    return false
   }
+
+  // 422: this project's code cannot be shown (e.g. its code.xml is broken); trying again would not help
+  if (response && response.status === 422) {
+    panel.innerHTML =
+      '<div class="cv-status cv-status--unavailable">' +
+      '<i class="material-icons">code_off</i>' +
+      '<span>' +
+      escapeHtml(container.dataset.transUnavailable || "This project's code can't be shown.") +
+      '</span>' +
+      '</div>'
+    return true
+  }
+
+  if (response?.ok) {
+    try {
+      panel.innerHTML = renderCodeView(await response.json(), container)
+      bindToggleEvents(panel)
+      return true
+    } catch (e) {
+      console.error('Failed to show code view', e)
+    }
+  }
+
+  panel.innerHTML =
+    '<div class="cv-status">' +
+    '<i class="material-icons">warning</i>' +
+    '<span>' +
+    escapeHtml(container.dataset.transError || 'Could not load code view.') +
+    '</span>' +
+    '<button type="button" class="cv-retry-btn" data-url="' +
+    escapeHtml(url) +
+    '">' +
+    escapeHtml(container.dataset.transRetry || 'Try again') +
+    '</button>' +
+    '</div>'
+  bindToggleEvents(panel)
+  return false
 }
 
 document.addEventListener('DOMContentLoaded', () => {
