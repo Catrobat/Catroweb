@@ -17,7 +17,9 @@ Needs JDK 21 and the Android SDK (`ANDROID_HOME`).
 Serve `build/dist/js/webapp` with any static server; `index.html#<project id>` loads that project from share's
 `/project-files/<id>/assets/code.xml`. `./scripts/smoke.sh` checks in headless Chrome that the engine runs and that the
 loader reads all of Catroid's `catrobatTests` projects, plus those in `fixtures/`, like the app does
-(`index.html#check`, compared by `scripts/check_loader.py`). `./scripts/export-mapping.sh` dumps Catroid's XStream
+(`index.html#check`, compared by `scripts/check_loader.py`); the fixtures' own checks (sounds, speech, plot, sensors,
+the restart button) drive Chrome over its DevTools protocol where they need to (`scripts/cdp.py`).
+`./scripts/export-mapping.sh` dumps Catroid's XStream
 mapping. `./scripts/conformance.sh` plays every `catrobatTests` project on the stage and compares the results with
 `conformance.tsv`, where each test is `pass` or `fail` with its reason: a test that passes there must keep passing (CI
 runs it in the Player workflow). After making more tests pass, record them with `./scripts/conformance.sh --update`.
@@ -86,9 +88,11 @@ Other pieces:
   every language Catroid ships) in the browser's language, English otherwise. `StartScreen` drives it and waits for the click
   browsers require before they play sound; `?autostart` has no start screen. The click also goes full screen and, on
   Android, locks the screen to the project's orientation (iPhones have no full screen for pages); after leaving full
-  screen, a small button in the corner goes back. A project that cannot be loaded says why, with a link back to
-  share. `QuickStart`, in gdx-teavm's package, skips the two waits of gdx-teavm's start (its preloader fills its bar
-  at 0.9 per second, then it renders only from the 61st frame on), about two seconds.
+  screen, a small button in the corner goes back. Next to it, a restart button (Catroid's "Restart") does what the
+  app's stage menu does (`StageDialog.onRestartPressed`): `StageListener.reloadProject`, then the stage runs on.
+  A project that cannot be loaded says why, with a link back to share. The page's icon is Pocket Code's launcher
+  icon from Catroid (`icon.png`, copied by `build.sh`). `QuickStart`, in gdx-teavm's package, skips the two waits of
+  gdx-teavm's start (its preloader fills its bar at 0.9 per second, then it renders only from the 61st frame on), about two seconds.
 - Open URL and save/share plot (and save/share laser, which subclass them): what the app hands to Android goes to the
   browser (`catroid/BrowserHandoff`). The link opens in a new tab (http and https only, `noopener,noreferrer`); the
   plot is Catroid's own SVG (`SVGPlotGenerator`, caught by a redirect of `writeToSVGFile`) offered as a download.

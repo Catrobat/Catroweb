@@ -1,6 +1,7 @@
 package org.catrobat.web;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.github.xpenatan.gdx.teavm.backends.web.QuickStart;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
@@ -22,6 +23,7 @@ import org.catrobat.catroid.formulaeditor.SensorHandler;
 import org.catrobat.catroid.formulaeditor.SensorLoudness;
 import org.catrobat.catroid.utils.VibrationManager;
 import org.catrobat.web.android.LocationManager;
+import org.catrobat.web.android.SystemClock;
 import org.catrobat.web.android.Vibrator;
 import org.catrobat.web.compat.WebCompat;
 import org.catrobat.catroid.stage.StageActivity;
@@ -117,6 +119,8 @@ public class WebLauncher {
 			return url.substring(0, url.lastIndexOf('/') + 1);
 		};
 		StageListener stage = new StageListener() {
+			private boolean restartRequested;
+
 			@Override
 			public void create() {
 				// gdx-teavm keeps local files in IndexedDB and reloads them on every start; looks are per play.
@@ -129,7 +133,32 @@ public class WebLauncher {
 				super.create();
 				setPaused(false); // StageLifeCycleController resumes the stage on Android once resources are ready
 				QuickStart.skipWarmup(); // the first frame comes right after this
-				StartScreen.close();
+				StartScreen.close(() -> restartRequested = true);
+			}
+
+			/**
+			 * The restart button (web/start.js) does what the app's stage menu does (StageDialog.onRestartPressed):
+			 * reloadProject resets variables, clones, looks and the pen; the next frame clears the sounds and the
+			 * physics world, starts the scripts again and pauses; the app's dialog then resumes the stage.
+			 */
+			@Override
+			public void render() {
+				boolean restart = restartRequested;
+				if (restart) {
+					restartRequested = false;
+					for (Scene scene : project.getSceneList()) {
+						for (Sprite sprite : scene.getSpriteList()) {
+							sprite.getIdToEventThreadMap().clear();
+							sprite.setEmbroideryThreadColor(Color.BLACK);
+						}
+					}
+					SensorHandler.timerReferenceValue = SystemClock.uptimeMillis();
+					reloadProject(null);
+				}
+				super.render();
+				if (restart) {
+					setPaused(false);
+				}
 			}
 		};
 		stage.setMaxViewPort(screen); // StageActivity's job on Android
