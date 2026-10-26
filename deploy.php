@@ -149,7 +149,12 @@ task('deploy:player', function () {
   // and player/index.html points at the current one. A failed player build must not block a release.
   $build = __DIR__.'/player/build/dist/js/webapp';
   if (!is_file($build.'/app.js')) {
-    warning('No complete browser player build found, skipping it');
+    // Keep the live release's player and code export, so the player and the code view work as before.
+    warning('No complete browser player build found, keeping the previous release\'s');
+    if (has('previous_release')) {
+      run('if [ -d {{previous_release}}/public/player ]; then cp -a {{previous_release}}/public/player {{release_path}}/public/; fi');
+      run('if [ -d {{previous_release}}/var/code-export ]; then mkdir -p {{release_path}}/var && cp -a {{previous_release}}/var/code-export {{release_path}}/var/; fi');
+    }
 
     return;
   }

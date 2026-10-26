@@ -13,7 +13,8 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
   untrusted, so Node runs with an empty environment (none of share's secrets) and its permission model: it may read
   only the export and that one file, and cannot write, start processes or workers. On Node 22 the permission model
   does not restrict the network (Node 25's `--allow-net` does). 60 s and 1 GB of heap at most (the largest projects,
-  20,000 bricks, need about 700 MB).
+  20,000 bricks, need about 700 MB); `/usr/bin/timeout` (where there is one) also ends Node when PHP-FPM kills the
+  worker that started it.
 - `CodeViewExportStore` keeps each project's export in `var/code-view/<id>.json` (`catrobat.code_view.dir`, shared
   between releases), keyed by the hash of `code.xml` and the export's version (`code-export/version.txt`, the hash of
   what the export is built from: the Catroid pin and the player's sources and build scripts, not of the built
@@ -36,8 +37,8 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
 ## Operations
 
 - Requirements on the server: Node 22 or newer at `/usr/local/bin/node` or `/usr/bin/node` (or in PHP's `PATH`),
-  `proc_open` allowed for PHP-FPM, `/usr/bin/env`. Without a player build in a release, stored code views stay and
-  new ones get 503.
+  `proc_open` allowed for PHP-FPM, `/usr/bin/env`, `/usr/bin/timeout`. A deploy whose player build failed keeps the
+  previous release's player and code export (`deploy:player`).
 - Nothing to run after a deploy: outdated code views are made again as they are viewed.
   `bin/console catro:backfill:code-view [--limit N] [ids...]` makes the missing or outdated ones of recently extracted
   projects (or the given ones) ahead of their viewers, one at a time, waiting for a free slot; safe alongside

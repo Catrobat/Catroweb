@@ -16,6 +16,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 
 /**
  * @internal
@@ -193,8 +194,17 @@ class CodeViewExportStoreTest extends TestCase
     $runner = $this->createMock(CodeExportRunner::class);
     $runner->method('getVersion')->willReturn('v1');
     $runner->expects($this->once())->method('export')->willReturn(['scenes' => []]);
+    (new Filesystem())->mkdir($this->dir.'store');
+    // Another process (another PHP-FPM worker) holds every slot for a second.
+    $locks = implode(',', array_map(fn (int $i): string => var_export($this->dir.'store/.slot-'.$i.'.lock', true), range(0, CodeViewExportStore::SLOTS - 1)));
+    $holder = new Process([PHP_BINARY, '-r', 'foreach (['.$locks.'] as $f) { $h[] = $l = fopen($f, "c"); flock($l, LOCK_EX); } echo "held\n"; usleep(1_000_000);']);
+    $holder->start();
+    $holder->waitUntil(static fn (string $type, string $output): bool => str_contains($output, 'held'));
 
+    $start = microtime(true);
     $this->assertSame(['scenes' => []], $this->store($runner)->refresh($this->project, true));
+    $this->assertGreaterThan(0.5, microtime(true) - $start, 'waited for the other process to free a slot');
+    $holder->wait();
   }
 
   public function testKeepsAFailedExportAndTheOlderOneWhenANewerExportFails(): void

@@ -21,6 +21,9 @@ class CodeExportRunner
 
   private const int MEMORY_MB = 1024;
 
+  /** GNU coreutils' timeout (servers, CI; not macOS). */
+  private const string TIMEOUT = '/usr/bin/timeout';
+
   public function __construct(
     #[Autowire('%catrobat.code_export.dir%')]
     private readonly string $export_dir,
@@ -65,8 +68,10 @@ class CodeExportRunner
       throw new CodeExportUnavailableException('The code export is not available');
     }
 
+    // timeout: Node ends even when PHP-FPM kills the worker that started it (its export slot is free then).
     // env -i: Symfony's Process passes PHP's environment (APP_SECRET, DATABASE_URL, ...) on to the child.
     $process = new Process([
+      ...(is_executable(self::TIMEOUT) ? [self::TIMEOUT, '-k', '5', (string) (self::TIMEOUT_SECONDS + 5)] : []),
       '/usr/bin/env',
       '-i',
       $node,
