@@ -1,11 +1,10 @@
 // Runs the code view's export (codeview/CodeExport, compiled to code-export.js) under Node: code.xml in, the code
 // view's JSON out. The player's loader reads code.xml with the browser's DOMParser, which Node gets from xmldom.
 //
-//   node export.mjs < code.xml > code.json      one project
-//   node export.mjs a.xml b.xml ...             one JSON line per file, in order (tests, batches)
+//   node export.mjs code.xml > code.json
 //
-// share runs it with Node's permission model, allowed to read only this folder and the file it exports: the XML is
-// untrusted, so no network, no child processes and no writes (CodeExportRunner on share).
+// share runs it with Node's permission model, allowed to read only this folder and the file it exports (no writes,
+// child processes or workers), and with an empty environment: the XML is untrusted (CodeExportRunner on share).
 import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -69,19 +68,21 @@ runInThisContext(readFileSync(join(here, 'code-export.js'), 'utf8'), { filename:
 delete globalThis.exports
 teavm.main([])
 
-function exportXml(xml) {
-  try {
-    return globalThis.catrobatCodeExport(xml)
-  } catch (e) {
-    return JSON.stringify({ error: String(e?.message ?? e) })
-  }
-}
+// The export's strings are markers made of U+0001, U+0002 and U+001F (CodeExport): a name in code.xml must not
+// contain them, written out or as a character reference, or it could show as any of Catroid's strings.
+// biome-ignore lint/suspicious/noControlCharactersInRegex: these control characters are what it takes out
+const MARKER_CHARACTERS = /[\x01\x02\x1f]|&#(?:0*(?:1|2|31)|[xX]0*(?:1|2|1[fF]));/g
 
-const files = process.argv.slice(2)
-if (files.length === 0) {
-  process.stdout.write(exportXml(readFileSync(0, 'utf8')))
-} else {
-  for (const file of files) {
-    process.stdout.write(`${exportXml(readFileSync(file, 'utf8'))}\n`)
+let json
+try {
+  let xml = readFileSync(process.argv[2], 'utf8')
+  // until none is left: taking one out can join a new one ("&&#1;#1;")
+  for (let before = ''; before !== xml; ) {
+    before = xml
+    xml = xml.replace(MARKER_CHARACTERS, '')
   }
+  json = globalThis.catrobatCodeExport(xml)
+} catch (e) {
+  json = JSON.stringify({ error: String(e?.message ?? e) })
 }
+process.stdout.write(json)

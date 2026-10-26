@@ -1,6 +1,7 @@
 """Checks the code view's export (README.md, "Code view export") on Catroid's own test projects and the fixtures:
 every project exports, and every brick shows as the app does, with no getView failure, no layout missing, no category
-unknown, no empty formula field and no drop-down without a selection.
+unknown, no empty formula field, no drop-down without a selection and no broken string marker (Catroid's string code
+cutting or joining a marker, which share could then not translate).
 
   check_code_export.py <built code-export dir> <dir with .catrobat files>...
 
@@ -8,12 +9,25 @@ Runs export.mjs under Node like share does (one process per project, with Node's
 per problem, then a summary with the export's start and per-project times."""
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
 import time
 import zipfile
 from pathlib import Path
+
+
+MARKER = re.compile("\x01[spa]:[^\x01\x02\x1f]*(?:\x1f[^\x01\x02\x1f]*)*\x02")
+
+
+def broken_marker(text):
+    """Control characters of a marker left over once the well-formed ones are taken out, innermost first."""
+    for _ in range(10):
+        text, n = MARKER.subn("", text)
+        if not n:
+            break
+    return any(c in text for c in "\x01\x02\x1f")
 
 
 def problems(brick, where):
@@ -23,11 +37,13 @@ def problems(brick, where):
         found.append(f"{name}: getView failed: {brick['error']}")
     if brick.get("category", "unknown") == "unknown":
         found.append(f"{name}: no category")
-    for part in brick.get("parts", []):
+    for part in brick.get("parts", []) + [p for s in brick.get("sections") or [] for p in s.get("parts", [])]:
         if part["kind"] == "formula" and not part["text"].strip():
             found.append(f"{name}: empty formula field")
         if part.get("missing"):
             found.append(f"{name}: drop-down without a selection")
+        if broken_marker(part["text"]):
+            found.append(f"{name}: broken string marker in {part['text']!r}")
     for child in brick.get("bricks") or []:
         found += problems(child, where)
     for section in brick.get("sections") or []:
@@ -96,5 +112,9 @@ if __name__ == "__main__":
         "p X: empty formula field"]
     assert problems({"type": "X", "category": "unknown", "parts": [], "error": "e"}, "p") == [
         "p X: getView failed: e", "p X: no category"]
+    assert not broken_marker("\x01s:brick_wait\x1f\x01p:second_plural\x1f3\x02\x02 x")
+    assert broken_marker("\x01s:brick_wa") and broken_marker("it\x1f3\x02")
+    assert problems({"type": "X", "category": "motion", "parts": [{"kind": "label", "text": "\x01s:a"}]}, "p") == [
+        "p X: broken string marker in '\\x01s:a'"]
     assert count({"scenes": [{"objects": [{"scripts": [{"type": "S", "bricks": [{"type": "B", "sections": []}]}]}]}]}) == 2
     sys.exit(main(*sys.argv[1:]))

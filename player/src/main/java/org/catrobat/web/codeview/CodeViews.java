@@ -122,6 +122,16 @@ public final class CodeViews {
 		}
 
 		@Override
+		public void addView(View child, android.view.ViewGroup.LayoutParams params) {
+			addView(child);
+		}
+
+		@Override
+		public void addView(View child, int index, android.view.ViewGroup.LayoutParams params) {
+			addView(child, index);
+		}
+
+		@Override
 		public void removeView(View child) {
 			children.remove(child);
 		}
@@ -218,6 +228,16 @@ public final class CodeViews {
 		@Override
 		public void addView(View child, int index) {
 			children.add(index < 0 ? children.size() : index, child);
+		}
+
+		@Override
+		public void addView(View child, android.view.ViewGroup.LayoutParams params) {
+			addView(child);
+		}
+
+		@Override
+		public void addView(View child, int index, android.view.ViewGroup.LayoutParams params) {
+			addView(child, index);
 		}
 
 		@Override

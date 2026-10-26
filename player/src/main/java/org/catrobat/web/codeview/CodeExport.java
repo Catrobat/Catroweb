@@ -33,7 +33,7 @@ import java.util.List;
  * object: {"name", "looks": [{"name", "file"}], "sounds": [{"name", "file"}], "scripts": [brick], "group": [object]?}
  * brick:  {"type", "category", "commented_out", "parts": [{"kind": label|formula|choice, "text"}],
  *          "bricks": [brick]? (a script's), "sections": [{"parts", "bricks"}]? (an if's else and end, a loop's end),
- *          "error"? (getView failed)}
+ *          "error"? (the brick could not be shown: getView or reading what it shows failed)}
  * </pre>
  */
 public final class CodeExport {
@@ -122,36 +122,59 @@ public final class CodeExport {
 		}
 		json.close(']').key("scripts").open('[');
 		for (Script script : sprite.getScriptList()) {
-			json.open('{');
-			brick(json, script.getClass().getSimpleName(), script.getScriptBrick(), script.isCommentedOut());
-			bricks(json, "bricks", script.getBrickList());
-			json.close('}');
+			Json one = new Json();
+			try {
+				one.open('{');
+				brick(one, script.getClass().getSimpleName(), script.getScriptBrick(), script.isCommentedOut());
+				bricks(one, "bricks", script.getBrickList());
+				one.close('}');
+			} catch (Throwable e) {
+				one = failed(script.getClass().getSimpleName(), script.isCommentedOut(), e);
+			}
+			json.raw(one);
 		}
 		json.close(']');
 	}
 
+	/** Each brick on its own: one that cannot be shown shows as such, the others as usual. */
 	private static void bricks(Json json, String key, List<Brick> bricks) {
 		json.key(key).open('[');
 		for (Brick brick : bricks) {
-			json.open('{');
-			brick(json, brick.getClass().getSimpleName(), brick, brick.isCommentedOut());
-			if (brick instanceof CompositeBrick composite) {
-				// The app shows an if's "else" and "end if", a loop's end, as bricks of their own (getAllParts).
-				List<Brick> parts = brick.getAllParts();
-				json.key("sections").open('[').open('{');
-				bricks(json, "bricks", composite.getNestedBricks());
-				json.close('}');
-				for (int i = 1; i < parts.size(); i++) {
-					json.open('{');
-					parts(json, parts.get(i));
-					bricks(json, "bricks", i == 1 && composite.hasSecondaryList() ? composite.getSecondaryNestedBricks() : List.of());
-					json.close('}');
+			Json one = new Json();
+			try {
+				one.open('{');
+				brick(one, brick.getClass().getSimpleName(), brick, brick.isCommentedOut());
+				if (brick instanceof CompositeBrick composite) {
+					// The app shows an if's "else" and "end if", a loop's end, as bricks of their own (getAllParts).
+					List<Brick> parts = brick.getAllParts();
+					one.key("sections").open('[').open('{');
+					bricks(one, "bricks", composite.getNestedBricks());
+					one.close('}');
+					for (int i = 1; i < parts.size(); i++) {
+						one.open('{');
+						parts(one, parts.get(i));
+						bricks(one, "bricks", i == 1 && composite.hasSecondaryList() ? composite.getSecondaryNestedBricks() : List.of());
+						one.close('}');
+					}
+					one.close(']');
 				}
-				json.close(']');
+				one.close('}');
+			} catch (Throwable e) {
+				one = failed(brick.getClass().getSimpleName(), brick.isCommentedOut(), e);
 			}
-			json.close('}');
+			json.raw(one);
 		}
 		json.close(']');
+	}
+
+	private static Json failed(String type, boolean commentedOut, Throwable e) {
+		Json json = new Json().open('{').key("type").value(type).key("commented_out").value(commentedOut);
+		return unknown(json, e).close('}');
+	}
+
+	private static Json unknown(Json json, Throwable e) {
+		return json.key("category").value("unknown").key("parts").open('[').close(']')
+				.key("error").value(e.getClass().getSimpleName() + ": " + e.getMessage());
 	}
 
 	private static void brick(Json json, String type, Brick brick, boolean commentedOut) {
@@ -159,20 +182,17 @@ public final class CodeExport {
 		parts(json, brick);
 	}
 
-	/** The brick's category and text, as its getView fills its layout; "error" if that fails. */
+	/** The brick's category and text, as its getView fills its layout; "error" if that or reading it fails. */
 	private static void parts(Json json, Brick brick) {
-		View view;
+		Json parts = new Json().open('[');
+		String[] category = new String[1];
 		try {
-			view = brick.getView(WebContext.INSTANCE);
+			render(parts, brick.getView(WebContext.INSTANCE), category);
 		} catch (Throwable e) {
-			json.key("category").value("unknown").key("parts").open('[').close(']')
-					.key("error").value(e.getClass().getSimpleName() + ": " + e.getMessage());
+			unknown(json, e);
 			return;
 		}
-		String[] category = new String[1];
-		json.key("parts").open('[');
-		render(json, view, category);
-		json.close(']').key("category").value(null == category[0] ? "unknown" : category[0]);
+		json.key("parts").raw(parts.close(']')).key("category").value(null == category[0] ? "unknown" : category[0]);
 	}
 
 	private static void render(Json json, View view, String[] category) {
@@ -260,6 +280,13 @@ public final class CodeExport {
 
 		Json value(int value) {
 			out.append(value);
+			return this;
+		}
+
+		/** JSON written on its own (a brick that may fail half-way), appended once it is complete. */
+		Json raw(Json json) {
+			comma();
+			out.append(json.out);
 			return this;
 		}
 

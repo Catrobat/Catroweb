@@ -113,13 +113,19 @@ Other pieces:
 share's code view (`App\Project\CodeView`, `docs/operations/Code-View.md` there) shows a project's code as the app
 does, made by Catroid itself: `build.sh` also compiles `codeview/CodeExport`, a second TeaVM entry (`codeExport` in
 `build.gradle.kts`) with the loader and Catroid's bricks but no stage, into `build/dist/js/webapp/code-export/`, which
-deploys with the player. share runs it with Node 22 or newer, one process per project, with Node's permission model:
+`deploy:player` puts next to the player, outside the web root (`var/code-export/`). share runs it with Node 22 or newer,
+one process per project, with an empty environment and Node's permission model:
 `node --permission --allow-fs-read=<code-export> --allow-fs-read=<code.xml> code-export/export.mjs <code.xml>` writes
-the project's code as JSON (its format is in `CodeExport`'s comment).
+the project's code as JSON (its format is in `CodeExport`'s comment). On Node 22 the permission model stops reading
+other files, writing, child processes and workers, not network access (that needs Node 25's `--allow-net`); with an
+empty environment the export has no secrets to send anywhere.
 
 - The loader reads `code.xml` as the player does (`ProjectLoader.parse`), so every project from Catrobat language 0.9
   on, through xmldom instead of the browser's `DOMParser` (`web/code-export/export.mjs`, which also adds the
-  `TreeWalker` the upgrade of projects before 0.93 needs).
+  `TreeWalker` the upgrade of projects before 0.93 needs). `export.mjs` takes the markers' control characters out of
+  `code.xml` first (also as character references), so no name can show as one of Catroid's strings.
+- A brick that cannot be shown (its `getView`, or reading what it put in its views, fails) shows as category `unknown`
+  with an `error`; the project's other bricks show as usual.
 - Each brick's text comes from its own `getView`: `codeview/CodeLayoutInflater` builds the brick's layout (exported by
   `scripts/export_code_resources.py`) from `codeview/CodeViews`, subclasses of the mockable SDK widgets that keep what
   `getView` puts in them, and `CodeExport` reads them in order: labels, formula fields (`BrickEditText` style, Catroid's
@@ -132,7 +138,7 @@ the project's code as JSON (its format is in `CodeExport`'s comment).
   TeaVM reads `\u0001` and `\u0002` in a string concatenation as `StringConcatFactory`'s own tags.
 - `scripts/check_code_export.py` exports Catroid's `catrobatTests` and the fixtures and fails on any project that does
   not export or brick that shows wrong (getView failed, a layout or category missing, an empty formula field, a
-  drop-down without a selection); the Player workflow runs it.
+  drop-down without a selection, a string marker that Catroid's code cut or joined); the Player workflow runs it.
 
 ## Deployment
 
