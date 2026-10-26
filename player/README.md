@@ -22,6 +22,20 @@ mapping. `./scripts/conformance.sh` plays every `catrobatTests` project on the s
 `conformance.tsv`, where each test is `pass` or `fail` with its reason: a test that passes there must keep passing (CI
 runs it in the Player workflow). After making more tests pass, record them with `./scripts/conformance.sh --update`.
 
+## Bumping Catroid
+
+The Player Catroid pin workflow (`.github/workflows/player-catroid-pin.yaml`) does it nightly: when Catroid's
+`develop` has moved past `catroid.commit`, it runs the Player workflow's build and checks at `develop`'s HEAD
+(`prepare.sh` builds `CATROID_COMMIT` instead of the pin when set). If they pass, it opens or updates the pull request
+from `bot/catroid-pin`, with the new pin, `conformance.tsv` rewritten by `conformance.py --update`, the Catroid commits
+in between and the changes to `build/web/stub-report.tsv` (newly stubbed methods are what no longer works on the
+web). If they fail, the run fails and nothing is opened. Pull requests from the workflow's token start no PR
+workflows, so it dispatches the required checks on the branch itself. Dispatched from another branch, with an
+optional `catroid-commit` to try, it only writes the PR body to the run's summary.
+
+By hand: `CATROID_COMMIT=<commit> ./scripts/prepare.sh`, build and run the checks, then put the commit in
+`catroid.commit`.
+
 ## How it works
 
 TeaVM compiles JVM bytecode, but Catroid is an Android app. `scripts/build.sh` patches every jar with
@@ -67,7 +81,7 @@ Other pieces:
   project needs, from Catroid's `Project.getRequiredResources()` as the app checks it: the device sensors it reads
   (so people know it is played on a phone) and, as the app's "Component not available" dialog, what the browser
   cannot do (camera, face detection, NFC, Bluetooth robots, ...) with a link to the app; playing anyway stays possible.
-  These texts are Catroid's own translations (`scripts/export_strings.py --start` writes `strings/<language>.json` for
+  These texts, the statuses and the player's prompts (where Catroid has words for them) are Catroid's own translations (`scripts/export_strings.py --start` writes `strings/<language>.json` for
   every language Catroid ships) in the browser's language, English otherwise. `StartScreen` drives it and waits for the click
   browsers require before they play sound; `?autostart` has no start screen. The click also goes full screen and, on
   Android, locks the screen to the project's orientation (iPhones have no full screen for pages); after leaving full
@@ -79,6 +93,15 @@ Other pieces:
   plot is Catroid's own SVG (`SVGPlotGenerator`, caught by a redirect of `writeToSVGFile`) offered as a download.
   Browsers allow both only right after a click, so otherwise a prompt at the bottom of the stage asks first; the player
   page never navigates. The open URL brick skips the app's web request and trust dialog.
+- Web and look requests: Catroid's `WebAction` runs as in the app. `catroid/WebConnection` (remapped) sends the request
+  with `fetch()` (no credentials, Catroid's 60 s timeout) and answers with the OkHttp `Response` the actions read, so
+  `WebRequestAction` stores the text and `LookRequestAction` turns the image into a look (in gdx's local storage, see
+  Looks). Catroid's trust list (`trustedDomains.json`, copied by `prepare.sh`) decides as in the app; an untrusted URL
+  is denied as there without a dialog (511). The play vhost's CSP (`connect-src`) then lets only requests to share
+  through, everything else fails as without network (500). Share's media library (`/resources/media/`) sends
+  `Access-Control-Allow-Origin: *` (infrastructure repository), so its images work as web looks. The copy look
+  brick copies looks in the same storage (`File.exists`/`createNewFile`, `duplicateFile` and `PixmapIO.writePNG` are
+  redirected there).
 - Screen: the canvas has the project's aspect ratio at the window's size in device pixels (at most 2 per CSS pixel,
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
 - Sensors: Catroid's `SensorHandler` reads them through Android classes that `Rewrite` remaps to web versions in
@@ -111,8 +134,9 @@ sounds, after a click on the start screen (browsers only play sound after one).
 Collision outlines are each look's bounding box for now. On phones, acceleration, inclination, compass, location,
 loudness and vibration work as in the app (no vibration on iPhones; desktop browsers report 0 for the motion sensors);
 camera, face/pose/text/object detection, NFC, Bluetooth devices, Chromecast and speech recognition do not, which the
-start screen says. Web and look requests end with a server error, as on a device
-without network, and toasts are not shown. `conformance.tsv` lists which of Catroid's test projects pass on the
+start screen says. Web and look requests reach share only (the play vhost's CSP); others end as on a device without
+network, and toasts are not shown. `conformance.tsv` lists which of Catroid's test projects pass on the
 stage: all but five. Four expect `#ffffff` from "color at x y", which Catroid returns in upper case since its #5041,
-and `testNumberOfLooks` needs looks downloaded from the web. Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
+and `testNumberOfLooks` loads its web looks from `catrob.at` until the Catroid pin includes Catrobat/Catroid#5262
+(share URLs; `testDeleteWebLook` then passes too). Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
 app and only where the browser has WebGL; downloading for the app stays the alternative.

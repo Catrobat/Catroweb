@@ -1,7 +1,5 @@
 package org.catrobat.web.catroid;
 
-import org.catrobat.catroid.web.WebConnection;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +7,8 @@ import okhttp3.OkHttpClient;
 
 /**
  * Catroid's WebConnectionHolder for the browser (compat/Rewrite remaps it): same members, no OkHttp client, which
- * needs sockets the browser does not have.
+ * needs sockets the browser does not have; the web WebConnection uses fetch() instead.
  */
-// ponytail: web request bricks do nothing yet; give WebConnection a fetch()-based version when they are needed.
 public class WebConnectionHolder {
 	private static final int MAX_CONNECTIONS = 10;
 	private List<WebConnection> connections = new ArrayList<>(MAX_CONNECTIONS);
@@ -34,6 +31,7 @@ public class WebConnectionHolder {
 	}
 
 	public void onPause() {
+		connections.forEach(WebConnection::cancelCall);
 		connections.clear();
 	}
 
