@@ -1,0 +1,157 @@
+# Keeps the player on Catroid's develop (player/catroid.commit). Nightly, when develop's HEAD differs from the pin, it
+# runs the Player workflow's own build and checks (player.yaml, called) at HEAD; if they pass, it opens or updates one
+# pull request from bot/catroid-pin. If they fail, the failed run is the signal and an open bump PR stays as it is.
+#
+# Required checks: a PR that GITHUB_TOKEN pushes starts no pull_request workflows, so main's required checks would never
+# report on it. workflow_dispatch is the one event GITHUB_TOKEN may trigger, so after creating or updating the PR the job
+# dispatches the workflows behind those checks on bot/catroid-pin; they report on its head commit as on any PR. The
+# commit goes through the API (sign-commits) because main requires signed commits. The player checks ran in this run,
+# which the PR body links.
+#
+# Run from any branch other than main (a dispatch, or a PR changing this file), it opens nothing and only writes the PR
+# body to the job summary; the catroid-commit input tries a given commit instead of develop's HEAD.
+name: Player Catroid pin
+
+permissions: {}
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      catroid-commit:
+        description: Catroid commit to try instead of develop's HEAD
+        required: false
+  pull_request:
+    paths: ['.github/workflows/player-catroid-pin.yaml']
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  resolve:
+    if: github.repository == 'Catrobat/Catroweb'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      old: ${{ steps.pin.outputs.old }}
+      new: ${{ steps.pin.outputs.new }}
+      short: ${{ steps.pin.outputs.short }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          sparse-checkout: player/catroid.commit
+          sparse-checkout-cone-mode: false
+
+      - name: Compare the pin with Catroid develop
+        id: pin
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET: ${{ inputs.catroid-commit || 'develop' }}
+        run: |
+          old=$(cat player/catroid.commit)
+          new=$(gh api "repos/Catrobat/Catroid/commits/$TARGET" --jq .sha)
+          echo "old=$old" >> "$GITHUB_OUTPUT"
+          if [ "$new" = "$old" ]; then
+            echo "Catroid $TARGET is at the pin ${old:0:10}: nothing to do." | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            printf 'new=%s\nshort=%s\n' "$new" "${new:0:10}" >> "$GITHUB_OUTPUT"
+            echo "Trying Catroid $TARGET [${new:0:10}](https://github.com/Catrobat/Catroid/compare/$old...$new) (pin: ${old:0:10})." | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+
+  player:
+    needs: resolve
+    if: needs.resolve.outputs.new != ''
+    permissions:
+      contents: read
+    uses: ./.github/workflows/player.yaml
+    with:
+      catroid-commit: ${{ needs.resolve.outputs.new }}
+
+  pull-request:
+    needs: [resolve, player]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write # dispatch the required checks; read the last stub report
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OLD: ${{ needs.resolve.outputs.old }}
+      NEW: ${{ needs.resolve.outputs.new }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Download the player built at the new commit
+        uses: actions/download-artifact@v8
+        with:
+          name: player
+          path: player/build
+
+      - name: Set the pin and record the conformance results
+        working-directory: player
+        run: |
+          echo "$NEW" > catroid.commit
+          python3 scripts/conformance.py build/web/conformance/results.tsv conformance.tsv --update
+
+      - name: Write the PR body
+        working-directory: player
+        run: |
+          # The stub report of the pinned commit comes from main's last successful Player run.
+          last=$(gh run list --workflow player.yaml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+          gh run download "$last" -n player -D build/last > /dev/null || true
+          catroid=https://github.com/Catrobat/Catroid
+          stubs() { # <methods in $1 but not in $2>
+            awk -F'\t' 'NR == FNR {seen[$1]; next} !($1 in seen) {print "- `" $1 "`: " $2}' "$2" "$1" \
+              | sort | awk 'NR <= 200 {print} END {if (!NR) print "None."}'
+          }
+          {
+            echo "Bumps the player's Catroid from [${OLD:0:10}]($catroid/commit/$OLD) to [${NEW:0:10}]($catroid/commit/$NEW)."
+            echo "Built, smoke-tested and conformance-checked in [this run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+            echo
+            echo "### Catroid commits ([compare]($catroid/compare/$OLD...$NEW))"
+            echo
+            # Titles keep their PR references, pointed at Catroid; @ is escaped so nobody is mentioned.
+            gh api "repos/Catrobat/Catroid/compare/$OLD...$NEW" \
+              --jq '.commits[] | "- \(.commit.message | split("\n")[0]) ([\(.sha[0:7])](\(.html_url)))"' \
+              | sed -E 's/(^|[^[:alnum:]/])#([0-9]+)/\1Catrobat\/Catroid#\2/g; s/@/\&#64;/g'
+            echo
+            if [ -f build/last/web/stub-report.tsv ]; then
+              echo "### Newly stubbed (not available on the web)"
+              echo
+              stubs build/web/stub-report.tsv build/last/web/stub-report.tsv
+              echo
+              echo "### No longer stubbed"
+              echo
+              stubs build/last/web/stub-report.tsv build/web/stub-report.tsv
+            else
+              echo "No stub report from main to compare with (run $last)."
+            fi
+          } > build/pr-body.md
+          cat build/pr-body.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open or update the PR
+        id: pr
+        if: github.ref == 'refs/heads/main'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: bot/catroid-pin
+          base: main
+          sign-commits: true
+          add-paths: |
+            player/catroid.commit
+            player/conformance.tsv
+          commit-message: 'Player: bump Catroid to ${{ needs.resolve.outputs.short }}'
+          title: 'Player: bump Catroid to ${{ needs.resolve.outputs.short }}'
+          body-path: player/build/pr-body.md
+
+      - name: Run the required checks on the PR
+        if: steps.pr.outputs.pull-request-operation == 'created' || steps.pr.outputs.pull-request-operation == 'updated'
+        run: |
+          for workflow in tests.yaml code_quality.yaml container_tests.yaml; do
+            gh workflow run "$workflow" --ref bot/catroid-pin
+          done
+          echo "PR: ${{ steps.pr.outputs.pull-request-url }}" >> "$GITHUB_STEP_SUMMARY"

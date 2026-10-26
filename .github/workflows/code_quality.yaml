@@ -42,6 +42,7 @@ on:
   pull_request:
     branches:
       - '**' # all branches
+  workflow_dispatch: # player-catroid-pin.yaml runs it on its bump PRs, which GITHUB_TOKEN opens without PR events
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}

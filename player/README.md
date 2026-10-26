@@ -22,6 +22,20 @@ mapping. `./scripts/conformance.sh` plays every `catrobatTests` project on the s
 `conformance.tsv`, where each test is `pass` or `fail` with its reason: a test that passes there must keep passing (CI
 runs it in the Player workflow). After making more tests pass, record them with `./scripts/conformance.sh --update`.
 
+## Bumping Catroid
+
+The Player Catroid pin workflow (`.github/workflows/player-catroid-pin.yaml`) does it nightly: when Catroid's
+`develop` has moved past `catroid.commit`, it runs the Player workflow's build and checks at `develop`'s HEAD
+(`prepare.sh` builds `CATROID_COMMIT` instead of the pin when set). If they pass, it opens or updates the pull request
+from `bot/catroid-pin`, with the new pin, `conformance.tsv` rewritten by `conformance.py --update`, the Catroid commits
+in between and the changes to `build/web/stub-report.tsv` (newly stubbed methods are what no longer works on the
+web). If they fail, the run fails and nothing is opened. Pull requests from the workflow's token start no PR
+workflows, so it dispatches the required checks on the branch itself. Dispatched from another branch, with an
+optional `catroid-commit` to try, it only writes the PR body to the run's summary.
+
+By hand: `CATROID_COMMIT=<commit> ./scripts/prepare.sh`, build and run the checks, then put the commit in
+`catroid.commit`.
+
 ## How it works
 
 TeaVM compiles JVM bytecode, but Catroid is an Android app. `scripts/build.sh` patches every jar with

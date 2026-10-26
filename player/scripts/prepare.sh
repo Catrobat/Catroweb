@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Builds Catroid at the commit in catroid.commit and collects what the web build compiles from:
+# Builds Catroid at the commit in catroid.commit (or CATROID_COMMIT, to try another one) and collects what the web build compiles from:
 # its classes, runtime jars and R.jar.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 OUT=build/catroid-input
 SRC=build/catroid
-COMMIT=$(cat catroid.commit)
+COMMIT=${CATROID_COMMIT:-$(cat catroid.commit)}
 
 [ -d $SRC/.git ] || git clone --filter=blob:none https://github.com/Catrobat/Catroid.git $SRC
 git -C $SRC fetch -q origin "$COMMIT" && git -C $SRC checkout -q "$COMMIT"
