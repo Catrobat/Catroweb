@@ -15,6 +15,12 @@ Projects for `scripts/check_loader.py` that Catroid's own `catrobatTests` do not
 - `plot-and-open-url.catrobat`: plain `testSetTransparency.catrobat` with, before that finish brick, a line plotted
   from (-300, -600) to (300, -600), "save plot" as `plot` and "open URL" `example.org/?q=<b>`. Made by `scripts/make_plot_fixture.py`; `smoke.sh` plays it on the stage and checks that,
   without a click, the player offers `plot.svg` and `https://example.org/?q=%3Cb%3E` in its prompts.
+- `sensors.catrobat`: plain `testSetTransparency.catrobat` with, before that finish brick, "vibrate for 0.3 seconds",
+  "wait 1 second", an assertion that inclination x and y, compass direction, acceleration x, y and z, latitude and
+  longitude, rounded and joined by spaces, are `30 20 90 1 2 3 47 15`, and one that the loudness is above 0. Made by
+  `scripts/make_sensors_fixture.py`; `smoke.sh` plays it with `scripts/sensors_check.py`, which has headless Chrome
+  emulate a phone with that orientation (alpha 90, beta 20, gamma -30), linear acceleration (1, 2, 3), location
+  (47.07, 15.44) and its fake microphone, and checks that the page vibrated.
 - `share/`: 23 of share's most downloaded projects, made with Catrobat language 0.9 to 0.999 and named
   `<language version>-<start of the project id>`, each with only its `code.xml` and the header fields naming the
   author or device emptied. They cover how `ProjectLoader` reads old projects: without scenes, with the XML upgrade

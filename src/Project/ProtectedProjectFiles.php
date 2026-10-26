@@ -68,14 +68,15 @@ final class ProtectedProjectFiles
         return null;
       }
     } else {
+      // Catroid saves imported images as PNG while retaining their original filename
+      // (StorageOperations.compressAndCopyStreamToDir), so any raster name may hold a PNG.
       $allowed = match ($extension) {
         'png' => ['image/png'],
-        'jpg', 'jpeg' => ['image/jpeg'],
-        // Catroid converts imported GIF and WebP to PNG while retaining its original filename.
+        'jpg', 'jpeg' => ['image/jpeg', 'image/png'],
         'gif' => ['image/gif', 'image/png'],
         'webp' => ['image/webp', 'image/png'],
-        'avif' => ['image/avif'],
-        'bmp' => ['image/bmp', 'image/x-ms-bmp'],
+        'avif' => ['image/avif', 'image/png'],
+        'bmp' => ['image/bmp', 'image/x-ms-bmp', 'image/png'],
         // Imported raster looks may have no extension; active documents are excluded.
         '' => $is_asset ? ['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/avif', 'image/bmp', 'image/x-ms-bmp'] : [],
         'svg' => ['image/svg+xml', 'application/xml', 'text/xml'],

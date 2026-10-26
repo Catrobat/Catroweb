@@ -63,6 +63,15 @@ for test in $(ls $STAGE/project-files); do
   fi
 done
 
+# Sensors: Chrome emulates a phone's orientation, motion, location and microphone, and Catroid's formulas must read
+# them (fixtures/README.md).
+SENSORS=build/web/sensors-test
+rm -rf $SENSORS && mkdir -p $SENSORS/project-files/sensors/assets
+unzip -q fixtures/sensors.catrobat -d $SENSORS/project-files/sensors/assets
+serve 0 $SENSORS
+python3 scripts/sensors_check.py "$CHROME" "http://127.0.0.1:$PORT/?autostart#sensors"
+kill $SERVER
+
 # The loader check runs synchronously once the page has loaded; --virtual-time-budget keeps headless Chrome from
 # dumping the page before it has finished. timeout: a hung renderer must not hold the job until its time limit (macOS
 # has no timeout unless coreutils provides gtimeout).

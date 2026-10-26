@@ -217,17 +217,17 @@ final class ProtectedProjectFilesTest extends TestCase
     self::assertNull($this->files->asset('one', 'sounds/fake.wav'));
   }
 
-  public function testClientExtensionlessRasterAndGifOrWebpConvertedToPngUseDetectedType(): void
+  public function testClientExtensionlessRasterAndImagesConvertedToPngUseDetectedType(): void
   {
-    foreach (['imported', 'converted.webp', 'converted.gif'] as $filename) {
+    foreach (['imported', 'converted.webp', 'converted.gif', 'converted.jpg', 'converted.bmp'] as $filename) {
       copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/'.$filename);
       $response = $this->files->asset('one', 'images/'.$filename);
       self::assertNotNull($response);
       self::assertSame('image/png', $response->headers->get('Content-Type'));
       self::assertSame('nosniff', $response->headers->get('X-Content-Type-Options'));
     }
-    copy($this->root.'/extract/one/images/look.png', $this->root.'/extract/one/images/misnamed.jpg');
-    self::assertNull($this->files->asset('one', 'images/misnamed.jpg'));
+    file_put_contents($this->root.'/extract/one/images/misnamed.png', "\xFF\xD8\xFF\xE0\x00\x10JFIF\x00");
+    self::assertNull($this->files->asset('one', 'images/misnamed.png'));
     foreach (['<html><script>alert(1)</script></html>', '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>'] as $content) {
       file_put_contents($this->root.'/extract/one/images/imported', $content);
       self::assertNull($this->files->asset('one', 'images/imported'));

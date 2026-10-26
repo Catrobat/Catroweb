@@ -59,6 +59,13 @@ public final class Rewrite {
 			Map.entry("java/util/concurrent/atomic/AtomicIntegerArray", "org/catrobat/web/java/AtomicIntegerArray"),
 			Map.entry("android/media/MediaPlayer", "org/catrobat/web/android/MediaPlayer"),
 			Map.entry("android/media/MediaMetadataRetriever", "org/catrobat/web/android/MediaMetadataRetriever"),
+			Map.entry("android/hardware/SensorManager", "org/catrobat/web/android/SensorManager"),
+			Map.entry("android/hardware/Sensor", "org/catrobat/web/android/Sensor"),
+			Map.entry("android/hardware/SensorEvent", "org/catrobat/web/android/SensorEvent"),
+			Map.entry("android/location/LocationManager", "org/catrobat/web/android/LocationManager"),
+			Map.entry("android/location/Location", "org/catrobat/web/android/Location"),
+			Map.entry("android/os/Vibrator", "org/catrobat/web/android/Vibrator"),
+			Map.entry("android/media/MediaRecorder", "org/catrobat/web/android/MediaRecorder"),
 			Map.entry("org/catrobat/catroid/web/WebConnectionHolder", "org/catrobat/web/catroid/WebConnectionHolder"),
 			Map.entry("org/catrobat/catroid/web/WebConnection", "org/catrobat/web/catroid/WebConnection"),
 			Map.entry("org/catrobat/catroid/web/WebConnection$WebRequestListener", "org/catrobat/web/catroid/WebConnection$WebRequestListener"),
@@ -244,6 +251,18 @@ public final class Rewrite {
 					"registerConverterDynamically"));
 
 	/**
+	 * Like REDIRECT, but only for calls from one Catroid class (and its inner classes), as "caller>owner.name+desc":
+	 * the loudness sensor polls the microphone with a Handler, which elsewhere stays the mockable one, and the vibrate
+	 * brick finds Catroid's VibrationManager through a StageActivity.
+	 */
+	static final Map<String, String> CALLER_REDIRECT = Map.ofEntries(
+			Map.entry("org/catrobat/catroid/formulaeditor/SensorLoudness>android/os/Handler.postDelayed(Ljava/lang/Runnable;J)Z",
+					"postDelayed"),
+			Map.entry("org/catrobat/catroid/formulaeditor/SensorLoudness>android/os/Handler.removeCallbacks(Ljava/lang/Runnable;)V",
+					"removeCallbacks"),
+			Map.entry(PLOT + "VibrateAction>java/lang/ref/WeakReference.get()Ljava/lang/Object;", "vibrationStage"));
+
+	/**
 	 * Private Catroid methods the player calls itself: ProjectLoader reads old projects as loadProject does, and
 	 * BrowserHandoff and WebCompat read the open URL brick's URL and export plots with Catroid's file names and SVG.
 	 */
@@ -360,6 +379,9 @@ public final class Rewrite {
 				}
 				if (insn instanceof MethodInsnNode call) {
 					String target = REDIRECT.get(call.owner + "." + call.name + call.desc);
+					if (null == target) {
+						target = CALLER_REDIRECT.get(node.name.split("\\$")[0] + ">" + call.owner + "." + call.name + call.desc);
+					}
 					if (null == target && "setContextClassLoader".equals(call.name) && "(Ljava/lang/ClassLoader;)V".equals(call.desc)) {
 						target = "setContextClassLoader"; // also on Thread subclasses
 					}
