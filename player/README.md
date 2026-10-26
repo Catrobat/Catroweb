@@ -74,6 +74,13 @@ Other pieces:
   plot is Catroid's own SVG (`SVGPlotGenerator`, caught by a redirect of `writeToSVGFile`) offered as a download.
   Browsers allow both only right after a click, so otherwise a prompt at the bottom of the stage asks first; the player
   page never navigates. The open URL brick skips the app's web request and trust dialog.
+- Web and look requests: Catroid's `WebAction` runs as in the app. `catroid/WebConnection` (remapped) sends the request
+  with `fetch()` (no credentials, Catroid's 60 s timeout) and answers with the OkHttp `Response` the actions read, so
+  `WebRequestAction` stores the text and `LookRequestAction` turns the image into a look (in gdx's local storage, see
+  Looks). Catroid's trust list (`trustedDomains.json`, copied by `prepare.sh`) decides as in the app; an untrusted URL
+  is denied as there without a dialog (511). The play vhost's CSP (`connect-src`) then lets only requests to share
+  through, everything else fails as without network (500). Share's media library (`/resources/media/`) sends
+  `Access-Control-Allow-Origin: *` (infrastructure repository), so its images work as web looks.
 - Screen: the canvas has the project's aspect ratio at the window's size in device pixels (at most 2 per CSS pixel,
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to
@@ -96,8 +103,10 @@ the files it serves via `X-Accel-Redirect`). Only projects a logged-out visitor 
 `index.html#<project id>` plays share projects from Catrobat language 0.9 on, as the app does, with their looks and
 sounds, after a click on the start screen (browsers only play sound after one).
 Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
-unavailable, as on a device without those sensors. Web and look requests end with a server error, as on a device
-without network, and toasts are not shown. `conformance.tsv` lists which of Catroid's test projects pass on the
+unavailable, as on a device without those sensors. Web and look requests reach share only (the play
+vhost's CSP); others end as on a device without network, and toasts are not shown. `conformance.tsv` lists which of Catroid's test projects pass on the
 stage: all but five. Four expect `#ffffff` from "color at x y", which Catroid returns in upper case since its #5041,
-and `testNumberOfLooks` needs looks downloaded from the web. Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
+and `testNumberOfLooks` copies looks, which fails on the web (the copy look brick's file copy), and loads its web
+looks from `catrob.at` until the Catroid pin includes Catrobat/Catroid#5262 (share URLs; `testDeleteWebLook` then
+passes too). Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
 app and only where the browser has WebGL; downloading for the app stays the alternative.
