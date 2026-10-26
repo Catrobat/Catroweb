@@ -85,7 +85,10 @@ Other pieces:
   (so people know it is played on a phone) and, as the app's "Component not available" dialog, what the browser
   cannot do (camera, face detection, NFC, Bluetooth robots, ...) with a link to the app; playing anyway stays possible.
   These texts, the statuses and the player's prompts (where Catroid has words for them) are Catroid's own translations (`scripts/export_strings.py --start` writes `strings/<language>.json` for
-  every language Catroid ships) in the browser's language, English otherwise. `StartScreen` drives it and waits for the click
+  every language Catroid ships) in the browser's language, English otherwise. The fullscreen label, which Catroid has
+  no string for, comes from `web/fullscreen.json` (English fallback); open/save prompts reuse Catroid's action labels.
+  Load failures show a translated message with technical details collapsed under Catroid's "Show details" label.
+  `StartScreen` drives it and waits for the click
   browsers require before they play sound; `?autostart` has no start screen. The click also goes full screen and, on
   Android, locks the screen to the project's orientation (iPhones have no full screen for pages); after leaving full
   screen, a small button in the corner goes back. Next to it, a restart button (Catroid's "Restart") does what the

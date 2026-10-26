@@ -368,8 +368,13 @@
         'error_load_project',
         'This project cannot be played in the browser.',
       )
-      const details = document.createElement('p')
-      details.textContent = message || ''
+      const details = document.createElement('details')
+      const summary = document.createElement('summary')
+      summary.textContent = text('show_details', 'Show details')
+      const diagnostic = document.createElement('p')
+      diagnostic.textContent = message || ''
+      details.append(summary, diagnostic)
+      details.hidden = !message
       const back = document.createElement('a')
       back.href = `${share}/app/project/${id}`
       back.textContent = text('stage_dialog_back', 'Back to the project')
@@ -400,7 +405,7 @@
       if (document.fullscreenEnabled) {
         const again = add(
           'fullscreen-button',
-          'Full screen',
+          text('web_fullscreen', 'Full screen'),
           'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
           goFullScreen,
         )
