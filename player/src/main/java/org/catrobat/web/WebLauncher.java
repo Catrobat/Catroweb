@@ -19,6 +19,11 @@ import org.catrobat.catroid.content.bricks.MoveNStepsBrick;
 import org.catrobat.catroid.content.bricks.PenDownBrick;
 import org.catrobat.catroid.content.bricks.TurnRightBrick;
 import org.catrobat.catroid.formulaeditor.SensorHandler;
+import org.catrobat.catroid.formulaeditor.SensorLoudness;
+import org.catrobat.catroid.utils.VibrationManager;
+import org.catrobat.web.android.LocationManager;
+import org.catrobat.web.android.Vibrator;
+import org.catrobat.web.compat.WebCompat;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.stage.StageListener;
 import org.catrobat.catroid.utils.Resolution;
@@ -84,6 +89,7 @@ public class WebLauncher {
 		}
 		projectManager.setCurrentProject(project);
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
+		startSensors(resources);
 		project.getDirectory().mkdirs(); // the device variables and lists bricks save there, in memory for this play
 		org.catrobat.catroid.common.Constants.EXTERNAL_STORAGE_ROOT_EXPORT_DIRECTORY.mkdirs(); // and the file bricks here
 		// The canvas takes the project's aspect ratio, fitted into the window in device pixels (at most 2 per CSS pixel
@@ -128,11 +134,37 @@ public class WebLauncher {
 		};
 		stage.setMaxViewPort(screen); // StageActivity's job on Android
 		StageActivity.stageListener = stage; // actors reach the stage through it
-		// No activity on the web. Empty rather than null: the bricks that need one (vibrate, open URL, edit look, ...)
-		// check activeStageActivity.get() and then do nothing, as on a device without the feature.
+		// No activity on the web. Empty rather than null: the bricks that need one (open URL, edit look, ...) check
+		// activeStageActivity.get() and then do nothing, as on a device without the feature (vibrate: WebCompat).
 		StageActivity.activeStageActivity = new java.lang.ref.WeakReference<>(null);
 		new WebApplication(stage, QuickStart.preloader(), config);
 		fitCanvas(width, height);
+	}
+
+	/**
+	 * What StageResourceHolder.initResources and the stage's resume do on Android for the sensors the browser has, and
+	 * only for those the project uses, so the browser asks for no permission a project does not need (the location and
+	 * microphone when listening starts; iPhones ask for motion in the start click, web/start.js).
+	 */
+	private static void startSensors(Brick.ResourcesSet resources) {
+		SensorHandler sensors = SensorHandler.getInstance(WebContext.INSTANCE);
+		if (resources.contains(Brick.MICROPHONE)) {
+			sensors.setSensorLoudness(new SensorLoudness());
+		}
+		if (resources.contains(Brick.SENSOR_GPS)) {
+			sensors.setLocationManager(new LocationManager());
+		}
+		if (resources.contains(Brick.VIBRATION)) {
+			WebCompat.vibration = new VibrationManager();
+			WebCompat.vibration.setVibration(new Vibrator());
+		}
+		for (int sensor : new int[] {Brick.SENSOR_ACCELERATION, Brick.SENSOR_INCLINATION, Brick.SENSOR_COMPASS,
+				Brick.SENSOR_GPS, Brick.MICROPHONE}) {
+			if (resources.contains(sensor)) {
+				SensorHandler.startSensorListener(WebContext.INSTANCE);
+				return;
+			}
+		}
 	}
 
 	/** gdx-teavm's page has no viewport meta, so phones laid it out 980 px wide and zoomed out. */

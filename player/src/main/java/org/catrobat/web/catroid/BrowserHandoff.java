@@ -64,8 +64,10 @@ public final class BrowserHandoff {
 			+ "for (var i = 0; i < list.children.length; i++) {"
 			+ "  if (list.children[i].dataset.target === target) { done(); return; }"
 			+ "}"
+			// Catroid's words for the buttons in the browser's language where the start screen has them (web/start.js)
+			+ "var t = window.catrobatText || function (name, english) { return english; };"
 			+ "var box = document.createElement('div'); box.dataset.target = target;"
-			+ "box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', null !== fileName ? 'Save file' : 'Open link');"
+			+ "box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', null !== fileName ? t('save', 'Save file') : t('brick_open', 'Open link'));"
 			+ "box.style.cssText = 'pointer-events:auto;box-sizing:border-box;width:100%;max-width:420px;padding:16px;"
 			+ "border-radius:12px;background:#fff;color:#1a1a1a;box-shadow:0 4px 16px rgba(0,0,0,.4);font:16px/1.4 system-ui,sans-serif';"
 			+ "var text = document.createElement('p'); text.style.cssText = 'margin:0 0 12px;overflow-wrap:anywhere';"
@@ -74,9 +76,9 @@ public final class BrowserHandoff {
 			+ "var buttons = document.createElement('div'); buttons.style.cssText = 'display:flex;justify-content:flex-end;gap:8px';"
 			+ "var look = 'min-height:44px;padding:0 16px;border-radius:8px;font:600 16px system-ui,sans-serif;cursor:pointer;"
 			+ "display:inline-flex;align-items:center;text-decoration:none;';"
-			+ "link.textContent = null !== fileName ? 'Save' : 'Open';"
+			+ "link.textContent = null !== fileName ? t('save', 'Save') : t('brick_open', 'Open');"
 			+ "link.style.cssText = look + 'border:0;background:#007f8f;color:#fff';"
-			+ "var cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'Cancel';"
+			+ "var cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = t('cancel', 'Cancel');"
 			+ "cancel.style.cssText = look + 'border:1px solid #767676;background:#fff;color:#1a1a1a';"
 			+ "var close = function () { box.remove(); done(); };"
 			// After the click has followed the link: a link removed while clicked might not.
