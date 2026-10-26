@@ -461,9 +461,52 @@ public final class WebCompat {
 		return null;
 	}
 
+	/** Catroid's VibrationManager, for projects with the vibrate brick (WebLauncher), as StageResourceHolder sets it. */
+	public static org.catrobat.catroid.utils.VibrationManager vibration;
+	private static StageActivity vibrationStage;
+
 	public static org.catrobat.catroid.utils.VibrationManager noVibrationManager() {
-		return null;
+		return vibration;
 	}
+
+	/**
+	 * VibrateAction reads the VibrationManager from the active StageActivity, which the web has not: there it gets one
+	 * that only carries it. Other bricks still find none (WebLauncher).
+	 */
+	public static Object vibrationStage(java.lang.ref.WeakReference<?> active) {
+		if (null != active.get() || null == vibration) {
+			return active.get();
+		}
+		if (null == vibrationStage) {
+			vibrationStage = new StageActivity();
+			vibrationStage.vibrationManager = vibration;
+		}
+		return vibrationStage;
+	}
+
+	private static final java.util.Map<Runnable, Integer> TIMEOUTS = new java.util.HashMap<>();
+
+	/** SensorLoudness polls the microphone every 50 ms with a Handler; here with the browser's timers. */
+	public static boolean postDelayed(android.os.Handler handler, Runnable runnable, long delay) {
+		TIMEOUTS.put(runnable, setTimeout(() -> {
+			TIMEOUTS.remove(runnable);
+			runnable.run();
+		}, delay));
+		return true;
+	}
+
+	public static void removeCallbacks(android.os.Handler handler, Runnable runnable) {
+		Integer timeout = TIMEOUTS.remove(runnable);
+		if (null != timeout) {
+			clearTimeout(timeout);
+		}
+	}
+
+	@JSBody(params = {"callback", "delay"}, script = "return setTimeout(callback, delay);")
+	private static native int setTimeout(org.catrobat.web.loader.Sounds.Callback callback, double delay);
+
+	@JSBody(params = "id", script = "clearTimeout(id);")
+	private static native void clearTimeout(int id);
 
 	/** The app's speech is a sound file; here it is the browser's, so it stops and pauses with the sounds. */
 	public static void stopAllSounds(org.catrobat.catroid.io.SoundManager sounds) {

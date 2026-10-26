@@ -329,6 +329,12 @@
         button.setAttribute('aria-label', 'Starting')
         state.clicked = true
         render()
+        // iPhones send motion and orientation only after asking, which a page may do only inside a click.
+        if (resources.some((resource) => resource >= 13 && resource <= 15)) {
+          for (const motion of [window.DeviceMotionEvent, window.DeviceOrientationEvent]) {
+            motion?.requestPermission?.().catch(() => {})
+          }
+        }
         goFullScreen()
         started()
       }

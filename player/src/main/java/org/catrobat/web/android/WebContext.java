@@ -1,18 +1,17 @@
 package org.catrobat.web.android;
 
 import android.content.ContextWrapper;
-import android.hardware.WebSensorManager;
 
 import java.io.File;
 
 /**
- * The application context Catroid asks for on the web: a virtual file system root, a sensor manager without sensors
+ * The application context Catroid asks for on the web: a virtual file system root, the browser's sensors
  * and Catroid's English strings (WebResources).
  */
 public final class WebContext extends ContextWrapper {
 	public static final WebContext INSTANCE = new WebContext();
 	private static final File ROOT = new File("/catroid");
-	private static final WebSensorManager SENSORS = new WebSensorManager();
+	private static final SensorManager SENSORS = new SensorManager();
 
 	private WebContext() {
 		super(null);

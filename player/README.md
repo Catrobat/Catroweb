@@ -81,6 +81,14 @@ Other pieces:
   page never navigates. The open URL brick skips the app's web request and trust dialog.
 - Screen: the canvas has the project's aspect ratio at the window's size in device pixels (at most 2 per CSS pixel,
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
+- Sensors: Catroid's `SensorHandler` reads them through Android classes that `Rewrite` remaps to web versions in
+  `android/`, so its own code turns sensor events into formula values. `SensorManager` offers the two sensors it
+  prefers, linear acceleration (`devicemotion`) and the rotation vector (`deviceorientation`, absolute where the
+  browser has it), with Android's matrix math; `LocationManager` is `navigator.geolocation`; `MediaRecorder` gives
+  `SensorLoudness` the microphone's peak (`getUserMedia`), polled with the browser's timers (a `Rewrite` redirect for
+  that class only); `Vibrator` is `navigator.vibrate`, and the vibrate brick finds Catroid's `VibrationManager` through
+  `WebCompat.vibrationStage`. `WebLauncher` starts only what the project needs (`getRequiredResources`), so the browser
+  asks for no permission a project does not use; iPhones ask for motion in the start click.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to
   `data-test-result` on the page (7777 = success), which `smoke.sh` checks for a few test projects with looks.
 
@@ -100,8 +108,10 @@ the files it serves via `X-Accel-Redirect`). Only projects a logged-out visitor 
 
 `index.html#<project id>` plays share projects from Catrobat language 0.9 on, as the app does, with their looks and
 sounds, after a click on the start screen (browsers only play sound after one).
-Collision outlines are each look's bounding box for now, and acceleration, inclination, compass and location are
-unavailable, as on a device without those sensors. Web and look requests end with a server error, as on a device
+Collision outlines are each look's bounding box for now. On phones, acceleration, inclination, compass, location,
+loudness and vibration work as in the app (no vibration on iPhones; desktop browsers report 0 for the motion sensors);
+camera, face/pose/text/object detection, NFC, Bluetooth devices, Chromecast and speech recognition do not, which the
+start screen says. Web and look requests end with a server error, as on a device
 without network, and toasts are not shown. `conformance.tsv` lists which of Catroid's test projects pass on the
 stage: all but five. Four expect `#ffffff` from "color at x y", which Catroid returns in upper case since its #5041,
 and `testNumberOfLooks` needs looks downloaded from the web. Project pages link to it ("Play in browser", `PLAYER_ORIGIN`) for projects it can load, outside the
