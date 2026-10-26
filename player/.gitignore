@@ -1,5 +1,6 @@
 /build
 .gradle/
 assets/stage/
+assets/trustedDomains.json
 src/main/java/org/catrobat/web/ActionRegistry.java
 !scripts/*.sh

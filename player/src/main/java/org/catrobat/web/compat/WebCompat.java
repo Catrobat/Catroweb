@@ -320,21 +320,78 @@ public final class WebCompat {
 	}
 
 	/**
-	 * WebAction.checkPermission: TrustedDomainManager reads its list with org.json, which TeaVM lacks, and there is no
-	 * dialog to ask, so access is denied, as Catroid does without a message handler. Nothing is requested anyway.
+	 * TrustedDomainManager reads Catroid's trust list (assets/trustedDomains.json, copied by prepare.sh) with org.json,
+	 * which TeaVM lacks: the same pattern as its getTrustListPatternFromDomains. An untrusted URL is denied as in Catroid
+	 * without a dialog to ask; the page's CSP then limits the trusted ones further (play: share only).
 	 */
-	public static void noWebAccess(org.catrobat.catroid.content.actions.WebAction action) {
-		action.denyPermission();
+	public static java.util.regex.Pattern trustList(org.catrobat.catroid.TrustedDomainManager manager) {
+		String domains = String.join("|", trustedDomains(com.badlogic.gdx.Gdx.files.internal("trustedDomains.json").readString("UTF-8")));
+		return java.util.regex.Pattern.compile("https?://([a-zA-Z0-9-]+\\.)*(" + domains.replace(".", "\\.") + ")(:[0-9]{1,5})?(/.*)?");
+	}
+
+	@JSBody(params = "json", script = "return JSON.parse(json).domains;")
+	private static native String[] trustedDomains(String json);
+
+	/** The user's own trust list is edited in the app's settings; the web has none. */
+	public static java.util.regex.Pattern noUserTrustList(org.catrobat.catroid.TrustedDomainManager manager) {
+		return null;
 	}
 
 	/**
-	 * WebAction.sendRequest: the web has no OkHttp, so web and look request bricks end as on a device without network,
-	 * with Catroid's server error code (the request variable holds it, a look request keeps the look).
+	 * OkHttp's HttpUrl (WebConnection builds its Request with it) canonicalizes hosts with java.net.IDN and
+	 * InetAddress; the browser's URL does the same: lower case, punycode, compressed IPv6, null when invalid.
 	 */
-	// ponytail: no requests at all; a fetch()-based one would also need a permission prompt for untrusted domains.
-	public static boolean noWebRequest(org.catrobat.catroid.content.actions.WebAction action) {
-		action.onRequestError(String.valueOf(org.catrobat.catroid.common.Constants.ERROR_SERVER_ERROR));
+	@JSBody(params = "host", script = "try {"
+			+ "  var h = new URL('http://' + (host.indexOf(':') >= 0 ? '[' + host + ']' : host) + '/').hostname;"
+			+ "  return h.charAt(0) === '[' ? h.substring(1, h.length - 1) : h;"
+			+ "} catch (e) { return null; }")
+	public static native String canonicalizeHost(String host);
+
+	/** TeaVM has no UTF-32, which OkHttp's Util only looks up for byte order marks (it failed loading the class). */
+	public static java.nio.charset.Charset charsetForName(String name) {
+		return name.startsWith("UTF-32") ? null : java.nio.charset.Charset.forName(name);
+	}
+
+	/** Catroid's files live in gdx's local storage on the web (see absolute): a look request's image goes there too. */
+	public static java.io.File copyStreamToFile(java.io.InputStream stream, java.io.File file) {
+		absolute(com.badlogic.gdx.Gdx.files, file.getAbsolutePath()).write(stream, false);
+		return file;
+	}
+
+	/** ...and is deleted there, too (LookRequestAction drops its image once the look has it). */
+	public static boolean delete(java.io.File file) {
+		boolean deleted = file.delete();
+		if (null != com.badlogic.gdx.Gdx.files) {
+			deleted |= absolute(com.badlogic.gdx.Gdx.files, file.getAbsolutePath()).delete();
+		}
+		return deleted;
+	}
+
+	/** A file in gdx's local storage exists for Catroid too (the copy look brick copies only looks that exist). */
+	public static boolean exists(java.io.File file) {
+		return file.exists() || null != com.badlogic.gdx.Gdx.files && absolute(com.badlogic.gdx.Gdx.files, file.getAbsolutePath()).exists();
+	}
+
+	/** Created in gdx's local storage, where the rest of Catroid's files are; false if it is already there. */
+	public static boolean createNewFile(java.io.File file) {
+		if (exists(file)) {
+			return false;
+		}
+		absolute(com.badlogic.gdx.Gdx.files, file.getAbsolutePath()).writeBytes(new byte[0], false);
 		return true;
+	}
+
+	/** StorageOperations.duplicateFile copies with FileChannel, which TeaVM lacks: the same unique name, in gdx's storage. */
+	public static java.io.File duplicateFile(java.io.File source) throws java.io.IOException {
+		java.io.File copy = org.catrobat.catroid.io.StorageOperations.getUniqueFile(source.getName(), source.getParentFile());
+		absolute(com.badlogic.gdx.Gdx.files, copy.getAbsolutePath())
+				.writeBytes(absolute(com.badlogic.gdx.Gdx.files, source.getAbsolutePath()).readBytes(), false);
+		return copy;
+	}
+
+	/** The copy look brick writes a web look (whose file is gone) to a FileHandle of its java.io.File: gdx-teavm has no absolute files. */
+	public static void writePNG(com.badlogic.gdx.files.FileHandle file, Pixmap pixmap) {
+		com.badlogic.gdx.graphics.PixmapIO.writePNG(absolute(com.badlogic.gdx.Gdx.files, file.path()), pixmap);
 	}
 
 	/**
@@ -553,6 +610,19 @@ public final class WebCompat {
 	/** Lets scripts/smoke_server.py stop waiting; elsewhere it is a request nobody answers. */
 	@JSBody(script = "fetch('__test-finished').catch(function () {});")
 	private static native void reportTestFinished();
+
+	/**
+	 * CollisionInformation.calculate computes the outline in a new thread, which LookRequestAction then joins from the
+	 * render loop, where TeaVM cannot wait. Its threads never run in parallel anyway, so the outline is computed at
+	 * once (as CollisionPolygonCreationTask does) and there is no thread to join.
+	 */
+	public static void calculateCollision(CollisionInformation information) {
+		try {
+			loadCollisionPolygon(information);
+		} catch (NullPointerException exception) {
+			org.catrobat.web.android.Log.e("CollisionInformation", "Image format not supported");
+		}
+	}
 
 	/**
 	 * Catroid's collision outline of a look, as the app gets it: from the PNG's metadata (the app writes it there, so

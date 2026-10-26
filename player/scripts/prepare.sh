@@ -20,6 +20,6 @@ cp -R $SRC/catroid/build/intermediates/javac/catroidDebug/compileCatroidDebugJav
 cp -R $SRC/catroid/build/tmp/kotlin-classes/catroidDebug/. $OUT/classes/
 (cd $OUT/classes && jar cf ../catroid-classes.jar .)
 cp $SRC/catroid/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/catroidDebug/processCatroidDebugResources/R.jar $OUT/R.jar
-mkdir -p assets && cp -R $SRC/catroid/src/main/assets/stage assets/
+mkdir -p assets && cp -R $SRC/catroid/src/main/assets/stage $SRC/catroid/src/main/assets/trustedDomains.json assets/
 (cd $SRC && ./gradlew -q --stop) # free the Gradle and Kotlin daemons' memory for TeaVM
 echo "Catroid $COMMIT prepared in $OUT"
