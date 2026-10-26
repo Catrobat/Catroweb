@@ -7,8 +7,8 @@ namespace Tests\PhpUnit\Project\CodeView;
 use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CodeView\CodeExportBusyException;
 use App\Project\CodeView\CodeExportRunner;
+use App\Project\CodeView\CodeExportUnavailableException;
 use App\Project\CodeView\CodeViewExportEventListener;
 use App\Project\CodeView\CodeViewExportStore;
 use App\Project\Event\ProjectAfterInsertEvent;
@@ -118,7 +118,7 @@ class CodeViewExportStoreTest extends TestCase
     $store = $this->store($runner);
     $slots = $this->holdLocks(array_map(static fn (int $i): string => '.slot-'.$i, range(0, CodeViewExportStore::SLOTS - 1)));
 
-    $this->expectException(CodeExportBusyException::class);
+    $this->expectException(CodeExportUnavailableException::class);
     try {
       $store->get($this->project);
     } finally {
@@ -144,7 +144,7 @@ class CodeViewExportStoreTest extends TestCase
     $runner->expects($this->never())->method('export');
     $locks = $this->holdLocks(['a1b2c3']);
 
-    $this->expectException(CodeExportBusyException::class);
+    $this->expectException(CodeExportUnavailableException::class);
     try {
       $this->store($runner)->get($this->project);
     } finally {
@@ -229,13 +229,54 @@ class CodeViewExportStoreTest extends TestCase
     $this->assertSame(['error' => 'broken'], $store->get($this->project));
   }
 
+  public function testAnExportThatCouldNotRunIsNotKept(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturn('v1');
+    $runner->expects($this->exactly(2))->method('export')->willReturnOnConsecutiveCalls(
+      $this->throwException(new CodeExportUnavailableException('The code export did not finish')),
+      ['scenes' => []],
+    );
+    $store = $this->store($runner);
+
+    try {
+      $store->get($this->project);
+      $this->fail('a view gets no answer, not a lasting error');
+    } catch (CodeExportUnavailableException) {
+    }
+    $this->assertFileDoesNotExist($this->dir.'store/a1b2c3.json');
+    $this->assertSame(['scenes' => []], $store->get($this->project), 'tried again');
+  }
+
+  public function testAnOutdatedExportStaysWhenTheNewerCannotRun(): void
+  {
+    $version = 'v1';
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturnCallback(static function () use (&$version): string {
+      return $version;
+    });
+    $runner->expects($this->exactly(2))->method('export')->willReturnOnConsecutiveCalls(
+      ['scenes' => ['old']],
+      $this->throwException(new CodeExportUnavailableException('The code export failed')),
+    );
+    $store = $this->store($runner);
+    $store->get($this->project);
+    $version = 'v2';
+
+    $store->get($this->project);
+    $store->refreshQueued();
+
+    $this->assertSame(['scenes' => ['old']], $store->get($this->project));
+  }
+
   public function testWithoutADeployedExport(): void
   {
     $runner = $this->createMock(CodeExportRunner::class);
     $runner->method('getVersion')->willReturn(null);
     $runner->expects($this->never())->method('export');
 
-    $this->assertSame(['error' => 'The code export is not available'], $this->store($runner)->get($this->project));
+    $this->expectException(CodeExportUnavailableException::class);
+    $this->store($runner)->get($this->project);
   }
 
   public function testWithoutProjectFiles(): void

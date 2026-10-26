@@ -14,8 +14,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Keeps each project's code export (CodeExportRunner) in a file and makes it when it is missing, when the project's
- * code.xml changed or when a newer export was deployed. An export that fails is kept too, so a project that cannot
- * be shown does not start Node on every view; a newer export tries it again.
+ * code.xml changed or when a newer export was deployed. An export that says the project cannot be shown is kept too,
+ * so such a project does not start Node on every view (a newer export tries it again); one that could not run or
+ * finish (CodeExportUnavailableException) is not kept.
  *
  * Views never wait for a newer export: they get the stored one and it is made again after the response
  * (kernel.terminate). Only a project without a stored export for its code.xml waits for Node on its first view. At
@@ -45,7 +46,7 @@ class CodeViewExportStore
    *
    * @return array<string, mixed>|null
    *
-   * @throws CodeExportBusyException when it has to be made and SLOTS exports are running
+   * @throws CodeExportUnavailableException when it has to be made and cannot be now (SLOTS exports running, Node failed)
    */
   public function get(Project $project): ?array
   {
@@ -72,7 +73,7 @@ class CodeViewExportStore
    *
    * @return array<string, mixed>|null
    *
-   * @throws CodeExportBusyException without $wait, when SLOTS exports are running
+   * @throws CodeExportUnavailableException when it cannot be made now (without $wait: also when SLOTS exports run)
    */
   public function refresh(Project $project, bool $wait): ?array
   {
@@ -97,8 +98,8 @@ class CodeViewExportStore
     foreach ($queue as $id => $project) {
       try {
         $this->refresh($project, false);
-      } catch (CodeExportBusyException) {
-        $this->logger->info('Code view of project '.$id.' not refreshed: all export slots busy');
+      } catch (CodeExportUnavailableException $e) {
+        $this->logger->info('Code view of project '.$id.' not refreshed: '.$e->getMessage());
       } catch (\Throwable $e) {
         $this->logger->error('Code view export after the response failed: '.$e->getMessage());
       }
@@ -118,7 +119,7 @@ class CodeViewExportStore
     // One export per project at a time; whoever waited finds it made.
     $lock = $this->lock($id, $wait);
     if (null === $lock) {
-      throw new CodeExportBusyException('The code view of project '.$id.' is being made');
+      throw new CodeExportUnavailableException('The code view of project '.$id.' is being made');
     }
 
     try {
@@ -129,12 +130,12 @@ class CodeViewExportStore
 
       if (null === $key['export']) {
         // No export deployed: an older one is better than none.
-        return $stored['data'] ?? ['error' => 'The code export is not available'];
+        return $stored['data'] ?? throw new CodeExportUnavailableException('The code export is not available');
       }
 
       $slot = $this->slot($wait);
       if (null === $slot) {
-        throw new CodeExportBusyException('All '.self::SLOTS.' code export slots are busy');
+        throw new CodeExportUnavailableException('All '.self::SLOTS.' code export slots are busy');
       }
 
       try {

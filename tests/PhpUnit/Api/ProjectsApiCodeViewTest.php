@@ -9,7 +9,7 @@ use App\Api\Services\Projects\ProjectsApiFacade;
 use App\Api\Services\Projects\ProjectsApiLoader;
 use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\DB\Entity\Project\Project;
-use App\Project\CodeView\CodeExportBusyException;
+use App\Project\CodeView\CodeExportUnavailableException;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Remix\RemixManager;
@@ -61,7 +61,7 @@ final class ProjectsApiCodeViewTest extends TestCase
   public function testACodeViewThatIsBeingMade(): void
   {
     $builder = $this->createStub(CodeTreeBuilder::class);
-    $builder->method('buildCodeTree')->willThrowException(new CodeExportBusyException('All 2 code export slots are busy'));
+    $builder->method('buildCodeTree')->willThrowException(new CodeExportUnavailableException('All 2 code export slots are busy'));
     $code = 0;
     $headers = [];
 

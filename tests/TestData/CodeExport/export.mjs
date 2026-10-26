@@ -1,7 +1,8 @@
 // A stand-in for the player's code export (player/web/code-export/export.mjs) in tests, where the player is not
 // built: same command line and output format, but it only lists the objects, scripts and bricks of a code.xml by
-// their XML types. Strings are markers (CodeViewLocalizer) where it knows one. "BROKEN" in code.xml fails the export;
-// "READ:<path>" makes it read that file too, which Node's permission model must deny (CodeExportRunnerTest).
+// their XML types. Strings are markers (CodeViewLocalizer) where it knows one. "BROKEN" in code.xml makes it say the
+// project cannot be shown; "CRASH" makes Node fail; "READ:<path>" makes it read that file too, which Node's permission
+// model must deny; "ENV:<name>" writes that environment variable, which it must not have (CodeExportRunnerTest).
 import { readFileSync } from 'node:fs'
 
 const MARKERS = {
@@ -33,8 +34,11 @@ function brick(type) {
 
 function exportXml(xml) {
   if (xml.includes('BROKEN')) return { error: 'code.xml is not valid XML' }
+  if (xml.includes('CRASH')) process.exit(3)
   const read = /READ:(\S+)/.exec(xml)
   if (read) return { read: readFileSync(read[1], 'utf8').length }
+  const env = /ENV:(\w+)/.exec(xml)
+  if (env) return { env: process.env[env[1]] ?? null }
   const objects = []
   for (const tag of xml.match(/<object [^>]*>|<script [^>]*>|<brick [^>]*>/g) ?? []) {
     if (tag.startsWith('<object')) {
@@ -51,6 +55,4 @@ function exportXml(xml) {
   return { files_in_scene_folders: false, scenes: [{ name: 'Scene 1', objects }] }
 }
 
-for (const file of process.argv.slice(2)) {
-  process.stdout.write(`${JSON.stringify(exportXml(readFileSync(file, 'utf8')))}\n`)
-}
+process.stdout.write(JSON.stringify(exportXml(readFileSync(process.argv[2], 'utf8'))))

@@ -158,18 +158,18 @@ task('deploy:player', function () {
   $hashes = [];
   foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($build, \FilesystemIterator::SKIP_DOTS)) as $file) {
     $relative = substr($file->getPathname(), strlen($build) + 1);
-    if (!str_starts_with($relative, 'WEB-INF/')) {
+    if (!str_starts_with($relative, 'WEB-INF/') && !str_starts_with($relative, 'code-export/')) {
       $hashes[$relative] = sha1_file($file->getPathname());
     }
   }
   ksort($hashes);
   $version = substr(sha1(json_encode($hashes, JSON_THROW_ON_ERROR)), 0, 12);
   run("mkdir -p {{release_path}}/public/player/{$version}"); // rsync creates only the last path segment
-  upload($build.'/', "{{release_path}}/public/player/{$version}/", ['options' => ['--exclude=WEB-INF']]);
+  upload($build.'/', "{{release_path}}/public/player/{$version}/", ['options' => ['--exclude=WEB-INF', '--exclude=code-export']]);
+  // The code view's export, which share runs with Node (App\Project\CodeView\CodeExportRunner): not web-served.
+  upload($build.'/code-export/', '{{release_path}}/var/code-export/');
   // A meta refresh drops the #<project id>; the script keeps it.
   run('cp {{release_path}}/public/favicon.ico {{release_path}}/public/player/favicon.ico');
-  // share runs the code view's export (code-export/) from the current build (App\Project\CodeView\CodeExportRunner).
-  run("ln -sfn {$version} {{release_path}}/public/player/current");
   run("printf '%s' '<!doctype html><script>location.replace(\"{$version}/index.html\" + location.hash)</script><meta http-equiv=\"refresh\" content=\"0; url={$version}/index.html\">' > {{release_path}}/public/player/index.html");
 });
 

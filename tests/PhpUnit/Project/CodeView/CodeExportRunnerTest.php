@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Project\CodeView;
 
 use App\Project\CodeView\CodeExportRunner;
+use App\Project\CodeView\CodeExportUnavailableException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -45,22 +46,46 @@ class CodeExportRunnerTest extends TestCase
     $this->assertNull((new CodeExportRunner('/nonexistent', new NullLogger()))->getVersion());
   }
 
-  public function testAnExportThatFailsIsAnError(): void
+  public function testAProjectTheExportCannotShowIsAnError(): void
   {
     $this->assertSame('code.xml is not valid XML', $this->exportOf('<program>BROKEN</program>')['error']);
   }
 
-  public function testTheExportCannotReadOtherFiles(): void
+  public function testAnExportThatDoesNotFinishIsNoAnswer(): void
   {
-    $other_file = (string) realpath('composer.json');
-
-    $this->assertSame(['error' => 'The code export failed'], $this->exportOf('<program>READ:'.$other_file.'</program>'));
+    $this->expectException(CodeExportUnavailableException::class);
+    $this->exportOf('<program>CRASH</program>');
   }
 
-  public function testWithoutTheExportOrTheFile(): void
+  public function testTheExportCannotReadOtherFiles(): void
   {
-    $this->assertArrayHasKey('error', (new CodeExportRunner('/nonexistent', new NullLogger()))->export(self::PROJECT));
-    $this->assertArrayHasKey('error', (new CodeExportRunner(self::EXPORT, new NullLogger()))->export('/nonexistent/code.xml'));
+    $this->expectException(CodeExportUnavailableException::class);
+    $this->exportOf('<program>READ:'.(string) realpath('composer.json').'</program>');
+  }
+
+  public function testTheExportHasNoneOfSharesEnvironment(): void
+  {
+    $_ENV['CODE_EXPORT_TEST_SECRET'] = $_SERVER['CODE_EXPORT_TEST_SECRET'] = 'secret';
+    putenv('CODE_EXPORT_TEST_SECRET=secret');
+    try {
+      $this->assertSame(['env' => null], $this->exportOf('<program>ENV:CODE_EXPORT_TEST_SECRET</program>'));
+      $this->assertSame(['env' => null], $this->exportOf('<program>ENV:APP_ENV</program>'));
+    } finally {
+      unset($_ENV['CODE_EXPORT_TEST_SECRET'], $_SERVER['CODE_EXPORT_TEST_SECRET']);
+      putenv('CODE_EXPORT_TEST_SECRET');
+    }
+  }
+
+  public function testWithoutTheExport(): void
+  {
+    $this->expectException(CodeExportUnavailableException::class);
+    (new CodeExportRunner('/nonexistent', new NullLogger()))->export(self::PROJECT);
+  }
+
+  public function testWithoutTheFile(): void
+  {
+    $this->expectException(CodeExportUnavailableException::class);
+    (new CodeExportRunner(self::EXPORT, new NullLogger()))->export('/nonexistent/code.xml');
   }
 
   /**

@@ -1186,7 +1186,7 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the code tree of a project'
-      description: "Returns the project code as the Catroid app shows it: scenes > objects > scripts > bricks, made by Catroid's own code (the browser player's code export) for projects from Catrobat language 0.9 on, in the request's language. 422 when the code cannot be shown, 503 while it is being made."
+      description: "Returns the project code as the Catroid app shows it: scenes > objects > scripts > bricks, made by Catroid's own code (the browser player's code export) for projects from Catrobat language 0.9 on, in the request's language. 422 when the code cannot be shown, 503 when it cannot be made right now."
       parameters:
         - $ref: '#/components/parameters/Uuid'
       responses:
@@ -1201,7 +1201,7 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
         '503':
-          description: 'The code view is being made; try again in a moment'
+          description: 'The code view cannot be made right now (being made, or the export could not run); try again'
           headers:
             Retry-After:
               schema:

@@ -24,8 +24,8 @@ class CodeTreeBuilder
   /**
    * @return array{scenes: list<array<string, mixed>>}
    *
-   * @throws CodeTreeBuildException  when the project's code cannot be shown
-   * @throws CodeExportBusyException when its code view is being made and cannot be waited for
+   * @throws CodeTreeBuildException         when the project's code cannot be shown
+   * @throws CodeExportUnavailableException when its code view cannot be made right now (try again)
    */
   public function buildCodeTree(Project $project, ?string $locale = null): array
   {

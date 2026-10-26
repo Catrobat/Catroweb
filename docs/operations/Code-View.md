@@ -8,15 +8,19 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
 
 ## How it runs
 
-- `App\Project\CodeView\CodeExportRunner` runs `code-export/export.mjs` from the deployed player
-  (`public/player/current/code-export`, `catrobat.code_export.dir`) with Node 22 or newer. `code.xml` is untrusted, so
-  Node runs with its permission model: it may read only the export and that one file; no network, child processes or
-  writes. 60 s and 1 GB of heap at most (the largest projects, 20,000 bricks, need about 700 MB).
+- `App\Project\CodeView\CodeExportRunner` runs `export.mjs` of the player's code export, which `deploy:player` puts
+  outside the web root (`var/code-export/`, `catrobat.code_export.dir`), with Node 22 or newer. `code.xml` is
+  untrusted, so Node runs with an empty environment (none of share's secrets) and its permission model: it may read
+  only the export and that one file, and cannot write, start processes or workers. On Node 22 the permission model
+  does not restrict the network (Node 25's `--allow-net` does). 60 s and 1 GB of heap at most (the largest projects,
+  20,000 bricks, need about 700 MB).
 - `CodeViewExportStore` keeps each project's export in `var/code-view/<id>.json` (`catrobat.code_view.dir`, shared
   between releases), keyed by the hash of `code.xml` and the export's version (`code-export/version.txt`, the hash of
   `code-export.js`, `resources.json` and `export.mjs`: it changes when the export's output can, e.g. with a new Catroid
-  commit, not with the translations, which are put in per view). A failed export is kept too, so a broken project does
-  not start Node on every view; if a newer export fails where an older one worked, the older one stays.
+  commit, not with the translations, which are put in per view). An export that says the project cannot be shown (Node
+  ran and wrote `{"error": ...}`, e.g. for a broken `code.xml`) is kept too, so such a project does not start Node on
+  every view; if a newer export says so where an older one worked, the older one stays. An export that could not run
+  or finish (Node missing, crashed, timed out, no export deployed) is not kept: the view gets 503, as below.
 - Views never wait for a newer export: an outdated one is shown as it is and made again after the response
   (`kernel.terminate`). Only the first view of a project without an export for its `code.xml` waits for Node (median
   about 0.9 s). Uploads never wait: the export runs after the upload's response (`CodeViewExportEventListener`).
@@ -31,8 +35,8 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
 ## Operations
 
 - Requirements on the server: Node 22 or newer at `/usr/local/bin/node` or `/usr/bin/node` (or in PHP's `PATH`),
-  `proc_open` allowed for PHP-FPM. `deploy:player` links `public/player/current` to the build it uploads; without a
-  player build in a release, stored code views stay and new ones say they cannot be shown.
+  `proc_open` allowed for PHP-FPM, `/usr/bin/env`. Without a player build in a release, stored code views stay and
+  new ones get 503.
 - Nothing to run after a deploy: outdated code views are made again as they are viewed.
   `bin/console catro:backfill:code-view [--limit N] [ids...]` makes the missing or outdated ones of recently extracted
   projects (or the given ones) ahead of their viewers, one at a time, waiting for a free slot; safe alongside
@@ -40,5 +44,5 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
 
 ## Development
 
-Build the player (`player/README.md`) and link its build: `ln -s ../../player/build/dist/js/webapp public/player/current`.
+Build the player (`player/README.md`) and link its export: `ln -s ../player/build/dist/js/webapp/code-export var/code-export`.
 Tests use a stand-in export in `tests/TestData/CodeExport`, which lists objects, scripts and bricks by their XML types.

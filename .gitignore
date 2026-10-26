@@ -65,7 +65,6 @@ var/log/**
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
-/public/player/
 /vendor/
 ###< symfony/framework-bundle ###
 

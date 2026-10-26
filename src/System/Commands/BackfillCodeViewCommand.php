@@ -6,6 +6,7 @@ namespace App\System\Commands;
 
 use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Project\ProjectRepository;
+use App\Project\CodeView\CodeExportUnavailableException;
 use App\Project\CodeView\CodeViewExportStore;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -71,7 +72,11 @@ class BackfillCodeViewCommand extends Command
       if (!$project instanceof Project) {
         continue;
       }
-      $export = $this->store->refresh($project, true);
+      try {
+        $export = $this->store->refresh($project, true);
+      } catch (CodeExportUnavailableException) {
+        $export = null;
+      }
       null === $export || isset($export['error']) ? ++$failed : ++$shown;
     }
     $progress->finish();

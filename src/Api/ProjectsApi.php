@@ -15,7 +15,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectDownloads;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
-use App\Project\CodeView\CodeExportBusyException;
+use App\Project\CodeView\CodeExportUnavailableException;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Event\ProjectDownloadEvent;
@@ -882,8 +882,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
       return null;
-    } catch (CodeExportBusyException) {
-      // The code view is being made (CodeViewExportStore::SLOTS at once); the page offers to try again.
+    } catch (CodeExportUnavailableException) {
+      // Being made, or the export could not run (CodeExportUnavailableException); the page offers to try again.
       $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
       $responseHeaders['Retry-After'] = '5';
 
