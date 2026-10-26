@@ -16,11 +16,12 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
   20,000 bricks, need about 700 MB).
 - `CodeViewExportStore` keeps each project's export in `var/code-view/<id>.json` (`catrobat.code_view.dir`, shared
   between releases), keyed by the hash of `code.xml` and the export's version (`code-export/version.txt`, the hash of
-  `code-export.js`, `resources.json` and `export.mjs`: it changes when the export's output can, e.g. with a new Catroid
-  commit, not with the translations, which are put in per view). An export that says the project cannot be shown (Node
-  ran and wrote `{"error": ...}`, e.g. for a broken `code.xml`) is kept too, so such a project does not start Node on
-  every view; if a newer export says so where an older one worked, the older one stays. An export that could not run
-  or finish (Node missing, crashed, timed out, no export deployed) is not kept: the view gets 503, as below.
+  what the export is built from: the Catroid pin and the player's sources and build scripts, not of the built
+  `code-export.js`, which TeaVM orders differently on every build; translations are put in per view and not part of
+  it). An export that says the project cannot be shown (Node ran and wrote `{"error": ...}`, e.g. for a broken
+  `code.xml`) is kept too, so such a project does not start Node on every view; if a newer export says so where an
+  older one worked, the older one stays. An export that could not run or finish (Node missing, crashed, timed out, no
+  export deployed) is not kept: the view gets 503, as below.
 - Views never wait for a newer export: an outdated one is shown as it is and made again after the response
   (`kernel.terminate`). Only the first view of a project without an export for its `code.xml` waits for Node (median
   about 0.9 s). Uploads never wait: the export runs after the upload's response (`CodeViewExportEventListener`).

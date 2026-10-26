@@ -29,7 +29,7 @@ class CodeExportRunner
   }
 
   /**
-   * Changes with every build of the export (its version.txt), so exports of an older one are made again.
+   * Changes when what the export is built from changes (its version.txt), so exports of an older one are made again.
    */
   public function getVersion(): ?string
   {
