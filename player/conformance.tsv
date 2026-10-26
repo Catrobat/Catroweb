@@ -138,7 +138,7 @@ formula/testModuloFunction.catrobat	pass
 formula/testNaturalLogarithmFunction.catrobat	pass	
 formula/testNumberOfItems.catrobat	pass	
 formula/testNumberOfItemsFunction.catrobat	pass	
-formula/testNumberOfLooks.catrobat	fail	on sprite "Background" Brick at position 4 in "StartScript" AssertEqualsError expected: <2> actual: <1.0> deviation: ^
+formula/testNumberOfLooks.catrobat	fail	on sprite "Looks downloaded from the web" Brick at position 4 in "StartScript" AssertEqualsError expected: <1> actual: <0.0> deviation: ^
 formula/testPowerFunction.catrobat	pass	
 formula/testRandomFunction.catrobat	pass	
 formula/testRegularExpressionFunction.catrobat	pass	

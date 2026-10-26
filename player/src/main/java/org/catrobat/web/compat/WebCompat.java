@@ -367,6 +367,33 @@ public final class WebCompat {
 		return deleted;
 	}
 
+	/** A file in gdx's local storage exists for Catroid too (the copy look brick copies only looks that exist). */
+	public static boolean exists(java.io.File file) {
+		return file.exists() || null != com.badlogic.gdx.Gdx.files && absolute(com.badlogic.gdx.Gdx.files, file.getAbsolutePath()).exists();
+	}
+
+	/** Created in gdx's local storage, where the rest of Catroid's files are; false if it is already there. */
+	public static boolean createNewFile(java.io.File file) {
+		if (exists(file)) {
+			return false;
+		}
+		absolute(com.badlogic.gdx.Gdx.files, file.getAbsolutePath()).writeBytes(new byte[0], false);
+		return true;
+	}
+
+	/** StorageOperations.duplicateFile copies with FileChannel, which TeaVM lacks: the same unique name, in gdx's storage. */
+	public static java.io.File duplicateFile(java.io.File source) throws java.io.IOException {
+		java.io.File copy = org.catrobat.catroid.io.StorageOperations.getUniqueFile(source.getName(), source.getParentFile());
+		absolute(com.badlogic.gdx.Gdx.files, copy.getAbsolutePath())
+				.writeBytes(absolute(com.badlogic.gdx.Gdx.files, source.getAbsolutePath()).readBytes(), false);
+		return copy;
+	}
+
+	/** The copy look brick writes a web look (whose file is gone) to a FileHandle of its java.io.File: gdx-teavm has no absolute files. */
+	public static void writePNG(com.badlogic.gdx.files.FileHandle file, Pixmap pixmap) {
+		com.badlogic.gdx.graphics.PixmapIO.writePNG(absolute(com.badlogic.gdx.Gdx.files, file.path()), pixmap);
+	}
+
 	/**
 	 * LookData.getPixmap gives a look whose image is missing a 1x1 transparent pixmap when gdx reports "Couldn't load
 	 * file:", Android's wording; gdx-teavm words it differently, so the look got none and drawing it crashed. Only a
