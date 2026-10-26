@@ -252,15 +252,19 @@ public final class Rewrite {
 
 	/**
 	 * Like REDIRECT, but only for calls from one Catroid class (and its inner classes), as "caller>owner.name+desc":
-	 * the loudness sensor polls the microphone with a Handler, which elsewhere stays the mockable one, and the vibrate
-	 * brick finds Catroid's VibrationManager through a StageActivity.
+	 * the loudness sensor polls the microphone with a Handler, which elsewhere stays the mockable one, the vibrate
+	 * brick finds Catroid's VibrationManager through a StageActivity, and the colour sensors' viewport gets a size.
 	 */
 	static final Map<String, String> CALLER_REDIRECT = Map.ofEntries(
 			Map.entry("org/catrobat/catroid/formulaeditor/SensorLoudness>android/os/Handler.postDelayed(Ljava/lang/Runnable;J)Z",
 					"postDelayed"),
 			Map.entry("org/catrobat/catroid/formulaeditor/SensorLoudness>android/os/Handler.removeCallbacks(Ljava/lang/Runnable;)V",
 					"removeCallbacks"),
-			Map.entry(PLOT + "VibrateAction>java/lang/ref/WeakReference.get()Ljava/lang/Object;", "vibrationStage"));
+			Map.entry(PLOT + "VibrateAction>java/lang/ref/WeakReference.get()Ljava/lang/Object;", "vibrationStage"),
+			Map.entry("org/catrobat/catroid/sensing/ColorCollisionDetection>com/badlogic/gdx/utils/viewport/Viewport.apply()V",
+					"applyColorViewport"),
+			Map.entry("org/catrobat/catroid/sensing/ColorAtXYDetection>com/badlogic/gdx/utils/viewport/Viewport.apply()V",
+					"applyColorViewport"));
 
 	/**
 	 * Private Catroid methods the player calls itself: ProjectLoader reads old projects as loadProject does, and
