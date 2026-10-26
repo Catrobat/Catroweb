@@ -398,7 +398,12 @@
         return button
       }
       if (document.fullscreenEnabled) {
-        const again = add('fullscreen-button', 'Full screen', 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5', goFullScreen)
+        const again = add(
+          'fullscreen-button',
+          'Full screen',
+          'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
+          goFullScreen,
+        )
         // Hidden is display: none, so the button fades again each time it comes back.
         const update = () => {
           again.hidden = Boolean(document.fullscreenElement)
@@ -406,7 +411,12 @@
         document.addEventListener('fullscreenchange', update)
         update()
       }
-      add('restart-button', text('stage_dialog_restart', 'Restart'), 'M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5', restart)
+      add(
+        'restart-button',
+        text('stage_dialog_restart', 'Restart'),
+        'M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5',
+        restart,
+      )
       document.body.append(buttons)
     },
   }
