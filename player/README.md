@@ -63,7 +63,12 @@ Other pieces:
   (from its files, as a blob; otherwise share's thumbnail from its API, which the play vhost's CSP must allow in
   `img-src`), its name (share's API) and what
   the player is doing: loading the player, downloading `code.xml` (which it starts at once, while `app.js` loads),
-  reading it, downloading the files (N of M), preparing the sounds. `StartScreen` drives it and waits for the click
+  reading it, downloading the files (N of M), preparing the sounds. Once the project is read, it also says what the
+  project needs, from Catroid's `Project.getRequiredResources()` as the app checks it: the device sensors it reads
+  (so people know it is played on a phone) and, as the app's "Component not available" dialog, what the browser
+  cannot do (camera, face detection, NFC, Bluetooth robots, ...) with a link to the app; playing anyway stays possible.
+  These texts are Catroid's own translations (`scripts/export_strings.py --start` writes `strings/<language>.json` for
+  every language Catroid ships) in the browser's language, English otherwise. `StartScreen` drives it and waits for the click
   browsers require before they play sound; `?autostart` has no start screen. The click also goes full screen and, on
   Android, locks the screen to the project's orientation (iPhones have no full screen for pages); after leaving full
   screen, a small button in the corner goes back. A project that cannot be loaded says why, with a link back to

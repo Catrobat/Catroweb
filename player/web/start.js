@@ -59,6 +59,10 @@
 #start-screen .bar.unknown div { width: 30%; animation: catrobat-slide 1.2s ease-in-out infinite; }
 #start-screen .bar.hidden { visibility: hidden; }
 #start-screen a { color: #7fe9f2; }
+#start-screen .needs { max-height: 30vh; max-height: 30dvh; overflow-y: auto; font-size: 14px; text-align: start;
+  text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+#start-screen .needs .missing { margin-top: 8px; padding: 10px 14px; border-radius: 12px; background: rgba(0,0,0,.4); }
+#start-screen .needs ul { margin: 6px 0; padding-inline-start: 20px; }
 #start-screen p { margin: 0; }
 #fullscreen-button { position: fixed; z-index: 10; top: max(12px, env(safe-area-inset-top));
   right: max(12px, env(safe-area-inset-right)); width: 44px; height: 44px; padding: 10px; border: 0;
@@ -80,7 +84,7 @@
   overlay.id = 'start-screen'
   overlay.setAttribute('aria-busy', 'true')
   overlay.innerHTML = `<div class="backdrop"></div><div class="card">
-<img class="picture" alt=""><h1></h1>
+<img class="picture" alt=""><h1></h1><div class="needs" dir="auto" hidden></div>
 <button class="play" type="button" aria-label="Play" disabled>
 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
 </button><div class="status" role="status" aria-live="polite"></div><div class="bar"><div></div></div></div>`
@@ -90,6 +94,7 @@
   const button = overlay.querySelector('.play')
   const status = overlay.querySelector('.status')
   const bar = overlay.querySelector('.bar')
+  const needs = overlay.querySelector('.needs')
   document.body.append(overlay)
 
   const megabytes = (bytes) => `${(bytes / 1048576).toFixed(1)} MB`
@@ -193,6 +198,98 @@
     }
   })().catch(() => {})
 
+  // What the project needs (Project.getRequiredResources, ids from Brick.java), in Catroid's own words and the
+  // browser's language (scripts/export_strings.py): the sensors it reads, so people know it is played on a phone, and
+  // what the browser cannot do, for which there is the app. Playing anyway is up to them.
+  const strings = fetch('strings/locales.json')
+    .then((response) => response.json())
+    .then((locales) => {
+      const alias = { zh: 'zh-cn', nb: 'no' }
+      const wanted = (navigator.languages || [navigator.language]).flatMap((language) => {
+        const tag = language.toLowerCase()
+        const base = tag.split('-')[0]
+        return [tag, base, alias[base]]
+      })
+      const tag = wanted.find((candidate) => locales.includes(candidate)) || 'en'
+      return fetch(`strings/${tag}.json`).then(async (response) => ({
+        tag,
+        texts: await response.json(),
+      }))
+    })
+    .catch(() => null)
+  const USES = {
+    13: 'prestage_no_acceleration_sensor_available',
+    14: 'prestage_no_inclination_sensor_available',
+    15: 'prestage_no_compass_sensor_available',
+    18: 'prestage_no_gps_sensor_available',
+    24: 'formula_editor_sensor_loudness',
+    9: 'prestage_no_vibration_available',
+  }
+  const MISSING = {
+    4: 'prestage_no_face_detection_available',
+    5: 'prestage_no_text_detection_available',
+    27: 'prestage_no_pose_detection_available',
+    28: 'prestage_no_object_detection_available',
+    8: 'prestage_no_flash_available',
+    11: 'prestage_no_back_camera_available',
+    12: 'prestage_no_front_camera_available',
+    17: 'prestage_no_camera_available',
+    16: 'formula_editor_device_nfc',
+    2: 'formula_editor_device_lego_nxt',
+    20: 'formula_editor_device_lego_ev3',
+    10: 'formula_editor_device_phiro',
+    6: 'formula_editor_device_arduino',
+    7: 'formula_editor_device_raspberry',
+    22: 'formula_editor_device_cast',
+    23: 'formula_editor_speech_recognition',
+    29: 'preference_title_multiplayer_variables_enabled',
+  }
+
+  function showNeeds(resources, { tag, texts }) {
+    // "\u2022 Compass\n" (StageResourceHolder's list) -> "Compass"; "loudness" (a formula sensor) -> "Loudness"
+    const name = (key) => {
+      const text = texts[key].replace(/^\s*\u2022\s*/, '').trim()
+      return text.charAt(0).toLocaleUpperCase(tag) + text.slice(1)
+    }
+    const uses = new Set()
+    const missing = new Set()
+    for (const resource of resources) {
+      if (resource === 9 && !navigator.vibrate) {
+        missing.add(name(USES[9])) // iPhones cannot vibrate from a page
+      } else if (USES[resource]) {
+        uses.add(name(USES[resource]))
+      } else if (MISSING[resource]) {
+        missing.add(name(MISSING[resource]))
+      }
+    }
+    needs.lang = tag
+    if (uses.size) {
+      const line = document.createElement('p')
+      line.textContent = `${texts.formula_editor_device_sensors}: ${[...uses].join(', ')}`
+      needs.append(line)
+    }
+    if (missing.size) {
+      const box = document.createElement('div')
+      box.className = 'missing'
+      const title = document.createElement('strong')
+      title.textContent = texts.prestage_resource_not_available_title
+      const text = document.createElement('p')
+      text.textContent = texts.prestage_resource_not_available_text.trim()
+      const list = document.createElement('ul')
+      for (const item of missing) {
+        list.append(Object.assign(document.createElement('li'), { textContent: item }))
+      }
+      const app = document.createElement('a')
+      app.href = 'https://play.google.com/store/apps/details?id=org.catrobat.catroid'
+      app.target = '_blank'
+      app.rel = 'noopener'
+      app.textContent = `${texts.app_name}: ${texts.google_play_store_logo}`
+      box.append(title, text, list, app)
+      needs.append(box)
+    }
+    needs.hidden = !needs.firstChild
+  }
+
   // The click also goes full screen and, where the browser allows it (Android), turns the screen to the project's
   // orientation. iPhones have no full screen for pages; there the game stays in the browser window.
   function goFullScreen() {
@@ -217,8 +314,9 @@
       render()
     },
 
-    ready(title, isLandscape, started) {
+    ready(title, isLandscape, resources, started) {
       landscape = isLandscape
+      strings.then((texts) => texts && showNeeds(resources, texts))
       if (!name.textContent) {
         name.textContent = title
       }

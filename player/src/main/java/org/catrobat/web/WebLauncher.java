@@ -13,6 +13,7 @@ import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.Scene;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.StartScript;
+import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.content.bricks.ForeverBrick;
 import org.catrobat.catroid.content.bricks.MoveNStepsBrick;
 import org.catrobat.catroid.content.bricks.PenDownBrick;
@@ -55,8 +56,11 @@ public class WebLauncher {
 			return;
 		}
 		Project project;
+		Brick.ResourcesSet resources;
 		try {
 			project = projectId.isEmpty() ? demoProject() : loadAndReport(projectId);
+			// StageResourceHolder's job on Android; also gives physics sprites their action factory
+			resources = project.getRequiredResources();
 			if (!projectId.isEmpty()) {
 				ProjectLoader.prefetch(project, projectId);
 			}
@@ -69,7 +73,7 @@ public class WebLauncher {
 			Sounds.createContext(); // without a click it may stay muted, which the demo and tests do not mind
 		} else {
 			StartScreen.waitForStart(project.getName(),
-					project.getXmlHeader().getVirtualScreenWidth() > project.getXmlHeader().getVirtualScreenHeight());
+					project.getXmlHeader().getVirtualScreenWidth() > project.getXmlHeader().getVirtualScreenHeight(), resources);
 		}
 		if (!projectId.isEmpty()) {
 			ProjectLoader.awaitPrefetch();
@@ -82,7 +86,6 @@ public class WebLauncher {
 		projectManager.setCurrentlyPlayingScene(project.getDefaultScene());
 		project.getDirectory().mkdirs(); // the device variables and lists bricks save there, in memory for this play
 		org.catrobat.catroid.common.Constants.EXTERNAL_STORAGE_ROOT_EXPORT_DIRECTORY.mkdirs(); // and the file bricks here
-		project.getRequiredResources(); // StageResourceHolder's job on Android; gives physics sprites their action factory
 		// The canvas takes the project's aspect ratio, fitted into the window in device pixels (at most 2 per CSS pixel
 		// and 1920 on the long side), so the stage is sharp at full screen. The demo and tests keep 480x800 (800x480 for
 		// landscape), so their pixel checks do not depend on the window. CSS keeps it fitted when the window changes.

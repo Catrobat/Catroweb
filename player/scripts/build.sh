@@ -72,6 +72,8 @@ for round in $(seq 1 12); do
     echo "Player built (round $round): $(grep -c '^org/catrobat/catroid' $W/stub-report.tsv) Catroid methods unavailable on the web, see $W/stub-report.tsv"
     python3 scripts/export_strings.py ${JAVA_HOME:+$JAVA_HOME/bin/}javap $IN/R.jar build/dist/js/webapp/strings.json \
       build/catroid/catroid/src/main/res/values build/catroid/catroid/src/catroid/res/values
+    python3 scripts/export_strings.py --start build/dist/js/webapp/strings \
+      build/catroid/catroid/src/main/res build/catroid/catroid/src/catroid/res
     # The start screen shows up before app.js is in (web/start.js).
     cp web/start.js build/dist/js/webapp/start.js
     python3 - build/dist/js/webapp/index.html <<'EOF'
