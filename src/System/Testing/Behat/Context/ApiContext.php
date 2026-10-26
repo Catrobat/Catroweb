@@ -2196,6 +2196,16 @@ class ApiContext implements Context
   }
 
   /**
+   * @Given the project converted from Scratch project :scratch_id was made by converter version :version
+   */
+  public function theProjectConvertedFromScratchProjectWasMadeByConverterVersion(int $scratch_id, int $version): void
+  {
+    $project = $this->findProjectConvertedFromScratch($scratch_id);
+    $project->setScratchConverterVersion($version);
+    $this->getManager()->flush();
+  }
+
+  /**
    * @When I download the project converted from Scratch project :scratch_id
    */
   public function iDownloadTheProjectConvertedFromScratchProject(int $scratch_id): void

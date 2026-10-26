@@ -33,6 +33,14 @@ Feature: Import a public Scratch project as a Pocket Code project
     And there should be "1" projects in the database
     And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 2 by "scratchcat"
 
+  Scenario: A copy made by an older converter is converted again
+    When I request "POST" "/api/projects/scratch/70058680"
+    And the project converted from Scratch project 70058680 was made by converter version 1
+    And I request "POST" "/api/projects/scratch/70058680"
+    Then the response code should be "201"
+    And there should be "1" projects in the database
+    And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 2 by "scratchcat"
+
   Scenario: Importing a Scratch project that Scratch doesn't know fails with 404 and creates nothing
     When I request "POST" "/api/projects/scratch/1"
     Then the response code should be "404"

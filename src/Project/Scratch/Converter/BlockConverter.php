@@ -45,6 +45,12 @@ final class BlockConverter
   /** @var list<string>|null argument names while converting a procedure body */
   private ?array $arguments = null;
 
+  /** converting the body of a "run without screen refresh" custom block */
+  private bool $warp = false;
+
+  /** loops around the brick being converted; a normal custom block counts as one, it may run in a loop */
+  private int $loops = 0;
+
   /** @var array<string, true> blocks being converted right now, to reject cycles */
   private array $active = [];
 
@@ -177,8 +183,12 @@ final class BlockConverter
     }
 
     $this->arguments = $procedure['names'];
+    $this->warp = $procedure['warp'];
+    $this->loops = $procedure['warp'] ? 0 : 1;
     $bricks = $body();
     $this->arguments = null;
+    $this->warp = false;
+    $this->loops = 0;
 
     return $this->script('UserDefinedScript', $bricks, [
       $this->text('screenRefresh', $procedure['warp'] ? 'false' : 'true'),
@@ -374,8 +384,8 @@ final class BlockConverter
 
         // control
       case 'control_wait': return [$this->brick('WaitBrick', ['TIME_TO_WAIT_IN_SECONDS' => $this->number($b, 'DURATION')])];
-      case 'control_repeat': return [$this->brick('RepeatBrick', ['TIMES_TO_REPEAT' => $this->number($b, 'TIMES')], [$this->list('loopBricks', $sub())])];
-      case 'control_forever': return [$this->brick('ForeverBrick', [], [$this->list('loopBricks', $sub())])];
+      case 'control_repeat': return [$this->brick('RepeatBrick', ['TIMES_TO_REPEAT' => $this->number($b, 'TIMES')], [$this->list('loopBricks', $this->loopBody($sub, counted: true))])];
+      case 'control_forever': return [$this->brick('ForeverBrick', [], [$this->list('loopBricks', $this->loopBody($sub))])];
       case 'control_if': return [$this->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => $this->condition($b, 'CONDITION')], [$this->list('ifBranchBricks', $sub())])];
       case 'control_if_else':
         return [$this->brick('IfLogicBeginBrick', ['IF_CONDITION' => $this->condition($b, 'CONDITION')], [
@@ -383,8 +393,8 @@ final class BlockConverter
           $this->list('ifBranchBricks', $sub()),
         ])];
       case 'control_wait_until': return [$this->brick('WaitUntilBrick', ['IF_CONDITION' => $this->condition($b, 'CONDITION')])];
-      case 'control_repeat_until': return [$this->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => $this->condition($b, 'CONDITION')], [$this->list('loopBricks', $sub())])];
-      case 'control_while': return [$this->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => Formula::unary('LOGICAL_NOT', $this->condition($b, 'CONDITION'))], [$this->list('loopBricks', $sub())])];
+      case 'control_repeat_until': return [$this->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => $this->condition($b, 'CONDITION')], [$this->list('loopBricks', $this->loopBody($sub))])];
+      case 'control_while': return [$this->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => Formula::unary('LOGICAL_NOT', $this->condition($b, 'CONDITION'))], [$this->list('loopBricks', $this->loopBody($sub))])];
       case 'control_stop':
         $option = strtolower($this->field($b, 'STOP_OPTION'));
         $selection = 'all' === $option ? '1' : ('this script' === $option ? '0' : '2');
@@ -505,6 +515,100 @@ final class BlockConverter
   public function note(string $text): \DOMElement
   {
     return $this->brick('NoteBrick', ['NOTE' => Formula::string('[Scratch] '.$text)]);
+  }
+
+  /**
+   * Scratch ends each pass of a loop with a frame (30 per second) as soon as anything on stage changed, which in a
+   * game is every frame. Catroid holds a pass for 0.02 s, and only in loops with motion or look bricks
+   * (LoopUtil.checkLoopBrickForLoopDelay), so game loops that only compute variables ran hundreds of passes a
+   * second. Waiting for the next frame at the end of each pass restores Scratch's pace.
+   * Not in "run without screen refresh" blocks, which never yield, and not when the body itself waits. A counted
+   * loop that changes nothing visible, right in a script, is set-up (filling lists, counters), which Scratch runs at
+   * once as long as nothing else moves; inside another loop it is game logic like any other ("repeat 20: change
+   * bounce by 4" is a bouncing ball), so it yields.
+   * ponytail: a block without screen refresh that calls a normal one makes the callee's loops yield in Catroid, not
+   * in Scratch; telling needs the call graph. A broadcast that a game loop sends sets up again at once.
+   *
+   * @param \Closure(): list<\DOMElement> $convert the body
+   *
+   * @return list<\DOMElement>
+   */
+  private function loopBody(\Closure $convert, bool $counted = false): array
+  {
+    ++$this->loops;
+    try {
+      $body = $convert();
+    } finally {
+      --$this->loops;
+    }
+
+    if ($this->warp || [] !== array_filter($body, self::waits(...)) || ($counted && 0 === $this->loops && !self::changesStage($body))) {
+      return $body;
+    }
+
+    return [...$body, $this->brick('WaitBrick', ['TIME_TO_WAIT_IN_SECONDS' => self::untilNextFrame()])];
+  }
+
+  /**
+   * Seconds to the next tick of a 30 per second clock on the timer: every loop resumes on the same tick, as Scratch
+   * runs all scripts once per frame, and the time the pass itself took counts towards it. A plain wait of a frame
+   * came on top of the pass and ran heavy loops a fifth slower than Scratch.
+   * The timer is the wall clock, which Catroid's scripts trail by up to a frame (it runs a frame's worth of bricks at
+   * once), so one more display frame (1/60 s) lands the wait just after the tick instead of before it, where the
+   * next pass would aim at the same tick again: measured 30 passes a second with it, 52 without.
+   * Not with MOD, which Catroid computes by repeated subtraction: frame * (floor(timer / frame) + 1) - timer + 1/60.
+   * ponytail: "reset timer" shifts the clock, which only moves the ticks.
+   */
+  private static function untilNextFrame(): Formula
+  {
+    $frame = Formula::number(round(1 / 30, 4));
+    $timer = Formula::sensor('TIMER');
+    $tick = Formula::op('MULT', $frame, Formula::op('PLUS', Formula::fn('FLOOR', Formula::op('DIVIDE', $timer, $frame)), Formula::number(1)));
+
+    return Formula::op('PLUS', Formula::op('MINUS', $tick, $timer), Formula::number(round(1 / 60, 4)));
+  }
+
+  /** A brick that, run in every pass, takes time; Scratch's "wait 0" only yields, like the end of the pass. */
+  private static function waits(\DOMElement $brick): bool
+  {
+    $type = $brick->getAttribute('type');
+    if ('WaitBrick' === $type) {
+      $time = $brick->getElementsByTagName('formula')->item(0);
+
+      return !($time instanceof \DOMElement && 'NUMBER' === self::childText($time, 'type') && 0.0 === (float) self::childText($time, 'value'));
+    }
+
+    return \in_array($type, ['WaitUntilBrick', 'GlideToBrick', 'SayForBubbleBrick', 'ThinkForBubbleBrick', 'AskBrick', 'PlayNoteForBeatsBrick',
+      'PauseForBeatsBrick', 'PlayDrumForBeatsBrick', 'BroadcastWaitBrick', 'PlaySoundAndWaitBrick', 'SetBackgroundAndWaitBrick',
+      'SetBackgroundByIndexAndWaitBrick'], true);
+  }
+
+  /** @param list<\DOMElement> $bricks */
+  private static function changesStage(array $bricks): bool
+  {
+    $quiet = ['SetVariableBrick', 'ChangeVariableBrick', 'AddItemToUserListBrick', 'DeleteItemOfUserListBrick', 'ClearUserListBrick',
+      'InsertItemIntoUserListBrick', 'ReplaceItemInUserListBrick', 'IfThenLogicBeginBrick', 'IfLogicBeginBrick', 'RepeatBrick',
+      'RepeatUntilBrick', 'ForeverBrick', 'WaitBrick', 'NoteBrick', 'ResetTimerBrick', 'StopScriptBrick'];
+    foreach ($bricks as $brick) {
+      foreach ([$brick, ...$brick->getElementsByTagName('brick')] as $inner) {
+        if (!\in_array($inner->getAttribute('type'), $quiet, true)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  private static function childText(\DOMElement $element, string $name): ?string
+  {
+    foreach ($element->childNodes as $child) {
+      if ($child instanceof \DOMElement && $name === $child->tagName) {
+        return $child->textContent;
+      }
+    }
+
+    return null;
   }
 
   /** @return list<\DOMElement> */
