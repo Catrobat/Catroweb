@@ -36,7 +36,9 @@ kill $SERVER
 # that "touching color" and "color at x y" see the stage in a project that is not stretched.
 STAGE=build/web/stage-tests
 rm -rf $STAGE
-for test in colorAtXY/testColorAtXY bricks/looks/testSetTransparency touchesColor/testColorTouchesColor; do
+# testSetTransparency itself runs only in conformance.sh, which retries: its "test loop delay" assertion fails when a
+# loaded machine stalls a frame. The fixtures made from it play its looks checks without that one.
+for test in colorAtXY/testColorAtXY touchesColor/testColorTouchesColor; do
   mkdir -p "$STAGE/project-files/$(basename $test)/assets"
   unzip -q "build/catroid/catroid/src/androidTest/assets/catrobatTests/$test.catrobat" -d "$STAGE/project-files/$(basename $test)/assets"
 done
@@ -73,6 +75,15 @@ rm -rf $SENSORS && mkdir -p $SENSORS/project-files/sensors/assets
 unzip -q fixtures/sensors.catrobat -d $SENSORS/project-files/sensors/assets
 serve 0 $SENSORS
 python3 scripts/sensors_check.py "$CHROME" "http://127.0.0.1:$PORT/?autostart#sensors"
+kill $SERVER
+
+# Restart: through the start screen, the button over the stage must reset the project's counter to its initial value
+# and let it count again (fixtures/README.md).
+RESTART=build/web/restart-test
+rm -rf $RESTART && mkdir -p $RESTART/project-files/restart/assets
+unzip -q fixtures/restart.catrobat -d $RESTART/project-files/restart/assets
+serve 0 $RESTART
+python3 scripts/restart_check.py "$CHROME" "http://127.0.0.1:$PORT/#restart"
 kill $SERVER
 
 # The loader check runs synchronously once the page has loaded; --virtual-time-budget keeps headless Chrome from

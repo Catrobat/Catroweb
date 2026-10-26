@@ -87,13 +87,15 @@ for round in $(seq 1 12); do
     # From what the export is built from, not from code-export.js: TeaVM orders its output differently on every build.
     python3 scripts/build_version.py > build/dist/js/webapp/version.txt
     cp build/dist/js/webapp/version.txt $E/version.txt
-    # The start screen shows up before app.js is in (web/start.js).
+    # The start screen shows up before app.js is in (web/start.js). The tab shows Pocket Code's launcher icon.
     cp web/start.js build/dist/js/webapp/start.js
+    cp build/catroid/catroid/src/main/res/mipmap-xxxhdpi/ic_launcher.png build/dist/js/webapp/icon.png
     python3 - build/dist/js/webapp/index.html <<'EOF'
 import sys
 page = open(sys.argv[1]).read()
 app = '<script type="text/javascript" charset="utf-8" src="app.js">'
-assert app in page, "gdx-teavm's index.html changed: load start.js before app.js"
+assert app in page and '</title>' in page, "gdx-teavm's index.html changed: load start.js before app.js"
+page = page.replace('</title>', '</title><link rel="icon" href="icon.png">', 1)
 open(sys.argv[1], "w").write(page.replace(app, '<script src="start.js"></script>' + app))
 EOF
     exit 0
