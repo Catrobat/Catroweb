@@ -211,7 +211,8 @@ class ProjectManager
     $project->setUser($request->getUser());
     $project->setCatrobatVersionName($extracted_file->getApplicationVersion());
     $project->setLanguageVersion($extracted_file->getLanguageVersion());
-    $project->setUploadIp($request->getIp());
+    // Console imports (Scratch re-conversion) have no client IP; an update keeps the uploader's.
+    $project->setUploadIp($request->getIp() ?? $project->getUploadIp());
     $project->setFilesize($file->getSize());
     $project->setApproved(false);
     $project->setUploadLanguage('en');

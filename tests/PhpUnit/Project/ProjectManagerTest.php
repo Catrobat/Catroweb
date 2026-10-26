@@ -211,6 +211,24 @@ class ProjectManagerTest extends TestCase
     $this->assertInstanceOf(Project::class, $program_manager->addProject($this->request));
   }
 
+  public function testARequestWithoutIpIsAccepted(): void
+  {
+    $entity_manager = $this->createStub(EntityManager::class);
+    $entity_manager->method('persist')->willReturnCallback(static function (object $project): void {
+      if ($project instanceof Project) {
+        $project->setId('1');
+      }
+    });
+    $event_dispatcher = $this->createStub(EventDispatcherInterface::class);
+    $event_dispatcher->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+    $request = new AddProjectRequest($this->request->getUser(), $this->request->getProjectFile(), null);
+
+    $project = $this->createProjectManagerWithMocks(entity_manager: $entity_manager, event_dispatcher: $event_dispatcher)->addProject($request);
+
+    $this->assertInstanceOf(Project::class, $project);
+    $this->assertSame('', $project->getUploadIp());
+  }
+
   public function testAConvertedScratchProjectHasItsScratchIdFromTheFirstPersist(): void
   {
     $this->request->method('getScratchId')->willReturn(10128407);
