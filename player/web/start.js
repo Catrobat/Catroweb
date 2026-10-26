@@ -97,31 +97,66 @@
   const needs = overlay.querySelector('.needs')
   document.body.append(overlay)
 
+  // Catroid's own words in the browser's language (scripts/export_strings.py --start), English until they are in
+  // and where Catroid has none. text() is also the player's (catroid/BrowserHandoff).
+  const strings = fetch('strings/locales.json')
+    .then((response) => response.json())
+    .then((locales) => {
+      const alias = { zh: 'zh-cn', nb: 'no' }
+      const wanted = (navigator.languages || [navigator.language]).flatMap((language) => {
+        const tag = language.toLowerCase()
+        const base = tag.split('-')[0]
+        return [tag, base, alias[base]]
+      })
+      const tag = wanted.find((candidate) => locales.includes(candidate)) || 'en'
+      return fetch(`strings/${tag}.json`).then(async (response) => ({
+        tag,
+        texts: await response.json(),
+      }))
+    })
+    .catch(() => null)
+  let texts = {}
+  const text = (name, english) => texts[name] ?? english
+  window.catrobatText = text
+  strings.then((loaded) => {
+    if (loaded) {
+      texts = loaded.texts
+      overlay.lang = loaded.tag
+      if (!state.clicked) {
+        button.setAttribute('aria-label', text('play', 'Play'))
+      }
+      render()
+    }
+  })
+
   const megabytes = (bytes) => `${(bytes / 1048576).toFixed(1)} MB`
 
   function render() {
     if (state.failed) {
       return
     }
-    let text
+    let line
     let progress = null // null: unknown, so the bar moves on its own
     if (state.phase === 'files' && state.total > 0 && state.done < state.total) {
-      text = `Downloading files: ${state.done} of ${state.total} (${megabytes(state.bytes)})`
+      line = `${text('status_downloading', 'Downloading files…')} ${state.done}/${state.total} (${megabytes(state.bytes)})`
       progress = state.done / state.total
     } else if (state.phase === 'files') {
-      text = state.clicked ? 'Starting…' : 'Ready to play'
+      line = state.clicked
+        ? text('please_wait', 'Starting…')
+        : text('main_menu_play', 'Ready to play')
       progress = state.clicked ? null : 1
     } else {
-      text = {
-        player: 'Loading the player…',
-        project: `Downloading the project…${state.xmlBytes ? ` ${megabytes(state.xmlBytes)}` : ''}`,
-        preparing: 'Reading the project…',
-        sounds: 'Preparing the sounds…',
-        starting: 'Starting…',
-      }[state.phase]
+      line = {
+        player: () => text('loading', 'Loading the player…'),
+        project: () =>
+          `${text('status_downloading', 'Downloading the project…')}${state.xmlBytes ? ` ${megabytes(state.xmlBytes)}` : ''}`,
+        preparing: () => text('loading', 'Reading the project…'),
+        sounds: () => text('loading', 'Preparing the sounds…'),
+        starting: () => text('please_wait', 'Starting…'),
+      }[state.phase]()
     }
-    if (status.textContent !== text) {
-      status.textContent = text
+    if (status.textContent !== line) {
+      status.textContent = line
     }
     bar.classList.toggle('unknown', progress === null)
     bar.classList.toggle('hidden', progress === 1)
@@ -198,25 +233,8 @@
     }
   })().catch(() => {})
 
-  // What the project needs (Project.getRequiredResources, ids from Brick.java), in Catroid's own words and the
-  // browser's language (scripts/export_strings.py): the sensors it reads, so people know it is played on a phone, and
-  // what the browser cannot do, for which there is the app. Playing anyway is up to them.
-  const strings = fetch('strings/locales.json')
-    .then((response) => response.json())
-    .then((locales) => {
-      const alias = { zh: 'zh-cn', nb: 'no' }
-      const wanted = (navigator.languages || [navigator.language]).flatMap((language) => {
-        const tag = language.toLowerCase()
-        const base = tag.split('-')[0]
-        return [tag, base, alias[base]]
-      })
-      const tag = wanted.find((candidate) => locales.includes(candidate)) || 'en'
-      return fetch(`strings/${tag}.json`).then(async (response) => ({
-        tag,
-        texts: await response.json(),
-      }))
-    })
-    .catch(() => null)
+  // What the project needs (Project.getRequiredResources, ids from Brick.java): the sensors it reads, so people know
+  // it is played on a phone, and what the browser cannot do, for which there is the app. Playing anyway is up to them.
   const USES = {
     13: 'prestage_no_acceleration_sensor_available',
     14: 'prestage_no_inclination_sensor_available',
@@ -326,7 +344,7 @@
       button.onclick = () => {
         button.onclick = null
         button.classList.add('clicked')
-        button.setAttribute('aria-label', 'Starting')
+        button.setAttribute('aria-label', text('please_wait', 'Starting'))
         state.clicked = true
         render()
         // iPhones send motion and orientation only after asking, which a page may do only inside a click.
@@ -345,12 +363,15 @@
       overlay.removeAttribute('aria-busy')
       button.remove()
       bar.remove()
-      status.textContent = 'This project cannot be played in the browser.'
+      status.textContent = text(
+        'error_load_project',
+        'This project cannot be played in the browser.',
+      )
       const details = document.createElement('p')
       details.textContent = message || ''
       const back = document.createElement('a')
       back.href = `${share}/app/project/${id}`
-      back.textContent = 'Back to the project'
+      back.textContent = text('stage_dialog_back', 'Back to the project')
       status.after(details, back)
       back.focus()
     },

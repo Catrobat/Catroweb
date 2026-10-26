@@ -46,8 +46,8 @@ def android_text(raw):
     return "".join(out).strip(UNQUOTED_SPACE).replace(UNQUOTED_SPACE, " ")
 
 
-# What the start screen says about a project's required resources (Brick.java), from StageResourceHolder's dialog,
-# the formula editor's device categories and the app's name.
+# What the start screen says: about a project's required resources (Brick.java), from StageResourceHolder's dialog,
+# the formula editor's device categories and the app's name;
 START = ["prestage_resource_not_available_title", "prestage_resource_not_available_text",
          "prestage_no_acceleration_sensor_available", "prestage_no_inclination_sensor_available",
          "prestage_no_compass_sensor_available", "prestage_no_gps_sensor_available", "prestage_no_vibration_available",
@@ -58,7 +58,10 @@ START = ["prestage_resource_not_available_title", "prestage_resource_not_availab
          "formula_editor_speech_recognition", "formula_editor_device_nfc", "formula_editor_device_lego_nxt",
          "formula_editor_device_lego_ev3", "formula_editor_device_phiro", "formula_editor_device_arduino",
          "formula_editor_device_raspberry", "formula_editor_device_cast", "preference_title_multiplayer_variables_enabled",
-         "app_name", "google_play_store_logo"]
+         "app_name", "google_play_store_logo",
+         # its status and buttons, and the player's prompts (catroid/BrowserHandoff)
+         "loading", "please_wait", "status_downloading", "main_menu_play", "play", "error_load_project",
+         "stage_dialog_back", "save", "brick_open", "cancel"]
 
 
 def language_tag(qualifier):
