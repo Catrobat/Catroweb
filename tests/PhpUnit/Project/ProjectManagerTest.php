@@ -231,6 +231,38 @@ class ProjectManagerTest extends TestCase
     $this->assertSame(10128407, $scratch_ids[0]);
   }
 
+  #[DataProvider('uploadIpCases')]
+  public function testUploadsWithoutAVisitorIpPreserveTheStoredAddress(bool $update, ?string $ip, string $expected): void
+  {
+    $existing = $update ? (new Project())->setUploadIp('192.0.2.1') : null;
+    $repository = $this->createStub(ProjectRepository::class);
+    $repository->method('findOneBy')->willReturn($existing);
+    $entity_manager = $this->createStub(EntityManager::class);
+    $entity_manager->method('persist')->willReturnCallback(static function (Project $project): void {
+      $project->setId('1');
+    });
+    $event_dispatcher = $this->createStub(EventDispatcherInterface::class);
+    $event_dispatcher->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+    $request = new AddProjectRequest(new User(), $this->request->getProjectFile(), $ip);
+
+    $project = $this->createProjectManagerWithMocks(
+      entity_manager: $entity_manager,
+      event_dispatcher: $event_dispatcher,
+      program_repository: $repository,
+    )->addProject($request);
+
+    $this->assertInstanceOf(Project::class, $project);
+    $this->assertSame($expected, $project->getUploadIp());
+  }
+
+  /** @return iterable<string, array{bool, ?string, string}> */
+  public static function uploadIpCases(): iterable
+  {
+    yield 'new background import has no address' => [false, null, ''];
+    yield 'background update preserves original address' => [true, null, '192.0.2.1'];
+    yield 'visitor upload records its new address' => [true, '198.51.100.2', '198.51.100.2'];
+  }
+
   /**
    * @throws ORMException
    * @throws Exception
