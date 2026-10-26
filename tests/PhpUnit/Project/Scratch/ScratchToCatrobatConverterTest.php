@@ -164,8 +164,9 @@ final class ScratchToCatrobatConverterTest extends TestCase
       $png = $normalizer->costumeToPng($svg, ['dataFormat' => 'svg', 'scratch2' => $legacy, 'rotationCenterX' => 40, 'rotationCenterY' => 20], microtime(true) + 10.0);
       $image = new \Imagick();
       $image->readImageBlob($png);
-      $alpha = $image->getImageChannelMean(\Imagick::CHANNEL_ALPHA)['mean'];
-      $this->assertSame($legacy, $alpha > 0, 'Only Scratch 2 ignores the obsolete text x/y coordinates.');
+      // An empty PNG's alpha mean differs between ImageMagick versions; drawn text has alpha variation.
+      $alpha_variation = $image->getImageChannelMean(\Imagick::CHANNEL_ALPHA)['standardDeviation'];
+      $this->assertSame($legacy, $alpha_variation > 0, 'Only Scratch 2 ignores the obsolete text x/y coordinates.');
     }
   }
 
