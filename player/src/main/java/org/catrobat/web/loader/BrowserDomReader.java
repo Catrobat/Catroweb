@@ -4,13 +4,14 @@ import com.thoughtworks.xstream.io.naming.NameCoder;
 import com.thoughtworks.xstream.io.xml.AbstractDocumentReader;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSObject;
+import org.teavm.jso.core.JSArrayReader;
 import org.teavm.jso.dom.xml.Attr;
 import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.Node;
 import org.teavm.jso.dom.xml.NodeList;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Lets Catroid's own XStream read a document parsed by the browser's DOMParser: XStream's DomReader needs the
@@ -18,7 +19,8 @@ import java.util.List;
  */
 public class BrowserDomReader extends AbstractDocumentReader {
 	private Element current;
-	private List<Element> children;
+	private JSArrayReader<Element> children;
+	private JSObject listed;
 
 	public BrowserDomReader(Element root) {
 		super(root, new UncloneableNameCoder(new XmlFriendlyNameCoder()));
@@ -49,17 +51,27 @@ public class BrowserDomReader extends AbstractDocumentReader {
 
 	@Override
 	protected void reassignCurrentElement(Object element) {
-		// Called from the super constructor, before field initializers would run.
-		current = (Element) element;
-		children = new ArrayList<>();
-		NodeList<Node> nodes = current.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++) {
-			Node node = nodes.item(i);
-			if (Node.ELEMENT_NODE == node.getNodeType()) {
-				children.add((Element) node);
-			}
+		// Called from the super constructor, before field initializers would run: no initializer for listed either.
+		if (null == listed) {
+			listed = newMap();
 		}
+		current = (Element) element;
+		children = elementChildren(listed, current);
 	}
+
+	/**
+	 * XStream comes back to a parent after each of its children, so this reader lists a parent's element children
+	 * once: listing them each time made large projects quadratic (a list of thousands of bricks). Per reader, as the
+	 * loader edits the document between two readings of an old project.
+	 */
+	@JSBody(script = "return new Map();")
+	private static native JSObject newMap();
+
+	@JSBody(params = {"listed", "element"}, script = "var c = listed.get(element);"
+			+ "if (!c) { c = []; for (var n = element.firstChild; n; n = n.nextSibling) if (n.nodeType === 1) c.push(n);"
+			+ " listed.set(element, c); }"
+			+ "return c;")
+	private static native JSArrayReader<Element> elementChildren(JSObject listed, Element element);
 
 	@Override
 	protected Object getParent() {
@@ -73,7 +85,7 @@ public class BrowserDomReader extends AbstractDocumentReader {
 
 	@Override
 	protected int getChildCount() {
-		return children.size();
+		return children.getLength();
 	}
 
 	@Override

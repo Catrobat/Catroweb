@@ -49,6 +49,33 @@ public final class WebCompat {
 		return org.catrobat.web.android.WebContext.INSTANCE;
 	}
 
+	/** No activity on the web, so no fragment manager: whoever asks for a fragment gets none (noFragment). */
+	public static androidx.fragment.app.FragmentManager noFragmentManager(Object activity) {
+		return null;
+	}
+
+	public static androidx.fragment.app.Fragment noFragment(androidx.fragment.app.FragmentManager manager, int id) {
+		return null;
+	}
+
+	public static androidx.fragment.app.Fragment noFragment(androidx.fragment.app.FragmentManager manager, String tag) {
+		return null;
+	}
+
+	/**
+	 * A formula's colour ('#ff0000') in a brick: the app draws a square of it with android.graphics, which the web has
+	 * not; the code export keeps the text (FormulaSpannableStringBuilder.addColoredSquareToColorString, without it).
+	 */
+	public static void colorSquare(Object builder, android.content.Context context, String colorString, float size,
+			android.text.SpannableStringBuilder text) {
+		text.append(colorString.substring(0, colorString.length() - 1) + " ").append("' ");
+	}
+
+	/** Bricks inflate their layouts through it: into views the code export reads (codeview/CodeLayoutInflater). */
+	public static android.view.LayoutInflater layoutInflater(android.content.Context context) {
+		return new org.catrobat.web.codeview.CodeLayoutInflater(context);
+	}
+
 	/** modifyXMLToSupportUnknownFields edits the browser's DOM of code.xml (Dom.edit), not a file it parses... */
 	public static org.catrobat.web.java.Dom.Document xmlToUpgrade(org.catrobat.catroid.io.BackwardCompatibleCatrobatLanguageXStream xstream,
 			java.io.File file) {

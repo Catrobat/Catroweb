@@ -17,6 +17,10 @@ dependencies {
     implementation(files(if (patched.exists()) patched.readLines().filter { it.isNotBlank() } else emptyList<String>()))
 }
 
+// Classes the project loader builds by reflection; TeaVM drops constructors nothing calls directly.
+// Written by scripts/build.sh next to the reflection policy's rules (compiler/CatroidReflectionPolicy).
+val preserved = file("build/web/preserved-classes.txt").let { if (it.exists()) it.readLines().filter { l -> l.isNotBlank() } else emptyList() }
+
 gdxTeaVM {
     assets("assets") // Catroid's own stage assets
     webDefaults {
@@ -25,13 +29,17 @@ gdxTeaVM {
         obfuscated = false
     }
     js {
-        // Classes the project loader builds by reflection; TeaVM drops constructors nothing calls directly.
-        // Written by scripts/build.sh next to the reflection policy's rules (compiler/CatroidReflectionPolicy).
-        val preserved = file("build/web/preserved-classes.txt")
-        if (preserved.exists()) {
-            preservedClasses.addAll(preserved.readLines().filter { it.isNotBlank() })
-        }
+        preservedClasses.addAll(preserved)
         outOfProcess = true
         processMemory = 12288 // TeaVM needs several GB for the whole engine
+    }
+    // The code view's export (codeview/CodeExport): the loader and the bricks' getView, no stage, run by Node.
+    js("codeExport") {
+        mainClass = "org.catrobat.web.codeview.CodeExport"
+        targetFileName = "code-export.js"
+        webappEnabled = false
+        preservedClasses.addAll(preserved)
+        outOfProcess = true
+        processMemory = 12288
     }
 }

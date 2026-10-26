@@ -46,7 +46,8 @@ Other pieces:
 - Project loader: Catroid's own `XstreamSerializer` setup reads `code.xml` through `loader/BrowserDomReader`, an XStream
   reader over the browser's `DOMParser`. XStream builds objects by reflection, so `compiler/CatroidReflectionPolicy`
   grants it Catroid's model, and `compiler/ReflectionLinks` (a TeaVM plugin) works around TeaVM 0.15 leaving the
-  names, constructors and fields of most of those classes out.
+  names, constructors and fields of most of those classes out. The reader lists each element's children once per reading: XStream returns to a
+  parent after every child, which made projects with thousands of bricks quadratic.
 - Older projects: as `XstreamSerializer.loadProject`, `ProjectLoader` reads projects without scenes (before Catrobat
   language 0.992) and those before 0.9991 into Catroid's legacy classes and converts them, then applies
   `ProjectManager`'s version updates. `Rewrite` makes the private `prepareXstream` and
@@ -78,6 +79,32 @@ Other pieces:
   1920 on the long side) and CSS keeps it fitted when the window changes; the demo and `?autostart` keep 480x800.
 - Catroid's test projects report their result through `StageActivity.finishTestWithResult`; the player writes it to
   `data-test-result` on the page (7777 = success), which `smoke.sh` checks for a few test projects with looks.
+
+## Code view export
+
+share's code view (`App\Project\CodeView`, `docs/operations/Code-View.md` there) shows a project's code as the app
+does, made by Catroid itself: `build.sh` also compiles `codeview/CodeExport`, a second TeaVM entry (`codeExport` in
+`build.gradle.kts`) with the loader and Catroid's bricks but no stage, into `build/dist/js/webapp/code-export/`, which
+deploys with the player. share runs it with Node 22 or newer, one process per project, with Node's permission model:
+`node --permission --allow-fs-read=<code-export> --allow-fs-read=<code.xml> code-export/export.mjs <code.xml>` writes
+the project's code as JSON (its format is in `CodeExport`'s comment).
+
+- The loader reads `code.xml` as the player does (`ProjectLoader.parse`), so every project from Catrobat language 0.9
+  on, through xmldom instead of the browser's `DOMParser` (`web/code-export/export.mjs`, which also adds the
+  `TreeWalker` the upgrade of projects before 0.93 needs).
+- Each brick's text comes from its own `getView`: `codeview/CodeLayoutInflater` builds the brick's layout (exported by
+  `scripts/export_code_resources.py`) from `codeview/CodeViews`, subclasses of the mockable SDK widgets that keep what
+  `getView` puts in them, and `CodeExport` reads them in order: labels, formula fields (`BrickEditText` style, Catroid's
+  own formula text) and drop-downs (their selection's name), and the category from the layout's `BrickContainer` style.
+  `Rewrite` makes Catroid's own code create the web subclasses (`SUBSTITUTE`: `TextView`, `ArrayAdapter`,
+  `SpannableStringBuilder`) and redirects `LayoutInflater.from` and the fragment lookups of an activity there is none of.
+- Strings are markers (`\x01` kind `:` name, arguments after `\x1f`, `\x02`) for Catroid's strings, plurals and
+  arrays, which share turns into the viewer's language with Catroid's translations (`code-export/strings/`). Plurals
+  come from `WebResources.getQuantityString`, which only the export has. Java code must not build a marker with `+`:
+  TeaVM reads `\u0001` and `\u0002` in a string concatenation as `StringConcatFactory`'s own tags.
+- `scripts/check_code_export.py` exports Catroid's `catrobatTests` and the fixtures and fails on any project that does
+  not export or brick that shows wrong (getView failed, a layout or category missing, an empty formula field, a
+  drop-down without a selection); the Player workflow runs it.
 
 ## Deployment
 
