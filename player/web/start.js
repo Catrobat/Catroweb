@@ -67,7 +67,8 @@
 #stage-buttons { position: fixed; z-index: 10; top: max(12px, env(safe-area-inset-top));
   right: max(12px, env(safe-area-inset-right)); display: flex; gap: 8px; }
 #stage-buttons button { width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 12px;
-  background: rgba(0,0,0,.5); color: #fff; cursor: pointer; animation: catrobat-fade .4s 3s forwards; }
+  background: rgba(0,0,0,.5); box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); color: #fff; cursor: pointer;
+  animation: catrobat-fade .4s 3s forwards; }
 #stage-buttons button:hover, #stage-buttons button:focus-visible { animation: none; opacity: 1; }
 #stage-buttons button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 #stage-buttons button[hidden] { display: none; }
@@ -382,8 +383,9 @@
       overlay.remove()
       const buttons = document.createElement('div')
       buttons.id = 'stage-buttons'
-      const add = (label, path, onclick) => {
+      const add = (id, label, path, onclick) => {
         const button = document.createElement('button')
+        button.id = id
         button.type = 'button'
         button.title = label
         button.setAttribute('aria-label', label)
@@ -396,7 +398,7 @@
         return button
       }
       if (document.fullscreenEnabled) {
-        const again = add('Full screen', 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5', goFullScreen)
+        const again = add('fullscreen-button', 'Full screen', 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5', goFullScreen)
         // Hidden is display: none, so the button fades again each time it comes back.
         const update = () => {
           again.hidden = Boolean(document.fullscreenElement)
@@ -404,7 +406,7 @@
         document.addEventListener('fullscreenchange', update)
         update()
       }
-      add(text('stage_dialog_restart', 'Restart'), 'M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5', restart)
+      add('restart-button', text('stage_dialog_restart', 'Restart'), 'M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5', restart)
       document.body.append(buttons)
     },
   }

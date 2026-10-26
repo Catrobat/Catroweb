@@ -17,7 +17,9 @@ Needs JDK 21 and the Android SDK (`ANDROID_HOME`).
 Serve `build/dist/js/webapp` with any static server; `index.html#<project id>` loads that project from share's
 `/project-files/<id>/assets/code.xml`. `./scripts/smoke.sh` checks in headless Chrome that the engine runs and that the
 loader reads all of Catroid's `catrobatTests` projects, plus those in `fixtures/`, like the app does
-(`index.html#check`, compared by `scripts/check_loader.py`). `./scripts/export-mapping.sh` dumps Catroid's XStream
+(`index.html#check`, compared by `scripts/check_loader.py`); the fixtures' own checks (sounds, speech, plot, sensors,
+the restart button) drive Chrome over its DevTools protocol where they need to (`scripts/cdp.py`).
+`./scripts/export-mapping.sh` dumps Catroid's XStream
 mapping. `./scripts/conformance.sh` plays every `catrobatTests` project on the stage and compares the results with
 `conformance.tsv`, where each test is `pass` or `fail` with its reason: a test that passes there must keep passing (CI
 runs it in the Player workflow). After making more tests pass, record them with `./scripts/conformance.sh --update`.
