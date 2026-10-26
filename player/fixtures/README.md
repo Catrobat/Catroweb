@@ -21,6 +21,12 @@ Projects for `scripts/check_loader.py` that Catroid's own `catrobatTests` do not
   `scripts/make_sensors_fixture.py`; `smoke.sh` plays it with `scripts/sensors_check.py`, which has headless Chrome
   emulate a phone with that orientation (alpha 90, beta 20, gamma -30), linear acceleration (1, 2, 3), location
   (47.07, 15.44) and its fake microphone, and checks that the page vibrated.
+- `touching-color-maximize.catrobat`: Catroid's `catrobatTests/touchesColor/testTouchesColorRotate.catrobat` with
+  screen mode `MAXIMIZE` (as converted Scratch projects have it), a white background with a `#7f6927` floor at the
+  bottom and a dark square as the sprite, both PNGs without Catroid's collision metadata. The sprite, at 80 %, falls
+  until it touches the floor's colour (or has fallen past it), then asserts that it touches it and that "color at x
+  y" in the floor equals `#7f6927` within 2 % (GPUs may round it by one). Made by
+  `scripts/make_touching_color_fixture.py`; `smoke.sh` plays it on the stage.
 - `share/`: 23 of share's most downloaded projects, made with Catrobat language 0.9 to 0.999 and named
   `<language version>-<start of the project id>`, each with only its `code.xml` and the header fields naming the
   author or device emptied. They cover how `ProjectLoader` reads old projects: without scenes, with the XML upgrade
