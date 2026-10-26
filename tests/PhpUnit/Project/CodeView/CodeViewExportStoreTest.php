@@ -7,8 +7,11 @@ namespace Tests\PhpUnit\Project\CodeView;
 use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
+use App\Project\CodeView\CodeExportBusyException;
 use App\Project\CodeView\CodeExportRunner;
+use App\Project\CodeView\CodeViewExportEventListener;
 use App\Project\CodeView\CodeViewExportStore;
+use App\Project\Event\ProjectAfterInsertEvent;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -67,7 +70,131 @@ class CodeViewExportStoreTest extends TestCase
     $store->get($this->project);
     $version = 'v2';
     $store->get($this->project);
+    $store->refreshQueued();
     $store->get($this->project);
+    $store->refreshQueued();
+  }
+
+  public function testAnOutdatedExportIsShownAtOnceAndMadeAgainAfterTheResponse(): void
+  {
+    $version = 'v1';
+    $result = ['scenes' => ['old']];
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturnCallback(static function () use (&$version): string {
+      return $version;
+    });
+    $runner->expects($this->exactly(2))->method('export')->willReturnCallback(static function () use (&$result): array {
+      return $result;
+    });
+    $store = $this->store($runner);
+    $store->get($this->project);
+
+    $version = 'v2';
+    $result = ['scenes' => ['new']];
+    $this->assertSame(['scenes' => ['old']], $store->get($this->project), 'no waiting for the newer export');
+    $this->assertSame(['scenes' => ['old']], $store->get($this->project), 'queued once');
+    $store->refreshQueued();
+    $this->assertSame(['scenes' => ['new']], $store->get($this->project));
+  }
+
+  public function testANewCodeXmlIsNotShownWithTheOldExport(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturn('v1');
+    $runner->expects($this->exactly(2))->method('export')->willReturnCallback(fn (): array => ['scenes' => [file_get_contents($this->dir.'project/code.xml')]]);
+    $store = $this->store($runner);
+    $store->get($this->project);
+
+    $this->writeCode('<program><object name="Dog"/></program>');
+
+    $this->assertSame(['scenes' => ['<program><object name="Dog"/></program>']], $store->get($this->project));
+  }
+
+  public function testAViewDoesNotWaitWhenAllExportSlotsAreBusy(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturn('v1');
+    $runner->expects($this->never())->method('export');
+    $store = $this->store($runner);
+    $slots = $this->holdLocks(array_map(static fn (int $i): string => '.slot-'.$i, range(0, CodeViewExportStore::SLOTS - 1)));
+
+    $this->expectException(CodeExportBusyException::class);
+    try {
+      $store->get($this->project);
+    } finally {
+      $this->releaseLocks($slots);
+    }
+  }
+
+  public function testOneFreeSlotIsEnough(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturn('v1');
+    $runner->expects($this->once())->method('export')->willReturn(['scenes' => []]);
+    $slots = $this->holdLocks(['.slot-0']);
+
+    $this->assertSame(['scenes' => []], $this->store($runner)->get($this->project));
+    $this->releaseLocks($slots);
+  }
+
+  public function testAViewDoesNotWaitForTheSameProjectsExport(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturn('v1');
+    $runner->expects($this->never())->method('export');
+    $locks = $this->holdLocks(['a1b2c3']);
+
+    $this->expectException(CodeExportBusyException::class);
+    try {
+      $this->store($runner)->get($this->project);
+    } finally {
+      $this->releaseLocks($locks);
+    }
+  }
+
+  public function testAfterTheResponseBusySlotsLeaveTheOutdatedExportForLater(): void
+  {
+    $version = 'v1';
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturnCallback(static function () use (&$version): string {
+      return $version;
+    });
+    $runner->expects($this->exactly(2))->method('export')->willReturn(['scenes' => []]);
+    $store = $this->store($runner);
+    $store->get($this->project);
+    $version = 'v2';
+
+    $store->get($this->project);
+    $slots = $this->holdLocks(array_map(static fn (int $i): string => '.slot-'.$i, range(0, CodeViewExportStore::SLOTS - 1)));
+    $store->refreshQueued(); // no exception, nothing exported
+    $this->releaseLocks($slots);
+
+    $store->get($this->project);
+    $store->refreshQueued();
+  }
+
+  public function testAnUploadedProjectIsExportedAfterTheResponse(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturn('v1');
+    $runner->expects($this->once())->method('export')->willReturn(['scenes' => []]);
+    $store = $this->store($runner);
+    $event = $this->createStub(ProjectAfterInsertEvent::class);
+    $event->method('getProjectEntity')->willReturn($this->project);
+
+    (new CodeViewExportEventListener($store))->onProjectAfterInsert($event);
+    $this->assertFileDoesNotExist($this->dir.'store/a1b2c3.json', 'not during the upload');
+    $store->refreshQueued();
+    $this->assertFileExists($this->dir.'store/a1b2c3.json');
+  }
+
+  public function testTheBackfillWaitsForASlot(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturn('v1');
+    $runner->expects($this->once())->method('export')->willReturn(['scenes' => []]);
+
+    $this->assertSame(['scenes' => []], $this->store($runner)->refresh($this->project, true));
   }
 
   public function testKeepsAFailedExportAndTheOlderOneWhenANewerExportFails(): void
@@ -86,6 +213,8 @@ class CodeViewExportStoreTest extends TestCase
     $this->assertSame(['scenes' => ['old']], $store->get($this->project));
     $version = 'v2';
     $result = ['error' => 'broken'];
+    $store->get($this->project);
+    $store->refreshQueued();
     $this->assertSame(['scenes' => ['old']], $store->get($this->project), 'the older export, as the newer one failed');
   }
 
@@ -124,6 +253,35 @@ class CodeViewExportStoreTest extends TestCase
     $repository->method('loadProjectExtractedFile')->willReturnCallback(fn (): ExtractedCatrobatFile => new ExtractedCatrobatFile($this->dir.'project/', '', 'a1b2c3'));
 
     return new CodeViewExportStore($runner, $repository, new NullLogger(), $this->dir.'store');
+  }
+
+  /**
+   * @param list<string> $names
+   *
+   * @return list<resource>
+   */
+  private function holdLocks(array $names): array
+  {
+    (new Filesystem())->mkdir($this->dir.'store');
+
+    return array_map(function (string $name) {
+      $lock = fopen($this->dir.'store/'.$name.'.lock', 'c');
+      $this->assertNotFalse($lock);
+      $this->assertTrue(flock($lock, LOCK_EX | LOCK_NB));
+
+      return $lock;
+    }, $names);
+  }
+
+  /**
+   * @param list<resource> $locks
+   */
+  private function releaseLocks(array $locks): void
+  {
+    foreach ($locks as $lock) {
+      flock($lock, LOCK_UN);
+      fclose($lock);
+    }
   }
 
   private function writeCode(string $xml): void

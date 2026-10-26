@@ -585,6 +585,7 @@ class ProjectsController extends Controller
         200 => 'OK',
         404 => 'Not found',
         422 => 'Unprocessable Entity',
+        503 => 'The code view is being made; try again in a moment',
         default => '',
       };
 

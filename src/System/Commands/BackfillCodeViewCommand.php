@@ -71,7 +71,7 @@ class BackfillCodeViewCommand extends Command
       if (!$project instanceof Project) {
         continue;
       }
-      $export = $this->store->get($project);
+      $export = $this->store->refresh($project, true);
       null === $export || isset($export['error']) ? ++$failed : ++$shown;
     }
     $progress->finish();

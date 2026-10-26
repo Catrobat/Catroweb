@@ -9,6 +9,7 @@ use App\Api\Services\Projects\ProjectsApiFacade;
 use App\Api\Services\Projects\ProjectsApiLoader;
 use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\DB\Entity\Project\Project;
+use App\Project\CodeView\CodeExportBusyException;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Remix\RemixManager;
@@ -24,7 +25,8 @@ use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
- * GET /projects/{id}/code: the code view, 422 (never a 500) when a project's code cannot be shown.
+ * GET /projects/{id}/code: the code view, 422 (never a 500) when a project's code cannot be shown, 503 while it is
+ * being made.
  *
  * @internal
  */
@@ -54,6 +56,18 @@ final class ProjectsApiCodeViewTest extends TestCase
 
     $this->assertNull($this->api(new Project(), $builder)->projectsIdCodeGet('p1', $code, $headers));
     $this->assertSame(422, $code);
+  }
+
+  public function testACodeViewThatIsBeingMade(): void
+  {
+    $builder = $this->createStub(CodeTreeBuilder::class);
+    $builder->method('buildCodeTree')->willThrowException(new CodeExportBusyException('All 2 code export slots are busy'));
+    $code = 0;
+    $headers = [];
+
+    $this->assertNull($this->api(new Project(), $builder)->projectsIdCodeGet('p1', $code, $headers));
+    $this->assertSame(503, $code);
+    $this->assertSame('5', $headers['Retry-After']);
   }
 
   public function testAProjectThatDoesNotExist(): void

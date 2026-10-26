@@ -13,12 +13,18 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
   Node runs with its permission model: it may read only the export and that one file; no network, child processes or
   writes. 60 s and 1 GB of heap at most (the largest projects, 20,000 bricks, need about 700 MB).
 - `CodeViewExportStore` keeps each project's export in `var/code-view/<id>.json` (`catrobat.code_view.dir`, shared
-  between releases). It makes it again when `code.xml` changes or a newer export is deployed (`code-export/version.txt`).
-  A failed export is kept too, so a broken project does not start Node on every view; if a newer export fails where an
-  older one worked, the older one stays.
-- Uploads never wait: the export runs after the upload's response (`CodeViewExportEventListener`, `kernel.terminate`),
-  and otherwise on the first view. A project whose code cannot be shown gets a 422, which the page shows as "This
-  project's code can't be shown".
+  between releases), keyed by the hash of `code.xml` and the export's version (`code-export/version.txt`, the hash of
+  `code-export.js`, `resources.json` and `export.mjs`: it changes when the export's output can, e.g. with a new Catroid
+  commit, not with the translations, which are put in per view). A failed export is kept too, so a broken project does
+  not start Node on every view; if a newer export fails where an older one worked, the older one stays.
+- Views never wait for a newer export: an outdated one is shown as it is and made again after the response
+  (`kernel.terminate`). Only the first view of a project without an export for its `code.xml` waits for Node (median
+  about 0.9 s). Uploads never wait: the export runs after the upload's response (`CodeViewExportEventListener`).
+- At most two exports run at once per server (`CodeViewExportStore::SLOTS`, lock files `var/code-view/.slot-N.lock`),
+  next to PHP-FPM's few workers. A view that needs an export when both slots (or that project's lock) are taken gets
+  503 with `Retry-After` at once, which the page shows as "Could not load code view" with "Try again"; it never waits.
+  After the response, busy slots skip the outdated export; the next view queues it again.
+- A project whose code cannot be shown gets a 422, which the page shows as "This project's code can't be shown".
 - `CodeViewLocalizer` puts Catroid's strings into the export: it writes them as markers, which become the viewer's
   language (`code-export/strings/<locale>.json`, English where a translation is missing).
 
@@ -27,8 +33,10 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
 - Requirements on the server: Node 22 or newer at `/usr/local/bin/node` or `/usr/bin/node` (or in PHP's `PATH`),
   `proc_open` allowed for PHP-FPM. `deploy:player` links `public/player/current` to the build it uploads; without a
   player build in a release, stored code views stay and new ones say they cannot be shown.
-- After a player update, `bin/console catro:backfill:code-view [--limit N] [ids...]` makes the outdated code views of
-  recently extracted projects ahead of their viewers; all others are made when first viewed.
+- Nothing to run after a deploy: outdated code views are made again as they are viewed.
+  `bin/console catro:backfill:code-view [--limit N] [ids...]` makes the missing or outdated ones of recently extracted
+  projects (or the given ones) ahead of their viewers, one at a time, waiting for a free slot; safe alongside
+  production traffic.
 
 ## Development
 
