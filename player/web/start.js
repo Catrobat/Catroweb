@@ -364,20 +364,24 @@
       overlay.removeAttribute('aria-busy')
       button.remove()
       bar.remove()
-      status.textContent = text(
-        'error_load_project',
-        'This project cannot be played in the browser.',
-      )
       const details = document.createElement('details')
       const summary = document.createElement('summary')
-      summary.textContent = text('show_details', 'Show details')
       const diagnostic = document.createElement('p')
       diagnostic.textContent = message || ''
       details.append(summary, diagnostic)
       details.hidden = !message
       const back = document.createElement('a')
       back.href = `${share}/app/project/${id}`
-      back.textContent = text('stage_dialog_back', 'Back to the project')
+      const translateError = () => {
+        status.textContent = text(
+          'error_load_project',
+          'This project cannot be played in the browser.',
+        )
+        summary.textContent = text('show_details', 'Show details')
+        back.textContent = text('stage_dialog_back', 'Back to the project')
+      }
+      translateError()
+      strings.then(translateError)
       status.after(details, back)
       back.focus()
     },
