@@ -26,10 +26,10 @@ bricks/data/StoreCSVIntoUserList/testMultiplications.catrobat	pass
 bricks/data/StoreCSVIntoUserList/testSeparators.catrobat	pass	
 bricks/data/StoreCSVIntoUserList/testStringOperations.catrobat	pass	
 bricks/data/testReplaceItemInList.catrobat	pass	
-bricks/data/testSeveralLineWebRequest.catrobat	pass
+bricks/data/testSeveralLineWebRequest.catrobat	pass	
 bricks/device/testResetTimer.catrobat	pass	
-bricks/embroidery/WriteEmbroideryToFile/testEmbroiderySaved.catrobat	pass
-bricks/embroidery/WriteEmbroideryToFile/testNoEmbroiderySaved.catrobat	pass
+bricks/embroidery/WriteEmbroideryToFile/testEmbroiderySaved.catrobat	pass	
+bricks/embroidery/WriteEmbroideryToFile/testNoEmbroiderySaved.catrobat	pass	
 bricks/events/Broadcast/testBroadcastBrickStage.catrobat	pass	
 bricks/events/Broadcast/testBroadcastSpeed.catrobat	pass	
 bricks/events/BroadcastReceiver/testMultipleBroadcastReceivers.catrobat	pass	
@@ -142,7 +142,7 @@ formula/testNumberOfLooks.catrobat	fail	on sprite "Looks downloaded from the web
 formula/testPowerFunction.catrobat	pass	
 formula/testRandomFunction.catrobat	pass	
 formula/testRegularExpressionFunction.catrobat	pass	
-formula/testRoundFunction.catrobat	pass
+formula/testRoundFunction.catrobat	pass	
 formula/testSineFunction.catrobat	pass	
 formula/testSquareRootFunction.catrobat	pass	
 formula/testTangentFunction.catrobat	pass	
