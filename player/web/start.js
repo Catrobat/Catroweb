@@ -67,7 +67,9 @@
 #stage-buttons { position: fixed; z-index: 10; top: max(12px, env(safe-area-inset-top));
   right: max(12px, env(safe-area-inset-right)); display: flex; gap: 8px; }
 #stage-buttons button { width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 12px;
-  background: rgba(0,0,0,.5); box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); color: #fff; cursor: pointer;
+  background: rgba(0,0,0,.55); color: #fff; cursor: pointer;
+  /* light ring for dark stages, dark edge and shadow for white ones */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), 0 0 0 1px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.35);
   animation: catrobat-fade .4s 3s forwards; }
 #stage-buttons button:hover, #stage-buttons button:focus-visible { animation: none; opacity: 1; }
 #stage-buttons button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
@@ -76,7 +78,7 @@
   70%, 100% { box-shadow: 0 0 0 22px rgba(63,216,230,0), 0 8px 32px rgba(0,180,200,.45); } }
 @keyframes catrobat-spin { to { transform: rotate(360deg); } }
 @keyframes catrobat-slide { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
-@keyframes catrobat-fade { to { opacity: .35; } }
+@keyframes catrobat-fade { to { opacity: .7; } }
 @media (prefers-reduced-motion: reduce) { #start-screen .play.ready, #start-screen .bar.unknown div { animation: none; } }
 `
   document.head.append(style)
