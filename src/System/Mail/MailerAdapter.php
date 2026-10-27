@@ -29,6 +29,11 @@ class MailerAdapter
 
   public function send(string $to, string $subject, string $template, array $context = [], string $emailType = 'admin'): bool
   {
+    // Accounts made for imported Scratch authors have a reserved, undeliverable "<name>@localhost" address.
+    if (str_ends_with(strtolower($to), '@localhost')) {
+      return false;
+    }
+
     if (!$this->budgetManager->canSend($emailType)) {
       $this->logger->warning(sprintf('Email budget exhausted for type "%s". Email to %s with subject "%s" was not sent.', $emailType, $to, $subject));
 
@@ -37,7 +42,10 @@ class MailerAdapter
 
     $email = $this->buildEmail($to, $subject, $template, $context);
     // $email = $this->signEmail($email); // Signing is currently disabled due to breveo
-    $this->sendEmail($email, $to);
+    if (!$this->sendEmail($email, $to)) {
+      return false;
+    }
+
     $this->budgetManager->recordSend($emailType);
 
     return true;
@@ -75,12 +83,16 @@ class MailerAdapter
     }
   }
 
-  protected function sendEmail(Message $email, string $to): void
+  protected function sendEmail(Message $email, string $to): bool
   {
     try {
       $this->mailer->send($email);
+
+      return true;
     } catch (TransportExceptionInterface $transportException) {
       $this->logger->error(sprintf('Can\'t send email to %s; Reason ', $to).$transportException->getMessage());
+
+      return false;
     }
   }
 }
