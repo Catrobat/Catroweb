@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class TextSanitizer
 {
   private const string REPLACEMENT_CONTACT = '[contact removed]';
+  private const string REPLACEMENT_LINK = '[link removed]';
 
   private const string CONTACT_LINKS_PATTERN = '/('
     .'https?:\/\/(?:www\.)?discord(?:app)?(?:\.gg|\.com\/invite)\/[a-zA-Z0-9\-]+'
@@ -30,7 +31,7 @@ class TextSanitizer
     .'|'
     .'https?:\/\/(?:www\.)?(?:signal\.me|signal\.group)\/[a-zA-Z0-9._\-#\/]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:join\.skype\.com\/|skype\.com\/)[a-zA-Z0-9._\-]+'
+    .'https?:\/\/(?:www\.)?(?:join\.skype\.com\/|skype\.com\/)[[a-zA-Z0-9._\-]+'
     .'|'
     .'https?:\/\/(?:www\.)?(?:twitter\.com|x\.com|t\.co)\/[a-zA-Z0-9._\-]+'
     .'|'
@@ -66,13 +67,22 @@ class TextSanitizer
   /** @var array<string, non-empty-string[]> */
   private array $spacedPatterns = [];
 
+  /** @var string[] */
+  private array $allowlistedHosts = [];
+
   public function __construct(
     private readonly RequestStack $requestStack,
     #[Autowire('%kernel.project_dir%/config/moderation/wordlists')]
     private readonly string $wordListDir,
     #[Autowire('%env(bool:TEXT_SANITIZER_ENABLED)%')]
     private readonly bool $enabled = true,
+    #[Autowire('%kernel.project_dir%/config/moderation/link_allowlist.php')]
+    private readonly string $linkAllowlistPath = '',
   ) {
+    if ('' !== $this->linkAllowlistPath && is_file($this->linkAllowlistPath)) {
+      $list = require $this->linkAllowlistPath;
+      $this->allowlistedHosts = is_array($list) ? array_map('strtolower', $list) : [];
+    }
   }
 
   public function sanitize(?string $text): ?string
@@ -93,6 +103,9 @@ class TextSanitizer
     $text = $this->redactPhoneNumbers($text);
     $text = $this->redactContactLinks($text);
     $text = $this->redactUriSchemes($text);
+    if ([] !== $this->allowlistedHosts) {
+      $text = $this->redactNonAllowlistedLinks($text);
+    }
 
     return $this->filterProfanity($text, $locale);
   }
@@ -134,6 +147,47 @@ class TextSanitizer
     return preg_replace(
       '/(?:skype|tg|whatsapp|viber|line|kakaoopen|fb-messenger):\/\/[^\s]+/i',
       self::REPLACEMENT_CONTACT,
+      $text
+    ) ?? $text;
+  }
+
+  /**
+   * Replaces any HTTP/HTTPS URL whose host is not in the allowlist with [link removed].
+   *
+   * Security properties:
+   *  - Host is extracted via parse_url() so userinfo tricks (https://trusted@evil.com) resolve to 'evil.com'.
+   *  - Suffix check requires a dot separator so 'eviltrusted.org' does not match 'trusted.org'.
+   *  - Matching is case-insensitive.
+   *  - Unparseable URLs are removed as a safe default.
+   *
+   * @see https://github.com/Catrobat/Catroweb/issues/7388
+   */
+  private function redactNonAllowlistedLinks(string $text): string
+  {
+    return preg_replace_callback(
+      '/https?:\/\/[^\s<>"\'\\[\\]{}|\\\\^`]+/i',
+      function (array $m): string {
+        $url = $m[0];
+        $host = parse_url($url, PHP_URL_HOST);
+        if (!is_string($host) || '' === $host) {
+          // Unparseable URL – remove it to be safe
+          return self::REPLACEMENT_LINK;
+        }
+        $host = strtolower($host);
+
+        foreach ($this->allowlistedHosts as $allowed) {
+          // Exact host match
+          if ($host === $allowed) {
+            return $url;
+          }
+          // Subdomain match: host must end with '.' . $allowed
+          if (str_ends_with($host, '.'.$allowed)) {
+            return $url;
+          }
+        }
+
+        return self::REPLACEMENT_LINK;
+      },
       $text
     ) ?? $text;
   }

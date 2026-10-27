@@ -21,13 +21,22 @@ class TextSanitizerTest extends TestCase
 {
   private TextSanitizer $sanitizer;
   private string $wordListDir;
+  private string $allowlistPath;
 
   #[\Override]
   protected function setUp(): void
   {
     $this->wordListDir = dirname(__DIR__, 3).'/config/moderation/wordlists';
+    $this->allowlistPath = dirname(__DIR__, 3).'/config/moderation/link_allowlist.php';
     $requestStack = $this->createStub(RequestStack::class);
     $this->sanitizer = new TextSanitizer($requestStack, $this->wordListDir);
+  }
+
+  private function createSanitizerWithAllowlist(): TextSanitizer
+  {
+    $requestStack = $this->createStub(RequestStack::class);
+
+    return new TextSanitizer($requestStack, $this->wordListDir, linkAllowlistPath: $this->allowlistPath);
   }
 
   // --- Null / Empty / Normal ---
@@ -341,5 +350,81 @@ class TextSanitizerTest extends TestCase
     $requestStack = $this->createStub(RequestStack::class);
     $sanitizer = new TextSanitizer($requestStack, $this->wordListDir, enabled: false);
     $this->assertSame('What the fuck', $sanitizer->sanitizeWithLocale('What the fuck'));
+  }
+
+  // --- Allowlist-based link redaction (Issue #7388) ---
+
+  public function testAllowlistedDomainIsKept(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Check out https://github.com/Catrobat/Catroweb for the code',
+      $sanitizer->sanitizeWithLocale('Check out https://github.com/Catrobat/Catroweb for the code')
+    );
+  }
+
+  public function testAllowlistedSubdomainIsKept(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Read https://en.wikipedia.org/wiki/PHP for details',
+      $sanitizer->sanitizeWithLocale('Read https://en.wikipedia.org/wiki/PHP for details')
+    );
+  }
+
+  public function testNonAllowlistedLinkIsRedacted(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Visit [link removed] for a great deal',
+      $sanitizer->sanitizeWithLocale('Visit https://some-random-site.com for a great deal')
+    );
+  }
+
+  public function testSuffixSpoofingIsBlocked(): void
+  {
+    // 'eviltrusted.org' must NOT match allowlisted 'trusted.org' (no dot separator)
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      '[link removed]',
+      $sanitizer->sanitizeWithLocale('https://evilgithub.com/path')
+    );
+  }
+
+  public function testUserinfoSpoofingIsBlocked(): void
+  {
+    // https://github.com@evil.com resolves host to 'evil.com', not 'github.com'
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      '[link removed]',
+      $sanitizer->sanitizeWithLocale('https://github.com@evil.com/steal')
+    );
+  }
+
+  public function testMultipleLinksPartiallyAllowlisted(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Code at https://github.com/foo and also [link removed]',
+      $sanitizer->sanitizeWithLocale('Code at https://github.com/foo and also https://badactor.xyz/phish')
+    );
+  }
+
+  public function testNoAllowlistDoesNotRedactLinks(): void
+  {
+    // Default sanitizer (no allowlist loaded) should NOT redact arbitrary http links
+    $this->assertSame(
+      'Visit https://some-random-site.com for info',
+      $this->sanitizer->sanitizeWithLocale('Visit https://some-random-site.com for info')
+    );
+  }
+
+  public function testCatrobatDomainIsAllowlisted(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Share at https://share.catrobat.org/project/123',
+      $sanitizer->sanitizeWithLocale('Share at https://share.catrobat.org/project/123')
+    );
   }
 }
