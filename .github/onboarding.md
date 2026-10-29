@@ -31,6 +31,8 @@ Now that you know how to work with Git, it is time to set up your fork by execut
 - [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) the [repository of Catroweb](https://github.com/Catrobat/Catroweb)
 - Clone and start it as described in the [Developer Quickstart](../docs/setup/Developer-Quickstart.md)
 
+The Docker image supplies Node 22 and Yarn 4.12.0; no separate Node installation is needed for this setup.
+
 ## c. Setup Verification
 
 Now you should be able to open <http://localhost:8080/> and see the sharing platform similar to our [current version online](https://share.catrobat.org/app/).
