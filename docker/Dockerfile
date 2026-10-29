@@ -8,8 +8,8 @@ COPY composer.json composer.lock ./
 RUN --mount=type=cache,target=/tmp/composer-cache \
     composer install --no-scripts --prefer-dist --no-progress --no-interaction
 
-# Use node image for better caching
-FROM node:lts AS node-build
+# Match the runtime's Node major; moving LTS tags can drop bundled tools such as Corepack.
+FROM node:22-bookworm AS node-build
 WORKDIR /app
 COPY package.json yarn.lock .yarnrc.yml ./
 RUN corepack enable && corepack prepare yarn@4.12.0 --activate
