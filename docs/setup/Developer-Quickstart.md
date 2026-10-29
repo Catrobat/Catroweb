@@ -2,6 +2,8 @@
 
 Docker is the recommended setup and closest to CI. Native alternatives: [Ubuntu](Setup-guide-Ubuntu.md), [macOS](<./Setup-guide-macOS-(native,-no-Docker).md>).
 
+The Docker frontend build and runtime both use Node 22, with Corepack providing Yarn 4.12.0. Keep their Node major versions aligned when upgrading the image.
+
 ## Docker setup
 
 ```bash
