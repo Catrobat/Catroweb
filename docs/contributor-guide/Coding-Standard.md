@@ -12,3 +12,5 @@ A project should look like it was written by one developer. CI checks style on e
 | All                | `yarn test`       | `yarn fix`       |
 
 All CSS, JS and image sources belong in `assets/`; never put them into `public/` directly (the Vite build does that).
+
+Markdown and YAML are excluded from Biome because Prettier handles their formatting. When updating Biome, update the schema version in `biome.json` alongside the package and lockfile.
