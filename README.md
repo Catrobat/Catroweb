@@ -76,6 +76,8 @@ Core project docs are maintained in-repo:
 - [docs/setup/Developer-Quickstart.md](./docs/setup/Developer-Quickstart.md)
 - [docs/architecture/Architecture-Overview.md](./docs/architecture/Architecture-Overview.md)
 
+The recommended Docker setup includes Node 22 and Yarn 4.12.0 for frontend builds.
+
 ## Operations & Infrastructure
 
 Production deployment configuration for the Catrobat ecosystem (web platform infra, monitoring stacks, reverse proxy, CI/CD) is maintained in the private companion repo [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure).
