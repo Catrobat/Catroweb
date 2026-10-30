@@ -22,7 +22,7 @@ git checkout -b SHARE-XXX
 
 Also, make sure that every commit has the **correct commit message layout** so it shows up on JIRA.
 
-Must read: [How to Write a Git Commit Message, by Chirs Beams](http://chris.beams.io/posts/git-commit/)
+Must read: [How to Write a Git Commit Message, by Chris Beams](https://cbea.ms/git-commit/)
 
 ```
 Line 1: SHARE-XXX Fitting Title (< 50 chars)
