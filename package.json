@@ -64,7 +64,7 @@
     "@popperjs/core": "^2.11.8",
     "analytics": "^0.8.19",
     "bootstrap": "^5.3.8",
-    "chart.js": "^4.5.1",
+    "chart.js": "^4.6.1",
     "external-svg-loader": "^1.7.1",
     "lazysizes": "^5.3.2",
     "material-icons": "^1.13.14",
