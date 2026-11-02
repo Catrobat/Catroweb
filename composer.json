@@ -77,7 +77,7 @@
     "symfony/var-dumper": "8.1.*",
     "symfony/var-exporter": "8.1.*",
     "symfony/yaml": "7.4.*",
-    "symfonycasts/reset-password-bundle": "1.25.*",
+    "symfonycasts/reset-password-bundle": "1.26.*",
     "symfonycasts/verify-email-bundle": "1.18.*",
     "twig/extra-bundle": "3.29.*",
     "twig/twig": "3.30.*"
