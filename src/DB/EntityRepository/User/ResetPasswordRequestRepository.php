@@ -14,9 +14,12 @@ use SymfonyCasts\Bundle\ResetPassword\Persistence\ResetPasswordRequestRepository
 
 /**
  * @extends ServiceEntityRepository<ResetPasswordRequest>
+ *
+ * @implements ResetPasswordRequestRepositoryInterface<User>
  */
 class ResetPasswordRequestRepository extends ServiceEntityRepository implements ResetPasswordRequestRepositoryInterface
 {
+  /** @use ResetPasswordRequestRepositoryTrait<User> */
   use ResetPasswordRequestRepositoryTrait;
 
   public function __construct(ManagerRegistry $registry)
@@ -27,8 +30,6 @@ class ResetPasswordRequestRepository extends ServiceEntityRepository implements 
   #[\Override]
   public function createResetPasswordRequest(object $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken): ResetPasswordRequestInterface
   {
-    assert($user instanceof User);
-
     return new ResetPasswordRequest($user, $expiresAt, $selector, $hashedToken);
   }
 }
