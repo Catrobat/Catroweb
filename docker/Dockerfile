@@ -9,10 +9,11 @@ RUN --mount=type=cache,target=/tmp/composer-cache \
     composer install --no-scripts --prefer-dist --no-progress --no-interaction
 
 # Match the runtime's Node major; moving LTS tags can drop bundled tools such as Corepack.
-FROM node:22-bookworm AS node-build
+FROM node:26-bookworm AS node-build
 WORKDIR /app
 COPY package.json yarn.lock .yarnrc.yml ./
-RUN corepack enable && corepack prepare yarn@4.12.0 --activate
+# Node 25+ no longer bundles Corepack, so it is installed explicitly.
+RUN npm install -g corepack@0.36.0 && corepack enable && corepack prepare yarn@4.12.0 --activate
 RUN --mount=type=cache,target=/root/.yarn/berry/cache \
     yarn install --immutable
 
@@ -64,8 +65,9 @@ RUN apt-get update && \
     apache2 \
     git \
     curl && \
-    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_26.x | bash - && \
     apt-get install -yq --no-install-recommends nodejs && \
+    npm install -g corepack@0.36.0 && \
     corepack enable && \
     corepack prepare yarn@4.12.0 --activate && \
     php -r 'exit(version_compare(PHP_VERSION, getenv("PHP_MIN_VERSION"), ">=") ? 0 : 1);' && \

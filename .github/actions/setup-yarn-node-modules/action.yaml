@@ -6,11 +6,12 @@ runs:
     - name: 'Download and set up node'
       uses: actions/setup-node@v4
       with:
-        node-version: '20.x'
+        node-version: '26.x'
 
     - name: 'Enable corepack'
       shell: bash
       run: |
+        npm install -g corepack@0.36.0
         corepack enable
         corepack prepare yarn@4.12.0 --activate
 

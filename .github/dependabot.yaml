@@ -23,6 +23,10 @@ updates:
     open-pull-requests-limit: 99
     cooldown:
       default-days: 5
+    ignore:
+      # LTS lines only: odd Node majors never become LTS (and 25+ dropped Corepack).
+      - dependency-name: 'node'
+        versions: ['25.x', '27.x', '29.x', '31.x']
 
   - package-ecosystem: 'npm'
     directory: '/'

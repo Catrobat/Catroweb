@@ -39,10 +39,10 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Node 22 (runs the code view's export, as share does)
+      - name: Node 26 (runs the code view's export, as share does)
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: '22'
+          node-version: '26'
 
       - name: Build Catroid at the pinned commit
         run: ./scripts/prepare.sh
