@@ -169,14 +169,16 @@ class StudioManagerTest extends KernelTestCase
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'leomessi_'.uniqid(), 'password' => '123456']);
     $this->assertNull($this->object->getStudioUserRole($newUser, $this->studio));
-    if (is_null($this->object->addUserToStudio($this->user, $this->studio, $newUser))) {
-      $this->markTestSkipped('unable to add new user to the studio');
-    }
+    $studioUser = $this->object->addUserToStudio($this->user, $this->studio, $newUser);
+    $this->assertInstanceOf(StudioUser::class, $studioUser);
 
     $this->assertEquals(StudioUser::ROLE_ADMIN, $this->object->getStudioUserRole($this->user, $this->studio));
     $this->assertEquals(StudioUser::ROLE_MEMBER, $this->object->getStudioUserRole($newUser, $this->studio));
     $this->assertNull($this->object->changeStudioUserRole($newUser, $this->studio, $newUser, StudioUser::ROLE_ADMIN));
-    $this->assertInstanceOf(StudioUser::class, $this->object->changeStudioUserRole($this->user, $this->studio, $newUser, StudioUser::ROLE_ADMIN));
+    $this->entity_manager->refresh($studioUser);
+    $this->assertSame(StudioUser::ROLE_MEMBER, $studioUser->getRole());
+    $this->assertSame($studioUser, $this->object->changeStudioUserRole($this->user, $this->studio, $newUser, StudioUser::ROLE_ADMIN));
+    $this->entity_manager->refresh($studioUser);
     $this->assertEquals(StudioUser::ROLE_ADMIN, $this->object->getStudioUserRole($newUser, $this->studio));
   }
 
@@ -185,13 +187,15 @@ class StudioManagerTest extends KernelTestCase
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'lutherking_'.uniqid(), 'password' => '123456']);
     $this->assertNull($this->object->getStudioUserStatus($newUser, $this->studio));
-    if (is_null($this->object->addUserToStudio($this->user, $this->studio, $newUser))) {
-      $this->markTestSkipped('unable to add new user to the studio');
-    }
+    $studioUser = $this->object->addUserToStudio($this->user, $this->studio, $newUser);
+    $this->assertInstanceOf(StudioUser::class, $studioUser);
 
     $this->assertEquals(StudioUser::STATUS_ACTIVE, $this->object->getStudioUserStatus($newUser, $this->studio));
     $this->assertNull($this->object->changeStudioUserStatus($newUser, $this->studio, $newUser, StudioUser::STATUS_BANNED));
-    $this->assertInstanceOf(StudioUser::class, $this->object->changeStudioUserStatus($this->user, $this->studio, $newUser, StudioUser::STATUS_BANNED));
+    $this->entity_manager->refresh($studioUser);
+    $this->assertSame(StudioUser::STATUS_ACTIVE, $studioUser->getStatus());
+    $this->assertSame($studioUser, $this->object->changeStudioUserStatus($this->user, $this->studio, $newUser, StudioUser::STATUS_BANNED));
+    $this->entity_manager->refresh($studioUser);
     $this->assertEquals(StudioUser::STATUS_BANNED, $this->object->getStudioUserStatus($newUser, $this->studio));
   }
 
