@@ -50,7 +50,7 @@
     "symfony/dotenv": "8.1.*",
     "symfony/error-handler": "8.1.*",
     "symfony/finder": "8.1.*",
-    "symfony/flex": "2.11.*",
+    "symfony/flex": "2.12.*",
     "symfony/framework-bundle": "8.0.*",
     "symfony/http-foundation": "8.1.*",
     "symfony/intl": "8.1.*",
