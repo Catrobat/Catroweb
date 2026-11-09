@@ -173,8 +173,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->alias(Sonata\AdminBundle\SonataConfiguration::class, 'sonata.admin.configuration');
   $services->alias(UserProviderInterface::class, UserProvider::class);
   $services->set('security.acl.permission.map', AdminPermissionMap::class);
-  $services->set('app.login_rate_limiter', Symfony\Component\Security\Http\RateLimiter\DefaultLoginRateLimiter::class)
+  $services->set('app.password_login_rate_limiter', Symfony\Component\Security\Http\RateLimiter\DefaultLoginRateLimiter::class)
     ->args([service('limiter.login_global'), service('limiter.login_local'), '%kernel.secret%'])
+  ;
+  $services->set('app.login_rate_limiter', App\Security\Authentication\PasswordLoginRateLimiter::class)
+    ->args([service('app.password_login_rate_limiter')])
   ;
   $services->set(ApiAuthenticationSuccessHandler::class)
     ->args([

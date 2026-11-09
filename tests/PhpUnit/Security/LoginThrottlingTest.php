@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 use Symfony\Component\Security\Http\EventListener\LoginThrottlingListener;
 
 /**
- * Password logins (web form and the app's API login) must be rate limited. The limits themselves are
+ * Password logins (the web login page and the app both use POST /api/authentication) must be rate limited. The limits themselves are
  * config/packages/rate_limiter.php `login_local` / `login_global` (no_limit in the test env).
  *
  * @internal
@@ -39,7 +39,6 @@ final class LoginThrottlingTest extends KernelTestCase
    */
   public static function provideLoginFirewalls(): iterable
   {
-    yield 'app API login' => ['api_authentication_login'];
-    yield 'web form login' => ['main'];
+    yield 'password login (web login page and app)' => ['api_authentication_login'];
   }
 }

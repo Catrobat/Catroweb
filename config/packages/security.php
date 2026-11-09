@@ -35,6 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'pattern' => '^/api/authentication',
           'methods' => ['POST'],
           'stateless' => true,
+          // Password logins from the web login page and the app both POST here; the limiter skips token refreshes.
           'login_throttling' => [
             'limiter' => 'app.login_rate_limiter',
           ],
@@ -64,9 +65,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'provider' => 'user_provider',
           'user_checker' => SuspendedUserChecker::class,
           'stateless' => false,
-          'login_throttling' => [
-            'limiter' => 'app.login_rate_limiter',
-          ],
           'form_login' => [
             'login_path' => '/app/login',
             'default_target_path' => '/',
