@@ -28,9 +28,14 @@ final class ListLimitCapListener
 
     // all() instead of get(): get() throws on ?limit[]=…, which the API validation should answer.
     $limit = $request->query->all()['limit'] ?? null;
-    // Only plain integers; anything else is left to the API validation (400). The length check comes first
-    // because a value past PHP_INT_MAX would not survive the (int) cast.
-    if (is_string($limit) && ctype_digit($limit) && (strlen(ltrim($limit, '0')) > 4 || (int) $limit > self::MAX_LIMIT)) {
+    if (!is_string($limit) || !is_numeric($limit)) {
+      return;
+    }
+
+    // Mirror the generated controllers: they parse the limit as `$limit + 0` (so "+5000" and " 5000" are
+    // 5000) and reject anything that isn't an int. Only ints above the cap need rewriting.
+    $value = $limit + 0;
+    if (is_int($value) && $value > self::MAX_LIMIT) {
       $request->query->set('limit', (string) self::MAX_LIMIT);
     }
   }
