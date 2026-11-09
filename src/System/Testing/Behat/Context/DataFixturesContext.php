@@ -1495,6 +1495,9 @@ class DataFixturesContext implements Context
         \assert(null !== $comment);
         $this->getManager()->persist($comment);
       }
+      if ('' !== ($config['parent_id'] ?? '')) {
+        $comment->setParentId($config['parent_id']);
+      }
       $comment->setAutoHidden('true' === ($config['auto_hidden'] ?? 'false'));
       $comment->setIsDeleted('true' === ($config['is_deleted'] ?? 'false'));
     }

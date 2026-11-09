@@ -38,7 +38,7 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function findAllStudioComments(?Studio $studio, ?int $limit = null, int $offset = 0): array
   {
-    return $this->findBy(['studio' => $studio, 'parent_id' => null], ['id' => 'DESC'], $limit, $offset);
+    return $this->findBy(['studio' => $studio, 'parent_id' => null, 'auto_hidden' => false, 'is_deleted' => false], ['id' => 'DESC'], $limit, $offset);
   }
 
   public function countStudioComments(?Studio $studio): int
@@ -93,7 +93,7 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function countCommentReplies(string $comment_id): int
   {
-    return $this->count(['parent_id' => $comment_id]);
+    return $this->count(['parent_id' => $comment_id, 'auto_hidden' => false, 'is_deleted' => false]);
   }
 
   public function findCommentsByProgramId(string $program_id): array
