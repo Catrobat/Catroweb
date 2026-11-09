@@ -10,6 +10,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
+use App\Security\Authentication\VerifyEmail;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
@@ -20,6 +21,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\RouterInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 /**
@@ -126,6 +128,40 @@ class CatrowebBrowserContext extends BrowserContext
     $token = $helper->generateResetToken($user)->getToken();
 
     $this->visit('/app/reset-password/reset/'.$token);
+  }
+
+  /**
+   * Opens the verification link a user would receive by e-mail, without going through the mailer.
+   *
+   * @When /^I open the email verification link for "([^"]*)"$/
+   */
+  public function iOpenTheEmailVerificationLinkFor(string $username): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertNotNull($user, 'Unknown user: '.$username);
+
+    $verify_email = $this->getSymfonyService(VerifyEmail::class);
+    Assert::assertInstanceOf(VerifyEmail::class, $verify_email);
+    $router = $this->getSymfonyService(RouterInterface::class);
+    Assert::assertInstanceOf(RouterInterface::class, $router);
+
+    // The signature covers the whole absolute URL, so sign it for the address the browser will open
+    // (host and the test front controller), and open it unchanged.
+    $base_url = $this->getMinkParameter('base_url');
+    Assert::assertIsString($base_url);
+    $base = Request::create($base_url);
+    $context = $router->getContext();
+    $original = clone $context;
+    $context->setScheme($base->getScheme())->setHost($base->getHost())->setHttpPort((int) ($base->getPort() ?? 80))
+      ->setBaseUrl(rtrim($base->getPathInfo(), '/'))
+    ;
+    try {
+      $signed_url = (string) $verify_email->init($user)->getContext()['signedUrl'];
+    } finally {
+      $router->setContext($original);
+    }
+
+    $this->getSession()->visit($signed_url);
   }
 
   /**
