@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 #[CoversClass(ListLimitCapListener::class)]
 final class ListLimitCapListenerRegistrationTest extends KernelTestCase
 {
-  public function testTheCapRunsOnEveryRequestBeforeRouting(): void
+  public function testTheCapRunsAfterRoutingAndBeforeTheController(): void
   {
     $dispatcher = self::getContainer()->get('event_dispatcher');
     \assert($dispatcher instanceof EventDispatcherInterface);
@@ -32,6 +32,7 @@ final class ListLimitCapListenerRegistrationTest extends KernelTestCase
     $router = array_search(RouterListener::class, $order, true);
     $this->assertIsInt($cap, 'ListLimitCapListener is not registered for kernel.request');
     $this->assertIsInt($router);
-    $this->assertLessThan($router, $cap);
+    // After routing, so a percent-encoded path (/%61pi/...) is judged by the route it resolved to.
+    $this->assertGreaterThan($router, $cap);
   }
 }

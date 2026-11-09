@@ -22,6 +22,9 @@ final class ListLimitCapListenerTest extends TestCase
   public function testCapsTheLimitOfApiRequests(string $uri, ?string $expected): void
   {
     $request = Request::create($uri);
+    if (str_starts_with($request->getPathInfo(), '/api/')) {
+      $request->attributes->set('_route', 'open_api_server_projects_projectsget');
+    }
 
     (new ListLimitCapListener())(new RequestEvent($this->createStub(HttpKernelInterface::class), $request, HttpKernelInterface::MAIN_REQUEST));
 
@@ -44,12 +47,16 @@ final class ListLimitCapListenerTest extends TestCase
     yield 'non-numeric limits are left to the API validation' => ['/api/projects?limit=abc', 'abc'];
     yield 'no limit stays absent' => ['/api/projects', null];
     yield 'non-API routes are untouched' => ['/app/search?limit=200000', '200000'];
+    yield 'unrouted /api paths are untouched' => ['/api-docs?limit=200000', '200000'];
   }
 
   #[DataProvider('provideArrayLimitPaths')]
   public function testAnArrayLimitIsLeftAloneWithoutThrowing(string $uri): void
   {
     $request = Request::create($uri);
+    if (str_starts_with($request->getPathInfo(), '/api/')) {
+      $request->attributes->set('_route', 'open_api_server_projects_projectsget');
+    }
 
     (new ListLimitCapListener())(new RequestEvent($this->createStub(HttpKernelInterface::class), $request, HttpKernelInterface::MAIN_REQUEST));
 

@@ -10,11 +10,12 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * The OpenAPI `Limit` schema only has a minimum, and several list endpoints pass the client's limit
- * straight to the database, so `?limit=200000` loads every row. Cap it for every API route here.
+ * straight to the database, so `?limit=200000` loads every row. Cap it for every generated API route here.
  *
  * The cap is high on purpose: the app asks for up to 999 of a user's projects in one call.
  */
-#[AsEventListener(event: KernelEvents::REQUEST, priority: 100)]
+// After the RouterListener (32): the matched route decides, not the raw path, which may be percent-encoded.
+#[AsEventListener(event: KernelEvents::REQUEST, priority: 16)]
 final class ListLimitCapListener
 {
   public const int MAX_LIMIT = 1000;
@@ -22,7 +23,7 @@ final class ListLimitCapListener
   public function __invoke(RequestEvent $event): void
   {
     $request = $event->getRequest();
-    if (!str_starts_with($request->getPathInfo(), '/api/')) {
+    if (!str_starts_with((string) $request->attributes->get('_route'), 'open_api_server_')) {
       return;
     }
 
