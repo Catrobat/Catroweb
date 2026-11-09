@@ -17,6 +17,8 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class VerifyEmail
 {
+  public const string RESEND_INTERVAL = '1 day';
+
   private VerifyEmailSignatureComponents $signature_components;
   private User $user;
   private string $delete_url;
@@ -64,17 +66,77 @@ class VerifyEmail
     ];
   }
 
-  public function send(): void
+  /**
+   * Sends unconditionally (registration, email change, admin) and returns whether the mail went out. The resend
+   * throttle only starts on success, so a failed send doesn't lock the user out for a day.
+   */
+  public function send(): bool
   {
-    $this->user->setVerificationRequestedAt(TimeUtils::getDateTime());
-    $this->entityManager->persist($this->user);
-    $this->entityManager->flush();
-    $this->mailer->send(
+    $sent = $this->deliver();
+    if ($sent) {
+      $this->user->setVerificationRequestedAt(TimeUtils::getDateTime());
+      $this->entityManager->persist($this->user);
+      $this->entityManager->flush();
+    }
+
+    return $sent;
+  }
+
+  /**
+   * User-initiated resend: at most one mail per RESEND_INTERVAL, also under parallel requests. The slot is claimed
+   * with one conditional UPDATE before the (slow) send and handed back only if it is still ours when the send fails.
+   *
+   * @return bool|null null when a mail already went out within RESEND_INTERVAL, otherwise whether this one did
+   */
+  public function sendUnlessRecentlySent(): ?bool
+  {
+    $now = TimeUtils::getDateTime();
+    $previous = $this->user->getVerificationRequestedAt();
+    $claimed = $this->updateRequestedAt($now, 'u.verification_requested_at IS NULL OR u.verification_requested_at <= :cutoff', ['cutoff' => new \DateTime('-'.self::RESEND_INTERVAL)]);
+    if (!$claimed) {
+      return null;
+    }
+
+    $this->user->setVerificationRequestedAt($now);
+    $sent = false;
+    try {
+      $sent = $this->deliver();
+    } finally {
+      if (!$sent) {
+        $this->updateRequestedAt($previous, 'u.verification_requested_at = :claimed', ['claimed' => $now]);
+        $this->user->setVerificationRequestedAt($previous);
+      }
+    }
+
+    return $sent;
+  }
+
+  private function deliver(): bool
+  {
+    return $this->mailer->send(
       $this->user->getEmail(),
       $this->translator->trans('user.verification.email', [], 'catroweb'),
       $this->getTemplate(),
       $this->getContext(),
       'verification'
     );
+  }
+
+  /**
+   * @param array<string, \DateTimeInterface> $parameters
+   */
+  private function updateRequestedAt(?\DateTimeInterface $value, string $condition, array $parameters): bool
+  {
+    $query = $this->entityManager->createQuery(
+      'UPDATE '.User::class.' u SET u.verification_requested_at = :value WHERE u.id = :id AND ('.$condition.')'
+    )
+      ->setParameter('value', $value)
+      ->setParameter('id', $this->user->getId())
+    ;
+    foreach ($parameters as $name => $parameter) {
+      $query->setParameter($name, $parameter);
+    }
+
+    return 1 === $query->execute();
   }
 }

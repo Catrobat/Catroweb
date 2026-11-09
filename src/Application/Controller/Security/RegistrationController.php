@@ -197,14 +197,24 @@ class RegistrationController extends AbstractController
       return $this->redirectToRoute('verify_email_pending');
     }
 
-    $oneDayAgo = new \DateTime('-1 day');
+    $oneDayAgo = new \DateTime('-'.VerifyEmail::RESEND_INTERVAL);
     if ($user->getVerificationRequestedAt() > $oneDayAgo) {
       $this->addFlash('error', 'A verification email was already sent recently. Please check your inbox and spam folder.');
 
       return $this->redirectToRoute('verify_email_pending');
     }
 
-    $this->verify_email->init($user)->send();
+    $sent = $this->verify_email->init($user)->sendUnlessRecentlySent();
+    if (null === $sent) {
+      $this->addFlash('error', 'A verification email was already sent recently. Please check your inbox and spam folder.');
+
+      return $this->redirectToRoute('verify_email_pending');
+    }
+    if (!$sent) {
+      $this->addFlash('error', 'The verification email could not be sent right now. Please try again later.');
+
+      return $this->redirectToRoute('verify_email_pending');
+    }
     $this->addFlash('success', 'Verification email resent. Please check your inbox.');
 
     return $this->redirectToRoute('verify_email_pending');
@@ -219,12 +229,18 @@ class RegistrationController extends AbstractController
       return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
 
-    $oneDayAgo = new \DateTime('-1 day');
+    $oneDayAgo = new \DateTime('-'.VerifyEmail::RESEND_INTERVAL);
     if ($user->getVerificationRequestedAt() > $oneDayAgo) {
       return new JsonResponse(null, Response::HTTP_FORBIDDEN);
     }
 
-    $this->verify_email->init($user)->send();
+    $sent = $this->verify_email->init($user)->sendUnlessRecentlySent();
+    if (null === $sent) {
+      return new JsonResponse(null, Response::HTTP_FORBIDDEN);
+    }
+    if (!$sent) {
+      return new JsonResponse(null, Response::HTTP_SERVICE_UNAVAILABLE);
+    }
 
     return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
