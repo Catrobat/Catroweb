@@ -5,12 +5,14 @@ Feature: Search users
 
   Background:
     Given there are users:
-      | name         | password | id |
-      | Catrobat     | 12345    | 1  |
-      | User1        | vwxyz    | 2  |
-      | NewUser      | 54321    | 3  |
-      | Catroweb     | 54321    | 4  |
-      | пользователь | 54321    | 5  |
+      | name         | password | id | consent_status |
+      | Catrobat     | 12345    | 1  | not_required   |
+      | User1        | vwxyz    | 2  | not_required   |
+      | NewUser      | 54321    | 3  | not_required   |
+      | Catroweb     | 54321    | 4  | not_required   |
+      | пользователь | 54321    | 5  | not_required   |
+      | CatroKid     | 54321    | 6  | pending        |
+      | CatroGone    | 54321    | 7  | revoked        |
     And there are followers:
       | name     | following       |
       | Catrobat | User1, Catroweb |
