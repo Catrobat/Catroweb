@@ -107,9 +107,15 @@ class UserApiLoader extends AbstractApiLoader
    */
   public function getAllUsersKeyset(int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
+    // Same visibility as the leaderboard: suspended, disabled (incl. Scratch placeholders) and
+    // consent-pending accounts 404 on their own profile, so they must not show up here either.
     $qb = $this->entity_manager->createQueryBuilder()
       ->select('u')
       ->from(User::class, 'u')
+      ->where('u.enabled = true')
+      ->andWhere('u.profile_hidden = false')
+      ->andWhere('u.consent_status NOT IN (:blocked_consent)')
+      ->setParameter('blocked_consent', ['pending', 'revoked'])
       ->orderBy('u.createdAt', 'DESC')
       ->addOrderBy('u.id', 'DESC')
       ->setMaxResults($limit)
