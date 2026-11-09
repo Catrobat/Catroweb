@@ -145,7 +145,8 @@ class NotificationRepository extends ServiceEntityRepository
     if (null !== $cursor_date && null !== $cursor_id) {
       $qb
         ->andWhere('n.created_at < :cursor_date OR (n.created_at = :cursor_date AND n.id < :cursor_id)')
-        ->setParameter('cursor_date', $cursor_date)
+        // created_at is stored in UTC (utc_datetime), whatever PHP's default timezone is.
+        ->setParameter('cursor_date', \DateTime::createFromInterface($cursor_date), 'utc_datetime')
         ->setParameter('cursor_id', $cursor_id)
       ;
     }

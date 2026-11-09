@@ -99,6 +99,11 @@ Feature: Get notifications via API with cursor-based pagination
     Then the response status code should be "200"
     And the JSON response field "data.0.id" should be '"00000000-0000-0000-0000-0000000000a1"'
     And the JSON response field "has_more" should be "true"
+    And I save the next_cursor from the response
+    When I request page 2 with the saved cursor at "/api/notifications?type=all&limit=1"
+    Then the response status code should be "200"
+    And the JSON response field "data.0.id" should be '"00000000-0000-0000-0000-0000000000f1"'
+    And the JSON response field "has_more" should be "false"
 
   Scenario: Invalid cursor returns 400
     Given I use a valid JWT Bearer token for "Catrobat"

@@ -34,8 +34,8 @@ class CatroNotification
   private bool $seen = false;
 
   /** Ids are random UUIDs, so this is what orders a user's notifications. */
-  #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
-  private \DateTimeImmutable $created_at;
+  #[ORM\Column(name: 'created_at', type: 'utc_datetime')]
+  private \DateTime $created_at;
 
   private string $twig_template = 'User/Notification/Type/Catro.html.twig';
 
@@ -54,17 +54,17 @@ class CatroNotification
     #[ORM\Column(name: 'type', type: Types::STRING)]
     private string $type = '',
   ) {
-    $this->created_at = new \DateTimeImmutable();
+    $this->created_at = new \DateTime('now', new \DateTimeZone('UTC'));
   }
 
   public function getCreatedAt(): \DateTimeImmutable
   {
-    return $this->created_at;
+    return \DateTimeImmutable::createFromMutable($this->created_at);
   }
 
-  public function setCreatedAt(\DateTimeImmutable $created_at): void
+  public function setCreatedAt(\DateTimeInterface $created_at): void
   {
-    $this->created_at = $created_at;
+    $this->created_at = \DateTime::createFromInterface($created_at);
   }
 
   public function getId(): ?string

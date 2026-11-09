@@ -1142,7 +1142,7 @@ class DataFixturesContext implements Context
       }
 
       if (isset($notification['created_at']) && '' !== $notification['created_at']) {
-        $to_create->setCreatedAt(new \DateTimeImmutable($notification['created_at']));
+        $to_create->setCreatedAt(new \DateTimeImmutable($notification['created_at'], new \DateTimeZone('UTC')));
       }
       if (isset($notification['seen'])) {
         $to_create->setSeen((bool) $notification['seen']);
