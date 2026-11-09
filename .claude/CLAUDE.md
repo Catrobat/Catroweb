@@ -89,6 +89,11 @@ Before committing (all must pass): `bin/php-cs-fixer fix <file>` → `bin/phpsta
 - `TranslatorAwareTrait`: `$translator` is private; use `$this->trans('key')` (no domain arg).
 - Never set `Location` on a 2xx non-201 response: FastCGI rewrites `200 + Location` into `302` (the dev cli-server doesn't, so only prod breaks). Use `Content-Location`.
 - `kernel.terminate` fires in-process in tests; its exceptions propagate.
+- Entity ids are random UUIDv4 (`MyUuidGenerator`): never order or page by `id` alone; it is only a tie-breaker.
+- Time zones: PHP runs in UTC, prod MariaDB in CET. New timestamp columns use the `utc_datetime` type; migrations use `UTC_TIMESTAMP()`, never `CURRENT_TIMESTAMP`.
+- Migrations run before the new release goes live, and a rollback doesn't run `down()`: a new `NOT NULL` column needs a server-side default so the old code can still insert.
+- New service or listener not picked up in PHPUnit? `bin/console cache:clear --env=test` (the test kernel keeps its cached container).
+- Fixing a baselined Psalm issue fails CI with `UnusedBaselineEntry`: delete the entry from `psalm-baseline.xml`.
 
 ## API
 
@@ -96,7 +101,8 @@ Before committing (all must pass): `bin/php-cs-fixer fix <file>` → `bin/phpsta
 - **Never `$ref` enums in response models** — JMS Serializer emits objects. Inline `type: string` + `enum: [...]`.
 - Feature services live in `src/Api/Services/{Feature}/` (Facade, Loader, Processor, RequestValidator, ResponseManager).
 - **Register every API handler** in `config/services.php`: `$services->set(XxxApi::class)->tag('open_api_server.api', ['api' => 'xxx'])`. Tag = lowercase OpenAPI tag; missing → 500.
-- Cursor pagination: fetch `$limit + 1`, `has_more` if the extra row exists; cursor = `base64_encode((string) $last_id)`; response `{ data, next_cursor, has_more }`.
+- Cursor pagination: fetch `$limit + 1`, `has_more` if the extra row exists; response `{ data, next_cursor, has_more }`. The cursor encodes the sort key **and** the id (`KeysetCursorTrait`, e.g. `encodeDateKeysetCursor()`) and the query continues after `(sort_key, id)`; a bare `base64(id)` cursor skips and repeats rows on any date-ordered list.
+- Generated API routes are named `open_api_server_*`; `ListLimitCapListener` caps their `?limit=` at 1000.
 - Validation: 400 for query parameters, 422 for request bodies.
 - `config/packages/security.php`: admin rules and explicit `PUBLIC_ACCESS` GET rules must come BEFORE the `^/api` catch-all.
 - `AccountStateEventListener` blocks write calls from unverified/suspended users with 403 (auth, registration, password reset, appeal exempt).
@@ -136,5 +142,7 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 - New issue in a worktree: `git worktree add .claude/worktrees/<name> -b feature/<issue>-<desc> origin/main`.
 
 ## Deploy Gotcha
+
+Client IP: nginx resolves the real visitor IP from Cloudflare's `CF-Connecting-IP` (infrastructure repo, Cloudflare ranges only), so Symfony trusts no proxies and `getClientIp()` is the visitor. Don't set `TRUSTED_PROXIES=REMOTE_ADDR`: the origin is reachable directly, so clients could spoof `X-Forwarded-For`.
 
 Protected project files (`/project-files/{id}/assets/{path}`): the nginx `^~ /project-files/` routing prefix must be live before deploying. See `docs/operations/Protected-Project-Files.md`.
