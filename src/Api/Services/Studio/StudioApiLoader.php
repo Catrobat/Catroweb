@@ -17,7 +17,9 @@ use App\DB\EntityRepository\Studios\StudioProjectRepository;
 use App\Storage\ScreenshotRepository;
 use App\Studio\StudioManager;
 use App\User\UserManager;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 
 class StudioApiLoader extends AbstractApiLoader
 {
@@ -118,12 +120,11 @@ class StudioApiLoader extends AbstractApiLoader
 
     if (StudioUser::STATUS_BANNED === $status) {
       $qb->orderBy('su.id', 'ASC');
-    }
-
-    if (null !== $cursor_id) {
-      $qb->andWhere('su.id > :cursor_id')
-        ->setParameter('cursor_id', $cursor_id)
-      ;
+      if (null !== $cursor_id) {
+        $qb->andWhere('su.id > :cursor_id')->setParameter('cursor_id', $cursor_id);
+      }
+    } elseif (null !== $cursor_id) {
+      $this->continueAfter($qb, 'su', StudioUser::class, 'created_on', $cursor_id, 'ASC');
     }
 
     /** @var StudioUser[] $members */
@@ -210,9 +211,7 @@ class StudioApiLoader extends AbstractApiLoader
     ;
 
     if (null !== $cursor_id) {
-      $qb->andWhere('su.id < :cursor_id')
-        ->setParameter('cursor_id', $cursor_id)
-      ;
+      $this->continueAfter($qb, 'su', StudioUser::class, 'created_on', $cursor_id, 'DESC');
     }
 
     /** @var Studio[] $studios */
@@ -293,9 +292,7 @@ class StudioApiLoader extends AbstractApiLoader
     ;
 
     if (null !== $cursor_id) {
-      $qb->andWhere('a.id < :cursor_id')
-        ->setParameter('cursor_id', $cursor_id)
-      ;
+      $this->continueAfter($qb, 'a', StudioActivity::class, 'created_on', $cursor_id, 'DESC');
     }
 
     /** @var StudioActivity[] $activities */
@@ -432,9 +429,7 @@ class StudioApiLoader extends AbstractApiLoader
     ;
 
     if (null !== $cursor_id) {
-      $qb->andWhere('c.id < :cursor_id')
-        ->setParameter('cursor_id', $cursor_id)
-      ;
+      $this->continueAfter($qb, 'c', UserComment::class, 'uploadDate', $cursor_id, 'DESC');
     }
 
     /** @var UserComment[] $comments */
@@ -449,5 +444,36 @@ class StudioApiLoader extends AbstractApiLoader
       'comments' => $comments,
       'has_more' => $has_more,
     ];
+  }
+
+  /**
+   * Continues a list ordered by ($date_field, id) after the row the cursor names. The cursor stays that row's id,
+   * but ids are random UUIDs, so the position comes from the row's date with the id only breaking ties.
+   *
+   * @param class-string $entity
+   */
+  private function continueAfter(QueryBuilder $qb, string $alias, string $entity, string $date_field, string $cursor_id, string $direction): void
+  {
+    $cursor_date = $this->entity_manager->createQueryBuilder()
+      ->select('cursor_row.'.$date_field)
+      ->from($entity, 'cursor_row')
+      ->where('cursor_row.id = :id')
+      ->setParameter('id', $cursor_id)
+      ->getQuery()
+      ->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR)
+    ;
+    $after = 'ASC' === $direction ? '>' : '<';
+
+    if (null === $cursor_date) {
+      // The cursor row is gone; an id comparison is the best remaining guess.
+      $qb->andWhere(sprintf('%s.id %s :cursor_id', $alias, $after))->setParameter('cursor_id', $cursor_id);
+
+      return;
+    }
+
+    $qb->andWhere(sprintf('%1$s.%2$s %3$s :cursor_date OR (%1$s.%2$s = :cursor_date AND %1$s.id %3$s :cursor_id)', $alias, $date_field, $after))
+      ->setParameter('cursor_date', $cursor_date)
+      ->setParameter('cursor_id', $cursor_id)
+    ;
   }
 }
