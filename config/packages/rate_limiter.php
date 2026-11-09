@@ -75,6 +75,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 10,
         'interval' => '15 minutes',
       ],
+      // Password login (web form and app API): failed attempts per IP + username, and per IP across usernames.
+      // Read by app.login_rate_limiter (config/services.php).
+      'login_local' => [
+        'policy' => 'sliding_window',
+        'limit' => 5,
+        'interval' => '1 minute',
+      ],
+      'login_global' => [
+        'policy' => 'sliding_window',
+        'limit' => 50,
+        'interval' => '1 minute',
+      ],
       'registration_burst' => [
         'policy' => 'sliding_window',
         'limit' => 3,

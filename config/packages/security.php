@@ -35,6 +35,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'pattern' => '^/api/authentication',
           'methods' => ['POST'],
           'stateless' => true,
+          'login_throttling' => [
+            'limiter' => 'app.login_rate_limiter',
+          ],
           'json_login' => [
             'check_path' => '/api/authentication',
             'success_handler' => ApiAuthenticationSuccessHandler::class,
@@ -61,6 +64,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'provider' => 'user_provider',
           'user_checker' => SuspendedUserChecker::class,
           'stateless' => false,
+          'login_throttling' => [
+            'limiter' => 'app.login_rate_limiter',
+          ],
           'form_login' => [
             'login_path' => '/app/login',
             'default_target_path' => '/',
