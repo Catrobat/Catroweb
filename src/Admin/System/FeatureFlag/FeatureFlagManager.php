@@ -22,6 +22,8 @@ class FeatureFlagManager
     protected EntityManagerInterface $entityManager,
     #[Autowire('%feature_flags%')]
     protected array $feature_flags,
+    #[Autowire('%kernel.environment%')]
+    private readonly string $environment = 'prod',
   ) {
     $this->defaultFlags = $this->feature_flags;
   }
@@ -95,7 +97,8 @@ class FeatureFlagManager
 
     $request = $this->requestStack->getCurrentRequest();
 
-    if ($request && $request->headers->has('X-Feature-Flag-'.$flagName)) {
+    // Header overrides are for tests only; in prod any client could switch flags for itself.
+    if ('prod' !== $this->environment && $request && $request->headers->has('X-Feature-Flag-'.$flagName)) {
       $value = (bool) $request->headers->get('X-Feature-Flag-'.$flagName);
       $this->flagCache[$flagName] = $value;
 
