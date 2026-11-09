@@ -63,10 +63,10 @@ class SendMailToUserController extends CRUDController
   private function sendVerifyEmail(User $user): Response
   {
     if (!$this->verify_email->init($user)->send()) {
-      return new Response('Verification email to '.$user->getEmail().' was not sent (mailer error or daily budget used up)', Response::HTTP_SERVICE_UNAVAILABLE);
+      return new Response('Verification email to '.htmlspecialchars((string) $user->getEmail()).' was not sent (mailer error or daily budget used up)', Response::HTTP_SERVICE_UNAVAILABLE);
     }
 
-    return new Response('OK - verification email sent to '.$user->getEmail(), Response::HTTP_OK);
+    return new Response('OK - verification email sent to '.htmlspecialchars((string) $user->getEmail()), Response::HTTP_OK);
   }
 
   private function sendConsentEmail(User $user): Response

@@ -31,6 +31,29 @@ final class VerifyEmailTest extends TestCase
     $this->assertNull($user->getVerificationRequestedAt());
   }
 
+  public function testAFailedSendRestoresTheEarlierRequestTime(): void
+  {
+    $user = $this->user();
+    $earlier = new \DateTime('-3 days');
+    $user->setVerificationRequestedAt($earlier);
+
+    $this->assertFalse($this->verifyEmail(sent: false)->init($user)->send());
+    $this->assertSame($earlier, $user->getVerificationRequestedAt());
+  }
+
+  public function testTheThrottleSlotIsClaimedBeforeTheMailIsSent(): void
+  {
+    $user = $this->user();
+    $mailer = $this->createStub(MailerAdapter::class);
+    $mailer->method('send')->willReturnCallback(function () use ($user): bool {
+      $this->assertNotNull($user->getVerificationRequestedAt(), 'the slot must be taken before the slow send');
+
+      return true;
+    });
+
+    $this->assertTrue($this->verifyEmail(sent: true, mailer: $mailer)->init($user)->send());
+  }
+
   public function testASuccessfulSendStartsTheResendThrottle(): void
   {
     $user = $this->user();
@@ -48,12 +71,14 @@ final class VerifyEmailTest extends TestCase
     return $user;
   }
 
-  private function verifyEmail(bool $sent): VerifyEmail
+  private function verifyEmail(bool $sent, ?MailerAdapter $mailer = null): VerifyEmail
   {
     $helper = $this->createStub(VerifyEmailHelperInterface::class);
     $helper->method('generateSignature')->willReturn(new VerifyEmailSignatureComponents(new \DateTimeImmutable('+1 hour'), 'https://example.org/verify', time()));
-    $mailer = $this->createStub(MailerAdapter::class);
-    $mailer->method('send')->willReturn($sent);
+    if (null === $mailer) {
+      $mailer = $this->createStub(MailerAdapter::class);
+      $mailer->method('send')->willReturn($sent);
+    }
 
     return new VerifyEmail(
       $helper,
