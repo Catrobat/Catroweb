@@ -24,6 +24,22 @@ Feature: List studio members
     And the client response should contain "Member"
     And the client response should contain "has_more"
 
+  Scenario: Paging follows join order even when ids sort the other way
+    Given there are studios:
+      | id | name        | description | is_public |
+      | 3  | PagedStudio | Paged       | true      |
+    And there are studio users:
+      | id                                   | user   | studio_name | role   | created_on          |
+      | f0000000-0000-4000-8000-000000000001 | Admin  | PagedStudio | admin  | 2026-01-01 12:00:00 |
+      | 00000000-0000-4000-8000-000000000002 | Member | PagedStudio | member | 2026-02-01 12:00:00 |
+    When I GET "/api/studios/3/members?limit=1"
+    Then the response status code should be "200"
+    And the JSON response field "data.0.username" should be '"Admin"'
+    And I save the next_cursor from the response
+    When I request page 2 with the saved cursor at "/api/studios/3/members?limit=1"
+    Then the response status code should be "200"
+    And the JSON response field "data.0.username" should be '"Member"'
+
   Scenario: List members of non-existent studio returns 404
     When I GET "/api/studios/nonexistent/members"
     Then the response status code should be "404"
