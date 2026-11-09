@@ -164,7 +164,15 @@ jobs:
 
       - name: Pull Docker Image (internal)
         if: needs.build.outputs.is-fork == 'false'
-        run: docker pull ${{ needs.build.outputs.image-tag }}
+        # ghcr.io sometimes answers "manifest ... not found" for an image the build job pushed seconds
+        # earlier; retrying is cheaper than re-running the whole job.
+        run: |
+          for attempt in 1 2 3 4; do
+            docker pull ${{ needs.build.outputs.image-tag }} && exit 0
+            echo "Pull attempt $attempt failed, retrying in $((attempt * 15))s"
+            sleep $((attempt * 15))
+          done
+          exit 1
 
       - name: Download image artifact (fork)
         if: needs.build.outputs.is-fork == 'true'
@@ -288,7 +296,15 @@ jobs:
 
       - name: Pull Docker Image (internal)
         if: needs.build.outputs.is-fork == 'false'
-        run: docker pull ${{ needs.build.outputs.image-tag }}
+        # ghcr.io sometimes answers "manifest ... not found" for an image the build job pushed seconds
+        # earlier; retrying is cheaper than re-running the whole job.
+        run: |
+          for attempt in 1 2 3 4; do
+            docker pull ${{ needs.build.outputs.image-tag }} && exit 0
+            echo "Pull attempt $attempt failed, retrying in $((attempt * 15))s"
+            sleep $((attempt * 15))
+          done
+          exit 1
 
       - name: Download image artifact (fork)
         if: needs.build.outputs.is-fork == 'true'
