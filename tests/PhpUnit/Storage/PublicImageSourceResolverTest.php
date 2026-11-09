@@ -26,8 +26,7 @@ final class PublicImageSourceResolverTest extends TestCase
     foreach (['images', 'resources/screenshots', 'resources/extract', 'resources/assets', 'private'] as $dir) {
       mkdir($this->root.'/'.$dir, 0o700, true);
     }
-    $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a8V0AAAAASUVORK5CYII=', true);
-    self::assertIsString($png);
+    $png = "\x89\x50\x4e\x47\x0d\x0a\x1a\x0a\x00\x00\x00\x0d\x49\x48\x44\x52\x00\x00\x00\x01\x00\x00\x00\x01\x08\x04\x00\x00\x00\xb5\x1c\x0c\x02\x00\x00\x00\x0b\x49\x44\x41\x54\x78\xda\x63\xfc\xff\x1f\x00\x03\x03\x02\x00\xef\x9a\xf1\x5d\x00\x00\x00\x00\x49\x45\x4e\x44\xae\x42\x60\x82"; // 1x1 PNG
     foreach (['images/picture.png', 'resources/screenshots/picture.png', 'resources/extract/private.png', 'resources/assets/private.png', 'private/secret.png'] as $path) {
       file_put_contents($this->root.'/'.$path, $png);
     }
