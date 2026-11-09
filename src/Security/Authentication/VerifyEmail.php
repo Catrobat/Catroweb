@@ -64,17 +64,25 @@ class VerifyEmail
     ];
   }
 
-  public function send(): void
+  /**
+   * Returns whether the mail went out. The resend throttle only starts on success, so a failed send
+   * (mailer down, daily budget used up) can be retried right away instead of locking the user out for a day.
+   */
+  public function send(): bool
   {
-    $this->user->setVerificationRequestedAt(TimeUtils::getDateTime());
-    $this->entityManager->persist($this->user);
-    $this->entityManager->flush();
-    $this->mailer->send(
+    $sent = $this->mailer->send(
       $this->user->getEmail(),
       $this->translator->trans('user.verification.email', [], 'catroweb'),
       $this->getTemplate(),
       $this->getContext(),
       'verification'
     );
+    if ($sent) {
+      $this->user->setVerificationRequestedAt(TimeUtils::getDateTime());
+      $this->entityManager->persist($this->user);
+      $this->entityManager->flush();
+    }
+
+    return $sent;
   }
 }

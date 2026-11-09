@@ -204,7 +204,11 @@ class RegistrationController extends AbstractController
       return $this->redirectToRoute('verify_email_pending');
     }
 
-    $this->verify_email->init($user)->send();
+    if (!$this->verify_email->init($user)->send()) {
+      $this->addFlash('error', 'The verification email could not be sent right now. Please try again later.');
+
+      return $this->redirectToRoute('verify_email_pending');
+    }
     $this->addFlash('success', 'Verification email resent. Please check your inbox.');
 
     return $this->redirectToRoute('verify_email_pending');
@@ -224,7 +228,9 @@ class RegistrationController extends AbstractController
       return new JsonResponse(null, Response::HTTP_FORBIDDEN);
     }
 
-    $this->verify_email->init($user)->send();
+    if (!$this->verify_email->init($user)->send()) {
+      return new JsonResponse(null, Response::HTTP_SERVICE_UNAVAILABLE);
+    }
 
     return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
