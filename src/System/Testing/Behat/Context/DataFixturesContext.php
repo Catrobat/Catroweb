@@ -1491,9 +1491,15 @@ class DataFixturesContext implements Context
         $comment->setUsername($user->getUsername() ?? $config['user']);
         $this->getManager()->persist($comment);
       } else {
-        $studio_comment = $studioManager->addCommentToStudio($user, $studio, $config['comment']);
-        $this->getManager()->persist($studio_comment);
+        $comment = $studioManager->addCommentToStudio($user, $studio, $config['comment']);
+        \assert(null !== $comment);
+        $this->getManager()->persist($comment);
       }
+      if ('' !== ($config['parent_id'] ?? '')) {
+        $comment->setParentId($config['parent_id']);
+      }
+      $comment->setAutoHidden('true' === ($config['auto_hidden'] ?? 'false'));
+      $comment->setIsDeleted('true' === ($config['is_deleted'] ?? 'false'));
     }
 
     $this->getManager()->flush();

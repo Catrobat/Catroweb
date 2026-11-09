@@ -419,7 +419,12 @@ class StudioApiLoader extends AbstractApiLoader
       ->addSelect('cu')
       ->from(UserComment::class, 'c')
       ->leftJoin('c.user', 'cu')
+      // Replies are listed too; a reply to a hidden or deleted comment would quote it out of context.
+      ->leftJoin(UserComment::class, 'parent', 'WITH', 'parent.id = c.parent_id')
       ->where('c.studio = :studio')
+      ->andWhere('c.auto_hidden = false')
+      ->andWhere('c.is_deleted = false')
+      ->andWhere('c.parent_id IS NULL OR (parent.auto_hidden = false AND parent.is_deleted = false)')
       ->setParameter('studio', $studio)
       ->orderBy('c.uploadDate', 'DESC')
       ->addOrderBy('c.id', 'DESC')

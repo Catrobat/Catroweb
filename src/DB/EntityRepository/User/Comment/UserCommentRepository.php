@@ -38,12 +38,12 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function findAllStudioComments(?Studio $studio, ?int $limit = null, int $offset = 0): array
   {
-    return $this->findBy(['studio' => $studio, 'parent_id' => null], ['id' => 'DESC'], $limit, $offset);
+    return $this->findBy(['studio' => $studio, 'parent_id' => null, 'auto_hidden' => false, 'is_deleted' => false], ['id' => 'DESC'], $limit, $offset);
   }
 
   public function countStudioComments(?Studio $studio): int
   {
-    return $this->count(['studio' => $studio, 'parent_id' => null]);
+    return $this->count(['studio' => $studio, 'parent_id' => null, 'auto_hidden' => false, 'is_deleted' => false]);
   }
 
   /**
@@ -65,6 +65,8 @@ class UserCommentRepository extends ServiceEntityRepository
       ->from(UserComment::class, 'c')
       ->where('c.studio IN (:ids)')
       ->andWhere('c.parent_id IS NULL')
+      ->andWhere('c.auto_hidden = false')
+      ->andWhere('c.is_deleted = false')
       ->setParameter('ids', $studioIds)
       ->groupBy('c.studio')
       ->getQuery()
@@ -91,7 +93,7 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function countCommentReplies(string $comment_id): int
   {
-    return $this->count(['parent_id' => $comment_id]);
+    return $this->count(['parent_id' => $comment_id, 'auto_hidden' => false, 'is_deleted' => false]);
   }
 
   public function findCommentsByProgramId(string $program_id): array

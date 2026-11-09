@@ -28,6 +28,23 @@ Feature: List studio comments
     And the client response should contain "Nice studio"
     And the client response should contain "has_more"
 
+  Scenario: Hidden and deleted comments and their replies are not listed or counted
+    Given there are studio comments:
+      | id                                   | user   | studio_name | comment        | auto_hidden | is_deleted | parent_id                            |
+      | 6a1e2b3c-0000-4000-8000-000000000001 | Member | Studio1     | Hidden spam    | true        | false      |                                      |
+      | 6a1e2b3c-0000-4000-8000-000000000002 | Member | Studio1     | Deleted remark | false       | true       |                                      |
+      | 6a1e2b3c-0000-4000-8000-000000000003 | Admin  | Studio1     | Reply to spam  | false       | false      | 6a1e2b3c-0000-4000-8000-000000000001 |
+    When I GET "/api/studios/1/comments"
+    Then the response status code should be "200"
+    And the client response should contain "Hello world"
+    And the client response should contain "Nice studio"
+    And the client response should not contain "Hidden spam"
+    And the client response should not contain "Deleted remark"
+    And the client response should not contain "Reply to spam"
+    When I GET "/api/studios/1"
+    Then the response status code should be "200"
+    And the JSON response field "comments_count" should be "2"
+
   Scenario: List comments of non-existent studio returns 404
     When I GET "/api/studios/nonexistent/comments"
     Then the response status code should be "404"
