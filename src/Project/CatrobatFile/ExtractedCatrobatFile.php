@@ -119,9 +119,11 @@ class ExtractedCatrobatFile
     $file_paths = [];
 
     if ($this->hasScenes()) {
-      $dir_regex = $this->path.'/*/images/';
-      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/images');
-      $finder->files()->in($dir_regex);
+      $scene_dirs = glob($this->path.'/*/images', GLOB_ONLYDIR) ?: [];
+      if ([] === $scene_dirs) {
+        return [];
+      }
+      $finder->files()->in($scene_dirs);
       foreach ($finder as $file) {
         $parts = explode($this->dir_hash.'/', (string) $file->getRealPath());
         $file_paths[] = '/'.$this->web_path.$parts[1];
@@ -149,9 +151,11 @@ class ExtractedCatrobatFile
     $file_paths = [];
 
     if ($this->hasScenes()) {
-      $dir_regex = $this->path.'/*/sounds/';
-      $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/sounds');
-      $finder->files()->in($dir_regex);
+      $scene_dirs = glob($this->path.'/*/sounds', GLOB_ONLYDIR) ?: [];
+      if ([] === $scene_dirs) {
+        return [];
+      }
+      $finder->files()->in($scene_dirs);
       foreach ($finder as $file) {
         $parts = explode($this->dir_hash.'/', (string) $file->getRealPath());
         $file_paths[] = '/'.$this->web_path.$parts[1];
@@ -358,18 +362,6 @@ class ExtractedCatrobatFile
     }
 
     return $header;
-  }
-
-  private function createDirectoryInSceneIfNotExist(string $base_path, string $dir_regex, string $dir_name): void
-  {
-    preg_match('@'.$dir_regex.'@', $dir_regex, $scene_names);
-
-    foreach ($scene_names as $scene_name) {
-      $directory = $base_path.$scene_name.$dir_name;
-      if (!file_exists($directory)) {
-        mkdir($directory, 0777, true);
-      }
-    }
   }
 
   private function createDirectoryIfNotExist(string $directory): void

@@ -461,6 +461,20 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->assertSame(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_screenshot/screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
   }
 
+  public function testAProjectWithScenesButNoSoundsHasNoSoundPaths(): void
+  {
+    $target_dir = BootstrapExtension::$CACHE_DIR.'scenes_without_sounds/';
+    $filesystem = new Filesystem();
+    $filesystem->remove($target_dir);
+    $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'embroidery/', $target_dir);
+    $filesystem->remove(glob($target_dir.'*/sounds') ?: []);
+
+    $file = new ExtractedCatrobatFile($target_dir, '/webpath/', 'hash');
+
+    $this->assertSame([], $file->getContainingSoundPaths());
+    $filesystem->remove($target_dir);
+  }
+
   public function testThrowsAnExceptionWhenCodeXmlIsMissing(): void
   {
     $this->expectException(InvalidCatrobatFileException::class);
