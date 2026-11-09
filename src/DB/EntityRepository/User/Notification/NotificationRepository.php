@@ -124,7 +124,7 @@ class NotificationRepository extends ServiceEntityRepository
   /**
    * @return array{notifications: CatroNotification[], has_more: bool}
    */
-  public function getNotificationsPageData(User $user, string $type, int $limit, ?string $cursor_id): array
+  public function getNotificationsPageData(User $user, string $type, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
   {
     $qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -135,15 +135,17 @@ class NotificationRepository extends ServiceEntityRepository
       ->leftJoin('n.user', 'nu')
       ->where('n.user = :user')
       ->setParameter('user', $user)
-      ->orderBy('n.id', 'DESC')
+      ->orderBy('n.created_at', 'DESC')
+      ->addOrderBy('n.id', 'DESC')
       ->setMaxResults($limit + 1)
     ;
 
     $this->applyTypeFilter($qb, $type);
 
-    if (null !== $cursor_id) {
+    if (null !== $cursor_date && null !== $cursor_id) {
       $qb
-        ->andWhere('n.id < :cursor_id')
+        ->andWhere('n.created_at < :cursor_date OR (n.created_at = :cursor_date AND n.id < :cursor_id)')
+        ->setParameter('cursor_date', $cursor_date)
         ->setParameter('cursor_id', $cursor_id)
       ;
     }

@@ -85,6 +85,21 @@ Feature: Get notifications via API with cursor-based pagination
     And the client response should contain "next_cursor"
     And the client response should contain "has_more"
 
+  Scenario: Notifications are listed newest first, not by id
+    Given there are users:
+      | id | name   |
+      | 9  | Sorter |
+    And there are catro notifications:
+      | id                                   | user   | type    | title  | message | created_at          | seen |
+      | 00000000-0000-0000-0000-0000000000a1 | Sorter | default | newest | newest  | 2026-11-09 12:00:00 | 0    |
+      | 00000000-0000-0000-0000-0000000000f1 | Sorter | default | oldest | oldest  | 2026-11-01 12:00:00 | 0    |
+    And I use a valid JWT Bearer token for "Sorter"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/notifications?type=all&limit=1"
+    Then the response status code should be "200"
+    And the JSON response field "data.0.id" should be '"00000000-0000-0000-0000-0000000000a1"'
+    And the JSON response field "has_more" should be "true"
+
   Scenario: Invalid cursor returns 400
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"

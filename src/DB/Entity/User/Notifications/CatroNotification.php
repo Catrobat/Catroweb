@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'CatroNotification')]
 #[ORM\Index(name: 'notif_user_seen_idx', columns: ['user', 'seen'])]
 #[ORM\Index(name: 'notif_user_id_idx', columns: ['user', 'id'])]
+#[ORM\Index(name: 'notif_user_created_idx', columns: ['user', 'created_at', 'id'])]
 #[ORM\Index(name: 'notif_user_type_idx', columns: ['user', 'notification_type'])]
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
@@ -31,6 +32,10 @@ class CatroNotification
 
   #[ORM\Column(name: 'seen', type: Types::BOOLEAN, options: ['default' => false])]
   private bool $seen = false;
+
+  /** Ids are random UUIDs, so this is what orders a user's notifications. */
+  #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
+  private \DateTimeImmutable $created_at;
 
   private string $twig_template = 'User/Notification/Type/Catro.html.twig';
 
@@ -49,6 +54,17 @@ class CatroNotification
     #[ORM\Column(name: 'type', type: Types::STRING)]
     private string $type = '',
   ) {
+    $this->created_at = new \DateTimeImmutable();
+  }
+
+  public function getCreatedAt(): \DateTimeImmutable
+  {
+    return $this->created_at;
+  }
+
+  public function setCreatedAt(\DateTimeImmutable $created_at): void
+  {
+    $this->created_at = $created_at;
   }
 
   public function getId(): ?string

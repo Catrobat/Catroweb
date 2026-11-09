@@ -1141,6 +1141,9 @@ class DataFixturesContext implements Context
         MyUuidGenerator::setNextValue((string) $notification['id']);
       }
 
+      if (isset($notification['created_at']) && '' !== $notification['created_at']) {
+        $to_create->setCreatedAt(new \DateTimeImmutable($notification['created_at']));
+      }
       if (isset($notification['seen'])) {
         $to_create->setSeen((bool) $notification['seen']);
       }

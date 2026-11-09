@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Api\Services\Notifications;
 
 use App\Api\Services\Base\AbstractResponseManager;
+use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -30,6 +31,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotificationsResponseManager extends AbstractResponseManager
 {
+  use KeysetCursorTrait;
+
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
@@ -65,7 +68,7 @@ class NotificationsResponseManager extends AbstractResponseManager
     $next_cursor = null;
     if ($has_more && [] !== $notifications) {
       $last_notification = end($notifications);
-      $next_cursor = base64_encode((string) $last_notification->getId());
+      $next_cursor = $this->encodeDateKeysetCursor($last_notification->getCreatedAt(), (string) $last_notification->getId());
     }
 
     return new NotificationListResponse([
