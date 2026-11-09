@@ -8,6 +8,7 @@ use App\DB\Entity\User\User;
 use App\Security\Authentication\VerifyEmail;
 use App\System\Mail\MailerAdapter;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -23,43 +24,57 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 #[CoversClass(VerifyEmail::class)]
 final class VerifyEmailTest extends TestCase
 {
-  public function testAFailedSendDoesNotStartTheResendThrottle(): void
-  {
-    $user = $this->user();
+  /** @var list<string> DQL of the conditional UPDATEs, in order */
+  private array $updates = [];
 
-    $this->assertFalse($this->verifyEmail(sent: false)->init($user)->send());
-    $this->assertNull($user->getVerificationRequestedAt());
-  }
-
-  public function testAFailedSendRestoresTheEarlierRequestTime(): void
+  public function testAFailedSendKeepsTheEarlierRequestTime(): void
   {
     $user = $this->user();
     $earlier = new \DateTime('-3 days');
     $user->setVerificationRequestedAt($earlier);
 
-    $this->assertFalse($this->verifyEmail(sent: false)->init($user)->send());
+    $this->assertFalse($this->verifyEmail($this->mailer(false))->init($user)->send());
     $this->assertSame($earlier, $user->getVerificationRequestedAt());
-  }
-
-  public function testTheThrottleSlotIsClaimedBeforeTheMailIsSent(): void
-  {
-    $user = $this->user();
-    $mailer = $this->createStub(MailerAdapter::class);
-    $mailer->method('send')->willReturnCallback(function () use ($user): bool {
-      $this->assertNotNull($user->getVerificationRequestedAt(), 'the slot must be taken before the slow send');
-
-      return true;
-    });
-
-    $this->assertTrue($this->verifyEmail(sent: true, mailer: $mailer)->init($user)->send());
   }
 
   public function testASuccessfulSendStartsTheResendThrottle(): void
   {
     $user = $this->user();
 
-    $this->assertTrue($this->verifyEmail(sent: true)->init($user)->send());
+    $this->assertTrue($this->verifyEmail($this->mailer(true))->init($user)->send());
     $this->assertNotNull($user->getVerificationRequestedAt());
+  }
+
+  public function testAResendClaimsTheFreeSlotAndSends(): void
+  {
+    $user = $this->user();
+
+    $this->assertTrue($this->verifyEmail($this->mailer(true), rows_updated: [1])->init($user)->sendUnlessRecentlySent());
+    $this->assertNotNull($user->getVerificationRequestedAt());
+    $this->assertCount(1, $this->updates);
+    $this->assertStringContainsString(':cutoff', $this->updates[0]);
+  }
+
+  public function testAResendDoesNotSendWhileAnotherRequestHoldsTheSlot(): void
+  {
+    $user = $this->user();
+    $mailer = $this->createMock(MailerAdapter::class);
+    $mailer->expects($this->never())->method('send');
+
+    $this->assertFalse($this->verifyEmail($mailer, rows_updated: [0])->init($user)->sendUnlessRecentlySent());
+    $this->assertNull($user->getVerificationRequestedAt());
+  }
+
+  public function testAFailedResendHandsTheSlotBackOnlyIfItIsStillOurs(): void
+  {
+    $user = $this->user();
+    $earlier = new \DateTime('-3 days');
+    $user->setVerificationRequestedAt($earlier);
+
+    $this->assertFalse($this->verifyEmail($this->mailer(false), rows_updated: [1, 1])->init($user)->sendUnlessRecentlySent());
+    $this->assertSame($earlier, $user->getVerificationRequestedAt());
+    $this->assertCount(2, $this->updates);
+    $this->assertStringContainsString('= :claimed', $this->updates[1]);
   }
 
   private function user(): User
@@ -71,14 +86,31 @@ final class VerifyEmailTest extends TestCase
     return $user;
   }
 
-  private function verifyEmail(bool $sent, ?MailerAdapter $mailer = null): VerifyEmail
+  private function mailer(bool $sent): MailerAdapter
+  {
+    $mailer = $this->createStub(MailerAdapter::class);
+    $mailer->method('send')->willReturn($sent);
+
+    return $mailer;
+  }
+
+  /**
+   * @param list<int> $rows_updated what each conditional UPDATE reports, in order
+   */
+  private function verifyEmail(MailerAdapter $mailer, array $rows_updated = []): VerifyEmail
   {
     $helper = $this->createStub(VerifyEmailHelperInterface::class);
     $helper->method('generateSignature')->willReturn(new VerifyEmailSignatureComponents(new \DateTimeImmutable('+1 hour'), 'https://example.org/verify', time()));
-    if (null === $mailer) {
-      $mailer = $this->createStub(MailerAdapter::class);
-      $mailer->method('send')->willReturn($sent);
-    }
+
+    $entity_manager = $this->createStub(EntityManagerInterface::class);
+    $entity_manager->method('createQuery')->willReturnCallback(function (string $dql) use (&$rows_updated): Query {
+      $this->updates[] = $dql;
+      $query = $this->createStub(Query::class);
+      $query->method('setParameter')->willReturnSelf();
+      $query->method('execute')->willReturn(array_shift($rows_updated) ?? 0);
+
+      return $query;
+    });
 
     return new VerifyEmail(
       $helper,
@@ -86,7 +118,7 @@ final class VerifyEmailTest extends TestCase
       $this->createStub(TranslatorInterface::class),
       new ParameterBag(['umbrellaTheme' => 'pocketcode']),
       $this->createStub(RouterInterface::class),
-      $this->createStub(EntityManagerInterface::class),
+      $entity_manager,
       $this->createStub(UrlGeneratorInterface::class),
     );
   }
