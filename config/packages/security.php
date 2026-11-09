@@ -35,6 +35,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'pattern' => '^/api/authentication',
           'methods' => ['POST'],
           'stateless' => true,
+          // Password logins from the web login page and the app both POST here; the limiter skips token refreshes.
+          'login_throttling' => [
+            'limiter' => 'app.login_rate_limiter',
+          ],
           'json_login' => [
             'check_path' => '/api/authentication',
             'success_handler' => ApiAuthenticationSuccessHandler::class,

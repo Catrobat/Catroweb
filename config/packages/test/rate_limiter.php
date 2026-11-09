@@ -46,6 +46,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'auth_burst' => [
         'policy' => 'no_limit',
       ],
+      'login_local' => [
+        'policy' => 'no_limit',
+      ],
+      'login_global' => [
+        'policy' => 'no_limit',
+      ],
       'registration_burst' => [
         'policy' => 'no_limit',
       ],
