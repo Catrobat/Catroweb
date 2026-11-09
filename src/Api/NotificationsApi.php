@@ -6,6 +6,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
+use App\Api\Traits\KeysetCursorTrait;
 use OpenAPI\Server\Api\NotificationsApiInterface;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationsCountResponse;
@@ -14,6 +15,7 @@ use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFact
 
 class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
 {
+  use KeysetCursorTrait;
   use RateLimitTrait;
 
   private const int DEFAULT_LIMIT = 20;
@@ -89,18 +91,20 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
 
     $limit = $this->normalizeLimit($limit);
 
+    $cursor_date = null;
     $cursor_id = null;
     if (null !== $cursor) {
-      $decoded = base64_decode($cursor, true);
-      if (false === $decoded || '' === $decoded) {
+      $cursor_data = $this->decodeDateKeysetCursor($cursor);
+      if (null === $cursor_data) {
         $responseCode = Response::HTTP_BAD_REQUEST;
 
         return null;
       }
-      $cursor_id = $decoded;
+      $cursor_date = $cursor_data['date'];
+      $cursor_id = $cursor_data['id'];
     }
 
-    $page_data = $this->facade->getLoader()->getNotificationsPage($user, $type, $limit, $cursor_id);
+    $page_data = $this->facade->getLoader()->getNotificationsPage($user, $type, $limit, $cursor_date, $cursor_id);
 
     $response = $this->facade->getResponseManager()->createNotificationListResponse(
       $page_data['notifications'],

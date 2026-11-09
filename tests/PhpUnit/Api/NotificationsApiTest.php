@@ -138,22 +138,47 @@ class NotificationsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $loader = $this->createStub(NotificationsApiLoader::class);
-    $loader->method('getNotificationsPage')->willReturn([
-      'notifications' => [],
-      'has_more' => false,
-    ]);
+    $loader = $this->createMock(NotificationsApiLoader::class);
+    $loader->expects($this->once())->method('getNotificationsPage')
+      ->with($user, 'all', 20, $this->equalTo(new \DateTimeImmutable('2026-11-09T12:00:00+00:00')), 'ffe1e473-f918-44a8-9347-30c214bc32d4')
+      ->willReturn([
+        'notifications' => [],
+        'has_more' => false,
+      ])
+    ;
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response_manager = $this->createStub(NotificationsResponseManager::class);
     $response_manager->method('createNotificationListResponse')->willReturn(new NotificationListResponse());
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $cursor = base64_encode('42');
+    $cursor = base64_encode('2026-11-09T12:00:00.000000+00:00|ffe1e473-f918-44a8-9347-30c214bc32d4');
     $response = $this->object->notificationsGet('en', 20, $cursor, 'all', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(NotificationListResponse::class, $response);
+  }
+
+  /**
+   * Cursors from before notifications had a creation time were just the id; they no longer page.
+   *
+   * @throws Exception
+   */
+  #[Group('unit')]
+  public function testNotificationsGetWithAnIdOnlyCursorIsRejected(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+
+    $response = $this->object->notificationsGet('en', 20, base64_encode('ffe1e473-f918-44a8-9347-30c214bc32d4'), 'all', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_BAD_REQUEST, $response_code);
+    $this->assertNull($response);
   }
 
   /**
