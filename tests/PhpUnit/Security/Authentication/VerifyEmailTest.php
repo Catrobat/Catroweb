@@ -61,7 +61,7 @@ final class VerifyEmailTest extends TestCase
     $mailer = $this->createMock(MailerAdapter::class);
     $mailer->expects($this->never())->method('send');
 
-    $this->assertFalse($this->verifyEmail($mailer, rows_updated: [0])->init($user)->sendUnlessRecentlySent());
+    $this->assertNull($this->verifyEmail($mailer, rows_updated: [0])->init($user)->sendUnlessRecentlySent(), 'null = already sent recently');
     $this->assertNull($user->getVerificationRequestedAt());
   }
 
@@ -73,6 +73,23 @@ final class VerifyEmailTest extends TestCase
 
     $this->assertFalse($this->verifyEmail($this->mailer(false), rows_updated: [1, 1])->init($user)->sendUnlessRecentlySent());
     $this->assertSame($earlier, $user->getVerificationRequestedAt());
+    $this->assertCount(2, $this->updates);
+    $this->assertStringContainsString('= :claimed', $this->updates[1]);
+  }
+
+  public function testAnExceptionWhileSendingHandsTheSlotBack(): void
+  {
+    $user = $this->user();
+    $mailer = $this->createStub(MailerAdapter::class);
+    $mailer->method('send')->willThrowException(new \RuntimeException('template broke'));
+
+    try {
+      $this->verifyEmail($mailer, rows_updated: [1, 1])->init($user)->sendUnlessRecentlySent();
+      $this->fail('the exception must propagate');
+    } catch (\RuntimeException) {
+    }
+
+    $this->assertNull($user->getVerificationRequestedAt());
     $this->assertCount(2, $this->updates);
     $this->assertStringContainsString('= :claimed', $this->updates[1]);
   }

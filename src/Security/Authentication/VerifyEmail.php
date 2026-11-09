@@ -85,21 +85,27 @@ class VerifyEmail
   /**
    * User-initiated resend: at most one mail per RESEND_INTERVAL, also under parallel requests. The slot is claimed
    * with one conditional UPDATE before the (slow) send and handed back only if it is still ours when the send fails.
+   *
+   * @return bool|null null when a mail already went out within RESEND_INTERVAL, otherwise whether this one did
    */
-  public function sendUnlessRecentlySent(): bool
+  public function sendUnlessRecentlySent(): ?bool
   {
     $now = TimeUtils::getDateTime();
     $previous = $this->user->getVerificationRequestedAt();
     $claimed = $this->updateRequestedAt($now, 'u.verification_requested_at IS NULL OR u.verification_requested_at <= :cutoff', ['cutoff' => new \DateTime('-'.self::RESEND_INTERVAL)]);
     if (!$claimed) {
-      return false;
+      return null;
     }
 
     $this->user->setVerificationRequestedAt($now);
-    $sent = $this->deliver();
-    if (!$sent) {
-      $this->updateRequestedAt($previous, 'u.verification_requested_at = :claimed', ['claimed' => $now]);
-      $this->user->setVerificationRequestedAt($previous);
+    $sent = false;
+    try {
+      $sent = $this->deliver();
+    } finally {
+      if (!$sent) {
+        $this->updateRequestedAt($previous, 'u.verification_requested_at = :claimed', ['claimed' => $now]);
+        $this->user->setVerificationRequestedAt($previous);
+      }
     }
 
     return $sent;
