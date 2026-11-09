@@ -575,6 +575,16 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $yields('true'));
   }
 
+  public function testACustomBlockNamedLikeANumberConverts(): void
+  {
+    $xml = self::convertBlocks([
+      'def' => ['opcode' => 'procedures_definition', 'next' => null, 'topLevel' => true, 'inputs' => ['custom_block' => [1, 'proto']], 'fields' => []],
+      'proto' => ['opcode' => 'procedures_prototype', 'shadow' => true, 'inputs' => [], 'fields' => [], 'mutation' => ['proccode' => '123', 'argumentids' => '[]', 'argumentnames' => '[]', 'warp' => 'false']],
+    ]);
+
+    $this->assertSame('123', (new \DOMXPath($xml))->evaluate('string(//userDefinedBrickLabel/label)'));
+  }
+
   /** Evaluates a formula like Catroid's FormulaElement does, for the few element types the costume wrap uses. */
   private static function evaluate(\DOMElement $element, float $x): float
   {

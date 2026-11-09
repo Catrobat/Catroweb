@@ -98,7 +98,8 @@ final class BlockConverter
     foreach ($this->procedures as $proccode => $procedure) {
       $definitions[] = $this->brick('UserDefinedBrick', [], [], [
         $this->text('isCallingBrick', 'false'),
-        $this->dataList($proccode),
+        // PHP turns numeric-string keys into ints: a custom block named "123" comes back as 123.
+        $this->dataList((string) $proccode),
         $this->text('userDefinedBrickID', $procedure['id']),
       ], formula_list: true);
     }
