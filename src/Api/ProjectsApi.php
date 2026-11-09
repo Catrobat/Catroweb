@@ -176,9 +176,9 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     if (in_array($category, ['random', 'example', 'scratch', 'trending', 'popular'], true)) {
       $offset = $this->decodeCursorToOffset($cursor);
       $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
-      $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%d', $category, $locale, $flavor, $max_version, $limit, $offset);
+      $cache_id = $this->sharedListCacheId(sprintf('projectsGet_%s_%s_%s_%s_%d_%d_%s', $category, $locale, $flavor, $max_version, $limit, $offset, md5($attributes)));
 
-      $cached = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+      $cached = null === $cache_id ? null : $this->facade->getResponseManager()->getCachedResponse($cache_id);
       if (null !== $cached) {
         $responseCode = $cached['response_code'];
         $responseHeaders = $cached['response_headers'];
@@ -193,7 +193,9 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-      $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+      if (null !== $cache_id) {
+        $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+      }
 
       return $response;
     }
@@ -232,10 +234,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     // Cache most_viewed/most_downloaded but not recent (changes too frequently)
+    $cache_id = null;
     if ('recent' !== $category) {
       $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
-      $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%s', $category, $locale, $flavor, $max_version, $limit, $cursor ?? '');
-
+      $cache_id = $this->sharedListCacheId(sprintf('projectsGet_%s_%s_%s_%s_%d_%s_%s', $category, $locale, $flavor, $max_version, $limit, $cursor ?? '', md5($attributes)));
+    }
+    if (null !== $cache_id) {
       $cached = $this->facade->getResponseManager()->getCachedResponse($cache_id);
       if (null !== $cached) {
         $responseCode = $cached['response_code'];
@@ -260,7 +264,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    if ('recent' !== $category && isset($cache_id)) {
+    if (null !== $cache_id) {
       $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
     }
 
@@ -488,14 +492,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $rm = $this->facade->getResponseManager();
     $locale = $rm->sanitizeLocale($accept_language);
 
-    $cache_id = sprintf(
+    $cache_id = $this->sharedListCacheId(sprintf(
       'projectsCategoriesGet_%s_%s_%s',
       $flavor,
       $locale,
       $max_version
-    );
+    ));
 
-    $cached = $rm->getCachedResponse($cache_id);
+    $cached = null === $cache_id ? null : $rm->getCachedResponse($cache_id);
     if (null !== $cached) {
       $responseCode = $cached['response_code'];
       $responseHeaders = $cached['response_headers'];
@@ -530,7 +534,9 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $responseCode = 200;
 
-    $rm->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+    if (null !== $cache_id) {
+      $rm->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+    }
 
     return $response;
   }
@@ -984,5 +990,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       ...$remix_graph,
       'nodes' => $nodes,
     ];
+  }
+
+  /**
+   * Cached project lists are shared by every viewer, but a minor's lists drop not-for-kids projects
+   * (except their own), so those lists are never read from or written to the shared cache.
+   */
+  private function sharedListCacheId(string $cache_id): ?string
+  {
+    return true === $this->facade->getAuthenticationManager()->getAuthenticatedUser()?->isMinor() ? null : $cache_id;
   }
 }
