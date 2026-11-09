@@ -475,7 +475,7 @@ final class ProjectsApiTest extends KernelTestCase
     $this->useViewer(isMinor: false);
     $keys = [];
     $response_manager = $this->createMock(ProjectsResponseManager::class);
-    $response_manager->expects($this->exactly(2))->method('getCachedResponse')
+    $response_manager->expects($this->exactly(4))->method('getCachedResponse')
       ->willReturnCallback(static function (string $key) use (&$keys): null {
         $keys[] = $key;
 
@@ -490,8 +490,34 @@ final class ProjectsApiTest extends KernelTestCase
     $response_headers = [];
     $this->object->projectsGet('en', 'popular', '', 20, null, 'id', 'pocketcode', $response_code, $response_headers);
     $this->object->projectsGet('en', 'popular', '', 20, null, 'ALL', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsGet('en', 'most_viewed', '', 20, null, 'id', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsGet('en', 'most_viewed', '', 20, null, 'ALL', 'pocketcode', $response_code, $response_headers);
 
-    $this->assertCount(2, array_unique($keys));
+    $this->assertCount(4, array_unique($keys));
+  }
+
+  /**
+   * @throws Exception
+   */
+  #[Group('unit')]
+  public function testGuestsUseTheSharedListCache(): void
+  {
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+    $response_manager = $this->createMock(ProjectsResponseManager::class);
+    $response_manager->expects($this->exactly(2))->method('getCachedResponse')->willReturn(null);
+    $response_manager->expects($this->exactly(2))->method('cacheResponse');
+    $response_manager->method('createProjectsListResponse')->willReturn(new ProjectsListResponse());
+    $this->facade->method('getResponseManager')->willReturn($response_manager);
+    $this->facade->method('getLoader')->willReturn($this->createStub(ProjectsApiLoader::class));
+
+    $response_code = 0;
+    $response_headers = [];
+    $this->object->projectsGet('en', 'popular', '', 20, null, 'id', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsCategoriesGet('', 'pocketcode', 'en', $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_OK, $response_code);
   }
 
   private function useViewer(bool $isMinor): void

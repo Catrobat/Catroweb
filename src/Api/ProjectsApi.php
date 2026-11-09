@@ -493,7 +493,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $locale = $rm->sanitizeLocale($accept_language);
 
     $cache_id = $this->sharedListCacheId(sprintf(
-      'projectsCategoriesGet_%s_%s_%s',
+      // v2: entries from before minors bypassed this cache may hold a minor's filtered lists.
+      'projectsCategoriesGet_v2_%s_%s_%s',
       $flavor,
       $locale,
       $max_version
