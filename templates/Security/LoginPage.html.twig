@@ -97,7 +97,11 @@
       </form>
     </div>
 
-    {{ include('Security/OauthRegistration.html.twig') }}
+    {# Google refuses OAuth inside embedded WebViews (disallowed_useragent), and older apps open it in the system
+       browser, where the session ends up. In the app, sign in with username and password instead. #}
+    {% if not isWebview() %}
+      {{ include('Security/OauthRegistration.html.twig') }}
+    {% endif %}
 
   </div>
 
