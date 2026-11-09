@@ -65,9 +65,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'php',
           ],
         ],
+        // Rotated: as a plain stream it grew without bound (188 MB in prod by 2026-11).
         'deprecation_stream' => [
-          'type' => 'stream',
+          'type' => 'rotating_file',
           'path' => '%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.deprecations.log',
+          'max_files' => 3,
         ],
       ],
     ]
