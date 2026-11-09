@@ -8,6 +8,7 @@ use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 
 class UserApiLoader extends AbstractApiLoader
 {
@@ -52,22 +53,10 @@ class UserApiLoader extends AbstractApiLoader
     return $this->user_manager->search($query, $limit, $offset);
   }
 
-  public function getAllUsers(?string $query, int $limit, int $offset): array
+  /** @return User[] search results; the list without a query is getAllUsersKeyset() */
+  public function getAllUsers(string $query, int $limit, int $offset): array
   {
-    if (null === $query || '' === trim($query)) {
-      return $this->user_manager->findBy([], ['createdAt' => 'DESC'], $limit, $offset);
-    }
-
     return $this->user_manager->search($query, $limit, $offset);
-  }
-
-  public function countAllUsers(?string $query): int
-  {
-    if (null === $query || '' === trim($query)) {
-      return count($this->user_manager->findAll());
-    }
-
-    return $this->user_manager->searchCount($query);
   }
 
   /**
@@ -81,14 +70,10 @@ class UserApiLoader extends AbstractApiLoader
   {
     $score = $recent ? 'u.ranking_score_recent' : 'u.ranking_score';
 
-    return $this->entity_manager->createQueryBuilder()
+    return $this->onlyPubliclyVisible($this->entity_manager->createQueryBuilder())
       ->select('u')
       ->from(User::class, 'u')
-      ->where($score.' > 0')
-      ->andWhere('u.enabled = true')
-      ->andWhere('u.profile_hidden = false')
-      ->andWhere('u.consent_status NOT IN (:blocked_consent)')
-      ->setParameter('blocked_consent', ['pending', 'revoked'])
+      ->andWhere($score.' > 0')
       ->orderBy($score, 'DESC')
       // id DESC: InnoDB secondary indexes carry the primary key, so (score DESC, id DESC) is a backward scan
       // of the score index that stops after $limit rows instead of a filesort over every ranked user.
@@ -107,15 +92,9 @@ class UserApiLoader extends AbstractApiLoader
    */
   public function getAllUsersKeyset(int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
-    // Same visibility as the leaderboard: suspended, disabled (incl. Scratch placeholders) and
-    // consent-pending accounts 404 on their own profile, so they must not show up here either.
-    $qb = $this->entity_manager->createQueryBuilder()
+    $qb = $this->onlyPubliclyVisible($this->entity_manager->createQueryBuilder())
       ->select('u')
       ->from(User::class, 'u')
-      ->where('u.enabled = true')
-      ->andWhere('u.profile_hidden = false')
-      ->andWhere('u.consent_status NOT IN (:blocked_consent)')
-      ->setParameter('blocked_consent', ['pending', 'revoked'])
       ->orderBy('u.createdAt', 'DESC')
       ->addOrderBy('u.id', 'DESC')
       ->setMaxResults($limit)
@@ -131,5 +110,19 @@ class UserApiLoader extends AbstractApiLoader
     }
 
     return $qb->getQuery()->getResult();
+  }
+
+  /**
+   * Suspended (profile hidden), disabled (incl. Scratch placeholder accounts) and consent-pending or
+   * revoked accounts 404 on their own profile, so user lists leave them out too.
+   */
+  private function onlyPubliclyVisible(QueryBuilder $qb): QueryBuilder
+  {
+    return $qb
+      ->andWhere('u.enabled = true')
+      ->andWhere('u.profile_hidden = false')
+      ->andWhere('u.consent_status NOT IN (:blocked_consent)')
+      ->setParameter('blocked_consent', ['pending', 'revoked'])
+    ;
   }
 }
