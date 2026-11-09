@@ -21,6 +21,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\RouterInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 /**
@@ -141,9 +142,26 @@ class CatrowebBrowserContext extends BrowserContext
 
     $verify_email = $this->getSymfonyService(VerifyEmail::class);
     Assert::assertInstanceOf(VerifyEmail::class, $verify_email);
-    $signed_url = (string) $verify_email->init($user)->getContext()['signedUrl'];
+    $router = $this->getSymfonyService(RouterInterface::class);
+    Assert::assertInstanceOf(RouterInterface::class, $router);
 
-    $this->visit((string) parse_url($signed_url, PHP_URL_PATH).'?'.parse_url($signed_url, PHP_URL_QUERY));
+    // The signature covers the whole absolute URL, so sign it for the address the browser will open
+    // (host and the test front controller), and open it unchanged.
+    $base_url = $this->getMinkParameter('base_url');
+    Assert::assertIsString($base_url);
+    $base = Request::create($base_url);
+    $context = $router->getContext();
+    $original = clone $context;
+    $context->setScheme($base->getScheme())->setHost($base->getHost())->setHttpPort((int) ($base->getPort() ?? 80))
+      ->setBaseUrl(rtrim($base->getPathInfo(), '/'))
+    ;
+    try {
+      $signed_url = (string) $verify_email->init($user)->getContext()['signedUrl'];
+    } finally {
+      $router->setContext($original);
+    }
+
+    $this->getSession()->visit($signed_url);
   }
 
   /**
