@@ -28,6 +28,17 @@ Feature: List studio comments
     And the client response should contain "Nice studio"
     And the client response should contain "has_more"
 
+  Scenario: Hidden and deleted comments are not listed
+    Given there are studio comments:
+      | user   | studio_name | comment        | auto_hidden | is_deleted |
+      | Member | Studio1     | Hidden spam    | true        | false      |
+      | Member | Studio1     | Deleted remark | false       | true       |
+    When I GET "/api/studios/1/comments"
+    Then the response status code should be "200"
+    And the client response should contain "Hello world"
+    And the client response should not contain "Hidden spam"
+    And the client response should not contain "Deleted remark"
+
   Scenario: List comments of non-existent studio returns 404
     When I GET "/api/studios/nonexistent/comments"
     Then the response status code should be "404"

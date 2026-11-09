@@ -43,7 +43,7 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function countStudioComments(?Studio $studio): int
   {
-    return $this->count(['studio' => $studio, 'parent_id' => null]);
+    return $this->count(['studio' => $studio, 'parent_id' => null, 'auto_hidden' => false, 'is_deleted' => false]);
   }
 
   /**
@@ -65,6 +65,8 @@ class UserCommentRepository extends ServiceEntityRepository
       ->from(UserComment::class, 'c')
       ->where('c.studio IN (:ids)')
       ->andWhere('c.parent_id IS NULL')
+      ->andWhere('c.auto_hidden = false')
+      ->andWhere('c.is_deleted = false')
       ->setParameter('ids', $studioIds)
       ->groupBy('c.studio')
       ->getQuery()

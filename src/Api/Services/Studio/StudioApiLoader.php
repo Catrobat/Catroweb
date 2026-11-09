@@ -420,6 +420,8 @@ class StudioApiLoader extends AbstractApiLoader
       ->from(UserComment::class, 'c')
       ->leftJoin('c.user', 'cu')
       ->where('c.studio = :studio')
+      ->andWhere('c.auto_hidden = false')
+      ->andWhere('c.is_deleted = false')
       ->setParameter('studio', $studio)
       ->orderBy('c.uploadDate', 'DESC')
       ->addOrderBy('c.id', 'DESC')
