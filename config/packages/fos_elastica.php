@@ -116,6 +116,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'username' => null,
             'profile_hidden' => null,
             'verified' => null,
+            'enabled' => null,
+            'consent_status' => ['type' => 'keyword'],
           ],
           'persistence' => [
             'driver' => 'orm',

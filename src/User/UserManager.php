@@ -20,6 +20,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Query\Term;
+use Elastica\Query\Terms;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -244,6 +245,10 @@ class UserManager
     $bool_query->addMust($query_string);
     $bool_query->addFilter(new Term(['verified' => true]));
     $bool_query->addFilter(new Term(['profile_hidden' => false]));
+    // Same visibility as the user list and leaderboard: children without parental consent aren't discoverable.
+    // Negative filters on purpose: documents indexed before these fields existed still match until the reindex.
+    $bool_query->addMustNot(new Term(['enabled' => false]));
+    $bool_query->addMustNot(new Terms('consent_status', ['pending', 'revoked']));
 
     return $bool_query;
   }
