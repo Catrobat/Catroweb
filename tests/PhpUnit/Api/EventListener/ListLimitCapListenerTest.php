@@ -44,12 +44,22 @@ final class ListLimitCapListenerTest extends TestCase
     yield 'non-API routes are untouched' => ['/app/search?limit=200000', '200000'];
   }
 
-  public function testAnArrayLimitOnAWebPageDoesNotThrow(): void
+  #[DataProvider('provideArrayLimitPaths')]
+  public function testAnArrayLimitIsLeftAloneWithoutThrowing(string $uri): void
   {
-    $request = Request::create('/app/search?limit[]=1');
+    $request = Request::create($uri);
 
     (new ListLimitCapListener())(new RequestEvent($this->createStub(HttpKernelInterface::class), $request, HttpKernelInterface::MAIN_REQUEST));
 
     $this->assertSame(['1'], $request->query->all()['limit']);
+  }
+
+  /**
+   * @return iterable<string, array{string}>
+   */
+  public static function provideArrayLimitPaths(): iterable
+  {
+    yield 'API route' => ['/api/projects?limit[]=1'];
+    yield 'web page' => ['/app/search?limit[]=1'];
   }
 }
