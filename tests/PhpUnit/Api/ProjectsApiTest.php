@@ -441,6 +441,95 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
+   * A minor's lists drop not-for-kids projects, so they must neither come from nor go into the
+   * cache that every other viewer shares.
+   *
+   * @throws Exception
+   */
+  #[Group('unit')]
+  public function testMinorsBypassTheSharedListCache(): void
+  {
+    $this->useViewer(isMinor: true);
+    $response_manager = $this->createMock(ProjectsResponseManager::class);
+    $response_manager->expects($this->never())->method('getCachedResponse');
+    $response_manager->expects($this->never())->method('cacheResponse');
+    $response_manager->method('createProjectsListResponse')->willReturn(new ProjectsListResponse());
+    $this->facade->method('getResponseManager')->willReturn($response_manager);
+    $this->facade->method('getLoader')->willReturn($this->createStub(ProjectsApiLoader::class));
+
+    $response_code = 0;
+    $response_headers = [];
+    $this->object->projectsGet('en', 'popular', '', 20, null, 'id,name', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsGet('en', 'most_viewed', '', 20, null, 'id,name', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsCategoriesGet('', 'pocketcode', 'en', $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_OK, $response_code);
+  }
+
+  /**
+   * @throws Exception
+   */
+  #[Group('unit')]
+  public function testSharedListCacheKeyIncludesTheRequestedAttributes(): void
+  {
+    $this->useViewer(isMinor: false);
+    $keys = [];
+    $response_manager = $this->createMock(ProjectsResponseManager::class);
+    $response_manager->expects($this->exactly(4))->method('getCachedResponse')
+      ->willReturnCallback(static function (string $key) use (&$keys): null {
+        $keys[] = $key;
+
+        return null;
+      })
+    ;
+    $response_manager->method('createProjectsListResponse')->willReturn(new ProjectsListResponse());
+    $this->facade->method('getResponseManager')->willReturn($response_manager);
+    $this->facade->method('getLoader')->willReturn($this->createStub(ProjectsApiLoader::class));
+
+    $response_code = 0;
+    $response_headers = [];
+    $this->object->projectsGet('en', 'popular', '', 20, null, 'id', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsGet('en', 'popular', '', 20, null, 'ALL', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsGet('en', 'most_viewed', '', 20, null, 'id', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsGet('en', 'most_viewed', '', 20, null, 'ALL', 'pocketcode', $response_code, $response_headers);
+
+    $this->assertCount(4, array_unique($keys));
+  }
+
+  /**
+   * @throws Exception
+   */
+  #[Group('unit')]
+  public function testGuestsUseTheSharedListCache(): void
+  {
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+    $response_manager = $this->createMock(ProjectsResponseManager::class);
+    $response_manager->expects($this->exactly(2))->method('getCachedResponse')->willReturn(null);
+    $response_manager->expects($this->exactly(2))->method('cacheResponse');
+    $response_manager->method('createProjectsListResponse')->willReturn(new ProjectsListResponse());
+    $this->facade->method('getResponseManager')->willReturn($response_manager);
+    $this->facade->method('getLoader')->willReturn($this->createStub(ProjectsApiLoader::class));
+
+    $response_code = 0;
+    $response_headers = [];
+    $this->object->projectsGet('en', 'popular', '', 20, null, 'id', 'pocketcode', $response_code, $response_headers);
+    $this->object->projectsCategoriesGet('', 'pocketcode', 'en', $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_OK, $response_code);
+  }
+
+  private function useViewer(bool $isMinor): void
+  {
+    $user = $this->createStub(User::class);
+    $user->method('isMinor')->willReturn($isMinor);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+  }
+
+  /**
    * @group unit
    *
    * @throws \Exception
