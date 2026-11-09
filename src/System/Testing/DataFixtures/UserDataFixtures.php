@@ -52,6 +52,7 @@ class UserDataFixtures
     $user->setDateOfBirth(new \DateTime($config['date_of_birth'] ?? '2000-01-15'));
     $user->setMinor(isset($config['is_minor']) && 'true' === $config['is_minor']);
     $user->setConsentStatus($config['consent_status'] ?? 'not_required');
+    $user->setProfileHidden('true' === ($config['profile_hidden'] ?? 'false'));
     if (isset($config['parent_email'])) {
       $user->setParentEmail($config['parent_email']);
     }
