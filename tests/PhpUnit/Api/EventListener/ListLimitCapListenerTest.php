@@ -34,11 +34,22 @@ final class ListLimitCapListenerTest extends TestCase
   public static function provideRequests(): iterable
   {
     yield 'huge API limit is capped' => ['/api/projects?limit=200000', '1000'];
-    yield 'exponent notation is capped' => ['/api/projects?limit=1e9', '1000'];
+    yield 'a limit beyond PHP_INT_MAX is capped' => ['/api/projects?limit=99999999999999999999999', '1000'];
+    yield 'exponent notation is left to the API validation' => ['/api/projects?limit=1e9', '1e9'];
+    yield 'decimals are left to the API validation' => ['/api/projects?limit=1001.5', '1001.5'];
     yield 'the app asking for 999 projects keeps 999' => ['/api/projects/user?limit=999', '999'];
     yield 'the cap itself is kept' => ['/api/projects?limit=1000', '1000'];
     yield 'non-numeric limits are left to the API validation' => ['/api/projects?limit=abc', 'abc'];
     yield 'no limit stays absent' => ['/api/projects', null];
     yield 'non-API routes are untouched' => ['/app/search?limit=200000', '200000'];
+  }
+
+  public function testAnArrayLimitOnAWebPageDoesNotThrow(): void
+  {
+    $request = Request::create('/app/search?limit[]=1');
+
+    (new ListLimitCapListener())(new RequestEvent($this->createStub(HttpKernelInterface::class), $request, HttpKernelInterface::MAIN_REQUEST));
+
+    $this->assertSame(['1'], $request->query->all()['limit']);
   }
 }

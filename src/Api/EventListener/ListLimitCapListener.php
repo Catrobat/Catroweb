@@ -22,12 +22,15 @@ final class ListLimitCapListener
   public function __invoke(RequestEvent $event): void
   {
     $request = $event->getRequest();
-    $limit = $request->query->get('limit');
-    if (null === $limit || !str_starts_with($request->getPathInfo(), '/api/')) {
+    if (!str_starts_with($request->getPathInfo(), '/api/')) {
       return;
     }
 
-    if (is_numeric($limit) && (int) $limit > self::MAX_LIMIT) {
+    // all() instead of get(): get() throws on ?limit[]=…, which the API validation should answer.
+    $limit = $request->query->all()['limit'] ?? null;
+    // Only plain integers; anything else is left to the API validation (400). The length check comes first
+    // because a value past PHP_INT_MAX would not survive the (int) cast.
+    if (is_string($limit) && ctype_digit($limit) && (strlen(ltrim($limit, '0')) > 4 || (int) $limit > self::MAX_LIMIT)) {
       $request->query->set('limit', (string) self::MAX_LIMIT);
     }
   }
