@@ -20,15 +20,6 @@ use Symfony\Component\Security\Http\EventListener\LoginThrottlingListener;
 #[CoversNothing]
 final class LoginThrottlingTest extends KernelTestCase
 {
-  /**
-   * @return iterable<string, array{string}>
-   */
-  public static function provideLoginFirewalls(): iterable
-  {
-    yield 'app API login' => ['api_authentication_login'];
-    yield 'web form login' => ['main'];
-  }
-
   #[DataProvider('provideLoginFirewalls')]
   public function testThePasswordLoginIsThrottled(string $firewall): void
   {
@@ -41,5 +32,14 @@ final class LoginThrottlingTest extends KernelTestCase
     );
 
     $this->assertContains(LoginThrottlingListener::class, $listeners);
+  }
+
+  /**
+   * @return iterable<string, array{string}>
+   */
+  public static function provideLoginFirewalls(): iterable
+  {
+    yield 'app API login' => ['api_authentication_login'];
+    yield 'web form login' => ['main'];
   }
 }
