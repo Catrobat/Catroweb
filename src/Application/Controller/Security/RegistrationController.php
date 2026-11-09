@@ -41,20 +41,24 @@ class RegistrationController extends AbstractController
   #[Route(path: '/verify', name: 'registration_confirmation_route', methods: ['GET'])]
   public function verifyUserEmail(Request $request): Response
   {
+    // Links carry the user id so they also work where the user isn't logged in; older links don't, and then only the
+    // logged-in user can be verified. Either way the signature check below binds the link to that user's id and email.
+    $id = $request->query->getString('id');
     /** @var User|null $user */
-    $user = $this->getUser();
+    $user = '' !== $id ? $this->entity_manager->find(User::class, $id) : $this->getUser();
     if (null === $user) {
+      $this->addFlash('snackbar', 'Please log in and open the verification link again.');
+
       return $this->redirectToRoute('index');
     }
 
-    // Do not get the User's Id or Email Address from the Request object
     try {
-      $this->verify_email_helper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+      $this->verify_email_helper->validateEmailConfirmation($request->getUri(), (string) $user->getId(), (string) $user->getEmail());
     } catch (VerifyEmailExceptionInterface $verifyEmailException) {
-      $this->logger->critical(sprintf('Email verification failed for user %s: %s', (string) $user->getId(), $verifyEmailException->getReason()));
-      $this->addFlash('verify_email_error', $verifyEmailException->getReason());
+      $this->logger->warning(sprintf('Email verification failed for user %s: %s', (string) $user->getId(), $verifyEmailException->getReason()));
+      $this->addFlash('snackbar', $verifyEmailException->getReason());
 
-      return $this->redirectToRoute('register');
+      return $this->redirectToRoute('index');
     }
 
     // Mark your user as verified. e.g. switch a User::verified property to true

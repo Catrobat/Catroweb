@@ -141,12 +141,6 @@
       <code><![CDATA[$this->facade->getAuthenticationManager()->getAuthenticatedUser()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Application/Controller/Security/RegistrationController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$user->getEmail()]]></code>
-      <code><![CDATA[$user->getId()]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Application/Controller/User/ProfileController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$user->getId()]]></code>

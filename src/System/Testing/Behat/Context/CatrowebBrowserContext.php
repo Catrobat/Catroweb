@@ -10,6 +10,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
+use App\Security\Authentication\VerifyEmail;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
@@ -126,6 +127,23 @@ class CatrowebBrowserContext extends BrowserContext
     $token = $helper->generateResetToken($user)->getToken();
 
     $this->visit('/app/reset-password/reset/'.$token);
+  }
+
+  /**
+   * Opens the verification link a user would receive by e-mail, without going through the mailer.
+   *
+   * @When /^I open the email verification link for "([^"]*)"$/
+   */
+  public function iOpenTheEmailVerificationLinkFor(string $username): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertNotNull($user, 'Unknown user: '.$username);
+
+    $verify_email = $this->getSymfonyService(VerifyEmail::class);
+    Assert::assertInstanceOf(VerifyEmail::class, $verify_email);
+    $signed_url = (string) $verify_email->init($user)->getContext()['signedUrl'];
+
+    $this->visit((string) parse_url($signed_url, PHP_URL_PATH).'?'.parse_url($signed_url, PHP_URL_QUERY));
   }
 
   /**

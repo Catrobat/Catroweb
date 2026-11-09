@@ -41,7 +41,9 @@ class VerifyEmail
       'registration_confirmation_route',
       $user->getId(),
       $user->getEmail(),
-      ['theme' => $theme]
+      // The id lets the link work in a browser where the user isn't logged in (e.g. the mail app after registering
+      // in the app). It is safe: the signature covers this user's id and email, so a different id fails validation.
+      ['theme' => $theme, 'id' => $user->getId()]
     );
 
     return $this;
