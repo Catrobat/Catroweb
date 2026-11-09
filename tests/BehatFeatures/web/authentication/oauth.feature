@@ -40,6 +40,17 @@ Feature:
     Given I am on "app/register"
     Then the element "#btn-login-google" should be visible
 
+  Scenario: The app's WebView offers no Google login, which Google blocks there
+    Given there are feature flags:
+      | name          | value |
+      | force_webview | 1     |
+    And I am on "app/login"
+    And I wait for the page to be loaded
+    Then the element "#btn-login-google" should not exist
+    Given I am on "app/register"
+    And I wait for the page to be loaded
+    Then the element "#btn-login-google" should not exist
+
   Scenario: New user registers via Google OAuth, completes date of birth, and sees the random username info popup
     Given I am on "/app/login"
     And I wait for the page to be loaded
