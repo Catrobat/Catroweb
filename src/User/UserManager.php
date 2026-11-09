@@ -246,7 +246,8 @@ class UserManager
     $bool_query->addFilter(new Term(['verified' => true]));
     $bool_query->addFilter(new Term(['profile_hidden' => false]));
     // Same visibility as the user list and leaderboard: children without parental consent aren't discoverable.
-    $bool_query->addFilter(new Term(['enabled' => true]));
+    // Negative filters on purpose: documents indexed before these fields existed still match until the reindex.
+    $bool_query->addMustNot(new Term(['enabled' => false]));
     $bool_query->addMustNot(new Terms('consent_status', ['pending', 'revoked']));
 
     return $bool_query;
