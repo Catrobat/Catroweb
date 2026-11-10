@@ -68,6 +68,8 @@ class ApiContext implements Context
 
   private ?string $request_content = null;
 
+  private string $saved_upload_id = '';
+
   private ?KernelBrowser $kernel_browser = null;
 
   private ?string $saved_cursor = null;
@@ -374,6 +376,64 @@ class ApiContext implements Context
   public function iUploadAValidCatrobatProject(): void
   {
     $this->uploadProject($this->FIXTURES_DIR.'test.catrobat');
+  }
+
+  /**
+   * @Given I save the upload id from the response
+   */
+  public function iSaveTheUploadIdFromTheResponse(): void
+  {
+    $this->saved_upload_id = (string) json_decode($this->getResponseContent(), true, 512, JSON_THROW_ON_ERROR)['id'];
+  }
+
+  /**
+   * @When I complete the saved upload
+   */
+  public function iCompleteTheSavedUpload(): void
+  {
+    $this->request_content = null;
+    $this->iRequestWith('POST', '/api/projects/uploads/'.$this->saved_upload_id.'/complete');
+  }
+
+  /**
+   * The resumable upload: start it, send every chunk, then complete it. The last response is the completion's.
+   *
+   * @When I upload a valid Catrobat project in chunks
+   */
+  public function iUploadAValidCatrobatProjectInChunks(): void
+  {
+    $path = $this->FIXTURES_DIR.'test.catrobat';
+    $user = null !== $this->username
+      ? $this->getUserManager()->findUserByUsername($this->username)
+      : $this->getUserDataFixtures()->getDefaultUser();
+    Assert::assertInstanceOf(User::class, $user);
+    $this->iUseAValidJwtBearerTokenFor((string) $user->getUsername());
+    $auth = $this->request_headers;
+
+    $this->request_headers = $auth + ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
+    $this->request_content = json_encode(['file_size' => filesize($path), 'checksum' => md5_file($path)], JSON_THROW_ON_ERROR);
+    $this->iRequestWith('POST', '/api/projects/uploads');
+    Assert::assertSame(201, $this->getKernelBrowser()->getResponse()->getStatusCode(), $this->getResponseContent());
+    $upload = json_decode($this->getResponseContent(), true, 512, JSON_THROW_ON_ERROR);
+    $this->saved_upload_id = (string) $upload['id'];
+
+    $content = (string) file_get_contents($path);
+    $this->request_content = null;
+    for ($index = 0; $index < $upload['total_chunks']; ++$index) {
+      $bytes = substr($content, $index * $upload['chunk_size'], $upload['chunk_size']);
+      $chunk_path = (string) tempnam(sys_get_temp_dir(), 'behat-chunk');
+      file_put_contents($chunk_path, $bytes);
+      $this->request_headers = $auth + ['CONTENT_TYPE' => 'multipart/form-data', 'HTTP_ACCEPT' => 'application/json'];
+      $this->request_files = ['chunk' => new UploadedFile($chunk_path, 'chunk', null, null, true)];
+      $this->request_parameters = ['checksum' => md5($bytes)];
+      $this->iRequestWith('POST', '/api/projects/uploads/'.$upload['id'].'/chunks/'.$index);
+      Assert::assertSame(204, $this->getKernelBrowser()->getResponse()->getStatusCode(), $this->getResponseContent());
+    }
+
+    $this->request_files = [];
+    $this->request_parameters = [];
+    $this->request_headers = $auth + ['HTTP_ACCEPT' => 'application/json'];
+    $this->iRequestWith('POST', '/api/projects/uploads/'.$upload['id'].'/complete');
   }
 
   /**

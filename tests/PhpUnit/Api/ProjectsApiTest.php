@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Api;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\ProjectsApi;
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Projects\ProjectsApiFacade;
@@ -18,11 +19,14 @@ use App\DB\Entity\User\User;
 use App\Moderation\TextSanitizer;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
+use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\ProjectManager;
 use App\Project\Remix\RemixManager;
 use App\Project\Scratch\ScratchManager;
+use App\Project\Upload\ResumableUpload;
+use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Handler\TestHandler;
@@ -37,6 +41,8 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
@@ -57,6 +63,18 @@ final class ProjectsApiTest extends KernelTestCase
   protected mixed $full_validator;
 
   protected mixed $full_response_manager;
+
+  private ?string $upload_root = null;
+
+  #[\Override]
+  protected function tearDown(): void
+  {
+    if (null !== $this->upload_root) {
+      new Filesystem()->remove($this->upload_root);
+    }
+
+    parent::tearDown();
+  }
 
   /**
    * @throws \ReflectionException
@@ -82,11 +100,76 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_burst'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_daily'),
       $this->createStub(ScratchManager::class),
+      $this->createStub(ResumableUploadStore::class),
     );
 
     ProjectsApiTest::bootKernel();
     $this->full_validator = ProjectsApiTest::getContainer()->get(ProjectsRequestValidator::class);
     $this->full_response_manager = ProjectsApiTest::getContainer()->get(ProjectsResponseManager::class);
+  }
+
+  /**
+   * @return array{ProjectsApi, ResumableUploadStore, ResumableUpload}
+   */
+  private function resumableUploadWhoseProcessingThrows(\Exception $exception, int $expected_attempts): array
+  {
+    $root = sys_get_temp_dir().'/projects-api-upload-'.bin2hex(random_bytes(4));
+    $this->upload_root = $root;
+    $store = new ResumableUploadStore($root, 1000);
+    $upload = $store->start($this->uploader(), 3, null, 'pocketcode', false, null);
+    $chunk = (string) tempnam(sys_get_temp_dir(), 'chunk');
+    file_put_contents($chunk, 'abc');
+    $store->storeChunk($upload, 0, new File($chunk), md5('abc'));
+
+    $authentication = $this->createStub(AuthenticationManager::class);
+    $authentication->method('getAuthenticatedUser')->willReturn($this->uploader());
+    $processor = $this->createMock(ProjectsApiProcessor::class);
+    $processor->expects($this->exactly($expected_attempts))->method('addProject')->willThrowException($exception);
+    $response_manager = $this->createStub(ProjectsResponseManager::class);
+    $response_manager->method('sanitizeLocale')->willReturn('en');
+    $response_manager->method('createUploadValidationErrorResponse')->willReturn(ApiErrorResponse::createModel(422, 'validation_error', 'Invalid file'));
+    $response_manager->method('createUploadErrorResponse')->willReturn(ApiErrorResponse::createModel(422, 'validation_error', 'Could not create'));
+    $facade = $this->createStub(ProjectsApiFacade::class);
+    $facade->method('getAuthenticationManager')->willReturn($authentication);
+    $facade->method('getProcessor')->willReturn($processor);
+    $facade->method('getResponseManager')->willReturn($response_manager);
+
+    $api = new ProjectsApi(
+      $facade,
+      $this->reactions_facade,
+      $this->createStub(CodeTreeBuilder::class),
+      $this->createStub(RemixManager::class),
+      $this->createStub(ScreenshotRepository::class),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_upload_daily_resumable'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_reaction_burst_resumable'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_download_burst_resumable'),
+      new \Symfony\Component\HttpFoundation\RequestStack(),
+      new \Psr\Log\NullLogger(),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_open_burst_resumable'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_burst_resumable'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_daily_resumable'),
+      $this->createStub(ScratchManager::class),
+      $store,
+    );
+
+    return [$api, $store, $upload];
+  }
+
+  private function completeUpload(ProjectsApi $api, string $id): int
+  {
+    $response_code = 0;
+    $response_headers = [];
+    $api->projectsUploadsIdCompletePost($id, $response_code, $response_headers);
+
+    return $response_code;
+  }
+
+  private function uploader(): User
+  {
+    $user = new User();
+    $user->setId('uploader');
+
+    return $user;
   }
 
   private function createNoLimitRateLimiterFactory(string $id): RateLimiterFactory
@@ -712,6 +795,32 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
+  #[Group('unit')]
+  public function testAResumableUploadRejectedForItsContentReplaysTheVerdict(): void
+  {
+    [$api, $store, $upload] = $this->resumableUploadWhoseProcessingThrows(new InvalidCatrobatFileException('errors.file.invalid', 527), 1);
+
+    $this->assertSame(422, $this->completeUpload($api, $upload->id));
+    $this->assertSame(422, $this->completeUpload($api, $upload->id), 'the retry gets the stored verdict without processing again');
+    $rejected = $store->find($upload->id, $this->uploader());
+    $this->assertNotNull($rejected);
+    $this->assertSame('validation_error', $rejected->failure_type);
+    $this->assertSame([], $store->receivedChunks($rejected), 'a verdict frees the chunks');
+  }
+
+  #[Group('unit')]
+  public function testAResumableUploadHitByAServerFaultKeepsItsChunksForTheNextAttempt(): void
+  {
+    [$api, $store, $upload] = $this->resumableUploadWhoseProcessingThrows(new \RuntimeException('database gone'), 2);
+
+    $this->assertSame(500, $this->completeUpload($api, $upload->id));
+    $kept = $store->find($upload->id, $this->uploader());
+    $this->assertNotNull($kept);
+    $this->assertFalse($kept->isFinished());
+    $this->assertSame([0], $store->receivedChunks($kept));
+    $this->assertSame(500, $this->completeUpload($api, $upload->id), 'the retry processes the file again');
+  }
+
   /**
    * Every upload outcome lands in the "upload" log channel at info level, including validation rejections,
    * which the error-triggered main log never kept.
@@ -737,6 +846,7 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_burst_log'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_daily_log'),
       $this->createStub(ScratchManager::class),
+      $this->createStub(ResumableUploadStore::class),
       new Logger('upload', [$handler]),
     );
     $validation_wrapper = $this->createStub(ValidationWrapper::class);
@@ -870,7 +980,7 @@ final class ProjectsApiTest extends KernelTestCase
     $tmp = tempnam(sys_get_temp_dir(), 'catrobat_test_');
     $this->assertIsString($tmp);
     file_put_contents($tmp, 'dummy');
-    $file = new \Symfony\Component\HttpFoundation\File\File($tmp);
+    $file = new File($tmp);
 
     $response = $this->full_response_manager->createProjectCatrobatFileResponse('abc', $file, 'path/to\project');
 

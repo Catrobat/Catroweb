@@ -835,6 +835,17 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @When I attach the project file :file to :field
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iAttachTheProjectFileTo(string $file, string $field): void
+  {
+    $path = $this->FIXTURES_DIR.$file;
+    $this->getSession()->getPage()->attachFileToField($field, realpath($path) ?: $path);
+  }
+
+  /**
    * @Then /^the avatar img tag should( [^"]*)? have the "([^"]*)" data url$/
    */
   public function theAvatarImgTagShouldHaveTheDataUrl(string $not, string $name): void
