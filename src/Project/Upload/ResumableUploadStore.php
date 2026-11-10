@@ -24,6 +24,9 @@ class ResumableUploadStore
 
   private const string META = 'upload.json';
 
+  /** Created with the upload and never again, so a lock attempt can't recreate a directory being removed. */
+  private const string LOCK = '.lock';
+
   private readonly Filesystem $filesystem;
 
   public function __construct(
@@ -42,9 +45,9 @@ class ResumableUploadStore
 
   /**
    * At the per-user limit the oldest open uploads make room: an upload abandoned by a closed tab or a crashed app
-   * must not block the next one for a day. Only uploads being completed right now are never evicted.
+   * must not block the next one for a day. Uploads in use right now (a chunk arriving, being completed) are spared.
    *
-   * @throws ResumableUploadException when the file is too large or all of the user's open uploads are being completed
+   * @throws ResumableUploadException when the file is too large or all of the user's open uploads are in use
    */
   public function start(User $user, int $file_size, ?string $checksum, string $flavor, bool $private, ?string $project_id): ResumableUpload
   {
@@ -65,13 +68,16 @@ class ResumableUploadStore
         continue;
       }
 
-      // The list was read before locking: an upload completed in between keeps its answer for the client.
-      if (false === $this->read($old->id)?->isFinished()) {
-        $this->delete($old);
-        --$excess;
+      try {
+        // The list was read before locking: an upload completed in between keeps its answer for the client, and
+        // one aborted in between has already made room.
+        if (!$this->read($old->id)?->isFinished()) {
+          $this->delete($old);
+          --$excess;
+        }
+      } finally {
+        $this->unlock($lock);
       }
-
-      $this->unlock($lock);
     }
 
     if ($excess > 0) {
@@ -91,6 +97,7 @@ class ResumableUploadStore
       new \DateTimeImmutable(self::TTL),
     );
     $this->filesystem->dumpFile($this->dir($upload->id).'/'.self::META, json_encode($upload->toArray(), JSON_THROW_ON_ERROR));
+    $this->filesystem->touch($this->dir($upload->id).'/'.self::LOCK);
 
     return $upload;
   }
@@ -157,9 +164,10 @@ class ResumableUploadStore
       }
 
       // Written under a temporary name and renamed, so a half-written chunk is never counted as received.
-      $target = $this->dir($upload->id).'/'.$index.'.part';
-      $chunk->move($this->dir($upload->id), $index.'.part.tmp');
-      $this->filesystem->rename($target.'.tmp', $target, true);
+      // The temporary name is unique, as two requests may carry the same chunk at once.
+      $temporary = $index.'.part.'.bin2hex(random_bytes(4)).'.tmp';
+      $chunk->move($this->dir($upload->id), $temporary);
+      $this->filesystem->rename($this->dir($upload->id).'/'.$temporary, $this->dir($upload->id).'/'.$index.'.part', true);
     } finally {
       $this->unlock($lock);
     }
@@ -241,6 +249,14 @@ class ResumableUploadStore
     fclose($lock);
   }
 
+  /**
+   * After a server-side failure: the chunks stay, so completing again needs no re-upload.
+   */
+  public function discardAssembled(ResumableUpload $upload): void
+  {
+    $this->filesystem->remove($this->dir($upload->id).'/project.catrobat');
+  }
+
   public function markCompleted(ResumableUpload $upload, string $project_id): void
   {
     $this->finish($upload, ['completed_project_id' => $project_id]);
@@ -289,7 +305,7 @@ class ResumableUploadStore
    */
   private function lockDir(string $id, bool $shared = false): mixed
   {
-    $handle = @fopen($this->dir($id).'/.lock', 'c');
+    $handle = @fopen($this->dir($id).'/'.self::LOCK, 'r');
     if (false === $handle) {
       return null;
     }
@@ -305,10 +321,20 @@ class ResumableUploadStore
 
   private function removeUnlessLocked(string $id): void
   {
+    if (!is_file($this->dir($id).'/'.self::LOCK)) {
+      // Left behind by a start() that died before creating the lock file; nobody can be using it.
+      $this->filesystem->remove($this->dir($id));
+
+      return;
+    }
+
     $lock = $this->lockDir($id);
     if (null !== $lock) {
-      $this->filesystem->remove($this->dir($id));
-      $this->unlock($lock);
+      try {
+        $this->filesystem->remove($this->dir($id));
+      } finally {
+        $this->unlock($lock);
+      }
     }
   }
 

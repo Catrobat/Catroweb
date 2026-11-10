@@ -176,8 +176,64 @@ final class ResumableUploadStoreTest extends TestCase
     }
 
     $this->sendChunk($store, $upload, $content, 1);
-    $this->expectExceptionMessage(ResumableUploadException::BAD_CHECKSUM);
+
+    try {
+      $store->assemble($upload);
+      $this->fail('Expected a checksum mismatch');
+    } catch (ResumableUploadException $e) {
+      $this->assertSame(ResumableUploadException::BAD_CHECKSUM, $e->getMessage());
+    }
+
+    $this->assertFileDoesNotExist($this->root.'/'.$upload->id.'/project.catrobat');
+    $this->assertSame([0, 1], $store->receivedChunks($upload));
+  }
+
+  public function testAfterAServerSideFailureTheChunksStayForTheNextAttempt(): void
+  {
+    $store = $this->store();
+    $content = random_bytes(10);
+    $upload = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $this->sendChunk($store, $upload, $content, 0);
+
     $store->assemble($upload);
+    $store->discardAssembled($upload);
+
+    $this->assertFileDoesNotExist($this->root.'/'.$upload->id.'/project.catrobat');
+    $this->assertSame($content, file_get_contents($store->assemble($upload)->getPathname()));
+  }
+
+  public function testExpiredUploadsInUseAndFreshDirectoriesWithoutMetadataSurviveThePurge(): void
+  {
+    $store = $this->store();
+    $in_use = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $abandoned = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $this->expire($in_use->id);
+    $this->expire($abandoned->id);
+    mkdir($this->root.'/'.str_repeat('a', 32));
+    mkdir($this->root.'/'.str_repeat('b', 32));
+    touch($this->root.'/'.str_repeat('b', 32), time() - 7200);
+
+    $lock = $store->lock($in_use);
+    $this->assertNotNull($lock);
+    $store->purgeExpired();
+
+    $this->assertDirectoryExists($this->root.'/'.$in_use->id);
+    $this->assertDirectoryDoesNotExist($this->root.'/'.$abandoned->id);
+    $this->assertDirectoryExists($this->root.'/'.str_repeat('a', 32), 'a start() may be writing it right now');
+    $this->assertDirectoryDoesNotExist($this->root.'/'.str_repeat('b', 32));
+  }
+
+  public function testFinishingAnUploadRestartsItsExpiry(): void
+  {
+    $store = $this->store();
+    $upload = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $this->expire($upload->id, '+1 minute');
+
+    $store->markCompleted($upload, 'project-1');
+
+    $found = $store->find($upload->id, $this->user('u1'));
+    $this->assertNotNull($found);
+    $this->assertGreaterThan(new \DateTimeImmutable('+23 hours'), $found->expires_at);
   }
 
   public function testOnlyTheOwnerFindsAnUploadAndExpiredOnesAreGone(): void
@@ -189,13 +245,18 @@ final class ResumableUploadStoreTest extends TestCase
     $this->assertNull($store->find($upload->id, $this->user('intruder')));
     $this->assertNull($store->find('../../etc', $this->user('u1')));
 
-    $meta = $this->root.'/'.$upload->id.'/upload.json';
-    $data = json_decode((string) file_get_contents($meta), true);
-    $data['expires_at'] = new \DateTimeImmutable('-1 minute')->format(\DATE_ATOM);
-    file_put_contents($meta, json_encode($data, JSON_THROW_ON_ERROR));
+    $this->expire($upload->id);
 
     $this->assertNull($store->find($upload->id, $this->user('u1')));
     $this->assertDirectoryDoesNotExist($this->root.'/'.$upload->id);
+  }
+
+  private function expire(string $id, string $at = '-1 minute'): void
+  {
+    $meta = $this->root.'/'.$id.'/upload.json';
+    $data = json_decode((string) file_get_contents($meta), true);
+    $data['expires_at'] = new \DateTimeImmutable($at)->format(\DATE_ATOM);
+    file_put_contents($meta, json_encode($data, JSON_THROW_ON_ERROR));
   }
 
   private function store(int $max = 100 * 1024 * 1024): ResumableUploadStore

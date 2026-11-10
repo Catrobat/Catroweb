@@ -1122,13 +1122,15 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         $this->request_stack->getCurrentRequest()?->headers->get('Accept-Language') ?? 'en'
       );
 
-      $response = $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, 'resumable', $responseCode, $responseHeaders);
+      $rejected = false;
+      $response = $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, 'resumable', $responseCode, $responseHeaders, $rejected);
       if ($response instanceof ProjectResponse && Response::HTTP_CREATED === $responseCode) {
         $this->resumable_uploads->markCompleted($upload, (string) $response->getId());
-      } elseif (($error = $response instanceof ErrorResponse ? $response->getError() : null) instanceof ErrorResponseError) {
+      } elseif ($rejected && ($error = $response instanceof ErrorResponse ? $response->getError() : null) instanceof ErrorResponseError) {
         $this->resumable_uploads->markFailed($upload, (string) $error->getType(), (string) $error->getMessage());
       } else {
-        $this->resumable_uploads->delete($upload);
+        // A server-side fault, not a verdict on the file: keep the chunks so completing again needs no re-upload.
+        $this->resumable_uploads->discardAssembled($upload);
       }
 
       return $response;
@@ -1139,9 +1141,9 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
   /**
    * Shared by the single-request upload and the resumable upload's completion: the same checks, malware scan and
-   * project creation either way.
+   * project creation either way. $rejected tells a verdict on the file apart from a server-side failure.
    */
-  private function createProjectFromFile(User $user, File $file, string $accept_language, string $flavor, bool $private, ?string $project_id, float $started, string $via, int &$responseCode, array &$responseHeaders): ?object
+  private function createProjectFromFile(User $user, File $file, string $accept_language, string $flavor, bool $private, ?string $project_id, float $started, string $via, int &$responseCode, array &$responseHeaders, bool &$rejected = false): ?object
   {
     // Needed (for tests) to make sure everything is up to date (followers, ..)
     $this->facade->getProcessor()->refreshUser($user);
@@ -1162,6 +1164,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         'debug' => $e->getDebugMessage(),
       ]);
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $rejected = true;
       $this->logUploadOutcome('rejected', $e->getMessage(), $file, $flavor, $started, $via);
       $error_response = $this->facade->getResponseManager()->createUploadValidationErrorResponse($e->getMessage(), $accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
