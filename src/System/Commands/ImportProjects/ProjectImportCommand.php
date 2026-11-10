@@ -99,7 +99,8 @@ class ProjectImportCommand extends Command
         $project->setViews(random_int(0, 10));
         $output->writeln('Added program <'.$project->getName().'> for user: <'.$username.'>');
         ++$imported;
-      } catch (InvalidCatrobatFileException $e) {
+      } catch (InvalidCatrobatFileException|\RuntimeException $e) {
+        // RuntimeException: e.g. the malware scan could not run; skip this file, not the whole import.
         $output->writeln('FAILED to add program!');
         $output->writeln($e->getMessage().' ('.$e->getCode().')');
       }
