@@ -2100,6 +2100,7 @@ class ProjectsController extends Controller
         201 => 'Project successfully uploaded',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         404 => 'Not found',
+        409 => 'The upload is still being completed by an earlier call; try again in a few seconds',
         422 => 'Unprocessable Entity',
         429 => 'Too Many Requests',
         default => '',
@@ -2173,6 +2174,7 @@ class ProjectsController extends Controller
         204 => 'Upload aborted and its chunks deleted',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         404 => 'Not found',
+        409 => 'The upload is being completed right now and can no longer be aborted',
         default => '',
       };
 

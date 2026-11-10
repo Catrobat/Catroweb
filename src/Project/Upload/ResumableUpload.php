@@ -17,6 +17,7 @@ final readonly class ResumableUpload
     public bool $private,
     public ?string $project_id,
     public \DateTimeImmutable $expires_at,
+    public ?string $completed_project_id = null,
   ) {
   }
 
@@ -47,7 +48,8 @@ final readonly class ResumableUpload
       'flavor' => $this->flavor,
       'private' => $this->private,
       'project_id' => $this->project_id,
-      'expires_at' => $this->expires_at->format(\DATE_ATOM),
+      'expires_at' => $this->expires_at->format('Y-m-d\TH:i:s.uP'), // µs: "oldest upload" must not tie
+      'completed_project_id' => $this->completed_project_id,
     ];
   }
 
@@ -67,6 +69,7 @@ final readonly class ResumableUpload
       (bool) $data['private'],
       isset($data['project_id']) ? (string) $data['project_id'] : null,
       new \DateTimeImmutable((string) $data['expires_at']),
+      isset($data['completed_project_id']) ? (string) $data['completed_project_id'] : null,
     );
   }
 }

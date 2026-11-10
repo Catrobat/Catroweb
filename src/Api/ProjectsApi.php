@@ -1029,7 +1029,15 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return;
     }
 
+    $lock = $this->resumable_uploads->lock($upload);
+    if (null === $lock) {
+      $responseCode = Response::HTTP_CONFLICT;
+
+      return;
+    }
+
     $this->resumable_uploads->delete($upload);
+    $this->resumable_uploads->unlock($lock);
     $responseCode = Response::HTTP_NO_CONTENT;
   }
 
@@ -1067,26 +1075,53 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    try {
-      $file = $this->resumable_uploads->assemble($upload);
-    } catch (ResumableUploadException $e) {
-      // Missing chunks can still be sent, so the upload stays until it expires.
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $this->logUploadOutcome('rejected', $e->getMessage(), null, $upload->flavor, $started, 'resumable');
+    $lock = $this->resumable_uploads->lock($upload);
+    if (null === $lock) {
+      // An earlier call is still checking the project; its client most likely gave up waiting and retried.
+      $responseCode = Response::HTTP_CONFLICT;
 
-      return ApiErrorResponse::createModel(Response::HTTP_UNPROCESSABLE_ENTITY, $e->getMessage(), $this->resumableUploadErrorText($e));
+      return null;
     }
 
-    // Joining, checking and extracting a file of several hundred MB can outlast the default limit.
-    set_time_limit(300);
-    $accept_language = $this->facade->getResponseManager()->sanitizeLocale(
-      $this->request_stack->getCurrentRequest()?->headers->get('Accept-Language') ?? 'en'
-    );
-
     try {
-      return $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, 'resumable', $responseCode, $responseHeaders);
+      // Read again under the lock: the call that held it before may have finished this upload.
+      $upload = $this->resumable_uploads->find($id, $user);
+      if (!$upload instanceof ResumableUpload) {
+        $responseCode = Response::HTTP_NOT_FOUND;
+
+        return null;
+      }
+
+      if (null !== $upload->completed_project_id) {
+        return $this->completedUploadResponse($upload->completed_project_id, $responseCode, $responseHeaders);
+      }
+
+      try {
+        $file = $this->resumable_uploads->assemble($upload);
+      } catch (ResumableUploadException $e) {
+        // Missing chunks can still be sent, so the upload stays until it expires.
+        $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+        $this->logUploadOutcome('rejected', $e->getMessage(), null, $upload->flavor, $started, 'resumable');
+
+        return ApiErrorResponse::createModel(Response::HTTP_UNPROCESSABLE_ENTITY, $e->getMessage(), $this->resumableUploadErrorText($e));
+      }
+
+      // Joining, checking and extracting a file of several hundred MB can outlast the default limit.
+      set_time_limit(300);
+      $accept_language = $this->facade->getResponseManager()->sanitizeLocale(
+        $this->request_stack->getCurrentRequest()?->headers->get('Accept-Language') ?? 'en'
+      );
+
+      $response = $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, 'resumable', $responseCode, $responseHeaders);
+      if ($response instanceof ProjectResponse && Response::HTTP_CREATED === $responseCode) {
+        $this->resumable_uploads->markCompleted($upload, (string) $response->getId());
+      } else {
+        $this->resumable_uploads->delete($upload);
+      }
+
+      return $response;
     } finally {
-      $this->resumable_uploads->delete($upload);
+      $this->resumable_uploads->unlock($lock);
     }
   }
 
@@ -1151,6 +1186,24 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
   }
 
+  /**
+   * The answer to a repeated completion call: the project the first call created, unless it is gone since.
+   */
+  private function completedUploadResponse(string $project_id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
+  {
+    $project = $this->facade->getLoader()->findProjectByID($project_id, true);
+    if (!$project instanceof Project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $responseCode = Response::HTTP_CREATED;
+    $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
+
+    return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
   private function findOwnUpload(string $id, int &$responseCode, ?User &$user = null): ?ResumableUpload
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -1185,7 +1238,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   {
     return match ($e->getMessage()) {
       ResumableUploadException::TOO_LARGE => sprintf('The project file is larger than the %d MB this server accepts.', intdiv($this->resumable_uploads->getMaxFileSize(), 1_048_576)),
-      ResumableUploadException::TOO_MANY_OPEN => 'Finish or cancel your other uploads first.',
+      ResumableUploadException::TOO_MANY_OPEN => 'Your other uploads are still being processed; try again in a minute.',
       ResumableUploadException::INCOMPLETE => 'Some chunks are missing; send them and complete the upload again.',
       ResumableUploadException::BAD_CHECKSUM => 'The uploaded file does not match its checksum.',
       default => 'The upload could not be accepted.',

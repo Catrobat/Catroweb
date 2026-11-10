@@ -115,12 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
     progressContainer.style.display = 'flex'
     setProgress(0)
 
+    let uploadId = null
     try {
       const upload = await requestJson('POST', `${apiUrl}/uploads`, {
         file_size: file.size,
         flavor: 'pocketcode',
         private: false,
       })
+      uploadId = upload.id
       for (let index = 0; index < upload.total_chunks; index++) {
         const offset = index * upload.chunk_size
         const blob = file.slice(offset, Math.min(offset + upload.chunk_size, file.size))
@@ -130,8 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
         )
       }
       setProgress(1)
-      showSuccess(await requestJson('POST', `${apiUrl}/uploads/${upload.id}/complete`))
+      showSuccess(await completeUpload(upload.id))
     } catch (error) {
+      // Best effort: an abandoned upload would otherwise hold its chunks on the server for a day.
+      if (uploadId) requestJson('DELETE', `${apiUrl}/uploads/${uploadId}`).catch(() => {})
       showUploadError(error)
     } finally {
       progressContainer.style.display = 'none'
@@ -165,6 +169,26 @@ document.addEventListener('DOMContentLoaded', () => {
     return data
   }
 
+  // Checking a big project can take longer than Cloudflare waits for an answer (~100 s). Completing is idempotent:
+  // the server answers 409 while the first call still works and the created project once it is done.
+  async function completeUpload(uploadId) {
+    const deadline = Date.now() + 10 * 60 * 1000
+    for (;;) {
+      try {
+        return await requestJson('POST', `${apiUrl}/uploads/${uploadId}/complete`)
+      } catch (error) {
+        const stillWorking =
+          !error.status || [409, 502, 503, 504, 520, 522, 524].includes(error.status)
+        if (!stillWorking || Date.now() > deadline) throw error
+        await wait(5000)
+      }
+    }
+  }
+
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
+
   async function sendChunkWithRetry(uploadId, index, blob, checksum, onProgress) {
     for (let attempt = 1; ; attempt++) {
       try {
@@ -172,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (error) {
         const retryable = error.status === 0 || error.status >= 500
         if (!retryable || attempt >= 3) throw error
-        await new Promise((resolve) => setTimeout(resolve, attempt * 2000))
+        await wait(attempt * 2000)
       }
     }
   }

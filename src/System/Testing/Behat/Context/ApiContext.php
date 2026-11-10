@@ -415,6 +415,7 @@ class ApiContext implements Context
     $this->iRequestWith('POST', '/api/projects/uploads');
     Assert::assertSame(201, $this->getKernelBrowser()->getResponse()->getStatusCode(), $this->getResponseContent());
     $upload = json_decode($this->getResponseContent(), true, 512, JSON_THROW_ON_ERROR);
+    $this->saved_upload_id = (string) $upload['id'];
 
     $content = (string) file_get_contents($path);
     $this->request_content = null;

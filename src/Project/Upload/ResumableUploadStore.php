@@ -41,7 +41,10 @@ class ResumableUploadStore
   }
 
   /**
-   * @throws ResumableUploadException when the file is too large or the user already has too many open uploads
+   * At the per-user limit the oldest open uploads make room: an upload abandoned by a closed tab or a crashed app
+   * must not block the next one for a day. Only uploads being completed right now are never evicted.
+   *
+   * @throws ResumableUploadException when the file is too large or all of the user's open uploads are being completed
    */
   public function start(User $user, int $file_size, ?string $checksum, string $flavor, bool $private, ?string $project_id): ResumableUpload
   {
@@ -50,7 +53,22 @@ class ResumableUploadStore
     }
 
     $this->purgeExpired();
-    if (count($this->openUploadsOf($user)) >= self::MAX_OPEN_UPLOADS_PER_USER) {
+    $open = $this->openUploadsOf($user);
+    $excess = count($open) - self::MAX_OPEN_UPLOADS_PER_USER + 1;
+    foreach ($open as $old) {
+      if ($excess <= 0) {
+        break;
+      }
+
+      $lock = $this->lock($old);
+      if (null !== $lock) {
+        $this->delete($old);
+        $this->unlock($lock);
+        --$excess;
+      }
+    }
+
+    if ($excess > 0) {
       throw new ResumableUploadException(ResumableUploadException::TOO_MANY_OPEN);
     }
 
@@ -171,6 +189,51 @@ class ResumableUploadStore
     return new File($path);
   }
 
+  /**
+   * Exclusive, non-blocking: completing an upload outlasts Cloudflare's timeout, so clients retry while the first
+   * request is still working. The retry must not join or delete the same files.
+   *
+   * @return resource|null null when another request holds the lock or the upload is gone
+   */
+  public function lock(ResumableUpload $upload): mixed
+  {
+    $handle = @fopen($this->dir($upload->id).'/.lock', 'c');
+    if (false === $handle) {
+      return null;
+    }
+
+    if (!flock($handle, LOCK_EX | LOCK_NB)) {
+      fclose($handle);
+
+      return null;
+    }
+
+    return $handle;
+  }
+
+  /**
+   * @param resource $lock
+   */
+  public function unlock(mixed $lock): void
+  {
+    flock($lock, LOCK_UN);
+    fclose($lock);
+  }
+
+  /**
+   * Frees the disk but keeps the upload until it expires, so a client whose completion request timed out can still
+   * learn which project it created.
+   */
+  public function markCompleted(ResumableUpload $upload, string $project_id): void
+  {
+    $dir = $this->dir($upload->id);
+    $this->filesystem->remove([...(glob($dir.'/*.part') ?: []), $dir.'/project.catrobat']);
+    $this->filesystem->dumpFile(
+      $dir.'/'.self::META,
+      json_encode(['completed_project_id' => $project_id] + $upload->toArray(), JSON_THROW_ON_ERROR),
+    );
+  }
+
   public function delete(ResumableUpload $upload): void
   {
     $this->filesystem->remove($this->dir($upload->id));
@@ -187,14 +250,19 @@ class ResumableUploadStore
   }
 
   /**
-   * @return list<ResumableUpload>
+   * @return list<ResumableUpload> oldest first
    */
   private function openUploadsOf(User $user): array
   {
-    return array_values(array_filter(
+    $open = array_values(array_filter(
       array_map($this->read(...), $this->allIds()),
-      static fn (?ResumableUpload $upload): bool => $upload instanceof ResumableUpload && $upload->user_id === (string) $user->getId(),
+      static fn (?ResumableUpload $upload): bool => $upload instanceof ResumableUpload
+        && $upload->user_id === (string) $user->getId()
+        && null === $upload->completed_project_id,
     ));
+    usort($open, static fn (ResumableUpload $a, ResumableUpload $b): int => $a->expires_at <=> $b->expires_at);
+
+    return $open;
   }
 
   /**

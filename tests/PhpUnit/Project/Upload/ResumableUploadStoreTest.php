@@ -59,16 +59,45 @@ final class ResumableUploadStoreTest extends TestCase
     $this->store(max: 1000)->start($this->user('u1'), 1001, null, 'pocketcode', false, null);
   }
 
-  public function testAUserCanOnlyHaveAFewOpenUploads(): void
+  public function testStartingOneUploadTooManyDiscardsTheOldestThatIsNotBeingCompleted(): void
   {
     $store = $this->store();
-    for ($i = 0; $i < ResumableUploadStore::MAX_OPEN_UPLOADS_PER_USER; ++$i) {
-      $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
-    }
+    $first = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $second = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $theirs = $store->start($this->user('someone-else'), 10, null, 'pocketcode', false, null);
 
-    $store->start($this->user('someone-else'), 10, null, 'pocketcode', false, null);
+    $third = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $this->assertNull($store->find($first->id, $this->user('u1')));
+    $this->assertNotNull($store->find($second->id, $this->user('u1')));
+    $this->assertNotNull($store->find($theirs->id, $this->user('someone-else')));
+
+    // Both remaining uploads are being completed right now: neither may be thrown away.
+    $locks = [$store->lock($second), $store->lock($third)]; // held until the end of the test
+    $this->assertNotContains(null, $locks);
     $this->expectExceptionMessage(ResumableUploadException::TOO_MANY_OPEN);
     $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+  }
+
+  public function testOnlyOneRequestCompletesAnUploadAndACompletedOneRemembersItsProject(): void
+  {
+    $store = $this->store();
+    $content = random_bytes(10);
+    $upload = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $this->sendChunk($store, $upload, $content, 0);
+
+    $lock = $store->lock($upload);
+    $this->assertNotNull($lock);
+    $this->assertNull($store->lock($upload), 'a second lock must fail while the first is held');
+    $store->assemble($upload);
+    $store->markCompleted($upload, 'project-1');
+    $store->unlock($lock);
+
+    $completed = $store->find($upload->id, $this->user('u1'));
+    $this->assertNotNull($completed);
+    $this->assertSame('project-1', $completed->completed_project_id);
+    $this->assertSame([], $store->receivedChunks($completed));
+    $this->assertFileDoesNotExist($this->root.'/'.$upload->id.'/project.catrobat');
+    $this->assertNotNull($store->lock($completed));
   }
 
   public function testAChunkWithTheWrongSizeIndexOrChecksumIsRefused(): void
