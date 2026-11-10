@@ -69,6 +69,7 @@ class TwigExtension extends AbstractExtension
       return $input ?? '0';
     }
 
+    /** @var numeric-string $input is_numeric() above holds for its string form too */
     $input = (string) $input;
 
     if (!\is_string($user_locale) || !preg_match('/^[a-zA-Z]/', $user_locale)) {

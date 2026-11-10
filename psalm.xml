@@ -70,5 +70,8 @@
                 <directory name="tests" />
             </errorLevel>
         </InvalidArrayOffset>
+        <!-- Psalm 7 enables the bundled psalm/plugin-symfony. This issue of it is a performance hint, not a
+             bug: Doctrine infers the type of a DateTime or entity parameter correctly without one. -->
+        <PluginIssue name="QueryBuilderSetParameter" errorLevel="info" />
     </issueHandlers>
 </psalm>

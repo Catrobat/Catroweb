@@ -98,18 +98,27 @@ class StudioManagerTest extends KernelTestCase
       $image_variant_url_builder,
       $studio_invite_repository,
     );
-    $user_manager = $container->get(UserManager::class);
-    \assert($user_manager instanceof UserManager);
-    $this->user_manager = $user_manager;
-    $user_fixture = $container->get(UserDataFixtures::class);
-    \assert($user_fixture instanceof UserDataFixtures);
-    $this->user_fixture = $user_fixture;
-    $project_fixture = $container->get(ProjectDataFixtures::class);
-    \assert($project_fixture instanceof ProjectDataFixtures);
-    $this->project_fixture = $project_fixture;
+    $this->user_manager = $this->service(UserManager::class);
+    $this->user_fixture = $this->service(UserDataFixtures::class);
+    $this->project_fixture = $this->service(ProjectDataFixtures::class);
     $this->user = $this->user_manager->findUserByUsername('catroweb') ?? $this->user_fixture->insertUser(['name' => 'catroweb', 'password' => '123456']);
     $studio_name = 'testname_'.uniqid();
     $this->studio = $this->object->createStudio($this->user, $studio_name, 'test description');
+  }
+
+  /**
+   * @template T of object
+   *
+   * @param class-string<T> $id
+   *
+   * @return T
+   */
+  private function service(string $id): object
+  {
+    $service = self::getContainer()->get($id);
+    $this->assertInstanceOf($id, $service);
+
+    return $service;
   }
 
   #[\Override]

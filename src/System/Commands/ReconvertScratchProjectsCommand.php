@@ -66,7 +66,7 @@ class ReconvertScratchProjectsCommand extends Command
     /** @var list<int> $scratch_ids */
     $scratch_ids = array_map(intval(...), array_column($query->getQuery()->getScalarResult(), 'scratch_id'));
     $io->note(sprintf('%d project(s) made by a converter older than version %d.', \count($scratch_ids), ScratchToCatrobatConverter::VERSION));
-    if ((bool) $input->getOption('dry-run')) {
+    if ($input->getOption('dry-run')) {
       $io->listing(array_map(static fn (int $id): string => 'https://scratch.mit.edu/projects/'.$id, $scratch_ids));
 
       return Command::SUCCESS;

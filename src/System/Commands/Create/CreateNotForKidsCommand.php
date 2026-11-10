@@ -22,7 +22,7 @@ class CreateNotForKidsCommand extends Command
     $this->setName('catrobat:notforkids')
       ->setDescription('mark a project as not safe for kids')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets marked')
-      ->addArgument('type', InputArgument::REQUIRED, 'Type of marking (admin or user)')
+      ->addArgument('type', InputArgument::REQUIRED, 'Type of marking: 1 or 2')
     ;
   }
 
@@ -33,11 +33,11 @@ class CreateNotForKidsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $project_name = $input->getArgument('program_name');
-    $type = $input->getArgument('type');
+    $type = (int) $input->getArgument('type');
 
     $project = $this->remix_manipulation_program_manager->findOneByName($project_name);
 
-    if (!$project instanceof \App\DB\Entity\Project\Project || null === $type) {
+    if (!$project instanceof \App\DB\Entity\Project\Project || !\in_array($type, [1, 2], true)) {
       $output->writeln('Marking '.$project_name.' as not safe for kids failed');
 
       return 1;

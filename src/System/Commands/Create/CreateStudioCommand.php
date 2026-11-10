@@ -53,9 +53,9 @@ class CreateStudioCommand extends Command
     $isPublic = filter_var($input->getArgument('is_public'), FILTER_VALIDATE_BOOLEAN);
     $isEnabled = filter_var($input->getArgument('is_enabled'), FILTER_VALIDATE_BOOLEAN);
     $allowComments = filter_var($input->getArgument('allow_comments'), FILTER_VALIDATE_BOOLEAN);
-    $usernames = $input->getArgument('users');
-    $status = $input->getArgument('status');
-    $projects = $input->getArgument('projects');
+    $usernames = (array) $input->getArgument('users');
+    $status = (array) $input->getArgument('status');
+    $projects = (array) $input->getArgument('projects');
     $coverPath = null;
 
     /** @var User|null $adminUser */
