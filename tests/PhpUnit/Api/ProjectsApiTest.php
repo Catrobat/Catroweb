@@ -25,6 +25,8 @@ use App\Project\Remix\RemixManager;
 use App\Project\Scratch\ScratchManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 use OpenAPI\Server\Model\ErrorResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ProjectsListResponse;
@@ -708,6 +710,55 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertSame(Response::HTTP_CREATED, $response_code);
     $this->assertArrayHasKey('Location', $response_headers);
     $this->assertInstanceOf(ProjectResponse::class, $response);
+  }
+
+  /**
+   * Every upload outcome lands in the "upload" log channel at info level, including validation rejections,
+   * which the error-triggered main log never kept.
+   *
+   * @throws Exception
+   */
+  #[Group('unit')]
+  public function testARejectedUploadIsLoggedWithItsReason(): void
+  {
+    $handler = new TestHandler();
+    $api = new ProjectsApi(
+      $this->facade,
+      $this->reactions_facade,
+      $this->createStub(CodeTreeBuilder::class),
+      $this->createStub(RemixManager::class),
+      $this->createStub(ScreenshotRepository::class),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_upload_daily_log'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_reaction_burst_log'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_download_burst_log'),
+      new \Symfony\Component\HttpFoundation\RequestStack(),
+      new \Psr\Log\NullLogger(),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_open_burst_log'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_burst_log'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_daily_log'),
+      $this->createStub(ScratchManager::class),
+      new Logger('upload', [$handler]),
+    );
+    $validation_wrapper = $this->createStub(ValidationWrapper::class);
+    $validation_wrapper->method('hasError')->willReturn(true);
+    $validation_wrapper->method('getErrors')->willReturn(['file' => 'File is too large']);
+    $validator = $this->createStub(ProjectsRequestValidator::class);
+    $validator->method('validateUploadFile')->willReturn($validation_wrapper);
+    $this->facade->method('getRequestValidator')->willReturn($validator);
+    $this->facade->method('getAuthenticationManager')->willReturn($this->createStub(AuthenticationManager::class));
+    $file = $this->createStub(UploadedFile::class);
+    $file->method('getSize')->willReturn(123_456);
+
+    $response_code = 0;
+    $response_headers = [];
+    $api->projectsPost('checksum', $file, 'en', 'pocketcode', false, null, $response_code, $response_headers);
+
+    $this->assertTrue($handler->hasInfoThatContains('Project upload rejected'));
+    $context = $handler->getRecords()[0]->context;
+    $this->assertSame('rejected', $context['outcome']);
+    $this->assertSame('File is too large', $context['reason']);
+    $this->assertSame(123_456, $context['bytes']);
+    $this->assertSame('pocketcode', $context['flavor']);
   }
 
   /**

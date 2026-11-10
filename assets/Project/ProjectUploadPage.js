@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!container) return
 
   const apiUrl = container.dataset.apiUrl
+  // Larger files never reach the server (Cloudflare/nginx answer 413), so say so before uploading.
+  const maxBytes = Number(container.dataset.maxBytes) || 0
   const projectUrlTemplate = container.dataset.projectUrl
 
   const trans = {
@@ -15,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     uploadSuccess: container.dataset.transSuccess || 'Project uploaded successfully!',
     uploadError: container.dataset.transUploadError || 'Upload failed.',
     invalidFile: container.dataset.transInvalidFile || 'Please select a .catrobat file',
+    fileTooLarge: container.dataset.transFileTooLarge || 'File is too large',
     unauthorized: container.dataset.transUnauthorized || 'You must be logged in.',
     rateLimited: container.dataset.transRateLimited || 'Too many uploads.',
     viewProject: container.dataset.transViewProject || 'View Project',
@@ -72,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleFile(file) {
     if (!file.name.endsWith('.catrobat')) {
       showError(trans.invalidFile)
+      return
+    }
+    if (maxBytes > 0 && file.size > maxBytes) {
+      showError(`${trans.fileTooLarge} (${formatSize(file.size)}, max. ${formatSize(maxBytes)})`)
       return
     }
     selectedFile = file

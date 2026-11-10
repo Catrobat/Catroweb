@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension('monolog', [
-    'channels' => ['search', 'download'],
+    'channels' => ['search', 'download', 'upload'],
     'handlers' => [
       'main' => [
         'type' => 'fingers_crossed',
@@ -36,6 +36,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'level' => 'debug',
         'max_files' => 1,
         'channels' => ['download'],
+        'formatter' => 'monolog.formatter.catrobat_custom_formatter',
+      ],
+      'upload' => [
+        'type' => 'rotating_file',
+        'path' => '%kernel.logs_dir%/%kernel.environment%/upload/upload.log',
+        'level' => 'info',
+        'max_files' => 1,
+        'channels' => ['upload'],
         'formatter' => 'monolog.formatter.catrobat_custom_formatter',
       ],
       'console' => [
