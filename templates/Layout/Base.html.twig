@@ -1,8 +1,28 @@
 <!DOCTYPE html>
 <html prefix="og: https://ogp.me/ns#" lang="{{ app.request.locale|slice(0, 2) }}">
 <head>
-  <script>(function(){var t=localStorage.getItem('theme');t=t==='light'||t==='dark'||t==='auto'?t:'auto';if(t==='auto'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-bs-theme',t);document.documentElement.setAttribute('data-swal2-theme',t);})();</script>
   <meta charset="UTF-8">
+  <script>
+    // Before every other script (the theme script below reads localStorage too): the released Pocket Code app's
+    // WebView has DOM storage off, so localStorage/sessionStorage are null and every script touching them throws.
+    // Give those pages a per-page memory store.
+    ['localStorage', 'sessionStorage'].forEach(function (name) {
+      var available = false
+      try { available = !!window[name] } catch (e) {}
+      if (available) return
+      var items = Object.create(null)
+      var store = {
+        getItem: function (key) { return key in items ? items[key] : null },
+        setItem: function (key, value) { items[key] = String(value) },
+        removeItem: function (key) { delete items[key] },
+        clear: function () { items = Object.create(null) },
+        key: function (index) { var key = Object.keys(items)[index]; return key === undefined ? null : key },
+        get length() { return Object.keys(items).length },
+      }
+      try { Object.defineProperty(window, name, { configurable: true, value: store }) } catch (e) {}
+    })
+  </script>
+  <script>(function(){var t=localStorage.getItem('theme');t=t==='light'||t==='dark'||t==='auto'?t:'auto';if(t==='auto'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-bs-theme',t);document.documentElement.setAttribute('data-swal2-theme',t);})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <title>
@@ -33,25 +53,6 @@
       },
       environment: '{{ app.environment }}',
     }</script>
-  <script>
-    // The released Pocket Code app's WebView has DOM storage off, so localStorage/sessionStorage are null and every
-    // script that touches them throws (dark mode, search, reactions...). Give those pages a per-page memory store.
-    ['localStorage', 'sessionStorage'].forEach(function (name) {
-      var available = false
-      try { available = !!window[name] } catch (e) {}
-      if (available) return
-      var items = {}
-      var store = {
-        getItem: function (key) { return Object.prototype.hasOwnProperty.call(items, key) ? items[key] : null },
-        setItem: function (key, value) { items[key] = String(value) },
-        removeItem: function (key) { delete items[key] },
-        clear: function () { items = {} },
-        key: function (index) { return Object.keys(items)[index] || null },
-        get length() { return Object.keys(items).length },
-      }
-      try { Object.defineProperty(window, name, { configurable: true, value: store }) } catch (e) {}
-    })
-  </script>
   {{ vite_entry_script_tags('color_scheme') }}
   {{ vite_entry_script_tags('base_layout') }}
   {% block javascript %}{% endblock %}
