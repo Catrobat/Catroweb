@@ -1,10 +1,21 @@
 export class CustomTranslationApi {
-  constructor(programSection, baseUrl = '') {
+  /**
+   * @param {Promise<string[]|null>|null} definedLanguages the project's custom-translation languages, fetched once
+   *   per page; lookups for other languages are skipped instead of each answering 404.
+   */
+  constructor(programSection, baseUrl = '', definedLanguages = null) {
     this.programSection = programSection === 'credits' ? 'credit' : programSection
     this.baseUrl = baseUrl
+    this.definedLanguages = definedLanguages
   }
 
   async getCustomTranslation(programId, language, successCallback, errorCallback = () => {}) {
+    const languages = await this.definedLanguages
+    if (Array.isArray(languages) && !languages.includes(language)) {
+      errorCallback(new Error('No custom translation for this language'))
+      return
+    }
+
     try {
       const response = await fetch(
         `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
