@@ -157,6 +157,11 @@ class ProjectManager
     $file = $request->getProjectFile();
 
     $scan_result = $this->malware_scanner->scanFile($file->getPathname());
+    if (!$scan_result->is_clean && !$scan_result->scan_performed) {
+      // Fail closed, but as a server fault (ClamAV down or timed out), not as a verdict on the file.
+      throw new \RuntimeException('Malware scan could not run: '.$scan_result->error_message);
+    }
+
     if (!$scan_result->is_clean) {
       $this->logger->error('Malware scan rejected upload', [
         'threat' => $scan_result->threat_name,

@@ -488,13 +488,13 @@ class ProjectManagerTest extends TestCase
    * @throws ORMException
    * @throws Exception
    */
-  public function testRejectsUploadWhenMalwareScanErrors(): void
+  public function testRejectsUploadAsAServerFaultWhenMalwareScanErrors(): void
   {
     $malware_scanner = $this->createStub(MalwareScanner::class);
     $malware_scanner->method('scanFile')->willReturn(MalwareScanResult::error('ClamAV unavailable'));
 
-    $this->expectException(InvalidCatrobatFileException::class);
-    $this->expectExceptionMessage('errors.file.malware');
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessage('Malware scan could not run');
 
     $program_manager = $this->createProjectManagerWithMocks(
       malware_scanner: $malware_scanner,

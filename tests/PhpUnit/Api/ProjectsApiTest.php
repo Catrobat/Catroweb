@@ -111,7 +111,7 @@ final class ProjectsApiTest extends KernelTestCase
   /**
    * @return array{ProjectsApi, ResumableUploadStore, ResumableUpload}
    */
-  private function resumableUploadWhoseProcessingThrows(\Exception $exception): array
+  private function resumableUploadWhoseProcessingThrows(\Exception $exception, int $expected_attempts): array
   {
     $root = sys_get_temp_dir().'/projects-api-upload-'.bin2hex(random_bytes(4));
     $this->upload_root = $root;
@@ -123,8 +123,8 @@ final class ProjectsApiTest extends KernelTestCase
 
     $authentication = $this->createStub(AuthenticationManager::class);
     $authentication->method('getAuthenticatedUser')->willReturn($this->uploader());
-    $processor = $this->createStub(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willThrowException($exception);
+    $processor = $this->createMock(ProjectsApiProcessor::class);
+    $processor->expects($this->exactly($expected_attempts))->method('addProject')->willThrowException($exception);
     $response_manager = $this->createStub(ProjectsResponseManager::class);
     $response_manager->method('sanitizeLocale')->willReturn('en');
     $response_manager->method('createUploadValidationErrorResponse')->willReturn(ApiErrorResponse::createModel(422, 'validation_error', 'Invalid file'));
@@ -795,25 +795,23 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
-  /**
-   * Every upload outcome lands in the "upload" log channel at info level, including validation rejections,
-   * which the error-triggered main log never kept.
-   *
-   * @throws Exception
-   */
   #[Group('unit')]
   public function testAResumableUploadRejectedForItsContentReplaysTheVerdict(): void
   {
-    [$api, $store, $upload] = $this->resumableUploadWhoseProcessingThrows(new InvalidCatrobatFileException('errors.file.invalid', 527));
+    [$api, $store, $upload] = $this->resumableUploadWhoseProcessingThrows(new InvalidCatrobatFileException('errors.file.invalid', 527), 1);
 
     $this->assertSame(422, $this->completeUpload($api, $upload->id));
-    $this->assertSame(422, $this->completeUpload($api, $upload->id), 'the retry gets the stored verdict');
-    $this->assertSame('validation_error', $store->find($upload->id, $this->uploader())?->failure_type);
+    $this->assertSame(422, $this->completeUpload($api, $upload->id), 'the retry gets the stored verdict without processing again');
+    $rejected = $store->find($upload->id, $this->uploader());
+    $this->assertNotNull($rejected);
+    $this->assertSame('validation_error', $rejected->failure_type);
+    $this->assertSame([], $store->receivedChunks($rejected), 'a verdict frees the chunks');
   }
 
+  #[Group('unit')]
   public function testAResumableUploadHitByAServerFaultKeepsItsChunksForTheNextAttempt(): void
   {
-    [$api, $store, $upload] = $this->resumableUploadWhoseProcessingThrows(new \RuntimeException('database gone'));
+    [$api, $store, $upload] = $this->resumableUploadWhoseProcessingThrows(new \RuntimeException('database gone'), 2);
 
     $this->assertSame(500, $this->completeUpload($api, $upload->id));
     $kept = $store->find($upload->id, $this->uploader());
@@ -823,6 +821,13 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertSame(500, $this->completeUpload($api, $upload->id), 'the retry processes the file again');
   }
 
+  /**
+   * Every upload outcome lands in the "upload" log channel at info level, including validation rejections,
+   * which the error-triggered main log never kept.
+   *
+   * @throws Exception
+   */
+  #[Group('unit')]
   public function testARejectedUploadIsLoggedWithItsReason(): void
   {
     $handler = new TestHandler();

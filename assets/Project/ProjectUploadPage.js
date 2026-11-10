@@ -173,10 +173,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // the server answers 409 while the first call still works and the created project once it is done.
   async function completeUpload(uploadId) {
     const deadline = Date.now() + 10 * 60 * 1000
+    let serverFailures = 0
     for (;;) {
       try {
         return await requestJson('POST', `${apiUrl}/uploads/${uploadId}/complete`)
       } catch (error) {
+        // A server-side failure keeps the chunks: worth a couple of later attempts before giving up.
+        if (error.body?.error?.type === 'upload_failed' && ++serverFailures <= 2) {
+          await wait(15000)
+          continue
+        }
         const stillWorking =
           !error.status || [409, 502, 503, 504, 520, 522, 524].includes(error.status)
         if (!stillWorking || Date.now() > deadline) throw error
@@ -276,6 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
       message = trans.unauthorized
     } else if (status === 429) {
       message = trans.rateLimited
+    } else if (details.type === 'upload_failed') {
+      message = trans.uploadError
     } else if (details.type === 'file_too_large') {
       message = `${trans.fileTooLarge}: ${details.message || ''}`.trim()
     } else if (typeof details.message === 'string' && details.message !== '') {
