@@ -606,11 +606,18 @@ function initComponents(data, earlyInits) {
     downloadErrorText: projectElement.dataset.transDownloadError,
   })
 
+  // One request for the languages that have custom translations, instead of three lookups that mostly answer 404.
+  const definedLanguages = isMyProject
+    ? null
+    : new CustomTranslationApi('', baseUrl)
+        .getCustomTranslationLanguages(projectId)
+        .catch(() => null)
+
   ProjectName(
     projectId,
     appLanguageElement.dataset.appLanguage,
     isMyProject,
-    new CustomTranslationApi('name', baseUrl),
+    new CustomTranslationApi('name', baseUrl, definedLanguages),
     editorNavigation,
   )
 
@@ -620,14 +627,14 @@ function initComponents(data, earlyInits) {
     projectDescriptionCreditsElement.dataset.transMoreInfo,
     projectDescriptionCreditsElement.dataset.transLessInfo,
     isMyProject,
-    new CustomTranslationApi('description', baseUrl),
+    new CustomTranslationApi('description', baseUrl, definedLanguages),
   )
 
   ProjectCredits(
     projectId,
     appLanguageElement.dataset.appLanguage,
     isMyProject,
-    new CustomTranslationApi('credit', baseUrl),
+    new CustomTranslationApi('credit', baseUrl, definedLanguages),
   )
 
   initProjectScreenshotUpload()
