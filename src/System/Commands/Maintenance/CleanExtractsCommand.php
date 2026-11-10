@@ -46,7 +46,7 @@ class CleanExtractsCommand extends Command
       return Command::FAILURE;
     }
 
-    $dry_run = (bool) $input->getOption('dry-run');
+    $dry_run = $input->getOption('dry-run');
 
     if (!is_dir($this->extract_dir)) {
       $output->writeln('<error>Extract directory does not exist: '.$this->extract_dir.'</error>');

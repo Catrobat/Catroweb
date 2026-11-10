@@ -43,7 +43,7 @@ final class ApiErrorResponse
 
     $headers = array_merge($headers, ['Content-Type' => 'application/json']);
 
-    return new Response(json_encode($body, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES), $code, $headers);
+    return new Response(json_encode($body, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP), $code, $headers);
   }
 
   /**

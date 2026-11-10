@@ -38,15 +38,8 @@ class LogsController extends CRUDController
       $file = $allFiles[0];
     }
 
-    if (!empty($file)) {
-      $realLogDir = realpath(self::LOG_DIR);
-      $realFilePath = realpath(self::LOG_DIR.$file);
-      if (false === $realLogDir || false === $realFilePath || !str_starts_with($realFilePath, $realLogDir.DIRECTORY_SEPARATOR)) {
-        $file = null;
-      }
-    }
-
-    $content = empty($file) ? null : $this->getLogFileContent($file, self::LOG_DIR, $searchParam);
+    $path = empty($file) ? null : $this->resolveLogFile($file);
+    $content = null === $path ? null : $this->getLogFileContent($path, $searchParam);
 
     return $this->render('Admin/SystemManagement/Logs.html.twig', [
       'files' => $allFiles, 'content' => $content, ]
@@ -67,9 +60,28 @@ class LogsController extends CRUDController
     return $files;
   }
 
-  protected function getLogFileContent(string $fileName, string $dir, array $searchParam): array
+  /**
+   * The canonical path of a file inside LOG_DIR, or null: `../` and symlinks out of it, and URLs,
+   * never get past realpath() plus the prefix check, so the result is safe to open.
+   *
+   * @psalm-taint-escape file
+   * @psalm-taint-escape ssrf
+   * @psalm-taint-escape url_component
+   * @psalm-taint-escape url_path
+   */
+  private function resolveLogFile(string $file): ?string
   {
-    $filePath = $dir.$fileName;
+    $realLogDir = realpath(self::LOG_DIR);
+    $realFilePath = realpath(self::LOG_DIR.$file);
+    if (false === $realLogDir || false === $realFilePath || !str_starts_with($realFilePath, $realLogDir.DIRECTORY_SEPARATOR)) {
+      return null;
+    }
+
+    return $realFilePath;
+  }
+
+  protected function getLogFileContent(string $filePath, array $searchParam): array
+  {
     if (!file_exists($filePath)) {
       return [];
     }

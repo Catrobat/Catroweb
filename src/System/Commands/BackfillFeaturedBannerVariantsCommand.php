@@ -56,7 +56,7 @@ class BackfillFeaturedBannerVariantsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $io = new SymfonyStyle($input, $output);
-    $dry_run = (bool) $input->getOption('dry-run');
+    $dry_run = $input->getOption('dry-run');
 
     $banners = $this->entity_manager->createQueryBuilder()
       ->select('f')

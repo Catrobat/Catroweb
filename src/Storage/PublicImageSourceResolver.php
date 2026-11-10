@@ -25,6 +25,41 @@ final class PublicImageSourceResolver
   /** @return array{source: string, destination: string}|null */
   public function resolve(string $public_dir, string $source): ?array
   {
+    $real_source = $this->confine($public_dir, $source);
+    if (null === $real_source) {
+      return null;
+    }
+
+    $extension = strtolower(pathinfo($real_source, PATHINFO_EXTENSION));
+    $expected_mime = match ($extension) {
+      'jpg', 'jpeg' => 'image/jpeg',
+      'png' => 'image/png',
+      default => null,
+    };
+    if (null === $expected_mime || $expected_mime !== (new \finfo(FILEINFO_MIME_TYPE))->file($real_source)) {
+      return null;
+    }
+
+    $destination = substr($real_source, 0, -(strlen($extension) + 1)).'.webp';
+    if (is_link($destination) || (file_exists($destination) && (!is_file($destination) || realpath($destination) !== $destination))) {
+      return null;
+    }
+
+    return ['source' => $real_source, 'destination' => $destination];
+  }
+
+  /**
+   * The real path of a readable file under one of PUBLIC_ROOTS and outside PROTECTED_ROOTS, or
+   * null. Traversal, encoded and control characters, symlinks out of the roots and URLs all stop
+   * here, so the result is safe to open.
+   *
+   * @psalm-taint-escape file
+   * @psalm-taint-escape ssrf
+   * @psalm-taint-escape url_component
+   * @psalm-taint-escape url_path
+   */
+  private function confine(string $public_dir, string $source): ?string
+  {
     if ('' === $source || !str_starts_with($source, '/') || str_contains($source, '\\') || str_contains($source, '%')
       || preg_match('/[\x00-\x1f\x7f]/', $source)
       || preg_match('~(?:^|/)\.{1,2}(?:/|$)~', $source)) {
@@ -57,22 +92,7 @@ final class PublicImageSourceResolver
       return null;
     }
 
-    $extension = strtolower(pathinfo($real_source, PATHINFO_EXTENSION));
-    $expected_mime = match ($extension) {
-      'jpg', 'jpeg' => 'image/jpeg',
-      'png' => 'image/png',
-      default => null,
-    };
-    if (null === $expected_mime || $expected_mime !== (new \finfo(FILEINFO_MIME_TYPE))->file($real_source)) {
-      return null;
-    }
-
-    $destination = substr($real_source, 0, -(strlen($extension) + 1)).'.webp';
-    if (is_link($destination) || (file_exists($destination) && (!is_file($destination) || realpath($destination) !== $destination))) {
-      return null;
-    }
-
-    return ['source' => $real_source, 'destination' => $destination];
+    return $real_source;
   }
 
   private function within(string $path, string $root): bool

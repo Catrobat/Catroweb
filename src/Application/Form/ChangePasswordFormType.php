@@ -12,6 +12,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @psalm-suppress MissingTemplateParam https://github.com/phpstan/phpstan-symfony/issues/320
+ */
 class ChangePasswordFormType extends AbstractType
 {
   #[\Override]

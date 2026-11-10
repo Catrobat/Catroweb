@@ -58,7 +58,7 @@ class BackfillStudioCoverVariantsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $io = new SymfonyStyle($input, $output);
-    $dry_run = (bool) $input->getOption('dry-run');
+    $dry_run = $input->getOption('dry-run');
     $batch = max(1, (int) $input->getOption('batch'));
     $studio_dir = $this->studio_manager->getStudioCoverDir();
 

@@ -54,8 +54,8 @@ class ImportProjectsFromShare extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $number_of_projects_to_download = intval($input->getOption('limit'));
-    $project_owner = (string) $input->getOption('user');
-    $category = (string) $input->getOption('category');
+    $project_owner = $input->getOption('user');
+    $category = $input->getOption('category');
     $remix_layout = intval($input->getOption('remix-layout'));
 
     $temp_dir = sys_get_temp_dir().'/catrobat.program.import/';

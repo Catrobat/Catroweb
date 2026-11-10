@@ -50,7 +50,7 @@ class MigrateAssetsToContentAddressableStoreCommand extends Command
     $batchSize = (int) $input->getOption('batch-size');
     $offset = (int) $input->getOption('offset');
     $limit = (int) $input->getOption('limit');
-    $dryRun = (bool) $input->getOption('dry-run');
+    $dryRun = $input->getOption('dry-run');
 
     $qb = $this->entityManager->createQueryBuilder()
       ->select('p.id')

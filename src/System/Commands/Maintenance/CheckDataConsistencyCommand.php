@@ -75,8 +75,8 @@ HELP)
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $io = new SymfonyStyle($input, $output);
-    $hide = (bool) $input->getOption('hide');
-    $regenerate = (bool) $input->getOption('regenerate-thumbnails');
+    $hide = $input->getOption('hide');
+    $regenerate = $input->getOption('regenerate-thumbnails');
     /** @var list<string> $only_ids */
     $only_ids = $input->getOption('project');
     $screenshot_dir = $this->screenshot_repository->getScreenshotDir();

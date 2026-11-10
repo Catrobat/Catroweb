@@ -33,11 +33,11 @@ class CreateNotForKidsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $project_name = $input->getArgument('program_name');
-    $type = $input->getArgument('type');
+    $type = (int) $input->getArgument('type');
 
     $project = $this->remix_manipulation_program_manager->findOneByName($project_name);
 
-    if (!$project instanceof \App\DB\Entity\Project\Project || null === $type) {
+    if (!$project instanceof \App\DB\Entity\Project\Project) {
       $output->writeln('Marking '.$project_name.' as not safe for kids failed');
 
       return 1;
