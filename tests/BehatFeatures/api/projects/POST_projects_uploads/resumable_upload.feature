@@ -12,13 +12,13 @@ Feature: Resumable project upload
   Scenario: A project sent in chunks is created like a single-request upload
     When I upload a valid Catrobat project in chunks
     Then the response status code should be "201"
-    And the client response should contain "\"name\":\"test\""
+    And the JSON response field "name" should be '"test"'
 
   Scenario: Completing an upload again answers with the project it created
     When I upload a valid Catrobat project in chunks
     And I complete the saved upload
     Then the response status code should be "201"
-    And the client response should contain "\"name\":\"test\""
+    And the JSON response field "name" should be '"test"'
 
   Scenario: Starting an upload needs a login
     Given I have a request header "CONTENT_TYPE" with value "application/json"
