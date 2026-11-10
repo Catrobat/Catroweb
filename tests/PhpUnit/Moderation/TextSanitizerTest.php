@@ -21,13 +21,27 @@ class TextSanitizerTest extends TestCase
 {
   private TextSanitizer $sanitizer;
   private string $wordListDir;
+  private string $allowlistPath;
 
   #[\Override]
   protected function setUp(): void
   {
     $this->wordListDir = dirname(__DIR__, 3).'/config/moderation/wordlists';
+    $this->allowlistPath = dirname(__DIR__, 3).'/config/moderation/link_allowlist.php';
     $requestStack = $this->createStub(RequestStack::class);
     $this->sanitizer = new TextSanitizer($requestStack, $this->wordListDir);
+  }
+
+  private function createSanitizerWithAllowlist(): TextSanitizer
+  {
+    $requestStack = $this->createStub(RequestStack::class);
+
+    return new TextSanitizer(
+      $requestStack,
+      $this->wordListDir,
+      linkAllowlistEnabled: true,
+      linkAllowlistPath: $this->allowlistPath
+    );
   }
 
   // --- Null / Empty / Normal ---
@@ -341,5 +355,179 @@ class TextSanitizerTest extends TestCase
     $requestStack = $this->createStub(RequestStack::class);
     $sanitizer = new TextSanitizer($requestStack, $this->wordListDir, enabled: false);
     $this->assertSame('What the fuck', $sanitizer->sanitizeWithLocale('What the fuck'));
+  }
+
+  // --- Allowlist-based link redaction (Issue #7388) ---
+
+  public function testAllowlistedDomainIsKept(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Check out https://github.com/Catrobat/Catroweb for the code',
+      $sanitizer->sanitizeWithLocale('Check out https://github.com/Catrobat/Catroweb for the code')
+    );
+  }
+
+  public function testAllowlistedSubdomainIsKeptWhenListed(): void
+  {
+    // scratch.mit.edu and share.catrobat.org are explicitly in the seed list
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Try https://scratch.mit.edu/projects/1 for details',
+      $sanitizer->sanitizeWithLocale('Try https://scratch.mit.edu/projects/1 for details')
+    );
+    $this->assertSame(
+      'Share at https://share.catrobat.org/project/123',
+      $sanitizer->sanitizeWithLocale('Share at https://share.catrobat.org/project/123')
+    );
+  }
+
+  public function testUnlistedSubdomainIsRedacted(): void
+  {
+    // Exact host matching: en.wikipedia.org is NOT on the list even if wikipedia.org is
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Read [link removed] for details',
+      $sanitizer->sanitizeWithLocale('Read https://en.wikipedia.org/wiki/PHP for details')
+    );
+  }
+
+  public function testNonAllowlistedLinkIsRedacted(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Visit [link removed] for a great deal',
+      $sanitizer->sanitizeWithLocale('Visit https://some-random-site.com for a great deal')
+    );
+  }
+
+  public function testSuffixSpoofingIsBlocked(): void
+  {
+    // 'evilgithub.com' must NOT match allowlisted 'github.com'
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      '[link removed]',
+      $sanitizer->sanitizeWithLocale('https://evilgithub.com/path')
+    );
+  }
+
+  public function testSubdomainSuffixTrickIsBlocked(): void
+  {
+    // wikipedia.org.evil.com resolves host to 'wikipedia.org.evil.com', not 'wikipedia.org'
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      '[link removed]',
+      $sanitizer->sanitizeWithLocale('wikipedia.org.evil.com')
+    );
+    $this->assertSame(
+      '[link removed]',
+      $sanitizer->sanitizeWithLocale('https://wikipedia.org.evil.com/phish')
+    );
+  }
+
+  public function testUserinfoSpoofingIsBlocked(): void
+  {
+    // https://github.com@evil.com resolves host to 'evil.com', not 'github.com'
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      '[link removed]',
+      $sanitizer->sanitizeWithLocale('https://github.com@evil.com/steal')
+    );
+  }
+
+  public function testBareDomainsAreRedacted(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Visit [link removed] for free games',
+      $sanitizer->sanitizeWithLocale('Visit evil.com/x for free games')
+    );
+    $this->assertSame(
+      'Visit [link removed] today',
+      $sanitizer->sanitizeWithLocale('Visit evil.com today')
+    );
+    $this->assertSame(
+      'Visit [link removed] now',
+      $sanitizer->sanitizeWithLocale('Visit www.evil.com now')
+    );
+  }
+
+  public function testAllowlistedBareDomainsAreKept(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Check github.com/Catrobat for source',
+      $sanitizer->sanitizeWithLocale('Check github.com/Catrobat for source')
+    );
+    $this->assertSame(
+      'Visit www.github.com for code',
+      $sanitizer->sanitizeWithLocale('Visit www.github.com for code')
+    );
+  }
+
+  public function testInvisibleCharactersInBareDomainAreRedacted(): void
+  {
+    // Evasion using zero-width spaces
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Visit [link removed]',
+      $sanitizer->sanitizeWithLocale("Visit evil\u{200B}.com")
+    );
+  }
+
+  public function testMultipleLinksPartiallyAllowlisted(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Code at https://github.com/foo and also [link removed]',
+      $sanitizer->sanitizeWithLocale('Code at https://github.com/foo and also https://badactor.xyz/phish')
+    );
+  }
+
+  public function testAllowlistDisabledByDefaultDoesNotRedact(): void
+  {
+    // Default sanitizer (flag is off by default) should NOT redact arbitrary links or bare domains
+    $this->assertSame(
+      'Visit https://some-random-site.com for info',
+      $this->sanitizer->sanitizeWithLocale('Visit https://some-random-site.com for info')
+    );
+    $this->assertSame(
+      'Visit evil.com/free for info',
+      $this->sanitizer->sanitizeWithLocale('Visit evil.com/free for info')
+    );
+  }
+
+  public function testLapsedCatrobatDomainIsRedacted(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Old link at [link removed] should not be trusted',
+      $sanitizer->sanitizeWithLocale('Old link at https://catrob.at/project/123 should not be trusted')
+    );
+  }
+
+  public function testAllowlistedLinkWithTrailingPunctuation(): void
+  {
+    $sanitizer = $this->createSanitizerWithAllowlist();
+    $this->assertSame(
+      'Check out https://github.com.',
+      $sanitizer->sanitizeWithLocale('Check out https://github.com.')
+    );
+    $this->assertSame(
+      '(https://github.com)',
+      $sanitizer->sanitizeWithLocale('(https://github.com)')
+    );
+    $this->assertSame(
+      'Visit [link removed].',
+      $sanitizer->sanitizeWithLocale('Visit https://some-random-site.com.')
+    );
+    $this->assertSame(
+      'Visit [link removed].',
+      $sanitizer->sanitizeWithLocale('Visit evil.com.')
+    );
+    $this->assertSame(
+      'Visit ([link removed])',
+      $sanitizer->sanitizeWithLocale('Visit (evil.com)')
+    );
   }
 }

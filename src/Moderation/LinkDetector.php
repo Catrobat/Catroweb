@@ -14,7 +14,7 @@ namespace App\Moderation;
  */
 class LinkDetector
 {
-  private const string TLDS = 'com|net|org|info|biz|io|co|me|tv|gg|ly|be|to|cc|ws|su|app|dev|xyz|online|site|'
+  public const string TLDS = 'com|net|org|info|biz|io|co|me|tv|gg|ly|be|to|cc|ws|su|app|dev|xyz|online|site|'
     .'website|shop|store|link|live|top|club|fun|video|stream|social|page|blog|news|one|click|'
     .'de|at|ch|uk|us|fr|it|es|nl|pl|ru|br|in|cn|jp|kr|tk|ml|ga|cf|gq';
 
