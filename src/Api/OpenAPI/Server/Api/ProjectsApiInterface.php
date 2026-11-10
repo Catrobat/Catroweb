@@ -30,9 +30,9 @@
 
 namespace OpenAPI\Server\Api;
 
+use OpenAPI\Server\Model\ProjectUploadSessionRequest;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\UpdateProjectRequest;
-use OpenAPI\Server\Model\ProjectUploadSessionRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
