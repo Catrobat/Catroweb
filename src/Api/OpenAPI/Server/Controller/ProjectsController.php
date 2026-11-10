@@ -2020,6 +2020,7 @@ class ProjectsController extends Controller
         400 => 'Bad request (Invalid, or missing parameters)',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         404 => 'Not found',
+        409 => 'The upload is being completed or aborted, or has already finished, and takes no more chunks',
         422 => 'Unprocessable Entity',
         default => '',
       };

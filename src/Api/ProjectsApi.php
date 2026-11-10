@@ -29,6 +29,8 @@ use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\CodeViewResponse;
+use OpenAPI\Server\Model\ErrorResponse;
+use OpenAPI\Server\Model\ErrorResponseError;
 use OpenAPI\Server\Model\ExtensionsResponse;
 use OpenAPI\Server\Model\FeaturedProjectsListResponse;
 use OpenAPI\Server\Model\ProjectResponse;
@@ -1057,8 +1059,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     try {
       $this->resumable_uploads->storeChunk($upload, $index, $chunk, $checksum);
-    } catch (ResumableUploadException) {
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+    } catch (ResumableUploadException $e) {
+      $responseCode = in_array($e->getMessage(), [ResumableUploadException::BUSY, ResumableUploadException::FINISHED], true)
+        ? Response::HTTP_CONFLICT
+        : Response::HTTP_UNPROCESSABLE_ENTITY;
 
       return;
     }
@@ -1096,6 +1100,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         return $this->completedUploadResponse($upload->completed_project_id, $responseCode, $responseHeaders);
       }
 
+      if (null !== $upload->failure_type) {
+        $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+        return ApiErrorResponse::createModel(Response::HTTP_UNPROCESSABLE_ENTITY, $upload->failure_type, (string) $upload->failure_message);
+      }
+
       try {
         $file = $this->resumable_uploads->assemble($upload);
       } catch (ResumableUploadException $e) {
@@ -1115,6 +1125,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $response = $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, 'resumable', $responseCode, $responseHeaders);
       if ($response instanceof ProjectResponse && Response::HTTP_CREATED === $responseCode) {
         $this->resumable_uploads->markCompleted($upload, (string) $response->getId());
+      } elseif (($error = $response instanceof ErrorResponse ? $response->getError() : null) instanceof ErrorResponseError) {
+        $this->resumable_uploads->markFailed($upload, (string) $error->getType(), (string) $error->getMessage());
       } else {
         $this->resumable_uploads->delete($upload);
       }

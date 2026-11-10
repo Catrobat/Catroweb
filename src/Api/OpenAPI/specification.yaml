@@ -798,6 +798,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'The upload is being completed or aborted, or has already finished, and takes no more chunks'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
@@ -815,7 +817,7 @@ paths:
       tags:
         - 'Projects'
       summary: 'Finish a resumable project upload and create or update the project'
-      description: 'Joins the chunks and runs the same checks as a single-request upload. Checking a large project can take longer than a proxy waits for the answer: after a timeout or network error, call this again. While the first call is still working it answers 409; once it has finished it answers with the created project (for 24 hours). An upload that fails the checks is removed, so a later call answers 404.'
+      description: 'Joins the chunks and runs the same checks as a single-request upload. Checking a large project can take longer than a proxy waits for the answer: after a timeout or network error, call this again. While the first call is still working it answers 409; once it has finished it answers with the created project, or with the reason the project was rejected, for 24 hours.'
       responses:
         '201':
           description: 'Project successfully uploaded'

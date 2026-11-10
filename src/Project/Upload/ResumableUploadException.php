@@ -15,4 +15,8 @@ final class ResumableUploadException extends \RuntimeException
   public const string BAD_CHUNK_SIZE = 'chunk_size_mismatch';
   public const string BAD_CHECKSUM = 'checksum_mismatch';
   public const string INCOMPLETE = 'chunks_missing';
+  /** The upload is being completed, aborted or evicted right now. */
+  public const string BUSY = 'upload_busy';
+  /** The upload was already completed or rejected; it takes no more chunks. */
+  public const string FINISHED = 'upload_finished';
 }

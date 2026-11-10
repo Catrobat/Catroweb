@@ -98,6 +98,44 @@ final class ResumableUploadStoreTest extends TestCase
     $this->assertSame([], $store->receivedChunks($completed));
     $this->assertFileDoesNotExist($this->root.'/'.$upload->id.'/project.catrobat');
     $this->assertNotNull($store->lock($completed));
+
+    try {
+      $this->sendChunk($store, $upload, $content, 0);
+      $this->fail('A completed upload must not take chunks again');
+    } catch (ResumableUploadException $e) {
+      $this->assertSame(ResumableUploadException::FINISHED, $e->getMessage());
+    }
+
+    $this->assertSame([], $store->receivedChunks($completed));
+  }
+
+  public function testARejectedUploadKeepsItsReasonAndNoLongerCountsAsOpen(): void
+  {
+    $store = $this->store();
+    $content = random_bytes(10);
+    $rejected = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $this->sendChunk($store, $rejected, $content, 0);
+    $store->markFailed($rejected, 'validation_error', 'Invalid project file');
+
+    $found = $store->find($rejected->id, $this->user('u1'));
+    $this->assertNotNull($found);
+    $this->assertSame(['validation_error', 'Invalid project file'], [$found->failure_type, $found->failure_message]);
+    $this->assertSame([], $store->receivedChunks($found));
+
+    $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $this->assertNotNull($store->find($rejected->id, $this->user('u1')), 'finished uploads are not evicted');
+  }
+
+  public function testAChunkIsRefusedWhileTheUploadIsBeingCompleted(): void
+  {
+    $store = $this->store();
+    $upload = $store->start($this->user('u1'), 10, null, 'pocketcode', false, null);
+    $lock = $store->lock($upload);
+    $this->assertNotNull($lock);
+
+    $this->expectExceptionMessage(ResumableUploadException::BUSY);
+    $this->sendChunk($store, $upload, random_bytes(10), 0);
   }
 
   public function testAChunkWithTheWrongSizeIndexOrChecksumIsRefused(): void

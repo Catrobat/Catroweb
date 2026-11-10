@@ -18,7 +18,17 @@ final readonly class ResumableUpload
     public ?string $project_id,
     public \DateTimeImmutable $expires_at,
     public ?string $completed_project_id = null,
+    public ?string $failure_type = null,
+    public ?string $failure_message = null,
   ) {
+  }
+
+  /**
+   * Completed or rejected: kept only so a client that retries the completion gets the same answer.
+   */
+  public function isFinished(): bool
+  {
+    return null !== $this->completed_project_id || null !== $this->failure_type;
   }
 
   public function expectedChunkSize(int $index): int
@@ -50,6 +60,8 @@ final readonly class ResumableUpload
       'project_id' => $this->project_id,
       'expires_at' => $this->expires_at->format('Y-m-d\TH:i:s.uP'), // µs: "oldest upload" must not tie
       'completed_project_id' => $this->completed_project_id,
+      'failure_type' => $this->failure_type,
+      'failure_message' => $this->failure_message,
     ];
   }
 
@@ -70,6 +82,8 @@ final readonly class ResumableUpload
       isset($data['project_id']) ? (string) $data['project_id'] : null,
       new \DateTimeImmutable((string) $data['expires_at']),
       isset($data['completed_project_id']) ? (string) $data['completed_project_id'] : null,
+      isset($data['failure_type']) ? (string) $data['failure_type'] : null,
+      isset($data['failure_message']) ? (string) $data['failure_message'] : null,
     );
   }
 }

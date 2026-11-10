@@ -61,11 +61,17 @@ class ResumableUploadStore
       }
 
       $lock = $this->lock($old);
-      if (null !== $lock) {
+      if (null === $lock) {
+        continue;
+      }
+
+      // The list was read before locking: an upload completed in between keeps its answer for the client.
+      if (false === $this->read($old->id)?->isFinished()) {
         $this->delete($old);
-        $this->unlock($lock);
         --$excess;
       }
+
+      $this->unlock($lock);
     }
 
     if ($excess > 0) {
@@ -105,7 +111,7 @@ class ResumableUploadStore
     }
 
     if ($upload->isExpired()) {
-      $this->delete($upload);
+      $this->removeUnlessLocked($id);
 
       return null;
     }
@@ -114,7 +120,11 @@ class ResumableUploadStore
   }
 
   /**
-   * @throws ResumableUploadException when the index is out of range, the size is wrong or the checksum doesn't match
+   * Chunks of one upload may arrive in parallel (shared lock), but never while the upload is being completed,
+   * aborted or evicted, and never after it finished: that would refill the disk outside the per-user limit.
+   *
+   * @throws ResumableUploadException when the index is out of range, the size is wrong, the checksum doesn't match
+   *                                  or the upload no longer takes chunks
    */
   public function storeChunk(ResumableUpload $upload, int $index, File $chunk, string $checksum): void
   {
@@ -130,10 +140,29 @@ class ResumableUploadStore
       throw new ResumableUploadException(ResumableUploadException::BAD_CHECKSUM);
     }
 
-    // Written under a temporary name and renamed, so a half-written chunk is never counted as received.
-    $target = $this->dir($upload->id).'/'.$index.'.part';
-    $chunk->move($this->dir($upload->id), $index.'.part.tmp');
-    $this->filesystem->rename($target.'.tmp', $target, true);
+    $lock = $this->lock($upload, true);
+    if (null === $lock) {
+      throw new ResumableUploadException(ResumableUploadException::BUSY);
+    }
+
+    try {
+      // Read again under the lock: the upload may have been finished or deleted since the caller found it.
+      $current = $this->read($upload->id);
+      if (!$current instanceof ResumableUpload) {
+        throw new ResumableUploadException(ResumableUploadException::BUSY);
+      }
+
+      if ($current->isFinished()) {
+        throw new ResumableUploadException(ResumableUploadException::FINISHED);
+      }
+
+      // Written under a temporary name and renamed, so a half-written chunk is never counted as received.
+      $target = $this->dir($upload->id).'/'.$index.'.part';
+      $chunk->move($this->dir($upload->id), $index.'.part.tmp');
+      $this->filesystem->rename($target.'.tmp', $target, true);
+    } finally {
+      $this->unlock($lock);
+    }
   }
 
   /**
@@ -183,6 +212,8 @@ class ResumableUploadStore
     }
 
     if (null !== $upload->checksum && $upload->checksum !== md5_file($path)) {
+      $this->filesystem->remove($path);
+
       throw new ResumableUploadException(ResumableUploadException::BAD_CHECKSUM);
     }
 
@@ -190,25 +221,15 @@ class ResumableUploadStore
   }
 
   /**
-   * Exclusive, non-blocking: completing an upload outlasts Cloudflare's timeout, so clients retry while the first
-   * request is still working. The retry must not join or delete the same files.
+   * Non-blocking. Exclusive for completing, aborting and evicting: completing outlasts Cloudflare's timeout, so
+   * clients retry while the first request is still working, and the retry must not join or delete the same files.
+   * Shared for storing chunks.
    *
-   * @return resource|null null when another request holds the lock or the upload is gone
+   * @return resource|null null when another request holds a conflicting lock or the upload is gone
    */
-  public function lock(ResumableUpload $upload): mixed
+  public function lock(ResumableUpload $upload, bool $shared = false): mixed
   {
-    $handle = @fopen($this->dir($upload->id).'/.lock', 'c');
-    if (false === $handle) {
-      return null;
-    }
-
-    if (!flock($handle, LOCK_EX | LOCK_NB)) {
-      fclose($handle);
-
-      return null;
-    }
-
-    return $handle;
+    return $this->lockDir($upload->id, $shared);
   }
 
   /**
@@ -220,18 +241,14 @@ class ResumableUploadStore
     fclose($lock);
   }
 
-  /**
-   * Frees the disk but keeps the upload until it expires, so a client whose completion request timed out can still
-   * learn which project it created.
-   */
   public function markCompleted(ResumableUpload $upload, string $project_id): void
   {
-    $dir = $this->dir($upload->id);
-    $this->filesystem->remove([...(glob($dir.'/*.part') ?: []), $dir.'/project.catrobat']);
-    $this->filesystem->dumpFile(
-      $dir.'/'.self::META,
-      json_encode(['completed_project_id' => $project_id] + $upload->toArray(), JSON_THROW_ON_ERROR),
-    );
+    $this->finish($upload, ['completed_project_id' => $project_id]);
+  }
+
+  public function markFailed(ResumableUpload $upload, string $type, string $message): void
+  {
+    $this->finish($upload, ['failure_type' => $type, 'failure_message' => $message]);
   }
 
   public function delete(ResumableUpload $upload): void
@@ -243,9 +260,55 @@ class ResumableUploadStore
   {
     foreach ($this->allIds() as $id) {
       $upload = $this->read($id);
-      if (!$upload instanceof ResumableUpload || $upload->isExpired()) {
-        $this->filesystem->remove($this->dir($id));
+      // Without metadata only when old: a parallel start() creates the directory before it writes the metadata.
+      $stale = $upload instanceof ResumableUpload
+        ? $upload->isExpired()
+        : (int) @filemtime($this->dir($id)) < time() - 3600;
+      if ($stale) {
+        $this->removeUnlessLocked($id);
       }
+    }
+  }
+
+  /**
+   * Frees the disk but keeps the outcome for a day, so a client whose completion request timed out still gets the
+   * created project or the reason for the rejection when it retries.
+   *
+   * @param array<string, string> $outcome
+   */
+  private function finish(ResumableUpload $upload, array $outcome): void
+  {
+    $dir = $this->dir($upload->id);
+    $this->filesystem->remove([...(glob($dir.'/*.part') ?: []), $dir.'/project.catrobat']);
+    $finished = ResumableUpload::fromArray(['expires_at' => new \DateTimeImmutable(self::TTL)->format(\DATE_ATOM)] + $outcome + $upload->toArray());
+    $this->filesystem->dumpFile($dir.'/'.self::META, json_encode($finished->toArray(), JSON_THROW_ON_ERROR));
+  }
+
+  /**
+   * @return resource|null
+   */
+  private function lockDir(string $id, bool $shared = false): mixed
+  {
+    $handle = @fopen($this->dir($id).'/.lock', 'c');
+    if (false === $handle) {
+      return null;
+    }
+
+    if (!flock($handle, ($shared ? LOCK_SH : LOCK_EX) | LOCK_NB)) {
+      fclose($handle);
+
+      return null;
+    }
+
+    return $handle;
+  }
+
+  private function removeUnlessLocked(string $id): void
+  {
+    $lock = $this->lockDir($id);
+    if (null !== $lock) {
+      $this->filesystem->remove($this->dir($id));
+      $this->unlock($lock);
     }
   }
 
@@ -258,7 +321,7 @@ class ResumableUploadStore
       array_map($this->read(...), $this->allIds()),
       static fn (?ResumableUpload $upload): bool => $upload instanceof ResumableUpload
         && $upload->user_id === (string) $user->getId()
-        && null === $upload->completed_project_id,
+        && !$upload->isFinished(),
     ));
     usort($open, static fn (ResumableUpload $a, ResumableUpload $b): int => $a->expires_at <=> $b->expires_at);
 
