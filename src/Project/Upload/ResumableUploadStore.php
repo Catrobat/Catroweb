@@ -96,8 +96,10 @@ class ResumableUploadStore
       $project_id,
       new \DateTimeImmutable(self::TTL),
     );
-    $this->filesystem->dumpFile($this->dir($upload->id).'/'.self::META, json_encode($upload->toArray(), JSON_THROW_ON_ERROR));
+    // Lock file first: a start() that dies halfway leaves a directory without metadata, which the purge removes.
+    $this->filesystem->mkdir($this->dir($upload->id));
     $this->filesystem->touch($this->dir($upload->id).'/'.self::LOCK);
+    $this->filesystem->dumpFile($this->dir($upload->id).'/'.self::META, json_encode($upload->toArray(), JSON_THROW_ON_ERROR));
 
     return $upload;
   }

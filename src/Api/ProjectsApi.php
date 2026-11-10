@@ -1038,8 +1038,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return;
     }
 
-    $this->resumable_uploads->delete($upload);
-    $this->resumable_uploads->unlock($lock);
+    try {
+      $this->resumable_uploads->delete($upload);
+    } finally {
+      $this->resumable_uploads->unlock($lock);
+    }
+
     $responseCode = Response::HTTP_NO_CONTENT;
   }
 
@@ -1129,8 +1133,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       } elseif ($rejected && ($error = $response instanceof ErrorResponse ? $response->getError() : null) instanceof ErrorResponseError) {
         $this->resumable_uploads->markFailed($upload, (string) $error->getType(), (string) $error->getMessage());
       } else {
-        // A server-side fault, not a verdict on the file: keep the chunks so completing again needs no re-upload.
+        // A server-side fault, not a verdict on the file: keep the chunks so completing again needs no re-upload,
+        // and say so with a 5xx instead of the single upload's 422.
         $this->resumable_uploads->discardAssembled($upload);
+        $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+        return ApiErrorResponse::createModel(Response::HTTP_INTERNAL_SERVER_ERROR, 'upload_failed', 'The server could not finish this upload. Complete it again later; the chunks are kept.');
       }
 
       return $response;

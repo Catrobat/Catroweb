@@ -2104,6 +2104,7 @@ class ProjectsController extends Controller
         409 => 'The upload is still being completed by an earlier call; try again in a few seconds',
         422 => 'Unprocessable Entity',
         429 => 'Too Many Requests',
+        500 => 'A server-side failure, not a verdict on the file: the chunks are kept, complete the upload again later',
         default => '',
       };
 
