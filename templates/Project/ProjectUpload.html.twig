@@ -23,6 +23,7 @@
        data-trans-rate-limited="{{ 'project.upload.rate_limited'|trans({}, 'catroweb')|default('Too many uploads. Please try again later.')|e('html_attr') }}"
        data-trans-selected-file="{{ 'project.upload.selected_file'|trans({}, 'catroweb')|default('Selected file:')|e('html_attr') }}"
        data-login-url="{{ path('login') }}"
+       data-max-bytes="{{ constant('App\\Api\\Services\\Projects\\ProjectsRequestValidator::MAX_UPLOAD_SIZE_BYTES') }}"
   >
     <div class="project-upload__info">
       <div class="project-upload__info-item">

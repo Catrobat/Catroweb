@@ -34,6 +34,7 @@ use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\TagsResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -65,6 +66,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     private readonly RateLimiterFactory $scratchConvertBurstLimiter,
     private readonly RateLimiterFactory $scratchConvertDailyLimiter,
     private readonly ScratchManager $scratch_manager,
+    // Channel "upload": one line per upload attempt, kept at info level so rejections reach the log.
+    private readonly LoggerInterface $uploadLogger = new NullLogger(),
   ) {
   }
 
@@ -315,11 +318,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   #[\Override]
   public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, ?string $project_id, int &$responseCode, array &$responseHeaders): array|object|null
   {
+    $started = microtime(true);
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     if ($user instanceof \App\DB\Entity\User\User && null === $this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+      $this->logUploadOutcome('rate_limited', null, $file, $flavor, $started);
 
       return null;
     }
@@ -329,6 +334,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $errors = $validation_wrapper->getErrors();
       $first_message = reset($errors) ?: 'Upload validation failed';
+      $this->logUploadOutcome('rejected', (string) $first_message, $file, $flavor, $started);
       $error_response = ApiErrorResponse::createModel(422, 'validation_error', $first_message);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
@@ -338,6 +344,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     if (!$user instanceof \App\DB\Entity\User\User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
+      $this->logUploadOutcome('unauthorized', null, $file, $flavor, $started);
 
       return null;
     }
@@ -361,6 +368,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         'debug' => $e->getDebugMessage(),
       ]);
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $this->logUploadOutcome('rejected', $e->getMessage(), $file, $flavor, $started);
       $error_response = $this->facade->getResponseManager()->createUploadValidationErrorResponse($e->getMessage(), $accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
@@ -369,6 +377,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     } catch (\Exception $e) {
       $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage().$e->getTraceAsString());
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $this->logUploadOutcome('failed', $e::class, $file, $flavor, $started);
       $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
@@ -378,6 +387,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     if (!$project instanceof Project) {
       $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+      $this->logUploadOutcome('failed', 'no project created', $file, $flavor, $started);
 
       return null;
     }
@@ -388,6 +398,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     // Since we have come this far, the project upload is completed
     $responseCode = Response::HTTP_CREATED;
+    $this->logUploadOutcome('created', null, $file, $flavor, $started);
     $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
 
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
@@ -1000,5 +1011,21 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   private function sharedListCacheId(string $cache_id): ?string
   {
     return true === $this->facade->getAuthenticationManager()->getAuthenticatedUser()?->isMinor() ? null : $cache_id;
+  }
+
+  /**
+   * Uploads that never reach PHP (over the nginx/Cloudflare body limit) only show up as 413 in the nginx log.
+   */
+  private function logUploadOutcome(string $outcome, ?string $reason, UploadedFile $file, string $flavor, float $started): void
+  {
+    $user_agent = (string) $this->request_stack->getCurrentRequest()?->headers->get('User-Agent');
+    $this->uploadLogger->info('Project upload '.$outcome, [
+      'outcome' => $outcome,
+      'reason' => $reason,
+      'bytes' => $file->getSize(),
+      'flavor' => $flavor,
+      'client' => str_contains($user_agent, 'Catrobat') || str_starts_with($user_agent, 'okhttp') ? 'app' : 'browser',
+      'ms' => (int) round((microtime(true) - $started) * 1000),
+    ]);
   }
 }
