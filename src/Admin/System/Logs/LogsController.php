@@ -72,6 +72,10 @@ class LogsController extends CRUDController
    */
   public static function resolveLogFile(string $file, string $logDir = self::LOG_DIR): ?string
   {
+    if (str_contains($file, "\0")) {
+      return null; // realpath() throws on a NUL byte: a 404, not a 500
+    }
+
     $realLogDir = realpath($logDir);
     $realFilePath = realpath($logDir.$file);
     if (false === $realLogDir || false === $realFilePath || !str_starts_with($realFilePath, $realLogDir.DIRECTORY_SEPARATOR)) {

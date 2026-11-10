@@ -58,5 +58,6 @@ final class LogsControllerTest extends TestCase
     yield 'missing file' => ['prod/missing.log'];
     yield 'stream wrapper' => ['php://filter/resource=prod/app.log'];
     yield 'the log directory itself' => [''];
+    yield 'NUL byte' => ["prod/app.log\0"];
   }
 }
