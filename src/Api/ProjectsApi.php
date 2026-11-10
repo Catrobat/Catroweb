@@ -13,6 +13,7 @@ use App\Api\Traits\CursorPaginationTrait;
 use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectDownloads;
+use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CodeView\CodeExportUnavailableException;
@@ -22,6 +23,9 @@ use App\Project\Event\ProjectDownloadEvent;
 use App\Project\Remix\RemixManager;
 use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\ScratchManager;
+use App\Project\Upload\ResumableUpload;
+use App\Project\Upload\ResumableUploadException;
+use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\CodeViewResponse;
@@ -30,6 +34,8 @@ use OpenAPI\Server\Model\FeaturedProjectsListResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ProjectsCategoryListResponse;
 use OpenAPI\Server\Model\ProjectsListResponse;
+use OpenAPI\Server\Model\ProjectUploadSessionRequest;
+use OpenAPI\Server\Model\ProjectUploadSessionResponse;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\TagsResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
@@ -66,6 +72,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     private readonly RateLimiterFactory $scratchConvertBurstLimiter,
     private readonly RateLimiterFactory $scratchConvertDailyLimiter,
     private readonly ScratchManager $scratch_manager,
+    private readonly ResumableUploadStore $resumable_uploads,
     // Channel "upload": one line per upload attempt, kept at info level so rejections reach the log.
     private readonly LoggerInterface $uploadLogger = new NullLogger(),
   ) {
@@ -322,7 +329,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    if ($user instanceof \App\DB\Entity\User\User && null === $this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
+    if ($user instanceof User && null === $this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
       $this->logUploadOutcome('rate_limited', null, $file, $flavor, $started);
 
@@ -342,66 +349,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return $error_response;
     }
 
-    if (!$user instanceof \App\DB\Entity\User\User) {
+    if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
       $this->logUploadOutcome('unauthorized', null, $file, $flavor, $started);
 
       return null;
     }
 
-    // Needed (for tests) to make sure everything is up to date (followers, ..)
-    $this->facade->getProcessor()->refreshUser($user);
-
-    try {
-      $project = $this->facade->getProcessor()->addProject(
-        new AddProjectRequest(
-          $user,
-          $file,
-          $this->facade->getLoader()->getClientIp(),
-          $accept_language,
-          $flavor,
-          $project_id,
-        )
-      );
-    } catch (InvalidCatrobatFileException $e) {
-      $this->facade->getLogger()->warning('Project upload rejected: '.$e->getMessage(), [
-        'debug' => $e->getDebugMessage(),
-      ]);
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $this->logUploadOutcome('rejected', $e->getMessage(), $file, $flavor, $started);
-      $error_response = $this->facade->getResponseManager()->createUploadValidationErrorResponse($e->getMessage(), $accept_language);
-      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
-      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-
-      return $error_response;
-    } catch (\Exception $e) {
-      $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage().$e->getTraceAsString());
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $this->logUploadOutcome('failed', $e::class, $file, $flavor, $started);
-      $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
-      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
-      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-
-      return $error_response;
-    }
-
-    if (!$project instanceof Project) {
-      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
-      $this->logUploadOutcome('failed', 'no project created', $file, $flavor, $started);
-
-      return null;
-    }
-
-    // Setting the project's attributes
-    $project->setPrivate($private);
-    $this->facade->getProcessor()->saveProject($project);
-
-    // Since we have come this far, the project upload is completed
-    $responseCode = Response::HTTP_CREATED;
-    $this->logUploadOutcome('created', null, $file, $flavor, $started);
-    $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
-
-    return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+    return $this->createProjectFromFile($user, $file, $accept_language, $flavor, $private, $project_id, $started, 'single', $responseCode, $responseHeaders);
   }
 
   #[\Override]
@@ -742,7 +697,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     array &$responseHeaders,
   ): array|object|null {
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (!$user instanceof \App\DB\Entity\User\User) {
+    if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return null;
@@ -801,7 +756,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     array &$responseHeaders,
   ): void {
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (!$user instanceof \App\DB\Entity\User\User) {
+    if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return;
@@ -842,7 +797,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $counts = $this->reactions_facade->getLoader()->getReactionCounts($id);
-    $user_reactions = $user instanceof \App\DB\Entity\User\User ? $this->reactions_facade->getLoader()->getUserReactions($id, $user) : [];
+    $user_reactions = $user instanceof User ? $this->reactions_facade->getLoader()->getUserReactions($id, $user) : [];
 
     $responseCode = Response::HTTP_OK;
     $response = $this->reactions_facade->getResponseManager()->createReactionSummaryResponse($counts, $user_reactions);
@@ -1013,16 +968,241 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return true === $this->facade->getAuthenticationManager()->getAuthenticatedUser()?->isMinor() ? null : $cache_id;
   }
 
+  #[\Override]
+  public function projectsUploadsPost(ProjectUploadSessionRequest $project_upload_session_request, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $started = microtime(true);
+    $flavor = $project_upload_session_request->getFlavor() ?? 'pocketcode';
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    if (null === $this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+      $this->logUploadOutcome('rate_limited', null, null, $flavor, $started, 'resumable');
+
+      return null;
+    }
+
+    try {
+      $upload = $this->resumable_uploads->start(
+        $user,
+        (int) $project_upload_session_request->getFileSize(),
+        $project_upload_session_request->getChecksum(),
+        $flavor,
+        (bool) $project_upload_session_request->isPrivate(),
+        $project_upload_session_request->getProjectId(),
+      );
+    } catch (ResumableUploadException $e) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $this->logUploadOutcome('rejected', $e->getMessage(), null, $flavor, $started, 'resumable');
+
+      return ApiErrorResponse::createModel(Response::HTTP_UNPROCESSABLE_ENTITY, $e->getMessage(), $this->resumableUploadErrorText($e));
+    }
+
+    $responseCode = Response::HTTP_CREATED;
+
+    return $this->createUploadSessionResponse($upload);
+  }
+
+  #[\Override]
+  public function projectsUploadsIdGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $upload = $this->findOwnUpload($id, $responseCode);
+    if (!$upload instanceof ResumableUpload) {
+      return null;
+    }
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->createUploadSessionResponse($upload);
+  }
+
+  #[\Override]
+  public function projectsUploadsIdDelete(string $id, int &$responseCode, array &$responseHeaders): void
+  {
+    $upload = $this->findOwnUpload($id, $responseCode);
+    if (!$upload instanceof ResumableUpload) {
+      return;
+    }
+
+    $this->resumable_uploads->delete($upload);
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function projectsUploadsIdChunksIndexPost(string $id, int $index, UploadedFile $chunk, string $checksum, int &$responseCode, array &$responseHeaders): void
+  {
+    $upload = $this->findOwnUpload($id, $responseCode);
+    if (!$upload instanceof ResumableUpload) {
+      return;
+    }
+
+    if (!$chunk->isValid()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return;
+    }
+
+    try {
+      $this->resumable_uploads->storeChunk($upload, $index, $chunk, $checksum);
+    } catch (ResumableUploadException) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return;
+    }
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function projectsUploadsIdCompletePost(string $id, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $started = microtime(true);
+    $upload = $this->findOwnUpload($id, $responseCode, $user);
+    if (!$upload instanceof ResumableUpload || !$user instanceof User) {
+      return null;
+    }
+
+    try {
+      $file = $this->resumable_uploads->assemble($upload);
+    } catch (ResumableUploadException $e) {
+      // Missing chunks can still be sent, so the upload stays until it expires.
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $this->logUploadOutcome('rejected', $e->getMessage(), null, $upload->flavor, $started, 'resumable');
+
+      return ApiErrorResponse::createModel(Response::HTTP_UNPROCESSABLE_ENTITY, $e->getMessage(), $this->resumableUploadErrorText($e));
+    }
+
+    // Joining, checking and extracting a file of several hundred MB can outlast the default limit.
+    set_time_limit(300);
+    $accept_language = $this->facade->getResponseManager()->sanitizeLocale(
+      $this->request_stack->getCurrentRequest()?->headers->get('Accept-Language') ?? 'en'
+    );
+
+    try {
+      return $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, 'resumable', $responseCode, $responseHeaders);
+    } finally {
+      $this->resumable_uploads->delete($upload);
+    }
+  }
+
+  /**
+   * Shared by the single-request upload and the resumable upload's completion: the same checks, malware scan and
+   * project creation either way.
+   */
+  private function createProjectFromFile(User $user, File $file, string $accept_language, string $flavor, bool $private, ?string $project_id, float $started, string $via, int &$responseCode, array &$responseHeaders): ?object
+  {
+    // Needed (for tests) to make sure everything is up to date (followers, ..)
+    $this->facade->getProcessor()->refreshUser($user);
+
+    try {
+      $project = $this->facade->getProcessor()->addProject(
+        new AddProjectRequest(
+          $user,
+          $file,
+          $this->facade->getLoader()->getClientIp(),
+          $accept_language,
+          $flavor,
+          $project_id,
+        )
+      );
+    } catch (InvalidCatrobatFileException $e) {
+      $this->facade->getLogger()->warning('Project upload rejected: '.$e->getMessage(), [
+        'debug' => $e->getDebugMessage(),
+      ]);
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $this->logUploadOutcome('rejected', $e->getMessage(), $file, $flavor, $started, $via);
+      $error_response = $this->facade->getResponseManager()->createUploadValidationErrorResponse($e->getMessage(), $accept_language);
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $error_response;
+    } catch (\Exception $e) {
+      $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage().$e->getTraceAsString());
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $this->logUploadOutcome('failed', $e::class, $file, $flavor, $started, $via);
+      $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $error_response;
+    }
+
+    if (!$project instanceof Project) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+      $this->logUploadOutcome('failed', 'no project created', $file, $flavor, $started, $via);
+
+      return null;
+    }
+
+    // Setting the project's attributes
+    $project->setPrivate($private);
+    $this->facade->getProcessor()->saveProject($project);
+
+    // Since we have come this far, the project upload is completed
+    $responseCode = Response::HTTP_CREATED;
+    $this->logUploadOutcome('created', null, $file, $flavor, $started, $via);
+    $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
+
+    return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
+  private function findOwnUpload(string $id, int &$responseCode, ?User &$user = null): ?ResumableUpload
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $upload = $this->resumable_uploads->find($id, $user);
+    if (!$upload instanceof ResumableUpload) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+    }
+
+    return $upload;
+  }
+
+  private function createUploadSessionResponse(ResumableUpload $upload): ProjectUploadSessionResponse
+  {
+    return new ProjectUploadSessionResponse([
+      'id' => $upload->id,
+      'file_size' => $upload->file_size,
+      'chunk_size' => $upload->chunk_size,
+      'total_chunks' => $upload->total_chunks,
+      'received_chunks' => $this->resumable_uploads->receivedChunks($upload),
+      'max_file_size' => $this->resumable_uploads->getMaxFileSize(),
+      'expires_at' => \DateTime::createFromImmutable($upload->expires_at),
+    ]);
+  }
+
+  private function resumableUploadErrorText(ResumableUploadException $e): string
+  {
+    return match ($e->getMessage()) {
+      ResumableUploadException::TOO_LARGE => sprintf('The project file is larger than the %d MB this server accepts.', intdiv($this->resumable_uploads->getMaxFileSize(), 1_048_576)),
+      ResumableUploadException::TOO_MANY_OPEN => 'Finish or cancel your other uploads first.',
+      ResumableUploadException::INCOMPLETE => 'Some chunks are missing; send them and complete the upload again.',
+      ResumableUploadException::BAD_CHECKSUM => 'The uploaded file does not match its checksum.',
+      default => 'The upload could not be accepted.',
+    };
+  }
+
   /**
    * Uploads that never reach PHP (over the nginx/Cloudflare body limit) only show up as 413 in the nginx log.
    */
-  private function logUploadOutcome(string $outcome, ?string $reason, UploadedFile $file, string $flavor, float $started): void
+  private function logUploadOutcome(string $outcome, ?string $reason, ?File $file, string $flavor, float $started, string $via = 'single'): void
   {
     $user_agent = (string) $this->request_stack->getCurrentRequest()?->headers->get('User-Agent');
     $this->uploadLogger->info('Project upload '.$outcome, [
       'outcome' => $outcome,
       'reason' => $reason,
-      'bytes' => $file->getSize(),
+      'via' => $via,
+      'bytes' => $file?->getSize(),
       'flavor' => $flavor,
       'client' => str_contains($user_agent, 'Catrobat') || str_starts_with($user_agent, 'okhttp') ? 'app' : 'browser',
       'ms' => (int) round((microtime(true) - $started) * 1000),

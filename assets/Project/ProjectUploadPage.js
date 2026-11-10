@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!container) return
 
   const apiUrl = container.dataset.apiUrl
-  // Larger files never reach the server (Cloudflare/nginx answer 413), so say so before uploading.
-  const maxBytes = Number(container.dataset.maxBytes) || 0
   const projectUrlTemplate = container.dataset.projectUrl
 
   const trans = {
@@ -77,10 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
       showError(trans.invalidFile)
       return
     }
-    if (maxBytes > 0 && file.size > maxBytes) {
-      showError(`${trans.fileTooLarge} (${formatSize(file.size)}, max. ${formatSize(maxBytes)})`)
-      return
-    }
     selectedFile = file
     fileName.textContent = `${file.name} (${formatSize(file.size)})`
     fileInfo.style.display = 'flex'
@@ -112,122 +106,160 @@ document.addEventListener('DOMContentLoaded', () => {
     errorContainer.style.display = 'none'
   }
 
-  function uploadProject(file) {
+  // Resumable upload (/api/projects/uploads): any size up to the server's limit, sent in chunks that each fit
+  // through Cloudflare's request limit; a dropped connection only costs the current chunk.
+  async function uploadProject(file) {
     hideError()
     submitBtn.disabled = true
     submitBtn.textContent = trans.uploading
     progressContainer.style.display = 'flex'
-    progressFill.style.width = '0%'
-    progressText.textContent = '0%'
+    setProgress(0)
 
-    // Read file to compute MD5 checksum, then upload
-    const reader = new FileReader()
-    reader.onload = () => {
-      const checksum = computeMd5Hex(new Uint8Array(reader.result))
-      doUpload(file, checksum)
+    try {
+      const upload = await requestJson('POST', `${apiUrl}/uploads`, {
+        file_size: file.size,
+        flavor: 'pocketcode',
+        private: false,
+      })
+      for (let index = 0; index < upload.total_chunks; index++) {
+        const offset = index * upload.chunk_size
+        const blob = file.slice(offset, Math.min(offset + upload.chunk_size, file.size))
+        const checksum = computeMd5Hex(new Uint8Array(await blob.arrayBuffer()))
+        await sendChunkWithRetry(upload.id, index, blob, checksum, (loaded) =>
+          setProgress((offset + loaded) / file.size),
+        )
+      }
+      setProgress(1)
+      showSuccess(await requestJson('POST', `${apiUrl}/uploads/${upload.id}/complete`))
+    } catch (error) {
+      showUploadError(error)
+    } finally {
+      progressContainer.style.display = 'none'
     }
-    reader.onerror = () => {
-      // If reading fails, try without checksum
-      doUpload(file, '')
-    }
-    reader.readAsArrayBuffer(file)
   }
 
-  function doUpload(file, checksum) {
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('checksum', checksum)
-    formData.append('flavor', 'pocketcode')
-    formData.append('private', 'false')
+  function setProgress(fraction) {
+    const percent = Math.round(Math.min(fraction, 1) * 100)
+    progressFill.style.width = `${percent}%`
+    progressText.textContent = `${percent}%`
+  }
 
-    const xhr = new XMLHttpRequest()
-
-    xhr.upload.addEventListener('progress', (e) => {
-      if (e.lengthComputable) {
-        const percent = Math.round((e.loaded / e.total) * 100)
-        progressFill.style.width = `${percent}%`
-        progressText.textContent = `${percent}%`
-      }
+  async function requestJson(method, url, body = null) {
+    const response = await fetch(url, {
+      method,
+      credentials: 'same-origin',
+      headers: body
+        ? { Accept: 'application/json', 'Content-Type': 'application/json' }
+        : { Accept: 'application/json' },
+      body: body ? JSON.stringify(body) : null,
     })
+    let data = {}
+    try {
+      data = await response.json()
+    } catch {
+      // empty or non-JSON body
+    }
+    if (!response.ok) {
+      throw { status: response.status, body: data }
+    }
+    return data
+  }
 
-    xhr.addEventListener('load', () => {
-      progressContainer.style.display = 'none'
+  async function sendChunkWithRetry(uploadId, index, blob, checksum, onProgress) {
+    for (let attempt = 1; ; attempt++) {
+      try {
+        return await sendChunk(uploadId, index, blob, checksum, onProgress)
+      } catch (error) {
+        const retryable = error.status === 0 || error.status >= 500
+        if (!retryable || attempt >= 3) throw error
+        await new Promise((resolve) => setTimeout(resolve, attempt * 2000))
+      }
+    }
+  }
 
-      if (xhr.status === 201) {
-        let response
+  function sendChunk(uploadId, index, blob, checksum, onProgress) {
+    return new Promise((resolve, reject) => {
+      const formData = new FormData()
+      formData.append('chunk', blob, 'chunk')
+      formData.append('checksum', checksum)
+      const xhr = new XMLHttpRequest()
+      xhr.upload.addEventListener('progress', (e) => {
+        if (e.lengthComputable) onProgress(e.loaded)
+      })
+      xhr.addEventListener('load', () => {
+        if (xhr.status === 204) {
+          resolve()
+          return
+        }
+        let body = {}
         try {
-          response = JSON.parse(xhr.responseText)
+          body = JSON.parse(xhr.responseText)
         } catch {
-          response = {}
+          // empty or non-JSON body
         }
+        reject({ status: xhr.status, body })
+      })
+      xhr.addEventListener('error', () => reject({ status: 0, body: {} }))
+      xhr.open('POST', `${apiUrl}/uploads/${uploadId}/chunks/${index}`)
+      xhr.withCredentials = true
+      xhr.setRequestHeader('Accept', 'application/json')
+      xhr.send(formData)
+    })
+  }
 
-        const projectId = response.project_id || response.id || ''
-        const projectUrl = projectUrlTemplate
-          ? projectUrlTemplate.replace('__ID__', projectId)
-          : `/app/project/${projectId}`
+  function showSuccess(response) {
+    const projectId = response.project_id || response.id || ''
+    const projectUrl = projectUrlTemplate
+      ? projectUrlTemplate.replace('__ID__', projectId)
+      : `/app/project/${projectId}`
 
-        const successText = document.getElementById('upload-success-text')
-        const viewBtn = document.getElementById('upload-view-project')
-        const anotherBtn = document.getElementById('upload-another')
+    const successText = document.getElementById('upload-success-text')
+    const viewBtn = document.getElementById('upload-view-project')
+    const anotherBtn = document.getElementById('upload-another')
 
-        if (successText) successText.textContent = trans.uploadSuccess
-        if (viewBtn) {
-          viewBtn.href = projectUrl
-          viewBtn.textContent = trans.viewProject
-          viewBtn.style.display = projectId ? 'inline-block' : 'none'
-        }
-        if (anotherBtn) {
-          anotherBtn.textContent = trans.uploadAnother
-          anotherBtn.addEventListener('click', () => {
-            successContainer.style.display = 'none'
-            fileInfo.style.display = 'none'
-            submitBtn.disabled = true
-            submitBtn.textContent = trans.upload
-            submitBtn.style.display = 'block'
-            dropZone.style.display = 'flex'
-            selectedFile = null
-            fileInput.value = ''
-          })
-        }
-
-        successContainer.style.display = 'block'
-
-        dropZone.style.display = 'none'
+    if (successText) successText.textContent = trans.uploadSuccess
+    if (viewBtn) {
+      viewBtn.href = projectUrl
+      viewBtn.textContent = trans.viewProject
+      viewBtn.style.display = projectId ? 'inline-block' : 'none'
+    }
+    if (anotherBtn) {
+      anotherBtn.textContent = trans.uploadAnother
+      anotherBtn.addEventListener('click', () => {
+        successContainer.style.display = 'none'
         fileInfo.style.display = 'none'
-        submitBtn.style.display = 'none'
-      } else if (xhr.status === 401) {
-        showError(trans.unauthorized)
-        submitBtn.disabled = false
+        submitBtn.disabled = true
         submitBtn.textContent = trans.upload
-      } else if (xhr.status === 429) {
-        showError(trans.rateLimited)
-        submitBtn.disabled = false
-        submitBtn.textContent = trans.upload
-      } else {
-        let message = trans.uploadError
-        try {
-          const err = JSON.parse(xhr.responseText)
-          if (err.error) message = err.error
-          if (err.validation_errors) message = Object.values(err.validation_errors).join(', ')
-        } catch {
-          // ignore parse error
-        }
-        showError(message)
-        submitBtn.disabled = false
-        submitBtn.textContent = trans.upload
-      }
-    })
+        submitBtn.style.display = 'block'
+        dropZone.style.display = 'flex'
+        selectedFile = null
+        fileInput.value = ''
+      })
+    }
 
-    xhr.addEventListener('error', () => {
-      progressContainer.style.display = 'none'
-      showError(trans.uploadError)
-      submitBtn.disabled = false
-      submitBtn.textContent = trans.upload
-    })
+    successContainer.style.display = 'block'
+    dropZone.style.display = 'none'
+    fileInfo.style.display = 'none'
+    submitBtn.style.display = 'none'
+  }
 
-    xhr.open('POST', apiUrl)
-    xhr.withCredentials = true
-    xhr.send(formData)
+  function showUploadError(error) {
+    const status = error?.status
+    // API errors look like {"error": {"type": "...", "message": "..."}}
+    const details = error?.body?.error || {}
+    let message = trans.uploadError
+    if (status === 401) {
+      message = trans.unauthorized
+    } else if (status === 429) {
+      message = trans.rateLimited
+    } else if (details.type === 'file_too_large') {
+      message = `${trans.fileTooLarge}: ${details.message || ''}`.trim()
+    } else if (typeof details.message === 'string' && details.message !== '') {
+      message = details.message
+    }
+    showError(message)
+    submitBtn.disabled = false
+    submitBtn.textContent = trans.upload
   }
 
   // Minimal MD5 implementation (RFC 1321)

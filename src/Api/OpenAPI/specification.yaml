@@ -688,6 +688,154 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
+  /projects/uploads:
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Projects'
+      summary: 'Start a resumable project upload'
+      description: 'For project files of any size up to the server limit, and for unreliable connections. Start an upload with the file size, send the file in chunks of exactly `chunk_size` bytes (only the last one may be shorter) to `/projects/uploads/{id}/chunks/{index}`, then call `/projects/uploads/{id}/complete`. A dropped connection only costs the current chunk: `GET /projects/uploads/{id}` lists the chunks the server already has. Uploads expire after 24 hours.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUploadSessionRequest'
+      responses:
+        '201':
+          description: 'Upload started'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUploadSessionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /projects/uploads/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: 'Upload id as returned when the upload was started'
+        schema:
+          type: string
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Projects'
+      summary: 'Get the state of a resumable project upload'
+      responses:
+        '200':
+          description: 'Upload state'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUploadSessionResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Projects'
+      summary: 'Abort a resumable project upload'
+      responses:
+        '204':
+          description: 'Upload aborted and its chunks deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /projects/uploads/{id}/chunks/{index}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: 'Upload id as returned when the upload was started'
+        schema:
+          type: string
+      - name: index
+        in: path
+        required: true
+        description: 'Zero-based chunk number'
+        schema:
+          type: integer
+          minimum: 0
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Projects'
+      summary: 'Send one chunk of a resumable project upload'
+      description: 'Chunks may arrive in any order and may be sent again; a resent chunk replaces the earlier one.'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProjectUploadChunkRequest'
+      responses:
+        '204':
+          description: 'Chunk stored'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /projects/uploads/{id}/complete:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: 'Upload id as returned when the upload was started'
+        schema:
+          type: string
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Projects'
+      summary: 'Finish a resumable project upload and create or update the project'
+      description: 'Joins the chunks and runs the same checks as a single-request upload. On success the upload is removed.'
+      responses:
+        '201':
+          description: 'Project successfully uploaded'
+          headers:
+            Location:
+              schema:
+                type: string
+                example: 'https://share.catrobat.org/app/project/63768cf1-5f07-11ea-a2ae-000c292a0f49'
+              description: 'Resource location on server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
   /projects/featured:
     get:
       tags:
@@ -4637,6 +4785,92 @@ components:
       required:
         - checksum
         - file
+
+    ProjectUploadSessionRequest:
+      type: object
+      properties:
+        file_size:
+          type: integer
+          format: int64
+          minimum: 1
+          description: 'Size of the *.catrobat file in bytes'
+          example: 314572800
+        checksum:
+          type: string
+          description: 'Optional MD5 of the whole *.catrobat file, checked when the upload is completed'
+          example: 'aqqoslcotroewlclcceadfgf'
+        flavor:
+          type: string
+          default: 'pocketcode'
+          example: 'pocketcode'
+          description: 'The flavor of this project'
+        private:
+          type: boolean
+          description: 'Indicates whether a project should be private'
+          default: false
+          example: false
+        project_id:
+          type: string
+          format: uuid
+          description: 'Optional UUID of an existing project to update (see ProjectUploadRequest)'
+          example: '63768cf1-5f07-11ea-a2ae-000c292a0f49'
+      required:
+        - file_size
+
+    ProjectUploadSessionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'b7a1c9e2f04d4b5e9c2a6f8d1e3b5a70'
+        file_size:
+          type: integer
+          format: int64
+          example: 314572800
+        chunk_size:
+          type: integer
+          description: 'Every chunk except the last must be exactly this many bytes'
+          example: 16777216
+        total_chunks:
+          type: integer
+          example: 19
+        received_chunks:
+          type: array
+          description: 'Zero-based numbers of the chunks the server has stored'
+          items:
+            type: integer
+          example: [0, 1, 2]
+        max_file_size:
+          type: integer
+          format: int64
+          description: 'Largest project file this server accepts, in bytes'
+          example: 314572800
+        expires_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - file_size
+        - chunk_size
+        - total_chunks
+        - received_chunks
+        - max_file_size
+        - expires_at
+
+    ProjectUploadChunkRequest:
+      type: object
+      properties:
+        chunk:
+          type: string
+          format: binary
+          description: 'The bytes of this chunk'
+        checksum:
+          type: string
+          description: 'MD5 of this chunk; a chunk that arrives damaged is refused'
+          example: 'aqqoslcotroewlclcceadfgf'
+      required:
+        - chunk
+        - checksum
 
     UpdateProjectRequest:
       type: object

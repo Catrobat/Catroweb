@@ -37,6 +37,7 @@ set('shared_dirs', [
   'var/log',
   'var/code-view', // code views made by the player's code export (App\Project\CodeView)
   'var/sessions',
+  'var/resumable_uploads', // project files arriving in chunks (App\Project\Upload); must survive a deploy mid-upload
   'public/resources',
   '.jwt',
 ]);

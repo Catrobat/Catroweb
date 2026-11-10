@@ -14,6 +14,7 @@ use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Remix\RemixManager;
 use App\Project\Scratch\ScratchManager;
+use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Model\CodeViewResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -87,6 +88,6 @@ final class ProjectsApiCodeViewTest extends TestCase
     $facade->method('getLoader')->willReturn($loader);
     $limiter = new RateLimiterFactory(['id' => 'code-view-test', 'policy' => 'no_limit'], new InMemoryStorage());
 
-    return new ProjectsApi($facade, $this->createStub(ReactionsApiFacade::class), $builder, $this->createStub(RemixManager::class), $this->createStub(ScreenshotRepository::class), $limiter, $limiter, $limiter, new RequestStack(), new NullLogger(), $limiter, $limiter, $limiter, $this->createStub(ScratchManager::class));
+    return new ProjectsApi($facade, $this->createStub(ReactionsApiFacade::class), $builder, $this->createStub(RemixManager::class), $this->createStub(ScreenshotRepository::class), $limiter, $limiter, $limiter, new RequestStack(), new NullLogger(), $limiter, $limiter, $limiter, $this->createStub(ScratchManager::class), $this->createStub(ResumableUploadStore::class));
   }
 }

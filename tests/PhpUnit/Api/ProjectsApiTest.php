@@ -23,6 +23,7 @@ use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\ProjectManager;
 use App\Project\Remix\RemixManager;
 use App\Project\Scratch\ScratchManager;
+use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Handler\TestHandler;
@@ -82,6 +83,7 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_burst'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_daily'),
       $this->createStub(ScratchManager::class),
+      $this->createStub(ResumableUploadStore::class),
     );
 
     ProjectsApiTest::bootKernel();
@@ -737,6 +739,7 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_burst_log'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_scratch_convert_daily_log'),
       $this->createStub(ScratchManager::class),
+      $this->createStub(ResumableUploadStore::class),
       new Logger('upload', [$handler]),
     );
     $validation_wrapper = $this->createStub(ValidationWrapper::class);

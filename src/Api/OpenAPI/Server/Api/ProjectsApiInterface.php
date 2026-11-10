@@ -32,6 +32,7 @@ namespace OpenAPI\Server\Api;
 
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\UpdateProjectRequest;
+use OpenAPI\Server\Model\ProjectUploadSessionRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -430,6 +431,87 @@ interface ProjectsApiInterface
    */
   public function projectsTagsGet(
     string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation projectsUploadsIdChunksIndexPost.
+   *
+   * Send one chunk of a resumable project upload
+   *
+   * @param string       $id              Upload id as returned when the upload was started (required)
+   * @param int          $index           Zero-based chunk number (required)
+   * @param UploadedFile $chunk           The bytes of this chunk (required)
+   * @param string       $checksum        MD5 of this chunk; a chunk that arrives damaged is refused (required)
+   * @param int          &$responseCode   The HTTP Response Code
+   * @param array        $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectsUploadsIdChunksIndexPost(
+    string $id,
+    int $index,
+    UploadedFile $chunk,
+    string $checksum,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation projectsUploadsIdCompletePost.
+   *
+   * Finish a resumable project upload and create or update the project
+   *
+   * @param string $id              Upload id as returned when the upload was started (required)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectsUploadsIdCompletePost(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation projectsUploadsIdDelete.
+   *
+   * Abort a resumable project upload
+   *
+   * @param string $id              Upload id as returned when the upload was started (required)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectsUploadsIdDelete(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation projectsUploadsIdGet.
+   *
+   * Get the state of a resumable project upload
+   *
+   * @param string $id              Upload id as returned when the upload was started (required)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectsUploadsIdGet(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation projectsUploadsPost.
+   *
+   * Start a resumable project upload
+   *
+   * @param ProjectUploadSessionRequest $project_upload_session_request (required)
+   * @param int                         &$responseCode                  The HTTP Response Code
+   * @param array                       $responseHeaders                Additional HTTP headers to return with the response ()
+   */
+  public function projectsUploadsPost(
+    ProjectUploadSessionRequest $project_upload_session_request,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;

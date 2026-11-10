@@ -14,6 +14,7 @@ use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\Remix\RemixManager;
 use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\ScratchManager;
+use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Model\ErrorResponse;
 use OpenAPI\Server\Model\ProjectResponse;
@@ -185,6 +186,7 @@ final class ProjectsApiScratchImportTest extends TestCase
       $limiter('burst', $convert_limit),
       $limiter('daily', $convert_limit),
       $scratch_manager,
+      $this->createStub(ResumableUploadStore::class),
     );
   }
 }
