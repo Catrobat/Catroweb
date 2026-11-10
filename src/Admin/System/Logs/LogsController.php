@@ -38,7 +38,7 @@ class LogsController extends CRUDController
       $file = $allFiles[0];
     }
 
-    $path = empty($file) ? null : $this->resolveLogFile($file);
+    $path = empty($file) ? null : self::resolveLogFile($file);
     $content = null === $path ? null : $this->getLogFileContent($path, $searchParam);
 
     return $this->render('Admin/SystemManagement/Logs.html.twig', [
@@ -61,18 +61,23 @@ class LogsController extends CRUDController
   }
 
   /**
-   * The canonical path of a file inside LOG_DIR, or null: `../` and symlinks out of it, and URLs,
-   * never get past realpath() plus the prefix check, so the result is safe to open.
+   * The canonical path of a file inside $logDir, or null: `../` and symlinks out of it, and URLs,
+   * never get past realpath() plus the prefix check, so the result is safe to open. Shared by the
+   * log viewer and DownloadLogController; $logDir is only overridden by tests.
    *
    * @psalm-taint-escape file
    * @psalm-taint-escape ssrf
    * @psalm-taint-escape url_component
    * @psalm-taint-escape url_path
    */
-  private function resolveLogFile(string $file): ?string
+  public static function resolveLogFile(string $file, string $logDir = self::LOG_DIR): ?string
   {
-    $realLogDir = realpath(self::LOG_DIR);
-    $realFilePath = realpath(self::LOG_DIR.$file);
+    if (str_contains($file, "\0")) {
+      return null; // realpath() throws on a NUL byte: a 404, not a 500
+    }
+
+    $realLogDir = realpath($logDir);
+    $realFilePath = realpath($logDir.$file);
     if (false === $realLogDir || false === $realFilePath || !str_starts_with($realFilePath, $realLogDir.DIRECTORY_SEPARATOR)) {
       return null;
     }

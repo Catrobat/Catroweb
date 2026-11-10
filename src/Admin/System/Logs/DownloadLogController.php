@@ -6,9 +6,7 @@ namespace App\Admin\System\Logs;
 
 use App\DB\Entity\User\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -35,24 +33,15 @@ class DownloadLogController extends AbstractController
       throw $this->createAccessDeniedException('Invalid CSRF token.');
     }
 
-    $fileName = (string) $request->request->get('file');
-    $path = LogsController::LOG_DIR;
-    $finder = new Finder();
-    if ($finder->files()->in($path)->depth('>= 1')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults()) {
-      $file = new File($path.$fileName);
-      if ($file->isFile()) {
-        $response = new BinaryFileResponse($file);
-        $d = $response->headers->makeDisposition(
-          ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-          $file->getFilename()
-        );
-        $response->headers->set('Content-Disposition', $d);
-        $response->headers->set('Content-type', 'text/plain');
-
-        return $response;
-      }
+    $path = LogsController::resolveLogFile($request->request->getString('file'));
+    if (null === $path || !is_file($path)) {
+      throw new NotFoundHttpException();
     }
 
-    throw new NotFoundHttpException();
+    $response = new BinaryFileResponse($path);
+    $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, basename($path));
+    $response->headers->set('Content-type', 'text/plain');
+
+    return $response;
   }
 }
