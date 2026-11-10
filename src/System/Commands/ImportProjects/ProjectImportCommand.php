@@ -8,6 +8,7 @@ use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixGraphLayout;
+use App\Security\Malware\MalwareScanUnavailableException;
 use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\Exception\ORMException;
@@ -85,6 +86,7 @@ class ProjectImportCommand extends Command
     }
 
     $imported = 0;
+    $unscanned = 0;
 
     /** @var SplFileInfo $file */
     foreach ($finder as $file) {
@@ -99,13 +101,16 @@ class ProjectImportCommand extends Command
         $project->setViews(random_int(0, 10));
         $output->writeln('Added program <'.$project->getName().'> for user: <'.$username.'>');
         ++$imported;
-      } catch (InvalidCatrobatFileException|\RuntimeException $e) {
-        // RuntimeException: e.g. the malware scan could not run; skip this file, not the whole import.
+      } catch (InvalidCatrobatFileException $e) {
         $output->writeln('FAILED to add program!');
         $output->writeln($e->getMessage().' ('.$e->getCode().')');
+      } catch (MalwareScanUnavailableException $e) {
+        // Skip the file, not the whole import, but don't report success for what could not be checked.
+        $output->writeln('FAILED to add program: '.$e->getMessage());
+        ++$unscanned;
       }
     }
 
-    return 0;
+    return 0 === $unscanned ? 0 : 1;
   }
 }

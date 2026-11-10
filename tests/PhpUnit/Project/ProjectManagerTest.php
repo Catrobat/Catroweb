@@ -25,6 +25,7 @@ use App\Project\ProjectDeduplicationService;
 use App\Project\ProjectManager;
 use App\Security\Malware\MalwareScanner;
 use App\Security\Malware\MalwareScanResult;
+use App\Security\Malware\MalwareScanUnavailableException;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
@@ -493,8 +494,7 @@ class ProjectManagerTest extends TestCase
     $malware_scanner = $this->createStub(MalwareScanner::class);
     $malware_scanner->method('scanFile')->willReturn(MalwareScanResult::error('ClamAV unavailable'));
 
-    $this->expectException(\RuntimeException::class);
-    $this->expectExceptionMessage('Malware scan could not run');
+    $this->expectException(MalwareScanUnavailableException::class);
 
     $program_manager = $this->createProjectManagerWithMocks(
       malware_scanner: $malware_scanner,

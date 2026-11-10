@@ -23,6 +23,7 @@ use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
 use App\Security\Malware\MalwareScanner;
+use App\Security\Malware\MalwareScanUnavailableException;
 use App\Storage\Images\ImageVariantUrlBuilder;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
@@ -159,7 +160,7 @@ class ProjectManager
     $scan_result = $this->malware_scanner->scanFile($file->getPathname());
     if (!$scan_result->is_clean && !$scan_result->scan_performed) {
       // Fail closed, but as a server fault (ClamAV down or timed out), not as a verdict on the file.
-      throw new \RuntimeException('Malware scan could not run: '.$scan_result->error_message);
+      throw new MalwareScanUnavailableException('Malware scan could not run: '.$scan_result->error_message);
     }
 
     if (!$scan_result->is_clean) {
