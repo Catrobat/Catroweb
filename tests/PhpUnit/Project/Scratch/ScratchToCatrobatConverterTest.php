@@ -320,6 +320,21 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="PLUS"]/leftChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
   }
 
+  public function testAFieldWhosePairIsNestedOneLevelDeeperKeepsItsName(): void
+  {
+    // Seen in prod: fields such as LIST or VARIABLE arrive as [["name", "id"]], which used to become "Array".
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'set', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'set' => ['opcode' => 'data_setvariableto', 'next' => 'say', 'inputs' => ['VALUE' => [1, [10, '7']]], 'fields' => ['VARIABLE' => [['score', 'v1']]]],
+      'say' => ['opcode' => 'looks_say', 'next' => null, 'inputs' => ['MESSAGE' => [3, 'item', [10, '']]], 'fields' => []],
+      'item' => ['opcode' => 'data_itemoflist', 'inputs' => ['INDEX' => [1, [7, 'last']]], 'fields' => ['LIST' => [['names', 'l1']]]],
+    ], ['variables' => ['v1' => ['score', '0']], 'lists' => ['l1' => ['names', ['a', 'b']]]]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame(0.0, $xpath->evaluate('count(//*[text()="Array"])'));
+    $this->assertGreaterThan(0.0, $xpath->evaluate('count(//*[type="USER_LIST" and value="names"])'));
+    $this->assertGreaterThan(0.0, $xpath->evaluate('count(//brick[@type="SetVariableBrick"]//*[text()="score"])'));
+  }
+
   public function testKeysBecomeOnScreenButtons(): void
   {
     $xml = self::convertBlocks([
