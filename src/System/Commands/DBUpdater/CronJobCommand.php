@@ -215,23 +215,9 @@ class CronJobCommand extends Command
       $output
     );
 
-    // Log maintenance (fast, but lowest priority)
-
-    $this->runCronJob(
-      'Archive log files',
-      ['bin/console', 'catrobat:logs:archive'],
-      ['timeout' => self::ONE_HOUR_IN_SECONDS],
-      '1 day',
-      $output
-    );
-
-    $this->runCronJob(
-      'Clean old log files',
-      ['bin/console', 'catrobat:clean:logs'],
-      ['timeout' => self::ONE_HOUR_IN_SECONDS],
-      '1 week',
-      $output
-    );
+    // No log maintenance here: Monolog rotates its own files (max_files). The former "Archive log files" +
+    // "Clean old log files" jobs emptied the whole var/log daily, including the archive they had just
+    // written, the upload log and the cron log.
 
     return 0;
   }

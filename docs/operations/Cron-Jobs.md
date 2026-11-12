@@ -4,10 +4,10 @@ One dispatcher, `catrobat:cronjob`, runs every 10 minutes from system cron. It c
 
 ```
 # /etc/cron.d/catroweb
-*/10 * * * * www-data cd /var/www/share/current && php bin/console catrobat:cronjob --env=prod >> /var/www/share/shared/var/log/prod/cronjob.log 2>&1
+*/10 * * * * www-data cd /var/www/share/current && php bin/console catrobat:cronjob --env=prod >> /var/log/catroweb/cronjob.log 2>&1
 ```
 
-The log must go to a directory `www-data` can write. `/var/log` is `root:syslog`, so a redirect there fails and bash never starts the command: from 2026-04-21 to 2026-11-12 no job ran at all, silently.
+The log must go to a directory `www-data` can write, and not into the app's `var/log` (Symfony maintenance may empty it). `/var/log/catroweb/` is created `www-data`-owned for this. `/var/log` itself is `root:syslog`: a redirect there fails and bash never starts the command, so from 2026-04-21 to 2026-11-12 no job ran at all, silently.
 
 ## Behavior to know
 
