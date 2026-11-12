@@ -138,18 +138,9 @@
               {% for RemovableObject in RemovableObjects %}
                 <div class="box">
                   <div class="box-header">
-                    {% if RemovableObject.archive_command_link != null %}
-                      <a class="btn btn-sm btn-default" style="min-width:20%;"
+                    <a class="btn btn-sm btn-default" style="min-width:20%;"
                          href="{{ RemovableObject.command_link }}"><i
                             class="glyphicon glyphicon-trash"></i> {{ RemovableObject.command_name }}</a>
-                      <a class="btn btn-sm btn-default" style="min-width:20%;"
-                         href="{{ RemovableObject.archive_command_link }}"><i
-                            class="glyphicon glyphicon-briefcase"></i> {{ RemovableObject.archive_command_name }}</a>
-                    {% else %}
-                      <a class="btn btn-sm btn-default" style="min-width:20%;"
-                         href="{{ RemovableObject.command_link }}"><i
-                            class="glyphicon glyphicon-trash"></i> {{ RemovableObject.command_name }}</a>
-                    {% endif %}
                     <span style="margin-left: 5%;">
                                   {{ RemovableObject.name }} ({{ RemovableObject.size }})
                                   </span>

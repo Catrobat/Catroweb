@@ -18,10 +18,6 @@ class RemovableMemory
 
   public ?string $execute_link = null;
 
-  public ?string $archive_command_link = null;
-
-  public ?string $archive_command_name = null;
-
   public function __construct(public string $name = '', public string $description = '')
   {
   }
@@ -49,26 +45,6 @@ class RemovableMemory
   public function setDownloadLink(string $download_link): void
   {
     $this->download_link = $download_link;
-  }
-
-  public function getArchiveCommandLink(): ?string
-  {
-    return $this->archive_command_link;
-  }
-
-  public function setArchiveCommandLink(string $archive_command_link): void
-  {
-    $this->archive_command_link = $archive_command_link;
-  }
-
-  public function getArchiveCommandName(): ?string
-  {
-    return $this->archive_command_name;
-  }
-
-  public function setArchiveCommandName(string $archive_command_name): void
-  {
-    $this->archive_command_name = $archive_command_name;
   }
 
   public function setExecuteLink(string $execute_link): void

@@ -7,7 +7,6 @@ namespace App\Admin\System\Maintenance;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,8 +24,6 @@ class MaintenanceController extends CRUDController
     protected KernelInterface $kernel,
     #[Autowire('%catrobat.file.storage.dir%')]
     private readonly string $file_storage_dir,
-    #[Autowire('%catrobat.logs.dir%')]
-    private readonly string $log_dir,
     private readonly SystemHealthService $healthService,
   ) {
   }
@@ -55,61 +52,6 @@ class MaintenanceController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @throws \Exception
-   */
-  public function archiveLogsAction(): RedirectResponse
-  {
-    if (!$this->admin->isGranted('EXTRACTED')) {
-      throw new AccessDeniedException();
-    }
-
-    $application = new Application($this->kernel);
-    $application->setAutoExit(false);
-
-    $input = new ArrayInput([
-      'command' => 'catrobat:logs:archive',
-    ]);
-
-    $return = $application->run($input, new NullOutput());
-    if (0 === $return) {
-      $this->addFlash('sonata_flash_success', 'Archive log files OK');
-    }
-
-    return new RedirectResponse($this->admin->generateUrl('list'));
-  }
-
-  /**
-   * @throws \Exception
-   */
-  public function deleteLogsAction(): RedirectResponse
-  {
-    if (!$this->admin->isGranted('EXTRACTED')) {
-      throw new AccessDeniedException();
-    }
-
-    $application = new Application($this->kernel);
-    $application->setAutoExit(false);
-
-    $input = new ArrayInput([
-      'command' => 'catrobat:clean:logs',
-    ]);
-
-    $output = new BufferedOutput();
-
-    $return = $application->run($input, $output);
-
-    if (0 === $return) {
-      $this->addFlash('sonata_flash_success', 'Clean log files OK');
-    } else {
-      $message = "<strong>Failed cleaning log files:</strong><br />\n";
-      $message .= str_replace("\n", "<br />\n", $output->fetch());
-      $this->addFlash('sonata_flash_error', $message);
-    }
-
-    return new RedirectResponse($this->admin->generateUrl('list'));
-  }
-
   #[\Override]
   public function listAction(Request $request): Response
   {
@@ -124,14 +66,6 @@ class MaintenanceController extends CRUDController
     $this->setSizeOfObject($rm, $this->file_storage_dir);
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
-    $RemovableObjects[] = $rm;
-    $description = 'This will remove all log files.';
-    $rm = new RemovableMemory('Logs', $description);
-    $this->setSizeOfObject($rm, $this->log_dir);
-    $rm->setCommandName('Delete log files');
-    $rm->setCommandLink($this->admin->generateUrl('delete_logs'));
-    $rm->setArchiveCommandLink($this->admin->generateUrl('archive_logs'));
-    $rm->setArchiveCommandName('Archive logs files');
     $RemovableObjects[] = $rm;
     $disks = $this->getDiskStats();
     $primaryDisk = $disks[0];

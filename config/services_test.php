@@ -32,7 +32,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.media.dir', '%catrobat.pubdir%resources_test/media/');
   $parameters->set('catrobat.media.path', 'resources_test/media/');
   $parameters->set('catrobat.tests.upld-dwnld-dir', 'tests/TestData/UploadDownloadTemp');
-  $parameters->set('catrobat.logs.dir', '%kernel.project_dir%/tests/TestData/Cache/log/');
   $parameters->set('catrobat.testreports.behat', 'tests/TestReports/Behat/');
   $parameters->set('catrobat.testreports.screenshot', 'tests/TestReports/TestScreenshots/');
 
