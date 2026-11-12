@@ -802,7 +802,7 @@ final class BlockConverter
     }
 
     if (($block['shadow'] ?? false) && !str_starts_with((string) ($block['opcode'] ?? ''), 'math_') && 'text' !== ($block['opcode'] ?? null) && [] !== ($block['fields'] ?? [])) {
-      return Formula::literal((string) (reset($block['fields'])[0] ?? '')); // a menu, e.g. a costume name
+      return Formula::literal(self::pair(reset($block['fields']))[0]); // a menu, e.g. a costume name
     }
 
     return $this->guarded($value, fn (): Formula => $this->reporter($block));
@@ -1054,17 +1054,23 @@ final class BlockConverter
   /** Value of a field such as VARIABLE: ["name", "id"]. */
   private function field(array $b, string $name): string
   {
-    return self::scalar($b['fields'][$name][0] ?? null) ?? '';
+    return self::pair($b['fields'][$name] ?? null)[0];
   }
 
-  /** Some projects nest a field's pair one level deeper ([["name", "id"]]); take the first scalar instead of "Array". */
-  private static function scalar(mixed $value): ?string
+  /**
+   * A field's [name, id]. Some projects nest the pair one level deeper ([["name", "id"]]), which used to
+   * become the name "Array" and lose the id.
+   *
+   * @return array{0: string, 1: ?string}
+   */
+  public static function pair(mixed $field): array
   {
-    while (is_array($value)) {
-      $value = [] === $value ? null : reset($value);
+    $field = is_array($field) ? $field : [];
+    while (is_array($field[0] ?? null)) {
+      $field = $field[0];
     }
 
-    return null === $value ? null : (string) $value;
+    return [is_scalar($field[0] ?? null) ? (string) $field[0] : '', is_scalar($field[1] ?? null) ? (string) $field[1] : null];
   }
 
   private function inputBlockId(array $b, string $name): ?string
@@ -1093,7 +1099,7 @@ final class BlockConverter
 
     $fields = $this->blocks[$value]['fields'] ?? [];
 
-    return [] === $fields ? null : (string) (reset($fields)[0] ?? '');
+    return [] === $fields ? null : self::pair(reset($fields))[0];
   }
 
   /** Selected value of a menu input (its shadow block holds the same-named field), or null if a reporter was dropped in. */
@@ -1129,23 +1135,23 @@ final class BlockConverter
 
   private function monitor(array $b): \DOMElement
   {
-    $field = $b['fields']['VARIABLE'] ?? ['', null];
+    [$name, $id] = self::pair($b['fields']['VARIABLE'] ?? null);
 
-    return $this->model->monitorElement($this->sprite_key, self::scalar($field[0] ?? null) ?? '', self::scalar($field[1] ?? null));
+    return $this->model->monitorElement($this->sprite_key, $name, $id);
   }
 
   private function variable(array $b): \DOMElement
   {
-    $field = $b['fields']['VARIABLE'] ?? ['', null];
+    [$name, $id] = self::pair($b['fields']['VARIABLE'] ?? null);
 
-    return $this->model->variableElement($this->sprite_key, self::scalar($field[0] ?? null) ?? '', self::scalar($field[1] ?? null));
+    return $this->model->variableElement($this->sprite_key, $name, $id);
   }
 
   private function userList(array $b): \DOMElement
   {
-    $field = $b['fields']['LIST'] ?? ['', null];
+    [$name, $id] = self::pair($b['fields']['LIST'] ?? null);
 
-    return $this->model->listElement($this->sprite_key, self::scalar($field[0] ?? null) ?? '', self::scalar($field[1] ?? null));
+    return $this->model->listElement($this->sprite_key, $name, $id);
   }
 
   // ---- XML helpers ----

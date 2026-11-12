@@ -637,7 +637,7 @@ class ScratchToCatrobatConverter
     foreach ($targets as $target) {
       foreach ($target['blocks'] ?? [] as $block) {
         if (\is_array($block) && \in_array($block['opcode'] ?? null, ['event_whenkeypressed', 'sensing_keyoptions'], true)) {
-          $keys[mb_strtolower((string) ($block['fields']['KEY_OPTION'][0] ?? ''))] = true;
+          $keys[mb_strtolower(BlockConverter::pair($block['fields']['KEY_OPTION'] ?? null)[0])] = true;
         }
       }
     }
