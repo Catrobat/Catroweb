@@ -105,18 +105,6 @@ class AchievementManager
     return $this->mapUserAchievementsToAchievements($this->findUserAchievements($user));
   }
 
-  /**
-   * @return Achievement[]
-   */
-  public function findLockedAchievements(User $user): array
-  {
-    $achievements = $this->findAllEnabledAchievements();
-    $unlocked_achievements = $this->findUnlockedAchievements($user);
-    $achievements_unlocked_id_list = array_map(static fn (Achievement $achievement): ?string => $achievement->getId(), $unlocked_achievements);
-
-    return array_filter($achievements, static fn (Achievement $achievement): bool => !in_array($achievement->getId(), $achievements_unlocked_id_list, true));
-  }
-
   public function findMostRecentUserAchievement(User $user): ?UserAchievement
   {
     return $this->user_achievement_repository->findMostRecentUserAchievement($user);

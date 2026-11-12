@@ -67,23 +67,6 @@ class UserManager
     return $this->userPasswordHasher->isPasswordValid($user, $password);
   }
 
-  public function getMappedUserData(array $raw_user_data): array
-  {
-    $response_data = [];
-
-    foreach ($raw_user_data as $user) {
-      $response_data[] = [
-        'username' => $user->getUsername(),
-        'id' => $user->getId(),
-        'avatar' => $user->getAvatar(),
-        'project_count' => $this->project_manager->countPublicUserProjects($user->getId()),
-        'profile' => $user,
-      ];
-    }
-
-    return $response_data;
-  }
-
   /**
    * An unverified account with the email of an OAuth sign-in may have been registered by someone else.
    * Only when the provider confirms it verified that email, the account is claimed for the sign-in:
@@ -290,11 +273,6 @@ class UserManager
     }
 
     return $this->findUserByUsername($usernameOrEmail);
-  }
-
-  public function findUserByConfirmationToken(string $token): ?User
-  {
-    return $this->findOneBy(['confirmation_token' => $token]);
   }
 
   /**

@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\DB\EntityRepository\Project;
 
 use App\DB\Entity\Project\Remix\ProjectRemixBackwardRelation;
-use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -82,28 +80,6 @@ class ProjectRemixBackwardRepository extends ServiceEntityRepository
       ->delete()
       ->getQuery()
       ->execute()
-    ;
-  }
-
-  /**
-   * @return ProjectRemixBackwardRelation[]
-   */
-  public function getUnseenChildRelationsOfUser(User $user): array
-  {
-    $qb = $this->createQueryBuilder('b');
-
-    return $qb
-      ->select('b')
-      ->innerJoin('b.parent', 'p', Join::ON, 'b.parent_id = p.id')
-      ->innerJoin('b.child', 'p2', Join::ON, 'b.child_id = p2.id')
-      ->where($qb->expr()->eq('p.user', ':user'))
-      ->andWhere($qb->expr()->neq('p2.user', 'p.user'))
-      ->andWhere($qb->expr()->isNull('b.seen_at'))
-      ->orderBy('b.created_at', 'DESC')
-      ->setParameter('user', $user)
-      ->distinct()
-      ->getQuery()
-      ->getResult()
     ;
   }
 

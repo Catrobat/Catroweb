@@ -7,7 +7,6 @@ namespace App\DB\EntityRepository\User\Comment;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\Comment\UserComment;
-use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,20 +19,6 @@ class UserCommentRepository extends ServiceEntityRepository
   public function __construct(ManagerRegistry $managerRegistry)
   {
     parent::__construct($managerRegistry, UserComment::class);
-  }
-
-  /**
-   * Returns all UserComments written by a certain User.
-   *
-   * @param User $user The User which UserComments should be returned
-   *
-   * @return UserComment[] The UserComments written by the specified User
-   */
-  public function getCommentsWrittenByUser(User $user): array
-  {
-    $em = $this->getEntityManager();
-
-    return $em->getRepository(UserComment::class)->findBy(['user' => $user]);
   }
 
   public function findAllStudioComments(?Studio $studio, ?int $limit = null, int $offset = 0): array
@@ -94,60 +79,6 @@ class UserCommentRepository extends ServiceEntityRepository
   public function countCommentReplies(string $comment_id): int
   {
     return $this->count(['parent_id' => $comment_id, 'auto_hidden' => false, 'is_deleted' => false]);
-  }
-
-  public function findCommentsByProgramId(string $program_id): array
-  {
-    $qb = $this->createQueryBuilder('uc');
-
-    return $qb->select('uc')
-      ->addSelect('u')
-      ->leftJoin('uc.user', 'u')
-      ->where('uc.project = :program_id')
-      ->setParameter('program_id', $program_id)
-      ->andWhere('uc.parent_id IS NULL')
-      ->orderBy('uc.uploadDate', 'DESC')
-      ->getQuery()->getResult()
-    ;
-  }
-
-  public function findCommentRepliesByParentId(string $parent_id): array
-  {
-    $qb = $this->createQueryBuilder('uc');
-
-    return $qb->select('uc')
-      ->addSelect('u')
-      ->leftJoin('uc.user', 'u')
-      ->where('uc.parent_id = :parent_id')
-      ->setParameter('parent_id', $parent_id)
-      ->orderBy('uc.uploadDate', 'DESC')
-      ->getQuery()->getResult()
-    ;
-  }
-
-  public function getProjectCommentOverviewListData(Project $project): array
-  {
-    $results = $this->createQueryBuilder('c')
-      ->innerJoin('c.user', 'cu')
-      ->select(
-        'c.id',
-        'c.username',
-        'c.text',
-        'c.is_deleted',
-        'c.auto_hidden as is_reported',
-        'c.uploadDate as upload_date',
-        'c.parent_id as parent_id',
-        'cu.id as user_id',
-        'cu.approved as user_approved')
-      ->where('c.project = :project')
-      ->andWhere('c.parent_id IS NULL')
-      ->andWhere('c.auto_hidden = false')
-      ->setParameter('project', $project)
-      ->getQuery()
-      ->getResult()
-    ;
-
-    return $this->attachReplyCounts($results);
   }
 
   public function getProjectCommentsPageData(Project $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
@@ -319,24 +250,5 @@ class UserCommentRepository extends ServiceEntityRepository
     }
 
     return $results;
-  }
-
-  public function getProjectCommentDetailViewCommentListData(string $parent_comment_id): array
-  {
-    return $this->createQueryBuilder('c')
-      ->innerJoin('c.user', 'cu')
-      ->select(
-        'c.id',
-        'c.username',
-        'c.text',
-        'c.is_deleted',
-        'c.uploadDate as upload_date',
-        'cu.id as user_id'
-      )
-      ->where('c.parent_id = :parentId')
-      ->setParameter('parentId', $parent_comment_id)
-      ->getQuery()
-      ->getResult()
-    ;
   }
 }

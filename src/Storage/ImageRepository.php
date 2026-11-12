@@ -9,7 +9,6 @@ use App\Storage\Images\ImageVariantUrlBuilder;
 use OpenAPI\Server\Model\ImageVariants;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\UrlHelper;
 
 class ImageRepository
 {
@@ -28,7 +27,6 @@ class ImageRepository
    */
   public function __construct(
     ParameterBagInterface $parameter_bag,
-    private readonly ?UrlHelper $urlHelper = null,
     private readonly ?ImageVariantGenerator $image_variant_generator = null,
     private readonly ?ImageVariantUrlBuilder $image_variant_url_builder = null,
   ) {
@@ -140,11 +138,6 @@ class ImageRepository
     $dir = $featured ? $this->featured_dir : $this->example_dir;
 
     return $path.FileHelper::getTimestampParameter($dir.$this->generateFileNameFromId($id, $extension, $featured));
-  }
-
-  public function getAbsoluteWebPath(int|string $id, string $extension, bool $featured): string
-  {
-    return $this->urlHelper->getAbsoluteUrl('/').$this->getWebPath($id, $extension, $featured);
   }
 
   public function getImagick(): \Imagick

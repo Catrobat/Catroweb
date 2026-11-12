@@ -15,11 +15,6 @@ class NotificationsApiLoader extends AbstractApiLoader
   {
   }
 
-  public function findNotificationByID(string $id): ?object
-  {
-    return $this->notification_repository->find($id);
-  }
-
   /**
    * @return array{notifications: CatroNotification[], has_more: bool}
    */

@@ -290,7 +290,6 @@ class MigrateRemixGraphsCommand extends Command
 
     try {
       $project_file = new File($project_file_path);
-      // $extracted_file = new ExtractedCatrobatFile($project_file_path, $project_file_path, null);
       $extracted_file = $this->file_extractor->extract($project_file);
     } catch (\Exception) {
       $progress_bar->clear();
@@ -311,7 +310,6 @@ class MigrateRemixGraphsCommand extends Command
       assert(1 === count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
       assert($url_data[0]->getProgramId() == $project_id);
 
-      // $remix_of_string = $extracted_file->getRemixMigrationUrlsString();
       $remix_data_only_forward_parents = $extracted_file->getRemixesData($project_id, true, $this->project_repository, true);
       $full_remix_data = $extracted_file->getRemixesData($project_id, false, $this->project_repository, true);
       $language_version = $extracted_file->getLanguageVersion();

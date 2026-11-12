@@ -30,17 +30,6 @@ class ProjectAssetMappingRepository extends ServiceEntityRepository
     ;
   }
 
-  public function deleteByProjectId(string $projectId): int
-  {
-    return $this->createQueryBuilder('m')
-      ->delete()
-      ->where('m.project = :projectId')
-      ->setParameter('projectId', $projectId)
-      ->getQuery()
-      ->execute()
-    ;
-  }
-
   public function hasAnyForProject(string $projectId): bool
   {
     $count = $this->createQueryBuilder('m')

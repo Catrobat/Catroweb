@@ -81,46 +81,9 @@ class MediaLibraryApiLoader extends AbstractApiLoader
     return $this->category_repository->findAll();
   }
 
-  public function countCategories(): int
-  {
-    return $this->category_repository->countAll();
-  }
-
   public function getAssetById(string $id): ?MediaAsset
   {
     return $this->asset_repository->find($id);
-  }
-
-  /**
-   * Fetches assets with cursor-based pagination.
-   * When $cursor is provided, it is decoded to an offset.
-   * Fetches $limit + 1 to allow the caller to determine has_more.
-   *
-   * @return array<MediaAsset>
-   */
-  public function getAssetsPaginated(
-    int $limit,
-    ?string $cursor,
-    ?string $category_id,
-    ?MediaFileType $file_type,
-    ?string $flavor,
-    ?string $search,
-    string $sort_by,
-    string $sort_order,
-  ): array {
-    $offset = $this->decodeCursorToOffset($cursor);
-    $category = $category_id ? $this->category_repository->find($category_id) : null;
-
-    return $this->asset_repository->findPaginated(
-      $limit + 1,
-      $offset,
-      $category,
-      $file_type,
-      $flavor,
-      $search,
-      $sort_by,
-      $sort_order
-    );
   }
 
   /**

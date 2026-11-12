@@ -25,19 +25,9 @@ class StudioActivityRepository extends ServiceEntityRepository
     return $this->findBy(['studio' => $studio], ['created_on' => 'DESC'], $limit, $offset);
   }
 
-  public function findAllStudioActivitiesByActivityType(Studio $studio, string $activityType): array
-  {
-    return $this->findBy(['studio' => $studio, 'type' => $activityType]);
-  }
-
   public function countStudioActivities(Studio $studio): int
   {
     return $this->count(['studio' => $studio]);
-  }
-
-  public function findStudioActivityById(string $activity_id): ?StudioActivity
-  {
-    return $this->findOneBy(['id' => $activity_id]);
   }
 
   /**

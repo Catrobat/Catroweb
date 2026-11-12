@@ -41,27 +41,4 @@ class MediaLibraryRequestValidator extends AbstractRequestValidator
 
     return $errors;
   }
-
-  public function validateTranslations(array $translations): array
-  {
-    $errors = [];
-
-    if ([] === $translations) {
-      $errors[] = 'At least one translation is required';
-
-      return $errors;
-    }
-
-    foreach ($translations as $locale => $value) {
-      if (!is_string($locale) || 2 !== strlen($locale)) {
-        $errors[] = sprintf('Invalid locale code: %s', $locale);
-      }
-
-      if (!is_string($value) || '' === trim($value)) {
-        $errors[] = sprintf('Translation value for locale "%s" cannot be empty', $locale);
-      }
-    }
-
-    return $errors;
-  }
 }

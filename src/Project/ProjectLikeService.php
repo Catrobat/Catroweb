@@ -26,25 +26,6 @@ class ProjectLikeService
     return $this->project_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
   }
 
-  public function findProjectLikeTypes(string $project_id): array
-  {
-    return $this->project_like_repository->likeTypesOfProject($project_id);
-  }
-
-  /**
-   * @throws NoResultException|\InvalidArgumentException
-   */
-  public function changeLike(Project $project, User $user, int $type, string $action): void
-  {
-    if (ProjectLike::ACTION_ADD === $action) {
-      $this->project_like_repository->addLike($project, $user, $type);
-    } elseif (ProjectLike::ACTION_REMOVE === $action) {
-      $this->project_like_repository->removeLike($project, $user, $type);
-    } else {
-      throw new \InvalidArgumentException('Invalid action: '.$action);
-    }
-  }
-
   /**
    * @throws NoResultException
    */

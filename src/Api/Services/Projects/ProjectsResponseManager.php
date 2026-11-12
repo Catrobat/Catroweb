@@ -419,29 +419,6 @@ class ProjectsResponseManager extends AbstractResponseManager
     return new FeaturedProjectResponse($data);
   }
 
-  public function createFeaturedProjectsListResponse(array $featured_projects, int $limit, ?string $attributes = null, int $offset = 0): FeaturedProjectsListResponse
-  {
-    $has_more = count($featured_projects) > $limit;
-    if ($has_more) {
-      array_pop($featured_projects);
-    }
-
-    $data = [];
-
-    /** @var FeaturedProject $featured_project */
-    foreach ($featured_projects as $featured_project) {
-      $data[] = $this->createFeaturedProjectResponse($featured_project, $attributes);
-    }
-
-    $next_cursor = ($has_more && [] !== $data) ? $this->encodeCursorFromOffset($offset, count($data)) : null;
-
-    return new FeaturedProjectsListResponse([
-      'data' => $data,
-      'next_cursor' => $next_cursor,
-      'has_more' => $has_more,
-    ]);
-  }
-
   public function createProjectCategoryResponse(array $projects, string $category, string $locale, ?string $attributes = null): ProjectsCategory
   {
     return new ProjectsCategory([

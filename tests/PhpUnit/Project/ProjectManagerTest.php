@@ -41,8 +41,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
@@ -141,7 +139,6 @@ class ProjectManagerTest extends TestCase
     $catrobat_file_sanitizer = $this->createStub(CatrobatFileSanitizer::class);
     $notification_service = $this->createStub(NotificationManager::class);
     $security = $this->createStub(Security::class);
-    $url_helper = new UrlHelper(new RequestStack());
 
     if (null === $malware_scanner) {
       $malware_scanner = $this->createStub(MalwareScanner::class);
@@ -170,7 +167,6 @@ class ProjectManagerTest extends TestCase
       $extension_repository,
       $catrobat_file_sanitizer,
       $notification_service,
-      $url_helper,
       $security,
       $malware_scanner,
       $this->createStub(ProjectDeduplicationService::class),

@@ -254,8 +254,6 @@
       <code><![CDATA[$request->getIp()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[getAbsoluteUrl]]></code>
-      <code><![CDATA[getAbsoluteUrl]]></code>
       <code><![CDATA[getFollowers]]></code>
     </PossiblyNullReference>
     <PossiblyUndefinedArrayOffset>
@@ -333,11 +331,6 @@
     <PossiblyFalseIterator>
       <code><![CDATA[$files]]></code>
     </PossiblyFalseIterator>
-  </file>
-  <file src="src/Storage/ImageRepository.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getAbsoluteUrl]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/Studio/StudioManager.php">
     <PossiblyNullArgument>

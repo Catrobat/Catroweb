@@ -76,7 +76,6 @@ class GenerateTestDataCommand extends Command
       $this->generateProgramWithInvalidCodeXML('program_with_invalid_code_xml');
       $this->generateProgramWithManualScreenshot('program_with_manual_screenshot');
       $this->generateProgramWithScreenshot('program_with_screenshot');
-      // $this->generateProgramWithInvalidContentCodeXML("program_with_invalid_content_code_xml");
       $this->generateProgramWithTags('program_with_tags');
       $this->generatePhiroProgram('phiro');
       $this->generateMindstormsProgram('lego');

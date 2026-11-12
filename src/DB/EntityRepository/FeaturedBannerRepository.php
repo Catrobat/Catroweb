@@ -19,27 +19,6 @@ class FeaturedBannerRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return FeaturedBanner[]
-   */
-  public function findActiveBanners(int $limit = 10, int $offset = 0, ?string $flavor = null, ?string $locale = null): array
-  {
-    $qb = $this->createQueryBuilder('fb');
-
-    $qb->select('fb')
-      ->where('fb.active = true')
-      ->orderBy('fb.priority', 'DESC')
-      ->addOrderBy('fb.created_on', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $this->addFlavorFilter($qb, $flavor);
-    $this->addLocaleFilter($qb, $locale);
-
-    return $qb->getQuery()->getResult();
-  }
-
-  /**
    * Keyset cursor query for active banners ordered by priority DESC, id DESC.
    *
    * @return FeaturedBanner[]

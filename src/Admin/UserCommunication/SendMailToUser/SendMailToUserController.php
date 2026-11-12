@@ -218,7 +218,6 @@ class SendMailToUserController extends CRUDController
       return new Response('Empty message!', Response::HTTP_BAD_REQUEST);
     }
 
-    // $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
     $text = str_replace(PHP_EOL, ' ', $messageText);
     $htmlText = wordwrap($text, 60, "<br>\n");
 

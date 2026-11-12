@@ -216,16 +216,6 @@ class StudioManager
     return $studioProject;
   }
 
-  public function isStudioPublic(Studio $studio): bool
-  {
-    return $studio->isIsPublic();
-  }
-
-  public function isStudioEnabled(Studio $studio): bool
-  {
-    return $studio->isIsEnabled();
-  }
-
   public function addUserToStudio(User $admin, Studio $studio, User $newUser, string $role = StudioUser::ROLE_MEMBER): ?StudioUser
   {
     if (($this->isUserInStudio($admin, $studio) && $this->isUserAStudioAdmin($admin, $studio))
@@ -463,12 +453,6 @@ class StudioManager
     $this->image_variant_generator->remove($this->getStudioCoverDir(), $cover_key);
 
     return true;
-  }
-
-  protected function deleteActivity(StudioActivity $activity): void
-  {
-    $this->entity_manager->remove($activity);
-    $this->entity_manager->flush();
   }
 
   public function findStudioById(string $studio_id): ?Studio

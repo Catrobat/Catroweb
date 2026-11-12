@@ -361,7 +361,6 @@ final class ProtectedProjectFilesTest extends TestCase
     ]));
     $repository = new \App\Project\CatrobatFile\ExtractedFileRepository(
       $parameters,
-      $this->createStub(\App\Project\ProjectManager::class),
       $this->createStub(\App\Project\CatrobatFile\CatrobatFileExtractor::class),
       new \Psr\Log\NullLogger(),
       $requests,

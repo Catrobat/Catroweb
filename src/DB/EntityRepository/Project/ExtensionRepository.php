@@ -24,19 +24,6 @@ class ExtensionRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, Extension::class);
   }
 
-  public function getExtensionByInternalTitle(string $internal_title): mixed
-  {
-    $qb = $this->createQueryBuilder('e');
-
-    return $qb
-      ->select('e')
-      ->where($qb->expr()->eq('e.internal_title', ':internal_title'))
-      ->setParameter('internal_title', $internal_title)
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
   public function getActiveExtensions(): array
   {
     return $this->cache->get('active_extensions', function (ItemInterface $item): array {
