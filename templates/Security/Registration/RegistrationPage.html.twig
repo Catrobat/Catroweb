@@ -21,6 +21,8 @@
 
         <h1>{{ 'register.title'|trans({}, 'catroweb') }}</h1>
 
+        {{ include('Security/OauthRegistration.html.twig') }}
+
         <div id="registration_form" role="form"
             {{ stimulus_controller('security--registration', {apiPath: path('open_api_server_users_userspost'), baseUrl: path('index'), captchaEndpoint: captcha_enabled ? (captcha_public_url ~ '/' ~ captcha_site_key ~ '/') : ''}) }}>
 
@@ -115,12 +117,6 @@
         </div>
       </div>
     </div>
-
-    {# Google refuses OAuth inside embedded WebViews (disallowed_useragent), and older apps open it in the system
-       browser, where the session ends up. In the app, sign in with username and password instead. #}
-    {% if not isWebview() %}
-      {{ include('Security/OauthRegistration.html.twig') }}
-    {% endif %}
 
   </div>
 

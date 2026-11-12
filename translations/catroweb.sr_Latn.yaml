@@ -574,7 +574,8 @@ login:
     createAccount: 'Napravi nalog'
     forgetPassword: 'Zaboravljena lozinka?'
   oauth:
-    title: 'Ili se pridruži preko'
+    google: "Nastavi sa Google-om"
+    orWithEmail: "ili putem imejla"
   passOrUser: Lozinka ili korisničko ime je netačno.
   accountSuspended: 'Tvoj nalog je suspendovan. Ako misliš da je to greška, kontaktiraj podršku.'
   noUsername: Korisničko ime ili e-mail adresa nije pronađena.

@@ -515,8 +515,6 @@ login:
     loginNow: 'Banye ugbu a'
     createAccount: 'Mepụta akaụntụ'
     forgetPassword: 'I chefuru okwuntụghe?'
-  oauth:
-    title: 'Ma ọ bụ ị nwere ike isonye site na'
   passOrUser: 'Okwuntụghe ma ọ bụ aha njirimara gị ezighi ezi.'
   accountSuspended: 'E kwụsịtụla akaụntụ gị. Ọ bụrụ na i chere na nke a bụ njehie, biko kpọtụrụ ndị nkwado.'
   noUsername: 'Ahụghị aha njirimara ma ọ bụ adreesị ozi-e gị.'

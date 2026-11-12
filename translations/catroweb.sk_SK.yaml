@@ -575,7 +575,8 @@ login:
     createAccount: Vytvoriť účet
     forgetPassword: Zabudol si heslo?
   oauth:
-    title: Alebo sa môžeš pridať cez
+    google: "Pokračovať cez Google"
+    orWithEmail: "alebo pomocou e-mailu"
   passOrUser: Tvoje heslo alebo používateľské meno bolo nesprávne.
   accountSuspended: 'Tvoj účet bol pozastavený. Ak si myslíš, že ide o chybu, kontaktuj podporu.'
   noUsername: Tvoje používateľské meno alebo e-mailová adresa sa nenašli.

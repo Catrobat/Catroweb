@@ -574,7 +574,8 @@ login:
     createAccount: Criar conta
     forgetPassword: 'Esqueceste-te da palavra-passe?'
   oauth:
-    title: 'Ou podes entrar com'
+    google: "Continuar com o Google"
+    orWithEmail: "ou com email"
   passOrUser: Sua palavra-passe ou nome de utilizador está incorreto.
   accountSuspended: 'A tua conta foi suspensa. Se achas que se trata de um erro, contacta o suporte.'
   noUsername: Seu nome de utilizador ou endereço de e-mail não foi encontrado.

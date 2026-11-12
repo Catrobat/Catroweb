@@ -516,7 +516,8 @@ login:
     createAccount: "Creează cont"
     forgetPassword: "Ai uitat parola?"
   oauth:
-    title: "Sau te poți alătura cu"
+    google: "Continuă cu Google"
+    orWithEmail: "sau cu e-mail"
   passOrUser: "Parola sau numele de utilizator au fost incorecte."
   accountSuspended: "Contul tău a fost suspendat. Dacă crezi că este o greșeală, contactează asistența."
   noUsername: "Numele tău de utilizator sau adresa de e-mail nu au fost găsite."

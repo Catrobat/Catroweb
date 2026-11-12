@@ -537,7 +537,8 @@ login:
     createAccount: アカウントを作成
     forgetPassword: "パスワードをお忘れですか？"
   oauth:
-    title: "または次の方法で参加"
+    google: "Google で続行"
+    orWithEmail: "またはメールアドレスで"
   passOrUser: ユーザー名またはパスワードが正しくありません。
   accountSuspended: "あなたのアカウントは停止されています。誤りだと思われる場合は、サポートにお問い合わせください。"
   noUsername: あなたのユーザー名または電子メール アドレスが見つかりませんでした。

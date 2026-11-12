@@ -34,11 +34,15 @@ Feature:
     And I click ".swal2-confirm"
     Then I should see "Password"
 
-  Scenario: I should see google log in button on the login page and on the registration page
+  Scenario: Google sign-in comes first on the login page and on the registration page
     Given I am on "app/login"
     Then the element "#btn-login-google" should be visible
+    And I should see "Continue with Google"
+    And I should see "or with email"
     Given I am on "app/register"
     Then the element "#btn-login-google" should be visible
+    And I should see "Continue with Google"
+    And I should see "or with email"
 
   Scenario: The app's WebView offers no Google login, which Google blocks there
     Given there are feature flags:
@@ -47,9 +51,11 @@ Feature:
     And I am on "app/login"
     And I wait for the page to be loaded
     Then the element "#btn-login-google" should not exist
+    And I should not see "or with email"
     Given I am on "app/register"
     And I wait for the page to be loaded
     Then the element "#btn-login-google" should not exist
+    And I should not see "or with email"
 
   Scenario: New user registers via Google OAuth, completes date of birth, and sees the random username info popup
     Given I am on "/app/login"

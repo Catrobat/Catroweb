@@ -578,7 +578,8 @@ login:
     createAccount: Konto erstellen
     forgetPassword: Passwort vergessen?
   oauth:
-    title: Oder beitreten mit
+    google: "Weiter mit Google"
+    orWithEmail: "oder mit E-Mail"
   passOrUser: Das Passwort oder der Username ist falsch.
   accountSuspended: 'Dein Konto wurde gesperrt. Wenn du glaubst, dass das ein Fehler ist, wende dich bitte an den Support.'
   noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.

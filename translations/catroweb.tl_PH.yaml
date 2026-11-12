@@ -574,7 +574,8 @@ login:
     createAccount: 'Gumawa ng account'
     forgetPassword: 'Nakalimutan ang password?'
   oauth:
-    title: 'O maaari kang sumali gamit ang'
+    google: "Magpatuloy gamit ang Google"
+    orWithEmail: "o gamit ang email"
   passOrUser: 'Mali ang iyong password o username.'
   accountSuspended: 'Sinuspinde ang iyong account. Kung sa tingin mo ay pagkakamali ito, makipag-ugnayan sa support.'
   noUsername: 'Hindi nahanap ang iyong username o email address.'

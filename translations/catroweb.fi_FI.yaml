@@ -574,7 +574,8 @@ login:
     createAccount: Luo tili
     forgetPassword: Unohditko salasanan?
   oauth:
-    title: Tai liity palvelulla
+    google: "Jatka Googlella"
+    orWithEmail: "tai sähköpostilla"
   passOrUser: Salasanasi tai käyttäjänimesi oli väärä.
   accountSuspended: 'Tilisi on jäädytetty. Jos uskot tämän olevan virhe, ota yhteyttä tukeen.'
   noUsername: Käyttäjänimeäsi tai sähköpostiosoitettasi ei löytynyt.

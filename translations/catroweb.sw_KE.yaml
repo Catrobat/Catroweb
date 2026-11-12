@@ -516,7 +516,8 @@ login:
     createAccount: Unda akaunti
     forgetPassword: "Umesahau nenosiri?"
   oauth:
-    title: "Au unaweza kujiunga kwa"
+    google: "Endelea na Google"
+    orWithEmail: "au kwa barua pepe"
   passOrUser: Jina la mtumiji au nenosiri havikuwa sahihi.
   accountSuspended: "Akaunti yako imesimamishwa. Kama unaamini hii ni hitilafu, tafadhali wasiliana na msaada."
   noUsername: "Jina lako la mtumiaji au anwani ya barua pepe haikupatikana."
