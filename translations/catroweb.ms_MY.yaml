@@ -575,7 +575,7 @@ login:
     forgetPassword: "Lupa kata laluan?"
   oauth:
     google: "Teruskan dengan Google"
-    orWithEmail: "atau dengan e-mel"
+    or: "atau"
   passOrUser: "Kata laluan atau nama pengguna kamu salah."
   accountSuspended: "Akaun kamu telah digantung. Jika kamu percaya ini satu kesilapan, sila hubungi pihak sokongan."
   noUsername: "Nama pengguna atau alamat e-mel kamu tidak ditemui."

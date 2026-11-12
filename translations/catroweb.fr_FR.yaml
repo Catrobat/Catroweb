@@ -575,7 +575,7 @@ login:
     forgetPassword: Mot de passe oublié ?
   oauth:
     google: "Continuer avec Google"
-    orWithEmail: "ou avec une adresse e-mail"
+    or: "ou"
   passOrUser: Votre mot de passe ou votre nom d'utilisateur est incorrect.
   accountSuspended: 'Votre compte a été suspendu. Si vous pensez qu''il s''agit d''une erreur, veuillez contacter le support.'
   noUsername: Votre nom d'utilisateur ou votre adresse e-mail n'a pas été trouvé.

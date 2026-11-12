@@ -577,7 +577,7 @@ login:
     forgetPassword: 'Glemt passordet?'
   oauth:
     google: "Fortsett med Google"
-    orWithEmail: "eller med e-post"
+    or: "eller"
   passOrUser: Ditt passord eller brukernavn er feil.
   accountSuspended: 'Kontoen din er suspendert. Hvis du mener dette er en feil, ta kontakt med brukerstøtten.'
   noUsername: Din brukernavn eller e-postadresse ble ikke funnet.

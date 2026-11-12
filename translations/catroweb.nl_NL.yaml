@@ -575,7 +575,7 @@ login:
     forgetPassword: 'Wachtwoord vergeten?'
   oauth:
     google: "Doorgaan met Google"
-    orWithEmail: "of met e-mail"
+    or: "of"
   passOrUser: 'Je wachtwoord of gebruikersnaam is onjuist.'
   accountSuspended: 'Je account is geschorst. Als je denkt dat dit een fout is, neem dan contact op met de ondersteuning.'
   noUsername: 'Je gebruikersnaam of e-mailadres is niet gevonden.'

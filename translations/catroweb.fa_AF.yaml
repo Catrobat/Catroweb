@@ -578,7 +578,7 @@ login:
     forgetPassword: فراموشی رمز عبور؟
   oauth:
     google: "ادامه با Google"
-    orWithEmail: "یا با ایمیل"
+    or: "یا"
   passOrUser: نام کاربری یا کلمه عبور نادرست است.
   accountSuspended: 'حسابت تعلیق شده است. اگر فکر می‌کنی اشتباهی رخ داده، لطفاً با پشتیبانی تماس بگیر.'
   noUsername: آدرس ایمیل یا نام کاربری یافت نشد.

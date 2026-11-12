@@ -575,7 +575,7 @@ login:
     forgetPassword: Harrove fjalëkalimin?
   oauth:
     google: "Vazhdo me Google"
-    orWithEmail: "ose me email"
+    or: "ose"
   passOrUser: Përdoruesi ose fjalëkalimi yt ishin të pasaktë.
   accountSuspended: 'Llogaria jote është pezulluar. Nëse mendon se është gabim, të lutem kontakto mbështetjen.'
   noUsername: Përdoruesi ose E-mail adresa nuk u gjetën.

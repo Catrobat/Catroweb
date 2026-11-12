@@ -38,11 +38,11 @@ Feature:
     Given I am on "app/login"
     Then the element "#btn-login-google" should be visible
     And I should see "Continue with Google"
-    And I should see "or with email"
+    And the element ".login-divider ~ #username" should exist
     Given I am on "app/register"
     Then the element "#btn-login-google" should be visible
     And I should see "Continue with Google"
-    And I should see "or with email"
+    And the element ".login-divider ~ #registration_form #username" should exist
 
   Scenario: The app's WebView offers no Google login, which Google blocks there
     Given there are feature flags:
@@ -51,11 +51,11 @@ Feature:
     And I am on "app/login"
     And I wait for the page to be loaded
     Then the element "#btn-login-google" should not exist
-    And I should not see "or with email"
+    And the element ".login-divider" should not exist
     Given I am on "app/register"
     And I wait for the page to be loaded
     Then the element "#btn-login-google" should not exist
-    And I should not see "or with email"
+    And the element ".login-divider" should not exist
 
   Scenario: New user registers via Google OAuth, completes date of birth, and sees the random username info popup
     Given I am on "/app/login"

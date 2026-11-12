@@ -576,7 +576,7 @@ login:
     forgetPassword: Zapomniałeś hasła?
   oauth:
     google: "Kontynuuj przez Google"
-    orWithEmail: "lub za pomocą e-maila"
+    or: "lub"
   passOrUser: Twoje hasło lub nazwa użytkownika były nieprawidłowe.
   accountSuspended: 'Twoje konto zostało zawieszone. Jeśli uważasz, że to pomyłka, skontaktuj się z pomocą techniczną.'
   noUsername: Twoja nazwa użytkownika lub adres e-mail adres nie zostały znalezione.

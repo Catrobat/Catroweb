@@ -579,7 +579,7 @@ login:
     forgetPassword: Passwort vergessen?
   oauth:
     google: "Weiter mit Google"
-    orWithEmail: "oder mit E-Mail"
+    or: "oder"
   passOrUser: Das Passwort oder der Username ist falsch.
   accountSuspended: 'Dein Konto wurde gesperrt. Wenn du glaubst, dass das ein Fehler ist, wende dich bitte an den Support.'
   noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.

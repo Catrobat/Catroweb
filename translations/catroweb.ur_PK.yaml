@@ -574,8 +574,8 @@ login:
     createAccount: اکاؤنٹ بناؤ
     forgetPassword: پاس ورڈ بھول گئے؟
   oauth:
-    google: "Google کے ساتھ جاری رکھیں"
-    orWithEmail: "یا ای میل کے ساتھ"
+    google: "Google کے ساتھ جاری رکھو"
+    or: "یا"
   passOrUser: تمہارا پاس ورڈ یا صارف نام غلط تھا۔
   accountSuspended: تمہارا اکاؤنٹ معطل کر دیا گیا ہے۔ اگر تمہیں لگتا ہے کہ یہ غلطی ہے تو براہ کرم سپورٹ سے رابطہ کرو۔
   noUsername: تمہارا صارف نام یا ای میل ایڈریس نہیں ملا۔

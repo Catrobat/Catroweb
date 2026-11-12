@@ -556,7 +556,7 @@ login:
     forgetPassword: 'Lupa kata sandi?'
   oauth:
     google: "Lanjutkan dengan Google"
-    orWithEmail: "atau dengan email"
+    or: "atau"
   passOrUser: Sandi atau nama pengguna adalah salah.
   accountSuspended: 'Akunmu telah ditangguhkan. Jika menurutmu ini kesalahan, silakan hubungi dukungan.'
   noUsername: Nama pengguna atau alamat email kamu tidak ditemukan.

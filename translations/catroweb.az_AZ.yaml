@@ -575,7 +575,7 @@ login:
     forgetPassword: 'Şifrəni unutmusan?'
   oauth:
     google: "Google ilə davam edin"
-    orWithEmail: "və ya e-poçt ilə"
+    or: "və ya"
   passOrUser: 'Şifrən və ya istifadəçi adın yanlışdır.'
   accountSuspended: 'Hesabın dayandırılıb. Bunun səhv olduğunu düşünürsənsə, dəstək xidməti ilə əlaqə saxla.'
   noUsername: İstifadəçi adı və ya e-poçt ünvanı tapılmadı.

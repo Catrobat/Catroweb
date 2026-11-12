@@ -575,7 +575,7 @@ login:
     forgetPassword: Zaboravio/la si lozinku?
   oauth:
     google: "Nastavi s Googleom"
-    orWithEmail: "ili putem e-pošte"
+    or: "ili"
   passOrUser: Lozinka ili korisničko ime je netačno.
   accountSuspended: Tvoj račun je suspendovan. Ako misliš da je to greška, kontaktiraj podršku.
   noUsername: Korisničko ime ili email adresa nije pronađena.

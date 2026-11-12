@@ -575,7 +575,7 @@ login:
     forgetPassword: 'Esqueciches o contrasinal?'
   oauth:
     google: "Continuar con Google"
-    orWithEmail: "ou co correo electrónico"
+    or: "ou"
   passOrUser: 'O teu contrasinal ou nome de usuario non era correcto.'
   accountSuspended: 'A túa conta foi suspendida. Se cres que é un erro, contacta co soporte.'
   noUsername: 'Non se atopou o teu nome de usuario ou enderezo de correo electrónico.'

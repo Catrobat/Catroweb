@@ -576,7 +576,7 @@ login:
     forgetPassword: 'Quên mật khẩu?'
   oauth:
     google: "Tiếp tục với Google"
-    orWithEmail: "hoặc bằng email"
+    or: "hoặc"
   passOrUser: Mật khẩu hoặc tên người dùng của bạn không chính xác.
   accountSuspended: 'Tài khoản của bạn đã bị tạm khóa. Nếu bạn nghĩ đây là nhầm lẫn, hãy liên hệ bộ phận hỗ trợ.'
   noUsername: Không tìm thấy địa chỉ email hoặc tên người dùng của bạn.

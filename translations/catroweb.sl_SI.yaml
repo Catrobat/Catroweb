@@ -575,7 +575,7 @@ login:
     forgetPassword: 'Pozabljeno geslo?'
   oauth:
     google: "Nadaljuj z Googlom"
-    orWithEmail: "ali z e-pošto"
+    or: "ali"
   passOrUser: Uporabniško ime ali geslo je napačno.
   accountSuspended: 'Tvoj račun je bil začasno onemogočen. Če meniš, da gre za napako, se obrni na podporo.'
   noUsername: 'Tvojega uporabniškega imena ali e-poštnega naslova ni bilo mogoče najti.'

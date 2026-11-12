@@ -575,7 +575,7 @@ login:
     forgetPassword: Has oblidat la contrasenya?
   oauth:
     google: "Continua amb Google"
-    orWithEmail: "o amb correu electrònic"
+    or: "o"
   passOrUser: La contrasenya o el nom d'usuari no són correctes.
   accountSuspended: 'El teu compte ha estat suspès. Si creus que és un error, contacta amb el suport.'
   noUsername: No s'ha trobat el teu nom d'usuari o adreça de correu electrònic.

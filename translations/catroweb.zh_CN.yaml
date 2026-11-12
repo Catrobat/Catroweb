@@ -539,7 +539,7 @@ login:
     forgetPassword: 忘记密码？
   oauth:
     google: "使用 Google 继续"
-    orWithEmail: "或使用邮箱"
+    or: "或"
   passOrUser: 您的密码或用户名不正确。
   accountSuspended: "您的帐户已被暂停。如果您认为这是错误，请联系支持团队。"
   noUsername: 找不到您的用户名或电子邮件地址。

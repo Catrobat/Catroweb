@@ -576,7 +576,7 @@ login:
     forgetPassword: Wagwoord vergeet?
   oauth:
     google: "Gaan voort met Google"
-    orWithEmail: "of met e-pos"
+    or: "of"
   passOrUser: Jou wagwoord of gebruikersnaam was verkeerd.
   accountSuspended: 'Jou rekening is opgeskort. As jy glo dat dit ''n fout is, kontak asseblief ondersteuning.'
   noUsername: Jou gebruikersnaam of e-posadres is nie gevind nie.

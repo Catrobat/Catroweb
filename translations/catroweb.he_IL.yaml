@@ -575,7 +575,7 @@ login:
     forgetPassword: "שכחת סיסמה?"
   oauth:
     google: "המשך עם Google"
-    orWithEmail: "או באמצעות אימייל"
+    or: "או"
   passOrUser: שם המשתמש או הסיסמה שלך שגויים.
   accountSuspended: "החשבון שלך הושעה. אם אתה חושב שזו טעות, פנה לתמיכה."
   noUsername: "שם המשתמש או כתובת הדוא\"ל שלך לא נמצאו."

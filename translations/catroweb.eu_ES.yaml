@@ -575,7 +575,7 @@ login:
     forgetPassword: 'Pasahitza ahaztu duzu?'
   oauth:
     google: "Jarraitu Google-rekin"
-    orWithEmail: "edo posta elektronikoarekin"
+    or: "edo"
   passOrUser: 'Zure pasahitza edo erabiltzaile-izena okerra zen.'
   accountSuspended: 'Zure kontua eten egin da. Akats bat dela uste baduzu, jarri harremanetan laguntza-zerbitzuarekin.'
   noUsername: 'Ez da aurkitu zure erabiltzaile-izena edo helbide elektronikoa.'

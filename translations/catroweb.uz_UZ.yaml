@@ -517,7 +517,7 @@ login:
     forgetPassword: "Parolni unutdingmi?"
   oauth:
     google: "Google orqali davom etish"
-    orWithEmail: "yoki elektron pochta orqali"
+    or: "yoki"
   passOrUser: "Paroling yoki foydalanuvchi noming notoʻgʻri."
   accountSuspended: "Hisobing toʻxtatildi. Agar bu xato deb hisoblasang, yordam xizmatiga murojaat qil."
   noUsername: "Foydalanuvchi noming yoki e-pochta manziling topilmadi."

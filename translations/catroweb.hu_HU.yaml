@@ -575,7 +575,7 @@ login:
     forgetPassword: 'Elfelejtetted a jelszavad?'
   oauth:
     google: "Folytatás Google-fiókkal"
-    orWithEmail: "vagy e-mail-címmel"
+    or: "vagy"
   passOrUser: 'A jelszó vagy a felhasználónév helytelen.'
   accountSuspended: 'A fiókodat felfüggesztettük. Ha úgy gondolod, hogy ez tévedés, fordulj az ügyfélszolgálathoz.'
   noUsername: 'A felhasználónév vagy az e-mail-cím nem található.'

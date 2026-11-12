@@ -580,7 +580,7 @@ login:
     forgetPassword: Hai dimenticato la password?
   oauth:
     google: "Continua con Google"
-    orWithEmail: "oppure con l'email"
+    or: "oppure"
   passOrUser: Password o nome utente errati.
   accountSuspended: 'Il tuo account è stato sospeso. Se pensi che si tratti di un errore, contatta l''assistenza.'
   noUsername: Non è stato trovato il tuo nome utente o indirizzo email.

@@ -37,12 +37,17 @@
   background-color: light-dark(#fff, #131314);
   color: light-dark(#1f1f1f, #e3e3e3);
   font-weight: 500;
+  text-decoration: none;
 }
 
 .social-login-btn:hover,
 .social-login-btn:focus-visible {
   background-color: light-dark(#f2f2f2, #2a2a2b);
-  color: light-dark(#1f1f1f, #e3e3e3);
+}
+
+.social-login-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .social-login-btn__img {
