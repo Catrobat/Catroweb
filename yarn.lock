@@ -1173,7 +1173,7 @@ __metadata:
     purgecss: "npm:^8.0.0"
     sweetalert2: "npm:^11.26.25"
     textfilljs: "npm:^1.0.3-a"
-    vis-network: "npm:^10.1.4"
+    vis-network: "npm:^10.1.5"
     vite: "npm:^8"
     vite-plugin-symfony: "npm:^8"
   languageName: unknown
@@ -3064,9 +3064,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vis-network@npm:^10.1.4":
-  version: 10.1.4
-  resolution: "vis-network@npm:10.1.4"
+"vis-network@npm:^10.1.5":
+  version: 10.1.5
+  resolution: "vis-network@npm:10.1.5"
   peerDependencies:
     "@egjs/hammerjs": ^2.0.0
     component-emitter: ^1.3.0 || ^2.0.0
@@ -3074,7 +3074,7 @@ __metadata:
     uuid: ^3.4.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^13.0.0 || ^14.0.0
     vis-data: ">=8.0.0"
     vis-util: ">=6.0.0"
-  checksum: 10c0/0709315bb59abbf4d0367a24dee10e8c5404d91a2df9ff8e9a22707d77f249616862cdd0604cf0847ac561e3a598ce9b237afb677a0edb2037ee5fa2a5f5afa4
+  checksum: 10c0/67a9c2587fa5a3d276c4f09314da9fb27b7be555f75a868b277903c64ea6caec05fec3d227c0b141f2ac4577f93c905b51c6eaf684ce8935052680e17a76d5eb
   languageName: node
   linkType: hard
 
