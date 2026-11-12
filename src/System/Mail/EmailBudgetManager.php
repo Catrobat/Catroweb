@@ -128,7 +128,8 @@ class EmailBudgetManager
       $limits[$name] = (int) $limit;
     }
 
-    return $limits;
+    // A typo must not stop all mail (verification, password reset): fall back to the single default provider.
+    return [] === $limits ? ['main' => 300] : $limits;
   }
 
   private function validateType(string $type): void

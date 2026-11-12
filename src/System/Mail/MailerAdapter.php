@@ -45,6 +45,8 @@ class MailerAdapter
 
     // Free mail tiers have small daily limits, so several providers are chained: the first one with room
     // left sends, and one that fails (down, or over a limit we did not know about) hands over to the next.
+    // ponytail: a provider that times out after accepting the mail causes a duplicate from the next one; a
+    // duplicate (same link) beats a lost verification mail. Fall through only on connect/auth errors if it hurts.
     foreach ($this->budgetManager->getProvidersWithRoom() as $provider) {
       $email->getHeaders()->remove('X-Transport');
       $email->getHeaders()->addTextHeader('X-Transport', $provider);

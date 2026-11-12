@@ -140,6 +140,12 @@ class EmailBudgetManagerTest extends TestCase
     self::assertSame(['main', 'resend'], $manager->getProvidersWithRoom());
   }
 
+  public function testAWhollyBrokenProviderListFallsBackToTheDefault(): void
+  {
+    self::assertSame(['main'], $this->managerWith('brevo=300')->getProvidersWithRoom());
+    self::assertSame(300, $this->managerWith('')->getDailyLimit());
+  }
+
   public function testAProviderAtItsLimitIsSkipped(): void
   {
     $manager = $this->managerWith('main:2,mailjet:190,ses:50');
