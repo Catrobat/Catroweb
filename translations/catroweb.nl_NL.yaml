@@ -574,7 +574,8 @@ login:
     createAccount: Account aanmaken
     forgetPassword: 'Wachtwoord vergeten?'
   oauth:
-    title: 'Of meld je aan met'
+    google: "Doorgaan met Google"
+    or: "of"
   passOrUser: 'Je wachtwoord of gebruikersnaam is onjuist.'
   accountSuspended: 'Je account is geschorst. Als je denkt dat dit een fout is, neem dan contact op met de ondersteuning.'
   noUsername: 'Je gebruikersnaam of e-mailadres is niet gevonden.'

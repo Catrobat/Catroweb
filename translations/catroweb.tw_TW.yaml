@@ -515,8 +515,6 @@ login:
     loginNow: 'Wura mu seesei'
     createAccount: 'Bue akawnt'
     forgetPassword: 'Wo werɛ afi ahintasɛm?'
-  oauth:
-    title: 'Anaa wobɛtumi de yi aka ho'
   passOrUser: 'Wo ahintasɛm anaa wo din no nteɛ.'
   accountSuspended: 'Wɔasiw wo akawnt kwan. Sɛ wugye di sɛ ɛyɛ mfomsoɔ a, mesrɛ wo, frɛ support.'
   noUsername: 'Yɛanhu wo din anaa wo e-mail address.'

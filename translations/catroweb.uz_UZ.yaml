@@ -516,7 +516,8 @@ login:
     createAccount: "Hisob yaratish"
     forgetPassword: "Parolni unutdingmi?"
   oauth:
-    title: "Yoki quyidagilar orqali qoʻshilishing mumkin"
+    google: "Google orqali davom etish"
+    or: "yoki"
   passOrUser: "Paroling yoki foydalanuvchi noming notoʻgʻri."
   accountSuspended: "Hisobing toʻxtatildi. Agar bu xato deb hisoblasang, yordam xizmatiga murojaat qil."
   noUsername: "Foydalanuvchi noming yoki e-pochta manziling topilmadi."

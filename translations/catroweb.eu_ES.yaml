@@ -574,7 +574,8 @@ login:
     createAccount: 'Sortu kontua'
     forgetPassword: 'Pasahitza ahaztu duzu?'
   oauth:
-    title: 'Edo hauekin batu zaitezke'
+    google: "Jarraitu Google-rekin"
+    or: "edo"
   passOrUser: 'Zure pasahitza edo erabiltzaile-izena okerra zen.'
   accountSuspended: 'Zure kontua eten egin da. Akats bat dela uste baduzu, jarri harremanetan laguntza-zerbitzuarekin.'
   noUsername: 'Ez da aurkitu zure erabiltzaile-izena edo helbide elektronikoa.'

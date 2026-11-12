@@ -574,7 +574,8 @@ login:
     createAccount: 'Sukurti paskyrą'
     forgetPassword: 'Pamiršai slaptažodį?'
   oauth:
-    title: 'Arba gali prisijungti per'
+    google: "Tęsti su Google"
+    or: "arba"
   passOrUser: 'Neteisingas slaptažodis arba naudotojo vardas.'
   accountSuspended: 'Tavo paskyra sustabdyta. Jei manai, kad tai klaida, susisiek su pagalbos tarnyba.'
   noUsername: 'Tavo naudotojo vardas arba el. pašto adresas nerastas.'

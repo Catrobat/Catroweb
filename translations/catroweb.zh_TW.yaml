@@ -555,7 +555,8 @@ login:
     createAccount: 建立帳號
     forgetPassword: "忘記密碼？"
   oauth:
-    title: "或使用以下方式加入"
+    google: "使用 Google 繼續"
+    or: "或"
   passOrUser: 你的密碼或使用者名稱錯誤。
   accountSuspended: "你的帳號已被停權。如果你認為這是錯誤，請聯絡客服。"
   noUsername: 找不到你的使用者名稱或電子郵件地址。

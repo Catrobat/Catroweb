@@ -574,7 +574,8 @@ login:
     createAccount: Hesap açmak
     forgetPassword: Şifreyi mi unuttun?
   oauth:
-    title: Veya şunlar ile katılabilirsiniz
+    google: "Google ile devam et"
+    or: "veya"
   passOrUser: Kullanıcı adı veya şifre yanlış.
   accountSuspended: 'Hesabın askıya alındı. Bunun bir hata olduğunu düşünüyorsan lütfen destek ekibiyle iletişime geç.'
   noUsername: Kullanıcı adı veya e-posta adresi bulunamadı.

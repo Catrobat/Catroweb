@@ -516,7 +516,8 @@ login:
     createAccount: "Rnu amiḍan"
     forgetPassword: "Tettuḍ awal uffir?"
   oauth:
-    title: "Neɣ tzemreḍ ad tkecmeḍ s"
+    google: "Kemmel s Google"
+    or: "neɣ"
   passOrUser: "Awal-ik uffir neɣ isem-ik n useqdac d arameɣtu."
   accountSuspended: "Amiḍan-ik yettwaḥbes. Ma tɣileḍ d tuccḍa, ttxil-k nermes tallalt."
   noUsername: "Isem-ik n useqdac neɣ tansa-ik imayl ur yettwaf ara."

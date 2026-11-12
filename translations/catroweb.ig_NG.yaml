@@ -516,7 +516,8 @@ login:
     createAccount: 'Mepụta akaụntụ'
     forgetPassword: 'I chefuru okwuntụghe?'
   oauth:
-    title: 'Ma ọ bụ ị nwere ike isonye site na'
+    google: "Gaa n'ihu na Google"
+    or: "ma ọ bụ"
   passOrUser: 'Okwuntụghe ma ọ bụ aha njirimara gị ezighi ezi.'
   accountSuspended: 'E kwụsịtụla akaụntụ gị. Ọ bụrụ na i chere na nke a bụ njehie, biko kpọtụrụ ndị nkwado.'
   noUsername: 'Ahụghị aha njirimara ma ọ bụ adreesị ozi-e gị.'

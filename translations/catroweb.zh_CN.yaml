@@ -538,7 +538,8 @@ login:
     createAccount: 创造帐户
     forgetPassword: 忘记密码？
   oauth:
-    title: 或者您可以加入
+    google: "使用 Google 继续"
+    or: "或"
   passOrUser: 您的密码或用户名不正确。
   accountSuspended: "您的帐户已被暂停。如果您认为这是错误，请联系支持团队。"
   noUsername: 找不到您的用户名或电子邮件地址。

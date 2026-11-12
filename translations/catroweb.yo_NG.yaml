@@ -516,7 +516,8 @@ login:
     createAccount: "Ṣẹ̀dá àkáǹtì"
     forgetPassword: "Ṣé o gbàgbé ọ̀rọ̀ aṣínà?"
   oauth:
-    title: "Tàbí o lè darapọ̀ pẹ̀lú"
+    google: "Tẹ̀síwájú pẹ̀lú Google"
+    or: "tàbí"
   passOrUser: "Ọ̀rọ̀ aṣínà tàbí orúkọ olùmúlò rẹ kò tọ́."
   accountSuspended: "A ti dá àkáǹtì rẹ dúró. Tí o bá gbàgbọ́ pé àṣìṣe ni èyí, jọ̀wọ́ kàn sí ìrànlọ́wọ́."
   noUsername: "A kò rí orúkọ olùmúlò tàbí àdírẹ́sì ímeèlì rẹ."

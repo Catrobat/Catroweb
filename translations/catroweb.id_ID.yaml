@@ -555,7 +555,8 @@ login:
     createAccount: Membuat akun
     forgetPassword: 'Lupa kata sandi?'
   oauth:
-    title: 'Atau kamu bisa bergabung dengan'
+    google: "Lanjutkan dengan Google"
+    or: "atau"
   passOrUser: Sandi atau nama pengguna adalah salah.
   accountSuspended: 'Akunmu telah ditangguhkan. Jika menurutmu ini kesalahan, silakan hubungi dukungan.'
   noUsername: Nama pengguna atau alamat email kamu tidak ditemukan.

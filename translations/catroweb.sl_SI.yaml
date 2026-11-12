@@ -574,7 +574,8 @@ login:
     createAccount: 'Ustvari račun'
     forgetPassword: 'Pozabljeno geslo?'
   oauth:
-    title: 'Lahko se pridružiš tudi z'
+    google: "Nadaljuj z Googlom"
+    or: "ali"
   passOrUser: Uporabniško ime ali geslo je napačno.
   accountSuspended: 'Tvoj račun je bil začasno onemogočen. Če meniš, da gre za napako, se obrni na podporo.'
   noUsername: 'Tvojega uporabniškega imena ali e-poštnega naslova ni bilo mogoče najti.'

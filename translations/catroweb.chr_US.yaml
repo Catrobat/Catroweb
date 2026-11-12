@@ -515,8 +515,6 @@ login:
     loginNow: 'ᎪᎯ ᏫᏴᎭ'
     createAccount: 'ᏕᏣᏙᎥ ᏫᏂᏯ'
     forgetPassword: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏣᏓᏅᏛᎮᎸᏍᎪ?'
-  oauth:
-    title: 'ᎠᎴᏱᎩ ᎯᎠ ᎬᏗ ᏫᏴᎭ'
   passOrUser: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎠᎴᏱᎩ ᏕᏣᏙᎥ ᎥᏝ ᎣᏏᏳ ᏱᎩ.'
   accountSuspended: 'ᏕᏣᏙᎥ ᎠᎦᏘᏴᏒ. ᎢᏳᏃ ᎤᏲ ᏣᏓᏅᏖᏍᎨᏍᏗ, ᏗᏍᏕᎵᏍᎩ ᎯᏬᏁᏓ.'
   noUsername: 'ᏕᏣᏙᎥ ᎠᎴᏱᎩ email ᎥᏝ ᏳᏩᏛ.'
