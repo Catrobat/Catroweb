@@ -575,6 +575,9 @@ login:
     loginNow: اوس ننوتل
     createAccount: ګڼون جوړول
     forgetPassword: پټنوم هیر کړی؟
+  oauth:
+    google: "د Google سره دوام ورکړه"
+    or: "یا"
   passOrUser: 'ستا پټنوم یا کارن نوم غلط و.'
   accountSuspended: 'ستا حساب ځنډول شوی دی. که فکر کوې دا تېروتنه ده، مهرباني وکړه له ملاتړ سره اړیکه ونیسه.'
   noUsername: 'ستا کارن نوم یا ایمیل پته ونه موندل شوه.'

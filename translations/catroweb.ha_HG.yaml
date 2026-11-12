@@ -515,6 +515,9 @@ login:
     loginNow: "Shiga yanzu"
     createAccount: "Ƙirƙiri asusu"
     forgetPassword: "Ka manta kalmar sirri?"
+  oauth:
+    google: "Ci gaba da Google"
+    or: "ko"
   passOrUser: "Kalmar sirrinka ko sunan mai amfani ba daidai ba ne."
   accountSuspended: "An dakatar da asusunka. Idan kana ganin kuskure ne, don Allah tuntuɓi tallafi."
   noUsername: "Ba a sami sunan mai amfani ko adireshin imel ɗinka ba."

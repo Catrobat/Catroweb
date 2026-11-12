@@ -43,6 +43,7 @@ Feature:
     Then the element "#btn-login-google" should be visible
     And I should see "Continue with Google"
     And the element ".login-divider ~ #registration_form #username" should exist
+    And the element ".subtext ~ #btn-login-google" should exist
 
   Scenario: The app's WebView offers no Google login, which Google blocks there
     Given there are feature flags:

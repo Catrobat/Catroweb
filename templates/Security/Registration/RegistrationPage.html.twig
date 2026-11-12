@@ -21,6 +21,12 @@
 
         <h1>{{ 'register.title'|trans({}, 'catroweb') }}</h1>
 
+        <p class="subtext">{{ 'register.subText'|trans({
+            '%var1%': '<a id="privacyPolicy" href="' ~ path('privacypolicy') ~ '">' ~ 'privacyPolicy'|trans({}, 'catroweb') ~ '</a>',
+            '%var2%': '<a id="termsOfUse" href="' ~ path('termsOfUse') ~ '">' ~ 'termsOfUse.title'|trans({}, 'catroweb') ~ '</a>',
+          }, 'catroweb')|raw }}
+        </p>
+
         {{ include('Security/OauthRegistration.html.twig') }}
 
         <div id="registration_form" role="form"
@@ -33,7 +39,6 @@
               label: '' ~ 'login.username'|trans({}, 'catroweb'),
               name: '_username',
               leading_icon: 'person',
-              tabindex: 1,
               autocomplete: 'username',
             },
           }) }}
@@ -46,7 +51,6 @@
               name: '_email',
               type: 'email',
               leading_icon: 'email',
-              tabindex: 2,
               autocomplete: 'email',
             },
           }) }}
@@ -60,7 +64,6 @@
               type: 'password',
               trailing_icon: 'visibility',
               leading_icon: 'lock',
-              tabindex: 3,
               autocomplete: 'new-password',
             },
           }) }}
@@ -72,8 +75,7 @@
                                 name="_date_of_birth"
                                 type="date"
                                 max="{{ 'now'|date('Y-m-d') }}"
-                                required
-                                tabindex="4">
+                                required>
             <span slot="leading-icon" class="material-icons" aria-hidden="true">cake</span>
           </md-filled-text-field>
 
@@ -83,17 +85,10 @@
                                   label="{{ 'register.parentEmail'|trans({}, 'catroweb') }}"
                                   supporting-text="{{ 'register.parentEmailInfo'|trans({}, 'catroweb') }}"
                                   name="_parent_email"
-                                  type="email"
-                                  tabindex="5">
+                                  type="email">
               <span slot="leading-icon" class="material-icons" aria-hidden="true">family_restroom</span>
             </md-filled-text-field>
           </div>
-
-          <p class="subtext">{{ 'register.subText'|trans({
-              '%var1%': '<a id="privacyPolicy" href="' ~ path('privacypolicy') ~ '">' ~ 'privacyPolicy'|trans({}, 'catroweb') ~ '</a>',
-              '%var2%': '<a id="termsOfUse" href="' ~ path('termsOfUse') ~ '">' ~ 'termsOfUse.title'|trans({}, 'catroweb') ~ '</a>',
-            }, 'catroweb')|raw }}
-          </p>
 
           {% if captcha_enabled %}
             <div id="captcha-container" class="mb-3"></div>
