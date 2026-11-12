@@ -31,6 +31,8 @@ set('symfony_env', 'prod');
 set('writable_recursive', true);
 set('http_user', 'www-data');
 set('writable_mode', 'acl');
+// Each release is ~850 MB (vendor + node_modules); without cleanup 162 piled up (~135 GB) by 2026-11.
+set('keep_releases', 5);
 
 // Shared directories
 set('shared_dirs', [
@@ -260,6 +262,7 @@ task('deploy', [
   'update:extensions',
   'update:special',
   'smoke_test',
+  'deploy:cleanup',
   'deploy:unlock',
   'slack:notify:success',
 ]);
