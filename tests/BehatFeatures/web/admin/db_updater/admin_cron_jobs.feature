@@ -22,10 +22,8 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
       | Add silver_user UserAchievements                             | idle  | 1 week        |          |          | OK     |
       | Add verified_developer (gold) UserAchievements               | idle  | 1 week        |          |          | OK     |
       | Add verified_developer (silver) UserAchievements             | idle  | 1 week        |          |          | OK     |
-      | Archive log files                                            | idle  | 1 day         |          |          | OK     |
       | Clean compressed project files                               | idle  | 1 week        |          |          | OK     |
       | Clean old extracted project files                            | idle  | 1 day         |          |          | OK     |
-      | Clean old log files                                          | idle  | 1 week        |          |          | OK     |
       | Clean unverified user accounts                               | idle  | 1 day         |          |          | OK     |
       | Delete expired projects based on retention rules             | idle  | 1 day         |          |          | OK     |
       | Delete old entries in machine translation table              | idle  | 1 month       |          |          | OK     |
