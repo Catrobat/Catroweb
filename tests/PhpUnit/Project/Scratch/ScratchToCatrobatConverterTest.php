@@ -320,6 +320,19 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//formula[value="PLUS"]/leftChild[type="BRACKET"]/rightChild[value="LOGICAL_NOT"])'));
   }
 
+  public function testAFieldWhosePairIsNestedOneLevelDeeperKeepsItsName(): void
+  {
+    // Seen in prod: fields such as LIST arrive as [["name", "id"]], which used to become "Array".
+    $xml = self::convertBlocks([
+      'hat' => ['opcode' => 'event_whenflagclicked', 'next' => 'say', 'topLevel' => true, 'inputs' => [], 'fields' => []],
+      'say' => ['opcode' => 'looks_say', 'next' => null, 'inputs' => ['MESSAGE' => [3, 'item', [10, '']]], 'fields' => []],
+      'item' => ['opcode' => 'data_itemoflist', 'inputs' => ['INDEX' => [1, [7, 'last']]], 'fields' => ['LIST' => [['names', 'l1']]]],
+    ], ['lists' => ['l1' => ['names', ['a', 'b']]]]);
+    $xpath = new \DOMXPath($xml);
+    $this->assertSame(0.0, $xpath->evaluate('count(//*[value="Array"])'));
+    $this->assertGreaterThan(0.0, $xpath->evaluate('count(//*[type="USER_LIST" and value="names"])'));
+  }
+
   public function testKeysBecomeOnScreenButtons(): void
   {
     $xml = self::convertBlocks([

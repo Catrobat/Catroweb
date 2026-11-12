@@ -1054,7 +1054,17 @@ final class BlockConverter
   /** Value of a field such as VARIABLE: ["name", "id"]. */
   private function field(array $b, string $name): string
   {
-    return (string) ($b['fields'][$name][0] ?? '');
+    return self::scalar($b['fields'][$name][0] ?? null) ?? '';
+  }
+
+  /** Some projects nest a field's pair one level deeper ([["name", "id"]]); take the first scalar instead of "Array". */
+  private static function scalar(mixed $value): ?string
+  {
+    while (is_array($value)) {
+      $value = [] === $value ? null : reset($value);
+    }
+
+    return null === $value ? null : (string) $value;
   }
 
   private function inputBlockId(array $b, string $name): ?string
@@ -1121,21 +1131,21 @@ final class BlockConverter
   {
     $field = $b['fields']['VARIABLE'] ?? ['', null];
 
-    return $this->model->monitorElement($this->sprite_key, (string) $field[0], isset($field[1]) ? (string) $field[1] : null);
+    return $this->model->monitorElement($this->sprite_key, self::scalar($field[0] ?? null) ?? '', self::scalar($field[1] ?? null));
   }
 
   private function variable(array $b): \DOMElement
   {
     $field = $b['fields']['VARIABLE'] ?? ['', null];
 
-    return $this->model->variableElement($this->sprite_key, (string) $field[0], isset($field[1]) ? (string) $field[1] : null);
+    return $this->model->variableElement($this->sprite_key, self::scalar($field[0] ?? null) ?? '', self::scalar($field[1] ?? null));
   }
 
   private function userList(array $b): \DOMElement
   {
     $field = $b['fields']['LIST'] ?? ['', null];
 
-    return $this->model->listElement($this->sprite_key, (string) $field[0], isset($field[1]) ? (string) $field[1] : null);
+    return $this->model->listElement($this->sprite_key, self::scalar($field[0] ?? null) ?? '', self::scalar($field[1] ?? null));
   }
 
   // ---- XML helpers ----
