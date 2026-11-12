@@ -4,8 +4,10 @@ One dispatcher, `catrobat:cronjob`, runs every 10 minutes from system cron. It c
 
 ```
 # /etc/cron.d/catroweb
-*/10 * * * * www-data cd /var/www/share/current && php bin/console catrobat:cronjob --env=prod >> /var/log/catroweb-cronjob.log 2>&1
+*/10 * * * * www-data cd /var/www/share/current && php bin/console catrobat:cronjob --env=prod >> <cron log file> 2>&1
 ```
+
+The log must go to a path the cron user can write, outside the app's `var/log`: if the `>>` redirect fails, bash never starts the command and no job runs.
 
 ## Behavior to know
 

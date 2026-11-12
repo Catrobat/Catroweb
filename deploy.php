@@ -31,6 +31,8 @@ set('symfony_env', 'prod');
 set('writable_recursive', true);
 set('http_user', 'www-data');
 set('writable_mode', 'acl');
+// Old releases are deleted after a successful deploy (deploy:cleanup), so they don't pile up.
+set('keep_releases', 5);
 
 // Shared directories
 set('shared_dirs', [
@@ -260,6 +262,7 @@ task('deploy', [
   'update:extensions',
   'update:special',
   'smoke_test',
+  'deploy:cleanup',
   'deploy:unlock',
   'slack:notify:success',
 ]);

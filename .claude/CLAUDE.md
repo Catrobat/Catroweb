@@ -143,6 +143,8 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 
 ## Deploy Gotcha
 
+Cron (`/etc/cron.d/catroweb`, runs as `www-data`) must log into a path the cron user can write: a failing `>>` redirect means the job never starts, with no error anywhere. Check `cronjob.end_at` when anything "should have been cleaned up".
+
 Client IP: nginx resolves the real visitor IP from Cloudflare's `CF-Connecting-IP` (infrastructure repo, Cloudflare ranges only), so Symfony trusts no proxies and `getClientIp()` is the visitor. Don't set `TRUSTED_PROXIES=REMOTE_ADDR`: the origin is reachable directly, so clients could spoof `X-Forwarded-For`.
 
 Protected project files (`/project-files/{id}/assets/{path}`): the nginx `^~ /project-files/` routing prefix must be live before deploying. See `docs/operations/Protected-Project-Files.md`.

@@ -747,19 +747,6 @@
       <code><![CDATA[insertUser]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="tests/PhpUnit/System/Commands/ArchiveLogsTest.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[scandir($log_dir)]]></code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="tests/PhpUnit/System/Commands/CleanLogsTest.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[scandir($log_dir)]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyFalseOperand>
-      <code><![CDATA[json_encode(scandir($log_dir))]]></code>
-    </PossiblyFalseOperand>
-  </file>
   <file src="tests/PhpUnit/System/Commands/ClearCompressedProjectsTest.php">
     <PossiblyFalseArgument>
       <code><![CDATA[scandir($this->compressed_projects_dir)]]></code>

@@ -7,7 +7,7 @@ The app is deployed with Deployer (`deploy.php`, one `share` stage). Production 
 1. Run the **Create Release PR** workflow. It bumps the version in `.env` and drafts a GitHub release.
 2. Merge the release PR. The **Deployment** workflow (`.github/workflows/deployment.yaml`) runs on `.env` changes to `main` and deploys. It can also be started manually with a branch or tag.
 
-Deployer's `smoke_test` task checks health on the server after the release is live; a failure fails the deploy but does not roll back (`bin/dep rollback share` does).
+Deployer's `smoke_test` task checks health on the server after the release is live; a failure fails the deploy but does not roll back (`bin/dep rollback share` does). After a passing smoke test, `deploy:cleanup` keeps the newest 5 releases (`keep_releases`) and deletes older ones.
 
 ## Manual deploy
 
