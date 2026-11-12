@@ -16,14 +16,14 @@ The defaults (`main:300`) are the old single-provider behavior.
 
 Keep every limit just under the free tier. For a monthly quota, use quota ÷ 31 so the month never runs out.
 
-| Slot       | Provider | Free tier             | Limit to set | SMTP DSN                                                    |
-| ---------- | -------- | --------------------- | ------------ | ----------------------------------------------------------- |
-| `main`     | Brevo    | 300/day               | `300`        | `brevo+api://KEY@default` (current)                         |
-| `mailjet`  | Mailjet  | 6,000/month, 200/day  | `190`        | `smtp://API_KEY:SECRET_KEY@in-v3.mailjet.com:587`           |
-| `mailtrap` | Mailtrap | 4,000/month, 150/day  | `125`        | `smtp://api:TOKEN@live.smtp.mailtrap.io:587`                |
-| `resend`   | Resend   | 3,000/month, 100/day  | `95`         | `smtp://resend:API_KEY@smtp.resend.com:587`                 |
-| `mailgun`  | Mailgun  | 100/day               | `95`         | `smtp://USER:PASSWORD@smtp.eu.mailgun.org:587`              |
-| `smtp2go`  | SMTP2GO  | 1,000/month           | `30`         | `smtp://USER:PASSWORD@mail.smtp2go.com:587`                 |
+| Slot       | Provider | Free tier             | Limit to set | SMTP DSN                                                                   |
+| ---------- | -------- | --------------------- | ------------ | -------------------------------------------------------------------------- |
+| `main`     | Brevo    | 300/day               | `300`        | `brevo+api://KEY@default` (current)                                        |
+| `mailjet`  | Mailjet  | 6,000/month, 200/day  | `190`        | `smtp://API_KEY:SECRET_KEY@in-v3.mailjet.com:587`                          |
+| `mailtrap` | Mailtrap | 4,000/month, 150/day  | `125`        | `smtp://api:TOKEN@live.smtp.mailtrap.io:587`                               |
+| `resend`   | Resend   | 3,000/month, 100/day  | `95`         | `smtp://resend:API_KEY@smtp.resend.com:587`                                |
+| `mailgun`  | Mailgun  | 100/day               | `95`         | `smtp://USER:PASSWORD@smtp.eu.mailgun.org:587`                             |
+| `smtp2go`  | SMTP2GO  | 1,000/month           | `30`         | `smtp://USER:PASSWORD@mail.smtp2go.com:587`                                |
 | `ses`      | AWS SES  | paid, $0.10 per 1,000 | spend cap    | `smtp://SMTP_USER:SMTP_PASSWORD@email-smtp.eu-central-1.amazonaws.com:587` |
 
 All free slots together: about 835 mails a day. Free tiers change; check the provider's pricing page before relying on a number.
