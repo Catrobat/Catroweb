@@ -184,13 +184,6 @@ class ScreenshotRepository
     return self::DEFAULT_THUMBNAIL;
   }
 
-  public function importProjectAssets(string $screenshot_filepath, string $thumbnail_filepath, string $id): void
-  {
-    $filesystem = new Filesystem();
-    $filesystem->copy($screenshot_filepath, $this->screenshot_dir.$this->generateFileNameFromId($id));
-    $filesystem->copy($thumbnail_filepath, $this->thumbnail_dir.$this->generateFileNameFromId($id));
-  }
-
   public function getImagick(): \Imagick
   {
     if (null === $this->imagick) {
@@ -258,19 +251,6 @@ class ScreenshotRepository
     $screen->writeImage($filename);
     chmod($filename, 0777);
     $screen->destroy();
-  }
-
-  public function deleteTempFilesForProject(string $id): void
-  {
-    unlink($this->tmp_dir.$this->generateFileNameFromId($id));
-    unlink($this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id));
-  }
-
-  public function deletePermProjectAssets(string $id): void
-  {
-    $this->deleteScreenshot($id);
-    $this->deleteThumbnail($id);
-    $this->deleteTempFilesForProject($id);
   }
 
   /**

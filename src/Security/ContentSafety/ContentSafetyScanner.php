@@ -52,16 +52,6 @@ class ContentSafetyScanner
     }
   }
 
-  public function scanImageFile(string $filePath): ContentSafetyResult
-  {
-    $blob = file_get_contents($filePath);
-    if (false === $blob) {
-      return ContentSafetyResult::unavailable();
-    }
-
-    return $this->scanImageBlob($blob);
-  }
-
   public function scanDataUri(string $dataUri): ContentSafetyResult
   {
     $parts = explode(',', $dataUri, 2);

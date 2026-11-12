@@ -6,7 +6,6 @@ namespace App\DB\EntityRepository\Project;
 
 use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Project\Project;
-use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
 use App\DB\Entity\User\Comment\UserComment;
 use App\Utils\ElasticsearchPagination;
@@ -14,7 +13,6 @@ use App\Utils\RequestHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Elastica\Query;
@@ -461,21 +459,6 @@ class ProjectRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getProjectDataByIds(array $program_ids, ?bool $is_debug_build_request = null): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, null, '', $is_debug_build_request);
-    $query_builder
-      ->select(['e.id', 'e.name', 'e.uploaded_at', 'u.username'])
-      ->innerJoin('e.user', 'u')
-      ->andWhere('e.id IN (:program_ids)')
-      ->setParameter('program_ids', $program_ids)
-      ->distinct()
-    ;
-
-    return $query_builder->getQuery()->getResult();
-  }
-
   /**
    * Fetches project data without visibility filtering — used by the remix graph
    * which must show all connected projects regardless of visibility state.
@@ -495,27 +478,6 @@ class ProjectRepository extends ServiceEntityRepository
       ->getQuery()
       ->getResult()
     ;
-  }
-
-  public function getMostLikedPrograms(?string $flavor, string $max_version, int $limit = 0, int $offset = 0): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
-    $query_builder = $this->setPagination($query_builder, $limit, $offset);
-
-    $query_builder
-      ->select(['e as program', 'COUNT(e.id) as like_count'])
-      ->innerJoin(ProjectLike::class, 'l', Join::ON,
-        $query_builder->expr()->eq('e.id', 'l.program_id')->__toString())
-      ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
-      ->groupBy('e.id')
-      ->orderBy('like_count', 'DESC')
-      ->distinct()
-    ;
-
-    $results = $query_builder->getQuery()->getResult();
-
-    return array_map(static fn (array $result): mixed => $result['project'], $results);
   }
 
   public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Project $project, ?int $limit, int $offset): array

@@ -27,11 +27,6 @@ class UserAchievementRepository extends ServiceEntityRepository
     return $this->findBy(['user' => $user], ['unlocked_at' => 'DESC']);
   }
 
-  public function countUserAchievements(User $user): int
-  {
-    return $this->count(['user' => $user]);
-  }
-
   public function countUnseenUserAchievements(User $user): int
   {
     return $this->count(['user' => $user, 'seen_at' => null]);

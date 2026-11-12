@@ -21,17 +21,6 @@ class ContentModerationActionRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return ContentModerationAction[]
-   */
-  public function findActionsForContent(string $content_type, string $content_id): array
-  {
-    return $this->findBy(
-      ['content_type' => $content_type, 'content_id' => $content_id],
-      ['created_at' => 'DESC']
-    );
-  }
-
-  /**
    * Counts auto-hide actions targeting a user's content within the last N days.
    * Used to apply a probation penalty to repeat offenders.
    */

@@ -38,7 +38,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProjectManager
@@ -58,22 +57,11 @@ class ProjectManager
     protected ExtensionRepository $extension_repository,
     protected CatrobatFileSanitizer $file_sanitizer,
     protected NotificationManager $notification_service,
-    private readonly ?UrlHelper $urlHelper,
     protected Security $security,
     private readonly MalwareScanner $malware_scanner,
     private readonly ProjectDeduplicationService $deduplication_service,
     private readonly ImageVariantUrlBuilder $image_variant_url_builder,
   ) {
-  }
-
-  public function getFeaturedRepository(): FeaturedRepository
-  {
-    return $this->featured_repository;
-  }
-
-  public function getExampleRepository(): ExampleRepository
-  {
-    return $this->example_repository;
   }
 
   public function getProjectByID(string $id, bool $include_private = false): array
@@ -622,16 +610,6 @@ class ProjectManager
     return $this->project_repository->getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(
       $flavor, $project, $limit, $offset
     );
-  }
-
-  public function getScreenshotLarge(string $id): string
-  {
-    return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getScreenshotWebPath($id);
-  }
-
-  public function getScreenshotSmall(string $id): string
-  {
-    return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getThumbnailWebPath($id);
   }
 
   /**

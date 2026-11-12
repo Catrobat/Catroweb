@@ -100,11 +100,6 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->filterNotSafeForMinors($this->project_manager->getUserProjects($user_id, $limit, $offset, $flavor, $max_version));
   }
 
-  public function getUserPublicProjects(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
-  {
-    return $this->project_manager->getPublicUserProjects($user_id, $limit, $offset, $flavor, $max_version);
-  }
-
   /**
    * @return array<Project>
    */

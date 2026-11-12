@@ -10,7 +10,6 @@ use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -36,25 +35,6 @@ class ProjectLikeRepository extends ServiceEntityRepository
       ->getQuery()
       ->getSingleScalarResult()
     ;
-  }
-
-  /**
-   * @return int[]
-   */
-  public function likeTypesOfProject(string $project_id): array
-  {
-    $qb = $this->createQueryBuilder('l');
-
-    $qb
-      ->select('l.type')->distinct()
-      ->where($qb->expr()->eq('l.program_id', ':program_id'))
-      ->setParameter(':program_id', $project_id)
-    ;
-
-    /** @var array<array{type: int}> $result */
-    $result = $qb->getQuery()->getResult();
-
-    return array_map(static fn (array $x): int => $x['type'], $result);
   }
 
   public function totalLikeCount(string $program_id): int
@@ -95,35 +75,6 @@ class ProjectLikeRepository extends ServiceEntityRepository
     }
 
     return $counts;
-  }
-
-  /**
-   * @param string[] $user_ids
-   * @param string[] $exclude_program_ids
-   *
-   * @return ProjectLike[]
-   */
-  public function getLikesOfUsers(array $user_ids, string $exclude_user_id, array $exclude_program_ids, string $flavor): array
-  {
-    $qb = $this->createQueryBuilder('l');
-
-    return $qb
-      ->select('l')
-      ->innerJoin(Project::class, 'p', Join::ON, $qb->expr()->eq('p.id', 'l.project')->__toString())
-      ->where($qb->expr()->in('l.user_id', ':user_ids'))
-      ->andWhere($qb->expr()->neq('IDENTITY(p.user)', ':exclude_user_id'))
-      ->andWhere($qb->expr()->notIn('p.id', ':exclude_program_ids'))
-      ->andWhere($qb->expr()->eq('p.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('p.flavor', ':flavor'))
-      ->andWhere($qb->expr()->eq('p.private', $qb->expr()->literal(false)))
-      ->setParameter('user_ids', $user_ids)
-      ->setParameter('exclude_user_id', $exclude_user_id)
-      ->setParameter('exclude_program_ids', $exclude_program_ids)
-      ->setParameter('flavor', $flavor)
-      ->distinct()
-      ->getQuery()
-      ->getResult()
-    ;
   }
 
   /**

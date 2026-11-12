@@ -44,13 +44,4 @@ class NotificationManager
 
     $this->em->flush();
   }
-
-  public function deleteNotifications(mixed $notifications): void
-  {
-    foreach ($notifications as $notification) {
-      $this->em->remove($notification);
-    }
-
-    $this->em->flush();
-  }
 }

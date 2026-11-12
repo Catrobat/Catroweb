@@ -71,65 +71,6 @@ class ExampleRepository extends ServiceEntityRepository
 
   /**
    * @throws NoResultException
-   * @throws NonUniqueResultException
-   */
-  public function getExampleProgramCount(string $flavor, bool $for_ios = false): mixed
-  {
-    $qb = $this->createQueryBuilder('e');
-
-    $qb
-      ->select($qb->expr()->count('e.id'))
-      ->join('e.flavor', 'fl')
-      ->where('e.active = true')
-      ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
-      ->andWhere($qb->expr()->isNotNull('e.project'))
-      ->andWhere($qb->expr()->eq('e.for_ios', ':for_ios'))
-      ->setParameter('flavor', $flavor)
-      ->setParameter('for_ios', $for_ios)
-    ;
-
-    return $qb->getQuery()->getSingleScalarResult();
-  }
-
-  public function getExampleItems(string $flavor, ?int $limit = 20, int $offset = 0): mixed
-  {
-    $qb = $this->createQueryBuilder('e');
-
-    return $qb
-      ->select('e')
-      ->join('e.flavor', 'fl')
-      ->where('e.active = true')
-      ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
-      ->andWhere($qb->expr()->eq('e.for_ios', 'false'))
-      ->setParameter('flavor', $flavor)
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-      ->orderBy('e.priority', 'DESC')
-      ->getQuery()->getResult()
-    ;
-  }
-
-  /**
-   * @throws NoResultException
-   * @throws NonUniqueResultException
-   */
-  public function getExampleItemCount(string $flavor): mixed
-  {
-    $qb = $this->createQueryBuilder('e');
-
-    return $qb
-      ->select($qb->expr()->count('e.id'))
-      ->join('e.flavor', 'fl')
-      ->where('e.active = true')
-      ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
-      ->andWhere($qb->expr()->eq('e.for_ios', 'false'))
-      ->setParameter('flavor', $flavor)
-      ->getQuery()->getSingleScalarResult()
-    ;
-  }
-
-  /**
-   * @throws NoResultException
    */
   public function isExample(Project $project): bool
   {

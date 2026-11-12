@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Project\CatrobatFile;
 
 use App\DB\Entity\Project\Project;
-use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -23,7 +22,6 @@ class ExtractedFileRepository
    * @throws \Exception
    */
   public function __construct(ParameterBagInterface $parameter_bag,
-    private readonly ProjectManager $project_manager,
     private readonly CatrobatFileExtractor $file_extractor,
     private readonly LoggerInterface $logger,
     private readonly RequestStack $request_stack)
@@ -65,26 +63,6 @@ class ExtractedFileRepository
       return new ExtractedCatrobatFile($base_dir, $web_path, $project_id);
     } catch (InvalidCatrobatFileException) {
       return null;
-    }
-  }
-
-  public function removeProjectExtractedFile(Project $project): void
-  {
-    try {
-      $project_id = $project->getId();
-
-      if (null === $project_id || !is_dir($this->local_path.$project_id.'/')) {
-        return; // nothing to do
-      }
-
-      $extract_dir = $this->local_path.$project_id.'/';
-      FileHelper::removeDirectory($extract_dir);
-      $this->project_manager->save($project);
-    } catch (\Exception $exception) {
-      $this->logger->error(
-        "Removing extracted project files failed with code '".$exception->getCode().
-        "' and message: '".$exception->getMessage()."'"
-      );
     }
   }
 

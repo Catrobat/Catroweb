@@ -6,7 +6,6 @@ namespace App\DB\EntityRepository\Project;
 
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\Remix\ProjectRemixRelation;
-use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -171,29 +170,6 @@ class ProjectRemixRepository extends ServiceEntityRepository
     ;
   }
 
-  /**
-   * @return ProjectRemixRelation[]
-   */
-  public function getUnseenDirectDescendantRelationsOfUser(User $user): array
-  {
-    $qb = $this->createQueryBuilder('r');
-
-    return $qb
-      ->select('r')
-      ->innerJoin('r.ancestor', 'p', Join::ON, 'r.ancestor_id = p.id')
-      ->innerJoin('r.descendant', 'p2', Join::ON, 'r.descendant_id = p2.id')
-      ->where($qb->expr()->eq('p.user', ':user'))
-      ->andWhere($qb->expr()->neq('p2.user', 'p.user'))
-      ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
-      ->andWhere($qb->expr()->isNull('r.seen_at'))
-      ->orderBy('r.created_at', 'DESC')
-      ->setParameter('user', $user)
-      ->distinct()
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
   public function markAllUnseenRelationsAsSeen(\DateTime $seen_at): void
   {
     $qb = $this->createQueryBuilder('r');
@@ -222,52 +198,5 @@ class ProjectRemixRepository extends ServiceEntityRepository
     ;
 
     return is_countable($result) ? count($result) : 0;
-  }
-
-  /**
-   * @return ProjectRemixRelation[]
-   */
-  public function getDirectParentRelationDataOfUser(string $user_id): array
-  {
-    $qb = $this->createQueryBuilder('r');
-
-    return $qb
-      ->select('r.ancestor_id, r.descendant_id')
-      ->innerJoin('r.descendant', 'p', Join::ON, 'r.descendant_id = p.id')
-      ->where($qb->expr()->eq('IDENTITY(p.user)', ':user_id'))
-      ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
-      ->setParameter('user_id', $user_id)
-      ->distinct()
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
-  /**
-   * @return ProjectRemixRelation[]
-   */
-  public function getDirectParentRelationsOfUsersRemixes(array $user_ids, string $exclude_user_id, array $exclude_program_ids, string $flavor): array
-  {
-    $qb = $this->createQueryBuilder('r');
-
-    return $qb
-      ->select('r')
-      ->innerJoin('r.ancestor', 'pa', Join::ON, 'r.ancestor_id = pa.id')
-      ->innerJoin('r.descendant', 'pd', Join::ON, 'r.descendant_id = pd.id')
-      ->where($qb->expr()->in('IDENTITY(pd.user)', ':user_ids'))
-      ->andWhere($qb->expr()->neq('IDENTITY(pa.user)', ':exclude_user_id'))
-      ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
-      ->andWhere($qb->expr()->notIn('r.ancestor_id', ':exclude_program_ids'))
-      ->andWhere($qb->expr()->eq('pa.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('pa.flavor', ':flavor'))
-      ->andWhere($qb->expr()->eq('pa.private', $qb->expr()->literal(false)))
-      ->setParameter('user_ids', $user_ids)
-      ->setParameter('exclude_user_id', $exclude_user_id)
-      ->setParameter('exclude_program_ids', $exclude_program_ids)
-      ->setParameter('flavor', $flavor)
-      ->distinct()
-      ->getQuery()
-      ->getResult()
-    ;
   }
 }
