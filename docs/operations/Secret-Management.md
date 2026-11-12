@@ -4,16 +4,17 @@ The committed `.env` holds **intentionally insecure dev-only defaults** so the p
 
 ## Secrets That Must Be Overridden in Production
 
-| Variable               | Dev Default                           | How to Override                   |
-| ---------------------- | ------------------------------------- | --------------------------------- |
-| `APP_SECRET`           | `93055246cfa39f62f5be97928084989a`    | `.env.prod.local` or real env var |
-| `JWT_PASSPHRASE`       | `catroweb`                            | `.env.prod.local` or real env var |
-| `DATABASE_URL`         | `pdo-mysql://root:root@localhost/...` | `.env.prod.local` or real env var |
-| `DATABASE_PASSWORD`    | `root`                                | `.env.prod.local` or real env var |
-| `GOOGLE_CLIENT_SECRET` | `'secret'`                            | `.env.prod.local` or real env var |
-| `MAILER_DSN`           | `null://null`                         | `.env.prod.local` or real env var |
-| `CLAMAV_HOST`          | `clamav`                              | `.env.prod.local` or real env var |
-| `CLAMAV_PORT`          | `3310`                                | `.env.prod.local` or real env var |
+| Variable               | Dev Default                           | How to Override                                                 |
+| ---------------------- | ------------------------------------- | --------------------------------------------------------------- |
+| `APP_SECRET`           | `93055246cfa39f62f5be97928084989a`    | `.env.prod.local` or real env var                               |
+| `JWT_PASSPHRASE`       | `catroweb`                            | `.env.prod.local` or real env var                               |
+| `DATABASE_URL`         | `pdo-mysql://root:root@localhost/...` | `.env.prod.local` or real env var                               |
+| `DATABASE_PASSWORD`    | `root`                                | `.env.prod.local` or real env var                               |
+| `GOOGLE_CLIENT_SECRET` | `'secret'`                            | `.env.prod.local` or real env var                               |
+| `MAILER_DSN`           | `null://null`                         | `.env.prod.local` or real env var                               |
+| `MAILER_DSN_<NAME>`    | unset (`null://null`)                 | `.env.prod.local`, see [Email-Providers.md](Email-Providers.md) |
+| `CLAMAV_HOST`          | `clamav`                              | `.env.prod.local` or real env var                               |
+| `CLAMAV_PORT`          | `3310`                                | `.env.prod.local` or real env var                               |
 
 ## Production Setup
 

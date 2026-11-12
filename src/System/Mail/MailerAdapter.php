@@ -42,13 +42,22 @@ class MailerAdapter
 
     $email = $this->buildEmail($to, $subject, $template, $context);
     // $email = $this->signEmail($email); // Signing is currently disabled due to breveo
-    if (!$this->sendEmail($email, $to)) {
-      return false;
+
+    // Free mail tiers have small daily limits, so several providers are chained: the first one with room
+    // left sends, and one that fails (down, or over a limit we did not know about) hands over to the next.
+    foreach ($this->budgetManager->getProvidersWithRoom() as $provider) {
+      $email->getHeaders()->remove('X-Transport');
+      $email->getHeaders()->addTextHeader('X-Transport', $provider);
+      if ($this->sendEmail($email, $to, $provider)) {
+        $this->budgetManager->recordSend($emailType, $provider);
+
+        return true;
+      }
     }
 
-    $this->budgetManager->recordSend($emailType);
+    $this->logger->error(sprintf('No mail provider could send the email to %s with subject "%s".', $to, $subject));
 
-    return true;
+    return false;
   }
 
   protected function buildEmail(string $to, string $subject, string $template, array $context): Message
@@ -83,14 +92,14 @@ class MailerAdapter
     }
   }
 
-  protected function sendEmail(Message $email, string $to): bool
+  protected function sendEmail(Message $email, string $to, string $provider): bool
   {
     try {
       $this->mailer->send($email);
 
       return true;
     } catch (TransportExceptionInterface $transportException) {
-      $this->logger->error(sprintf('Can\'t send email to %s; Reason ', $to).$transportException->getMessage());
+      $this->logger->warning(sprintf('Mail provider "%s" can\'t send email to %s; Reason ', $provider, $to).$transportException->getMessage());
 
       return false;
     }

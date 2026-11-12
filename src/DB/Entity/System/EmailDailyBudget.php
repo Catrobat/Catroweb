@@ -38,6 +38,10 @@ class EmailDailyBudget
   #[ORM\Column(name: 'management_sent', type: Types::INTEGER, nullable: false, options: ['default' => 0])]
   protected int $management_sent = 0;
 
+  /** @var array<string, int>|null mails sent today per mail provider (EmailBudgetManager::PROVIDERS) */
+  #[ORM\Column(name: 'provider_sent', type: Types::JSON, nullable: true)]
+  protected ?array $provider_sent = null;
+
   public function __construct()
   {
     $this->date = new \DateTime('today');
@@ -125,6 +129,16 @@ class EmailDailyBudget
     $this->management_sent = $management_sent;
 
     return $this;
+  }
+
+  public function getSentByProvider(string $provider): int
+  {
+    return $this->provider_sent[$provider] ?? 0;
+  }
+
+  public function incrementProvider(string $provider): void
+  {
+    $this->provider_sent[$provider] = $this->getSentByProvider($provider) + 1;
   }
 
   public function incrementType(string $type): void

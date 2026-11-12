@@ -33,7 +33,7 @@ class SystemHealthService
   {
     $remaining = $this->emailBudgetManager->getRemainingBudget();
     $totalRemaining = $remaining['total'];
-    $totalSent = EmailBudgetManager::DAILY_LIMIT - $totalRemaining;
+    $totalSent = $this->emailBudgetManager->getDailyLimit() - $totalRemaining;
 
     $breakdown = [];
     foreach (EmailBudgetManager::TYPE_RESERVES as $type => $reserve) {
@@ -46,7 +46,7 @@ class SystemHealthService
     }
 
     return [
-      'daily_limit' => EmailBudgetManager::DAILY_LIMIT,
+      'daily_limit' => $this->emailBudgetManager->getDailyLimit(),
       'sent_today' => $totalSent,
       'remaining' => $totalRemaining,
       'breakdown' => $breakdown,

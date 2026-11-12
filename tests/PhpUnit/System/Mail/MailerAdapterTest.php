@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Message;
 use Twig\Environment;
 
 /**
@@ -35,6 +36,7 @@ final class MailerAdapterTest extends TestCase
     $mailer->method('send')->willThrowException(new TransportException('rejected'));
     $budget = $this->createMock(EmailBudgetManager::class);
     $budget->method('canSend')->willReturn(true);
+    $budget->method('getProvidersWithRoom')->willReturn(['main', 'mailjet']);
     $budget->expects($this->never())->method('recordSend');
 
     $this->assertFalse($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig'));
@@ -46,9 +48,31 @@ final class MailerAdapterTest extends TestCase
     $mailer->expects($this->once())->method('send');
     $budget = $this->createMock(EmailBudgetManager::class);
     $budget->method('canSend')->willReturn(true);
-    $budget->expects($this->once())->method('recordSend')->with('admin');
+    $budget->method('getProvidersWithRoom')->willReturn(['main']);
+    $budget->expects($this->once())->method('recordSend')->with('admin', 'main');
 
     $this->assertTrue($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig'));
+  }
+
+  public function testAFailingProviderHandsTheMailToTheNextOne(): void
+  {
+    $transports = [];
+    $mailer = $this->createMock(MailerInterface::class);
+    $mailer->expects($this->exactly(2))->method('send')->willReturnCallback(
+      static function (Message $email) use (&$transports): void {
+        $transports[] = $email->getHeaders()->getHeaderBody('X-Transport');
+        if ('main' === end($transports)) {
+          throw new TransportException('daily limit reached');
+        }
+      }
+    );
+    $budget = $this->createMock(EmailBudgetManager::class);
+    $budget->method('canSend')->willReturn(true);
+    $budget->method('getProvidersWithRoom')->willReturn(['main', 'mailjet', 'ses']);
+    $budget->expects($this->once())->method('recordSend')->with('verification', 'mailjet');
+
+    $this->assertTrue($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig', [], 'verification'));
+    $this->assertSame(['main', 'mailjet'], $transports);
   }
 
   private function adapter(MailerInterface $mailer, EmailBudgetManager $budget): MailerAdapter
