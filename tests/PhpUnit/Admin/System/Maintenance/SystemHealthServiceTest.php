@@ -125,7 +125,7 @@ class SystemHealthServiceTest extends TestCase
   public function testGetEmailBudgetLevel(int $totalRemaining, string $expected): void
   {
     $budget = new EmailDailyBudget();
-    $totalSent = EmailBudgetManager::DAILY_LIMIT - $totalRemaining;
+    $totalSent = 300 - $totalRemaining;
     $budget->setTotalSent($totalSent);
     $budget->setVerificationSent(0);
     $budget->setResetSent(0);

@@ -45,7 +45,7 @@ class EmailBudgetManagerTest extends TestCase
 
   public function testCanSendReturnsFalseWhenDailyLimitReached(): void
   {
-    $this->budget->setTotalSent(EmailBudgetManager::DAILY_LIMIT);
+    $this->budget->setTotalSent($this->manager->getDailyLimit());
 
     self::assertFalse($this->manager->canSend('verification'));
     self::assertFalse($this->manager->canSend('reset'));
@@ -126,6 +126,38 @@ class EmailBudgetManagerTest extends TestCase
     self::assertSame(200, $remaining['total']);
   }
 
+  public function testTheDailyLimitIsTheSumOfTheProviderLimits(): void
+  {
+    self::assertSame(300, $this->manager->getDailyLimit());
+    self::assertSame(490, $this->managerWith('main:300, mailjet:190')->getDailyLimit());
+  }
+
+  public function testAnUnknownOrMalformedProviderIsIgnored(): void
+  {
+    $manager = $this->managerWith('main:300,gmail:500,mailjet:lots,resend:100');
+
+    self::assertSame(400, $manager->getDailyLimit());
+    self::assertSame(['main', 'resend'], $manager->getProvidersWithRoom());
+  }
+
+  public function testAWhollyBrokenProviderListFallsBackToTheDefault(): void
+  {
+    self::assertSame(['main'], $this->managerWith('brevo=300')->getProvidersWithRoom());
+    self::assertSame(300, $this->managerWith('')->getDailyLimit());
+  }
+
+  public function testAProviderAtItsLimitIsSkipped(): void
+  {
+    $manager = $this->managerWith('main:2,mailjet:190,ses:50');
+
+    $manager->recordSend('verification', 'main');
+    self::assertSame(['main', 'mailjet', 'ses'], $manager->getProvidersWithRoom());
+
+    $manager->recordSend('verification', 'main');
+    self::assertSame(['mailjet', 'ses'], $manager->getProvidersWithRoom());
+    self::assertSame(2, $this->budget->getSentByProvider('main'));
+  }
+
   public function testCanSendThrowsOnInvalidType(): void
   {
     $this->expectException(\InvalidArgumentException::class);
@@ -166,5 +198,13 @@ class EmailBudgetManagerTest extends TestCase
     self::assertFalse($this->manager->canSend('consent'));
     self::assertFalse($this->manager->canSend('admin'));
     self::assertFalse($this->manager->canSend('management'));
+  }
+
+  private function managerWith(string $providers): EmailBudgetManager
+  {
+    $repository = $this->createStub(EmailDailyBudgetRepository::class);
+    $repository->method('findOrCreateToday')->willReturn($this->budget);
+
+    return new EmailBudgetManager($repository, $this->createStub(EntityManagerInterface::class), new NullLogger(), $providers);
   }
 }
