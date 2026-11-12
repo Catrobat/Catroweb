@@ -49,6 +49,12 @@ class StorageLifecycleCommand extends Command
       $io->warning('CRITICAL: Disk usage above 95% -- uploads should be paused!');
     }
 
+    // Warn owners (in-app notification, once per project) during the last week before deletion.
+    if (!$dry_run) {
+      $warned = $this->lifecycle_service->sendExpiryWarnings(7, $this->storage_dir)['warned'];
+      $io->text(sprintf('Expiry warnings sent: %d', $warned));
+    }
+
     $result = $this->lifecycle_service->deleteExpiredProjects($dry_run, $this->storage_dir);
 
     $action = $dry_run ? 'would delete' : 'deleted';
