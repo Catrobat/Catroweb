@@ -57,6 +57,7 @@ Feature:
     And I wait for the page to be loaded
     Then the element "#btn-login-google" should not exist
     And the element ".login-divider" should not exist
+    And the element ".subtext #privacyPolicy" should exist
 
   Scenario: New user registers via Google OAuth, completes date of birth, and sees the random username info popup
     Given I am on "/app/login"

@@ -517,7 +517,7 @@ login:
     createAccount: ਖਾਤਾ ਬਣਾਉ
     forgetPassword: 'ਪਾਸਵਰਡ ਭੁੱਲ ਗਿਆ?'
   oauth:
-    google: "Google ਨਾਲ ਜਾਰੀ ਰੱਖੋ"
+    google: "Google ਨਾਲ ਜਾਰੀ ਰੱਖ"
     or: "ਜਾਂ"
   passOrUser: 'ਤੇਰਾ ਪਾਸਵਰਡ ਜਾਂ ਵਰਤੋਂਕਾਰ ਨਾਮ ਗਲਤ ਸੀ।'
   accountSuspended: 'ਤੇਰਾ ਖਾਤਾ ਮੁਅੱਤਲ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ। ਜੇ ਤੈਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਇਹ ਗਲਤੀ ਹੈ, ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰ।'

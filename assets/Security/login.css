@@ -43,6 +43,7 @@
 .social-login-btn:hover,
 .social-login-btn:focus-visible {
   background-color: light-dark(#f2f2f2, #2a2a2b);
+  color: light-dark(#1f1f1f, #e3e3e3);
 }
 
 .social-login-btn:focus-visible {
