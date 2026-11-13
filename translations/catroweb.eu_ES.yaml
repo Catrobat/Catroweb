@@ -8,19 +8,12 @@ meta.og.description.login: 'Hasi saioa zure Catrobat proiektuak komunitatearekin
 meta.og.title.register: 'Sortu Catrobat kontu bat'
 meta.og.description.register: 'Batu Catrobat komunitatera eta hasi gaur bertan zure proiektu sortzaileak partekatzen.'
 meta.og.description.profile: '%username% Catrobaten – arakatu bere proiektuak eta lorpenak.'
-localLanguage: Ingelesa
 username: 'Erabiltzaile-izena'
 password: 'Pasahitza'
-createNewPassword: Sortu pasahitz berria
-accountSettings: Kontuaren ezarpenak
 email: 'Helbide elektronikoa:'
-aboutPocketCode: 'Pocket Code-ri buruz'
 about: Catrobati buruz
-education: Hezkuntza
 chat: Txata eta foroak
-privacyGuide: 'Pribatutasunaren inguruko gida'
 others: Bestelakoak
-tutorials: Laguntza
 googlePlay: Google Play Denda
 iosAppStore: iOS App denda
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Nola sortu duzu proiektu hau? Beste jende batzuen id
 projectImportedFromScratch: 'Proiektu hau MIT Scratch-etik inportatu da. Jatorrizko proiektua ikus dezakezu'
 scratchImportedProjectLinkHere: 'hemen.'
 country: Herrialdea
-loginText: Saioa hasi
 privacyPolicy: Pribatutasun politika
-imprint: Argitaratzailea
 projectDetails: 'Xehetasunak'
 somethingWentWrong: 'Ai ene! Zerbait ez doa ongi.'
 accountNotVerified: 'Ziurtatu saioa hasita duzula eta zure kontuaren helbide elektronikoa egiaztatuta dagoela.'
@@ -55,36 +46,28 @@ accountSuspended: 'Zure kontua eten egin da komunitatearen salaketengatik. Eraba
 doesNotExist: 'Eskatutako baliabidea ez da existitzen.'
 pleaseTryAgain: 'Saiatu berriro mesedez!'
 tryAgainButton: 'Saiatu berriro'
-oldVersionError: 'Eguneratu Pocket Paint azkeneko bertsiora mesedez!'
 more: 'gehiago'
 less: 'gutxiago'
 show-more: 'Erakutsi gehiago'
-show-less: 'Erakutsi gutxiago'
 more-information: 'Informazio gehiago'
 less-information: 'Informazio gutxiago'
 ok: Ados
-clickToDownloadProgram: 'Adibidez programa hau deskargatzeko sakatu %link_start% hemen%link_end%.'
-registrationError: 'Erabiltzaile izen edo helbide hau erabili egin dute dagoeneko.'
 notifications: 'Jakinarazpenak'
 allNotifications: 'Dena'
 FollowersNotifications: 'Jarraitzaileak'
 LikeNotifications: 'Erreakzioak'
 CommentNotifications: 'Iruzkinak'
 RemixNotifications: 'Nahaste borrasteak'
-wellDone: "Oso ongi!"
 done: "Eginda!"
 notificationsReadMessage: "Jakinarezpen berririk ez dagoela ematen du."
-confirmMessage: "Bai, ezabatu"
 cancelMessage: 'Utzi'
 notificationsUnauthorizedError: "Ezin izan da erabiltzailea onartu"
 notificationsClearError: "Jakinarazpenak ezin izan dira \"irakurrita\" bezala markatu!"
-pleaseWait: "Itxaron mesedez..."
 projects: 'Proiektuak'
 users: "Erabiltzaileak"
 studios: 'Estudioak'
 oauthPopUpTitle: "Kanpoko kontu baten saio hasteari buruzko informazioa"
 oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat asmatu dugu zuretzat. Erabiltzailearen izena edo pasahitza aldatu nahi baduzu joan mesedez zure profilaren orrialdera.'
-oauthHere: "hemen"
 statistics: "Estatistikak"
 languageSelection: 'Hizkuntza-hautaketa'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Iluna'
   dark_description: 'Itxura iluna'
   apply: 'Ezarri'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Zer proiektu gomendatzen ditugu hemen?'
-      description: 'Zure proiektuak erreakzio gehiago jaso ahala (datsegit, irri...), gorago agertuko da zerrendan.'
 follower:
   follows: Jarraitzen
   followers: Jarraitzaileak
   follow: Jarraitu
-  username: Erabiltzailea
   followsMe: Jarraitzen nau
   noFollowing: Ez duzu inor jarraitzen oraindik.
   noFollowers: Ez zaitu inork jarraitzen oraindik.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Ziur al zaude erabiltzaile hau jarraitzeari utzi nahi duzula?"
   unfollowButton: "%username% jarraitzeari utzi"
 project:
-  welcome:
-    title: 'Ongi etorri Catrobaten %theme%-ra'
-    title_mindstorms: 'Ongi etorri Catrobaten Mindstorms EV3 eta NXTrako gunera'
-    subtitle: 'Sortu istorioak, jokoak eta gehiago...'
-    subtitle_embroidery: 'Brodatu zure ereduak kamiseta, poltsa, praka edo mugikorraren karkasan!'
-    subtitle_mindstorms: 'Sortu zure proiektuak Lego Mindstorms EV3 eta NXT robotekin'
-    download: 'Deskargatu aplikazioa'
-    statistics: 'Estatistika gehiago'
   featured: 'Nabarmenduak'
   open: Ireki
   download: 'Deskargatu'
@@ -148,9 +117,6 @@ project:
       retention: 'Igotako proiektuak automatikoki ezabatuko dira jarduerarik gabeko denboraldi baten ondoren. Hasi saioa maiz edo lortu deskargak zure proiektuan hura gehiago gordetzeko.'
       protection: 'Proiektu bereziki onak edo ezagunak moderatzaileek babestu ditzakete ezabatze automatikoaren aurka.'
   example: 'Adibideak'
-  newest: 'Proiektu berrienak'
-  recommended: 'Gomendatutako proiektuak'
-  scratchremixes: 'Scratch remixak'
   noProjects: 'Oraingoz ez dago proiekturik.'
   shareAction: 'Partekatu'
   deleteAction: 'Ezabatu proiektua'
@@ -190,17 +156,10 @@ project:
     Ezingo duzu ekintza hau desegin!
     Bai, ezabatu!
     Utzi
-  tooLongName: 'Proiektuaren izena luzeegia da!'
-  tooLongDescription: 'Proiektuaren deskribapena luzeegia da!'
-  tooLongCredits: 'Proiektuaren oharrak eta kredituak luzeegiak dira!'
   my_projects: Nire proiektuak
   trending: 'Joerako proiektuak'
   popular: 'Proiektu ezagunak'
-  most:
-    viewed: 'Ikusienak'
-    downloaded: 'Deskargatuenak'
   random: 'Ausazko proiektuak'
-  related: 'Lotutako proiektuak'
   browse:
     explore: 'Esploratu proiektuak'
     no_projects: 'Oraindik ez duzu proiekturik sortu'
@@ -214,36 +173,14 @@ project:
     tooltip: 'Proiektuak automatikoki ezabatzen dira jarduerarik gabeko denboraldi baten ondoren. Lortu deskarga gehiago edo hasi saioa maiz hura gehiago gordetzeko.'
     tooltip_protected: 'Proiektu hau babestuta dago eta ez da automatikoki ezabatuko.'
   downloads: '%downloads% deskarga'
-  sample: 'Adibide-proiektuak'
   views: '%views% ikustaldi'
   likes:
     likersTitle: 'Proiektu horri erreakzionatu dioten pertsonak'
     all: "Dena"
-  remixes: '{0}0 remix |{1}remix 1 |]1,Inf]%remixes% remix'
-  newRemixesNotificationTitle: '|{1}"%programName%" proiektuak remix berri 1 du: |]1,Inf] "%programName%" proiektuak %remixes% remix berri ditu:'
-  submitted: 'Bidalitako proiektuak'
-  uploaded: 'Igotako proiektuak'
-  reportAsInappropriate: 'Salatu desegoki gisa'
-  reportProgram: 'Salatu proiektua'
   languageVersion: 'Catrobat hizkuntzaren bertsioa: %languageVersion%'
-  reportLoginText: '%login% proiektu hau salatzeko.'
-  reportDialogHeader: 'Zergatik salatu nahi duzu proiektu hau?'
-  reportDialogReason: 'Idatzi arrazoi bat'
-  reportRadioButtonInappropriate: 'Desegokia da'
-  reportRadioButtonCopyright: 'Egile-eskubideen urraketa'
-  reportRadioButtonSpam: 'Spama da'
-  reportRadioButtonDislike: 'Ez zait gustatzen'
-  reportOwnProgram: 'Ezin duzu zure proiektua salatu.'
-  reportAlready: 'Dagoeneko salatu duzu proiektu hau.'
-  reportDone: 'Proiektu hau salatu duzu!'
   updateAppHeaderDownload: 'Ezin da deskargatu'
   updateAppTextDownload: 'Eguneratu zure aplikazioa azken bertsiora. Kontuan izan Androideko eginbide guztiak ez daudela oraindik iOSen eskuragarri.'
-  updateAppTextDownloadApk: 'APK deskarga Androiden bakarrik dago eskuragarri une honetan, ez iOSen.'
-  updateAppHeader: 'Eguneratu aplikazioa'
-  updateAppText: 'Eguneratu zure aplikazioa azken bertsiora.'
-  btnClosePopup: Ados
   checkout_this_project: 'Begiratu Catrobat proiektu hau'
-  show_more: 'Erakutsi gehiago'
   comments: Iruzkinak
   send: 'Bidali'
   delete: 'Ezabatu'
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: 'Ezabatua'
   noAdminRights: 'Ez duzu administratzaile-baimenik. Hasi saioa administratzaile gisa.'
   editProject: 'Editatu proiektua'
-  closeProjectEditor: 'Itxi proiektu-editorea'
   closeEditorPrompt: Ziur aldaketak gorde nahi dituzula?
   btnDiscard: Baztertu
   addComment: 'Idatzi iruzkin bat'
@@ -263,8 +199,6 @@ project:
   smile: 'Irribarre!'
   love: 'Maite dut!'
   wow: 'Uaaau!'
-  linkTitle: 'Esteka'
-  link: 'Kopiatu proiektuaren esteka arbelean'
   reactionsText: Erreakzioak
   downloadErrorText: 'Errore bat gertatu da proiektua deskargatzean. Saiatu berriro geroago.'
   downloadStartText: 'Deskarga hasi da...'
@@ -284,11 +218,8 @@ project:
   translations: 'Itzulpenak'
   createTranslation: 'Sortu itzulpena'
   deletedComment: '**Ezabatua**'
-  replyLabel: 'erantzun'
-  repliesLabel: 'erantzun'
   notForKids: 'Ez da egokia haurrentzat'
 remixGraph:
-  title: Nahaste borrasteak
   showRemixGraph: 'Remix grafikoa'
   by: 'by'
   open: 'Ireki'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Ez dago eskuragarri'
   projectUnknownUser: 'Erabiltzaile ezezaguna'
 noReply: 'Mezu automatiko bat da hau - Ez erantzun zuzenean mezu honi.'
-accountConfirmation:
-  subject: Zure Catrobat kontuaren berrespena 
-  message: |
-    %username% maitea.
-    Zure kontua aktibatzez amaitzeko - sakatu mesedez %confirmationUrl%
-    Esteka hau behin bakarrik erabili daiteke zure kontua ontzat emateko.
-    Ongi izan,
-    Catrobaten taldea.
-  messageHtml: |
-    <p>
-    %username% maitea.<br>
-    <br>
-    Zure kontua aktibatzen amaitzeko, egin klik <a href="%confirmationUrl%">hemen.</a><br>
-    Esteka hau behin bakarrik erabil daiteke zure kontua baliozkotzeko.<br>
-    <br>
-    Ongi izan,<br>
-    Catrobat taldea.
-    </p>
 newAccountConfirmation:
   subject: 'Egiaztatu zure helbide elektronikoa'
   welcome: 'Ongi etorri Catrobatera!'
@@ -403,63 +316,13 @@ parent:
       ignore: 'Hau eskatu ez baduzu, mezu hau alde batera utz dezakezu.'
 passwordRecovery:
   subject: Zure Catrobateko pasahitzaren berreskurapena.
-  message: |
-    %username% maitea.
-    Zure pasahitza aldatzeko eskatu duzu %appplication_url%-(e)n, dirudienez ahaztu egin duzulako.
-    Eskaera ez baduzu zuk egin, ez egin kasu. 24 ordutan balio gabe geratuko da eskaera.
-    Pasahitza ezabatu eta berri bat sortzeko, joan honako orrialde honetara: %confirmationUrl%
-    Zure erabiltzaile izena eta pasahitza erabiltzen jarritu dezakezu %appplication_url% komunitatean parte hartzeko.
-    Hori lortzeko, bisitatu honako orrialde hau: %loginPage%
-    Zure profileko zehetasunak aldatzeko, joan orrialde honetara: %profilePage%
-    Ongi izan,
-    Cstrobaten taldea.
-  messageHtml: |
-    <p>
-    %username% maitea.<br>
-    <br>
-    Zure pasahitza ahaztu duzulako, <a href="%appplication_url%">Pocket Code</a>-n pasahitza berrezartzeko eskatu duzu.
-    Zuk eskatu ez baduzu, ez egin kasurik. 24 orduren buruan iraungi egingo da eta ez du balioko.<br>
-    <br>
-    Zure pasahitza berrezarri eta berri bat sortzeko, egin klik <a href="%confirmationUrl%">hemen.</a><br>
-    <br>
-    Zure erabiltzaile-izena eta pasahitza edozein unetan erabil ditzakezu <a href="%appplication_url%">Pocket Code</a> komunitatean sartzeko.<br>
-    Horretarako, joan orri honetara: <a href="%loginPage%">Saio-hasierako orria</a><br>
-    Zure profilaren xehetasunak editatzeko, joan <a href="%profilePage%">orri honetara</a>.<br>
-    <br>
-    Ongi izan,<br>
-    Catrobat taldea.
-    </p>
 profile:
   aboutMe: 'Niri buruz'
   currentlyWorkingOn: 'Une honetan lantzen'
-  edit: Zure profila editatu
-  saveChanges: aldaketak gorde
   newPass: pasahitz berria
   repeatPass: pasahitza berridatzi
   oldPass: pasahitz zaharra
-  firstEmail: Nire lehen emaila
-  secondEmail: Nire bigarren emaila
-  myPrograms: Nire proiektuak
-  follows: 'Jarraitzen ditu'
-  follower: 'Jarraitzailea'
-  unfollowUser: Erabiltzaile hau jarraitzeari utzi!
-  followUser: Erabiltzaile hau jarraitu!
-  amountOfPrograms: Proiektu kopurua
-  form:
-    passwordTooShort: Parahitz berriak %length% karaktere izan behar ditu gutxienez.
-    passwordTooLong: Pasahitz berriak %length% karaktere izan ditzake gehienez.
-    passwordIsUsername: Pasahitza eta erabiltzailearen izena ezin dira berdinak izan.
-    passwordWrong: Okerreko pasahitza
-    emailNotValid: Helbide elektroniko honek ez du balio.
-    emailMissing: Arazo bat egon da helbide elektroniko hau eguneratzen. Helbide elektroniko onartu bat behintzat beharrezkoa da.
-    emailExists: Helbide elektroniko hau existitzen da dagoeneko.
-    usernameNotValid: Erabiltzaile izen honek ez du balio.
-    usernameMissing: Erabiltzaile izen bat izan behar duzu.
-    usernameExists: Erabiltzaile izen hau dagoeneko existitzen da.
-    usernameContainsEmail: Erabiltzaile izena ezin da helbide elektroniko bat izan.
-    submitSuccess: Gordeta!
   reallyDeleteProgram: Ziur zaude zure proiektua ezabatu nahi duzula
-  programsOf: 'Honen proiektuak:'
   picture: 'Profileko irudia'
   changePicture: Argazkia aldatu
   goToScratchProfile: 'Profila Scratch-en'
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: 'Aldatu pasahitza'
   accountSettings: Kontuaren ezarpenak
   accountVerification: 'Egiaztatu kontua'
-  account: 'Kontua'
-  editProfile: Profila editatu
-  edit: 'Editatu'
   done: Eginda
-  checkMail: Email bat bidali dugu zure helbidera. Begiratu sarrera ontzia.
   passwordUpdated: Zure pasahitza ongi eguneratu da.
-  avatar: 'Abatarra'
-  email: 'Helbide elektronikoa'
   deleteAccount: Kontua ezabatu
   deleteAccountWarning: |
     Kontuz:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: 'Deskargatzen...'
   exportDataError: 'Zerbait gaizki joan da zure datuak esportatzean. Saiatu berriro geroago.'
   exportDataRateLimited: 'Zure datuak egunean behin bakarrik esporta ditzakezu. Saiatu berriro bihar.'
-  editAccountSettings: Kontuaren ezarpenak aldatu
   profileChangeSuccess: 'Zure profila ondo aldatu da.'
   unspecifiedError: 'Zerbaitek ez du funtzionatu zure profila aldatzean. Saiatu berriro edo jakinarazi iezaguzu behin eta berriz gertatzen bada!'
   verifyAccountText: 'Mezu elektroniko bat bidaliko dizugu zure kontua egiaztatzeko esteka batekin. Ziurtatu hurrengo orduan estekan klik egiten duzula; egunean mezu bakarra eska dezakezu.'
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Bidali erabilera-baldintza hauei buruzko iradokizunak %email-webmaster% helbidera.'
   version: '1.3 bertsioa, 2014ko martxoaren 4a'
 search:
-  dotdotdot: 'Bilatu...'
   search: 'Bilatu proiektuak, erabiltzaileak eta estudioak'
   inMediaLib: 'Bilatu multimedia-liburutegian'
   inMediaCategory: 'Bilatu multimedia-kategorian'
   results: 'Emaitzak:'
-  resultcount: 'Zure bilaketak %count% emaitza eman ditu'
-  fail: 'Idatzi gutxienez bilaketa-termino bat'
   noUsers: 'Ez da erabiltzailerik aurkitu'
   noProjects: 'Ez da proiekturik aurkitu'
   noStudios: 'Ez da estudiorik aurkitu'
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: 'Multimedia-liburutegia'
   studio: 'Estudioak'
   language: 'Hizkuntza'
-  languageOptionsNotAvailable: 'Ez dago hizkuntza-aukerarik eskuragarri.'
 login:
   login: 'Hasi saioa'
   button:
@@ -578,21 +430,10 @@ login:
     or: "edo"
   passOrUser: 'Zure pasahitza edo erabiltzaile-izena okerra zen.'
   accountSuspended: 'Zure kontua eten egin da. Akats bat dela uste baduzu, jarri harremanetan laguntza-zerbitzuarekin.'
-  noUsername: 'Ez da aurkitu zure erabiltzaile-izena edo helbide elektronikoa.'
-  forgotPass: 'Pasahitza edo erabiltzaile-izena ahaztu duzu?'
   recoverPassSend: Email bat bidali dugu zure helbidera. Begiratu sarrera ontzia.
   alreadyReset: 'Erabiltzaile honen pasahitza dagoeneko eskatu da azken 24 orduetan.'
-  confirmationSend: 'Zure erregistroa berresteko mezu bat bidali da zure helbide elektronikora. Begiratu zure sarrera-ontzia eta aktibatu zure kontua.'
-  userOrEmail: 'Erabiltzaile-izena edo helbide elektronikoa'
-  changePass: 'Aldatu pasahitza'
-  createAccount: 'Sortu kontu bat'
-  noAccount: 'Ez duzu konturik?'
-  alreadyAccount: 'Baduzu kontu bat dagoeneko?'
-  or: OR
   username: 'Erabiltzaile-izena'
   email: 'Helbide elektronikoa'
-  passwordFirst: 'Pasahitza'
-  passwordSecond: 'Berretsi pasahitza'
 register:
   title: 'Eman izena'
   subText: 'Jarraituz gero, Catrobat komunitateko kontu bat sortzen ari zara eta gure %var1% eta %var2% onartzen dituzu.'
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: 'Gurasoen baimena ezeztatu da'
     message: 'Zure guraso edo tutoreak zure konturako baimena ezeztatu du. Zure kontuak funtzionalitate mugatua izango du baimena berriro eman arte.'
-    newEmailPlaceholder: 'Gurasoaren helbide berria'
-    changeButton: 'Eguneratu eta bidali berriro'
-accountRecovery:
-  title: 'Kontua berreskuratzea'
-  description: 'Zure kontuaren helbide elektronikoa edo erabiltzaile-izena gogoratzen baduzu, zure pasahitza berrezartzeko esteka bat bidal diezazukegu.'
-  button:
-    cancel: 'Utzi'
-    submit: 'Berreskuratu pasahitza'
 resetPassword:
   request:
     title: 'Berrezarri zure pasahitza'
@@ -645,11 +478,6 @@ resetPassword:
     description: 'Zure helbide elektronikoarekin bat datorren konturen bat badago, mezu bat bidali berri da zure pasahitza berrezartzeko erabil dezakezun esteka batekin. Esteka hau %time% barru iraungiko da.'
     descriptionTwo: 'Pasahitza berrezartzeko eskaera berri bat egin dezakezu %throttleLimit% orduro.'
     descriptionThree: 'Mezurik jaso ez baduzu, begiratu zure spam karpeta edo idatzi gure laguntza-zerbitzuari %email-webmaster% helbidera.'
-  email:
-    title: "Hi!"
-    visitLink: 'Zure pasahitza berrezartzeko, joan esteka honetara'
-    expire: 'Esteka hau %time% barru iraungiko da.'
-    cheers: 'Ondo izan!'
   newemail:
     title: 'Berrezarri zure pasahitza'
     content: 'Duela gutxi zure Catrobat kontuaren pasahitza berrezartzeko eskatu duzu. Egin klik beheko botoian pasahitz berri bat aukeratzeko. Zuk eskatu ez baduzu, mezu hau alde batera utz dezakezu.'
@@ -659,76 +487,33 @@ resetPassword:
     title: 'Berrezarri zure pasahitza'
     button:
       submit: 'Berrezarri pasahitza'
-apk:
-  download: 'Deskargatu aplikazio gisa'
-  prepare: 'Lortu aplikazio gisa'
-  preparing: 'Aplikazioa prestatzen'
-  text: 'Prozesuak denbora pixka bat har dezake'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'Zerbaitek ez du funtzionatu. Saiatu berriro edo jakinarazi iezaguzu behin eta berriz gertatzen bada!'
-  username:
-    blank: 'Erabiltzaile-izena ezin da hutsik egon'
-    invalid: 'Zure erabiltzaile-izena ez da baliozkoa'
-    exists: Erabiltzaile izen hau dagoeneko existitzen da.
-    not_exists: 'Erabiltzaile-izen hau ez dago.'
-    not_email: 'Erabiltzaile-izena ezin da helbide elektroniko bat izan.'
-    size: 'Erabiltzaile-izenak gutxienez 3 karaktere eta gehienez 180 izan behar ditu'
-  password:
-    blank: 'Pasahitza falta da.'
-    short: 'Zure pasahitzak gutxienez {{ limit }} karaktere izan behar ditu.'
-  country:
-    blank: 'Herrialdea falta da.'
-    invalid: 'Herrialde baliogabea'
-  email:
-    blank: 'helbide elektronikoa ezin da hutsik egon'
-    invalid: 'Zure helbide elektronikoa baliogabea dela dirudi'
-    exists: Helbide elektroniko hau existitzen da dagoeneko.
-  id:
-    blank: 'Autentifikazio irekiaren IDa ezin da hutsik egon'
-  login: 'Pasahitza edo erabiltzaile-izena okerra zen.'
-  post-data: 'POST datuak okerrak dira edo falta dira!'
-  checksum:
-    missing: 'Bezeroak ez du fileChecksum bidali! Pocket Code-ren bertsio zahar bat erabiltzen ari zara?'
-    invalid: 'kontrol-batura baliogabea'
   xml:
     invalid: 'kode XML baliogabea'
     missing: 'errore ezezaguna: project_xml_not_found!'
   file:
-    unexpected: 'ustekabeko fitxategia aurkitu da'
     invalid: 'fitxategi baliogabea'
-  image.missing: 'Proiektuaren XMLak proiektuaren karpetan ez dagoen fitxategi bat aipatzen du'
-  unknown: 'errore ezezaguna'
-  token: 'Gailuaren autentifikazioak huts egin du: auth-token baliogabea!'
-  uploadTokenAuthFailed: 'Igoera-tokenaren autentifikazioak huts egin du.'
-  project:
-    invalid: 'Proiektu baliogabea.'
   languageversion:
     tooold: 'Barkatu, zure proiektuak Catrobat hizkuntzaren bertsio zahar bat du! Pocket Code-ren azken bertsioa erabiltzen ari zara?'
   projectversion:
     tooold: 'Barkatu, Pocket Code-ren bertsio zahar bat erabiltzen ari zara. Eguneratu azken bertsiora.'
   authentication:
-    title: 'Saio-hasierak ez du funtzionatu'
     webview: |
       Badirudi zure erabiltzaile-izena edo pasahitza ez zela zuzena.
       Saiatu berriro saioa hasten aplikazioan.
 success:
   text: 'Ondo'
-  registration: 'Erregistroa ondo egin da!'
-  token: ok
-  upload: 'Zure proiektua ondo igo da!'
   imgUpload: 'Zure irudia ondo igo da!'
-  report: 'Zure salaketa ondo bidali da!'
 time:
   minutes.ago: '{0} duela < minutu 1 |{1}duela minutu 1 |]1,Inf] duela %count% minutu'
   hours.ago: '{1}duela ordu 1 |]1,Inf] duela %count% ordu'
   days.ago: '{1}duela egun 1 |]1,Inf] duela %count% egun'
   months.ago: '{1}duela hilabete 1 |]1,Inf] duela %count% hilabete'
   years.ago: '{1}duela urte 1 |]1,Inf] duela urte bat baino gehiago'
-failure:
-  upload: 'Errore bat gertatu da zure aplikazioa igotzean.'
 user:
   verification:
     email: 'Egiaztatu zure helbide elektronikoa'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'Pasahitzak karaktere baliogabeak ditu'
     usernameContainsEmail: 'Erabiltzaile-izenak ezin du helbide elektronikorik izan'
     usernameContainsLink: 'Erabiltzaile-izenak ezin du estekarik izan'
-    countryCodeInvalid: 'Herrialde-kode baliogabea'
     pictureInvalid: 'Profileko irudia baliogabea da edo ez da onartzen'
     dateOfBirthMissing: 'Jaiotze-data beharrezkoa da'
     dateOfBirthInvalid: 'Jaiotze-data baliogabea da'
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'Izena dagoeneko erabiltzen ari da'
     descriptionMissing: 'Deskribapena falta da'
     descriptionEmpty: 'Deskribapena hutsik dago'
-    descriptionTooShort: 'Deskribapena laburregia da'
     descriptionTooLong: 'Deskribapena luzeegia da'
     imageFileInvalid: 'Irudi-fitxategi baliogabea'
     imageFileInvalidType: 'Irudi-fitxategiaren mota baliogabea'
     imageFileTooLarge: 'Irudi-fitxategia handiegia da'
-#languages and countries
-language:
-  arabic: 'Arabiera'
-  bulgarian: 'Bulgariera'
-  catalan: 'Katalana'
-  chinese_simplified_han: 'Txinera (han sinplifikatua)'
-  chinese_traditional_han: 'Txinera (han tradizionala)'
-  croatian: 'Kroaziera'
-  czech: 'Txekiera'
-  danish: 'Daniera'
-  dutch: 'Nederlandera'
-  english_united_kingdom: 'Ingelesa (Erresuma Batua)'
-  english_united_states: 'Ingelesa (Ameriketako Estatu Batuak)'
-  estonian: 'Estoniera'
-  filipino: 'Filipinera'
-  finnish: 'Finlandiera'
-  french: 'Frantsesa'
-  german: 'Alemana'
-  greek: 'Greziera'
-  hebrew: 'Hebreera'
-  hindi: 'Hindia'
-  hungarian: 'Hungariera'
-  indonesian: 'Indonesiera'
-  italian: 'Italiera'
-  japanese: 'Japoniera'
-  korean: 'Koreera'
-  latvian: 'Letoniera'
-  lithuanian: 'Lituaniera'
-  malay: 'Malaysiera'
-  norwegian: 'Norvegiera'
-  persian: 'Persiera'
-  polish: 'Poloniera'
-  portuguese_brazil: 'Portugesa (Brasil)'
-  portuguese_portugal: 'Portugesa (Portugal)'
-  romanian: 'Errumaniera'
-  russian: 'Errusiera'
-  serbian: 'Serbiera'
-  slovak: 'Eslovakiera'
-  slovenian: 'Esloveniera'
-  spanish_latin_america: 'Gaztelania (Latinoamerika)'
-  spanish_spain: 'Gaztelania (Espainia)'
-  swedish: 'Suediera'
-  thai: 'Thailandiera'
-  turkish: 'Turkiera'
-  ukrainian: 'Ukrainera'
-  vietnamese: 'Vietnamera'
-ci:
-  generate: 'Sortu APKa'
-  pending: 'APKa sortzen'
-  download: 'Deskargatu APKa'
+
 admin:
   maintain:
     diskMaintenance: 'Diskoaren mantentzea'
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: 'Ez dago objektu ezabagarririk.'
     removableObjects: 'Objektu ezabagarriak'
 recommender:
-  similarPrograms: 'Antzeko proiektuak'
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Proiektu hau deskargatu duten erabiltzaileek hauek ere deskargatu dituzte'
   moreFromThisUser: '%username%-(r)en gehiago'
-pmd:
-  submitBtn: 'Bidali zure proiektua'
-  submitBox:
-    header: 'Bidalketa'
-    text: 'Zure proiektua bidaltzear zaude. Idatzi proiektuaren kodea eta egin klik bidali botoian.'
-    btnText: 'Bidali'
-  successful:
-    text: 'Zure proiektua ondo igo da.'
-  failed:
-    text: 'Proiektuaren igoerak huts egin du.'
 codeview:
   title: 'Kode-ikuspegia'
-  showCode: 'Erakutsi kodea'
-  hideCode: 'Ezkutatu kodea'
-  showStatistics: 'Erakutsi kodearen estatistikak'
-  hideStatistics: 'Ezkutatu kodearen estatistikak'
-  cantDisplayCode: 'Ezin da kodea bistaratu'
-  cantDisplayStatistics: 'Ezin da kodea bistaratu'
-  totalNumberOf: 'Guztira:'
-  scenes: 'Eszenak'
-  scripts: 'Scriptak'
-  bricks: 'Blokeak'
-  objects: 'Aktoreak eta objektuak'
-  looks: 'Itxurak'
-  sounds: 'Soinuak'
-  globals: 'Globalak'
-  locals: 'Lokalak'
-  globalVariables: 'Aldagai globalak'
-  localVariables: 'Aldagai lokalak'
-  eventBricks: 'Gertaera-blokeak'
-  controlBricks: 'Kontrol-blokeak'
-  motionBricks: 'Mugimendu-blokeak'
-  soundBricks: 'Soinu-blokeak'
-  looksBricks: 'Itxura-blokeak'
-  penBricks: 'Arkatz-blokeak'
-  dataBricks: 'Datu-blokeak'
-  specialBricks: 'Bloke bereziak'
 codeView:
   title: 'Kode-ikuspegia'
   loading: 'Kode-ikuspegia kargatzen...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: 'Kodearen estatistikak'
   error: 'Ezin dira kodearen estatistikak bistaratu.'
-  general: 'Orokorra'
-  bricks: 'Blokeak'
-  eventBricks: 'Gertaera'
-  controlBricks: 'Kontrola'
-  motionBricks: 'Mugimendua'
-  soundBricks: 'Soinua'
-  looksBricks: 'Itxura'
-  penBricks: 'Pen'
-  dataBricks: 'Datuak'
-  deviceBricks: 'Gailua'
-  specialBricks: 'Bereziak'
   yourScore: 'Zure puntuazioa:'
-  points: 'puntu'
   abstraction: 'Abstrakzioa eta arazoen deskonposizioa'
   parallelism: 'Paralelismoa'
   logicalThinking: 'Pentsamendu logikoa'
@@ -927,20 +612,7 @@ footer:
   text: '%project_count% proiektu harrigarri partekatu dira dagoeneko, eta hurrengoa zurea izan daiteke. Deskargatu gure aplikazioa eta hasi gaur bertan sortzen'
 privacy-policy:
   header: 'Pribatutasun-politika'
-  version: '2.2 bertsioa, 2019ko urriaren 17a'
-  text1: 'Gure zerbitzuen eta lotutako kontuaren abantaila guztiak eskaintzeko, beharrezkoa da zuri buruzko datu batzuk biltzea.'
-  text2: 'Gure zerbitzuak (aplikazioak eta webguneak) mantendu eta hobetzeko eta IKTei eta STEM/STEAM hezkuntzari buruzko ikerketa zientifikoa egiteko, Google Analytics, Crashlytics eta Firebase erabiltzen ditugu, guztiak Google LLC enpresarenak (AEB), baita Dynatrace ere, Dynatrace LLC enpresarena (AEB), gure zerbitzuen erabilerari buruzko metadatuak lortzeko; adibidez, hutsegiteen informazioa, denbora-zigiluak, bisitatutako orriak/pantailak, gure aplikazio eta zerbitzuen erabilera, erabilitako sistema eragilea eta sare-hornitzaileari buruzko informazioa. Analisi hau eta bildutako datuak ez daude zure profilarekin lotuta eta ez dute informazio pertsonalik (IP helbidearen azken bitak anonimizatu egiten dira). Hala ere, bildutako datuak zerbitzu-hornitzaileei transferituko zaizkie (Google LLC, AEB eta Dynatrace LLC, AEB). Datuen tratamendua Google LLC eta Dynatrace LLC enpresekin egindako akordioetan oinarritzen da. Zerbitzu-hornitzaileekiko harreman hau Europar Batasuneko Datuak Babesteko Erregelamendu Orokorrarekin (EB DBEO) eta EB-AEB "Privacy Shield" akordioarekin bat dator.'
-  text3: 'Gure sistemetan kontu bat sortu eta erabiltzeko, eta zure kontuari buruzko beharrezko aldaketen berri posta elektronikoz emateko (adibidez, eguneraketak edo gure erabilera- eta zerbitzu-baldintzen, komunitate-arauen edo politiken urraketak), zure erabiltzaile-izena eta, ematen baduzu, zure helbide elektronikoa gordeko ditugu. Zure kontua Google Plus edo Facebook bidez konektatu baduzu, zerbitzu horietako zure kontuari lotutako identifikazio-gako bat ere gordetzen dugu. Ez ditugu datu hauek beste helburu batzuetarako (adibidez, marketinerako) erabiliko, berariaz baimentzen ez badiguzu.'
-  text4: 'Borondatez, zure bizileku-herrialdea eman diezaguke partekatze-guneko zure kontuaren orriaren bidez. Zure profil publikoan bistaratuko da eta guk helburu estatistiko eta ikerketakoetarako soilik erabiliko dugu. Edozein unetan ken dezakezu zure profilaren ezarpenetan.'
-  text5: 'Zure kontuari dagozkion datu pertsonalen erabilera edozein unetan ezezta dezakezu zure kontua ezabatuz https://share.catrobat.org/ guneko zure profilaren orriaren bidez. Zure kontua ezabatu ondoren, emandako zerbitzuak erabiltzen jarraitu ahal izango duzu, baina ez lankidetzan aritu, adibidez, programak igoz, iruzkinak eginez edo atsegiteak emanez. Gainera, zure kontuari lotutako eduki guztia (adibidez, igotako programak, iruzkinak, etab.) ezabatu egingo da.'
-  text6: 'Gure zerbitzuen erabilera okerra saihesteko (adibidez, erabiltzaileek legez kanpoko helburuetarako egindako igoerak edo iruzkinak), erabiltzaileek sortutako datu publiko guztiak (igoerak, iruzkinak) barneko datu-base batean gordeko dira, denbora-zigilu batekin eta erabilitako Interneteko helbidearekin batera. Datu hauek ez dira inolako erakundek erabiliko edo inolako erakunderi bidaliko, legez kanpoko ekintzen susmo nahikoa ez badago eta legez horretarako eskumena duten erakundeek aplikatu beharreko legean oinarrituta eskatzen ez badituzte. Kasu bakoitza guk aztertuko dugu lehenik, banan-banan eta sakon.'
-  text7: 'Borondatez, Catrobat buletinera harpidetu zaitezke https://catrobat.org/newsletter helbidean; guk MailChimp zerbitzuaren bidez eskaintzen dugu (The Rocket Science Group LLC d/b/a MailChimp, AEB). Orduan, Catrobat proiektuari eta haren zerbitzuei buruzko berriak jasoko dituzu emandako helbide elektronikoan. Buletinari edozein unetan uko egin diezaiokezu buletin bakoitzaren oinean dagoen "harpidetza kendu" estekaren bidez. Buletin hau MailChimp-ek eskaintzen du; harekin datuen tratamendurako akordioa dugu eta EBko Datuak Babesteko Erregelamendu Orokorra eta EB-AEB "Privacy Shield" betetzeko konpromisoa hartu du. MailChimp-i buruzko xehetasun gehiagorako, kontsultatu MailChimp-en pribatutasun-politika eta erabilera-baldintzak.'
-  text8: 'Zerbitzu guztiak Catrobat kode irekiko proiektu libreak eskaintzen ditu, International Catrobat Association – Verein zur Förderung freier Software elkartearen babespean, Grazen (Austria, Europar Batasuna) eratutako irabazi-asmorik gabeko GKE bat. Gure politikek EBko eta Austriako datuak babesteko legea (DBEO) errespetatzen dute. Gurekin harremanetan jartzeko, bidali mezu elektroniko bat contact@catrobat.org helbidera edo idatzi helbide honetara: Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Europar Batasuna).'
-  text9: '14 urtetik beherakoa bazara, legezko tutore batek (normalean guraso batek) onartu behar du politika hau.'
-  text10: 'Catrobaten ingelesezko pribatutasun-politika ofiziala sarean dago eskuragarri hemen: %privacy_policy%.'
-  disagree-text: 'Onarpenik gabe ezin dugu konturik sortu, baina oinarrizko eginbideak erabilgarri daude oraindik.'
 catro-notifications:
-  markAsRead: 'Markatu irakurritako gisa'
   noFollowers: 'Badirudi ez duzula jarraitzaileen jakinarazpenik.'
   noComments: 'Badirudi ez duzula iruzkinen jakinarazpenik.'
   noReactions: 'Badirudi ez duzula erreakzioen jakinarazpenik.'
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: 'Esteka arbelean kopiatu da!'
   success_project: 'Proiekturako esteka arbelean kopiatu da!'
-  success_user: 'Erabiltzailerako esteka arbelean kopiatu da!'
   fail: 'Ezin izan da esteka arbelean kopiatu! :('
 next: Hurrengoa
 previous: 'Aurrekoa'
 media-packages:
   title: 'Multimedia-liburutegia'
   description: 'Kategoria hauetan zure proiektuetan gehitzeko aktoreak eta objektuak aurki ditzakezu.'
-  thumb-size:
-    description: 'Aurrebistaren tamaina'
-    sm: 'txikia'
-    md: 'ertaina'
-    lg: 'handia'
   theme-special: '%flavor% gai berezia'
   search-results: 'Multimedia-liburutegiko bilaketa-emaitzak'
-  no-results: 'Zure bilaketak 0 emaitza eman ditu. Erabili ingelesezko bilaketa-terminoak soilik.'
-  download_these_files: 'gorde'
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Eskubide guztiak erreserbatuta.'
 noscript:
   warning: 'Webgune honek JavaScript behar du funtzionatzeko. Gaitu JavaScript zure nabigatzailean edo eskatu heldu bati laguntzeko.'
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: 'Ukatu'
   privacy-link: "Pribatutasun politika"
   settings-link: 'Cookieen ezarpenak'
-agree: 'Ados'
-disagree: 'Ez nago ados'
-profileLoader:
-  noProfiles: 'Oraingoz ez dago profilik.'
 element: 'Elementua'
 elements: 'Elementuak'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'Ondo partekatu da'
 copy: 'Kopiatu esteka'
 checkOutProject: 'Begiratu proiektu hau:'
-checkOutUser: 'Begiratu erabiltzaile hau:'
 community: 'Catrobat komunitatea'
 back_to_app: 'Irten komunitatetik'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Lorpenak'
-    badge: 'berria'
   overview:
     header: 'Lorpenak'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: 'Jokalari anitz'
 studio:
   title: 'Estudioak'
-  singular: 'Estudioa'
   create_studio: 'Sortu estudioa'
-  delete_studio: 'Ezabatu estudioa'
-  cancel_studio: 'Utzi'
   studio_name: 'Estudioaren izena'
   studio_description: 'Estudioaren deskribapena'
   is_public: 'Publiko egin?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Kendu irudia'
   popular: 'Estudio ezagunak'
   join: 'Batu'
-  leave: 'Irten'
-  report: 'Salatu'
   public: 'publikoa'
   private: 'Gonbidapen bidez soilik'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Administratzailea'
     member: 'Kidea'
   details:
-    add_project: 'egin klik proiektua gehitzeko'
     add: 'Add'
     showMore: 'erakutsi gehiago'
-    showLess: 'erakutsi gutxiago'
     are_you_sure: 'Ziur zaude?'
     no_way_of_return: 'Hau ezin da desegin.'
     delete_it: 'Ezabatu'
-    remove_project: 'Kendu estudiotik'
     remove_project_error: 'Ezin izan da proiektua estudiotik kendu.'
-    remove_project_success: 'Proiektua ondo kendu da estudiotik.'
     no_projects: 'Estudioak ez du proiekturik oraindik.'
     projects:
       title: 'Proiektuak'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Oraindik ez duzu gehitzeko proiekturik. Sortu bat Pocket Code-n lehenik!'
       add_selected: 'Gehitu hautatuak'
     no_available_projects: 'Ez dago gehitzeko proiekturik.'
-    updateCoverError: 'Zerbait gaizki joan da estudioaren azala eguneratzean.'
     join: 'Batu'
     leave: 'Irten'
-    report: 'Salatu'
     pending: 'Zain'
     decline: 'Baztertua'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% erabiltzaileak iruzkin bat utzi du.'
     members_list:
       title: 'Estudioko kideak'
-      project_count: '{0} Ez dago estudioko proiekturik |{1} Estudioko proiektu 1 |]1,Inf] Estudioko %count% proiektu'
       no_studio_projects: 'Ez dago estudioko proiekturik'
       one_studio_project: 'Estudioko proiektu 1'
       n_studio_projects: 'Estudioko %count% proiektu'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'Zerbait gaizki joan da kide hau debekatzean. Saiatu berriro geroago.'
       demote_member: 'Jaitsi administratzailea kide izatera'
       demotion_failed: 'Zerbait gaizki joan da administratzaile hau jaistean. Saiatu berriro geroago.'
-      last_admin: 'Ezin da estudio honetako azken administratzailea jaitsi.'
     join_requests:
       title: 'Batzeko eskaerak'
       accept: 'Onartu'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'Ez da emaitzarik aurkitu.'
   assets_count: 'baliabide'
   view_all: 'Ikusi guztiak'
-  view_all_category: 'Ikusi guztiak: %category%'
   back_to_app: 'Itzuli aplikaziora'
 snackbar:
   project_not_found: 'Eskatutako proiektua ez dago eskuragarri'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: 'Estudioko ekintzak azkarregi egiten ari zara. Itxaron une batez.'
   hidden_notice:
     project: 'Proiektu hau ezkutatu egin da komunitatearen salaketengatik.'
-    comment: 'Iruzkin hau ezkutatu egin da komunitatearen salaketengatik.'
-    user: 'Profil hau ezkutatu egin da komunitatearen salaketengatik.'
     user_own: 'Zure kontua eten egin da komunitatearen salaketengatik. Erabaki hau errekurritu dezakezu.'
-    studio: 'Estudio hau ezkutatu egin da komunitatearen salaketengatik.'
-  notification:
-    content_hidden: 'Zure %content_type% ezkutatu egin da komunitatearen salaketengatik. Erabaki hau errekurritu dezakezu.'
-    appeal_approved: 'Zure errekurtsoa onartu da. Zure edukia berriro ikusgai dago.'
-    appeal_rejected: 'Zure errekurtsoa berrikusi da eta zure edukia ezkutatzeko erabakiak bere horretan jarraitzen du.'
-    admin_review_needed: 'Edukia automatikoki ezkutatu da eta berrikusi egin behar da.'
 Reports: 'Salaketak'
 members: 'kide'

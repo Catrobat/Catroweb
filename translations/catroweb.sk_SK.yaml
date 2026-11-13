@@ -8,19 +8,12 @@ meta.og.description.login: Prihlás sa a zdieľaj svoje projekty Catrobat s komu
 meta.og.title.register: Vytvor si účet Catrobat
 meta.og.description.register: Pridaj sa ku komunite Catrobat a začni zdieľať svoje kreatívne projekty ešte dnes.
 meta.og.description.profile: '%username% na Catrobate – prezri si projekty a úspechy.'
-localLanguage: Slovenčina
 username: Používateľské meno
 password: Heslo
-createNewPassword: Vytvor nové heslo
-accountSettings: Nastavenia účtu
 email: E-mail
-aboutPocketCode: O Pocket Code
 about: O Catrobat
-education: Vzdelávanie
 chat: Chat a fóra
-privacyGuide: Sprievodca ochranou súkromia
 others: Ostatné
-tutorials: Pomoc
 googlePlay: Google Play
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Ako si vytvoril tento projekt? Použil si nápady, s
 projectImportedFromScratch: Tento projekt bol importovaný z MIT Scratch. Pôvodný projekt si môžeš pozrieť
 scratchImportedProjectLinkHere: tu.
 country: Krajina
-loginText: prihlásiť sa
 privacyPolicy: Zásady ochrany osobných údajov
-imprint: Tiráž
 projectDetails: Podrobnosti
 somethingWentWrong: 'Ups, niečo nefungovalo. Skús to znova!'
 accountNotVerified: 'Uisti sa, že si prihlásený a e-mail tvojho účtu je overený.'
@@ -55,36 +46,28 @@ accountSuspended: 'Tvoj účet bol pozastavený na základe nahlásení od komun
 doesNotExist: 'Požadovaný zdroj neexistuje.'
 pleaseTryAgain: 'Skús to znova!'
 tryAgainButton: 'Skúsiť znova'
-oldVersionError: 'Aktualizuj Pocket Code na najnovšiu verziu!'
 more: 'viac'
 less: 'menej'
 show-more: 'Viac informácií'
-show-less: 'Menej informácií'
 more-information: 'Viac informácií'
 less-information: 'Menej informácií'
 ok: Rozumiem
-clickToDownloadProgram: 'Ak chceš stiahnuť ukážkový projekt, klikni %link_start% sem %link_end%.'
-registrationError: 'Používateľské meno alebo e-mailová adresa sa už používa.'
 notifications: 'Upozornenia'
 allNotifications: 'Všetky'
 FollowersNotifications: 'Sledujúci'
 LikeNotifications: 'Reakcie'
 CommentNotifications: 'Komentáre'
 RemixNotifications: 'Remixy'
-wellDone: "Výborne!"
 done: "Hotovo!"
 notificationsReadMessage: "Zdá sa, že nemáš žiadne upozornenia."
-confirmMessage: "Áno, vymazať"
 cancelMessage: "Zrušiť"
 notificationsUnauthorizedError: "Používateľa sa nepodarilo autorizovať"
 notificationsClearError: "Upozornenia sa nepodarilo označiť ako prečítané!"
-pleaseWait: "Čakaj, prosím..."
 projects: "Projekty"
 users: "Používatelia"
 studios: "Štúdiá"
 oauthPopUpTitle: "Informácie o prihlásení cez externý účet"
 oauthInfo: 'Práve si sa prihlásil cez externý účet. Vytvorili sme ti náhodné používateľské meno. Ak chceš zmeniť používateľské meno alebo si vytvoriť nové heslo, prejdi na svoju profilovú stránku.'
-oauthHere: "tu"
 statistics: "Štatistiky"
 languageSelection: "Výber jazyka"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Tmavý'
   dark_description: 'Tmavý vzhľad'
   apply: 'Použiť'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Ktoré projekty sa tu odporúčajú?'
-      description: 'Čím viac reakcií (palec hore, úsmev ...) tvoj projekt dostane, tým vyššie sa v tomto zozname zobrazí.'
 follower:
   follows: Sledované
   followers: Sledujúci
   follow: Sledovať
-  username: Používateľ
   followsMe: Sleduje ma
   noFollowing: Momentálne nikoho nesleduješ.
   noFollowers: Momentálne nemáš žiadnych sledujúcich.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Naozaj chceš prestať sledovať tohto používateľa?"
   unfollowButton: "Prestať sledovať %username%"
 project:
-  welcome:
-    title: Vitaj na stránke %theme% od Catrobatu
-    title_mindstorms: Vitaj na stránke Catrobatu pre Mindstorms EV3 a NXT
-    subtitle: Vytváraj príbehy, hry a ešte viac...
-    subtitle_embroidery: Vyšívaj vlastné vzory na tričká, tašky, nohavice alebo obal na smartfón!
-    subtitle_mindstorms: Vytváraj vlastné projekty so svojimi robotmi Lego Mindstorms EV3 a NXT
-    download: Stiahni si aplikáciu
-    statistics: Ďalšie štatistiky
   featured: Odporúčané
   open: Otvoriť 
   download: Stiahnuť
@@ -148,9 +117,6 @@ project:
       retention: Nahrané projekty sa po čase nečinnosti automaticky odstránia. Pravidelne sa prihlasuj alebo získavaj stiahnutia svojho projektu, aby zostal dlhšie.
       protection: Mimoriadne dobré alebo populárne projekty môžu moderátori chrániť pred automatickým vymazaním.
   example: Ukážky
-  newest: Najnovšie projekty
-  recommended: Odporúčané projekty
-  scratchremixes: Remixy zo Scratchu
   noProjects: Momentálne tu nie sú žiadne projekty.
   shareAction: Zdieľať
   deleteAction: Vymazať projekt
@@ -190,17 +156,10 @@ project:
     Túto akciu nie je možné vrátiť späť!
     Áno, vymazať!
     Zrušiť
-  tooLongName: Názov projektu je príliš dlhý!
-  tooLongDescription: Popis projektu je príliš dlhý!
-  tooLongCredits: Poznámky a poďakovania k projektu sú príliš dlhé!
   my_projects: Moje zdieľané projekty
   trending: Populárne práve teraz
   popular: Populárne projekty
-  most:
-    viewed: Najzobrazovanejšie
-    downloaded: Najsťahovanejšie
   random: Náhodné projekty
-  related: Podobné projekty
   browse:
     explore: 'Objavuj projekty'
     no_projects: "Zatiaľ si nevytvoril žiadne projekty"
@@ -214,36 +173,14 @@ project:
     tooltip: 'Projekty sa po čase nečinnosti automaticky odstránia. Získavaj viac stiahnutí alebo sa pravidelne prihlasuj, aby zostali dlhšie.'
     tooltip_protected: 'Tento projekt je chránený a nebude automaticky vymazaný.'
   downloads: 'Stiahnutia: %downloads%'
-  sample: Ukážkové projekty
   views: 'Zobrazenia: %views%'
   likes:
     likersTitle: "Ľudia, ktorí reagovali na tento projekt"
     all: "Všetky"
-  remixes: '{0}0 remixov |{1}1 remix |]1,Inf]Remixy: %remixes%'
-  newRemixesNotificationTitle: '|{1}„%programName%“ má 1 nový remix: |]1,Inf] „%programName%“ má nové remixy (%remixes%):'
-  submitted: Odoslané projekty
-  uploaded: Nahrané projekty
-  reportAsInappropriate: Nahlásiť ako nevhodné
-  reportProgram: Nahlásiť projekt
   languageVersion: 'Verzia jazyka Catrobat: %languageVersion%'
-  reportLoginText: Ak chceš nahlásiť tento projekt, %login%.
-  reportDialogHeader: Prečo chceš nahlásiť tento projekt?
-  reportDialogReason: Zadaj dôvod
-  reportRadioButtonInappropriate: Je nevhodný
-  reportRadioButtonCopyright: Porušenie autorských práv
-  reportRadioButtonSpam: Je to spam
-  reportRadioButtonDislike: Nepáči sa mi
-  reportOwnProgram: Nemôžeš nahlásiť vlastný projekt.
-  reportAlready: Tento projekt si už nahlásil.
-  reportDone: Nahlásil si tento projekt!
   updateAppHeaderDownload: Stiahnutie nie je možné
   updateAppTextDownload: Aktualizuj aplikáciu na najnovšiu verziu. Nie všetky funkcie z Androidu sú už dostupné na iOS.
-  updateAppTextDownloadApk: Stiahnutie APK je momentálne dostupné iba na Androide, nie na iOS.
-  updateAppHeader: Aktualizuj aplikáciu
-  updateAppText: Aktualizuj aplikáciu na najnovšiu verziu.
-  btnClosePopup: Ok
   checkout_this_project: Pozri si tento projekt Catrobat
-  show_more: Zobraziť viac
   comments: Komentáre
   send: Odoslať
   delete: Vymazať
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: Vymazané
   noAdminRights: Nemáš administrátorské práva. Prihlás sa ako administrátor.
   editProject: Upraviť projekt
-  closeProjectEditor: Zavrieť editor projektu
   closeEditorPrompt: Chceš uložiť zmeny?
   btnDiscard: Zahodiť
   addComment: Napíš komentár
@@ -263,8 +199,6 @@ project:
   smile: Úsmev!
   love: Láska!
   wow: Wau!
-  linkTitle: Odkaz
-  link: Skopírovať odkaz na projekt do schránky
   reactionsText: Reakcie
   downloadErrorText: Pri sťahovaní projektu nastala chyba. Skús to znova neskôr.
   downloadStartText: Sťahovanie sa začalo...
@@ -284,11 +218,8 @@ project:
   translations: Preklady
   createTranslation: Vytvoriť preklad
   deletedComment: '**Vymazané**'
-  replyLabel: odpoveď
-  repliesLabel: odpovede
   notForKids: Nevhodné pre deti
 remixGraph:
-  title: Remixy
   showRemixGraph: 'Graf remixov'
   by: 'od'
   open: 'Otvoriť '
@@ -309,24 +240,6 @@ remixGraph:
   projectUnknownUser: 'Neznámy používateľ'
 noReply:
   Toto je automatická správa – na tento e-mail priamo neodpovedaj.
-accountConfirmation:
-  subject: Potvrdenie tvojho účtu Catrobat
-  message: |
-    Ahoj %username%.
-    Ak chceš dokončiť aktiváciu svojho účtu, navštív %confirmationUrl%
-    Tento odkaz sa dá použiť na overenie účtu iba raz.
-    S pozdravom
-    tvoj tím Catrobat.
-  messageHtml: |
-    <p>
-    Ahoj %username%.<br>
-    <br>
-    Ak chceš dokončiť aktiváciu svojho účtu, klikni <a href="%confirmationUrl%">sem.</a><br>
-    Tento odkaz sa dá použiť na overenie účtu iba raz.<br>
-    <br>
-    S pozdravom<br>
-    tvoj tím Catrobat.
-    </p>
 newAccountConfirmation:
   subject: "Over svoju e-mailovú adresu"
   welcome: "Vitaj v Catrobate!"
@@ -404,63 +317,13 @@ parent:
       ignore: "Ak si o to nežiadal, tento e-mail môžeš pokojne ignorovať."
 passwordRecovery:
   subject: Obnovenie hesla k tvojmu účtu Catrobat
-  message: |
-    Ahoj %username%.
-    Požiadal si o obnovenie hesla na %appplication_url%, pretože si ho zabudol.
-    Ak si o to nežiadal, tento e-mail ignoruj. Platnosť vyprší o 24 hodín.
-    Ak chceš obnoviť heslo a vytvoriť si nové, navštív túto stránku: %confirmationUrl%
-    So svojím používateľským menom a heslom sa môžeš kedykoľvek dostať do komunity %appplication_url%.
-    Stačí navštíviť túto stránku: %loginPage%
-    Údaje svojho profilu môžeš upraviť na tejto stránke: %profilePage%
-    S pozdravom
-    tvoj tím Catrobat.
-  messageHtml: |
-    <p>
-    Ahoj %username%.<br>
-    <br>
-    Požiadal si o obnovenie hesla na <a href="%appplication_url%">Pocket Code</a>, pretože si ho zabudol.
-    Ak si o to nežiadal, tento e-mail ignoruj. Platnosť vyprší o 24 hodín.<br>
-    <br>
-    Ak chceš obnoviť heslo a vytvoriť si nové, klikni <a href="%confirmationUrl%">sem.</a><br>
-    <br>
-    So svojím používateľským menom a heslom sa môžeš kedykoľvek dostať do komunity <a href="%appplication_url%">Pocket Code</a>.<br>
-    Stačí navštíviť túto stránku: <a href="%loginPage%">Prihlásenie</a><br>
-    Údaje svojho profilu môžeš upraviť na tejto <a href="%profilePage%">stránke</a>.<br>
-    <br>
-    S pozdravom<br>
-    tvoj tím Catrobat.
-    </p>
 profile:
   aboutMe: O mne
   currentlyWorkingOn: Momentálne pracujem na
-  edit: Upraviť profil
-  saveChanges: uložiť zmeny
   newPass: nové heslo
   repeatPass: zopakuj heslo
   oldPass: staré heslo
-  firstEmail: Môj prvý e-mail
-  secondEmail: Môj druhý e-mail
-  myPrograms: Moje projekty
-  follows: Sledované
-  follower: Sledujúci
-  unfollowUser: Prestať sledovať tohto používateľa!
-  followUser: Sledovať tohto používateľa!
-  amountOfPrograms: Počet projektov
-  form:
-    passwordTooShort: Nové heslo musí mať aspoň %length% znakov.
-    passwordTooLong: Nové heslo môže mať najviac %length% znakov.
-    passwordIsUsername: Heslo sa musí líšiť od používateľského mena.
-    passwordWrong: Nesprávne heslo
-    emailNotValid: Táto e-mailová adresa nie je platná.
-    emailMissing: Pri aktualizácii tejto e-mailovej adresy nastala chyba. Musíš mať aspoň jednu overenú e-mailovú adresu.
-    emailExists: Táto e-mailová adresa už existuje.
-    usernameNotValid: Toto používateľské meno nie je platné.
-    usernameMissing: Musíš mať používateľské meno.
-    usernameExists: Toto používateľské meno už existuje.
-    usernameContainsEmail: Používateľské meno by nemalo obsahovať e-mailovú adresu.
-    submitSuccess: uložené!
   reallyDeleteProgram: Naozaj chceš vymazať svoj projekt
-  programsOf: Projekty používateľa
   picture: Profilový obrázok
   changePicture: Zmeniť obrázok
   goToScratchProfile: Profil na Scratchi
@@ -470,14 +333,8 @@ myprofile:
   securitySettings: Zmeniť heslo
   accountSettings: Nastavenia účtu
   accountVerification: Overiť účet
-  account: Účet
-  editProfile: Upraviť profil
-  edit: Upraviť
   done: Hotovo
-  checkMail: Na tvoju e-mailovú adresu sme poslali e-mail. Skontroluj si schránku.
   passwordUpdated: Tvoje heslo bolo úspešne zmenené.
-  avatar: Avatar
-  email: E-mail
   deleteAccount: Vymazať účet
   deleteAccountWarning: |
     Pozor:
@@ -488,7 +345,6 @@ myprofile:
   exportDataLoading: Sťahuje sa...
   exportDataError: Pri exporte tvojich údajov sa niečo pokazilo. Skús to znova neskôr.
   exportDataRateLimited: Svoje údaje môžeš exportovať iba raz denne. Skús to znova zajtra.
-  editAccountSettings: Upraviť nastavenia účtu
   profileChangeSuccess: Tvoj profil bol úspešne zmenený.
   unspecifiedError: Pri zmene profilu niečo nefungovalo. Skús to znova alebo nám daj vedieť, ak sa to bude opakovať!
   verifyAccountText: Pošleme ti e-mail s odkazom na overenie účtu. Klikni na odkaz do hodiny – e-mail si môžeš vyžiadať iba raz denne.
@@ -545,13 +401,10 @@ termsOfUse:
   bottom2: 'Návrhy k týmto podmienkam používania posielaj na %email-webmaster%.'
   version: Verzia 1.3, 4. marca 2014
 search:
-  dotdotdot: Hľadať...
   search: Hľadaj projekty, používateľov a štúdiá
   inMediaLib: Hľadať v knižnici médií
   inMediaCategory: Hľadať v kategórii médií
   results: Výsledky vyhľadávania
-  resultcount: 'Počet výsledkov vyhľadávania: %count%'
-  fail: Zadaj aspoň jeden hľadaný výraz
   noUsers: Nenašli sa žiadni používatelia
   noProjects: Nenašli sa žiadne projekty
   noStudios: Nenašli sa žiadne štúdiá
@@ -567,7 +420,6 @@ menu:
   mediaLibrary: Knižnica médií
   studio: Štúdiá
   language: Jazyk
-  languageOptionsNotAvailable: Nie sú k dispozícii žiadne jazykové možnosti.
 login:
   login: Prihlásiť
   button:
@@ -579,21 +431,10 @@ login:
     or: "alebo"
   passOrUser: Tvoje heslo alebo používateľské meno bolo nesprávne.
   accountSuspended: 'Tvoj účet bol pozastavený. Ak si myslíš, že ide o chybu, kontaktuj podporu.'
-  noUsername: Tvoje používateľské meno alebo e-mailová adresa sa nenašli.
-  forgotPass: Zabudol si heslo alebo používateľské meno?
   recoverPassSend: Na tvoju e-mailovú adresu sme poslali e-mail. Skontroluj si schránku.
   alreadyReset: O heslo pre tohto používateľa už bolo požiadané za posledných 24 hodín.
-  confirmationSend: Na tvoju e-mailovú adresu sme poslali e-mail na potvrdenie registrácie. Skontroluj si schránku a aktivuj svoj účet.
-  userOrEmail: Používateľské meno alebo e-mail
-  changePass: Zmeniť heslo
-  createAccount: Vytvoriť účet
-  noAccount: Nemáš účet?
-  alreadyAccount: Už máš účet?
-  or: OR
   username: Používateľské meno
   email: E-mail
-  passwordFirst: Heslo
-  passwordSecond: Potvrdenie hesla
 register:
   title: Registrácia
   subText: "Pokračovaním si vytvoríš účet v komunite Catrobat a súhlasíš s našimi %var1% a %var2%."
@@ -626,14 +467,6 @@ registration:
   consentRevoked:
     title: "Súhlas rodiča bol odvolaný"
     message: "Tvoj rodič alebo zákonný zástupca odvolal súhlas pre tvoj účet. Kým nebude súhlas znova udelený, bude mať tvoj účet obmedzené funkcie."
-    newEmailPlaceholder: "Nový e-mail rodiča"
-    changeButton: "Aktualizovať a znova poslať"
-accountRecovery:
-  title: Obnovenie účtu
-  description: Ak si pamätáš e-mail alebo používateľské meno svojho účtu, môžeme ti poslať odkaz na obnovenie hesla.
-  button:
-    cancel: Zrušiť
-    submit: Obnoviť heslo
 resetPassword:
   request:
     title: "Obnov si heslo"
@@ -646,11 +479,6 @@ resetPassword:
     description: "Ak existuje účet s tvojím e-mailom, práve sme naň poslali e-mail s odkazom, ktorým si môžeš obnoviť heslo. Platnosť odkazu vyprší o %time%."
     descriptionTwo: "O nové obnovenie hesla môžeš požiadať každých %throttleLimit% hodín."
     descriptionThree: "Ak ti e-mail neprišiel, pozri sa do priečinka so spamom alebo napíš našej podpore na %email-webmaster%."
-  email:
-    title: "Hi!"
-    visitLink: "Ak chceš obnoviť heslo, otvor tento odkaz"
-    expire: "Platnosť tohto odkazu vyprší o %time%."
-    cheers: "Maj sa!"
   newemail:
     title: "Obnov si heslo"
     content: "Nedávno si požiadal o obnovenie hesla k svojmu účtu Catrobat. Klikni na tlačidlo nižšie a zvoľ si nové heslo. Ak si o to nežiadal, tento e-mail môžeš pokojne ignorovať."
@@ -660,76 +488,33 @@ resetPassword:
     title: "Obnov si heslo"
     button:
       submit: "Obnoviť heslo"
-apk:
-  download: Stiahnuť ako aplikáciu
-  prepare: 'Získať ako aplikáciu'
-  preparing: 'Aplikácia sa pripravuje'
-  text: 'Môže to chvíľu trvať'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: Niečo nefungovalo. Skús to znova alebo nám daj vedieť, ak sa to bude opakovať!
-  username:
-    blank: Používateľské meno nesmie byť prázdne
-    invalid: Tvoje používateľské meno je neplatné
-    exists: Toto používateľské meno už existuje.
-    not_exists: Toto používateľské meno neexistuje.
-    not_email: Používateľské meno nesmie byť e-mailová adresa.
-    size: Používateľské meno musí mať aspoň 3 a najviac 180 znakov
-  password:
-    blank: Chýba heslo.
-    short: 'Tvoje heslo musí mať aspoň {{ limit }} znakov.'
-  country:
-    blank: Chýba krajina.
-    invalid: Neplatná krajina
-  email:
-    blank: e-mail nesmie byť prázdny
-    invalid: Tvoj e-mail sa zdá byť neplatný
-    exists: Táto e-mailová adresa už existuje.
-  id:
-    blank: ID pre Open Authentication nesmie byť prázdne
-  login: Heslo alebo používateľské meno bolo nesprávne.
-  post-data: Údaje POST sú nesprávne alebo chýbajú!
-  checksum:
-    missing: Klient neposlal fileChecksum! Nepoužívaš zastaranú verziu Pocket Code?
-    invalid: neplatný kontrolný súčet
   xml:
     invalid: neplatné XML kódu
     missing: 'neznáma chyba: project_xml_not_found!'
   file:
-    unexpected: našiel sa neočakávaný súbor
     invalid: neplatný súbor
-  image.missing: XML projektu odkazuje na súbor, ktorý v priečinku projektu neexistuje
-  unknown: neznáma chyba
-  token: 'Overenie zariadenia zlyhalo: neplatný auth-token!'
-  uploadTokenAuthFailed: 'Overenie tokenu na nahrávanie zlyhalo.'
-  project:
-    invalid: Neplatný projekt.
   languageversion:
     tooold: 'Prepáč, tvoj projekt obsahuje starú verziu jazyka Catrobat! Používaš najnovšiu verziu Pocket Code?'
   projectversion:
     tooold: 'Prepáč, používaš starú verziu Pocket Code. Aktualizuj ho na najnovšiu verziu.'
   authentication:
-    title: Prihlásenie nefungovalo
     webview: |
       Zdá sa, že tvoje používateľské meno alebo heslo nebolo správne.
       Skús sa znova prihlásiť v aplikácii.
 success:
   text: Úspech
-  registration: Registrácia bola úspešná!
-  token: ok
-  upload: Tvoj projekt bol úspešne nahraný!
   imgUpload: Tvoj obrázok bol úspešne nahraný!
-  report: Tvoje nahlásenie bolo úspešne odoslané!
 time:
   minutes.ago: '{0} pred menej ako minútou |{1}pred 1 minútou |]1,Inf] pred %count% minútami'
   hours.ago: '{1}pred 1 hodinou |]1,Inf] pred %count% hodinami'
   days.ago: '{1}pred 1 dňom |]1,Inf] pred %count% dňami'
   months.ago: '{1}pred 1 mesiacom |]1,Inf] pred %count% mesiacmi'
   years.ago: '{1}pred 1 rokom |]1,Inf] pred viac ako rokom'
-failure:
-  upload: Pri nahrávaní tvojej aplikácie nastala chyba.
 user:
   verification:
     email: 'Over svoj e-mail'
@@ -752,7 +537,6 @@ api:
     passwordInvalidChars: 'Heslo obsahuje neplatné znaky'
     usernameContainsEmail: "Používateľské meno nesmie obsahovať e-mailovú adresu"
     usernameContainsLink: "Používateľské meno nesmie obsahovať odkaz"
-    countryCodeInvalid: "Neplatný kód krajiny"
     pictureInvalid: "Profilový obrázok je neplatný alebo nepodporovaný"
     dateOfBirthMissing: "Dátum narodenia je povinný"
     dateOfBirthInvalid: "Dátum narodenia je neplatný"
@@ -786,61 +570,11 @@ api:
     nameAlreadyInUse: 'Názov sa už používa'
     descriptionMissing: 'Chýba popis'
     descriptionEmpty: 'Popis je prázdny'
-    descriptionTooShort: 'Popis je príliš krátky'
     descriptionTooLong: 'Popis je príliš dlhý'
     imageFileInvalid: 'Neplatný obrázok'
     imageFileInvalidType: 'Neplatný typ obrázka'
     imageFileTooLarge: 'Obrázok je príliš veľký'
-#languages and countries
-language:
-  arabic: Arabčina
-  bulgarian: Bulharčina
-  catalan: Katalánčina
-  chinese_simplified_han: Čínština (zjednodušená)
-  chinese_traditional_han: Čínština (tradičná)
-  croatian: Chorvátčina
-  czech: Čeština
-  danish: Dánčina
-  dutch: Holandčina
-  english_united_kingdom: Angličtina (Spojené kráľovstvo)
-  english_united_states: Angličtina (Spojené štáty)
-  estonian: Estónčina
-  filipino: Filipínčina
-  finnish: Fínčina
-  french: Francúzština
-  german: Nemčina
-  greek: Gréčtina
-  hebrew: Hebrejčina
-  hindi: Hindčina
-  hungarian: Maďarčina
-  indonesian: Indonézština
-  italian: Taliančina
-  japanese: Japončina
-  korean: Kórejčina
-  latvian: Lotyština
-  lithuanian: Litovčina
-  malay: Malajčina
-  norwegian: Nórčina
-  persian: Perzština
-  polish: Poľština
-  portuguese_brazil: Portugalčina (Brazília)
-  portuguese_portugal: Portugalčina (Portugalsko)
-  romanian: Rumunčina
-  russian: Ruština
-  serbian: Srbčina
-  slovak: Slovenčina
-  slovenian: Slovinčina
-  spanish_latin_america: Španielčina (Latinská Amerika)
-  spanish_spain: Španielčina (Španielsko)
-  swedish: Švédčina
-  thai: Thajčina
-  turkish: Turečtina
-  ukrainian: Ukrajinčina
-  vietnamese: Vietnamčina
-ci:
-  generate: Vygenerovať APK
-  pending: APK sa generuje
-  download: Stiahnuť APK
+
 admin:
   maintain:
     diskMaintenance: Údržba disku
@@ -848,46 +582,9 @@ admin:
     noRemovableObjects: Nie sú k dispozícii žiadne odstrániteľné objekty.
     removableObjects: Odstrániteľné objekty
 recommender:
-  similarPrograms: Podobné projekty
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Používatelia, ktorí si stiahli tento projekt, si stiahli aj
   moreFromThisUser: Viac od používateľa %username%
-pmd:
-  submitBtn: Odoslať projekt
-  submitBox:
-    header: Odoslanie
-    text: Chystáš sa odoslať svoj projekt. Zadaj kód projektu a klikni na Odoslať.
-    btnText: Odoslať
-  successful:
-    text: Tvoj projekt bol úspešne nahraný.
-  failed:
-    text: Nahrávanie projektu zlyhalo.
 codeview:
   title: 'Zobrazenie kódu'
-  showCode: 'Zobraziť kód'
-  hideCode: 'Skryť kód'
-  showStatistics: 'Zobraziť štatistiky kódu'
-  hideStatistics: 'Skryť štatistiky kódu'
-  cantDisplayCode: "Kód sa nedá zobraziť"
-  cantDisplayStatistics: "Kód sa nedá zobraziť"
-  totalNumberOf: 'Celkový počet'
-  scenes: 'Scény'
-  scripts: 'Skripty'
-  bricks: 'Bloky'
-  objects: 'Objekty'
-  looks: 'Vzhľady'
-  sounds: 'Zvuky'
-  globals: 'Globálne'
-  locals: 'Lokálne'
-  globalVariables: 'Globálne premenné'
-  localVariables: 'Lokálne premenné'
-  eventBricks: 'Bloky udalostí'
-  controlBricks: 'Ovládacie bloky'
-  motionBricks: 'Bloky pohybu'
-  soundBricks: 'Zvukové bloky'
-  looksBricks: 'Bloky vzhľadu'
-  penBricks: 'Bloky pera'
-  dataBricks: 'Dátové bloky'
-  specialBricks: 'Špeciálne bloky'
 codeView:
   title: 'Zobrazenie kódu'
   loading: 'Načítava sa zobrazenie kódu...'
@@ -900,19 +597,7 @@ codeView:
 codeStatistics:
   title: "Štatistiky kódu"
   error: "Štatistiky kódu sa nedajú zobraziť."
-  general: 'Všeobecné'
-  bricks: 'Bloky'
-  eventBricks: 'Udalosť'
-  controlBricks: 'Ovládacie prvky'
-  motionBricks: 'Pohyb'
-  soundBricks: 'Zvuk'
-  looksBricks: 'Vzhľady'
-  penBricks: 'Pero'
-  dataBricks: 'Dáta'
-  deviceBricks: 'Zariadenie'
-  specialBricks: 'Špeciálne'
   yourScore: 'Tvoje skóre:'
-  points: 'bodov'
   abstraction: 'Abstrakcia a rozklad problému'
   parallelism: 'Paralelizmus'
   logicalThinking: 'Logické myslenie'
@@ -928,20 +613,7 @@ footer:
   text: "Už bolo zdieľaných %project_count% úžasných projektov a ďalší môže byť tvoj. Stiahni si našu aplikáciu a začni tvoriť ešte dnes"
 privacy-policy:
   header: Zásady ochrany osobných údajov
-  version: Verzia 2.2, 17. októbra 2019
-  text1: Aby sme ti mohli ponúknuť všetky výhody našich služieb a súvisiaceho účtu, musíme od teba zbierať určité údaje.
-  text2: Na údržbu a zlepšovanie našich služieb (aplikácií a webových stránok) a na vedecký výskum v oblasti vzdelávania IKT a STEM/STEAM používame Google Analytics, Crashlytics a Firebase od spoločnosti Google LLC (USA), ako aj Dynatrace od spoločnosti Dynatrace LLC (USA), aby sme získali metadáta o používaní našich služieb, napr. informácie o pádoch, časové značky, navštívené stránky/obrazovky, používanie našich aplikácií a služieb, použitý operačný systém a informácie o poskytovateľovi siete. Táto analýza a zozbierané údaje nie sú prepojené s tvojím profilom a neobsahujú žiadne osobné údaje (posledné bity IP adresy sa anonymizujú). Zozbierané údaje sa však prenášajú poskytovateľom služieb (Google LLC, USA a Dynatrace LLC, USA). Spracúvanie údajov je založené na zmluvách so spoločnosťami Google LLC a Dynatrace LLC. Tento vzťah s poskytovateľmi služieb je v súlade so všeobecným nariadením Európskej únie o ochrane údajov (GDPR) a dohodou EÚ – USA „Privacy Shield“.
-  text3: Aby si si mohol vytvoriť a používať účet v našich systémoch a aby sme ťa mohli e-mailom informovať o potrebných zmenách týkajúcich sa tvojho účtu, napr. o aktualizáciách alebo porušeniach našich podmienok používania a služieb, pravidiel komunity či zásad, uchovávame tvoje používateľské meno a, ak si ju uviedol, tvoju e-mailovú adresu. Ak si svoj účet prepojil cez Google Plus alebo Facebook, uchovávame navyše identifikačný kľúč spojený s tvojím účtom v týchto službách. Tieto údaje nepoužijeme na žiadne iné (napr. marketingové) účely, pokiaľ nám to výslovne nepovolíš.
-  text4: Dobrovoľne nám môžeš na stránke svojho účtu na zdieľacej stránke uviesť krajinu, v ktorej žiješ. Zobrazí sa na tvojom verejnom profile a používame ju iba na štatistické a výskumné účely. V nastaveniach profilu ju môžeš kedykoľvek odstrániť.
-  text5: Používanie osobných údajov patriacich k tvojmu účtu môžeš kedykoľvek ukončiť vymazaním účtu na svojej profilovej stránke na https://share.catrobat.org/. Po vymazaní účtu budeš môcť poskytované služby naďalej používať, ale nie spolupracovať, napr. nahrávať programy, komentovať alebo dávať lajky. Vymaže sa aj všetok obsah prepojený s tvojím účtom, napr. nahrané programy, komentáre atď.
-  text6: Aby sme zabránili zneužívaniu našich služieb, napr. nahrávaním alebo komentármi na nezákonné účely, všetky verejné údaje vytvorené používateľmi (nahrávky, komentáre) sa interne ukladajú do databázy spolu s časovou značkou a použitou internetovou adresou. Tieto údaje nebudú používané žiadnymi inštitúciami ani im postúpené, pokiaľ neexistuje dôvodné podozrenie z dostatočne nezákonného konania a oficiálne oprávnené právne inštitúcie o ne nepožiadajú na základe platného práva. Každý prípad najprv dôkladne individuálne preveríme.
-  text7: Dobrovoľne sa môžeš prihlásiť na odber newslettera Catrobat na https://catrobat.org/newsletter, ktorý poskytujeme prostredníctvom služby MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Potom budeš na zadanú e-mailovú adresu dostávať novinky o projekte Catrobat a jeho službách. Odber newslettera môžeš kedykoľvek zrušiť pomocou odkazu „unsubscribe“ v päte každého newslettera. Tento newsletter poskytuje MailChimp, s ktorým máme zmluvu o spracúvaní údajov a ktorý sa zaviazal dodržiavať všeobecné nariadenie EÚ o ochrane údajov a dohodu EÚ – USA „Privacy Shield“. Ďalšie podrobnosti o MailChimpe nájdeš v jeho zásadách ochrany osobných údajov a podmienkach používania.
-  text8: Všetky služby poskytuje slobodný open source projekt Catrobat pod záštitou International Catrobat Association – Verein zur Förderung freier Software, neziskovej mimovládnej organizácie so sídlom v Grazi v Rakúsku (Európska únia). Naše zásady rešpektujú právo EÚ a Rakúska v oblasti ochrany údajov (GDPR). Ak nás chceš kontaktovať, pošli e-mail na contact@catrobat.org alebo list na adresu Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Rakúsko (Európska únia).
-  text9: Ak máš menej ako 14 rokov, musí tieto zásady prijať zákonný zástupca (zvyčajne rodič).
-  text10: Oficiálne anglické znenie zásad ochrany osobných údajov Catrobat nájdeš na webe na adrese %privacy_policy%.
-  disagree-text: Bez súhlasu ti nemôžeme vytvoriť účet, ale základné funkcie sú stále dostupné.
 catro-notifications:
-  markAsRead: "Označiť ako prečítané"
   noFollowers: "Zdá sa, že nemáš žiadne upozornenia na sledujúcich."
   noComments: "Zdá sa, že nemáš žiadne upozornenia na komentáre."
   noReactions: "Zdá sa, že nemáš žiadne upozornenia na reakcie."
@@ -975,29 +647,16 @@ catro-notifications:
 clipboard:
   success: Odkaz bol skopírovaný do schránky!
   success_project: Odkaz na projekt bol skopírovaný do schránky!
-  success_user: Odkaz na používateľa bol skopírovaný do schránky!
   fail: Odkaz sa nepodarilo skopírovať do schránky! :(
 next: Ďalej
 previous: Predchádzajúce
 media-packages:
   title: Knižnica médií
   description: V nasledujúcich kategóriách nájdeš postavy a objekty, ktoré môžeš pridať do svojich projektov.
-  thumb-size:
-    description: Veľkosť náhľadu
-    sm: malé
-    md: stredné
-    lg: veľké
   theme-special: "Špeciálna téma %flavor%"
   search-results: Výsledky vyhľadávania v knižnici médií
-  no-results: Vyhľadávanie nenašlo žiadne výsledky. Používaj iba anglické hľadané výrazy.
-  download_these_files: uložiť
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Všetky práva vyhradené.'
 noscript:
   warning: "Táto webová stránka potrebuje na fungovanie JavaScript. Zapni JavaScript vo svojom prehliadači alebo popros o pomoc dospelého."
@@ -1007,10 +666,6 @@ cookie-consent:
   decline: "Odmietnuť"
   privacy-link: "Zásady ochrany osobných údajov"
   settings-link: "Nastavenia cookies"
-agree: Súhlasím
-disagree: Nesúhlasím
-profileLoader:
-  noProfiles: Momentálne tu nie sú žiadne profily.
 element: 'Prvok'
 elements: 'Prvky'
 share:
@@ -1019,7 +674,6 @@ share:
   success: 'Zdieľanie bolo úspešné'
 copy: 'Kopírovať odkaz'
 checkOutProject: 'Pozri si tento projekt:'
-checkOutUser: 'Pozri si tohto používateľa:'
 community: 'Komunita Catrobat'
 back_to_app: 'Opustiť komunitu'
 category:
@@ -1035,7 +689,6 @@ category:
 achievements:
   sidebar:
     title: 'Úspechy'
-    badge: 'new'
   overview:
     header: 'Úspechy'
     most_recent_achievement:
@@ -1127,10 +780,7 @@ extensions:
       title: Hra pre viacerých hráčov
 studio:
   title: 'Štúdiá'
-  singular: 'Štúdio'
   create_studio: 'Vytvoriť štúdio'
-  delete_studio: 'Vymazať štúdio'
-  cancel_studio: 'Zrušiť'
   studio_name: 'Názov štúdia'
   studio_description: 'Popis štúdia'
   is_public: 'Zverejniť?'
@@ -1147,8 +797,6 @@ studio:
   cover_image_remove: 'Odstrániť obrázok'
   popular: 'Populárne štúdiá'
   join: 'Pridať sa'
-  leave: 'Opustiť'
-  report: 'Nahlásiť'
   public: 'verejné'
   private: 'Iba na pozvanie'
   overview:
@@ -1171,16 +819,12 @@ studio:
     admin: 'Administrátor'
     member: 'Člen'
   details:
-    add_project: 'klikni a pridaj projekt'
     add: 'Add'
     showMore: 'zobraziť viac'
-    showLess: 'zobraziť menej'
     are_you_sure: 'Si si istý?'
     no_way_of_return: 'Túto akciu nie je možné vrátiť späť.'
     delete_it: 'Vymazať'
-    remove_project: 'Odstrániť zo štúdia'
     remove_project_error: 'Projekt sa nepodarilo odstrániť zo štúdia.'
-    remove_project_success: 'Projekt bol úspešne odstránený zo štúdia.'
     no_projects: 'Štúdio zatiaľ neobsahuje žiadne projekty.'
     projects:
       title: 'Projekty'
@@ -1196,10 +840,8 @@ studio:
       no_projects_empty_state: 'Zatiaľ nemáš žiadne projekty na pridanie. Najprv si nejaký vytvor v Pocket Code!'
       add_selected: 'Pridať vybrané'
     no_available_projects: 'Nie sú k dispozícii žiadne projekty na pridanie.'
-    updateCoverError: 'Pri aktualizácii titulného obrázka štúdia sa niečo pokazilo.'
     join: 'Pridať sa'
     leave: 'Opustiť'
-    report: 'Nahlásiť'
     pending: 'Čaká sa'
     decline: 'Zamietnuté'
     comments:
@@ -1219,7 +861,6 @@ studio:
       add_comment: '%user% pridal komentár.'
     members_list:
       title: 'Členovia štúdia'
-      project_count: '{0} Žiadne projekty v štúdiu |{1} 1 projekt v štúdiu |]1,Inf] Projekty v štúdiu: %count%'
       no_studio_projects: 'Žiadne projekty v štúdiu'
       one_studio_project: '1 projekt v štúdiu'
       n_studio_projects: 'Projekty v štúdiu: %count%'
@@ -1229,7 +870,6 @@ studio:
       ban_failed: 'Pri blokovaní tohto člena sa niečo pokazilo. Skús to znova neskôr.'
       demote_member: 'Zmeniť administrátora na člena'
       demotion_failed: 'Pri odoberaní práv tomuto administrátorovi sa niečo pokazilo. Skús to znova neskôr.'
-      last_admin: 'Posledného administrátora tohto štúdia nemožno zmeniť na člena.'
     join_requests:
       title: 'Žiadosti o pripojenie'
       accept: 'Prijať'
@@ -1259,7 +899,6 @@ media_library:
   no_results: 'Nenašli sa žiadne výsledky.'
   assets_count: 'položiek'
   view_all: 'Zobraziť všetko'
-  view_all_category: 'Zobraziť všetko: %category%'
   back_to_app: 'Späť do aplikácie'
 snackbar:
   project_not_found: 'Požadovaný projekt nie je k dispozícii'
@@ -1313,14 +952,6 @@ moderation:
     rate_limited: "Vykonávaš akcie v štúdiu príliš rýchlo. Chvíľu počkaj."
   hidden_notice:
     project: "Tento projekt bol skrytý na základe nahlásení od komunity."
-    comment: "Tento komentár bol skrytý na základe nahlásení od komunity."
-    user: "Tento profil bol skrytý na základe nahlásení od komunity."
     user_own: "Tvoj účet bol pozastavený na základe nahlásení od komunity. Proti tomuto rozhodnutiu sa môžeš odvolať."
-    studio: "Toto štúdio bolo skryté na základe nahlásení od komunity."
-  notification:
-    content_hidden: "Tvoj obsah (%content_type%) bol skrytý na základe nahlásení od komunity. Proti tomuto rozhodnutiu sa môžeš odvolať."
-    appeal_approved: "Tvoje odvolanie bolo schválené. Tvoj obsah je opäť viditeľný."
-    appeal_rejected: "Tvoje odvolanie bolo posúdené a rozhodnutie o skrytí tvojho obsahu zostáva v platnosti."
-    admin_review_needed: "Obsah bol automaticky skrytý a vyžaduje posúdenie."
 Reports: Nahlásenia
 members: členovia

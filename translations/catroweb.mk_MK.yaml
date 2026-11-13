@@ -8,19 +8,12 @@ meta.og.description.login: 'Најави се за да ги споделиш с
 meta.og.title.register: 'Создај Catrobat сметка'
 meta.og.description.register: 'Приклучи се на Catrobat заедницата и почни да ги споделуваш своите креативни проекти уште денес.'
 meta.og.description.profile: '%username% на Catrobat – прелистај ги неговите проекти и достигнувања.'
-localLanguage: Англиски
 username: Корисничко име
 password: Лозинка
-createNewPassword: 'Создај нова лозинка'
-accountSettings: 'Поставки за сметката'
 email: 'Е-пошта'
-aboutPocketCode: За Pocket Code
 about: 'За Catrobat'
-education: 'Образование'
 chat: 'Разговор и форуми'
-privacyGuide: 'Водич за приватност'
 others: 'Друго'
-tutorials: 'Помош'
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: 'Како го создаде овој проект?
 projectImportedFromScratch: 'Овој проект е увезен од MIT Scratch. Можеш да го погледнеш оригиналниот проект'
 scratchImportedProjectLinkHere: 'овде.'
 country: Држава
-loginText: пријава
 privacyPolicy: Политика за приватност
-imprint: 'Импресум'
 projectDetails: 'Детали'
 somethingWentWrong: 'Уупс, се појави неочекувана грешка.'
 accountNotVerified: 'Провери дали си најавен и дали е-поштата на твојата сметка е потврдена.'
@@ -55,36 +46,28 @@ accountSuspended: 'Твојата сметка е суспендирана по�
 doesNotExist: 'Бараниот ресурс не постои.'
 pleaseTryAgain: 'Обиди се повторно!'
 tryAgainButton: 'Обиди се повторно'
-oldVersionError: 'Ажурирај ја својата верзија на Pocket Code!'
 more: 'повеќе'
 less: 'помалку'
 show-more: 'Прикажи повеќе'
-show-less: 'Прикажи помалку'
 more-information: 'Повеќе информации'
 less-information: 'Помалку информации'
 ok: 'Разбрав'
-clickToDownloadProgram: 'За да го преземеш примерниот проект, кликни %link_start% овде %link_end%.'
-registrationError: 'Корисничкото име или е-маил адресата веќе е употребена.'
 notifications: 'Известувања'
 allNotifications: 'Сите'
 FollowersNotifications: 'Следбеници'
 LikeNotifications: 'Реакции'
 CommentNotifications: 'Коментари'
 RemixNotifications: 'Ремикси'
-wellDone: "Браво!"
 done: "Готово!"
 notificationsReadMessage: 'Изгледа дека немаш известувања.'
-confirmMessage: 'Да, избриши го'
 cancelMessage: "Откажи"
 notificationsUnauthorizedError: 'Не може да се овласти корисникот'
 notificationsClearError: 'Не можеш да ги означиш сите известувања како прочитани!'
-pleaseWait: 'Почекај...'
 projects: 'Проекти'
 users: 'Корисници'
 studios: 'Студија'
 oauthPopUpTitle: 'Информации за најава со надворешна сметка'
 oauthInfo: 'Штотуку се најави со надворешна сметка. Создадовме случајно корисничко име за тебе. Ако сакаш да го промениш корисничкото име или да создадеш нова лозинка за сметката, оди на страницата на твојот профил.'
-oauthHere: 'овде'
 statistics: 'Статистика'
 languageSelection: 'Избор на јазик'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Темна'
   dark_description: 'Темен изглед'
   apply: 'Примени'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Кои проекти се препорачуваат овде?'
-      description: 'Колку повеќе реакции (Палец горе, Насмевка ...) добива твојот проект, толку повисоко се појавува на оваа листа.'
 follower:
   follows: 'Следиш'
   followers: 'Следбеници'
   follow: 'Следи'
-  username: 'Корисник'
   followsMe: 'Ме следи'
   noFollowing: 'Моментално не следиш никого.'
   noFollowers: 'Моментално немаш следбеници.'
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: 'Дали си сигурен дека сакаш да престанеш да го следиш овој корисник?'
   unfollowButton: 'Престани да го следиш %username%'
 project:
-  welcome:
-    title: 'Добредојде на %theme% од Catrobat'
-    title_mindstorms: 'Добредојде на страницата на Catrobat за Mindstorms EV3 и NXT'
-    subtitle: 'Создавај приказни, игри и уште многу...'
-    subtitle_embroidery: 'Извези свои шари на маиците, торбите, панталоните или футролата за телефон!'
-    subtitle_mindstorms: 'Создавај свои проекти со твоите Lego Mindstorms EV3 и NXT роботи'
-    download: 'Преземи ја апликацијата'
-    statistics: 'Повеќе статистика'
   featured: 'Истакнати'
   open: 'Отвори'
   download: 'Преземи'
@@ -148,9 +117,6 @@ project:
       retention: 'Прикачените проекти автоматски се отстрануваат по одреден период на неактивност. Најавувај се редовно или собирај преземања на твојот проект за да го продолжиш неговото чување.'
       protection: 'Особено добрите или популарни проекти модераторите можат да ги заштитат од автоматско бришење.'
   example: 'Примери'
-  newest: 'Најнови проекти'
-  recommended: 'Препорачани проекти'
-  scratchremixes: 'Scratch ремикси'
   noProjects: 'Моментално нема проекти.'
   shareAction: 'Сподели'
   deleteAction: 'Избриши проект'
@@ -173,17 +139,10 @@ project:
   reportCommentConfirmation: 'Дали си сигурен дека сакаш да го пријавиш овој коментар?'
   deleteCommentConfirmation: 'Дали си сигурен дека сакаш да го избришеш овој коментар?'
   deleteAccountConfirmation: "Бришење на сметката?\nДали си сигурен дека сакаш да ја избришеш својата сметка? Со ова ќе се избришат и твоите прикачени проекти и коментари!\nНема начин да ги вратиш своите дејства!\nДа, избриши ја!\nОткажи\n"
-  tooLongName: 'Името на проектот е предолго!'
-  tooLongDescription: 'Описот на проектот е предолг!'
-  tooLongCredits: 'Белешките и заслугите на проектот се предолги!'
   my_projects: 'Мои споделени проекти'
   trending: 'Проекти во тренд'
   popular: 'Популарни проекти'
-  most:
-    viewed: Најмногу прегледани
-    downloaded: 'Најмногу преземани'
   random: 'Случајни проекти'
-  related: 'Поврзани проекти'
   browse:
     explore: 'Истражи проекти'
     no_projects: 'Сè уште немаш создадено проекти'
@@ -197,36 +156,14 @@ project:
     tooltip: 'Проектите автоматски се отстрануваат по одреден период на неактивност. Собирај повеќе преземања или најавувај се редовно за да го продолжиш чувањето.'
     tooltip_protected: 'Овој проект е заштитен и нема автоматски да биде избришан.'
   downloads: '%downloads% преземања'
-  sample: 'Примерни проекти'
   views: '%views% прегледи'
   likes:
     likersTitle: 'Луѓе што реагирале на тој проект'
     all: 'Сите'
-  remixes: '{0}0 ремикси |{1}1 ремикс |]1,Inf]%remixes% ремикси'
-  newRemixesNotificationTitle: '|{1}„%programName%“ има 1 нов ремикс: |]1,Inf] „%programName%“ има %remixes% нови ремикси:'
-  submitted: 'Поднесени проекти'
-  uploaded: 'Прикачени проекти'
-  reportAsInappropriate: 'Пријави како несоодветно'
-  reportProgram: 'Пријави проект'
   languageVersion: 'Верзија на јазикот Catrobat: %languageVersion%'
-  reportLoginText: 'Потребна е %login% за да го пријавиш овој проект.'
-  reportDialogHeader: 'Зошто сакаш да го пријавиш овој проект?'
-  reportDialogReason: 'Внеси причина'
-  reportRadioButtonInappropriate: 'Несоодветно е'
-  reportRadioButtonCopyright: 'Повреда на авторски права'
-  reportRadioButtonSpam: 'Спам е'
-  reportRadioButtonDislike: 'Не ми се допаѓа'
-  reportOwnProgram: 'Не можеш да го пријавиш својот проект.'
-  reportAlready: 'Веќе го пријави овој проект.'
-  reportDone: 'Го пријави овој проект!'
   updateAppHeaderDownload: 'Преземањето не е можно'
   updateAppTextDownload: 'Ажурирај ја апликацијата на најновата верзија. Имај предвид дека не сите функции од Android се веќе достапни на iOS.'
-  updateAppTextDownloadApk: 'Преземањето на APK моментално е достапно само на Android, а не на iOS.'
-  updateAppHeader: 'Ажурирај ја апликацијата'
-  updateAppText: 'Ажурирај ја апликацијата на најновата верзија.'
-  btnClosePopup: 'Во ред'
   checkout_this_project: 'Погледни го овој Catrobat проект'
-  show_more: 'Прикажи повеќе'
   comments: 'Коментари'
   send: 'Испрати'
   delete: Избриши
@@ -238,7 +175,6 @@ project:
   deleted_popup_header: 'Избришано'
   noAdminRights: 'Немаш администраторски права. Најави се како администратор.'
   editProject: 'Уреди го проектот'
-  closeProjectEditor: 'Затвори го уредувачот на проекти'
   closeEditorPrompt: 'Дали сакаш да ги зачуваш промените?'
   btnDiscard: 'Отфрли'
   addComment: 'Напиши коментар'
@@ -246,8 +182,6 @@ project:
   smile: 'Насмевка!'
   love: 'Љубов!'
   wow: 'Уаууу!'
-  linkTitle: 'Линк'
-  link: 'Копирај го линкот до проектот'
   reactionsText: 'Реакции'
   downloadErrorText: 'Настана грешка при преземањето на проектот. Обиди се повторно подоцна.'
   downloadStartText: 'Преземањето започна...'
@@ -267,11 +201,8 @@ project:
   translations: 'Преводи'
   createTranslation: 'Создај превод'
   deletedComment: '**Избришано**'
-  replyLabel: 'одговор'
-  repliesLabel: 'одговори'
   notForKids: 'Не е безбедно за деца'
 remixGraph:
-  title: 'Ремикси'
   showRemixGraph: 'Граф на ремикси'
   by: 'од'
   open: 'Отвори'
@@ -291,10 +222,6 @@ remixGraph:
   projectNotAvailable: 'Не е достапно'
   projectUnknownUser: 'Непознат корисник'
 noReply: 'Ова е автоматска порака - не одговарај директно на оваа порака.'
-accountConfirmation:
-  subject: 'Потврда на твојата Catrobat сметка'
-  message: "Здраво %username%.\nЗа да ја завршиш активацијата на сметката, посети %confirmationUrl%\nОвој линк може да се користи само еднаш за потврда на сметката.\nПоздрав,\nТвојот Catrobat тим.\n"
-  messageHtml: "<p>\nЗдраво %username%.<br>\n<br>\nЗа да ја завршиш активацијата на сметката, кликни <a href=\"%confirmationUrl%\">овде.</a><br>\nОвој линк може да се користи само еднаш за потврда на сметката.<br>\n<br>\nПоздрав,<br>\nТвојот Catrobat тим.\n</p>\n"
 newAccountConfirmation:
   subject: 'Потврди ја адресата на е-пошта'
   welcome: 'Добредојде на Catrobat!'
@@ -372,39 +299,13 @@ parent:
       ignore: 'Ако не го побара ова, можеш слободно да ја игнорираш оваа порака.'
 passwordRecovery:
   subject: 'Враќање на твојата Catrobat лозинка'
-  message: "Здраво %username%.\nПобара ресетирање на лозинката на %appplication_url% затоа што ја заборави.\nАко не го побара ова, игнорирај ја пораката. Барањето ќе истече и ќе стане неважечко за 24 часа.\nЗа да ја ресетираш лозинката и да создадеш нова, посети ја следнава страница: %confirmationUrl%\nСо твоето корисничко име и лозинка можеш во секое време да пристапиш до заедницата %appplication_url%.\nЗа тоа, само посети ја следнава страница: %loginPage%\nЗа да ги уредиш деталите на профилот, оди на оваа страница: %profilePage%\nПоздрав,\nТвојот Catrobat тим.\n"
-  messageHtml: "<p>\nЗдраво %username%.<br>\n<br>\nПобара ресетирање на лозинката на <a href=\"%appplication_url%\">Pocket Code</a> затоа што ја заборави.\nАко не го побара ова, игнорирај ја пораката. Барањето ќе истече и ќе стане неважечко за 24 часа.<br>\n<br>\nЗа да ја ресетираш лозинката и да создадеш нова, кликни <a href=\"%confirmationUrl%\">овде.</a><br>\n<br>\nСо твоето корисничко име и лозинка можеш во секое време да пристапиш до заедницата <a href=\"%appplication_url%\">Pocket Code</a>.<br>\nЗа тоа, само посети ја следнава страница: <a href=\"%loginPage%\">Страница за најава</a><br>\nЗа да ги уредиш деталите на профилот, оди на оваа <a href=\"%profilePage%\">страница</a>.<br>\n<br>\nПоздрав,<br>\nТвојот Catrobat тим.\n</p>\n"
 profile:
   aboutMe: 'За мене'
   currentlyWorkingOn: 'Моментално работам на'
-  edit: 'Уреди го профилот'
-  saveChanges: 'зачувај промени'
   newPass: 'нова лозинка'
   repeatPass: 'повтори ја лозинката'
   oldPass: 'стара лозинка'
-  firstEmail: 'Мојата прва е-пошта'
-  secondEmail: 'Мојата втора е-пошта'
-  myPrograms: 'Мои проекти'
-  follows: 'Следи'
-  follower: 'Следбеник'
-  unfollowUser: 'Престани да го следиш овој корисник!'
-  followUser: 'Следи го овој корисник!'
-  amountOfPrograms: 'Број на проекти'
-  form:
-    passwordTooShort: 'Новата лозинка мора да има најмалку %length% знаци.'
-    passwordTooLong: 'Новата лозинка може да има најмногу %length% знаци.'
-    passwordIsUsername: 'Лозинката мора да се разликува од корисничкото име.'
-    passwordWrong: 'Погрешна лозинка'
-    emailNotValid: 'Оваа адреса на е-пошта не е валидна.'
-    emailMissing: 'Грешка при ажурирање на оваа адреса на е-пошта. Мора да имаш најмалку една потврдена адреса на е-пошта.'
-    emailExists: 'Оваа адреса на е-пошта веќе постои.'
-    usernameNotValid: 'Ова корисничко име не е валидно.'
-    usernameMissing: 'Мора да имаш корисничко име.'
-    usernameExists: 'Ова корисничко име веќе постои.'
-    usernameContainsEmail: 'Корисничкото име не смее да содржи адреса на е-пошта.'
-    submitSuccess: 'зачувано!'
   reallyDeleteProgram: 'Дали навистина сакаш да го избришеш својот проект'
-  programsOf: 'Проекти од'
   picture: 'Профилна слика'
   changePicture: 'Промени слика'
   goToScratchProfile: 'Профил на Scratch'
@@ -414,14 +315,8 @@ myprofile:
   securitySettings: 'Промени лозинка'
   accountSettings: 'Поставки за сметката'
   accountVerification: 'Потврди сметка'
-  account: 'Сметка'
-  editProfile: 'Уреди профил'
-  edit: 'Уреди'
   done: 'Готово'
-  checkMail: 'Испратена е порака на твојата адреса на е-пошта. Провери го сандачето.'
   passwordUpdated: 'Лозинката е успешно ажурирана.'
-  avatar: 'Аватар'
-  email: 'Е-пошта'
   deleteAccount: 'Избриши сметка'
   deleteAccountWarning: "Внимание:\nСоздаде %num_projects% проект(и) и имаш %num_followers% следбеник(ци). Сите твои проекти ќе бидат отстранети. Повеќе нема да можеш да се најавиш, а твоите проекти ќе исчезнат од сите листи. Бришењето на профилот не може да се врати!\nДали си сигурен дека сакаш да не напуштиш?\n"
   exportData: 'Преземи ги моите податоци'
@@ -429,7 +324,6 @@ myprofile:
   exportDataLoading: 'Се презема...'
   exportDataError: 'Нешто тргна наопаку при извозот на твоите податоци. Обиди се повторно подоцна.'
   exportDataRateLimited: 'Податоците можеш да ги извезеш само еднаш дневно. Обиди се повторно утре.'
-  editAccountSettings: 'Уреди поставки за сметката'
   profileChangeSuccess: 'Профилот е успешно променет.'
   unspecifiedError: 'Нешто не успеа при промената на профилот. Обиди се повторно или кажи ни ако продолжи да се случува!'
   verifyAccountText: 'Ќе ти испратиме порака со линк за потврда на сметката. Кликни на линкот во рок од еден час; можеш да побараш само една порака дневно.'
@@ -486,13 +380,10 @@ termsOfUse:
   bottom2: 'Сите предлози во врска со овие Услови за користење испрати ги на %email-webmaster%.'
   version: 'Верзија 1.3, 4 март 2014'
 search:
-  dotdotdot: 'Пребарај...'
   search: 'Пребарај проекти, корисници и студија'
   inMediaLib: 'Пребарај во медиумската библиотека'
   inMediaCategory: 'Пребарај во медиумската категорија'
   results: 'Резултати за'
-  resultcount: 'Пребарувањето врати %count% резултати'
-  fail: 'Внеси барем еден поим за пребарување'
   noUsers: 'Не се пронајдени корисници'
   noProjects: 'Не се пронајдени проекти'
   noStudios: 'Не се пронајдени студија'
@@ -508,7 +399,6 @@ menu:
   mediaLibrary: 'Медиумска библиотека'
   studio: 'Студија'
   language: 'Јазик'
-  languageOptionsNotAvailable: 'Нема достапни јазични опции.'
 login:
   login: Најава
   button:
@@ -520,21 +410,10 @@ login:
     or: "или"
   passOrUser: 'Лозинката или корисничкото име е погрешно.'
   accountSuspended: 'Твојата сметка е суспендирана. Ако мислиш дека ова е грешка, контактирај ја поддршката.'
-  noUsername: 'Корисничкото име или адресата на е-пошта не е пронајдена.'
-  forgotPass: 'Ја заборави лозинката или корисничкото име?'
   recoverPassSend: 'Испратена е порака на твојата адреса на е-пошта. Провери го сандачето.'
   alreadyReset: 'Лозинката за овој корисник веќе е побарана во последните 24 часа.'
-  confirmationSend: 'Порака за потврда на регистрацијата е испратена на твојата адреса на е-пошта. Провери го сандачето и активирај ја сметката.'
-  userOrEmail: 'Корисничко име или е-пошта'
-  changePass: 'Промени лозинка'
-  createAccount: 'Создај сметка'
-  noAccount: 'Немаш сметка?'
-  alreadyAccount: 'Веќе имаш сметка?'
-  or: 'ИЛИ'
   username: Корисничко име
   email: 'Е-пошта'
-  passwordFirst: Лозинка
-  passwordSecond: 'Потврди лозинка'
 register:
   title: 'Регистрирај се'
   subText: 'Со продолжување создаваш сметка во Catrobat заедницата и се согласуваш со нашите %var1% и %var2%.'
@@ -567,14 +446,6 @@ registration:
   consentRevoked:
     title: 'Родителската согласност е повлечена'
     message: 'Твојот родител или старател ја повлече согласноста за твојата сметка. Сметката има ограничени функции додека согласноста повторно не биде дадена.'
-    newEmailPlaceholder: 'Нова е-пошта на родителот'
-    changeButton: 'Ажурирај и испрати повторно'
-accountRecovery:
-  title: 'Враќање на сметката'
-  description: 'Ако се сеќаваш на е-поштата или корисничкото име на сметката, можеме да ти испратиме линк за ресетирање на лозинката.'
-  button:
-    cancel: Откажи
-    submit: 'Врати лозинка'
 resetPassword:
   request:
     title: 'Ресетирај ја лозинката'
@@ -587,11 +458,6 @@ resetPassword:
     description: 'Ако постои сметка со твојата е-пошта, штотуку е испратена порака со линк што можеш да го користиш за ресетирање на лозинката. Овој линк ќе истече за %time%.'
     descriptionTwo: 'Ново ресетирање на лозинката можеш да побараш на секои %throttleLimit% часа.'
     descriptionThree: 'Ако не доби порака, провери ја папката за спам или пиши ѝ на нашата поддршка на %email-webmaster%.'
-  email:
-    title: 'Здраво!'
-    visitLink: 'За да ја ресетираш лозинката, посети го следниов линк'
-    expire: 'Овој линк ќе истече за %time%.'
-    cheers: 'Поздрав!'
   newemail:
     title: 'Ресетирај ја лозинката'
     content: 'Неодамна побара ресетирање на лозинката за твојата Catrobat сметка. Кликни на копчето подолу за да избереш нова лозинка. Ако не го побара ова, можеш слободно да ја игнорираш оваа порака.'
@@ -601,74 +467,31 @@ resetPassword:
     title: 'Ресетирај ја лозинката'
     button:
       submit: 'Ресетирај лозинка'
-apk:
-  download: 'Преземи како апликација'
-  prepare: 'Добиј како апликација'
-  preparing: 'Се подготвува апликацијата'
-  text: 'Процесот може да потрае'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'Нешто не успеа. Обиди се повторно или кажи ни ако продолжи да се случува!'
-  username:
-    blank: 'Корисничкото име не смее да биде празно'
-    invalid: 'Корисничкото име е неважечко'
-    exists: 'Ова корисничко име веќе постои.'
-    not_exists: 'Ова корисничко име не постои.'
-    not_email: 'Корисничкото име не смее да биде адреса на е-пошта.'
-    size: 'Корисничкото име мора да има најмалку 3 и најмногу 180 знаци'
-  password:
-    blank: 'Недостасува лозинката.'
-    short: 'Лозинката мора да има најмалку {{ limit }} знаци.'
-  country:
-    blank: 'Недостасува државата.'
-    invalid: 'Неважечка држава'
-  email:
-    blank: 'е-поштата не смее да биде празна'
-    invalid: 'Е-поштата изгледа неважечка'
-    exists: 'Оваа адреса на е-пошта веќе постои.'
-  id:
-    blank: 'ID-то за отворена автентикација не смее да биде празно'
-  login: 'Лозинката или корисничкото име е погрешно.'
-  post-data: 'POST-податоците не се точни или недостасуваат!'
-  checksum:
-    missing: 'Клиентот не испрати fileChecksum! Дали користиш застарена верзија на Pocket Code?'
-    invalid: 'неважечка контролна сума'
   xml:
     invalid: 'неважечки XML код'
     missing: 'непозната грешка: project_xml_not_found!'
   file:
-    unexpected: 'пронајдена е неочекувана датотека'
     invalid: 'неважечка датотека'
-  image.missing: 'XML-от на проектот спомнува датотека што не постои во папката на проектот'
-  unknown: 'непозната грешка'
-  token: 'Автентикацијата на уредот не успеа: неважечки auth-token!'
-  uploadTokenAuthFailed: 'Автентикацијата со токенот за прикачување не успеа.'
-  project:
-    invalid: 'Неважечки проект.'
   languageversion:
     tooold: 'Жал ни е, твојот проект содржи стара верзија на јазикот Catrobat! Дали ја користиш најновата верзија на Pocket Code?'
   projectversion:
     tooold: 'Жал ни е, користиш стара верзија на Pocket Code. Ажурирај на најновата верзија.'
   authentication:
-    title: 'Најавата не успеа'
     webview: "Изгледа дека корисничкото име или лозинката не беа точни.\nОбиди се повторно да се најавиш во апликацијата.\n"
 success:
   text: 'Успешно'
-  registration: 'Регистрацијата е успешна!'
-  token: ok
-  upload: 'Твојот проект е успешно прикачен!'
   imgUpload: 'Твојата слика е успешно прикачена!'
-  report: 'Твојата пријава е успешно испратена!'
 time:
   minutes.ago: '{0} пред < 1 минута |{1}пред 1 минута |]1,Inf] пред %count% минути'
   hours.ago: '{1}пред 1 час |]1,Inf] пред %count% часа'
   days.ago: '{1}пред 1 ден |]1,Inf] пред %count% дена'
   months.ago: '{1}пред 1 месец |]1,Inf] пред %count% месеци'
   years.ago: '{1}пред 1 година |]1,Inf] пред повеќе од една година'
-failure:
-  upload: 'Настана грешка при прикачувањето на твојата апликација.'
 user:
   verification:
     email: 'Потврди ја е-поштата'
@@ -691,7 +514,6 @@ api:
     passwordInvalidChars: 'Лозинката содржи неважечки знаци'
     usernameContainsEmail: 'Корисничкото име не смее да содржи адреса на е-пошта'
     usernameContainsLink: 'Корисничкото име не смее да содржи линк'
-    countryCodeInvalid: 'Неважечки код на држава'
     pictureInvalid: 'Профилната слика е неважечка или не е поддржана'
     dateOfBirthMissing: 'Датумот на раѓање е задолжителен'
     dateOfBirthInvalid: 'Датумот на раѓање е неважечки'
@@ -725,61 +547,11 @@ api:
     nameAlreadyInUse: 'Името веќе се користи'
     descriptionMissing: 'Недостасува опис'
     descriptionEmpty: 'Описот е празен'
-    descriptionTooShort: 'Описот е прекраток'
     descriptionTooLong: 'Описот е предолг'
     imageFileInvalid: 'Неважечка датотека за слика'
     imageFileInvalidType: 'Неважечки тип на датотека за слика'
     imageFileTooLarge: 'Датотеката за слика е преголема'
-#languages and countries
-language:
-  arabic: 'Арапски'
-  bulgarian: 'Бугарски'
-  catalan: 'Каталонски'
-  chinese_simplified_han: 'Кинески (поедноставен)'
-  chinese_traditional_han: 'Кинески (традиционален)'
-  croatian: 'Хрватски'
-  czech: 'Чешки'
-  danish: 'Дански'
-  dutch: 'Холандски'
-  english_united_kingdom: 'Англиски (Обединето Кралство)'
-  english_united_states: 'Англиски (САД)'
-  estonian: 'Естонски'
-  filipino: 'Филипински'
-  finnish: 'Фински'
-  french: 'Француски'
-  german: 'Германски'
-  greek: 'Грчки'
-  hebrew: 'Хебрејски'
-  hindi: 'Хинди'
-  hungarian: 'Унгарски'
-  indonesian: 'Индонезиски'
-  italian: 'Италијански'
-  japanese: 'Јапонски'
-  korean: 'Корејски'
-  latvian: 'Латвиски'
-  lithuanian: 'Литвански'
-  malay: 'Малајски'
-  norwegian: 'Норвешки'
-  persian: 'Персиски'
-  polish: 'Полски'
-  portuguese_brazil: 'Португалски (Бразил)'
-  portuguese_portugal: 'Португалски (Португалија)'
-  romanian: 'Романски'
-  russian: 'Руски'
-  serbian: 'Српски'
-  slovak: 'Словачки'
-  slovenian: 'Словенечки'
-  spanish_latin_america: 'Шпански (Латинска Америка)'
-  spanish_spain: 'Шпански (Шпанија)'
-  swedish: 'Шведски'
-  thai: 'Тајландски'
-  turkish: 'Турски'
-  ukrainian: 'Украински'
-  vietnamese: 'Виетнамски'
-ci:
-  generate: 'Генерирај APK'
-  pending: 'Се генерира APK'
-  download: 'Преземи APK'
+
 admin:
   maintain:
     diskMaintenance: 'Одржување на дискот'
@@ -787,46 +559,9 @@ admin:
     noRemovableObjects: 'Нема објекти за отстранување.'
     removableObjects: 'Објекти за отстранување'
 recommender:
-  similarPrograms: 'Слични проекти'
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Корисниците што го презеле овој проект ги презеле и'
   moreFromThisUser: 'Повеќе од %username%'
-pmd:
-  submitBtn: 'Поднеси го својот проект'
-  submitBox:
-    header: 'Поднесување'
-    text: 'Ќе го поднесеш својот проект. Внеси го кодот на проектот и кликни испрати.'
-    btnText: 'Поднеси'
-  successful:
-    text: 'Твојот проект е успешно прикачен.'
-  failed:
-    text: 'Прикачувањето на проектот не успеа.'
 codeview:
   title: 'Приказ на кодот'
-  showCode: 'Прикажи код'
-  hideCode: 'Скриј код'
-  showStatistics: 'Прикажи статистика на кодот'
-  hideStatistics: 'Скриј статистика на кодот'
-  cantDisplayCode: 'Кодот не може да се прикаже'
-  cantDisplayStatistics: 'Кодот не може да се прикаже'
-  totalNumberOf: 'Вкупен број на'
-  scenes: 'Сцени'
-  scripts: 'Скрипти'
-  bricks: 'Блокови'
-  objects: 'Ликови и објекти'
-  looks: 'Изгледи'
-  sounds: 'Звуци'
-  globals: 'Глобални'
-  locals: 'Локални'
-  globalVariables: 'Глобални променливи'
-  localVariables: 'Локални променливи'
-  eventBricks: 'Блокови за настани'
-  controlBricks: 'Контролни блокови'
-  motionBricks: 'Блокови за движење'
-  soundBricks: 'Блокови за звук'
-  looksBricks: 'Блокови за изглед'
-  penBricks: 'Блокови за пенкало'
-  dataBricks: 'Блокови за податоци'
-  specialBricks: 'Специјални блокови'
 codeView:
   title: 'Приказ на кодот'
   loading: 'Се вчитува приказот на кодот...'
@@ -839,19 +574,7 @@ codeView:
 codeStatistics:
   title: 'Статистика на кодот'
   error: 'Статистиката на кодот не може да се прикаже.'
-  general: 'Општо'
-  bricks: 'Блокови'
-  eventBricks: 'Настани'
-  controlBricks: 'Контрола'
-  motionBricks: 'Движење'
-  soundBricks: 'Звук'
-  looksBricks: 'Изглед'
-  penBricks: 'Пенкало'
-  dataBricks: 'Податоци'
-  deviceBricks: 'Уред'
-  specialBricks: 'Специјални'
   yourScore: 'Твојот резултат:'
-  points: 'поени'
   abstraction: 'Апстракција и разложување на проблеми'
   parallelism: 'Паралелизам'
   logicalThinking: 'Логичко размислување'
@@ -867,20 +590,7 @@ footer:
   text: 'Веќе се споделени %project_count% неверојатни проекти, а следниот може да биде твојот. Преземи ја нашата апликација и почни да создаваш уште денес'
 privacy-policy:
   header: 'Политика за приватност'
-  version: 'Верзија 2.2, 17 октомври 2019'
-  text1: 'За да ти ги понудиме сите предности на нашите услуги и поврзаната сметка, потребно е да собереме одредени податоци од тебе.'
-  text2: 'За одржување и подобрување на нашите услуги (апликации и веб-страници) и за научно истражување во областа на ИКТ и STEM/STEAM образованието, користиме Google Analytics, Crashlytics и Firebase, сите од Google LLC (САД), како и Dynatrace од Dynatrace LLC (САД), за да добиеме метаподатоци за користењето на нашите услуги, на пр. информации за падови, временски ознаки, посетени страници/екрани, користење на нашите апликации и услуги, користен оперативен систем и информации за мрежниот оператор. Оваа анализа и собраните податоци не се поврзани со твојот профил и не содржат лични информации (последните битови од IP-адресата се анонимизираат). Сепак, собраните податоци се пренесуваат до давателите на услуги (Google LLC, САД и Dynatrace LLC, САД). Обработката на податоците се заснова на договори со Google LLC и Dynatrace LLC. Овој однос со давателите на услуги е во согласност со Општата регулатива за заштита на податоците на Европската Унија (EU GDPR) и договорот ЕУ-САД „Privacy Shield“.'
-  text3: 'За да создадеш и користиш сметка во нашите системи и за да те информираме по е-пошта за потребни промени во врска со твојата сметка, на пр. ажурирања или прекршувања на нашите Услови за користење и услуга, правилата на заедницата или нашите политики, ќе го чуваме твоето корисничко име и, ако ја внесеш, твојата адреса на е-пошта. Ако си ја поврзал сметката преку Google Plus или Facebook, дополнително чуваме идентификациски клуч поврзан со твојата сметка на тие услуги. Овие податоци нема да ги користиме за други цели (на пр. маркетинг), освен ако изречно не ни дозволиш.'
-  text4: 'Доброволно можеш да ни ја кажеш државата во која живееш преку страницата на твојата сметка на сајтот за споделување. Таа ќе биде прикажана на твојот јавен профил и ќе ја користиме само за статистички и истражувачки цели. Можеш да ја отстраниш во секое време во поставките на профилот.'
-  text5: 'Користењето на личните податоци поврзани со твојата сметка можеш да го повлечеш во секое време со бришење на сметката преку страницата на профилот на https://share.catrobat.org/. По бришењето на сметката сè уште ќе можеш да ги користиш понудените услуги, но не и да соработуваш, на пр. со прикачување програми, коментирање или допаѓања. Исто така, целата содржина поврзана со твојата сметка, на пр. прикачени програми, коментари итн., ќе биде избришана.'
-  text6: 'За да спречиме злоупотреба на нашите услуги, на пр. преку прикачувања или коментари од корисници за незаконски цели, сите јавни податоци создадени од корисниците (прикачувања, коментари) се чуваат интерно во база на податоци, заедно со временска ознака и користената интернет-адреса. Овие податоци нема да бидат користени од или проследени до какви било институции, освен ако постои оправдано сомнение за доволно незаконски дејства и официјално овластени правни институции ги побараат врз основа на важечкиот закон. Секој случај прво ќе го провериме темелно поединечно.'
-  text7: 'Доброволно можеш да се претплатиш на Catrobat билтенот на https://catrobat.org/newsletter, кој го нудиме преку услугата MailChimp (The Rocket Science Group LLC d/b/a MailChimp, САД). Потоа ќе добиваш новости за проектот Catrobat и неговите услуги на адресата на е-пошта што ја внесе. Од билтенот можеш да се откажеш во секое време преку линкот „unsubscribe“ во подножјето на секој билтен. Билтенот го обезбедува MailChimp, со кој имаме договор за обработка на податоци и кој се обврзал на Општата регулатива за заштита на податоците на ЕУ и „Privacy Shield“ ЕУ-САД. За повеќе детали за MailChimp, погледни ги и Политиката за приватност и Условите за користење на MailChimp.'
-  text8: 'Сите услуги ги обезбедува слободниот проект со отворен код Catrobat под покровителство на International Catrobat Association – Verein zur Förderung freier Software, непрофитна невладина организација регистрирана во Грац, Австрија (Европска Унија). Нашите политики ги почитуваат законите на ЕУ и Австрија за заштита на податоците (GDPR). За да стапиш во контакт со нас, испрати е-пошта на contact@catrobat.org или пиши ни на Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).'
-  text9: 'Ако си помлад од 14 години, оваа политика мора да ја прифати законски старател (обично родител).'
-  text10: 'Официјалната политика за приватност на Catrobat на англиски јазик е достапна на интернет на %privacy_policy%.'
-  disagree-text: 'Без одобрение не можеме да создадеме сметка, но основните функции се сè уште достапни.'
 catro-notifications:
-  markAsRead: 'Означи како прочитано'
   noFollowers: 'Изгледа дека немаш известувања за следбеници.'
   noComments: 'Изгледа дека немаш известувања за коментари.'
   noReactions: 'Изгледа дека немаш известувања за реакции.'
@@ -914,29 +624,16 @@ catro-notifications:
 clipboard:
   success: 'Линкот е копиран!'
   success_project: 'Линкот до проектот е копиран!'
-  success_user: 'Линкот до корисникот е копиран!'
   fail: 'Копирањето на линкот не успеа! :('
 next: Следно
 previous: 'Претходно'
 media-packages:
   title: 'Медиумска библиотека'
   description: 'Во следниве категории можеш да најдеш ликови и објекти за да ги додадеш во своите проекти.'
-  thumb-size:
-    description: 'Големина на прегледот'
-    sm: 'мала'
-    md: 'средна'
-    lg: 'голема'
   theme-special: '%flavor% тематски специјал'
   search-results: 'Резултати од пребарувањето во медиумската библиотека'
-  no-results: 'Пребарувањето врати 0 резултати. Користи само англиски поими за пребарување.'
-  download_these_files: 'зачувај'
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Авторски права &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Сите права се задржани.'
 noscript:
   warning: 'На оваа веб-страница ѝ треба JavaScript за да работи. Вклучи JavaScript во прелистувачот или замоли возрасен да ти помогне.'
@@ -946,10 +643,6 @@ cookie-consent:
   decline: 'Одбиј'
   privacy-link: "Политика за приватност"
   settings-link: 'Поставки за колачиња'
-agree: Се согласувам
-disagree: Не се согласувам
-profileLoader:
-  noProfiles: 'Моментално нема профили.'
 element: 'Елемент'
 elements: 'Елементи'
 share:
@@ -958,7 +651,6 @@ share:
   success: 'Успешно споделено'
 copy: 'Копирај линк'
 checkOutProject: 'Погледни го овој проект:'
-checkOutUser: 'Погледни го овој корисник:'
 community: 'Catrobat заедница'
 back_to_app: 'Излези од заедницата'
 category:
@@ -974,7 +666,6 @@ category:
 achievements:
   sidebar:
     title: 'Достигнувања'
-    badge: 'ново'
   overview:
     header: 'Достигнувања'
     most_recent_achievement:
@@ -1066,10 +757,7 @@ extensions:
       title: 'Повеќе играчи'
 studio:
   title: 'Студија'
-  singular: 'Студио'
   create_studio: 'Создај студио'
-  delete_studio: 'Избриши студио'
-  cancel_studio: 'Откажи'
   studio_name: 'Име на студиото'
   studio_description: 'Опис на студиото'
   is_public: 'Да биде јавно?'
@@ -1086,8 +774,6 @@ studio:
   cover_image_remove: 'Отстрани слика'
   popular: 'Популарни студија'
   join: 'Приклучи се'
-  leave: 'Напушти'
-  report: 'Пријави'
   public: 'јавно'
   private: 'Само со покана'
   overview:
@@ -1110,16 +796,12 @@ studio:
     admin: 'Администратор'
     member: 'Член'
   details:
-    add_project: 'кликни за да го додадеш проектот'
     add: 'Додај'
     showMore: 'прикажи повеќе'
-    showLess: 'прикажи помалку'
     are_you_sure: 'Дали си сигурен?'
     no_way_of_return: 'Ова не може да се врати.'
     delete_it: 'Избриши'
-    remove_project: 'Отстрани од студиото'
     remove_project_error: 'Отстранувањето на проектот од студиото не успеа.'
-    remove_project_success: 'Проектот е успешно отстранет од студиото.'
     no_projects: 'Студиото сè уште не содржи проекти.'
     projects:
       title: 'Проекти'
@@ -1135,10 +817,8 @@ studio:
       no_projects_empty_state: 'Сè уште немаш проекти за додавање. Прво создај еден во Pocket Code!'
       add_selected: 'Додај избрани'
     no_available_projects: 'Нема достапни проекти за додавање.'
-    updateCoverError: 'Нешто тргна наопаку при ажурирањето на насловната слика на студиото.'
     join: 'Приклучи се'
     leave: 'Напушти'
-    report: 'Пријави'
     pending: 'Во тек'
     decline: 'Одбиено'
     comments:
@@ -1158,7 +838,6 @@ studio:
       add_comment: '%user% остави коментар.'
     members_list:
       title: 'Членови на студиото'
-      project_count: '{0} Нема проекти во студиото |{1} 1 проект во студиото |]1,Inf] %count% проекти во студиото'
       no_studio_projects: 'Нема проекти во студиото'
       one_studio_project: '1 проект во студиото'
       n_studio_projects: '%count% проекти во студиото'
@@ -1168,7 +847,6 @@ studio:
       ban_failed: 'Нешто тргна наопаку при забраната на овој член. Обиди се повторно подоцна.'
       demote_member: 'Врати го администраторот во член'
       demotion_failed: 'Нешто тргна наопаку при враќањето на овој администратор во член. Обиди се повторно подоцна.'
-      last_admin: 'Последниот администратор на ова студио не може да се врати во член.'
     join_requests:
       title: 'Барања за приклучување'
       accept: 'Прифати'
@@ -1198,7 +876,6 @@ media_library:
   no_results: 'Не се пронајдени резултати.'
   assets_count: 'ресурси'
   view_all: 'Види ги сите'
-  view_all_category: 'Види ги сите %category%'
   back_to_app: 'Назад во апликацијата'
 snackbar:
   project_not_found: 'Бараниот проект не е достапен'
@@ -1252,14 +929,6 @@ moderation:
     rate_limited: 'Извршуваш дејства во студиото пребрзо. Почекај малку.'
   hidden_notice:
     project: 'Овој проект е скриен поради пријави од заедницата.'
-    comment: 'Овој коментар е скриен поради пријави од заедницата.'
-    user: 'Овој профил е скриен поради пријави од заедницата.'
     user_own: 'Твојата сметка е суспендирана поради пријави од заедницата. Можеш да поднесеш жалба на оваа одлука.'
-    studio: 'Ова студио е скриено поради пријави од заедницата.'
-  notification:
-    content_hidden: 'Твоето (%content_type%) е скриено поради пријави од заедницата. Можеш да поднесеш жалба на оваа одлука.'
-    appeal_approved: 'Твојата жалба е одобрена. Твојата содржина повторно е видлива.'
-    appeal_rejected: 'Твојата жалба е разгледана и одлуката за скривање на твојата содржина останува.'
-    admin_review_needed: 'Содржината е автоматски скриена и бара преглед.'
 Reports: 'Пријави'
 members: 'членови'

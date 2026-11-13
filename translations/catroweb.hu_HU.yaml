@@ -8,19 +8,12 @@ meta.og.description.login: 'Jelentkezz be, és oszd meg Catrobat-projektjeidet a
 meta.og.title.register: 'Catrobat-fiók létrehozása'
 meta.og.description.register: 'Csatlakozz a Catrobat közösséghez, és kezdd el még ma megosztani kreatív projektjeidet.'
 meta.og.description.profile: '%username% a Catrobaton – böngészd a projektjeit és eredményeit.'
-localLanguage: Angol
 username: Felhasználónév
 password: Jelszó
-createNewPassword: 'Új jelszó létrehozása'
-accountSettings: 'Fiókbeállítások'
 email: E-mail
-aboutPocketCode: A Pocket Code-ról
 about: A Catrobatról
-education: 'Oktatás'
 chat: 'Csevegés és fórumok'
-privacyGuide: 'Adatvédelmi útmutató'
 others: 'Egyéb'
-tutorials: Súgó
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: 'Hogyan készítetted ezt a projektet? Használtál 
 projectImportedFromScratch: 'Ezt a projektet az MIT Scratchből importálták. Az eredeti projektet megnézheted'
 scratchImportedProjectLinkHere: 'itt.'
 country: Ország
-loginText: bejelentkezés
 privacyPolicy: Adatvédelem
-imprint: Impresszum
 projectDetails: Részletek
 somethingWentWrong: 'Hoppá, hiba történt.'
 accountNotVerified: 'Győződj meg róla, hogy be vagy jelentkezve, és a fiókod e-mail-címe meg van erősítve.'
@@ -55,36 +46,28 @@ accountSuspended: 'A fiókodat közösségi bejelentések miatt felfüggesztett�
 doesNotExist: 'A kért erőforrás nem létezik.'
 pleaseTryAgain: 'Kérlek, próbáld újra!'
 tryAgainButton: 'Próbáld újra'
-oldVersionError: 'Kérlek, frissíts a Pocket Code legújabb verziójára!'
 more: 'több'
 less: 'kevesebb'
 show-more: 'Több mutatása'
-show-less: 'Kevesebb mutatása'
 more-information: 'További információ'
 less-information: 'Kevesebb információ'
 ok: 'Értem'
-clickToDownloadProgram: 'A példaprojekt letöltéséhez kattints %link_start% ide %link_end%.'
-registrationError: 'A felhasználónév vagy az e-mail-cím már foglalt.'
 notifications: 'Értesítések'
 allNotifications: 'Mind'
 FollowersNotifications: 'Követők'
 LikeNotifications: 'Reakciók'
 CommentNotifications: 'Hozzászólások'
 RemixNotifications: 'Remixek'
-wellDone: 'Szép munka!'
 done: 'Kész!'
 notificationsReadMessage: 'Úgy tűnik, nincsenek értesítéseid.'
-confirmMessage: 'Igen, töröld'
 cancelMessage: "Mégse"
 notificationsUnauthorizedError: 'A felhasználó nem hitelesíthető'
 notificationsClearError: 'Nem sikerült olvasottnak jelölni az értesítéseket!'
-pleaseWait: 'Kérlek, várj...'
 projects: 'Projektek'
 users: 'Felhasználó'
 studios: 'Stúdiók'
 oauthPopUpTitle: 'Információ a külső fiókkal való bejelentkezésről'
 oauthInfo: 'Most külső fiókkal jelentkeztél be. Létrehoztunk neked egy véletlenszerű felhasználónevet. Ha módosítani szeretnéd a felhasználóneved, vagy új jelszót szeretnél létrehozni a fiókodhoz, látogass el a profiloldaladra.'
-oauthHere: 'itt'
 statistics: 'Statisztikák'
 languageSelection: 'Nyelvválasztás'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Sötét'
   dark_description: 'Sötét megjelenés'
   apply: 'Alkalmaz'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Milyen projekteket ajánlunk itt?'
-      description: 'Minél több reakciót (Tetszik, Mosoly ...) kap a projekted, annál előrébb jelenik meg ebben a listában.'
 follower:
   follows: 'Követettek'
   followers: 'Követők'
   follow: 'Követés'
-  username: 'Felhasználó'
   followsMe: 'Követ engem'
   noFollowing: 'Jelenleg senkit sem követsz.'
   noFollowers: 'Jelenleg nincsenek követőid.'
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: 'Biztosan nem szeretnéd tovább követni ezt a felhasználót?'
   unfollowButton: '%username% követésének leállítása'
 project:
-  welcome:
-    title: 'Üdvözöl a Catrobat %theme%!'
-    title_mindstorms: 'Üdvözöl a Catrobat Mindstorms EV3 és NXT oldala'
-    subtitle: 'Készíts történeteket, játékokat és még sok mást...'
-    subtitle_embroidery: 'Hímezd saját mintáidat pólóra, táskára, nadrágra vagy telefontokra!'
-    subtitle_mindstorms: 'Készíts saját projekteket Lego Mindstorms EV3 és NXT robotjaidhoz'
-    download: 'Töltsd le az alkalmazást'
-    statistics: 'További statisztikák'
   featured: 'Kiemelt'
   open: Megnyitás 
   download: Letöltés
@@ -148,9 +117,6 @@ project:
       retention: 'A feltöltött projekteket egy idő utáni inaktivitás esetén automatikusan eltávolítjuk. Jelentkezz be rendszeresen, vagy gyűjts letöltéseket a projektedre, hogy tovább megmaradjon.'
       protection: 'A különösen jó vagy népszerű projekteket a moderátorok megvédhetik az automatikus törléstől.'
   example: 'Példák'
-  newest: 'Legújabb projektek'
-  recommended: 'Ajánlott projektek'
-  scratchremixes: 'Scratch-remixek'
   noProjects: 'Jelenleg nincsenek projektek.'
   shareAction: 'Megosztás'
   deleteAction: 'Projekt törlése'
@@ -190,17 +156,10 @@ project:
     Ezt a műveletet nem lehet visszavonni!
     Igen, töröld!
     Mégse
-  tooLongName: 'A projekt neve túl hosszú!'
-  tooLongDescription: 'A projekt leírása túl hosszú!'
-  tooLongCredits: 'A projekt jegyzetei és köszönetnyilvánításai túl hosszúak!'
   my_projects: 'Megosztott projektjeim'
   trending: 'Felkapott projektek'
   popular: 'Népszerű projektek'
-  most:
-    viewed: Legnézettebb
-    downloaded: Legtöbbször letöltött
   random: 'Véletlenszerű projektek'
-  related: 'Kapcsolódó projektek'
   browse:
     explore: 'Projektek felfedezése'
     no_projects: 'Még nem készítettél egyetlen projektet sem'
@@ -214,36 +173,14 @@ project:
     tooltip: 'A projekteket egy idő utáni inaktivitás esetén automatikusan eltávolítjuk. Gyűjts több letöltést, vagy jelentkezz be rendszeresen, hogy tovább megmaradjon.'
     tooltip_protected: 'Ez a projekt védett, és nem törlődik automatikusan.'
   downloads: '%downloads% letöltés'
-  sample: 'Példaprojektek'
   views: '%views% megtekintés'
   likes:
     likersTitle: 'Akik reagáltak erre a projektre'
     all: "Mind"
-  remixes: '{0}0 remix |{1}1 remix |]1,Inf]%remixes% remix'
-  newRemixesNotificationTitle: '|{1}A(z) „%programName%” projektnek 1 új remixe van: |]1,Inf] A(z) „%programName%” projektnek %remixes% új remixe van:'
-  submitted: 'Beküldött projektek'
-  uploaded: 'Feltöltött projektek'
-  reportAsInappropriate: 'Jelentés nem megfelelőként'
-  reportProgram: 'Projekt jelentése'
   languageVersion: 'Catrobat nyelvi verzió: %languageVersion%'
-  reportLoginText: 'A projekt jelentéséhez %login%.'
-  reportDialogHeader: 'Miért szeretnéd jelenteni ezt a projektet?'
-  reportDialogReason: 'Add meg az okát'
-  reportRadioButtonInappropriate: 'Nem megfelelő'
-  reportRadioButtonCopyright: 'Szerzői jogsértés'
-  reportRadioButtonSpam: 'Spam'
-  reportRadioButtonDislike: 'Nem tetszik'
-  reportOwnProgram: 'A saját projektedet nem jelentheted.'
-  reportAlready: 'Ezt a projektet már jelentetted.'
-  reportDone: 'Jelentetted ezt a projektet!'
   updateAppHeaderDownload: 'A letöltés nem lehetséges'
   updateAppTextDownload: 'Frissítsd az alkalmazásodat a legújabb verzióra. Vedd figyelembe, hogy nem minden Android-funkció érhető el már iOS-en.'
-  updateAppTextDownloadApk: 'Az APK-letöltés jelenleg csak Androidon érhető el, iOS-en nem.'
-  updateAppHeader: 'Alkalmazás frissítése'
-  updateAppText: 'Frissítsd az alkalmazásodat a legújabb verzióra.'
-  btnClosePopup: Ok
   checkout_this_project: 'Nézd meg ezt a Catrobat-projektet'
-  show_more: 'Több mutatása'
   comments: 'Hozzászólások'
   send: 'Küldés'
   delete: Törlés
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: 'Törölve'
   noAdminRights: 'Nincs adminisztrátori jogosultságod. Jelentkezz be adminisztrátorként.'
   editProject: 'Projekt szerkesztése'
-  closeProjectEditor: 'Projektszerkesztő bezárása'
   closeEditorPrompt: Szeretnéd menteni a módosításokat?
   btnDiscard: Elvetés
   addComment: 'Írj hozzászólást'
@@ -263,8 +199,6 @@ project:
   smile: 'Mosoly!'
   love: 'Imádom!'
   wow: 'Hűha!'
-  linkTitle: 'Link'
-  link: 'Projektlink másolása a vágólapra'
   reactionsText: 'Reakciók'
   downloadErrorText: 'Hiba történt a projekt letöltése közben. Próbáld újra később.'
   downloadStartText: 'A letöltés elkezdődött...'
@@ -284,11 +218,8 @@ project:
   translations: 'Fordítások'
   createTranslation: 'Fordítás létrehozása'
   deletedComment: '**Törölve**'
-  replyLabel: 'válasz'
-  repliesLabel: 'válasz'
   notForKids: 'Gyerekeknek nem való'
 remixGraph:
-  title: 'Remixek'
   showRemixGraph: 'Remixgráf'
   by: 'készítette:'
   open: 'Megnyitás '
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Nem érhető el'
   projectUnknownUser: 'Ismeretlen felhasználó'
 noReply: 'Ez egy automatikus üzenet – kérjük, ne válaszolj közvetlenül erre az e-mailre.'
-accountConfirmation:
-  subject: 'Catrobat-fiókod megerősítése'
-  message: |
-    Kedves %username%!
-    A fiókod aktiválásának befejezéséhez látogass el ide: %confirmationUrl%
-    Ez a link csak egyszer használható a fiókod megerősítésére.
-    Üdvözlettel:
-    a Catrobat csapata
-  messageHtml: |
-    <p>
-    Kedves %username%!<br>
-    <br>
-    A fiókod aktiválásának befejezéséhez kattints <a href="%confirmationUrl%">ide.</a><br>
-    Ez a link csak egyszer használható a fiókod megerősítésére.<br>
-    <br>
-    Üdvözlettel:<br>
-    a Catrobat csapata
-    </p>
 newAccountConfirmation:
   subject: 'Erősítsd meg az e-mail-címed'
   welcome: 'Üdv a Catrobaton!'
@@ -403,63 +316,13 @@ parent:
       ignore: 'Ha nem te kérted ezt, nyugodtan figyelmen kívül hagyhatod ezt az e-mailt.'
 passwordRecovery:
   subject: Catrobat jelszó emlékeztető
-  message: |
-    Kedves %username%!
-    Jelszó-visszaállítást kértél a(z) %appplication_url% oldalon, mert elfelejtetted a jelszavadat.
-    Ha nem te kérted, hagyd figyelmen kívül ezt az üzenetet. A kérés 24 óra múlva lejár és érvénytelenné válik.
-    A jelszavad visszaállításához és egy új létrehozásához látogass el a következő oldalra: %confirmationUrl%
-    A felhasználóneveddel és a jelszavaddal bármikor beléphetsz a(z) %appplication_url% közösségbe.
-    Ehhez egyszerűen látogass el a következő oldalra: %loginPage%
-    A profiladataid szerkesztéséhez látogass el erre az oldalra: %profilePage%
-    Üdvözlettel:
-    a Catrobat csapata
-  messageHtml: |
-    <p>
-    Kedves %username%!<br>
-    <br>
-    Jelszó-visszaállítást kértél a <a href="%appplication_url%">Pocket Code</a> oldalon, mert elfelejtetted a jelszavadat.
-    Ha nem te kérted, hagyd figyelmen kívül ezt az üzenetet. A kérés 24 óra múlva lejár és érvénytelenné válik.<br>
-    <br>
-    A jelszavad visszaállításához és egy új létrehozásához kattints <a href="%confirmationUrl%">ide.</a><br>
-    <br>
-    A felhasználóneveddel és a jelszavaddal bármikor beléphetsz a <a href="%appplication_url%">Pocket Code</a> közösségbe.<br>
-    Ehhez egyszerűen látogass el a következő oldalra: <a href="%loginPage%">Bejelentkezési oldal</a><br>
-    A profiladataid szerkesztéséhez látogass el erre az <a href="%profilePage%">oldalra</a>.<br>
-    <br>
-    Üdvözlettel:<br>
-    a Catrobat csapata
-    </p>
 profile:
   aboutMe: 'Rólam'
   currentlyWorkingOn: 'Jelenleg ezen dolgozom'
-  edit: 'Profil szerkesztése'
-  saveChanges: módosítások mentése
   newPass: Új jelszó
   repeatPass: 'jelszó megismétlése'
   oldPass: 'régi jelszó'
-  firstEmail: Első e-mailem
-  secondEmail: Második e-mailem
-  myPrograms: 'Projektjeim'
-  follows: 'Követettek'
-  follower: 'Követő'
-  unfollowUser: 'Követés leállítása!'
-  followUser: 'Kövesd ezt a felhasználót!'
-  amountOfPrograms: 'Projektek száma'
-  form:
-    passwordTooShort: 'Az új jelszónak legalább %length% karakterből kell állnia.'
-    passwordTooLong: 'Az új jelszó legfeljebb %length% karakterből állhat.'
-    passwordIsUsername: 'A jelszó nem egyezhet meg a felhasználónévvel.'
-    passwordWrong: 'Hibás jelszó'
-    emailNotValid: 'Ez az e-mail-cím érvénytelen.'
-    emailMissing: 'Hiba az e-mail-cím mentése közben. Legalább egy megerősített e-mail-címmel rendelkezned kell.'
-    emailExists: Ez az e-mail cím már létezik.
-    usernameNotValid: 'Ez a felhasználónév érvénytelen.'
-    usernameMissing: 'Meg kell adnod egy felhasználónevet.'
-    usernameExists: 'Ez a felhasználónév már létezik.'
-    usernameContainsEmail: 'A felhasználónév nem tartalmazhat e-mail-címet.'
-    submitSuccess: mentve!
   reallyDeleteProgram: 'Biztosan törölni szeretnéd a projektedet'
-  programsOf: 'Projektjei:'
   picture: 'Profilkép'
   changePicture: Kép módosítása
   goToScratchProfile: 'Profil a Scratchen'
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: Jelszó módosítása
   accountSettings: 'Fiókbeállítások'
   accountVerification: 'Fiók megerősítése'
-  account: 'Fiók'
-  editProfile: 'Profil szerkesztése'
-  edit: Szerkesztés
   done: Kész
-  checkMail: 'Küldtünk egy e-mailt az e-mail-címedre. Nézd meg a postafiókodat.'
   passwordUpdated: 'A jelszavad sikeresen frissült.'
-  avatar: 'Profilkép'
-  email: E-mail
   deleteAccount: 'Fiók törlése'
   deleteAccountWarning: |
     Figyelem:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: 'Letöltés...'
   exportDataError: 'Hiba történt az adataid exportálása közben. Próbáld újra később.'
   exportDataRateLimited: 'Az adataidat naponta csak egyszer exportálhatod. Próbáld újra holnap.'
-  editAccountSettings: 'Fiókbeállítások szerkesztése'
   profileChangeSuccess: 'A profilod sikeresen módosult.'
   unspecifiedError: 'Valami nem sikerült a profilod módosítása közben. Próbáld újra, vagy szólj nekünk, ha továbbra is előfordul!'
   verifyAccountText: 'Küldünk neked egy e-mailt egy linkkel a fiókod megerősítéséhez. A következő egy órán belül kattints a linkre – naponta csak egy e-mailt kérhetsz.'
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'A felhasználási feltételekkel kapcsolatos javaslataidat küldd el ide: %email-webmaster%.'
   version: '1.3-as verzió, 2014. március 4.'
 search:
-  dotdotdot: Keresés...
   search: 'Projektek, felhasználók és stúdiók keresése'
   inMediaLib: 'Keresés a médiatárban'
   inMediaCategory: 'Keresés a médiakategóriában'
   results: Keresés eredménye
-  resultcount: A keresés %count% eredményt adott
-  fail: 'Adj meg legalább egy keresőkifejezést'
   noUsers: 'Nem található felhasználó'
   noProjects: 'Nem található projekt'
   noStudios: 'Nem található stúdió'
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: 'Médiatár'
   studio: 'Stúdiók'
   language: Nyelv
-  languageOptionsNotAvailable: 'Nincsenek elérhető nyelvi beállítások.'
 login:
   login: Bejelentkezés
   button:
@@ -578,21 +430,10 @@ login:
     or: "vagy"
   passOrUser: 'A jelszó vagy a felhasználónév helytelen.'
   accountSuspended: 'A fiókodat felfüggesztettük. Ha úgy gondolod, hogy ez tévedés, fordulj az ügyfélszolgálathoz.'
-  noUsername: 'A felhasználónév vagy az e-mail-cím nem található.'
-  forgotPass: 'Elfelejtetted a jelszavad vagy a felhasználóneved?'
   recoverPassSend: 'Küldtünk egy e-mailt az e-mail-címedre. Nézd meg a postafiókodat.'
   alreadyReset: 'Ennek a felhasználónak a jelszavát az elmúlt 24 órában már kérték.'
-  confirmationSend: 'A regisztrációd megerősítéséhez e-mailt küldtünk az e-mail-címedre. Nézd meg a postafiókodat, és aktiváld a fiókodat.'
-  userOrEmail: Felhasználónév vagy e-mail
-  changePass: Jelszó módosítása
-  createAccount: 'Fiók létrehozása'
-  noAccount: 'Még nincs fiókod?'
-  alreadyAccount: 'Már van fiókod?'
-  or: VAGY
   username: Felhasználónév
   email: E-mail
-  passwordFirst: Jelszó
-  passwordSecond: 'Jelszó megerősítése'
 register:
   title: 'Regisztráció'
   subText: 'A folytatással Catrobat közösségi fiókot hozol létre, és elfogadod a következőket: %var1% és %var2%.'
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: 'A szülői beleegyezést visszavonták'
     message: 'A szülőd vagy gondviselőd visszavonta a fiókodra vonatkozó beleegyezést. A fiókod csak korlátozottan használható, amíg a beleegyezést újra meg nem adják.'
-    newEmailPlaceholder: 'Új szülői e-mail-cím'
-    changeButton: 'Frissítés és újraküldés'
-accountRecovery:
-  title: 'Fiók helyreállítása'
-  description: 'Ha emlékszel a fiókod e-mail-címére vagy felhasználónevére, küldhetünk egy linket a jelszavad visszaállításához.'
-  button:
-    cancel: Mégse
-    submit: 'Jelszó helyreállítása'
 resetPassword:
   request:
     title: 'Jelszó visszaállítása'
@@ -645,11 +478,6 @@ resetPassword:
     description: 'Ha létezik az e-mail-címedhez tartozó fiók, most küldtünk egy e-mailt egy linkkel, amellyel visszaállíthatod a jelszavadat. Ez a link %time% múlva lejár.'
     descriptionTwo: '%throttleLimit% óránként kérhetsz új jelszó-visszaállítást.'
     descriptionThree: 'Ha nem kaptál e-mailt, nézd meg a spam mappát, vagy írj ügyfélszolgálatunknak ide: %email-webmaster%.'
-  email:
-    title: 'Szia!'
-    visitLink: 'A jelszavad visszaállításához látogass el a következő linkre'
-    expire: 'Ez a link %time% múlva lejár.'
-    cheers: 'Üdv!'
   newemail:
     title: 'Jelszó visszaállítása'
     content: 'Nemrég jelszó-visszaállítást kértél a Catrobat-fiókodhoz. Kattints az alábbi gombra egy új jelszó megadásához. Ha nem te kérted, nyugodtan figyelmen kívül hagyhatod ezt az e-mailt.'
@@ -659,76 +487,33 @@ resetPassword:
     title: 'Jelszó visszaállítása'
     button:
       submit: 'Jelszó visszaállítása'
-apk:
-  download: 'Letöltés alkalmazásként'
-  prepare: 'Alkalmazás kérése'
-  preparing: 'Alkalmazás előkészítése'
-  text: 'A folyamat eltarthat egy ideig'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'Valami nem sikerült. Próbáld újra, vagy szólj nekünk, ha továbbra is előfordul!'
-  username:
-    blank: A felhasználónév kitöltése kötelező
-    invalid: 'A felhasználóneved érvénytelen'
-    exists: 'Ez a felhasználónév már létezik.'
-    not_exists: 'Ez a felhasználónév nem létezik.'
-    not_email: 'A felhasználónév nem lehet e-mail-cím.'
-    size: 'A felhasználónévnek legalább 3, legfeljebb 180 karakterből kell állnia'
-  password:
-    blank: 'Hiányzik a jelszó.'
-    short: 'A jelszavadnak legalább {{ limit }} karakterből kell állnia.'
-  country:
-    blank: 'Hiányzik az ország.'
-    invalid: 'Érvénytelen ország'
-  email:
-    blank: 'Az e-mail-cím nem lehet üres'
-    invalid: A megadott e-mail cim érvénytelennek tűnik
-    exists: Ez az e-mail cím már létezik.
-  id:
-    blank: 'Az OAuth-azonosító nem lehet üres'
-  login: 'A jelszó vagy a felhasználónév helytelen.'
-  post-data: 'A POST-adatok hibásak vagy hiányoznak!'
-  checksum:
-    missing: 'Az alkalmazás nem küldte el a fileChecksum értéket! Lehet, hogy a Pocket Code egy régi verzióját használod?'
-    invalid: 'érvénytelen ellenőrzőösszeg'
   xml:
     invalid: 'érvénytelen kód-XML'
     missing: 'ismeretlen hiba: project_xml_not_found!'
   file:
-    unexpected: 'váratlan fájl található'
     invalid: 'érvénytelen fájl'
-  image.missing: 'A projekt XML-je olyan fájlra hivatkozik, amely nem létezik a projektmappában'
-  unknown: 'ismeretlen hiba'
-  token: 'Az eszköz hitelesítése nem sikerült: érvénytelen hitelesítési token!'
-  uploadTokenAuthFailed: 'A feltöltési token hitelesítése nem sikerült.'
-  project:
-    invalid: 'Érvénytelen projekt.'
   languageversion:
     tooold: 'Sajnáljuk, a projekted a Catrobat nyelv egy régi verzióját tartalmazza! A Pocket Code legújabb verzióját használod?'
   projectversion:
     tooold: 'Sajnáljuk, a Pocket Code egy régi verzióját használod. Frissíts a legújabb verzióra.'
   authentication:
-    title: 'A bejelentkezés nem sikerült'
     webview: |
       Úgy tűnik, a felhasználóneved vagy a jelszavad nem volt helyes.
       Próbálj meg újra bejelentkezni az alkalmazásban.
 success:
   text: 'Siker'
-  registration: Sikeres regisztráció!
-  token: ok
-  upload: A projekt sikeresen feltöltve!
   imgUpload: 'A képed sikeresen feltöltve!'
-  report: 'A jelentésedet sikeresen elküldtük!'
 time:
   minutes.ago: '{0} < 1 perccel ezelőtt |{1}1 perccel ezelőtt |]1,Inf] %count% perccel ezelőtt'
   hours.ago: '{1}1 órája |]1,Inf] %count% órája'
   days.ago: '{1}1 napja|]1,Inf] %count% napja'
   months.ago: '{1}1 hónapja |]1,Inf] %count% hónapja'
   years.ago: '{1}1 éve |]1,Inf] több, mint egy éve'
-failure:
-  upload: 'Hiba történt az alkalmazásod feltöltése közben.'
 user:
   verification:
     email: 'Erősítsd meg az e-mail-címed'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'A jelszó érvénytelen karaktereket tartalmaz'
     usernameContainsEmail: 'A felhasználónév nem tartalmazhat e-mail-címet'
     usernameContainsLink: 'A felhasználónév nem tartalmazhat linket'
-    countryCodeInvalid: 'Érvénytelen országkód'
     pictureInvalid: 'A profilkép érvénytelen vagy nem támogatott'
     dateOfBirthMissing: 'A születési dátum megadása kötelező'
     dateOfBirthInvalid: 'A születési dátum érvénytelen'
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'A név már foglalt'
     descriptionMissing: 'Hiányzik a leírás'
     descriptionEmpty: 'A leírás üres'
-    descriptionTooShort: 'A leírás túl rövid'
     descriptionTooLong: 'A leírás túl hosszú'
     imageFileInvalid: 'Érvénytelen képfájl'
     imageFileInvalidType: 'Érvénytelen képfájltípus'
     imageFileTooLarge: 'A képfájl túl nagy'
-#languages and countries
-language:
-  arabic: Arab
-  bulgarian: Bolgár
-  catalan: Katalán
-  chinese_simplified_han: Kínai (egyszerűsített Han)
-  chinese_traditional_han: Kínai (hagyományos Han)
-  croatian: Horvát
-  czech: Cseh
-  danish: Dán
-  dutch: Holland
-  english_united_kingdom: Angol (Egyesült Királyság)
-  english_united_states: Angol (Egyesült Államok)
-  estonian: Észt
-  filipino: 'Filippínó'
-  finnish: Finn
-  french: 'Francia'
-  german: Német
-  greek: Görög
-  hebrew: Héber
-  hindi: 'Hindi'
-  hungarian: Magyar
-  indonesian: Indonéz
-  italian: Olasz
-  japanese: Japán
-  korean: Koreai
-  latvian: Lett
-  lithuanian: Litván
-  malay: Maláj
-  norwegian: Norvég
-  persian: Perzsa
-  polish: Lengyel
-  portuguese_brazil: Portugál (Brazil)
-  portuguese_portugal: Portugál (portugáliai)
-  romanian: Román
-  russian: Orosz
-  serbian: Szerb
-  slovak: Szlovák
-  slovenian: 'Szlovén'
-  spanish_latin_america: Spanyol (Latin-Amerika)
-  spanish_spain: Spanyol (spanyolországi)
-  swedish: Svéd
-  thai: 'Thai'
-  turkish: Török
-  ukrainian: Ukrán
-  vietnamese: Vietnámi
-ci:
-  generate: 'APK létrehozása'
-  pending: 'APK létrehozása folyamatban'
-  download: 'APK letöltése'
+
 admin:
   maintain:
     diskMaintenance: 'Lemezkarbantartás'
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: 'Nincsenek eltávolítható objektumok.'
     removableObjects: 'Eltávolítható objektumok'
 recommender:
-  similarPrograms: 'Hasonló projektek'
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Akik letöltötték ezt a projektet, ezeket is letöltötték'
   moreFromThisUser: 'Továbbiak tőle: %username%'
-pmd:
-  submitBtn: 'Projekt beküldése'
-  submitBox:
-    header: 'Beküldés'
-    text: 'Mindjárt beküldöd a projektedet. Add meg a projektkódot, és kattints a küldésre.'
-    btnText: 'Beküldés'
-  successful:
-    text: 'A projekted sikeresen feltöltve.'
-  failed:
-    text: 'A projekt feltöltése nem sikerült.'
 codeview:
   title: 'Kódnézet'
-  showCode: 'Kód megjelenítése'
-  hideCode: 'Kód elrejtése'
-  showStatistics: 'Kódstatisztika megjelenítése'
-  hideStatistics: 'Kódstatisztika elrejtése'
-  cantDisplayCode: 'A kód nem jeleníthető meg'
-  cantDisplayStatistics: 'A kód nem jeleníthető meg'
-  totalNumberOf: 'Összesen'
-  scenes: 'Jelenetek'
-  scripts: 'Szkript'
-  bricks: 'Építőelemek'
-  objects: 'Szereplők és objektumok'
-  looks: 'Kinézetek'
-  sounds: 'Hangok'
-  globals: 'Globálisak'
-  locals: 'Lokálisak'
-  globalVariables: 'Globális változók'
-  localVariables: 'Lokális változók'
-  eventBricks: 'Eseményblokkok'
-  controlBricks: 'Vezérlőblokkok'
-  motionBricks: 'Mozgásblokkok'
-  soundBricks: 'Hangblokkok'
-  looksBricks: 'Kinézetblokkok'
-  penBricks: 'Tollblokkok'
-  dataBricks: 'Adatblokkok'
-  specialBricks: 'Speciális blokkok'
 codeView:
   title: 'Kódnézet'
   loading: 'Kódnézet betöltése...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: 'Kódstatisztika'
   error: 'A kódstatisztika nem jeleníthető meg.'
-  general: 'Általános'
-  bricks: 'Építőelemek'
-  eventBricks: 'Esemény'
-  controlBricks: 'Vezérlés'
-  motionBricks: 'Mozgás'
-  soundBricks: 'Hang'
-  looksBricks: 'Kinézetek'
-  penBricks: 'Toll'
-  dataBricks: 'Adatok'
-  deviceBricks: 'Eszköz'
-  specialBricks: 'Speciális'
   yourScore: 'Pontszámod:'
-  points: 'pont'
   abstraction: 'Absztrakció és problémafelbontás'
   parallelism: 'Párhuzamosság'
   logicalThinking: 'Logikus gondolkodás'
@@ -927,20 +612,7 @@ footer:
   text: 'Már %project_count% csodás projektet osztottak meg – a következő lehet a tiéd. Töltsd le az alkalmazásunkat, és kezdj el alkotni még ma'
 privacy-policy:
   header: 'Adatvédelmi irányelvek'
-  version: '2.2-es verzió, 2019. október 17.'
-  text1: 'Ahhoz, hogy szolgáltatásaink és a hozzájuk tartozó fiók minden előnyét kínálhassuk neked, bizonyos adatokat kell gyűjtenünk rólad.'
-  text2: 'Szolgáltatásaink (alkalmazások és weboldalak) fenntartásához és fejlesztéséhez, valamint az IKT- és STEM/STEAM-oktatással kapcsolatos tudományos kutatáshoz a Google LLC (USA) által nyújtott Google Analytics, Crashlytics és Firebase szolgáltatásokat, valamint a Dynatrace LLC (USA) Dynatrace szolgáltatását használjuk, hogy metaadatokat kapjunk szolgáltatásaink használatáról, például összeomlási információkat, időbélyegeket, meglátogatott oldalakat/képernyőket, alkalmazásaink és szolgáltatásaink használatát, a használt operációs rendszert és a hálózati szolgáltatóra vonatkozó információkat. Ez az elemzés és az összegyűjtött adatok nincsenek a profilodhoz kapcsolva, és nem tartalmaznak személyes adatokat (az IP-cím utolsó bitjeit anonimizáljuk). Az összegyűjtött adatokat azonban továbbítjuk a szolgáltatóknak (Google LLC, USA és Dynatrace LLC, USA). Az adatkezelés a Google LLC-vel és a Dynatrace LLC-vel kötött megállapodásokon alapul. A szolgáltatókkal fennálló kapcsolat megfelel az Európai Unió általános adatvédelmi rendeletének (EU GDPR) és az EU–USA „Privacy Shield” megállapodásnak.'
-  text3: 'Ahhoz, hogy fiókot hozhass létre és használhass rendszereinkben, és hogy e-mailben tájékoztathassunk a fiókodat érintő szükséges változásokról, például frissítésekről vagy a felhasználási és szolgáltatási feltételeink, közösségi szabályaink vagy irányelveink megsértéséről, tároljuk a felhasználónevedet és – ha megadtad – az e-mail-címedet. Ha a fiókodat Google Plus vagy Facebook segítségével kapcsoltad össze, ezenkívül egy, az ezeken a szolgáltatásokon lévő fiókodhoz kapcsolódó azonosító kulcsot is tárolunk. Ezeket az adatokat semmilyen más (például marketing) célra nem használjuk, hacsak kifejezetten meg nem engedted.'
-  text4: 'Önkéntes alapon a megosztó oldal fiókoldalán megadhatod a lakóhelyed szerinti országot. Ez megjelenik a nyilvános profilodon, és csak statisztikai és kutatási célokra használjuk. A profilbeállításaidban bármikor eltávolíthatod.'
-  text5: 'A fiókodhoz tartozó személyes adatok használatát bármikor visszavonhatod, ha a https://share.catrobat.org/ oldalon a profiloldaladon törlöd a fiókodat. A fiókod törlése után továbbra is használhatod a nyújtott szolgáltatásokat, de együttműködni – például programokat feltölteni, hozzászólni vagy kedvelni – már nem. Emellett a fiókodhoz kapcsolódó minden tartalom, például a feltöltött programok, hozzászólások stb. is törlődik.'
-  text6: 'Szolgáltatásaink visszaélésszerű használatának – például a felhasználók által illegális célokra feltöltött tartalmaknak vagy hozzászólásoknak – megelőzése érdekében minden, felhasználók által létrehozott nyilvános adatot (feltöltések, hozzászólások) belsőleg egy adatbázisban tárolunk, időbélyeggel és a használt internetcímmel együtt. Ezeket az adatokat semmilyen intézmény nem használja, és nem továbbítjuk nekik, kivéve, ha kellően megalapozottan illegális cselekmény gyanúja áll fenn, és hivatalosan felhatalmazott jogi intézmények az alkalmazandó jog alapján kérik. Minden esetet először egyenként alaposan megvizsgálunk.'
-  text7: 'Önkéntesen feliratkozhatsz a Catrobat hírlevelére a https://catrobat.org/newsletter oldalon, amelyet a MailChimp szolgáltatáson (The Rocket Science Group LLC d/b/a MailChimp, USA) keresztül nyújtunk. Ezután a megadott e-mail-címedre hírt kapsz a Catrobat projektről és szolgáltatásairól. A hírlevélről bármikor leiratkozhatsz az egyes hírlevelek alján található „leiratkozás” linkkel. A hírlevelet a MailChimp nyújtja, amellyel adatfeldolgozási megállapodásunk van, és amely elkötelezte magát az EU általános adatvédelmi rendelete és az EU–USA „Privacy Shield” mellett. A MailChimppel kapcsolatos további részletekért tekintsd meg a MailChimp adatvédelmi irányelveit és felhasználási feltételeit is.'
-  text8: 'Minden szolgáltatást a szabad, nyílt forráskódú Catrobat projekt nyújt az International Catrobat Association – Verein zur Förderung freier Software égisze alatt, amely egy Grazban (Ausztria, Európai Unió) bejegyzett nonprofit civil szervezet. Irányelveink tiszteletben tartják az uniós és az osztrák adatvédelmi jogot (GDPR). Ha kapcsolatba szeretnél lépni velünk, írj e-mailt a contact@catrobat.org címre, vagy postai levelet ide: Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Ausztria (Európai Unió).'
-  text9: 'Ha 14 évesnél fiatalabb vagy, ezeket az irányelveket egy törvényes gondviselőnek (általában a szülődnek) kell elfogadnia.'
-  text10: 'A Catrobat hivatalos angol nyelvű adatvédelmi irányelvei itt érhetők el: %privacy_policy%.'
-  disagree-text: 'Beleegyezés nélkül nem tudunk fiókot létrehozni, de az alapfunkciók továbbra is elérhetők.'
 catro-notifications:
-  markAsRead: 'Megjelölés olvasottként'
   noFollowers: 'Úgy tűnik, nincsenek követőkkel kapcsolatos értesítéseid.'
   noComments: 'Úgy tűnik, nincsenek hozzászólásokkal kapcsolatos értesítéseid.'
   noReactions: 'Úgy tűnik, nincsenek reakciókkal kapcsolatos értesítéseid.'
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: 'Link a vágólapra másolva!'
   success_project: 'A projekt linkje a vágólapra másolva!'
-  success_user: 'A felhasználó linkje a vágólapra másolva!'
   fail: 'Nem sikerült a linket a vágólapra másolni! :('
 next: Következő
 previous: 'Előző'
 media-packages:
   title: 'Médiatár'
   description: 'Az alábbi kategóriákban szereplőket és objektumokat találsz, amelyeket hozzáadhatsz a projektjeidhez.'
-  thumb-size:
-    description: 'Előnézet mérete'
-    sm: 'kicsi'
-    md: 'közepes'
-    lg: 'nagy'
   theme-special: '%flavor% téma különlegességei'
   search-results: 'Médiatár keresési találatai'
-  no-results: 'A keresés 0 találatot adott. Csak angol keresőkifejezéseket használj.'
-  download_these_files: 'mentés'
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Minden jog fenntartva.'
 noscript:
   warning: 'Ennek a weboldalnak JavaScriptre van szüksége a működéshez. Kapcsold be a JavaScriptet a böngésződben, vagy kérj meg egy felnőttet, hogy segítsen.'
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: "Elutasítás"
   privacy-link: "Adatvédelem"
   settings-link: 'Sütibeállítások'
-agree: 'Elfogadom'
-disagree: 'Nem fogadom el'
-profileLoader:
-  noProfiles: 'Jelenleg nincsenek profilok.'
 element: 'Elem'
 elements: 'Elemek'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'Sikeres megosztás'
 copy: 'Link másolása'
 checkOutProject: 'Nézd meg ezt a projektet:'
-checkOutUser: 'Nézd meg ezt a felhasználót:'
 community: 'Catrobat közösség'
 back_to_app: 'Kilépés a közösségből'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Eredmények'
-    badge: 'új'
   overview:
     header: 'Eredmények'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: 'Többjátékos'
 studio:
   title: 'Stúdiók'
-  singular: 'Stúdió'
   create_studio: 'Stúdió létrehozása'
-  delete_studio: 'Stúdió törlése'
-  cancel_studio: 'Mégse'
   studio_name: 'Stúdió neve'
   studio_description: 'Stúdió leírása'
   is_public: 'Legyen nyilvános?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Kép eltávolítása'
   popular: 'Népszerű stúdiók'
   join: 'Csatlakozás'
-  leave: 'Kilépés'
-  report: 'Jelentés'
   public: 'nyilvános'
   private: 'Csak meghívással'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Adminisztrátor'
     member: 'Tag'
   details:
-    add_project: 'kattints a projekt hozzáadásához'
     add: 'Hozzáadás'
     showMore: 'több mutatása'
-    showLess: 'kevesebb mutatása'
     are_you_sure: 'Biztos vagy benne?'
     no_way_of_return: 'Ez nem vonható vissza.'
     delete_it: 'Törlés'
-    remove_project: 'Eltávolítás a stúdióból'
     remove_project_error: 'Nem sikerült eltávolítani a projektet a stúdióból.'
-    remove_project_success: 'A projektet sikeresen eltávolítottuk a stúdióból.'
     no_projects: 'A stúdióban még nincsenek projektek.'
     projects:
       title: 'Projektek'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Még nincs hozzáadható projekted. Előbb készíts egyet a Pocket Code-ban!'
       add_selected: 'Kiválasztottak hozzáadása'
     no_available_projects: 'Nincs hozzáadható projekt.'
-    updateCoverError: 'Hiba történt a stúdió borítóképének frissítése közben.'
     join: 'Csatlakozás'
     leave: 'Kilépés'
-    report: 'Jelentés'
     pending: 'Függőben'
     decline: 'Elutasítva'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% hozzászólt.'
     members_list:
       title: 'Stúdiótagok'
-      project_count: '{0} Nincs stúdióprojekt |{1} 1 stúdióprojekt |]1,Inf] %count% stúdióprojekt'
       no_studio_projects: 'Nincs stúdióprojekt'
       one_studio_project: '1 stúdióprojekt'
       n_studio_projects: '%count% stúdióprojekt'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'Hiba történt a tag kitiltása közben. Próbáld újra később.'
       demote_member: 'Adminisztrátor visszaminősítése taggá'
       demotion_failed: 'Hiba történt az adminisztrátor visszaminősítése közben. Próbáld újra később.'
-      last_admin: 'A stúdió utolsó adminisztrátora nem minősíthető vissza.'
     join_requests:
       title: 'Csatlakozási kérelmek'
       accept: 'Elfogadás'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'Nincs találat.'
   assets_count: 'elem'
   view_all: 'Összes megtekintése'
-  view_all_category: 'Összes megtekintése: %category%'
   back_to_app: 'Vissza az alkalmazásba'
 snackbar:
   project_not_found: 'A kért projekt nem érhető el'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: 'Túl gyorsan végzel stúdióműveleteket. Várj egy pillanatot.'
   hidden_notice:
     project: 'Ezt a projektet közösségi bejelentések miatt elrejtettük.'
-    comment: 'Ezt a hozzászólást közösségi bejelentések miatt elrejtettük.'
-    user: 'Ezt a profilt közösségi bejelentések miatt elrejtettük.'
     user_own: 'A fiókodat közösségi bejelentések miatt felfüggesztettük. A döntés ellen fellebbezhetsz.'
-    studio: 'Ezt a stúdiót közösségi bejelentések miatt elrejtettük.'
-  notification:
-    content_hidden: 'A(z) %content_type% tartalmadat közösségi bejelentések miatt elrejtettük. A döntés ellen fellebbezhetsz.'
-    appeal_approved: 'A fellebbezésedet elfogadtuk. A tartalmad ismét látható.'
-    appeal_rejected: 'A fellebbezésedet felülvizsgáltuk, és a tartalmad elrejtéséről szóló döntés érvényben marad.'
-    admin_review_needed: 'Egy tartalmat automatikusan elrejtettünk, felülvizsgálat szükséges.'
 Reports: 'Jelentések'
 members: 'tagok'

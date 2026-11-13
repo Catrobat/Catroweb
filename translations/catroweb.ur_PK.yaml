@@ -8,19 +8,12 @@ meta.og.description.login: سائن اِن کرو اور اپنے Catrobat پر�
 meta.og.title.register: Catrobat اکاؤنٹ بناؤ
 meta.og.description.register: Catrobat کمیونٹی میں شامل ہو جاؤ اور آج ہی اپنے تخلیقی پروجیکٹس شیئر کرنا شروع کرو۔
 meta.og.description.profile: Catrobat پر %username% – ان کے پروجیکٹس اور کامیابیاں دیکھو۔
-localLanguage: انگریزی
 username: صارف کا نام
 password: پاس ورڈ
-createNewPassword: نیا پاس ورڈ بناؤ
-accountSettings: اکاؤنٹ کی ترتیبات
 email: ای-میل
-aboutPocketCode: پاکٹ کوڈ کے بارے میں
 about: Catrobat کے بارے میں
-education: تعلیم
 chat: چیٹ اور فورم
-privacyGuide: پرائیویسی آگاہی گائیڈ
 others: دیگر
-tutorials: مدد
 googlePlay: Google Play Store
 iosAppStore: iOS ایپ اسٹور
 instagram: انسٹاگرام
@@ -45,9 +38,7 @@ notesAndCreditsDescription: تم نے یہ پروجیکٹ کیسے بنایا؟ 
 projectImportedFromScratch: یہ پروجیکٹ MIT Scratch سے درآمد کیا گیا ہے۔ تم اصل پروجیکٹ دیکھ سکتے ہو
 scratchImportedProjectLinkHere: یہاں۔
 country: ملک
-loginText: لاگ اِن
 privacyPolicy: پرائیویسی پالیسی
-imprint: قانونی معلومات
 projectDetails: تفصیلات
 somethingWentWrong: اوہو، کچھ کام نہیں کیا۔ براہ کرم دوبارہ کوشش کرو!
 accountNotVerified: براہ کرم یقینی بناؤ کہ تم لاگ اِن ہو اور تمہارے اکاؤنٹ کی ای میل کی تصدیق ہو چکی ہے۔
@@ -55,36 +46,28 @@ accountSuspended: کمیونٹی کی رپورٹس کی وجہ سے تمہارا
 doesNotExist: مطلوبہ چیز موجود نہیں ہے۔
 pleaseTryAgain: براہ کرم دوبارہ کوشش کرو!
 tryAgainButton: دوبارہ کوشش کرو
-oldVersionError: براہ کرم Pocket Code کو تازہ ترین ورژن پر اپ ڈیٹ کرو!
 more: 'مزید'
 less: 'کم'
 show-more: مزید دکھاؤ
-show-less: کم دکھاؤ
 more-information: 'مزید معلومات'
 less-information: 'کم معلومات'
 ok: سمجھ گیا
-clickToDownloadProgram: مثالی پروجیکٹ ڈاؤن لوڈ کرنے کے لیے %link_start% یہاں %link_end% کلک کرو۔
-registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
 notifications: 'اطلاعات'
 allNotifications: 'تمام'
 FollowersNotifications: فالوورز
 LikeNotifications: 'ردعمل'
 CommentNotifications: 'تبصرے'
 RemixNotifications: ریمکسز
-wellDone: "بہت اچھا!"
 done: ہو گیا!
 notificationsReadMessage: لگتا ہے تمہارے پاس کوئی اطلاع نہیں ہے۔
-confirmMessage: ہاں، اسے حذف کرو
 cancelMessage: "منسوخ"
 notificationsUnauthorizedError: صارف کی تصدیق نہیں ہو سکی
 notificationsClearError: اطلاعات کو پڑھا ہوا نشان زد نہیں کیا جا سکا!
-pleaseWait: براہ کرم انتظار کرو...
 projects: پروجیکٹس
 users: صارف
 studios: اسٹوڈیوز
 oauthPopUpTitle: بیرونی اکاؤنٹ سے سائن اِن کی معلومات
 oauthInfo: تم نے ابھی لاگ اِن کرنے کے لیے ایک بیرونی اکاؤنٹ استعمال کیا ہے۔ ہم نے تمہارے لیے ایک بے ترتیب صارف نام بنایا ہے۔ اگر تم اپنا صارف نام بدلنا یا اپنے اکاؤنٹ کے لیے نیا پاس ورڈ بنانا چاہتے ہو تو براہ کرم اپنی پروفائل کے صفحے پر جاؤ۔
-oauthHere: "یہاں"
 statistics: "اعداد و شمار"
 languageSelection: "زبان کا انتخاب"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: تاریک
   dark_description: تاریک انداز
   apply: لاگو کرو
-indexPage:
-  recommendedSection:
-    info:
-      title: یہاں کون سے پروجیکٹس تجویز کیے جاتے ہیں؟
-      description: تمہارے پروجیکٹ کو جتنے زیادہ ردعمل (انگوٹھا اوپر، مسکراہٹ ...) ملیں گے، وہ اس فہرست میں اتنا ہی اوپر نظر آئے گا۔
 follower:
   follows: فالو کر رہے ہیں
   followers: فالوورز
   follow: فالو کرو
-  username: صارف
   followsMe: مجھے فالو کرتا ہے
   noFollowing: تم فی الحال کسی کو فالو نہیں کر رہے۔
   noFollowers: فی الحال تمہارا کوئی فالوور نہیں ہے۔
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: کیا تم واقعی اس صارف کو ان فالو کرنا چاہتے ہو؟
   unfollowButton: '%username% کو ان فالو کرو'
 project:
-  welcome:
-    title: Catrobat کے %theme% میں خوش آمدید
-    title_mindstorms: Mindstorms EV3 اور NXT کے لیے Catrobat کی سائٹ پر خوش آمدید
-    subtitle: کہانیاں، گیمز اور بہت کچھ بناؤ...
-    subtitle_embroidery: اپنی ٹی شرٹس، بیگز، پتلونوں یا اسمارٹ فون کور پر اپنے ڈیزائن کڑھائی کرو!
-    subtitle_mindstorms: اپنے Lego Mindstorms EV3 اور NXT روبوٹس کے ساتھ اپنے پروجیکٹس بناؤ
-    download: ایپ ڈاؤن لوڈ کرو
-    statistics: مزید اعداد و شمار
   featured: نمایاں
   open: کھولو
   download: ڈاؤن لوڈ
@@ -148,9 +117,6 @@ project:
       retention: اپ لوڈ کیے گئے پروجیکٹس کچھ عرصہ غیر فعال رہنے کے بعد خود بخود ہٹا دیے جاتے ہیں۔ اسے زیادہ دیر رکھنے کے لیے باقاعدگی سے لاگ اِن کرو یا اپنے پروجیکٹ کے ڈاؤن لوڈز بڑھاؤ۔
       protection: خاص طور پر اچھے یا مقبول پروجیکٹس کو ماڈریٹرز خودکار حذف ہونے سے محفوظ کر سکتے ہیں۔
   example: مثالیں
-  newest: نئے پروجیکٹس
-  recommended: تجویز کردہ پروجیکٹس
-  scratchremixes: Scratch ریمکسز
   noProjects: فی الحال کوئی پروجیکٹ نہیں ہے۔
   shareAction: شیئر کرو
   deleteAction: پروجیکٹ حذف کرو
@@ -190,17 +156,10 @@ project:
     تمہارے اس عمل کو واپس لانے کا کوئی طریقہ نہیں ہے!
     ہاں، اسے حذف کرو!
     منسوخ
-  tooLongName: پروجیکٹ کا نام بہت لمبا ہے!
-  tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
-  tooLongCredits: پروجیکٹ کے نوٹس اور کریڈٹس بہت لمبے ہیں!
   my_projects: میرے شیئر کیے گئے پروجیکٹس
   trending: مقبولِ عام پروجیکٹس
   popular: مقبول پروجیکٹس
-  most:
-    viewed: سب سے زیادہ دیکھے گئے
-    downloaded: سب سے زیادہ ڈاؤن لوڈ کیے گئے
   random: بے ترتیب پروجیکٹس
-  related: متعلقہ پروجیکٹس
   browse:
     explore: پروجیکٹس دریافت کرو
     no_projects: تم نے ابھی تک کوئی پروجیکٹ نہیں بنایا
@@ -214,36 +173,14 @@ project:
     tooltip: پروجیکٹس کچھ عرصہ غیر فعال رہنے کے بعد خود بخود ہٹا دیے جاتے ہیں۔ انہیں زیادہ دیر رکھنے کے لیے زیادہ ڈاؤن لوڈز حاصل کرو یا باقاعدگی سے لاگ اِن کرو۔
     tooltip_protected: یہ پروجیکٹ محفوظ ہے اور خود بخود حذف نہیں ہوگا۔
   downloads: '%downloads% ڈاؤن لوڈز'
-  sample: مثالی پروجیکٹس
   views: '%views% بار دیکھا گیا'
   likes:
     likersTitle: وہ لوگ جنہوں نے اس پروجیکٹ پر ردعمل دیا
     all: "تمام"
-  remixes: '{0}0 ریمکس |{1}1 ریمکس |]1,Inf]%remixes% ریمکسز'
-  newRemixesNotificationTitle: '|{1}"%programName%" کا 1 نیا ریمکس ہے: |]1,Inf] "%programName%" کے %remixes% نئے ریمکسز ہیں:'
-  submitted: جمع کرائے گئے پروجیکٹس
-  uploaded: اپ لوڈ کیے گئے پروجیکٹس
-  reportAsInappropriate: نامناسب کے طور پر رپورٹ کرو
-  reportProgram: پروجیکٹ رپورٹ کرو
   languageVersion: 'Catrobat زبان کا ورژن: %languageVersion%'
-  reportLoginText: اس پروجیکٹ کو رپورٹ کرنے کے لیے براہ کرم %login% کرو۔
-  reportDialogHeader: تم اس پروجیکٹ کو کیوں رپورٹ کرنا چاہتے ہو؟
-  reportDialogReason: وجہ لکھو
-  reportRadioButtonInappropriate: یہ نامناسب ہے
-  reportRadioButtonCopyright: کاپی رائٹ کی خلاف ورزی
-  reportRadioButtonSpam: یہ اسپام ہے
-  reportRadioButtonDislike: مجھے یہ پسند نہیں
-  reportOwnProgram: تم اپنے ہی پروجیکٹ کو رپورٹ نہیں کر سکتے۔
-  reportAlready: تم اس پروجیکٹ کو پہلے ہی رپورٹ کر چکے ہو۔
-  reportDone: تم نے اس پروجیکٹ کو رپورٹ کر دیا!
   updateAppHeaderDownload: ڈاؤن لوڈ ممکن نہیں
   updateAppTextDownload: براہ کرم اپنی ایپ کو تازہ ترین ورژن پر اپ ڈیٹ کرو۔ دھیان رکھو کہ Android کی تمام خصوصیات ابھی iOS پر دستیاب نہیں ہیں۔
-  updateAppTextDownloadApk: APK ڈاؤن لوڈ فی الحال صرف Android پر دستیاب ہے، iOS پر نہیں۔
-  updateAppHeader: ایپ اپ ڈیٹ کرو
-  updateAppText: براہ کرم اپنی ایپ کو تازہ ترین ورژن پر اپ ڈیٹ کرو۔
-  btnClosePopup: ٹھیک
   checkout_this_project: یہ Catrobat پروجیکٹ دیکھو
-  show_more: مزید دکھاؤ
   comments: تبصرے
   send: بھیجو
   delete: حذف کرو
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: حذف ہو گیا
   noAdminRights: تمہارے پاس ایڈمن کے اختیارات نہیں ہیں۔ براہ کرم ایڈمن کے طور پر لاگ اِن کرو۔
   editProject: پروجیکٹ میں ترمیم کرو
-  closeProjectEditor: پروجیکٹ ایڈیٹر بند کرو
   closeEditorPrompt: کیا تم اپنی تبدیلیاں محفوظ کرنا چاہتے ہو؟
   btnDiscard: رد کرو
   addComment: تبصرہ لکھو
@@ -263,8 +199,6 @@ project:
   smile: مسکراؤ!
   love: پیار!
   wow: واہ!
-  linkTitle: لنک
-  link: پروجیکٹ کا لنک کلپ بورڈ پر کاپی کرو
   reactionsText: ردعمل
   downloadErrorText: پروجیکٹ ڈاؤن لوڈ کرتے وقت ایک خرابی پیش آئی۔ براہ کرم بعد میں دوبارہ کوشش کرو۔
   downloadStartText: ڈاؤن لوڈ شروع ہو گیا ہے...
@@ -284,11 +218,8 @@ project:
   translations: ترجمے
   createTranslation: ترجمہ بناؤ
   deletedComment: '**حذف شدہ**'
-  replyLabel: جواب
-  repliesLabel: جوابات
   notForKids: بچوں کے لیے محفوظ نہیں
 remixGraph:
-  title: ریمکسز
   showRemixGraph: 'ریمکس گراف'
   by: از
   open: کھولو
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: دستیاب نہیں
   projectUnknownUser: نامعلوم صارف
 noReply: یہ ایک خودکار پیغام ہے - براہ کرم اس ای میل کا براہِ راست جواب نہ دو۔
-accountConfirmation:
-  subject: تمہارے Catrobat اکاؤنٹ کی تصدیق
-  message: |
-    پیارے %username%۔
-    اپنے اکاؤنٹ کو فعال کرنا مکمل کرنے کے لیے - براہ کرم %confirmationUrl% پر جاؤ
-    یہ لنک تمہارے اکاؤنٹ کی تصدیق کے لیے صرف ایک بار استعمال ہو سکتا ہے۔
-    نیک تمنائیں،
-    تمہاری Catrobat ٹیم۔
-  messageHtml: |
-    <p>
-    پیارے %username%۔<br>
-    <br>
-    اپنے اکاؤنٹ کو فعال کرنا مکمل کرنے کے لیے - براہ کرم <a href="%confirmationUrl%">یہاں</a> کلک کرو۔<br>
-    یہ لنک تمہارے اکاؤنٹ کی تصدیق کے لیے صرف ایک بار استعمال ہو سکتا ہے۔<br>
-    <br>
-    نیک تمنائیں،<br>
-    تمہاری Catrobat ٹیم۔
-    </p>
 newAccountConfirmation:
   subject: اپنے ای میل ایڈریس کی تصدیق کرو
   welcome: Catrobat میں خوش آمدید!
@@ -403,63 +316,13 @@ parent:
       ignore: اگر تم نے یہ درخواست نہیں کی تو تم اس ای میل کو بلا فکر نظر انداز کر سکتے ہو۔
 passwordRecovery:
   subject: تمہارے Catrobat پاس ورڈ کی بحالی
-  message: |
-    پیارے %username%۔
-    تم نے %appplication_url% پر اپنا پاس ورڈ ری سیٹ کرنے کی درخواست کی ہے کیونکہ تم اپنا پاس ورڈ بھول گئے ہو۔
-    اگر تم نے یہ درخواست نہیں کی تو براہ کرم اسے نظر انداز کر دو۔ یہ 24 گھنٹوں میں ختم ہو کر بے کار ہو جائے گا۔
-    اپنا پاس ورڈ ری سیٹ کرنے اور نیا بنانے کے لیے براہ کرم یہ صفحہ کھولو: %confirmationUrl%
-    تم کسی بھی وقت %appplication_url% کمیونٹی تک رسائی کے لیے اپنا صارف نام اور پاس ورڈ استعمال کر سکتے ہو۔
-    اس کے لیے بس یہ صفحہ کھولو: %loginPage%
-    اپنی پروفائل کی تفصیلات میں ترمیم کرنے کے لیے اس صفحے پر جاؤ: %profilePage%
-    نیک تمنائیں،
-    تمہاری Catrobat ٹیم۔
-  messageHtml: |
-    <p>
-    پیارے %username%۔<br>
-    <br>
-    تم نے <a href="%appplication_url%">Pocket Code</a> پر اپنا پاس ورڈ ری سیٹ کرنے کی درخواست کی ہے کیونکہ تم اپنا پاس ورڈ بھول گئے ہو۔
-    اگر تم نے یہ درخواست نہیں کی تو براہ کرم اسے نظر انداز کر دو۔ یہ 24 گھنٹوں میں ختم ہو کر بے کار ہو جائے گا۔<br>
-    <br>
-    اپنا پاس ورڈ ری سیٹ کرنے اور نیا بنانے کے لیے براہ کرم <a href="%confirmationUrl%">یہاں کلک کرو۔</a><br>
-    <br>
-    تم کسی بھی وقت <a href="%appplication_url%">Pocket Code</a> کمیونٹی تک رسائی کے لیے اپنا صارف نام اور پاس ورڈ استعمال کر سکتے ہو۔<br>
-    اس کے لیے بس یہ صفحہ کھولو: <a href="%loginPage%">لاگ اِن صفحہ</a><br>
-    اپنی پروفائل کی تفصیلات میں ترمیم کرنے کے لیے اس <a href="%profilePage%">صفحے</a> پر جاؤ۔<br>
-    <br>
-    نیک تمنائیں،<br>
-    تمہاری Catrobat ٹیم۔
-    </p>
 profile:
   aboutMe: میرے بارے میں
   currentlyWorkingOn: فی الحال کام کر رہا ہوں
-  edit: اپنی پروفائل میں ترمیم کرو
-  saveChanges: تبدیلیاں محفوظ کرو
   newPass: نیا پاس ورڈ
   repeatPass: پاس ورڈ دوبارہ لکھو
   oldPass: پرانا پاس ورڈ
-  firstEmail: میری پہلی ای میل
-  secondEmail: میری دوسری ای میل
-  myPrograms: میرے پروجیکٹس
-  follows: فالو کر رہے ہیں
-  follower: فالوورز
-  unfollowUser: اس صارف کو ان فالو کرو!
-  followUser: اس صارف کو فالو کرو!
-  amountOfPrograms: پروجیکٹس کی تعداد
-  form:
-    passwordTooShort: نیا پاس ورڈ کم از کم %length% حروف کا ہونا چاہیے۔
-    passwordTooLong: نیا پاس ورڈ زیادہ سے زیادہ %length% حروف کا ہو سکتا ہے۔
-    passwordIsUsername: پاس ورڈ صارف نام سے مختلف ہونا چاہیے۔
-    passwordWrong: غلط پاس ورڈ
-    emailNotValid: یہ ای میل ایڈریس درست نہیں ہے۔
-    emailMissing: اس ای میل ایڈریس کو اپ ڈیٹ کرتے وقت خرابی۔ تمہارے پاس کم از کم ایک تصدیق شدہ ای میل ایڈریس ہونا ضروری ہے۔
-    emailExists: یہ ای میل ایڈریس پہلے سے موجود ہے۔
-    usernameNotValid: یہ صارف نام درست نہیں ہے۔
-    usernameMissing: تمہارا ایک صارف نام ہونا ضروری ہے۔
-    usernameExists: یہ صارف نام پہلے سے موجود ہے۔
-    usernameContainsEmail: صارف نام میں ای میل ایڈریس نہیں ہونا چاہیے۔
-    submitSuccess: محفوظ ہو گیا!
   reallyDeleteProgram: کیا تم واقعی اپنا پروجیکٹ حذف کرنا چاہتے ہو
-  programsOf: کے پروجیکٹس
   picture: پروفائل تصویر
   changePicture: تصویر بدلو
   goToScratchProfile: Scratch پر پروفائل
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: پاس ورڈ بدلو
   accountSettings: اکاؤنٹ کی ترتیبات
   accountVerification: اکاؤنٹ کی تصدیق کرو
-  account: اکاؤنٹ
-  editProfile: پروفائل میں ترمیم کرو
-  edit: ترمیم کرو
   done: ہو گیا
-  checkMail: تمہارے ای میل ایڈریس پر ایک ای میل بھیجی گئی ہے۔ براہ کرم اپنا ان باکس دیکھو۔
   passwordUpdated: تمہارا پاس ورڈ کامیابی سے بدل دیا گیا۔
-  avatar: اوتار
-  email: ای میل
   deleteAccount: اکاؤنٹ حذف کرو
   deleteAccountWarning: |
     دھیان رکھو:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: ڈاؤن لوڈ ہو رہا ہے...
   exportDataError: تمہارا ڈیٹا ایکسپورٹ کرتے وقت کچھ غلط ہو گیا۔ براہ کرم بعد میں دوبارہ کوشش کرو۔
   exportDataRateLimited: تم دن میں صرف ایک بار اپنا ڈیٹا ایکسپورٹ کر سکتے ہو۔ براہ کرم کل دوبارہ کوشش کرو۔
-  editAccountSettings: اکاؤنٹ کی سیٹنگز میں ترمیم کرو
   profileChangeSuccess: تمہاری پروفائل کامیابی سے بدل دی گئی ہے۔
   unspecifiedError: تمہاری پروفائل بدلتے وقت کچھ کام نہیں کیا۔ براہ کرم دوبارہ کوشش کرو یا اگر یہ بار بار ہو تو ہمیں بتاؤ!
   verifyAccountText: ہم تمہیں تمہارے اکاؤنٹ کی تصدیق کے لنک کے ساتھ ایک ای میل بھیجیں گے۔ اگلے ایک گھنٹے کے اندر لنک پر کلک کرنا یقینی بناؤ، تم دن میں صرف ایک ای میل مانگ سکتے ہو۔
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: استعمال کی ان شرائط کے بارے میں کوئی بھی تجویز براہ کرم %email-webmaster% پر ای میل کرو۔
   version: ورژن 1.3، 4 مارچ 2014
 search:
-  dotdotdot: تلاش کرو...
   search: پروجیکٹس، صارفین اور اسٹوڈیوز تلاش کرو
   inMediaLib: میڈیا لائبریری میں تلاش کرو
   inMediaCategory: میڈیا زمرے میں تلاش کرو
   results: اس کے نتائج
-  resultcount: تمہاری تلاش سے %count% نتائج ملے
-  fail: براہ کرم کم از کم ایک تلاش کا لفظ درج کرو
   noUsers: کوئی صارف نہیں ملا
   noProjects: کوئی پروجیکٹ نہیں ملا
   noStudios: کوئی اسٹوڈیو نہیں ملا
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: میڈیا لائبریری
   studio: اسٹوڈیوز
   language: زبان
-  languageOptionsNotAvailable: زبان کے کوئی اختیارات دستیاب نہیں۔
 login:
   login: لاگ اِن
   button:
@@ -578,21 +430,10 @@ login:
     or: "یا"
   passOrUser: تمہارا پاس ورڈ یا صارف نام غلط تھا۔
   accountSuspended: تمہارا اکاؤنٹ معطل کر دیا گیا ہے۔ اگر تمہیں لگتا ہے کہ یہ غلطی ہے تو براہ کرم سپورٹ سے رابطہ کرو۔
-  noUsername: تمہارا صارف نام یا ای میل ایڈریس نہیں ملا۔
-  forgotPass: پاس ورڈ یا صارف نام بھول گئے؟
   recoverPassSend: تمہارے ای میل ایڈریس پر ایک ای میل بھیجی گئی ہے۔ براہ کرم اپنا ان باکس دیکھو۔
   alreadyReset: اس صارف کے لیے پاس ورڈ کی درخواست پچھلے 24 گھنٹوں میں پہلے ہی کی جا چکی ہے۔
-  confirmationSend: تمہاری رجسٹریشن کی تصدیق کے لیے تمہارے ای میل ایڈریس پر ایک ای میل بھیجی گئی ہے۔ براہ کرم اپنا ان باکس دیکھو اور اپنا اکاؤنٹ فعال کرو۔
-  userOrEmail: صارف کا نام یا ای میل
-  changePass: پاس ورڈ بدلو
-  createAccount: اکاؤنٹ بناؤ
-  noAccount: اکاؤنٹ نہیں ہے!
-  alreadyAccount: پہلے سے اکاؤنٹ ہے؟
-  or: یا
   username: صارف کا نام
   email: ای میل
-  passwordFirst: پاس ورڈ
-  passwordSecond: پاس ورڈ کی تصدیق
 register:
   title: سائن اپ
   subText: جاری رکھ کر تم Catrobat کمیونٹی اکاؤنٹ بنا رہے ہو اور ہمارے %var1% اور %var2% سے اتفاق کرتے ہو۔
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: والدین کی رضامندی واپس لے لی گئی
     message: تمہارے والدین یا سرپرست نے تمہارے اکاؤنٹ کے لیے رضامندی واپس لے لی ہے۔ جب تک دوبارہ رضامندی نہیں دی جاتی، تمہارے اکاؤنٹ کی سہولیات محدود رہیں گی۔
-    newEmailPlaceholder: والدین کی نئی ای میل
-    changeButton: اپ ڈیٹ کرو اور دوبارہ بھیجو
-accountRecovery:
-  title: اکاؤنٹ کی بحالی
-  description: اگر تمہیں اپنے اکاؤنٹ کی ای میل یا صارف نام یاد ہے تو ہم تمہیں پاس ورڈ ری سیٹ کرنے کا لنک بھیج سکتے ہیں۔
-  button:
-    cancel: منسوخ
-    submit: پاس ورڈ بحال کرو
 resetPassword:
   request:
     title: اپنا پاس ورڈ ری سیٹ کرو
@@ -645,11 +478,6 @@ resetPassword:
     description: اگر تمہاری ای میل سے ملتا جلتا کوئی اکاؤنٹ موجود ہے تو ابھی ایک ای میل بھیجی گئی ہے جس میں ایک لنک ہے جس سے تم اپنا پاس ورڈ ری سیٹ کر سکتے ہو۔ یہ لنک %time% میں ختم ہو جائے گا۔
     descriptionTwo: تم ہر %throttleLimit% گھنٹے بعد پاس ورڈ ری سیٹ کی نئی درخواست کر سکتے ہو۔
     descriptionThree: اگر تمہیں ای میل نہیں ملی تو براہ کرم اپنا اسپام فولڈر دیکھو یا %email-webmaster% پر ہماری سپورٹ کو ای میل لکھو۔
-  email:
-    title: ہیلو!
-    visitLink: اپنا پاس ورڈ ری سیٹ کرنے کے لیے براہ کرم یہ لنک کھولو
-    expire: "یہ لنک %time% میں ختم ہو جائے گا۔"
-    cheers: خوش رہو!
   newemail:
     title: اپنا پاس ورڈ ری سیٹ کرو
     content: تم نے حال ہی میں اپنے Catrobat اکاؤنٹ کے لیے پاس ورڈ ری سیٹ کرنے کی درخواست کی ہے۔ نیا پاس ورڈ چننے کے لیے نیچے دیے گئے بٹن پر کلک کرو۔ اگر تم نے یہ درخواست نہیں کی تو تم اس ای میل کو بلا فکر نظر انداز کر سکتے ہو۔
@@ -659,76 +487,33 @@ resetPassword:
     title: اپنا پاس ورڈ ری سیٹ کرو
     button:
       submit: پاس ورڈ ری سیٹ کرو
-apk:
-  download: ایپ کے طور پر ڈاؤن لوڈ کرو
-  prepare: ایپ کے طور پر حاصل کرو
-  preparing: ایپ تیار ہو رہی ہے
-  text: 'اس عمل میں کچھ وقت لگ سکتا ہے'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: کچھ کام نہیں کیا۔ براہ کرم دوبارہ کوشش کرو یا اگر یہ بار بار ہو تو ہمیں بتاؤ!
-  username:
-    blank: صارف نام خالی نہیں ہونا چاہیے
-    invalid: تمہارا صارف نام درست نہیں ہے
-    exists: یہ صارف نام پہلے سے موجود ہے۔
-    not_exists: یہ صارف نام موجود نہیں ہے۔
-    not_email: صارف نام ای میل ایڈریس نہیں ہونا چاہیے۔
-    size: صارف نام کم از کم 3 اور زیادہ سے زیادہ 180 حروف کا ہونا چاہیے
-  password:
-    blank: پاس ورڈ موجود نہیں ہے۔
-    short: تمہارا پاس ورڈ کم از کم {{ limit }} حروف کا ہونا چاہیے۔
-  country:
-    blank: ملک درج نہیں کیا گیا۔
-    invalid: غلط ملک
-  email:
-    blank: ای میل خالی نہیں ہونی چاہیے
-    invalid: لگتا ہے تمہاری ای میل درست نہیں ہے
-    exists: یہ ای میل ایڈریس پہلے سے موجود ہے۔
-  id:
-    blank: اوپن آتھنٹیکیشن ID خالی نہیں ہونی چاہیے
-  login: پاس ورڈ یا صارف نام غلط تھا۔
-  post-data: POST ڈیٹا درست نہیں یا موجود نہیں!
-  checksum:
-    missing: کلائنٹ نے fileChecksum نہیں بھیجا! کیا تم Pocket Code کا پرانا ورژن استعمال کر رہے ہو؟
-    invalid: غلط چیک سم
   xml:
     invalid: غلط xml کوڈ
     missing: 'نامعلوم خرابی: project_xml_not_found!'
   file:
-    unexpected: غیر متوقع فائل ملی
     invalid: غلط فائل
-  image.missing: پروجیکٹ XML میں ایک ایسی فائل کا ذکر ہے جو پروجیکٹ فولڈر میں موجود نہیں
-  unknown: نامعلوم خرابی
-  token: 'ڈیوائس کی تصدیق ناکام: غلط auth-token!'
-  uploadTokenAuthFailed: اپ لوڈ ٹوکن کی تصدیق ناکام ہو گئی۔
-  project:
-    invalid: غلط پروجیکٹ۔
   languageversion:
     tooold: معذرت، تمہارے پروجیکٹ میں Catrobat زبان کا پرانا ورژن ہے! کیا تم Pocket Code کا تازہ ترین ورژن استعمال کر رہے ہو؟
   projectversion:
     tooold: معذرت، تم Pocket Code کا پرانا ورژن استعمال کر رہے ہو۔ براہ کرم تازہ ترین ورژن پر اپ ڈیٹ کرو۔
   authentication:
-    title: لاگ اِن نہیں ہو سکا
     webview: |
       لگتا ہے تمہارا صارف نام یا پاس ورڈ درست نہیں تھا۔
       براہ کرم ایپ میں دوبارہ لاگ اِن کرنے کی کوشش کرو۔
 success:
   text: کامیاب
-  registration: رجسٹریشن کامیاب!
-  token: ٹھیک ہے
-  upload: تمہارا پروجیکٹ کامیابی سے اپ لوڈ ہو گیا!
   imgUpload: تمہاری تصویر کامیابی سے اپ لوڈ ہو گئی!
-  report: تمہاری رپورٹ کامیابی سے بھیج دی گئی!
 time:
   minutes.ago: '{0} < 1 منٹ پہلے |{1}1 منٹ پہلے |]1,Inf] %count% منٹ پہلے'
   hours.ago: '{1}1 گھنٹہ پہلے |]1,Inf] %count% گھنٹے پہلے'
   days.ago: '{1}1 دن پہلے |]1,Inf] %count% دن پہلے'
   months.ago: '{1}1 مہینہ پہلے |]1,Inf] %count% مہینے پہلے'
   years.ago: '{1}1 سال پہلے |]1,Inf] ایک سال سے زیادہ پہلے'
-failure:
-  upload: تمہاری ایپ اپ لوڈ کرتے وقت ایک خرابی پیش آئی۔
 user:
   verification:
     email: اپنی ای میل کی تصدیق کرو
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: پاس ورڈ میں غلط حروف ہیں
     usernameContainsEmail: صارف نام میں ای میل ایڈریس نہیں ہونا چاہیے
     usernameContainsLink: صارف نام میں لنک نہیں ہونا چاہیے
-    countryCodeInvalid: ملک کا کوڈ غلط ہے
     pictureInvalid: پروفائل تصویر غلط ہے یا اس کی سہولت موجود نہیں
     dateOfBirthMissing: تاریخِ پیدائش ضروری ہے
     dateOfBirthInvalid: تاریخِ پیدائش غلط ہے
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: یہ نام پہلے ہی استعمال میں ہے
     descriptionMissing: تفصیل موجود نہیں
     descriptionEmpty: تفصیل خالی ہے
-    descriptionTooShort: تفصیل بہت چھوٹی ہے
     descriptionTooLong: تفصیل بہت لمبی ہے
     imageFileInvalid: تصویر کی فائل غلط ہے
     imageFileInvalidType: تصویر کی فائل کی قسم غلط ہے
     imageFileTooLarge: تصویر کی فائل بہت بڑی ہے
-#languages and countries
-language:
-  arabic: عربی
-  bulgarian: بلغاری
-  catalan: کیٹالان
-  chinese_simplified_han: چینی (آسان کردہ)
-  chinese_traditional_han: چینی (روایتی)
-  croatian: کروشین
-  czech: چیک
-  danish: ڈینش
-  dutch: ڈچ
-  english_united_kingdom: انگریزی (برطانیہ)
-  english_united_states: انگریزی (امریکہ)
-  estonian: ایسٹونین
-  filipino: فلیپینو
-  finnish: فینیش
-  french: فرانسیسی
-  german: جرمن
-  greek: یونانی
-  hebrew: عبرانی
-  hindi: ہندی
-  hungarian: ہنگرین
-  indonesian: انڈونیشی
-  italian: اطالوی
-  japanese: جاپانی
-  korean: کوریائی
-  latvian: لیٹوین
-  lithuanian: لتھونيئن
-  malay: مالے
-  norwegian: نارويجين
-  persian: فارسی
-  polish: پولش
-  portuguese_brazil: پرتگالی (برازیل)
-  portuguese_portugal: پرتگالی (پرتگال)
-  romanian: رومنی
-  russian: روسی
-  serbian: سربيئن
-  slovak: سلوواک
-  slovenian: سلووينيئن
-  spanish_latin_america: ہسپانوی (لاطینی امریکہ)
-  spanish_spain: ہسپانوی (سپین)
-  swedish: سویڈنی
-  thai: تھائی
-  turkish: ترکی
-  ukrainian: يوکرينيئن
-  vietnamese: ویتنامی
-ci:
-  generate: APK بناؤ
-  pending: APK بن رہی ہے
-  download: APK ڈاؤن لوڈ کرو
+
 admin:
   maintain:
     diskMaintenance: ڈسک کی دیکھ بھال
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: کوئی ہٹائی جانے والی اشیاء دستیاب نہیں ۔
     removableObjects: ہٹائی جا سکنے والی اشیاء
 recommender:
-  similarPrograms: ملتے جلتے پروجیکٹس
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: جن صارفین نے یہ پروجیکٹ ڈاؤن لوڈ کیا انہوں نے یہ بھی ڈاؤن لوڈ کیا
   moreFromThisUser: '%username% کی طرف سے مزید'
-pmd:
-  submitBtn: اپنا پروجیکٹ جمع کرو
-  submitBox:
-    header: جمع کرانا
-    text: تم اپنا پروجیکٹ جمع کرانے والے ہو۔ براہ کرم پروجیکٹ کوڈ درج کرو اور بھیجو پر کلک کرو۔
-    btnText: جمع کرو
-  successful:
-    text: تمہارا پروجیکٹ کامیابی سے اپ لوڈ ہو گیا۔
-  failed:
-    text: پروجیکٹ اپ لوڈ ناکام ہو گیا۔
 codeview:
   title: کوڈ ویو
-  showCode: کوڈ دکھاؤ
-  hideCode: کوڈ چھپاؤ
-  showStatistics: کوڈ کے اعداد و شمار دکھاؤ
-  hideStatistics: کوڈ کے اعداد و شمار چھپاؤ
-  cantDisplayCode: "کوڈ ظاہر نہیں کیا جا سکتا"
-  cantDisplayStatistics: "کوڈ ظاہر نہیں کیا جا سکتا"
-  totalNumberOf: 'کل تعداد'
-  scenes: 'مناظر'
-  scripts: اسکرپٹس
-  bricks: بلاکس
-  objects: کردار اور اشیاء
-  looks: شکلیں
-  sounds: 'آوازیں'
-  globals: عالمی
-  locals: 'مقامی'
-  globalVariables: عالمی متغیرات
-  localVariables: مقامی متغیرات
-  eventBricks: ایونٹ بلاکس
-  controlBricks: کنٹرول بلاکس
-  motionBricks: حرکت کے بلاکس
-  soundBricks: آواز کے بلاکس
-  looksBricks: شکل کے بلاکس
-  penBricks: قلم کے بلاکس
-  dataBricks: ڈیٹا کے بلاکس
-  specialBricks: خصوصی بلاکس
 codeView:
   title: کوڈ ویو
   loading: کوڈ ویو لوڈ ہو رہا ہے...
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: "کوڈ کے اعداد و شمار"
   error: کوڈ کے اعداد و شمار ظاہر نہیں کیے جا سکتے۔
-  general: عمومی
-  bricks: بلاکس
-  eventBricks: ایونٹ
-  controlBricks: 'کنٹرول'
-  motionBricks: 'حرکت'
-  soundBricks: 'آواز'
-  looksBricks: شکلیں
-  penBricks: 'قلم'
-  dataBricks: 'ڈیٹا'
-  deviceBricks: 'ڈیوائس'
-  specialBricks: 'خصوصی'
   yourScore: 'تمہارا اسکور:'
-  points: پوائنٹس
   abstraction: تجرید اور مسئلے کو حصوں میں بانٹنا
   parallelism: متوازی عمل
   logicalThinking: منطقی سوچ
@@ -927,20 +612,7 @@ footer:
   text: '%project_count% زبردست پروجیکٹس پہلے ہی شیئر ہو چکے ہیں، اگلا تمہارا ہو سکتا ہے۔ ہماری ایپ ڈاؤن لوڈ کرو اور آج ہی بنانا شروع کرو'
 privacy-policy:
   header: پرائیویسی پالیسی
-  version: ورژن 2.2، 17 اکتوبر 2019
-  text1: تمہیں ہماری خدمات اور ان سے منسلک اکاؤنٹ کے تمام فوائد دینے کے لیے تم سے کچھ ڈیٹا جمع کرنا ضروری ہے۔
-  text2: اپنی خدمات (ایپس اور ویب سائٹس) کو برقرار رکھنے اور بہتر بنانے، اور ICT اور STEM/STEAM تعلیم پر سائنسی تحقیق کے لیے ہم Google Analytics، Crashlytics اور Firebase (سب Google LLC، USA کے) نیز Dynatrace LLC (USA) کا Dynatrace استعمال کرتے ہیں تاکہ اپنی خدمات کے استعمال کے بارے میں میٹا ڈیٹا حاصل کریں، مثلاً کریش کی معلومات، ٹائم اسٹیمپس، دیکھے گئے صفحات/اسکرینز، ہماری ایپس اور خدمات کا استعمال، استعمال شدہ آپریٹنگ سسٹم، اور نیٹ ورک فراہم کنندہ کے بارے میں معلومات۔ یہ تجزیہ اور جمع کیا گیا ڈیٹا تمہاری پروفائل سے منسلک نہیں ہوتا اور اس میں کوئی ذاتی معلومات شامل نہیں ہوتیں (IP ایڈریس کے آخری حصے گمنام کر دیے جاتے ہیں)۔ تاہم، جمع کیا گیا ڈیٹا سروس فراہم کنندگان (Google LLC، USA اور Dynatrace LLC، USA) کو منتقل کیا جائے گا۔ ڈیٹا پروسیسنگ Google LLC اور Dynatrace LLC کے ساتھ معاہدوں کی بنیاد پر ہوتی ہے۔ سروس فراہم کنندگان کے ساتھ یہ تعلق یورپی یونین کے جنرل ڈیٹا پروٹیکشن ریگولیشن (EU GDPR) اور EU-USA "Privacy Shield" معاہدے کے مطابق ہے۔
-  text3: ہمارے سسٹمز میں اکاؤنٹ بنانے اور استعمال کرنے، اور تمہیں ای میل کے ذریعے تمہارے اکاؤنٹ سے متعلق ضروری تبدیلیوں سے آگاہ کرنے کے لیے، مثلاً ہماری استعمال اور خدمات کی شرائط، کمیونٹی کے اصولوں یا پالیسیوں میں اپ ڈیٹس یا ان کی خلاف ورزیاں، ہم تمہارا صارف نام اور، اگر تم نے دیا ہو تو، تمہارا ای میل ایڈریس محفوظ کریں گے۔ اگر تم نے اپنا اکاؤنٹ Google Plus یا Facebook کے ذریعے جوڑا ہے تو ہم ان خدمات پر تمہارے اکاؤنٹ سے منسلک ایک شناختی کلید بھی محفوظ کرتے ہیں۔ ہم یہ ڈیٹا کسی اور مقصد (مثلاً مارکیٹنگ) کے لیے استعمال نہیں کریں گے، جب تک کہ تم نے ہمیں واضح طور پر اس کی اجازت نہ دی ہو۔
-  text4: اپنی مرضی سے تم شیئرنگ سائٹ پر اپنے اکاؤنٹ کے صفحے کے ذریعے ہمیں اپنی رہائش کا ملک بتا سکتے ہو۔ یہ تمہاری عوامی پروفائل پر دکھایا جائے گا اور ہم اسے صرف اعداد و شمار اور تحقیق کے مقاصد کے لیے استعمال کریں گے۔ تم اسے کسی بھی وقت اپنی پروفائل کی سیٹنگز میں ہٹا سکتے ہو۔
-  text5: تم https://share.catrobat.org/ پر اپنی پروفائل کے صفحے کے ذریعے اپنا اکاؤنٹ حذف کر کے کسی بھی وقت اپنے اکاؤنٹ سے متعلق ذاتی ڈیٹا کا استعمال واپس لے سکتے ہو۔ اکاؤنٹ حذف کرنے کے بعد بھی تم فراہم کردہ خدمات استعمال کر سکو گے، لیکن تعاون نہیں کر سکو گے، مثلاً پروگرامز اپ لوڈ کرنا، تبصرے کرنا یا لائک کرنا۔ اس کے علاوہ تمہارے اکاؤنٹ سے منسلک تمام مواد، مثلاً اپ لوڈ کیے گئے پروگرامز، تبصرے وغیرہ، حذف کر دیے جائیں گے۔
-  text6: ہماری خدمات کے غلط استعمال سے بچنے کے لیے، مثلاً صارفین کی طرف سے غیر قانونی مقاصد کے لیے اپ لوڈز یا تبصروں کے ذریعے، صارفین کا بنایا ہوا تمام عوامی ڈیٹا (اپ لوڈز، تبصرے) ٹائم اسٹیمپ اور استعمال شدہ انٹرنیٹ ایڈریس کے ساتھ اندرونی طور پر ایک ڈیٹا بیس میں محفوظ کیا جائے گا۔ یہ ڈیٹا کسی ادارے کو استعمال کے لیے نہیں دیا جائے گا اور نہ آگے بھیجا جائے گا، جب تک کہ کافی حد تک غیر قانونی کارروائیوں کا معقول شبہ نہ ہو اور سرکاری طور پر مجاز قانونی ادارے لاگو قانون کی بنیاد پر اس کی درخواست نہ کریں۔ ہر معاملے کی پہلے ہم انفرادی طور پر اچھی طرح جانچ کریں گے۔
-  text7: تم اپنی مرضی سے https://catrobat.org/newsletter پر Catrobat نیوز لیٹر سبسکرائب کر سکتے ہو، جو ہم MailChimp سروس (The Rocket Science Group LLC d/b/a MailChimp، USA) کے ذریعے فراہم کرتے ہیں۔ اس کے بعد تمہیں تمہارے دیے گئے ای میل ایڈریس پر Catrobat پروجیکٹ اور اس کی خدمات کے بارے میں اپ ڈیٹس ملیں گی۔ تم ہر نیوز لیٹر کے فوٹر میں "unsubscribe" لنک استعمال کر کے کسی بھی وقت نیوز لیٹر بند کر سکتے ہو۔ یہ نیوز لیٹر MailChimp فراہم کرتا ہے، جس کے ساتھ ہمارا ڈیٹا پروسیسنگ معاہدہ ہے اور جس نے EU جنرل ڈیٹا پروٹیکشن ریگولیشن اور EU-USA "Privacy Shield" کی پابندی کا عہد کیا ہے۔ MailChimp کے بارے میں مزید تفصیلات کے لیے براہ کرم MailChimp کی پرائیویسی پالیسی اور استعمال کی شرائط بھی دیکھو۔
-  text8: 'تمام خدمات مفت اوپن سورس Catrobat پروجیکٹ فراہم کرتا ہے، جو International Catrobat Association – Verein zur Förderung freier Software کے تحت ہے، جو Graz، آسٹریا (یورپی یونین) میں رجسٹرڈ ایک غیر منافع بخش NGO ہے۔ ہماری پالیسیاں یورپی یونین اور آسٹریا کے ڈیٹا پروٹیکشن قانون (GDPR) کا احترام کرتی ہیں۔ ہم سے رابطہ کرنے کے لیے براہ کرم contact@catrobat.org پر ای میل بھیجو یا اس پتے پر خط لکھو: Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)۔'
-  text9: اگر تمہاری عمر 14 سال سے کم ہے تو یہ پالیسی کسی قانونی سرپرست (عام طور پر والدین) کو قبول کرنی ہوگی۔
-  text10: Catrobat کی سرکاری انگریزی پرائیویسی پالیسی ویب پر %privacy_policy% پر دستیاب ہے۔
-  disagree-text: منظوری کے بغیر ہم اکاؤنٹ نہیں بنا سکتے، لیکن بنیادی خصوصیات پھر بھی دستیاب ہیں۔
 catro-notifications:
-  markAsRead: پڑھا ہوا نشان زد کرو
   noFollowers: لگتا ہے تمہارے پاس فالوورز کی کوئی اطلاع نہیں ہے۔
   noComments: لگتا ہے تمہارے پاس تبصروں کی کوئی اطلاع نہیں ہے۔
   noReactions: لگتا ہے تمہارے پاس ردعمل کی کوئی اطلاع نہیں ہے۔
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: لنک کلپ بورڈ پر کاپی ہو گیا!
   success_project: پروجیکٹ کا لنک کلپ بورڈ پر کاپی ہو گیا!
-  success_user: صارف کا لنک کلپ بورڈ پر کاپی ہو گیا!
   fail: لنک کلپ بورڈ پر کاپی نہیں ہو سکا! :(
 next: اگلا
 previous: پچھلا
 media-packages:
   title: میڈیا لائبریری
   description: درج ذیل زمروں میں تمہیں اپنے پروجیکٹس میں شامل کرنے کے لیے کردار اور اشیاء ملیں گی۔
-  thumb-size:
-    description: پیش نظارہ سائز
-    sm: چھوٹا
-    md: درمیانہ
-    lg: بڑا
   theme-special: '%flavor% تھیم اسپیشل'
   search-results: میڈیا لائبریری تلاش کے نتائج
-  no-results: تمہاری تلاش سے 0 نتائج ملے۔ براہ کرم تلاش کے لیے صرف انگریزی الفاظ استعمال کرو۔
-  download_these_files: محفوظ کرو
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: کاپی رائٹ &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>۔ جملہ حقوق محفوظ ہیں۔
 noscript:
   warning: اس ویب سائٹ کو کام کرنے کے لیے JavaScript کی ضرورت ہے۔ براہ کرم اپنے براؤزر میں JavaScript فعال کرو یا کسی بڑے سے مدد مانگو۔
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: مسترد کرو
   privacy-link: پرائیویسی پالیسی
   settings-link: کوکی سیٹنگز
-agree: متفق
-disagree: غیر متفق
-profileLoader:
-  noProfiles: فی الحال کوئی پروفائل نہیں ہے۔
 element: 'عنصر'
 elements: 'عناصر'
 share:
@@ -1018,7 +673,6 @@ share:
   success: کامیابی سے شیئر ہو گیا
 copy: لنک کاپی کرو
 checkOutProject: 'یہ پروجیکٹ دیکھو:'
-checkOutUser: 'یہ صارف دیکھو:'
 community: Catrobat کمیونٹی
 back_to_app: کمیونٹی سے باہر نکلو
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'کامیابیاں'
-    badge: 'نیا'
   overview:
     header: 'کامیابیاں'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: ملٹی پلیئر
 studio:
   title: اسٹوڈیوز
-  singular: اسٹوڈیو
   create_studio: اسٹوڈیو بناؤ
-  delete_studio: اسٹوڈیو حذف کرو
-  cancel_studio: 'منسوخ'
   studio_name: اسٹوڈیو کا نام
   studio_description: اسٹوڈیو کی تفصیل
   is_public: اسے عوامی بنانا ہے؟
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: تصویر ہٹاؤ
   popular: مقبول اسٹوڈیوز
   join: شامل ہو جاؤ
-  leave: چھوڑ دو
-  report: 'رپورٹ'
   public: عوامی
   private: صرف دعوت پر
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'منتظم'
     member: رکن
   details:
-    add_project: پروجیکٹ شامل کرنے کے لیے کلک کرو
     add: شامل کرو
     showMore: مزید دکھاؤ
-    showLess: کم دکھاؤ
     are_you_sure: 'کیا تمہیں یقین ہے؟'
     no_way_of_return: یہ واپس نہیں ہو سکتا۔
     delete_it: حذف کرو
-    remove_project: اسٹوڈیو سے ہٹاؤ
     remove_project_error: پروجیکٹ کو اسٹوڈیو سے ہٹایا نہیں جا سکا۔
-    remove_project_success: پروجیکٹ کامیابی سے اسٹوڈیو سے ہٹا دیا گیا۔
     no_projects: 'اسٹوڈیو میں ابھی پروجیکٹ شامل نہیں ہے۔'
     projects:
       title: 'پروجیکٹس'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: تمہارے پاس ابھی شامل کرنے کے لیے کوئی پروجیکٹ نہیں ہے۔ پہلے Pocket Code میں ایک بناؤ!
       add_selected: منتخب شامل کرو
     no_available_projects: شامل کرنے کے لیے کوئی پروجیکٹ دستیاب نہیں۔
-    updateCoverError: اسٹوڈیو کا کور اپ ڈیٹ کرتے وقت کچھ غلط ہو گیا۔
     join: شامل ہو جاؤ
     leave: چھوڑ دو
-    report: 'رپورٹ'
     pending: زیرِ التوا
     decline: مسترد
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% نے ایک تبصرہ کیا۔'
     members_list:
       title: اسٹوڈیو کے ارکان
-      project_count: '{0} کوئی اسٹوڈیو پروجیکٹ نہیں |{1} 1 اسٹوڈیو پروجیکٹ |]1,Inf] %count% اسٹوڈیو پروجیکٹس'
       no_studio_projects: کوئی اسٹوڈیو پروجیکٹ نہیں
       one_studio_project: 1 اسٹوڈیو پروجیکٹ
       n_studio_projects: '%count% اسٹوڈیو پروجیکٹس'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: اس رکن پر پابندی لگاتے وقت کچھ غلط ہو گیا۔ بعد میں دوبارہ کوشش کرو۔
       demote_member: ایڈمن کو عام رکن بناؤ
       demotion_failed: اس ایڈمن کو عام رکن بناتے وقت کچھ غلط ہو گیا۔ بعد میں دوبارہ کوشش کرو۔
-      last_admin: اس اسٹوڈیو کے آخری ایڈمن کو عام رکن نہیں بنایا جا سکتا۔
     join_requests:
       title: شمولیت کی درخواستیں
       accept: قبول کرو
@@ -1258,7 +898,6 @@ media_library:
   no_results: کوئی نتیجہ نہیں ملا۔
   assets_count: اثاثے
   view_all: سب دیکھو
-  view_all_category: تمام %category% دیکھو
   back_to_app: ایپ پر واپس جاؤ
 snackbar:
   project_not_found: 'درخواست کردہ پروجیکٹ دستیاب نہیں ہے۔'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: تم اسٹوڈیو میں بہت جلدی جلدی کام کر رہے ہو۔ براہ کرم ایک لمحہ انتظار کرو۔
   hidden_notice:
     project: کمیونٹی کی رپورٹس کی وجہ سے یہ پروجیکٹ چھپا دیا گیا ہے۔
-    comment: کمیونٹی کی رپورٹس کی وجہ سے یہ تبصرہ چھپا دیا گیا ہے۔
-    user: کمیونٹی کی رپورٹس کی وجہ سے یہ پروفائل چھپا دی گئی ہے۔
     user_own: کمیونٹی کی رپورٹس کی وجہ سے تمہارا اکاؤنٹ معطل کر دیا گیا ہے۔ تم اس فیصلے کے خلاف اپیل کر سکتے ہو۔
-    studio: کمیونٹی کی رپورٹس کی وجہ سے یہ اسٹوڈیو چھپا دیا گیا ہے۔
-  notification:
-    content_hidden: کمیونٹی کی رپورٹس کی وجہ سے تمہارا %content_type% چھپا دیا گیا ہے۔ تم اس فیصلے کے خلاف اپیل کر سکتے ہو۔
-    appeal_approved: تمہاری اپیل منظور ہو گئی ہے۔ تمہارا مواد اب دوبارہ نظر آ رہا ہے۔
-    appeal_rejected: تمہاری اپیل کا جائزہ لیا گیا اور تمہارا مواد چھپانے کا فیصلہ برقرار ہے۔
-    admin_review_needed: مواد خود بخود چھپا دیا گیا ہے اور اس کا جائزہ درکار ہے۔
 Reports: رپورٹس
 members: ارکان

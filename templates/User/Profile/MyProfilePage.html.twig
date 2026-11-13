@@ -276,7 +276,7 @@
       passwordChangedSuccessText:  '{{ 'myprofile.passwordUpdated'|trans({}, 'catroweb')|escape('js')|raw }}'
     }
   }
-  const projectConfiguration = { {# needed in OwnProjectList::_actionToggleVisibility #}
+  const projectConfiguration = { {# read by Api/ProjectApi.js #}
     messages: {
       forbidden: '{{ 'api.updateProject.forbidden'|trans({}, 'catroweb') }}',
       notFound: '{{ 'api.updateProject.notFound'|trans({}, 'catroweb') }}',

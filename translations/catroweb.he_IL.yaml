@@ -8,19 +8,12 @@ meta.og.description.login: "התחבר כדי לשתף את פרויקטי ה-Ca
 meta.og.title.register: "יצירת חשבון Catrobat"
 meta.og.description.register: "הצטרף לקהילת Catrobat והתחל לשתף את הפרויקטים היצירתיים שלך עוד היום."
 meta.og.description.profile: "%username% ב-Catrobat – עיין בפרויקטים ובהישגים."
-localLanguage: אנגלית
 username: שם משתמש
 password: סיסמה
-createNewPassword: "יצירת סיסמה חדשה"
-accountSettings: "הגדרות חשבון"
 email: "דוא\"ל"
-aboutPocketCode: אודות פוקטקוד
 about: על אודות Catrobat
-education: "חינוך"
 chat: "צ'אט ופורומים"
-privacyGuide: "מדריך למודעות לפרטיות"
 others: "אחרים"
-tutorials: עזרה
 googlePlay: חנות Google Play
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: "איך יצרת את הפרויקט הזה? השת�
 projectImportedFromScratch: "פרויקט זה יובא מ-MIT Scratch. אפשר לראות את הפרויקט המקורי"
 scratchImportedProjectLinkHere: "כאן."
 country: מדינה
-loginText: כניסה
 privacyPolicy: מדיניות פרטיות
-imprint: "פרטי האתר"
 projectDetails: "פרטים"
 somethingWentWrong: 'Ooooops משהו השתבש.'
 accountNotVerified: "ודא שאתה מחובר ושכתובת הדוא\"ל של החשבון שלך אומתה."
@@ -55,36 +46,28 @@ accountSuspended: "החשבון שלך הושעה בעקבות דיווחים מ
 doesNotExist: "המשאב המבוקש לא קיים."
 pleaseTryAgain: 'אנא נסה שנית!'
 tryAgainButton: "נסה שוב"
-oldVersionError: 'נא לעדכן הגירסה החדשה ביותר של פוקטקוד!'
 more: 'יותר'
 less: 'פחות'
 show-more: "הצג עוד"
-show-less: "הצג פחות"
 more-information: "מידע נוסף"
 less-information: "פחות מידע"
 ok: "הבנתי"
-clickToDownloadProgram: "כדי להוריד את פרויקט הדוגמה לחץ %link_start% כאן %link_end%."
-registrationError: 'שם המשתמש או האימייל שבחרת תפוסים.'
 notifications: "התראות"
 allNotifications: 'הכל'
 FollowersNotifications: "עוקבים"
 LikeNotifications: "תגובות"
 CommentNotifications: 'תגובות'
 RemixNotifications: "רמיקסים"
-wellDone: "כל הכבוד!"
 done: "בוצע!"
 notificationsReadMessage: "נראה שאין לך התראות."
-confirmMessage: "כן, מחק את זה"
 cancelMessage: "בטל"
 notificationsUnauthorizedError: "לא ניתן לאמת את המשתמש"
 notificationsClearError: "לא ניתן לסמן את ההתראות כנקראו!"
-pleaseWait: "אנא המתן..."
 projects: "המיזמים השמורים במכשיר"
 users: "משתמש"
 studios: "סטודיו"
 oauthPopUpTitle: "מידע על התחברות עם חשבון חיצוני"
 oauthInfo: "הרגע התחברת עם חשבון חיצוני. יצרנו עבורך שם משתמש אקראי. אם ברצונך לשנות את שם המשתמש או ליצור סיסמה חדשה לחשבון שלך, עבור לדף הפרופיל שלך."
-oauthHere: "כאן"
 statistics: "סטטיסטיקה"
 languageSelection: "בחירת שפה"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: "כהה"
   dark_description: "מראה כהה"
   apply: "החל"
-indexPage:
-  recommendedSection:
-    info:
-      title: "אילו פרויקטים מומלצים כאן?"
-      description: "ככל שהפרויקט שלך מקבל יותר תגובות (אגודל למעלה, חיוך ...), כך הוא מופיע גבוה יותר ברשימה."
 follower:
   follows: "נעקבים"
   followers: "עוקבים"
   follow: "עקוב"
-  username: "משתמש"
   followsMe: "עוקב אחריי"
   noFollowing: "אתה לא עוקב אחרי אף אחד כרגע."
   noFollowers: "אין לך עוקבים כרגע."
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "האם אתה בטוח שברצונך להפסיק לעקוב אחרי המשתמש הזה?"
   unfollowButton: "הפסק לעקוב אחרי %username%"
 project:
-  welcome:
-    title: "ברוכים הבאים ל-%theme% של Catrobat"
-    title_mindstorms: "ברוכים הבאים לאתר של Catrobat עבור Mindstorms EV3 ו-NXT"
-    subtitle: "צור סיפורים, משחקים ועוד..."
-    subtitle_embroidery: "תפור דוגמאות משלך על החולצות, התיקים, המכנסיים או כיסוי הטלפון שלך!"
-    subtitle_mindstorms: "צור פרויקטים משלך עם רובוטי Lego Mindstorms EV3 ו-NXT שלך"
-    download: "הורד את האפליקציה"
-    statistics: "עוד סטטיסטיקות"
   featured: "מומלצים"
   open: פתח 
   download: הורד
@@ -148,9 +117,6 @@ project:
       retention: "פרויקטים שהועלו יוסרו אוטומטית לאחר תקופה של חוסר פעילות. התחבר באופן קבוע או השג הורדות לפרויקט שלך כדי להאריך את שמירתו."
       protection: "פרויקטים טובים או פופולריים במיוחד עשויים להיות מוגנים ממחיקה אוטומטית על ידי המנהלים."
   example: "דוגמאות"
-  newest: "פרויקטים חדשים"
-  recommended: "פרויקטים מומלצים"
-  scratchremixes: "רמיקסים מ-Scratch"
   noProjects: "אין כרגע פרויקטים."
   shareAction: "שתף"
   deleteAction: "מחק פרויקט"
@@ -190,17 +156,10 @@ project:
     אין אפשרות לשחזר את הפעולות שלך!
     כן, מחק את זה!
     ביטול
-  tooLongName: "שם הפרויקט ארוך מדי!"
-  tooLongDescription: "תיאור הפרויקט ארוך מדי!"
-  tooLongCredits: "ההערות והקרדיטים של הפרויקט ארוכים מדי!"
   my_projects: "הפרויקטים ששיתפתי"
   trending: "פרויקטים חמים"
   popular: "פרויקטים פופולריים"
-  most:
-    viewed: הנצפים ביותר
-    downloaded: ההורדות הנפוצות ביותר
   random: "פרויקטים אקראיים"
-  related: "פרויקטים קשורים"
   browse:
     explore: "גלה פרויקטים"
     no_projects: "עדיין לא יצרת פרויקטים"
@@ -214,36 +173,14 @@ project:
     tooltip: "פרויקטים מוסרים אוטומטית לאחר תקופה של חוסר פעילות. השג יותר הורדות או התחבר באופן קבוע כדי להאריך את השמירה."
     tooltip_protected: "פרויקט זה מוגן ולא יימחק אוטומטית."
   downloads: "%downloads% הורדות"
-  sample: "פרויקטים לדוגמה"
   views: "%views% צפיות"
   likes:
     likersTitle: "אנשים שהגיבו לפרויקט הזה"
     all: "הכל"
-  remixes: "{0}0 רמיקסים |{1}רמיקס 1 |]1,Inf]%remixes% רמיקסים"
-  newRemixesNotificationTitle: "|{1}ל-\"%programName%\" יש רמיקס חדש 1: |]1,Inf] ל-\"%programName%\" יש %remixes% רמיקסים חדשים:"
-  submitted: "פרויקטים שנשלחו"
-  uploaded: "פרויקטים שהועלו"
-  reportAsInappropriate: "דווח כלא הולם"
-  reportProgram: "דווח על הפרויקט"
   languageVersion: "גרסת שפת Catrobat: %languageVersion%"
-  reportLoginText: "עליך %login% כדי לדווח על הפרויקט הזה."
-  reportDialogHeader: "למה ברצונך לדווח על הפרויקט הזה?"
-  reportDialogReason: "הזן סיבה"
-  reportRadioButtonInappropriate: "הוא לא הולם"
-  reportRadioButtonCopyright: "הפרת זכויות יוצרים"
-  reportRadioButtonSpam: "זה ספאם"
-  reportRadioButtonDislike: "הוא לא מוצא חן בעיניי"
-  reportOwnProgram: "אי אפשר לדווח על פרויקט משלך."
-  reportAlready: "כבר דיווחת על הפרויקט הזה."
-  reportDone: "דיווחת על הפרויקט הזה!"
   updateAppHeaderDownload: "ההורדה אינה אפשרית"
   updateAppTextDownload: "עדכן את האפליקציה שלך לגרסה העדכנית ביותר. שים לב שלא כל התכונות של Android זמינות כבר ב-iOS."
-  updateAppTextDownloadApk: "הורדת ה-APK זמינה כרגע רק ב-Android ולא ב-iOS."
-  updateAppHeader: "עדכון אפליקציה"
-  updateAppText: "עדכן את האפליקציה שלך לגרסה העדכנית ביותר."
-  btnClosePopup: Ok
   checkout_this_project: "בוא לראות את פרויקט ה-Catrobat הזה"
-  show_more: "הצג עוד"
   comments: תגובות
   send: "שלח"
   delete: מחק
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: "נמחק"
   noAdminRights: "אין לך הרשאות מנהל. התחבר כמנהל."
   editProject: "ערוך את הפרויקט"
-  closeProjectEditor: "סגור את עורך הפרויקט"
   closeEditorPrompt: האם ברצונך לשמור את השינויים?
   btnDiscard: זרוק
   addComment: "כתוב תגובה"
@@ -263,8 +199,6 @@ project:
   smile: "חיוך!"
   love: "אהבה!"
   wow: "וואו!"
-  linkTitle: "קישור"
-  link: "העתק את קישור הפרויקט ללוח"
   reactionsText: "תגובות"
   downloadErrorText: "אירעה שגיאה בהורדת הפרויקט. נסה שוב מאוחר יותר."
   downloadStartText: "ההורדה התחילה..."
@@ -284,11 +218,8 @@ project:
   translations: "תרגומים"
   createTranslation: "צור תרגום"
   deletedComment: "**נמחק**"
-  replyLabel: "תגובה"
-  repliesLabel: "תגובות"
   notForKids: "לא מתאים לילדים"
 remixGraph:
-  title: "רמיקסים"
   showRemixGraph: "גרף רמיקסים"
   by: 'by'
   open: 'פתח '
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: "לא זמין"
   projectUnknownUser: "משתמש לא ידוע"
 noReply: "זוהי הודעה אוטומטית - נא לא להשיב ישירות להודעת דוא\"ל זו."
-accountConfirmation:
-  subject: "אישור חשבון ה-Catrobat שלך"
-  message: |
-    %username% היקר/ה.
-    כדי להשלים את הפעלת החשבון שלך - בקר בכתובת %confirmationUrl%
-    אפשר להשתמש בקישור הזה פעם אחת בלבד לאימות החשבון שלך.
-    בברכה,
-    צוות Catrobat.
-  messageHtml: |
-    <p>
-    %username% היקר/ה.<br>
-    <br>
-    כדי להשלים את הפעלת החשבון שלך - לחץ <a href="%confirmationUrl%">כאן.</a><br>
-    אפשר להשתמש בקישור הזה פעם אחת בלבד לאימות החשבון שלך.<br>
-    <br>
-    בברכה,<br>
-    צוות Catrobat.
-    </p>
 newAccountConfirmation:
   subject: "אמת את כתובת הדוא\"ל שלך"
   welcome: "ברוך הבא ל-Catrobat!"
@@ -403,63 +316,13 @@ parent:
       ignore: "אם לא ביקשת זאת, אפשר להתעלם מהודעה זו בבטחה."
 passwordRecovery:
   subject: שחזור סיסמה שלך
-  message: |
-    %username% היקר/ה.
-    ביקשת לאפס את הסיסמה שלך ב-%appplication_url% כי שכחת אותה.
-    אם לא ביקשת זאת, התעלם מהודעה זו. הבקשה תפוג ותהיה חסרת תוקף בעוד 24 שעות.
-    כדי לאפס את הסיסמה וליצור סיסמה חדשה, בקר בדף הבא: %confirmationUrl%
-    אפשר להשתמש בשם המשתמש ובסיסמה שלך בכל עת כדי לגשת לקהילת %appplication_url%.
-    כדי לעשות זאת, פשוט בקר בדף הבא: %loginPage%
-    כדי לערוך את פרטי הפרופיל שלך, עבור לדף זה: %profilePage%
-    בברכה,
-    צוות Catrobat.
-  messageHtml: |
-    <p>
-    %username% היקר/ה.<br>
-    <br>
-    ביקשת לאפס את הסיסמה שלך ב-<a href="%appplication_url%">Pocket Code</a> כי שכחת אותה.
-    אם לא ביקשת זאת, התעלם מהודעה זו. הבקשה תפוג ותהיה חסרת תוקף בעוד 24 שעות.<br>
-    <br>
-    כדי לאפס את הסיסמה וליצור סיסמה חדשה, לחץ <a href="%confirmationUrl%">כאן.</a><br>
-    <br>
-    אפשר להשתמש בשם המשתמש ובסיסמה שלך בכל עת כדי לגשת לקהילת <a href="%appplication_url%">Pocket Code</a>.<br>
-    כדי לעשות זאת, פשוט בקר בדף הבא: <a href="%loginPage%">דף ההתחברות</a><br>
-    כדי לערוך את פרטי הפרופיל שלך, עבור ל<a href="%profilePage%">דף</a> הזה.<br>
-    <br>
-    בברכה,<br>
-    צוות Catrobat.
-    </p>
 profile:
   aboutMe: "עליי"
   currentlyWorkingOn: "עובד כרגע על"
-  edit: "ערוך את הפרופיל שלך"
-  saveChanges: שמור שינויים
   newPass: סיסמה חדשה
   repeatPass: הקלד סיסמה בשנית
   oldPass: "סיסמה ישנה"
-  firstEmail: המייל הראשי שלי
-  secondEmail: המייל המשני שלי
-  myPrograms: "הפרויקטים שלי"
-  follows: "עוקב אחרי"
-  follower: "עוקב"
-  unfollowUser: "הפסק לעקוב אחרי המשתמש הזה!"
-  followUser: "עקוב אחרי המשתמש הזה!"
-  amountOfPrograms: "מספר פרויקטים"
-  form:
-    passwordTooShort: הסיסמה החדשה חייב להיות לפחות %length% תווים.
-    passwordTooLong: הסיסמה החדשה יכול להכיל תווים באורך %length%.
-    passwordIsUsername: הסיסמה צריכה להיות שונה משם המשתמש.
-    passwordWrong: "סיסמה שגויה"
-    emailNotValid: כתובת האמייל הזו לא תקינה.
-    emailMissing: שגיאה בעת עדכון כתובת דואר אלקטרוני זו. צריכה להיות לך לפחות כתובת דואר אלקטרונית מאומתת אחת.
-    emailExists: כתובת דואר אלקטרוני זו כבר קיימת.
-    usernameNotValid: "שם המשתמש הזה אינו חוקי."
-    usernameMissing: "חייב להיות לך שם משתמש."
-    usernameExists: "שם המשתמש הזה כבר קיים."
-    usernameContainsEmail: "שם המשתמש לא צריך להכיל כתובת דוא\"ל."
-    submitSuccess: נשמר!
   reallyDeleteProgram: "האם אתה באמת רוצה למחוק את הפרויקט שלך"
-  programsOf: "הפרויקטים של"
   picture: "תמונת פרופיל"
   changePicture: שנה תמונה
   goToScratchProfile: "פרופיל ב-Scratch"
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: שנה סיסמא
   accountSettings: "הגדרות חשבון"
   accountVerification: "אימות חשבון"
-  account: "חשבון"
-  editProfile: "עריכת פרופיל"
-  edit: "ערוך"
   done: בוצע
-  checkMail: דואר אלקטרוני נשלח לכתובת הדוא ל שלך. אנא בדוק את תיבת הדואר הנכנס שלך.
   passwordUpdated: "הסיסמה שלך עודכנה בהצלחה."
-  avatar: "תמונה אישית"
-  email: "דוא\"ל"
   deleteAccount: "מחיקת חשבון"
   deleteAccountWarning: |
     שים לב:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: "מוריד..."
   exportDataError: "משהו השתבש בייצוא הנתונים שלך. נסה שוב מאוחר יותר."
   exportDataRateLimited: "אפשר לייצא את הנתונים שלך רק פעם ביום. נסה שוב מחר."
-  editAccountSettings: "עריכת הגדרות חשבון"
   profileChangeSuccess: "הפרופיל שלך שונה בהצלחה."
   unspecifiedError: "משהו לא עבד בשינוי הפרופיל שלך. נסה שוב או ספר לנו אם זה ממשיך לקרות!"
   verifyAccountText: "נשלח לך דוא\"ל עם קישור לאימות החשבון שלך. הקפד ללחוץ על הקישור בתוך השעה הקרובה; אפשר לבקש רק הודעה אחת ביום."
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: "שלח הצעות בנוגע לתנאי השימוש האלה בדוא\"ל אל %email-webmaster%."
   version: "גרסה 1.3, 4 במרץ 2014"
 search:
-  dotdotdot: חפש...
   search: "חפש פרויקטים, משתמשים וסטודיו"
   inMediaLib: "חפש בספריית המדיה"
   inMediaCategory: "חפש בקטגוריית המדיה"
   results: תוצאות חיפוש
-  resultcount: החיפוש שלך החזיר את התוצאות %count%
-  fail: "הזן לפחות מילת חיפוש אחת"
   noUsers: "לא נמצאו משתמשים"
   noProjects: "לא נמצאו פרויקטים"
   noStudios: "לא נמצאו סטודיו"
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: "ספריית מדיה"
   studio: "סטודיו"
   language: שפה
-  languageOptionsNotAvailable: "אין אפשרויות שפה זמינות."
 login:
   login: התחברות
   button:
@@ -578,21 +430,10 @@ login:
     or: "או"
   passOrUser: שם המשתמש או הסיסמה שלך שגויים.
   accountSuspended: "החשבון שלך הושעה. אם אתה חושב שזו טעות, פנה לתמיכה."
-  noUsername: "שם המשתמש או כתובת הדוא\"ל שלך לא נמצאו."
-  forgotPass: שכחת סיסמא או שם משתמש?
   recoverPassSend: דואר אלקטרוני נשלח לכתובת הדוא ל שלך. אנא בדוק את תיבת הדואר הנכנס שלך.
   alreadyReset: "הסיסמה למשתמש הזה כבר התבקשה ב-24 השעות האחרונות."
-  confirmationSend: "נשלח דוא\"ל לאישור ההרשמה לכתובת הדוא\"ל שלך. בדוק את תיבת הדואר שלך והפעל את החשבון."
-  userOrEmail: שם משתשמש או דואר אלקטרוני
-  changePass: שנה סיסמא
-  createAccount: צור חשבון
-  noAccount: "אין לך חשבון?"
-  alreadyAccount: "כבר יש לך חשבון?"
-  or: או
   username: שם משתמש
   email: "דוא\"ל"
-  passwordFirst: סיסמה
-  passwordSecond: "אימות סיסמה"
 register:
   title: "הרשמה"
   subText: "בהמשך, אתה יוצר חשבון בקהילת Catrobat ומסכים ל-%var1% ול-%var2% שלנו."
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: "הסכמת ההורים בוטלה"
     message: "ההורה או האפוטרופוס שלך ביטל את ההסכמה לחשבון שלך. לחשבון שלך תהיה פונקציונליות מוגבלת עד שההסכמה תינתן שוב."
-    newEmailPlaceholder: "דוא\"ל חדש של הורה"
-    changeButton: "עדכן ושלח שוב"
-accountRecovery:
-  title: "שחזור חשבון"
-  description: "אם אתה זוכר את הדוא\"ל או את שם המשתמש של החשבון שלך, נוכל לשלוח לך קישור לאיפוס הסיסמה."
-  button:
-    cancel: בטל
-    submit: "שחזר סיסמה"
 resetPassword:
   request:
     title: "אפס את הסיסמה שלך"
@@ -645,11 +478,6 @@ resetPassword:
     description: "אם קיים חשבון התואם לדוא\"ל שלך, נשלחה זה עתה הודעה עם קישור שבו אפשר לאפס את הסיסמה. הקישור יפוג בעוד %time%."
     descriptionTwo: "אפשר לבקש איפוס סיסמה חדש כל %throttleLimit% שעות."
     descriptionThree: "אם לא קיבלת דוא\"ל, בדוק את תיקיית הספאם או כתוב לתמיכה שלנו בכתובת %email-webmaster%."
-  email:
-    title: "Hi!"
-    visitLink: "כדי לאפס את הסיסמה שלך, בקר בקישור הבא"
-    expire: "הקישור יפוג בעוד %time%."
-    cheers: "להתראות!"
   newemail:
     title: "אפס את הסיסמה שלך"
     content: "ביקשת לאחרונה לאפס את הסיסמה של חשבון ה-Catrobat שלך. לחץ על הכפתור למטה כדי לבחור סיסמה חדשה. אם לא ביקשת זאת, אפשר להתעלם מהודעה זו בבטחה."
@@ -659,76 +487,33 @@ resetPassword:
     title: "אפס את הסיסמה שלך"
     button:
       submit: "אפס סיסמה"
-apk:
-  download: הורד כיישום (apps)
-  prepare: 'הכנת ישום'
-  preparing: 'הכנת הישום'
-  text: 'התהליך עשוי לקחת קצת זמן'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: "משהו לא עבד. נסה שוב או ספר לנו אם זה ממשיך לקרות!"
-  username:
-    blank: שם משתמש אינו יכול להיות ריק
-    invalid: שם המשתמש שלך אינו חוקי
-    exists: "שם המשתמש הזה כבר קיים."
-    not_exists: שם משתמש זה אינו קיים.
-    not_email: "שם המשתמש לא יכול להיות כתובת דוא\"ל."
-    size: "שם המשתמש חייב להכיל לפחות 3 תווים ולא יותר מ-180"
-  password:
-    blank: סיסמה חסרה.
-    short: 'הסיסמה שלך חייבת להיות לפחות {{ limit }} תווים.'
-  country:
-    blank: שם המדינה חסר.
-    invalid: שם המדינה לא חוקי
-  email:
-    blank: דואר אלקטרוני אינו יכול להיות ריק
-    invalid: הדוא ל שלך נראה לא חוקי
-    exists: כתובת דואר אלקטרוני זו כבר קיימת.
-  id:
-    blank: קוד אימות פתוח אינו יכול להיות ריק
-  login: סיסמה או שם המשתמש שגויים.
-  post-data: "נתוני ה-POST שגויים או חסרים!"
-  checksum:
-    missing: "הלקוח לא שלח fileChecksum! האם אתה משתמש בגרסה ישנה של Pocket Code?"
-    invalid: "סכום ביקורת לא חוקי"
   xml:
     invalid: קוד xml לא תקף
     missing: "שגיאה לא ידועה: project_xml_not_found!"
   file:
-    unexpected: קובץ לא צפוי נמצא
     invalid: קובץ שגוי
-  image.missing: "קובץ ה-XML של הפרויקט מזכיר קובץ שלא קיים בתיקיית הפרויקט"
-  unknown: שגיאה לא ידועה
-  token: "אימות המכשיר נכשל: auth-token לא חוקי!"
-  uploadTokenAuthFailed: "אימות אסימון ההעלאה נכשל."
-  project:
-    invalid: "פרויקט לא חוקי."
   languageversion:
     tooold: "מצטערים, הפרויקט שלך מכיל גרסה ישנה של שפת Catrobat! האם אתה משתמש בגרסה העדכנית של Pocket Code?"
   projectversion:
     tooold: "מצטערים, אתה משתמש בגרסה ישנה של Pocket Code. עדכן לגרסה העדכנית ביותר."
   authentication:
-    title: "ההתחברות לא הצליחה"
     webview: |
       נראה ששם המשתמש או הסיסמה שלך לא היו נכונים.
       נסה להתחבר שוב באפליקציה.
 success:
   text: "הצלחה"
-  registration: ההרשמה בוצעה בהצלחה!
-  token: ok
-  upload: הפרויקט שלך הועלה בהצלחה!
   imgUpload: "התמונה שלך הועלתה בהצלחה!"
-  report: הדו"ח שלך נשלחה בהצלחה!
 time:
   minutes.ago: "{0} לפני פחות מדקה |{1}לפני דקה |]1,Inf] לפני %count% דקות"
   hours.ago: "{1}לפני שעה |]1,Inf] לפני %count% שעות"
   days.ago: "{1}לפני יום |]1,Inf] לפני %count% ימים"
   months.ago: "{1}לפני חודש |]1,Inf] לפני %count% חודשים"
   years.ago: "{1}לפני שנה |]1,Inf] לפני יותר משנה"
-failure:
-  upload: "אירעה שגיאה בהעלאת האפליקציה שלך."
 user:
   verification:
     email: "אמת את הדוא\"ל שלך"
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: "הסיסמה מכילה תווים לא חוקיים"
     usernameContainsEmail: "שם המשתמש לא יכול להכיל כתובת דוא\"ל"
     usernameContainsLink: "שם המשתמש לא יכול להכיל קישור"
-    countryCodeInvalid: "קוד מדינה לא חוקי"
     pictureInvalid: "תמונת הפרופיל לא חוקית או לא נתמכת"
     dateOfBirthMissing: "נדרש תאריך לידה"
     dateOfBirthInvalid: "תאריך הלידה לא חוקי"
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: "השם כבר בשימוש"
     descriptionMissing: "חסר תיאור"
     descriptionEmpty: "התיאור ריק"
-    descriptionTooShort: "התיאור קצר מדי"
     descriptionTooLong: "התיאור ארוך מדי"
     imageFileInvalid: "קובץ התמונה לא חוקי"
     imageFileInvalidType: "סוג קובץ התמונה לא חוקי"
     imageFileTooLarge: "קובץ התמונה גדול מדי"
-#languages and countries
-language:
-  arabic: ערבית
-  bulgarian: בולגרית
-  catalan: קטלונית
-  chinese_simplified_han: סינית (מפושטת האן)
-  chinese_traditional_han: סינית (מסורתית האן)
-  croatian: קוראטית
-  czech: צ'כית
-  danish: דנית
-  dutch: הולנדית
-  english_united_kingdom: אנגלית (בריטניה)
-  english_united_states: אנגלית (ארצות הברית)
-  estonian: אסטונית
-  filipino: פיליפינית
-  finnish: פינית
-  french: צרפתית
-  german: גרמנית
-  greek: יוונית
-  hebrew: עברית
-  hindi: הינדית
-  hungarian: הונגרית
-  indonesian: אינדונזית
-  italian: איטלקית
-  japanese: יפנית
-  korean: קוריאנית
-  latvian: לטבית
-  lithuanian: ליטאית
-  malay: מָלָאִית
-  norwegian: "נורווגית"
-  persian: פרסית
-  polish: פולנית
-  portuguese_brazil: פורטוגזית (ברזיל)
-  portuguese_portugal: פורטוגזית (פורטוגל)
-  romanian: רומנית
-  russian: רוסית
-  serbian: סרבית
-  slovak: "סלובקית"
-  slovenian: סלובנית
-  spanish_latin_america: "ספרדית (אמריקה הלטינית)"
-  spanish_spain: "ספרדית (ספרד)"
-  swedish: "שוודית"
-  thai: תאילנדית
-  turkish: טורקית
-  ukrainian: "אוקראינית"
-  vietnamese: "וייטנאמית"
-ci:
-  generate: צור קובץ מסוג Apk
-  pending: יצירת קובץ מסוג Apk
-  download: הורד קובץ Apk
+
 admin:
   maintain:
     diskMaintenance: "תחזוקת דיסק"
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: "אין אובייקטים להסרה."
     removableObjects: "אובייקטים להסרה"
 recommender:
-  similarPrograms: "פרויקטים דומים"
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: "משתמשים שהורידו את הפרויקט הזה הורידו גם"
   moreFromThisUser: "עוד מאת %username%"
-pmd:
-  submitBtn: "הגש את הפרויקט שלך"
-  submitBox:
-    header: "הגשה"
-    text: "אתה עומד להגיש את הפרויקט שלך. הזן את קוד הפרויקט ולחץ על שלח."
-    btnText: "הגש"
-  successful:
-    text: "העלאת הפרויקט שלך הצליחה."
-  failed:
-    text: "העלאת הפרויקט נכשלה."
 codeview:
   title: "תצוגת קוד"
-  showCode: "הצג קוד"
-  hideCode: "הסתר קוד"
-  showStatistics: "הצג סטטיסטיקות קוד"
-  hideStatistics: "הסתר סטטיסטיקות קוד"
-  cantDisplayCode: "לא ניתן להציג את הקוד"
-  cantDisplayStatistics: "לא ניתן להציג את הקוד"
-  totalNumberOf: "מספר כולל של"
-  scenes: "סצנות"
-  scripts: 'תסריט'
-  bricks: 'לבנים'
-  objects: "דמויות ואובייקטים"
-  looks: 'מראה'
-  sounds: 'צלילים'
-  globals: "גלובליים"
-  locals: "מקומיים"
-  globalVariables: "משתנים גלובליים"
-  localVariables: "משתנים מקומיים"
-  eventBricks: "אבני אירועים"
-  controlBricks: "אבני בקרה"
-  motionBricks: "אבני תנועה"
-  soundBricks: "אבני צליל"
-  looksBricks: "אבני מראה"
-  penBricks: "אבני עט"
-  dataBricks: "אבני נתונים"
-  specialBricks: "אבנים מיוחדות"
 codeView:
   title: "תצוגת קוד"
   loading: "טוען תצוגת קוד..."
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: "סטטיסטיקות קוד"
   error: "לא ניתן להציג את סטטיסטיקות הקוד."
-  general: "כללי"
-  bricks: 'לבנים'
-  eventBricks: "אירוע"
-  controlBricks: 'שליטה'
-  motionBricks: 'תנועה'
-  soundBricks: 'צליל'
-  looksBricks: 'מראה'
-  penBricks: "עט"
-  dataBricks: 'נתונים'
-  deviceBricks: "מכשיר"
-  specialBricks: "מיוחד"
   yourScore: "הניקוד שלך:"
-  points: "נקודות"
   abstraction: "הפשטה ופירוק בעיות"
   parallelism: "מקביליות"
   logicalThinking: "חשיבה לוגית"
@@ -927,20 +612,7 @@ footer:
   text: "עם %project_count% פרויקטים מדהימים שכבר שותפו, הבא בתור יכול להיות שלך. הורד את האפליקציה שלנו והתחל ליצור עוד היום"
 privacy-policy:
   header: "מדיניות פרטיות"
-  version: "גרסה 2.2, 17 באוקטובר 2019"
-  text1: "כדי להציע לך את כל היתרונות של השירותים שלנו ושל החשבון הקשור אליהם, יש צורך לאסוף ממך נתונים מסוימים."
-  text2: "כדי לתחזק ולשפר את השירותים שלנו (אפליקציות ואתרים) ולבצע מחקר מדעי בנושא חינוך ICT ו-STEM/STEAM, אנחנו משתמשים ב-Google Analytics, ב-Crashlytics וב-Firebase, כולם של Google LLC (ארה\"ב), וכן ב-Dynatrace של Dynatrace LLC (ארה\"ב), כדי לקבל מטא-נתונים על השימוש בשירותים שלנו, למשל מידע על קריסות, חותמות זמן, דפים/מסכים שנצפו, שימוש באפליקציות ובשירותים שלנו, מערכת ההפעלה שבשימוש ומידע על ספק הרשת. ניתוח זה והנתונים שנאספים אינם מקושרים לפרופיל שלך ואינם מכילים מידע אישי (הספרות האחרונות של כתובת ה-IP עוברות אנונימיזציה). עם זאת, הנתונים שנאספים יועברו לספקי השירות (Google LLC, ארה\"ב ו-Dynatrace LLC, ארה\"ב). עיבוד הנתונים מבוסס על הסכמים עם Google LLC ועם Dynatrace LLC. היחסים עם ספקי השירות תואמים את התקנה הכללית להגנת מידע של האיחוד האירופי (EU GDPR) ואת הסכם \"Privacy Shield\" בין האיחוד האירופי לארה\"ב."
-  text3: "כדי ליצור חשבון במערכות שלנו ולהשתמש בו, וכדי ליידע אותך בדוא\"ל על שינויים נחוצים בחשבון שלך, למשל עדכונים או הפרות של תנאי השימוש והשירות, כללי הקהילה או המדיניות שלנו, נשמור את שם המשתמש שלך ואת כתובת הדוא\"ל שלך, אם מסרת אותה. אם חיברת את החשבון שלך דרך Google Plus או Facebook, נשמור בנוסף מפתח זיהוי המקושר לחשבון שלך בשירותים אלה. לא נשתמש בנתונים אלה לשום מטרה אחרת (למשל שיווק), אלא אם התרת לנו זאת במפורש."
-  text4: "על בסיס התנדבותי, אתה יכול למסור לנו את מדינת המגורים שלך דרך דף החשבון שלך באתר השיתוף. היא תוצג בפרופיל הציבורי שלך ותשמש אותנו רק למטרות סטטיסטיקה ומחקר. אפשר להסיר אותה בכל עת בהגדרות הפרופיל שלך."
-  text5: "אתה יכול לבטל את השימוש בנתונים האישיים השייכים לחשבון שלך בכל עת על ידי מחיקת החשבון דרך דף הפרופיל שלך ב-https://share.catrobat.org/. לאחר מחיקת החשבון עדיין תוכל להשתמש בשירותים המסופקים, אבל לא לשתף פעולה, למשל באמצעות העלאת תוכניות, תגובות או לייקים. בנוסף, כל התוכן שסיפקת ומקושר לחשבון שלך, למשל תוכניות שהועלו, תגובות וכו', יימחק."
-  text6: "כדי למנוע שימוש לרעה בשירותים שלנו, למשל באמצעות העלאות או תגובות של משתמשים למטרות לא חוקיות, כל הנתונים הציבוריים שמשתמשים יוצרים (העלאות, תגובות) יישמרו באופן פנימי במסד נתונים, יחד עם חותמת זמן וכתובת האינטרנט שבשימוש. נתונים אלה לא ישמשו מוסדות כלשהם ולא יועברו אליהם, אלא אם קיים חשד סביר לפעולות בלתי חוקיות במידה מספקת ומוסדות משפטיים מוסמכים רשמית מבקשים אותם על בסיס החוק החל. כל מקרה ייבדק קודם על ידינו ביסודיות באופן פרטני."
-  text7: "אתה יכול להירשם מרצון לניוזלטר של Catrobat בכתובת https://catrobat.org/newsletter, שאנחנו מספקים דרך שירות MailChimp (The Rocket Science Group LLC d/b/a MailChimp, ארה\"ב). לאחר מכן תקבל עדכונים על פרויקט Catrobat ועל השירותים שלו לכתובת הדוא\"ל שמסרת. אפשר לבטל את הניוזלטר בכל עת באמצעות הקישור \"unsubscribe\" בתחתית כל ניוזלטר. הניוזלטר מסופק על ידי MailChimp, שאיתה יש לנו הסכם עיבוד נתונים ושהתחייבה לתקנה הכללית להגנת מידע של האיחוד האירופי ול-\"Privacy Shield\" בין האיחוד האירופי לארה\"ב. לפרטים נוספים על MailChimp, עיין גם במדיניות הפרטיות ובתנאי השימוש של MailChimp."
-  text8: "כל השירותים מסופקים על ידי פרויקט הקוד הפתוח והחופשי Catrobat, תחת המטרייה של International Catrobat Association – Verein zur Förderung freier Software, ארגון ללא מטרות רווח הרשום בגראץ, אוסטריה (האיחוד האירופי). המדיניות שלנו מכבדת את דיני הגנת המידע של האיחוד האירופי ושל אוסטריה (GDPR). כדי ליצור איתנו קשר, שלח דוא\"ל אל contact@catrobat.org או מכתב אל Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)."
-  text9: "אם אתה מתחת לגיל 14, מדיניות זו חייבת להתקבל על ידי אפוטרופוס חוקי (בדרך כלל הורה)."
-  text10: "מדיניות הפרטיות הרשמית של Catrobat בשפה האנגלית זמינה ברשת בכתובת %privacy_policy%."
-  disagree-text: "ללא אישור לא נוכל ליצור חשבון, אבל התכונות העיקריות עדיין זמינות."
 catro-notifications:
-  markAsRead: "סמן כנקרא"
   noFollowers: "נראה שאין לך התראות על עוקבים."
   noComments: "נראה שאין לך התראות על תגובות."
   noReactions: "נראה שאין לך התראות על ריאקציות."
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: "הקישור הועתק ללוח!"
   success_project: "הקישור לפרויקט הועתק ללוח!"
-  success_user: "הקישור למשתמש הועתק ללוח!"
   fail: "העתקת הקישור ללוח נכשלה! :("
 next: קדימה
 previous: "הקודם"
 media-packages:
   title: "ספריית מדיה"
   description: "בקטגוריות הבאות אפשר למצוא דמויות ואובייקטים להוספה לפרויקטים שלך."
-  thumb-size:
-    description: "גודל תצוגה מקדימה"
-    sm: "קטן"
-    md: "בינוני"
-    lg: "גדול"
   theme-special: "מיוחד לערכת הנושא %flavor%"
   search-results: "תוצאות חיפוש בספריית המדיה"
-  no-results: "החיפוש שלך החזיר 0 תוצאות. השתמש רק במילות חיפוש באנגלית."
-  download_these_files: "שמור"
 flavor:
   pocketcode: פוקטקוד
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: "זכויות יוצרים &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. כל הזכויות שמורות."
 noscript:
   warning: "האתר הזה צריך JavaScript כדי לעבוד. הפעל JavaScript בדפדפן שלך או בקש ממבוגר לעזור לך."
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: "סירוב"
   privacy-link: "מדיניות פרטיות"
   settings-link: "הגדרות עוגיות"
-agree: "מסכים"
-disagree: "לא מסכים"
-profileLoader:
-  noProfiles: "אין כרגע פרופילים."
 element: "רכיב"
 elements: "רכיבים"
 share:
@@ -1018,7 +673,6 @@ share:
   success: "השיתוף הצליח"
 copy: "העתק קישור"
 checkOutProject: "בוא לראות את הפרויקט הזה:"
-checkOutUser: "בוא לראות את המשתמש הזה:"
 community: 'קהילת Catrobat'
 back_to_app: "יציאה מהקהילה"
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: "הישגים"
-    badge: "חדש"
   overview:
     header: "הישגים"
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: "מרובה משתתפים"
 studio:
   title: "סטודיו"
-  singular: "סטודיו"
   create_studio: "צור סטודיו"
-  delete_studio: "מחק סטודיו"
-  cancel_studio: 'בטל'
   studio_name: "שם הסטודיו"
   studio_description: "תיאור הסטודיו"
   is_public: "להפוך לציבורי?"
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: "הסר תמונה"
   popular: "סטודיו פופולריים"
   join: "הצטרף"
-  leave: "עזוב"
-  report: 'דיווח'
   public: "ציבורי"
   private: "בהזמנה בלבד"
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: "מנהל"
     member: "חבר"
   details:
-    add_project: "לחץ כדי להוסיף את הפרויקט"
     add: 'הוסף'
     showMore: "הצג עוד"
-    showLess: "הצג פחות"
     are_you_sure: "האם אתה בטוח?"
     no_way_of_return: "לא ניתן לבטל פעולה זו."
     delete_it: 'מחק'
-    remove_project: "הסר מהסטודיו"
     remove_project_error: "הסרת הפרויקט מהסטודיו נכשלה."
-    remove_project_success: "הפרויקט הוסר מהסטודיו בהצלחה."
     no_projects: "הסטודיו עדיין לא מכיל פרויקטים."
     projects:
       title: 'המיזמים השמורים במכשיר'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: "עדיין אין לך פרויקטים להוספה. צור אחד קודם ב-Pocket Code!"
       add_selected: "הוסף את הנבחרים"
     no_available_projects: "אין פרויקטים זמינים להוספה."
-    updateCoverError: "משהו השתבש בעדכון תמונת השער של הסטודיו."
     join: "הצטרף"
     leave: "עזוב"
-    report: 'דיווח'
     pending: "ממתין"
     decline: "נדחה"
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: "%user% השאיר תגובה."
     members_list:
       title: "חברי הסטודיו"
-      project_count: "{0} אין פרויקטים בסטודיו |{1} פרויקט אחד בסטודיו |]1,Inf] %count% פרויקטים בסטודיו"
       no_studio_projects: "אין פרויקטים בסטודיו"
       one_studio_project: "פרויקט אחד בסטודיו"
       n_studio_projects: "%count% פרויקטים בסטודיו"
@@ -1228,7 +869,6 @@ studio:
       ban_failed: "משהו השתבש בחסימת החבר הזה. נסה שוב מאוחר יותר."
       demote_member: "הורד מנהל לדרגת חבר"
       demotion_failed: "משהו השתבש בהורדת המנהל הזה בדרגה. נסה שוב מאוחר יותר."
-      last_admin: "לא ניתן להוריד בדרגה את המנהל האחרון של הסטודיו הזה."
     join_requests:
       title: "בקשות הצטרפות"
       accept: 'הסכמה'
@@ -1258,7 +898,6 @@ media_library:
   no_results: "לא נמצאו תוצאות."
   assets_count: "פריטים"
   view_all: "הצג הכול"
-  view_all_category: "הצג את כל %category%"
   back_to_app: "חזרה לאפליקציה"
 snackbar:
   project_not_found: "הפרויקט המבוקש לא זמין"
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: "אתה מבצע פעולות בסטודיו מהר מדי. המתן רגע."
   hidden_notice:
     project: "הפרויקט הזה הוסתר בעקבות דיווחים מהקהילה."
-    comment: "התגובה הזו הוסתרה בעקבות דיווחים מהקהילה."
-    user: "הפרופיל הזה הוסתר בעקבות דיווחים מהקהילה."
     user_own: "החשבון שלך הושעה בעקבות דיווחים מהקהילה. אפשר לערער על ההחלטה."
-    studio: "הסטודיו הזה הוסתר בעקבות דיווחים מהקהילה."
-  notification:
-    content_hidden: "ה%content_type% שלך הוסתר בעקבות דיווחים מהקהילה. אפשר לערער על ההחלטה."
-    appeal_approved: "הערעור שלך אושר. התוכן שלך גלוי שוב."
-    appeal_rejected: "הערעור שלך נבדק וההחלטה להסתיר את התוכן שלך נשארת בתוקף."
-    admin_review_needed: "תוכן הוסתר אוטומטית ודורש בדיקה."
 Reports: "דיווחים"
 members: "חברים"

@@ -8,19 +8,12 @@ meta.og.description.login: 'Mag-sign in para maibahagi mo ang iyong mga proyekto
 meta.og.title.register: 'Gumawa ng Catrobat account'
 meta.og.description.register: 'Sumali sa komunidad ng Catrobat at simulan nang ibahagi ang iyong mga malikhaing proyekto ngayon.'
 meta.og.description.profile: '%username% sa Catrobat – tingnan ang kanilang mga proyekto at nakamit.'
-localLanguage: Ingles
 username: Pangalan ng gumagamit
 password: Password
-createNewPassword: Lumikha ng panibagong password
-accountSettings: Settings ng account
 email: 'Email'
-aboutPocketCode: Tungkol sa Pocket Code
 about: Tungkol sa Catrobat
-education: Edukasyon
 chat: Mga usapan at forums
-privacyGuide: 'Gabay sa Privacy'
 others: Iba pa
-tutorials: Tulong
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Paano mo nabuo ang iyong proyekto? Gumamit ka ba ng 
 projectImportedFromScratch: 'Ang proyektong ito ay inangkat mula sa MIT Scratch. Maaari mong tingnan ang orihinal na proyekto'
 scratchImportedProjectLinkHere: 'dito.'
 country: 'Bansa'
-loginText: 'mag-login'
 privacyPolicy: Patakaran sa Privacy
-imprint: 'Impormasyong legal'
 projectDetails: 'Mga detalye'
 somethingWentWrong: 'Naku, may hindi gumana. Pakisubukan ulit!'
 accountNotVerified: 'Siguraduhing naka-login ka at na-verify na ang email ng iyong account.'
@@ -55,36 +46,28 @@ accountSuspended: 'Sinuspinde ang iyong account dahil sa mga ulat ng komunidad. 
 doesNotExist: 'Hindi umiiral ang hinihinging resource.'
 pleaseTryAgain: 'Pakisubukan ulit!'
 tryAgainButton: 'Subukan ulit'
-oldVersionError: 'Pakiupdate sa pinakabagong bersyon ng Pocket Code!'
 more: 'higit pa'
 less: 'mas kaunti'
 show-more: 'Ipakita ang higit pa'
-show-less: 'Ipakita ang mas kaunti'
 more-information: 'Higit pang impormasyon'
 less-information: 'Mas kaunting impormasyon'
 ok: 'Sige'
-clickToDownloadProgram: 'Para i-download ang halimbawang proyekto, i-click %link_start% dito %link_end%.'
-registrationError: 'Ginagamit na ang username o email address.'
 notifications: 'Mga abiso'
 allNotifications: 'All'
 FollowersNotifications: 'Mga tagasunod'
 LikeNotifications: 'Mga reaksyon'
 CommentNotifications: 'Mga komento'
 RemixNotifications: 'Mga remix'
-wellDone: 'Magaling!'
 done: 'Tapos na!'
 notificationsReadMessage: 'Mukhang wala kang mga abiso.'
-confirmMessage: 'Oo, burahin ito'
 cancelMessage: "I-cancel"
 notificationsUnauthorizedError: 'Hindi ma-authorize ang user'
 notificationsClearError: 'Hindi mamarkahang nabasa ang mga abiso!'
-pleaseWait: 'Sandali lang...'
 projects: "Proyekto sa device"
 users: 'Mga user'
 studios: 'Mga studio'
 oauthPopUpTitle: 'Impormasyon sa pag-sign in gamit ang external na account'
 oauthInfo: 'Gumamit ka ng external na account para mag-login. Gumawa kami ng random na username para sa iyo. Kung gusto mong palitan ang iyong username o gumawa ng bagong password para sa iyong account, pumunta sa iyong profile page.'
-oauthHere: 'dito'
 statistics: 'Estadistika'
 languageSelection: 'Pagpili ng wika'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Madilim'
   dark_description: 'Madilim na itsura'
   apply: 'Ilagay'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Anong mga proyekto ang inirerekomenda rito?'
-      description: 'Habang dumarami ang reaksyon (Thumbs up, Smile ...) na natatanggap ng iyong proyekto, mas tumataas ito sa listahang ito.'
 follower:
   follows: 'Sinusundan'
   followers: 'Mga tagasunod'
   follow: 'Sundan'
-  username: 'User'
   followsMe: 'Sinusundan ako'
   noFollowing: 'Wala ka pang sinusundan sa ngayon.'
   noFollowers: 'Wala ka pang tagasunod sa ngayon.'
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: 'Sigurado ka bang gusto mong ihinto ang pagsunod sa user na ito?'
   unfollowButton: 'Ihinto ang pagsunod kay %username%'
 project:
-  welcome:
-    title: 'Maligayang pagdating sa %theme% ng Catrobat'
-    title_mindstorms: 'Maligayang pagdating sa site ng Catrobat para sa Mindstorms EV3 at NXT'
-    subtitle: 'Gumawa ng mga kuwento, laro at iba pa...'
-    subtitle_embroidery: 'Magtahi ng sarili mong disenyo sa iyong T-shirt, bag, pantalon, o case ng smartphone!'
-    subtitle_mindstorms: 'Gumawa ng sarili mong mga proyekto gamit ang iyong Lego Mindstorms EV3 at NXT na robot'
-    download: 'I-download ang app'
-    statistics: 'Higit pang estadistika'
   featured: 'Itinatampok'
   open: 'Buksan'
   download: 'I-download'
@@ -148,9 +117,6 @@ project:
       retention: 'Awtomatikong buburahin ang mga na-upload na proyekto pagkatapos ng isang panahon ng kawalan ng aktibidad. Mag-login nang regular o magkaroon ng mga download sa iyong proyekto para mas tumagal ito.'
       protection: 'Maaaring protektahan ng mga moderator mula sa awtomatikong pagbura ang mga partikular na mahusay o sikat na proyekto.'
   example: 'Mga halimbawa'
-  newest: 'Pinakabagong mga proyekto'
-  recommended: 'Mga inirerekomendang proyekto'
-  scratchremixes: 'Mga remix mula sa Scratch'
   noProjects: 'Wala pang mga proyekto sa ngayon.'
   shareAction: 'Ibahagi'
   deleteAction: Burahin ang proyekto
@@ -190,17 +156,10 @@ project:
     Hindi na maibabalik ang iyong ginawa!
     Oo, burahin ito!
     I-cancel
-  tooLongName: 'Masyadong mahaba ang pangalan ng proyekto!'
-  tooLongDescription: 'Masyadong mahaba ang paglalarawan ng proyekto!'
-  tooLongCredits: 'Masyadong mahaba ang mga tala at credits ng proyekto!'
   my_projects: 'Mga ibinahagi kong proyekto'
   trending: 'Mga trending na proyekto'
   popular: 'Mga sikat na proyekto'
-  most:
-    viewed: 'Pinakamaraming nanood'
-    downloaded: 'Pinakamaraming nag-download'
   random: 'Mga random na proyekto'
-  related: 'Mga kaugnay na proyekto'
   browse:
     explore: 'Tuklasin ang mga proyekto'
     no_projects: 'Wala ka pang nagagawang proyekto'
@@ -214,36 +173,14 @@ project:
     tooltip: 'Awtomatikong binubura ang mga proyekto pagkatapos ng isang panahon ng kawalan ng aktibidad. Magkaroon ng mas maraming download o mag-login nang regular para mas tumagal ito.'
     tooltip_protected: 'Protektado ang proyektong ito at hindi awtomatikong mabubura.'
   downloads: '%downloads% download'
-  sample: 'Mga halimbawang proyekto'
   views: '%views% view'
   likes:
     likersTitle: 'Mga taong nag-react sa proyektong iyon'
     all: "All"
-  remixes: '{0}0 remix |{1}1 remix |]1,Inf]%remixes% remix'
-  newRemixesNotificationTitle: '|{1}May 1 bagong remix ang "%programName%": |]1,Inf] May %remixes% bagong remix ang "%programName%":'
-  submitted: 'Mga isinumiteng proyekto'
-  uploaded: 'Mga na-upload na proyekto'
-  reportAsInappropriate: 'Iulat bilang hindi angkop'
-  reportProgram: 'Iulat ang proyekto'
   languageVersion: 'Bersyon ng wikang Catrobat: %languageVersion%'
-  reportLoginText: 'Pakiusap, %login% para maiulat ang proyektong ito.'
-  reportDialogHeader: 'Bakit mo gustong iulat ang proyektong ito?'
-  reportDialogReason: 'Ilagay ang dahilan'
-  reportRadioButtonInappropriate: 'Hindi ito angkop'
-  reportRadioButtonCopyright: 'Paglabag sa copyright'
-  reportRadioButtonSpam: 'Spam ito'
-  reportRadioButtonDislike: 'Hindi ko ito gusto'
-  reportOwnProgram: 'Hindi mo maaaring iulat ang sarili mong proyekto.'
-  reportAlready: 'Naiulat mo na ang proyektong ito.'
-  reportDone: 'Naiulat mo ang proyektong ito!'
   updateAppHeaderDownload: 'Hindi ma-download'
   updateAppTextDownload: 'Pakiupdate ang iyong app sa pinakabagong bersyon. Tandaan na hindi pa available sa iOS ang lahat ng feature ng Android.'
-  updateAppTextDownloadApk: 'Sa ngayon, sa Android lang available ang pag-download ng APK at hindi sa iOS.'
-  updateAppHeader: 'I-update ang app'
-  updateAppText: 'Pakiupdate ang iyong app sa pinakabagong bersyon.'
-  btnClosePopup: Ok
   checkout_this_project: 'Tingnan ang proyektong ito sa Catrobat'
-  show_more: 'Ipakita ang higit pa'
   comments: 'Mga komento'
   send: 'Ipadala'
   delete: Burahin
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: 'Nabura'
   noAdminRights: 'Wala kang admin rights. Mag-login bilang Admin.'
   editProject: 'I-edit ang proyekto'
-  closeProjectEditor: 'Isara ang project editor'
   closeEditorPrompt: Gusto mo bang i-save ang mga pagbabago?
   btnDiscard: I-discard
   addComment: 'Magsulat ng komento'
@@ -263,8 +199,6 @@ project:
   smile: 'Ngiti!'
   love: 'Puso!'
   wow: 'Wow!'
-  linkTitle: Link
-  link: 'Kopyahin ang link ng proyekto sa clipboard'
   reactionsText: 'Mga reaksyon'
   downloadErrorText: 'Nagkaroon ng error habang dina-download ang proyekto. Pakisubukan ulit mamaya.'
   downloadStartText: 'Nagsimula na ang download...'
@@ -284,11 +218,8 @@ project:
   translations: 'Mga salin'
   createTranslation: 'Gumawa ng salin'
   deletedComment: '**Nabura**'
-  replyLabel: 'sagot'
-  repliesLabel: 'mga sagot'
   notForKids: 'Hindi ligtas para sa mga bata'
 remixGraph:
-  title: 'Mga remix'
   showRemixGraph: 'Graph ng remix'
   by: 'ni'
   open: 'Buksan'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Hindi available'
   projectUnknownUser: 'Hindi kilalang user'
 noReply: 'Isa itong awtomatikong mensahe - Huwag direktang sumagot sa email na ito.'
-accountConfirmation:
-  subject: 'Kumpirmasyon ng iyong Catrobat account'
-  message: |
-    Mahal na %username%,
-    Para matapos ang pag-activate ng iyong account, bisitahin ang %confirmationUrl%
-    Isang beses lang magagamit ang link na ito para i-validate ang iyong account.
-    Nagmamahal,
-    Ang iyong Catrobat Team.
-  messageHtml: |
-    <p>
-    Mahal na %username%,<br>
-    <br>
-    Para matapos ang pag-activate ng iyong account, i-click <a href="%confirmationUrl%">dito.</a><br>
-    Isang beses lang magagamit ang link na ito para i-validate ang iyong account.<br>
-    <br>
-    Nagmamahal,<br>
-    Ang iyong Catrobat Team.
-    </p>
 newAccountConfirmation:
   subject: 'I-verify ang iyong email address'
   welcome: 'Maligayang pagdating sa Catrobat!'
@@ -403,63 +316,13 @@ parent:
       ignore: 'Kung hindi mo ito hiniling, maaari mong balewalain ang email na ito.'
 passwordRecovery:
   subject: 'Pagbawi ng iyong password sa Catrobat'
-  message: |
-    Mahal na %username%,
-    Humiling ka na i-reset ang iyong password sa %appplication_url% dahil nakalimutan mo ang iyong password.
-    Kung hindi mo ito hiniling, balewalain mo lang ito. Mag-e-expire ito at hindi na magagamit pagkalipas ng 24 oras.
-    Para i-reset ang iyong password at gumawa ng bago, bisitahin ang sumusunod na pahina: %confirmationUrl%
-    Magagamit mo ang iyong username at password anumang oras para ma-access ang komunidad ng %appplication_url%.
-    Para gawin ito, bisitahin lang ang sumusunod na pahina: %loginPage%
-    Para i-edit ang mga detalye ng iyong profile, pumunta sa pahinang ito: %profilePage%
-    Nagmamahal,
-    Ang iyong Catrobat Team.
-  messageHtml: |
-    <p>
-    Mahal na %username%,<br>
-    <br>
-    Humiling ka na i-reset ang iyong password sa <a href="%appplication_url%">Pocket Code</a> dahil nakalimutan mo ang iyong password.
-    Kung hindi mo ito hiniling, balewalain mo lang ito. Mag-e-expire ito at hindi na magagamit pagkalipas ng 24 oras.<br>
-    <br>
-    Para i-reset ang iyong password at gumawa ng bago, i-click <a href="%confirmationUrl%">dito.</a><br>
-    <br>
-    Magagamit mo ang iyong username at password anumang oras para ma-access ang komunidad ng <a href="%appplication_url%">Pocket Code</a>.<br>
-    Para gawin ito, bisitahin lang ang sumusunod na pahina: <a href="%loginPage%">Pahina ng login</a><br>
-    Para i-edit ang mga detalye ng iyong profile, pumunta sa <a href="%profilePage%">pahinang ito</a>.<br>
-    <br>
-    Nagmamahal,<br>
-    Ang iyong Catrobat Team.
-    </p>
 profile:
   aboutMe: 'Tungkol sa akin'
   currentlyWorkingOn: 'Kasalukuyang ginagawa'
-  edit: 'I-edit ang iyong profile'
-  saveChanges: 'i-save ang mga pagbabago'
   newPass: 'bagong password'
   repeatPass: 'ulitin ang password'
   oldPass: 'lumang password'
-  firstEmail: 'Ang una kong email'
-  secondEmail: 'Ang pangalawa kong email'
-  myPrograms: 'Ang aking mga proyekto'
-  follows: 'Sinusundan'
-  follower: 'Tagasunod'
-  unfollowUser: 'Ihinto ang pagsunod sa user na ito!'
-  followUser: 'Sundan ang user na ito!'
-  amountOfPrograms: 'Bilang ng mga proyekto'
-  form:
-    passwordTooShort: 'Dapat may hindi bababa sa %length% character ang bagong password.'
-    passwordTooLong: 'Hanggang %length% character lang ang maaaring laman ng bagong password.'
-    passwordIsUsername: 'Dapat iba ang password sa username.'
-    passwordWrong: 'Maling password'
-    emailNotValid: 'Hindi valid ang email address na ito.'
-    emailMissing: 'Nagkaroon ng error habang ina-update ang email address na ito. Dapat may kahit isang na-validate kang email address.'
-    emailExists: 'Umiiral na ang email address na ito.'
-    usernameNotValid: 'Hindi valid ang username na ito.'
-    usernameMissing: 'Kailangan mong magkaroon ng username.'
-    usernameExists: 'Umiiral na ang username na ito.'
-    usernameContainsEmail: 'Hindi dapat maglaman ng email address ang username.'
-    submitSuccess: 'na-save!'
   reallyDeleteProgram: 'Gusto mo ba talagang burahin ang iyong proyekto'
-  programsOf: 'Mga proyekto ni'
   picture: 'Larawan sa profile'
   changePicture: 'Palitan ang larawan'
   goToScratchProfile: 'Profile sa Scratch'
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: 'Palitan ang password'
   accountSettings: Settings ng account
   accountVerification: 'I-verify ang account'
-  account: Account
-  editProfile: 'I-edit ang profile'
-  edit: 'I-edit'
   done: Tapos
-  checkMail: 'May ipinadalang email sa iyong email address. Tingnan ang iyong inbox.'
   passwordUpdated: 'Matagumpay na na-update ang iyong password.'
-  avatar: Avatar
-  email: Email
   deleteAccount: 'Burahin ang account'
   deleteAccountWarning: |
     Tandaan:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: 'Dina-download...'
   exportDataError: 'May nangyaring mali habang ine-export ang iyong datos. Pakisubukan ulit mamaya.'
   exportDataRateLimited: 'Isang beses lang bawat araw mo maaaring i-export ang iyong datos. Pakisubukan ulit bukas.'
-  editAccountSettings: 'I-edit ang mga setting ng account'
   profileChangeSuccess: 'Matagumpay na nabago ang iyong profile.'
   unspecifiedError: 'May hindi gumana habang binabago ang iyong profile. Pakisubukan ulit o sabihan kami kung paulit-ulit itong nangyayari!'
   verifyAccountText: 'Padadalhan ka namin ng email na may link para i-verify ang iyong account. Siguraduhing i-click ang link sa loob ng susunod na oras; isang email lang bawat araw ang maaari mong hilingin.'
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Ipadala ang anumang mungkahi tungkol sa Mga Tuntunin ng Paggamit na ito sa %email-webmaster%.'
   version: 'Bersyon 1.3, 4 Marso 2014'
 search:
-  dotdotdot: 'Maghanap...'
   search: 'Maghanap ng mga proyekto, user at studio'
   inMediaLib: 'Maghanap sa media library'
   inMediaCategory: 'Maghanap sa kategorya ng media'
   results: 'Mga resulta para sa'
-  resultcount: 'Nagbalik ang iyong paghahanap ng %count% resulta'
-  fail: 'Maglagay ng kahit isang salitang hahanapin'
   noUsers: 'Walang nahanap na user'
   noProjects: 'Walang nahanap na proyekto'
   noStudios: 'Walang nahanap na studio'
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: 'Aklatan ng media'
   studio: 'Mga studio'
   language: Lengguahe
-  languageOptionsNotAvailable: 'Walang available na opsyon sa wika.'
 login:
   login: Mag-Login
   button:
@@ -578,21 +430,10 @@ login:
     or: "o"
   passOrUser: 'Mali ang iyong password o username.'
   accountSuspended: 'Sinuspinde ang iyong account. Kung sa tingin mo ay pagkakamali ito, makipag-ugnayan sa support.'
-  noUsername: 'Hindi nahanap ang iyong username o email address.'
-  forgotPass: 'Nakalimutan ang password o username?'
   recoverPassSend: 'May ipinadalang email sa iyong email address. Tingnan ang iyong inbox.'
   alreadyReset: 'Nahiling na ang password para sa user na ito sa loob ng huling 24 oras.'
-  confirmationSend: 'May ipinadalang email para kumpirmahin ang iyong pagpaparehistro sa iyong email address. Tingnan ang iyong inbox at i-activate ang iyong account.'
-  userOrEmail: 'Username o email'
-  changePass: 'Palitan ang password'
-  createAccount: 'Gumawa ng account'
-  noAccount: 'Wala ka pang account?'
-  alreadyAccount: 'May account ka na?'
-  or: OR
   username: Pangalan ng gumagamit
   email: Email
-  passwordFirst: Password
-  passwordSecond: 'Kumpirmahin ang password'
 register:
   title: 'Mag-sign up'
   subText: 'Sa pagpapatuloy, gumagawa ka ng account sa komunidad ng Catrobat at sumasang-ayon ka sa aming %var1% at %var2%.'
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: 'Binawi ang pahintulot ng magulang'
     message: 'Binawi ng iyong magulang o tagapag-alaga ang pahintulot para sa iyong account. Limitado ang magagawa ng iyong account hanggang maibigay ulit ang pahintulot.'
-    newEmailPlaceholder: 'Bagong email ng magulang'
-    changeButton: 'I-update at ipadala ulit'
-accountRecovery:
-  title: 'Pagbawi ng account'
-  description: 'Kung naaalala mo ang email o username ng iyong account, mapapadalhan ka namin ng link para i-reset ang iyong password.'
-  button:
-    cancel: I-cancel
-    submit: 'Bawiin ang password'
 resetPassword:
   request:
     title: 'I-reset ang iyong password'
@@ -645,11 +478,6 @@ resetPassword:
     description: 'Kung may account na tumutugma sa iyong email, may kapapadalang email na naglalaman ng link na magagamit mo para i-reset ang iyong password. Mag-e-expire ang link na ito sa loob ng %time%.'
     descriptionTwo: 'Maaari kang humiling ng bagong pag-reset ng password tuwing %throttleLimit% oras.'
     descriptionThree: 'Kung hindi ka nakatanggap ng email, tingnan ang iyong spam folder o sumulat sa aming support sa %email-webmaster%.'
-  email:
-    title: "Hi!"
-    visitLink: 'Para i-reset ang iyong password, bisitahin ang sumusunod na link'
-    expire: 'Mag-e-expire ang link na ito sa loob ng %time%.'
-    cheers: 'Paalam!'
   newemail:
     title: 'I-reset ang iyong password'
     content: 'Kamakailan kang humiling ng pag-reset ng password para sa iyong Catrobat account. I-click ang button sa ibaba para pumili ng bagong password. Kung hindi mo ito hiniling, maaari mong balewalain ang email na ito.'
@@ -659,76 +487,33 @@ resetPassword:
     title: 'I-reset ang iyong password'
     button:
       submit: "Baguhin ang password"
-apk:
-  download: 'I-download bilang app'
-  prepare: 'Kunin bilang app'
-  preparing: 'Inihahanda ang app'
-  text: 'Maaaring magtagal ang prosesong ito'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'May hindi gumana. Pakisubukan ulit o sabihan kami kung paulit-ulit itong nangyayari!'
-  username:
-    blank: 'Hindi dapat walang laman ang username'
-    invalid: 'Hindi valid ang iyong username'
-    exists: 'Umiiral na ang username na ito.'
-    not_exists: 'Hindi umiiral ang username na ito.'
-    not_email: 'Hindi dapat email address ang username.'
-    size: 'Dapat may hindi bababa sa 3 at hindi hihigit sa 180 character ang username'
-  password:
-    blank: 'Walang password.'
-    short: 'Dapat may hindi bababa sa {{ limit }} character ang iyong password.'
-  country:
-    blank: 'Walang bansa.'
-    invalid: 'Hindi valid na bansa'
-  email:
-    blank: 'Hindi dapat walang laman ang email'
-    invalid: 'Mukhang hindi valid ang iyong email'
-    exists: 'Umiiral na ang email address na ito.'
-  id:
-    blank: 'Hindi dapat walang laman ang Open authentication ID'
-  login: 'Mali ang password o username.'
-  post-data: 'Mali o kulang ang POST-data!'
-  checksum:
-    missing: 'Hindi nagpadala ng fileChecksum ang client! Lumang bersyon ba ng Pocket Code ang gamit mo?'
-    invalid: 'hindi valid na checksum'
   xml:
     invalid: 'hindi valid na code xml'
     missing: 'hindi kilalang error: project_xml_not_found!'
   file:
-    unexpected: 'may nahanap na hindi inaasahang file'
     invalid: 'hindi valid na file'
-  image.missing: 'Binabanggit ng Project XML ang isang file na wala sa project-folder'
-  unknown: 'hindi kilalang error'
-  token: 'Nabigo ang pag-authenticate ng device: hindi valid na auth-token!'
-  uploadTokenAuthFailed: 'Nabigo ang auth ng upload token.'
-  project:
-    invalid: 'Hindi valid na proyekto.'
   languageversion:
     tooold: 'Paumanhin, may lumang bersyon ng wikang Catrobat ang iyong proyekto! Pinakabagong bersyon ba ng Pocket Code ang gamit mo?'
   projectversion:
     tooold: 'Paumanhin, lumang bersyon ng Pocket Code ang gamit mo. Pakiupdate sa pinakabagong bersyon.'
   authentication:
-    title: 'Hindi gumana ang login'
     webview: |
       Mukhang hindi tama ang iyong username o password.
       Subukang mag-login ulit sa app.
 success:
   text: 'Tagumpay'
-  registration: 'Matagumpay ang pagpaparehistro!'
-  token: ok
-  upload: 'Matagumpay na na-upload ang iyong proyekto!'
   imgUpload: 'Matagumpay na na-upload ang iyong larawan!'
-  report: 'Matagumpay na naipadala ang iyong ulat!'
 time:
   minutes.ago: '{0} < 1 minuto ang nakalipas |{1}1 minuto ang nakalipas |]1,Inf] %count% minuto ang nakalipas'
   hours.ago: '{1}1 oras ang nakalipas |]1,Inf] %count% oras ang nakalipas'
   days.ago: '{1}1 araw ang nakalipas |]1,Inf] %count% araw ang nakalipas'
   months.ago: '{1}1 buwan ang nakalipas |]1,Inf] %count% buwan ang nakalipas'
   years.ago: '{1}1 taon ang nakalipas |]1,Inf] mahigit isang taon ang nakalipas'
-failure:
-  upload: 'Nagkaroon ng error habang ina-upload ang iyong app.'
 user:
   verification:
     email: 'I-verify ang iyong email'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'May mga hindi valid na character ang password'
     usernameContainsEmail: 'Hindi dapat maglaman ng email address ang username'
     usernameContainsLink: 'Hindi dapat maglaman ng link ang username'
-    countryCodeInvalid: 'Hindi valid ang country code'
     pictureInvalid: 'Hindi valid o hindi suportado ang larawan sa profile'
     dateOfBirthMissing: 'Kailangan ang petsa ng kapanganakan'
     dateOfBirthInvalid: 'Hindi valid ang petsa ng kapanganakan'
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'Ginagamit na ang pangalan'
     descriptionMissing: 'Walang paglalarawan'
     descriptionEmpty: 'Walang laman ang paglalarawan'
-    descriptionTooShort: 'Masyadong maikli ang paglalarawan'
     descriptionTooLong: 'Masyadong mahaba ang paglalarawan'
     imageFileInvalid: 'Hindi valid ang image file'
     imageFileInvalidType: 'Hindi valid ang uri ng image file'
     imageFileTooLarge: 'Masyadong malaki ang image file'
-#languages and countries
-language:
-  arabic: 'Arabe'
-  bulgarian: 'Bulgaro'
-  catalan: 'Katalan'
-  chinese_simplified_han: 'Tsino (Pinasimpleng Han)'
-  chinese_traditional_han: 'Tsino (Tradisyonal na Han)'
-  croatian: 'Kroato'
-  czech: 'Tseko'
-  danish: 'Danes'
-  dutch: 'Olandes'
-  english_united_kingdom: 'Ingles (United Kingdom)'
-  english_united_states: 'Ingles (Estados Unidos)'
-  estonian: 'Estonyano'
-  filipino: Filipino
-  finnish: 'Finlandes'
-  french: 'Pranses'
-  german: 'Aleman'
-  greek: 'Griyego'
-  hebrew: 'Hebreo'
-  hindi: Hindi
-  hungarian: 'Unggaro'
-  indonesian: 'Indones'
-  italian: 'Italyano'
-  japanese: 'Hapon'
-  korean: 'Koreano'
-  latvian: 'Latbyano'
-  lithuanian: 'Litwano'
-  malay: Malay
-  norwegian: 'Noruwego'
-  persian: 'Persyano'
-  polish: 'Polako'
-  portuguese_brazil: 'Portuges (Brazil)'
-  portuguese_portugal: 'Portuges (Portugal)'
-  romanian: 'Rumano'
-  russian: 'Ruso'
-  serbian: 'Serbyo'
-  slovak: 'Eslobako'
-  slovenian: 'Eslobeno'
-  spanish_latin_america: 'Espanyol (Latin America)'
-  spanish_spain: 'Espanyol (Espanya)'
-  swedish: 'Suweko'
-  thai: Thai
-  turkish: 'Turko'
-  ukrainian: 'Ukranyano'
-  vietnamese: 'Byetnames'
-ci:
-  generate: 'Gumawa ng apk'
-  pending: 'Ginagawa ang apk'
-  download: 'I-download ang apk'
+
 admin:
   maintain:
     diskMaintenance: 'Pagpapanatili ng disk'
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: 'Walang maaaring alisin na object.'
     removableObjects: 'Mga object na maaaring alisin'
 recommender:
-  similarPrograms: 'Mga katulad na proyekto'
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Ang mga user na nag-download ng proyektong ito ay nag-download din ng'
   moreFromThisUser: 'Higit pa mula kay %username%'
-pmd:
-  submitBtn: 'Isumite ang iyong proyekto'
-  submitBox:
-    header: 'Pagsusumite'
-    text: 'Isusumite mo na ang iyong proyekto. Ilagay ang project code at i-click ang ipadala.'
-    btnText: 'Isumite'
-  successful:
-    text: 'Matagumpay ang pag-upload ng iyong proyekto.'
-  failed:
-    text: 'Nabigo ang pag-upload ng proyekto.'
 codeview:
   title: 'Tingnan ang code'
-  showCode: 'Ipakita ang code'
-  hideCode: 'Itago ang code'
-  showStatistics: 'Ipakita ang estadistika ng code'
-  hideStatistics: 'Itago ang estadistika ng code'
-  cantDisplayCode: 'Hindi maipakita ang code'
-  cantDisplayStatistics: 'Hindi maipakita ang code'
-  totalNumberOf: 'Kabuuang bilang ng'
-  scenes: 'Mga eksena'
-  scripts: 'Mga script'
-  bricks: 'Mga brick'
-  objects: 'Aktor at mga bagay'
-  looks: 'Larawan'
-  sounds: 'Tunog'
-  globals: 'Mga global'
-  locals: 'Mga lokal'
-  globalVariables: 'Mga global na variable'
-  localVariables: 'Mga lokal na variable'
-  eventBricks: 'Mga event brick'
-  controlBricks: 'Mga control brick'
-  motionBricks: 'Mga motion brick'
-  soundBricks: 'Mga sound brick'
-  looksBricks: 'Mga looks brick'
-  penBricks: 'Mga pen brick'
-  dataBricks: 'Mga data brick'
-  specialBricks: 'Mga espesyal na brick'
 codeView:
   title: 'Tingnan ang code'
   loading: 'Nilo-load ang code...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: 'Estadistika ng code'
   error: 'Hindi maipakita ang estadistika ng code.'
-  general: 'Pangkalahatan'
-  bricks: 'Mga brick'
-  eventBricks: 'Kaganapan'
-  controlBricks: 'Kontrol'
-  motionBricks: 'Paggalaw'
-  soundBricks: 'Tunog'
-  looksBricks: 'Larawan'
-  penBricks: 'Panulat'
-  dataBricks: 'Datos'
-  deviceBricks: 'Aparato'
-  specialBricks: 'Espesyal'
   yourScore: 'Ang iyong score:'
-  points: 'puntos'
   abstraction: 'Abstraksyon at paghahati-hati ng problema'
   parallelism: 'Paralelismo'
   logicalThinking: 'Lohikal na pag-iisip'
@@ -927,20 +612,7 @@ footer:
   text: 'Mayroon nang %project_count% kahanga-hangang proyektong naibahagi, kaya maaaring sa iyo ang susunod. I-download ang aming app at magsimulang lumikha ngayon'
 privacy-policy:
   header: 'Patakaran sa privacy'
-  version: 'Bersyon 2.2, 17 Oktubre 2019'
-  text1: 'Para maibigay sa iyo ang lahat ng benepisyo ng aming mga serbisyo at ng kaugnay na account, kailangan naming mangolekta ng ilang datos mula sa iyo.'
-  text2: 'Para mapanatili at mapabuti ang aming mga serbisyo (mga app at website) at para magsagawa ng siyentipikong pananaliksik sa edukasyon sa ICT at STEM/STEAM, ginagamit namin ang Google Analytics, Crashlytics, at Firebase, lahat ng Google LLC (USA), pati na ang Dynatrace ng Dynatrace LLC (USA) para makakuha ng metadata tungkol sa paggamit ng aming mga serbisyo, hal., impormasyon sa pag-crash, mga timestamp, mga binisitang pahina/screen, paggamit ng aming mga app at serbisyo, ginamit na operating system, at impormasyon tungkol sa network provider. Ang pagsusuring ito at ang nakolektang datos ay hindi nakakonekta sa iyong profile at walang anumang personal na impormasyon (ina-anonymize ang huling bahagi ng IP address). Gayunpaman, ililipat ang nakolektang datos sa mga service provider (Google LLC, USA at Dynatrace LLC, USA). Nakabatay ang pagproseso ng datos sa mga kasunduan sa Google LLC at Dynatrace LLC. Sumusunod ang ugnayang ito sa mga service provider sa General Data Protection Regulation ng European Union (EU GDPR) at sa kasunduang EU-USA "Privacy Shield".'
-  text3: 'Para makagawa at magamit ang isang account sa aming mga sistema, at para ipaalam sa iyo sa e-mail ang mga kinakailangang pagbabago tungkol sa iyong account, hal., mga update o paglabag sa aming Mga Tuntunin ng Paggamit at Serbisyo, mga patakaran ng komunidad, o mga patakaran namin, iimbakin namin ang iyong username at, kung ibinigay mo, ang iyong e-mail address. Kung ikinonekta mo ang iyong account sa Google Plus o Facebook, nag-iimbak din kami ng identification key na nakakonekta sa iyong account sa mga serbisyong iyon. Hindi namin gagamitin ang datos na ito para sa anumang ibang layunin (hal., marketing), maliban kung tahasan mo kaming pinahintulutan.'
-  text4: 'Kung gusto mo, maaari mong ibigay sa amin ang iyong bansang tinitirhan sa pahina ng iyong account sa sharing site. Ipapakita ito sa iyong pampublikong profile at gagamitin lang namin para sa estadistika at pananaliksik. Maaari itong alisin anumang oras sa mga setting ng iyong profile.'
-  text5: 'Maaari mong bawiin ang paggamit ng personal na datos ng iyong account anumang oras sa pagbura ng iyong account sa iyong profile page sa https://share.catrobat.org/. Pagkatapos burahin ang iyong account, magagamit mo pa rin ang mga ibinibigay na serbisyo, pero hindi ka na makakapag-collaborate, hal., sa pag-upload ng mga programa, pagkomento, o pag-like. Bukod dito, mabubura ang lahat ng nilalamang nakakonekta sa iyong account, hal., mga na-upload na programa, komento, atbp.'
-  text6: 'Para maiwasan ang maling paggamit ng aming mga serbisyo, hal., sa mga upload o komento ng user para sa ilegal na layunin, iniimbak sa loob ng isang database ang lahat ng pampublikong datos na ginawa ng user (mga upload, komento), kasama ang timestamp at ang ginamit na internet address. Hindi gagamitin o ipapasa ang datos na ito sa anumang institusyon, maliban kung may makatwirang hinala ng sapat na ilegal na gawain at hilingin ito ng mga opisyal na awtorisadong legal na institusyon batay sa naaangkop na batas. Masusing susuriin muna namin ang bawat kaso nang isa-isa.'
-  text7: 'Maaari kang kusang mag-subscribe sa Catrobat Newsletter sa https://catrobat.org/newsletter na ibinibigay namin sa pamamagitan ng serbisyong MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Makakatanggap ka ng mga update tungkol sa proyektong Catrobat at mga serbisyo nito sa e-mail address na ibinigay mo. Maaari mong ihinto ang newsletter anumang oras gamit ang link na "unsubscribe" sa footer ng bawat newsletter. Ibinibigay ang newsletter na ito ng MailChimp, na may kasunduan kami sa pagproseso ng datos at nangako na susunod sa EU General Data Protection Regulation at sa EU-USA "Privacy Shield". Para sa higit pang detalye tungkol sa MailChimp, tingnan din ang Patakaran sa Privacy at Mga Tuntunin ng Paggamit ng MailChimp.'
-  text8: 'Ang lahat ng Serbisyo ay ibinibigay ng libre at open source na proyektong Catrobat sa ilalim ng International Catrobat Association – Verein zur Förderung freier Software, isang non-profit na NGO na nakarehistro sa Graz, Austria (European Union). Iginagalang ng aming mga patakaran ang batas ng EU at Austria sa proteksyon ng datos (GDPR). Para makipag-ugnayan sa amin, magpadala ng e-mail sa contact@catrobat.org o sumulat sa Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).'
-  text9: 'Kung wala ka pang 14 taong gulang, dapat tanggapin ng isang legal na tagapag-alaga (karaniwan ay magulang) ang patakarang ito.'
-  text10: 'Ang opisyal na patakaran sa privacy ng Catrobat sa wikang Ingles ay available sa web sa %privacy_policy%.'
-  disagree-text: 'Kung walang pahintulot, hindi kami makakagawa ng account pero magagamit pa rin ang mga pangunahing feature.'
 catro-notifications:
-  markAsRead: 'Markahang nabasa'
   noFollowers: 'Mukhang wala kang mga abiso tungkol sa tagasunod.'
   noComments: 'Mukhang wala kang mga abiso tungkol sa komento.'
   noReactions: 'Mukhang wala kang mga abiso tungkol sa reaksyon.'
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: 'Nakopya ang link sa clipboard!'
   success_project: 'Nakopya ang link ng proyekto sa clipboard!'
-  success_user: 'Nakopya ang link ng user sa clipboard!'
   fail: 'Hindi nakopya ang link sa clipboard! :('
 next: Sunod
 previous: 'Nakaraan'
 media-packages:
   title: 'Aklatan ng media'
   description: 'Sa mga sumusunod na kategorya, makakahanap ka ng mga actor at object na maidaragdag sa iyong mga proyekto.'
-  thumb-size:
-    description: 'Laki ng preview'
-    sm: 'maliit'
-    md: 'katamtaman'
-    lg: 'malaki'
   theme-special: 'Espesyal na tema ng %flavor%'
   search-results: 'Mga resulta ng paghahanap sa aklatan ng media'
-  no-results: 'Walang resulta ang iyong paghahanap. Gumamit lang ng mga salitang Ingles sa paghahanap.'
-  download_these_files: 'i-save'
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Nakalaan ang lahat ng karapatan.'
 noscript:
   warning: 'Kailangan ng website na ito ang JavaScript para gumana. I-enable ang JavaScript sa iyong browser o humingi ng tulong sa isang nakatatanda.'
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: "Tanggihan"
   privacy-link: "Patakaran sa Privacy"
   settings-link: 'Mga setting ng cookie'
-agree: 'Sang-ayon'
-disagree: 'Hindi sang-ayon'
-profileLoader:
-  noProfiles: 'Wala pang mga profile sa ngayon.'
 element: 'Elemento'
 elements: 'Mga elemento'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'Matagumpay na naibahagi'
 copy: 'Kopyahin ang link'
 checkOutProject: 'Tingnan ang proyektong ito:'
-checkOutUser: 'Tingnan ang user na ito:'
 community: 'Komunidad ng Catrobat'
 back_to_app: 'Lumabas sa komunidad'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Mga nakamit'
-    badge: 'bago'
   overview:
     header: 'Mga nakamit'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: 'Maramihang manlalaro'
 studio:
   title: 'Mga studio'
-  singular: 'Studio'
   create_studio: 'Gumawa ng studio'
-  delete_studio: 'Burahin ang studio'
-  cancel_studio: 'I-cancel'
   studio_name: 'Pangalan ng studio'
   studio_description: 'Paglalarawan ng studio'
   is_public: 'Gawing pampubliko?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Alisin ang larawan'
   popular: 'Mga sikat na studio'
   join: 'Sumali'
-  leave: 'Umalis'
-  report: 'Iulat'
   public: 'pampubliko'
   private: 'Imbitasyon lang'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Admin'
     member: 'Miyembro'
   details:
-    add_project: 'i-click para idagdag ang proyekto'
     add: 'Add'
     showMore: 'ipakita ang higit pa'
-    showLess: 'ipakita ang mas kaunti'
     are_you_sure: 'Sigurado ka ba?'
     no_way_of_return: 'Hindi na ito mababawi.'
     delete_it: 'Burahin'
-    remove_project: 'Alisin sa studio'
     remove_project_error: 'Hindi maalis ang proyekto sa studio.'
-    remove_project_success: 'Matagumpay na naalis ang proyekto sa studio.'
     no_projects: 'Wala pang proyekto ang studio.'
     projects:
       title: 'Proyekto sa device'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Wala ka pang maidaragdag na proyekto. Gumawa muna ng isa sa Pocket Code!'
       add_selected: 'Idagdag ang mga napili'
     no_available_projects: 'Walang available na proyektong maidaragdag.'
-    updateCoverError: 'May nangyaring mali habang ina-update ang cover ng studio.'
     join: 'Sumali'
     leave: 'Umalis'
-    report: 'Iulat'
     pending: 'Nakabinbin'
     decline: 'Tinanggihan'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: 'Nag-iwan si %user% ng komento.'
     members_list:
       title: 'Mga miyembro ng studio'
-      project_count: '{0} Walang proyekto sa studio |{1} 1 proyekto sa studio |]1,Inf] %count% proyekto sa studio'
       no_studio_projects: 'Walang proyekto sa studio'
       one_studio_project: '1 proyekto sa studio'
       n_studio_projects: '%count% proyekto sa studio'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'May nangyaring mali habang bina-ban ang miyembrong ito. Subukan ulit mamaya.'
       demote_member: 'Ibaba ang admin bilang miyembro'
       demotion_failed: 'May nangyaring mali habang ibinababa ang admin na ito. Subukan ulit mamaya.'
-      last_admin: 'Hindi maibababa ang huling admin ng studio na ito.'
     join_requests:
       title: 'Mga hiling na sumali'
       accept: 'Tanggapin'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'Walang nahanap na resulta.'
   assets_count: 'mga asset'
   view_all: 'Tingnan lahat'
-  view_all_category: 'Tingnan lahat ng %category%'
   back_to_app: 'Bumalik sa app'
 snackbar:
   project_not_found: 'Hindi available ang hinihinging proyekto'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: 'Masyadong mabilis ang mga ginagawa mo sa studio. Maghintay sandali.'
   hidden_notice:
     project: 'Itinago ang proyektong ito dahil sa mga ulat ng komunidad.'
-    comment: 'Itinago ang komentong ito dahil sa mga ulat ng komunidad.'
-    user: 'Itinago ang profile na ito dahil sa mga ulat ng komunidad.'
     user_own: 'Sinuspinde ang iyong account dahil sa mga ulat ng komunidad. Maaari mong iapela ang desisyong ito.'
-    studio: 'Itinago ang studio na ito dahil sa mga ulat ng komunidad.'
-  notification:
-    content_hidden: 'Itinago ang iyong %content_type% dahil sa mga ulat ng komunidad. Maaari mong iapela ang desisyong ito.'
-    appeal_approved: 'Inaprubahan ang iyong apela. Makikita na ulit ang iyong nilalaman.'
-    appeal_rejected: 'Nasuri na ang iyong apela at mananatili ang desisyong itago ang iyong nilalaman.'
-    admin_review_needed: 'Awtomatikong itinago ang nilalaman at kailangan itong suriin.'
 Reports: 'Mga ulat'
 members: 'mga miyembro'

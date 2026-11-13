@@ -8,19 +8,12 @@ meta.og.description.login: "ログインして、Catrobat のプロジェクト�
 meta.og.title.register: "Catrobat アカウントを作成"
 meta.og.description.register: "Catrobat コミュニティに参加して、今日からクリエイティブなプロジェクトを共有しましょう。"
 meta.og.description.profile: "Catrobat の %username% – プロジェクトや実績を見てみましょう。"
-localLanguage: 英語
 username: ユーザー名
 password: パスワード
-createNewPassword: 新しいパスワードを作成
-accountSettings: アカウント設定
 email: メール
-aboutPocketCode: ポケットコードについて
 about: キャトロバットについて
-education: 教育
 chat: チャットとフォーラム
-privacyGuide: "プライバシー意識ガイド"
 others: その他
-tutorials: ヘルプ
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: どのようにしてこのプロジェクトを作�
 projectImportedFromScratch: "このプロジェクトは MIT Scratch からインポートされました。元のプロジェクトはこちらで確認できます："
 scratchImportedProjectLinkHere: "ここ。"
 country: 国
-loginText: ログイン
 privacyPolicy: プライバシーポリシー
-imprint: インプリント
 projectDetails: 詳細
 somethingWentWrong: '何か間違っています。'
 accountNotVerified: "ログインしていること、およびアカウントのメールアドレスが確認済みであることを確認してください。"
@@ -55,36 +46,28 @@ accountSuspended: "コミュニティからの報告により、あなたのア�
 doesNotExist: "リクエストされたリソースは存在しません。"
 pleaseTryAgain: 'もう一度やり直してください。'
 tryAgainButton: "もう一度試す"
-oldVersionError: 'ポケット コードの最新のバージョンにアップデートしてください!'
 more: '詳細'
 less: '少ない'
 show-more: '詳細を表示'
-show-less: '表示を減らす'
 more-information: '詳細情報'
 less-information: '情報を減らす'
 ok: OK
-clickToDownloadProgram: 'サンプルプロジェクトをダウンロードするには、 %link_start% ここをクリックしてください %link_end%.'
-registrationError: 'ユーザー名またはメール アドレスは、すでに使用されています。'
 notifications: '通知'
 allNotifications: 'すべて'
 FollowersNotifications: 'フォロワー'
 LikeNotifications: 'リアクション'
 CommentNotifications: 'コメント'
 RemixNotifications: 'リミックス'
-wellDone: "よくできました!"
 done: "完了!"
 notificationsReadMessage: "通知がないようです。"
-confirmMessage: "はい、削除します"
 cancelMessage: "キャンセル"
 notificationsUnauthorizedError: "ユーザーを承認できません"
 notificationsClearError: "通知を既読にできません!"
-pleaseWait: "しばらくお待ちください..."
 projects: "プログラム"
 users: "ユーザー"
 studios: "スタジオ"
 oauthPopUpTitle: "外部アカウントのサインイン情報"
 oauthInfo: '外部アカウントを使用してログインしました。ランダムなユーザー名を作成しました。 ユーザー名を変更したい場合、またはアカウントの新しいパスワードを作成したい場合は、プロフィールページにアクセスしてください。'
-oauthHere: "ここ"
 statistics: "統計情報"
 languageSelection: "言語の選択"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: "ダーク"
   dark_description: "暗い表示"
   apply: '適用'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'ここで推奨されるプロジェクトは何ですか?'
-      description: 'プロジェクトが受信するほど(Thumbs up, Smile ...)、このリストに表示される反応が高くなります。'
 follower:
   follows: フォロー中
   followers: フォロワー
   follow: フォロー
-  username: ユーザー
   followsMe: フォローする
   noFollowing: あなたは現在誰もフォローしていません。
   noFollowers: 現在フォロワーはいません。
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "このユーザーのフォローを解除してもよろしいですか？"
   unfollowButton: "%username% のフォローを解除"
 project:
-  welcome:
-    title: "Catrobat の %theme% へようこそ"
-    title_mindstorms: "Catrobat の Mindstorms EV3・NXT 向けサイトへようこそ"
-    subtitle: "ストーリーやゲームなどを作りましょう..."
-    subtitle_embroidery: "Tシャツ、バッグ、ズボン、スマホケースに自分だけの模様を刺しゅうしましょう！"
-    subtitle_mindstorms: "Lego Mindstorms EV3・NXT ロボットで自分だけのプロジェクトを作りましょう"
-    download: "アプリをダウンロード"
-    statistics: "その他の統計"
   featured: おすすめ
   open: 開く 
   download: ダウンロード
@@ -148,9 +117,6 @@ project:
       retention: "アップロードされたプロジェクトは、一定期間アクティビティがないと自動的に削除されます。定期的にログインするか、プロジェクトをダウンロードしてもらうと、保存期間が延長されます。"
       protection: "特に優れたプロジェクトや人気のプロジェクトは、モデレーターによって自動削除から保護される場合があります。"
   example: "サンプル"
-  newest: "最新のプロジェクト"
-  recommended: "おすすめのプロジェクト"
-  scratchremixes: "Scratch リミックス"
   noProjects: "現在、プロジェクトはありません。"
   shareAction: 共有
   deleteAction: プロジェクトを削除
@@ -180,17 +146,10 @@ project:
   reportCommentConfirmation: "このコメントを報告してもよろしいですか？"
   deleteCommentConfirmation: "このコメントを削除してもよろしいですか？"
   deleteAccountConfirmation: "アカウントを削除しますか？\nアカウントを削除してもよろしいですか？アップロードしたプロジェクトとコメントもすべて削除されます！\nこの操作は元に戻せません！\nはい、削除します！\nキャンセル\n"
-  tooLongName: "プロジェクト名が長すぎます！"
-  tooLongDescription: "プロジェクトの説明が長すぎます！"
-  tooLongCredits: "プロジェクトのメモとクレジットが長すぎます！"
   my_projects: 私のプロジェクト
   trending: "話題のプロジェクト"
   popular: "人気のプロジェクト"
-  most:
-    viewed: よく見られているもの
-    downloaded: 最もダウンロードされているもの
   random: "ランダムなプロジェクト"
-  related: "関連プロジェクト"
   browse:
     explore: "プロジェクトを探す"
     no_projects: "まだプロジェクトを作成していません"
@@ -204,36 +163,14 @@ project:
     tooltip: "プロジェクトは一定期間アクティビティがないと自動的に削除されます。ダウンロード数を増やすか、定期的にログインすると保存期間が延長されます。"
     tooltip_protected: "このプロジェクトは保護されているため、自動的に削除されることはありません。"
   downloads: "%downloads% 回ダウンロード"
-  sample: "サンプルプロジェクト"
   views: "%views% 回表示"
   likes:
     likersTitle: "このプロジェクトにリアクションした人"
     all: "すべて"
-  remixes: "{0}0 件のリミックス |{1}1 件のリミックス |]1,Inf]%remixes% 件のリミックス"
-  newRemixesNotificationTitle: "|{1}「%programName%」に 1 件の新しいリミックスがあります： |]1,Inf] 「%programName%」に %remixes% 件の新しいリミックスがあります："
-  submitted: "投稿されたプロジェクト"
-  uploaded: "アップロードされたプロジェクト"
-  reportAsInappropriate: 不適切として報告します。
-  reportProgram: "プロジェクトを報告"
   languageVersion: "Catrobat 言語バージョン：%languageVersion%"
-  reportLoginText: "このプロジェクトを報告するには %login% してください。"
-  reportDialogHeader: "このプロジェクトを報告する理由は何ですか？"
-  reportDialogReason: "理由を入力してください"
-  reportRadioButtonInappropriate: "不適切な内容です"
-  reportRadioButtonCopyright: "著作権の侵害"
-  reportRadioButtonSpam: "スパムです"
-  reportRadioButtonDislike: "気に入りません"
-  reportOwnProgram: "自分のプロジェクトを報告することはできません。"
-  reportAlready: "このプロジェクトはすでに報告済みです。"
-  reportDone: "このプロジェクトを報告しました！"
   updateAppHeaderDownload: "ダウンロードできません"
   updateAppTextDownload: "アプリを最新バージョンに更新してください。なお、Android のすべての機能が IOS で使えるわけではありません。"
-  updateAppTextDownloadApk: "APK のダウンロードは現在 Android でのみ利用でき、IOS では利用できません。"
-  updateAppHeader: "アプリを更新"
-  updateAppText: "アプリを最新バージョンに更新してください。"
-  btnClosePopup: OK
   checkout_this_project: "この Catrobat プロジェクトを見てみてください"
-  show_more: "もっと見る"
   comments: コメント
   send: "送信"
   delete: 削除
@@ -245,7 +182,6 @@ project:
   deleted_popup_header: "削除済み"
   noAdminRights: "管理者権限がありません。管理者としてログインしてください。"
   editProject: "プロジェクトを編集"
-  closeProjectEditor: "プロジェクトエディターを閉じる"
   closeEditorPrompt: 変更内容を保存しますか？
   btnDiscard: 破棄
   addComment: "コメントを書く"
@@ -253,8 +189,6 @@ project:
   smile: "スマイル！"
   love: "大好き！"
   wow: "すごーい！"
-  linkTitle: "リンク"
-  link: "プロジェクトのリンクをクリップボードにコピー"
   reactionsText: リアクション
   downloadErrorText: "プロジェクトのダウンロード中にエラーが発生しました。しばらくしてからもう一度お試しください。"
   downloadStartText: "ダウンロードを開始しました..."
@@ -274,11 +208,8 @@ project:
   translations: "翻訳"
   createTranslation: "翻訳を作成"
   deletedComment: "**削除済み**"
-  replyLabel: "件の返信"
-  repliesLabel: "件の返信"
   notForKids: "子ども向けではありません"
 remixGraph:
-  title: リミックス
   showRemixGraph: 'リミックスのグラフを表示'
   by: 'によって'
   open: '開く '
@@ -298,15 +229,6 @@ remixGraph:
   projectNotAvailable: "利用できません"
   projectUnknownUser: "不明なユーザー"
 noReply: 'これは自動送信メッセージです。このメールには直接返信しないでください。'
-accountConfirmation:
-  subject: Catrobat アカウントの確認
-  message: |
-    親愛なる %username%。
-    アカウントの有効化を完了するには - %confirmationUrl% にアクセスしてください。
-    このリンクは、お客様のアカウントを認証するために一度だけ使用することができます。
-    よろしくお願いいたします。
-    あなたの Catrobat チーム。
-  messageHtml: "<p>\n%username% 様<br>\n<br>\nアカウントの有効化を完了するには、<a href=\"%confirmationUrl%\">ここをクリックしてください。</a><br>\nこのリンクは、アカウントを確認するために一度だけ使用できます。<br>\n<br>\nよろしくお願いいたします。<br>\nCatrobat チーム\n</p>\n"
 newAccountConfirmation:
   subject: "メールアドレスを確認してください"
   welcome: "Catrobat へようこそ！"
@@ -384,48 +306,13 @@ parent:
       ignore: "このリクエストに心当たりがない場合は、このメールを無視してかまいません。"
 passwordRecovery:
   subject: あなたの Catrobat パスワードを回復
-  message: |
-    親愛なる %username%。
-    パスワードを忘れたため、%appplication_url%でパスワードのリセットを要求しました。
-    リクエストしていない場合は、無視してください。24時間後には期限切れとなり、使えなくなります。
-    パスワードをリセットして新しいパスワードを作成するには、以下のページにアクセスしてください。%confirmationUrl% です。
-    ユーザー名とパスワードを使って、いつでも%appplication_url%コミュニティにアクセスすることができます。
-    これを行うには、次のページにアクセスしてください。%loginPage% (ログインページ)
-    プロフィールの詳細を編集するには、このページにアクセスしてください。%profilePage%
-    よろしくお願いします。
-    Your Catrobat Team.
-  messageHtml: "<p>\n%username% 様<br>\n<br>\nパスワードをお忘れになったため、<a href=\"%appplication_url%\">Pocket Code</a> のパスワードの再設定がリクエストされました。\nリクエストしていない場合は、このメールを無視してください。24 時間後に期限切れとなり、使えなくなります。<br>\n<br>\nパスワードを再設定して新しいパスワードを作成するには、<a href=\"%confirmationUrl%\">ここをクリックしてください。</a><br>\n<br>\nユーザー名とパスワードを使って、いつでも <a href=\"%appplication_url%\">Pocket Code</a> コミュニティにアクセスできます。<br>\n次のページにアクセスしてください：<a href=\"%loginPage%\">ログインページ</a><br>\nプロフィールの詳細を編集するには、こちらの<a href=\"%profilePage%\">ページ</a>にアクセスしてください。<br>\n<br>\nよろしくお願いいたします。<br>\nCatrobat チーム\n</p>\n"
 profile:
   aboutMe: "自己紹介"
   currentlyWorkingOn: "現在取り組んでいること"
-  edit: プロフィールを編集
-  saveChanges: 変更を保存します。
   newPass: 新しいパスワード
   repeatPass: パスワードの確認
   oldPass: 古いパスワード
-  firstEmail: 私の最初のメール アドレス
-  secondEmail: 私の 2 番目のメール アドレス
-  myPrograms: 私のプロジェクト
-  follows: フォロー
-  follower: フォロワー
-  unfollowUser: このユーザーのフォローを解除！
-  followUser: このユーザーをフォロー！
-  amountOfPrograms: プロジェクトの量
-  form:
-    passwordTooShort: 新しいパスワードは、少なくとも %length% 文字必要です。
-    passwordTooLong: 新しいパスワードは、最大 %length% 文字にすることができます。
-    passwordIsUsername: パスワードは、ユーザー名と異なる必要があります。
-    passwordWrong: パスワードが間違っています
-    emailNotValid: この電子メール アドレスが無効です。
-    emailMissing: この電子メール アドレスを更新中のエラーがありました。少なくとも 1 つの検証済みの電子メール アドレスが必要です。
-    emailExists: このメール アドレスは既に存在します。
-    usernameNotValid: このユーザー名は無効です。
-    usernameMissing: ユーザー名が必要です。
-    usernameExists: このユーザー名は既に存在します。
-    usernameContainsEmail: ユーザー名にメールアドレスを含めるべきではありません。
-    submitSuccess: 保存しました！
   reallyDeleteProgram: 本当にプロジェクトを削除しますか？
-  programsOf: プロジェクト
   picture: "プロフィール画像"
   changePicture: 写真を変更
   goToScratchProfile: スクラッチのプロフィール
@@ -435,14 +322,8 @@ myprofile:
   securitySettings: パスワードを変更する
   accountSettings: アカウント設定
   accountVerification: "アカウントを確認"
-  account: "アカウント"
-  editProfile: プロファイルを編集
-  edit: 編集
   done: 完了
-  checkMail: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。
   passwordUpdated: パスワードが正常に更新されました。
-  avatar: アバター
-  email: Eメールアドレス
   deleteAccount: アカウントを削除
   deleteAccountWarning: "ご注意ください：\nあなたは %num_projects% 件のプロジェクトを作成し、%num_followers% 人のフォロワーがいます。すべてのプロジェクトが削除されます。今後ログインできなくなり、プロジェクトはすべての一覧から消えます。プロフィールの削除は元に戻せません！\n本当に退会しますか？\n"
   exportData: "自分のデータをダウンロード"
@@ -450,7 +331,6 @@ myprofile:
   exportDataLoading: "ダウンロード中..."
   exportDataError: "データのエクスポート中に問題が発生しました。しばらくしてからもう一度お試しください。"
   exportDataRateLimited: "データのエクスポートは 1 日 1 回までです。明日もう一度お試しください。"
-  editAccountSettings: アカウント設定を編集
   profileChangeSuccess: "プロフィールを変更しました。"
   unspecifiedError: "プロフィールの変更中に問題が発生しました。もう一度お試しいただき、問題が続く場合はお知らせください！"
   verifyAccountText: "アカウントを確認するためのリンクを記載したメールをお送りします。1 時間以内にリンクをクリックしてください。メールのリクエストは 1 日 1 回までです。"
@@ -507,13 +387,10 @@ termsOfUse:
   bottom2: 'これらの利用規約に関するあらゆる提案を、%email-webmaster% までメールしてください。'
   version: バージョン 1.3、2014/3/4
 search:
-  dotdotdot: 検索...
   search: "プロジェクト、ユーザー、スタジオを検索"
   inMediaLib: メディアライブラリ内で検索
   inMediaCategory: "メディアカテゴリ内を検索"
   results: 検索結果
-  resultcount: 検索結果は %count% です
-  fail: 少なくとも1つの検索語を入力してください
   noUsers: "ユーザーが見つかりません"
   noProjects: "プロジェクトが見つかりません"
   noStudios: "スタジオが見つかりません"
@@ -529,7 +406,6 @@ menu:
   mediaLibrary: メディア ライブラリー
   studio: "スタジオ"
   language: 言語
-  languageOptionsNotAvailable: "利用できる言語オプションはありません。"
 login:
   login: ログイン
   button:
@@ -541,21 +417,10 @@ login:
     or: "または"
   passOrUser: ユーザー名またはパスワードが正しくありません。
   accountSuspended: "あなたのアカウントは停止されています。誤りだと思われる場合は、サポートにお問い合わせください。"
-  noUsername: あなたのユーザー名または電子メール アドレスが見つかりませんでした。
-  forgotPass: パスワードまたはユーザ名を忘れましたか?
   recoverPassSend: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。
   alreadyReset: このユーザーのパスワードは過去24時間以内に要求されています。
-  confirmationSend: あなたのメールアドレスに登録を確認するメールが送信されました。受信トレイを確認し、アカウントを有効にしてください。
-  userOrEmail: ユーザー名またはメールアドレス
-  changePass: パスワードを変更する
-  createAccount: アカウントを作成
-  noAccount: アカウントを持っていません！
-  alreadyAccount: 既にアカウントをお持ちですか？
-  or: OR
   username: ユーザー名
   email: Eメールアドレス
-  passwordFirst: パスワード
-  passwordSecond: パスワード確認
 register:
   title: "新規登録"
   subText: "続行すると、Catrobat コミュニティのアカウントが作成され、%var1% と %var2% に同意したことになります。"
@@ -588,14 +453,6 @@ registration:
   consentRevoked:
     title: "保護者の同意が取り消されました"
     message: "保護者があなたのアカウントへの同意を取り消しました。再び同意されるまで、アカウントの機能は制限されます。"
-    newEmailPlaceholder: "新しい保護者のメールアドレス"
-    changeButton: "更新して再送信"
-accountRecovery:
-  title: "アカウントの復旧"
-  description: "アカウントのメールアドレスまたはユーザー名を覚えていれば、パスワードを再設定するためのリンクをお送りできます。"
-  button:
-    cancel: キャンセル
-    submit: "パスワードを復旧"
 resetPassword:
   request:
     title: "パスワードの再設定"
@@ -608,11 +465,6 @@ resetPassword:
     description: "あなたのメールアドレスに一致するアカウントがある場合、パスワードを再設定するためのリンクを記載したメールを送信しました。このリンクは %time% 後に無効になります。"
     descriptionTwo: "パスワードの再設定は %throttleLimit% 時間ごとにリクエストできます。"
     descriptionThree: "メールが届かない場合は、迷惑メールフォルダを確認するか、サポート（%email-webmaster%）までメールでお問い合わせください。"
-  email:
-    title: "Hi!"
-    visitLink: "パスワードを再設定するには、次のリンクにアクセスしてください"
-    expire: "このリンクは %time% 後に無効になります。"
-    cheers: "よろしくお願いします！"
   newemail:
     title: "パスワードの再設定"
     content: "最近、Catrobat アカウントのパスワード再設定がリクエストされました。下のボタンをクリックして、新しいパスワードを設定してください。このリクエストに心当たりがない場合は、このメールを無視してかまいません。"
@@ -622,76 +474,33 @@ resetPassword:
     title: "パスワードの再設定"
     button:
       submit: "パスワードのリセット"
-apk:
-  download: アプリとしてダウンロード
-  prepare: 'アプリを準備する'
-  preparing: 'アプリを準備しています'
-  text: 'プロセスには時間がかかることがあります'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: "問題が発生しました。もう一度お試しいただき、問題が続く場合はお知らせください！"
-  username:
-    blank: ユーザー名を空白にできません
-    invalid: あなたのユーザー名は有効ではありません
-    exists: このユーザー名は既に存在します。
-    not_exists: このユーザー名は存在しません。
-    not_email: ユーザー名に、電子メール アドレスは使えません。
-    size: ユーザー名は少なくとも3文字、180文字以上でなければなりません
-  password:
-    blank: パスワードがありません。
-    short: 'パスワードは、少なくとも {{ limit }} 文字必要です。'
-  country:
-    blank: 国は、不足しています。
-    invalid: 無効な国
-  email:
-    blank: メールは空白にできません
-    invalid: あなたのメール アドレスは無効なようです
-    exists: このメール アドレスは既に存在します。
-  id:
-    blank: オープン認証 ID は空白にできません
-  login: ユーザー名またはパスワードが正しくありません。
-  post-data: ポスト データのない正しいまたは不足している ！
-  checksum:
-    missing: クライアントは fileChecksum を送信しませんでした ！ポケット コードの古いバージョンを使用していますか？
-    invalid: 無効なチェックサム
   xml:
     invalid: 無効なコードの xml
     missing: '不明なエラー: プロジェクト_xml_が見つかりません!'
   file:
-    unexpected: 期待したファイルが見つかりません
     invalid: 無効なファイル
-  image.missing: プロジェクト XML で、プロジェクト フォルダーに存在しないファイルを言及しています。
-  unknown: 不明なエラー
-  token: '失敗したデバイス認証： 認証トークンが無効です!'
-  uploadTokenAuthFailed: 'トークンのアップロードに失敗しました。'
-  project:
-    invalid: "無効なプロジェクトです。"
   languageversion:
     tooold: '申し訳ありませんが、あなたのプロジェクトには Catrobat 言語の古いバージョンが含まれています! ポケットコードの最新バージョンを使用していますか?'
   projectversion:
     tooold: "申し訳ありませんが、古いバージョンの Pocket Code をお使いです。最新バージョンに更新してください。"
   authentication:
-    title: "ログインできませんでした"
     webview: |
       ユーザーの資格情報が間違っています。
       アプリでもう一度ログインしてみてください。
 success:
   text: 成功
-  registration: 登録に成功しました ！
-  token: ok
-  upload: プロジェクトは正常にアップロードされました!
   imgUpload: 画像が正常にアップロードされました！
-  report: レポートは正常に送信されました!
 time:
   minutes.ago: '{0} < 1 分前 |{1}1 分前 |]1,Inf] %count% 分前'
   hours.ago: '{1}1 時間前 |]1,Inf] %count% 時間前'
   days.ago: '{1}1 日前 |]1,Inf] %count% 日前'
   months.ago: '{1}1 ヶ月前 |]1,Inf] %count% ヶ月前'
   years.ago: '{1}1 年前 |]1,Inf] 1 年以上前'
-failure:
-  upload: アプリのアップロード中にエラーが発生しました。
 user:
   verification:
     email: "メールアドレスを確認してください"
@@ -714,7 +523,6 @@ api:
     passwordInvalidChars: 'パスワードに無効な文字が含まれています'
     usernameContainsEmail: "ユーザー名にメールアドレスを含めることはできません"
     usernameContainsLink: "ユーザー名にリンクを含めることはできません"
-    countryCodeInvalid: "国コードが無効です"
     pictureInvalid: "プロフィール画像が無効か、サポートされていません"
     dateOfBirthMissing: "生年月日は必須です"
     dateOfBirthInvalid: "生年月日が無効です"
@@ -748,61 +556,11 @@ api:
     nameAlreadyInUse: "この名前はすでに使われています"
     descriptionMissing: "説明がありません"
     descriptionEmpty: "説明が空です"
-    descriptionTooShort: "説明が短すぎます"
     descriptionTooLong: "説明が長すぎます"
     imageFileInvalid: "画像ファイルが無効です"
     imageFileInvalidType: "画像ファイルの形式が無効です"
     imageFileTooLarge: "画像ファイルが大きすぎます"
-#languages and countries
-language:
-  arabic: アラビア語
-  bulgarian: ブルガリア語
-  catalan: カタロニア語
-  chinese_simplified_han: 中国語 (簡体字・漢語)
-  chinese_traditional_han: 中国語  (伝統的な中国語)
-  croatian: クロアチア語
-  czech: チェコ
-  danish: デンマーク
-  dutch: オランダ語
-  english_united_kingdom: 英語 (イギリス)
-  english_united_states: 英語 (米国)
-  estonian: エストニア語
-  filipino: フィリピン人
-  finnish: フィンランド語
-  french: フランス語
-  german: ドイツ語
-  greek: ギリシャ語
-  hebrew: ヘブライ語
-  hindi: ヒンディー語
-  hungarian: ハンガリー語
-  indonesian: インドネシア語
-  italian: イタリア語
-  japanese: 日本語
-  korean: 韓国語
-  latvian: ラトビア語
-  lithuanian: リトアニア語
-  malay: マレー語
-  norwegian: ノルウェー語
-  persian: ペルシャ語
-  polish: ポーランド語
-  portuguese_brazil: ポルトガル語 (ブラジル)
-  portuguese_portugal: ポルトガル語 (ポルトガル)
-  romanian: ルーマニア語
-  russian: ロシア語
-  serbian: セルビア語
-  slovak: スロバキア語
-  slovenian: スロベニア語
-  spanish_latin_america: スペイン語 (ラテン アメリカ)
-  spanish_spain: スペイン語 (スペイン)
-  swedish: スウェーデン語
-  thai: タイ語
-  turkish: トルコ語
-  ukrainian: ウクライナ語
-  vietnamese: ベトナム語
-ci:
-  generate: Apk を生成
-  pending: Apk を生成しています
-  download: Apk をダウンロード
+
 admin:
   maintain:
     diskMaintenance: ディスクのメンテナンス
@@ -810,46 +568,9 @@ admin:
     noRemovableObjects: 取り外し可能なオブジェクトはありません。
     removableObjects: リムーバブルオブジェクト
 recommender:
-  similarPrograms: 類似のプロジェクト
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: このプロジェクトをダウンロードしたユーザーもダウンロード
   moreFromThisUser: '%username% からの詳細'
-pmd:
-  submitBtn: プロジェクトを送信
-  submitBox:
-    header: 送信
-    text: プロジェクトを送信しようとしています。プロジェクト コードを入力して、送信をクリックしてください。
-    btnText: 送信
-  successful:
-    text: プロジェクトのアップロードが完了しました。
-  failed:
-    text: プロジェクトのアップロードに失敗しました。
 codeview:
   title: 'コードビュー'
-  showCode: 'コードを表示'
-  hideCode: 'コードを隠す'
-  showStatistics: 'コードの統計情報を表示'
-  hideStatistics: 'コードの統計情報を隠す'
-  cantDisplayCode: "コードを表示できません"
-  cantDisplayStatistics: "コードを表示できません"
-  totalNumberOf: '合計数'
-  scenes: 'シーン'
-  scripts: 'スクリプト'
-  bricks: 'ブロック'
-  objects: 'アクターとオブジェクト'
-  looks: '外見'
-  sounds: 'サウンド'
-  globals: 'グローバル'
-  locals: 'ローカル'
-  globalVariables: 'グローバル変数'
-  localVariables: 'ローカル変数'
-  eventBricks: 'イベントブロック'
-  controlBricks: 'コントロールブロック'
-  motionBricks: 'モーションブロック'
-  soundBricks: 'サウンドブロック'
-  looksBricks: 'ブロックに見える'
-  penBricks: 'ペンブロック'
-  dataBricks: 'データブロック'
-  specialBricks: '特別なブロック'
 codeView:
   title: "コードビュー"
   loading: "コードビューを読み込み中..."
@@ -862,19 +583,7 @@ codeView:
 codeStatistics:
   title: "コードの統計"
   error: "コードの統計情報を表示できません。"
-  general: '全般'
-  bricks: 'ブロック'
-  eventBricks: 'イベント'
-  controlBricks: '制御'
-  motionBricks: '動き'
-  soundBricks: '音'
-  looksBricks: '外見'
-  penBricks: 'ペン'
-  dataBricks: 'データ'
-  deviceBricks: 'デバイス'
-  specialBricks: 'スペシャル'
   yourScore: "あなたのスコア："
-  points: "ポイント"
   abstraction: "抽象化と問題の分解"
   parallelism: "並列処理"
   logicalThinking: "論理的思考"
@@ -890,20 +599,7 @@ footer:
   text: "すでに %project_count% 件の素晴らしいプロジェクトが共有されています。次はあなたの番かもしれません。アプリをダウンロードして、今日から作り始めましょう"
 privacy-policy:
   header: プライバシーポリシー
-  version: バージョン 2.2、2019 年 10 月 17 日
-  text1: 当社のサービスおよび関連するアカウントのすべての利点を提供するには、お客様から特定のデータを収集する必要があります。
-  text2: 当社のサービス（アプリやウェブサイト）を維持・改善し、ICTやSTEM/STEAM教育に関する科学的研究を行うために、当社は、Google LLC（米国）が提供するGoogle Analytics、Crashlytics、Firebase、およびDynatrace LLC（米国）が提供するDynatraceを利用して、当社サービスの利用状況に関するメタデータ（クラッシュ情報、タイムスタンプ、訪問したページ/画面、当社アプリやサービスの利用状況、使用したOS、ネットワークプロバイダーに関する情報など）を取得しています。この分析と収集されたデータは、お客様のプロフィールにリンクされることはなく、いかなる個人情報も含まれません（IPアドレスの最後のビットは匿名化されます）。ただし、収集されたデータは、サービス提供者（Google LLC, USAおよびDynatrace LLC, USA）に転送されます。データ処理は、Google LLCおよびDynatrace LLCとの契約に基づいて行われます。サービス提供者との関係は、欧州連合の一般データ保護規則（EU GDPR）およびEU-USA「プライバシーシールド」協定に準拠しています。
-  text3: 私たちのシステムでアカウントを作成し、使用するには、電子メールごとのアカウントに関する必要な変更についてお知らせします。例えば、 当社の利用規約およびサービスの更新または違反、コミュニティのルール または当社のポリシーでは、お客様のユーザー名と、お客様のメールアドレスが提供されている場合は、当社はお客様のユーザー名を保存します。 Google PlusまたはFacebook経由でアカウントを接続している場合は、これらのサービスにアカウントに接続されたIDキーを追加で保存します。 お客様が明示的に許可しない限り、このデータを他の目的(マーケティングなど)に使用することはありません。
-  text4: 任意に, あなたは私たちに共有サイト上のあなたのアカウントページを介して居住地のあなたの国を与えることができます. これは公開プロフィールに表示され、統計的および研究的目的のためにのみ使用されます。 プロフィール設定でいつでも削除できます。
-  text5: https://shareのプロフィールページからアカウントを削除することで、アカウントに属する個人データの使用をいつでも撤回できます。 atrob.at/. アカウントを削除した後でも、提供されたサービスを使用することはできますが、プログラムのアップロード、コメント、または好きなようにコラボレーションすることはできません。 また、アップロードされたプログラム、コメントなど、あなたのアカウントにリンクされたすべての提供されたコンテンツは削除されます。
-  text6: ユーザーが投稿したアップロードやコメントが違法な目的で使用されるなど、当社のサービスが悪用されることを防ぐため、ユーザーが作成したすべての公開データ（アップロード、コメント）は、タイムスタンプと使用されたインターネットアドレスとともに、内部的にデータベースに保存されます。このデータは、十分な違法行為が合理的に疑われ、公式に権利を有する法的機関が適用法に基づいて要求しない限り、いかなる機関によっても使用されたり、転送されたりすることはありません。ただし、違法行為が合理的に疑われ、適用される法律に基づいて正式に権利を有する法的機関から要請があった場合はこの限りではありません。
-  text7: お客様は、MailChimp（The Rocket Science Group LLC d/b/a MailChimp, USA）のサービスを利用して、私たちが提供する https://catrobat.org/newsletter に掲載されている「Catrobat Newsletter」を自主的に購読することができます。これにより、提供された電子メールアドレスに、Cotrobat プロジェクトおよびそのサービスに関する最新情報が届きます。ニュースレターの配信は、各ニュースレターのフッターにある「配信停止」のリンクを利用して、いつでも停止することができます。このニュースレターは、EU一般データ保護規則およびEU-USA「プライバシーシールド」を遵守し、データ処理に関する契約を結んでいるMailChimp社によって提供されています。MailChimpの詳細については、MailChimpのプライバシーポリシーと利用規約をご覧ください。
-  text8: すべてのサービスは、International Catrobat Association - Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union) の傘下にある、無料のオープンソース Catrobat プロジェクトによって提供されています。私たちのポリシーは、EUおよびオーストリアのデータ保護法（GDPR）を尊重しています。お問い合わせは、contact@catrobat.org までメールをお送りいただくか、Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)までご郵送ください。
-  text9: 14歳未満の場合、このポリシーは法的保護者(通常は保護者)に承認されなければなりません。
-  text10: Catrobat の公式英語のプライバシーポリシーは、 %privacy_policy% の下でウェブで入手できます。
-  disagree-text: 承認がない場合、アカウントを作成することはできませんが、コア機能はまだアクセス可能です。
 catro-notifications:
-  markAsRead: "既読にする"
   noFollowers: "フォロワーの通知がないようです。"
   noComments: "コメント通知がないようです。"
   noReactions: "リアクション通知がないようです。"
@@ -937,29 +633,16 @@ catro-notifications:
 clipboard:
   success: "リンクをクリップボードにコピーしました！"
   success_project: "プロジェクトへのリンクをクリップボードにコピーしました！"
-  success_user: "ユーザーへのリンクをクリップボードにコピーしました！"
   fail: クリップボードへのリンクのコピーに失敗しました！ :(
 next: 次へ
 previous: 前
 media-packages:
   title: メディアパッケージ
   description: 以下のカテゴリでは、PocketCode プロジェクトに追加する追加のアクターやオブジェクトを見つけることができます。
-  thumb-size:
-    description: プレビューサイズ
-    sm: 小さく
-    md: ミディアム
-    lg: 大
   theme-special: "%flavor% テーマスペシャル"
   search-results: メディアライブラリの検索結果
-  no-results: 検索結果は0です。英語の検索語のみを使用してください。
-  download_these_files: 保存
 flavor:
   pocketcode: ポケット\nコード
-  pocketalice: ポケットアリス
-  pocketgalaxy: ギャラクシージャム
-  phirocode: PhiroCode
-  luna: ルナ＆キャット
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. すべての権利は留保されています。'
 noscript:
   warning: "このウェブサイトを使うには JavaScript が必要です。ブラウザで JavaScript を有効にするか、大人の人に手伝ってもらってください。"
@@ -969,10 +652,6 @@ cookie-consent:
   decline: "同意しない"
   privacy-link: "プライバシーポリシー"
   settings-link: "Cookie 設定"
-agree: 同意する
-disagree: 同意しない
-profileLoader:
-  noProfiles: 現在プロファイルはありません。
 element: '要素'
 elements: '要素'
 share:
@@ -981,7 +660,6 @@ share:
   success: '共有に成功しました'
 copy: 'リンクをコピー'
 checkOutProject: 'このプロジェクトをチェックしてください:'
-checkOutUser: "このユーザーを見てみてください："
 community: 'Catrobat コミュニティ'
 back_to_app: 'コミュニティを終了'
 category:
@@ -997,7 +675,6 @@ category:
 achievements:
   sidebar:
     title: '実績'
-    badge: '新'
   overview:
     header: '実績'
     most_recent_achievement:
@@ -1089,10 +766,7 @@ extensions:
       title: "マルチプレイヤー"
 studio:
   title: "スタジオ"
-  singular: "スタジオ"
   create_studio: "スタジオを作成"
-  delete_studio: "スタジオを削除"
-  cancel_studio: 'キャンセル'
   studio_name: "スタジオ名"
   studio_description: "スタジオの説明"
   is_public: "公開しますか？"
@@ -1109,8 +783,6 @@ studio:
   cover_image_remove: "画像を削除"
   popular: "人気のスタジオ"
   join: "参加する"
-  leave: "退出する"
-  report: '不適切として報告する'
   public: "公開"
   private: "招待制"
   overview:
@@ -1133,16 +805,12 @@ studio:
     admin: '管理者'
     member: "メンバー"
   details:
-    add_project: "クリックしてプロジェクトを追加"
     add: '追加'
     showMore: '詳細を表示'
-    showLess: 'ショーアップ'
     are_you_sure: 'よろしいですか？'
     no_way_of_return: "この操作は元に戻せません。"
     delete_it: '削除'
-    remove_project: 'スタジオから削除'
     remove_project_error: 'スタジオからのプロジェクトの削除に失敗しました。'
-    remove_project_success: 'プロジェクトがスタジオから削除されました。'
     no_projects: 'スタジオにはまだプロジェクトがありません'
     projects:
       title: 'プログラム'
@@ -1158,10 +826,8 @@ studio:
       no_projects_empty_state: "追加できるプロジェクトがまだありません。まずは Pocket Code で作ってみましょう！"
       add_selected: "選択したものを追加"
     no_available_projects: "追加できるプロジェクトはありません。"
-    updateCoverError: 'スタジオカバーの更新中に何か問題が発生しました'
     join: "参加する"
     leave: "退出する"
-    report: '不適切として報告する'
     pending: "保留中"
     decline: "拒否されました"
     comments:
@@ -1181,7 +847,6 @@ studio:
       add_comment: "%user% さんがコメントしました。"
     members_list:
       title: "スタジオのメンバー"
-      project_count: "{0} スタジオのプロジェクトはありません |{1} スタジオのプロジェクト 1 件 |]1,Inf] スタジオのプロジェクト %count% 件"
       no_studio_projects: "スタジオのプロジェクトはありません"
       one_studio_project: "スタジオのプロジェクト 1 件"
       n_studio_projects: "スタジオのプロジェクト %count% 件"
@@ -1191,7 +856,6 @@ studio:
       ban_failed: "このメンバーを追放する際に問題が発生しました。しばらくしてからもう一度お試しください。"
       demote_member: "管理者をメンバーに戻す"
       demotion_failed: "この管理者をメンバーに戻す際に問題が発生しました。しばらくしてからもう一度お試しください。"
-      last_admin: "このスタジオの最後の管理者をメンバーに戻すことはできません。"
     join_requests:
       title: "参加リクエスト"
       accept: '同意する'
@@ -1221,7 +885,6 @@ media_library:
   no_results: "結果が見つかりません。"
   assets_count: "件の素材"
   view_all: "すべて表示"
-  view_all_category: "%category% をすべて表示"
   back_to_app: "アプリに戻る"
 snackbar:
   project_not_found: "リクエストされたプロジェクトは利用できません"
@@ -1275,14 +938,6 @@ moderation:
     rate_limited: "スタジオの操作が速すぎます。少しお待ちください。"
   hidden_notice:
     project: "コミュニティからの報告により、このプロジェクトは非表示になりました。"
-    comment: "コミュニティからの報告により、このコメントは非表示になりました。"
-    user: "コミュニティからの報告により、このプロフィールは非表示になりました。"
     user_own: "コミュニティからの報告により、あなたのアカウントは停止されました。この決定に異議を申し立てることができます。"
-    studio: "コミュニティからの報告により、このスタジオは非表示になりました。"
-  notification:
-    content_hidden: "コミュニティからの報告により、あなたの%content_type%は非表示になりました。この決定に異議を申し立てることができます。"
-    appeal_approved: "異議申し立てが認められました。あなたのコンテンツは再び表示されています。"
-    appeal_rejected: "異議申し立てを審査した結果、コンテンツを非表示にする決定は変わりませんでした。"
-    admin_review_needed: "コンテンツが自動的に非表示になりました。確認が必要です。"
 Reports: "報告"
 members: "メンバー"

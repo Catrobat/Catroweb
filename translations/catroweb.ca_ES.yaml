@@ -8,19 +8,12 @@ meta.og.description.login: Inicia sessió per compartir els teus projectes de Ca
 meta.og.title.register: Crea un compte de Catrobat
 meta.og.description.register: Uneix-te a la comunitat Catrobat i comença a compartir els teus projectes creatius avui mateix.
 meta.og.description.profile: '%username% a Catrobat – explora els seus projectes i assoliments.'
-localLanguage: Anglès
 username: Usuari
 password: Contrasenya
-createNewPassword: Crea una contrasenya nova
-accountSettings: Configuració del compte
 email: Correu electrònic
-aboutPocketCode: Quant a Pocket Code
 about: Quant a Catrobat
-education: Educació
 chat: Xat i fòrums
-privacyGuide: Guia de consciència sobre la privacitat
 others: Altres
-tutorials: Ajuda
 googlePlay: Google Play
 iosAppStore: App Store d'iOS
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Com has creat aquest projecte? Has fet servir idees,
 projectImportedFromScratch: Aquest projecte s'ha importat de MIT Scratch. Pots veure el projecte original
 scratchImportedProjectLinkHere: aquí.
 country: País
-loginText: inicia sessió
 privacyPolicy: Política de privacitat
-imprint: Peu d'impremta
 projectDetails: Detalls
 somethingWentWrong: 'Ups... alguna cosa ha anat malament.'
 accountNotVerified: 'Assegura''t que has iniciat sessió i que el correu electrònic del teu compte està verificat.'
@@ -55,36 +46,28 @@ accountSuspended: 'El teu compte ha estat suspès a causa de denúncies de la co
 doesNotExist: 'El recurs sol·licitat no existeix.'
 pleaseTryAgain: 'Torna-ho a provar!'
 tryAgainButton: 'Torna-ho a provar'
-oldVersionError: 'Actualitza a la nova versió de Pocket Code'
 more: 'més'
 less: 'menys'
 show-more: 'Més informació'
-show-less: 'Menys informació'
 more-information: 'Més informació'
 less-information: 'Menys informació'
 ok: Entesos
-clickToDownloadProgram: 'Per descarregar el projecte d''exemple, fes clic %link_start% aquí %link_end%.'
-registrationError: 'El nom d''usuari o el correu electrònic ja existeixen.'
 notifications: 'notificacions'
 allNotifications: 'Totes'
 FollowersNotifications: 'Seguidors'
 LikeNotifications: 'Reaccions'
 CommentNotifications: 'Comentaris'
 RemixNotifications: 'Remixos'
-wellDone: "Ben fet!"
 done: "Fet!"
 notificationsReadMessage: "Sembla que no tens cap notificació."
-confirmMessage: "Sí, elimina-ho"
 cancelMessage: "Cancel·la"
 notificationsUnauthorizedError: "No s'ha pogut autoritzar l'usuari"
 notificationsClearError: "No s'han pogut marcar les notificacions com a llegides!"
-pleaseWait: "Si us plau, espera..."
 projects: "Projectes"
 users: "Usuari"
 studios: "Estudis"
 oauthPopUpTitle: "Informació sobre l'inici de sessió amb un compte extern"
 oauthInfo: 'Acabes d''iniciar sessió amb un compte extern. Hem creat un nom d''usuari aleatori per a tu. Si vols canviar el teu nom d''usuari o crear una contrasenya nova per al teu compte, ves a la teva pàgina de perfil.'
-oauthHere: "aquí"
 statistics: "Estadístiques"
 languageSelection: "Selecció d'idioma"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Fosc'
   dark_description: 'Aparença fosca'
   apply: 'Aplica'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Quins projectes es recomanen aquí?'
-      description: 'Com més reaccions (M''agrada, Somriure...) rebi el teu projecte, més amunt apareixerà en aquesta llista.'
 follower:
   follows: Seguint
   followers: Seguidors
   follow: Segueix
-  username: Usuari
   followsMe: Em segueix
   noFollowing: Ara mateix no segueixes ningú.
   noFollowers: Ara mateix no tens seguidors.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Segur que vols deixar de seguir aquest usuari?"
   unfollowButton: "Deixa de seguir %username%"
 project:
-  welcome:
-    title: Benvingut a %theme% de Catrobat
-    title_mindstorms: Benvingut al lloc de Catrobat per a Mindstorms EV3 i NXT
-    subtitle: Crea històries, jocs i molt més...
-    subtitle_embroidery: Broda els teus propis patrons a les samarretes, bosses, pantalons o la funda del mòbil!
-    subtitle_mindstorms: Crea els teus propis projectes amb els teus robots Lego Mindstorms EV3 i NXT
-    download: Descarrega l'aplicació
-    statistics: Més estadístiques
   featured: Destacats
   open: Obre
   download: Descarrega
@@ -148,9 +117,6 @@ project:
       retention: Els projectes pujats s'eliminen automàticament després d'un període d'inactivitat. Inicia sessió regularment o aconsegueix descàrregues del teu projecte per allargar-ne la conservació.
       protection: Els moderadors poden protegir de l'eliminació automàtica els projectes especialment bons o populars.
   example: Exemples
-  newest: Projectes més nous
-  recommended: Projectes recomanats
-  scratchremixes: Remixos de Scratch
   noProjects: Ara mateix no hi ha cap projecte.
   shareAction: Comparteix
   deleteAction: Elimina el projecte
@@ -190,17 +156,10 @@ project:
     No hi ha manera de desfer aquesta acció!
     Sí, elimina-ho!
     Cancel·la
-  tooLongName: El nom del projecte és massa llarg!
-  tooLongDescription: La descripció del projecte és massa llarga!
-  tooLongCredits: Les notes i els crèdits del projecte són massa llargs!
   my_projects: Els meus projectes compartits
   trending: Projectes en tendència
   popular: Projectes populars
-  most:
-    viewed: Més visitats
-    downloaded: Els més descarregats
   random: Projectes aleatoris
-  related: Projectes relacionats
   browse:
     explore: 'Explora projectes'
     no_projects: "Encara no has creat cap projecte"
@@ -214,36 +173,14 @@ project:
     tooltip: 'Els projectes s''eliminen automàticament després d''un període d''inactivitat. Aconsegueix més descàrregues o inicia sessió regularment per allargar-ne la conservació.'
     tooltip_protected: 'Aquest projecte està protegit i no s''eliminarà automàticament.'
   downloads: '%downloads% descàrregues'
-  sample: Projectes d'exemple
   views: '%views% visualitzacions'
   likes:
     likersTitle: "Persones que han reaccionat a aquest projecte"
     all: "Totes"
-  remixes: '{0}0 remixos |{1}1 remix |]1,Inf]%remixes% remixos'
-  newRemixesNotificationTitle: '|{1}"%programName%" té 1 remix nou: |]1,Inf] "%programName%" té %remixes% remixos nous:'
-  submitted: Projectes enviats
-  uploaded: Projectes pujats
-  reportAsInappropriate: Denuncia'l com a inadequat
-  reportProgram: Denuncia el projecte
   languageVersion: 'Versió del llenguatge Catrobat: %languageVersion%'
-  reportLoginText: Si us plau, %login% per denunciar aquest projecte.
-  reportDialogHeader: Per què vols denunciar aquest projecte?
-  reportDialogReason: Escriu un motiu
-  reportRadioButtonInappropriate: És inadequat
-  reportRadioButtonCopyright: Infracció dels drets d'autor
-  reportRadioButtonSpam: És correu brossa
-  reportRadioButtonDislike: No m'agrada
-  reportOwnProgram: No pots denunciar el teu propi projecte.
-  reportAlready: Ja has denunciat aquest projecte.
-  reportDone: Has denunciat aquest projecte!
   updateAppHeaderDownload: No es pot descarregar
   updateAppTextDownload: Actualitza l'aplicació a la versió més recent. Tingues en compte que no totes les funcions d'Android estan disponibles encara a iOS.
-  updateAppTextDownloadApk: Ara mateix la descàrrega de l'APK només està disponible a Android i no a iOS.
-  updateAppHeader: Actualitza l'aplicació
-  updateAppText: Actualitza l'aplicació a la versió més recent.
-  btnClosePopup: D'acord
   checkout_this_project: Fes una ullada a aquest projecte de Catrobat
-  show_more: Mostra'n més
   comments: Comentaris
   send: Envia
   delete: Elimina
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: Eliminat
   noAdminRights: No tens drets d'administrador. Inicia sessió com a administrador.
   editProject: Edita el projecte
-  closeProjectEditor: Tanca l'editor del projecte
   closeEditorPrompt: Vols desar els canvis?
   btnDiscard: Descarta
   addComment: Escriu un comentari
@@ -263,8 +199,6 @@ project:
   smile: Somriure!
   love: M'encanta!
   wow: Uaaau!
-  linkTitle: Enllaç
-  link: Copia l'enllaç del projecte al porta-retalls
   reactionsText: Reaccions
   downloadErrorText: S'ha produït un error en descarregar el projecte. Torna-ho a provar més tard.
   downloadStartText: La descàrrega ha començat...
@@ -284,11 +218,8 @@ project:
   translations: Traduccions
   createTranslation: Crea una traducció
   deletedComment: '**Eliminat**'
-  replyLabel: resposta
-  repliesLabel: respostes
   notForKids: No adequat per a infants
 remixGraph:
-  title: Remixos
   showRemixGraph: 'Mostra el gràfic de remixos'
   by: 'de'
   open: 'Obre'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'No disponible'
   projectUnknownUser: 'Usuari desconegut'
 noReply: 'Aquest és un missatge automàtic. No responguis directament a aquest correu.'
-accountConfirmation:
-  subject: Confirmació del teu compte de Catrobat
-  message: |
-    Hola, %username%.
-    Per acabar d'activar el teu compte, visita %confirmationUrl%
-    Aquest enllaç només es pot fer servir una vegada per validar el teu compte.
-    Salutacions cordials,
-    L'equip de Catrobat.
-  messageHtml: |
-    <p>
-    Hola, %username%.<br>
-    <br>
-    Per acabar d'activar el teu compte, fes clic <a href="%confirmationUrl%">aquí.</a><br>
-    Aquest enllaç només es pot fer servir una vegada per validar el teu compte.<br>
-    <br>
-    Salutacions cordials,<br>
-    L'equip de Catrobat.
-    </p>
 newAccountConfirmation:
   subject: "Verifica la teva adreça de correu electrònic"
   welcome: "Benvingut a Catrobat!"
@@ -403,63 +316,13 @@ parent:
       ignore: "Si no ho has demanat tu, pots ignorar aquest correu sense problemes."
 passwordRecovery:
   subject: Recuperació de la teva contrasenya de Catrobat
-  message: |
-    Hola, %username%.
-    Has demanat restablir la teva contrasenya a %appplication_url% perquè l'has oblidada.
-    Si no ho has demanat tu, ignora aquest missatge. Caducarà i deixarà de funcionar d'aquí a 24 hores.
-    Per restablir la contrasenya i crear-ne una de nova, visita la pàgina següent: %confirmationUrl%
-    Pots fer servir el teu nom d'usuari i la teva contrasenya en qualsevol moment per accedir a la comunitat %appplication_url%.
-    Per fer-ho, només cal que visitis la pàgina següent: %loginPage%
-    Per editar les dades del teu perfil, ves a aquesta pàgina: %profilePage%
-    Salutacions cordials,
-    L'equip de Catrobat.
-  messageHtml: |
-    <p>
-    Hola, %username%.<br>
-    <br>
-    Has demanat restablir la teva contrasenya a <a href="%appplication_url%">Pocket Code</a> perquè l'has oblidada.
-    Si no ho has demanat tu, ignora aquest missatge. Caducarà i deixarà de funcionar d'aquí a 24 hores.<br>
-    <br>
-    Per restablir la contrasenya i crear-ne una de nova, fes clic <a href="%confirmationUrl%">aquí.</a><br>
-    <br>
-    Pots fer servir el teu nom d'usuari i la teva contrasenya en qualsevol moment per accedir a la comunitat <a href="%appplication_url%">Pocket Code</a>.<br>
-    Per fer-ho, només cal que visitis la pàgina següent: <a href="%loginPage%">Pàgina d'inici de sessió</a><br>
-    Per editar les dades del teu perfil, ves a aquesta <a href="%profilePage%">pàgina</a>.<br>
-    <br>
-    Salutacions cordials,<br>
-    L'equip de Catrobat.
-    </p>
 profile:
   aboutMe: Sobre mi
   currentlyWorkingOn: Ara treballo en
-  edit: Edita el teu perfil
-  saveChanges: desa els canvis
   newPass: contrasenya nova
   repeatPass: repeteix la contrasenya
   oldPass: contrasenya antiga
-  firstEmail: El meu primer correu electrònic
-  secondEmail: El meu segon correu electrònic
-  myPrograms: Els meus projectes
-  follows: Segueix
-  follower: Seguidor
-  unfollowUser: Deixa de seguir aquest usuari!
-  followUser: Segueix aquest usuari!
-  amountOfPrograms: Nombre de projectes
-  form:
-    passwordTooShort: La nova contrasenya ha de tenir com a mínim %length% caràcters.
-    passwordTooLong: La nova contrasenya pot tenir com a màxim %length% caràcters.
-    passwordIsUsername: La contrasenya ha de ser diferent del nom d'usuari.
-    passwordWrong: Contrasenya incorrecta
-    emailNotValid: L'adreça electrònica no és vàlida.
-    emailMissing: Error en actualitzar aquesta adreça electrònica. Has de tenir com a mínim una adreça de correu electrònic validada.
-    emailExists: Aquesta adreça de correu electrònic ja existeix.
-    usernameNotValid: Aquest nom d'usuari no és vàlid.
-    usernameMissing: Has de tenir un nom d'usuari.
-    usernameExists: Aquest nom d'usuari ja existeix.
-    usernameContainsEmail: El nom d'usuari no hauria de contenir cap adreça de correu electrònic.
-    submitSuccess: desat!
   reallyDeleteProgram: Segur que vols eliminar el teu projecte
-  programsOf: Projectes de
   picture: Foto de perfil
   changePicture: Canvia la imatge
   goToScratchProfile: Perfil a Scratch
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: Canvia la contrasenya
   accountSettings: Configuració del compte
   accountVerification: Verifica el compte
-  account: Compte
-  editProfile: Edita el perfil
-  edit: Edita
   done: Fet
-  checkMail: T'hem enviat un correu a la teva adreça electrònica. Revisa la safata d'entrada.
   passwordUpdated: La teva contrasenya s'ha actualitzat correctament.
-  avatar: Avatar
-  email: Correu electrònic
   deleteAccount: Elimina el compte
   deleteAccountWarning: |
     Compte:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: S'està descarregant...
   exportDataError: Alguna cosa ha anat malament en exportar les teves dades. Torna-ho a provar més tard.
   exportDataRateLimited: Només pots exportar les teves dades una vegada al dia. Torna-ho a provar demà.
-  editAccountSettings: Edita la configuració del compte
   profileChangeSuccess: El teu perfil s'ha canviat correctament.
   unspecifiedError: Alguna cosa no ha funcionat en canviar el teu perfil. Torna-ho a provar o fes-nos-ho saber si continua passant!
   verifyAccountText: T'enviarem un correu amb un enllaç per verificar el teu compte. Assegura't de fer clic a l'enllaç durant la propera hora; només pots demanar un correu al dia.
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Envia qualsevol suggeriment sobre aquestes condicions d''ús a %email-webmaster%.'
   version: Versió 1.3, 4 de març de 2014
 search:
-  dotdotdot: Cerca...
   search: Cerca projectes, usuaris i estudis
   inMediaLib: Cerca a la mediateca
   inMediaCategory: Cerca a la categoria multimèdia
   results: Resultats de la cerca
-  resultcount: La teva cerca ha donat %count% resultats
-  fail: Escriu almenys un terme de cerca
   noUsers: No s'ha trobat cap usuari
   noProjects: No s'ha trobat cap projecte
   noStudios: No s'ha trobat cap estudi
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: Mediateca
   studio: Estudis
   language: Idioma
-  languageOptionsNotAvailable: No hi ha opcions d'idioma disponibles.
 login:
   login: Inicia sessió
   button:
@@ -578,21 +430,10 @@ login:
     or: "o"
   passOrUser: La contrasenya o el nom d'usuari no són correctes.
   accountSuspended: 'El teu compte ha estat suspès. Si creus que és un error, contacta amb el suport.'
-  noUsername: No s'ha trobat el teu nom d'usuari o adreça de correu electrònic.
-  forgotPass: Has oblidat la contrasenya o el nom d'usuari?
   recoverPassSend: T'hem enviat un correu a la teva adreça electrònica. Revisa la safata d'entrada.
   alreadyReset: Ja s'ha demanat la contrasenya d'aquest usuari durant les últimes 24 hores.
-  confirmationSend: T'hem enviat un correu a la teva adreça per confirmar el registre. Revisa la safata d'entrada i activa el teu compte.
-  userOrEmail: Nom d'usuari o correu electrònic
-  changePass: Canvia la contrasenya
-  createAccount: Crea un compte
-  noAccount: No tens compte?
-  alreadyAccount: Ja tens un compte?
-  or: O
   username: Usuari
   email: Correu electrònic
-  passwordFirst: Contrasenya
-  passwordSecond: Confirma la contrasenya
 register:
   title: Registra't
   subText: "Si continues, crearàs un compte a la comunitat Catrobat i acceptes les nostres %var1% i %var2%."
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: "S'ha retirat el consentiment parental"
     message: "El teu pare, mare o tutor ha retirat el consentiment per al teu compte. El teu compte tindrà funcions limitades fins que es torni a donar el consentiment."
-    newEmailPlaceholder: "Nou correu del pare o la mare"
-    changeButton: "Actualitza i torna a enviar"
-accountRecovery:
-  title: Recuperació del compte
-  description: Si recordes el correu electrònic o el nom d'usuari del teu compte, et podem enviar un enllaç per restablir la contrasenya.
-  button:
-    cancel: Cancel·la
-    submit: Recupera la contrasenya
 resetPassword:
   request:
     title: "Restableix la contrasenya"
@@ -645,11 +478,6 @@ resetPassword:
     description: "Si existeix un compte amb el teu correu, t'acabem d'enviar un correu amb un enllaç per restablir la contrasenya. Aquest enllaç caducarà d'aquí a %time%."
     descriptionTwo: "Pots demanar un nou restabliment de contrasenya cada %throttleLimit% hores."
     descriptionThree: "Si no has rebut cap correu, revisa la carpeta de correu brossa o escriu al nostre suport a %email-webmaster%."
-  email:
-    title: "Hola!"
-    visitLink: "Per restablir la contrasenya, visita l'enllaç següent"
-    expire: "Aquest enllaç caducarà d'aquí a %time%."
-    cheers: "Fins aviat!"
   newemail:
     title: "Restableix la contrasenya"
     content: "Fa poc has demanat restablir la contrasenya del teu compte de Catrobat. Fes clic al botó de sota per triar una contrasenya nova. Si no ho has demanat tu, pots ignorar aquest correu sense problemes."
@@ -659,76 +487,33 @@ resetPassword:
     title: "Restableix la contrasenya"
     button:
       submit: "Restableix la contrasenya"
-apk:
-  download: Descarrega com a aplicació
-  prepare: 'Obtén-lo com a aplicació'
-  preparing: 'S''està preparant l''aplicació'
-  text: 'El procés pot trigar una estona'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: Alguna cosa no ha funcionat. Torna-ho a provar o fes-nos-ho saber si continua passant!
-  username:
-    blank: El nom d'usuari no pot estar buit
-    invalid: El teu nom d'usuari no és vàlid
-    exists: Aquest nom d'usuari ja existeix.
-    not_exists: Aquest nom d'usuari no existeix.
-    not_email: El nom d'usuari no pot ser una adreça de correu electrònic.
-    size: El nom d'usuari ha de tenir com a mínim 3 caràcters i com a màxim 180
-  password:
-    blank: Falta la contrasenya.
-    short: 'La teva contrasenya ha de tenir com a mínim {{ limit }} caràcters.'
-  country:
-    blank: Falta el país.
-    invalid: País no vàlid
-  email:
-    blank: El correu electrònic no pot estar buit
-    invalid: Sembla que el teu correu electrònic no és vàlid
-    exists: Aquesta adreça de correu electrònic ja existeix.
-  id:
-    blank: L'identificador d'Open Authentication no pot estar buit
-  login: La contrasenya o el nom d'usuari no són correctes.
-  post-data: Les dades POST no són correctes o falten!
-  checksum:
-    missing: El client no ha enviat fileChecksum! Fas servir una versió antiga de Pocket Code?
-    invalid: suma de verificació no vàlida
   xml:
     invalid: XML del codi no vàlid
     missing: 'error desconegut: no s''ha trobat project_xml!'
   file:
-    unexpected: s'ha trobat un fitxer inesperat
     invalid: fitxer no vàlid
-  image.missing: L'XML del projecte esmenta un fitxer que no existeix a la carpeta del projecte
-  unknown: error desconegut
-  token: 'Ha fallat l''autenticació del dispositiu: el testimoni d''autenticació no és vàlid!'
-  uploadTokenAuthFailed: 'Ha fallat l''autenticació del testimoni de pujada.'
-  project:
-    invalid: Projecte no vàlid.
   languageversion:
     tooold: 'Ho sentim, el teu projecte conté una versió antiga del llenguatge Catrobat! Fas servir la darrera versió de Pocket Code?'
   projectversion:
     tooold: 'Ho sentim, fas servir una versió antiga de Pocket Code. Actualitza a la darrera versió.'
   authentication:
-    title: No s'ha pogut iniciar sessió
     webview: |
       Sembla que el teu nom d'usuari o la contrasenya no eren correctes.
       Torna a provar d'iniciar sessió a l'aplicació.
 success:
   text: Fet
-  registration: Registre completat!
-  token: ok
-  upload: El teu projecte s'ha pujat correctament!
   imgUpload: La teva imatge s'ha pujat correctament!
-  report: La teva denúncia s'ha enviat correctament!
 time:
   minutes.ago: '{0} fa < 1 minut |{1}fa 1 minut |]1,Inf] fa %count% minuts'
   hours.ago: '{1}fa 1 hora |]1,Inf] fa %count% hores'
   days.ago: '{1}fa 1 dia |]1,Inf] fa %count% dies'
   months.ago: '{1}fa 1 mes |]1,Inf] fa %count% mesos'
   years.ago: '{1}fa 1 any |]1,Inf] fa més d''un any'
-failure:
-  upload: S'ha produït un error durant la pujada de la teva aplicació.
 user:
   verification:
     email: 'Verifica el teu correu electrònic'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'La contrasenya conté caràcters no vàlids'
     usernameContainsEmail: "El nom d'usuari no pot contenir cap adreça de correu electrònic"
     usernameContainsLink: "El nom d'usuari no pot contenir cap enllaç"
-    countryCodeInvalid: "El codi de país no és vàlid"
     pictureInvalid: "La foto de perfil no és vàlida o no és compatible"
     dateOfBirthMissing: "Cal la data de naixement"
     dateOfBirthInvalid: "La data de naixement no és vàlida"
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'El nom ja està en ús'
     descriptionMissing: 'Falta la descripció'
     descriptionEmpty: 'La descripció és buida'
-    descriptionTooShort: 'La descripció és massa curta'
     descriptionTooLong: 'La descripció és massa llarga'
     imageFileInvalid: 'El fitxer d''imatge no és vàlid'
     imageFileInvalidType: 'El tipus de fitxer d''imatge no és vàlid'
     imageFileTooLarge: 'El fitxer d''imatge és massa gran'
-#languages and countries
-language:
-  arabic: Àrab
-  bulgarian: Búlgar
-  catalan: Català
-  chinese_simplified_han: Xinès (han simplificat)
-  chinese_traditional_han: Xinès (han tradicional)
-  croatian: Croat
-  czech: Txec
-  danish: Danès
-  dutch: Neerlandès
-  english_united_kingdom: Anglès (Regne Unit)
-  english_united_states: Anglès (Estats Units)
-  estonian: Estonià
-  filipino: Filipí
-  finnish: Finès
-  french: Francès
-  german: Alemany
-  greek: Grec
-  hebrew: Hebreu
-  hindi: Hindi
-  hungarian: Hongarès
-  indonesian: Indonesi
-  italian: Italià
-  japanese: Japonès
-  korean: Coreà
-  latvian: Letó
-  lithuanian: Lituà
-  malay: Malai
-  norwegian: Noruec
-  persian: Persa
-  polish: Polonès
-  portuguese_brazil: Portuguès (Brasil)
-  portuguese_portugal: Portuguès (Portugal)
-  romanian: Romanès
-  russian: Rus
-  serbian: Serbi
-  slovak: Eslovac
-  slovenian: Eslovè
-  spanish_latin_america: Castellà (Amèrica Llatina)
-  spanish_spain: Castellà (Espanya)
-  swedish: Suec
-  thai: Tai
-  turkish: Turc
-  ukrainian: Ucraïnès
-  vietnamese: Vietnamita
-ci:
-  generate: Genera l'APK
-  pending: S'està generant l'APK
-  download: Descarrega l'APK
+
 admin:
   maintain:
     diskMaintenance: Manteniment del disc
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: No hi ha objectes eliminables.
     removableObjects: Objectes eliminables
 recommender:
-  similarPrograms: Projectes similars
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Els usuaris que han descarregat aquest projecte també han descarregat
   moreFromThisUser: Més de %username%
-pmd:
-  submitBtn: Envia el teu projecte
-  submitBox:
-    header: Enviament
-    text: Estàs a punt d'enviar el teu projecte. Escriu el codi del projecte i fes clic a Envia.
-    btnText: Envia
-  successful:
-    text: El teu projecte s'ha pujat correctament.
-  failed:
-    text: No s'ha pogut pujar el projecte.
 codeview:
   title: 'Vista del codi'
-  showCode: 'Mostra el codi'
-  hideCode: 'Amaga el codi'
-  showStatistics: 'Mostra les estadístiques del codi'
-  hideStatistics: 'Amaga les estadístiques del codi'
-  cantDisplayCode: "No es pot mostrar el codi"
-  cantDisplayStatistics: "No es pot mostrar el codi"
-  totalNumberOf: 'Nombre total de'
-  scenes: 'Escenes'
-  scripts: 'Scripts'
-  bricks: 'Blocs'
-  objects: 'Actors i objectes'
-  looks: 'Aparences'
-  sounds: 'Sons'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Variables globals'
-  localVariables: 'Variables locals'
-  eventBricks: 'Blocs d''esdeveniments'
-  controlBricks: 'Blocs de control'
-  motionBricks: 'Blocs de moviment'
-  soundBricks: 'Blocs de so'
-  looksBricks: 'Blocs d''aparença'
-  penBricks: 'Blocs de llapis'
-  dataBricks: 'Blocs de dades'
-  specialBricks: 'Blocs especials'
 codeView:
   title: 'Vista del codi'
   loading: 'S''està carregant la vista del codi...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: "Estadístiques del codi"
   error: "No es poden mostrar les estadístiques del codi."
-  general: 'General'
-  bricks: 'Blocs'
-  eventBricks: 'Esdeveniment'
-  controlBricks: 'Control'
-  motionBricks: 'Moviment'
-  soundBricks: 'So'
-  looksBricks: 'Aparença'
-  penBricks: 'Llapis'
-  dataBricks: 'Dades'
-  deviceBricks: 'Dispositiu'
-  specialBricks: 'Especial'
   yourScore: 'La teva puntuació:'
-  points: 'punts'
   abstraction: 'Abstracció i descomposició de problemes'
   parallelism: 'Paral·lelisme'
   logicalThinking: 'Pensament lògic'
@@ -927,20 +612,7 @@ footer:
   text: "Ja s'han compartit %project_count% projectes increïbles i el següent podria ser el teu. Descarrega la nostra aplicació i comença a crear avui mateix"
 privacy-policy:
   header: Política de privacitat
-  version: Versió 2.2, 17 d'octubre de 2019
-  text1: Per oferir-te tots els avantatges dels nostres serveis i del compte associat, cal recollir algunes dades teves.
-  text2: Per mantenir i millorar els nostres serveis (aplicacions i llocs web) i per fer recerca científica sobre l'educació en TIC i STEM/STEAM, fem servir Google Analytics, Crashlytics i Firebase, tots de Google LLC (EUA), així com Dynatrace de Dynatrace LLC (EUA), per obtenir metadades sobre l'ús dels nostres serveis, per exemple informació sobre errors, marques de temps, pàgines/pantalles visitades, ús de les nostres aplicacions i serveis, sistema operatiu utilitzat i informació sobre el proveïdor de xarxa. Aquesta anàlisi i les dades recollides no estan vinculades al teu perfil i no contenen cap informació personal (els últims bits de l'adreça IP s'anonimitzen). Tanmateix, les dades recollides es transfereixen als proveïdors del servei (Google LLC, EUA i Dynatrace LLC, EUA). El tractament de les dades es basa en acords amb Google LLC i Dynatrace LLC. Aquesta relació amb els proveïdors del servei compleix el Reglament general de protecció de dades de la Unió Europea (RGPD) i l'acord UE-EUA "Privacy Shield".
-  text3: Per crear i fer servir un compte als nostres sistemes, i per informar-te per correu electrònic de canvis necessaris sobre el teu compte, per exemple actualitzacions o infraccions de les nostres condicions d'ús i de servei, de les normes de la comunitat o de les nostres polítiques, desarem el teu nom d'usuari i, si ens la dones, la teva adreça de correu electrònic. Si has connectat el teu compte amb Google Plus o Facebook, també desem una clau d'identificació vinculada al teu compte en aquests serveis. No farem servir aquestes dades per a cap altra finalitat (per exemple, de màrqueting), tret que ens ho hagis permès explícitament.
-  text4: De manera voluntària, ens pots indicar el teu país de residència a la pàgina del teu compte al lloc web per compartir projectes. Es mostrarà al teu perfil públic i només el farem servir amb finalitats estadístiques i de recerca. El pots treure en qualsevol moment a la configuració del perfil.
-  text5: Pots retirar l'ús de les dades personals del teu compte en qualsevol moment eliminant el compte des de la teva pàgina de perfil a https://share.catrobat.org/. Després d'eliminar el compte, podràs continuar fent servir els serveis oferts, però no col·laborar, per exemple pujant programes, comentant o fent m'agrada. A més, s'eliminarà tot el contingut vinculat al teu compte, per exemple programes pujats, comentaris, etc.
-  text6: Per evitar l'ús indegut dels nostres serveis, per exemple mitjançant pujades o comentaris d'usuaris amb finalitats il·legals, totes les dades públiques generades pels usuaris (pujades, comentaris) es desaran internament en una base de dades, juntament amb una marca de temps i l'adreça d'Internet utilitzada. Aquestes dades no les farà servir ni es passaran a cap institució, tret que hi hagi sospites raonables d'accions prou il·legals i institucions legals oficialment autoritzades les sol·licitin d'acord amb la llei aplicable. Primer revisarem a fons cada cas de manera individual.
-  text7: Pots subscriure't voluntàriament al butlletí de Catrobat a https://catrobat.org/newsletter, que oferim mitjançant el servei MailChimp (The Rocket Science Group LLC d/b/a MailChimp, EUA). Aleshores rebràs novetats sobre el projecte Catrobat i els seus serveis a l'adreça de correu electrònic que hagis indicat. Pots donar-te de baixa del butlletí en qualsevol moment amb l'enllaç "unsubscribe" del peu de cada butlletí. Aquest butlletí l'ofereix MailChimp, amb qui tenim un acord de tractament de dades i que s'ha compromès amb el Reglament general de protecció de dades de la UE i el "Privacy Shield" UE-EUA. Per a més detalls sobre MailChimp, consulta també la política de privacitat i les condicions d'ús de MailChimp.
-  text8: Tots els serveis els ofereix el projecte lliure i de codi obert Catrobat sota el paraigua de la International Catrobat Association – Verein zur Förderung freier Software, una ONG sense ànim de lucre constituïda a Graz, Àustria (Unió Europea). Les nostres polítiques respecten la legislació de protecció de dades de la UE i d'Àustria (RGPD). Per contactar amb nosaltres, envia un correu electrònic a contact@catrobat.org o escriu-nos a Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Àustria (Unió Europea).
-  text9: Si tens menys de 14 anys, aquesta política l'ha d'acceptar un tutor legal (normalment el pare o la mare).
-  text10: La política de privacitat oficial de Catrobat en anglès està disponible al web a %privacy_policy%.
-  disagree-text: Sense la teva aprovació no podem crear un compte, però les funcions principals continuen disponibles.
 catro-notifications:
-  markAsRead: "Marca com a llegit"
   noFollowers: "Sembla que no tens cap notificació de seguidors."
   noComments: "Sembla que no tens cap notificació de comentaris."
   noReactions: "Sembla que no tens cap notificació de reaccions."
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: Enllaç copiat al porta-retalls!
   success_project: Enllaç al projecte copiat al porta-retalls!
-  success_user: Enllaç a l'usuari copiat al porta-retalls!
   fail: No s'ha pogut copiar l'enllaç al porta-retalls! :(
 next: Següent
 previous: Anterior
 media-packages:
   title: Mediateca
   description: A les categories següents trobaràs actors i objectes per afegir als teus projectes.
-  thumb-size:
-    description: Mida de la previsualització
-    sm: petita
-    md: mitjana
-    lg: gran
   theme-special: "Especial temàtic de %flavor%"
   search-results: Resultats de la cerca a la mediateca
-  no-results: La teva cerca no ha donat cap resultat. Fes servir només termes de cerca en anglès.
-  download_these_files: desa
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Tots els drets reservats.'
 noscript:
   warning: "Aquest lloc web necessita JavaScript per funcionar. Activa JavaScript al teu navegador o demana ajuda a un adult."
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: "Rebutja"
   privacy-link: "Política de privacitat"
   settings-link: "Configuració de galetes"
-agree: Estic d'acord
-disagree: Cancel·la
-profileLoader:
-  noProfiles: Ara mateix no hi ha cap perfil.
 element: 'Element'
 elements: 'Elements'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'S''ha compartit correctament'
 copy: 'Copia l''enllaç'
 checkOutProject: 'Fes una ullada a aquest projecte:'
-checkOutUser: 'Fes una ullada a aquest usuari:'
 community: 'Comunitat Catrobat'
 back_to_app: 'Surt de la comunitat'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Assoliments'
-    badge: 'nou'
   overview:
     header: 'Assoliments'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: Multijugador
 studio:
   title: 'Estudis'
-  singular: 'Estudi'
   create_studio: 'Crea un estudi'
-  delete_studio: 'Elimina l''estudi'
-  cancel_studio: 'Cancel·la'
   studio_name: 'Nom de l''estudi'
   studio_description: 'Descripció de l''estudi'
   is_public: 'Vols fer-lo públic?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Treu la imatge'
   popular: 'Estudis populars'
   join: 'Uneix-t''hi'
-  leave: 'Surt'
-  report: 'Denuncia'
   public: 'públic'
   private: 'Només amb invitació'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Administrador'
     member: 'Membre'
   details:
-    add_project: 'fes clic per afegir el projecte'
     add: 'Afegeix'
     showMore: 'mostra''n més'
-    showLess: 'mostra''n menys'
     are_you_sure: 'N''estàs segur?'
     no_way_of_return: 'Això no es pot desfer.'
     delete_it: 'Elimina'
-    remove_project: 'Treu de l''estudi'
     remove_project_error: 'No s''ha pogut treure el projecte de l''estudi.'
-    remove_project_success: 'El projecte s''ha tret de l''estudi correctament.'
     no_projects: 'L''estudi encara no conté cap projecte.'
     projects:
       title: 'Projectes'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Encara no tens cap projecte per afegir. Primer crea''n un a Pocket Code!'
       add_selected: 'Afegeix els seleccionats'
     no_available_projects: 'No hi ha projectes disponibles per afegir.'
-    updateCoverError: 'Alguna cosa ha anat malament en actualitzar la portada de l''estudi.'
     join: 'Uneix-t''hi'
     leave: 'Surt'
-    report: 'Denuncia'
     pending: 'Pendent'
     decline: 'Rebutjada'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% ha deixat un comentari.'
     members_list:
       title: 'Membres de l''estudi'
-      project_count: '{0} Cap projecte a l''estudi |{1} 1 projecte a l''estudi |]1,Inf] %count% projectes a l''estudi'
       no_studio_projects: 'Cap projecte a l''estudi'
       one_studio_project: '1 projecte a l''estudi'
       n_studio_projects: '%count% projectes a l''estudi'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'Alguna cosa ha anat malament en expulsar aquest membre. Torna-ho a provar més tard.'
       demote_member: 'Torna l''administrador a membre'
       demotion_failed: 'Alguna cosa ha anat malament en treure els permisos d''administrador. Torna-ho a provar més tard.'
-      last_admin: 'No pots treure els permisos a l''últim administrador d''aquest estudi.'
     join_requests:
       title: 'Sol·licituds per unir-se'
       accept: 'Accepta'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'No s''ha trobat cap resultat.'
   assets_count: 'recursos'
   view_all: 'Mostra-ho tot'
-  view_all_category: 'Mostra tot: %category%'
   back_to_app: 'Torna a l''aplicació'
 snackbar:
   project_not_found: 'El projecte sol·licitat no està disponible'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: "Fas accions a l'estudi massa ràpid. Espera un moment."
   hidden_notice:
     project: "Aquest projecte s'ha amagat a causa de denúncies de la comunitat."
-    comment: "Aquest comentari s'ha amagat a causa de denúncies de la comunitat."
-    user: "Aquest perfil s'ha amagat a causa de denúncies de la comunitat."
     user_own: "El teu compte ha estat suspès a causa de denúncies de la comunitat. Pots recórrer aquesta decisió."
-    studio: "Aquest estudi s'ha amagat a causa de denúncies de la comunitat."
-  notification:
-    content_hidden: "El teu contingut (%content_type%) s'ha amagat a causa de denúncies de la comunitat. Pots recórrer aquesta decisió."
-    appeal_approved: "S'ha acceptat el teu recurs. El teu contingut torna a ser visible."
-    appeal_rejected: "S'ha revisat el teu recurs i es manté la decisió d'amagar el teu contingut."
-    admin_review_needed: "S'ha amagat contingut automàticament i cal revisar-lo."
 Reports: Denúncies
 members: membres

@@ -8,19 +8,12 @@ meta.og.description.login: 'Masuk untuk membagikan proyek Catrobat-mu dengan kom
 meta.og.title.register: 'Buat akun Catrobat'
 meta.og.description.register: 'Bergabunglah dengan komunitas Catrobat dan mulai bagikan proyek kreatifmu hari ini.'
 meta.og.description.profile: '%username% di Catrobat – jelajahi proyek dan prestasinya.'
-localLanguage: Bahasa Inggris
 username: Nama pengguna
 password: Kata sandi
-createNewPassword: Buat kata sandi baru
-accountSettings: Pengaturan akun
 email: E-mail
-aboutPocketCode: Tentang Pocket Code
 about: Tentang Catrobat
-education: pendidikan
 chat: Obrolan dan forum
-privacyGuide: 'Panduan Kesadaran Privasi'
 others: Lainnya
-tutorials: Bantuan
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Bagaimana kamu membuat proyek ini? Apakah kamu mengg
 projectImportedFromScratch: 'Proyek ini diimpor dari MIT Scratch. Kamu bisa melihat proyek aslinya'
 scratchImportedProjectLinkHere: 'di sini.'
 country: Negara
-loginText: masuk
 privacyPolicy: Kebijakan privasi
-imprint: Jejak
 projectDetails: Rincian
 somethingWentWrong: 'Ups ada kesalahan.'
 accountNotVerified: 'Pastikan kamu sudah masuk dan email akunmu sudah diverifikasi.'
@@ -55,36 +46,28 @@ accountSuspended: 'Akunmu ditangguhkan karena laporan komunitas. Kamu bisa menga
 doesNotExist: 'Sumber yang diminta tidak ada.'
 pleaseTryAgain: 'Silahkan coba lagi!'
 tryAgainButton: 'Coba lagi'
-oldVersionError: 'Mohon perbaharui Pocket Code ke versi terbaru!'
 more: 'lebih'
 less: 'kurang'
 show-more: 'Menampilkan lebih banyak'
-show-less: 'Tampilkan lebih sedikit'
 more-information: 'Informasi lebih lanjut'
 less-information: 'Lebih sedikit informasi'
 ok: Baik
-clickToDownloadProgram: 'Untuk mengunduh proyek contoh, klik %link_start% di sini %link_end%.'
-registrationError: 'Nama pengguna atau alamat email sudah di gunakan.'
 notifications: 'Pemberitahuan'
 allNotifications: 'Semua'
 FollowersNotifications: 'Pengikut'
 LikeNotifications: 'Reaksi'
 CommentNotifications: 'Komentar'
 RemixNotifications: 'Remix'
-wellDone: "Sudah selesai dilakukan dengan baik!"
 done: "Selesai!"
 notificationsReadMessage: "Sepertinya kamu tidak memiliki notifikasi apa pun."
-confirmMessage: "Ya, hapus"
 cancelMessage: "Batalkan"
 notificationsUnauthorizedError: "Tidak dapat memberi otorisasi kepada pengguna"
 notificationsClearError: "Tidak bisa menandai pemberitahuan sebagai terbaca!"
-pleaseWait: "Mohon tunggu..."
 projects: "Program"
 users: 'Pengguna'
 studios: 'Studio'
 oauthPopUpTitle: "Informasi masuk akun eksternal"
 oauthInfo: 'Kamu baru saja menggunakan akun eksternal untuk masuk. Kami membuat nama pengguna acak untuk kamu. Jika kamu ingin mengubah nama pengguna atau membuat kata sandi baru untuk akun kamu, silakan buka halaman profil saya.'
-oauthHere: "sini"
 statistics: "Statistik"
 languageSelection: 'Pilihan bahasa'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Gelap'
   dark_description: 'Tampilan gelap'
   apply: 'Menerapkan'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Proyek apa yang direkomendasikan di sini?'
-      description: 'Semakin banyak reaksi (Suka, Tersenyumlah ...) yang diterima proyek kamu, semakin tinggi kemunculannya dalam daftar ini.'
 follower:
   follows: Berikut
   followers: Pengikut
   follow: Mengikuti
-  username: Pengguna
   followsMe: Ikuti saya
   noFollowing: Kamu tidak mengikuti siapa pun saat ini.
   noFollowers: Kamu tidak memiliki pengikut saat ini.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Kamu yakin ingin berhenti mengikuti pengguna ini?"
   unfollowButton: "Berhenti mengikuti %username%"
 project:
-  welcome:
-    title: 'Selamat datang di %theme% Catrobat'
-    title_mindstorms: 'Selamat datang di situs Catrobat untuk Mindstorms EV3 dan NXT'
-    subtitle: 'Buat cerita, game, dan lainnya...'
-    subtitle_embroidery: 'Jahit pola buatanmu sendiri di kaus, tas, celana, atau casing ponselmu!'
-    subtitle_mindstorms: 'Buat proyekmu sendiri dengan robot Lego Mindstorms EV3 dan NXT milikmu'
-    download: 'Unduh aplikasinya'
-    statistics: 'Statistik lainnya'
   featured: 'Unggulan'
   open: Buka 
   download: Unduh
@@ -148,9 +117,6 @@ project:
       retention: 'Proyek yang diunggah akan dihapus otomatis setelah tidak aktif selama beberapa waktu. Masuklah secara rutin atau dapatkan unduhan pada proyekmu agar proyekmu disimpan lebih lama.'
       protection: 'Proyek yang sangat bagus atau populer bisa dilindungi oleh moderator dari penghapusan otomatis.'
   example: 'Contoh'
-  newest: 'Proyek terbaru'
-  recommended: 'Proyek yang direkomendasikan'
-  scratchremixes: 'Remix Scratch'
   noProjects: 'Saat ini belum ada proyek.'
   shareAction: Bagikan
   deleteAction: Hapus proyek
@@ -173,17 +139,10 @@ project:
   reportCommentConfirmation: 'Apakah kamu yakin ingin melaporkan komentar ini?'
   deleteCommentConfirmation: 'Apakah kamu yakin ingin menghapus komentar ini?'
   deleteAccountConfirmation: "Hapus akun?\nApakah kamu yakin ingin menghapus akunmu? Ini juga akan menghapus proyek dan komentar yang sudah kamu unggah!\nTindakanmu tidak bisa dipulihkan!\nYa, hapus!\nBatal\n"
-  tooLongName: 'Nama proyek terlalu panjang!'
-  tooLongDescription: 'Deskripsi proyek terlalu panjang!'
-  tooLongCredits: 'Catatan dan kredit proyek terlalu panjang!'
   my_projects: Proyek saya
   trending: 'Proyek yang sedang tren'
   popular: 'Proyek populer'
-  most:
-    viewed: Paling banyak dilihat
-    downloaded: Paling banyak diunduh
   random: 'Proyek acak'
-  related: 'Proyek terkait'
   browse:
     explore: 'Jelajahi Proyek'
     no_projects: 'Kamu belum membuat proyek apa pun'
@@ -197,36 +156,14 @@ project:
     tooltip: 'Proyek dihapus otomatis setelah tidak aktif selama beberapa waktu. Dapatkan lebih banyak unduhan atau masuklah secara rutin agar proyek disimpan lebih lama.'
     tooltip_protected: 'Proyek ini dilindungi dan tidak akan dihapus secara otomatis.'
   downloads: '%downloads% unduhan'
-  sample: 'Contoh proyek'
   views: '%views% kali dilihat'
   likes:
     likersTitle: 'Orang yang bereaksi pada proyek ini'
     all: "Semua"
-  remixes: '{0}0 remix |{1}1 remix |]1,Inf]%remixes% remix'
-  newRemixesNotificationTitle: '|{1}"%programName%" punya 1 remix baru: |]1,Inf] "%programName%" punya %remixes% remix baru:'
-  submitted: 'Proyek yang dikirim'
-  uploaded: 'Proyek yang diunggah'
-  reportAsInappropriate: 'Laporkan sebagai tidak pantas'
-  reportProgram: 'Laporkan proyek'
   languageVersion: 'Versi bahasa Catrobat: %languageVersion%'
-  reportLoginText: 'Silakan %login% untuk melaporkan proyek ini.'
-  reportDialogHeader: 'Kenapa kamu ingin melaporkan proyek ini?'
-  reportDialogReason: 'Masukkan alasan'
-  reportRadioButtonInappropriate: 'Tidak pantas'
-  reportRadioButtonCopyright: 'Pelanggaran hak cipta'
-  reportRadioButtonSpam: 'Ini spam'
-  reportRadioButtonDislike: 'Aku tidak menyukainya'
-  reportOwnProgram: 'Kamu tidak bisa melaporkan proyekmu sendiri.'
-  reportAlready: 'Kamu sudah melaporkan proyek ini.'
-  reportDone: 'Kamu telah melaporkan proyek ini!'
   updateAppHeaderDownload: 'Unduhan tidak memungkinkan'
   updateAppTextDownload: 'Perbarui aplikasimu ke versi terbaru. Perlu diketahui, belum semua fitur Android tersedia di iOS.'
-  updateAppTextDownloadApk: 'Unduhan APK saat ini hanya tersedia di Android dan tidak di iOS.'
-  updateAppHeader: 'Perbarui aplikasi'
-  updateAppText: 'Perbarui aplikasimu ke versi terbaru.'
-  btnClosePopup: Baik
   checkout_this_project: 'Lihat proyek Catrobat ini'
-  show_more: 'Tampilkan Lebih Banyak'
   comments: Komentar
   send: 'Kirim'
   delete: Hapus
@@ -238,7 +175,6 @@ project:
   deleted_popup_header: 'Dihapus'
   noAdminRights: 'Kamu tidak punya hak admin. Silakan masuk sebagai admin.'
   editProject: 'Edit proyek'
-  closeProjectEditor: 'Tutup editor proyek'
   closeEditorPrompt: Apakah kamu ingin menyimpan perubahan?
   btnDiscard: Singkirkan
   addComment: 'Tulis komentar'
@@ -246,8 +182,6 @@ project:
   smile: 'Senyum!'
   love: 'Suka banget!'
   wow: 'Wah!'
-  linkTitle: 'Tautan'
-  link: 'Salin tautan proyek ke papan klip'
   reactionsText: Reaksi
   downloadErrorText: 'Terjadi kesalahan saat mengunduh proyek. Silakan coba lagi nanti.'
   downloadStartText: 'Unduhan dimulai...'
@@ -267,11 +201,8 @@ project:
   translations: 'Terjemahan'
   createTranslation: 'Buat terjemahan'
   deletedComment: '**Dihapus**'
-  replyLabel: 'balasan'
-  repliesLabel: 'balasan'
   notForKids: 'Tidak aman untuk anak-anak'
 remixGraph:
-  title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'
   by: 'oleh'
   open: 'Buka '
@@ -291,25 +222,6 @@ remixGraph:
   projectNotAvailable: 'Tidak tersedia'
   projectUnknownUser: 'Pengguna tidak dikenal'
 noReply: 'Ini adalah pesan otomatis – jangan membalas langsung ke email ini.'
-accountConfirmation:
-  subject: Konfirmasi akun Catrobat kamu
-  message: |
-    %username% yang terhormat.
-    Untuk menyelesaikan aktivasi akun kamu - silakan kunjungi %confirmationUrl%
-    Tautan ini hanya dapat digunakan sekali untuk memvalidasi akun kamu.
-    Salam Hormat,
-    Tim Catrobat.
-  messageHtml: |
-    <p>
-    Halo %username%. <br>
-    <br>
-    Untuk menyelesaikan aktivasi akun kamu - silakan klik <a href="%confirmationUrl%"> di sini. </a> <br>
-    <br>
-    Tautan ini hanya dapat digunakan sekali untuk memvalidasi akun kamu. <br>
-    <br>
-    Salam, <br>
-    Tim Catrobat.
-    </p>
 newAccountConfirmation:
   subject: 'Verifikasi alamat emailmu'
   welcome: 'Selamat datang di Catrobat!'
@@ -387,63 +299,13 @@ parent:
       ignore: 'Jika kamu tidak memintanya, kamu bisa mengabaikan email ini.'
 passwordRecovery:
   subject: Pemulihan Kata Sandi Catrobat kamu
-  message: |
-    %username% yang terhormat.
-    Kamu telah meminta untuk menyetel ulang kata sandi kamu di %appplication_url% karena kamu lupa kata sandi kamu.
-    Jika kamu tidak memintanya, harap abaikan. Ini akan kedaluwarsa dan menjadi tidak berguna dalam waktu 24 jam.
-    Untuk mereset kata sandi kamu dan membuat yang baru, silakan kunjungi halaman berikut: %confirmationUrl%
-    Kamu dapat menggunakan nama pengguna dan sandi kamu kapan saja untuk mengakses komunitas %appplication_url%.
-    Untuk melakukannya, cukup kunjungi halaman berikut: %loginPage%
-    Untuk mengedit detail profil kamu, buka halaman ini: %profilePage%
-    Salam Hormat,
-    Tim Catrobat.
-  messageHtml: |
-    <p>
-    Halo %username%. <br>
-    <br>
-    Kamu telah meminta untuk mengatur ulang kata sandi kamu di <a href="%appplication_url%"> Pocket Code </a> karena kamu lupa kata sandi kamu.
-    Jika kamu tidak memintanya, harap abaikan. Ini akan kedaluwarsa dan menjadi tidak berguna dalam waktu 24 jam. <br>
-    <br>
-    Untuk menyetel ulang sandi kamu dan membuat yang baru, harap klik <a href="%confirmationUrl%"> di sini. </a> <br>
-    <br>
-    Kamu dapat menggunakan nama pengguna dan sandi kamu kapan saja untuk mengakses komunitas <a href="%appplication_url%"> Pocket Code </a>. <br>
-    Untuk melakukannya, cukup kunjungi halaman berikut: <a href="%loginPage%"> Halaman Login </a> <br>
-    Untuk mengedit detail profil kamu, buka <a href="%profilePage%"> halaman </a> ini. <br>
-    <br>
-    Salam, <br>
-    Tim Catrobat.
-    </p>
 profile:
   aboutMe: 'Tentang aku'
   currentlyWorkingOn: 'Sedang mengerjakan'
-  edit: Sunting profil kamu
-  saveChanges: simpan perubahan
   newPass: kata sandi baru
   repeatPass: ulangi kata sandi
   oldPass: password lama
-  firstEmail: Email pertama saya
-  secondEmail: Email kedua saya
-  myPrograms: Proyek saya
-  follows: Ikuti
-  follower: Pengikut
-  unfollowUser: Berhenti ikuti pengguna ini!
-  followUser: Ikuti pengguna ini!
-  amountOfPrograms: Jumlah proyek
-  form:
-    passwordTooShort: Kata sandi baru harus memiliki setidaknya %length% karakter.
-    passwordTooLong: Kata sandi baru dapat memiliki maksimal %length% karakter.
-    passwordIsUsername: Kata sandi harus berbeda dari nama pengguna.
-    passwordWrong: Kata sandi salah
-    emailNotValid: Alamat email ini tidak valid.
-    emailMissing: Kesalahan ketika memperbarui alamat e-mail. Kamu harus memiliki minimal satu alamat e-mail divalidasi.
-    emailExists: Alamat email ini sudah ada.
-    usernameNotValid: Nama pengguna ini tidak valid
-    usernameMissing: Kamu harus memiliki nama pengguna.
-    usernameExists: Nama pengguna ini sudah ada.
-    usernameContainsEmail: Nama pengguna tidak boleh berisi alamat email.
-    submitSuccess: tersimpan!
   reallyDeleteProgram: Apakah kamu benar-benar ingin menghapus proyek kamu
-  programsOf: Proyek dari
   picture: 'Foto profil'
   changePicture: Ubah foto
   goToScratchProfile: Profil di Scratch
@@ -453,14 +315,8 @@ myprofile:
   securitySettings: Ubah Kata Sandi
   accountSettings: Pengaturan akun
   accountVerification: 'Verifikasi akun'
-  account: 'Akun'
-  editProfile: Edit profil
-  edit: 'Edit'
   done: Selesai
-  checkMail: Email dikirim ke alamat email kamu. Silakan cek inbox kamu.
   passwordUpdated: Kata sandi kamu berhasil diperbarui.
-  avatar: Avatar
-  email: Surel
   deleteAccount: Hapus akun
   deleteAccountWarning: "Perhatian:\nKamu telah membuat %num_projects% proyek dan punya %num_followers% pengikut. Semua proyekmu akan dihapus. Kamu tidak akan bisa masuk lagi dan proyekmu akan hilang dari semua daftar. Penghapusan profilmu tidak bisa dibatalkan!\nApakah kamu yakin ingin meninggalkan kami?\n"
   exportData: 'Unduh dataku'
@@ -468,7 +324,6 @@ myprofile:
   exportDataLoading: 'Mengunduh...'
   exportDataError: 'Terjadi kesalahan saat mengekspor datamu. Silakan coba lagi nanti.'
   exportDataRateLimited: 'Kamu hanya bisa mengekspor datamu sekali sehari. Silakan coba lagi besok.'
-  editAccountSettings: Edit pengaturan akun
   profileChangeSuccess: 'Profilmu berhasil diubah.'
   unspecifiedError: 'Ada yang tidak berhasil saat mengubah profilmu. Silakan coba lagi atau beri tahu kami jika ini terus terjadi!'
   verifyAccountText: 'Kami akan mengirimkan email berisi tautan untuk memverifikasi akunmu. Pastikan kamu mengklik tautan itu dalam satu jam ke depan; kamu hanya boleh meminta satu email per hari.'
@@ -525,13 +380,10 @@ termsOfUse:
   bottom2: 'Silahkan email saran-saran mengenai syarat penggunaan ke %email-webmaster%.'
   version: Versi 1.3, 4 Maret 2014
 search:
-  dotdotdot: Cari...
   search: 'Cari proyek, pengguna & studio'
   inMediaLib: Cari di perpustakaan media
   inMediaCategory: 'Cari di kategori media'
   results: Hasil pencarian
-  resultcount: Pencarian kamu menemukan %count% hasil
-  fail: Harap masukkan setidaknya satu istilah pencarian
   noUsers: 'Tidak ada pengguna ditemukan'
   noProjects: 'Tidak ada proyek ditemukan'
   noStudios: 'Tidak ada studio ditemukan'
@@ -547,7 +399,6 @@ menu:
   mediaLibrary: Perpustakaan media
   studio: 'Studio'
   language: Bahasa
-  languageOptionsNotAvailable: 'Tidak ada pilihan bahasa yang tersedia.'
 login:
   login: Gabung
   button:
@@ -559,21 +410,10 @@ login:
     or: "atau"
   passOrUser: Sandi atau nama pengguna adalah salah.
   accountSuspended: 'Akunmu telah ditangguhkan. Jika menurutmu ini kesalahan, silakan hubungi dukungan.'
-  noUsername: Nama pengguna atau alamat email kamu tidak ditemukan.
-  forgotPass: Lupa sandi atau nama pengguna?
   recoverPassSend: Email dikirim ke alamat email kamu. Silakan cek inbox kamu.
   alreadyReset: Kata sandi untuk pengguna ini telah diminta dalam 24 jam terakhir.
-  confirmationSend: Sebuah email untuk mengkonfirmasi pendaftaran kamu telah dikirim ke alamat email kamu. Silakan periksa kotak masuk kamu dan aktifkan akun kamu.
-  userOrEmail: Nama pengguna atau Email
-  changePass: Ubah Kata Sandi
-  createAccount: Buat akun
-  noAccount: Tidak punya akun!
-  alreadyAccount: Sudah punya akun?
-  or: ATAU
   username: Nama pengguna
   email: Surel
-  passwordFirst: Kata sandi
-  passwordSecond: Konfirmasi password
 register:
   title: 'Daftar'
   subText: 'Dengan melanjutkan, kamu membuat akun komunitas Catrobat dan menyetujui %var1% dan %var2% kami.'
@@ -606,14 +446,6 @@ registration:
   consentRevoked:
     title: 'Izin orang tua telah dicabut'
     message: 'Orang tua atau walimu telah mencabut izin untuk akunmu. Fungsi akunmu dibatasi sampai izin diberikan lagi.'
-    newEmailPlaceholder: 'Email orang tua yang baru'
-    changeButton: 'Perbarui & kirim ulang'
-accountRecovery:
-  title: 'Pemulihan akun'
-  description: 'Jika kamu ingat email atau nama pengguna akunmu, kami bisa mengirimkan tautan untuk mengatur ulang kata sandimu.'
-  button:
-    cancel: Batalkan
-    submit: 'Pulihkan kata sandi'
 resetPassword:
   request:
     title: 'Atur ulang kata sandimu'
@@ -626,11 +458,6 @@ resetPassword:
     description: 'Jika ada akun yang cocok dengan emailmu, email berisi tautan untuk mengatur ulang kata sandimu baru saja dikirim. Tautan ini akan kedaluwarsa dalam %time%.'
     descriptionTwo: 'Kamu bisa meminta pengaturan ulang kata sandi baru setiap %throttleLimit% jam.'
     descriptionThree: 'Jika kamu tidak menerima email, cek folder spam-mu atau kirim email ke tim dukungan kami di %email-webmaster%.'
-  email:
-    title: "Hi!"
-    visitLink: 'Untuk mengatur ulang kata sandimu, kunjungi tautan berikut'
-    expire: 'Tautan ini akan kedaluwarsa dalam %time%.'
-    cheers: 'Salam!'
   newemail:
     title: 'Atur ulang kata sandimu'
     content: 'Kamu baru saja meminta pengaturan ulang kata sandi untuk akun Catrobat-mu. Klik tombol di bawah untuk memilih kata sandi baru. Jika kamu tidak memintanya, kamu bisa mengabaikan email ini.'
@@ -640,76 +467,33 @@ resetPassword:
     title: 'Atur ulang kata sandimu'
     button:
       submit: "Setel ulang kata sandi"
-apk:
-  download: Unduh sebagai app
-  prepare: 'Mempersiapkan app'
-  preparing: 'Mempersiapkan app'
-  text: 'Proses ini dapat berlangsung beberapa saat'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'Ada yang tidak berhasil. Silakan coba lagi atau beri tahu kami jika ini terus terjadi!'
-  username:
-    blank: Nama pengguna tidak boleh kosong
-    invalid: Nama pengguna tidak sah
-    exists: Nama pengguna ini sudah ada.
-    not_exists: Nama pengguna ini tidak ada.
-    not_email: Nama pengguna tidak boleh berupa alamat email.
-    size: Nama pengguna harus memiliki minimal 3 karakter dan tidak lebih dari 180
-  password:
-    blank: Kata sandi hilang.
-    short: 'Password kamu harus memiliki setidaknya {{ limit }} karakter.'
-  country:
-    blank: Negara hilang.
-    invalid: Negara tidak sah
-  email:
-    blank: email tidak boleh kosong
-    invalid: Email kamu tampaknya tidak sah
-    exists: Alamat email ini sudah ada.
-  id:
-    blank: Open Authentication ID tidak boleh kosong
-  login: Sandi atau nama pengguna salah.
-  post-data: POST-Data tidak benar atau hilang!
-  checksum:
-    missing: Client tidak mengirim fileChecksum! Apakah kamu menggunakan versi lama dari Pocket Code?
-    invalid: checksum tidak sah
   xml:
     invalid: kode xml tidak valid
     missing: 'kesalahan tidak dikenal: project_xml_tidak_ditemukan!'
   file:
-    unexpected: file tak terduga ditemukan
     invalid: berkas tidak sah
-  image.missing: Proyek XML menyebutkan berkas yang tidak ada dalam folder proyek
-  unknown: kesalahan tidak dikenal
-  token: 'Otentikasi perangkat gagal: auth-token tidak valid!'
-  uploadTokenAuthFailed: 'Otorisasi upload Token gagal.'
-  project:
-    invalid: 'Proyek tidak valid.'
   languageversion:
     tooold: 'Maaf, proyek kamu berisi bahasa Catrobat versi lama! Apakah kamu menggunakan Pocket Code versi terbaru?'
   projectversion:
     tooold: 'Maaf, kamu menggunakan Pocket Code versi lama. Perbarui ke versi terbaru.'
   authentication:
-    title: 'Gagal masuk'
     webview: |
       Kredensial pengguna kamu salah.
       Silakan coba masuk lagi di aplikasi.
 success:
   text: Keberhasilan
-  registration: Registrasi berhasil!
-  token: oke
-  upload: Program kamu telah berhasil di unggah!
   imgUpload: Gambar kamu berhasil diunggah!
-  report: Laporan kamu berhasil dikirim!
 time:
   minutes.ago: '{0} <1 menit yang lalu | {1} 1 menit yang lalu |] 1, Inf] %count% menit yang lalu'
   hours.ago: '{1}1 jam lalu |] 1, Inf] %count% jam lalu'
   days.ago: '{1}1 hari yang lalu |] 1, Inf] %count% hari yang lalu'
   months.ago: '{1}1 bulan yang lalu |] 1, Inf] %count% bulan yang lalu'
   years.ago: '{1}1 tahun yang lalu |] 1, Inf] lebih dari satu tahun yang lalu'
-failure:
-  upload: Terjadi kesalahan ketika mengupload aplikasi anda.
 user:
   verification:
     email: 'Verifikasi emailmu'
@@ -732,7 +516,6 @@ api:
     passwordInvalidChars: 'Kata sandi mengandung karakter yang tidak valid'
     usernameContainsEmail: "Nama pengguna tidak boleh mengandung alamat email"
     usernameContainsLink: 'Nama pengguna tidak boleh berisi tautan'
-    countryCodeInvalid: "Kode negara tidak valid"
     pictureInvalid: 'Foto profil tidak valid atau tidak didukung'
     dateOfBirthMissing: 'Tanggal lahir wajib diisi'
     dateOfBirthInvalid: 'Tanggal lahir tidak valid'
@@ -766,61 +549,11 @@ api:
     nameAlreadyInUse: 'Nama sudah digunakan'
     descriptionMissing: 'Deskripsi belum diisi'
     descriptionEmpty: 'Deskripsi kosong'
-    descriptionTooShort: 'Deskripsi terlalu pendek'
     descriptionTooLong: 'Deskripsi terlalu panjang'
     imageFileInvalid: 'File gambar tidak valid'
     imageFileInvalidType: 'Jenis file gambar tidak valid'
     imageFileTooLarge: 'File gambar terlalu besar'
-#languages and countries
-language:
-  arabic: Arab
-  bulgarian: Bulgaria
-  catalan: 'Bahasa Katalan'
-  chinese_simplified_han: Cina (disederhanakan Han)
-  chinese_traditional_han: Cina (tradisional Han)
-  croatian: Kroasia
-  czech: Ceko
-  danish: Denmark
-  dutch: Belanda
-  english_united_kingdom: Inggris (Britania Raya)
-  english_united_states: Inggris (Amerika Serikat)
-  estonian: Estonia
-  filipino: Philipina
-  finnish: Finlandia
-  french: Prancis
-  german: Jerman
-  greek: Yunani
-  hebrew: Ibrani
-  hindi: India
-  hungarian: Hongaria
-  indonesian: Indonesia
-  italian: Italia
-  japanese: Jepang
-  korean: Korea
-  latvian: Latvia
-  lithuanian: Lithuania
-  malay: Melayu
-  norwegian: Norwegia
-  persian: Persia
-  polish: Polandia
-  portuguese_brazil: Portugis (Brasil)
-  portuguese_portugal: Portugis (Portugal)
-  romanian: Rumania
-  russian: Rusia
-  serbian: Serbia
-  slovak: Slovakia
-  slovenian: Slovenia
-  spanish_latin_america: Spanyol (Amerika Latin)
-  spanish_spain: Spanyol (Spanyol)
-  swedish: Swedia
-  thai: 'Bahasa Thai'
-  turkish: Turki
-  ukrainian: Ukraina
-  vietnamese: Vietnam
-ci:
-  generate: Menghasilkan Apk
-  pending: Menghasilkan Apk
-  download: Unduh Apk
+
 admin:
   maintain:
     diskMaintenance: Pemeliharaan disk
@@ -828,46 +561,9 @@ admin:
     noRemovableObjects: Tidak tersedia objek yang dapat dipindahkan.
     removableObjects: Benda yang bisa dilepas
 recommender:
-  similarPrograms: Proyek serupa
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Para pengguna yang mengunduh proyek ini juga mengunduh
   moreFromThisUser: Lainnya dari %username%
-pmd:
-  submitBtn: Kirimkan proyek kamu
-  submitBox:
-    header: Pengajuan
-    text: Kamu akan mengirimkan proyek kamu. Harap masukkan kode proyek dan klik kirim.
-    btnText: Menyerahkan
-  successful:
-    text: Unggahan proyek kamu berhasil.
-  failed:
-    text: Unggahan proyek gagal.
 codeview:
   title: 'Tampilan kode'
-  showCode: 'Tampilkan Kode'
-  hideCode: 'Sembunyikan kode'
-  showStatistics: 'Tampilkan statistik kode'
-  hideStatistics: 'Sembunyikan statistik kode'
-  cantDisplayCode: "Kode tidak dapat ditampilkan"
-  cantDisplayStatistics: "Kode tidak dapat ditampilkan"
-  totalNumberOf: 'Jumlah total'
-  scenes: 'Adegan'
-  scripts: 'Naskah'
-  bricks: 'Bata'
-  objects: 'Aktor dan objek'
-  looks: 'Tampilan'
-  sounds: 'Suara'
-  globals: 'Global'
-  locals: 'Penduduk setempat'
-  globalVariables: 'Variabel global'
-  localVariables: 'Variabel lokal'
-  eventBricks: 'Bata acara'
-  controlBricks: 'Kontrol batu bata'
-  motionBricks: 'Batu bata gerak'
-  soundBricks: 'Batu bata suara'
-  looksBricks: 'Tampak batu bata'
-  penBricks: 'Bata pulpen'
-  dataBricks: 'Databricks'
-  specialBricks: 'Batu bata khusus'
 codeView:
   title: 'Tampilan Kode'
   loading: 'Memuat tampilan kode...'
@@ -880,19 +576,7 @@ codeView:
 codeStatistics:
   title: "Statistik kode"
   error: "Statistik kode tidak dapat ditampilkan."
-  general: 'Umum'
-  bricks: 'Bata'
-  eventBricks: 'Peristiwa'
-  controlBricks: 'Kontrol'
-  motionBricks: 'Gerak'
-  soundBricks: 'Suara'
-  looksBricks: 'Tampilan'
-  penBricks: 'Pena'
-  dataBricks: 'Data'
-  deviceBricks: 'Alat'
-  specialBricks: 'Khusus'
   yourScore: 'Skormu:'
-  points: 'poin'
   abstraction: 'Abstraksi dan dekomposisi masalah'
   parallelism: 'Paralelisme'
   logicalThinking: 'Berpikir logis'
@@ -908,20 +592,7 @@ footer:
   text: 'Sudah ada %project_count% proyek keren yang dibagikan, proyek berikutnya bisa jadi milikmu. Unduh aplikasi kami dan mulai berkarya hari ini'
 privacy-policy:
   header: Kebijakan privasi
-  version: Versi 2.2, 17 Oktober 2019
-  text1: Untuk menawarkan kepada kamu semua manfaat layanan kami dan akun terkait, kamu perlu mengumpulkan data tertentu.
-  text2: Untuk memelihara dan meningkatkan layanan kami (aplikasi dan situs web) dan untuk melakukan penelitian ilmiah tentang pendidikan ICT dan STEM / STEAM, kami menggunakan Google Analytics, Crashlytics, dan Firebase, semuanya oleh Google LLC (AS), serta Dynatrace oleh Dynatrace LLC ( USA) untuk mendapatkan metadata tentang penggunaan layanan kami, misalnya, informasi kerusakan, cap waktu, halaman / layar yang dikunjungi, penggunaan aplikasi dan layanan kami, sistem operasi yang digunakan, dan informasi tentang penyedia jaringan. Analisis ini dan data yang dikumpulkan tidak ditautkan ke profil kamu dan tidak berisi informasi pribadi apa pun (bit terakhir dari alamat IP menjadi anonim). Namun, data yang dikumpulkan akan ditransfer ke penyedia layanan (Google LLC, USA dan Dynatrace LLC, USA). Pemrosesan data didasarkan pada perjanjian dengan Google LLC dan Dynatrace LLC. Hubungan dengan penyedia layanan ini sesuai dengan Peraturan Perlindungan Data Umum Uni Eropa (GDPR UE) dan perjanjian "Perlindungan Privasi" UE-AS.
-  text3: Untuk membuat dan menggunakan akun di sistem kami, dan untuk memberi tahu kamu tentang perubahan yang diperlukan tentang akun kamu melalui email, misalnya, pembaruan atau pelanggaran Persyaratan Penggunaan dan Layanan kami, aturan komunitas kami, atau kebijakan kami, kami akan menyimpan nama pengguna dan, jika disediakan oleh kamu, alamat email kamu. Jika kamu telah menghubungkan akun kamu melalui Google Plus atau Facebook, kami juga menyimpan kunci identifikasi yang terhubung ke akun kamu pada layanan ini. Kami tidak akan menggunakan data ini untuk tujuan lain (misalnya, pemasaran), kecuali kamu secara eksplisit mengizinkan kami untuk melakukannya.
-  text4: Secara sukarela, kamu dapat memberi kami negara tempat tinggal kamu melalui halaman akun kamu di situs berbagi. Ini akan ditampilkan di profil publik kamu dan hanya digunakan untuk keperluan statistik dan penelitian oleh kami. Itu dapat dihapus kapan saja di pengaturan profil kamu.
-  text5: Kamu dapat menarik penggunaan data pribadi milik akun kamu kapan saja dengan menghapus akun kamu melalui halaman profil kamu di https://share.catrobat.org/. Setelah menghapus akun kamu, kamu masih dapat menggunakan layanan yang disediakan, tetapi tidak dapat berkolaborasi, misalnya, melalui program mengunggah, berkomentar, atau menyukai. Selain itu, semua konten yang disediakan dan ditautkan ke akun kamu, misalnya, program yang diunggah, komentar, dll., Akan dihapus.
-  text6: Untuk menghindari penyalahgunaan layanan kami, misalnya, melalui unggahan atau komentar yang dikontribusikan pengguna untuk tujuan ilegal, semua data publik yang dibuat pengguna (unggahan, komentar) akan disimpan secara internal dalam database, bersama dengan stempel waktu dan alamat internet yang digunakan. Data ini tidak akan digunakan oleh atau diteruskan ke lembaga mana pun, kecuali tindakan ilegal cukup dicurigai dan lembaga hukum yang berhak secara resmi memintanya berdasarkan hukum yang berlaku. Setiap kasus akan diperiksa secara menyeluruh oleh kami terlebih dahulu.
-  text7: Kamu dapat berlangganan Buletin Catrobat secara sukarela, di https://catrobat.org/newsletter yang kami sediakan melalui layanan MailChimp (The Rocket Science Group LLC d / b / a MailChimp, USA). Kamu kemudian akan menerima pembaruan pada proyek Catrobat dan layanannya untuk alamat email yang kamu sediakan. Kamu dapat menarik buletin kapan saja dengan menggunakan tautan "berhenti berlangganan" di bagian bawah setiap buletin. Buletin ini disediakan oleh MailChimp dengan siapa kami memiliki perjanjian pemrosesan data dan yang berkomitmen pada Peraturan Produksi Data Umum UE dan "Perlindungan Privasi" UE-AS. Untuk detail lebih lanjut tentang MailChimp, harap lihat juga Kebijakan Privasi MailChimp dan Syarat Penggunaan.
-  text8: Semua Layanan disediakan oleh proyek Catrobat open source gratis di bawah payung Asosiasi Catrobat Internasional - Verein zur Förderung freier Software, sebuah LSM nirlaba yang didirikan di Graz, Austria (Uni Eropa). Kebijakan kami menghormati undang-undang perlindungan data UE dan Austria (GDPR). Untuk menghubungi kami, silakan kirim email ke contact@catrobat.org atau kirim email ke Catrobat, c / o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union ).
-  text9: Jika kamu berusia di bawah 14 tahun, polis ini harus diterima oleh wali resmi (biasanya orang tua).
-  text10: Kebijakan privasi bahasa Inggris resmi Catrobat tersedia di web di bawah %privacy_policy%.
-  disagree-text: Tanpa persetujuan, kami tidak dapat membuat akun tetapi fitur intinya masih dapat diakses.
 catro-notifications:
-  markAsRead: "tandai sebagai membaca"
   noFollowers: "Sepertinya kamu tidak memiliki notifikasi pengikut."
   noComments: "Sepertinya kamu tidak memiliki pemberitahuan komentar."
   noReactions: "Sepertinya kamu tidak memiliki pemberitahuan reaksi."
@@ -955,29 +626,16 @@ catro-notifications:
 clipboard:
   success: 'Tautan disalin ke papan klip!'
   success_project: 'Tautan ke proyek disalin ke papan klip!'
-  success_user: 'Tautan ke pengguna disalin ke papan klip!'
   fail: Gagal menyalin link ke papan klip! :(
 next: Lanjut
 previous: Sebelumnya
 media-packages:
   title: Paket Media
   description: Dalam kategori berikut, kamu dapat menemukan aktor dan objek tambahan untuk ditambahkan ke proyek PocketCode kamu.
-  thumb-size:
-    description: Ukuran pratinjau
-    sm: kecil
-    md: 'sedang'
-    lg: besar
   theme-special: "%flavor% Tema Spesial"
   search-results: Hasil pencarian perpustakaan media
-  no-results: Pencarian kamu menghasilkan 0 hasil. Harap gunakan hanya istilah pencarian bahasa Inggris.
-  download_these_files: menyimpan
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Buat@Sekolah
 copyright: 'Hak Cipta &copy; %year% <a href="http://www.catrobat.org"> Catrobat </a>. Seluruh hak cipta.'
 noscript:
   warning: 'Situs web ini membutuhkan JavaScript agar bisa berfungsi. Aktifkan JavaScript di browsermu atau minta bantuan orang dewasa.'
@@ -987,10 +645,6 @@ cookie-consent:
   decline: "Menurun"
   privacy-link: "Kebijakan privasi"
   settings-link: 'Pengaturan Cookie'
-agree: Setuju
-disagree: Tidak setuju
-profileLoader:
-  noProfiles: Saat ini tidak ada profil.
 element: 'Elemen'
 elements: 'Elemen'
 share:
@@ -999,7 +653,6 @@ share:
   success: 'Berbagi berhasil'
 copy: 'Salin tautan'
 checkOutProject: 'Lihat proyek ini:'
-checkOutUser: 'Lihat pengguna ini:'
 community: 'Komunitas Catrobat'
 back_to_app: 'Keluar dari komunitas'
 category:
@@ -1015,7 +668,6 @@ category:
 achievements:
   sidebar:
     title: 'Prestasi'
-    badge: 'baru'
   overview:
     header: 'Prestasi'
     most_recent_achievement:
@@ -1107,10 +759,7 @@ extensions:
       title: 'Multipemain'
 studio:
   title: 'Studio'
-  singular: 'Studio'
   create_studio: 'Buat studio'
-  delete_studio: 'Hapus studio'
-  cancel_studio: 'Batalkan'
   studio_name: 'Nama studio'
   studio_description: 'Deskripsi studio'
   is_public: 'Jadikan publik?'
@@ -1127,8 +776,6 @@ studio:
   cover_image_remove: 'Hapus gambar'
   popular: 'Studio Populer'
   join: 'Gabung'
-  leave: 'Keluar'
-  report: 'Laporkan'
   public: 'publik'
   private: 'Khusus undangan'
   overview:
@@ -1151,16 +798,12 @@ studio:
     admin: 'Admin'
     member: 'Anggota'
   details:
-    add_project: 'klik untuk menambahkan proyek'
     add: 'Tambahkan'
     showMore: 'menampilkan lebih banyak'
-    showLess: 'tampilkan lebih sedikit'
     are_you_sure: 'Apakah kamu yakin?'
     no_way_of_return: 'Ini tidak bisa dibatalkan.'
     delete_it: 'Hapus'
-    remove_project: 'Hapus dari studio'
     remove_project_error: 'Gagal menghapus proyek dari studio!'
-    remove_project_success: 'proyek berhasil dihapus dari studio!'
     no_projects: 'Studio belum memiliki proyek apa pun'
     projects:
       title: 'Program'
@@ -1176,10 +819,8 @@ studio:
       no_projects_empty_state: 'Kamu belum punya proyek untuk ditambahkan. Buat dulu satu di Pocket Code!'
       add_selected: 'Tambahkan yang Dipilih'
     no_available_projects: 'Tidak ada proyek yang bisa ditambahkan.'
-    updateCoverError: 'Terjadi masalah saat memperbarui sampul studio!'
     join: 'Gabung'
     leave: 'Keluar'
-    report: 'Laporkan'
     pending: 'Menunggu'
     decline: 'Ditolak'
     comments:
@@ -1199,7 +840,6 @@ studio:
       add_comment: '%user% meninggalkan komentar.'
     members_list:
       title: 'Anggota studio'
-      project_count: '{0} Tidak ada proyek studio |{1} 1 proyek studio |]1,Inf] %count% proyek studio'
       no_studio_projects: 'Tidak ada proyek studio'
       one_studio_project: '1 proyek studio'
       n_studio_projects: '%count% proyek studio'
@@ -1209,7 +849,6 @@ studio:
       ban_failed: 'Terjadi kesalahan saat memblokir anggota ini. Coba lagi nanti.'
       demote_member: 'Turunkan admin menjadi anggota'
       demotion_failed: 'Terjadi kesalahan saat menurunkan peran admin ini. Coba lagi nanti.'
-      last_admin: 'Admin terakhir studio ini tidak bisa diturunkan.'
     join_requests:
       title: 'Permintaan Bergabung'
       accept: 'Menerima'
@@ -1239,7 +878,6 @@ media_library:
   no_results: 'Tidak ada hasil ditemukan.'
   assets_count: 'aset'
   view_all: 'Lihat semua'
-  view_all_category: 'Lihat semua %category%'
   back_to_app: 'Kembali ke aplikasi'
 snackbar:
   project_not_found: 'Proyek yang diminta tidak tersedia'
@@ -1293,14 +931,6 @@ moderation:
     rate_limited: 'Kamu melakukan tindakan studio terlalu cepat. Tunggu sebentar.'
   hidden_notice:
     project: 'Proyek ini disembunyikan karena laporan komunitas.'
-    comment: 'Komentar ini disembunyikan karena laporan komunitas.'
-    user: 'Profil ini disembunyikan karena laporan komunitas.'
     user_own: 'Akunmu ditangguhkan karena laporan komunitas. Kamu bisa mengajukan banding atas keputusan ini.'
-    studio: 'Studio ini disembunyikan karena laporan komunitas.'
-  notification:
-    content_hidden: '%content_type% milikmu disembunyikan karena laporan komunitas. Kamu bisa mengajukan banding atas keputusan ini.'
-    appeal_approved: 'Bandingmu telah disetujui. Kontenmu sekarang terlihat lagi.'
-    appeal_rejected: 'Bandingmu telah ditinjau dan keputusan untuk menyembunyikan kontenmu tetap berlaku.'
-    admin_review_needed: 'Konten telah disembunyikan otomatis dan perlu ditinjau.'
 Reports: 'Laporan'
 members: 'anggota'

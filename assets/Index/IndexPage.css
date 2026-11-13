@@ -66,11 +66,6 @@
   color: var(--theme-text-color);
 }
 
-.additional-info {
-  font-size: 14px;
-  color: var(--maintenance-color1);
-}
-
 .maintenance-icon {
   font-size: 24px;
   color: var(--maintenance-color2);

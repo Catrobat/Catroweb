@@ -165,19 +165,6 @@ export default class extends Controller {
     }
   }
 
-  showCommentForm() {
-    if (this.hasFormTarget) {
-      this.formTarget.style.display = 'flex'
-    }
-    if (this.hasCommentButtonsTarget) {
-      this.commentButtonsTarget.style.display = 'flex'
-    }
-    if (this.hasMessageInputTarget) {
-      this.messageInputTarget.style.height = '100px'
-      this.messageInputTarget.focus()
-    }
-  }
-
   cancelComment() {
     if (this.hasMessageInputTarget) {
       this.messageInputTarget.value = ''

@@ -8,19 +8,12 @@ meta.og.description.login: ඔයාගේ Catrobat ව්‍යාපෘති 
 meta.og.title.register: Catrobat ගිණුමක් හදන්න
 meta.og.description.register: Catrobat ප්‍රජාවට එකතු වෙලා අදම ඔයාගේ නිර්මාණශීලී ව්‍යාපෘති බෙදාගන්න පටන් ගන්න.
 meta.og.description.profile: Catrobat හි %username% – ඔවුන්ගේ ව්‍යාපෘති සහ ජයග්‍රහණ බලන්න.
-localLanguage: ඉංග්‍රීසි
 username: පරිශීලක නාමය
 password: මුරපදය
-createNewPassword: අලුත් මුරපදයක් හදන්න
-accountSettings: ගිණුමේ සැකසුම්
 email: විද්‍යුත් තැපෑල
-aboutPocketCode: Pocket Code ගැන
 about: Catrobat ගැන
-education: අධ්‍යාපනය
 chat: කතාබහ සහ සංසද
-privacyGuide: රහස්‍යතා දැනුවත් කිරීමේ මාර්ගෝපදේශය
 others: වෙනත්
-tutorials: උපකාර
 googlePlay: ගූගල් ප්ලේ ස්ටෝර්
 iosAppStore: අයිඕඑස් ඇප් ස්ටෝර්
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: ඔයා මේ ව්‍යාපෘතිය හ�
 projectImportedFromScratch: මේ ව්‍යාපෘතිය MIT Scratch එකෙන් ආනයනය කළේ. මුල් ව්‍යාපෘතිය බලන්න පුළුවන්
 scratchImportedProjectLinkHere: මෙතැනින්.
 country: රට
-loginText: පුරනය වෙන්න
 privacyPolicy: රහස්‍යතා ප්‍රතිපත්තිය
-imprint: ප්‍රකාශන තොරතුරු
 projectDetails: විස්තර
 somethingWentWrong: අයියෝ, මොකක්හරි වැඩ කළේ නැහැ. ආයෙත් උත්සාහ කරන්න!
 accountNotVerified: ඔයා පුරනය වෙලා ඉන්නවද සහ ඔයාගේ ගිණුමේ විද්‍යුත් තැපෑල තහවුරු කරලාද කියලා බලන්න.
@@ -55,36 +46,28 @@ accountSuspended: ප්‍රජා වාර්තා නිසා ඔයා�
 doesNotExist: ඉල්ලපු දේ නැහැ.
 pleaseTryAgain: 'කරුණාකර නැවත උත්සාහ කරන්න!'
 tryAgainButton: ආයෙත් උත්සාහ කරන්න
-oldVersionError: කරුණාකර අලුත්ම Pocket Code අනුවාදයට යාවත්කාල කරන්න!
 more: තව
 less: අඩුවෙන්
 show-more: 'තව පෙන්වන්න'
-show-less: අඩුවෙන් පෙන්වන්න
 more-information: තව තොරතුරු
 less-information: අඩු තොරතුරු
 ok: හරි, තේරුණා
-clickToDownloadProgram: උදාහරණ ව්‍යාපෘතිය බාගන්න %link_start% මෙතන %link_end% ක්ලික් කරන්න.
-registrationError: පරිශීලක නාමය හෝ විද්‍යුත් තැපැල් ලිපිනය දැනටමත් පාවිච්චි වෙනවා.
 notifications: දැනුම්දීම්
 allNotifications: 'සියල්ල'
 FollowersNotifications: අනුගාමිකයන්
 LikeNotifications: ප්‍රතිචාර
 CommentNotifications: අදහස්
 RemixNotifications: රීමික්ස්
-wellDone: නියමයි!
 done: ඉවරයි!
 notificationsReadMessage: ඔයාට කිසිම දැනුම්දීමක් නැහැ වගේ.
-confirmMessage: ඔව්, මකන්න
 cancelMessage: "අවලංගු කරන්න"
 notificationsUnauthorizedError: පරිශීලකයාට අවසර දෙන්න බැරි වුණා
 notificationsClearError: දැනුම්දීම් කියවූ ලෙස ලකුණු කරන්න බැරි වුණා!
-pleaseWait: "කරුණාකර රැඳෙන්න..."
 projects: ව්‍යාපෘති
 users: පරිශීලකයා
 studios: ස්ටූඩියෝ
 oauthPopUpTitle: බාහිර ගිණුමකින් පුරනය වීම ගැන තොරතුරු
 oauthInfo: ඔයා දැන් බාහිර ගිණුමකින් පුරනය වුණා. අපි ඔයාට අහඹු පරිශීලක නාමයක් හැදුවා. ඔයාගේ පරිශීලක නාමය වෙනස් කරන්න හෝ ගිණුමට අලුත් මුරපදයක් හදන්න ඕන නම් ඔයාගේ පැතිකඩ පිටුවට යන්න.
-oauthHere: මෙතන
 statistics: සංඛ්‍යාලේඛන
 languageSelection: භාෂාව තෝරන්න
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: අඳුරු
   dark_description: අඳුරු පෙනුම
   apply: යොදන්න
-indexPage:
-  recommendedSection:
-    info:
-      title: මෙතන නිර්දේශ කරන්නේ මොන ව්‍යාපෘතිද?
-      description: ඔයාගේ ව්‍යාපෘතියට ප්‍රතිචාර (ඇඟිල්ල උඩට, සිනහව ...) වැඩියෙන් ලැබෙන තරමට, මේ ලැයිස්තුවේ ඒක උඩින් පෙන්වනවා.
 follower:
   follows: අනුගමනය කරන
   followers: අනුගාමිකයන්
   follow: අනුගමනය කරන්න
-  username: පරිශීලකයා
   followsMe: මාව අනුගමනය කරනවා
   noFollowing: ඔයා දැනට කිසිවෙකු අනුගමනය කරන්නේ නැහැ.
   noFollowers: ඔයාට දැනට අනුගාමිකයන් නැහැ.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: ඔයාට ඇත්තටම මේ පරිශීලකයා අනුගමනය කිරීම නවත්වන්න ඕනද?
   unfollowButton: '%username% අනුගමනය කිරීම නවත්වන්න'
 project:
-  welcome:
-    title: Catrobat හි %theme% වෙත සාදරයෙන් පිළිගන්නවා
-    title_mindstorms: Mindstorms EV3 සහ NXT සඳහා Catrobat අඩවියට සාදරයෙන් පිළිගන්නවා
-    subtitle: කතා, ක්‍රීඩා සහ තවත් දේ හදන්න...
-    subtitle_embroidery: ඔයාගේ ටී-ෂර්ට්, බෑග්, කලිසම් හෝ ස්මාර්ට්ෆෝන් කවරය මත ඔයාගේම රටා මහන්න!
-    subtitle_mindstorms: ඔයාගේ Lego Mindstorms EV3 සහ NXT රොබෝ එක්ක ඔයාගේම ව්‍යාපෘති හදන්න
-    download: යෙදුම බාගන්න
-    statistics: තව සංඛ්‍යාලේඛන
   featured: විශේෂාංග
   open: විවෘත කරන්න
   download: බාගන්න
@@ -148,9 +117,6 @@ project:
       retention: උඩුගත කළ ව්‍යාපෘති අක්‍රිය කාලයකට පස්සේ ස්වයංක්‍රීයව ඉවත් වෙනවා. ඔයාගේ ව්‍යාපෘතිය තවත් කාලයක් තියාගන්න නිතර පුරනය වෙන්න හෝ ඒකට බාගැනීම් ලබාගන්න.
       protection: ගොඩක් හොඳ හෝ ජනප්‍රිය ව්‍යාපෘති ස්වයංක්‍රීය මැකීමෙන් මොඩරේටර්ලා ආරක්ෂා කරන්න පුළුවන්.
   example: උදාහරණ
-  newest: අලුත්ම ව්‍යාපෘති
-  recommended: නිර්දේශිත ව්‍යාපෘති
-  scratchremixes: Scratch රීමික්ස්
   noProjects: දැනට ව්‍යාපෘති නැහැ.
   shareAction: බෙදාගන්න
   deleteAction: ව්‍යාපෘතිය මකන්න
@@ -190,17 +156,10 @@ project:
     මේ ක්‍රියාව ආපසු හරවන්න බැහැ!
     ඔව්, මකන්න!
     අවලංගු කරන්න
-  tooLongName: ව්‍යාපෘතියේ නම දිග වැඩියි!
-  tooLongDescription: ව්‍යාපෘතියේ විස්තරය දිග වැඩියි!
-  tooLongCredits: ව්‍යාපෘතියේ සටහන් සහ ස්තූතිය දිග වැඩියි!
   my_projects: මම බෙදාගත් ව්‍යාපෘති
   trending: ප්‍රවණතා ව්‍යාපෘති
   popular: ජනප්‍රිය ව්‍යාපෘති
-  most:
-    viewed: වැඩියෙන්ම බැලූ
-    downloaded: වැඩියෙන්ම බාගත්
   random: අහඹු ව්‍යාපෘති
-  related: අදාළ ව්‍යාපෘති
   browse:
     explore: ව්‍යාපෘති ගවේෂණය කරන්න
     no_projects: ඔයා තවම කිසිම ව්‍යාපෘතියක් හදලා නැහැ
@@ -214,36 +173,14 @@ project:
     tooltip: ව්‍යාපෘති අක්‍රිය කාලයකට පස්සේ ස්වයංක්‍රීයව ඉවත් වෙනවා. තවත් කාලයක් තියාගන්න වැඩියෙන් බාගැනීම් ලබාගන්න හෝ නිතර පුරනය වෙන්න.
     tooltip_protected: මේ ව්‍යාපෘතිය ආරක්ෂිතයි, ඒක ස්වයංක්‍රීයව මැකෙන්නේ නැහැ.
   downloads: බාගැනීම් %downloads%
-  sample: උදාහරණ ව්‍යාපෘති
   views: බැලීම් %views%
   likes:
     likersTitle: මේ ව්‍යාපෘතියට ප්‍රතිචාර දැක්වූ අය
     all: "සියල්ල"
-  remixes: '{0}රීමික්ස් 0 |{1}රීමික්ස් 1 |]1,Inf]රීමික්ස් %remixes%'
-  newRemixesNotificationTitle: '|{1}"%programName%" ට අලුත් රීමික්ස් 1ක් තියෙනවා: |]1,Inf] "%programName%" ට අලුත් රීමික්ස් %remixes%ක් තියෙනවා:'
-  submitted: ඉදිරිපත් කළ ව්‍යාපෘති
-  uploaded: උඩුගත කළ ව්‍යාපෘති
-  reportAsInappropriate: නුසුදුසු ලෙස වාර්තා කරන්න
-  reportProgram: ව්‍යාපෘතිය වාර්තා කරන්න
   languageVersion: 'Catrobat භාෂා අනුවාදය: %languageVersion%'
-  reportLoginText: මේ ව්‍යාපෘතිය වාර්තා කරන්න කරුණාකර %login%.
-  reportDialogHeader: ඔයාට මේ ව්‍යාපෘතිය වාර්තා කරන්න ඕන ඇයි?
-  reportDialogReason: හේතුවක් ඇතුළත් කරන්න
-  reportRadioButtonInappropriate: ඒක නුසුදුසුයි
-  reportRadioButtonCopyright: ප්‍රකාශන හිමිකම් උල්ලංඝනය
-  reportRadioButtonSpam: ඒක ස්පෑම්
-  reportRadioButtonDislike: මට ඒක කැමති නැහැ
-  reportOwnProgram: ඔයාට ඔයාගේම ව්‍යාපෘතිය වාර්තා කරන්න බැහැ.
-  reportAlready: ඔයා දැනටමත් මේ ව්‍යාපෘතිය වාර්තා කරලා.
-  reportDone: ඔයා මේ ව්‍යාපෘතිය වාර්තා කළා!
   updateAppHeaderDownload: බාගන්න බැහැ
   updateAppTextDownload: කරුණාකර ඔයාගේ යෙදුම අලුත්ම අනුවාදයට යාවත්කාල කරන්න. Android හි තියෙන හැම විශේෂාංගයක්ම තවම iOS හි නැහැ කියලා මතක තියාගන්න.
-  updateAppTextDownloadApk: APK බාගැනීම දැනට Android වල විතරයි, iOS වල නැහැ.
-  updateAppHeader: යෙදුම යාවත්කාල කරන්න
-  updateAppText: කරුණාකර ඔයාගේ යෙදුම අලුත්ම අනුවාදයට යාවත්කාල කරන්න.
-  btnClosePopup: Ok
   checkout_this_project: මේ Catrobat ව්‍යාපෘතිය බලන්න
-  show_more: තව පෙන්වන්න
   comments: අදහස්
   send: යවන්න
   delete: මකන්න
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: මැකුවා
   noAdminRights: ඔයාට පරිපාලක අයිතිවාසිකම් නැහැ. කරුණාකර පරිපාලකයෙක් ලෙස පුරනය වෙන්න.
   editProject: ව්‍යාපෘතිය සංස්කරණය කරන්න
-  closeProjectEditor: ව්‍යාපෘති සංස්කාරකය වසන්න
   closeEditorPrompt: ඔයාගේ වෙනස්කම් සුරකින්න ඕනද?
   btnDiscard: ඉවත ලන්න
   addComment: අදහසක් ලියන්න
@@ -263,8 +199,6 @@ project:
   smile: සිනහව!
   love: ආදරෙයි!
   wow: වාව්!
-  linkTitle: සබැඳිය
-  link: ව්‍යාපෘති සබැඳිය පසුරු පුවරුවට පිටපත් කරන්න
   reactionsText: ප්‍රතිචාර
   downloadErrorText: ව්‍යාපෘතිය බාගන්නකොට දෝෂයක් ආවා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
   downloadStartText: බාගැනීම පටන් ගත්තා...
@@ -284,11 +218,8 @@ project:
   translations: පරිවර්තන
   createTranslation: පරිවර්තනයක් හදන්න
   deletedComment: '**මකා දැමුවා**'
-  replyLabel: පිළිතුර
-  repliesLabel: පිළිතුරු
   notForKids: ළමයින්ට ආරක්ෂිත නැහැ
 remixGraph:
-  title: රීමික්ස්
   showRemixGraph: රීමික්ස් ප්‍රස්තාරය
   by: 'by'
   open: විවෘත කරන්න
@@ -309,24 +240,6 @@ remixGraph:
   projectUnknownUser: 'නොදන්නා පරිශීලකයෙකි'
 noReply:
   මේක ස්වයංක්‍රීය පණිවිඩයක් - කරුණාකර මේ විද්‍යුත් තැපෑලට කෙලින්ම පිළිතුරු දෙන්න එපා.
-accountConfirmation:
-  subject: ඔයාගේ Catrobat ගිණුම තහවුරු කිරීම
-  message: |
-    ආදරණීය %username%,
-    ඔයාගේ ගිණුම සක්‍රිය කිරීම අවසන් කරන්න - කරුණාකර %confirmationUrl% වෙත යන්න
-    මේ සබැඳිය ඔයාගේ ගිණුම තහවුරු කරන්න එක් වරක් විතරයි පාවිච්චි කරන්න පුළුවන්.
-    සුබ පැතුම්,
-    ඔයාගේ Catrobat කණ්ඩායම.
-  messageHtml: |
-    <p>
-    ආදරණීය %username%,<br>
-    <br>
-    ඔයාගේ ගිණුම සක්‍රිය කිරීම අවසන් කරන්න - කරුණාකර <a href="%confirmationUrl%">මෙතන</a> ක්ලික් කරන්න.<br>
-    මේ සබැඳිය ඔයාගේ ගිණුම තහවුරු කරන්න එක් වරක් විතරයි පාවිච්චි කරන්න පුළුවන්.<br>
-    <br>
-    සුබ පැතුම්,<br>
-    ඔයාගේ Catrobat කණ්ඩායම.
-    </p>
 newAccountConfirmation:
   subject: ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය තහවුරු කරන්න
   welcome: Catrobat වෙත සාදරයෙන් පිළිගන්නවා!
@@ -404,63 +317,13 @@ parent:
       ignore: ඔයා මේක ඉල්ලුවේ නැත්නම්, මේ විද්‍යුත් තැපෑල නොසලකා හරින්න පුළුවන්.
 passwordRecovery:
   subject: ඔයාගේ Catrobat මුරපද ප්‍රතිසාධනය
-  message: |
-    ආදරණීය %username%,
-    ඔයාට මුරපදය අමතක වුණු නිසා %appplication_url% හි ඔයාගේ මුරපදය යළි සකසන්න ඔයා ඉල්ලුවා.
-    ඔයා මේක ඉල්ලුවේ නැත්නම්, කරුණාකර නොසලකා හරින්න. ඒක පැය 24කින් කල් ඉකුත් වෙලා නිෂ්ඵල වෙනවා.
-    ඔයාගේ මුරපදය යළි සකසලා අලුත් එකක් හදන්න, කරුණාකර මේ පිටුවට යන්න: %confirmationUrl%
-    %appplication_url% ප්‍රජාවට පිවිසෙන්න ඔයාට ඕනම වෙලාවක ඔයාගේ පරිශීලක නාමය සහ මුරපදය පාවිච්චි කරන්න පුළුවන්.
-    ඒකට, මේ පිටුවට යන්න: %loginPage%
-    ඔයාගේ පැතිකඩ විස්තර සංස්කරණය කරන්න, මේ පිටුවට යන්න: %profilePage%
-    සුබ පැතුම්,
-    ඔයාගේ Catrobat කණ්ඩායම.
-  messageHtml: |
-    <p>
-    ආදරණීය %username%,<br>
-    <br>
-    ඔයාට මුරපදය අමතක වුණු නිසා <a href="%appplication_url%">Pocket Code</a> හි ඔයාගේ මුරපදය යළි සකසන්න ඔයා ඉල්ලුවා.
-    ඔයා මේක ඉල්ලුවේ නැත්නම්, කරුණාකර නොසලකා හරින්න. ඒක පැය 24කින් කල් ඉකුත් වෙලා නිෂ්ඵල වෙනවා.<br>
-    <br>
-    ඔයාගේ මුරපදය යළි සකසලා අලුත් එකක් හදන්න, කරුණාකර <a href="%confirmationUrl%">මෙතන</a> ක්ලික් කරන්න.<br>
-    <br>
-    <a href="%appplication_url%">Pocket Code</a> ප්‍රජාවට පිවිසෙන්න ඔයාට ඕනම වෙලාවක ඔයාගේ පරිශීලක නාමය සහ මුරපදය පාවිච්චි කරන්න පුළුවන්.<br>
-    ඒකට, මේ පිටුවට යන්න: <a href="%loginPage%">පුරනය වීමේ පිටුව</a><br>
-    ඔයාගේ පැතිකඩ විස්තර සංස්කරණය කරන්න, මේ <a href="%profilePage%">පිටුවට</a> යන්න.<br>
-    <br>
-    සුබ පැතුම්,<br>
-    ඔයාගේ Catrobat කණ්ඩායම.
-    </p>
 profile:
   aboutMe: මා ගැන
   currentlyWorkingOn: දැනට කරන දේ
-  edit: ඔයාගේ පැතිකඩ සංස්කරණය කරන්න
-  saveChanges: වෙනස්කම් සුරකින්න
   newPass: අලුත් මුරපදය
   repeatPass: මුරපදය නැවත දාන්න
   oldPass: පරණ මුරපදය
-  firstEmail: මගේ පළමු විද්‍යුත් තැපෑල
-  secondEmail: මගේ දෙවන විද්‍යුත් තැපෑල
-  myPrograms: මගේ ව්‍යාපෘති
-  follows: අනුගමනය කරන
-  follower: අනුගාමිකයා
-  unfollowUser: මේ පරිශීලකයා අනුගමනය කිරීම නවත්වන්න!
-  followUser: මේ පරිශීලකයා අනුගමනය කරන්න!
-  amountOfPrograms: ව්‍යාපෘති ගණන
-  form:
-    passwordTooShort: අලුත් මුරපදයේ අඩුම තරමින් අකුරු %length%ක් තියෙන්න ඕන.
-    passwordTooLong: අලුත් මුරපදයේ උපරිම අකුරු %length%ක් තියෙන්න පුළුවන්.
-    passwordIsUsername: මුරපදය පරිශීලක නාමයට වඩා වෙනස් වෙන්න ඕන.
-    passwordWrong: වැරදි මුරපදය
-    emailNotValid: මේ විද්‍යුත් තැපැල් ලිපිනය වලංගු නැහැ.
-    emailMissing: මේ විද්‍යුත් තැපැල් ලිපිනය යාවත්කාල කරද්දී දෝෂයක්. ඔයාට අඩුම තරමින් තහවුරු කළ විද්‍යුත් තැපැල් ලිපිනයක් තියෙන්න ඕන.
-    emailExists: මේ විද්‍යුත් තැපැල් ලිපිනය දැනටමත් තියෙනවා.
-    usernameNotValid: මේ පරිශීලක නාමය වලංගු නැහැ.
-    usernameMissing: ඔයාට පරිශීලක නාමයක් තියෙන්න ඕන.
-    usernameExists: මේ පරිශීලක නාමය දැනටමත් තියෙනවා.
-    usernameContainsEmail: පරිශීලක නාමයේ විද්‍යුත් තැපැල් ලිපිනයක් තියෙන්න හොඳ නැහැ.
-    submitSuccess: සුරැකුවා!
   reallyDeleteProgram: ඔයාට ඇත්තටම ඔයාගේ ව්‍යාපෘතිය මකන්න ඕනද
-  programsOf: 'ව්‍යාපෘති:'
   picture: පැතිකඩ පින්තූරය
   changePicture: පින්තූරය වෙනස් කරන්න
   goToScratchProfile: Scratch හි පැතිකඩ
@@ -470,14 +333,8 @@ myprofile:
   securitySettings: මුරපදය වෙනස් කරන්න
   accountSettings: ගිණුමේ සැකසුම්
   accountVerification: ගිණුම තහවුරු කරන්න
-  account: ගිණුම
-  editProfile: පැතිකඩ සංස්කරණය කරන්න
-  edit: සංස්කරණය කරන්න
   done: ඉවරයි
-  checkMail: ඔයාගේ විද්‍යුත් තැපැල් ලිපිනයට විද්‍යුත් තැපෑලක් එව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරන්න.
   passwordUpdated: ඔයාගේ මුරපදය සාර්ථකව යාවත්කාල කළා.
-  avatar: අවතාරය
-  email: විද්‍යුත් තැපෑල
   deleteAccount: ගිණුම මකන්න
   deleteAccountWarning: |
     අවධානයෙන්:
@@ -488,7 +345,6 @@ myprofile:
   exportDataLoading: බාගනිමින්...
   exportDataError: ඔයාගේ දත්ත අපනයනය කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
   exportDataRateLimited: ඔයාට දවසකට එක් වරක් විතරයි ඔයාගේ දත්ත අපනයනය කරන්න පුළුවන්. හෙට ආයෙත් උත්සාහ කරන්න.
-  editAccountSettings: ගිණුම් සැකසුම් සංස්කරණය කරන්න
   profileChangeSuccess: ඔයාගේ පැතිකඩ සාර්ථකව වෙනස් කළා.
   unspecifiedError: ඔයාගේ පැතිකඩ වෙනස් කරද්දී මොකක්හරි වැඩ කළේ නැහැ. ආයෙත් උත්සාහ කරන්න, නැත්නම් දිගටම මෙහෙම වෙනවා නම් අපිට කියන්න!
   verifyAccountText: ඔයාගේ ගිණුම තහවුරු කරන්න සබැඳියක් එක්ක අපි ඔයාට විද්‍යුත් තැපෑලක් එවනවා. ඊළඟ පැය ඇතුළත සබැඳිය ක්ලික් කරන්න මතක තියාගන්න, ඔයාට දවසකට එක විද්‍යුත් තැපෑලක් විතරයි ඉල්ලන්න පුළුවන්.
@@ -545,13 +401,10 @@ termsOfUse:
   bottom2: මේ භාවිත නියම ගැන ඕනම යෝජනාවක් කරුණාකර %email-webmaster% වෙත එවන්න.
   version: අනුවාදය 1.3, 2014 මාර්තු 4
 search:
-  dotdotdot: සොයන්න...
   search: ව්‍යාපෘති, පරිශීලකයන් සහ ස්ටූඩියෝ සොයන්න
   inMediaLib: මාධ්‍ය පුස්තකාලයේ සොයන්න
   inMediaCategory: මාධ්‍ය කාණ්ඩයේ සොයන්න
   results: සෙවුම් ප්‍රතිඵල
-  resultcount: ඔයාගේ සෙවුමට ප්‍රතිඵල %count%ක් ලැබුණා
-  fail: කරුණාකර අඩුම තරමින් එක සෙවුම් පදයක්වත් ඇතුළත් කරන්න
   noUsers: පරිශීලකයන් හමු වුණේ නැහැ
   noProjects: ව්‍යාපෘති හමු වුණේ නැහැ
   noStudios: ස්ටූඩියෝ හමු වුණේ නැහැ
@@ -567,7 +420,6 @@ menu:
   mediaLibrary: මාධ්‍ය පුස්තකාලය
   studio: ස්ටූඩියෝ
   language: භාෂාව
-  languageOptionsNotAvailable: භාෂා විකල්ප නැහැ.
 login:
   login: පුරනය වෙන්න
   button:
@@ -579,21 +431,10 @@ login:
     or: "හෝ"
   passOrUser: ඔයාගේ මුරපදය හෝ පරිශීලක නාමය වැරදියි.
   accountSuspended: ඔයාගේ ගිණුම අත්හිටුවලා. මේක වැරැද්දක් කියලා ඔයා හිතනවා නම්, කරුණාකර සහාය කණ්ඩායම අමතන්න.
-  noUsername: ඔයාගේ පරිශීලක නාමය හෝ විද්‍යුත් තැපැල් ලිපිනය හමු වුණේ නැහැ.
-  forgotPass: මුරපදය හෝ පරිශීලක නාමය අමතකද?
   recoverPassSend: ඔයාගේ විද්‍යුත් තැපැල් ලිපිනයට විද්‍යුත් තැපෑලක් එව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරන්න.
   alreadyReset: මේ පරිශීලකයාගේ මුරපදය පසුගිය පැය 24 ඇතුළත දැනටමත් ඉල්ලලා තියෙනවා.
-  confirmationSend: ඔයාගේ ලියාපදිංචිය තහවුරු කරන්න ඔයාගේ විද්‍යුත් තැපැල් ලිපිනයට විද්‍යුත් තැපෑලක් එව්වා. කරුණාකර ඔයාගේ එන ලිපි පරීක්ෂා කරලා ගිණුම සක්‍රිය කරන්න.
-  userOrEmail: පරිශීලක නාමය හෝ විද්‍යුත් තැපෑල
-  changePass: මුරපදය වෙනස් කරන්න
-  createAccount: ගිණුමක් හදන්න
-  noAccount: ගිණුමක් නැද්ද?
-  alreadyAccount: දැනටමත් ගිණුමක් තියෙනවද?
-  or: OR
   username: පරිශීලක නාමය
   email: විද්‍යුත් තැපෑල
-  passwordFirst: මුරපදය
-  passwordSecond: මුරපදය තහවුරු කරන්න
 register:
   title: ලියාපදිංචි වෙන්න
   subText: දිගටම යාමෙන්, ඔයා Catrobat ප්‍රජා ගිණුමක් හදනවා, සහ අපේ %var1% සහ %var2% වලට එකඟ වෙනවා.
@@ -626,14 +467,6 @@ registration:
   consentRevoked:
     title: දෙමාපිය කැමැත්ත අවලංගු කළා
     message: ඔයාගේ දෙමාපියෙක් හෝ භාරකරුවෙක් ඔයාගේ ගිණුමට දුන්න කැමැත්ත අවලංගු කළා. ආයෙත් කැමැත්ත දෙනකම් ඔයාගේ ගිණුමට සීමිත ක්‍රියාකාරිත්වයක් තියෙන්නේ.
-    newEmailPlaceholder: අලුත් දෙමාපිය විද්‍යුත් තැපෑල
-    changeButton: යාවත්කාල කරලා ආයෙත් එවන්න
-accountRecovery:
-  title: ගිණුම ප්‍රතිසාධනය
-  description: ඔයාගේ ගිණුමේ විද්‍යුත් තැපෑල හෝ පරිශීලක නාමය මතක නම්, ඔයාගේ මුරපදය යළි සකසන්න අපිට සබැඳියක් එවන්න පුළුවන්.
-  button:
-    cancel: අවලංගු කරන්න
-    submit: මුරපදය ප්‍රතිසාධනය කරන්න
 resetPassword:
   request:
     title: ඔයාගේ මුරපදය යළි සකසන්න
@@ -646,11 +479,6 @@ resetPassword:
     description: ඔයාගේ විද්‍යුත් තැපෑලට ගැළපෙන ගිණුමක් තියෙනවා නම්, ඔයාගේ මුරපදය යළි සකසන්න පාවිච්චි කරන්න පුළුවන් සබැඳියක් එක්ක විද්‍යුත් තැපෑලක් දැන් එව්වා. මේ සබැඳිය %time% කින් කල් ඉකුත් වෙනවා.
     descriptionTwo: ඔයාට පැය %throttleLimit%කට වරක් අලුත් මුරපද යළි සැකසීමක් ඉල්ලන්න පුළුවන්.
     descriptionThree: ඔයාට විද්‍යුත් තැපෑලක් ලැබුණේ නැත්නම් කරුණාකර ඔයාගේ ස්පෑම් ෆෝල්ඩරය බලන්න, නැත්නම් %email-webmaster% හි අපේ සහාය කණ්ඩායමට විද්‍යුත් තැපෑලක් ලියන්න.
-  email:
-    title: "Hi!"
-    visitLink: ඔයාගේ මුරපදය යළි සකසන්න, කරුණාකර මේ සබැඳියට යන්න
-    expire: මේ සබැඳිය %time% කින් කල් ඉකුත් වෙනවා.
-    cheers: ජය වේවා!
   newemail:
     title: ඔයාගේ මුරපදය යළි සකසන්න
     content: ඔයා මෑතකදී ඔයාගේ Catrobat ගිණුමේ මුරපදය යළි සකසන්න ඉල්ලුවා. අලුත් මුරපදයක් තෝරන්න පහළ බොත්තම ක්ලික් කරන්න. ඔයා මේක ඉල්ලුවේ නැත්නම්, මේ විද්‍යුත් තැපෑල නොසලකා හරින්න පුළුවන්.
@@ -660,76 +488,33 @@ resetPassword:
     title: ඔයාගේ මුරපදය යළි සකසන්න
     button:
       submit: මුරපදය යළි සකසන්න
-apk:
-  download: යෙදුමක් ලෙස බාගන්න
-  prepare: යෙදුමක් ලෙස ගන්න
-  preparing: යෙදුම සූදානම් කරමින්
-  text: මේකට ටික වෙලාවක් යන්න පුළුවන්
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: මොකක්හරි වැඩ කළේ නැහැ. ආයෙත් උත්සාහ කරන්න, නැත්නම් දිගටම මෙහෙම වෙනවා නම් අපිට කියන්න!
-  username:
-    blank: පරිශීලක නාමය හිස් වෙන්න බැහැ
-    invalid: ඔයාගේ පරිශීලක නාමය වලංගු නැහැ
-    exists: මේ පරිශීලක නාමය දැනටමත් තියෙනවා.
-    not_exists: මේ පරිශීලක නාමය නැහැ.
-    not_email: පරිශීලක නාමය විද්‍යුත් තැපැල් ලිපිනයක් වෙන්න බැහැ.
-    size: පරිශීලක නාමයේ අඩුම තරමින් අකුරු 3ක් තියෙන්න ඕන, 180ට වඩා තියෙන්න බැහැ
-  password:
-    blank: මුරපදය නැහැ.
-    short: ඔයාගේ මුරපදයේ අඩුම තරමින් අකුරු {{ limit }}ක් තියෙන්න ඕන.
-  country:
-    blank: රට නැහැ.
-    invalid: වලංගු නොවන රට
-  email:
-    blank: විද්‍යුත් තැපෑල හිස් වෙන්න බැහැ
-    invalid: ඔයාගේ විද්‍යුත් තැපෑල වලංගු නැහැ වගේ
-    exists: මේ විද්‍යුත් තැපැල් ලිපිනය දැනටමත් තියෙනවා.
-  id:
-    blank: විවෘත සත්‍යාපන ID හිස් වෙන්න බැහැ
-  login: මුරපදය හෝ පරිශීලක නාමය වැරදියි.
-  post-data: POST-දත්ත නිවැරදි නැහැ හෝ නැහැ!
-  checksum:
-    missing: සේවාදායකයා fileChecksum එවලා නැහැ! ඔයා පාවිච්චි කරන්නේ Pocket Code හි පරණ අනුවාදයක්ද?
-    invalid: වලංගු නොවන checksum
   xml:
     invalid: වලංගු නොවන කේත xml
     missing: 'නොදන්නා දෝෂය: project_xml_not_found!'
   file:
-    unexpected: බලාපොරොත්තු නොවූ ගොනුවක් හමු වුණා
     invalid: වලංගු නොවන ගොනුව
-  image.missing: ව්‍යාපෘති XML එකේ ව්‍යාපෘති ෆෝල්ඩරයේ නැති ගොනුවක් සඳහන් වෙනවා
-  unknown: නොදන්නා දෝෂය
-  token: 'උපාංගය සත්‍යාපනය අසාර්ථකයි: වලංගු නොවන auth-token!'
-  uploadTokenAuthFailed: උඩුගත කිරීමේ ටෝකන් සත්‍යාපනය අසාර්ථකයි.
-  project:
-    invalid: වලංගු නොවන ව්‍යාපෘතිය.
   languageversion:
     tooold: සමාවෙන්න, ඔයාගේ ව්‍යාපෘතියේ Catrobat භාෂාවේ පරණ අනුවාදයක් තියෙනවා! ඔයා පාවිච්චි කරන්නේ Pocket Code හි අලුත්ම අනුවාදයද?
   projectversion:
     tooold: සමාවෙන්න, ඔයා පාවිච්චි කරන්නේ Pocket Code හි පරණ අනුවාදයක්. කරුණාකර අලුත්ම අනුවාදයට යාවත්කාල කරන්න.
   authentication:
-    title: පුරනය වීම වැඩ කළේ නැහැ
     webview: |
       ඔයාගේ පරිශීලක නාමය හෝ මුරපදය හරි නැහැ වගේ.
       කරුණාකර යෙදුමේ ආයෙත් පුරනය වෙන්න උත්සාහ කරන්න.
 success:
   text: සාර්ථකයි
-  registration: ලියාපදිංචිය සාර්ථකයි!
-  token: ok
-  upload: ඔයාගේ ව්‍යාපෘතිය සාර්ථකව උඩුගත කළා!
   imgUpload: ඔයාගේ පින්තූරය සාර්ථකව උඩුගත කළා!
-  report: ඔයාගේ වාර්තාව සාර්ථකව යැව්වා!
 time:
   minutes.ago: '{0} විනාඩි 1කට අඩු කලකට පෙර |{1}විනාඩි 1කට පෙර |]1,Inf] විනාඩි %count%කට පෙර'
   hours.ago: '{1}පැය 1කට පෙර |]1,Inf] පැය %count%කට පෙර'
   days.ago: '{1}දින 1කට පෙර |]1,Inf] දින %count%කට පෙර'
   months.ago: '{1}මාස 1කට පෙර |]1,Inf] මාස %count%කට පෙර'
   years.ago: '{1}අවුරුද්දකට පෙර |]1,Inf] අවුරුද්දකට වඩා කලකට පෙර'
-failure:
-  upload: ඔයාගේ යෙදුම උඩුගත කරද්දී දෝෂයක් ආවා.
 user:
   verification:
     email: ඔයාගේ විද්‍යුත් තැපෑල තහවුරු කරන්න
@@ -752,7 +537,6 @@ api:
     passwordInvalidChars: මුරපදයේ වලංගු නොවන අකුරු තියෙනවා
     usernameContainsEmail: පරිශීලක නාමයේ විද්‍යුත් තැපැල් ලිපිනයක් තියෙන්න බැහැ
     usernameContainsLink: පරිශීලක නාමයේ සබැඳියක් තියෙන්න බැහැ
-    countryCodeInvalid: රට කේතය වලංගු නැහැ
     pictureInvalid: පැතිකඩ පින්තූරය වලංගු නැහැ හෝ සහාය නැහැ
     dateOfBirthMissing: උපන් දිනය අවශ්‍යයි
     dateOfBirthInvalid: උපන් දිනය වලංගු නැහැ
@@ -786,61 +570,11 @@ api:
     nameAlreadyInUse: නම දැනටමත් පාවිච්චි වෙනවා
     descriptionMissing: විස්තරය නැහැ
     descriptionEmpty: විස්තරය හිස්
-    descriptionTooShort: විස්තරය කෙටි වැඩියි
     descriptionTooLong: විස්තරය දිග වැඩියි
     imageFileInvalid: පින්තූර ගොනුව වලංගු නැහැ
     imageFileInvalidType: පින්තූර ගොනු වර්ගය වලංගු නැහැ
     imageFileTooLarge: පින්තූර ගොනුව ලොකු වැඩියි
-#languages and countries
-language:
-  arabic: අරාබි
-  bulgarian: බල්ගේරියානු
-  catalan: කැටලන්
-  chinese_simplified_han: චීන (සරල හාන්)
-  chinese_traditional_han: චීන (සාම්ප්‍රදායික හාන්)
-  croatian: ක්‍රොඒෂියානු
-  czech: චෙක්
-  danish: ඩෙන්මාර්ක
-  dutch: ලන්දේසි
-  english_united_kingdom: ඉංග්‍රීසි (එක්සත් රාජධානිය)
-  english_united_states: ඉංග්‍රීසි (එක්සත් ජනපදය)
-  estonian: එස්තෝනියානු
-  filipino: පිලිපීන
-  finnish: ෆින්ලන්ත
-  french: ප්‍රංශ
-  german: ජර්මන්
-  greek: ග්‍රීක
-  hebrew: හීබ්‍රු
-  hindi: හින්දි
-  hungarian: හංගේරියානු
-  indonesian: ඉන්දුනීසියානු
-  italian: ඉතාලි
-  japanese: ජපන්
-  korean: කොරියානු
-  latvian: ලැට්වියානු
-  lithuanian: ලිතුවේනියානු
-  malay: මැලේ
-  norwegian: නෝර්වීජියානු
-  persian: පර්සියානු
-  polish: පෝලන්ත
-  portuguese_brazil: පෘතුගීසි (බ්‍රසීලය)
-  portuguese_portugal: පෘතුගීසි (පෘතුගාලය)
-  romanian: රුමේනියානු
-  russian: රුසියානු
-  serbian: සර්බියානු
-  slovak: ස්ලෝවැක්
-  slovenian: ස්ලෝවේනියානු
-  spanish_latin_america: ස්පාඤ්ඤ (ලතින් ඇමරිකාව)
-  spanish_spain: ස්පාඤ්ඤ (ස්පාඤ්ඤය)
-  swedish: ස්වීඩන්
-  thai: තායි
-  turkish: තුර්කි
-  ukrainian: යුක්රේනියානු
-  vietnamese: වියට්නාම
-ci:
-  generate: apk ජනනය කරන්න
-  pending: apk ජනනය කරමින්
-  download: apk බාගන්න
+
 admin:
   maintain:
     diskMaintenance: තැටි නඩත්තුව
@@ -848,46 +582,9 @@ admin:
     noRemovableObjects: ඉවත් කළ හැකි වස්තු නැහැ.
     removableObjects: ඉවත් කළ හැකි වස්තු
 recommender:
-  similarPrograms: සමාන ව්‍යාපෘති
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: මේ ව්‍යාපෘතිය බාගත් අය මේවත් බාගත්තා
   moreFromThisUser: '%username% ගෙන් තවත්'
-pmd:
-  submitBtn: ඔයාගේ ව්‍යාපෘතිය ඉදිරිපත් කරන්න
-  submitBox:
-    header: ඉදිරිපත් කිරීම
-    text: ඔයා ඔයාගේ ව්‍යාපෘතිය ඉදිරිපත් කරන්න යනවා. කරුණාකර ව්‍යාපෘති කේතය ඇතුළත් කරලා යවන්න ක්ලික් කරන්න.
-    btnText: ඉදිරිපත් කරන්න
-  successful:
-    text: ඔයාගේ ව්‍යාපෘතිය සාර්ථකව උඩුගත කළා.
-  failed:
-    text: ව්‍යාපෘතිය උඩුගත කිරීම අසාර්ථකයි.
 codeview:
   title: කේත දසුන
-  showCode: කේතය පෙන්වන්න
-  hideCode: කේතය සඟවන්න
-  showStatistics: කේත සංඛ්‍යාලේඛන පෙන්වන්න
-  hideStatistics: කේත සංඛ්‍යාලේඛන සඟවන්න
-  cantDisplayCode: කේතය පෙන්වන්න බැහැ
-  cantDisplayStatistics: කේතය පෙන්වන්න බැහැ
-  totalNumberOf: 'මුළු ගණන:'
-  scenes: දර්ශන
-  scripts: ස්ක්‍රිප්ට්
-  bricks: කැට
-  objects: චරිත සහ වස්තු
-  looks: පෙනුම්
-  sounds: ශබ්ද
-  globals: ගෝලීය
-  locals: ස්ථානීය
-  globalVariables: ගෝලීය විචල්‍ය
-  localVariables: ස්ථානීය විචල්‍ය
-  eventBricks: සිදුවීම් කැට
-  controlBricks: පාලන කැට
-  motionBricks: චලන කැට
-  soundBricks: ශබ්ද කැට
-  looksBricks: පෙනුම් කැට
-  penBricks: පෑන් කැට
-  dataBricks: දත්ත කැට
-  specialBricks: විශේෂ කැට
 codeView:
   title: කේත දසුන
   loading: කේත දසුන පූරණය කරමින්...
@@ -900,19 +597,7 @@ codeView:
 codeStatistics:
   title: කේත සංඛ්‍යාලේඛන
   error: කේත සංඛ්‍යාලේඛන පෙන්වන්න බැහැ.
-  general: සාමාන්‍ය
-  bricks: කැට
-  eventBricks: සිදුවීම්
-  controlBricks: පාලනය
-  motionBricks: චලනය
-  soundBricks: 'ශබ්දය'
-  looksBricks: පෙනුම්
-  penBricks: 'Pen'
-  dataBricks: 'දත්ත'
-  deviceBricks: උපාංගය
-  specialBricks: විශේෂ
   yourScore: 'ඔයාගේ ලකුණු:'
-  points: ලකුණු
   abstraction: වියුක්තකරණය සහ ගැටලු බෙදීම
   parallelism: සමාන්තරකරණය
   logicalThinking: තාර්කික චින්තනය
@@ -928,20 +613,7 @@ footer:
   text: නියම ව්‍යාපෘති %project_count%ක් දැනටමත් බෙදාගෙන තියෙනවා, ඊළඟ එක ඔයාගේ වෙන්න පුළුවන්. අපේ යෙදුම බාගෙන අදම හදන්න පටන් ගන්න
 privacy-policy:
   header: රහස්‍යතා ප්‍රතිපත්තිය
-  version: අනුවාදය 2.2, 2019 ඔක්තෝබර් 17
-  text1: අපේ සේවාවල සහ ඒකට අදාළ ගිණුමේ හැම වාසියක්ම ඔයාට දෙන්න, ඔයාගෙන් යම් දත්ත එකතු කරන්න අවශ්‍යයි.
-  text2: අපේ සේවා (යෙදුම් සහ වෙබ් අඩවි) නඩත්තු කරන්න සහ දියුණු කරන්න, සහ ICT සහ STEM/STEAM අධ්‍යාපනය ගැන විද්‍යාත්මක පර්යේෂණ කරන්න, අපේ සේවා පාවිච්චිය ගැන පාරදත්ත ලබාගන්න අපි Google LLC (USA) හි Google Analytics, Crashlytics සහ Firebase, සහ Dynatrace LLC (USA) හි Dynatrace පාවිච්චි කරනවා, උදාහරණයක් විදිහට බිඳවැටීම් තොරතුරු, කාල මුද්‍රා, බැලූ පිටු/තිර, අපේ යෙදුම් සහ සේවා පාවිච්චිය, පාවිච්චි කළ මෙහෙයුම් පද්ධතිය, සහ ජාල සපයන්නා ගැන තොරතුරු. මේ විශ්ලේෂණය සහ එකතු කළ දත්ත ඔයාගේ පැතිකඩට සම්බන්ධ නැහැ, කිසිම පෞද්ගලික තොරතුරක් ඇතුළත් නැහැ (IP ලිපිනයේ අවසාන බිටු නිර්නාමික කරනවා). කෙසේ වෙතත්, එකතු කළ දත්ත සේවා සපයන්නන්ට (Google LLC, USA සහ Dynatrace LLC, USA) මාරු කරනවා. දත්ත සැකසීම Google LLC සහ Dynatrace LLC එක්ක ඇති ගිවිසුම් මත පදනම් වෙලා තියෙනවා. සේවා සපයන්නන් එක්ක ඇති මේ සම්බන්ධතාව යුරෝපා සංගමයේ සාමාන්‍ය දත්ත ආරක්ෂණ රෙගුලාසියට (EU GDPR) සහ EU-USA "Privacy Shield" ගිවිසුමට අනුකූලයි.
-  text3: 'අපේ පද්ධතිවල ගිණුමක් හදලා පාවිච්චි කරන්න, සහ ඔයාගේ ගිණුම ගැන අවශ්‍ය වෙනස්කම් ගැන, උදාහරණයක් විදිහට යාවත්කාලීන කිරීම් හෝ අපේ භාවිත සහ සේවා නියම, ප්‍රජා නීති හෝ ප්‍රතිපත්ති උල්ලංඝනය කිරීම් ගැන, ඔයාට විද්‍යුත් තැපෑලෙන් දැනුම් දෙන්න, අපි ඔයාගේ පරිශීලක නාමය සහ, ඔයා දුන්නොත්, ඔයාගේ විද්‍යුත් තැපැල් ලිපිනය ගබඩා කරනවා. ඔයා Google Plus හෝ Facebook හරහා ඔයාගේ ගිණුම සම්බන්ධ කරලා නම්, ඒ සේවාවල ඔයාගේ ගිණුමට සම්බන්ධ හඳුනාගැනීමේ යතුරකුත් අපි ගබඩා කරනවා. ඔයා පැහැදිලිවම අවසර දුන්නේ නැත්නම්, අපි මේ දත්ත වෙනත් කිසිම (උදා: අලෙවිකරණ) අරමුණකට පාවිච්චි කරන්නේ නැහැ.'
-  text4: ස්වේච්ඡාවෙන්, බෙදාගැනීමේ අඩවියේ ඔයාගේ ගිණුම් පිටුව හරහා ඔයා ජීවත් වෙන රට අපිට දෙන්න පුළුවන්. ඒක ඔයාගේ පොදු පැතිකඩේ පෙන්වනවා, අපි ඒක පාවිච්චි කරන්නේ සංඛ්‍යාලේඛන සහ පර්යේෂණ අරමුණු සඳහා විතරයි. ඔයාගේ පැතිකඩ සැකසුම්වලින් ඕනම වෙලාවක ඒක ඉවත් කරන්න පුළුවන්.
-  text5: https://share.catrobat.org/ හි ඔයාගේ පැතිකඩ පිටුව හරහා ඔයාගේ ගිණුම මකලා, ඔයාගේ ගිණුමට අයත් පෞද්ගලික දත්ත පාවිච්චිය ඕනම වෙලාවක ඉල්ලා අස්කරගන්න පුළුවන්. ඔයාගේ ගිණුම මැකුවට පස්සෙත් ඔයාට සපයන සේවා පාවිච්චි කරන්න පුළුවන්, ඒත් සහයෝගයෙන් වැඩ කරන්න බැහැ, උදාහරණයක් විදිහට වැඩසටහන් උඩුගත කරන්න, අදහස් දක්වන්න හෝ කැමැත්ත පළ කරන්න. ඒ වගේම, ඔයාගේ ගිණුමට සම්බන්ධ සපයපු හැම අන්තර්ගතයක්ම, උදාහරණයක් විදිහට උඩුගත කළ වැඩසටහන්, අදහස් ආදිය මැකෙනවා.
-  text6: අපේ සේවා අනිසි ලෙස පාවිච්චි කිරීම වළක්වන්න, උදාහරණයක් විදිහට නීති විරෝධී අරමුණු සඳහා පරිශීලකයන් දායක කරන උඩුගත කිරීම් හෝ අදහස් හරහා, පරිශීලකයන් හදන හැම පොදු දත්තයක්ම (උඩුගත කිරීම්, අදහස්) කාල මුද්‍රාවක් සහ පාවිච්චි කළ අන්තර්ජාල ලිපිනය එක්ක දත්ත ගබඩාවක අභ්‍යන්තරව ගබඩා කරනවා. ප්‍රමාණවත් නීති විරෝධී ක්‍රියා ගැන සාධාරණ සැකයක් තියෙන්නේ නැත්නම් සහ නිල වශයෙන් බලය ලත් නීතිමය ආයතන අදාළ නීතිය මත එය ඉල්ලන්නේ නැත්නම්, මේ දත්ත කිසිම ආයතනයක් පාවිච්චි කරන්නේ හෝ ඔවුන්ට යවන්නේ නැහැ. හැම අවස්ථාවක්ම මුලින්ම අපි තනි තනිව හොඳින් පරීක්ෂා කරනවා.
-  text7: ඔයාට ස්වේච්ඡාවෙන් https://catrobat.org/newsletter හි Catrobat පුවත් ලිපියට දායක වෙන්න පුළුවන්, අපි ඒක MailChimp සේවාව (The Rocket Science Group LLC d/b/a MailChimp, USA) හරහා සපයනවා. එතකොට ඔයා දුන්න විද්‍යුත් තැපැල් ලිපිනයට Catrobat ව්‍යාපෘතිය සහ ඒකේ සේවා ගැන යාවත්කාලීන ලැබෙනවා. හැම පුවත් ලිපියකම පාදකයේ තියෙන "unsubscribe" සබැඳිය පාවිච්චි කරලා ඕනම වෙලාවක පුවත් ලිපියෙන් ඉවත් වෙන්න පුළුවන්. මේ පුවත් ලිපිය සපයන්නේ MailChimp, ඔවුන් එක්ක අපිට දත්ත සැකසීමේ ගිවිසුමක් තියෙනවා, ඔවුන් EU සාමාන්‍ය දත්ත ආරක්ෂණ රෙගුලාසියට සහ EU-USA "Privacy Shield" එකට කැපවෙලා ඉන්නවා. MailChimp ගැන වැඩි විස්තර සඳහා කරුණාකර MailChimp හි රහස්‍යතා ප්‍රතිපත්තිය සහ භාවිත නියමත් බලන්න.
-  text8: හැම සේවාවක්ම සපයන්නේ නොමිලේ විවෘත මූලාශ්‍ර Catrobat ව්‍යාපෘතිය, International Catrobat Association – Verein zur Förderung freier Software යටතේ, ඒක ඔස්ට්‍රියාවේ (යුරෝපා සංගමය) ග්‍රාස් හි සංස්ථාගත ලාභ නොලබන රාජ්‍ය නොවන සංවිධානයක්. අපේ ප්‍රතිපත්ති EU සහ ඔස්ට්‍රියානු දත්ත ආරක්ෂණ නීතියට (GDPR) ගරු කරනවා. අපිව සම්බන්ධ කරගන්න, කරුණාකර contact@catrobat.org වෙත විද්‍යුත් තැපෑලක් එවන්න හෝ Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union) වෙත ලිපියක් එවන්න.
-  text9: ඔයා අවුරුදු 14ට අඩු නම්, මේ ප්‍රතිපත්තිය නීත්‍යානුකූල භාරකරුවෙක් (සාමාන්‍යයෙන් දෙමාපියෙක්) පිළිගන්න ඕන.
-  text10: Catrobat හි නිල ඉංග්‍රීසි භාෂා රහස්‍යතා ප්‍රතිපත්තිය වෙබ් එකේ %privacy_policy% යටතේ තියෙනවා.
-  disagree-text: අනුමැතිය නැතිව අපිට ගිණුමක් හදන්න බැහැ, ඒත් ප්‍රධාන විශේෂාංග තවමත් පාවිච්චි කරන්න පුළුවන්.
 catro-notifications:
-  markAsRead: කියවූ ලෙස ලකුණු කරන්න
   noFollowers: ඔයාට අනුගාමික දැනුම්දීම් කිසිවක් නැහැ වගේ.
   noComments: ඔයාට අදහස් දැනුම්දීම් කිසිවක් නැහැ වගේ.
   noReactions: ඔයාට ප්‍රතිචාර දැනුම්දීම් කිසිවක් නැහැ වගේ.
@@ -975,29 +647,16 @@ catro-notifications:
 clipboard:
   success: සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
   success_project: ව්‍යාපෘතියේ සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
-  success_user: පරිශීලකයාගේ සබැඳිය පසුරු පුවරුවට පිටපත් කළා!
   fail: සබැඳිය පසුරු පුවරුවට පිටපත් කරන්න බැරි වුණා! :(
 next: ඊළඟ
 previous: කලින්
 media-packages:
   title: මාධ්‍ය පුස්තකාලය
   description: පහත කාණ්ඩවල ඔයාගේ ව්‍යාපෘතිවලට එකතු කරන්න චරිත සහ වස්තු හොයාගන්න පුළුවන්.
-  thumb-size:
-    description: පෙරදසුන් ප්‍රමාණය
-    sm: කුඩා
-    md: මධ්‍යම
-    lg: විශාල
   theme-special: '%flavor% විශේෂ තේමාව'
   search-results: මාධ්‍ය පුස්තකාල සෙවුම් ප්‍රතිඵල
-  no-results: ඔයාගේ සෙවුමට ප්‍රතිඵල 0ක් ලැබුණා. කරුණාකර ඉංග්‍රීසි සෙවුම් පද විතරක් පාවිච්චි කරන්න.
-  download_these_files: සුරකින්න
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: ප්‍රකාශන හිමිකම &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. සියලු හිමිකම් ඇවිරිණි.
 noscript:
   warning: මේ වෙබ් අඩවිය වැඩ කරන්න JavaScript ඕන. කරුණාකර ඔයාගේ බ්‍රව්සරයේ JavaScript සක්‍රිය කරන්න, නැත්නම් වැඩිහිටියෙකුගෙන් උදව් ඉල්ලන්න.
@@ -1007,10 +666,6 @@ cookie-consent:
   decline: ප්‍රතික්ෂේප කරන්න
   privacy-link: රහස්‍යතා ප්‍රතිපත්තිය
   settings-link: කුකී සැකසුම්
-agree: එකඟයි
-disagree: එකඟ නැහැ
-profileLoader:
-  noProfiles: දැනට පැතිකඩ නැහැ.
 element: අංගය
 elements: අංග
 share:
@@ -1019,7 +674,6 @@ share:
   success: බෙදාගැනීම සාර්ථකයි
 copy: සබැඳිය පිටපත් කරන්න
 checkOutProject: 'මේ ව්‍යාපෘතිය බලන්න:'
-checkOutUser: 'මේ පරිශීලකයා බලන්න:'
 community: Catrobat ප්‍රජාව
 back_to_app: ප්‍රජාවෙන් ඉවත් වෙන්න
 category:
@@ -1035,7 +689,6 @@ category:
 achievements:
   sidebar:
     title: ජයග්‍රහණ
-    badge: 'new'
   overview:
     header: ජයග්‍රහණ
     most_recent_achievement:
@@ -1127,10 +780,7 @@ extensions:
       title: බහු ක්‍රීඩක
 studio:
   title: ස්ටූඩියෝ
-  singular: ස්ටූඩියෝව
   create_studio: ස්ටූඩියෝවක් හදන්න
-  delete_studio: ස්ටූඩියෝව මකන්න
-  cancel_studio: 'අවලංගු කරන්න'
   studio_name: ස්ටූඩියෝවේ නම
   studio_description: ස්ටූඩියෝවේ විස්තරය
   is_public: පොදු කරන්නද?
@@ -1147,8 +797,6 @@ studio:
   cover_image_remove: පින්තූරය ඉවත් කරන්න
   popular: ජනප්‍රිය ස්ටූඩියෝ
   join: එකතු වෙන්න
-  leave: ඉවත් වෙන්න
-  report: වාර්තා කරන්න
   public: පොදු
   private: ආරාධනයෙන් පමණයි
   overview:
@@ -1171,16 +819,12 @@ studio:
     admin: පරිපාලක
     member: සාමාජික
   details:
-    add_project: ව්‍යාපෘතිය එකතු කරන්න ක්ලික් කරන්න
     add: 'Add'
     showMore: තව පෙන්වන්න
-    showLess: අඩුවෙන් පෙන්වන්න
     are_you_sure: ඔයාට විශ්වාසද?
     no_way_of_return: මේක ආපසු හරවන්න බැහැ.
     delete_it: මකන්න
-    remove_project: ස්ටූඩියෝවෙන් ඉවත් කරන්න
     remove_project_error: ස්ටූඩියෝවෙන් ව්‍යාපෘතිය ඉවත් කරන්න බැරි වුණා.
-    remove_project_success: ව්‍යාපෘතිය ස්ටූඩියෝවෙන් සාර්ථකව ඉවත් කළා.
     no_projects: ස්ටූඩියෝවේ තවම කිසිම ව්‍යාපෘතියක් නැහැ.
     projects:
       title: ව්‍යාපෘති
@@ -1196,10 +840,8 @@ studio:
       no_projects_empty_state: ඔයාට තවම එකතු කරන්න ව්‍යාපෘති නැහැ. මුලින්ම Pocket Code හි එකක් හදන්න!
       add_selected: තෝරාගත් ඒවා එකතු කරන්න
     no_available_projects: එකතු කරන්න ව්‍යාපෘති නැහැ.
-    updateCoverError: ස්ටූඩියෝ කවරය යාවත්කාල කරද්දී මොකක්හරි වැරදුණා.
     join: එකතු වෙන්න
     leave: ඉවත් වෙන්න
-    report: වාර්තා කරන්න
     pending: බලාපොරොත්තුවෙන්
     decline: ප්‍රතික්ෂේප කළා
     comments:
@@ -1219,7 +861,6 @@ studio:
       add_comment: '%user% අදහසක් දැක්වුවා.'
     members_list:
       title: ස්ටූඩියෝ සාමාජිකයන්
-      project_count: '{0} ස්ටූඩියෝ ව්‍යාපෘති නැහැ |{1} ස්ටූඩියෝ ව්‍යාපෘති 1ක් |]1,Inf] ස්ටූඩියෝ ව්‍යාපෘති %count%ක්'
       no_studio_projects: ස්ටූඩියෝ ව්‍යාපෘති නැහැ
       one_studio_project: ස්ටූඩියෝ ව්‍යාපෘති 1ක්
       n_studio_projects: ස්ටූඩියෝ ව්‍යාපෘති %count%ක්
@@ -1229,7 +870,6 @@ studio:
       ban_failed: මේ සාමාජිකයා තහනම් කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
       demote_member: පරිපාලකයා සාමාජිකයෙක් කරන්න
       demotion_failed: මේ පරිපාලකයා පහත් කරද්දී මොකක්හරි වැරදුණා. ටිකකට පස්සේ ආයෙත් උත්සාහ කරන්න.
-      last_admin: මේ ස්ටූඩියෝවේ අන්තිම පරිපාලකයා පහත් කරන්න බැහැ.
     join_requests:
       title: එකතු වීමේ ඉල්ලීම්
       accept: පිළිගන්න
@@ -1259,7 +899,6 @@ media_library:
   no_results: ප්‍රතිඵල හමු වුණේ නැහැ.
   assets_count: වත්කම්
   view_all: ඔක්කොම බලන්න
-  view_all_category: '%category% ඔක්කොම බලන්න'
   back_to_app: යෙදුමට ආපසු
 snackbar:
   project_not_found: ඉල්ලපු ව්‍යාපෘතිය නැහැ
@@ -1313,14 +952,6 @@ moderation:
     rate_limited: ඔයා ඉක්මනින් වැඩියි ස්ටූඩියෝ ක්‍රියා කරන්නේ. පොඩ්ඩක් ඉන්න.
   hidden_notice:
     project: ප්‍රජා වාර්තා නිසා මේ ව්‍යාපෘතිය සඟවලා.
-    comment: ප්‍රජා වාර්තා නිසා මේ අදහස සඟවලා.
-    user: ප්‍රජා වාර්තා නිසා මේ පැතිකඩ සඟවලා.
     user_own: ප්‍රජා වාර්තා නිසා ඔයාගේ ගිණුම අත්හිටුවලා. ඔයාට මේ තීරණයට අභියාචනා කරන්න පුළුවන්.
-    studio: ප්‍රජා වාර්තා නිසා මේ ස්ටූඩියෝව සඟවලා.
-  notification:
-    content_hidden: ප්‍රජා වාර්තා නිසා ඔයාගේ %content_type% සඟවලා. ඔයාට මේ තීරණයට අභියාචනා කරන්න පුළුවන්.
-    appeal_approved: ඔයාගේ අභියාචනය අනුමත කළා. ඔයාගේ අන්තර්ගතය දැන් ආයෙත් පේනවා.
-    appeal_rejected: ඔයාගේ අභියාචනය සමාලෝචනය කළා, ඔයාගේ අන්තර්ගතය සඟවන තීරණය එලෙසම පවතිනවා.
-    admin_review_needed: අන්තර්ගතය ස්වයංක්‍රීයව සඟවලා, සමාලෝචනයක් අවශ්‍යයි.
 Reports: වාර්තා
 members: සාමාජිකයන්

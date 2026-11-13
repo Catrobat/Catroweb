@@ -8,19 +8,12 @@ meta.og.description.login: "Conectează-te ca să-ți distribui proiectele Catro
 meta.og.title.register: "Creează un cont Catrobat"
 meta.og.description.register: "Alătură-te comunității Catrobat și începe chiar azi să-ți distribui proiectele creative."
 meta.og.description.profile: "%username% pe Catrobat – răsfoiește proiectele și realizările sale."
-localLanguage: Engleză
 username: nume de utilizator
 password: Parolă
-createNewPassword: "Creează o parolă nouă"
-accountSettings: "Setările contului"
 email: "E-mail"
-aboutPocketCode: Despre Catroid
 about: Despre Catrobat
-education: "Educație"
 chat: "Chat și forumuri"
-privacyGuide: "Ghid de protecție a datelor"
 others: "Altele"
-tutorials: Ajutor
 googlePlay: Magazin Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: "Cum ai creat acest proiect? Ai folosit idei, script
 projectImportedFromScratch: "Acest proiect a fost importat din MIT Scratch. Poți vedea proiectul original"
 scratchImportedProjectLinkHere: "aici."
 country: Țară
-loginText: Conectare
 privacyPolicy: Politică de confidenţialitate
-imprint: "Date legale"
 projectDetails: "Detalii"
 somethingWentWrong: 'Ups... ceva nu a mers bine.'
 accountNotVerified: "Asigură-te că ești conectat și că adresa de e-mail a contului tău este verificată."
@@ -55,36 +46,28 @@ accountSuspended: "Contul tău a fost suspendat în urma raportărilor din comun
 doesNotExist: "Resursa solicitată nu există."
 pleaseTryAgain: 'Încearcă din nou!'
 tryAgainButton: "Încearcă din nou"
-oldVersionError: 'Te rog să actualizezi cea mai nouă versiune de Pocket Code!'
 more: 'Mai mult'
 less: 'Mai puțin'
 show-more: "Mai multe informații"
-show-less: "Mai puține informații"
 more-information: "Mai multe informații"
 less-information: "Mai puține informații"
 ok: "Am înțeles"
-clickToDownloadProgram: "Pentru a descărca proiectul exemplu, apasă %link_start% aici %link_end%."
-registrationError: 'Numele de utilizator sau adresa de email sunt deja în folosință.'
 notifications: 'Notificări'
 allNotifications: 'Toate'
 FollowersNotifications: "Urmăritori"
 LikeNotifications: "Reacții"
 CommentNotifications: 'Comentarii'
 RemixNotifications: "Remixuri"
-wellDone: "Bine lucrat!"
 done: "Efectuat!"
 notificationsReadMessage: "Se pare că nu ai nicio notificare."
-confirmMessage: "Da, șterge"
 cancelMessage: "Anulare"
 notificationsUnauthorizedError: "Utilizatorul nu a putut fi autorizat"
 notificationsClearError: "Imposibil de marcat notificările ca fiind citite!"
-pleaseWait: "Te rog să aștepți..."
 projects: "Programe"
 users: "Utilizatori"
 studios: "Studiouri"
 oauthPopUpTitle: "Informații despre conectarea cu un cont extern"
 oauthInfo: "Tocmai te-ai conectat cu un cont extern. Ți-am creat un nume de utilizator aleatoriu. Dacă vrei să-ți schimbi numele de utilizator sau să creezi o parolă nouă pentru contul tău, mergi la pagina ta de profil."
-oauthHere: "aici"
 statistics: "Statistici"
 languageSelection: "Alegerea limbii"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: "Întunecată"
   dark_description: "Aspect întunecat"
   apply: "Aplică"
-indexPage:
-  recommendedSection:
-    info:
-      title: "Ce proiecte sunt recomandate aici?"
-      description: "Cu cât proiectul tău primește mai multe reacții (Like, Zâmbet ...), cu atât apare mai sus în această listă."
 follower:
   follows: "Urmărești"
   followers: "Urmăritori"
   follow: "Urmărește"
-  username: "Utilizator"
   followsMe: "Mă urmărește"
   noFollowing: "Momentan nu urmărești pe nimeni."
   noFollowers: "Momentan nu ai urmăritori."
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Ești sigur că nu mai vrei să urmărești acest utilizator?"
   unfollowButton: "Nu mai urmări pe %username%"
 project:
-  welcome:
-    title: "Bine ai venit pe %theme% de la Catrobat"
-    title_mindstorms: "Bine ai venit pe site-ul Catrobat pentru Mindstorms EV3 și NXT"
-    subtitle: "Creează povești, jocuri și multe altele..."
-    subtitle_embroidery: "Brodează-ți propriile modele pe tricouri, genți, pantaloni sau husa telefonului!"
-    subtitle_mindstorms: "Creează-ți propriile proiecte cu roboții tăi Lego Mindstorms EV3 și NXT"
-    download: "Descarcă aplicația"
-    statistics: "Mai multe statistici"
   featured: "Recomandate"
   open: Deschide 
   download: Descarca
@@ -148,9 +117,6 @@ project:
       retention: "Proiectele încărcate sunt șterse automat după o perioadă de inactivitate. Conectează-te regulat sau adună descărcări la proiectul tău ca să-i prelungești păstrarea."
       protection: "Proiectele deosebit de bune sau populare pot fi protejate de moderatori împotriva ștergerii automate."
   example: "Exemple"
-  newest: "Cele mai noi proiecte"
-  recommended: "Proiecte recomandate"
-  scratchremixes: "Remixuri Scratch"
   noProjects: "Momentan nu există proiecte."
   shareAction: "Distribuie"
   deleteAction: "Șterge proiectul"
@@ -173,17 +139,10 @@ project:
   reportCommentConfirmation: "Ești sigur că vrei să raportezi acest comentariu?"
   deleteCommentConfirmation: "Ești sigur că vrei să ștergi acest comentariu?"
   deleteAccountConfirmation: "Ștergi contul?\nEști sigur că vrei să-ți ștergi contul? Asta va șterge și proiectele și comentariile tale încărcate!\nAcțiunile tale nu pot fi anulate!\nDa, șterge!\nAnulare\n"
-  tooLongName: "Numele proiectului este prea lung!"
-  tooLongDescription: "Descrierea proiectului este prea lungă!"
-  tooLongCredits: "Notele și mențiunile proiectului sunt prea lungi!"
   my_projects: "Proiectele mele distribuite"
   trending: "Proiecte în tendințe"
   popular: "Proiecte populare"
-  most:
-    viewed: Cele mai vizualizate
-    downloaded: Cele mai descărcate
   random: "Proiecte aleatorii"
-  related: "Proiecte asemănătoare"
   browse:
     explore: "Explorează proiecte"
     no_projects: "Încă nu ai creat niciun proiect"
@@ -197,36 +156,14 @@ project:
     tooltip: "Proiectele sunt șterse automat după o perioadă de inactivitate. Adună mai multe descărcări sau conectează-te regulat ca să prelungești păstrarea."
     tooltip_protected: "Acest proiect este protejat și nu va fi șters automat."
   downloads: "%downloads% descărcări"
-  sample: "Proiecte exemplu"
   views: "%views% vizualizări"
   likes:
     likersTitle: "Persoane care au reacționat la acest proiect"
     all: "Toate"
-  remixes: "{0}0 remixuri |{1}1 remix |]1,Inf]%remixes% remixuri"
-  newRemixesNotificationTitle: "|{1}„%programName%” are 1 remix nou: |]1,Inf] „%programName%” are %remixes% remixuri noi:"
-  submitted: "Proiecte trimise"
-  uploaded: "Proiecte încărcate"
-  reportAsInappropriate: "Raportează ca nepotrivit"
-  reportProgram: "Raportează proiectul"
   languageVersion: "Versiunea limbajului Catrobat: %languageVersion%"
-  reportLoginText: "Te rugăm să te %login% pentru a raporta acest proiect."
-  reportDialogHeader: "De ce vrei să raportezi acest proiect?"
-  reportDialogReason: "Introdu un motiv"
-  reportRadioButtonInappropriate: "Este nepotrivit"
-  reportRadioButtonCopyright: "Încălcarea drepturilor de autor"
-  reportRadioButtonSpam: "Este spam"
-  reportRadioButtonDislike: "Nu-mi place"
-  reportOwnProgram: "Nu poți raporta propriul proiect."
-  reportAlready: "Ai raportat deja acest proiect."
-  reportDone: "Ai raportat acest proiect!"
   updateAppHeaderDownload: "Descărcarea nu este posibilă"
   updateAppTextDownload: "Actualizează aplicația la cea mai nouă versiune. Reține că nu toate funcțiile Android sunt deja disponibile pe iOS."
-  updateAppTextDownloadApk: "Descărcarea APK este momentan disponibilă doar pe Android, nu și pe iOS."
-  updateAppHeader: "Actualizează aplicația"
-  updateAppText: "Actualizează aplicația la cea mai nouă versiune."
-  btnClosePopup: Ok
   checkout_this_project: "Descoperă acest proiect Catrobat"
-  show_more: "Arată mai mult"
   comments: Comentarii
   send: "Trimite"
   delete: șterge
@@ -238,7 +175,6 @@ project:
   deleted_popup_header: "Șters"
   noAdminRights: "Nu ai drepturi de administrator. Conectează-te ca administrator."
   editProject: "Editează proiectul"
-  closeProjectEditor: "Închide editorul de proiect"
   closeEditorPrompt: "Vrei să salvezi modificările?"
   btnDiscard: "Renunță"
   addComment: "Scrie un comentariu"
@@ -246,8 +182,6 @@ project:
   smile: "Zâmbet!"
   love: "Iubire!"
   wow: "Uau!"
-  linkTitle: "Link"
-  link: "Copiază linkul proiectului în clipboard"
   reactionsText: "Reacții"
   downloadErrorText: "A apărut o eroare la descărcarea proiectului. Încearcă din nou mai târziu."
   downloadStartText: "Descărcarea a început..."
@@ -267,11 +201,8 @@ project:
   translations: "Traduceri"
   createTranslation: "Creează o traducere"
   deletedComment: "**Șters**"
-  replyLabel: "răspuns"
-  repliesLabel: "răspunsuri"
   notForKids: "Nepotrivit pentru copii"
 remixGraph:
-  title: "Remixuri"
   showRemixGraph: 'Arată graficul remixului'
   by: 'cu'
   open: 'Deschide '
@@ -291,10 +222,6 @@ remixGraph:
   projectNotAvailable: "Indisponibil"
   projectUnknownUser: "Utilizator necunoscut"
 noReply: 'Acesta este un mesaj automat – te rugăm să nu răspunzi direct la acest e-mail.'
-accountConfirmation:
-  subject: "Confirmarea contului tău Catrobat"
-  message: "Dragă %username%,\nPentru a finaliza activarea contului tău, vizitează %confirmationUrl%\nAcest link poate fi folosit o singură dată pentru validarea contului tău.\nCu drag,\nEchipa ta Catrobat.\n"
-  messageHtml: "<p>\nDragă %username%,<br>\n<br>\nPentru a finaliza activarea contului tău, apasă <a href=\"%confirmationUrl%\">aici.</a><br>\nAcest link poate fi folosit o singură dată pentru validarea contului tău.<br>\n<br>\nCu drag,<br>\nEchipa ta Catrobat.\n</p>\n"
 newAccountConfirmation:
   subject: "Verifică-ți adresa de e-mail"
   welcome: "Bine ai venit la Catrobat!"
@@ -372,39 +299,13 @@ parent:
       ignore: "Dacă nu ai cerut acest lucru, poți ignora liniștit acest e-mail."
 passwordRecovery:
   subject: Recuperare parolă Catrobat
-  message: "Dragă %username%,\nAi cerut resetarea parolei pe %appplication_url% pentru că ți-ai uitat parola.\nDacă nu ai cerut asta, ignoră acest mesaj. Cererea va expira și nu va mai fi valabilă peste 24 de ore.\nPentru a-ți reseta parola și a crea una nouă, vizitează pagina următoare: %confirmationUrl%\nPoți folosi oricând numele de utilizator și parola pentru a accesa comunitatea %appplication_url%.\nPentru asta, vizitează pagina următoare: %loginPage%\nPentru a-ți edita detaliile profilului, mergi la această pagină: %profilePage%\nCu drag,\nEchipa ta Catrobat.\n"
-  messageHtml: "<p>\nDragă %username%,<br>\n<br>\nAi cerut resetarea parolei pe <a href=\"%appplication_url%\">Pocket Code</a> pentru că ți-ai uitat parola.\nDacă nu ai cerut asta, ignoră acest mesaj. Cererea va expira și nu va mai fi valabilă peste 24 de ore.<br>\n<br>\nPentru a-ți reseta parola și a crea una nouă, apasă <a href=\"%confirmationUrl%\">aici.</a><br>\n<br>\nPoți folosi oricând numele de utilizator și parola pentru a accesa comunitatea <a href=\"%appplication_url%\">Pocket Code</a>.<br>\nPentru asta, vizitează pagina următoare: <a href=\"%loginPage%\">Pagina de conectare</a><br>\nPentru a-ți edita detaliile profilului, mergi la această <a href=\"%profilePage%\">pagină</a>.<br>\n<br>\nCu drag,<br>\nEchipa ta Catrobat.\n</p>\n"
 profile:
   aboutMe: "Despre mine"
   currentlyWorkingOn: "Lucrez acum la"
-  edit: "Editează-ți profilul"
-  saveChanges: salvează schimbările
   newPass: parolă nouă
   repeatPass: repetă parola
   oldPass: "parola veche"
-  firstEmail: "Primul meu e-mail"
-  secondEmail: "Al doilea meu e-mail"
-  myPrograms: "Proiectele mele"
-  follows: "Urmărește"
-  follower: "Urmăritori"
-  unfollowUser: "Nu mai urmări acest utilizator!"
-  followUser: "Urmărește acest utilizator!"
-  amountOfPrograms: "Număr de proiecte"
-  form:
-    passwordTooShort: Noua parolă trebuie să aibă cel puţin %length% caractere.
-    passwordTooLong: Noua parolă poate avea maxim %length% caractere.
-    passwordIsUsername: Parola trebuie să difere de numele de utilizator.
-    passwordWrong: Parolă greșită
-    emailNotValid: Această adresă de e-mail nu este validă.
-    emailMissing: Eroare în timpul actualizării aceastei adrese electronice. Trebuie să ai cel puţin o adresă de e-mail validă.
-    emailExists: "Această adresă de e-mail există deja."
-    usernameNotValid: "Acest nume de utilizator nu este valid."
-    usernameMissing: "Trebuie să ai un nume de utilizator."
-    usernameExists: "Acest nume de utilizator există deja."
-    usernameContainsEmail: "Numele de utilizator nu ar trebui să conțină o adresă de e-mail."
-    submitSuccess: salvat!
   reallyDeleteProgram: "Chiar vrei să-ți ștergi proiectul"
-  programsOf: "Proiectele lui"
   picture: "Poză de profil"
   changePicture: "Schimbă poza"
   goToScratchProfile: "Profilul de pe Scratch"
@@ -414,14 +315,8 @@ myprofile:
   securitySettings: Schimbă parola
   accountSettings: "Setările contului"
   accountVerification: "Verifică contul"
-  account: "Cont"
-  editProfile: "Editează profilul"
-  edit: Editează
   done: "Gata"
-  checkMail: "Ți-am trimis un e-mail. Verifică-ți căsuța de e-mail."
   passwordUpdated: "Parola ta a fost actualizată cu succes."
-  avatar: Avatar
-  email: "E-mail"
   deleteAccount: "Șterge contul"
   deleteAccountWarning: "Atenție:\nAi creat %num_projects% proiect(e) și ai %num_followers% urmăritor(i). Toate proiectele tale vor fi șterse. Nu te vei mai putea conecta, iar proiectele tale vor dispărea din toate listele. Ștergerea profilului nu poate fi anulată!\nEști sigur că vrei să ne părăsești?\n"
   exportData: "Descarcă datele mele"
@@ -429,7 +324,6 @@ myprofile:
   exportDataLoading: "Se descarcă..."
   exportDataError: "Ceva nu a mers bine la exportul datelor tale. Încearcă din nou mai târziu."
   exportDataRateLimited: "Îți poți exporta datele doar o dată pe zi. Încearcă din nou mâine."
-  editAccountSettings: "Editează setările contului"
   profileChangeSuccess: "Profilul tău a fost modificat cu succes."
   unspecifiedError: "Ceva nu a funcționat la modificarea profilului tău. Încearcă din nou sau anunță-ne dacă se tot întâmplă!"
   verifyAccountText: "Îți vom trimite un e-mail cu un link pentru verificarea contului. Asigură-te că apeși pe link în următoarea oră; poți cere doar un e-mail pe zi."
@@ -486,13 +380,10 @@ termsOfUse:
   bottom2: "Trimite orice sugestii privind acești Termeni de utilizare la %email-webmaster%."
   version: Versiunea 1.3, 4 martie 2014
 search:
-  dotdotdot: Caută...
   search: "Caută proiecte, utilizatori și studiouri"
   inMediaLib: "Caută în biblioteca media"
   inMediaCategory: "Caută în categoria media"
   results: 'Rezultatele c&#x103;ut&#x103;rii'
-  resultcount: "Căutarea ta a returnat %count% rezultate"
-  fail: "Introdu cel puțin un termen de căutare"
   noUsers: "Nu s-au găsit utilizatori"
   noProjects: "Nu s-au găsit proiecte"
   noStudios: "Nu s-au găsit studiouri"
@@ -508,7 +399,6 @@ menu:
   mediaLibrary: "Biblioteca media"
   studio: "Studiouri"
   language: "Limbă"
-  languageOptionsNotAvailable: "Nu există opțiuni de limbă disponibile."
 login:
   login: Intrare
   button:
@@ -520,21 +410,10 @@ login:
     or: "sau"
   passOrUser: "Parola sau numele de utilizator au fost incorecte."
   accountSuspended: "Contul tău a fost suspendat. Dacă crezi că este o greșeală, contactează asistența."
-  noUsername: "Numele tău de utilizator sau adresa de e-mail nu au fost găsite."
-  forgotPass: Ai uitat parola sau numele de utilizator?
   recoverPassSend: "Ți-am trimis un e-mail. Verifică-ți căsuța de e-mail."
   alreadyReset: "Parola pentru acest utilizator a fost deja solicitată în ultimele 24 de ore."
-  confirmationSend: "Ți-am trimis un e-mail pentru confirmarea înregistrării. Verifică-ți căsuța de e-mail și activează-ți contul."
-  userOrEmail: Nume de utilizator sau adresă de e-mail
-  changePass: Schimbă parola
-  createAccount: "Creează un cont"
-  noAccount: "Nu ai cont?"
-  alreadyAccount: "Ai deja un cont?"
-  or: SAU
   username: nume de utilizator
   email: "E-mail"
-  passwordFirst: Parolă
-  passwordSecond: "Confirmă parola"
 register:
   title: "Înregistrare"
   subText: "Continuând, îți creezi un cont în comunitatea Catrobat și ești de acord cu %var1% și %var2%."
@@ -567,14 +446,6 @@ registration:
   consentRevoked:
     title: "Acordul părintelui a fost retras"
     message: "Părintele sau tutorele tău și-a retras acordul pentru contul tău. Contul tău are funcții limitate până când acordul este dat din nou."
-    newEmailPlaceholder: "E-mailul nou al părintelui"
-    changeButton: "Actualizează și retrimite"
-accountRecovery:
-  title: "Recuperarea contului"
-  description: "Dacă îți amintești e-mailul sau numele de utilizator al contului, îți putem trimite un link pentru resetarea parolei."
-  button:
-    cancel: Anulare
-    submit: "Recuperează parola"
 resetPassword:
   request:
     title: "Resetează-ți parola"
@@ -587,11 +458,6 @@ resetPassword:
     description: "Dacă există un cont cu e-mailul tău, tocmai ți-am trimis un e-mail cu un link pe care îl poți folosi pentru a-ți reseta parola. Acest link va expira în %time%."
     descriptionTwo: "Poți cere o nouă resetare a parolei la fiecare %throttleLimit% ore."
     descriptionThree: "Dacă nu ai primit un e-mail, verifică dosarul de spam sau scrie un e-mail echipei noastre de asistență la %email-webmaster%."
-  email:
-    title: "Hi!"
-    visitLink: "Pentru a-ți reseta parola, vizitează linkul următor"
-    expire: "Acest link va expira în %time%."
-    cheers: "Numai bine!"
   newemail:
     title: "Resetează-ți parola"
     content: "Ai cerut recent resetarea parolei pentru contul tău Catrobat. Apasă butonul de mai jos pentru a alege o parolă nouă. Dacă nu ai cerut asta, poți ignora liniștit acest e-mail."
@@ -601,74 +467,31 @@ resetPassword:
     title: "Resetează-ți parola"
     button:
       submit: "Resetează parola"
-apk:
-  download: "Descarcă ca aplicație"
-  prepare: "Obține ca aplicație"
-  preparing: "Se pregătește aplicația"
-  text: "Procesul poate dura o vreme"
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: "Ceva nu a funcționat. Încearcă din nou sau anunță-ne dacă se tot întâmplă!"
-  username:
-    blank: Numele de utilizator trebuie să fie completat
-    invalid: "Numele tău de utilizator nu este valid"
-    exists: "Acest nume de utilizator există deja."
-    not_exists: "Acest nume de utilizator nu există."
-    not_email: "Numele de utilizator nu poate fi o adresă de e-mail."
-    size: "Numele de utilizator trebuie să aibă cel puțin 3 caractere și cel mult 180"
-  password:
-    blank: Lipsește parola.
-    short: "Parola ta trebuie să aibă cel puțin {{ limit }} caractere."
-  country:
-    blank: "Lipsește țara."
-    invalid: "Țară nevalidă"
-  email:
-    blank: "e-mailul nu poate fi gol"
-    invalid: Email-ul pare să fie nevalid
-    exists: "Această adresă de e-mail există deja."
-  id:
-    blank: "ID-ul de autentificare deschisă nu poate fi gol"
-  login: Numele de utilizator sau parola sunt incorecte.
-  post-data: "Datele POST sunt incorecte sau lipsesc!"
-  checksum:
-    missing: "Clientul nu a trimis fileChecksum! Folosești o versiune învechită de Pocket Code?"
-    invalid: "sumă de control nevalidă"
   xml:
     invalid: "cod xml nevalid"
     missing: "eroare necunoscută: project_xml_not_found!"
   file:
-    unexpected: "a fost găsit un fișier neașteptat"
     invalid: "fișier nevalid"
-  image.missing: "XML-ul proiectului menționează un fișier care nu există în dosarul proiectului"
-  unknown: "eroare necunoscută"
-  token: 'Autentificarea dispozitivului a e&#x219;uat: auth-token invalid!'
-  uploadTokenAuthFailed: "Autentificarea cu tokenul de încărcare a eșuat."
-  project:
-    invalid: "Proiect nevalid."
   languageversion:
     tooold: "Ne pare rău, proiectul tău conține o versiune veche a limbajului Catrobat! Folosești cea mai nouă versiune de Pocket Code?"
   projectversion:
     tooold: "Ne pare rău, folosești o versiune veche de Pocket Code. Actualizează la cea mai nouă versiune."
   authentication:
-    title: "Conectarea nu a funcționat"
     webview: "Se pare că numele de utilizator sau parola nu au fost corecte.\nÎncearcă să te conectezi din nou în aplicație.\n"
 success:
   text: "Succes"
-  registration: "Înregistrare reușită!"
-  token: ok
-  upload: Proiectul a fost încărcat cu succes!
   imgUpload: "Imaginea ta a fost încărcată cu succes!"
-  report: "Raportul tău a fost trimis cu succes!"
 time:
   minutes.ago: '{0} < 1 minut în urmă |{1}1 minute în urmă |]1, Inf] %count% minute în urmă'
   hours.ago: '{1}1 oră în urmă |]1, Inf] %count% ore în urmă'
   days.ago: '{1}1 zi în urmă |]1,Inf] %count% zile în urmă'
   months.ago: '{1} 1 lună în urmă |]1, Inf] %count% luni în urmă'
   years.ago: '{1}1 an în urmă |]1, Inf] mai mult de un an în urmă'
-failure:
-  upload: "A apărut o eroare la încărcarea aplicației tale."
 user:
   verification:
     email: "Verifică-ți e-mailul"
@@ -691,7 +514,6 @@ api:
     passwordInvalidChars: "Parola conține caractere nevalide"
     usernameContainsEmail: "Numele de utilizator nu poate conține o adresă de e-mail"
     usernameContainsLink: "Numele de utilizator nu poate conține un link"
-    countryCodeInvalid: "Cod de țară nevalid"
     pictureInvalid: "Poza de profil este nevalidă sau nu este acceptată"
     dateOfBirthMissing: "Data nașterii este obligatorie"
     dateOfBirthInvalid: "Data nașterii nu este validă"
@@ -725,61 +547,11 @@ api:
     nameAlreadyInUse: "Numele este deja folosit"
     descriptionMissing: "Lipsește descrierea"
     descriptionEmpty: "Descrierea este goală"
-    descriptionTooShort: "Descrierea este prea scurtă"
     descriptionTooLong: "Descrierea este prea lungă"
     imageFileInvalid: "Fișier imagine nevalid"
     imageFileInvalidType: "Tip de fișier imagine nevalid"
     imageFileTooLarge: "Fișierul imagine este prea mare"
-#languages and countries
-language:
-  arabic: 'Arab&#x103;'
-  bulgarian: 'Bulgar&#x103;'
-  catalan: 'Catalan&#x103;'
-  chinese_simplified_han: 'Chinez&#x103; (Simplificat&#x103;)'
-  chinese_traditional_han: "Chineză (Tradițională)"
-  croatian: 'Croat&#x103;'
-  czech: 'Ceh&#x103;'
-  danish: 'Danez&#x103;'
-  dutch: 'Olandez&#x103;'
-  english_united_kingdom: 'Englez&#x103; (Regatul Unit)'
-  english_united_states: 'Englez&#x103; (Statele Unite)'
-  estonian: 'Eston&#x103;'
-  filipino: 'Filipinez&#x103;'
-  finnish: 'Finlandez&#x103;'
-  french: 'Francez&#x103;'
-  german: 'German&#x103;'
-  greek: 'Greac&#x103;'
-  hebrew: 'Ebraic&#x103;'
-  hindi: Hindi
-  hungarian: 'Maghiar&#x103;'
-  indonesian: 'Indonezian&#x103;'
-  italian: 'Italian&#x103;'
-  japanese: 'Japonez&#x103;'
-  korean: 'Coreean&#x103;'
-  latvian: 'Leton&#x103;'
-  lithuanian: 'Lituanian&#x103;'
-  malay: "Malaeză"
-  norwegian: 'Norvegian&#x103;'
-  persian: "Persană"
-  polish: 'Polonez&#x103;'
-  portuguese_brazil: 'Portughez&#x103; (Brazilia)'
-  portuguese_portugal: 'Portughez&#x103; (Portugalia)'
-  romanian: Română
-  russian: 'Rus&#x103;'
-  serbian: 'S&#xE2;rb&#x103;'
-  slovak: 'Slovac&#x103;'
-  slovenian: 'Sloven&#x103;'
-  spanish_latin_america: "Spaniolă (America Latină)"
-  spanish_spain: 'Spaniol&#x103; (Spania)'
-  swedish: 'Suedez&#x103;'
-  thai: 'Tailandez&#x103;'
-  turkish: 'Turc&#x103;'
-  ukrainian: 'Ucrainean&#x103;'
-  vietnamese: 'Vietnamez&#x103;'
-ci:
-  generate: "Generează APK"
-  pending: "Se generează APK-ul"
-  download: "Descarcă APK"
+
 admin:
   maintain:
     diskMaintenance: "Întreținerea discului"
@@ -787,46 +559,9 @@ admin:
     noRemovableObjects: "Nu există obiecte care pot fi eliminate."
     removableObjects: "Obiecte care pot fi eliminate"
 recommender:
-  similarPrograms: "Proiecte similare"
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: "Utilizatorii care au descărcat acest proiect au descărcat și"
   moreFromThisUser: "Mai multe de la %username%"
-pmd:
-  submitBtn: "Trimite-ți proiectul"
-  submitBox:
-    header: "Trimitere"
-    text: "Ești pe cale să-ți trimiți proiectul. Introdu codul proiectului și apasă pe trimite."
-    btnText: "Trimite"
-  successful:
-    text: "Proiectul tău a fost încărcat cu succes."
-  failed:
-    text: "Încărcarea proiectului a eșuat."
 codeview:
   title: "Vizualizare cod"
-  showCode: "Arată codul"
-  hideCode: "Ascunde codul"
-  showStatistics: "Arată statisticile codului"
-  hideStatistics: "Ascunde statisticile codului"
-  cantDisplayCode: "Codul nu poate fi afișat"
-  cantDisplayStatistics: "Codul nu poate fi afișat"
-  totalNumberOf: "Număr total de"
-  scenes: "Scene"
-  scripts: 'Scripte'
-  bricks: 'Cărămizi'
-  objects: "Actori și obiecte"
-  looks: 'Arată'
-  sounds: 'Sunete'
-  globals: "Globale"
-  locals: "Locale"
-  globalVariables: "Variabile globale"
-  localVariables: "Variabile locale"
-  eventBricks: "Cărămizi de eveniment"
-  controlBricks: "Cărămizi de control"
-  motionBricks: "Cărămizi de mișcare"
-  soundBricks: "Cărămizi de sunet"
-  looksBricks: "Cărămizi de aspect"
-  penBricks: "Cărămizi de creion"
-  dataBricks: "Cărămizi de date"
-  specialBricks: "Cărămizi speciale"
 codeView:
   title: "Vizualizare cod"
   loading: "Se încarcă vizualizarea codului..."
@@ -839,19 +574,7 @@ codeView:
 codeStatistics:
   title: "Statisticile codului"
   error: "Statisticile codului nu pot fi afișate."
-  general: "General"
-  bricks: 'Cărămizi'
-  eventBricks: "Eveniment"
-  controlBricks: 'Controlul'
-  motionBricks: 'Mișcare'
-  soundBricks: 'Sunet'
-  looksBricks: 'Arată'
-  penBricks: "Creion"
-  dataBricks: "Date"
-  deviceBricks: "Dispozitiv"
-  specialBricks: "Speciale"
   yourScore: "Scorul tău:"
-  points: "puncte"
   abstraction: "Abstractizare și descompunerea problemelor"
   parallelism: "Paralelism"
   logicalThinking: "Gândire logică"
@@ -867,20 +590,7 @@ footer:
   text: "Cu %project_count% proiecte uimitoare deja distribuite, următorul ar putea fi al tău. Descarcă aplicația noastră și începe să creezi chiar azi"
 privacy-policy:
   header: "Politica de confidențialitate"
-  version: "Versiunea 2.2, 17 octombrie 2019"
-  text1: "Pentru a-ți oferi toate avantajele serviciilor noastre și ale contului asociat, este necesar să colectăm anumite date de la tine."
-  text2: "Pentru a ne menține și îmbunătăți serviciile (aplicații și site-uri web) și pentru a face cercetare științifică în educația TIC și STEM/STEAM, folosim Google Analytics, Crashlytics și Firebase, toate de la Google LLC (SUA), precum și Dynatrace de la Dynatrace LLC (SUA), pentru a obține metadate despre utilizarea serviciilor noastre, de exemplu informații despre blocări, marcaje temporale, pagini/ecrane vizitate, utilizarea aplicațiilor și serviciilor noastre, sistemul de operare folosit și informații despre furnizorul de rețea. Această analiză și datele colectate nu sunt legate de profilul tău și nu conțin informații personale (ultimii biți ai adresei IP sunt anonimizați). Totuși, datele colectate vor fi transferate furnizorilor de servicii (Google LLC, SUA și Dynatrace LLC, SUA). Prelucrarea datelor se bazează pe acorduri cu Google LLC și Dynatrace LLC. Această relație cu furnizorii de servicii respectă Regulamentul general privind protecția datelor al Uniunii Europene (GDPR) și acordul UE-SUA „Privacy Shield”."
-  text3: "Pentru a crea și folosi un cont în sistemele noastre și pentru a te informa prin e-mail despre schimbări necesare legate de contul tău, de exemplu actualizări sau încălcări ale Termenilor de utilizare și servicii, ale regulilor comunității sau ale politicilor noastre, vom stoca numele tău de utilizator și, dacă ni-l furnizezi, adresa ta de e-mail. Dacă ți-ai conectat contul prin Google Plus sau Facebook, stocăm în plus o cheie de identificare legată de contul tău de pe aceste servicii. Nu vom folosi aceste date în niciun alt scop (de exemplu marketing), decât dacă ne-ai permis explicit acest lucru."
-  text4: "În mod voluntar, ne poți indica țara de reședință prin pagina contului tău de pe site-ul de distribuire. Aceasta va fi afișată pe profilul tău public și va fi folosită de noi doar în scopuri statistice și de cercetare. O poți elimina oricând din setările profilului."
-  text5: "Poți retrage oricând utilizarea datelor personale aparținând contului tău, ștergându-ți contul din pagina de profil de pe https://share.catrobat.org/. După ștergerea contului vei putea folosi în continuare serviciile oferite, dar nu vei mai putea colabora, de exemplu prin încărcarea de programe, comentarii sau aprecieri. De asemenea, tot conținutul legat de contul tău, de exemplu programele încărcate, comentariile etc., va fi șters."
-  text6: "Pentru a evita folosirea abuzivă a serviciilor noastre, de exemplu prin încărcări sau comentarii ale utilizatorilor în scopuri ilegale, toate datele publice generate de utilizatori (încărcări, comentarii) vor fi stocate intern într-o bază de date, împreună cu un marcaj temporal și adresa de internet folosită. Aceste date nu vor fi folosite de nicio instituție și nici transmise vreuneia, decât dacă există o suspiciune rezonabilă de acțiuni suficient de ilegale și instituții juridice abilitate oficial le solicită pe baza legii aplicabile. Fiecare caz va fi mai întâi verificat temeinic, individual, de către noi."
-  text7: "Te poți abona voluntar la newsletterul Catrobat pe https://catrobat.org/newsletter, oferit de noi prin serviciul MailChimp (The Rocket Science Group LLC d/b/a MailChimp, SUA). Vei primi apoi noutăți despre proiectul Catrobat și serviciile sale la adresa de e-mail indicată. Te poți dezabona oricând folosind linkul „unsubscribe” din subsolul fiecărui newsletter. Acest newsletter este oferit de MailChimp, cu care avem un acord de prelucrare a datelor și care s-a angajat să respecte Regulamentul general privind protecția datelor al UE și acordul UE-SUA „Privacy Shield”. Pentru mai multe detalii despre MailChimp, consultă și Politica de confidențialitate și Termenii de utilizare ai MailChimp."
-  text8: "Toate serviciile sunt oferite de proiectul liber și open source Catrobat, sub umbrela International Catrobat Association – Verein zur Förderung freier Software, un ONG non-profit înregistrat în Graz, Austria (Uniunea Europeană). Politicile noastre respectă legislația UE și austriacă privind protecția datelor (GDPR). Pentru a ne contacta, trimite un e-mail la contact@catrobat.org sau scrie-ne la Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Uniunea Europeană)."
-  text9: "Dacă ai sub 14 ani, această politică trebuie acceptată de un tutore legal (de obicei un părinte)."
-  text10: "Politica de confidențialitate oficială a Catrobat în limba engleză este disponibilă pe web la %privacy_policy%."
-  disagree-text: "Fără acordul tău nu putem crea un cont, dar funcțiile de bază rămân accesibile."
 catro-notifications:
-  markAsRead: "Marchează ca citit"
   noFollowers: "Se pare că nu ai nicio notificare despre urmăritori."
   noComments: "Se pare că nu ai nicio notificare despre comentarii."
   noReactions: "Se pare că nu ai nicio notificare despre reacții."
@@ -914,29 +624,16 @@ catro-notifications:
 clipboard:
   success: "Linkul a fost copiat în clipboard!"
   success_project: "Linkul către proiect a fost copiat în clipboard!"
-  success_user: "Linkul către utilizator a fost copiat în clipboard!"
   fail: "Linkul nu a putut fi copiat în clipboard! :("
 next: Următor
 previous: "Anterior"
 media-packages:
   title: "Biblioteca media"
   description: "În categoriile următoare găsești actori și obiecte pe care să le adaugi în proiectele tale."
-  thumb-size:
-    description: "Mărimea previzualizării"
-    sm: "mică"
-    md: "medie"
-    lg: "mare"
   theme-special: "Ediție specială %flavor%"
   search-results: "Rezultatele căutării în biblioteca media"
-  no-results: "Căutarea ta a returnat 0 rezultate. Folosește doar termeni de căutare în engleză."
-  download_these_files: "salvează"
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: "Copyright &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. Toate drepturile rezervate."
 noscript:
   warning: "Acest site are nevoie de JavaScript pentru a funcționa. Activează JavaScript în browserul tău sau roagă un adult să te ajute."
@@ -946,10 +643,6 @@ cookie-consent:
   decline: "Refuz"
   privacy-link: "Politică de confidenţialitate"
   settings-link: "Setări cookie-uri"
-agree: "Sunt de acord"
-disagree: "Nu sunt de acord"
-profileLoader:
-  noProfiles: "Momentan nu există profiluri."
 element: 'Element'
 elements: "Elemente"
 share:
@@ -958,7 +651,6 @@ share:
   success: "Distribuit cu succes"
 copy: "Copiază linkul"
 checkOutProject: "Descoperă acest proiect:"
-checkOutUser: "Descoperă acest utilizator:"
 community: "Comunitatea Catrobat"
 back_to_app: "Ieși din comunitate"
 category:
@@ -974,7 +666,6 @@ category:
 achievements:
   sidebar:
     title: "Realizări"
-    badge: "nou"
   overview:
     header: "Realizări"
     most_recent_achievement:
@@ -1066,10 +757,7 @@ extensions:
       title: "Multiplayer"
 studio:
   title: "Studiouri"
-  singular: "Studio"
   create_studio: "Creează un studio"
-  delete_studio: "Șterge studioul"
-  cancel_studio: 'Anulare'
   studio_name: "Numele studioului"
   studio_description: "Descrierea studioului"
   is_public: "Îl faci public?"
@@ -1086,8 +774,6 @@ studio:
   cover_image_remove: "Elimină imaginea"
   popular: "Studiouri populare"
   join: "Alătură-te"
-  leave: "Părăsește"
-  report: 'Raport'
   public: "public"
   private: "Doar cu invitație"
   overview:
@@ -1110,16 +796,12 @@ studio:
     admin: 'Admin'
     member: "Membru"
   details:
-    add_project: "apasă pentru a adăuga proiectul"
     add: "Adaugă"
     showMore: "arată mai mult"
-    showLess: "arată mai puțin"
     are_you_sure: "Ești sigur?"
     no_way_of_return: "Acțiunea nu poate fi anulată."
     delete_it: 'șterge'
-    remove_project: "Elimină din studio"
     remove_project_error: "Proiectul nu a putut fi eliminat din studio."
-    remove_project_success: "Proiectul a fost eliminat cu succes din studio."
     no_projects: "Studioul nu conține încă niciun proiect."
     projects:
       title: 'Programe'
@@ -1135,10 +817,8 @@ studio:
       no_projects_empty_state: "Încă nu ai proiecte de adăugat. Creează mai întâi unul în Pocket Code!"
       add_selected: "Adaugă selecția"
     no_available_projects: "Nu există proiecte disponibile de adăugat."
-    updateCoverError: "Ceva nu a mers bine la actualizarea copertei studioului."
     join: "Alătură-te"
     leave: "Părăsește"
-    report: 'Raport'
     pending: "În așteptare"
     decline: "Respins"
     comments:
@@ -1158,7 +838,6 @@ studio:
       add_comment: "%user% a lăsat un comentariu."
     members_list:
       title: "Membrii studioului"
-      project_count: "{0} Niciun proiect în studio |{1} 1 proiect în studio |]1,Inf] %count% proiecte în studio"
       no_studio_projects: "Niciun proiect în studio"
       one_studio_project: "1 proiect în studio"
       n_studio_projects: "%count% proiecte în studio"
@@ -1168,7 +847,6 @@ studio:
       ban_failed: "Ceva nu a mers bine la excluderea acestui membru. Încearcă din nou mai târziu."
       demote_member: "Retrogradează administratorul la membru"
       demotion_failed: "Ceva nu a mers bine la retrogradarea acestui administrator. Încearcă din nou mai târziu."
-      last_admin: "Ultimul administrator al acestui studio nu poate fi retrogradat."
     join_requests:
       title: "Cereri de alăturare"
       accept: "Acceptă"
@@ -1198,7 +876,6 @@ media_library:
   no_results: "Nu s-au găsit rezultate."
   assets_count: "resurse"
   view_all: "Vezi tot"
-  view_all_category: "Vezi tot din %category%"
   back_to_app: "Înapoi la aplicație"
 snackbar:
   project_not_found: "Proiectul solicitat nu este disponibil"
@@ -1252,14 +929,6 @@ moderation:
     rate_limited: "Faci acțiuni în studio prea repede. Așteaptă puțin."
   hidden_notice:
     project: "Acest proiect a fost ascuns în urma raportărilor din comunitate."
-    comment: "Acest comentariu a fost ascuns în urma raportărilor din comunitate."
-    user: "Acest profil a fost ascuns în urma raportărilor din comunitate."
     user_own: "Contul tău a fost suspendat în urma raportărilor din comunitate. Poți contesta această decizie."
-    studio: "Acest studio a fost ascuns în urma raportărilor din comunitate."
-  notification:
-    content_hidden: "Conținutul tău (%content_type%) a fost ascuns în urma raportărilor din comunitate. Poți contesta această decizie."
-    appeal_approved: "Contestația ta a fost aprobată. Conținutul tău este din nou vizibil."
-    appeal_rejected: "Contestația ta a fost analizată, iar decizia de a-ți ascunde conținutul se menține."
-    admin_review_needed: "Conținutul a fost ascuns automat și necesită verificare."
 Reports: "Rapoarte"
 members: "membri"

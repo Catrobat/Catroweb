@@ -8,19 +8,12 @@ meta.og.description.login: "Catrobat loyihalaringni hamjamiyat bilan ulashish uc
 meta.og.title.register: "Catrobat hisobini yaratish"
 meta.og.description.register: "Catrobat hamjamiyatiga qoʻshil va bugunoq ijodiy loyihalaringni ulashishni boshla."
 meta.og.description.profile: "%username% Catrobat'da – uning loyihalari va yutuqlarini koʻrib chiq."
-localLanguage: "Oʻzbekcha"
 username: "Foydalanuvchi nomi"
 password: "Parol"
-createNewPassword: "Yangi parol yaratish"
-accountSettings: "Hisob sozlamalari"
 email: "E-pochta"
-aboutPocketCode: "Pocket Code haqida"
 about: "Catrobat haqida"
-education: "Taʼlim"
 chat: "Chat va forumlar"
-privacyGuide: "Maxfiylik boʻyicha qoʻllanma"
 others: "Boshqalar"
-tutorials: "Yordam"
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: "Bu loyihani qanday yaratding? Boshqalarning gʻoyal
 projectImportedFromScratch: "Bu loyiha MIT Scratch'dan import qilingan. Asl loyihani koʻrishing mumkin"
 scratchImportedProjectLinkHere: "shu yerda."
 country: "Mamlakat"
-loginText: "kirish"
 privacyPolicy: "Maxfiylik siyosati"
-imprint: "Maʼlumotlar"
 projectDetails: "Tafsilotlar"
 somethingWentWrong: "Voy, nimadir ishlamadi. Iltimos, qaytadan urinib koʻr!"
 accountNotVerified: "Iltimos, tizimga kirganingga va hisobing e-pochtasi tasdiqlanganiga ishonch hosil qil."
@@ -55,36 +46,28 @@ accountSuspended: "Hamjamiyat shikoyatlari sababli hisobing toʻxtatildi. Bu qar
 doesNotExist: "Soʻralgan resurs mavjud emas."
 pleaseTryAgain: "Iltimos, qaytadan urinib koʻr!"
 tryAgainButton: "Qayta urinish"
-oldVersionError: "Iltimos, Pocket Code'ning eng yangi versiyasiga yangila!"
 more: "koʻproq"
 less: "kamroq"
 show-more: "Batafsil maʼlumot"
-show-less: "Qisqaroq maʼlumot"
 more-information: "Batafsil maʼlumot"
 less-information: "Qisqaroq maʼlumot"
 ok: "Tushunarli"
-clickToDownloadProgram: "Namuna loyihani yuklab olish uchun %link_start% shu yerni %link_end% bos."
-registrationError: "Foydalanuvchi nomi yoki e-pochta manzili allaqachon band."
 notifications: "Bildirishnomalar"
 allNotifications: 'All'
 FollowersNotifications: "Obunachilar"
 LikeNotifications: "Reaksiyalar"
 CommentNotifications: "Izohlar"
 RemixNotifications: "Remikslar"
-wellDone: "Barakalla!"
 done: "Tayyor!"
 notificationsReadMessage: "Koʻrinishidan, senda hech qanday bildirishnoma yoʻq."
-confirmMessage: "Ha, oʻchir"
 cancelMessage: "Bekor qilish"
 notificationsUnauthorizedError: "Foydalanuvchini avtorizatsiya qilib boʻlmadi"
 notificationsClearError: "Bildirishnomalarni oʻqilgan deb belgilab boʻlmadi!"
-pleaseWait: "Iltimos, kuting..."
 projects: "Loyihalar"
 users: "Foydalanuvchilar"
 studios: "Studiyalar"
 oauthPopUpTitle: "Tashqi hisob orqali kirish haqida maʼlumot"
 oauthInfo: "Sen hozirgina tashqi hisob orqali kirding. Biz senga tasodifiy foydalanuvchi nomi yaratdik. Foydalanuvchi nomingni oʻzgartirmoqchi yoki hisobing uchun yangi parol yaratmoqchi boʻlsang, profil sahifangga oʻt."
-oauthHere: "shu yerda"
 statistics: "Statistika"
 languageSelection: "Tilni tanlash"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: "Qorongʻi"
   dark_description: "Qorongʻi koʻrinish"
   apply: "Qoʻllash"
-indexPage:
-  recommendedSection:
-    info:
-      title: "Bu yerda qaysi loyihalar tavsiya etiladi?"
-      description: "Loyihang qancha koʻp reaksiya (Bosh barmoq, Tabassum ...) olsa, bu roʻyxatda shuncha yuqori chiqadi."
 follower:
   follows: "Obunalar"
   followers: "Obunachilar"
   follow: "Obuna boʻlish"
-  username: "Foydalanuvchi"
   followsMe: "Menga obuna"
   noFollowing: "Hozircha hech kimga obuna emassan."
   noFollowers: "Hozircha obunachilaring yoʻq."
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Bu foydalanuvchidan obunani bekor qilmoqchimisan?"
   unfollowButton: "%username% obunasini bekor qilish"
 project:
-  welcome:
-    title: "Catrobat'ning %theme% sahifasiga xush kelibsan"
-    title_mindstorms: "Catrobat'ning Mindstorms EV3 va NXT sahifasiga xush kelibsan"
-    subtitle: "Hikoyalar, oʻyinlar va boshqalarni yarat..."
-    subtitle_embroidery: "Futbolka, sumka, shim yoki smartfon gʻilofingga oʻz naqshlaringni tik!"
-    subtitle_mindstorms: "Lego Mindstorms EV3 va NXT robotlaring bilan oʻz loyihalaringni yarat"
-    download: "Ilovani yuklab olish"
-    statistics: "Koʻproq statistika"
   featured: "Tanlanganlar"
   open: "Ochish"
   download: "Yuklab olish"
@@ -148,9 +117,6 @@ project:
       retention: "Yuklangan loyihalar maʼlum muddat faolsizlikdan soʻng avtomatik oʻchiriladi. Saqlanish muddatini uzaytirish uchun muntazam tizimga kir yoki loyihang yuklab olinishiga erish."
       protection: "Ayniqsa yaxshi yoki mashhur loyihalar moderatorlar tomonidan avtomatik oʻchirishdan himoyalanishi mumkin."
   example: "Namunalar"
-  newest: "Eng yangi loyihalar"
-  recommended: "Tavsiya etilgan loyihalar"
-  scratchremixes: "Scratch remikslari"
   noProjects: "Hozircha loyihalar yoʻq."
   shareAction: "Ulashish"
   deleteAction: "Loyihani oʻchirish"
@@ -173,17 +139,10 @@ project:
   reportCommentConfirmation: "Bu izoh ustidan shikoyat qilmoqchimisan?"
   deleteCommentConfirmation: "Bu izohni oʻchirmoqchimisan?"
   deleteAccountConfirmation: "Hisobni oʻchirish?\nHisobingni oʻchirmoqchimisan? Bu yuklagan loyihalaring va izohlaringni ham oʻchiradi!\nBu amalni qaytarib boʻlmaydi!\nHa, oʻchir!\nBekor qilish\n"
-  tooLongName: "Loyiha nomi juda uzun!"
-  tooLongDescription: "Loyiha tavsifi juda uzun!"
-  tooLongCredits: "Loyiha eslatmalari va mualliflari juda uzun!"
   my_projects: "Men ulashgan loyihalar"
   trending: "Ommabop loyihalar"
   popular: "Mashhur loyihalar"
-  most:
-    viewed: "Eng koʻp koʻrilgan"
-    downloaded: "Eng koʻp yuklab olingan"
   random: "Tasodifiy loyihalar"
-  related: "Oʻxshash loyihalar"
   browse:
     explore: "Loyihalarni kashf qilish"
     no_projects: "Hali hech qanday loyiha yaratmagansan"
@@ -197,36 +156,14 @@ project:
     tooltip: "Loyihalar maʼlum muddat faolsizlikdan soʻng avtomatik oʻchiriladi. Saqlanish muddatini uzaytirish uchun koʻproq yuklab olinishlarga erish yoki muntazam tizimga kir."
     tooltip_protected: "Bu loyiha himoyalangan va avtomatik oʻchirilmaydi."
   downloads: "%downloads% marta yuklab olingan"
-  sample: "Namuna loyihalar"
   views: "%views% marta koʻrilgan"
   likes:
     likersTitle: "Bu loyihaga reaksiya bildirganlar"
     all: "All"
-  remixes: "{0}0 ta remiks |{1}1 ta remiks |]1,Inf]%remixes% ta remiks"
-  newRemixesNotificationTitle: "|{1}\"%programName%\" loyihasining 1 ta yangi remiksi bor: |]1,Inf] \"%programName%\" loyihasining %remixes% ta yangi remiksi bor:"
-  submitted: "Yuborilgan loyihalar"
-  uploaded: "Yuklangan loyihalar"
-  reportAsInappropriate: "Nomaqbul deb shikoyat qilish"
-  reportProgram: "Loyiha ustidan shikoyat qilish"
   languageVersion: "Catrobat til versiyasi: %languageVersion%"
-  reportLoginText: "Bu loyiha ustidan shikoyat qilish uchun %login% qil."
-  reportDialogHeader: "Nega bu loyiha ustidan shikoyat qilmoqchisan?"
-  reportDialogReason: "Sababni kirit"
-  reportRadioButtonInappropriate: "Bu nomaqbul"
-  reportRadioButtonCopyright: "Mualliflik huquqi buzilishi"
-  reportRadioButtonSpam: "Bu spam"
-  reportRadioButtonDislike: "Menga yoqmadi"
-  reportOwnProgram: "Oʻz loyihang ustidan shikoyat qila olmaysan."
-  reportAlready: "Bu loyiha ustidan allaqachon shikoyat qilgansan."
-  reportDone: "Bu loyiha ustidan shikoyat qilding!"
   updateAppHeaderDownload: "Yuklab olish imkonsiz"
   updateAppTextDownload: "Iltimos, ilovangni eng yangi versiyaga yangila. Eʼtibor ber: Android'dagi barcha funksiyalar hali iOS'da mavjud emas."
-  updateAppTextDownloadApk: "APK yuklab olish hozircha faqat Android'da mavjud, iOS'da emas."
-  updateAppHeader: "Ilovani yangilash"
-  updateAppText: "Iltimos, ilovangni eng yangi versiyaga yangila."
-  btnClosePopup: Ok
   checkout_this_project: "Bu Catrobat loyihasini koʻr"
-  show_more: "Koʻproq koʻrsatish"
   comments: "Izohlar"
   send: "Yuborish"
   delete: "Oʻchirish"
@@ -238,7 +175,6 @@ project:
   deleted_popup_header: "Oʻchirildi"
   noAdminRights: "Senda admin huquqlari yoʻq. Iltimos, admin sifatida kir."
   editProject: "Loyihani tahrirlash"
-  closeProjectEditor: "Loyiha muharririni yopish"
   closeEditorPrompt: "Oʻzgarishlarni saqlamoqchimisan?"
   btnDiscard: "Bekor qilish"
   addComment: "Izoh yoz"
@@ -246,8 +182,6 @@ project:
   smile: "Tabassum!"
   love: "Sevdim!"
   wow: "Voy-buy!"
-  linkTitle: "Havola"
-  link: "Loyiha havolasini nusxalash"
   reactionsText: "Reaksiyalar"
   downloadErrorText: "Loyihani yuklab olishda xatolik yuz berdi. Iltimos, keyinroq urinib koʻr."
   downloadStartText: "Yuklab olish boshlandi..."
@@ -267,11 +201,8 @@ project:
   translations: "Tarjimalar"
   createTranslation: "Tarjima yaratish"
   deletedComment: "**Oʻchirilgan**"
-  replyLabel: "javob"
-  repliesLabel: "javoblar"
   notForKids: "Bolalar uchun xavfsiz emas"
 remixGraph:
-  title: "Remikslar"
   showRemixGraph: "Remiks grafigi"
   by: 'by'
   open: "Ochish"
@@ -291,10 +222,6 @@ remixGraph:
   projectNotAvailable: "Mavjud emas"
   projectUnknownUser: "Nomaʼlum foydalanuvchi"
 noReply: "Bu avtomatik xabar - iltimos, bu xatga toʻgʻridan-toʻgʻri javob berma."
-accountConfirmation:
-  subject: "Catrobat hisobingni tasdiqlash"
-  message: "Hurmatli %username%.\nHisobingni faollashtirishni yakunlash uchun %confirmationUrl% manziliga oʻt\nBu havoladan hisobingni tasdiqlash uchun faqat bir marta foydalanish mumkin.\nHurmat bilan,\nCatrobat jamoang.\n"
-  messageHtml: "<p>\nHurmatli %username%.<br>\n<br>\nHisobingni faollashtirishni yakunlash uchun <a href=\"%confirmationUrl%\">shu yerni bos.</a><br>\nBu havoladan hisobingni tasdiqlash uchun faqat bir marta foydalanish mumkin.<br>\n<br>\nHurmat bilan,<br>\nCatrobat jamoang.\n</p>\n"
 newAccountConfirmation:
   subject: "E-pochta manzilingni tasdiqla"
   welcome: "Catrobat'ga xush kelibsan!"
@@ -372,39 +299,13 @@ parent:
       ignore: "Agar buni soʻramagan boʻlsangiz, bu xatga eʼtibor bermasangiz ham boʻladi."
 passwordRecovery:
   subject: "Catrobat parolingni tiklash"
-  message: "Hurmatli %username%.\nParolingni unutganing sababli %appplication_url% saytida parolni tiklashni soʻrading.\nAgar buni soʻramagan boʻlsang, eʼtibor berma. U 24 soatdan soʻng muddati tugab, yaroqsiz boʻladi.\nParolingni tiklash va yangisini yaratish uchun quyidagi sahifaga oʻt: %confirmationUrl%\n%appplication_url% hamjamiyatiga kirish uchun foydalanuvchi noming va parolingdan istalgan vaqtda foydalanishing mumkin.\nBuning uchun quyidagi sahifaga oʻt: %loginPage%\nProfil maʼlumotlaringni tahrirlash uchun bu sahifaga oʻt: %profilePage%\nHurmat bilan,\nCatrobat jamoang.\n"
-  messageHtml: "<p>\nHurmatli %username%.<br>\n<br>\nParolingni unutganing sababli <a href=\"%appplication_url%\">Pocket Code</a> saytida parolni tiklashni soʻrading.\nAgar buni soʻramagan boʻlsang, eʼtibor berma. U 24 soatdan soʻng muddati tugab, yaroqsiz boʻladi.<br>\n<br>\nParolingni tiklash va yangisini yaratish uchun <a href=\"%confirmationUrl%\">shu yerni bos.</a><br>\n<br>\n<a href=\"%appplication_url%\">Pocket Code</a> hamjamiyatiga kirish uchun foydalanuvchi noming va parolingdan istalgan vaqtda foydalanishing mumkin.<br>\nBuning uchun quyidagi sahifaga oʻt: <a href=\"%loginPage%\">Kirish sahifasi</a><br>\nProfil maʼlumotlaringni tahrirlash uchun bu <a href=\"%profilePage%\">sahifaga</a> oʻt.<br>\n<br>\nHurmat bilan,<br>\nCatrobat jamoang.\n</p>\n"
 profile:
   aboutMe: "Men haqimda"
   currentlyWorkingOn: "Hozir ustida ishlayotganim"
-  edit: "Profilingni tahrirla"
-  saveChanges: "oʻzgarishlarni saqlash"
   newPass: "yangi parol"
   repeatPass: "parolni takrorla"
   oldPass: "eski parol"
-  firstEmail: "Birinchi e-pochtam"
-  secondEmail: "Ikkinchi e-pochtam"
-  myPrograms: "Loyihalarim"
-  follows: "Obunalar"
-  follower: "Obunachi"
-  unfollowUser: "Bu foydalanuvchidan obunani bekor qil!"
-  followUser: "Bu foydalanuvchiga obuna boʻl!"
-  amountOfPrograms: "Loyihalar soni"
-  form:
-    passwordTooShort: "Yangi parol kamida %length% ta belgidan iborat boʻlishi kerak."
-    passwordTooLong: "Yangi parol koʻpi bilan %length% ta belgidan iborat boʻlishi mumkin."
-    passwordIsUsername: "Parol foydalanuvchi nomidan farq qilishi kerak."
-    passwordWrong: "Notoʻgʻri parol"
-    emailNotValid: "Bu e-pochta manzili yaroqsiz."
-    emailMissing: "Bu e-pochta manzilini yangilashda xatolik. Kamida bitta tasdiqlangan e-pochta manziling boʻlishi kerak."
-    emailExists: "Bu e-pochta manzili allaqachon mavjud."
-    usernameNotValid: "Bu foydalanuvchi nomi yaroqsiz."
-    usernameMissing: "Foydalanuvchi noming boʻlishi kerak."
-    usernameExists: "Bu foydalanuvchi nomi allaqachon mavjud."
-    usernameContainsEmail: "Foydalanuvchi nomida e-pochta manzili boʻlmasligi kerak."
-    submitSuccess: "saqlandi!"
   reallyDeleteProgram: "Haqiqatan ham loyihangni oʻchirmoqchimisan"
-  programsOf: "Loyihalari:"
   picture: "Profil rasmi"
   changePicture: "Rasmni oʻzgartirish"
   goToScratchProfile: "Scratch'dagi profil"
@@ -414,14 +315,8 @@ myprofile:
   securitySettings: "Parolni oʻzgartirish"
   accountSettings: "Hisob sozlamalari"
   accountVerification: "Hisobni tasdiqlash"
-  account: "Hisob"
-  editProfile: "Profilni tahrirlash"
-  edit: "Tahrirlash"
   done: "Tayyor"
-  checkMail: "E-pochta manzilingga xat yuborildi. Iltimos, pochta qutingni tekshir."
   passwordUpdated: "Paroling muvaffaqiyatli yangilandi."
-  avatar: "Avatar"
-  email: "E-pochta"
   deleteAccount: "Hisobni oʻchirish"
   deleteAccountWarning: "Diqqat:\nSen %num_projects% ta loyiha yaratgansan va %num_followers% ta obunachiga egasan. Barcha loyihalaring oʻchiriladi. Endi tizimga kira olmaysan va loyihalaring barcha roʻyxatlardan yoʻqoladi. Profilni oʻchirishni qaytarib boʻlmaydi!\nRostdan ham bizni tark etmoqchimisan?\n"
   exportData: "Maʼlumotlarimni yuklab olish"
@@ -429,7 +324,6 @@ myprofile:
   exportDataLoading: "Yuklab olinmoqda..."
   exportDataError: "Maʼlumotlaringni eksport qilishda nimadir xato ketdi. Iltimos, keyinroq urinib koʻr."
   exportDataRateLimited: "Maʼlumotlaringni kuniga faqat bir marta eksport qilishing mumkin. Iltimos, ertaga urinib koʻr."
-  editAccountSettings: "Hisob sozlamalarini tahrirlash"
   profileChangeSuccess: "Profiling muvaffaqiyatli oʻzgartirildi."
   unspecifiedError: "Profilingni oʻzgartirishda nimadir ishlamadi. Iltimos, qaytadan urinib koʻr yoki bu takrorlansa, bizga xabar ber!"
   verifyAccountText: "Hisobingni tasdiqlash uchun senga havolali xat yuboramiz. Havolani keyingi bir soat ichida bosishni unutma, kuniga faqat bitta xat soʻrashing mumkin."
@@ -486,13 +380,10 @@ termsOfUse:
   bottom2: "Bu foydalanish shartlari boʻyicha takliflaringni %email-webmaster% manziliga yubor."
   version: "Versiya 1.3, 2014-yil 4-mart"
 search:
-  dotdotdot: "Qidirish..."
   search: "Loyihalar, foydalanuvchilar va studiyalarni qidirish"
   inMediaLib: "Media kutubxonasidan qidirish"
   inMediaCategory: "Media toifasidan qidirish"
   results: "Qidiruv natijalari"
-  resultcount: "Qidiruving %count% ta natija berdi"
-  fail: "Iltimos, kamida bitta qidiruv soʻzini kirit"
   noUsers: "Foydalanuvchilar topilmadi"
   noProjects: "Loyihalar topilmadi"
   noStudios: "Studiyalar topilmadi"
@@ -508,7 +399,6 @@ menu:
   mediaLibrary: "Media kutubxonasi"
   studio: "Studiyalar"
   language: "Til"
-  languageOptionsNotAvailable: "Til variantlari mavjud emas."
 login:
   login: "Kirish"
   button:
@@ -520,21 +410,10 @@ login:
     or: "yoki"
   passOrUser: "Paroling yoki foydalanuvchi noming notoʻgʻri."
   accountSuspended: "Hisobing toʻxtatildi. Agar bu xato deb hisoblasang, yordam xizmatiga murojaat qil."
-  noUsername: "Foydalanuvchi noming yoki e-pochta manziling topilmadi."
-  forgotPass: "Parol yoki foydalanuvchi nomini unutdingmi?"
   recoverPassSend: "E-pochta manzilingga xat yuborildi. Iltimos, pochta qutingni tekshir."
   alreadyReset: "Bu foydalanuvchi uchun parol oxirgi 24 soat ichida allaqachon soʻralgan."
-  confirmationSend: "Roʻyxatdan oʻtishni tasdiqlash uchun e-pochta manzilingga xat yuborildi. Iltimos, pochta qutingni tekshir va hisobingni faollashtir."
-  userOrEmail: "Foydalanuvchi nomi yoki e-pochta"
-  changePass: "Parolni oʻzgartirish"
-  createAccount: "Hisob yaratish"
-  noAccount: "Hisobing yoʻqmi?"
-  alreadyAccount: "Hisobing bormi?"
-  or: "YOKI"
   username: "Foydalanuvchi nomi"
   email: "E-pochta"
-  passwordFirst: "Parol"
-  passwordSecond: "Parolni tasdiqlash"
 register:
   title: "Roʻyxatdan oʻtish"
   subText: "Davom etish orqali sen Catrobat hamjamiyati hisobini yaratasan va bizning %var1% hamda %var2% shartlarimizga rozilik bildirasan."
@@ -567,14 +446,6 @@ registration:
   consentRevoked:
     title: "Ota-ona roziligi qaytarib olindi"
     message: "Ota-onang yoki vasiying hisobing uchun rozilikni qaytarib oldi. Rozilik qayta berilmaguncha hisobing cheklangan imkoniyatlarga ega."
-    newEmailPlaceholder: "Ota-onaning yangi e-pochtasi"
-    changeButton: "Yangilash va qayta yuborish"
-accountRecovery:
-  title: "Hisobni tiklash"
-  description: "Agar hisobingning e-pochtasi yoki foydalanuvchi nomini eslasang, senga parolni tiklash havolasini yuborishimiz mumkin."
-  button:
-    cancel: "Bekor qilish"
-    submit: "Parolni tiklash"
 resetPassword:
   request:
     title: "Parolingni tikla"
@@ -587,11 +458,6 @@ resetPassword:
     description: "Agar e-pochtangga mos hisob mavjud boʻlsa, parolingni tiklash uchun havolali xat hozirgina yuborildi. Bu havola %time% dan soʻng eskiradi."
     descriptionTwo: "Parolni tiklashni har %throttleLimit% soatda bir marta soʻrashing mumkin."
     descriptionThree: "Agar xat kelmagan boʻlsa, spam jildingni tekshir yoki %email-webmaster% manzilidagi yordam xizmatimizga yoz."
-  email:
-    title: "Hi!"
-    visitLink: "Parolingni tiklash uchun quyidagi havolaga oʻt"
-    expire: "Bu havola %time% dan soʻng eskiradi."
-    cheers: "Omad!"
   newemail:
     title: "Parolingni tikla"
     content: "Yaqinda Catrobat hisobing uchun parolni tiklashni soʻrading. Yangi parol tanlash uchun quyidagi tugmani bos. Agar buni soʻramagan boʻlsang, bu xatga eʼtibor bermasang ham boʻladi."
@@ -601,74 +467,31 @@ resetPassword:
     title: "Parolingni tikla"
     button:
       submit: "Parolni tiklash"
-apk:
-  download: "Ilova sifatida yuklab olish"
-  prepare: "Ilova sifatida olish"
-  preparing: "Ilova tayyorlanmoqda"
-  text: "Jarayon biroz vaqt olishi mumkin"
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: "Nimadir ishlamadi. Iltimos, qaytadan urinib koʻr yoki bu takrorlansa, bizga xabar ber!"
-  username:
-    blank: "Foydalanuvchi nomi boʻsh boʻlmasligi kerak"
-    invalid: "Foydalanuvchi noming yaroqsiz"
-    exists: "Bu foydalanuvchi nomi allaqachon mavjud."
-    not_exists: "Bu foydalanuvchi nomi mavjud emas."
-    not_email: "Foydalanuvchi nomi e-pochta manzili boʻlmasligi kerak."
-    size: "Foydalanuvchi nomi kamida 3 ta va koʻpi bilan 180 ta belgidan iborat boʻlishi kerak"
-  password:
-    blank: "Parol kiritilmagan."
-    short: "Paroling kamida {{ limit }} ta belgidan iborat boʻlishi kerak."
-  country:
-    blank: "Mamlakat koʻrsatilmagan."
-    invalid: "Notoʻgʻri mamlakat"
-  email:
-    blank: "E-pochta boʻsh boʻlmasligi kerak"
-    invalid: "E-pochtang yaroqsizga oʻxshaydi"
-    exists: "Bu e-pochta manzili allaqachon mavjud."
-  id:
-    blank: "Open Authentication ID boʻsh boʻlmasligi kerak"
-  login: "Parol yoki foydalanuvchi nomi notoʻgʻri."
-  post-data: "POST maʼlumotlari notoʻgʻri yoki yoʻq!"
-  checksum:
-    missing: "Mijoz fileChecksum yubormadi! Pocket Code'ning eskirgan versiyasidan foydalanyapsanmi?"
-    invalid: "notoʻgʻri nazorat summasi"
   xml:
     invalid: "notoʻgʻri kod XML"
     missing: "nomaʼlum xato: project_xml_not_found!"
   file:
-    unexpected: "kutilmagan fayl topildi"
     invalid: "notoʻgʻri fayl"
-  image.missing: "Loyiha XML'ida loyiha jildida mavjud boʻlmagan fayl tilga olingan"
-  unknown: "nomaʼlum xato"
-  token: "Qurilma autentifikatsiyasi amalga oshmadi: notoʻgʻri auth-token!"
-  uploadTokenAuthFailed: "Yuklash tokeni autentifikatsiyasi amalga oshmadi."
-  project:
-    invalid: "Notoʻgʻri loyiha."
   languageversion:
     tooold: "Kechirasiz, loyihangda Catrobat tilining eski versiyasi bor! Pocket Code'ning eng soʻnggi versiyasidan foydalanyapsanmi?"
   projectversion:
     tooold: "Kechirasiz, Pocket Code'ning eski versiyasidan foydalanyapsan. Iltimos, eng soʻnggi versiyaga yangila."
   authentication:
-    title: "Kirish amalga oshmadi"
     webview: "Foydalanuvchi noming yoki paroling notoʻgʻri boʻlganga oʻxshaydi.\nIltimos, ilovada qaytadan kirib koʻr.\n"
 success:
   text: "Muvaffaqiyatli"
-  registration: "Roʻyxatdan oʻtish muvaffaqiyatli!"
-  token: ok
-  upload: "Loyihang muvaffaqiyatli yuklandi!"
   imgUpload: "Rasming muvaffaqiyatli yuklandi!"
-  report: "Shikoyating muvaffaqiyatli yuborildi!"
 time:
   minutes.ago: "{0} < 1 daqiqa oldin |{1}1 daqiqa oldin |]1,Inf] %count% daqiqa oldin"
   hours.ago: "{1}1 soat oldin |]1,Inf] %count% soat oldin"
   days.ago: "{1}1 kun oldin |]1,Inf] %count% kun oldin"
   months.ago: "{1}1 oy oldin |]1,Inf] %count% oy oldin"
   years.ago: "{1}1 yil oldin |]1,Inf] bir yildan koʻproq oldin"
-failure:
-  upload: "Ilovangni yuklashda xatolik yuz berdi."
 user:
   verification:
     email: "E-pochtangni tasdiqla"
@@ -691,7 +514,6 @@ api:
     passwordInvalidChars: "Parolda notoʻgʻri belgilar bor"
     usernameContainsEmail: "Foydalanuvchi nomida e-pochta manzili boʻlmasligi kerak"
     usernameContainsLink: "Foydalanuvchi nomida havola boʻlmasligi kerak"
-    countryCodeInvalid: "Mamlakat kodi yaroqsiz"
     pictureInvalid: "Profil rasmi yaroqsiz yoki qoʻllab-quvvatlanmaydi"
     dateOfBirthMissing: "Tugʻilgan sana majburiy"
     dateOfBirthInvalid: "Tugʻilgan sana yaroqsiz"
@@ -725,61 +547,11 @@ api:
     nameAlreadyInUse: "Nom allaqachon band"
     descriptionMissing: "Tavsif koʻrsatilmagan"
     descriptionEmpty: "Tavsif boʻsh"
-    descriptionTooShort: "Tavsif juda qisqa"
     descriptionTooLong: "Tavsif juda uzun"
     imageFileInvalid: "Rasm fayli yaroqsiz"
     imageFileInvalidType: "Rasm fayli turi yaroqsiz"
     imageFileTooLarge: "Rasm fayli juda katta"
-#languages and countries
-language:
-  arabic: "Arabcha"
-  bulgarian: "Bolgarcha"
-  catalan: "Katalancha"
-  chinese_simplified_han: "Xitoycha (soddalashtirilgan)"
-  chinese_traditional_han: "Xitoycha (anʼanaviy)"
-  croatian: "Xorvatcha"
-  czech: "Chexcha"
-  danish: "Daniyacha"
-  dutch: "Niderlandcha"
-  english_united_kingdom: "Inglizcha (Buyuk Britaniya)"
-  english_united_states: "Inglizcha (AQSh)"
-  estonian: "Estoncha"
-  filipino: "Filippincha"
-  finnish: "Fincha"
-  french: "Fransuzcha"
-  german: "Nemischa"
-  greek: "Yunoncha"
-  hebrew: "Ivritcha"
-  hindi: "Hindcha"
-  hungarian: "Vengercha"
-  indonesian: "Indonezcha"
-  italian: "Italyancha"
-  japanese: "Yaponcha"
-  korean: "Koreyscha"
-  latvian: "Latishcha"
-  lithuanian: "Litvacha"
-  malay: "Malaycha"
-  norwegian: "Norvegcha"
-  persian: "Forscha"
-  polish: "Polyakcha"
-  portuguese_brazil: "Portugalcha (Braziliya)"
-  portuguese_portugal: "Portugalcha (Portugaliya)"
-  romanian: "Rumincha"
-  russian: "Ruscha"
-  serbian: "Serbcha"
-  slovak: "Slovakcha"
-  slovenian: "Slovencha"
-  spanish_latin_america: "Ispancha (Lotin Amerikasi)"
-  spanish_spain: "Ispancha (Ispaniya)"
-  swedish: "Shvedcha"
-  thai: "Taycha"
-  turkish: "Turkcha"
-  ukrainian: "Ukraincha"
-  vietnamese: "Vyetnamcha"
-ci:
-  generate: "APK yaratish"
-  pending: "APK yaratilmoqda"
-  download: "APK yuklab olish"
+
 admin:
   maintain:
     diskMaintenance: "Diskka xizmat koʻrsatish"
@@ -787,46 +559,9 @@ admin:
     noRemovableObjects: "Oʻchiriladigan obyektlar yoʻq."
     removableObjects: "Oʻchiriladigan obyektlar"
 recommender:
-  similarPrograms: "Oʻxshash loyihalar"
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: "Bu loyihani yuklab olganlar quyidagilarni ham yuklab olgan"
   moreFromThisUser: "%username% dan yana"
-pmd:
-  submitBtn: "Loyihangni topshir"
-  submitBox:
-    header: "Topshirish"
-    text: "Loyihangni topshirmoqchisan. Iltimos, loyiha kodini kirit va yuborishni bos."
-    btnText: "Topshirish"
-  successful:
-    text: "Loyihang muvaffaqiyatli yuklandi."
-  failed:
-    text: "Loyihani yuklash amalga oshmadi."
 codeview:
   title: 'Code View'
-  showCode: "Kodni koʻrsatish"
-  hideCode: "Kodni yashirish"
-  showStatistics: "Kod statistikasini koʻrsatish"
-  hideStatistics: "Kod statistikasini yashirish"
-  cantDisplayCode: "Kodni koʻrsatib boʻlmaydi"
-  cantDisplayStatistics: "Statistikani koʻrsatib boʻlmaydi"
-  totalNumberOf: "Umumiy soni"
-  scenes: "Sahnalar"
-  scripts: "Skriptlar"
-  bricks: "Bloklar"
-  objects: "Aktyorlar va obyektlar"
-  looks: "Koʻrinishlar"
-  sounds: "Tovushlar"
-  globals: "Global oʻzgaruvchilar"
-  locals: "Lokal oʻzgaruvchilar"
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
 codeView:
   title: "Kod koʻrinishi"
   loading: "Kod koʻrinishi yuklanmoqda..."
@@ -839,19 +574,7 @@ codeView:
 codeStatistics:
   title: "Code Statistics"
   error: "Kod statistikasini koʻrsatib boʻlmaydi."
-  general: "Umumiy"
-  bricks: "Bloklar"
-  eventBricks: "Hodisa"
-  controlBricks: "Boshqaruv"
-  motionBricks: "Harakat"
-  soundBricks: "Tovush"
-  looksBricks: "Koʻrinish"
-  penBricks: 'Pen'
-  dataBricks: "Maʼlumotlar"
-  deviceBricks: "Qurilma"
-  specialBricks: "Maxsus"
   yourScore: "Sening balling:"
-  points: "ball"
   abstraction: "Abstraksiya va masalani qismlarga ajratish"
   parallelism: "Parallellik"
   logicalThinking: "Mantiqiy fikrlash"
@@ -867,20 +590,7 @@ footer:
   text: "Allaqachon %project_count% ta ajoyib loyiha ulashilgan, keyingisi seniki boʻlishi mumkin. Ilovamizni yuklab ol va bugunoq yaratishni boshla"
 privacy-policy:
   header: "Maxfiylik siyosati"
-  version: "Versiya 2.2, 2019-yil 17-oktabr"
-  text1: "Xizmatlarimiz va unga bogʻliq hisobning barcha afzalliklarini taqdim etish uchun sendan maʼlum maʼlumotlarni yigʻishimiz zarur."
-  text2: "Xizmatlarimizni (ilovalar va veb-saytlar) qoʻllab-quvvatlash va yaxshilash hamda AKT va STEM/STEAM taʼlimi boʻyicha ilmiy tadqiqotlar olib borish uchun xizmatlarimizdan foydalanish haqida metamaʼlumotlarni, masalan, ishdan chiqish maʼlumotlari, vaqt belgilari, tashrif buyurilgan sahifalar/ekranlar, ilova va xizmatlarimizdan foydalanish, ishlatilgan operatsion tizim va tarmoq provayderi haqidagi maʼlumotlarni olish uchun Google LLC (AQSh) kompaniyasining Google Analytics, Crashlytics va Firebase xizmatlaridan hamda Dynatrace LLC (AQSh) kompaniyasining Dynatrace xizmatidan foydalanamiz. Bu tahlil va yigʻilgan maʼlumotlar profilingga bogʻlanmaydi va hech qanday shaxsiy maʼlumotni oʻz ichiga olmaydi (IP manzilning oxirgi bitlari anonimlashtiriladi). Biroq yigʻilgan maʼlumotlar xizmat koʻrsatuvchilarga (Google LLC, AQSh va Dynatrace LLC, AQSh) uzatiladi. Maʼlumotlarni qayta ishlash Google LLC va Dynatrace LLC bilan tuzilgan kelishuvlarga asoslanadi. Xizmat koʻrsatuvchilar bilan bu munosabat Yevropa Ittifoqining Maʼlumotlarni himoya qilish umumiy reglamenti (EU GDPR) va YeI-AQSh \"Privacy Shield\" kelishuviga mos keladi."
-  text3: "Tizimlarimizda hisob yaratish va undan foydalanish hamda hisobing boʻyicha zarur oʻzgarishlar, masalan, yangilanishlar yoki foydalanish va xizmat koʻrsatish shartlarimiz, hamjamiyat qoidalarimiz yoki siyosatlarimiz buzilishi haqida e-pochta orqali xabar berish uchun foydalanuvchi nomingni va, agar koʻrsatgan boʻlsang, e-pochta manzilingni saqlaymiz. Agar hisobingni Google Plus yoki Facebook orqali ulagan boʻlsang, qoʻshimcha ravishda bu xizmatlardagi hisobingga bogʻlangan identifikatsiya kalitini saqlaymiz. Bu maʼlumotlardan, sen bizga aniq ruxsat bermaguningcha, boshqa (masalan, marketing) maqsadlarda foydalanmaymiz."
-  text4: "Ixtiyoriy ravishda ulashish saytidagi hisob sahifang orqali yashash mamlakatingni koʻrsatishing mumkin. U ommaviy profilingda koʻrsatiladi va biz tomonidan faqat statistika va tadqiqot maqsadlarida ishlatiladi. Uni istalgan vaqtda profil sozlamalaringda olib tashlashing mumkin."
-  text5: "Hisobingga tegishli shaxsiy maʼlumotlardan foydalanishni istalgan vaqtda https://share.catrobat.org/ saytidagi profil sahifang orqali hisobingni oʻchirib bekor qilishing mumkin. Hisobingni oʻchirgandan soʻng ham taqdim etilgan xizmatlardan foydalanishing mumkin, lekin hamkorlik qila olmaysan, masalan, dastur yuklash, izoh yozish yoki layk bosish. Shuningdek, hisobingga bogʻlangan barcha kontent, masalan, yuklangan dasturlar, izohlar va hokazo oʻchiriladi."
-  text6: "Xizmatlarimizdan suiisteʼmol qilishning, masalan, foydalanuvchilar yuklagan fayllar yoki izohlardan noqonuniy maqsadlarda foydalanishning oldini olish uchun foydalanuvchilar yaratgan barcha ommaviy maʼlumotlar (yuklamalar, izohlar) vaqt belgisi va ishlatilgan internet manzili bilan birga ichki maʼlumotlar bazasida saqlanadi. Bu maʼlumotlar, agar jiddiy noqonuniy harakatlarga asosli shubha boʻlmasa va rasman vakolatli huquqiy idoralar amaldagi qonunchilik asosida talab qilmasa, hech qanday muassasa tomonidan ishlatilmaydi va ularga uzatilmaydi. Har bir holat avval biz tomonidan alohida sinchiklab tekshiriladi."
-  text7: "Biz MailChimp xizmati (The Rocket Science Group LLC d/b/a MailChimp, AQSh) orqali taqdim etadigan Catrobat axborotnomasiga https://catrobat.org/newsletter sahifasida ixtiyoriy obuna boʻlishing mumkin. Shundan soʻng koʻrsatgan e-pochta manzilingga Catrobat loyihasi va uning xizmatlari haqida yangiliklar olasan. Axborotnomadan istalgan vaqtda har bir axborotnoma pastidagi \"unsubscribe\" havolasi orqali voz kechishing mumkin. Bu axborotnoma biz bilan maʼlumotlarni qayta ishlash kelishuviga ega boʻlgan va YeI Maʼlumotlarni himoya qilish umumiy reglamenti hamda YeI-AQSh \"Privacy Shield\" kelishuviga rioya qilish majburiyatini olgan MailChimp tomonidan taqdim etiladi. MailChimp haqida batafsil maʼlumot uchun MailChimp'ning maxfiylik siyosati va foydalanish shartlari bilan ham tanishib chiq."
-  text8: "Barcha xizmatlar bepul ochiq manbali Catrobat loyihasi tomonidan Graz, Avstriya (Yevropa Ittifoqi)da roʻyxatdan oʻtgan notijorat NNT — International Catrobat Association – Verein zur Förderung freier Software homiyligida taqdim etiladi. Siyosatlarimiz YeI va Avstriya maʼlumotlarni himoya qilish qonunchiligini (GDPR) hurmat qiladi. Biz bilan bogʻlanish uchun contact@catrobat.org manziliga xat yubor yoki quyidagi manzilga pochta orqali yoz: Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)."
-  text9: "Agar 14 yoshga toʻlmagan boʻlsang, bu siyosatni qonuniy vasiy (odatda ota-ona) qabul qilishi kerak."
-  text10: "Catrobat'ning rasmiy ingliz tilidagi maxfiylik siyosati internetda %privacy_policy% manzilida mavjud."
-  disagree-text: "Roziliksiz hisob yarata olmaymiz, lekin asosiy funksiyalar baribir mavjud."
 catro-notifications:
-  markAsRead: "Oʻqilgan deb belgilash"
   noFollowers: "Koʻrinishidan, obunachilar haqida bildirishnomalaring yoʻq."
   noComments: "Koʻrinishidan, izohlar haqida bildirishnomalaring yoʻq."
   noReactions: "Koʻrinishidan, reaksiyalar haqida bildirishnomalaring yoʻq."
@@ -914,29 +624,16 @@ catro-notifications:
 clipboard:
   success: "Havola nusxalandi!"
   success_project: "Loyiha havolasi nusxalandi!"
-  success_user: "Foydalanuvchi havolasi nusxalandi!"
   fail: "Havolani nusxalab boʻlmadi! :("
 next: "Keyingi"
 previous: "Oldingi"
 media-packages:
   title: "Media kutubxonasi"
   description: "Quyidagi toifalarda loyihalaringga qoʻshish uchun aktyorlar va obyektlarni topishing mumkin."
-  thumb-size:
-    description: "Oldindan koʻrish oʻlchami"
-    sm: "kichik"
-    md: "oʻrta"
-    lg: "katta"
   theme-special: "%flavor% mavzusi uchun maxsus"
   search-results: "Media kutubxonasidagi qidiruv natijalari"
-  no-results: "Qidiruving 0 ta natija berdi. Iltimos, faqat inglizcha qidiruv soʻzlaridan foydalan."
-  download_these_files: "saqlash"
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: "Copyright &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. Barcha huquqlar himoyalangan."
 noscript:
   warning: "Bu sayt ishlashi uchun JavaScript kerak. Iltimos, brauzeringda JavaScript'ni yoq yoki kattalardan yordam soʻra."
@@ -946,10 +643,6 @@ cookie-consent:
   decline: "Rad etish"
   privacy-link: "Maxfiylik siyosati"
   settings-link: "Cookie sozlamalari"
-agree: "Roziman"
-disagree: "Rozi emasman"
-profileLoader:
-  noProfiles: "Hozircha profillar yoʻq."
 element: "Element"
 elements: "Elementlar"
 share:
@@ -958,7 +651,6 @@ share:
   success: "Muvaffaqiyatli ulashildi"
 copy: "Havolani nusxalash"
 checkOutProject: "Bu loyihani koʻr:"
-checkOutUser: "Bu foydalanuvchini koʻr:"
 community: "Catrobat hamjamiyati"
 back_to_app: "Hamjamiyatdan chiqish"
 category:
@@ -974,7 +666,6 @@ category:
 achievements:
   sidebar:
     title: "Yutuqlar"
-    badge: 'new'
   overview:
     header: "Yutuqlar"
     most_recent_achievement:
@@ -1066,10 +757,7 @@ extensions:
       title: "Koʻp oʻyinchili"
 studio:
   title: "Studiyalar"
-  singular: "Studiya"
   create_studio: "Studiya yaratish"
-  delete_studio: "Studiyani oʻchirish"
-  cancel_studio: "Bekor qilish"
   studio_name: "Studiya nomi"
   studio_description: "Studiya tavsifi"
   is_public: "Ommaviy qilinsinmi?"
@@ -1086,8 +774,6 @@ studio:
   cover_image_remove: "Rasmni olib tashlash"
   popular: "Mashhur studiyalar"
   join: "Qoʻshilish"
-  leave: "Chiqish"
-  report: "Shikoyat qilish"
   public: "ommaviy"
   private: "Faqat taklif bilan"
   overview:
@@ -1110,16 +796,12 @@ studio:
     admin: 'Admin'
     member: "Aʼzo"
   details:
-    add_project: "loyihani qoʻshish uchun bos"
     add: 'Add'
     showMore: "koʻproq koʻrsatish"
-    showLess: "kamroq koʻrsatish"
     are_you_sure: "Ishonching komilmi?"
     no_way_of_return: "Buni qaytarib boʻlmaydi."
     delete_it: "Oʻchirish"
-    remove_project: "Studiyadan olib tashlash"
     remove_project_error: "Loyihani studiyadan olib tashlab boʻlmadi."
-    remove_project_success: "Loyiha studiyadan muvaffaqiyatli olib tashlandi."
     no_projects: "Studiyada hali loyihalar yoʻq."
     projects:
       title: "Loyihalar"
@@ -1135,10 +817,8 @@ studio:
       no_projects_empty_state: "Hozircha qoʻshish uchun loyihang yoʻq. Avval Pocket Code'da loyiha yarat!"
       add_selected: "Tanlanganlarni qoʻshish"
     no_available_projects: "Qoʻshish uchun loyihalar yoʻq."
-    updateCoverError: "Studiya muqovasini yangilashda nimadir xato ketdi."
     join: "Qoʻshilish"
     leave: "Chiqish"
-    report: "Shikoyat qilish"
     pending: "Kutilmoqda"
     decline: "Rad etildi"
     comments:
@@ -1158,7 +838,6 @@ studio:
       add_comment: "%user% izoh qoldirdi."
     members_list:
       title: "Studiya aʼzolari"
-      project_count: "{0} Studiya loyihalari yoʻq |{1} 1 ta studiya loyihasi |]1,Inf] %count% ta studiya loyihasi"
       no_studio_projects: "Studiya loyihalari yoʻq"
       one_studio_project: "1 ta studiya loyihasi"
       n_studio_projects: "%count% ta studiya loyihasi"
@@ -1168,7 +847,6 @@ studio:
       ban_failed: "Bu aʼzoni bloklashda nimadir xato ketdi. Keyinroq urinib koʻr."
       demote_member: "Adminni aʼzoga tushirish"
       demotion_failed: "Bu adminni tushirishda nimadir xato ketdi. Keyinroq urinib koʻr."
-      last_admin: "Bu studiyaning oxirgi adminini tushirib boʻlmaydi."
     join_requests:
       title: "Qoʻshilish soʻrovlari"
       accept: "Qabul qilish"
@@ -1198,7 +876,6 @@ media_library:
   no_results: "Hech narsa topilmadi."
   assets_count: "resurslar"
   view_all: "Hammasini koʻrish"
-  view_all_category: "Barcha %category%ni koʻrish"
   back_to_app: "Ilovaga qaytish"
 snackbar:
   project_not_found: "Soʻralgan loyiha mavjud emas"
@@ -1252,14 +929,6 @@ moderation:
     rate_limited: "Studiya amallarini juda tez bajaryapsan. Iltimos, biroz kut."
   hidden_notice:
     project: "Bu loyiha hamjamiyat shikoyatlari sababli yashirildi."
-    comment: "Bu izoh hamjamiyat shikoyatlari sababli yashirildi."
-    user: "Bu profil hamjamiyat shikoyatlari sababli yashirildi."
     user_own: "Hamjamiyat shikoyatlari sababli hisobing toʻxtatildi. Bu qarorga eʼtiroz bildirishing mumkin."
-    studio: "Bu studiya hamjamiyat shikoyatlari sababli yashirildi."
-  notification:
-    content_hidden: "Sening %content_type% hamjamiyat shikoyatlari sababli yashirildi. Bu qarorga eʼtiroz bildirishing mumkin."
-    appeal_approved: "Eʼtirozing maʼqullandi. Kontenting yana koʻrinadi."
-    appeal_rejected: "Eʼtirozing koʻrib chiqildi va kontentingni yashirish haqidagi qaror oʻz kuchida qoladi."
-    admin_review_needed: "Kontent avtomatik yashirildi va koʻrib chiqishni talab qiladi."
 Reports: "Shikoyatlar"
 members: "aʼzolar"
