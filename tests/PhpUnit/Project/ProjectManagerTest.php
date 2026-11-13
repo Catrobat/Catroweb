@@ -127,6 +127,7 @@ class ProjectManagerTest extends TestCase
     ?ExtractedCatrobatFile $extracted_file = null,
     ?MalwareScanner $malware_scanner = null,
     ?ProjectRepository $program_repository = null,
+    ?NotificationManager $notification_service = null,
   ): ProjectManager {
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
     $program_repository ??= $this->createStub(ProjectRepository::class);
@@ -137,7 +138,7 @@ class ProjectManagerTest extends TestCase
     $app_request = $this->createStub(RequestHelper::class);
     $extension_repository = $this->createStub(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createStub(CatrobatFileSanitizer::class);
-    $notification_service = $this->createStub(NotificationManager::class);
+    $notification_service ??= $this->createStub(NotificationManager::class);
     $security = $this->createStub(Security::class);
 
     if (null === $malware_scanner) {
@@ -258,6 +259,33 @@ class ProjectManagerTest extends TestCase
     yield 'new background import has no address' => [false, null, ''];
     yield 'background update preserves original address' => [true, null, '192.0.2.1'];
     yield 'visitor upload records its new address' => [true, '198.51.100.2', '198.51.100.2'];
+  }
+
+  public function testARestoreKeepsTheUploadDateAndTellsNoFollower(): void
+  {
+    $owner = new User();
+    $owner->addFollower(new User());
+    $existing = (new Project())->setUser($owner)->setUploadedAt(new \DateTime('2025-12-22 10:58:18'));
+    $repository = $this->createStub(ProjectRepository::class);
+    $repository->method('findOneBy')->willReturn($existing);
+    $entity_manager = $this->createStub(EntityManager::class);
+    $entity_manager->method('persist')->willReturnCallback(static function (Project $project): void {
+      $project->setId('1');
+    });
+    $event_dispatcher = $this->createStub(EventDispatcherInterface::class);
+    $event_dispatcher->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+    $notification_service = $this->createMock(NotificationManager::class);
+    $notification_service->expects($this->never())->method('addNotification');
+
+    $project = $this->createProjectManagerWithMocks(
+      entity_manager: $entity_manager,
+      event_dispatcher: $event_dispatcher,
+      program_repository: $repository,
+      notification_service: $notification_service,
+    )->addProject(new AddProjectRequest($owner, $this->request->getProjectFile(), restore: true));
+
+    $this->assertInstanceOf(Project::class, $project);
+    $this->assertSame('2025-12-22 10:58:18', $project->getUploadedAt()->format('Y-m-d H:i:s'));
   }
 
   /**
