@@ -88,13 +88,12 @@ class SanitizeExistingContentCommand extends Command
       $select_cols = implode(', ', array_merge([$pk], $columns));
       if (null === $lastId) {
         $rows = $this->connection->fetchAllAssociative(
-          "SELECT {$select_cols} FROM {$table} ORDER BY {$pk} LIMIT ?",
-          [self::BATCH_SIZE],
+          "SELECT {$select_cols} FROM {$table} ORDER BY {$pk} LIMIT ".self::BATCH_SIZE,
         );
       } else {
         $rows = $this->connection->fetchAllAssociative(
-          "SELECT {$select_cols} FROM {$table} WHERE {$pk} > ? ORDER BY {$pk} LIMIT ?",
-          [$lastId, self::BATCH_SIZE],
+          "SELECT {$select_cols} FROM {$table} WHERE {$pk} > ? ORDER BY {$pk} LIMIT ".self::BATCH_SIZE,
+          [$lastId],
         );
       }
 

@@ -32,7 +32,12 @@ class SanitizeExistingContentCommandTest extends KernelTestCase
 
       return 0;
     });
-    $connection->method('fetchAllAssociative')->willReturn([]);
+    $batches = [];
+    $connection->method('fetchAllAssociative')->willReturnCallback(static function (string $sql, array $params = []) use (&$batches): array {
+      $batches[] = [$sql, $params];
+
+      return [];
+    });
 
     $sanitizer = new TextSanitizer($this->createStub(RequestStack::class), dirname(__DIR__, 4).'/config/moderation/wordlists');
     $tester = new CommandTester(new SanitizeExistingContentCommand($sanitizer, $connection, $entity_manager));
@@ -45,5 +50,12 @@ class SanitizeExistingContentCommandTest extends KernelTestCase
       'SELECT COUNT(*) FROM studio',
       'SELECT COUNT(*) FROM fos_user',
     ], $queried);
+
+    // LIMIT must be a literal: DBAL binds positional params as strings, and MariaDB rejects LIMIT '1000'.
+    foreach ($batches as [$sql, $params]) {
+      $this->assertStringEndsWith('LIMIT 1000', $sql);
+      $this->assertSame([], $params);
+    }
+    $this->assertCount(4, $batches);
   }
 }
