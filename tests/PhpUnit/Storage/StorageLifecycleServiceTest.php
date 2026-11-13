@@ -255,13 +255,34 @@ class StorageLifecycleServiceTest extends TestCase
     self::assertCount(1, $table);
   }
 
+  public function testDeletesLostScratchImportWithoutWaitingForANotice(): void
+  {
+    $table = [$this->createLostFilesProjectStub('lost', hasMissingFiles: true, scratchId: 123)];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false)->deleteExpiredProjects();
+
+    self::assertSame(1, $result['deleted']);
+    self::assertSame([], $table);
+  }
+
+  public function testKeepsIntactScratchImport(): void
+  {
+    $table = [$this->createLostFilesProjectStub('intact', hasMissingFiles: false, scratchId: 123)];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false)->deleteExpiredProjects();
+
+    self::assertSame(0, $result['deleted']);
+    self::assertCount(1, $table);
+  }
+
   /**
    * An active project that normal retention keeps for a year.
    */
-  private function createLostFilesProjectStub(string $id, bool $hasMissingFiles, string $uploadedAt = '-30 days'): Project
+  private function createLostFilesProjectStub(string $id, bool $hasMissingFiles, string $uploadedAt = '-30 days', ?int $scratchId = null): Project
   {
     $project = $this->createStub(Project::class);
     $project->method('getId')->willReturn($id);
+    $project->method('getScratchId')->willReturn($scratchId);
     $project->method('hasMissingFiles')->willReturn($hasMissingFiles);
     $project->method('getDownloads')->willReturn(100);
     $project->method('getVisible')->willReturn(true);

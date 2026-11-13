@@ -298,8 +298,10 @@ class StorageLifecycleService
 
         // Files still lost and the owner was told long enough ago to re-upload: delete regardless of tier.
         // A notice from before the last upload is about an earlier loss and does not count.
+        // A lost Scratch import goes at once: opening it on Scratch converts it again.
         $noticed_at = $lost_files_due_ids[$project->getId() ?? ''] ?? null;
-        $lost_files_due = $project->hasMissingFiles() && null !== $noticed_at && $noticed_at >= $project->getUploadedAt();
+        $lost_files_due = $project->hasMissingFiles()
+          && (null !== $project->getScratchId() || (null !== $noticed_at && $noticed_at >= $project->getUploadedAt()));
         if (!$lost_files_due) {
           $anchor = $this->getAnchorDate($project, $tier);
           $expiry = (clone $anchor)->modify('+'.$retention_days.' days');
