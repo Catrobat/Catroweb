@@ -310,11 +310,19 @@ class ProjectManager
       $filesystem->remove($backup_path);
     }
 
-    // A re-upload restores a project whose files were lost: show it again right away.
-    if ($project->hasMissingFiles()) {
-      $project->setHasMissingFiles(false);
-      $this->entity_manager->flush();
-    }
+    // A re-upload restores a project whose files were lost: show it again right away. The flush updates the
+    // search index; the DQL update covers the detector flagging the row after this request loaded the entity.
+    $project->setHasMissingFiles(false);
+    $this->entity_manager->flush();
+    $this->entity_manager->createQueryBuilder()
+      ->update(Project::class, 'p')
+      ->set('p.has_missing_files', ':false')
+      ->where('p.id = :id')
+      ->setParameter('false', false)
+      ->setParameter('id', $project_id)
+      ->getQuery()
+      ->execute()
+    ;
 
     $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));
     $this->notifyFollower($project);

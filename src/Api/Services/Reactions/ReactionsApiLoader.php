@@ -23,7 +23,8 @@ class ReactionsApiLoader extends AbstractApiLoader
   {
     $project = $this->project_manager->find($id);
 
-    if (!$project instanceof Project || $this->project_manager->isHiddenFromCurrentMinor($project)) {
+    if (!$project instanceof Project || $this->project_manager->isHiddenFromCurrentMinor($project)
+      || $this->project_manager->isHiddenBecauseFilesAreMissing($project)) {
       return null;
     }
 

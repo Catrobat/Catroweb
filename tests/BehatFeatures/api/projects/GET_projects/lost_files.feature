@@ -52,3 +52,12 @@ Feature: Projects whose files were lost are hidden from everyone but their owner
     Given I use a valid JWT Bearer token for "Owner"
     When I request "GET" "/api/projects/2"
     Then the response status code should be "200"
+
+  Scenario: Only the owner can read the reactions of a project with lost files
+    Given I use a valid JWT Bearer token for "Stranger"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I request "GET" "/api/projects/2/reactions"
+    Then the response status code should be "404"
+    Given I use a valid JWT Bearer token for "Owner"
+    When I request "GET" "/api/projects/2/reactions"
+    Then the response status code should be "200"

@@ -234,6 +234,17 @@ class StorageLifecycleServiceTest extends TestCase
     self::assertCount(1, $table);
   }
 
+  public function testKeepsProjectLostAgainAfterARestoreUntilItIsNoticedAgain(): void
+  {
+    // Notified 20 days ago, re-uploaded 5 days ago, flagged again since: the old notice is about the earlier loss.
+    $table = [$this->createLostFilesProjectStub('lost', hasMissingFiles: true, uploadedAt: '-5 days')];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false, notices: [$this->createNotice('lost', '-20 days')])->deleteExpiredProjects();
+
+    self::assertSame(0, $result['deleted']);
+    self::assertCount(1, $table);
+  }
+
   public function testKeepsProjectWithLostFilesWhoseOwnerWasNeverNotified(): void
   {
     $table = [$this->createLostFilesProjectStub('lost', hasMissingFiles: true)];
@@ -247,7 +258,7 @@ class StorageLifecycleServiceTest extends TestCase
   /**
    * An active project that normal retention keeps for a year.
    */
-  private function createLostFilesProjectStub(string $id, bool $hasMissingFiles): Project
+  private function createLostFilesProjectStub(string $id, bool $hasMissingFiles, string $uploadedAt = '-30 days'): Project
   {
     $project = $this->createStub(Project::class);
     $project->method('getId')->willReturn($id);
@@ -255,7 +266,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project->method('getDownloads')->willReturn(100);
     $project->method('getVisible')->willReturn(true);
     $project->method('getUser')->willReturn($this->createStub(User::class));
-    $project->method('getUploadedAt')->willReturn(new \DateTime('-1 day'));
+    $project->method('getUploadedAt')->willReturn(new \DateTime($uploadedAt));
     $project->method('getName')->willReturn('Lost Project');
 
     return $project;

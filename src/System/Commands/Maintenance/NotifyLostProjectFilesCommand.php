@@ -17,8 +17,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * One-off: tells every owner of projects flagged has_missing_files (by catrobat:workflow:detect_broken_projects,
- * which must have run first) to re-upload them. Each project is announced once: re-running only notifies about
- * projects not listed in an earlier notice. StorageLifecycleService deletes projects still without files
+ * which must have run first) to re-upload them. Re-running only announces projects that no notice since their last
+ * upload lists. StorageLifecycleService deletes projects still without files
  * LOST_FILES_GRACE_DAYS after their notice.
  */
 #[AsCommand(
@@ -27,6 +27,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class NotifyLostProjectFilesCommand extends Command
 {
+  /** Keeps the JSON in the notice's TEXT column well below its 64 KB limit. */
+  private const int MAX_PROJECTS_PER_NOTICE = 200;
+
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
   ) {
@@ -45,17 +48,13 @@ class NotifyLostProjectFilesCommand extends Command
     $io = new SymfonyStyle($input, $output);
     $dry_run = (bool) $input->getOption('dry-run');
 
-    $already_notified = [];
-    /** @var ProjectFilesLostNotification $notice */
-    foreach ($this->entity_manager->getRepository(ProjectFilesLostNotification::class)->findAll() as $notice) {
-      foreach (array_keys($notice->getProjects()) as $project_id) {
-        $already_notified[$project_id] = true;
-      }
-    }
+    $latest_notice = ProjectFilesLostNotification::latestNoticePerProject(
+      $this->entity_manager->getRepository(ProjectFilesLostNotification::class)->findAll()
+    );
 
-    /** @var list<array{id: string, name: string, user_id: string}> $rows */
+    /** @var list<array{id: string, name: string, uploaded_at: \DateTimeInterface, user_id: string}> $rows */
     $rows = $this->entity_manager->createQueryBuilder()
-      ->select('p.id', 'p.name', 'IDENTITY(p.user) AS user_id')
+      ->select('p.id', 'p.name', 'p.uploaded_at', 'IDENTITY(p.user) AS user_id')
       ->from(Project::class, 'p')
       ->where('p.has_missing_files = true')
       ->andWhere('p.user IS NOT NULL')
@@ -67,20 +66,24 @@ class NotifyLostProjectFilesCommand extends Command
     /** @var array<string, array<string, string>> $projects_by_owner */
     $projects_by_owner = [];
     foreach ($rows as $row) {
-      if (!isset($already_notified[(string) $row['id']])) {
-        $projects_by_owner[(string) $row['user_id']][(string) $row['id']] = (string) $row['name'];
+      $id = (string) $row['id'];
+      // A notice from before the last upload was about an earlier loss: announce this one again.
+      if (!isset($latest_notice[$id]) || $latest_notice[$id] < $row['uploaded_at']) {
+        $projects_by_owner[(string) $row['user_id']][$id] = (string) $row['name'];
       }
     }
 
     foreach ($projects_by_owner as $user_id => $projects) {
       $io->writeln(sprintf('%s: %d project(s)', $user_id, count($projects)));
       $user = $dry_run ? null : $this->entity_manager->find(User::class, $user_id);
-      if ($user instanceof User) {
-        $this->entity_manager->persist(new ProjectFilesLostNotification($user, $projects));
+      if (!$user instanceof User) {
+        continue;
       }
-    }
 
-    if (!$dry_run) {
+      foreach (array_chunk($projects, self::MAX_PROJECTS_PER_NOTICE, true) as $chunk) {
+        $this->entity_manager->persist(new ProjectFilesLostNotification($user, $chunk));
+      }
+      // Per owner: a failure keeps the notices already sent, and a re-run sends the rest.
       $this->entity_manager->flush();
     }
 

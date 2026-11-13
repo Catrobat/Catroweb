@@ -18,7 +18,7 @@ To move storage to another disk, move the data and update the last symlink. Path
 
 The `.catrobat` zip is only a cache, rebuilt from the extracted directory. `catrobat:workflow:detect_broken_projects` (cron) sets `has_missing_files` when a project has neither a zip nor an extracted `code.xml`, and clears it once files are back; a re-upload clears it right away. Flagged projects are hidden from everyone but their owner and admins (lists, search, featured, studios, detail page), without touching `visible`.
 
-`catrobat:projects:notify-lost-files [--dry-run]` is a one-off: run the detector first, then it sends each affected owner one in-app notice listing their projects (re-runs only announce projects not in an earlier notice). `catrobat:storage:lifecycle` deletes a project still flagged 14 days after its notice. The detector's bulk update bypasses the search index: run `fos:elastica:populate` after it so search hides flagged projects too.
+`catrobat:projects:notify-lost-files [--dry-run]` is a one-off: run the detector first, then it sends each affected owner one in-app notice listing their projects (re-runs only announce projects that no notice since their last upload lists). `catrobat:storage:lifecycle` deletes a project still flagged 14 days after such a notice. The detector re-indexes the projects whose flag it changed; run `fos:elastica:populate` once after deploying the new `has_missing_files` search field.
 
 ## Backup and restore
 

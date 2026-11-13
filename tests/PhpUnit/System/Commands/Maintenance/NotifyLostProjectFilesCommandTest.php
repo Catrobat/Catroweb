@@ -24,12 +24,18 @@ class NotifyLostProjectFilesCommandTest extends TestCase
   /** @var list<ProjectFilesLostNotification> notices persisted so far (the "table") */
   private array $notices = [];
 
-  /** @var list<array{id: string, name: string, user_id: string}> */
-  private array $broken_rows = [
-    ['id' => 'p1', 'name' => 'Alpha', 'user_id' => 'u1'],
-    ['id' => 'p2', 'name' => 'Beta', 'user_id' => 'u1'],
-    ['id' => 'p3', 'name' => 'Gamma', 'user_id' => 'u2'],
-  ];
+  /** @var list<array{id: string, name: string, uploaded_at: \DateTime, user_id: string}> */
+  private array $broken_rows;
+
+  #[\Override]
+  protected function setUp(): void
+  {
+    $this->broken_rows = [
+      $this->row('p1', 'Alpha', 'u1'),
+      $this->row('p2', 'Beta', 'u1'),
+      $this->row('p3', 'Gamma', 'u2'),
+    ];
+  }
 
   public function testCreatesOneNoticePerOwnerListingTheirProjects(): void
   {
@@ -62,11 +68,43 @@ class NotifyLostProjectFilesCommandTest extends TestCase
   public function testOnlyAnnouncesProjectsMissingFromEarlierNotices(): void
   {
     $this->runCommand();
-    $this->broken_rows[] = ['id' => 'p4', 'name' => 'Delta', 'user_id' => 'u1'];
+    $this->broken_rows[] = $this->row('p4', 'Delta', 'u1');
     $this->runCommand();
 
     self::assertCount(3, $this->notices);
     self::assertSame(['p4' => 'Delta'], $this->notices[2]->getProjects());
+  }
+
+  public function testReAnnouncesAProjectLostAgainAfterARestore(): void
+  {
+    $this->runCommand();
+    // p1 was re-uploaded after the notice and has been flagged again since
+    $this->broken_rows[0]['uploaded_at'] = new \DateTime('+1 minute');
+    $this->runCommand();
+
+    self::assertCount(3, $this->notices);
+    self::assertSame(['p1' => 'Alpha'], $this->notices[2]->getProjects());
+  }
+
+  public function testSplitsLargeListsOverSeveralNotices(): void
+  {
+    $this->broken_rows = [];
+    for ($i = 0; $i < 450; ++$i) {
+      $this->broken_rows[] = $this->row('id-'.$i, 'Spiel '.$i.' ä', 'u1');
+    }
+
+    $this->runCommand();
+
+    self::assertSame([200, 200, 50], array_map(static fn (ProjectFilesLostNotification $n): int => count($n->getProjects()), $this->notices));
+    self::assertStringContainsString('ä', $this->notices[0]->getMessage());
+  }
+
+  /**
+   * @return array{id: string, name: string, uploaded_at: \DateTime, user_id: string}
+   */
+  private function row(string $id, string $name, string $user_id): array
+  {
+    return ['id' => $id, 'name' => $name, 'uploaded_at' => new \DateTime('-30 days'), 'user_id' => $user_id];
   }
 
   /**

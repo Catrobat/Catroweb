@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\System\Commands\DBUpdater\CronJobs;
 
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\System\Commands\DBUpdater\CronJobs\DetectBrokenProjectsCommand;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use FOS\ElasticaBundle\Persister\ObjectPersisterInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -29,6 +32,7 @@ class DetectBrokenProjectsCommandTest extends TestCase
     $fs = new Filesystem();
     $fs->dumpFile($this->extract_dir.'extract-only/code.xml', '<program/>');
     $fs->dumpFile($this->extract_dir.'both/code.xml', '<program/>');
+    $fs->dumpFile($this->extract_dir.'restored/code.xml', '<program/>');
   }
 
   #[\Override]
@@ -39,24 +43,29 @@ class DetectBrokenProjectsCommandTest extends TestCase
 
   public function testOnlyProjectsWithoutZipAndWithoutExtractedCodeAreBroken(): void
   {
-    $updates = $this->runCommand(
-      ['zip-only', 'extract-only', 'both', 'nothing'],
+    [$updates, $reindexed] = $this->runCommand(
+      ['zip-only' => false, 'extract-only' => false, 'both' => false, 'nothing' => false, 'restored' => true, 'still-lost' => true],
       zips: ['zip-only', 'both'],
     );
 
     self::assertSame(['nothing'], $updates[':true']);
-    self::assertSame(['zip-only', 'extract-only', 'both'], $updates[':false']);
+    self::assertSame(['restored'], $updates[':false']);
+    self::assertSame(['nothing', 'restored'], $reindexed);
   }
 
   /**
-   * @param list<string> $ids
-   * @param list<string> $zips ids that still have a .catrobat zip
+   * @param array<string, bool> $flags id => current has_missing_files
+   * @param list<string>        $zips  ids that still have a .catrobat zip
    *
-   * @return array<string, list<string>> new flag value (':true'/':false') => ids passed to the update
+   * @return array{array<string, list<string>>, list<string>} new flag value (':true'/':false') => updated ids, and the re-indexed ids
    */
-  private function runCommand(array $ids, array $zips): array
+  private function runCommand(array $flags, array $zips): array
   {
-    $pages = [array_map(static fn (string $id): array => ['id' => $id], $ids), []];
+    $rows = [];
+    foreach ($flags as $id => $flag) {
+      $rows[] = ['id' => (string) $id, 'has_missing_files' => $flag];
+    }
+    $pages = [$rows, []];
     $last_set = '';
     $updates = [];
 
@@ -83,16 +92,35 @@ class DetectBrokenProjectsCommandTest extends TestCase
     });
     $qb->method('getQuery')->willReturn($query);
 
+    $repository = $this->createStub(EntityRepository::class);
+    $repository->method('findBy')->willReturnCallback(function (array $criteria): array {
+      return array_map(function (string $id): Project {
+        $project = $this->createStub(Project::class);
+        $project->method('getId')->willReturn($id);
+
+        return $project;
+      }, $criteria['id']);
+    });
+
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('createQueryBuilder')->willReturn($qb);
+    $em->method('getRepository')->willReturn($repository);
+
+    $reindexed = [];
+    $persister = $this->createStub(ObjectPersisterInterface::class);
+    $persister->method('replaceMany')->willReturnCallback(static function (array $projects) use (&$reindexed): void {
+      foreach ($projects as $project) {
+        $reindexed[] = (string) $project->getId();
+      }
+    });
 
     $file_repository = $this->createStub(ProjectFileRepository::class);
     $file_repository->method('checkIfProjectZipFileExists')->willReturnCallback(static fn (string $id): bool => in_array($id, $zips, true));
 
-    $tester = new CommandTester(new DetectBrokenProjectsCommand($em, $file_repository, $this->extract_dir));
+    $tester = new CommandTester(new DetectBrokenProjectsCommand($em, $file_repository, $this->extract_dir, $persister));
     $tester->execute([]);
     $tester->assertCommandIsSuccessful();
 
-    return $updates;
+    return [$updates, $reindexed];
   }
 }

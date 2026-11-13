@@ -297,7 +297,9 @@ class StorageLifecycleService
         }
 
         // Files still lost and the owner was told long enough ago to re-upload: delete regardless of tier.
-        $lost_files_due = $project->hasMissingFiles() && isset($lost_files_due_ids[$project->getId() ?? '']);
+        // A notice from before the last upload is about an earlier loss and does not count.
+        $noticed_at = $lost_files_due_ids[$project->getId() ?? ''] ?? null;
+        $lost_files_due = $project->hasMissingFiles() && null !== $noticed_at && $noticed_at >= $project->getUploadedAt();
         if (!$lost_files_due) {
           $anchor = $this->getAnchorDate($project, $tier);
           $expiry = (clone $anchor)->modify('+'.$retention_days.' days');
@@ -359,24 +361,19 @@ class StorageLifecycleService
   }
 
   /**
-   * Ids of projects listed in a lost-files notice that is at least LOST_FILES_GRACE_DAYS old.
+   * Projects listed in a lost-files notice that is at least LOST_FILES_GRACE_DAYS old,
+   * mapped to the newest such notice's creation time.
    *
-   * @return array<string, true>
+   * @return array<string, \DateTimeImmutable>
    */
   private function getLostFilesDeletionDueProjectIds(\DateTimeInterface $now): array
   {
     $cutoff = \DateTimeImmutable::createFromInterface($now)->modify('-'.self::LOST_FILES_GRACE_DAYS.' days');
-    $ids = [];
-    /** @var ProjectFilesLostNotification $notice */
-    foreach ($this->entity_manager->getRepository(ProjectFilesLostNotification::class)->findAll() as $notice) {
-      if ($notice->getCreatedAt() <= $cutoff) {
-        foreach (array_keys($notice->getProjects()) as $id) {
-          $ids[$id] = true;
-        }
-      }
-    }
 
-    return $ids;
+    return ProjectFilesLostNotification::latestNoticePerProject(
+      $this->entity_manager->getRepository(ProjectFilesLostNotification::class)->findAll(),
+      $cutoff,
+    );
   }
 
   /**

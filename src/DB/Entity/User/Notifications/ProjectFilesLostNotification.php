@@ -19,7 +19,31 @@ class ProjectFilesLostNotification extends CatroNotification
    */
   public function __construct(User $user, array $projects = [])
   {
-    parent::__construct($user, '', json_encode($projects, JSON_THROW_ON_ERROR), 'project_files_lost');
+    parent::__construct($user, '', json_encode($projects, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE), 'project_files_lost');
+  }
+
+  /**
+   * @param iterable<ProjectFilesLostNotification> $notices
+   *
+   * @return array<string, \DateTimeImmutable> project id => creation time of the newest notice listing it
+   *                                           (only notices created no later than $until count)
+   */
+  public static function latestNoticePerProject(iterable $notices, ?\DateTimeInterface $until = null): array
+  {
+    $latest = [];
+    foreach ($notices as $notice) {
+      $created_at = $notice->getCreatedAt();
+      if (null !== $until && $created_at > $until) {
+        continue;
+      }
+      foreach (array_keys($notice->getProjects()) as $id) {
+        if (!isset($latest[$id]) || $latest[$id] < $created_at) {
+          $latest[$id] = $created_at;
+        }
+      }
+    }
+
+    return $latest;
   }
 
   /**

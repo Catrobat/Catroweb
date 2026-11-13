@@ -27,7 +27,9 @@ class FeaturedBannerRepository extends ServiceEntityRepository
   {
     $qb = $this->createQueryBuilder('fb')
       ->select('fb')
+      ->leftJoin('fb.project', 'p')
       ->where('fb.active = true')
+      ->andWhere('p.id IS NULL OR p.has_missing_files = false')
       ->orderBy('fb.priority', 'DESC')
       ->addOrderBy('fb.id', 'DESC')
       ->setMaxResults($limit)
