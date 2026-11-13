@@ -47,7 +47,7 @@ class LoggerProcessor
   {
     $id = $request->headers->get('X-Request-Id');
 
-    return null !== $id && 1 === preg_match('/^[\w.-]{1,128}$/', $id) ? $id : null;
+    return null !== $id && 1 === preg_match('/^[\w.-]{1,128}\z/', $id) ? $id : null;
   }
 
   private function getSessionUser(): string

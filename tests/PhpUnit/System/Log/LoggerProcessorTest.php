@@ -32,6 +32,7 @@ class LoggerProcessorTest extends KernelTestCase
   {
     $this->assertArrayNotHasKey('request_id', $this->process([])->extra);
     $this->assertArrayNotHasKey('request_id', $this->process(['HTTP_X_REQUEST_ID' => 'a b|c'])->extra);
+    $this->assertArrayNotHasKey('request_id', $this->process(['HTTP_X_REQUEST_ID' => "abc\n"])->extra);
   }
 
   public function testNoRequestLeavesRecordUntouched(): void
