@@ -200,12 +200,6 @@
   margin-block-end: 0;
 }
 
-#sign-app-ellipsis-container .top-app-bar-btn-options {
-  display: block;
-  padding: 0.5em 1em;
-  text-align: left;
-}
-
 .top-app-bar__options-anchor {
   position: relative;
 }

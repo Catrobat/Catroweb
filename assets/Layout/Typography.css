@@ -74,17 +74,6 @@ h6,
   letter-spacing: 0.15px;
 }
 
-.subtitle-1 {
-  font-size: 0.9rem;
-  letter-spacing: 0.15px;
-}
-
-.subtitle-2 {
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.1px;
-}
-
 .subtext {
   font-size: 0.75rem;
 }
@@ -96,18 +85,6 @@ h6,
 
 .text-dark {
   color: #212121;
-}
-
-.text-medium {
-  color: #616161 !important;
-}
-
-.text-light {
-  color: #737373 !important;
-}
-
-.text-bold {
-  font-weight: 700;
 }
 
 .text-center {

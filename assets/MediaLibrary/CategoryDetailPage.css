@@ -223,12 +223,3 @@
     height: 96px;
   }
 }
-/* thumbsize breakpoints */
-#thumbsize-control {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-#thumbsize-control span {
-  margin-right: 0.5rem;
-}

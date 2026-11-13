@@ -234,13 +234,3 @@
 .notification-skeleton__indicator {
   border-radius: 50% !important;
 }
-
-.notification-header {
-  width: 100%;
-}
-
-.notification-avatar-round {
-  border-radius: 100%;
-  width: 100%;
-  max-width: 50px;
-}

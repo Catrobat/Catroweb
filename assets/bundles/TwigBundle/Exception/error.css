@@ -14,11 +14,6 @@
   width: 80%;
   margin-bottom: 2rem;
 }
-.error-wrapper .error-container .error-img-placeholder {
-  margin-bottom: 0.5rem;
-  color: #c4c4c4;
-  font-size: 1.5rem;
-}
 .error-wrapper .error-container .error-code {
   color: #c4c4c4;
 }

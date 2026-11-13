@@ -107,10 +107,6 @@
   min-height: 50vh;
 }
 
-.follower-tabs {
-  margin-top: -1rem;
-}
-
 /* NEW MY PROFILE PAGE */
 .profile__basic-info {
   display: flex;

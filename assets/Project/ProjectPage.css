@@ -125,18 +125,9 @@
   animation: skeleton-pulse 1.5s ease-in-out infinite;
   pointer-events: none;
 }
-.skeleton--thumbnail {
-  aspect-ratio: 1;
-  width: 100%;
-  border-radius: 10%;
-}
 .skeleton--text {
   height: 1em;
   display: inline-block;
-}
-.skeleton--title {
-  height: 1.5em;
-  width: 60%;
 }
 .skeleton--button {
   height: 48px;
@@ -182,11 +173,6 @@
   align-items: center;
   justify-content: center;
   font-size: 16px;
-}
-
-.text-area-empty {
-  border-color: #f00 !important;
-  border-width: medium;
 }
 
 .show {
@@ -346,21 +332,6 @@ table td:nth-child(1) {
   width: 45px;
 }
 
-.popup-div {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 9999;
-  width: 320px;
-  height: 200px;
-  padding: 20px 5px;
-  margin: -125px 0 0 -160px;
-  font-size: 15px;
-  text-align: center;
-  background-color: #fff;
-  border: none;
-}
-
 .popup-bg {
   position: fixed;
   top: 0;
@@ -369,12 +340,6 @@ table td:nth-child(1) {
   height: 100%;
   background-color: #000;
   opacity: 0.5;
-}
-
-.btn-close-popup {
-  min-width: 50%;
-  min-height: 10px !important;
-  margin-top: 10px;
 }
 
 .name-wrapper {
@@ -708,53 +673,6 @@ input[type='number'] {
   appearance: textfield;
 }
 
-.center.row .button-show-more,
-.center.row .button-show-less {
-  display: none;
-}
-
-.pc-start-button,
-.pc-start-button:active {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 300px;
-  padding: 0;
-  margin: 0;
-  color: #a9dcf1;
-  cursor: pointer;
-  background: none;
-  border: medium none;
-  outline: medium none;
-  fill: #a9dcf1;
-}
-
-.pc-start-button svg {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 50%;
-  padding: 0;
-  margin: 0;
-}
-
-.pc-start-button:hover {
-  fill: #fff;
-}
-
-.pc-start-button:active {
-  padding: 0;
-  margin: 0;
-  fill: #17a5b8;
-}
-
-.pc-start-button:disabled {
-  cursor: default;
-  fill: #a5a5a5;
-}
-
 #tag-extension-container {
   margin-bottom: 1rem;
 }
@@ -834,14 +752,6 @@ input[type='number'] {
 
 .nav-tabs * {
   color: var(--bs-body-color);
-}
-
-.sign-project-help {
-  top: 0;
-  right: 0;
-  display: none;
-  color: var(--bs-body-color);
-  border-radius: 0;
 }
 
 .ellipsis-modal-btn {
@@ -926,61 +836,6 @@ input[type='number'] {
   align-items: center;
 }
 
-.years-validity-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.years-validity-container label {
-  margin: 0;
-  opacity: 1;
-}
-.years-validity-container input:focus {
-  border: 1px solid #ccc;
-}
-
-.years-validity-text {
-  margin-left: 2%;
-  font-size: 1rem;
-}
-
-.spinner-container {
-  display: flex;
-  align-items: center;
-  height: 55px;
-  padding-right: 0 !important;
-}
-.spinner-container input {
-  display: inline-block;
-  max-width: 60px;
-  text-align: center;
-  border-width: 1px 0;
-  border-radius: 0;
-}
-.spinner-container {
-  /* Chrome, Safari, Edge, Opera */
-}
-.spinner-container input::-webkit-outer-spin-button,
-.spinner-container input::-webkit-inner-spin-button {
-  margin: 0;
-  appearance: none;
-}
-.spinner-container {
-  /* Firefox */
-}
-.spinner-container input[type='number'] {
-  appearance: textfield;
-}
-.spinner-container button {
-  display: inline-block;
-  width: 40px;
-  font-size: 1.1rem;
-  color: white;
-  background-color: var(--primary-bg, var(--primary));
-  border-width: 0;
-  border-radius: 0;
-}
-
 .full-screen {
   position: fixed;
   top: 50px;
@@ -1041,29 +896,6 @@ input[type='number'] {
   input:valid ~ label {
     left: 6% !important;
   }
-  .form-input-left {
-    padding: 0 1% 0 5% !important;
-  }
-  .form-input-left label {
-    left: 14%;
-  }
-  .form-input-left input:focus ~ label,
-  .form-input-left input:valid ~ label {
-    left: 12% !important;
-  }
-  .form-input-right {
-    padding: 0 5% 0 1% !important;
-  }
-  .form-input-right span {
-    right: 12% !important;
-  }
-  .form-input-right input:focus ~ label,
-  .form-input-right input:valid ~ label {
-    left: 4% !important;
-  }
-  .years-validity-container {
-    justify-content: flex-end;
-  }
 }
 .upload-project-image {
   position: absolute;
@@ -1073,9 +905,6 @@ input[type='number'] {
   height: 50px;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
-}
-.upload-project-image .button-show-ajax {
-  margin: 0 auto;
 }
 .upload-project-image input {
   position: absolute;

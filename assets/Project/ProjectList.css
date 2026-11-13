@@ -60,9 +60,6 @@
 .project-list {
   margin-bottom: 1rem;
 }
-.project-list .projects-spinner-container {
-  display: none;
-}
 .project-list.loading .project-list__wrapper {
   animation: spinner;
   animation-fill-mode: both;
@@ -542,11 +539,6 @@
   font-size: 0.8rem;
 }
 
-.no-projects {
-  margin-bottom: 25px;
-  text-align: center;
-}
-
 .projects {
   display: flex;
   flex-flow: row wrap;
@@ -587,11 +579,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: top;
-}
-.projects > .project > a .project-name .project-thumb-icon,
-.projects > .project > a > div .project-thumb-icon {
-  margin-right: 0.3em;
-  font-size: 16px;
 }
 
 .projects-list-item--dropdown-divider {
