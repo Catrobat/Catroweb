@@ -647,9 +647,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openapitools/openapi-generator-cli@npm:^2.42.0":
-  version: 2.42.0
-  resolution: "@openapitools/openapi-generator-cli@npm:2.42.0"
+"@openapitools/openapi-generator-cli@npm:^2.42.1":
+  version: 2.42.1
+  resolution: "@openapitools/openapi-generator-cli@npm:2.42.1"
   dependencies:
     "@inquirer/select": "npm:1.3.3"
     "@nestjs/axios": "npm:4.0.1"
@@ -670,7 +670,7 @@ __metadata:
     tslib: "npm:2.8.1"
   bin:
     openapi-generator-cli: main.js
-  checksum: 10c0/3763a60cc58258ac27dac08aabb7be8fb19bbd16f721998f546e041341e47263f4f82a039fc6ce1ea5848b34e06bf0c71a1192f6df77f1e517a24bbacbfff363
+  checksum: 10c0/fb1935f7b3ce859a86cda38f86e0efd485af1acb72aad2b60137a3d6cec8cc34adf954c120b6a7bcfd8c5eb2b73616494080a117ceb6c9110ad2822ff4a752d2
   languageName: node
   linkType: hard
 
@@ -1156,7 +1156,7 @@ __metadata:
     "@hotwired/stimulus": "npm:^3.2.2"
     "@material/top-app-bar": "npm:^14.0.0"
     "@material/web": "npm:^2.5.0"
-    "@openapitools/openapi-generator-cli": "npm:^2.42.0"
+    "@openapitools/openapi-generator-cli": "npm:^2.42.1"
     "@popperjs/core": "npm:^2.11.8"
     analytics: "npm:^0.8.19"
     auto-changelog: "npm:^2.7.0"
