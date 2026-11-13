@@ -8,19 +8,12 @@ meta.og.description.login: Hyr për të ndarë projektet e tua Catrobat me komun
 meta.og.title.register: Krijo një llogari Catrobat
 meta.og.description.register: Bashkohu me komunitetin Catrobat dhe fillo të ndash projektet e tua krijuese që sot.
 meta.og.description.profile: '%username% në Catrobat – shfleto projektet dhe arritjet e tij/saj.'
-localLanguage: Anglisht
 username: Përdoruesi
 password: Fjalëkalimi
-createNewPassword: Krijo një Fjalëkalim të ri
-accountSettings: Konfigurimet e llogarisë
 email: Email
-aboutPocketCode: Për Pocket Code
 about: Rreth Catrobat
-education: Edukimi
 chat: Biseda dhe Forume
-privacyGuide: Udhëzues për ndërgjegjësimin mbi privatësinë
 others: Të Tjera
-tutorials: Ndihmë
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Si e krijove këtë projekt? A përdore ide, skripte
 projectImportedFromScratch: Ky projekt u importua nga MIT Scratch. Mund ta shikosh projektin origjinal
 scratchImportedProjectLinkHere: këtu.
 country: Shteti
-loginText: lidhu
 privacyPolicy: Privatësia
-imprint: Impresum
 projectDetails: Detajet
 somethingWentWrong: 'Uuups, diçka shkoi keq.'
 accountNotVerified: 'Të lutem sigurohu që je i identifikuar dhe që emaili i llogarisë tënde është verifikuar.'
@@ -55,36 +46,28 @@ accountSuspended: 'Llogaria jote është pezulluar për shkak të raportimeve ng
 doesNotExist: 'Burimi i kërkuar nuk ekziston'
 pleaseTryAgain: 'Të lutem provo përsëri!'
 tryAgainButton: 'Provo përsëri'
-oldVersionError: 'Të lutem merr versionin më të ri të Pocket Code!'
 more: 'më shumë'
 less: 'më pak'
 show-more: 'Shfaq më shumë'
-show-less: 'Shfaq më pak'
 more-information: 'Më shumë informacion'
 less-information: 'Më pak të dhëna'
 ok: OK
-clickToDownloadProgram: 'Për të shkarkuar programin "shembull" kliko %link_start% këtu %link_end%.'
-registrationError: 'Përdoruesi ose adresa E-mail janë në përdorim.'
 notifications: 'Lajmërimet'
 allNotifications: 'Të gjitha'
 FollowersNotifications: 'Ndjekësit'
 LikeNotifications: 'Reagimet'
 CommentNotifications: 'Komentet'
 RemixNotifications: 'Ripërzierjet'
-wellDone: "Të lumtë!"
 done: "U krye!"
 notificationsReadMessage: "Duket se nuk ke asnjë njoftim."
-confirmMessage: "Po, fshije"
 cancelMessage: "Anulo"
 notificationsUnauthorizedError: "E pamundur të autorizohet përdoruesi"
 notificationsClearError: "Njoftimet nuk mund të shënoheshin si të lexuara!"
-pleaseWait: "Të lutem prit..."
 projects: "Programet"
 users: "Përdoruesit"
 studios: "Studiot"
 oauthPopUpTitle: "të dhënat e identifikimit të llogarisë së jashtme"
 oauthInfo: 'Sapo përdore një llogari të jashtme për t''u identifikuar. Krijuam një emër përdoruesi të rastësishëm për ty. Nëse dëshiron të ndryshosh emrin e përdoruesit ose të krijosh një fjalëkalim të ri për llogarinë tënde, të lutem shko te faqja e profilit tënd.'
-oauthHere: "këtu"
 statistics: "Statistikat"
 languageSelection: "Zgjedhja e gjuhës"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'E errët'
   dark_description: 'Pamje e errët'
   apply: 'Apliko'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Cilat projekte rekomandohen këtu?'
-      description: 'Sa më shumë reagime (Gisht lart, Buzëqeshje ...) të marrë projekti yt, aq më lart shfaqet në këtë listë.'
 follower:
   follows: Duke ndjekur
   followers: Ndjekësit
   follow: Ndiq
-  username: Përdorues
   followsMe: Më ndjek
   noFollowing: Aktualisht nuk po ndjek askënd.
   noFollowers: Aktualisht nuk ke asnjë ndjekës.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Je i sigurt që dëshiron të anulosh ndjekjen e këtij përdoruesi?"
   unfollowButton: "Mos ndiq më %username%"
 project:
-  welcome:
-    title: Mirë se vjen në %theme% të Catrobat
-    title_mindstorms: Mirë se vjen në faqen e Catrobat për Mindstorms EV3 dhe NXT
-    subtitle: Krijo histori, lojëra dhe më shumë...
-    subtitle_embroidery: Qëndis modelet e tua në bluza, çanta, pantallona ose në mbështjellësen e telefonit!
-    subtitle_mindstorms: Krijo projektet e tua me robotët e tu Lego Mindstorms EV3 dhe NXT
-    download: Shkarko aplikacionin
-    statistics: Më shumë statistika
   featured: Të veçuara
   open: Hape
   download: Shkarko
@@ -148,9 +117,6 @@ project:
       retention: Projektet e ngarkuara hiqen automatikisht pas një periudhe pasiviteti. Hyr rregullisht ose merr shkarkime për projektin tënd që të zgjatet ruajtja e tij.
       protection: Projektet veçanërisht të mira ose të njohura mund të mbrohen nga moderatorët ndaj fshirjes automatike.
   example: Shembuj
-  newest: Projektet më të reja
-  recommended: Projekte të rekomanduara
-  scratchremixes: Ripërzierje nga Scratch
   noProjects: Aktualisht nuk ka projekte.
   shareAction: Ndarje
   deleteAction: Fshi projektin
@@ -190,17 +156,10 @@ project:
     Veprimet e tua nuk mund të rikthehen!
     Po, fshije!
     Anulo
-  tooLongName: Emri i projektit është shumë i gjatë!
-  tooLongDescription: Përshkrimi i projektit është shumë i gjatë!
-  tooLongCredits: Shënimet dhe falënderimet e projektit janë shumë të gjata!
   my_projects: Programet e mia
   trending: Projekte në trend
   popular: Projekte të njohura
-  most:
-    viewed: Më të shikuarat
-    downloaded: Më të shkarkuarat
   random: Projekte të rastësishme
-  related: Projekte të ngjashme
   browse:
     explore: 'Eksploro projektet'
     no_projects: "Nuk ke krijuar ende asnjë projekt"
@@ -214,36 +173,14 @@ project:
     tooltip: 'Projektet hiqen automatikisht pas një periudhe pasiviteti. Merr më shumë shkarkime ose hyr rregullisht që të zgjatet ruajtja.'
     tooltip_protected: 'Ky projekt është i mbrojtur dhe nuk do të fshihet automatikisht.'
   downloads: '%downloads% shkarkime'
-  sample: Projekte shembull
   views: '%views% shikime'
   likes:
     likersTitle: "Njerëzit që reaguan ndaj këtij projekti"
     all: "Të gjitha"
-  remixes: '{0}0 ripërzierje |{1}1 ripërzierje |]1,Inf]%remixes% ripërzierje'
-  newRemixesNotificationTitle: '|{1}"%programName%" ka 1 ripërzierje të re: |]1,Inf] "%programName%" ka %remixes% ripërzierje të reja:'
-  submitted: Projektet e dorëzuara
-  uploaded: Projektet e ngarkuara
-  reportAsInappropriate: Raporto si të papërshtatshëm
-  reportProgram: Raporto projektin
   languageVersion: 'Versioni i gjuhës Catrobat: %languageVersion%'
-  reportLoginText: Të lutem %login% për ta raportuar këtë projekt.
-  reportDialogHeader: Pse dëshiron ta raportosh këtë projekt?
-  reportDialogReason: Shkruaj një arsye
-  reportRadioButtonInappropriate: Është i papërshtatshëm
-  reportRadioButtonCopyright: Shkelje e të drejtave të autorit
-  reportRadioButtonSpam: Është spam
-  reportRadioButtonDislike: Nuk më pëlqen
-  reportOwnProgram: Nuk mund ta raportosh projektin tënd.
-  reportAlready: E ke raportuar tashmë këtë projekt.
-  reportDone: E raportove këtë projekt!
   updateAppHeaderDownload: Shkarkimi nuk është i mundur
   updateAppTextDownload: Të lutem përditëso aplikacionin në versionin më të ri. Ki parasysh që jo të gjitha veçoritë e Android janë ende të disponueshme në iOS.
-  updateAppTextDownloadApk: Shkarkimi i APK-së aktualisht është i disponueshëm vetëm në Android dhe jo në iOS.
-  updateAppHeader: Përditëso aplikacionin
-  updateAppText: Të lutem përditëso aplikacionin në versionin më të ri.
-  btnClosePopup: OK
   checkout_this_project: Shiko këtë projekt Catrobat
-  show_more: Shfaq më shumë
   comments: Komentet
   send: Dërgo
   delete: Fshije
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: U fshi
   noAdminRights: Nuk ke të drejta administratori. Të lutem hyr si administrator.
   editProject: Modifiko projektin
-  closeProjectEditor: Mbyll redaktuesin e projektit
   closeEditorPrompt: Dëshiron t'i ruash ndryshimet?
   btnDiscard: Anulo
   addComment: Shkruaj një koment
@@ -263,8 +199,6 @@ project:
   smile: Buzëqeshje!
   love: Dashuri!
   wow: Uaaau!
-  linkTitle: Link
-  link: Kopjo linkun e projektit në kujtesën e fragmenteve
   reactionsText: Reagimet
   downloadErrorText: Ndodhi një gabim gjatë shkarkimit të projektit. Të lutem provo përsëri më vonë.
   downloadStartText: Shkarkimi ka filluar...
@@ -284,11 +218,8 @@ project:
   translations: Përkthimet
   createTranslation: Krijo përkthim
   deletedComment: '**U fshi**'
-  replyLabel: përgjigje
-  repliesLabel: përgjigjet
   notForKids: Jo i sigurt për fëmijë
 remixGraph:
-  title: Ripërzierjet
   showRemixGraph: 'Ripërziej grafikun'
   by: 'nga'
   open: 'Hape'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Nuk është i disponueshëm'
   projectUnknownUser: 'Përdorues i panjohur'
 noReply: Ky është një mesazh automatik - të lutem mos iu përgjigj drejtpërdrejt këtij emaili.
-accountConfirmation:
-  subject: Konfirmimi i llogarisë tënde Catrobat
-  message: |
-    I dashur %username%.
-    Për të përfunduar aktivizimin e llogarisë tënde - të lutem vizito %confirmationUrl%
-    Ky link mund të përdoret vetëm një herë për të vërtetuar llogarinë tënde.
-    Me përshëndetje të përzemërta,
-    Ekipi yt Catrobat.
-  messageHtml: |
-    <p>
-    I dashur %username%.<br>
-    <br>
-    Për të përfunduar aktivizimin e llogarisë tënde - të lutem kliko <a href="%confirmationUrl%">këtu.</a><br>
-    Ky link mund të përdoret vetëm një herë për të vërtetuar llogarinë tënde.<br>
-    <br>
-    Me përshëndetje të përzemërta,<br>
-    Ekipi yt Catrobat.
-    </p>
 newAccountConfirmation:
   subject: "Verifiko adresën tënde të emailit"
   welcome: "Mirë se vjen në Catrobat!"
@@ -403,63 +316,13 @@ parent:
       ignore: "Nëse nuk e ke kërkuar këtë, mund ta shpërfillësh pa problem këtë email."
 passwordRecovery:
   subject: Rivendosja e fjalëkalimit tënd
-  message: |
-    I dashur %username%.
-    Ke kërkuar të rivendosësh fjalëkalimin tënd në %appplication_url% sepse e ke harruar.
-    Nëse nuk e ke kërkuar këtë, të lutem shpërfille këtë mesazh. Kërkesa do të skadojë dhe do të bëhet e pavlefshme pas 24 orësh.
-    Për të rivendosur fjalëkalimin tënd dhe për të krijuar një të ri, të lutem vizito faqen në vijim: %confirmationUrl%
-    Mund ta përdorësh emrin e përdoruesit dhe fjalëkalimin tënd në çdo kohë për të hyrë në komunitetin %appplication_url%.
-    Për ta bërë këtë, vizito faqen në vijim: %loginPage%
-    Për të ndryshuar detajet e profilit tënd, shko te kjo faqe: %profilePage%
-    Me përshëndetje të përzemërta,
-    Ekipi yt Catrobat.
-  messageHtml: |
-    <p>
-    I dashur %username%.<br>
-    <br>
-    Ke kërkuar të rivendosësh fjalëkalimin tënd në <a href="%appplication_url%">Pocket Code</a> sepse e ke harruar.
-    Nëse nuk e ke kërkuar këtë, të lutem shpërfille. Kërkesa do të skadojë dhe do të bëhet e pavlefshme pas 24 orësh.<br>
-    <br>
-    Për të rivendosur fjalëkalimin tënd dhe për të krijuar një të ri, të lutem kliko <a href="%confirmationUrl%">këtu.</a><br>
-    <br>
-    Mund ta përdorësh emrin e përdoruesit dhe fjalëkalimin tënd në çdo kohë për të hyrë në komunitetin <a href="%appplication_url%">Pocket Code</a>.<br>
-    Për ta bërë këtë, thjesht vizito faqen në vijim: <a href="%loginPage%">Faqja e hyrjes</a><br>
-    Për të ndryshuar detajet e profilit tënd, shko te kjo <a href="%profilePage%">faqe</a>.<br>
-    <br>
-    Me përshëndetje të përzemërta,<br>
-    Ekipi yt Catrobat.
-    </p>
 profile:
   aboutMe: Rreth meje
   currentlyWorkingOn: Aktualisht po punoj për
-  edit: Ndrysho profilin tënd
-  saveChanges: ruaj ndryshimet
   newPass: fjalëkalimi i ri
   repeatPass: përsërit fjalëkalimin
   oldPass: fjalëkalim i vjetër
-  firstEmail: Emaili im i parë
-  secondEmail: Emaili im i dytë
-  myPrograms: Programet e mia
-  follows: Ndjek
-  follower: Ndjekës
-  unfollowUser: Mos e ndiq këtë përdorues! 
-  followUser: Ndiq këtë përdorues!
-  amountOfPrograms: Sasia e projekteve 
-  form:
-    passwordTooShort: Fjalëkalimi i ri duhet të ketë së paku %length% karaktere.
-    passwordTooLong: Fjalëkalimi i ri mund të ketë maximum %length% karaktere.
-    passwordIsUsername: Fjalëkalimi duhet të ndryshojë nga emri i përdoruesit.
-    passwordWrong: Fjalëkalim i gabuar
-    emailNotValid: E-mail adresa nuk eshte valide.
-    emailMissing: Gabim gjatë përditësimit të adresës së emailit. Duhet të kesh së paku një adresë emaili të vlefshme.
-    emailExists: Ky E-mail tashmë ekziston.
-    usernameNotValid: Ky emër përdoruesi nuk është i vlefshëm.
-    usernameMissing: Duhet të kesh një emër përdoruesi.
-    usernameExists: Ky emër përdoruesi ekziston. 
-    usernameContainsEmail: Emri i përdoruesit nuk duhet të përmbajë një adresë emaili
-    submitSuccess: u ruajt!
   reallyDeleteProgram: A dëshiron vërtet ta fshish projektin tënd
-  programsOf: Projektet e
   picture: Fotoja e profilit
   changePicture: Ndrysho foton
   goToScratchProfile: Profili në Scratch 
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: Ndrysho fjalëkalimin
   accountSettings: Konfigurimet e llogarisë
   accountVerification: Verifiko llogarinë
-  account: Llogaria
-  editProfile: Modifiko profilin
-  edit: Modifiko
   done: i përfunduar
-  checkMail: Të është dërguar një email. Të lutem kontrollo postën tënde.
   passwordUpdated: Fjalëkalimi yt u ndryshua me sukses.
-  avatar: Fotografia
-  email: Email
   deleteAccount: Fshi llogarinë
   deleteAccountWarning: |
     Ki kujdes:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: Duke shkarkuar...
   exportDataError: Diçka shkoi keq gjatë eksportimit të të dhënave të tua. Të lutem provo përsëri më vonë.
   exportDataRateLimited: Mund t'i eksportosh të dhënat vetëm një herë në ditë. Të lutem provo përsëri nesër.
-  editAccountSettings: Redakto çdo cilësim te llogarisë
   profileChangeSuccess: Profili yt u ndryshua me sukses.
   unspecifiedError: Diçka nuk funksionoi gjatë ndryshimit të profilit tënd. Të lutem provo përsëri ose na njofto nëse vazhdon të ndodhë!
   verifyAccountText: Do të të dërgojmë një email me një link për të verifikuar llogarinë tënde. Sigurohu të klikosh linkun brenda orës së ardhshme; mund të kërkosh vetëm një email në ditë.
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Të lutem dërgo çdo sugjerim në lidhje me këto kushte të përdorimit te %email-webmaster%'
   version: Versioni 1.3, 4 mars 2014
 search:
-  dotdotdot: Kërkim...
   search: Kërko projekte, përdorues dhe studio
   inMediaLib: Kërko në bibliotekën e mediave
   inMediaCategory: Kërko në kategorinë e mediave
   results: Rezultatet për
-  resultcount: Kërkimi yt solli %count% rezultate
-  fail: Të lutem shkruaj të paktën një term kërkimi
   noUsers: Nuk u gjet asnjë përdorues
   noProjects: Nuk u gjet asnjë projekt
   noStudios: Nuk u gjet asnjë studio
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: Biblioteka e mediave
   studio: Studiot
   language: Gjuha
-  languageOptionsNotAvailable: Nuk ka opsione gjuhe të disponueshme.
 login:
   login: Hyr
   button:
@@ -578,21 +430,10 @@ login:
     or: "ose"
   passOrUser: Përdoruesi ose fjalëkalimi yt ishin të pasaktë.
   accountSuspended: 'Llogaria jote është pezulluar. Nëse mendon se është gabim, të lutem kontakto mbështetjen.'
-  noUsername: Përdoruesi ose E-mail adresa nuk u gjetën.
-  forgotPass: Ke harruar fjalëkalimin ose përdoruesin?
   recoverPassSend: Të është dërguar një email. Të lutem kontrollo postën tënde.
   alreadyReset: Fjalëkalimi për këtë përdorues është kërkuar brenda 24 orëve të fundit. 
-  confirmationSend: Një email për të konfirmuar regjistrimin tënd u dërgua në adresën tënde. Të lutem kontrollo kutinë postare dhe aktivizo llogarinë tënde.
-  userOrEmail: Emër përdoruesi ose email
-  changePass: Ndrysho fjalëkalimin
-  createAccount: Krijo një llogari
-  noAccount: Nuk ke llogari?
-  alreadyAccount: Ke një llogari?
-  or: OSE
   username: Përdoruesi
   email: Email
-  passwordFirst: Fjalëkalimi
-  passwordSecond: Konfirmo fjalëkalimin 
 register:
   title: Regjistrohu
   subText: "Duke vazhduar, po krijon një llogari në komunitetin Catrobat dhe pranon %var1% dhe %var2%."
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: "Pëlqimi prindëror u tërhoq"
     message: "Prindi ose kujdestari yt e ka tërhequr pëlqimin për llogarinë tënde. Llogaria jote ka funksionalitet të kufizuar derisa pëlqimi të jepet përsëri."
-    newEmailPlaceholder: "Emaili i ri i prindit"
-    changeButton: "Përditëso dhe ridërgo"
-accountRecovery:
-  title: Rikuperimi i llogarisë
-  description: Nëse e mban mend emailin ose emrin e përdoruesit të llogarisë tënde, mund të të dërgojmë një link për të rivendosur fjalëkalimin tënd.
-  button:
-    cancel: Anulo
-    submit: Rivendos fjalëkalimin
 resetPassword:
   request:
     title: "Rivendos fjalëkalimin"
@@ -645,11 +478,6 @@ resetPassword:
     description: "Nëse ekziston një llogari që përputhet me emailin tënd, sapo është dërguar një email me një link që mund ta përdorësh për të rivendosur fjalëkalimin tënd. Ky link do të skadojë për %time%."
     descriptionTwo: "Mund të kërkosh një rivendosje të re të fjalëkalimit çdo %throttleLimit% orë."
     descriptionThree: "Nëse nuk more email, të lutem kontrollo dosjen e spam-it ose shkruaji një email mbështetjes sonë te %email-webmaster%."
-  email:
-    title: "Përshëndetje!"
-    visitLink: "Për të rivendosur fjalëkalimin tënd, të lutem vizito linkun e mëposhtëm"
-    expire: "Ky link do të skadojë për %time%."
-    cheers: "Gjithë të mirat!"
   newemail:
     title: "Rivendos fjalëkalimin"
     content: "Kohët e fundit kërkove rivendosjen e fjalëkalimit për llogarinë tënde Catrobat. Kliko butonin më poshtë për të zgjedhur një fjalëkalim të ri. Nëse nuk e ke kërkuar këtë, mund ta shpërfillësh pa problem këtë email."
@@ -659,76 +487,33 @@ resetPassword:
     title: "Rivendos fjalëkalimin"
     button:
       submit: "Rivendos fjalëkalimin"
-apk:
-  download: Shkarko si aplikacion
-  prepare: 'Merre si aplikacion'
-  preparing: 'Duke përgatitur aplikacionin'
-  text: 'Procesi mund të zgjatë'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: Diçka nuk funksionoi. Të lutem provo përsëri ose na njofto nëse vazhdon të ndodhë!
-  username:
-    blank: Emri i përdoruesit nuk duhet të jetë i zbrazur
-    invalid: Emri përdoruesit nuk është valid
-    exists: Ky emër përdoruesi ekziston. 
-    not_exists: Ky emër përdoruesi nuk ekziston. 
-    not_email: Emri i përdoruesit nuk duhet të jetë në adresën e emailit.
-    size: Emri i përdoruesit duhet të ketë të paktën 3 karaktere dhe jo më shumë se 180
-  password:
-    blank: Fjalëkalimi mungon.
-    short: 'Fjalëkalimi yt duhet të ketë të paktën {{ limit }} karaktere.'
-  country:
-    blank: Mungon shteti.
-    invalid: Shteti i pavlefshëm
-  email:
-    blank: e-mail nuk duhet të jetë i zbrazur
-    invalid: Emaili yt duket të jetë i pavlefshëm
-    exists: Ky E-mail tashmë ekziston.
-  id:
-    blank: ID-ja e Open Authentication nuk duhet të jetë bosh
-  login: Fjalëkalimi ose emri i përdoruesit nuk ishte i saktë.
-  post-data: Të dhënat POST janë të pasakta ose mungojnë!
-  checksum:
-    missing: Klienti nuk dërgoi fileChecksum! Mos po përdor një version të vjetër të Pocket Code?
-    invalid: checksum i pavlefshëm
   xml:
     invalid: kodi i pavlefshëm xml
     missing: 'gabim i panjohur: project_xml_not_found!'
   file:
-    unexpected: u gjet një skedar i papritur
     invalid: Skedar i pavlefshëm
-  image.missing: Projekti XML përmend një skedar i cili nuk ekziston në dosjen e projektit
-  unknown: gabim i panjohur
-  token: 'Vërtetimi i pajisjes dështoi: auth-token pavlefshme!'
-  uploadTokenAuthFailed: 'Ngarkimi i Token auth dështoi.'
-  project:
-    invalid: Projekt i pavlefshëm.
   languageversion:
     tooold: 'Na vjen keq, projekti yt përmban një version të vjetër të gjuhës Catrobat! A po përdor versionin më të ri të Pocket Code?'
   projectversion:
     tooold: 'Na vjen keq, po përdor një version të vjetër të Pocket Code. Të lutem përditësoje në versionin më të ri.'
   authentication:
-    title: Hyrja nuk funksionoi
     webview: |
       Duket se emri i përdoruesit ose fjalëkalimi nuk ishte i saktë.
       Të lutem provo të hysh përsëri në aplikacion.
 success:
   text: Sukses
-  registration: Regjistrimi u krye me sukses!
-  token: ok
-  upload: Projekti yt u ngarkua me sukses!
   imgUpload: Imazhi yt u ngarkua me sukses!
-  report: Raporti yt u dërgua me sukses!
 time:
   minutes.ago: '{0} <1 minutë më parë |{1} 1 minutë më parë |]1,Inf] %count% minuta më parë'
   hours.ago: '{1}1 orë më parë |]1,Inf] %count% orë më parë'
   days.ago: '{1}1 ditë më parë |]1,Inf] %count% ditë më parë'
   months.ago: '{1}1 muaj më parë |]1,Inf] %count% muaj më parë'
   years.ago: '{1}1 vit më parë |]1,Inf] më shumë se një vit më parë'
-failure:
-  upload: Pati një gabim gjatë ngarkimit të projektit tënd.
 user:
   verification:
     email: 'Verifiko e-mailin'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'Fjalëkalimi përmban karaktere të pavlefshme'
     usernameContainsEmail: "Emri i përdoruesit nuk duhet të përmbajë një adresë emaili"
     usernameContainsLink: "Emri i përdoruesit nuk duhet të përmbajë një link"
-    countryCodeInvalid: "Kodi i vendit është i pavlefshëm"
     pictureInvalid: "Fotoja e profilit është e pavlefshme ose nuk mbështetet"
     dateOfBirthMissing: "Data e lindjes është e detyrueshme"
     dateOfBirthInvalid: "Data e lindjes është e pavlefshme"
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'Emri është tashmë në përdorim'
     descriptionMissing: 'Përshkrimi mungon'
     descriptionEmpty: 'Përshkrimi është bosh'
-    descriptionTooShort: 'Përshkrimi është shumë i shkurtër'
     descriptionTooLong: 'Përshkrimi është shumë i gjatë'
     imageFileInvalid: 'Skedari i imazhit është i pavlefshëm'
     imageFileInvalidType: 'Lloji i skedarit të imazhit është i pavlefshëm'
     imageFileTooLarge: 'Skedari i imazhit është shumë i madh'
-#languages and countries
-language:
-  arabic: Arabisht
-  bulgarian: Bullgarisht
-  catalan: Katalanisht
-  chinese_simplified_han: Kinezisht (Han e thjeshtuar)
-  chinese_traditional_han: Kinezisht (Han tradicionale)
-  croatian: Kroatisht
-  czech: Çekisht
-  danish: Danisht
-  dutch: Hollandisht
-  english_united_kingdom: Anglisht(Britani e Madhe)
-  english_united_states: Anglisht (Shba)
-  estonian: Estonisht
-  filipino: Filipine
-  finnish: Finlandisht
-  french: Frëngjisht
-  german: Gjermanisht
-  greek: Greqisht
-  hebrew: Hebreisht
-  hindi: Hinduisht
-  hungarian: Hungarisht
-  indonesian: Indonezisht
-  italian: Italisht
-  japanese: Japonisht
-  korean: Koreanisht
-  latvian: Letonisht
-  lithuanian: Lituanisht
-  malay: Malazisht
-  norwegian: Norvegjisht
-  persian: Persisht
-  polish: Polonisht
-  portuguese_brazil: Portugalisht (Brazil)
-  portuguese_portugal: Portugalisht (Portugali)
-  romanian: Rumanisht
-  russian: Rusisht
-  serbian: Serbisht
-  slovak: Sllovakisht
-  slovenian: Sllovenisht
-  spanish_latin_america: Spanjisht (Amerika Latine)
-  spanish_spain: Spanjisht (Spanjë)
-  swedish: Suedisht
-  thai: Tajlandisht
-  turkish: Turqisht
-  ukrainian: Ukrainisht
-  vietnamese: Vietnamisht
-ci:
-  generate: Gjenero APK
-  pending: Duke gjeneruar APK
-  download: Shkarko APK
+
 admin:
   maintain:
     diskMaintenance: Mirëmbajtja e diskut
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: Nuk ka objekte të heqshme në dispozicion.
     removableObjects: Objekte të heqshme
 recommender:
-  similarPrograms: Projekte të ngjashme 
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Përdoruesit që shkarkuan këtë projekt gjithashtu shkarkuan 
   moreFromThisUser: Më shumë nga %username% 
-pmd:
-  submitBtn: Dorëzo projektin tënd
-  submitBox:
-    header: Dorëzimi
-    text: Je gati të dorëzosh projektin tënd. Të lutem shkruaj kodin e projektit dhe kliko dërgo.
-    btnText: Dërgo
-  successful:
-    text: Ngarkimi i projektit tënd ishte i suksesshëm.
-  failed:
-    text: Ngarkimi i projektit dështoi. 
 codeview:
   title: 'Pamja e kodit '
-  showCode: 'Shfaq kodin'
-  hideCode: 'Fshih kodin '
-  showStatistics: 'Shfaq statistikat e kodit '
-  hideStatistics: 'Fshih statistikat e kodit '
-  cantDisplayCode: "Kodi nuk mund të shfaqet "
-  cantDisplayStatistics: "Kodi nuk mund të shfaqet "
-  totalNumberOf: 'Numri total i '
-  scenes: 'Skenat '
-  scripts: 'Skriptet '
-  bricks: 'Tullat'
-  objects: 'Aktorët dhe objektet '
-  looks: 'Pamje'
-  sounds: 'Tingull'
-  globals: 'Globale'
-  locals: 'Lokale'
-  globalVariables: 'Variabla globale'
-  localVariables: 'variabla lokale'
-  eventBricks: 'Tullat e ngjarjeve '
-  controlBricks: 'Tullat e kontrollit '
-  motionBricks: 'Tulla e lëvizjes '
-  soundBricks: 'Tullat e tingullit'
-  looksBricks: 'Tullat e pamjes'
-  penBricks: 'Tullat e stilolapsit'
-  dataBricks: 'Tullat e të dhënave '
-  specialBricks: 'Tullat e veçanta '
 codeView:
   title: 'Pamja e kodit'
   loading: 'Duke ngarkuar pamjen e kodit...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: "Statistikat e kodit "
   error: "Statistikat e kodit nuk mund të shfaqen. "
-  general: 'Gjeneral'
-  bricks: 'Tullat'
-  eventBricks: 'Ngjarje'
-  controlBricks: 'Kontroll'
-  motionBricks: 'Lëvizje'
-  soundBricks: 'Tingull'
-  looksBricks: 'Pamje'
-  penBricks: 'Stilolaps'
-  dataBricks: 'Të dhënave'
-  deviceBricks: 'Pajisje '
-  specialBricks: 'Speciale'
   yourScore: 'Pikët e tua:'
-  points: 'pikë'
   abstraction: 'Abstraksioni dhe zbërthimi i problemit'
   parallelism: 'Paralelizmi'
   logicalThinking: 'Të menduarit logjik'
@@ -927,20 +612,7 @@ footer:
   text: "Me %project_count% projekte të mrekullueshme të ndara tashmë, i radhës mund të jetë i yti. Shkarko aplikacionin tonë dhe fillo të krijosh që sot"
 privacy-policy:
   header: Politika e privatësisë 
-  version: Versioni 2.2, 17 Tetor 2019 
-  text1: Për të të ofruar të gjitha përfitimet e shërbimeve tona dhe të llogarisë përkatëse, është e nevojshme të mbledhim disa të dhëna nga ti.
-  text2: Për të mirëmbajtur dhe përmirësuar shërbimet tona (aplikacionet dhe faqet e internetit) dhe për të bërë kërkime shkencore mbi edukimin ICT dhe STEM/STEAM, përdorim Google Analytics, Crashlytics dhe Firebase, të gjitha nga Google LLC (SHBA), si dhe Dynatrace nga Dynatrace LLC (SHBA), për të marrë meta të dhëna mbi përdorimin e shërbimeve tona, p.sh. informacione mbi rrëzimet, vulat kohore, faqet/ekranet e vizituara, përdorimin e aplikacioneve dhe shërbimeve tona, sistemin operativ të përdorur dhe informacione mbi ofruesin e rrjetit. Kjo analizë dhe të dhënat e mbledhura nuk lidhen me profilin tënd dhe nuk përmbajnë asnjë informacion personal (pjesët e fundit të adresës IP anonimizohen). Megjithatë, të dhënat e mbledhura do të transferohen te ofruesit e shërbimeve (Google LLC, SHBA dhe Dynatrace LLC, SHBA). Përpunimi i të dhënave bazohet në marrëveshjet me Google LLC dhe Dynatrace LLC. Kjo marrëdhënie me ofruesit e shërbimeve përputhet me Rregulloren e Përgjithshme të Bashkimit Evropian për Mbrojtjen e të Dhënave (EU GDPR) dhe me marrëveshjen BE-SHBA "Privacy Shield".
-  text3: Për të krijuar dhe përdorur një llogari në sistemet tona, dhe për të të informuar me email për ndryshime të nevojshme në lidhje me llogarinë tënde, p.sh. përditësime ose shkelje të Kushteve tona të Përdorimit dhe Shërbimit, të rregullave të komunitetit ose të politikave tona, do të ruajmë emrin tënd të përdoruesit dhe, nëse e jep, adresën tënde të emailit. Nëse e ke lidhur llogarinë tënde përmes Google Plus ose Facebook, ruajmë gjithashtu një çelës identifikimi të lidhur me llogarinë tënde në këto shërbime. Nuk do t'i përdorim këto të dhëna për asnjë qëllim tjetër (p.sh. marketing), përveç nëse na e lejon shprehimisht.
-  text4: Në mënyrë vullnetare, mund të na japësh vendin tënd të banimit përmes faqes së llogarisë tënde në faqen e ndarjes. Ky do të shfaqet në profilin tënd publik dhe do të përdoret nga ne vetëm për qëllime statistikore dhe kërkimore. Mund ta heqësh në çdo kohë te cilësimet e profilit tënd.
-  text5: Mund ta tërheqësh përdorimin e të dhënave personale që i përkasin llogarisë tënde në çdo kohë duke fshirë llogarinë përmes faqes së profilit tënd në https://share.catrobat.org/. Pas fshirjes së llogarisë do të mund t'i përdorësh ende shërbimet e ofruara, por jo të bashkëpunosh, p.sh. duke ngarkuar programe, komentuar ose pëlqyer. Gjithashtu, e gjithë përmbajtja e lidhur me llogarinë tënde, p.sh. programet e ngarkuara, komentet etj., do të fshihet.
-  text6: Për të shmangur keqpërdorimin e shërbimeve tona, p.sh., përmes ngarkimeve ose komenteve të kontribuara nga përdoruesit për qëllime të paligjshme, të gjitha të dhënat publike të krijuara nga përdoruesit (ngarkimet, komentet) do të ruhen brenda në një bazë të dhënash, së bashku me një etiketë kohore dhe adresën e përdorur të internetit. Këto të dhëna nuk do të përdoren ose nuk do të përcillen tek asnjë institucion, përveç rasteve kur dyshohen në mënyrë të arsyeshme veprime të paligjshme dhe institucionet juridike të autorizuara zyrtarisht i kërkojnë në bazë të ligjit në fuqi. Së pari, çdo rast do të kontrollohet tërësisht në baza individuale nga ne. 
-  text7: Mund të regjistrohesh vullnetarisht në buletinin e Catrobat në https://catrobat.org/newsletter, që ofrohet nga ne përmes shërbimit MailChimp (The Rocket Science Group LLC d/b/a MailChimp, SHBA). Më pas do të marrësh përditësime mbi projektin Catrobat dhe shërbimet e tij në adresën e emailit që ke dhënë. Mund ta çregjistrosh buletinin në çdo kohë duke përdorur linkun "çregjistrohu" në fund të çdo buletini. Ky buletin ofrohet nga MailChimp, me të cilin kemi një marrëveshje për përpunimin e të dhënave dhe që është angazhuar ndaj Rregullores së Përgjithshme të BE-së për Mbrojtjen e të Dhënave dhe "Privacy Shield" BE-SHBA. Për detaje të mëtejshme mbi MailChimp, të lutem shiko gjithashtu Politikën e Privatësisë dhe Kushtet e Përdorimit të MailChimp.
-  text8: Të gjitha shërbimet ofrohen nga projekti i lirë me burim të hapur Catrobat nën ombrellën e International Catrobat Association – Verein zur Förderung freier Software, një OJQ jofitimprurëse e regjistruar në Graz, Austri (Bashkimi Evropian). Politikat tona respektojnë ligjin e BE-së dhe të Austrisë për mbrojtjen e të dhënave (GDPR). Për të na kontaktuar, të lutem dërgo një email te contact@catrobat.org ose na shkruaj me postë në Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Bashkimi Evropian).
-  text9: Nëse je nën moshën 14 vjeç, kjo politikë duhet të pranohet nga një kujdestar ligjor (zakonisht një prind).
-  text10: Politika zyrtare e privatësisë e Catrobat në gjuhën angleze është e disponueshme në internet nën %privacy_policy%. 
-  disagree-text: Pa miratim, ne nuk mund të krijojmë një llogari, por veçoritë kryesore janë akoma të arritshme.
 catro-notifications:
-  markAsRead: "Shëno si të lexuar "
   noFollowers: "Me sa duket nuk ke asnjë njoftim nga ndjekësit."
   noComments: "Me sa duket nuk ke asnjë njoftim për koment."
   noReactions: "Me sa duket nuk ke asnjë njoftim reagimi. "
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: Linku u kopjua në kujtesën e fragmenteve!
   success_project: Linku me projektin u kopjua në clipboard! 
-  success_user: Linku me përdoruesin u kopjua në clipboard! 
   fail: Kopjimi i linkut në kujtesën e fragmenteve dështoi! :(
 next: Tjetri
 previous: I mëparshmi
 media-packages:
   title: Paketat e mediave 
   description: Në kategoritë e mëposhtme mund të gjesh aktorë dhe objekte për t'i shtuar te projektet e tua.
-  thumb-size:
-    description: vrojtim paraprak i madhësisë 
-    sm: i vogël
-    md: mesatare
-    lg: i gjerë
   theme-special: "%flavor% Temë speciale "
   search-results: Rezultatet e kërkimit të bibliotekës mediatike 
-  no-results: Kërkimi yt ktheu 0 rezultate. Të lutem përdor vetëm terma kërkimi në anglisht.
-  download_these_files: Ruaj
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'E drejta e autorit &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Të gjitha të drejtat e rezervuara. '
 noscript:
   warning: "Kjo faqe interneti ka nevojë për JavaScript për të funksionuar. Të lutem aktivizo JavaScript në shfletuesin tënd ose kërkoji ndihmë një të rrituri."
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: "Refuzo"
   privacy-link: "Privatësia"
   settings-link: "Cilësimet e cookies"
-agree: Pranoj
-disagree: Nuk pranoj
-profileLoader:
-  noProfiles: Aktualisht nuk ka profile.
 element: 'Element'
 elements: 'Elementet'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'Ndarja ishte e suksesshme '
 copy: 'Kopjo linkun'
 checkOutProject: 'Shiko këtë projekt: '
-checkOutUser: 'Shiko këtë përdorues: '
 community: 'Komuniteti Catrobat'
 back_to_app: 'Dil nga komuniteti'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Arritjet'
-    badge: 'E re'
   overview:
     header: 'Arritjet'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: Shumë lojtarë
 studio:
   title: 'Studiot'
-  singular: 'Studio'
   create_studio: 'Krijo studio'
-  delete_studio: 'Fshi studion'
-  cancel_studio: 'Anulo'
   studio_name: 'Emri i studios'
   studio_description: 'Përshkrimi i studios'
   is_public: 'Ta bësh publike?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Hiq imazhin'
   popular: 'Studiot e njohura'
   join: 'Bashkohu'
-  leave: 'Largohu'
-  report: 'Raport'
   public: 'publike'
   private: 'Vetëm me ftesë'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Administratori'
     member: 'Anëtar'
   details:
-    add_project: 'kliko për të shtuar projektin'
     add: 'Shto'
     showMore: 'Trego më shumë'
-    showLess: 'Trego më pak'
     are_you_sure: 'A je i Sigurtë?'
     no_way_of_return: 'Kjo nuk mund të zhbëhet.'
     delete_it: 'Fshije'
-    remove_project: 'Hiqe nga studio '
     remove_project_error: 'Heqja e projektit nga studio dështoi! '
-    remove_project_success: 'projekti u hoq me sukses nga studio! '
     no_projects: 'Studio nuk përmban ende asnjë projekt '
     projects:
       title: 'Projektet'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Nuk ke ende projekte për të shtuar. Krijo një fillimisht në Pocket Code!'
       add_selected: 'Shto të zgjedhurat'
     no_available_projects: 'Nuk ka projekte të disponueshme për t''u shtuar.'
-    updateCoverError: 'Diçka shkoi keq gjatë përditësimit të kopertinës së studios! '
     join: 'Bashkohu'
     leave: 'Largohu'
-    report: 'Raport'
     pending: 'Në pritje'
     decline: 'Refuzuar'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% la një koment.'
     members_list:
       title: 'Anëtarët e studios '
-      project_count: '{0} Nuk ka projekte në studio |{1} 1 projekt në studio |]1,Inf] %count% projekte në studio '
       no_studio_projects: 'Nuk ka projekte në studio'
       one_studio_project: '1 projekt në studio'
       n_studio_projects: '%count% projekte në studio'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'Ndodhi një gabim gjatë ndalimit të këtij anëtari. Provo sërish më vonë. '
       demote_member: 'Ule administratorin në anëtar'
       demotion_failed: 'Diçka shkoi keq gjatë uljes së këtij administratori. Provo përsëri më vonë.'
-      last_admin: 'Administratori i fundit i kësaj studioje nuk mund të ulet.'
     join_requests:
       title: 'Kërkesat për anëtarësim'
       accept: 'Prano'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'Nuk u gjet asnjë rezultat.'
   assets_count: 'burime'
   view_all: 'Shiko të gjitha'
-  view_all_category: 'Shiko të gjitha në %category%'
   back_to_app: 'Kthehu te aplikacioni'
 snackbar:
   project_not_found: 'Projekti i kërkuar nuk është i disponueshëm '
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: "Po kryen veprime në studio shumë shpejt. Të lutem prit një moment."
   hidden_notice:
     project: "Ky projekt është fshehur për shkak të raportimeve nga komuniteti."
-    comment: "Ky koment është fshehur për shkak të raportimeve nga komuniteti."
-    user: "Ky profil është fshehur për shkak të raportimeve nga komuniteti."
     user_own: "Llogaria jote është pezulluar për shkak të raportimeve nga komuniteti. Mund ta apelosh këtë vendim."
-    studio: "Kjo studio është fshehur për shkak të raportimeve nga komuniteti."
-  notification:
-    content_hidden: "%content_type% yt është fshehur për shkak të raportimeve nga komuniteti. Mund ta apelosh këtë vendim."
-    appeal_approved: "Apelimi yt u miratua. Përmbajtja jote është përsëri e dukshme."
-    appeal_rejected: "Apelimi yt u shqyrtua dhe vendimi për ta fshehur përmbajtjen tënde mbetet në fuqi."
-    admin_review_needed: "Përmbajtja u fsheh automatikisht dhe kërkon shqyrtim."
 Reports: Raportimet
 members: anëtarë

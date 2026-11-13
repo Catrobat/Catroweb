@@ -8,19 +8,12 @@ meta.og.description.login: Catrobat projelerini toplulukla paylaşmak için giri
 meta.og.title.register: Catrobat hesabı oluştur
 meta.og.description.register: Catrobat topluluğuna katıl ve yaratıcı projelerini bugün paylaşmaya başla.
 meta.og.description.profile: '%username% Catrobat''ta – projelerine ve başarılarına göz at.'
-localLanguage: İngilizce
 username: Kullanıcı adı
 password: Şifre
-createNewPassword: Yeni şifre oluşturma
-accountSettings: Hesap silme
 email: E-Posta
-aboutPocketCode: Cep kodu hakkında
 about: Catrobat hakkında
-education: Eğitim
 chat: Sohbet ve forumlar
-privacyGuide: Gizlilik Farkındalığı Rehberi
 others: Diğerleri
-tutorials: Yardım
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Bu projeyi nasıl yarattınız? Başkalarının fiki
 projectImportedFromScratch: 'Bu proje MIT Scratch''ten içe aktarıldı. Orijinal projeye göz atabilirsin:'
 scratchImportedProjectLinkHere: buradan.
 country: Ülke
-loginText: oturum aç
 privacyPolicy: Gizlilik politikası
-imprint: Damga
 projectDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
 accountNotVerified: 'Lütfen giriş yaptığından ve hesabının e-posta adresinin doğrulandığından emin ol.'
@@ -55,36 +46,28 @@ accountSuspended: 'Hesabın topluluk bildirimleri nedeniyle askıya alındı. Bu
 doesNotExist: 'İstenen kaynak mevcut değil.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
 tryAgainButton: 'Tekrar dene'
-oldVersionError: 'Lütfen en yeni Cep Kodu sürümüne güncelleyin!'
 more: 'daha fazla'
 less: 'daha az'
 show-more: 'Daha fazla göster'
-show-less: 'Daha az göster'
 more-information: 'Daha fazla bilgi'
 less-information: 'Daha az bilgi'
 ok: Tamam
-clickToDownloadProgram: 'Örnek projeyi indirmek için tıklayın %link_start% buraya %link_end%'
-registrationError: 'Kullanıcı adı yada e-posta zaten kullanılıyor.'
 notifications: 'Bildirimler'
 allNotifications: 'Tüm'
 FollowersNotifications: 'Takipçiler'
 LikeNotifications: 'Tepkiler'
 CommentNotifications: 'Yorumlar'
 RemixNotifications: 'Remixler'
-wellDone: "Tebrikler!"
 done: "Tamam!"
 notificationsReadMessage: "Herhangi bir bildiriminiz yok gibi görünüyor."
-confirmMessage: "Evet, sil"
 cancelMessage: "İptal et"
 notificationsUnauthorizedError: "Kullanıcıya yetki verilemiyor"
 notificationsClearError: "Bildirimler okundu olarak işaretlenemedi!"
-pleaseWait: "Lütfen bekleyiniz..."
 projects: "Projelerin"
 users: "Kullanıcılar"
 studios: "Stüdyolar"
 oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
 oauthInfo: 'Giriş yapmak için harici bir hesap kullandın. Senin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adını değiştirmek veya hesabın için yeni bir şifre oluşturmak istiyorsan lütfen profil sayfana git.'
-oauthHere: "buraya"
 statistics: "İstatistik"
 languageSelection: "Dil seçimi"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Koyu'
   dark_description: 'Karanlık görünüm'
   apply: 'Uygula'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Burada hangi projeler önerilir?'
-      description: 'Projeniz ne kadar çok tepki alırsa (Beğen, Gülümseyin...) projeniz bu listede o kadar yüksek görünür.'
 follower:
   follows: Takipte
   followers: Takipçiler
   follow: Takip et
-  username: kullanıcı
   followsMe: Beni takip ediyor
   noFollowing: Şu anda kimseyi takip etmiyorsunuz.
   noFollowers: Şu anda takipçiniz yok.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Bu kullanıcıyı takip etmeyi bırakmak istediğinden emin misin?"
   unfollowButton: "Takip etmekten vazgeç %username%"
 project:
-  welcome:
-    title: Catrobat'ın %theme% sayfasına hoş geldin
-    title_mindstorms: Catrobat'ın Mindstorms EV3 ve NXT sayfasına hoş geldin
-    subtitle: Hikâyeler, oyunlar ve daha fazlasını oluştur...
-    subtitle_embroidery: Tişörtlerine, çantalarına, pantolonlarına veya telefon kılıfına kendi desenlerini işle!
-    subtitle_mindstorms: Lego Mindstorms EV3 ve NXT robotlarınla kendi projelerini oluştur
-    download: Uygulamayı indir
-    statistics: Daha fazla istatistik
   featured: Öne çıkanlar
   open: Aç
   download: indir
@@ -148,9 +117,6 @@ project:
       retention: Yüklenen projeler bir süre etkinlik olmazsa otomatik olarak kaldırılır. Projenin daha uzun süre kalması için düzenli olarak giriş yap veya projenin indirilmesini sağla.
       protection: Özellikle iyi veya popüler projeler, moderatörler tarafından otomatik silinmeye karşı korunabilir.
   example: Örnekler
-  newest: En yeni projeler
-  recommended: Önerilen projeler
-  scratchremixes: Scratch remixleri
   noProjects: Şu anda hiç proje yok.
   shareAction: Paylaş
   deleteAction: Projeyi sil
@@ -190,17 +156,10 @@ project:
     Bu işlem geri alınamaz!
     Evet, sil!
     İptal
-  tooLongName: Proje adı çok uzun!
-  tooLongDescription: Proje açıklaması çok uzun!
-  tooLongCredits: Proje notları ve katkıda bulunanlar çok uzun!
   my_projects: Projelerim
   trending: Trend projeler
   popular: Popüler projeler
-  most:
-    viewed: En çok İzlenenler
-    downloaded: En çok indirilen
   random: Rastgele projeler
-  related: Benzer projeler
   browse:
     explore: 'Projeleri keşfet'
     no_projects: "Henüz hiç proje oluşturmadın"
@@ -214,36 +173,14 @@ project:
     tooltip: 'Projeler bir süre etkinlik olmazsa otomatik olarak kaldırılır. Daha uzun süre kalması için daha fazla indirme topla veya düzenli olarak giriş yap.'
     tooltip_protected: 'Bu proje korumalı ve otomatik olarak silinmeyecek.'
   downloads: '%downloads% indirme'
-  sample: Örnek projeler
   views: '%views% görüntülenme'
   likes:
     likersTitle: "Bu projeye tepki verenler"
     all: "Tüm"
-  remixes: '{0}0 remix |{1}1 remix |]1,Inf]%remixes% remix'
-  newRemixesNotificationTitle: '|{1}"%programName%" projesinin 1 yeni remixi var: |]1,Inf] "%programName%" projesinin %remixes% yeni remixi var:'
-  submitted: Gönderilen projeler
-  uploaded: Yüklenen projeler
-  reportAsInappropriate: Uygunsuz olarak bildir
-  reportProgram: Projeyi bildir
   languageVersion: 'Catrobat dil sürümü: %languageVersion%'
-  reportLoginText: Bu projeyi bildirmek için lütfen %login%.
-  reportDialogHeader: Bu projeyi neden bildirmek istiyorsun?
-  reportDialogReason: Bir neden yaz
-  reportRadioButtonInappropriate: Uygunsuz
-  reportRadioButtonCopyright: Telif hakkı ihlali
-  reportRadioButtonSpam: Spam
-  reportRadioButtonDislike: Beğenmedim
-  reportOwnProgram: Kendi projeni bildiremezsin.
-  reportAlready: Bu projeyi zaten bildirdin.
-  reportDone: Bu projeyi bildirdin!
   updateAppHeaderDownload: İndirme mümkün değil
   updateAppTextDownload: Lütfen uygulamanı en yeni sürüme güncelle. Tüm Android özelliklerinin henüz iOS'ta bulunmadığını unutma.
-  updateAppTextDownloadApk: APK indirme şu anda yalnızca Android'de kullanılabilir, iOS'ta kullanılamaz.
-  updateAppHeader: Uygulamayı güncelle
-  updateAppText: Lütfen uygulamanı en yeni sürüme güncelle.
-  btnClosePopup: Tamam
   checkout_this_project: Bu Catrobat projesine göz at
-  show_more: Daha fazla göster
   comments: Yorumlar
   send: Gönder
   delete: Sil
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: Silindi
   noAdminRights: Yönetici yetkin yok. Lütfen yönetici olarak giriş yap.
   editProject: Projeyi düzenle
-  closeProjectEditor: Proje düzenleyicisini kapat
   closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
   btnDiscard: Vazgeç
   addComment: Bir yorum yaz
@@ -263,8 +199,6 @@ project:
   smile: Gülümse!
   love: Bayıldım!
   wow: Vaaay!
-  linkTitle: Bağlantı
-  link: Proje bağlantısını panoya kopyala
   reactionsText: Tepkiler
   downloadErrorText: Proje indirilirken bir hata oluştu. Lütfen daha sonra tekrar dene.
   downloadStartText: İndirme başladı...
@@ -284,11 +218,8 @@ project:
   translations: Çeviriler
   createTranslation: Çeviri oluştur
   deletedComment: '**Silindi**'
-  replyLabel: yanıtla
-  repliesLabel: yanıtlar
   notForKids: Çocuklar için uygun değil
 remixGraph:
-  title: Remixler
   showRemixGraph: 'Remixleri'
   by: 'değiştir'
   open: 'Aç'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Mevcut değil'
   projectUnknownUser: 'Bilinmeyen kullanıcı'
 noReply: 'Bu otomatik bir mesajdır – lütfen bu e-postayı doğrudan yanıtlama.'
-accountConfirmation:
-  subject: Catrobat hesap onayınız
-  message: |
-    Sayın %username%
-    Hesabınızı etkinleştirmeyi bitirmek için lütfen
-    %confirmationUrl% adresini ziyaret edin. Bu bağlantı, hesabınızı doğrulamak için yalnızca bir kez kullanılabilir. Saygılarımızla,
-    Catrobat Takımı.
-  messageHtml: |
-    <p>
-    Sayın %username%.<br>
-    <br>
-    Hesabınızı etkinleştirmeyi tamamlamak için - lütfen tıklayın <a href="%confirmationUrl%">buraya.</a><br>
-    <br>
-    Bu bağlantı, hesabınızı doğrulamak için yalnızca bir kez kullanılabilir.<br>
-    <br>
-    Saygılarla,<br>
-    Catrobat Takımı.
-    </p>
 newAccountConfirmation:
   subject: "E-posta adresini doğrula"
   welcome: "Catrobat'a hoş geldin!"
@@ -403,63 +316,13 @@ parent:
       ignore: "Bunu siz istemediyseniz bu e-postayı görmezden gelebilirsiniz."
 passwordRecovery:
   subject: Catrobat şifre kurtarma
-  message: |
-    Sayın %username%.
-    Şifrenizi unuttuğunuz için %appplication_url% adresinde şifrenizi sıfırlamayı istediniz.
-    Bunu talep etmediyseniz, lütfen dikkate almayın. 24 saat içinde kullanım süresi dolacak ve kullanılmaz hale gelecektir.
-    Şifrenizi sıfırlamak ve yeni bir tane oluşturmak için lütfen şu sayfayı ziyaret edin: %confirmationUrl%
-    %appplication_url% topluluğuna erişmek için istediğiniz zaman kullanıcı adınızı ve şifrenizi kullanabilirsiniz.
-    Bunu yapmak için şu sayfayı ziyaret edin: %loginPage%
-    Profil ayrıntılarınızı düzenlemek için bu sayfaya gidin: %profilePage%
-    Saygılarla,
-    Catrobat Ekibiniz.
-  messageHtml: |
-    <p>
-    Sayın %username%.<br>
-    <br>
-    Şifreni unuttuğun için <a href="%appplication_url%">Pocket Code</a> üzerinde şifreni sıfırlamak istedin.
-    Bunu sen istemediysen lütfen görmezden gel. Bağlantı 24 saat içinde geçerliliğini yitirecek.<br>
-    <br>
-    Şifrenizi sıfırlamak ve yeni bir şifre oluşturmak için lütfen tıklayın <a href="%confirmationUrl%">buraya.</a><br>
-    <br>
-    <a href="%appplication_url%">Pocket Code</a> topluluğuna erişmek için kullanıcı adını ve şifreni istediğin zaman kullanabilirsin.<br>
-    Bunu yapmak için aşağıdaki sayfayı ziyaret etmeniz yeterlidir: <a href="%loginPage%">Giriş yap</a><br>
-    Profil ayrıntılarınızı düzenlemek için buna gidin <a href="%profilePage%">sayfaya.</a>.<br>
-    <br>
-    Saygılarla,<br>
-    Catrobat Takımı.
-    </p>
 profile:
   aboutMe: Benim hakkımda
   currentlyWorkingOn: Mevcut olarak sunun üzerinde çalışıyor
-  edit: Profilini düzenle
-  saveChanges: Değişiklikleri kaydet
   newPass: yeni şifre
   repeatPass: Şifreyi tekrar girin
   oldPass: Eşki şifre
-  firstEmail: Benim ilk e-postam
-  secondEmail: İkinci e-postam
-  myPrograms: Projelerim
-  follows: Takipler
-  follower: Takipçin
-  unfollowUser: Takipten çık!
-  followUser: Takip et!
-  amountOfPrograms: Proje miktarı
-  form:
-    passwordTooShort: "Yeni şifrenin en az uzunluk karakteri %length% olmalıdır.\n \nBağlam | Bağlam İste."
-    passwordTooLong: "Yeni şifrenin uzunluğu en fazla %length% olabilir.\n \nBağlam | Bağlam İste."
-    passwordIsUsername: Şifre kullanıcı adından farklı olmalıdır.
-    passwordWrong: Yanlış şifre
-    emailNotValid: Bu e-posta adresi geçerli değil.
-    emailMissing: E-posta adresinizi güncelleştirme sırasında bir hata oluştu. En az bir onaylanmış e-posta adresi olması gerekir.
-    emailExists: Bu e-posta adresi zaten kullanılıyor.
-    usernameNotValid: Bu kullanıcı adı geçerli değil.
-    usernameMissing: Bir kullanıcı adınız olmalı.
-    usernameExists: Bu kullanıcı adı zaten kullanılıyor.
-    usernameContainsEmail: Kullanıcı adı bir e-posta adresi içermemelidir.
-    submitSuccess: Kaydedildi!
   reallyDeleteProgram: Projeni gerçekten silmek istiyor musun?
-  programsOf: Projeleri
   picture: Profil Resmi
   changePicture: Resmi değistir
   goToScratchProfile: Schart profili
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: Güvenlik ayarları
   accountSettings: Hesap Ayarları
   accountVerification: Hesabı doğrula
-  account: Hesap
-  editProfile: Profili düzenle
-  edit: Düzenle
   done: Tamam
-  checkMail: Adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin.
   passwordUpdated: Şifreniz başarıyla güncellendi.
-  avatar: Profil resmi
-  email: E-posta
   deleteAccount: Hesabı Sil
   deleteAccountWarning: |
     FARKINDA OL!
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: İndiriliyor...
   exportDataError: Verilerin dışa aktarılırken bir sorun oluştu. Lütfen daha sonra tekrar dene.
   exportDataRateLimited: Verilerini günde yalnızca bir kez dışa aktarabilirsin. Lütfen yarın tekrar dene.
-  editAccountSettings: Hesap ayarlarını düzenle
   profileChangeSuccess: Profiliniz başarıyla güncellendi.
   unspecifiedError: Profiliniz değiştirilirken belirtilmemiş bir hata oluştu. Lütfen bizimle iletişime geçin.
   verifyAccountText: Hesabını doğrulaman için sana bir bağlantı içeren e-posta göndereceğiz. Bağlantıya bir saat içinde tıkladığından emin ol; günde yalnızca bir e-posta isteyebilirsin.
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Lütfen Kullanım koşulları ile ilgili önerilerinizi %email-webmaster%''a mail atın.'
   version: Sürüm 1.3, 4 Mart 2014
 search:
-  dotdotdot: Ara...
   search: Proje, kullanıcı ve stüdyo ara
   inMediaLib: Medya kitaplığında ara
   inMediaCategory: Medya kategorisinde ara
   results: Sonuçlarda Ara
-  resultcount: '%count% tane sonuç bulundu'
-  fail: Lütfen en az bir arama terimi girin
   noUsers: Kullanıcı bulunamadı
   noProjects: Proje bulunamadı
   noStudios: Stüdyo bulunamadı
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: Medya kütüphanesi
   studio: Stüdyolar
   language: Dil
-  languageOptionsNotAvailable: Kullanılabilir dil seçeneği yok.
 login:
   login: Oturum aç
   button:
@@ -578,21 +430,10 @@ login:
     or: "veya"
   passOrUser: Kullanıcı adı veya şifre yanlış.
   accountSuspended: 'Hesabın askıya alındı. Bunun bir hata olduğunu düşünüyorsan lütfen destek ekibiyle iletişime geç.'
-  noUsername: Kullanıcı adı veya e-posta adresi bulunamadı.
-  forgotPass: Şifre yada kullanıcı adını unuttunuz mu?
   recoverPassSend: Adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin.
   alreadyReset: Bu kullanıcının şifresi son 24 saat içinde istendi.
-  confirmationSend: Kaydınızı onaylamak için posta adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin ve hesabınızı etkinleştirin.
-  userOrEmail: Kullanıcı adı veya E-Posta
-  changePass: Şifre değiştir
-  createAccount: Bir hesap oluştur
-  noAccount: Hesabınız yok!
-  alreadyAccount: Zaten bir hesabınız var mı?
-  or: YADA
   username: Kullanıcı adı
   email: E-posta
-  passwordFirst: Şifre
-  passwordSecond: Şifre onayla
 register:
   title: Üye ol
   subText: "Devam ederek, bir Catrobat Topluluğu hesabı oluşturuyorsunuz ve %var1% ve %var2%'mizi kabul etmiş oluyorsunuz."
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: "Ebeveyn onayı geri çekildi"
     message: "Ebeveynin veya velin hesabın için verdiği onayı geri çekti. Onay yeniden verilene kadar hesabının işlevleri sınırlıdır."
-    newEmailPlaceholder: "Yeni ebeveyn e-postası"
-    changeButton: "Güncelle ve tekrar gönder"
-accountRecovery:
-  title: Hesap kurtarma
-  description: Hesabınızın e-posta adresini veya kullanıcı adını hatırlıyorsanız, şifrenizi sıfırlamanız için size bir bağlantı gönderebiliriz.
-  button:
-    cancel: İptal et
-    submit: Şifre kurtarma
 resetPassword:
   request:
     title: "Şifrenizi sıfırlayın"
@@ -645,11 +478,6 @@ resetPassword:
     description: "E-postanızla eşleşen bir hesap varsa, şifrenizi sıfırlamak için kullanabileceğiniz bir bağlantı içeren bir e-posta gönderildi. Bu bağlantı %time% içinde sona erecek."
     descriptionTwo: "Her %throttleLimit% saatte bir yeni şifre sıfırlama isteyebilirsin."
     descriptionThree: "E-posta almadıysan lütfen spam klasörünü kontrol et veya %email-webmaster% adresinden destek ekibimize yaz."
-  email:
-    title: "Merhaba!"
-    visitLink: "Şifrenizi sıfırlamak için lütfen aşağıdaki bağlantıyı ziyaret edin"
-    expire: "Bu bağlantı %time% içinde sona erecek."
-    cheers: "Şerefe!"
   newemail:
     title: "Şifrenizi sıfırlayın"
     content: "Kısa süre önce Catrobat hesabın için şifre sıfırlama istedin. Yeni bir şifre seçmek için aşağıdaki düğmeye tıkla. Bunu sen istemediysen bu e-postayı görmezden gelebilirsin."
@@ -659,75 +487,32 @@ resetPassword:
     title: "Şifrenizi sıfırlayın"
     button:
       submit: "Şifre sıfırlama"
-apk:
-  download: Uyglm'yı indir
-  prepare: 'Uyglm yap'
-  preparing: 'Uyglm yapılıyor'
-  text: 'İşlem biraz zaman alabilir'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: Belirlenemeyen bir hata meydana geldi. Yardım almak için lütfen bizimle iletişime geçin.
-  username:
-    blank: Kullanıcı adı boş olmamalıdır
-    invalid: Kullanıcı adınız geçersiz
-    exists: Bu kullanıcı adı zaten kullanılıyor.
-    not_exists: Bu kullanıcı adı bulunamıyor.
-    not_email: Kullanıcı adı bir eposta adresi olmamalı.
-    size: Kullanıcı adı en az 3 karakter olmalı ve 180'den fazla olmamalıdır
-  password:
-    blank: Şifre eksik.
-    short: 'Şifreniz en az {{ limit }} karakter içermelidir.'
-  country:
-    blank: Ülke adı eksik.
-    invalid: Geçersiz ülke
-  email:
-    blank: e-posta bölümü boş olmamalıdır
-    invalid: E-posta adresiniz geçersiz görünüyor
-    exists: Bu e-posta adresi zaten kullanılıyor.
-  id:
-    blank: Açık kimlik doğrulama boş olmamalıdır
-  login: Kullanıcı adı veya şifre yanlış.
-  post-data: Son veriler eksik yada yanlış!
-  checksum:
-    missing: İstemci sağlama toplamı dosyası göndermedi. Cep Kodu'nun eski bir sürümü nümü kullanıyorsunuz?
-    invalid: geçersiz sağlama
   xml:
     invalid: geçersiz xml kodu
     missing: 'bilinmeyen hata: project_xml_not_found!'
   file:
-    unexpected: Beklenmeyen dosya bulundu
     invalid: geçersiz dosya
-  image.missing: Proje XML, proje klasöründe bulunmayan bir dosyadan bahsediyor
-  unknown: bilinmeyen hata
-  token: 'Cihaz doğrulaması başarısız: geçersiz yetki-belirteci!'
-  uploadTokenAuthFailed: 'Yükleme Jetonu kimlik doğrulaması başarısız oldu.'
-  project:
-    invalid: Geçersiz proje.
   languageversion:
     tooold: 'Üzgünüz, projeniz Catrobat dilinin eski bir sürümünü içeriyor! Cep Kodunun en son sürümünü mü kullanıyorsunuz?'
   projectversion:
     tooold: 'Üzgünüz, Pocket Code''un eski bir sürümünü kullanıyorsun. Lütfen en son sürüme güncelle.'
   authentication:
-    title: Giriş yapılamadı
     webview: |
       Kullanıcı kimlik bilgileriniz yanlış. Lütfen uygulamada tekrar giriş yapmayı deneyin.
 success:
   text: başarı
-  registration: Kayıt başarılı!
-  token: Tamam
-  upload: Proje başarıyla yüklendi!
   imgUpload: Resminiz başarıyla yüklendi!
-  report: Raporunuz başarıyla gönderildi!
 time:
   minutes.ago: '{0} < 1 dakika önce |{1}1 dakika önce |]1,Inf] %count% dakika önce'
   hours.ago: '{1}1 saat önce |]1,Inf] %count% saat önce'
   days.ago: '{1}1 gün önce |]1,Inf] %count% gün önce'
   months.ago: '{1}1 ay önce |]1,Inf] %count% ay önce'
   years.ago: '{1} 1 yıl önce |]1,Inf] bir yıldan fazla'
-failure:
-  upload: Uygulamanız yüklenirken bir hata oluştu.
 user:
   verification:
     email: 'Eposta adresinizi doğrulayın'
@@ -750,7 +535,6 @@ api:
     passwordInvalidChars: 'Şifre geçersiz karakterler içeriyor'
     usernameContainsEmail: "Kullanıcı adı bir e-posta adresi içermemelidir"
     usernameContainsLink: "Kullanıcı adı bağlantı içeremez"
-    countryCodeInvalid: "Ülke kodu geçersiz"
     pictureInvalid: "Profil resmi geçersiz veya desteklenmiyor"
     dateOfBirthMissing: "Doğum tarihi gereklidir"
     dateOfBirthInvalid: "Doğum tarihi geçersiz"
@@ -784,61 +568,11 @@ api:
     nameAlreadyInUse: 'Bu ad zaten kullanılıyor'
     descriptionMissing: 'Açıklama eksik'
     descriptionEmpty: 'Açıklama boş'
-    descriptionTooShort: 'Açıklama çok kısa'
     descriptionTooLong: 'Açıklama çok uzun'
     imageFileInvalid: 'Görsel dosyası geçersiz'
     imageFileInvalidType: 'Görsel dosya türü geçersiz'
     imageFileTooLarge: 'Görsel dosyası çok büyük'
-#languages and countries
-language:
-  arabic: Arapça
-  bulgarian: Bulgarca
-  catalan: Katalanca
-  chinese_simplified_han: Çince (Basitleştirilmiş Han)
-  chinese_traditional_han: Çince (geleneksel Han)
-  croatian: Hırvatça
-  czech: Çekçe
-  danish: Danimarkaca
-  dutch: Hollandaca
-  english_united_kingdom: İngilizce (Birleşik Krallık)
-  english_united_states: İngilizce (ABD)
-  estonian: Estonyaca
-  filipino: Filipince
-  finnish: Fince
-  french: Fransızca
-  german: Almanca
-  greek: Yunanca
-  hebrew: İbranice
-  hindi: Hintçe
-  hungarian: Macarca
-  indonesian: Endonezyaca
-  italian: İtalyanca
-  japanese: Japonca
-  korean: Korece
-  latvian: Letonyaca
-  lithuanian: Litvanyaca
-  malay: Malayca
-  norwegian: Norveççe
-  persian: Farsça
-  polish: Polonyaca
-  portuguese_brazil: Portekizce (Brezilya)
-  portuguese_portugal: Portekizce (Portekiz)
-  romanian: Romence
-  russian: Rusça
-  serbian: Sırpça
-  slovak: Slovakça
-  slovenian: Slovakça
-  spanish_latin_america: İspanyolca (Latin Amerika)
-  spanish_spain: İspanyolca (İspanya)
-  swedish: İsveççe
-  thai: Taylandca
-  turkish: Türkçe
-  ukrainian: Ukraynaca
-  vietnamese: Vietnamca
-ci:
-  generate: Apk Oluştur
-  pending: Apk Oluşturuluyor
-  download: Apk indir
+
 admin:
   maintain:
     diskMaintenance: Disk bakımı
@@ -846,46 +580,9 @@ admin:
     noRemovableObjects: Kaldırılamaz objeler mevcut.
     removableObjects: Çıkarılabilir nesneler
 recommender:
-  similarPrograms: Benzer projeler
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Bu projeyi indiren kullanıcılar ayrıca bunlarıda,
   moreFromThisUser: '%username%''den daha fazlası'
-pmd:
-  submitBtn: Projenizi gönderin
-  submitBox:
-    header: Gönderim
-    text: Projenizi göndermek üzeresiniz. Lütfen proje kodunu girin ve göndere basın.
-    btnText: Gönder
-  successful:
-    text: Proje yüklemeniz başarılı oldu.
-  failed:
-    text: Proje yüklenemedi.
 codeview:
   title: 'Kodları göster'
-  showCode: 'Kodu göster'
-  hideCode: 'Kodları gizle'
-  showStatistics: 'Kod istatistiklerini göster'
-  hideStatistics: 'Kod istatistiklerini gizle'
-  cantDisplayCode: "Kod görüntülenemiyor"
-  cantDisplayStatistics: "Kod görüntülenemiyor"
-  totalNumberOf: 'Toplam sayısı'
-  scenes: 'Sahneler'
-  scripts: 'Komut dosyaları'
-  bricks: 'Tuğlalar'
-  objects: 'Objeler'
-  looks: 'Görüntü'
-  sounds: 'Sesler'
-  globals: 'Globaller'
-  locals: 'Yerliler'
-  globalVariables: 'Global değişkenler'
-  localVariables: 'Yerel değişkenler'
-  eventBricks: 'Etkinlik tuğlaları'
-  controlBricks: 'Control tuğlaları'
-  motionBricks: 'Hareket tuğlaları'
-  soundBricks: 'Ses tuğlaları'
-  looksBricks: 'Görüntü blokları'
-  penBricks: 'Kalem blokları'
-  dataBricks: 'Veri blokları'
-  specialBricks: 'Özel tuğlalar'
 codeView:
   title: 'Kod görünümü'
   loading: 'Kod görünümü yükleniyor...'
@@ -898,19 +595,7 @@ codeView:
 codeStatistics:
   title: "Kod istatistikleri"
   error: "Kod istatistikleri görüntülenemez."
-  general: 'Genel'
-  bricks: 'Tuğlalar'
-  eventBricks: 'Etkinlik'
-  controlBricks: 'Denetim'
-  motionBricks: 'Hareket'
-  soundBricks: 'Ses'
-  looksBricks: 'Görüntü'
-  penBricks: 'Kalem'
-  dataBricks: 'Veri'
-  deviceBricks: 'Cihaz'
-  specialBricks: 'Özel'
   yourScore: 'Puanın:'
-  points: 'puan'
   abstraction: 'Soyutlama ve problem ayrıştırma'
   parallelism: 'Paralellik'
   logicalThinking: 'Mantıksal düşünme'
@@ -926,20 +611,7 @@ footer:
   text: "Şimdiden %project_count% harika proje paylaşıldı, sıradaki seninki olabilir. Uygulamamızı indir ve bugün oluşturmaya başla"
 privacy-policy:
   header: Gizlilik politikası
-  version: Versiyon 2.2, 17 Ekim 2019
-  text1: Size hizmetlerimizin ve ilişkili hesabın tüm avantajlarını sunmak için sizden belirli verileri toplamak gerekir.
-  text2: Hizmetlerimizi (uygulamalar ve web siteleri) korumak ve geliştirmek ve ICT ve STEM / STEAM eğitimi hakkında bilimsel araştırma yapmak için, Google Analytics (Crashlytics ve Firebase) ve hepsi de Google LLC (ABD) ve Dynatrace by Dynatrace LLC ( ABD) hizmetlerimizin kullanımıyla ilgili meta verileri (ör. Kilitlenme bilgileri, zaman damgaları, ziyaret edilen sayfalar / ekranlar, uygulamalarımızın ve hizmetlerimizin kullanımı, kullanılan işletim sistemi ve ağ sağlayıcısı hakkında bilgiler) almak için. Bu analiz ve toplanan veriler profilinize bağlı değildir ve herhangi bir kişisel bilgi içermez (IP adresinin son bitleri anonimleştirilir). Ancak toplanan veriler servis sağlayıcılara (Google LLC, ABD ve Dynatrace LLC, ABD) aktarılacaktır. Veri işleme, Google LLC ve Dynatrace LLC ile yapılan anlaşmalara dayanmaktadır. Hizmet sağlayıcılarla olan bu ilişki, Avrupa Birliği'nin Genel Veri Koruma Yönetmeliği (AB GDPR) ve AB-ABD "Gizlilik Kalkanı" anlaşmasına uygundur.
-  text3: Sistemlerimizde bir hesap oluşturmak ve kullanmak ve e-posta yoluyla hesabınızla ilgili gerekli değişiklikler hakkında sizi bilgilendirmek, örneğin Kullanım ve Hizmet Koşullarımızdaki güncellemeler veya ihlaller, topluluk kurallarımızı ilgilendirir.
-  text4: Gönüllü olarak, ikamet ettiğiniz ülkeyi paylaşım sitesindeki hesap sayfanızdan bize verebilirsiniz. Bu, genel profilinizde görüntülenecek ve yalnızca istatistiksel ve araştırma için kullanılacaktır.
-  text5: Https://share.catrobat.org/ adresindeki profil sayfanızdan hesabınızı silerek hesabınıza ait kişisel verilerin kullanımını istediğiniz zaman geri alabilirsiniz.
-  text6: Hizmetlerimizin kötüye kullanılmasını önlemek için, örneğin kullanıcı katkısı olan yüklemeler veya yasa dışı amaçlar için yorumlar yoluyla, kullanıcı tarafından oluşturulan tüm genel veriler (yüklemeler, yorumlar) dahili olarak bir veritabanında saklanır.
-  text7: MailChimp hizmeti (Rocket Science Group LLC d / b / a MailChimp, ABD) aracılığıyla tarafımızca sağlanan https://catrobat.org/newsletter adresinden Catrobat Haber Bülteni'ne gönüllü olarak abone olabilirsiniz. Daha sonra, sağlanan e-posta adresinize Catrobat projesi ve hizmetleri hakkında güncellemeler alacaksınız. Her bülten altbilgisindeki "abonelikten çık" bağlantısını kullanarak bülteni istediğiniz zaman çekebilirsiniz. Bu bülten, veri işleme anlaşmamız olan ve AB Genel Veri Koruma Yönetmeliği ve AB-ABD "Gizlilik Kalkanı" na bağlı olan MailChimp tarafından sağlanmaktadır. MailChimp hakkında daha fazla bilgi için lütfen MailChimp'in Gizlilik Politikası ve Kullanım Koşulları'na bakın.
-  text8: Tüm Hizmetler, Graz, Avusturya'da (Avrupa Birliği) kurulmuş, kar amacı gütmeyen bir STK olan Uluslararası Catrobat Derneği - Verein zur Förderung freier Software çatısı altında ücretsiz açık kaynaklı Catrobat projesi tarafından sağlanmaktadır. Politikalarımız AB ve Avusturya veri koruma yasasına (GDPR) saygı göstermektedir. Bizimle iletişime geçmek için lütfen contact@catrobat.org adresine bir e-posta gönderin veya Catrobat, c / o Yazılım Teknolojisi Enstitüsü, Graz Teknoloji Üniversitesi, Inffeldgasse 16b, A-8010 Graz, Avusturya (Avrupa Birliği ).
-  text9: 14 yaşından küçük olmanız durumunda, bu politika yasal bir vasi (genellikle ebeveyn) tarafından kabul edilmelidir.
-  text10: "Catrobat'ın resmi İngilizce gizlilik politikası web'de\n%privacy_policy% altında yer almaktadır."
-  disagree-text: Onay olmadan bir hesap oluşturamayız, ancak temel özelliklere hâlâ erişilebilir.
 catro-notifications:
-  markAsRead: "Okundu olarak işaretle"
   noFollowers: "Görünüşe göre hiç takipçi bildiriminiz yok."
   noComments: "Görünüşe göre herhangi bir yorum bildiriminiz yok."
   noReactions: "Görünüşe göre herhangi bir tepki bildiriminiz yok."
@@ -973,29 +645,16 @@ catro-notifications:
 clipboard:
   success: Bağlantı panoya kopyalandı!
   success_project: Proje bağlantısı panoya kopyalandı!
-  success_user: Kullanıcının bağlantısı panoya kopyalandı!
   fail: Bağlantı panoya kopyalanamadı!
 next: İleri
 previous: Önceki
 media-packages:
   title: Medya-Paketler
   description: Aşağıdaki kategorilerde size Cep Kodu projeleri eklemek için ek aktörler ve nesneler bulabilirsiniz.
-  thumb-size:
-    description: Önizleme boyutu
-    sm: küçük
-    md: orta
-    lg: büyük
   theme-special: "%flavor% Tema Özel"
   search-results: Medya kitaplığı arama sonuçları
-  no-results: Aramanızda sonuç bulunamadı. Lütfen yalnızca İngilizce arama terimleri kullanın.
-  download_these_files: kayıt etmek
 flavor:
   pocketcode: Cep Kodu
-  pocketalice: Cep Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Kedi
-  create@school: Okulu@Oluştur
 copyright: 'Telif hakkı &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Tüm hakları saklıdır.'
 noscript:
   warning: "Bu web sitesinin çalışması için JavaScript gerekiyor. Lütfen tarayıcında JavaScript'i etkinleştir veya bir yetişkinden yardım iste."
@@ -1005,10 +664,6 @@ cookie-consent:
   decline: "Reddet"
   privacy-link: "Gizlilik politikası"
   settings-link: "Çerez ayarları"
-agree: Kabul ediyorum
-disagree: Kabul etmiyorum
-profileLoader:
-  noProfiles: Şu anda profil yok.
 element: 'Eleman'
 elements: 'Elementler'
 share:
@@ -1017,7 +672,6 @@ share:
   success: 'Paylaşım başarılı'
 copy: 'Bağlantıyı kopyala'
 checkOutProject: 'Bu projeye göz atın:'
-checkOutUser: 'Bu kullanıcıya göz atın:'
 community: 'Catrobat topluluğu'
 back_to_app: 'Topluluktan çık'
 category:
@@ -1033,7 +687,6 @@ category:
 achievements:
   sidebar:
     title: 'Başarılar'
-    badge: 'yeni'
   overview:
     header: 'Başarılar'
     most_recent_achievement:
@@ -1125,10 +778,7 @@ extensions:
       title: Çok Oyunculu
 studio:
   title: 'Stüdyolar'
-  singular: 'Stüdyo'
   create_studio: 'Stüdyo oluştur'
-  delete_studio: 'Stüdyoyu sil'
-  cancel_studio: 'İptal et'
   studio_name: 'Stüdyo adı'
   studio_description: 'Stüdyo açıklaması'
   is_public: 'Herkese açık olsun mu?'
@@ -1145,8 +795,6 @@ studio:
   cover_image_remove: 'Görseli kaldır'
   popular: 'Popüler stüdyolar'
   join: 'Katıl'
-  leave: 'Ayrıl'
-  report: 'Bildir'
   public: 'herkese açık'
   private: 'Yalnızca davetle'
   overview:
@@ -1169,16 +817,12 @@ studio:
     admin: 'Yönetici'
     member: 'Üye'
   details:
-    add_project: 'projeyi eklemek için tıkla'
     add: 'Ekle'
     showMore: 'daha fazla göster'
-    showLess: 'daha az göster'
     are_you_sure: 'Emin misiniz?'
     no_way_of_return: 'Bu işlem geri alınamaz.'
     delete_it: 'Sil'
-    remove_project: 'Stüdyodan kaldır'
     remove_project_error: 'Proje stüdyodan kaldırılamadı!'
-    remove_project_success: 'proje stüdyodan başarıyla kaldırıldı!'
     no_projects: 'Studio henüz proje içermiyor'
     projects:
       title: 'projeler'
@@ -1194,10 +838,8 @@ studio:
       no_projects_empty_state: 'Henüz ekleyebileceğin bir projen yok. Önce Pocket Code''da bir tane oluştur!'
       add_selected: 'Seçilenleri ekle'
     no_available_projects: 'Eklenebilecek proje yok.'
-    updateCoverError: 'Stüdyo kapağı güncellenirken bir şeyler ters gitti!'
     join: 'Katıl'
     leave: 'Ayrıl'
-    report: 'Bildir'
     pending: 'Beklemede'
     decline: 'Reddedildi'
     comments:
@@ -1217,7 +859,6 @@ studio:
       add_comment: '%user% bir proje ekledi.'
     members_list:
       title: 'Stüdyo üyeleri'
-      project_count: '{0} Stüdyo projesi yok |{1} 1 stüdyo projesi |]1,Inf] %count% stüdyo projesi'
       no_studio_projects: 'Stüdyo projesi yok'
       one_studio_project: '1 stüdyo projesi'
       n_studio_projects: '%count% stüdyo projesi'
@@ -1227,7 +868,6 @@ studio:
       ban_failed: 'Bu üye yasaklanırken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
       demote_member: 'Yöneticiyi üyeliğe düşür'
       demotion_failed: 'Bu yöneticinin yetkisi düşürülürken bir sorun oluştu. Daha sonra tekrar dene.'
-      last_admin: 'Bu stüdyonun son yöneticisinin yetkisi düşürülemez.'
     join_requests:
       title: 'Katılma istekleri'
       accept: 'Kabul et'
@@ -1257,7 +897,6 @@ media_library:
   no_results: 'Sonuç bulunamadı.'
   assets_count: 'dosya'
   view_all: 'Tümünü gör'
-  view_all_category: 'Tüm %category% öğelerini gör'
   back_to_app: 'Uygulamaya dön'
 snackbar:
   project_not_found: 'İstenen proje mevcut değil'
@@ -1311,14 +950,6 @@ moderation:
     rate_limited: "Stüdyo işlemlerini çok hızlı yapıyorsun. Lütfen biraz bekle."
   hidden_notice:
     project: "Bu proje topluluk bildirimleri nedeniyle gizlendi."
-    comment: "Bu yorum topluluk bildirimleri nedeniyle gizlendi."
-    user: "Bu profil topluluk bildirimleri nedeniyle gizlendi."
     user_own: "Hesabın topluluk bildirimleri nedeniyle askıya alındı. Bu karara itiraz edebilirsin."
-    studio: "Bu stüdyo topluluk bildirimleri nedeniyle gizlendi."
-  notification:
-    content_hidden: "%content_type% içeriğin topluluk bildirimleri nedeniyle gizlendi. Bu karara itiraz edebilirsin."
-    appeal_approved: "İtirazın onaylandı. İçeriğin artık yeniden görünür."
-    appeal_rejected: "İtirazın incelendi ve içeriğini gizleme kararı geçerliliğini koruyor."
-    admin_review_needed: "İçerik otomatik olarak gizlendi ve incelenmesi gerekiyor."
 Reports: Bildirimler
 members: üye

@@ -8,19 +8,12 @@ meta.og.description.login: Kirjaudu sisään jakaaksesi Catrobat-projektejasi yh
 meta.og.title.register: Luo Catrobat-tili
 meta.og.description.register: Liity Catrobat-yhteisöön ja ala jakaa luovia projektejasi jo tänään.
 meta.og.description.profile: '%username% Catrobatissa – selaa hänen projektejaan ja saavutuksiaan.'
-localLanguage: Suomi
 username: Käyttäjänimi
 password: Salasana
-createNewPassword: Luo uusi salasana
-accountSettings: Tilin asetukset
 email: Sähköposti
-aboutPocketCode: Tietoa Pocket Codesta
 about: Tietoa Catrobatista
-education: Opetus
 chat: Chat ja foorumit
-privacyGuide: Yksityisyysopas
 others: Muut
-tutorials: Ohjeet
 googlePlay: Google Play
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Miten loit tämän projektin? Käytitkö muiden ideo
 projectImportedFromScratch: Tämä projekti on tuotu MIT Scratchista. Voit katsoa alkuperäisen projektin
 scratchImportedProjectLinkHere: täältä.
 country: Maa
-loginText: kirjaudu sisään
 privacyPolicy: Tietosuojakäytäntö
-imprint: Julkaisutiedot
 projectDetails: Tiedot
 somethingWentWrong: 'Hups, jokin ei toiminut. Yritä uudelleen!'
 accountNotVerified: 'Varmista, että olet kirjautunut sisään ja tilisi sähköpostiosoite on vahvistettu.'
@@ -55,36 +46,28 @@ accountSuspended: 'Tilisi on jäädytetty yhteisön ilmoitusten vuoksi. Voit val
 doesNotExist: 'Pyydettyä resurssia ei ole olemassa.'
 pleaseTryAgain: 'Yritä uudelleen!'
 tryAgainButton: 'Yritä uudelleen'
-oldVersionError: 'Päivitä Pocket Code uusimpaan versioon!'
 more: 'lisää'
 less: 'vähemmän'
 show-more: 'Lisätietoja'
-show-less: 'Vähemmän tietoja'
 more-information: 'Lisätietoja'
 less-information: 'Vähemmän tietoja'
 ok: Selvä
-clickToDownloadProgram: 'Lataa esimerkkiprojekti napsauttamalla %link_start% tästä %link_end%.'
-registrationError: 'Käyttäjänimi tai sähköpostiosoite on jo käytössä.'
 notifications: 'Ilmoitukset'
 allNotifications: 'Kaikki'
 FollowersNotifications: 'Seuraajat'
 LikeNotifications: 'Reaktiot'
 CommentNotifications: 'Kommentit'
 RemixNotifications: 'Remiksit'
-wellDone: "Hienoa!"
 done: "Valmis!"
 notificationsReadMessage: "Sinulla ei näytä olevan ilmoituksia."
-confirmMessage: "Kyllä, poista se"
 cancelMessage: "Peruuta"
 notificationsUnauthorizedError: "Käyttäjää ei voitu valtuuttaa"
 notificationsClearError: "Ilmoituksia ei voitu merkitä luetuiksi!"
-pleaseWait: "Odota hetki..."
 projects: "Projektit"
 users: "Käyttäjät"
 studios: "Studiot"
 oauthPopUpTitle: "Tietoa kirjautumisesta ulkoisella tilillä"
 oauthInfo: 'Kirjauduit juuri sisään ulkoisella tilillä. Loimme sinulle satunnaisen käyttäjänimen. Jos haluat vaihtaa käyttäjänimesi tai luoda tilillesi uuden salasanan, siirry profiilisivullesi.'
-oauthHere: "täältä"
 statistics: "Tilastot"
 languageSelection: "Kielen valinta"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Tumma'
   dark_description: 'Tumma ulkoasu'
   apply: 'Käytä'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Mitä projekteja täällä suositellaan?'
-      description: 'Mitä enemmän reaktioita (peukku ylös, hymy ...) projektisi saa, sitä korkeammalle se nousee tällä listalla.'
 follower:
   follows: Seurattavat
   followers: Seuraajat
   follow: Seuraa
-  username: Käyttäjä
   followsMe: Seuraa minua
   noFollowing: Et seuraa tällä hetkellä ketään.
   noFollowers: Sinulla ei ole tällä hetkellä seuraajia.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Haluatko varmasti lopettaa tämän käyttäjän seuraamisen?"
   unfollowButton: "Lopeta käyttäjän %username% seuraaminen"
 project:
-  welcome:
-    title: Tervetuloa Catrobatin %theme%-sivulle
-    title_mindstorms: Tervetuloa Catrobatin Mindstorms EV3- ja NXT-sivulle
-    subtitle: Luo tarinoita, pelejä ja paljon muuta...
-    subtitle_embroidery: Kirjo omia kuvioita T-paitoihisi, laukkuihisi, housuihisi tai puhelimesi kuoreen!
-    subtitle_mindstorms: Luo omia projekteja Lego Mindstorms EV3- ja NXT-roboteillesi
-    download: Lataa sovellus
-    statistics: Lisää tilastoja
   featured: Esittelyssä
   open: Avaa
   download: Lataa
@@ -148,9 +117,6 @@ project:
       retention: Lähetetyt projektit poistetaan automaattisesti, jos niitä ei käytetä vähään aikaan. Kirjaudu säännöllisesti tai hanki projektillesi latauksia pidentääksesi sen säilytysaikaa.
       protection: Moderaattorit voivat suojata erityisen hyviä tai suosittuja projekteja automaattiselta poistolta.
   example: Esimerkit
-  newest: Uusimmat projektit
-  recommended: Suositellut projektit
-  scratchremixes: Scratch-remiksit
   noProjects: Projekteja ei ole tällä hetkellä.
   shareAction: Jaa
   deleteAction: Poista projekti
@@ -190,17 +156,10 @@ project:
     Toimintoa ei voi perua!
     Kyllä, poista se!
     Peruuta
-  tooLongName: Projektin nimi on liian pitkä!
-  tooLongDescription: Projektin kuvaus on liian pitkä!
-  tooLongCredits: Projektin muistiinpanot ja tekijätiedot ovat liian pitkiä!
   my_projects: Jakamani projektit
   trending: Nousussa olevat projektit
   popular: Suositut projektit
-  most:
-    viewed: Katsotuimmat
-    downloaded: Ladatuimmat
   random: Satunnaiset projektit
-  related: Samankaltaiset projektit
   browse:
     explore: 'Tutki projekteja'
     no_projects: "Et ole vielä luonut yhtään projektia"
@@ -214,36 +173,14 @@ project:
     tooltip: 'Projektit poistetaan automaattisesti, jos niitä ei käytetä vähään aikaan. Hanki lisää latauksia tai kirjaudu säännöllisesti pidentääksesi säilytysaikaa.'
     tooltip_protected: 'Tämä projekti on suojattu, eikä sitä poisteta automaattisesti.'
   downloads: '%downloads% latausta'
-  sample: Esimerkkiprojektit
   views: '%views% katselua'
   likes:
     likersTitle: "Projektiin reagoineet"
     all: "Kaikki"
-  remixes: '{0}0 remiksiä |{1}1 remiksi |]1,Inf]%remixes% remiksiä'
-  newRemixesNotificationTitle: '|{1}Projektilla "%programName%" on 1 uusi remiksi: |]1,Inf] Projektilla "%programName%" on %remixes% uutta remiksiä:'
-  submitted: Lähetetyt projektit
-  uploaded: Ladatut projektit
-  reportAsInappropriate: Ilmoita sopimattomaksi
-  reportProgram: Ilmoita projektista
   languageVersion: 'Catrobat-kielen versio: %languageVersion%'
-  reportLoginText: Ole hyvä ja %login% ilmoittaaksesi tästä projektista.
-  reportDialogHeader: Miksi haluat ilmoittaa tästä projektista?
-  reportDialogReason: Kirjoita syy
-  reportRadioButtonInappropriate: Se on sopimaton
-  reportRadioButtonCopyright: Tekijänoikeusloukkaus
-  reportRadioButtonSpam: Se on roskapostia
-  reportRadioButtonDislike: En pidä siitä
-  reportOwnProgram: Et voi ilmoittaa omasta projektistasi.
-  reportAlready: Olet jo ilmoittanut tästä projektista.
-  reportDone: Ilmoitit tästä projektista!
   updateAppHeaderDownload: Lataus ei ole mahdollinen
   updateAppTextDownload: Päivitä sovelluksesi uusimpaan versioon. Huomaa, että kaikki Android-ominaisuudet eivät ole vielä saatavilla iOS:ssä.
-  updateAppTextDownloadApk: APK-lataus on tällä hetkellä saatavilla vain Androidilla, ei iOS:ssä.
-  updateAppHeader: Päivitä sovellus
-  updateAppText: Päivitä sovelluksesi uusimpaan versioon.
-  btnClosePopup: OK
   checkout_this_project: Katso tämä Catrobat-projekti
-  show_more: Näytä lisää
   comments: Kommentit
   send: Lähetä
   delete: Poista
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: Poistettu
   noAdminRights: Sinulla ei ole ylläpitäjän oikeuksia. Kirjaudu sisään ylläpitäjänä.
   editProject: Muokkaa projektia
-  closeProjectEditor: Sulje projektieditori
   closeEditorPrompt: Haluatko tallentaa muutoksesi?
   btnDiscard: Hylkää
   addComment: Kirjoita kommentti
@@ -263,8 +199,6 @@ project:
   smile: Hymy!
   love: Rakkautta!
   wow: Vau!
-  linkTitle: Linkki
-  link: Kopioi projektin linkki leikepöydälle
   reactionsText: Reaktiot
   downloadErrorText: Projektin lataamisessa tapahtui virhe. Yritä myöhemmin uudelleen.
   downloadStartText: Lataus on alkanut...
@@ -284,11 +218,8 @@ project:
   translations: Käännökset
   createTranslation: Luo käännös
   deletedComment: '**Poistettu**'
-  replyLabel: vastaus
-  repliesLabel: vastausta
   notForKids: Ei sovellu lapsille
 remixGraph:
-  title: Remiksit
   showRemixGraph: 'Remiksikaavio'
   by: 'tekijältä'
   open: 'Avaa'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Ei saatavilla'
   projectUnknownUser: 'Tuntematon käyttäjä'
 noReply: 'Tämä on automaattinen viesti – älä vastaa suoraan tähän sähköpostiin.'
-accountConfirmation:
-  subject: Catrobat-tilisi vahvistus
-  message: |
-    Hei %username%.
-    Viimeistele tilisi aktivointi käymällä osoitteessa %confirmationUrl%
-    Tätä linkkiä voi käyttää vain kerran tilisi vahvistamiseen.
-    Terveisin
-    Catrobat-tiimisi
-  messageHtml: |
-    <p>
-    Hei %username%.<br>
-    <br>
-    Viimeistele tilisi aktivointi napsauttamalla <a href="%confirmationUrl%">tästä.</a><br>
-    Tätä linkkiä voi käyttää vain kerran tilisi vahvistamiseen.<br>
-    <br>
-    Terveisin<br>
-    Catrobat-tiimisi
-    </p>
 newAccountConfirmation:
   subject: "Vahvista sähköpostiosoitteesi"
   welcome: "Tervetuloa Catrobatiin!"
@@ -403,63 +316,13 @@ parent:
       ignore: "Jos et pyytänyt tätä, voit jättää tämän sähköpostin huomiotta."
 passwordRecovery:
   subject: Catrobat-salasanasi palautus
-  message: |
-    Hei %username%.
-    Pyysit salasanasi nollaamista sivustolla %appplication_url%, koska olet unohtanut salasanasi.
-    Jos et pyytänyt tätä, jätä viesti huomiotta. Pyyntö vanhenee ja muuttuu käyttökelvottomaksi 24 tunnin kuluttua.
-    Nollaa salasanasi ja luo uusi käymällä seuraavalla sivulla: %confirmationUrl%
-    Voit käyttää käyttäjänimeäsi ja salasanaasi milloin tahansa päästäksesi %appplication_url% -yhteisöön.
-    Käy sitä varten seuraavalla sivulla: %loginPage%
-    Voit muokata profiilisi tietoja tällä sivulla: %profilePage%
-    Terveisin
-    Catrobat-tiimisi
-  messageHtml: |
-    <p>
-    Hei %username%.<br>
-    <br>
-    Pyysit salasanasi nollaamista sivustolla <a href="%appplication_url%">Pocket Code</a>, koska olet unohtanut salasanasi.
-    Jos et pyytänyt tätä, jätä viesti huomiotta. Pyyntö vanhenee ja muuttuu käyttökelvottomaksi 24 tunnin kuluttua.<br>
-    <br>
-    Nollaa salasanasi ja luo uusi napsauttamalla <a href="%confirmationUrl%">tästä.</a><br>
-    <br>
-    Voit käyttää käyttäjänimeäsi ja salasanaasi milloin tahansa päästäksesi <a href="%appplication_url%">Pocket Code</a> -yhteisöön.<br>
-    Käy sitä varten seuraavalla sivulla: <a href="%loginPage%">Kirjautumissivu</a><br>
-    Voit muokata profiilisi tietoja tällä <a href="%profilePage%">sivulla</a>.<br>
-    <br>
-    Terveisin<br>
-    Catrobat-tiimisi
-    </p>
 profile:
   aboutMe: Tietoa minusta
   currentlyWorkingOn: Työn alla nyt
-  edit: Muokkaa profiiliasi
-  saveChanges: tallenna muutokset
   newPass: uusi salasana
   repeatPass: toista salasana
   oldPass: vanha salasana
-  firstEmail: Ensimmäinen sähköpostini
-  secondEmail: Toinen sähköpostini
-  myPrograms: Omat projektit
-  follows: Seuraa
-  follower: Seuraaja
-  unfollowUser: Lopeta tämän käyttäjän seuraaminen!
-  followUser: Seuraa tätä käyttäjää!
-  amountOfPrograms: Projektien määrä
-  form:
-    passwordTooShort: Uudessa salasanassa on oltava vähintään %length% merkkiä.
-    passwordTooLong: Uudessa salasanassa voi olla enintään %length% merkkiä.
-    passwordIsUsername: Salasana ei saa olla sama kuin käyttäjänimi.
-    passwordWrong: Väärä salasana
-    emailNotValid: Tämä sähköpostiosoite ei ole kelvollinen.
-    emailMissing: Virhe tämän sähköpostiosoitteen päivittämisessä. Sinulla on oltava vähintään yksi vahvistettu sähköpostiosoite.
-    emailExists: Tämä sähköpostiosoite on jo olemassa.
-    usernameNotValid: Tämä käyttäjänimi ei ole kelvollinen.
-    usernameMissing: Sinulla on oltava käyttäjänimi.
-    usernameExists: Tämä käyttäjänimi on jo olemassa.
-    usernameContainsEmail: Käyttäjänimi ei saa sisältää sähköpostiosoitetta.
-    submitSuccess: tallennettu!
   reallyDeleteProgram: Haluatko todella poistaa projektisi
-  programsOf: Projektit käyttäjältä
   picture: Profiilikuva
   changePicture: Vaihda kuva
   goToScratchProfile: Profiili Scratchissa
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: Vaihda salasana
   accountSettings: Tilin asetukset
   accountVerification: Vahvista tili
-  account: Tili
-  editProfile: Muokkaa profiilia
-  edit: Muokkaa
   done: Valmis
-  checkMail: Sähköpostiosoitteeseesi lähetettiin viesti. Tarkista saapuneet viestisi.
   passwordUpdated: Salasanasi päivitettiin onnistuneesti.
-  avatar: Avatar
-  email: Sähköposti
   deleteAccount: Poista tili
   deleteAccountWarning: |
     Huomaa:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: Ladataan...
   exportDataError: Tietojesi viennissä tapahtui virhe. Yritä myöhemmin uudelleen.
   exportDataRateLimited: Voit viedä tietosi vain kerran päivässä. Yritä uudelleen huomenna.
-  editAccountSettings: Muokkaa tilin asetuksia
   profileChangeSuccess: Profiilisi muutettiin onnistuneesti.
   unspecifiedError: Profiilisi muuttamisessa jokin ei toiminut. Yritä uudelleen tai kerro meille, jos ongelma toistuu!
   verifyAccountText: Lähetämme sinulle sähköpostin, jossa on linkki tilisi vahvistamiseen. Muista napsauttaa linkkiä tunnin kuluessa – voit pyytää vain yhden sähköpostin päivässä.
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Lähetä näitä käyttöehtoja koskevat ehdotukset osoitteeseen %email-webmaster%.'
   version: Versio 1.3, 4. maaliskuuta 2014
 search:
-  dotdotdot: Hae...
   search: Hae projekteja, käyttäjiä ja studioita
   inMediaLib: Hae mediakirjastosta
   inMediaCategory: Hae mediakategoriasta
   results: Hakutulokset
-  resultcount: Hakusi tuotti %count% tulosta
-  fail: Kirjoita vähintään yksi hakusana
   noUsers: Käyttäjiä ei löytynyt
   noProjects: Projekteja ei löytynyt
   noStudios: Studioita ei löytynyt
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: Mediakirjasto
   studio: Studiot
   language: Kieli
-  languageOptionsNotAvailable: Kielivaihtoehtoja ei ole saatavilla.
 login:
   login: Kirjaudu sisään
   button:
@@ -578,21 +430,10 @@ login:
     or: "tai"
   passOrUser: Salasanasi tai käyttäjänimesi oli väärä.
   accountSuspended: 'Tilisi on jäädytetty. Jos uskot tämän olevan virhe, ota yhteyttä tukeen.'
-  noUsername: Käyttäjänimeäsi tai sähköpostiosoitettasi ei löytynyt.
-  forgotPass: Unohditko salasanan tai käyttäjänimen?
   recoverPassSend: Sähköpostiosoitteeseesi lähetettiin viesti. Tarkista saapuneet viestisi.
   alreadyReset: Tämän käyttäjän salasanaa on jo pyydetty viimeisen 24 tunnin aikana.
-  confirmationSend: Sähköpostiosoitteeseesi lähetettiin rekisteröitymisen vahvistusviesti. Tarkista saapuneet viestisi ja aktivoi tilisi.
-  userOrEmail: Käyttäjänimi tai sähköposti
-  changePass: Vaihda salasana
-  createAccount: Luo tili
-  noAccount: Eikö sinulla ole tiliä?
-  alreadyAccount: Onko sinulla jo tili?
-  or: TAI
   username: Käyttäjänimi
   email: Sähköposti
-  passwordFirst: Salasana
-  passwordSecond: Vahvista salasana
 register:
   title: Rekisteröidy
   subText: "Jatkamalla luot Catrobat-yhteisötilin ja hyväksyt %var1% ja %var2%."
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: "Huoltajan suostumus peruttiin"
     message: "Vanhempasi tai huoltajasi on peruuttanut suostumuksen tilillesi. Tilisi toiminnot ovat rajoitettuja, kunnes suostumus annetaan uudelleen."
-    newEmailPlaceholder: "Vanhemman uusi sähköposti"
-    changeButton: "Päivitä ja lähetä uudelleen"
-accountRecovery:
-  title: Tilin palautus
-  description: Jos muistat tilisi sähköpostiosoitteen tai käyttäjänimen, voimme lähettää sinulle linkin salasanan nollaamiseen.
-  button:
-    cancel: Peruuta
-    submit: Palauta salasana
 resetPassword:
   request:
     title: "Nollaa salasanasi"
@@ -645,11 +478,6 @@ resetPassword:
     description: "Jos sähköpostiosoitettasi vastaava tili on olemassa, sinulle lähetettiin juuri sähköposti, jossa on linkki salasanan nollaamiseen. Linkki vanhenee %time% kuluttua."
     descriptionTwo: "Voit pyytää uutta salasanan nollausta %throttleLimit% tunnin välein."
     descriptionThree: "Jos et saanut sähköpostia, tarkista roskapostikansiosi tai kirjoita tukeemme osoitteeseen %email-webmaster%."
-  email:
-    title: "Hei!"
-    visitLink: "Nollaa salasanasi käymällä seuraavassa linkissä"
-    expire: "Linkki vanhenee %time% kuluttua."
-    cheers: "Terveisin!"
   newemail:
     title: "Nollaa salasanasi"
     content: "Pyysit hiljattain Catrobat-tilisi salasanan nollausta. Valitse uusi salasana napsauttamalla alla olevaa painiketta. Jos et pyytänyt tätä, voit jättää tämän sähköpostin huomiotta."
@@ -659,76 +487,33 @@ resetPassword:
     title: "Nollaa salasanasi"
     button:
       submit: "Nollaa salasana"
-apk:
-  download: Lataa sovelluksena
-  prepare: 'Hae sovelluksena'
-  preparing: 'Sovellusta valmistellaan'
-  text: 'Tämä voi kestää hetken'
 format:
   million_abbreviation: milj.
 #api
 errors:
   unspecified: Jokin ei toiminut. Yritä uudelleen tai kerro meille, jos ongelma toistuu!
-  username:
-    blank: Käyttäjänimi ei saa olla tyhjä
-    invalid: Käyttäjänimesi ei kelpaa
-    exists: Tämä käyttäjänimi on jo olemassa.
-    not_exists: Tätä käyttäjänimeä ei ole olemassa.
-    not_email: Käyttäjänimi ei saa olla sähköpostiosoite.
-    size: Käyttäjänimessä on oltava vähintään 3 ja enintään 180 merkkiä
-  password:
-    blank: Salasana puuttuu.
-    short: 'Salasanassasi on oltava vähintään {{ limit }} merkkiä.'
-  country:
-    blank: Maa puuttuu.
-    invalid: Virheellinen maa
-  email:
-    blank: Sähköposti ei saa olla tyhjä
-    invalid: Sähköpostiosoitteesi näyttää virheelliseltä
-    exists: Tämä sähköpostiosoite on jo olemassa.
-  id:
-    blank: Open Authentication -tunnus ei saa olla tyhjä
-  login: Salasana tai käyttäjänimi oli väärä.
-  post-data: POST-tiedot ovat virheelliset tai puuttuvat!
-  checksum:
-    missing: Asiakas ei lähettänyt fileChecksum-arvoa! Käytätkö vanhentunutta Pocket Code -versiota?
-    invalid: virheellinen tarkistussumma
   xml:
     invalid: virheellinen koodi-XML
     missing: 'tuntematon virhe: project_xml_not_found!'
   file:
-    unexpected: odottamaton tiedosto löytyi
     invalid: virheellinen tiedosto
-  image.missing: Projektin XML viittaa tiedostoon, jota ei ole projektikansiossa
-  unknown: tuntematon virhe
-  token: 'Laitteen tunnistus epäonnistui: virheellinen auth-token!'
-  uploadTokenAuthFailed: 'Lähetystunnuksen tunnistus epäonnistui.'
-  project:
-    invalid: Virheellinen projekti.
   languageversion:
     tooold: 'Valitettavasti projektisi sisältää vanhan version Catrobat-kielestä! Käytätkö Pocket Coden uusinta versiota?'
   projectversion:
     tooold: 'Valitettavasti käytät vanhaa Pocket Code -versiota. Päivitä uusimpaan versioon.'
   authentication:
-    title: Kirjautuminen ei onnistunut
     webview: |
       Käyttäjänimesi tai salasanasi ei näytä olleen oikein.
       Yritä kirjautua uudelleen sovelluksessa.
 success:
   text: Onnistui
-  registration: Rekisteröityminen onnistui!
-  token: ok
-  upload: Projektisi lähetettiin onnistuneesti!
   imgUpload: Kuvasi lähetettiin onnistuneesti!
-  report: Ilmoituksesi lähetettiin onnistuneesti!
 time:
   minutes.ago: '{0} < 1 minuutti sitten |{1}1 minuutti sitten |]1,Inf] %count% minuuttia sitten'
   hours.ago: '{1}1 tunti sitten |]1,Inf] %count% tuntia sitten'
   days.ago: '{1}1 päivä sitten |]1,Inf] %count% päivää sitten'
   months.ago: '{1}1 kuukausi sitten |]1,Inf] %count% kuukautta sitten'
   years.ago: '{1}1 vuosi sitten |]1,Inf] yli vuosi sitten'
-failure:
-  upload: Sovelluksesi lähetyksessä tapahtui virhe.
 user:
   verification:
     email: 'Vahvista sähköpostiosoitteesi'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'Salasanassa on virheellisiä merkkejä'
     usernameContainsEmail: "Käyttäjänimi ei saa sisältää sähköpostiosoitetta"
     usernameContainsLink: "Käyttäjänimi ei saa sisältää linkkiä"
-    countryCodeInvalid: "Virheellinen maakoodi"
     pictureInvalid: "Profiilikuva on virheellinen tai sitä ei tueta"
     dateOfBirthMissing: "Syntymäaika vaaditaan"
     dateOfBirthInvalid: "Syntymäaika on virheellinen"
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'Nimi on jo käytössä'
     descriptionMissing: 'Kuvaus puuttuu'
     descriptionEmpty: 'Kuvaus on tyhjä'
-    descriptionTooShort: 'Kuvaus on liian lyhyt'
     descriptionTooLong: 'Kuvaus on liian pitkä'
     imageFileInvalid: 'Virheellinen kuvatiedosto'
     imageFileInvalidType: 'Virheellinen kuvatiedoston tyyppi'
     imageFileTooLarge: 'Kuvatiedosto on liian suuri'
-#languages and countries
-language:
-  arabic: arabia
-  bulgarian: bulgaria
-  catalan: katalaani
-  chinese_simplified_han: kiina (yksinkertaistettu)
-  chinese_traditional_han: kiina (perinteinen)
-  croatian: kroatia
-  czech: tšekki
-  danish: tanska
-  dutch: hollanti
-  english_united_kingdom: englanti (Iso-Britannia)
-  english_united_states: englanti (Yhdysvallat)
-  estonian: viro
-  filipino: filipino
-  finnish: suomi
-  french: ranska
-  german: saksa
-  greek: kreikka
-  hebrew: heprea
-  hindi: hindi
-  hungarian: unkari
-  indonesian: indonesia
-  italian: italia
-  japanese: japani
-  korean: korea
-  latvian: latvia
-  lithuanian: liettua
-  malay: malaiji
-  norwegian: norja
-  persian: persia
-  polish: puola
-  portuguese_brazil: portugali (Brasilia)
-  portuguese_portugal: portugali (Portugali)
-  romanian: romania
-  russian: venäjä
-  serbian: serbia
-  slovak: slovakki
-  slovenian: sloveeni
-  spanish_latin_america: espanja (Latinalainen Amerikka)
-  spanish_spain: espanja (Espanja)
-  swedish: ruotsi
-  thai: thai
-  turkish: turkki
-  ukrainian: ukraina
-  vietnamese: vietnam
-ci:
-  generate: Luo APK
-  pending: Luodaan APK:ta
-  download: Lataa APK
+
 admin:
   maintain:
     diskMaintenance: Levyn ylläpito
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: Poistettavia kohteita ei ole.
     removableObjects: Poistettavat kohteet
 recommender:
-  similarPrograms: Samankaltaiset projektit
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Tämän projektin lataajat latasivat myös
   moreFromThisUser: Lisää käyttäjältä %username%
-pmd:
-  submitBtn: Lähetä projektisi
-  submitBox:
-    header: Lähetys
-    text: Olet lähettämässä projektiasi. Kirjoita projektin koodi ja napsauta Lähetä.
-    btnText: Lähetä
-  successful:
-    text: Projektisi lähetys onnistui.
-  failed:
-    text: Projektin lähetys epäonnistui.
 codeview:
   title: 'Koodinäkymä'
-  showCode: 'Näytä koodi'
-  hideCode: 'Piilota koodi'
-  showStatistics: 'Näytä koodin tilastot'
-  hideStatistics: 'Piilota koodin tilastot'
-  cantDisplayCode: "Koodia ei voi näyttää"
-  cantDisplayStatistics: "Koodia ei voi näyttää"
-  totalNumberOf: 'Yhteensä'
-  scenes: 'Kohtaukset'
-  scripts: 'Skriptit'
-  bricks: 'Palikat'
-  objects: 'Hahmot ja objektit'
-  looks: 'Asut'
-  sounds: 'Äänet'
-  globals: 'Globaalit'
-  locals: 'Paikalliset'
-  globalVariables: 'Globaalit muuttujat'
-  localVariables: 'Paikalliset muuttujat'
-  eventBricks: 'Tapahtumapalikat'
-  controlBricks: 'Ohjauspalikat'
-  motionBricks: 'Liikepalikat'
-  soundBricks: 'Äänipalikat'
-  looksBricks: 'Asupalikat'
-  penBricks: 'Kynäpalikat'
-  dataBricks: 'Datapalikat'
-  specialBricks: 'Erikoispalikat'
 codeView:
   title: 'Koodinäkymä'
   loading: 'Ladataan koodinäkymää...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: "Koodin tilastot"
   error: "Koodin tilastoja ei voi näyttää."
-  general: 'Yleiset'
-  bricks: 'Palikat'
-  eventBricks: 'Tapahtumat'
-  controlBricks: 'Ohjaus'
-  motionBricks: 'Liike'
-  soundBricks: 'Ääni'
-  looksBricks: 'Asut'
-  penBricks: 'Kynä'
-  dataBricks: 'Data'
-  deviceBricks: 'Laite'
-  specialBricks: 'Erikoiset'
   yourScore: 'Pisteesi:'
-  points: 'pistettä'
   abstraction: 'Abstrahointi ja ongelman pilkkominen'
   parallelism: 'Rinnakkaisuus'
   logicalThinking: 'Looginen ajattelu'
@@ -927,20 +612,7 @@ footer:
   text: "Jo %project_count% upeaa projektia on jaettu – seuraava voi olla sinun. Lataa sovelluksemme ja aloita luominen jo tänään"
 privacy-policy:
   header: Tietosuojakäytäntö
-  version: Versio 2.2, 17. lokakuuta 2019
-  text1: Jotta voimme tarjota sinulle kaikki palveluidemme ja niihin liittyvän tilin edut, meidän on kerättävä sinusta tiettyjä tietoja.
-  text2: Palveluidemme (sovellusten ja verkkosivujen) ylläpitämiseksi ja parantamiseksi sekä tieto- ja viestintätekniikan ja STEM/STEAM-opetuksen tieteellistä tutkimusta varten käytämme Google Analyticsia, Crashlyticsia ja Firebasea (kaikki Google LLC, USA) sekä Dynatracea (Dynatrace LLC, USA) saadaksemme metatietoja palveluidemme käytöstä, esim. kaatumistietoja, aikaleimoja, vierailtuja sivuja/näkymiä, sovellustemme ja palveluidemme käyttöä, käytettyä käyttöjärjestelmää ja tietoja verkko-operaattorista. Tätä analyysiä ja kerättyjä tietoja ei yhdistetä profiiliisi, eivätkä ne sisällä henkilötietoja (IP-osoitteen viimeiset bitit anonymisoidaan). Kerätyt tiedot siirretään kuitenkin palveluntarjoajille (Google LLC, USA ja Dynatrace LLC, USA). Tietojenkäsittely perustuu sopimuksiin Google LLC:n ja Dynatrace LLC:n kanssa. Suhde palveluntarjoajiin on Euroopan unionin yleisen tietosuoja-asetuksen (EU GDPR) ja EU:n ja Yhdysvaltojen välisen "Privacy Shield" -sopimuksen mukainen.
-  text3: Jotta voit luoda tilin järjestelmiimme ja käyttää sitä ja jotta voimme ilmoittaa sinulle sähköpostitse tiliäsi koskevista tarpeellisista muutoksista, esim. päivityksistä tai käyttö- ja palveluehtojemme, yhteisösääntöjemme tai käytäntöjemme rikkomuksista, tallennamme käyttäjänimesi ja, jos annat sen, sähköpostiosoitteesi. Jos olet yhdistänyt tilisi Google Plusin tai Facebookin kautta, tallennamme lisäksi tunnisteavaimen, joka liittyy tiliisi näissä palveluissa. Emme käytä näitä tietoja mihinkään muuhun (esim. markkinointi)tarkoitukseen, ellet ole nimenomaisesti antanut siihen lupaa.
-  text4: Voit vapaaehtoisesti kertoa meille asuinmaasi jakosivuston tilisivulla. Se näytetään julkisessa profiilissasi, ja käytämme sitä vain tilasto- ja tutkimustarkoituksiin. Voit poistaa sen milloin tahansa profiilisi asetuksista.
-  text5: Voit milloin tahansa peruuttaa tiliisi kuuluvien henkilötietojen käytön poistamalla tilisi profiilisivultasi osoitteessa https://share.catrobat.org/. Tilin poistamisen jälkeen voit edelleen käyttää tarjottuja palveluita, mutta et voi osallistua yhteistyöhön esim. lähettämällä ohjelmia, kommentoimalla tai tykkäämällä. Lisäksi kaikki tiliisi liittyvä sisältö, esim. lähetetyt ohjelmat ja kommentit, poistetaan.
-  text6: Palveluidemme väärinkäytön estämiseksi, esim. käyttäjien lähettämien tiedostojen tai kommenttien käyttämisen laittomiin tarkoituksiin, kaikki käyttäjien luoma julkinen sisältö (lähetykset, kommentit) tallennetaan sisäisesti tietokantaan yhdessä aikaleiman ja käytetyn internetosoitteen kanssa. Näitä tietoja ei käytetä eikä luovuteta millekään taholle, ellei ole perusteltua epäillä riittävän vakavaa laitonta toimintaa ja virallisesti valtuutetut oikeusviranomaiset pyydä niitä sovellettavan lain nojalla. Tarkistamme jokaisen tapauksen ensin perusteellisesti yksilöllisesti.
-  text7: Voit vapaaehtoisesti tilata Catrobat-uutiskirjeen osoitteessa https://catrobat.org/newsletter. Tarjoamme sen MailChimp-palvelun (The Rocket Science Group LLC d/b/a MailChimp, USA) kautta. Saat silloin päivityksiä Catrobat-projektista ja sen palveluista antamaasi sähköpostiosoitteeseen. Voit perua uutiskirjeen milloin tahansa jokaisen uutiskirjeen alatunnisteessa olevalla "unsubscribe"-linkillä. Uutiskirjeen tarjoaa MailChimp, jonka kanssa meillä on tietojenkäsittelysopimus ja joka on sitoutunut EU:n yleiseen tietosuoja-asetukseen ja EU:n ja Yhdysvaltojen väliseen "Privacy Shield" -sopimukseen. Lisätietoja MailChimpistä löydät myös MailChimpin tietosuojakäytännöstä ja käyttöehdoista.
-  text8: Kaikki palvelut tarjoaa vapaa avoimen lähdekoodin Catrobat-projekti International Catrobat Associationin – Verein zur Förderung freier Software – alaisuudessa. Se on Grazissa, Itävallassa (Euroopan unioni) rekisteröity voittoa tavoittelematon kansalaisjärjestö. Käytäntömme noudattavat EU:n ja Itävallan tietosuojalainsäädäntöä (GDPR). Ota meihin yhteyttä sähköpostitse osoitteeseen contact@catrobat.org tai postitse osoitteeseen Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: Jos olet alle 14-vuotias, laillisen huoltajan (yleensä vanhemman) on hyväksyttävä tämä käytäntö.
-  text10: Catrobatin virallinen englanninkielinen tietosuojakäytäntö on saatavilla verkossa osoitteessa %privacy_policy%.
-  disagree-text: Ilman hyväksyntää emme voi luoda tiliä, mutta keskeiset toiminnot ovat silti käytettävissä.
 catro-notifications:
-  markAsRead: "Merkitse luetuksi"
   noFollowers: "Sinulla ei näytä olevan seuraajailmoituksia."
   noComments: "Sinulla ei näytä olevan kommentti-ilmoituksia."
   noReactions: "Sinulla ei näytä olevan reaktioilmoituksia."
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: Linkki kopioitiin leikepöydälle!
   success_project: Projektin linkki kopioitiin leikepöydälle!
-  success_user: Käyttäjän linkki kopioitiin leikepöydälle!
   fail: Linkin kopiointi leikepöydälle epäonnistui! :(
 next: Seuraava
 previous: Edellinen
 media-packages:
   title: Mediakirjasto
   description: Seuraavista kategorioista löydät hahmoja ja objekteja lisättäväksi projekteihisi.
-  thumb-size:
-    description: Esikatselun koko
-    sm: pieni
-    md: keskikokoinen
-    lg: suuri
   theme-special: "%flavor%-teeman erikoisuudet"
   search-results: Mediakirjaston hakutulokset
-  no-results: Hakusi tuotti 0 tulosta. Käytä vain englanninkielisiä hakusanoja.
-  download_these_files: tallenna
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Kaikki oikeudet pidätetään.'
 noscript:
   warning: "Tämä verkkosivusto tarvitsee JavaScriptin toimiakseen. Ota JavaScript käyttöön selaimessasi tai pyydä aikuista auttamaan."
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: "Hylkää"
   privacy-link: "Tietosuojakäytäntö"
   settings-link: "Evästeasetukset"
-agree: Hyväksyn
-disagree: En hyväksy
-profileLoader:
-  noProfiles: Profiileja ei ole tällä hetkellä.
 element: 'Elementti'
 elements: 'Elementit'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'Jakaminen onnistui'
 copy: 'Kopioi linkki'
 checkOutProject: 'Katso tämä projekti:'
-checkOutUser: 'Katso tämä käyttäjä:'
 community: 'Catrobat-yhteisö'
 back_to_app: 'Poistu yhteisöstä'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Saavutukset'
-    badge: 'uusi'
   overview:
     header: 'Saavutukset'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: Moninpeli
 studio:
   title: 'Studiot'
-  singular: 'Studio'
   create_studio: 'Luo studio'
-  delete_studio: 'Poista studio'
-  cancel_studio: 'Peruuta'
   studio_name: 'Studion nimi'
   studio_description: 'Studion kuvaus'
   is_public: 'Tehdäänkö julkiseksi?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Poista kuva'
   popular: 'Suositut studiot'
   join: 'Liity'
-  leave: 'Poistu'
-  report: 'Ilmoita'
   public: 'julkinen'
   private: 'Vain kutsutut'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Ylläpitäjä'
     member: 'Jäsen'
   details:
-    add_project: 'napsauta lisätäksesi projektin'
     add: 'Lisää'
     showMore: 'näytä lisää'
-    showLess: 'näytä vähemmän'
     are_you_sure: 'Oletko varma?'
     no_way_of_return: 'Tätä ei voi perua.'
     delete_it: 'Poista'
-    remove_project: 'Poista studiosta'
     remove_project_error: 'Projektin poistaminen studiosta epäonnistui.'
-    remove_project_success: 'Projekti poistettiin studiosta onnistuneesti.'
     no_projects: 'Studiossa ei ole vielä projekteja.'
     projects:
       title: 'Projektit'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Sinulla ei ole vielä lisättäviä projekteja. Luo ensin projekti Pocket Codessa!'
       add_selected: 'Lisää valitut'
     no_available_projects: 'Lisättäviä projekteja ei ole.'
-    updateCoverError: 'Studion kansikuvan päivittämisessä tapahtui virhe.'
     join: 'Liity'
     leave: 'Poistu'
-    report: 'Ilmoita'
     pending: 'Odottaa'
     decline: 'Hylätty'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% jätti kommentin.'
     members_list:
       title: 'Studion jäsenet'
-      project_count: '{0} Ei studioprojekteja |{1} 1 studioprojekti |]1,Inf] %count% studioprojektia'
       no_studio_projects: 'Ei studioprojekteja'
       one_studio_project: '1 studioprojekti'
       n_studio_projects: '%count% studioprojektia'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'Jäsenen estämisessä tapahtui virhe. Yritä myöhemmin uudelleen.'
       demote_member: 'Alenna ylläpitäjä jäseneksi'
       demotion_failed: 'Ylläpitäjän alentamisessa tapahtui virhe. Yritä myöhemmin uudelleen.'
-      last_admin: 'Studion viimeistä ylläpitäjää ei voi alentaa.'
     join_requests:
       title: 'Liittymispyynnöt'
       accept: 'Hyväksy'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'Tuloksia ei löytynyt.'
   assets_count: 'tiedostoa'
   view_all: 'Näytä kaikki'
-  view_all_category: 'Näytä kaikki: %category%'
   back_to_app: 'Takaisin sovellukseen'
 snackbar:
   project_not_found: 'Pyydetty projekti ei ole saatavilla'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: "Teet studiotoimintoja liian nopeasti. Odota hetki."
   hidden_notice:
     project: "Tämä projekti on piilotettu yhteisön ilmoitusten vuoksi."
-    comment: "Tämä kommentti on piilotettu yhteisön ilmoitusten vuoksi."
-    user: "Tämä profiili on piilotettu yhteisön ilmoitusten vuoksi."
     user_own: "Tilisi on jäädytetty yhteisön ilmoitusten vuoksi. Voit valittaa tästä päätöksestä."
-    studio: "Tämä studio on piilotettu yhteisön ilmoitusten vuoksi."
-  notification:
-    content_hidden: "Sisältösi (%content_type%) on piilotettu yhteisön ilmoitusten vuoksi. Voit valittaa tästä päätöksestä."
-    appeal_approved: "Valituksesi on hyväksytty. Sisältösi on taas näkyvissä."
-    appeal_rejected: "Valituksesi on käsitelty, ja päätös sisältösi piilottamisesta pysyy voimassa."
-    admin_review_needed: "Sisältö on piilotettu automaattisesti ja vaatii tarkistuksen."
 Reports: Ilmoitukset
 members: jäsentä

@@ -8,19 +8,12 @@ meta.og.description.login: 'Inicia sesión para compartir os teus proxectos de C
 meta.og.title.register: 'Crea unha conta de Catrobat'
 meta.og.description.register: 'Únete á comunidade Catrobat e comeza hoxe a compartir os teus proxectos creativos.'
 meta.og.description.profile: '%username% en Catrobat: explora os seus proxectos e logros.'
-localLanguage: Inglés
 username: Usuario
 password: Contrasinal
-createNewPassword: 'Crear un novo contrasinal'
-accountSettings: 'Configuración da conta'
 email: Correo electrónico
-aboutPocketCode: Sobre Pocket Code
 about: 'Sobre Catrobat'
-education: 'Educación'
 chat: 'Chat e foros'
-privacyGuide: 'Guía de concienciación sobre a privacidade'
 others: 'Outros'
-tutorials: Axuda
 googlePlay: Google Play
 iosAppStore: 'App Store de iOS'
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: 'Como creaches este proxecto? Usaches ideas, scripts
 projectImportedFromScratch: 'Este proxecto importouse de MIT Scratch. Podes ver o proxecto orixinal'
 scratchImportedProjectLinkHere: 'aquí.'
 country: País
-loginText: iniciar sesión
 privacyPolicy: Política de privacidade
-imprint: Aviso legal
 projectDetails: 'Detalles'
 somethingWentWrong: 'Algo non saíu ben.'
 accountNotVerified: 'Asegúrate de que iniciaches sesión e de que o correo electrónico da túa conta está verificado.'
@@ -55,36 +46,28 @@ accountSuspended: 'A túa conta foi suspendida por denuncias da comunidade. Pode
 doesNotExist: 'O recurso solicitado non existe.'
 pleaseTryAgain: 'Téntao de novo!'
 tryAgainButton: 'Tentar de novo'
-oldVersionError: 'Actualiza á nova versión de Pocket Code!'
 more: 'máis'
 less: 'menos'
 show-more: 'Máis información'
-show-less: 'Menos información'
 more-information: 'Máis información'
 less-information: 'Menos información'
 ok: 'Entendido'
-clickToDownloadProgram: 'Para descargar o proxecto de exemplo preme %link_start% aquí %link_end%.'
-registrationError: 'O nome de usuario ou o enderezo de correo electrónico xa está en uso.'
 notifications: 'Notificacións'
 allNotifications: 'Todas'
 FollowersNotifications: 'Seguidores'
 LikeNotifications: 'Reaccións'
 CommentNotifications: 'Comentarios'
 RemixNotifications: 'Remesturas'
-wellDone: 'Moi ben!'
 done: 'Listo!'
 notificationsReadMessage: 'Parece que non tes ningunha notificación.'
-confirmMessage: 'Si, elimínao'
 cancelMessage: "Cancelar"
 notificationsUnauthorizedError: 'Non foi posible autorizar o usuario'
 notificationsClearError: 'Non foi posible marcar as notificacións como lidas!'
-pleaseWait: "Agarda..."
 projects: 'Proxectos'
 users: 'Usuario'
 studios: 'Estudios'
 oauthPopUpTitle: 'Información sobre o inicio de sesión cunha conta externa'
 oauthInfo: 'Acabas de iniciar sesión cunha conta externa. Creamos un nome de usuario aleatorio para ti. Se queres cambiar o teu nome de usuario ou crear un novo contrasinal para a túa conta, vai á páxina do teu perfil.'
-oauthHere: 'aquí'
 statistics: 'Estatísticas'
 languageSelection: 'Selección de idioma'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Escuro'
   dark_description: 'Aparencia escura'
   apply: 'Aplicar'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Que proxectos se recomendan aquí?'
-      description: 'Canto máis reaccións (polgar arriba, sorriso...) reciba o teu proxecto, máis arriba aparecerá nesta lista.'
 follower:
   follows: 'Seguindo'
   followers: 'Seguidores'
   follow: 'Seguir'
-  username: 'Usuario'
   followsMe: 'Ségueme'
   noFollowing: 'Agora mesmo non segues a ninguén.'
   noFollowers: 'Agora mesmo non tes seguidores.'
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: 'Seguro que queres deixar de seguir este usuario?'
   unfollowButton: 'Deixar de seguir a %username%'
 project:
-  welcome:
-    title: 'Benvido a %theme% de Catrobat'
-    title_mindstorms: 'Benvido ao sitio de Catrobat para Mindstorms EV3 e NXT'
-    subtitle: 'Crea historias, xogos e moito máis...'
-    subtitle_embroidery: 'Borda os teus propios deseños nas túas camisetas, bolsas, pantalóns ou funda do móbil!'
-    subtitle_mindstorms: 'Crea os teus propios proxectos cos teus robots Lego Mindstorms EV3 e NXT'
-    download: 'Descarga a aplicación'
-    statistics: 'Máis estatísticas'
   featured: 'Destacados'
   open: 'Abrir'
   download: Descargar
@@ -148,9 +117,6 @@ project:
       retention: 'Os proxectos subidos elimínanse automaticamente despois dun período de inactividade. Inicia sesión regularmente ou consegue descargas do teu proxecto para prolongar a súa conservación.'
       protection: 'Os moderadores poden protexer da eliminación automática os proxectos especialmente bos ou populares.'
   example: 'Exemplos'
-  newest: 'Proxectos máis novos'
-  recommended: 'Proxectos recomendados'
-  scratchremixes: 'Remesturas de Scratch'
   noProjects: 'Agora mesmo non hai proxectos.'
   shareAction: 'Compartir'
   deleteAction: 'Eliminar proxecto'
@@ -190,17 +156,10 @@ project:
     Non hai forma de desfacer esta acción!
     Si, elimínaa!
     Cancelar
-  tooLongName: 'O nome do proxecto é demasiado longo!'
-  tooLongDescription: 'A descrición do proxecto é demasiado longa!'
-  tooLongCredits: 'As notas e créditos do proxecto son demasiado longos!'
   my_projects: 'Os meus proxectos compartidos'
   trending: 'Proxectos en tendencia'
   popular: 'Proxectos populares'
-  most:
-    viewed: Os máis vistos
-    downloaded: Os máis descargados
   random: 'Proxectos aleatorios'
-  related: 'Proxectos relacionados'
   browse:
     explore: 'Explorar proxectos'
     no_projects: 'Aínda non creaches ningún proxecto'
@@ -214,36 +173,14 @@ project:
     tooltip: 'Os proxectos elimínanse automaticamente despois dun período de inactividade. Consegue máis descargas ou inicia sesión regularmente para prolongar a súa conservación.'
     tooltip_protected: 'Este proxecto está protexido e non se eliminará automaticamente.'
   downloads: '%downloads% descargas'
-  sample: 'Proxectos de exemplo'
   views: '%views% visualizacións'
   likes:
     likersTitle: 'Persoas que reaccionaron a este proxecto'
     all: 'Todas'
-  remixes: '{0}0 remesturas |{1}1 remestura |]1,Inf]%remixes% remesturas'
-  newRemixesNotificationTitle: '|{1}"%programName%" ten 1 remestura nova: |]1,Inf] "%programName%" ten %remixes% remesturas novas:'
-  submitted: 'Proxectos enviados'
-  uploaded: 'Proxectos subidos'
-  reportAsInappropriate: 'Denunciar como inapropiado'
-  reportProgram: 'Denunciar proxecto'
   languageVersion: 'Versión da linguaxe Catrobat: %languageVersion%'
-  reportLoginText: 'Para denunciar este proxecto, %login%.'
-  reportDialogHeader: 'Por que queres denunciar este proxecto?'
-  reportDialogReason: 'Escribe un motivo'
-  reportRadioButtonInappropriate: 'É inapropiado'
-  reportRadioButtonCopyright: 'Infracción dos dereitos de autor'
-  reportRadioButtonSpam: 'É spam'
-  reportRadioButtonDislike: 'Non me gusta'
-  reportOwnProgram: 'Non podes denunciar o teu propio proxecto.'
-  reportAlready: 'Xa denunciaches este proxecto.'
-  reportDone: 'Denunciaches este proxecto!'
   updateAppHeaderDownload: 'Non é posible descargar'
   updateAppTextDownload: 'Actualiza a túa aplicación á versión máis recente. Ten en conta que non todas as funcións de Android están dispoñibles aínda en iOS.'
-  updateAppTextDownloadApk: 'A descarga do APK de momento só está dispoñible en Android, non en iOS.'
-  updateAppHeader: 'Actualizar a aplicación'
-  updateAppText: 'Actualiza a túa aplicación á versión máis recente.'
-  btnClosePopup: 'Aceptar'
   checkout_this_project: 'Bota unha ollada a este proxecto de Catrobat'
-  show_more: 'Amosar máis'
   comments: Comentarios
   send: 'Enviar'
   delete: Eliminar
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: 'Eliminado'
   noAdminRights: 'Non tes dereitos de administración. Inicia sesión como administrador.'
   editProject: 'Editar o proxecto'
-  closeProjectEditor: 'Pechar o editor do proxecto'
   closeEditorPrompt: 'Queres gardar os cambios?'
   btnDiscard: 'Descartar'
   addComment: 'Escribe un comentario'
@@ -263,8 +199,6 @@ project:
   smile: 'Sorriso!'
   love: 'Encántame!'
   wow: 'Uaaau!'
-  linkTitle: 'Ligazón'
-  link: 'Copiar a ligazón do proxecto no portapapeis'
   reactionsText: 'Reaccións'
   downloadErrorText: 'Produciuse un erro ao descargar o proxecto. Téntao de novo máis tarde.'
   downloadStartText: 'A descarga comezou...'
@@ -284,11 +218,8 @@ project:
   translations: 'Traducións'
   createTranslation: 'Crear tradución'
   deletedComment: '**Eliminado**'
-  replyLabel: 'resposta'
-  repliesLabel: 'respostas'
   notForKids: 'Non apto para nenos'
 remixGraph:
-  title: 'Remesturas'
   showRemixGraph: 'Gráfico de remesturas'
   by: 'de'
   open: 'Abrir'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Non dispoñible'
   projectUnknownUser: 'Usuario descoñecido'
 noReply: 'Esta é unha mensaxe automática. Non respondas directamente a este correo.'
-accountConfirmation:
-  subject: 'Confirmación da túa conta de Catrobat'
-  message: |
-    Ola, %username%.
-    Para rematar de activar a túa conta, visita %confirmationUrl%
-    Esta ligazón só se pode usar unha vez para validar a túa conta.
-    Un saúdo,
-    O equipo de Catrobat.
-  messageHtml: |
-    <p>
-    Ola, %username%.<br>
-    <br>
-    Para rematar de activar a túa conta, preme <a href="%confirmationUrl%">aquí.</a><br>
-    Esta ligazón só se pode usar unha vez para validar a túa conta.<br>
-    <br>
-    Un saúdo,<br>
-    O equipo de Catrobat.
-    </p>
 newAccountConfirmation:
   subject: 'Verifica o teu enderezo de correo electrónico'
   welcome: 'Benvido a Catrobat!'
@@ -403,63 +316,13 @@ parent:
       ignore: 'Se non o solicitaches, podes ignorar este correo sen problema.'
 passwordRecovery:
   subject: Recuperación do teu contrasinal
-  message: |
-    Ola, %username%.
-    Solicitaches restablecer o teu contrasinal en %appplication_url% porque o esqueciches.
-    Se non o solicitaches, ignora esta mensaxe. Caducará e deixará de valer dentro de 24 horas.
-    Para restablecer o teu contrasinal e crear un novo, visita a seguinte páxina: %confirmationUrl%
-    Podes usar o teu nome de usuario e o teu contrasinal en calquera momento para acceder á comunidade %appplication_url%.
-    Para iso, só tes que visitar a seguinte páxina: %loginPage%
-    Para editar os datos do teu perfil, vai a esta páxina: %profilePage%
-    Un saúdo,
-    O equipo de Catrobat.
-  messageHtml: |
-    <p>
-    Ola, %username%.<br>
-    <br>
-    Solicitaches restablecer o teu contrasinal en <a href="%appplication_url%">Pocket Code</a> porque o esqueciches.
-    Se non o solicitaches, ignora esta mensaxe. Caducará e deixará de valer dentro de 24 horas.<br>
-    <br>
-    Para restablecer o teu contrasinal e crear un novo, preme <a href="%confirmationUrl%">aquí.</a><br>
-    <br>
-    Podes usar o teu nome de usuario e o teu contrasinal en calquera momento para acceder á comunidade <a href="%appplication_url%">Pocket Code</a>.<br>
-    Para iso, só tes que visitar a seguinte páxina: <a href="%loginPage%">Páxina de inicio de sesión</a><br>
-    Para editar os datos do teu perfil, vai a esta <a href="%profilePage%">páxina</a>.<br>
-    <br>
-    Un saúdo,<br>
-    O equipo de Catrobat.
-    </p>
 profile:
   aboutMe: 'Sobre min'
   currentlyWorkingOn: 'Traballando agora en'
-  edit: 'Edita o teu perfil'
-  saveChanges: 'Gardar os cambios'
   newPass: 'Novo contrasinal'
   repeatPass: 'Repetir o contrasinal'
   oldPass: 'contrasinal antigo'
-  firstEmail: O meu primeiro correo electrónico
-  secondEmail: O meu segundo correo electrónico
-  myPrograms: 'Os meus proxectos'
-  follows: 'Segue'
-  follower: 'Seguidor'
-  unfollowUser: 'Deixar de seguir este usuario!'
-  followUser: 'Seguir este usuario!'
-  amountOfPrograms: 'Número de proxectos'
-  form:
-    passwordTooShort: O novo contrasinal debe ter ao menos %length% caracteres.
-    passwordTooLong: O novo contrasinal pode ter un máximo de %length% caracteres.
-    passwordIsUsername: O contrasinal debe ser diferente do nome de usuario.
-    passwordWrong: Contrasinal incorrecto
-    emailNotValid: Este enderezo de correo electrónico non é válido.
-    emailMissing: Produciuse un erro ao actualizar este enderezo de correo electrónico. Debes validar polo menos un enderezo de correo electrónico.
-    emailExists: Este enderezo de correo electrónico xa existe.
-    usernameNotValid: 'Este nome de usuario non é válido.'
-    usernameMissing: 'Tes que ter un nome de usuario.'
-    usernameExists: 'Este nome de usuario xa existe.'
-    usernameContainsEmail: 'O nome de usuario non debe conter un enderezo de correo electrónico.'
-    submitSuccess: 'Gardado!'
   reallyDeleteProgram: 'Seguro que queres eliminar o teu proxecto'
-  programsOf: 'Proxectos de'
   picture: 'Imaxe de perfil'
   changePicture: Cambiar imaxe
   goToScratchProfile: 'Perfil en Scratch'
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: 'Cambiar o contrasinal'
   accountSettings: 'Configuración da conta'
   accountVerification: 'Verificar a conta'
-  account: 'Conta'
-  editProfile: Editar perfil
-  edit: Editar
   done: 'Feito'
-  checkMail: 'Enviamos un correo ao teu enderezo de correo electrónico. Revisa a túa caixa de entrada.'
   passwordUpdated: 'O teu contrasinal actualizouse correctamente.'
-  avatar: 'Avatar'
-  email: 'Correo electrónico'
   deleteAccount: 'Eliminar a conta'
   deleteAccountWarning: |
     Atención:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: 'Descargando...'
   exportDataError: 'Algo saíu mal ao exportar os teus datos. Téntao de novo máis tarde.'
   exportDataRateLimited: 'Só podes exportar os teus datos unha vez ao día. Téntao de novo mañá.'
-  editAccountSettings: 'Editar a configuración da conta'
   profileChangeSuccess: 'O teu perfil cambiouse correctamente.'
   unspecifiedError: 'Algo non funcionou ao cambiar o teu perfil. Téntao de novo ou avísanos se segue a pasar!'
   verifyAccountText: 'Enviarémosche un correo cunha ligazón para verificar a túa conta. Asegúrate de premer a ligazón na próxima hora; só podes solicitar un correo ao día.'
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Envía calquera suxestión sobre estas condicións de uso a %email-webmaster%.'
   version: 'Versión 1.3, 4 de marzo de 2014'
 search:
-  dotdotdot: 'Buscar...'
   search: 'Buscar proxectos, usuarios e estudios'
   inMediaLib: 'Buscar na mediateca'
   inMediaCategory: 'Buscar na categoría multimedia'
   results: 'Resultados da busca'
-  resultcount: 'A túa busca devolveu %count% resultados'
-  fail: 'Introduce polo menos un termo de busca'
   noUsers: 'Non se atoparon usuarios'
   noProjects: 'Non se atoparon proxectos'
   noStudios: 'Non se atoparon estudios'
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: 'Mediateca'
   studio: 'Estudios'
   language: 'Idioma'
-  languageOptionsNotAvailable: 'Non hai opcións de idioma dispoñibles.'
 login:
   login: Iniciar sesión
   button:
@@ -578,21 +430,10 @@ login:
     or: "ou"
   passOrUser: 'O teu contrasinal ou nome de usuario non era correcto.'
   accountSuspended: 'A túa conta foi suspendida. Se cres que é un erro, contacta co soporte.'
-  noUsername: 'Non se atopou o teu nome de usuario ou enderezo de correo electrónico.'
-  forgotPass: 'Esqueciches o contrasinal ou o nome de usuario?'
   recoverPassSend: 'Enviamos un correo ao teu enderezo de correo electrónico. Revisa a túa caixa de entrada.'
   alreadyReset: 'O contrasinal deste usuario xa se solicitou nas últimas 24 horas.'
-  confirmationSend: 'Enviamos un correo ao teu enderezo para confirmar o rexistro. Revisa a túa caixa de entrada e activa a túa conta.'
-  userOrEmail: 'Nome de usuario ou correo electrónico'
-  changePass: 'Cambiar o contrasinal'
-  createAccount: 'Crear unha conta'
-  noAccount: 'Non tes conta?'
-  alreadyAccount: 'Xa tes unha conta?'
-  or: 'OU'
   username: Usuario
   email: 'Correo electrónico'
-  passwordFirst: Contrasinal
-  passwordSecond: 'Confirmar o contrasinal'
 register:
   title: 'Rexistrarse'
   subText: 'Ao continuar, creas unha conta na comunidade Catrobat e aceptas os nosos %var1% e %var2%.'
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: 'Retirouse o consentimento parental'
     message: 'O teu pai, nai ou titor retirou o consentimento para a túa conta. A túa conta terá funcións limitadas ata que se volva outorgar o consentimento.'
-    newEmailPlaceholder: 'Novo correo do pai ou nai'
-    changeButton: 'Actualizar e reenviar'
-accountRecovery:
-  title: 'Recuperación da conta'
-  description: 'Se lembras o correo electrónico ou o nome de usuario da túa conta, podemos enviarche unha ligazón para restablecer o teu contrasinal.'
-  button:
-    cancel: Cancelar
-    submit: 'Recuperar o contrasinal'
 resetPassword:
   request:
     title: 'Restablece o teu contrasinal'
@@ -645,11 +478,6 @@ resetPassword:
     description: 'Se existe unha conta co teu correo electrónico, acabamos de enviar un correo cunha ligazón que podes usar para restablecer o teu contrasinal. Esta ligazón caducará en %time%.'
     descriptionTwo: 'Podes solicitar un novo restablecemento do contrasinal cada %throttleLimit% horas.'
     descriptionThree: 'Se non recibiches ningún correo, revisa o cartafol de spam ou escribe ao noso soporte en %email-webmaster%.'
-  email:
-    title: 'Ola!'
-    visitLink: 'Para restablecer o teu contrasinal, visita a seguinte ligazón'
-    expire: 'Esta ligazón caducará en %time%.'
-    cheers: 'Un saúdo!'
   newemail:
     title: 'Restablece o teu contrasinal'
     content: 'Hai pouco solicitaches restablecer o contrasinal da túa conta de Catrobat. Preme o botón de abaixo para escoller un novo contrasinal. Se non o solicitaches, podes ignorar este correo sen problema.'
@@ -659,76 +487,33 @@ resetPassword:
     title: 'Restablece o teu contrasinal'
     button:
       submit: 'Restablecer o contrasinal'
-apk:
-  download: 'Descargar como aplicación'
-  prepare: 'Obter como aplicación'
-  preparing: 'Preparando a aplicación'
-  text: 'O proceso pode levar un tempo'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'Algo non funcionou. Téntao de novo ou avísanos se segue a pasar!'
-  username:
-    blank: 'O nome de usuario non pode estar baleiro'
-    invalid: 'O teu nome de usuario non é válido'
-    exists: 'Este nome de usuario xa existe.'
-    not_exists: 'Este nome de usuario non existe.'
-    not_email: 'O nome de usuario non pode ser un enderezo de correo electrónico.'
-    size: 'O nome de usuario debe ter polo menos 3 caracteres e non máis de 180'
-  password:
-    blank: 'Falta o contrasinal.'
-    short: 'O teu contrasinal debe ter polo menos {{ limit }} caracteres.'
-  country:
-    blank: 'Falta o país.'
-    invalid: 'País non válido'
-  email:
-    blank: 'O correo electrónico non pode estar baleiro'
-    invalid: 'O teu correo electrónico parece non ser válido'
-    exists: Este enderezo de correo electrónico xa existe.
-  id:
-    blank: 'O ID de Open Authentication non pode estar baleiro'
-  login: 'O contrasinal ou o nome de usuario non era correcto.'
-  post-data: 'Os datos POST non son correctos ou faltan!'
-  checksum:
-    missing: 'O cliente non enviou fileChecksum! Estás a usar unha versión antiga de Pocket Code?'
-    invalid: 'suma de verificación non válida'
   xml:
     invalid: 'XML do código non válido'
     missing: 'erro descoñecido: project_xml_not_found!'
   file:
-    unexpected: 'atopouse un ficheiro inesperado'
     invalid: 'ficheiro non válido'
-  image.missing: 'O XML do proxecto menciona un ficheiro que non existe no cartafol do proxecto'
-  unknown: 'erro descoñecido'
-  token: 'Fallou a autenticación do dispositivo: token de autenticación non válido!'
-  uploadTokenAuthFailed: 'Fallou a autenticación do token de subida.'
-  project:
-    invalid: 'Proxecto non válido.'
   languageversion:
     tooold: 'Sentímolo, o teu proxecto contén unha versión antiga da linguaxe Catrobat! Estás a usar a versión máis recente de Pocket Code?'
   projectversion:
     tooold: 'Sentímolo, estás a usar unha versión antiga de Pocket Code. Actualiza á versión máis recente.'
   authentication:
-    title: 'Non se puido iniciar sesión'
     webview: |
       Parece que o teu nome de usuario ou contrasinal non era correcto.
       Tenta iniciar sesión de novo na aplicación.
 success:
   text: 'Feito'
-  registration: 'Rexistro completado!'
-  token: ok
-  upload: 'O teu proxecto subiuse correctamente!'
   imgUpload: 'A túa imaxe subiuse correctamente!'
-  report: 'A túa denuncia enviouse correctamente!'
 time:
   minutes.ago: '{0} hai < 1 minuto |{1}hai 1 minuto |]1,Inf] hai %count% minutos'
   hours.ago: '{1}hai 1 hora |]1,Inf] hai %count% horas'
   days.ago: '{1}hai 1 día |]1,Inf] hai %count% días'
   months.ago: '{1}hai 1 mes |]1,Inf] hai %count% meses'
   years.ago: '{1}hai 1 ano |]1,Inf] hai máis dun ano'
-failure:
-  upload: 'Produciuse un erro ao subir a túa aplicación.'
 user:
   verification:
     email: 'Verifica o teu correo electrónico'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'O contrasinal contén caracteres non válidos'
     usernameContainsEmail: 'O nome de usuario non pode conter un enderezo de correo electrónico'
     usernameContainsLink: 'O nome de usuario non pode conter unha ligazón'
-    countryCodeInvalid: 'Código de país non válido'
     pictureInvalid: 'A imaxe de perfil non é válida ou non é compatible'
     dateOfBirthMissing: 'A data de nacemento é obrigatoria'
     dateOfBirthInvalid: 'A data de nacemento non é válida'
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'O nome xa está en uso'
     descriptionMissing: 'Falta a descrición'
     descriptionEmpty: 'A descrición está baleira'
-    descriptionTooShort: 'A descrición é demasiado curta'
     descriptionTooLong: 'A descrición é demasiado longa'
     imageFileInvalid: 'O ficheiro de imaxe non é válido'
     imageFileInvalidType: 'O tipo de ficheiro de imaxe non é válido'
     imageFileTooLarge: 'O ficheiro de imaxe é demasiado grande'
-#languages and countries
-language:
-  arabic: 'Árabe'
-  bulgarian: 'Búlgaro'
-  catalan: 'Catalán'
-  chinese_simplified_han: 'Chinés (han simplificado)'
-  chinese_traditional_han: 'Chinés (han tradicional)'
-  croatian: 'Croata'
-  czech: 'Checo'
-  danish: 'Dinamarqués'
-  dutch: 'Neerlandés'
-  english_united_kingdom: 'Inglés (Reino Unido)'
-  english_united_states: 'Inglés (Estados Unidos)'
-  estonian: 'Estoniano'
-  filipino: 'Filipino'
-  finnish: 'Finés'
-  french: 'Francés'
-  german: 'Alemán'
-  greek: 'Grego'
-  hebrew: 'Hebreo'
-  hindi: 'Hindi'
-  hungarian: 'Húngaro'
-  indonesian: 'Indonesio'
-  italian: 'Italiano'
-  japanese: 'Xaponés'
-  korean: 'Coreano'
-  latvian: 'Letón'
-  lithuanian: 'Lituano'
-  malay: 'Malaio'
-  norwegian: 'Noruegués'
-  persian: 'Persa'
-  polish: 'Polaco'
-  portuguese_brazil: 'Portugués (Brasil)'
-  portuguese_portugal: 'Portugués (Portugal)'
-  romanian: 'Romanés'
-  russian: 'Ruso'
-  serbian: 'Serbio'
-  slovak: 'Eslovaco'
-  slovenian: 'Esloveno'
-  spanish_latin_america: 'Español (América Latina)'
-  spanish_spain: 'Español (España)'
-  swedish: 'Sueco'
-  thai: 'Tailandés'
-  turkish: 'Turco'
-  ukrainian: 'Ucraíno'
-  vietnamese: 'Vietnamita'
-ci:
-  generate: 'Xerar APK'
-  pending: 'Xerando APK'
-  download: 'Descargar APK'
+
 admin:
   maintain:
     diskMaintenance: 'Mantemento do disco'
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: 'Non hai obxectos eliminables.'
     removableObjects: 'Obxectos eliminables'
 recommender:
-  similarPrograms: 'Proxectos similares'
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Quen descargou este proxecto tamén descargou'
   moreFromThisUser: 'Máis de %username%'
-pmd:
-  submitBtn: Envía o teu proxecto
-  submitBox:
-    header: Envío
-    text: 'Vas enviar o teu proxecto. Introduce o código do proxecto e preme Enviar.'
-    btnText: Enviar
-  successful:
-    text: 'O teu proxecto subiuse correctamente.'
-  failed:
-    text: 'Non se puido subir o proxecto.'
 codeview:
   title: 'Vista do código'
-  showCode: 'Amosar o código'
-  hideCode: 'Ocultar o código'
-  showStatistics: 'Amosar as estatísticas do código'
-  hideStatistics: 'Ocultar as estatísticas do código'
-  cantDisplayCode: 'Non se pode amosar o código'
-  cantDisplayStatistics: 'Non se pode amosar o código'
-  totalNumberOf: 'Número total de'
-  scenes: 'Escenas'
-  scripts: 'Scripts'
-  bricks: 'Bloques'
-  objects: 'Actores e obxectos'
-  looks: 'Aparencias'
-  sounds: 'Sons'
-  globals: 'Globais'
-  locals: 'Locais'
-  globalVariables: 'Variables globais'
-  localVariables: 'Variables locais'
-  eventBricks: 'Bloques de eventos'
-  controlBricks: 'Bloques de control'
-  motionBricks: 'Bloques de movemento'
-  soundBricks: 'Bloques de son'
-  looksBricks: 'Bloques de aparencia'
-  penBricks: 'Bloques de lapis'
-  dataBricks: 'Bloques de datos'
-  specialBricks: 'Bloques especiais'
 codeView:
   title: 'Vista do código'
   loading: 'Cargando a vista do código...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: 'Estatísticas do código'
   error: 'Non se poden amosar as estatísticas do código.'
-  general: 'Xeral'
-  bricks: 'Bloques'
-  eventBricks: 'Eventos'
-  controlBricks: 'Control'
-  motionBricks: 'Movemento'
-  soundBricks: 'Son'
-  looksBricks: 'Aparencias'
-  penBricks: 'Lapis'
-  dataBricks: 'Datos'
-  deviceBricks: 'Dispositivo'
-  specialBricks: 'Especiais'
   yourScore: 'A túa puntuación:'
-  points: 'puntos'
   abstraction: 'Abstracción e descomposición de problemas'
   parallelism: 'Paralelismo'
   logicalThinking: 'Pensamento lóxico'
@@ -927,20 +612,7 @@ footer:
   text: 'Xa se compartiron %project_count% proxectos incribles, e o seguinte pode ser o teu. Descarga a nosa aplicación e comeza a crear hoxe'
 privacy-policy:
   header: Política de privacidade
-  version: 'Versión 2.2, 17 de outubro de 2019'
-  text1: 'Para ofrecerche todas as vantaxes dos nosos servizos e da conta asociada, é necesario recoller certos datos teus.'
-  text2: 'Para manter e mellorar os nosos servizos (aplicacións e sitios web) e para facer investigación científica sobre a educación en TIC e STEM/STEAM, usamos Google Analytics, Crashlytics e Firebase, todos de Google LLC (EUA), así como Dynatrace de Dynatrace LLC (EUA), para obter metadatos sobre o uso dos nosos servizos, por exemplo, información sobre fallos, marcas de tempo, páxinas/pantallas visitadas, uso das nosas aplicacións e servizos, sistema operativo usado e información sobre o provedor de rede. Esta análise e os datos recollidos non están vinculados ao teu perfil e non conteñen ningunha información persoal (os últimos bits do enderezo IP anonimízanse). Porén, os datos recollidos transfírense aos provedores de servizos (Google LLC, EUA e Dynatrace LLC, EUA). O tratamento de datos baséase en acordos con Google LLC e Dynatrace LLC. Esta relación cos provedores de servizos cumpre o Regulamento xeral de protección de datos da Unión Europea (RXPD da UE) e o acordo UE-EUA "Privacy Shield".'
-  text3: 'Para crear e usar unha conta nos nosos sistemas, e para informarte por correo electrónico de cambios necesarios na túa conta, por exemplo, actualizacións ou infraccións das nosas condicións de uso e servizo, das nosas normas da comunidade ou das nosas políticas, gardaremos o teu nome de usuario e, se nolo dás, o teu enderezo de correo electrónico. Se conectaches a túa conta mediante Google Plus ou Facebook, gardamos ademais unha clave de identificación vinculada á túa conta nestes servizos. Non usaremos estes datos para ningún outro fin (por exemplo, mercadotecnia), salvo que nolo permitas explicitamente.'
-  text4: 'De forma voluntaria, podes indicarnos o teu país de residencia na páxina da túa conta no sitio para compartir. Amosarase no teu perfil público e só o usaremos con fins estatísticos e de investigación. Podes quitalo en calquera momento na configuración do teu perfil.'
-  text5: 'Podes retirar en calquera momento o uso dos datos persoais da túa conta eliminando a túa conta desde a páxina do teu perfil en https://share.catrobat.org/. Despois de eliminar a túa conta, poderás seguir usando os servizos ofrecidos, pero non colaborar, por exemplo, subindo programas, comentando ou dando "gústame". Ademais, eliminarase todo o contido vinculado á túa conta, por exemplo, programas subidos, comentarios, etc.'
-  text6: 'Para evitar o mal uso dos nosos servizos, por exemplo, mediante subidas ou comentarios de usuarios con fins ilegais, todos os datos públicos xerados polos usuarios (subidas, comentarios) gárdanse internamente nunha base de datos, xunto cunha marca de tempo e o enderezo de Internet usado. Estes datos non os usará nin se lles enviarán a ningunha institución, salvo que haxa sospeitas razoables de accións suficientemente ilegais e institucións xurídicas oficialmente autorizadas os soliciten segundo a lei aplicable. Primeiro revisaremos a fondo cada caso de forma individual.'
-  text7: 'Podes subscribirte voluntariamente ao boletín de Catrobat, en https://catrobat.org/newsletter, que ofrecemos mediante o servizo MailChimp (The Rocket Science Group LLC d/b/a MailChimp, EUA). Recibirás entón novidades sobre o proxecto Catrobat e os seus servizos no enderezo de correo electrónico que indicaches. Podes darte de baixa do boletín en calquera momento usando a ligazón "unsubscribe" no pé de cada boletín. Este boletín ofrécese mediante MailChimp, co que temos un acordo de tratamento de datos e que se comprometeu co Regulamento xeral de protección de datos da UE e co "Privacy Shield" UE-EUA. Para máis detalles sobre MailChimp, consulta tamén a política de privacidade e as condicións de uso de MailChimp.'
-  text8: 'Todos os servizos ofréceos o proxecto libre e de código aberto Catrobat baixo o paraugas da International Catrobat Association – Verein zur Förderung freier Software, unha ONG sen ánimo de lucro constituída en Graz, Austria (Unión Europea). As nosas políticas respectan a lexislación de protección de datos da UE e de Austria (RXPD). Para contactar connosco, envía un correo electrónico a contact@catrobat.org ou escríbenos a Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Unión Europea).'
-  text9: 'Se tes menos de 14 anos, esta política debe aceptala un titor legal (normalmente o pai ou a nai).'
-  text10: 'A política de privacidade oficial de Catrobat en inglés está dispoñible na web en %privacy_policy%.'
-  disagree-text: 'Sen a túa aprobación non podemos crear unha conta, pero as funcións principais seguen dispoñibles.'
 catro-notifications:
-  markAsRead: 'Marcar como lido'
   noFollowers: 'Parece que non tes ningunha notificación de seguidores.'
   noComments: 'Parece que non tes ningunha notificación de comentarios.'
   noReactions: 'Parece que non tes ningunha notificación de reaccións.'
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: 'Ligazón copiada no portapapeis!'
   success_project: 'Ligazón ao proxecto copiada no portapapeis!'
-  success_user: 'Ligazón ao usuario copiada no portapapeis!'
   fail: 'Non se puido copiar a ligazón no portapapeis! :('
 next: Seguinte
 previous: 'Anterior'
 media-packages:
   title: 'Mediateca'
   description: 'Nas seguintes categorías podes atopar actores e obxectos para engadir aos teus proxectos.'
-  thumb-size:
-    description: 'Tamaño da vista previa'
-    sm: 'pequeno'
-    md: 'mediano'
-    lg: 'grande'
   theme-special: 'Especial do tema %flavor%'
   search-results: 'Resultados da busca na mediateca'
-  no-results: 'A túa busca devolveu 0 resultados. Usa só termos de busca en inglés.'
-  download_these_files: 'gardar'
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Todos os dereitos reservados.'
 noscript:
   warning: 'Este sitio web necesita JavaScript para funcionar. Activa JavaScript no teu navegador ou pídelle axuda a unha persoa adulta.'
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: 'Rexeitar'
   privacy-link: "Política de privacidade"
   settings-link: 'Configuración das cookies'
-agree: 'Acepto'
-disagree: 'Non acepto'
-profileLoader:
-  noProfiles: 'Agora mesmo non hai perfís.'
 element: 'Elemento'
 elements: 'Elementos'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'Compartido correctamente'
 copy: 'Copiar a ligazón'
 checkOutProject: 'Bota unha ollada a este proxecto:'
-checkOutUser: 'Bota unha ollada a este usuario:'
 community: 'Comunidade Catrobat'
 back_to_app: 'Saír da comunidade'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Logros'
-    badge: 'novo'
   overview:
     header: 'Logros'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: 'Multixogador'
 studio:
   title: 'Estudios'
-  singular: 'Estudio'
   create_studio: 'Crear estudio'
-  delete_studio: 'Eliminar estudio'
-  cancel_studio: 'Cancelar'
   studio_name: 'Nome do estudio'
   studio_description: 'Descrición do estudio'
   is_public: 'Facelo público?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Quitar a imaxe'
   popular: 'Estudios populares'
   join: 'Unirse'
-  leave: 'Saír'
-  report: 'Denunciar'
   public: 'público'
   private: 'Só con invitación'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Administrador'
     member: 'Membro'
   details:
-    add_project: 'preme para engadir o proxecto'
     add: 'Engadir'
     showMore: 'amosar máis'
-    showLess: 'amosar menos'
     are_you_sure: 'Estás seguro?'
     no_way_of_return: 'Isto non se pode desfacer.'
     delete_it: 'Eliminar'
-    remove_project: 'Quitar do estudio'
     remove_project_error: 'Non se puido quitar o proxecto do estudio.'
-    remove_project_success: 'O proxecto quitouse do estudio correctamente.'
     no_projects: 'O estudio aínda non ten ningún proxecto.'
     projects:
       title: 'Proxectos'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Aínda non tes proxectos que engadir. Crea un primeiro en Pocket Code!'
       add_selected: 'Engadir os seleccionados'
     no_available_projects: 'Non hai proxectos dispoñibles para engadir.'
-    updateCoverError: 'Algo saíu mal ao actualizar a portada do estudio.'
     join: 'Unirse'
     leave: 'Saír'
-    report: 'Denunciar'
     pending: 'Pendente'
     decline: 'Rexeitada'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% deixou un comentario.'
     members_list:
       title: 'Membros do estudio'
-      project_count: '{0} Ningún proxecto no estudio |{1} 1 proxecto no estudio |]1,Inf] %count% proxectos no estudio'
       no_studio_projects: 'Ningún proxecto no estudio'
       one_studio_project: '1 proxecto no estudio'
       n_studio_projects: '%count% proxectos no estudio'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'Algo saíu mal ao expulsar este membro. Téntao de novo máis tarde.'
       demote_member: 'Pasar o administrador a membro'
       demotion_failed: 'Algo saíu mal ao quitarlle os permisos de administrador. Téntao de novo máis tarde.'
-      last_admin: 'Non se pode quitar o último administrador deste estudio.'
     join_requests:
       title: 'Solicitudes para unirse'
       accept: 'Aceptar'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'Non se atoparon resultados.'
   assets_count: 'recursos'
   view_all: 'Ver todo'
-  view_all_category: 'Ver todo en %category%'
   back_to_app: 'Volver á aplicación'
 snackbar:
   project_not_found: 'O proxecto solicitado non está dispoñible'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: 'Estás a facer accións no estudio demasiado rápido. Agarda un momento.'
   hidden_notice:
     project: 'Este proxecto ocultouse por denuncias da comunidade.'
-    comment: 'Este comentario ocultouse por denuncias da comunidade.'
-    user: 'Este perfil ocultouse por denuncias da comunidade.'
     user_own: 'A túa conta foi suspendida por denuncias da comunidade. Podes recorrer esta decisión.'
-    studio: 'Este estudio ocultouse por denuncias da comunidade.'
-  notification:
-    content_hidden: 'O teu %content_type% ocultouse por denuncias da comunidade. Podes recorrer esta decisión.'
-    appeal_approved: 'Aprobouse o teu recurso. O teu contido volve estar visible.'
-    appeal_rejected: 'Revisouse o teu recurso e mantense a decisión de ocultar o teu contido.'
-    admin_review_needed: 'Ocultouse contido automaticamente e precisa revisión.'
 Reports: 'Denuncias'
 members: 'membros'

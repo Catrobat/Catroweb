@@ -8,19 +8,12 @@ meta.og.description.login: 'Đăng nhập để chia sẻ các dự án Catrobat
 meta.og.title.register: 'Tạo tài khoản Catrobat'
 meta.og.description.register: 'Tham gia cộng đồng Catrobat và bắt đầu chia sẻ các dự án sáng tạo của bạn ngay hôm nay.'
 meta.og.description.profile: '%username% trên Catrobat – xem các dự án và thành tích của bạn ấy.'
-localLanguage: 'Tiếng Việt'
 username: Tên đăng nhập
 password: Mật khẩu
-createNewPassword: 'Tạo mật khẩu mới'
-accountSettings: 'Cài đặt tài khoản'
 email: 'Email'
-aboutPocketCode: Về Pocket Code
 about: Về Catrobat
-education: 'Giáo dục'
 chat: 'Trò chuyện và diễn đàn'
-privacyGuide: 'Hướng dẫn về quyền riêng tư'
 others: 'Khác'
-tutorials: Trợ giúp
 googlePlay: googlePlay
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: 'Bạn đã tạo dự án này như thế nào? B�
 projectImportedFromScratch: 'Dự án này được nhập từ MIT Scratch. Bạn có thể xem dự án gốc'
 scratchImportedProjectLinkHere: 'tại đây.'
 country: Quốc gia
-loginText: Đăng nhập
 privacyPolicy: Chính sách bảo mật
-imprint: Nhà xuất bản
 projectDetails: Chi tiêt
 somethingWentWrong: 'Thao tác sai.'
 accountNotVerified: 'Hãy đảm bảo bạn đã đăng nhập và email tài khoản của bạn đã được xác minh.'
@@ -55,36 +46,28 @@ accountSuspended: 'Tài khoản của bạn đã bị tạm khóa do bị cộng
 doesNotExist: 'Tài nguyên được yêu cầu không tồn tại.'
 pleaseTryAgain: 'Làm ơn hãy thử lại!'
 tryAgainButton: 'Thử lại'
-oldVersionError: 'Làm ơn hãy cập nhật phiên bản Pocket Code mới nhất!'
 more: 'hơn/thêm/nhiều hơn'
 less: 'ít hơn'
 show-more: 'Xem thêm'
-show-less: 'Thu gọn'
 more-information: 'Thêm thông tin'
 less-information: 'Ít thông tin hơn'
 ok: 'Đã hiểu'
-clickToDownloadProgram: 'Để tải dự án mẫu, hãy nhấn %link_start% vào đây %link_end%.'
-registrationError: 'Tên người dùng hoặc địa chỉ email đã được sử dụng.'
 notifications: 'Thông báo'
 allNotifications: 'Tất cả'
 FollowersNotifications: 'Người theo dõi'
 LikeNotifications: 'Cảm xúc'
 CommentNotifications: 'Bình luận'
 RemixNotifications: 'Bản remix'
-wellDone: "Làm tốt lắm!"
 done: "Đã hoàn thành!"
 notificationsReadMessage: 'Có vẻ bạn chưa có thông báo nào.'
-confirmMessage: 'Đúng, xóa nó đi'
 cancelMessage: "Hủy bỏ"
 notificationsUnauthorizedError: 'Không thể xác thực người dùng'
 notificationsClearError: 'Không thể đánh dấu thông báo là đã đọc!'
-pleaseWait: 'Vui lòng chờ...'
 projects: "Các chương trình"
 users: 'Người dùng'
 studios: 'Studio'
 oauthPopUpTitle: 'Thông tin đăng nhập bằng tài khoản bên ngoài'
 oauthInfo: 'Bạn vừa đăng nhập bằng một tài khoản bên ngoài. Chúng mình đã tạo một tên đăng nhập ngẫu nhiên cho bạn. Nếu bạn muốn đổi tên đăng nhập hoặc tạo mật khẩu mới cho tài khoản, hãy vào trang hồ sơ của bạn.'
-oauthHere: 'tại đây'
 statistics: 'Thống kê'
 languageSelection: 'Chọn ngôn ngữ'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Tối'
   dark_description: 'Giao diện tối'
   apply: 'Áp dụng'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Những dự án nào được đề xuất ở đây?'
-      description: 'Dự án của bạn nhận được càng nhiều cảm xúc (Thích, Cười ...) thì càng xuất hiện cao hơn trong danh sách này.'
 follower:
   follows: 'Đang theo dõi'
   followers: 'Người theo dõi'
   follow: 'Theo dõi'
-  username: 'Người dùng'
   followsMe: 'Theo dõi mình'
   noFollowing: 'Hiện tại bạn chưa theo dõi ai.'
   noFollowers: 'Hiện tại bạn chưa có người theo dõi nào.'
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: 'Bạn có chắc muốn bỏ theo dõi người dùng này không?'
   unfollowButton: 'Bỏ theo dõi %username%'
 project:
-  welcome:
-    title: 'Chào mừng bạn đến với %theme% của Catrobat'
-    title_mindstorms: 'Chào mừng bạn đến với trang Catrobat dành cho Mindstorms EV3 và NXT'
-    subtitle: 'Tạo truyện, trò chơi và nhiều thứ khác...'
-    subtitle_embroidery: 'Thêu hoa văn của riêng bạn lên áo phông, túi, quần hoặc ốp điện thoại!'
-    subtitle_mindstorms: 'Tạo dự án của riêng bạn với robot Lego Mindstorms EV3 và NXT'
-    download: 'Tải ứng dụng'
-    statistics: 'Thêm thống kê'
   featured: 'Nổi bật'
   open: Mở 
   download: Tải về
@@ -148,9 +117,6 @@ project:
       retention: 'Các dự án đã tải lên sẽ tự động bị xóa sau một thời gian không hoạt động. Hãy đăng nhập thường xuyên hoặc có thêm lượt tải về cho dự án để giữ nó lâu hơn.'
       protection: 'Những dự án đặc biệt hay hoặc phổ biến có thể được người kiểm duyệt bảo vệ khỏi việc tự động xóa.'
   example: 'Ví dụ'
-  newest: 'Dự án mới nhất'
-  recommended: 'Dự án được đề xuất'
-  scratchremixes: 'Bản remix từ Scratch'
   noProjects: 'Hiện tại chưa có dự án nào.'
   shareAction: 'Chia sẻ'
   deleteAction: 'Xóa dự án'
@@ -190,17 +156,10 @@ project:
     Bạn sẽ không thể hoàn tác thao tác này!
     Đúng, xóa nó đi!
     Hủy
-  tooLongName: 'Tên dự án quá dài!'
-  tooLongDescription: 'Mô tả dự án quá dài!'
-  tooLongCredits: 'Ghi chú và ghi công của dự án quá dài!'
   my_projects: 'Dự án mình đã chia sẻ'
   trending: 'Dự án thịnh hành'
   popular: 'Dự án phổ biến'
-  most:
-    viewed: Xem nhiều nhất
-    downloaded: Tải về nhiều nhất
   random: 'Dự án ngẫu nhiên'
-  related: 'Dự án liên quan'
   browse:
     explore: 'Khám phá dự án'
     no_projects: 'Bạn chưa tạo dự án nào'
@@ -214,36 +173,14 @@ project:
     tooltip: 'Dự án sẽ tự động bị xóa sau một thời gian không hoạt động. Hãy có thêm lượt tải về hoặc đăng nhập thường xuyên để giữ dự án lâu hơn.'
     tooltip_protected: 'Dự án này được bảo vệ và sẽ không bị tự động xóa.'
   downloads: '%downloads% lượt tải về'
-  sample: 'Dự án mẫu'
   views: '%views% lượt xem'
   likes:
     likersTitle: 'Những người đã bày tỏ cảm xúc với dự án này'
     all: "Tất cả"
-  remixes: '{0}0 bản remix |{1}1 bản remix |]1,Inf]%remixes% bản remix'
-  newRemixesNotificationTitle: '|{1}"%programName%" có 1 bản remix mới: |]1,Inf] "%programName%" có %remixes% bản remix mới:'
-  submitted: 'Dự án đã nộp'
-  uploaded: 'Dự án đã tải lên'
-  reportAsInappropriate: 'Báo cáo là không phù hợp'
-  reportProgram: 'Báo cáo dự án'
   languageVersion: 'Phiên bản ngôn ngữ Catrobat: %languageVersion%'
-  reportLoginText: 'Hãy %login% để báo cáo dự án này.'
-  reportDialogHeader: 'Vì sao bạn muốn báo cáo dự án này?'
-  reportDialogReason: 'Nhập lý do'
-  reportRadioButtonInappropriate: 'Nội dung không phù hợp'
-  reportRadioButtonCopyright: 'Vi phạm bản quyền'
-  reportRadioButtonSpam: 'Đây là spam'
-  reportRadioButtonDislike: 'Mình không thích nó'
-  reportOwnProgram: 'Bạn không thể báo cáo dự án của chính mình.'
-  reportAlready: 'Bạn đã báo cáo dự án này rồi.'
-  reportDone: 'Bạn đã báo cáo dự án này!'
   updateAppHeaderDownload: 'Không thể tải về'
   updateAppTextDownload: 'Hãy cập nhật ứng dụng lên phiên bản mới nhất. Lưu ý rằng không phải tất cả tính năng Android đều đã có trên iOS.'
-  updateAppTextDownloadApk: 'Tải APK hiện chỉ có trên Android, không có trên iOS.'
-  updateAppHeader: 'Cập nhật ứng dụng'
-  updateAppText: 'Hãy cập nhật ứng dụng lên phiên bản mới nhất.'
-  btnClosePopup: Ok
   checkout_this_project: 'Xem dự án Catrobat này'
-  show_more: 'Xem thêm'
   comments: 'Bình luận'
   send: 'Gửi'
   delete: Xóa
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: 'Đã xóa'
   noAdminRights: 'Bạn không có quyền quản trị. Hãy đăng nhập bằng tài khoản quản trị viên.'
   editProject: 'Chỉnh sửa dự án'
-  closeProjectEditor: 'Đóng trình chỉnh sửa dự án'
   closeEditorPrompt: Bạn có muốn lưu thay đổi của mình?
   btnDiscard: Loại bỏ
   addComment: 'Viết bình luận'
@@ -263,8 +199,6 @@ project:
   smile: 'Cười!'
   love: 'Yêu thích!'
   wow: 'Wooow!'
-  linkTitle: 'Liên kết'
-  link: 'Sao chép liên kết dự án vào bộ nhớ tạm'
   reactionsText: 'Cảm xúc'
   downloadErrorText: 'Đã xảy ra lỗi khi tải dự án về. Hãy thử lại sau.'
   downloadStartText: 'Đã bắt đầu tải về...'
@@ -284,11 +218,8 @@ project:
   translations: 'Bản dịch'
   createTranslation: 'Tạo bản dịch'
   deletedComment: '**Đã xóa**'
-  replyLabel: 'trả lời'
-  repliesLabel: 'trả lời'
   notForKids: 'Không phù hợp với trẻ em'
 remixGraph:
-  title: 'Bản remix'
   showRemixGraph: 'Sơ đồ remix'
   by: 'bởi'
   open: 'Mở '
@@ -309,24 +240,6 @@ remixGraph:
   projectUnknownUser: 'Người dùng không xác định'
 noReply:
   Đây là tin nhắn tự động - Vui lòng không trả lời trực tiếp email này.
-accountConfirmation:
-  subject: 'Xác nhận tài khoản Catrobat của bạn'
-  message: |
-    Chào %username%,
-    Để hoàn tất kích hoạt tài khoản, hãy truy cập %confirmationUrl%
-    Liên kết này chỉ dùng được một lần để xác thực tài khoản của bạn.
-    Thân mến,
-    Đội ngũ Catrobat.
-  messageHtml: |
-    <p>
-    Chào %username%,<br>
-    <br>
-    Để hoàn tất kích hoạt tài khoản, hãy nhấn <a href="%confirmationUrl%">vào đây.</a><br>
-    Liên kết này chỉ dùng được một lần để xác thực tài khoản của bạn.<br>
-    <br>
-    Thân mến,<br>
-    Đội ngũ Catrobat.
-    </p>
 newAccountConfirmation:
   subject: 'Xác minh địa chỉ email của bạn'
   welcome: 'Chào mừng bạn đến với Catrobat!'
@@ -404,63 +317,13 @@ parent:
       ignore: 'Nếu bạn không yêu cầu việc này, bạn có thể bỏ qua email này.'
 passwordRecovery:
   subject: Mật khẩu Catrobat của bạn đã được phục hồi
-  message: |
-    Chào %username%,
-    Bạn đã yêu cầu đặt lại mật khẩu trên %appplication_url% vì bạn quên mật khẩu.
-    Nếu bạn không yêu cầu việc này, hãy bỏ qua email. Yêu cầu sẽ hết hạn và không còn tác dụng sau 24 giờ.
-    Để đặt lại mật khẩu và tạo mật khẩu mới, hãy truy cập trang sau: %confirmationUrl%
-    Bạn có thể dùng tên đăng nhập và mật khẩu của mình bất cứ lúc nào để vào cộng đồng %appplication_url%.
-    Để làm vậy, chỉ cần truy cập trang sau: %loginPage%
-    Để sửa thông tin hồ sơ, hãy vào trang này: %profilePage%
-    Thân mến,
-    Đội ngũ Catrobat.
-  messageHtml: |
-    <p>
-    Chào %username%,<br>
-    <br>
-    Bạn đã yêu cầu đặt lại mật khẩu trên <a href="%appplication_url%">Pocket Code</a> vì bạn quên mật khẩu.
-    Nếu bạn không yêu cầu việc này, hãy bỏ qua email. Yêu cầu sẽ hết hạn và không còn tác dụng sau 24 giờ.<br>
-    <br>
-    Để đặt lại mật khẩu và tạo mật khẩu mới, hãy nhấn <a href="%confirmationUrl%">vào đây.</a><br>
-    <br>
-    Bạn có thể dùng tên đăng nhập và mật khẩu của mình bất cứ lúc nào để vào cộng đồng <a href="%appplication_url%">Pocket Code</a>.<br>
-    Để làm vậy, chỉ cần truy cập trang sau: <a href="%loginPage%">Trang đăng nhập</a><br>
-    Để sửa thông tin hồ sơ, hãy vào <a href="%profilePage%">trang này</a>.<br>
-    <br>
-    Thân mến,<br>
-    Đội ngũ Catrobat.
-    </p>
 profile:
   aboutMe: 'Về mình'
   currentlyWorkingOn: 'Đang thực hiện'
-  edit: 'Chỉnh sửa hồ sơ'
-  saveChanges: lưu thay đổi
   newPass: mật khẩu mới
   repeatPass: nhắc lại mật khẩu
   oldPass: 'mật khẩu cũ'
-  firstEmail: Email đầu tiên của tôi
-  secondEmail: Email thứ hai của tôi
-  myPrograms: 'Dự án của mình'
-  follows: 'Đang theo dõi'
-  follower: 'Người theo dõi'
-  unfollowUser: 'Bỏ theo dõi người dùng này!'
-  followUser: 'Theo dõi người dùng này!'
-  amountOfPrograms: 'Số lượng dự án'
-  form:
-    passwordTooShort: Mật khẩu mới phải có ít nhất %length% kí tự.
-    passwordTooLong: Mật khẩu mới có nhiều nhất %length% kí tự.
-    passwordIsUsername: Mật khẩu phải khác với tên đăng nhập.
-    passwordWrong: 'Sai mật khẩu'
-    emailNotValid: Địa chỉ email này không phù hợp.
-    emailMissing: Lỗi trong khi cập nhật địa chỉ email. Bạn phải có ít nhất một địa chỉ email hợp lệ.
-    emailExists: Địa chỉ email này đã tồn tại.
-    usernameNotValid: 'Tên đăng nhập này không hợp lệ.'
-    usernameMissing: 'Bạn phải có tên đăng nhập.'
-    usernameExists: Tên người dùng này đã tồn tại.
-    usernameContainsEmail: 'Tên đăng nhập không được chứa địa chỉ email.'
-    submitSuccess: đã lưu!
   reallyDeleteProgram: 'Bạn có thật sự muốn xóa dự án của mình không'
-  programsOf: 'Dự án của'
   picture: 'Ảnh đại diện'
   changePicture: Thay đổi hình ảnh
   goToScratchProfile: 'Hồ sơ trên Scratch'
@@ -470,14 +333,8 @@ myprofile:
   securitySettings: Thay đổi mật khẩu
   accountSettings: 'Cài đặt tài khoản'
   accountVerification: 'Xác minh tài khoản'
-  account: 'Tài khoản'
-  editProfile: 'Chỉnh sửa hồ sơ'
-  edit: Chỉnh sửa
   done: Đã Thực hiện
-  checkMail: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
   passwordUpdated: 'Đã cập nhật mật khẩu thành công.'
-  avatar: 'Ảnh đại diện'
-  email: Thư điện tử
   deleteAccount: 'Xóa tài khoản'
   deleteAccountWarning: |
     Lưu ý:
@@ -488,7 +345,6 @@ myprofile:
   exportDataLoading: 'Đang tải về...'
   exportDataError: 'Đã xảy ra lỗi khi xuất dữ liệu của bạn. Hãy thử lại sau.'
   exportDataRateLimited: 'Bạn chỉ có thể xuất dữ liệu mỗi ngày một lần. Hãy thử lại vào ngày mai.'
-  editAccountSettings: 'Chỉnh sửa cài đặt tài khoản'
   profileChangeSuccess: 'Đã thay đổi hồ sơ của bạn thành công.'
   unspecifiedError: 'Đã có lỗi khi thay đổi hồ sơ của bạn. Hãy thử lại hoặc báo cho chúng mình nếu lỗi vẫn tiếp diễn!'
   verifyAccountText: 'Chúng mình sẽ gửi cho bạn một email có liên kết để xác minh tài khoản. Hãy nhấn vào liên kết trong vòng một giờ; mỗi ngày bạn chỉ được yêu cầu một email.'
@@ -545,13 +401,10 @@ termsOfUse:
   bottom2: 'Vui lòng gửi bất cứ gợi ý nào về điều khoản sự dụng tới %email-webmaster%.'
   version: Phiên bản 1.3, Ngày 4 Tháng 3 Năm 2014
 search:
-  dotdotdot: Tìm kiếm...
   search: 'Tìm dự án, người dùng & studio'
   inMediaLib: 'Tìm trong thư viện đa phương tiện'
   inMediaCategory: 'Tìm trong danh mục đa phương tiện'
   results: Kết quả tìm kiếm
-  resultcount: Kết quá tìm kiếm của bạn %count%
-  fail: 'Hãy nhập ít nhất một từ khóa tìm kiếm'
   noUsers: 'Không tìm thấy người dùng nào'
   noProjects: 'Không tìm thấy dự án nào'
   noStudios: 'Không tìm thấy studio nào'
@@ -567,7 +420,6 @@ menu:
   mediaLibrary: 'Thư viện đa phương tiện'
   studio: 'Studio'
   language: 'Ngôn ngữ'
-  languageOptionsNotAvailable: 'Không có tùy chọn ngôn ngữ nào.'
 login:
   login: Đăng nhập
   button:
@@ -579,21 +431,10 @@ login:
     or: "hoặc"
   passOrUser: Mật khẩu hoặc tên người dùng của bạn không chính xác.
   accountSuspended: 'Tài khoản của bạn đã bị tạm khóa. Nếu bạn nghĩ đây là nhầm lẫn, hãy liên hệ bộ phận hỗ trợ.'
-  noUsername: Không tìm thấy địa chỉ email hoặc tên người dùng của bạn.
-  forgotPass: Quên mật khẩu hoặc tên người dùng?
   recoverPassSend: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
   alreadyReset: 'Mật khẩu của người dùng này đã được yêu cầu đặt lại trong 24 giờ qua.'
-  confirmationSend: 'Một email xác nhận đăng ký đã được gửi đến địa chỉ email của bạn. Hãy kiểm tra hộp thư và kích hoạt tài khoản.'
-  userOrEmail: Tên đăng nhập hoặc Email
-  changePass: Thay đổi mật khẩu
-  createAccount: Tạo tài khoản mới
-  noAccount: 'Chưa có tài khoản?'
-  alreadyAccount: 'Đã có tài khoản?'
-  or: HOẶC
   username: Tên đăng nhập
   email: Thư điện tử
-  passwordFirst: Mật khẩu
-  passwordSecond: 'Xác nhận mật khẩu'
 register:
   title: 'Đăng ký'
   subText: 'Khi tiếp tục, bạn sẽ tạo một tài khoản cộng đồng Catrobat và đồng ý với %var1% và %var2% của chúng mình.'
@@ -626,14 +467,6 @@ registration:
   consentRevoked:
     title: 'Phụ huynh đã rút lại sự đồng ý'
     message: 'Phụ huynh hoặc người giám hộ của bạn đã rút lại sự đồng ý cho tài khoản của bạn. Tài khoản sẽ bị giới hạn chức năng cho đến khi được đồng ý lại.'
-    newEmailPlaceholder: 'Email mới của phụ huynh'
-    changeButton: 'Cập nhật & gửi lại'
-accountRecovery:
-  title: 'Khôi phục tài khoản'
-  description: 'Nếu bạn nhớ email hoặc tên đăng nhập của tài khoản, chúng mình có thể gửi cho bạn liên kết để đặt lại mật khẩu.'
-  button:
-    cancel: Hủy bỏ
-    submit: 'Khôi phục mật khẩu'
 resetPassword:
   request:
     title: 'Đặt lại mật khẩu'
@@ -646,11 +479,6 @@ resetPassword:
     description: 'Nếu có tài khoản khớp với email của bạn, một email chứa liên kết để đặt lại mật khẩu vừa được gửi đi. Liên kết này sẽ hết hạn sau %time%.'
     descriptionTwo: 'Bạn có thể yêu cầu đặt lại mật khẩu mới sau mỗi %throttleLimit% giờ.'
     descriptionThree: 'Nếu bạn không nhận được email, hãy kiểm tra thư mục thư rác hoặc gửi email cho bộ phận hỗ trợ của chúng mình tại %email-webmaster%.'
-  email:
-    title: "Hi!"
-    visitLink: 'Để đặt lại mật khẩu, hãy truy cập liên kết sau'
-    expire: 'Liên kết này sẽ hết hạn sau %time%.'
-    cheers: 'Chúc bạn một ngày vui!'
   newemail:
     title: 'Đặt lại mật khẩu'
     content: 'Gần đây bạn đã yêu cầu đặt lại mật khẩu cho tài khoản Catrobat. Nhấn nút bên dưới để chọn mật khẩu mới. Nếu bạn không yêu cầu việc này, bạn có thể bỏ qua email này.'
@@ -660,76 +488,33 @@ resetPassword:
     title: 'Đặt lại mật khẩu'
     button:
       submit: 'Đặt lại mật khẩu'
-apk:
-  download: Tải về ứng dụng
-  prepare: 'Chuẩn bị ứng dụng'
-  preparing: 'Đang chuẩn bị ứng dụng'
-  text: 'Quá trình có thể mất một lúc'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'Đã có lỗi xảy ra. Hãy thử lại hoặc báo cho chúng mình nếu lỗi vẫn tiếp diễn!'
-  username:
-    blank: Tên người dùng không được để trống
-    invalid: Tên người dùng của bạn không hợp lệ
-    exists: Tên người dùng này đã tồn tại.
-    not_exists: Tên người dùng này không tồn tại.
-    not_email: 'Tên đăng nhập không được là địa chỉ email.'
-    size: 'Tên đăng nhập phải có ít nhất 3 ký tự và không quá 180 ký tự'
-  password:
-    blank: Thiếu mật khẩu.
-    short: 'Mật khẩu của bạn phải có ít nhất {{ limit }} ký tự.'
-  country:
-    blank: Thiếu tên đất nước.
-    invalid: Quốc gia không hợp lệ
-  email:
-    blank: thư điện tử không được để trống
-    invalid: Email của bạn có vẻ là không hợp lệ
-    exists: Địa chỉ email này đã tồn tại.
-  id:
-    blank: Xác thực ID không được để trống
-  login: Mật khẩu hoặc tên người dùng là không chính xác.
-  post-data: Dữ liệu niêm yết là không chính xác hoặc thiếu!
-  checksum:
-    missing: Khách hàng đã không gửi fileChecksum! Bạn đang sử dụng phiên bản lỗi thời của Pocket Code?
-    invalid: kiểm tra không hợp lệ
   xml:
     invalid: không hợp lệ mã xml
     missing: 'lỗi không xác định: project_xml_not_found!'
   file:
-    unexpected: tập tin đã được tìm thấy
     invalid: tập tin không hợp lệ
-  image.missing: Dự án XML đề cập đến một tập tin không tồn tại trong thư mục dự án
-  unknown: lỗi không xác định
-  token: 'Xác thực thiết bị thất bại: auth mã thông báo không hợp lệ!'
-  uploadTokenAuthFailed: 'Xác thực mã tải lên thất bại.'
-  project:
-    invalid: 'Dự án không hợp lệ.'
   languageversion:
     tooold: 'Xin lỗi, dự án của bạn dùng phiên bản cũ của ngôn ngữ Catrobat! Bạn có đang dùng phiên bản Pocket Code mới nhất không?'
   projectversion:
     tooold: 'Xin lỗi, bạn đang dùng phiên bản Pocket Code cũ. Hãy cập nhật lên phiên bản mới nhất.'
   authentication:
-    title: 'Đăng nhập không thành công'
     webview: |
       Có vẻ tên đăng nhập hoặc mật khẩu của bạn chưa đúng.
       Hãy thử đăng nhập lại trong ứng dụng.
 success:
   text: 'Thành công'
-  registration: Đăng ký thành công!
-  token: Đồng ý
-  upload: Dự án của bạn được tải lên thành công!
   imgUpload: 'Đã tải ảnh của bạn lên thành công!'
-  report: Báo cáo của bạn được gửi thành công!
 time:
   minutes.ago: '{0} < 1 phút trước |{1}1 phút trước |] 1, Inf] %count% phút trước'
   hours.ago: '{1}1 giờ trước |] 1, Inf] %count% giờ trước'
   days.ago: '{1}1 ngày trước |] 1, Inf] %count% ngày trước'
   months.ago: '{1}1 tháng trước |] 1, Inf] %count% tháng trước'
   years.ago: '{1}1 năm trước |] 1, Inf] nhiều hơn một năm trước'
-failure:
-  upload: 'Đã xảy ra lỗi khi tải ứng dụng của bạn lên.'
 user:
   verification:
     email: 'Xác minh email của bạn'
@@ -752,7 +537,6 @@ api:
     passwordInvalidChars: 'Mật khẩu chứa ký tự không hợp lệ'
     usernameContainsEmail: 'Tên đăng nhập không được chứa địa chỉ email'
     usernameContainsLink: 'Tên đăng nhập không được chứa liên kết'
-    countryCodeInvalid: 'Mã quốc gia không hợp lệ'
     pictureInvalid: 'Ảnh đại diện không hợp lệ hoặc không được hỗ trợ'
     dateOfBirthMissing: 'Bắt buộc nhập ngày sinh'
     dateOfBirthInvalid: 'Ngày sinh không hợp lệ'
@@ -786,61 +570,11 @@ api:
     nameAlreadyInUse: 'Tên đã được sử dụng'
     descriptionMissing: 'Thiếu mô tả'
     descriptionEmpty: 'Mô tả trống'
-    descriptionTooShort: 'Mô tả quá ngắn'
     descriptionTooLong: 'Mô tả quá dài'
     imageFileInvalid: 'Tệp ảnh không hợp lệ'
     imageFileInvalidType: 'Loại tệp ảnh không hợp lệ'
     imageFileTooLarge: 'Tệp ảnh quá lớn'
-#languages and countries
-language:
-  arabic: Ả rập
-  bulgarian: Bun-ga-ri
-  catalan: 'Tiếng Catalan'
-  chinese_simplified_han: Trung Quốc (giản thể Han)
-  chinese_traditional_han: Trung Quốc (truyền thống Han)
-  croatian: Croatia
-  czech: Séc
-  danish: Đan Mạch
-  dutch: Hà Lan
-  english_united_kingdom: Tiếng Anh (Vương Quốc Anh)
-  english_united_states: Tiếng Anh (Hoa Kỳ)
-  estonian: Estonia
-  filipino: Philippines
-  finnish: Phần Lan
-  french: Pháp
-  german: Đức
-  greek: Hy Lạp
-  hebrew: Do Thái
-  hindi: Hin-đi
-  hungarian: Hungari
-  indonesian: Indonesia
-  italian: Ý
-  japanese: Nhật Bản
-  korean: Hàn Quốc
-  latvian: Latvia
-  lithuanian: Lithuania
-  malay: Mã Lai
-  norwegian: Na Uy
-  persian: Ba tư
-  polish: Ba Lan
-  portuguese_brazil: Bồ Đào Nha (Brazil)
-  portuguese_portugal: Bồ Đào Nha (Bồ Đào Nha)
-  romanian: Rumani
-  russian: Nga
-  serbian: Séc-bi
-  slovak: Slovakia
-  slovenian: Sloven
-  spanish_latin_america: Tây Ban Nha (Mỹ La tinh)
-  spanish_spain: Tây Ban Nha (Tây Ban Nha)
-  swedish: Thụy Điển
-  thai: Thái
-  turkish: Thổ Nhĩ Kỳ
-  ukrainian: Ucraina
-  vietnamese: Tiếng Việt
-ci:
-  generate: Tạo ra Apk
-  pending: Đang tạo Apk
-  download: Tải về Apk
+
 admin:
   maintain:
     diskMaintenance: 'Bảo trì ổ đĩa'
@@ -848,46 +582,9 @@ admin:
     noRemovableObjects: 'Không có đối tượng nào có thể xóa.'
     removableObjects: 'Đối tượng có thể xóa'
 recommender:
-  similarPrograms: 'Dự án tương tự'
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Những người tải dự án này cũng đã tải'
   moreFromThisUser: 'Thêm từ %username%'
-pmd:
-  submitBtn: 'Nộp dự án của bạn'
-  submitBox:
-    header: 'Nộp bài'
-    text: 'Bạn sắp nộp dự án của mình. Hãy nhập mã dự án và nhấn gửi.'
-    btnText: 'Nộp'
-  successful:
-    text: 'Đã tải dự án của bạn lên thành công.'
-  failed:
-    text: 'Tải dự án lên thất bại.'
 codeview:
   title: 'Xem mã'
-  showCode: 'Hiện mã'
-  hideCode: 'Ẩn mã'
-  showStatistics: 'Hiện thống kê mã'
-  hideStatistics: 'Ẩn thống kê mã'
-  cantDisplayCode: 'Không thể hiển thị mã'
-  cantDisplayStatistics: 'Không thể hiển thị mã'
-  totalNumberOf: 'Tổng số'
-  scenes: 'Cảnh'
-  scripts: 'Các kịch bản'
-  bricks: 'Gạch'
-  objects: 'Nhân vật và đối tượng'
-  looks: 'Các giao diện'
-  sounds: 'Âm thanh'
-  globals: 'Toàn cục'
-  locals: 'Cục bộ'
-  globalVariables: 'Biến toàn cục'
-  localVariables: 'Biến cục bộ'
-  eventBricks: 'Khối sự kiện'
-  controlBricks: 'Khối điều khiển'
-  motionBricks: 'Khối chuyển động'
-  soundBricks: 'Khối âm thanh'
-  looksBricks: 'Khối hiển thị'
-  penBricks: 'Khối bút vẽ'
-  dataBricks: 'Khối dữ liệu'
-  specialBricks: 'Khối đặc biệt'
 codeView:
   title: 'Xem mã'
   loading: 'Đang tải phần xem mã...'
@@ -900,19 +597,7 @@ codeView:
 codeStatistics:
   title: 'Thống kê mã'
   error: 'Không thể hiển thị thống kê mã.'
-  general: 'Tổng quan'
-  bricks: 'Gạch'
-  eventBricks: 'Sự kiện'
-  controlBricks: 'Điều khiển'
-  motionBricks: 'Chuyển động'
-  soundBricks: 'Âm thanh'
-  looksBricks: 'Các giao diện'
-  penBricks: 'Pen'
-  dataBricks: 'Dữ liệu'
-  deviceBricks: 'Thiết bị'
-  specialBricks: 'Đặc biệt'
   yourScore: 'Điểm của bạn:'
-  points: 'điểm'
   abstraction: 'Trừu tượng hóa và phân rã vấn đề'
   parallelism: 'Xử lý song song'
   logicalThinking: 'Tư duy logic'
@@ -928,20 +613,7 @@ footer:
   text: 'Đã có %project_count% dự án tuyệt vời được chia sẻ, dự án tiếp theo có thể là của bạn. Tải ứng dụng của chúng mình và bắt đầu sáng tạo ngay hôm nay'
 privacy-policy:
   header: 'Chính sách quyền riêng tư'
-  version: 'Phiên bản 2.2, ngày 17 tháng 10 năm 2019'
-  text1: 'Để mang đến cho bạn mọi lợi ích từ dịch vụ của chúng mình và tài khoản đi kèm, chúng mình cần thu thập một số dữ liệu của bạn.'
-  text2: 'Để duy trì và cải thiện dịch vụ (ứng dụng và trang web) cũng như nghiên cứu khoa học về giáo dục ICT và STEM/STEAM, chúng mình sử dụng Google Analytics, Crashlytics và Firebase, đều của Google LLC (Mỹ), cùng Dynatrace của Dynatrace LLC (Mỹ) để thu thập siêu dữ liệu về việc sử dụng dịch vụ, ví dụ thông tin sự cố, dấu thời gian, các trang/màn hình đã truy cập, cách sử dụng ứng dụng và dịch vụ, hệ điều hành đang dùng và thông tin về nhà cung cấp mạng. Việc phân tích này và dữ liệu thu thập được không liên kết với hồ sơ của bạn và không chứa thông tin cá nhân nào (các bit cuối của địa chỉ IP được ẩn danh). Tuy nhiên, dữ liệu thu thập được sẽ được chuyển cho các nhà cung cấp dịch vụ (Google LLC, Mỹ và Dynatrace LLC, Mỹ). Việc xử lý dữ liệu dựa trên thỏa thuận với Google LLC và Dynatrace LLC. Mối quan hệ với các nhà cung cấp dịch vụ này tuân thủ Quy định chung về bảo vệ dữ liệu của Liên minh châu Âu (EU GDPR) và thỏa thuận "Privacy Shield" giữa EU và Mỹ.'
-  text3: 'Để tạo và sử dụng tài khoản trong hệ thống của chúng mình, cũng như thông báo cho bạn qua email về những thay đổi cần thiết liên quan đến tài khoản, ví dụ cập nhật hoặc vi phạm Điều khoản sử dụng và dịch vụ, quy tắc cộng đồng hay chính sách của chúng mình, chúng mình sẽ lưu tên đăng nhập và, nếu bạn cung cấp, địa chỉ email của bạn. Nếu bạn đã kết nối tài khoản qua Google Plus hoặc Facebook, chúng mình còn lưu thêm một mã định danh gắn với tài khoản của bạn trên các dịch vụ đó. Chúng mình sẽ không dùng dữ liệu này cho bất kỳ mục đích nào khác (ví dụ tiếp thị), trừ khi bạn cho phép rõ ràng.'
-  text4: 'Trên cơ sở tự nguyện, bạn có thể cho chúng mình biết quốc gia bạn đang sống qua trang tài khoản trên trang chia sẻ. Thông tin này sẽ hiển thị trên hồ sơ công khai của bạn và chỉ được chúng mình dùng cho mục đích thống kê và nghiên cứu. Bạn có thể xóa nó bất cứ lúc nào trong cài đặt hồ sơ.'
-  text5: 'Bạn có thể rút lại việc sử dụng dữ liệu cá nhân thuộc tài khoản của mình bất cứ lúc nào bằng cách xóa tài khoản qua trang hồ sơ trên https://share.catrobat.org/. Sau khi xóa tài khoản, bạn vẫn có thể dùng các dịch vụ được cung cấp nhưng không thể cộng tác, ví dụ như tải lên chương trình, bình luận hay bày tỏ cảm xúc. Ngoài ra, mọi nội dung liên kết với tài khoản của bạn, ví dụ chương trình đã tải lên, bình luận, v.v., cũng sẽ bị xóa.'
-  text6: 'Để tránh việc lạm dụng dịch vụ, ví dụ qua các nội dung tải lên hoặc bình luận của người dùng nhằm mục đích bất hợp pháp, mọi dữ liệu công khai do người dùng tạo ra (nội dung tải lên, bình luận) sẽ được lưu nội bộ trong cơ sở dữ liệu, kèm dấu thời gian và địa chỉ internet đã dùng. Dữ liệu này sẽ không được bất kỳ tổ chức nào sử dụng hoặc chuyển cho bất kỳ tổ chức nào, trừ khi có nghi ngờ hợp lý về hành vi bất hợp pháp đủ nghiêm trọng và các cơ quan pháp luật có thẩm quyền chính thức yêu cầu dựa trên luật hiện hành. Mỗi trường hợp sẽ được chúng mình kiểm tra kỹ lưỡng trước, trên cơ sở từng trường hợp riêng.'
-  text7: 'Bạn có thể tự nguyện đăng ký nhận Bản tin Catrobat tại https://catrobat.org/newsletter, do chúng mình cung cấp qua dịch vụ MailChimp (The Rocket Science Group LLC d/b/a MailChimp, Mỹ). Khi đó bạn sẽ nhận được thông tin cập nhật về dự án Catrobat và các dịch vụ của nó qua địa chỉ email bạn đã cung cấp. Bạn có thể hủy đăng ký bản tin bất cứ lúc nào bằng liên kết "unsubscribe" ở cuối mỗi bản tin. Bản tin này được cung cấp bởi MailChimp, bên đã ký thỏa thuận xử lý dữ liệu với chúng mình và cam kết tuân thủ Quy định chung về bảo vệ dữ liệu của EU cũng như "Privacy Shield" giữa EU và Mỹ. Để biết thêm chi tiết về MailChimp, bạn cũng có thể xem Chính sách quyền riêng tư và Điều khoản sử dụng của MailChimp.'
-  text8: 'Mọi dịch vụ đều được cung cấp bởi dự án mã nguồn mở miễn phí Catrobat, trực thuộc International Catrobat Association – Verein zur Förderung freier Software, một tổ chức phi chính phủ phi lợi nhuận được thành lập tại Graz, Áo (Liên minh châu Âu). Các chính sách của chúng mình tôn trọng luật bảo vệ dữ liệu của EU và Áo (GDPR). Để liên hệ với chúng mình, hãy gửi email đến contact@catrobat.org hoặc gửi thư đến Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).'
-  text9: 'Nếu bạn dưới 14 tuổi, chính sách này phải được người giám hộ hợp pháp (thường là cha mẹ) chấp nhận.'
-  text10: 'Chính sách quyền riêng tư chính thức bằng tiếng Anh của Catrobat có trên web tại %privacy_policy%.'
-  disagree-text: 'Nếu không có sự đồng ý, chúng mình không thể tạo tài khoản, nhưng bạn vẫn có thể dùng các tính năng chính.'
 catro-notifications:
-  markAsRead: 'Đánh dấu là đã đọc'
   noFollowers: 'Có vẻ bạn chưa có thông báo nào về người theo dõi.'
   noComments: 'Có vẻ bạn chưa có thông báo nào về bình luận.'
   noReactions: 'Có vẻ bạn chưa có thông báo nào về cảm xúc.'
@@ -975,29 +647,16 @@ catro-notifications:
 clipboard:
   success: 'Đã sao chép liên kết vào bộ nhớ tạm!'
   success_project: 'Đã sao chép liên kết dự án vào bộ nhớ tạm!'
-  success_user: 'Đã sao chép liên kết người dùng vào bộ nhớ tạm!'
   fail: 'Không thể sao chép liên kết vào bộ nhớ tạm! :('
 next: 'Tiếp'
 previous: 'Trước'
 media-packages:
   title: 'Thư viện đa phương tiện'
   description: 'Trong các danh mục sau, bạn có thể tìm thấy nhân vật và đối tượng để thêm vào dự án của mình.'
-  thumb-size:
-    description: 'Kích thước xem trước'
-    sm: 'nhỏ'
-    md: 'vừa'
-    lg: 'lớn'
   theme-special: 'Chủ đề đặc biệt %flavor%'
   search-results: 'Kết quả tìm kiếm trong thư viện đa phương tiện'
-  no-results: 'Không tìm thấy kết quả nào. Hãy chỉ dùng từ khóa tìm kiếm bằng tiếng Anh.'
-  download_these_files: 'lưu'
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Bản quyền &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Bảo lưu mọi quyền.'
 noscript:
   warning: 'Trang web này cần JavaScript để hoạt động. Hãy bật JavaScript trong trình duyệt hoặc nhờ người lớn giúp bạn.'
@@ -1007,10 +666,6 @@ cookie-consent:
   decline: 'Từ chối'
   privacy-link: "Chính sách bảo mật"
   settings-link: 'Cài đặt cookie'
-agree: 'Đồng ý'
-disagree: 'Không đồng ý'
-profileLoader:
-  noProfiles: 'Hiện tại chưa có hồ sơ nào.'
 element: 'Phần tử'
 elements: 'Phần tử'
 share:
@@ -1019,7 +674,6 @@ share:
   success: 'Chia sẻ thành công'
 copy: 'Sao chép liên kết'
 checkOutProject: 'Xem dự án này:'
-checkOutUser: 'Xem người dùng này:'
 community: 'Cộng đồng Catrobat'
 back_to_app: 'Rời cộng đồng'
 category:
@@ -1035,7 +689,6 @@ category:
 achievements:
   sidebar:
     title: 'Thành tích'
-    badge: 'new'
   overview:
     header: 'Thành tích'
     most_recent_achievement:
@@ -1127,10 +780,7 @@ extensions:
       title: 'Nhiều người chơi'
 studio:
   title: 'Studio'
-  singular: 'Studio'
   create_studio: 'Tạo studio'
-  delete_studio: 'Xóa studio'
-  cancel_studio: 'Hủy bỏ'
   studio_name: 'Tên studio'
   studio_description: 'Mô tả studio'
   is_public: 'Đặt công khai?'
@@ -1147,8 +797,6 @@ studio:
   cover_image_remove: 'Xóa ảnh'
   popular: 'Studio phổ biến'
   join: 'Tham gia'
-  leave: 'Rời khỏi'
-  report: 'Báo cáo'
   public: 'công khai'
   private: 'Chỉ theo lời mời'
   overview:
@@ -1171,16 +819,12 @@ studio:
     admin: 'Quản trị viên'
     member: 'Thành viên'
   details:
-    add_project: 'nhấn để thêm dự án'
     add: 'Thêm'
     showMore: 'xem thêm'
-    showLess: 'thu gọn'
     are_you_sure: 'Bạn có chắc không?'
     no_way_of_return: 'Thao tác này không thể hoàn tác.'
     delete_it: 'Xóa'
-    remove_project: 'Gỡ khỏi studio'
     remove_project_error: 'Không thể gỡ dự án khỏi studio.'
-    remove_project_success: 'Đã gỡ dự án khỏi studio thành công.'
     no_projects: 'Studio chưa có dự án nào.'
     projects:
       title: 'Các chương trình'
@@ -1196,10 +840,8 @@ studio:
       no_projects_empty_state: 'Bạn chưa có dự án nào để thêm. Hãy tạo một dự án trong Pocket Code trước nhé!'
       add_selected: 'Thêm mục đã chọn'
     no_available_projects: 'Không có dự án nào để thêm.'
-    updateCoverError: 'Đã có lỗi khi cập nhật ảnh bìa studio.'
     join: 'Tham gia'
     leave: 'Rời khỏi'
-    report: 'Báo cáo'
     pending: 'Đang chờ'
     decline: 'Đã từ chối'
     comments:
@@ -1219,7 +861,6 @@ studio:
       add_comment: '%user% đã để lại một bình luận.'
     members_list:
       title: 'Thành viên studio'
-      project_count: '{0} Chưa có dự án studio nào |{1} 1 dự án studio |]1,Inf] %count% dự án studio'
       no_studio_projects: 'Chưa có dự án studio nào'
       one_studio_project: '1 dự án studio'
       n_studio_projects: '%count% dự án studio'
@@ -1229,7 +870,6 @@ studio:
       ban_failed: 'Đã có lỗi khi cấm thành viên này. Hãy thử lại sau.'
       demote_member: 'Hạ quản trị viên xuống thành viên'
       demotion_failed: 'Đã có lỗi khi hạ quyền quản trị viên này. Hãy thử lại sau.'
-      last_admin: 'Không thể hạ quyền quản trị viên cuối cùng của studio này.'
     join_requests:
       title: 'Yêu cầu tham gia'
       accept: 'Chấp nhận'
@@ -1259,7 +899,6 @@ media_library:
   no_results: 'Không tìm thấy kết quả nào.'
   assets_count: 'tài nguyên'
   view_all: 'Xem tất cả'
-  view_all_category: 'Xem tất cả %category%'
   back_to_app: 'Quay lại ứng dụng'
 snackbar:
   project_not_found: 'Dự án được yêu cầu không có sẵn'
@@ -1313,14 +952,6 @@ moderation:
     rate_limited: 'Bạn đang thực hiện thao tác với studio quá nhanh. Hãy chờ một chút.'
   hidden_notice:
     project: 'Dự án này đã bị ẩn do bị cộng đồng báo cáo.'
-    comment: 'Bình luận này đã bị ẩn do bị cộng đồng báo cáo.'
-    user: 'Hồ sơ này đã bị ẩn do bị cộng đồng báo cáo.'
     user_own: 'Tài khoản của bạn đã bị tạm khóa do bị cộng đồng báo cáo. Bạn có thể kháng nghị quyết định này.'
-    studio: 'Studio này đã bị ẩn do bị cộng đồng báo cáo.'
-  notification:
-    content_hidden: '%content_type% của bạn đã bị ẩn do bị cộng đồng báo cáo. Bạn có thể kháng nghị quyết định này.'
-    appeal_approved: 'Kháng nghị của bạn đã được chấp thuận. Nội dung của bạn đã hiển thị trở lại.'
-    appeal_rejected: 'Kháng nghị của bạn đã được xem xét và quyết định ẩn nội dung vẫn được giữ nguyên.'
-    admin_review_needed: 'Nội dung đã bị tự động ẩn và cần được xem xét.'
 Reports: 'Báo cáo'
 members: 'thành viên'

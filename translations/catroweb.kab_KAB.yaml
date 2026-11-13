@@ -8,19 +8,12 @@ meta.og.description.login: "Qqen akken ad tebḍuḍ isenfaren-ik n Catrobat d t
 meta.og.title.register: "Rnu amiḍan n Catrobat"
 meta.og.description.register: "Rnu ɣer tmɣiwant n Catrobat u bdu ass-a ad tebḍuḍ isenfaren-ik n tesnulfa."
 meta.og.description.profile: "%username% deg Catrobat – snirem isenfaren d tirbaḥin-is."
-localLanguage: "Taqbaylit"
 username: "Isem n useqdac"
 password: "Awal uffir"
-createNewPassword: Rnu awal uffir
-accountSettings: Iɣewwaren n umiḍan
 email: "Imayl"
-aboutPocketCode: "Ɣef Pocket Code"
 about: "Ɣef Catrobat"
-education: Ţṛebga
 chat: Aqeṣṣer akked ifoṛumen
-privacyGuide: "Amnir n tbaḍnit"
 others: Wiyaḍ
-tutorials: Tallelt
 googlePlay: "Google Play Store"
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: "Amek i txedmeḍ asenfar-a? Tesqedceḍ tikta, iskr
 projectImportedFromScratch: "Asenfar-a yettwakter-d seg MIT Scratch. Tzemreḍ ad twaliḍ asenfar aɣbalu"
 scratchImportedProjectLinkHere: "dagi."
 country: Tamurt
-loginText: qqen
 privacyPolicy: "Tasertit n tbaḍnit"
-imprint: "Talɣut tusḍift"
 projectDetails: "Talqayt"
 somethingWentWrong: 'Ooooops yella kra ur yeddan akken iwata.'
 accountNotVerified: "Ttxil-k selken belli teqqneḍ u imayl n umiḍan-ik yettwasenqed."
@@ -55,36 +46,28 @@ accountSuspended: "Amiḍan-ik yettwaḥbes ɣef ssebba n yineqqisen n tmɣiwant
 doesNotExist: "Aɣbalu i d-yettwasutren ulac-it."
 pleaseTryAgain: 'Ttxilek ɛreḍ tikkelt nniḍen!'
 tryAgainButton: "Ɛreḍ tikkelt-nniḍen"
-oldVersionError: "Ttxil-k leqqem ɣer lqem amaynut n Pocket Code!"
 more: 'ugar'
 less: "drus"
 show-more: 'Zken ugar'
-show-less: 'Sken qell'
 more-information: "Ugar n talɣut"
 less-information: 'Qell n isallen'
 ok: Ok
-clickToDownloadProgram: "Akken ad tsadreḍ asenfar n umedya sit %link_start% dagi %link_end%."
-registrationError: "Isem n useqdac neɣ tansa imayl yettwaseqdac yakan."
 notifications: 'Ilɣuyen'
 allNotifications: 'All'
 FollowersNotifications: 'Imeḍfaṛen'
 LikeNotifications: "Tisedmirin"
 CommentNotifications: 'Iwenniten'
 RemixNotifications: "Iremixen"
-wellDone: "Igerrez waya!"
 done: "Dayen ifuk!"
 notificationsReadMessage: "Yettban-d ulac ɣur-k ilɣa."
-confirmMessage: "Ih, kkes-it"
 cancelMessage: "Sefsex"
 notificationsUnauthorizedError: "Ur yezmir ara ad yesireg aseqdac"
 notificationsClearError: "Ur nezmir ara ad nerr ilɣa d imeɣriyen!"
-pleaseWait: "Ttxil-k rǧu..."
 projects: "Isenfaren"
 users: "Iseqdacen"
 studios: "Isudyuten"
 oauthPopUpTitle: "Talɣut n tuqqna s umiḍan uffiɣ"
 oauthInfo: "Tqeqneḍ s umiḍan uffiɣ. Nexleq-ak-d isem n useqdac s wudem agacuran. Ma tebɣiḍ ad tbeddleḍ isem n useqdac neɣ ad texleqḍ awal uffir amaynut, ddu ɣer usebter n umaɣnu-ik"
-oauthHere: "dagi"
 statistics: "Tidaddanin"
 languageSelection: "Afran n tutlayt"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: "Aberkan"
   dark_description: "Udem aberkan"
   apply: "Snes"
-indexPage:
-  recommendedSection:
-    info:
-      title: "Anwi isenfaren i d-yettwasumren dagi?"
-      description: "Ma yella asenfar-ik yeṭṭef ugar n tsedmirin (Aḥmiq, Taḍsa ...), ad d-yali ugar deg tebdart-a."
 follower:
   follows: "Yettḍafar"
   followers: Imeḍfaṛen
   follow: "Ḍfer"
-  username: "Aseqdac"
   followsMe: "Iḍeffer-iyi"
   noFollowing: "Ur tettḍafareḍ yiwen akka tura."
   noFollowers: "Ulac ɣur-k imeḍfaren akka tura."
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Tetḥeqqeḍ tebɣiḍ ad tḥebseḍ aḍfar n useqdac-a?"
   unfollowButton: "Ḥbes aḍfar n %username%"
 project:
-  welcome:
-    title: "Ansuf ɣer %theme% n Catrobat"
-    title_mindstorms: "Ansuf ɣer usmel n Catrobat i Mindstorms EV3 d NXT"
-    subtitle: "Snulfu-d tiqsiḍin, uraren d wugar..."
-    subtitle_embroidery: "Ṭerrez timudmin-ik ɣef yitricuyen, iqrab, iserwal neɣ tilifun-ik!"
-    subtitle_mindstorms: "Snulfu-d isenfaren-ik s yiṛubuten-ik Lego Mindstorms EV3 d NXT"
-    download: "Sader asnas"
-    statistics: "Ugar n tidaddanin"
   featured: "Yettwafernen"
   open: "Ldi"
   download: "Sader"
@@ -148,9 +117,6 @@ project:
       retention: "Isenfaren yulin ad ttwakksen s wudem awurman deffir yiwet n tallit n warmud. Qqen yal tikkelt neɣ awi-d isadaren i usenfar-ik akken ad yeqqim ugar."
       protection: "Isenfaren yelhan aṭas neɣ yettwassnen zemren ad ttwaḥerzen seg tukksa tawurmant sɣur imeɣyaden."
   example: "Imedyaten"
-  newest: "Isenfaren imaynuten"
-  recommended: "Isenfaren yettwasumren"
-  scratchremixes: "Iremixen n Scratch"
   noProjects: "Ulac isenfaren akka tura."
   shareAction: "Bḍu"
   deleteAction: "Kkes asenfar"
@@ -173,17 +139,10 @@ project:
   reportCommentConfirmation: "Tetḥeqqeḍ tebɣiḍ ad tmmleḍ awennit-a?"
   deleteCommentConfirmation: "Tetḥeqqeḍ tebɣiḍ ad tekkseḍ awennit-a?"
   deleteAccountConfirmation: "Tukksa n umiḍan?\nTetḥeqqeḍ tebɣiḍ ad tekkseḍ amiḍan-ik? Aya ad yekkes daɣen isenfaren d yiwenniten-ik!\nUlac abrid ad d-terreḍ tigawin-ik!\nIh, kkes-it!\nSefsex\n"
-  tooLongName: "Isem n usenfar ɣezzif aṭas!"
-  tooLongDescription: "Aglam n usenfar ɣezzif aṭas!"
-  tooLongCredits: "Tizmilin d yisnemmiren n usenfar ɣezzifit aṭas!"
   my_projects: "Isenfaren-iw yettwabḍan"
   trending: "Isenfaren n tura"
   popular: "Isenfaren yettwassnen"
-  most:
-    viewed: "Wid yettwalan ugar"
-    downloaded: "Wid yettwasadren ugar"
   random: "Isenfaren igacuranen"
-  related: "Isenfaren icudden"
   browse:
     explore: "Snirem isenfaren"
     no_projects: "Mazal ur d-tesnulfaḍ ara isenfaren"
@@ -197,36 +156,14 @@ project:
     tooltip: "Isenfaren ttwakksen s wudem awurman deffir yiwet n tallit n warmud. Awi-d ugar n yisadaren neɣ qqen yal tikkelt akken ad yeqqim ugar."
     tooltip_protected: "Asenfar-a yettwaḥrez u ur yettwakkes ara s wudem awurman."
   downloads: "%downloads% n yisadaren"
-  sample: "Isenfaren n umedya"
   views: "%views% n tmuɣliwin"
   likes:
     likersTitle: "Imdanen i yesserwen ɣef usenfar-a"
     all: "All"
-  remixes: "{0}0 n yiremixen |{1}1 n uremix |]1,Inf]%remixes% n yiremixen"
-  newRemixesNotificationTitle: "|{1}\"%programName%\" ɣur-s 1 n uremix amaynut: |]1,Inf] \"%programName%\" ɣur-s %remixes% n yiremixen imaynuten:"
-  submitted: "Isenfaren yettwaznen"
-  uploaded: "Isenfaren yulin"
-  reportAsInappropriate: "Mmel d awezɣi"
-  reportProgram: "Mmel asenfar"
   languageVersion: "Lqem n tutlayt Catrobat: %languageVersion%"
-  reportLoginText: "Ttxil-k %login% akken ad tmmleḍ asenfar-a."
-  reportDialogHeader: "Acuɣer tebɣiḍ ad tmmleḍ asenfar-a?"
-  reportDialogReason: "Sekcem ssebba"
-  reportRadioButtonInappropriate: "D awezɣi"
-  reportRadioButtonCopyright: "Takerḍa n yizerfan n umeskar"
-  reportRadioButtonSpam: "D aspam"
-  reportRadioButtonDislike: "Ur t-ḥemmleɣ ara"
-  reportOwnProgram: "Ur tezmireḍ ara ad tmmleḍ asenfar-ik."
-  reportAlready: "Temmleḍ yakan asenfar-a."
-  reportDone: "Temmleḍ asenfar-a!"
   updateAppHeaderDownload: "Asader ur yezmir ara"
   updateAppTextDownload: "Ttxil-k leqqem asnas-ik ɣer lqem amaynut. Ẓer belli mačči akk timahilin n Android llant yakan deg iOS."
-  updateAppTextDownloadApk: "Asader n APK yella kan deg Android akka tura, ulac-it deg iOS."
-  updateAppHeader: "Leqqem asnas"
-  updateAppText: "Ttxil-k leqqem asnas-ik ɣer lqem amaynut."
-  btnClosePopup: Ok
   checkout_this_project: "Wali asenfar-a n Catrobat"
-  show_more: "Sken ugar"
   comments: Iwenniten
   send: "Azen"
   delete: "Kkes"
@@ -238,7 +175,6 @@ project:
   deleted_popup_header: "Yettwakkes"
   noAdminRights: "Ulac ɣur-k izerfan n unedbal. Ttxil-k qqen d anedbal."
   editProject: "Ẓreg asenfar"
-  closeProjectEditor: "Mdel amaẓrag n usenfar"
   closeEditorPrompt: "Tebɣiḍ ad teskelseḍ isnifal-ik?"
   btnDiscard: Sefsex
   addComment: "Aru awennit"
@@ -246,8 +182,6 @@ project:
   smile: "Taḍsa!"
   love: "Tayri!"
   wow: "Ayuuh!"
-  linkTitle: "Aseɣwen"
-  link: "Nɣel aseɣwen n usenfar ɣer tecfawit"
   reactionsText: "Tisedmirin"
   downloadErrorText: "Teḍra-d tuccḍa deg usader n usenfar. Ttxil-k ɛreḍ ticki."
   downloadStartText: "Asader yebda..."
@@ -267,11 +201,8 @@ project:
   translations: "Tisuqilin"
   createTranslation: "Rnu tasuqilt"
   deletedComment: "**Yettwakkes**"
-  replyLabel: "tiririt"
-  repliesLabel: "tiririyin"
   notForKids: "Ur yelhi ara i yigerdan"
 remixGraph:
-  title: "Iremixen"
   showRemixGraph: "Udlif n yiremixen"
   by: 'by'
   open: "Ldi"
@@ -291,10 +222,6 @@ remixGraph:
   projectNotAvailable: "Ulac-it"
   projectUnknownUser: "Aseqdac arussin"
 noReply: "Wagi d izen awurman - Ttxil-k ur d-sserr ara srid ɣef yimayl-a."
-accountConfirmation:
-  subject: "Asentem n umiḍan-ik Catrobat"
-  message: "Azul %username%.\nAkken ad tsemdeḍ armad n umiḍan-ik - ttxil-k rzu ɣer %confirmationUrl%\nAseɣwen-a yettwaseqdac yiwet n tikkelt kan i usentem n umiḍan-ik.\nTanemmirt,\nTarbaɛt-ik n Catrobat.\n"
-  messageHtml: "<p>\nAzul %username%.<br>\n<br>\nAkken ad tsemdeḍ armad n umiḍan-ik - ttxil-k sit <a href=\"%confirmationUrl%\">dagi.</a><br>\nAseɣwen-a yettwaseqdac yiwet n tikkelt kan i usentem n umiḍan-ik.<br>\n<br>\nTanemmirt,<br>\nTarbaɛt-ik n Catrobat.\n</p>\n"
 newAccountConfirmation:
   subject: "Senqed tansa-ik imayl"
   welcome: "Ansuf ɣer Catrobat!"
@@ -372,39 +299,13 @@ parent:
       ignore: "Ma ur tessutreḍ ara aya, tzemreḍ ad tzegleḍ imayl-a war ugur."
 passwordRecovery:
   subject: "Tiririt n wawal-ik uffir n Catrobat"
-  message: "Azul %username%.\nTessutreḍ ad twennzeḍ awal-ik uffir deg %appplication_url% acku tettuḍ awal-ik uffir.\nMa ur tessutreḍ ara aya, ttxil-k zgel-it. Ad yemmet u ur yettnefɛ ara deffir 24 n yisragen.\nAkken ad twennzeḍ awal-ik uffir u ad texleqḍ wayeḍ, ttxil-k rzu ɣer usebter-a: %confirmationUrl%\nTzemreḍ ad tesqedceḍ isem-ik n useqdac d wawal-ik uffir melmi i tebɣiḍ akken ad tkecmeḍ ɣer tmɣiwant %appplication_url%.\nI waya, rzu kan ɣer usebter-a: %loginPage%\nAkken ad tẓergeḍ talqayt n umaɣnu-ik, ddu ɣer usebter-a: %profilePage%\nTanemmirt,\nTarbaɛt-ik n Catrobat.\n"
-  messageHtml: "<p>\nAzul %username%.<br>\n<br>\nTessutreḍ ad twennzeḍ awal-ik uffir deg <a href=\"%appplication_url%\">Pocket Code</a> acku tettuḍ awal-ik uffir.\nMa ur tessutreḍ ara aya, ttxil-k zgel-it. Ad yemmet u ur yettnefɛ ara deffir 24 n yisragen.<br>\n<br>\nAkken ad twennzeḍ awal-ik uffir u ad texleqḍ wayeḍ, ttxil-k sit <a href=\"%confirmationUrl%\">dagi.</a><br>\n<br>\nTzemreḍ ad tesqedceḍ isem-ik n useqdac d wawal-ik uffir melmi i tebɣiḍ akken ad tkecmeḍ ɣer tmɣiwant <a href=\"%appplication_url%\">Pocket Code</a>.<br>\nI waya, rzu kan ɣer usebter-a: <a href=\"%loginPage%\">Asebter n tuqqna</a><br>\nAkken ad tẓergeḍ talqayt n umaɣnu-ik, ddu ɣer <a href=\"%profilePage%\">usebter-a</a>.<br>\n<br>\nTanemmirt,<br>\nTarbaɛt-ik n Catrobat.\n</p>\n"
 profile:
   aboutMe: "Ɣef-i"
   currentlyWorkingOn: "Akka tura xeddmeɣ ɣef"
-  edit: "Ẓreg amaɣnu-ik"
-  saveChanges: "sekles isnifal"
   newPass: "awal uffir amaynut"
   repeatPass: "ales awal uffir"
   oldPass: "awal uffir aqbur"
-  firstEmail: "Imayl-iw amezwaru"
-  secondEmail: "Imayl-iw wis sin"
-  myPrograms: "Isenfaren-iw"
-  follows: "Yettḍafar"
-  follower: "Imeḍfaren"
-  unfollowUser: "Ḥbes aḍfar n useqdac-a!"
-  followUser: "Ḍfer aseqdac-a!"
-  amountOfPrograms: "Amḍan n yisenfaren"
-  form:
-    passwordTooShort: "Awal uffir amaynut ilaq ad yesɛu ma drus %length% n yisekkilen."
-    passwordTooLong: "Awal uffir amaynut yezmer ad yesɛu %length% n yisekkilen ma yella aṭas."
-    passwordIsUsername: "Awal uffir ilaq ad yemgarad ɣef yisem n useqdac."
-    passwordWrong: "Awal uffir d armeɣtu"
-    emailNotValid: "Tansa imayl-a d tarameɣtut."
-    emailMissing: "Tuccḍa deg uleqqem n tansa imayl-a. Ilaq ad tesɛuḍ ma drus yiwet n tansa imayl yettwasneqden."
-    emailExists: "Tansa imayl-a tella yakan."
-    usernameNotValid: "Isem n useqdac-a d arameɣtu."
-    usernameMissing: "Ilaq ad tesɛuḍ isem n useqdac."
-    usernameExists: "Isem n useqdac-a yella yakan."
-    usernameContainsEmail: "Isem n useqdac ur ilaq ara ad yegber tansa imayl."
-    submitSuccess: "yettwasekles!"
   reallyDeleteProgram: "S tidet tebɣiḍ ad tekkseḍ asenfar-ik"
-  programsOf: "Isenfaren n"
   picture: "Tugna n umaɣnu"
   changePicture: "Beddel tugna"
   goToScratchProfile: "Amaɣnu deg Scratch"
@@ -414,14 +315,8 @@ myprofile:
   securitySettings: "Beddel awal uffir"
   accountSettings: Iɣewwaren n umiḍan
   accountVerification: "Senqed amiḍan"
-  account: "Amiḍan"
-  editProfile: "Ẓreg amaɣnu"
-  edit: "Ẓreg"
   done: Immed
-  checkMail: "Yettwazen yimayl ɣer tansa-ik imayl. Ttxil-k senqed tanaka-ik."
   passwordUpdated: "Awal-ik uffir yettwaleqqem akken iwata."
-  avatar: "Avaṭar"
-  email: "Imayl"
   deleteAccount: "Kkes amiḍan"
   deleteAccountWarning: "Ɣur-k:\nTesnulfaḍ-d %num_projects% n usenfar(en) u ɣur-k %num_followers% n umeḍfar(en). Akk isenfaren-ik ad ttwakksen. Ur tettizmireḍ ara ad teqqneḍ u isenfaren-ik ad ruḥen seg tebdarin akk. Tukksa n umaɣnu-ik ur tettwasefsax ara!\nTetḥeqqeḍ tebɣiḍ ad aɣ-teǧǧeḍ?\n"
   exportData: "Sader isefka-inu"
@@ -429,7 +324,6 @@ myprofile:
   exportDataLoading: "Asader..."
   exportDataError: "Yella wayen ur nteddu ara deg usifeḍ n yisefka-ik. Ttxil-k ɛreḍ ticki."
   exportDataRateLimited: "Tzemreḍ ad tsifḍeḍ isefka-ik yiwet n tikkelt i wass kan. Ttxil-k ɛreḍ azekka."
-  editAccountSettings: "Ẓreg iɣewwaṛen n umiḍan"
   profileChangeSuccess: "Amaɣnu-ik yettwabeddel akken iwata."
   unspecifiedError: "Yella wayen ur nteddu ara deg ubeddel n umaɣnu-ik. Ttxil-k ɛreḍ tikkelt-nniḍen neɣ ini-aɣ-d ma yuɣal-d!"
   verifyAccountText: "Ad ak-d-nazen imayl s useɣwen i usenqed n umiḍan-ik. Ḥrez ad tsiteḍ ɣef useɣwen deg usrag i d-iteddun, tzemreḍ ad tessutreḍ yiwen n yimayl kan i wass."
@@ -486,13 +380,10 @@ termsOfUse:
   bottom2: "Ttxil-k azen yal asumer ɣef tewtilin-a n useqdec ɣer %email-webmaster%."
   version: "Lqem 1.3, 4 Meɣres 2014"
 search:
-  dotdotdot: "Nadi..."
   search: "Nadi isenfaren, iseqdacen d yisudyuten"
   inMediaLib: "Nadi deg temkarḍit n yimidyaten"
   inMediaCategory: "Nadi deg taggayt n yimidyaten"
   results: "Igmaḍ i"
-  resultcount: "Anadi-ik yerra-d %count% n yigmaḍ"
-  fail: "Ttxil-k sekcem ma drus yiwen n wawal n unadi"
   noUsers: "Ulac iseqdacen yettwafen"
   noProjects: "Ulac isenfaren yettwafen"
   noStudios: "Ulac isudyuten yettwafen"
@@ -508,7 +399,6 @@ menu:
   mediaLibrary: "Tamkarḍit n yimidyaten"
   studio: "Isudyuten"
   language: "Tutlayt"
-  languageOptionsNotAvailable: "Ulac iɣewwaṛen n tutlayt."
 login:
   login: "Qqen"
   button:
@@ -520,21 +410,10 @@ login:
     or: "neɣ"
   passOrUser: "Awal-ik uffir neɣ isem-ik n useqdac d arameɣtu."
   accountSuspended: "Amiḍan-ik yettwaḥbes. Ma tɣileḍ d tuccḍa, ttxil-k nermes tallalt."
-  noUsername: "Isem-ik n useqdac neɣ tansa-ik imayl ur yettwaf ara."
-  forgotPass: "Tettuḍ awal uffir neɣ isem n useqdac?"
   recoverPassSend: "Yettwazen yimayl ɣer tansa-ik imayl. Ttxil-k senqed tanaka-ik."
   alreadyReset: "Awal uffir n useqdac-a yettwasuter yakan deg 24 n yisragen ineggura."
-  confirmationSend: "Yettwazen yimayl i usentem n ujerred-ik ɣer tansa-ik imayl. Ttxil-k senqed tanaka-ik u rmed amiḍan-ik."
-  userOrEmail: "Isem n useqdac neɣ imayl"
-  changePass: "Beddel awal uffir"
-  createAccount: "Rnu amiḍan"
-  noAccount: "Ulac ɣur-k amiḍan?"
-  alreadyAccount: "Ɣur-k yakan amiḍan?"
-  or: OR
   username: "Isem n useqdac"
   email: "Imayl"
-  passwordFirst: "Awal uffir"
-  passwordSecond: "Sentem awal uffir"
 register:
   title: "Jerred"
   subText: "Ma tkemmleḍ, ad texleqḍ amiḍan n tmɣiwant Catrobat u tqebleḍ %var1% d %var2%."
@@ -567,14 +446,6 @@ registration:
   consentRevoked:
     title: "Tasiregt n yimawlan tettwakkes"
     message: "Amawal-ik neɣ ameḥraz-ik yekkes tasiregt i umiḍan-ik. Amiḍan-ik ad yesɛu timahilin yettwaḥeddan alamma tettunefk tasiregt tikkelt-nniḍen."
-    newEmailPlaceholder: "Imayl amaynut n umawal"
-    changeButton: "Leqqem u ales tuzna"
-accountRecovery:
-  title: "Tiririt n umiḍan"
-  description: "Ma tecfiḍ ɣef yimayl neɣ isem n useqdac n umiḍan-ik, nezmer ad ak-d-nazen aseɣwen i wennez n wawal-ik uffir."
-  button:
-    cancel: "Sefsex"
-    submit: "Err-d awal uffir"
 resetPassword:
   request:
     title: "Wennez awal-ik uffir"
@@ -587,11 +458,6 @@ resetPassword:
     description: "Ma yella umiḍan yemṣadan d yimayl-ik, ihi yettwazen yimayl ideg yella useɣwen i tzemreḍ ad tesqedceḍ i wennez n wawal-ik uffir. Aseɣwen-a ad yemmet deg %time%."
     descriptionTwo: "Tzemreḍ ad tessutreḍ awennez amaynut n wawal uffir yal %throttleLimit% n yisragen."
     descriptionThree: "Ma ur d-teṭṭifeḍ ara imayl, ttxil-k senqed akaram n uspam neɣ aru imayl i tallalt-nneɣ ɣer %email-webmaster%."
-  email:
-    title: "Hi!"
-    visitLink: "Akken ad twennzeḍ awal-ik uffir, ttxil-k rzu ɣer useɣwen-a"
-    expire: "Aseɣwen-a ad yemmet deg %time%."
-    cheers: "Ar tufat!"
   newemail:
     title: "Wennez awal-ik uffir"
     content: "Tessutreḍ melmi kan awennez n wawal uffir i umiḍan-ik Catrobat. Sit ɣef tqeffalt ddaw-a akken ad tferneḍ awal uffir amaynut. Ma ur tessutreḍ ara aya, tzemreḍ ad tzegleḍ imayl-a war ugur."
@@ -601,74 +467,31 @@ resetPassword:
     title: "Wennez awal-ik uffir"
     button:
       submit: "Wennez awal uffir"
-apk:
-  download: "Sader am usnas"
-  prepare: "Awi-t am usnas"
-  preparing: "Aheyyi n usnas"
-  text: "Akala-a yezmer ad yeṭṭef kra n wakud"
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: "Yella wayen ur nteddu ara. Ttxil-k ɛreḍ tikkelt-nniḍen neɣ ini-aɣ-d ma yuɣal-d!"
-  username:
-    blank: "Isem n useqdac ur ilaq ara ad yili d ilem"
-    invalid: "Isem-ik n useqdac d arameɣtu"
-    exists: "Isem n useqdac-a yella yakan."
-    not_exists: "Isem n useqdac-a ulac-it."
-    not_email: "Isem n useqdac ur ilaq ara ad yili d tansa imayl."
-    size: "Isem n useqdac ilaq ad yesɛu ma drus 3 n yisekkilen u ur ilaq ara ad iɛeddi 180"
-  password:
-    blank: "Awal uffir ulac-it."
-    short: "Awal-ik uffir ilaq ad yesɛu ma drus {{ limit }} n yisekkilen."
-  country:
-    blank: "Tamurt ulac-itt."
-    invalid: "Tamurt d tarameɣtut"
-  email:
-    blank: "Imayl ur ilaq ara ad yili d ilem"
-    invalid: "Imayl-ik yettban-d d arameɣtu"
-    exists: "Tansa imayl-a tella yakan."
-  id:
-    blank: "Asulay n usesteb yeldin ur ilaq ara ad yili d ilem"
-  login: "Awal uffir neɣ isem n useqdac d arameɣtu."
-  post-data: "Isefka POST d irameɣtuyen neɣ ulac-iten!"
-  checksum:
-    missing: "Amsaɣ ur d-yuzin ara fileChecksum! Tesseqdaceḍ lqem aqbur n Pocket Code?"
-    invalid: "checksum d arameɣtu"
   xml:
     invalid: "XML n tengalt d arameɣtu"
     missing: "tuccḍa tarussint: project_xml_not_found!"
   file:
-    unexpected: "yettwaf ufaylu ur nettwaṛǧa ara"
     invalid: "afaylu d arameɣtu"
-  image.missing: "XML n usenfar yebder afaylu ulac-it deg ukaram n usenfar"
-  unknown: "tuccḍa tarussint"
-  token: "Asesteb n yibenk ur yeddi ara: auth-token d arameɣtu!"
-  uploadTokenAuthFailed: "Asesteb n tiddest n usali ur yeddi ara."
-  project:
-    invalid: "Asenfar d arameɣtu."
   languageversion:
     tooold: "Suref-aɣ, asenfar-ik yegber lqem aqbur n tutlayt Catrobat! Tesseqdaceḍ lqem aneggaru n Pocket Code?"
   projectversion:
     tooold: "Suref-aɣ, tesseqdaceḍ lqem aqbur n Pocket Code. Ttxil-k leqqem ɣer lqem aneggaru."
   authentication:
-    title: "Tuqqna ur teddi ara"
     webview: "Yettban-d isem-ik n useqdac neɣ awal-ik uffir mačči d ayen iṣeḥḥan.\nTtxil-k ɛreḍ ad teqqneḍ tikkelt-nniḍen deg usnas.\n"
 success:
   text: "Yedda"
-  registration: "Ajerred yedda akken iwata!"
-  token: ok
-  upload: "Asenfar-ik yuli akken iwata!"
   imgUpload: "Tugna-k tuli akken iwata!"
-  report: "Aneqqis-ik yettwazen akken iwata!"
 time:
   minutes.ago: "{0} < 1 n tesdat aya |{1}1 n tesdat aya |]1,Inf] %count% n tesdatin aya"
   hours.ago: "{1}1 n usrag aya |]1,Inf] %count% n yisragen aya"
   days.ago: "{1}1 n wass aya |]1,Inf] %count% n wussan aya"
   months.ago: "{1}1 n wayyur aya |]1,Inf] %count% n wayyuren aya"
   years.ago: "{1}1 n useggas aya |]1,Inf] ugar n useggas aya"
-failure:
-  upload: "Teḍra-d tuccḍa deg usali n usnas-ik."
 user:
   verification:
     email: "Senqed imayl-ik"
@@ -691,7 +514,6 @@ api:
     passwordInvalidChars: "Awal uffir yegber isekkilen irameɣtuyen"
     usernameContainsEmail: "Isem n useqdac ur ilaq ara ad yegber tansa imayl"
     usernameContainsLink: "Isem n useqdac ur ilaq ara ad yegber aseɣwen"
-    countryCodeInvalid: "Tangalt n tmurt d tarameɣtut"
     pictureInvalid: "Tugna n umaɣnu d tarameɣtut neɣ ur tettwasefrak ara"
     dateOfBirthMissing: "Azemz n tlalit yettwasra"
     dateOfBirthInvalid: "Azemz n tlalit d arameɣtu"
@@ -725,61 +547,11 @@ api:
     nameAlreadyInUse: "Isem yettwaseqdac yakan"
     descriptionMissing: "Aglam ulac-it"
     descriptionEmpty: "Aglam d ilem"
-    descriptionTooShort: "Aglam wezzil aṭas"
     descriptionTooLong: "Aglam ɣezzif aṭas"
     imageFileInvalid: "Afaylu n tugna d arameɣtu"
     imageFileInvalidType: "Anaw n ufaylu n tugna d arameɣtu"
     imageFileTooLarge: "Afaylu n tugna meqqer aṭas"
-#languages and countries
-language:
-  arabic: "Taɛrabt"
-  bulgarian: "Tabulgarit"
-  catalan: "Takaṭalant"
-  chinese_simplified_han: "Tacinwat (Han yettwafessren)"
-  chinese_traditional_han: "Tacinwat (Han tansayt)"
-  croatian: "Takrwatit"
-  czech: "Tačikit"
-  danish: "Tadanit"
-  dutch: "Tahulandit"
-  english_united_kingdom: "Taglizit (Tagelda Yedduklen)"
-  english_united_states: "Taglizit (Iwunak Yedduklen)"
-  estonian: "Tastunit"
-  filipino: "Tafilipinit"
-  finnish: "Tafinit"
-  french: "Tafransist"
-  german: "Talmanit"
-  greek: "Tagrigit"
-  hebrew: "Taɛebrit"
-  hindi: "Tahendit"
-  hungarian: "Tahungarit"
-  indonesian: "Tandunisit"
-  italian: "Taṭelyanit"
-  japanese: "Tajapunit"
-  korean: "Takurit"
-  latvian: "Talitunit"
-  lithuanian: "Taliṭwanit"
-  malay: "Tamalawit"
-  norwegian: "Tanurvijit"
-  persian: "Tafarisit"
-  polish: "Tapulunit"
-  portuguese_brazil: "Tapurtugit (Brazil)"
-  portuguese_portugal: "Tapurtugit (Purtugal)"
-  romanian: "Tarumanit"
-  russian: "Tarusit"
-  serbian: "Taserbit"
-  slovak: "Tasluvakit"
-  slovenian: "Tasluvinit"
-  spanish_latin_america: "Taspenyulit (Temrikt Talatinit)"
-  spanish_spain: "Taspenyulit (Spanya)"
-  swedish: "Taswidit"
-  thai: "Taṭayit"
-  turkish: "Taṭurkit"
-  ukrainian: "Tukranit"
-  vietnamese: "Tabyiṭnamit"
-ci:
-  generate: "Sirew apk"
-  pending: "Asirew n apk"
-  download: "Sader apk"
+
 admin:
   maintain:
     diskMaintenance: "Aseggem n uḍebsi"
@@ -787,46 +559,9 @@ admin:
     noRemovableObjects: "Ulac tiɣawsiwin ara yettwakksen."
     removableObjects: "Tiɣawsiwin ara yettwakksen"
 recommender:
-  similarPrograms: "Isenfaren yemcabin"
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: "Iseqdacen i d-yessadren asenfar-a ssadren-d daɣen"
   moreFromThisUser: "Ugar sɣur %username%"
-pmd:
-  submitBtn: "Azen asenfar-ik"
-  submitBox:
-    header: "Tuzna"
-    text: "Ad tazneḍ asenfar-ik. Ttxil-k sekcem tangalt n usenfar u sit ɣef azen."
-    btnText: "Azen"
-  successful:
-    text: "Asali n usenfar-ik yedda akken iwata."
-  failed:
-    text: "Asali n usenfar ur yeddi ara."
 codeview:
   title: "Timeẓriwt n tengalt"
-  showCode: "Sken tangalt"
-  hideCode: "Ffer tangalt"
-  showStatistics: "Sken tidaddanin n tengalt"
-  hideStatistics: "Ffer tidaddanin n tengalt"
-  cantDisplayCode: "Tangalt ur tezmir ara ad d-tettwaskan"
-  cantDisplayStatistics: "Tidaddanin ur zmirent ara ad d-ttwaskanent"
-  totalNumberOf: "Amḍan asemday n"
-  scenes: "Isayes"
-  scripts: "Iskripten"
-  bricks: "Iḥedren"
-  objects: "Imeskanen d tɣawsiwin"
-  looks: "Udmawen"
-  sounds: "Imeslan"
-  globals: "Imatuten"
-  locals: "Idiganen"
-  globalVariables: "Imuttiyen imatuten"
-  localVariables: "Imuttiyen idiganen"
-  eventBricks: "Iḥedren n tedyant"
-  controlBricks: "Iḥedren n usenqed"
-  motionBricks: "Iḥedren n umussu"
-  soundBricks: "Iḥedren n imesli"
-  looksBricks: "Iḥedren n udem"
-  penBricks: "Iḥedren n ukeryun"
-  dataBricks: "Iḥedren n yisefka"
-  specialBricks: "Iḥedren uzzigen"
 codeView:
   title: "Timeẓriwt n tengalt"
   loading: "Asali n tmeẓriwt n tengalt..."
@@ -839,19 +574,7 @@ codeView:
 codeStatistics:
   title: "Tidaddanin n tengalt"
   error: "Tidaddanin n tengalt ur zmirent ara ad d-ttwaskanent."
-  general: "Amatu"
-  bricks: "Iḥedren"
-  eventBricks: "Tadyant"
-  controlBricks: "Asenqed"
-  motionBricks: "Amussu"
-  soundBricks: "Imesli"
-  looksBricks: "Udem"
-  penBricks: 'Pen'
-  dataBricks: "Isefka"
-  deviceBricks: "Ibenk"
-  specialBricks: "Uzzig"
   yourScore: "Agmuḍ-ik:"
-  points: "tinqiḍin"
   abstraction: "Tamuɣli tamatut d beṭṭu n wugur"
   parallelism: "Amsada"
   logicalThinking: "Axemmem amegzu"
@@ -867,20 +590,7 @@ footer:
   text: "S %project_count% n yisenfaren yessewhamen yettwabḍan yakan, win d-iteddun yezmer ad yili d ayla-k. Sader asnas-nneɣ u bdu asnulfu ass-a"
 privacy-policy:
   header: "Tasertit n tbaḍnit"
-  version: "Lqem 2.2, 17 Tubeṛ 2019"
-  text1: "Akken ad ak-d-nefk akk tifadiwin n tenfa-nneɣ d umiḍan yeqqnen ɣur-sent, ilaq ad nleqqeḍ kra n yisefka fell-ak."
-  text2: "Akken ad nḥerrez u ad nesnerni tanfa-nneɣ (isnasen d yismal) u ad nexdem anadi ussnan ɣef uselmed ICT d STEM/STEAM, nesseqdac Google Analytics, Crashlytics, d Firebase, akk sɣur Google LLC (USA), akked Dynatrace sɣur Dynatrace LLC (USA) akken ad d-naf isefka n tallit ɣef useqdec n tenfa-nneɣ, am talɣut n uɣelluy, tizmilin n wakud, isebtar/igdilen yettwarzan, aseqdec n yisnasen d tenfa-nneɣ, anagraw n wammud yettwasqedcen, d talɣut ɣef usaǧǧaw n uẓeṭṭa. Tasleḍt-a d yisefka yettwalqeḍen ur qqinen ara ɣer umaɣnu-ik u ur gbiren ara talɣut tudmawant (ibitten ineggura n tansa IP ttwarran d irussinen). Maca, isefka yettwalqeḍen ad ttwaznen ɣer yisaǧǧawen n tenfa (Google LLC, USA d Dynatrace LLC, USA). Asesfer n yisefka yebna ɣef yimtawan d Google LLC d Dynatrace LLC. Assaɣ-a d yisaǧǧawen n tenfa yemṣada d Ulugen Amatu n Tḥuḍa n Yisefka n Tdukli Tawrupit (EU GDPR) d umtawa EU-USA \"Privacy Shield\"."
-  text3: "Akken ad texleqḍ u ad tesqedceḍ amiḍan deg yinagrawen-nneɣ, u akken ad k-nessefhem ɣef yisnifal ilaqen n umiḍan-ik s imayl, am ileqman neɣ tikerḍiwin n tewtilin-nneɣ n useqdec d tenfa, ilugan n tmɣiwant, neɣ tisertiyin-nneɣ, ad nkels isem-ik n useqdac, u ma tefkiḍ-tt-id, tansa-ik imayl. Ma tqqneḍ amiḍan-ik s Google Plus neɣ Facebook, nkeles daɣen tasarut n usulay yeqqnen ɣer umiḍan-ik deg tenfiwin-a. Ur nseqdac ara isefka-a i yiswi-nniḍen (am usnezzi), ala ma tsirgeḍ-aɣ s tbanin."
-  text4: "S lebɣi-ik, tzemreḍ ad aɣ-d-tefkeḍ tamurt n wanda tzedɣeḍ s usebter n umiḍan-ik deg usmel n beṭṭu. Ad d-tettwaskan deg umaɣnu-ik azayez u ad tettwaseqdac kan i yiswi n tidaddanin d unadi sɣur-neɣ. Tezmer ad tettwakkes melmi i tebɣiḍ deg yiɣewwaṛen n umaɣnu-ik."
-  text5: "Tzemreḍ ad tḥebseḍ aseqdec n yisefka udmawanen n umiḍan-ik melmi i tebɣiḍ s tukksa n umiḍan-ik seg usebter n umaɣnu-ik deg https://share.catrobat.org/. Deffir tukksa n umiḍan-ik, ad tizmireḍ kan ad tesqedceḍ tanfiwin, maca mačči ad tekkiḍ, am usali n yisenfaren, iwenniten neɣ tisedmirin. Daɣen, akk agbur yeqqnen ɣer umiḍan-ik, am yisenfaren yulin, iwenniten, atg., ad yettwakkes."
-  text6: "Akken ad nesḥebs aseqdec n diri n tenfa-nneɣ, am yisaliyen neɣ iwenniten n yiseqdacen i yiswi ur nelli ara d isaridanen, akk isefka izayzen i d-snulfan yiseqdacen (isaliyen, iwenniten) ad ttwakelsen deg daxel deg taffa n yisefka, akked tezmilt n wakud d tansa n Internet yettwasqedcen. Isefka-a ur ttwaseqdacen ara, ur ttwaznen ara ɣer tkebbaniyin, ala ma yella ccekk iwulmen ɣef tigawin ur nelli ara d isaridanen u tisuddas tusḍifin yettwasirgen ssutrent-ten s usaḍuf n uzref. Yal tadyant ad tettwasenqed s telqay sɣur-neɣ send."
-  text7: "Tzemreḍ s lebɣi-ik ad tjerdeḍ deg tebrat n yisallen n Catrobat, deg https://catrobat.org/newsletter i d-nettak s tenfa MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Ad d-teṭṭfeḍ ileqman ɣef usenfar Catrobat d tenfiwin-is ɣer tansa imayl i d-tefkiḍ. Tzemreḍ ad tḥebseḍ tabrat n yisallen melmi i tebɣiḍ s useqdec n useɣwen \"unsubscribe\" deg uḍar n yal tabrat. Tabrat-a n yisallen tettunefk sɣur MailChimp, i yesɛan yid-neɣ amtawa n usesfer n yisefka u yeqbel Ulugen Amatu n Tḥuḍa n Yisefka n UE d \"Privacy Shield\" EU-USA. I ugar n telqayt ɣef MailChimp, ttxil-k wali daɣen Tasertit n tbaḍnit d Tiwtilin n useqdec n MailChimp."
-  text8: "Akk tanfiwin ttunefkent sɣur asenfar ilelli n uɣbalu yeldin Catrobat ddaw tsiwant n International Catrobat Association – Verein zur Förderung freier Software, d tamesbanit war tanfa i yettwaxedmen deg Graz, Ustriya (Tadukli Tawrupit). Tisertiyin-nneɣ qadrent azref n tḥuḍa n yisefka n UE d Ustriya (GDPR). Akken ad aɣ-tnermseḍ, ttxil-k azen imayl ɣer contact@catrobat.org neɣ azen-aɣ-d tabrat ɣer Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Ustriya (Tadukli Tawrupit)."
-  text9: "Ma yella ddaw 14 n yiseggasen, tasertit-a ilaq ad tettwaqbel sɣur ameḥraz usḍif (s umata amawal)."
-  text10: "Tasertit tunṣibt n tbaḍnit n Catrobat s tutlayt taglizit tella deg web ddaw %privacy_policy%."
-  disagree-text: "War tamtawit, ur nezmir ara ad nexleq amiḍan maca timahilin tigejdanin mazal-itent."
 catro-notifications:
-  markAsRead: "Creḍ yettwaɣra"
   noFollowers: "Yettban-d ulac ɣur-k ilɣa n yimeḍfaren."
   noComments: "Yettban-d ulac ɣur-k ilɣa n yiwenniten."
   noReactions: "Yettban-d ulac ɣur-k ilɣa n tsedmirin."
@@ -914,29 +624,16 @@ catro-notifications:
 clipboard:
   success: "Aseɣwen yettwanɣel ɣer tecfawit!"
   success_project: "Aseɣwen n usenfar yettwanɣel ɣer tecfawit!"
-  success_user: "Aseɣwen n useqdac yettwanɣel ɣer tecfawit!"
   fail: "Anɣal n useɣwen ɣer tecfawit ur yeddi ara! :("
 next: Uḍfiṛ
 previous: "Uzwir"
 media-packages:
   title: "Tamkarḍit n yimidyaten"
   description: "Deg taggayin-a tzemreḍ ad d-tafeḍ imeskanen d tɣawsiwin ara ternuḍ ɣer yisenfaren-ik."
-  thumb-size:
-    description: "Teɣzi n teskant"
-    sm: "meẓẓiyen"
-    md: "alemmas"
-    lg: "imeqqranen"
   theme-special: "Asentel uzzig %flavor%"
   search-results: "Igmaḍ n unadi deg temkarḍit n yimidyaten"
-  no-results: "Anadi-ik yerra-d 0 n yigmaḍ. Ttxil-k seqdec kan awalen n unadi s teglizit."
-  download_these_files: "sekles"
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: "Copyright &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. Akk izerfan ttwaḥerzen."
 noscript:
   warning: "Asmel-a web yesra JavaScript akken ad iteddu. Ttxil-k rmed JavaScript deg yiminig-ik neɣ ssuter tallalt seg umeqqran."
@@ -946,10 +643,6 @@ cookie-consent:
   decline: "Agwi"
   privacy-link: "Tasertit n tbaḍnit"
   settings-link: "Iɣewwaṛen n yinagan n tuqqna"
-agree: "Qebleɣ"
-disagree: "Ugiɣ"
-profileLoader:
-  noProfiles: "Ulac imuɣna akka tura."
 element: "Aferdis"
 elements: "Iferdisen"
 share:
@@ -958,7 +651,6 @@ share:
   success: "Beṭṭu yedda akken iwata"
 copy: "Nɣel aseɣwen"
 checkOutProject: "Wali asenfar-a:"
-checkOutUser: "Wali aseqdac-a:"
 community: "Tamɣiwant n Catrobat"
 back_to_app: "Ffeɣ seg tmɣiwant"
 category:
@@ -974,7 +666,6 @@ category:
 achievements:
   sidebar:
     title: "Tirbaḥin"
-    badge: 'new'
   overview:
     header: "Tirbaḥin"
     most_recent_achievement:
@@ -1066,10 +757,7 @@ extensions:
       title: "Aṭas n yimyuraren"
 studio:
   title: "Isudyuten"
-  singular: "Asudyu"
   create_studio: "Rnu asudyu"
-  delete_studio: "Kkes asudyu"
-  cancel_studio: "Sefsex"
   studio_name: "Isem n usudyu"
   studio_description: "Aglam n usudyu"
   is_public: "Ad t-terreḍ d azayez?"
@@ -1086,8 +774,6 @@ studio:
   cover_image_remove: "Kkes tugna"
   popular: "Isudyuten yettwassnen"
   join: "Rnu"
-  leave: "Ffeɣ"
-  report: 'Cetki'
   public: "azayez"
   private: "S tinubga kan"
   overview:
@@ -1110,16 +796,12 @@ studio:
     admin: "Anedbal"
     member: "Aɛeggal"
   details:
-    add_project: "sit akken ad ternuḍ asenfar"
     add: 'Add'
     showMore: "sken ugar"
-    showLess: "sken drus"
     are_you_sure: 'Tetḥeqqeḍ ?'
     no_way_of_return: "Aya ur yettwasefsax ara."
     delete_it: "Kkes"
-    remove_project: "Kkes seg usudyu"
     remove_project_error: "Tukksa n usenfar seg usudyu ur teddi ara."
-    remove_project_success: "Asenfar yettwakkes seg usudyu akken iwata."
     no_projects: "Asudyu mazal ulac deg-s isenfaren."
     projects:
       title: "Isenfaren"
@@ -1135,10 +817,8 @@ studio:
       no_projects_empty_state: "Mazal ulac ɣur-k isenfaren ara ternuḍ. Snulfu-d yiwen deg Pocket Code qbel!"
       add_selected: "Rnu wid yettwafernen"
     no_available_projects: "Ulac isenfaren ara yettwarnun."
-    updateCoverError: "Yella wayen ur nteddu ara deg uleqqem n tugna n tduli n usudyu."
     join: "Rnu"
     leave: "Ffeɣ"
-    report: 'Cetki'
     pending: "Deg uṛaǧu"
     decline: "Yettwagi"
     comments:
@@ -1158,7 +838,6 @@ studio:
       add_comment: "%user% yeǧǧa awennit."
     members_list:
       title: "Iɛeggalen n usudyu"
-      project_count: "{0} Ulac isenfaren n usudyu |{1} 1 n usenfar n usudyu |]1,Inf] %count% n yisenfaren n usudyu"
       no_studio_projects: "Ulac isenfaren n usudyu"
       one_studio_project: "1 n usenfar n usudyu"
       n_studio_projects: "%count% n yisenfaren n usudyu"
@@ -1168,7 +847,6 @@ studio:
       ban_failed: "Yella wayen ur nteddu ara deg ugdal n uɛeggal-a. Ɛreḍ ticki."
       demote_member: "Ṣubb anedbal ɣer uɛeggal"
       demotion_failed: "Yella wayen ur nteddu ara deg usubbu n unedbal-a. Ɛreḍ ticki."
-      last_admin: "Ur yezmir ara ad yettwaṣubb unedbal aneggaru n usudyu-a."
     join_requests:
       title: "Isuturen n tmerna"
       accept: 'Qbel'
@@ -1198,7 +876,6 @@ media_library:
   no_results: "Ulac igmaḍ yettwafen."
   assets_count: "iɣbula"
   view_all: "Wali akk"
-  view_all_category: "Wali akk %category%"
   back_to_app: "Uɣal ɣer usnas"
 snackbar:
   project_not_found: "Asenfar i d-yettwasutren ulac-it"
@@ -1252,14 +929,6 @@ moderation:
     rate_limited: "Tettxedmeḍ tigawin n usudyu s tazzla aṭas. Ttxil-k rǧu cwiṭ."
   hidden_notice:
     project: "Asenfar-a yettwaffer ɣef ssebba n yineqqisen n tmɣiwant."
-    comment: "Awennit-a yettwaffer ɣef ssebba n yineqqisen n tmɣiwant."
-    user: "Amaɣnu-a yettwaffer ɣef ssebba n yineqqisen n tmɣiwant."
     user_own: "Amiḍan-ik yettwaḥbes ɣef ssebba n yineqqisen n tmɣiwant. Tzemreḍ ad tessutreḍ aɛiwed n tegzemt-a."
-    studio: "Asudyu-a yettwaffer ɣef ssebba n yineqqisen n tmɣiwant."
-  notification:
-    content_hidden: "%content_type%-ik yettwaffer ɣef ssebba n yineqqisen n tmɣiwant. Tzemreḍ ad tessutreḍ aɛiwed n tegzemt-a."
-    appeal_approved: "Asuter-ik n uɛiwed yettwaqbel. Agbur-ik yettban-d tura tikkelt-nniḍen."
-    appeal_rejected: "Asuter-ik n uɛiwed yettwasenqed u tagzemt n tuffra n ugbur-ik teqqim."
-    admin_review_needed: "Agbur yettwaffer s wudem awurman u yesra asenqed."
 Reports: "Ineqqisen"
 members: "iɛeggalen"

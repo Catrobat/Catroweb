@@ -8,19 +8,12 @@ meta.og.description.login: 'Logga in för att dela dina Catrobat-projekt med com
 meta.og.title.register: 'Skapa ett Catrobat-konto'
 meta.og.description.register: 'Gå med i Catrobat-communityn och börja dela dina kreativa projekt redan idag.'
 meta.og.description.profile: '%username% på Catrobat – bläddra bland deras projekt och prestationer.'
-localLanguage: Engelska
 username: Användarnamn
 password: Lösenord
-createNewPassword: Skapa nytt lösenord
-accountSettings: Kontoinställningar
 email: E-post
-aboutPocketCode: Om Pocket Code
 about: Om Catrobat
-education: Utbildning
 chat: Chatt och forum
-privacyGuide: 'Guide om integritetsmedvetenhet'
 others: Övriga
-tutorials: Hjälp
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: 'Hur skapade du det här projektet? Använde du idé
 projectImportedFromScratch: 'Det här projektet importerades från MIT Scratch. Du kan kolla in originalprojektet'
 scratchImportedProjectLinkHere: 'här.'
 country: Land
-loginText: Logga in
 privacyPolicy: Sekretesspolicy
-imprint: Avtryck
 projectDetails: Detaljer
 somethingWentWrong: 'Hoppsan! Något gick fel.'
 accountNotVerified: 'Se till att du är inloggad och att ditt kontos e-postadress är verifierad.'
@@ -55,36 +46,28 @@ accountSuspended: 'Ditt konto har stängts av på grund av rapporter från commu
 doesNotExist: 'Den begärda resursen finns inte.'
 pleaseTryAgain: 'Försök igen!'
 tryAgainButton: 'Försök igen'
-oldVersionError: 'Uppdatera till den senaste versionen av Pocket Code!'
 more: 'mer'
 less: 'mindre'
 show-more: 'More information'
-show-less: 'Less information'
 more-information: 'Mer information'
 less-information: 'Mindre information'
 ok: Ok
-clickToDownloadProgram: 'Klicka %link_start% här %link_end% för att ladda ner exempelprojektet.'
-registrationError: 'Användarnamnet eller e-postadressen används redan.'
 notifications: 'Aviseringar'
 allNotifications: 'Alla'
 FollowersNotifications: 'Följare'
 LikeNotifications: 'Reaktioner'
 CommentNotifications: 'Kommentarer'
 RemixNotifications: 'Remixar'
-wellDone: "Bra gjort!"
 done: "Klar!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Ja, ta bort det!"
 cancelMessage: "Avbryt"
 notificationsUnauthorizedError: 'Det gick inte att auktorisera användaren'
 notificationsClearError: 'Det gick inte att markera aviseringarna som lästa!'
-pleaseWait: "Vänligen vänta..."
 projects: "Program"
 users: "Användare"
 studios: 'Studior'
 oauthPopUpTitle: 'Information om inloggning med externt konto'
 oauthInfo: 'Du har precis loggat in med ett externt konto. Vi har skapat ett slumpmässigt användarnamn åt dig. Om du vill ändra ditt användarnamn eller skapa ett nytt lösenord för ditt konto, gå till din profilsida.'
-oauthHere: "här"
 statistics: "Statistik "
 languageSelection: 'Språkval'
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Mörkt'
   dark_description: 'Mörkt utseende'
   apply: 'Använd'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Vilka projekt rekommenderas här?'
-      description: 'Ju fler reaktioner (tummen upp, leende ...) ditt projekt får, desto högre upp hamnar det i listan.'
 follower:
   follows: Följer
   followers: Följare
   follow: Följ
-  username: Användare
   followsMe: Följer mig
   noFollowing: Du följer inte någon för närvarande.
   noFollowers: Du har inga följare för närvarande.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Är du säker på att du vill sluta följa den här användaren?"
   unfollowButton: "Sluta följa %username%"
 project:
-  welcome:
-    title: 'Välkommen till Catrobats %theme%'
-    title_mindstorms: 'Välkommen till Catrobats sida för Mindstorms EV3 och NXT'
-    subtitle: 'Skapa berättelser, spel och mycket mer...'
-    subtitle_embroidery: 'Sy dina egna mönster på t-shirts, väskor, byxor eller mobilskal!'
-    subtitle_mindstorms: 'Skapa egna projekt med dina Lego Mindstorms EV3- och NXT-robotar'
-    download: 'Ladda ner appen'
-    statistics: 'Mer statistik'
   featured: 'Utvalda'
   open: Öppen 
   download: Ladda ner
@@ -148,9 +117,6 @@ project:
       retention: 'Uppladdade projekt tas automatiskt bort efter en period av inaktivitet. Logga in regelbundet eller få nedladdningar av ditt projekt för att förlänga hur länge det sparas.'
       protection: 'Särskilt bra eller populära projekt kan skyddas mot automatisk borttagning av moderatorer.'
   example: 'Exempel'
-  newest: 'Nyaste projekten'
-  recommended: 'Rekommenderade projekt'
-  scratchremixes: 'Scratch-remixer'
   noProjects: 'Det finns inga projekt just nu.'
   shareAction: Dela
   deleteAction: Ta bort projekt
@@ -190,17 +156,10 @@ project:
     Det går inte att ångra!
     Ja, ta bort det!
     Avbryt
-  tooLongName: 'Projektnamnet är för långt!'
-  tooLongDescription: 'Projektbeskrivningen är för lång!'
-  tooLongCredits: 'Projektets anteckningar och tack är för långa!'
   my_projects: Mina projekt
   trending: 'Trendande projekt'
   popular: 'Populära projekt'
-  most:
-    viewed: Mest visade
-    downloaded: Mest nedladdningar
   random: 'Slumpade projekt'
-  related: 'Relaterade projekt'
   browse:
     explore: 'Utforska projekt'
     no_projects: 'Du har inte skapat några projekt än'
@@ -214,36 +173,14 @@ project:
     tooltip: 'Projekt tas automatiskt bort efter en period av inaktivitet. Få fler nedladdningar eller logga in regelbundet för att förlänga hur länge de sparas.'
     tooltip_protected: 'Det här projektet är skyddat och tas inte bort automatiskt.'
   downloads: '%downloads% nedladdningar'
-  sample: 'Exempelprojekt'
   views: '%views% visningar'
   likes:
     likersTitle: 'Personer som reagerade på projektet'
     all: "Alla"
-  remixes: '{0}0 remixer |{1}1 remix |]1,Inf]%remixes% remixer'
-  newRemixesNotificationTitle: '|{1}"%programName%" har 1 ny remix: |]1,Inf] "%programName%" har %remixes% nya remixer:'
-  submitted: 'Inskickade projekt'
-  uploaded: 'Uppladdade projekt'
-  reportAsInappropriate: 'Rapportera som olämpligt'
-  reportProgram: 'Rapportera projekt'
   languageVersion: 'Catrobat-språkversion: %languageVersion%'
-  reportLoginText: '%login% för att rapportera det här projektet.'
-  reportDialogHeader: 'Varför vill du rapportera det här projektet?'
-  reportDialogReason: 'Ange en anledning'
-  reportRadioButtonInappropriate: 'Det är olämpligt'
-  reportRadioButtonCopyright: 'Upphovsrättsintrång'
-  reportRadioButtonSpam: 'Det är spam'
-  reportRadioButtonDislike: 'Jag gillar det inte'
-  reportOwnProgram: 'Du kan inte flagga ditt eget projekt.'
-  reportAlready: 'Du har redan flaggat det här projektet.'
-  reportDone: 'Du har rapporterat det här projektet!'
   updateAppHeaderDownload: 'Nedladdning inte möjlig'
   updateAppTextDownload: 'Uppdatera din app till den senaste versionen. Observera att inte alla Android-funktioner finns tillgängliga på iOS än.'
-  updateAppTextDownloadApk: 'APK-nedladdningen finns just nu bara på Android och inte på iOS.'
-  updateAppHeader: 'Uppdatera appen'
-  updateAppText: 'Uppdatera din app till den senaste versionen.'
-  btnClosePopup: Ok
   checkout_this_project: 'Kolla in det här Catrobat-projektet'
-  show_more: 'Visa mer'
   comments: Kommentarer
   send: 'Skicka'
   delete: Radera
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: 'Borttagen'
   noAdminRights: 'Du har inte administratörsbehörighet. Logga in som administratör.'
   editProject: 'Redigera projektet'
-  closeProjectEditor: 'Stäng projektredigeraren'
   closeEditorPrompt: Vill du spara ändringarna?
   btnDiscard: Kasta
   addComment: 'Skriv en kommentar'
@@ -263,8 +199,6 @@ project:
   smile: 'Le!'
   love: 'Kärlek!'
   wow: 'Wooow!'
-  linkTitle: 'Länk'
-  link: 'Kopiera projektlänken till urklipp'
   reactionsText: Reaktioner
   downloadErrorText: 'Ett fel uppstod när projektet laddades ner. Försök igen senare.'
   downloadStartText: 'Nedladdningen har startat...'
@@ -284,11 +218,8 @@ project:
   translations: 'Översättningar'
   createTranslation: 'Skapa översättning'
   deletedComment: '**Borttagen**'
-  replyLabel: 'svar'
-  repliesLabel: svar
   notForKids: 'Olämpligt för barn'
 remixGraph:
-  title: Remixar
   showRemixGraph: 'Remixgraf'
   by: 'med'
   open: 'Öppen '
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Inte tillgängligt'
   projectUnknownUser: 'Okänd användare'
 noReply: 'Det här är ett automatiskt meddelande – svara inte direkt på det här mejlet.'
-accountConfirmation:
-  subject: 'Bekräftelse av ditt Catrobat-konto'
-  message: |
-    Hej %username%!
-    För att slutföra aktiveringen av ditt konto, besök %confirmationUrl%
-    Länken kan bara användas en gång för att verifiera ditt konto.
-    Vänliga hälsningar,
-    Catrobat-teamet.
-  messageHtml: |
-    <p>
-    Hej %username%!<br>
-    <br>
-    För att slutföra aktiveringen av ditt konto, klicka <a href="%confirmationUrl%">här.</a><br>
-    Länken kan bara användas en gång för att verifiera ditt konto.<br>
-    <br>
-    Vänliga hälsningar,<br>
-    Catrobat-teamet.
-    </p>
 newAccountConfirmation:
   subject: 'Verifiera din e-postadress'
   welcome: 'Välkommen till Catrobat!'
@@ -403,63 +316,13 @@ parent:
       ignore: 'Om du inte har begärt detta kan du lugnt ignorera det här mejlet.'
 passwordRecovery:
   subject: 'Återställning av ditt Catrobat-lösenord'
-  message: |
-    Hej %username%!
-    Du har begärt att återställa ditt lösenord på %appplication_url% eftersom du har glömt det.
-    Om du inte har begärt detta kan du ignorera det. Begäran upphör att gälla efter 24 timmar.
-    För att återställa ditt lösenord och skapa ett nytt, besök följande sida: %confirmationUrl%
-    Du kan när som helst använda ditt användarnamn och lösenord för att komma åt %appplication_url%-communityn.
-    Besök i så fall följande sida: %loginPage%
-    För att redigera dina profiluppgifter, gå till den här sidan: %profilePage%
-    Vänliga hälsningar,
-    Catrobat-teamet.
-  messageHtml: |
-    <p>
-    Hej %username%!<br>
-    <br>
-    Du har begärt att återställa ditt lösenord på <a href="%appplication_url%">Pocket Code</a> eftersom du har glömt det.
-    Om du inte har begärt detta kan du ignorera det. Begäran upphör att gälla efter 24 timmar.<br>
-    <br>
-    För att återställa ditt lösenord och skapa ett nytt, klicka <a href="%confirmationUrl%">här.</a><br>
-    <br>
-    Du kan när som helst använda ditt användarnamn och lösenord för att komma åt <a href="%appplication_url%">Pocket Code</a>-communityn.<br>
-    Besök i så fall följande sida: <a href="%loginPage%">Inloggningssida</a><br>
-    För att redigera dina profiluppgifter, gå till den här <a href="%profilePage%">sidan</a>.<br>
-    <br>
-    Vänliga hälsningar,<br>
-    Catrobat-teamet.
-    </p>
 profile:
   aboutMe: 'Om mig'
   currentlyWorkingOn: 'Jobbar just nu med'
-  edit: Redigera din profil
-  saveChanges: Spara ändringar
   newPass: nytt lösenord
   repeatPass: upprepa lösenord
   oldPass: Gammalt lösenord
-  firstEmail: Min första e-post
-  secondEmail: Min andra e-post
-  myPrograms: Mina projekt
-  follows: Följer
-  follower: Följare
-  unfollowUser: 'Sluta följa den här användaren!'
-  followUser: Följ denna användare!
-  amountOfPrograms: Mängden projekt
-  form:
-    passwordTooShort: 'Det nya lösenordet måste ha minst %length% tecken.'
-    passwordTooLong: 'Det nya lösenordet får ha högst %length% tecken.'
-    passwordIsUsername: Lösenordet måste skilja sig från användarnamnet.
-    passwordWrong: Fel lösenord
-    emailNotValid: Denna e-postadress är inte giltig.
-    emailMissing: Fel vid uppdatering av denna e-postadress. Du måste ha minst en verifierad e-postadress.
-    emailExists: Denna e-postadress finns redan.
-    usernameNotValid: Detta användarnamn är inte giltigt.
-    usernameMissing: Du måste ha ett användarnamn.
-    usernameExists: Detta användarnamn finns redan.
-    usernameContainsEmail: Användarnamnet bör inte innehålla någon e-postadress.
-    submitSuccess: sparat!
   reallyDeleteProgram: Vill du verkligen ta bort ditt projekt
-  programsOf: Projekt av
   picture: 'Profilbild'
   changePicture: Ändra bild
   goToScratchProfile: Profil på Scratch
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: Ändra lösenord
   accountSettings: Kontoinställningar
   accountVerification: 'Verifiera konto'
-  account: 'Konto'
-  editProfile: Redigera profil
-  edit: Redigera
   done: Färdigt
-  checkMail: Ett e-postmeddelande skickades till din e-postadress. Vänligen kontrollera din inkorg.
   passwordUpdated: Ditt lösenord har uppdaterats.
-  avatar: 'Avatar'
-  email: E-post
   deleteAccount: Ta bort konto
   deleteAccountWarning: |
     Observera:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: 'Laddar ner...'
   exportDataError: 'Något gick fel när dina data skulle exporteras. Försök igen senare.'
   exportDataRateLimited: 'Du kan bara exportera dina data en gång per dag. Försök igen i morgon.'
-  editAccountSettings: Redigera kontoinställningar
   profileChangeSuccess: 'Din profil har ändrats.'
   unspecifiedError: 'Något fungerade inte när din profil skulle ändras. Försök igen eller hör av dig till oss om det fortsätter att hända!'
   verifyAccountText: 'Vi skickar ett mejl till dig med en länk för att verifiera ditt konto. Se till att klicka på länken inom en timme. Du kan bara begära ett mejl per dag.'
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'Maila några förslag angående dessa användarvillkor till %email-webmaster%.'
   version: Version 1.3, 4 mars 2014
 search:
-  dotdotdot: Sök...
   search: 'Sök projekt, användare och studior'
   inMediaLib: Sök i mediabibliotek
   inMediaCategory: 'Sök i mediekategori'
   results: Sökresultat
-  resultcount: Din sökning gav %count% resultat
-  fail: Ange minst ett sökord
   noUsers: 'Inga användare hittades'
   noProjects: 'Inga projekt hittades'
   noStudios: 'Inga studior hittades'
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: Mediabibliotek
   studio: 'Studior'
   language: Språk
-  languageOptionsNotAvailable: 'Inga språkalternativ tillgängliga.'
 login:
   login: Logga in
   button:
@@ -578,21 +430,10 @@ login:
     or: "eller"
   passOrUser: Ditt lösenord eller användarnamn var felaktigt.
   accountSuspended: 'Ditt konto har stängts av. Om du tror att det är ett misstag, kontakta supporten.'
-  noUsername: Ditt användarnamn eller e-post adress hittades inte.
-  forgotPass: Glömt lösenord eller användarnamn?
   recoverPassSend: Ett e-postmeddelande skickades till din e-postadress. Vänligen kontrollera din inkorg.
   alreadyReset: 'Lösenordet för den här användaren har redan begärts under de senaste 24 timmarna.'
-  confirmationSend: 'Ett mejl för att bekräfta din registrering har skickats till din e-postadress. Kolla din inkorg och aktivera ditt konto.'
-  userOrEmail: Användarnamn eller email
-  changePass: Ändra lösenord
-  createAccount: Skapa ett konto
-  noAccount: 'Har du inget konto?'
-  alreadyAccount: Har du redan ett konto?
-  or: ELLER
   username: Användarnamn
   email: E-post
-  passwordFirst: Lösenord
-  passwordSecond: 'Bekräfta lösenord'
 register:
   title: 'Registrera dig'
   subText: 'Genom att fortsätta skapar du ett konto i Catrobat-communityn och godkänner våra %var1% och vår %var2%.'
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: 'Föräldrasamtycket har återkallats'
     message: 'Din förälder eller vårdnadshavare har återkallat samtycket för ditt konto. Ditt konto har begränsade funktioner tills samtycke ges igen.'
-    newEmailPlaceholder: 'Ny e-postadress till förälder'
-    changeButton: 'Uppdatera och skicka igen'
-accountRecovery:
-  title: 'Återställ konto'
-  description: 'Om du kommer ihåg e-postadressen eller användarnamnet för ditt konto kan vi skicka en länk till dig för att återställa ditt lösenord.'
-  button:
-    cancel: Avbryt
-    submit: 'Återställ lösenord'
 resetPassword:
   request:
     title: 'Återställ ditt lösenord'
@@ -645,11 +478,6 @@ resetPassword:
     description: 'Om det finns ett konto med din e-postadress har vi just skickat ett mejl med en länk som du kan använda för att återställa ditt lösenord. Länken slutar gälla om %time%.'
     descriptionTwo: 'Du kan begära en ny lösenordsåterställning var %throttleLimit%:e timme.'
     descriptionThree: 'Om du inte har fått något mejl, kolla din skräppostmapp eller mejla vår support på %email-webmaster%.'
-  email:
-    title: "Hej!"
-    visitLink: 'Besök följande länk för att återställa ditt lösenord'
-    expire: 'Länken slutar gälla om %time%.'
-    cheers: 'Ha det bra!'
   newemail:
     title: 'Återställ ditt lösenord'
     content: 'Du har nyligen begärt att återställa lösenordet för ditt Catrobat-konto. Klicka på knappen nedan för att välja ett nytt lösenord. Om du inte har begärt detta kan du lugnt ignorera det här mejlet.'
@@ -659,76 +487,33 @@ resetPassword:
     title: 'Återställ ditt lösenord'
     button:
       submit: "Återställ lösenord"
-apk:
-  download: Ladda ner som app
-  prepare: 'Förbered app'
-  preparing: 'Förbereder app'
-  text: 'Det kan ta en stund'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: 'Något fungerade inte. Försök igen eller hör av dig till oss om det fortsätter att hända!'
-  username:
-    blank: Användarnamn får inte vara tomt
-    invalid: Ditt användarnamn är ogiltig
-    exists: Detta användarnamn finns redan.
-    not_exists: Detta användarnamn finns inte.
-    not_email: Användarnamnet får inte vara en e-postadress.
-    size: 'Användarnamnet måste ha minst 3 och högst 180 tecken'
-  password:
-    blank: Lösenord saknas.
-    short: 'Ditt lösenord måste ha minst {{ limit }} tecken.'
-  country:
-    blank: Landet saknas.
-    invalid: Ogiltigt land
-  email:
-    blank: 'E-postadressen får inte vara tom'
-    invalid: Din e-post verkar vara ogiltig
-    exists: Denna e-postadress finns redan.
-  id:
-    blank: 'ID för öppen autentisering får inte vara tomt'
-  login: Lösenordet eller användarnamnet var felaktigt.
-  post-data: Efter Data saknas eller inte korrekt!
-  checksum:
-    missing: Klienten skickade inte fileChecksum! Använder du en gammal version av Pocket Code?
-    invalid: felaktig kontrollsumma
   xml:
     invalid: ogiltig kod-xml
     missing: 'okänt fel: project_xml_not_found!'
   file:
-    unexpected: oväntad fil hittades
     invalid: ogiltig fil
-  image.missing: 'Projektets XML nämner en fil som inte finns i projektmappen'
-  unknown: okänt fel
-  token: 'Autentisering av enhet misslyckades: Ogiltig auth-token!'
-  uploadTokenAuthFailed: 'Autentisering med uppladdningstoken misslyckades.'
-  project:
-    invalid: 'Ogiltigt projekt.'
   languageversion:
     tooold: 'Tyvärr innehåller ditt projekt en gammal version av Catrobat-språket! Använder du den senaste versionen av Pocket Code?'
   projectversion:
     tooold: 'Tyvärr använder du en gammal version av Pocket Code. Uppdatera till den senaste versionen.'
   authentication:
-    title: 'Inloggningen fungerade inte'
     webview: |
       Det verkar som att ditt användarnamn eller lösenord inte stämde.
       Försök logga in igen i appen.
 success:
   text: 'Klart'
-  registration: Registreringen lyckades!
-  token: Okej
-  upload: Ditt Projektet lyckades laddas upp!
   imgUpload: Din bild laddades upp!
-  report: Din rapport har skickats!
 time:
   minutes.ago: '{0} < 1 minut sedan |{1}1 minuter sedan |]1,Inf] %count% minuter sedan'
   hours.ago: '{1}1 timme sedan |]1,Inf] %count% timmar sedan'
   days.ago: '{1}1 dag sedan |]1,Inf] %count% dagar sedan'
   months.ago: '{1}1 månad sedan |]1,Inf] %count% månader sedan'
   years.ago: '{1}1 år sedan |]1,Inf] mer än ett år sedan'
-failure:
-  upload: 'Ett fel uppstod när din app laddades upp.'
 user:
   verification:
     email: 'Verifiera din e-postadress'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'Lösenord innehåller ogiltiga tecken'
     usernameContainsEmail: "Användarnamnet får inte innehålla någon e-postadress"
     usernameContainsLink: 'Användarnamnet får inte innehålla en länk'
-    countryCodeInvalid: "Landskod ogiltig"
     pictureInvalid: 'Profilbilden är ogiltig eller stöds inte'
     dateOfBirthMissing: 'Födelsedatum krävs'
     dateOfBirthInvalid: 'Födelsedatumet är ogiltigt'
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'Namnet används redan'
     descriptionMissing: 'Beskrivning saknas'
     descriptionEmpty: 'Beskrivningen är tom'
-    descriptionTooShort: 'Beskrivningen är för kort'
     descriptionTooLong: 'Beskrivningen är för lång'
     imageFileInvalid: 'Bildfilen är ogiltig'
     imageFileInvalidType: 'Bildfilens typ är ogiltig'
     imageFileTooLarge: 'Bildfilen är för stor'
-#languages and countries
-language:
-  arabic: Arabiska
-  bulgarian: Bulgariska
-  catalan: Katalanska
-  chinese_simplified_han: Kinesiska (förenklad Han)
-  chinese_traditional_han: Kinesiska (traditionell Han)
-  croatian: Kroatiska
-  czech: Tjeckiska
-  danish: Danska
-  dutch: Holländska
-  english_united_kingdom: Engelska (Storbritannien)
-  english_united_states: Engelska (USA)
-  estonian: Estniska
-  filipino: Filippinska
-  finnish: Finska
-  french: Franska
-  german: Tyska
-  greek: Grekiska
-  hebrew: Hebreiska
-  hindi: Hindi
-  hungarian: Ungerska
-  indonesian: Indonesiska
-  italian: Italienska
-  japanese: Japanska
-  korean: Koreanska
-  latvian: Lettiska
-  lithuanian: Litauiska
-  malay: Malajiska
-  norwegian: Norska
-  persian: Persiska
-  polish: Polska
-  portuguese_brazil: Portugisiska (Brasilien)
-  portuguese_portugal: Portugisiska (Portugal)
-  romanian: Rumänska
-  russian: Ryska
-  serbian: Serbiska
-  slovak: Slovakiska
-  slovenian: Slovenska
-  spanish_latin_america: Spanska (Latinamerika)
-  spanish_spain: Spanska (Spanien)
-  swedish: Svenska
-  thai: Thailändska
-  turkish: Turkiska
-  ukrainian: Ukrainska
-  vietnamese: Vietnamesiska
-ci:
-  generate: Generera APK
-  pending: Genererar APK
-  download: Hämta APK
+
 admin:
   maintain:
     diskMaintenance: Diskunderhåll
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: Ingen borttagningsbara objekt tillgängliga.
     removableObjects: 'Borttagbara objekt'
 recommender:
-  similarPrograms: Liknande projekt
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Användare som laddade ner det här projektet laddade även ner'
   moreFromThisUser: 'Mer från %username%'
-pmd:
-  submitBtn: 'Skicka in ditt projekt'
-  submitBox:
-    header: 'Inlämning'
-    text: 'Du är på väg att skicka in ditt projekt. Ange projektkoden och klicka på skicka.'
-    btnText: 'Skicka in'
-  successful:
-    text: 'Ditt projekt har laddats upp.'
-  failed:
-    text: 'Uppladdningen av projektet misslyckades.'
 codeview:
   title: 'Kodvy'
-  showCode: 'Visa kod'
-  hideCode: 'Dölj kod'
-  showStatistics: 'Visa kodstatistik'
-  hideStatistics: 'Dölj kodstatistik'
-  cantDisplayCode: 'Koden kan inte visas'
-  cantDisplayStatistics: 'Koden kan inte visas'
-  totalNumberOf: 'Totalt antal'
-  scenes: 'Scener'
-  scripts: 'Skript'
-  bricks: 'Klossar'
-  objects: 'Aktörer och objekt'
-  looks: 'Utseenden'
-  sounds: 'Ljud'
-  globals: 'Globala'
-  locals: 'Lokala'
-  globalVariables: 'Globala variabler'
-  localVariables: 'Lokala variabler'
-  eventBricks: 'Händelseklossar'
-  controlBricks: 'Kontrollklossar'
-  motionBricks: 'Rörelseklossar'
-  soundBricks: 'Ljudklossar'
-  looksBricks: 'Utseendeklossar'
-  penBricks: 'Pennklossar'
-  dataBricks: 'Dataklossar'
-  specialBricks: 'Specialklossar'
 codeView:
   title: 'Kodvy'
   loading: 'Laddar kodvy...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: "Kodstatistik"
   error: 'Kodstatistiken kan inte visas.'
-  general: 'Allmänt'
-  bricks: 'Klossar'
-  eventBricks: 'Händelse'
-  controlBricks: 'Kontroll'
-  motionBricks: 'Rörelser'
-  soundBricks: 'Ljud'
-  looksBricks: 'Utseenden'
-  penBricks: 'Penna'
-  dataBricks: 'Data'
-  deviceBricks: 'Enhet'
-  specialBricks: 'Special'
   yourScore: 'Din poäng:'
-  points: 'poäng'
   abstraction: 'Abstraktion och problemuppdelning'
   parallelism: 'Parallellism'
   logicalThinking: 'Logiskt tänkande'
@@ -927,20 +612,7 @@ footer:
   text: 'Redan %project_count% fantastiska projekt har delats – nästa kan bli ditt. Ladda ner vår app och börja skapa redan idag'
 privacy-policy:
   header: Integritetspolicy
-  version: Version 2.2, 17 oktober 2019
-  text1: 'För att kunna erbjuda dig alla fördelar med våra tjänster och det tillhörande kontot behöver vi samla in vissa uppgifter om dig.'
-  text2: 'För att underhålla och förbättra våra tjänster (appar och webbplatser) och för att bedriva vetenskaplig forskning om IKT- och STEM/STEAM-utbildning använder vi Google Analytics, Crashlytics och Firebase, alla från Google LLC (USA), samt Dynatrace från Dynatrace LLC (USA) för att få metadata om hur våra tjänster används, t.ex. kraschinformation, tidsstämplar, besökta sidor/skärmar, användning av våra appar och tjänster, använt operativsystem och information om nätverksleverantören. Analysen och de insamlade uppgifterna är inte kopplade till din profil och innehåller inga personuppgifter (de sista delarna av IP-adressen anonymiseras). De insamlade uppgifterna överförs dock till tjänsteleverantörerna (Google LLC, USA och Dynatrace LLC, USA). Databehandlingen bygger på avtal med Google LLC och Dynatrace LLC. Förhållandet till tjänsteleverantörerna följer EU:s allmänna dataskyddsförordning (EU GDPR) och avtalet "Privacy Shield" mellan EU och USA.'
-  text3: 'För att skapa och använda ett konto i våra system och för att informera dig via e-post om nödvändiga ändringar som rör ditt konto, t.ex. uppdateringar eller överträdelser av våra användarvillkor, våra communityregler eller våra policyer, sparar vi ditt användarnamn och, om du har angett den, din e-postadress. Om du har kopplat ditt konto via Google Plus eller Facebook sparar vi dessutom en identifieringsnyckel som är kopplad till ditt konto på dessa tjänster. Vi använder inte dessa uppgifter för några andra ändamål (t.ex. marknadsföring) om du inte uttryckligen har gett oss tillåtelse till det.'
-  text4: 'Du kan frivilligt ange ditt bosättningsland via din kontosida på delningssidan. Det visas då på din offentliga profil och används av oss endast för statistik och forskning. Du kan när som helst ta bort det i dina profilinställningar.'
-  text5: 'Du kan när som helst återkalla användningen av personuppgifterna som hör till ditt konto genom att ta bort ditt konto via din profilsida på https://share.catrobat.org/. När du har tagit bort ditt konto kan du fortfarande använda tjänsterna, men inte samarbeta, t.ex. genom att ladda upp program, kommentera eller gilla. Allt innehåll som är kopplat till ditt konto, t.ex. uppladdade program, kommentarer osv., tas också bort.'
-  text6: 'För att förhindra missbruk av våra tjänster, t.ex. genom uppladdningar eller kommentarer från användare i olagliga syften, sparas all offentlig data som användare skapar (uppladdningar, kommentarer) internt i en databas tillsammans med en tidsstämpel och den använda internetadressen. Dessa uppgifter används inte av och lämnas inte vidare till några institutioner, såvida det inte finns rimlig misstanke om tillräckligt allvarliga olagliga handlingar och officiellt behöriga rättsliga instanser begär dem med stöd av gällande lag. Varje fall granskas först noggrant och individuellt av oss.'
-  text7: 'Du kan frivilligt prenumerera på Catrobats nyhetsbrev på https://catrobat.org/newsletter, som vi tillhandahåller via tjänsten MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Du får då uppdateringar om Catrobat-projektet och dess tjänster till den e-postadress du har angett. Du kan när som helst avsluta nyhetsbrevet via länken "unsubscribe" längst ner i varje nyhetsbrev. Nyhetsbrevet tillhandahålls av MailChimp, som vi har ett personuppgiftsbiträdesavtal med och som har förbundit sig att följa EU:s allmänna dataskyddsförordning och "Privacy Shield" mellan EU och USA. Mer information om MailChimp finns i MailChimps integritetspolicy och användarvillkor.'
-  text8: 'Alla tjänster tillhandahålls av det fria Catrobat-projektet med öppen källkod under paraplyet International Catrobat Association – Verein zur Förderung freier Software, en ideell organisation registrerad i Graz, Österrike (Europeiska unionen). Våra policyer följer EU:s och Österrikes dataskyddslagstiftning (GDPR). Kontakta oss genom att mejla contact@catrobat.org eller skicka post till Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Europeiska unionen).'
-  text9: 'Om du är under 14 år måste den här policyn godkännas av en vårdnadshavare (oftast en förälder).'
-  text10: 'Catrobats officiella integritetspolicy på engelska finns på webben under %privacy_policy%.'
-  disagree-text: 'Utan godkännande kan vi inte skapa något konto, men de grundläggande funktionerna är fortfarande tillgängliga.'
 catro-notifications:
-  markAsRead: "Markera som läst"
   noFollowers: 'Det verkar som att du inte har några aviseringar om följare.'
   noComments: 'Det verkar som att du inte har några aviseringar om kommentarer.'
   noReactions: 'Det verkar som att du inte har några aviseringar om reaktioner.'
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: 'Länken har kopierats till urklipp!'
   success_project: 'Länken till projektet har kopierats till urklipp!'
-  success_user: 'Länken till användaren har kopierats till urklipp!'
   fail: Det gick inte att kopiera länk till urklipp! :(
 next: Nästa
 previous: Föregående
 media-packages:
   title: 'Mediebibliotek'
   description: 'I följande kategorier hittar du figurer och objekt att lägga till i dina projekt.'
-  thumb-size:
-    description: 'Förhandsvisningsstorlek'
-    sm: liten
-    md: 'medel'
-    lg: stor
   theme-special: '%flavor%-temaspecial'
   search-results: 'Sökresultat i mediebiblioteket'
-  no-results: 'Din sökning gav 0 resultat. Använd bara engelska söktermer.'
-  download_these_files: spara
 flavor:
   pocketcode: Pocked Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Alla rättigheter förbehållna.'
 noscript:
   warning: 'Den här webbplatsen behöver JavaScript för att fungera. Aktivera JavaScript i din webbläsare eller be en vuxen om hjälp.'
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: 'Avböj'
   privacy-link: "Sekretesspolicy"
   settings-link: 'Cookieinställningar'
-agree: Godkänn
-disagree: 'Godkänn inte'
-profileLoader:
-  noProfiles: Det finns för närvarande inga profiler.
 element: 'Element'
 elements: 'Element'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'Delning lyckades'
 copy: 'Kopiera länk'
 checkOutProject: 'Kolla in detta projekt:'
-checkOutUser: 'Kolla in den här användaren:'
 community: 'Catrobat-community'
 back_to_app: 'Lämna communityn'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Prestationer'
-    badge: 'ny'
   overview:
     header: 'Prestationer'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: 'Flerspelarläge'
 studio:
   title: 'Studior'
-  singular: 'Studio'
   create_studio: 'Skapa studio'
-  delete_studio: 'Ta bort studio'
-  cancel_studio: 'Avbryt'
   studio_name: 'Studionamn'
   studio_description: 'Studiobeskrivning'
   is_public: 'Gör den offentlig?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'Ta bort bild'
   popular: 'Populära studior'
   join: 'Gå med'
-  leave: 'Lämna'
-  report: 'Rapportera'
   public: 'offentlig'
   private: 'privat'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'Administratör'
     member: 'Medlem'
   details:
-    add_project: 'klicka för att lägga till projektet'
     add: 'Lägg tilll'
     showMore: 'visa mer'
-    showLess: 'visa mindre'
     are_you_sure: 'Är du säker?'
     no_way_of_return: 'Det går inte att ångra.'
     delete_it: 'Radera'
-    remove_project: 'Ta bort från studion'
     remove_project_error: 'Det gick inte att ta bort projektet från studion.'
-    remove_project_success: 'Projektet har tagits bort från studion.'
     no_projects: 'Studion innehåller inga projekt än.'
     projects:
       title: 'projekt'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'Du har inga projekt att lägga till än. Skapa ett i Pocket Code först!'
       add_selected: 'Lägg till valda'
     no_available_projects: 'Inga projekt finns att lägga till.'
-    updateCoverError: 'Något gick fel när studions omslag skulle uppdateras.'
     join: 'Gå med'
     leave: 'Lämna'
-    report: 'Rapportera'
     pending: 'Väntar'
     decline: 'Avslagen'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% skrev en kommentar.'
     members_list:
       title: 'Studiomedlemmar'
-      project_count: '{0} Inga studioprojekt |{1} 1 studioprojekt |]1,Inf] %count% studioprojekt'
       no_studio_projects: 'Inga studioprojekt'
       one_studio_project: '1 studioprojekt'
       n_studio_projects: '%count% studioprojekt'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'Något gick fel när medlemmen skulle stängas av. Försök igen senare.'
       demote_member: 'Gör administratören till medlem'
       demotion_failed: 'Något gick fel när administratören skulle degraderas. Försök igen senare.'
-      last_admin: 'Studions sista administratör kan inte degraderas.'
     join_requests:
       title: 'Förfrågningar om att gå med'
       accept: 'Acceptera'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'Inga resultat hittades.'
   assets_count: 'filer'
   view_all: 'Visa alla'
-  view_all_category: 'Visa alla %category%'
   back_to_app: 'Tillbaka till appen'
 snackbar:
   project_not_found: 'Det begärda projektet är inte tillgängligt'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: 'Du utför studioåtgärder för snabbt. Vänta en stund.'
   hidden_notice:
     project: 'Det här projektet har dolts på grund av rapporter från communityn.'
-    comment: 'Den här kommentaren har dolts på grund av rapporter från communityn.'
-    user: 'Den här profilen har dolts på grund av rapporter från communityn.'
     user_own: 'Ditt konto har stängts av på grund av rapporter från communityn. Du kan överklaga beslutet.'
-    studio: 'Den här studion har dolts på grund av rapporter från communityn.'
-  notification:
-    content_hidden: 'Ditt innehåll (%content_type%) har dolts på grund av rapporter från communityn. Du kan överklaga beslutet.'
-    appeal_approved: 'Ditt överklagande har godkänts. Ditt innehåll syns nu igen.'
-    appeal_rejected: 'Ditt överklagande har granskats och beslutet att dölja ditt innehåll står fast.'
-    admin_review_needed: 'Innehåll har dolts automatiskt och behöver granskas.'
 Reports: 'Rapporter'
 members: 'medlemmar'

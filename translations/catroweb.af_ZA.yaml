@@ -8,19 +8,12 @@ meta.og.description.login: Teken aan om jou Catrobat-projekte met die gemeenskap
 meta.og.title.register: Skep 'n Catrobat-rekening
 meta.og.description.register: Sluit aan by die Catrobat-gemeenskap en begin vandag jou kreatiewe projekte deel.
 meta.og.description.profile: '%username% op Catrobat – blaai deur hul projekte en prestasies.'
-localLanguage: Afrikaans
 username: Gebruikersnaam
 password: Wagwoord
-createNewPassword: Skep nuwe wagwoord
-accountSettings: Rekeninginstellings
 email: E-pos
-aboutPocketCode: Oor Pocket Code
 about: Oor Catrobat
-education: Onderwys
 chat: Klets en forums
-privacyGuide: Gids tot privaatheidsbewustheid
 others: Ander
-tutorials: Hulp
 googlePlay: Google Play
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Hoe het jy hierdie projek geskep? Het jy idees, skri
 projectImportedFromScratch: Hierdie projek is vanaf MIT Scratch ingevoer. Jy kan die oorspronklike projek bekyk
 scratchImportedProjectLinkHere: hier.
 country: Land
-loginText: aanteken
 privacyPolicy: Privaatheidsbeleid
-imprint: Kolofon
 projectDetails: Besonderhede
 somethingWentWrong: 'Oeps, iets het nie gewerk nie. Probeer asseblief weer!'
 accountNotVerified: 'Maak asseblief seker dat jy aangeteken is en dat jou rekening se e-posadres geverifieer is.'
@@ -55,36 +46,28 @@ accountSuspended: 'Jou rekening is weens gemeenskapsverslae opgeskort. Jy kan te
 doesNotExist: 'Die versoekte hulpbron bestaan nie.'
 pleaseTryAgain: 'Probeer asseblief weer!'
 tryAgainButton: 'Probeer weer'
-oldVersionError: 'Dateer asseblief op na die nuutste Pocket Code-weergawe!'
 more: 'meer'
 less: 'minder'
 show-more: 'Meer inligting'
-show-less: 'Minder inligting'
 more-information: 'Meer inligting'
 less-information: 'Minder inligting'
 ok: Verstaan
-clickToDownloadProgram: 'Klik %link_start% hier %link_end% om die voorbeeldprojek af te laai.'
-registrationError: 'Gebruikersnaam of e-posadres is reeds in gebruik.'
 notifications: 'Kennisgewings'
 allNotifications: 'Alles'
 FollowersNotifications: 'Volgelinge'
 LikeNotifications: 'Reaksies'
 CommentNotifications: 'Kommentaar'
 RemixNotifications: 'Remixe'
-wellDone: "Mooi so!"
 done: "Klaar!"
 notificationsReadMessage: "Dit lyk asof jy geen kennisgewings het nie."
-confirmMessage: "Ja, skrap dit"
 cancelMessage: "Kanselleer"
 notificationsUnauthorizedError: "Kon nie die gebruiker magtig nie"
 notificationsClearError: "Kon nie die kennisgewings as gelees merk nie!"
-pleaseWait: "Wag asseblief..."
 projects: "Projekte"
 users: "Gebruiker"
 studios: "Studio's"
 oauthPopUpTitle: "Inligting oor aanteken met eksterne rekening"
 oauthInfo: "Jy het pas 'n eksterne rekening gebruik om aan te teken. Ons het 'n ewekansige gebruikersnaam vir jou geskep. As jy jou gebruikersnaam wil verander of 'n nuwe wagwoord vir jou rekening wil skep, gaan asseblief na jou profielblad."
-oauthHere: "hier"
 statistics: "Statistieke"
 languageSelection: "Taalkeuse"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Donker'
   dark_description: 'Donker voorkoms'
   apply: 'Pas toe'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Watter projekte word hier aanbeveel?'
-      description: 'Hoe meer reaksies (duim op, glimlag ...) jou projek kry, hoe hoër verskyn dit in hierdie lys.'
 follower:
   follows: Volg
   followers: Volgelinge
   follow: Volg
-  username: Gebruiker
   followsMe: Volg my
   noFollowing: Jy volg tans niemand nie.
   noFollowers: Jy het tans geen volgelinge nie.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Is jy seker jy wil ophou om hierdie gebruiker te volg?"
   unfollowButton: "Hou op om %username% te volg"
 project:
-  welcome:
-    title: Welkom by Catrobat se %theme%
-    title_mindstorms: Welkom by Catrobat se webwerf vir Mindstorms EV3 en NXT
-    subtitle: Skep stories, speletjies en meer...
-    subtitle_embroidery: Borduur jou eie patrone op jou T-hemde, sakke, broeke of selfoonomhulsel!
-    subtitle_mindstorms: Skep jou eie projekte met jou Lego Mindstorms EV3- en NXT-robotte
-    download: Laai die app af
-    statistics: Meer statistieke
   featured: Uitgelig
   open: Maak oop
   download: Laai af
@@ -148,9 +117,6 @@ project:
       retention: Opgelaaide projekte word ná 'n tydperk van onaktiwiteit outomaties verwyder. Teken gereeld aan of kry aflaaie op jou projek om die bewaartyd te verleng.
       protection: Besonder goeie of gewilde projekte kan deur moderators teen outomatiese skrapping beskerm word.
   example: Voorbeelde
-  newest: Nuutste projekte
-  recommended: Aanbevole projekte
-  scratchremixes: Scratch-remixe
   noProjects: Daar is tans geen projekte nie.
   shareAction: Deel
   deleteAction: Skrap projek
@@ -190,17 +156,10 @@ project:
     Daar is geen manier om jou aksies ongedaan te maak nie!
     Ja, skrap dit!
     Kanselleer
-  tooLongName: Die projeknaam is te lank!
-  tooLongDescription: Die projekbeskrywing is te lank!
-  tooLongCredits: Die projeknotas en erkennings is te lank!
   my_projects: My gedeelde projekte
   trending: Gewilde projekte nou
   popular: Gewilde projekte
-  most:
-    viewed: Meeste bekyk
-    downloaded: Meeste afgelaai
   random: Lukrake projekte
-  related: Verwante projekte
   browse:
     explore: 'Verken projekte'
     no_projects: "Jy het nog geen projekte geskep nie"
@@ -214,36 +173,14 @@ project:
     tooltip: 'Projekte word ná ''n tydperk van onaktiwiteit outomaties verwyder. Kry meer aflaaie of teken gereeld aan om die bewaartyd te verleng.'
     tooltip_protected: 'Hierdie projek is beskerm en sal nie outomaties geskrap word nie.'
   downloads: '%downloads% aflaaie'
-  sample: Voorbeeldprojekte
   views: '%views% kyke'
   likes:
     likersTitle: "Mense wat op hierdie projek gereageer het"
     all: "Alles"
-  remixes: '{0}0 remixe |{1}1 remix |]1,Inf]%remixes% remixe'
-  newRemixesNotificationTitle: '|{1}"%programName%" het 1 nuwe remix: |]1,Inf] "%programName%" het %remixes% nuwe remixe:'
-  submitted: Ingediende projekte
-  uploaded: Opgelaaide projekte
-  reportAsInappropriate: Rapporteer as onvanpas
-  reportProgram: Rapporteer projek
   languageVersion: 'Catrobat-taalweergawe: %languageVersion%'
-  reportLoginText: Jy moet %login% om hierdie projek te rapporteer.
-  reportDialogHeader: Hoekom wil jy hierdie projek rapporteer?
-  reportDialogReason: Gee 'n rede
-  reportRadioButtonInappropriate: Dit is onvanpas
-  reportRadioButtonCopyright: Kopieregskending
-  reportRadioButtonSpam: Dit is gemors (spam)
-  reportRadioButtonDislike: Ek hou nie daarvan nie
-  reportOwnProgram: Jy kan nie jou eie projek rapporteer nie.
-  reportAlready: Jy het hierdie projek reeds gerapporteer.
-  reportDone: Jy het hierdie projek gerapporteer!
   updateAppHeaderDownload: Aflaai nie moontlik nie
   updateAppTextDownload: Dateer asseblief jou app op na die nuutste weergawe. Let daarop dat nog nie alle Android-funksies op iOS beskikbaar is nie.
-  updateAppTextDownloadApk: Die APK-aflaai is tans slegs op Android beskikbaar en nie op iOS nie.
-  updateAppHeader: Dateer app op
-  updateAppText: Dateer asseblief jou app op na die nuutste weergawe.
-  btnClosePopup: Goed
   checkout_this_project: Kyk na hierdie Catrobat-projek
-  show_more: Wys meer
   comments: Kommentaar
   send: Stuur
   delete: Skrap
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: Geskrap
   noAdminRights: Jy het nie administrateursregte nie. Teken asseblief as administrateur aan.
   editProject: Wysig die projek
-  closeProjectEditor: Sluit projekredigeerder
   closeEditorPrompt: Wil jy jou veranderinge stoor?
   btnDiscard: Verwerp
   addComment: Skryf 'n kommentaar
@@ -263,8 +199,6 @@ project:
   smile: Glimlag!
   love: Liefde!
   wow: Sjoe!
-  linkTitle: Skakel
-  link: Kopieer projekskakel na knipbord
   reactionsText: Reaksies
   downloadErrorText: "'n Fout het voorgekom tydens die aflaai van die projek. Probeer asseblief later weer."
   downloadStartText: Aflaai het begin...
@@ -284,11 +218,8 @@ project:
   translations: Vertalings
   createTranslation: Skep vertaling
   deletedComment: '**Geskrap**'
-  replyLabel: antwoord
-  repliesLabel: antwoorde
   notForKids: Nie veilig vir kinders nie
 remixGraph:
-  title: Remixe
   showRemixGraph: 'Remix-grafiek'
   by: 'deur'
   open: 'Maak oop'
@@ -309,24 +240,6 @@ remixGraph:
   projectUnknownUser: 'Onbekende gebruiker'
 noReply:
   Dit is 'n outomatiese boodskap - moet asseblief nie direk op hierdie e-pos antwoord nie.
-accountConfirmation:
-  subject: Bevestiging van jou Catrobat-rekening
-  message: |
-    Liewe %username%.
-    Besoek asseblief %confirmationUrl% om die aktivering van jou rekening te voltooi.
-    Hierdie skakel kan net een keer gebruik word om jou rekening te bevestig.
-    Groete,
-    Jou Catrobat-span.
-  messageHtml: |
-    <p>
-    Liewe %username%.<br>
-    <br>
-    Klik asseblief <a href="%confirmationUrl%">hier</a> om die aktivering van jou rekening te voltooi.<br>
-    Hierdie skakel kan net een keer gebruik word om jou rekening te bevestig.<br>
-    <br>
-    Groete,<br>
-    Jou Catrobat-span.
-    </p>
 newAccountConfirmation:
   subject: "Verifieer jou e-posadres"
   welcome: "Welkom by Catrobat!"
@@ -404,63 +317,13 @@ parent:
       ignore: "As jy dit nie aangevra het nie, kan jy hierdie e-pos veilig ignoreer."
 passwordRecovery:
   subject: Herstel van jou Catrobat-wagwoord
-  message: |
-    Liewe %username%.
-    Jy het versoek om jou wagwoord op %appplication_url% terug te stel omdat jy jou wagwoord vergeet het.
-    As jy dit nie versoek het nie, ignoreer dit asseblief. Dit sal binne 24 uur verval en onbruikbaar word.
-    Besoek asseblief die volgende blad om jou wagwoord terug te stel en 'n nuwe een te skep: %confirmationUrl%
-    Jy kan jou gebruikersnaam en wagwoord enige tyd gebruik om toegang tot die %appplication_url%-gemeenskap te kry.
-    Besoek daarvoor net die volgende blad: %loginPage%
-    Gaan na hierdie blad om jou profielbesonderhede te wysig: %profilePage%
-    Groete,
-    Jou Catrobat-span.
-  messageHtml: |
-    <p>
-    Liewe %username%.<br>
-    <br>
-    Jy het versoek om jou wagwoord op <a href="%appplication_url%">Pocket Code</a> terug te stel omdat jy jou wagwoord vergeet het.
-    As jy dit nie versoek het nie, ignoreer dit asseblief. Dit sal binne 24 uur verval en onbruikbaar word.<br>
-    <br>
-    Klik asseblief <a href="%confirmationUrl%">hier</a> om jou wagwoord terug te stel en 'n nuwe een te skep.<br>
-    <br>
-    Jy kan jou gebruikersnaam en wagwoord enige tyd gebruik om toegang tot die <a href="%appplication_url%">Pocket Code</a>-gemeenskap te kry.<br>
-    Besoek daarvoor net die volgende blad: <a href="%loginPage%">Aantekenblad</a><br>
-    Gaan na hierdie <a href="%profilePage%">blad</a> om jou profielbesonderhede te wysig.<br>
-    <br>
-    Groete,<br>
-    Jou Catrobat-span.
-    </p>
 profile:
   aboutMe: Oor my
   currentlyWorkingOn: Werk tans aan
-  edit: Wysig jou profiel
-  saveChanges: stoor veranderinge
   newPass: nuwe wagwoord
   repeatPass: herhaal wagwoord
   oldPass: ou wagwoord
-  firstEmail: My eerste e-pos
-  secondEmail: My tweede e-pos
-  myPrograms: My projekte
-  follows: Volg
-  follower: Volgeling
-  unfollowUser: Hou op om hierdie gebruiker te volg!
-  followUser: Volg hierdie gebruiker!
-  amountOfPrograms: Aantal projekte
-  form:
-    passwordTooShort: Die nuwe wagwoord moet minstens %length% karakters hê.
-    passwordTooLong: Die nuwe wagwoord mag hoogstens %length% karakters hê.
-    passwordIsUsername: Die wagwoord moet van die gebruikersnaam verskil.
-    passwordWrong: Verkeerde wagwoord
-    emailNotValid: Hierdie e-posadres is nie geldig nie.
-    emailMissing: Fout tydens die opdatering van hierdie e-posadres. Jy moet minstens een geverifieerde e-posadres hê.
-    emailExists: Hierdie e-posadres bestaan reeds.
-    usernameNotValid: Hierdie gebruikersnaam is nie geldig nie.
-    usernameMissing: Jy moet 'n gebruikersnaam hê.
-    usernameExists: Hierdie gebruikersnaam bestaan reeds.
-    usernameContainsEmail: Die gebruikersnaam moenie 'n e-posadres bevat nie.
-    submitSuccess: gestoor!
   reallyDeleteProgram: Wil jy regtig jou projek skrap
-  programsOf: Projekte van
   picture: Profielfoto
   changePicture: Verander foto
   goToScratchProfile: Profiel op Scratch
@@ -470,14 +333,8 @@ myprofile:
   securitySettings: Verander wagwoord
   accountSettings: Rekeninginstellings
   accountVerification: Verifieer rekening
-  account: Rekening
-  editProfile: Wysig profiel
-  edit: Wysig
   done: Klaar
-  checkMail: "'n E-pos is na jou e-posadres gestuur. Kyk asseblief in jou inkassie."
   passwordUpdated: Jou wagwoord is suksesvol opgedateer.
-  avatar: Avatar
-  email: E-pos
   deleteAccount: Skrap rekening
   deleteAccountWarning: |
     Let op:
@@ -488,7 +345,6 @@ myprofile:
   exportDataLoading: Laai tans af...
   exportDataError: Iets het verkeerd geloop tydens die uitvoer van jou data. Probeer asseblief later weer.
   exportDataRateLimited: Jy kan jou data net een keer per dag uitvoer. Probeer asseblief môre weer.
-  editAccountSettings: Wysig rekeninginstellings
   profileChangeSuccess: Jou profiel is suksesvol verander.
   unspecifiedError: Iets het nie gewerk tydens die verandering van jou profiel nie. Probeer asseblief weer of laat weet ons as dit aanhou gebeur!
   verifyAccountText: Ons sal vir jou 'n e-pos stuur met 'n skakel om jou rekening te verifieer. Maak seker dat jy binne die volgende uur op die skakel klik; jy mag net een e-pos per dag aanvra.
@@ -545,13 +401,10 @@ termsOfUse:
   bottom2: 'Stuur asseblief enige voorstelle oor hierdie gebruiksvoorwaardes na %email-webmaster%.'
   version: Weergawe 1.3, 4 Maart 2014
 search:
-  dotdotdot: Soek...
   search: Soek projekte, gebruikers en studio's
   inMediaLib: Soek in mediabiblioteek
   inMediaCategory: Soek in mediakategorie
   results: Soekresultate
-  resultcount: Jou soektog het %count% resultate opgelewer
-  fail: Voer asseblief minstens een soekterm in
   noUsers: Geen gebruikers gevind nie
   noProjects: Geen projekte gevind nie
   noStudios: Geen studio's gevind nie
@@ -567,7 +420,6 @@ menu:
   mediaLibrary: Mediabiblioteek
   studio: Studio's
   language: Taal
-  languageOptionsNotAvailable: Geen taalopsies beskikbaar nie.
 login:
   login: Teken aan
   button:
@@ -579,21 +431,10 @@ login:
     or: "of"
   passOrUser: Jou wagwoord of gebruikersnaam was verkeerd.
   accountSuspended: 'Jou rekening is opgeskort. As jy glo dat dit ''n fout is, kontak asseblief ondersteuning.'
-  noUsername: Jou gebruikersnaam of e-posadres is nie gevind nie.
-  forgotPass: Wagwoord of gebruikersnaam vergeet?
   recoverPassSend: "'n E-pos is na jou e-posadres gestuur. Kyk asseblief in jou inkassie."
   alreadyReset: Die wagwoord vir hierdie gebruiker is reeds in die afgelope 24 uur aangevra.
-  confirmationSend: "'n E-pos om jou registrasie te bevestig is na jou e-posadres gestuur. Kyk asseblief in jou inkassie en aktiveer jou rekening."
-  userOrEmail: Gebruikersnaam of e-pos
-  changePass: Verander wagwoord
-  createAccount: Skep 'n rekening
-  noAccount: Het jy nie 'n rekening nie?
-  alreadyAccount: Het jy reeds 'n rekening?
-  or: OF
   username: Gebruikersnaam
   email: E-pos
-  passwordFirst: Wagwoord
-  passwordSecond: Bevestig wagwoord
 register:
   title: Registreer
   subText: "Deur voort te gaan, skep jy 'n Catrobat-gemeenskapsrekening en stem jy in tot ons %var1% en %var2%."
@@ -626,14 +467,6 @@ registration:
   consentRevoked:
     title: "Ouertoestemming is teruggetrek"
     message: "Jou ouer of voog het die toestemming vir jou rekening teruggetrek. Jou rekening het beperkte funksies totdat toestemming weer gegee word."
-    newEmailPlaceholder: "Nuwe ouer-e-pos"
-    changeButton: "Dateer op en stuur weer"
-accountRecovery:
-  title: Rekeningherstel
-  description: As jy die e-posadres of gebruikersnaam van jou rekening onthou, kan ons vir jou 'n skakel stuur om jou wagwoord terug te stel.
-  button:
-    cancel: Kanselleer
-    submit: Herstel wagwoord
 resetPassword:
   request:
     title: "Stel jou wagwoord terug"
@@ -646,11 +479,6 @@ resetPassword:
     description: "As 'n rekening met jou e-posadres bestaan, is pas 'n e-pos gestuur met 'n skakel wat jy kan gebruik om jou wagwoord terug te stel. Hierdie skakel verval oor %time%."
     descriptionTwo: "Jy kan elke %throttleLimit% uur 'n nuwe wagwoordterugstelling aanvra."
     descriptionThree: "As jy nie 'n e-pos ontvang het nie, kyk asseblief in jou gemorspos-lêer of skryf 'n e-pos aan ons ondersteuning by %email-webmaster%."
-  email:
-    title: "Hallo!"
-    visitLink: "Besoek asseblief die volgende skakel om jou wagwoord terug te stel"
-    expire: "Hierdie skakel verval oor %time%."
-    cheers: "Groete!"
   newemail:
     title: "Stel jou wagwoord terug"
     content: "Jy het onlangs 'n wagwoordterugstelling vir jou Catrobat-rekening aangevra. Klik op die knoppie hieronder om 'n nuwe wagwoord te kies. As jy dit nie aangevra het nie, kan jy hierdie e-pos veilig ignoreer."
@@ -660,76 +488,33 @@ resetPassword:
     title: "Stel jou wagwoord terug"
     button:
       submit: "Stel wagwoord terug"
-apk:
-  download: Laai af as app
-  prepare: 'Kry as app'
-  preparing: 'Berei app voor'
-  text: 'Die proses kan ''n rukkie duur'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: Iets het nie gewerk nie. Probeer asseblief weer of laat weet ons as dit aanhou gebeur!
-  username:
-    blank: Gebruikersnaam mag nie leeg wees nie
-    invalid: Jou gebruikersnaam is ongeldig
-    exists: Hierdie gebruikersnaam bestaan reeds.
-    not_exists: Hierdie gebruikersnaam bestaan nie.
-    not_email: Die gebruikersnaam mag nie 'n e-posadres wees nie.
-    size: Die gebruikersnaam moet minstens 3 en hoogstens 180 karakters hê
-  password:
-    blank: Die wagwoord ontbreek.
-    short: 'Jou wagwoord moet minstens {{ limit }} karakters hê.'
-  country:
-    blank: Die land ontbreek.
-    invalid: Ongeldige land
-  email:
-    blank: E-pos mag nie leeg wees nie
-    invalid: Jou e-pos lyk ongeldig
-    exists: Hierdie e-posadres bestaan reeds.
-  id:
-    blank: Open Authentication-ID mag nie leeg wees nie
-  login: Die wagwoord of gebruikersnaam was verkeerd.
-  post-data: POST-data is verkeerd of ontbreek!
-  checksum:
-    missing: Kliënt het nie fileChecksum gestuur nie! Gebruik jy 'n verouderde weergawe van Pocket Code?
-    invalid: ongeldige kontrolesom
   xml:
     invalid: ongeldige kode-XML
     missing: 'onbekende fout: project_xml_not_found!'
   file:
-    unexpected: onverwagte lêer gevind
     invalid: ongeldige lêer
-  image.missing: Projek-XML noem 'n lêer wat nie in die projekgids bestaan nie
-  unknown: onbekende fout
-  token: 'Verifikasie van toestel het misluk: ongeldige auth-token!'
-  uploadTokenAuthFailed: 'Verifikasie van oplaai-token het misluk.'
-  project:
-    invalid: Ongeldige projek.
   languageversion:
     tooold: 'Jammer, jou projek bevat ''n ou weergawe van die Catrobat-taal! Gebruik jy die nuutste weergawe van Pocket Code?'
   projectversion:
     tooold: 'Jammer, jy gebruik ''n ou weergawe van Pocket Code. Dateer asseblief op na die nuutste weergawe.'
   authentication:
-    title: Aanteken het nie gewerk nie
     webview: |
       Dit lyk asof jou gebruikersnaam of wagwoord nie reg was nie.
       Probeer asseblief weer in die app aanteken.
 success:
   text: Sukses
-  registration: Registrasie suksesvol!
-  token: ok
-  upload: Jou projek is suksesvol opgelaai!
   imgUpload: Jou prent is suksesvol opgelaai!
-  report: Jou verslag is suksesvol gestuur!
 time:
   minutes.ago: '{0} < 1 minuut gelede |{1}1 minuut gelede |]1,Inf] %count% minute gelede'
   hours.ago: '{1}1 uur gelede |]1,Inf] %count% uur gelede'
   days.ago: '{1}1 dag gelede |]1,Inf] %count% dae gelede'
   months.ago: '{1}1 maand gelede |]1,Inf] %count% maande gelede'
   years.ago: '{1}1 jaar gelede |]1,Inf] meer as een jaar gelede'
-failure:
-  upload: "'n Fout het voorgekom tydens die oplaai van jou app."
 user:
   verification:
     email: 'Verifieer jou e-pos'
@@ -752,7 +537,6 @@ api:
     passwordInvalidChars: 'Wagwoord bevat ongeldige karakters'
     usernameContainsEmail: "Gebruikersnaam mag nie 'n e-posadres bevat nie"
     usernameContainsLink: "Gebruikersnaam mag nie 'n skakel bevat nie"
-    countryCodeInvalid: "Landkode ongeldig"
     pictureInvalid: "Profielfoto ongeldig of nie ondersteun nie"
     dateOfBirthMissing: "Geboortedatum word vereis"
     dateOfBirthInvalid: "Geboortedatum is ongeldig"
@@ -786,61 +570,11 @@ api:
     nameAlreadyInUse: 'Naam reeds in gebruik'
     descriptionMissing: 'Beskrywing ontbreek'
     descriptionEmpty: 'Beskrywing leeg'
-    descriptionTooShort: 'Beskrywing te kort'
     descriptionTooLong: 'Beskrywing te lank'
     imageFileInvalid: 'Prentlêer ongeldig'
     imageFileInvalidType: 'Prentlêertipe ongeldig'
     imageFileTooLarge: 'Prentlêer te groot'
-#languages and countries
-language:
-  arabic: Arabies
-  bulgarian: Bulgaars
-  catalan: Katalaans
-  chinese_simplified_han: Chinees (Vereenvoudigde Han)
-  chinese_traditional_han: Chinees (Tradisionele Han)
-  croatian: Kroaties
-  czech: Tsjeggies
-  danish: Deens
-  dutch: Nederlands
-  english_united_kingdom: Engels (Verenigde Koninkryk)
-  english_united_states: Engels (Verenigde State)
-  estonian: Estnies
-  filipino: Filipyns
-  finnish: Fins
-  french: Frans
-  german: Duits
-  greek: Grieks
-  hebrew: Hebreeus
-  hindi: Hindi
-  hungarian: Hongaars
-  indonesian: Indonesies
-  italian: Italiaans
-  japanese: Japannees
-  korean: Koreaans
-  latvian: Letties
-  lithuanian: Litaus
-  malay: Maleis
-  norwegian: Noors
-  persian: Persies
-  polish: Pools
-  portuguese_brazil: Portugees (Brasilië)
-  portuguese_portugal: Portugees (Portugal)
-  romanian: Roemeens
-  russian: Russies
-  serbian: Serwies
-  slovak: Slowaaks
-  slovenian: Sloweens
-  spanish_latin_america: Spaans (Latyns-Amerika)
-  spanish_spain: Spaans (Spanje)
-  swedish: Sweeds
-  thai: Thai
-  turkish: Turks
-  ukrainian: Oekraïens
-  vietnamese: Viëtnamees
-ci:
-  generate: Genereer APK
-  pending: Genereer tans APK
-  download: Laai APK af
+
 admin:
   maintain:
     diskMaintenance: Skyfinstandhouding
@@ -848,46 +582,9 @@ admin:
     noRemovableObjects: Geen verwyderbare objekte beskikbaar nie.
     removableObjects: Verwyderbare objekte
 recommender:
-  similarPrograms: Soortgelyke projekte
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Gebruikers wat hierdie projek afgelaai het, het ook afgelaai
   moreFromThisUser: Meer van %username%
-pmd:
-  submitBtn: Dien jou projek in
-  submitBox:
-    header: Indiening
-    text: Jy is op die punt om jou projek in te dien. Voer asseblief die projekkode in en klik op stuur.
-    btnText: Dien in
-  successful:
-    text: Jou projek is suksesvol opgelaai.
-  failed:
-    text: Oplaai van projek het misluk.
 codeview:
   title: 'Kode-aansig'
-  showCode: 'Wys kode'
-  hideCode: 'Versteek kode'
-  showStatistics: 'Wys kodestatistieke'
-  hideStatistics: 'Versteek kodestatistieke'
-  cantDisplayCode: "Kode kan nie vertoon word nie"
-  cantDisplayStatistics: "Kode kan nie vertoon word nie"
-  totalNumberOf: 'Totale aantal'
-  scenes: 'Tonele'
-  scripts: 'Skripte'
-  bricks: 'Blokke'
-  objects: 'Akteurs en objekte'
-  looks: 'Voorkoms'
-  sounds: 'Klanke'
-  globals: 'Globale'
-  locals: 'Plaaslike'
-  globalVariables: 'Globale veranderlikes'
-  localVariables: 'Plaaslike veranderlikes'
-  eventBricks: 'Gebeurtenisblokke'
-  controlBricks: 'Beheerblokke'
-  motionBricks: 'Bewegingsblokke'
-  soundBricks: 'Klankblokke'
-  looksBricks: 'Voorkomsblokke'
-  penBricks: 'Penblokke'
-  dataBricks: 'Datablokke'
-  specialBricks: 'Spesiale blokke'
 codeView:
   title: 'Kode-aansig'
   loading: 'Laai tans kode-aansig...'
@@ -900,19 +597,7 @@ codeView:
 codeStatistics:
   title: "Kodestatistieke"
   error: "Kodestatistieke kan nie vertoon word nie."
-  general: 'Algemeen'
-  bricks: 'Blokke'
-  eventBricks: 'Gebeurtenis'
-  controlBricks: 'Beheer'
-  motionBricks: 'Beweging'
-  soundBricks: 'Klank'
-  looksBricks: 'Voorkoms'
-  penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Toestel'
-  specialBricks: 'Spesiaal'
   yourScore: 'Jou telling:'
-  points: 'punte'
   abstraction: 'Abstraksie en probleemontleding'
   parallelism: 'Parallelisme'
   logicalThinking: 'Logiese denke'
@@ -928,20 +613,7 @@ footer:
   text: "Met reeds %project_count% wonderlike projekte gedeel, kan die volgende een joune wees. Laai ons app af en begin vandag skep"
 privacy-policy:
   header: Privaatheidsbeleid
-  version: Weergawe 2.2, 17 Oktober 2019
-  text1: Om jou al die voordele van ons dienste en die gepaardgaande rekening te bied, is dit nodig om sekere data van jou te versamel.
-  text2: Om ons dienste (apps en webwerwe) in stand te hou en te verbeter en om wetenskaplike navorsing oor IKT- en STEM/STEAM-onderwys te doen, gebruik ons Google Analytics, Crashlytics en Firebase, almal van Google LLC (VSA), asook Dynatrace van Dynatrace LLC (VSA), om metadata oor die gebruik van ons dienste te kry, bv. omvalinligting, tydstempels, besoekte blaaie/skerms, gebruik van ons apps en dienste, die bedryfstelsel wat gebruik word, en inligting oor die netwerkverskaffer. Hierdie ontleding en die versamelde data is nie aan jou profiel gekoppel nie en bevat geen persoonlike inligting nie (die laaste bisse van die IP-adres word geanonimiseer). Die versamelde data word egter na die diensverskaffers (Google LLC, VSA en Dynatrace LLC, VSA) oorgedra. Dataverwerking is gebaseer op ooreenkomste met Google LLC en Dynatrace LLC. Hierdie verhouding met die diensverskaffers voldoen aan die Europese Unie se Algemene Databeskermingsregulasie (EU GDPR) en die EU-VSA "Privacy Shield"-ooreenkoms.
-  text3: Om 'n rekening in ons stelsels te skep en te gebruik, en om jou per e-pos in te lig oor nodige veranderinge aan jou rekening, bv. opdaterings of oortredings van ons gebruiks- en diensvoorwaardes, ons gemeenskapsreëls of ons beleide, stoor ons jou gebruikersnaam en, indien jy dit verskaf, jou e-posadres. As jy jou rekening via Google Plus of Facebook gekoppel het, stoor ons ook 'n identifikasiesleutel wat aan jou rekening op daardie dienste gekoppel is. Ons sal hierdie data nie vir enige ander (bv. bemarkings-) doeleindes gebruik nie, tensy jy ons uitdruklik toestemming gegee het.
-  text4: Op 'n vrywillige basis kan jy ons jou land van verblyf gee via jou rekeningblad op die deelwerf. Dit sal op jou publieke profiel vertoon word en slegs vir statistiese en navorsingsdoeleindes deur ons gebruik word. Dit kan enige tyd in jou profielinstellings verwyder word.
-  text5: Jy kan die gebruik van die persoonlike data van jou rekening enige tyd terugtrek deur jou rekening via jou profielblad op https://share.catrobat.org/ te skrap. Nadat jy jou rekening geskrap het, sal jy steeds die verskafde dienste kan gebruik, maar nie kan saamwerk nie, bv. deur programme op te laai, kommentaar te lewer of te like. Alle verskafde inhoud wat aan jou rekening gekoppel is, bv. opgelaaide programme, kommentaar ens., sal ook geskrap word.
-  text6: Om misbruik van ons dienste te voorkom, bv. deur gebruikersbydraes of kommentaar vir onwettige doeleindes, word alle publieke data wat deur gebruikers gegenereer word (oplaaie, kommentaar) intern in 'n databasis gestoor, saam met 'n tydstempel en die gebruikte internetadres. Hierdie data sal nie deur enige instellings gebruik of aan hulle deurgestuur word nie, tensy voldoende onwettige optrede redelikerwys vermoed word en amptelik gemagtigde regsinstellings dit op grond van toepaslike wetgewing aanvra. Elke geval sal eers deeglik op 'n individuele basis deur ons nagegaan word.
-  text7: Jy kan vrywillig inteken op die Catrobat-nuusbrief op https://catrobat.org/newsletter, wat ons via die MailChimp-diens (The Rocket Science Group LLC d/b/a MailChimp, VSA) aanbied. Jy sal dan opdaterings oor die Catrobat-projek en sy dienste na jou verskafde e-posadres ontvang. Jy kan die nuusbrief enige tyd opsê deur die "unsubscribe"-skakel onderaan elke nuusbrief te gebruik. Hierdie nuusbrief word aangebied deur MailChimp, met wie ons 'n dataverwerkingsooreenkoms het en wat hulle verbind het tot die EU se Algemene Databeskermingsregulasie en EU-VSA "Privacy Shield". Vir meer besonderhede oor MailChimp, kyk ook na MailChimp se privaatheidsbeleid en gebruiksvoorwaardes.
-  text8: Alle dienste word aangebied deur die gratis oopbron-Catrobat-projek onder die sambreel van die International Catrobat Association – Verein zur Förderung freier Software, 'n nie-winsgewende NRO wat in Graz, Oostenryk (Europese Unie) geïnkorporeer is. Ons beleide respekteer EU- en Oostenrykse databeskermingswetgewing (GDPR). Om met ons in verbinding te tree, stuur asseblief 'n e-pos na contact@catrobat.org of skryf aan Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Oostenryk (Europese Unie).
-  text9: As jy jonger as 14 is, moet hierdie beleid deur 'n wettige voog (gewoonlik 'n ouer) aanvaar word.
-  text10: Catrobat se amptelike Engelstalige privaatheidsbeleid is op die web beskikbaar by %privacy_policy%.
-  disagree-text: Sonder goedkeuring kan ons nie 'n rekening skep nie, maar die kernfunksies is steeds toeganklik.
 catro-notifications:
-  markAsRead: "Merk as gelees"
   noFollowers: "Dit lyk asof jy geen volgeling-kennisgewings het nie."
   noComments: "Dit lyk asof jy geen kommentaar-kennisgewings het nie."
   noReactions: "Dit lyk asof jy geen reaksie-kennisgewings het nie."
@@ -975,29 +647,16 @@ catro-notifications:
 clipboard:
   success: Skakel na knipbord gekopieer!
   success_project: Skakel na projek na knipbord gekopieer!
-  success_user: Skakel na gebruiker na knipbord gekopieer!
   fail: Kon nie skakel na knipbord kopieer nie! :(
 next: Volgende
 previous: Vorige
 media-packages:
   title: Mediabiblioteek
   description: In die volgende kategorieë kan jy akteurs en objekte vind om by jou projekte te voeg.
-  thumb-size:
-    description: Voorskougrootte
-    sm: klein
-    md: medium
-    lg: groot
   theme-special: "%flavor%-temaspesiaal"
   search-results: Soekresultate in mediabiblioteek
-  no-results: Jou soektog het 0 resultate opgelewer. Gebruik asseblief slegs Engelse soekterme.
-  download_these_files: stoor
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Kopiereg &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Alle regte voorbehou.'
 noscript:
   warning: "Hierdie webwerf het JavaScript nodig om te werk. Skakel asseblief JavaScript in jou blaaier aan of vra 'n volwassene om jou te help."
@@ -1007,10 +666,6 @@ cookie-consent:
   decline: "Weier"
   privacy-link: "Privaatheidsbeleid"
   settings-link: "Koekie-instellings"
-agree: Stem in
-disagree: Stem nie in nie
-profileLoader:
-  noProfiles: Daar is tans geen profiele nie.
 element: 'Element'
 elements: 'Elemente'
 share:
@@ -1019,7 +674,6 @@ share:
   success: 'Suksesvol gedeel'
 copy: 'Kopieer skakel'
 checkOutProject: 'Kyk na hierdie projek:'
-checkOutUser: 'Kyk na hierdie gebruiker:'
 community: 'Catrobat-gemeenskap'
 back_to_app: 'Verlaat gemeenskap'
 category:
@@ -1035,7 +689,6 @@ category:
 achievements:
   sidebar:
     title: 'Prestasies'
-    badge: 'nuut'
   overview:
     header: 'Prestasies'
     most_recent_achievement:
@@ -1127,10 +780,7 @@ extensions:
       title: Veelspeler
 studio:
   title: 'Studio''s'
-  singular: 'Studio'
   create_studio: 'Skep studio'
-  delete_studio: 'Skrap studio'
-  cancel_studio: 'Kanselleer'
   studio_name: 'Studionaam'
   studio_description: 'Studiobeskrywing'
   is_public: 'Maak dit publiek?'
@@ -1147,8 +797,6 @@ studio:
   cover_image_remove: 'Verwyder prent'
   popular: 'Gewilde studio''s'
   join: 'Sluit aan'
-  leave: 'Verlaat'
-  report: 'Rapporteer'
   public: 'publiek'
   private: 'Slegs op uitnodiging'
   overview:
@@ -1171,16 +819,12 @@ studio:
     admin: 'Administrateur'
     member: 'Lid'
   details:
-    add_project: 'klik om die projek by te voeg'
     add: 'Voeg by'
     showMore: 'wys meer'
-    showLess: 'wys minder'
     are_you_sure: 'Is jy seker?'
     no_way_of_return: 'Dit kan nie ongedaan gemaak word nie.'
     delete_it: 'Skrap'
-    remove_project: 'Verwyder uit studio'
     remove_project_error: 'Kon nie projek uit studio verwyder nie.'
-    remove_project_success: 'Projek suksesvol uit studio verwyder.'
     no_projects: 'Die studio bevat nog geen projekte nie.'
     projects:
       title: 'Projekte'
@@ -1196,10 +840,8 @@ studio:
       no_projects_empty_state: 'Jy het nog geen projekte om by te voeg nie. Skep eers een in Pocket Code!'
       add_selected: 'Voeg gekose by'
     no_available_projects: 'Geen projekte beskikbaar om by te voeg nie.'
-    updateCoverError: 'Iets het verkeerd geloop tydens die opdatering van die studio se voorbladprent.'
     join: 'Sluit aan'
     leave: 'Verlaat'
-    report: 'Rapporteer'
     pending: 'Hangende'
     decline: 'Afgewys'
     comments:
@@ -1219,7 +861,6 @@ studio:
       add_comment: '%user% het ''n kommentaar gelaat.'
     members_list:
       title: 'Studiolede'
-      project_count: '{0} Geen studioprojekte |{1} 1 studioprojek |]1,Inf] %count% studioprojekte'
       no_studio_projects: 'Geen studioprojekte'
       one_studio_project: '1 studioprojek'
       n_studio_projects: '%count% studioprojekte'
@@ -1229,7 +870,6 @@ studio:
       ban_failed: 'Iets het verkeerd geloop tydens die verbanning van hierdie lid. Probeer later weer.'
       demote_member: 'Degradeer administrateur tot lid'
       demotion_failed: 'Iets het verkeerd geloop tydens die degradering van hierdie administrateur. Probeer later weer.'
-      last_admin: 'Kan nie die laaste administrateur van hierdie studio degradeer nie.'
     join_requests:
       title: 'Aansluitversoeke'
       accept: 'Aanvaar'
@@ -1259,7 +899,6 @@ media_library:
   no_results: 'Geen resultate gevind nie.'
   assets_count: 'items'
   view_all: 'Bekyk alles'
-  view_all_category: 'Bekyk alles in %category%'
   back_to_app: 'Terug na app'
 snackbar:
   project_not_found: 'Die versoekte projek is nie beskikbaar nie'
@@ -1313,14 +952,6 @@ moderation:
     rate_limited: "Jy voer studio-aksies te vinnig uit. Wag asseblief 'n oomblik."
   hidden_notice:
     project: "Hierdie projek is weens gemeenskapsverslae versteek."
-    comment: "Hierdie kommentaar is weens gemeenskapsverslae versteek."
-    user: "Hierdie profiel is weens gemeenskapsverslae versteek."
     user_own: "Jou rekening is weens gemeenskapsverslae opgeskort. Jy kan teen hierdie besluit appelleer."
-    studio: "Hierdie studio is weens gemeenskapsverslae versteek."
-  notification:
-    content_hidden: "Jou %content_type% is weens gemeenskapsverslae versteek. Jy kan teen hierdie besluit appelleer."
-    appeal_approved: "Jou appèl is goedgekeur. Jou inhoud is weer sigbaar."
-    appeal_rejected: "Jou appèl is hersien en die besluit om jou inhoud te versteek, bly staan."
-    admin_review_needed: "Inhoud is outomaties versteek en moet hersien word."
 Reports: Verslae
 members: lede

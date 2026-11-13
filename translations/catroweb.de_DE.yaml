@@ -8,19 +8,12 @@ meta.og.description.login: Melde dich an, um deine Catrobat-Projekte mit der Com
 meta.og.title.register: Catrobat-Konto erstellen
 meta.og.description.register: Werde Teil der Catrobat-Community und teile noch heute deine kreativen Projekte.
 meta.og.description.profile: '%username% auf Catrobat – entdecke Projekte und Erfolge.'
-localLanguage: Englisch
 username: Benutzername
 password: Passwort
-createNewPassword: Neues Passwort erstellen
-accountSettings: Kontoeinstellungen
 email: E-Mail
-aboutPocketCode: Über Pocket Code
 about: Über Catrobat
-education: Bildung
 chat: Chat und Foren
-privacyGuide: Datenschutz-Leitfaden
 others: Andere
-tutorials: Hilfe
 googlePlay: Google Play Store
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -45,9 +38,7 @@ notesAndCreditsDescription: Wie hast du dieses Projekt erstellt? Hast du Ideen, 
 projectImportedFromScratch: Dieses Projekt wurde von MIT Scratch importiert. Du kannst sich das ursprüngliche Projekt ansehen
 scratchImportedProjectLinkHere: hier.
 country: Land
-loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
-imprint: Impressum
 projectDetails: Einzelheiten
 somethingWentWrong: 'Ooooops etwas ging schief.'
 accountNotVerified: 'Bitte stelle sicher, dass du angemeldet bist und die E-Mail-Adresse deines Kontos bestätigt ist.'
@@ -55,36 +46,28 @@ accountSuspended: 'Dein Konto wurde aufgrund von Meldungen aus der Community ges
 doesNotExist: 'Die angefragte Ressource existiert nicht.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 tryAgainButton: 'Erneut versuchen'
-oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
 more: 'mehr'
 less: 'weniger'
 show-more: 'Mehr'
-show-less: 'Weniger'
 more-information: 'Mehr Information'
 less-information: 'Weniger Informationen'
 ok: Ok
-clickToDownloadProgram: 'Um das Beispielprojekt herunterzuladen klicke %link_start% hier %link_end%.'
-registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
 allNotifications: 'Alle'
 FollowersNotifications: 'Follower'
 LikeNotifications: 'Likes'
 CommentNotifications: 'Kommentare'
 RemixNotifications: 'Remixe'
-wellDone: "Gut gemacht!"
 done: "Fertig!"
 notificationsReadMessage: "Es scheint, als hättest du keine Benachrichtigungen."
-confirmMessage: "Ja, jetzt löschen"
 cancelMessage: "Abbrechen"
 notificationsUnauthorizedError: "Benutzer kann nicht autorisiert werden"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
-pleaseWait: "Bitte warten..."
 projects: "Projekte am Gerät"
 users: "Benutzer"
 studios: "Studios"
 oauthPopUpTitle: "Externe Logininformationen"
 oauthInfo: 'Du hast dich gerade mit einem externen Konto angemeldet. Wir haben einen zufälligen Benutzernamen für dich erstellt. Wenn du deinen Benutzernamen ändern oder ein neues Passwort für dein Konto festlegen möchtest, geh bitte auf deine Profilseite.'
-oauthHere: "hier"
 statistics: "Statistiken"
 languageSelection: "Sprachwahl"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'Dunkel'
   dark_description: 'Dunkle Darstellung'
   apply: 'Anwenden'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'Welche Projekte werden hier empfohlen?'
-      description: 'Je mehr "Reaktionen" (einschließlich "Daumen hoch", "Lachen", "Liebe" und "Woow!") dein Projekt erhält, desto höher erscheint es in dieser Liste.'
 follower:
   follows: Abonniert
   followers: Follower
   follow: Folgen
-  username: Benutzer
   followsMe: Folgt mir
   noFollowing: Du folgst derzeit niemandem.
   noFollowers: Du hast derzeit keine Follower.
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "Bist du sicher, dass du diesem User nicht mehr folgen möchtest?"
   unfollowButton: "%username% entfernen"
 project:
-  welcome:
-    title: Willkommen bei Catrobat's %theme%
-    title_mindstorms: Willkommen auf Catrobats Seite für Mindstorms EV3 und NXT
-    subtitle: Erstelle Animationen, Spiele und mehr...
-    subtitle_embroidery: Sticke dein eigenes Muster auf deine T-shirts, Taschen, Hosen oder auf deine Smartphonehülle!
-    subtitle_mindstorms: Erstelle deine eigenen Projekte mit deinen Lego Mindstorms EV3 und NXT Robotern
-    download: Lade die App herunter
-    statistics: Mehr Statistiken
   featured: Empfohlen
   open: Öffne 
   download: Herunterladen
@@ -148,9 +117,6 @@ project:
       retention: Hochgeladene Projekte werden nach einer Zeit der Inaktivität automatisch entfernt. Melde dich regelmäßig an oder sammle Downloads für dein Projekt, damit es länger erhalten bleibt.
       protection: Besonders gute oder beliebte Projekte können von Moderatoren vor der automatischen Löschung geschützt werden.
   example: Beispiele
-  newest: Neueste Projekte
-  recommended: Empfohlene Projekte
-  scratchremixes: Scratch-Remixe
   noProjects: Derzeit gibt es keine Projekte.
   shareAction: Teilen
   deleteAction: Projekt löschen
@@ -190,17 +156,10 @@ project:
     Es gibt keine Möglichkeit, deine Aktionen rückgängig zu machen!
     Ja, löschen!
     Abbrechen
-  tooLongName: Der Projektname ist zu lang!
-  tooLongDescription: Die Projektbeschreibung ist zu lang!
-  tooLongCredits: Die Projektnotizen und Credits sind zu lang!
   my_projects: Meine Projekte
   trending: Interessante Projekte
   popular: Beliebte Projekte
-  most:
-    viewed: Am meisten angesehen
-    downloaded: Meist heruntergeladen
   random: Zufällige Projekte
-  related: Verwandte Projekte
   browse:
     explore: 'Projekte entdecken'
     no_projects: "Du hast noch keine Projekte erstellt"
@@ -214,36 +173,14 @@ project:
     tooltip: 'Projekte werden nach einer Zeit der Inaktivität automatisch entfernt. Sammle mehr Downloads oder melde dich regelmäßig an, damit sie länger erhalten bleiben.'
     tooltip_protected: 'Dieses Projekt ist geschützt und wird nicht automatisch gelöscht.'
   downloads: '%downloads% heruntergeladen'
-  sample: Beispielprojekte
   views: '%views% Aufrufe'
   likes:
     likersTitle: "Benutzer, die auf dieses Projekt reagiert haben"
     all: "Alle"
-  remixes: '{0}0 Remixe |{1}1 Remix |]1,Inf]%remixes% Remixe'
-  newRemixesNotificationTitle: '|{1}"%programName%" hat 1 neues Remix: |]1,Inf] "%programName%" hat %remixes% neue Remixe:'
-  submitted: Eingereichte Projekte
-  uploaded: Hochgeladene Projekte
-  reportAsInappropriate: Als unpassend melden
-  reportProgram: Projekt melden
   languageVersion: 'Catrobat Sprachversion: %languageVersion%'
-  reportLoginText: Bitte %login% um dieses Projekt zu melden.
-  reportDialogHeader: Warum möchtest du das Projekt melden?
-  reportDialogReason: Gib einen Grund an
-  reportRadioButtonInappropriate: Es ist unangemessen
-  reportRadioButtonCopyright: Urheberrechtsverletzung
-  reportRadioButtonSpam: Es ist Spam
-  reportRadioButtonDislike: Es gefällt mir nicht
-  reportOwnProgram: Du kannst dein eigenes Programm nicht melden.
-  reportAlready: Du hast dieses Projekt bereits gemeldet.
-  reportDone: Du hast dieses Projekt gemeldet!
   updateAppHeaderDownload: Download nicht möglich
   updateAppTextDownload: Bitte aktualisiere deine App auf die neueste Version. Sei dir bewusst, dass nicht alle Android Funktionen bereits auf IOS verfügbar sind.
-  updateAppTextDownloadApk: Der APK-Download ist derzeit nur auf Android und nicht auf IOS verfügbar.
-  updateAppHeader: App aktualisieren
-  updateAppText: "Bitte führe ein Update auf die \nneuste Version der App durch."
-  btnClosePopup: Ok
   checkout_this_project: Sieh dir diese Catrobat Projekt an
-  show_more: Mehr anzeigen
   comments: Kommentare
   send: Senden
   delete: Löschen
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: Gelöscht
   noAdminRights: Du hast keine Administratorenrechte. Bitte melde dich als Administrator an.
   editProject: Projekt bearbeiten
-  closeProjectEditor: Projekteditor schließen
   closeEditorPrompt: Möchtest du deine Änderungen speichern?
   btnDiscard: Verwerfen
   addComment: Kommentar schreiben
@@ -263,8 +199,6 @@ project:
   smile: Lächeln!
   love: Liebe!
   wow: Wooow!
-  linkTitle: Link
-  link: Link in Zwischenablage kopieren
   reactionsText: Likes
   downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuche es später erneut.
   downloadStartText: Download wurde gestartet...
@@ -284,11 +218,8 @@ project:
   translations: Übersetzungen
   createTranslation: Übersetzung erstellen
   deletedComment: '**Gelöscht**'
-  replyLabel: antworten
-  repliesLabel: antwortete
   notForKids: Nicht sicher für Kinder
 remixGraph:
-  title: Remixe
   showRemixGraph: 'Remix Graph'
   by: 'um'
   open: 'Öffne '
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'Nicht verfügbar'
   projectUnknownUser: 'Unbekannter Benutzer'
 noReply: 'Dies ist eine automatische Meldung, bitte antworte nicht auf diese E-Mail'
-accountConfirmation:
-  subject: Deine Catrobat Account Bestätigung
-  message: |
-    Lieber oder Liebe %username%.
-    Um die Aktivierung deines Kontos abzuschließen besuche bitte %confirmationUrl%
-    Dieser Link kann nur einmal verwendet werden, um dein Konto zu validieren.
-    Mit freundlichen Grüßen,
-    Dein Catrobat Team.
-  messageHtml: |
-    <p>
-    Hallo %username%,<br>
-    <br>
-    um die Aktivierung deines Kontos abzuschließen, klicke bitte <a href="%confirmationUrl%">hier.</a><br>
-    Dieser Link kann nur einmal verwendet werden, um dein Konto zu bestätigen.<br>
-    <br>
-    Viele Grüße,<br>
-    Dein Catrobat-Team.
-    </p>
 newAccountConfirmation:
   subject: "Bitte verifiziere deine E-Mail-Adresse"
   welcome: "Willkommen in der Catrobat Community!"
@@ -403,67 +316,13 @@ parent:
       ignore: "Wenn du das nicht angefordert hast, kannst du diese E-Mail einfach ignorieren."
 passwordRecovery:
   subject: Deine Catrobat Passwort Wiederherstellung
-  message: |
-    Lieber oder Liebe %username%.
-
-    Du hast ein neues Passwort auf %appplication_url% angefordert, da du dein Passwort vergessen hast.
-    Wenn du kein neues Passwort angefordert hast, ignoriere bitte diese Mail. Dein Passwort läuft ab und wird in 24 Stunden unbrauchbar.
-
-    Um dein Passwort zurückzusetzen und ein neues zu erstellen besuche bitte die folgende Seite: %confirmationUrl%
-
-    Du kannst jederzeit mit deinem Benutzernamen und deinem Passwort auf die %appplication_url% Community zugreifen.
-    Um dies zu tun, besuche einfach die folgende Seite: %loginPage%
-    Um deine Profildaten zu bearbeiten, gehen auf diese Seite: %profilePage%
-
-    Alles Gute,
-    Dein Catrobat Team.
-  messageHtml: |
-    <p>
-    Hallo %username%,<br>
-    <br>
-    du hast auf <a href="%appplication_url%">Pocket Code</a> ein neues Passwort angefordert, weil du dein Passwort vergessen hast.
-    Wenn du das nicht angefordert hast, ignoriere diese E-Mail bitte. Die Anfrage läuft in 24 Stunden ab und wird dann ungültig.<br>
-    <br>
-    Um dein Passwort zurückzusetzen und ein neues zu erstellen, klicke bitte <a href="%confirmationUrl%">hier.</a><br>
-    <br>
-    Mit deinem Benutzernamen und deinem Passwort kannst du jederzeit auf die <a href="%appplication_url%">Pocket Code</a> Community zugreifen.<br>
-    Besuche dafür einfach die folgende Seite: <a href="%loginPage%">Anmeldeseite</a><br>
-    Um deine Profildaten zu bearbeiten, geh auf diese <a href="%profilePage%">Seite</a>.<br>
-    <br>
-    Viele Grüße,<br>
-    Dein Catrobat-Team.
-    </p>
 profile:
   aboutMe: Über mich
   currentlyWorkingOn: Derzeit arbeitet an
-  edit: Profil bearbeiten
-  saveChanges: Änderungen speichern
   newPass: Neues Passwort
   repeatPass: Passwort wiederholen
   oldPass: altes Passwort
-  firstEmail: Meine erste E-Mail
-  secondEmail: Meine zweite E-Mail
-  myPrograms: Meine Projekte
-  follows: Folgt
-  follower: Abonnenten
-  unfollowUser: Entfolgen!
-  followUser: Folgen
-  amountOfPrograms: Anzahl der Projekte
-  form:
-    passwordTooShort: Das neue Passwort muss mindestens %length% Zeichen lang sein.
-    passwordTooLong: Das neue Passwort darf maximal %length% Zeichen lang sein.
-    passwordIsUsername: Passwort und Username dürfen nicht gleich sein.
-    passwordWrong: Falsches Passwort
-    emailNotValid: Diese E-mail Adresse ist ungültig.
-    emailMissing: Fehler beim Speicher dieser E-Mail Adresse. Du musst zumindest eine verifizierte E-Mail Adresse haben.
-    emailExists: Die E-Mail Adresse existiert bereits.
-    usernameNotValid: Dieser Benutzername ist ungültig.
-    usernameMissing: Du musst einen Benutzernamen eingeben.
-    usernameExists: Dieser Benutzername existiert bereits.
-    usernameContainsEmail: Der Benutzername sollte keine E-Mail-Adresse beinhalten.
-    submitSuccess: gespeichert!
   reallyDeleteProgram: Willst du wirklich dein Projekt löschen
-  programsOf: Projekte von
   picture: Profilbild
   changePicture: Bild ändern
   goToScratchProfile: Scratch Profil
@@ -473,14 +332,8 @@ myprofile:
   securitySettings: Sicherheit Einstellungen
   accountSettings: Konto Einstellungen
   accountVerification: Konto bestätigen
-  account: Konto
-  editProfile: Profil bearbeiten
-  edit: Bearbeiten
   done: Fertig
-  checkMail: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
   passwordUpdated: Dein Passwort wurde erfolgreich aktualisiert.
-  avatar: Avatar
-  email: E-Mail
   deleteAccount: Account löschen
   deleteAccountWarning: |
     Bitte beachte:
@@ -491,7 +344,6 @@ myprofile:
   exportDataLoading: Wird heruntergeladen...
   exportDataError: Beim Exportieren deiner Daten ist etwas schiefgegangen. Bitte versuche es später noch einmal.
   exportDataRateLimited: Du kannst deine Daten nur einmal pro Tag exportieren. Bitte versuche es morgen noch einmal.
-  editAccountSettings: Kontoeinstellungen bearbeiten
   profileChangeSuccess: Dein Profil wurde erfolgreich geändert.
   unspecifiedError: Beim Ändern deines Profils ist ein unspezifizierter Fehler aufgetreten. Bitte kontaktiere uns.
   verifyAccountText: Wir schicken dir eine E-Mail mit einem Link, um dein Konto zu bestätigen. Klicke den Link innerhalb der nächsten Stunde an – du kannst nur eine E-Mail pro Tag anfordern.
@@ -548,13 +400,10 @@ termsOfUse:
   bottom2: 'Bitte sende Anregungen bezüglich dieser Nutzungsbedingungen an %email-webmaster%.'
   version: Version 1.3, 4. März 2014
 search:
-  dotdotdot: Suche...
   search: Projekte, Benutzer & Studios suchen
   inMediaLib: In Medienbibliothek suchen
   inMediaCategory: In Medienkategorie suchen
   results: Suchergebnisse
-  resultcount: Deine Suche brachte %count% Ergebnisse
-  fail: Bitte gib zumindest ein Wort ein
   noUsers: Keine Benutzer gefunden
   noProjects: Keine Projekte gefunden
   noStudios: Keine Studios gefunden
@@ -570,7 +419,6 @@ menu:
   mediaLibrary: Medienbibliothek
   studio: Studios
   language: Sprache
-  languageOptionsNotAvailable: Keine Sprachoptionen verfügbar.
 login:
   login: Einloggen
   button:
@@ -582,21 +430,10 @@ login:
     or: "oder"
   passOrUser: Das Passwort oder der Username ist falsch.
   accountSuspended: 'Dein Konto wurde gesperrt. Wenn du glaubst, dass das ein Fehler ist, wende dich bitte an den Support.'
-  noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.
-  forgotPass: Passwort oder Usernamen vergessen?
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
   alreadyReset: Ein Passwort für diesen Account wurde bereits innerhalb der letzten 24 Stunden angefordert.
-  confirmationSend: Eine E-Mail zur Bestätigung der Registrierung wurde an deine E-Mail-Adresse gesendet. Bitte überprüfe deinen Posteingang und aktivieren deinen Account.
-  userOrEmail: Username oder Email
-  changePass: Passwort ändern
-  createAccount: Erstelle ein Konto
-  noAccount: Ich habe keinen Account!
-  alreadyAccount: Hast du bereits einen Account?
-  or: ODER
   username: Benutzername
   email: E-Mail
-  passwordFirst: Passwort
-  passwordSecond: Passwort bestätigen
 register:
   title: Anmelden
   subText: "Wenn du fortfährst, richtest du ein Catrobat-Community-Konto ein und stimmst unseren %var1% und %var2% zu."
@@ -629,14 +466,6 @@ registration:
   consentRevoked:
     title: "Die Zustimmung der Eltern wurde widerrufen"
     message: "Dein Elternteil oder Erziehungsberechtigter hat die Zustimmung für dein Konto widerrufen. Dein Konto ist eingeschränkt, bis die Zustimmung wieder erteilt wird."
-    newEmailPlaceholder: "Neue E-Mail-Adresse der Eltern"
-    changeButton: "Aktualisieren & erneut senden"
-accountRecovery:
-  title: Kontowiederherstellung
-  description: Wenn du dich an die E-Mail oder den Benutzernamen deines Kontos erinnerst, können wir dir einen Link schicken, um dein Passwort zurückzusetzen.
-  button:
-    cancel: Abbrechen
-    submit: Passwort wiederherstellen
 resetPassword:
   request:
     title: "Passwort zurücksetzen"
@@ -649,11 +478,6 @@ resetPassword:
     description: "Wenn ein Konto existiert, das mit deiner E-Mail-Adresse übereinstimmt, wurde soeben ein E-Mail verschickt, das einen Link enthält, mit dem du dein Passwort zurücksetzen kannst. Dieser Link wird in %time% ablaufen."
     descriptionTwo: "Du kannst alle %throttleLimit% Stunden ein neues Passwort anfordern."
     descriptionThree: "Wenn du kein E-Mail erhalten hast, überprüfe bitte deinen Spam-Ordner oder schreibe ein E-Mail an unseren Support unter %email-webmaster%."
-  email:
-    title: "Hallo!"
-    visitLink: "Um dein Passwort zurückzusetzen, besuche bitte folgenden Link"
-    expire: "Dieser Link wird in %time% ablaufen."
-    cheers: "Glückwunsch!"
   newemail:
     title: "Passwort zurücksetzen"
     content: "Du hast vor Kurzem angefordert, das Passwort deines Catrobat-Kontos zurückzusetzen. Klicke auf die Schaltfläche unten, um ein neues Passwort zu wählen. Wenn du das nicht angefordert hast, kannst du diese E-Mail einfach ignorieren."
@@ -663,76 +487,33 @@ resetPassword:
     title: "Passwort zurücksetzen"
     button:
       submit: "Passwort zurücksetzen"
-apk:
-  download: App herunterladen
-  prepare: 'App erstellen'
-  preparing: 'App vorbereiten'
-  text: 'Der Vorgang kann eine Weile dauern'
 format:
   million_abbreviation: M
 #api
 errors:
   unspecified: Es ist ein unspezifizierter Fehler aufgetreten. Bitte kontaktiere uns.
-  username:
-    blank: Benutzername darf nicht leer sein
-    invalid: Dein Benutzername ist ungültig
-    exists: Dieser Benutzername existiert bereits.
-    not_exists: Dieser Benutzername existiert nicht.
-    not_email: Dein Username darf keine E-Mail-Adresse sein.
-    size: Der Benutzername muss mindestens 3 Zeichen lang sein und darf nicht mehr als 180 Zeichen enthalten
-  password:
-    blank: Du hast kein Passwort angegeben.
-    short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
-  country:
-    blank: Du hast kein Land angegeben.
-    invalid: Ungültiges Land
-  email:
-    blank: E-Mail Adresse darf nicht leer sein
-    invalid: Deine E-Mail Adresse scheint ungültig zu sein
-    exists: Die E-Mail Adresse existiert bereits.
-  id:
-    blank: Offene Authentifizierungs ID darf nicht leer sein
-  login: Das Passwort oder der Username ist falsch.
-  post-data: POST-Daten nicht korrekt oder fehlt!
-  checksum:
-    missing: Der Client hat die fileChecksum nicht mitgeschickt! Verwendest du eine veraltete Version von Pocket Code?
-    invalid: Ungültige Prüfsumme
   xml:
     invalid: Ungültiger xml Code
     missing: 'Unbekannter Fehler: project_xml_not_found!'
   file:
-    unexpected: Unerwartete Datei gefunden
     invalid: Ungültige Datei
-  image.missing: In der Projekt XML ist eine Datei gelistet, die nicht im Projekt Ordner vorhanden ist
-  unknown: Unbekannter Fehler
-  token: 'Authentifizierung des Geräts fehlgeschlagen: ungültiger auth-token!'
-  uploadTokenAuthFailed: 'Upload-Token-Authentifizierung fehlgeschlagen.'
-  project:
-    invalid: Ungültiges Projekt.
   languageversion:
     tooold: 'Leider enthält dein Projekt eine alte Version der Catrobat-Sprache! Verwendest du die neueste Version von Pocket Code?'
   projectversion:
     tooold: 'Entschuldigung, du verwendest eine alte Version von Pocket Code. Bitte aktualisiere deine App.'
   authentication:
-    title: Die Anmeldung hat nicht funktioniert
     webview: |
       Deine Benutzerdaten sind falsch.
       Bitte versuche, dich erneut in der App anzumelden.
 success:
   text: Abgeschlossen
-  registration: Registrierung erfolgreich!
-  token: Ok
-  upload: Das Projekt wurde erfolgreich hochgeladen!
   imgUpload: Dein Bild wurde erfolgreich hochgeladen!
-  report: Dein Bericht wurde erfolgreich verschickt!
 time:
   minutes.ago: '{0} < vor 1 Minute |{1} vor 1 Minute |]1, Inf]  vor %count% Minuten'
   hours.ago: '{1} vor 1 Stunde |]1, Inf]  vor %count% Stunden'
   days.ago: '{1} vor 1 Tag |]1, Inf] vor %count% Tagen'
   months.ago: '{1} vor 1 Monat |]1, Inf] vor %count% Monaten'
   years.ago: '{1} vor einem Jahr |]1, Inf] vor mehr als einem Jahr'
-failure:
-  upload: Während dem Upload deiner App ist ein Fehler passiert.
 user:
   verification:
     email: 'Bestätige deine E-Mail-Adresse'
@@ -755,7 +536,6 @@ api:
     passwordInvalidChars: 'Password enthält ungültige Zeichen'
     usernameContainsEmail: "Username darf keine Email Adresse beinhalten"
     usernameContainsLink: "Der Benutzername darf keinen Link enthalten"
-    countryCodeInvalid: "Ungültige Landesvorwahl"
     pictureInvalid: "Profilbild ungültig oder nicht unterstützt"
     dateOfBirthMissing: "Das Geburtsdatum ist erforderlich"
     dateOfBirthInvalid: "Das Geburtsdatum ist ungültig"
@@ -789,61 +569,11 @@ api:
     nameAlreadyInUse: 'Name bereits in Verwendung'
     descriptionMissing: 'Beschreibung fehlt'
     descriptionEmpty: 'Beschreibung leer'
-    descriptionTooShort: 'Beschreibung zu kurz'
     descriptionTooLong: 'Die Beschreibung ist zu lang'
     imageFileInvalid: 'Bilddatei ungültig'
     imageFileInvalidType: 'Bilddatei ungültig'
     imageFileTooLarge: 'Bilddatei zu groß'
-#languages and countries
-language:
-  arabic: Arabisch
-  bulgarian: Bulgarisch
-  catalan: Katalanisch
-  chinese_simplified_han: Chinesisch (Vereinfachte Chinesische Schrift)
-  chinese_traditional_han: Chinesisch (Traditionelle Chinesische Schrift)
-  croatian: Kroatisch
-  czech: Tschechisch
-  danish: Dänisch
-  dutch: Niederländisch
-  english_united_kingdom: Englisch (Vereinigtes Königreich)
-  english_united_states: Englisch (Vereinigte Staaten)
-  estonian: Estnisch
-  filipino: Filipino
-  finnish: Finnisch
-  french: Französisch
-  german: Deutsch
-  greek: Griechisch
-  hebrew: Hebräisch
-  hindi: Hindi
-  hungarian: Ungarisch
-  indonesian: Indonesisch
-  italian: Italienisch
-  japanese: Japanisch
-  korean: Koreanisch
-  latvian: Lettisch
-  lithuanian: Litauisch
-  malay: Malaiisch
-  norwegian: Norwegisch
-  persian: Persisch
-  polish: Polnisch
-  portuguese_brazil: Portugiesisch (Brasilien)
-  portuguese_portugal: Portugiesisch (Portugal)
-  romanian: Rumänisch
-  russian: Russisch
-  serbian: Serbisch
-  slovak: Slowakisch
-  slovenian: Slowenisch
-  spanish_latin_america: Spanisch (Lateinamerika und Karibik)
-  spanish_spain: Spanisch (Spanien)
-  swedish: Schwedisch
-  thai: Thailändisch
-  turkish: Türkisch
-  ukrainian: Ukrainisch
-  vietnamese: Vietnamesisch
-ci:
-  generate: APK generieren
-  pending: Generiere APK
-  download: APK herunterladen
+
 admin:
   maintain:
     diskMaintenance: Festplattenwartung
@@ -851,46 +581,9 @@ admin:
     noRemovableObjects: Keine entfernbaren Objekte verfügbar.
     removableObjects: Entfernbare Objekte
 recommender:
-  similarPrograms: Ähnliche Projekte
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Andere haben auch heruntergeladen
   moreFromThisUser: Mehr von %username%
-pmd:
-  submitBtn: Projekt abgeben
-  submitBox:
-    header: Abgabe
-    text: Du bist im begriff dein Projekt abzugeben. Bitte gib den Projektcode ein.
-    btnText: Abgeben
-  successful:
-    text: Dein Projekt wurde erfolgreich hochgeladen.
-  failed:
-    text: Fehler beim Hochladen des Projekts.
 codeview:
   title: 'Code-Ansicht'
-  showCode: 'Code anzeigen'
-  hideCode: 'Code ausblenden'
-  showStatistics: 'Code-Statistiken anzeigen'
-  hideStatistics: 'Code-Statistiken ausblenden'
-  cantDisplayCode: "Code kann nicht angezeigt werden"
-  cantDisplayStatistics: "Code kann nicht angezeigt werden"
-  totalNumberOf: 'Gesamtzahl von'
-  scenes: 'Szenen'
-  scripts: 'Skripte'
-  bricks: 'Bausteine'
-  objects: 'Figuren und Objekte'
-  looks: 'Aussehen'
-  sounds: 'Klänge'
-  globals: 'Globale'
-  locals: 'Lokale'
-  globalVariables: 'Globale Variablen'
-  localVariables: 'Lokale Variablen'
-  eventBricks: 'Event-Bausteine'
-  controlBricks: 'Steuerung-Bausteine'
-  motionBricks: 'Bewegung-Bausteine'
-  soundBricks: 'Klang-Bausteine'
-  looksBricks: 'Aussehen-Bausteine'
-  penBricks: 'Malstift-Bausteine'
-  dataBricks: 'Daten-Bausteine'
-  specialBricks: 'Spezielle Bausteine'
 codeView:
   title: 'Code-Ansicht'
   loading: 'Code-Ansicht wird geladen...'
@@ -903,19 +596,7 @@ codeView:
 codeStatistics:
   title: "Code-Statistiken"
   error: "Code-Statistiken können nicht angezeigt werden."
-  general: 'Allgemein'
-  bricks: 'Bausteine'
-  eventBricks: 'Ereignisse'
-  controlBricks: 'Steuerung'
-  motionBricks: 'Bewegung'
-  soundBricks: 'Klang'
-  looksBricks: 'Aussehen'
-  penBricks: 'Malstift'
-  dataBricks: 'Daten'
-  deviceBricks: 'Gerät'
-  specialBricks: 'Spezial'
   yourScore: 'Deine Punktzahl:'
-  points: 'Punkte'
   abstraction: 'Abstraktion und Problemzerlegung'
   parallelism: 'Parallelität'
   logicalThinking: 'Logisches Denken'
@@ -931,20 +612,7 @@ footer:
   text: "Schon %project_count% großartige Projekte wurden geteilt – das nächste könnte deins sein. Lade unsere App herunter und leg noch heute los"
 privacy-policy:
   header: Datenschutz-Vereinbarung
-  version: Version 2.2, 17. Oktober 2019
-  text1: Um dir alle Vorteile unserer Dienste und dem verknüpften Benutzerkonto bieten zu können, ist es notwendig gewisse Daten von dir zu sammeln.
-  text2: Um unsere Dienste (Apps und Websites) warten und verbessern zu können und um wissenschaftliche Forschung über ICT und STEM/STEAM-Ausbildung zu betreiben, verwenden wir Google Analytics, Crashlytics und Firebase, alle von Google LLC (USA), sowie Dynatrace von Dynatrace LLC (USA), um Metadaten über die Nutzung unserer Dienste zu erhalten, z.B. Absturzinformationen, Zeitstempel, besuchte Seiten/Bildschirme, Nutzung unserer Apps und Dienste, verwendetes Betriebssystem und Informationen über den Netzwerkanbieter. Diese Analyse und die gesammelten Daten werden nicht mit deinem Profil verknüpft und enthalten keine persönlichen Informationen (die letzten Bits der IP-Adresse werden anonymisiert). Die gesammelten Daten werden jedoch an die Service-Anbieter (Google LLC, USA und Dynatrace LLC, USA) übermittelt. Die Datenverarbeitung basiert auf Vereinbarungen mit Google LLC und Dynatrace LLC. Diese Beziehung zu den Dienstanbietern entspricht der Allgemeinen Datenschutzverordnung der Europäischen Union (EU GDPR) und dem Abkommen zwischen der EU und den USA "Privacy Shield".
-  text3: Um ein Benutzerkonto in unserem System zu erstellen und nutzen, sowie um Nutzer per E-Mail über notwendige Änderungen unserer Dienste/Vereinbarungen zu informieren, werden Nutzername und sofern zur Verfügung gestellt E-Mailadresse von uns gespeichert. Falls der Account via Google Plus oder Facebook erstellt wurde wird zusätzlich ein Identifizierungsschlüssel zu diesen Diensten gespeichert. Diese Daten werden, sofern nicht explizit eingewilligt, nicht für andere Zwecke (z.B. Marketing) verwendet.
-  text4: Auf freiwilliger Basis kann das Heimatland auf der Benutzerseite angegeben werden. Diese Information wird öffentlich auf der Benutzerseite angezeigt und für Forschungs-/Statistikzwecke von uns genutzt. Sie kann über die Benutzerseite jederzeit wieder entfernt werden.
-  text5: Die Nutzung der persönlichen Daten von uns kann jederzeit durch die Löschung des Benutzerkontos auf https://share.catrobat.org widerrufen werden. Durch die Löschung können unsere Dienste weiterhin genutzt werden, jedoch stehen Kontoabhängige Funktionen (z.B. Upload, Kommentieren oder liken) nicht mehr zur Verfügung. Weiters, werden alle mit dem Benutzerkonto verbundenen Inhalte (hochgeladene Programme, Kommentare, etc.) gelöscht.
-  text6: Um Missbrauch unserer Dienste, z.B. durch das Hochladen illegaler Inhalte, werden alle öffentlich zur Verfügung gestellten Daten (hochgeladene Programme, Kommentare) intern mit einem Zeitstempel und persönlicher IP-Adresse gespeichert. Diese Daten werden erst genutzt bzw. weitergeleitet sofern von Behörden eine offizielle Anfrage die auf gültigem Recht beruht vorliegt. Jeder Fall wird jedoch davor einzeln von uns überprüft.
-  text7: Es besteht freiwillig die Möglichkeit den Catrobat-Newsletter (https://catrobat.org/newsletter), der von MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA) zur Verfügung gestellt wird, zu abonnieren. Mit dem Newsletter werden regelmäßig Neuigkeiten über Catrobat und unsere Dienste an die angegebene E-Mailadresse gesendet. Der Newsletter kann jederzeit über einen "Unsubscribe" Link in den Mails abbestellt werden. Dieser Dienst wird von MailChimp betrieben, mit denen wir eine entsprechende Vereinbarung zur Datenverarbeitung abgeschlossen haben und die sich der EU-DSGVO und dem EU-USA "Privacy Shield" verpflichten. Für weitere Details über MailChimp zu erfahren bitten wir direkt ihre Datenschutzvereinbarung und Geschäftsbedingungen aufzurufen.
-  text8: "Alle Dienste werden von der \"International Catrobat Association - Verein zur Förderung freier Software\", einer non-profit Organisation mit Sitz in Graz (Österreich), betrieben. Unsere Vereinbarung unterliegt Europäischem sowie Österreichischem Datenschutzrecht (DSGVO). Um uns zu kontaktieren, bitten wir eine E-Mail an contact@catrobat.org zu senden oder sich per Post an uns zu wenden:\\n\nCatrobat\\n\nc/o Institut für Softwaretechnologie\\n\nTechnische Universität Graz\\n\nInffeldgasse 16b\\n\n8010 Graz, Österreich (EU)."
-  text9: Falls du jünger als 14 Jahre bist muss diese Vereinbarung von deinen Erziehungsberechtigten (üblicherweise die Eltern) akzeptiert werden.
-  text10: Die offizielle englischsprachige Datenschutzerklärung von Catrobat ist im Internet unter %privacy_policy%. verfügbar.
-  disagree-text: Ohne Zustimmung kann kein Benutzerkonto erstellt werden, die Basisfunktionalität kann aber weiterhin genutzt werden.
 catro-notifications:
-  markAsRead: "Als gelesen markieren"
   noFollowers: "Es sieht so aus, als hättest du keine Follower-Benachrichtigungen"
   noComments: "Es sieht so aus, als hättest du keine Kommentarbenachrichtigungen"
   noReactions: "Es sieht so aus, als hättest du keine Reaktionsbenachrichtigungen"
@@ -978,29 +646,16 @@ catro-notifications:
 clipboard:
   success: Link in die Zwischenablage kopiert!
   success_project: Link zum Projekt in die Zwischenablage kopiert!
-  success_user: Link zum Benutzer in die Zwischenablage kopiert!
   fail: Fehler beim Kopieren! :(
 next: Weiter
 previous: Vorheriges
 media-packages:
   title: Medien-Pakete
   description: In den folgenden Kategorien kannst du zusätzliche Figuren und Objekte zu deinem PocketCode Programm hinzufügen.
-  thumb-size:
-    description: Vorschaugröße
-    sm: klein
-    md: mittel
-    lg: groß
   theme-special: "%flavor% Themen-Special"
   search-results: Medienbibliothek Suchergebnisse
-  no-results: Deine Suche lieferte 0 Ergebnisse. Bitte verwende nur englische Suchbegriffe.
-  download_these_files: Speichern
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
-  pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Alle Rechte vorbehalten.'
 noscript:
   warning: "Diese Website braucht JavaScript, um zu funktionieren. Bitte aktiviere JavaScript in deinem Browser oder bitte einen Erwachsenen um Hilfe."
@@ -1010,10 +665,6 @@ cookie-consent:
   decline: "Ablehnen"
   privacy-link: "Datenschutz-Vereinbarung"
   settings-link: "Cookie-Einstellungen"
-agree: Zustimmen
-disagree: Ablehnen
-profileLoader:
-  noProfiles: Zur Zeit existieren keine Profile.
 element: 'Element'
 elements: 'Elemente'
 share:
@@ -1022,7 +673,6 @@ share:
   success: 'Teilen erfolgreich'
 copy: 'Link kopieren'
 checkOutProject: 'Sieh dir dieses Projekt an:'
-checkOutUser: 'Sieh dir diese Benutzer an:'
 community: 'Catrobat Community'
 back_to_app: 'Community verlassen'
 category:
@@ -1038,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'Erreichte Ziele'
-    badge: 'neu'
   overview:
     header: 'Erreichte Ziele'
     most_recent_achievement:
@@ -1130,10 +779,7 @@ extensions:
       title: Mehrspieler
 studio:
   title: 'Studios'
-  singular: 'Studio'
   create_studio: 'Studio erstellen'
-  delete_studio: 'Studio löschen'
-  cancel_studio: 'Abbrechen'
   studio_name: 'Studio-Name'
   studio_description: 'Beschreibung ändern'
   is_public: 'Studio veröffentlichen?'
@@ -1150,8 +796,6 @@ studio:
   cover_image_remove: 'Bild entfernen'
   popular: 'Beliebte Studios'
   join: 'Beitreten'
-  leave: 'Verlassen'
-  report: 'Melden'
   public: 'öffentlich'
   private: 'privat'
   overview:
@@ -1174,16 +818,12 @@ studio:
     admin: 'Administrator'
     member: 'Mitglied'
   details:
-    add_project: 'klicken, um das Projekt hinzuzufügen'
     add: 'Hinzufügen'
     showMore: 'mehr anzeigen'
-    showLess: 'weniger zeigen'
     are_you_sure: 'Bist du sicher?'
     no_way_of_return: 'Das kann nicht rückgängig gemacht werden.'
     delete_it: 'Löschen'
-    remove_project: 'Aus Studio entfernen'
     remove_project_error: 'Projekt konnte nicht aus dem Studio entfernt werden!'
-    remove_project_success: 'Projekt erfolgreich aus dem Studio entfernt!'
     no_projects: 'Studio enthält noch keine Projekte'
     projects:
       title: 'Projekte am Gerät'
@@ -1199,10 +839,8 @@ studio:
       no_projects_empty_state: 'Du hast noch keine Projekte zum Hinzufügen. Erstelle zuerst eins in Pocket Code!'
       add_selected: 'Ausgewählte hinzufügen'
     no_available_projects: 'Keine Projekte zum Hinzufügen verfügbar.'
-    updateCoverError: 'Beim Aktualisieren des Studio-Covers ist etwas schiefgelaufen!'
     join: 'Beitreten'
     leave: 'Verlassen'
-    report: 'Melden'
     pending: 'Ausstehend'
     decline: 'Abgelehnt'
     comments:
@@ -1222,7 +860,6 @@ studio:
       add_comment: '%user% hat ein Kommentar hinterlassen.'
     members_list:
       title: 'Studio-Mitglieder'
-      project_count: '{0} Keine Studio Projekte |{1} 1 Studio Projekt |]1,Inf] %count% Studio Projekte'
       no_studio_projects: 'Keine Studio-Projekte'
       one_studio_project: '1 Studio-Projekt'
       n_studio_projects: '%count% Studio-Projekte'
@@ -1232,7 +869,6 @@ studio:
       ban_failed: 'Beim Bannen dieses Mitglieds ist etwas schiefgelaufen. Versuche es später noch einmal.'
       demote_member: 'Admin zum Mitglied herabstufen'
       demotion_failed: 'Beim Herabstufen dieses Admins ist etwas schiefgegangen. Versuche es später noch einmal.'
-      last_admin: 'Der letzte Admin dieses Studios kann nicht herabgestuft werden.'
     join_requests:
       title: 'Beitrittsanfragen'
       accept: 'Akzeptieren'
@@ -1262,7 +898,6 @@ media_library:
   no_results: 'Keine Ergebnisse gefunden.'
   assets_count: 'Medien'
   view_all: 'Alle anzeigen'
-  view_all_category: 'Alle %category% anzeigen'
   back_to_app: 'Zurück zur App'
 snackbar:
   project_not_found: 'Das angeforderte Projekt ist nicht verfügbar'
@@ -1316,14 +951,6 @@ moderation:
     rate_limited: "Du führst Studio-Aktionen zu schnell aus. Bitte warte einen Moment."
   hidden_notice:
     project: "Dieses Projekt wurde aufgrund von Meldungen aus der Community ausgeblendet."
-    comment: "Dieser Kommentar wurde aufgrund von Meldungen aus der Community ausgeblendet."
-    user: "Dieses Profil wurde aufgrund von Meldungen aus der Community ausgeblendet."
     user_own: "Dein Konto wurde aufgrund von Meldungen aus der Community gesperrt. Du kannst Einspruch gegen diese Entscheidung einlegen."
-    studio: "Dieses Studio wurde aufgrund von Meldungen aus der Community ausgeblendet."
-  notification:
-    content_hidden: "Dein Inhalt (%content_type%) wurde aufgrund von Meldungen aus der Community ausgeblendet. Du kannst Einspruch gegen diese Entscheidung einlegen."
-    appeal_approved: "Deinem Einspruch wurde stattgegeben. Dein Inhalt ist wieder sichtbar."
-    appeal_rejected: "Dein Einspruch wurde geprüft und die Entscheidung, deinen Inhalt auszublenden, bleibt bestehen."
-    admin_review_needed: "Inhalt wurde automatisch ausgeblendet und muss geprüft werden."
 Reports: Meldungen
 members: Mitglieder

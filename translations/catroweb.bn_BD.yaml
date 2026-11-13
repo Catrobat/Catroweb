@@ -8,19 +8,12 @@ meta.og.description.login: কমিউনিটির সাথে তোমা
 meta.og.title.register: ক্যাট্রোব্যাট অ্যাকাউন্ট তৈরি করো
 meta.og.description.register: ক্যাট্রোব্যাট কমিউনিটিতে যোগ দাও আর আজই তোমার সৃজনশীল প্রকল্প শেয়ার করা শুরু করো।
 meta.og.description.profile: 'ক্যাট্রোব্যাটে %username% – তার প্রকল্প আর অর্জনগুলো দেখো।'
-localLanguage: ইংরেজি
 username: ব্যবহারকারীর নাম
 password: পাসওয়ার্ড
-createNewPassword: নতুন পাসওয়ার্ড তৈরি করো
-accountSettings: অ্যাকাউন্ট সেটিংস
 email: ই-মেল
-aboutPocketCode: পকেট কোড সম্পর্কে
 about: ক্যাট্রোব্যাট সম্পর্কে
-education: শিক্ষা
 chat: চ্যাট এবং ফোরাম
-privacyGuide: গোপনীয়তা সচেতনতা গাইড
 others: অন্যান্য
-tutorials: সাহায্য
 googlePlay: গুগল প্লে
 iosAppStore: iOS অ্যাপ স্টোর
 instagram: ইনস্টাগ্রাম
@@ -45,9 +38,7 @@ notesAndCreditsDescription: তুমি এই প্রকল্পটি ক�
 projectImportedFromScratch: এই প্রকল্পটি MIT Scratch থেকে আনা হয়েছে। তুমি মূল প্রকল্পটি দেখতে পারো
 scratchImportedProjectLinkHere: এখানে।
 country: দেশ
-loginText: লগইন
 privacyPolicy: গোপনীয়তার নীতি
-imprint: প্রকাশনা তথ্য
 projectDetails: বিস্তারিত
 somethingWentWrong: 'উফ, কিছু একটা কাজ করেনি। আবার চেষ্টা করো!'
 accountNotVerified: 'নিশ্চিত করো যে তুমি লগ ইন করেছ এবং তোমার অ্যাকাউন্টের ইমেইল যাচাই করা আছে।'
@@ -55,36 +46,28 @@ accountSuspended: 'কমিউনিটির রিপোর্টের ক�
 doesNotExist: 'যা খুঁজছ তা নেই।'
 pleaseTryAgain: 'আবার চেষ্টা করো!'
 tryAgainButton: 'আবার চেষ্টা করো'
-oldVersionError: 'পকেট কোডের সবচেয়ে নতুন সংস্করণে আপডেট করো!'
 more: 'আরও'
 less: 'কম'
 show-more: 'আরও দেখাও'
-show-less: 'কম দেখাও'
 more-information: 'আরো তথ্য'
 less-information: 'কম তথ্য'
 ok: বুঝেছি
-clickToDownloadProgram: "উদাহরণ প্রকল্পটি ডাউনলোড করতে %link_start% এখানে %link_end% ক্লিক করো।"
-registrationError: 'ব্যবহারকারীর নাম বা ইমেইল ঠিকানা ইতিমধ্যে ব্যবহৃত হচ্ছে।'
 notifications: 'বিজ্ঞপ্তি'
 allNotifications: 'সব'
 FollowersNotifications: 'অনুসারীরা'
 LikeNotifications: 'প্রতিক্রিয়া'
 CommentNotifications: 'মন্তব্যসমূহ'
 RemixNotifications: 'রিমিক্স'
-wellDone: "দারুণ করেছ!"
 done: "সম্পন্ন!"
 notificationsReadMessage: "মনে হচ্ছে তোমার কোনো বিজ্ঞপ্তি নেই।"
-confirmMessage: "হ্যাঁ, মুছে ফেলো"
 cancelMessage: "বাতিল"
 notificationsUnauthorizedError: "ব্যবহারকারীকে অনুমোদন করা যায়নি"
 notificationsClearError: "বিজ্ঞপ্তিগুলো পড়া হয়েছে হিসেবে চিহ্নিত করা যায়নি!"
-pleaseWait: "একটু অপেক্ষা করো..."
 projects: "প্রকল্প"
 users: "ব্যবহারকারী"
 studios: "স্টুডিও"
 oauthPopUpTitle: "বাহ্যিক অ্যাকাউন্ট সাইন ইন তথ্য"
 oauthInfo: 'তুমি এইমাত্র একটি বাহ্যিক অ্যাকাউন্ট দিয়ে লগ ইন করেছ। আমরা তোমার জন্য একটি এলোমেলো ব্যবহারকারীর নাম তৈরি করেছি। তুমি যদি তোমার ব্যবহারকারীর নাম বদলাতে বা তোমার অ্যাকাউন্টের জন্য নতুন পাসওয়ার্ড তৈরি করতে চাও, তাহলে তোমার প্রোফাইল পেজে যাও।'
-oauthHere: "এখানে"
 statistics: "পরিসংখ্যান"
 languageSelection: "ভাষা নির্বাচন"
 color-scheme:
@@ -96,16 +79,10 @@ color-scheme:
   dark: 'ডার্ক'
   dark_description: 'গাঢ় চেহারা'
   apply: 'প্রয়োগ করো'
-indexPage:
-  recommendedSection:
-    info:
-      title: 'এখানে কোন প্রকল্পগুলো সুপারিশ করা হয়?'
-      description: 'তোমার প্রকল্প যত বেশি প্রতিক্রিয়া (থাম্বস আপ, হাসি ...) পাবে, এই তালিকায় সেটি তত উপরে দেখাবে।'
 follower:
   follows: অনুসরণ করছ
   followers: অনুসারীরা
   follow: অনুসরণ
-  username: ব্যবহারকারী
   followsMe: আমাকে অনুসরণ করে
   noFollowing: তুমি এখন কাউকে অনুসরণ করছ না।
   noFollowers: এখন তোমার কোনো অনুসারী নেই।
@@ -116,14 +93,6 @@ follower:
   unfollowQuestion: "তুমি কি নিশ্চিত যে এই ব্যবহারকারীকে আনফলো করতে চাও?"
   unfollowButton: "%username%-কে আনফলো করো"
 project:
-  welcome:
-    title: ক্যাট্রোব্যাটের %theme%-এ স্বাগতম
-    title_mindstorms: Mindstorms EV3 ও NXT-এর জন্য ক্যাট্রোব্যাটের সাইটে স্বাগতম
-    subtitle: গল্প, গেম আর আরও অনেক কিছু তৈরি করো...
-    subtitle_embroidery: তোমার টি-শার্ট, ব্যাগ, প্যান্ট বা স্মার্টফোন কভারে নিজের নকশা সেলাই করো!
-    subtitle_mindstorms: তোমার Lego Mindstorms EV3 ও NXT রোবট দিয়ে নিজের প্রকল্প তৈরি করো
-    download: অ্যাপটি ডাউনলোড করো
-    statistics: আরও পরিসংখ্যান
   featured: বিশেষ
   open: খোলো
   download: ডাউনলোড
@@ -148,9 +117,6 @@ project:
       retention: আপলোড করা প্রকল্প কিছুদিন নিষ্ক্রিয় থাকলে স্বয়ংক্রিয়ভাবে মুছে যায়। নিয়মিত লগ ইন করো বা তোমার প্রকল্পে ডাউনলোড পাও, তাহলে এটি বেশিদিন থাকবে।
       protection: বিশেষভাবে ভালো বা জনপ্রিয় প্রকল্পগুলোকে মডারেটররা স্বয়ংক্রিয় মুছে ফেলা থেকে রক্ষা করতে পারেন।
   example: উদাহরণ
-  newest: নতুন প্রকল্প
-  recommended: সুপারিশকৃত প্রকল্প
-  scratchremixes: Scratch রিমিক্স
   noProjects: এখন কোনো প্রকল্প নেই।
   shareAction: শেয়ার করো
   deleteAction: প্রকল্প মুছে ফেলো
@@ -190,17 +156,10 @@ project:
     তোমার এই কাজ আর ফেরানো যাবে না!
     হ্যাঁ, মুছে ফেলো!
     বাতিল
-  tooLongName: প্রকল্পের নাম খুব লম্বা!
-  tooLongDescription: প্রকল্পের বর্ণনা খুব লম্বা!
-  tooLongCredits: প্রকল্পের নোট ও কৃতজ্ঞতা খুব লম্বা!
   my_projects: আমার শেয়ার করা প্রকল্প
   trending: ট্রেন্ডিং প্রকল্প
   popular: জনপ্রিয় প্রকল্প
-  most:
-    viewed: সবচেয়ে বেশি দেখা
-    downloaded: সবচেয়ে বেশি ডাউনলোড করা
   random: এলোমেলো প্রকল্প
-  related: সম্পর্কিত প্রকল্প
   browse:
     explore: 'প্রকল্প ঘুরে দেখো'
     no_projects: "তুমি এখনো কোনো প্রকল্প তৈরি করোনি"
@@ -214,36 +173,14 @@ project:
     tooltip: 'প্রকল্প কিছুদিন নিষ্ক্রিয় থাকলে স্বয়ংক্রিয়ভাবে মুছে যায়। আরও ডাউনলোড পাও বা নিয়মিত লগ ইন করো, তাহলে এটি বেশিদিন থাকবে।'
     tooltip_protected: 'এই প্রকল্পটি সুরক্ষিত এবং স্বয়ংক্রিয়ভাবে মুছে যাবে না।'
   downloads: '%downloads% বার ডাউনলোড'
-  sample: উদাহরণ প্রকল্প
   views: '%views% বার দেখা'
   likes:
     likersTitle: "যারা এই প্রকল্পে প্রতিক্রিয়া দিয়েছে"
     all: "সব"
-  remixes: '{0}০টি রিমিক্স |{1}১টি রিমিক্স |]1,Inf]%remixes%টি রিমিক্স'
-  newRemixesNotificationTitle: '|{1}"%programName%"-এর ১টি নতুন রিমিক্স আছে: |]1,Inf] "%programName%"-এর %remixes%টি নতুন রিমিক্স আছে:'
-  submitted: জমা দেওয়া প্রকল্প
-  uploaded: আপলোড করা প্রকল্প
-  reportAsInappropriate: অনুপযুক্ত হিসেবে রিপোর্ট করো
-  reportProgram: প্রকল্প রিপোর্ট করো
   languageVersion: 'ক্যাট্রোব্যাট ভাষার সংস্করণ: %languageVersion%'
-  reportLoginText: এই প্রকল্পটি রিপোর্ট করতে %login% করো।
-  reportDialogHeader: তুমি কেন এই প্রকল্পটি রিপোর্ট করতে চাও?
-  reportDialogReason: একটি কারণ লেখো
-  reportRadioButtonInappropriate: এটি অনুপযুক্ত
-  reportRadioButtonCopyright: কপিরাইট লঙ্ঘন
-  reportRadioButtonSpam: এটি স্প্যাম
-  reportRadioButtonDislike: আমার এটি পছন্দ নয়
-  reportOwnProgram: তুমি নিজের প্রকল্প রিপোর্ট করতে পারবে না।
-  reportAlready: তুমি এই প্রকল্পটি আগেই রিপোর্ট করেছ।
-  reportDone: তুমি এই প্রকল্পটি রিপোর্ট করেছ!
   updateAppHeaderDownload: ডাউনলোড সম্ভব নয়
   updateAppTextDownload: তোমার অ্যাপটি সবচেয়ে নতুন সংস্করণে আপডেট করো। মনে রেখো, Android-এর সব ফিচার এখনো iOS-এ পাওয়া যায় না।
-  updateAppTextDownloadApk: APK ডাউনলোড এখন শুধু Android-এ পাওয়া যায়, iOS-এ নয়।
-  updateAppHeader: অ্যাপ আপডেট করো
-  updateAppText: তোমার অ্যাপটি সবচেয়ে নতুন সংস্করণে আপডেট করো।
-  btnClosePopup: ঠিক আছে
   checkout_this_project: এই ক্যাট্রোব্যাট প্রকল্পটি দেখো
-  show_more: আরও দেখাও
   comments: মন্তব্যসমূহ
   send: পাঠাও
   delete: মুছে ফেলো
@@ -255,7 +192,6 @@ project:
   deleted_popup_header: মুছে ফেলা হয়েছে
   noAdminRights: তোমার অ্যাডমিন অধিকার নেই। অ্যাডমিন হিসেবে লগ ইন করো।
   editProject: প্রকল্প সম্পাদনা করো
-  closeProjectEditor: প্রকল্প সম্পাদক বন্ধ করো
   closeEditorPrompt: তুমি কি তোমার পরিবর্তনগুলো সংরক্ষণ করতে চাও?
   btnDiscard: বাদ দাও
   addComment: একটি মন্তব্য লেখো
@@ -263,8 +199,6 @@ project:
   smile: হাসি!
   love: ভালোবাসা!
   wow: ওয়াও!
-  linkTitle: লিংক
-  link: প্রকল্পের লিংক ক্লিপবোর্ডে কপি করো
   reactionsText: প্রতিক্রিয়া
   downloadErrorText: প্রকল্প ডাউনলোড করার সময় একটি ত্রুটি হয়েছে। একটু পরে আবার চেষ্টা করো।
   downloadStartText: ডাউনলোড শুরু হয়েছে...
@@ -284,11 +218,8 @@ project:
   translations: অনুবাদ
   createTranslation: অনুবাদ তৈরি করো
   deletedComment: '**মুছে ফেলা হয়েছে**'
-  replyLabel: উত্তর
-  repliesLabel: উত্তর
   notForKids: শিশুদের জন্য নিরাপদ নয়
 remixGraph:
-  title: রিমিক্স
   showRemixGraph: 'রিমিক্স গ্রাফ'
   by: 'নির্মাতা'
   open: 'খোলো'
@@ -308,24 +239,6 @@ remixGraph:
   projectNotAvailable: 'পাওয়া যাচ্ছে না'
   projectUnknownUser: 'অজানা ব্যবহারকারী'
 noReply: এটি একটি স্বয়ংক্রিয় বার্তা - দয়া করে এই ইমেইলের সরাসরি উত্তর দিও না।
-accountConfirmation:
-  subject: তোমার ক্যাট্রোব্যাট অ্যাকাউন্ট নিশ্চিতকরণ
-  message: |
-    প্রিয় %username%,
-    তোমার অ্যাকাউন্ট চালু করা শেষ করতে এই লিংকে যাও: %confirmationUrl%
-    তোমার অ্যাকাউন্ট যাচাই করতে এই লিংকটি শুধু একবার ব্যবহার করা যাবে।
-    শুভেচ্ছান্তে,
-    তোমার ক্যাট্রোব্যাট টিম।
-  messageHtml: |
-    <p>
-    প্রিয় %username%,<br>
-    <br>
-    তোমার অ্যাকাউন্ট চালু করা শেষ করতে <a href="%confirmationUrl%">এখানে ক্লিক করো।</a><br>
-    তোমার অ্যাকাউন্ট যাচাই করতে এই লিংকটি শুধু একবার ব্যবহার করা যাবে।<br>
-    <br>
-    শুভেচ্ছান্তে,<br>
-    তোমার ক্যাট্রোব্যাট টিম।
-    </p>
 newAccountConfirmation:
   subject: "তোমার ইমেইল ঠিকানা যাচাই করো"
   welcome: "ক্যাট্রোব্যাটে স্বাগতম!"
@@ -403,63 +316,13 @@ parent:
       ignore: "তুমি যদি এটি না চেয়ে থাকো, তাহলে নিশ্চিন্তে এই ইমেইলটি উপেক্ষা করতে পারো।"
 passwordRecovery:
   subject: তোমার ক্যাট্রোব্যাট পাসওয়ার্ড পুনরুদ্ধার
-  message: |
-    প্রিয় %username%,
-    তুমি পাসওয়ার্ড ভুলে গেছ বলে %appplication_url%-এ তোমার পাসওয়ার্ড রিসেট করার অনুরোধ করেছ।
-    তুমি যদি এই অনুরোধ না করে থাকো, তাহলে এটি উপেক্ষা করো। ২৪ ঘণ্টা পর এটির মেয়াদ শেষ হয়ে অকেজো হয়ে যাবে।
-    তোমার পাসওয়ার্ড রিসেট করে নতুন একটি তৈরি করতে এই পেজে যাও: %confirmationUrl%
-    %appplication_url% কমিউনিটিতে ঢুকতে তুমি যেকোনো সময় তোমার ব্যবহারকারীর নাম ও পাসওয়ার্ড ব্যবহার করতে পারো।
-    এর জন্য শুধু এই পেজে যাও: %loginPage%
-    তোমার প্রোফাইলের তথ্য সম্পাদনা করতে এই পেজে যাও: %profilePage%
-    শুভেচ্ছান্তে,
-    তোমার ক্যাট্রোব্যাট টিম।
-  messageHtml: |
-    <p>
-    প্রিয় %username%,<br>
-    <br>
-    তুমি পাসওয়ার্ড ভুলে গেছ বলে <a href="%appplication_url%">Pocket Code</a>-এ তোমার পাসওয়ার্ড রিসেট করার অনুরোধ করেছ।
-    তুমি যদি এই অনুরোধ না করে থাকো, তাহলে এটি উপেক্ষা করো। ২৪ ঘণ্টা পর এটির মেয়াদ শেষ হয়ে অকেজো হয়ে যাবে।<br>
-    <br>
-    তোমার পাসওয়ার্ড রিসেট করে নতুন একটি তৈরি করতে <a href="%confirmationUrl%">এখানে ক্লিক করো।</a><br>
-    <br>
-    <a href="%appplication_url%">Pocket Code</a> কমিউনিটিতে ঢুকতে তুমি যেকোনো সময় তোমার ব্যবহারকারীর নাম ও পাসওয়ার্ড ব্যবহার করতে পারো।<br>
-    এর জন্য শুধু এই পেজে যাও: <a href="%loginPage%">লগইন পেজ</a><br>
-    তোমার প্রোফাইলের তথ্য সম্পাদনা করতে এই <a href="%profilePage%">পেজে</a> যাও।<br>
-    <br>
-    শুভেচ্ছান্তে,<br>
-    তোমার ক্যাট্রোব্যাট টিম।
-    </p>
 profile:
   aboutMe: আমার সম্পর্কে
   currentlyWorkingOn: এখন যা নিয়ে কাজ করছি
-  edit: তোমার প্রোফাইল সম্পাদনা করো
-  saveChanges: পরিবর্তনগুলো সংরক্ষণ করো
   newPass: নতুন পাসওয়ার্ড
   repeatPass: পাসওয়ার্ড আবার লেখো
   oldPass: পুরাতন পাসওয়ার্ড
-  firstEmail: আমার প্রথম ইমেল
-  secondEmail: আমার দ্বিতীয় ইমেল
-  myPrograms: আমার প্রকল্পগুলি
-  follows: অনুসরণ
-  follower: অনুসরণকারী
-  unfollowUser: এই ব্যবহারকারীকে আনফলো করো!
-  followUser: এই ব্যবহারকারীকে অনুসরণ করো!
-  amountOfPrograms: প্রকল্পের পরিমাণ
-  form:
-    passwordTooShort: নতুন পাসওয়ার্ডে কমপক্ষে %length% অক্ষর থাকতে হবে।
-    passwordTooLong: নতুন পাসওয়ার্ডে সর্বাধিক %length% অক্ষর থাকতে পারে।
-    passwordIsUsername: পাসওয়ার্ড ব্যবহারকারীর নাম থেকে আলাদা হতে হবে।
-    passwordWrong: ভুল পাসওয়ার্ড
-    emailNotValid: এই ইমেল ঠিকানাটি বৈধ নয়।
-    emailMissing: এই ইমেইল ঠিকানা আপডেট করার সময় ত্রুটি হয়েছে। তোমার অন্তত একটি যাচাই করা ইমেইল ঠিকানা থাকতে হবে।
-    emailExists: এই ইমেইল ঠিকানাটি আগে থেকেই আছে।
-    usernameNotValid: এই ব্যবহারকারীর নামটি বৈধ নয়।
-    usernameMissing: তোমার একটি ব্যবহারকারীর নাম থাকতে হবে।
-    usernameExists: এই ব্যবহারকারীর নামটি আগে থেকেই আছে।
-    usernameContainsEmail: ব্যবহারকারীর নামে কোনো ইমেইল ঠিকানা থাকা উচিত নয়।
-    submitSuccess: সংরক্ষিত!
   reallyDeleteProgram: তুমি কি সত্যিই তোমার প্রকল্পটি মুছে ফেলতে চাও
-  programsOf: 'যার প্রকল্প:'
   picture: প্রোফাইল ছবি
   changePicture: ছবি বদলাও
   goToScratchProfile: স্ক্র্যাচ-এ প্রোফাইল
@@ -469,14 +332,8 @@ myprofile:
   securitySettings: পাসওয়ার্ড বদলাও
   accountSettings: অ্যাকাউন্ট সেটিংস
   accountVerification: অ্যাকাউন্ট যাচাই করো
-  account: অ্যাকাউন্ট
-  editProfile: প্রোফাইল সম্পাদনা করো
-  edit: সম্পাদনা করো
   done: সম্পন্ন
-  checkMail: তোমার ইমেইল ঠিকানায় একটি ইমেইল পাঠানো হয়েছে। তোমার ইনবক্স দেখো।
   passwordUpdated: তোমার পাসওয়ার্ড সফলভাবে আপডেট হয়েছে।
-  avatar: অ্যাভাটার
-  email: ই-মেইল
   deleteAccount: অ্যাকাউন্ট মুছে ফেলো
   deleteAccountWarning: |
     সাবধান:
@@ -487,7 +344,6 @@ myprofile:
   exportDataLoading: ডাউনলোড হচ্ছে...
   exportDataError: তোমার তথ্য এক্সপোর্ট করার সময় কিছু একটা ভুল হয়েছে। একটু পরে আবার চেষ্টা করো।
   exportDataRateLimited: তুমি দিনে শুধু একবার তোমার তথ্য এক্সপোর্ট করতে পারো। কাল আবার চেষ্টা করো।
-  editAccountSettings: অ্যাকাউন্ট সেটিংস সম্পাদনা করো
   profileChangeSuccess: তোমার প্রোফাইল সফলভাবে বদলানো হয়েছে।
   unspecifiedError: তোমার প্রোফাইল বদলানোর সময় কিছু একটা কাজ করেনি। আবার চেষ্টা করো, আর বারবার এমন হলে আমাদের জানাও!
   verifyAccountText: তোমার অ্যাকাউন্ট যাচাই করার জন্য আমরা তোমাকে একটি লিংকসহ ইমেইল পাঠাব। পরের এক ঘণ্টার মধ্যে লিংকে ক্লিক করতে ভুলো না, তুমি দিনে শুধু একটি ইমেইল চাইতে পারো।
@@ -544,13 +400,10 @@ termsOfUse:
   bottom2: 'এই ব্যবহারের শর্তাবলী নিয়ে তোমার কোনো পরামর্শ থাকলে %email-webmaster%-এ মেইল করো।'
   version: সংস্করণ ১.৩, ৪ মার্চ ২০১৪
 search:
-  dotdotdot: অনুসন্ধান...
   search: প্রকল্প, ব্যবহারকারী ও স্টুডিও খোঁজো
   inMediaLib: মিডিয়া লাইব্রেরিতে খোঁজো
   inMediaCategory: মিডিয়া বিভাগে খোঁজো
   results: 'যার ফলাফল:'
-  resultcount: তোমার অনুসন্ধানে %count%টি ফলাফল পাওয়া গেছে
-  fail: অন্তত একটি অনুসন্ধান শব্দ লেখো
   noUsers: কোনো ব্যবহারকারী পাওয়া যায়নি
   noProjects: কোনো প্রকল্প পাওয়া যায়নি
   noStudios: কোনো স্টুডিও পাওয়া যায়নি
@@ -566,7 +419,6 @@ menu:
   mediaLibrary: মিডিয়া লাইব্রেরি
   studio: স্টুডিও
   language: ভাষা
-  languageOptionsNotAvailable: কোনো ভাষার বিকল্প নেই।
 login:
   login: লগইন
   button:
@@ -578,21 +430,10 @@ login:
     or: "অথবা"
   passOrUser: তোমার পাসওয়ার্ড বা ব্যবহারকারীর নাম ভুল ছিল।
   accountSuspended: 'তোমার অ্যাকাউন্ট স্থগিত করা হয়েছে। তোমার যদি মনে হয় এটি ভুল, তাহলে সাপোর্টের সাথে যোগাযোগ করো।'
-  noUsername: তোমার ব্যবহারকারীর নাম বা ইমেইল ঠিকানা পাওয়া যায়নি।
-  forgotPass: পাসওয়ার্ড বা ব্যবহারকারীর নাম ভুলে গেছ?
   recoverPassSend: তোমার ইমেইল ঠিকানায় একটি ইমেইল পাঠানো হয়েছে। তোমার ইনবক্স দেখো।
   alreadyReset: এই ব্যবহারকারীর জন্য পাসওয়ার্ড ইতিমধ্যে গত ২৪ ঘন্টা মধ্যে অনুরোধ করা হয়েছে।
-  confirmationSend: তোমার নিবন্ধন নিশ্চিত করতে তোমার ইমেইল ঠিকানায় একটি ইমেইল পাঠানো হয়েছে। তোমার ইনবক্স দেখো এবং তোমার অ্যাকাউন্ট চালু করো।
-  userOrEmail: ব্যবহারকারীর নাম অথবা ইমেইল
-  changePass: পাসওয়ার্ড বদলাও
-  createAccount: একটি অ্যাকাউন্ট তৈরি করো
-  noAccount: তোমার অ্যাকাউন্ট নেই?
-  alreadyAccount: আগে থেকেই অ্যাকাউন্ট আছে?
-  or: অথবা
   username: ব্যবহারকারীর নাম
   email: ইমেইল
-  passwordFirst: পাসওয়ার্ড
-  passwordSecond: পাসওয়ার্ড নিশ্চিত করো
 register:
   title: সাইন আপ
   subText: "এগিয়ে গিয়ে তুমি একটি ক্যাট্রোব্যাট কমিউনিটি অ্যাকাউন্ট তৈরি করছ এবং আমাদের %var1% ও %var2%-এ রাজি হচ্ছ।"
@@ -625,14 +466,6 @@ registration:
   consentRevoked:
     title: "বাবা-মায়ের সম্মতি প্রত্যাহার করা হয়েছে"
     message: "তোমার বাবা-মা বা অভিভাবক তোমার অ্যাকাউন্টের সম্মতি প্রত্যাহার করেছেন। আবার সম্মতি না দেওয়া পর্যন্ত তোমার অ্যাকাউন্টের সুবিধা সীমিত থাকবে।"
-    newEmailPlaceholder: "বাবা-মায়ের নতুন ইমেইল"
-    changeButton: "আপডেট করে আবার পাঠাও"
-accountRecovery:
-  title: একাউন্ট পুনরুদ্ধার
-  description: তোমার অ্যাকাউন্টের ইমেইল বা ব্যবহারকারীর নাম মনে থাকলে আমরা তোমার পাসওয়ার্ড রিসেট করার একটি লিংক পাঠাতে পারি।
-  button:
-    cancel: বাতিল
-    submit: পাসওয়ার্ড পুনরুদ্ধার করো
 resetPassword:
   request:
     title: "তোমার পাসওয়ার্ড রিসেট করো"
@@ -645,11 +478,6 @@ resetPassword:
     description: "তোমার ইমেইলের সাথে মেলে এমন কোনো অ্যাকাউন্ট থাকলে এইমাত্র একটি ইমেইল পাঠানো হয়েছে, যাতে তোমার পাসওয়ার্ড রিসেট করার একটি লিংক আছে। এই লিংকের মেয়াদ %time%-এ শেষ হবে।"
     descriptionTwo: "তুমি প্রতি %throttleLimit% ঘণ্টায় একবার নতুন পাসওয়ার্ড রিসেট চাইতে পারো।"
     descriptionThree: "ইমেইল না পেলে তোমার স্প্যাম ফোল্ডার দেখো অথবা আমাদের সাপোর্টে %email-webmaster%-এ ইমেইল করো।"
-  email:
-    title: "হাই!"
-    visitLink: "তোমার পাসওয়ার্ড রিসেট করতে নিচের লিংকে যাও"
-    expire: "এই লিংকের মেয়াদ %time%-এ শেষ হবে।"
-    cheers: "শুভেচ্ছা!"
   newemail:
     title: "তোমার পাসওয়ার্ড রিসেট করো"
     content: "তুমি সম্প্রতি তোমার ক্যাট্রোব্যাট অ্যাকাউন্টের পাসওয়ার্ড রিসেট করতে চেয়েছ। নতুন পাসওয়ার্ড বেছে নিতে নিচের বোতামে ক্লিক করো। তুমি যদি এটি না চেয়ে থাকো, তাহলে নিশ্চিন্তে এই ইমেইলটি উপেক্ষা করতে পারো।"
@@ -659,76 +487,33 @@ resetPassword:
     title: "তোমার পাসওয়ার্ড রিসেট করো"
     button:
       submit: "পাসওয়ার্ড রিসেট করো"
-apk:
-  download: অ্যাপ হিসেবে ডাউনলোড করো
-  prepare: 'অ্যাপ হিসেবে নাও'
-  preparing: 'অ্যাপ তৈরি হচ্ছে'
-  text: 'প্রক্রিয়াটি কিছুটা সময় নিতে পারে'
 format:
   million_abbreviation: এম
 #api
 errors:
   unspecified: কিছু একটা কাজ করেনি। আবার চেষ্টা করো, আর বারবার এমন হলে আমাদের জানাও!
-  username:
-    blank: ব্যবহারকারীর নাম ফাঁকা রাখা যাবে না
-    invalid: তোমার ব্যবহারকারীর নামটি অবৈধ
-    exists: এই ব্যবহারকারীর নামটি আগে থেকেই আছে।
-    not_exists: এই ব্যবহারকারীর নাম বিদ্যমান নেই।
-    not_email: ব্যবহারকারীর নাম কোনো ইমেইল ঠিকানা হতে পারবে না।
-    size: ব্যবহারকারীর নামটিতে কমপক্ষে ৩ টি অক্ষর থাকতে হবে এবং ১৮০ এর বেশি নয়
-  password:
-    blank: পাসওয়ার্ড অনুপস্থিত।
-    short: 'তোমার পাসওয়ার্ডে অন্তত {{ limit }}টি অক্ষর থাকতে হবে।'
-  country:
-    blank: দেশটি অনুপস্থিত।
-    invalid: অবৈধ দেশ
-  email:
-    blank: ইমেইল ফাঁকা রাখা যাবে না
-    invalid: তোমার ইমেইলটি অবৈধ মনে হচ্ছে
-    exists: এই ইমেইল ঠিকানাটি আগে থেকেই আছে।
-  id:
-    blank: ওপেন অথেন্টিকেশন আইডি ফাঁকা রাখা যাবে না
-  login: পাসওয়ার্ড বা ব্যবহারকারীর নাম ভুল ছিল।
-  post-data: পোস্ট-ডেটা সঠিক নয় বা অনুপস্থিত!
-  checksum:
-    missing: ক্লায়েন্ট fileChecksum পাঠায়নি! তুমি কি পকেট কোডের পুরোনো সংস্করণ ব্যবহার করছ?
-    invalid: অবৈধ চেকসাম
   xml:
     invalid: অবৈধ কোড এক্সএমএল
     missing: 'অজানা ভুল: প্রজেক্ট_এক্সএমএল পাওয়া যায় নি '
   file:
-    unexpected: অপ্রত্যাশিত ফাইল পাওয়া গেছে
     invalid: ভুল ফাইল
-  image.missing: প্রজেক্ট এক্সএমএল এমন একটি ফাইলের উল্লেখ করেছে যা প্রজেক্ট-ফোল্ডারে নেই
-  unknown: অজানা ভুল
-  token: 'ডিভাইসের প্রমাণীকরণ ব্যর্থ হয়েছে: অবৈধ প্রমাণীকরণ-টোকেন!'
-  uploadTokenAuthFailed: 'আপলোড টোকেন যাচাই ব্যর্থ হয়েছে।'
-  project:
-    invalid: অবৈধ প্রকল্প।
   languageversion:
     tooold: 'দুঃখিত, তোমার প্রকল্পে ক্যাট্রোব্যাট ভাষার একটি পুরোনো সংস্করণ আছে! তুমি কি পকেট কোডের সর্বশেষ সংস্করণ ব্যবহার করছ?'
   projectversion:
     tooold: 'দুঃখিত, তুমি পকেট কোডের একটি পুরোনো সংস্করণ ব্যবহার করছ। সর্বশেষ সংস্করণে আপডেট করো।'
   authentication:
-    title: লগইন কাজ করেনি
     webview: |
       মনে হচ্ছে তোমার ব্যবহারকারীর নাম বা পাসওয়ার্ড ঠিক ছিল না।
       অ্যাপে আবার লগ ইন করার চেষ্টা করো।
 success:
   text: সফল হয়েছে
-  registration: নিবন্ধন সফল হয়েছে৷
-  token: ঠিক আছে
-  upload: তোমার প্রকল্প সফলভাবে আপলোড হয়েছে!
   imgUpload: তোমার ছবি সফলভাবে আপলোড হয়েছে!
-  report: তোমার রিপোর্ট সফলভাবে পাঠানো হয়েছে!
 time:
   minutes.ago: '{0} <১ মিনিট আগে | {1} ১ মিনিট আগে |]1,Inf] %count% মিনিট আগে'
   hours.ago: '{1} ১ ঘন্টা আগে |]1,Inf] %count% ঘন্টা আগে'
   days.ago: '{1} ১ দিন আগে |]1,Inf] %count% দিন আগে'
   months.ago: '{1} ১ মাস আগে |]1,Inf] %count% মাস আগে'
   years.ago: '{1} ১ বছর আগে |]1,Inf] এক বছরেরও বেশি আগে'
-failure:
-  upload: তোমার অ্যাপ আপলোড করার সময় একটি ত্রুটি হয়েছে।
 user:
   verification:
     email: 'তোমার ইমেইল যাচাই করো'
@@ -751,7 +536,6 @@ api:
     passwordInvalidChars: 'পাসওয়ার্ডে অবৈধ অক্ষর রয়েছে'
     usernameContainsEmail: "ব্যবহারকারীর নামে কোনো ইমেইল ঠিকানা থাকা চলবে না"
     usernameContainsLink: "ব্যবহারকারীর নামে কোনো লিংক থাকা চলবে না"
-    countryCodeInvalid: "দেশের কোড অবৈধ"
     pictureInvalid: "প্রোফাইল ছবি অবৈধ বা সমর্থিত নয়"
     dateOfBirthMissing: "জন্মতারিখ দিতে হবে"
     dateOfBirthInvalid: "জন্মতারিখ অবৈধ"
@@ -785,61 +569,11 @@ api:
     nameAlreadyInUse: 'নামটি আগে থেকেই ব্যবহৃত হচ্ছে'
     descriptionMissing: 'বর্ণনা দেওয়া হয়নি'
     descriptionEmpty: 'বর্ণনা ফাঁকা'
-    descriptionTooShort: 'বর্ণনা খুব ছোট'
     descriptionTooLong: 'বর্ণনা খুব লম্বা'
     imageFileInvalid: 'ছবির ফাইল অবৈধ'
     imageFileInvalidType: 'ছবির ফাইলের ধরন অবৈধ'
     imageFileTooLarge: 'ছবির ফাইল খুব বড়'
-#languages and countries
-language:
-  arabic: আরবী
-  bulgarian: বুলগেরীয়ান
-  catalan: ক্যাটালান
-  chinese_simplified_han: চীনা (সহজবোধ্য হান)
-  chinese_traditional_han: চীনা (সনাতন হান)
-  croatian: ক্রোয়েশিয়ান
-  czech: চেক
-  danish: ড্যানিশ
-  dutch: ডাচ
-  english_united_kingdom: ইংরেজি (যুক্তরাজ্য)
-  english_united_states: ইংরেজি (মার্কিন যুক্তরাষ্ট্র)
-  estonian: এস্তোনিয়ান
-  filipino: ফিলিপিনো
-  finnish: ফিনিশ
-  french: ফরাসি
-  german: জার্মান
-  greek: গ্রিক
-  hebrew: হিব্রু
-  hindi: হিন্দি
-  hungarian: হাঙ্গেরিয়ান
-  indonesian: ইন্দোনেশিয়ান
-  italian: ইতালিয়ান
-  japanese: জাপানি
-  korean: কোরিয়ান
-  latvian: লাটভিয়ান
-  lithuanian: লিথুয়ানিয়ান
-  malay: মালয়
-  norwegian: নরওয়েজীয়
-  persian: ফার্সি
-  polish: পোলিশ
-  portuguese_brazil: পর্তুগিজ (ব্রাজিল)
-  portuguese_portugal: পর্তুগিজ (পর্তুগাল)
-  romanian: রোমানিয়ন
-  russian: রাশিয়ান
-  serbian: সার্বিয়ান
-  slovak: স্লোভাক
-  slovenian: স্লোভেনিয়ান
-  spanish_latin_america: স্পেনীয় (লাতিন আমেরিকা)
-  spanish_spain: স্পেনীয় (স্পেন)
-  swedish: সুইডিশ
-  thai: থাই
-  turkish: তুর্কী
-  ukrainian: ইউক্রেনীয়
-  vietnamese: ভিয়েতনামী
-ci:
-  generate: APK তৈরি করো
-  pending: APK তৈরি হচ্ছে
-  download: APK ডাউনলোড করো
+
 admin:
   maintain:
     diskMaintenance: ডিস্ক রক্ষণাবেক্ষণ
@@ -847,46 +581,9 @@ admin:
     noRemovableObjects: কোন অপসারণযোগ্য সামগ্রী সহজলভ্য নেই।
     removableObjects: অপসারণযোগ্য বস্তু
 recommender:
-  similarPrograms: অনুরূপ প্রকল্প
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: যারা এই প্রকল্পটি ডাউনলোড করেছে তারা এগুলোও ডাউনলোড করেছে
   moreFromThisUser: '%username%-এর আরও প্রকল্প'
-pmd:
-  submitBtn: তোমার প্রকল্প জমা দাও
-  submitBox:
-    header: জমা দেওয়া
-    text: তুমি তোমার প্রকল্প জমা দিতে যাচ্ছ। প্রকল্পের কোডটি লেখো এবং পাঠাও-এ ক্লিক করো।
-    btnText: জমা দাও
-  successful:
-    text: তোমার প্রকল্প সফলভাবে আপলোড হয়েছে।
-  failed:
-    text: প্রকল্প আপলোড ব্যর্থ হয়েছে।
 codeview:
   title: 'কোড ভিউ'
-  showCode: 'কোড দেখাও'
-  hideCode: 'কোড লুকাও'
-  showStatistics: 'কোডের পরিসংখ্যান দেখাও'
-  hideStatistics: 'কোডের পরিসংখ্যান লুকাও'
-  cantDisplayCode: "কোড দেখানো যাচ্ছে না"
-  cantDisplayStatistics: "কোড দেখানো যাচ্ছে না"
-  totalNumberOf: 'মোট সংখ্যা'
-  scenes: 'দৃশ্য'
-  scripts: 'স্ক্রিপ্টসমূহ'
-  bricks: 'ব্রিক'
-  objects: 'চরিত্র ও অবজেক্ট'
-  looks: 'চেহারা'
-  sounds: 'শব্দ'
-  globals: 'গ্লোবাল'
-  locals: 'লোকাল'
-  globalVariables: 'গ্লোবাল ভেরিয়েবল'
-  localVariables: 'লোকাল ভেরিয়েবল'
-  eventBricks: 'ইভেন্ট ব্রিক'
-  controlBricks: 'কন্ট্রোল ব্রিক'
-  motionBricks: 'মোশন ব্রিক'
-  soundBricks: 'সাউন্ড ব্রিক'
-  looksBricks: 'লুকস ব্রিক'
-  penBricks: 'পেন ব্রিক'
-  dataBricks: 'ডেটা ব্রিক'
-  specialBricks: 'বিশেষ ব্রিক'
 codeView:
   title: 'কোড ভিউ'
   loading: 'কোড ভিউ লোড হচ্ছে...'
@@ -899,19 +596,7 @@ codeView:
 codeStatistics:
   title: "কোডের পরিসংখ্যান"
   error: "কোডের পরিসংখ্যান দেখানো যাচ্ছে না।"
-  general: 'সাধারণ'
-  bricks: 'ব্রিক'
-  eventBricks: 'ঘটনা'
-  controlBricks: 'নিয়ন্ত্রণ'
-  motionBricks: 'গতি'
-  soundBricks: 'শব্দ'
-  looksBricks: 'চেহারা'
-  penBricks: 'কলম'
-  dataBricks: 'তথ্য'
-  deviceBricks: 'যন্ত্র'
-  specialBricks: 'বিশেষ'
   yourScore: 'তোমার স্কোর:'
-  points: 'পয়েন্ট'
   abstraction: 'বিমূর্তকরণ ও সমস্যা ভাগ করা'
   parallelism: 'সমান্তরালতা'
   logicalThinking: 'যৌক্তিক চিন্তা'
@@ -927,20 +612,7 @@ footer:
   text: "ইতিমধ্যে %project_count%টি দারুণ প্রকল্প শেয়ার করা হয়েছে, পরেরটি তোমার হতে পারে। আমাদের অ্যাপ ডাউনলোড করো আর আজই তৈরি করা শুরু করো"
 privacy-policy:
   header: গোপনীয়তার নীতি
-  version: সংস্করণ ২.২, ১৭ অক্টোবর ২০১৯
-  text1: তোমাকে আমাদের সেবা ও এর সাথে যুক্ত অ্যাকাউন্টের সব সুবিধা দিতে তোমার কাছ থেকে কিছু নির্দিষ্ট তথ্য সংগ্রহ করা দরকার।
-  text2: আমাদের সেবা (অ্যাপ ও ওয়েবসাইট) চালু রাখতে ও উন্নত করতে এবং ICT ও STEM/STEAM শিক্ষা নিয়ে বৈজ্ঞানিক গবেষণা করতে আমরা Google LLC (USA)-এর Google Analytics, Crashlytics ও Firebase এবং Dynatrace LLC (USA)-এর Dynatrace ব্যবহার করি। এগুলো দিয়ে আমরা আমাদের সেবার ব্যবহার সম্পর্কে মেটাডেটা পাই, যেমন ক্র্যাশের তথ্য, সময়, দেখা পেজ/স্ক্রিন, আমাদের অ্যাপ ও সেবার ব্যবহার, ব্যবহৃত অপারেটিং সিস্টেম এবং নেটওয়ার্ক প্রদানকারীর তথ্য। এই বিশ্লেষণ ও সংগৃহীত তথ্য তোমার প্রোফাইলের সাথে যুক্ত নয় এবং এতে কোনো ব্যক্তিগত তথ্য নেই (IP ঠিকানার শেষ অংশ বেনামি করা হয়)। তবে সংগৃহীত তথ্য সেবা প্রদানকারীদের (Google LLC, USA এবং Dynatrace LLC, USA) কাছে পাঠানো হবে। তথ্য প্রক্রিয়াকরণ Google LLC ও Dynatrace LLC-এর সাথে চুক্তির ভিত্তিতে হয়। সেবা প্রদানকারীদের সাথে এই সম্পর্ক ইউরোপীয় ইউনিয়নের সাধারণ তথ্য সুরক্ষা বিধি (EU GDPR) এবং EU-USA "Privacy Shield" চুক্তি মেনে চলে।
-  text3: আমাদের সিস্টেমে একটি অ্যাকাউন্ট তৈরি ও ব্যবহার করতে, এবং তোমার অ্যাকাউন্টের দরকারি পরিবর্তন সম্পর্কে ইমেইলে তোমাকে জানাতে — যেমন আমাদের ব্যবহারের শর্তাবলী, কমিউনিটির নিয়ম বা নীতিমালার আপডেট বা লঙ্ঘন — আমরা তোমার ব্যবহারকারীর নাম এবং, তুমি দিয়ে থাকলে, তোমার ইমেইল ঠিকানা সংরক্ষণ করব। তুমি যদি Google Plus বা Facebook-এর মাধ্যমে তোমার অ্যাকাউন্ট যুক্ত করে থাকো, তাহলে আমরা এই সেবাগুলোতে তোমার অ্যাকাউন্টের সাথে যুক্ত একটি শনাক্তকরণ কী-ও সংরক্ষণ করি। তুমি স্পষ্টভাবে অনুমতি না দিলে আমরা এই তথ্য অন্য কোনো (যেমন বিপণনের) উদ্দেশ্যে ব্যবহার করব না।
-  text4: তুমি চাইলে শেয়ারিং সাইটে তোমার অ্যাকাউন্ট পেজ থেকে তুমি কোন দেশে থাকো তা আমাদের জানাতে পারো। এটি তোমার সর্বজনীন প্রোফাইলে দেখানো হবে এবং আমরা শুধু পরিসংখ্যান ও গবেষণার কাজে এটি ব্যবহার করব। তুমি যেকোনো সময় তোমার প্রোফাইল সেটিংস থেকে এটি সরিয়ে দিতে পারো।
-  text5: https://share.catrobat.org/-এ তোমার প্রোফাইল পেজ থেকে অ্যাকাউন্ট মুছে ফেলে তুমি যেকোনো সময় তোমার অ্যাকাউন্টের ব্যক্তিগত তথ্যের ব্যবহার প্রত্যাহার করতে পারো। অ্যাকাউন্ট মুছে ফেলার পরও তুমি দেওয়া সেবাগুলো ব্যবহার করতে পারবে, তবে অংশ নিতে পারবে না, যেমন প্রোগ্রাম আপলোড, মন্তব্য বা লাইক করা। এছাড়া তোমার অ্যাকাউন্টের সাথে যুক্ত সব কনটেন্ট, যেমন আপলোড করা প্রোগ্রাম, মন্তব্য ইত্যাদি মুছে ফেলা হবে।
-  text6: আমাদের সেবার অপব্যবহার ঠেকাতে, যেমন বেআইনি উদ্দেশ্যে ব্যবহারকারীদের আপলোড বা মন্তব্য, ব্যবহারকারীদের তৈরি সব সর্বজনীন তথ্য (আপলোড, মন্তব্য) সময় ও ব্যবহৃত ইন্টারনেট ঠিকানাসহ একটি ডাটাবেসে অভ্যন্তরীণভাবে সংরক্ষণ করা হবে। যথেষ্ট বেআইনি কাজের যুক্তিসঙ্গত সন্দেহ না থাকলে এবং সরকারিভাবে অধিকারপ্রাপ্ত আইনি প্রতিষ্ঠান প্রযোজ্য আইনের ভিত্তিতে না চাইলে এই তথ্য কোনো প্রতিষ্ঠান ব্যবহার করবে না বা তাদের কাছে পাঠানো হবে না। প্রতিটি ঘটনা আমরা প্রথমে আলাদাভাবে ভালো করে যাচাই করব।
-  text7: তুমি চাইলে https://catrobat.org/newsletter-এ ক্যাট্রোব্যাট নিউজলেটার সাবস্ক্রাইব করতে পারো, যা আমরা MailChimp সেবার (The Rocket Science Group LLC d/b/a MailChimp, USA) মাধ্যমে দিই। তারপর তুমি তোমার দেওয়া ইমেইল ঠিকানায় ক্যাট্রোব্যাট প্রকল্প ও এর সেবার আপডেট পাবে। প্রতিটি নিউজলেটারের নিচে থাকা "unsubscribe" লিংক ব্যবহার করে তুমি যেকোনো সময় নিউজলেটার বন্ধ করতে পারো। এই নিউজলেটার দেয় MailChimp, যার সাথে আমাদের তথ্য প্রক্রিয়াকরণ চুক্তি আছে এবং যারা EU-র সাধারণ তথ্য সুরক্ষা বিধি ও EU-USA "Privacy Shield" মেনে চলার অঙ্গীকার করেছে। MailChimp সম্পর্কে আরও জানতে MailChimp-এর গোপনীয়তা নীতি ও ব্যবহারের শর্তাবলীও দেখো।
-  text8: 'সব সেবা দেয় মুক্ত ওপেন সোর্স ক্যাট্রোব্যাট প্রকল্প, যা International Catrobat Association – Verein zur Förderung freier Software-এর অধীনে চলে; এটি গ্রাৎস, অস্ট্রিয়ায় (ইউরোপীয় ইউনিয়ন) নিবন্ধিত একটি অলাভজনক এনজিও। আমাদের নীতিমালা EU ও অস্ট্রিয়ার তথ্য সুরক্ষা আইন (GDPR) মেনে চলে। আমাদের সাথে যোগাযোগ করতে contact@catrobat.org-এ ইমেইল পাঠাও অথবা এই ঠিকানায় চিঠি পাঠাও: Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union)।'
-  text9: তোমার বয়স ১৪ বছরের কম হলে এই নীতি একজন আইনি অভিভাবককে (সাধারণত বাবা বা মা) মেনে নিতে হবে।
-  text10: ক্যাট্রোব্যাটের অফিসিয়াল ইংরেজি গোপনীয়তা নীতি ওয়েবে %privacy_policy%-এ পাওয়া যায়।
-  disagree-text: অনুমোদন ছাড়া আমরা অ্যাকাউন্ট তৈরি করতে পারি না, তবে মূল ফিচারগুলো তবুও ব্যবহার করা যাবে।
 catro-notifications:
-  markAsRead: "পড়া হয়েছে হিসেবে চিহ্নিত করো"
   noFollowers: "মনে হচ্ছে তোমার কোনো অনুসারী বিজ্ঞপ্তি নেই।"
   noComments: "মনে হচ্ছে তোমার কোনো মন্তব্যের বিজ্ঞপ্তি নেই।"
   noReactions: "মনে হচ্ছে তোমার কোনো প্রতিক্রিয়ার বিজ্ঞপ্তি নেই।"
@@ -974,29 +646,16 @@ catro-notifications:
 clipboard:
   success: লিংক ক্লিপবোর্ডে কপি হয়েছে!
   success_project: প্রকল্পের লিংক ক্লিপবোর্ডে কপি হয়েছে!
-  success_user: ব্যবহারকারীর লিংক ক্লিপবোর্ডে কপি হয়েছে!
   fail: লিংক ক্লিপবোর্ডে কপি করা যায়নি! :(
 next: পরবর্তী
 previous: পূর্ববর্তী
 media-packages:
   title: মিডিয়া লাইব্রেরি
   description: নিচের বিভাগগুলোতে তুমি তোমার প্রকল্পে যোগ করার জন্য চরিত্র ও অবজেক্ট খুঁজে পাবে।
-  thumb-size:
-    description: পূর্বরূপ আকার
-    sm: ছোট
-    md: মাঝারি
-    lg: বড়
   theme-special: "%flavor% থিম বিশেষ"
   search-results: মিডিয়া লাইব্রেরি অনুসন্ধান ফলাফল
-  no-results: তোমার অনুসন্ধানে ০টি ফলাফল পাওয়া গেছে। শুধু ইংরেজি অনুসন্ধান শব্দ ব্যবহার করো।
-  download_these_files: সংরক্ষণ
 flavor:
   pocketcode: পকেট কোড
-  pocketalice: পকেট এলিস
-  pocketgalaxy: গ্যালাক্সি জাম
-  phirocode: ফিরো কোড
-  luna: Luna & Cat
-  create@school: Create@School
 copyright: 'কপিরাইট &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>। সর্বস্বত্ব সংরক্ষিত।'
 noscript:
   warning: "এই ওয়েবসাইট চালাতে JavaScript লাগে। তোমার ব্রাউজারে JavaScript চালু করো অথবা কোনো বড়দের সাহায্য নাও।"
@@ -1006,10 +665,6 @@ cookie-consent:
   decline: "প্রত্যাখ্যান করো"
   privacy-link: "গোপনীয়তার নীতি"
   settings-link: "কুকি সেটিংস"
-agree: একমত
-disagree: রাজি না
-profileLoader:
-  noProfiles: বর্তমানে কোন প্রোফাইল নেই।
 element: 'উপাদান'
 elements: 'উপাদানসমূহ'
 share:
@@ -1018,7 +673,6 @@ share:
   success: 'শেয়ার সফল হয়েছে'
 copy: 'লিংক কপি করো'
 checkOutProject: 'এই প্রকল্পটি দেখো:'
-checkOutUser: 'এই ব্যবহারকারীকে দেখো:'
 community: 'ক্যাট্রোব্যাট সম্প্রদায়'
 back_to_app: 'কমিউনিটি থেকে বের হও'
 category:
@@ -1034,7 +688,6 @@ category:
 achievements:
   sidebar:
     title: 'অর্জনসমূহ'
-    badge: 'নতুন'
   overview:
     header: 'অর্জনসমূহ'
     most_recent_achievement:
@@ -1126,10 +779,7 @@ extensions:
       title: মাল্টিপ্লেয়ার
 studio:
   title: 'স্টুডিও'
-  singular: 'স্টুডিও'
   create_studio: 'স্টুডিও তৈরি করো'
-  delete_studio: 'স্টুডিও মুছে ফেলো'
-  cancel_studio: 'বাতিল'
   studio_name: 'স্টুডিওর নাম'
   studio_description: 'স্টুডিওর বর্ণনা'
   is_public: 'সর্বজনীন করবে?'
@@ -1146,8 +796,6 @@ studio:
   cover_image_remove: 'ছবি সরাও'
   popular: 'জনপ্রিয় স্টুডিও'
   join: 'যোগ দাও'
-  leave: 'ছেড়ে দাও'
-  report: 'রিপোর্ট করো'
   public: 'সর্বজনীন'
   private: 'শুধু আমন্ত্রণে'
   overview:
@@ -1170,16 +818,12 @@ studio:
     admin: 'অ্যাডমিন'
     member: 'সদস্য'
   details:
-    add_project: 'প্রকল্পটি যোগ করতে ক্লিক করো'
     add: 'যোগ করো'
     showMore: 'আরও দেখাও'
-    showLess: 'কম দেখাও'
     are_you_sure: 'তুমি কি নিশ্চিত?'
     no_way_of_return: 'এটি আর ফেরানো যাবে না।'
     delete_it: 'মুছে ফেলো'
-    remove_project: 'স্টুডিও থেকে সরাও'
     remove_project_error: 'স্টুডিও থেকে প্রকল্প সরানো যায়নি।'
-    remove_project_success: 'প্রকল্পটি সফলভাবে স্টুডিও থেকে সরানো হয়েছে।'
     no_projects: 'স্টুডিওতে এখনো কোনো প্রকল্প নেই।'
     projects:
       title: 'প্রকল্প'
@@ -1195,10 +839,8 @@ studio:
       no_projects_empty_state: 'তোমার এখনো যোগ করার মতো কোনো প্রকল্প নেই। আগে Pocket Code-এ একটি তৈরি করো!'
       add_selected: 'বেছে নেওয়াগুলো যোগ করো'
     no_available_projects: 'যোগ করার মতো কোনো প্রকল্প নেই।'
-    updateCoverError: 'স্টুডিওর কভার আপডেট করার সময় কিছু একটা ভুল হয়েছে।'
     join: 'যোগ দাও'
     leave: 'ছেড়ে দাও'
-    report: 'রিপোর্ট করো'
     pending: 'অপেক্ষমাণ'
     decline: 'প্রত্যাখ্যাত'
     comments:
@@ -1218,7 +860,6 @@ studio:
       add_comment: '%user% একটি মন্তব্য করেছে।'
     members_list:
       title: 'স্টুডিও সদস্যরা'
-      project_count: '{0} কোনো স্টুডিও প্রকল্প নেই |{1} ১টি স্টুডিও প্রকল্প |]1,Inf] %count%টি স্টুডিও প্রকল্প'
       no_studio_projects: 'কোনো স্টুডিও প্রকল্প নেই'
       one_studio_project: '১টি স্টুডিও প্রকল্প'
       n_studio_projects: '%count%টি স্টুডিও প্রকল্প'
@@ -1228,7 +869,6 @@ studio:
       ban_failed: 'এই সদস্যকে নিষিদ্ধ করার সময় কিছু একটা ভুল হয়েছে। একটু পরে আবার চেষ্টা করো।'
       demote_member: 'অ্যাডমিনকে সাধারণ সদস্য বানাও'
       demotion_failed: 'এই অ্যাডমিনকে সাধারণ সদস্য বানানোর সময় কিছু একটা ভুল হয়েছে। একটু পরে আবার চেষ্টা করো।'
-      last_admin: 'এই স্টুডিওর শেষ অ্যাডমিনকে সাধারণ সদস্য বানানো যাবে না।'
     join_requests:
       title: 'যোগ দেওয়ার অনুরোধ'
       accept: 'গ্রহণ করো'
@@ -1258,7 +898,6 @@ media_library:
   no_results: 'কোনো ফলাফল পাওয়া যায়নি।'
   assets_count: 'ফাইল'
   view_all: 'সব দেখো'
-  view_all_category: 'সব %category% দেখো'
   back_to_app: 'অ্যাপে ফিরে যাও'
 snackbar:
   project_not_found: 'যে প্রকল্পটি চেয়েছ সেটি পাওয়া যাচ্ছে না'
@@ -1312,14 +951,6 @@ moderation:
     rate_limited: "তুমি খুব তাড়াতাড়ি স্টুডিওর কাজ করছ। একটু অপেক্ষা করো।"
   hidden_notice:
     project: "কমিউনিটির রিপোর্টের কারণে এই প্রকল্পটি লুকিয়ে রাখা হয়েছে।"
-    comment: "কমিউনিটির রিপোর্টের কারণে এই মন্তব্যটি লুকিয়ে রাখা হয়েছে।"
-    user: "কমিউনিটির রিপোর্টের কারণে এই প্রোফাইলটি লুকিয়ে রাখা হয়েছে।"
     user_own: "কমিউনিটির রিপোর্টের কারণে তোমার অ্যাকাউন্ট স্থগিত করা হয়েছে। তুমি এই সিদ্ধান্তের বিরুদ্ধে আপিল করতে পারো।"
-    studio: "কমিউনিটির রিপোর্টের কারণে এই স্টুডিওটি লুকিয়ে রাখা হয়েছে।"
-  notification:
-    content_hidden: "কমিউনিটির রিপোর্টের কারণে তোমার %content_type% লুকিয়ে রাখা হয়েছে। তুমি এই সিদ্ধান্তের বিরুদ্ধে আপিল করতে পারো।"
-    appeal_approved: "তোমার আপিল অনুমোদিত হয়েছে। তোমার কনটেন্ট এখন আবার দেখা যাচ্ছে।"
-    appeal_rejected: "তোমার আপিল পর্যালোচনা করা হয়েছে এবং তোমার কনটেন্ট লুকিয়ে রাখার সিদ্ধান্ত বহাল আছে।"
-    admin_review_needed: "কনটেন্ট স্বয়ংক্রিয়ভাবে লুকানো হয়েছে এবং পর্যালোচনা দরকার।"
 Reports: রিপোর্ট
 members: সদস্য
