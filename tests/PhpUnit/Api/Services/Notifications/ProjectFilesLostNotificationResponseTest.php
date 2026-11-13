@@ -59,7 +59,9 @@ class ProjectFilesLostNotificationResponseTest extends TestCase
       $this->createStub(UserAvatarService::class),
     );
 
-    $item = $manager->createNotificationListResponse([$notification], false, new User())->getData()[0];
+    $data = $manager->createNotificationListResponse([$notification], false, new User())->getData();
+    self::assertNotNull($data);
+    $item = $data[0];
     self::assertSame('project', $item->getType());
 
     return (string) $item->getMessage();

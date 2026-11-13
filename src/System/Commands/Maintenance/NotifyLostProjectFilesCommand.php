@@ -46,7 +46,7 @@ class NotifyLostProjectFilesCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $io = new SymfonyStyle($input, $output);
-    $dry_run = (bool) $input->getOption('dry-run');
+    $dry_run = true === $input->getOption('dry-run');
 
     $latest_notice = ProjectFilesLostNotification::latestNoticePerProject(
       $this->entity_manager->getRepository(ProjectFilesLostNotification::class)->findAll()

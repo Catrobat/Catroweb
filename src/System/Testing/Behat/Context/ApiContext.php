@@ -2789,6 +2789,8 @@ class ApiContext implements Context
     $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('checksum');
     $this->iUseAValidJwtBearerTokenFor($user->getUsername());
     $this->iRequestWith('POST', '/api/projects');
+    // A later request in the same scenario must not resend the file (the kernel browser cannot serialize it).
+    $this->request_files = [];
   }
 
   /**

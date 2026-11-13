@@ -71,7 +71,7 @@ class DetectBrokenProjectsCommandTest extends TestCase
 
     $query = $this->createStub(Query::class);
     $query->method('getArrayResult')->willReturnCallback(static function () use (&$pages): array {
-      return array_shift($pages) ?? [];
+      return [] === $pages ? [] : array_shift($pages);
     });
 
     $qb = $this->createStub(QueryBuilder::class);
