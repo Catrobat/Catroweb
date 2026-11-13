@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: डिस्क रखरखाव
-    ramMaintenance: रैम रखरखाव
     noRemovableObjects: कोई हटाने योग्य वस्तु उपलब्ध नहीं है।
     removableObjects: हटाने योग्य वस्तु
 recommender:

@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Обслуговування диска
-    ramMaintenance: Обслуговування оперативної пам'яті
     noRemovableObjects: Немає доступних знімних об'єктів.
     removableObjects: Знімні об'єкти
 recommender:

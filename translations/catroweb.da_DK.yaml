@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Diskvedligeholdelse
-    ramMaintenance: RAM-vedligeholdelse
     noRemovableObjects: Ingen objekter, der kan fjernes.
     removableObjects: Objekter, der kan fjernes
 recommender:

@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: ڈسک کی دیکھ بھال
-    ramMaintenance: RAM کی دیکھ بھال
     noRemovableObjects: کوئی ہٹائی جانے والی اشیاء دستیاب نہیں ۔
     removableObjects: ہٹائی جا سکنے والی اشیاء
 recommender:

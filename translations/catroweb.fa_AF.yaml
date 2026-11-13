@@ -579,8 +579,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: تعمیر و نگهداری دیسک
-    ramMaintenance: تعمیر و نگهداری RAM
     noRemovableObjects: اشیاء قابل جابجایی در دسترس نیستند.
     removableObjects: اشیاء قابل جابجایی
 recommender:

@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "Aseggem n uḍebsi"
-    ramMaintenance: "Aseggem n RAM"
     noRemovableObjects: "Ulac tiɣawsiwin ara yettwakksen."
     removableObjects: "Tiɣawsiwin ara yettwakksen"
 recommender:

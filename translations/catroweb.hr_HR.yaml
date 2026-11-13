@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Održavanje diska
-    ramMaintenance: Održavanje RAM-a
     noRemovableObjects: Nema uklonjivih objekata.
     removableObjects: Uklonjivi objekti
 recommender:

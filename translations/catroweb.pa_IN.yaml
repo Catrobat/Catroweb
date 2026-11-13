@@ -555,8 +555,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: ਡਿਸਕ ਸੰਭਾਲ
-    ramMaintenance: ਰੈਮ ਮੇਨਟੇਨੈਂਸ
     noRemovableObjects: ਕੋਈ ਹਟਾਉਣ ਯੋਗ ਚੀਜ਼ਾਂ ਉਪਲਬਧ ਨਹੀਂ ਹਨ.
     removableObjects: ਹਟਾਉਣ ਯੋਗ ਵਸਤੂਆਂ
 recommender:

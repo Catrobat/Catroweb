@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "Ìtọ́jú dísíkì"
-    ramMaintenance: "Ìtọ́jú RAM"
     noRemovableObjects: "Kò sí ohun tí a lè yọ kúrò."
     removableObjects: "Àwọn ohun tí a lè yọ kúrò"
 recommender:

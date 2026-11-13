@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Συντήρηση δίσκου
-    ramMaintenance: 'Συντήρηση RAM'
     noRemovableObjects: 'Δεν υπάρχουν αντικείμενα προς αφαίρεση.'
     removableObjects: 'Αντικείμενα προς αφαίρεση'
 recommender:

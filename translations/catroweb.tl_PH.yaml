@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Pagpapanatili ng disk'
-    ramMaintenance: 'Pagpapanatili ng RAM'
     noRemovableObjects: 'Walang maaaring alisin na object.'
     removableObjects: 'Mga object na maaaring alisin'
 recommender:

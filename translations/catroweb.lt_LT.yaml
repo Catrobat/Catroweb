@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Disko priežiūra'
-    ramMaintenance: 'RAM priežiūra'
     noRemovableObjects: 'Nėra šalintinų objektų.'
     removableObjects: 'Šalintini objektai'
 recommender:

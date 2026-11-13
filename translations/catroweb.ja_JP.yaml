@@ -563,8 +563,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: ディスクのメンテナンス
-    ramMaintenance: RAMメンテナンス
     noRemovableObjects: 取り外し可能なオブジェクトはありません。
     removableObjects: リムーバブルオブジェクト
 recommender:

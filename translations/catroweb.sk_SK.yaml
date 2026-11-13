@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Údržba disku
-    ramMaintenance: Údržba RAM
     noRemovableObjects: Nie sú k dispozícii žiadne odstrániteľné objekty.
     removableObjects: Odstrániteľné objekty
 recommender:

@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Vzdrževanje diska'
-    ramMaintenance: 'Vzdrževanje RAM-a'
     noRemovableObjects: 'Ni odstranljivih objektov.'
     removableObjects: 'Odstranljivi objekti'
 recommender:

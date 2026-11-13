@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: ডিস্ক রক্ষণাবেক্ষণ
-    ramMaintenance: র‌্যাম রক্ষণাবেক্ষণ
     noRemovableObjects: কোন অপসারণযোগ্য সামগ্রী সহজলভ্য নেই।
     removableObjects: অপসারণযোগ্য বস্তু
 recommender:

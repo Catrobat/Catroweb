@@ -578,8 +578,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: డిస్క్ నిర్వహణ
-    ramMaintenance: RAM నిర్వహణ
     noRemovableObjects: తొలగించగల వస్తువులు అందుబాటులో లేవు.
     removableObjects: తొలగించగల వస్తువులు
 recommender:

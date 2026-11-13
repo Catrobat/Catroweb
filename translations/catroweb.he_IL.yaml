@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "תחזוקת דיסק"
-    ramMaintenance: "תחזוקת זיכרון RAM"
     noRemovableObjects: "אין אובייקטים להסרה."
     removableObjects: "אובייקטים להסרה"
 recommender:

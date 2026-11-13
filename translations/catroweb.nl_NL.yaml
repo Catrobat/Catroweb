@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Schijfonderhoud'
-    ramMaintenance: 'RAM-onderhoud'
     noRemovableObjects: 'Geen verwijderbare objecten beschikbaar.'
     removableObjects: 'Verwijderbare objecten'
 recommender:

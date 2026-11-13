@@ -559,8 +559,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 磁盘维护
-    ramMaintenance: 记录和档案管理维护
     noRemovableObjects: 无可移除对象。
     removableObjects: 可移动对象
 recommender:

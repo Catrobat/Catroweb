@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Mantemento do disco'
-    ramMaintenance: 'Mantemento da RAM'
     noRemovableObjects: 'Non hai obxectos eliminables.'
     removableObjects: 'Obxectos eliminables'
 recommender:

@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Обслуживание диска
-    ramMaintenance: Обслуживание RAM
     noRemovableObjects: Нет объектов для удаления.
     removableObjects: Удаляемые объекты
 recommender:

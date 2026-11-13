@@ -93,34 +93,6 @@ class SystemHealthServiceTest extends TestCase
     self::assertSame(3, $projects['missing_files']);
   }
 
-  #[DataProvider('storagePressureProvider')]
-  public function testGetStoragePressureLevel(float $percentage, int $freeSpace, string $expected): void
-  {
-    self::assertSame($expected, $this->service->getStoragePressureLevel($percentage, $freeSpace));
-  }
-
-  /**
-   * @return array<string, array{float, int, string}>
-   */
-  public static function storagePressureProvider(): array
-  {
-    return [
-      'normal - low usage' => [50.0, 50_000_000_000, 'normal'],
-      'normal - at warning boundary minus one' => [79.9, 11_000_000_000, 'normal'],
-      'warning - high percentage' => [80.0, 50_000_000_000, 'warning'],
-      'warning - low free space' => [50.0, 10_737_418_240 - 1, 'warning'],
-      'warning - at critical boundary minus one' => [89.9, 6_000_000_000, 'warning'],
-      'critical - high percentage' => [90.0, 50_000_000_000, 'critical'],
-      'critical - low free space' => [50.0, 5_368_709_120 - 1, 'critical'],
-      'critical - at emergency boundary minus one' => [94.9, 2_000_000_000, 'critical'],
-      'emergency - high percentage' => [95.0, 50_000_000_000, 'emergency'],
-      'emergency - very low free space' => [50.0, 1_073_741_824 - 1, 'emergency'],
-      'emergency - both triggers' => [96.0, 500_000_000, 'emergency'],
-      'warning - percentage ok but free space triggers' => [70.0, 8_000_000_000, 'warning'],
-      'critical - percentage ok but free space triggers' => [70.0, 3_000_000_000, 'critical'],
-    ];
-  }
-
   #[DataProvider('emailBudgetLevelProvider')]
   public function testGetEmailBudgetLevel(int $totalRemaining, string $expected): void
   {

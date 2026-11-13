@@ -67,116 +67,13 @@ class MaintenanceController extends CRUDController
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
     $RemovableObjects[] = $rm;
-    $disks = $this->getDiskStats();
-    $primaryDisk = $disks[0];
-
-    $usedSpaceRaw = $primaryDisk['used_raw'];
-    foreach ($RemovableObjects as $obj) {
-      $usedSpaceRaw -= $obj->size_raw;
-    }
-
-    $projectsSize = $this->get_dir_size($this->file_storage_dir);
-    $usedSpaceRaw -= $projectsSize;
-    $ram_output = (string) @shell_exec("free 2>/dev/null | grep Mem | awk '{print $2,$3,$4,$5,$6,$7}'");
-    $ram_parts = array_map('floatval', preg_split('/\s+/', trim($ram_output)) ?: []);
-    $whole_ram = ($ram_parts[0] ?? 0) * 1_000;
-    $used_ram = ($ram_parts[1] ?? 0) * 1_000;
-    $free_ram = ($ram_parts[2] ?? 0) * 1_000;
-    $shared_ram = ($ram_parts[3] ?? 0) * 1_000;
-    $cached_ram = ($ram_parts[4] ?? 0) * 1_000;
-    $available_ram = ($ram_parts[5] ?? 0) * 1_000;
-    $free_ram_percentage = $whole_ram > 0 ? ($free_ram / $whole_ram) * 100 : 0;
-    $used_ram_percentage = $whole_ram > 0 ? ($used_ram / $whole_ram) * 100 : 0;
-    $shared_ram_percentage = $whole_ram > 0 ? ($shared_ram / $whole_ram) * 100 : 0;
-    $cached_ram_percentage = $whole_ram > 0 ? ($cached_ram / $whole_ram) * 100 : 0;
-
-    $storageDisk = $this->getStorageDisk($disks);
 
     return $this->render('Admin/SystemManagement/Maintain.html.twig', [
       'RemovableObjects' => $RemovableObjects,
-      'disks' => $disks,
-      'wholeSpace' => $this->getSymbolByQuantity($primaryDisk['total_raw']),
-      'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),
-      'usedSpace_raw' => $usedSpaceRaw,
-      'freeSpace_raw' => $primaryDisk['free_raw'],
-      'freeSpace' => $this->getSymbolByQuantity($primaryDisk['free_raw']),
-      'projectsSpace_raw' => $projectsSize,
-      'projectsSpace' => $this->getSymbolByQuantity($projectsSize),
-      'freeRamPercentage' => $free_ram_percentage,
-      'usedRamPercentage' => $used_ram_percentage,
-      'sharedRamPercentage' => $shared_ram_percentage,
-      'cachedRamPercentage' => $cached_ram_percentage,
-      'wholeRam' => $this->getSymbolByQuantity($whole_ram),
-      'usedRam' => $this->getSymbolByQuantity($used_ram),
-      'freeRam' => $this->getSymbolByQuantity($free_ram),
-      'sharedRam' => $this->getSymbolByQuantity($shared_ram),
-      'cachedRam' => $this->getSymbolByQuantity($cached_ram),
-      'availableRam' => $this->getSymbolByQuantity($available_ram),
-      'storagePressureLevel' => $this->healthService->getStoragePressureLevel(
-        $storageDisk['used_percentage'], (int) $storageDisk['free_raw']
-      ),
       'emailBudget' => $emailBudget = $this->healthService->getEmailBudget(),
       'emailBudgetLevel' => $this->healthService->getEmailBudgetLevel($emailBudget['remaining']),
       'projectCounts' => $this->healthService->getProjectCounts(),
     ]);
-  }
-
-  /**
-   * @return list<array{name: string, mount: string, total: string, used: string, free: string, total_raw: float, used_raw: float, free_raw: float, used_percentage: float}>
-   */
-  private function getDiskStats(): array
-  {
-    $mounts = ['/' => 'System', '/data' => 'Data', '/backup' => 'Backup'];
-    $disks = [];
-
-    foreach ($mounts as $path => $name) {
-      $total = @disk_total_space($path);
-      $free = @disk_free_space($path);
-      if (false === $total || false === $free) {
-        continue;
-      }
-
-      $used = max($total - $free, 0);
-      $percentage = $total > 0 ? ($used / $total) * 100.0 : 0.0;
-
-      $disks[] = [
-        'name' => $name,
-        'mount' => $path,
-        'total' => $this->getSymbolByQuantity($total),
-        'used' => $this->getSymbolByQuantity($used),
-        'free' => $this->getSymbolByQuantity($free),
-        'total_raw' => $total,
-        'used_raw' => $used,
-        'free_raw' => $free,
-        'used_percentage' => $percentage,
-      ];
-    }
-
-    return $disks;
-  }
-
-  /**
-   * Returns the disk where project storage actually lives (follows symlinks).
-   *
-   * @param list<array{name: string, mount: string, total: string, used: string, free: string, total_raw: float, used_raw: float, free_raw: float, used_percentage: float}> $disks
-   *
-   * @return array{name: string, mount: string, total: string, used: string, free: string, total_raw: float, used_raw: float, free_raw: float, used_percentage: float}
-   */
-  private function getStorageDisk(array $disks): array
-  {
-    $storage_real = realpath($this->file_storage_dir) ?: $this->file_storage_dir;
-    $best = $disks[0];
-    $best_len = 0;
-
-    foreach ($disks as $disk) {
-      $mount = $disk['mount'];
-      if (str_starts_with($storage_real, $mount) && strlen($mount) > $best_len) {
-        $best = $disk;
-        $best_len = strlen($mount);
-      }
-    }
-
-    return $best;
   }
 
   private function get_dir_size(string $directory, ?array $extension = null): int

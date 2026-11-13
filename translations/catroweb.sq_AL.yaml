@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Mirëmbajtja e diskut
-    ramMaintenance: Mirëmbajtja e RAM -it
     noRemovableObjects: Nuk ka objekte të heqshme në dispozicion.
     removableObjects: Objekte të heqshme
 recommender:

@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'ڊسڪ جي سار سنڀال'
-    ramMaintenance: 'RAM جي سار سنڀال'
     noRemovableObjects: 'هٽائڻ لائق ڪا به شيءِ موجود ناهي.'
     removableObjects: 'هٽائڻ لائق شيون'
 recommender:

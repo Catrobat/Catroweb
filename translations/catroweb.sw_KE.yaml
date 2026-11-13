@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "Matengenezo ya diski"
-    ramMaintenance: "Matengenezo ya RAM"
     noRemovableObjects: "Hakuna vitu vinavyoweza kuondolewa."
     removableObjects: "Vitu vinavyoweza kuondolewa"
 recommender:

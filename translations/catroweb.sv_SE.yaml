@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Diskunderhåll
-    ramMaintenance: 'RAM-underhåll'
     noRemovableObjects: Ingen borttagningsbara objekt tillgängliga.
     removableObjects: 'Borttagbara objekt'
 recommender:

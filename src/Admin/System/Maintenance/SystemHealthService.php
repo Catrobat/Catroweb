@@ -10,13 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class SystemHealthService
 {
-  public const float STORAGE_EMERGENCY_PERCENT = 95.0;
-  public const float STORAGE_CRITICAL_PERCENT = 90.0;
-  public const float STORAGE_WARNING_PERCENT = 80.0;
-  public const int STORAGE_EMERGENCY_FREE_BYTES = 1_073_741_824;
-  public const int STORAGE_CRITICAL_FREE_BYTES = 5_368_709_120;
-  public const int STORAGE_WARNING_FREE_BYTES = 10_737_418_240;
-
   private const int EMAIL_LOW_THRESHOLD = 30;
   private const int EMAIL_MODERATE_THRESHOLD = 100;
 
@@ -79,16 +72,6 @@ class SystemHealthService
       'hidden' => (int) $result['hidden'],
       'missing_files' => (int) $result['missing_files'],
     ];
-  }
-
-  public function getStoragePressureLevel(float $percentage, int $freeSpace): string
-  {
-    return match (true) {
-      $percentage >= self::STORAGE_EMERGENCY_PERCENT || $freeSpace < self::STORAGE_EMERGENCY_FREE_BYTES => 'emergency',
-      $percentage >= self::STORAGE_CRITICAL_PERCENT || $freeSpace < self::STORAGE_CRITICAL_FREE_BYTES => 'critical',
-      $percentage >= self::STORAGE_WARNING_PERCENT || $freeSpace < self::STORAGE_WARNING_FREE_BYTES => 'warning',
-      default => 'normal',
-    };
   }
 
   public function getEmailBudgetLevel(?int $totalRemaining = null): string

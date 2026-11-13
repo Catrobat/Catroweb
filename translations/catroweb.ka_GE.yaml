@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "დისკის მოვლა"
-    ramMaintenance: "RAM-ის მოვლა"
     noRemovableObjects: "წასაშლელი ობიექტები არ არის."
     removableObjects: "წასაშლელი ობიექტები"
 recommender:

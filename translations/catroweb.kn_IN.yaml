@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: ಡಿಸ್ಕ್ ನಿರ್ವಹಣೆ
-    ramMaintenance: RAM ನಿರ್ವಹಣೆ
     noRemovableObjects: ತೆಗೆದುಹಾಕಬಹುದಾದ ಯಾವುದೇ ವಸ್ತುಗಳು ಲಭ್ಯವಿಲ್ಲ.
     removableObjects: ತೆಗೆದುಹಾಕಬಹುದಾದ ವಸ್ತುಗಳು
 recommender:

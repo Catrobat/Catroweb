@@ -556,8 +556,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 磁盤維護
-    ramMaintenance: 內存維護
     noRemovableObjects: 沒有可用的可移動物件。
     removableObjects: 可移動物件
 recommender:
