@@ -102,7 +102,7 @@ class ExtractedFileRepository
 
       $filesystem->rename($extracted->getPath(), $target_dir);
     } catch (\Exception $e) {
-      $this->logger->error('Failed to re-extract project '.$project_id.': '.$e->getMessage());
+      $this->logger->error('Failed to re-extract project '.$project_id.': '.$e->getMessage(), ['exception' => $e]);
     }
   }
 }

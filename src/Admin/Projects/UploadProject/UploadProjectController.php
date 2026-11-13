@@ -137,6 +137,7 @@ class UploadProjectController extends CRUDController
     } catch (\Exception $e) {
       $this->logger->error('Admin project upload failed', [
         'error' => $e->getMessage(),
+        'exception' => $e,
         'username' => $username,
       ]);
       $this->addFlash('sonata_flash_error', sprintf('Upload failed: %s', $e->getMessage()));

@@ -186,7 +186,7 @@ class ProjectManager
     try {
       $event = $this->event_dispatcher->dispatch(new ProjectBeforeInsertEvent($extracted_file));
     } catch (InvalidCatrobatFileException $invalidCatrobatFileException) {
-      $this->logger->error('addProject failed with code: '.$invalidCatrobatFileException->getCode().' and message:'.$invalidCatrobatFileException->getMessage());
+      $this->logger->error('addProject failed with code: '.$invalidCatrobatFileException->getCode().' and message:'.$invalidCatrobatFileException->getMessage(), ['exception' => $invalidCatrobatFileException]);
       throw $invalidCatrobatFileException;
     }
 
@@ -297,7 +297,7 @@ class ProjectManager
     try {
       $this->file_repository->saveProjectZipFile($file, $project_id);
     } catch (\Exception $e) {
-      $this->logger->error('UploadError -> saveProjectZipFile failed, restoring backup', ['exception' => $e->getMessage()]);
+      $this->logger->error('UploadError -> saveProjectZipFile failed, restoring backup', ['exception' => $e]);
       if ($has_old_zip && file_exists($backup_path)) {
         $filesystem->rename($backup_path, $this->file_repository->zip_dir.$project_id.'.catrobat', true);
       }
@@ -349,6 +349,7 @@ class ProjectManager
       $this->logger->error('Asset deduplication failed (non-fatal)', [
         'project_id' => $project_id,
         'error' => $e->getMessage(),
+        'exception' => $e,
       ]);
     }
 

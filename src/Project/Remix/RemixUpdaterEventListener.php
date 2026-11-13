@@ -35,7 +35,7 @@ class RemixUpdaterEventListener
     try {
       $this->update($event->getExtractedFile(), $event->getProjectEntity());
     } catch (\Throwable $e) {
-      $this->logger->error('RemixUpdaterEventListener failed: '.$e->getMessage());
+      $this->logger->error('RemixUpdaterEventListener failed: '.$e->getMessage(), ['exception' => $e]);
     }
   }
 

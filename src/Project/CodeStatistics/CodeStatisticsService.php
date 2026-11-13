@@ -71,7 +71,7 @@ class CodeStatisticsService
 
       return $stats;
     } catch (\Throwable $e) {
-      $this->logger->error('On-demand code statistics parsing failed for project '.$project->getId().': '.$e->getMessage());
+      $this->logger->error('On-demand code statistics parsing failed for project '.$project->getId().': '.$e->getMessage(), ['exception' => $e]);
 
       return null;
     }

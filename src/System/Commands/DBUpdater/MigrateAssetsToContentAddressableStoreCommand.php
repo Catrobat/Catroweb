@@ -114,6 +114,7 @@ class MigrateAssetsToContentAddressableStoreCommand extends Command
           $this->logger->error('Migration failed for project', [
             'project_id' => $id,
             'error' => $e->getMessage(),
+            'exception' => $e,
           ]);
           $io->warning("  FAIL {$id}: {$e->getMessage()}");
         }

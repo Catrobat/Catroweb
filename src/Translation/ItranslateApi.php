@@ -118,7 +118,7 @@ class ItranslateApi implements TranslationApiInterface
         ]
       );
     } catch (GuzzleException $guzzleException) {
-      $this->logger->error(sprintf('Itranslate Guzzle client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $guzzleException->getMessage()));
+      $this->logger->error(sprintf('Itranslate Guzzle client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $guzzleException->getMessage()), ['exception' => $guzzleException]);
 
       return null;
     }
