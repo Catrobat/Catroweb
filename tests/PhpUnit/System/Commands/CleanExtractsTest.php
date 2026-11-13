@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\System\Commands;
 
 use App\System\Commands\Maintenance\CleanExtractsCommand;
+use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -41,7 +42,7 @@ class CleanExtractsTest extends KernelTestCase
   protected function tearDown(): void
   {
     // Clean up any test directories we created
-    foreach (['old_project_1', 'old_project_2', 'recent_project'] as $dir) {
+    foreach (['old_project_1', 'old_project_2', 'recent_project', 'live-project-id'] as $dir) {
       $path = $this->extract_dir.$dir;
       if (is_dir($path)) {
         $this->filesystem->remove($path);
@@ -119,5 +120,25 @@ class CleanExtractsTest extends KernelTestCase
     $return = $this->command_tester->execute(['--days' => '1']);
     $this->assertSame(0, $return);
     $this->assertDirectoryDoesNotExist($dir);
+  }
+
+  public function testKeepsDirectoriesOfExistingProjects(): void
+  {
+    $live_dir = $this->extract_dir.'live-project-id';
+    $this->filesystem->mkdir($live_dir);
+    $this->filesystem->touch($live_dir.'/code.xml');
+    touch($live_dir, time() - 30 * 86400);
+
+    $orphan_dir = $this->extract_dir.'old_project_1';
+    $this->filesystem->mkdir($orphan_dir);
+    touch($orphan_dir, time() - 30 * 86400);
+
+    $connection = $this->createStub(Connection::class);
+    $connection->method('fetchFirstColumn')->willReturn(['live-project-id']);
+    $tester = new CommandTester(new CleanExtractsCommand($this->extract_dir, $connection));
+
+    $this->assertSame(0, $tester->execute(['--days' => '7']));
+    $this->assertDirectoryExists($live_dir);
+    $this->assertDirectoryDoesNotExist($orphan_dir);
   }
 }
