@@ -27,6 +27,7 @@ class ProjectZipReconstructor
    * and extracted code.xml. Caches the result in the projects/ directory.
    *
    * Returns the absolute path to the reconstructed ZIP, or null on failure.
+   * A missing extracted directory is not logged here: callers decide how to report it.
    */
   public function reconstruct(string $projectId): ?string
   {
@@ -38,10 +39,6 @@ class ProjectZipReconstructor
 
     $extractPath = $this->extractDir.$projectId;
     if (!is_dir($extractPath)) {
-      $this->logger->error('Cannot reconstruct ZIP: extracted directory missing', [
-        'project_id' => $projectId,
-      ]);
-
       return null;
     }
 

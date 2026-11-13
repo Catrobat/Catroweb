@@ -509,7 +509,7 @@ class ProjectsController extends Controller
         200 => '.catrobat file successfully downloaded',
         400 => 'Bad request (Invalid, or missing parameters)',
         404 => 'Not found',
-        500 => 'We were not able to create a .catrobat file for this project. There is a high possibility that the project files are missing on the server.',
+        500 => 'We were not able to create a .catrobat file for this project. A project whose files are missing on the server answers 404.',
         default => '',
       };
 
