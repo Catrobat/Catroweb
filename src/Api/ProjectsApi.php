@@ -44,6 +44,7 @@ use OpenAPI\Server\Model\UpdateProjectRequest;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -664,7 +665,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $zipFile = $this->facade->getLoader()->getProjectCatrobatZipFile($id);
+    try {
+      $zipFile = $this->facade->getLoader()->getProjectCatrobatZipFile($id);
+    } catch (FileNotFoundException) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
     if (!$zipFile instanceof File) {
       $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 

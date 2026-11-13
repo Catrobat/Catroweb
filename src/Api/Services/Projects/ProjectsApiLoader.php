@@ -196,15 +196,25 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->tag_repository->getActiveTags();
   }
 
+  /**
+   * @throws FileNotFoundException when the project's files are gone (neither a ZIP nor an extracted directory)
+   */
   public function getProjectCatrobatZipFile(string $id): ?File
   {
+    $extracted_dir = $this->extracted_file_repository->getBaseDir($id);
+    if (!$this->file_repository->checkIfProjectZipFileExists($id) && !is_dir($extracted_dir)) {
+      $this->logger->warning('Project files missing, cannot provide .catrobat download', ['project_id' => $id]);
+
+      throw new FileNotFoundException($extracted_dir);
+    }
+
     try {
       if (!$this->file_repository->checkIfProjectZipFileExists($id)) {
         // Try reconstructing from content-addressable store first
         $reconstructed = $this->zip_reconstructor->reconstruct($id);
         if (null === $reconstructed) {
           // Fall back to existing behavior: zip from extracted files
-          $this->file_repository->zipProject($this->extracted_file_repository->getBaseDir($id), $id);
+          $this->file_repository->zipProject($extracted_dir, $id);
         }
       }
 
@@ -212,10 +222,8 @@ class ProjectsApiLoader extends AbstractApiLoader
       if (!$zipFile->isFile()) {
         return null;
       }
-    } catch (FileNotFoundException) {
-      return null;
     } catch (\Throwable $e) {
-      $this->logger->error(sprintf('Can\'t get project zip for "%s"; error: ', $id).$e->getMessage());
+      $this->logger->error('Can\'t get project zip', ['project_id' => $id, 'exception' => $e]);
 
       return null;
     }

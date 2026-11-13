@@ -28,6 +28,13 @@ Feature: Download programs
     When I request "GET" "/api/projects/999/catrobat"
     Then the response code should be "404"
 
+  Scenario: Projects whose files are missing on the server answer 404
+    Given there are projects:
+      | id | name           | owned by |
+      | 4  | files are gone | Catrobat |
+    When I request "GET" "/api/projects/4/catrobat"
+    Then the response code should be "404"
+
   Scenario: Projects download counter increases not when not authenticated
     When I request "GET" "/api/projects/1/catrobat"
     Then i should receive a project file

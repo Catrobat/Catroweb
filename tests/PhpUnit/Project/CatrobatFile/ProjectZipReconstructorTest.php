@@ -91,6 +91,16 @@ class ProjectZipReconstructorTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testReconstructDoesNotLogIfExtractedDirMissing(): void
+  {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->never())->method($this->anything());
+    $reconstructor = new ProjectZipReconstructor($this->mapping_repository, $this->store, $logger, $this->extract_dir, $this->zip_dir);
+
+    $this->assertNull($reconstructor->reconstruct('nonexistent-project'));
+  }
+
+  #[Group('unit')]
   public function testReconstructCreatesValidZipWithAssets(): void
   {
     $project_id = 'test-reconstruct';
