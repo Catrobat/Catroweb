@@ -192,11 +192,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   // Custom formatting for our logs
-  $logFormat = "[%%datetime%%] %%level_name%% %%channel%%: %%message%% | ip=%%extra.client_ip%% user=%%extra.session_user%% %%context%% %%extra%%\n";
+  $logFormat = "[%%datetime%%] %%level_name%% %%channel%%: %%message%% | ip=%%extra.client_ip%% user=%%extra.session_user%% rid=%%extra.request_id%% %%context%% %%extra%%\n";
   $services->set('monolog.formatter.catrobat_custom_formatter', LineFormatter::class)
     ->args([$logFormat, null, true, false])
     ->call('includeStacktraces', [true])
-    ->call('setBasePath', ['/var/www/my_project'])
+    ->call('setBasePath', ['%kernel.project_dir%'])
     ->call('indentStacktraces', ['    '])
     ->call('setMaxLevelNameLength', [5])
   ;

@@ -101,7 +101,7 @@ class CodeViewExportStore
       } catch (CodeExportUnavailableException $e) {
         $this->logger->info('Code view of project '.$id.' not refreshed: '.$e->getMessage());
       } catch (\Throwable $e) {
-        $this->logger->error('Code view export after the response failed: '.$e->getMessage());
+        $this->logger->error('Code view export after the response failed: '.$e->getMessage(), ['exception' => $e]);
       }
     }
   }
@@ -260,7 +260,7 @@ class CodeViewExportStore
     try {
       (new Filesystem())->dumpFile($this->path($id), json_encode($stored, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE, 100_000));
     } catch (\Throwable $e) {
-      $this->logger->error('Could not store the code view of project '.$id.': '.$e->getMessage());
+      $this->logger->error('Could not store the code view of project '.$id.': '.$e->getMessage(), ['exception' => $e]);
     }
   }
 

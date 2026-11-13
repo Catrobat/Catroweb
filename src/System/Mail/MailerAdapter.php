@@ -68,7 +68,7 @@ class MailerAdapter
     try {
       $html = $this->templateWrapper->render($template, $context);
     } catch (\Exception $exception) {
-      $this->logger->error('Can\'t render mail template: '.$template.$exception->getMessage());
+      $this->logger->error('Can\'t render mail template: '.$template.$exception->getMessage(), ['exception' => $exception]);
     }
 
     return new TemplatedEmail()
@@ -87,7 +87,7 @@ class MailerAdapter
       return new DkimSigner('file://'.$this->dkim_private_key_path, 'share.catrobat.org', 'sf')->sign($email);
     } catch (InvalidArgumentException $invalidArgumentException) {
       if ('prod' === $_ENV['APP_ENV']) {
-        $this->logger->error(sprintf('Private dkim key is missing (%s): ', $this->dkim_private_key_path).$invalidArgumentException->getMessage());
+        $this->logger->error(sprintf('Private dkim key is missing (%s): ', $this->dkim_private_key_path).$invalidArgumentException->getMessage(), ['exception' => $invalidArgumentException]);
       }
 
       return $email;

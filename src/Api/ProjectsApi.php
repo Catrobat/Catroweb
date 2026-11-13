@@ -1188,7 +1188,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
       return $error_response;
     } catch (\Exception $e) {
-      $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage().$e->getTraceAsString());
+      $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage(), ['exception' => $e]);
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $this->logUploadOutcome('failed', $e::class, $file, $flavor, $started, $via);
       $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);

@@ -145,7 +145,7 @@ class GoogleTranslateApi implements TranslationApiInterface
       $parent = sprintf('projects/%s/locations/global', $this->google_cloud_project_id);
       $response = $this->client->translateText([$text], $target_language, $parent, $source_language);
     } catch (ApiException $apiException) {
-      $this->logger->error(sprintf('Google translate client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $apiException->getMessage()));
+      $this->logger->error(sprintf('Google translate client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $apiException->getMessage()), ['exception' => $apiException]);
 
       return null;
     }

@@ -32,8 +32,22 @@ class LoggerProcessor
     $record->extra['client_ip'] = $this->getOriginalClientIp($request);
     $record->extra['user_agent'] = $this->getUserAgent($request);
     $record->extra['session_user'] = $this->getSessionUser();
+    $request_id = $this->getRequestId($request);
+    if (null !== $request_id) {
+      $record->extra['request_id'] = $request_id;
+    }
 
     return $record;
+  }
+
+  /**
+   * The reverse proxy sets X-Request-Id; only accept a plain token so a client cannot inject junk into log lines.
+   */
+  private function getRequestId(Request $request): ?string
+  {
+    $id = $request->headers->get('X-Request-Id');
+
+    return null !== $id && 1 === preg_match('/^[\w.-]{1,128}\z/', $id) ? $id : null;
   }
 
   private function getSessionUser(): string

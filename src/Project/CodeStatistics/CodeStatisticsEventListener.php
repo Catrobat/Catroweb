@@ -36,7 +36,7 @@ class CodeStatisticsEventListener
       $this->entity_manager->persist($stats);
       $this->entity_manager->flush();
     } catch (\Throwable $e) {
-      $this->logger->error('CodeStatisticsEventListener failed: '.$e->getMessage());
+      $this->logger->error('CodeStatisticsEventListener failed: '.$e->getMessage(), ['exception' => $e]);
     }
   }
 }

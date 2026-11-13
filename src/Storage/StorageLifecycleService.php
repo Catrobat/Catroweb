@@ -344,6 +344,7 @@ class StorageLifecycleService
           $this->logger->error('Storage lifecycle: failed to delete project {id}: {error}', [
             'id' => $projectId,
             'error' => $e->getMessage(),
+            'exception' => $e,
           ]);
           // A failed flush closes the EntityManager; every later delete would fail the same way.
           if (!$this->entity_manager->isOpen()) {
