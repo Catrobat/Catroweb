@@ -32,6 +32,7 @@ Feature: Download programs
     Given there are projects:
       | id | name           | owned by |
       | 4  | files are gone | Catrobat |
+    And project "4" has no extracted files
     When I request "GET" "/api/projects/4/catrobat"
     Then the response code should be "404"
 
