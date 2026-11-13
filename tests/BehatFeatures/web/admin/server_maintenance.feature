@@ -13,7 +13,7 @@ Feature: Admin Server Maintenance
     Given I am a logged in as super admin
     When I GET "/admin/system/maintenance/list"
     Then the client response should contain "Delete compressed files"
-    And the client response should contain "https://monitor-share.catrobat.org/d/catroweb"
+    And the client response should contain "https://monitoring.example.test/"
 
   Scenario: As a valid admin I want to be able to remove the compressed program files through the backend
   which should result in deleting resources from disk and reset entity state

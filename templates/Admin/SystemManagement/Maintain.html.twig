@@ -47,19 +47,21 @@
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="box">
-          <div class="box-header">
-            <h4>Server monitoring</h4>
-          </div>
-          <div class="box-body">
-            <p>Disk, memory and application logs live in Grafana.</p>
-            <a class="btn btn-default" href="https://monitor-share.catrobat.org/d/catroweb" target="_blank" rel="noopener noreferrer">
-              <i class="fa fa-line-chart"></i> Logs &amp; metrics (Grafana)
-            </a>
+      {% if admin_monitoring_url %}
+        <div class="col-md-4">
+          <div class="box">
+            <div class="box-header">
+              <h4>Server monitoring</h4>
+            </div>
+            <div class="box-body">
+              <p>Disk, memory and application logs live in Grafana.</p>
+              <a class="btn btn-default" href="{{ admin_monitoring_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-line-chart"></i> Logs &amp; metrics (Grafana)
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      {% endif %}
 
     </div>
 
