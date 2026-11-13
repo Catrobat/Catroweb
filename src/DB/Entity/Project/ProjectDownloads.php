@@ -23,7 +23,7 @@ class ProjectDownloads
   protected ?int $id = null;
 
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
-  #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'program_downloads')]
+  #[ORM\ManyToOne(targetEntity: Project::class)]
   protected Project $project;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
