@@ -556,8 +556,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: வட்டு பராமரிப்பு
-    ramMaintenance: ரேம் நினைவகம் பராமரிப்பு
     noRemovableObjects: அகற்றக்கூடிய பொருள்கள் எதுவும் இல்லை.
     removableObjects: அகற்றக்கூடிய பொருள்கள்
 recommender:

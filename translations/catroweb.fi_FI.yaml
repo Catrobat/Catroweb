@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Levyn ylläpito
-    ramMaintenance: RAM-muistin ylläpito
     noRemovableObjects: Poistettavia kohteita ei ole.
     removableObjects: Poistettavat kohteet
 recommender:

@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Skyfinstandhouding
-    ramMaintenance: RAM-instandhouding
     noRemovableObjects: Geen verwyderbare objekte beskikbaar nie.
     removableObjects: Verwyderbare objekte
 recommender:

@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Disk vedlikehold
-    ramMaintenance: RAM vedlikehold
     noRemovableObjects: Ingen flyttbare gjenstander for hånden.
     removableObjects: Flyttbare objekter
 recommender:

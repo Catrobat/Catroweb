@@ -556,8 +556,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 유지 보수 필요
-    ramMaintenance: 서비스 점검 중
     noRemovableObjects: 삭제할 오브젝트가 없음.
     removableObjects: 삭제 가능한 오브젝트
 recommender:

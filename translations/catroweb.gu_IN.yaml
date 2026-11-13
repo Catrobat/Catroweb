@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'ડિસ્ક જાળવણી'
-    ramMaintenance: 'RAM જાળવણી'
     noRemovableObjects: 'દૂર કરી શકાય તેવી કોઈ વસ્તુઓ ઉપલબ્ધ નથી.'
     removableObjects: 'દૂર કરી શકાય તેવી વસ્તુઓ'
 recommender:

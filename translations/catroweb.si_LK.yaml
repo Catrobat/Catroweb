@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: තැටි නඩත්තුව
-    ramMaintenance: RAM නඩත්තුව
     noRemovableObjects: ඉවත් කළ හැකි වස්තු නැහැ.
     removableObjects: ඉවත් කළ හැකි වස්තු
 recommender:

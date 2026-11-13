@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: صيانة القرص
-    ramMaintenance: صيانة ذاكرة الوصول العشوائي
     noRemovableObjects: لا يوجد كائنات قابلة للإزالة.
     removableObjects: كائنات قابلة للإزالة
 recommender:

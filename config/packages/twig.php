@@ -20,6 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'captcha_public_url' => '%env(CAPTCHA_PUBLIC_URL)%',
         'captcha_site_key' => '%env(CAPTCHA_SITE_KEY)%',
         'player_origin' => '%env(PLAYER_ORIGIN)%',
+        'admin_monitoring_url' => '%env(ADMIN_MONITORING_URL)%',
       ],
       'form_themes' => [
         '@SonataForm/Form/datepicker.html.twig',

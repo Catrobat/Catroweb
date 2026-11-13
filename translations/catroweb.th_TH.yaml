@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: การบำรุงรักษาดิสก์
-    ramMaintenance: การบำรุงรักษา RAM
     noRemovableObjects: ไม่มีวัตถุที่ถอดออกได้
     removableObjects: วัตถุที่ถอดออกได้
 recommender:

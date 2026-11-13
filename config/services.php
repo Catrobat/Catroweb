@@ -38,8 +38,6 @@ use App\Admin\System\DB_Updater\SpecialUpdaterAdmin;
 use App\Admin\System\DB_Updater\TagsAdmin;
 use App\Admin\System\FeatureFlag\FeatureFlagAdmin;
 use App\Admin\System\FeatureFlag\FeatureFlagController;
-use App\Admin\System\Logs\LogsAdmin;
-use App\Admin\System\Logs\LogsController;
 use App\Admin\System\Maintenance\MaintenanceAdmin;
 use App\Admin\System\Maintenance\MaintenanceController;
 use App\Admin\UserCommunication\BroadcastNotification\BroadcastNotificationAdmin;
@@ -532,19 +530,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => CronJob::class,
         'controller' => MaintenanceController::class,
-      ]
-    )
-  ;
-  $services->set('admin.block.tools.logs', LogsAdmin::class)
-    ->tag(
-      'sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Logs',
-        'icon' => '<i class="fa fa-cogs"></i>',
-        'code' => null,
-        'model_class' => CronJob::class,
-        'controller' => LogsController::class,
       ]
     )
   ;

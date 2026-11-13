@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "Kula da faifai"
-    ramMaintenance: "Kula da RAM"
     noRemovableObjects: "Babu abubuwan da za a iya cirewa."
     removableObjects: "Abubuwan da za a iya cirewa"
 recommender:

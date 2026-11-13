@@ -578,8 +578,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: د ډیسک ساتنه
-    ramMaintenance: د رام ساتنه
     noRemovableObjects: د لرې کولو وړ شیان شتون نلري.
     removableObjects: د لرې کولو وړ توکي
 recommender:

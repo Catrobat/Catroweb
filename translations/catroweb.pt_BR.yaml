@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Manutenção de disco
-    ramMaintenance: Manutenção de RAM
     noRemovableObjects: Não há objetos removíveis disponíveis.
     removableObjects: Objetos removíveis
 recommender:

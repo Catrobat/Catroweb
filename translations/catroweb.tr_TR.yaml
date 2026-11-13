@@ -575,8 +575,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Disk bakımı
-    ramMaintenance: RAM bakımı
     noRemovableObjects: Kaldırılamaz objeler mevcut.
     removableObjects: Çıkarılabilir nesneler
 recommender:

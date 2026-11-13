@@ -181,7 +181,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'icon' => '<i class="fa fa-cogs"></i>',
             'items' => [
               'admin.block.tools.maintain',
-              'admin.block.tools.logs',
               'admin.block.tools.feature_flag',
               'admin.block.cron_jobs',
               'admin.block.special_updater',

@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Diskoaren mantentzea'
-    ramMaintenance: 'RAMaren mantentzea'
     noRemovableObjects: 'Ez dago objektu ezabagarririk.'
     removableObjects: 'Objektu ezabagarriak'
 recommender:

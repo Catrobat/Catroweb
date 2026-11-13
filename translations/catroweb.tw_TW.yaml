@@ -551,8 +551,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Disk nhwɛsoɔ'
-    ramMaintenance: 'RAM nhwɛsoɔ'
     noRemovableObjects: 'Adeɛ biara nni hɔ a wobɛtumi ayi.'
     removableObjects: 'Nneɛma a wobɛtumi ayi'
 recommender:

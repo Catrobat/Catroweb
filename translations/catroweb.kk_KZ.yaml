@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Дискіге техникалық қызмет көрсету
-    ramMaintenance: ЖЖҚ техникалық қызмет көрсету
     noRemovableObjects: Кетіруге обьект табылмады.
     removableObjects: Кетірілетін обьекттер
 recommender:

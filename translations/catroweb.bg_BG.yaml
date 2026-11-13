@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Поддръжка на диска
-    ramMaintenance: Поддръжка на RAM
     noRemovableObjects: Няма обекти за премахване.
     removableObjects: Обекти за премахване
 recommender:

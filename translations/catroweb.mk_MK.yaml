@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Одржување на дискот'
-    ramMaintenance: 'Одржување на RAM'
     noRemovableObjects: 'Нема објекти за отстранување.'
     removableObjects: 'Објекти за отстранување'
 recommender:

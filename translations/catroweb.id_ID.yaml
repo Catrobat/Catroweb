@@ -556,8 +556,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: Pemeliharaan disk
-    ramMaintenance: Pemeliharaan RAM
     noRemovableObjects: Tidak tersedia objek yang dapat dipindahkan.
     removableObjects: Benda yang bisa dilepas
 recommender:

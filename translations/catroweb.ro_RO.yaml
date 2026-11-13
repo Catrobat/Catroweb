@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "Întreținerea discului"
-    ramMaintenance: "Întreținerea memoriei RAM"
     noRemovableObjects: "Nu există obiecte care pot fi eliminate."
     removableObjects: "Obiecte care pot fi eliminate"
 recommender:

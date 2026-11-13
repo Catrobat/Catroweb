@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "Penyelenggaraan cakera"
-    ramMaintenance: "Penyelenggaraan RAM"
     noRemovableObjects: "Tiada objek yang boleh dibuang."
     removableObjects: "Objek yang boleh dibuang"
 recommender:

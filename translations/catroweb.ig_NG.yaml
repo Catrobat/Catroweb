@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Nlekọta diski'
-    ramMaintenance: 'Nlekọta RAM'
     noRemovableObjects: 'Enweghị ihe a ga-ewepụ.'
     removableObjects: 'Ihe a ga-ewepụ'
 recommender:

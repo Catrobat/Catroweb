@@ -554,8 +554,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: "Diskka xizmat koʻrsatish"
-    ramMaintenance: "RAMga xizmat koʻrsatish"
     noRemovableObjects: "Oʻchiriladigan obyektlar yoʻq."
     removableObjects: "Oʻchiriladigan obyektlar"
 recommender:

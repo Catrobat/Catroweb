@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Lemezkarbantartás'
-    ramMaintenance: 'RAM-karbantartás'
     noRemovableObjects: 'Nincsenek eltávolítható objektumok.'
     removableObjects: 'Eltávolítható objektumok'
 recommender:

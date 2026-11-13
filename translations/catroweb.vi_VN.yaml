@@ -577,8 +577,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Bảo trì ổ đĩa'
-    ramMaintenance: 'Bảo trì RAM'
     noRemovableObjects: 'Không có đối tượng nào có thể xóa.'
     removableObjects: 'Đối tượng có thể xóa'
 recommender:

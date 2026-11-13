@@ -551,8 +551,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Disk ᎦᎦᏌᏯᏍᏗ'
-    ramMaintenance: 'RAM ᎦᎦᏌᏯᏍᏗ'
     noRemovableObjects: 'ᎥᏝ ᎪᎱᏍᏗ ᎦᏛᏗ ᏱᏓᏁᎭ.'
     removableObjects: 'ᎦᏛᏗ ᏧᏓᎴᏅᏓ'
 recommender:

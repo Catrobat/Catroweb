@@ -576,8 +576,6 @@ api:
 
 admin:
   maintain:
-    diskMaintenance: 'Diskə texniki xidmət'
-    ramMaintenance: 'RAM-a texniki xidmət'
     noRemovableObjects: 'Silinə bilən obyekt yoxdur.'
     removableObjects: 'Silinə bilən obyektlər'
 recommender:
