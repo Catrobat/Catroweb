@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\System\Commands\Maintenance;
 
 use App\Storage\FileHelper;
+use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,7 +14,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 
-#[AsCommand(name: 'catrobat:clean:extracts', description: 'Delete extracted project directories older than N days')]
+/**
+ * The extracted directory is a project's source of truth (code.xml + asset mappings): the .catrobat
+ * ZIP is only a cache that catrobat:clean:compressed empties daily. So only directories of projects
+ * that no longer exist are removed; live projects lose their files only through retention.
+ */
+#[AsCommand(name: 'catrobat:clean:extracts', description: 'Delete orphaned extracted project directories (no project row) older than N days')]
 class CleanExtractsCommand extends Command
 {
   private const int DEFAULT_DAYS = 7;
@@ -23,6 +29,7 @@ class CleanExtractsCommand extends Command
   public function __construct(
     #[Autowire('%catrobat.file.extract.dir%')]
     private readonly string $extract_dir,
+    private readonly Connection $connection,
   ) {
     parent::__construct();
   }
@@ -31,7 +38,7 @@ class CleanExtractsCommand extends Command
   protected function configure(): void
   {
     $this
-      ->addOption('days', 'd', InputOption::VALUE_REQUIRED, 'Delete directories older than this many days', (string) self::DEFAULT_DAYS)
+      ->addOption('days', 'd', InputOption::VALUE_REQUIRED, 'Delete orphaned directories older than this many days', (string) self::DEFAULT_DAYS)
       ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Preview what would be deleted without actually deleting')
     ;
   }
@@ -57,7 +64,9 @@ class CleanExtractsCommand extends Command
     $cutoff = new \DateTimeImmutable('-'.$days.' days');
     $cutoff_timestamp = $cutoff->getTimestamp();
 
-    $output->writeln(($dry_run ? '[DRY RUN] ' : '').'Cleaning extracted project directories older than '.$days.' days...');
+    $output->writeln(($dry_run ? '[DRY RUN] ' : '').'Cleaning orphaned extracted project directories older than '.$days.' days...');
+
+    $project_ids = array_fill_keys(array_map(strval(...), $this->connection->fetchFirstColumn('SELECT id FROM program')), true);
 
     $finder = new Finder();
     $finder->in($this->extract_dir)->directories()->depth(0);
@@ -67,7 +76,7 @@ class CleanExtractsCommand extends Command
     $batch_count = 0;
 
     foreach ($finder as $dir) {
-      if ($dir->getMTime() >= $cutoff_timestamp) {
+      if ($dir->getMTime() >= $cutoff_timestamp || isset($project_ids[$dir->getFilename()])) {
         continue;
       }
 
