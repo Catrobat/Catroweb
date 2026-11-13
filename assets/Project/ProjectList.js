@@ -9,7 +9,7 @@ import './ProjectList.css'
 
 const projectListRegistry = new Map()
 
-export function getProjectListInstance(containerId) {
+function getProjectListInstance(containerId) {
   return projectListRegistry.get(containerId) || null
 }
 
