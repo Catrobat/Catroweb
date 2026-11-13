@@ -14,7 +14,7 @@ class ProjectExpiringNotification extends CatroNotification
 {
   public function __construct(
     User $user,
-    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Project::class)]
     private ?Project $project = null,
     #[ORM\Column(name: 'expiry_days', type: Types::INTEGER, nullable: true)]

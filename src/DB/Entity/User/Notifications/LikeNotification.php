@@ -28,7 +28,7 @@ class LikeNotification extends CatroNotification
     #[ORM\JoinColumn(name: 'like_from', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'like_notification_mentions')]
     private ?User $like_from,
-    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'like_notification_mentions')]
     private ?Project $project,
   ) {

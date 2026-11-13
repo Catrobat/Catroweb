@@ -18,7 +18,7 @@ class NewProjectNotification extends CatroNotification
 
   public function __construct(
     User $user,
-    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'new_program_notification_mentions')]
     private ?Project $project,
   ) {

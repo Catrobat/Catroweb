@@ -278,6 +278,8 @@ class StorageLifecycleService
         break;
       }
 
+      $deleted_in_batch = 0;
+
       /** @var Project $project */
       foreach ($projects as $project) {
         ++$checked;
@@ -320,6 +322,7 @@ class StorageLifecycleService
           }
           $this->hardDeleteProject($project);
           ++$deleted;
+          ++$deleted_in_batch;
           $this->logger->info('Storage lifecycle: deleted project {id} "{name}"', [
             'id' => $projectId,
             'name' => $projectName,
@@ -330,10 +333,15 @@ class StorageLifecycleService
             'id' => $projectId,
             'error' => $e->getMessage(),
           ]);
+          // A failed flush closes the EntityManager; every later delete would fail the same way.
+          if (!$this->entity_manager->isOpen()) {
+            break 2;
+          }
         }
       }
 
-      $offset += self::BATCH_SIZE;
+      // Deleted rows shift the following ones forward; skipping a full batch would miss them.
+      $offset += self::BATCH_SIZE - $deleted_in_batch;
       $this->entity_manager->clear();
     }
 
