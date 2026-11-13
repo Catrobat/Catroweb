@@ -36,6 +36,7 @@ class FeaturedRepository extends ServiceEntityRepository
     ;
     $qb->orderBy('e.priority', 'DESC');
     $qb->leftJoin('e.project', 'project');
+    $qb->andWhere('project.id IS NULL OR project.has_missing_files = false');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
     $qb = $this->addPlatformCondition($qb, $platform);
@@ -53,6 +54,7 @@ class FeaturedRepository extends ServiceEntityRepository
       ->where('e.active = true')
     ;
     $qb->leftJoin('e.project', 'project');
+    $qb->andWhere('project.id IS NULL OR project.has_missing_files = false');
     $qb->orderBy('e.priority', 'DESC')->addOrderBy('e.id', 'DESC');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);

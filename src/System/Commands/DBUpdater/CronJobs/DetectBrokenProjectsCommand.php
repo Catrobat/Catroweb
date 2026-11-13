@@ -12,8 +12,13 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
-#[AsCommand(name: 'catrobat:workflow:detect_broken_projects', description: 'Detect projects with missing .catrobat files and flag them.')]
+/**
+ * The .catrobat zip is only a cache (emptied by catrobat:clean:compressed, rebuilt by ProjectZipReconstructor from
+ * the extracted directory), so a project is broken only when both the zip and the extracted code.xml are gone.
+ */
+#[AsCommand(name: 'catrobat:workflow:detect_broken_projects', description: 'Detect projects whose files are lost (no .catrobat zip and no extracted code.xml) and flag them.')]
 class DetectBrokenProjectsCommand extends Command
 {
   private const int BATCH_SIZE = 100;
@@ -21,6 +26,8 @@ class DetectBrokenProjectsCommand extends Command
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
     private readonly ProjectFileRepository $file_repository,
+    #[Autowire('%catrobat.file.extract.dir%')]
+    private readonly string $extract_dir,
   ) {
     parent::__construct();
   }
@@ -57,7 +64,8 @@ class DetectBrokenProjectsCommand extends Command
 
       foreach ($projects as $project) {
         $id = $project['id'];
-        $file_exists = $this->file_repository->checkIfProjectZipFileExists($id);
+        $file_exists = $this->file_repository->checkIfProjectZipFileExists($id)
+          || is_file($this->extract_dir.$id.'/code.xml');
 
         if (!$file_exists) {
           $broken_ids[] = $id;

@@ -195,6 +195,7 @@ class FollowersApiLoader extends AbstractApiLoader
       ->andWhere('p.visible = true')
       ->andWhere('p.auto_hidden = false')
       ->andWhere('p.private = false')
+      ->andWhere('p.has_missing_files = false')
       ->andWhere('p.debug_build = false')
       ->setParameter('userIds', $user_ids)
       ->groupBy('p.user')

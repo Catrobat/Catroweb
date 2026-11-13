@@ -56,6 +56,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'visible' => null,
             'debug_build' => null,
             'auto_hidden' => null,
+            'has_missing_files' => ['type' => 'boolean'],
             'getTagsString' => [
               'type' => 'text',
             ],

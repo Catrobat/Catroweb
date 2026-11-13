@@ -40,6 +40,7 @@ class ExampleRepository extends ServiceEntityRepository
     ;
     $qb->orderBy('e.priority', 'DESC');
     $qb->leftJoin('e.project', 'project');
+    $qb->andWhere('project.has_missing_files = false');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
 
@@ -57,6 +58,7 @@ class ExampleRepository extends ServiceEntityRepository
     ;
     $qb->orderBy('e.priority', 'DESC');
     $qb->leftJoin('e.project', 'project');
+    $qb->andWhere('project.has_missing_files = false');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
 

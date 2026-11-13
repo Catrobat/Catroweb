@@ -53,6 +53,7 @@ class SitemapListener
       ->where('p.visible = true')
       ->andWhere('p.auto_hidden = false')
       ->andWhere('p.private = false')
+      ->andWhere('p.has_missing_files = false')
       ->andWhere('p.debug_build = false')
       ->orderBy('p.id', 'ASC')
       ->setMaxResults(self::BATCH_SIZE)

@@ -101,6 +101,7 @@ class ProjectDataFixtures
     $project->setPopularity((float) ($config['popularity'] ?? 0));
     $project->setNotForKids((int) ($config['not_for_kids'] ?? 0));
     $project->setAutoHidden(isset($config['auto_hidden']) && 'true' === $config['auto_hidden']);
+    $project->setHasMissingFiles(isset($config['has_missing_files']) && 'true' === $config['has_missing_files']);
     $project->setSlug(empty($config['slug']) ? null : $config['slug']);
 
     $this->entity_manager->persist($project);

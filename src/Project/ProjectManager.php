@@ -66,7 +66,27 @@ class ProjectManager
 
   public function getProjectByID(string $id, bool $include_private = false): array
   {
-    return $this->project_repository->getProjectByID($id, $include_private);
+    return array_values(array_filter(
+      $this->project_repository->getProjectByID($id, $include_private),
+      fn (Project $project): bool => !$this->isHiddenBecauseFilesAreMissing($project)
+    ));
+  }
+
+  /**
+   * A project whose files were lost is only shown to its owner (so they know to re-upload it) and admins.
+   */
+  public function isHiddenBecauseFilesAreMissing(Project $project): bool
+  {
+    if (!$project->hasMissingFiles()) {
+      return false;
+    }
+
+    $user = $this->security->getUser();
+    if (!$user instanceof User) {
+      return true;
+    }
+
+    return $project->getUser() !== $user && !$this->security->isGranted('ROLE_ADMIN');
   }
 
   /**
@@ -116,7 +136,7 @@ class ProjectManager
       return $this->security->isGranted('ROLE_ADMIN');
     }
 
-    if ($this->isHiddenFromCurrentMinor($project)) {
+    if ($this->isHiddenFromCurrentMinor($project) || $this->isHiddenBecauseFilesAreMissing($project)) {
       return false;
     }
 
@@ -288,6 +308,12 @@ class ProjectManager
     // New zip saved successfully, remove backup
     if (file_exists($backup_path)) {
       $filesystem->remove($backup_path);
+    }
+
+    // A re-upload restores a project whose files were lost: show it again right away.
+    if ($project->hasMissingFiles()) {
+      $project->setHasMissingFiles(false);
+      $this->entity_manager->flush();
     }
 
     $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));

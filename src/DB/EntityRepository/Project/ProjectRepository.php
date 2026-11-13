@@ -540,6 +540,7 @@ class ProjectRepository extends ServiceEntityRepository
   private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', ?bool $is_debug_build_request = null): QueryBuilder
   {
     $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, 'e', $is_debug_build_request);
+    $qb = $this->excludeProjectsWithMissingFiles($qb, 'e');
 
     return $this->excludePrivateProjects($qb, 'e');
   }
@@ -619,6 +620,17 @@ class ProjectRepository extends ServiceEntityRepository
     ;
   }
 
+  /**
+   * Projects whose files were lost stay out of public lists until their owner re-uploads them.
+   * The owner's own list (excludeUnavailableProjects only) still shows them.
+   */
+  private function excludeProjectsWithMissingFiles(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  {
+    return $query_builder->andWhere(
+      $query_builder->expr()->eq($alias.'.has_missing_files', $query_builder->expr()->literal(false))
+    );
+  }
+
   private function excludePrivateProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
   {
     return $query_builder->andWhere(
@@ -629,6 +641,8 @@ class ProjectRepository extends ServiceEntityRepository
   private function excludeUnavailableAndPrivateProjectsElastica(BoolQuery $qb, ?string $flavor = null, string $max_version = ''): void
   {
     $this->excludePrivateProjectsElastica($qb);
+    // must_not instead of must false: documents indexed before the field existed have no value
+    $qb->addMustNot(new Query\Term(['has_missing_files' => true]));
     $this->excludeUnavailableProjectsElastica($qb, $flavor, $max_version);
   }
 
