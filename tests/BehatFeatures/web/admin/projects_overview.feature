@@ -159,17 +159,6 @@ Feature: Admin all projects
       | 1    | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | 0 B  | no      | no          | yes     | no        | no    | Safe for kids | Expired (90d)    | Show Hide Protect Whitelist        |
 
 
-# # TODO: Report project feature currently disabled
-#  Scenario: Admin should be able to change if project is approved
-#    Given I log in as "Admin" with the password "123456"
-#    Given I am on "/admin/project/list"
-#    And I wait for the page to be loaded
-#    And I change the approval of the project number "4" in the list to "yes"
-#    And I report project 2 with category "spam" and note "Bad Program" in Browser
-#    And I am on "/app"
-#    And I wait for the page to be loaded
-#    Then I should see "program 2"
-
   Scenario: Change the visibility of the program
     Given I log in as "Admin" with the password "123456"
     And I am on "/app"

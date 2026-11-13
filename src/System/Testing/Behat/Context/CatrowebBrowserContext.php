@@ -619,25 +619,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I change the approval of the project number "([^"]*)" in the list to "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iChangeTheApprovalOfTheProject(string $project_number, string $approved): void
-  {
-    // /param project_number contains the number of the project position in the list on the admin page
-    // /
-    $page = $this->getSession()->getPage();
-    // /click the visibility button (yes/no)
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[11]/span')
-      ->click()
-    ;
-
-    $this->iSelectTheOptionInThePopup($approved);
-  }
-
-  /**
    * @Then /^I change the approval of the project number "([^"]*)" in the approve list to "([^"]*)"$/
    *
    * @throws \Exception
@@ -773,23 +754,6 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $page = $this->getSession()->getPage();
     $page->findById('code-view')->click();
-  }
-
-  /**
-   * @When /^I report project (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iReportProjectWithNoteInBrowser(string $project_id, string $category, string $note): void
-  {
-    $this->visit('app/project/'.$project_id);
-    $this->iWaitForThePageToBeLoaded();
-    $this->iClick('#top-app-bar__btn-report-project');
-    $this->iWaitForAjaxToFinish();
-    $this->iClickTheRadiobutton('#report-cat-'.$category);
-    $this->getSession()->getPage()->find('css', '#report-note')->setValue($note);
-    $this->iClick('.swal2-confirm');
-    $this->iWaitForAjaxToFinish();
   }
 
   /**

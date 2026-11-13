@@ -469,20 +469,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I report project (\d+) with category "([^"]*)" and note "([^"]*)"$/
-   */
-  public function iReportProjectWithNote(string $project_id, string $category, string $note): void
-  {
-    $url = '/app/api/reportProject/reportProject.json';
-    $this->request_parameters = [
-      'project' => $project_id,
-      'category' => $category,
-      'note' => $note,
-    ];
-    $this->iRequestWith('POST', $url);
-  }
-
-  /**
    * @When /^I POST login with user "([^"]*)" and password "([^"]*)"$/
    *
    * @throws \Exception
