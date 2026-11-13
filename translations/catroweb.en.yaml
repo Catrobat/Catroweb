@@ -709,6 +709,9 @@ catro-notifications:
     message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
   project-deleted:
     message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
+  project-files-lost:
+    message: 'A server error lost the files of %count% of your projects: %projects%. They are hidden until you upload them again from Pocket Code. Projects that are not uploaded again within 14 days will be deleted.'
+    more: 'and %count% more'
   noProjects: "It looks like you don't have any project notifications."
 
 clipboard:

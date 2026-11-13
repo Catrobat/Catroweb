@@ -14,6 +14,7 @@ use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
 use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
+use App\DB\Entity\User\Notifications\ProjectFilesLostNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\Notifications\StudioCommentNotification;
 use App\DB\Entity\User\Notifications\StudioJoinRequestNotification;
@@ -32,6 +33,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class NotificationsResponseManager extends AbstractResponseManager
 {
   use KeysetCursorTrait;
+
+  private const int LOST_FILES_LISTED_NAMES = 10;
 
   public function __construct(
     TranslatorInterface $translator,
@@ -269,6 +272,25 @@ class NotificationsResponseManager extends AbstractResponseManager
         'project_name' => $notification->getProjectName(),
         'message' => $this->trans('catro-notifications.project-deleted.message', [
           '%project_name%' => $notification->getProjectName() ?? '',
+        ]),
+      ]);
+    }
+
+    if ($notification instanceof ProjectFilesLostNotification) {
+      $names = array_values($notification->getProjects());
+      $listed = implode(', ', array_map(static fn (string $name): string => '"'.$name.'"', array_slice($names, 0, self::LOST_FILES_LISTED_NAMES)));
+      $more = count($names) - self::LOST_FILES_LISTED_NAMES;
+      if ($more > 0) {
+        $listed .= ' '.$this->trans('catro-notifications.project-files-lost.more', ['%count%' => (string) $more]);
+      }
+
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'project',
+        'seen' => $notification->getSeen(),
+        'message' => $this->trans('catro-notifications.project-files-lost.message', [
+          '%count%' => (string) count($names),
+          '%projects%' => $listed,
         ]),
       ]);
     }

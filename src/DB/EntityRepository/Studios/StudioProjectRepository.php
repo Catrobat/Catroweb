@@ -41,7 +41,7 @@ class StudioProjectRepository extends ServiceEntityRepository
   public static function applyViewerVisibility(QueryBuilder $qb, ?User $viewer, string $project_alias = 'p'): void
   {
     $p = $project_alias;
-    $publicly_visible = "{$p}.visible = true AND {$p}.auto_hidden = false AND {$p}.private = false";
+    $publicly_visible = "{$p}.visible = true AND {$p}.auto_hidden = false AND {$p}.private = false AND {$p}.has_missing_files = false";
     if (!$viewer instanceof User) {
       $qb->andWhere($publicly_visible);
 

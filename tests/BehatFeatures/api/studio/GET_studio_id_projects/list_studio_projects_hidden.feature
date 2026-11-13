@@ -1,5 +1,5 @@
 @api @studio
-Feature: Studio project lists hide hidden and private projects, except from their owner
+Feature: Studio project lists hide hidden, private and lost-files projects, except from their owner
 
   Background:
     Given there are users:
@@ -8,11 +8,12 @@ Feature: Studio project lists hide hidden and private projects, except from thei
       | 2  | Owner    |
       | 3  | Stranger |
     And there are projects:
-      | id | name            | owned by | visible | auto_hidden | private |
-      | 1  | ShownProject    | Admin    | true    | false       | false   |
-      | 2  | HiddenProject   | Owner    | false   | false       | false   |
-      | 3  | AutoHiddenProj  | Owner    | true    | true        | false   |
-      | 4  | PrivateProject  | Owner    | true    | false       | true    |
+      | id | name            | owned by | visible | auto_hidden | private | has_missing_files |
+      | 1  | ShownProject    | Admin    | true    | false       | false   | false             |
+      | 2  | HiddenProject   | Owner    | false   | false       | false   | false             |
+      | 3  | AutoHiddenProj  | Owner    | true    | true        | false   | false             |
+      | 4  | PrivateProject  | Owner    | true    | false       | true    | false             |
+      | 5  | LostFilesProj   | Owner    | true    | false       | false   | true              |
     And there are studios:
       | id | name    | description | is_public |
       | 1  | Studio1 | Test studio | true      |
@@ -26,6 +27,7 @@ Feature: Studio project lists hide hidden and private projects, except from thei
       | Owner | Studio1     | HiddenProject  |
       | Owner | Studio1     | AutoHiddenProj |
       | Owner | Studio1     | PrivateProject |
+      | Owner | Studio1     | LostFilesProj  |
 
   Scenario: Guests only see publicly visible projects
     When I GET "/api/studios/1/projects"
@@ -34,6 +36,7 @@ Feature: Studio project lists hide hidden and private projects, except from thei
     And the client response should not contain "HiddenProject"
     And the client response should not contain "AutoHiddenProj"
     And the client response should not contain "PrivateProject"
+    And the client response should not contain "LostFilesProj"
 
   Scenario: Other users only see publicly visible projects
     Given I use a valid JWT Bearer token for "Stranger"
@@ -43,6 +46,7 @@ Feature: Studio project lists hide hidden and private projects, except from thei
     And the client response should not contain "HiddenProject"
     And the client response should not contain "AutoHiddenProj"
     And the client response should not contain "PrivateProject"
+    And the client response should not contain "LostFilesProj"
 
   Scenario: The owner still sees their own projects
     Given I use a valid JWT Bearer token for "Owner"
@@ -52,3 +56,4 @@ Feature: Studio project lists hide hidden and private projects, except from thei
     And the client response should contain "HiddenProject"
     And the client response should contain "AutoHiddenProj"
     And the client response should contain "PrivateProject"
+    And the client response should contain "LostFilesProj"

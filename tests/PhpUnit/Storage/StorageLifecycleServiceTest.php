@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Storage;
 
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\User\Notifications\ProjectFilesLostNotification;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Storage\ScreenshotRepository;
 use App\Storage\StorageLifecycleService;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
@@ -202,10 +204,87 @@ class StorageLifecycleServiceTest extends TestCase
     self::assertSame(['checked' => 1, 'deleted' => 0, 'errors' => 1], $result);
   }
 
+  public function testDeletesProjectWithLostFilesFifteenDaysAfterTheNotice(): void
+  {
+    $table = [$this->createLostFilesProjectStub('lost', hasMissingFiles: true)];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false, notices: [$this->createNotice('lost', '-15 days')])->deleteExpiredProjects();
+
+    self::assertSame(1, $result['deleted']);
+    self::assertSame([], $table);
+  }
+
+  public function testKeepsProjectWithLostFilesThirteenDaysAfterTheNotice(): void
+  {
+    $table = [$this->createLostFilesProjectStub('lost', hasMissingFiles: true)];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false, notices: [$this->createNotice('lost', '-13 days')])->deleteExpiredProjects();
+
+    self::assertSame(0, $result['deleted']);
+    self::assertCount(1, $table);
+  }
+
+  public function testKeepsRestoredProjectAfterTheNotice(): void
+  {
+    $table = [$this->createLostFilesProjectStub('restored', hasMissingFiles: false)];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false, notices: [$this->createNotice('restored', '-15 days')])->deleteExpiredProjects();
+
+    self::assertSame(0, $result['deleted']);
+    self::assertCount(1, $table);
+  }
+
+  public function testKeepsProjectLostAgainAfterARestoreUntilItIsNoticedAgain(): void
+  {
+    // Notified 20 days ago, re-uploaded 5 days ago, flagged again since: the old notice is about the earlier loss.
+    $table = [$this->createLostFilesProjectStub('lost', hasMissingFiles: true, uploadedAt: '-5 days')];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false, notices: [$this->createNotice('lost', '-20 days')])->deleteExpiredProjects();
+
+    self::assertSame(0, $result['deleted']);
+    self::assertCount(1, $table);
+  }
+
+  public function testKeepsProjectWithLostFilesWhoseOwnerWasNeverNotified(): void
+  {
+    $table = [$this->createLostFilesProjectStub('lost', hasMissingFiles: true)];
+
+    $result = $this->buildServiceOverTable($table, flushFails: false, notices: [$this->createNotice('other', '-15 days')])->deleteExpiredProjects();
+
+    self::assertSame(0, $result['deleted']);
+    self::assertCount(1, $table);
+  }
+
   /**
-   * @param list<Project> $table rows; removed projects are dropped from it on flush
+   * An active project that normal retention keeps for a year.
    */
-  private function buildServiceOverTable(array &$table, bool $flushFails): StorageLifecycleService
+  private function createLostFilesProjectStub(string $id, bool $hasMissingFiles, string $uploadedAt = '-30 days'): Project
+  {
+    $project = $this->createStub(Project::class);
+    $project->method('getId')->willReturn($id);
+    $project->method('hasMissingFiles')->willReturn($hasMissingFiles);
+    $project->method('getDownloads')->willReturn(100);
+    $project->method('getVisible')->willReturn(true);
+    $project->method('getUser')->willReturn($this->createStub(User::class));
+    $project->method('getUploadedAt')->willReturn(new \DateTime($uploadedAt));
+    $project->method('getName')->willReturn('Lost Project');
+
+    return $project;
+  }
+
+  private function createNotice(string $projectId, string $age): ProjectFilesLostNotification
+  {
+    $notice = new ProjectFilesLostNotification($this->createStub(User::class), [$projectId => 'Lost Project']);
+    $notice->setCreatedAt(new \DateTime($age));
+
+    return $notice;
+  }
+
+  /**
+   * @param list<Project>                      $table   rows; removed projects are dropped from it on flush
+   * @param list<ProjectFilesLostNotification> $notices
+   */
+  private function buildServiceOverTable(array &$table, bool $flushFails, array $notices = []): StorageLifecycleService
   {
     $offset = 0;
     $removed = null;
@@ -228,8 +307,12 @@ class StorageLifecycleServiceTest extends TestCase
     });
     $qb->method('getQuery')->willReturn($query);
 
+    $notice_repository = $this->createStub(EntityRepository::class);
+    $notice_repository->method('findAll')->willReturn($notices);
+
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('createQueryBuilder')->willReturn($qb);
+    $em->method('getRepository')->willReturn($notice_repository);
     $em->method('isOpen')->willReturnCallback(static function () use (&$open): bool {
       return $open;
     });

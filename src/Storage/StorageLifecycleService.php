@@ -9,6 +9,7 @@ use App\DB\Entity\Project\Special\ExampleProject;
 use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
 use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
+use App\DB\Entity\User\Notifications\ProjectFilesLostNotification;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,6 +32,9 @@ class StorageLifecycleService
 
   private const int ACTIVE_DOWNLOAD_MINIMUM = 10;
   private const int USER_ACTIVE_DAYS = 180;
+
+  /** Days an owner has to re-upload a project whose files were lost, counted from the lost-files notice. */
+  public const int LOST_FILES_GRACE_DAYS = 14;
 
   /** @var string[]|null */
   private ?array $featured_project_ids = null;
@@ -261,6 +265,7 @@ class StorageLifecycleService
     $errors = 0;
     $offset = 0;
     $now = new \DateTime();
+    $lost_files_due_ids = $this->getLostFilesDeletionDueProjectIds($now);
 
     while (true) {
       $projects = $this->entity_manager->createQueryBuilder()
@@ -291,11 +296,17 @@ class StorageLifecycleService
           continue;
         }
 
-        $anchor = $this->getAnchorDate($project, $tier);
-        $expiry = (clone $anchor)->modify('+'.$retention_days.' days');
+        // Files still lost and the owner was told long enough ago to re-upload: delete regardless of tier.
+        // A notice from before the last upload is about an earlier loss and does not count.
+        $noticed_at = $lost_files_due_ids[$project->getId() ?? ''] ?? null;
+        $lost_files_due = $project->hasMissingFiles() && null !== $noticed_at && $noticed_at >= $project->getUploadedAt();
+        if (!$lost_files_due) {
+          $anchor = $this->getAnchorDate($project, $tier);
+          $expiry = (clone $anchor)->modify('+'.$retention_days.' days');
 
-        if ($expiry >= $now) {
-          continue;
+          if ($expiry >= $now) {
+            continue;
+          }
         }
 
         $projectId = $project->getId() ?? 'unknown';
@@ -315,7 +326,8 @@ class StorageLifecycleService
 
         try {
           $user = $project->getUser();
-          if ($user instanceof User) {
+          // The lost-files notice already told the owner; "removed due to inactivity" would be wrong.
+          if ($user instanceof User && !$lost_files_due) {
             $notification = new ProjectDeletedNotification($user, $projectName);
             $this->entity_manager->persist($notification);
             $this->entity_manager->flush();
@@ -346,6 +358,22 @@ class StorageLifecycleService
     }
 
     return ['checked' => $checked, 'deleted' => $deleted, 'errors' => $errors];
+  }
+
+  /**
+   * Projects listed in a lost-files notice that is at least LOST_FILES_GRACE_DAYS old,
+   * mapped to the newest such notice's creation time.
+   *
+   * @return array<string, \DateTimeImmutable>
+   */
+  private function getLostFilesDeletionDueProjectIds(\DateTimeInterface $now): array
+  {
+    $cutoff = \DateTimeImmutable::createFromInterface($now)->modify('-'.self::LOST_FILES_GRACE_DAYS.' days');
+
+    return ProjectFilesLostNotification::latestNoticePerProject(
+      $this->entity_manager->getRepository(ProjectFilesLostNotification::class)->findAll(),
+      $cutoff,
+    );
   }
 
   /**

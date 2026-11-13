@@ -60,6 +60,7 @@ class ProjectSearchService
     $bool_query->addMust(new Terms('private', [false]));
     $bool_query->addMust(new Terms('visible', [true]));
     $bool_query->addMust(new Terms('auto_hidden', [false]));
+    $bool_query->addMustNot(new Terms('has_missing_files', [true]));
 
     if (!$is_debug_request) {
       $bool_query->addMust(new Terms('debug_build', [false]));
