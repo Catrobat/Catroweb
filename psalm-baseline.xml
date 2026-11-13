@@ -524,13 +524,11 @@
       <code><![CDATA[click]]></code>
       <code><![CDATA[click]]></code>
       <code><![CDATA[click]]></code>
-      <code><![CDATA[click]]></code>
       <code><![CDATA[find]]></code>
       <code><![CDATA[findAll]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
-      <code><![CDATA[setValue]]></code>
       <code><![CDATA[setValue]]></code>
     </PossiblyNullReference>
   </file>
