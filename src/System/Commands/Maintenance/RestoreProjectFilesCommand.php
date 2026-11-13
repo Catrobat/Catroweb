@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Restores lost project files from .catrobat archives: each archive is uploaded as an update of the user's existing
- * project with the same name (same id, stats kept, has_missing_files cleared). Archives without such a project are
+ * project with the same name (same id, stats and upload date kept, has_missing_files cleared, no follower notices). Archives without such a project are
  * skipped, never added as new projects. Unlike catrobat:import, the archive is stored unchanged.
  */
 #[AsCommand(
@@ -84,7 +84,7 @@ class RestoreProjectFilesCommand extends Command
       }
 
       try {
-        $this->project_manager->addProject(new AddProjectRequest($user, new File($file->getPathname()), null, null, $project->getFlavor(), $project->getId()));
+        $this->project_manager->addProject(new AddProjectRequest($user, new File($file->getPathname()), null, null, $project->getFlavor(), $project->getId(), restore: true));
         ++$restored;
         $io->writeln(sprintf('%s: restored %s "%s"', $file->getFilename(), $project->getId() ?? '', $name));
       } catch (\Throwable $throwable) {

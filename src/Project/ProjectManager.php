@@ -232,7 +232,9 @@ class ProjectManager
     $project->setFilesize($file->getSize());
     $project->setApproved(false);
     $project->setUploadLanguage('en');
-    $project->setUploadedAt(TimeUtils::getDateTime());
+    if (!$request->isRestore()) {
+      $project->setUploadedAt(TimeUtils::getDateTime());
+    }
     $project->setRemixMigratedAt(null);
     $project->setFlavor($request->getFlavor());
     $project->setDebugBuild($extracted_file->isDebugBuild());
@@ -325,7 +327,9 @@ class ProjectManager
     ;
 
     $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));
-    $this->notifyFollower($project);
+    if (!$request->isRestore()) {
+      $this->notifyFollower($project);
+    }
     $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$project_id;
     if (is_dir($compressed_file_directory)) {
       $filesystem->remove($compressed_file_directory);

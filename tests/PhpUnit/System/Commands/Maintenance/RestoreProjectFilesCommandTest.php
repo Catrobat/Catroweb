@@ -48,7 +48,7 @@ class RestoreProjectFilesCommandTest extends TestCase
     $project_manager = $this->createMock(ProjectManager::class);
     $project_manager->method('findOneByNameAndUser')->willReturnCallback(static fn (string $name): ?Project => 'Known' === $name ? $project : null);
     $project_manager->expects($this->once())->method('addProject')
-      ->with($this->callback(static fn (AddProjectRequest $request): bool => 'p1' === $request->getProjectId() && 'luna' === $request->getFlavor()))
+      ->with($this->callback(static fn (AddProjectRequest $request): bool => 'p1' === $request->getProjectId() && 'luna' === $request->getFlavor() && $request->isRestore()))
     ;
 
     $tester = $this->runCommand($project_manager, []);

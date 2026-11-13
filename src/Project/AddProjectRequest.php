@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AddProjectRequest
 {
-  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = Flavor::POCKETCODE, private readonly ?string $project_id = null, private readonly ?int $scratch_id = null)
+  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = Flavor::POCKETCODE, private readonly ?string $project_id = null, private readonly ?int $scratch_id = null, private readonly bool $restore = false)
   {
   }
 
@@ -60,6 +60,12 @@ class AddProjectRequest
   }
 
   /** Set on projects converted from Scratch, so the first persisted row already says where it came from. */
+  /** A restore of lost files: keeps the upload date and tells no followers. */
+  public function isRestore(): bool
+  {
+    return $this->restore;
+  }
+
   public function getScratchId(): ?int
   {
     return $this->scratch_id;
