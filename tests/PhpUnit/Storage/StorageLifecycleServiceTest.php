@@ -180,6 +180,83 @@ class StorageLifecycleServiceTest extends TestCase
     self::assertFalse($this->service->shouldPauseUploads(0.50));
   }
 
+  public function testDeletesEveryExpiredProjectAcrossBatches(): void
+  {
+    $table = [];
+    for ($i = 0; $i < 150; ++$i) {
+      $table[] = $this->createProjectStub();
+    }
+
+    $result = $this->buildServiceOverTable($table, flushFails: false)->deleteExpiredProjects();
+
+    self::assertSame(['checked' => 150, 'deleted' => 150, 'errors' => 0], $result);
+    self::assertSame([], $table);
+  }
+
+  public function testStopsOnceTheEntityManagerIsClosed(): void
+  {
+    $table = [$this->createProjectStub(), $this->createProjectStub()];
+
+    $result = $this->buildServiceOverTable($table, flushFails: true)->deleteExpiredProjects();
+
+    self::assertSame(['checked' => 1, 'deleted' => 0, 'errors' => 1], $result);
+  }
+
+  /**
+   * @param list<Project> $table rows; removed projects are dropped from it on flush
+   */
+  private function buildServiceOverTable(array &$table, bool $flushFails): StorageLifecycleService
+  {
+    $offset = 0;
+    $removed = null;
+    $open = true;
+
+    $query = $this->createStub(Query::class);
+    $query->method('getSingleColumnResult')->willReturn([]);
+    $query->method('getResult')->willReturnCallback(static function () use (&$table, &$offset): array {
+      return array_slice($table, $offset, 100);
+    });
+
+    $qb = $this->createStub(QueryBuilder::class);
+    foreach (['select', 'from', 'where', 'setParameter', 'leftJoin', 'orderBy', 'setMaxResults'] as $method) {
+      $qb->method($method)->willReturnSelf();
+    }
+    $qb->method('setFirstResult')->willReturnCallback(static function (int $first) use (&$offset, $qb): QueryBuilder {
+      $offset = $first;
+
+      return $qb;
+    });
+    $qb->method('getQuery')->willReturn($query);
+
+    $em = $this->createStub(EntityManagerInterface::class);
+    $em->method('createQueryBuilder')->willReturn($qb);
+    $em->method('isOpen')->willReturnCallback(static function () use (&$open): bool {
+      return $open;
+    });
+    $em->method('remove')->willReturnCallback(static function (object $project) use (&$removed): void {
+      $removed = $project;
+    });
+    $em->method('flush')->willReturnCallback(static function () use (&$table, &$removed, &$open, $flushFails): void {
+      if (null === $removed) {
+        return;
+      }
+      if ($flushFails) {
+        $open = false;
+
+        throw new \RuntimeException('foreign key constraint fails');
+      }
+      $table = array_values(array_filter($table, static fn (Project $p): bool => $p !== $removed));
+      $removed = null;
+    });
+
+    return new StorageLifecycleService(
+      $em,
+      $this->createStub(ProjectFileRepository::class),
+      $this->createStub(ScreenshotRepository::class),
+      new NullLogger(),
+    );
+  }
+
   private function createProjectStub(
     bool $storageProtected = false,
     int $downloads = 0,

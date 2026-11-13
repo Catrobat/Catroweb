@@ -29,10 +29,10 @@ class RemixNotification extends CatroNotification
     #[ORM\JoinColumn(name: 'remix_root', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $remix_from,
-    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'remix_notification_mentions_as_parent')]
     private ?Project $project,
-    #[ORM\JoinColumn(name: 'remix_program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'remix_program_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'remix_notification_mentions_as_child')]
     private ?Project $remix_program,
   ) {

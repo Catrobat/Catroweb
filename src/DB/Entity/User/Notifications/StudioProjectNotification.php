@@ -22,7 +22,7 @@ class StudioProjectNotification extends CatroNotification
     #[ORM\JoinColumn(name: 'project_user_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $project_user,
-    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Project::class)]
     private ?Project $project,
   ) {
