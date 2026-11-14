@@ -230,6 +230,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          // Own projects need a login; listed here because the public project-by-id rule below would match "user".
+          'path' => '^/api/projects/user/?$',
+          'roles' => 'IS_AUTHENTICATED_FULLY',
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/projects/user/[a-zA-Z0-9_-]+/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

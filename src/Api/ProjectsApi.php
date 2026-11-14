@@ -516,7 +516,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
-      $responseCode = Response::HTTP_FORBIDDEN;
+      $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return null;
     }
