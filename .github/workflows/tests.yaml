@@ -546,7 +546,7 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          command -v compare || sudo apt-get install -y --no-install-recommends imagemagick
+          command -v magick || command -v compare || { sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends imagemagick; }
           tests/visual/compare.sh
 
       - name: Upload snapshots
@@ -555,6 +555,14 @@ jobs:
         with:
           name: visual-snapshots
           path: tests/TestReports/Visual
+          if-no-files-found: ignore
+
+      - name: Upload failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-failures
+          path: tests/TestReports/TestScreenshots
           if-no-files-found: ignore
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

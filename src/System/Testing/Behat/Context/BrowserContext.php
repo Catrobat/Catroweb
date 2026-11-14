@@ -790,12 +790,15 @@ class BrowserContext extends MinkContext implements Context
   // --------------------------------------------------------------------------------------------------------------------
 
   /**
+   * Call before navigating: it only stores the choice (and declines cookies so the banner stays out of the shot).
+   *
    * @Given I use the :scheme color scheme
    */
   public function iUseTheColorScheme(string $scheme): void
   {
-    $this->getSession()->executeScript("localStorage.setItem('theme', ".json_encode($scheme).')');
-    $this->getSession()->reload();
+    $this->getSession()->executeScript(
+      "localStorage.setItem('theme', ".json_encode($scheme)."); document.cookie = 'cookie_consent=declined; path=/'"
+    );
   }
 
   /**
@@ -811,6 +814,10 @@ class BrowserContext extends MinkContext implements Context
    */
   public function iTakeAVisualSnapshot(string $name): void
   {
+    // external-svg-loader fills <svg data-src> asynchronously; badges and the popup background need it.
+    $this->getSession()->wait(10000, "document.fonts.status === 'loaded'"
+      ." && [...document.querySelectorAll('svg[data-src]')].every((s) => s.childElementCount > 0)"
+      .' && [...document.images].every((i) => i.complete)');
     // Freeze every CSS animation/transition at a fixed point so two runs render the same pixels:
     // finite ones jump to their end state, infinite ones (popup rays, badge stars) to their start.
     $this->getSession()->executeScript(<<<'JS'
@@ -819,7 +826,6 @@ class BrowserContext extends MinkContext implements Context
         if (a.effect?.getComputedTiming().iterations === Infinity) { a.pause(); a.currentTime = 0 } else { a.finish() }
       });
       JS);
-    $this->getSession()->wait(5000, "document.fonts.status === 'loaded'");
     $dir = $this->getSymfonyParameterAsString('kernel.project_dir').'/tests/TestReports/Visual';
     if (!is_dir($dir)) {
       mkdir($dir, 0o777, true);

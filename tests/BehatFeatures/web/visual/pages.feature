@@ -19,8 +19,8 @@ Feature: Visual snapshots of key pages
 
   Scenario Outline: Login page (<scheme>, <size>)
     Given I use a <width> x <height> viewport
-    And I am on "/app/login"
     And I use the "<scheme>" color scheme
+    And I am on "/app/login"
     And I wait for the page to be loaded
     Then I take a visual snapshot "login-<scheme>-<size>"
 
@@ -33,8 +33,8 @@ Feature: Visual snapshots of key pages
 
   Scenario Outline: Project page (<scheme>, <size>)
     Given I use a <width> x <height> viewport
-    And I am on "/app/project/1"
     And I use the "<scheme>" color scheme
+    And I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I wait for the element "#name" to contain "project 1"
@@ -54,8 +54,8 @@ Feature: Visual snapshots of key pages
       | 2  | Catrobat | best_user          | 2021-03-03 | 2021-03-03  |
     And I use a <width> x <height> viewport
     And I log in as "Catrobat"
-    And I am on "/app/achievements"
     And I use the "<scheme>" color scheme
+    And I am on "/app/achievements"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I wait for the element ".swal2-popup" to contain "Congratulations"
