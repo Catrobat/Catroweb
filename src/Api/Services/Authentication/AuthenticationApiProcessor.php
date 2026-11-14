@@ -11,13 +11,6 @@ use App\Moderation\LinkDetector;
 use App\Security\PasswordGenerator;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
-use CoderCat\JWKToPEM\Exception\Base64DecodeException;
-use CoderCat\JWKToPEM\Exception\JWKConverterException;
-use CoderCat\JWKToPEM\JWKConverter;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
@@ -44,99 +37,12 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
   }
 
   /**
-   * used in connectUserToAccount!
-   */
-  protected function getPayloadFromGoogleIdToken(mixed $id_token): array
-  {
-    $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
-
-    $payload = $client->verifyIdToken($id_token);
-    if (false === $payload) {
-      throw new \RuntimeException('Invalid Google ID token');
-    }
-
-    return [
-      'id' => $payload['sub'],
-      'email' => $payload['email'],
-      'name' => $payload['name'],
-      'email_verified' => $payload['email_verified'] ?? false,
-    ];
-  }
-
-  /**
-   * used in connectUserToAccount!
-   */
-  protected function getPayloadFromFacebookIdToken(mixed $id_token): array
-  {
-    $public_key = $_ENV['FB_OAUTH_PUBLIC_KEY'] ?? '';
-    $payload = JWT::decode($id_token, new Key($public_key, 'RS256'));
-
-    return [
-      'id' => $payload->user_id,
-      'email' => $payload->email,
-      'name' => $payload->name,
-    ];
-  }
-
-  /**
-   * used in connectUserToAccount!
+   * @param array<string, mixed> $payload claims already verified by AuthenticationRequestValidator::verify()
    *
-   * @throws GuzzleException
-   * @throws Base64DecodeException
-   * @throws JWKConverterException
-   * @throws \JsonException
-   */
-  protected function getPayloadFromAppleIdToken(string $id_token): array
-  {
-    $jwt = AuthenticationRequestValidator::jwt_decode($id_token);
-    if (null === $jwt || !isset($jwt['header'])) {
-      throw new \RuntimeException('Invalid Apple ID token');
-    }
-
-    $header = $jwt['header'];
-    if (!isset($header['kid'])) {
-      throw new \RuntimeException('Invalid Apple ID token: missing kid');
-    }
-
-    $client = new Client();
-    $res = $client->request('GET', 'https://appleid.apple.com/auth/keys');
-    $body = $res->getBody()->getContents();
-    $keys_raw = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-    $keys = $keys_raw['keys'];
-    $public_key = [];
-    foreach ($keys as $key) {
-      if ($header['kid'] === $key['kid']) {
-        $public_key = $key;
-        break;
-      }
-    }
-
-    $jwkConverter = new JWKConverter();
-    $PEM = $jwkConverter->toPEM($public_key);
-    $payload = JWT::decode($id_token, new Key($PEM, 'RS256'));
-
-    // Apple identifies the user by the standard `sub` claim; there is no `user_id` claim.
-    return [
-      'id' => $payload->sub,
-      'email' => $payload->email,
-      // Apple sends the flag as a boolean or as the string "true"
-      'email_verified' => $payload->email_verified ?? false,
-    ];
-  }
-
-  /**
    * @throws \Exception
    */
-  public function connectUserToAccount(string $id_token, string $resource_owner): User
+  public function connectUserToAccount(array $payload, string $resource_owner): User
   {
-    // Dynamic methods: setAppleId, setGoogleId, setFacebookId
-    $set_id = 'set'.ucfirst($resource_owner).'Id';
-
-    // Dynamic methods: getPayloadFromAppleIdToken, getPayloadFromGoogleIdToken, getPayloadFromFacebookIdToken
-    $getPayloadMethod = 'getPayloadFrom'.ucfirst($resource_owner).'IdToken';
-
-    // Extract payload
-    $payload = $this->{$getPayloadMethod}($id_token);
     $user_id = $payload['id'];
     $email = $payload['email'];
     $name = $payload['name'] ?? '';
@@ -162,7 +68,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
       } catch (CustomUserMessageAccountStatusException $e) {
         throw new HttpException(Response::HTTP_UNAUTHORIZED, $e->getMessageKey(), $e);
       }
-      $user->{$set_id}($user_id);
+      $this->setProviderId($user, $resource_owner, $user_id);
       $this->user_manager->updateUser($user);
 
       return $user;
@@ -170,7 +76,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
 
     // User does not exist yet
     $user = $this->user_manager->create();
-    $user->{$set_id}($user_id);
+    $this->setProviderId($user, $resource_owner, $user_id);
     $user->setEnabled(true);
     $user->setEmail($email);
     $user->setUsername($this->createRandomUsername($name));
@@ -182,6 +88,16 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $this->user_manager->updateUser($user);
 
     return $user;
+  }
+
+  private function setProviderId(User $user, string $resource_owner, string $id): void
+  {
+    match ($resource_owner) {
+      'google' => $user->setGoogleId($id),
+      'facebook' => $user->setFacebookId($id),
+      'apple' => $user->setAppleId($id),
+      default => throw new \LogicException(sprintf('Unknown OAuth provider "%s"', $resource_owner)),
+    };
   }
 
   public function deleteRefreshToken(string $x_refresh): bool
