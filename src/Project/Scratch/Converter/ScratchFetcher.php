@@ -16,7 +16,7 @@ class ScratchFetcher
   final public const string OLD_SCRATCH_MESSAGE = 'This project was made with an older Scratch version (1.4) and can\'t be converted.';
   private const int MAX_JSON_BYTES = 16 * 1024 * 1024;
   private const int MAX_ASSET_BYTES = 32 * 1024 * 1024;
-  private const int MAX_TOTAL_ASSET_BYTES = 128 * 1024 * 1024;
+  private const int MAX_TOTAL_ASSET_BYTES = 256 * 1024 * 1024; // sound-heavy games (WAVs) pass 150 MB; all of it is held in memory
   final public const int MAX_ASSETS = 2_000;
   private const int PARALLEL_DOWNLOADS = 8;
 
