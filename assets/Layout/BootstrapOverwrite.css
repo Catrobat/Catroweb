@@ -5,8 +5,11 @@
    toggles stay undefined and every light-dark() value computes to garbage
    (e.g. the footer lost its colors). "light" (not "light dark") is correct:
    ColorScheme.js always sets an explicit data-bs-theme, so dark comes from
-   Bootstrap's override, never from the OS preference. */
-:root {
+   Bootstrap's override, never from the OS preference.
+   :not() keeps it out of dark mode: [data-bs-theme=dark] has the same
+   specificity and comes earlier in the bundle, so a bare :root won the
+   cascade and pinned every light-dark() to its light value in dark mode. */
+:root:not([data-bs-theme='dark']) {
   color-scheme: light;
 }
 

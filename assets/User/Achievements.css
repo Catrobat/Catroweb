@@ -112,6 +112,8 @@
   text-align: center;
   line-height: 1;
   font-size: var(--achievement-banner-text-size);
+  /* The banner artwork is light green in both colour schemes */
+  color: #212529;
   font-weight: 600;
   letter-spacing: 0.01em;
   transform: translateY(var(--achievement-banner-text-shift));
