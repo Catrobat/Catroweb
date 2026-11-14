@@ -555,6 +555,8 @@ jobs:
         id: compare
         run: |
           command -v magick || command -v compare || { sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends imagemagick; }
+          # Behat writes the screenshots as root inside the container
+          sudo chown -R "$(id -u):$(id -g)" tests/TestReports/Visual
           if [ "$PUBLISH" = true ]; then
             export IMAGE_BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/visual-snapshots/pr-$PR_NUMBER/$RUN_ID"
           fi
