@@ -96,13 +96,22 @@ class ScratchFetcher
         $responses[$md5ext] = $this->request('https://assets.scratch.mit.edu/internalapi/asset/'.$md5ext.'/get/', self::MAX_ASSET_BYTES, $total);
       }
 
-      foreach ($responses as $md5ext => $response) {
-        $body = $this->content($response);
-        if (md5($body) !== substr($md5ext, 0, 32)) {
-          throw new ScratchConversionException('Asset does not match its checksum: '.$md5ext);
+      try {
+        foreach ($responses as $md5ext => $response) {
+          $body = $this->content($response);
+          if (md5($body) !== substr($md5ext, 0, 32)) {
+            throw new ScratchConversionException('Asset does not match its checksum: '.$md5ext);
+          }
+
+          $assets[$md5ext] = $body;
+        }
+      } catch (\Throwable $throwable) {
+        // Unread responses check themselves on destruct and would throw a raw TransportException over this one.
+        foreach ($responses as $response) {
+          $response->cancel();
         }
 
-        $assets[$md5ext] = $body;
+        throw $throwable;
       }
     }
 

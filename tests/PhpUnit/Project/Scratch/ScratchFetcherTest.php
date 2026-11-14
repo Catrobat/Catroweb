@@ -100,4 +100,15 @@ final class ScratchFetcherTest extends TestCase
       $this->assertSame(0, $exception->getCode());
     }
   }
+
+  public function testAFailedAssetIsNotDrownedOutByItsUnreadSiblings(): void
+  {
+    // The second response is never read; on destruct it would throw a raw HTTP client exception over ours.
+    $client = new MockHttpClient([new MockResponse('not the checksum'), new MockResponse('', ['http_code' => 404])]);
+    $costumes = [['md5ext' => md5('a').'.svg'], ['md5ext' => md5('b').'.svg']];
+
+    $this->expectException(ScratchConversionException::class);
+    $this->expectExceptionMessage('Asset does not match its checksum');
+    (new ScratchFetcher($client))->fetchAssets(['targets' => [['costumes' => $costumes]]]);
+  }
 }
