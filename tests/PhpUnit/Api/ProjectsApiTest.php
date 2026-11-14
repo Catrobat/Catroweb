@@ -687,7 +687,7 @@ final class ProjectsApiTest extends KernelTestCase
    * @throws \Exception
    * @throws Exception
    */
-  public function testProjectsUserGetForbidden(): void
+  public function testProjectsUserGetUnauthorized(): void
   {
     $response_code = 200;
     $response_headers = [];
@@ -698,7 +698,7 @@ final class ProjectsApiTest extends KernelTestCase
 
     $response = $this->object->projectsUserGet('', 20, null, '', '', $response_code, $response_headers);
 
-    $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
+    $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
     $this->assertNull($response);
   }
 
