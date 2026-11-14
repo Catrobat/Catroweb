@@ -21,6 +21,10 @@ class VersionValidatorEventListener
 
   public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event): void
   {
+    if ($event->isRestore()) {
+      return;
+    }
+
     $this->validate($event->getExtractedFile()->getProjectXmlProperties());
   }
 
