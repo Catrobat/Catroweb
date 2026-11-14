@@ -65,6 +65,8 @@ export function purgeCssPlugin({ rootDir }) {
         content: [
           path.resolve(rootDir, 'templates/**/*.html.twig'),
           path.resolve(rootDir, 'assets/**/*.js'),
+          // Classes used only inside inlined SVGs (achievement popup, badge stars)
+          path.resolve(rootDir, 'assets/**/*.svg'),
         ],
         css: cssFiles,
         safelist: { standard: PURGE_SAFELIST },
