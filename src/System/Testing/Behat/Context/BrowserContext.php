@@ -819,11 +819,12 @@ class BrowserContext extends MinkContext implements Context
       ." && [...document.querySelectorAll('svg[data-src]')].every((s) => s.childElementCount > 0)"
       .' && [...document.images].every((i) => i.complete)');
     // Freeze every CSS animation/transition at a fixed point so two runs render the same pixels:
-    // finite ones jump to their end state, infinite ones (popup rays, badge stars) to their start.
+    // finite ones jump to their end state, infinite ones (popup rays, badge stars) to 500 ms, where the popup's
+    // two ray groups show their contrasting colours (at 0 ms both are white).
     $this->getSession()->executeScript(<<<'JS'
       document.activeElement?.blur();
       document.getAnimations().forEach((a) => {
-        if (a.effect?.getComputedTiming().iterations === Infinity) { a.pause(); a.currentTime = 0 } else { a.finish() }
+        if (a.effect?.getComputedTiming().iterations === Infinity) { a.pause(); a.currentTime = 500 } else { a.finish() }
       });
       JS);
     $dir = $this->getSymfonyParameterAsString('kernel.project_dir').'/tests/TestReports/Visual';

@@ -12,10 +12,10 @@ Feature: Visual snapshots of key pages
       | id | name      | owned by | upload time      |
       | 1  | project 1 | Catrobat | 01.01.2024 12:00 |
     And there are achievements:
-      | id | internal_title     | title_ltm_code | description_ltm_code | priority |
-      | 1  | best_user          | best__         | best__desc           | 2        |
-      | 2  | first_achiever     | first__        | first__desc          | 3        |
-      | 3  | master_of_disaster | ups__          | ups__desc            | 1        |
+      | id | internal_title     | title_ltm_code | description_ltm_code | priority | badge_svg_path                                     |
+      | 1  | best_user          | best__         | best__desc           | 2        | images/achievements/badge2-user-gold.svg           |
+      | 2  | first_achiever     | first__        | first__desc          | 3        | images/achievements/badge1-perfect-profile.svg     |
+      | 3  | master_of_disaster | ups__          | ups__desc            | 1        | images/achievements/badge2-user-silver.svg         |
 
   Scenario Outline: Login page (<scheme>, <size>)
     Given I use a <width> x <height> viewport
@@ -50,7 +50,7 @@ Feature: Visual snapshots of key pages
   Scenario Outline: New achievement popup (<scheme>, <size>)
     Given there are user achievements:
       | id | user     | achievement        | seen_at    | unlocked_at |
-      | 1  | Catrobat | master_of_disaster |            | 2021-03-03  |
+      | 1  | Catrobat | master_of_disaster |            | 2021-03-04  |
       | 2  | Catrobat | best_user          | 2021-03-03 | 2021-03-03  |
     And I use a <width> x <height> viewport
     And I log in as "Catrobat"
