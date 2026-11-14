@@ -490,12 +490,16 @@ jobs:
       pull-requests: write # the PR comment
     env:
       # Fork PRs get a read-only token: no images or comment there, the job summary + artifact still work.
-      PUBLISH: ${{ github.event_name == 'pull_request' && needs.build.outputs.is-fork == 'false' }}
+      # Dependabot runs get a read-only token too.
+      PUBLISH: ${{ github.event_name == 'pull_request' && needs.build.outputs.is-fork == 'false' && github.actor != 'dependabot[bot]' }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
       RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
+        with:
+          # The write token is only handed to the publish step, not to yarn install / vite build
+          persist-credentials: false
 
       - name: Log in to GitHub Container Registry
         if: needs.build.outputs.is-fork == 'false'
@@ -556,6 +560,7 @@ jobs:
         run: |
           command -v magick || command -v compare || { sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends imagemagick; }
           # Behat writes the screenshots as root inside the container
+          sudo mkdir -p tests/TestReports/Visual
           sudo chown -R "$(id -u):$(id -g)" tests/TestReports/Visual
           if [ "$PUBLISH" = true ]; then
             export IMAGE_BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/visual-snapshots/pr-$PR_NUMBER/$RUN_ID"
