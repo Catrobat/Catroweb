@@ -815,9 +815,13 @@ class BrowserContext extends MinkContext implements Context
   public function iTakeAVisualSnapshot(string $name): void
   {
     // external-svg-loader fills <svg data-src> asynchronously; badges and the popup background need it.
-    $this->getSession()->wait(10000, "document.fonts.status === 'loaded'"
+    $ready = $this->getSession()->wait(10000, "document.fonts.status === 'loaded'"
       ." && [...document.querySelectorAll('svg[data-src]')].every((s) => s.childElementCount > 0)"
-      .' && [...document.images].every((i) => i.complete)');
+      ." && [...document.images].every((i) => i.complete || i.loading === 'lazy')");
+    if (!$ready) {
+      // Still take the shot: the comparison reports the difference, and the log says why
+      fwrite(STDERR, "Visual snapshot '{$name}': page not ready after 10 s (fonts, SVGs or images still loading)\n");
+    }
     // Freeze every CSS animation/transition at a fixed point so two runs render the same pixels:
     // finite ones jump to their end state, infinite ones (popup rays, badge stars) to 500 ms, where the popup's
     // two ray groups show their contrasting colours (at 0 ms both are white).

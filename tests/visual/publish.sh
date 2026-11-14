@@ -9,7 +9,9 @@ ACTUAL=tests/TestReports/Visual
 BRANCH=visual-snapshots
 repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
 comment_id=$(gh api "repos/$repo/issues/$PR_NUMBER/comments" --paginate \
-  -q '.[] | select(.body | startswith("<!-- visual-snapshots -->")) | .id' | head -1)
+  -q '.[] | select(.user.login == "github-actions[bot]" and (.body | startswith("<!-- visual-snapshots -->"))) | .id' | head -1)
+# Checkout runs without persisted credentials; only this script gets the write token
+remote="https://x-access-token:$GH_TOKEN@github.com/$repo.git"
 
 # Nothing changed and nothing said before: stay quiet
 if [ "$CHANGED" -eq 0 ] && [ -z "$comment_id" ]; then
@@ -19,7 +21,7 @@ fi
 if compgen -G "$ACTUAL/strips/*.png" >/dev/null; then
   dir=$(mktemp -d)
   trap 'git worktree remove --force "$dir"; git branch -D "$BRANCH" >/dev/null' EXIT
-  if git fetch --depth 1 origin "$BRANCH" 2>/dev/null; then
+  if git fetch --depth 1 "$remote" "$BRANCH" 2>/dev/null; then
     git worktree add -B "$BRANCH" "$dir" FETCH_HEAD
   else
     git worktree add --orphan -b "$BRANCH" "$dir"
@@ -34,9 +36,9 @@ if compgen -G "$ACTUAL/strips/*.png" >/dev/null; then
     commit -qm "Visual snapshots for #$PR_NUMBER (run $RUN_ID)"
   # Other PRs push to the same branch; their folders never overlap, so rebase and retry
   for attempt in 1 2 3; do
-    git -C "$dir" push -q origin "$BRANCH" && break
+    git -C "$dir" push -q "$remote" "$BRANCH" && break
     [ "$attempt" -eq 3 ] && exit 1
-    git -C "$dir" pull -q --rebase origin "$BRANCH"
+    git -C "$dir" pull -q --rebase "$remote" "$BRANCH"
   done
 fi
 
