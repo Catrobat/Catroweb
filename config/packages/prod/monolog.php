@@ -12,6 +12,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'search',
         'download',
         'upload',
+        'login',
       ],
       'handlers' => [
         'main' => [
@@ -20,6 +21,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'handler' => 'mainHandler',
           'excluded_http_codes' => [400, 401, 402, 403, 404, 405, 406, 429],
           'buffer_size' => 50,
+          'channels' => ['!login'],
         ],
         'mainHandler' => [
           'type' => 'rotating_file',
@@ -56,6 +58,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'max_files' => 30,
           'channels' => ['upload'],
           'formatter' => 'monolog.formatter.catrobat_custom_formatter',
+        ],
+        // Top level of var/log/prod, so promtail ships it to Loki (job="catroweb-app").
+        // Own formatter: these lines must never carry the client IP or a user name.
+        'login' => [
+          'type' => 'rotating_file',
+          'path' => '%kernel.logs_dir%/%kernel.environment%/login.log',
+          'level' => 'info',
+          'max_files' => 30,
+          'channels' => ['login'],
+          'formatter' => 'monolog.formatter.login_formatter',
         ],
         'console' => [
           'type' => 'console',

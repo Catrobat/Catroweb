@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension('monolog', [
-    'channels' => ['search', 'download', 'upload'],
+    'channels' => ['search', 'download', 'upload', 'login'],
     'handlers' => [
       'main' => [
         'type' => 'fingers_crossed',
