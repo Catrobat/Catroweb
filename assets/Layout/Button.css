@@ -99,10 +99,8 @@
 .btn-block {
   display: block;
   width: 100%;
-  --deprecated: 'WARNING: deprecated, removed in bs5, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/Components/buttons/#block-buttons';
 }
 
 .btn-block + .btn-block {
   margin-top: 0.5rem;
-  --deprecated: 'WARNING: deprecated, removed in bs5, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/Components/buttons/#block-buttons';
 }
