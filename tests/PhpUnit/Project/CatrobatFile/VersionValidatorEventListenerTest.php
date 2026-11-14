@@ -61,7 +61,7 @@ class VersionValidatorEventListenerTest extends TestCase
   }
 
   /**
-   * @psalm-suppress UndefinedPropertyAssignment
+   * @psalm-suppress UndefinedPropertyAssignment, PossiblyNullPropertyAssignment
    */
   private function extractedFileWithLanguageVersion(string $version): ExtractedCatrobatFile
   {
