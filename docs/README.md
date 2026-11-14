@@ -24,6 +24,7 @@
 - [Coding Standard](./contributor-guide/Coding-Standard.md)
 - [How to Test](./contributor-guide/How-To-Test.md)
 - [Behat Test Guidelines](./contributor-guide/Behat-Test-Guidelines.md)
+- [Visual Regression Snapshots](./contributor-guide/Visual-Regression.md)
 - [Translations](./contributor-guide/Translations.md)
 
 ## Development Topics

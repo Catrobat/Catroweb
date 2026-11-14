@@ -46,6 +46,7 @@ tests/style-report/**
 tests/TestReports/Behat/**
 tests/TestReports/CoverageReports/**
 tests/TestReports/TestScreenshots/**
+tests/TestReports/Visual/**
 tests/TestData/DataFixtures/GeneratedFixtures**
 tests/TestData/Cache/**
 

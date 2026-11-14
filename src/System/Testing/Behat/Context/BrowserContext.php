@@ -785,6 +785,48 @@ class BrowserContext extends MinkContext implements Context
     }
   }
 
+  // --------------------------------------------------------------------------------------------------------------------
+  //  Visual regression (web-visual suite, compared against tests/visual/baselines by tests/visual/compare.sh)
+  // --------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @Given I use the :scheme color scheme
+   */
+  public function iUseTheColorScheme(string $scheme): void
+  {
+    $this->getSession()->executeScript("localStorage.setItem('theme', ".json_encode($scheme).')');
+    $this->getSession()->reload();
+  }
+
+  /**
+   * @Given I use a :width x :height viewport
+   */
+  public function iUseAViewport(int $width, int $height): void
+  {
+    $this->getSession()->resizeWindow($width, $height);
+  }
+
+  /**
+   * @Then I take a visual snapshot :name
+   */
+  public function iTakeAVisualSnapshot(string $name): void
+  {
+    // Freeze every CSS animation/transition at a fixed point so two runs render the same pixels:
+    // finite ones jump to their end state, infinite ones (popup rays, badge stars) to their start.
+    $this->getSession()->executeScript(<<<'JS'
+      document.activeElement?.blur();
+      document.getAnimations().forEach((a) => {
+        if (a.effect?.getComputedTiming().iterations === Infinity) { a.pause(); a.currentTime = 0 } else { a.finish() }
+      });
+      JS);
+    $this->getSession()->wait(5000, "document.fonts.status === 'loaded'");
+    $dir = $this->getSymfonyParameterAsString('kernel.project_dir').'/tests/TestReports/Visual';
+    if (!is_dir($dir)) {
+      mkdir($dir, 0o777, true);
+    }
+    file_put_contents($dir.'/'.$name.'.png', $this->getSession()->getScreenshot());
+  }
+
   /**
    * @When /^I get page content$/
    */
