@@ -11,5 +11,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
       Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException::class,
     ],
+    // The PHP session holds the serialized security token, password hash included.
+    'redacted_keys' => ['session'],
   ]);
 };
