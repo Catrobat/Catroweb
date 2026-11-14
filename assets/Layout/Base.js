@@ -74,19 +74,21 @@ function fitHeadingFontSizeToAvailableWidth() {
 
 function initScrollToHash() {
   window.addEventListener('load', () => {
-    let hash
-    let timeout = 0
-    if (window.location.hash === '') {
+    // getElementById, not querySelector: a hash is not always a valid selector, and the
+    // hash can be cleared (e.g. by history.pushState) while we are still polling.
+    const id = window.location.hash.slice(1)
+    if (id === '') {
       return
     }
 
+    let attempts = 0
     const poll = window.setInterval(() => {
-      hash = document.querySelector(window.location.hash)
+      const target = document.getElementById(id)
 
-      if (hash) {
-        window.scrollTo(0, hash.offsetTop)
+      if (target) {
+        window.scrollTo(0, target.offsetTop)
         window.clearInterval(poll)
-      } else if (timeout++ > 100) {
+      } else if (attempts++ > 100) {
         // cancel the interval after 100 attempts (== 10s)
         window.clearInterval(poll)
       }
