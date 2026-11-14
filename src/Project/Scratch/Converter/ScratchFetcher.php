@@ -16,7 +16,7 @@ class ScratchFetcher
   final public const string OLD_SCRATCH_MESSAGE = 'This project was made with an older Scratch version (1.4) and can\'t be converted.';
   private const int MAX_JSON_BYTES = 16 * 1024 * 1024;
   private const int MAX_ASSET_BYTES = 32 * 1024 * 1024;
-  private const int MAX_TOTAL_ASSET_BYTES = 128 * 1024 * 1024;
+  private const int MAX_TOTAL_ASSET_BYTES = 256 * 1024 * 1024; // sound-heavy games (WAVs) pass 150 MB; all of it is held in memory
   final public const int MAX_ASSETS = 2_000;
   private const int PARALLEL_DOWNLOADS = 8;
 
@@ -96,13 +96,22 @@ class ScratchFetcher
         $responses[$md5ext] = $this->request('https://assets.scratch.mit.edu/internalapi/asset/'.$md5ext.'/get/', self::MAX_ASSET_BYTES, $total);
       }
 
-      foreach ($responses as $md5ext => $response) {
-        $body = $this->content($response);
-        if (md5($body) !== substr($md5ext, 0, 32)) {
-          throw new ScratchConversionException('Asset does not match its checksum: '.$md5ext);
+      try {
+        foreach ($responses as $md5ext => $response) {
+          $body = $this->content($response);
+          if (md5($body) !== substr($md5ext, 0, 32)) {
+            throw new ScratchConversionException('Asset does not match its checksum: '.$md5ext);
+          }
+
+          $assets[$md5ext] = $body;
+        }
+      } catch (\Throwable $throwable) {
+        // Unread responses check themselves on destruct and would throw a raw TransportException over this one.
+        foreach ($responses as $response) {
+          $response->cancel();
         }
 
-        $assets[$md5ext] = $body;
+        throw $throwable;
       }
     }
 
