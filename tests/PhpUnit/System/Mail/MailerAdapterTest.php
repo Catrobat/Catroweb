@@ -75,6 +75,24 @@ final class MailerAdapterTest extends TestCase
     $this->assertSame(['main', 'mailjet'], $transports);
   }
 
+  public function testMailIsSentFromShareWithRepliesToSupport(): void
+  {
+    $headers = null;
+    $mailer = $this->createMock(MailerInterface::class);
+    $mailer->expects($this->once())->method('send')->willReturnCallback(
+      static function (Message $email) use (&$headers): void {
+        $headers = $email->getHeaders();
+      }
+    );
+    $budget = $this->createStub(EmailBudgetManager::class);
+    $budget->method('canSend')->willReturn(true);
+    $budget->method('getProvidersWithRoom')->willReturn(['main']);
+
+    $this->assertTrue($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig'));
+    $this->assertSame('Catrobat Share <share@catrobat.org>', $headers?->get('From')?->getBodyAsString());
+    $this->assertSame('support@catrobat.org', $headers?->get('Reply-To')?->getBodyAsString());
+  }
+
   private function adapter(MailerInterface $mailer, EmailBudgetManager $budget): MailerAdapter
   {
     return new MailerAdapter($mailer, new NullLogger(), $this->createStub(Environment::class), '', $budget);
