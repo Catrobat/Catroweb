@@ -32,10 +32,8 @@ class AuthenticationApiProcessorTest extends TestCase
     $user_manager->expects($this->never())->method('findOneBy');
     $user_manager->expects($this->never())->method('findUserByEmail');
 
-    $processor = $this->appleProcessor($user_manager, $payload);
-
     $this->expectException(\RuntimeException::class);
-    $processor->connectUserToAccount('token', 'apple');
+    $this->processor($user_manager)->connectUserToAccount($payload, 'apple');
   }
 
   /**
@@ -57,9 +55,9 @@ class AuthenticationApiProcessorTest extends TestCase
     $user_manager->expects($this->once())->method('claimUnverifiedAccountForOAuth')->with($existing, true);
     $user_manager->expects($this->once())->method('updateUser')->with($existing);
 
-    $processor = $this->appleProcessor($user_manager, ['id' => '001234.abcd', 'email' => 'someone@example.com', 'email_verified' => 'true']);
+    $payload = ['id' => '001234.abcd', 'email' => 'someone@example.com', 'email_verified' => 'true'];
 
-    $this->assertSame($existing, $processor->connectUserToAccount('token', 'apple'));
+    $this->assertSame($existing, $this->processor($user_manager)->connectUserToAccount($payload, 'apple'));
     $this->assertSame('001234.abcd', $existing->getAppleId());
   }
 
@@ -72,10 +70,8 @@ class AuthenticationApiProcessorTest extends TestCase
     ;
     $user_manager->expects($this->never())->method('updateUser');
 
-    $processor = $this->appleProcessor($user_manager, ['id' => '001234.abcd', 'email' => 'someone@example.com']);
-
     try {
-      $processor->connectUserToAccount('token', 'apple');
+      $this->processor($user_manager)->connectUserToAccount(['id' => '001234.abcd', 'email' => 'someone@example.com'], 'apple');
       $this->fail('linking must be refused');
     } catch (HttpException $e) {
       $this->assertSame(401, $e->getStatusCode());
@@ -93,25 +89,8 @@ class AuthenticationApiProcessorTest extends TestCase
     return $user_manager;
   }
 
-  /**
-   * @param array<string, mixed> $payload
-   */
-  private function appleProcessor(UserManager $user_manager, array $payload): AuthenticationApiProcessor
+  private function processor(UserManager $user_manager): AuthenticationApiProcessor
   {
-    return new class($payload, $user_manager, $this->createStub(AuthenticationManager::class), $this->createStub(AchievementManager::class)) extends AuthenticationApiProcessor {
-      /**
-       * @param array<string, mixed> $payload
-       */
-      public function __construct(private readonly array $payload, UserManager $user_manager, AuthenticationManager $authentication_manager, AchievementManager $achievement_manager)
-      {
-        parent::__construct($user_manager, $authentication_manager, $achievement_manager);
-      }
-
-      #[\Override]
-      protected function getPayloadFromAppleIdToken(string $id_token): array
-      {
-        return $this->payload;
-      }
-    };
+    return new AuthenticationApiProcessor($user_manager, $this->createStub(AuthenticationManager::class), $this->createStub(AchievementManager::class));
   }
 }

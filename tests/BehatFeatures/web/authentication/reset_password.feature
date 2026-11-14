@@ -35,3 +35,16 @@ Feature:
     And refresh session "reset-session-two" should be revoked
     When I log in as "Catrobat" with the password "MyNewPassword123"
     Then I should be logged in
+
+  Scenario: Resetting the password signs the browser out, not only the API cookies
+    Given I log in as "Catrobat"
+    And I should be logged in
+    When I open the password reset link for "Catrobat"
+    And I wait for the page to be loaded
+    And I fill in "change_password_form[plainPassword][first]" with "MyNewPassword123"
+    And I fill in "change_password_form[plainPassword][second]" with "MyNewPassword123"
+    And I press "Reset password"
+    And I wait for the page to be loaded
+    Then I should be on "/app/"
+    And I should be logged out
+    And the element ".js-user-state" should have a attribute "data-is-user-logged-in" with value "false"

@@ -85,21 +85,20 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
     $resource_owner = $o_auth_login_request->getResourceOwner() ?? '';
     $id_token = $o_auth_login_request->getIdToken() ?? '';
 
-    $resource_owner_method = 'validate'.ucfirst($resource_owner).'IdToken';
-
-    if (!method_exists($this->facade->getRequestValidator(), $resource_owner_method)) {
+    try {
+      $payload = $this->facade->getRequestValidator()->verify($resource_owner, $id_token);
+    } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
       return new JWTResponse();
     }
 
-    $validation_response = $this->facade->getRequestValidator()->{$resource_owner_method}($id_token);
-    if (!$validation_response) {
+    if (null === $payload) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return null;
     }
-    $user = $this->facade->getProcessor()->connectUserToAccount($id_token, $resource_owner);
+    $user = $this->facade->getProcessor()->connectUserToAccount($payload, $resource_owner);
     $token = $this->facade->getProcessor()->createJWTByUser($user);
     $refresh_token = $this->facade->getProcessor()->createRefreshTokenByUser($user);
     $responseCode = Response::HTTP_OK;

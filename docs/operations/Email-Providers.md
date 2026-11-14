@@ -35,7 +35,7 @@ Use **one account per provider**. Several free accounts at the same provider to 
 ## Adding a Provider
 
 1. Sign up with a `catrobat.org` address, not a personal one (Cloudflare Email Routing forwards it).
-2. Verify the sending domain `catrobat.org` in the provider and add its DKIM (and, if asked, return-path) records in Cloudflare DNS. Mail is sent from `support@catrobat.org`; without DKIM it fails DMARC and lands in spam.
+2. Verify the sending domain `catrobat.org` in the provider and add its DKIM (and, if asked, return-path) records in Cloudflare DNS. Mail is sent from `share@catrobat.org` (replies go to `support@catrobat.org`); without DKIM it fails DMARC and lands in spam.
 3. Add the DSN to `/var/www/share/shared/.env.prod.local`, e.g. `MAILER_DSN_MAILJET=smtp://...`.
 4. Append the provider to `MAILER_PROVIDERS` there, e.g. `MAILER_PROVIDERS=main:300,mailjet:190`.
 5. Clear the cache (`bin/console cache:clear --env=prod`) and send a test: `bin/console mailer:test you@example.org --transport=mailjet --env=prod`.

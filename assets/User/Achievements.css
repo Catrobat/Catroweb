@@ -201,10 +201,6 @@
   pointer-events: none;
 }
 
-.skeleton--text-heading {
-  display: block;
-}
-
 .skeleton--text {
   display: block;
 }

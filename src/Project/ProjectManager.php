@@ -184,7 +184,7 @@ class ProjectManager
     $this->file_sanitizer->sanitize($extracted_file);
 
     try {
-      $event = $this->event_dispatcher->dispatch(new ProjectBeforeInsertEvent($extracted_file));
+      $event = $this->event_dispatcher->dispatch(new ProjectBeforeInsertEvent($extracted_file, $request->isRestore()));
     } catch (InvalidCatrobatFileException $invalidCatrobatFileException) {
       $this->logger->error('addProject failed with code: '.$invalidCatrobatFileException->getCode().' and message:'.$invalidCatrobatFileException->getMessage(), ['exception' => $invalidCatrobatFileException]);
       throw $invalidCatrobatFileException;

@@ -1,5 +1,4 @@
 :root {
-  --maintenance-color1: rgb(0 0 0 / 70%);
   --maintenance-color2: #0097a7;
   --maintenance-font-family1: 'Material Icons', sans-serif;
   --maintenance-background-color1: rgb(0 0 0 / 3%);
@@ -7,7 +6,6 @@
 }
 
 [data-theme='dark'] {
-  --maintenance-color1: rgb(255 255 255 / 70%);
   --maintenance-color2: #4dd0e1;
   --maintenance-background-color1: rgb(255 255 255 / 5%);
   --maintenance-border-color: rgb(255 255 255 / 10%);

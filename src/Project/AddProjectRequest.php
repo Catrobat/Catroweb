@@ -59,13 +59,13 @@ class AddProjectRequest
     return $this->project_id;
   }
 
-  /** Set on projects converted from Scratch, so the first persisted row already says where it came from. */
-  /** A restore of lost files: keeps the upload date and tells no followers. */
+  /** A restore of lost files: keeps the upload date, tells no followers and skips the version check. */
   public function isRestore(): bool
   {
     return $this->restore;
   }
 
+  /** Set on projects converted from Scratch, so the first persisted row already says where it came from. */
   public function getScratchId(): ?int
   {
     return $this->scratch_id;
