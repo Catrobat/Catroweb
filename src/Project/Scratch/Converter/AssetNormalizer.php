@@ -20,6 +20,7 @@ class AssetNormalizer
   // is scaled up on a phone. Render at 2x and halve the sprite size if that matters.
   private const int MAX_SIDE = 2048;
   private const int MAX_SOUND_BYTES = 32 * 1024 * 1024;
+  private const int MP3_ABOVE_BYTES = 256 * 1024; // short effects stay WAV: MP3 pads them with silence
   private const int TOOL_TIMEOUT = 20;
   private const int TOOL_MISSING = 127;
 
@@ -107,6 +108,15 @@ class AssetNormalizer
 
     if ('wav' !== $format) {
       throw new ScratchConversionException('Unsupported sound format: '.$format);
+    }
+
+    // Scratch keeps sounds uncompressed or as ADPCM, so music-heavy games bloat past the upload limit; MP3 is ~10x smaller.
+    // Needs sox built with MP3 support (Debian: libsox-fmt-mp3); without it sox fails and the sound stays WAV.
+    if (\strlen($bytes) > self::MP3_ABOVE_BYTES) {
+      $mp3 = self::run(['sox', '-t', 'wav', '-', '-t', 'mp3', '-'], $bytes, $deadline);
+      if (null !== $mp3 && '' !== $mp3) {
+        return [$mp3, 'mp3'];
+      }
     }
 
     if (1 === self::wavFormatCode($bytes)) {

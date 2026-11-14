@@ -106,7 +106,7 @@ class ScratchFetcher
           $assets[$md5ext] = $body;
         }
       } catch (\Throwable $throwable) {
-        // Unread responses check themselves on destruct and would throw a raw TransportException over this one.
+        // Unread responses check themselves on destruct and would throw a stray TransportException later (GC or shutdown).
         foreach ($responses as $response) {
           $response->cancel();
         }

@@ -59,6 +59,7 @@ RUN apt-get update && \
     libapache2-mod-php8.5 \
     librsvg2-bin \
     sox \
+    libsox-fmt-mp3 \
     acl \
     make \
     libtool \
