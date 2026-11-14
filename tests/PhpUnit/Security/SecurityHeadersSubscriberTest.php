@@ -83,6 +83,21 @@ class SecurityHeadersSubscriberTest extends TestCase
     $this->assertStringContainsString("worker-src 'self' blob:", $csp);
   }
 
+  public function testCspAllowsCloudflareWebAnalytics(): void
+  {
+    $event = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
+    new SecurityHeadersSubscriber('prod')->onKernelResponse($event);
+
+    $directives = [];
+    foreach (explode('; ', (string) $event->getResponse()->headers->get('Content-Security-Policy')) as $directive) {
+      $sources = explode(' ', $directive);
+      $directives[array_shift($sources)] = $sources;
+    }
+
+    $this->assertContains('https://static.cloudflareinsights.com', $directives['script-src']);
+    $this->assertContains('https://cloudflareinsights.com', $directives['connect-src']);
+  }
+
   public function testCaptchaOriginPreservesPort(): void
   {
     $subscriber = new SecurityHeadersSubscriber('dev', true, 'http://localhost:3000');

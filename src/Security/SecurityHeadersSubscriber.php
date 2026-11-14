@@ -61,6 +61,8 @@ class SecurityHeadersSubscriber
       'https://*.google-analytics.com',
       'https://*.googletagmanager.com',
       'https://appleid.apple.com',
+      // Cloudflare Web Analytics beacon reports here.
+      'https://cloudflareinsights.com',
     ];
     $worker_src = ["'self'"];
 
@@ -80,7 +82,7 @@ class SecurityHeadersSubscriber
 
     return implode('; ', [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com",
       "style-src 'self' 'unsafe-inline'",
       'img-src '."'self'".' data: https:',
       'font-src '."'self'".' data:',
