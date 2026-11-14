@@ -72,7 +72,8 @@ class MailerAdapter
     }
 
     return new TemplatedEmail()
-      ->from(new Address('support@catrobat.org'))
+      ->from(new Address('share@catrobat.org', 'Catrobat Share'))
+      ->replyTo('support@catrobat.org')
       ->to($to)
       ->subject($subject)
       ->htmlTemplate($template)
