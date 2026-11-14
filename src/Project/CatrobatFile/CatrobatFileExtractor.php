@@ -52,7 +52,7 @@ class CatrobatFileExtractor
       throw new InvalidCatrobatFileException('errors.file.invalid', 505);
     }
 
-    $max_total_size = 200 * 1024 * 1024; // 200 MB
+    $max_total_size = 512 * 1024 * 1024; // uncompressed zip-bomb guard; keep it above PROJECT_UPLOAD_MAX_BYTES
     $max_file_count = 5_000;
     $total_size = 0;
     $num_entries = $zip->numFiles;
