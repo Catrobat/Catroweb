@@ -149,11 +149,12 @@ final class ScratchToCatrobatConverterTest extends TestCase
     (new AssetNormalizer())->costumeToPng('<svg xmlns="http://www.w3.org/2000/svg" width="20000" height="20000"/>', ['dataFormat' => 'svg'], microtime(true) + 10.0);
   }
 
-  public function testABlackAndWhiteCostumeStaysRgba(): void
+  public function testABlackAndWhiteCostumeIsNotGrayscale(): void
   {
     $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="#000"/></svg>';
     $png = (new AssetNormalizer())->costumeToPng($svg, ['dataFormat' => 'svg', 'rotationCenterX' => 2, 'rotationCenterY' => 2], microtime(true) + 10.0);
-    $this->assertSame(6, \ord($png[25]), 'PNG color type RGBA; Pocket Code reads grayscale as alpha');
+    // Pocket Code (libGDX/stb_image) reads grayscale (0, 4) as alpha only; RGB, palette (pngquant) and RGBA expand to colour.
+    $this->assertContains(\ord($png[25]), [2, 3, 6], 'PNG color type must not be grayscale');
   }
 
   public function testScratch2SvgTextUsesItsTransformInsteadOfObsoleteCoordinates(): void

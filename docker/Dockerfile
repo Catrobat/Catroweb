@@ -60,6 +60,7 @@ RUN apt-get update && \
     librsvg2-bin \
     sox \
     libsox-fmt-mp3 \
+    pngquant \
     acl \
     make \
     libtool \

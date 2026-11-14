@@ -87,11 +87,15 @@ class AssetNormalizer
       $canvas->compositeImage($image, \Imagick::COMPOSITE_OVER, (int) round($half_w - $center_x), (int) round($half_h - $center_y));
       // Always RGBA: Pocket Code (libGDX) loads an 8-bit grayscale PNG as alpha only, so black became transparent.
       $canvas->setImageFormat('png32');
-
-      return $canvas->getImageBlob();
+      $png = $canvas->getImageBlob();
     } catch (\ImagickException $exception) {
       throw new ScratchConversionException('A costume could not be read.', 0, $exception);
     }
+
+    // A palette cuts converted costumes by about two thirds. pngquant keeps the original when the quality floor
+    // can't be met or the result is larger (exit 99/98), and is optional: without it costumes stay RGBA.
+    // A palette PNG is safe for Pocket Code, unlike grayscale: libGDX expands it to RGB(A).
+    return self::run(['pngquant', '--quality=70-95', '--speed=10', '--skip-if-larger', '-'], $png, $deadline, false) ?: $png;
   }
 
   /**
@@ -241,9 +245,9 @@ class AssetNormalizer
   /**
    * @param list<string> $command
    *
-   * @return string|null output, null if the tool failed on this input
+   * @return string|null output, null if the tool failed on this input or an optional tool is missing
    */
-  private static function run(array $command, string $input, float $deadline): ?string
+  private static function run(array $command, string $input, float $deadline, bool $required = true): ?string
   {
     $remaining = $deadline - microtime(true);
     if ($remaining <= 0) {
@@ -260,6 +264,10 @@ class AssetNormalizer
     }
 
     if (self::TOOL_MISSING === $process->getExitCode()) {
+      if (!$required) {
+        return null;
+      }
+
       throw new \RuntimeException($command[0].' is not installed; the Scratch converter needs it.');
     }
 

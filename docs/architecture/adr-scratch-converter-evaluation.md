@@ -26,7 +26,7 @@ Scratch is served from Share without converting again.
 
 - **Stage:** 480×360 with `MAXIMIZE`, so Scratch coordinates are 1:1. Costumes are padded so Scratch's rotation
   center, measured from the SVG viewBox origin, becomes the image center. SVGs are rendered with `rsvg-convert`,
-  and IMA-ADPCM wavs are transcoded with `sox`; wavs over 256 KB become MP3 when sox has MP3 support (`libsox-fmt-mp3`).
+  and IMA-ADPCM wavs are transcoded with `sox`; wavs over 256 KB become MP3 when sox has MP3 support (`libsox-fmt-mp3`). Costumes are palette-quantized with `pngquant` when installed.
 - **Scratch 2 text:** SVG costumes imported from Scratch 2 use its text-positioning rules (obsolete x/y ignored,
   top-aligned lines). Ordinary Scratch 3 SVGs keep their original coordinates.
 - **Costume identity:** named costume switches become indexed switches. Catroid copies a clone's named look

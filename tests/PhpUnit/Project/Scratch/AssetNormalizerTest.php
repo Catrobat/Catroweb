@@ -34,6 +34,25 @@ final class AssetNormalizerTest extends TestCase
     $this->assertSame([$short, 'wav'], $normalizer->playableSound($short, ['dataFormat' => 'wav'], $deadline));
   }
 
+  public function testCostumesArePaletteQuantizedWhenPngquantIsInstalled(): void
+  {
+    $pngquant = new Process(['pngquant', '--version']);
+    $pngquant->run();
+    if (!$pngquant->isSuccessful()) {
+      $this->markTestSkipped('pngquant is not installed');
+    }
+
+    $image = new \Imagick();
+    $image->newPseudoImage(300, 200, 'plasma:red-blue');
+    $image->setImageFormat('png32');
+    $rgba = $image->getImageBlob();
+
+    $png = (new AssetNormalizer())->costumeToPng($rgba, ['dataFormat' => 'png', 'rotationCenterX' => 150, 'rotationCenterY' => 100], microtime(true) + 30.0);
+
+    $this->assertSame(3, \ord($png[25]), 'PNG color type 3 (palette)');
+    $this->assertLessThan(\strlen($rgba), \strlen($png));
+  }
+
   /** A 440 Hz tone as 16-bit mono PCM WAV at 44.1 kHz. */
   private static function pcmWav(int $seconds): string
   {
