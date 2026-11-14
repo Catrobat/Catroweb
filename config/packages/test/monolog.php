@@ -12,6 +12,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'search',
         'download',
         'upload',
+        'login',
       ],
       'handlers' => [
         'main' => [

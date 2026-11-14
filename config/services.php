@@ -201,6 +201,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->call('setMaxLevelNameLength', [5])
   ;
 
+  // Failed-login lines (channel "login"): context only, no ip/user extras.
+  $services->set('monolog.formatter.login_formatter', LineFormatter::class)
+    ->args([str_replace('%', '%%', App\Security\Authentication\LoginFailureLogger::LOG_FORMAT), null, true, true])
+  ;
+
   $services->set(CaptchaVerifier::class)
     ->arg('$captchaVerifyUrl', '%env(CAPTCHA_API_ENDPOINT)%/%env(CAPTCHA_SITE_KEY)%/siteverify')
     ->arg('$captchaSecret', '%env(CAPTCHA_SECRET)%')
