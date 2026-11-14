@@ -214,6 +214,14 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
 
+        web-visual:
+            paths:
+                - tests/BehatFeatures/web/visual
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+
         web-achievements:
             paths:
                 - tests/BehatFeatures/web/achievements

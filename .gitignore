@@ -46,6 +46,7 @@ tests/style-report/**
 tests/TestReports/Behat/**
 tests/TestReports/CoverageReports/**
 tests/TestReports/TestScreenshots/**
+tests/TestReports/Visual/**
 tests/TestData/DataFixtures/GeneratedFixtures**
 tests/TestData/Cache/**
 
@@ -82,6 +83,7 @@ behat.yaml
 !/docker/app/set-permissions.sh
 !/docker/app/execute-tests.sh
 !/docker/app/prepare-for-deploy.sh
+!/tests/visual/*.sh
 
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php

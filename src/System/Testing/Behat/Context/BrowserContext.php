@@ -785,6 +785,59 @@ class BrowserContext extends MinkContext implements Context
     }
   }
 
+  // --------------------------------------------------------------------------------------------------------------------
+  //  Visual regression (web-visual suite, compared against tests/visual/baselines by tests/visual/compare.sh)
+  // --------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Call before navigating: it only stores the choice (and declines cookies so the banner stays out of the shot).
+   *
+   * @Given I use the :scheme color scheme
+   */
+  public function iUseTheColorScheme(string $scheme): void
+  {
+    $this->getSession()->executeScript(
+      "localStorage.setItem('theme', ".json_encode($scheme)."); document.cookie = 'cookie_consent=declined; path=/'"
+    );
+  }
+
+  /**
+   * @Given I use a :width x :height viewport
+   */
+  public function iUseAViewport(int $width, int $height): void
+  {
+    $this->getSession()->resizeWindow($width, $height);
+  }
+
+  /**
+   * @Then I take a visual snapshot :name
+   */
+  public function iTakeAVisualSnapshot(string $name): void
+  {
+    // external-svg-loader fills <svg data-src> asynchronously; badges and the popup background need it.
+    $ready = $this->getSession()->wait(10000, "document.fonts.status === 'loaded'"
+      ." && [...document.querySelectorAll('svg[data-src]')].every((s) => s.childElementCount > 0)"
+      ." && [...document.images].every((i) => i.complete || i.loading === 'lazy')");
+    if (!$ready) {
+      // Still take the shot: the comparison reports the difference, and the log says why
+      fwrite(STDERR, "Visual snapshot '{$name}': page not ready after 10 s (fonts, SVGs or images still loading)\n");
+    }
+    // Freeze every CSS animation/transition at a fixed point so two runs render the same pixels:
+    // finite ones jump to their end state, infinite ones (popup rays, badge stars) to 500 ms, where the popup's
+    // two ray groups show their contrasting colours (at 0 ms both are white).
+    $this->getSession()->executeScript(<<<'JS'
+      document.activeElement?.blur();
+      document.getAnimations().forEach((a) => {
+        if (a.effect?.getComputedTiming().iterations === Infinity) { a.pause(); a.currentTime = 500 } else { a.finish() }
+      });
+      JS);
+    $dir = $this->getSymfonyParameterAsString('kernel.project_dir').'/tests/TestReports/Visual';
+    if (!is_dir($dir)) {
+      mkdir($dir, 0o777, true);
+    }
+    file_put_contents($dir.'/'.$name.'.png', $this->getSession()->getScreenshot());
+  }
+
   /**
    * @When /^I get page content$/
    */

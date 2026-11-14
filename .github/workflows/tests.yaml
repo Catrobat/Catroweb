@@ -472,6 +472,125 @@ jobs:
           docker logs chrome.catroweb
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Visual snapshots:
+  #
+  #   - Screenshots key pages (web-visual Behat suite) against the PRODUCTION frontend build, so prod-only breakage
+  #     (PurgeCSS, minification) shows up, and compares them with tests/visual/baselines.
+  #   - Advisory only: differences become warnings + a job summary, never a failure. Not part of the CI gate.
+  #   - Accept intended changes with tests/visual/accept.sh <pr>. See docs/contributor-guide/Visual-Regression.md.
+  #
+  tests_visual:
+    name: Visual snapshots
+    needs: build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write # push the comparison images to the visual-snapshots branch
+      packages: read
+      pull-requests: write # the PR comment
+    env:
+      # Fork PRs get a read-only token: no images or comment there, the job summary + artifact still work.
+      # Dependabot runs get a read-only token too.
+      PUBLISH: ${{ github.event_name == 'pull_request' && needs.build.outputs.is-fork == 'false' && github.actor != 'dependabot[bot]' }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          # The write token is only handed to the publish step, not to yarn install / vite build
+          persist-credentials: false
+
+      - name: Log in to GitHub Container Registry
+        if: needs.build.outputs.is-fork == 'false'
+        uses: docker/login-action@v4.7.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Docker Image (internal)
+        if: needs.build.outputs.is-fork == 'false'
+        run: docker pull ${{ needs.build.outputs.image-tag }}
+
+      - name: Download image artifact (fork)
+        if: needs.build.outputs.is-fork == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: catroweb-image
+          path: /tmp
+
+      - name: Load Docker Image (fork)
+        if: needs.build.outputs.is-fork == 'true'
+        run: gunzip -c /tmp/catroweb-image.tar.gz | docker load
+
+      - name: Tag image for docker-compose
+        run: docker tag ${{ needs.build.outputs.image-tag }} app.catroweb
+
+      - name: Setup node modules
+        uses: ./.github/actions/setup-yarn-node-modules
+
+      - name: Production frontend build
+        run: npx vite build
+
+      - name: Start Docker Containers
+        run: |
+          cd docker
+          for attempt in 1 2 3; do
+            docker compose -f docker-compose.test.yaml up -d && break
+            [ "$attempt" -eq 3 ] && exit 1
+            docker compose -f docker-compose.test.yaml down -v || true
+            sleep "$((attempt * 15))"
+          done
+
+      - name: Swap in the production build
+        run: |
+          docker exec app.catroweb rm -rf public/build
+          docker cp public/build app.catroweb:/var/www/catroweb/public/build
+          docker exec app.catroweb bin/console cache:warmup -e test
+
+      - name: Take snapshots
+        continue-on-error: true
+        run: |
+          docker exec app.catroweb chmod -R 777 var tests/TestReports
+          docker exec app.catroweb bin/behat -s web-visual -f pretty
+
+      - name: Compare with baselines
+        id: compare
+        run: |
+          command -v magick || command -v compare || { sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends imagemagick; }
+          # Behat writes the screenshots as root inside the container
+          sudo mkdir -p tests/TestReports/Visual
+          sudo chown -R "$(id -u):$(id -g)" tests/TestReports/Visual
+          if [ "$PUBLISH" = true ]; then
+            export IMAGE_BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/visual-snapshots/pr-$PR_NUMBER/$RUN_ID"
+          fi
+          tests/visual/compare.sh
+
+      - name: Comment on the PR
+        if: env.PUBLISH == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANGED: ${{ steps.compare.outputs.changed }}
+        run: tests/visual/publish.sh
+
+      - name: Upload snapshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-snapshots
+          path: tests/TestReports/Visual
+          if-no-files-found: ignore
+
+      - name: Upload failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-failures
+          path: tests/TestReports/TestScreenshots
+          if-no-files-found: ignore
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # CI gate:
   #
   #   - Aggregates every job of this workflow into a single status check, so that branch protection has one stable
