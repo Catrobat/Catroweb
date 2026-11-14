@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
@@ -30,6 +31,7 @@ class ResetPasswordController extends AbstractController
     private readonly PasswordSessionService $password_sessions,
     private readonly CookieService $cookie_service,
     private readonly ParameterBagInterface $parameter_bag,
+    private readonly TokenStorageInterface $token_storage,
   ) {
   }
 
@@ -105,8 +107,11 @@ class ResetPasswordController extends AbstractController
       $this->resetPasswordHelper->removeResetRequest($token);
       $this->password_sessions->resetPassword($user, $hashedPassword);
 
-      // The session is cleaned up after the password has been changed.
-      $this->cleanSessionAfterReset();
+      // Sign the browser out completely: the auth cookies are cleared below, and a surviving main-firewall
+      // session (re-saved with the new password hash) would show the user as logged in while every /api call
+      // answers 401. This also drops the reset token from the session.
+      $this->token_storage->setToken(null);
+      $request->getSession()->invalidate();
 
       $request->attributes->remove(RefreshTokenService::REFRESHED_BEARER_COOKIE_ATTRIBUTE);
       $request->attributes->set(RefreshTokenService::CLEAR_AUTHENTICATION_COOKIES_ATTRIBUTE, true);
