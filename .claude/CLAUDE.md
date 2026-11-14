@@ -67,7 +67,9 @@ Ports: app 8080, phpMyAdmin 8081, MariaDB 3306 (`db.catroweb.dev` / `catroweb_de
 
 - Plain CSS only (no Sass). Bootstrap is imported precompiled in `assets/Layout/Base.css`; shared custom properties live in `assets/Layout/Variables.css`.
 - Dark mode: use `light-dark(light, dark)`, not `@media (prefers-color-scheme)` (Bootstrap's `data-bs-theme` overrides the media query).
-- The `:root { color-scheme: light; }` rule in BootstrapOverwrite.css is **required**: Vite 8's LightningCSS `light-dark()` polyfill only injects toggle vars into rules declaring `color-scheme`; without it every `light-dark()` value is garbage in light mode.
+- The `:root:not([data-bs-theme='dark']) { color-scheme: light; }` rule in BootstrapOverwrite.css is **required**: Vite 8's LightningCSS `light-dark()` polyfill only injects toggle vars into rules declaring `color-scheme`; without it every `light-dark()` value is garbage in light mode. Keep the `:not()`: a bare `:root` ties with `[data-bs-theme=dark]` and wins by order, pinning every `light-dark()` to light in dark mode.
+- PurgeCSS runs only in the prod build and keeps a class only if it appears in `templates/`, `assets/**/*.js` or `assets/**/*.svg`. Classes added any other way need the `PURGE_SAFELIST` in `vite/plugins.mjs`.
+- CSS that only the prod build breaks is caught by the advisory **Visual snapshots** CI job (screenshots vs `tests/visual/baselines/`, before/after/diff PR comment). Accept intended changes with `tests/visual/accept.sh <pr>`. See `docs/contributor-guide/Visual-Regression.md`.
 - `--primary` adapts to dark mode (text/borders/links); `--primary-bg` is always dark for filled surfaces with `--on-primary` (#fff) text. MDC uses `--mdc-theme-primary: var(--primary-bg, var(--primary))`.
 - WCAG AA: Bootstrap `text-muted` (#6c757d on white, 4.48:1) fails. Use `light-dark(#5a6374, #a0aec0)`. Bootstrap `*-subtle` badges can fail in dark mode; override with explicit `light-dark()` colors.
 - No empty rule blocks.
