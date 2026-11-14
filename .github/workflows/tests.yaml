@@ -484,6 +484,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     continue-on-error: true
+    permissions:
+      contents: write # push the comparison images to the visual-snapshots branch
+      packages: read
+      pull-requests: write # the PR comment
+    env:
+      # Fork PRs get a read-only token: no images or comment there, the job summary + artifact still work.
+      PUBLISH: ${{ github.event_name == 'pull_request' && needs.build.outputs.is-fork == 'false' }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
@@ -543,11 +552,20 @@ jobs:
           docker exec app.catroweb bin/behat -s web-visual -f pretty
 
       - name: Compare with baselines
-        env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+        id: compare
         run: |
           command -v magick || command -v compare || { sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends imagemagick; }
+          if [ "$PUBLISH" = true ]; then
+            export IMAGE_BASE_URL="https://raw.githubusercontent.com/${{ github.repository }}/visual-snapshots/pr-$PR_NUMBER/$RUN_ID"
+          fi
           tests/visual/compare.sh
+
+      - name: Comment on the PR
+        if: env.PUBLISH == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANGED: ${{ steps.compare.outputs.changed }}
+        run: tests/visual/publish.sh
 
       - name: Upload snapshots
         if: always()
