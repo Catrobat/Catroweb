@@ -9,6 +9,7 @@ use CoderCat\JWKToPEM\JWKConverter;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
@@ -19,48 +20,93 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
     private readonly string $google_client_id,
     #[Autowire('%env(string:APPLE_ID)%')]
     private readonly string $apple_client_id,
+    private readonly ClientInterface $http_client = new Client(),
   ) {
   }
 
-  public function validateGoogleIdToken(string $id_token): bool
+  /**
+   * Verifies the provider's ID token once and returns its normalized claims.
+   *
+   * @return array{id: mixed, email: mixed, name?: mixed, email_verified?: mixed}|null null when the token is invalid
+   *
+   * @throws \InvalidArgumentException when the provider is unknown
+   * @throws GuzzleException
+   * @throws \JsonException
+   */
+  public function verify(string $provider, string $id_token): ?array
+  {
+    return match ($provider) {
+      'google' => $this->verifyGoogleIdToken($id_token),
+      'facebook' => $this->verifyFacebookIdToken($id_token),
+      'apple' => $this->verifyAppleIdToken($id_token),
+      default => throw new \InvalidArgumentException(sprintf('Unknown OAuth provider "%s"', $provider)),
+    };
+  }
+
+  /**
+   * @return array{id: mixed, email: mixed, name: mixed, email_verified: mixed}|null
+   */
+  private function verifyGoogleIdToken(string $id_token): ?array
   {
     try {
       // Specify the CLIENT_ID of the app that accesses the backend
       $client = new \Google\Client(['client_id' => $this->google_client_id]);
+      $client->setHttpClient($this->http_client);
       $payload = $client->verifyIdToken($id_token);
-
-      return boolval($payload);
     } catch (\Exception) {
-      return false;
+      return null;
     }
+
+    if (false === $payload) {
+      return null;
+    }
+
+    return [
+      'id' => $payload['sub'] ?? null,
+      'email' => $payload['email'] ?? null,
+      'name' => $payload['name'] ?? null,
+      'email_verified' => $payload['email_verified'] ?? false,
+    ];
   }
 
-  public function validateFacebookIdToken(string $id_token): bool
+  /**
+   * @return array{id: mixed, email: mixed, name: mixed}|null
+   */
+  private function verifyFacebookIdToken(string $id_token): ?array
   {
     try {
       $public_key = $_ENV['FB_OAUTH_PUBLIC_KEY'] ?? '';
       $decoded = JWT::decode($id_token, new Key($public_key, 'RS256'));
     } catch (\Exception) {
-      return false;
+      return null;
     }
 
-    return !($decoded->expires_at < time() || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email) || !isset($decoded->name));
+    if ($decoded->expires_at < time() || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email) || !isset($decoded->name)) {
+      return null;
+    }
+
+    return [
+      'id' => $decoded->user_id,
+      'email' => $decoded->email,
+      'name' => $decoded->name,
+    ];
   }
 
   /**
+   * @return array{id: mixed, email: mixed, email_verified: mixed}|null
+   *
    * @throws GuzzleException
    * @throws \JsonException
    */
-  public function validateAppleIdToken(string $id_token): bool
+  private function verifyAppleIdToken(string $id_token): ?array
   {
     $jwt = self::jwt_decode($id_token);
     if (null === $jwt || [] === $jwt || !isset($jwt['header']['kid'])) {
-      return false;
+      return null;
     }
 
     $header = $jwt['header'];
-    $client = new Client();
-    $res = $client->request('GET', 'https://appleid.apple.com/auth/keys');
+    $res = $this->http_client->request('GET', 'https://appleid.apple.com/auth/keys');
     $body = $res->getBody()->getContents();
     $keys_raw = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     $keys = $keys_raw['keys'];
@@ -73,7 +119,7 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
     }
 
     if ((is_countable($public_key) ? count($public_key) : 0) < 1) {
-      return false;
+      return null;
     }
 
     $jwkConverter = new JWKConverter();
@@ -82,15 +128,21 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
       $PEM = $jwkConverter->toPEM($public_key);
       $decoded = JWT::decode($id_token, new Key($PEM, 'RS256'));
     } catch (\Exception) {
-      return false;
+      return null;
     }
 
     if ($decoded->exp < time() || $decoded->iat > time() || $decoded->aud !== $this->apple_client_id
       || 'https://appleid.apple.com' !== $decoded->iss || empty($decoded->sub) || !isset($decoded->email)) {
-      return false;
+      return null;
     }
 
-    return true;
+    // Apple identifies the user by the standard `sub` claim; there is no `user_id` claim.
+    return [
+      'id' => $decoded->sub,
+      'email' => $decoded->email,
+      // Apple sends the flag as a boolean or as the string "true"
+      'email_verified' => $decoded->email_verified ?? false,
+    ];
   }
 
   /**
