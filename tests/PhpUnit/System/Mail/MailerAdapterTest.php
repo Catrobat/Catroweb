@@ -89,8 +89,9 @@ final class MailerAdapterTest extends TestCase
     $budget->method('getProvidersWithRoom')->willReturn(['main']);
 
     $this->assertTrue($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig'));
-    $this->assertSame('Catrobat Share <share@catrobat.org>', $headers?->get('From')?->getBodyAsString());
-    $this->assertSame('support@catrobat.org', $headers?->get('Reply-To')?->getBodyAsString());
+    $this->assertNotNull($headers);
+    $this->assertSame('Catrobat Share <share@catrobat.org>', $headers->get('From')?->getBodyAsString());
+    $this->assertSame('support@catrobat.org', $headers->get('Reply-To')?->getBodyAsString());
   }
 
   private function adapter(MailerInterface $mailer, EmailBudgetManager $budget): MailerAdapter
