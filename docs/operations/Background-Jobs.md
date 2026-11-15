@@ -29,14 +29,14 @@ Run by hand: `bin/console catrobat:cronjob` runs every due task of both lanes, `
 
 The workers are systemd services (Catrobat/infrastructure `host-config/systemd/catroweb-worker@.service`, one instance per queue above, grouped by `catroweb-workers.target`).
 
-First rollout, in this order: install the unit files and the sudoers entry (infrastructure repo, `docs/HOST_BOOTSTRAP.md`), deploy (the migration creates the queue tables, `restart:workers` starts the workers), then delete `/etc/cron.d/catroweb`.
+First rollout, in this order: install and start the unit files (infrastructure repo, `docs/HOST_BOOTSTRAP.md`), deploy, then delete `/etc/cron.d/catroweb`.
 
 ```bash
 systemctl status 'catroweb-worker@*'
 journalctl -u catroweb-worker@scratch -f
 ```
 
-- **Deploys** restart them with `systemctl restart catroweb-workers.target` (`deploy.php`, task `restart:workers`); `check:workers` stops a deploy before it changes anything if the units are not installed: mail and notifications only run on the workers. Not `messenger:stop-workers`: its signal is stored in the release's own `var/cache`, which workers started from the previous release never read. systemd sends SIGTERM to the worker only (`KillMode=mixed`), which finishes its current job, including a running periodic task, before it exits (up to `TimeoutStopSec`).
+- **Deploys** run `messenger:stop-workers` (`deploy.php`, task `restart:workers`): each worker exits after its current job, and systemd (`Restart=always`) starts it again from the new release. The signal lives in the database (`cache_items`, `config/packages/cache.php`), not in `var/cache`, because each release has its own `var/cache` and the old workers would never see it. No sudo is needed. `check:workers` stops a deploy before it changes anything if the workers are not running. On `systemctl stop`/`restart` systemd sends SIGTERM to the worker only (`KillMode=mixed`), which finishes its current job first (up to `TimeoutStopSec`).
 - **Failed jobs**: a job is retried up to three times (growing delay, at most 10 minutes), then moves to the `failed` queue and its `background_job` row fails. See them at `/admin/system/background-tasks/list`: "Retry" queues the job again on its own queue, "Delete" drops it. A job row left unfinished by a killed worker counts as dead after 30 minutes and is failed by the hourly clean-up.
 - **Monitoring**: the Background tasks admin page; Grafana's "Background jobs" row; `catroweb-watchdog` alerts when a worker is not running, when jobs wait longer than 15 minutes, and when a job failed for good.
 - A worker restarts itself every hour (`--time-limit`) and after a job that took it over 512 MB (`--memory-limit`).
