@@ -26,6 +26,9 @@ class ContentModerationAction
   final public const string ACTION_APPEAL_APPROVED = 'appeal_approved';
   final public const string ACTION_APPEAL_REJECTED = 'appeal_rejected';
   final public const string ACTION_BRIGADING_SUSPECTED = 'brigading_suspected';
+  /** Kept as evidence (police, Stopline): catro:moderation:purge-hidden skips it until a later release. */
+  final public const string ACTION_EVIDENCE_HOLD = 'evidence_hold';
+  final public const string ACTION_EVIDENCE_RELEASED = 'evidence_released';
 
   #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\Id]

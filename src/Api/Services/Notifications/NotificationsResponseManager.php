@@ -25,6 +25,7 @@ use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportProcessor;
+use App\System\Commands\Maintenance\PurgeHiddenContentCommand;
 use App\User\UserAvatarService;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationResponse;
@@ -179,6 +180,15 @@ class NotificationsResponseManager extends AbstractResponseManager
       $message = $notification->getMessage();
       if ('' === $message && ReportProcessor::NOTIFICATION_ADMIN_WARNING === $notification->getModerationAction()) {
         $message = $this->trans('catro-notifications.moderation-warning.message');
+      }
+
+      $hidden_type = ContentType::tryFrom((string) $notification->getContentType());
+      $hidden_id = $notification->getContentId();
+      if (ReportProcessor::NOTIFICATION_ADMIN_WARNING === $notification->getModerationAction()
+        && $hidden_type instanceof ContentType && null !== $hidden_id
+        && $this->content_visibility_manager->isContentHidden($hidden_type, $hidden_id)) {
+        $deletion = $notification->getCreatedAt()->modify(sprintf('+%d days', PurgeHiddenContentCommand::DAYS));
+        $message .= ' '.$this->trans('catro-notifications.moderation-warning.deletion', ['%date%' => $deletion->format('Y-m-d')]);
       }
 
       $response = [

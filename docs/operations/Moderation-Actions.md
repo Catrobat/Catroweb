@@ -11,7 +11,9 @@ A moderator resolves a content report with one of four actions. All of them go t
 
 Use `hide_warn` for a first offense (for example suggestive content by a child) and `accept` for clear abuse.
 
-The warning is a `ModerationNotification` with `moderation_action = 'admin_warning'`. Its text is the moderator's message; when the message is empty, the notifications API shows the translated default `catro-notifications.moderation-warning.message`.
+Hidden content with an accepted report, and everything of a banned account, is deleted 14 days later unless it is appealed or held as evidence: see [Retention](./Content-Moderation.md#retention-hidden-content-is-deleted-after-14-days).
+
+The warning is a `ModerationNotification` with `moderation_action = 'admin_warning'`. Its text is the moderator's message; when the message is empty, the notifications API shows the translated default `catro-notifications.moderation-warning.message`. While the content is hidden, the API appends its deletion date (`catro-notifications.moderation-warning.deletion`).
 
 ## Where the actions are available
 

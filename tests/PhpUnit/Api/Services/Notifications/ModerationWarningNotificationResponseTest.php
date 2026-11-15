@@ -41,17 +41,28 @@ class ModerationWarningNotificationResponseTest extends TestCase
     self::assertSame('', $this->renderMessage('report_accepted', ''));
   }
 
-  private function renderMessage(string $moderation_action, string $message): string
+  public function testWarningAboutHiddenContentNamesTheDeletionDate(): void
+  {
+    $date = new \DateTimeImmutable('+14 days')->format('Y-m-d');
+    self::assertSame(
+      'Custom text catro-notifications.moderation-warning.deletion '.$date,
+      $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_WARNING, 'Custom text', true),
+    );
+  }
+
+  private function renderMessage(string $moderation_action, string $message, bool $hidden = false): string
   {
     $translator = $this->createStub(TranslatorInterface::class);
-    $translator->method('trans')->willReturnArgument(0);
+    $translator->method('trans')->willReturnCallback(static fn (string $id, array $parameters = []): string => trim($id.' '.implode(' ', $parameters)));
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $visibility->method('isContentHidden')->willReturn($hidden);
 
     $manager = new NotificationsResponseManager(
       $translator,
       $this->createStub(SerializerInterface::class),
       $this->createStub(CacheItemPoolInterface::class),
       $this->createStub(NotificationRepository::class),
-      $this->createStub(ContentVisibilityManager::class),
+      $visibility,
       $this->createStub(UserAvatarService::class),
     );
 

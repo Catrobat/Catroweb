@@ -2,15 +2,15 @@
 
 Slow work runs outside web requests, on workers that each consume one queue, so one kind of job never waits for another. The queues are rows in the `messenger_messages` table (Symfony Messenger, Doctrine transport); there is no broker to run.
 
-| Queue / worker               | What runs there                                                                                        |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `scratch`                    | Scratch imports (`ConvertScratchProject`), one at a time                                               |
-| `uploads`                    | Completing resumable uploads that asked for it (`CompleteProjectUpload`)                               |
-| `mail`                       | Mail delivery (`SendMail`), so a verification mail never waits behind other jobs                       |
-| `default`                    | Follower notifications for a new project, code view exports, NSFW image scans (`ScanContentImages`)    |
-| `cleanup`                    | Bulk clean-ups that queue one batch after the next while work is left (`GarbageCollectOrphanedAssets`) |
-| `scheduler_maintenance`      | Fast periodic tasks (popularity, rankings, achievements, small clean-ups)                              |
-| `scheduler_maintenance_slow` | Periodic sweeps that may take long (retention, broken projects, re-sanitizing, unverified accounts)    |
+| Queue / worker               | What runs there                                                                                                       |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `scratch`                    | Scratch imports (`ConvertScratchProject`), one at a time                                                              |
+| `uploads`                    | Completing resumable uploads that asked for it (`CompleteProjectUpload`)                                              |
+| `mail`                       | Mail delivery (`SendMail`), so a verification mail never waits behind other jobs                                      |
+| `default`                    | Follower notifications for a new project, code view exports, NSFW image scans (`ScanContentImages`)                   |
+| `cleanup`                    | Bulk clean-ups that queue one batch after the next while work is left (`GarbageCollectOrphanedAssets`)                |
+| `scheduler_maintenance`      | Fast periodic tasks (popularity, rankings, achievements, small clean-ups)                                             |
+| `scheduler_maintenance_slow` | Periodic sweeps that may take long (retention, broken projects, re-sanitizing, unverified accounts, moderation purge) |
 
 Configuration: `config/packages/messenger.php` (queues and routing), `src/System/Cron/CronTasks.php` (periodic tasks). In tests every queue is `sync://`: a job runs inside the request that queues it.
 

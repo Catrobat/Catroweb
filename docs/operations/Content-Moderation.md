@@ -41,3 +41,33 @@ bin/console catro:moderation:flag-adult-content --images --limit 200 --delay 500
 ```
 
 Only visible content is checked, and content with a rejected report is skipped: an admin has already looked at it, so re-runs don't queue it again. Profiles follow the account rule above. `--images` scans the newest `--limit` projects and studios one by one, waiting `--delay` ms between them so the scanner keeps up with live uploads. Run the dry run first and look through the hits before `--apply`.
+
+## Retention: hidden content is deleted after 14 days
+
+Content hidden by a moderator is not kept as free storage. `catro:moderation:purge-hidden` runs daily on the slow scheduler lane (task "Delete content hidden by moderation for 14 days", with `--apply`) and deletes:
+
+- a project, studio or comment that is hidden (`auto_hidden`) and has a report an admin accepted (`accept`, `hide_warn`, or `warn` on already hidden content), when both `auto_hidden_at` and the report's `resolved_at` are at least 14 days old;
+- everything of an account banned at least 14 days ago (`fos_user.profile_hidden_at`): its projects, its comments and the studios it is the only active admin of. The account row stays (banned, `profile_hidden = 1`) so the ban holds and the name and e-mail stay taken.
+
+It never deletes content that has a pending report (state new: auto-flagged or community-hidden content nobody reviewed), a pending or approved appeal, or an evidence hold, and nothing of an account with a pending appeal or an evidence hold. Restored content is no longer `auto_hidden`, so it is never selected.
+
+Projects go through `StorageLifecycleService::hardDeleteProject()` (zip, extracted files, screenshots, search index, cascades), studios through `StudioManager::deleteCoverImage()` and a Doctrine remove, comments through a Doctrine remove (their notifications cascade; replies by other users stay). Every deletion is logged (`Moderation purge: deleted {type} {id} of {owner_id}`) and printed.
+
+```bash
+bin/console catro:moderation:purge-hidden               # dry run: lists what is due
+bin/console catro:moderation:purge-hidden --apply       # deletes it
+bin/console catro:moderation:purge-hidden --days=30     # another deadline
+```
+
+**Since when.** `program.auto_hidden_at`, `studio.auto_hidden_at`, `user_comment.auto_hidden_at` and `fos_user.profile_hidden_at` are set when the flag goes on (entity setters, the ban cascade) and cleared when it goes off. Ops scripts that hide or ban with raw SQL must set them too, e.g. `UPDATE fos_user SET profile_hidden = 1, profile_hidden_at = NOW() WHERE …`, and clear them when they unhide. A hidden row without a timestamp is stamped by the next `--apply` run, so the 14 days start then; rows hidden before the columns existed therefore get 14 days from the first run after the deploy.
+
+**Evidence hold.** A case reported to the police or Stopline must be kept:
+
+```bash
+bin/console catro:moderation:hold <project|studio|comment|user> <id> --note="case 123"
+bin/console catro:moderation:hold <type> <id> --release
+```
+
+A hold is an `evidence_hold` row in `content_moderation_action` (a later `evidence_released` row lifts it). A hold on a user keeps all their content.
+
+The owner warning (`hide_warn`) on hidden content names the deletion date: the notifications API appends `catro-notifications.moderation-warning.deletion` while the content is still hidden.
