@@ -1,0 +1,4 @@
+{# Cloudflare Web Analytics: cookieless page-performance beacon. The token is public and only set in .env.prod. #}
+{% if token %}
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{{ {token: token}|json_encode|e('html_attr') }}"></script>
+{% endif %}

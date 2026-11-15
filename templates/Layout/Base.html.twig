@@ -129,6 +129,7 @@
 {{ include('Layout/Footer.html.twig') }}
 
 <div id="bugsnag" data-api-key="{{ bugsnag_api_key }}" style="display: none;"></div>
+{{ include('Layout/CloudflareWebAnalytics.html.twig', {token: cloudflare_web_analytics_token}) }}
 <div id="gtm-container-id" data-gtm-container-id="{{ gtm_container_id }}" style="display: none;"></div>
 <div id="app-version" data-app-version="{{ app_version }}" style="display: none;">{{ app_version }}</div>
 <div id="app-language" data-app-language="{{ app.request.locale }}"></div>
