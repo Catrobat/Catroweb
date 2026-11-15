@@ -992,6 +992,19 @@ class ApiContext implements Context
   }
 
   /**
+   * Follows the Content-Location of a 202 to the background job (GET /api/jobs/{id}), with the same headers.
+   *
+   * @When /^I request the background job from the response$/
+   */
+  public function iRequestTheBackgroundJobFromTheResponse(): void
+  {
+    $location = $this->getKernelBrowser()->getResponse()->headers->get('Content-Location');
+    Assert::assertNotNull($location, 'The response has no Content-Location');
+    $this->request_content = null;
+    $this->iRequestWith('GET', $location);
+  }
+
+  /**
    * @When /^I request page 2 with the saved cursor at "([^"]*)"$/
    */
   public function iRequestPage2WithTheSavedCursorAt(string $url): void
