@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\System\Commands\DBUpdater\CronJobs;
 
 use App\DB\EntityRepository\Project\ProjectAssetRepository;
-use App\Project\ProjectDeduplicationService;
+use App\Project\GarbageCollectOrphanedAssets;
 use App\System\Commands\DBUpdater\CronJobs\GarbageCollectAssetsCommand;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface;
+use Symfony\Component\Messenger\Transport\TransportInterface;
 
 /**
  * @internal
@@ -18,28 +21,76 @@ use Symfony\Component\Console\Tester\CommandTester;
 #[CoversClass(GarbageCollectAssetsCommand::class)]
 final class GarbageCollectAssetsCommandTest extends TestCase
 {
-  public function testADryRunCountsWithoutDeleting(): void
+  public function testADryRunCountsWithoutQueueing(): void
   {
-    $service = $this->createMock(ProjectDeduplicationService::class);
-    $service->expects($this->never())->method('garbageCollect');
-    $assets = $this->createStub(ProjectAssetRepository::class);
-    $assets->method('countOrphans')->willReturn(['count' => 112907, 'bytes' => 12_600_000_000]);
+    $bus = $this->createMock(MessageBusInterface::class);
+    $bus->expects($this->never())->method('dispatch');
 
-    $tester = new CommandTester(new GarbageCollectAssetsCommand($service, $assets, $this->createStub(LoggerInterface::class)));
-    $tester->execute(['--dry-run' => true]);
+    $display = $this->runCommand(['--dry-run' => true], $bus, 0);
 
-    $this->assertStringContainsString('112907 orphaned assets (12600.0 MB) would be deleted', $tester->getDisplay());
+    $this->assertStringContainsString('112907 orphaned assets (12600.0 MB) would be deleted', $display);
   }
 
-  public function testARunLogsOneSummaryLine(): void
+  public function testStartsTheChainWhenNoneIsQueued(): void
   {
-    $service = $this->createStub(ProjectDeduplicationService::class);
-    $service->method('garbageCollect')->willReturn(['count' => 3, 'bytes' => 300]);
-    $assets = $this->createStub(ProjectAssetRepository::class);
-    $assets->method('countOrphans')->willReturn(['count' => 0, 'bytes' => 0]);
-    $logger = $this->createMock(LoggerInterface::class);
-    $logger->expects($this->once())->method('info')->with('cleanup_run', ['rule' => 'orphaned_assets', 'deleted' => 3, 'bytes' => 300, 'remaining' => 0]);
+    $bus = $this->createMock(MessageBusInterface::class);
+    $bus->expects($this->once())->method('dispatch')
+      ->with($this->isInstanceOf(GarbageCollectOrphanedAssets::class))
+      ->willReturnCallback(static fn (object $message): Envelope => new Envelope($message))
+    ;
 
-    new CommandTester(new GarbageCollectAssetsCommand($service, $assets, $logger))->execute([]);
+    $this->assertStringContainsString('Queued garbage collection', $this->runCommand([], $bus, 0));
+  }
+
+  public function testLeavesARunningChainAlone(): void
+  {
+    $bus = $this->createMock(MessageBusInterface::class);
+    $bus->expects($this->never())->method('dispatch');
+
+    $this->assertStringContainsString('already queued', $this->runCommand([], $bus, 1));
+  }
+
+  /** @param array<string, bool> $options */
+  private function runCommand(array $options, MessageBusInterface $bus, int $queued): string
+  {
+    $assets = $this->createStub(ProjectAssetRepository::class);
+    $assets->method('countOrphans')->willReturn(['count' => 112907, 'bytes' => 12_600_000_000]);
+    $queue = new class($queued) implements TransportInterface, MessageCountAwareInterface {
+      public function __construct(private readonly int $queued)
+      {
+      }
+
+      #[\Override]
+      public function get(): iterable
+      {
+        return [];
+      }
+
+      #[\Override]
+      public function ack(Envelope $envelope): void
+      {
+      }
+
+      #[\Override]
+      public function reject(Envelope $envelope): void
+      {
+      }
+
+      #[\Override]
+      public function send(Envelope $envelope): Envelope
+      {
+        return $envelope;
+      }
+
+      #[\Override]
+      public function getMessageCount(): int
+      {
+        return $this->queued;
+      }
+    };
+    $tester = new CommandTester(new GarbageCollectAssetsCommand($assets, $bus, $queue));
+    $tester->execute($options);
+
+    return $tester->getDisplay();
   }
 }

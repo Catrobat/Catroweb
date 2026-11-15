@@ -13,6 +13,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'default' => 'sync://',
         'scratch' => 'sync://',
         'uploads' => 'sync://',
+        'cleanup' => 'sync://',
         'failed' => 'in-memory://',
       ],
     ],

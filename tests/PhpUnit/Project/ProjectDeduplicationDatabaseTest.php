@@ -9,6 +9,8 @@ use App\DB\Entity\Project\ProjectAsset;
 use App\DB\Entity\Project\ProjectAssetMapping;
 use App\DB\EntityRepository\Project\ProjectAssetMappingRepository;
 use App\DB\EntityRepository\Project\ProjectAssetRepository;
+use App\Project\GarbageCollectOrphanedAssets;
+use App\Project\GarbageCollectOrphanedAssetsHandler;
 use App\Project\ProjectDeduplicationService;
 use App\Storage\ContentAddressableStore;
 use App\Storage\FileHelper;
@@ -18,6 +20,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * Deduplication against the real database: its collation, unique and foreign keys are what keep it correct.
@@ -25,6 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * @internal
  */
 #[CoversClass(ProjectDeduplicationService::class)]
+#[CoversClass(GarbageCollectOrphanedAssetsHandler::class)]
 final class ProjectDeduplicationDatabaseTest extends KernelTestCase
 {
   private string $dir;
@@ -90,9 +95,10 @@ final class ProjectDeduplicationDatabaseTest extends KernelTestCase
     $this->service()->removeProjectMappings((string) $project->getId());
     $this->deduplicate($project, ['images/kept.png' => $kept]); // the update no longer has dropped.png
 
-    $deleted = $this->service()->garbageCollect(new \DateTimeImmutable('+1 minute'));
+    $deleted = $this->service()->garbageCollectBatch(new \DateTimeImmutable('+1 minute'), PHP_INT_MAX);
 
     $this->assertGreaterThanOrEqual(1, $deleted['count']);
+    $this->assertFalse($deleted['more']);
     $this->assertTrue($this->store->exists(hash('sha256', $kept)));
     $this->assertNotNull($this->entity_manager->find(ProjectAsset::class, hash('sha256', $kept)));
     $this->assertFalse($this->store->exists(hash('sha256', $dropped)));
@@ -107,23 +113,39 @@ final class ProjectDeduplicationDatabaseTest extends KernelTestCase
     $assets = $this->createStub(ProjectAssetRepository::class);
     $assets->method('findOrphans')->willReturn([hash('sha256', $content) => 1]); // listed as orphan, then mapped
 
-    $deleted = new ProjectDeduplicationService($this->store, $assets, $this->mappings, $this->entity_manager, new NullLogger())->garbageCollect(new \DateTimeImmutable('+1 minute'));
+    $deleted = new ProjectDeduplicationService($this->store, $assets, $this->mappings, $this->entity_manager, new NullLogger())->garbageCollectBatch(new \DateTimeImmutable('+1 minute'), 10);
 
     $this->assertSame(0, $deleted['count']);
     $this->assertTrue($this->store->exists(hash('sha256', $content)));
     $this->assertTrue($this->entity_manager->isOpen());
   }
 
-  public function testGarbageCollectionWorksThroughEveryBatchInOneRun(): void
+  public function testTheJobChainsBatchesUntilNoOrphanIsLeft(): void
   {
     $orphans = ['a '.uniqid(), 'b '.uniqid(), 'c '.uniqid()];
     $project = $this->insertProject();
     $this->deduplicate($project, array_combine(['images/a.png', 'images/b.png', 'images/c.png'], $orphans));
     $this->service()->removeProjectMappings((string) $project->getId());
+    $this->entity_manager->getConnection()->executeStatement('UPDATE project_asset SET created_at = ? WHERE hash IN (?, ?, ?)', [
+      new \DateTimeImmutable('-2 days')->format('Y-m-d H:i:s'), ...array_map(static fn (string $c): string => hash('sha256', $c), $orphans),
+    ]);
 
-    $deleted = $this->service()->garbageCollect(new \DateTimeImmutable('+1 minute'), batch_size: 1);
+    $queue = [new GarbageCollectOrphanedAssets()];
+    $bus = $this->createStub(MessageBusInterface::class);
+    $bus->method('dispatch')->willReturnCallback(static function (object $message) use (&$queue): Envelope {
+      $queue[] = $message;
 
-    $this->assertGreaterThanOrEqual(3, $deleted['count']);
+      return new Envelope($message);
+    });
+    $handler = new GarbageCollectOrphanedAssetsHandler($this->service(), $bus, new NullLogger(), batch_size: 1);
+
+    $batches = 0;
+    while (($message = array_shift($queue)) instanceof GarbageCollectOrphanedAssets) { // what the cleanup worker does
+      $handler($message);
+      ++$batches;
+    }
+
+    $this->assertGreaterThanOrEqual(3, $batches);
     foreach ($orphans as $content) {
       $this->assertFalse($this->store->exists(hash('sha256', $content)));
     }
@@ -136,7 +158,7 @@ final class ProjectDeduplicationDatabaseTest extends KernelTestCase
     $this->deduplicate($project, ['images/new.png' => $content]);
     $this->service()->removeProjectMappings((string) $project->getId());
 
-    $this->service()->garbageCollect(new \DateTimeImmutable('-1 day'));
+    $this->service()->garbageCollectBatch(new \DateTimeImmutable('-1 day'), PHP_INT_MAX);
 
     $this->assertTrue($this->store->exists(hash('sha256', $content)));
     $this->assertNotNull($this->entity_manager->find(ProjectAsset::class, hash('sha256', $content)));

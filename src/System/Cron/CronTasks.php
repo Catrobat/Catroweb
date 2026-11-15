@@ -36,10 +36,10 @@ final class CronTasks
       $task('Add bronze_user UserAchievements', 'catrobat:workflow:achievement:bronze_user', '1 year', self::WEEK),
       $task('Add perfect_profile UserAchievements', 'catrobat:workflow:achievement:perfect_profile', '1 year', self::WEEK),
       $task('Clean up background jobs', 'catrobat:background-jobs:clean', '1 hour', self::HOUR),
+      $task('Garbage collect orphaned assets', 'catrobat:gc-assets', '1 day', self::HOUR),
 
       // Slow lane: whole-table or whole-disk sweeps
       $task('Delete expired projects based on retention rules', 'catrobat:storage:lifecycle', '1 day', self::DAY, true),
-      $task('Garbage collect orphaned assets', 'catrobat:gc-assets', '1 day', self::DAY, true),
       $task('Detect broken projects', 'catrobat:workflow:detect_broken_projects', '1 day', self::DAY, true),
       $task('Re-sanitize user-generated content', 'catro:moderation:sanitize-existing', '1 month', self::DAY, true),
       $task('(Re-)Add project extensions', 'catrobat:workflow:project:refresh_extensions', '1 year', self::WEEK, true),

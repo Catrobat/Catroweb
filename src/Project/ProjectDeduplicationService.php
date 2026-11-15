@@ -75,35 +75,32 @@ class ProjectDeduplicationService
   }
 
   /**
-   * Garbage-collect assets no project maps, batch by batch until none are left or the deadline passes.
+   * Garbage-collect one batch of assets no project maps, in hash order after $after.
    * Assets younger than $created_before are skipped: an upload may still be mapping them.
-   * Intended to be called from a cron/command, NOT inline during upload.
+   * Intended to be called from a background job, NOT inline during upload.
    *
-   * @return array{count: int, bytes: int}
+   * @return array{count: int, bytes: int, last: string, more: bool} last: the last hash looked at; more: a full batch was listed
    */
-  public function garbageCollect(\DateTimeImmutable $created_before, int $batch_size = 500, float $deadline = INF): array
+  public function garbageCollectBatch(\DateTimeImmutable $created_before, int $batch_size, string $after = ''): array
   {
     $deleted = ['count' => 0, 'bytes' => 0];
-    $after = '';
-    do {
-      $orphans = $this->assetRepository->findOrphans($batch_size, $created_before, $after);
-      foreach ($orphans as $hash => $size) {
-        $after = (string) $hash;
-        try {
-          // The delete waits for an upload holding the row and fails on the foreign key once that upload mapped it.
-          $this->entityManager->getConnection()->transactional(function (Connection $connection) use ($after, $size, &$deleted): void {
-            if (1 === $connection->executeStatement('DELETE FROM project_asset WHERE hash = ?', [$after])) {
-              $this->store->delete($after);
-              ++$deleted['count'];
-              $deleted['bytes'] += $size;
-            }
-          });
-        } catch (ForeignKeyConstraintViolationException) {
-        }
+    $orphans = $this->assetRepository->findOrphans($batch_size, $created_before, $after);
+    foreach ($orphans as $hash => $size) {
+      $after = (string) $hash;
+      try {
+        // The delete waits for an upload holding the row and fails on the foreign key once that upload mapped it.
+        $this->entityManager->getConnection()->transactional(function (Connection $connection) use ($after, $size, &$deleted): void {
+          if (1 === $connection->executeStatement('DELETE FROM project_asset WHERE hash = ?', [$after])) {
+            $this->store->delete($after);
+            ++$deleted['count'];
+            $deleted['bytes'] += $size;
+          }
+        });
+      } catch (ForeignKeyConstraintViolationException) {
       }
-    } while (count($orphans) === $batch_size && microtime(true) < $deadline);
+    }
 
-    return $deleted;
+    return $deleted + ['last' => $after, 'more' => count($orphans) === $batch_size];
   }
 
   public function hasExistingMappings(string $projectId): bool
