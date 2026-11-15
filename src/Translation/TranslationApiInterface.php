@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Translation;
 
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+#[AutoconfigureTag]
 interface TranslationApiInterface
 {
   /**

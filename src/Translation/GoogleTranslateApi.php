@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Translation;
 
 use Google\ApiCore\ApiException;
+use Google\ApiCore\ValidationException;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class GoogleTranslateApi implements TranslationApiInterface
 {
@@ -129,8 +131,9 @@ class GoogleTranslateApi implements TranslationApiInterface
   public function __construct(
     private readonly GoogleTranslateClientInterface $client,
     private readonly LoggerInterface $logger,
-    private readonly int $short_text_length,
+    #[Autowire(env: 'GOOGLE_CLOUD_PROJECT')]
     private readonly string $google_cloud_project_id,
+    private readonly int $short_text_length = 20,
   ) {
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
@@ -144,7 +147,7 @@ class GoogleTranslateApi implements TranslationApiInterface
     try {
       $parent = sprintf('projects/%s/locations/global', $this->google_cloud_project_id);
       $response = $this->client->translateText([$text], $target_language, $parent, $source_language);
-    } catch (ApiException $apiException) {
+    } catch (ApiException|ValidationException $apiException) {
       $this->logger->error(sprintf('Google translate client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $apiException->getMessage()), ['exception' => $apiException]);
 
       return null;

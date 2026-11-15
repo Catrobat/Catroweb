@@ -7,11 +7,20 @@ namespace App\Translation;
 use Google\Cloud\Translate\V3\Client\TranslationServiceClient;
 use Google\Cloud\Translate\V3\TranslateTextRequest;
 use Google\Cloud\Translate\V3\TranslateTextResponse;
+use Symfony\Component\DependencyInjection\Attribute\AutowireServiceClosure;
 
 class GoogleTranslateClientAdapter implements GoogleTranslateClientInterface
 {
-  public function __construct(private readonly TranslationServiceClient $client)
-  {
+  /**
+   * The client is built on first use: its constructor throws a ValidationException without Google credentials,
+   * which must not take down every service that depends on the translation delegate.
+   *
+   * @param \Closure(): TranslationServiceClient $client
+   */
+  public function __construct(
+    #[AutowireServiceClosure(TranslationServiceClient::class)]
+    private readonly \Closure $client,
+  ) {
   }
 
   #[\Override]
@@ -27,6 +36,6 @@ class GoogleTranslateClientAdapter implements GoogleTranslateClientInterface
       $request->setSourceLanguageCode($sourceLanguageCode);
     }
 
-    return $this->client->translateText($request);
+    return ($this->client)()->translateText($request);
   }
 }

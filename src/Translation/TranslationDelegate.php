@@ -7,18 +7,30 @@ namespace App\Translation;
 use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
 
 class TranslationDelegate
 {
+  /** @var TranslationApiInterface[] */
   private readonly array $apis;
 
-  public function __construct(private readonly ProjectCustomTranslationRepository $project_custom_translation_repository,
+  /**
+   * Providers are injected as a tagged iterator: Symfony autowiring silently skips variadic
+   * parameters, which left prod with no providers and every machine translation failing.
+   *
+   * @param iterable<TranslationApiInterface> $apis
+   */
+  public function __construct(
+    private readonly ProjectCustomTranslationRepository $project_custom_translation_repository,
     private readonly ProjectMachineTranslationRepository $project_machine_translation_repository,
-    TranslationApiInterface ...$apis)
-  {
-    $this->apis = $apis;
+    private readonly LoggerInterface $logger,
+    #[AutowireIterator(TranslationApiInterface::class)]
+    iterable $apis,
+  ) {
+    $this->apis = iterator_to_array($apis, false);
   }
 
   /**
@@ -169,6 +181,14 @@ class TranslationDelegate
         return $translation;
       }
     }
+
+    $this->logger->warning(sprintf(
+      'Machine translation failed: %s, source: %s, target: %s, text length: %d',
+      [] === $apis ? 'no translation provider configured' : 'all providers failed ('.implode(', ', array_map(static fn (TranslationApiInterface $api): string => $api::class, $apis)).')',
+      $source_language ?? 'auto',
+      $target_language,
+      mb_strlen($text),
+    ));
 
     return null;
   }

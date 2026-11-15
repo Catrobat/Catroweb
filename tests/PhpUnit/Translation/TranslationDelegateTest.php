@@ -15,6 +15,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * @internal
@@ -49,7 +51,7 @@ class TranslationDelegateTest extends TestCase
       ->willReturn($expected_result)
     ;
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), [$api]);
 
     $actual_result = $translation_delegate->translate('test', 'en', 'fr');
 
@@ -75,7 +77,7 @@ class TranslationDelegateTest extends TestCase
       ->willReturn($expected_result)
     ;
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api1, $api2);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), [$api1, $api2]);
 
     $actual_result = $translation_delegate->translate('test', 'en', 'fr');
 
@@ -101,7 +103,7 @@ class TranslationDelegateTest extends TestCase
       ->willReturn($expected_result)
     ;
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api1, $api2);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), [$api1, $api2]);
 
     $actual_result = $translation_delegate->translate('test', 'en', 'fr');
 
@@ -126,7 +128,7 @@ class TranslationDelegateTest extends TestCase
       ->willReturn(null)
     ;
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api1, $api2);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), [$api1, $api2]);
 
     $result = $translation_delegate->translate('test', 'en', 'fr');
 
@@ -137,7 +139,7 @@ class TranslationDelegateTest extends TestCase
   public function testInvalidLanguageCode(string $invalid_code): void
   {
     $this->expectException(\InvalidArgumentException::class);
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), []);
 
     $translation_delegate->translate('test', $invalid_code, $invalid_code);
   }
@@ -172,7 +174,7 @@ class TranslationDelegateTest extends TestCase
     $project = new Project();
     $project->setName('name');
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), [$api]);
 
     $actual_result = $translation_delegate->translateProject($project, 'en', 'fr');
 
@@ -196,7 +198,7 @@ class TranslationDelegateTest extends TestCase
     $project->setDescription('description');
     $project->setCredits('credit');
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), [$api]);
 
     $actual_result = $translation_delegate->translateProject($project, 'en', 'fr');
 
@@ -219,7 +221,7 @@ class TranslationDelegateTest extends TestCase
     $project->setDescription('description');
     $project->setCredits('credit');
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), [$api]);
 
     $actual_result = $translation_delegate->translateProject($project, 'en', 'fr');
 
@@ -233,7 +235,7 @@ class TranslationDelegateTest extends TestCase
   {
     // For this test, we need a mock (not a stub) because we're verifying behavior
     $custom_translation_repository = $this->createMock(ProjectCustomTranslationRepository::class);
-    $translation_delegate = new TranslationDelegate($custom_translation_repository, $this->project_machine_translation_repository);
+    $translation_delegate = new TranslationDelegate($custom_translation_repository, $this->project_machine_translation_repository, new NullLogger(), []);
     $project = new Project();
 
     $custom_translation_repository->expects($this->once())
@@ -273,10 +275,25 @@ class TranslationDelegateTest extends TestCase
 
     $api = $this->createStub(TranslationApiInterface::class);
 
-    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $machine_translation_repository, $api);
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $machine_translation_repository, new NullLogger(), [$api]);
 
     $actual_result = $translation_delegate->translateProject(new Project(), 'en', 'fr');
 
     $this->assertEquals($cached_translation, $actual_result);
+  }
+
+  public function testLogsAWarningWhenNoProviderCanTranslate(): void
+  {
+    $api = $this->createStub(TranslationApiInterface::class);
+    $api->method('translate')->willReturn(null);
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->exactly(2))->method('warning')->with($this->stringContains('target: ru-RU'));
+
+    new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $logger, [$api])
+      ->translate('hello', null, 'ru-RU')
+    ;
+    new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $logger, [])
+      ->translate('hello', null, 'ru-RU')
+    ;
   }
 }

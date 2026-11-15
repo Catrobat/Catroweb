@@ -91,6 +91,7 @@ Before committing (all must pass): `bin/php-cs-fixer fix <file>` → `bin/phpsta
 - `TranslatorAwareTrait`: `$translator` is private; use `$this->trans('key')` (no domain arg).
 - Never set `Location` on a 2xx non-201 response: FastCGI rewrites `200 + Location` into `302` (the dev cli-server doesn't, so only prod breaks). Use `Content-Location`.
 - `kernel.terminate` fires in-process in tests; its exceptions propagate.
+- DI: autowiring silently skips variadic constructor parameters (inject a tagged iterator), and a `config/packages/*` definition of an `App\` class is overwritten by the `App\` resource load in `services.php` (use `#[Autowire]` on the class).
 - Messenger queues are `sync://` in tests: a handler runs inside the request that dispatches it. Handlers must not `EntityManager::clear()` (it detaches the request's entities); detach what they created instead. Services holding per-job state implement `ResetInterface` (workers handle many jobs per process).
 - Entity ids are random UUIDv4 (`MyUuidGenerator`): never order or page by `id` alone; it is only a tie-breaker.
 - Time zones: PHP runs in UTC, prod MariaDB in CET. New timestamp columns use the `utc_datetime` type; migrations use `UTC_TIMESTAMP()`, never `CURRENT_TIMESTAMP`.
