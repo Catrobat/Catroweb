@@ -342,6 +342,12 @@ parent:
 passwordRecovery:
   subject: Your Catrobat password recovery
 
+inactiveAccount:
+  subject: Your Catrobat account will be deleted
+  title: We miss you!
+  content: 'You have not logged in to your Catrobat account "%username%" for two years and it has no projects or comments. To keep our community lively, we will delete it in %days% days. If you want to keep it, just log in once.'
+  button: Log in to keep my account
+
 profile:
   aboutMe: About me
   currentlyWorkingOn: Currently working on

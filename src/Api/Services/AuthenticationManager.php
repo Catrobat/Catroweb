@@ -7,6 +7,7 @@ namespace App\Api\Services;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
 use App\Utils\RequestHelper;
+use App\Utils\TimeUtils;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -103,7 +104,9 @@ class AuthenticationManager
   {
     $token = $this->refresh_token_generator->createForUserWithTtl($user, $this->refresh_token_ttl);
     $value = $token->getRefreshToken() ?? '';
-    $this->refresh_manager->save($token);
+    // App OAuth logins and sign-ups end here, not in the JWT success event: without this their last_login stays empty.
+    $user->setLastLogin(TimeUtils::getDateTime());
+    $this->refresh_manager->save($token); // flushes the user too
 
     return $value;
   }

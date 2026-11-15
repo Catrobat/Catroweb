@@ -48,6 +48,7 @@ final class CronTasks
       $task('(Re-)Add project extensions', 'catrobat:workflow:project:refresh_extensions', '1 year', self::WEEK, true),
       $task('Clean unverified user accounts', 'catrobat:clean:unverified-users', '1 day', 3 * self::HOUR, true),
       $task('Delete Scratch placeholder accounts without projects', 'catrobat:clean:scratch-placeholders', '1 day', 3 * self::HOUR, true),
+      $task('Warn about and delete inactive empty accounts', 'catrobat:clean:inactive-users', '1 day', 3 * self::HOUR, true),
     ];
   }
 
