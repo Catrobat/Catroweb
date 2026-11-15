@@ -1,23 +1,23 @@
 {% extends 'Layout/Base.html.twig' %}
 {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
 
+{% set banner_mobile_media = '(max-width: 480px)' %}
+
 {% block head %}
   {{ vite_entry_link_tags('index_page') }}
   {% if first_banner is defined and first_banner %}
     {% set _variants = first_banner.image_variants.detail ?? {} %}
-    {% if _variants.avif1x is defined %}
-      <link rel="preload" as="image"
-            href="{{ _variants.avif1x }}"
-            imagesrcset="{{ _variants.avif1x }} 1x{% if _variants.avif2x is defined %}, {{ _variants.avif2x }} 2x{% endif %}"
-            imagesizes="(min-width: 1200px) 960px, 100vw"
-            type="image/avif"
-            fetchpriority="high">
-    {% elseif _variants.webp1x is defined %}
-      <link rel="preload" as="image"
-            href="{{ _variants.webp1x }}"
-            imagesrcset="{{ _variants.webp1x }} 1x{% if _variants.webp2x is defined %}, {{ _variants.webp2x }} 2x{% endif %}"
-            imagesizes="(min-width: 1200px) 960px, 100vw"
-            type="image/webp"
+    {# Must mirror the <picture> below (mobile_media + srcset), or the browser downloads twice. #}
+    {% set _fmt = _variants.avif1x is defined ? 'avif' : (_variants.webp1x is defined ? 'webp' : null) %}
+    {% if _fmt %}
+      {% set _u1 = attribute(_variants, _fmt ~ '1x') %}
+      {% set _u2 = attribute(_variants, _fmt ~ '2x')|default(null) %}
+      <link rel="preload" as="image" media="{{ banner_mobile_media }}"
+            href="{{ _u1 }}" type="image/{{ _fmt }}" fetchpriority="high">
+      <link rel="preload" as="image" media="not all and {{ banner_mobile_media }}"
+            href="{{ _u1 }}"
+            imagesrcset="{{ _u1 }} 1x{% if _u2 %}, {{ _u2 }} 2x{% endif %}"
+            type="image/{{ _fmt }}"
             fetchpriority="high">
     {% else %}
       <link rel="preload" as="image" href="/images/default/screenshot-detail@1x.webp" fetchpriority="high">
@@ -49,6 +49,7 @@
         {% set _pic_opts = {
           class: 'carousel-item__image d-block w-100',
           sizes: '(min-width: 1200px) 960px, 100vw',
+          mobile_media: banner_mobile_media,
           loading: 'eager',
           fetchpriority: 'high',
           fallback: '/images/default/screenshot-detail@1x.webp',

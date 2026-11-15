@@ -109,11 +109,15 @@ export function buildPictureHTML(variants, size, fallback, imgAttrs = '', { lazy
 /**
  * Create a <picture> DOM element with proper <source> children.
  *
+ * `mobileMedia` (e.g. '(max-width: 480px)') prepends one <source media> per
+ * format that pins the @1x file on matching viewports: phones at DPR ~3
+ * would otherwise always take @2x, at roughly twice the bytes.
+ *
  * @param {object|null} variants
  * @param {'thumb'|'card'|'detail'} size
  * @param {string|null} fallback
  * @param {object} imgAttrs  Attribute key-value pairs for the <img>
- * @param {{lazy?: boolean}} options
+ * @param {{lazy?: boolean, mobileMedia?: string|null}} options
  * @returns {HTMLPictureElement|HTMLImageElement}
  */
 export function createPictureElement(
@@ -121,7 +125,7 @@ export function createPictureElement(
   size,
   fallback,
   imgAttrs = {},
-  { lazy = false } = {},
+  { lazy = false, mobileMedia = null } = {},
 ) {
   const set = resolveSet(variants, size, fallback)
   const src = bestUrl(set) || fallback || ''
@@ -143,6 +147,17 @@ export function createPictureElement(
   if (!set) return img
 
   const picture = document.createElement('picture')
+  if (mobileMedia) {
+    for (const fmt of ['avif', 'webp']) {
+      const url = set[`${fmt}_1x`]
+      if (!url) continue
+      const source = document.createElement('source')
+      source.type = `image/${fmt}`
+      source.media = mobileMedia
+      source.setAttribute(lazy ? 'data-srcset' : 'srcset', url)
+      picture.appendChild(source)
+    }
+  }
   appendSources(picture, set, null, lazy)
   picture.appendChild(img)
   return picture
