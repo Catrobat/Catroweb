@@ -38,7 +38,7 @@ class ExampleRepository extends ServiceEntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
-    $qb->orderBy('e.priority', 'DESC');
+    $qb->orderBy('e.priority', \SortDirection::Descending);
     $qb->leftJoin('e.project', 'project');
     $qb->andWhere('project.has_missing_files = false');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
@@ -56,7 +56,7 @@ class ExampleRepository extends ServiceEntityRepository
       ->where('e.active = true')
       ->andWhere($qb->expr()->isNotNull('e.project'))
     ;
-    $qb->orderBy('e.priority', 'DESC');
+    $qb->orderBy('e.priority', \SortDirection::Descending);
     $qb->leftJoin('e.project', 'project');
     $qb->andWhere('project.has_missing_files = false');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
@@ -113,8 +113,8 @@ class ExampleRepository extends ServiceEntityRepository
           $query_builder->expr()->eq('e.project', 'p')->__toString())
         ->andWhere($query_builder->expr()->lte('p.language_version', ':max_version'))
         ->setParameter('max_version', $max_version)
-        ->addOrderBy('e.id', 'ASC')
-        ->addOrderBy('e.priority', 'DESC')
+        ->addOrderBy('e.id', \SortDirection::Ascending)
+        ->addOrderBy('e.priority', \SortDirection::Descending)
       ;
     }
 

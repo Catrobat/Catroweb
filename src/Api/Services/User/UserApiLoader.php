@@ -74,10 +74,10 @@ class UserApiLoader extends AbstractApiLoader
       ->select('u')
       ->from(User::class, 'u')
       ->andWhere($score.' > 0')
-      ->orderBy($score, 'DESC')
+      ->orderBy($score, \SortDirection::Descending)
       // id DESC: InnoDB secondary indexes carry the primary key, so (score DESC, id DESC) is a backward scan
       // of the score index that stops after $limit rows instead of a filesort over every ranked user.
-      ->addOrderBy('u.id', 'DESC')
+      ->addOrderBy('u.id', \SortDirection::Descending)
       ->setFirstResult($offset)
       ->setMaxResults($limit)
       ->getQuery()
@@ -95,8 +95,8 @@ class UserApiLoader extends AbstractApiLoader
     $qb = $this->onlyPubliclyVisible($this->entity_manager->createQueryBuilder())
       ->select('u')
       ->from(User::class, 'u')
-      ->orderBy('u.createdAt', 'DESC')
-      ->addOrderBy('u.id', 'DESC')
+      ->orderBy('u.createdAt', \SortDirection::Descending)
+      ->addOrderBy('u.id', \SortDirection::Descending)
       ->setMaxResults($limit)
     ;
 

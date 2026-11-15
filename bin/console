@@ -2,7 +2,7 @@
 <?php
 
 use App\Kernel;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use App\System\Commands\ConsoleApplication;
 
 if (!is_dir(dirname(__DIR__).'/vendor')) {
   throw new LogicException('Dependencies are missing. Try running "composer install".');
@@ -17,5 +17,5 @@ require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 return function (array $context) {
   $kernel = new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
 
-  return new Application($kernel);
+  return new ConsoleApplication($kernel);
 };

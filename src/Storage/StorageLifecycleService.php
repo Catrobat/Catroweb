@@ -272,7 +272,7 @@ class StorageLifecycleService
         ->select('p', 'u') // the tier needs the owner: one query per batch, not one per project
         ->from(Project::class, 'p')
         ->leftJoin('p.user', 'u')
-        ->orderBy('p.uploaded_at', 'ASC')
+        ->orderBy('p.uploaded_at', \SortDirection::Ascending)
         ->setFirstResult($offset)
         ->setMaxResults(self::BATCH_SIZE)
         ->getQuery()
@@ -429,7 +429,7 @@ class StorageLifecycleService
         ->select('p', 'u') // the tier needs the owner: one query per batch, not one per project
         ->from(Project::class, 'p')
         ->leftJoin('p.user', 'u')
-        ->orderBy('p.uploaded_at', 'ASC')
+        ->orderBy('p.uploaded_at', \SortDirection::Ascending)
         ->setFirstResult($offset)
         ->setMaxResults(self::BATCH_SIZE)
         ->getQuery()

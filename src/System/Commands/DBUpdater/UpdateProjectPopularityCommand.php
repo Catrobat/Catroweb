@@ -135,10 +135,10 @@ class UpdateProjectPopularityCommand extends Command
       ->from(Project::class, 'p')
       ->leftJoin(ProjectRemixRelation::class, 'r', Join::ON, 'p.id = r.ancestor_id')
       ->groupBy('r.ancestor_id')
-      ->orderBy('count', 'DESC')
+      ->orderBy('count', \SortDirection::Descending)
     ;
     $max = $query_builder->getQuery()->getResult()[0]['count'];
-    $query_builder->orderBy('count', 'ASC');
+    $query_builder->orderBy('count', \SortDirection::Ascending);
     $min = $query_builder->getQuery()->getResult()[0]['count'];
 
     return [
@@ -157,12 +157,12 @@ class UpdateProjectPopularityCommand extends Command
       ->from(Project::class, 'p')
       ->leftJoin(ProjectLike::class, 'e', Join::ON, 'p.id = e.program_id')
       ->groupBy('e.program_id')
-      ->orderBy('count', 'DESC')
+      ->orderBy('count', \SortDirection::Descending)
       ->setMaxResults(1)
     ;
 
     $max = $query_builder->getQuery()->getResult()[0]['count'];
-    $query_builder->orderBy('count', 'ASC');
+    $query_builder->orderBy('count', \SortDirection::Ascending);
     $min = $query_builder->getQuery()->getResult()[0]['count'];
 
     return [

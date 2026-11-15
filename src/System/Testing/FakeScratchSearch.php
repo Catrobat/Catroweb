@@ -37,7 +37,7 @@ class FakeScratchSearch extends ScratchSearch
     $projects = $this->scratch_project_repository->createQueryBuilder('s')
       ->where('s.name LIKE :query OR s.username LIKE :query')
       ->setParameter('query', '%'.addcslashes($query, '%_\\').'%')
-      ->orderBy('s.id', 'ASC')
+      ->orderBy('s.id', \SortDirection::Ascending)
       ->setFirstResult($offset)
       ->setMaxResults($limit)
       ->getQuery()

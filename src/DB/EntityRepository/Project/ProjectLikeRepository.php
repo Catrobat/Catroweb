@@ -192,7 +192,7 @@ class ProjectLikeRepository extends ServiceEntityRepository
       ->join('l.user', 'u')
       ->where($qb->expr()->eq('l.program_id', ':project_id'))
       ->setParameter('project_id', $project_id)
-      ->orderBy('l.user_id', 'ASC')
+      ->orderBy('l.user_id', \SortDirection::Ascending)
     ;
 
     if (null !== $type) {

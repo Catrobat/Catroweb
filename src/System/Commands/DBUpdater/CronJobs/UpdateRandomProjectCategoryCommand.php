@@ -34,7 +34,7 @@ class UpdateRandomProjectCategoryCommand extends Command
     $random_id_list = $qb->select('p.id')
       ->from(Project::class, 'p')
       ->setMaxResults(self::LIMIT)
-      ->orderBy('RAND()', 'DESC')
+      ->orderBy('RAND()', \SortDirection::Descending)
       ->getQuery()
       ->getArrayResult()
     ;

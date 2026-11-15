@@ -41,7 +41,7 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
       ->select('ur')
       ->where($qb->expr()->eq('ur.first_user', ':user'))
       ->orWhere($qb->expr()->eq('ur.second_user', ':user'))
-      ->orderBy('ur.similarity', 'DESC')
+      ->orderBy('ur.similarity', \SortDirection::Descending)
       ->setParameter('user', $user)
       ->distinct()
       ->getQuery()

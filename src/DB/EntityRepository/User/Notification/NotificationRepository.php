@@ -136,8 +136,8 @@ class NotificationRepository extends ServiceEntityRepository
       ->leftJoin('n.user', 'nu')
       ->where('n.user = :user')
       ->setParameter('user', $user)
-      ->orderBy('n.created_at', 'DESC')
-      ->addOrderBy('n.id', 'DESC')
+      ->orderBy('n.created_at', \SortDirection::Descending)
+      ->addOrderBy('n.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 

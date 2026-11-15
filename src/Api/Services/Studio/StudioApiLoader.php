@@ -70,8 +70,8 @@ class StudioApiLoader extends AbstractApiLoader
       ->from(Studio::class, 's')
       ->where('s.auto_hidden = false')
       ->andWhere('s.is_enabled = true')
-      ->orderBy('s.created_on', 'DESC')
-      ->addOrderBy('s.id', 'DESC')
+      ->orderBy('s.created_on', \SortDirection::Descending)
+      ->addOrderBy('s.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 
@@ -108,13 +108,13 @@ class StudioApiLoader extends AbstractApiLoader
       ->andWhere('su.status = :status')
       ->setParameter('studio', $studio)
       ->setParameter('status', $status)
-      ->orderBy('su.created_on', 'ASC')
-      ->addOrderBy('su.id', 'ASC')
+      ->orderBy('su.created_on', \SortDirection::Ascending)
+      ->addOrderBy('su.id', \SortDirection::Ascending)
       ->setMaxResults($limit + 1)
     ;
 
     if (StudioUser::STATUS_BANNED === $status) {
-      $qb->orderBy('su.id', 'ASC');
+      $qb->orderBy('su.id', \SortDirection::Ascending);
       if (null !== $cursor_id) {
         $qb->andWhere('su.id > :cursor_id')->setParameter('cursor_id', $cursor_id);
       }
@@ -152,8 +152,8 @@ class StudioApiLoader extends AbstractApiLoader
       ->leftJoin('p.user', 'pu')
       ->where('sp.studio = :studio')
       ->setParameter('studio', $studio)
-      ->orderBy('sp.created_on', 'DESC')
-      ->addOrderBy('sp.id', 'DESC')
+      ->orderBy('sp.created_on', \SortDirection::Descending)
+      ->addOrderBy('sp.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 
@@ -200,8 +200,8 @@ class StudioApiLoader extends AbstractApiLoader
       $qb->andWhere('s.is_public = true');
     }
 
-    $qb->orderBy('su.created_on', 'DESC')
-      ->addOrderBy('su.id', 'DESC')
+    $qb->orderBy('su.created_on', \SortDirection::Descending)
+      ->addOrderBy('su.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 
@@ -281,8 +281,8 @@ class StudioApiLoader extends AbstractApiLoader
       ->leftJoin('a.user', 'au')
       ->where('a.studio = :studio')
       ->setParameter('studio', $studio)
-      ->orderBy('a.created_on', 'DESC')
-      ->addOrderBy('a.id', 'DESC')
+      ->orderBy('a.created_on', \SortDirection::Descending)
+      ->addOrderBy('a.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 
@@ -349,7 +349,7 @@ class StudioApiLoader extends AbstractApiLoader
       ->andWhere('jr.status = :status')
       ->setParameter('studio', $studio)
       ->setParameter('status', StudioJoinRequest::STATUS_PENDING)
-      ->orderBy('jr.id', 'ASC')
+      ->orderBy('jr.id', \SortDirection::Ascending)
       ->setMaxResults($limit + 1)
     ;
 
@@ -412,14 +412,14 @@ class StudioApiLoader extends AbstractApiLoader
       ->from(UserComment::class, 'c')
       ->leftJoin('c.user', 'cu')
       // Replies are listed too; a reply to a hidden or deleted comment would quote it out of context.
-      ->leftJoin(UserComment::class, 'parent', 'WITH', 'parent.id = c.parent_id')
+      ->leftJoin(UserComment::class, 'parent', 'ON', 'parent.id = c.parent_id')
       ->where('c.studio = :studio')
       ->andWhere('c.auto_hidden = false')
       ->andWhere('c.is_deleted = false')
       ->andWhere('c.parent_id IS NULL OR (parent.auto_hidden = false AND parent.is_deleted = false)')
       ->setParameter('studio', $studio)
-      ->orderBy('c.uploadDate', 'DESC')
-      ->addOrderBy('c.id', 'DESC')
+      ->orderBy('c.uploadDate', \SortDirection::Descending)
+      ->addOrderBy('c.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 

@@ -158,8 +158,8 @@ class ContentReportRepository extends ServiceEntityRepository
     $qb
       ->where('r.state = :state')
       ->setParameter('state', ReportState::New->value)
-      ->orderBy('r.created_at', 'ASC')
-      ->addOrderBy('r.id', 'ASC')
+      ->orderBy('r.created_at', \SortDirection::Ascending)
+      ->addOrderBy('r.id', \SortDirection::Ascending)
       ->setMaxResults($limit + 1)
     ;
 
@@ -199,8 +199,8 @@ class ContentReportRepository extends ServiceEntityRepository
     $qb
       ->where('IDENTITY(r.reporter) = :user_id')
       ->setParameter('user_id', $user_id)
-      ->orderBy('r.created_at', 'DESC')
-      ->addOrderBy('r.id', 'DESC')
+      ->orderBy('r.created_at', \SortDirection::Descending)
+      ->addOrderBy('r.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 

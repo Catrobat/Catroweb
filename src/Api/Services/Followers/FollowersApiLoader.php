@@ -57,7 +57,7 @@ class FollowersApiLoader extends AbstractApiLoader
       ->where('u.id = :userId')
       ->andWhere('f.profile_hidden = false')
       ->setParameter('userId', $user->getId())
-      ->orderBy('f.username', 'ASC')
+      ->orderBy('f.username', \SortDirection::Ascending)
     ;
 
     return $qb->getQuery()->getResult();

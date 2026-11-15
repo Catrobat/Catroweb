@@ -25,8 +25,8 @@ class MediaCategoryRepository extends ServiceEntityRepository
   public function findAll(): array
   {
     return $this->createQueryBuilder('c')
-      ->orderBy('c.priority', 'ASC')
-      ->addOrderBy('c.name', 'ASC')
+      ->orderBy('c.priority', \SortDirection::Ascending)
+      ->addOrderBy('c.name', \SortDirection::Ascending)
       ->getQuery()
       ->getResult()
     ;
@@ -38,8 +38,8 @@ class MediaCategoryRepository extends ServiceEntityRepository
   public function findPaginated(int $limit = 20, int $offset = 0): array
   {
     $qb = $this->createQueryBuilder('c')
-      ->orderBy('c.priority', 'ASC')
-      ->addOrderBy('c.name', 'ASC')
+      ->orderBy('c.priority', \SortDirection::Ascending)
+      ->addOrderBy('c.name', \SortDirection::Ascending)
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
@@ -55,8 +55,8 @@ class MediaCategoryRepository extends ServiceEntityRepository
   public function findPaginatedKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null): array
   {
     $qb = $this->createQueryBuilder('c')
-      ->orderBy('c.priority', 'ASC')
-      ->addOrderBy('c.id', 'ASC')
+      ->orderBy('c.priority', \SortDirection::Ascending)
+      ->addOrderBy('c.id', \SortDirection::Ascending)
       ->setMaxResults($limit)
     ;
 

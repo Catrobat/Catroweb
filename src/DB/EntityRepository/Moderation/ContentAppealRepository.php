@@ -73,8 +73,8 @@ class ContentAppealRepository extends ServiceEntityRepository
     $qb
       ->where('a.state = :state')
       ->setParameter('state', AppealState::Pending->value)
-      ->orderBy('a.created_at', 'ASC')
-      ->addOrderBy('a.id', 'ASC')
+      ->orderBy('a.created_at', \SortDirection::Ascending)
+      ->addOrderBy('a.id', \SortDirection::Ascending)
       ->setMaxResults($limit + 1)
     ;
 

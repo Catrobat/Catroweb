@@ -30,8 +30,8 @@ class FeaturedBannerRepository extends ServiceEntityRepository
       ->leftJoin('fb.project', 'p')
       ->where('fb.active = true')
       ->andWhere('p.id IS NULL OR p.has_missing_files = false')
-      ->orderBy('fb.priority', 'DESC')
-      ->addOrderBy('fb.id', 'DESC')
+      ->orderBy('fb.priority', \SortDirection::Descending)
+      ->addOrderBy('fb.id', \SortDirection::Descending)
       ->setMaxResults($limit)
     ;
 

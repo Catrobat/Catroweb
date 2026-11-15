@@ -100,8 +100,8 @@ class UserCommentRepository extends ServiceEntityRepository
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
       ->setParameter('project', $project)
-      ->orderBy('c.uploadDate', 'DESC')
-      ->addOrderBy('c.id', 'DESC')
+      ->orderBy('c.uploadDate', \SortDirection::Descending)
+      ->addOrderBy('c.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 
@@ -150,8 +150,8 @@ class UserCommentRepository extends ServiceEntityRepository
       ->where('c.parent_id = :parentId')
       ->andWhere('c.auto_hidden = false')
       ->setParameter('parentId', $comment_id)
-      ->orderBy('c.uploadDate', 'DESC')
-      ->addOrderBy('c.id', 'DESC')
+      ->orderBy('c.uploadDate', \SortDirection::Descending)
+      ->addOrderBy('c.id', \SortDirection::Descending)
       ->setMaxResults($limit + 1)
     ;
 

@@ -73,8 +73,7 @@ class ParentPortalController extends AbstractController
   public function manage(Request $request): Response
   {
     try {
-      $this->verify_email_helper->validateEmailConfirmation(
-        $request->getUri(),
+      $this->verify_email_helper->validateEmailConfirmationFromRequest($request,
         'parent',
         $request->query->get('email', '')
       );
