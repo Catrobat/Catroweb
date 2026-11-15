@@ -80,6 +80,22 @@ class ContentSafetyScannerTest extends TestCase
     $this->assertTrue($result->skipped);
   }
 
+  public function testRefusedImageIsInvalidNotUnavailable(): void
+  {
+    $scanner = new ContentSafetyScanner(
+      new MockHttpClient(new MockResponse('{"error": "Invalid image data"}', ['http_code' => 400])),
+      new NullLogger(),
+      'http://localhost:5000',
+      true,
+      0.7,
+    );
+
+    $result = $scanner->scanImageBlob('not-an-image');
+
+    $this->assertTrue($result->invalid);
+    $this->assertFalse($result->unavailable);
+  }
+
   public function testScanFailsOpenOnNetworkError(): void
   {
     $mockResponse = new MockResponse('', ['http_code' => 500]);

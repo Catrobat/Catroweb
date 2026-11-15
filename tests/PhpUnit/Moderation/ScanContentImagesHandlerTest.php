@@ -84,6 +84,19 @@ class ScanContentImagesHandlerTest extends TestCase
     $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
   }
 
+  public function testSkipsAnImageTheScannerRefusesAndScansTheNext(): void
+  {
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => 's' === $blob[0]
+      ? ContentSafetyResult::invalid()
+      : new ContentSafetyResult(safe: false, nsfwScore: 0.9));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview');
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
   public function testDoesNotHideSafeImages(): void
   {
     $scanner = $this->createStub(ContentSafetyScanner::class);

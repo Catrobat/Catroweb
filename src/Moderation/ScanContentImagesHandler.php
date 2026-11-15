@@ -20,7 +20,8 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /**
  * Sends a project's screenshots and its largest look images (or a studio's cover) to the NSFW scanner and flags
- * the content for review at the first image at or above the threshold. Scanner down: logged, nothing hidden.
+ * the content for review at the first image at or above the threshold. An image the scanner refuses (4xx) is
+ * skipped; scanner down (timeout, 5xx): logged, nothing hidden.
  */
 #[AsMessageHandler]
 final readonly class ScanContentImagesHandler
@@ -63,6 +64,12 @@ final readonly class ScanContentImagesHandler
       }
 
       $result = $this->scanner->scanImageBlob($blob);
+      if ($result->invalid) {
+        $this->logger->info('Image scan of {type} {id}: scanner refused {image}, skipped', ['type' => $message->content_type, 'id' => $message->content_id, 'image' => basename($path)]);
+
+        continue;
+      }
+
       if ($result->unavailable || $result->skipped) {
         $this->logger->warning('Image scan of {type} {id} stopped: scanner unavailable or disabled', ['type' => $message->content_type, 'id' => $message->content_id]);
 

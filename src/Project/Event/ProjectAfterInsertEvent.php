@@ -10,8 +10,14 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ProjectAfterInsertEvent extends Event
 {
-  public function __construct(protected ExtractedCatrobatFile $extracted_file, protected Project $project)
+  public function __construct(protected ExtractedCatrobatFile $extracted_file, protected Project $project, protected bool $restore = false)
   {
+  }
+
+  /** A backup restore, not an upload by the user. */
+  public function isRestore(): bool
+  {
+    return $this->restore;
   }
 
   public function getExtractedFile(): ExtractedCatrobatFile

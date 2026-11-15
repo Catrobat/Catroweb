@@ -10,7 +10,8 @@ namespace App\Moderation;
  * not for kids, so a match flags the content for review instead of censoring it.
  *
  * Numbers that only look like an age are removed first: versions and levels ("1.18+", "version 18+",
- * "level 18+"), years ("2018"), sums ("18+2") and score gains ("+18 points").
+ * "level 18+"), years ("2018") and sums ("18+2"). A match is ignored when negated ("no 18+", "kein NSFW"),
+ * when it counts something ("18+ levels", "ab 18 Punkten"), after "Score:" or "Seite", and in phone numbers.
  */
 class AgeSignalDetector
 {
@@ -18,18 +19,32 @@ class AgeSignalDetector
   private const string NUMBER_CONTEXT = '~(*UCP)\b(?:version|ver|v|level|lvl|android|api|ios|stufe|nivel|nível|уровень|'
     .'chapter|kapitel|part|teil|episode|ep|page|seite|day|tag|wave|round|runde|stage|world|welt)\.?\s*\d[\d.]*\s*\+?~iu';
 
-  private const string GAINS = '(?!\s*(?:points?|pts|coins?|hp|xp|punkte|münzen|puntos|pontos|monedas|moedas|damage|dmg|очк))';
+  /** Right before a match: negations ("no 18+", "kein NSFW") and counters ("Score: 18+", "Seite ab 18"). */
+  private const string IGNORED_BEFORE = '~(*UCP)\b(?:no|not|never|kein\w*|nicht|nie|sin|sem|без|нет|не|pas\s+de|non|'
+    .'score|punktzahl|seite|page|p[aá]gina|страниц\w*)\s*[:\-]?\s*$~iu';
+
+  /**
+   * Right after a match: a counted noun ("18+ levels", "ab 18 Punkten") or more digits (a phone number).
+   * Not "projects", "games" or "content": "+18 projects" is a signal.
+   */
+  private const string IGNORED_AFTER = '~(*UCP)^(?:[\s\-]*\d|\s*(?:levels?|kills?|times?|points?|pts|coins?|stars?|lives|enemies|'
+    .'items?|players?|rounds?|seconds?|minutes?|hours?|blocks?|bricks?|sprites?|looks?|sounds?|followers?|likes?|'
+    .'downloads?|views?|hp|xp|damage|dmg|'
+    .'punkte?n?|stufen|leben|sterne?n?|münzen|spieler\w*|gegner\w*|mal|sekunden|minuten|'
+    .'niveles|puntos|monedas|vidas|estrellas|jugadores|enemigos|veces|'
+    .'n[ií]veis|pontos|moedas|estrelas|jogadores|inimigos|vezes|'
+    .'уровн\w*|очк\w*|монет\w*|жизн\w*|звезд\w*|игрок\w*|враг\w*|раз)\b)~iu';
 
   /**
    * @var list<string>
    */
   private const array PATTERNS = [
     // 18+ / 18 + / +18 / + 18 as a standalone number, not part of a version, year, phone number or sum
-    '(?<![\p{L}\p{N}.,:/\-])(?<!\d\s)18\s?\+(?!\s*\d)'.self::GAINS,
-    '(?<![\p{L}\p{N}.,:/\-])(?<!\d\s)\+\s?18(?!\p{N}|[.,]\d)'.self::GAINS,
+    '(?<![\p{L}\p{N}.,:/\-])(?<!\d\s)18\s?\+(?!\s*\d)',
+    '(?<![\p{L}\p{N}.,:/\-])(?<!\d\s)\+\s?18(?!\p{N}|[.,]\d)',
     // R18, R-18, FSK 18, USK 18, PEGI 18
     '\b(?:r-?|fsk\s?|usk\s?|pegi\s?)18\b',
-    '\bnsfw\b',
+    '(?<![\p{L}\p{N}])nsfw(?![\p{L}\p{N}])', // also in user_names
     // en: 18 plus, 18 and over/up, 18 or older, adults only, adult content, older than 18
     '\b18\s*(?:years?\s*)?(?:plus|and\s+(?:over|up|older)|or\s+older)\b',
     '\b(?:adults?\s+only|only\s+(?:for\s+)?adults|adult\s+content|content\s+for\s+adults|older\s+than\s+18)\b',
@@ -61,8 +76,12 @@ class AgeSignalDetector
       $text = preg_replace(self::INVISIBLE_CHARACTERS, '', $text) ?? $text;
       $text = preg_replace(self::NUMBER_CONTEXT, ' ', $text) ?? $text;
       foreach (self::PATTERNS as $pattern) {
-        if (1 === preg_match('~(*UCP)'.$pattern.'~iu', $text, $match)) {
-          return trim($match[0]);
+        preg_match_all('~(*UCP)'.$pattern.'~iu', $text, $matches, PREG_OFFSET_CAPTURE);
+        foreach ($matches[0] as [$match, $offset]) {
+          if (1 !== preg_match(self::IGNORED_BEFORE, substr($text, 0, $offset))
+            && 1 !== preg_match(self::IGNORED_AFTER, substr($text, $offset + strlen($match)))) {
+            return trim($match);
+          }
         }
       }
     }

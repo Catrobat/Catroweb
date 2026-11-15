@@ -65,6 +65,10 @@ class AgeSignalDetectorTest extends TestCase
       'ru older' => ['старше 18'],
       'fr' => ['réservé aux adultes'],
       'zero-width space' => ["18\u{200B}+"],
+      'username with underscore' => ['nsfw_artist'],
+      'negated elsewhere' => ['no spam here, 18+ only'],
+      'second match counts' => ['18+ levels and 18+ content'],
+      'adult games' => ['18+ games'],
     ];
   }
 
@@ -106,6 +110,20 @@ class AgeSignalDetectorTest extends TestCase
       'words containing nsfw letters' => ['transfwd'],
       'adult word alone' => ['ask an adult for help'],
       'kids game' => ['A fun game for kids'],
+      'negated' => ['No 18+ content please'],
+      'negated de' => ['kein NSFW!'],
+      'negated after age' => ["I'm 12, not 18+"],
+      'negated es' => ['sin +18'],
+      'negated ru' => ['без 18+'],
+      'counted levels' => ['18+ levels'],
+      'counted kills' => ['I got 18+ kills'],
+      'counted times' => ['jump 18+ times'],
+      'counted de' => ['Ab 18 Punkten gibt es Bonus'],
+      'counted es' => ['más de 18+ niveles'],
+      'counted ru' => ['18+ уровней'],
+      'score label' => ['Score: 18+'],
+      'page de' => ['Seite ab 18'],
+      'phone spaced' => ['Telefon +18 123'],
     ];
   }
 }

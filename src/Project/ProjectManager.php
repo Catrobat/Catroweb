@@ -325,7 +325,7 @@ class ProjectManager
       ->execute()
     ;
 
-    $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));
+    $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project, $request->isRestore()));
     if (!$request->isRestore()) {
       $this->notification_service->queueNewProjectNotifications($project);
     }

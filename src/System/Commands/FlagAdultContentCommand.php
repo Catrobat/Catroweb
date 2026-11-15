@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\System\Commands;
 
+use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
+use App\DB\Enum\ReportState;
 use App\Moderation\AgeSignalDetector;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ScanContentImages;
@@ -22,7 +24,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Backfill for the checks new content gets (docs/operations/Content-Moderation.md): lists visible projects, studios
- * and profiles with adults-only texts; --apply hides them for review. --images also scans images (slow).
+ * and profiles with adults-only texts; --apply hides projects and studios for review and queues profiles (accounts
+ * are never hidden). Content with a rejected report is skipped. --images also scans images (slow).
  */
 #[AsCommand(
   name: 'catro:moderation:flag-adult-content',
@@ -31,6 +34,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class FlagAdultContentCommand extends Command
 {
   private const int BATCH_SIZE = 500;
+
+  /** @var array<string, true> "type:id" of content with a rejected report */
+  private array $reviewed = [];
 
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
@@ -61,11 +67,20 @@ class FlagAdultContentCommand extends Command
       $io->note('DRY RUN: nothing is hidden. Pass --apply to flag the hits.');
     }
 
+    // An admin who rejected a report about the content has looked at it: don't queue it again.
+    /** @var list<array{content_type: string, content_id: string}> $rejected */
+    $rejected = $this->entity_manager->createQuery('SELECT r.content_type, r.content_id FROM '.ContentReport::class.' r WHERE r.state = :rejected')
+      ->setParameter('rejected', ReportState::Rejected->value)->getArrayResult()
+    ;
+    foreach ($rejected as $report) {
+      $this->reviewed[$report['content_type'].':'.$report['content_id']] = true;
+    }
+
     $hits = 0;
     $hits += $this->scanTexts($io, $apply, ContentType::Project, Project::class, 'auto_hidden', ['name', 'description', 'credits']);
     $hits += $this->scanTexts($io, $apply, ContentType::Studio, Studio::class, 'auto_hidden', ['name', 'description']);
     $hits += $this->scanTexts($io, $apply, ContentType::User, User::class, 'profile_hidden', ['username', 'about', 'currently_working_on']);
-    $io->success(sprintf('%d text hits%s.', $hits, $apply ? ' flagged' : ''));
+    $io->success(sprintf('%d text hits%s. Accounts are never hidden: their profile texts are cleared and queued.', $hits, $apply ? ' flagged' : ''));
 
     if ($input->getOption('images')) {
       $this->scanImages($io, $apply, (int) $input->getOption('limit'), (int) $input->getOption('delay'));
@@ -94,6 +109,10 @@ class FlagAdultContentCommand extends Command
 
       foreach ($rows as $row) {
         $last_id = (string) $row['id'];
+        if (isset($this->reviewed[$type->value.':'.$last_id])) {
+          continue;
+        }
+
         $texts = array_map(static fn (string $field): ?string => $row[$field], $fields);
         $signal = $this->detector->findSignal(...$texts);
         if (null === $signal) {
@@ -102,7 +121,16 @@ class FlagAdultContentCommand extends Command
 
         ++$hits;
         $io->writeln(sprintf('  %s %s: "%s" in "%s"', $type->value, $last_id, $signal, mb_substr(implode(' | ', array_filter($texts)), 0, 120)));
-        if ($apply) {
+        if (!$apply) {
+          continue;
+        }
+
+        if (ContentType::User === $type) {
+          $user = $this->entity_manager->find(User::class, $last_id);
+          if (null !== $user) {
+            $this->auto_moderation->flagUserProfile($user);
+          }
+        } else {
           $this->auto_moderation->flagAgeSignal($type, $last_id, ...$texts);
         }
       }
@@ -121,6 +149,10 @@ class FlagAdultContentCommand extends Command
       ;
       $io->section(sprintf('Scanning images of %d %ss', count($ids), $type->value));
       foreach ($ids as $id) {
+        if (isset($this->reviewed[$type->value.':'.$id])) {
+          continue;
+        }
+
         // Calls the handler directly, so the backfill doesn't flood the default queue.
         $hit = $this->image_scanner->scan(new ScanContentImages($type->value, $id), $apply);
         if (null !== $hit) {

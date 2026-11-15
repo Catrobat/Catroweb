@@ -51,3 +51,18 @@ Feature: Texts that say the content is for adults hide it until an admin reviews
     When I request "PATCH" "/api/studios/1"
     Then the response status code should be "200"
     And the studio "1" should be hidden
+
+  Scenario: An about text with an adults-only signal is cleared and queued, the account stays usable
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {"about": "18+ only"}
+    """
+    When I request "PATCH" "/api/users/me"
+    Then the response code should be "204"
+    And the user "Catrobat" profile should be visible
+    And the project "1" should be visible
+    When I request "GET" "/api/users/me"
+    Then the response code should be "200"

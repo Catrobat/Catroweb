@@ -6,12 +6,14 @@ namespace Tests\PhpUnit\Moderation;
 
 use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\Moderation\ContentReport;
+use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
 use App\Moderation\AgeSignalDetector;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
 use App\Security\ContentSafety\ContentSafetyScanner;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -42,6 +44,41 @@ class AutoModerationServiceTest extends TestCase
     $this->assertSame('inappropriate_content', $report->getCategory());
     $this->assertStringContainsString('+18', (string) $report->getNote());
     $this->assertCount(1, array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction));
+  }
+
+  public function testAProfileIsQueuedButNeverHidden(): void
+  {
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->expects($this->never())->method('hideContent');
+
+    $user = new User();
+    $user->setId('u1');
+    $user->setUsername('Builder');
+    $user->setAbout('18+ only');
+    $user->setCurrentlyWorkingOn('a racing game');
+
+    $this->assertTrue($this->service($visibility)->flagUserProfile($user));
+
+    $this->assertFalse($user->getProfileHidden());
+    $this->assertNull($user->getAbout());
+    $this->assertSame('a racing game', $user->getCurrentlyWorkingOn());
+    $report = array_values(array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport))[0];
+    $this->assertSame('inappropriate_profile', $report->getCategory());
+    $this->assertSame([], array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction));
+  }
+
+  public function testAUsernameIsKeptAndQueued(): void
+  {
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->expects($this->never())->method('hideContent');
+
+    $user = new User();
+    $user->setId('u2');
+    $user->setUsername('nsfw_artist');
+
+    $this->assertTrue($this->service($visibility)->flagUserProfile($user));
+    $this->assertSame('nsfw_artist', $user->getUsername());
+    $this->assertCount(1, array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport));
   }
 
   public function testHarmlessTextChangesNothing(): void
@@ -76,6 +113,7 @@ class AutoModerationServiceTest extends TestCase
 
     $entity_manager = $this->createStub(EntityManagerInterface::class);
     $entity_manager->method('createQueryBuilder')->willReturn($query_builder);
+    $entity_manager->method('getRepository')->willReturn($this->createStub(EntityRepository::class));
     $entity_manager->method('persist')->willReturnCallback(function (object $o): void {
       $this->persisted[] = $o;
     });
