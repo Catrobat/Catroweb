@@ -35,7 +35,7 @@ Feature: The background tasks page shows the scheduled tasks, the queues and fai
       | Update project popularity scores                             | 6 hours  |
       | Update user rankings                                         | 1 day    |
       | Clean up background jobs                                     | 1 hour   |
-    And there should be "23" cron jobs in the database
+    And there should be "24" cron jobs in the database
 
   Scenario: The queues are shown, and no job has failed
     Given I log in as "Admin"
@@ -63,4 +63,4 @@ Feature: The background tasks page shows the scheduled tasks, the queues and fai
     When I click ".btn-reset-cron-job"
     And I wait for the page to be loaded
     Then I should see "The task runs at the next scheduler tick"
-    And there should be "22" cron jobs in the database
+    And there should be "23" cron jobs in the database
