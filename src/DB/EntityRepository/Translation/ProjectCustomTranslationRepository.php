@@ -123,62 +123,17 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
 
   public function deleteNameTranslation(Project $project, string $language): bool
   {
-    $translation = $this->findTranslation($project, $language);
-
-    if (!$translation instanceof ProjectCustomTranslation) {
-      return true;
-    }
-
-    if (null === $translation->getDescription() && null === $translation->getCredits()) {
-      $this->getEntityManager()->remove($translation);
-    } else {
-      $translation->setName(null);
-      $this->getEntityManager()->persist($translation);
-    }
-
-    $this->getEntityManager()->flush();
-
-    return true;
+    return $this->clearField($project, $language, 'name');
   }
 
   public function deleteDescriptionTranslation(Project $project, string $language): bool
   {
-    $translation = $this->findTranslation($project, $language);
-
-    if (!$translation instanceof ProjectCustomTranslation) {
-      return true;
-    }
-
-    if (null === $translation->getName() && null === $translation->getCredits()) {
-      $this->getEntityManager()->remove($translation);
-    } else {
-      $translation->setDescription(null);
-      $this->getEntityManager()->persist($translation);
-    }
-
-    $this->getEntityManager()->flush();
-
-    return true;
+    return $this->clearField($project, $language, 'description');
   }
 
   public function deleteCreditTranslation(Project $project, string $language): bool
   {
-    $translation = $this->findTranslation($project, $language);
-
-    if (!$translation instanceof ProjectCustomTranslation) {
-      return true;
-    }
-
-    if (null === $translation->getDescription() && null === $translation->getName()) {
-      $this->getEntityManager()->remove($translation);
-    } else {
-      $translation->setCredits(null);
-      $this->getEntityManager()->persist($translation);
-    }
-
-    $this->getEntityManager()->flush();
-
-    return true;
+    return $this->clearField($project, $language, 'credits');
   }
 
   public function listDefinedLanguages(Project $project): array
@@ -208,6 +163,41 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     }
 
     return count($languages);
+  }
+
+  /**
+   * Clears one field and removes the row once all fields are empty, in the database itself:
+   * the editor deletes name, description and credits with three parallel requests, and a
+   * read-then-decide in PHP let every request see the other fields still set, leaving an
+   * empty row behind.
+   */
+  private function clearField(Project $project, string $language, string $field): bool
+  {
+    $this->createQueryBuilder('t')
+      ->update()
+      ->set('t.'.$field, 'NULL')
+      ->where('t.project = :project')
+      ->andWhere('t.language = :language')
+      ->setParameter('project', $project)
+      ->setParameter('language', $language)
+      ->getQuery()
+      ->execute()
+    ;
+
+    $this->createQueryBuilder('t')
+      ->delete()
+      ->where('t.project = :project')
+      ->andWhere('t.language = :language')
+      ->andWhere('t.name IS NULL')
+      ->andWhere('t.description IS NULL')
+      ->andWhere('t.credits IS NULL')
+      ->setParameter('project', $project)
+      ->setParameter('language', $language)
+      ->getQuery()
+      ->execute()
+    ;
+
+    return true;
   }
 
   private function findTranslation(Project $project, string $language): ?ProjectCustomTranslation
