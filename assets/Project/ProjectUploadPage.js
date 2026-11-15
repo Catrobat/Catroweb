@@ -148,13 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
     progressText.textContent = `${percent}%`
   }
 
-  async function requestJson(method, url, body = null) {
+  async function requestJson(method, url, body = null, extraHeaders = {}) {
     const response = await fetch(url, {
       method,
       credentials: 'same-origin',
-      headers: body
-        ? { Accept: 'application/json', 'Content-Type': 'application/json' }
-        : { Accept: 'application/json' },
+      headers: {
+        Accept: 'application/json',
+        ...(body ? { 'Content-Type': 'application/json' } : {}),
+        ...extraHeaders,
+      },
       body: body ? JSON.stringify(body) : null,
     })
     let data = {}
@@ -169,14 +171,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return data
   }
 
-  // Checking a big project can take longer than Cloudflare waits for an answer (~100 s). Completing is idempotent:
-  // the server answers 409 while the first call still works and the created project once it is done.
+  // Checking a big project runs on a background worker: completing answers 202 with a job, polled until it is done.
+  // Completing is idempotent, so once the job is finished, completing again answers with its outcome (the created
+  // project, or why it was rejected). A dropped connection or a 409 (an earlier call still working) is retried.
   async function completeUpload(uploadId) {
     const deadline = Date.now() + 10 * 60 * 1000
     let serverFailures = 0
     for (;;) {
       try {
-        return await requestJson('POST', `${apiUrl}/uploads/${uploadId}/complete`)
+        const result = await requestJson('POST', `${apiUrl}/uploads/${uploadId}/complete`, null, {
+          Prefer: 'respond-async',
+        })
+        if (result?.type !== 'project_upload') return result
+        await waitForJob(result, deadline)
       } catch (error) {
         // A server-side failure keeps the chunks: worth a couple of later attempts before giving up.
         if (error.body?.error?.type === 'upload_failed' && ++serverFailures <= 2) {
@@ -188,6 +195,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!stillWorking || Date.now() > deadline) throw error
         await wait(5000)
       }
+    }
+  }
+
+  async function waitForJob(job, deadline) {
+    const jobUrl = `${apiUrl.replace(/\/projects\/?$/, '')}/jobs/${encodeURIComponent(job.id)}`
+    while (job.state === 'queued' || job.state === 'running') {
+      if (Date.now() > deadline) throw { status: 504, body: {} }
+      await wait(2000)
+      job = await requestJson('GET', jobUrl)
+    }
+    // A server-side failure (chunks kept) counts like the synchronous one; a rejection is answered by completing again.
+    if (job.state === 'failed' && (job.error_status ?? 500) >= 500) {
+      throw { status: job.error_status ?? 500, body: { error: { type: 'upload_failed' } } }
     }
   }
 
