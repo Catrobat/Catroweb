@@ -42,26 +42,28 @@ class CronTaskRunner
   public function isDue(CronTask $task): bool
   {
     $job = $this->cron_job_repository->findByName($task->name);
-    if (null === $job || null === $job->getStartAt() || null === $job->getEndAt()) {
-      return null === $job || 'run' !== $job->getState();
+    if (null === $job) {
+      return true;
     }
 
+    $start = $job->getStartAt();
     if ('run' === $job->getState()) {
       return false;
     }
 
     // A failed run is retried at the next tick, a successful one waits for its interval.
-    return 0 !== $job->getResultCode() || (clone $job->getStartAt())->modify('+'.$task->interval) <= new \DateTime();
+    return null === $start || null === $job->getEndAt() || 0 !== $job->getResultCode() || (clone $start)->modify('+'.$task->interval) <= new \DateTime();
   }
 
   public function nextRunAt(CronTask $task): ?\DateTime
   {
     $job = $this->cron_job_repository->findByName($task->name);
-    if (null === $job || null === $job->getStartAt() || 0 !== $job->getResultCode()) {
+    $start = $job?->getStartAt();
+    if (null === $job || null === $start || 0 !== $job->getResultCode()) {
       return null; // due at the next tick
     }
 
-    return (clone $job->getStartAt())->modify('+'.$task->interval);
+    return (clone $start)->modify('+'.$task->interval);
   }
 
   public function run(CronTask $task): void

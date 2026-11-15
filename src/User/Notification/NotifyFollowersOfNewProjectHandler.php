@@ -34,7 +34,12 @@ final readonly class NotifyFollowersOfNewProjectHandler
       $project = $this->entity_manager->getReference(Project::class, $message->project_id);
       $notifications = [];
       foreach ($batch as $follower_id) {
-        $notifications[] = $notification = new NewProjectNotification($this->entity_manager->getReference(User::class, $follower_id), $project);
+        $follower = $this->entity_manager->getReference(User::class, $follower_id);
+        if (null === $follower) {
+          continue;
+        }
+
+        $notifications[] = $notification = new NewProjectNotification($follower, $project);
         $this->entity_manager->persist($notification);
       }
 

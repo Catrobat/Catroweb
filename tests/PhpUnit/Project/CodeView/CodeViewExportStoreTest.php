@@ -11,6 +11,7 @@ use App\Project\CodeView\CodeExportRunner;
 use App\Project\CodeView\CodeExportUnavailableException;
 use App\Project\CodeView\CodeViewExportEventListener;
 use App\Project\CodeView\CodeViewExportStore;
+use App\Project\CodeView\ExportCodeView;
 use App\Project\CodeView\ExportCodeViewHandler;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\ProjectManager;
@@ -290,6 +291,7 @@ class CodeViewExportStoreTest extends TestCase
     $project_manager->method('find')->willReturn($this->project);
     $handler = new ExportCodeViewHandler($project_manager, $store, new NullLogger());
     foreach ($this->bus->dispatched as $message) {
+      $this->assertInstanceOf(ExportCodeView::class, $message);
       $handler($message);
     }
 

@@ -253,9 +253,6 @@
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$request->getIp()]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[getFollowers]]></code>
-    </PossiblyNullReference>
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$_ENV['APP_ENV']]]></code>
     </PossiblyUndefinedArrayOffset>
@@ -372,14 +369,6 @@
     <PossiblyNullReference>
       <code><![CDATA[getUsername]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/System/Commands/DBUpdater/CronJobCommand.php">
-    <PossiblyNullReference>
-      <code><![CDATA[modify]]></code>
-    </PossiblyNullReference>
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$_ENV['APP_ENV']]]></code>
-    </PossiblyUndefinedArrayOffset>
   </file>
   <file src="src/System/Commands/DBUpdater/CronJobs/UpdateRandomProjectCategoryCommand.php">
     <PossiblyNullReference>

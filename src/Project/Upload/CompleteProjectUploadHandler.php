@@ -47,7 +47,7 @@ final readonly class CompleteProjectUploadHandler
       $job->succeed((string) $result->getId());
     } else {
       $error = $result instanceof ErrorResponse ? $result->getError() : null;
-      $job->fail($code >= 400 ? $code : Response::HTTP_INTERNAL_SERVER_ERROR, (string) ($error?->getMessage() ?? 'The upload could not be completed.'));
+      $job->fail($code >= 400 ? $code : Response::HTTP_INTERNAL_SERVER_ERROR, $error?->getMessage() ?? 'The upload could not be completed.');
     }
 
     $this->entity_manager->flush();
