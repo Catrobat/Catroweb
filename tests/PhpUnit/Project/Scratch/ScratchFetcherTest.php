@@ -103,7 +103,7 @@ final class ScratchFetcherTest extends TestCase
 
   public function testAFailedAssetIsNotDrownedOutByItsUnreadSiblings(): void
   {
-    // The second response is never read; on destruct it would throw a raw HTTP client exception over ours.
+    // The second response is never read; without cancel() its destructor throws a ClientException at shutdown (fatal).
     $client = new MockHttpClient([new MockResponse('not the checksum'), new MockResponse('', ['http_code' => 404])]);
     $costumes = [['md5ext' => md5('a').'.svg'], ['md5ext' => md5('b').'.svg']];
 

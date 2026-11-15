@@ -20,6 +20,7 @@ class AssetNormalizer
   // is scaled up on a phone. Render at 2x and halve the sprite size if that matters.
   private const int MAX_SIDE = 2048;
   private const int MAX_SOUND_BYTES = 32 * 1024 * 1024;
+  private const int MP3_ABOVE_BYTES = 256 * 1024; // short effects stay WAV: MP3 pads them with silence
   private const int TOOL_TIMEOUT = 20;
   private const int TOOL_MISSING = 127;
 
@@ -86,11 +87,15 @@ class AssetNormalizer
       $canvas->compositeImage($image, \Imagick::COMPOSITE_OVER, (int) round($half_w - $center_x), (int) round($half_h - $center_y));
       // Always RGBA: Pocket Code (libGDX) loads an 8-bit grayscale PNG as alpha only, so black became transparent.
       $canvas->setImageFormat('png32');
-
-      return $canvas->getImageBlob();
+      $png = $canvas->getImageBlob();
     } catch (\ImagickException $exception) {
       throw new ScratchConversionException('A costume could not be read.', 0, $exception);
     }
+
+    // A palette cuts converted costumes by about two thirds. pngquant keeps the original when the quality floor
+    // can't be met or the result is larger (exit 99/98), and is optional: without it costumes stay RGBA.
+    // A palette PNG is safe for Pocket Code, unlike grayscale: libGDX expands it to RGB(A).
+    return self::run(['pngquant', '--quality=70-95', '--speed=10', '--skip-if-larger', '-'], $png, $deadline, false) ?: $png;
   }
 
   /**
@@ -107,6 +112,15 @@ class AssetNormalizer
 
     if ('wav' !== $format) {
       throw new ScratchConversionException('Unsupported sound format: '.$format);
+    }
+
+    // Scratch keeps sounds uncompressed or as ADPCM, so music-heavy games bloat past the upload limit; MP3 is ~10x smaller.
+    // Needs sox built with MP3 support (Debian: libsox-fmt-mp3); without it sox fails and the sound stays WAV.
+    if (\strlen($bytes) > self::MP3_ABOVE_BYTES) {
+      $mp3 = self::run(['sox', '-t', 'wav', '-', '-t', 'mp3', '-'], $bytes, $deadline);
+      if (null !== $mp3 && '' !== $mp3) {
+        return [$mp3, 'mp3'];
+      }
     }
 
     if (1 === self::wavFormatCode($bytes)) {
@@ -231,9 +245,9 @@ class AssetNormalizer
   /**
    * @param list<string> $command
    *
-   * @return string|null output, null if the tool failed on this input
+   * @return string|null output, null if the tool failed on this input or an optional tool is missing
    */
-  private static function run(array $command, string $input, float $deadline): ?string
+  private static function run(array $command, string $input, float $deadline, bool $required = true): ?string
   {
     $remaining = $deadline - microtime(true);
     if ($remaining <= 0) {
@@ -250,6 +264,10 @@ class AssetNormalizer
     }
 
     if (self::TOOL_MISSING === $process->getExitCode()) {
+      if (!$required) {
+        return null;
+      }
+
       throw new \RuntimeException($command[0].' is not installed; the Scratch converter needs it.');
     }
 

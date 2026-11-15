@@ -52,7 +52,7 @@ class CatrobatFileExtractor
       throw new InvalidCatrobatFileException('errors.file.invalid', 505);
     }
 
-    $max_total_size = 200 * 1024 * 1024; // 200 MB
+    $max_total_size = 300 * 1024 * 1024; // keep within clamd MaxFileSize/MaxScanSize, or ClamAV only scans part of the upload
     $max_file_count = 5_000;
     $total_size = 0;
     $num_entries = $zip->numFiles;
