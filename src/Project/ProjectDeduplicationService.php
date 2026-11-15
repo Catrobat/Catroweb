@@ -97,6 +97,9 @@ class ProjectDeduplicationService
           }
         });
       } catch (ForeignKeyConstraintViolationException) {
+      } catch (\Throwable $e) {
+        // One asset that cannot go (lock wait timeout, file system error) must not stop the rest: skip it.
+        $this->logger->warning('Garbage collection skipped an asset', ['hash' => $after, 'error' => $e->getMessage()]);
       }
     }
 

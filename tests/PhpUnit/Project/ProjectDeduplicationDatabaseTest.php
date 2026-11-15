@@ -120,15 +120,17 @@ final class ProjectDeduplicationDatabaseTest extends KernelTestCase
     $this->assertTrue($this->entity_manager->isOpen());
   }
 
-  public function testTheJobChainsBatchesUntilNoOrphanIsLeft(): void
+  public function testTheJobChainsBatchesUntilNoOrphanIsLeftButSparesFreshOnes(): void
   {
     $orphans = ['a '.uniqid(), 'b '.uniqid(), 'c '.uniqid()];
+    $fresh = 'fresh '.uniqid(); // created an hour ago: an upload may still be mapping it
     $project = $this->insertProject();
-    $this->deduplicate($project, array_combine(['images/a.png', 'images/b.png', 'images/c.png'], $orphans));
+    $this->deduplicate($project, array_combine(['images/a.png', 'images/b.png', 'images/c.png'], $orphans) + ['images/fresh.png' => $fresh]);
     $this->service()->removeProjectMappings((string) $project->getId());
     $this->entity_manager->getConnection()->executeStatement('UPDATE project_asset SET created_at = ? WHERE hash IN (?, ?, ?)', [
       new \DateTimeImmutable('-2 days')->format('Y-m-d H:i:s'), ...array_map(static fn (string $c): string => hash('sha256', $c), $orphans),
     ]);
+    $this->entity_manager->getConnection()->executeStatement('UPDATE project_asset SET created_at = ? WHERE hash = ?', [new \DateTimeImmutable('-1 hour')->format('Y-m-d H:i:s'), hash('sha256', $fresh)]);
 
     $queue = [new GarbageCollectOrphanedAssets()];
     $bus = $this->createStub(MessageBusInterface::class);
@@ -149,6 +151,28 @@ final class ProjectDeduplicationDatabaseTest extends KernelTestCase
     foreach ($orphans as $content) {
       $this->assertFalse($this->store->exists(hash('sha256', $content)));
     }
+    $this->assertTrue($this->store->exists(hash('sha256', $fresh)), 'the handler\'s grace period spares a just-uploaded asset');
+    $this->assertNotNull($this->entity_manager->find(ProjectAsset::class, hash('sha256', $fresh)));
+  }
+
+  public function testOneAssetThatCannotBeDeletedDoesNotStopTheBatch(): void
+  {
+    $orphans = ['x '.uniqid(), 'y '.uniqid()];
+    $project = $this->insertProject();
+    $this->deduplicate($project, ['images/x.png' => $orphans[0], 'images/y.png' => $orphans[1]]);
+    $this->service()->removeProjectMappings((string) $project->getId());
+    $hashes = array_map(static fn (string $c): string => hash('sha256', $c), $orphans);
+    sort($hashes);
+    $store = $this->createStub(ContentAddressableStore::class);
+    $store->method('delete')->willReturnCallback(static fn (string $hash): bool => $hash === $hashes[0] ? throw new \RuntimeException('disk error') : true);
+    $assets = $this->createStub(ProjectAssetRepository::class);
+    $assets->method('findOrphans')->willReturn(array_fill_keys($hashes, 1));
+
+    $batch = new ProjectDeduplicationService($store, $assets, $this->mappings, $this->entity_manager, new NullLogger())->garbageCollectBatch(new \DateTimeImmutable('+1 minute'), 10);
+
+    $this->assertSame(1, $batch['count']);
+    $this->assertSame($hashes[1], $batch['last']);
+    $this->assertNotNull($this->entity_manager->find(ProjectAsset::class, $hashes[0]), 'rolled back: row and file stay together');
   }
 
   public function testGarbageCollectionKeepsOrphansInsideTheGracePeriod(): void
