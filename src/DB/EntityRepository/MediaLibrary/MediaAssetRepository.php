@@ -79,10 +79,10 @@ class MediaAssetRepository extends ServiceEntityRepository
     if (!in_array($sortBy, $allowedSortFields, true)) {
       $sortBy = 'created_at';
     }
-    $sortOrder = 'ASC' === strtoupper($sortOrder) ? 'ASC' : 'DESC';
+    $direction = 'ASC' === strtoupper($sortOrder) ? \SortDirection::Ascending : \SortDirection::Descending;
 
-    $qb->orderBy('a.'.$sortBy, $sortOrder)
-      ->addOrderBy('a.id', 'DESC')
+    $qb->orderBy('a.'.$sortBy, $direction)
+      ->addOrderBy('a.id', \SortDirection::Descending)
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
@@ -112,12 +112,11 @@ class MediaAssetRepository extends ServiceEntityRepository
     if (!in_array($sortBy, $allowedSortFields, true)) {
       $sortBy = 'created_at';
     }
-    $sortOrder = 'ASC' === strtoupper($sortOrder) ? 'ASC' : 'DESC';
-    $cmp = 'DESC' === $sortOrder ? '<' : '>';
-    $idOrder = 'DESC' === $sortOrder ? 'DESC' : 'ASC';
+    $direction = 'ASC' === strtoupper($sortOrder) ? \SortDirection::Ascending : \SortDirection::Descending;
+    $cmp = \SortDirection::Descending === $direction ? '<' : '>';
 
-    $qb->orderBy('a.'.$sortBy, $sortOrder)
-      ->addOrderBy('a.id', $idOrder)
+    $qb->orderBy('a.'.$sortBy, $direction)
+      ->addOrderBy('a.id', $direction)
       ->setMaxResults($limit)
     ;
 

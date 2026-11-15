@@ -300,7 +300,7 @@ class ProjectRepository extends ServiceEntityRepository
       default => 'e.uploaded_at',
     };
 
-    $qb->orderBy($sort_field, 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb->orderBy($sort_field, \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $cursor_value_param = 'uploaded_at' === $order_by ? $cursor_date : $cursor_value;
     $this->applyKeysetCursor($qb, $sort_field, $cursor_value_param, $cursor_id);
     $qb->setMaxResults($limit);
@@ -315,7 +315,7 @@ class ProjectRepository extends ServiceEntityRepository
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
-    $qb->orderBy('e.uploaded_at', 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb->orderBy('e.uploaded_at', \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
     $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
     $qb->setMaxResults($limit);
@@ -330,7 +330,7 @@ class ProjectRepository extends ServiceEntityRepository
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
-    $qb->orderBy('e.uploaded_at', 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb->orderBy('e.uploaded_at', \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
     $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
     $qb->setMaxResults($limit);
@@ -345,7 +345,7 @@ class ProjectRepository extends ServiceEntityRepository
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
-    $qb->orderBy('e.uploaded_at', 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb->orderBy('e.uploaded_at', \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
     $qb->andWhere($qb->expr()->neq('e.id', ':project_id'))->setParameter('project_id', $exclude_project_id);
     $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
@@ -514,11 +514,11 @@ class ProjectRepository extends ServiceEntityRepository
   private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC'): QueryBuilder
   {
     if ('' !== trim($order_by)) {
-      $query_builder->orderBy('e.'.$order_by, $order);
+      $query_builder->orderBy('e.'.$order_by, 'ASC' === strtoupper($order) ? \SortDirection::Ascending : \SortDirection::Descending);
       // Add deterministic tiebreakers to ensure stable pagination
       // when multiple rows share the same primary sort value.
-      $query_builder->addOrderBy('e.name', 'ASC');
-      $query_builder->addOrderBy('e.id', 'ASC');
+      $query_builder->addOrderBy('e.name', \SortDirection::Ascending);
+      $query_builder->addOrderBy('e.id', \SortDirection::Ascending);
     }
 
     return $query_builder;

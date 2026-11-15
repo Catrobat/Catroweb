@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Admin\System\Maintenance;
 
+use App\System\Commands\ConsoleApplication;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -37,7 +37,7 @@ class MaintenanceController extends CRUDController
       throw new AccessDeniedException();
     }
 
-    $application = new Application($this->kernel);
+    $application = new ConsoleApplication($this->kernel);
     $application->setAutoExit(false);
 
     $input = new ArrayInput([

@@ -55,7 +55,7 @@ class SitemapListener
       ->andWhere('p.private = false')
       ->andWhere('p.has_missing_files = false')
       ->andWhere('p.debug_build = false')
-      ->orderBy('p.id', 'ASC')
+      ->orderBy('p.id', \SortDirection::Ascending)
       ->setMaxResults(self::BATCH_SIZE)
     ;
 
@@ -82,7 +82,7 @@ class SitemapListener
       ->from(User::class, 'u')
       ->where('u.enabled = true')
       ->andWhere('u.profile_hidden = false')
-      ->orderBy('u.id', 'ASC')
+      ->orderBy('u.id', \SortDirection::Ascending)
       ->setMaxResults(self::BATCH_SIZE)
     ;
 

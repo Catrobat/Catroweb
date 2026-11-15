@@ -7,7 +7,6 @@ namespace App\DB\EntityRepository\Studios;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -66,7 +65,7 @@ class StudioActivityRepository extends ServiceEntityRepository
     $qb->addselect('a')->from(StudioActivity::class, 'a')
       ->where($qb->expr()->eq('a.studio', ':studio'))
       ->setParameter('studio', $studio)
-      ->orderBy('a.created_on', Criteria::DESC)
+      ->orderBy('a.created_on', \SortDirection::Descending)
     ;
 
     if (null !== $limit) {

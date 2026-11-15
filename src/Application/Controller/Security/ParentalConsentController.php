@@ -43,8 +43,7 @@ class ParentalConsentController extends AbstractController
     }
 
     try {
-      $this->verify_email_helper->validateEmailConfirmation(
-        $request->getUri(),
+      $this->verify_email_helper->validateEmailConfirmationFromRequest($request,
         (string) $user->getId(),
         $user->getParentEmail() ?? ''
       );

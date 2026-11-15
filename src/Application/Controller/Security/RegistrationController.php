@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
     }
 
     try {
-      $this->verify_email_helper->validateEmailConfirmation($request->getUri(), (string) $user->getId(), (string) $user->getEmail());
+      $this->verify_email_helper->validateEmailConfirmationFromRequest($request, (string) $user->getId(), (string) $user->getEmail());
     } catch (VerifyEmailExceptionInterface $verifyEmailException) {
       $this->logger->warning(sprintf('Email verification failed for user %s: %s', (string) $user->getId(), $verifyEmailException->getReason()));
       $this->addFlash('snackbar', $verifyEmailException->getReason());

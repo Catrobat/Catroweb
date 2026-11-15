@@ -55,7 +55,7 @@ class MigrateAssetsToContentAddressableStoreCommand extends Command
     $qb = $this->entityManager->createQueryBuilder()
       ->select('p.id')
       ->from(Project::class, 'p')
-      ->orderBy('p.uploaded_at', 'ASC')
+      ->orderBy('p.uploaded_at', \SortDirection::Ascending)
     ;
 
     $totalQuery = clone $qb;

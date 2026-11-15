@@ -58,7 +58,7 @@ class NotifyLostProjectFilesCommand extends Command
       ->from(Project::class, 'p')
       ->where('p.has_missing_files = true')
       ->andWhere('p.user IS NOT NULL')
-      ->orderBy('p.uploaded_at', 'DESC')
+      ->orderBy('p.uploaded_at', \SortDirection::Descending)
       ->getQuery()
       ->getArrayResult()
     ;

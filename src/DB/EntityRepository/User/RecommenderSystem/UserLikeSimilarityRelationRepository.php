@@ -41,7 +41,7 @@ class UserLikeSimilarityRelationRepository extends ServiceEntityRepository
       ->select('ul')
       ->where($qb->expr()->eq('ul.first_user', ':user'))
       ->orWhere($qb->expr()->eq('ul.second_user', ':user'))
-      ->orderBy('ul.similarity', 'DESC')
+      ->orderBy('ul.similarity', \SortDirection::Descending)
       ->setParameter('user', $user)
       ->distinct()
       ->getQuery()

@@ -250,7 +250,7 @@ class Project implements \Stringable
    * @var Collection<int, ProjectCodeStatistics>
    */
   #[ORM\OneToMany(targetEntity: ProjectCodeStatistics::class, mappedBy: 'project', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
-  #[ORM\OrderBy(['created_at' => 'DESC'])]
+  #[ORM\OrderBy(['created_at' => \SortDirection::Descending])]
   private Collection $code_statistics;
 
   #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]

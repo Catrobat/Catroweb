@@ -51,7 +51,7 @@ class DetectBrokenProjectsCommand extends Command
       $projects = $this->entity_manager->createQueryBuilder()
         ->select('p.id', 'p.has_missing_files')
         ->from(Project::class, 'p')
-        ->orderBy('p.id', 'ASC')
+        ->orderBy('p.id', \SortDirection::Ascending)
         ->setFirstResult($offset)
         ->setMaxResults(self::BATCH_SIZE)
         ->getQuery()

@@ -23,7 +23,7 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
 
   public function getCachedTranslation(Project $project, ?string $source_language, string $target_language): ?array
   {
-    $criteria = Criteria::create()
+    $criteria = new Criteria(firstResult: 0, accessRawFieldValues: true)
       ->where(Criteria::expr()->eq('project', $project))
       ->andWhere(Criteria::expr()->eq('target_language', $target_language))
       ->andWhere(Criteria::expr()->neq('cached_name', null))
