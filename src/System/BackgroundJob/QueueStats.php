@@ -10,10 +10,9 @@ use Symfony\Component\Messenger\Stamp\ErrorDetailsStamp;
 use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
 use Symfony\Component\Messenger\Stamp\TransportMessageIdStamp;
 use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
-use Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
 
-/** What the queues hold right now, for the admin page and the metrics log line. */
+/** What the queues hold right now, for the Background tasks admin page. */
 class QueueStats
 {
   public const array QUEUES = ['default', 'scratch', 'uploads'];
@@ -75,10 +74,5 @@ class QueueStats
     }
 
     return $failed;
-  }
-
-  public function failedCount(): int
-  {
-    return $this->failed_transport instanceof MessageCountAwareInterface ? $this->failed_transport->getMessageCount() : 0;
   }
 }
