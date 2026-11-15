@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\System\Commands\Maintenance;
 
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\User\Notifications\StudioDeletionWarningNotification;
 use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
@@ -50,6 +51,18 @@ final class CleanEmptyStudiosCommandTest extends KernelTestCase
     $young = $this->studio('-10 days');
     $due = $this->studio('-200 days', '-31 days');
     $revived = $this->studio('-200 days', '-31 days');
+    $recently_warned = $this->studio('-200 days', '-10 days');
+    $requested = $this->studio('-100 days');
+    $adminless = $this->studio('-100 days');
+    $nobody = $this->studio('-100 days');
+    $connection = $this->em->getConnection();
+    $connection->executeStatement("UPDATE studio_user SET role = 'member' WHERE studio = ?", [$adminless]);
+    $connection->executeStatement("UPDATE studio_user SET status = 'banned' WHERE studio = ?", [$nobody]);
+    $users = self::getContainer()->get(UserDataFixtures::class);
+    $this->assertInstanceOf(UserDataFixtures::class, $users);
+    $requested_studio = $this->find($requested);
+    $this->assertInstanceOf(Studio::class, $requested_studio);
+    $this->studios->setJoinRequest($users->insertUser(['name' => 'asking'.uniqid()]), $requested_studio, StudioJoinRequest::STATUS_PENDING);
     $projects = self::getContainer()->get(ProjectDataFixtures::class);
     $this->assertInstanceOf(ProjectDataFixtures::class, $projects);
     $project = $projects->insertProject(['name' => 'studio '.uniqid(), 'owned by' => $this->admin->getUsername()]);
@@ -72,11 +85,15 @@ final class CleanEmptyStudiosCommandTest extends KernelTestCase
     $revived_studio = $this->find($revived);
     $this->assertInstanceOf(Studio::class, $revived_studio);
     $this->assertNull($revived_studio->getDeletionWarnedAt());
+    $this->assertNotNull($this->find($recently_warned)?->getDeletionWarnedAt(), 'warned 10 days ago: neither deleted nor reset');
+    $this->assertNull($this->find($requested)?->getDeletionWarnedAt(), 'a pending join request is activity');
+    $this->assertNull($this->find($nobody)?->getDeletionWarnedAt(), 'no one to warn: never warned, so never deleted');
+    $warned_studios = static fn (array $warnings): array => array_map(static fn (StudioDeletionWarningNotification $n): ?string => $n->getStudio()?->getId(), $warnings);
     $warnings = $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]);
-    $this->assertSame([$inactive], array_map(static fn (StudioDeletionWarningNotification $n): ?string => $n->getStudio()?->getId(), $warnings));
+    $this->assertEqualsCanonicalizing([$inactive, $adminless], $warned_studios($warnings), 'without an admin the members are warned');
 
     new CommandTester($command)->execute([]);
-    $this->assertCount(1, $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]), 'warned once');
+    $this->assertCount(2, $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]), 'warned once');
   }
 
   /** A studio whose creation and activities all lie $age back, optionally warned $warned ago. */

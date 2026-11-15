@@ -18,8 +18,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * A studio without projects in which nothing happened for 90 days: its admins get an in-app warning, and 30 days
- * later it is deleted unless a project was added or anything else happened in it. Featured studios stay.
+ * A studio without projects in which nothing happened for 90 days: its admins (or, without one, its members) get an
+ * in-app warning, and 30 days later it is deleted unless a project was added or anything else happened in it.
+ * Featured studios, studios with a pending join request and studios with no one to warn stay.
  */
 #[AsCommand(
   name: 'catrobat:clean:empty-studios',
@@ -70,30 +71,40 @@ class CleanEmptyStudiosCommand extends Command
     }
 
     $now = new \DateTime();
+    $unwarnable = 0;
     foreach ($this->studios($warned) as $studio) {
+      $recipients = $this->recipients($studio);
+      if ([] === $recipients) {
+        ++$unwarnable; // no one to tell: never warned, so never deleted
+        continue;
+      }
+
       $studio->setDeletionWarnedAt($now);
-      foreach ($this->entity_manager->getRepository(StudioUser::class)->findBy(['studio' => $studio, 'role' => StudioUser::ROLE_ADMIN, 'status' => StudioUser::STATUS_ACTIVE]) as $admin) {
-        $this->entity_manager->persist(new StudioDeletionWarningNotification($admin->getUser(), $studio));
+      foreach ($recipients as $member) {
+        $this->entity_manager->persist(new StudioDeletionWarningNotification($member->getUser(), $studio));
       }
     }
 
     $this->entity_manager->flush();
 
-    $this->cleanupLogger->info('cleanup_run', ['rule' => 'empty_studios', 'deleted' => count($deleted), 'warned' => count($warned), 'kept' => count($kept)]);
-    $io->success(sprintf('Warned %d studios, deleted %d, kept %d because something happened.', count($warned), count($deleted), count($kept)));
+    $warned_count = count($warned) - $unwarnable;
+    $this->cleanupLogger->info('cleanup_run', ['rule' => 'empty_studios', 'deleted' => count($deleted), 'warned' => $warned_count, 'kept' => count($kept), 'no_one_to_warn' => $unwarnable]);
+    $io->success(sprintf('Warned %d studios, deleted %d, kept %d because something happened, %d have no one to warn.', $warned_count, count($deleted), count($kept), $unwarnable));
 
     return Command::SUCCESS;
   }
 
   /**
-   * SQL condition on studio s: no projects, not featured, and nothing happened in it since $since (an SQL expression).
+   * SQL condition on studio s: no projects, not featured, no pending join request, and nothing happened in it since
+   * $since (an SQL expression).
    */
   private static function idleSince(string $since): string
   {
     return "(NOT EXISTS (SELECT 1 FROM studio_program sp WHERE sp.studio = s.id)
       AND NOT EXISTS (SELECT 1 FROM featured_studio f WHERE f.studio_id = s.id)
       AND s.created_on < {$since} AND COALESCE(s.updated_on, s.created_on) < {$since}
-      AND NOT EXISTS (SELECT 1 FROM studio_activity a WHERE a.studio = s.id AND a.created_on >= {$since}))";
+      AND NOT EXISTS (SELECT 1 FROM studio_activity a WHERE a.studio = s.id AND a.created_on >= {$since})
+      AND NOT EXISTS (SELECT 1 FROM studio_join_requests j WHERE j.studio = s.id AND j.status = 'pending'))";
   }
 
   /**
@@ -104,6 +115,19 @@ class CleanEmptyStudiosCommand extends Command
   private function studioIds(string $where, array $params = []): array
   {
     return array_map(strval(...), $this->entity_manager->getConnection()->fetchFirstColumn('SELECT s.id FROM studio s WHERE '.$where, $params));
+  }
+
+  /**
+   * The active admins; a studio without one warns all its active members.
+   *
+   * @return list<StudioUser>
+   */
+  private function recipients(Studio $studio): array
+  {
+    $repository = $this->entity_manager->getRepository(StudioUser::class);
+    $admins = $repository->findBy(['studio' => $studio, 'role' => StudioUser::ROLE_ADMIN, 'status' => StudioUser::STATUS_ACTIVE]);
+
+    return [] !== $admins ? $admins : $repository->findBy(['studio' => $studio, 'status' => StudioUser::STATUS_ACTIVE]);
   }
 
   /**
