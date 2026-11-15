@@ -9,6 +9,7 @@ use App\DB\Entity\User\User;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -30,12 +31,11 @@ class CleanScratchPlaceholdersCommand extends Command
   /** An import creates the placeholder before its project: leave the import a day to finish. */
   public const string GRACE_PERIOD = '-1 day';
 
-  private const int BATCH_SIZE = 50;
-
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
     private readonly UserManager $user_manager,
     private readonly LoggerInterface $cleanupLogger,
+    private readonly ManagerRegistry $doctrine,
   ) {
     parent::__construct();
   }
@@ -58,21 +58,29 @@ class CleanScratchPlaceholdersCommand extends Command
       return Command::SUCCESS;
     }
 
+    /** @var list<string> $ids */
+    $ids = array_map(strval(...), $this->placeholders()->select('u.id')->orderBy('u.id')->getQuery()->getSingleColumnResult());
     $deleted = 0;
-    do {
-      /** @var list<User> $users */
-      $users = $this->placeholders()->setMaxResults(self::BATCH_SIZE)->getQuery()->getResult();
-      foreach ($users as $user) {
-        $this->user_manager->delete($user, false);
-        ++$deleted;
+    $failed = 0;
+    foreach ($ids as $id) {
+      try {
+        $user = $this->entity_manager->find(User::class, $id);
+        if ($user instanceof User) {
+          $this->user_manager->delete($user);
+          ++$deleted;
+        }
+      } catch (\Throwable $e) {
+        // A row that still points at the account (a restricting foreign key) must not stop the others.
+        ++$failed;
+        $this->cleanupLogger->warning('cleanup_skipped', ['rule' => 'scratch_placeholders', 'user_id' => $id, 'error' => $e->getMessage()]);
+        $this->doctrine->resetManager(); // a failed flush closes the entity manager
       }
 
-      $this->entity_manager->flush();
       $this->entity_manager->clear();
-    } while (self::BATCH_SIZE === count($users));
+    }
 
-    $this->cleanupLogger->info('cleanup_run', ['rule' => 'scratch_placeholders', 'deleted' => $deleted]);
-    $io->success("Deleted {$deleted} Scratch placeholder accounts.");
+    $this->cleanupLogger->info('cleanup_run', ['rule' => 'scratch_placeholders', 'deleted' => $deleted, 'failed' => $failed]);
+    $io->success("Deleted {$deleted} Scratch placeholder accounts, {$failed} could not be deleted.");
 
     return Command::SUCCESS;
   }
