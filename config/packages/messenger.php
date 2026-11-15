@@ -27,6 +27,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'routing' => [
         Symfony\Component\Mailer\Messenger\SendEmailMessage::class => 'default',
         App\Project\Scratch\ConvertScratchProject::class => 'scratch',
+        App\Project\CodeView\ExportCodeView::class => 'default',
       ],
     ],
   ]);

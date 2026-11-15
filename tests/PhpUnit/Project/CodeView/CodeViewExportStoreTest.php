@@ -11,12 +11,15 @@ use App\Project\CodeView\CodeExportRunner;
 use App\Project\CodeView\CodeExportUnavailableException;
 use App\Project\CodeView\CodeViewExportEventListener;
 use App\Project\CodeView\CodeViewExportStore;
+use App\Project\CodeView\ExportCodeViewHandler;
 use App\Project\Event\ProjectAfterInsertEvent;
+use App\Project\ProjectManager;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
+use Tests\PhpUnit\System\BackgroundJob\RecordingMessageBus;
 
 /**
  * @internal
@@ -28,9 +31,12 @@ class CodeViewExportStoreTest extends TestCase
 
   private Project $project;
 
+  private RecordingMessageBus $bus;
+
   #[\Override]
   protected function setUp(): void
   {
+    $this->bus = new RecordingMessageBus();
     $this->dir = sys_get_temp_dir().'/code-view-store-'.bin2hex(random_bytes(4)).'/';
     (new Filesystem())->mkdir([$this->dir.'project', $this->dir.'store']);
     $this->project = new Project();
@@ -71,12 +77,12 @@ class CodeViewExportStoreTest extends TestCase
     $store->get($this->project);
     $version = 'v2';
     $store->get($this->project);
-    $store->refreshQueued();
+    $this->runQueued($store);
     $store->get($this->project);
-    $store->refreshQueued();
+    $this->runQueued($store);
   }
 
-  public function testAnOutdatedExportIsShownAtOnceAndMadeAgainAfterTheResponse(): void
+  public function testAnOutdatedExportIsShownAtOnceAndMadeAgainOnTheWorker(): void
   {
     $version = 'v1';
     $result = ['scenes' => ['old']];
@@ -94,7 +100,7 @@ class CodeViewExportStoreTest extends TestCase
     $result = ['scenes' => ['new']];
     $this->assertSame(['scenes' => ['old']], $store->get($this->project), 'no waiting for the newer export');
     $this->assertSame(['scenes' => ['old']], $store->get($this->project), 'queued once');
-    $store->refreshQueued();
+    $this->runQueued($store);
     $this->assertSame(['scenes' => ['new']], $store->get($this->project));
   }
 
@@ -153,28 +159,7 @@ class CodeViewExportStoreTest extends TestCase
     }
   }
 
-  public function testAfterTheResponseBusySlotsLeaveTheOutdatedExportForLater(): void
-  {
-    $version = 'v1';
-    $runner = $this->createMock(CodeExportRunner::class);
-    $runner->method('getVersion')->willReturnCallback(static function () use (&$version): string {
-      return $version;
-    });
-    $runner->expects($this->exactly(2))->method('export')->willReturn(['scenes' => []]);
-    $store = $this->store($runner);
-    $store->get($this->project);
-    $version = 'v2';
-
-    $store->get($this->project);
-    $slots = $this->holdLocks(array_map(static fn (int $i): string => '.slot-'.$i, range(0, CodeViewExportStore::SLOTS - 1)));
-    $store->refreshQueued(); // no exception, nothing exported
-    $this->releaseLocks($slots);
-
-    $store->get($this->project);
-    $store->refreshQueued();
-  }
-
-  public function testAnUploadedProjectIsExportedAfterTheResponse(): void
+  public function testAnUploadedProjectIsExportedOnTheWorker(): void
   {
     $runner = $this->createMock(CodeExportRunner::class);
     $runner->method('getVersion')->willReturn('v1');
@@ -185,7 +170,7 @@ class CodeViewExportStoreTest extends TestCase
 
     (new CodeViewExportEventListener($store))->onProjectAfterInsert($event);
     $this->assertFileDoesNotExist($this->dir.'store/a1b2c3.json', 'not during the upload');
-    $store->refreshQueued();
+    $this->runQueued($store);
     $this->assertFileExists($this->dir.'store/a1b2c3.json');
   }
 
@@ -224,7 +209,7 @@ class CodeViewExportStoreTest extends TestCase
     $version = 'v2';
     $result = ['error' => 'broken'];
     $store->get($this->project);
-    $store->refreshQueued();
+    $this->runQueued($store);
     $this->assertSame(['scenes' => ['old']], $store->get($this->project), 'the older export, as the newer one failed');
   }
 
@@ -274,7 +259,7 @@ class CodeViewExportStoreTest extends TestCase
     $version = 'v2';
 
     $store->get($this->project);
-    $store->refreshQueued();
+    $this->runQueued($store);
 
     $this->assertSame(['scenes' => ['old']], $store->get($this->project));
   }
@@ -293,9 +278,22 @@ class CodeViewExportStoreTest extends TestCase
   {
     $repository = $this->createStub(ExtractedFileRepository::class);
     $repository->method('loadProjectExtractedFile')->willReturn(null);
-    $store = new CodeViewExportStore($this->createStub(CodeExportRunner::class), $repository, new NullLogger(), $this->dir.'store');
+    $store = new CodeViewExportStore($this->createStub(CodeExportRunner::class), $repository, new NullLogger(), $this->bus, $this->dir.'store');
 
     $this->assertNull($store->get($this->project));
+  }
+
+  /** What the default worker does with the exports the store queued. */
+  private function runQueued(CodeViewExportStore $store): void
+  {
+    $project_manager = $this->createStub(ProjectManager::class);
+    $project_manager->method('find')->willReturn($this->project);
+    $handler = new ExportCodeViewHandler($project_manager, $store, new NullLogger());
+    foreach ($this->bus->dispatched as $message) {
+      $handler($message);
+    }
+
+    $this->bus->dispatched = [];
   }
 
   private function store(CodeExportRunner $runner): CodeViewExportStore
@@ -303,7 +301,7 @@ class CodeViewExportStoreTest extends TestCase
     $repository = $this->createStub(ExtractedFileRepository::class);
     $repository->method('loadProjectExtractedFile')->willReturnCallback(fn (): ExtractedCatrobatFile => new ExtractedCatrobatFile($this->dir.'project/', '', 'a1b2c3'));
 
-    return new CodeViewExportStore($runner, $repository, new NullLogger(), $this->dir.'store');
+    return new CodeViewExportStore($runner, $repository, new NullLogger(), $this->bus, $this->dir.'store');
   }
 
   /**
