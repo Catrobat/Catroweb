@@ -6,6 +6,6 @@
             title="Hides the content and warns its owner, no ban"><i class="fa fa-eye-slash"></i> Hide + warn </button>
     <button type="submit" name="warn" class="btn btn-sm btn-info"
             formaction="{{ admin.generateObjectUrl('warnReport', object) }}"
-            title="Keeps the content visible and warns its owner"><i class="fa fa-exclamation-triangle"></i> Warn </button>
+            title="Warns the owner without changing visibility"><i class="fa fa-exclamation-triangle"></i> Warn </button>
   </form>
 {% endif %}

@@ -90,7 +90,7 @@ Feature: Admin moderation queue guards
     When I fill in "message" with "Minor warning"
     And I click on the button named "Warn"
     And I wait for the page to be loaded
-    Then I should see "content kept visible, owner warned"
+    Then I should see "visibility unchanged, owner warned"
     And moderation report "00000000-0000-0000-0000-000000000405" should have state "accepted"
     And the project "1" should be visible
     And the user "Owner" profile should be visible

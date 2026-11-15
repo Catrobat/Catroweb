@@ -65,7 +65,7 @@ class ModerationQueueController extends CRUDController
     $label = match ($action) {
       ReportProcessor::ACTION_ACCEPT => 'accepted - content hidden, owner banned',
       ReportProcessor::ACTION_HIDE_WARN => 'accepted - content hidden, owner warned',
-      ReportProcessor::ACTION_WARN => 'accepted - content kept visible, owner warned',
+      ReportProcessor::ACTION_WARN => 'accepted - visibility unchanged, owner warned',
       default => 'rejected - content restored',
     };
     $this->addFlash('sonata_flash_success', 'Report #'.$report->getId().' '.$label);
