@@ -38,7 +38,6 @@ final class CronTasks
       $task('Clean up background jobs', 'catrobat:background-jobs:clean', '1 hour', self::HOUR),
       $task('Garbage collect orphaned assets', 'catrobat:gc-assets', '1 day', self::HOUR),
       $task('Delete old notifications', 'catrobat:clean:notifications', '1 day', self::HOUR),
-      $task('Delete expired refresh tokens and deleted comments', 'catrobat:clean:stale-records', '1 day', self::HOUR),
       $task('Delete expired refresh tokens', 'catrobat:clean:refresh-tokens', '1 day', self::HOUR),
 
       // Slow lane: whole-table or whole-disk sweeps
