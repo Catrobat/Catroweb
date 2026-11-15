@@ -15,6 +15,11 @@
   not fall back *between* sets, so the detail set carries every width needed
   for typical hero layouts.
 
+  `mobile_media` (e.g. '(max-width: 480px)') adds a <source media> per format
+  that pins the detail@1x file on matching viewports, whatever the DPR. Phones
+  at DPR 2.75–3 would otherwise always take detail@2x; 1x is plenty sharp at
+  phone width and roughly half the bytes (used by the start-page LCP banner).
+
   Passing `null` for `variants` renders the fallback <img> only, so the macro
   is safe to use even before the avatar/screenshot data migration has run.
 #}
@@ -25,6 +30,7 @@
   {% set loading = options.loading|default('lazy') %}
   {% set fetchpriority = options.fetchpriority|default(null) %}
   {% set fallback = options.fallback|default(null) %}
+  {% set mobile_media = options.mobile_media|default(null) %}
   {% set width = options.width|default(variants and variants.width ? variants.width : null) %}
   {% set height = options.height|default(variants and variants.height ? variants.height : null) %}
   {# Generated OpenAPI model uses camelCase getters (getWebp1x, getAvif2x, …); accessors below match that. #}
@@ -42,6 +48,14 @@
     {% endif %}
   {% endif %}
   <picture>
+    {% if variants and mobile_media and variants.detail %}
+      {% for fmt_type, set_suffix in {'image/avif': 'avif', 'image/webp': 'webp'} %}
+        {% set u1 = attribute(variants.detail, set_suffix ~ '1x') %}
+        {% if u1 %}
+          <source type="{{ fmt_type }}" media="{{ mobile_media }}" srcset="{{ u1 }}">
+        {% endif %}
+      {% endfor %}
+    {% endif %}
     {% if variants %}
       {% for fmt_type, set_suffix in {'image/avif': 'avif', 'image/webp': 'webp'} %}
         {% set set = variants.detail %}

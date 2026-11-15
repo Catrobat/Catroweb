@@ -2,6 +2,10 @@ import { Carousel } from 'bootstrap'
 import AcceptLanguage from '../Api/AcceptLanguage'
 import { createPictureElement } from '../Layout/ImageVariants'
 
+// Keep in sync with banner_mobile_media in templates/Index/IndexPage.html.twig,
+// so slide 1 reuses the preloaded SSR image instead of downloading another size.
+const BANNER_MOBILE_MEDIA = '(max-width: 480px)'
+
 export class FeaturedBanner {
   constructor(containerId) {
     this.container = document.getElementById(containerId)
@@ -203,7 +207,9 @@ export class FeaturedBanner {
       attrs.fetchpriority = 'high'
     }
     const fallback = slide.youtubeThumbnail || '/images/default/screenshot-detail@2x.avif'
-    const el = createPictureElement(slide.imageVariants, 'detail', fallback, attrs)
+    const el = createPictureElement(slide.imageVariants, 'detail', fallback, attrs, {
+      mobileMedia: BANNER_MOBILE_MEDIA,
+    })
     if (index === 0) {
       const img = el.tagName === 'IMG' ? el : el.querySelector('img')
       if (img) {
