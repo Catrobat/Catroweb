@@ -108,7 +108,19 @@ class ScanContentImagesHandlerTest extends TestCase
     $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
   }
 
-  private function handler(ContentSafetyScanner $scanner, AutoModerationService $auto_moderation): ScanContentImagesHandler
+  public function testDoesNotHideImagesBelowTheContentThreshold(): void
+  {
+    // Game art scores high: below the content threshold it is not hidden, even if the avatar threshold would reject it.
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturn(new ContentSafetyResult(safe: false, nsfwScore: 0.96, label: 'nsfw'));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->never())->method('flagForReview');
+
+    $this->handler($scanner, $auto_moderation, 0.97)(new ScanContentImages('project', 'p1'));
+  }
+
+  private function handler(ContentSafetyScanner $scanner, AutoModerationService $auto_moderation, float $threshold = 0.9): ScanContentImagesHandler
   {
     $entity_manager = $this->createStub(EntityManagerInterface::class);
     $entity_manager->method('find')->willReturn(new Project());
@@ -128,6 +140,7 @@ class ScanContentImagesHandlerTest extends TestCase
       $scanner,
       $auto_moderation,
       new NullLogger(),
+      $threshold,
     );
   }
 }
