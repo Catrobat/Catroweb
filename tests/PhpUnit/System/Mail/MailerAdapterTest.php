@@ -123,6 +123,29 @@ final class MailerAdapterTest extends TestCase
     new SendMailHandler($this->adapter($mailer, $budget, new RecordingMessageBus()))($message);
   }
 
+  public function testSendingRightAwayDeliversWithoutTheQueue(): void
+  {
+    $mailer = $this->createMock(MailerInterface::class);
+    $mailer->expects($this->once())->method('send');
+    $budget = $this->createStub(EmailBudgetManager::class);
+    $budget->method('canSend')->willReturn(true);
+    $budget->method('getProvidersWithRoom')->willReturn(['main']);
+    $bus = new RecordingMessageBus();
+
+    $this->assertTrue($this->adapter($mailer, $budget, $bus)->sendNow('someone@example.org', 'Inactive', 'mail.html.twig', [], 'management'));
+    $this->assertSame([], $bus->dispatched);
+  }
+
+  public function testSendingRightAwayRespectsTheBudget(): void
+  {
+    $mailer = $this->createMock(MailerInterface::class);
+    $mailer->expects($this->never())->method('send');
+    $budget = $this->createStub(EmailBudgetManager::class);
+    $budget->method('canSend')->willReturn(false);
+
+    $this->assertFalse($this->adapter($mailer, $budget)->sendNow('someone@example.org', 'Inactive', 'mail.html.twig', [], 'management'));
+  }
+
   /** Sends like the request, then delivers like the worker; false if nothing was delivered. */
   private function sendNow(MailerInterface $mailer, EmailBudgetManager $budget, string $to, string $type = 'admin'): bool
   {

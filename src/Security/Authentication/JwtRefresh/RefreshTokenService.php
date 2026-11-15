@@ -7,6 +7,7 @@ namespace App\Security\Authentication\JwtRefresh;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\CookieService;
 use App\User\UserManager;
+use App\Utils\TimeUtils;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
@@ -43,7 +44,9 @@ class RefreshTokenService
     }
 
     $token = $this->refresh_token_generator->createForUserWithTtl($user, $this->refreshTokenLifetime);
-    $this->refresh_manager->save($token);
+    // Web and OAuth logins end here, not in the JWT success event: without this their last_login stays empty.
+    $user->setLastLogin(TimeUtils::getDateTime());
+    $this->refresh_manager->save($token); // flushes the user too
 
     return $token;
   }

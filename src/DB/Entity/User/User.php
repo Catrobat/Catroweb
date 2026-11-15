@@ -267,6 +267,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   #[ORM\Column(name: 'created_at', type: 'datetime')]
   protected \DateTimeInterface $createdAt;
 
+  /** Set when the account was mailed that it will be deleted for inactivity (catrobat:clean:inactive-users). */
+  #[ORM\Column(name: 'inactivity_warned_at', type: 'datetime', nullable: true)]
+  protected ?\DateTimeInterface $inactivity_warned_at = null;
+
   #[ORM\Column(name: 'updated_at', type: 'datetime')]
   protected \DateTimeInterface $updatedAt;
 
@@ -861,6 +865,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     // when you only change the password, since plainPassword
     // is not persisted on the entity, doctrine does not watch for it.
     $this->updatedAt = new \DateTime();
+  }
+
+  public function getInactivityWarnedAt(): ?\DateTimeInterface
+  {
+    return $this->inactivity_warned_at;
+  }
+
+  public function setInactivityWarnedAt(?\DateTimeInterface $inactivity_warned_at): void
+  {
+    $this->inactivity_warned_at = $inactivity_warned_at;
   }
 
   public function setLastLogin(?\DateTimeInterface $time = null): void

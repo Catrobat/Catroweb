@@ -10,6 +10,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     [
       'router' => [
         'strict_requirements' => null,
+        // Links in mails rendered by console commands (no request to take the host from).
+        'default_uri' => 'https://share.catrobat.org/',
       ],
     ]
   );
