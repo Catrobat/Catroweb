@@ -2075,12 +2075,14 @@ class ProjectsController extends Controller
     $securityBearerAuth = $request->headers->get('authorization');
 
     // Read out all input parameter values into variables
+    $prefer = $request->headers->get('Prefer');
 
     // Use the default value if no value was provided
 
     // Deserialize the input values that needs it
     try {
       $id = $this->deserialize($id, 'string', 'string');
+      $prefer = $this->deserialize($prefer, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -2090,6 +2092,12 @@ class ProjectsController extends Controller
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($prefer, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -2104,10 +2112,11 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsUploadsIdCompletePost($id, $responseCode, $responseHeaders);
+      $result = $handler->projectsUploadsIdCompletePost($id, $prefer, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         201 => 'Project successfully uploaded',
+        202 => 'Sent &#x60;Prefer: respond-async&#x60;: checking and creating the project is queued. Poll the job (with the same login) until it is done (then load &#x60;project_id&#x60;) or failed (&#x60;error_status&#x60; 422: rejected, &#x60;error_message&#x60; says why; 500: complete again later). Calling this again while it is queued returns the same job.',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         404 => 'Not found',
         409 => 'The upload is still being completed by an earlier call; try again in a few seconds',
