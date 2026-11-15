@@ -759,7 +759,7 @@ final class ReportProcessorTest extends TestCase
   }
 
   #[Group('unit')]
-  public function testWarnKeepsContentVisibleAndWarnsOwner(): void
+  public function testWarnLeavesVisibilityAloneAndWarnsOwner(): void
   {
     [$report, $related] = $this->createPendingReports('comment', '42');
     $owner = new User();
@@ -767,7 +767,7 @@ final class ReportProcessorTest extends TestCase
     $visibility = $this->createMock(ContentVisibilityManager::class);
     $visibility->method('getContentOwnerId')->willReturn('owner-id');
     $visibility->expects($this->never())->method('hideContent');
-    $visibility->expects($this->once())->method('showContent')->with(ContentType::Comment, '42');
+    $visibility->expects($this->never())->method('showContent');
 
     $report_repo = $this->createStub(ContentReportRepository::class);
     $report_repo->method('findReportsForContent')->willReturn([$report, $related]);

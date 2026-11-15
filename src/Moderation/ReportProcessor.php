@@ -153,7 +153,7 @@ class ReportProcessor
         $this->warnContentOwner($content_type, $content_id, $message);
         break;
       case self::ACTION_WARN:
-        $this->visibility_manager->showContent($content_type, $content_id);
+        // Visibility is left as is: un-hiding here could lift an earlier ban or accepted report.
         $this->warnContentOwner($content_type, $content_id, $message);
         break;
       default:

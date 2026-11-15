@@ -2,12 +2,12 @@
 
 A moderator resolves a content report with one of four actions. All of them go through `App\Moderation\ReportProcessor::resolveReport()`, which also resolves every other pending report on the same content, notifies the reporters, invalidates their trust scores and writes a `content_moderation_action` audit row.
 
-| Action      | Admin queue button | Content                                                                         | Owner                                        | Reports  | Audit action      |
-| ----------- | ------------------ | ------------------------------------------------------------------------------- | -------------------------------------------- | -------- | ----------------- |
-| `accept`    | Hide + ban owner   | hidden                                                                          | banned (profile hidden, all content hidden)  | accepted | `admin_confirmed` |
-| `hide_warn` | Hide + warn        | hidden; a reported **user** is not banned, their `about` and `currently_working_on` texts are cleared | warning notification, not banned | accepted | `admin_warned`    |
-| `warn`      | Warn               | stays (or becomes) visible                                                      | warning notification, not banned             | accepted | `admin_warned`    |
-| `reject`    | Reject             | restored unless other active reports exist                                      | untouched                                    | rejected | `admin_reversed`  |
+| Action      | Admin queue button | Content                                                                                               | Owner                                       | Reports  | Audit action      |
+| ----------- | ------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------- | -------- | ----------------- |
+| `accept`    | Hide + ban owner   | hidden                                                                                                | banned (profile hidden, all content hidden) | accepted | `admin_confirmed` |
+| `hide_warn` | Hide + warn        | hidden; a reported **user** is not banned, their `about` and `currently_working_on` texts are cleared | warning notification, not banned            | accepted | `admin_warned`    |
+| `warn`      | Warn               | unchanged (a hidden item or banned user stays hidden)                                                 | warning notification, not banned            | accepted | `admin_warned`    |
+| `reject`    | Reject             | restored unless other active reports exist                                                            | untouched                                   | rejected | `admin_reversed`  |
 
 Use `hide_warn` for a first offense (for example suggestive content by a child) and `accept` for clear abuse.
 
