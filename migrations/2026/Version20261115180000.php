@@ -35,7 +35,8 @@ final class Version20261115180000 extends AbstractMigration
       $this->addSql("INSERT INTO content_moderation_action (content_type, content_id, action, note, created_at)
         SELECT DISTINCT 'user', x.user_id, 'admin_banned', 'Backfill: owner of an accepted {$type}', NOW()
         FROM content_moderation_action a JOIN {$table} x ON x.id = a.content_id JOIN fos_user u ON u.id = x.user_id
-        WHERE a.content_type = '{$type}' AND a.action = 'admin_confirmed' AND u.profile_hidden = 1");
+        WHERE a.content_type = '{$type}' AND a.action = 'admin_confirmed' AND u.profile_hidden = 1
+          AND NOT EXISTS (SELECT 1 FROM content_moderation_action r WHERE r.content_type = 'user' AND r.content_id = x.user_id AND r.action IN ('appeal_approved', 'admin_reversed'))");
     }
   }
 

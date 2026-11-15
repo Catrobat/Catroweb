@@ -388,7 +388,12 @@ class StudioManager
       $cover = $studio->getCoverAssetPath();
       $this->entity_manager->remove($studio);
       $this->entity_manager->flush();
-      $this->deleteCoverImage($cover); // after the row: a failed flush must not leave a studio without its cover
+      try {
+        $this->deleteCoverImage($cover); // after the row: a failed flush must not leave a studio without its cover
+      } catch (\Throwable $e) {
+        // The studio is gone: an orphaned cover file must not turn the deletion into an error response.
+        $this->logger->warning('Could not delete the cover {key} of deleted studio: {error}', ['key' => $cover, 'error' => $e->getMessage()]);
+      }
     }
   }
 
