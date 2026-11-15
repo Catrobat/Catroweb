@@ -9,6 +9,8 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\System\BackgroundJob;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\System\BackgroundJobRepository;
+use App\DB\Enum\ContentType;
+use App\Moderation\AutoModerationService;
 use App\Moderation\TextSanitizer;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
@@ -35,7 +37,8 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly TextSanitizer $textSanitizer,
     private readonly BackgroundJobRepository $job_repository,
-    private readonly MessageBusInterface $message_bus)
+    private readonly MessageBusInterface $message_bus,
+    private readonly AutoModerationService $auto_moderation)
   {
   }
 
@@ -56,6 +59,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
   public function updateProject(Project $project, UpdateProjectRequest $request): bool|int
   {
     $project_touched = false;
+    $text_touched = false;
     $extracted_file = null;
     $extracted_file_properties_before_update = [];
 
@@ -65,6 +69,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
       $credits = $this->textSanitizer->sanitize($request->getCredits());
 
       $project_touched = true;
+      $text_touched = true;
 
       if (!is_null($name)) {
         $project->setName($name);
@@ -156,6 +161,15 @@ class ProjectsApiProcessor extends AbstractApiProcessor
 
     if ($project_touched) {
       $this->project_manager->save($project);
+    }
+
+    $project_id = (string) $project->getId();
+    if ($text_touched) {
+      $this->auto_moderation->flagAgeSignal(ContentType::Project, $project_id, $project->getName(), $project->getDescription(), $project->getCredits());
+    }
+
+    if (!is_null($request->getScreenshot())) {
+      $this->auto_moderation->queueImageScan(ContentType::Project, $project_id);
     }
 
     return true;

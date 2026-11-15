@@ -12,6 +12,8 @@ use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
+use App\DB\Enum\ContentType;
+use App\Moderation\AutoModerationService;
 use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
 use App\Studio\StudioManager;
@@ -24,12 +26,13 @@ class StudioApiProcessor extends AbstractApiProcessor
     private readonly StudioManager $studio_manager,
     private readonly ProjectManager $project_manager,
     private readonly TextSanitizer $textSanitizer,
+    private readonly AutoModerationService $auto_moderation,
   ) {
   }
 
   public function create(User $user, string $name, string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file): Studio
   {
-    return $this->studio_manager->createStudio(
+    $studio = $this->studio_manager->createStudio(
       $user,
       $this->textSanitizer->sanitize($name) ?? '',
       $this->textSanitizer->sanitize($description) ?? '',
@@ -38,11 +41,14 @@ class StudioApiProcessor extends AbstractApiProcessor
       $enable_comments,
       $image_file
     );
+    $this->moderate($studio, true, null !== $image_file);
+
+    return $studio;
   }
 
   public function update(Studio $studio, ?string $name, ?string $description, ?bool $is_public, ?bool $enable_comments, ?UploadedFile $image_file): Studio
   {
-    return $this->studio_manager->updateStudio(
+    $studio = $this->studio_manager->updateStudio(
       $studio,
       $this->textSanitizer->sanitize($name),
       $this->textSanitizer->sanitize($description),
@@ -50,6 +56,22 @@ class StudioApiProcessor extends AbstractApiProcessor
       $enable_comments,
       $image_file
     );
+    $this->moderate($studio, null !== $name || null !== $description, null !== $image_file);
+
+    return $studio;
+  }
+
+  /** Adults-only texts hide the studio for review; a new cover is scanned on the default worker. */
+  private function moderate(Studio $studio, bool $text_changed, bool $cover_changed): void
+  {
+    $id = (string) $studio->getId();
+    if ($text_changed) {
+      $this->auto_moderation->flagAgeSignal(ContentType::Studio, $id, $studio->getName(), $studio->getDescription());
+    }
+
+    if ($cover_changed) {
+      $this->auto_moderation->queueImageScan(ContentType::Studio, $id);
+    }
   }
 
   public function deleteStudio(Studio $studio, User $user): void

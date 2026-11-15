@@ -32,6 +32,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         App\Project\Upload\CompleteProjectUpload::class => 'uploads',
         App\Project\CodeView\ExportCodeView::class => 'default',
         App\User\Notification\NotifyFollowersOfNewProject::class => 'default',
+        App\Moderation\ScanContentImages::class => 'default',
       ],
     ],
   ]);

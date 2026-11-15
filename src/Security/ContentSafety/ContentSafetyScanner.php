@@ -6,6 +6,7 @@ namespace App\Security\ContentSafety;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ContentSafetyScanner
@@ -20,6 +21,11 @@ class ContentSafetyScanner
     #[Autowire('%env(float:CONTENT_SAFETY_THRESHOLD)%')]
     private readonly float $threshold,
   ) {
+  }
+
+  public function isEnabled(): bool
+  {
+    return $this->enabled;
   }
 
   public function scanImageBlob(string $imageBlob): ContentSafetyResult
@@ -45,6 +51,10 @@ class ContentSafetyScanner
         nsfwScore: $nsfwScore,
         label: $data['label'] ?? 'unknown',
       );
+    } catch (ClientExceptionInterface $e) {
+      $this->logger->info('Content safety scanner refused the image: '.$e->getMessage());
+
+      return ContentSafetyResult::invalid();
     } catch (\Throwable $e) {
       $this->logger->warning('Content safety scanner unavailable: '.$e->getMessage());
 

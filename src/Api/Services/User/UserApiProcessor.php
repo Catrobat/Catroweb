@@ -6,6 +6,7 @@ namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
+use App\Moderation\AutoModerationService;
 use App\Moderation\TextSanitizer;
 use App\User\UserAvatarService;
 use App\User\UserManager;
@@ -18,6 +19,7 @@ class UserApiProcessor extends AbstractApiProcessor
     private readonly UserManager $user_manager,
     private readonly TextSanitizer $textSanitizer,
     private readonly UserAvatarService $user_avatar_service,
+    private readonly AutoModerationService $auto_moderation,
   ) {
   }
 
@@ -67,6 +69,7 @@ class UserApiProcessor extends AbstractApiProcessor
     }
 
     $this->user_manager->updateUser($user);
+    $this->auto_moderation->flagUserProfile($user);
 
     return $user;
   }
@@ -111,5 +114,8 @@ class UserApiProcessor extends AbstractApiProcessor
     }
 
     $this->user_manager->updateUser($user);
+    if (null !== $request->getUsername() || null !== $request->getAbout() || null !== $request->getCurrentlyWorkingOn()) {
+      $this->auto_moderation->flagUserProfile($user);
+    }
   }
 }

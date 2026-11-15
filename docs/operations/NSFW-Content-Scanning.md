@@ -1,8 +1,11 @@
 # NSFW Content Scanning
 
-Uploaded profile pictures are scanned by a self-hosted model ([Falconsai/nsfw_image_detection](https://huggingface.co/Falconsai/nsfw_image_detection)) in the `docker/nsfw-scanner/` Flask service. `ContentSafetyScanner` posts the image bytes to `/scan`; a score at or above `CONTENT_SAFETY_THRESHOLD` (default 0.7) rejects the upload with 422. Today the only caller is `UserRequestValidator` (avatars); project images are **not** scanned yet.
+Images are scanned by a self-hosted model ([Falconsai/nsfw_image_detection](https://huggingface.co/Falconsai/nsfw_image_detection)) in the `docker/nsfw-scanner/` Flask service. `ContentSafetyScanner` posts the image bytes to `/scan`; a score at or above `CONTENT_SAFETY_THRESHOLD` (default 0.7) counts as unsafe.
 
-**Fail-open by design:** if the scanner is down or times out (5 s), the upload goes through and `Content safety scanner unavailable` is logged, so the scanner can't take down uploads.
+- Profile pictures: `UserRequestValidator` rejects the upload with 422.
+- Project screenshots and look images, studio covers: scanned on the `default` worker after the upload; an unsafe image hides the content for admin review. See [Content moderation](./Content-Moderation.md).
+
+**Fail-open by design:** if the scanner is down or times out (5 s), the upload goes through, nothing is hidden and `Content safety scanner unavailable` is logged, so the scanner can't take down uploads.
 
 ## Configuration
 
