@@ -64,3 +64,37 @@ Feature: Import a public Scratch project as a Pocket Code project
     And there should be "1" users in the database
     And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 1 by "scratchcat"
     And the Scratch project 70058681 should be converted to "Gamma Ray Racer (70058681)" version 1 by "scratchcat"
+
+  Scenario: An import that asks to be asynchronous is queued and its job polled until it is done
+    Given I have a request header "HTTP_PREFER" with value "respond-async"
+    When I request "POST" "/api/projects/scratch/70058680"
+    Then the response code should be "202"
+    And the response Header should contain the key "Content-Location"
+    And the JSON response field "type" should be '"scratch_import"'
+    # Tests run every job inside the request: the job is already finished when it is polled.
+    When I request the background job from the response
+    Then the response code should be "200"
+    And the JSON response field "state" should be '"done"'
+    And there should be "1" projects in the database
+    And the Scratch project 70058680 should be converted to "Gamma Ray Racer" version 1 by "scratchcat"
+
+  Scenario: An asynchronous import of a project that cannot be converted fails its job with the reason
+    Given I have a request header "HTTP_PREFER" with value "respond-async"
+    When I request "POST" "/api/projects/scratch/70058682"
+    Then the response code should be "202"
+    When I request the background job from the response
+    Then the JSON response field "state" should be '"failed"'
+    And the JSON response field "error_status" should be "422"
+    And the client response should contain "made with an older Scratch version"
+    And there should be "0" projects in the database
+
+  Scenario: An asynchronous import of a current copy answers with the project at once
+    When I request "POST" "/api/projects/scratch/70058680"
+    And I have a request header "HTTP_PREFER" with value "respond-async"
+    And I request "POST" "/api/projects/scratch/70058680"
+    Then the response code should be "200"
+    And the client response should contain "Gamma Ray Racer"
+
+  Scenario: An unknown background job is not found
+    When I request "GET" "/api/jobs/00000000-0000-4000-8000-000000000000"
+    Then the response code should be "404"

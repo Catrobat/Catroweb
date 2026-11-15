@@ -55,6 +55,7 @@ use App\Api\AchievementsApi;
 use App\Api\AuthenticationApi;
 use App\Api\CommentsApi;
 use App\Api\FollowersApi;
+use App\Api\JobsApi;
 use App\Api\MediaLibraryApi;
 use App\Api\ModerationApi;
 use App\Api\NotificationsApi;
@@ -230,6 +231,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(StudiosApi::class)->tag('open_api_server.api', ['api' => 'studios']);
   $services->set(ModerationApi::class)->tag('open_api_server.api', ['api' => 'moderation']);
   $services->set(TranslationApi::class)->tag('open_api_server.api', ['api' => 'translation']);
+  $services->set(JobsApi::class)->tag('open_api_server.api', ['api' => 'jobs']);
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 
@@ -469,7 +471,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'sonata.admin',
       [
         'manager_type' => 'orm',
-        'label' => 'Cron Jobs',
+        'label' => 'Background tasks',
         'icon' => '<i class="fa fa-hourglass"></i>',
         'code' => null,
         'model_class' => CronJob::class,

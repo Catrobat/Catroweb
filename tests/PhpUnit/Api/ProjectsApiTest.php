@@ -16,6 +16,7 @@ use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\System\BackgroundJobRepository;
 use App\Moderation\TextSanitizer;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -47,6 +48,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
+use Tests\PhpUnit\System\BackgroundJob\RecordingMessageBus;
 
 /**
  * @internal
@@ -159,7 +161,7 @@ final class ProjectsApiTest extends KernelTestCase
   {
     $response_code = 0;
     $response_headers = [];
-    $api->projectsUploadsIdCompletePost($id, $response_code, $response_headers);
+    $api->projectsUploadsIdCompletePost($id, null, $response_code, $response_headers);
 
     return $response_code;
   }
@@ -297,7 +299,9 @@ final class ProjectsApiTest extends KernelTestCase
       $extracted_file_repository,
       $this->createStub(ProjectFileRepository::class),
       $this->createStub(ScreenshotRepository::class),
-      $this->createPassthroughTextSanitizer()
+      $this->createPassthroughTextSanitizer(),
+      $this->createStub(BackgroundJobRepository::class),
+      new RecordingMessageBus(),
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 
@@ -462,7 +466,9 @@ final class ProjectsApiTest extends KernelTestCase
       $extracted_file_repository,
       $this->createStub(ProjectFileRepository::class),
       $this->createStub(ScreenshotRepository::class),
-      $this->createPassthroughTextSanitizer()
+      $this->createPassthroughTextSanitizer(),
+      $this->createStub(BackgroundJobRepository::class),
+      new RecordingMessageBus(),
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 

@@ -2,6 +2,8 @@
 
 Catroweb sends only transactional mail (verification, password reset, consent, admin, account management). To stay free, it chains several providers' free tiers: each mail goes to the first provider that still has room today, and a provider that fails hands the mail to the next one.
 
+The request renders the mail and queues it; the `default` background worker delivers it (`SendMailHandler`, see [Background-Jobs.md](./Background-Jobs.md)). When every provider fails, Messenger retries later and finally keeps the mail in the failed queue, where an admin can retry it.
+
 ## How It Works
 
 - `MAILER_PROVIDERS` lists the providers in the order they are tried, each with its daily limit: `main:300,mailjet:190,...`.

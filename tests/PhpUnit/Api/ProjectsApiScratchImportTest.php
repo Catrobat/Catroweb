@@ -10,12 +10,14 @@ use App\Api\Services\Projects\ProjectsApiLoader;
 use App\Api\Services\Projects\ProjectsResponseManager;
 use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\System\BackgroundJob;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\Remix\RemixManager;
 use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\ScratchManager;
 use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
+use OpenAPI\Server\Model\BackgroundJobResponse;
 use OpenAPI\Server\Model\ErrorResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -144,19 +146,47 @@ final class ProjectsApiScratchImportTest extends TestCase
     $this->assertSame(429, $this->import($api)[0]);
   }
 
+  public function testAsyncImportQueuesAJobAndPointsToIt(): void
+  {
+    $api = $this->createApi(fn (): never => $this->fail('An async import must not convert in the request'));
+
+    [$code, $headers, $result] = $this->import($api, 'respond-async');
+
+    $this->assertSame(202, $code);
+    $this->assertInstanceOf(BackgroundJobResponse::class, $result);
+    $this->assertSame('queued', $result->getState());
+    $this->assertSame('/api/jobs/'.$result->getId(), $headers['Content-Location']);
+    $this->assertArrayNotHasKey('Location', $headers, 'FastCGI turns a 2xx with Location into a 302');
+  }
+
+  public function testAsyncImportOfACurrentCopyAnswersAtOnce(): void
+  {
+    $api = $this->createApi(fn (): never => $this->fail('A current copy is not converted'), current_copy: new Project());
+
+    $this->assertSame(200, $this->import($api, 'wait=10, respond-async')[0]);
+  }
+
+  public function testAsyncImportsAreRateLimitedWhenQueued(): void
+  {
+    $api = $this->createApi(fn (): never => $this->fail('unused'), convert_limit: 1);
+
+    $this->assertSame(202, $this->import($api, 'respond-async')[0]);
+    $this->assertSame(429, $this->import($api, 'respond-async')[0]);
+  }
+
   /**
    * @return array{int, array<string, string>, mixed}
    */
-  private function import(ProjectsApi $api): array
+  private function import(ProjectsApi $api, ?string $prefer = null): array
   {
     $code = 0;
     $headers = [];
-    $result = $api->projectsScratchScratchIdPost(70058680, $code, $headers);
+    $result = $api->projectsScratchScratchIdPost(70058680, $prefer, $code, $headers);
 
     return [$code, $headers, $result];
   }
 
-  private function createApi(\Closure $import, int $open_limit = 100, int $convert_limit = 100, RequestStack $requests = new RequestStack()): ProjectsApi
+  private function createApi(\Closure $import, int $open_limit = 100, int $convert_limit = 100, RequestStack $requests = new RequestStack(), ?Project $current_copy = null): ProjectsApi
   {
     $loader = $this->createStub(ProjectsApiLoader::class);
     $loader->method('getClientIp')->willReturn('1.2.3.4');
@@ -168,6 +198,12 @@ final class ProjectsApiScratchImportTest extends TestCase
     $facade->method('getResponseManager')->willReturn($response_manager);
     $scratch_manager = $this->createStub(ScratchManager::class);
     $scratch_manager->method('importProject')->willReturnCallback($import);
+    $scratch_manager->method('currentCopy')->willReturn($current_copy);
+    $scratch_manager->method('queueImport')->willReturnCallback(static function (int $id, callable $before_conversion): BackgroundJob {
+      $before_conversion();
+
+      return new BackgroundJob(ScratchManager::JOB_TYPE, (string) $id);
+    });
     $limiter = static fn (string $id, int $limit): RateLimiterFactory => new RateLimiterFactory(['id' => $id, 'policy' => 'sliding_window', 'limit' => $limit, 'interval' => '1 minute'], new InMemoryStorage());
     $unlimited = new RateLimiterFactory(['id' => 'unlimited', 'policy' => 'no_limit'], new InMemoryStorage());
 

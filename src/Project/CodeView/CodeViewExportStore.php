@@ -8,9 +8,8 @@ use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * Keeps each project's code export (CodeExportRunner) in a file and makes it when it is missing, when the project's
@@ -22,19 +21,16 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * (kernel.terminate). Only a project without a stored export for its code.xml waits for Node on its first view. At
  * most SLOTS exports run at once on a server; a view that finds none free is told to try again, it does not wait.
  */
-#[AsEventListener(event: KernelEvents::TERMINATE, method: 'refreshQueued')]
 class CodeViewExportStore
 {
   /** Node exports at once (each up to CodeExportRunner's 1 GB) next to PHP-FPM's workers. */
   public const int SLOTS = 2;
 
-  /** @var array<string, Project> to export again after the response */
-  private array $queue = [];
-
   public function __construct(
     private readonly CodeExportRunner $runner,
     private readonly ExtractedFileRepository $extracted_file_repository,
     private readonly LoggerInterface $logger,
+    private readonly MessageBusInterface $message_bus,
     #[Autowire('%catrobat.code_view.dir%')]
     private readonly string $store_dir,
   ) {
@@ -42,7 +38,7 @@ class CodeViewExportStore
 
   /**
    * The project's export for a view: its code (see CodeExport in the player) or ['error' => why]; null without
-   * code.xml. An outdated export is returned as it is and made again after the response.
+   * code.xml. An outdated export is returned as it is and made again on a worker.
    *
    * @return array<string, mixed>|null
    *
@@ -82,28 +78,10 @@ class CodeViewExportStore
     return null === $xml ? null : $this->make($project, $xml, $this->key($xml), $wait);
   }
 
-  /** Exports the project after the response (an upload, an outdated export). */
+  /** Exports the project on the default worker (an upload, an outdated export), not in a PHP-FPM process. */
   public function queue(Project $project): void
   {
-    $this->queue[(string) $project->getId()] = $project;
-  }
-
-  /**
-   * kernel.terminate: makes the queued exports. Busy slots skip them; the next view queues them again.
-   */
-  public function refreshQueued(): void
-  {
-    $queue = $this->queue;
-    $this->queue = [];
-    foreach ($queue as $id => $project) {
-      try {
-        $this->refresh($project, false);
-      } catch (CodeExportUnavailableException $e) {
-        $this->logger->info('Code view of project '.$id.' not refreshed: '.$e->getMessage());
-      } catch (\Throwable $e) {
-        $this->logger->error('Code view export after the response failed: '.$e->getMessage(), ['exception' => $e]);
-      }
-    }
+    $this->message_bus->dispatch(new ExportCodeView((string) $project->getId()));
   }
 
   /**

@@ -206,6 +206,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/jobs/[a-zA-Z0-9-]+/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+        ],
+        [
           'path' => '^/api/projects/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

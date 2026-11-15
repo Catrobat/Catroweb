@@ -6,12 +6,16 @@ namespace Tests\PhpUnit\System\Mail;
 
 use App\System\Mail\EmailBudgetManager;
 use App\System\Mail\MailerAdapter;
+use App\System\Mail\SendMail;
+use App\System\Mail\SendMailHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Message;
+use Tests\PhpUnit\System\BackgroundJob\RecordingMessageBus;
 use Twig\Environment;
 
 /**
@@ -39,7 +43,7 @@ final class MailerAdapterTest extends TestCase
     $budget->method('getProvidersWithRoom')->willReturn(['main', 'mailjet']);
     $budget->expects($this->never())->method('recordSend');
 
-    $this->assertFalse($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig'));
+    $this->assertFalse($this->sendNow($mailer, $budget, 'someone@example.org'));
   }
 
   public function testASentMailUsesTheBudget(): void
@@ -51,7 +55,7 @@ final class MailerAdapterTest extends TestCase
     $budget->method('getProvidersWithRoom')->willReturn(['main']);
     $budget->expects($this->once())->method('recordSend')->with('admin', 'main');
 
-    $this->assertTrue($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig'));
+    $this->assertTrue($this->sendNow($mailer, $budget, 'someone@example.org'));
   }
 
   public function testAFailingProviderHandsTheMailToTheNextOne(): void
@@ -71,7 +75,7 @@ final class MailerAdapterTest extends TestCase
     $budget->method('getProvidersWithRoom')->willReturn(['main', 'mailjet', 'ses']);
     $budget->expects($this->once())->method('recordSend')->with('verification', 'mailjet');
 
-    $this->assertTrue($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig', [], 'verification'));
+    $this->assertTrue($this->sendNow($mailer, $budget, 'someone@example.org', 'verification'));
     $this->assertSame(['main', 'mailjet'], $transports);
   }
 
@@ -88,14 +92,54 @@ final class MailerAdapterTest extends TestCase
     $budget->method('canSend')->willReturn(true);
     $budget->method('getProvidersWithRoom')->willReturn(['main']);
 
-    $this->assertTrue($this->adapter($mailer, $budget)->send('someone@example.org', 'Verify', 'mail.html.twig'));
+    $this->assertTrue($this->sendNow($mailer, $budget, 'someone@example.org'));
     $this->assertNotNull($headers);
     $this->assertSame('Catrobat Share <share@catrobat.org>', $headers->get('From')?->getBodyAsString());
     $this->assertSame('support@catrobat.org', $headers->get('Reply-To')?->getBodyAsString());
   }
 
-  private function adapter(MailerInterface $mailer, EmailBudgetManager $budget): MailerAdapter
+  public function testTheRequestOnlyQueuesTheMail(): void
   {
-    return new MailerAdapter($mailer, new NullLogger(), $this->createStub(Environment::class), '', $budget);
+    $mailer = $this->createMock(MailerInterface::class);
+    $mailer->expects($this->never())->method('send');
+    $budget = $this->createStub(EmailBudgetManager::class);
+    $budget->method('canSend')->willReturn(true);
+    $bus = new RecordingMessageBus();
+
+    $this->assertTrue($this->adapter($mailer, $budget, $bus)->send('someone@example.org', 'Verify', 'mail.html.twig'));
+    $this->assertCount(1, $bus->dispatched);
+    $this->assertInstanceOf(SendMail::class, $bus->dispatched[0]);
+  }
+
+  public function testTheWorkerRetriesWhenNoProviderCouldSend(): void
+  {
+    $mailer = $this->createStub(MailerInterface::class);
+    $mailer->method('send')->willThrowException(new TransportException('down'));
+    $budget = $this->createStub(EmailBudgetManager::class);
+    $budget->method('getProvidersWithRoom')->willReturn(['main']);
+    $message = new SendMail(new Email()->to('someone@example.org')->subject('Verify')->text('x'), 'someone@example.org', 'admin');
+
+    $this->expectException(\RuntimeException::class);
+    new SendMailHandler($this->adapter($mailer, $budget, new RecordingMessageBus()))($message);
+  }
+
+  /** Sends like the request, then delivers like the worker; false if nothing was delivered. */
+  private function sendNow(MailerInterface $mailer, EmailBudgetManager $budget, string $to, string $type = 'admin'): bool
+  {
+    $bus = new RecordingMessageBus();
+    $adapter = $this->adapter($mailer, $budget, $bus);
+    if (!$adapter->send($to, 'Verify', 'mail.html.twig', [], $type)) {
+      return false;
+    }
+
+    $message = $bus->dispatched[0];
+    $this->assertInstanceOf(SendMail::class, $message);
+
+    return $adapter->deliver($message->email, $message->to, $message->email_type);
+  }
+
+  private function adapter(MailerInterface $mailer, EmailBudgetManager $budget, RecordingMessageBus $bus = new RecordingMessageBus()): MailerAdapter
+  {
+    return new MailerAdapter($mailer, new NullLogger(), $this->createStub(Environment::class), '', $budget, $bus);
   }
 }

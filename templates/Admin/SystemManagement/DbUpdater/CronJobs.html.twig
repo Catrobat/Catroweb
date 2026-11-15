@@ -1,32 +1,102 @@
 {% extends '@SonataAdmin/CRUD/base_list.html.twig' %}
 
+{% macro result(code) %}
+  {% if code is null %}<span class="text-muted">—</span>
+  {% elseif code == 0 %}<span class="badge bg-success">OK</span>
+  {% elseif code == -1 %}<span class="badge bg-danger">timeout</span>
+  {% elseif code == -2 %}<span class="badge bg-warning">auto-recovered</span>
+  {% else %}<span class="badge bg-danger">exit {{ code }}</span>
+  {% endif %}
+{% endmacro %}
+
+{% macro duration(seconds) %}
+  {% if seconds is null %}<span class="text-muted">—</span>
+  {% elseif seconds >= 3600 %}{{ (seconds / 3600)|number_format(1) }}h
+  {% elseif seconds >= 60 %}{{ (seconds / 60)|number_format(0) }}m
+  {% elseif seconds >= 1 %}{{ seconds }}s
+  {% else %}&lt;1s
+  {% endif %}
+{% endmacro %}
+
 {% block list_table %}
-    <div class="col-xs-12 col-md-12 mb-5">
+  <div class="col-xs-12 col-md-12 mb-5" id="background-tasks">
+    {{ include('@SonataTwig/FlashMessage/render.html.twig') }}
 
-        {{ include('@SonataTwig/FlashMessage/render.html.twig') }}
+    <h1 class="h1" style="margin-top: 0">Background tasks</h1>
+    <p>
+      Slow work runs on background workers, one per queue, so one kind of job never waits for another.
+      How it works and how to add a task: <code>docs/operations/Background-Jobs.md</code>.
+    </p>
 
-        <h1 class="h1" style="margin-top: 0">Cron Jobs</h1>
-        <p style="padding: 0.5em">
-            There exist various workflows that have to be executed on a regularly basis.
-            This section provides the necessary information about previous runs and even allows the manual
-            trigger of a new workflow run. <br>Info: The manual job trigger will not immediately start the workflow.
-            The job is only added to the queue again and its last run statistics are removed.
-        </p>
-        <h4>Step-by-step guide on how to add a new workflow</h4>
-        <ol>
-            <li>Add/modify the cron jobs in `CronJobsCommand.php`</li>
-            <li>Add all necessary new commands</li>
-            <li>Wait for the next CronJob trigger or start a new run manually</li>
-        </ol>
+    <h3>Queues</h3>
+    <table class="table table-bordered table-striped" id="queues-table">
+      <thead><tr><th>Queue</th><th>Waiting</th><th>Running</th><th>Oldest waiting</th></tr></thead>
+      <tbody>
+        {% for name, queue in queues %}
+          <tr>
+            <td>{{ name }}</td>
+            <td>{{ queue.waiting }}</td>
+            <td>{{ queue.running }}</td>
+            <td>{{ queue.oldest_waiting_seconds is null ? '—' : _self.duration(queue.oldest_waiting_seconds) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-        <a id="btn-trigger-cron-jobs" class="btn btn-large btn-primary" href="{{ triggerCronJobsUrl }}">
-            <i class="glyphicon glyphicon-refresh"></i>
-            Manually trigger the cron job
-        </a>
+    <h3>Failed jobs</h3>
+    {% if failed is empty %}
+      <p id="no-failed-jobs">No job has failed for good.</p>
+    {% else %}
+      <table class="table table-bordered table-striped" id="failed-table">
+        <thead><tr><th>Id</th><th>Job</th><th>Error</th><th>Failed at</th><th></th></tr></thead>
+        <tbody>
+          {% for job in failed %}
+            <tr>
+              <td>{{ job.id }}</td>
+              <td>{{ job.message|split('\\')|last }}</td>
+              <td>{{ job.error }}</td>
+              <td>{{ job.failed_at ? job.failed_at|date('Y-m-d H:i') : '—' }}</td>
+              <td>
+                {% if job.retryable %}
+                  <a class="btn btn-sm btn-primary btn-retry-failed-job" href="{{ admin.generateUrl('retry_failed_job', {id: job.id}) }}">Retry</a>
+                {% endif %}
+                <a class="btn btn-sm btn-danger btn-remove-failed-job" href="{{ admin.generateUrl('remove_failed_job', {id: job.id}) }}">Delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
 
-        <h3>CronJob State Overview</h3>
-    </div>
-
-    {{ parent() }}
-
+    <h3>Scheduled tasks</h3>
+    <table class="table table-bordered table-striped" id="tasks-table">
+      <thead><tr><th>Name</th><th>Lane</th><th>State</th><th>Interval</th><th>Last run</th><th>Duration</th><th>Result</th><th>Next run</th><th></th></tr></thead>
+      <tbody>
+        {% for row in tasks %}
+          <tr>
+            <td>{{ row.task.name }}</td>
+            <td>{{ row.task.slow ? 'slow' : 'fast' }}</td>
+            <td>{{ row.job ? row.job.state : 'never run' }}</td>
+            <td>{{ row.task.interval }}</td>
+            <td>{{ row.job and row.job.startAt ? row.job.startAt|date('Y-m-d H:i') : '—' }}</td>
+            <td>{{ _self.duration(row.job ? row.job.durationSeconds : null) }}</td>
+            <td>{{ _self.result(row.job ? row.job.resultCode : null) }}</td>
+            <td>{{ row.next_run_at ? row.next_run_at|date('Y-m-d H:i') : (row.job and row.job.state == 'run' ? 'running' : 'next tick') }}</td>
+            <td>
+              {% if row.job and row.job.state != 'run' %}
+                <a class="btn btn-sm btn-primary btn-reset-cron-job" href="{{ admin.generateUrl('reset_cron_job', {id: row.task.name}) }}">Run at next tick</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        {% for job in stale %}
+          <tr class="text-muted">
+            <td>{{ job.name }}</td>
+            <td colspan="7">No longer a task</td>
+            <td><a class="btn btn-sm btn-danger btn-reset-cron-job" href="{{ admin.generateUrl('reset_cron_job', {id: job.name}) }}">Remove</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

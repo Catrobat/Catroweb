@@ -453,22 +453,23 @@ function importScratchProject(card, name, scratchId, baseUrl, theme, trans) {
   label.textContent = trans.scratchConverting
   showSnackbar('#share-snackbar', trans.scratchConvertingSnackbar.replace('%name%', name))
 
+  // Converting runs on a background worker: the import answers 202 with a job, which is polled until it is done.
   fetch(`${baseUrl}/api/projects/scratch/${scratchId}`, {
     method: 'POST',
     credentials: 'same-origin',
-    headers: { Accept: 'application/json' },
+    headers: { Accept: 'application/json', Prefer: 'respond-async' },
   })
-    .then((response) =>
-      response
-        .json()
-        .catch(() => ({}))
-        .then((body) => {
-          if (!response.ok || !body?.id) {
-            throw new Error(body?.error?.message || `HTTP ${response.status}`)
-          }
-          window.location.href = `${baseUrl}/${theme}/project/${encodeURIComponent(body.id)}`
-        }),
+    .then(readJson)
+    .then(({ response, body }) =>
+      response.status === 202 ? waitForJob(baseUrl, body) : { response, body },
     )
+    .then(({ response, body }) => {
+      const projectId = body?.project_id ?? body?.id
+      if (!response.ok || !projectId) {
+        throw new Error(body?.error_message || body?.error?.message || `HTTP ${response.status}`)
+      }
+      window.location.href = `${baseUrl}/${theme}/project/${encodeURIComponent(projectId)}`
+    })
     .catch((error) => {
       card.disabled = false
       card.removeAttribute('aria-busy')
@@ -478,6 +479,38 @@ function importScratchProject(card, name, scratchId, baseUrl, theme, trans) {
       // Replace the "Converting…" message at once, so the outcome doesn't wait behind it.
       replaceSnackbar('#share-snackbar', error.message, SnackbarDuration.error)
     })
+}
+
+function readJson(response) {
+  return response
+    .json()
+    .catch(() => ({}))
+    .then((body) => ({ response, body }))
+}
+
+const JOB_POLL_MS = 2000
+const JOB_TIMEOUT_MS = 10 * 60 * 1000
+
+// Resolves with the finished job; a failed job comes back as a non-ok response carrying its message.
+function waitForJob(baseUrl, job, startedAt = Date.now()) {
+  if (job?.state === 'done') return { response: { ok: true, status: 200 }, body: job }
+  if (job?.state === 'failed')
+    return { response: { ok: false, status: job.error_status || 500 }, body: job }
+  if (!job?.id || Date.now() - startedAt > JOB_TIMEOUT_MS) {
+    return { response: { ok: false, status: 504 }, body: {} }
+  }
+
+  return new Promise((resolve) => setTimeout(resolve, JOB_POLL_MS))
+    .then(() =>
+      fetch(`${baseUrl}/api/jobs/${encodeURIComponent(job.id)}`, {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' },
+      }),
+    )
+    .then(readJson)
+    .then(({ response, body }) =>
+      response.ok ? waitForJob(baseUrl, body, startedAt) : { response, body },
+    )
 }
 
 // Without a url the card is a button; its caller handles the click.

@@ -363,7 +363,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsScratchScratchIdPost(int $scratch_id, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsScratchScratchIdPost(int $scratch_id, ?string $prefer, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Every request asks Scratch's API, even when our copy is current; converting is limited much harder.
     if ($this->isCrossSiteRequest()) {
@@ -379,7 +379,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         throw new ScratchConversionException('Too many Scratch projects opened in a short time. Please wait a minute.', ScratchConversionException::RATE_LIMITED);
       }
 
-      $project = $this->scratch_manager->importProject($scratch_id, function () use ($ip, &$converted): void {
+      $consume_conversion_quota = function () use ($ip, &$converted): void {
         $burst = $this->scratchConvertBurstLimiter->create($ip)->consume();
         $daily = $this->scratchConvertDailyLimiter->create($ip)->consume();
         if (!$burst->isAccepted() || !$daily->isAccepted()) {
@@ -387,7 +387,21 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         }
 
         $converted = true;
-      }, $ip);
+      };
+
+      if (self::prefersAsync($prefer)) {
+        $project = $this->scratch_manager->currentCopy($scratch_id);
+        if (null === $project) {
+          $job = $this->scratch_manager->queueImport($scratch_id, $consume_conversion_quota, $ip);
+          $responseCode = Response::HTTP_ACCEPTED;
+          // Not Location: FastCGI turns a 2xx with Location into a 302.
+          $responseHeaders['Content-Location'] = '/api/jobs/'.$job->getId();
+
+          return JobsApi::response($job);
+        }
+      } else {
+        $project = $this->scratch_manager->importProject($scratch_id, $consume_conversion_quota, $ip);
+      }
     } catch (ScratchConversionException $exception) {
       [$responseCode, $type] = match ($exception->getCode()) {
         ScratchConversionException::NOT_FOUND => [Response::HTTP_NOT_FOUND, 'not_found'],
@@ -410,6 +424,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
+  /** RFC 7240: `Prefer: respond-async`, possibly among other preferences. */
+  private static function prefersAsync(?string $prefer): bool
+  {
+    return null !== $prefer && 1 === preg_match('/(^|[\s,;])respond-async($|[\s,;])/i', $prefer);
   }
 
   /**
@@ -1083,11 +1103,40 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsUploadsIdCompletePost(string $id, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsUploadsIdCompletePost(string $id, ?string $prefer, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $started = microtime(true);
     $upload = $this->findOwnUpload($id, $responseCode, $user);
     if (!$upload instanceof ResumableUpload || !$user instanceof User) {
+      return null;
+    }
+
+    $accept_language = $this->facade->getResponseManager()->sanitizeLocale(
+      $this->request_stack->getCurrentRequest()?->headers->get('Accept-Language') ?? 'en'
+    );
+    $ip = $this->facade->getLoader()->getClientIp();
+
+    // A finished upload answers with its outcome at once, async or not.
+    if (self::prefersAsync($prefer) && null === $upload->completed_project_id && null === $upload->failure_type) {
+      $job = $this->facade->getProcessor()->queueUploadCompletion($id, $user, $accept_language, $ip);
+      $responseCode = Response::HTTP_ACCEPTED;
+      $responseHeaders['Content-Location'] = '/api/jobs/'.$job->getId();
+
+      return JobsApi::response($job);
+    }
+
+    return $this->completeUpload($id, $user, $accept_language, $ip, 'resumable', $responseCode, $responseHeaders);
+  }
+
+  /**
+   * Joins the chunks, checks the project and creates it: for the completion call, or on the uploads worker.
+   */
+  public function completeUpload(string $id, User $user, string $accept_language, ?string $ip, string $via, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $started = microtime(true);
+    $upload = $this->resumable_uploads->find($id, $user);
+    if (!$upload instanceof ResumableUpload) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
       return null;
     }
 
@@ -1123,19 +1172,16 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       } catch (ResumableUploadException $e) {
         // Missing chunks can still be sent, so the upload stays until it expires.
         $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-        $this->logUploadOutcome('rejected', $e->getMessage(), null, $upload->flavor, $started, 'resumable');
+        $this->logUploadOutcome('rejected', $e->getMessage(), null, $upload->flavor, $started, $via);
 
         return ApiErrorResponse::createModel(Response::HTTP_UNPROCESSABLE_ENTITY, $e->getMessage(), $this->resumableUploadErrorText($e));
       }
 
       // Joining, checking and extracting a file of several hundred MB can outlast the default limit.
       set_time_limit(300);
-      $accept_language = $this->facade->getResponseManager()->sanitizeLocale(
-        $this->request_stack->getCurrentRequest()?->headers->get('Accept-Language') ?? 'en'
-      );
 
       $rejected = false;
-      $response = $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, 'resumable', $responseCode, $responseHeaders, $rejected);
+      $response = $this->createProjectFromFile($user, $file, $accept_language, $upload->flavor, $upload->private, $upload->project_id, $started, $via, $responseCode, $responseHeaders, $rejected, $ip);
       if ($response instanceof ProjectResponse && Response::HTTP_CREATED === $responseCode) {
         $this->resumable_uploads->markCompleted($upload, (string) $response->getId());
       } elseif ($rejected && ($error = $response instanceof ErrorResponse ? $response->getError() : null) instanceof ErrorResponseError) {
@@ -1159,7 +1205,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
    * Shared by the single-request upload and the resumable upload's completion: the same checks, malware scan and
    * project creation either way. $rejected tells a verdict on the file apart from a server-side failure.
    */
-  private function createProjectFromFile(User $user, File $file, string $accept_language, string $flavor, bool $private, ?string $project_id, float $started, string $via, int &$responseCode, array &$responseHeaders, bool &$rejected = false): ?object
+  private function createProjectFromFile(User $user, File $file, string $accept_language, string $flavor, bool $private, ?string $project_id, float $started, string $via, int &$responseCode, array &$responseHeaders, bool &$rejected = false, ?string $ip = null): ?object
   {
     // Needed (for tests) to make sure everything is up to date (followers, ..)
     $this->facade->getProcessor()->refreshUser($user);
@@ -1169,7 +1215,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         new AddProjectRequest(
           $user,
           $file,
-          $this->facade->getLoader()->getClientIp(),
+          $ip ?? $this->facade->getLoader()->getClientIp(),
           $accept_language,
           $flavor,
           $project_id,

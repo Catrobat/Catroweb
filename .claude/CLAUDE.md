@@ -91,6 +91,7 @@ Before committing (all must pass): `bin/php-cs-fixer fix <file>` → `bin/phpsta
 - `TranslatorAwareTrait`: `$translator` is private; use `$this->trans('key')` (no domain arg).
 - Never set `Location` on a 2xx non-201 response: FastCGI rewrites `200 + Location` into `302` (the dev cli-server doesn't, so only prod breaks). Use `Content-Location`.
 - `kernel.terminate` fires in-process in tests; its exceptions propagate.
+- Messenger queues are `sync://` in tests: a handler runs inside the request that dispatches it. Handlers must not `EntityManager::clear()` (it detaches the request's entities); detach what they created instead. Services holding per-job state implement `ResetInterface` (workers handle many jobs per process).
 - Entity ids are random UUIDv4 (`MyUuidGenerator`): never order or page by `id` alone; it is only a tie-breaker.
 - Time zones: PHP runs in UTC, prod MariaDB in CET. New timestamp columns use the `utc_datetime` type; migrations use `UTC_TIMESTAMP()`, never `CURRENT_TIMESTAMP`.
 - Migrations run before the new release goes live, and a rollback doesn't run `down()`: a new `NOT NULL` column needs a server-side default so the old code can still insert.
@@ -145,7 +146,7 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 
 ## Deploy Gotcha
 
-Cron (`/etc/cron.d/catroweb`, runs as `www-data`) must log into a path the cron user can write: a failing `>>` redirect means the job never starts, with no error anywhere. Check `cronjob.end_at` when anything "should have been cleaned up".
+Background workers (systemd `catroweb-worker@<queue>`) run the queues and the periodic tasks; the deploy restarts them via systemd, not `messenger:stop-workers` (its signal lives in the per-release `var/cache`). See `docs/operations/Background-Jobs.md`.
 
 Client IP: nginx resolves the real visitor IP from Cloudflare's `CF-Connecting-IP` (infrastructure repo, Cloudflare ranges only), so Symfony trusts no proxies and `getClientIp()` is the visitor. Don't set `TRUSTED_PROXIES=REMOTE_ADDR`: the origin is reachable directly, so clients could spoof `X-Forwarded-For`.
 

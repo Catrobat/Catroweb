@@ -6,6 +6,8 @@ namespace App\Project\Scratch;
 
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\System\BackgroundJob;
+use App\DB\EntityRepository\System\BackgroundJobRepository;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\ProjectManager;
@@ -18,13 +20,20 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * Imports a public Scratch project as a real Pocket Code project: converted, then published through the normal
  * upload pipeline (malware scan, sanitizing, validation) under a shadow account of its Scratch author.
  */
-class ScratchManager
+class ScratchManager implements ResetInterface
 {
+  final public const string JOB_TYPE = 'scratch_import';
+
+  /** @var array<int, array<string, mixed>> Scratch metadata fetched in this request or job, so a check and its import ask once */
+  private array $metadata = [];
+
   public function __construct(
     private readonly ProjectManager $project_manager,
     private readonly UserManager $user_manager,
@@ -33,21 +42,23 @@ class ScratchManager
     private readonly LoggerInterface $logger,
     private readonly Connection $connection,
     private readonly EntityManagerInterface $entity_manager,
+    private readonly BackgroundJobRepository $job_repository,
+    private readonly MessageBusInterface $message_bus,
   ) {
   }
 
   /**
-   * @param callable(): void $before_conversion called only when a conversion is actually needed (rate limiting)
+   * Our copy if it is up to date (or Scratch can't be asked and a copy exists), null if it must be converted.
    *
    * @throws ScratchConversionException with a message that can be shown to the user
    */
-  public function importProject(int $scratch_id, callable $before_conversion, ?string $ip): Project
+  public function currentCopy(int $scratch_id): ?Project
   {
     $existing = $this->project_manager->findOneByScratchId($scratch_id);
     $converted = null !== $existing && $existing->getFilesize() > 0 ? $existing : null;
 
     try {
-      $metadata = $this->fetcher->fetchMetadata($scratch_id);
+      $metadata = $this->metadata($scratch_id);
     } catch (ScratchConversionException $exception) {
       if (null !== $converted) {
         return $converted; // Scratch is down or the project was unshared: keep serving our copy
@@ -61,6 +72,46 @@ class ScratchManager
     if ($current && (!$modified instanceof \DateTime || $converted->getLastModifiedAt()->getTimestamp() >= $modified->getTimestamp())) {
       return $converted;
     }
+
+    return null;
+  }
+
+  /**
+   * Queues the import for the scratch worker. A request for a project that is already queued joins that job, without
+   * using quota again: it converts once either way.
+   *
+   * @param callable(): void $before_conversion called only when a new job is queued (rate limiting)
+   */
+  public function queueImport(int $scratch_id, callable $before_conversion, ?string $ip): BackgroundJob
+  {
+    $job = $this->job_repository->findUnfinished(self::JOB_TYPE, (string) $scratch_id);
+    if (null !== $job) {
+      return $job;
+    }
+
+    $before_conversion();
+    $job = new BackgroundJob(self::JOB_TYPE, (string) $scratch_id);
+    $this->entity_manager->persist($job);
+    $this->entity_manager->flush();
+    $this->message_bus->dispatch(new ConvertScratchProject($job->getId(), $scratch_id, $ip));
+
+    return $job;
+  }
+
+  /**
+   * @param callable(): void $before_conversion called only when a conversion is actually needed (rate limiting)
+   *
+   * @throws ScratchConversionException with a message that can be shown to the user
+   */
+  public function importProject(int $scratch_id, callable $before_conversion, ?string $ip): Project
+  {
+    $current = $this->currentCopy($scratch_id);
+    if (null !== $current) {
+      return $current;
+    }
+
+    $existing = $this->project_manager->findOneByScratchId($scratch_id);
+    $metadata = $this->metadata($scratch_id);
 
     $before_conversion();
     set_time_limit(120);
@@ -131,6 +182,19 @@ class ScratchManager
     } catch (\Throwable $throwable) {
       $this->logger->error('Could not mark a converted Scratch project as outdated', ['scratch_id' => $scratch_id, 'exception' => $throwable]);
     }
+  }
+
+  /** Workers handle many jobs in one process: forget the metadata between them. */
+  #[\Override]
+  public function reset(): void
+  {
+    $this->metadata = [];
+  }
+
+  /** @return array<string, mixed> */
+  private function metadata(int $scratch_id): array
+  {
+    return $this->metadata[$scratch_id] ??= $this->fetcher->fetchMetadata($scratch_id);
   }
 
   private function userFacing(int $scratch_id, \Throwable $throwable): ScratchConversionException

@@ -385,12 +385,14 @@ interface ProjectsApiInterface
    *
    * Import a public Scratch project
    *
-   * @param int   $scratch_id      Scratch project id (required)
-   * @param int   &$responseCode   The HTTP Response Code
-   * @param array $responseHeaders Additional HTTP headers to return with the response ()
+   * @param int         $scratch_id      Scratch project id (required)
+   * @param string|null $prefer          &#x60;respond-async&#x60; (RFC 7240): answer 202 with a job to poll instead of waiting for slow work. Without it the request blocks until the work is done. (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectsScratchScratchIdPost(
     int $scratch_id,
+    ?string $prefer,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
@@ -461,12 +463,14 @@ interface ProjectsApiInterface
    *
    * Finish a resumable project upload and create or update the project
    *
-   * @param string $id              Upload id as returned when the upload was started (required)
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $id              Upload id as returned when the upload was started (required)
+   * @param string|null $prefer          &#x60;respond-async&#x60; (RFC 7240): answer 202 with a job to poll instead of waiting for slow work. Without it the request blocks until the work is done. (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectsUploadsIdCompletePost(
     string $id,
+    ?string $prefer,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;

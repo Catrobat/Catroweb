@@ -6,17 +6,21 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\System\BackgroundJob;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\System\BackgroundJobRepository;
 use App\Moderation\TextSanitizer;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
+use App\Project\Upload\CompleteProjectUpload;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use OpenAPI\Server\Model\UpdateProjectRequest;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class ProjectsApiProcessor extends AbstractApiProcessor
 {
@@ -29,7 +33,9 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     private readonly ExtractedFileRepository $extracted_file_repository,
     private readonly ProjectFileRepository $file_repository,
     private readonly ScreenshotRepository $screenshot_repository,
-    private readonly TextSanitizer $textSanitizer)
+    private readonly TextSanitizer $textSanitizer,
+    private readonly BackgroundJobRepository $job_repository,
+    private readonly MessageBusInterface $message_bus)
   {
   }
 
@@ -178,5 +184,21 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     $this->project_manager->deleteProject($project[0]);
 
     return true;
+  }
+
+  /** Queues the completion for the uploads worker; calling again while it is queued returns the same job. */
+  public function queueUploadCompletion(string $upload_id, User $user, string $accept_language, ?string $ip): BackgroundJob
+  {
+    $job = $this->job_repository->findUnfinished(CompleteProjectUpload::JOB_TYPE, $upload_id);
+    if (null !== $job) {
+      return $job;
+    }
+
+    $job = new BackgroundJob(CompleteProjectUpload::JOB_TYPE, $upload_id, (string) $user->getId());
+    $this->entity_manager->persist($job);
+    $this->entity_manager->flush();
+    $this->message_bus->dispatch(new CompleteProjectUpload($job->getId(), $upload_id, (string) $user->getId(), $accept_language, $ip));
+
+    return $job;
   }
 }

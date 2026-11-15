@@ -275,7 +275,7 @@ class ProjectManagerTest extends TestCase
     $event_dispatcher = $this->createStub(EventDispatcherInterface::class);
     $event_dispatcher->method('dispatch')->willReturn($this->programBeforeInsertEvent);
     $notification_service = $this->createMock(NotificationManager::class);
-    $notification_service->expects($this->never())->method('addNotification');
+    $notification_service->expects($this->never())->method('queueNewProjectNotifications');
 
     $project = $this->createProjectManagerWithMocks(
       entity_manager: $entity_manager,

@@ -134,6 +134,15 @@ open_api_server_followers_usersidunfollowdelete:
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
 
+# jobs
+open_api_server_jobs_jobsjobidget:
+  path: /jobs/{job_id}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.jobs::jobsJobIdGetAction
+  requirements:
+    job_id: '^[a-zA-Z0-9\-]+$'
+
 # mediaLibrary
 open_api_server_mediaLibrary_mediaassetsget:
   path: /media/assets

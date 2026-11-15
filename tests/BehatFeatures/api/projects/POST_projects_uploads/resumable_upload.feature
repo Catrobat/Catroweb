@@ -20,6 +20,19 @@ Feature: Resumable project upload
     Then the response status code should be "201"
     And the JSON response field "name" should be '"test"'
 
+  Scenario: A completion that asks to be asynchronous queues the check, and its job leads to the project
+    Given I have a request header "HTTP_PREFER" with value "respond-async"
+    When I upload a valid Catrobat project in chunks
+    Then the response status code should be "202"
+    And the JSON response field "type" should be '"project_upload"'
+    # Tests run every job inside the request: the job is already finished when it is polled.
+    When I request the background job from the response
+    Then the response status code should be "200"
+    And the JSON response field "state" should be '"done"'
+    When I complete the saved upload
+    Then the response status code should be "201"
+    And the JSON response field "name" should be '"test"'
+
   Scenario: Starting an upload needs a login
     Given I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
