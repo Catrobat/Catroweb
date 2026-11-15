@@ -1,7 +1,7 @@
 # Operations
 
 - [Code-View.md](./Code-View.md) — The project page's code view, made by the player's code export (Catroid's own code) under Node.
-- [Cron-Jobs.md](./Cron-Jobs.md) — How the `catrobat:cronjob` dispatcher schedules and tracks all periodic tasks.
+- [Background-Jobs.md](./Background-Jobs.md) — Queues, workers and periodic tasks (Symfony Messenger + Scheduler), async API jobs, operations.
 - [Protected-Project-Files.md](./Protected-Project-Files.md) — Authorized delivery of project files and the nginx rollout order.
 - [Data-consistency.md](./Data-consistency.md) — Read-only data consistency checks and explicitly approved repairs using the application owner.
 - [Domain-Change.md](./Domain-Change.md) — Procedure for changing the production domain behind Cloudflare + nginx origin.

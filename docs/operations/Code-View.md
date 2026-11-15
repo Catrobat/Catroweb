@@ -23,13 +23,14 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
   `code.xml`) is kept too, so such a project does not start Node on every view; if a newer export says so where an
   older one worked, the older one stays. An export that could not run or finish (Node missing, crashed, timed out, no
   export deployed) is not kept: the view gets 503, as below.
-- Views never wait for a newer export: an outdated one is shown as it is and made again after the response
-  (`kernel.terminate`). Only the first view of a project without an export for its `code.xml` waits for Node (median
-  about 0.9 s). Uploads never wait: the export runs after the upload's response (`CodeViewExportEventListener`).
+- Views never wait for a newer export: an outdated one is shown as it is and made again on the `default` background
+  worker (`ExportCodeView`, see [Background-Jobs.md](./Background-Jobs.md)). Only the first view of a project without an
+  export for its `code.xml` waits for Node (median about 0.9 s). Uploads never wait: the export is queued by
+  `CodeViewExportEventListener`. The worker waits for a free export slot, so a queued export is never dropped.
 - At most two exports run at once per server (`CodeViewExportStore::SLOTS`, lock files `var/code-view/.slot-N.lock`),
   next to PHP-FPM's few workers. A view that needs an export when both slots (or that project's lock) are taken gets
   503 with `Retry-After` at once, which the page shows as "Could not load code view" with "Try again"; it never waits.
-  After the response, busy slots skip the outdated export; the next view queues it again.
+  The background worker waits for a slot instead.
 - A project whose code cannot be shown gets a 422, which the page shows as "This project's code can't be shown".
 - `CodeViewLocalizer` puts Catroid's strings into the export: it writes them as markers, which become the viewer's
   language (`code-export/strings/<locale>.json`, English where a translation is missing).
