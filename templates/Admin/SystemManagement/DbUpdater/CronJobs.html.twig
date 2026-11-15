@@ -57,7 +57,9 @@
               <td>{{ job.error }}</td>
               <td>{{ job.failed_at ? job.failed_at|date('Y-m-d H:i') : '—' }}</td>
               <td>
-                <a class="btn btn-sm btn-primary btn-retry-failed-job" href="{{ admin.generateUrl('retry_failed_job', {id: job.id}) }}">Retry</a>
+                {% if job.retryable %}
+                  <a class="btn btn-sm btn-primary btn-retry-failed-job" href="{{ admin.generateUrl('retry_failed_job', {id: job.id}) }}">Retry</a>
+                {% endif %}
                 <a class="btn btn-sm btn-danger btn-remove-failed-job" href="{{ admin.generateUrl('remove_failed_job', {id: job.id}) }}">Delete</a>
               </td>
             </tr>

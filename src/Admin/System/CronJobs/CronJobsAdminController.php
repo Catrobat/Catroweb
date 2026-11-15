@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Admin\System\CronJobs;
 
+use App\DB\Entity\System\BackgroundJob;
 use App\DB\Entity\System\CronJob;
 use App\DB\EntityRepository\System\CronJobRepository;
 use App\System\BackgroundJob\QueueStats;
+use App\System\BackgroundJob\TrackedJobMessage;
 use App\System\Cron\CronTaskRunner;
 use App\System\Cron\CronTasks;
 use Doctrine\ORM\EntityManagerInterface;
@@ -83,8 +85,19 @@ class CronJobsAdminController extends CRUDController
   /** Queues the job again on its own queue; a worker runs it, never this request. */
   public function retryFailedJobAction(Request $request): RedirectResponse
   {
-    return $this->withFailedJob($request, function (Envelope $envelope): string {
-      $this->message_bus->dispatch($envelope->getMessage());
+    return $this->withFailedJob($request, function (Envelope $envelope): ?string {
+      $message = $envelope->getMessage();
+      if (!QueueStats::retryable($message)) {
+        return null;
+      }
+
+      if ($message instanceof TrackedJobMessage) {
+        // The failure ended its row: open it again, or the handler skips the finished job.
+        $this->entity_manager->find(BackgroundJob::class, $message->jobId())?->requeue();
+        $this->entity_manager->flush();
+      }
+
+      $this->message_bus->dispatch($message);
 
       return 'The job is queued again.';
     });
@@ -95,7 +108,7 @@ class CronJobsAdminController extends CRUDController
     return $this->withFailedJob($request, static fn (): string => 'The job was deleted.');
   }
 
-  /** @param callable(Envelope): string $action runs before the job leaves the failed queue */
+  /** @param callable(Envelope): ?string $action runs before the job leaves the failed queue; null refuses */
   private function withFailedJob(Request $request, callable $action): RedirectResponse
   {
     $this->denyUnlessAllowed();
@@ -107,6 +120,12 @@ class CronJobsAdminController extends CRUDController
     }
 
     $message = $action($envelope);
+    if (null === $message) {
+      $this->addFlash('sonata_flash_error', 'This job cannot be retried; delete it, the next scheduler tick runs the task.');
+
+      return $this->toList();
+    }
+
     $this->failed_transport->reject($envelope);
     $this->addFlash('sonata_flash_success', $message);
 

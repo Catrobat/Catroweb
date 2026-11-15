@@ -34,14 +34,14 @@ class BackgroundJobRepository extends ServiceEntityRepository
     ;
   }
 
-  /** Ends jobs left unfinished by a killed worker, so their clients stop polling. */
+  /** Ends jobs a killed worker left running, so their clients stop polling. Queued ones may just wait in a backlog. */
   public function failStale(): int
   {
     return (int) $this->createQueryBuilder('j')->update()
       ->set('j.state', ':failed')->set('j.error_status', 500)->set('j.error_message', ':message')->set('j.updated_at', ':now')
-      ->where('j.state IN (:states)')->andWhere('j.updated_at < :stale')
+      ->where('j.state = :running')->andWhere('j.updated_at < :stale')
       ->setParameter('failed', BackgroundJob::FAILED)->setParameter('message', 'Something went wrong. Please try again later.')
-      ->setParameter('now', new \DateTimeImmutable())->setParameter('states', [BackgroundJob::QUEUED, BackgroundJob::RUNNING])
+      ->setParameter('now', new \DateTimeImmutable())->setParameter('running', BackgroundJob::RUNNING)
       ->setParameter('stale', new \DateTimeImmutable(self::STALE_AFTER))
       ->getQuery()->execute()
     ;

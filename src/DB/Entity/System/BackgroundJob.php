@@ -117,6 +117,15 @@ class BackgroundJob
     return self::DONE === $this->state || self::FAILED === $this->state;
   }
 
+  /** An admin retried the failed job: its client may poll it again. */
+  public function requeue(): void
+  {
+    $this->state = self::QUEUED;
+    $this->error_status = null;
+    $this->error_message = null;
+    $this->updated_at = new \DateTimeImmutable();
+  }
+
   public function start(): void
   {
     $this->state = self::RUNNING;

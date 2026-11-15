@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\BackgroundJob;
 
+use App\System\Cron\RunDueCronTasks;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\Stamp\ErrorDetailsStamp;
@@ -54,7 +55,7 @@ class QueueStats
   }
 
   /**
-   * @return list<array{id: string, message: string, error: string, failed_at: \DateTimeInterface|null}>
+   * @return list<array{id: string, message: string, retryable: bool, error: string, failed_at: \DateTimeInterface|null}>
    */
   public function failed(int $limit = 50): array
   {
@@ -68,11 +69,18 @@ class QueueStats
       $failed[] = [
         'id' => (string) $envelope->last(TransportMessageIdStamp::class)?->getId(),
         'message' => $envelope->getMessage()::class,
+        'retryable' => self::retryable($envelope->getMessage()),
         'error' => (string) $error?->getExceptionMessage(),
         'failed_at' => $envelope->last(RedeliveryStamp::class)?->getRedeliveredAt(),
       ];
     }
 
     return $failed;
+  }
+
+  /** A scheduler tick has no queue: retried from the admin page it would run a whole lane in that request. */
+  public static function retryable(object $message): bool
+  {
+    return !$message instanceof RunDueCronTasks;
   }
 }

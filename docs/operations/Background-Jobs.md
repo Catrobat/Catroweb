@@ -6,7 +6,8 @@ Slow work runs outside web requests, on workers that each consume one queue, so 
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `scratch`                    | Scratch imports (`ConvertScratchProject`), one at a time                                                      |
 | `uploads`                    | Completing resumable uploads that asked for it (`CompleteProjectUpload`)                                      |
-| `default`                    | Mail delivery (`SendMail`), follower notifications for a new project, code view exports                       |
+| `mail`                       | Mail delivery (`SendMail`), so a verification mail never waits behind other jobs                              |
+| `default`                    | Follower notifications for a new project, code view exports                                                   |
 | `scheduler_maintenance`      | Fast periodic tasks (popularity, rankings, achievements, small clean-ups)                                     |
 | `scheduler_maintenance_slow` | Periodic sweeps that may take long (retention, asset GC, broken projects, re-sanitizing, unverified accounts) |
 
