@@ -29,7 +29,7 @@ class AgeSignalDetector
    */
   private const string IGNORED_AFTER = '~(*UCP)^(?:[\s\-]*\d|\s*(?:levels?|kills?|times?|points?|pts|coins?|stars?|lives|enemies|'
     .'items?|players?|rounds?|seconds?|minutes?|hours?|blocks?|bricks?|sprites?|looks?|sounds?|followers?|likes?|'
-    .'downloads?|views?|hp|xp|damage|dmg|'
+    .'downloads?|views?|hp|xp|damage|dmg|boost|speed|grip|power|fuel|health|armou?r|energy|gems?|force|atk|def|'
     .'punkte?n?|stufen|leben|sterne?n?|münzen|spieler\w*|gegner\w*|mal|sekunden|minuten|'
     .'niveles|puntos|monedas|vidas|estrellas|jugadores|enemigos|veces|'
     .'n[ií]veis|pontos|moedas|estrelas|jogadores|inimigos|vezes|'

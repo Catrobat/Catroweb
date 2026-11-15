@@ -117,6 +117,8 @@ class AgeSignalDetectorTest extends TestCase
       'negated ru' => ['без 18+'],
       'counted levels' => ['18+ levels'],
       'counted kills' => ['I got 18+ kills'],
+      'game stat' => ['9: +18 boost'],
+      'game stat speed' => ['Engine: +18 speed, +5 grip'],
       'counted times' => ['jump 18+ times'],
       'counted de' => ['Ab 18 Punkten gibt es Bonus'],
       'counted es' => ['más de 18+ niveles'],
