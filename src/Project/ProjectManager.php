@@ -329,25 +329,14 @@ class ProjectManager
     if (!$request->isRestore()) {
       $this->notification_service->queueNewProjectNotifications($project);
     }
-    $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$project_id;
-    if (is_dir($compressed_file_directory)) {
-      $filesystem->remove($compressed_file_directory);
-    }
-
-    if (is_dir($extracted_file->getPath())) {
-      $filesystem->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$project_id);
-    }
-
-    $filesystem->remove($extracted_file->getPath());
-
-    // Deduplicate project assets in content-addressable store
-    $permanentExtractDir = $this->file_extractor->getExtractDir().'/'.$project_id;
+    // Deduplicate from this request's own extraction, before it moves into the shared extract dir: there, a
+    // concurrent request finding the dir missing re-extracts the zip and swaps the dir under the running loop.
     try {
       if (null !== $old_project) {
         $this->deduplication_service->removeProjectMappings($project_id);
       }
 
-      $this->deduplication_service->deduplicateProject($project, $permanentExtractDir);
+      $this->deduplication_service->deduplicateProject($project, $extracted_file->getPath());
     } catch (\Throwable $e) {
       $this->logger->error('Asset deduplication failed (non-fatal)', [
         'project_id' => $project_id,
@@ -355,6 +344,17 @@ class ProjectManager
         'exception' => $e,
       ]);
     }
+
+    $compressed_file_directory = $this->file_extractor->getExtractDir().$project_id;
+    if (is_dir($compressed_file_directory)) {
+      $filesystem->remove($compressed_file_directory);
+    }
+
+    if (is_dir($extracted_file->getPath())) {
+      $filesystem->rename($extracted_file->getPath(), $compressed_file_directory);
+    }
+
+    $filesystem->remove($extracted_file->getPath());
 
     return $project;
   }

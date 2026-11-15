@@ -128,8 +128,11 @@ class ProjectManagerTest extends TestCase
     ?MalwareScanner $malware_scanner = null,
     ?ProjectRepository $program_repository = null,
     ?NotificationManager $notification_service = null,
+    ?ProjectDeduplicationService $deduplication_service = null,
+    string $extract_dir = '',
   ): ProjectManager {
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
+    $file_extractor->method('getExtractDir')->willReturn($extract_dir);
     $program_repository ??= $this->createStub(ProjectRepository::class);
     $tag_repository = $this->createStub(TagRepository::class);
     $featured_repository = $this->createStub(FeaturedRepository::class);
@@ -170,7 +173,7 @@ class ProjectManagerTest extends TestCase
       $notification_service,
       $security,
       $malware_scanner,
-      $this->createStub(ProjectDeduplicationService::class),
+      $deduplication_service ?? $this->createStub(ProjectDeduplicationService::class),
       $this->createStub(\App\Storage\Images\ImageVariantUrlBuilder::class),
     );
   }
@@ -207,6 +210,56 @@ class ProjectManagerTest extends TestCase
     );
 
     $this->assertInstanceOf(Project::class, $program_manager->addProject($this->request));
+  }
+
+  /**
+   * Deduplication reads this upload's private extraction: the shared extract dir can be swapped by a concurrent
+   * request re-extracting the zip, which made it fail with "file does not exist".
+   */
+  public function testAssetsAreDeduplicatedFromThePrivateExtractionBeforeItMovesIntoPlace(): void
+  {
+    $root = sys_get_temp_dir().'/catroweb_dedup_order_'.uniqid().'/';
+    $private = $root.'tmp-extraction/';
+    mkdir($private.'images', 0o777, true);
+    touch($private.'images/a.png');
+    mkdir($root.'shared', 0o777, true);
+
+    $extracted_file = $this->createStub(ExtractedCatrobatFile::class);
+    $extracted_file->method('getName')->willReturn('TestProject');
+    $extracted_file->method('getTags')->willReturn([]);
+    $extracted_file->method('getProjectXmlProperties')->willReturn(new \SimpleXMLElement('<empty></empty>'));
+    $extracted_file->method('getPath')->willReturn($private);
+
+    $deduplication_service = $this->createMock(ProjectDeduplicationService::class);
+    $deduplication_service->expects($this->once())->method('deduplicateProject')
+      ->willReturnCallback(function (Project $project, string $dir) use ($private): void {
+        $this->assertSame($private, $dir);
+        $this->assertFileExists($dir.'images/a.png');
+      })
+    ;
+
+    $entity_manager = $this->createStub(EntityManager::class);
+    $entity_manager->method('persist')->willReturnCallback(static function (object $project): void {
+      if ($project instanceof Project) {
+        $project->setId('1');
+      }
+    });
+    $event_dispatcher = $this->createStub(EventDispatcherInterface::class);
+    $event_dispatcher->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+
+    try {
+      $this->createProjectManagerWithMocks(
+        entity_manager: $entity_manager,
+        event_dispatcher: $event_dispatcher,
+        extracted_file: $extracted_file,
+        deduplication_service: $deduplication_service,
+        extract_dir: $root.'shared/',
+      )->addProject($this->request);
+
+      $this->assertFileExists($root.'shared/1/images/a.png');
+    } finally {
+      new \Symfony\Component\Filesystem\Filesystem()->remove($root);
+    }
   }
 
   public function testAConvertedScratchProjectHasItsScratchIdFromTheFirstPersist(): void

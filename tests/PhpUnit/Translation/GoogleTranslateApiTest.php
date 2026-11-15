@@ -32,7 +32,7 @@ class GoogleTranslateApiTest extends TestCase
   protected function setUp(): void
   {
     $this->client = $this->createStub(GoogleTranslateClientInterface::class);
-    $this->api = new GoogleTranslateApi($this->client, $this->createStub(LoggerInterface::class), 5, 'test-project');
+    $this->api = new GoogleTranslateApi($this->client, $this->createStub(LoggerInterface::class), 'test-project', 5);
   }
 
   /**
@@ -50,7 +50,7 @@ class GoogleTranslateApiTest extends TestCase
     $response->method('getTranslations')->willReturn([$translation]);
 
     $client->expects($this->once())->method('translateText')->willReturn($response);
-    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5, 'test-project');
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 'test-project', 5);
 
     $result = $api->translate('testing', null, 'fr');
 
@@ -72,7 +72,7 @@ class GoogleTranslateApiTest extends TestCase
     $response->method('getTranslations')->willReturn([$translation]);
 
     $client->expects($this->once())->method('translateText')->willReturn($response);
-    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5, 'test-project');
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 'test-project', 5);
 
     $result = $api->translate('testing', 'en', 'fr');
 
@@ -91,7 +91,7 @@ class GoogleTranslateApiTest extends TestCase
     $response->method('getTranslations')->willReturn([]);
 
     $client->expects($this->once())->method('translateText')->willReturn($response);
-    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5, 'test-project');
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 'test-project', 5);
 
     $result = $api->translate('testing', null, 'fr');
 
@@ -106,7 +106,7 @@ class GoogleTranslateApiTest extends TestCase
     $client = $this->createMock(GoogleTranslateClientInterface::class);
     $exception = new ApiException('test error', 500, 'INTERNAL');
     $client->expects($this->once())->method('translateText')->willThrowException($exception);
-    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5, 'test-project');
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 'test-project', 5);
 
     $result = $api->translate('testing', null, 'fr');
 

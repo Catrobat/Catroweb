@@ -144,7 +144,7 @@ class ExampleProjectAdmin extends AbstractAdmin
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
-      ->add('program.name')
+      ->add('project.name')
     ;
   }
 
