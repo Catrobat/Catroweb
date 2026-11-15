@@ -820,7 +820,9 @@ paths:
       tags:
         - 'Projects'
       summary: 'Finish a resumable project upload and create or update the project'
-      description: 'Joins the chunks and runs the same checks as a single-request upload. Checking a large project can take longer than a proxy waits for the answer: after a timeout or network error, call this again. While the first call is still working it answers 409; once it has finished it answers with the created project, or with the reason the project was rejected, for 24 hours. A finished upload lists no received chunks and takes no more; call this to learn its outcome.'
+      description: 'Joins the chunks and runs the same checks as a single-request upload. Checking a large project can take longer than a proxy waits for the answer: send `Prefer: respond-async` to get a job to poll instead, or after a timeout or network error call this again. While the first call is still working it answers 409; once it has finished it answers with the created project, or with the reason the project was rejected, for 24 hours. A finished upload lists no received chunks and takes no more; call this to learn its outcome.'
+      parameters:
+        - $ref: '#/components/parameters/PreferAsync'
       responses:
         '201':
           description: 'Project successfully uploaded'
@@ -834,6 +836,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectResponse'
+        '202':
+          description: 'Sent `Prefer: respond-async`: checking and creating the project is queued. Poll the job (with the same login) until it is done (then load `project_id`) or failed (`error_status` 422: rejected, `error_message` says why; 500: complete again later). Calling this again while it is queued returns the same job.'
+          headers:
+            Content-Location:
+              schema:
+                type: string
+                example: '/api/jobs/0b5c1a52-7a5e-4cf7-9a8e-2d4f7c3b1e90'
+              description: 'Where to poll the job'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackgroundJobResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '404':
