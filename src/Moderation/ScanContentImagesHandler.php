@@ -15,6 +15,7 @@ use App\Storage\ScreenshotRepository;
 use App\Studio\StudioManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -43,6 +44,9 @@ final readonly class ScanContentImagesHandler
     private ContentSafetyScanner $scanner,
     private AutoModerationService $auto_moderation,
     private LoggerInterface $logger,
+    // Stricter than the avatar threshold: game art (sprites, horror and fan games) scores high on the model.
+    #[Autowire('%env(float:CONTENT_SAFETY_CONTENT_THRESHOLD)%')]
+    private float $threshold = 0.97,
   ) {
   }
 
@@ -76,7 +80,7 @@ final readonly class ScanContentImagesHandler
         return null;
       }
 
-      if (!$result->safe) {
+      if ($result->nsfwScore >= $this->threshold) {
         $note = sprintf('Automatic: image "%s" has NSFW score %.2f', basename($path), $result->nsfwScore);
         if ($flag) {
           $this->auto_moderation->flagForReview(
