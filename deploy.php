@@ -105,9 +105,12 @@ task('restart:workers', function () {
   run('{{bin/console}} messenger:stop-workers');
 });
 
+// Before anything changes: without the workers, mail, follower notifications and code view exports would only queue.
 task('check:workers', function () {
-  if (!test('systemctl cat catroweb-workers.target >/dev/null 2>&1')) {
-    throw new RuntimeException('catroweb-workers.target is not installed: install the worker units first (docs/operations/Background-Jobs.md)');
+  $workers = ['mail', 'default', 'scratch', 'uploads', 'scheduler_maintenance', 'scheduler_maintenance_slow'];
+  $units = implode(' ', array_map(static fn (string $worker): string => 'catroweb-worker@'.$worker, $workers));
+  if (!test('systemctl is-active --quiet '.$units)) {
+    throw new RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
   }
 });
 
