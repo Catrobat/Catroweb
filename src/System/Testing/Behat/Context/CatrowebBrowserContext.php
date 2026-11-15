@@ -1273,23 +1273,19 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the cron jobs table:$/
+   * @Then /^I should see the scheduled tasks table:$/
    *
    * @throws ResponseTextException
    */
-  public function seeCronJobTable(TableNode $table): void
+  public function seeScheduledTasksTable(TableNode $table): void
   {
-    $this->assertSession()->pageTextContains('Name');
-    $this->assertSession()->pageTextContains('State');
-    $this->assertSession()->pageTextContains('Cron Interval');
-    $this->assertSession()->pageTextContains('Start At');
-    $this->assertSession()->pageTextContains('Duration');
-    $this->assertSession()->pageTextContains('Result');
+    foreach (['Name', 'Lane', 'State', 'Interval', 'Last run', 'Duration', 'Result', 'Next run'] as $header) {
+      $this->assertSession()->elementTextContains('css', '#tasks-table thead', $header);
+    }
 
-    $rows = $table->getHash();
-    foreach ($rows as $row) {
-      $this->assertSession()->pageTextContains($row['Name']);
-      $this->assertSession()->pageTextContains($row['Cron Interval']);
+    foreach ($table->getHash() as $row) {
+      $this->assertSession()->elementTextContains('css', '#tasks-table', $row['Name']);
+      $this->assertSession()->elementTextContains('css', '#tasks-table', $row['Interval']);
     }
   }
 

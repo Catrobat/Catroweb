@@ -471,7 +471,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'sonata.admin',
       [
         'manager_type' => 'orm',
-        'label' => 'Cron Jobs',
+        'label' => 'Background tasks',
         'icon' => '<i class="fa fa-hourglass"></i>',
         'code' => null,
         'model_class' => CronJob::class,
