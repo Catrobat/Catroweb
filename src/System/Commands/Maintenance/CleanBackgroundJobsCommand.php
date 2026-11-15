@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /** Clients poll a job for minutes; finished ones are kept a week for support questions, then deleted. */
-#[AsCommand(name: 'catrobat:background-jobs:clean', description: 'Delete finished background jobs older than a week')]
+#[AsCommand(name: 'catrobat:background-jobs:clean', description: 'End stale background jobs, delete finished ones older than a week')]
 class CleanBackgroundJobsCommand extends Command
 {
   public function __construct(private readonly BackgroundJobRepository $jobs)
@@ -22,6 +22,7 @@ class CleanBackgroundJobsCommand extends Command
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
+    $output->writeln(sprintf('Failed %d stale background jobs.', $this->jobs->failStale()));
     $output->writeln(sprintf('Deleted %d finished background jobs.', $this->jobs->deleteFinishedBefore(new \DateTimeImmutable('-7 days'))));
 
     return Command::SUCCESS;

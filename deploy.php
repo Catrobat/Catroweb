@@ -101,11 +101,10 @@ task('restart:php-fpm', function () {
 // Background workers (systemd, Catrobat/infrastructure host-config/systemd) run the new release once restarted.
 // Not `messenger:stop-workers`: its signal lives in the release's own var/cache, which old workers never read.
 // systemd sends SIGTERM, so a worker finishes its current job first.
+// Fails the deploy without them: mail, follower notifications and code view exports only run on the workers.
 task('restart:workers', function () {
   if (!test('systemctl cat catroweb-workers.target >/dev/null 2>&1')) {
-    info('catroweb-workers.target not installed on this host, skipping');
-
-    return;
+    throw new RuntimeException('catroweb-workers.target is not installed: install the worker units first (docs/operations/Background-Jobs.md)');
   }
 
   run('sudo /usr/bin/systemctl restart catroweb-workers.target');

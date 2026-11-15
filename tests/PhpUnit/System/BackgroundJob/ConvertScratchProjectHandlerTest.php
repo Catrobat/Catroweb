@@ -13,7 +13,6 @@ use App\Project\Scratch\ScratchManager;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Messenger\Exception\RecoverableMessageHandlingException;
 
 /**
  * @internal
@@ -49,7 +48,7 @@ final class ConvertScratchProjectHandlerTest extends TestCase
 
   public function testScratchBeingDownIsRetried(): void
   {
-    $this->expectException(RecoverableMessageHandlingException::class);
+    $this->expectException(\RuntimeException::class);
     $this->handle(static fn (): never => throw new ScratchConversionException('down', ScratchConversionException::UPSTREAM));
   }
 

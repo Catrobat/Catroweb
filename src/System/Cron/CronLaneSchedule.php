@@ -29,6 +29,7 @@ abstract class CronLaneSchedule implements ScheduleProviderInterface
   {
     return (new Schedule())
       ->add(RecurringMessage::every(self::TICK, new RunDueCronTasks($this->slow())))
-      ->lock($this->locks->createLock(static::class));
+      ->lock($this->locks->createLock(static::class))
+    ;
   }
 }

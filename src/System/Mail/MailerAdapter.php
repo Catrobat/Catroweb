@@ -43,8 +43,16 @@ class MailerAdapter
       return false;
     }
 
-    // Rendered here, where the request's locale and host are known; the default worker only delivers it.
-    $this->messageBus->dispatch(new SendMail($this->buildEmail($to, $subject, $template, $context), $to, $emailType));
+    // Rendered here, where the request's locale and host are known; the mail worker only delivers it.
+    try {
+      $email = $this->buildEmail($to, $subject, $template, $context);
+    } catch (\Throwable $exception) {
+      $this->logger->error('Can\'t render mail template: '.$template.': '.$exception->getMessage(), ['exception' => $exception]);
+
+      return false; // never an empty mail
+    }
+
+    $this->messageBus->dispatch(new SendMail($email, $to, $emailType));
 
     return true;
   }
@@ -75,12 +83,7 @@ class MailerAdapter
 
   protected function buildEmail(string $to, string $subject, string $template, array $context): Email
   {
-    $html = '';
-    try {
-      $html = $this->templateWrapper->render($template, $context);
-    } catch (\Exception $exception) {
-      $this->logger->error('Can\'t render mail template: '.$template.$exception->getMessage(), ['exception' => $exception]);
-    }
+    $html = $this->templateWrapper->render($template, $context);
 
     // A plain Email, already rendered: a TemplatedEmail would be rendered again on the worker, from a context that
     // may hold entities.

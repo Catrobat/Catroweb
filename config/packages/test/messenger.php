@@ -9,6 +9,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension('framework', [
     'messenger' => [
       'transports' => [
+        'mail' => 'sync://',
         'default' => 'sync://',
         'scratch' => 'sync://',
         'uploads' => 'sync://',

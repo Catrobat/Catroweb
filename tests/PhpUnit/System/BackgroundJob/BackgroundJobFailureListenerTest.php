@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\System\BackgroundJob;
 
-use App\DB\Entity\System\BackgroundJob;
 use App\Project\Scratch\ConvertScratchProject;
 use App\System\BackgroundJob\BackgroundJobFailureListener;
-use Doctrine\ORM\EntityManagerInterface;
+use App\System\Mail\SendMail;
+use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
+use Symfony\Component\Mime\Email;
 
 /**
  * @internal
@@ -19,32 +20,40 @@ use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 #[CoversClass(BackgroundJobFailureListener::class)]
 final class BackgroundJobFailureListenerTest extends TestCase
 {
-  public function testAJobWhoseRetriesAreUsedUpFails(): void
+  public function testAJobWhoseRetriesAreUsedUpIsFailedWithPlainSql(): void
   {
-    $job = $this->failJob(will_retry: false);
+    $connection = $this->createMock(Connection::class);
+    $connection->expects($this->once())->method('executeStatement')->with(
+      $this->stringContains('UPDATE background_job SET state = :failed'),
+      $this->callback(static fn (array $params): bool => 'job-1' === $params['id'] && 'failed' === $params['failed']),
+    );
 
-    $this->assertSame(BackgroundJob::FAILED, $job->getState());
-    $this->assertSame(500, $job->getErrorStatus());
+    new BackgroundJobFailureListener($connection)($this->event(new ConvertScratchProject('job-1', 1, null), will_retry: false));
   }
 
   public function testAJobThatWillBeRetriedKeepsWaiting(): void
   {
-    $this->assertSame(BackgroundJob::QUEUED, $this->failJob(will_retry: true)->getState());
+    $connection = $this->createMock(Connection::class);
+    $connection->expects($this->never())->method('executeStatement');
+
+    new BackgroundJobFailureListener($connection)($this->event(new ConvertScratchProject('job-1', 1, null), will_retry: true));
   }
 
-  private function failJob(bool $will_retry): BackgroundJob
+  public function testMessagesWithoutAJobAreIgnored(): void
   {
-    $job = new BackgroundJob('scratch_import', '1');
-    $entity_manager = $this->createStub(EntityManagerInterface::class);
-    $entity_manager->method('isOpen')->willReturn(true);
-    $entity_manager->method('find')->willReturn($job);
-    $event = new WorkerMessageFailedEvent(new Envelope(new ConvertScratchProject($job->getId(), 1, null)), 'scratch', new \RuntimeException('crash'));
+    $connection = $this->createMock(Connection::class);
+    $connection->expects($this->never())->method('executeStatement');
+
+    new BackgroundJobFailureListener($connection)($this->event(new SendMail(new Email(), 'a@example.org', 'admin'), will_retry: false));
+  }
+
+  private function event(object $message, bool $will_retry): WorkerMessageFailedEvent
+  {
+    $event = new WorkerMessageFailedEvent(new Envelope($message), 'scratch', new \RuntimeException('crash'));
     if ($will_retry) {
       $event->setForRetry();
     }
 
-    new BackgroundJobFailureListener($entity_manager)($event);
-
-    return $job;
+    return $event;
   }
 }

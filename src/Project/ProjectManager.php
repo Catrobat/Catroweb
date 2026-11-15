@@ -7,7 +7,6 @@ namespace App\Project;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\Project\Tag;
-use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\ProjectRepository;

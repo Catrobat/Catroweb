@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\Transport\TransportInterface;
 /** What the queues hold right now, for the Background tasks admin page. */
 class QueueStats
 {
-  public const array QUEUES = ['default', 'scratch', 'uploads'];
+  public const array QUEUES = ['mail', 'default', 'scratch', 'uploads'];
 
   public function __construct(
     private readonly Connection $connection,

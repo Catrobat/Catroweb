@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\System\BackgroundJob;
 
 use App\DB\Entity\System\BackgroundJob;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\DBAL\Connection;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 
 /**
@@ -17,7 +16,7 @@ use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 #[AsEventListener]
 final readonly class BackgroundJobFailureListener
 {
-  public function __construct(private EntityManagerInterface $entity_manager)
+  public function __construct(private Connection $connection)
   {
   }
 
@@ -28,17 +27,11 @@ final readonly class BackgroundJobFailureListener
       return;
     }
 
-    if (!$this->entity_manager->isOpen()) {
-      return; // a fresh worker process picks the next message; this row stays "running" and is cleaned up later
-    }
-
-    $this->entity_manager->clear();
-    $job = $this->entity_manager->find(BackgroundJob::class, $message->jobId());
-    if (null === $job || $job->isFinished()) {
-      return;
-    }
-
-    $job->fail(Response::HTTP_INTERNAL_SERVER_ERROR, 'Something went wrong. Please try again later.');
-    $this->entity_manager->flush();
+    // Plain SQL: after a database error the EntityManager is closed, and the job must still end.
+    $this->connection->executeStatement(
+      'UPDATE background_job SET state = :failed, error_status = 500, error_message = :message, updated_at = :now WHERE id = :id AND state IN (:queued, :running)',
+      ['failed' => BackgroundJob::FAILED, 'message' => 'Something went wrong. Please try again later.', 'now' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
+        'id' => $message->jobId(), 'queued' => BackgroundJob::QUEUED, 'running' => BackgroundJob::RUNNING],
+    );
   }
 }

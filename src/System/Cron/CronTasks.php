@@ -35,7 +35,7 @@ final class CronTasks
       $task('Retroactively unlock custom translation achievements', 'catrobat:workflow:achievement:translation', '1 month', self::DAY),
       $task('Add bronze_user UserAchievements', 'catrobat:workflow:achievement:bronze_user', '1 year', self::WEEK),
       $task('Add perfect_profile UserAchievements', 'catrobat:workflow:achievement:perfect_profile', '1 year', self::WEEK),
-      $task('Delete finished background jobs', 'catrobat:background-jobs:clean', '1 day', self::HOUR),
+      $task('Clean up background jobs', 'catrobat:background-jobs:clean', '1 hour', self::HOUR),
 
       // Slow lane: whole-table or whole-disk sweeps
       $task('Delete expired projects based on retention rules', 'catrobat:storage:lifecycle', '1 day', self::DAY, true),

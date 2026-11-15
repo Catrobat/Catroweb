@@ -12,7 +12,6 @@ use OpenAPI\Server\Model\ErrorResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Exception\RecoverableMessageHandlingException;
 
 /** Completes a resumable upload on the uploads worker: the same code path as the synchronous completion call. */
 #[AsMessageHandler]
@@ -39,7 +38,7 @@ final readonly class CompleteProjectUploadHandler
 
     if (Response::HTTP_CONFLICT === $code) {
       // A synchronous completion call holds the upload: its outcome is stored, the retry picks it up.
-      throw new RecoverableMessageHandlingException('Upload '.$message->upload_id.' is being completed by another call');
+      throw new \RuntimeException('Upload '.$message->upload_id.' is being completed by another call');
     }
 
     $job = $this->entity_manager->find(BackgroundJob::class, $message->job_id) ?? $job;

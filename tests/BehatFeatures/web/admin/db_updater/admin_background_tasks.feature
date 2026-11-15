@@ -34,7 +34,7 @@ Feature: The background tasks page shows the scheduled tasks, the queues and fai
       | Retroactively unlock custom translation achievements         | 1 month  |
       | Update project popularity scores                             | 6 hours  |
       | Update user rankings                                         | 1 day    |
-      | Delete finished background jobs                              | 1 day    |
+      | Clean up background jobs                                     | 1 hour   |
     And there should be "21" cron jobs in the database
 
   Scenario: The queues are shown, and no job has failed

@@ -9,7 +9,6 @@ use App\Project\Scratch\Converter\ScratchConversionException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Exception\RecoverableMessageHandlingException;
 
 /** Runs a queued Scratch import on the scratch worker, one at a time, and records the outcome for the polling client. */
 #[AsMessageHandler]
@@ -32,9 +31,10 @@ final readonly class ConvertScratchProjectHandler
     try {
       $project = $this->scratch_manager->importProject($message->scratch_id, static function (): void {}, $message->ip);
     } catch (ScratchConversionException $exception) {
-      // Scratch being down, or a synchronous import holding the converter, passes: try again later.
+      // Scratch being down, or a synchronous import holding the converter, passes: Messenger retries (a few times,
+      // then BackgroundJobFailureListener fails the job). Not RecoverableMessageHandlingException: it retries forever.
       if (\in_array($exception->getCode(), [ScratchConversionException::UPSTREAM, ScratchConversionException::BUSY], true)) {
-        throw new RecoverableMessageHandlingException($exception->getMessage(), 0, $exception);
+        throw new \RuntimeException($exception->getMessage(), 0, $exception);
       }
 
       // importProject cleared the EntityManager: load the job again.

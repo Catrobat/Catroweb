@@ -26,18 +26,20 @@ Run by hand: `bin/console catrobat:cronjob` runs every due task of both lanes, `
 
 ## Production
 
-The workers are systemd services (Catrobat/infrastructure `host-config/systemd/catroweb-worker@.service`, one instance per queue above, grouped by `catroweb-workers.target`):
+The workers are systemd services (Catrobat/infrastructure `host-config/systemd/catroweb-worker@.service`, one instance per queue above, grouped by `catroweb-workers.target`).
+
+First rollout, in this order: install the unit files and the sudoers entry (infrastructure repo, `docs/HOST_BOOTSTRAP.md`), deploy (the migration creates the queue tables, `restart:workers` starts the workers), then delete `/etc/cron.d/catroweb`.
 
 ```bash
 systemctl status 'catroweb-worker@*'
 journalctl -u catroweb-worker@scratch -f
 ```
 
-- **Deploys** restart them with `systemctl restart catroweb-workers.target` (`deploy.php`, task `restart:workers`). Not `messenger:stop-workers`: its signal is stored in the release's own `var/cache`, which workers started from the previous release never read. systemd sends SIGTERM and a worker finishes its current job before it exits.
-- **Failed jobs** (retries used up) move to the `failed` queue. See and retry or delete them at `/admin/system/background-tasks/list`, or with `bin/console messenger:failed:show` / `messenger:failed:retry`.
+- **Deploys** restart them with `systemctl restart catroweb-workers.target` (`deploy.php`, task `restart:workers`), and fail if the units are not installed: mail and notifications only run on the workers. Not `messenger:stop-workers`: its signal is stored in the release's own `var/cache`, which workers started from the previous release never read. systemd sends SIGTERM to the worker only (`KillMode=mixed`), which finishes its current job, including a running periodic task, before it exits (up to `TimeoutStopSec`).
+- **Failed jobs**: a job is retried up to three times (growing delay, at most 10 minutes), then moves to the `failed` queue and its `background_job` row fails. See them at `/admin/system/background-tasks/list`: "Retry" queues the job again on its own queue, "Delete" drops it. A job row left unfinished by a killed worker counts as dead after 30 minutes and is failed by the hourly clean-up.
 - **Monitoring**: the Background tasks admin page; Grafana's "Background jobs" row; `catroweb-watchdog` alerts when a worker is not running, when jobs wait longer than 15 minutes, and when a job failed for good.
 - A worker restarts itself every hour (`--time-limit`) and after a job that took it over 512 MB (`--memory-limit`).
 
 ## Locally
 
-`bin/console messenger:consume default scratch uploads scheduler_maintenance scheduler_maintenance_slow -vv` runs all queues in one terminal. Without a worker, async requests stay `queued`.
+`bin/console messenger:consume mail default scratch uploads scheduler_maintenance scheduler_maintenance_slow -vv` runs all queues in one terminal. Without a worker, async requests stay `queued`.

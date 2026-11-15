@@ -15,7 +15,10 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Process\Process;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
+use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -30,8 +33,9 @@ class CronJobsAdminController extends CRUDController
     protected EntityManagerInterface $entity_manager,
     private readonly CronTaskRunner $runner,
     private readonly QueueStats $queue_stats,
-    #[Autowire('%kernel.project_dir%')]
-    private readonly string $project_dir,
+    private readonly MessageBusInterface $message_bus,
+    #[Autowire(service: 'messenger.transport.failed')]
+    private readonly TransportInterface $failed_transport,
   ) {
   }
 
@@ -76,31 +80,35 @@ class CronJobsAdminController extends CRUDController
     return $this->toList();
   }
 
+  /** Queues the job again on its own queue; a worker runs it, never this request. */
   public function retryFailedJobAction(Request $request): RedirectResponse
   {
-    return $this->failedJobCommand('messenger:failed:retry', $request, 'The job is queued again.');
+    return $this->withFailedJob($request, function (Envelope $envelope): string {
+      $this->message_bus->dispatch($envelope->getMessage());
+
+      return 'The job is queued again.';
+    });
   }
 
   public function removeFailedJobAction(Request $request): RedirectResponse
   {
-    return $this->failedJobCommand('messenger:failed:remove', $request, 'The job was deleted.');
+    return $this->withFailedJob($request, static fn (): string => 'The job was deleted.');
   }
 
-  private function failedJobCommand(string $command, Request $request, string $success): RedirectResponse
+  /** @param callable(Envelope): string $action runs before the job leaves the failed queue */
+  private function withFailedJob(Request $request, callable $action): RedirectResponse
   {
     $this->denyUnlessAllowed();
-    $id = (string) $request->query->get('id');
-    if (1 !== preg_match('/^\d+$/', $id)) {
+    $envelope = $this->failed_transport instanceof ListableReceiverInterface ? $this->failed_transport->find((string) $request->query->get('id')) : null;
+    if (null === $envelope) {
       $this->addFlash('sonata_flash_error', 'No such job');
 
       return $this->toList();
     }
 
-    // The Messenger commands know how to move a message between transports; a retry is only queued, never run here.
-    $process = new Process(['bin/console', $command, $id, '--force', '--no-interaction'], $this->project_dir);
-    $process->setTimeout(60);
-    $process->run();
-    $this->addFlash($process->isSuccessful() ? 'sonata_flash_success' : 'sonata_flash_error', $process->isSuccessful() ? $success : 'Failed: '.$process->getErrorOutput());
+    $message = $action($envelope);
+    $this->failed_transport->reject($envelope);
+    $this->addFlash('sonata_flash_success', $message);
 
     return $this->toList();
   }
