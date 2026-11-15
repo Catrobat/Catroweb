@@ -363,7 +363,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsScratchScratchIdPost(int $scratch_id, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsScratchScratchIdPost(int $scratch_id, ?string $prefer, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Every request asks Scratch's API, even when our copy is current; converting is limited much harder.
     if ($this->isCrossSiteRequest()) {
@@ -379,7 +379,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         throw new ScratchConversionException('Too many Scratch projects opened in a short time. Please wait a minute.', ScratchConversionException::RATE_LIMITED);
       }
 
-      $project = $this->scratch_manager->importProject($scratch_id, function () use ($ip, &$converted): void {
+      $consume_conversion_quota = function () use ($ip, &$converted): void {
         $burst = $this->scratchConvertBurstLimiter->create($ip)->consume();
         $daily = $this->scratchConvertDailyLimiter->create($ip)->consume();
         if (!$burst->isAccepted() || !$daily->isAccepted()) {
@@ -387,7 +387,21 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         }
 
         $converted = true;
-      }, $ip);
+      };
+
+      if (self::prefersAsync($prefer)) {
+        $project = $this->scratch_manager->currentCopy($scratch_id);
+        if (null === $project) {
+          $job = $this->scratch_manager->queueImport($scratch_id, $consume_conversion_quota, $ip);
+          $responseCode = Response::HTTP_ACCEPTED;
+          // Not Location: FastCGI turns a 2xx with Location into a 302.
+          $responseHeaders['Content-Location'] = '/api/jobs/'.$job->getId();
+
+          return JobsApi::response($job);
+        }
+      } else {
+        $project = $this->scratch_manager->importProject($scratch_id, $consume_conversion_quota, $ip);
+      }
     } catch (ScratchConversionException $exception) {
       [$responseCode, $type] = match ($exception->getCode()) {
         ScratchConversionException::NOT_FOUND => [Response::HTTP_NOT_FOUND, 'not_found'],
@@ -410,6 +424,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
+  }
+
+  /** RFC 7240: `Prefer: respond-async`, possibly among other preferences. */
+  private static function prefersAsync(?string $prefer): bool
+  {
+    return null !== $prefer && 1 === preg_match('/(^|[\s,;])respond-async($|[\s,;])/i', $prefer);
   }
 
   /**

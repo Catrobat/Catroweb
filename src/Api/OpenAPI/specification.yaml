@@ -60,6 +60,9 @@ tags:
   - name: 'Translation'
     description: 'Machine and custom translations for projects'
 
+  - name: 'Jobs'
+    description: 'Status of background jobs started with `Prefer: respond-async` (Scratch import, project upload)'
+
 paths:
   ##############################################
   # Authentication
@@ -1060,6 +1063,7 @@ paths:
             type: integer
             minimum: 1
             example: 70058680
+        - $ref: '#/components/parameters/PreferAsync'
       responses:
         '200':
           description: 'An up-to-date copy already existed'
@@ -1079,6 +1083,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectResponse'
+        '202':
+          description: 'Sent `Prefer: respond-async` and the project must be converted: the conversion is queued. Poll the job until it is done (then load `project_id`) or failed (then show `error_message`). A second request for the same project while it is queued gets the same job.'
+          headers:
+            Content-Location:
+              schema:
+                type: string
+                example: '/api/jobs/0b5c1a52-7a5e-4cf7-9a8e-2d4f7c3b1e90'
+              description: 'Where to poll the job'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackgroundJobResponse'
         '403':
           description: 'The request comes from another site (Origin or Sec-Fetch-Site header); browsers may only import from this site'
           content:
@@ -3714,6 +3730,33 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  ##############################################
+  # Jobs
+  ###
+  '/jobs/{job_id}':
+    get:
+      tags:
+        - 'Jobs'
+      summary: 'Status of a background job'
+      description: 'Poll every few seconds until `state` is `done` or `failed`. Finished jobs are kept for a week. A job started by a logged-in user (an upload) is only shown to that user.'
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+            pattern: '^[a-zA-Z0-9\-]+$'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackgroundJobResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   ##############################################
   # Default Response messages
@@ -3825,6 +3868,15 @@ components:
     ##
     # Default
     #
+    PreferAsync:
+      in: header
+      name: Prefer
+      required: false
+      description: '`respond-async` (RFC 7240): answer 202 with a job to poll instead of waiting for slow work. Without it the request blocks until the work is done.'
+      schema:
+        type: string
+        example: 'respond-async'
+
     Locale:
       in: header
       name: Accept-Language
@@ -4702,6 +4754,36 @@ components:
                 type: string
               username:
                 type: string
+
+    BackgroundJobResponse:
+      type: object
+      required:
+        - id
+        - type
+        - state
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: ['scratch_import', 'project_upload']
+        state:
+          type: string
+          enum: ['queued', 'running', 'done', 'failed']
+        project_id:
+          type: string
+          nullable: true
+          description: 'The project, once done'
+        error_status:
+          type: integer
+          nullable: true
+          description: 'Once failed: the HTTP status the request would have got without `Prefer: respond-async`'
+          example: 422
+        error_message:
+          type: string
+          nullable: true
+          description: 'Once failed: why, in words that can be shown to the user'
 
     ErrorResponse:
       type: object

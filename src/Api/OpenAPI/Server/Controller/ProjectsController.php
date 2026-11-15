@@ -1693,12 +1693,14 @@ class ProjectsController extends Controller
     // Handle authentication
 
     // Read out all input parameter values into variables
+    $prefer = $request->headers->get('Prefer');
 
     // Use the default value if no value was provided
 
     // Deserialize the input values that needs it
     try {
       $scratch_id = $this->deserialize($scratch_id, 'int', 'string');
+      $prefer = $this->deserialize($prefer, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -1712,6 +1714,12 @@ class ProjectsController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($prefer, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -1720,11 +1728,12 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsScratchScratchIdPost($scratch_id, $responseCode, $responseHeaders);
+      $result = $handler->projectsScratchScratchIdPost($scratch_id, $prefer, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'An up-to-date copy already existed',
         201 => 'The Scratch project was converted',
+        202 => 'Sent &#x60;Prefer: respond-async&#x60; and the project must be converted: the conversion is queued. Poll the job until it is done (then load &#x60;project_id&#x60;) or failed (then show &#x60;error_message&#x60;). A second request for the same project while it is queued gets the same job.',
         403 => 'The request comes from another site (Origin or Sec-Fetch-Site header); browsers may only import from this site',
         404 => 'Scratch does not know the project, or it is not shared',
         422 => 'The project cannot be converted; the message says why and can be shown to the user',

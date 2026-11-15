@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Project\Scratch;
 
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\System\BackgroundJobRepository;
 use App\Project\ProjectManager;
 use App\Project\Scratch\Converter\ScratchConversionException;
 use App\Project\Scratch\Converter\ScratchFetcher;
@@ -18,6 +19,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @internal
@@ -43,7 +45,7 @@ final class ScratchManagerTest extends TestCase
 
     $manager = new ScratchManager($project_manager, $this->createStub(UserManager::class), $fetcher,
       $this->createStub(ScratchToCatrobatConverter::class), new NullLogger(), $this->createStub(Connection::class),
-      $this->createStub(EntityManagerInterface::class));
+      $this->createStub(EntityManagerInterface::class), $this->createStub(BackgroundJobRepository::class), $this->createStub(MessageBusInterface::class));
 
     try {
       $this->assertSame($existing, $manager->importProject(7, static function (): void {}, null));

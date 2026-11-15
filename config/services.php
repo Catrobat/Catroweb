@@ -62,6 +62,7 @@ use App\Api\ProjectsApi;
 use App\Api\SearchApi;
 use App\Api\Services\OverwriteController;
 use App\Api\StudiosApi;
+use App\Api\JobsApi;
 use App\Api\TranslationApi;
 use App\Api\UsersApi;
 use App\Api\UtilityApi;
@@ -230,6 +231,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(StudiosApi::class)->tag('open_api_server.api', ['api' => 'studios']);
   $services->set(ModerationApi::class)->tag('open_api_server.api', ['api' => 'moderation']);
   $services->set(TranslationApi::class)->tag('open_api_server.api', ['api' => 'translation']);
+  $services->set(JobsApi::class)->tag('open_api_server.api', ['api' => 'jobs']);
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 
