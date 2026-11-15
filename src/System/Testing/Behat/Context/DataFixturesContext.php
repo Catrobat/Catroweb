@@ -2428,7 +2428,7 @@ class DataFixturesContext implements Context
     Assert::assertNotNull($user, sprintf('User "%s" not found', $user_identifier));
     $warning = $this->getManager()->getRepository(ModerationNotification::class)->findOneBy([
       'user' => $user,
-      'moderation_action' => ReportProcessor::NOTIFICATION_ADMIN_WARNING,
+      'moderation_action' => [ReportProcessor::NOTIFICATION_ADMIN_WARNING, ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING],
       'message' => $message,
     ]);
     Assert::assertNotNull($warning, sprintf('No moderation warning "%s" for user "%s"', $message, $user_identifier));
