@@ -47,6 +47,7 @@ final class CronTasks
       $task('Re-sanitize user-generated content', 'catro:moderation:sanitize-existing', '1 month', self::DAY, true),
       $task('(Re-)Add project extensions', 'catrobat:workflow:project:refresh_extensions', '1 year', self::WEEK, true),
       $task('Clean unverified user accounts', 'catrobat:clean:unverified-users', '1 day', 3 * self::HOUR, true),
+      $task('Delete Scratch placeholder accounts without projects', 'catrobat:clean:scratch-placeholders', '1 day', 3 * self::HOUR, true),
     ];
   }
 
