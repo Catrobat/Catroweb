@@ -25,9 +25,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'failed' => ['dsn' => '%env(MESSENGER_TRANSPORT_DSN)%', 'options' => ['queue_name' => 'failed']],
       ],
       'routing' => [
-        Symfony\Component\Mailer\Messenger\SendEmailMessage::class => 'default',
+        App\System\Mail\SendMail::class => 'default',
         App\Project\Scratch\ConvertScratchProject::class => 'scratch',
         App\Project\CodeView\ExportCodeView::class => 'default',
+        App\User\Notification\NotifyFollowersOfNewProject::class => 'default',
       ],
     ],
   ]);

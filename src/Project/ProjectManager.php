@@ -328,7 +328,7 @@ class ProjectManager
 
     $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));
     if (!$request->isRestore()) {
-      $this->notifyFollower($project);
+      $this->notification_service->queueNewProjectNotifications($project);
     }
     $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$project_id;
     if (is_dir($compressed_file_directory)) {
@@ -707,15 +707,6 @@ class ProjectManager
       'scratch' => $this->getScratchRemixesProjectsCount($flavor, $max_version),
       default => 0,
     };
-  }
-
-  private function notifyFollower(Project $project): void
-  {
-    $followers = $project->getUser()->getFollowers();
-    for ($i = 0; $i < $followers->count(); ++$i) {
-      $notification = new NewProjectNotification($followers[$i], $project);
-      $this->notification_service->addNotification($notification);
-    }
   }
 
   public function deleteProject(Project $project): void

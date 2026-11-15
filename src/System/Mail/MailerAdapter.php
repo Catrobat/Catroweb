@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\System\Mail;
 
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Crypto\DkimSigner;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Exception\InvalidArgumentException;
+use Symfony\Component\Mime\HtmlToTextConverter\DefaultHtmlToTextConverter;
 use Symfony\Component\Mime\Message;
 use Twig\Environment;
 
@@ -24,6 +26,7 @@ class MailerAdapter
     #[Autowire('%dkim.private.key%')]
     protected string $dkim_private_key_path,
     protected EmailBudgetManager $budgetManager,
+    protected MessageBusInterface $messageBus,
   ) {
   }
 
@@ -40,13 +43,21 @@ class MailerAdapter
       return false;
     }
 
-    $email = $this->buildEmail($to, $subject, $template, $context);
-    // $email = $this->signEmail($email); // Signing is currently disabled due to breveo
+    // Rendered here, where the request's locale and host are known; the default worker only delivers it.
+    $this->messageBus->dispatch(new SendMail($this->buildEmail($to, $subject, $template, $context), $to, $emailType));
 
-    // Free mail tiers have small daily limits, so several providers are chained: the first one with room
-    // left sends, and one that fails (down, or over a limit we did not know about) hands over to the next.
-    // ponytail: a provider that times out after accepting the mail causes a duplicate from the next one; a
-    // duplicate (same link) beats a lost verification mail. Fall through only on connect/auth errors if it hurts.
+    return true;
+  }
+
+  /**
+   * On the default worker. Free mail tiers have small daily limits, so several providers are chained: the first one
+   * with room left sends, and one that fails (down, or over a limit we did not know about) hands over to the next.
+   * ponytail: a provider that times out after accepting the mail causes a duplicate from the next one; a
+   * duplicate (same link) beats a lost verification mail. Fall through only on connect/auth errors if it hurts.
+   */
+  public function deliver(Message $email, string $to, string $emailType): bool
+  {
+    // $email = $this->signEmail($email); // Signing is currently disabled due to breveo
     foreach ($this->budgetManager->getProvidersWithRoom() as $provider) {
       $email->getHeaders()->remove('X-Transport');
       $email->getHeaders()->addTextHeader('X-Transport', $provider);
@@ -57,12 +68,12 @@ class MailerAdapter
       }
     }
 
-    $this->logger->error(sprintf('No mail provider could send the email to %s with subject "%s".', $to, $subject));
+    $this->logger->error(sprintf('No mail provider could send the email to %s with subject "%s".', $to, $email->getHeaders()->getHeaderBody('Subject')));
 
     return false;
   }
 
-  protected function buildEmail(string $to, string $subject, string $template, array $context): Message
+  protected function buildEmail(string $to, string $subject, string $template, array $context): Email
   {
     $html = '';
     try {
@@ -71,14 +82,15 @@ class MailerAdapter
       $this->logger->error('Can\'t render mail template: '.$template.$exception->getMessage(), ['exception' => $exception]);
     }
 
-    return new TemplatedEmail()
+    // A plain Email, already rendered: a TemplatedEmail would be rendered again on the worker, from a context that
+    // may hold entities.
+    return new Email()
       ->from(new Address('share@catrobat.org', 'Catrobat Share'))
       ->replyTo('support@catrobat.org')
       ->to($to)
       ->subject($subject)
-      ->htmlTemplate($template)
-      ->context($context)
       ->html($html)
+      ->text(new DefaultHtmlToTextConverter()->convert($html, 'utf-8'))
     ;
   }
 

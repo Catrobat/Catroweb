@@ -4,12 +4,20 @@ declare(strict_types=1);
 
 namespace App\User\Notification;
 
+use App\DB\Entity\Project\Project;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class NotificationManager
 {
-  public function __construct(private readonly EntityManagerInterface $em)
+  public function __construct(private readonly EntityManagerInterface $em, private readonly MessageBusInterface $message_bus)
   {
+  }
+
+  /** A popular uploader has thousands of followers: their notifications are written on the default worker. */
+  public function queueNewProjectNotifications(Project $project): void
+  {
+    $this->message_bus->dispatch(new NotifyFollowersOfNewProject((string) $project->getId()));
   }
 
   public function addNotification(mixed $notification, bool $flush = true): void
