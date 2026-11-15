@@ -62,7 +62,8 @@ final class CleanEmptyStudiosCommandTest extends KernelTestCase
     $this->assertInstanceOf(UserDataFixtures::class, $users);
     $requested_studio = $this->find($requested);
     $this->assertInstanceOf(Studio::class, $requested_studio);
-    $this->studios->setJoinRequest($users->insertUser(['name' => 'asking'.uniqid()]), $requested_studio, StudioJoinRequest::STATUS_PENDING);
+    $asking = $users->insertUser(['name' => 'asking'.uniqid()]);
+    $this->studios->setJoinRequest($asking, $requested_studio, StudioJoinRequest::STATUS_PENDING);
     $projects = self::getContainer()->get(ProjectDataFixtures::class);
     $this->assertInstanceOf(ProjectDataFixtures::class, $projects);
     $project = $projects->insertProject(['name' => 'studio '.uniqid(), 'owned by' => $this->admin->getUsername()]);
@@ -85,15 +86,16 @@ final class CleanEmptyStudiosCommandTest extends KernelTestCase
     $revived_studio = $this->find($revived);
     $this->assertInstanceOf(Studio::class, $revived_studio);
     $this->assertNull($revived_studio->getDeletionWarnedAt());
-    $this->assertNotNull($this->find($recently_warned)?->getDeletionWarnedAt(), 'warned 10 days ago: neither deleted nor reset');
-    $this->assertNull($this->find($requested)?->getDeletionWarnedAt(), 'a pending join request is activity');
-    $this->assertNull($this->find($nobody)?->getDeletionWarnedAt(), 'no one to warn: never warned, so never deleted');
     $warned_studios = static fn (array $warnings): array => array_map(static fn (StudioDeletionWarningNotification $n): ?string => $n->getStudio()?->getId(), $warnings);
+    $this->assertNotNull($this->find($recently_warned)?->getDeletionWarnedAt(), 'warned 10 days ago: neither deleted nor reset');
+    $this->assertNotNull($this->find($requested)?->getDeletionWarnedAt(), 'an unanswered join request is not activity');
+    $this->assertSame([$requested], $warned_studios($this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $asking->getId()])), 'the one waiting on a join request is told too');
+    $this->assertNull($this->find($nobody)?->getDeletionWarnedAt(), 'no one to warn: never warned, so never deleted');
     $warnings = $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]);
-    $this->assertEqualsCanonicalizing([$inactive, $adminless], $warned_studios($warnings), 'without an admin the members are warned');
+    $this->assertEqualsCanonicalizing([$inactive, $adminless, $requested], $warned_studios($warnings), 'without an admin the members are warned');
 
     new CommandTester($command)->execute([]);
-    $this->assertCount(2, $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]), 'warned once');
+    $this->assertCount(3, $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]), 'warned once');
   }
 
   /** A studio whose creation and activities all lie $age back, optionally warned $warned ago. */

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\System\Commands\Maintenance;
 
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Notifications\StudioDeletionWarningNotification;
+use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -18,9 +20,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * A studio without projects in which nothing happened for 90 days: its admins (or, without one, its members) get an
- * in-app warning, and 30 days later it is deleted unless a project was added or anything else happened in it.
- * Featured studios, studios with a pending join request and studios with no one to warn stay.
+ * A studio without projects in which nothing happened for 90 days: its admins (or, without one, its members) and
+ * anyone waiting on a join request get an in-app warning, and 30 days later it is deleted unless a project was added
+ * or anything else happened in it. Featured studios and studios with no one to warn stay.
  */
 #[AsCommand(
   name: 'catrobat:clean:empty-studios',
@@ -80,8 +82,8 @@ class CleanEmptyStudiosCommand extends Command
       }
 
       $studio->setDeletionWarnedAt($now);
-      foreach ($recipients as $member) {
-        $this->entity_manager->persist(new StudioDeletionWarningNotification($member->getUser(), $studio));
+      foreach ($recipients as $user) {
+        $this->entity_manager->persist(new StudioDeletionWarningNotification($user, $studio));
       }
     }
 
@@ -95,16 +97,15 @@ class CleanEmptyStudiosCommand extends Command
   }
 
   /**
-   * SQL condition on studio s: no projects, not featured, no pending join request, and nothing happened in it since
-   * $since (an SQL expression).
+   * SQL condition on studio s: no projects, not featured, and nothing happened in it since $since (an SQL expression).
+   * An unanswered join request is not activity: it has no date, and nobody in the studio answered it.
    */
   private static function idleSince(string $since): string
   {
     return "(NOT EXISTS (SELECT 1 FROM studio_program sp WHERE sp.studio = s.id)
       AND NOT EXISTS (SELECT 1 FROM featured_studio f WHERE f.studio_id = s.id)
       AND s.created_on < {$since} AND COALESCE(s.updated_on, s.created_on) < {$since}
-      AND NOT EXISTS (SELECT 1 FROM studio_activity a WHERE a.studio = s.id AND a.created_on >= {$since})
-      AND NOT EXISTS (SELECT 1 FROM studio_join_requests j WHERE j.studio = s.id AND j.status = 'pending'))";
+      AND NOT EXISTS (SELECT 1 FROM studio_activity a WHERE a.studio = s.id AND a.created_on >= {$since}))";
   }
 
   /**
@@ -118,16 +119,27 @@ class CleanEmptyStudiosCommand extends Command
   }
 
   /**
-   * The active admins; a studio without one warns all its active members.
+   * The active admins (a studio without one: all its active members), and whoever still waits for an answer to a
+   * join request: their request goes with the studio.
    *
-   * @return list<StudioUser>
+   * @return list<User>
    */
   private function recipients(Studio $studio): array
   {
-    $repository = $this->entity_manager->getRepository(StudioUser::class);
-    $admins = $repository->findBy(['studio' => $studio, 'role' => StudioUser::ROLE_ADMIN, 'status' => StudioUser::STATUS_ACTIVE]);
+    $members = $this->entity_manager->getRepository(StudioUser::class);
+    $staff = $members->findBy(['studio' => $studio, 'role' => StudioUser::ROLE_ADMIN, 'status' => StudioUser::STATUS_ACTIVE])
+      ?: $members->findBy(['studio' => $studio, 'status' => StudioUser::STATUS_ACTIVE]);
+    $requests = $this->entity_manager->getRepository(StudioJoinRequest::class)->findBy(['studio' => $studio, 'status' => StudioJoinRequest::STATUS_PENDING]);
 
-    return [] !== $admins ? $admins : $repository->findBy(['studio' => $studio, 'status' => StudioUser::STATUS_ACTIVE]);
+    $recipients = [];
+    foreach ([...$staff, ...$requests] as $link) {
+      $user = $link->getUser();
+      if ($user instanceof User) {
+        $recipients[(string) $user->getId()] = $user;
+      }
+    }
+
+    return array_values($recipients);
   }
 
   /**
