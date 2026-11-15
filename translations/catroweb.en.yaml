@@ -712,6 +712,8 @@ catro-notifications:
   project-files-lost:
     message: 'A server error lost the files of %count% of your projects: %projects%. They are hidden until you upload them again from Pocket Code. Projects that are not uploaded again within 14 days will be deleted.'
     more: 'and %count% more'
+  moderation-warning:
+    message: 'A moderator reviewed a report about your content and found that it breaks our community rules. Please follow the rules, or your account may be suspended next time.'
   noProjects: "It looks like you don't have any project notifications."
 
 clipboard:

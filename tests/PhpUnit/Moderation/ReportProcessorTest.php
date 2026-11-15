@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Moderation;
 
+use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\Moderation\ContentReport;
+use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
 use App\DB\Enum\ContentType;
+use App\DB\Enum\ReportState;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportException;
@@ -671,5 +674,157 @@ final class ReportProcessorTest extends TestCase
     );
 
     $this->assertFalse($result['auto_hidden']);
+  }
+
+  /**
+   * @return array{0: ContentReport, 1: ContentReport}
+   */
+  private function createPendingReports(string $content_type, string $content_id): array
+  {
+    $reports = [];
+    foreach (['report-1', 'report-2'] as $id) {
+      $report = new ContentReport();
+      $report->setId($id);
+      $report->setContentType($content_type);
+      $report->setContentId($content_id);
+      $report->setCategory('inappropriate');
+      $reports[] = $report;
+    }
+
+    return [$reports[0], $reports[1]];
+  }
+
+  /**
+   * @param list<object> $persisted
+   */
+  private function createRecordingEntityManager(array &$persisted, ?User $found_user): EntityManagerInterface
+  {
+    $em = $this->createStub(EntityManagerInterface::class);
+    $em->method('find')->willReturn($found_user);
+    $em->method('persist')->willReturnCallback(static function (object $entity) use (&$persisted): void {
+      $persisted[] = $entity;
+    });
+
+    return $em;
+  }
+
+  /**
+   * @param list<object> $persisted
+   */
+  private function assertOwnerWarned(array $persisted, User $owner, string $content_type, string $message): void
+  {
+    $warnings = array_values(array_filter(
+      $persisted,
+      static fn (object $e): bool => $e instanceof ModerationNotification
+        && ReportProcessor::NOTIFICATION_ADMIN_WARNING === $e->getModerationAction(),
+    ));
+    $this->assertCount(1, $warnings);
+    $this->assertSame($owner, $warnings[0]->getUser());
+    $this->assertSame($content_type, $warnings[0]->getContentType());
+    $this->assertSame($message, $warnings[0]->getMessage());
+
+    $audits = array_values(array_filter($persisted, static fn (object $e): bool => $e instanceof ContentModerationAction));
+    $this->assertCount(1, $audits);
+    $this->assertSame(ContentModerationAction::ACTION_ADMIN_WARNED, $audits[0]->getAction());
+  }
+
+  #[Group('unit')]
+  public function testHideWarnHidesContentWarnsOwnerWithoutBan(): void
+  {
+    [$report, $related] = $this->createPendingReports('project', 'project-123');
+    $owner = new User();
+
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('owner-id');
+    // Exactly one hide: the project. No second call that would ban the owner.
+    $visibility->expects($this->once())->method('hideContent')->with(ContentType::Project, 'project-123');
+    $visibility->expects($this->never())->method('showContent');
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('findReportsForContent')->willReturn([$report, $related]);
+
+    $persisted = [];
+    $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      visibility_manager: $visibility,
+      entity_manager: $this->createRecordingEntityManager($persisted, $owner),
+    );
+
+    $processor->resolveReport($report, $this->createUserStub('admin-id'), ReportProcessor::ACTION_HIDE_WARN, '  Please keep it kind.  ');
+
+    $this->assertSame(ReportState::Accepted->value, $report->getState());
+    $this->assertSame(ReportState::Accepted->value, $related->getState());
+    $this->assertFalse($owner->getProfileHidden());
+    $this->assertOwnerWarned($persisted, $owner, 'project', 'Please keep it kind.');
+  }
+
+  #[Group('unit')]
+  public function testWarnKeepsContentVisibleAndWarnsOwner(): void
+  {
+    [$report, $related] = $this->createPendingReports('comment', '42');
+    $owner = new User();
+
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('owner-id');
+    $visibility->expects($this->never())->method('hideContent');
+    $visibility->expects($this->once())->method('showContent')->with(ContentType::Comment, '42');
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('findReportsForContent')->willReturn([$report, $related]);
+
+    $persisted = [];
+    $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      visibility_manager: $visibility,
+      entity_manager: $this->createRecordingEntityManager($persisted, $owner),
+    );
+
+    $processor->resolveReport($report, $this->createUserStub('admin-id'), ReportProcessor::ACTION_WARN);
+
+    $this->assertSame(ReportState::Accepted->value, $report->getState());
+    $this->assertSame(ReportState::Accepted->value, $related->getState());
+    $this->assertFalse($owner->getProfileHidden());
+    // Empty message: the notification renders a translated default.
+    $this->assertOwnerWarned($persisted, $owner, 'comment', '');
+  }
+
+  #[Group('unit')]
+  public function testHideWarnOnUserClearsProfileTextsInsteadOfBanning(): void
+  {
+    [$report, $related] = $this->createPendingReports('user', 'reported-user-id');
+    $reported_user = new User();
+    $reported_user->setAbout('about text');
+    $reported_user->setCurrentlyWorkingOn('working on text');
+
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('reported-user-id');
+    $visibility->expects($this->never())->method('hideContent');
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('findReportsForContent')->willReturn([$report, $related]);
+
+    $persisted = [];
+    $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      visibility_manager: $visibility,
+      entity_manager: $this->createRecordingEntityManager($persisted, $reported_user),
+    );
+
+    $processor->resolveReport($report, $this->createUserStub('admin-id'), ReportProcessor::ACTION_HIDE_WARN, 'Warned');
+
+    $this->assertNull($reported_user->getAbout());
+    $this->assertNull($reported_user->getCurrentlyWorkingOn());
+    $this->assertFalse($reported_user->getProfileHidden());
+    $this->assertSame(ReportState::Accepted->value, $related->getState());
+    $this->assertOwnerWarned($persisted, $reported_user, 'user', 'Warned');
+  }
+
+  #[Group('unit')]
+  public function testUnknownResolveActionThrows(): void
+  {
+    [$report] = $this->createPendingReports('project', 'project-123');
+
+    $this->expectException(\InvalidArgumentException::class);
+    $this->buildProcessor()->resolveReport($report, $this->createUserStub('admin-id'), 'ban_everyone');
   }
 }

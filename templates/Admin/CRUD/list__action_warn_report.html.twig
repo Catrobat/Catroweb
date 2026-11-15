@@ -1,0 +1,11 @@
+{% if object.state == 1 %}
+  <form method="post" action="{{ admin.generateObjectUrl('hideWarnReport', object) }}" style="display: inline-block; margin-top: 4px;">
+    <input type="text" name="message" maxlength="5000" class="form-control input-sm"
+           placeholder="Warning message (optional)" aria-label="Warning message for report {{ object.id }}">
+    <button type="submit" name="hide_warn" class="btn btn-sm btn-warning"
+            title="Hides the content and warns its owner, no ban"><i class="fa fa-eye-slash"></i> Hide + warn </button>
+    <button type="submit" name="warn" class="btn btn-sm btn-info"
+            formaction="{{ admin.generateObjectUrl('warnReport', object) }}"
+            title="Keeps the content visible and warns its owner"><i class="fa fa-exclamation-triangle"></i> Warn </button>
+  </form>
+{% endif %}

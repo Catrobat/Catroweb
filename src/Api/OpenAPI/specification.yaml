@@ -3666,7 +3666,7 @@ paths:
         - BearerAuth: []
       tags:
         - Moderation
-      summary: 'Resolve a report (accept or reject, admin only)'
+      summary: 'Resolve a report (admin only): accept, hide_warn, warn or reject'
       parameters:
         - name: id
           in: path
@@ -6383,7 +6383,14 @@ components:
           enum:
             - 'accept'
             - 'reject'
-          description: 'Whether to accept or reject the report'
+            - 'hide_warn'
+            - 'warn'
+          description: 'accept: hide content and ban its owner; hide_warn: hide content and warn the owner (a reported user gets the profile texts cleared instead); warn: keep content visible and warn the owner; reject: dismiss the report'
+        message:
+          type: string
+          nullable: true
+          maxLength: 5000
+          description: 'Warning text sent to the content owner (hide_warn and warn only); empty sends a default warning'
 
     ResolveAppealRequest:
       type: object

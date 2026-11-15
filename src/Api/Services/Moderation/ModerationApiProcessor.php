@@ -59,9 +59,9 @@ class ModerationApiProcessor extends AbstractApiProcessor
     );
   }
 
-  public function resolveReport(ContentReport $report, User $admin, string $action): void
+  public function resolveReport(ContentReport $report, User $admin, string $action, ?string $message = null): void
   {
-    $this->report_processor->resolveReport($report, $admin, $action);
+    $this->report_processor->resolveReport($report, $admin, $action, $message);
   }
 
   public function approveAppeal(ContentAppeal $appeal, User $admin, ?string $note): void

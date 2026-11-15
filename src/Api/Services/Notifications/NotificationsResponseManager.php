@@ -23,6 +23,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
+use App\Moderation\ReportProcessor;
 use App\User\UserAvatarService;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationResponse;
@@ -174,11 +175,16 @@ class NotificationsResponseManager extends AbstractResponseManager
     }
 
     if ($notification instanceof ModerationNotification) {
+      $message = $notification->getMessage();
+      if ('' === $message && ReportProcessor::NOTIFICATION_ADMIN_WARNING === $notification->getModerationAction()) {
+        $message = $this->trans('catro-notifications.moderation-warning.message');
+      }
+
       $response = [
         'id' => $notification->getId(),
         'type' => 'moderation',
         'seen' => $notification->getSeen(),
-        'message' => $notification->getMessage(),
+        'message' => $message,
       ];
 
       $content_type = $notification->getContentType();

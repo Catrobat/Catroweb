@@ -42,6 +42,7 @@ use App\DB\Entity\User\User;
 use App\DB\Enum\AppealState;
 use App\DB\Enum\ReportState;
 use App\DB\Generator\MyUuidGenerator;
+use App\Moderation\ReportProcessor;
 use App\Project\CodeStatistics\CodeStatisticsParser;
 use App\Storage\FileHelper;
 use App\System\Commands\DBUpdater\UpdateAchievementsCommand;
@@ -2412,6 +2413,21 @@ class DataFixturesContext implements Context
     $user = $this->findUserByUsernameOrId($user_identifier);
     Assert::assertNotNull($user, sprintf('User "%s" not found', $user_identifier));
     Assert::assertSame('hidden' === $visibility, $user->getProfileHidden());
+  }
+
+  /**
+   * @Then /^the user "([^"]*)" should have a moderation warning "([^"]*)"$/
+   */
+  public function theUserShouldHaveAModerationWarning(string $user_identifier, string $message): void
+  {
+    $user = $this->findUserByUsernameOrId($user_identifier);
+    Assert::assertNotNull($user, sprintf('User "%s" not found', $user_identifier));
+    $warning = $this->getManager()->getRepository(ModerationNotification::class)->findOneBy([
+      'user' => $user,
+      'moderation_action' => ReportProcessor::NOTIFICATION_ADMIN_WARNING,
+      'message' => $message,
+    ]);
+    Assert::assertNotNull($warning, sprintf('No moderation warning "%s" for user "%s"', $message, $user_identifier));
   }
 
   /**
