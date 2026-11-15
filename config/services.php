@@ -97,6 +97,7 @@ use Monolog\Formatter\LineFormatter;
 use OpenAPI\Server\Service\SerializerInterface;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap;
+use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Dotenv\Command\DotenvDumpCommand;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -232,6 +233,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(ModerationApi::class)->tag('open_api_server.api', ['api' => 'moderation']);
   $services->set(TranslationApi::class)->tag('open_api_server.api', ['api' => 'translation']);
   $services->set(JobsApi::class)->tag('open_api_server.api', ['api' => 'jobs']);
+
+  // Messenger's restart signal (messenger:stop-workers), shared by every release: in the database, not the release's
+  // own var/cache, and with a fixed namespace. A cache.pool would derive its namespace from the release directory.
+  $services->set('cache.messenger.restart_workers_signal', DoctrineDbalAdapter::class)
+    ->args([service('database_connection'), 'messenger-restart', 0])
+  ;
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 
