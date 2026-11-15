@@ -98,6 +98,19 @@ task('restart:php-fpm', function () {
   run('sudo /usr/sbin/service php{{php_fpm_version}}-fpm restart');
 });
 
+// Background workers (systemd, Catrobat/infrastructure host-config/systemd) run the new release once restarted.
+// Not `messenger:stop-workers`: its signal lives in the release's own var/cache, which old workers never read.
+// systemd sends SIGTERM, so a worker finishes its current job first.
+task('restart:workers', function () {
+  if (!test('systemctl cat catroweb-workers.target >/dev/null 2>&1')) {
+    info('catroweb-workers.target not installed on this host, skipping');
+
+    return;
+  }
+
+  run('sudo /usr/bin/systemctl restart catroweb-workers.target');
+});
+
 // Sync nsfw-scanner sources to /opt/nsfw-scanner and rebuild the container only
 // when the source files actually changed (model download is multi-minute). On
 // first run after switching from raw `docker run` to compose, the legacy
@@ -255,6 +268,7 @@ task('deploy', [
   'deploy:symlink',
   'restart:nginx',
   'restart:php-fpm',
+  'restart:workers',
   'restart:nsfw-scanner',
   'update:flavors',
   'update:achievements',
