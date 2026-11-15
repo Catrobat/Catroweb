@@ -45,6 +45,10 @@ class Studio implements \Stringable
   #[ORM\Column(name: 'auto_hidden', type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $auto_hidden = false;
 
+  /** Since when auto_hidden is set; catro:moderation:purge-hidden deletes moderated content 14 days after it. */
+  #[ORM\Column(name: 'auto_hidden_at', type: Types::DATETIME_MUTABLE, nullable: true)]
+  protected ?\DateTime $auto_hidden_at = null;
+
   #[ORM\Column(name: 'cover_path', type: Types::STRING, length: 300, nullable: true)]
   protected ?string $cover_path = null;
 
@@ -157,6 +161,10 @@ class Studio implements \Stringable
 
   public function setAutoHidden(bool $auto_hidden): Studio
   {
+    if ($auto_hidden !== $this->auto_hidden) {
+      $this->auto_hidden_at = $auto_hidden ? new \DateTime() : null;
+    }
+
     $this->auto_hidden = $auto_hidden;
 
     return $this;

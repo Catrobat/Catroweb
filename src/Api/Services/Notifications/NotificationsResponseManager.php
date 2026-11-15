@@ -25,6 +25,7 @@ use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportProcessor;
+use App\System\Commands\Maintenance\PurgeHiddenContentCommand;
 use App\User\UserAvatarService;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationResponse;
@@ -177,8 +178,19 @@ class NotificationsResponseManager extends AbstractResponseManager
 
     if ($notification instanceof ModerationNotification) {
       $message = $notification->getMessage();
-      if ('' === $message && ReportProcessor::NOTIFICATION_ADMIN_WARNING === $notification->getModerationAction()) {
+      $action = $notification->getModerationAction();
+      $is_warning = in_array($action, [ReportProcessor::NOTIFICATION_ADMIN_WARNING, ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING], true);
+      if ('' === $message && $is_warning) {
         $message = $this->trans('catro-notifications.moderation-warning.message');
+      }
+
+      // Only hide_warn hides; said while the content is still hidden (catro:moderation:purge-hidden deletes it).
+      $hidden_type = ContentType::tryFrom((string) $notification->getContentType());
+      $hidden_id = $notification->getContentId();
+      if (ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING === $action
+        && $hidden_type instanceof ContentType && null !== $hidden_id
+        && $this->content_visibility_manager->isContentHidden($hidden_type, $hidden_id)) {
+        $message .= ' '.$this->trans('catro-notifications.moderation-warning.deletion', ['%days%' => PurgeHiddenContentCommand::DAYS]);
       }
 
       $response = [

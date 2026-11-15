@@ -74,6 +74,10 @@ class UserComment implements \Stringable
   #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => false])]
   protected bool $auto_hidden = false;
 
+  /** Since when auto_hidden is set; catro:moderation:purge-hidden deletes moderated content 14 days after it. */
+  #[ORM\Column(name: 'auto_hidden_at', type: Types::DATETIME_MUTABLE, nullable: true)]
+  protected ?\DateTime $auto_hidden_at = null;
+
   #[ORM\JoinColumn(name: 'activity', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
   #[ORM\OneToOne(targetEntity: StudioActivity::class, cascade: ['persist'])]
   protected ?StudioActivity $activity = null;
@@ -246,6 +250,10 @@ class UserComment implements \Stringable
 
   public function setAutoHidden(bool $auto_hidden): UserComment
   {
+    if ($auto_hidden !== $this->auto_hidden) {
+      $this->auto_hidden_at = $auto_hidden ? new \DateTime() : null;
+    }
+
     $this->auto_hidden = $auto_hidden;
 
     return $this;

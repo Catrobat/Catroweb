@@ -593,6 +593,11 @@ final class ReportProcessorTest extends TestCase
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('find')->willReturn($owner);
 
+    $persisted = [];
+    $em->method('persist')->willReturnCallback(static function (object $entity) use (&$persisted): void {
+      $persisted[] = $entity;
+    });
+
     $processor = $this->buildProcessor(
       report_repository: $report_repo,
       visibility_manager: $visibility,
@@ -600,6 +605,10 @@ final class ReportProcessorTest extends TestCase
     );
 
     $processor->resolveReport($report, $this->createUserStub('admin-id'), 'accept');
+
+    $bans = array_values(array_filter($persisted, static fn (object $e): bool => $e instanceof ContentModerationAction && ContentModerationAction::ACTION_ADMIN_BANNED === $e->getAction()));
+    $this->assertCount(1, $bans, 'an admin ban is recorded even when the community hid the account already');
+    $this->assertSame(['user', 'owner-id'], [$bans[0]->getContentType(), $bans[0]->getContentId()]);
   }
 
   #[Group('unit')]
@@ -711,12 +720,12 @@ final class ReportProcessorTest extends TestCase
   /**
    * @param list<object> $persisted
    */
-  private function assertOwnerWarned(array $persisted, User $owner, string $content_type, string $message): void
+  private function assertOwnerWarned(array $persisted, User $owner, string $content_type, string $message, string $notification_action = ReportProcessor::NOTIFICATION_ADMIN_WARNING, string $audit_action = ContentModerationAction::ACTION_ADMIN_WARNED): void
   {
     $warnings = array_values(array_filter(
       $persisted,
       static fn (object $e): bool => $e instanceof ModerationNotification
-        && ReportProcessor::NOTIFICATION_ADMIN_WARNING === $e->getModerationAction(),
+        && $notification_action === $e->getModerationAction(),
     ));
     $this->assertCount(1, $warnings);
     $this->assertSame($owner, $warnings[0]->getUser());
@@ -725,7 +734,7 @@ final class ReportProcessorTest extends TestCase
 
     $audits = array_values(array_filter($persisted, static fn (object $e): bool => $e instanceof ContentModerationAction));
     $this->assertCount(1, $audits);
-    $this->assertSame(ContentModerationAction::ACTION_ADMIN_WARNED, $audits[0]->getAction());
+    $this->assertSame($audit_action, $audits[0]->getAction());
   }
 
   #[Group('unit')]
@@ -755,7 +764,7 @@ final class ReportProcessorTest extends TestCase
     $this->assertSame(ReportState::Accepted->value, $report->getState());
     $this->assertSame(ReportState::Accepted->value, $related->getState());
     $this->assertFalse($owner->getProfileHidden());
-    $this->assertOwnerWarned($persisted, $owner, 'project', 'Please keep it kind.');
+    $this->assertOwnerWarned($persisted, $owner, 'project', 'Please keep it kind.', ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, ContentModerationAction::ACTION_ADMIN_HIDE_WARNED);
   }
 
   #[Group('unit')]

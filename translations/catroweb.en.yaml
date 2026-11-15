@@ -722,6 +722,7 @@ catro-notifications:
     more: 'and %count% more'
   moderation-warning:
     message: 'A moderator reviewed a report about your content and found that it breaks our community rules. Please follow the rules, or your account may be suspended next time.'
+    deletion: 'The hidden content will be deleted %days% days after it was hidden unless you fix it or appeal.'
   noProjects: "It looks like you don't have any project notifications."
 
 clipboard:

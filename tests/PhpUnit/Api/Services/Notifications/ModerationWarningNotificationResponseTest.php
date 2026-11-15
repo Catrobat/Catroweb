@@ -41,17 +41,37 @@ class ModerationWarningNotificationResponseTest extends TestCase
     self::assertSame('', $this->renderMessage('report_accepted', ''));
   }
 
-  private function renderMessage(string $moderation_action, string $message): string
+  public function testHideWarningOnHiddenContentAnnouncesTheDeletion(): void
+  {
+    self::assertSame(
+      'catro-notifications.moderation-warning.message catro-notifications.moderation-warning.deletion 14',
+      $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, '', true),
+    );
+  }
+
+  public function testPlainWarningNeverAnnouncesADeletion(): void
+  {
+    self::assertSame('Custom text', $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_WARNING, 'Custom text', true));
+  }
+
+  public function testHideWarningOnRestoredContentAnnouncesNothing(): void
+  {
+    self::assertSame('Custom text', $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, 'Custom text'));
+  }
+
+  private function renderMessage(string $moderation_action, string $message, bool $hidden = false): string
   {
     $translator = $this->createStub(TranslatorInterface::class);
-    $translator->method('trans')->willReturnArgument(0);
+    $translator->method('trans')->willReturnCallback(static fn (string $id, array $parameters = []): string => trim($id.' '.implode(' ', $parameters)));
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $visibility->method('isContentHidden')->willReturn($hidden);
 
     $manager = new NotificationsResponseManager(
       $translator,
       $this->createStub(SerializerInterface::class),
       $this->createStub(CacheItemPoolInterface::class),
       $this->createStub(NotificationRepository::class),
-      $this->createStub(ContentVisibilityManager::class),
+      $visibility,
       $this->createStub(UserAvatarService::class),
     );
 

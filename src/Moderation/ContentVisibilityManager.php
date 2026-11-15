@@ -13,6 +13,7 @@ use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportState;
 use App\Security\Authentication\JwtRefresh\RefreshTokenService;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ContentVisibilityManager
@@ -200,9 +201,11 @@ class ContentVisibilityManager
     $this->entity_manager->createQueryBuilder()
       ->update(UserComment::class, 'c')
       ->set('c.auto_hidden', ':target')
+      ->set('c.auto_hidden_at', ':now')
       ->where('c.user = :user')
       ->andWhere('c.auto_hidden = :current')
       ->setParameter('target', true)
+      ->setParameter('now', new \DateTime(), Types::DATETIME_MUTABLE)
       ->setParameter('current', false)
       ->setParameter('user', $user)
       ->getQuery()
@@ -277,6 +280,7 @@ class ContentVisibilityManager
       $qb = $this->entity_manager->createQueryBuilder()
         ->update($entity_class, $alias)
         ->set($alias.'.auto_hidden', ':target')
+        ->set($alias.'.auto_hidden_at', 'NULL')
         ->where($alias.'.user = :user')
         ->andWhere($alias.'.auto_hidden = :current')
         ->setParameter('target', false)

@@ -36,6 +36,8 @@ class ReportProcessor
   public const array ACTIONS = [self::ACTION_ACCEPT, self::ACTION_REJECT, self::ACTION_HIDE_WARN, self::ACTION_WARN];
   /** ModerationNotification::moderation_action of an owner warning. */
   public const string NOTIFICATION_ADMIN_WARNING = 'admin_warning';
+  /** ModerationNotification::moderation_action of an owner warning whose content was hidden (hide_warn). */
+  public const string NOTIFICATION_ADMIN_HIDE_WARNING = 'admin_hide_warning';
 
   public function __construct(
     private readonly ContentReportRepository $report_repository,
@@ -129,7 +131,9 @@ class ReportProcessor
     $audit_action = match ($action) {
       self::ACTION_ACCEPT => ContentModerationAction::ACTION_ADMIN_CONFIRMED,
       self::ACTION_REJECT => ContentModerationAction::ACTION_ADMIN_REVERSED,
-      self::ACTION_HIDE_WARN, self::ACTION_WARN => ContentModerationAction::ACTION_ADMIN_WARNED,
+      // A reported user is not hidden by hide_warn (profile texts are cleared), so that is a plain warning.
+      self::ACTION_HIDE_WARN => ContentType::User->value === $report->getContentType() ? ContentModerationAction::ACTION_ADMIN_WARNED : ContentModerationAction::ACTION_ADMIN_HIDE_WARNED,
+      self::ACTION_WARN => ContentModerationAction::ACTION_ADMIN_WARNED,
       default => throw new \InvalidArgumentException('Invalid action: '.$action),
     };
     $state = self::ACTION_REJECT === $action ? ReportState::Rejected : ReportState::Accepted;
@@ -146,11 +150,11 @@ class ReportProcessor
     switch ($action) {
       case self::ACTION_ACCEPT:
         $this->visibility_manager->hideContent($content_type, $content_id);
-        $this->banContentOwner($content_type, $content_id);
+        $this->banContentOwner($content_type, $content_id, $admin);
         break;
       case self::ACTION_HIDE_WARN:
         $this->hideContentWithoutBan($content_type, $content_id);
-        $this->warnContentOwner($content_type, $content_id, $message);
+        $this->warnContentOwner($content_type, $content_id, $message, ContentType::User === $content_type ? self::NOTIFICATION_ADMIN_WARNING : self::NOTIFICATION_ADMIN_HIDE_WARNING);
         break;
       case self::ACTION_WARN:
         // Visibility is left as is: un-hiding here could lift an earlier ban or accepted report.
@@ -289,7 +293,7 @@ class ReportProcessor
    * When an admin accepts a report on a project, studio, or comment,
    * also ban (profile-hide) the content owner as a safety measure.
    */
-  private function banContentOwner(ContentType $content_type, string $content_id): void
+  private function banContentOwner(ContentType $content_type, string $content_id, User $admin): void
   {
     if (ContentType::User === $content_type) {
       return; // User reports already ban the user directly via hideContent()
@@ -301,8 +305,21 @@ class ReportProcessor
     }
 
     $owner = $this->entity_manager->find(User::class, $owner_id);
-    if (!$owner instanceof User || $owner->getProfileHidden()) {
-      return; // Already banned or not found
+    if (!$owner instanceof User) {
+      return;
+    }
+
+    // An admin ban, even of an account the community already hid: catro:moderation:purge-hidden relies on it.
+    $audit = new ContentModerationAction();
+    $audit->setContentType(ContentType::User->value);
+    $audit->setContentId($owner_id);
+    $audit->setAction(ContentModerationAction::ACTION_ADMIN_BANNED);
+    $audit->setPerformedBy($admin);
+    $audit->setNote('Owner of '.$content_type->value.' '.$content_id);
+    $this->entity_manager->persist($audit);
+
+    if ($owner->getProfileHidden()) {
+      return; // Already banned
     }
 
     $this->visibility_manager->hideContent(ContentType::User, $owner_id);
@@ -326,7 +343,7 @@ class ReportProcessor
     }
   }
 
-  private function warnContentOwner(ContentType $content_type, string $content_id, ?string $message): void
+  private function warnContentOwner(ContentType $content_type, string $content_id, ?string $message, string $notification_action = self::NOTIFICATION_ADMIN_WARNING): void
   {
     $owner_id = $this->visibility_manager->getContentOwnerId($content_type, $content_id);
     $owner = null === $owner_id ? null : $this->entity_manager->find(User::class, $owner_id);
@@ -338,7 +355,7 @@ class ReportProcessor
       $owner,
       $content_type->value,
       $content_id,
-      self::NOTIFICATION_ADMIN_WARNING,
+      $notification_action,
       mb_substr(trim($message ?? ''), 0, self::MAX_NOTE_LENGTH),
     ));
   }

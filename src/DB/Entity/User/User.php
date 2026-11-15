@@ -238,6 +238,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $profile_hidden = false;
 
+  /** Since when the account is banned; catro:moderation:purge-hidden deletes its content 14 days after it. */
+  #[ORM\Column(name: 'profile_hidden_at', type: 'datetime', nullable: true)]
+  protected ?\DateTimeInterface $profile_hidden_at = null;
+
   #[ORM\Column(type: 'string', nullable: true)]
   protected ?string $salt = null;
 
@@ -824,6 +828,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
   public function setProfileHidden(bool $profile_hidden): void
   {
+    if ($profile_hidden !== $this->profile_hidden) {
+      $this->profile_hidden_at = $profile_hidden ? new \DateTime() : null;
+    }
+
     $this->profile_hidden = $profile_hidden;
   }
 

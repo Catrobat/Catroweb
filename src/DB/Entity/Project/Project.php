@@ -167,6 +167,10 @@ class Project implements \Stringable
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $auto_hidden = false;
 
+  /** Since when auto_hidden is set; catro:moderation:purge-hidden deletes moderated content 14 days after it. */
+  #[ORM\Column(name: 'auto_hidden_at', type: Types::DATETIME_MUTABLE, nullable: true)]
+  protected ?\DateTime $auto_hidden_at = null;
+
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $private = false;
 
@@ -541,8 +545,17 @@ class Project implements \Stringable
     return $this->auto_hidden;
   }
 
+  public function getAutoHiddenAt(): ?\DateTime
+  {
+    return $this->auto_hidden_at;
+  }
+
   public function setAutoHidden(bool $auto_hidden): Project
   {
+    if ($auto_hidden !== $this->auto_hidden) {
+      $this->auto_hidden_at = $auto_hidden ? new \DateTime() : null;
+    }
+
     $this->auto_hidden = $auto_hidden;
 
     return $this;

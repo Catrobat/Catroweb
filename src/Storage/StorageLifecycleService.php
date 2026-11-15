@@ -390,26 +390,27 @@ class StorageLifecycleService
       throw new \InvalidArgumentException('Cannot hard-delete a project without an ID');
     }
 
-    // Delete zip file
-    $this->file_repository->deleteProjectZipFileIfExists($projectId);
-
-    // Delete extracted files
-    try {
-      $this->file_repository->deleteProjectExtractFiles($projectId);
-    } catch (\Exception $e) {
-      $this->logger->warning('Storage lifecycle: could not delete extract files for project {id}: {error}', [
-        'id' => $projectId,
-        'error' => $e->getMessage(),
-      ]);
-    }
-
-    // Delete screenshots and thumbnails
-    $this->screenshot_repository->deleteScreenshot($projectId);
-    $this->screenshot_repository->deleteThumbnail($projectId);
-
-    // Remove from database (Doctrine cascades handle relations)
+    // The row goes first (flush runs in a transaction): a failed flush must never leave a project without its files.
     $this->entity_manager->remove($project);
     $this->entity_manager->flush();
+
+    // Files whose deletion fails are only orphans: catrobat:clean:extracts and catrobat:clean:compressed sweep those.
+    foreach ([
+      'zip' => fn () => $this->file_repository->deleteProjectZipFileIfExists($projectId),
+      'extract' => fn () => $this->file_repository->deleteProjectExtractFiles($projectId),
+      'screenshot' => fn () => $this->screenshot_repository->deleteScreenshot($projectId),
+      'thumbnail' => fn () => $this->screenshot_repository->deleteThumbnail($projectId),
+    ] as $kind => $delete) {
+      try {
+        $delete();
+      } catch (\Throwable $e) {
+        $this->logger->warning('Storage lifecycle: could not delete {kind} files of deleted project {id}: {error}', [
+          'kind' => $kind,
+          'id' => $projectId,
+          'error' => $e->getMessage(),
+        ]);
+      }
+    }
   }
 
   /**

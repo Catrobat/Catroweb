@@ -49,6 +49,7 @@ final class CronTasks
       $task('Clean unverified user accounts', 'catrobat:clean:unverified-users', '1 day', 3 * self::HOUR, true),
       $task('Delete Scratch placeholder accounts without projects', 'catrobat:clean:scratch-placeholders', '1 day', 3 * self::HOUR, true),
       $task('Warn about and delete inactive empty accounts', 'catrobat:clean:inactive-users', '1 day', 3 * self::HOUR, true),
+      new CronTask('Delete content hidden by moderation for 14 days', ['bin/console', 'catro:moderation:purge-hidden', '--apply'], '1 day', 3 * self::HOUR, true),
     ];
   }
 
