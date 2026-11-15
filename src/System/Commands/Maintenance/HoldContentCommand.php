@@ -6,6 +6,7 @@ namespace App\System\Commands\Maintenance;
 
 use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Enum\ContentType;
+use App\Moderation\ContentVisibilityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -22,8 +23,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class HoldContentCommand extends Command
 {
-  public function __construct(private readonly EntityManagerInterface $entity_manager)
-  {
+  public function __construct(
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly ContentVisibilityManager $visibility,
+  ) {
     parent::__construct();
   }
 
@@ -47,6 +50,12 @@ class HoldContentCommand extends Command
       $io->error('Type must be project, studio, comment or user.');
 
       return Command::INVALID;
+    }
+
+    if (!$this->visibility->contentExists($type, $input->getArgument('id'))) {
+      $io->error(sprintf('There is no %s %s.', $type->value, $input->getArgument('id')));
+
+      return Command::FAILURE;
     }
 
     $release = $input->getOption('release');

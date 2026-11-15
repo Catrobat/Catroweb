@@ -385,9 +385,10 @@ class StudioManager
   public function deleteStudio(Studio $studio, User $user): void
   {
     if ($this->isUserAStudioAdmin($user, $studio)) {
-      $this->deleteCoverImage($studio->getCoverAssetPath());
+      $cover = $studio->getCoverAssetPath();
       $this->entity_manager->remove($studio);
       $this->entity_manager->flush();
+      $this->deleteCoverImage($cover); // after the row: a failed flush must not leave a studio without its cover
     }
   }
 

@@ -25,11 +25,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Content hidden by moderation is not kept as free storage: its owner has DAYS to fix or appeal it, then it is deleted.
  *
- * Due: a project, studio or comment that is hidden (auto_hidden_at) and has a report an admin accepted, both at least
- * DAYS ago; and everything of an account banned (profile_hidden_at) at least DAYS ago: projects, comments, and studios
- * it is the only active admin of. The account row itself stays, so the ban holds.
+ * Due: a project, studio or comment hidden (auto_hidden_at) at least DAYS ago that a moderator decided to hide
+ * (audit admin_confirmed or admin_hide_warned, at least DAYS ago, not reversed since); and everything of an account an
+ * admin banned (audit admin_confirmed or admin_banned on the user) at least DAYS ago (profile_hidden_at): projects,
+ * comments, and studios it is the only active admin of. The account row itself stays, so the ban holds.
  * Never due: content with a pending report, a pending or approved appeal, or an evidence hold
- * (catro:moderation:hold), and anything of an account with a pending appeal or a hold.
+ * (catro:moderation:hold), content whose deletion would take a held comment along, and anything of an account with a
+ * pending report, a pending appeal or a hold.
  *
  * Ops scripts that hide or ban with raw SQL should set auto_hidden_at / profile_hidden_at; rows they leave empty are
  * stamped by the next --apply run, so the DAYS start then.
@@ -139,21 +141,32 @@ class PurgeHiddenContentCommand extends Command
     $sole_admin = 'studio' === $type
       ? "AND NOT EXISTS (SELECT 1 FROM studio_user o WHERE o.studio = x.id AND o.role = 'admin' AND o.status = 'active' AND o.user <> u.id)"
       : '';
+    // Deleting a project or studio deletes its comments: a held one, or one by a held user, keeps it.
+    $cascade = match ($type) {
+      'project' => 'c.programId = x.id',
+      'studio' => 'c.studio = x.id',
+      default => null,
+    };
+    $cascade_held = null === $cascade ? '' : "AND NOT EXISTS (SELECT 1 FROM user_comment c WHERE {$cascade} AND (".self::held("'comment'", 'c.id').' OR '.self::held("'user'", 'c.user_id').'))';
+    $restored = [ContentModerationAction::ACTION_ADMIN_REVERSED, ContentModerationAction::ACTION_APPEAL_APPROVED];
+    // Only a moderator's hide counts: accept or hide_warn (a plain warn leaves visibility alone), not since restored.
+    $hide_decided = self::standing(':type', 'x.id', [ContentModerationAction::ACTION_ADMIN_CONFIRMED, ContentModerationAction::ACTION_ADMIN_HIDE_WARNED], $restored, 'AND s.created_at <= :cutoff');
+    // Only an admin's ban counts, not a community auto-hide of the account.
+    $ban_decided = self::standing("'user'", 'u.id', [ContentModerationAction::ACTION_ADMIN_CONFIRMED, ContentModerationAction::ACTION_ADMIN_BANNED], $restored, 'AND s.created_at <= :cutoff');
 
     $sql = "SELECT x.id, u.id AS owner_id FROM {$table} x LEFT JOIN fos_user u ON u.id = {$owner}
-      WHERE ((x.auto_hidden = 1 AND x.auto_hidden_at <= :cutoff
-          AND EXISTS (SELECT 1 FROM content_report r WHERE r.content_type = :type AND r.content_id = x.id AND r.state = :accepted AND r.resolved_at <= :cutoff))
-        OR (u.profile_hidden = 1 AND u.profile_hidden_at <= :cutoff {$sole_admin}))
+      WHERE ((x.auto_hidden = 1 AND x.auto_hidden_at <= :cutoff AND {$hide_decided})
+        OR (u.profile_hidden = 1 AND u.profile_hidden_at <= :cutoff AND {$ban_decided} {$sole_admin}))
       AND NOT EXISTS (SELECT 1 FROM content_report r WHERE r.content_type = :type AND r.content_id = x.id AND r.state = :new)
+      AND NOT EXISTS (SELECT 1 FROM content_report r WHERE r.content_type = 'user' AND r.content_id = u.id AND r.state = :new)
       AND NOT EXISTS (SELECT 1 FROM content_appeal a WHERE a.content_type = :type AND a.content_id = x.id AND a.state IN (:pending, :approved))
       AND NOT EXISTS (SELECT 1 FROM content_appeal a WHERE a.content_type = 'user' AND a.content_id = u.id AND a.state = :pending)
-      AND NOT ".self::held(':type', 'x.id').' AND NOT '.self::held("'user'", 'u.id').'
-      ORDER BY x.id';
+      AND NOT ".self::held(':type', 'x.id').' AND NOT '.self::held("'user'", 'u.id')." {$cascade_held}
+      ORDER BY x.id";
 
     $rows = $this->entity_manager->getConnection()->fetchAllAssociative($sql, [
       'cutoff' => $cutoff,
       'type' => $type,
-      'accepted' => ReportState::Accepted->value,
       'new' => ReportState::New->value,
       'pending' => AppealState::Pending->value,
       'approved' => AppealState::Approved->value,
@@ -168,11 +181,22 @@ class PurgeHiddenContentCommand extends Command
   /** SQL condition: the content has an evidence hold that was not released since. */
   private static function held(string $type, string $id): string
   {
-    $hold = ContentModerationAction::ACTION_EVIDENCE_HOLD;
-    $release = ContentModerationAction::ACTION_EVIDENCE_RELEASED;
+    return self::standing($type, $id, [ContentModerationAction::ACTION_EVIDENCE_HOLD], [ContentModerationAction::ACTION_EVIDENCE_RELEASED]);
+  }
 
-    return "EXISTS (SELECT 1 FROM content_moderation_action h WHERE h.content_type = {$type} AND h.content_id = {$id} AND h.action = '{$hold}'
-      AND NOT EXISTS (SELECT 1 FROM content_moderation_action l WHERE l.content_type = h.content_type AND l.content_id = h.content_id AND l.action = '{$release}' AND l.id > h.id))";
+  /**
+   * SQL condition: an audit row of one of $actions on the content (SQL expressions $type, $id) that no row of $undone_by
+   * followed.
+   *
+   * @param list<string> $actions
+   * @param list<string> $undone_by
+   */
+  private static function standing(string $type, string $id, array $actions, array $undone_by, string $and = ''): string
+  {
+    $in = static fn (array $values): string => "'".implode("', '", $values)."'";
+
+    return "EXISTS (SELECT 1 FROM content_moderation_action s WHERE s.content_type = {$type} AND s.content_id = {$id} AND s.action IN ({$in($actions)}) {$and}
+      AND NOT EXISTS (SELECT 1 FROM content_moderation_action l WHERE l.content_type = s.content_type AND l.content_id = s.content_id AND l.action IN ({$in($undone_by)}) AND l.id > s.id))";
   }
 
   /** Through the same paths an admin's deletion takes: files, search index (entity listener) and cascades. */
@@ -194,12 +218,14 @@ class PurgeHiddenContentCommand extends Command
       return true;
     }
 
-    if ($entity instanceof Studio) {
-      $this->studio_manager->deleteCoverImage($entity->getCoverAssetPath());
-    }
-
+    $cover = $entity instanceof Studio ? $entity->getCoverAssetPath() : null;
     $this->entity_manager->remove($entity);
     $this->entity_manager->flush();
+    try {
+      $this->studio_manager->deleteCoverImage($cover); // after the row: never a studio without its cover
+    } catch (\Throwable $e) {
+      $this->logger->warning('Moderation purge: could not delete the cover of studio {id}', ['id' => $id, 'error' => $e->getMessage()]);
+    }
 
     return true;
   }

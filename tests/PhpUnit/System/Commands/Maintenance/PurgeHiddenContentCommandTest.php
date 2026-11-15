@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\System\Commands\Maintenance;
 
 use App\DB\Entity\Moderation\ContentAppeal;
+use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ReportState;
+use App\Moderation\ContentVisibilityManager;
 use App\Storage\StorageLifecycleService;
 use App\Studio\StudioManager;
 use App\System\Commands\Maintenance\HoldContentCommand;
@@ -70,14 +72,18 @@ final class PurgeHiddenContentCommandTest extends KernelTestCase
     $this->hold('project', $released, true);
     $comment = $this->comment($this->project());
     $this->em->getConnection()->executeStatement('UPDATE user_comment SET auto_hidden = 1, auto_hidden_at = ? WHERE id = ?', [$this->at('-15 days'), $comment]);
-    $this->report('comment', $comment, ReportState::Accepted, '-15 days');
+    $this->decide('comment', $comment, ContentModerationAction::ACTION_ADMIN_HIDE_WARNED, '-15 days');
+    $only_warned = $this->hiddenProject('-15 days');
+    $this->decide('project', $only_warned, ContentModerationAction::ACTION_ADMIN_WARNED, '-15 days');
+    $reversed = $this->hiddenProject('-15 days', '-15 days');
+    $this->decide('project', $reversed, ContentModerationAction::ACTION_ADMIN_REVERSED, '-14 days');
 
     $this->purge();
 
     $this->assertNull($this->em->find(Project::class, $due));
     $this->assertNull($this->em->find(Project::class, $released), 'a released hold no longer protects');
     $this->assertNull($this->em->find(UserComment::class, $comment));
-    foreach (['13 days' => $young, 'hidden 2 days' => $hidden_recently, 'pending report' => $pending_report, 'pending appeal' => $pending_appeal, 'never reviewed' => $unreviewed, 'restored' => $restored, 'held' => $held] as $case => $id) {
+    foreach (['13 days' => $young, 'hidden 2 days' => $hidden_recently, 'pending report' => $pending_report, 'pending appeal' => $pending_appeal, 'never reviewed' => $unreviewed, 'restored' => $restored, 'held' => $held, 'warn only, community-hidden' => $only_warned, 'decision reversed' => $reversed] as $case => $id) {
       $this->assertNotNull($this->em->find(Project::class, $id), $case.': kept');
     }
   }
@@ -102,8 +108,20 @@ final class PurgeHiddenContentCommandTest extends KernelTestCase
     $this->ban($appealing, '-15 days');
     $this->appeal('user', (string) $appealing->getId());
 
+    $community_hidden = $this->user();
+    $community_project = $this->project($community_hidden);
+    $this->em->getConnection()->executeStatement('UPDATE fos_user SET profile_hidden = 1, profile_hidden_at = ? WHERE id = ?', [$this->at('-15 days'), $community_hidden->getId()]);
+    $this->report('user', (string) $community_hidden->getId(), ReportState::New);
+
+    $reported_again = $this->user();
+    $reported_again_project = $this->project($reported_again);
+    $this->ban($reported_again, '-15 days');
+    $this->report('user', (string) $reported_again->getId(), ReportState::New);
+
     $this->purge();
 
+    $this->assertNotNull($this->em->find(Project::class, $community_project), 'hidden by the community, no admin ban');
+    $this->assertNotNull($this->em->find(Project::class, $reported_again_project), 'a pending report on the account');
     $this->assertNull($this->em->find(Project::class, $project));
     $this->assertNull($this->em->find(UserComment::class, $comment));
     $this->assertNull($this->em->find(Studio::class, $own_studio));
@@ -113,6 +131,27 @@ final class PurgeHiddenContentCommandTest extends KernelTestCase
     $this->assertTrue($user->getProfileHidden());
     $this->assertNotNull($this->em->find(Project::class, $recent_project), 'banned 13 days ago');
     $this->assertNotNull($this->em->find(Project::class, $appealing_project), 'the ban is appealed');
+  }
+
+  public function testHoldsSurviveCascades(): void
+  {
+    $with_held_comment = $this->hiddenProject('-15 days', '-15 days');
+    $this->hold('comment', $this->comment($with_held_comment));
+    $with_held_commenter = $this->hiddenProject('-15 days', '-15 days');
+    $witness = $this->user();
+    $this->comment($with_held_commenter, $witness);
+    $this->hold('user', (string) $witness->getId());
+
+    $this->purge();
+
+    $this->assertNotNull($this->em->find(Project::class, $with_held_comment), 'deleting it would delete a held comment');
+    $this->assertNotNull($this->em->find(Project::class, $with_held_commenter), 'deleting it would delete a held user\'s comment');
+  }
+
+  public function testHoldRejectsUnknownContent(): void
+  {
+    $tester = new CommandTester($this->holdCommand());
+    $this->assertSame(1, $tester->execute(['type' => 'project', 'id' => 'no-such-project']));
   }
 
   public function testDryRunWritesNothing(): void
@@ -170,13 +209,14 @@ final class PurgeHiddenContentCommandTest extends KernelTestCase
     return (string) $projects->insertProject(['name' => 'purge '.uniqid(), 'owned by' => ($owner ?? $this->owner)->getUsername()])->getId();
   }
 
-  /** A project hidden $hidden ago (null: without timestamp), with a report accepted $accepted ago. */
-  private function hiddenProject(?string $hidden, ?string $accepted = null): string
+  /** A project hidden $hidden ago (null: without timestamp), that an admin decided to hide $decided ago. */
+  private function hiddenProject(?string $hidden, ?string $decided = null): string
   {
     $id = $this->project();
     $this->em->getConnection()->executeStatement('UPDATE program SET auto_hidden = 1, auto_hidden_at = ? WHERE id = ?', [null === $hidden ? null : $this->at($hidden), $id]);
-    if (null !== $accepted) {
-      $this->report('project', $id, ReportState::Accepted, $accepted);
+    if (null !== $decided) {
+      $this->report('project', $id, ReportState::Accepted, $decided);
+      $this->decide('project', $id, ContentModerationAction::ACTION_ADMIN_CONFIRMED, $decided);
     }
 
     return $id;
@@ -211,12 +251,27 @@ final class PurgeHiddenContentCommandTest extends KernelTestCase
 
   private function hold(string $type, string $id, bool $release = false): void
   {
-    new CommandTester(new HoldContentCommand($this->em))->execute(['type' => $type, 'id' => $id, '--release' => $release]);
+    $this->assertSame(0, new CommandTester($this->holdCommand())->execute(['type' => $type, 'id' => $id, '--release' => $release]));
   }
 
+  private function holdCommand(): HoldContentCommand
+  {
+    $visibility = self::getContainer()->get(ContentVisibilityManager::class);
+    $this->assertInstanceOf(ContentVisibilityManager::class, $visibility);
+
+    return new HoldContentCommand($this->em, $visibility);
+  }
+
+  /** Like ops ban scripts: the flag, its timestamp and the admin_banned audit row. */
   private function ban(User $user, string $since): void
   {
     $this->em->getConnection()->executeStatement('UPDATE fos_user SET profile_hidden = 1, profile_hidden_at = ? WHERE id = ?', [$this->at($since), $user->getId()]);
+    $this->em->getConnection()->executeStatement("INSERT INTO content_moderation_action (content_type, content_id, action, note, created_at) VALUES ('user', ?, 'admin_banned', 'ban script', ?)", [$user->getId(), $this->at($since)]);
+  }
+
+  private function decide(string $type, string $id, string $action, string $when): void
+  {
+    $this->em->getConnection()->executeStatement('INSERT INTO content_moderation_action (content_type, content_id, action, created_at) VALUES (?, ?, ?, ?)', [$type, $id, $action, $this->at($when)]);
   }
 
   private function at(string $modify): string

@@ -22,6 +22,10 @@ class ContentModerationAction
   final public const string ACTION_ADMIN_CONFIRMED = 'admin_confirmed';
   final public const string ACTION_ADMIN_REVERSED = 'admin_reversed';
   final public const string ACTION_ADMIN_WARNED = 'admin_warned';
+  /** hide_warn: hidden and owner warned, a hide decision (admin_warned is warn only: visibility unchanged). */
+  final public const string ACTION_ADMIN_HIDE_WARNED = 'admin_hide_warned';
+  /** On the user: an admin banned the account (accept on their content, or ops ban scripts). */
+  final public const string ACTION_ADMIN_BANNED = 'admin_banned';
   final public const string ACTION_APPEALED = 'appealed';
   final public const string ACTION_APPEAL_APPROVED = 'appeal_approved';
   final public const string ACTION_APPEAL_REJECTED = 'appeal_rejected';

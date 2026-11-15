@@ -46,12 +46,22 @@ Only visible content is checked, and content with a rejected report is skipped: 
 
 Content hidden by a moderator is not kept as free storage. `catro:moderation:purge-hidden` runs daily on the slow scheduler lane (task "Delete content hidden by moderation for 14 days", with `--apply`) and deletes:
 
-- a project, studio or comment that is hidden (`auto_hidden`) and has a report an admin accepted (`accept`, `hide_warn`, or `warn` on already hidden content), when both `auto_hidden_at` and the report's `resolved_at` are at least 14 days old;
-- everything of an account banned at least 14 days ago (`fos_user.profile_hidden_at`): its projects, its comments and the studios it is the only active admin of. The account row stays (banned, `profile_hidden = 1`) so the ban holds and the name and e-mail stay taken.
+- a project, studio or comment that is hidden (`auto_hidden`, `auto_hidden_at` at least 14 days old) and that a moderator decided to hide at least 14 days ago: a `content_moderation_action` row `admin_confirmed` (`accept`) or `admin_hide_warned` (`hide_warn`) on it with no `admin_reversed` or `appeal_approved` row after it. A plain `warn` (`admin_warned`) leaves visibility alone and is not a hide decision;
+- everything of an account an admin banned at least 14 days ago (`fos_user.profile_hidden_at`, plus an `admin_confirmed` or `admin_banned` row on the user not reversed since): its projects, its comments and the studios it is the only active admin of. The account row stays (banned, `profile_hidden = 1`) so the ban holds and the name and e-mail stay taken. An account hidden only by community reports is never purged.
 
-It never deletes content that has a pending report (state new: auto-flagged or community-hidden content nobody reviewed), a pending or approved appeal, or an evidence hold, and nothing of an account with a pending appeal or an evidence hold. Restored content is no longer `auto_hidden`, so it is never selected.
+It never deletes content that has a pending report (state new: auto-flagged or community-hidden content nobody reviewed), a pending or approved appeal, or an evidence hold; a project or studio whose deletion would take a held comment, or a comment by a held user, along; and nothing of an account with a pending report, a pending appeal or an evidence hold. Restored content is no longer `auto_hidden`, so it is never selected.
 
-Projects go through `StorageLifecycleService::hardDeleteProject()` (zip, extracted files, screenshots, search index, cascades), studios through `StudioManager::deleteCoverImage()` and a Doctrine remove, comments through a Doctrine remove (their notifications cascade; replies by other users stay). Every deletion is logged (`Moderation purge: deleted {type} {id} of {owner_id}`) and printed.
+`accept` on a project, studio or comment writes an `admin_banned` row on its owner, even when the community had hidden the account already. Ops scripts that ban with raw SQL must write the same row:
+
+```sql
+UPDATE fos_user SET profile_hidden = 1, profile_hidden_at = NOW() WHERE id = '<user id>';
+INSERT INTO content_moderation_action (content_type, content_id, action, note, created_at)
+  VALUES ('user', '<user id>', 'admin_banned', 'ban.sh: <reason>', NOW());
+```
+
+and, when they lift a ban, an `admin_reversed` row the same way (otherwise a later community hide of the account would count as the old admin ban).
+
+Projects go through `StorageLifecycleService::hardDeleteProject()`, studios through a Doctrine remove and `StudioManager::deleteCoverImage()`, comments through a Doctrine remove (their notifications cascade). The database row is deleted first, in the flush's transaction; files (zip, extracted files, screenshots, studio covers) only after it. A file that cannot be deleted is logged and stays as an orphan: `catrobat:clean:extracts` and `catrobat:clean:compressed` sweep extracts and zips, screenshots and covers are not swept. Replies by other users to a deleted comment are not deleted; they stay without their parent. Every deletion is logged (`Moderation purge: deleted {type} {id} of {owner_id}`) and printed.
 
 ```bash
 bin/console catro:moderation:purge-hidden               # dry run: lists what is due
@@ -70,4 +80,6 @@ bin/console catro:moderation:hold <type> <id> --release
 
 A hold is an `evidence_hold` row in `content_moderation_action` (a later `evidence_released` row lifts it). A hold on a user keeps all their content.
 
-The owner warning (`hide_warn`) on hidden content names the deletion date: the notifications API appends `catro-notifications.moderation-warning.deletion` while the content is still hidden.
+The owner warning of `hide_warn` (`moderation_action = 'admin_hide_warning'`) says the content will be deleted 14 days after it was hidden unless fixed or appealed: the notifications API appends `catro-notifications.moderation-warning.deletion` while the content is still hidden. A plain `warn` (`admin_warning`) never does.
+
+The migration that added these columns relabels earlier `hide_warn` audit rows (`admin_warned` with the note `… resolved via admin: hide_warn`) as `admin_hide_warned`, and adds an `admin_banned` row, dated the migration, for each currently banned owner of a project or comment with an `admin_confirmed` row. Bans made earlier by raw SQL have no such row and are not purged until one is added.

@@ -67,8 +67,9 @@ class CleanEmptyStudiosCommand extends Command
       $studio->setDeletionWarnedAt(null);
     }
 
+    $covers = [];
     foreach ($this->studios($deleted) as $studio) {
-      $this->studio_manager->deleteCoverImage($studio->getCoverAssetPath());
+      $covers[] = $studio->getCoverAssetPath();
       $this->entity_manager->remove($studio);
     }
 
@@ -88,6 +89,9 @@ class CleanEmptyStudiosCommand extends Command
     }
 
     $this->entity_manager->flush();
+    foreach ($covers as $cover) {
+      $this->studio_manager->deleteCoverImage($cover); // after the rows are gone, never before
+    }
 
     $warned_count = count($warned) - $unwarnable;
     $this->cleanupLogger->info('cleanup_run', ['rule' => 'empty_studios', 'deleted' => count($deleted), 'warned' => $warned_count, 'kept' => count($kept), 'no_one_to_warn' => $unwarnable]);

@@ -41,13 +41,22 @@ class ModerationWarningNotificationResponseTest extends TestCase
     self::assertSame('', $this->renderMessage('report_accepted', ''));
   }
 
-  public function testWarningAboutHiddenContentNamesTheDeletionDate(): void
+  public function testHideWarningOnHiddenContentAnnouncesTheDeletion(): void
   {
-    $date = new \DateTimeImmutable('+14 days')->format('Y-m-d');
     self::assertSame(
-      'Custom text catro-notifications.moderation-warning.deletion '.$date,
-      $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_WARNING, 'Custom text', true),
+      'catro-notifications.moderation-warning.message catro-notifications.moderation-warning.deletion 14',
+      $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, '', true),
     );
+  }
+
+  public function testPlainWarningNeverAnnouncesADeletion(): void
+  {
+    self::assertSame('Custom text', $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_WARNING, 'Custom text', true));
+  }
+
+  public function testHideWarningOnRestoredContentAnnouncesNothing(): void
+  {
+    self::assertSame('Custom text', $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, 'Custom text'));
   }
 
   private function renderMessage(string $moderation_action, string $message, bool $hidden = false): string
