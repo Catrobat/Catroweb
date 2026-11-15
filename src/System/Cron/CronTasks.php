@@ -39,7 +39,7 @@ final class CronTasks
 
       // Slow lane: whole-table or whole-disk sweeps
       $task('Delete expired projects based on retention rules', 'catrobat:storage:lifecycle', '1 day', self::DAY, true),
-      $task('Garbage collect orphaned assets', 'catrobat:gc-assets', '1 week', self::DAY, true),
+      $task('Garbage collect orphaned assets', 'catrobat:gc-assets', '1 day', self::DAY, true),
       $task('Detect broken projects', 'catrobat:workflow:detect_broken_projects', '1 day', self::DAY, true),
       $task('Re-sanitize user-generated content', 'catro:moderation:sanitize-existing', '1 month', self::DAY, true),
       $task('(Re-)Add project extensions', 'catrobat:workflow:project:refresh_extensions', '1 year', self::WEEK, true),

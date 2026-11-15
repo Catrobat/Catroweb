@@ -75,26 +75,33 @@ class ProjectDeduplicationService
   }
 
   /**
-   * Garbage-collect assets no project maps.
+   * Garbage-collect assets no project maps, batch by batch until none are left or the deadline passes.
+   * Assets younger than $created_before are skipped: an upload may still be mapping them.
    * Intended to be called from a cron/command, NOT inline during upload.
+   *
+   * @return array{count: int, bytes: int}
    */
-  public function garbageCollect(int $limit = 100): int
+  public function garbageCollect(\DateTimeImmutable $created_before, int $batch_size = 500, float $deadline = INF): array
   {
-    $deleted = 0;
-    foreach ($this->assetRepository->findOrphanedHashes($limit) as $hash) {
-      try {
-        // The delete waits for an upload holding the row and fails on the foreign key once that upload mapped it.
-        $this->entityManager->getConnection()->transactional(function (Connection $connection) use ($hash, &$deleted): void {
-          if (1 === $connection->executeStatement('DELETE FROM project_asset WHERE hash = ?', [$hash])) {
-            $this->store->delete($hash);
-            ++$deleted;
-          }
-        });
-      } catch (ForeignKeyConstraintViolationException) {
+    $deleted = ['count' => 0, 'bytes' => 0];
+    $after = '';
+    do {
+      $orphans = $this->assetRepository->findOrphans($batch_size, $created_before, $after);
+      foreach ($orphans as $hash => $size) {
+        $after = (string) $hash;
+        try {
+          // The delete waits for an upload holding the row and fails on the foreign key once that upload mapped it.
+          $this->entityManager->getConnection()->transactional(function (Connection $connection) use ($after, $size, &$deleted): void {
+            if (1 === $connection->executeStatement('DELETE FROM project_asset WHERE hash = ?', [$after])) {
+              $this->store->delete($after);
+              ++$deleted['count'];
+              $deleted['bytes'] += $size;
+            }
+          });
+        } catch (ForeignKeyConstraintViolationException) {
+        }
       }
-    }
-
-    $this->logger->info('Garbage collected orphaned assets', ['count' => $deleted]);
+    } while (count($orphans) === $batch_size && microtime(true) < $deadline);
 
     return $deleted;
   }

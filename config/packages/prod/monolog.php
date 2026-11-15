@@ -13,6 +13,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'download',
         'upload',
         'login',
+        'cleanup',
       ],
       'handlers' => [
         'main' => [
@@ -21,7 +22,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'handler' => 'mainHandler',
           'excluded_http_codes' => [400, 401, 402, 403, 404, 405, 406, 429],
           'buffer_size' => 50,
-          'channels' => ['!login'],
+          'channels' => ['!login', '!cleanup'],
         ],
         'mainHandler' => [
           'type' => 'rotating_file',
@@ -67,6 +68,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'level' => 'info',
           'max_files' => 30,
           'channels' => ['login'],
+          'formatter' => 'monolog.formatter.login_formatter',
+        ],
+        // One summary line per cleanup cron run (rule, deleted count), for Grafana. Same shipping as login.log.
+        'cleanup' => [
+          'type' => 'rotating_file',
+          'path' => '%kernel.logs_dir%/%kernel.environment%/cleanup.log',
+          'level' => 'info',
+          'max_files' => 30,
+          'channels' => ['cleanup'],
           'formatter' => 'monolog.formatter.login_formatter',
         ],
         'console' => [

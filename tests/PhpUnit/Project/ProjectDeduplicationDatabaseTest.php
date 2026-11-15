@@ -90,8 +90,9 @@ final class ProjectDeduplicationDatabaseTest extends KernelTestCase
     $this->service()->removeProjectMappings((string) $project->getId());
     $this->deduplicate($project, ['images/kept.png' => $kept]); // the update no longer has dropped.png
 
-    $this->service()->garbageCollect(PHP_INT_MAX);
+    $deleted = $this->service()->garbageCollect(new \DateTimeImmutable('+1 minute'));
 
+    $this->assertGreaterThanOrEqual(1, $deleted['count']);
     $this->assertTrue($this->store->exists(hash('sha256', $kept)));
     $this->assertNotNull($this->entity_manager->find(ProjectAsset::class, hash('sha256', $kept)));
     $this->assertFalse($this->store->exists(hash('sha256', $dropped)));
@@ -104,13 +105,41 @@ final class ProjectDeduplicationDatabaseTest extends KernelTestCase
     $content = 'raced '.uniqid();
     $this->deduplicate($this->insertProject(), ['images/raced.png' => $content]);
     $assets = $this->createStub(ProjectAssetRepository::class);
-    $assets->method('findOrphanedHashes')->willReturn([hash('sha256', $content)]); // listed as orphan, then mapped
+    $assets->method('findOrphans')->willReturn([hash('sha256', $content) => 1]); // listed as orphan, then mapped
 
-    $deleted = new ProjectDeduplicationService($this->store, $assets, $this->mappings, $this->entity_manager, new NullLogger())->garbageCollect();
+    $deleted = new ProjectDeduplicationService($this->store, $assets, $this->mappings, $this->entity_manager, new NullLogger())->garbageCollect(new \DateTimeImmutable('+1 minute'));
 
-    $this->assertSame(0, $deleted);
+    $this->assertSame(0, $deleted['count']);
     $this->assertTrue($this->store->exists(hash('sha256', $content)));
     $this->assertTrue($this->entity_manager->isOpen());
+  }
+
+  public function testGarbageCollectionWorksThroughEveryBatchInOneRun(): void
+  {
+    $orphans = ['a '.uniqid(), 'b '.uniqid(), 'c '.uniqid()];
+    $project = $this->insertProject();
+    $this->deduplicate($project, array_combine(['images/a.png', 'images/b.png', 'images/c.png'], $orphans));
+    $this->service()->removeProjectMappings((string) $project->getId());
+
+    $deleted = $this->service()->garbageCollect(new \DateTimeImmutable('+1 minute'), batch_size: 1);
+
+    $this->assertGreaterThanOrEqual(3, $deleted['count']);
+    foreach ($orphans as $content) {
+      $this->assertFalse($this->store->exists(hash('sha256', $content)));
+    }
+  }
+
+  public function testGarbageCollectionKeepsOrphansInsideTheGracePeriod(): void
+  {
+    $content = 'just uploaded '.uniqid();
+    $project = $this->insertProject();
+    $this->deduplicate($project, ['images/new.png' => $content]);
+    $this->service()->removeProjectMappings((string) $project->getId());
+
+    $this->service()->garbageCollect(new \DateTimeImmutable('-1 day'));
+
+    $this->assertTrue($this->store->exists(hash('sha256', $content)));
+    $this->assertNotNull($this->entity_manager->find(ProjectAsset::class, hash('sha256', $content)));
   }
 
   private function service(): ProjectDeduplicationService
