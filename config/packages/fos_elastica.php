@@ -8,6 +8,10 @@ use App\DB\Entity\User\User;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
+  // Index changes are sent after the response (kernel.terminate), so a save never waits for Elasticsearch and an
+  // Elasticsearch outage never fails it. Not in tests: Behat fixtures save outside any request, where nothing defers.
+  $listener = ['defer' => 'test' !== $containerConfigurator->env()];
+
   $containerConfigurator->extension(
     'fos_elastica',
     [
@@ -83,6 +87,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ],
           ],
           'persistence' => [
+            'listener' => $listener,
             'driver' => 'orm',
             'model' => Project::class,
           ],
@@ -121,6 +126,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'consent_status' => ['type' => 'keyword'],
           ],
           'persistence' => [
+            'listener' => $listener,
             'driver' => 'orm',
             'model' => User::class,
           ],
@@ -165,6 +171,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ],
           ],
           'persistence' => [
+            'listener' => $listener,
             'driver' => 'orm',
             'model' => Studio::class,
           ],
