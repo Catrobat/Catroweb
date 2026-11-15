@@ -17,6 +17,7 @@ use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\Notifications\ProjectFilesLostNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\Notifications\StudioCommentNotification;
+use App\DB\Entity\User\Notifications\StudioDeletionWarningNotification;
 use App\DB\Entity\User\Notifications\StudioJoinRequestNotification;
 use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
@@ -278,6 +279,19 @@ class NotificationsResponseManager extends AbstractResponseManager
         'project_name' => $notification->getProjectName(),
         'message' => $this->trans('catro-notifications.project-deleted.message', [
           '%project_name%' => $notification->getProjectName() ?? '',
+        ]),
+      ]);
+    }
+
+    if ($notification instanceof StudioDeletionWarningNotification) {
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'studio',
+        'seen' => $notification->getSeen(),
+        'studio' => $notification->getStudio()?->getId(),
+        'message' => $this->trans('catro-notifications.studio-deletion-warning.message', [
+          '%studio_name%' => $notification->getStudioName(),
+          '%days%' => (string) StudioDeletionWarningNotification::DAYS_UNTIL_DELETION,
         ]),
       ]);
     }

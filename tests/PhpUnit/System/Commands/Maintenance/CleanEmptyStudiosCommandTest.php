@@ -1,0 +1,121 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\PhpUnit\System\Commands\Maintenance;
+
+use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioJoinRequest;
+use App\DB\Entity\User\Notifications\StudioDeletionWarningNotification;
+use App\DB\Entity\User\User;
+use App\Studio\StudioManager;
+use App\System\Commands\Maintenance\CleanEmptyStudiosCommand;
+use App\System\Testing\DataFixtures\ProjectDataFixtures;
+use App\System\Testing\DataFixtures\UserDataFixtures;
+use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Psr\Log\NullLogger;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Tester\CommandTester;
+
+/**
+ * @internal
+ */
+#[CoversClass(CleanEmptyStudiosCommand::class)]
+final class CleanEmptyStudiosCommandTest extends KernelTestCase
+{
+  private EntityManagerInterface $em;
+
+  private StudioManager $studios;
+
+  private User $admin;
+
+  #[\Override]
+  protected function setUp(): void
+  {
+    self::bootKernel();
+    $em = self::getContainer()->get(EntityManagerInterface::class);
+    $this->assertInstanceOf(EntityManagerInterface::class, $em);
+    $this->em = $em;
+    $studios = self::getContainer()->get(StudioManager::class);
+    $this->assertInstanceOf(StudioManager::class, $studios);
+    $this->studios = $studios;
+    $users = self::getContainer()->get(UserDataFixtures::class);
+    $this->assertInstanceOf(UserDataFixtures::class, $users);
+    $this->admin = $users->insertUser(['name' => 'studioadmin'.uniqid()]);
+  }
+
+  public function testWarnsThenDeletesEmptyInactiveStudiosAndKeepsLiveOnes(): void
+  {
+    $inactive = $this->studio('-100 days');
+    $young = $this->studio('-10 days');
+    $due = $this->studio('-200 days', '-31 days');
+    $revived = $this->studio('-200 days', '-31 days');
+    $recently_warned = $this->studio('-200 days', '-10 days');
+    $requested = $this->studio('-100 days');
+    $adminless = $this->studio('-100 days');
+    $nobody = $this->studio('-100 days');
+    $connection = $this->em->getConnection();
+    $connection->executeStatement("UPDATE studio_user SET role = 'member' WHERE studio = ?", [$adminless]);
+    $connection->executeStatement("UPDATE studio_user SET status = 'banned' WHERE studio = ?", [$nobody]);
+    $users = self::getContainer()->get(UserDataFixtures::class);
+    $this->assertInstanceOf(UserDataFixtures::class, $users);
+    $requested_studio = $this->find($requested);
+    $this->assertInstanceOf(Studio::class, $requested_studio);
+    $asking = $users->insertUser(['name' => 'asking'.uniqid()]);
+    $this->studios->setJoinRequest($asking, $requested_studio, StudioJoinRequest::STATUS_PENDING);
+    $projects = self::getContainer()->get(ProjectDataFixtures::class);
+    $this->assertInstanceOf(ProjectDataFixtures::class, $projects);
+    $project = $projects->insertProject(['name' => 'studio '.uniqid(), 'owned by' => $this->admin->getUsername()]);
+    $revived_studio = $this->find($revived);
+    $this->assertInstanceOf(Studio::class, $revived_studio);
+    $this->studios->addProjectToStudio($this->admin, $revived_studio, $project);
+
+    $command = new CleanEmptyStudiosCommand($this->em, $this->studios, new NullLogger());
+    $dry = new CommandTester($command);
+    $dry->execute(['--dry-run' => true]);
+    $this->assertStringContainsString('studios would be warned', $dry->getDisplay());
+    $this->assertNotNull($this->find($due));
+
+    new CommandTester($command)->execute([]);
+    $this->em->clear();
+
+    $this->assertNotNull($this->find($inactive)?->getDeletionWarnedAt());
+    $this->assertNull($this->find($young)?->getDeletionWarnedAt());
+    $this->assertNull($this->find($due));
+    $revived_studio = $this->find($revived);
+    $this->assertInstanceOf(Studio::class, $revived_studio);
+    $this->assertNull($revived_studio->getDeletionWarnedAt());
+    $warned_studios = static fn (array $warnings): array => array_map(static fn (StudioDeletionWarningNotification $n): ?string => $n->getStudio()?->getId(), $warnings);
+    $this->assertNotNull($this->find($recently_warned)?->getDeletionWarnedAt(), 'warned 10 days ago: neither deleted nor reset');
+    $this->assertNotNull($this->find($requested)?->getDeletionWarnedAt(), 'an unanswered join request is not activity');
+    $this->assertSame([$requested], $warned_studios($this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $asking->getId()])), 'the one waiting on a join request is told too');
+    $this->assertNull($this->find($nobody)?->getDeletionWarnedAt(), 'no one to warn: never warned, so never deleted');
+    $warnings = $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]);
+    $this->assertEqualsCanonicalizing([$inactive, $adminless, $requested], $warned_studios($warnings), 'without an admin the members are warned');
+
+    new CommandTester($command)->execute([]);
+    $this->assertCount(3, $this->em->getRepository(StudioDeletionWarningNotification::class)->findBy(['user' => $this->admin->getId()]), 'warned once');
+  }
+
+  /** A studio whose creation and activities all lie $age back, optionally warned $warned ago. */
+  private function studio(string $age, ?string $warned = null): string
+  {
+    $id = (string) $this->studios->createStudio($this->admin, 'empty '.uniqid(), 'test')->getId();
+    $connection = $this->em->getConnection();
+    $at = new \DateTime($age)->format('Y-m-d H:i:s');
+    $connection->executeStatement('UPDATE studio SET created_on = ?, updated_on = NULL, deletion_warned_at = ? WHERE id = ?', [$at, null === $warned ? null : new \DateTime($warned)->format('Y-m-d H:i:s'), $id]);
+    $connection->executeStatement('UPDATE studio_activity SET created_on = ? WHERE studio = ?', [$at, $id]);
+    $this->em->clear();
+    $admin = $this->em->find(User::class, $this->admin->getId());
+    $this->assertInstanceOf(User::class, $admin);
+    $this->admin = $admin;
+
+    return $id;
+  }
+
+  private function find(string $id): ?Studio
+  {
+    return $this->em->find(Studio::class, $id);
+  }
+}

@@ -54,6 +54,10 @@ class Studio implements \Stringable
   #[ORM\Column(name: 'created_on', type: Types::DATETIME_MUTABLE, nullable: false)]
   protected ?\DateTime $created_on = null;
 
+  /** Set when the owners were told this empty, inactive studio will be deleted (catrobat:clean:empty-studios). */
+  #[ORM\Column(name: 'deletion_warned_at', type: Types::DATETIME_MUTABLE, nullable: true)]
+  protected ?\DateTime $deletion_warned_at = null;
+
   /**
    * When this studio is deleted, all its comments should be removed too.
    *
@@ -178,6 +182,18 @@ class Studio implements \Stringable
   public function setUpdatedOn(?\DateTime $updated_on): Studio
   {
     $this->updated_on = $updated_on;
+
+    return $this;
+  }
+
+  public function getDeletionWarnedAt(): ?\DateTime
+  {
+    return $this->deletion_warned_at;
+  }
+
+  public function setDeletionWarnedAt(?\DateTime $deletion_warned_at): Studio
+  {
+    $this->deletion_warned_at = $deletion_warned_at;
 
     return $this;
   }
