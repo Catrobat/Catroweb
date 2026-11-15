@@ -269,7 +269,7 @@ class StorageLifecycleService
 
     while (true) {
       $projects = $this->entity_manager->createQueryBuilder()
-        ->select('p')
+        ->select('p', 'u') // the tier needs the owner: one query per batch, not one per project
         ->from(Project::class, 'p')
         ->leftJoin('p.user', 'u')
         ->orderBy('p.uploaded_at', 'ASC')
@@ -426,7 +426,7 @@ class StorageLifecycleService
 
     while (true) {
       $projects = $this->entity_manager->createQueryBuilder()
-        ->select('p')
+        ->select('p', 'u') // the tier needs the owner: one query per batch, not one per project
         ->from(Project::class, 'p')
         ->leftJoin('p.user', 'u')
         ->orderBy('p.uploaded_at', 'ASC')
