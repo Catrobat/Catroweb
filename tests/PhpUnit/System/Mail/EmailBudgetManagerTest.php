@@ -200,6 +200,15 @@ class EmailBudgetManagerTest extends TestCase
     self::assertFalse($this->manager->canSend('management'));
   }
 
+  public function testABulkMailLeavesEveryReserveAndCountsQueuedMails(): void
+  {
+    $manager = $this->managerWith('main:300,mailjet:100'); // 400 a day, 300 of them reserved
+    $this->budget->setTotalSent(50);
+
+    self::assertTrue($manager->canSendBulk(49));
+    self::assertFalse($manager->canSendBulk(50));
+  }
+
   private function managerWith(string $providers): EmailBudgetManager
   {
     $repository = $this->createStub(EmailDailyBudgetRepository::class);

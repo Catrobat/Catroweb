@@ -84,6 +84,15 @@ class EmailBudgetManager
     return true;
   }
 
+  /**
+   * Room for a bulk mail (e.g. inactivity warnings) that leaves every type's reserve untouched, counting the mails
+   * still waiting in the queue as sent.
+   */
+  public function canSendBulk(int $queued): bool
+  {
+    return $this->getDailyLimit() - $this->repository->findOrCreateToday()->getTotalSent() - $queued > $this->getTotalReserved();
+  }
+
   public function recordSend(string $type, string $provider = 'main'): void
   {
     $this->validateType($type);

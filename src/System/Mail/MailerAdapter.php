@@ -58,6 +58,19 @@ class MailerAdapter
   }
 
   /**
+   * Renders and delivers right away instead of queueing: for console commands that may only act once the mail is
+   * out (a deletion warning). False when the budget has no room or no provider took the mail.
+   */
+  public function sendNow(string $to, string $subject, string $template, array $context, string $emailType): bool
+  {
+    if (str_ends_with(strtolower($to), '@localhost') || !$this->budgetManager->canSend($emailType)) {
+      return false;
+    }
+
+    return $this->deliver($this->buildEmail($to, $subject, $template, $context), $to, $emailType);
+  }
+
+  /**
    * On the mail worker. Free mail tiers have small daily limits, so several providers are chained: the first one
    * with room left sends, and one that fails (down, or over a limit we did not know about) hands over to the next.
    * ponytail: a provider that times out after accepting the mail causes a duplicate from the next one; a
