@@ -141,7 +141,7 @@ interface ModerationApiInterface
   /**
    * Operation moderationReportsIdResolvePut.
    *
-   * Resolve a report (accept or reject, admin only)
+   * Resolve a report (admin only): accept, hide_warn, warn or reject
    *
    * @param string               $id                     (required)
    * @param ResolveReportRequest $resolve_report_request (required)

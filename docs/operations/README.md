@@ -7,6 +7,7 @@
 - [Domain-Change.md](./Domain-Change.md) — Procedure for changing the production domain behind Cloudflare + nginx origin.
 - [How-To-Deploy.md](./How-To-Deploy.md) — Release and deploy the app via Deployer.
 - [Email-Providers.md](./Email-Providers.md) — chaining free mail-provider tiers, daily limits per provider, AWS SES as capped paid overflow.
+- [Moderation-Actions.md](./Moderation-Actions.md) — Report resolutions (ban, hide + warn, warn, reject) in the admin queue, API and console.
 - [Malware-Scanning.md](./Malware-Scanning.md) — ClamAV-based scanning of uploaded `.catrobat` files before extraction.
 - [Content-Moderation.md](./Content-Moderation.md) — Reports, adults-only text signals and NSFW image scans that hide content for admin review; backfill command.
 - [NSFW-Content-Scanning.md](./NSFW-Content-Scanning.md) — Self-hosted NSFW scanning of profile pictures, project images and studio covers.

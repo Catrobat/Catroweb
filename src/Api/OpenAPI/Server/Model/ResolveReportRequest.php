@@ -42,19 +42,34 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ResolveReportRequest
 {
   /**
-   * Whether to accept or reject the report.
+   * accept: hide content and ban its owner; hide_warn: hide content and warn the owner (a reported user gets the profile texts cleared instead); warn: keep content visible and warn the owner; reject: dismiss the report.
    *
    * @SerializedName("action")
    *
    * @Assert\NotNull()
    *
-   * @Assert\Choice({ "accept", "reject" })
+   * @Assert\Choice({ "accept", "reject", "hide_warn", "warn" })
    *
    * @Assert\Type("string")
    *
    * @Type("string")
    */
   protected ?string $action = null;
+
+  /**
+   * Warning text sent to the content owner (hide_warn and warn only); empty sends a default warning.
+   *
+   * @SerializedName("message")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   *
+   * @Assert\Length(
+   *   max = 5000
+   * )
+   */
+  protected ?string $message = null;
 
   /**
    * Constructor.
@@ -65,6 +80,7 @@ class ResolveReportRequest
   {
     if (is_array($data)) {
       $this->action = array_key_exists('action', $data) ? $data['action'] : $this->action;
+      $this->message = array_key_exists('message', $data) ? $data['message'] : $this->message;
     }
   }
 
@@ -79,13 +95,35 @@ class ResolveReportRequest
   /**
    * Sets action.
    *
-   * @param string|null $action Whether to accept or reject the report
+   * @param string|null $action accept: hide content and ban its owner; hide_warn: hide content and warn the owner (a reported user gets the profile texts cleared instead); warn: keep content visible and warn the owner; reject: dismiss the report
    *
    * @return $this
    */
   public function setAction(?string $action): self
   {
     $this->action = $action;
+
+    return $this;
+  }
+
+  /**
+   * Gets message.
+   */
+  public function getMessage(): ?string
+  {
+    return $this->message;
+  }
+
+  /**
+   * Sets message.
+   *
+   * @param string|null $message Warning text sent to the content owner (hide_warn and warn only); empty sends a default warning
+   *
+   * @return $this
+   */
+  public function setMessage(?string $message = null): self
+  {
+    $this->message = $message;
 
     return $this;
   }

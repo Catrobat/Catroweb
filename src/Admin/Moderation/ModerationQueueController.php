@@ -9,6 +9,7 @@ use App\DB\Enum\ReportState;
 use App\Moderation\ReportProcessor;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @phpstan-extends CRUDController<ContentReport>
@@ -22,15 +23,25 @@ class ModerationQueueController extends CRUDController
 
   public function acceptReportAction(): RedirectResponse
   {
-    return $this->resolveReport('accept');
+    return $this->resolveReport(ReportProcessor::ACTION_ACCEPT);
   }
 
   public function rejectReportAction(): RedirectResponse
   {
-    return $this->resolveReport('reject');
+    return $this->resolveReport(ReportProcessor::ACTION_REJECT);
   }
 
-  private function resolveReport(string $action): RedirectResponse
+  public function hideWarnReportAction(Request $request): RedirectResponse
+  {
+    return $this->resolveReport(ReportProcessor::ACTION_HIDE_WARN, $request->request->getString('message'));
+  }
+
+  public function warnReportAction(Request $request): RedirectResponse
+  {
+    return $this->resolveReport(ReportProcessor::ACTION_WARN, $request->request->getString('message'));
+  }
+
+  private function resolveReport(string $action, ?string $message = null): RedirectResponse
   {
     /** @var ContentReport|null $report */
     $report = $this->admin->getSubject();
@@ -49,9 +60,14 @@ class ModerationQueueController extends CRUDController
     /** @var \App\DB\Entity\User\User $admin */
     $admin = $this->getUser();
 
-    $this->report_processor->resolveReport($report, $admin, $action);
+    $this->report_processor->resolveReport($report, $admin, $action, $message);
 
-    $label = 'accept' === $action ? 'accepted - content hidden, owner banned' : 'rejected - content restored';
+    $label = match ($action) {
+      ReportProcessor::ACTION_ACCEPT => 'accepted - content hidden, owner banned',
+      ReportProcessor::ACTION_HIDE_WARN => 'accepted - content hidden, owner warned',
+      ReportProcessor::ACTION_WARN => 'accepted - visibility unchanged, owner warned',
+      default => 'rejected - content restored',
+    };
     $this->addFlash('sonata_flash_success', 'Report #'.$report->getId().' '.$label);
 
     return new RedirectResponse($this->admin->generateUrl('list'));

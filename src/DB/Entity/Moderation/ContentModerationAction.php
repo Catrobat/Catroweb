@@ -21,6 +21,7 @@ class ContentModerationAction
   final public const string ACTION_AUTO_HIDDEN = 'auto_hidden';
   final public const string ACTION_ADMIN_CONFIRMED = 'admin_confirmed';
   final public const string ACTION_ADMIN_REVERSED = 'admin_reversed';
+  final public const string ACTION_ADMIN_WARNED = 'admin_warned';
   final public const string ACTION_APPEALED = 'appealed';
   final public const string ACTION_APPEAL_APPROVED = 'appeal_approved';
   final public const string ACTION_APPEAL_REJECTED = 'appeal_rejected';

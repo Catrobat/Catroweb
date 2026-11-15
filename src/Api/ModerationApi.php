@@ -183,7 +183,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     }
 
     try {
-      $this->facade->getProcessor()->resolveReport($report, $admin, $action);
+      $this->facade->getProcessor()->resolveReport($report, $admin, $action, $resolve_report_request->getMessage());
     } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 

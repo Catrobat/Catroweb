@@ -26,6 +26,17 @@ class ReportProcessor
   private const int VELOCITY_WINDOW_MINUTES = 30;
   public const int MAX_NOTE_LENGTH = 5000;
 
+  /** Hide the content and ban (profile-hide) its owner. */
+  public const string ACTION_ACCEPT = 'accept';
+  public const string ACTION_REJECT = 'reject';
+  /** Hide the content, warn the owner, no ban. For user reports: clear the profile texts instead of hiding. */
+  public const string ACTION_HIDE_WARN = 'hide_warn';
+  /** Keep the content visible, warn the owner. */
+  public const string ACTION_WARN = 'warn';
+  public const array ACTIONS = [self::ACTION_ACCEPT, self::ACTION_REJECT, self::ACTION_HIDE_WARN, self::ACTION_WARN];
+  /** ModerationNotification::moderation_action of an owner warning. */
+  public const string NOTIFICATION_ADMIN_WARNING = 'admin_warning';
+
   public function __construct(
     private readonly ContentReportRepository $report_repository,
     private readonly TrustScoreCalculator $trust_calculator,
@@ -109,16 +120,22 @@ class ReportProcessor
     return ['report' => $report, 'auto_hidden' => $auto_hidden];
   }
 
-  public function resolveReport(ContentReport $report, User $admin, string $action): void
+  /**
+   * @param string      $action  one of the ACTION_* constants
+   * @param string|null $message warning text for the owner (hide_warn/warn); empty = translated default at render time
+   */
+  public function resolveReport(ContentReport $report, User $admin, string $action, ?string $message = null): void
   {
-    $state = match ($action) {
-      'accept' => ReportState::Accepted,
-      'reject' => ReportState::Rejected,
+    $audit_action = match ($action) {
+      self::ACTION_ACCEPT => ContentModerationAction::ACTION_ADMIN_CONFIRMED,
+      self::ACTION_REJECT => ContentModerationAction::ACTION_ADMIN_REVERSED,
+      self::ACTION_HIDE_WARN, self::ACTION_WARN => ContentModerationAction::ACTION_ADMIN_WARNED,
       default => throw new \InvalidArgumentException('Invalid action: '.$action),
     };
+    $state = self::ACTION_REJECT === $action ? ReportState::Rejected : ReportState::Accepted;
 
     $content_type = ContentType::from($report->getContentType());
-    $accepted = ReportState::Accepted === $state;
+    $content_id = $report->getContentId();
     $now = TimeUtils::getDateTime();
 
     // Resolve the primary report
@@ -126,31 +143,41 @@ class ReportProcessor
     $report->setResolvedAt($now);
     $report->setResolvedBy($admin);
 
-    if ($accepted) {
-      $this->visibility_manager->hideContent($content_type, $report->getContentId());
-      $this->banContentOwner($content_type, $report->getContentId());
-    } else {
-      // Only restore content visibility if no other active (new/accepted) reports exist.
-      // This prevents un-hiding content that was legitimately reported by others.
-      $report_id = $report->getId();
-      $has_other_reports = null !== $report_id && $this->report_repository->hasOtherActiveReports(
-        $report->getContentType(),
-        $report->getContentId(),
-        $report_id,
-      );
-      if (!$has_other_reports) {
-        $this->visibility_manager->showContent($content_type, $report->getContentId());
-      }
+    switch ($action) {
+      case self::ACTION_ACCEPT:
+        $this->visibility_manager->hideContent($content_type, $content_id);
+        $this->banContentOwner($content_type, $content_id);
+        break;
+      case self::ACTION_HIDE_WARN:
+        $this->hideContentWithoutBan($content_type, $content_id);
+        $this->warnContentOwner($content_type, $content_id, $message);
+        break;
+      case self::ACTION_WARN:
+        // Visibility is left as is: un-hiding here could lift an earlier ban or accepted report.
+        $this->warnContentOwner($content_type, $content_id, $message);
+        break;
+      default:
+        // Only restore content visibility if no other active (new/accepted) reports exist.
+        // This prevents un-hiding content that was legitimately reported by others.
+        $report_id = $report->getId();
+        $has_other_reports = null !== $report_id && $this->report_repository->hasOtherActiveReports(
+          $report->getContentType(),
+          $content_id,
+          $report_id,
+        );
+        if (!$has_other_reports) {
+          $this->visibility_manager->showContent($content_type, $content_id);
+        }
     }
 
     $all_reports = $this->resolveRelatedReports($report, $state, $admin, $now);
 
     $audit = new ContentModerationAction();
     $audit->setContentType($report->getContentType());
-    $audit->setContentId($report->getContentId());
-    $audit->setAction($accepted ? ContentModerationAction::ACTION_ADMIN_CONFIRMED : ContentModerationAction::ACTION_ADMIN_REVERSED);
+    $audit->setContentId($content_id);
+    $audit->setAction($audit_action);
     $audit->setPerformedBy($admin);
-    $audit->setNote('Report #'.$report->getId().' '.$action.'ed via admin');
+    $audit->setNote('Report #'.$report->getId().' resolved via admin: '.$action);
     $this->entity_manager->persist($audit);
 
     if ($report->getReporter() instanceof User) {
@@ -279,6 +306,41 @@ class ReportProcessor
     }
 
     $this->visibility_manager->hideContent(ContentType::User, $owner_id);
+  }
+
+  /**
+   * Like hideContent(), but a reported user is not banned: their profile texts are cleared instead.
+   */
+  private function hideContentWithoutBan(ContentType $content_type, string $content_id): void
+  {
+    if (ContentType::User !== $content_type) {
+      $this->visibility_manager->hideContent($content_type, $content_id);
+
+      return;
+    }
+
+    $user = $this->entity_manager->find(User::class, $content_id);
+    if ($user instanceof User) {
+      $user->setAbout(null);
+      $user->setCurrentlyWorkingOn(null);
+    }
+  }
+
+  private function warnContentOwner(ContentType $content_type, string $content_id, ?string $message): void
+  {
+    $owner_id = $this->visibility_manager->getContentOwnerId($content_type, $content_id);
+    $owner = null === $owner_id ? null : $this->entity_manager->find(User::class, $owner_id);
+    if (!$owner instanceof User) {
+      return;
+    }
+
+    $this->entity_manager->persist(new ModerationNotification(
+      $owner,
+      $content_type->value,
+      $content_id,
+      self::NOTIFICATION_ADMIN_WARNING,
+      mb_substr(trim($message ?? ''), 0, self::MAX_NOTE_LENGTH),
+    ));
   }
 
   /**

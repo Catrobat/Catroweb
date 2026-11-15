@@ -1,4 +1,4 @@
 {% if object.state == 1 %}
-  <a class="btn btn-sm btn-success" href="{{ admin.generateObjectUrl('acceptReport', object) }}"><i
-        class="fa fa-check"></i> Accept </a>
+  <a class="btn btn-sm btn-danger" href="{{ admin.generateObjectUrl('acceptReport', object) }}"
+     title="Hides the content and bans its owner"><i class="fa fa-ban"></i> Hide + ban owner </a>
 {% endif %}

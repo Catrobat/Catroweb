@@ -42,6 +42,7 @@ use App\DB\Entity\User\User;
 use App\DB\Enum\AppealState;
 use App\DB\Enum\ReportState;
 use App\DB\Generator\MyUuidGenerator;
+use App\Moderation\ReportProcessor;
 use App\Project\CodeStatistics\CodeStatisticsParser;
 use App\Storage\FileHelper;
 use App\System\Commands\DBUpdater\UpdateAchievementsCommand;
@@ -2332,6 +2333,7 @@ class DataFixturesContext implements Context
    */
   public function moderationReportShouldHaveState(string $report_id, string $expected_state): void
   {
+    $this->getManager()->clear(); // the browser request changed the row in another process
     $report = $this->getManager()->find(ContentReport::class, $report_id);
     Assert::assertNotNull($report, sprintf('Report %s not found', $report_id));
     Assert::assertSame($this->parseReportState($expected_state), $report->getState());
@@ -2386,6 +2388,7 @@ class DataFixturesContext implements Context
    */
   public function theProjectShouldBeHiddenOrVisible(string $project_identifier, string $visibility): void
   {
+    $this->getManager()->clear(); // the browser request changed the row in another process
     $project = ctype_digit($project_identifier)
       ? $this->getProjectManager()->find($project_identifier)
       : $this->getProjectManager()->findOneByName($project_identifier);
@@ -2399,6 +2402,7 @@ class DataFixturesContext implements Context
    */
   public function theCommentShouldBeHiddenOrVisible(string $comment_id, string $visibility): void
   {
+    $this->getManager()->clear(); // the browser request changed the row in another process
     $comment = $this->getManager()->find(UserComment::class, $comment_id);
     Assert::assertNotNull($comment, sprintf('Comment %s not found', $comment_id));
     Assert::assertSame('hidden' === $visibility, $comment->getAutoHidden());
@@ -2409,9 +2413,25 @@ class DataFixturesContext implements Context
    */
   public function theUserProfileShouldBeHiddenOrVisible(string $user_identifier, string $visibility): void
   {
+    $this->getManager()->clear(); // the browser request changed the row in another process
     $user = $this->findUserByUsernameOrId($user_identifier);
     Assert::assertNotNull($user, sprintf('User "%s" not found', $user_identifier));
     Assert::assertSame('hidden' === $visibility, $user->getProfileHidden());
+  }
+
+  /**
+   * @Then /^the user "([^"]*)" should have a moderation warning "([^"]*)"$/
+   */
+  public function theUserShouldHaveAModerationWarning(string $user_identifier, string $message): void
+  {
+    $user = $this->findUserByUsernameOrId($user_identifier);
+    Assert::assertNotNull($user, sprintf('User "%s" not found', $user_identifier));
+    $warning = $this->getManager()->getRepository(ModerationNotification::class)->findOneBy([
+      'user' => $user,
+      'moderation_action' => ReportProcessor::NOTIFICATION_ADMIN_WARNING,
+      'message' => $message,
+    ]);
+    Assert::assertNotNull($warning, sprintf('No moderation warning "%s" for user "%s"', $message, $user_identifier));
   }
 
   /**

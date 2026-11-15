@@ -102,6 +102,7 @@ class ModerationQueueAdmin extends AbstractAdmin
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'acceptReport' => ['template' => 'Admin/CRUD/list__action_accept_report.html.twig'],
         'rejectReport' => ['template' => 'Admin/CRUD/list__action_reject_report.html.twig'],
+        'warnReport' => ['template' => 'Admin/CRUD/list__action_warn_report.html.twig'],
       ]])
     ;
   }
@@ -111,6 +112,8 @@ class ModerationQueueAdmin extends AbstractAdmin
   {
     $collection->add('acceptReport', $this->getRouterIdParameter().'/acceptReport');
     $collection->add('rejectReport', $this->getRouterIdParameter().'/rejectReport');
+    $collection->add('hideWarnReport', $this->getRouterIdParameter().'/hideWarnReport', methods: ['POST']);
+    $collection->add('warnReport', $this->getRouterIdParameter().'/warnReport', methods: ['POST']);
     $collection->remove('create')->remove('delete')->remove('export');
   }
 }
