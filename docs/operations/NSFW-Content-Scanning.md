@@ -9,11 +9,11 @@ Images are scanned by a self-hosted model ([Falconsai/nsfw_image_detection](http
 
 ## Configuration
 
-| Variable                   | Default                    | Notes                                           |
-| -------------------------- | -------------------------- | ----------------------------------------------- |
-| `CONTENT_SAFETY_URL`       | `http://nsfw-scanner:5000` | prod `.env.prod.local`: `http://127.0.0.1:5000` |
-| `CONTENT_SAFETY_ENABLED`   | `true`                     | `false` in `.env.test`                          |
-| `CONTENT_SAFETY_THRESHOLD` | `0.7`                      | Raise on false positives, lower on misses       |
+| Variable                   | Default                    | Notes                                             |
+| -------------------------- | -------------------------- | ------------------------------------------------- |
+| `CONTENT_SAFETY_URL`       | `http://nsfw-scanner:5000` | prod: `http://127.0.0.1:5000`, set in `.env.prod` |
+| `CONTENT_SAFETY_ENABLED`   | `true`                     | `false` in `.env.test`                            |
+| `CONTENT_SAFETY_THRESHOLD` | `0.7`                      | Raise on false positives, lower on misses         |
 
 Dev: the scanner starts with `docker/docker-compose.dev.yaml` on port 5050 (`curl http://localhost:5050/health`). The first build downloads the ~500 MB model (~5 min).
 
