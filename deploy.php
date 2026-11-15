@@ -108,8 +108,9 @@ task('restart:workers', function () {
 // Before anything changes: without the workers, mail, follower notifications and code view exports would only queue.
 task('check:workers', function () {
   $workers = ['mail', 'default', 'scratch', 'uploads', 'scheduler_maintenance', 'scheduler_maintenance_slow'];
+  // One by one: with several units, `systemctl is-active` succeeds when any of them runs.
   $units = implode(' ', array_map(static fn (string $worker): string => 'catroweb-worker@'.$worker, $workers));
-  if (!test('systemctl is-active --quiet '.$units)) {
+  if (!test('(for unit in '.$units.'; do systemctl is-active --quiet "$unit" || exit 1; done)')) {
     throw new RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
   }
 });
