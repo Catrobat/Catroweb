@@ -8,7 +8,8 @@
 - [How-To-Deploy.md](./How-To-Deploy.md) — Release and deploy the app via Deployer.
 - [Email-Providers.md](./Email-Providers.md) — chaining free mail-provider tiers, daily limits per provider, AWS SES as capped paid overflow.
 - [Malware-Scanning.md](./Malware-Scanning.md) — ClamAV-based scanning of uploaded `.catrobat` files before extraction.
-- [NSFW-Content-Scanning.md](./NSFW-Content-Scanning.md) — Self-hosted NSFW scanning of profile pictures.
+- [Content-Moderation.md](./Content-Moderation.md) — Reports, adults-only text signals and NSFW image scans that hide content for admin review; backfill command.
+- [NSFW-Content-Scanning.md](./NSFW-Content-Scanning.md) — Self-hosted NSFW scanning of profile pictures, project images and studio covers.
 - [Redis-Cache.md](./Redis-Cache.md) — Redis as the production application cache backend (Symfony, Doctrine, trust scores).
 - [Secret-Management.md](./Secret-Management.md) — Symfony `.env` hierarchy and how production overrides committed dev defaults.
 - [Storage-Architecture.md](./Storage-Architecture.md) — Symlink chain under `public/resources/` for user-generated content storage.

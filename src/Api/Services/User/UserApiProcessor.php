@@ -6,6 +6,8 @@ namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
+use App\DB\Enum\ContentType;
+use App\Moderation\AutoModerationService;
 use App\Moderation\TextSanitizer;
 use App\User\UserAvatarService;
 use App\User\UserManager;
@@ -18,6 +20,7 @@ class UserApiProcessor extends AbstractApiProcessor
     private readonly UserManager $user_manager,
     private readonly TextSanitizer $textSanitizer,
     private readonly UserAvatarService $user_avatar_service,
+    private readonly AutoModerationService $auto_moderation,
   ) {
   }
 
@@ -67,6 +70,7 @@ class UserApiProcessor extends AbstractApiProcessor
     }
 
     $this->user_manager->updateUser($user);
+    $this->flagAgeSignal($user);
 
     return $user;
   }
@@ -111,5 +115,14 @@ class UserApiProcessor extends AbstractApiProcessor
     }
 
     $this->user_manager->updateUser($user);
+    if (null !== $request->getUsername() || null !== $request->getAbout() || null !== $request->getCurrentlyWorkingOn()) {
+      $this->flagAgeSignal($user);
+    }
+  }
+
+  /** Adults-only texts in the profile hide it for review; the texts are saved as they are. */
+  private function flagAgeSignal(User $user): void
+  {
+    $this->auto_moderation->flagAgeSignal(ContentType::User, (string) $user->getId(), $user->getUsername(), $user->getAbout(), $user->getCurrentlyWorkingOn());
   }
 }

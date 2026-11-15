@@ -5,17 +5,86 @@ declare(strict_types=1);
 namespace App\Moderation;
 
 use App\DB\Entity\Moderation\ContentModerationAction;
+use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
+use App\DB\Enum\ReportCategory;
+use App\Security\ContentSafety\ContentSafetyScanner;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class AutoModerationService
 {
   public function __construct(
     private readonly ContentVisibilityManager $visibility_manager,
     private readonly EntityManagerInterface $entity_manager,
+    private readonly AgeSignalDetector $age_signal_detector,
+    private readonly ContentSafetyScanner $content_safety_scanner,
+    private readonly MessageBusInterface $message_bus,
   ) {
+  }
+
+  /**
+   * Flags content whose texts say it is for adults ("18+", "nsfw", …). The texts stay as they are.
+   */
+  public function flagAgeSignal(ContentType $content_type, string $content_id, ?string ...$texts): bool
+  {
+    $signal = $this->age_signal_detector->findSignal(...$texts);
+    if (null === $signal) {
+      return false;
+    }
+
+    $category = match ($content_type) {
+      ContentType::Project => ReportCategory::ImproperRating,
+      ContentType::Studio => ReportCategory::InappropriateContent,
+      ContentType::User => ReportCategory::InappropriateProfile,
+      ContentType::Comment => ReportCategory::Inappropriate,
+    };
+    $this->flagForReview($content_type, $content_id, $category, sprintf('Automatic: adults-only signal "%s" in the text', $signal));
+
+    return true;
+  }
+
+  /** Scans the content's images on the default worker (ScanContentImagesHandler), so uploads don't wait. */
+  public function queueImageScan(ContentType $content_type, string $content_id): void
+  {
+    if ($this->content_safety_scanner->isEnabled()) {
+      $this->message_bus->dispatch(new ScanContentImages($content_type->value, $content_id));
+    }
+  }
+
+  /**
+   * Hides the content until an admin reviews it: a report without reporter puts it in the moderation queue,
+   * where accepting or rejecting it works like for a community report.
+   */
+  public function flagForReview(ContentType $content_type, string $content_id, ReportCategory $category, string $note, ?float $score = null): void
+  {
+    if ($this->visibility_manager->isContentHidden($content_type, $content_id)) {
+      return;
+    }
+
+    $this->visibility_manager->hideContent($content_type, $content_id);
+
+    $action = new ContentModerationAction();
+    $action->setContentType($content_type->value);
+    $action->setContentId($content_id);
+    $action->setAction(ContentModerationAction::ACTION_AUTO_HIDDEN);
+    $action->setCumulativeScore($score);
+    $action->setNote($note);
+    $this->entity_manager->persist($action);
+
+    $report = new ContentReport();
+    $report->setContentType($content_type->value);
+    $report->setContentId($content_id);
+    $report->setCategory($category->value);
+    $report->setNote($note);
+    $this->entity_manager->persist($report);
+
+    $this->notifyContentOwner($content_type, $content_id, 'is hidden until a moderator has reviewed it');
+    $this->notifyAdmins($content_type, $content_id);
+
+    $this->entity_manager->flush();
   }
 
   public function autoHideContent(ContentType $content_type, string $content_id, float $cumulative_score): void
@@ -45,7 +114,7 @@ class AutoModerationService
     $this->entity_manager->persist($action);
   }
 
-  private function notifyContentOwner(ContentType $content_type, string $content_id): void
+  private function notifyContentOwner(ContentType $content_type, string $content_id, string $reason = 'has been hidden due to community reports'): void
   {
     $owner_id = $this->visibility_manager->getContentOwnerId($content_type, $content_id);
     if (null === $owner_id) {
@@ -59,11 +128,11 @@ class AutoModerationService
 
     $content_name = $this->visibility_manager->getContentName($content_type, $content_id);
     $message = match ($content_type) {
-      ContentType::Project => 'Your project "%s" has been hidden due to community reports. You may appeal this decision.',
-      ContentType::Comment => 'Your comment "%s" has been hidden due to community reports. You may appeal this decision.',
-      ContentType::User => 'Your profile has been hidden due to community reports. You may appeal this decision.',
-      ContentType::Studio => 'Your studio "%s" has been hidden due to community reports. You may appeal this decision.',
-    };
+      ContentType::Project => 'Your project "%s" ',
+      ContentType::Comment => 'Your comment "%s" ',
+      ContentType::User => 'Your profile ',
+      ContentType::Studio => 'Your studio "%s" ',
+    }.$reason.'. You may appeal this decision.';
 
     $notification = new ModerationNotification(
       $owner,

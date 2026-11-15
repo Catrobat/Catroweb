@@ -17,6 +17,7 @@ use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\System\BackgroundJobRepository;
+use App\Moderation\AutoModerationService;
 use App\Moderation\TextSanitizer;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -302,6 +303,7 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createPassthroughTextSanitizer(),
       $this->createStub(BackgroundJobRepository::class),
       new RecordingMessageBus(),
+      $this->createStub(AutoModerationService::class),
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 
@@ -469,6 +471,7 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createPassthroughTextSanitizer(),
       $this->createStub(BackgroundJobRepository::class),
       new RecordingMessageBus(),
+      $this->createStub(AutoModerationService::class),
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 

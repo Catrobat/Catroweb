@@ -22,6 +22,11 @@ class ContentSafetyScanner
   ) {
   }
 
+  public function isEnabled(): bool
+  {
+    return $this->enabled;
+  }
+
   public function scanImageBlob(string $imageBlob): ContentSafetyResult
   {
     if (!$this->enabled) {
