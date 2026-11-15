@@ -39,6 +39,7 @@ final class CronTasks
       $task('Garbage collect orphaned assets', 'catrobat:gc-assets', '1 day', self::HOUR),
       $task('Delete old notifications', 'catrobat:clean:notifications', '1 day', self::HOUR),
       $task('Delete expired refresh tokens', 'catrobat:clean:refresh-tokens', '1 day', self::HOUR),
+      $task('Warn about and delete empty, inactive studios', 'catrobat:clean:empty-studios', '1 day', self::HOUR),
 
       // Slow lane: whole-table or whole-disk sweeps
       $task('Delete expired projects based on retention rules', 'catrobat:storage:lifecycle', '1 day', self::DAY, true),
