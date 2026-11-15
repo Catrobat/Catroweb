@@ -98,17 +98,20 @@ task('restart:php-fpm', function () {
   run('sudo /usr/sbin/service php{{php_fpm_version}}-fpm restart');
 });
 
-// Background workers (systemd, Catrobat/infrastructure host-config/systemd) run the new release once restarted.
-// Not `messenger:stop-workers`: its signal lives in the release's own var/cache, which old workers never read.
-// systemd sends SIGTERM, so a worker finishes its current job first.
+// Background workers (systemd, Catrobat/infrastructure host-config/systemd) pick up the new release: stop-workers asks
+// each to exit after its current job, and systemd (Restart=always) starts it again from the new release. The signal
+// is kept in the database (config/packages/cache.php), which every release shares.
 task('restart:workers', function () {
-  run('sudo /usr/bin/systemctl restart catroweb-workers.target');
+  run('{{bin/console}} messenger:stop-workers');
 });
 
 // Before anything changes: without the workers, mail, follower notifications and code view exports would only queue.
 task('check:workers', function () {
-  if (!test('systemctl cat catroweb-workers.target >/dev/null 2>&1')) {
-    throw new RuntimeException('catroweb-workers.target is not installed: install the worker units first (docs/operations/Background-Jobs.md)');
+  $workers = ['mail', 'default', 'scratch', 'uploads', 'scheduler_maintenance', 'scheduler_maintenance_slow'];
+  // One by one: with several units, `systemctl is-active` succeeds when any of them runs.
+  $units = implode(' ', array_map(static fn (string $worker): string => 'catroweb-worker@'.$worker, $workers));
+  if (!test('(for unit in '.$units.'; do systemctl is-active --quiet "$unit" || exit 1; done)')) {
+    throw new RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
   }
 });
 

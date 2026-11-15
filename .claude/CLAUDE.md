@@ -146,7 +146,7 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 
 ## Deploy Gotcha
 
-Background workers (systemd `catroweb-worker@<queue>`) run the queues and the periodic tasks; the deploy restarts them via systemd, not `messenger:stop-workers` (its signal lives in the per-release `var/cache`). See `docs/operations/Background-Jobs.md`.
+Background workers (systemd `catroweb-worker@<queue>`) run the queues and the periodic tasks. The deploy restarts them with `messenger:stop-workers`; that only works because its signal pool is in the database (`config/packages/cache.php`): the default pool lives in the per-release `var/cache`, which old workers never read. See `docs/operations/Background-Jobs.md`.
 
 Client IP: nginx resolves the real visitor IP from Cloudflare's `CF-Connecting-IP` (infrastructure repo, Cloudflare ranges only), so Symfony trusts no proxies and `getClientIp()` is the visitor. Don't set `TRUSTED_PROXIES=REMOTE_ADDR`: the origin is reachable directly, so clients could spoof `X-Forwarded-For`.
 
