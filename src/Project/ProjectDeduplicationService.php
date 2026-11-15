@@ -75,28 +75,35 @@ class ProjectDeduplicationService
   }
 
   /**
-   * Garbage-collect assets no project maps.
-   * Intended to be called from a cron/command, NOT inline during upload.
+   * Garbage-collect one batch of assets no project maps, in hash order after $after.
+   * Assets younger than $created_before are skipped: an upload may still be mapping them.
+   * Intended to be called from a background job, NOT inline during upload.
+   *
+   * @return array{count: int, bytes: int, last: string, more: bool} last: the last hash looked at; more: a full batch was listed
    */
-  public function garbageCollect(int $limit = 100): int
+  public function garbageCollectBatch(\DateTimeImmutable $created_before, int $batch_size, string $after = ''): array
   {
-    $deleted = 0;
-    foreach ($this->assetRepository->findOrphanedHashes($limit) as $hash) {
+    $deleted = ['count' => 0, 'bytes' => 0];
+    $orphans = $this->assetRepository->findOrphans($batch_size, $created_before, $after);
+    foreach ($orphans as $hash => $size) {
+      $after = (string) $hash;
       try {
         // The delete waits for an upload holding the row and fails on the foreign key once that upload mapped it.
-        $this->entityManager->getConnection()->transactional(function (Connection $connection) use ($hash, &$deleted): void {
-          if (1 === $connection->executeStatement('DELETE FROM project_asset WHERE hash = ?', [$hash])) {
-            $this->store->delete($hash);
-            ++$deleted;
+        $this->entityManager->getConnection()->transactional(function (Connection $connection) use ($after, $size, &$deleted): void {
+          if (1 === $connection->executeStatement('DELETE FROM project_asset WHERE hash = ?', [$after])) {
+            $this->store->delete($after);
+            ++$deleted['count'];
+            $deleted['bytes'] += $size;
           }
         });
       } catch (ForeignKeyConstraintViolationException) {
+      } catch (\Throwable $e) {
+        // One asset that cannot go (lock wait timeout, file system error) must not stop the rest: skip it.
+        $this->logger->warning('Garbage collection skipped an asset', ['hash' => $after, 'error' => $e->getMessage()]);
       }
     }
 
-    $this->logger->info('Garbage collected orphaned assets', ['count' => $deleted]);
-
-    return $deleted;
+    return $deleted + ['last' => $after, 'more' => count($orphans) === $batch_size];
   }
 
   public function hasExistingMappings(string $projectId): bool

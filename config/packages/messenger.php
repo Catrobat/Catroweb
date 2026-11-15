@@ -23,6 +23,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'default' => $queue('default'),
         'scratch' => $queue('scratch', ['max_retries' => 2, 'delay' => 60_000]),
         'uploads' => $queue('uploads', ['max_retries' => 1]),
+        // Bulk clean-ups that chain one batch after the next for as long as there is work; their own worker.
+        'cleanup' => $queue('cleanup'),
         'failed' => ['dsn' => '%env(MESSENGER_TRANSPORT_DSN)%', 'options' => ['queue_name' => 'failed']],
       ],
       'routing' => [
@@ -33,6 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         App\Project\CodeView\ExportCodeView::class => 'default',
         App\User\Notification\NotifyFollowersOfNewProject::class => 'default',
         App\Moderation\ScanContentImages::class => 'default',
+        App\Project\GarbageCollectOrphanedAssets::class => 'cleanup',
       ],
     ],
   ]);

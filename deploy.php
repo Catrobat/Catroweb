@@ -113,6 +113,13 @@ task('check:workers', function () {
   if (!test('(for unit in '.$units.'; do systemctl is-active --quiet "$unit" || exit 1; done)')) {
     throw new RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
   }
+
+  // ponytail: the cleanup worker only has to be enabled. Until a release with its queue is live it restarts in a
+  // loop (unknown transport), so is-active would block the very deploy that adds the queue. Move it into $workers
+  // once that release is out.
+  if (!test('systemctl is-enabled --quiet catroweb-worker@cleanup')) {
+    throw new RuntimeException('The cleanup worker is not enabled: sudo systemctl enable --now catroweb-worker@cleanup (docs/operations/Background-Jobs.md)');
+  }
 });
 
 // Sync nsfw-scanner sources to /opt/nsfw-scanner and rebuild the container only

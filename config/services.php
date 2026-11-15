@@ -203,7 +203,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->call('setMaxLevelNameLength', [5])
   ;
 
-  // Failed-login lines (channel "login"): context only, no ip/user extras.
+  // Failed-login and cleanup-run lines (channels "login", "cleanup"): context only, no ip/user extras.
   $services->set('monolog.formatter.login_formatter', LineFormatter::class)
     ->args([str_replace('%', '%%', App\Security\Authentication\LoginFailureLogger::LOG_FORMAT), null, true, true])
   ;
