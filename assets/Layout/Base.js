@@ -4,11 +4,9 @@
 // Optionally you can also add a src attribute with a low quality image
 import 'lazysizes'
 
-// Icons (Google) ------------------------------------------------------------------------------------------------------
-// https://fonts.google.com/icons
-// no further config is needed - just add the class material-icons to element
-// E.g: <i class="material-icons">thumb_up</i>
-import 'material-icons/iconfont/material-icons.css'
+// Icons (Google): <i class="material-icons">thumb_up</i> — https://fonts.google.com/icons?icon.set=Material+Icons
+// The font and the .material-icons class live in Layout/Typography.css; the font is cut down at build time to
+// the names the code uses (vite/material-icons-subset.mjs), so write new icon names out literally somewhere.
 import '@material/web/progress/circular-progress.js'
 
 import textFillDefault from '../Components/TextFillDefault'

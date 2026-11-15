@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import symfony from 'vite-plugin-symfony'
 
 import { cssEntries, jsEntries } from './vite/entries.mjs'
+import { materialIconsSubset, SUBSET_PATH } from './vite/material-icons-subset.mjs'
 import { cssEntryWrappers, purgeCssPlugin, staticCopy } from './vite/plugins.mjs'
 
 const rootDir = import.meta.dirname
@@ -31,7 +32,10 @@ export default defineConfig(({ mode }) => {
     publicDir: false,
 
     resolve: {
-      alias: { '@': path.resolve(rootDir, 'assets') },
+      alias: {
+        '@': path.resolve(rootDir, 'assets'),
+        'material-icons-subset.woff2': path.resolve(rootDir, SUBSET_PATH),
+      },
     },
 
     build: {
@@ -58,6 +62,7 @@ export default defineConfig(({ mode }) => {
     css: { devSourcemap: true },
 
     plugins: [
+      materialIconsSubset({ rootDir }),
       themes.plugin,
       purgeCssPlugin({ rootDir }),
       // Twig references images via asset('images/...'); land them at

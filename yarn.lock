@@ -949,6 +949,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"argparse@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "argparse@npm:2.0.1"
+  checksum: 10c0/c5640c2d89045371c7cedd6a70212a04e360fd34d6edeae32f6952c63949e3525ea77dbec0289d8213a99bbaeab5abfa860b5c12cf88a2e6cf8106e90dd27a7e
+  languageName: node
+  linkType: hard
+
 "ast-types@npm:^0.13.4":
   version: 0.13.4
   resolution: "ast-types@npm:0.13.4"
@@ -1166,6 +1173,7 @@ __metadata:
     chart.js: "npm:^4.6.1"
     dotenv: "npm:^18.0.10"
     external-svg-loader: "npm:^1.7.1"
+    harfbuzzjs: "npm:^1.6.4"
     lazysizes: "npm:^5.3.2"
     material-icons: "npm:^1.13.14"
     postcss: "npm:^8.5.32"
@@ -1176,6 +1184,7 @@ __metadata:
     vis-network: "npm:^10.1.5"
     vite: "npm:^8"
     vite-plugin-symfony: "npm:^8"
+    wawoff2: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
 
@@ -1843,6 +1852,13 @@ __metadata:
   bin:
     handlebars: bin/handlebars
   checksum: 10c0/9b5573584ae5836172ae3f1502d9819568ba1b92ee83b81b18223beeb4c07486595e7b0fa633102beabc66ed06fe6e7da1dd9a9ea8c7072b9550b9a88809165c
+  languageName: node
+  linkType: hard
+
+"harfbuzzjs@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "harfbuzzjs@npm:1.6.4"
+  checksum: 10c0/85cd10d5083ff2fc8f9707ce188ecc6ccb6633bdb39ab9ba8a8b399edcc9ed1a14bb382350432c4fe2b15bb96f6ab1a5701ef2e2829383dbb73288053ad8b499
   languageName: node
   linkType: hard
 
@@ -3146,6 +3162,18 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/5433e9c0120edd79479e02d943bcde19ecd74be4c6e8e220bdb120693229425858620d07665baa4adafbcc3d1096a70c86ef179653fa310d777aaed8f6fe74cf
+  languageName: node
+  linkType: hard
+
+"wawoff2@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "wawoff2@npm:2.0.1"
+  dependencies:
+    argparse: "npm:^2.0.1"
+  bin:
+    woff2_compress.js: bin/woff2_compress.js
+    woff2_decompress.js: bin/woff2_decompress.js
+  checksum: 10c0/98a286b60114e15ed578bbeeef1759b4890a1e8106e1486d8d0d4106b8e6c7a99c4c1d1b64afc76a83893dae040cc19a59dd64cffd5754b5337b5c82efed3d12
   languageName: node
   linkType: hard
 
