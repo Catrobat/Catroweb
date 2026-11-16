@@ -2228,9 +2228,9 @@ class ApiContext implements Context
     }
 
     try {
-      if (!$scope->getTestResult()->isPassed() && null != $this->getKernelBrowser()) {
+      if (!$scope->getTestResult()->isPassed()) {
         $response = $this->getKernelBrowser()->getResponse();
-        if (null != $response && '' != $response->getContent()) {
+        if ('' != $response->getContent()) {
           file_put_contents($this->ERROR_DIR.'errors.json', $response->getContent());
         }
       }
