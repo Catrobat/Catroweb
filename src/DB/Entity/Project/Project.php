@@ -320,6 +320,8 @@ class Project implements \Stringable
 
   /**
    * @throws \Exception
+   *
+   * @psalm-suppress RedundantPropertyInitializationCheck
    */
   #[ORM\PrePersist]
   public function updateTimestamps(): void
