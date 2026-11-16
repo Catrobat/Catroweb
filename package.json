@@ -42,7 +42,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.6.7",
     "@hotwired/stimulus": "^3.2.2",
-    "@openapitools/openapi-generator-cli": "^2.42.1",
+    "@openapitools/openapi-generator-cli": "^2.42.2",
     "auto-changelog": "^2.7.0",
     "autoprefixer": "^10.6.2",
     "browserslist": "^4.29.5",
@@ -59,7 +59,7 @@
     "@analytics/google-tag-manager": "^0.6.0",
     "@bugsnag/browser-performance": "^3.4.1",
     "@bugsnag/js": "^9.1.0",
-    "@cap.js/widget": "^0.1.62",
+    "@cap.js/widget": "^0.1.63",
     "@fontsource/roboto": "^5.3.0",
     "@material/top-app-bar": "^14.0.0",
     "@material/web": "^2.5.0",
