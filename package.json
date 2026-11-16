@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/Catrobat/Catroweb#readme",
   "devDependencies": {
-    "@biomejs/biome": "2.6.6",
+    "@biomejs/biome": "2.6.7",
     "@hotwired/stimulus": "^3.2.2",
     "@openapitools/openapi-generator-cli": "^2.42.1",
     "auto-changelog": "^2.7.0",
@@ -50,7 +50,7 @@
     "harfbuzzjs": "^1.6.4",
     "postcss": "^8.5.32",
     "prettier": "^3.9.10",
-    "purgecss": "^8.0.0",
+    "purgecss": "^9.1.0",
     "vite": "^8",
     "vite-plugin-symfony": "^8",
     "wawoff2": "^2.0.1"
@@ -65,7 +65,7 @@
     "@material/web": "^2.5.0",
     "@popperjs/core": "^2.11.8",
     "analytics": "^0.8.19",
-    "bootstrap": "^5.3.8",
+    "bootstrap": "^5.3.9",
     "chart.js": "^4.6.1",
     "external-svg-loader": "^1.7.1",
     "lazysizes": "^5.3.2",
