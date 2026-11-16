@@ -325,7 +325,7 @@ class Project implements \Stringable
   public function updateTimestamps(): void
   {
     $this->updateLastModifiedTimestamp();
-    if (null == $this->getUploadedAt()) {
+    if (!isset($this->uploaded_at)) { // typed and unset until setUploadedAt(); the getter would throw
       $this->setUploadedAt(new \DateTime('now', new \DateTimeZone('UTC')));
     }
   }
