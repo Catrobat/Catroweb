@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13a43390c3bd9cb65ec40a0629c1e54c",
+    "content-hash": "7e3dada57e076f1a78dc23504fe560a1",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -9669,20 +9669,20 @@
         },
         {
             "name": "symfony/lock",
-            "version": "v8.0.14",
+            "version": "v8.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/lock.git",
-                "reference": "74e7eae902fd59b674115494ee14e461ee35f299"
+                "reference": "c121c8011a1b85698594cca96da5546cc6c78949"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lock/zipball/74e7eae902fd59b674115494ee14e461ee35f299",
-                "reference": "74e7eae902fd59b674115494ee14e461ee35f299",
+                "url": "https://api.github.com/repos/symfony/lock/zipball/c121c8011a1b85698594cca96da5546cc6c78949",
+                "reference": "c121c8011a1b85698594cca96da5546cc6c78949",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.4",
+                "php": ">=8.4.1",
                 "psr/log": "^1|^2|^3"
             },
             "conflict": {
@@ -9727,7 +9727,7 @@
                 "semaphore"
             ],
             "support": {
-                "source": "https://github.com/symfony/lock/tree/v8.0.14"
+                "source": "https://github.com/symfony/lock/tree/v8.1.11"
             },
             "funding": [
                 {
@@ -9747,7 +9747,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-12T08:36:40+00:00"
+            "time": "2026-11-01T22:27:46+00:00"
         },
         {
             "name": "symfony/mailer",
@@ -11943,20 +11943,20 @@
         },
         {
             "name": "symfony/scheduler",
-            "version": "v8.0.15",
+            "version": "v8.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/scheduler.git",
-                "reference": "7241cdd7e812d79bbe66b67ef69b81a1f3e976cb"
+                "reference": "5cb3b9ce52813ac2b15381df41a47c153a18535d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/scheduler/zipball/7241cdd7e812d79bbe66b67ef69b81a1f3e976cb",
-                "reference": "7241cdd7e812d79bbe66b67ef69b81a1f3e976cb",
+                "url": "https://api.github.com/repos/symfony/scheduler/zipball/5cb3b9ce52813ac2b15381df41a47c153a18535d",
+                "reference": "5cb3b9ce52813ac2b15381df41a47c153a18535d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.4",
+                "php": ">=8.4.1",
                 "symfony/clock": "^7.4|^8.0"
             },
             "require-dev": {
@@ -12004,7 +12004,7 @@
                 "scheduler"
             ],
             "support": {
-                "source": "https://github.com/symfony/scheduler/tree/v8.0.15"
+                "source": "https://github.com/symfony/scheduler/tree/v8.1.10"
             },
             "funding": [
                 {
@@ -12024,7 +12024,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-19T19:42:52+00:00"
+            "time": "2026-10-26T21:55:04+00:00"
         },
         {
             "name": "symfony/security-bundle",
