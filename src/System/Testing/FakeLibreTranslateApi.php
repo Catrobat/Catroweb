@@ -17,7 +17,8 @@ class FakeLibreTranslateApi extends LibreTranslateApi
       return null;
     }
 
-    // Stands in for a language LibreTranslate has no model for.
+    // Stands in for a language LibreTranslate has no model for. Deliberately still in getSupportedLanguages(), so
+    // the web tests can pick it in the by-line dropdown.
     if ('ru' === $source_language) {
       throw new UnsupportedLanguageException('ru is not supported');
     }

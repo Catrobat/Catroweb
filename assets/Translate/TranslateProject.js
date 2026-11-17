@@ -140,7 +140,6 @@ export class TranslateProject extends Translation {
     this.showTranslationFailed()
   }
 
-  /** Resolves to false when the translation failed, undefined when it succeeded or was superseded. */
   translateProject(sourceLanguage = null, targetLanguage = this.targetLanguage) {
     const params = new URLSearchParams({ target_language: targetLanguage })
     if (sourceLanguage) params.set('source_language', sourceLanguage)
@@ -170,9 +169,7 @@ export class TranslateProject extends Translation {
         this.openTranslatedProject()
       })
       .catch(() => {
-        if (!isCurrent()) return
-        this.projectNotTranslated()
-        return false
+        if (isCurrent()) this.projectNotTranslated()
       })
   }
 }

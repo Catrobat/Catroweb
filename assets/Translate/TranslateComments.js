@@ -94,7 +94,6 @@ export class TranslateComments extends Translation {
     this.showTranslationFailed()
   }
 
-  /** Resolves to false when the translation failed. */
   translateComment(
     translateCommentUrl,
     commentId,
@@ -117,7 +116,6 @@ export class TranslateComments extends Translation {
       })
       .catch(() => {
         this.commentNotTranslated(commentId)
-        return false
       })
   }
 }
