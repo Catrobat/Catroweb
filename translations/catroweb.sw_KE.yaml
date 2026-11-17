@@ -112,7 +112,7 @@ project:
     rate_limited: "Upakiaji mwingi mno. Tafadhali jaribu tena baadaye."
     selected_file: "Faili iliyochaguliwa:"
     info:
-      file_size: "Ukubwa wa juu wa faili ni MB 100."
+      file_size: "Ukubwa wa juu wa faili ni MB %size%."
       app_upload: "Unaweza pia kupakia miradi moja kwa moja kutoka programu ya Pocket Code. Kumbuka kwamba programu zinarekebishwa kwa sasa na hazitumii upakiaji wa wavuti kwa wakati huu."
       retention: "Miradi iliyopakiwa itaondolewa kiotomatiki baada ya kipindi cha kutotumika. Ingia mara kwa mara au pata vipakuliwa kwenye mradi wako ili kuongeza muda wake wa kuhifadhiwa."
       protection: "Miradi mizuri sana au maarufu inaweza kulindwa na wasimamizi dhidi ya kufutwa kiotomatiki."

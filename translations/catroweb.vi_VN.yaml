@@ -112,7 +112,7 @@ project:
     rate_limited: 'Quá nhiều lượt tải lên. Hãy thử lại sau.'
     selected_file: 'Tệp đã chọn:'
     info:
-      file_size: 'Kích thước tệp tối đa là 100 MB.'
+      file_size: 'Kích thước tệp tối đa là %size% MB.'
       app_upload: 'Bạn cũng có thể tải dự án lên trực tiếp từ ứng dụng Pocket Code. Lưu ý rằng các ứng dụng hiện đang được làm lại và tạm thời chưa hỗ trợ tải lên web.'
       retention: 'Các dự án đã tải lên sẽ tự động bị xóa sau một thời gian không hoạt động. Hãy đăng nhập thường xuyên hoặc có thêm lượt tải về cho dự án để giữ nó lâu hơn.'
       protection: 'Những dự án đặc biệt hay hoặc phổ biến có thể được người kiểm duyệt bảo vệ khỏi việc tự động xóa.'

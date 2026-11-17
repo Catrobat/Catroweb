@@ -112,7 +112,7 @@ project:
     rate_limited: Previše prijenosa. Pokušaj ponovno kasnije.
     selected_file: 'Odabrana datoteka:'
     info:
-      file_size: Najveća veličina datoteke je 100 MB.
+      file_size: Najveća veličina datoteke je %size% MB.
       app_upload: 'Projekte možeš prenijeti i izravno iz aplikacije Pocket Code. Napomena: aplikacije se trenutačno prerađuju i zasad ne podržavaju prijenos na web.'
       retention: Preneseni projekti automatski se uklanjaju nakon razdoblja neaktivnosti. Redovito se prijavljuj ili skupljaj preuzimanja svog projekta kako bi dulje ostao sačuvan.
       protection: Moderatori mogu zaštititi osobito dobre ili popularne projekte od automatskog brisanja.

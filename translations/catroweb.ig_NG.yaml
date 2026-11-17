@@ -112,7 +112,7 @@ project:
     rate_limited: 'Mbulite karịrị akarị. Biko nwaa ọzọ ma emechaa.'
     selected_file: 'Faịlụ a họrọ:'
     info:
-      file_size: 'Nha faịlụ kachasị bụ 100 MB.'
+      file_size: 'Nha faịlụ kachasị bụ %size% MB.'
       app_upload: 'Ị nwekwara ike bulite ọrụ ozugbo site na ngwa Pocket Code. Mara na a na-arụgharị ngwa ndị ahụ ugbu a, ha anaghịkwa akwado mbulite weebụ ugbu a.'
       retention: 'A ga-ewepụ ọrụ e bulitere na-akpaghị aka mgbe oge enweghị ọrụ gachara. Na-abanye mgbe niile ma ọ bụ nweta nbudata na ọrụ gị iji gbatịa oge ọ ga-anọ.'
       protection: 'Ndị nlekọta nwere ike ichebe ọrụ dị mma ma ọ bụ ndị a ma ama pụrụ iche ka a ghara ihichapụ ha na-akpaghị aka.'

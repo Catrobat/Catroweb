@@ -28,7 +28,7 @@
     <div class="project-upload__info">
       <div class="project-upload__info-item">
         <span class="material-icons">cloud_upload</span>
-        <span>{{ 'project.upload.info.file_size'|trans({}, 'catroweb') }}</span>
+        <span>{{ 'project.upload.info.file_size'|trans({'%size%': (max_file_size / 1048576)|round(0, 'floor')}, 'catroweb') }}</span>
       </div>
       <div class="project-upload__info-item">
         <span class="material-icons">phone_android</span>

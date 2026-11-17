@@ -112,7 +112,7 @@ project:
     rate_limited: "Ɗorawa sun yi yawa. Don Allah sake gwadawa daga baya."
     selected_file: "Fayil da aka zaɓa:"
     info:
-      file_size: "Matsakaicin girman fayil shine 100 MB."
+      file_size: "Matsakaicin girman fayil shine %size% MB."
       app_upload: "Za ka iya kuma ɗora ayyuka kai tsaye daga manhajar Pocket Code. Lura cewa ana sake gina manhajojin a yanzu kuma ba sa goyon bayan ɗorawa ta yanar gizo a wannan lokaci."
       retention: "Za a cire ayyukan da aka ɗora ta atomatik bayan wani lokaci na rashin aiki. Shiga akai-akai ko samu saukewa a aikinka don tsawaita adana shi."
       protection: "Masu daidaitawa za su iya kare ayyuka masu kyau ko shahararru musamman daga gogewa ta atomatik."

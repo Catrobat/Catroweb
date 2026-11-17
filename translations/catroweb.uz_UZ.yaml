@@ -112,7 +112,7 @@ project:
     rate_limited: "Juda koʻp yuklashlar. Iltimos, keyinroq urinib koʻr."
     selected_file: "Tanlangan fayl:"
     info:
-      file_size: "Maksimal fayl hajmi 100 MB."
+      file_size: "Maksimal fayl hajmi %size% MB."
       app_upload: "Loyihalarni toʻgʻridan-toʻgʻri Pocket Code ilovasidan ham yuklashing mumkin. Eʼtibor ber: ilovalar hozir qayta ishlanmoqda va hozircha veb orqali yuklashni qoʻllab-quvvatlamaydi."
       retention: "Yuklangan loyihalar maʼlum muddat faolsizlikdan soʻng avtomatik oʻchiriladi. Saqlanish muddatini uzaytirish uchun muntazam tizimga kir yoki loyihang yuklab olinishiga erish."
       protection: "Ayniqsa yaxshi yoki mashhur loyihalar moderatorlar tomonidan avtomatik oʻchirishdan himoyalanishi mumkin."

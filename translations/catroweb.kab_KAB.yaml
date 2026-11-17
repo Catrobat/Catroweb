@@ -112,7 +112,7 @@ project:
     rate_limited: "Aṭas n yisaliyen. Ttxil-k ɛreḍ ticki."
     selected_file: "Afaylu yettwafernen:"
     info:
-      file_size: "Teɣzi tafellayt n ufaylu d 100 MB."
+      file_size: "Teɣzi tafellayt n ufaylu d %size% MB."
       app_upload: "Tzemreḍ daɣen ad tessaliḍ isenfaren srid seg usnas Pocket Code. Ẓer belli isnasen ttwaɛawaden akka tura u ur sseḍfaren ara asali s web akka tura."
       retention: "Isenfaren yulin ad ttwakksen s wudem awurman deffir yiwet n tallit n warmud. Qqen yal tikkelt neɣ awi-d isadaren i usenfar-ik akken ad yeqqim ugar."
       protection: "Isenfaren yelhan aṭas neɣ yettwassnen zemren ad ttwaḥerzen seg tukksa tawurmant sɣur imeɣyaden."

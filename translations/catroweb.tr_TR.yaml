@@ -112,7 +112,7 @@ project:
     rate_limited: Çok fazla yükleme yaptın. Lütfen daha sonra tekrar dene.
     selected_file: 'Seçilen dosya:'
     info:
-      file_size: En büyük dosya boyutu 100 MB'dir.
+      file_size: En büyük dosya boyutu %size% MB'dir.
       app_upload: Projeleri doğrudan Pocket Code uygulamasından da yükleyebilirsin. Uygulamaların şu anda yeniden geliştirildiğini ve şimdilik web yüklemesini desteklemediğini unutma.
       retention: Yüklenen projeler bir süre etkinlik olmazsa otomatik olarak kaldırılır. Projenin daha uzun süre kalması için düzenli olarak giriş yap veya projenin indirilmesini sağla.
       protection: Özellikle iyi veya popüler projeler, moderatörler tarafından otomatik silinmeye karşı korunabilir.

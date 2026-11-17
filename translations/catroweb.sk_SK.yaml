@@ -112,7 +112,7 @@ project:
     rate_limited: Príliš veľa nahrávaní. Skús to znova neskôr.
     selected_file: 'Vybraný súbor:'
     info:
-      file_size: Maximálna veľkosť súboru je 100 MB.
+      file_size: Maximálna veľkosť súboru je %size% MB.
       app_upload: Projekty môžeš nahrávať aj priamo z aplikácie Pocket Code. Aplikácie sa momentálne prepracúvajú a nahrávanie cez web zatiaľ nepodporujú.
       retention: Nahrané projekty sa po čase nečinnosti automaticky odstránia. Pravidelne sa prihlasuj alebo získavaj stiahnutia svojho projektu, aby zostal dlhšie.
       protection: Mimoriadne dobré alebo populárne projekty môžu moderátori chrániť pred automatickým vymazaním.

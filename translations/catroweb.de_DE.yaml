@@ -112,7 +112,7 @@ project:
     rate_limited: Zu viele Uploads. Bitte versuche es später noch einmal.
     selected_file: 'Ausgewählte Datei:'
     info:
-      file_size: Die maximale Dateigröße beträgt 100 MB.
+      file_size: Die maximale Dateigröße beträgt %size% MB.
       app_upload: 'Du kannst Projekte auch direkt aus der Pocket Code App hochladen. Hinweis: Die Apps werden gerade überarbeitet und unterstützen das Hochladen ins Web derzeit nicht.'
       retention: Hochgeladene Projekte werden nach einer Zeit der Inaktivität automatisch entfernt. Melde dich regelmäßig an oder sammle Downloads für dein Projekt, damit es länger erhalten bleibt.
       protection: Besonders gute oder beliebte Projekte können von Moderatoren vor der automatischen Löschung geschützt werden.

@@ -112,7 +112,7 @@ project:
     rate_limited: 'Preveč nalaganj. Poskusi znova pozneje.'
     selected_file: 'Izbrana datoteka:'
     info:
-      file_size: 'Največja velikost datoteke je 100 MB.'
+      file_size: 'Največja velikost datoteke je %size% MB.'
       app_upload: 'Projekte lahko naložiš tudi neposredno iz aplikacije Pocket Code. Upoštevaj, da aplikacije trenutno prenavljamo in zaenkrat ne podpirajo nalaganja na splet.'
       retention: 'Naloženi projekti se po določenem obdobju nedejavnosti samodejno odstranijo. Redno se prijavljaj ali poskrbi za prenose svojega projekta, da podaljšaš njegovo hrambo.'
       protection: 'Posebej dobre ali priljubljene projekte lahko moderatorji zaščitijo pred samodejnim brisanjem.'

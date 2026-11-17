@@ -112,7 +112,7 @@ project:
     rate_limited: 'Demasiados carregamentos. Tenta novamente mais tarde.'
     selected_file: 'Ficheiro selecionado:'
     info:
-      file_size: 'O tamanho máximo do ficheiro é 100 MB.'
+      file_size: 'O tamanho máximo do ficheiro é %size% MB.'
       app_upload: 'Também podes carregar projetos diretamente a partir da aplicação Pocket Code. Nota que as aplicações estão a ser reformuladas e de momento não suportam o carregamento pela web.'
       retention: 'Os projetos carregados são removidos automaticamente após um período de inatividade. Inicia sessão regularmente ou consegue downloads para o teu projeto para prolongar o tempo de conservação.'
       protection: 'Projetos particularmente bons ou populares podem ser protegidos da eliminação automática pelos moderadores.'

@@ -112,7 +112,7 @@ project:
     rate_limited: For mange uploads. Prøv igen senere.
     selected_file: 'Valgt fil:'
     info:
-      file_size: Den maksimale filstørrelse er 100 MB.
+      file_size: Den maksimale filstørrelse er %size% MB.
       app_upload: Du kan også uploade projekter direkte fra Pocket Code-appen. Bemærk, at apps'ene i øjeblikket bliver omarbejdet og ikke understøtter upload via web lige nu.
       retention: Uploadede projekter fjernes automatisk efter en periode uden aktivitet. Log på regelmæssigt eller få downloads af dit projekt for at forlænge, hvor længe det bliver gemt.
       protection: Særligt gode eller populære projekter kan beskyttes mod automatisk sletning af moderatorer.
