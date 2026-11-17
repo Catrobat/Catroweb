@@ -2,6 +2,8 @@ import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 
 // Machine translation works per language, not per regional variant; these are the exceptions.
 const SPECIAL_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR', 'pt-PT']
+// Variants LibreTranslate has a separate model for (LibreTranslateApi::LANGUAGE_CODES).
+const EXACT_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR']
 
 export class Translation {
   constructor(translatedByLine, refreshLabel = 'Translate again') {
@@ -175,7 +177,8 @@ export class Translation {
     return (
       this.supportedLanguages.length === 0 ||
       this.supportedLanguages.includes(code) ||
-      this.supportedLanguages.includes(code.slice(0, 2))
+      // Regional variants with their own model must be listed themselves; others are served by the language.
+      (!EXACT_LANGUAGES.includes(code) && this.supportedLanguages.includes(code.slice(0, 2)))
     )
   }
 }

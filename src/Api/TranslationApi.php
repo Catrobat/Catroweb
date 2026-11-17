@@ -26,7 +26,6 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
     private readonly ProjectManager $project_manager,
     private readonly RequestStack $request_stack,
     private readonly RateLimiterFactory $translationBurstLimiter,
-    private readonly RateLimiterFactory $translationGlobalLimiter,
   ) {
   }
 
@@ -69,8 +68,7 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
       }
     }
 
-    if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)
-      || null === $this->checkIpRateLimit('site', $this->translationGlobalLimiter)) {
+    if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;

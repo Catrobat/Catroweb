@@ -13,6 +13,8 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\JsonMockResponse;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -74,6 +76,20 @@ final class LibreTranslateApiTest extends TestCase
     }
   }
 
+  public function testSiteWideLimitCountsLibreTranslateCalls(): void
+  {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->once())->method('warning')->with($this->stringContains('site-wide translation limit reached'));
+    $client = new MockHttpClient([new JsonMockResponse(['translatedText' => 'Hallo'])]);
+    $limiter = new RateLimiterFactory(['id' => 'phpunit_lt_limited', 'policy' => 'fixed_window', 'limit' => 1, 'interval' => '1 minute'], new InMemoryStorage());
+    $api = $this->api($client, $logger, $limiter);
+
+    $this->assertSame(' ', $api->translate(' ', null, 'de')?->translation);
+    $this->assertSame('Hallo', $api->translate('Hello', 'en', 'de')?->translation);
+    $this->assertNull($api->translate('Hello', 'en', 'de'));
+    $this->assertSame(1, $client->getRequestsCount());
+  }
+
   public function testBlankTextIsNotSent(): void
   {
     $client = new MockHttpClient(static fn (): never => throw new \LogicException('no request expected'));
@@ -117,8 +133,8 @@ final class LibreTranslateApiTest extends TestCase
     $this->assertSame([], $this->api($client, $logger)->getSupportedLanguages());
   }
 
-  private function api(MockHttpClient $client, ?LoggerInterface $logger = null): LibreTranslateApi
+  private function api(MockHttpClient $client, ?LoggerInterface $logger = null, ?RateLimiterFactory $limiter = null): LibreTranslateApi
   {
-    return new LibreTranslateApi($client, new ArrayAdapter(), $logger ?? new NullLogger(), 'http://lt:5000');
+    return new LibreTranslateApi($client, new ArrayAdapter(), $logger ?? new NullLogger(), 'http://lt:5000', $limiter ?? new RateLimiterFactory(['id' => 'phpunit_lt', 'policy' => 'no_limit'], new InMemoryStorage()));
   }
 }

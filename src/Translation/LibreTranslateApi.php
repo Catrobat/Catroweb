@@ -6,6 +6,7 @@ namespace App\Translation;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -28,6 +29,8 @@ class LibreTranslateApi
     private readonly LoggerInterface $logger,
     #[Autowire(env: 'LIBRETRANSLATE_URL')]
     private readonly string $url,
+    // Site-wide, one token per LibreTranslate call: it runs on the web host's CPU.
+    private readonly RateLimiterFactoryInterface $translationGlobalLimiter,
   ) {
   }
 
@@ -41,6 +44,10 @@ class LibreTranslateApi
       $result->translation = $text;
 
       return $result;
+    }
+
+    if (!$this->translationGlobalLimiter->create('site')->consume()->isAccepted()) {
+      return $this->failed(new \RuntimeException('site-wide translation limit reached'), $text, $source_language, $target_language);
     }
 
     try {

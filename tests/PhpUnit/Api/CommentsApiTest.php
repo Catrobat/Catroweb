@@ -64,7 +64,6 @@ final class CommentsApiTest extends TestCase
       $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
       $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),
       $this->createNoLimitRateLimiterFactory('phpunit_translation_burst'),
-      $this->createNoLimitRateLimiterFactory('phpunit_translation_global'),
       $text_sanitizer ?? $this->createPassthroughTextSanitizer(),
       $user_avatar_service ?? $this->createStub(\App\User\UserAvatarService::class),
     );
