@@ -42,9 +42,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->validator = new ProjectsRequestValidator($symfony_validator, $translator, $user_manager, $project_repository);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   #[DataProvider('validNameProvider')]
   public function testValidateUpdateRequestWithValidName(string $name): void
   {
@@ -75,9 +73,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     ];
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testValidateUpdateRequestWithEmptyName(): void
   {
     $request = new UpdateProjectRequest([
@@ -92,9 +88,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->assertSame('api.project.nameEmpty', $result->getError('name'));
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testValidateUpdateRequestWithNameTooLong(): void
   {
     $request = new UpdateProjectRequest([
@@ -109,9 +103,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->assertSame('api.project.nameTooLong', $result->getError('name'));
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   #[DataProvider('validDescriptionProvider')]
   public function testValidateUpdateRequestWithValidDescription(string $description): void
   {
@@ -140,9 +132,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     ];
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testValidateUpdateRequestWithDescriptionTooLong(): void
   {
     $request = new UpdateProjectRequest([
@@ -157,9 +147,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->assertSame('api.project.descriptionTooLong', $result->getError('description'));
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   #[DataProvider('validCreditsProvider')]
   public function testValidateUpdateRequestWithValidCredits(string $credits): void
   {
@@ -188,9 +176,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     ];
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testValidateUpdateRequestWithCreditsTooLong(): void
   {
     $request = new UpdateProjectRequest([
@@ -205,9 +191,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->assertSame('api.project.creditsTooLong', $result->getError('credits'));
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testValidateUpdateRequestWithValidScreenshot(): void
   {
     $small_gif_base64 = 'R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
@@ -225,9 +209,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->assertFalse($result->hasError());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   #[DataProvider('invalidScreenshotProvider')]
   public function testValidateUpdateRequestWithInvalidScreenshot(string $screenshot, string $description): void
   {
@@ -254,9 +236,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     ];
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testValidateUpdateRequestWithAllValidFields(): void
   {
     $small_gif_base64 = 'R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
@@ -274,9 +254,7 @@ final class ProjectsRequestValidatorTest extends TestCase
     $this->assertFalse($result->hasError());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testValidateUpdateRequestWithMultipleInvalidFields(): void
   {
     $request = new UpdateProjectRequest([

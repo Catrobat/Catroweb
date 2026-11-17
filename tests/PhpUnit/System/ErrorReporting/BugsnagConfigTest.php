@@ -6,13 +6,11 @@ namespace Tests\PhpUnit\System\ErrorReporting;
 
 use Bugsnag\Client;
 use Bugsnag\Report;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+/** @internal */
+#[CoversNothing]
 class BugsnagConfigTest extends KernelTestCase
 {
   public function testSessionDataIsRedacted(): void

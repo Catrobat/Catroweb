@@ -9,6 +9,7 @@ use App\Api\Services\ValidationWrapper;
 use App\Moderation\LinkDetector;
 use App\Security\ContentSafety\ContentSafetyScanner;
 use App\User\UserManager;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -18,11 +19,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @internal
- *
- * @covers \App\Api\Services\User\UserRequestValidator
- */
+/** @internal */
+#[CoversClass(UserRequestValidator::class)]
 class UserRequestValidatorDateOfBirthTest extends TestCase
 {
   private UserRequestValidator $validator;

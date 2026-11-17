@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api;
 
 use App\Api\Traits\KeysetCursorTrait;
+use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \App\Api\Traits\KeysetCursorTrait
- *
- * @internal
- */
+/** @internal */
+#[CoversTrait(KeysetCursorTrait::class)]
 class KeysetCursorTraitTest extends TestCase
 {
   use KeysetCursorTrait;

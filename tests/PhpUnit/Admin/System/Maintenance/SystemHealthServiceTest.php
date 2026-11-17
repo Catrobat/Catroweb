@@ -11,15 +11,13 @@ use App\System\Mail\EmailBudgetManager;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
-/**
- * @covers \App\Admin\System\Maintenance\SystemHealthService
- *
- * @internal
- */
+/** @internal */
+#[CoversClass(SystemHealthService::class)]
 class SystemHealthServiceTest extends TestCase
 {
   private SystemHealthService $service;

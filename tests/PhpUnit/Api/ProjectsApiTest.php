@@ -500,11 +500,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsFeaturedGet(): void
   {
     $response_code = 200;
@@ -519,11 +518,8 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
 
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   */
+  /** @throws \Exception */
+  #[Group('unit')]
   public function testProjectsGet(): void
   {
     $response_code = 200;
@@ -623,11 +619,8 @@ final class ProjectsApiTest extends KernelTestCase
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
   }
 
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   */
+  /** @throws \Exception */
+  #[Group('unit')]
   public function testProjectsIdRecommendationsGetNotFound(): void
   {
     $response_code = 200;
@@ -639,11 +632,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsIdRecommendationsGet(): void
   {
     $response_code = 200;
@@ -660,11 +652,8 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertInstanceOf(ProjectsListResponse::class, $response);
   }
 
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   */
+  /** @throws \Exception */
+  #[Group('unit')]
   public function testProjectsSearchGet(): void
   {
     $response_code = 200;
@@ -675,11 +664,8 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
 
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   */
+  /** @throws \Exception */
+  #[Group('unit')]
   public function testProjectsCategoriesGet(): void
   {
     $response_code = 200;
@@ -691,11 +677,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsUserGetUnauthorized(): void
   {
     $response_code = 200;
@@ -712,11 +697,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsUserGet(): void
   {
     $response_code = 200;
@@ -735,11 +719,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsUserIdGet(): void
   {
     $response_code = 200;
@@ -756,11 +739,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsUserIdGetNotFound(): void
   {
     $response_code = 200;
@@ -777,11 +759,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsPost(): void
   {
     $response_code = 200;
@@ -881,11 +862,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsPostValidationError(): void
   {
     $response_code = 200;
@@ -913,11 +893,10 @@ final class ProjectsApiTest extends KernelTestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws \Exception
    * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectsPostAddException(): void
   {
     $response_code = 200;
@@ -939,11 +918,8 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertInstanceOf(ErrorResponse::class, $response);
   }
 
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   */
+  /** @throws \Exception */
+  #[Group('unit')]
   public function testProjectsIdDelete(): void
   {
     $response_code = 200;
@@ -954,11 +930,8 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
   }
 
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   */
+  /** @throws \Exception */
+  #[Group('unit')]
   public function testProjectsExtensionsGet(): void
   {
     $response_code = 200;
@@ -969,11 +942,8 @@ final class ProjectsApiTest extends KernelTestCase
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
 
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   */
+  /** @throws \Exception */
+  #[Group('unit')]
   public function testProjectsTagsGet(): void
   {
     $response_code = 200;
