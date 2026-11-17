@@ -152,4 +152,17 @@ interface TranslationApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
+
+  /**
+   * Operation translationLanguagesGet.
+   *
+   * List machine translation languages
+   *
+   * @param int   &$responseCode   The HTTP Response Code
+   * @param array $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function translationLanguagesGet(
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
 }

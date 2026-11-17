@@ -23,7 +23,7 @@
      data-path-comments-base-url="{{ path('open_api_server_comments_commentsiddelete', {id: 0})|replace({'/0': ''}) }}"
      data-path-login-url="{{ path('login') }}"
      data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
-     data-machine-translation-languages="{{ libretranslate.supportedLanguages|json_encode }}"
+     data-machine-translation-languages-url="{{ path('open_api_server_translation_translationlanguagesget') }}"
      data-trans-machine-translation-failed="{{ 'project.machineTranslationFailed'|trans({}, 'catroweb') }}"
      data-trans-translate-again="{{ 'project.translateAgain'|trans({}, 'catroweb') }}"
      data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'comment'}, 'catroweb') }}"

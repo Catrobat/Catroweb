@@ -21,7 +21,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'captcha_site_key' => '%env(CAPTCHA_SITE_KEY)%',
         'player_origin' => '%env(PLAYER_ORIGIN)%',
         'admin_monitoring_url' => '%env(ADMIN_MONITORING_URL)%',
-        'libretranslate' => '@App\Translation\LibreTranslateApi',
       ],
       'form_themes' => [
         '@SonataForm/Form/datepicker.html.twig',

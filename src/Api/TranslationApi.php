@@ -10,6 +10,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
+use App\Translation\LibreTranslateApi;
 use App\Translation\ProjectTranslationJob;
 use OpenAPI\Server\Api\TranslationApiInterface;
 use OpenAPI\Server\Model\ProjectCustomTranslationResponse;
@@ -28,6 +29,7 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
     private readonly ProjectManager $project_manager,
     private readonly RequestStack $request_stack,
     private readonly RateLimiterFactory $translationBurstLimiter,
+    private readonly LibreTranslateApi $libre_translate_api,
   ) {
   }
 
@@ -253,5 +255,14 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
     $responseCode = Response::HTTP_OK;
 
     return $this->facade->getLoader()->listDefinedLanguages($project);
+  }
+
+  #[\Override]
+  public function translationLanguagesGet(int &$responseCode, array &$responseHeaders): array
+  {
+    $responseCode = Response::HTTP_OK;
+
+    // Asked on the first translate click, never on page render: LibreTranslate can be slow or down.
+    return $this->libre_translate_api->getSupportedLanguages();
   }
 }

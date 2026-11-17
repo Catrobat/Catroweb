@@ -9,9 +9,8 @@ export class Translation {
   constructor(translatedByLine, refreshLabel = 'Translate again') {
     this.translatedByLine = translatedByLine
     this.refreshLabel = refreshLabel
-    // Languages the machine translation offers; empty while it is unreachable, then every language is offered.
-    const supported = document.querySelector('[data-machine-translation-languages]')
-    this.supportedLanguages = JSON.parse(supported?.dataset.machineTranslationLanguages || '[]')
+    // Languages the machine translation offers (loadSupportedLanguages); while empty, every language is offered.
+    this.supportedLanguages = []
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}
     this.targetLanguage = null
@@ -31,6 +30,25 @@ export class Translation {
     // Without a model for the site language every attempt would fail; English is the closest useful default and
     // the dropdown still offers every supported language.
     this.targetLanguage = this.isSupported(code) ? code : 'en'
+  }
+
+  /**
+   * Fetches the languages the machine translation offers, once: on the first translate click, so rendering a
+   * page never waits for LibreTranslate. Resolves when the target language is set accordingly.
+   */
+  loadSupportedLanguages() {
+    this.supportedLanguagesLoaded ??= fetch(
+      document.querySelector('[data-machine-translation-languages-url]')?.dataset
+        .machineTranslationLanguagesUrl,
+    )
+      .then((response) => (response.ok ? response.json() : []))
+      .catch(() => [])
+      .then((languages) => {
+        // Empty while LibreTranslate is unreachable: then every language is offered.
+        this.supportedLanguages = Array.isArray(languages) ? languages : []
+        this.setTargetLanguage()
+      })
+    return this.supportedLanguagesLoaded
   }
 
   setDisplayLanguageMap() {

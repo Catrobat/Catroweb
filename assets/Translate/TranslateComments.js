@@ -28,7 +28,9 @@ export class TranslateComments extends Translation {
             document.getElementById(
               `comment-translation-loading-spinner-${commentId}`,
             ).style.display = 'block'
-            this.translateComment(translateCommentUrl, commentId)
+            this.loadSupportedLanguages().then(() =>
+              this.translateComment(translateCommentUrl, commentId),
+            )
           } else {
             this.openTranslatedComment(commentId)
           }
