@@ -4920,7 +4920,7 @@ components:
         project_id:
           type: string
           format: uuid
-          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
+          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}(?!\n)$'
           description: 'Optional UUID of an existing project to update. When provided, the server matches by ID instead of by name, allowing project renames without creating duplicates.'
           example: '63768cf1-5f07-11ea-a2ae-000c292a0f49'
       required:

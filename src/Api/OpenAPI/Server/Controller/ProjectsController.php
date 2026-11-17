@@ -1625,7 +1625,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/');
+    $asserts[] = new Assert\Regex('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}(?!\n)$/');
     $response = $this->validate($project_id, $asserts);
     if ($response instanceof Response) {
       return $response;
