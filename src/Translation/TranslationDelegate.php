@@ -190,7 +190,8 @@ class TranslationDelegate
         return;
       }
     } catch (\Throwable $e) {
-      $this->logger->error('Project translation job failed: '.$e->getMessage(), ['exception' => $e, 'project' => $project->getId()]);
+      // The infra watchdog counts the "Machine translation failed" prefix.
+      $this->logger->error('Machine translation failed: project job: '.$e->getMessage(), ['exception' => $e, 'project' => $project->getId()]);
     }
 
     $this->cache->save($this->cache->getItem($key)->set(self::JOB_FAILED)->expiresAfter(self::JOB_FAILED_TTL));

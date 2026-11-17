@@ -41,6 +41,9 @@ export class TranslateProject extends Translation {
       .addEventListener('click', function () {
         this.style.display = 'none'
         document.getElementById('project-translation-button').style.display = 'block'
+        // A "translate again" still running must not re-open what the user just removed.
+        translateProject.translationRequest = (translateProject.translationRequest ?? 0) + 1
+        document.getElementById('project-translation-loading-spinner').style.display = 'none'
 
         const name = document.getElementById('name')
         const nameTranslation = document.getElementById('name-translation')
