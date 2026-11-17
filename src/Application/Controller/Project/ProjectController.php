@@ -12,6 +12,7 @@ use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
 use App\Project\ProjectManager;
 use App\Project\ProjectStatisticsService;
+use App\Project\Upload\ResumableUploadStore;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,13 +47,15 @@ class ProjectController extends AbstractController
   }
 
   #[Route(path: '/project/upload', name: 'project_upload', methods: ['GET'], priority: 10)]
-  public function projectUpload(): Response
+  public function projectUpload(ResumableUploadStore $resumable_uploads): Response
   {
     if (!$this->getUser()) {
       return $this->redirectToRoute('login');
     }
 
-    return $this->render('Project/ProjectUpload.html.twig');
+    return $this->render('Project/ProjectUpload.html.twig', [
+      'max_file_size' => $resumable_uploads->getMaxFileSize(),
+    ]);
   }
 
   #[Route(path: '/project/{id}', name: 'project', defaults: ['id' => 0])]

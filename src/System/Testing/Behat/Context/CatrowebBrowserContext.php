@@ -800,6 +800,16 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * Lets a small fixture stand in for a file above the real limit.
+   *
+   * @When I lower the upload size limit of the page to :bytes bytes
+   */
+  public function iLowerTheUploadSizeLimitOfThePageTo(int $bytes): void
+  {
+    $this->getSession()->executeScript(sprintf("document.querySelector('.project-upload').dataset.maxFileSize = '%d'", $bytes));
+  }
+
+  /**
    * @When I attach the project file :file to :field
    *
    * @throws ElementNotFoundException
