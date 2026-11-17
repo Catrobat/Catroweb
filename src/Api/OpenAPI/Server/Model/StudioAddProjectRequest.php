@@ -43,15 +43,11 @@ class StudioAddProjectRequest
 {
   /**
    * The project UUID to add.
-   *
-   * @SerializedName("project_id")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('project_id')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $project_id = null;
 
   /**

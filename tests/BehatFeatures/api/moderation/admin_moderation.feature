@@ -108,7 +108,7 @@ Feature: Admin Moderation API
     When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000009999/resolve"
     Then the response status code should be "404"
 
-  Scenario: Resolve report with invalid action returns 400
+  Scenario: Resolve report with invalid action returns 422
     # Create a report
     Given the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "User2"
@@ -127,7 +127,7 @@ Feature: Admin Moderation API
       {"action": "invalid_action"}
       """
     When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
-    Then the response status code should be "400"
+    Then the response status code should be "422"
 
   Scenario: Non-admin cannot resolve reports (403)
     Given I use a valid JWT Bearer token for "User2"
@@ -262,7 +262,7 @@ Feature: Admin Moderation API
     When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000009999/resolve"
     Then the response status code should be "404"
 
-  Scenario: Resolve appeal with invalid action returns 400
+  Scenario: Resolve appeal with invalid action returns 422
     Given the project "project1" is auto-hidden
     And the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "Catrobat"
@@ -280,7 +280,7 @@ Feature: Admin Moderation API
       {"action": "invalid_action"}
       """
     When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
-    Then the response status code should be "400"
+    Then the response status code should be "422"
 
   Scenario: Non-admin cannot resolve appeals (403)
     Given I use a valid JWT Bearer token for "User2"

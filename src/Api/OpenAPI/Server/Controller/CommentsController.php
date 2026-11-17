@@ -526,6 +526,7 @@ class CommentsController extends Controller
         406 => 'Not acceptable - client must accept application/json as content type',
         415 => 'Unsupported Media Type - request must use application/json as content type',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 

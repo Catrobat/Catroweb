@@ -43,32 +43,21 @@ class ResolveReportRequest
 {
   /**
    * accept: hide content and ban its owner; hide_warn: hide content and warn the owner (a reported user gets the profile texts cleared instead); warn: keep content visible and warn the owner; reject: dismiss the report.
-   *
-   * @SerializedName("action")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Choice({ "accept", "reject", "hide_warn", "warn" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('action')]
+  #[Assert\NotNull]
+  #[Assert\Choice(choices: ['accept', 'reject', 'hide_warn', 'warn'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $action = null;
 
   /**
    * Warning text sent to the content owner (hide_warn and warn only); empty sends a default warning.
-   *
-   * @SerializedName("message")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 5000
-   * )
    */
+  #[SerializedName('message')]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Length(max: 5000)]
   protected ?string $message = null;
 
   /**

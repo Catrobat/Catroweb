@@ -43,28 +43,20 @@ class ResolveAppealRequest
 {
   /**
    * Whether to approve or reject the appeal.
-   *
-   * @SerializedName("action")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Choice({ "approve", "reject" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('action')]
+  #[Assert\NotNull]
+  #[Assert\Choice(choices: ['approve', 'reject'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $action = null;
 
   /**
    * Admin note for the appellant.
-   *
-   * @SerializedName("note")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('note')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $note = null;
 
   /**

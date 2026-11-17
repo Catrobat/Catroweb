@@ -46,11 +46,13 @@ rm -rf "$PRESERVE_DIR"
 # Fix generated code: double-escaped regex, string Assert\Type refs
 find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/\\\\-/\\-/g' {} +
 find src/Api/OpenAPI/Server -name '*.yaml' -exec sed -i '' 's/\\\\-/\\-/g' {} +
-# Fix deprecated Choice(array) → Choice(choices: array) for Symfony 7.4+
-find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/new Assert\\Choice(\[/new Assert\\Choice(choices: [/g' {} +
 # Literal routes before placeholder routes (/projects/search before /projects/{id})
 php src/Api/OpenAPI/sort-routes.php
-# Note: Rector (run after this script) turns Assert\Type('OpenAPI\\Server\\Model\\...') into the
+# Model docblock annotations → attributes, the only form Symfony's validator and JMS read
+bin/rector process --config src/Api/OpenAPI/rector-attributes.php --clear-cache --no-progress-bar
+# Symfony 8 rejects Choice(array) (an options array); the list must be Choice(choices: array)
+find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/Assert\\Choice(\[/Assert\\Choice(choices: [/g' {} +
+# Note: the project-wide Rector run (bin/rector process src/Api/OpenAPI/Server/, after this script) turns Assert\Type('OpenAPI\\Server\\Model\\...') into the
 # fully qualified \OpenAPI\Server\Model\...::class. Do NOT sed it to an unqualified ::class:
 # the controllers don't import Model classes, so it would resolve to the Controller namespace.
 

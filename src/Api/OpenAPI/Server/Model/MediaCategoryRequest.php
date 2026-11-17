@@ -42,37 +42,28 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MediaCategoryRequest
 {
   /**
-   * Category name.
-   *
-   * @SerializedName("name")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
+   * Category name (required on create).
    */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * Category description.
-   *
-   * @SerializedName("description")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('description')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $description = null;
 
   /**
-   * @SerializedName("priority")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
+   * Sort priority; 0 when omitted on create, unchanged when omitted on update.
    */
-  protected ?int $priority = 0;
+  #[SerializedName('priority')]
+  #[Assert\Type('int')]
+  #[Type('int')]
+  protected ?int $priority = null;
 
   /**
    * Constructor.
@@ -99,11 +90,11 @@ class MediaCategoryRequest
   /**
    * Sets name.
    *
-   * @param string|null $name Category name
+   * @param string|null $name Category name (required on create)
    *
    * @return $this
    */
-  public function setName(?string $name): self
+  public function setName(?string $name = null): self
   {
     $this->name = $name;
 
@@ -142,6 +133,8 @@ class MediaCategoryRequest
 
   /**
    * Sets priority.
+   *
+   * @param int|null $priority Sort priority; 0 when omitted on create, unchanged when omitted on update
    *
    * @return $this
    */

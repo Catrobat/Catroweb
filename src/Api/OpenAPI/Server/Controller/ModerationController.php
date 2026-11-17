@@ -122,6 +122,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Appeal already pending',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -224,6 +225,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Duplicate report',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -405,6 +407,7 @@ class ModerationController extends Controller
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         403 => 'Insufficient privileges, action not allowed.',
         404 => 'Not found',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -585,6 +588,7 @@ class ModerationController extends Controller
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         403 => 'Insufficient privileges, action not allowed.',
         404 => 'Not found',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -678,6 +682,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Appeal already pending',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -780,6 +785,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Duplicate report',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -874,6 +880,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Appeal already pending',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -976,6 +983,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Duplicate report',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -1070,6 +1078,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Appeal already pending',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -1172,6 +1181,7 @@ class ModerationController extends Controller
         404 => 'Not found',
         409 => 'Duplicate report',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 

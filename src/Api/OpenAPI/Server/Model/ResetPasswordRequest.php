@@ -43,24 +43,18 @@ class ResetPasswordRequest
 {
   /**
    * Email of the user.
-   *
-   * @SerializedName("email")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('email')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $email = null;
 
   /**
    * CAPTCHA response token for bot detection.
-   *
-   * @SerializedName("captcha_token")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('captcha_token')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $captcha_token = null;
 
   /**

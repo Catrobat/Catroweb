@@ -14,6 +14,7 @@ export async function showAppealDialog({ apiUrl, translations }) {
                               style="display: block; width: 100%;"
                               type="textarea"
                               rows="5"
+                              maxlength="5000"
                               placeholder="${escapeAttr(placeholder)}"></md-outlined-text-field>
     `,
     focusConfirm: false,

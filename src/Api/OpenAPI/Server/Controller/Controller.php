@@ -30,6 +30,7 @@
 
 namespace OpenAPI\Server\Controller;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use OpenAPI\Server\Api\ApiServer;
 use OpenAPI\Server\Service\SerializerInterface;
 use OpenAPI\Server\Service\ValidatorInterface;
@@ -135,6 +136,17 @@ class Controller extends AbstractController
     $errors = $this->validator->validate($data, $asserts);
 
     if (count($errors) > 0) {
+      // A request body that breaks its model's spec constraints is a 422 ErrorResponse, a bad parameter 400
+      if (is_object($data) && str_starts_with($data::class, 'OpenAPI\Server\Model\\')) {
+        $details = [];
+        /** @var ConstraintViolation $violation */
+        foreach ($errors as $violation) {
+          $details[] = ['field' => $violation->getPropertyPath(), 'message' => (string) $violation->getMessage()];
+        }
+
+        return ApiErrorResponse::create(Response::HTTP_UNPROCESSABLE_ENTITY, 'validation_error', 'Validation failed', $details);
+      }
+
       $errorsString = '';
       /** @var ConstraintViolation $violation */
       foreach ($errors as $violation) {

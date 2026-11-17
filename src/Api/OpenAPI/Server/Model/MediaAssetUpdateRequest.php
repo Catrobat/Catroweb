@@ -41,63 +41,37 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MediaAssetUpdateRequest
 {
-  /**
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
-  /**
-   * @SerializedName("description")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('description')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $description = null;
 
-  /**
-   * @SerializedName("category_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('category_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $category_id = null;
 
   /**
    * @var string[]|null
-   *
-   * @SerializedName("flavors")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("string")
-   * })
-   *
-   * @Type("array<string>")
    */
+  #[SerializedName('flavors')]
+  #[Assert\All([new Assert\Type('string')])]
+  #[Type('array<string>')]
   protected ?array $flavors = null;
 
-  /**
-   * @SerializedName("author")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('author')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $author = null;
 
-  /**
-   * @SerializedName("active")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
-   */
+  #[SerializedName('active')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $active = null;
 
   /**

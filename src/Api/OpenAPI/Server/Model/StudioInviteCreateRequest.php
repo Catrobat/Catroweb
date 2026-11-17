@@ -43,28 +43,20 @@ class StudioInviteCreateRequest
 {
   /**
    * The code stops working after this point in time. Omit for no expiry.
-   *
-   * @SerializedName("expires_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
    */
+  #[SerializedName('expires_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $expires_at = null;
 
   /**
    * The code stops working after this many joins. Omit for unlimited.
-   *
-   * @SerializedName("max_uses")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   *
-   * @Assert\GreaterThanOrEqual(1)
-   *
-   * @Assert\LessThanOrEqual(1000)
    */
+  #[SerializedName('max_uses')]
+  #[Assert\Type('int')]
+  #[Type('int')]
+  #[Assert\GreaterThanOrEqual(1)]
+  #[Assert\LessThanOrEqual(1000)]
   protected ?int $max_uses = null;
 
   /**

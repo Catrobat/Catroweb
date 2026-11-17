@@ -1301,6 +1301,8 @@ paths:
           description: 'Duplicate report'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/projects/{id}/appeal':
     post:
@@ -1332,6 +1334,8 @@ paths:
           description: 'Appeal already pending'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/projects/{id}/recommendations':
     parameters:
@@ -1648,6 +1652,8 @@ paths:
           $ref: '#/components/responses/UnsupportedMediaType'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/comments/{id}/replies':
     parameters:
@@ -1736,6 +1742,8 @@ paths:
           description: 'Duplicate report'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/comments/{id}/appeal':
     post:
@@ -1767,6 +1775,8 @@ paths:
           description: 'Appeal already pending'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/comments/{id}/translation':
     parameters:
@@ -1923,6 +1933,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
     delete:
       security:
@@ -2957,6 +2969,8 @@ paths:
           description: Project already in studio
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/studios/{id}/batch-add-projects':
     parameters:
@@ -2991,6 +3005,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/studios/{id}/projects/{project_id}':
     parameters:
@@ -3069,6 +3085,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/studios/{id}/comments/{comment_id}':
     parameters:
@@ -3455,6 +3473,8 @@ paths:
                 $ref: '#/components/schemas/StudioResponse'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   ##############################################
   # Followers
@@ -3574,6 +3594,8 @@ paths:
           description: 'Duplicate report'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/users/{id}/appeal':
     post:
@@ -3605,6 +3627,8 @@ paths:
           description: 'Appeal already pending'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/studios/{id}/report':
     post:
@@ -3640,6 +3664,8 @@ paths:
           description: 'Duplicate report'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/studios/{id}/appeal':
     post:
@@ -3671,6 +3697,8 @@ paths:
           description: 'Appeal already pending'
         '429':
           $ref: '#/components/responses/TooManyRequests'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/moderation/reports':
     get:
@@ -3725,6 +3753,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   '/moderation/appeals':
     get:
@@ -3779,6 +3809,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   ##############################################
   # Jobs
@@ -4336,14 +4368,13 @@ components:
 
     # Category Requests
     MediaCategoryRequest:
+      # No `required`: PATCH reuses this schema for partial updates; POST checks the name itself.
       type: object
-      required:
-        - name
       properties:
         name:
           type: string
           example: 'Figures'
-          description: 'Category name'
+          description: 'Category name (required on create)'
         description:
           type: string
           example: 'Character figures for your projects'
@@ -4351,7 +4382,7 @@ components:
         priority:
           type: integer
           example: 1
-          default: 0
+          description: 'Sort priority; 0 when omitted on create, unchanged when omitted on update'
 
     # Asset Responses
     MediaAssetsListResponse:
@@ -5769,7 +5800,6 @@ components:
           items:
             type: string
           description: List of project UUIDs to add
-          # Enforced by config/validator/StudioBatchAddProjectsRequest.yaml; keep both in sync.
           minItems: 1
           maxItems: 50
 
