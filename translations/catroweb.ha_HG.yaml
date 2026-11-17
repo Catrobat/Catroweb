@@ -190,8 +190,6 @@ project:
   downloaded: "An sauke"
   showTranslation: "Nuna fassara"
   hideTranslation: "Ɓoye fassara"
-  translatedByLine: "%provider% ya fassara daga %sourceLanguage% zuwa %targetLanguage%"
-  googleTranslate: Google Translate
   confrimDelete: "Ka tabbata kana son goge fassarar?"
   default: "Tsoho"
   save: "Adana"

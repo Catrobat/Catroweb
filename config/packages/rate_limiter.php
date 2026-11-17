@@ -107,6 +107,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 30,
         'interval' => '1 minute',
       ],
+      // Machine translation runs on our own LibreTranslate, on the web host's CPU. translation_burst: requests per
+      // client IP (schools share one). translation_global: LibreTranslate calls site-wide (cache hits are free; a
+      // project is up to 3 calls; the container itself takes 120 a minute), so a few IPs can't hold the PHP workers.
+      'translation_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 30,
+        'interval' => '1 minute',
+      ],
+      'translation_global' => [
+        'policy' => 'sliding_window',
+        'limit' => 100,
+        'interval' => '1 minute',
+      ],
       'studio_create_daily' => [
         'policy' => 'sliding_window',
         'limit' => 5,

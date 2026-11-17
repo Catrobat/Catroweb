@@ -207,8 +207,7 @@ project:
   downloaded: İndirildi
   showTranslation: Çeviriyi göster
   hideTranslation: Çeviriyi gizle
-  translatedByLine: '%provider% tarafından %sourceLanguage% dilinden %targetLanguage% diline çevrildi'
-  googleTranslate: Google Çeviri
+  translatedByLine: '%sourceLanguage% dilinden %targetLanguage% diline makine çevirisi'
   confrimDelete: Çeviriyi silmek istediğinden emin misin?
   default: Varsayılan
   save: Kaydet

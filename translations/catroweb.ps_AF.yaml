@@ -207,8 +207,6 @@ project:
   downloaded: 'ډاونلوډ شو'
   showTranslation: 'ژباړه وښیه'
   hideTranslation: 'ژباړه پټه کړه'
-  translatedByLine: 'د %provider% لخوا له %sourceLanguage% څخه %targetLanguage% ته ژباړل شوی'
-  googleTranslate: 'Google ژباړه'
   confrimDelete: 'ایا ډاډه یې چې غواړې ژباړه حذف کړې؟'
   default: ډیفالټ
   save: 'خوندي کړه'

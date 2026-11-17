@@ -207,8 +207,7 @@ project:
   downloaded: Preuzeto
   showTranslation: Prikaži prijevod
   hideTranslation: Sakrij prijevod
-  translatedByLine: Preveo %provider% s jezika %sourceLanguage% na %targetLanguage%
-  googleTranslate: Google Translate
+  translatedByLine: 'Strojno prevedeno s jezika %sourceLanguage% na %targetLanguage%'
   confrimDelete: Želiš li stvarno izbrisati prijevod?
   default: Zadano
   save: Spremi

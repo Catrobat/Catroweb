@@ -207,8 +207,7 @@ project:
   downloaded: 'Gedownload'
   showTranslation: 'Vertaling tonen'
   hideTranslation: 'Vertaling verbergen'
-  translatedByLine: 'Vertaald door %provider% van %sourceLanguage% naar %targetLanguage%'
-  googleTranslate: Google Translate
+  translatedByLine: 'Automatisch vertaald van %sourceLanguage% naar %targetLanguage%'
   confrimDelete: 'Weet je zeker dat je de vertaling wilt verwijderen?'
   default: 'Standaard'
   save: Opslaan

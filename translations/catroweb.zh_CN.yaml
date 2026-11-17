@@ -190,8 +190,7 @@ project:
   downloaded: "已下载"
   showTranslation: "显示翻译"
   hideTranslation: "隐藏翻译"
-  translatedByLine: "由 %provider% 从%sourceLanguage%翻译为%targetLanguage%"
-  googleTranslate: "Google 翻译"
+  translatedByLine: '从%sourceLanguage%机器翻译为%targetLanguage%'
   confrimDelete: "您确定要删除此翻译吗？"
   default: 默认
   save: 保存

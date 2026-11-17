@@ -190,8 +190,7 @@ project:
   downloaded: "已下載"
   showTranslation: "顯示翻譯"
   hideTranslation: "隱藏翻譯"
-  translatedByLine: "由 %provider% 從%sourceLanguage%翻譯成%targetLanguage%"
-  googleTranslate: "Google 翻譯"
+  translatedByLine: '從%sourceLanguage%機器翻譯成%targetLanguage%'
   confrimDelete: "你確定要刪除這個翻譯嗎？"
   default: 預設
   save: 存檔

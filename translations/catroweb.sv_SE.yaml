@@ -207,8 +207,7 @@ project:
   downloaded: 'Nedladdat'
   showTranslation: 'Visa översättning'
   hideTranslation: 'Dölj översättning'
-  translatedByLine: 'Översatt av %provider% från %sourceLanguage% till %targetLanguage%'
-  googleTranslate: Google Translate
+  translatedByLine: 'Maskinöversatt från %sourceLanguage% till %targetLanguage%'
   confrimDelete: 'Är du säker på att du vill ta bort översättningen?'
   default: 'Standard'
   save: Spara

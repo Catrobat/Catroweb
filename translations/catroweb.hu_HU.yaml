@@ -207,8 +207,7 @@ project:
   downloaded: 'Letöltve'
   showTranslation: 'Fordítás megjelenítése'
   hideTranslation: 'Fordítás elrejtése'
-  translatedByLine: 'Fordította: %provider% (%sourceLanguage% → %targetLanguage%)'
-  googleTranslate: 'Google Fordító'
+  translatedByLine: 'Gépi fordítás (%sourceLanguage% → %targetLanguage%)'
   confrimDelete: 'Biztosan törölni szeretnéd a fordítást?'
   default: 'Alapértelmezett'
   save: Mentés

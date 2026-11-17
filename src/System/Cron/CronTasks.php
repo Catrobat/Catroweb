@@ -31,7 +31,6 @@ final class CronTasks
       $task('Add silver_user UserAchievements', 'catrobat:workflow:achievement:silver_user', '1 week', self::HOUR),
       $task('Add verified_developer (silver) UserAchievements', 'catrobat:workflow:achievement:verified_developer_silver', '1 week', self::HOUR),
       $task('Add verified_developer (gold) UserAchievements', 'catrobat:workflow:achievement:verified_developer_gold', '1 week', self::HOUR),
-      $task('Delete old entries in machine translation table', 'catrobat:translation:trim-storage', '1 month', self::DAY),
       $task('Retroactively unlock custom translation achievements', 'catrobat:workflow:achievement:translation', '1 month', self::DAY),
       $task('Add bronze_user UserAchievements', 'catrobat:workflow:achievement:bronze_user', '1 year', self::WEEK),
       $task('Add perfect_profile UserAchievements', 'catrobat:workflow:achievement:perfect_profile', '1 year', self::WEEK),

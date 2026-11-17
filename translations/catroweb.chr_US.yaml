@@ -190,8 +190,6 @@ project:
   downloaded: 'ᎦᏯᏅ'
   showTranslation: 'ᎦᏁᏟᏴᏛ ᎾᎬᏁ'
   hideTranslation: 'ᎦᏁᏟᏴᏛ ᎯᏍᎦᎳ'
-  translatedByLine: '%provider% ᎤᏁᏟᏴᏔᏅ %sourceLanguage% ᏅᏓᏳᏓᎴᏅᎯ %targetLanguage% ᏫᏚᏳᎪᏛ'
-  googleTranslate: Google Translate
   confrimDelete: 'ᎤᏙᎯᏳᏍᎪ ᎦᏁᏟᏴᏛ ᎯᏍᏆᏓ ᏣᏚᎵ?'
   default: 'ᎢᎬᏱᏱ ᏄᏍᏛ'
   save: 'ᎯᏍᏆᏂᎪᏓ'

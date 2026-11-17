@@ -18,11 +18,7 @@ use App\Admin\Projects\ProjectsController;
 use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectController;
-use App\Admin\Statistics\Translation\CommentMachineTranslationAdmin;
-use App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminController;
-use App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController;
 use App\Admin\Statistics\Translation\ProjectCustomTranslationAdmin;
-use App\Admin\Statistics\Translation\ProjectMachineTranslationAdmin;
 use App\Admin\Studios\StudioAdmin;
 use App\Admin\System\CronJobs\CronJobsAdmin;
 use App\Admin\System\CronJobs\CronJobsAdminController;
@@ -81,9 +77,7 @@ use App\DB\Entity\System\CronJob;
 use App\DB\Entity\System\FeatureFlag;
 use App\DB\Entity\System\MaintenanceInformation;
 use App\DB\Entity\System\Survey;
-use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
-use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\ConsentLog;
@@ -140,7 +134,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.test.directory.target', '%kernel.project_dir%/tests/TestData/DataFixtures/GeneratedFixtures/');
   $parameters->set('catrobat.thumbnail.dir', '%catrobat.pubdir%resources/thumbnails/');
   $parameters->set('catrobat.thumbnail.path', 'resources/thumbnails/');
-  $parameters->set('catrobat.translations.project_cache_threshold', 15);
   $parameters->set('catrobat.upload.temp.dir', '%catrobat.pubdir%resources/tmp/uploads/');
   $parameters->set('catrobat.upload.temp.path', 'resources/tmp/uploads/');
   $parameters->set('dkim.private.key', '%kernel.project_dir%/.dkim/private.key');
@@ -595,18 +588,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       ]
     )
   ;
-  $services->set('admin.block.statistics.project_machine_translation', ProjectMachineTranslationAdmin::class)
-    ->tag(
-      'sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Project Machine Translation',
-        'code' => null,
-        'model_class' => ProjectMachineTranslation::class,
-        'controller' => ProjectMachineTranslationAdminController::class,
-      ]
-    )
-  ;
   $services->set('admin.block.statistics.project_custom_translation', ProjectCustomTranslationAdmin::class)
     ->tag(
       'sonata.admin',
@@ -616,18 +597,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => ProjectCustomTranslation::class,
         'controller' => null,
-      ]
-    )
-  ;
-  $services->set('admin.block.statistics.comment_machine_translation', CommentMachineTranslationAdmin::class)
-    ->tag(
-      'sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Comment Machine Translation',
-        'code' => null,
-        'model_class' => CommentMachineTranslation::class,
-        'controller' => CommentMachineTranslationAdminController::class,
       ]
     )
   ;

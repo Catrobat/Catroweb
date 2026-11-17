@@ -207,8 +207,7 @@ project:
   downloaded: ഡൗൺലോഡ് ചെയ്തു
   showTranslation: വിവർത്തനം കാണിക്കുക
   hideTranslation: വിവർത്തനം മറയ്ക്കുക
-  translatedByLine: '%provider% %sourceLanguage%-ൽ നിന്ന് %targetLanguage%-ലേക്ക് വിവർത്തനം ചെയ്തു'
-  googleTranslate: Google Translate
+  translatedByLine: '%sourceLanguage%-ൽ നിന്ന് %targetLanguage%-ലേക്ക് യന്ത്രവിവർത്തനം'
   confrimDelete: വിവർത്തനം ഇല്ലാതാക്കണമെന്ന് നിനക്ക് ഉറപ്പാണോ?
   default: ഡിഫോൾട്ട്
   save: സേവ് ചെയ്യുക

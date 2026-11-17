@@ -63,6 +63,7 @@ final class CommentsApiTest extends TestCase
       $authorization_checker ?? $this->createStub(AuthorizationCheckerInterface::class),
       $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
       $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),
+      $this->createNoLimitRateLimiterFactory('phpunit_translation_burst'),
       $text_sanitizer ?? $this->createPassthroughTextSanitizer(),
       $user_avatar_service ?? $this->createStub(\App\User\UserAvatarService::class),
     );
@@ -612,7 +613,6 @@ final class CommentsApiTest extends TestCase
     $translation_result = new TranslationResult();
     $translation_result->translation = 'bonjour';
     $translation_result->detected_source_language = 'en';
-    $translation_result->provider = 'test-provider';
 
     $translation_delegate = $this->createStub(TranslationDelegate::class);
     $translation_delegate->method('translate')->willReturn($translation_result);
@@ -632,6 +632,6 @@ final class CommentsApiTest extends TestCase
     $this->assertSame('bonjour', $result->getTranslation());
     $this->assertSame('fr', $result->getTargetLanguage());
     $this->assertSame('en', $result->getSourceLanguage());
-    $this->assertSame('test-provider', $result->getProvider());
+    $this->assertSame('libretranslate', $result->getProvider());
   }
 }

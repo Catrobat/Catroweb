@@ -207,8 +207,6 @@ project:
   downloaded: බාගත්තා
   showTranslation: පරිවර්තනය පෙන්වන්න
   hideTranslation: පරිවර්තනය සඟවන්න
-  translatedByLine: '%provider% මගින් %sourceLanguage% සිට %targetLanguage% දක්වා පරිවර්තනය කළා'
-  googleTranslate: Google පරිවර්තන
   confrimDelete: ඔයාට ඇත්තටම පරිවර්තනය මකන්න ඕනද?
   default: පෙරනිමි
   save: සුරකින්න

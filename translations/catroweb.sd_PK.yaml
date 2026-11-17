@@ -207,8 +207,6 @@ project:
   downloaded: 'ڊائونلوڊ ٿي ويو'
   showTranslation: 'ترجمو ڏيکار'
   hideTranslation: 'ترجمو لڪاءِ'
-  translatedByLine: '%provider% طرفان %sourceLanguage% مان %targetLanguage% ۾ ترجمو ڪيل'
-  googleTranslate: 'گوگل ترجمو'
   confrimDelete: 'ڇا توکي پڪ آهي ته تون ترجمو ڊليٽ ڪرڻ چاهين ٿو؟'
   default: 'ڊفالٽ'
   save: محفوظ

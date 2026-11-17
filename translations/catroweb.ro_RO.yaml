@@ -190,8 +190,7 @@ project:
   downloaded: "Descărcat"
   showTranslation: "Arată traducerea"
   hideTranslation: "Ascunde traducerea"
-  translatedByLine: "Tradus de %provider% din %sourceLanguage% în %targetLanguage%"
-  googleTranslate: "Google Traducere"
+  translatedByLine: 'Traducere automată din %sourceLanguage% în %targetLanguage%'
   confrimDelete: "Ești sigur că vrei să ștergi traducerea?"
   default: "Implicit"
   save: "Salvează"

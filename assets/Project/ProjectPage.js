@@ -642,7 +642,6 @@ function initComponents(data, earlyInits) {
 
   new TranslateComments(
     projectElement.dataset.translatedByLine,
-    projectElement.dataset.googleTranslateDisplayName,
     projectElement.dataset.transTranslateAgain,
   )
 
@@ -662,7 +661,6 @@ function initComponents(data, earlyInits) {
 
   new TranslateProject(
     projectElement.dataset.translatedByLine,
-    projectElement.dataset.googleTranslateDisplayName,
     projectElement.dataset.projectId,
     projectElement.dataset.hasDescription === 'true',
     projectElement.dataset.hasCredits === 'true',

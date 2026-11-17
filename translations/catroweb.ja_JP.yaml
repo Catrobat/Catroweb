@@ -197,8 +197,7 @@ project:
   downloaded: "ダウンロード済み"
   showTranslation: "翻訳を表示"
   hideTranslation: "翻訳を非表示"
-  translatedByLine: "%provider% により %sourceLanguage% から %targetLanguage% に翻訳"
-  googleTranslate: "Google 翻訳"
+  translatedByLine: '%sourceLanguage% から %targetLanguage% に機械翻訳'
   confrimDelete: "この翻訳を削除してもよろしいですか？"
   default: デフォルト
   save: 保存

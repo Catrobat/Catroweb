@@ -13,6 +13,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
+use App\Translation\LibreTranslateApi;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 use App\User\Notification\NotificationManager;
@@ -47,6 +48,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly AuthorizationCheckerInterface $authorization_checker,
     private readonly RateLimiterFactory $commentBurstLimiter,
     private readonly RateLimiterFactory $commentDailyLimiter,
+    private readonly RateLimiterFactory $translationBurstLimiter,
     private readonly TextSanitizer $textSanitizer,
     private readonly UserAvatarService $user_avatar_service,
   ) {
@@ -326,6 +328,12 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       }
     }
 
+    if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     try {
       $translation_result = $this->translation_delegate->translate($comment_text, $source_language, $target_language);
     } catch (\InvalidArgumentException) {
@@ -345,7 +353,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $response->setSourceLanguage($source_language ?? $translation_result->detected_source_language);
     $response->setTargetLanguage($target_language);
     $response->setTranslation($translation_result->translation);
-    $response->setProvider($translation_result->provider);
+    $response->setProvider(LibreTranslateApi::PROVIDER);
     $response->setCache(null !== $translation_result->cache ? true : null);
 
     $responseCode = Response::HTTP_OK;

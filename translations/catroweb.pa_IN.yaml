@@ -190,8 +190,7 @@ project:
   downloaded: 'ਡਾਊਨਲੋਡ ਹੋ ਗਿਆ'
   showTranslation: 'ਅਨੁਵਾਦ ਦਿਖਾ'
   hideTranslation: 'ਅਨੁਵਾਦ ਲੁਕਾ'
-  translatedByLine: '%provider% ਵੱਲੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ'
-  googleTranslate: 'Google ਅਨੁਵਾਦ'
+  translatedByLine: '%sourceLanguage% ਤੋਂ %targetLanguage% ਵਿੱਚ ਮਸ਼ੀਨੀ ਅਨੁਵਾਦ'
   confrimDelete: 'ਕੀ ਤੂੰ ਪੱਕਾ ਇਹ ਅਨੁਵਾਦ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦਾ ਹੈਂ?'
   default: ਮੂਲ
   save: ਸੇਵ

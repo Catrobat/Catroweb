@@ -207,8 +207,7 @@ project:
   downloaded: 'Đã tải về'
   showTranslation: 'Hiện bản dịch'
   hideTranslation: 'Ẩn bản dịch'
-  translatedByLine: 'Được %provider% dịch từ %sourceLanguage% sang %targetLanguage%'
-  googleTranslate: 'Google Dịch'
+  translatedByLine: 'Dịch máy từ %sourceLanguage% sang %targetLanguage%'
   confrimDelete: 'Bạn có chắc muốn xóa bản dịch này không?'
   default: 'Mặc định'
   save: Lưu

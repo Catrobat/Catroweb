@@ -207,8 +207,7 @@ project:
   downloaded: U shkarkua
   showTranslation: Shfaq përkthimin
   hideTranslation: Fshih përkthimin
-  translatedByLine: Përkthyer nga %provider% nga %sourceLanguage% në %targetLanguage%
-  googleTranslate: Google Translate
+  translatedByLine: 'Përkthim automatik nga %sourceLanguage% në %targetLanguage%'
   confrimDelete: A je i sigurt që dëshiron ta fshish përkthimin?
   default: Parazgjedhje
   save: Ruaj

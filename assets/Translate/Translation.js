@@ -1,20 +1,17 @@
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
+
 // Machine translation works per language, not per regional variant; these are the exceptions.
 const SPECIAL_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR', 'pt-PT']
+// Variants LibreTranslate has a separate model for (LibreTranslateApi::LANGUAGE_CODES).
+const EXACT_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR']
 
 export class Translation {
-  constructor(translatedByLine, googleTranslateDisplayName, refreshLabel = 'Translate again') {
+  constructor(translatedByLine, refreshLabel = 'Translate again') {
     this.translatedByLine = translatedByLine
     this.refreshLabel = refreshLabel
-    this.providerMap = {
-      itranslate: {
-        displayName: 'iTranslate',
-        link: 'https://itranslate.com',
-      },
-      google: {
-        displayName: googleTranslateDisplayName,
-        link: 'https://translate.google.com',
-      },
-    }
+    // Languages the machine translation offers; empty while it is unreachable, then every language is offered.
+    const supported = document.querySelector('[data-machine-translation-languages]')
+    this.supportedLanguages = JSON.parse(supported?.dataset.machineTranslationLanguages || '[]')
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}
     this.targetLanguage = null
@@ -26,7 +23,14 @@ export class Translation {
 
   setTargetLanguage() {
     const appLanguageElement = document.getElementById('app-language')
-    this.targetLanguage = appLanguageElement.dataset.appLanguage.replace('_', '-')
+    const siteLanguage = appLanguageElement.dataset.appLanguage.replace('_', '-')
+    // The API takes "xx" or "xx-YY": "sr-Latn" becomes "sr", 3-letter languages (kab, chr) have no model.
+    const [language, region = ''] = siteLanguage.split('-')
+    let code = /^[A-Z]{2}$/.test(region) ? siteLanguage : language
+    if (language.length !== 2) code = 'en'
+    // Without a model for the site language every attempt would fail; English is the closest useful default and
+    // the dropdown still offers every supported language.
+    this.targetLanguage = this.isSupported(code) ? code : 'en'
   }
 
   setDisplayLanguageMap() {
@@ -71,35 +75,20 @@ export class Translation {
     return document.querySelector(elementId).getAttribute('lang') !== this.targetLanguage
   }
 
-  openGoogleTranslatePage(text, sourceLanguage = 'auto', targetLanguage = this.targetLanguage) {
-    window.open(
-      'https://translate.google.com/?q=' +
-        encodeURIComponent(text) +
-        '&sl=' +
-        encodeURIComponent(sourceLanguage) +
-        '&tl=' +
-        encodeURIComponent(targetLanguage),
-      '_self',
-    )
+  showTranslationFailed() {
+    const message = document.querySelector('[data-trans-machine-translation-failed]')?.dataset
+      .transMachineTranslationFailed
+    showSnackbar('#share-snackbar', message, SnackbarDuration.error)
   }
 
   /**
-   * Renders the "Translated by … from X to Y" line. X and Y are selectors; changing one shows a
+   * Renders the "Machine translated from X to Y" line. X and Y are selectors; changing one shows a
    * refresh button that calls onRefresh(sourceLanguage, targetLanguage).
    */
   setTranslationCredit(data, byLineElements, onRefresh) {
-    byLineElements.before.innerHTML = this.formatProvider(
-      this.translatedByLineMap.before,
-      this.providerMap[data.provider],
-    )
-    byLineElements.between.innerHTML = this.formatProvider(
-      this.translatedByLineMap.between,
-      this.providerMap[data.provider],
-    )
-    byLineElements.after.innerHTML = this.formatProvider(
-      this.translatedByLineMap.after,
-      this.providerMap[data.provider],
-    )
+    byLineElements.before.textContent = this.translatedByLineMap.before
+    byLineElements.between.textContent = this.translatedByLineMap.between
+    byLineElements.after.textContent = this.translatedByLineMap.after
 
     const [sourceElement, targetElement] = this.isSourceLanguageFirst()
       ? [byLineElements.firstLanguage, byLineElements.secondLanguage]
@@ -166,7 +155,9 @@ export class Translation {
   fillLanguageOptions(select) {
     const selected = select.value
     const languages = Object.keys(this.displayLanguageMap).filter(
-      (code) => code.length === 2 || SPECIAL_LANGUAGES.includes(code) || code === selected,
+      (code) =>
+        code === selected ||
+        ((code.length === 2 || SPECIAL_LANGUAGES.includes(code)) && this.isSupported(code)),
     )
     if (languages.length === 0) return
 
@@ -182,10 +173,12 @@ export class Translation {
     )
   }
 
-  formatProvider(byLine, provider) {
-    return byLine.replace(
-      '%provider%',
-      `<a href="${provider.link}" class="translation-credit" style="text-decoration: none">${provider.displayName}</a>`,
+  isSupported(code) {
+    return (
+      this.supportedLanguages.length === 0 ||
+      this.supportedLanguages.includes(code) ||
+      // Regional variants with their own model must be listed themselves; others are served by the language.
+      (!EXACT_LANGUAGES.includes(code) && this.supportedLanguages.includes(code.slice(0, 2)))
     )
   }
 }

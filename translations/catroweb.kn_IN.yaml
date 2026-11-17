@@ -207,8 +207,7 @@ project:
   downloaded: ಡೌನ್‌ಲೋಡ್ ಆಗಿದೆ
   showTranslation: ಅನುವಾದ ತೋರಿಸು
   hideTranslation: ಅನುವಾದ ಮರೆಮಾಡು
-  translatedByLine: '%provider% ಮೂಲಕ %sourceLanguage% ನಿಂದ %targetLanguage% ಗೆ ಅನುವಾದಿಸಲಾಗಿದೆ'
-  googleTranslate: ಗೂಗಲ್ ಅನುವಾದ
+  translatedByLine: '%sourceLanguage% ನಿಂದ %targetLanguage% ಗೆ ಯಂತ್ರ ಅನುವಾದ'
   confrimDelete: ಅನುವಾದವನ್ನು ಅಳಿಸಲು ನಿನಗೆ ಖಚಿತವೇ?
   default: ಡೀಫಾಲ್ಟ್
   save: ಉಳಿಸು

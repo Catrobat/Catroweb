@@ -207,8 +207,7 @@ project:
   downloaded: Heruntergeladen
   showTranslation: Übersetzungen anzeigen
   hideTranslation: Übersetzung verbergen
-  translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%
-  googleTranslate: Google Übersetzer
+  translatedByLine: 'Maschinell übersetzt von %sourceLanguage% nach %targetLanguage%'
   confrimDelete: Bist du sicher, dass du die Übersetzung löschen willst?
   default: Standard
   save: Speichern

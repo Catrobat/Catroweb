@@ -3,14 +3,13 @@ import { ByLineElementContainer, Translation } from './Translation'
 export class TranslateProject extends Translation {
   constructor(
     translatedByLine,
-    googleTranslateDisplayName,
     projectId,
     hasDescription,
     hasCredit,
     baseUrl = '',
     refreshLabel = undefined,
   ) {
-    super(translatedByLine, googleTranslateDisplayName, refreshLabel)
+    super(translatedByLine, refreshLabel)
     this.projectId = projectId
     this.baseUrl = baseUrl
     this.hasDescription = hasDescription
@@ -129,21 +128,13 @@ export class TranslateProject extends Translation {
     }
   }
 
-  projectNotTranslated(sourceLanguage = 'auto', targetLanguage = this.targetLanguage) {
+  projectNotTranslated() {
     document.getElementById('project-translation-loading-spinner').style.display = 'none'
-    document.getElementById('project-translation-button').style.display = 'block'
-
-    let text = document.getElementById('name').innerText
-
-    if (this.hasDescription) {
-      text += `\n\n${document.getElementById('description').innerText}`
+    // A failed "translate again" keeps the translation that is already shown.
+    if (document.getElementById('remove-project-translation-button').style.display !== 'block') {
+      document.getElementById('project-translation-button').style.display = 'block'
     }
-
-    if (this.hasCredit) {
-      text += `\n\n${document.getElementById('credits').innerText}`
-    }
-
-    this.openGoogleTranslatePage(text, sourceLanguage, targetLanguage)
+    this.showTranslationFailed()
   }
 
   translateProject(sourceLanguage = null, targetLanguage = this.targetLanguage) {
@@ -162,7 +153,7 @@ export class TranslateProject extends Translation {
         this.openTranslatedProject()
       })
       .catch(() => {
-        this.projectNotTranslated(sourceLanguage || 'auto', targetLanguage)
+        this.projectNotTranslated()
       })
   }
 }

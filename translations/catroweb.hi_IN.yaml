@@ -198,8 +198,7 @@ project:
   downloaded: "डाउनलोड हो गया"
   showTranslation: "अनुवाद दिखाओ"
   hideTranslation: "अनुवाद छिपाओ"
-  translatedByLine: "%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित"
-  googleTranslate: गूगल ट्रांसलेट
+  translatedByLine: '%sourceLanguage% से %targetLanguage% में मशीनी अनुवाद'
   translateAgain: "इन भाषाओं के साथ फिर से अनुवाद करें"
   prefillMachineTranslation: "मशीनी अनुवाद भरें"
   machineTranslationFailed: "मशीनी अनुवाद अभी उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें।"

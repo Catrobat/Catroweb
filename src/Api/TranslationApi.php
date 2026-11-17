@@ -15,13 +15,17 @@ use OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest;
 use OpenAPI\Server\Model\ProjectTranslationResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class TranslationApi extends AbstractApiController implements TranslationApiInterface
 {
+  use RateLimitTrait;
+
   public function __construct(
     private readonly TranslationApiFacade $facade,
     private readonly ProjectManager $project_manager,
     private readonly RequestStack $request_stack,
+    private readonly RateLimiterFactory $translationBurstLimiter,
   ) {
   }
 
@@ -64,7 +68,20 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
       }
     }
 
-    $translation_result = $this->facade->getLoader()->translateProject($project, $source_language, $target_language);
+    if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    try {
+      $translation_result = $this->facade->getLoader()->translateProject($project, $source_language, $target_language);
+    } catch (\InvalidArgumentException) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
     if (null === $translation_result) {
       $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
 

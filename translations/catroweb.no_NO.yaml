@@ -207,8 +207,7 @@ project:
   downloaded: 'Lastet ned'
   showTranslation: 'Vis oversettelse'
   hideTranslation: 'Skjul oversettelse'
-  translatedByLine: 'Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%'
-  googleTranslate: Google Translate
+  translatedByLine: 'Maskinoversatt fra %sourceLanguage% til %targetLanguage%'
   confrimDelete: 'Er du sikker på at du vil slette oversettelsen?'
   default: Standard
   save: Lagre

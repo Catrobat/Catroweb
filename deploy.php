@@ -47,7 +47,6 @@ set('shared_dirs', [
 // Shared files between releases
 add('shared_files', [
   '.env.prod.local',      // keep only production .env
-  'google_cloud_key.json',
   '.dkim/private.key',
 ]);
 

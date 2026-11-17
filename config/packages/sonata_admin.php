@@ -170,9 +170,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'translation_domain' => 'catroweb',
             'icon' => '<i class="fa fa-bar-chart"></i>',
             'items' => [
-              'admin.block.statistics.project_machine_translation',
               'admin.block.statistics.project_custom_translation',
-              'admin.block.statistics.comment_machine_translation',
             ],
           ],
           'sonata.admin.group.tools' => [

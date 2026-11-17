@@ -207,8 +207,7 @@ project:
   downloaded: 'Preneseno'
   showTranslation: Pokaži prevod
   hideTranslation: Skrij prevod
-  translatedByLine: Prevedel %provider% iz %sourceLanguage% v %targetLanguage%
-  googleTranslate: Prevajalnik Google
+  translatedByLine: 'Strojni prevod iz %sourceLanguage% v %targetLanguage%'
   confrimDelete: Ali si prepričan/a, da želiš izbrisati ta prevod?
   default: Privzeto
   save: Shrani

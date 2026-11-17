@@ -208,8 +208,7 @@ project:
   downloaded: "Жүктеп алынды"
   showTranslation: Аударманы көрсету
   hideTranslation: Аударманы жасыру
-  translatedByLine: Аударған %provider% %sourceLanguage%-нан %targetLanguage% дейін
-  googleTranslate: Google аудармашы
+  translatedByLine: '%sourceLanguage% тілінен %targetLanguage% тіліне машиналық аударма'
   confrimDelete: Аударманы шынымен жойғың келе ме?
   default: Бастапқы
   save: Сақтау

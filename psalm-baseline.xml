@@ -524,7 +524,6 @@
   <file src="src/System/Testing/Behat/Context/DataFixturesContext.php">
     <PossiblyNullArgument>
       <code><![CDATA[$achievement]]></code>
-      <code><![CDATA[$comment]]></code>
       <code><![CDATA[$followUser]]></code>
       <code><![CDATA[$followUser]]></code>
       <code><![CDATA[$follow_user]]></code>
@@ -599,21 +598,6 @@
   <file src="src/System/Testing/DataFixtures/UserDataFixtures.php">
     <PossiblyNullArgument>
       <code><![CDATA[$user->getPassword()]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Translation/GoogleTranslateApi.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$source_language]]></code>
-      <code><![CDATA[$target_language]]></code>
-      <code><![CDATA[$target_language]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Translation/ItranslateApi.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$source_language]]></code>
-      <code><![CDATA[$source_language]]></code>
-      <code><![CDATA[$target_language]]></code>
-      <code><![CDATA[$target_language]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/Translation/TranslationDelegate.php">
@@ -739,21 +723,5 @@
       <code><![CDATA[scandir($this->compressed_projects_dir)]]></code>
       <code><![CDATA[scandir($this->compressed_projects_dir)]]></code>
     </PossiblyFalseArgument>
-  </file>
-  <file src="tests/PhpUnit/Translation/GoogleTranslateApiTest.php">
-    <PossiblyNullPropertyFetch>
-      <code><![CDATA[$result->detected_source_language]]></code>
-      <code><![CDATA[$result->detected_source_language]]></code>
-      <code><![CDATA[$result->translation]]></code>
-      <code><![CDATA[$result->translation]]></code>
-    </PossiblyNullPropertyFetch>
-  </file>
-  <file src="tests/PhpUnit/Translation/ItranslateApiTest.php">
-    <PossiblyNullPropertyFetch>
-      <code><![CDATA[$result->detected_source_language]]></code>
-      <code><![CDATA[$result->detected_source_language]]></code>
-      <code><![CDATA[$result->translation]]></code>
-      <code><![CDATA[$result->translation]]></code>
-    </PossiblyNullPropertyFetch>
   </file>
 </files>

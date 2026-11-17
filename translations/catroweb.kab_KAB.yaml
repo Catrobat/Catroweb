@@ -190,8 +190,6 @@ project:
   downloaded: "Yettwasader"
   showTranslation: "Sken tasuqilt"
   hideTranslation: "Ffer tasuqilt"
-  translatedByLine: "Yettwasuqel sɣur %provider% seg %sourceLanguage% ɣer %targetLanguage%"
-  googleTranslate: Google Translate
   confrimDelete: "Tetḥeqqeḍ tebɣiḍ ad tekkseḍ tasuqilt?"
   default: "Amezwer"
   save: Sekles

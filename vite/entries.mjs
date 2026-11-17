@@ -41,7 +41,6 @@ export const jsEntries = {
   admin_user_communication_send_mail: './assets/Admin/UserCommunication/SendMail.js',
   admin_user_communication_maintenance_information_icon_list:
     './assets/Admin/UserCommunication/MaintenanceInformation/IconList.js',
-  admin_statistics_machine_translation: './assets/Admin/Statistics/MachineTranslation.js',
 }
 
 export const cssEntries = {

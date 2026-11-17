@@ -207,8 +207,7 @@ project:
   downloaded: Preuzeto
   showTranslation: Prikaži prijevod
   hideTranslation: Sakrij prijevod
-  translatedByLine: Preveo %provider% sa jezika %sourceLanguage% na %targetLanguage%
-  googleTranslate: Google Translate
+  translatedByLine: 'Mašinski prevedeno sa jezika %sourceLanguage% na %targetLanguage%'
   confrimDelete: Jesi li siguran/na da želiš izbrisati prijevod?
   default: Zadano
   save: Sačuvaj

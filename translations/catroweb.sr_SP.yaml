@@ -207,8 +207,7 @@ project:
   downloaded: Преузето
   showTranslation: Прикажи превод
   hideTranslation: Сакриј превод
-  translatedByLine: Превео %provider% са језика %sourceLanguage% на %targetLanguage%
-  googleTranslate: Google преводилац
+  translatedByLine: 'Машински преведено са језика %sourceLanguage% на %targetLanguage%'
   confrimDelete: Да ли си сигуран да желиш да обришеш превод?
   default: Подразумевано
   save: Сачувај

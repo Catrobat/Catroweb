@@ -207,8 +207,7 @@ project:
   downloaded: 'Atsisiųsta'
   showTranslation: 'Rodyti vertimą'
   hideTranslation: 'Slėpti vertimą'
-  translatedByLine: 'Išvertė %provider% iš %sourceLanguage% į %targetLanguage%'
-  googleTranslate: Google Translate
+  translatedByLine: 'Mašininis vertimas iš %sourceLanguage% į %targetLanguage%'
   confrimDelete: 'Ar tikrai nori ištrinti vertimą?'
   default: 'Numatytasis'
   save: 'Išsaugoti'

@@ -207,8 +207,7 @@ project:
   downloaded: Stiahnuté
   showTranslation: Zobraziť preklad
   hideTranslation: Skryť preklad
-  translatedByLine: Preložené službou %provider% z jazyka %sourceLanguage% do jazyka %targetLanguage%
-  googleTranslate: Prekladač Google
+  translatedByLine: 'Strojovo preložené z jazyka %sourceLanguage% do jazyka %targetLanguage%'
   confrimDelete: Naozaj chceš vymazať preklad?
   default: Predvolené
   save: Uložiť

@@ -207,8 +207,7 @@ project:
   downloaded: 'ડાઉનલોડ થયું'
   showTranslation: 'અનુવાદ બતાવ'
   hideTranslation: 'અનુવાદ છુપાવ'
-  translatedByLine: '%provider% દ્વારા %sourceLanguage% માંથી %targetLanguage% માં અનુવાદિત'
-  googleTranslate: Google Translate
+  translatedByLine: '%sourceLanguage% માંથી %targetLanguage% માં મશીન અનુવાદ'
   confrimDelete: 'શું તને ખાતરી છે કે તું અનુવાદ ડિલીટ કરવા માંગે છે?'
   default: 'મૂળભૂત'
   save: 'સેવ કર'

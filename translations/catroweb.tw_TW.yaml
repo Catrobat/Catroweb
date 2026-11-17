@@ -190,8 +190,6 @@ project:
   downloaded: 'Wɔatwe'
   showTranslation: 'Kyerɛ nkyerɛaseɛ'
   hideTranslation: 'Fa nkyerɛaseɛ sie'
-  translatedByLine: '%provider% na ɔkyerɛɛ aseɛ fi %sourceLanguage% mu kɔ %targetLanguage% mu'
-  googleTranslate: 'Google Translate'
   confrimDelete: 'Wo wɔ gyidie sɛ wopɛ sɛ woyi nkyerɛaseɛ no fi hɔ?'
   default: 'Deɛ ɛdi kan'
   save: 'Kora'

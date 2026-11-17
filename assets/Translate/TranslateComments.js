@@ -1,8 +1,8 @@
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateComments extends Translation {
-  constructor(translatedByLine, googleTranslateDisplayName, refreshLabel = undefined) {
-    super(translatedByLine, googleTranslateDisplayName, refreshLabel)
+  constructor(translatedByLine, refreshLabel = undefined) {
+    super(translatedByLine, refreshLabel)
     this._initListeners()
   }
 
@@ -81,15 +81,17 @@ export class TranslateComments extends Translation {
     document.getElementById(`comment-text-wrapper-${commentId}`).style.display = 'none'
   }
 
-  commentNotTranslated(commentId, sourceLanguage = 'auto', targetLanguage = this.targetLanguage) {
+  commentNotTranslated(commentId) {
     document.getElementById(`comment-translation-loading-spinner-${commentId}`).style.display =
       'none'
-    document.getElementById(`comment-translation-button-${commentId}`).style.display = 'block'
-    this.openGoogleTranslatePage(
-      document.getElementById(`comment-text-${commentId}`).innerText,
-      sourceLanguage,
-      targetLanguage,
-    )
+    // A failed "translate again" keeps the translation that is already shown.
+    if (
+      document.getElementById(`remove-comment-translation-button-${commentId}`).style.display !==
+      'block'
+    ) {
+      document.getElementById(`comment-translation-button-${commentId}`).style.display = 'block'
+    }
+    this.showTranslationFailed()
   }
 
   translateComment(
@@ -113,7 +115,7 @@ export class TranslateComments extends Translation {
         this.openTranslatedComment(commentId)
       })
       .catch(() => {
-        this.commentNotTranslated(commentId, sourceLanguage || 'auto', targetLanguage)
+        this.commentNotTranslated(commentId)
       })
   }
 }
