@@ -81,15 +81,11 @@ export class TranslateComments extends Translation {
     document.getElementById(`comment-text-wrapper-${commentId}`).style.display = 'none'
   }
 
-  commentNotTranslated(commentId, sourceLanguage = 'auto', targetLanguage = this.targetLanguage) {
+  commentNotTranslated(commentId) {
     document.getElementById(`comment-translation-loading-spinner-${commentId}`).style.display =
       'none'
     document.getElementById(`comment-translation-button-${commentId}`).style.display = 'block'
-    this.openGoogleTranslatePage(
-      document.getElementById(`comment-text-${commentId}`).innerText,
-      sourceLanguage,
-      targetLanguage,
-    )
+    this.showTranslationFailed()
   }
 
   translateComment(
@@ -113,7 +109,7 @@ export class TranslateComments extends Translation {
         this.openTranslatedComment(commentId)
       })
       .catch(() => {
-        this.commentNotTranslated(commentId, sourceLanguage || 'auto', targetLanguage)
+        this.commentNotTranslated(commentId)
       })
   }
 }

@@ -1,3 +1,5 @@
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
+
 // Machine translation works per language, not per regional variant; these are the exceptions.
 const SPECIAL_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR', 'pt-PT']
 
@@ -64,16 +66,10 @@ export class Translation {
     return document.querySelector(elementId).getAttribute('lang') !== this.targetLanguage
   }
 
-  openGoogleTranslatePage(text, sourceLanguage = 'auto', targetLanguage = this.targetLanguage) {
-    window.open(
-      'https://translate.google.com/?q=' +
-        encodeURIComponent(text) +
-        '&sl=' +
-        encodeURIComponent(sourceLanguage) +
-        '&tl=' +
-        encodeURIComponent(targetLanguage),
-      '_self',
-    )
+  showTranslationFailed() {
+    const message = document.querySelector('[data-trans-machine-translation-failed]')?.dataset
+      .transMachineTranslationFailed
+    showSnackbar('#share-snackbar', message, SnackbarDuration.error)
   }
 
   /**

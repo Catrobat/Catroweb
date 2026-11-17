@@ -1851,7 +1851,7 @@ class DataFixturesContext implements Context
       $project = $this->getProjectManager()->find($config['project_id']);
       $project_machine_translation = new ProjectMachineTranslation($project, $config['source_language'], $config['target_language']);
       $project_machine_translation->setCachedTranslation(
-        $config['cached_name'] ?: null, $config['cached_description'] ?: null, $config['cached_credits'] ?: null,
+        ($config['cached_name'] ?? '') ?: null, ($config['cached_description'] ?? '') ?: null, ($config['cached_credits'] ?? '') ?: null,
       );
       $this->getManager()->persist($project_machine_translation);
     }

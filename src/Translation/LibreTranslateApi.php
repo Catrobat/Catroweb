@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -35,6 +36,13 @@ class LibreTranslateApi
    */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
+    if ('' === trim($text)) {
+      $result = new TranslationResult();
+      $result->translation = $text;
+
+      return $result;
+    }
+
     try {
       // One text per request: with "auto", LibreTranslate detects a single language for a whole batch.
       $data = $this->http_client->request('POST', $this->url.'/translate', [
@@ -51,14 +59,17 @@ class LibreTranslateApi
       if (!is_string($translation)) {
         throw new \UnexpectedValueException('response has no translatedText');
       }
-    } catch (ExceptionInterface|\UnexpectedValueException $e) {
-      // The infra watchdog counts this exact message.
-      $this->logger->warning(sprintf(
-        'Machine translation failed: %s, source: %s, target: %s, text length: %d',
-        $e->getMessage(), $source_language ?? 'auto', $target_language, mb_strlen($text),
-      ));
+    } catch (ClientExceptionInterface $e) {
+      if (429 !== $e->getResponse()->getStatusCode()) {
+        // A request LibreTranslate can't serve (e.g. an unsupported language), not an outage.
+        $this->logger->notice(sprintf('Machine translation rejected: %s, source: %s, target: %s', $e->getMessage(), $source_language ?? 'auto', $target_language));
 
-      return null;
+        return null;
+      }
+
+      return $this->failed($e, $text, $source_language, $target_language);
+    } catch (ExceptionInterface|\UnexpectedValueException $e) {
+      return $this->failed($e, $text, $source_language, $target_language);
     }
 
     $result = new TranslationResult();
@@ -69,6 +80,17 @@ class LibreTranslateApi
     }
 
     return $result;
+  }
+
+  private function failed(\Throwable $e, string $text, ?string $source_language, string $target_language): null
+  {
+    // The infra watchdog counts this exact message.
+    $this->logger->warning(sprintf(
+      'Machine translation failed: %s, source: %s, target: %s, text length: %d',
+      $e->getMessage(), $source_language ?? 'auto', $target_language, mb_strlen($text),
+    ));
+
+    return null;
   }
 
   /**
@@ -88,7 +110,13 @@ class LibreTranslateApi
         return [];
       }
 
-      return array_map($this->fromLibreTranslate(...), array_column($languages, 'code'));
+      $codes = array_map($this->fromLibreTranslate(...), array_filter(array_column($languages, 'code'), is_string(...)));
+      if ([] === $codes) {
+        $item->expiresAfter(300);
+        $this->logger->warning('LibreTranslate languages unavailable: empty or malformed /languages response');
+      }
+
+      return array_values($codes);
     });
   }
 

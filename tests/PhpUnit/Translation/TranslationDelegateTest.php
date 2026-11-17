@@ -80,6 +80,40 @@ class TranslationDelegateTest extends TestCase
     $this->assertSame('translated credit', $result[2]?->translation);
   }
 
+  public function testTranslateProjectSkipsBlankTexts(): void
+  {
+    $project = new Project();
+    $project->setName('name');
+    $project->setDescription('');
+    $project->setCredits('  ');
+
+    $result = new TranslationResult();
+    $result->translation = 'translated name';
+    $result->detected_source_language = 'de';
+    $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('translate')->with('name')->willReturn($result);
+
+    $translation = $this->delegate($api)->translateProject($project, null, 'fr');
+
+    $this->assertSame([$result, null, null], $translation);
+  }
+
+  public function testTranslateProjectWithAnExplicitSourceIsNotCached(): void
+  {
+    $project = new Project();
+    $project->setName('name');
+
+    $result = new TranslationResult();
+    $result->translation = 'translated';
+    $api = $this->createStub(LibreTranslateApi::class);
+    $api->method('translate')->willReturn($result);
+    $repository = $this->createMock(ProjectMachineTranslationRepository::class);
+    $repository->method('getCachedTranslation')->willReturn(null);
+    $repository->expects($this->never())->method('cacheTranslation');
+
+    $this->assertNotNull($this->delegate($api, $repository)->translateProject($project, 'ja', 'en'));
+  }
+
   public function testTranslateProjectFailureCachesNothing(): void
   {
     $project = new Project();

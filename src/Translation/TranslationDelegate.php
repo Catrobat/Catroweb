@@ -132,7 +132,8 @@ class TranslationDelegate
     $translation_result = [$name];
     $translations = [$name->translation];
     foreach ([$project->getDescription(), $project->getCredits()] as $text) {
-      if (null === $text) {
+      // Uploads store missing descriptions and credits as '', which LibreTranslate rejects.
+      if (null === $text || '' === trim($text)) {
         $translation_result[] = null;
         $translations[] = null;
         continue;
@@ -147,9 +148,10 @@ class TranslationDelegate
       $translations[] = $translated_text->translation;
     }
 
-    $source_language ??= $name->detected_source_language;
-    if (null !== $source_language) {
-      $this->project_machine_translation_repository->cacheTranslation($project, $source_language, $target_language, ...$translations);
+    // Only auto-detected translations are shared: a user picking a wrong source language must not pin a bad
+    // translation for every later visitor.
+    if (null === $source_language && null !== $name->detected_source_language) {
+      $this->project_machine_translation_repository->cacheTranslation($project, $name->detected_source_language, $target_language, ...$translations);
     }
 
     return $translation_result;

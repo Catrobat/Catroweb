@@ -53,13 +53,33 @@ final class LibreTranslateApiTest extends TestCase
     $this->assertSame('no', $result?->detected_source_language);
   }
 
-  public function testHttpErrorIsLoggedAndReturnsNull(): void
+  public function testRejectedRequestIsNotLoggedAsAFailure(): void
   {
     $logger = $this->createMock(LoggerInterface::class);
-    $logger->expects($this->once())->method('warning')->with($this->stringContains('Machine translation failed'));
+    $logger->expects($this->never())->method('warning');
+    $logger->expects($this->once())->method('notice')->with($this->stringContains('Machine translation rejected'));
     $client = new MockHttpClient(new JsonMockResponse(['error' => 'xx is not supported'], ['http_code' => 400]));
 
     $this->assertNull($this->api($client, $logger)->translate('Hello', 'en', 'de'));
+  }
+
+  public function testRateLimitedOrServerErrorIsLoggedAsAFailure(): void
+  {
+    foreach ([429, 500] as $status) {
+      $logger = $this->createMock(LoggerInterface::class);
+      $logger->expects($this->once())->method('warning')->with($this->stringContains('Machine translation failed'));
+      $client = new MockHttpClient(new JsonMockResponse(['error' => 'busy'], ['http_code' => $status]));
+
+      $this->assertNull($this->api($client, $logger)->translate('Hello', 'en', 'de'));
+    }
+  }
+
+  public function testBlankTextIsNotSent(): void
+  {
+    $client = new MockHttpClient(static fn (): never => throw new \LogicException('no request expected'));
+
+    $this->assertSame(' ', $this->api($client)->translate(' ', null, 'de')?->translation);
+    $this->assertSame(0, $client->getRequestsCount());
   }
 
   public function testNetworkErrorIsLoggedAndReturnsNull(): void
@@ -86,6 +106,15 @@ final class LibreTranslateApiTest extends TestCase
     $client = new MockHttpClient(static fn (): never => throw new TransportException('Connection refused'));
 
     $this->assertSame([], $this->api($client)->getSupportedLanguages());
+  }
+
+  public function testMalformedLanguageListIsTreatedAsUnavailable(): void
+  {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->once())->method('warning')->with($this->stringContains('LibreTranslate languages unavailable'));
+    $client = new MockHttpClient(new JsonMockResponse(['error' => 'not a list']));
+
+    $this->assertSame([], $this->api($client, $logger)->getSupportedLanguages());
   }
 
   private function api(MockHttpClient $client, ?LoggerInterface $logger = null): LibreTranslateApi
