@@ -190,7 +190,6 @@ class ProjectsController extends Controller
 
       $message = match ($responseCode) {
         200 => 'OK',
-        404 => 'No project found with this id',
         406 => 'Not acceptable - client must accept application/json as content type',
         default => '',
       };
@@ -871,7 +870,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $update_project_request = $this->deserialize($update_project_request, 'OpenAPI\Server\Model\UpdateProjectRequest', $inputFormat);
+      $update_project_request = $this->deserialize($update_project_request, \OpenAPI\Server\Model\UpdateProjectRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -888,7 +887,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\UpdateProjectRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\UpdateProjectRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_project_request, $asserts);
     if ($response instanceof Response) {
@@ -1073,7 +1072,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $reaction_request = $this->deserialize($reaction_request, 'OpenAPI\Server\Model\ReactionRequest', $inputFormat);
+      $reaction_request = $this->deserialize($reaction_request, \OpenAPI\Server\Model\ReactionRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -1090,7 +1089,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ReactionRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ReactionRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reaction_request, $asserts);
     if ($response instanceof Response) {
@@ -1524,6 +1523,7 @@ class ProjectsController extends Controller
 
       $message = match ($responseCode) {
         200 => 'OK',
+        404 => 'Not found',
         406 => 'Not acceptable - client must accept application/json as content type',
         default => '',
       };
@@ -1625,7 +1625,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Uuid();
+    $asserts[] = new Assert\Regex('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/');
     $response = $this->validate($project_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -2333,7 +2333,7 @@ class ProjectsController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $project_upload_session_request = $this->deserialize($project_upload_session_request, 'OpenAPI\Server\Model\ProjectUploadSessionRequest', $inputFormat);
+      $project_upload_session_request = $this->deserialize($project_upload_session_request, \OpenAPI\Server\Model\ProjectUploadSessionRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -2341,7 +2341,7 @@ class ProjectsController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ProjectUploadSessionRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ProjectUploadSessionRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($project_upload_session_request, $asserts);
     if ($response instanceof Response) {

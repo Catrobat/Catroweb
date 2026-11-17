@@ -203,6 +203,28 @@ class StudioInviteResponse
   }
 
   /**
+   * Gets qr_code.
+   */
+  public function getQrCode(): ?string
+  {
+    return $this->qr_code;
+  }
+
+  /**
+   * Sets qr_code.
+   *
+   * @param string|null $qr_code Locally generated SVG image as a data URI for the invite URL. Present only while the invite is usable; returned only to active studio admins, with no shared cache.
+   *
+   * @return $this
+   */
+  public function setQrCode(?string $qr_code = null): self
+  {
+    $this->qr_code = $qr_code;
+
+    return $this;
+  }
+
+  /**
    * Gets uses.
    */
   public function getUses(): ?int
@@ -278,28 +300,6 @@ class StudioInviteResponse
   public function setCreatedAt(?\DateTime $created_at = null): self
   {
     $this->created_at = $created_at;
-
-    return $this;
-  }
-
-  /**
-   * Gets qr_code.
-   */
-  public function getQrCode(): ?string
-  {
-    return $this->qr_code;
-  }
-
-  /**
-   * Sets qr_code.
-   *
-   * @param string|null $qr_code Locally generated SVG image as a data URI for the invite URL. Present only while the invite is usable; returned only to active studio admins, with no shared cache.
-   *
-   * @return $this
-   */
-  public function setQrCode(?string $qr_code = null): self
-  {
-    $this->qr_code = $qr_code;
 
     return $this;
   }

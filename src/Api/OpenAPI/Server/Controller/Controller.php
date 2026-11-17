@@ -178,7 +178,7 @@ class Controller extends AbstractController
     $accept = preg_split('/[\s,]+/', $accept);
 
     // Remove q-factor weighting. E.g. "application/json;q=0.8" becomes "application/json"
-    $accept = array_map(fn ($type) => explode(';', (string) $type)[0], $accept);
+    $accept = array_map(fn ($type): string => explode(';', (string) $type)[0], $accept);
 
     if (in_array('*/*', $accept, true) || in_array('application/*', $accept, true)) {
       // Prefer JSON if the client has no preference

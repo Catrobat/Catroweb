@@ -251,7 +251,7 @@ class RemixGraphNode
    *
    * @return $this
    */
-  public function setName(?string $name): self
+  public function setName(?string $name = null): self
   {
     $this->name = $name;
 
@@ -273,7 +273,7 @@ class RemixGraphNode
    *
    * @return $this
    */
-  public function setUsername(?string $username): self
+  public function setUsername(?string $username = null): self
   {
     $this->username = $username;
 

@@ -476,7 +476,7 @@ class CommentsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $comment_create_request = $this->deserialize($comment_create_request, 'OpenAPI\Server\Model\CommentCreateRequest', $inputFormat);
+      $comment_create_request = $this->deserialize($comment_create_request, \OpenAPI\Server\Model\CommentCreateRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -493,7 +493,7 @@ class CommentsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\CommentCreateRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\CommentCreateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($comment_create_request, $asserts);
     if ($response instanceof Response) {

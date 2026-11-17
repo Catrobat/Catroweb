@@ -107,6 +107,8 @@ class ProjectTranslationResponse
   protected ?string $provider = null;
 
   /**
+   * Cache source (e.g. \&quot;db\&quot;) or null if not cached.
+   *
    * @SerializedName("_cache")
    *
    * @Assert\Type("string")
@@ -286,6 +288,8 @@ class ProjectTranslationResponse
 
   /**
    * Sets _cache.
+   *
+   * @param string|null $_cache Cache source (e.g. \"db\") or null if not cached
    *
    * @return $this
    */
