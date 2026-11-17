@@ -43,111 +43,154 @@ class ExtendedUserDataResponse
 {
   /**
    * Unique ID of the user.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * Nickname of the user.
+   *
+   * @SerializedName("username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $username = null;
 
-  #[SerializedName('avatar')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("avatar")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $avatar = null;
 
   /**
    * An introduction of the user.
+   *
+   * @SerializedName("about")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('about')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $about = null;
 
   /**
    * A short description about the project the user is currently working on.
+   *
+   * @SerializedName("currently_working_on")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('currently_working_on')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $currently_working_on = null;
 
   /**
    * Amount of projects of the user.
+   *
+   * @SerializedName("projects")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('projects')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $projects = null;
 
   /**
    * Amount of users that follow this user.
+   *
+   * @SerializedName("followers")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('followers')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $followers = null;
 
   /**
    * Amount of users followed by this user.
+   *
+   * @SerializedName("following")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('following')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $following = null;
 
   /**
    * All-time leaderboard score of this user (smoothed average downloads per public project).
+   *
+   * @SerializedName("ranking_score")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('ranking_score')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $ranking_score = null;
 
   /**
    * Leaderboard score of this user over the last 7 days (only populated for the rank_recent leaderboard).
+   *
+   * @SerializedName("ranking_score_recent")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('ranking_score_recent')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $ranking_score_recent = null;
 
   /**
    * Whether the user account is verified (only populated for GET /users/{id}).
+   *
+   * @SerializedName("is_verified")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('is_verified')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $is_verified = null;
 
   /**
    * The Scratch username if the user was imported from Scratch; null otherwise (only populated for GET /users/{id}).
+   *
+   * @SerializedName("scratch_username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('scratch_username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $scratch_username = null;
 
   /**
    * Whether the authenticated viewer follows this user; null when unauthenticated (only populated for GET /users/{id}).
+   *
+   * @SerializedName("is_followed_by_viewer")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('is_followed_by_viewer')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $is_followed_by_viewer = null;
 
   /**
    * EMail of the user.
+   *
+   * @SerializedName("email")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('email')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $email = null;
 
   /**

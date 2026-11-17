@@ -43,66 +43,90 @@ class AchievementResponse
 {
   /**
    * Achievement UUID.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * Internal title of the achievement.
+   *
+   * @SerializedName("internal_title")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('internal_title')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $internal_title = null;
 
   /**
    * Translated title of the achievement.
+   *
+   * @SerializedName("title")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('title')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $title = null;
 
   /**
    * Translated description of the achievement.
+   *
+   * @SerializedName("description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('description')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $description = null;
 
   /**
    * Path to the badge SVG.
+   *
+   * @SerializedName("badge_svg_path")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('badge_svg_path')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $badge_svg_path = null;
 
   /**
    * Path to the locked badge SVG.
+   *
+   * @SerializedName("badge_locked_svg_path")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('badge_locked_svg_path')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $badge_locked_svg_path = null;
 
   /**
    * Path to the banner SVG.
+   *
+   * @SerializedName("banner_svg_path")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('banner_svg_path')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $banner_svg_path = null;
 
   /**
    * Banner color.
+   *
+   * @SerializedName("banner_color")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('banner_color')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $banner_color = null;
 
   /**

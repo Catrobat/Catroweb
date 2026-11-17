@@ -41,97 +41,161 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MediaAssetResponse
 {
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $id = null;
 
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $name = null;
 
-  #[SerializedName('description')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $description = null;
 
-  #[SerializedName('file_type')]
-  #[Assert\Choice(choices: ['IMAGE', 'SOUND'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("file_type")
+   *
+   * @Assert\Choice({ "IMAGE", "SOUND" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $file_type = null;
 
-  #[SerializedName('extension')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("extension")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $extension = null;
 
   /**
    * File size in bytes.
+   *
+   * @SerializedName("size")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('size')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $size = null;
 
-  #[SerializedName('author')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("author")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $author = null;
 
-  #[SerializedName('downloads')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("downloads")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $downloads = null;
 
-  #[SerializedName('active')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
+  /**
+   * @SerializedName("active")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
   protected ?bool $active = null;
 
-  #[SerializedName('created_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("created_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $created_at = null;
 
-  #[SerializedName('updated_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("updated_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $updated_at = null;
 
   /**
    * Category UUID.
+   *
+   * @SerializedName("category_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('category_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $category_id = null;
 
   /**
    * Translated category name.
+   *
+   * @SerializedName("category_name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('category_name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $category_name = null;
 
   /**
    * @var string[]|null
+   *
+   * @SerializedName("flavors")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string>")
    */
-  #[SerializedName('flavors')]
-  #[Assert\All([new Assert\Type('string')])]
-  #[Type('array<string>')]
   protected ?array $flavors = null;
 
-  #[SerializedName('download_url')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("download_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $download_url = null;
 
-  #[SerializedName('thumbnail')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("thumbnail")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $thumbnail = null;
 
   /**

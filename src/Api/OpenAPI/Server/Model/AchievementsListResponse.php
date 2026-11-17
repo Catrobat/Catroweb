@@ -43,55 +43,83 @@ class AchievementsListResponse
 {
   /**
    * @var AchievementResponse[]|null
+   *
+   * @SerializedName("unlocked")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\AchievementResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\AchievementResponse>")
    */
-  #[SerializedName('unlocked')]
-  #[Assert\All([new Assert\Type(AchievementResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\AchievementResponse>')]
   protected ?array $unlocked = null;
 
   /**
    * @var AchievementResponse[]|null
+   *
+   * @SerializedName("locked")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\AchievementResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\AchievementResponse>")
    */
-  #[SerializedName('locked')]
-  #[Assert\All([new Assert\Type(AchievementResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\AchievementResponse>')]
   protected ?array $locked = null;
 
-  #[SerializedName('most_recent')]
-  #[Assert\Type(AchievementResponse::class)]
-  #[Type(AchievementResponse::class)]
+  /**
+   * @SerializedName("most_recent")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\AchievementResponse")
+   *
+   * @Type("OpenAPI\Server\Model\AchievementResponse")
+   */
   protected ?AchievementResponse $most_recent = null;
 
   /**
    * Date when the most recent achievement was unlocked (Y-m-d).
+   *
+   * @SerializedName("most_recent_unlocked_at")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('most_recent_unlocked_at')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $most_recent_unlocked_at = null;
 
   /**
    * Whether to show the new achievement animation.
+   *
+   * @SerializedName("show_animation")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('show_animation')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $show_animation = null;
 
   /**
    * Total number of enabled achievements.
+   *
+   * @SerializedName("total_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('total_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $total_count = null;
 
   /**
    * Number of achievements unlocked by this user.
+   *
+   * @SerializedName("unlocked_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('unlocked_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $unlocked_count = null;
 
   /**

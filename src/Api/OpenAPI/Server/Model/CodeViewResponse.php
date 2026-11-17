@@ -43,10 +43,16 @@ class CodeViewResponse
 {
   /**
    * @var CodeViewScene[]|null
+   *
+   * @SerializedName("scenes")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewScene")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewScene>")
    */
-  #[SerializedName('scenes')]
-  #[Assert\All([new Assert\Type(CodeViewScene::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewScene>')]
   protected ?array $scenes = null;
 
   /**

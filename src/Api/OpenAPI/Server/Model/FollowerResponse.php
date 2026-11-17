@@ -43,53 +43,77 @@ class FollowerResponse
 {
   /**
    * Unique UUID/ID (string) of the object.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   *
+   * @Assert\Regex("/^[a-zA-Z0-9\-]+$/")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
-  #[Assert\Regex('/^[a-zA-Z0-9\-]+$/')]
   protected ?string $id = null;
 
-  #[SerializedName('username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $username = null;
 
-  #[SerializedName('avatar')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("avatar")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $avatar = null;
 
   /**
    * Number of public projects.
+   *
+   * @SerializedName("project_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('project_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $project_count = null;
 
   /**
    * Number of followers.
+   *
+   * @SerializedName("follower_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('follower_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $follower_count = null;
 
   /**
    * Does the authenticated user follow this user?
+   *
+   * @SerializedName("is_following")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('is_following')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $is_following = null;
 
   /**
    * Does this user follow the authenticated user?
+   *
+   * @SerializedName("follows_you")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('follows_you')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $follows_you = null;
 
   /**

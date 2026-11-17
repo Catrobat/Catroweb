@@ -43,44 +43,71 @@ class FeaturedBannerResponse
 {
   /**
    * Banner UUID.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
-  #[SerializedName('type')]
-  #[Assert\Choice(choices: ['project', 'studio', 'link', 'image', 'video'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("type")
+   *
+   * @Assert\Choice({ "project", "studio", "link", "image", "video" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $type = null;
 
-  #[SerializedName('title')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("title")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $title = null;
 
-  #[SerializedName('image_variants')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("image_variants")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $image_variants = null;
 
-  #[SerializedName('link_url')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("link_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $link_url = null;
 
   /**
    * YouTube embed URL for video-type banners.
+   *
+   * @SerializedName("video_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('video_url')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $video_url = null;
 
-  #[SerializedName('priority')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("priority")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $priority = null;
 
   /**

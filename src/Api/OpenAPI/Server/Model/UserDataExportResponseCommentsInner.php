@@ -41,24 +41,40 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserDataExportResponseCommentsInner
 {
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $id = null;
 
-  #[SerializedName('text')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("text")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $text = null;
 
-  #[SerializedName('posted_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("posted_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $posted_at = null;
 
-  #[SerializedName('parent_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("parent_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $parent_id = null;
 
   /**

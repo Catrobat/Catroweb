@@ -43,82 +43,112 @@ class CodeStatisticsResponse
 {
   /**
    * Abstraction score (0-6).
+   *
+   * @SerializedName("score_abstraction")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_abstraction')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_abstraction = null;
 
   /**
    * Parallelism score (0-6).
+   *
+   * @SerializedName("score_parallelism")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_parallelism')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_parallelism = null;
 
   /**
    * Synchronization score (0-6).
+   *
+   * @SerializedName("score_synchronization")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_synchronization')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_synchronization = null;
 
   /**
    * Logical thinking score (0-6).
+   *
+   * @SerializedName("score_logical_thinking")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_logical_thinking')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_logical_thinking = null;
 
   /**
    * Flow control score (0-6).
+   *
+   * @SerializedName("score_flow_control")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_flow_control')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_flow_control = null;
 
   /**
    * User interactivity score (0-6).
+   *
+   * @SerializedName("score_user_interactivity")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_user_interactivity')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_user_interactivity = null;
 
   /**
    * Data representation score (0-6).
+   *
+   * @SerializedName("score_data_representation")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_data_representation')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_data_representation = null;
 
   /**
    * Bonus points awarded for physics or extension usage.
+   *
+   * @SerializedName("score_bonus")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_bonus')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_bonus = null;
 
   /**
    * Sum of all category scores and bonus points.
+   *
+   * @SerializedName("score_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('score_total')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $score_total = null;
 
   /**
    * Identifier of the rubric version used to compute the scores.
+   *
+   * @SerializedName("scoring_version")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('scoring_version')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $scoring_version = null;
 
   /**

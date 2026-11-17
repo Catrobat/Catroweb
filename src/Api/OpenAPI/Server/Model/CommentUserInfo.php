@@ -43,31 +43,44 @@ class CommentUserInfo
 {
   /**
    * Unique ID of the user.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * Username of the user.
+   *
+   * @SerializedName("username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $username = null;
 
-  #[SerializedName('avatar')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("avatar")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $avatar = null;
 
   /**
    * Whether the user is approved/whitelisted by admins.
+   *
+   * @SerializedName("approved")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('approved')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $approved = null;
 
   /**

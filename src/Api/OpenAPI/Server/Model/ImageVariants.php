@@ -43,35 +43,53 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ImageVariants
 {
-  #[SerializedName('thumb')]
-  #[Assert\Type(ImageVariantSet::class)]
-  #[Type(ImageVariantSet::class)]
+  /**
+   * @SerializedName("thumb")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariantSet")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariantSet")
+   */
   protected ?ImageVariantSet $thumb = null;
 
-  #[SerializedName('card')]
-  #[Assert\Type(ImageVariantSet::class)]
-  #[Type(ImageVariantSet::class)]
+  /**
+   * @SerializedName("card")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariantSet")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariantSet")
+   */
   protected ?ImageVariantSet $card = null;
 
-  #[SerializedName('detail')]
-  #[Assert\Type(ImageVariantSet::class)]
-  #[Type(ImageVariantSet::class)]
+  /**
+   * @SerializedName("detail")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariantSet")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariantSet")
+   */
   protected ?ImageVariantSet $detail = null;
 
   /**
    * Original image width in pixels (useful as a CLS-safe layout hint).
+   *
+   * @SerializedName("width")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('width')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $width = null;
 
   /**
    * Original image height in pixels (useful as a CLS-safe layout hint).
+   *
+   * @SerializedName("height")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('height')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $height = null;
 
   /**

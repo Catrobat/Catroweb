@@ -43,64 +43,99 @@ class ReactionSummaryResponse
 {
   /**
    * Total number of reactions across all types.
+   *
+   * @SerializedName("total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('total')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $total = null;
 
   /**
    * Number of thumbs_up reactions.
+   *
+   * @SerializedName("thumbs_up")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('thumbs_up')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $thumbs_up = null;
 
   /**
    * Number of smile reactions.
+   *
+   * @SerializedName("smile")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('smile')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $smile = null;
 
   /**
    * Number of love reactions.
+   *
+   * @SerializedName("love")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('love')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $love = null;
 
   /**
    * Number of wow reactions.
+   *
+   * @SerializedName("wow")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('wow')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $wow = null;
 
   /**
    * Current users reaction types (empty if not authenticated).
    *
    * @var string[]|null
+   *
+   * @SerializedName("user_reactions")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Choice({ "thumbs_up", "smile", "love", "wow" })
+   * })
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string>")
    */
-  #[SerializedName('user_reactions')]
-  #[Assert\All([new Assert\Choice(choices: ['thumbs_up', 'smile', 'love', 'wow'])])]
-  #[Assert\All([new Assert\Type('string')])]
-  #[Type('array<string>')]
   protected ?array $user_reactions = null;
 
   /**
    * All reaction types that have at least one reaction.
    *
    * @var string[]|null
+   *
+   * @SerializedName("active_types")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Choice({ "thumbs_up", "smile", "love", "wow" })
+   * })
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string>")
    */
-  #[SerializedName('active_types')]
-  #[Assert\All([new Assert\Choice(choices: ['thumbs_up', 'smile', 'love', 'wow'])])]
-  #[Assert\All([new Assert\Type('string')])]
-  #[Type('array<string>')]
   protected ?array $active_types = null;
 
   /**

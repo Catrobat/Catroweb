@@ -43,10 +43,16 @@ class AchievementsDataResponse
 {
   /**
    * @var AchievementResponse[]|null
+   *
+   * @SerializedName("data")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\AchievementResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\AchievementResponse>")
    */
-  #[SerializedName('data')]
-  #[Assert\All([new Assert\Type(AchievementResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\AchievementResponse>')]
   protected ?array $data = null;
 
   /**

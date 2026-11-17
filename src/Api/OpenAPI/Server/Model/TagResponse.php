@@ -43,18 +43,24 @@ class TagResponse
 {
   /**
    * The internal title of the title.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * The translated text of the project tag.
+   *
+   * @SerializedName("text")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('text')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $text = null;
 
   /**

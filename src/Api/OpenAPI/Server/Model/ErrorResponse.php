@@ -43,11 +43,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ErrorResponse
 {
-  #[SerializedName('error')]
-  #[Assert\NotNull]
-  #[Assert\Valid]
-  #[Assert\Type(ErrorResponseError::class)]
-  #[Type(ErrorResponseError::class)]
+  /**
+   * @SerializedName("error")
+   *
+   * @Assert\NotNull()
+   *
+   * @Assert\Valid()
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ErrorResponseError")
+   *
+   * @Type("OpenAPI\Server\Model\ErrorResponseError")
+   */
   protected ?ErrorResponseError $error = null;
 
   /**

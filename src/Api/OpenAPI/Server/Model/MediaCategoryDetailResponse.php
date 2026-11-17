@@ -41,58 +41,94 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MediaCategoryDetailResponse
 {
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $id = null;
 
   /**
    * Category name.
+   *
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * Category description.
+   *
+   * @SerializedName("description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('description')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $description = null;
 
-  #[SerializedName('priority')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("priority")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $priority = null;
 
-  #[SerializedName('created_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("created_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $created_at = null;
 
-  #[SerializedName('updated_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("updated_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $updated_at = null;
 
   /**
    * @var MediaAssetResponse[]|null
+   *
+   * @SerializedName("data")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\MediaAssetResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\MediaAssetResponse>")
    */
-  #[SerializedName('data')]
-  #[Assert\All([new Assert\Type(MediaAssetResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\MediaAssetResponse>')]
   protected ?array $data = null;
 
-  #[SerializedName('next_cursor')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("next_cursor")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $next_cursor = null;
 
-  #[SerializedName('has_more')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
+  /**
+   * @SerializedName("has_more")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
   protected ?bool $has_more = null;
 
   /**

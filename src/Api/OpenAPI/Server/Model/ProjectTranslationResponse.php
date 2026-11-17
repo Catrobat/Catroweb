@@ -43,48 +43,78 @@ class ProjectTranslationResponse
 {
   /**
    * Project UUID.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
-  #[SerializedName('source_language')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("source_language")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $source_language = null;
 
-  #[SerializedName('target_language')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("target_language")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $target_language = null;
 
-  #[SerializedName('translated_title')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("translated_title")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $translated_title = null;
 
-  #[SerializedName('translated_description')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("translated_description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $translated_description = null;
 
-  #[SerializedName('translated_credit')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("translated_credit")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $translated_credit = null;
 
-  #[SerializedName('provider')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("provider")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $provider = null;
 
   /**
    * Cache source (e.g. \&quot;db\&quot;) or null if not cached.
+   *
+   * @SerializedName("_cache")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('_cache')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $_cache = null;
 
   /**

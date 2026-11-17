@@ -43,23 +43,33 @@ class SearchResponseScratchProjectsInner
 {
   /**
    * Scratch project id.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $name = null;
 
   /**
    * Scratch username of the author.
+   *
+   * @SerializedName("username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $username = null;
 
   /**

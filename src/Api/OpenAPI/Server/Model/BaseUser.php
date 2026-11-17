@@ -43,50 +43,68 @@ class BaseUser
 {
   /**
    * Email of the user.
+   *
+   * @SerializedName("email")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('email')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $email = null;
 
   /**
    * Name of the user | minLength: 3 | maxLength: 180.
+   *
+   * @SerializedName("username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $username = null;
 
   /**
    * A secure password | minLength: 6 | maxLength: 4096.
+   *
+   * @SerializedName("password")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('password')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $password = null;
 
   /**
    * The profile picture of the user in data URI scheme.
+   *
+   * @SerializedName("picture")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('picture')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $picture = null;
 
   /**
    * An introduction of the user.
+   *
+   * @SerializedName("about")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('about')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $about = null;
 
   /**
    * A short description about the project the user is currently working on.
+   *
+   * @SerializedName("currently_working_on")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('currently_working_on')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $currently_working_on = null;
 
   /**

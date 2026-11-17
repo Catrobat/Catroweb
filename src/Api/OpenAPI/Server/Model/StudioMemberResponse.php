@@ -43,53 +43,84 @@ class StudioMemberResponse
 {
   /**
    * Studio membership UUID.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * User UUID.
+   *
+   * @SerializedName("user_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('user_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $user_id = null;
 
-  #[SerializedName('username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $username = null;
 
-  #[SerializedName('avatar')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("avatar")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $avatar = null;
 
-  #[SerializedName('role')]
-  #[Assert\Choice(choices: ['admin', 'member'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("role")
+   *
+   * @Assert\Choice({ "admin", "member" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $role = null;
 
-  #[SerializedName('status')]
-  #[Assert\Choice(choices: ['active', 'banned', 'pending_request'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("status")
+   *
+   * @Assert\Choice({ "active", "banned", "pending_request" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $status = null;
 
-  #[SerializedName('joined_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("joined_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $joined_at = null;
 
   /**
    * Number of projects this member has in the studio.
+   *
+   * @SerializedName("studio_project_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('studio_project_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $studio_project_count = null;
 
   /**

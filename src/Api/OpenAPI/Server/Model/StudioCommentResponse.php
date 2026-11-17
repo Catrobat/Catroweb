@@ -43,53 +43,87 @@ class StudioCommentResponse
 {
   /**
    * Comment UUID.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
-  #[SerializedName('message')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("message")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $message = null;
 
-  #[SerializedName('username')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $username = null;
 
-  #[SerializedName('user_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("user_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $user_id = null;
 
-  #[SerializedName('user_avatar')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("user_avatar")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $user_avatar = null;
 
-  #[SerializedName('parent_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("parent_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $parent_id = null;
 
-  #[SerializedName('reply_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("reply_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $reply_count = null;
 
   /**
    * Whether the comment author is an approved (whitelisted) user.
+   *
+   * @SerializedName("user_approved")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('user_approved')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $user_approved = null;
 
-  #[SerializedName('created_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("created_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $created_at = null;
 
   /**

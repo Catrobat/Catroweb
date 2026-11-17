@@ -41,48 +41,71 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MediaLibraryCategoryPreview
 {
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $id = null;
 
   /**
    * Category name.
+   *
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * Category description.
+   *
+   * @SerializedName("description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('description')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $description = null;
 
-  #[SerializedName('priority')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("priority")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $priority = null;
 
   /**
    * Total number of assets in this category.
+   *
+   * @SerializedName("assets_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('assets_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $assets_count = null;
 
   /**
    * Preview of assets in this category.
    *
    * @var MediaAssetResponse[]|null
+   *
+   * @SerializedName("preview_assets")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\MediaAssetResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\MediaAssetResponse>")
    */
-  #[SerializedName('preview_assets')]
-  #[Assert\All([new Assert\Type(MediaAssetResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\MediaAssetResponse>')]
   protected ?array $preview_assets = null;
 
   /**

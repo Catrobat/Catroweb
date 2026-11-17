@@ -41,48 +41,74 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class BackgroundJobResponse
 {
-  #[SerializedName('id')]
-  #[Assert\NotNull]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("id")
+   *
+   * @Assert\NotNull()
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $id = null;
 
-  #[SerializedName('type')]
-  #[Assert\NotNull]
-  #[Assert\Choice(choices: ['scratch_import', 'project_upload'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("type")
+   *
+   * @Assert\NotNull()
+   *
+   * @Assert\Choice({ "scratch_import", "project_upload" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $type = null;
 
-  #[SerializedName('state')]
-  #[Assert\NotNull]
-  #[Assert\Choice(choices: ['queued', 'running', 'done', 'failed'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("state")
+   *
+   * @Assert\NotNull()
+   *
+   * @Assert\Choice({ "queued", "running", "done", "failed" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $state = null;
 
   /**
    * The project, once done.
+   *
+   * @SerializedName("project_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('project_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $project_id = null;
 
   /**
    * Once failed: the HTTP status the request would have got without &#x60;Prefer: respond-async&#x60;.
+   *
+   * @SerializedName("error_status")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('error_status')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $error_status = null;
 
   /**
    * Once failed: why, in words that can be shown to the user.
+   *
+   * @SerializedName("error_message")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('error_message')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $error_message = null;
 
   /**

@@ -41,44 +41,76 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class NotificationsCountResponse
 {
-  #[SerializedName('total')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $total = null;
 
-  #[SerializedName('like')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("like")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $like = null;
 
-  #[SerializedName('follower')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("follower")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $follower = null;
 
-  #[SerializedName('comment')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("comment")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $comment = null;
 
-  #[SerializedName('remix')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("remix")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $remix = null;
 
-  #[SerializedName('moderation')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("moderation")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $moderation = null;
 
-  #[SerializedName('studio')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("studio")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $studio = null;
 
-  #[SerializedName('project')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("project")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $project = null;
 
   /**

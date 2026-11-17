@@ -43,60 +43,93 @@ class CommentResponse
 {
   /**
    * Comment UUID.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * Unique UUID/ID (string) of the object.
+   *
+   * @SerializedName("project_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   *
+   * @Assert\Regex("/^[a-zA-Z0-9\-]+$/")
    */
-  #[SerializedName('project_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
-  #[Assert\Regex('/^[a-zA-Z0-9\-]+$/')]
   protected ?string $project_id = null;
 
   /**
    * Parent comment UUID, null for top-level comments.
+   *
+   * @SerializedName("parent_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('parent_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $parent_id = null;
 
-  #[SerializedName('user')]
-  #[Assert\Type(CommentUserInfo::class)]
-  #[Type(CommentUserInfo::class)]
+  /**
+   * @SerializedName("user")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\CommentUserInfo")
+   *
+   * @Type("OpenAPI\Server\Model\CommentUserInfo")
+   */
   protected ?CommentUserInfo $user = null;
 
   /**
    * Comment text (null if deleted).
+   *
+   * @SerializedName("message")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('message')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $message = null;
 
-  #[SerializedName('created_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("created_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $created_at = null;
 
-  #[SerializedName('reply_count')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("reply_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $reply_count = null;
 
-  #[SerializedName('is_deleted')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
+  /**
+   * @SerializedName("is_deleted")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
   protected ?bool $is_deleted = null;
 
-  #[SerializedName('is_reported')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
+  /**
+   * @SerializedName("is_reported")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
   protected ?bool $is_reported = null;
 
   /**

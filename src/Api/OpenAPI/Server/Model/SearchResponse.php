@@ -45,63 +45,102 @@ class SearchResponse
    * Array of projects.
    *
    * @var ProjectResponse[]|null
+   *
+   * @SerializedName("projects")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\ProjectResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\ProjectResponse>")
    */
-  #[SerializedName('projects')]
-  #[Assert\All([new Assert\Type(ProjectResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\ProjectResponse>')]
   protected ?array $projects = null;
 
-  #[SerializedName('projects_total')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("projects_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $projects_total = null;
 
   /**
    * Array of users.
    *
    * @var BasicUserDataResponse[]|null
+   *
+   * @SerializedName("users")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\BasicUserDataResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\BasicUserDataResponse>")
    */
-  #[SerializedName('users')]
-  #[Assert\All([new Assert\Type(BasicUserDataResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\BasicUserDataResponse>')]
   protected ?array $users = null;
 
-  #[SerializedName('users_total')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("users_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $users_total = null;
 
   /**
    * Array of studios.
    *
    * @var SearchResponseStudiosInner[]|null
+   *
+   * @SerializedName("studios")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\SearchResponseStudiosInner")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\SearchResponseStudiosInner>")
    */
-  #[SerializedName('studios')]
-  #[Assert\All([new Assert\Type(SearchResponseStudiosInner::class)])]
-  #[Type('array<OpenAPI\Server\Model\SearchResponseStudiosInner>')]
   protected ?array $studios = null;
 
-  #[SerializedName('studios_total')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("studios_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $studios_total = null;
 
   /**
    * Live results of Scratch&#39;s public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it.
    *
    * @var SearchResponseScratchProjectsInner[]|null
+   *
+   * @SerializedName("scratch_projects")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\SearchResponseScratchProjectsInner")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\SearchResponseScratchProjectsInner>")
    */
-  #[SerializedName('scratch_projects')]
-  #[Assert\All([new Assert\Type(SearchResponseScratchProjectsInner::class)])]
-  #[Type('array<OpenAPI\Server\Model\SearchResponseScratchProjectsInner>')]
   protected ?array $scratch_projects = null;
 
   /**
    * Scratch reports no total: offset plus the size of Scratch&#39;s page (counted before imported projects are left out), plus one while that page is full.
+   *
+   * @SerializedName("scratch_projects_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('scratch_projects_total')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $scratch_projects_total = null;
 
   /**

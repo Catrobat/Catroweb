@@ -43,10 +43,16 @@ class StudioUserProjectsResponse
 {
   /**
    * @var StudioUserProjectResponse[]|null
+   *
+   * @SerializedName("projects")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\StudioUserProjectResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\StudioUserProjectResponse>")
    */
-  #[SerializedName('projects')]
-  #[Assert\All([new Assert\Type(StudioUserProjectResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\StudioUserProjectResponse>')]
   protected ?array $projects = null;
 
   /**

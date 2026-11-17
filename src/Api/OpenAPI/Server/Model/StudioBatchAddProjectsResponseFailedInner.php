@@ -41,15 +41,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class StudioBatchAddProjectsResponseFailedInner
 {
-  #[SerializedName('project_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("project_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $project_id = null;
 
-  #[SerializedName('reason')]
-  #[Assert\Choice(choices: ['not_found', 'conflict'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("reason")
+   *
+   * @Assert\Choice({ "not_found", "conflict" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $reason = null;
 
   /**

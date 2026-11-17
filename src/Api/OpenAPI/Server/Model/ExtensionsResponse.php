@@ -43,10 +43,16 @@ class ExtensionsResponse
 {
   /**
    * @var ExtensionResponse[]|null
+   *
+   * @SerializedName("data")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\ExtensionResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\ExtensionResponse>")
    */
-  #[SerializedName('data')]
-  #[Assert\All([new Assert\Type(ExtensionResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\ExtensionResponse>')]
   protected ?array $data = null;
 
   /**

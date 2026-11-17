@@ -41,48 +41,80 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CodeViewObject
 {
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $name = null;
 
-  #[SerializedName('is_group')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
+  /**
+   * @SerializedName("is_group")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
   protected ?bool $is_group = null;
 
   /**
    * @var CodeViewBrick[]|null
+   *
+   * @SerializedName("scripts")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrick")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrick>")
    */
-  #[SerializedName('scripts')]
-  #[Assert\All([new Assert\Type(CodeViewBrick::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewBrick>')]
   protected ?array $scripts = null;
 
   /**
    * @var CodeViewAsset[]|null
+   *
+   * @SerializedName("looks")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewAsset")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewAsset>")
    */
-  #[SerializedName('looks')]
-  #[Assert\All([new Assert\Type(CodeViewAsset::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewAsset>')]
   protected ?array $looks = null;
 
   /**
    * @var CodeViewAsset[]|null
+   *
+   * @SerializedName("sounds")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewAsset")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewAsset>")
    */
-  #[SerializedName('sounds')]
-  #[Assert\All([new Assert\Type(CodeViewAsset::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewAsset>')]
   protected ?array $sounds = null;
 
   /**
    * Child objects if this is a group sprite.
    *
    * @var CodeViewObject[]|null
+   *
+   * @SerializedName("children")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewObject")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewObject>")
    */
-  #[SerializedName('children')]
-  #[Assert\All([new Assert\Type(CodeViewObject::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewObject>')]
   protected ?array $children = null;
 
   /**

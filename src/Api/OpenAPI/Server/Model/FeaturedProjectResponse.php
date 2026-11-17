@@ -41,39 +41,67 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class FeaturedProjectResponse
 {
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $id = null;
 
-  #[SerializedName('project_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("project_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $project_id = null;
 
-  #[SerializedName('project_url')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("project_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $project_url = null;
 
-  #[SerializedName('url')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $url = null;
 
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $name = null;
 
-  #[SerializedName('author')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("author")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $author = null;
 
-  #[SerializedName('featured_image')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("featured_image")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $featured_image = null;
 
   /**

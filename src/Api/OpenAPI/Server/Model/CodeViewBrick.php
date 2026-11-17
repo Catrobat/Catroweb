@@ -45,53 +45,81 @@ class CodeViewBrick
 {
   /**
    * Catroid&#39;s class of the brick or script.
+   *
+   * @SerializedName("type")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('type')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $type = null;
 
   /**
    * Catroid&#39;s brick category (its layout style), e.g. event, control, motion, look, sound, pen, uservariables, userlist, device; unknown if the brick could not be shown.
+   *
+   * @SerializedName("category")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('category')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $category = null;
 
-  #[SerializedName('commented_out')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
+  /**
+   * @SerializedName("commented_out")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
   protected ?bool $commented_out = null;
 
   /**
    * The brick&#39;s text in order: labels, formula fields and drop-down choices.
    *
    * @var CodeViewBrickPart[]|null
+   *
+   * @SerializedName("parts")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrickPart")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrickPart>")
    */
-  #[SerializedName('parts')]
-  #[Assert\All([new Assert\Type(CodeViewBrickPart::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewBrickPart>')]
   protected ?array $parts = null;
 
   /**
    * A script&#39;s bricks.
    *
    * @var CodeViewBrick[]|null
+   *
+   * @SerializedName("bricks")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrick")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrick>")
    */
-  #[SerializedName('bricks')]
-  #[Assert\All([new Assert\Type(CodeViewBrick::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewBrick>')]
   protected ?array $bricks = null;
 
   /**
    * A control-flow brick: first the bricks inside it, then the parts that follow (else, end if, end of loop), each with its own bricks.
    *
    * @var CodeViewBrickSection[]|null
+   *
+   * @SerializedName("sections")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrickSection")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrickSection>")
    */
-  #[SerializedName('sections')]
-  #[Assert\All([new Assert\Type(CodeViewBrickSection::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewBrickSection>')]
   protected ?array $sections = null;
 
   /**

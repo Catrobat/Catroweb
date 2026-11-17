@@ -43,30 +43,43 @@ class HealthResponse
 {
   /**
    * Overall health status.
+   *
+   * @SerializedName("status")
+   *
+   * @Assert\NotNull()
+   *
+   * @Assert\Choice({ "ok", "degraded" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('status')]
-  #[Assert\NotNull]
-  #[Assert\Choice(choices: ['ok', 'degraded'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $status = null;
 
   /**
    * Current server time in ISO 8601 format.
+   *
+   * @SerializedName("timestamp")
+   *
+   * @Assert\NotNull()
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
    */
-  #[SerializedName('timestamp')]
-  #[Assert\NotNull]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
   protected ?\DateTime $timestamp = null;
 
   /**
    * Database connectivity status.
+   *
+   * @SerializedName("database")
+   *
+   * @Assert\Choice({ "ok", "error" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('database')]
-  #[Assert\Choice(choices: ['ok', 'error'])]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $database = null;
 
   /**

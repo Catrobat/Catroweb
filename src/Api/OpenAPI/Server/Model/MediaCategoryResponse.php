@@ -41,40 +41,62 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MediaCategoryResponse
 {
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $id = null;
 
   /**
    * Category name.
+   *
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * Category description.
+   *
+   * @SerializedName("description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('description')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $description = null;
 
-  #[SerializedName('priority')]
-  #[Assert\Type('int')]
-  #[Type('int')]
+  /**
+   * @SerializedName("priority")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
   protected ?int $priority = null;
 
-  #[SerializedName('created_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("created_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $created_at = null;
 
-  #[SerializedName('updated_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("updated_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $updated_at = null;
 
   /**

@@ -43,18 +43,24 @@ class ExtensionResponse
 {
   /**
    * The internal title of the extension.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * The translated text of the project extension.
+   *
+   * @SerializedName("text")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('text')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $text = null;
 
   /**

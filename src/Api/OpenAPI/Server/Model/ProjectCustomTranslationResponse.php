@@ -41,9 +41,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProjectCustomTranslationResponse
 {
-  #[SerializedName('translation')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("translation")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $translation = null;
 
   /**

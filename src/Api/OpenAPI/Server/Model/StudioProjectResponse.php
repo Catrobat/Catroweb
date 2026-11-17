@@ -43,89 +43,128 @@ class StudioProjectResponse
 {
   /**
    * Project UUID.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $name = null;
 
   /**
    * Username of the user who added the project.
+   *
+   * @SerializedName("added_by")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('added_by')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $added_by = null;
 
-  #[SerializedName('added_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
+  /**
+   * @SerializedName("added_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
   protected ?\DateTime $added_at = null;
 
-  #[SerializedName('screenshot')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("screenshot")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $screenshot = null;
 
   /**
    * Username of the project author.
+   *
+   * @SerializedName("author")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('author')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $author = null;
 
   /**
    * UUID of the project author.
+   *
+   * @SerializedName("author_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('author_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $author_id = null;
 
   /**
    * Download count.
+   *
+   * @SerializedName("downloads")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('downloads')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $downloads = null;
 
   /**
    * View count.
+   *
+   * @SerializedName("views")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('views')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $views = null;
 
   /**
    * Localized upload time.
+   *
+   * @SerializedName("uploaded_string")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('uploaded_string')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $uploaded_string = null;
 
   /**
    * Whether the project is private.
+   *
+   * @SerializedName("private")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('private')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $private = null;
 
   /**
    * Not-for-kids flag (0&#x3D;safe, 1&#x3D;flagged, 2&#x3D;moderator-flagged).
+   *
+   * @SerializedName("not_for_kids")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('not_for_kids')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $not_for_kids = null;
 
   /**

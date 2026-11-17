@@ -43,20 +43,34 @@ class StudioProjectListResponse
 {
   /**
    * @var StudioProjectResponse[]|null
+   *
+   * @SerializedName("data")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\StudioProjectResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\StudioProjectResponse>")
    */
-  #[SerializedName('data')]
-  #[Assert\All([new Assert\Type(StudioProjectResponse::class)])]
-  #[Type('array<OpenAPI\Server\Model\StudioProjectResponse>')]
   protected ?array $data = null;
 
-  #[SerializedName('has_more')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
+  /**
+   * @SerializedName("has_more")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
   protected ?bool $has_more = null;
 
-  #[SerializedName('next_cursor')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("next_cursor")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $next_cursor = null;
 
   /**

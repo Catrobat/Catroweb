@@ -45,34 +45,46 @@ class ImageVariantSet
 {
   /**
    * AVIF encoded at 1x device-pixel ratio.
+   *
+   * @SerializedName("avif_1x")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('avif_1x')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $avif_1x = null;
 
   /**
    * AVIF encoded at 2x device-pixel ratio (retina).
+   *
+   * @SerializedName("avif_2x")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('avif_2x')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $avif_2x = null;
 
   /**
    * WebP encoded at 1x device-pixel ratio.
+   *
+   * @SerializedName("webp_1x")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('webp_1x')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $webp_1x = null;
 
   /**
    * WebP encoded at 2x device-pixel ratio (retina).
+   *
+   * @SerializedName("webp_2x")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('webp_2x')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $webp_2x = null;
 
   /**

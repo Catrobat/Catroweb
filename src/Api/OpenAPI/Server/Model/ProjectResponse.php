@@ -43,200 +43,283 @@ class ProjectResponse
 {
   /**
    * The unique identifier of the project.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * The name of the project. minLength: 1 | maxLength: 255.
+   *
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * The name of the projects&#39; author.
+   *
+   * @SerializedName("author")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('author')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $author = null;
 
   /**
    * The unique identifier of the projects&#39; author.
+   *
+   * @SerializedName("author_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('author_id')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $author_id = null;
 
   /**
    * The scratch project ID if this project was imported from Scratch, null otherwise.
+   *
+   * @SerializedName("scratch_id")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('scratch_id')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $scratch_id = null;
 
   /**
    * A description of the project.
+   *
+   * @SerializedName("description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('description')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $description = null;
 
   /**
    * Credits and notes for the project. E.g., credits for using ideas, scripts or artwork from other people.
+   *
+   * @SerializedName("credits")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('credits')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $credits = null;
 
   /**
    * The catrobat version that was used to create this project.
+   *
+   * @SerializedName("version")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('version')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $version = null;
 
   /**
    * The projects&#39; count of views.
+   *
+   * @SerializedName("views")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('views')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $views = null;
 
   /**
    * The projects&#39; count of downloads.
+   *
+   * @SerializedName("downloads")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('downloads')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $downloads = null;
 
   /**
    * The projects&#39; count of reactions.
+   *
+   * @SerializedName("reactions")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('reactions')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $reactions = null;
 
   /**
    * The projects&#39; count of comments.
+   *
+   * @SerializedName("comments")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('comments')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $comments = null;
 
   /**
    * Whether a project is publicly visible (false) or only via direct link (true).
+   *
+   * @SerializedName("private")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
    */
-  #[SerializedName('private')]
-  #[Assert\Type('bool')]
-  #[Type('bool')]
   protected ?bool $private = null;
 
-  #[SerializedName('flavor')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("flavor")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $flavor = null;
 
   /**
    * Tags allow projects to be categorized by their creators. Keys are internal tag names, values are translated display names.
    *
    * @var string[]|null
+   *
+   * @SerializedName("tags")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string, string>")
    */
-  #[SerializedName('tags')]
-  #[Assert\All([new Assert\Type('string')])]
-  #[Type('array<string, string>')]
   protected ?array $tags = null;
 
   /**
    * Extensions used by this project (e.g., arduino, mindstorms). Keys are internal extension names, values are translated display names.
    *
    * @var string[]|null
+   *
+   * @SerializedName("extensions")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string, string>")
    */
-  #[SerializedName('extensions')]
-  #[Assert\All([new Assert\Type('string')])]
-  #[Type('array<string, string>')]
   protected ?array $extensions = null;
 
   /**
    * The time of the upload in ISO 8601 format.
+   *
+   * @SerializedName("uploaded_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
    */
-  #[SerializedName('uploaded_at')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
   protected ?\DateTime $uploaded_at = null;
 
   /**
    * A localised text interpretation of the uploaded timestamp.
+   *
+   * @SerializedName("uploaded_string")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('uploaded_string')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $uploaded_string = null;
 
-  #[SerializedName('screenshot')]
-  #[Assert\Type(ImageVariants::class)]
-  #[Type(ImageVariants::class)]
+  /**
+   * @SerializedName("screenshot")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
+   *
+   * @Type("OpenAPI\Server\Model\ImageVariants")
+   */
   protected ?ImageVariants $screenshot = null;
 
   /**
    * The url to the project on our official share community platform.
+   *
+   * @SerializedName("project_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('project_url')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $project_url = null;
 
   /**
    * The url to GET the catrobat file of this project.
+   *
+   * @SerializedName("download_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
    */
-  #[SerializedName('download_url')]
-  #[Assert\Type('string')]
-  #[Type('string')]
   protected ?string $download_url = null;
 
   /**
    * The filesize of the catrobat file in megabytes.
+   *
+   * @SerializedName("filesize")
+   *
+   * @Assert\Type("float")
+   *
+   * @Type("float")
    */
-  #[SerializedName('filesize')]
-  #[Assert\Type('float')]
-  #[Type('float')]
   protected ?float $filesize = null;
 
   /**
    * Indicates whether a project is suitable for kids or not (0 &#x3D; safe for kids, 1 &#x3D; not safe for kids, 2 &#x3D; not safe for kids set by moderator).
+   *
+   * @SerializedName("not_for_kids")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('not_for_kids')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $not_for_kids = null;
 
   /**
    * Days until automatic deletion (-1 &#x3D; protected/never). Only returned when explicitly requested via attributes parameter.
+   *
+   * @SerializedName("retention_days")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  #[SerializedName('retention_days')]
-  #[Assert\Type('int')]
-  #[Type('int')]
   protected ?int $retention_days = null;
 
   /**
    * ISO 8601 date when the project will be auto-deleted. Null for protected projects. Only returned when explicitly requested.
+   *
+   * @SerializedName("retention_expiry")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
    */
-  #[SerializedName('retention_expiry')]
-  #[Assert\Type('\DateTime')]
-  #[Type('DateTime')]
   protected ?\DateTime $retention_expiry = null;
 
   /**

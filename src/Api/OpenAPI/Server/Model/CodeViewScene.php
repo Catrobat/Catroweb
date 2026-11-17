@@ -41,17 +41,27 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CodeViewScene
 {
-  #[SerializedName('name')]
-  #[Assert\Type('string')]
-  #[Type('string')]
+  /**
+   * @SerializedName("name")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
   protected ?string $name = null;
 
   /**
    * @var CodeViewObject[]|null
+   *
+   * @SerializedName("objects")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewObject")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewObject>")
    */
-  #[SerializedName('objects')]
-  #[Assert\All([new Assert\Type(CodeViewObject::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewObject>')]
   protected ?array $objects = null;
 
   /**

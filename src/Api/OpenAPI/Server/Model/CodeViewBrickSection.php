@@ -43,18 +43,30 @@ class CodeViewBrickSection
 {
   /**
    * @var CodeViewBrickPart[]|null
+   *
+   * @SerializedName("parts")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrickPart")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrickPart>")
    */
-  #[SerializedName('parts')]
-  #[Assert\All([new Assert\Type(CodeViewBrickPart::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewBrickPart>')]
   protected ?array $parts = null;
 
   /**
    * @var CodeViewBrick[]|null
+   *
+   * @SerializedName("bricks")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewBrick")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewBrick>")
    */
-  #[SerializedName('bricks')]
-  #[Assert\All([new Assert\Type(CodeViewBrick::class)])]
-  #[Type('array<OpenAPI\Server\Model\CodeViewBrick>')]
   protected ?array $bricks = null;
 
   /**
