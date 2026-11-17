@@ -12,6 +12,10 @@ class FakeLibreTranslateApi extends LibreTranslateApi
   #[\Override]
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
+    if ('untranslatable' === $text) {
+      return null;
+    }
+
     $result = new TranslationResult();
     $result->translation = 'translated '.$text;
     if (null === $source_language) {

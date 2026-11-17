@@ -60,8 +60,9 @@ class LibreTranslateApi
         throw new \UnexpectedValueException('response has no translatedText');
       }
     } catch (ClientExceptionInterface $e) {
-      if (429 !== $e->getResponse()->getStatusCode()) {
-        // A request LibreTranslate can't serve (e.g. an unsupported language), not an outage.
+      $response = $e->getResponse();
+      if (400 === $response->getStatusCode() && str_contains($response->getContent(false), 'is not supported')) {
+        // A language LibreTranslate has no model for: not an outage. Other 4xx (403, 404, 429...) are.
         $this->logger->notice(sprintf('Machine translation rejected: %s, source: %s, target: %s', $e->getMessage(), $source_language ?? 'auto', $target_language));
 
         return null;

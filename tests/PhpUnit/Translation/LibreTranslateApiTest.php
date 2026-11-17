@@ -63,9 +63,9 @@ final class LibreTranslateApiTest extends TestCase
     $this->assertNull($this->api($client, $logger)->translate('Hello', 'en', 'de'));
   }
 
-  public function testRateLimitedOrServerErrorIsLoggedAsAFailure(): void
+  public function testOtherClientAndServerErrorsAreLoggedAsAFailure(): void
   {
-    foreach ([429, 500] as $status) {
+    foreach ([400, 403, 404, 429, 500] as $status) {
       $logger = $this->createMock(LoggerInterface::class);
       $logger->expects($this->once())->method('warning')->with($this->stringContains('Machine translation failed'));
       $client = new MockHttpClient(new JsonMockResponse(['error' => 'busy'], ['http_code' => $status]));

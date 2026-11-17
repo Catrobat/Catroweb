@@ -12,6 +12,16 @@ Feature: Project title, description and credits should be translatable via a but
       | 2  | project2 | Catrobat | mydescription |          |
       | 3  | project3 | Catrobat |               | mycredit |
       | 4  | project4 | Catrobat | mydescription | mycredit |
+      | 5  | untranslatable | Catrobat |         |          |
+
+  Scenario: A failed translation shows an error and keeps the page
+    Given I am on "/app/project/5"
+    And I wait for the page to be loaded
+    When I click "#project-translation-button"
+    And I wait for AJAX to finish
+    Then I wait for the element "#share-snackbar-label" to contain "Machine translation is not available right now"
+    And the element "#project-translation-button" should be visible
+    And I should be on "/app/project/5"
 
   Scenario: Translate button should translate only title when description and credits not available
     Given I am on "/app/project/1"

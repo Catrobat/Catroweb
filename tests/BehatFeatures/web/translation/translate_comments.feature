@@ -13,6 +13,18 @@ Feature: Project comments should be translatable via a button
       | id                                   | project_id | user_id | text |
       | 00000000-0000-0000-0000-000000000001 | 1          | 1       | c1   |
       | 00000000-0000-0000-0000-000000000002 | 1          | 2       | c2   |
+      | 00000000-0000-0000-0000-000000000003 | 1          | 2       | untranslatable |
+
+  Scenario: A failed comment translation shows an error and keeps the page
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#comment-translation-button-00000000-0000-0000-0000-000000000003" to be visible
+    When I click "#comment-translation-button-00000000-0000-0000-0000-000000000003"
+    And I wait for AJAX to finish
+    Then I wait for the element "#share-snackbar-label" to contain "Machine translation is not available right now"
+    And the element "#comment-translation-button-00000000-0000-0000-0000-000000000003" should be visible
+    And I should be on "/app/project/1"
 
   Scenario: Translate button should translate the corresponding comment
     Given I am on "/app/project/1"
