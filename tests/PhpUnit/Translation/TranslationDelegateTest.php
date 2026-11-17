@@ -8,11 +8,15 @@ use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use App\Translation\LibreTranslateApi;
+use App\Translation\TranslateProject;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @internal
@@ -51,99 +55,75 @@ class TranslationDelegateTest extends TestCase
     ];
   }
 
-  public function testTranslateProjectCachesTheFirstTranslationUnderTheDetectedLanguage(): void
+  public function testTranslateProjectCachesTheTranslationUnderTheDetectedLanguage(): void
   {
-    $project = new Project();
-    $project->setName('name');
-    $project->setCredits('credit');
-
-    $api = $this->createStub(LibreTranslateApi::class);
-    $api->method('translate')->willReturnCallback(static function (string $text): TranslationResult {
-      $result = new TranslationResult();
-      $result->translation = 'translated '.$text;
-      $result->detected_source_language = 'de';
-
-      return $result;
-    });
+    $project = $this->project('name', null, 'credit');
     $repository = $this->createMock(ProjectMachineTranslationRepository::class);
-    $repository->method('getCachedTranslation')->willReturn(null);
     $repository->expects($this->once())->method('cacheTranslation')
-      ->with($project, 'de', 'fr', 'translated name', null, 'translated credit')
+      ->with($project, 'de', 'fr', true, 'translated name', null, 'translated credit')
     ;
 
-    $result = $this->delegate($api, $repository)->translateProject($project, null, 'fr');
-
-    $this->assertNotNull($result);
-    $this->assertSame('translated name', $result[0]?->translation);
-    $this->assertNull($result[1]);
-    $this->assertSame('translated credit', $result[2]?->translation);
+    $this->delegate($this->translatingApi(), $repository)->translateProject($project, null, 'fr');
   }
 
-  public function testLocaleWithoutARealCountryIsTranslatedByLanguage(): void
+  public function testTranslateProjectWithAPickedSourceIsCachedAsNotAutoDetected(): void
   {
-    $api = $this->createMock(LibreTranslateApi::class);
-    $api->expects($this->once())->method('translate')->with('test', null, 'sr')->willReturn(new TranslationResult());
-
-    $this->delegate($api)->translate('test', null, 'sr-SP');
-  }
-
-  public function testTranslateProjectSkipsBlankTexts(): void
-  {
-    $project = new Project();
-    $project->setName('name');
-    $project->setDescription('');
-    $project->setCredits('  ');
-
-    $result = new TranslationResult();
-    $result->translation = 'translated name';
-    $result->detected_source_language = 'de';
-    $api = $this->createMock(LibreTranslateApi::class);
-    $api->expects($this->once())->method('translate')->with('name')->willReturn($result);
-
-    $translation = $this->delegate($api)->translateProject($project, null, 'fr');
-
-    $this->assertSame([$result, null, null], $translation);
-  }
-
-  public function testTranslateProjectWithAnExplicitSourceIsNotCached(): void
-  {
-    $project = new Project();
-    $project->setName('name');
-
-    $result = new TranslationResult();
-    $result->translation = 'translated';
-    $api = $this->createStub(LibreTranslateApi::class);
-    $api->method('translate')->willReturn($result);
+    $project = $this->project('name');
     $repository = $this->createMock(ProjectMachineTranslationRepository::class);
-    $repository->method('getCachedTranslation')->willReturn(null);
-    $repository->expects($this->never())->method('cacheTranslation');
+    $repository->expects($this->once())->method('cacheTranslation')->with($project, 'ja', 'en', false, 'translated name', null, null);
 
-    $this->assertNotNull($this->delegate($api, $repository)->translateProject($project, 'ja', 'en'));
+    $this->delegate($this->translatingApi(), $repository)->translateProject($project, 'ja', 'en');
   }
 
-  public function testTranslateProjectFailureCachesNothing(): void
+  public function testTranslateProjectSkipsBlankTextsAndWaitsLongerThanAWebRequest(): void
   {
-    $project = new Project();
-    $project->setName('name');
+    $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('translate')
+      ->with('name', null, 'fr', $this->greaterThan(5))
+      ->willReturn($this->translationResult('translated name', 'de'))
+    ;
 
+    $this->delegate($api)->translateProject($this->project('name', '', '  '), null, 'fr');
+  }
+
+  public function testRequestQueuesOneJobUntilItIsDone(): void
+  {
+    $bus = $this->createMock(MessageBusInterface::class);
+    $bus->expects($this->once())->method('dispatch')
+      ->with(new TranslateProject('p1', null, 'fr'))
+      ->willReturnCallback(static fn (object $message): Envelope => new Envelope($message))
+    ;
+    $delegate = $this->delegate(bus: $bus);
+    $project = $this->project('name');
+
+    $this->assertTrue($delegate->requestProjectTranslation($project, null, 'fr'));
+    $this->assertTrue($delegate->requestProjectTranslation($project, null, 'fr'));
+  }
+
+  public function testAFailedJobIsReportedOnceThenQueuedAgain(): void
+  {
     $api = $this->createStub(LibreTranslateApi::class);
     $api->method('translate')->willReturn(null);
     $repository = $this->createMock(ProjectMachineTranslationRepository::class);
-    $repository->method('getCachedTranslation')->willReturn(null);
     $repository->expects($this->never())->method('cacheTranslation');
+    $bus = $this->createMock(MessageBusInterface::class);
+    $bus->expects($this->once())->method('dispatch')->willReturnCallback(static fn (object $message): Envelope => new Envelope($message));
+    $delegate = $this->delegate($api, $repository, $bus);
+    $project = $this->project('name');
 
-    $this->assertNull($this->delegate($api, $repository)->translateProject($project, null, 'fr'));
+    $delegate->translateProject($project, null, 'fr');
+
+    $this->assertFalse($delegate->requestProjectTranslation($project, null, 'fr'));
+    $this->assertTrue($delegate->requestProjectTranslation($project, null, 'fr'));
   }
 
-  public function testCachedProjectTranslationSkipsTheApi(): void
+  public function testCachedProjectTranslationComesFromTheRepository(): void
   {
     $cached_translation = [new TranslationResult(), null, null];
-    $repository = $this->createStub(ProjectMachineTranslationRepository::class);
-    $repository->method('getCachedTranslation')->willReturn($cached_translation);
-    $api = $this->createMock(LibreTranslateApi::class);
-    $api->expects($this->never())->method('translate');
+    $repository = $this->createMock(ProjectMachineTranslationRepository::class);
+    $repository->expects($this->once())->method('getCachedTranslation')->with($this->anything(), 'sr', 'en')->willReturn($cached_translation);
 
-    $this->assertSame($cached_translation, $this->delegate($api, $repository)->translateProject(new Project(), 'en', 'fr'));
+    $this->assertSame($cached_translation, $this->delegate(repository: $repository)->getCachedProjectTranslation(new Project(), 'sr-SP', 'en'));
   }
 
   public function testAddProjectCustomTranslation(): void
@@ -153,6 +133,8 @@ class TranslationDelegateTest extends TestCase
       $custom_translation_repository,
       $this->createStub(ProjectMachineTranslationRepository::class),
       $this->createStub(LibreTranslateApi::class),
+      new ArrayAdapter(),
+      $this->createStub(MessageBusInterface::class),
     );
     $project = new Project();
 
@@ -165,12 +147,42 @@ class TranslationDelegateTest extends TestCase
     $this->assertTrue($translation_delegate->addProjectCreditCustomTranslation($project, 'fr', 'test'));
   }
 
-  private function delegate(?LibreTranslateApi $api = null, ?ProjectMachineTranslationRepository $repository = null): TranslationDelegate
+  private function delegate(?LibreTranslateApi $api = null, ?ProjectMachineTranslationRepository $repository = null, ?MessageBusInterface $bus = null): TranslationDelegate
   {
     return new TranslationDelegate(
       $this->createStub(ProjectCustomTranslationRepository::class),
       $repository ?? $this->createStub(ProjectMachineTranslationRepository::class),
       $api ?? $this->createStub(LibreTranslateApi::class),
+      new ArrayAdapter(),
+      $bus ?? $this->createStub(MessageBusInterface::class),
     );
+  }
+
+  private function project(string $name, ?string $description = null, ?string $credits = null): Project
+  {
+    $project = new Project();
+    $project->setId('p1');
+    $project->setName($name);
+    $project->setDescription($description);
+    $project->setCredits($credits);
+
+    return $project;
+  }
+
+  private function translationResult(string $translation, ?string $detected = null): TranslationResult
+  {
+    $result = new TranslationResult();
+    $result->translation = $translation;
+    $result->detected_source_language = $detected;
+
+    return $result;
+  }
+
+  private function translatingApi(): LibreTranslateApi
+  {
+    $api = $this->createStub(LibreTranslateApi::class);
+    $api->method('translate')->willReturnCallback(fn (string $text, ?string $source): TranslationResult => $this->translationResult('translated '.$text, null === $source ? 'de' : null));
+
+    return $api;
   }
 }

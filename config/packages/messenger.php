@@ -33,6 +33,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         App\Project\Scratch\ConvertScratchProject::class => 'scratch',
         App\Project\Upload\CompleteProjectUpload::class => 'uploads',
         App\Project\CodeView\ExportCodeView::class => 'default',
+        // ponytail: shares the queue with code view exports; give it its own worker if a backlog makes visitors wait.
+        App\Translation\TranslateProject::class => 'default',
         App\User\Notification\NotifyFollowersOfNewProject::class => 'default',
         App\Moderation\ScanContentImages::class => 'default',
         App\Project\GarbageCollectOrphanedAssets::class => 'cleanup',

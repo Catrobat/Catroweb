@@ -7,15 +7,26 @@ namespace App\Translation;
 use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class TranslationDelegate
 {
+  private const string JOB_QUEUED = 'queued';
+  private const string JOB_FAILED = 'failed';
+  // A queued job older than this is presumed lost and queued again; a failure is reported for this long.
+  private const int JOB_TTL = 180;
+  // Per LibreTranslate call: a 1,300-character description took 42 s on the production container.
+  private const int JOB_CALL_TIMEOUT = 120;
+
   public function __construct(
     private readonly ProjectCustomTranslationRepository $project_custom_translation_repository,
     private readonly ProjectMachineTranslationRepository $project_machine_translation_repository,
     private readonly LibreTranslateApi $api,
+    private readonly CacheItemPoolInterface $cache,
+    private readonly MessageBusInterface $message_bus,
   ) {
   }
 
@@ -110,53 +121,94 @@ class TranslationDelegate
   }
 
   /**
-   * @psalm-return array<array-key, TranslationResult|null>|null
+   * The cached translation of the project's current texts, or null when there is none yet.
+   *
+   * @return array<TranslationResult|null>|null
    *
    * @throws \InvalidArgumentException
    */
-  public function translateProject(Project $project, ?string $source_language, string $target_language): ?array
+  public function getCachedProjectTranslation(Project $project, ?string $source_language, string $target_language): ?array
   {
-    $source_language = $this->machineLanguage($source_language);
-    $target_language = $this->machineLanguage($target_language);
-    $this->validateLanguage($source_language);
-    $this->validateLanguage($target_language);
+    [$source_language, $target_language] = $this->machineLanguages($source_language, $target_language);
 
-    $cached_result = $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language);
-    if (null !== $cached_result) {
-      return $cached_result;
+    return $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language);
+  }
+
+  /**
+   * Queues the translation unless it is queued already. False when the last attempt failed: the caller reports it,
+   * and the next request queues a new attempt.
+   *
+   * @throws \InvalidArgumentException
+   */
+  public function requestProjectTranslation(Project $project, ?string $source_language, string $target_language): bool
+  {
+    [$source_language, $target_language] = $this->machineLanguages($source_language, $target_language);
+    $state = $this->cache->getItem($this->jobKey($project, $source_language, $target_language));
+    if (self::JOB_FAILED === $state->get()) {
+      $this->cache->deleteItem($state->getKey());
+
+      return false;
     }
 
-    $name = $this->api->translate($project->getName(), $source_language, $target_language);
-    if (!$name instanceof TranslationResult) {
-      return null;
+    if (self::JOB_QUEUED !== $state->get()) {
+      $this->cache->save($state->set(self::JOB_QUEUED)->expiresAfter(self::JOB_TTL));
+      $this->message_bus->dispatch(new TranslateProject((string) $project->getId(), $source_language, $target_language));
+      // Tests run the job right here (sync transport).
+      if (self::JOB_FAILED === $this->cache->getItem($state->getKey())->get()) {
+        $this->cache->deleteItem($state->getKey());
+
+        return false;
+      }
     }
 
-    $translation_result = [$name];
-    $translations = [$name->translation];
-    foreach ([$project->getDescription(), $project->getCredits()] as $text) {
+    return true;
+  }
+
+  /**
+   * Translates and caches the project's texts (TranslateProject job). Takes about 1 s per 30 characters.
+   */
+  public function translateProject(Project $project, ?string $source_language, string $target_language): void
+  {
+    $key = $this->jobKey($project, $source_language, $target_language);
+    // Already done by an earlier job for the same languages.
+    if (null !== $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language)) {
+      $this->cache->deleteItem($key);
+
+      return;
+    }
+
+    $texts = ['name' => $project->getName(), 'description' => $project->getDescription(), 'credits' => $project->getCredits()];
+    $translated = [];
+    $detected = null;
+    foreach ($texts as $field => $text) {
       // Uploads store missing descriptions and credits as ''; there is nothing to translate or show.
       if (null === $text || '' === trim($text)) {
-        $translation_result[] = null;
-        $translations[] = null;
         continue;
       }
 
-      $translated_text = $this->api->translate($text, $source_language, $target_language);
-      if (!$translated_text instanceof TranslationResult) {
-        return null;
+      $result = $this->api->translate($text, $source_language, $target_language, self::JOB_CALL_TIMEOUT);
+      if (!$result instanceof TranslationResult) {
+        $this->cache->save($this->cache->getItem($key)->set(self::JOB_FAILED)->expiresAfter(self::JOB_TTL));
+
+        return;
       }
 
-      $translation_result[] = $translated_text;
-      $translations[] = $translated_text->translation;
+      $translated[$field] = $result->translation;
+      if ('name' === $field) {
+        $detected = $result->detected_source_language;
+      }
     }
 
-    // Only auto-detected translations are shared: a user picking a wrong source language must not pin a bad
-    // translation for every later visitor.
-    if (null === $source_language && null !== $name->detected_source_language) {
-      $this->project_machine_translation_repository->cacheTranslation($project, $name->detected_source_language, $target_language, ...$translations);
+    $source = $source_language ?? $detected;
+    $name = $translated['name'] ?? null;
+    if (null === $source || null === $name) {
+      $this->cache->save($this->cache->getItem($key)->set(self::JOB_FAILED)->expiresAfter(self::JOB_TTL));
+
+      return;
     }
 
-    return $translation_result;
+    $this->project_machine_translation_repository->cacheTranslation($project, $source, $target_language, null === $source_language, $name, $translated['description'] ?? null, $translated['credits'] ?? null);
+    $this->cache->deleteItem($key);
   }
 
   /**
@@ -164,12 +216,29 @@ class TranslationDelegate
    */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
+    [$source_language, $target_language] = $this->machineLanguages($source_language, $target_language);
+
+    return $this->api->translate($text, $source_language, $target_language);
+  }
+
+  /**
+   * @return array{0: string|null, 1: string}
+   *
+   * @throws \InvalidArgumentException
+   */
+  private function machineLanguages(?string $source_language, string $target_language): array
+  {
     $source_language = $this->machineLanguage($source_language);
     $target_language = $this->machineLanguage($target_language);
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
 
-    return $this->api->translate($text, $source_language, $target_language);
+    return [$source_language, $target_language];
+  }
+
+  private function jobKey(Project $project, ?string $source_language, string $target_language): string
+  {
+    return 'project_translation.'.$project->getId().'.'.($source_language ?? 'auto').'.'.$target_language;
   }
 
   /**

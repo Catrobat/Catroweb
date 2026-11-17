@@ -140,14 +140,23 @@ export class TranslateProject extends Translation {
   translateProject(sourceLanguage = null, targetLanguage = this.targetLanguage) {
     const params = new URLSearchParams({ target_language: targetLanguage })
     if (sourceLanguage) params.set('source_language', sourceLanguage)
+    const url = `${this.baseUrl}/api/projects/${this.projectId}/translation?${params}`
+    // 202: the server translates in the background (about 1 s per 30 characters); ask again until it is done.
+    // Every 3 s stays below the 30 requests a minute per IP.
+    const deadline = Date.now() + 120_000
 
-    fetch(`${this.baseUrl}/api/projects/${this.projectId}/translation?${params}`, {
-      method: 'GET',
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error(`Translation failed: ${response.status}`)
+    const poll = () =>
+      fetch(url, { method: 'GET' }).then((response) => {
+        if (response.status === 202 && Date.now() < deadline) {
+          return new Promise((resolve) => setTimeout(resolve, 3000)).then(poll)
+        }
+        if (!response.ok || response.status === 202) {
+          throw new Error(`Translation failed: ${response.status}`)
+        }
         return response.json()
       })
+
+    poll()
       .then((data) => {
         this.setTranslatedProjectData(data)
         this.openTranslatedProject()

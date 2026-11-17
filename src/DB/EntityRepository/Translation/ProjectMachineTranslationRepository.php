@@ -22,14 +22,22 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, ProjectMachineTranslation::class);
   }
 
+  /**
+   * A translation of the project's current texts. Without a source language only auto-detected ones count.
+   *
+   * @return array<TranslationResult|null>|null
+   */
   public function getCachedTranslation(Project $project, ?string $source_language, string $target_language): ?array
   {
     $criteria = new Criteria(firstResult: 0, accessRawFieldValues: true)
       ->where(Criteria::expr()->eq('project', $project))
       ->andWhere(Criteria::expr()->eq('target_language', $target_language))
+      ->andWhere(Criteria::expr()->eq('source_hash', ProjectMachineTranslation::sourceHash($project)))
       ->andWhere(Criteria::expr()->neq('cached_name', null))
     ;
-    if (null !== $source_language) {
+    if (null === $source_language) {
+      $criteria->andWhere(Criteria::expr()->eq('auto_detected', true));
+    } else {
       $criteria->andWhere(Criteria::expr()->eq('source_language', $source_language));
     }
 
@@ -42,15 +50,8 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     /** @var ProjectMachineTranslation $entry */
     $entry = $entries[0];
 
-    $translations = [
-      $entry->getCachedName(),
-      $entry->getCachedDescription(),
-      $entry->getCachedCredits(),
-    ];
-
     $result = [];
-
-    foreach ($translations as $translation) {
+    foreach ([$entry->getCachedName(), $entry->getCachedDescription(), $entry->getCachedCredits()] as $translation) {
       if (null === $translation) {
         $result[] = null;
         continue;
@@ -69,12 +70,14 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     return $result;
   }
 
-  public function cacheTranslation(Project $project, string $source_language, string $target_language, string $name, ?string $description = null, ?string $credits = null): void
+  public function cacheTranslation(Project $project, string $source_language, string $target_language, bool $auto_detected, string $name, ?string $description = null, ?string $credits = null): void
   {
     $entry = $this->findOneBy(['project' => $project, 'source_language' => $source_language, 'target_language' => $target_language])
       ?? new ProjectMachineTranslation($project, $source_language, $target_language);
+    // Same source and target give the same text: a picked source that matches a detected one stays usable as detected.
+    $auto_detected = $auto_detected || (null !== $entry->getCachedName() && $entry->isAutoDetected());
     // A translation can be longer than the original name; cached_name is VARCHAR(300) like the name itself.
-    $entry->setCachedTranslation(mb_substr($name, 0, 300), $description, $credits);
+    $entry->setCachedTranslation(mb_substr($name, 0, 300), $description, $credits, ProjectMachineTranslation::sourceHash($project), $auto_detected);
     $this->getEntityManager()->persist($entry);
     try {
       $this->getEntityManager()->flush();

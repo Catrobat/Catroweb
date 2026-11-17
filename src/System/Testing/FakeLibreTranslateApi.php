@@ -10,7 +10,7 @@ use App\Translation\TranslationResult;
 class FakeLibreTranslateApi extends LibreTranslateApi
 {
   #[\Override]
-  public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
+  public function translate(string $text, ?string $source_language, string $target_language, int $timeout = 5): ?TranslationResult
   {
     if ('untranslatable' === $text) {
       return null;

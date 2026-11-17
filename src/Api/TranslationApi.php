@@ -7,6 +7,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Translation\TranslationApiFacade;
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use OpenAPI\Server\Api\TranslationApiInterface;
@@ -51,9 +52,8 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
       return null;
     }
 
-    $etag_value = md5($project->getName().$project->getDescription().$project->getCredits()).$target_language;
+    $etag_value = ProjectMachineTranslation::sourceHash($project).($source_language ?? 'auto').$target_language;
     $etag_header = '"'.$etag_value.'"';
-    $responseHeaders['ETag'] = $etag_header;
 
     $request = $this->request_stack->getCurrentRequest();
     $if_none_match = $request?->headers->get('If-None-Match');
@@ -61,6 +61,7 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
       $candidates = array_map(trim(...), explode(',', $if_none_match));
       foreach ($candidates as $candidate) {
         if (trim($candidate, '"') === $etag_value) {
+          $responseHeaders['ETag'] = $etag_header;
           $responseCode = Response::HTTP_NOT_MODIFIED;
 
           return null;
@@ -68,14 +69,26 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
       }
     }
 
-    if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)) {
-      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
-
-      return null;
-    }
-
+    $loader = $this->facade->getLoader();
     try {
-      $translation_result = $this->facade->getLoader()->translateProject($project, $source_language, $target_language);
+      $translation_result = $loader->getCachedProjectTranslation($project, $source_language, $target_language);
+      if (null === $translation_result) {
+        // Polls while the job runs count too: 30 a minute is a poll every 2 s.
+        if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)) {
+          $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+          return null;
+        }
+
+        if (!$loader->requestProjectTranslation($project, $source_language, $target_language)) {
+          $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
+
+          return null;
+        }
+
+        // In tests the job has run already (sync transport); in production the client asks again.
+        $translation_result = $loader->getCachedProjectTranslation($project, $source_language, $target_language);
+      }
     } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
@@ -83,7 +96,8 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
     }
 
     if (null === $translation_result) {
-      $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
+      $responseHeaders['Retry-After'] = '2';
+      $responseCode = Response::HTTP_ACCEPTED;
 
       return null;
     }
@@ -95,6 +109,7 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
       return null;
     }
 
+    $responseHeaders['ETag'] = $etag_header;
     $responseCode = Response::HTTP_OK;
 
     return $this->facade->getResponseManager()->createProjectTranslationResponse(

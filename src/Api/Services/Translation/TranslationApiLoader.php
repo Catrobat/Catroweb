@@ -21,9 +21,14 @@ class TranslationApiLoader extends AbstractApiLoader
   /**
    * @return array<TranslationResult|null>|null
    */
-  public function translateProject(Project $project, ?string $source_language, string $target_language): ?array
+  public function getCachedProjectTranslation(Project $project, ?string $source_language, string $target_language): ?array
   {
-    return $this->translation_delegate->translateProject($project, $source_language, $target_language);
+    return $this->translation_delegate->getCachedProjectTranslation($project, $source_language, $target_language);
+  }
+
+  public function requestProjectTranslation(Project $project, ?string $source_language, string $target_language): bool
+  {
+    return $this->translation_delegate->requestProjectTranslation($project, $source_language, $target_language);
   }
 
   public function getCustomTranslation(Project $project, string $field, string $language): ?string
