@@ -346,6 +346,7 @@ class TranslationController extends Controller
         400 => 'Bad request (Invalid, or missing parameters)',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         404 => 'Not found',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 

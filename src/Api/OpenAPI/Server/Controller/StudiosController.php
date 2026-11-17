@@ -444,6 +444,7 @@ class StudiosController extends Controller
         403 => 'Insufficient privileges, action not allowed.',
         404 => 'Not found',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -743,6 +744,7 @@ class StudiosController extends Controller
         403 => 'Insufficient privileges, action not allowed.',
         404 => 'Not found',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -2439,6 +2441,7 @@ class StudiosController extends Controller
         404 => 'Not found',
         409 => 'Project already in studio',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -2718,6 +2721,7 @@ class StudiosController extends Controller
         404 => 'Not found',
         409 => 'Already a member; the studio the code belongs to',
         429 => 'Too Many Requests',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
