@@ -6,7 +6,6 @@ namespace App\DB\Entity\Translation;
 
 use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
-use App\Utils\TimeUtils;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Cached machine translation of a project's name, description and credits.
  */
 #[ORM\Table(name: 'project_machine_translation')]
+#[ORM\UniqueConstraint(name: 'uniq_project_machine_translation_languages', columns: ['project_id', 'source_language', 'target_language'])]
 #[ORM\Entity(repositoryClass: ProjectMachineTranslationRepository::class)]
 class ProjectMachineTranslation
 {
@@ -31,23 +31,6 @@ class ProjectMachineTranslation
   #[ORM\Column(type: Types::TEXT, nullable: true)]
   private ?string $cached_credits = null;
 
-  // ponytail: usage bookkeeping of the removed providers, unused. The previous release still reads and writes
-  // these columns (deploy window, rollback), so they stay mapped for one release; then drop them.
-  #[ORM\Column(type: Types::STRING)]
-  protected string $provider = 'libretranslate';
-
-  #[ORM\Column(type: Types::INTEGER)]
-  protected int $usage_count = 1;
-
-  #[ORM\Column(type: Types::FLOAT)]
-  protected float $usage_per_month = 1;
-
-  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-  protected \DateTime $last_modified_at;
-
-  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-  protected \DateTime $created_at;
-
   public function __construct(
     #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Project::class)]
@@ -57,8 +40,6 @@ class ProjectMachineTranslation
     #[ORM\Column(type: Types::STRING, length: 5)]
     protected string $target_language,
   ) {
-    $this->created_at = TimeUtils::getDateTime();
-    $this->last_modified_at = $this->created_at;
   }
 
   public function getProject(): Project

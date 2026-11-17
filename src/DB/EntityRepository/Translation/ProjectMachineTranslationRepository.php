@@ -9,6 +9,7 @@ use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\Translation\TranslationResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -75,7 +76,11 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     // A translation can be longer than the original name; cached_name is VARCHAR(300) like the name itself.
     $entry->setCachedTranslation(mb_substr($name, 0, 300), $description, $credits);
     $this->getEntityManager()->persist($entry);
-    $this->getEntityManager()->flush();
+    try {
+      $this->getEntityManager()->flush();
+    } catch (UniqueConstraintViolationException) {
+      // A concurrent first translation of the same project and languages cached it already.
+    }
   }
 
   public function invalidateCachedTranslation(Project $project): void
