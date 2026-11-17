@@ -114,18 +114,51 @@ class ScanContentImagesHandlerTest extends TestCase
     $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
   }
 
-  public function testTheScreenshotsCountAsOneImage(): void
+  public function testScreenshotsDoNotCountTowardsHiding(): void
   {
-    // The site screenshot is a copy of the project's: both flagged is still one image.
+    // The screenshots show the looks: the site's and the project's screenshot and the look in them are one image.
     (new Filesystem())->dumpFile($this->dir.'missing/screen_p1.png', str_repeat('s', 4_000));
     $scanner = $this->createStub(ContentSafetyScanner::class);
-    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => 's' === $blob[0]
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => 'm' === $blob[0]
+      ? new ContentSafetyResult(safe: true, nsfwScore: 0.01)
+      : new ContentSafetyResult(safe: false, nsfwScore: 0.99));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(3), false,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testTheSameLookInTwoScenesCountsOnce(): void
+  {
+    (new Filesystem())->dumpFile($this->dir.'Scene 2/images/big.png', str_repeat('b', 8_000));
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => 'b' === $blob[0]
       ? new ContentSafetyResult(safe: false, nsfwScore: 0.99)
       : new ContentSafetyResult(safe: true, nsfwScore: 0.01));
 
     $auto_moderation = $this->createMock(AutoModerationService::class);
     $auto_moderation->expects($this->once())->method('flagForReview')->with(
       $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(2), false,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testAnOutageActsOnWhatWasFlaggedBefore(): void
+  {
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => match ($blob[0]) {
+      'b' => new ContentSafetyResult(safe: false, nsfwScore: 0.99),
+      'm' => ContentSafetyResult::unavailable(),
+      default => new ContentSafetyResult(safe: true, nsfwScore: 0.01),
+    });
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(1), false,
     );
 
     $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));

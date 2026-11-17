@@ -7,7 +7,7 @@ A moderator resolves a content report with one of four actions. All of them go t
 | `accept`    | Hide + ban owner   | hidden                                                                                                | banned (profile hidden, all content hidden) | accepted | `admin_confirmed`, plus `admin_banned` on the owner |
 | `hide_warn` | Hide + warn        | hidden; a reported **user** is not banned, their `about` and `currently_working_on` texts are cleared | warning notification, not banned            | accepted | `admin_hide_warned` (user: `admin_warned`)          |
 | `warn`      | Warn               | unchanged (a hidden item or banned user stays hidden)                                                 | warning notification, not banned            | accepted | `admin_warned`                                      |
-| `reject`    | Reject             | restored unless other active reports exist                                                            | untouched                                   | rejected | `admin_reversed`                                    |
+| `reject`    | Reject             | restored unless another report was accepted                                                           | untouched                                   | rejected | `admin_reversed`                                    |
 
 Use `hide_warn` for a first offense (for example suggestive content by a child) and `accept` for clear abuse.
 

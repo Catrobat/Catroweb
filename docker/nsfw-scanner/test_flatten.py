@@ -12,6 +12,9 @@ palette = Image.new("P", (1, 1), 0)
 palette.info["transparency"] = 0
 assert flatten(palette).getpixel((0, 0)) == (255, 255, 255)
 
+huge = Image.new("RGBA", (4000, 100), (0, 0, 0, 0))
+assert flatten(huge).size == (1024, 26), "shrunk before the RGBA copies"
+
 opaque = Image.new("RGB", (1, 1), (0, 0, 0))
 assert flatten(opaque).getpixel((0, 0)) == (0, 0, 0), "opaque images stay as they are"
 

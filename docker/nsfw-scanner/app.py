@@ -10,7 +10,6 @@ app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10 MB
 classifier = pipeline("image-classification", model="Falconsai/nsfw_image_detection")
 
 
-
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok"})

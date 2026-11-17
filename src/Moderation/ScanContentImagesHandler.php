@@ -22,9 +22,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 /**
  * Sends a project's screenshots and its largest look images (or a studio's cover) to the NSFW scanner and flags
  * the content when images score at or above the threshold: one such image only queues it for review (it stays
- * visible), two or more, or one at or above the hide threshold, hide it until a moderator has looked. The
- * screenshots count as one image (the site's is a copy of the project's). An image the scanner refuses (4xx) is
- * skipped; scanner down (timeout, 5xx): logged, the scan stops and acts on what it found so far.
+ * visible), two or more looks, or one image at or above the hide threshold, hide it until a moderator has looked.
+ * Screenshots never count towards the two: they show the looks. An image the scanner refuses (4xx) is skipped;
+ * scanner down (timeout, 5xx): logged, the scan stops and acts on what it found so far.
  */
 #[AsMessageHandler]
 final readonly class ScanContentImagesHandler
@@ -64,14 +64,14 @@ final readonly class ScanContentImagesHandler
   }
 
   /**
-   * @return string|null what was found (null: all images safe, or the scanner is unavailable); flagged when $flag
+   * @return string|null what was found (null: no image flagged before the end or an outage); flagged when $flag
    */
   public function scan(ScanContentImages $message, bool $flag): ?string
   {
     $content_type = ContentType::from($message->content_type);
     $flagged = [];
-    $flagged_images = [];
-    foreach ($this->imagePaths($content_type, $message->content_id) as $path) {
+    $flagged_looks = [];
+    foreach ($this->imagePaths($content_type, $message->content_id) as $path => $is_look) {
       $blob = @file_get_contents($path);
       if (false === $blob) {
         continue;
@@ -92,8 +92,9 @@ final readonly class ScanContentImagesHandler
 
       if ($result->nsfwScore >= $this->threshold) {
         $flagged[] = ['type' => 'image', 'name' => basename($path), 'score' => $result->nsfwScore];
-        // Identical looks count once, all screenshots as one.
-        $flagged_images[str_contains($path, '/images/') ? md5($blob) : 'screenshot'] = true;
+        if ($is_look) {
+          $flagged_looks[md5($blob)] = true; // the same look in two scenes counts once
+        }
       }
     }
 
@@ -103,7 +104,7 @@ final readonly class ScanContentImagesHandler
 
     usort($flagged, static fn (array $a, array $b): int => $b['score'] <=> $a['score']);
     $score = $flagged[0]['score'];
-    $hide = count($flagged_images) >= $this->hide_min_images || $score >= $this->hide_threshold;
+    $hide = count($flagged_looks) >= $this->hide_min_images || $score >= $this->hide_threshold;
     $note = 'Automatic: '.implode('; ', array_map(
       static fn (array $image): string => sprintf('image "%s" has NSFW score %.3f', $image['name'], $image['score']),
       $flagged,
@@ -124,7 +125,7 @@ final readonly class ScanContentImagesHandler
   }
 
   /**
-   * @return list<string>
+   * @return array<string, bool> path => whether it is a look (or the studio cover), not a screenshot
    */
   private function imagePaths(ContentType $content_type, string $content_id): array
   {
@@ -133,7 +134,7 @@ final readonly class ScanContentImagesHandler
       $path = null === $cover ? null : rtrim($this->studio_manager->getStudioCoverDir(), '/').'/'
         .ImageVariantLayout::filename($cover, ImageVariantLayout::VARIANT_CARD, ImageVariantLayout::DPR_1X, ImageVariantLayout::FORMAT_WEBP);
 
-      return null !== $path && is_file($path) ? [$path] : [];
+      return null !== $path && is_file($path) ? [$path => true] : [];
     }
 
     $project = $this->entity_manager->find(Project::class, $content_id);
@@ -156,14 +157,14 @@ final readonly class ScanContentImagesHandler
     }
 
     arsort($images);
-    $paths = array_merge($paths, array_keys($images));
+    $paths = array_fill_keys($paths, false) + array_fill_keys(array_keys($images), true);
 
     $paths = array_filter($paths, static function (string $path): bool {
       $size = @filesize($path);
 
       return false !== $size && $size >= self::MIN_BYTES && $size <= self::MAX_BYTES;
-    });
+    }, ARRAY_FILTER_USE_KEY);
 
-    return array_slice(array_values(array_unique($paths)), 0, self::MAX_IMAGES);
+    return array_slice($paths, 0, self::MAX_IMAGES, true);
   }
 }

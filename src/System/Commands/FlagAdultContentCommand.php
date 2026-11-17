@@ -165,6 +165,6 @@ class FlagAdultContentCommand extends Command
       }
     }
 
-    $io->success(sprintf('%d image hits%s. A scanner outage counts as no hit; see the log.', $hits, $apply ? ' flagged' : ''));
+    $io->success(sprintf('%d image hits%s. A scanner outage ends a scan with what it found so far; see the log.', $hits, $apply ? ' flagged' : ''));
   }
 }

@@ -35,9 +35,9 @@ Where it runs:
 `ScanContentImages` (queue `default`) sends the site screenshot, the project's own screenshots and then its largest look images to the scanner: at most 20 images between 2 KB and 10 MB. Studios: the cover's `card` WebP variant. All of them are scanned; every image at or above `CONTENT_SAFETY_CONTENT_THRESHOLD` (0.97) is flagged:
 
 - one flagged image queues the content for review and leaves it visible;
-- `CONTENT_SAFETY_HIDE_MIN_IMAGES` (2) flagged images, or one at or above `CONTENT_SAFETY_HIDE_THRESHOLD` (0.995), hide it until review.
+- `CONTENT_SAFETY_HIDE_MIN_IMAGES` (2) flagged looks, or one image at or above `CONTENT_SAFETY_HIDE_THRESHOLD` (0.995), hide it until review.
 
-The screenshots count as one image (the site screenshot is a copy of the project's), identical looks as one. Why: drawn and anime game art (Friday Night Funkin', Dragon Ball, Sakura School Simulator) scored 0.988–0.993 in production, and all four hides by a single image were false positives. An image the scanner refuses (4xx, e.g. a format it can't read) is skipped and logged. If the scanner is down (timeout, connection error, 5xx) or disabled the scan stops, logs a warning and acts only on what it flagged before; the job does not retry. With `CONTENT_SAFETY_ENABLED=false` (tests) nothing is queued.
+Only looks count towards the two (the same look in two scenes once): the screenshots show the looks, so a flagged look and the screenshot showing it are one image. Why: drawn and anime game art (Friday Night Funkin', Dragon Ball, Sakura School Simulator) scored 0.988–0.993 in production, and all four hides by a single image were false positives. An image the scanner refuses (4xx, e.g. a format it can't read) is skipped and logged. If the scanner is down (timeout, connection error, 5xx) or disabled the scan stops, logs a warning and acts only on what it flagged before; the job does not retry. With `CONTENT_SAFETY_ENABLED=false` (tests) nothing is queued.
 
 ## Backfill
 

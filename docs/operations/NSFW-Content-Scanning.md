@@ -11,14 +11,14 @@ The scanner composites transparent images (alpha, palette transparency) onto whi
 
 ## Configuration
 
-| Variable                           | Default                    | Notes                                             |
-| ---------------------------------- | -------------------------- | ------------------------------------------------- |
-| `CONTENT_SAFETY_URL`               | `http://nsfw-scanner:5000` | prod: `http://127.0.0.1:5000`, set in `.env.prod` |
-| `CONTENT_SAFETY_ENABLED`           | `true`                     | `false` in `.env.test`                            |
-| `CONTENT_SAFETY_THRESHOLD`         | `0.7`                      | Avatars (prod 0.9): rejected at this score        |
-| `CONTENT_SAFETY_CONTENT_THRESHOLD` | `0.97`                     | Project/studio images: flagged at this score      |
-| `CONTENT_SAFETY_HIDE_THRESHOLD`    | `0.995`                    | One flagged image this sure hides the content     |
-| `CONTENT_SAFETY_HIDE_MIN_IMAGES`   | `2`                        | This many flagged images hide the content         |
+| Variable                           | Default                    | Notes                                              |
+| ---------------------------------- | -------------------------- | -------------------------------------------------- |
+| `CONTENT_SAFETY_URL`               | `http://nsfw-scanner:5000` | prod: `http://127.0.0.1:5000`, set in `.env.prod`  |
+| `CONTENT_SAFETY_ENABLED`           | `true`                     | `false` in `.env.test`                             |
+| `CONTENT_SAFETY_THRESHOLD`         | `0.7`                      | Avatars (prod 0.9): rejected at this score         |
+| `CONTENT_SAFETY_CONTENT_THRESHOLD` | `0.97`                     | Project/studio images: flagged at this score       |
+| `CONTENT_SAFETY_HIDE_THRESHOLD`    | `0.995`                    | One flagged image this sure hides the content      |
+| `CONTENT_SAFETY_HIDE_MIN_IMAGES`   | `2`                        | This many different flagged looks hide the content |
 
 Dev: the scanner starts with `docker/docker-compose.dev.yaml` on port 5050 (`curl http://localhost:5050/health`). The first build downloads the ~500 MB model (~5 min).
 

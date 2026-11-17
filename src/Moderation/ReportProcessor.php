@@ -161,10 +161,10 @@ class ReportProcessor
         $this->warnContentOwner($content_type, $content_id, $message);
         break;
       default:
-        // Only restore content visibility if no other active (new/accepted) reports exist.
-        // This prevents un-hiding content that was legitimately reported by others.
+        // Only restore content visibility if no other report was accepted: that hide decision stands. Pending
+        // reports don't count, the reject resolves them too (a review-only auto flag must not keep it hidden).
         $report_id = $report->getId();
-        $has_other_reports = null !== $report_id && $this->report_repository->hasOtherActiveReports(
+        $has_other_reports = null !== $report_id && $this->report_repository->hasOtherAcceptedReports(
           $report->getContentType(),
           $content_id,
           $report_id,
