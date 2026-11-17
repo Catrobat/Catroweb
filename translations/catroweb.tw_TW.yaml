@@ -112,7 +112,7 @@ project:
     rate_limited: 'Woade nneɛma pii dodo ato so. Mesrɛ wo, akyiri yi san bɔ mmɔden.'
     selected_file: 'Fael a woapaw:'
     info:
-      file_size: 'Fael kɛseɛ a ɛsen biara yɛ 100 MB.'
+      file_size: 'Fael kɛseɛ a ɛsen biara yɛ %size% MB.'
       app_upload: 'Wobɛtumi afi Pocket Code app no mu de nnwuma ato so tẽẽ. Hyɛ no nsow sɛ yɛresiesie apps no seesei na wɔmfa web so nto so seesei.'
       retention: 'Sɛ wɔamfa nnwuma a wɔde ato so no anyɛ hwee bere bi a, wɔbɛyi afi hɔ. Wura mu daa anaa ma nnipa ntwe wo adwuma no na ɛntena hɔ nkyɛ.'
       protection: 'Ahwɛfoɔ bɛtumi abɔ nnwuma a ɛyɛ papa anaa agye din ho ban sɛnea wɔrenyi mfi hɔ.'

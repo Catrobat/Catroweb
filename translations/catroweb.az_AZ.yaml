@@ -112,7 +112,7 @@ project:
     rate_limited: 'Həddindən çox yükləmə. Bir az sonra yenidən cəhd et.'
     selected_file: 'Seçilmiş fayl:'
     info:
-      file_size: 'Maksimum fayl ölçüsü 100 MB-dır.'
+      file_size: 'Maksimum fayl ölçüsü %size% MB-dır.'
       app_upload: 'Layihələri birbaşa Pocket Code tətbiqindən də yükləyə bilərsən. Nəzərə al ki, tətbiqlər hazırda yenidən işlənir və hələlik veb yükləməni dəstəkləmir.'
       retention: 'Yüklənmiş layihələr müəyyən müddət aktivlik olmadıqda avtomatik silinir. Saxlanma müddətini uzatmaq üçün mütəmadi daxil ol və ya layihənin endirilməsini təmin et.'
       protection: 'Xüsusilə yaxşı və ya populyar layihələr moderatorlar tərəfindən avtomatik silinmədən qoruna bilər.'

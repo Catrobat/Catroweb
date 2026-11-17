@@ -112,7 +112,7 @@ project:
     rate_limited: 'Demasiadas subidas. Téntao de novo máis tarde.'
     selected_file: 'Ficheiro seleccionado:'
     info:
-      file_size: 'O tamaño máximo do ficheiro é de 100 MB.'
+      file_size: 'O tamaño máximo do ficheiro é de %size% MB.'
       app_upload: 'Tamén podes subir proxectos directamente desde a aplicación Pocket Code. Ten en conta que as aplicacións se están a renovar e de momento non admiten a subida web.'
       retention: 'Os proxectos subidos elimínanse automaticamente despois dun período de inactividade. Inicia sesión regularmente ou consegue descargas do teu proxecto para prolongar a súa conservación.'
       protection: 'Os moderadores poden protexer da eliminación automática os proxectos especialmente bos ou populares.'

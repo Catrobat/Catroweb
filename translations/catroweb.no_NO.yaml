@@ -112,7 +112,7 @@ project:
     rate_limited: 'For mange opplastinger. Prøv igjen senere.'
     selected_file: 'Valgt fil:'
     info:
-      file_size: 'Maksimal filstørrelse er 100 MB.'
+      file_size: 'Maksimal filstørrelse er %size% MB.'
       app_upload: 'Du kan også laste opp prosjekter direkte fra Pocket Code-appen. Merk at appene for øyeblikket blir omarbeidet og ikke støtter opplasting til nettet akkurat nå.'
       retention: 'Opplastede prosjekter fjernes automatisk etter en periode uten aktivitet. Logg inn jevnlig eller få nedlastinger av prosjektet ditt for å forlenge lagringstiden.'
       protection: 'Spesielt gode eller populære prosjekter kan beskyttes mot automatisk sletting av moderatorer.'

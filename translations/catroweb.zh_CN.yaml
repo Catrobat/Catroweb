@@ -112,7 +112,7 @@ project:
     rate_limited: "上传次数过多，请稍后再试。"
     selected_file: "已选文件："
     info:
-      file_size: "文件大小上限为 100 MB。"
+      file_size: "文件大小上限为 %size% MB。"
       app_upload: "你也可以直接从 Pocket Code 应用上传项目。请注意，应用目前正在重新开发，暂时不支持网页上传。"
       retention: "上传的项目在一段时间不活跃后会被自动删除。定期登录或让你的项目获得下载，即可延长保留时间。"
       protection: "特别优秀或受欢迎的项目可能会被版主保护，不会被自动删除。"

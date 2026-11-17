@@ -112,7 +112,7 @@ project:
     rate_limited: 'Túl sok feltöltés. Próbáld újra később.'
     selected_file: 'Kiválasztott fájl:'
     info:
-      file_size: 'A maximális fájlméret 100 MB.'
+      file_size: 'A maximális fájlméret %size% MB.'
       app_upload: 'Projekteket közvetlenül a Pocket Code alkalmazásból is feltölthetsz. Az alkalmazásokat jelenleg átdolgozzuk, ezért most nem támogatják a webes feltöltést.'
       retention: 'A feltöltött projekteket egy idő utáni inaktivitás esetén automatikusan eltávolítjuk. Jelentkezz be rendszeresen, vagy gyűjts letöltéseket a projektedre, hogy tovább megmaradjon.'
       protection: 'A különösen jó vagy népszerű projekteket a moderátorok megvédhetik az automatikus törléstől.'

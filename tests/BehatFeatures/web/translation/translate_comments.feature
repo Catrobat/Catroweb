@@ -82,7 +82,7 @@ Feature: Project comments should be translatable via a button
     When I select "ru" from "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select"
     And I click ".translation-refresh-button"
     And I wait for AJAX to finish
-    Then I wait for the element "#share-snackbar-label" to contain "Machine translation is not available right now"
+    Then I wait for the element "#share-snackbar-label" to contain "Machine translation is not available for this language"
     And the "#comment-text-translation-00000000-0000-0000-0000-000000000001" element should contain "translated c1"
     And the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "en"
 

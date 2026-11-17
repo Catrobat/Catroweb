@@ -131,13 +131,13 @@ export class TranslateProject extends Translation {
     }
   }
 
-  projectNotTranslated() {
+  projectNotTranslated(error) {
     document.getElementById('project-translation-loading-spinner').style.display = 'none'
     // A failed "translate again" keeps the translation that is already shown.
     if (document.getElementById('remove-project-translation-button').style.display !== 'block') {
       document.getElementById('project-translation-button').style.display = 'block'
     }
-    this.showTranslationFailed()
+    this.showTranslationFailed(error)
   }
 
   translateProject(sourceLanguage = null, targetLanguage = this.targetLanguage) {
@@ -157,7 +157,7 @@ export class TranslateProject extends Translation {
           return new Promise((resolve) => setTimeout(resolve, 3000)).then(poll)
         }
         if (!response.ok || response.status === 202) {
-          throw new Error(`Translation failed: ${response.status}`)
+          throw new Error(`Translation failed: ${response.status}`, { cause: response.status })
         }
         return response.json()
       })
@@ -168,8 +168,8 @@ export class TranslateProject extends Translation {
         this.setTranslatedProjectData(data)
         this.openTranslatedProject()
       })
-      .catch(() => {
-        if (isCurrent()) this.projectNotTranslated()
+      .catch((error) => {
+        if (isCurrent()) this.projectNotTranslated(error)
       })
   }
 }

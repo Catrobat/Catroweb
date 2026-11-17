@@ -112,7 +112,7 @@ project:
     rate_limited: 'Terlalu banyak unggahan. Silakan coba lagi nanti.'
     selected_file: 'File yang dipilih:'
     info:
-      file_size: 'Ukuran file maksimal 100 MB.'
+      file_size: 'Ukuran file maksimal %size% MB.'
       app_upload: 'Kamu juga bisa mengunggah proyek langsung dari aplikasi Pocket Code. Perlu diketahui, aplikasinya sedang dikerjakan ulang dan saat ini belum mendukung unggahan web.'
       retention: 'Proyek yang diunggah akan dihapus otomatis setelah tidak aktif selama beberapa waktu. Masuklah secara rutin atau dapatkan unduhan pada proyekmu agar proyekmu disimpan lebih lama.'
       protection: 'Proyek yang sangat bagus atau populer bisa dilindungi oleh moderator dari penghapusan otomatis.'

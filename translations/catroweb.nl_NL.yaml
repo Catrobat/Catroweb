@@ -112,7 +112,7 @@ project:
     rate_limited: 'Te veel uploads. Probeer het later opnieuw.'
     selected_file: 'Gekozen bestand:'
     info:
-      file_size: 'De maximale bestandsgrootte is 100 MB.'
+      file_size: 'De maximale bestandsgrootte is %size% MB.'
       app_upload: 'Je kunt projecten ook rechtstreeks vanuit de Pocket Code-app uploaden. Let op: de apps worden momenteel vernieuwd en ondersteunen uploaden via het web op dit moment niet.'
       retention: 'Geüploade projecten worden na een periode van inactiviteit automatisch verwijderd. Log regelmatig in of zorg voor downloads van je project om het langer te bewaren.'
       protection: 'Bijzonder goede of populaire projecten kunnen door moderators tegen automatisch verwijderen worden beschermd.'

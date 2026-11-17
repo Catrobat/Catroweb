@@ -112,7 +112,7 @@ project:
     rate_limited: 'Envios demais. Tente novamente mais tarde.'
     selected_file: 'Arquivo selecionado:'
     info:
-      file_size: 'O tamanho máximo do arquivo é 100 MB.'
+      file_size: 'O tamanho máximo do arquivo é %size% MB.'
       app_upload: 'Você também pode enviar projetos diretamente pelo app Pocket Code. Observação: os apps estão sendo reformulados e no momento não oferecem suporte ao envio pela web.'
       retention: 'Projetos enviados são removidos automaticamente após um período de inatividade. Entre regularmente ou consiga downloads no seu projeto para que ele fique guardado por mais tempo.'
       protection: 'Projetos especialmente bons ou populares podem ser protegidos da exclusão automática pelos moderadores.'

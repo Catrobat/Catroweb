@@ -33,6 +33,7 @@ Feature: Project upload page allows users to upload .catrobat files
     And I am on "/app/project/upload"
     And I wait for the page to be loaded
     Then the element ".project-upload" should have a attribute "data-max-file-size" with value "209715200"
+    And I should see "Maximum file size is 200 MB."
     When I lower the upload size limit of the page to 100 bytes
     And I attach the project file "test.catrobat" to "upload-file-input"
     Then I wait for the element "#upload-error-text" to contain "File is too large"
