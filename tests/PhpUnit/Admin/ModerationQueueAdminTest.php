@@ -78,6 +78,7 @@ class ModerationQueueAdminTest extends TestCase
       ['type' => 'text', 'name' => '18+'],
       ['type' => 'text', 'name' => 'only'],
       ['type' => 'text', 'name' => 'game', 'field' => 'name'],
+      ['type' => 'text', 'name' => 'player', 'field' => 'description'], // in the code only: not highlighted there
       ['type' => 'text', 'name' => 'nsfw'],
       ['type' => 'text', 'name' => ''],
     ]);
@@ -92,6 +93,7 @@ class ModerationQueueAdminTest extends TestCase
       ['type' => 'text', 'name' => '18+', 'score' => null, 'url' => null, 'label' => 'Description', 'text' => 'Only for 18+'],
       ['type' => 'text', 'name' => 'only', 'score' => null, 'url' => null, 'label' => 'Description', 'text' => 'Only for 18+'],
       ['type' => 'text', 'name' => 'game', 'score' => null, 'url' => null, 'label' => 'Name', 'text' => 'Space game'],
+      ['type' => 'text', 'name' => 'player', 'score' => null, 'url' => null, 'label' => null, 'text' => null],
       ['type' => 'text', 'name' => 'nsfw', 'score' => null, 'url' => null, 'label' => 'Code', 'text' => "n\u{200B}sfw"],
     ], $assets['flagged']);
     $this->assertSame(['/resources/extract/p1/images/other.png'], $assets['images']);

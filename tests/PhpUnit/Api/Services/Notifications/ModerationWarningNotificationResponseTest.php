@@ -59,11 +59,11 @@ class ModerationWarningNotificationResponseTest extends TestCase
     self::assertSame('Custom text', $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, 'Custom text'));
   }
 
-  public function testAnAcceptedReportGetsTheHiddenDefaultAndItsCategory(): void
+  public function testAnAcceptedReportGetsTheHiddenDefaultItsCategoryAndTheDeletion(): void
   {
     self::assertSame(
-      'catro-notifications.moderation-hidden.message catro-notifications.moderation-reason.category.spam',
-      $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDDEN, '', reason: ['category' => 'spam']),
+      'catro-notifications.moderation-hidden.message catro-notifications.moderation-reason.category.spam catro-notifications.moderation-warning.deletion 14',
+      $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDDEN, '', true, ['category' => 'spam']),
     );
   }
 

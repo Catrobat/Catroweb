@@ -228,10 +228,10 @@ class NotificationsResponseManager extends AbstractResponseManager
         $message .= ' '.$reason;
       }
 
-      // Only hide_warn hides; said while the content is still hidden (catro:moderation:purge-hidden deletes it).
+      // Only hide_warn and accept hide; said while the content is still hidden (catro:moderation:purge-hidden deletes it).
       $hidden_type = ContentType::tryFrom((string) $notification->getContentType());
       $hidden_id = $notification->getContentId();
-      if (ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING === $action
+      if (in_array($action, [ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, ReportProcessor::NOTIFICATION_ADMIN_HIDDEN], true)
         && $hidden_type instanceof ContentType && null !== $hidden_id
         && $this->content_visibility_manager->isContentHidden($hidden_type, $hidden_id)) {
         $message .= ' '.$this->trans('catro-notifications.moderation-warning.deletion', ['%days%' => PurgeHiddenContentCommand::DAYS]);
