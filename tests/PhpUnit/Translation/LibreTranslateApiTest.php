@@ -58,7 +58,7 @@ final class LibreTranslateApiTest extends TestCase
   public function testRejectedRequestIsNotLoggedAsAFailure(): void
   {
     $logger = $this->createMock(LoggerInterface::class);
-    $logger->expects($this->never())->method('warning');
+    $logger->expects($this->never())->method('error');
     $logger->expects($this->once())->method('notice')->with($this->stringContains('Machine translation rejected'));
     $client = new MockHttpClient(new JsonMockResponse(['error' => 'xx is not supported'], ['http_code' => 400]));
 
@@ -69,7 +69,7 @@ final class LibreTranslateApiTest extends TestCase
   {
     foreach ([400, 403, 404, 429, 500] as $status) {
       $logger = $this->createMock(LoggerInterface::class);
-      $logger->expects($this->once())->method('warning')->with($this->stringContains('Machine translation failed'));
+      $logger->expects($this->once())->method('error')->with($this->stringContains('Machine translation failed'));
       $client = new MockHttpClient(new JsonMockResponse(['error' => 'busy'], ['http_code' => $status]));
 
       $this->assertNull($this->api($client, $logger)->translate('Hello', 'en', 'de'));
@@ -79,7 +79,7 @@ final class LibreTranslateApiTest extends TestCase
   public function testSiteWideLimitCountsLibreTranslateCalls(): void
   {
     $logger = $this->createMock(LoggerInterface::class);
-    $logger->expects($this->once())->method('warning')->with($this->stringContains('site-wide translation limit reached'));
+    $logger->expects($this->once())->method('error')->with($this->stringContains('site-wide translation limit reached'));
     $client = new MockHttpClient([new JsonMockResponse(['translatedText' => 'Hallo'])]);
     $limiter = new RateLimiterFactory(['id' => 'phpunit_lt_limited', 'policy' => 'fixed_window', 'limit' => 1, 'interval' => '1 minute'], new InMemoryStorage());
     $api = $this->api($client, $logger, $limiter);
@@ -101,7 +101,7 @@ final class LibreTranslateApiTest extends TestCase
   public function testNetworkErrorIsLoggedAndReturnsNull(): void
   {
     $logger = $this->createMock(LoggerInterface::class);
-    $logger->expects($this->once())->method('warning')->with($this->stringContains('Machine translation failed'));
+    $logger->expects($this->once())->method('error')->with($this->stringContains('Machine translation failed'));
     $client = new MockHttpClient(static fn (): never => throw new TransportException('Connection refused'));
 
     $this->assertNull($this->api($client, $logger)->translate('Hello', null, 'de'));
@@ -127,7 +127,7 @@ final class LibreTranslateApiTest extends TestCase
   public function testMalformedLanguageListIsTreatedAsUnavailable(): void
   {
     $logger = $this->createMock(LoggerInterface::class);
-    $logger->expects($this->once())->method('warning')->with($this->stringContains('LibreTranslate languages unavailable'));
+    $logger->expects($this->once())->method('error')->with($this->stringContains('LibreTranslate languages unavailable'));
     $client = new MockHttpClient(new JsonMockResponse(['error' => 'not a list']));
 
     $this->assertSame([], $this->api($client, $logger)->getSupportedLanguages());

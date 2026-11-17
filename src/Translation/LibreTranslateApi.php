@@ -98,8 +98,8 @@ class LibreTranslateApi
 
   private function failed(\Throwable $e, string $text, ?string $source_language, string $target_language): null
   {
-    // The infra watchdog counts this exact message.
-    $this->logger->warning(sprintf(
+    // The infra watchdog counts this exact message. Error level: prod's fingers_crossed handler drops warnings.
+    $this->logger->error(sprintf(
       'Machine translation failed: %s, source: %s, target: %s, text length: %d',
       $e->getMessage(), $source_language ?? 'auto', $target_language, mb_strlen($text),
     ));
@@ -119,7 +119,7 @@ class LibreTranslateApi
       } catch (ExceptionInterface $e) {
         // Rendered into every project page: retry soon, but don't make each page wait for a dead server.
         $item->expiresAfter(300);
-        $this->logger->warning('LibreTranslate languages unavailable: '.$e->getMessage());
+        $this->logger->error('LibreTranslate languages unavailable: '.$e->getMessage());
 
         return [];
       }
@@ -127,7 +127,7 @@ class LibreTranslateApi
       $codes = array_map($this->fromLibreTranslate(...), array_filter(array_column($languages, 'code'), is_string(...)));
       if ([] === $codes) {
         $item->expiresAfter(300);
-        $this->logger->warning('LibreTranslate languages unavailable: empty or malformed /languages response');
+        $this->logger->error('LibreTranslate languages unavailable: empty or malformed /languages response');
       }
 
       return array_values($codes);
