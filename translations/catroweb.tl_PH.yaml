@@ -112,7 +112,7 @@ project:
     rate_limited: 'Masyadong maraming upload. Pakisubukan ulit mamaya.'
     selected_file: 'Napiling file:'
     info:
-      file_size: 'Ang pinakamalaking laki ng file ay 100 MB.'
+      file_size: 'Ang pinakamalaking laki ng file ay %size% MB.'
       app_upload: 'Maaari ka ring mag-upload ng mga proyekto nang direkta mula sa Pocket Code app. Tandaan na kasalukuyang inaayos ang mga app at hindi pa sinusuportahan ang pag-upload sa web sa ngayon.'
       retention: 'Awtomatikong buburahin ang mga na-upload na proyekto pagkatapos ng isang panahon ng kawalan ng aktibidad. Mag-login nang regular o magkaroon ng mga download sa iyong proyekto para mas tumagal ito.'
       protection: 'Maaaring protektahan ng mga moderator mula sa awtomatikong pagbura ang mga partikular na mahusay o sikat na proyekto.'

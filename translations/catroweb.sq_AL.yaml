@@ -112,7 +112,7 @@ project:
     rate_limited: Shumë ngarkime. Të lutem provo përsëri më vonë.
     selected_file: 'Skedari i zgjedhur:'
     info:
-      file_size: Madhësia maksimale e skedarit është 100 MB.
+      file_size: Madhësia maksimale e skedarit është %size% MB.
       app_upload: Mund të ngarkosh projekte edhe direkt nga aplikacioni Pocket Code. Ki parasysh që aplikacionet po ripunohen aktualisht dhe për momentin nuk mbështesin ngarkimin në web.
       retention: Projektet e ngarkuara hiqen automatikisht pas një periudhe pasiviteti. Hyr rregullisht ose merr shkarkime për projektin tënd që të zgjatet ruajtja e tij.
       protection: Projektet veçanërisht të mira ose të njohura mund të mbrohen nga moderatorët ndaj fshirjes automatike.

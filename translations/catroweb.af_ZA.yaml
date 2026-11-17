@@ -112,7 +112,7 @@ project:
     rate_limited: Te veel oplaaie. Probeer asseblief later weer.
     selected_file: 'Gekose lêer:'
     info:
-      file_size: Die maksimum lêergrootte is 100 MB.
+      file_size: Die maksimum lêergrootte is %size% MB.
       app_upload: Jy kan ook projekte direk vanuit die Pocket Code-app oplaai. Let daarop dat die apps tans herwerk word en nog nie web-oplaai ondersteun nie.
       retention: Opgelaaide projekte word ná 'n tydperk van onaktiwiteit outomaties verwyder. Teken gereeld aan of kry aflaaie op jou projek om die bewaartyd te verleng.
       protection: Besonder goeie of gewilde projekte kan deur moderators teen outomatiese skrapping beskerm word.

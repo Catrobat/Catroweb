@@ -112,7 +112,7 @@ project:
     rate_limited: "Terlalu banyak muat naik. Sila cuba lagi nanti."
     selected_file: "Fail dipilih:"
     info:
-      file_size: "Saiz fail maksimum ialah 100 MB."
+      file_size: "Saiz fail maksimum ialah %size% MB."
       app_upload: "Kamu juga boleh memuat naik projek terus dari aplikasi Pocket Code. Ambil perhatian bahawa aplikasi sedang diolah semula dan tidak menyokong muat naik web buat masa ini."
       retention: "Projek yang dimuat naik akan dibuang secara automatik selepas tempoh tidak aktif. Log masuk dengan kerap atau dapatkan muat turun pada projek kamu untuk melanjutkan tempoh simpanannya."
       protection: "Projek yang sangat bagus atau popular boleh dilindungi daripada pemadaman automatik oleh moderator."

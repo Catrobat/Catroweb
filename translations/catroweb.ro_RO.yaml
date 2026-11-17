@@ -112,7 +112,7 @@ project:
     rate_limited: "Prea multe încărcări. Încearcă din nou mai târziu."
     selected_file: "Fișier selectat:"
     info:
-      file_size: "Dimensiunea maximă a fișierului este de 100 MB."
+      file_size: "Dimensiunea maximă a fișierului este de %size% MB."
       app_upload: "Poți încărca proiecte și direct din aplicația Pocket Code. Reține că aplicațiile sunt în curs de refacere și momentan nu suportă încărcarea pe web."
       retention: "Proiectele încărcate sunt șterse automat după o perioadă de inactivitate. Conectează-te regulat sau adună descărcări la proiectul tău ca să-i prelungești păstrarea."
       protection: "Proiectele deosebit de bune sau populare pot fi protejate de moderatori împotriva ștergerii automate."

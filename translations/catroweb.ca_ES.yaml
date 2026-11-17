@@ -112,7 +112,7 @@ project:
     rate_limited: Massa pujades. Torna-ho a provar més tard.
     selected_file: 'Fitxer seleccionat:'
     info:
-      file_size: La mida màxima del fitxer és de 100 MB.
+      file_size: La mida màxima del fitxer és de %size% MB.
       app_upload: També pots pujar projectes directament des de l'aplicació Pocket Code. Tingues en compte que les aplicacions s'estan refent i de moment no admeten la pujada web.
       retention: Els projectes pujats s'eliminen automàticament després d'un període d'inactivitat. Inicia sessió regularment o aconsegueix descàrregues del teu projecte per allargar-ne la conservació.
       protection: Els moderadors poden protegir de l'eliminació automàtica els projectes especialment bons o populars.

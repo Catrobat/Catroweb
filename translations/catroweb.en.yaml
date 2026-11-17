@@ -118,7 +118,7 @@ project:
     rate_limited: Too many uploads. Please try again later.
     selected_file: 'Selected file:'
     info:
-      file_size: Maximum file size is 100 MB.
+      file_size: Maximum file size is %size% MB.
       app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
       retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
       protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
@@ -225,6 +225,7 @@ project:
   translateAgain: Translate again with these languages
   prefillMachineTranslation: Fill in machine translation
   machineTranslationFailed: Machine translation is not available right now. Please try again later.
+  machineTranslationUnsupported: Machine translation is not available for this language.
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
   save: Save

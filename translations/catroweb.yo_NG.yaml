@@ -112,7 +112,7 @@ project:
     rate_limited: "Gbígbé sókè ti pọ̀ jù. Jọ̀wọ́ gbìyànjú lẹ́yìn náà."
     selected_file: "Fáìlì tí a yàn:"
     info:
-      file_size: "Ìwọ̀n fáìlì tó pọ̀ jùlọ jẹ́ 100 MB."
+      file_size: "Ìwọ̀n fáìlì tó pọ̀ jùlọ jẹ́ %size% MB."
       app_upload: "O tún lè gbé àwọn iṣẹ́ sókè tààrà láti inú áàpù Pocket Code. Ṣàkíyèsí pé à ń tún àwọn áàpù ṣe lọ́wọ́lọ́wọ́, wọn kò sì ṣe àtìlẹ́yìn fún gbígbé sókè lórí wẹ́ẹ̀bù báyìí."
       retention: "A óò yọ àwọn iṣẹ́ tí a gbé sókè kúrò fúnra rẹ̀ lẹ́yìn àkókò àìṣiṣẹ́. Máa wọlé déédéé tàbí jẹ́ kí wọ́n ṣe ìgbàsílẹ̀ iṣẹ́ rẹ láti fa àkókò ìpamọ́ rẹ̀ gùn."
       protection: "Àwọn alábòójútó lè dáàbò bo àwọn iṣẹ́ tí ó dára gan-an tàbí tí ó gbajúmọ̀ kúrò lọ́wọ́ píparẹ́ aládàáṣe."

@@ -112,7 +112,7 @@ project:
     rate_limited: 'Igoera gehiegi. Saiatu berriro geroago.'
     selected_file: 'Hautatutako fitxategia:'
     info:
-      file_size: 'Fitxategiaren gehienezko tamaina 100 MB da.'
+      file_size: 'Fitxategiaren gehienezko tamaina %size% MB da.'
       app_upload: 'Proiektuak zuzenean Pocket Code aplikaziotik ere igo ditzakezu. Kontuan izan aplikazioak berrantolatzen ari direla eta une honetan ez dutela web bidezko igoerarik onartzen.'
       retention: 'Igotako proiektuak automatikoki ezabatuko dira jarduerarik gabeko denboraldi baten ondoren. Hasi saioa maiz edo lortu deskargak zure proiektuan hura gehiago gordetzeko.'
       protection: 'Proiektu bereziki onak edo ezagunak moderatzaileek babestu ditzakete ezabatze automatikoaren aurka.'

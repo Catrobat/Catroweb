@@ -102,9 +102,13 @@ export class Translation {
     return document.querySelector(elementId).getAttribute('lang') !== this.targetLanguage
   }
 
-  showTranslationFailed() {
-    const message = document.querySelector('[data-trans-machine-translation-failed]')?.dataset
-      .transMachineTranslationFailed
+  // 422: LibreTranslate has no model for the picked language; retrying won't help.
+  showTranslationFailed(error) {
+    const dataset = document.querySelector('[data-trans-machine-translation-failed]')?.dataset
+    const message =
+      error?.cause === 422
+        ? dataset?.transMachineTranslationUnsupported
+        : dataset?.transMachineTranslationFailed
     showSnackbar('#share-snackbar', message, SnackbarDuration.error)
   }
 

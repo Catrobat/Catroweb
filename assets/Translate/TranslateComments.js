@@ -83,7 +83,7 @@ export class TranslateComments extends Translation {
     document.getElementById(`comment-text-wrapper-${commentId}`).style.display = 'none'
   }
 
-  commentNotTranslated(commentId) {
+  commentNotTranslated(commentId, error) {
     document.getElementById(`comment-translation-loading-spinner-${commentId}`).style.display =
       'none'
     // A failed "translate again" keeps the translation that is already shown.
@@ -93,7 +93,7 @@ export class TranslateComments extends Translation {
     ) {
       document.getElementById(`comment-translation-button-${commentId}`).style.display = 'block'
     }
-    this.showTranslationFailed()
+    this.showTranslationFailed(error)
   }
 
   translateComment(
@@ -109,15 +109,17 @@ export class TranslateComments extends Translation {
       method: 'GET',
     })
       .then((response) => {
-        if (!response.ok) throw new Error(`Translation failed: ${response.status}`)
+        if (!response.ok) {
+          throw new Error(`Translation failed: ${response.status}`, { cause: response.status })
+        }
         return response.json()
       })
       .then((data) => {
         this.setTranslatedCommentData(commentId, data)
         this.openTranslatedComment(commentId)
       })
-      .catch(() => {
-        this.commentNotTranslated(commentId)
+      .catch((error) => {
+        this.commentNotTranslated(commentId, error)
       })
   }
 }

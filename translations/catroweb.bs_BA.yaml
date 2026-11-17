@@ -112,7 +112,7 @@ project:
     rate_limited: Previše otpremanja. Pokušaj ponovo kasnije.
     selected_file: 'Odabrana datoteka:'
     info:
-      file_size: Maksimalna veličina datoteke je 100 MB.
+      file_size: Maksimalna veličina datoteke je %size% MB.
       app_upload: 'Projekte možeš otpremiti i direktno iz aplikacije Pocket Code. Napomena: aplikacije se trenutno prerađuju i za sada ne podržavaju otpremanje na web.'
       retention: Otpremljeni projekti se automatski uklanjaju nakon perioda neaktivnosti. Redovno se prijavljuj ili skupljaj preuzimanja svog projekta da produžiš njegovo čuvanje.
       protection: Moderatori mogu zaštititi posebno dobre ili popularne projekte od automatskog brisanja.

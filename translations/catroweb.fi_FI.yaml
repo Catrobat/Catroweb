@@ -112,7 +112,7 @@ project:
     rate_limited: Liian monta lähetystä. Yritä myöhemmin uudelleen.
     selected_file: 'Valittu tiedosto:'
     info:
-      file_size: Tiedoston enimmäiskoko on 100 Mt.
+      file_size: Tiedoston enimmäiskoko on %size% Mt.
       app_upload: Voit myös lähettää projekteja suoraan Pocket Code -sovelluksesta. Huomaa, että sovelluksia uudistetaan parhaillaan eivätkä ne tällä hetkellä tue verkkolähetystä.
       retention: Lähetetyt projektit poistetaan automaattisesti, jos niitä ei käytetä vähään aikaan. Kirjaudu säännöllisesti tai hanki projektillesi latauksia pidentääksesi sen säilytysaikaa.
       protection: Moderaattorit voivat suojata erityisen hyviä tai suosittuja projekteja automaattiselta poistolta.

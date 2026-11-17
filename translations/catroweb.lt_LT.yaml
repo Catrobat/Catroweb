@@ -112,7 +112,7 @@ project:
     rate_limited: 'Per daug įkėlimų. Bandyk vėliau.'
     selected_file: 'Pasirinktas failas:'
     info:
-      file_size: 'Didžiausias failo dydis – 100 MB.'
+      file_size: 'Didžiausias failo dydis – %size% MB.'
       app_upload: 'Projektus taip pat gali įkelti tiesiai iš Pocket Code programėlės. Atkreipk dėmesį, kad programėlės šiuo metu perdirbamos ir kol kas nepalaiko įkėlimo į svetainę.'
       retention: 'Įkelti projektai automatiškai pašalinami po tam tikro neaktyvumo laikotarpio. Reguliariai prisijunk arba surink atsisiuntimų, kad projektas būtų saugomas ilgiau.'
       protection: 'Ypač geri ar populiarūs projektai moderatorių gali būti apsaugoti nuo automatinio ištrynimo.'

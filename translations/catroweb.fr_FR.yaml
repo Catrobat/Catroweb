@@ -112,7 +112,7 @@ project:
     rate_limited: Trop d'envois. Veuillez réessayer plus tard.
     selected_file: 'Fichier sélectionné :'
     info:
-      file_size: La taille maximale du fichier est de 100 Mo.
+      file_size: La taille maximale du fichier est de %size% Mo.
       app_upload: Vous pouvez aussi publier des projets directement depuis l'application Pocket Code. Notez que les applications sont en cours de refonte et ne prennent pas en charge l'envoi via le web pour le moment.
       retention: Les projets publiés sont supprimés automatiquement après une période d'inactivité. Connectez-vous régulièrement ou faites télécharger votre projet pour prolonger sa conservation.
       protection: Les projets particulièrement réussis ou populaires peuvent être protégés de la suppression automatique par les modérateurs.
