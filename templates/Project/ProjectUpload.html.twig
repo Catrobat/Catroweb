@@ -8,6 +8,7 @@
 {% block body %}
   <div class="project-upload"
        data-api-url="{{ app.request.getBaseURL() }}/api/projects"
+       data-max-file-size="{{ max_file_size }}"
        data-project-url="{{ path('project', {id: '__ID__'}) }}"
        data-trans-drop-here="{{ 'project.upload.drop_here'|trans({}, 'catroweb')|default('Drag & drop your .catrobat file here')|e('html_attr') }}"
        data-trans-or-browse="{{ 'project.upload.or_browse'|trans({}, 'catroweb')|default('or click to browse')|e('html_attr') }}"
@@ -66,7 +67,7 @@
         <span id="upload-progress-text" class="project-upload__progress-text">0%</span>
       </div>
 
-      <div id="upload-error" class="project-upload__error" style="display: none;">
+      <div id="upload-error" class="project-upload__error" role="alert" style="display: none;">
         <span class="material-icons">error_outline</span>
         <span id="upload-error-text"></span>
       </div>
