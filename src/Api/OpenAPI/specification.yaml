@@ -4342,7 +4342,7 @@ components:
         name:
           type: string
           example: 'Figures'
-          description: 'Category name'
+          description: 'Category name (required on create)'
         description:
           type: string
           example: 'Character figures for your projects'
@@ -4350,7 +4350,7 @@ components:
         priority:
           type: integer
           example: 1
-          default: 0
+          description: 'Sort priority; 0 when omitted on create, unchanged when omitted on update'
 
     # Asset Responses
     MediaAssetsListResponse:

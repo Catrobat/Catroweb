@@ -49,7 +49,7 @@ find src/Api/OpenAPI/Server -name '*.yaml' -exec sed -i '' 's/\\\\-/\\-/g' {} +
 # Literal routes before placeholder routes (/projects/search before /projects/{id})
 php src/Api/OpenAPI/sort-routes.php
 # Model docblock annotations → attributes, the only form Symfony's validator and JMS read
-bin/rector process --config src/Api/OpenAPI/rector-attributes.php --clear-cache --no-progress-bar > /dev/null
+bin/rector process --config src/Api/OpenAPI/rector-attributes.php --clear-cache --no-progress-bar
 # Symfony 8 rejects Choice(array) (an options array); the list must be Choice(choices: array)
 find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/Assert\\Choice(\[/Assert\\Choice(choices: [/g' {} +
 # Note: the project-wide Rector run (bin/rector process src/Api/OpenAPI/Server/, after this script) turns Assert\Type('OpenAPI\\Server\\Model\\...') into the

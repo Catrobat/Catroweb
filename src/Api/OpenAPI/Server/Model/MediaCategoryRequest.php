@@ -42,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MediaCategoryRequest
 {
   /**
-   * Category name.
+   * Category name (required on create).
    */
   #[SerializedName('name')]
   #[Assert\Type('string')]
@@ -57,10 +57,13 @@ class MediaCategoryRequest
   #[Type('string')]
   protected ?string $description = null;
 
+  /**
+   * Sort priority; 0 when omitted on create, unchanged when omitted on update.
+   */
   #[SerializedName('priority')]
   #[Assert\Type('int')]
   #[Type('int')]
-  protected ?int $priority = 0;
+  protected ?int $priority = null;
 
   /**
    * Constructor.
@@ -87,7 +90,7 @@ class MediaCategoryRequest
   /**
    * Sets name.
    *
-   * @param string|null $name Category name
+   * @param string|null $name Category name (required on create)
    *
    * @return $this
    */
@@ -130,6 +133,8 @@ class MediaCategoryRequest
 
   /**
    * Sets priority.
+   *
+   * @param int|null $priority Sort priority; 0 when omitted on create, unchanged when omitted on update
    *
    * @return $this
    */
