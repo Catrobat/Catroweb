@@ -8,6 +8,7 @@ use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
+use App\DB\Enum\ReportCategory;
 use App\Moderation\AgeSignalDetector;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
@@ -43,6 +44,7 @@ class AutoModerationServiceTest extends TestCase
     $this->assertNull($report->getReporter());
     $this->assertSame('inappropriate_content', $report->getCategory());
     $this->assertStringContainsString('+18', (string) $report->getNote());
+    $this->assertSame([['type' => 'text', 'name' => '+18']], $report->getFlaggedAssets());
     $this->assertCount(1, array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction));
   }
 
@@ -81,6 +83,30 @@ class AutoModerationServiceTest extends TestCase
     $this->assertCount(1, array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport));
   }
 
+  public function testAReviewOnlyFlagQueuesTheContentAndLeavesItVisible(): void
+  {
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('isContentHidden')->willReturn(false);
+    $visibility->expects($this->never())->method('hideContent');
+
+    $images = [['type' => 'image', 'name' => 'look.png', 'score' => 0.99]];
+    $this->service($visibility)->flagForReview(ContentType::Project, 'p1', ReportCategory::SexualContent, 'Automatic: image', 0.99, $images, false);
+
+    $report = array_values(array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport))[0];
+    $this->assertSame($images, $report->getFlaggedAssets());
+    $this->assertSame([], array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction), 'no auto_hidden entry');
+  }
+
+  public function testAReviewOnlyFlagIsNotQueuedWhileOneIsPending(): void
+  {
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $repository = $this->createStub(EntityRepository::class);
+    $repository->method('findOneBy')->willReturn(new ContentReport());
+
+    $this->service($visibility, $repository)->flagForReview(ContentType::Project, 'p1', ReportCategory::SexualContent, 'Automatic: image', hide: false);
+    $this->assertSame([], $this->persisted);
+  }
+
   public function testHarmlessTextChangesNothing(): void
   {
     $visibility = $this->createMock(ContentVisibilityManager::class);
@@ -100,7 +126,7 @@ class AutoModerationServiceTest extends TestCase
     $this->assertSame([], $this->persisted);
   }
 
-  private function service(ContentVisibilityManager $visibility): AutoModerationService
+  private function service(ContentVisibilityManager $visibility, ?EntityRepository $repository = null): AutoModerationService
   {
     $query = $this->createStub(Query::class);
     $query->method('getResult')->willReturn([]);
@@ -113,7 +139,7 @@ class AutoModerationServiceTest extends TestCase
 
     $entity_manager = $this->createStub(EntityManagerInterface::class);
     $entity_manager->method('createQueryBuilder')->willReturn($query_builder);
-    $entity_manager->method('getRepository')->willReturn($this->createStub(EntityRepository::class));
+    $entity_manager->method('getRepository')->willReturn($repository ?? $this->createStub(EntityRepository::class));
     $entity_manager->method('persist')->willReturnCallback(function (object $o): void {
       $this->persisted[] = $o;
     });

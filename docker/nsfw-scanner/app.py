@@ -3,9 +3,12 @@ from flask import Flask, request, jsonify
 from PIL import Image, UnidentifiedImageError
 from transformers import pipeline
 
+from flatten import flatten
+
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10 MB
 classifier = pipeline("image-classification", model="Falconsai/nsfw_image_detection")
+
 
 
 @app.route("/health", methods=["GET"])
@@ -19,7 +22,7 @@ def scan():
         return jsonify({"error": "No image data provided"}), 400
 
     try:
-        image = Image.open(io.BytesIO(request.data)).convert("RGB")
+        image = flatten(Image.open(io.BytesIO(request.data)))
     except (UnidentifiedImageError, OSError, ValueError):
         return jsonify({"error": "Invalid image data"}), 400
 

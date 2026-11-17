@@ -21,8 +21,10 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /**
  * Sends a project's screenshots and its largest look images (or a studio's cover) to the NSFW scanner and flags
- * the content for review at the first image at or above the threshold. An image the scanner refuses (4xx) is
- * skipped; scanner down (timeout, 5xx): logged, nothing hidden.
+ * the content when images score at or above the threshold: one such image only queues it for review (it stays
+ * visible), two or more, or one at or above the hide threshold, hide it until a moderator has looked. The
+ * screenshots count as one image (the site's is a copy of the project's). An image the scanner refuses (4xx) is
+ * skipped; scanner down (timeout, 5xx): logged, the scan stops and acts on what it found so far.
  */
 #[AsMessageHandler]
 final readonly class ScanContentImagesHandler
@@ -47,6 +49,12 @@ final readonly class ScanContentImagesHandler
     // Stricter than the avatar threshold: game art (sprites, horror and fan games) scores high on the model.
     #[Autowire('%env(float:CONTENT_SAFETY_CONTENT_THRESHOLD)%')]
     private float $threshold = 0.97,
+    // Drawn and anime art reaches 0.99 too (all false positives in production scored 0.988-0.993), so one image
+    // below this only queues the content for review.
+    #[Autowire('%env(float:CONTENT_SAFETY_HIDE_THRESHOLD)%')]
+    private float $hide_threshold = 0.995,
+    #[Autowire('%env(int:CONTENT_SAFETY_HIDE_MIN_IMAGES)%')]
+    private int $hide_min_images = 2,
   ) {
   }
 
@@ -61,6 +69,8 @@ final readonly class ScanContentImagesHandler
   public function scan(ScanContentImages $message, bool $flag): ?string
   {
     $content_type = ContentType::from($message->content_type);
+    $flagged = [];
+    $flagged_images = [];
     foreach ($this->imagePaths($content_type, $message->content_id) as $path) {
       $blob = @file_get_contents($path);
       if (false === $blob) {
@@ -77,26 +87,40 @@ final readonly class ScanContentImagesHandler
       if ($result->unavailable || $result->skipped) {
         $this->logger->warning('Image scan of {type} {id} stopped: scanner unavailable or disabled', ['type' => $message->content_type, 'id' => $message->content_id]);
 
-        return null;
+        break;
       }
 
       if ($result->nsfwScore >= $this->threshold) {
-        $note = sprintf('Automatic: image "%s" has NSFW score %.2f', basename($path), $result->nsfwScore);
-        if ($flag) {
-          $this->auto_moderation->flagForReview(
-            $content_type,
-            $message->content_id,
-            ContentType::Studio === $content_type ? ReportCategory::InappropriateContent : ReportCategory::SexualContent,
-            $note,
-            $result->nsfwScore,
-          );
-        }
-
-        return $note;
+        $flagged[] = ['type' => 'image', 'name' => basename($path), 'score' => $result->nsfwScore];
+        // Identical looks count once, all screenshots as one.
+        $flagged_images[str_contains($path, '/images/') ? md5($blob) : 'screenshot'] = true;
       }
     }
 
-    return null;
+    if ([] === $flagged) {
+      return null;
+    }
+
+    usort($flagged, static fn (array $a, array $b): int => $b['score'] <=> $a['score']);
+    $score = $flagged[0]['score'];
+    $hide = count($flagged_images) >= $this->hide_min_images || $score >= $this->hide_threshold;
+    $note = 'Automatic: '.implode('; ', array_map(
+      static fn (array $image): string => sprintf('image "%s" has NSFW score %.3f', $image['name'], $image['score']),
+      $flagged,
+    ));
+    if ($flag) {
+      $this->auto_moderation->flagForReview(
+        $content_type,
+        $message->content_id,
+        ContentType::Studio === $content_type ? ReportCategory::InappropriateContent : ReportCategory::SexualContent,
+        $note,
+        $score,
+        $flagged,
+        $hide,
+      );
+    }
+
+    return $note.($hide ? ' (hide)' : ' (review only)');
   }
 
   /**
