@@ -743,7 +743,7 @@ catro-notifications:
       hateful_content: 'Reason: it looked hurtful or hateful towards others.'
       improper_rating: 'Reason: it looked like it is not suitable for kids.'
       spam: 'Reason: it looked like spam.'
-      other: 'Reason: it breaks our community rules.'
+      other: 'Reason: a moderator found a problem with it.'
       inappropriate: 'Reason: it looked inappropriate.'
       harassment: 'Reason: it looked like it is bullying or harassing someone.'
       impersonation: 'Reason: it looked like it pretends to be someone else.'

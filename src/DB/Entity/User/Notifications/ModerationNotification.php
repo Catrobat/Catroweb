@@ -107,7 +107,10 @@ class ModerationNotification extends CatroNotification
       } elseif (1 === preg_match('~^(screen_|(manual_|automatic_)?screenshot\.)~', $asset['name'])) {
         $reason['screenshot'] = true;
       } else {
-        $images[] = (string) preg_replace('~^[0-9a-f]{32}_~i', '', pathinfo($asset['name'], PATHINFO_FILENAME));
+        $name = (string) preg_replace('~^[0-9a-f]{32}_~i', '', pathinfo($asset['name'], PATHINFO_FILENAME));
+        if ('' !== $name) {
+          $images[] = $name;
+        }
       }
     }
 
