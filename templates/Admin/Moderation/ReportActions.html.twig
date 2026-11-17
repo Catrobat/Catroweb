@@ -1,0 +1,11 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+  {% if object.state == 1 %}
+    {{ include('Admin/CRUD/list__action_accept_report.html.twig') }}
+    {{ include('Admin/CRUD/list__action_reject_report.html.twig') }}
+    {{ include('Admin/CRUD/list__action_warn_report.html.twig') }}
+  {% else %}
+    Resolved
+  {% endif %}
+{% endblock %}

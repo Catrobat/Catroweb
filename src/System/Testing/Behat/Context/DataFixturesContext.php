@@ -2122,7 +2122,7 @@ class DataFixturesContext implements Context
    *
    * Supported columns:
    *   id, reporter, content_type, content_id, category, note,
-   *   state, reporter_trust_score, created_at, resolved_at, resolved_by
+   *   state, reporter_trust_score, created_at, resolved_at, resolved_by, flagged_assets (JSON)
    *
    * @throws \Exception
    */
@@ -2162,6 +2162,9 @@ class DataFixturesContext implements Context
       $report->setContentId($content_id);
       $report->setCategory($category);
       $report->setNote($note);
+      if (isset($config['flagged_assets']) && '' !== $config['flagged_assets']) {
+        $report->setFlaggedAssets(json_decode((string) $config['flagged_assets'], true, flags: JSON_THROW_ON_ERROR));
+      }
       $report->setState($state);
       $report->setReporterTrustScore($trust_score);
       $report->setCreatedAt($created_at);
