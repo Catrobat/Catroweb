@@ -76,6 +76,7 @@ class ModerationQueueAdminTest extends TestCase
       ['type' => 'image', 'name' => 'automatic_screenshot.png', 'score' => 0.98],
       ['type' => 'image', 'name' => 'manual_screenshot.png', 'score' => 0.98],
       ['type' => 'text', 'name' => '18+'],
+      ['type' => 'text', 'name' => 'only'],
       ['type' => 'text', 'name' => 'nsfw'],
       ['type' => 'text', 'name' => ''],
     ]);
@@ -88,6 +89,7 @@ class ModerationQueueAdminTest extends TestCase
       ['type' => 'image', 'name' => 'automatic_screenshot.png', 'score' => 0.98, 'url' => '/resources/extract/p1/Scene%201/automatic_screenshot.png', 'label' => null, 'text' => null],
       ['type' => 'image', 'name' => 'manual_screenshot.png', 'score' => 0.98, 'url' => null, 'label' => null, 'text' => null],
       ['type' => 'text', 'name' => '18+', 'score' => null, 'url' => null, 'label' => 'Description', 'text' => 'Only for 18+'],
+      ['type' => 'text', 'name' => 'only', 'score' => null, 'url' => null, 'label' => 'Description', 'text' => 'Only for 18+'],
       ['type' => 'text', 'name' => 'nsfw', 'score' => null, 'url' => null, 'label' => 'Code', 'text' => "n\u{200B}sfw"],
     ], $assets['flagged']);
     $this->assertSame(['/resources/extract/p1/images/other.png'], $assets['images']);

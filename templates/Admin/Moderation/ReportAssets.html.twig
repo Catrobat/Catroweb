@@ -28,7 +28,7 @@
   {% endif %}
 
   {% if value.images is not empty %}
-    <p><strong>{{ value.flagged is empty ? 'Images' : 'Other images' }} ({{ value.images|length }})</strong></p>
+    <p><strong>{{ value.flagged|filter(asset => asset.type == 'image') is empty ? 'Images' : 'Other images' }} ({{ value.images|length }})</strong></p>
     <div>
       {% for image in value.images %}
         <a href="{{ image }}" target="_blank"><img src="{{ image }}" width="100" alt="Project image {{ loop.index }}"></a>

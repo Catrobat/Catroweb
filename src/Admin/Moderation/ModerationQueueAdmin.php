@@ -98,6 +98,7 @@ class ModerationQueueAdmin extends AbstractAdmin
     }
 
     $flagged = [];
+    $flagged_texts = [];
     foreach (self::flaggedAssets($report) as $asset) {
       if ('' === $asset['name']) {
         continue;
@@ -129,7 +130,7 @@ class ModerationQueueAdmin extends AbstractAdmin
         // The detector matched the text without its invisible characters ("n\u{200B}sfw" is "nsfw").
         if (false !== mb_stripos(AgeSignalDetector::removeInvisibleCharacters($text['text']), $asset['name'])) {
           $flagged[] = ['type' => 'text', 'name' => $asset['name'], 'score' => $score, 'url' => null, 'label' => $text['label'], 'text' => $text['text']];
-          unset($texts[$i]);
+          $flagged_texts[$i] = true;
           $matched = true;
         }
       }
@@ -143,7 +144,7 @@ class ModerationQueueAdmin extends AbstractAdmin
       'flagged' => $flagged,
       'images' => array_values($images),
       'sounds' => array_values(array_map(self::url(...), $extracted?->getContainingSoundPaths() ?? [])),
-      'texts' => array_values($texts),
+      'texts' => array_values(array_diff_key($texts, $flagged_texts)),
     ];
   }
 
@@ -159,12 +160,18 @@ class ModerationQueueAdmin extends AbstractAdmin
       return ScreenshotRepository::DEFAULT_SCREENSHOT === $path ? null : '/'.ltrim($path, '/');
     }
 
-    $found = null === $extracted ? [] : (glob($extracted->getPath().'{,*/}'.$name, GLOB_BRACE) ?: []);
-    if (null === $extracted || [] === $found) {
+    if (null === $extracted) {
       return null;
     }
 
-    return self::url('/'.$extracted->getWebPath().substr($found[0], strlen($extracted->getPath())));
+    // ponytail: the first scene with a screenshot of that name; the scanner stores no scene.
+    foreach (['', ...array_map(static fn (string $dir): string => basename($dir).'/', glob($extracted->getPath().'*', GLOB_ONLYDIR) ?: [])] as $dir) {
+      if (is_file($extracted->getPath().$dir.$name)) {
+        return self::url('/'.$extracted->getWebPath().$dir.$name);
+      }
+    }
+
+    return null;
   }
 
   private static function url(string $path): string
@@ -262,15 +269,15 @@ class ModerationQueueAdmin extends AbstractAdmin
       ->add('note')
       ->add('reporter', null, ['label' => 'Reporter'])
       ->add('state', 'choice', ['choices' => [1 => 'New', 2 => 'Accepted', 3 => 'Rejected']])
-      ->add('assets', null, [
-        'label' => 'Assets',
-        'accessor' => $this->getReviewAssets(...),
-        'template' => 'Admin/Moderation/ReportAssets.html.twig',
-      ])
       ->add('actions', null, [
         'label' => 'Actions',
         'accessor' => static fn (): null => null, // just the buttons of the list
         'template' => 'Admin/Moderation/ReportActions.html.twig',
+      ])
+      ->add('assets', null, [
+        'label' => 'Assets',
+        'accessor' => $this->getReviewAssets(...),
+        'template' => 'Admin/Moderation/ReportAssets.html.twig',
       ])
     ;
   }
