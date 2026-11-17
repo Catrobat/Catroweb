@@ -194,9 +194,9 @@ class ProjectResponse
   protected ?string $flavor = null;
 
   /**
-   * Tags allow projects to be categorized by their creators.
+   * Tags allow projects to be categorized by their creators. Keys are internal tag names, values are translated display names.
    *
-   * @var array<string, string>|null
+   * @var string[]|null
    *
    * @SerializedName("tags")
    *
@@ -210,9 +210,9 @@ class ProjectResponse
   protected ?array $tags = null;
 
   /**
-   * Extensions used by this project (e.g., arduino, mindstorms).
+   * Extensions used by this project (e.g., arduino, mindstorms). Keys are internal extension names, values are translated display names.
    *
-   * @var array<string, string>|null
+   * @var string[]|null
    *
    * @SerializedName("extensions")
    *
@@ -667,7 +667,7 @@ class ProjectResponse
   /**
    * Gets tags.
    *
-   * @return array<string, string>|null
+   * @return string[]|null
    */
   public function getTags(): ?array
   {
@@ -677,7 +677,7 @@ class ProjectResponse
   /**
    * Sets tags.
    *
-   * @param array<string, string>|null $tags Tags allow projects to be categorized by their creators
+   * @param string[]|null $tags Tags allow projects to be categorized by their creators. Keys are internal tag names, values are translated display names.
    *
    * @return $this
    */
@@ -691,7 +691,7 @@ class ProjectResponse
   /**
    * Gets extensions.
    *
-   * @return array<string, string>|null
+   * @return string[]|null
    */
   public function getExtensions(): ?array
   {
@@ -701,7 +701,7 @@ class ProjectResponse
   /**
    * Sets extensions.
    *
-   * @param array<string, string>|null $extensions Extensions used by this project (e.g., arduino, mindstorms)
+   * @param string[]|null $extensions Extensions used by this project (e.g., arduino, mindstorms). Keys are internal extension names, values are translated display names.
    *
    * @return $this
    */

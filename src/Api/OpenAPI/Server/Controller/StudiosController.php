@@ -246,6 +246,114 @@ class StudiosController extends Controller
   }
 
   /**
+   * Operation studiosIdBannedMembersGet.
+   *
+   * List banned studio members
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studiosIdBannedMembersGetAction(Request $request, $id): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $cursor = $request->query->get('cursor');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->studiosIdBannedMembersGet($id, $accept_language, $limit, $cursor, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'Banned studio members',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation studiosIdBatchAddProjectsPost.
    *
    * Add multiple projects to a studio in a single request
@@ -287,7 +395,7 @@ class StudiosController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_batch_add_projects_request = $this->deserialize($studio_batch_add_projects_request, 'OpenAPI\Server\Model\StudioBatchAddProjectsRequest', $inputFormat);
+      $studio_batch_add_projects_request = $this->deserialize($studio_batch_add_projects_request, \OpenAPI\Server\Model\StudioBatchAddProjectsRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -304,7 +412,7 @@ class StudiosController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\StudioBatchAddProjectsRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\StudioBatchAddProjectsRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_batch_add_projects_request, $asserts);
     if ($response instanceof Response) {
@@ -397,6 +505,7 @@ class StudiosController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($comment_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -585,7 +694,7 @@ class StudiosController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, 'OpenAPI\Server\Model\StudioCommentCreateRequest', $inputFormat);
+      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, \OpenAPI\Server\Model\StudioCommentCreateRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -602,7 +711,7 @@ class StudiosController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\StudioCommentCreateRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\StudioCommentCreateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_comment_create_request, $asserts);
     if ($response instanceof Response) {
@@ -1043,7 +1152,7 @@ class StudiosController extends Controller
       $id = $this->deserialize($id, 'string', 'string');
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_invite_create_request = $this->deserialize($studio_invite_create_request, 'OpenAPI\Server\Model\StudioInviteCreateRequest', $inputFormat);
+      $studio_invite_create_request = $this->deserialize($studio_invite_create_request, \OpenAPI\Server\Model\StudioInviteCreateRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -1064,7 +1173,7 @@ class StudiosController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\StudioInviteCreateRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\StudioInviteCreateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_invite_create_request, $asserts);
     if ($response instanceof Response) {
@@ -1340,6 +1449,7 @@ class StudiosController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($request_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1429,6 +1539,7 @@ class StudiosController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($request_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1698,6 +1809,7 @@ class StudiosController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($user_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1786,6 +1898,7 @@ class StudiosController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($user_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1875,6 +1988,7 @@ class StudiosController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($user_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1897,6 +2011,95 @@ class StudiosController extends Controller
       $responseHeaders = [];
 
       $handler->studiosIdMembersUserIdPromotePost($id, $user_id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        204 => 'No Content',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation studiosIdMembersUserIdUnbanPost.
+   *
+   * Remove a studio member ban
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studiosIdMembersUserIdUnbanPostAction(Request $request, $id, $user_id): Response
+  {
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $user_id = $this->deserialize($user_id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($user_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 204;
+      $responseHeaders = [];
+
+      $handler->studiosIdMembersUserIdUnbanPost($id, $user_id, $accept_language, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         204 => 'No Content',
@@ -2186,7 +2389,7 @@ class StudiosController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_add_project_request = $this->deserialize($studio_add_project_request, 'OpenAPI\Server\Model\StudioAddProjectRequest', $inputFormat);
+      $studio_add_project_request = $this->deserialize($studio_add_project_request, \OpenAPI\Server\Model\StudioAddProjectRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -2203,7 +2406,7 @@ class StudiosController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\StudioAddProjectRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\StudioAddProjectRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_add_project_request, $asserts);
     if ($response instanceof Response) {
@@ -2473,7 +2676,7 @@ class StudiosController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_join_with_code_request = $this->deserialize($studio_join_with_code_request, 'OpenAPI\Server\Model\StudioJoinWithCodeRequest', $inputFormat);
+      $studio_join_with_code_request = $this->deserialize($studio_join_with_code_request, \OpenAPI\Server\Model\StudioJoinWithCodeRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -2482,7 +2685,7 @@ class StudiosController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\StudioJoinWithCodeRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\StudioJoinWithCodeRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_join_with_code_request, $asserts);
     if ($response instanceof Response) {
@@ -2513,7 +2716,7 @@ class StudiosController extends Controller
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         403 => 'Banned from this studio',
         404 => 'Not found',
-        409 => 'Already a member',
+        409 => 'Already a member; the studio the code belongs to',
         429 => 'Too Many Requests',
         default => '',
       };
@@ -2664,201 +2867,5 @@ class StudiosController extends Controller
   public function getApiHandler()
   {
     return $this->apiServer->getApiHandler('studios');
-  }
-
-  /**
-   * Operation studiosIdBannedMembersGet.
-   *
-   * List banned studio members
-   *
-   * @param Request $request the Symfony request to handle
-   *
-   * @return Response the Symfony response
-   */
-  public function studiosIdBannedMembersGetAction(Request $request, $id): Response
-  {
-    // Figure out what data format to return to the client
-    $produces = ['application/json'];
-    // Figure out what the client accepts
-    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
-    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
-    if (null === $responseFormat) {
-      return new Response('', 406);
-    }
-
-    // Handle authentication
-    // Authentication 'BearerAuth' required
-    // HTTP bearer authentication required
-    $securityBearerAuth = $request->headers->get('authorization');
-
-    // Read out all input parameter values into variables
-    $limit = $request->query->get('limit', 20);
-    $cursor = $request->query->get('cursor');
-    $accept_language = $request->headers->get('Accept-Language', 'en');
-
-    // Use the default value if no value was provided
-
-    // Deserialize the input values that needs it
-    try {
-      $id = $this->deserialize($id, 'string', 'string');
-      $accept_language = $this->deserialize($accept_language, 'string', 'string');
-      $limit = $this->deserialize($limit, 'int', 'string');
-      $cursor = $this->deserialize($cursor, 'string', 'string');
-    } catch (SerializerRuntimeException $exception) {
-      return $this->createBadRequestResponse($exception->getMessage());
-    }
-
-    // Validate the input values
-    $asserts = [];
-    $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
-    $response = $this->validate($id, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($accept_language, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('int');
-    $asserts[] = new Assert\GreaterThanOrEqual(0);
-    $response = $this->validate($limit, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($cursor, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-
-    try {
-      $handler = $this->getApiHandler();
-
-      // Set authentication method 'BearerAuth'
-      $handler->setBearerAuth($securityBearerAuth);
-
-      // Make the call to the business logic
-      $responseCode = 200;
-      $responseHeaders = [];
-
-      $result = $handler->studiosIdBannedMembersGet($id, $accept_language, $limit, $cursor, $responseCode, $responseHeaders);
-
-      $message = match ($responseCode) {
-        200 => 'Banned studio members',
-        400 => 'Bad request (Invalid, or missing parameters)',
-        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
-        403 => 'Insufficient privileges, action not allowed.',
-        404 => 'Not found',
-        default => '',
-      };
-
-      return new Response(
-        null !== $result ? $this->serialize($result, $responseFormat) : '',
-        $responseCode,
-        array_merge(
-          $responseHeaders,
-          [
-            'Content-Type' => $responseFormat,
-            'X-OpenAPI-Message' => $message,
-          ]
-        )
-      );
-    } catch (\Throwable $fallthrough) {
-      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
-    }
-  }
-
-  /**
-   * Operation studiosIdMembersUserIdUnbanPost.
-   *
-   * Remove a studio member ban
-   *
-   * @param Request $request the Symfony request to handle
-   *
-   * @return Response the Symfony response
-   */
-  public function studiosIdMembersUserIdUnbanPostAction(Request $request, $id, $user_id): Response
-  {
-    // Handle authentication
-    // Authentication 'BearerAuth' required
-    // HTTP bearer authentication required
-    $securityBearerAuth = $request->headers->get('authorization');
-
-    // Read out all input parameter values into variables
-    $accept_language = $request->headers->get('Accept-Language', 'en');
-
-    // Use the default value if no value was provided
-
-    // Deserialize the input values that needs it
-    try {
-      $id = $this->deserialize($id, 'string', 'string');
-      $user_id = $this->deserialize($user_id, 'string', 'string');
-      $accept_language = $this->deserialize($accept_language, 'string', 'string');
-    } catch (SerializerRuntimeException $exception) {
-      return $this->createBadRequestResponse($exception->getMessage());
-    }
-
-    // Validate the input values
-    $asserts = [];
-    $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
-    $response = $this->validate($id, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($user_id, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($accept_language, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-
-    try {
-      $handler = $this->getApiHandler();
-
-      // Set authentication method 'BearerAuth'
-      $handler->setBearerAuth($securityBearerAuth);
-
-      // Make the call to the business logic
-      $responseCode = 204;
-      $responseHeaders = [];
-
-      $handler->studiosIdMembersUserIdUnbanPost($id, $user_id, $accept_language, $responseCode, $responseHeaders);
-
-      $message = match ($responseCode) {
-        204 => 'No Content',
-        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
-        403 => 'Insufficient privileges, action not allowed.',
-        404 => 'Not found',
-        default => '',
-      };
-
-      return new Response(
-        '',
-        $responseCode,
-        array_merge(
-          $responseHeaders,
-          [
-            'X-OpenAPI-Message' => $message,
-          ]
-        )
-      );
-    } catch (\Throwable $fallthrough) {
-      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
-    }
   }
 }

@@ -56,7 +56,7 @@ class TranslationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsIdTranslationFieldLanguageDeleteAction(Request $request, $id, $field, $language)
+  public function projectsIdTranslationFieldLanguageDeleteAction(Request $request, $id, $field, $language): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -91,6 +91,7 @@ class TranslationController extends Controller
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Choice(choices: ['name', 'description', 'credit']);
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^(name|description|credit)$/');
     $response = $this->validate($field, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -98,6 +99,7 @@ class TranslationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z\-]+$/');
     $response = $this->validate($language, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -153,7 +155,7 @@ class TranslationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsIdTranslationFieldLanguageGetAction(Request $request, $id, $field, $language)
+  public function projectsIdTranslationFieldLanguageGetAction(Request $request, $id, $field, $language): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -194,6 +196,7 @@ class TranslationController extends Controller
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Choice(choices: ['name', 'description', 'credit']);
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^(name|description|credit)$/');
     $response = $this->validate($field, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -201,6 +204,7 @@ class TranslationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z\-]+$/');
     $response = $this->validate($language, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -252,7 +256,7 @@ class TranslationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsIdTranslationFieldLanguagePutAction(Request $request, $id, $field, $language)
+  public function projectsIdTranslationFieldLanguagePutAction(Request $request, $id, $field, $language): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -278,7 +282,7 @@ class TranslationController extends Controller
       $field = $this->deserialize($field, 'string', 'string');
       $language = $this->deserialize($language, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $project_custom_translation_save_request = $this->deserialize($project_custom_translation_save_request, 'OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest', $inputFormat);
+      $project_custom_translation_save_request = $this->deserialize($project_custom_translation_save_request, \OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -297,6 +301,7 @@ class TranslationController extends Controller
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Choice(choices: ['name', 'description', 'credit']);
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^(name|description|credit)$/');
     $response = $this->validate($field, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -304,13 +309,14 @@ class TranslationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z\-]+$/');
     $response = $this->validate($language, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($project_custom_translation_save_request, $asserts);
     if ($response instanceof Response) {
@@ -367,7 +373,7 @@ class TranslationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsIdTranslationGetAction(Request $request, $id)
+  public function projectsIdTranslationGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -472,7 +478,7 @@ class TranslationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsIdTranslationLanguagesGetAction(Request $request, $id)
+  public function projectsIdTranslationLanguagesGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

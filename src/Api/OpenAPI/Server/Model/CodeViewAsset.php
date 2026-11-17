@@ -105,6 +105,8 @@ class CodeViewAsset
   /**
    * Sets url.
    *
+   * @param string|null $url project-authorized file URL; follows the project page access policy
+   *
    * @return $this
    */
   public function setUrl(?string $url = null): self

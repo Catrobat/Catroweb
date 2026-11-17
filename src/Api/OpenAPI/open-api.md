@@ -39,7 +39,15 @@ To generate the OpenAPI code (e.g., client libraries, server stubs, etc.), you n
 
    ```bash
    yarn run generate-api
+   bin/rector process src/Api/OpenAPI/Server/
+   bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
    ```
+
+   On an unchanged spec this must produce no diff. Never hand-edit `src/Api/OpenAPI/Server/`; change the spec or the pipeline instead:
+   - Route requirements come from the path parameter's `pattern` (without one the generator emits `[a-z0-9]+`, which rejects UUIDs).
+   - `sort-routes.php` puts literal routes before placeholder routes within each tag section (`/projects/search` before `/projects/{id}`), since the generator orders routes by operationId.
+   - Symfony's validator ignores the docblock `@Assert` annotations the generator writes on models. Request-body constraints that must hold go into `config/validator/<Model>.yaml`.
+   - JMS reads no docblock annotations either; it types properties from their PHP types. A request model with a typed array (`@Type("array<string>")`) needs `config/jms/<Model>.yml`, otherwise deserialization fails with "You must define a type".
 
 ### Breaking Changes in the OpenAPI Spec
 

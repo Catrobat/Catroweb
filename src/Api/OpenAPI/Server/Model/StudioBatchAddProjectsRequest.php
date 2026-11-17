@@ -45,12 +45,25 @@ class StudioBatchAddProjectsRequest
    * List of project UUIDs to add.
    *
    * @var string[]|null
+   *
+   * @SerializedName("project_ids")
+   *
+   * @Assert\NotNull()
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string>")
+   *
+   * @Assert\Count(
+   *   max = 50
+   * )
+   * @Assert\Count(
+   *   min = 1
+   * )
    */
-  #[SerializedName('project_ids')]
-  #[Type('array<string>')]
-  #[Assert\NotNull]
-  #[Assert\All([new Assert\Type('string')])]
-  #[Assert\Count(min: 1, max: 50)]
   protected ?array $project_ids = null;
 
   /**
