@@ -10,6 +10,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
+use App\Translation\ProjectTranslationJob;
 use OpenAPI\Server\Api\TranslationApiInterface;
 use OpenAPI\Server\Model\ProjectCustomTranslationResponse;
 use OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest;
@@ -73,14 +74,19 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
     try {
       $translation_result = $loader->getCachedProjectTranslation($project, $source_language, $target_language);
       if (null === $translation_result) {
-        // Polls while the job runs count too: 30 a minute is a poll every 2 s.
-        if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)) {
+        // Only a new job counts against the per-IP limit: polls of a queued one cost a DB and a Redis read.
+        $client_ip = $request?->getClientIp() ?? 'unknown';
+        $job = $loader->requestProjectTranslation(
+          $project, $source_language, $target_language,
+          fn (): bool => null !== $this->checkIpRateLimit($client_ip, $this->translationBurstLimiter),
+        );
+        if (ProjectTranslationJob::Refused === $job) {
           $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
           return null;
         }
 
-        if (!$loader->requestProjectTranslation($project, $source_language, $target_language)) {
+        if (ProjectTranslationJob::Failed === $job) {
           $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
 
           return null;

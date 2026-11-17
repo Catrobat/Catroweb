@@ -8,12 +8,14 @@ use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use App\Translation\LibreTranslateApi;
+use App\Translation\ProjectTranslationJob;
 use App\Translation\TranslateProject;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -96,8 +98,35 @@ class TranslationDelegateTest extends TestCase
     $delegate = $this->delegate(bus: $bus);
     $project = $this->project('name');
 
-    $this->assertTrue($delegate->requestProjectTranslation($project, null, 'fr'));
-    $this->assertTrue($delegate->requestProjectTranslation($project, null, 'fr'));
+    $this->assertSame(ProjectTranslationJob::Queued, $delegate->requestProjectTranslation($project, null, 'fr', static fn (): bool => true));
+    // A poll of the queued job neither queues another nor asks the rate limit.
+    $asked = false;
+    $this->assertSame(ProjectTranslationJob::Queued, $delegate->requestProjectTranslation($project, null, 'fr', static function () use (&$asked): bool {
+      $asked = true;
+
+      return true;
+    }));
+    $this->assertFalse($asked);
+  }
+
+  public function testARefusedRequestQueuesNothing(): void
+  {
+    $bus = $this->createMock(MessageBusInterface::class);
+    $bus->expects($this->never())->method('dispatch');
+
+    $this->assertSame(ProjectTranslationJob::Refused, $this->delegate(bus: $bus)->requestProjectTranslation($this->project('name'), null, 'fr', static fn (): bool => false));
+  }
+
+  public function testAJobThatThrowsIsReportedAsFailed(): void
+  {
+    $repository = $this->createStub(ProjectMachineTranslationRepository::class);
+    $repository->method('cacheTranslation')->willThrowException(new \RuntimeException('db down'));
+    $delegate = $this->delegate($this->translatingApi(), $repository);
+    $project = $this->project('name');
+
+    $delegate->translateProject($project, null, 'fr');
+
+    $this->assertSame(ProjectTranslationJob::Failed, $delegate->requestProjectTranslation($project, null, 'fr', static fn (): bool => true));
   }
 
   public function testAFailedJobIsReportedOnceThenQueuedAgain(): void
@@ -113,8 +142,8 @@ class TranslationDelegateTest extends TestCase
 
     $delegate->translateProject($project, null, 'fr');
 
-    $this->assertFalse($delegate->requestProjectTranslation($project, null, 'fr'));
-    $this->assertTrue($delegate->requestProjectTranslation($project, null, 'fr'));
+    $this->assertSame(ProjectTranslationJob::Failed, $delegate->requestProjectTranslation($project, null, 'fr', static fn (): bool => true));
+    $this->assertSame(ProjectTranslationJob::Queued, $delegate->requestProjectTranslation($project, null, 'fr', static fn (): bool => true));
   }
 
   public function testCachedProjectTranslationComesFromTheRepository(): void
@@ -135,6 +164,7 @@ class TranslationDelegateTest extends TestCase
       $this->createStub(LibreTranslateApi::class),
       new ArrayAdapter(),
       $this->createStub(MessageBusInterface::class),
+      new NullLogger(),
     );
     $project = new Project();
 
@@ -155,6 +185,7 @@ class TranslationDelegateTest extends TestCase
       $api ?? $this->createStub(LibreTranslateApi::class),
       new ArrayAdapter(),
       $bus ?? $this->createStub(MessageBusInterface::class),
+      new NullLogger(),
     );
   }
 

@@ -9,6 +9,7 @@ use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\Translation\TranslationResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -34,6 +35,8 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
       ->andWhere(Criteria::expr()->eq('target_language', $target_language))
       ->andWhere(Criteria::expr()->eq('source_hash', ProjectMachineTranslation::sourceHash($project)))
       ->andWhere(Criteria::expr()->neq('cached_name', null))
+      // Several detected sources can be current (a picked source that matched one): always answer with the same.
+      ->orderBy(['id' => Order::Ascending])
     ;
     if (null === $source_language) {
       $criteria->andWhere(Criteria::expr()->eq('auto_detected', true));
@@ -75,7 +78,7 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     $entry = $this->findOneBy(['project' => $project, 'source_language' => $source_language, 'target_language' => $target_language])
       ?? new ProjectMachineTranslation($project, $source_language, $target_language);
     // Same source and target give the same text: a picked source that matches a detected one stays usable as detected.
-    $auto_detected = $auto_detected || (null !== $entry->getCachedName() && $entry->isAutoDetected());
+    $auto_detected = $auto_detected || $entry->isCurrentAutoDetected();
     // A translation can be longer than the original name; cached_name is VARCHAR(300) like the name itself.
     $entry->setCachedTranslation(mb_substr($name, 0, 300), $description, $credits, ProjectMachineTranslation::sourceHash($project), $auto_detected);
     $this->getEntityManager()->persist($entry);

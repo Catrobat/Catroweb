@@ -8,6 +8,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -16,10 +17,12 @@ class TranslationDelegate
 {
   private const string JOB_QUEUED = 'queued';
   private const string JOB_FAILED = 'failed';
-  // A queued job older than this is presumed lost and queued again; a failure is reported for this long.
-  private const int JOB_TTL = 180;
   // Per LibreTranslate call: a 1,300-character description took 42 s on the production container.
   private const int JOB_CALL_TIMEOUT = 120;
+  // A queued job older than this is presumed lost and queued again: longer than a job's three calls can take.
+  private const int JOB_QUEUED_TTL = 3 * self::JOB_CALL_TIMEOUT + 60;
+  // A failure is reported to the next request within this time.
+  private const int JOB_FAILED_TTL = 180;
 
   public function __construct(
     private readonly ProjectCustomTranslationRepository $project_custom_translation_repository,
@@ -27,6 +30,7 @@ class TranslationDelegate
     private readonly LibreTranslateApi $api,
     private readonly CacheItemPoolInterface $cache,
     private readonly MessageBusInterface $message_bus,
+    private readonly LoggerInterface $logger,
   ) {
   }
 
@@ -135,46 +139,68 @@ class TranslationDelegate
   }
 
   /**
-   * Queues the translation unless it is queued already. False when the last attempt failed: the caller reports it,
-   * and the next request queues a new attempt.
+   * Queues the translation unless it is queued already. $may_queue is asked only before a new job is queued.
+   *
+   * @param \Closure(): bool $may_queue
    *
    * @throws \InvalidArgumentException
    */
-  public function requestProjectTranslation(Project $project, ?string $source_language, string $target_language): bool
+  public function requestProjectTranslation(Project $project, ?string $source_language, string $target_language, \Closure $may_queue): ProjectTranslationJob
   {
     [$source_language, $target_language] = $this->machineLanguages($source_language, $target_language);
-    $state = $this->cache->getItem($this->jobKey($project, $source_language, $target_language));
-    if (self::JOB_FAILED === $state->get()) {
-      $this->cache->deleteItem($state->getKey());
-
-      return false;
+    $key = $this->jobKey($project, $source_language, $target_language);
+    $state = $this->cache->getItem($key)->get();
+    if (self::JOB_QUEUED === $state) {
+      return ProjectTranslationJob::Queued;
     }
 
-    if (self::JOB_QUEUED !== $state->get()) {
-      $this->cache->save($state->set(self::JOB_QUEUED)->expiresAfter(self::JOB_TTL));
-      $this->message_bus->dispatch(new TranslateProject((string) $project->getId(), $source_language, $target_language));
-      // Tests run the job right here (sync transport).
-      if (self::JOB_FAILED === $this->cache->getItem($state->getKey())->get()) {
-        $this->cache->deleteItem($state->getKey());
+    if (self::JOB_FAILED === $state) {
+      $this->cache->deleteItem($key);
 
-        return false;
-      }
+      return ProjectTranslationJob::Failed;
     }
 
-    return true;
+    if (!$may_queue()) {
+      return ProjectTranslationJob::Refused;
+    }
+
+    $this->cache->save($this->cache->getItem($key)->set(self::JOB_QUEUED)->expiresAfter(self::JOB_QUEUED_TTL));
+    $this->message_bus->dispatch(new TranslateProject((string) $project->getId(), $source_language, $target_language));
+    // Tests run the job right here (sync transport).
+    if (self::JOB_FAILED === $this->cache->getItem($key)->get()) {
+      $this->cache->deleteItem($key);
+
+      return ProjectTranslationJob::Failed;
+    }
+
+    return ProjectTranslationJob::Queued;
   }
 
   /**
-   * Translates and caches the project's texts (TranslateProject job). Takes about 1 s per 30 characters.
+   * Translates and caches the project's texts (TranslateProject job). Takes about 1 s per 30 characters. Never throws:
+   * the waiting page learns about a failure from the job state.
    */
   public function translateProject(Project $project, ?string $source_language, string $target_language): void
   {
     $key = $this->jobKey($project, $source_language, $target_language);
+    try {
+      if ($this->translateAndCache($project, $source_language, $target_language)) {
+        $this->cache->deleteItem($key);
+
+        return;
+      }
+    } catch (\Throwable $e) {
+      $this->logger->error('Project translation job failed: '.$e->getMessage(), ['exception' => $e, 'project' => $project->getId()]);
+    }
+
+    $this->cache->save($this->cache->getItem($key)->set(self::JOB_FAILED)->expiresAfter(self::JOB_FAILED_TTL));
+  }
+
+  private function translateAndCache(Project $project, ?string $source_language, string $target_language): bool
+  {
     // Already done by an earlier job for the same languages.
     if (null !== $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language)) {
-      $this->cache->deleteItem($key);
-
-      return;
+      return true;
     }
 
     $texts = ['name' => $project->getName(), 'description' => $project->getDescription(), 'credits' => $project->getCredits()];
@@ -186,11 +212,10 @@ class TranslationDelegate
         continue;
       }
 
+      // LibreTranslateApi logs the failure.
       $result = $this->api->translate($text, $source_language, $target_language, self::JOB_CALL_TIMEOUT);
       if (!$result instanceof TranslationResult) {
-        $this->cache->save($this->cache->getItem($key)->set(self::JOB_FAILED)->expiresAfter(self::JOB_TTL));
-
-        return;
+        return false;
       }
 
       $translated[$field] = $result->translation;
@@ -202,13 +227,12 @@ class TranslationDelegate
     $source = $source_language ?? $detected;
     $name = $translated['name'] ?? null;
     if (null === $source || null === $name) {
-      $this->cache->save($this->cache->getItem($key)->set(self::JOB_FAILED)->expiresAfter(self::JOB_TTL));
-
-      return;
+      return false;
     }
 
     $this->project_machine_translation_repository->cacheTranslation($project, $source, $target_language, null === $source_language, $name, $translated['description'] ?? null, $translated['credits'] ?? null);
-    $this->cache->deleteItem($key);
+
+    return true;
   }
 
   /**

@@ -14,6 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'scratch' => 'sync://',
         'uploads' => 'sync://',
         'cleanup' => 'sync://',
+        'translation' => 'sync://',
         'failed' => 'in-memory://',
       ],
     ],

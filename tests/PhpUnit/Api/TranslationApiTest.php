@@ -14,6 +14,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
+use App\Translation\ProjectTranslationJob;
 use App\Translation\TranslationResult;
 use OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -119,7 +120,7 @@ final class TranslationApiTest extends TestCase
 
     $loader = $this->createStub(TranslationApiLoader::class);
     $loader->method('getCachedProjectTranslation')->willReturn(null);
-    $loader->method('requestProjectTranslation')->willReturn(false);
+    $loader->method('requestProjectTranslation')->willReturn(ProjectTranslationJob::Failed);
 
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
@@ -144,7 +145,7 @@ final class TranslationApiTest extends TestCase
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
     $loader = $this->createMock(TranslationApiLoader::class);
     $loader->method('getCachedProjectTranslation')->willReturn(null);
-    $loader->expects($this->once())->method('requestProjectTranslation')->willReturn(true);
+    $loader->expects($this->once())->method('requestProjectTranslation')->willReturn(ProjectTranslationJob::Queued);
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
     $request_stack = new RequestStack();
@@ -183,7 +184,9 @@ final class TranslationApiTest extends TestCase
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
     $loader = $this->createMock(TranslationApiLoader::class);
     $loader->method('getCachedProjectTranslation')->willReturn(null);
-    $loader->expects($this->once())->method('requestProjectTranslation')->willReturn(false);
+    $loader->expects($this->exactly(2))->method('requestProjectTranslation')
+      ->willReturnCallback(static fn (Project $p, ?string $s, string $t, \Closure $may_queue): ProjectTranslationJob => $may_queue() ? ProjectTranslationJob::Queued : ProjectTranslationJob::Refused)
+    ;
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
     $request_stack = new RequestStack();
@@ -194,7 +197,7 @@ final class TranslationApiTest extends TestCase
     $code = 200;
     $headers = [];
     $api->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers);
-    $this->assertSame(Response::HTTP_SERVICE_UNAVAILABLE, $code);
+    $this->assertSame(Response::HTTP_ACCEPTED, $code);
 
     $code = 200;
     $this->assertNull($api->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers));

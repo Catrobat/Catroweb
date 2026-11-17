@@ -141,13 +141,16 @@ export class TranslateProject extends Translation {
     const params = new URLSearchParams({ target_language: targetLanguage })
     if (sourceLanguage) params.set('source_language', sourceLanguage)
     const url = `${this.baseUrl}/api/projects/${this.projectId}/translation?${params}`
+    // A newer request (another source picked) wins; an older poll still running is ignored.
+    this.translationRequest = (this.translationRequest ?? 0) + 1
+    const request = this.translationRequest
+    const isCurrent = () => request === this.translationRequest
     // 202: the server translates in the background (about 1 s per 30 characters); ask again until it is done.
-    // Every 3 s stays below the 30 requests a minute per IP.
     const deadline = Date.now() + 120_000
 
     const poll = () =>
       fetch(url, { method: 'GET' }).then((response) => {
-        if (response.status === 202 && Date.now() < deadline) {
+        if (response.status === 202 && Date.now() < deadline && isCurrent()) {
           return new Promise((resolve) => setTimeout(resolve, 3000)).then(poll)
         }
         if (!response.ok || response.status === 202) {
@@ -158,11 +161,12 @@ export class TranslateProject extends Translation {
 
     poll()
       .then((data) => {
+        if (!isCurrent()) return
         this.setTranslatedProjectData(data)
         this.openTranslatedProject()
       })
       .catch(() => {
-        this.projectNotTranslated()
+        if (isCurrent()) this.projectNotTranslated()
       })
   }
 }

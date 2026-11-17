@@ -106,18 +106,18 @@ task('restart:workers', function () {
 
 // Before anything changes: without the workers, mail, follower notifications and code view exports would only queue.
 task('check:workers', function () {
-  $workers = ['mail', 'default', 'scratch', 'uploads', 'scheduler_maintenance', 'scheduler_maintenance_slow'];
+  $workers = ['mail', 'default', 'scratch', 'uploads', 'cleanup', 'scheduler_maintenance', 'scheduler_maintenance_slow'];
   // One by one: with several units, `systemctl is-active` succeeds when any of them runs.
   $units = implode(' ', array_map(static fn (string $worker): string => 'catroweb-worker@'.$worker, $workers));
   if (!test('(for unit in '.$units.'; do systemctl is-active --quiet "$unit" || exit 1; done)')) {
     throw new RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
   }
 
-  // ponytail: the cleanup worker only has to be enabled. Until a release with its queue is live it restarts in a
+  // ponytail: the translation worker only has to be enabled. Until a release with its queue is live it restarts in a
   // loop (unknown transport), so is-active would block the very deploy that adds the queue. Move it into $workers
   // once that release is out.
-  if (!test('systemctl is-enabled --quiet catroweb-worker@cleanup')) {
-    throw new RuntimeException('The cleanup worker is not enabled: sudo systemctl enable --now catroweb-worker@cleanup (docs/operations/Background-Jobs.md)');
+  if (!test('systemctl is-enabled --quiet catroweb-worker@translation')) {
+    throw new RuntimeException('The translation worker is not enabled: sudo systemctl enable --now catroweb-worker@translation (docs/operations/Background-Jobs.md)');
   }
 });
 

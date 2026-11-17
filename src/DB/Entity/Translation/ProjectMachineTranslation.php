@@ -33,7 +33,7 @@ class ProjectMachineTranslation
 
   // md5 of the name, description and credits that were translated: an edit during a translation makes it stale.
   #[ORM\Column(type: Types::STRING, length: 32, nullable: true)]
-  private ?string $source_hash = null; // @phpstan-ignore property.onlyWritten (read by ProjectMachineTranslationRepository's query)
+  private ?string $source_hash = null;
 
   // Detected by LibreTranslate, not picked by a user: only these answer requests without a source language.
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
@@ -52,7 +52,7 @@ class ProjectMachineTranslation
 
   public static function sourceHash(Project $project): string
   {
-    return md5(json_encode([$project->getName(), $project->getDescription(), $project->getCredits()], JSON_THROW_ON_ERROR));
+    return md5(json_encode([$project->getName(), $project->getDescription(), $project->getCredits()], JSON_THROW_ON_ERROR | JSON_INVALID_UTF8_SUBSTITUTE));
   }
 
   public function getProject(): Project
@@ -85,9 +85,12 @@ class ProjectMachineTranslation
     return $this->cached_credits;
   }
 
-  public function isAutoDetected(): bool
+  /**
+   * Holds a detected-source translation of the project's current texts.
+   */
+  public function isCurrentAutoDetected(): bool
   {
-    return $this->auto_detected;
+    return $this->auto_detected && null !== $this->cached_name && self::sourceHash($this->project) === $this->source_hash;
   }
 
   public function setCachedTranslation(?string $name, ?string $description, ?string $credits, ?string $source_hash = null, bool $auto_detected = true): void
