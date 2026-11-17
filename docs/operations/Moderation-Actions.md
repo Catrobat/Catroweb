@@ -18,6 +18,7 @@ The warning is a `ModerationNotification` with `moderation_action = 'admin_warni
 ## Where the actions are available
 
 - Admin moderation queue (`/admin/moderation/report/list`): the warn buttons share an optional message field.
+- The report's **Show** page (`/admin/moderation/report/{id}/show`) has the same buttons above the reported content: what an automatic flag found comes first, outlined in red (flagged images with their NSFW score, the texts containing a flagged signal), then a project's other images, sounds and texts, as on Approve Projects (other content types: only the flags and a link to the content). The flags come from `content_report.flagged_assets`; reports from before it are read from their note (`image "<file>" has NSFW score …`, `adults-only signal "…"`).
 - API: `PUT /api/moderation/reports/{id}/resolve` with `{"action": "hide_warn", "message": "..."}` (admin only).
 - Console, for scripted moderation (never close reports with raw SQL, it skips notifications, audit and trust caches):
 

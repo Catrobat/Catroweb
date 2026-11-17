@@ -1,0 +1,52 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+  {% if value.flagged is not empty %}
+    <div class="moderation-flagged" style="border: 2px solid #dd4b39; border-radius: 4px; padding: 8px; margin-bottom: 12px;">
+      <strong>Flagged ({{ value.flagged|length }})</strong>
+      <ul class="list-unstyled" style="margin: 8px 0 0;">
+        {% for asset in value.flagged %}
+          <li class="moderation-flagged-{{ asset.type }}" style="margin-bottom: 8px;">
+            {% if asset.type == 'image' %}
+              {% if asset.url %}
+                <a href="{{ asset.url }}" target="_blank"><img src="{{ asset.url }}" width="200" alt="Flagged image {{ asset.name }}"></a><br>
+              {% endif %}
+              <span class="label label-danger">flagged image</span> {{ asset.name }}
+            {% else %}
+              <span class="label label-danger">flagged text</span> signal "{{ asset.name }}"
+              {% if asset.label %}
+                in {{ asset.label }}: <mark>{{ asset.text }}</mark>
+              {% endif %}
+            {% endif %}
+            {% if asset.score is not null %}
+              <span class="label label-warning">NSFW score {{ asset.score|number_format(3) }}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if value.images is not empty %}
+    <p><strong>{{ value.flagged is empty ? 'Images' : 'Other images' }} ({{ value.images|length }})</strong></p>
+    <div>
+      {% for image in value.images %}
+        <a href="{{ image }}" target="_blank"><img src="{{ image }}" width="100" alt="Project image {{ loop.index }}"></a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if value.sounds is not empty %}
+    <p><strong>Sounds ({{ value.sounds|length }})</strong></p>
+    {% for sound in value.sounds %}
+      <audio controls preload="none" src="{{ sound }}" aria-label="Sound {{ loop.index }}"></audio> (<a href="{{ sound }}">Download</a>)<br>
+    {% endfor %}
+  {% endif %}
+
+  {% if value.texts is not empty %}
+    <p><strong>Texts ({{ value.texts|length }})</strong></p>
+    {% for text in value.texts %}
+      <span class="label label-primary">{{ text.label }}: {{ text.text }}</span>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

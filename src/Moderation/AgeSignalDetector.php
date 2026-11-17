@@ -63,6 +63,11 @@ class AgeSignalDetector
 
   private const string INVISIBLE_CHARACTERS = '/[\x{200B}\x{200C}\x{200D}\x{2060}\x{00AD}\x{FEFF}]/u';
 
+  public static function removeInvisibleCharacters(string $text): string
+  {
+    return preg_replace(self::INVISIBLE_CHARACTERS, '', $text) ?? $text;
+  }
+
   /**
    * @return string|null the first signal found, for the moderation note
    */
@@ -73,7 +78,7 @@ class AgeSignalDetector
         continue;
       }
 
-      $text = preg_replace(self::INVISIBLE_CHARACTERS, '', $text) ?? $text;
+      $text = self::removeInvisibleCharacters($text);
       $text = preg_replace(self::NUMBER_CONTEXT, ' ', $text) ?? $text;
       foreach (self::PATTERNS as $pattern) {
         preg_match_all('~(*UCP)'.$pattern.'~iu', $text, $matches, PREG_OFFSET_CAPTURE);
