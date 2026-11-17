@@ -1819,7 +1819,7 @@ paths:
       tags:
         - 'Translation'
       summary: 'Machine-translate a project'
-      description: 'Translates the project name, description, and credits using machine translation.'
+      description: 'Translates the project name, description, and credits using machine translation. Translations are cached; an uncached one runs in the background and answers 202 until it is done, so ask again after Retry-After seconds.'
       parameters:
         - $ref: '#/components/parameters/Uuid'
         - name: target_language
@@ -1843,6 +1843,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectTranslationResponse'
+        '202':
+          description: 'Accepted: the translation runs in the background, ask again after Retry-After seconds'
         '304':
           description: 'Not Modified (ETag match)'
         '400':
