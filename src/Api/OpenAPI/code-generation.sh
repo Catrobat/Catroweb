@@ -52,7 +52,7 @@ php src/Api/OpenAPI/sort-routes.php
 bin/rector process --config src/Api/OpenAPI/rector-attributes.php --clear-cache --no-progress-bar > /dev/null
 # Symfony 8 rejects Choice(array) (an options array); the list must be Choice(choices: array)
 find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/Assert\\Choice(\[/Assert\\Choice(choices: [/g' {} +
-# Note: Rector (run after this script) turns Assert\Type('OpenAPI\\Server\\Model\\...') into the
+# Note: the project-wide Rector run (bin/rector process src/Api/OpenAPI/Server/, after this script) turns Assert\Type('OpenAPI\\Server\\Model\\...') into the
 # fully qualified \OpenAPI\Server\Model\...::class. Do NOT sed it to an unqualified ::class:
 # the controllers don't import Model classes, so it would resolve to the Controller namespace.
 

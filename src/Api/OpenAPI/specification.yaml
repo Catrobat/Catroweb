@@ -4336,9 +4336,8 @@ components:
 
     # Category Requests
     MediaCategoryRequest:
+      # No `required`: PATCH reuses this schema for partial updates; POST checks the name itself.
       type: object
-      required:
-        - name
       properties:
         name:
           type: string

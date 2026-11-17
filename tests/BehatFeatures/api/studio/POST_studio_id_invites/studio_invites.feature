@@ -89,6 +89,8 @@ Feature: Studio admins manage invite codes
       """
     When I POST "/api/studios/1/invites"
     Then the response status code should be "422"
+    And the JSON response field "error.type" should be '"validation_error"'
+    And the JSON response field "error.details.0.field" should be '"max_uses"'
     And the client response should contain "greater than or equal to 1"
 
   Scenario: An admin lists only the invites of their studio

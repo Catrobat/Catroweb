@@ -45,7 +45,6 @@ class MediaCategoryRequest
    * Category name.
    */
   #[SerializedName('name')]
-  #[Assert\NotNull]
   #[Assert\Type('string')]
   #[Type('string')]
   protected ?string $name = null;
@@ -92,7 +91,7 @@ class MediaCategoryRequest
    *
    * @return $this
    */
-  public function setName(?string $name): self
+  public function setName(?string $name = null): self
   {
     $this->name = $name;
 
