@@ -136,6 +136,24 @@ final class TranslationApiTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testTranslationGetInvalidLanguage(): void
+  {
+    $project_manager = $this->createStub(ProjectManager::class);
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
+    $loader = $this->createStub(TranslationApiLoader::class);
+    $loader->method('translateProject')->willThrowException(new \InvalidArgumentException('bad code'));
+    $facade = $this->createStub(TranslationApiFacade::class);
+    $facade->method('getLoader')->willReturn($loader);
+    $request_stack = new RequestStack();
+    $request_stack->push(new Request());
+
+    $code = 200;
+    $headers = [];
+    $this->assertNull($this->buildApi(facade: $facade, project_manager: $project_manager, request_stack: $request_stack)->projectsIdTranslationGet('1', 'xx-Latn', 'en', null, $code, $headers));
+    $this->assertSame(Response::HTTP_BAD_REQUEST, $code);
+  }
+
+  #[Group('unit')]
   public function testTranslationGetRateLimited(): void
   {
     $project_manager = $this->createStub(ProjectManager::class);

@@ -45,7 +45,6 @@ class TranslationDelegateTest extends TestCase
       ['xx'],
       ['EN'], // need to be lowercase en
       ['xxxxx'],
-      ['en-XX'],
       ['EN-US'], // need to be lowercase en
       ['en-us'], // need to be uppercase US
       ['xx-US'],
@@ -78,6 +77,14 @@ class TranslationDelegateTest extends TestCase
     $this->assertSame('translated name', $result[0]?->translation);
     $this->assertNull($result[1]);
     $this->assertSame('translated credit', $result[2]?->translation);
+  }
+
+  public function testLocaleWithoutARealCountryIsTranslatedByLanguage(): void
+  {
+    $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('translate')->with('test', null, 'sr')->willReturn(new TranslationResult());
+
+    $this->delegate($api)->translate('test', null, 'sr-SP');
   }
 
   public function testTranslateProjectSkipsBlankTexts(): void

@@ -74,7 +74,14 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
       return null;
     }
 
-    $translation_result = $this->facade->getLoader()->translateProject($project, $source_language, $target_language);
+    try {
+      $translation_result = $this->facade->getLoader()->translateProject($project, $source_language, $target_language);
+    } catch (\InvalidArgumentException) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
     if (null === $translation_result) {
       $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
 

@@ -116,6 +116,8 @@ class TranslationDelegate
    */
   public function translateProject(Project $project, ?string $source_language, string $target_language): ?array
   {
+    $source_language = $this->machineLanguage($source_language);
+    $target_language = $this->machineLanguage($target_language);
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
 
@@ -162,10 +164,26 @@ class TranslationDelegate
    */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
+    $source_language = $this->machineLanguage($source_language);
+    $target_language = $this->machineLanguage($target_language);
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
 
     return $this->api->translate($text, $source_language, $target_language);
+  }
+
+  /**
+   * Site locales like sr_SP or ha_HG carry no real country; machine translation only needs the language.
+   *
+   * @return ($language is null ? null : string)
+   */
+  private function machineLanguage(?string $language): ?string
+  {
+    if (null !== $language && 1 === preg_match('/^([a-z]{2})-([A-Z]{2})$/', $language, $m) && !Countries::exists($m[2])) {
+      return $m[1];
+    }
+
+    return $language;
   }
 
   private function validateLanguage(?string $language): void
