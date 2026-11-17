@@ -131,6 +131,36 @@ class ScanContentImagesHandlerTest extends TestCase
     $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
   }
 
+  public function testALookNamedLikeAScreenshotIsStillALook(): void
+  {
+    (new Filesystem())->dumpFile($this->dir.'Scene 1/images/screenshot.png', str_repeat('x', 5_000));
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => in_array($blob[0], ['b', 'x'], true)
+      ? new ContentSafetyResult(safe: false, nsfwScore: 0.99)
+      : new ContentSafetyResult(safe: true, nsfwScore: 0.01));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(2), true,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testTheHidePolicyIsConfigurable(): void
+  {
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturn(new ContentSafetyResult(safe: false, nsfwScore: 0.99));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(3), false,
+    );
+
+    // Two looks and a screenshot flagged: not enough for 3 looks, and below a hide threshold of 0.999.
+    $this->handler($scanner, $auto_moderation, 0.97, 0.999, 3)(new ScanContentImages('project', 'p1'));
+  }
+
   public function testTheSameLookInTwoScenesCountsOnce(): void
   {
     (new Filesystem())->dumpFile($this->dir.'Scene 2/images/big.png', str_repeat('b', 8_000));
@@ -213,7 +243,7 @@ class ScanContentImagesHandlerTest extends TestCase
     $this->handler($scanner, $auto_moderation, 0.97)(new ScanContentImages('project', 'p1'));
   }
 
-  private function handler(ContentSafetyScanner $scanner, AutoModerationService $auto_moderation, float $threshold = 0.9): ScanContentImagesHandler
+  private function handler(ContentSafetyScanner $scanner, AutoModerationService $auto_moderation, float $threshold = 0.9, float $hide_threshold = 0.995, int $hide_min_images = 2): ScanContentImagesHandler
   {
     $entity_manager = $this->createStub(EntityManagerInterface::class);
     $entity_manager->method('find')->willReturn(new Project());
@@ -234,6 +264,8 @@ class ScanContentImagesHandlerTest extends TestCase
       $auto_moderation,
       new NullLogger(),
       $threshold,
+      $hide_threshold,
+      $hide_min_images,
     );
   }
 }

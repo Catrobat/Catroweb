@@ -147,7 +147,7 @@ final readonly class ScanContentImagesHandler
     $dir = $this->extracted_file_repository->loadProjectExtractedFile($project)?->getPath();
     $images = [];
     if (null !== $dir && is_dir($dir)) {
-      foreach ((new Finder())->files()->in($dir)->name(['manual_screenshot.png', 'automatic_screenshot.png', 'screenshot.png']) as $file) {
+      foreach ((new Finder())->files()->in($dir)->name(['manual_screenshot.png', 'automatic_screenshot.png', 'screenshot.png'])->notPath('~(^|/)images/~') as $file) {
         $paths[] = $file->getPathname();
       }
 
