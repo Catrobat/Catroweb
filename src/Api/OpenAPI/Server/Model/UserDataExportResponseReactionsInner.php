@@ -41,31 +41,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserDataExportResponseReactionsInner
 {
-  /**
-   * @SerializedName("project_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('project_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $project_id = null;
 
-  /**
-   * @SerializedName("type")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('type')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $type = null;
 
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('created_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $created_at = null;
 
   /**

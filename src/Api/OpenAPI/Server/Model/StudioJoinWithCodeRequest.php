@@ -43,15 +43,11 @@ class StudioJoinWithCodeRequest
 {
   /**
    * The invite code; case, spaces and dashes are ignored.
-   *
-   * @SerializedName("code")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('code')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $code = null;
 
   /**

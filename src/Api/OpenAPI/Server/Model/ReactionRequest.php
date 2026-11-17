@@ -43,17 +43,12 @@ class ReactionRequest
 {
   /**
    * The type of reaction.
-   *
-   * @SerializedName("type")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Choice({ "thumbs_up", "smile", "love", "wow" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('type')]
+  #[Assert\NotNull]
+  #[Assert\Choice(choices: ['thumbs_up', 'smile', 'love', 'wow'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $type = null;
 
   /**

@@ -43,79 +43,58 @@ class UpdateProjectRequest
 {
   /**
    * The name of the project. minLength: 1 | maxLength: 255.
-   *
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * A description of the project.
-   *
-   * @SerializedName("description")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('description')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $description = null;
 
   /**
    * Credits and notes for the project. E.g., credits for using ideas, scripts or artwork from other people.
-   *
-   * @SerializedName("credits")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('credits')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $credits = null;
 
   /**
    * Whether a project is publicly visible (false) or only via direct link (true).
-   *
-   * @SerializedName("private")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('private')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $private = null;
 
   /**
    * An image representing the project in data URI scheme.
-   *
-   * @SerializedName("screenshot")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('screenshot')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $screenshot = null;
 
   /**
    * Mark the project as not suitable for kids (true) or safe for kids (false). Cannot be changed if set by a moderator.
-   *
-   * @SerializedName("not_for_kids")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('not_for_kids')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $not_for_kids = null;
 
   /**
    * Custom short URL name: the project is then also reachable at /app/project/{slug}. 3-50 characters, lowercase letters, digits and single hyphens, at least one letter, unique. An empty string removes it.
-   *
-   * @SerializedName("slug")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('slug')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $slug = null;
 
   /**

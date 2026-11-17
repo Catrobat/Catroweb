@@ -41,92 +41,57 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProjectUploadSessionResponse
 {
-  /**
-   * @SerializedName("id")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('id')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("file_size")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('file_size')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $file_size = null;
 
   /**
    * Every chunk except the last must be exactly this many bytes.
-   *
-   * @SerializedName("chunk_size")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('chunk_size')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $chunk_size = null;
 
-  /**
-   * @SerializedName("total_chunks")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('total_chunks')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $total_chunks = null;
 
   /**
    * Zero-based numbers of the chunks the server has stored.
    *
    * @var int[]|null
-   *
-   * @SerializedName("received_chunks")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("int")
-   * })
-   *
-   * @Type("array<int>")
    */
+  #[SerializedName('received_chunks')]
+  #[Assert\NotNull]
+  #[Assert\All([new Assert\Type('int')])]
+  #[Type('array<int>')]
   protected ?array $received_chunks = null;
 
   /**
    * Largest project file this server accepts, in bytes.
-   *
-   * @SerializedName("max_file_size")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('max_file_size')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $max_file_size = null;
 
-  /**
-   * @SerializedName("expires_at")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('expires_at')]
+  #[Assert\NotNull]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $expires_at = null;
 
   /**

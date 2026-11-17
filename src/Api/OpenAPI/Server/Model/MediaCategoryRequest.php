@@ -43,35 +43,24 @@ class MediaCategoryRequest
 {
   /**
    * Category name.
-   *
-   * @SerializedName("name")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('name')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * Category description.
-   *
-   * @SerializedName("description")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('description')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $description = null;
 
-  /**
-   * @SerializedName("priority")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('priority')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $priority = 0;
 
   /**

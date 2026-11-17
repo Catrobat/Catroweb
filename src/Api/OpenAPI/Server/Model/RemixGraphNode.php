@@ -43,91 +43,64 @@ class RemixGraphNode
 {
   /**
    * Graph node id composed of source and project id.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * Project ID in its source namespace.
-   *
-   * @SerializedName("projectId")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('projectId')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $project_id = null;
 
   /**
    * Source platform of the node.
-   *
-   * @SerializedName("source")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Choice({ "catrobat", "scratch" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('source')]
+  #[Assert\NotNull]
+  #[Assert\Choice(choices: ['catrobat', 'scratch'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $source = null;
 
   /**
    * Whether project metadata is available to the current viewer.
-   *
-   * @SerializedName("available")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('available')]
+  #[Assert\NotNull]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $available = null;
 
   /**
    * Project title; omitted when unavailable to the current viewer.
-   *
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * Username of the project owner; omitted when unavailable to the current viewer.
-   *
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $username = null;
 
   /**
    * Thumbnail URL resolved from project source and availability.
-   *
-   * @SerializedName("thumbnailUrl")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('thumbnailUrl')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $thumbnail_url = null;
 
   /**

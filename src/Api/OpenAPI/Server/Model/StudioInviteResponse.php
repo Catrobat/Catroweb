@@ -43,80 +43,51 @@ class StudioInviteResponse
 {
   /**
    * Invite UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("code")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('code')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $code = null;
 
   /**
    * Web link that joins the studio with this code.
-   *
-   * @SerializedName("url")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('url')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $url = null;
 
   /**
    * Locally generated SVG image as a data URI for the invite URL. Present only while the invite is usable; returned only to active studio admins, with no shared cache.
-   *
-   * @SerializedName("qr_code")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('qr_code')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $qr_code = null;
 
-  /**
-   * @SerializedName("uses")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('uses')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $uses = null;
 
-  /**
-   * @SerializedName("max_uses")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('max_uses')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $max_uses = null;
 
-  /**
-   * @SerializedName("expires_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('expires_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $expires_at = null;
 
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('created_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $created_at = null;
 
   /**

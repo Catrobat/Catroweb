@@ -1,8 +1,0 @@
-# JMS reads no docblock annotations (doctrine/annotations is not installed), so the generated
-# @Type("array<string>") is ignored and an untyped array property cannot be deserialized.
-# Loaded by OpenAPI\Server\Service\JmsSerializer; a file here replaces all metadata of its class.
-OpenAPI\Server\Model\StudioBatchAddProjectsRequest:
-  properties:
-    project_ids:
-      type: array<string>
-      serialized_name: project_ids

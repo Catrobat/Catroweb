@@ -43,140 +43,99 @@ class NotificationResponse
 {
   /**
    * Id of the notification.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * Notification Type.
-   *
-   * @SerializedName("type")
-   *
-   * @Assert\Choice({ "reaction", "follow", "comment", "remix", "moderation", "studio", "project", "other" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('type')]
+  #[Assert\Choice(choices: ['reaction', 'follow', 'comment', 'remix', 'moderation', 'studio', 'project', 'other'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $type = null;
 
   /**
    * Seen status of the notification.
-   *
-   * @SerializedName("seen")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('seen')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $seen = null;
 
   /**
    * Id of the user who caused the notification.
-   *
-   * @SerializedName("from")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Regex("/^[a-zA-Z0-9\-]+$/")
    */
+  #[SerializedName('from')]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Regex('/^[a-zA-Z0-9\-]+$/')]
   protected ?string $from = null;
 
   /**
    * Username of the user who caused the notification.
-   *
-   * @SerializedName("from_name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('from_name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $from_name = null;
 
   /**
    * Id of the project for which the notification is about.
-   *
-   * @SerializedName("project")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Regex("/^[a-zA-Z0-9\-]+$/")
    */
+  #[SerializedName('project')]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Regex('/^[a-zA-Z0-9\-]+$/')]
   protected ?string $project = null;
 
   /**
    * Name of the project for which the notification is about.
-   *
-   * @SerializedName("project_name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('project_name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $project_name = null;
 
-  /**
-   * @SerializedName("avatar")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
-   *
-   * @Type("OpenAPI\Server\Model\ImageVariants")
-   */
+  #[SerializedName('avatar')]
+  #[Assert\Type(ImageVariants::class)]
+  #[Type(ImageVariants::class)]
   protected ?ImageVariants $avatar = null;
 
   /**
    * Id of the remixed project.
-   *
-   * @SerializedName("remixed_project")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Regex("/^[a-zA-Z0-9\-]+$/")
    */
+  #[SerializedName('remixed_project')]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Regex('/^[a-zA-Z0-9\-]+$/')]
   protected ?string $remixed_project = null;
 
   /**
    * Name of the remixed project.
-   *
-   * @SerializedName("remixed_project_name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('remixed_project_name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $remixed_project_name = null;
 
   /**
    * Notification message.
-   *
-   * @SerializedName("message")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('message')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $message = null;
 
   /**
    * Prize for anniversary notifications.
-   *
-   * @SerializedName("prize")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('prize')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $prize = null;
 
   /**

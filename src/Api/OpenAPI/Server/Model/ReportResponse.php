@@ -43,87 +43,53 @@ class ReportResponse
 {
   /**
    * Report UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("reporter_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('reporter_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $reporter_id = null;
 
-  /**
-   * @SerializedName("content_type")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('content_type')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $content_type = null;
 
-  /**
-   * @SerializedName("content_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('content_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $content_id = null;
 
-  /**
-   * @SerializedName("category")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('category')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $category = null;
 
-  /**
-   * @SerializedName("note")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('note')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $note = null;
 
   /**
    * 1&#x3D;new, 2&#x3D;accepted, 3&#x3D;rejected.
-   *
-   * @SerializedName("state")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('state')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $state = null;
 
-  /**
-   * @SerializedName("reporter_trust_score")
-   *
-   * @Assert\Type("float")
-   *
-   * @Type("float")
-   */
+  #[SerializedName('reporter_trust_score')]
+  #[Assert\Type('float')]
+  #[Type('float')]
   protected ?float $reporter_trust_score = null;
 
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('created_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $created_at = null;
 
   /**

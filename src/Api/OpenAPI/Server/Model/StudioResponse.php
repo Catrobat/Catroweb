@@ -43,165 +43,119 @@ class StudioResponse
 {
   /**
    * ID of the studio.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * The name of the studio.
-   *
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * A small description about the Studio.
-   *
-   * @SerializedName("description")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('description')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $description = '';
 
   /**
    * This flag sets the studios&#39; visibility to public or private.
-   *
-   * @SerializedName("is_public")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('is_public')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $is_public = true;
 
   /**
    * This flag enables or disabled the possibility to add comments to the studio.
-   *
-   * @SerializedName("enable_comments")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('enable_comments')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $enable_comments = true;
 
-  /**
-   * @SerializedName("cover")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
-   *
-   * @Type("OpenAPI\Server\Model\ImageVariants")
-   */
+  #[SerializedName('cover')]
+  #[Assert\Type(ImageVariants::class)]
+  #[Type(ImageVariants::class)]
   protected ?ImageVariants $cover = null;
 
   /**
    * Number of members in the studio.
-   *
-   * @SerializedName("members_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('members_count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $members_count = null;
 
   /**
    * Number of projects in the studio.
-   *
-   * @SerializedName("projects_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('projects_count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $projects_count = null;
 
   /**
    * Whether the authenticated user is a member of this studio (null if not authenticated).
-   *
-   * @SerializedName("is_member")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('is_member')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $is_member = null;
 
   /**
    * Whether the authenticated user is banned from this studio and so cannot join it again (null if not authenticated).
-   *
-   * @SerializedName("is_banned")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('is_banned')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $is_banned = null;
 
   /**
    * Status of the authenticated user&#39;s join request (pending, approved, declined) or null.
-   *
-   * @SerializedName("join_request_status")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('join_request_status')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $join_request_status = null;
 
   /**
    * Number of activities in the studio.
-   *
-   * @SerializedName("activities_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('activities_count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $activities_count = null;
 
   /**
    * Number of comments in the studio.
-   *
-   * @SerializedName("comments_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('comments_count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $comments_count = null;
 
   /**
    * Authenticated user&#39;s role in the studio (admin, member) or null.
-   *
-   * @SerializedName("user_role")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('user_role')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $user_role = null;
 
   /**
    * Number of pending join requests (only for admins, null otherwise).
-   *
-   * @SerializedName("pending_join_requests_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('pending_join_requests_count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $pending_join_requests_count = null;
 
   /**

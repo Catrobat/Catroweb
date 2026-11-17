@@ -43,51 +43,31 @@ class StudioActivityResponse
 {
   /**
    * Activity UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("type")
-   *
-   * @Assert\Choice({ "user", "project", "comment" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('type')]
+  #[Assert\Choice(choices: ['user', 'project', 'comment'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $type = null;
 
-  /**
-   * @SerializedName("user_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('user_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $user_id = null;
 
-  /**
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $username = null;
 
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('created_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $created_at = null;
 
   /**

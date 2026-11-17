@@ -43,58 +43,34 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserDataExportResponseProfile
 {
-  /**
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $username = null;
 
-  /**
-   * @SerializedName("email")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('email')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $email = null;
 
-  /**
-   * @SerializedName("about")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('about')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $about = null;
 
-  /**
-   * @SerializedName("currently_working_on")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('currently_working_on')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $currently_working_on = null;
 
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('created_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $created_at = null;
 
   /**

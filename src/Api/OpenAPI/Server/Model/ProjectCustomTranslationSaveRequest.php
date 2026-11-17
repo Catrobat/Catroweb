@@ -43,15 +43,11 @@ class ProjectCustomTranslationSaveRequest
 {
   /**
    * The translated text.
-   *
-   * @SerializedName("text")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('text')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $text = null;
 
   /**

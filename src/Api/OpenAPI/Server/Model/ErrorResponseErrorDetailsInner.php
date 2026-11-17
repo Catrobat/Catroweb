@@ -43,28 +43,20 @@ class ErrorResponseErrorDetailsInner
 {
   /**
    * The field that caused the error.
-   *
-   * @SerializedName("field")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('field')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $field = null;
 
   /**
    * Human-readable error message for this field.
-   *
-   * @SerializedName("message")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('message')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $message = null;
 
   /**

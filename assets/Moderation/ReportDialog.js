@@ -209,6 +209,7 @@ function buildReportHtml(categories, translations, oldData) {
                               class="report-reason report-dialog__note"
                               type="textarea"
                               rows="4"
+                              maxlength="5000"
                               placeholder="${escapeAttr(placeholder)}"
                               value="${escapeAttr(noteValue)}"></md-outlined-text-field>
     </div>

@@ -80,6 +80,17 @@ Feature: Studio admins manage invite codes
     When I POST "/api/studios/1/invites"
     Then the response status code should be "422"
 
+  Scenario: Max uses outside the spec's 1..1000 is rejected
+    Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"max_uses": 0}
+      """
+    When I POST "/api/studios/1/invites"
+    Then the response status code should be "422"
+    And the client response should contain "greater than or equal to 1"
+
   Scenario: An admin lists only the invites of their studio
     Given I use a valid JWT Bearer token for "Admin"
     When I GET "/api/studios/1/invites"

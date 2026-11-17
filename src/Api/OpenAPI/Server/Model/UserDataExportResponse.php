@@ -45,102 +45,65 @@ class UserDataExportResponse
 {
   /**
    * Timestamp when the export was generated.
-   *
-   * @SerializedName("exported_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
    */
+  #[SerializedName('exported_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $exported_at = null;
 
-  /**
-   * @SerializedName("profile")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\UserDataExportResponseProfile")
-   *
-   * @Type("OpenAPI\Server\Model\UserDataExportResponseProfile")
-   */
+  #[SerializedName('profile')]
+  #[Assert\Type(UserDataExportResponseProfile::class)]
+  #[Type(UserDataExportResponseProfile::class)]
   protected ?UserDataExportResponseProfile $profile = null;
 
   /**
    * Projects uploaded by the user.
    *
    * @var UserDataExportResponseProjectsInner[]|null
-   *
-   * @SerializedName("projects")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\UserDataExportResponseProjectsInner")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\UserDataExportResponseProjectsInner>")
    */
+  #[SerializedName('projects')]
+  #[Assert\All([new Assert\Type(UserDataExportResponseProjectsInner::class)])]
+  #[Type('array<OpenAPI\Server\Model\UserDataExportResponseProjectsInner>')]
   protected ?array $projects = null;
 
   /**
    * Comments written by the user.
    *
    * @var UserDataExportResponseCommentsInner[]|null
-   *
-   * @SerializedName("comments")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\UserDataExportResponseCommentsInner")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\UserDataExportResponseCommentsInner>")
    */
+  #[SerializedName('comments')]
+  #[Assert\All([new Assert\Type(UserDataExportResponseCommentsInner::class)])]
+  #[Type('array<OpenAPI\Server\Model\UserDataExportResponseCommentsInner>')]
   protected ?array $comments = null;
 
   /**
    * Reactions (likes) given by the user.
    *
    * @var UserDataExportResponseReactionsInner[]|null
-   *
-   * @SerializedName("reactions")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\UserDataExportResponseReactionsInner")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\UserDataExportResponseReactionsInner>")
    */
+  #[SerializedName('reactions')]
+  #[Assert\All([new Assert\Type(UserDataExportResponseReactionsInner::class)])]
+  #[Type('array<OpenAPI\Server\Model\UserDataExportResponseReactionsInner>')]
   protected ?array $reactions = null;
 
   /**
    * Users who follow this user.
    *
    * @var UserDataExportResponseFollowersInner[]|null
-   *
-   * @SerializedName("followers")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\UserDataExportResponseFollowersInner")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\UserDataExportResponseFollowersInner>")
    */
+  #[SerializedName('followers')]
+  #[Assert\All([new Assert\Type(UserDataExportResponseFollowersInner::class)])]
+  #[Type('array<OpenAPI\Server\Model\UserDataExportResponseFollowersInner>')]
   protected ?array $followers = null;
 
   /**
    * Users followed by this user.
    *
    * @var UserDataExportResponseFollowersInner[]|null
-   *
-   * @SerializedName("following")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\UserDataExportResponseFollowersInner")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\UserDataExportResponseFollowersInner>")
    */
+  #[SerializedName('following')]
+  #[Assert\All([new Assert\Type(UserDataExportResponseFollowersInner::class)])]
+  #[Type('array<OpenAPI\Server\Model\UserDataExportResponseFollowersInner>')]
   protected ?array $following = null;
 
   /**

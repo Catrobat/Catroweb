@@ -41,45 +41,28 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ReactionUserEntry
 {
-  /**
-   * @SerializedName("user")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\ReactionUserInfo")
-   *
-   * @Type("OpenAPI\Server\Model\ReactionUserInfo")
-   */
+  #[SerializedName('user')]
+  #[Assert\Type(ReactionUserInfo::class)]
+  #[Type(ReactionUserInfo::class)]
   protected ?ReactionUserInfo $user = null;
 
   /**
    * Reaction types by this user.
    *
    * @var string[]|null
-   *
-   * @SerializedName("types")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Choice({ "thumbs_up", "smile", "love", "wow" })
-   * })
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("string")
-   * })
-   *
-   * @Type("array<string>")
    */
+  #[SerializedName('types')]
+  #[Assert\All([new Assert\Choice(choices: ['thumbs_up', 'smile', 'love', 'wow'])])]
+  #[Assert\All([new Assert\Type('string')])]
+  #[Type('array<string>')]
   protected ?array $types = null;
 
   /**
    * When the most recent reaction was added.
-   *
-   * @SerializedName("reacted_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
    */
+  #[SerializedName('reacted_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $reacted_at = null;
 
   /**

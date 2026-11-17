@@ -45,38 +45,26 @@ class FollowersListResponse
    * Array of follower items.
    *
    * @var FollowerResponse[]|null
-   *
-   * @SerializedName("data")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\FollowerResponse")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\FollowerResponse>")
    */
+  #[SerializedName('data')]
+  #[Assert\All([new Assert\Type(FollowerResponse::class)])]
+  #[Type('array<OpenAPI\Server\Model\FollowerResponse>')]
   protected ?array $data = null;
 
   /**
    * Total number of followers.
-   *
-   * @SerializedName("total_followers")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('total_followers')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $total_followers = null;
 
   /**
    * Total number of users being followed.
-   *
-   * @SerializedName("total_following")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('total_following')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $total_following = null;
 
   /**

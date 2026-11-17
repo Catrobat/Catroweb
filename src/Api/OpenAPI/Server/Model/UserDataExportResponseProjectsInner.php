@@ -41,67 +41,39 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserDataExportResponseProjectsInner
 {
-  /**
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
-  /**
-   * @SerializedName("description")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('description')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $description = null;
 
-  /**
-   * @SerializedName("uploaded_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('uploaded_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $uploaded_at = null;
 
-  /**
-   * @SerializedName("views")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('views')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $views = null;
 
-  /**
-   * @SerializedName("downloads")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('downloads')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $downloads = null;
 
-  /**
-   * @SerializedName("private")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
-   */
+  #[SerializedName('private')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $private = null;
 
   /**

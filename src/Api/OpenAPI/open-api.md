@@ -46,8 +46,7 @@ To generate the OpenAPI code (e.g., client libraries, server stubs, etc.), you n
    On an unchanged spec this must produce no diff. Never hand-edit `src/Api/OpenAPI/Server/`; change the spec or the pipeline instead:
    - Route requirements come from the path parameter's `pattern` (without one the generator emits `[a-z0-9]+`, which rejects UUIDs).
    - `sort-routes.php` puts literal routes before placeholder routes within each tag section (`/projects/search` before `/projects/{id}`), since the generator orders routes by operationId.
-   - Symfony's validator ignores the docblock `@Assert` annotations the generator writes on models. Request-body constraints that must hold go into `config/validator/<Model>.yaml`.
-   - JMS reads no docblock annotations either; it types properties from their PHP types. A request model with a typed array (`@Type("array<string>")`) needs `config/jms/<Model>.yml`, otherwise deserialization fails with "You must define a type".
+   - The generator writes model constraints (`@Assert\...`) and JMS metadata (`@Type`, `@SerializedName`) as docblock annotations, which neither Symfony's validator nor JMS reads. `rector-attributes.php` (run by `code-generation.sh`) turns them into PHP attributes, so every spec constraint on a request body (`minLength`, `maxItems`, `enum`, `required`, ...) is enforced. Changing one changes what the API accepts: check what the website and the Catroid app send first.
 
 ### Breaking Changes in the OpenAPI Spec
 

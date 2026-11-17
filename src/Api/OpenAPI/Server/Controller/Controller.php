@@ -141,6 +141,11 @@ class Controller extends AbstractController
         $errorsString .= $violation->getMessage()."\n";
       }
 
+      // A request body that breaks its model's spec constraints is 422, a bad parameter 400
+      if (is_object($data) && str_starts_with($data::class, 'OpenAPI\Server\Model\\')) {
+        return new Response($errorsString, Response::HTTP_UNPROCESSABLE_ENTITY);
+      }
+
       return $this->createBadRequestResponse($errorsString);
     }
 

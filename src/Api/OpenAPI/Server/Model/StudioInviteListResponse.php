@@ -43,16 +43,10 @@ class StudioInviteListResponse
 {
   /**
    * @var StudioInviteResponse[]|null
-   *
-   * @SerializedName("data")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\StudioInviteResponse")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\StudioInviteResponse>")
    */
+  #[SerializedName('data')]
+  #[Assert\All([new Assert\Type(StudioInviteResponse::class)])]
+  #[Type('array<OpenAPI\Server\Model\StudioInviteResponse>')]
   protected ?array $data = null;
 
   /**

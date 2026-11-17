@@ -41,22 +41,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserDataExportResponseFollowersInner
 {
-  /**
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $username = null;
 
   /**

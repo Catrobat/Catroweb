@@ -43,38 +43,22 @@ class LoginRequest
 {
   /**
    * Name of the user.
-   *
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 180
-   * )
-   * @Assert\Length(
-   *   min = 3
-   * )
    */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Length(max: 180)]
+  #[Assert\Length(min: 3)]
   protected ?string $username = null;
 
   /**
    * A secure password.
-   *
-   * @SerializedName("password")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 4096
-   * )
-   * @Assert\Length(
-   *   min = 6
-   * )
    */
+  #[SerializedName('password')]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Length(max: 4096)]
+  #[Assert\Length(min: 6)]
   protected ?string $password = null;
 
   /**

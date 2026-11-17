@@ -43,71 +43,44 @@ class UserReportResponse
 {
   /**
    * Report UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("content_type")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('content_type')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $content_type = null;
 
-  /**
-   * @SerializedName("content_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('content_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $content_id = null;
 
-  /**
-   * @SerializedName("category")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('category')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $category = null;
 
   /**
    * pending, accepted, or rejected.
-   *
-   * @SerializedName("status")
-   *
-   * @Assert\Choice({ "pending", "accepted", "rejected" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('status')]
+  #[Assert\Choice(choices: ['pending', 'accepted', 'rejected'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $status = null;
 
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('created_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $created_at = null;
 
-  /**
-   * @SerializedName("resolved_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('resolved_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $resolved_at = null;
 
   /**

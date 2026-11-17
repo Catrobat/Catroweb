@@ -5769,7 +5769,6 @@ components:
           items:
             type: string
           description: List of project UUIDs to add
-          # Enforced by config/validator/StudioBatchAddProjectsRequest.yaml; keep both in sync.
           minItems: 1
           maxItems: 50
 

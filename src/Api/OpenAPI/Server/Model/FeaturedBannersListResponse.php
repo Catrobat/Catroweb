@@ -43,34 +43,20 @@ class FeaturedBannersListResponse
 {
   /**
    * @var FeaturedBannerResponse[]|null
-   *
-   * @SerializedName("data")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\FeaturedBannerResponse")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\FeaturedBannerResponse>")
    */
+  #[SerializedName('data')]
+  #[Assert\All([new Assert\Type(FeaturedBannerResponse::class)])]
+  #[Type('array<OpenAPI\Server\Model\FeaturedBannerResponse>')]
   protected ?array $data = null;
 
-  /**
-   * @SerializedName("next_cursor")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('next_cursor')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $next_cursor = null;
 
-  /**
-   * @SerializedName("has_more")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
-   */
+  #[SerializedName('has_more')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $has_more = null;
 
   /**

@@ -43,33 +43,23 @@ class ReactionUserInfo
 {
   /**
    * Unique ID of the user.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * Username of the user.
-   *
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $username = null;
 
-  /**
-   * @SerializedName("avatar")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
-   *
-   * @Type("OpenAPI\Server\Model\ImageVariants")
-   */
+  #[SerializedName('avatar')]
+  #[Assert\Type(ImageVariants::class)]
+  #[Type(ImageVariants::class)]
   protected ?ImageVariants $avatar = null;
 
   /**

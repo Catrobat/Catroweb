@@ -43,59 +43,40 @@ class ErrorResponseError
 {
   /**
    * HTTP status code.
-   *
-   * @SerializedName("code")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('code')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $code = null;
 
   /**
    * Machine-readable error type.
-   *
-   * @SerializedName("type")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Choice({ "validation_error", "bad_request", "unauthorized", "forbidden", "not_found", "not_acceptable", "unsupported_media_type", "unprocessable_entity", "too_many_requests", "internal_error", "service_unavailable" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('type')]
+  #[Assert\NotNull]
+  #[Assert\Choice(choices: ['validation_error', 'bad_request', 'unauthorized', 'forbidden', 'not_found', 'not_acceptable', 'unsupported_media_type', 'unprocessable_entity', 'too_many_requests', 'internal_error', 'service_unavailable'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $type = null;
 
   /**
    * Human-readable error summary.
-   *
-   * @SerializedName("message")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('message')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $message = null;
 
   /**
    * Optional field-level error details (for validation errors).
    *
    * @var ErrorResponseErrorDetailsInner[]|null
-   *
-   * @SerializedName("details")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\ErrorResponseErrorDetailsInner")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\ErrorResponseErrorDetailsInner>")
    */
+  #[SerializedName('details')]
+  #[Assert\All([new Assert\Type(ErrorResponseErrorDetailsInner::class)])]
+  #[Type('array<OpenAPI\Server\Model\ErrorResponseErrorDetailsInner>')]
   protected ?array $details = null;
 
   /**

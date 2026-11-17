@@ -43,30 +43,20 @@ class ContentReportRequest
 {
   /**
    * Report reason category.
-   *
-   * @SerializedName("category")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('category')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $category = null;
 
   /**
    * Optional additional details.
-   *
-   * @SerializedName("note")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 5000
-   * )
    */
+  #[SerializedName('note')]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Length(max: 5000)]
   protected ?string $note = null;
 
   /**

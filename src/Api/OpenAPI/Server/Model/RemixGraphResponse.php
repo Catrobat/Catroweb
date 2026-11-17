@@ -43,90 +43,58 @@ class RemixGraphResponse
 {
   /**
    * ID of the project for which the remix graph was requested.
-   *
-   * @SerializedName("projectId")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('projectId')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $project_id = null;
 
   /**
    * Number of Catrobat projects in the connected remix graph.
-   *
-   * @SerializedName("projectCount")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('projectCount')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $project_count = null;
 
   /**
    * Number of Scratch projects in the connected remix graph.
-   *
-   * @SerializedName("scratchCount")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('scratchCount')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $scratch_count = null;
 
   /**
    * Number of remixes in the connected Catrobat graph.
-   *
-   * @SerializedName("remixCount")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('remixCount')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $remix_count = null;
 
   /**
    * @var RemixGraphNode[]|null
-   *
-   * @SerializedName("nodes")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Valid()
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\RemixGraphNode")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\RemixGraphNode>")
    */
+  #[SerializedName('nodes')]
+  #[Assert\NotNull]
+  #[Assert\Valid]
+  #[Assert\All([new Assert\Type(RemixGraphNode::class)])]
+  #[Type('array<OpenAPI\Server\Model\RemixGraphNode>')]
   protected ?array $nodes = null;
 
   /**
    * @var RemixGraphEdge[]|null
-   *
-   * @SerializedName("edges")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Valid()
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\RemixGraphEdge")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\RemixGraphEdge>")
    */
+  #[SerializedName('edges')]
+  #[Assert\NotNull]
+  #[Assert\Valid]
+  #[Assert\All([new Assert\Type(RemixGraphEdge::class)])]
+  #[Type('array<OpenAPI\Server\Model\RemixGraphEdge>')]
   protected ?array $edges = null;
 
   /**

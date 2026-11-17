@@ -19,7 +19,6 @@ class JmsSerializer implements SerializerInterface
       ->setDeserializationVisitor('json', new StrictJsonDeserializationVisitorFactory())
       ->setDeserializationVisitor('xml', new XmlDeserializationVisitorFactory())
       ->setPropertyNamingStrategy($namingStrategy)
-      ->addMetadataDir(\dirname(__DIR__, 5).'/config/jms', 'OpenAPI\Server\Model')
       ->build()
     ;
   }

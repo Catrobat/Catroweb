@@ -43,26 +43,19 @@ class StudioCommentCreateRequest
 {
   /**
    * The comment text.
-   *
-   * @SerializedName("message")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('message')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $message = null;
 
   /**
    * Parent comment UUID for replies.
-   *
-   * @SerializedName("parent_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('parent_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $parent_id = null;
 
   /**

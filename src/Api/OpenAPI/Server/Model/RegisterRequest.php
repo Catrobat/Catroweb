@@ -43,112 +43,82 @@ class RegisterRequest
 {
   /**
    * Indicates if a request should only be verified or executed.
-   *
-   * @SerializedName("dry_run")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('dry_run')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $dry_run = false;
 
   /**
    * Email of the user.
-   *
-   * @SerializedName("email")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('email')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $email = null;
 
   /**
    * Name of the user | minLength: 3 | maxLength: 180.
-   *
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $username = null;
 
   /**
    * A secure password | minLength: 6 | maxLength: 4096.
-   *
-   * @SerializedName("password")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('password')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $password = null;
 
   /**
    * The profile picture of the user in data URI scheme.
-   *
-   * @SerializedName("picture")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('picture')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $picture = null;
 
   /**
    * An introduction of the user.
-   *
-   * @SerializedName("about")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('about')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $about = null;
 
   /**
    * A short description about the project the user is currently working on.
-   *
-   * @SerializedName("currently_working_on")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('currently_working_on')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $currently_working_on = null;
 
   /**
    * CAPTCHA response token for bot detection.
-   *
-   * @SerializedName("captcha_token")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('captcha_token')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $captcha_token = null;
 
   /**
    * Date of birth for age verification (COPPA compliance). Format: YYYY-MM-DD.
-   *
-   * @SerializedName("date_of_birth")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('date_of_birth')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $date_of_birth = null;
 
   /**
    * Email address of parent/guardian. Required for users under 13 for parental consent.
-   *
-   * @SerializedName("parent_email")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('parent_email')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $parent_email = null;
 
   /**

@@ -43,34 +43,20 @@ class AppealListResponse
 {
   /**
    * @var AppealResponse[]|null
-   *
-   * @SerializedName("data")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\AppealResponse")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\AppealResponse>")
    */
+  #[SerializedName('data')]
+  #[Assert\All([new Assert\Type(AppealResponse::class)])]
+  #[Type('array<OpenAPI\Server\Model\AppealResponse>')]
   protected ?array $data = null;
 
-  /**
-   * @SerializedName("next_cursor")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('next_cursor')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $next_cursor = null;
 
-  /**
-   * @SerializedName("has_more")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
-   */
+  #[SerializedName('has_more')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $has_more = null;
 
   /**

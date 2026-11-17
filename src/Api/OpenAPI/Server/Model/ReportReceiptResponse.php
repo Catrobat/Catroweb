@@ -43,15 +43,11 @@ class ReportReceiptResponse
 {
   /**
    * The unique identifier of the created report.
-   *
-   * @SerializedName("report_id")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('report_id')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $report_id = null;
 
   /**

@@ -43,58 +43,35 @@ class CommentTranslationResponse
 {
   /**
    * Comment UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("source_language")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('source_language')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $source_language = null;
 
-  /**
-   * @SerializedName("target_language")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('target_language')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $target_language = null;
 
-  /**
-   * @SerializedName("translation")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('translation')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $translation = null;
 
-  /**
-   * @SerializedName("provider")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('provider')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $provider = null;
 
-  /**
-   * @SerializedName("_cache")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
-   */
+  #[SerializedName('_cache')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $_cache = null;
 
   /**

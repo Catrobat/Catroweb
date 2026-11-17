@@ -43,78 +43,48 @@ class AppealResponse
 {
   /**
    * Appeal UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("content_type")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('content_type')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $content_type = null;
 
-  /**
-   * @SerializedName("content_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('content_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $content_id = null;
 
-  /**
-   * @SerializedName("appellant_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('appellant_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $appellant_id = null;
 
-  /**
-   * @SerializedName("reason")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('reason')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $reason = null;
 
   /**
    * 1&#x3D;pending, 2&#x3D;approved, 3&#x3D;rejected.
-   *
-   * @SerializedName("state")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('state')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $state = null;
 
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
+  #[SerializedName('created_at')]
+  #[Assert\Type('\DateTime')]
+  #[Type('DateTime')]
   protected ?\DateTime $created_at = null;
 
-  /**
-   * @SerializedName("resolution_note")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('resolution_note')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $resolution_note = null;
 
   /**

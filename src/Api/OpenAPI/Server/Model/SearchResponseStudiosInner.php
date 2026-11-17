@@ -43,58 +43,35 @@ class SearchResponseStudiosInner
 {
   /**
    * Studio UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
-  /**
-   * @SerializedName("description")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('description')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $description = null;
 
-  /**
-   * @SerializedName("cover")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
-   *
-   * @Type("OpenAPI\Server\Model\ImageVariants")
-   */
+  #[SerializedName('cover')]
+  #[Assert\Type(ImageVariants::class)]
+  #[Type(ImageVariants::class)]
   protected ?ImageVariants $cover = null;
 
-  /**
-   * @SerializedName("members_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('members_count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $members_count = null;
 
-  /**
-   * @SerializedName("projects_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
+  #[SerializedName('projects_count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $projects_count = null;
 
   /**

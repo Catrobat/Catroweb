@@ -43,61 +43,44 @@ class ProjectUploadSessionRequest
 {
   /**
    * Size of the *.catrobat file in bytes.
-   *
-   * @SerializedName("file_size")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   *
-   * @Assert\GreaterThanOrEqual(1)
    */
+  #[SerializedName('file_size')]
+  #[Assert\NotNull]
+  #[Assert\Type('int')]
+  #[Type('int')]
+  #[Assert\GreaterThanOrEqual(1)]
   protected ?int $file_size = null;
 
   /**
    * Optional MD5 of the whole *.catrobat file, checked when the upload is completed.
-   *
-   * @SerializedName("checksum")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('checksum')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $checksum = null;
 
   /**
    * The flavor of this project.
-   *
-   * @SerializedName("flavor")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('flavor')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $flavor = 'pocketcode';
 
   /**
    * Indicates whether a project should be private.
-   *
-   * @SerializedName("private")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('private')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $private = false;
 
   /**
    * Optional UUID of an existing project to update (see ProjectUploadRequest).
-   *
-   * @SerializedName("project_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('project_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $project_id = null;
 
   /**

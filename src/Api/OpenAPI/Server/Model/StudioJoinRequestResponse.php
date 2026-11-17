@@ -43,53 +43,34 @@ class StudioJoinRequestResponse
 {
   /**
    * Join request UUID.
-   *
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
   /**
    * User UUID.
-   *
-   * @SerializedName("user_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('user_id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $user_id = null;
 
-  /**
-   * @SerializedName("username")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('username')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $username = null;
 
-  /**
-   * @SerializedName("avatar")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
-   *
-   * @Type("OpenAPI\Server\Model\ImageVariants")
-   */
+  #[SerializedName('avatar')]
+  #[Assert\Type(ImageVariants::class)]
+  #[Type(ImageVariants::class)]
   protected ?ImageVariants $avatar = null;
 
-  /**
-   * @SerializedName("status")
-   *
-   * @Assert\Choice({ "pending", "approved", "declined" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('status')]
+  #[Assert\Choice(choices: ['pending', 'approved', 'declined'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $status = null;
 
   /**

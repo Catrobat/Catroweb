@@ -41,24 +41,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CodeViewAsset
 {
-  /**
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
   /**
    * Project-authorized file URL; follows the project page access policy.
-   *
-   * @SerializedName("url")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('url')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $url = null;
 
   /**

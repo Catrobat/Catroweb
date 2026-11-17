@@ -41,24 +41,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CodeViewBrickPart
 {
-  /**
-   * @SerializedName("kind")
-   *
-   * @Assert\Choice({ "label", "formula", "choice" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('kind')]
+  #[Assert\Choice(choices: ['label', 'formula', 'choice'])]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $kind = null;
 
-  /**
-   * @SerializedName("text")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('text')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $text = null;
 
   /**

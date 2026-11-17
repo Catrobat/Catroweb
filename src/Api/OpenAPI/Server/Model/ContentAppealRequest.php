@@ -43,19 +43,12 @@ class ContentAppealRequest
 {
   /**
    * Justification for the appeal.
-   *
-   * @SerializedName("reason")
-   *
-   * @Assert\NotNull()
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 5000
-   * )
    */
+  #[SerializedName('reason')]
+  #[Assert\NotNull]
+  #[Assert\Type('string')]
+  #[Type('string')]
+  #[Assert\Length(max: 5000)]
   protected ?string $reason = null;
 
   /**

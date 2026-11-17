@@ -43,16 +43,10 @@ class TagsResponse
 {
   /**
    * @var TagResponse[]|null
-   *
-   * @SerializedName("data")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\TagResponse")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\TagResponse>")
    */
+  #[SerializedName('data')]
+  #[Assert\All([new Assert\Type(TagResponse::class)])]
+  #[Type('array<OpenAPI\Server\Model\TagResponse>')]
   protected ?array $data = null;
 
   /**

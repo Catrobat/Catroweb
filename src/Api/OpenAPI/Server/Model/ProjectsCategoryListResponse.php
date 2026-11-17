@@ -43,16 +43,10 @@ class ProjectsCategoryListResponse
 {
   /**
    * @var ProjectsCategory[]|null
-   *
-   * @SerializedName("data")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\ProjectsCategory")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\ProjectsCategory>")
    */
+  #[SerializedName('data')]
+  #[Assert\All([new Assert\Type(ProjectsCategory::class)])]
+  #[Type('array<OpenAPI\Server\Model\ProjectsCategory>')]
   protected ?array $data = null;
 
   /**

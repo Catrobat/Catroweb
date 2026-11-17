@@ -43,13 +43,10 @@ class AchievementsCountResponse
 {
   /**
    * Number of unseen achievements.
-   *
-   * @SerializedName("count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
    */
+  #[SerializedName('count')]
+  #[Assert\Type('int')]
+  #[Type('int')]
   protected ?int $count = null;
 
   /**

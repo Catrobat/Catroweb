@@ -41,40 +41,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class StudioUserProjectResponse
 {
-  /**
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('id')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $id = null;
 
-  /**
-   * @SerializedName("name")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('name')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $name = null;
 
-  /**
-   * @SerializedName("in_studio")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
-   */
+  #[SerializedName('in_studio')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $in_studio = null;
 
-  /**
-   * @SerializedName("screenshot")
-   *
-   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
-   *
-   * @Type("OpenAPI\Server\Model\ImageVariants")
-   */
+  #[SerializedName('screenshot')]
+  #[Assert\Type(ImageVariants::class)]
+  #[Type(ImageVariants::class)]
   protected ?ImageVariants $screenshot = null;
 
   /**

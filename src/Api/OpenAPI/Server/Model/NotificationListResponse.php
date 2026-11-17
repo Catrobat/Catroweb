@@ -45,38 +45,26 @@ class NotificationListResponse
    * Array of notifications.
    *
    * @var NotificationResponse[]|null
-   *
-   * @SerializedName("data")
-   *
-   * @Assert\All({
-   *
-   *   @Assert\Type("OpenAPI\Server\Model\NotificationResponse")
-   * })
-   *
-   * @Type("array<OpenAPI\Server\Model\NotificationResponse>")
    */
+  #[SerializedName('data')]
+  #[Assert\All([new Assert\Type(NotificationResponse::class)])]
+  #[Type('array<OpenAPI\Server\Model\NotificationResponse>')]
   protected ?array $data = null;
 
   /**
    * Cursor for the next page, null if no more results.
-   *
-   * @SerializedName("next_cursor")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
    */
+  #[SerializedName('next_cursor')]
+  #[Assert\Type('string')]
+  #[Type('string')]
   protected ?string $next_cursor = null;
 
   /**
    * Whether there are more results available.
-   *
-   * @SerializedName("has_more")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
    */
+  #[SerializedName('has_more')]
+  #[Assert\Type('bool')]
+  #[Type('bool')]
   protected ?bool $has_more = null;
 
   /**
