@@ -310,7 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
       message = details.message
     }
     showError(message)
-    submitBtn.disabled = false
+    // Retrying the same too-large file can only fail again; picking another file re-enables the button.
+    submitBtn.disabled = details.type === 'file_too_large'
     submitBtn.textContent = trans.upload
   }
 
