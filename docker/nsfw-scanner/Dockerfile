@@ -11,7 +11,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py .
+COPY app.py flatten.py test_flatten.py ./
+RUN python test_flatten.py && rm test_flatten.py
 
 # Download model at build time into the non-root user's HF cache.
 # Anonymous huggingface.co requests get rate limited (HTTP 429) on shared CI runners,

@@ -2,17 +2,19 @@
 
 Catroweb is a platform for children. Content is hidden from everyone but its owner in three ways:
 
-| Path                    | Trigger                                                                                           | Code                                                                |
-| ----------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Community reports       | Reports whose trust-weighted score passes the threshold                                           | `ReportProcessor` → `AutoModerationService::autoHideContent`        |
-| Adults-only text signal | "18+", "+18", "nsfw", "Ab 18", "solo adultos", "только для взрослых", … in a saved text           | `AgeSignalDetector` → `AutoModerationService::flagAgeSignal`        |
-| NSFW image              | An image at or above `CONTENT_SAFETY_THRESHOLD` (see [NSFW scanning](./NSFW-Content-Scanning.md)) | `ScanContentImagesHandler` → `AutoModerationService::flagForReview` |
+| Path                    | Trigger                                                                                 | Code                                                                |
+| ----------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Community reports       | Reports whose trust-weighted score passes the threshold                                 | `ReportProcessor` → `AutoModerationService::autoHideContent`        |
+| Adults-only text signal | "18+", "+18", "nsfw", "Ab 18", "solo adultos", "только для взрослых", … in a saved text | `AgeSignalDetector` → `AutoModerationService::flagAgeSignal`        |
+| NSFW image              | Images at or above `CONTENT_SAFETY_CONTENT_THRESHOLD` (see [Image scans](#image-scans)) | `ScanContentImagesHandler` → `AutoModerationService::flagForReview` |
 
 Profanity is a separate concern: `TextSanitizer` censors words from `config/moderation/wordlists/`. Age signals are not censored; the text is saved as written so the reviewer sees it.
 
 ## Automatic flags
 
-`AutoModerationService::flagForReview` hides a project or studio (`auto_hidden`), writes an `auto_hidden` audit entry with the reason in its note, and adds a report **without reporter** to the moderation queue (`/admin/moderation/report/list`). The owner gets a notification and may appeal; admins get a notification too. Accepting or rejecting the report in the queue works as for a community report. Content that is already hidden is left alone, so nothing is queued twice.
+`AutoModerationService::flagForReview` hides a project or studio (`auto_hidden`), writes an `auto_hidden` audit entry with the reason in its note, and adds a report **without reporter** to the moderation queue (`/admin/moderation/report/list`). The owner gets a notification and may appeal; admins get a notification too. Accepting or rejecting the report in the queue works as for a community report. Content that is already hidden is left alone, so nothing is queued twice. The report keeps what the flag found in `flagged_assets` (JSON list of `{type: image|text, name, score?}`: image file names with their NSFW score, matched text signals) for the queue to show first.
+
+With `hide: false` (a single NSFW image, see below) the content stays visible: only the report is queued, admins are notified (`review_requested`), the owner is not. While such a reporter-less report is pending, the content is not queued again.
 
 **Accounts are never hidden or suspended automatically** (`flagUserProfile`): an about or "currently working on" text with a signal is cleared, a username is kept as it is, and the profile is queued (reporter-less report, category `inappropriate_profile`) with a notification to admins only. The account stays fully usable. While such a report is pending, the profile is not queued again.
 
@@ -30,7 +32,12 @@ Where it runs:
 
 ### Image scans
 
-`ScanContentImages` (queue `default`) sends the site screenshot, the project's own screenshots and then its largest look images to the scanner: at most 20 images between 2 KB and 10 MB. Studios: the cover's `card` WebP variant. The first image at or above the threshold flags the content. An image the scanner refuses (4xx, e.g. a format it can't read) is skipped and logged. If the scanner is down (timeout, connection error, 5xx) or disabled the scan stops, logs a warning and hides nothing; the job does not retry. With `CONTENT_SAFETY_ENABLED=false` (tests) nothing is queued.
+`ScanContentImages` (queue `default`) sends the site screenshot, the project's own screenshots and then its largest look images to the scanner: at most 20 images between 2 KB and 10 MB. Studios: the cover's `card` WebP variant. All of them are scanned; every image at or above `CONTENT_SAFETY_CONTENT_THRESHOLD` (0.97) is flagged:
+
+- one flagged image queues the content for review and leaves it visible;
+- `CONTENT_SAFETY_HIDE_MIN_IMAGES` (2) flagged looks, or one image at or above `CONTENT_SAFETY_HIDE_THRESHOLD` (0.995), hide it until review.
+
+Only looks count towards the two (the same look in two scenes once): the screenshots show the looks, so a flagged look and the screenshot showing it are one image. Why: drawn and anime game art (Friday Night Funkin', Dragon Ball, Sakura School Simulator) scored 0.988–0.993 in production, and all four hides by a single image were false positives. An image the scanner refuses (4xx, e.g. a format it can't read) is skipped and logged. If the scanner is down (timeout, connection error, 5xx) or disabled the scan stops, logs a warning and acts only on what it flagged before; the job does not retry. With `CONTENT_SAFETY_ENABLED=false` (tests) nothing is queued.
 
 ## Backfill
 

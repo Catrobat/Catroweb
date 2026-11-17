@@ -6,8 +6,10 @@ namespace Tests\PhpUnit\Moderation;
 
 use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\Moderation\ContentReport;
+use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
+use App\DB\Enum\ReportCategory;
 use App\Moderation\AgeSignalDetector;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
@@ -43,6 +45,7 @@ class AutoModerationServiceTest extends TestCase
     $this->assertNull($report->getReporter());
     $this->assertSame('inappropriate_content', $report->getCategory());
     $this->assertStringContainsString('+18', (string) $report->getNote());
+    $this->assertSame([['type' => 'text', 'name' => '+18']], $report->getFlaggedAssets());
     $this->assertCount(1, array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction));
   }
 
@@ -81,6 +84,44 @@ class AutoModerationServiceTest extends TestCase
     $this->assertCount(1, array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport));
   }
 
+  public function testAReviewOnlyFlagQueuesTheContentAndLeavesItVisible(): void
+  {
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('isContentHidden')->willReturn(false);
+    $visibility->method('getContentOwnerId')->willReturn('owner');
+    $visibility->expects($this->never())->method('hideContent');
+
+    $images = [['type' => 'image', 'name' => 'look.png', 'score' => 0.99]];
+    $this->service($visibility)->flagForReview(ContentType::Project, 'p1', ReportCategory::SexualContent, 'Automatic: image', 0.99, $images, false);
+
+    $report = array_values(array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport))[0];
+    $this->assertSame($images, $report->getFlaggedAssets());
+    $this->assertSame([], array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction), 'no auto_hidden entry');
+    $this->assertSame(['admin' => AutoModerationService::ACTION_REVIEW_REQUESTED], $this->notifications(), 'admins only, the owner is not told');
+  }
+
+  public function testAHidingFlagNotifiesTheOwnerAndAdmins(): void
+  {
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('isContentHidden')->willReturn(false);
+    $visibility->method('getContentOwnerId')->willReturn('owner');
+    $visibility->expects($this->once())->method('hideContent');
+
+    $this->service($visibility)->flagForReview(ContentType::Project, 'p1', ReportCategory::SexualContent, 'Automatic: image', 0.999);
+
+    $this->assertSame(['owner' => ContentModerationAction::ACTION_AUTO_HIDDEN, 'admin' => ContentModerationAction::ACTION_AUTO_HIDDEN], $this->notifications());
+  }
+
+  public function testAReviewOnlyFlagIsNotQueuedWhileOneIsPending(): void
+  {
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $repository = $this->createStub(EntityRepository::class);
+    $repository->method('findOneBy')->willReturn(new ContentReport());
+
+    $this->service($visibility, $repository)->flagForReview(ContentType::Project, 'p1', ReportCategory::SexualContent, 'Automatic: image', hide: false);
+    $this->assertSame([], $this->persisted);
+  }
+
   public function testHarmlessTextChangesNothing(): void
   {
     $visibility = $this->createMock(ContentVisibilityManager::class);
@@ -100,10 +141,30 @@ class AutoModerationServiceTest extends TestCase
     $this->assertSame([], $this->persisted);
   }
 
-  private function service(ContentVisibilityManager $visibility): AutoModerationService
+  /**
+   * @return array<string, string|null> username => moderation action of the persisted notifications
+   */
+  private function notifications(): array
   {
+    $notifications = [];
+    foreach ($this->persisted as $o) {
+      if ($o instanceof ModerationNotification) {
+        $notifications[(string) $o->getUser()->getUsername()] = $o->getModerationAction();
+      }
+    }
+
+    return $notifications;
+  }
+
+  private function service(ContentVisibilityManager $visibility, ?EntityRepository $repository = null): AutoModerationService
+  {
+    $admin = new User();
+    $admin->setUsername('admin');
+    $owner = new User();
+    $owner->setUsername('owner');
+
     $query = $this->createStub(Query::class);
-    $query->method('getResult')->willReturn([]);
+    $query->method('getResult')->willReturn([$admin]);
     $query_builder = $this->createStub(QueryBuilder::class);
     $query_builder->method('select')->willReturnSelf();
     $query_builder->method('from')->willReturnSelf();
@@ -113,7 +174,8 @@ class AutoModerationServiceTest extends TestCase
 
     $entity_manager = $this->createStub(EntityManagerInterface::class);
     $entity_manager->method('createQueryBuilder')->willReturn($query_builder);
-    $entity_manager->method('getRepository')->willReturn($this->createStub(EntityRepository::class));
+    $entity_manager->method('find')->willReturn($owner);
+    $entity_manager->method('getRepository')->willReturn($repository ?? $this->createStub(EntityRepository::class));
     $entity_manager->method('persist')->willReturnCallback(function (object $o): void {
       $this->persisted[] = $o;
     });

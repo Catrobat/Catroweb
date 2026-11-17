@@ -21,8 +21,10 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 /**
  * Sends a project's screenshots and its largest look images (or a studio's cover) to the NSFW scanner and flags
- * the content for review at the first image at or above the threshold. An image the scanner refuses (4xx) is
- * skipped; scanner down (timeout, 5xx): logged, nothing hidden.
+ * the content when images score at or above the threshold: one such image only queues it for review (it stays
+ * visible), two or more looks, or one image at or above the hide threshold, hide it until a moderator has looked.
+ * Screenshots never count towards the two: they show the looks. An image the scanner refuses (4xx) is skipped;
+ * scanner down (timeout, 5xx): logged, the scan stops and acts on what it found so far.
  */
 #[AsMessageHandler]
 final readonly class ScanContentImagesHandler
@@ -47,6 +49,12 @@ final readonly class ScanContentImagesHandler
     // Stricter than the avatar threshold: game art (sprites, horror and fan games) scores high on the model.
     #[Autowire('%env(float:CONTENT_SAFETY_CONTENT_THRESHOLD)%')]
     private float $threshold = 0.97,
+    // Drawn and anime art reaches 0.99 too (all false positives in production scored 0.988-0.993), so one image
+    // below this only queues the content for review.
+    #[Autowire('%env(float:CONTENT_SAFETY_HIDE_THRESHOLD)%')]
+    private float $hide_threshold = 0.995,
+    #[Autowire('%env(int:CONTENT_SAFETY_HIDE_MIN_IMAGES)%')]
+    private int $hide_min_images = 2,
   ) {
   }
 
@@ -56,12 +64,14 @@ final readonly class ScanContentImagesHandler
   }
 
   /**
-   * @return string|null what was found (null: all images safe, or the scanner is unavailable); flagged when $flag
+   * @return string|null what was found (null: no image flagged before the end or an outage); flagged when $flag
    */
   public function scan(ScanContentImages $message, bool $flag): ?string
   {
     $content_type = ContentType::from($message->content_type);
-    foreach ($this->imagePaths($content_type, $message->content_id) as $path) {
+    $flagged = [];
+    $flagged_looks = [];
+    foreach ($this->imagePaths($content_type, $message->content_id) as $path => $is_look) {
       $blob = @file_get_contents($path);
       if (false === $blob) {
         continue;
@@ -77,30 +87,45 @@ final readonly class ScanContentImagesHandler
       if ($result->unavailable || $result->skipped) {
         $this->logger->warning('Image scan of {type} {id} stopped: scanner unavailable or disabled', ['type' => $message->content_type, 'id' => $message->content_id]);
 
-        return null;
+        break;
       }
 
       if ($result->nsfwScore >= $this->threshold) {
-        $note = sprintf('Automatic: image "%s" has NSFW score %.2f', basename($path), $result->nsfwScore);
-        if ($flag) {
-          $this->auto_moderation->flagForReview(
-            $content_type,
-            $message->content_id,
-            ContentType::Studio === $content_type ? ReportCategory::InappropriateContent : ReportCategory::SexualContent,
-            $note,
-            $result->nsfwScore,
-          );
+        $flagged[] = ['type' => 'image', 'name' => basename($path), 'score' => $result->nsfwScore];
+        if ($is_look) {
+          $flagged_looks[md5($blob)] = true; // the same look in two scenes counts once
         }
-
-        return $note;
       }
     }
 
-    return null;
+    if ([] === $flagged) {
+      return null;
+    }
+
+    usort($flagged, static fn (array $a, array $b): int => $b['score'] <=> $a['score']);
+    $score = $flagged[0]['score'];
+    $hide = count($flagged_looks) >= $this->hide_min_images || $score >= $this->hide_threshold;
+    $note = 'Automatic: '.implode('; ', array_map(
+      static fn (array $image): string => sprintf('image "%s" has NSFW score %.3f', $image['name'], $image['score']),
+      $flagged,
+    ));
+    if ($flag) {
+      $this->auto_moderation->flagForReview(
+        $content_type,
+        $message->content_id,
+        ContentType::Studio === $content_type ? ReportCategory::InappropriateContent : ReportCategory::SexualContent,
+        $note,
+        $score,
+        $flagged,
+        $hide,
+      );
+    }
+
+    return $note.($hide ? ' (hide)' : ' (review only)');
   }
 
   /**
-   * @return list<string>
+   * @return array<string, bool> path => whether it is a look (or the studio cover), not a screenshot
    */
   private function imagePaths(ContentType $content_type, string $content_id): array
   {
@@ -109,7 +134,7 @@ final readonly class ScanContentImagesHandler
       $path = null === $cover ? null : rtrim($this->studio_manager->getStudioCoverDir(), '/').'/'
         .ImageVariantLayout::filename($cover, ImageVariantLayout::VARIANT_CARD, ImageVariantLayout::DPR_1X, ImageVariantLayout::FORMAT_WEBP);
 
-      return null !== $path && is_file($path) ? [$path] : [];
+      return null !== $path && is_file($path) ? [$path => true] : [];
     }
 
     $project = $this->entity_manager->find(Project::class, $content_id);
@@ -122,7 +147,7 @@ final readonly class ScanContentImagesHandler
     $dir = $this->extracted_file_repository->loadProjectExtractedFile($project)?->getPath();
     $images = [];
     if (null !== $dir && is_dir($dir)) {
-      foreach ((new Finder())->files()->in($dir)->name(['manual_screenshot.png', 'automatic_screenshot.png', 'screenshot.png']) as $file) {
+      foreach ((new Finder())->files()->in($dir)->name(['manual_screenshot.png', 'automatic_screenshot.png', 'screenshot.png'])->notPath('~(^|/)images/~') as $file) {
         $paths[] = $file->getPathname();
       }
 
@@ -132,14 +157,14 @@ final readonly class ScanContentImagesHandler
     }
 
     arsort($images);
-    $paths = array_merge($paths, array_keys($images));
+    $paths = array_fill_keys($paths, false) + array_fill_keys(array_keys($images), true);
 
     $paths = array_filter($paths, static function (string $path): bool {
       $size = @filesize($path);
 
       return false !== $size && $size >= self::MIN_BYTES && $size <= self::MAX_BYTES;
-    });
+    }, ARRAY_FILTER_USE_KEY);
 
-    return array_slice(array_values(array_unique($paths)), 0, self::MAX_IMAGES);
+    return array_slice($paths, 0, self::MAX_IMAGES, true);
   }
 }

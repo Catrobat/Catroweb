@@ -27,7 +27,7 @@ class AutoModerationService
   ) {
   }
 
-  /** Admin notification for content queued without hiding it (profiles). */
+  /** Admin notification for content queued without hiding it (profiles, a single NSFW image). */
   public const string ACTION_REVIEW_REQUESTED = 'review_requested';
 
   /**
@@ -47,7 +47,7 @@ class AutoModerationService
       ContentType::Comment => ReportCategory::Inappropriate,
       ContentType::User => throw new \LogicException('Accounts are never hidden automatically, use flagUserProfile()'),
     };
-    $this->flagForReview($content_type, $content_id, $category, self::signalNote($signal));
+    $this->flagForReview($content_type, $content_id, $category, self::signalNote($signal), flagged_assets: [self::textAsset($signal)]);
 
     return true;
   }
@@ -82,15 +82,9 @@ class AutoModerationService
     }
 
     $user_id = (string) $user->getId();
-    $pending = $this->entity_manager->getRepository(ContentReport::class)->findOneBy([
-      'content_type' => ContentType::User->value,
-      'content_id' => $user_id,
-      'reporter' => null,
-      'state' => ReportState::New->value,
-    ]);
-    if (null === $pending) {
+    if (!$this->hasPendingAutoReport(ContentType::User, $user_id)) {
       $note = self::signalNote(implode('", "', $signals)).($cleared ? '; the profile texts with it were cleared' : ' in the username');
-      $this->queueReport(ContentType::User, $user_id, ReportCategory::InappropriateProfile, $note);
+      $this->queueReport(ContentType::User, $user_id, ReportCategory::InappropriateProfile, $note, array_map(self::textAsset(...), $signals));
       $this->notifyAdmins(ContentType::User, $user_id, 'matched an adults-only signal and needs review (the account stays usable)', self::ACTION_REVIEW_REQUESTED);
     }
 
@@ -112,15 +106,28 @@ class AutoModerationService
 
   /**
    * Hides the content until an admin reviews it: a report without reporter puts it in the moderation queue,
-   * where accepting or rejecting it works like for a community report.
+   * where accepting or rejecting it works like for a community report. With $hide false the content stays
+   * visible and only the report is queued (once, while it is pending), with a notification to admins only.
+   *
+   * @param list<array{type: 'image'|'text', name: string, score?: float}>|null $flagged_assets what the queue shows first
    */
-  public function flagForReview(ContentType $content_type, string $content_id, ReportCategory $category, string $note, ?float $score = null): void
+  public function flagForReview(ContentType $content_type, string $content_id, ReportCategory $category, string $note, ?float $score = null, ?array $flagged_assets = null, bool $hide = true): void
   {
     if (ContentType::User === $content_type) {
       throw new \LogicException('Accounts are never hidden automatically, use flagUserProfile()');
     }
 
     if ($this->visibility_manager->isContentHidden($content_type, $content_id)) {
+      return;
+    }
+
+    if (!$hide) {
+      if (!$this->hasPendingAutoReport($content_type, $content_id)) {
+        $this->queueReport($content_type, $content_id, $category, $note, $flagged_assets);
+        $this->notifyAdmins($content_type, $content_id, 'was flagged and needs review (it stays visible)', self::ACTION_REVIEW_REQUESTED);
+        $this->entity_manager->flush();
+      }
+
       return;
     }
 
@@ -134,7 +141,7 @@ class AutoModerationService
     $action->setNote($note);
     $this->entity_manager->persist($action);
 
-    $this->queueReport($content_type, $content_id, $category, $note);
+    $this->queueReport($content_type, $content_id, $category, $note, $flagged_assets);
     $this->notifyContentOwner($content_type, $content_id, 'is hidden until a moderator has reviewed it');
     $this->notifyAdmins($content_type, $content_id);
 
@@ -146,13 +153,35 @@ class AutoModerationService
     return sprintf('Automatic: adults-only signal "%s"', $signal);
   }
 
-  private function queueReport(ContentType $content_type, string $content_id, ReportCategory $category, string $note): void
+  /**
+   * @return array{type: 'text', name: string}
+   */
+  private static function textAsset(string $signal): array
+  {
+    return ['type' => 'text', 'name' => $signal];
+  }
+
+  private function hasPendingAutoReport(ContentType $content_type, string $content_id): bool
+  {
+    return null !== $this->entity_manager->getRepository(ContentReport::class)->findOneBy([
+      'content_type' => $content_type->value,
+      'content_id' => $content_id,
+      'reporter' => null,
+      'state' => ReportState::New->value,
+    ]);
+  }
+
+  /**
+   * @param list<array{type: 'image'|'text', name: string, score?: float}>|null $flagged_assets
+   */
+  private function queueReport(ContentType $content_type, string $content_id, ReportCategory $category, string $note, ?array $flagged_assets = null): void
   {
     $report = new ContentReport();
     $report->setContentType($content_type->value);
     $report->setContentId($content_id);
     $report->setCategory($category->value);
     $report->setNote($note);
+    $report->setFlaggedAssets($flagged_assets);
     $this->entity_manager->persist($report);
   }
 

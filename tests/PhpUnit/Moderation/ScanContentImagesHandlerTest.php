@@ -40,6 +40,7 @@ class ScanContentImagesHandlerTest extends TestCase
     $filesystem->dumpFile($this->dir.'code.xml', '<program><header/></program>');
     $filesystem->dumpFile($this->dir.'automatic_screenshot.png', str_repeat('s', 4_000));
     $filesystem->dumpFile($this->dir.'Scene 1/images/big.png', str_repeat('b', 8_000));
+    $filesystem->dumpFile($this->dir.'Scene 1/images/mid.png', str_repeat('m', 6_000));
     $filesystem->dumpFile($this->dir.'Scene 1/images/tiny.png', 'tiny');
   }
 
@@ -49,14 +50,14 @@ class ScanContentImagesHandlerTest extends TestCase
     (new Filesystem())->remove($this->dir);
   }
 
-  public function testFlagsProjectAtTheFirstUnsafeImage(): void
+  public function testOneFlaggedImageQueuesTheProjectWithoutHidingIt(): void
   {
     $scanned = [];
     $scanner = $this->createStub(ContentSafetyScanner::class);
     $scanner->method('scanImageBlob')->willReturnCallback(static function (string $blob) use (&$scanned): ContentSafetyResult {
       $scanned[] = $blob[0];
 
-      return 'b' === $blob[0] ? new ContentSafetyResult(safe: false, nsfwScore: 0.93, label: 'nsfw') : new ContentSafetyResult(safe: true, nsfwScore: 0.01);
+      return 'b' === $blob[0] ? new ContentSafetyResult(safe: false, nsfwScore: 0.993, label: 'nsfw') : new ContentSafetyResult(safe: true, nsfwScore: 0.01);
     });
 
     $auto_moderation = $this->createMock(AutoModerationService::class);
@@ -64,13 +65,133 @@ class ScanContentImagesHandlerTest extends TestCase
       ContentType::Project,
       'p1',
       ReportCategory::SexualContent,
-      $this->stringContains('big.png'),
-      0.93,
+      'Automatic: image "big.png" has NSFW score 0.993',
+      0.993,
+      [['type' => 'image', 'name' => 'big.png', 'score' => 0.993]],
+      false,
     );
 
     $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
 
-    $this->assertSame(['s', 'b'], $scanned, 'screenshot first, tiny images skipped');
+    $this->assertSame(['s', 'b', 'm'], $scanned, 'screenshot first, then all images by size; tiny ones skipped');
+  }
+
+  public function testTwoFlaggedImagesHideTheProjectAndAreListedByScore(): void
+  {
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => match ($blob[0]) {
+      'b' => new ContentSafetyResult(safe: false, nsfwScore: 0.98),
+      'm' => new ContentSafetyResult(safe: false, nsfwScore: 0.99),
+      default => new ContentSafetyResult(safe: true, nsfwScore: 0.01),
+    });
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      ContentType::Project,
+      'p1',
+      ReportCategory::SexualContent,
+      'Automatic: image "mid.png" has NSFW score 0.990; image "big.png" has NSFW score 0.980',
+      0.99,
+      [['type' => 'image', 'name' => 'mid.png', 'score' => 0.99], ['type' => 'image', 'name' => 'big.png', 'score' => 0.98]],
+      true,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testOneImageAtTheHideThresholdHidesTheProject(): void
+  {
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => 'm' === $blob[0]
+      ? new ContentSafetyResult(safe: false, nsfwScore: 0.996)
+      : new ContentSafetyResult(safe: true, nsfwScore: 0.01));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.996, $this->anything(), true,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testScreenshotsDoNotCountTowardsHiding(): void
+  {
+    // The screenshots show the looks: the site's and the project's screenshot and the look in them are one image.
+    (new Filesystem())->dumpFile($this->dir.'missing/screen_p1.png', str_repeat('s', 4_000));
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => 'm' === $blob[0]
+      ? new ContentSafetyResult(safe: true, nsfwScore: 0.01)
+      : new ContentSafetyResult(safe: false, nsfwScore: 0.99));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(3), false,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testALookNamedLikeAScreenshotIsStillALook(): void
+  {
+    (new Filesystem())->dumpFile($this->dir.'Scene 1/images/screenshot.png', str_repeat('x', 5_000));
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => in_array($blob[0], ['b', 'x'], true)
+      ? new ContentSafetyResult(safe: false, nsfwScore: 0.99)
+      : new ContentSafetyResult(safe: true, nsfwScore: 0.01));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(2), true,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testTheHidePolicyIsConfigurable(): void
+  {
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturn(new ContentSafetyResult(safe: false, nsfwScore: 0.99));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(3), false,
+    );
+
+    // Two looks and a screenshot flagged: not enough for 3 looks, and below a hide threshold of 0.999.
+    $this->handler($scanner, $auto_moderation, 0.97, 0.999, 3)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testTheSameLookInTwoScenesCountsOnce(): void
+  {
+    (new Filesystem())->dumpFile($this->dir.'Scene 2/images/big.png', str_repeat('b', 8_000));
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => 'b' === $blob[0]
+      ? new ContentSafetyResult(safe: false, nsfwScore: 0.99)
+      : new ContentSafetyResult(safe: true, nsfwScore: 0.01));
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(2), false,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
+  }
+
+  public function testAnOutageActsOnWhatWasFlaggedBefore(): void
+  {
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturnCallback(static fn (string $blob): ContentSafetyResult => match ($blob[0]) {
+      'b' => new ContentSafetyResult(safe: false, nsfwScore: 0.99),
+      'm' => ContentSafetyResult::unavailable(),
+      default => new ContentSafetyResult(safe: true, nsfwScore: 0.01),
+    });
+
+    $auto_moderation = $this->createMock(AutoModerationService::class);
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->anything(), 0.99, $this->countOf(1), false,
+    );
+
+    $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
   }
 
   public function testDoesNotHideWhenTheScannerIsUnavailable(): void
@@ -92,7 +213,9 @@ class ScanContentImagesHandlerTest extends TestCase
       : new ContentSafetyResult(safe: false, nsfwScore: 0.9));
 
     $auto_moderation = $this->createMock(AutoModerationService::class);
-    $auto_moderation->expects($this->once())->method('flagForReview');
+    $auto_moderation->expects($this->once())->method('flagForReview')->with(
+      $this->anything(), $this->anything(), $this->anything(), $this->stringContains('big.png'), $this->anything(), $this->countOf(2), true,
+    );
 
     $this->handler($scanner, $auto_moderation)(new ScanContentImages('project', 'p1'));
   }
@@ -120,7 +243,7 @@ class ScanContentImagesHandlerTest extends TestCase
     $this->handler($scanner, $auto_moderation, 0.97)(new ScanContentImages('project', 'p1'));
   }
 
-  private function handler(ContentSafetyScanner $scanner, AutoModerationService $auto_moderation, float $threshold = 0.9): ScanContentImagesHandler
+  private function handler(ContentSafetyScanner $scanner, AutoModerationService $auto_moderation, float $threshold = 0.9, float $hide_threshold = 0.995, int $hide_min_images = 2): ScanContentImagesHandler
   {
     $entity_manager = $this->createStub(EntityManagerInterface::class);
     $entity_manager->method('find')->willReturn(new Project());
@@ -141,6 +264,8 @@ class ScanContentImagesHandlerTest extends TestCase
       $auto_moderation,
       new NullLogger(),
       $threshold,
+      $hide_threshold,
+      $hide_min_images,
     );
   }
 }

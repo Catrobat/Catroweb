@@ -43,6 +43,14 @@ class ContentReport
   #[ORM\Column(name: 'note', type: Types::TEXT, nullable: true)]
   private ?string $note = null;
 
+  /**
+   * What an automatic flag found, for the moderation queue to show first: images with their NSFW score, text signals.
+   *
+   * @var list<array{type: 'image'|'text', name: string, score?: float}>|null
+   */
+  #[ORM\Column(name: 'flagged_assets', type: Types::JSON, nullable: true)]
+  private ?array $flagged_assets = null;
+
   #[ORM\Column(name: 'state', type: Types::SMALLINT, options: ['default' => 1])]
   private int $state = ReportState::New->value;
 
@@ -138,6 +146,24 @@ class ContentReport
   public function setNote(?string $note): ContentReport
   {
     $this->note = $note;
+
+    return $this;
+  }
+
+  /**
+   * @return list<array{type: 'image'|'text', name: string, score?: float}>|null
+   */
+  public function getFlaggedAssets(): ?array
+  {
+    return $this->flagged_assets;
+  }
+
+  /**
+   * @param list<array{type: 'image'|'text', name: string, score?: float}>|null $flagged_assets
+   */
+  public function setFlaggedAssets(?array $flagged_assets): ContentReport
+  {
+    $this->flagged_assets = $flagged_assets;
 
     return $this;
   }
