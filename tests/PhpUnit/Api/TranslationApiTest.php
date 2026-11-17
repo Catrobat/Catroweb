@@ -14,6 +14,7 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
+use App\Translation\LibreTranslateApi;
 use App\Translation\ProjectTranslationJob;
 use App\Translation\TranslationResult;
 use OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest;
@@ -42,12 +43,14 @@ final class TranslationApiTest extends TestCase
     ?ProjectManager $project_manager = null,
     ?RequestStack $request_stack = null,
     ?RateLimiterFactory $translation_burst_limiter = null,
+    ?LibreTranslateApi $libre_translate_api = null,
   ): TranslationApi {
     return new TranslationApi(
       $facade ?? $this->createDefaultFacade(),
       $project_manager ?? $this->createStub(ProjectManager::class),
       $request_stack ?? new RequestStack(),
       $translation_burst_limiter ?? new RateLimiterFactory(['id' => 'phpunit_translation', 'policy' => 'no_limit'], new InMemoryStorage()),
+      $libre_translate_api ?? $this->createStub(LibreTranslateApi::class),
     );
   }
 
@@ -74,6 +77,22 @@ final class TranslationApiTest extends TestCase
     $project->method('getCredits')->willReturn($credits);
 
     return $project;
+  }
+
+  // --- translationLanguagesGet ---
+
+  #[Group('unit')]
+  public function testLanguagesComeFromLibreTranslate(): void
+  {
+    $libre_translate_api = $this->createStub(LibreTranslateApi::class);
+    $libre_translate_api->method('getSupportedLanguages')->willReturn(['de', 'zh-CN']);
+
+    $code = 0;
+    $headers = [];
+    $result = $this->buildApi(libre_translate_api: $libre_translate_api)->translationLanguagesGet($code, $headers);
+
+    $this->assertSame(Response::HTTP_OK, $code);
+    $this->assertSame(['de', 'zh-CN'], $result);
   }
 
   // --- projectsIdTranslationGet ---

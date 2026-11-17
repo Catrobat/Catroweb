@@ -365,7 +365,7 @@
   <div class="js-project"
        data-project-id="{{ project_id }}"
        data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
-       data-machine-translation-languages="{{ libretranslate.supportedLanguages|json_encode }}"
+       data-machine-translation-languages-url="{{ path('open_api_server_translation_translationlanguagesget') }}"
        data-trans-translate-again="{{ 'project.translateAgain'|trans({}, 'catroweb') }}"
        data-has-description=""
        data-has-credits=""

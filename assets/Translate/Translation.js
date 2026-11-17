@@ -4,14 +4,15 @@ import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 const SPECIAL_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR', 'pt-PT']
 // Variants LibreTranslate has a separate model for (LibreTranslateApi::LANGUAGE_CODES).
 const EXACT_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR']
+// The project and the comment translators of a page share one request.
+let supportedLanguagesRequest = null
 
 export class Translation {
   constructor(translatedByLine, refreshLabel = 'Translate again') {
     this.translatedByLine = translatedByLine
     this.refreshLabel = refreshLabel
-    // Languages the machine translation offers; empty while it is unreachable, then every language is offered.
-    const supported = document.querySelector('[data-machine-translation-languages]')
-    this.supportedLanguages = JSON.parse(supported?.dataset.machineTranslationLanguages || '[]')
+    // Languages the machine translation offers (loadSupportedLanguages); while empty, every language is offered.
+    this.supportedLanguages = []
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}
     this.targetLanguage = null
@@ -31,6 +32,32 @@ export class Translation {
     // Without a model for the site language every attempt would fail; English is the closest useful default and
     // the dropdown still offers every supported language.
     this.targetLanguage = this.isSupported(code) ? code : 'en'
+  }
+
+  /**
+   * Fetches the languages the machine translation offers on the first translate click, so rendering a page never
+   * waits for LibreTranslate; a failed request is tried again on the next click. Resolves when the target language
+   * is set accordingly.
+   */
+  loadSupportedLanguages() {
+    supportedLanguagesRequest ??= fetch(
+      document.querySelector('[data-machine-translation-languages-url]')?.dataset
+        .machineTranslationLanguagesUrl,
+    )
+      .then((response) => {
+        if (!response.ok) throw new Error(`Languages failed: ${response.status}`)
+        return response.json()
+      })
+      .then((languages) => (Array.isArray(languages) ? languages : []))
+      .catch(() => {
+        supportedLanguagesRequest = null
+        return []
+      })
+    return supportedLanguagesRequest.then((languages) => {
+      // Empty while LibreTranslate is unreachable: then every language is offered.
+      this.supportedLanguages = languages
+      this.setTargetLanguage()
+    })
   }
 
   setDisplayLanguageMap() {

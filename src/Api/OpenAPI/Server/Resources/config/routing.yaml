@@ -836,6 +836,12 @@ open_api_server_translation_projectsidtranslationfieldlanguagedelete:
     field: '^(name|description|credit)$'
     language: '^[a-zA-Z\-]+$'
 
+open_api_server_translation_translationlanguagesget:
+  path: /translation/languages
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.translation::translationLanguagesGetAction
+
 # users
 # IMPORTANT: Literal path segments (me, search, reset-password) MUST be defined
 # BEFORE /users/{id} wildcard routes, otherwise they match {id}.

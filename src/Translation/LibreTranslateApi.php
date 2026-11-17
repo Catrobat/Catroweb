@@ -119,7 +119,7 @@ class LibreTranslateApi
       try {
         $languages = $this->http_client->request('GET', $this->url.'/languages', ['timeout' => 3, 'max_duration' => 3])->toArray();
       } catch (ExceptionInterface $e) {
-        // Rendered into every project page: retry soon, but don't make each page wait for a dead server.
+        // Asked on a page's first translate click: retry soon, but don't make each click wait for a dead server.
         $item->expiresAfter(300);
         $this->logger->error('LibreTranslate languages unavailable: '.$e->getMessage());
 

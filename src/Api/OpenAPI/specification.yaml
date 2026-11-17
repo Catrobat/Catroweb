@@ -1963,6 +1963,23 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/translation/languages':
+    get:
+      tags:
+        - 'Translation'
+      summary: 'List machine translation languages'
+      description: 'Language codes the machine translation has a model for, as the translate endpoints take them. Empty while the translation service is unreachable: then offer every language.'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: 'fr'
+
   ################################################
   # Notifications
   #

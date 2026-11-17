@@ -30,7 +30,7 @@ export class TranslateProject extends Translation {
 
       if (translateProject.isTranslationNotAvailable('#name-translation')) {
         document.getElementById('project-translation-loading-spinner').style.display = 'block'
-        translateProject.translateProject()
+        translateProject.loadSupportedLanguages().then(() => translateProject.translateProject())
       } else {
         translateProject.openTranslatedProject()
       }
