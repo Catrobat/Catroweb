@@ -14,14 +14,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
-/**
- * @internal
- *
- * @covers \App\Storage\StorageLifecycleService
- */
+/** @internal */
+#[CoversClass(StorageLifecycleService::class)]
 class StorageLifecycleServiceTest extends TestCase
 {
   private StorageLifecycleService $service;

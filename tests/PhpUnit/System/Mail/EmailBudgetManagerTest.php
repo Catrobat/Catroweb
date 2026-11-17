@@ -8,14 +8,12 @@ use App\DB\Entity\System\EmailDailyBudget;
 use App\DB\EntityRepository\System\EmailDailyBudgetRepository;
 use App\System\Mail\EmailBudgetManager;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
-/**
- * @covers \App\System\Mail\EmailBudgetManager
- *
- * @internal
- */
+/** @internal */
+#[CoversClass(EmailBudgetManager::class)]
 class EmailBudgetManagerTest extends TestCase
 {
   private EmailDailyBudget $budget;

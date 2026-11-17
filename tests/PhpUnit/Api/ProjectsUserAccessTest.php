@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Api;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,9 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
  * "user", which let anonymous callers through to the controller and answered 500 instead of 401.
  *
  * @internal
- *
- * @coversNothing
  */
+#[CoversNothing]
 class ProjectsUserAccessTest extends WebTestCase
 {
   public function testOwnProjectsWithoutLoginAnswer401(): void

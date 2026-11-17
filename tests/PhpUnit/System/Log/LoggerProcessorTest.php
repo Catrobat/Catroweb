@@ -8,16 +8,14 @@ use App\System\Log\LoggerProcessor;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Level;
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-/**
- * @covers \App\System\Log\LoggerProcessor
- *
- * @internal
- */
+/** @internal */
+#[CoversClass(LoggerProcessor::class)]
 class LoggerProcessorTest extends KernelTestCase
 {
   public function testAddsRequestIdFromHeader(): void

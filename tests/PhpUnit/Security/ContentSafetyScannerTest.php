@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Security;
 
 use App\Security\ContentSafety\ContentSafetyScanner;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+/** @internal */
+#[CoversNothing]
 class ContentSafetyScannerTest extends TestCase
 {
   public function testScanReturnsSafeForCleanImage(): void

@@ -7,6 +7,7 @@ namespace Tests\PhpUnit\System\Log;
 use App\DB\Entity\User\User;
 use Bugsnag\Client;
 use Bugsnag\Report;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\NullToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -17,10 +18,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * Runs reports through the real Bugsnag client's middleware pipeline, so it also proves the callback is registered.
  *
- * @covers \App\System\Log\IgnoreLoginRequiredAccessDenied
- *
  * @internal
  */
+#[CoversClass(\App\System\Log\IgnoreLoginRequiredAccessDenied::class)]
 class IgnoreLoginRequiredAccessDeniedTest extends KernelTestCase
 {
   public function testAccessDeniedForAnonymousCallerIsNotReported(): void
