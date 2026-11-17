@@ -15,7 +15,7 @@ docker exec -it app.catroweb php bin/console catrobat:reset --hard
 ```
 
 - App: <http://localhost:8080/>, phpMyAdmin: <http://localhost:8081/>, Mailpit (all dev mail): <http://localhost:8025/>
-- Translate buttons: add `--profile translation` to `up -d` to start LibreTranslate (first start downloads the language models). See [Machine Translation](../operations/Machine-Translation.md).
+- Translate buttons: add `--profile translation` to `up -d` to start LibreTranslate (first start downloads the language models); project translations also need a `translation` worker. See [Machine Translation](../operations/Machine-Translation.md).
 - `src/`, `assets/`, `templates/`, `config/` and `tests/` are mounted live. `vendor/` and `node_modules/` are built in the image; for IDE indexing copy them out with `sh docker/app/import-container-libraries.sh`.
 - After dependency or Dockerfile changes: `docker compose -f docker-compose.dev.yaml build --no-cache app.catroweb`, then `up -d`.
 - Logs: `docker compose -f docker-compose.dev.yaml logs -f app.catroweb`.
