@@ -46,7 +46,7 @@ docker compose -f docker/docker-compose.dev.yaml up -d
 docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb   # after dependency changes
 ```
 
-Ports: app 8080, phpMyAdmin 8081, MariaDB 3306 (`db.catroweb.dev` / `catroweb_dev`, `root`/`root`), Elasticsearch 9200, headless Chrome 9222, Mailpit 8025 (catches all dev mail).
+Ports: app 8080, phpMyAdmin 8081, MariaDB 3306 (`db.catroweb.dev` / `catroweb_dev`, `root`/`root`), Elasticsearch 9200, headless Chrome 9222, Mailpit 8025 (catches all dev mail), LibreTranslate 5005 (only with `--profile translation`).
 
 - Volume-mounted: `assets/`, `src/`, `templates/`, `config/`, `tests/`. **Not** mounted: `node_modules/`, `vendor/`, `public/build/`, `behat.yaml.dist`.
 - After JS changes for Behat: `yarn run dev && docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/ && docker exec app.catroweb bin/console cache:clear --env=test`.
