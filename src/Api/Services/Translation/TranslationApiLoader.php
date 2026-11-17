@@ -7,6 +7,7 @@ namespace App\Api\Services\Translation;
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
+use App\Translation\ProjectTranslationJob;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 
@@ -21,9 +22,17 @@ class TranslationApiLoader extends AbstractApiLoader
   /**
    * @return array<TranslationResult|null>|null
    */
-  public function translateProject(Project $project, ?string $source_language, string $target_language): ?array
+  public function getCachedProjectTranslation(Project $project, ?string $source_language, string $target_language): ?array
   {
-    return $this->translation_delegate->translateProject($project, $source_language, $target_language);
+    return $this->translation_delegate->getCachedProjectTranslation($project, $source_language, $target_language);
+  }
+
+  /**
+   * @param \Closure(): bool $may_queue
+   */
+  public function requestProjectTranslation(Project $project, ?string $source_language, string $target_language, \Closure $may_queue): ProjectTranslationJob
+  {
+    return $this->translation_delegate->requestProjectTranslation($project, $source_language, $target_language, $may_queue);
   }
 
   public function getCustomTranslation(Project $project, string $field, string $language): ?string

@@ -8,6 +8,7 @@ Slow work runs outside web requests, on workers that each consume one queue, so 
 | `uploads`                    | Completing resumable uploads that asked for it (`CompleteProjectUpload`)                                              |
 | `mail`                       | Mail delivery (`SendMail`), so a verification mail never waits behind other jobs                                      |
 | `default`                    | Follower notifications for a new project, code view exports, NSFW image scans (`ScanContentImages`)                   |
+| `translation`                | Project machine translations (`TranslateProject`), no retries: a visitor waits on them                                |
 | `cleanup`                    | Bulk clean-ups that queue one batch after the next while work is left (`GarbageCollectOrphanedAssets`)                |
 | `scheduler_maintenance`      | Fast periodic tasks (popularity, rankings, achievements, small clean-ups)                                             |
 | `scheduler_maintenance_slow` | Periodic sweeps that may take long (retention, broken projects, re-sanitizing, unverified accounts, moderation purge) |
@@ -30,7 +31,7 @@ Run by hand: `bin/console catrobat:cronjob` runs every due task of both lanes, `
 
 The workers are systemd services (Catrobat/infrastructure `host-config/systemd/catroweb-worker@.service`, one instance per queue above, grouped by `catroweb-workers.target`).
 
-The `cleanup` worker came later (Catrobat/infrastructure adds it to `catroweb-workers.target` and the watchdog): run `sudo systemctl enable --now catroweb-worker@cleanup` once, **before** the deploy that adds the queue. The deploy refuses to run while the unit is not enabled. Until that release is live the worker restarts in a loop (its queue does not exist yet); systemd then starts it from the new release on its own.
+The `translation` worker came later (Catrobat/infrastructure adds it to `catroweb-workers.target` and the watchdog): run `sudo systemctl enable --now catroweb-worker@translation` once, **before** the deploy that adds the queue. The deploy refuses to run while the unit is not enabled. Until that release is live the worker restarts in a loop (its queue does not exist yet); systemd then starts it from the new release on its own.
 
 First rollout, in this order: install and start the unit files (infrastructure repo, `docs/HOST_BOOTSTRAP.md`), deploy, then delete `/etc/cron.d/catroweb`.
 
@@ -46,4 +47,4 @@ journalctl -u catroweb-worker@scratch -f
 
 ## Locally
 
-`bin/console messenger:consume mail default scratch uploads cleanup scheduler_maintenance scheduler_maintenance_slow -vv` runs all queues in one terminal. Without a worker, async requests stay `queued`.
+`bin/console messenger:consume mail default scratch uploads cleanup translation scheduler_maintenance scheduler_maintenance_slow -vv` runs all queues in one terminal. Without a worker, async requests stay `queued`.

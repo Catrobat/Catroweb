@@ -437,6 +437,7 @@ class TranslationController extends Controller
 
       $message = match ($responseCode) {
         200 => 'OK',
+        202 => 'Accepted: the translation runs in the background, ask again after Retry-After seconds',
         304 => 'Not Modified (ETag match)',
         400 => 'Bad request (Invalid, or missing parameters)',
         404 => 'Not found',

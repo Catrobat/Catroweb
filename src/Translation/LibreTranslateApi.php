@@ -37,7 +37,7 @@ class LibreTranslateApi
   /**
    * @param string|null $source_language null to auto-detect
    */
-  public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
+  public function translate(string $text, ?string $source_language, string $target_language, int $timeout = 5): ?TranslationResult
   {
     if ('' === trim($text)) {
       $result = new TranslationResult();
@@ -59,9 +59,9 @@ class LibreTranslateApi
           'target' => $this->toLibreTranslate($target_language),
           'format' => 'text',
         ],
-        // A project is up to three calls in one web request.
-        'timeout' => 5,
-        'max_duration' => 5,
+        // Web requests keep the default; the project translation job waits longer (about 1 s per 30 characters).
+        'timeout' => $timeout,
+        'max_duration' => $timeout,
       ])->toArray();
       $translation = $data['translatedText'] ?? null;
       if (!is_string($translation)) {

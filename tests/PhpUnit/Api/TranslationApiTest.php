@@ -11,8 +11,10 @@ use App\Api\Services\Translation\TranslationApiProcessor;
 use App\Api\Services\Translation\TranslationResponseManager;
 use App\Api\TranslationApi;
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
+use App\Translation\ProjectTranslationJob;
 use App\Translation\TranslationResult;
 use OpenAPI\Server\Model\ProjectCustomTranslationSaveRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -117,7 +119,8 @@ final class TranslationApiTest extends TestCase
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
 
     $loader = $this->createStub(TranslationApiLoader::class);
-    $loader->method('translateProject')->willReturn(null);
+    $loader->method('getCachedProjectTranslation')->willReturn(null);
+    $loader->method('requestProjectTranslation')->willReturn(ProjectTranslationJob::Failed);
 
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
@@ -136,12 +139,33 @@ final class TranslationApiTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testTranslationGetQueuedAnswersAccepted(): void
+  {
+    $project_manager = $this->createStub(ProjectManager::class);
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
+    $loader = $this->createMock(TranslationApiLoader::class);
+    $loader->method('getCachedProjectTranslation')->willReturn(null);
+    $loader->expects($this->once())->method('requestProjectTranslation')->willReturn(ProjectTranslationJob::Queued);
+    $facade = $this->createStub(TranslationApiFacade::class);
+    $facade->method('getLoader')->willReturn($loader);
+    $request_stack = new RequestStack();
+    $request_stack->push(new Request());
+
+    $code = 200;
+    $headers = [];
+    $this->assertNull($this->buildApi(facade: $facade, project_manager: $project_manager, request_stack: $request_stack)->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers));
+    $this->assertSame(Response::HTTP_ACCEPTED, $code);
+    $this->assertSame('2', $headers['Retry-After'] ?? null);
+    $this->assertArrayNotHasKey('ETag', $headers);
+  }
+
+  #[Group('unit')]
   public function testTranslationGetInvalidLanguage(): void
   {
     $project_manager = $this->createStub(ProjectManager::class);
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
     $loader = $this->createStub(TranslationApiLoader::class);
-    $loader->method('translateProject')->willThrowException(new \InvalidArgumentException('bad code'));
+    $loader->method('getCachedProjectTranslation')->willThrowException(new \InvalidArgumentException('bad code'));
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
     $request_stack = new RequestStack();
@@ -159,7 +183,10 @@ final class TranslationApiTest extends TestCase
     $project_manager = $this->createStub(ProjectManager::class);
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
     $loader = $this->createMock(TranslationApiLoader::class);
-    $loader->expects($this->once())->method('translateProject')->willReturn(null);
+    $loader->method('getCachedProjectTranslation')->willReturn(null);
+    $loader->expects($this->exactly(2))->method('requestProjectTranslation')
+      ->willReturnCallback(static fn (Project $p, ?string $s, string $t, \Closure $may_queue): ProjectTranslationJob => $may_queue() ? ProjectTranslationJob::Queued : ProjectTranslationJob::Refused)
+    ;
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
     $request_stack = new RequestStack();
@@ -170,7 +197,7 @@ final class TranslationApiTest extends TestCase
     $code = 200;
     $headers = [];
     $api->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers);
-    $this->assertSame(Response::HTTP_SERVICE_UNAVAILABLE, $code);
+    $this->assertSame(Response::HTTP_ACCEPTED, $code);
 
     $code = 200;
     $this->assertNull($api->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers));
@@ -185,7 +212,7 @@ final class TranslationApiTest extends TestCase
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
 
     $loader = $this->createStub(TranslationApiLoader::class);
-    $loader->method('translateProject')->willReturn([null, null, null]);
+    $loader->method('getCachedProjectTranslation')->willReturn([null, null, null]);
 
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
@@ -214,7 +241,7 @@ final class TranslationApiTest extends TestCase
     $title_result->translation = 'Translated';
     $title_result->detected_source_language = 'en';
     $loader = $this->createStub(TranslationApiLoader::class);
-    $loader->method('translateProject')->willReturn([$title_result, null, null]);
+    $loader->method('getCachedProjectTranslation')->willReturn([$title_result, null, null]);
 
     $facade = $this->createStub(TranslationApiFacade::class);
     $facade->method('getLoader')->willReturn($loader);
@@ -240,7 +267,7 @@ final class TranslationApiTest extends TestCase
     $project_manager = $this->createStub(ProjectManager::class);
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
 
-    $etag_value = md5('TestDesc').'fr';
+    $etag_value = ProjectMachineTranslation::sourceHash($project).'autofr';
 
     $request = new Request();
     $request->headers->set('If-None-Match', '"'.$etag_value.'"');

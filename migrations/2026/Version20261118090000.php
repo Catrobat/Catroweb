@@ -9,8 +9,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 /**
  * The usage columns are unmapped now but stay one more release: the previous release still selects and writes them
- * (deploy window, rollback). The defaults let this release insert rows without them.
- * ponytail: drop provider, usage_count, usage_per_month, last_modified_at and created_at in the next release.
+ * (deploy window, rollback). The defaults let this release insert rows without them. Version20261118120000 drops them.
  */
 final class Version20261118090000 extends AbstractMigration
 {

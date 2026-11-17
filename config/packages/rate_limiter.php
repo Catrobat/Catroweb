@@ -109,7 +109,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       ],
       // Machine translation runs on our own LibreTranslate, on the web host's CPU. translation_burst: requests per
       // client IP (schools share one). translation_global: LibreTranslate calls site-wide (cache hits are free; a
-      // project is up to 3 calls; the container itself takes 120 a minute), so a few IPs can't hold the PHP workers.
+      // project is up to 3 calls; the container itself takes 120 a minute). Comments are translated within the
+      // request, so a few IPs can't hold the PHP workers; a project counts once per queued job, not per poll.
       'translation_burst' => [
         'policy' => 'sliding_window',
         'limit' => 30,
