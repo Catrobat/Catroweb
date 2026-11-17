@@ -9,6 +9,7 @@ The translate buttons on project pages and comments use a self-hosted [LibreTran
 - The language dropdowns only offer languages from LibreTranslate's `GET /languages`, cached for a day. While LibreTranslate is unreachable the list is empty (retried after 5 minutes) and the dropdowns offer every site language. When LibreTranslate has no model for the site language, translations go to English.
 - LibreTranslate runs on the web host's CPU, so `config/packages/rate_limiter.php` limits both translate endpoints per IP (`translation_burst`, 30 requests a minute, then 429) and all LibreTranslate calls site-wide (`translation_global`, 100 a minute; cache hits are free; over the limit a translation fails like an outage). In a web request each call times out after 5 s, in the project job after 120 s. Only a request that queues a new project job counts against `translation_burst`; polls and cache hits are free.
 - A failed translation answers 503 and logs the error `Machine translation failed: <reason>, …`; the infra watchdog counts these lines.
+- A language LibreTranslate has no model for (`… is not supported`) is not an outage: it answers 422 (a project job reports it once, like a failure) and logs a notice `Machine translation rejected: …`, which the watchdog ignores. Malformed language codes answer 400.
 
 ## Configuration
 

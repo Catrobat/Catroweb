@@ -20,3 +20,7 @@ Feature: Project machine translation failure modes
   Scenario: Missing target_language parameter returns 400
     Given I request "GET" "/api/projects/1/translation"
     Then the response status code should be "400"
+
+  Scenario: A language the translator has no model for returns 422
+    Given I request "GET" "/api/projects/1/translation?target_language=fr&source_language=ru"
+    Then the response status code should be "422"

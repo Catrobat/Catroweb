@@ -96,7 +96,7 @@ export class TranslateProject extends Translation {
 
     this.setTranslationCredit(data, byLineElements, (sourceLanguage, targetLanguage) => {
       document.getElementById('project-translation-loading-spinner').style.display = 'block'
-      this.translateProject(sourceLanguage, targetLanguage)
+      return this.translateProject(sourceLanguage, targetLanguage)
     })
   }
 
@@ -140,6 +140,7 @@ export class TranslateProject extends Translation {
     this.showTranslationFailed()
   }
 
+  /** Resolves to false when the translation failed, undefined when it succeeded or was superseded. */
   translateProject(sourceLanguage = null, targetLanguage = this.targetLanguage) {
     const params = new URLSearchParams({ target_language: targetLanguage })
     if (sourceLanguage) params.set('source_language', sourceLanguage)
@@ -162,14 +163,16 @@ export class TranslateProject extends Translation {
         return response.json()
       })
 
-    poll()
+    return poll()
       .then((data) => {
         if (!isCurrent()) return
         this.setTranslatedProjectData(data)
         this.openTranslatedProject()
       })
       .catch(() => {
-        if (isCurrent()) this.projectNotTranslated()
+        if (!isCurrent()) return
+        this.projectNotTranslated()
+        return false
       })
   }
 }

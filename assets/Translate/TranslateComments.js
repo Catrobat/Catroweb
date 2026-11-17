@@ -63,7 +63,7 @@ export class TranslateComments extends Translation {
     this.setTranslationCredit(data, byLineElements, (sourceLanguage, targetLanguage) => {
       document.getElementById(`comment-translation-loading-spinner-${commentId}`).style.display =
         'block'
-      this.translateComment(
+      return this.translateComment(
         this.translateCommentUrls[commentId],
         commentId,
         sourceLanguage,
@@ -94,6 +94,7 @@ export class TranslateComments extends Translation {
     this.showTranslationFailed()
   }
 
+  /** Resolves to false when the translation failed. */
   translateComment(
     translateCommentUrl,
     commentId,
@@ -103,7 +104,7 @@ export class TranslateComments extends Translation {
     const params = new URLSearchParams({ target_language: targetLanguage })
     if (sourceLanguage) params.set('source_language', sourceLanguage)
 
-    fetch(`${translateCommentUrl}?${params}`, {
+    return fetch(`${translateCommentUrl}?${params}`, {
       method: 'GET',
     })
       .then((response) => {
@@ -116,6 +117,7 @@ export class TranslateComments extends Translation {
       })
       .catch(() => {
         this.commentNotTranslated(commentId)
+        return false
       })
   }
 }

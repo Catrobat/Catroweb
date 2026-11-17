@@ -211,3 +211,17 @@ Feature: Project title, description and credits should be translatable via a but
     And the "project-translation-first-language-select" field should contain "fr"
     And the "#description-translation" element should contain "translated mydescription"
     And the element ".translation-refresh-button" should not be visible
+
+  Scenario: A failed translate again keeps the by-line on the languages that are shown
+    Given I am on "/app/project/2"
+    And I wait for the page to be loaded
+    When I click "#project-translation-button"
+    And I wait for AJAX to finish
+    Then the "project-translation-first-language-select" field should contain "en"
+    When I select "ru" from "project-translation-first-language-select"
+    And I click ".translation-refresh-button"
+    And I wait for AJAX to finish
+    Then I wait for the element "#share-snackbar-label" to contain "Machine translation is not available right now"
+    And the "#name-translation" element should contain "translated project2"
+    And the "project-translation-first-language-select" field should contain "en"
+    And the element ".translation-refresh-button" should not be visible

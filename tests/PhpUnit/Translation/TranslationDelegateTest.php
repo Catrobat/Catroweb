@@ -12,9 +12,11 @@ use App\Translation\ProjectTranslationJob;
 use App\Translation\TranslateProject;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
+use App\Translation\UnsupportedLanguageException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Messenger\Envelope;
@@ -144,6 +146,30 @@ class TranslationDelegateTest extends TestCase
 
     $this->assertSame(ProjectTranslationJob::Failed, $delegate->requestProjectTranslation($project, null, 'fr', static fn (): bool => true));
     $this->assertSame(ProjectTranslationJob::Queued, $delegate->requestProjectTranslation($project, null, 'fr', static fn (): bool => true));
+  }
+
+  public function testAJobWithoutALanguageModelIsReportedAsUnsupported(): void
+  {
+    $api = $this->createStub(LibreTranslateApi::class);
+    $api->method('translate')->willThrowException(new UnsupportedLanguageException('kk is not supported'));
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->expects($this->never())->method('error');
+    $bus = $this->createStub(MessageBusInterface::class);
+    $bus->method('dispatch')->willReturnCallback(static fn (object $message): Envelope => new Envelope($message));
+    $delegate = new TranslationDelegate(
+      $this->createStub(ProjectCustomTranslationRepository::class),
+      $this->createStub(ProjectMachineTranslationRepository::class),
+      $api,
+      new ArrayAdapter(),
+      $bus,
+      $logger,
+    );
+    $project = $this->project('name');
+
+    $delegate->translateProject($project, null, 'kk');
+
+    $this->assertSame(ProjectTranslationJob::Unsupported, $delegate->requestProjectTranslation($project, null, 'kk', static fn (): bool => true));
+    $this->assertSame(ProjectTranslationJob::Queued, $delegate->requestProjectTranslation($project, null, 'kk', static fn (): bool => true));
   }
 
   public function testCachedProjectTranslationComesFromTheRepository(): void

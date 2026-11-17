@@ -16,6 +16,7 @@ use App\Project\ProjectManager;
 use App\Translation\LibreTranslateApi;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
+use App\Translation\UnsupportedLanguageException;
 use App\User\Notification\NotificationManager;
 use App\User\UserAvatarService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -338,6 +339,10 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       $translation_result = $this->translation_delegate->translate($comment_text, $source_language, $target_language);
     } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    } catch (UnsupportedLanguageException) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
       return null;
     }

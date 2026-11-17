@@ -83,7 +83,8 @@ export class Translation {
 
   /**
    * Renders the "Machine translated from X to Y" line. X and Y are selectors; changing one shows a
-   * refresh button that calls onRefresh(sourceLanguage, targetLanguage).
+   * refresh button that calls onRefresh(sourceLanguage, targetLanguage). When the promise onRefresh
+   * returns resolves to false (the translation failed), the selectors go back to the shown translation.
    */
   setTranslationCredit(data, byLineElements, onRefresh) {
     byLineElements.before.textContent = this.translatedByLineMap.before
@@ -115,7 +116,12 @@ export class Translation {
     refreshButton.style.display = 'none'
     refreshButton.onclick = () => {
       refreshButton.style.display = 'none'
-      onRefresh(sourceSelect.value, targetSelect.value)
+      onRefresh(sourceSelect.value, targetSelect.value).then((translated) => {
+        if (translated !== false) return
+        sourceSelect.value = data.source_language
+        targetSelect.value = data.target_language
+        syncDisabled()
+      })
     }
 
     // A language cannot be picked on both sides.
