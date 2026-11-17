@@ -65,19 +65,21 @@ class AutoModerationServiceTest extends TestCase
     $this->assertSame(['category' => 'sexual_content', 'images' => ['Mom']], $this->ownerReason());
   }
 
-  public function testACommunityHideGivesTheCategoryMostReportsGave(): void
+  public function testACommunityHideGivesTheCategoryWithTheMostTrust(): void
   {
     $visibility = $this->createStub(ContentVisibilityManager::class);
     $visibility->method('getContentOwnerId')->willReturn('owner');
     $repository = $this->createStub(EntityRepository::class);
-    $repository->method('findBy')->willReturn(array_map(
-      static fn (string $category): ContentReport => new ContentReport()->setCategory($category),
-      ['spam', 'sexual_content', 'sexual_content'],
-    ));
+    $repository->method('findBy')->willReturn([
+      new ContentReport()->setCategory('spam')->setReporter(new User())->setReporterTrustScore(2.5),
+      new ContentReport()->setCategory('sexual_content')->setReporter(new User())->setReporterTrustScore(1.0),
+      new ContentReport()->setCategory('sexual_content')->setReporter(new User())->setReporterTrustScore(1.0),
+      new ContentReport()->setCategory('sexual_content')->setReporterTrustScore(5.0), // an automatic flag doesn't vote
+    ]);
 
     $this->service($visibility, $repository)->autoHideContent(ContentType::Project, 'p1', 3.0);
 
-    $this->assertSame(['category' => 'sexual_content'], $this->ownerReason());
+    $this->assertSame(['category' => 'spam'], $this->ownerReason());
   }
 
   public function testAProfileIsQueuedButNeverHidden(): void

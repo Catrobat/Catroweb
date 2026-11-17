@@ -223,29 +223,30 @@ class AutoModerationService
   }
 
   /**
-   * The category most of the pending reports gave.
+   * The category of the pending community reports with the most trust behind it (what decided the hide).
    *
    * @return array{category?: string}|null
    */
   private function communityReason(ContentType $content_type, string $content_id): ?array
   {
-    $categories = [];
+    $weights = [];
     foreach ($this->entity_manager->getRepository(ContentReport::class)->findBy([
       'content_type' => $content_type->value,
       'content_id' => $content_id,
       'state' => ReportState::New->value,
     ], ['created_at' => 'ASC']) as $report) { // a tie goes to the first report
-      $categories[] = $report->getCategory();
+      if (null !== $report->getReporter()) {
+        $weights[$report->getCategory()] = ($weights[$report->getCategory()] ?? 0.0) + $report->getReporterTrustScore();
+      }
     }
 
-    if ([] === $categories) {
+    if ([] === $weights) {
       return null;
     }
 
-    $counts = array_count_values($categories);
-    arsort($counts);
+    arsort($weights);
 
-    return ['category' => array_key_first($counts)];
+    return ['category' => array_key_first($weights)];
   }
 
   /**

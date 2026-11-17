@@ -62,7 +62,8 @@ class NotificationsResponseManager extends AbstractResponseManager
   private function moderationReason(?array $reason): string
   {
     $parts = [];
-    $images = $reason['images'] ?? [];
+    // ponytail: the first 5 names, 40 characters each; the admin queue lists them all.
+    $images = array_map(static fn (string $name): string => mb_strimwidth($name, 0, 40, '…'), array_slice($reason['images'] ?? [], 0, 5));
     if ([] !== $images) {
       $parts[] = $this->trans('catro-notifications.moderation-reason.image', ['%count%' => count($images), '%names%' => implode(', ', $images)]);
     }

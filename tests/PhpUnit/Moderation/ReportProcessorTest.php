@@ -765,6 +765,45 @@ final class ReportProcessorTest extends TestCase
     $this->assertSame(ReportState::Accepted->value, $related->getState());
     $this->assertFalse($owner->getProfileHidden());
     $this->assertOwnerWarned($persisted, $owner, 'project', 'Please keep it kind.', ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, ContentModerationAction::ACTION_ADMIN_HIDE_WARNED);
+    $this->assertSame(['category' => 'inappropriate'], $this->ownerNotification($persisted)->getModerationReason());
+  }
+
+  #[Group('unit')]
+  public function testAcceptTellsTheOwnerWhyTheContentWasHidden(): void
+  {
+    [$report] = $this->createPendingReports('studio', 'studio-1');
+    $report->setCategory('inappropriate_content');
+    $report->setFlaggedAssets([['type' => 'image', 'name' => '1731234567-My-Studio-card@1x.webp', 'score' => 0.999]]);
+
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('owner-id');
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('findReportsForContent')->willReturn([$report]);
+
+    $persisted = [];
+    $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      visibility_manager: $visibility,
+      entity_manager: $this->createRecordingEntityManager($persisted, new User()),
+    );
+
+    $processor->resolveReport($report, $this->createUserStub('admin-id'), ReportProcessor::ACTION_ACCEPT);
+
+    $notification = $this->ownerNotification($persisted);
+    $this->assertSame(ReportProcessor::NOTIFICATION_ADMIN_HIDDEN, $notification->getModerationAction());
+    $this->assertSame('', $notification->getMessage(), 'the API shows the translated default');
+    $this->assertSame(['category' => 'inappropriate_content', 'cover' => true], $notification->getModerationReason());
+  }
+
+  /**
+   * @param list<object> $persisted
+   */
+  private function ownerNotification(array $persisted): ModerationNotification
+  {
+    $notifications = array_values(array_filter($persisted, static fn (object $e): bool => $e instanceof ModerationNotification));
+    $this->assertCount(1, $notifications);
+
+    return $notifications[0];
   }
 
   #[Group('unit')]
