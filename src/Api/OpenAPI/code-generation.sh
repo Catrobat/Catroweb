@@ -50,8 +50,8 @@ find src/Api/OpenAPI/Server -name '*.yaml' -exec sed -i '' 's/\\\\-/\\-/g' {} +
 find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/new Assert\\Choice(\[/new Assert\\Choice(choices: [/g' {} +
 # Literal routes before placeholder routes (/projects/search before /projects/{id})
 php src/Api/OpenAPI/sort-routes.php
-# Note: Do NOT replace Assert\Type('OpenAPI\\Server\\Model\\...') with ::class syntax.
-# The generated controllers don't import Model classes, so ::class resolves to the
-# Controller namespace and breaks validation.
+# Note: Rector (run after this script) turns Assert\Type('OpenAPI\\Server\\Model\\...') into the
+# fully qualified \OpenAPI\Server\Model\...::class. Do NOT sed it to an unqualified ::class:
+# the controllers don't import Model classes, so it would resolve to the Controller namespace.
 
 yarn run fix

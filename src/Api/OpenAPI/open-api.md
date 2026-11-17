@@ -45,7 +45,7 @@ To generate the OpenAPI code (e.g., client libraries, server stubs, etc.), you n
 
    On an unchanged spec this must produce no diff. Never hand-edit `src/Api/OpenAPI/Server/`; change the spec or the pipeline instead:
    - Route requirements come from the path parameter's `pattern` (without one the generator emits `[a-z0-9]+`, which rejects UUIDs).
-   - `sort-routes.php` puts literal routes before placeholder routes (`/projects/search` before `/projects/{id}`), since the generator orders routes by operationId.
+   - `sort-routes.php` puts literal routes before placeholder routes within each tag section (`/projects/search` before `/projects/{id}`), since the generator orders routes by operationId.
    - Symfony's validator ignores the docblock `@Assert` annotations the generator writes on models. Request-body constraints that must hold go into `config/validator/<Model>.yaml`.
 
 ### Breaking Changes in the OpenAPI Spec
