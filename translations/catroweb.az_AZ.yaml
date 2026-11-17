@@ -207,8 +207,7 @@ project:
   downloaded: 'Endirildi'
   showTranslation: 'Tərcüməni göstər'
   hideTranslation: 'Tərcüməni gizlət'
-  translatedByLine: '%provider% tərəfindən %sourceLanguage% dilindən %targetLanguage% dilinə tərcümə edilib'
-  googleTranslate: Google Translate
+  translatedByLine: '%sourceLanguage% dilindən %targetLanguage% dilinə maşın tərcüməsi'
   confrimDelete: 'Tərcüməni silmək istədiyinə əminsən?'
   default: 'Standart'
   save: Saxla

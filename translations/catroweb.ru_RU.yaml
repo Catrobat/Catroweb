@@ -207,8 +207,7 @@ project:
   downloaded: 'Скачано'
   showTranslation: Показать перевод
   hideTranslation: Скрыть перевод
-  translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
-  googleTranslate: Google Переводчик
+  translatedByLine: 'Машинный перевод с %sourceLanguage% на %targetLanguage%'
   confrimDelete: Вы уверены, что хотите удалить перевод?
   default: По умолчанию
   save: Сохранить

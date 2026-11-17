@@ -207,8 +207,7 @@ project:
   downloaded: Afgelaai
   showTranslation: Wys vertaling
   hideTranslation: Versteek vertaling
-  translatedByLine: Deur %provider% vertaal van %sourceLanguage% na %targetLanguage%
-  googleTranslate: Google Translate
+  translatedByLine: 'Masjienvertaal van %sourceLanguage% na %targetLanguage%'
   confrimDelete: Is jy seker jy wil die vertaling skrap?
   default: Verstek
   save: Stoor

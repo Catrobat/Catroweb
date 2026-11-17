@@ -207,8 +207,7 @@ project:
   downloaded: ڈاؤن لوڈ ہو گیا
   showTranslation: ترجمہ دکھاؤ
   hideTranslation: ترجمہ چھپاؤ
-  translatedByLine: '%provider% نے %sourceLanguage% سے %targetLanguage% میں ترجمہ کیا'
-  googleTranslate: Google Translate
+  translatedByLine: '%sourceLanguage% سے %targetLanguage% میں مشینی ترجمہ'
   confrimDelete: کیا تم واقعی یہ ترجمہ حذف کرنا چاہتے ہو؟
   default: پہلے سے طے شدہ
   save: محفوظ کرو

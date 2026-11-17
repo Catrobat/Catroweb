@@ -190,8 +190,7 @@ project:
   downloaded: "다운로드됨"
   showTranslation: "번역 보기"
   hideTranslation: "번역 숨기기"
-  translatedByLine: "%provider%이(가) %sourceLanguage%에서 %targetLanguage%(으)로 번역했어요"
-  googleTranslate: "Google 번역"
+  translatedByLine: '%sourceLanguage%에서 %targetLanguage%(으)로 기계 번역됨'
   confrimDelete: "번역을 정말 삭제할까요?"
   default: 기본값
   save: 저장

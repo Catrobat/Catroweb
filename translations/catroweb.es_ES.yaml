@@ -207,8 +207,7 @@ project:
   downloaded: 'Descargado'
   showTranslation: 'Mostrar traducción'
   hideTranslation: 'Ocultar traducción'
-  translatedByLine: 'Traducido por %provider% del %sourceLanguage% al %targetLanguage%'
-  googleTranslate: Google Traductor
+  translatedByLine: 'Traducción automática del %sourceLanguage% al %targetLanguage%'
   confrimDelete: '¿Estás segur@ que quieres eliminar esta traducción?'
   default: Por defecto
   save: Guardar

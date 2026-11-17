@@ -3,14 +3,13 @@ import { ByLineElementContainer, Translation } from './Translation'
 export class TranslateProject extends Translation {
   constructor(
     translatedByLine,
-    googleTranslateDisplayName,
     projectId,
     hasDescription,
     hasCredit,
     baseUrl = '',
     refreshLabel = undefined,
   ) {
-    super(translatedByLine, googleTranslateDisplayName, refreshLabel)
+    super(translatedByLine, refreshLabel)
     this.projectId = projectId
     this.baseUrl = baseUrl
     this.hasDescription = hasDescription

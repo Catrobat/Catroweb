@@ -207,8 +207,7 @@ project:
   downloaded: Ladattu
   showTranslation: Näytä käännös
   hideTranslation: Piilota käännös
-  translatedByLine: Kääntänyt %provider% kielestä %sourceLanguage% kieleen %targetLanguage%
-  googleTranslate: Google Kääntäjä
+  translatedByLine: 'Konekäännetty kielestä %sourceLanguage% kieleen %targetLanguage%'
   confrimDelete: Haluatko varmasti poistaa käännöksen?
   default: Oletus
   save: Tallenna

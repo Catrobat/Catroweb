@@ -167,7 +167,6 @@ final class TranslationApiTest extends TestCase
     $title_result = new TranslationResult();
     $title_result->translation = 'Translated';
     $title_result->detected_source_language = 'en';
-    $title_result->provider = 'google';
     $loader = $this->createStub(TranslationApiLoader::class);
     $loader->method('translateProject')->willReturn([$title_result, null, null]);
 

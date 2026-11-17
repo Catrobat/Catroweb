@@ -190,8 +190,7 @@ project:
   downloaded: "ჩამოტვირთულია"
   showTranslation: "თარგმანის ჩვენება"
   hideTranslation: "თარგმანის დამალვა"
-  translatedByLine: "თარგმნილია %provider%-ის მიერ %sourceLanguage%-დან %targetLanguage%-ზე"
-  googleTranslate: "Google Translate"
+  translatedByLine: 'მანქანური თარგმანი %sourceLanguage%-დან %targetLanguage%-ზე'
   confrimDelete: "დარწმუნებული ხარ, რომ გინდა თარგმანის წაშლა?"
   default: "ნაგულისხმევი"
   save: "შენახვა"

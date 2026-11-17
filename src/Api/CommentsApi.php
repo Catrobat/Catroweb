@@ -13,6 +13,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
+use App\Translation\LibreTranslateApi;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 use App\User\Notification\NotificationManager;
@@ -345,7 +346,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $response->setSourceLanguage($source_language ?? $translation_result->detected_source_language);
     $response->setTargetLanguage($target_language);
     $response->setTranslation($translation_result->translation);
-    $response->setProvider($translation_result->provider);
+    $response->setProvider(LibreTranslateApi::PROVIDER);
     $response->setCache(null !== $translation_result->cache ? true : null);
 
     $responseCode = Response::HTTP_OK;

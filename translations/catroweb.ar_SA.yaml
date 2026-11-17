@@ -207,8 +207,7 @@ project:
   downloaded: "تم التنزيل"
   showTranslation: "إظهار الترجمة"
   hideTranslation: "إخفاء الترجمة"
-  translatedByLine: "ترجمة %provider% من %sourceLanguage% إلى %targetLanguage%"
-  googleTranslate: "ترجمة Google"
+  translatedByLine: 'ترجمة آلية من %sourceLanguage% إلى %targetLanguage%'
   confrimDelete: "هل أنت متأكد أنك تريد حذف الترجمة؟"
   default: افتراضي
   save: حفظ

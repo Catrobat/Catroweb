@@ -207,8 +207,7 @@ project:
   downloaded: డౌన్‌లోడ్ అయింది
   showTranslation: అనువాదం చూపించు
   hideTranslation: అనువాదం దాచు
-  translatedByLine: '%provider% ద్వారా %sourceLanguage% నుండి %targetLanguage%కి అనువదించబడింది'
-  googleTranslate: Google Translate
+  translatedByLine: '%sourceLanguage% నుండి %targetLanguage%కి యంత్ర అనువాదం'
   confrimDelete: నువ్వు ఖచ్చితంగా ఈ అనువాదాన్ని తొలగించాలనుకుంటున్నావా?
   default: డిఫాల్ట్
   save: సేవ్ చేయి

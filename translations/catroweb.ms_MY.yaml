@@ -207,8 +207,7 @@ project:
   downloaded: "Dimuat turun"
   showTranslation: "Tunjuk terjemahan"
   hideTranslation: "Sembunyikan terjemahan"
-  translatedByLine: "Diterjemah oleh %provider% daripada %sourceLanguage% ke %targetLanguage%"
-  googleTranslate: Google Translate
+  translatedByLine: 'Terjemahan mesin daripada %sourceLanguage% ke %targetLanguage%'
   confrimDelete: "Kamu pasti mahu memadam terjemahan ini?"
   default: "Lalai"
   save: "Simpan"

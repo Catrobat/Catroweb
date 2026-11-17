@@ -207,8 +207,7 @@ project:
   downloaded: Изтеглен
   showTranslation: Покажи превода
   hideTranslation: Скрий превода
-  translatedByLine: Преведено от %provider% от %sourceLanguage% на %targetLanguage%
-  googleTranslate: Google Преводач
+  translatedByLine: 'Машинен превод от %sourceLanguage% на %targetLanguage%'
   confrimDelete: Сигурен ли си, че искаш да изтриеш превода?
   default: По подразбиране
   save: Запази

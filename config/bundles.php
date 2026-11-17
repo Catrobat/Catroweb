@@ -5,7 +5,6 @@ return [
   Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
   Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
   Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
-  EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundle::class => ['all' => true],
   FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true],
   Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
   Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],

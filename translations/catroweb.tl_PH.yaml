@@ -207,8 +207,7 @@ project:
   downloaded: 'Na-download na'
   showTranslation: 'Ipakita ang salin'
   hideTranslation: 'Itago ang salin'
-  translatedByLine: 'Isinalin ng %provider% mula %sourceLanguage% patungong %targetLanguage%'
-  googleTranslate: Google Translate
+  translatedByLine: 'Isinalin ng makina mula %sourceLanguage% patungong %targetLanguage%'
   confrimDelete: 'Sigurado ka bang gusto mong burahin ang salin?'
   default: Naka-Default
   save: I-save

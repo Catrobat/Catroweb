@@ -190,8 +190,7 @@ project:
   downloaded: 'Diunduh'
   showTranslation: 'Tampilkan terjemahan'
   hideTranslation: 'Sembunyikan terjemahan'
-  translatedByLine: 'Diterjemahkan oleh %provider% dari %sourceLanguage% ke %targetLanguage%'
-  googleTranslate: Google Translate
+  translatedByLine: 'Terjemahan mesin dari %sourceLanguage% ke %targetLanguage%'
   confrimDelete: 'Apakah kamu yakin ingin menghapus terjemahan ini?'
   default: 'Bawaan'
   save: Simpan

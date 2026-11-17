@@ -190,8 +190,6 @@ project:
   downloaded: 'E budatara ya'
   showTranslation: 'Gosi ntụgharị'
   hideTranslation: 'Zoo ntụgharị'
-  translatedByLine: '%provider% tụgharịrị ya site na %sourceLanguage% gaa na %targetLanguage%'
-  googleTranslate: Google Translate
   confrimDelete: "Ị ji n'aka na ịchọrọ ihichapụ ntụgharị ahụ?"
   default: 'Nke ndabara'
   save: 'Chekwaa'

@@ -207,8 +207,7 @@ project:
   downloaded: Descarregat
   showTranslation: Mostra la traducció
   hideTranslation: Amaga la traducció
-  translatedByLine: Traduït per %provider% de %sourceLanguage% a %targetLanguage%
-  googleTranslate: Google Traductor
+  translatedByLine: 'Traducció automàtica de %sourceLanguage% a %targetLanguage%'
   confrimDelete: Segur que vols eliminar la traducció?
   default: Per defecte
   save: Desa

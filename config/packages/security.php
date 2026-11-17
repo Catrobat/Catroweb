@@ -504,9 +504,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'ROLE_ADMIN',
         ],
         'ROLE_STATISTICS' => [
-          'ROLE_ADMIN_BLOCK_STATISTICS_PROJECT_MACHINE_TRANSLATION_ADMIN',
           'ROLE_ADMIN_BLOCK_STATISTICS_PROJECT_CUSTOM_TRANSLATION_ADMIN',
-          'ROLE_ADMIN_BLOCK_STATISTICS_COMMENT_MACHINE_TRANSLATION_ADMIN',
           'ROLE_ADMIN',
         ],
       ],

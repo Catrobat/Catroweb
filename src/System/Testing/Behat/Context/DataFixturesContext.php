@@ -24,7 +24,6 @@ use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\System\MaintenanceInformation;
 use App\DB\Entity\System\Statistic;
 use App\DB\Entity\System\Survey;
-use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\Achievements\Achievement;
@@ -1850,16 +1849,10 @@ class DataFixturesContext implements Context
   {
     foreach ($table->getHash() as $config) {
       $project = $this->getProjectManager()->find($config['project_id']);
-      $source_language = $config['source_language'];
-      $target_language = $config['target_language'];
-      $provider = $config['provider'];
-      $usage_count = (int) $config['usage_count'];
-      $cached_name = $config['cached_name'] ?? null;
-      $cached_description = $config['cached_description'] ?? null;
-      $cached_credits = $config['cached_credits'] ?? null;
-
-      $project_machine_translation = new ProjectMachineTranslation($project, $source_language, $target_language, $provider, $usage_count);
-      $project_machine_translation->setCachedTranslation($cached_name, $cached_description, $cached_credits);
+      $project_machine_translation = new ProjectMachineTranslation($project, $config['source_language'], $config['target_language']);
+      $project_machine_translation->setCachedTranslation(
+        $config['cached_name'] ?: null, $config['cached_description'] ?: null, $config['cached_credits'] ?: null,
+      );
       $this->getManager()->persist($project_machine_translation);
     }
 
@@ -1873,113 +1866,24 @@ class DataFixturesContext implements Context
    */
   public function thereShouldBeProjectMachineTranslations(TableNode $table): void
   {
-    $project_machine_translations = $this->getManager()->getRepository(ProjectMachineTranslation::class)->findAll();
-    // The returned entities may not be up to date
-    foreach ($project_machine_translations as $translation) {
+    $actual = [];
+    foreach ($this->getManager()->getRepository(ProjectMachineTranslation::class)->findAll() as $translation) {
+      // The returned entities may not be up to date
       $this->getManager()->refresh($translation);
+      $actual[] = [
+        'project_id' => $translation->getProject()->getId(),
+        'source_language' => $translation->getSourceLanguage(),
+        'target_language' => $translation->getTargetLanguage(),
+        'cached_name' => $translation->getCachedName() ?? '',
+        'cached_description' => $translation->getCachedDescription() ?? '',
+        'cached_credits' => $translation->getCachedCredits() ?? '',
+      ];
     }
 
-    $table_rows = $table->getHash();
-
-    Assert::assertEquals(count($table_rows), count($project_machine_translations), 'table has different number of rows');
-
-    foreach ($project_machine_translations as $translation) {
-      /** @var Project $project */
-      $project = $translation->getProject();
-      $project_id = $project->getId();
-      $source_language = $translation->getSourceLanguage();
-      $target_language = $translation->getTargetLanguage();
-      $provider = $translation->getProvider();
-      $usage_count = $translation->getUsageCount();
-      $cached_name = $translation->getCachedName();
-      $cached_description = $translation->getCachedDescription();
-      $cached_credits = $translation->getCachedCredits();
-
-      // Filter rows to find matching entries
-      $matching_row = array_filter($table_rows, static fn (array $row) => $project_id == $row['project_id']
-        && $source_language == $row['source_language']
-        && $target_language == $row['target_language']
-        && $provider == $row['provider']
-        && $usage_count == (int) $row['usage_count']
-        && $cached_name == ($row['cached_name'] ?? null)
-        && $cached_description == ($row['cached_description'] ?? null)
-        && $cached_credits == ($row['cached_credits'] ?? null));
-
-      // Assert that exactly one matching row was found
-      $matching_row_count = count($matching_row);
-      Assert::assertEquals(1, $matching_row_count, 'Row not found: '.json_encode([
-        'expected' => [
-          'project_id' => $project_id,
-          'source_language' => $source_language,
-          'target_language' => $target_language,
-          'provider' => $provider,
-          'usage_count' => $usage_count,
-          'cached_name' => $cached_name,
-          'cached_description' => $cached_description,
-          'cached_credits' => $cached_credits,
-        ],
-        'found_rows' => $table_rows,
-      ]));
-    }
-  }
-
-  /**
-   * @Given there are comment machine translations:
-   */
-  public function thereAreCommentMachineTranslations(TableNode $table): void
-  {
-    $em = $this->getManager();
-    $comment_repository = $em->getRepository(UserComment::class);
-
-    foreach ($table->getHash() as $config) {
-      $comment = $comment_repository->find($config['comment_id']);
-      $source_language = $config['source_language'];
-      $target_language = $config['target_language'];
-      $provider = $config['provider'];
-      $usage_count = (int) $config['usage_count'];
-
-      $comment_machine_translation = new CommentMachineTranslation($comment, $source_language, $target_language, $provider, $usage_count);
-      $this->getManager()->persist($comment_machine_translation);
-    }
-
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Then there should be comment machine translations:
-   *
-   * @throws ORMException
-   */
-  public function thereShouldBeCommentMachineTranslations(TableNode $table): void
-  {
-    $comment_machine_translations = $this->getManager()->getRepository(CommentMachineTranslation::class)->findAll();
-    // The returned entities may not be up to date
-    foreach ($comment_machine_translations as $translation) {
-      $this->getManager()->refresh($translation);
-    }
-
-    $table_rows = $table->getHash();
-
-    Assert::assertEquals(count($comment_machine_translations), count($table_rows), 'table has different number of rows');
-
-    foreach ($comment_machine_translations as $translation) {
-      $comment_id = $translation->getComment()->getId();
-      $source_language = $translation->getSourceLanguage();
-      $target_language = $translation->getTargetLanguage();
-      $provider = $translation->getProvider();
-      $usage_count = $translation->getUsageCount();
-
-      $matching_row = array_filter(
-        $table_rows,
-        static fn (array $row): bool => $comment_id == $row['comment_id']
-          && $source_language == $row['source_language']
-          && $target_language == $row['target_language']
-          && $provider == $row['provider']
-          && $usage_count == $row['usage_count']
-      );
-
-      Assert::assertEquals(1, count($matching_row), "row not found with comment id: {$comment_id}");
-    }
+    $expected = $table->getHash();
+    sort($expected);
+    sort($actual);
+    Assert::assertEquals($expected, $actual);
   }
 
   /**

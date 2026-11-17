@@ -208,8 +208,7 @@ project:
   downloaded: "ดาวน์โหลดแล้ว"
   showTranslation: แสดงคำแปล
   hideTranslation: ซ่อนคำแปล
-  translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
-  googleTranslate: Google แปลภาษา
+  translatedByLine: 'แปลด้วยเครื่องจาก %sourceLanguage% เป็น %targetLanguage%'
   confrimDelete: คุณแน่ใจหรือไม่ว่าต้องการลบการแปล
   default: ค่าเริ่มต้น
   save: บันทึก

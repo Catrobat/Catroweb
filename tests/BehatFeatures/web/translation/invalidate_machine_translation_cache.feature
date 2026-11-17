@@ -13,8 +13,8 @@ Feature: Invalidate project cached machine translation
 
   Scenario Outline: Invalidate cached translation when project is edited
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
-      | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
+      | project_id | source_language | target_language | cached_name         | cached_description      | cached_credits     |
+      | 1          | en              | fr-FR           | translated project1 | translated description1 | translated credit1 |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -26,8 +26,8 @@ Feature: Invalidate project cached machine translation
         """
     When I request "PATCH" "/api/projects/1"
     Then there should be project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count |
-      | 1          | en              | fr-FR           | itranslate | 16          |
+      | project_id | source_language | target_language | cached_name | cached_description | cached_credits |
+      | 1          | en              | fr-FR           |             |                    |                |
 
     Examples:
       | property    |
@@ -37,8 +37,8 @@ Feature: Invalidate project cached machine translation
 
   Scenario Outline: Edits should not invalidate cached translation when not logged in
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
-      | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
+      | project_id | source_language | target_language | cached_name         | cached_description      | cached_credits     |
+      | 1          | en              | fr-FR           | translated project1 | translated description1 | translated credit1 |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -49,8 +49,8 @@ Feature: Invalidate project cached machine translation
         """
     When I request "PATCH" "/api/projects/1"
     Then there should be project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
-      | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
+      | project_id | source_language | target_language | cached_name         | cached_description      | cached_credits     |
+      | 1          | en              | fr-FR           | translated project1 | translated description1 | translated credit1 |
 
     Examples:
       | property    |
@@ -60,8 +60,8 @@ Feature: Invalidate project cached machine translation
 
   Scenario Outline: Nothing happens when other project properties are changed
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
-      | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
+      | project_id | source_language | target_language | cached_name         | cached_description      | cached_credits     |
+      | 1          | en              | fr-FR           | translated project1 | translated description1 | translated credit1 |
     And I use a valid JWT Bearer token for "<user>"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -72,8 +72,8 @@ Feature: Invalidate project cached machine translation
           }
         """
     Then there should be project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
-      | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
+      | project_id | source_language | target_language | cached_name         | cached_description      | cached_credits     |
+      | 1          | en              | fr-FR           | translated project1 | translated description1 | translated credit1 |
 
     Examples:
       | user     | property | value |
@@ -82,8 +82,8 @@ Feature: Invalidate project cached machine translation
 
   Scenario Outline: Nothing happens when other projects are edited
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
-      | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
+      | project_id | source_language | target_language | cached_name         | cached_description      | cached_credits     |
+      | 1          | en              | fr-FR           | translated project1 | translated description1 | translated credit1 |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -95,8 +95,8 @@ Feature: Invalidate project cached machine translation
         """
     When I request "PATCH" "/api/projects/2"
     Then there should be project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
-      | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
+      | project_id | source_language | target_language | cached_name         | cached_description      | cached_credits     |
+      | 1          | en              | fr-FR           | translated project1 | translated description1 | translated credit1 |
 
     Examples:
       | property    |

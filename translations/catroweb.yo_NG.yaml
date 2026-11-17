@@ -190,8 +190,6 @@ project:
   downloaded: "A ti ṣe ìgbàsílẹ̀"
   showTranslation: "Fi ìtumọ̀ hàn"
   hideTranslation: "Fi ìtumọ̀ pamọ́"
-  translatedByLine: "%provider% ló túmọ̀ rẹ̀ láti %sourceLanguage% sí %targetLanguage%"
-  googleTranslate: Google Translate
   confrimDelete: "Ṣé o dájú pé o fẹ́ pa ìtumọ̀ náà rẹ́?"
   default: "Àtilẹ̀wá"
   save: "Fi pamọ́"

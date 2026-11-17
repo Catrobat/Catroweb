@@ -2,19 +2,12 @@
 const SPECIAL_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR', 'pt-PT']
 
 export class Translation {
-  constructor(translatedByLine, googleTranslateDisplayName, refreshLabel = 'Translate again') {
+  constructor(translatedByLine, refreshLabel = 'Translate again') {
     this.translatedByLine = translatedByLine
     this.refreshLabel = refreshLabel
-    this.providerMap = {
-      itranslate: {
-        displayName: 'iTranslate',
-        link: 'https://itranslate.com',
-      },
-      google: {
-        displayName: googleTranslateDisplayName,
-        link: 'https://translate.google.com',
-      },
-    }
+    // Languages the machine translation offers; empty while it is unreachable, then every language is offered.
+    const supported = document.querySelector('[data-machine-translation-languages]')
+    this.supportedLanguages = JSON.parse(supported?.dataset.machineTranslationLanguages || '[]')
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}
     this.targetLanguage = null
@@ -84,22 +77,13 @@ export class Translation {
   }
 
   /**
-   * Renders the "Translated by … from X to Y" line. X and Y are selectors; changing one shows a
+   * Renders the "Machine translated from X to Y" line. X and Y are selectors; changing one shows a
    * refresh button that calls onRefresh(sourceLanguage, targetLanguage).
    */
   setTranslationCredit(data, byLineElements, onRefresh) {
-    byLineElements.before.innerHTML = this.formatProvider(
-      this.translatedByLineMap.before,
-      this.providerMap[data.provider],
-    )
-    byLineElements.between.innerHTML = this.formatProvider(
-      this.translatedByLineMap.between,
-      this.providerMap[data.provider],
-    )
-    byLineElements.after.innerHTML = this.formatProvider(
-      this.translatedByLineMap.after,
-      this.providerMap[data.provider],
-    )
+    byLineElements.before.textContent = this.translatedByLineMap.before
+    byLineElements.between.textContent = this.translatedByLineMap.between
+    byLineElements.after.textContent = this.translatedByLineMap.after
 
     const [sourceElement, targetElement] = this.isSourceLanguageFirst()
       ? [byLineElements.firstLanguage, byLineElements.secondLanguage]
@@ -166,7 +150,9 @@ export class Translation {
   fillLanguageOptions(select) {
     const selected = select.value
     const languages = Object.keys(this.displayLanguageMap).filter(
-      (code) => code.length === 2 || SPECIAL_LANGUAGES.includes(code) || code === selected,
+      (code) =>
+        code === selected ||
+        ((code.length === 2 || SPECIAL_LANGUAGES.includes(code)) && this.isSupported(code)),
     )
     if (languages.length === 0) return
 
@@ -182,10 +168,11 @@ export class Translation {
     )
   }
 
-  formatProvider(byLine, provider) {
-    return byLine.replace(
-      '%provider%',
-      `<a href="${provider.link}" class="translation-credit" style="text-decoration: none">${provider.displayName}</a>`,
+  isSupported(code) {
+    return (
+      this.supportedLanguages.length === 0 ||
+      this.supportedLanguages.includes(code) ||
+      this.supportedLanguages.includes(code.slice(0, 2))
     )
   }
 }

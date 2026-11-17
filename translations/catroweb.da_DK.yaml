@@ -207,8 +207,7 @@ project:
   downloaded: Downloadet
   showTranslation: Vis oversættelse
   hideTranslation: Skjul oversættelse
-  translatedByLine: Oversat af %provider% fra %sourceLanguage% til %targetLanguage%
-  googleTranslate: Google Translate
+  translatedByLine: 'Maskinoversat fra %sourceLanguage% til %targetLanguage%'
   confrimDelete: Er du sikker på, at du vil slette oversættelsen?
   default: Standard
   save: Gem

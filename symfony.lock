@@ -151,18 +151,6 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
-    "eightpoints/guzzle-bundle": {
-        "version": "8.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "7.0",
-            "ref": "7babb21a3928e44e485391907e3abc346804e0d2"
-        },
-        "files": [
-            "config/packages/eight_points_guzzle.yaml"
-        ]
-    },
     "elasticsearch/elasticsearch": {
         "version": "v6.7.2"
     },
@@ -237,27 +225,6 @@
     },
     "google/auth": {
         "version": "v1.7.1"
-    },
-    "google/cloud-core": {
-        "version": "v1.43.1"
-    },
-    "google/cloud-translate": {
-        "version": "v1.12.2"
-    },
-    "google/common-protos": {
-        "version": "1.4.0"
-    },
-    "google/gax": {
-        "version": "v1.10.0"
-    },
-    "google/grpc-gcp": {
-        "version": "v0.2.0"
-    },
-    "google/protobuf": {
-        "version": "v3.19.2"
-    },
-    "grpc/grpc": {
-        "version": "1.42.0"
     },
     "guzzlehttp/guzzle": {
         "version": "6.5.2"
@@ -492,9 +459,6 @@
     },
     "rector/rector": {
         "version": "0.12.23"
-    },
-    "rize/uri-template": {
-        "version": "0.3.4"
     },
     "rosell-dk/exec-with-fallback": {
         "version": "1.2.0"

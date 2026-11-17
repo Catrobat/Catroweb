@@ -190,8 +190,7 @@ project:
   downloaded: "Imepakuliwa"
   showTranslation: "Onyesha tafsiri"
   hideTranslation: "Ficha tafsiri"
-  translatedByLine: "Imetafsiriwa na %provider% kutoka %sourceLanguage% kwenda %targetLanguage%"
-  googleTranslate: Google Translate
+  translatedByLine: 'Imetafsiriwa kwa mashine kutoka %sourceLanguage% kwenda %targetLanguage%'
   confrimDelete: "Una uhakika unataka kufuta tafsiri?"
   default: "Chaguo-msingi"
   save: Hifadhi

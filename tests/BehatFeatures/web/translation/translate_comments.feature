@@ -23,7 +23,7 @@ Feature: Project comments should be translatable via a button
     And I wait for AJAX to finish
     Then the element "#remove-comment-translation-button-00000000-0000-0000-0000-000000000001" should be visible
     And the element "#comment-translation-wrapper-00000000-0000-0000-0000-000000000001" should be visible
-    Then the "#comment-text-translation-00000000-0000-0000-0000-000000000001" element should contain "Fixed translation text"
+    Then the "#comment-text-translation-00000000-0000-0000-0000-000000000001" element should contain "translated c1"
     When I click "#remove-comment-translation-button-00000000-0000-0000-0000-000000000001"
     Then the element "#comment-translation-button-00000000-0000-0000-0000-000000000001" should be visible
     And the element "#comment-text-wrapper-00000000-0000-0000-0000-000000000001" should be visible
@@ -38,24 +38,23 @@ Feature: Project comments should be translatable via a button
     And I wait for AJAX to finish
     Then the element "#remove-comment-translation-button-00000000-0000-0000-0000-000000000002" should be visible
     And the element "#comment-translation-wrapper-00000000-0000-0000-0000-000000000002" should be visible
-    And the "#comment-text-translation-00000000-0000-0000-0000-000000000002" element should contain "Fixed translation text"
+    And the "#comment-text-translation-00000000-0000-0000-0000-000000000002" element should contain "translated c2"
     When I click "#remove-comment-translation-button-00000000-0000-0000-0000-000000000002"
     Then the element "#comment-translation-button-00000000-0000-0000-0000-000000000002" should be visible
     And the element "#comment-text-wrapper-00000000-0000-0000-0000-000000000002" should be visible
     When I click "#comment-translation-button-00000000-0000-0000-0000-000000000002"
     Then the element "#remove-comment-translation-button-00000000-0000-0000-0000-000000000002" should be visible
     And the element "#comment-translation-wrapper-00000000-0000-0000-0000-000000000002" should be visible
-    And the "#comment-text-translation-00000000-0000-0000-0000-000000000002" element should contain "Fixed translation text"
+    And the "#comment-text-translation-00000000-0000-0000-0000-000000000002" element should contain "translated c2"
 
-  Scenario: Translation provider should have correct provider, source language, and target language
+  Scenario: Translation by-line should have the correct source and target language
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     When I click "#comment-translation-button-00000000-0000-0000-0000-000000000001"
     And I wait for AJAX to finish
     Then the element "#remove-comment-translation-button-00000000-0000-0000-0000-000000000001" should be visible
     And the element "#comment-translation-wrapper-00000000-0000-0000-0000-000000000001" should be visible
-    Then the "#comment-translation-before-languages-00000000-0000-0000-0000-000000000001" element should contain "Translated by"
-    Then the "#comment-translation-before-languages-00000000-0000-0000-0000-000000000001" element should contain "iTranslate"
+    Then the "#comment-translation-before-languages-00000000-0000-0000-0000-000000000001" element should contain "Machine translated from"
     And the "#comment-translation-first-language-00000000-0000-0000-0000-000000000001" element should contain "English"
     And the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "en"
     And the "#comment-translation-between-languages-00000000-0000-0000-0000-000000000001" element should contain "to"
@@ -96,4 +95,4 @@ Feature: Project comments should be translatable via a button
     When I click "#comment-translation-wrapper-00000000-0000-0000-0000-000000000001 .translation-refresh-button"
     And I wait for AJAX to finish
     Then the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "de"
-    And the "#comment-text-translation-00000000-0000-0000-0000-000000000001" element should contain "Fixed translation text"
+    And the "#comment-text-translation-00000000-0000-0000-0000-000000000001" element should contain "translated c1"

@@ -1,8 +1,8 @@
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateComments extends Translation {
-  constructor(translatedByLine, googleTranslateDisplayName, refreshLabel = undefined) {
-    super(translatedByLine, googleTranslateDisplayName, refreshLabel)
+  constructor(translatedByLine, refreshLabel = undefined) {
+    super(translatedByLine, refreshLabel)
     this._initListeners()
   }
 

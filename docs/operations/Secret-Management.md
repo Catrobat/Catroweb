@@ -4,17 +4,16 @@ The committed `.env` holds **intentionally insecure dev-only defaults** so the p
 
 ## Secrets That Must Be Overridden in Production
 
-| Variable               | Dev Default                           | How to Override                                                 |
-| ---------------------- | ------------------------------------- | --------------------------------------------------------------- |
-| `APP_SECRET`           | `93055246cfa39f62f5be97928084989a`    | `.env.prod.local` or real env var                               |
-| `JWT_PASSPHRASE`       | `catroweb`                            | `.env.prod.local` or real env var                               |
-| `DATABASE_URL`         | `pdo-mysql://root:root@localhost/...` | `.env.prod.local` or real env var                               |
-| `DATABASE_PASSWORD`    | `root`                                | `.env.prod.local` or real env var                               |
-| `GOOGLE_CLIENT_SECRET` | `'secret'`                            | `.env.prod.local` or real env var                               |
-| `MAILER_DSN`           | `null://null`                         | `.env.prod.local` or real env var                               |
-| `MAILER_DSN_<NAME>`    | unset (`null://null`)                 | `.env.prod.local`, see [Email-Providers.md](Email-Providers.md) |
-| `CLAMAV_HOST`          | `clamav`                              | `.env.prod.local` or real env var                               |
-| `CLAMAV_PORT`          | `3310`                                | `.env.prod.local` or real env var                               |
+| Variable            | Dev Default                           | How to Override                                                 |
+| ------------------- | ------------------------------------- | --------------------------------------------------------------- |
+| `APP_SECRET`        | `93055246cfa39f62f5be97928084989a`    | `.env.prod.local` or real env var                               |
+| `JWT_PASSPHRASE`    | `catroweb`                            | `.env.prod.local` or real env var                               |
+| `DATABASE_URL`      | `pdo-mysql://root:root@localhost/...` | `.env.prod.local` or real env var                               |
+| `DATABASE_PASSWORD` | `root`                                | `.env.prod.local` or real env var                               |
+| `MAILER_DSN`        | `null://null`                         | `.env.prod.local` or real env var                               |
+| `MAILER_DSN_<NAME>` | unset (`null://null`)                 | `.env.prod.local`, see [Email-Providers.md](Email-Providers.md) |
+| `CLAMAV_HOST`       | `clamav`                              | `.env.prod.local` or real env var                               |
+| `CLAMAV_PORT`       | `3310`                                | `.env.prod.local` or real env var                               |
 
 ## Production Setup
 
@@ -34,7 +33,6 @@ APP_SECRET=<generate-with: php -r "echo bin2hex(random_bytes(16));">
 JWT_PASSPHRASE=<generate-with: openssl rand -base64 32>
 DATABASE_URL=pdo-mysql://catroweb:<db-password>@localhost/catroweb
 DATABASE_PASSWORD=<db-password>
-GOOGLE_CLIENT_SECRET=<from-google-console>
 MAILER_DSN=<your-mailer-dsn>
 ```
 
@@ -75,4 +73,4 @@ Run it locally with `bin/check-default-secrets`.
 
 ## Deployer Integration
 
-`deploy.php` shares `.env.prod.local`, `google_cloud_key.json`, `.dkim/private.key` and the `.jwt/` directory across releases, so production secrets are set up once in `/var/www/share/shared/`.
+`deploy.php` shares `.env.prod.local`, `.dkim/private.key` and the `.jwt/` directory across releases, so production secrets are set up once in `/var/www/share/shared/`.

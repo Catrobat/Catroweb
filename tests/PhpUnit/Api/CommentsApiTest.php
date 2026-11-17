@@ -612,7 +612,6 @@ final class CommentsApiTest extends TestCase
     $translation_result = new TranslationResult();
     $translation_result->translation = 'bonjour';
     $translation_result->detected_source_language = 'en';
-    $translation_result->provider = 'test-provider';
 
     $translation_delegate = $this->createStub(TranslationDelegate::class);
     $translation_delegate->method('translate')->willReturn($translation_result);
@@ -632,6 +631,6 @@ final class CommentsApiTest extends TestCase
     $this->assertSame('bonjour', $result->getTranslation());
     $this->assertSame('fr', $result->getTargetLanguage());
     $this->assertSame('en', $result->getSourceLanguage());
-    $this->assertSame('test-provider', $result->getProvider());
+    $this->assertSame('libretranslate', $result->getProvider());
   }
 }

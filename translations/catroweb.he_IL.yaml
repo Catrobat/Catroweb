@@ -207,8 +207,7 @@ project:
   downloaded: "הורד"
   showTranslation: "הצג תרגום"
   hideTranslation: "הסתר תרגום"
-  translatedByLine: "תורגם על ידי %provider% מ%sourceLanguage% ל%targetLanguage%"
-  googleTranslate: "Google Translate"
+  translatedByLine: 'תרגום מכונה מ%sourceLanguage% ל%targetLanguage%'
   confrimDelete: "האם אתה בטוח שברצונך למחוק את התרגום?"
   default: ברירת מחדל
   save: שמור

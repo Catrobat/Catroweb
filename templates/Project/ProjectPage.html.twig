@@ -130,12 +130,10 @@
               </i>
             </span>
             <span id="remove-project-translation-button" class="remove-project-translation-button catro-icon-button"
-                  style="display: none;"
-                  data-bs-toggle="tooltip" title="Hide Translation">
-                <i class="ms-2 material-icons" data-bs-toggle="tooltip"
-                   title="{{ 'project.hideTranslation'|trans({}, 'catroweb') }}">
-                  close
-                </i>
+                  style="display: none;" role="button"
+                  aria-label="{{ 'project.hideTranslation'|trans({}, 'catroweb') }}"
+                  data-bs-toggle="tooltip" title="{{ 'project.hideTranslation'|trans({}, 'catroweb') }}">
+              <i class="ms-2 material-icons" aria-hidden="true">close</i>
             </span>
           </span>
         {% endif %}
@@ -367,7 +365,7 @@
   <div class="js-project"
        data-project-id="{{ project_id }}"
        data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
-       data-google-translate-display-name="{{ 'project.googleTranslate'|trans({}, 'catroweb') }}"
+       data-machine-translation-languages="{{ libretranslate.supportedLanguages|json_encode }}"
        data-trans-translate-again="{{ 'project.translateAgain'|trans({}, 'catroweb') }}"
        data-has-description=""
        data-has-credits=""

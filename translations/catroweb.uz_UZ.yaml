@@ -190,8 +190,7 @@ project:
   downloaded: "Yuklab olindi"
   showTranslation: "Tarjimani koʻrsatish"
   hideTranslation: "Tarjimani yashirish"
-  translatedByLine: "%provider% tomonidan %sourceLanguage% tilidan %targetLanguage% tiliga tarjima qilindi"
-  googleTranslate: Google Translate
+  translatedByLine: '%sourceLanguage% tilidan %targetLanguage% tiliga mashina tarjimasi'
   confrimDelete: "Tarjimani oʻchirmoqchimisan?"
   default: "Standart"
   save: "Saqlash"

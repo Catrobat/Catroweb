@@ -207,8 +207,7 @@ project:
   downloaded: 'Deskargatua'
   showTranslation: 'Erakutsi itzulpena'
   hideTranslation: 'Ezkutatu itzulpena'
-  translatedByLine: '%provider%-(e)k itzulia, %sourceLanguage%-tik %targetLanguage%-ra'
-  googleTranslate: 'Google Itzultzailea'
+  translatedByLine: 'Itzulpen automatikoa, %sourceLanguage%-tik %targetLanguage%-ra'
   confrimDelete: 'Ziur itzulpena ezabatu nahi duzula?'
   default: 'Lehenetsia'
   save: Gorde

@@ -57,7 +57,6 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
 
       $translation_result = new TranslationResult();
       $translation_result->translation = $translation;
-      $translation_result->provider = $entry->getProvider();
       $translation_result->cache = 'db';
       if (null === $source_language) {
         $translation_result->detected_source_language = $entry->getSourceLanguage();
@@ -67,6 +66,15 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     }
 
     return $result;
+  }
+
+  public function cacheTranslation(Project $project, string $source_language, string $target_language, string $name, ?string $description = null, ?string $credits = null): void
+  {
+    $entry = $this->findOneBy(['project' => $project, 'source_language' => $source_language, 'target_language' => $target_language])
+      ?? new ProjectMachineTranslation($project, $source_language, $target_language);
+    $entry->setCachedTranslation($name, $description, $credits);
+    $this->getEntityManager()->persist($entry);
+    $this->getEntityManager()->flush();
   }
 
   public function invalidateCachedTranslation(Project $project): void

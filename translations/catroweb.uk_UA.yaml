@@ -208,8 +208,7 @@ project:
   downloaded: "Завантажено"
   showTranslation: Показати переклад
   hideTranslation: Сховати переклад
-  translatedByLine: Використано %provider%, перекладено з %sourceLanguage% на %targetLanguage%
-  googleTranslate: Google Перекладачем
+  translatedByLine: 'Машинний переклад з %sourceLanguage% на %targetLanguage%'
   confrimDelete: Ти справді хочеш видалити переклад?
   default: Стандартний
   save: Зберегти

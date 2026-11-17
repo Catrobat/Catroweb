@@ -19,6 +19,8 @@ Feature: Project title, description and credits should be translatable via a but
     When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then the element "#remove-project-translation-button" should be visible
+    And the element "#remove-project-translation-button" should have a attribute "aria-label" with value "Hide translation"
+    And the element "#remove-project-translation-button [data-bs-toggle]" should not exist
     And the element "#name-translation" should be visible
     And the "#name-translation" element should contain "translated project1"
     And the element "#description" should be visible
@@ -98,8 +100,7 @@ Feature: Project title, description and credits should be translatable via a but
     When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then the element "#credits-translation-wrapper" should be visible
-    And the "#project-translation-before-languages" element should contain "Translated by"
-    And the "#project-translation-before-languages" element should contain "iTranslate"
+    And the "#project-translation-before-languages" element should contain "Machine translated from"
     And the "#project-translation-first-language" element should contain "English"
     And the "project-translation-first-language-select" field should contain "en"
     And the "#project-translation-between-languages" element should contain "to"
@@ -125,8 +126,8 @@ Feature: Project title, description and credits should be translatable via a but
 
   Scenario: Use cached translation for title when description and credits not available
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description | cached_credits |
-      | 1          | ru              | en              | itranslate | 16          | cached project1 |                    |                |
+      | project_id | source_language | target_language | cached_name     | cached_description | cached_credits |
+      | 1          | ru              | en              | cached project1 |                    |                |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     When I click "#project-translation-button"
@@ -141,8 +142,8 @@ Feature: Project title, description and credits should be translatable via a but
 
   Scenario: Use cached translation for title and description when available
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description  | cached_credits |
-      | 2          | ru              | en              | itranslate | 16          | cached project2 | cached description2 |                |
+      | project_id | source_language | target_language | cached_name     | cached_description  | cached_credits |
+      | 2          | ru              | en              | cached project2 | cached description2 |                |
     And I am on "/app/project/2"
     And I wait for the page to be loaded
     When I click "#project-translation-button"
@@ -155,8 +156,8 @@ Feature: Project title, description and credits should be translatable via a but
 
   Scenario: Use cached translation for title and credit when available
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description | cached_credits |
-      | 3          | ru              | en              | itranslate | 16          | cached project3 |                    | cached credit3 |
+      | project_id | source_language | target_language | cached_name     | cached_description | cached_credits |
+      | 3          | ru              | en              | cached project3 |                    | cached credit3 |
     And I am on "/app/project/3"
     And I wait for the page to be loaded
     When I click "#project-translation-button"
@@ -169,8 +170,8 @@ Feature: Project title, description and credits should be translatable via a but
 
   Scenario: Use cached translation for ttitle, description, and credit when available
     Given there are project machine translations:
-      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description  | cached_credits |
-      | 4          | ru              | en              | itranslate | 16          | cached project4 | cached description4 | cached credit4 |
+      | project_id | source_language | target_language | cached_name     | cached_description  | cached_credits |
+      | 4          | ru              | en              | cached project4 | cached description4 | cached credit4 |
     And I am on "/app/project/4"
     And I wait for the page to be loaded
     When I click "#project-translation-button"
@@ -193,6 +194,7 @@ Feature: Project title, description and credits should be translatable via a but
     When I select "fr" from "project-translation-first-language-select"
     Then the element ".translation-refresh-button" should be visible
     And the element "#project-translation-second-language-select option[value='fr']" should be disabled
+    And the element "#project-translation-second-language-select option[value='it']" should not exist
     When I click ".translation-refresh-button"
     And I wait for AJAX to finish
     Then the element "#name-translation" should be visible

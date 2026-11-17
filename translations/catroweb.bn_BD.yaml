@@ -207,8 +207,7 @@ project:
   downloaded: ডাউনলোড হয়েছে
   showTranslation: অনুবাদ দেখাও
   hideTranslation: অনুবাদ লুকাও
-  translatedByLine: '%provider% দ্বারা %sourceLanguage% থেকে %targetLanguage%-এ অনূদিত'
-  googleTranslate: Google Translate
+  translatedByLine: '%sourceLanguage% থেকে %targetLanguage%-এ যান্ত্রিক অনুবাদ'
   confrimDelete: তুমি কি নিশ্চিত যে অনুবাদটি মুছে ফেলতে চাও?
   default: পূর্ব-নির্ধারিত
   save: সংরক্ষণ করো

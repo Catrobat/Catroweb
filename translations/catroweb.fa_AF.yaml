@@ -207,8 +207,7 @@ project:
   downloaded: 'دانلود شد'
   showTranslation: 'نمایش ترجمه'
   hideTranslation: 'پنهان کردن ترجمه'
-  translatedByLine: 'ترجمه‌شده توسط %provider% از %sourceLanguage% به %targetLanguage%'
-  googleTranslate: 'مترجم گوگل'
+  translatedByLine: 'ترجمه ماشینی از %sourceLanguage% به %targetLanguage%'
   confrimDelete: 'مطمئنی که می‌خواهی این ترجمه را حذف کنی؟'
   default: پیش فرض
   save: ذخيره

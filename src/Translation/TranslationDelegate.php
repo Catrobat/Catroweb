@@ -7,30 +7,16 @@ namespace App\Translation;
 use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
 
 class TranslationDelegate
 {
-  /** @var TranslationApiInterface[] */
-  private readonly array $apis;
-
-  /**
-   * Providers are injected as a tagged iterator: Symfony autowiring silently skips variadic
-   * parameters, which left prod with no providers and every machine translation failing.
-   *
-   * @param iterable<TranslationApiInterface> $apis
-   */
   public function __construct(
     private readonly ProjectCustomTranslationRepository $project_custom_translation_repository,
     private readonly ProjectMachineTranslationRepository $project_machine_translation_repository,
-    private readonly LoggerInterface $logger,
-    #[AutowireIterator(TranslationApiInterface::class)]
-    iterable $apis,
+    private readonly LibreTranslateApi $api,
   ) {
-    $this->apis = iterator_to_array($apis, false);
   }
 
   /**
@@ -133,27 +119,37 @@ class TranslationDelegate
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
 
-    $cached_result = $this->getCachedProjectTranslation($project, $source_language, $target_language);
+    $cached_result = $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language);
     if (null !== $cached_result) {
       return $cached_result;
     }
 
-    $to_translate = [$project->getName(), $project->getDescription(), $project->getCredits()];
-    $translation_result = [];
+    $name = $this->api->translate($project->getName(), $source_language, $target_language);
+    if (!$name instanceof TranslationResult) {
+      return null;
+    }
 
-    foreach ($to_translate as $text) {
+    $translation_result = [$name];
+    $translations = [$name->translation];
+    foreach ([$project->getDescription(), $project->getCredits()] as $text) {
       if (null === $text) {
         $translation_result[] = null;
+        $translations[] = null;
         continue;
       }
 
-      $translated_text = $this->internalTranslate($text, $source_language, $target_language);
-
+      $translated_text = $this->api->translate($text, $source_language, $target_language);
       if (!$translated_text instanceof TranslationResult) {
         return null;
       }
 
       $translation_result[] = $translated_text;
+      $translations[] = $translated_text->translation;
+    }
+
+    $source_language ??= $name->detected_source_language;
+    if (null !== $source_language) {
+      $this->project_machine_translation_repository->cacheTranslation($project, $source_language, $target_language, ...$translations);
     }
 
     return $translation_result;
@@ -167,40 +163,7 @@ class TranslationDelegate
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
 
-    return $this->internalTranslate($text, $source_language, $target_language);
-  }
-
-  private function internalTranslate(string $text, ?string $source_language, string $target_language): ?TranslationResult
-  {
-    $apis = $this->orderApi($text, $source_language, $target_language);
-
-    foreach ($apis as $api) {
-      $translation = $api->translate($text, $source_language, $target_language);
-
-      if (null != $translation) {
-        return $translation;
-      }
-    }
-
-    $this->logger->warning(sprintf(
-      'Machine translation failed: %s, source: %s, target: %s, text length: %d',
-      [] === $apis ? 'no translation provider configured' : 'all providers failed ('.implode(', ', array_map(static fn (TranslationApiInterface $api): string => $api::class, $apis)).')',
-      $source_language ?? 'auto',
-      $target_language,
-      mb_strlen($text),
-    ));
-
-    return null;
-  }
-
-  private function orderApi(string $text, ?string $source_language, string $target_language): array
-  {
-    $apis = $this->apis;
-
-    usort($apis, static fn (TranslationApiInterface $api_1, TranslationApiInterface $api_2): int => -($api_1->getPreference($text, $source_language, $target_language) <=>
-      $api_2->getPreference($text, $source_language, $target_language)));
-
-    return $apis;
+    return $this->api->translate($text, $source_language, $target_language);
   }
 
   private function validateLanguage(?string $language): void
@@ -239,10 +202,5 @@ class TranslationDelegate
     } elseif (null !== $language) {
       throw new \InvalidArgumentException('language has to be null, 2-character or 5-character language code');
     }
-  }
-
-  protected function getCachedProjectTranslation(Project $project, ?string $source_language, string $target_language): ?array
-  {
-    return $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language);
   }
 }
