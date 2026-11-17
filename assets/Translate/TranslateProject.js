@@ -130,7 +130,10 @@ export class TranslateProject extends Translation {
 
   projectNotTranslated() {
     document.getElementById('project-translation-loading-spinner').style.display = 'none'
-    document.getElementById('project-translation-button').style.display = 'block'
+    // A failed "translate again" keeps the translation that is already shown.
+    if (document.getElementById('remove-project-translation-button').style.display !== 'block') {
+      document.getElementById('project-translation-button').style.display = 'block'
+    }
     this.showTranslationFailed()
   }
 

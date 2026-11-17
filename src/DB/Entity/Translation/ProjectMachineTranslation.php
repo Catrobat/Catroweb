@@ -6,7 +6,6 @@ namespace App\DB\Entity\Translation;
 
 use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
-use App\Translation\LibreTranslateApi;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,7 +34,7 @@ class ProjectMachineTranslation
   // ponytail: usage bookkeeping of the removed providers, unused. The previous release still reads and writes
   // these columns (deploy window, rollback), so they stay mapped for one release; then drop them.
   #[ORM\Column(type: Types::STRING)]
-  protected string $provider = LibreTranslateApi::PROVIDER;
+  protected string $provider = 'libretranslate';
 
   #[ORM\Column(type: Types::INTEGER)]
   protected int $usage_count = 1;

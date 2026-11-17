@@ -61,6 +61,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'search_burst' => [
         'policy' => 'no_limit',
       ],
+      'translation_burst' => [
+        'policy' => 'no_limit',
+      ],
       'studio_invite_redeem_burst' => [
         'policy' => 'no_limit',
       ],

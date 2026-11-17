@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57789e09576bb8408d2476069bd63fe3",
+    "content-hash": "9a77b1216cbb48fe86ac0914ea329e28",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2588,7 +2588,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-25T21:35:21+00:00"
+            "time": "2026-10-25T21:35:21+00:00",
+            "published-time": "2026-10-25T21:37:23+00:00"
         },
         {
             "name": "guzzlehttp/promises",

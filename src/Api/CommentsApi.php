@@ -48,6 +48,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly AuthorizationCheckerInterface $authorization_checker,
     private readonly RateLimiterFactory $commentBurstLimiter,
     private readonly RateLimiterFactory $commentDailyLimiter,
+    private readonly RateLimiterFactory $translationBurstLimiter,
     private readonly TextSanitizer $textSanitizer,
     private readonly UserAvatarService $user_avatar_service,
   ) {
@@ -325,6 +326,12 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
           return null;
         }
       }
+    }
+
+    if (null === $this->checkIpRateLimit($request?->getClientIp() ?? 'unknown', $this->translationBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
     }
 
     try {

@@ -84,7 +84,13 @@ export class TranslateComments extends Translation {
   commentNotTranslated(commentId) {
     document.getElementById(`comment-translation-loading-spinner-${commentId}`).style.display =
       'none'
-    document.getElementById(`comment-translation-button-${commentId}`).style.display = 'block'
+    // A failed "translate again" keeps the translation that is already shown.
+    if (
+      document.getElementById(`remove-comment-translation-button-${commentId}`).style.display !==
+      'block'
+    ) {
+      document.getElementById(`comment-translation-button-${commentId}`).style.display = 'block'
+    }
     this.showTranslationFailed()
   }
 

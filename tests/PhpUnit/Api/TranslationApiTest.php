@@ -23,6 +23,8 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -37,11 +39,13 @@ final class TranslationApiTest extends TestCase
     ?TranslationApiFacade $facade = null,
     ?ProjectManager $project_manager = null,
     ?RequestStack $request_stack = null,
+    ?RateLimiterFactory $translation_burst_limiter = null,
   ): TranslationApi {
     return new TranslationApi(
       $facade ?? $this->createDefaultFacade(),
       $project_manager ?? $this->createStub(ProjectManager::class),
       $request_stack ?? new RequestStack(),
+      $translation_burst_limiter ?? new RateLimiterFactory(['id' => 'phpunit_translation', 'policy' => 'no_limit'], new InMemoryStorage()),
     );
   }
 
@@ -129,6 +133,30 @@ final class TranslationApiTest extends TestCase
 
     $this->assertSame(Response::HTTP_SERVICE_UNAVAILABLE, $code);
     $this->assertNull($result);
+  }
+
+  #[Group('unit')]
+  public function testTranslationGetRateLimited(): void
+  {
+    $project_manager = $this->createStub(ProjectManager::class);
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
+    $loader = $this->createMock(TranslationApiLoader::class);
+    $loader->expects($this->once())->method('translateProject')->willReturn(null);
+    $facade = $this->createStub(TranslationApiFacade::class);
+    $facade->method('getLoader')->willReturn($loader);
+    $request_stack = new RequestStack();
+    $request_stack->push(new Request());
+    $limiter = new RateLimiterFactory(['id' => 'phpunit_translation_limited', 'policy' => 'fixed_window', 'limit' => 1, 'interval' => '1 minute'], new InMemoryStorage());
+    $api = $this->buildApi(facade: $facade, project_manager: $project_manager, request_stack: $request_stack, translation_burst_limiter: $limiter);
+
+    $code = 200;
+    $headers = [];
+    $api->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers);
+    $this->assertSame(Response::HTTP_SERVICE_UNAVAILABLE, $code);
+
+    $code = 200;
+    $this->assertNull($api->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers));
+    $this->assertSame(Response::HTTP_TOO_MANY_REQUESTS, $code);
   }
 
   #[Group('unit')]

@@ -22,9 +22,13 @@ export class Translation {
   setTargetLanguage() {
     const appLanguageElement = document.getElementById('app-language')
     const siteLanguage = appLanguageElement.dataset.appLanguage.replace('_', '-')
+    // The API takes "xx" or "xx-YY": "sr-Latn" becomes "sr", 3-letter languages (kab, chr) have no model.
+    const [language, region = ''] = siteLanguage.split('-')
+    let code = /^[A-Z]{2}$/.test(region) ? siteLanguage : language
+    if (language.length !== 2) code = 'en'
     // Without a model for the site language every attempt would fail; English is the closest useful default and
     // the dropdown still offers every supported language.
-    this.targetLanguage = this.isSupported(siteLanguage) ? siteLanguage : 'en'
+    this.targetLanguage = this.isSupported(code) ? code : 'en'
   }
 
   setDisplayLanguageMap() {

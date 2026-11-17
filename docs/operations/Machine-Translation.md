@@ -5,6 +5,7 @@ The translate buttons on project pages and comments use a self-hosted [LibreTran
 - One text per request, `source: auto` unless the user picked a source language: with `auto`, LibreTranslate detects a single language for a whole batch.
 - A project's translated name, description and credits are cached in `project_machine_translation` on the first successful translation, per source and target language. Editing the project clears its cache. Comments are not cached.
 - The language dropdowns only offer languages from LibreTranslate's `GET /languages`, cached for a day. While LibreTranslate is unreachable the list is empty (retried after 5 minutes) and the dropdowns offer every site language. When LibreTranslate has no model for the site language, translations go to English.
+- Both translate endpoints share the per-IP `translation_burst` rate limit (20 a minute, `config/packages/rate_limiter.php`): LibreTranslate runs on the web host's CPU. Over the limit they answer 429.
 - A failed translation answers 503 and logs the warning `Machine translation failed: <reason>, …`; the infra watchdog counts these lines.
 
 ## Configuration

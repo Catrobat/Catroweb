@@ -63,6 +63,7 @@ final class CommentsApiTest extends TestCase
       $authorization_checker ?? $this->createStub(AuthorizationCheckerInterface::class),
       $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
       $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),
+      $this->createNoLimitRateLimiterFactory('phpunit_translation_burst'),
       $text_sanitizer ?? $this->createPassthroughTextSanitizer(),
       $user_avatar_service ?? $this->createStub(\App\User\UserAvatarService::class),
     );
