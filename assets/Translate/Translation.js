@@ -21,7 +21,10 @@ export class Translation {
 
   setTargetLanguage() {
     const appLanguageElement = document.getElementById('app-language')
-    this.targetLanguage = appLanguageElement.dataset.appLanguage.replace('_', '-')
+    const siteLanguage = appLanguageElement.dataset.appLanguage.replace('_', '-')
+    // Without a model for the site language every attempt would fail; English is the closest useful default and
+    // the dropdown still offers every supported language.
+    this.targetLanguage = this.isSupported(siteLanguage) ? siteLanguage : 'en'
   }
 
   setDisplayLanguageMap() {

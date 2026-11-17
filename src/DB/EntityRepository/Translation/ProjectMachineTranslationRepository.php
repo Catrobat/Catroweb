@@ -72,7 +72,8 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
   {
     $entry = $this->findOneBy(['project' => $project, 'source_language' => $source_language, 'target_language' => $target_language])
       ?? new ProjectMachineTranslation($project, $source_language, $target_language);
-    $entry->setCachedTranslation($name, $description, $credits);
+    // A translation can be longer than the original name; cached_name is VARCHAR(300) like the name itself.
+    $entry->setCachedTranslation(mb_substr($name, 0, 300), $description, $credits);
     $this->getEntityManager()->persist($entry);
     $this->getEntityManager()->flush();
   }

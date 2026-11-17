@@ -132,7 +132,7 @@ class TranslationDelegate
     $translation_result = [$name];
     $translations = [$name->translation];
     foreach ([$project->getDescription(), $project->getCredits()] as $text) {
-      // Uploads store missing descriptions and credits as '', which LibreTranslate rejects.
+      // Uploads store missing descriptions and credits as ''; there is nothing to translate or show.
       if (null === $text || '' === trim($text)) {
         $translation_result[] = null;
         $translations[] = null;

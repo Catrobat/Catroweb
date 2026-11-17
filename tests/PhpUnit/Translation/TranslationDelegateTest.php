@@ -125,7 +125,7 @@ class TranslationDelegateTest extends TestCase
     $repository->method('getCachedTranslation')->willReturn(null);
     $repository->expects($this->never())->method('cacheTranslation');
 
-    $this->assertNull($this->delegate($api, $repository)->translateProject($project, 'en', 'fr'));
+    $this->assertNull($this->delegate($api, $repository)->translateProject($project, null, 'fr'));
   }
 
   public function testCachedProjectTranslationSkipsTheApi(): void

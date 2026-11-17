@@ -488,6 +488,7 @@ class CatrowebBrowserContext extends BrowserContext
       'Deutsch' => $this->getSession()->setCookie('hl', 'de_DE'),
       'Russisch' => $this->getSession()->setCookie('hl', 'ru_RU'),
       'French' => $this->getSession()->setCookie('hl', 'fr_FR'),
+      'Italian' => $this->getSession()->setCookie('hl', 'it_IT'),
       default => throw new \InvalidArgumentException('Invalid language: '.$arg1),
     };
     $this->reload();
