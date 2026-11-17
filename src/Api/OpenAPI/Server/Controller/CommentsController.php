@@ -313,6 +313,8 @@ class CommentsController extends Controller
         404 => 'Not found',
         406 => 'Not acceptable - client must accept application/json as content type',
         422 => 'Unprocessable Entity',
+        429 => 'Too Many Requests',
+        503 => 'Translation service unavailable',
         default => '',
       };
 

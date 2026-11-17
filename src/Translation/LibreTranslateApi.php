@@ -36,6 +36,8 @@ class LibreTranslateApi
 
   /**
    * @param string|null $source_language null to auto-detect
+   *
+   * @throws UnsupportedLanguageException
    */
   public function translate(string $text, ?string $source_language, string $target_language, int $timeout = 5): ?TranslationResult
   {
@@ -78,7 +80,7 @@ class LibreTranslateApi
         // A language LibreTranslate has no model for: not an outage. Other 4xx (403, 404, 429...) are.
         $this->logger->notice(sprintf('Machine translation rejected: %s, source: %s, target: %s', $e->getMessage(), $source_language ?? 'auto', $target_language));
 
-        return null;
+        throw new UnsupportedLanguageException($e->getMessage(), 0, $e);
       }
 
       return $this->failed($e, $text, $source_language, $target_language);

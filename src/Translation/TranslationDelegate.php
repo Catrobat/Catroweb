@@ -17,6 +17,7 @@ class TranslationDelegate
 {
   private const string JOB_QUEUED = 'queued';
   private const string JOB_FAILED = 'failed';
+  private const string JOB_UNSUPPORTED = 'unsupported';
   // Per LibreTranslate call: a 1,300-character description took 42 s on the production container.
   private const int JOB_CALL_TIMEOUT = 120;
   // A queued job older than this is presumed lost and queued again: longer than a job's three calls can take.
@@ -149,15 +150,9 @@ class TranslationDelegate
   {
     [$source_language, $target_language] = $this->machineLanguages($source_language, $target_language);
     $key = $this->jobKey($project, $source_language, $target_language);
-    $state = $this->cache->getItem($key)->get();
-    if (self::JOB_QUEUED === $state) {
-      return ProjectTranslationJob::Queued;
-    }
-
-    if (self::JOB_FAILED === $state) {
-      $this->cache->deleteItem($key);
-
-      return ProjectTranslationJob::Failed;
+    $state = $this->jobState($key);
+    if (null !== $state) {
+      return $state;
     }
 
     if (!$may_queue()) {
@@ -166,14 +161,27 @@ class TranslationDelegate
 
     $this->cache->save($this->cache->getItem($key)->set(self::JOB_QUEUED)->expiresAfter(self::JOB_QUEUED_TTL));
     $this->message_bus->dispatch(new TranslateProject((string) $project->getId(), $source_language, $target_language));
-    // Tests run the job right here (sync transport).
-    if (self::JOB_FAILED === $this->cache->getItem($key)->get()) {
-      $this->cache->deleteItem($key);
 
-      return ProjectTranslationJob::Failed;
+    // Tests run the job right here (sync transport).
+    return $this->jobState($key) ?? ProjectTranslationJob::Queued;
+  }
+
+  /**
+   * The queued job's state, or null when there is none. A failure is reported once, then forgotten.
+   */
+  private function jobState(string $key): ?ProjectTranslationJob
+  {
+    $state = match ($this->cache->getItem($key)->get()) {
+      self::JOB_QUEUED => ProjectTranslationJob::Queued,
+      self::JOB_FAILED => ProjectTranslationJob::Failed,
+      self::JOB_UNSUPPORTED => ProjectTranslationJob::Unsupported,
+      default => null,
+    };
+    if (ProjectTranslationJob::Failed === $state || ProjectTranslationJob::Unsupported === $state) {
+      $this->cache->deleteItem($key);
     }
 
-    return ProjectTranslationJob::Queued;
+    return $state;
   }
 
   /**
@@ -183,18 +191,22 @@ class TranslationDelegate
   public function translateProject(Project $project, ?string $source_language, string $target_language): void
   {
     $key = $this->jobKey($project, $source_language, $target_language);
+    $state = self::JOB_FAILED;
     try {
       if ($this->translateAndCache($project, $source_language, $target_language)) {
         $this->cache->deleteItem($key);
 
         return;
       }
+    } catch (UnsupportedLanguageException) {
+      // LibreTranslateApi logged it; not an outage.
+      $state = self::JOB_UNSUPPORTED;
     } catch (\Throwable $e) {
       // The infra watchdog counts the "Machine translation failed" prefix.
       $this->logger->error('Machine translation failed: project job: '.$e->getMessage(), ['exception' => $e, 'project' => $project->getId()]);
     }
 
-    $this->cache->save($this->cache->getItem($key)->set(self::JOB_FAILED)->expiresAfter(self::JOB_FAILED_TTL));
+    $this->cache->save($this->cache->getItem($key)->set($state)->expiresAfter(self::JOB_FAILED_TTL));
   }
 
   private function translateAndCache(Project $project, ?string $source_language, string $target_language): bool
@@ -238,6 +250,7 @@ class TranslationDelegate
 
   /**
    * @throws \InvalidArgumentException
+   * @throws UnsupportedLanguageException
    */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {

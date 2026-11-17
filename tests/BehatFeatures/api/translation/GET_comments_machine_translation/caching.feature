@@ -32,3 +32,7 @@ Feature: Comment translation should be cached
     And I request "GET" "/api/comments/00000000-0000-0000-0000-000000000001/translation?target_language=es"
     Then the response status code should be "200"
     And the response Header should contain the key "ETAG" with the value '"a9f7e97965d6cf799a529102a973b8b9es"'
+
+  Scenario: A language the translator has no model for returns 422
+    Given I request "GET" "/api/comments/00000000-0000-0000-0000-000000000001/translation?target_language=fr&source_language=ru"
+    Then the response status code should be "422"

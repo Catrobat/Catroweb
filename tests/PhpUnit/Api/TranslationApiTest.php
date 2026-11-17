@@ -139,6 +139,32 @@ final class TranslationApiTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testTranslationGetUnsupportedLanguage(): void
+  {
+    $project_manager = $this->createStub(ProjectManager::class);
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
+
+    $loader = $this->createStub(TranslationApiLoader::class);
+    $loader->method('getCachedProjectTranslation')->willReturn(null);
+    $loader->method('requestProjectTranslation')->willReturn(ProjectTranslationJob::Unsupported);
+
+    $facade = $this->createStub(TranslationApiFacade::class);
+    $facade->method('getLoader')->willReturn($loader);
+
+    $request_stack = new RequestStack();
+    $request_stack->push(new Request());
+
+    $api = $this->buildApi(facade: $facade, project_manager: $project_manager, request_stack: $request_stack);
+
+    $code = 200;
+    $headers = [];
+    $result = $api->projectsIdTranslationGet('1', 'kk', 'en', null, $code, $headers);
+
+    $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $code);
+    $this->assertNull($result);
+  }
+
+  #[Group('unit')]
   public function testTranslationGetQueuedAnswersAccepted(): void
   {
     $project_manager = $this->createStub(ProjectManager::class);

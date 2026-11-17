@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Translation;
 
 use App\Translation\LibreTranslateApi;
+use App\Translation\UnsupportedLanguageException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -55,14 +56,16 @@ final class LibreTranslateApiTest extends TestCase
     $this->assertSame('no', $result?->detected_source_language);
   }
 
-  public function testRejectedRequestIsNotLoggedAsAFailure(): void
+  public function testUnsupportedLanguageThrowsAndIsNotLoggedAsAFailure(): void
   {
     $logger = $this->createMock(LoggerInterface::class);
     $logger->expects($this->never())->method('error');
     $logger->expects($this->once())->method('notice')->with($this->stringContains('Machine translation rejected'));
     $client = new MockHttpClient(new JsonMockResponse(['error' => 'xx is not supported'], ['http_code' => 400]));
 
-    $this->assertNull($this->api($client, $logger)->translate('Hello', 'en', 'de'));
+    $this->expectException(UnsupportedLanguageException::class);
+
+    $this->api($client, $logger)->translate('Hello', 'en', 'de');
   }
 
   public function testOtherClientAndServerErrorsAreLoggedAsAFailure(): void

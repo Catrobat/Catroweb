@@ -86,6 +86,12 @@ class TranslationApi extends AbstractApiController implements TranslationApiInte
           return null;
         }
 
+        if (ProjectTranslationJob::Unsupported === $job) {
+          $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+          return null;
+        }
+
         if (ProjectTranslationJob::Failed === $job) {
           $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
 

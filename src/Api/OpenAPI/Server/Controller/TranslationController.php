@@ -442,6 +442,7 @@ class TranslationController extends Controller
         400 => 'Bad request (Invalid, or missing parameters)',
         404 => 'Not found',
         422 => 'Unprocessable Entity',
+        429 => 'Too Many Requests',
         503 => 'Translation service unavailable',
         default => '',
       };

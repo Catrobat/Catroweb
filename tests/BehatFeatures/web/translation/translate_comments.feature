@@ -73,6 +73,19 @@ Feature: Project comments should be translatable via a button
     And the "#comment-translation-second-language-00000000-0000-0000-0000-000000000001" element should contain "English"
     And the "#comment-translation-after-languages-00000000-0000-0000-0000-000000000001" element should contain ""
 
+  Scenario: A failed translate again keeps the comment by-line on the languages that are shown
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    When I click "#comment-translation-button-00000000-0000-0000-0000-000000000001"
+    And I wait for AJAX to finish
+    Then the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "en"
+    When I select "ru" from "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select"
+    And I click ".translation-refresh-button"
+    And I wait for AJAX to finish
+    Then I wait for the element "#share-snackbar-label" to contain "Machine translation is not available right now"
+    And the "#comment-text-translation-00000000-0000-0000-0000-000000000001" element should contain "translated c1"
+    And the "comment-translation-first-language-00000000-0000-0000-0000-000000000001-select" field should contain "en"
+
   Scenario: Translation button should not be visible for comments the user wrote
     Given I log in as "Catrobat"
     And I am on "/app/project/1"

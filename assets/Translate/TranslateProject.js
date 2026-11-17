@@ -96,7 +96,7 @@ export class TranslateProject extends Translation {
 
     this.setTranslationCredit(data, byLineElements, (sourceLanguage, targetLanguage) => {
       document.getElementById('project-translation-loading-spinner').style.display = 'block'
-      this.translateProject(sourceLanguage, targetLanguage)
+      return this.translateProject(sourceLanguage, targetLanguage)
     })
   }
 
@@ -162,7 +162,7 @@ export class TranslateProject extends Translation {
         return response.json()
       })
 
-    poll()
+    return poll()
       .then((data) => {
         if (!isCurrent()) return
         this.setTranslatedProjectData(data)

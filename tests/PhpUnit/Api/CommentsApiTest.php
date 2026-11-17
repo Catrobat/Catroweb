@@ -14,6 +14,7 @@ use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
+use App\Translation\UnsupportedLanguageException;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\CommentCreateRequest;
@@ -51,6 +52,7 @@ final class CommentsApiTest extends TestCase
     ?RateLimiterFactory $comment_daily_limiter = null,
     ?TextSanitizer $text_sanitizer = null,
     ?\App\User\UserAvatarService $user_avatar_service = null,
+    ?RateLimiterFactory $translation_burst_limiter = null,
   ): CommentsApi {
     return new CommentsApi(
       $authentication_manager ?? $this->createStub(AuthenticationManager::class),
@@ -63,7 +65,7 @@ final class CommentsApiTest extends TestCase
       $authorization_checker ?? $this->createStub(AuthorizationCheckerInterface::class),
       $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
       $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),
-      $this->createNoLimitRateLimiterFactory('phpunit_translation_burst'),
+      $translation_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_translation_burst'),
       $text_sanitizer ?? $this->createPassthroughTextSanitizer(),
       $user_avatar_service ?? $this->createStub(\App\User\UserAvatarService::class),
     );
@@ -596,6 +598,72 @@ final class CommentsApiTest extends TestCase
     $result = $api->commentsIdTranslationGet('1', 'fr', 'en', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_SERVICE_UNAVAILABLE, $response_code);
+    $this->assertNull($result);
+  }
+
+  #[Group('unit')]
+  public function testCommentsIdTranslationGetReturnsUnprocessableForUnsupportedLanguage(): void
+  {
+    $comment = $this->createStub(UserComment::class);
+    $comment->method('getIsDeleted')->willReturn(false);
+    $comment->method('getText')->willReturn('text');
+
+    $comment_repository = $this->createStub(UserCommentRepository::class);
+    $comment_repository->method('findOneBy')->willReturn($comment);
+
+    $translation_delegate = $this->createStub(TranslationDelegate::class);
+    $translation_delegate->method('translate')->willThrowException(new UnsupportedLanguageException('kk is not supported'));
+
+    $api = $this->buildApi(
+      comment_repository: $comment_repository,
+      translation_delegate: $translation_delegate,
+    );
+
+    $response_code = 200;
+    $response_headers = [];
+
+    $result = $api->commentsIdTranslationGet('1', 'kk', 'en', null, $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
+    $this->assertNull($result);
+  }
+
+  #[Group('unit')]
+  public function testCommentsIdTranslationGetIsRateLimitedPerIp(): void
+  {
+    $comment = $this->createStub(UserComment::class);
+    $comment->method('getIsDeleted')->willReturn(false);
+    $comment->method('getText')->willReturn('text');
+
+    $comment_repository = $this->createStub(UserCommentRepository::class);
+    $comment_repository->method('findOneBy')->willReturn($comment);
+
+    $translation_result = new TranslationResult();
+    $translation_result->translation = 'texte';
+    $translation_delegate = $this->createMock(TranslationDelegate::class);
+    $translation_delegate->expects($this->once())->method('translate')->willReturn($translation_result);
+
+    $request_stack = new RequestStack();
+    $request_stack->push(Request::create('/api/comments/1/translation'));
+
+    $api = $this->buildApi(
+      comment_repository: $comment_repository,
+      translation_delegate: $translation_delegate,
+      request_stack: $request_stack,
+      translation_burst_limiter: new RateLimiterFactory(
+        ['id' => 'phpunit_translation_limited', 'policy' => 'fixed_window', 'limit' => 1, 'interval' => '1 minute'],
+        new InMemoryStorage(),
+      ),
+    );
+
+    $response_code = 200;
+    $response_headers = [];
+    $api->commentsIdTranslationGet('1', 'fr', 'en', null, $response_code, $response_headers);
+    $this->assertSame(Response::HTTP_OK, $response_code);
+
+    // The second request never reaches LibreTranslate.
+    $result = $api->commentsIdTranslationGet('1', 'fr', 'en', null, $response_code, $response_headers);
+    $this->assertSame(Response::HTTP_TOO_MANY_REQUESTS, $response_code);
     $this->assertNull($result);
   }
 
