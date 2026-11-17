@@ -95,18 +95,3 @@ Feature: Admin moderation queue guards
     And the project "1" should be visible
     And the user "Owner" profile should be visible
     And the user "Owner" should have a moderation warning "Minor warning"
-
-  Scenario: Reject restores hidden content although another report on it was still pending
-    Given there are projects:
-      | id | name   | owned by | auto_hidden |
-      | 2  | hidden | Owner    | true        |
-    And there are moderation reports:
-      | id                                   | reporter | content_type | content_id | category       | state | created_at          |
-      | 00000000-0000-0000-0000-000000000406 |          | project      | 2          | sexual_content | new   | 2024-01-01 09:00:00 |
-      | 00000000-0000-0000-0000-000000000407 | Reporter | project      | 2          | spam           | new   | 2024-01-01 10:00:00 |
-    And I log in as "Admin" with the password "123456"
-    And I am on "/admin/moderation/report/00000000-0000-0000-0000-000000000407/rejectReport"
-    And I wait for the page to be loaded
-    Then I should see "rejected - content restored"
-    And moderation report "00000000-0000-0000-0000-000000000406" should have state "rejected"
-    And the project "2" should be visible

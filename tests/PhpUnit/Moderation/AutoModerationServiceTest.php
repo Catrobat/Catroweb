@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Moderation;
 
 use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\Moderation\ContentReport;
+use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportCategory;
@@ -87,6 +88,7 @@ class AutoModerationServiceTest extends TestCase
   {
     $visibility = $this->createMock(ContentVisibilityManager::class);
     $visibility->method('isContentHidden')->willReturn(false);
+    $visibility->method('getContentOwnerId')->willReturn('owner');
     $visibility->expects($this->never())->method('hideContent');
 
     $images = [['type' => 'image', 'name' => 'look.png', 'score' => 0.99]];
@@ -95,6 +97,19 @@ class AutoModerationServiceTest extends TestCase
     $report = array_values(array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport))[0];
     $this->assertSame($images, $report->getFlaggedAssets());
     $this->assertSame([], array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction), 'no auto_hidden entry');
+    $this->assertSame(['admin' => AutoModerationService::ACTION_REVIEW_REQUESTED], $this->notifications(), 'admins only, the owner is not told');
+  }
+
+  public function testAHidingFlagNotifiesTheOwnerAndAdmins(): void
+  {
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('isContentHidden')->willReturn(false);
+    $visibility->method('getContentOwnerId')->willReturn('owner');
+    $visibility->expects($this->once())->method('hideContent');
+
+    $this->service($visibility)->flagForReview(ContentType::Project, 'p1', ReportCategory::SexualContent, 'Automatic: image', 0.999);
+
+    $this->assertSame(['owner' => ContentModerationAction::ACTION_AUTO_HIDDEN, 'admin' => ContentModerationAction::ACTION_AUTO_HIDDEN], $this->notifications());
   }
 
   public function testAReviewOnlyFlagIsNotQueuedWhileOneIsPending(): void
@@ -126,10 +141,30 @@ class AutoModerationServiceTest extends TestCase
     $this->assertSame([], $this->persisted);
   }
 
+  /**
+   * @return array<string, string|null> username => moderation action of the persisted notifications
+   */
+  private function notifications(): array
+  {
+    $notifications = [];
+    foreach ($this->persisted as $o) {
+      if ($o instanceof ModerationNotification) {
+        $notifications[(string) $o->getUser()->getUsername()] = $o->getModerationAction();
+      }
+    }
+
+    return $notifications;
+  }
+
   private function service(ContentVisibilityManager $visibility, ?EntityRepository $repository = null): AutoModerationService
   {
+    $admin = new User();
+    $admin->setUsername('admin');
+    $owner = new User();
+    $owner->setUsername('owner');
+
     $query = $this->createStub(Query::class);
-    $query->method('getResult')->willReturn([]);
+    $query->method('getResult')->willReturn([$admin]);
     $query_builder = $this->createStub(QueryBuilder::class);
     $query_builder->method('select')->willReturnSelf();
     $query_builder->method('from')->willReturnSelf();
@@ -139,6 +174,7 @@ class AutoModerationServiceTest extends TestCase
 
     $entity_manager = $this->createStub(EntityManagerInterface::class);
     $entity_manager->method('createQueryBuilder')->willReturn($query_builder);
+    $entity_manager->method('find')->willReturn($owner);
     $entity_manager->method('getRepository')->willReturn($repository ?? $this->createStub(EntityRepository::class));
     $entity_manager->method('persist')->willReturnCallback(function (object $o): void {
       $this->persisted[] = $o;

@@ -123,9 +123,10 @@ class ContentReportRepository extends ServiceEntityRepository
   }
 
   /**
-   * Checks whether other reports (excluding the given report) for the same content have been accepted.
+   * Checks whether other reports (excluding the given report) exist for the same content
+   * that are still pending (New) or have been accepted.
    */
-  public function hasOtherAcceptedReports(string $content_type, string $content_id, string $exclude_report_id): bool
+  public function hasOtherActiveReports(string $content_type, string $content_id, string $exclude_report_id): bool
   {
     $qb = $this->createQueryBuilder('r');
 
@@ -138,7 +139,7 @@ class ContentReportRepository extends ServiceEntityRepository
       ->setParameter('content_type', $content_type)
       ->setParameter('content_id', $content_id)
       ->setParameter('exclude_id', $exclude_report_id)
-      ->setParameter('states', [ReportState::Accepted->value])
+      ->setParameter('states', [ReportState::New->value, ReportState::Accepted->value])
       ->getQuery()
       ->getSingleScalarResult() > 0
     ;

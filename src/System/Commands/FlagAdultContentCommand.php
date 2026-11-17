@@ -25,7 +25,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Backfill for the checks new content gets (docs/operations/Content-Moderation.md): lists visible projects, studios
  * and profiles with adults-only texts; --apply hides projects and studios for review and queues profiles (accounts
- * are never hidden). Content with a rejected report is skipped. --images also scans images (slow).
+ * are never hidden). Content with a rejected report is skipped. --images also scans images (slow; a single flagged
+ * image only queues the content, see ScanContentImagesHandler).
  */
 #[AsCommand(
   name: 'catro:moderation:flag-adult-content',
@@ -51,7 +52,7 @@ class FlagAdultContentCommand extends Command
   protected function configure(): void
   {
     $this
-      ->addOption('apply', null, InputOption::VALUE_NONE, 'Hide hits and queue them for review (default: only list them)')
+      ->addOption('apply', null, InputOption::VALUE_NONE, 'Hide hits and queue them for review, single image hits only queue (default: only list them)')
       ->addOption('images', null, InputOption::VALUE_NONE, 'Also scan project and studio images with the NSFW scanner (slow)')
       ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'At most this many projects/studios get an image scan', '1000')
       ->addOption('delay', null, InputOption::VALUE_REQUIRED, 'Milliseconds to wait between image scans', '200')
