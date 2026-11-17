@@ -800,6 +800,12 @@ open_api_server_studios_studiosidmembersuseridunbanpost:
     user_id: '^[a-zA-Z0-9\-]+$'
 
 # translation
+open_api_server_translation_translationlanguagesget:
+  path: /translation/languages
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.translation::translationLanguagesGetAction
+
 open_api_server_translation_projectsidtranslationget:
   path: /projects/{id}/translation
   methods: [GET]
