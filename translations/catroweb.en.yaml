@@ -723,6 +723,33 @@ catro-notifications:
   moderation-warning:
     message: 'A moderator reviewed a report about your content and found that it breaks our community rules. Please follow the rules, or your account may be suspended next time.'
     deletion: 'The hidden content will be deleted %days% days after it was hidden unless you fix it or appeal.'
+  moderation-hidden:
+    message: 'A moderator reviewed a report about your content and hid it because it breaks our community rules.'
+  moderation-reason:
+    image: '{1}An image (%names%) looked like adult content.|]1,Inf]Some images (%names%) looked like adult content.'
+    screenshot: 'The screenshot looked like adult content.'
+    cover: 'The cover image looked like adult content.'
+    text:
+      name: 'The name looked like it says this is only for adults.'
+      description: 'The description looked like it says this is only for adults.'
+      credits: 'The notes and credits looked like they say this is only for adults.'
+      about: 'Your "About me" text looked like it says this is only for adults.'
+      currently_working_on: 'Your "Currently working on" text looked like it says this is only for adults.'
+      username: 'Your username looked like it says this is only for adults.'
+    category:
+      copyright: 'Reason: it seems to use work of other people without permission.'
+      sexual_content: 'Reason: it looked like adult content.'
+      graphic_violence: 'Reason: it looked too violent.'
+      hateful_content: 'Reason: it looked hurtful or hateful towards others.'
+      improper_rating: 'Reason: it looked like it is not suitable for kids.'
+      spam: 'Reason: it looked like spam.'
+      other: 'Reason: it breaks our community rules.'
+      inappropriate: 'Reason: it looked inappropriate.'
+      harassment: 'Reason: it looked like it is bullying or harassing someone.'
+      impersonation: 'Reason: it looked like it pretends to be someone else.'
+      inappropriate_profile: 'Reason: the profile looked inappropriate.'
+      spam_account: 'Reason: it looked like a spam account.'
+      inappropriate_content: 'Reason: it looked inappropriate.'
   noProjects: "It looks like you don't have any project notifications."
 
 clipboard:

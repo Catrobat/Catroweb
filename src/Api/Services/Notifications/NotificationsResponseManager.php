@@ -23,6 +23,7 @@ use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
+use App\DB\Enum\ReportCategory;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportProcessor;
 use App\System\Commands\Maintenance\PurgeHiddenContentCommand;
@@ -48,6 +49,40 @@ class NotificationsResponseManager extends AbstractResponseManager
     private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct($translator, $serializer, $cache);
+  }
+
+  /** The text fields a moderation reason can name (catro-notifications.moderation-reason.text.*). */
+  private const array MODERATION_REASON_FIELDS = ['name', 'description', 'credits', 'about', 'currently_working_on', 'username'];
+
+  /**
+   * Kid-friendly and without detector internals: which images or texts, or else the report category.
+   *
+   * @param array{category?: string, screenshot?: bool, cover?: bool, images?: list<string>, fields?: list<string>}|null $reason
+   */
+  private function moderationReason(?array $reason): string
+  {
+    $parts = [];
+    $images = $reason['images'] ?? [];
+    if ([] !== $images) {
+      $parts[] = $this->trans('catro-notifications.moderation-reason.image', ['%count%' => count($images), '%names%' => implode(', ', $images)]);
+    }
+
+    foreach (['screenshot', 'cover'] as $image) {
+      if ($reason[$image] ?? false) {
+        $parts[] = $this->trans('catro-notifications.moderation-reason.'.$image);
+      }
+    }
+
+    foreach (array_intersect($reason['fields'] ?? [], self::MODERATION_REASON_FIELDS) as $field) {
+      $parts[] = $this->trans('catro-notifications.moderation-reason.text.'.$field);
+    }
+
+    $category = ReportCategory::tryFrom($reason['category'] ?? '');
+    if ([] === $parts && null !== $category) {
+      $parts[] = $this->trans('catro-notifications.moderation-reason.category.'.$category->value);
+    }
+
+    return implode(' ', $parts);
   }
 
   public function createNotificationsCountResponse(User $user): NotificationsCountResponse
@@ -182,6 +217,13 @@ class NotificationsResponseManager extends AbstractResponseManager
       $is_warning = in_array($action, [ReportProcessor::NOTIFICATION_ADMIN_WARNING, ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING], true);
       if ('' === $message && $is_warning) {
         $message = $this->trans('catro-notifications.moderation-warning.message');
+      } elseif ('' === $message && ReportProcessor::NOTIFICATION_ADMIN_HIDDEN === $action) {
+        $message = $this->trans('catro-notifications.moderation-hidden.message');
+      }
+
+      $reason = $this->moderationReason($notification->getModerationReason());
+      if ('' !== $reason) {
+        $message .= ' '.$reason;
       }
 
       // Only hide_warn hides; said while the content is still hidden (catro:moderation:purge-hidden deletes it).

@@ -30,7 +30,7 @@ class ProjectUploadModerationListener
 
     $project = $event->getProjectEntity();
     $id = (string) $project->getId();
-    $this->auto_moderation->flagAgeSignal(ContentType::Project, $id, $project->getName(), $project->getDescription(), $project->getCredits());
+    $this->auto_moderation->flagAgeSignal(ContentType::Project, $id, name: $project->getName(), description: $project->getDescription(), credits: $project->getCredits());
     $this->auto_moderation->queueImageScan(ContentType::Project, $id, self::SCAN_DELAY_MS);
   }
 }

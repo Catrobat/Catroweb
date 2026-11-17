@@ -32,12 +32,20 @@ class AutoModerationService
 
   /**
    * Hides a project or studio whose texts say it is for adults ("18+", "nsfw", …) until an admin reviews it.
-   * The texts stay as they are. Users: flagUserProfile().
+   * The texts stay as they are. Users: flagUserProfile(). Pass the texts as named arguments (name: …,
+   * description: …): the field names go into the report and the owner's notification.
    */
   public function flagAgeSignal(ContentType $content_type, string $content_id, ?string ...$texts): bool
   {
-    $signal = $this->age_signal_detector->findSignal(...$texts);
-    if (null === $signal) {
+    $assets = [];
+    foreach ($texts as $field => $text) {
+      $signal = $this->age_signal_detector->findSignal($text);
+      if (null !== $signal) {
+        $assets[] = self::textAsset($signal, is_string($field) ? $field : null);
+      }
+    }
+
+    if ([] === $assets) {
       return false;
     }
 
@@ -47,7 +55,7 @@ class AutoModerationService
       ContentType::Comment => ReportCategory::Inappropriate,
       ContentType::User => throw new \LogicException('Accounts are never hidden automatically, use flagUserProfile()'),
     };
-    $this->flagForReview($content_type, $content_id, $category, self::signalNote($signal), flagged_assets: [self::textAsset($signal)]);
+    $this->flagForReview($content_type, $content_id, $category, self::signalNote($assets[0]['name']), flagged_assets: $assets);
 
     return true;
   }
@@ -58,33 +66,35 @@ class AutoModerationService
    */
   public function flagUserProfile(User $user): bool
   {
-    $signals = [];
+    $assets = [];
     $signal = $this->age_signal_detector->findSignal($user->getAbout());
     if (null !== $signal) {
-      $signals[] = $signal;
+      $assets[] = self::textAsset($signal, 'about');
       $user->setAbout(null);
     }
 
     $signal = $this->age_signal_detector->findSignal($user->getCurrentlyWorkingOn());
     if (null !== $signal) {
-      $signals[] = $signal;
+      $assets[] = self::textAsset($signal, 'currently_working_on');
       $user->setCurrentlyWorkingOn(null);
     }
 
-    $cleared = [] !== $signals;
+    $cleared = [] !== $assets;
     $signal = $this->age_signal_detector->findSignal($user->getUsername());
     if (null !== $signal) {
-      $signals[] = $signal;
+      $assets[] = self::textAsset($signal, 'username');
     }
 
-    if ([] === $signals) {
+    if ([] === $assets) {
       return false;
     }
+
+    $signals = array_values(array_unique(array_column($assets, 'name')));
 
     $user_id = (string) $user->getId();
     if (!$this->hasPendingAutoReport(ContentType::User, $user_id)) {
       $note = self::signalNote(implode('", "', $signals)).($cleared ? '; the profile texts with it were cleared' : ' in the username');
-      $this->queueReport(ContentType::User, $user_id, ReportCategory::InappropriateProfile, $note, array_map(self::textAsset(...), $signals));
+      $this->queueReport(ContentType::User, $user_id, ReportCategory::InappropriateProfile, $note, $assets);
       $this->notifyAdmins(ContentType::User, $user_id, 'matched an adults-only signal and needs review (the account stays usable)', self::ACTION_REVIEW_REQUESTED);
     }
 
@@ -109,7 +119,7 @@ class AutoModerationService
    * where accepting or rejecting it works like for a community report. With $hide false the content stays
    * visible and only the report is queued (once, while it is pending), with a notification to admins only.
    *
-   * @param list<array{type: 'image'|'text', name: string, score?: float}>|null $flagged_assets what the queue shows first
+   * @param list<array{type: 'image'|'text', name: string, score?: float, field?: string}>|null $flagged_assets what the queue shows first
    */
   public function flagForReview(ContentType $content_type, string $content_id, ReportCategory $category, string $note, ?float $score = null, ?array $flagged_assets = null, bool $hide = true): void
   {
@@ -142,7 +152,7 @@ class AutoModerationService
     $this->entity_manager->persist($action);
 
     $this->queueReport($content_type, $content_id, $category, $note, $flagged_assets);
-    $this->notifyContentOwner($content_type, $content_id, 'is hidden until a moderator has reviewed it');
+    $this->notifyContentOwner($content_type, $content_id, 'is hidden until a moderator has reviewed it', ModerationNotification::reason($category->value, $flagged_assets, ContentType::Studio === $content_type));
     $this->notifyAdmins($content_type, $content_id);
 
     $this->entity_manager->flush();
@@ -154,11 +164,11 @@ class AutoModerationService
   }
 
   /**
-   * @return array{type: 'text', name: string}
+   * @return array{type: 'text', name: string, field?: string}
    */
-  private static function textAsset(string $signal): array
+  private static function textAsset(string $signal, ?string $field = null): array
   {
-    return ['type' => 'text', 'name' => $signal];
+    return null === $field ? ['type' => 'text', 'name' => $signal] : ['type' => 'text', 'name' => $signal, 'field' => $field];
   }
 
   private function hasPendingAutoReport(ContentType $content_type, string $content_id): bool
@@ -172,7 +182,7 @@ class AutoModerationService
   }
 
   /**
-   * @param list<array{type: 'image'|'text', name: string, score?: float}>|null $flagged_assets
+   * @param list<array{type: 'image'|'text', name: string, score?: float, field?: string}>|null $flagged_assets
    */
   private function queueReport(ContentType $content_type, string $content_id, ReportCategory $category, string $note, ?array $flagged_assets = null): void
   {
@@ -195,7 +205,7 @@ class AutoModerationService
 
     $this->visibility_manager->hideContent($content_type, $content_id);
     $this->createAuditEntry($content_type, $content_id, $cumulative_score);
-    $this->notifyContentOwner($content_type, $content_id);
+    $this->notifyContentOwner($content_type, $content_id, moderation_reason: $this->communityReason($content_type, $content_id));
     $this->notifyAdmins($content_type, $content_id);
 
     $this->entity_manager->flush();
@@ -212,7 +222,36 @@ class AutoModerationService
     $this->entity_manager->persist($action);
   }
 
-  private function notifyContentOwner(ContentType $content_type, string $content_id, string $reason = 'has been hidden due to community reports'): void
+  /**
+   * The category most of the pending reports gave.
+   *
+   * @return array{category?: string}|null
+   */
+  private function communityReason(ContentType $content_type, string $content_id): ?array
+  {
+    $categories = [];
+    foreach ($this->entity_manager->getRepository(ContentReport::class)->findBy([
+      'content_type' => $content_type->value,
+      'content_id' => $content_id,
+      'state' => ReportState::New->value,
+    ], ['created_at' => 'ASC']) as $report) { // a tie goes to the first report
+      $categories[] = $report->getCategory();
+    }
+
+    if ([] === $categories) {
+      return null;
+    }
+
+    $counts = array_count_values($categories);
+    arsort($counts);
+
+    return ['category' => array_key_first($counts)];
+  }
+
+  /**
+   * @param array{category?: string, screenshot?: bool, cover?: bool, images?: list<string>, fields?: list<string>}|null $moderation_reason
+   */
+  private function notifyContentOwner(ContentType $content_type, string $content_id, string $reason = 'has been hidden due to community reports', ?array $moderation_reason = null): void
   {
     $owner_id = $this->visibility_manager->getContentOwnerId($content_type, $content_id);
     if (null === $owner_id) {
@@ -239,6 +278,7 @@ class AutoModerationService
       ContentModerationAction::ACTION_AUTO_HIDDEN,
       ContentType::User === $content_type ? $message : sprintf($message, $content_name ?? $content_id),
     );
+    $notification->setModerationReason($moderation_reason);
 
     $this->entity_manager->persist($notification);
   }

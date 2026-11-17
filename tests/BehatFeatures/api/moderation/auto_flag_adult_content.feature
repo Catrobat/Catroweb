@@ -29,6 +29,10 @@ Feature: Texts that say the content is for adults hide it until an admin reviews
       | id | description          |
       | 1  | Contains 18+ content |
     And the project "1" should be hidden
+    When I request "GET" "/api/notifications?type=all"
+    Then the response status code should be "200"
+    And the client response should contain "is hidden until a moderator has reviewed it"
+    And the client response should contain "The description looked like it says this is only for adults."
 
   Scenario: A version number is not an adults-only signal
     Given I use a valid JWT Bearer token for "Catrobat"

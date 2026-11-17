@@ -165,7 +165,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
 
     $project_id = (string) $project->getId();
     if ($text_touched) {
-      $this->auto_moderation->flagAgeSignal(ContentType::Project, $project_id, $project->getName(), $project->getDescription(), $project->getCredits());
+      $this->auto_moderation->flagAgeSignal(ContentType::Project, $project_id, name: $project->getName(), description: $project->getDescription(), credits: $project->getCredits());
     }
 
     if (!is_null($request->getScreenshot())) {

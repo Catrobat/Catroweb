@@ -59,7 +59,52 @@ class ModerationWarningNotificationResponseTest extends TestCase
     self::assertSame('Custom text', $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDE_WARNING, 'Custom text'));
   }
 
-  private function renderMessage(string $moderation_action, string $message, bool $hidden = false): string
+  public function testAnAcceptedReportGetsTheHiddenDefaultAndItsCategory(): void
+  {
+    self::assertSame(
+      'catro-notifications.moderation-hidden.message catro-notifications.moderation-reason.category.spam',
+      $this->renderMessage(ReportProcessor::NOTIFICATION_ADMIN_HIDDEN, '', reason: ['category' => 'spam']),
+    );
+  }
+
+  public function testFlaggedImagesAndTextsAreNamedInsteadOfTheCategory(): void
+  {
+    $reason = ['category' => 'sexual_content', 'images' => ['Mom', 'Dad'], 'screenshot' => true, 'fields' => ['description', 'made_up']];
+    self::assertSame(
+      'Text catro-notifications.moderation-reason.image 2 Mom, Dad catro-notifications.moderation-reason.screenshot'
+      .' catro-notifications.moderation-reason.text.description',
+      $this->renderMessage('auto_hidden', 'Text', reason: $reason),
+    );
+  }
+
+  public function testAnUnknownCategoryAddsNothing(): void
+  {
+    self::assertSame('Text', $this->renderMessage('auto_hidden', 'Text', reason: ['category' => 'made_up']));
+  }
+
+  public function testTheReasonIsBuiltFromTheReportAndItsFlags(): void
+  {
+    self::assertSame(
+      ['category' => 'sexual_content', 'screenshot' => true, 'images' => ['Parent Right Note Mom'], 'fields' => ['description']],
+      ModerationNotification::reason('sexual_content', [
+        ['type' => 'image', 'name' => '0123456789abcdef0123456789abcdef_Parent Right Note Mom.png', 'score' => 0.99],
+        ['type' => 'image', 'name' => 'screen_p1.png', 'score' => 0.98],
+        ['type' => 'image', 'name' => 'automatic_screenshot.png', 'score' => 0.98],
+        ['type' => 'text', 'name' => '18+', 'field' => 'description'],
+        ['type' => 'text', 'name' => 'nsfw'],
+      ]),
+    );
+    self::assertSame(['category' => 'spam'], ModerationNotification::reason('spam'));
+    self::assertSame(
+      ['category' => 'inappropriate_content', 'cover' => true],
+      ModerationNotification::reason('inappropriate_content', [['type' => 'image', 'name' => '1731234567-My-Studio-card@1x.webp', 'score' => 0.999]], true),
+    );
+  }
+
+  /**
+   * @param array{category?: string, screenshot?: bool, cover?: bool, images?: list<string>, fields?: list<string>}|null $reason
+   */
+  private function renderMessage(string $moderation_action, string $message, bool $hidden = false, ?array $reason = null): string
   {
     $translator = $this->createStub(TranslatorInterface::class);
     $translator->method('trans')->willReturnCallback(static fn (string $id, array $parameters = []): string => trim($id.' '.implode(' ', $parameters)));
@@ -76,6 +121,7 @@ class ModerationWarningNotificationResponseTest extends TestCase
     );
 
     $notification = new ModerationNotification(new User(), 'studio', 'studio-id', $moderation_action, $message);
+    $notification->setModerationReason($reason);
     $data = $manager->createNotificationListResponse([$notification], false, new User())->getData();
     self::assertNotNull($data);
 

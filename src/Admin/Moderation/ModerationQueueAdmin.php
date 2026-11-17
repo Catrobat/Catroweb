@@ -41,7 +41,7 @@ class ModerationQueueAdmin extends AbstractAdmin
   /**
    * What an automatic flag found: flagged_assets, or for reports written before it, parsed from the note.
    *
-   * @return list<array{type: 'image'|'text', name: string, score?: float}>
+   * @return list<array{type: 'image'|'text', name: string, score?: float, field?: string}>
    */
   public static function flaggedAssets(ContentReport $report): array
   {

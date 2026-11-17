@@ -66,7 +66,7 @@ class StudioApiProcessor extends AbstractApiProcessor
   {
     $id = (string) $studio->getId();
     if ($text_changed) {
-      $this->auto_moderation->flagAgeSignal(ContentType::Studio, $id, $studio->getName(), $studio->getDescription());
+      $this->auto_moderation->flagAgeSignal(ContentType::Studio, $id, name: $studio->getName(), description: $studio->getDescription());
     }
 
     if ($cover_changed) {

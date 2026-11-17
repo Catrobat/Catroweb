@@ -76,6 +76,26 @@ Feature: Admin Moderation API
       """
     When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
+    When I use a valid JWT Bearer token for "Catrobat"
+    And I request "GET" "/api/notifications?type=all"
+    Then the client response should contain "hid it because it breaks our community rules. Reason: it looked like spam."
+
+  Scenario: A warning about an automatic image flag names the image, not its score
+    Given there are moderation reports:
+      | id                                   | reporter | content_type | content_id | category       | state | created_at          | note               | flagged_assets                                                                                          |
+      | 00000000-0000-0000-0000-000000000002 |          | project      | 1          | sexual_content | new   | 2024-01-01 10:00:00 | Automatic: flagged | [{"type":"image","name":"0123456789abcdef0123456789abcdef_Parent Right Note Mom.png","score":0.993}] |
+    And I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"action": "warn", "message": "Please keep it kid-friendly."}
+      """
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000002/resolve"
+    Then the response status code should be "200"
+    When I use a valid JWT Bearer token for "Catrobat"
+    And I request "GET" "/api/notifications?type=all"
+    Then the client response should contain "Please keep it kid-friendly. An image (Parent Right Note Mom) looked like adult content."
+    And the client response should not contain "0.993"
 
   Scenario: Admin can reject a report
     # Create a report
