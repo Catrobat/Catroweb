@@ -40,12 +40,14 @@ final class TranslationApiTest extends TestCase
     ?ProjectManager $project_manager = null,
     ?RequestStack $request_stack = null,
     ?RateLimiterFactory $translation_burst_limiter = null,
+    ?RateLimiterFactory $translation_global_limiter = null,
   ): TranslationApi {
     return new TranslationApi(
       $facade ?? $this->createDefaultFacade(),
       $project_manager ?? $this->createStub(ProjectManager::class),
       $request_stack ?? new RequestStack(),
       $translation_burst_limiter ?? new RateLimiterFactory(['id' => 'phpunit_translation', 'policy' => 'no_limit'], new InMemoryStorage()),
+      $translation_global_limiter ?? new RateLimiterFactory(['id' => 'phpunit_translation_global', 'policy' => 'no_limit'], new InMemoryStorage()),
     );
   }
 
@@ -133,6 +135,29 @@ final class TranslationApiTest extends TestCase
 
     $this->assertSame(Response::HTTP_SERVICE_UNAVAILABLE, $code);
     $this->assertNull($result);
+  }
+
+  #[Group('unit')]
+  public function testTranslationGetRateLimitedSiteWide(): void
+  {
+    $project_manager = $this->createStub(ProjectManager::class);
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createProjectStub());
+    $loader = $this->createMock(TranslationApiLoader::class);
+    $loader->expects($this->once())->method('translateProject')->willReturn(null);
+    $facade = $this->createStub(TranslationApiFacade::class);
+    $facade->method('getLoader')->willReturn($loader);
+    $limiter = new RateLimiterFactory(['id' => 'phpunit_translation_site', 'policy' => 'fixed_window', 'limit' => 1, 'interval' => '1 minute'], new InMemoryStorage());
+    $code = 200;
+    $headers = [];
+    foreach (['1.1.1.1', '2.2.2.2'] as $ip) {
+      $request_stack = new RequestStack();
+      $request_stack->push(Request::create('/', server: ['REMOTE_ADDR' => $ip]));
+      $api = $this->buildApi(facade: $facade, project_manager: $project_manager, request_stack: $request_stack, translation_global_limiter: $limiter);
+      $code = 200;
+      $api->projectsIdTranslationGet('1', 'fr', 'en', null, $code, $headers);
+    }
+
+    $this->assertSame(Response::HTTP_TOO_MANY_REQUESTS, $code);
   }
 
   #[Group('unit')]

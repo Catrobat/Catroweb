@@ -52,16 +52,22 @@ class LibreTranslateApi
           'target' => $this->toLibreTranslate($target_language),
           'format' => 'text',
         ],
-        'timeout' => 10,
-        'max_duration' => 10,
+        // A project is up to three calls in one web request.
+        'timeout' => 5,
+        'max_duration' => 5,
       ])->toArray();
       $translation = $data['translatedText'] ?? null;
       if (!is_string($translation)) {
         throw new \UnexpectedValueException('response has no translatedText');
       }
     } catch (ClientExceptionInterface $e) {
-      $response = $e->getResponse();
-      if (400 === $response->getStatusCode() && str_contains($response->getContent(false), 'is not supported')) {
+      try {
+        $unsupported = 400 === $e->getResponse()->getStatusCode() && str_contains($e->getResponse()->getContent(false), 'is not supported');
+      } catch (ExceptionInterface) {
+        $unsupported = false;
+      }
+
+      if ($unsupported) {
         // A language LibreTranslate has no model for: not an outage. Other 4xx (403, 404, 429...) are.
         $this->logger->notice(sprintf('Machine translation rejected: %s, source: %s, target: %s', $e->getMessage(), $source_language ?? 'auto', $target_language));
 
