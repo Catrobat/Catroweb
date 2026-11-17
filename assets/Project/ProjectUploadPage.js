@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBtn.textContent = trans.upload
     successContainer.style.display = 'none'
     // Same limit the server enforces (it stays the real gate): don't offer an upload that can only be rejected.
-    const maxFileSize = Number(container.dataset.maxFileSize)
+    const maxFileSize = Number(container.dataset.maxFileSize) || Infinity
     submitBtn.disabled = file.size > maxFileSize
     if (submitBtn.disabled) {
       showError(`${trans.fileTooLarge}: ${formatSize(file.size)} > ${formatSize(maxFileSize)}`)
