@@ -17,6 +17,9 @@ services:
       - elasticsearch
     ports:
       - '8080:80'
+    environment:
+      # Only reachable with the "translation" profile, see the libretranslate service.
+      - LIBRETRANSLATE_URL=http://libretranslate:5000
     volumes:
       #
       # Changes to the following files are shared between host and container.
@@ -185,6 +188,28 @@ services:
       timeout: 10s
       retries: 3
 
+  # --- Machine translation (translate buttons):
+  # Opt-in, so a plain `up -d` (and CI) never downloads the language models:
+  #   docker compose -f docker-compose.dev.yaml --profile translation up -d
+  # The first start downloads the models into the volume (a few minutes).
+
+  libretranslate:
+    image: libretranslate/libretranslate:v1.9.6 # same as production
+    container_name: libretranslate.catroweb
+    profiles: ['translation']
+    ports:
+      - '127.0.0.1:5005:5000'
+    environment:
+      - LT_LOAD_ONLY=en,de,es,fr,pt,ru
+    volumes:
+      - libretranslate-models:/home/libretranslate/.local
+    healthcheck:
+      test: ['CMD-SHELL', './venv/bin/python scripts/healthcheck.py']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
   # --- Email testing:
 
   mailpit:
@@ -242,4 +267,6 @@ volumes:
   cap-data:
     driver: local
   clamav-data:
+    driver: local
+  libretranslate-models:
     driver: local
