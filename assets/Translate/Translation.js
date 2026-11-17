@@ -4,6 +4,8 @@ import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 const SPECIAL_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR', 'pt-PT']
 // Variants LibreTranslate has a separate model for (LibreTranslateApi::LANGUAGE_CODES).
 const EXACT_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR']
+// The project and the comment translators of a page share one request.
+let supportedLanguagesRequest = null
 
 export class Translation {
   constructor(translatedByLine, refreshLabel = 'Translate again') {
@@ -33,22 +35,29 @@ export class Translation {
   }
 
   /**
-   * Fetches the languages the machine translation offers, once: on the first translate click, so rendering a
-   * page never waits for LibreTranslate. Resolves when the target language is set accordingly.
+   * Fetches the languages the machine translation offers on the first translate click, so rendering a page never
+   * waits for LibreTranslate; a failed request is tried again on the next click. Resolves when the target language
+   * is set accordingly.
    */
   loadSupportedLanguages() {
-    this.supportedLanguagesLoaded ??= fetch(
+    supportedLanguagesRequest ??= fetch(
       document.querySelector('[data-machine-translation-languages-url]')?.dataset
         .machineTranslationLanguagesUrl,
     )
-      .then((response) => (response.ok ? response.json() : []))
-      .catch(() => [])
-      .then((languages) => {
-        // Empty while LibreTranslate is unreachable: then every language is offered.
-        this.supportedLanguages = Array.isArray(languages) ? languages : []
-        this.setTargetLanguage()
+      .then((response) => {
+        if (!response.ok) throw new Error(`Languages failed: ${response.status}`)
+        return response.json()
       })
-    return this.supportedLanguagesLoaded
+      .then((languages) => (Array.isArray(languages) ? languages : []))
+      .catch(() => {
+        supportedLanguagesRequest = null
+        return []
+      })
+    return supportedLanguagesRequest.then((languages) => {
+      // Empty while LibreTranslate is unreachable: then every language is offered.
+      this.supportedLanguages = languages
+      this.setTargetLanguage()
+    })
   }
 
   setDisplayLanguageMap() {
