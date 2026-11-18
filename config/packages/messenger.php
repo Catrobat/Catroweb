@@ -36,6 +36,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         App\Project\Upload\CompleteProjectUpload::class => 'uploads',
         App\Project\CodeView\ExportCodeView::class => 'default',
         App\Translation\TranslateProject::class => 'translation',
+        App\Project\CodeView\TranslateCodeView::class => 'translation',
         App\User\Notification\NotifyFollowersOfNewProject::class => 'default',
         App\Moderation\ScanContentImages::class => 'default',
         App\Project\GarbageCollectOrphanedAssets::class => 'cleanup',

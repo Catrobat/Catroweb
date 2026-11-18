@@ -33,6 +33,27 @@ class FakeLibreTranslateApi extends LibreTranslateApi
   }
 
   #[\Override]
+  public function detectLanguage(string $sample): array
+  {
+    return ['language' => 'en', 'confidence' => 100.0];
+  }
+
+  #[\Override]
+  public function translateBatch(array $texts, string $source_language, string $target_language, int $timeout): ?array
+  {
+    $translated = [];
+    foreach ($texts as $text) {
+      $result = $this->translate($text, $source_language, $target_language, $timeout);
+      if (null === $result) {
+        return null;
+      }
+      $translated[] = $result->translation;
+    }
+
+    return $translated;
+  }
+
+  #[\Override]
   public function getSupportedLanguages(): array
   {
     return ['de', 'en', 'fr', 'ru', 'zh-CN'];
