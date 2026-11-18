@@ -108,7 +108,7 @@
     "symfony/phpunit-bridge": "8.1.*",
     "symfony/stopwatch": "7.4.*",
     "symfony/web-profiler-bundle": "7.4.*",
-    "vimeo/psalm": "7.2.*",
+    "vimeo/psalm": "7.3.*",
     "vincentlanglet/twig-cs-fixer": "^4.0",
     "wapmorgan/php-deprecation-detector": "2.0.*"
   },
