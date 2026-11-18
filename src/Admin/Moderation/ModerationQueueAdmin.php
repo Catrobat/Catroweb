@@ -41,7 +41,7 @@ class ModerationQueueAdmin extends AbstractAdmin
   /**
    * What an automatic flag found: flagged_assets, or for reports written before it, parsed from the note.
    *
-   * @return list<array{type: 'image'|'text', name: string, score?: float}>
+   * @return list<array{type: 'image'|'text', name: string, score?: float, field?: string}>
    */
   public static function flaggedAssets(ContentReport $report): array
   {
@@ -126,7 +126,12 @@ class ModerationQueueAdmin extends AbstractAdmin
       }
 
       $matched = false;
+      $label = ucfirst($asset['field'] ?? ''); // name, description, credits: only the text it was found in
       foreach ($texts as $i => $text) {
+        if ('' !== $label && $label !== $text['label']) {
+          continue;
+        }
+
         // The detector matched the text without its invisible characters ("n\u{200B}sfw" is "nsfw").
         if (false !== mb_stripos(AgeSignalDetector::removeInvisibleCharacters($text['text']), $asset['name'])) {
           $flagged[] = ['type' => 'text', 'name' => $asset['name'], 'score' => $score, 'url' => null, 'label' => $text['label'], 'text' => $text['text']];

@@ -45,8 +45,41 @@ class AutoModerationServiceTest extends TestCase
     $this->assertNull($report->getReporter());
     $this->assertSame('inappropriate_content', $report->getCategory());
     $this->assertStringContainsString('+18', (string) $report->getNote());
-    $this->assertSame([['type' => 'text', 'name' => '+18']], $report->getFlaggedAssets());
+    $this->assertSame([['type' => 'text', 'name' => '+18']], $report->getFlaggedAssets(), 'positional texts: no field');
     $this->assertCount(1, array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentModerationAction));
+  }
+
+  public function testTheOwnerIsToldWhichFieldOrImageHidTheContent(): void
+  {
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('owner');
+
+    $this->service($visibility)->flagAgeSignal(ContentType::Project, 'p1', name: 'Space game', description: 'only 18+');
+    $report = array_values(array_filter($this->persisted, static fn (object $o): bool => $o instanceof ContentReport))[0];
+    $this->assertSame([['type' => 'text', 'name' => '18+', 'field' => 'description']], $report->getFlaggedAssets());
+    $this->assertSame(['category' => 'improper_rating', 'fields' => ['description']], $this->ownerReason());
+
+    $this->persisted = [];
+    $images = [['type' => 'image', 'name' => '0123456789abcdef0123456789abcdef_Mom.png', 'score' => 0.999]];
+    $this->service($visibility)->flagForReview(ContentType::Project, 'p2', ReportCategory::SexualContent, 'Automatic: image', 0.999, $images);
+    $this->assertSame(['category' => 'sexual_content', 'images' => ['Mom']], $this->ownerReason());
+  }
+
+  public function testACommunityHideGivesTheCategoryWithTheMostTrust(): void
+  {
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('owner');
+    $repository = $this->createStub(EntityRepository::class);
+    $repository->method('findBy')->willReturn([
+      new ContentReport()->setCategory('spam')->setReporter(new User())->setReporterTrustScore(2.5),
+      new ContentReport()->setCategory('sexual_content')->setReporter(new User())->setReporterTrustScore(1.0),
+      new ContentReport()->setCategory('sexual_content')->setReporter(new User())->setReporterTrustScore(1.0),
+      new ContentReport()->setCategory('sexual_content')->setReporterTrustScore(5.0), // an automatic flag doesn't vote
+    ]);
+
+    $this->service($visibility, $repository)->autoHideContent(ContentType::Project, 'p1', 3.0);
+
+    $this->assertSame(['category' => 'spam'], $this->ownerReason());
   }
 
   public function testAProfileIsQueuedButNeverHidden(): void
@@ -139,6 +172,20 @@ class AutoModerationServiceTest extends TestCase
 
     $this->service($visibility)->flagAgeSignal(ContentType::Project, 'p1', 'nsfw');
     $this->assertSame([], $this->persisted);
+  }
+
+  /**
+   * @return array<string, mixed>|null
+   */
+  private function ownerReason(): ?array
+  {
+    foreach ($this->persisted as $o) {
+      if ($o instanceof ModerationNotification && 'owner' === $o->getUser()->getUsername()) {
+        return $o->getModerationReason();
+      }
+    }
+
+    $this->fail('the owner got no notification');
   }
 
   /**

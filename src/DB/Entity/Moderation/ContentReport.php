@@ -44,9 +44,9 @@ class ContentReport
   private ?string $note = null;
 
   /**
-   * What an automatic flag found, for the moderation queue to show first: images with their NSFW score, text signals.
+   * What an automatic flag found, for the moderation queue to show first: images with their NSFW score, text signals (and the field they are in).
    *
-   * @var list<array{type: 'image'|'text', name: string, score?: float}>|null
+   * @var list<array{type: 'image'|'text', name: string, score?: float, field?: string}>|null
    */
   #[ORM\Column(name: 'flagged_assets', type: Types::JSON, nullable: true)]
   private ?array $flagged_assets = null;
@@ -151,7 +151,7 @@ class ContentReport
   }
 
   /**
-   * @return list<array{type: 'image'|'text', name: string, score?: float}>|null
+   * @return list<array{type: 'image'|'text', name: string, score?: float, field?: string}>|null
    */
   public function getFlaggedAssets(): ?array
   {
@@ -159,7 +159,7 @@ class ContentReport
   }
 
   /**
-   * @param list<array{type: 'image'|'text', name: string, score?: float}>|null $flagged_assets
+   * @param list<array{type: 'image'|'text', name: string, score?: float, field?: string}>|null $flagged_assets
    */
   public function setFlaggedAssets(?array $flagged_assets): ContentReport
   {

@@ -2,18 +2,20 @@
 
 A moderator resolves a content report with one of four actions. All of them go through `App\Moderation\ReportProcessor::resolveReport()`, which also resolves every other pending report on the same content, notifies the reporters, invalidates their trust scores and writes a `content_moderation_action` audit row.
 
-| Action      | Admin queue button | Content                                                                                               | Owner                                       | Reports  | Audit action                                        |
-| ----------- | ------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------- | -------- | --------------------------------------------------- |
-| `accept`    | Hide + ban owner   | hidden                                                                                                | banned (profile hidden, all content hidden) | accepted | `admin_confirmed`, plus `admin_banned` on the owner |
-| `hide_warn` | Hide + warn        | hidden; a reported **user** is not banned, their `about` and `currently_working_on` texts are cleared | warning notification, not banned            | accepted | `admin_hide_warned` (user: `admin_warned`)          |
-| `warn`      | Warn               | unchanged (a hidden item or banned user stays hidden)                                                 | warning notification, not banned            | accepted | `admin_warned`                                      |
-| `reject`    | Reject             | restored unless other active reports exist                                                            | untouched                                   | rejected | `admin_reversed`                                    |
+| Action      | Admin queue button | Content                                                                                               | Owner                                                                    | Reports  | Audit action                                        |
+| ----------- | ------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------- | --------------------------------------------------- |
+| `accept`    | Hide + ban owner   | hidden                                                                                                | banned (profile hidden, all content hidden), `admin_hidden` notification | accepted | `admin_confirmed`, plus `admin_banned` on the owner |
+| `hide_warn` | Hide + warn        | hidden; a reported **user** is not banned, their `about` and `currently_working_on` texts are cleared | warning notification, not banned                                         | accepted | `admin_hide_warned` (user: `admin_warned`)          |
+| `warn`      | Warn               | unchanged (a hidden item or banned user stays hidden)                                                 | warning notification, not banned                                         | accepted | `admin_warned`                                      |
+| `reject`    | Reject             | restored unless other active reports exist                                                            | untouched                                                                | rejected | `admin_reversed`                                    |
 
 Use `hide_warn` for a first offense (for example suggestive content by a child) and `accept` for clear abuse.
 
 Hidden content with an accepted report, and everything of a banned account, is deleted 14 days later unless it is appealed or held as evidence: see [Retention](./Content-Moderation.md#retention-hidden-content-is-deleted-after-14-days).
 
 The warning is a `ModerationNotification` with `moderation_action = 'admin_warning'` (`'admin_hide_warning'` for `hide_warn` on hidden content). Its text is the moderator's message; when the message is empty, the notifications API shows the translated default `catro-notifications.moderation-warning.message`. For `admin_hide_warning`, while the content is hidden, the API appends that it will be deleted 14 days after it was hidden (`catro-notifications.moderation-warning.deletion`).
+
+**Reasons.** Every owner notification that announces a hide or a warning (automatic flags, community hides, `accept`, `hide_warn`, `warn`) carries `moderation_reason` (JSON, `ModerationNotification::reason()`): the report category, the names of flagged images (look file names without the hash prefix, or that the screenshot was flagged) and the text fields a signal was found in. The notifications API appends it translated (`catro-notifications.moderation-reason.*`): the flagged images and fields when there are any, otherwise a kid-friendly sentence for the category. Scores and detector details are never shown. `accept` notifies the owner too (`admin_hidden`, default text `catro-notifications.moderation-hidden.message`, plus the deletion sentence while the content is hidden). `flagAgeSignal()` takes the texts as named arguments (`name:`, `description:`, `credits:`), so it knows the field.
 
 ## Where the actions are available
 

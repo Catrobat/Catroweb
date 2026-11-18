@@ -132,7 +132,7 @@ class FlagAdultContentCommand extends Command
             $this->auto_moderation->flagUserProfile($user);
           }
         } else {
-          $this->auto_moderation->flagAgeSignal($type, $last_id, ...$texts);
+          $this->auto_moderation->flagAgeSignal($type, $last_id, ...array_combine($fields, $texts)); // named: field => text
         }
       }
 

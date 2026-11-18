@@ -77,6 +77,8 @@ class ModerationQueueAdminTest extends TestCase
       ['type' => 'image', 'name' => 'manual_screenshot.png', 'score' => 0.98],
       ['type' => 'text', 'name' => '18+'],
       ['type' => 'text', 'name' => 'only'],
+      ['type' => 'text', 'name' => 'game', 'field' => 'name'],
+      ['type' => 'text', 'name' => 'player', 'field' => 'description'], // in the code only: not highlighted there
       ['type' => 'text', 'name' => 'nsfw'],
       ['type' => 'text', 'name' => ''],
     ]);
@@ -90,11 +92,13 @@ class ModerationQueueAdminTest extends TestCase
       ['type' => 'image', 'name' => 'manual_screenshot.png', 'score' => 0.98, 'url' => null, 'label' => null, 'text' => null],
       ['type' => 'text', 'name' => '18+', 'score' => null, 'url' => null, 'label' => 'Description', 'text' => 'Only for 18+'],
       ['type' => 'text', 'name' => 'only', 'score' => null, 'url' => null, 'label' => 'Description', 'text' => 'Only for 18+'],
+      ['type' => 'text', 'name' => 'game', 'score' => null, 'url' => null, 'label' => 'Name', 'text' => 'Space game'],
+      ['type' => 'text', 'name' => 'player', 'score' => null, 'url' => null, 'label' => null, 'text' => null],
       ['type' => 'text', 'name' => 'nsfw', 'score' => null, 'url' => null, 'label' => 'Code', 'text' => "n\u{200B}sfw"],
     ], $assets['flagged']);
     $this->assertSame(['/resources/extract/p1/images/other.png'], $assets['images']);
     $this->assertSame(['/resources/extract/p1/sounds/meow.mp3'], $assets['sounds']);
-    $this->assertSame([['label' => 'Name', 'text' => 'Space game'], ['label' => 'Code', 'text' => 'Hello player']], $assets['texts']);
+    $this->assertSame([['label' => 'Code', 'text' => 'Hello player']], $assets['texts']);
   }
 
   private function admin(): ModerationQueueAdmin

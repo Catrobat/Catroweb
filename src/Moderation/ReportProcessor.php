@@ -38,6 +38,8 @@ class ReportProcessor
   public const string NOTIFICATION_ADMIN_WARNING = 'admin_warning';
   /** ModerationNotification::moderation_action of an owner warning whose content was hidden (hide_warn). */
   public const string NOTIFICATION_ADMIN_HIDE_WARNING = 'admin_hide_warning';
+  /** ModerationNotification::moderation_action telling the owner an admin accepted a report and hid the content. */
+  public const string NOTIFICATION_ADMIN_HIDDEN = 'admin_hidden';
 
   public function __construct(
     private readonly ContentReportRepository $report_repository,
@@ -151,14 +153,15 @@ class ReportProcessor
       case self::ACTION_ACCEPT:
         $this->visibility_manager->hideContent($content_type, $content_id);
         $this->banContentOwner($content_type, $content_id, $admin);
+        $this->warnContentOwner($report, null, self::NOTIFICATION_ADMIN_HIDDEN);
         break;
       case self::ACTION_HIDE_WARN:
         $this->hideContentWithoutBan($content_type, $content_id);
-        $this->warnContentOwner($content_type, $content_id, $message, ContentType::User === $content_type ? self::NOTIFICATION_ADMIN_WARNING : self::NOTIFICATION_ADMIN_HIDE_WARNING);
+        $this->warnContentOwner($report, $message, ContentType::User === $content_type ? self::NOTIFICATION_ADMIN_WARNING : self::NOTIFICATION_ADMIN_HIDE_WARNING);
         break;
       case self::ACTION_WARN:
         // Visibility is left as is: un-hiding here could lift an earlier ban or accepted report.
-        $this->warnContentOwner($content_type, $content_id, $message);
+        $this->warnContentOwner($report, $message);
         break;
       default:
         // Only restore content visibility if no other active (new/accepted) reports exist.
@@ -343,21 +346,28 @@ class ReportProcessor
     }
   }
 
-  private function warnContentOwner(ContentType $content_type, string $content_id, ?string $message, string $notification_action = self::NOTIFICATION_ADMIN_WARNING): void
+  /**
+   * Tells the owner what the moderator decided, with the moderator's message and the reason (the report's category
+   * and what an automatic flag found), translated when shown.
+   */
+  private function warnContentOwner(ContentReport $report, ?string $message, string $notification_action = self::NOTIFICATION_ADMIN_WARNING): void
   {
-    $owner_id = $this->visibility_manager->getContentOwnerId($content_type, $content_id);
+    $content_type = ContentType::from($report->getContentType());
+    $owner_id = $this->visibility_manager->getContentOwnerId($content_type, $report->getContentId());
     $owner = null === $owner_id ? null : $this->entity_manager->find(User::class, $owner_id);
     if (!$owner instanceof User) {
       return;
     }
 
-    $this->entity_manager->persist(new ModerationNotification(
+    $notification = new ModerationNotification(
       $owner,
       $content_type->value,
-      $content_id,
+      $report->getContentId(),
       $notification_action,
       mb_substr(trim($message ?? ''), 0, self::MAX_NOTE_LENGTH),
-    ));
+    );
+    $notification->setModerationReason(ModerationNotification::reason($report->getCategory(), $report->getFlaggedAssets(), ContentType::Studio === $content_type));
+    $this->entity_manager->persist($notification);
   }
 
   /**
