@@ -16,13 +16,24 @@ function attribute(tag, name) {
   return new RegExp(`${name}="([^"]*)"`).exec(tag)?.[1]
 }
 
-function brick(type) {
+function brick(type, text) {
   const parts = [{ kind: 'label', text: MARKERS[type] ?? type }]
   if (type === 'WaitBrick') {
     parts.push(
       { kind: 'formula', text: '1' },
       { kind: 'label', text: '\u0001p:second_plural\u001f1\u0002' },
     )
+  }
+  if (text && (type === 'NoteBrick' || type === 'SpeakBrick')) {
+    parts.push({
+      kind: 'formula',
+      text: `'${text}'`,
+      segments: [
+        { kind: 'formula', text: "'" },
+        { kind: 'string', text, source: text },
+        { kind: 'formula', text: "'" },
+      ],
+    })
   }
   return {
     type,
@@ -49,10 +60,10 @@ function exportXml(xml) {
       objects
         .at(-1)
         .scripts.at(-1)
-        .bricks.push(brick(attribute(tag, 'type') ?? ''))
+        .bricks.push(brick(attribute(tag, 'type') ?? '', attribute(tag, 'text')))
     }
   }
-  return { files_in_scene_folders: false, scenes: [{ name: 'Scene 1', objects }] }
+  return { translation_parts: true, files_in_scene_folders: false, scenes: [{ name: 'Scene 1', objects }] }
 }
 
 process.stdout.write(JSON.stringify(exportXml(readFileSync(process.argv[2], 'utf8'))))

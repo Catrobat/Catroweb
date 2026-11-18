@@ -20,6 +20,28 @@ Feature: As a visitor I want to see inline code view on the project page
     And I wait for the page to be loaded
     Then the element "#code-view-panel" should not be visible
 
+  Scenario: Translating and restoring the code keeps the sprite expanded
+    Given project "1" has extracted code xml:
+      """
+      <program><object name="Cat"><script type="StartScript">
+        <brick type="NoteBrick" text="Hola, ¿quieres jugar?"/>
+      </script></object>
+      <object name="Dog"><script type="StartScript">
+        <brick type="SpeakBrick" text="Este es el texto del perro."/>
+      </script></object></program>
+      """
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    When I click "#code-view-toggle"
+    And I wait for the element "#code-view-panel" to contain "Hola, ¿quieres jugar?"
+    And I click ".cv-sprite:nth-of-type(2) .cv-sprite__header"
+    And I click "[data-code-translate]"
+    Then I wait for the element "#code-view-panel" to contain "translated Este es el texto del perro."
+    And the element ".cv-sprite:nth-of-type(2) .cv-sprite__body" should be visible
+    When I click "[data-code-original]"
+    Then I wait for the element "#code-view-panel" to contain "Este es el texto del perro."
+    And the element ".cv-sprite:nth-of-type(2) .cv-sprite__body" should be visible
+
   Scenario: Clicking toggle shows the code view panel
     Given project "1" has extracted code xml:
       """

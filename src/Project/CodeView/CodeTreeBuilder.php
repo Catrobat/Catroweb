@@ -27,16 +27,18 @@ class CodeTreeBuilder
    * @throws CodeTreeBuildException         when the project's code cannot be shown
    * @throws CodeExportUnavailableException when its code view cannot be made right now (try again)
    */
-  public function buildCodeTree(Project $project, ?string $locale = null): array
+  public function buildCodeTree(Project $project, ?string $locale = null, ?string &$export_key = null): array
   {
-    $export = $this->store->get($project);
-    if (null === $export) {
+    $snapshot = $this->store->snapshot($project);
+    if (null === $snapshot) {
       throw new CodeTreeBuildException('Could not load project files');
     }
+    $export = $snapshot['data'];
     if (isset($export['error']) || !is_array($export['scenes'] ?? null)) {
       throw new CodeTreeBuildException('Cannot show this project\'s code: '.(is_string($export['error'] ?? null) ? $export['error'] : 'no scenes'));
     }
 
+    $export_key = CodeViewExportStore::translationKey($snapshot);
     $locale ??= $this->request_stack->getCurrentRequest()?->getLocale() ?? 'en';
     $files = $this->filesUrl((string) $project->getId());
     $in_scene_folders = (bool) ($export['files_in_scene_folders'] ?? true);
@@ -117,14 +119,32 @@ class CodeTreeBuilder
   }
 
   /**
-   * @return list<array{kind: string, text: string}>
+   * @return list<array{kind: string, text: string, segments?: list<array<string, string>>}>
    */
   private function parts(mixed $parts, string $locale): array
   {
-    return array_map(fn (array $part): array => [
-      'kind' => in_array($part['kind'] ?? null, ['label', 'formula', 'choice'], true) ? $part['kind'] : 'label',
-      'text' => $this->localizer->localize((string) ($part['text'] ?? ''), $locale),
-    ], $this->list($parts));
+    return array_map(function (array $part) use ($locale): array {
+      $localized = [
+        'kind' => in_array($part['kind'] ?? null, ['label', 'formula', 'choice'], true) ? $part['kind'] : 'label',
+        'text' => $this->localizer->localize((string) ($part['text'] ?? ''), $locale),
+      ];
+      $segments = $this->list($part['segments'] ?? null);
+      if ([] !== $segments) {
+        $localized['segments'] = array_map(function (array $segment) use ($locale): array {
+          $kind = in_array($segment['kind'] ?? null, ['string', 'variable', 'list'], true) ? $segment['kind'] : 'formula';
+          $text = (string) ($segment['text'] ?? '');
+          $out = ['kind' => $kind, 'text' => 'formula' === $kind ? $this->localizer->localize($text, $locale) : $text];
+          $key = CodeViewTranslationContent::key($segment);
+          if (null !== $key) {
+            $out['key'] = $key;
+          }
+
+          return $out;
+        }, $segments);
+      }
+
+      return $localized;
+    }, $this->list($parts));
   }
 
   /**

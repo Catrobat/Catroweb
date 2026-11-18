@@ -264,7 +264,7 @@ class TranslationDelegate
    *
    * @throws \InvalidArgumentException
    */
-  private function machineLanguages(?string $source_language, string $target_language): array
+  public function machineLanguages(?string $source_language, string $target_language): array
   {
     $source_language = $this->machineLanguage($source_language);
     $target_language = $this->machineLanguage($target_language);

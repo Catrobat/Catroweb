@@ -52,9 +52,41 @@
 
 .cv-toolbar {
   display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.25rem;
   margin-bottom: 0.5rem;
+}
+
+.cv-translation {
+  order: -1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  margin-inline-end: auto;
+}
+
+.cv-translation [hidden] {
+  display: none;
+}
+
+.cv-translation__languages:not([hidden]) {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cv-translation__languages label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cv-translation [role='status'] {
+  font-size: 0.85rem;
 }
 
 .cv-toolbar__btn {

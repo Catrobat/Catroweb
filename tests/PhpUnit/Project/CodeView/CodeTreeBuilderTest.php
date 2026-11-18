@@ -111,7 +111,7 @@ class CodeTreeBuilderTest extends TestCase
   private function builder(?array $export): CodeTreeBuilder
   {
     $store = $this->createStub(CodeViewExportStore::class);
-    $store->method('get')->willReturn($export);
+    $store->method('snapshot')->willReturn(null === $export ? null : ['code' => 'hash', 'export' => 'v1', 'data' => $export]);
     $requests = new RequestStack();
     $requests->push(Request::create('/api/projects/p1/code'));
 

@@ -1,6 +1,7 @@
 <div id="code-view-inline"
      class="code-view-inline"
      data-code-url="{{ path('open_api_server_projects_projectsidcodeget', {id: project_id}) }}"
+     data-translation-url="{{ path('open_api_server_codeViewTranslation_projectsidcodetranslationget', {id: project_id}) }}"
      data-trans-title="{{ 'codeView.title'|trans({}, 'catroweb') }}"
      data-trans-loading="{{ 'codeView.loading'|trans({}, 'catroweb') }}"
      data-trans-error="{{ 'codeView.error'|trans({}, 'catroweb') }}"
@@ -11,6 +12,32 @@
      data-trans-looks="{{ 'codeView.looks'|trans({}, 'catroweb') }}"
      data-trans-sounds="{{ 'codeView.sounds'|trans({}, 'catroweb') }}"
 >
+  <template data-code-translation-template>
+    <div class="cv-translation"
+         data-loading="{{ 'codeView.translation.loading'|trans({}, 'catroweb') }}"
+         data-complete="{{ 'codeView.translation.complete'|trans({}, 'catroweb') }}"
+         data-partial="{{ 'codeView.translation.partial'|trans({}, 'catroweb') }}"
+         data-source-required="{{ 'codeView.translation.sourceRequired'|trans({}, 'catroweb') }}"
+         data-auto="{{ 'codeView.translation.auto'|trans({}, 'catroweb') }}"
+         data-error="{{ 'codeView.translation.error'|trans({}, 'catroweb') }}"
+         data-unsupported="{{ 'codeView.translation.unsupported'|trans({}, 'catroweb') }}">
+      <button type="button" class="btn btn-sm btn-outline-primary" data-code-translate>
+        <i class="material-icons" aria-hidden="true">translate</i>
+        {{ 'codeView.translation.action'|trans({}, 'catroweb') }}
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-primary" data-code-resume hidden>
+        {{ 'codeView.translation.resume'|trans({}, 'catroweb') }}
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-code-original hidden>
+        {{ 'codeView.translation.original'|trans({}, 'catroweb') }}
+      </button>
+      <div class="cv-translation__languages" data-code-languages hidden>
+        <label data-code-source>{{ 'codeView.translation.source'|trans({}, 'catroweb') }}</label>
+        <label data-code-target>{{ 'codeView.translation.target'|trans({}, 'catroweb') }}</label>
+      </div>
+      <span role="status" data-code-translation-status></span>
+    </div>
+  </template>
   <button id="code-view-toggle" class="project-section-toggle" type="button" aria-expanded="false" aria-controls="code-view-panel">
     <i class="material-icons">code</i>
     <span>{{ 'codeView.title'|trans({}, 'catroweb') }}</span>

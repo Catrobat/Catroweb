@@ -10,6 +10,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     [
       'cache' => [
         'app' => 'cache.adapter.array',
+        'pools' => [
+          'cache.code_view_translation_test' => ['adapter' => 'cache.adapter.filesystem'],
+        ],
       ],
     ]
   );

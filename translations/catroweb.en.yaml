@@ -663,6 +663,19 @@ codeView:
   scripts: 'Scripts'
   looks: 'Looks'
   sounds: 'Sounds'
+  translation:
+    action: 'Translate'
+    original: 'Show original'
+    resume: 'Continue translating'
+    source: 'From'
+    target: 'To'
+    auto: 'Detect language'
+    loading: 'Translating code…'
+    complete: 'Machine translated'
+    partial: 'Partially translated'
+    sourceRequired: 'Choose the source language to translate this code.'
+    unsupported: 'Translation is unavailable for these languages.'
+    error: 'Could not translate the code. Try again.'
 
 codeStatistics:
   title: "Code statistics"

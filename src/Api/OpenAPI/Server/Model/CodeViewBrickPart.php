@@ -62,6 +62,20 @@ class CodeViewBrickPart
   protected ?string $text = null;
 
   /**
+   * @var CodeViewTextSegment[]|null
+   *
+   * @SerializedName("segments")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\CodeViewTextSegment")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\CodeViewTextSegment>")
+   */
+  protected ?array $segments = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -71,6 +85,7 @@ class CodeViewBrickPart
     if (is_array($data)) {
       $this->kind = array_key_exists('kind', $data) ? $data['kind'] : $this->kind;
       $this->text = array_key_exists('text', $data) ? $data['text'] : $this->text;
+      $this->segments = array_key_exists('segments', $data) ? $data['segments'] : $this->segments;
     }
   }
 
@@ -110,6 +125,30 @@ class CodeViewBrickPart
   public function setText(?string $text = null): self
   {
     $this->text = $text;
+
+    return $this;
+  }
+
+  /**
+   * Gets segments.
+   *
+   * @return CodeViewTextSegment[]|null
+   */
+  public function getSegments(): ?array
+  {
+    return $this->segments;
+  }
+
+  /**
+   * Sets segments.
+   *
+   * @param CodeViewTextSegment[]|null $segments
+   *
+   * @return $this
+   */
+  public function setSegments(?array $segments = null): self
+  {
+    $this->segments = $segments;
 
     return $this;
   }

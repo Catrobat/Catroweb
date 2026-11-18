@@ -880,7 +880,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     try {
-      $tree = $this->code_tree_builder->buildCodeTree($project);
+      $export_key = null;
+      $tree = $this->code_tree_builder->buildCodeTree($project, export_key: $export_key);
     } catch (CodeTreeBuildException) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
@@ -894,6 +895,9 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $responseCode = Response::HTTP_OK;
+    if (null !== $export_key) {
+      $responseHeaders['X-Code-Export-Key'] = $export_key;
+    }
     $response = new CodeViewResponse($tree);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
 

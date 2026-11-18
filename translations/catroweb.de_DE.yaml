@@ -590,6 +590,19 @@ codeView:
   scripts: 'Skripte'
   looks: 'Aussehen'
   sounds: 'Klänge'
+  translation:
+    action: 'Übersetzen'
+    original: 'Original anzeigen'
+    resume: 'Weiter übersetzen'
+    source: 'Von'
+    target: 'Nach'
+    auto: 'Sprache erkennen'
+    loading: 'Code wird übersetzt …'
+    complete: 'Maschinell übersetzt'
+    partial: 'Teilweise übersetzt'
+    sourceRequired: 'Wähle die Ausgangssprache für die Übersetzung.'
+    unsupported: 'Für diese Sprachen ist keine Übersetzung verfügbar.'
+    error: 'Der Code konnte nicht übersetzt werden. Versuche es erneut.'
 codeStatistics:
   title: "Code-Statistiken"
   error: "Code-Statistiken können nicht angezeigt werden."

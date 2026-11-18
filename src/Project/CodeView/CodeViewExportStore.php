@@ -106,8 +106,6 @@ class CodeViewExportStore
    * @param array{code: string, export: string|null} $key
    *
    * @return array{code: string, export: string|null, data: array<string, mixed>}
-   *
-   * @return array<string, mixed>
    */
   private function make(Project $project, string $xml, array $key, bool $wait): array
   {

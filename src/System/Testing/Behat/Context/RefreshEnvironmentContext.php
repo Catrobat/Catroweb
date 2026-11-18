@@ -16,6 +16,7 @@ use PHPUnit\Event\Facade as EventFacade;
 use PHPUnit\TextUI\CliArguments\Builder as CliConfigurationBuilder;
 use PHPUnit\TextUI\Configuration\Registry;
 use PHPUnit\TextUI\XmlConfiguration\DefaultConfiguration;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Dotenv\Dotenv;
 
 class RefreshEnvironmentContext implements Context
@@ -115,6 +116,14 @@ class RefreshEnvironmentContext implements Context
     foreach ($index_manager->getAllIndexes() as $index) {
       $index->deleteByQuery(new MatchAll(), ['refresh' => true, 'conflicts' => 'proceed']);
     }
+  }
+
+  /** @BeforeScenario @code_view_translation */
+  public function emptyCodeViewTranslations(): void
+  {
+    /** @var CacheItemPoolInterface $cache */
+    $cache = $this->getContainer()->get('cache.code_view_translation_test');
+    $cache->clear();
   }
 
   /**
