@@ -16,14 +16,22 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
   toolbar.append(controls)
 
   const translate = controls.querySelector('[data-code-translate]')
+  const translateLabel = translate.querySelector('span')
   const resume = controls.querySelector('[data-code-resume]')
   const original = controls.querySelector('[data-code-original]')
   const status = controls.querySelector('[data-code-translation-status]')
   const languages = controls.querySelector('[data-code-languages]')
   const { dataset } = controls
+  const languageNames =
+    typeof Intl.DisplayNames === 'function'
+      ? new Intl.DisplayNames(document.documentElement.lang.replaceAll('_', '-') || undefined, {
+          type: 'language',
+        })
+      : null
   let translation
   let sourceSelect
   let targetSelect
+  let displayed
   let continuation
   let activeRequest
 
@@ -42,10 +50,15 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
     controls.querySelector('[data-code-target]').append(targetSelect)
     languages.hidden = false
     for (const select of [sourceSelect, targetSelect]) {
-      select.addEventListener('change', () => {
-        resume.hidden = !matchesContinuation()
-      })
+      for (const option of select.options) {
+        if (option.value) option.textContent = languageName(option.value)
+      }
+      select.addEventListener('change', updateSelection)
     }
+  }
+
+  function languageName(language) {
+    return languageNames?.of(language) || translation.displayLanguageMap[language] || language
   }
 
   function matchesContinuation() {
@@ -54,6 +67,30 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
       continuation.source === sourceSelect.value &&
       continuation.target === targetSelect.value
     )
+  }
+
+  function updateSelection() {
+    const targetChanged = displayed && displayed.target !== targetSelect.value
+    const sourceChanged = displayed && displayed.source !== sourceSelect.value
+    const pending = Boolean(targetChanged || sourceChanged)
+    translate.classList.toggle('btn-primary', pending)
+    translate.classList.toggle('btn-outline-primary', !pending)
+    if (targetChanged) {
+      translateLabel.textContent = dataset.translateTo.replace('%language%', () =>
+        languageName(targetSelect.value),
+      )
+    } else {
+      translateLabel.textContent = sourceChanged ? dataset.translateAgain : dataset.translate
+    }
+    resume.hidden = !matchesContinuation()
+    if (displayed) {
+      const message = pending
+        ? dataset.stillShowing
+        : displayed.partial
+          ? dataset.partialInLanguage
+          : dataset.complete
+      status.textContent = message.replace('%language%', () => languageName(displayed.language))
+    }
   }
 
   function applyTranslations(translations, language) {
@@ -95,6 +132,12 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
     translate.disabled = true
     resume.disabled = true
     status.textContent = dataset.loading
+    const deadline = Date.now() + 120_000
+    const timeout = setTimeout(() => {
+      if (activeRequest !== request) return
+      request.abort()
+      status.textContent = dataset.error
+    }, deadline - Date.now())
 
     try {
       await initializeLanguages()
@@ -107,7 +150,6 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
       if (continueJob) url.searchParams.set('resume', 'true')
       sourceSelect.disabled = true
       targetSelect.disabled = true
-      const deadline = Date.now() + 120_000
       let response
       do {
         response = await fetch(url, {
@@ -119,7 +161,9 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
         url.searchParams.delete('resume')
         url.searchParams.set('poll', 'true')
         const delay = Math.max(1, Math.min(10, Number(response.headers.get('Retry-After')) || 2))
-        await new Promise((resolve) => setTimeout(resolve, delay * 1000))
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.min(delay * 1000, Math.max(0, deadline - Date.now()))),
+        )
       } while (Date.now() < deadline && !request.signal.aborted)
 
       if (request.signal.aborted) return
@@ -148,14 +192,23 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
         return
       }
 
-      applyTranslations(result.translations ?? [], result.target_language)
-      original.hidden = false
+      if (result.target_language) {
+        applyTranslations(result.translations ?? [], result.target_language)
+        original.hidden = false
+        displayed = {
+          source,
+          target,
+          language: result.target_language,
+          partial: result.status === 'partial',
+        }
+      }
       continuation = { source, target, canResume: result.can_resume }
-      resume.hidden = !matchesContinuation()
-      status.textContent = result.status === 'partial' ? dataset.partial : dataset.complete
+      updateSelection()
+      if (!displayed) status.textContent = dataset.partial
     } catch {
       if (!request.signal.aborted) status.textContent = dataset.error
     } finally {
+      clearTimeout(timeout)
       if (activeRequest === request) {
         activeRequest = null
         translate.disabled = false
@@ -171,8 +224,10 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
   original.addEventListener('click', () => {
     activeRequest?.abort()
     applyTranslations([])
+    displayed = null
+    continuation = null
     original.hidden = true
-    resume.hidden = true
+    updateSelection()
     status.textContent = ''
     if (activeRequest) {
       activeRequest = null

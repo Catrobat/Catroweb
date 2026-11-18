@@ -72,6 +72,14 @@
   display: none;
 }
 
+.cv-translation__actions {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  max-inline-size: 100%;
+}
+
 .cv-translation__languages:not([hidden]) {
   display: flex;
   align-items: center;
@@ -87,6 +95,10 @@
 
 .cv-translation [role='status'] {
   font-size: 0.85rem;
+}
+
+.cv-translation [role='status']:not(:empty) {
+  flex-basis: 100%;
 }
 
 .cv-translation-name {

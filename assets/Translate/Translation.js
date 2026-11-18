@@ -7,6 +7,17 @@ const EXACT_LANGUAGES = ['zh-CN', 'zh-TW', 'pt-BR']
 // The project and the comment translators of a page share one request.
 let supportedLanguagesRequest = null
 
+function fetchLanguageData(url) {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 10_000)
+  return fetch(url, { signal: controller.signal })
+    .then((response) => {
+      if (!response.ok) throw new Error(`Languages failed: ${response.status}`)
+      return response.json()
+    })
+    .finally(() => clearTimeout(timeout))
+}
+
 export class Translation {
   constructor(translatedByLine, refreshLabel = 'Translate again') {
     this.translatedByLine = translatedByLine
@@ -40,14 +51,10 @@ export class Translation {
    * is set accordingly.
    */
   loadSupportedLanguages() {
-    supportedLanguagesRequest ??= fetch(
+    supportedLanguagesRequest ??= fetchLanguageData(
       document.querySelector('[data-machine-translation-languages-url]')?.dataset
         .machineTranslationLanguagesUrl,
     )
-      .then((response) => {
-        if (!response.ok) throw new Error(`Languages failed: ${response.status}`)
-        return response.json()
-      })
       .then((languages) => (Array.isArray(languages) ? languages : []))
       .catch(() => {
         supportedLanguagesRequest = null
@@ -63,8 +70,7 @@ export class Translation {
   setDisplayLanguageMap() {
     const routing = document.getElementById('js-api-routing')
     const languagesUrl = routing ? routing.dataset.languages : '/languages'
-    this.displayLanguagesLoaded = fetch(languagesUrl)
-      .then((response) => response.json())
+    this.displayLanguagesLoaded = fetchLanguageData(languagesUrl)
       .then((data) => {
         this.displayLanguageMap = data
       })

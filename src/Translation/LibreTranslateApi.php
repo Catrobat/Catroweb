@@ -94,7 +94,7 @@ class LibreTranslateApi
    */
   public function translateBatch(array $texts, string $source_language, string $target_language, int $timeout): ?array
   {
-    if ($this->toLibreTranslate($source_language) === $this->toLibreTranslate($target_language)) {
+    if (self::isSameLanguage($source_language, $target_language)) {
       return $texts;
     }
 
@@ -131,8 +131,8 @@ class LibreTranslateApi
     $body = ['q' => $texts];
     if (null !== $target) {
       $body += [
-        'source' => null === $source ? 'auto' : $this->toLibreTranslate($source),
-        'target' => $this->toLibreTranslate($target),
+        'source' => null === $source ? 'auto' : self::toLibreTranslate($source),
+        'target' => self::toLibreTranslate($target),
         'format' => 'text',
       ];
     }
@@ -202,7 +202,12 @@ class LibreTranslateApi
     });
   }
 
-  private function toLibreTranslate(string $language): string
+  public static function isSameLanguage(string $source, string $target): bool
+  {
+    return self::toLibreTranslate($source) === self::toLibreTranslate($target);
+  }
+
+  private static function toLibreTranslate(string $language): string
   {
     $short = substr($language, 0, 2);
 

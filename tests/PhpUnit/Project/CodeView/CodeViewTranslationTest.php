@@ -12,6 +12,7 @@ use App\Project\ProjectManager;
 use App\Translation\LibreTranslateApi;
 use App\Translation\UnsupportedLanguageException;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
@@ -26,8 +27,9 @@ use Tests\PhpUnit\System\BackgroundJob\RecordingMessageBus;
 final class CodeViewTranslationTest extends TestCase
 {
   private RecordingMessageBus $bus;
-  private LibreTranslateApi $provider;
+  private LibreTranslateApi&MockObject $provider;
   private CodeViewTranslation $translation;
+  /** @var array{code: string, export: string|null, data: array<string, mixed>} */
   private array $snapshot;
 
   #[\Override]
@@ -38,7 +40,7 @@ final class CodeViewTranslationTest extends TestCase
     $projects = $this->createStub(ProjectManager::class);
     $projects->method('find')->willReturn(new Project());
     $store = $this->createStub(CodeViewExportStore::class);
-    $store->method('snapshot')->willReturnCallback(fn (): array => $this->snapshot);
+    $store->method('storedSnapshot')->willReturnCallback(fn (): array => $this->snapshot);
     $limiter = new RateLimiterFactory(['id' => 'code_view_translation', 'policy' => 'no_limit'], new InMemoryStorage());
     $this->translation = new CodeViewTranslation(new ArrayAdapter(), new LockFactory(new InMemoryStore()), $this->bus, $projects, $store, $this->provider, $limiter, new NullLogger());
   }
@@ -104,6 +106,19 @@ final class CodeViewTranslationTest extends TestCase
     $this->assertSame('unsupported', $this->request(poll: true, source: 'ru')['status']);
   }
 
+  public function testSameLanguageFinishesWithoutBatching(): void
+  {
+    $this->setTexts('v1', array_map(static fn (int $i): string => 'Text '.$i, range(1, 13)));
+    $this->provider->expects($this->never())->method('translateBatch');
+    $this->request(source: 'de-DE');
+    $this->runJob();
+
+    $result = $this->request(poll: true, source: 'de-DE');
+    $this->assertSame('complete', $result['status']);
+    $this->assertSame([], $result['translations']);
+    $this->assertFalse($result['can_resume']);
+  }
+
   public function testLongNotesResumeAcrossJobs(): void
   {
     $note = str_repeat('français ', 125).str_repeat('espagnol ', 125);
@@ -148,7 +163,10 @@ final class CodeViewTranslationTest extends TestCase
 
   private function request(bool $poll = false, bool $resume = false, ?string $source = null): array
   {
-    return $this->translation->request('project', CodeViewExportStore::translationKey($this->snapshot), $source, 'de', $poll, $resume, static fn (): bool => true);
+    $key = CodeViewExportStore::translationKey($this->snapshot);
+    self::assertNotNull($key);
+
+    return $this->translation->request('project', $key, $source, 'de', $poll, $resume, static fn (): bool => true);
   }
 
   private function runJob(int $index = 0): void

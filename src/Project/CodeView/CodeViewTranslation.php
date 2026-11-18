@@ -60,8 +60,8 @@ final readonly class CodeViewTranslation
     try {
       $state = $this->state($key);
       $status = $state['status'] ?? null;
-      if ('queued' === $status || 'complete' === $status || 'source_required' === $status
-        || ('partial' === $status && (!$resume || !($state['can_resume'] ?? false)))) {
+      if (null !== $state && ('queued' === $status || 'complete' === $status || 'source_required' === $status
+        || ('partial' === $status && (!$resume || !($state['can_resume'] ?? false))))) {
         return $state;
       }
       if (!$may_queue()) {
@@ -98,7 +98,7 @@ final readonly class CodeViewTranslation
       }
       try {
         $project = $this->projects->find($job->project_id);
-        $snapshot = null === $project ? null : $this->store->snapshot($project);
+        $snapshot = null === $project ? null : $this->store->storedSnapshot($project);
         $result = null !== $snapshot && $job->export_key === CodeViewExportStore::translationKey($snapshot)
           ? $this->translateExport($snapshot['data'], $job->project_id, $job->source_language, $job->target_language)
           : ['status' => 'failed'];
@@ -136,6 +136,9 @@ final readonly class CodeViewTranslation
       if (null === $source) {
         return ['status' => 'source_required', 'translations' => [], 'can_resume' => false];
       }
+    }
+    if (LibreTranslateApi::isSameLanguage($source, $target)) {
+      return ['status' => 'complete', 'source_language' => $source, 'target_language' => $target, 'translations' => [], 'can_resume' => false];
     }
 
     $keys = [];

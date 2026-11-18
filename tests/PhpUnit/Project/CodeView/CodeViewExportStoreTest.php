@@ -126,8 +126,13 @@ class CodeViewExportStoreTest extends TestCase
     $store = $this->store($runner);
     $key = sha1('<program><object name="Cat"/></program>').'-v1';
 
-    $this->assertSame($key, CodeViewExportStore::translationKey($store->snapshot($this->project)));
-    $this->assertSame($key, CodeViewExportStore::translationKey($store->snapshot($this->project)));
+    $snapshot = $store->snapshot($this->project);
+    $this->assertNotNull($snapshot);
+    $this->assertSame($key, CodeViewExportStore::translationKey($snapshot));
+    $snapshot = $store->storedSnapshot($this->project);
+    $this->assertNotNull($snapshot);
+    $this->assertSame($key, CodeViewExportStore::translationKey($snapshot));
+    $this->assertSame([], $this->bus->dispatched);
   }
 
   public function testAViewDoesNotWaitWhenAllExportSlotsAreBusy(): void

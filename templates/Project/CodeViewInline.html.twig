@@ -14,22 +14,29 @@
 >
   <template data-code-translation-template>
     <div class="cv-translation"
+         data-translate="{{ 'codeView.translation.action'|trans({}, 'catroweb') }}"
+         data-translate-to="{{ 'codeView.translation.translateTo'|trans({}, 'catroweb') }}"
+         data-translate-again="{{ 'codeView.translation.translateAgain'|trans({}, 'catroweb') }}"
+         data-still-showing="{{ 'codeView.translation.stillShowing'|trans({}, 'catroweb') }}"
          data-loading="{{ 'codeView.translation.loading'|trans({}, 'catroweb') }}"
          data-complete="{{ 'codeView.translation.complete'|trans({}, 'catroweb') }}"
          data-partial="{{ 'codeView.translation.partial'|trans({}, 'catroweb') }}"
+         data-partial-in-language="{{ 'codeView.translation.partialInLanguage'|trans({}, 'catroweb') }}"
          data-source-required="{{ 'codeView.translation.sourceRequired'|trans({}, 'catroweb') }}"
          data-auto="{{ 'codeView.translation.auto'|trans({}, 'catroweb') }}"
          data-error="{{ 'codeView.translation.error'|trans({}, 'catroweb') }}"
          data-unsupported="{{ 'codeView.translation.unsupported'|trans({}, 'catroweb') }}">
-      <button type="button" class="btn btn-sm btn-outline-primary" data-code-translate>
-        <i class="material-icons" aria-hidden="true">translate</i>
-        {{ 'codeView.translation.action'|trans({}, 'catroweb') }}
-      </button>
+      <div class="cv-translation__actions">
+        <button type="button" class="btn btn-sm btn-outline-primary" data-code-translate>
+          <i class="material-icons" aria-hidden="true">translate</i>
+          <span>{{ 'codeView.translation.action'|trans({}, 'catroweb') }}</span>
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-code-original hidden>
+          {{ 'codeView.translation.original'|trans({}, 'catroweb') }}
+        </button>
+      </div>
       <button type="button" class="btn btn-sm btn-outline-primary" data-code-resume hidden>
         {{ 'codeView.translation.resume'|trans({}, 'catroweb') }}
-      </button>
-      <button type="button" class="btn btn-sm btn-outline-secondary" data-code-original hidden>
-        {{ 'codeView.translation.original'|trans({}, 'catroweb') }}
       </button>
       <div class="cv-translation__languages" data-code-languages hidden>
         <label data-code-source>{{ 'codeView.translation.source'|trans({}, 'catroweb') }}</label>

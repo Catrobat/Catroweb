@@ -46,9 +46,14 @@ final class CodeViewTranslationApi extends AbstractApiController implements Code
 
       return null;
     }
+    $poll ??= false;
     try {
       [$source, $target] = $this->languages->machineLanguages($source_language, $target_language);
-      $snapshot = $this->exports->snapshot($project);
+      $key = $x_code_export_key;
+      if (!$poll || null === $key) {
+        $snapshot = $poll ? $this->exports->storedSnapshot($project) : $this->exports->snapshot($project);
+        $key = null === $snapshot ? null : CodeViewExportStore::translationKey($snapshot);
+      }
     } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
@@ -58,10 +63,6 @@ final class CodeViewTranslationApi extends AbstractApiController implements Code
 
       return null;
     }
-    $key = null === $snapshot ? null : CodeViewExportStore::translationKey($snapshot);
-    if (null !== $key) {
-      $responseHeaders['X-Code-Export-Key'] = $key;
-    }
     if (null === $key || (null !== $x_code_export_key && $x_code_export_key !== $key)) {
       $responseCode = Response::HTTP_CONFLICT;
 
@@ -69,8 +70,18 @@ final class CodeViewTranslationApi extends AbstractApiController implements Code
     }
 
     $client_ip = $this->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    $state = $this->translation->request($id, $key, $source, $target, $poll ?? false, $resume ?? false,
+    $state = $this->translation->request($id, $key, $source, $target, $poll, $resume ?? false,
       fn (): bool => null !== $this->checkIpRateLimit($client_ip, $this->translationBurstLimiter));
+    if ($poll && null !== $x_code_export_key && 'queued' !== $state['status']) {
+      // Validate before returning a result. While the job runs, reading its status needs no export or XML I/O.
+      $snapshot = $this->exports->storedSnapshot($project);
+      if (null === $snapshot || CodeViewExportStore::translationKey($snapshot) !== $key) {
+        $responseCode = Response::HTTP_CONFLICT;
+
+        return null;
+      }
+    }
+    $responseHeaders['X-Code-Export-Key'] = $key;
     $responseCode = match ($state['status']) {
       'complete', 'partial', 'source_required' => Response::HTTP_OK,
       'queued' => Response::HTTP_ACCEPTED,

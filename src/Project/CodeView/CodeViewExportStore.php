@@ -73,6 +73,23 @@ class CodeViewExportStore
   }
 
   /**
+   * Reads an existing export for the current code without starting or queuing an export.
+   *
+   * @return array{code: string, export: string|null, data: array<string, mixed>}|null
+   */
+  public function storedSnapshot(Project $project): ?array
+  {
+    $xml = $this->codeXml($project);
+    if (null === $xml) {
+      return null;
+    }
+
+    $stored = $this->read((string) $project->getId());
+
+    return null !== $stored && $stored['code'] === sha1_file($xml) ? $stored : null;
+  }
+
+  /**
    * Makes the project's export unless it is current (backfill, after an upload); with $wait for a free slot.
    *
    * @return array<string, mixed>|null
