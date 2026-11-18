@@ -46,6 +46,14 @@ class CodeViewExportStore
    */
   public function get(Project $project): ?array
   {
+    return $this->snapshot($project)['data'] ?? null;
+  }
+
+  /**
+   * @return array{code: string, export: string|null, data: array<string, mixed>}|null
+   */
+  public function snapshot(Project $project): ?array
+  {
     $xml = $this->codeXml($project);
     if (null === $xml) {
       return null;
@@ -58,7 +66,7 @@ class CodeViewExportStore
         $this->queue($project);
       }
 
-      return $stored['data'];
+      return $stored;
     }
 
     return $this->make($project, $xml, $key, false);
@@ -75,7 +83,17 @@ class CodeViewExportStore
   {
     $xml = $this->codeXml($project);
 
-    return null === $xml ? null : $this->make($project, $xml, $this->key($xml), $wait);
+    return null === $xml ? null : $this->make($project, $xml, $this->key($xml), $wait)['data'];
+  }
+
+  /**
+   * @param array{code: string, export: string|null, data: array<string, mixed>} $snapshot
+   */
+  public static function translationKey(array $snapshot): ?string
+  {
+    return true === ($snapshot['data']['translation_parts'] ?? false)
+      ? $snapshot['code'].'-'.$snapshot['export']
+      : null;
   }
 
   /** Exports the project on the default worker (an upload, an outdated export), not in a PHP-FPM process. */
@@ -86,6 +104,8 @@ class CodeViewExportStore
 
   /**
    * @param array{code: string, export: string|null} $key
+   *
+   * @return array{code: string, export: string|null, data: array<string, mixed>}
    *
    * @return array<string, mixed>
    */
@@ -103,12 +123,12 @@ class CodeViewExportStore
     try {
       $stored = $this->read($id);
       if (null !== $stored && $this->isCurrent($stored, $key)) {
-        return $stored['data'];
+        return $stored;
       }
 
       if (null === $key['export']) {
         // No export deployed: an older one is better than none.
-        return $stored['data'] ?? throw new CodeExportUnavailableException('The code export is not available');
+        return $stored ?? throw new CodeExportUnavailableException('The code export is not available');
       }
 
       $slot = $this->slot($wait);
@@ -125,13 +145,14 @@ class CodeViewExportStore
       if (isset($data['error'])) {
         $this->logger->info('No code view for project '.$id.': '.(is_string($data['error']) ? $data['error'] : ''));
         if (null !== $stored && ($stored['code'] ?? null) === $key['code'] && !isset($stored['data']['error'])) {
-          return $stored['data']; // the newer export failed where the older one did not
+          return $stored; // the newer export failed where the older one did not
         }
       }
 
-      $this->write($id, ['code' => $key['code'], 'export' => $key['export'], 'data' => $data]);
+      $snapshot = $key + ['data' => $data];
+      $this->write($id, $snapshot);
 
-      return $data;
+      return $snapshot;
     } finally {
       $this->unlock($lock);
     }
@@ -212,7 +233,7 @@ class CodeViewExportStore
   }
 
   /**
-   * @return array<string, mixed>|null with 'data' an array
+   * @return array{code: string, export: string|null, data: array<string, mixed>}|null
    */
   private function read(string $id): ?array
   {
@@ -227,7 +248,15 @@ class CodeViewExportStore
       return null;
     }
 
-    return is_array($stored) && is_array($stored['data'] ?? null) ? $stored : null;
+    if (!is_array($stored) || !is_string($stored['code'] ?? null) || !is_array($stored['data'] ?? null)) {
+      return null;
+    }
+
+    return [
+      'code' => $stored['code'],
+      'export' => is_string($stored['export'] ?? null) ? $stored['export'] : null,
+      'data' => $stored['data'],
+    ];
   }
 
   /**

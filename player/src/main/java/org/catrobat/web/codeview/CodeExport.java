@@ -29,9 +29,9 @@ import java.util.List;
  * Built as its own script (code-export.js) for Node; web/code-export/export.mjs runs it.
  *
  * <pre>
- * {"scenes": [{"name", "objects": [object]}], "files_in_scene_folders": bool}
+ * {"scenes": [{"name", "objects": [object]}], "files_in_scene_folders": bool, "translation_parts": true}
  * object: {"name", "looks": [{"name", "file"}], "sounds": [{"name", "file"}], "scripts": [brick], "group": [object]?}
- * brick:  {"type", "category", "commented_out", "parts": [{"kind": label|formula|choice, "text"}],
+ * brick:  {"type", "category", "commented_out", "parts": [{"kind": label|formula|choice, "text", "segments"?}],
  *          "bricks": [brick]? (a script's), "sections": [{"parts", "bricks"}]? (an if's else and end, a loop's end),
  *          "error"? (the brick could not be shown: getView or reading what it shows failed)}
  * </pre>
@@ -75,7 +75,8 @@ public final class CodeExport {
 			Project project = ProjectLoader.parse(xml);
 			missingLayouts = 0;
 			Json json = new Json();
-			json.open('{').key("files_in_scene_folders").value(!ProjectLoader.filesWithoutSceneFolder()).key("scenes").open('[');
+			json.open('{').key("translation_parts").value(true)
+					.key("files_in_scene_folders").value(!ProjectLoader.filesWithoutSceneFolder()).key("scenes").open('[');
 			ProjectManager manager = ProjectManager.getInstance();
 			manager.setCurrentProject(project);
 			for (Scene scene : project.getSceneList()) {
@@ -187,7 +188,7 @@ public final class CodeExport {
 		Json parts = new Json().open('[');
 		String[] category = new String[1];
 		try {
-			render(parts, brick.getView(WebContext.INSTANCE), category);
+			render(parts, brick.getView(WebContext.INSTANCE), category, brick);
 		} catch (Throwable e) {
 			unknown(json, e);
 			return;
@@ -195,7 +196,7 @@ public final class CodeExport {
 		json.key("parts").raw(parts.close(']')).key("category").value(null == category[0] ? "unknown" : category[0]);
 	}
 
-	private static void render(Json json, View view, String[] category) {
+	private static void render(Json json, View view, String[] category, Brick brick) {
 		if (null == view || View.GONE == view.getVisibility()) {
 			return;
 		}
@@ -204,7 +205,7 @@ public final class CodeExport {
 				category[0] = group.style().split("\\.")[1].toLowerCase();
 			}
 			for (View child : group.children()) {
-				render(json, child, category);
+				render(json, child, category, brick);
 			}
 		} else if (view instanceof CodeViews.Leaf leaf && leaf.style().startsWith("Category.") && null == category[0]) {
 			category[0] = leaf.style().substring("Category.".length());
@@ -212,7 +213,11 @@ public final class CodeExport {
 			String value = trim(text.getText().toString());
 			boolean formula = text.style().startsWith("BrickEditText");
 			if (formula || !value.isEmpty()) {
-				json.open('{').key("kind").value(formula ? "formula" : "label").key("text").value(value).close('}');
+				json.open('{').key("kind").value(formula ? "formula" : "label").key("text").value(value);
+				if (formula) {
+					CodeFormulaParts.addSegments(json, brick, view.getId(), value);
+				}
+				json.close('}');
 			}
 		} else if (view instanceof CodeViews.Spinner spinner) {
 			Object item = spinner.getSelectedItem();
@@ -226,7 +231,7 @@ public final class CodeExport {
 	}
 
 	/** Without spaces around it; String.trim would also take the markers' control characters at its ends. */
-	private static String trim(String text) {
+	static String trim(String text) {
 		int start = 0;
 		int end = text.length();
 		while (start < end && isSpace(text.charAt(start))) {

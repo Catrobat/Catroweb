@@ -43,6 +43,8 @@ def problems(brick, where):
             found.append(f"{name}: drop-down without a selection")
         if broken_marker(part["text"]):
             found.append(f"{name}: broken string marker in {part['text']!r}")
+        if "segments" in part and "".join(s["text"] for s in part["segments"]) != part["text"]:
+            found.append(f"{name}: formula segments do not reproduce the original")
     for child in brick.get("bricks") or []:
         found += problems(child, where)
     for section in brick.get("sections") or []:
@@ -88,7 +90,11 @@ def main(export_dir, *project_dirs):
         for project in projects:
             with zipfile.ZipFile(project) as archive:
                 xml = Path(tmp) / "code.xml"
-                xml.write_bytes(archive.read("code.xml"))
+                source = archive.read("code.xml")
+                if project.name == "speak-and-wait.catrobat":
+                    source = source.replace(b"<value>Hello</value>", '<value>"Hola, Grüße 🐈"</value>'.encode())
+                    source = source.replace(b"<value>test default value</value>", '<value>Note with "quotes" and 🐈</value>'.encode())
+                xml.write_bytes(source)
             start = time.time()
             result = run(export_dir, xml)
             times.append(time.time() - start)
@@ -99,6 +105,16 @@ def main(export_dir, *project_dirs):
             export = json.loads(result.stdout)
             bricks += count(export)
             found += check(export, name)
+            if project.name == "speak-and-wait.catrobat" and "error" not in export:
+                expected = {'"Hola, Grüße 🐈"', 'Note with "quotes" and 🐈'}
+                for scene in export["scenes"]:
+                    for sprite in scene["objects"]:
+                        for script in sprite["scripts"]:
+                            for brick in script.get("bricks", []):
+                                for part in brick["parts"]:
+                                    expected.difference_update(s.get("source") for s in part.get("segments", []))
+                if expected:
+                    found.append(f"{name}: missing translation sources {expected!r}")
     for line in found:
         print(line)
     print(f"{len(projects)} projects, {bricks} scripts and bricks, {len(found)} problems; Node with the export: "
