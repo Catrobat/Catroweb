@@ -53,7 +53,7 @@ function renderParts(parts) {
               .map((segment) => {
                 const original = escapeHtml(segment.text || '')
                 return segment.key
-                  ? `<span data-cv-translation-key="${escapeAttr(segment.key)}">${original}</span>`
+                  ? `<span data-cv-translation-key="${escapeAttr(segment.key)}" data-cv-translation-kind="${escapeAttr(segment.kind)}">${original}</span>`
                   : original
               })
               .join('')

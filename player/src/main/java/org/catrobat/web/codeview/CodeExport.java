@@ -29,7 +29,7 @@ import java.util.List;
  * Built as its own script (code-export.js) for Node; web/code-export/export.mjs runs it.
  *
  * <pre>
- * {"scenes": [{"name", "objects": [object]}], "files_in_scene_folders": bool, "translation_parts": true}
+ * {"scenes": [{"name", "objects": [object]}], "files_in_scene_folders": bool, "translation_parts": true, "symbols"}
  * object: {"name", "looks": [{"name", "file"}], "sounds": [{"name", "file"}], "scripts": [brick], "group": [object]?}
  * brick:  {"type", "category", "commented_out", "parts": [{"kind": label|formula|choice, "text", "segments"?}],
  *          "bricks": [brick]? (a script's), "sections": [{"parts", "bricks"}]? (an if's else and end, a loop's end),
@@ -73,6 +73,7 @@ public final class CodeExport {
 	public static String export(String xml) {
 		try {
 			Project project = ProjectLoader.parse(xml);
+			CodeSymbols symbols = new CodeSymbols(project);
 			missingLayouts = 0;
 			Json json = new Json();
 			json.open('{').key("translation_parts").value(true)
@@ -87,12 +88,12 @@ public final class CodeExport {
 				for (int i = 0; i < sprites.size(); i++) {
 					Sprite sprite = sprites.get(i);
 					json.open('{');
-					object(json, scene, sprite);
+					object(json, scene, sprite, symbols);
 					if (sprite instanceof GroupSprite) {
 						json.key("group").open('[');
 						while (i + 1 < sprites.size() && sprites.get(i + 1) instanceof GroupItemSprite) {
 							json.open('{');
-							object(json, scene, sprites.get(++i));
+							object(json, scene, sprites.get(++i), symbols);
 							json.close('}');
 						}
 						json.close(']');
@@ -101,18 +102,21 @@ public final class CodeExport {
 				}
 				json.close(']').close('}');
 			}
-			json.close(']').key("missing_layouts").value(missingLayouts).close('}');
+			json.close(']').key("missing_layouts").value(missingLayouts);
+			symbols.writeDeclarations(json);
+			json.close('}');
 			return json.toString();
 		} catch (Throwable e) {
 			return new Json().open('{').key("error").value(String.valueOf(e.getMessage() != null ? e.getMessage() : e)).close('}').toString();
 		}
 	}
 
-	private static void object(Json json, Scene scene, Sprite sprite) {
+	private static void object(Json json, Scene scene, Sprite sprite, CodeSymbols symbols) {
 		ProjectManager manager = ProjectManager.getInstance();
 		manager.setCurrentlyEditedScene(scene);
 		manager.setCurrentSprite(sprite);
 		manager.setCurrentlyEditedScene(scene); // setCurrentSprite may pick the sprite's first scene
+		symbols.enterSprite(sprite);
 		json.key("name").value(sprite.getName()).key("looks").open('[');
 		for (LookData look : sprite.getLookList()) {
 			json.open('{').key("name").value(look.getName()).key("file").value(look.getXstreamFileName()).close('}');
@@ -126,8 +130,8 @@ public final class CodeExport {
 			Json one = new Json();
 			try {
 				one.open('{');
-				brick(one, script.getClass().getSimpleName(), script.getScriptBrick(), script.isCommentedOut());
-				bricks(one, "bricks", script.getBrickList());
+				brick(one, script.getClass().getSimpleName(), script.getScriptBrick(), script.isCommentedOut(), symbols);
+				bricks(one, "bricks", script.getBrickList(), symbols);
 				one.close('}');
 			} catch (Throwable e) {
 				one = failed(script.getClass().getSimpleName(), script.isCommentedOut(), e);
@@ -138,23 +142,23 @@ public final class CodeExport {
 	}
 
 	/** Each brick on its own: one that cannot be shown shows as such, the others as usual. */
-	private static void bricks(Json json, String key, List<Brick> bricks) {
+	private static void bricks(Json json, String key, List<Brick> bricks, CodeSymbols symbols) {
 		json.key(key).open('[');
 		for (Brick brick : bricks) {
 			Json one = new Json();
 			try {
 				one.open('{');
-				brick(one, brick.getClass().getSimpleName(), brick, brick.isCommentedOut());
+				brick(one, brick.getClass().getSimpleName(), brick, brick.isCommentedOut(), symbols);
 				if (brick instanceof CompositeBrick composite) {
 					// The app shows an if's "else" and "end if", a loop's end, as bricks of their own (getAllParts).
 					List<Brick> parts = brick.getAllParts();
 					one.key("sections").open('[').open('{');
-					bricks(one, "bricks", composite.getNestedBricks());
+					bricks(one, "bricks", composite.getNestedBricks(), symbols);
 					one.close('}');
 					for (int i = 1; i < parts.size(); i++) {
 						one.open('{');
-						parts(one, parts.get(i));
-						bricks(one, "bricks", i == 1 && composite.hasSecondaryList() ? composite.getSecondaryNestedBricks() : List.of());
+						parts(one, parts.get(i), symbols);
+						bricks(one, "bricks", i == 1 && composite.hasSecondaryList() ? composite.getSecondaryNestedBricks() : List.of(), symbols);
 						one.close('}');
 					}
 					one.close(']');
@@ -178,17 +182,17 @@ public final class CodeExport {
 				.key("error").value(e.getClass().getSimpleName() + ": " + e.getMessage());
 	}
 
-	private static void brick(Json json, String type, Brick brick, boolean commentedOut) {
+	private static void brick(Json json, String type, Brick brick, boolean commentedOut, CodeSymbols symbols) {
 		json.key("type").value(type).key("commented_out").value(commentedOut);
-		parts(json, brick);
+		parts(json, brick, symbols);
 	}
 
 	/** The brick's category and text, as its getView fills its layout; "error" if that or reading it fails. */
-	private static void parts(Json json, Brick brick) {
+	private static void parts(Json json, Brick brick, CodeSymbols symbols) {
 		Json parts = new Json().open('[');
 		String[] category = new String[1];
 		try {
-			render(parts, brick.getView(WebContext.INSTANCE), category, brick);
+			render(parts, brick.getView(WebContext.INSTANCE), category, brick, symbols);
 		} catch (Throwable e) {
 			unknown(json, e);
 			return;
@@ -196,7 +200,7 @@ public final class CodeExport {
 		json.key("parts").raw(parts.close(']')).key("category").value(null == category[0] ? "unknown" : category[0]);
 	}
 
-	private static void render(Json json, View view, String[] category, Brick brick) {
+	private static void render(Json json, View view, String[] category, Brick brick, CodeSymbols symbols) {
 		if (null == view || View.GONE == view.getVisibility()) {
 			return;
 		}
@@ -205,7 +209,7 @@ public final class CodeExport {
 				category[0] = group.style().split("\\.")[1].toLowerCase();
 			}
 			for (View child : group.children()) {
-				render(json, child, category, brick);
+				render(json, child, category, brick, symbols);
 			}
 		} else if (view instanceof CodeViews.Leaf leaf && leaf.style().startsWith("Category.") && null == category[0]) {
 			category[0] = leaf.style().substring("Category.".length());
@@ -215,7 +219,7 @@ public final class CodeExport {
 			if (formula || !value.isEmpty()) {
 				json.open('{').key("kind").value(formula ? "formula" : "label").key("text").value(value);
 				if (formula) {
-					CodeFormulaParts.addSegments(json, brick, view.getId(), value);
+					CodeFormulaParts.addSegments(json, brick, view.getId(), value, symbols);
 				}
 				json.close('}');
 			}
@@ -225,6 +229,8 @@ public final class CodeExport {
 			json.open('{').key("kind").value("choice").key("text").value(null == value ? "" : value);
 			if (null == item) {
 				json.key("missing").value(true); // nothing selected: what scripts/check_code_export.py looks for
+			} else if (value != null) {
+				symbols.addChoice(json, item, value);
 			}
 			json.close('}');
 		}

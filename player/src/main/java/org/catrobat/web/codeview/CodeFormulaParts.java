@@ -15,7 +15,18 @@ final class CodeFormulaParts {
 	private CodeFormulaParts() {
 	}
 
-	static void addSegments(CodeExport.Json json, Brick brick, int viewId, String displayed) {
+	private record Source(String value, CodeSymbols.Symbol symbol) {
+		void write(CodeExport.Json json, String displayed) {
+			if (symbol == null) {
+				json.open('{').key("kind").value("string").key("text").value(displayed)
+						.key("source").value(value).close('}');
+			} else {
+				symbol.writeSegment(json, displayed);
+			}
+		}
+	}
+
+	static void addSegments(CodeExport.Json json, Brick brick, int viewId, String displayed, CodeSymbols symbols) {
 		if (!(brick instanceof FormulaBrick formulaBrick)) {
 			return;
 		}
@@ -29,15 +40,16 @@ final class CodeFormulaParts {
 			while (displayed.contains(prefix)) {
 				prefix += "X";
 			}
-			List<String> sources = new ArrayList<>();
+			List<Source> sources = new ArrayList<>();
 			for (InternToken token : tokens) {
-				if (token.getInternTokenType() == InternTokenType.STRING
-						&& (field == Brick.BrickField.NOTE || field == Brick.BrickField.SPEAK)) {
-					String source = token.getTokenStringValue();
-					if (!source.isBlank() && !source.matches("#.{6}")) {
-						token.setTokenStringValue(prefix + sources.size() + "_END");
-						sources.add(source);
-					}
+				String value = token.getTokenStringValue();
+				CodeSymbols.Symbol symbol = symbols.resolve(token);
+				boolean projectText = token.getInternTokenType() == InternTokenType.STRING
+						&& (field == Brick.BrickField.NOTE || field == Brick.BrickField.SPEAK)
+						&& !value.isBlank() && !value.matches("#.{6}");
+				if (symbol != null || projectText) {
+					token.setTokenStringValue(prefix + sources.size() + "_END");
+					sources.add(new Source(value, symbol));
 				}
 			}
 			if (!sources.isEmpty()) {
@@ -49,7 +61,7 @@ final class CodeFormulaParts {
 	}
 
 	private static void addMatchingSegments(CodeExport.Json json, String displayed, String prefix,
-			List<InternToken> tokens, List<String> sources) {
+			List<InternToken> tokens, List<Source> sources) {
 		InternToExternGenerator generator = new InternToExternGenerator(WebContext.INSTANCE);
 		generator.trimExternString(tokens);
 		String marked = CodeExport.trim(FormulaSpannableStringBuilder.buildSpannableFormulaString(
@@ -64,11 +76,10 @@ final class CodeFormulaParts {
 				return;
 			}
 			appendFixed(segments, reconstructed, marked.substring(start, end));
-			String source = sources.get(i);
+			Source source = sources.get(i);
 			// Catroid's spannable formula renderer collapses runs of ASCII spaces.
-			String text = source.replaceAll(" +", " ");
-			segments.open('{').key("kind").value("string").key("text").value(text)
-					.key("source").value(source).close('}');
+			String text = source.value().replaceAll(" +", " ");
+			source.write(segments, text);
 			reconstructed.append(text);
 			start = end + placeholder.length();
 		}

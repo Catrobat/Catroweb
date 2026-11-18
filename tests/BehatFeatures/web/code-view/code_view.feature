@@ -20,27 +20,89 @@ Feature: As a visitor I want to see inline code view on the project page
     And I wait for the page to be loaded
     Then the element "#code-view-panel" should not be visible
 
+  @code_view_translation
   Scenario: Translating and restoring the code keeps the sprite expanded
     Given project "1" has extracted code xml:
       """
-      <program><object name="Cat"><script type="StartScript">
+      <program><object name="Cat"><look name="Costume"/><script type="StartScript">
         <brick type="NoteBrick" text="Hola, ¿quieres jugar?"/>
       </script></object>
       <object name="Dog"><script type="StartScript">
         <brick type="SpeakBrick" text="Este es el texto del perro."/>
       </script></object></program>
       """
+    And I request "GET" "/api/projects/1/code"
+    And the response status code should be "200"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I click ".cookie-consent-decline"
     When I click "#code-view-toggle"
     And I wait for the element "#code-view-panel" to contain "Hola, ¿quieres jugar?"
+    And I click ".cv-sprite:first-child [data-tab='looks']"
     And I click ".cv-sprite:nth-of-type(2) .cv-sprite__header"
     And I click "[data-code-translate]"
     Then I wait for the element "#code-view-panel" to contain "translated Este es el texto del perro."
     And the element ".cv-sprite:nth-of-type(2) .cv-sprite__body" should be visible
+    And the element ".cv-sprite:first-child [data-tab-panel='looks']" should be visible
     When I click "[data-code-original]"
-    Then I wait for the element "#code-view-panel" to contain "Este es el texto del perro."
+    Then I should not see "translated Este es el texto del perro."
+    And I wait for the element "#code-view-panel" to contain "Este es el texto del perro."
     And the element ".cv-sprite:nth-of-type(2) .cv-sprite__body" should be visible
+    And the element ".cv-sprite:first-child [data-tab-panel='looks']" should be visible
+
+  @code_view_translation
+  Scenario: Visitors can choose the source for a project with only variable names
+    Given project "1" has extracted code xml:
+      """
+      <program><object name="Cat"><script type="StartScript">
+        <brick type="SetVariableBrick" variable="puntos"/>
+      </script></object></program>
+      """
+    And I request "GET" "/api/projects/1/code"
+    And the response status code should be "200"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    And I click ".cookie-consent-decline"
+    When I click "#code-view-toggle"
+    And I wait for the element "#code-view-panel" to contain "puntos"
+    And I click "[data-code-translate]"
+    Then I wait for the element "[data-code-translation-status]" to contain "Choose the source language"
+    When I select "fr" from "code-view-source-language"
+    And I click "[data-code-translate]"
+    Then I wait for the element "#code-view-panel" to contain "translated puntos"
+    And the element ".cv-field--choice .cv-translation-name" should be visible
+    And the element ".cv-field:not(.cv-field--choice) .cv-translation-name" should be visible
+    When I click ".cv-field--choice .cv-translation-name"
+    Then I wait for the element ".tooltip .tooltip-inner" to contain "puntos"
+    When I click "[data-code-original]"
+    Then I should not see "translated puntos"
+
+  @code_view_translation
+  Scenario: A stale translation request reloads the code view
+    Given project "1" has extracted code xml:
+      """
+      <program><object name="Cat"><script type="StartScript">
+        <brick type="NoteBrick" text="The original note."/>
+      </script></object></program>
+      """
+    And I request "GET" "/api/projects/1/code"
+    And the response status code should be "200"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    And I click ".cookie-consent-decline"
+    When I click "#code-view-toggle"
+    And I wait for the element "#code-view-panel" to contain "The original note."
+    Given project "1" has extracted code xml:
+      """
+      <program><object name="Cat"><script type="StartScript">
+        <brick type="NoteBrick" text="The updated note."/>
+      </script></object></program>
+      """
+    And I request "GET" "/api/projects/1/code"
+    And the response status code should be "200"
+    When I click "[data-code-translate]"
+    Then I wait for the element "#code-view-panel" to contain "The updated note."
+    And I should not see "The original note."
 
   Scenario: Clicking toggle shows the code view panel
     Given project "1" has extracted code xml:

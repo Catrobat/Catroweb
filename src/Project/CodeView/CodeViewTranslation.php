@@ -132,7 +132,7 @@ final readonly class CodeViewTranslation
     }
 
     if (null === $source) {
-      $source = $this->detectSource($project_id, $texts);
+      $source = $this->detectSource($project_id, CodeViewTranslationContent::texts($export, include_names: false));
       if (null === $source) {
         return ['status' => 'source_required', 'translations' => [], 'can_resume' => false];
       }
@@ -144,7 +144,7 @@ final readonly class CodeViewTranslation
     }
     $translations = [];
     $cache_misses = [];
-    $oversized = false;
+    $long_texts = [];
     foreach ($this->cache->getItems(array_values(array_unique($keys))) as $cache_key => $item) {
       $cached = $item->get();
       if (is_string($cached)) {
@@ -155,10 +155,30 @@ final readonly class CodeViewTranslation
       if (isset($translations[$key])) {
         continue;
       }
-      if (mb_strlen($texts[$id]) > self::MAX_BATCH_CHARACTERS) {
-        $oversized = true;
-      } else {
-        $cache_misses[$key] = $texts[$id];
+      if (isset($long_texts[$key])) {
+        continue;
+      }
+      $text = $texts[$id];
+      if (mb_strlen($text) <= self::MAX_BATCH_CHARACTERS) {
+        $cache_misses[$key] = $text;
+        continue;
+      }
+      foreach ($this->split($text) as [$piece, $separator]) {
+        $piece_key = 'code_view_text.'.hash('sha256', $source."\0".$target."\0".$piece);
+        $long_texts[$key][] = [$piece_key, $separator];
+        if (!isset($translations[$piece_key])) {
+          $cache_misses[$piece_key] = $piece;
+        }
+      }
+    }
+    if ([] !== $long_texts) {
+      // Previous jobs may have completed pieces of a long note without finishing the note itself.
+      foreach ($this->cache->getItems(array_keys($cache_misses)) as $key => $item) {
+        $cached = $item->get();
+        if (is_string($cached)) {
+          $translations[$key] = $cached;
+          unset($cache_misses[$key]);
+        }
       }
     }
 
@@ -188,20 +208,48 @@ final readonly class CodeViewTranslation
     if ($failed && [] === $translations) {
       return ['status' => 'failed'];
     }
+    foreach ($long_texts as $key => $pieces) {
+      $translation = '';
+      foreach ($pieces as [$piece_key, $separator]) {
+        if (!isset($translations[$piece_key])) {
+          continue 2;
+        }
+        $translation .= $translations[$piece_key].$separator;
+      }
+      $translations[$key] = $translation;
+      $this->save($key, $translation, self::TEXT_TTL);
+    }
+
     $updates = [];
     foreach ($keys as $id => $key) {
       if (isset($translations[$key]) && $texts[$id] !== $translations[$key]) {
-        $updates[] = ['key' => $id, 'text' => $translations[$key]];
+        $updates[$id] = $translations[$key];
       }
     }
 
     return [
-      'status' => ([] !== $cache_misses || $oversized) ? 'partial' : 'complete',
+      'status' => [] !== $cache_misses ? 'partial' : 'complete',
       'source_language' => $source,
       'target_language' => $target,
-      'translations' => $updates,
+      'translations' => CodeViewTranslatedNames::updates($export, $updates),
       'can_resume' => [] !== $cache_misses,
     ];
+  }
+
+  /** @return \Generator<int, array{string, string}> Text pieces and their original separators */
+  private function split(string $text): \Generator
+  {
+    $offset = 0;
+    $length = strlen($text);
+    while ($length - $offset > self::MAX_BATCH_CHARACTERS) {
+      $window = mb_strcut($text, $offset, self::MAX_BATCH_CHARACTERS, 'UTF-8');
+      [$piece, $separator] = preg_match('/^(.*\S)(\s+)\S*$/su', $window, $match) ? [$match[1], $match[2]] : [$window, ''];
+      yield [$piece, $separator];
+      $offset += strlen($piece) + strlen($separator);
+    }
+    if ($offset < $length) {
+      yield [substr($text, $offset), ''];
+    }
   }
 
   /** @param array<string, string> $texts */
@@ -209,8 +257,8 @@ final readonly class CodeViewTranslation
   {
     $sample = '';
     foreach ($texts as $text) {
-      $sample .= mb_substr(trim($text), 0, self::SAMPLE_CHARACTERS - mb_strlen($sample))."\n";
-      if (mb_strlen($sample) >= self::SAMPLE_CHARACTERS) {
+      $sample .= mb_substr(trim($text), 0, self::SAMPLE_CHARACTERS - 1 - mb_strlen($sample))."\n";
+      if (mb_strlen($sample) >= self::SAMPLE_CHARACTERS - 1) {
         break;
       }
     }
@@ -218,23 +266,29 @@ final readonly class CodeViewTranslation
       return null;
     }
     $key = 'code_view_language.'.hash('sha256', $project_id."\0".$sample);
-    $item = $this->cache->getItem($key);
-    if ($item->isHit()) {
-      $source = $item->get();
+    $lock = $this->locks->createLock($key, 10);
+    $lock->acquire(true);
+    try {
+      $item = $this->cache->getItem($key);
+      if ($item->isHit()) {
+        $source = $item->get();
 
-      return is_string($source) ? $source : null;
-    }
-    if (!$this->codeTranslationGlobalLimiter->create('site')->consume()->isAccepted()) {
-      throw new TranslationBudgetExceededException();
-    }
-    $detected = $this->provider->detectLanguage($sample);
-    if (null === $detected) {
-      throw new \RuntimeException('Code view language detection failed');
-    }
-    $source = $detected['confidence'] >= 60 && '' !== $detected['language'] ? $detected['language'] : null;
-    $this->save($key, $source, self::TEXT_TTL);
+        return is_string($source) ? $source : null;
+      }
+      if (!$this->codeTranslationGlobalLimiter->create('site')->consume()->isAccepted()) {
+        throw new TranslationBudgetExceededException();
+      }
+      $detected = $this->provider->detectLanguage($sample);
+      if (null === $detected) {
+        throw new \RuntimeException('Code view language detection failed');
+      }
+      $source = $detected['confidence'] >= 60 && '' !== $detected['language'] ? $detected['language'] : null;
+      $this->save($key, $source, self::TEXT_TTL);
 
-    return $source;
+      return $source;
+    } finally {
+      $lock->release();
+    }
   }
 
   /**
@@ -273,7 +327,11 @@ final readonly class CodeViewTranslation
     return 'code_view_job.'.hash('sha256', implode("\0", [$project_id, $export_key, $source ?? '', $target]));
   }
 
-  /** @return array<string, mixed>|null */
+  /**
+   * @return array<string, mixed>|null
+   *
+   * @phpstan-impure The worker or another web request may update the shared cache.
+   */
   private function state(string $key): ?array
   {
     $value = $this->cache->getItem($key)->get();

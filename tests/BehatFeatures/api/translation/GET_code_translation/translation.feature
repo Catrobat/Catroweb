@@ -28,7 +28,7 @@ Feature: Translate project text in the code view
     Then the response status code should be "409"
 
   Scenario: A project hidden from the visitor cannot be translated
-    Given project "1" is not visible
+    Given project "Project" is not visible
     When I request "GET" "/api/projects/1/code/translation?target_language=de"
     Then the response status code should be "404"
 

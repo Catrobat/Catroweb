@@ -16,7 +16,7 @@ function attribute(tag, name) {
   return new RegExp(`${name}="([^"]*)"`).exec(tag)?.[1]
 }
 
-function brick(type, text) {
+function brick(type, text, variable) {
   const parts = [{ kind: 'label', text: MARKERS[type] ?? type }]
   if (type === 'WaitBrick') {
     parts.push(
@@ -35,6 +35,17 @@ function brick(type, text) {
       ],
     })
   }
+  if (variable) {
+    const symbol = { kind: 'variable', text: variable, source: variable, symbol: 'name-0' }
+    parts.push(
+      { kind: 'choice', text: variable, segments: [symbol] },
+      {
+        kind: 'formula',
+        text: `"${variable}" + 1`,
+        segments: [{ kind: 'formula', text: '"' }, symbol, { kind: 'formula', text: '" + 1' }],
+      },
+    )
+  }
   return {
     type,
     commented_out: false,
@@ -51,19 +62,28 @@ function exportXml(xml) {
   const env = /ENV:(\w+)/.exec(xml)
   if (env) return { env: process.env[env[1]] ?? null }
   const objects = []
-  for (const tag of xml.match(/<object [^>]*>|<script [^>]*>|<brick [^>]*>/g) ?? []) {
+  for (const tag of xml.match(/<object [^>]*>|<look [^>]*>|<script [^>]*>|<brick [^>]*>/g) ?? []) {
     if (tag.startsWith('<object')) {
       objects.push({ name: attribute(tag, 'name') ?? '', looks: [], sounds: [], scripts: [] })
+    } else if (tag.startsWith('<look') && objects.length > 0) {
+      objects.at(-1).looks.push({ name: attribute(tag, 'name') ?? '' })
     } else if (tag.startsWith('<script') && objects.length > 0) {
       objects.at(-1).scripts.push({ ...brick(attribute(tag, 'type') ?? ''), bricks: [] })
     } else if (objects.at(-1)?.scripts.length > 0) {
       objects
         .at(-1)
         .scripts.at(-1)
-        .bricks.push(brick(attribute(tag, 'type') ?? '', attribute(tag, 'text')))
+        .bricks.push(
+          brick(attribute(tag, 'type') ?? '', attribute(tag, 'text'), attribute(tag, 'variable')),
+        )
     }
   }
-  return { translation_parts: true, files_in_scene_folders: false, scenes: [{ name: 'Scene 1', objects }] }
+  return {
+    translation_parts: true,
+    symbols: [{ id: 'name-0', kind: 'variable', scope: 'project', name: 'puntos' }],
+    files_in_scene_folders: false,
+    scenes: [{ name: 'Scene 1', objects }],
+  }
 }
 
 process.stdout.write(JSON.stringify(exportXml(readFileSync(process.argv[2], 'utf8'))))

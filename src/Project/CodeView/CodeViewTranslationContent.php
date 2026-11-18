@@ -10,10 +10,17 @@ final class CodeViewTranslationContent
   public static function key(array $segment): ?string
   {
     $source = $segment['source'] ?? null;
+    if (!is_string($source) || '' === trim($source)) {
+      return null;
+    }
 
-    return 'string' === ($segment['kind'] ?? null) && is_string($source) && '' !== trim($source)
-      ? hash('sha256', $source)
-      : null;
+    $kind = $segment['kind'] ?? null;
+    $symbol = $segment['symbol'] ?? null;
+    if (in_array($kind, ['variable', 'list'], true) && is_string($symbol)) {
+      return $symbol;
+    }
+
+    return 'string' === $kind ? hash('sha256', $source) : null;
   }
 
   /**
@@ -21,10 +28,13 @@ final class CodeViewTranslationContent
    *
    * @return array<string, string> Translation key to source text, in project order
    */
-  public static function texts(array $export): array
+  public static function texts(array $export, bool $include_names = true): array
   {
     $texts = [];
     foreach (self::segments($export) as $segment) {
+      if (!$include_names && 'string' !== ($segment['kind'] ?? null)) {
+        continue;
+      }
       $key = self::key($segment);
       if (null !== $key) {
         $texts[$key] = (string) $segment['source'];

@@ -89,6 +89,16 @@
   font-size: 0.85rem;
 }
 
+.cv-translation-name {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+}
+
 .cv-toolbar__btn {
   display: flex;
   align-items: center;

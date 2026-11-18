@@ -1,3 +1,4 @@
+import { Tooltip } from 'bootstrap'
 import { Translation } from '../Translate/Translation'
 
 const EXPORT_KEY_HEADER = 'X-Code-Export-Key'
@@ -31,8 +32,12 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
     translation ??= new Translation('%sourceLanguage% → %targetLanguage%')
     await Promise.all([translation.loadSupportedLanguages(), translation.displayLanguagesLoaded])
     sourceSelect = translation.createLanguageSelect('', 'source')
-    sourceSelect.querySelector('option[value=""]').textContent = dataset.auto
+    sourceSelect.id = 'code-view-source-language'
+    const auto = sourceSelect.querySelector('option[value=""]')
+    auto.textContent = dataset.auto
+    sourceSelect.prepend(auto)
     targetSelect = translation.createLanguageSelect(translation.targetLanguage, 'target')
+    targetSelect.id = 'code-view-target-language'
     controls.querySelector('[data-code-source]').append(sourceSelect)
     controls.querySelector('[data-code-target]').append(targetSelect)
     languages.hidden = false
@@ -54,10 +59,32 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
   function applyTranslations(translations, language) {
     const byKey = new Map(translations.map(({ key, text }) => [key, text]))
     for (const segment of segments) {
-      const text = byKey.get(segment.element.dataset.cvTranslationKey)
-      segment.element.textContent = text ?? segment.original
-      if (text === undefined || !language) segment.element.removeAttribute('lang')
-      else segment.element.lang = language
+      const { element } = segment
+      const text = byKey.get(element.dataset.cvTranslationKey)
+      segment.tooltip?.dispose()
+      segment.tooltip = null
+      element.textContent = text ?? segment.original
+      if (text === undefined || !language) {
+        element.removeAttribute('lang')
+        continue
+      }
+      element.lang = language
+      if (['list', 'variable'].includes(element.dataset.cvTranslationKind)) {
+        const name = document.createElement('button')
+        name.type = 'button'
+        name.className = 'cv-translation-name'
+        name.textContent = text
+        element.replaceChildren(name)
+        const tooltip = new Tooltip(name, {
+          title: segment.original,
+          container: document.body,
+          trigger: 'hover focus click',
+        })
+        name.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') tooltip.hide()
+        })
+        segment.tooltip = tooltip
+      }
     }
   }
 
@@ -100,6 +127,7 @@ export function bindCodeViewTranslation(container, panel, exportKey, reload) {
         response.status === 409 ||
         (response.status === 200 && response.headers.get(EXPORT_KEY_HEADER) !== exportKey)
       ) {
+        applyTranslations([])
         await reload()
         return
       }

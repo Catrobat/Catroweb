@@ -61,7 +61,7 @@ class CodeViewExportStore
 
     $key = $this->key($xml);
     $stored = $this->read((string) $project->getId());
-    if (null !== $stored && ($stored['code'] ?? null) === $key['code']) {
+    if (null !== $stored && $stored['code'] === $key['code']) {
       if (!$this->isCurrent($stored, $key)) {
         $this->queue($project);
       }
@@ -142,7 +142,7 @@ class CodeViewExportStore
 
       if (isset($data['error'])) {
         $this->logger->info('No code view for project '.$id.': '.(is_string($data['error']) ? $data['error'] : ''));
-        if (null !== $stored && ($stored['code'] ?? null) === $key['code'] && !isset($stored['data']['error'])) {
+        if (null !== $stored && $stored['code'] === $key['code'] && !isset($stored['data']['error'])) {
           return $stored; // the newer export failed where the older one did not
         }
       }

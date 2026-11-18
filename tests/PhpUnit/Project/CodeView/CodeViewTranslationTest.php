@@ -73,7 +73,8 @@ final class CodeViewTranslationTest extends TestCase
     $this->setTexts('v1', array_map(static fn (int $i): string => 'Text '.$i, range(1, 13)));
     $this->provider->expects($this->once())->method('detectLanguage')->willReturn(['language' => 'en', 'confidence' => 100.0]);
     $this->provider->expects($this->exactly(3))->method('translateBatch')
-      ->willReturnCallback(static fn (array $texts): array => array_map(static fn (string $text): string => 'translated '.$text, $texts));
+      ->willReturnCallback(static fn (array $texts): array => array_map(static fn (string $text): string => 'translated '.$text, $texts))
+    ;
     $this->request();
     $this->runJob();
     $partial = $this->request(poll: true);
@@ -101,6 +102,36 @@ final class CodeViewTranslationTest extends TestCase
     $this->request(source: 'ru');
     $this->runJob(1);
     $this->assertSame('unsupported', $this->request(poll: true, source: 'ru')['status']);
+  }
+
+  public function testLongNotesResumeAcrossJobs(): void
+  {
+    $note = str_repeat('français ', 125).str_repeat('espagnol ', 125);
+    $this->setTexts('v1', [$note]);
+    $this->provider->expects($this->atLeastOnce())->method('translateBatch')
+      ->willReturnCallback(static function (array $texts): array {
+        self::assertLessThanOrEqual(900, array_sum(array_map(mb_strlen(...), $texts)));
+
+        return array_map(mb_strtoupper(...), $texts);
+      })
+    ;
+    $this->request(source: 'fr');
+    $this->runJob();
+    $partial = $this->request(poll: true, source: 'fr');
+    $this->assertSame('partial', $partial['status']);
+    $this->assertSame([], $partial['translations']);
+
+    for ($i = 1; $i <= 3; ++$i) {
+      $this->request(resume: true, source: 'fr');
+      $this->runJob($i);
+      $result = $this->request(poll: true, source: 'fr');
+      if ('complete' === $result['status']) {
+        $this->assertSame(mb_strtoupper($note), $result['translations'][0]['text']);
+
+        return;
+      }
+    }
+    $this->fail('The long note did not finish');
   }
 
   private function setTexts(string $version, array $texts): void

@@ -60,6 +60,33 @@ def count(node):
     return sum(count(v) for v in node) if isinstance(node, list) else 0
 
 
+def all_parts(node):
+    if isinstance(node, dict):
+        yield from node.get("parts", [])
+        for value in node.values():
+            yield from all_parts(value)
+    elif isinstance(node, list):
+        for value in node:
+            yield from all_parts(value)
+
+
+def translation_problems(export, project):
+    parts = list(all_parts(export))
+    expected = {'"Hola, Grüße 🐈"', 'Note with "quotes" and 🐈'}
+    for part in parts:
+        expected.difference_update(s.get("source") for s in part.get("segments", []))
+    found = [f"{project}: missing translation sources {expected!r}"] if expected else []
+    for name, kind in [("duration", "variable"), ("deviations", "list")]:
+        ids = {
+            part_kind: {s.get("symbol") for part in parts if part["kind"] == part_kind
+                        for s in part.get("segments", []) if s["kind"] == kind and s["source"] == name}
+            for part_kind in ("choice", "formula")
+        }
+        if len(ids["choice"]) != 1 or ids["choice"] != ids["formula"] or None in ids["choice"]:
+            found.append(f"{project}: {kind} {name} has inconsistent symbol ids {ids!r}")
+    return found
+
+
 def check(export, project):
     if "error" in export:
         return [f"{project}: not exported: {export['error']}"]
@@ -106,15 +133,7 @@ def main(export_dir, *project_dirs):
             bricks += count(export)
             found += check(export, name)
             if project.name == "speak-and-wait.catrobat" and "error" not in export:
-                expected = {'"Hola, Grüße 🐈"', 'Note with "quotes" and 🐈'}
-                for scene in export["scenes"]:
-                    for sprite in scene["objects"]:
-                        for script in sprite["scripts"]:
-                            for brick in script.get("bricks", []):
-                                for part in brick["parts"]:
-                                    expected.difference_update(s.get("source") for s in part.get("segments", []))
-                if expected:
-                    found.append(f"{name}: missing translation sources {expected!r}")
+                found += translation_problems(export, name)
     for line in found:
         print(line)
     print(f"{len(projects)} projects, {bricks} scripts and bricks, {len(found)} problems; Node with the export: "

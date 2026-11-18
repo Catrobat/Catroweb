@@ -34,6 +34,10 @@ brick list on share to keep in step with Catroid: updating the player (`player/c
 - A project whose code cannot be shown gets a 422, which the page shows as "This project's code can't be shown".
 - `CodeViewLocalizer` puts Catroid's strings into the export: it writes them as markers, which become the viewer's
   language (`code-export/strings/<locale>.json`, English where a translation is missing).
+- New exports carry optional segments for speech, notes, and variable and list names. The toolbar requests
+  machine translation on demand and uses the export key returned by both endpoints to reject stale updates.
+  Name aliases apply to selections and formulas in the same view. Colliding names keep their original spelling.
+  See [Machine-Translation.md](./Machine-Translation.md) for queue and cache behavior.
 
 ## Operations
 
