@@ -22,7 +22,6 @@ final class NoDeprecationsTest extends KernelTestCase
   public function testEntityMappingsUseSortDirection(): void
   {
     $entity_manager = self::getContainer()->get(EntityManagerInterface::class);
-    \assert($entity_manager instanceof EntityManagerInterface);
 
     Deprecation::disable(); // the counter is process-global: earlier tests' query-builder deprecations must not count here
     Deprecation::enableTrackingDeprecations();
