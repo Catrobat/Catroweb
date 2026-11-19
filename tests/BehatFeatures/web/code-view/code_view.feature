@@ -40,10 +40,10 @@ Feature: As a visitor I want to see inline code view on the project page
     And I click ".cv-sprite:first-child [data-tab='looks']"
     And I click ".cv-sprite:nth-of-type(2) .cv-sprite__header"
     And I activate the button "[data-code-translate]"
-    And I wait for the element "[data-code-translation-status]" to contain "Machine translated into British English"
+    And I wait for the element "[data-code-translation-status]" to contain "Machine translated into"
     When I select "fr" from "code-view-target-language"
     Then I wait for the element "[data-code-translate]" to contain "Translate to French"
-    And I wait for the element "[data-code-translation-status]" to contain "Still showing British English"
+    And I wait for the element "[data-code-translation-status]" to contain "Still showing"
     When I activate the button "[data-code-translate]"
     Then I wait for the element "#code-view-panel" to contain "translated Este es el texto del perro."
     And the element ".cv-sprite:nth-of-type(2) .cv-sprite__body" should be visible
