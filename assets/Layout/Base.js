@@ -19,6 +19,20 @@ import { showSnackbar } from './Snackbar'
 // Start the stimulus app
 import '../bootstrap'
 
+// A deploy deletes the previous build's chunks, so a page opened before it fails its next lazy import: reload once
+// to pick up the new build. The timestamp guard stops a reload loop when the chunk is missing for another reason.
+window.addEventListener('vite:preloadError', (event) => {
+  try {
+    const last = Number(sessionStorage.getItem('chunkReloadAt'))
+    if (Date.now() - last < 60_000) return
+    sessionStorage.setItem('chunkReloadAt', String(Date.now()))
+  } catch {
+    return
+  }
+  event.preventDefault()
+  window.location.reload()
+})
+
 const appVersion = document.getElementById('app-version').dataset.appVersion
 const bugsnagApiKey = document.getElementById('bugsnag').dataset.apiKey
 if (bugsnagApiKey) {
