@@ -56,52 +56,76 @@ class ProjectZipReconstructor
       return null;
     }
 
-    // Add code.xml from extracted directory
-    $codeXmlPath = $extractPath.'/code.xml';
-    if (file_exists($codeXmlPath)) {
-      $zip->addFile($codeXmlPath, 'code.xml');
-    }
-
-    // Add screenshots if present
-    foreach (['manual_screenshot.png', 'automatic_screenshot.png', 'screenshot.png'] as $screenshot) {
-      $screenshotPath = $extractPath.'/'.$screenshot;
-      if (file_exists($screenshotPath)) {
-        $zip->addFile($screenshotPath, $screenshot);
+    $success = false;
+    $closed = false;
+    try {
+      // Add code.xml from extracted directory
+      $codeXmlPath = $extractPath.'/code.xml';
+      if (file_exists($codeXmlPath)) {
+        $zip->addFile($codeXmlPath, 'code.xml');
       }
-    }
 
-    // Add all mapped assets from content-addressable store
-    foreach ($mappings as $mapping) {
-      $asset = $mapping->getAsset();
-      $assetPath = $this->store->getAbsolutePathFromRelative($asset->getStoragePath());
+      // Add screenshots if present
+      foreach (['manual_screenshot.png', 'automatic_screenshot.png', 'screenshot.png'] as $screenshot) {
+        $screenshotPath = $extractPath.'/'.$screenshot;
+        if (file_exists($screenshotPath)) {
+          $zip->addFile($screenshotPath, $screenshot);
+        }
+      }
 
-      if (!file_exists($assetPath)) {
-        $this->logger->warning('Asset file missing from store', [
-          'hash' => $asset->getHash(),
-          'path' => $asset->getStoragePath(),
-          'project_id' => $projectId,
-        ]);
-        // Fall back to extracted file if available
-        $fallback = $extractPath.'/'.$mapping->getPathInZip();
-        if (file_exists($fallback)) {
-          $zip->addFile($fallback, $mapping->getPathInZip());
+      // Add all mapped assets from content-addressable store
+      foreach ($mappings as $mapping) {
+        $asset = $mapping->getAsset();
+        $assetPath = $this->store->getAbsolutePathFromRelative($asset->getStoragePath());
+
+        if (!file_exists($assetPath)) {
+          $this->logger->warning('Asset file missing from store', [
+            'hash' => $asset->getHash(),
+            'path' => $asset->getStoragePath(),
+            'project_id' => $projectId,
+          ]);
+          // Fall back to extracted file if available
+          $fallback = $extractPath.'/'.$mapping->getPathInZip();
+          if (file_exists($fallback)) {
+            $zip->addFile($fallback, $mapping->getPathInZip());
+          }
+
+          continue;
         }
 
-        continue;
+        $zip->addFile($assetPath, $mapping->getPathInZip());
       }
 
-      $zip->addFile($assetPath, $mapping->getPathInZip());
+      // Add any other files from extract dir not covered by mappings
+      $this->addRemainingFiles($zip, $extractPath, $mappings);
+
+      $closed = true;
+      if (!$zip->close()) {
+        $this->logger->error('Cannot close ZIP archive', ['path' => $tempPath]);
+
+        return null;
+      }
+
+      // Atomic move to final path
+      if (!rename($tempPath, $zipPath)) {
+        $this->logger->error('Cannot rename temporary ZIP archive', ['from' => $tempPath, 'to' => $zipPath]);
+
+        return null;
+      }
+
+      $success = true;
+
+      return $zipPath;
+    } finally {
+      if (!$success) {
+        if (!$closed) {
+          @$zip->close();
+        }
+        if (file_exists($tempPath)) {
+          @unlink($tempPath);
+        }
+      }
     }
-
-    // Add any other files from extract dir not covered by mappings
-    $this->addRemainingFiles($zip, $extractPath, $mappings);
-
-    $zip->close();
-
-    // Atomic move to final path
-    rename($tempPath, $zipPath);
-
-    return $zipPath;
   }
 
   public function invalidateCache(string $projectId): void
