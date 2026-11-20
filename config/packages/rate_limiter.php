@@ -121,6 +121,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 100,
         'interval' => '1 minute',
       ],
+      'code_translation_global' => [
+        'policy' => 'sliding_window',
+        'limit' => 32,
+        'interval' => '1 minute',
+      ],
       'studio_create_daily' => [
         'policy' => 'sliding_window',
         'limit' => 5,

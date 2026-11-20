@@ -1,5 +1,6 @@
-import { escapeHtml } from '../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import './CodeViewInline.css'
+import { bindCodeViewTranslation } from './CodeViewTranslation'
 
 const COLORS = {
   event: '#CF5717',
@@ -46,7 +47,17 @@ function renderParts(parts) {
   if (!Array.isArray(parts)) return ''
   return parts
     .map((part) => {
-      const text = escapeHtml(part.text || '')
+      const text =
+        Array.isArray(part.segments) && part.segments.length > 0
+          ? part.segments
+              .map((segment) => {
+                const original = escapeHtml(segment.text || '')
+                return segment.key
+                  ? `<span data-cv-translation-key="${escapeAttr(segment.key)}" data-cv-translation-kind="${escapeAttr(segment.kind)}">${original}</span>`
+                  : original
+              })
+              .join('')
+          : escapeHtml(part.text || '')
       if (part.kind === 'formula') return `<span class="cv-field">${text}</span>`
       if (part.kind === 'choice') return `<span class="cv-field cv-field--choice">${text}</span>`
       return text
@@ -413,7 +424,9 @@ async function loadCodeView(url, container, panel) {
   if (response?.ok) {
     try {
       panel.innerHTML = renderCodeView(await response.json(), container)
-      bindToggleEvents(panel)
+      bindCodeViewTranslation(container, panel, response.headers.get('X-Code-Export-Key'), () =>
+        loadCodeView(url, container, panel),
+      )
       return true
     } catch (e) {
       console.error('Failed to show code view', e)
@@ -432,7 +445,6 @@ async function loadCodeView(url, container, panel) {
     escapeHtml(container.dataset.transRetry || 'Try again') +
     '</button>' +
     '</div>'
-  bindToggleEvents(panel)
   return false
 }
 
@@ -445,6 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chevron = toggleBtn.querySelector('.project-section-toggle__chevron')
   const codeUrl = container.dataset.codeUrl
   let loaded = false
+  bindToggleEvents(panel)
 
   toggleBtn.addEventListener('click', async () => {
     const isHidden = panel.classList.contains('d-none')

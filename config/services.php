@@ -225,6 +225,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(StudiosApi::class)->tag('open_api_server.api', ['api' => 'studios']);
   $services->set(ModerationApi::class)->tag('open_api_server.api', ['api' => 'moderation']);
   $services->set(TranslationApi::class)->tag('open_api_server.api', ['api' => 'translation']);
+  $services->set(App\Api\CodeViewTranslationApi::class)->tag('open_api_server.api', ['api' => 'codeViewTranslation']);
   $services->set(JobsApi::class)->tag('open_api_server.api', ['api' => 'jobs']);
 
   // Messenger's restart signal (messenger:stop-workers), shared by every release: in the database, not the release's

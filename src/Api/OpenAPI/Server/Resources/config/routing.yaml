@@ -60,6 +60,15 @@ open_api_server_authentication_authenticationrefreshpost:
   defaults:
     _controller: open_api_server.controller.authentication::authenticationRefreshPostAction
 
+# codeViewTranslation
+open_api_server_codeViewTranslation_projectsidcodetranslationget:
+  path: /projects/{id}/code/translation
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.codeViewTranslation::projectsIdCodeTranslationGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
 # comments
 open_api_server_comments_commentsiddelete:
   path: /comments/{id}

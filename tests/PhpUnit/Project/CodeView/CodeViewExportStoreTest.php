@@ -118,6 +118,23 @@ class CodeViewExportStoreTest extends TestCase
     $this->assertSame(['scenes' => ['<program><object name="Dog"/></program>']], $store->get($this->project));
   }
 
+  public function testTranslationKeyUsesTheServedExportVersion(): void
+  {
+    $runner = $this->createMock(CodeExportRunner::class);
+    $runner->method('getVersion')->willReturnOnConsecutiveCalls('v1', 'v2');
+    $runner->expects($this->once())->method('export')->willReturn(['scenes' => [], 'translation_parts' => true]);
+    $store = $this->store($runner);
+    $key = sha1('<program><object name="Cat"/></program>').'-v1';
+
+    $snapshot = $store->snapshot($this->project);
+    $this->assertNotNull($snapshot);
+    $this->assertSame($key, CodeViewExportStore::translationKey($snapshot));
+    $snapshot = $store->storedSnapshot($this->project);
+    $this->assertNotNull($snapshot);
+    $this->assertSame($key, CodeViewExportStore::translationKey($snapshot));
+    $this->assertSame([], $this->bus->dispatched);
+  }
+
   public function testAViewDoesNotWaitWhenAllExportSlotsAreBusy(): void
   {
     $runner = $this->createMock(CodeExportRunner::class);

@@ -386,6 +386,16 @@ class BrowserContext extends MinkContext implements Context
     $this->getSession()->getPage()->find('css', $arg1)->click();
   }
 
+  /** @When /^I activate the button "([^"]*)"$/ */
+  public function iActivateButton(string $selector): void
+  {
+    $this->assertSession()->elementExists('css', $selector);
+    $this->getSession()->executeScript(sprintf(
+      'document.querySelector(%s).click()',
+      json_encode($selector, JSON_THROW_ON_ERROR)
+    ));
+  }
+
   /**
    * @When /^I click browser's back button$/
    */
