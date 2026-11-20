@@ -1382,6 +1382,9 @@ paths:
       responses:
         '200':
           description: 'OK'
+          headers:
+            X-Code-Export-Key:
+              $ref: '#/components/headers/X-Code-Export-Key'
           content:
             application/json:
               schema:
@@ -1398,6 +1401,65 @@ paths:
                 type: integer
                 example: 5
               description: 'Seconds to wait before retrying'
+
+  '/projects/{id}/code/translation':
+    get:
+      tags:
+        - 'CodeViewTranslation'
+      summary: 'Machine-translate project text in the code view'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - name: target_language
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: source_language
+          in: query
+          schema:
+            type: string
+        - name: poll
+          in: query
+          description: 'Read job status without starting another job'
+          schema:
+            type: boolean
+        - name: resume
+          in: query
+          description: 'Start another job for the remaining texts of a partial result'
+          schema:
+            type: boolean
+        - name: X-Code-Export-Key
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Complete or partial translation, or a request to select the source language'
+          headers:
+            X-Code-Export-Key:
+              $ref: '#/components/headers/X-Code-Export-Key'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeViewTranslationResponse'
+        '202':
+          description: 'Accepted, poll again after Retry-After seconds'
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Displayed export is stale or does not support translation'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          description: 'Code export or translation service unavailable'
 
   '/projects/{id}/code-statistics':
     get:
@@ -4132,6 +4194,11 @@ components:
   ###
 
   headers:
+    X-Code-Export-Key:
+      description: 'Identifies the code and the actual export version served to the client'
+      schema:
+        type: string
+
     X-Response-Hash:
       schema:
         type: string
@@ -6710,6 +6777,47 @@ components:
         text:
           type: string
           example: '100'
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewTextSegment'
+
+    CodeViewTextSegment:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum: ['formula', 'string', 'variable', 'list']
+        text:
+          type: string
+        key:
+          description: 'Identifies a segment with a machine-translatable source'
+          type: string
+
+    CodeViewTranslationResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: ['complete', 'partial', 'source_required']
+        source_language:
+          type: string
+        target_language:
+          type: string
+        can_resume:
+          type: boolean
+        translations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewTranslatedText'
+
+    CodeViewTranslatedText:
+      type: object
+      properties:
+        key:
+          type: string
+        text:
+          type: string
 
     CodeViewBrickSection:
       type: object
