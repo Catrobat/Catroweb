@@ -92,6 +92,7 @@ class TextSanitizer
     $text = $this->redactEmails($text);
     $text = $this->redactPhoneNumbers($text);
     $text = $this->redactContactLinks($text);
+    $text = $this->redactMessengerHandles($text);
     $text = $this->redactUriSchemes($text);
 
     return $this->filterProfanity($text, $locale);
@@ -127,6 +128,19 @@ class TextSanitizer
   private function redactContactLinks(string $text): string
   {
     return preg_replace(self::CONTACT_LINKS_PATTERN, self::REPLACEMENT_CONTACT, $text) ?? $text;
+  }
+
+  /**
+   * A bare handle after a messenger name ("TG: @name", "discord @name") is a contact channel
+   * even without a link. A lone @mention stays.
+   */
+  private function redactMessengerHandles(string $text): string
+  {
+    return preg_replace(
+      '/(?<![\p{L}\d])(telegram|tg|тгк?|телеграм\w*|телег[аи]|discord|дискорд|дс|whats\s?app|ватсап|snap(?:chat)?|signal|kik)(?![\p{L}\d])([\s:\-–—]*)@[\w.]{2,}(?:[\s,]+@[\w.]{2,})*/iu',
+      '$1$2'.self::REPLACEMENT_CONTACT,
+      $text
+    ) ?? $text;
   }
 
   private function redactUriSchemes(string $text): string
