@@ -27,6 +27,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[CoversClass(NotificationsResponseManager::class)]
 class AdminReviewNotificationResponseTest extends TestCase
 {
+  #[DataProvider('adminActions')]
+  public function testAdminNotificationsLinkToTheModerationQueueOfThatContent(string $action): void
+  {
+    self::assertSame('admin_moderation_reports_list?filter[content_id][type]=3&filter[content_id][value]=project-id', $this->reviewUrl($action));
+  }
+
   /**
    * @return array<string, array{string}>
    */
@@ -37,12 +43,6 @@ class AdminReviewNotificationResponseTest extends TestCase
       'flagged for review' => [AutoModerationService::ACTION_REVIEW_REQUESTED],
       'suspected brigading' => [ContentModerationAction::ACTION_BRIGADING_SUSPECTED],
     ];
-  }
-
-  #[DataProvider('adminActions')]
-  public function testAdminNotificationsLinkToTheModerationQueueOfThatContent(string $action): void
-  {
-    self::assertSame('admin_moderation_reports_list?filter[content_id][type]=3&filter[content_id][value]=project-id', $this->reviewUrl($action));
   }
 
   public function testAnOwnerWhoseContentWasAutoHiddenGetsNoReviewLink(): void

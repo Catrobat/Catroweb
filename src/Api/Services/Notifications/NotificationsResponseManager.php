@@ -6,6 +6,7 @@ namespace App\Api\Services\Notifications;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Traits\KeysetCursorTrait;
+use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -24,7 +25,6 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportCategory;
-use App\DB\Entity\Moderation\ContentModerationAction;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportProcessor;
