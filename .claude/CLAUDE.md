@@ -59,6 +59,7 @@ Ports: app 8080, phpMyAdmin 8081, MariaDB 3306 (`db.catroweb.dev` / `catroweb_de
 - New page-level UI behavior goes into Stimulus controllers. Migrate existing vanilla files incrementally when touching them; no new `DOMContentLoaded` bootstrapping where a controller can own the lifecycle.
 - Event delegation: use `.closest()`, not `.matches()`.
 - Nothing may download alongside the render-blocking CSS: `modulepreload` is off (`config/packages/pentatrion_vite.php`) and Early Hints carry only stylesheets. On a slow phone the ~30 JS chunks shared the line with the CSS and delayed the first paint by ~0.7 s. Render the LCP text in Twig, not from an API fetch.
+- A new or removed translation key goes into **all 73** `translations/catroweb.*.yaml` in the same PR (AI translation is fine, say so in the PR); `TranslationFilesTest` fails otherwise. See `docs/contributor-guide/Translations.md`.
 - Twig → JS data: `data-trans-*` for translations, `data-base-url` for the API prefix; escape with `escapeHtml()`/`escapeAttr()`.
 - Write API calls must parse a 403 body: `"Email verification required."` vs `"Your account has been suspended."` vs generic.
 - Guest → login → action: store the pending action in `sessionStorage`, validate context (same project ID), remove it immediately after reading.
