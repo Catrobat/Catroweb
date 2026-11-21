@@ -99,6 +99,17 @@ class ProjectManager
   }
 
   /**
+   * Whether a list of $owner_id's projects must leave out not-for-kids projects for the current
+   * user. Filtered in the query, so keyset paging (limit + 1) still sees whether more rows exist.
+   */
+  public function hidesNotForKidsOf(string $owner_id): bool
+  {
+    $user = $this->security->getUser();
+
+    return $user instanceof User && $user->isMinor() && $user->getId() !== $owner_id;
+  }
+
+  /**
    * @param array<Project> $projects
    *
    * @return array<Project>
@@ -533,17 +544,17 @@ class ProjectManager
   /**
    * @return Project[]
    */
-  public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null, bool $safe_for_kids_only = false): array
   {
-    return $this->project_repository->getPublicUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id);
+    return $this->project_repository->getPublicUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id, $safe_for_kids_only);
   }
 
   /**
    * @return Project[]
    */
-  public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null, bool $safe_for_kids_only = false): array
   {
-    return $this->project_repository->getUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id);
+    return $this->project_repository->getUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id, $safe_for_kids_only);
   }
 
   /**

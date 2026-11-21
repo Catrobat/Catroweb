@@ -455,6 +455,7 @@ export class ProjectList {
           })
           if (delResp.ok) {
             wrapper.remove()
+            this.observeEnd()
           } else {
             const { showSnackbar, SnackbarDuration } = await import('../Layout/Snackbar')
             showSnackbar(

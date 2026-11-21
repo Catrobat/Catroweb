@@ -7,15 +7,15 @@ Feature: A profile loads its projects page by page while scrolling
       | 1  | Pager |
     And there are projects:
       | id | name | owned by |
-      | 1 | paged project 1 | Pager |
-      | 2 | paged project 2 | Pager |
-      | 3 | paged project 3 | Pager |
-      | 4 | paged project 4 | Pager |
-      | 5 | paged project 5 | Pager |
-      | 6 | paged project 6 | Pager |
-      | 7 | paged project 7 | Pager |
-      | 8 | paged project 8 | Pager |
-      | 9 | paged project 9 | Pager |
+      | 1 | paged project 01 | Pager |
+      | 2 | paged project 02 | Pager |
+      | 3 | paged project 03 | Pager |
+      | 4 | paged project 04 | Pager |
+      | 5 | paged project 05 | Pager |
+      | 6 | paged project 06 | Pager |
+      | 7 | paged project 07 | Pager |
+      | 8 | paged project 08 | Pager |
+      | 9 | paged project 09 | Pager |
       | 10 | paged project 10 | Pager |
       | 11 | paged project 11 | Pager |
       | 12 | paged project 12 | Pager |
@@ -50,5 +50,6 @@ Feature: A profile loads its projects page by page while scrolling
     When I scroll to the bottom of the page
     And I wait for AJAX to finish
     And I scroll to the bottom of the page
-    And I wait for AJAX to finish
-    Then I should see 35 "#user-projects .project-list__project"
+    Then I wait for the element "#user-projects" to contain "paged project 01"
+    And I wait for the element "#user-projects" to contain "paged project 35"
+    And I should see 35 "#user-projects .project-list__project"
