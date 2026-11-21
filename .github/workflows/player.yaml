@@ -1,6 +1,6 @@
 # Builds the browser player: Catroid's own engine at the commit in player/catroid.commit, compiled to JavaScript
-# with gdx-teavm (see player/README.md). Runs when the player changes and nightly; player-catroid-pin.yaml calls it to
-# run the same checks at Catroid's develop HEAD before it proposes bumping the pin.
+# with gdx-teavm (see player/README.md). Runs when the player or share's Scratch converter changes, and nightly;
+# player-catroid-pin.yaml calls it to run the same checks at Catroid's develop HEAD before it proposes bumping the pin.
 name: Player
 
 permissions:
@@ -8,10 +8,10 @@ permissions:
 
 on:
   pull_request:
-    paths: ['player/**', '.github/workflows/player.yaml']
+    paths: ['player/**', 'src/Project/Scratch/**', '.github/workflows/player.yaml']
   push:
     branches: [main]
-    paths: ['player/**', '.github/workflows/player.yaml']
+    paths: ['player/**', 'src/Project/Scratch/**', '.github/workflows/player.yaml']
   schedule:
     - cron: '0 3 * * *'
   workflow_dispatch:
@@ -64,6 +64,22 @@ jobs:
       - name: Conformance (Catroid's catrobatTests on the stage, compared with conformance.tsv)
         run: ./scripts/conformance.sh
 
+      - name: PHP, rsvg-convert and sox for share's Scratch converter
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5
+          extensions: imagick
+          tools: composer
+
+      - name: Catroweb's PHP dependencies (the converter's autoloader)
+        working-directory: .
+        run: |
+          sudo apt-get install -y --no-install-recommends librsvg2-bin sox libsox-fmt-mp3
+          composer install --no-dev --no-scripts --prefer-dist --no-progress
+
+      - name: Scratch imports (fixtures/scratch converted by share's converter, loaded and played)
+        run: ./scripts/scratch_check.sh
+
       - name: Upload the player
         if: always()
         uses: actions/upload-artifact@v7
@@ -77,3 +93,4 @@ jobs:
             player/build/web/loader-check/page.html
             player/build/web/loader-check/chrome.log
             player/build/web/conformance/results.tsv
+            player/build/web/scratch/check/page.html

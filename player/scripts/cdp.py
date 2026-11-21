@@ -5,7 +5,8 @@ that need more than --dump-dom: sensors_check.py and restart_check.py.
         page = browser.open()                   # a new tab's session
         browser.send("Page.navigate", page, url=url)
         browser.evaluate(page, "1 + 1")
-        browser.console                         # the page's console messages and exceptions"""
+        browser.console                         # the page's console messages and exceptions
+        browser.errors                          # only its exceptions and console.error calls"""
 import fcntl
 import json
 import os
@@ -38,6 +39,7 @@ class Chrome:
         self.buffer = b""
         self.ids = iter(range(1, 10**6))
         self.console = []
+        self.errors = []  # uncaught exceptions and console.error, also in console
 
     def __enter__(self):
         return self
@@ -65,6 +67,8 @@ class Chrome:
                 event = reply["params"]
                 self.console.append(event.get("exceptionDetails", {}).get("exception", {}).get("description", "")[:1500]
                                     or " ".join(str(a.get("value", "")) for a in event.get("args", []))[:300])
+                if reply["method"] == "Runtime.exceptionThrown" or event.get("type") == "error":
+                    self.errors.append(self.console[-1] or event.get("exceptionDetails", {}).get("text", "error"))
             if reply.get("id") == message_id:
                 if "error" in reply:
                     raise SystemExit(f"{method}: {reply['error']}")
