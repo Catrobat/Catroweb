@@ -12,8 +12,6 @@ username: Nome utente
 password: Password
 email: Email
 about: Su Catrobat
-chat: Chat e forum
-others: Altri
 googlePlay: Google Play Store
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Nessun riconoscimento disponibile.
 notesAndCreditsDescription: Come hai creato questo progetto? Hai usato idee, script o opere altrui? Ringraziali qui.
 projectImportedFromScratch: Questo progetto è stato importato da Scratch. Puoi controllare il progetto originale
 scratchImportedProjectLinkHere: qui.
-country: Paese
 privacyPolicy: Politica sulla Privacy
 projectDetails: Dettagli
 somethingWentWrong: 'Ooooops qualcosa è andato storto.'
@@ -47,7 +44,6 @@ doesNotExist: 'La risorsa richiesta non esiste.'
 pleaseTryAgain: 'Per favore riprova!'
 tryAgainButton: 'Riprova'
 more: 'altro'
-less: 'meno'
 show-more: 'Mostra di più'
 more-information: 'Ulteriori informazioni'
 less-information: 'Meno informazioni'
@@ -68,7 +64,6 @@ users: "Utenti"
 studios: 'Studi'
 oauthPopUpTitle: "Informazioni accesso account esterno"
 oauthInfo: 'Hai appena usato un account esterno per accedere. Abbiamo creato un nome utente casuale. Se vuoi cambiare il tuo nome utente o creare una nuova password per il tuo account, vai alla pagina del profilo.'
-statistics: "Statistiche"
 languageSelection: "Seleziona la lingua"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Persone che hanno reagito a questo progetto'
     all: "Tutti"
-  languageVersion: 'Versione del linguaggio di Catrobat: %languageVersion%'
   updateAppHeaderDownload: Download non possibile
   updateAppTextDownload: Aggiorna l'app alla versione più recente. Tieni presente che non tutte le funzionalità Android sono ancora disponibili su IOS.
   checkout_this_project: 'Dai un''occhiata a questo progetto Catrobat'
@@ -218,6 +212,18 @@ project:
   createTranslation: Crea traduzione
   deletedComment: '**Eliminato**'
   notForKids: 'Non adatto ai bambini'
+  customUrl:
+    title: 'URL personalizzato'
+    hint: 'Scegli un nome breve per il link di questo progetto: 3-50 lettere minuscole, cifre o trattini. Lascia vuoto per rimuoverlo.'
+  playInBrowser: 'Gioca nel browser'
+  madeWithVersion: 'Creato con la versione dell''app %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Creato con una versione precedente dell''app'
+    text: 'Questo progetto non può ancora essere giocato nel browser. Aprilo in Pocket Code e caricalo di nuovo per aggiornarlo.'
+  translateAgain: 'Traduci di nuovo con queste lingue'
+  prefillMachineTranslation: 'Compila con traduzione automatica'
+  machineTranslationFailed: 'La traduzione automatica non è disponibile al momento. Riprova più tardi.'
+  machineTranslationUnsupported: 'La traduzione automatica non è disponibile per questa lingua.'
 remixGraph:
   showRemixGraph: 'Visualizza il grafo dei Remix'
   by: 'di'
@@ -407,6 +413,10 @@ search:
   noProjects: Nessun progetto trovato
   noStudios: 'Nessuno studio trovato'
   sameSearchMessage: 'Sembra che tu sia già qui! Vuoi provare un''altra ricerca?'
+  noResults: 'Nessun risultato per “%query%”'
+  scratchProjects: 'Progetti Scratch'
+  scratchConverting: 'Conversione per %app%…'
+  scratchConvertingSnackbar: 'Conversione di “%name%” in corso — può richiedere qualche secondo'
 menu:
   profile: Il mio profilo
   login: 'Accedi'
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: 'Verifica la tua email'
+  leaderboard:
+    all_time: 'Migliori creatori'
+    this_week: 'Migliori creatori della settimana'
+    points: 'punti'
 api:
   registerUser:
     emailMissing: 'Email mancante'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: 'Descrizione troppo lunga'
     creditsTooLong: 'Note e crediti troppo lunghi'
     screenshotInvalid: 'Screenshot del progetto non valido o non supportato'
+    slugInvalid: 'L''URL personalizzato deve contenere 3-50 lettere minuscole, cifre o singoli trattini, con almeno una lettera'
+    slugReserved: 'Questo URL personalizzato è riservato'
+    slugTaken: 'Questo URL personalizzato è già in uso'
   projectsPost:
     invalid_checksum: 'Checksum non valido. Riprova a caricare!'
     upload_error: 'Errore durante il caricamento. Riprova a caricare!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'Script'
   looks: 'Costumi'
   sounds: 'Suoni'
+  unavailable: 'Il codice di questo progetto non può essere mostrato.'
+  translation:
+    action: 'Traduci'
+    translateTo: 'Traduci in %language%'
+    translateAgain: 'Traduci di nuovo'
+    stillShowing: 'Ancora in %language%'
+    original: 'Mostra originale'
+    resume: 'Continua a tradurre'
+    source: 'Da'
+    target: 'A'
+    auto: 'Rileva lingua'
+    loading: 'Traduzione del codice…'
+    complete: 'Tradotto automaticamente in %language%'
+    partial: 'Tradotto in parte'
+    partialInLanguage: 'Tradotto in parte in %language%'
+    sourceRequired: 'Scegli la lingua di origine per tradurre questo codice.'
+    unsupported: 'La traduzione non è disponibile per queste lingue.'
+    error: 'Impossibile tradurre il codice. Riprova.'
 codeStatistics:
   title: "Statistiche sul codice"
   error: "Le statistiche sul codice non possono essere visualizzate."
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Il tuo progetto "%project_name%" è stato rimosso automaticamente per inattività. Caricalo di nuovo se vuoi ancora condividerlo.'
   noProjects: 'Sembra che tu non abbia notifiche dei progetti.'
+  studio-deletion-warning:
+    message: 'Il tuo studio "%studio_name%" non ha progetti e non è successo nulla per 90 giorni. Verrà eliminato tra %days% giorni a meno che tu non aggiunga un progetto.'
+  project-files-lost:
+    message: 'Un errore del server ha fatto perdere i file di %count% dei tuoi progetti: %projects%. Rimangono nascosti finché non li carichi di nuovo da Pocket Code. I progetti non ricaricati entro 14 giorni verranno eliminati.'
+    more: 'e altri %count%'
+  moderation-warning:
+    message: 'Un moderatore ha esaminato una segnalazione sui tuoi contenuti e ha stabilito che violano le regole della nostra community. Rispetta le regole, altrimenti la prossima volta il tuo account potrebbe essere sospeso.'
+    deletion: 'Il contenuto nascosto verrà eliminato %days% giorni dopo essere stato nascosto, a meno che tu non lo corregga o faccia appello.'
+  moderation-hidden:
+    message: 'Un moderatore ha esaminato una segnalazione sui tuoi contenuti e li ha nascosti perché violano le regole della nostra community.'
+  moderation-reason:
+    image: '{1}Un''immagine (%names%) sembrava un contenuto per adulti.|]1,Inf]Alcune immagini (%names%) sembravano contenuti per adulti.'
+    screenshot: 'Lo screenshot sembrava un contenuto per adulti.'
+    cover: 'L''immagine di copertina sembrava un contenuto per adulti.'
+    text:
+      name: 'Il nome sembrava dire che è solo per adulti.'
+      description: 'La descrizione sembrava dire che è solo per adulti.'
+      credits: 'Le note e i crediti sembravano dire che è solo per adulti.'
+      about: 'Il tuo testo "Informazioni su di me" sembrava dire che è solo per adulti.'
+      currently_working_on: 'Il tuo testo "Attualmente in lavorazione" sembrava dire che è solo per adulti.'
+      username: 'Il tuo nome utente sembrava dire che è solo per adulti.'
+    category:
+      copyright: 'Motivo: sembra usare il lavoro di altre persone senza permesso.'
+      sexual_content: 'Motivo: sembrava un contenuto per adulti.'
+      graphic_violence: 'Motivo: sembrava troppo violento.'
+      hateful_content: 'Motivo: sembrava offensivo o pieno d''odio verso gli altri.'
+      improper_rating: 'Motivo: sembrava non adatto ai bambini.'
+      spam: 'Motivo: sembrava spam.'
+      other: 'Motivo: un moderatore ha trovato un problema.'
+      inappropriate: 'Motivo: sembrava inappropriato.'
+      harassment: 'Motivo: sembrava bullizzare o molestare qualcuno.'
+      impersonation: 'Motivo: sembrava fingersi qualcun altro.'
+      inappropriate_profile: 'Motivo: il profilo sembrava inappropriato.'
+      spam_account: 'Motivo: sembrava un account di spam.'
+      inappropriate_content: 'Motivo: sembrava inappropriato.'
 clipboard:
   success: 'Link copiato negli appunti!'
   success_project: Link al progetto copiato negli appunti!
@@ -649,7 +719,6 @@ previous: Precedente
 media-packages:
   title: Risorse multimediali
   description: Nelle seguenti categorie è possibile trovare altri attori e oggetti da aggiungere ai progetti PocketCode.
-  theme-special: "%flavor% Tema Speciale"
   search-results: Risultati di ricerca nelle librerie multimediali
 flavor:
   pocketcode: Pocket Code
@@ -866,6 +935,10 @@ studio:
       ban_failed: 'Qualcosa è andato storto mentre si espelleva questo membro. Riprova più tardi.'
       demote_member: 'Retrocedi l''amministratore a membro'
       demotion_failed: 'Qualcosa è andato storto durante la retrocessione di questo amministratore. Riprova più tardi.'
+      banned_members: 'Membri espulsi'
+      unban_member: 'Rimuovi espulsione'
+      unban_hint: 'Rimuovere un''espulsione permette alla persona di unirsi di nuovo normalmente. Non la riaggiunge allo studio.'
+      unban_failed: 'Impossibile aggiornare i membri espulsi. Riprova.'
     join_requests:
       title: 'Richieste di adesione'
       accept: 'Accetta'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'Descrizione'
       toggle_allow_comments: 'Commenti'
       toggle_privacy: 'Pubblico'
+    banned: 'Non puoi unirti a questo studio.'
+    invites:
+      title: 'Codici d''invito'
+      hint: 'Chiunque abbia il codice o il link si unisce subito a questo studio, senza approvazione. Revocando un codice, i membri già entrati restano.'
+      expires_on: 'Scade il (facoltativo)'
+      max_uses: 'Utilizzi max. (facoltativo)'
+      create: 'Crea codice d''invito'
+      uses: 'Usato %uses% volte'
+      uses_max: 'Usato %uses% di %max% volte'
+      expires: 'Scade il %date%'
+      qr_alt: 'Scansiona questo codice QR per unirti allo studio'
+      copy_link: 'Copia link'
+      copied: 'Link d''invito copiato negli appunti!'
+      revoke: 'Revoca'
+      none: 'Ancora nessun codice d''invito.'
+      error: 'Qualcosa è andato storto con il codice d''invito. Riprova.'
+  join_with_code:
+    title: 'Unisciti con un codice'
+    hint: 'Hai ricevuto un codice d''invito dal tuo insegnante o da un amministratore dello studio? Inseriscilo qui per unirti allo studio.'
+    code: 'Codice d''invito'
+    invalid: 'Questo codice non è valido. Potrebbe essere scaduto o revocato.'
+    banned: 'Sei stato espulso da questo studio.'
+    rate_limited: 'Troppi tentativi. Aspetta qualche minuto e riprova.'
 media_library:
   file:
     size: 'Dimensione: %size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: 'Il tuo account è stato sospeso a causa di segnalazioni della community. Puoi fare ricorso contro questa decisione.'
 Reports: 'Segnalazioni'
 members: 'membri'
+inactiveAccount:
+  subject: 'Il tuo account Catrobat verrà eliminato'
+  title: 'Ci manchi!'
+  content: 'Non accedi al tuo account Catrobat "%username%" da due anni e non contiene progetti né commenti. Per mantenere viva la nostra community, lo elimineremo tra %days% giorni. Se vuoi tenerlo, basta accedere una volta.'
+  button: 'Accedi per tenere il mio account'

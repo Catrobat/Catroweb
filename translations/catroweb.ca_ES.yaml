@@ -12,8 +12,6 @@ username: Usuari
 password: Contrasenya
 email: Correu electrònic
 about: Quant a Catrobat
-chat: Xat i fòrums
-others: Altres
 googlePlay: Google Play
 iosAppStore: App Store d'iOS
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No hi ha notes ni crèdits disponibles.
 notesAndCreditsDescription: Com has creat aquest projecte? Has fet servir idees, scripts o dibuixos d'altres persones? Dona'ls les gràcies aquí.
 projectImportedFromScratch: Aquest projecte s'ha importat de MIT Scratch. Pots veure el projecte original
 scratchImportedProjectLinkHere: aquí.
-country: País
 privacyPolicy: Política de privacitat
 projectDetails: Detalls
 somethingWentWrong: 'Ups... alguna cosa ha anat malament.'
@@ -47,7 +44,6 @@ doesNotExist: 'El recurs sol·licitat no existeix.'
 pleaseTryAgain: 'Torna-ho a provar!'
 tryAgainButton: 'Torna-ho a provar'
 more: 'més'
-less: 'menys'
 show-more: 'Més informació'
 more-information: 'Més informació'
 less-information: 'Menys informació'
@@ -68,7 +64,6 @@ users: "Usuari"
 studios: "Estudis"
 oauthPopUpTitle: "Informació sobre l'inici de sessió amb un compte extern"
 oauthInfo: 'Acabes d''iniciar sessió amb un compte extern. Hem creat un nom d''usuari aleatori per a tu. Si vols canviar el teu nom d''usuari o crear una contrasenya nova per al teu compte, ves a la teva pàgina de perfil.'
-statistics: "Estadístiques"
 languageSelection: "Selecció d'idioma"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Persones que han reaccionat a aquest projecte"
     all: "Totes"
-  languageVersion: 'Versió del llenguatge Catrobat: %languageVersion%'
   updateAppHeaderDownload: No es pot descarregar
   updateAppTextDownload: Actualitza l'aplicació a la versió més recent. Tingues en compte que no totes les funcions d'Android estan disponibles encara a iOS.
   checkout_this_project: Fes una ullada a aquest projecte de Catrobat
@@ -218,6 +212,18 @@ project:
   createTranslation: Crea una traducció
   deletedComment: '**Eliminat**'
   notForKids: No adequat per a infants
+  customUrl:
+    title: 'URL personalitzat'
+    hint: 'Tria un nom curt per a l''enllaç d''aquest projecte: de 3 a 50 lletres minúscules, xifres o guions. Deixa-ho buit per eliminar-lo.'
+  playInBrowser: 'Juga al navegador'
+  madeWithVersion: 'Fet amb la versió %app% de l''aplicació (Catrobat %language%)'
+  oldVersion:
+    title: 'Fet amb una versió antiga de l''aplicació'
+    text: 'Aquest projecte encara no es pot jugar al navegador. Obre''l a Pocket Code i torna''l a pujar per actualitzar-lo.'
+  translateAgain: 'Torna a traduir amb aquests idiomes'
+  prefillMachineTranslation: 'Omple amb traducció automàtica'
+  machineTranslationFailed: 'Ara mateix la traducció automàtica no està disponible. Torna-ho a provar més tard.'
+  machineTranslationUnsupported: 'La traducció automàtica no està disponible per a aquest idioma.'
 remixGraph:
   showRemixGraph: 'Mostra el gràfic de remixos'
   by: 'de'
@@ -407,6 +413,10 @@ search:
   noProjects: No s'ha trobat cap projecte
   noStudios: No s'ha trobat cap estudi
   sameSearchMessage: "Sembla que ja hi ets! Vols provar una altra cerca?"
+  noResults: 'No hi ha resultats per a «%query%»'
+  scratchProjects: 'Projectes de Scratch'
+  scratchConverting: 'S''està convertint per a %app%…'
+  scratchConvertingSnackbar: 'S''està convertint «%name%» — pot trigar uns segons'
 menu:
   profile: Perfil
   login: Inicia sessió
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: 'Verifica el teu correu electrònic'
+  leaderboard:
+    all_time: 'Millors creadors'
+    this_week: 'Millors creadors d''aquesta setmana'
+    points: 'punts'
 api:
   registerUser:
     emailMissing: 'Falta el correu electrònic'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: 'La descripció és massa llarga'
     creditsTooLong: 'Les notes i els crèdits són massa llargs'
     screenshotInvalid: 'La captura de pantalla del projecte no és vàlida o no és compatible'
+    slugInvalid: 'L''URL personalitzat ha de tenir de 3 a 50 lletres minúscules, xifres o guions simples, amb almenys una lletra'
+    slugReserved: 'Aquest URL personalitzat està reservat'
+    slugTaken: 'Aquest URL personalitzat ja està agafat'
   projectsPost:
     invalid_checksum: 'Suma de verificació no vàlida. Torna a provar de pujar-lo!'
     upload_error: 'Error durant la pujada. Torna a provar de pujar-lo!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'Scripts'
   looks: 'Aparences'
   sounds: 'Sons'
+  unavailable: 'No es pot mostrar el codi d''aquest projecte.'
+  translation:
+    action: 'Tradueix'
+    translateTo: 'Tradueix al %language%'
+    translateAgain: 'Torna a traduir'
+    stillShowing: 'Encara es mostra en %language%'
+    original: 'Mostra l''original'
+    resume: 'Continua traduint'
+    source: 'De'
+    target: 'A'
+    auto: 'Detecta l''idioma'
+    loading: 'S''està traduint el codi…'
+    complete: 'Traduït automàticament al %language%'
+    partial: 'Traduït parcialment'
+    partialInLanguage: 'Traduït parcialment al %language%'
+    sourceRequired: 'Tria l''idioma d''origen per traduir aquest codi.'
+    unsupported: 'La traducció no està disponible per a aquests idiomes.'
+    error: 'No s''ha pogut traduir el codi. Torna-ho a provar.'
 codeStatistics:
   title: "Estadístiques del codi"
   error: "No es poden mostrar les estadístiques del codi."
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'El teu projecte "%project_name%" s''ha eliminat automàticament per inactivitat. Torna''l a pujar si encara el vols compartir.'
   noProjects: "Sembla que no tens cap notificació de projectes."
+  studio-deletion-warning:
+    message: 'El teu estudi "%studio_name%" no té projectes i fa 90 dies que no hi passa res. S''eliminarà d''aquí a %days% dies si no hi afegeixes un projecte.'
+  project-files-lost:
+    message: 'Un error del servidor ha fet perdre els fitxers de %count% dels teus projectes: %projects%. Estaran amagats fins que els tornis a pujar des de Pocket Code. Els projectes que no es tornin a pujar en 14 dies s''eliminaran.'
+    more: 'i %count% més'
+  moderation-warning:
+    message: 'Un moderador ha revisat una denúncia sobre el teu contingut i ha vist que incompleix les normes de la comunitat. Segueix les normes, o la propera vegada el teu compte podria ser suspès.'
+    deletion: 'El contingut amagat s''eliminarà %days% dies després d''haver-se amagat, tret que el corregeixis o hi presentis un recurs.'
+  moderation-hidden:
+    message: 'Un moderador ha revisat una denúncia sobre el teu contingut i l''ha amagat perquè incompleix les normes de la comunitat.'
+  moderation-reason:
+    image: '{1}Una imatge (%names%) semblava contingut per a adults.|]1,Inf]Algunes imatges (%names%) semblaven contingut per a adults.'
+    screenshot: 'La captura de pantalla semblava contingut per a adults.'
+    cover: 'La imatge de portada semblava contingut per a adults.'
+    text:
+      name: 'Semblava que el nom deia que això és només per a adults.'
+      description: 'Semblava que la descripció deia que això és només per a adults.'
+      credits: 'Semblava que les notes i crèdits deien que això és només per a adults.'
+      about: 'Semblava que el teu text «Sobre mi» deia que això és només per a adults.'
+      currently_working_on: 'Semblava que el teu text «Ara treballo en» deia que això és només per a adults.'
+      username: 'Semblava que el teu nom d''usuari deia que això és només per a adults.'
+    category:
+      copyright: 'Motiu: sembla que fa servir la feina d''altres persones sense permís.'
+      sexual_content: 'Motiu: semblava contingut per a adults.'
+      graphic_violence: 'Motiu: semblava massa violent.'
+      hateful_content: 'Motiu: semblava ofensiu o d''odi cap a altres persones.'
+      improper_rating: 'Motiu: semblava que no és adequat per a infants.'
+      spam: 'Motiu: semblava correu brossa.'
+      other: 'Motiu: un moderador hi ha trobat un problema.'
+      inappropriate: 'Motiu: semblava inadequat.'
+      harassment: 'Motiu: semblava que assetjava o molestava algú.'
+      impersonation: 'Motiu: semblava que es feia passar per una altra persona.'
+      inappropriate_profile: 'Motiu: el perfil semblava inadequat.'
+      spam_account: 'Motiu: semblava un compte de correu brossa.'
+      inappropriate_content: 'Motiu: semblava inadequat.'
 clipboard:
   success: Enllaç copiat al porta-retalls!
   success_project: Enllaç al projecte copiat al porta-retalls!
@@ -649,7 +719,6 @@ previous: Anterior
 media-packages:
   title: Mediateca
   description: A les categories següents trobaràs actors i objectes per afegir als teus projectes.
-  theme-special: "Especial temàtic de %flavor%"
   search-results: Resultats de la cerca a la mediateca
 flavor:
   pocketcode: Pocket Code
@@ -866,6 +935,10 @@ studio:
       ban_failed: 'Alguna cosa ha anat malament en expulsar aquest membre. Torna-ho a provar més tard.'
       demote_member: 'Torna l''administrador a membre'
       demotion_failed: 'Alguna cosa ha anat malament en treure els permisos d''administrador. Torna-ho a provar més tard.'
+      banned_members: 'Membres expulsats'
+      unban_member: 'Retira l''expulsió'
+      unban_hint: 'Retirar l''expulsió permet que la persona es torni a unir amb normalitat. No l''afegeix de nou a l''estudi.'
+      unban_failed: 'No s''han pogut actualitzar els membres expulsats. Torna-ho a provar.'
     join_requests:
       title: 'Sol·licituds per unir-se'
       accept: 'Accepta'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'Descripció'
       toggle_allow_comments: 'Comentaris'
       toggle_privacy: 'Públic'
+    banned: 'No et pots unir a aquest estudi.'
+    invites:
+      title: 'Codis d''invitació'
+      hint: 'Qualsevol persona amb el codi o l''enllaç s''uneix a aquest estudi de seguida, sense aprovació. Si revoques un codi, els membres que ja s''hi han unit es queden.'
+      expires_on: 'Caduca el (opcional)'
+      max_uses: 'Usos màx. (opcional)'
+      create: 'Crea un codi d''invitació'
+      uses: 'Utilitzat %uses% vegades'
+      uses_max: 'Utilitzat %uses% de %max% vegades'
+      expires: 'Caduca el %date%'
+      qr_alt: 'Escaneja aquest codi QR per unir-te a l''estudi'
+      copy_link: 'Copia l''enllaç'
+      copied: 'Enllaç d''invitació copiat al porta-retalls!'
+      revoke: 'Revoca'
+      none: 'Encara no hi ha codis d''invitació.'
+      error: 'Alguna cosa ha anat malament amb el codi d''invitació. Torna-ho a provar.'
+  join_with_code:
+    title: 'Uneix-t''hi amb un codi'
+    hint: 'Tens un codi d''invitació del teu professor o d''un administrador de l''estudi? Escriu-lo aquí per unir-te a l''estudi.'
+    code: 'Codi d''invitació'
+    invalid: 'Aquest codi no és vàlid. Pot ser que hagi caducat o que s''hagi revocat.'
+    banned: 'T''han expulsat d''aquest estudi.'
+    rate_limited: 'Massa intents. Espera uns minuts i torna-ho a provar.'
 media_library:
   file:
     size: 'Mida: %size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: "El teu compte ha estat suspès a causa de denúncies de la comunitat. Pots recórrer aquesta decisió."
 Reports: Denúncies
 members: membres
+inactiveAccount:
+  subject: 'El teu compte de Catrobat s''eliminarà'
+  title: 'Et trobem a faltar!'
+  content: 'Fa dos anys que no inicies sessió al teu compte de Catrobat "%username%" i no té cap projecte ni comentari. Per mantenir viva la nostra comunitat, l''eliminarem d''aquí a %days% dies. Si el vols conservar, només cal que iniciïs sessió una vegada.'
+  button: 'Inicia sessió per conservar el meu compte'

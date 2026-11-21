@@ -12,8 +12,6 @@ username: Username
 password: Password
 email: E-Mail
 about: About Catrobat
-chat: Chat and forums
-others: Others
 googlePlay: Google Play Store
 iosAppStore: iOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No notes and credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
 scratchImportedProjectLinkHere: here.
-country: Country
 privacyPolicy: Privacy Policy
 projectDetails: Details
 somethingWentWrong: 'Oops, something did not work. Please try again!'
@@ -47,7 +44,6 @@ doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Please try again!'
 tryAgainButton: 'Try again'
 more: 'more'
-less: 'less'
 show-more: 'Show more'
 more-information: 'More information'
 less-information: 'Less information'
@@ -69,7 +65,6 @@ studios: "Studios"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want
             to change your username or create a new password for your account please go to your profile page.'
-statistics: "Statistics"
 languageSelection: "Language selection"
 
 color-scheme:
@@ -186,7 +181,6 @@ project:
   likes:
     likersTitle: "People who reacted to that project"
     all: "All"
-  languageVersion: 'Catrobat language version: %languageVersion%'
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   checkout_this_project: Checkout this Catrobat project
@@ -780,7 +774,6 @@ previous: Previous
 media-packages:
   title: Media Library
   description: In the following categories you can find actors and objects to add to your projects.
-  theme-special: "%flavor% Theme Special"
   search-results : Media library search results
 
 flavor:

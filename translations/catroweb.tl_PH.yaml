@@ -12,8 +12,6 @@ username: Pangalan ng gumagamit
 password: Password
 email: 'Email'
 about: Tungkol sa Catrobat
-chat: Mga usapan at forums
-others: Iba pa
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Walang tala at credits.'
 notesAndCreditsDescription: Paano mo nabuo ang iyong proyekto? Gumamit ka ba ng mga ideya,mga script o artwork mula sa ibang tao? Pasalamatan mo sila rito.
 projectImportedFromScratch: 'Ang proyektong ito ay inangkat mula sa MIT Scratch. Maaari mong tingnan ang orihinal na proyekto'
 scratchImportedProjectLinkHere: 'dito.'
-country: 'Bansa'
 privacyPolicy: Patakaran sa Privacy
 projectDetails: 'Mga detalye'
 somethingWentWrong: 'Naku, may hindi gumana. Pakisubukan ulit!'
@@ -47,7 +44,6 @@ doesNotExist: 'Hindi umiiral ang hinihinging resource.'
 pleaseTryAgain: 'Pakisubukan ulit!'
 tryAgainButton: 'Subukan ulit'
 more: 'higit pa'
-less: 'mas kaunti'
 show-more: 'Ipakita ang higit pa'
 more-information: 'Higit pang impormasyon'
 less-information: 'Mas kaunting impormasyon'
@@ -68,7 +64,6 @@ users: 'Mga user'
 studios: 'Mga studio'
 oauthPopUpTitle: 'Impormasyon sa pag-sign in gamit ang external na account'
 oauthInfo: 'Gumamit ka ng external na account para mag-login. Gumawa kami ng random na username para sa iyo. Kung gusto mong palitan ang iyong username o gumawa ng bagong password para sa iyong account, pumunta sa iyong profile page.'
-statistics: 'Estadistika'
 languageSelection: 'Pagpili ng wika'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Mga taong nag-react sa proyektong iyon'
     all: "All"
-  languageVersion: 'Bersyon ng wikang Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Hindi ma-download'
   updateAppTextDownload: 'Pakiupdate ang iyong app sa pinakabagong bersyon. Tandaan na hindi pa available sa iOS ang lahat ng feature ng Android.'
   checkout_this_project: 'Tingnan ang proyektong ito sa Catrobat'
@@ -218,6 +212,18 @@ project:
   createTranslation: 'Gumawa ng salin'
   deletedComment: '**Nabura**'
   notForKids: 'Hindi ligtas para sa mga bata'
+  customUrl:
+    title: 'Custom URL'
+    hint: 'Pumili ng maikling pangalan para sa link ng proyektong ito: 3-50 maliliit na titik, numero o gitling. Iwanang blangko para alisin ito.'
+  playInBrowser: 'Laruin sa browser'
+  madeWithVersion: 'Ginawa gamit ang app version %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Ginawa gamit ang mas lumang bersyon ng app'
+    text: 'Hindi pa malalaro sa browser ang proyektong ito. Buksan ito sa Pocket Code at i-upload ulit para ma-update.'
+  translateAgain: 'Isalin ulit gamit ang mga wikang ito'
+  prefillMachineTranslation: 'Punan ng salin ng makina'
+  machineTranslationFailed: 'Hindi available ang salin ng makina ngayon. Pakisubukan ulit mamaya.'
+  machineTranslationUnsupported: 'Hindi available ang salin ng makina para sa wikang ito.'
 remixGraph:
   showRemixGraph: 'Graph ng remix'
   by: 'ni'
@@ -407,6 +413,10 @@ search:
   noProjects: 'Walang nahanap na proyekto'
   noStudios: 'Walang nahanap na studio'
   sameSearchMessage: 'Mukhang nandito ka na! Subukan ang ibang paghahanap?'
+  noResults: 'Walang resulta para sa “%query%”'
+  scratchProjects: 'Mga proyekto sa Scratch'
+  scratchConverting: 'Kino-convert para sa %app%…'
+  scratchConvertingSnackbar: 'Kino-convert ang “%name%” — maaaring tumagal ito nang ilang segundo'
 menu:
   profile: Profile
   login: Mag-Login
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: 'I-verify ang iyong email'
+  leaderboard:
+    all_time: 'Mga nangungunang creator'
+    this_week: 'Mga nangungunang creator ngayong linggo'
+    points: 'puntos'
 api:
   registerUser:
     emailMissing: 'Walang email'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: 'Masyadong mahaba ang paglalarawan'
     creditsTooLong: 'Masyadong mahaba ang mga tala at credits'
     screenshotInvalid: 'Hindi valid o hindi suportado ang screenshot ng proyekto'
+    slugInvalid: 'Ang custom URL ay dapat 3-50 maliliit na titik, numero o iisang gitling, na may kahit isang titik'
+    slugReserved: 'Nakareserba ang custom URL na ito'
+    slugTaken: 'Ginagamit na ang custom URL na ito'
   projectsPost:
     invalid_checksum: 'Hindi valid na checksum. Subukang mag-upload ulit!'
     upload_error: 'Nagkaroon ng error habang nag-a-upload. Subukang mag-upload ulit!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'Mga script'
   looks: 'Larawan'
   sounds: 'Tunog'
+  unavailable: 'Hindi maipakita ang code ng proyektong ito.'
+  translation:
+    action: 'Isalin'
+    translateTo: 'Isalin sa %language%'
+    translateAgain: 'Isalin ulit'
+    stillShowing: 'Ipinapakita pa rin ang %language%'
+    original: 'Ipakita ang orihinal'
+    resume: 'Ituloy ang pagsasalin'
+    source: 'Mula sa'
+    target: 'Patungo sa'
+    auto: 'Tukuyin ang wika'
+    loading: 'Isinasalin ang code…'
+    complete: 'Isinalin ng makina sa %language%'
+    partial: 'Bahagyang naisalin'
+    partialInLanguage: 'Bahagyang naisalin sa %language%'
+    sourceRequired: 'Piliin ang orihinal na wika para isalin ang code na ito.'
+    unsupported: 'Hindi available ang pagsasalin para sa mga wikang ito.'
+    error: 'Hindi maisalin ang code. Subukan ulit.'
 codeStatistics:
   title: 'Estadistika ng code'
   error: 'Hindi maipakita ang estadistika ng code.'
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Awtomatikong binura ang iyong proyektong "%project_name%" dahil sa kawalan ng aktibidad. I-upload ito ulit kung gusto mo pa rin itong ibahagi.'
   noProjects: 'Mukhang wala kang mga abiso tungkol sa proyekto.'
+  studio-deletion-warning:
+    message: 'Walang proyekto ang iyong studio na "%studio_name%" at walang nangyari rito sa loob ng 90 araw. Buburahin ito sa loob ng %days% araw maliban kung magdagdag ka ng proyekto.'
+  project-files-lost:
+    message: 'Dahil sa isang error sa server, nawala ang mga file ng %count% sa iyong mga proyekto: %projects%. Nakatago ang mga ito hanggang i-upload mo ulit mula sa Pocket Code. Buburahin ang mga proyektong hindi na-upload ulit sa loob ng 14 na araw.'
+    more: 'at %count% pa'
+  moderation-warning:
+    message: 'Sinuri ng isang moderator ang ulat tungkol sa iyong nilalaman at nakitang lumalabag ito sa aming mga patakaran ng komunidad. Pakisunod ang mga patakaran, kung hindi ay maaaring masuspinde ang iyong account sa susunod.'
+    deletion: 'Buburahin ang nakatagong nilalaman %days% araw matapos itong itago maliban kung ayusin mo ito o iapela.'
+  moderation-hidden:
+    message: 'Sinuri ng isang moderator ang ulat tungkol sa iyong nilalaman at itinago ito dahil lumalabag ito sa aming mga patakaran ng komunidad.'
+  moderation-reason:
+    image: '{1}Mukhang pang-adultong nilalaman ang isang larawan (%names%).|]1,Inf]Mukhang pang-adultong nilalaman ang ilang larawan (%names%).'
+    screenshot: 'Mukhang pang-adultong nilalaman ang screenshot.'
+    cover: 'Mukhang pang-adultong nilalaman ang cover image.'
+    text:
+      name: 'Mukhang sinasabi ng pangalan na para lang ito sa mga adult.'
+      description: 'Mukhang sinasabi ng paglalarawan na para lang ito sa mga adult.'
+      credits: 'Mukhang sinasabi ng mga tala at kredito na para lang ito sa mga adult.'
+      about: 'Mukhang sinasabi ng iyong "Tungkol sa akin" na para lang ito sa mga adult.'
+      currently_working_on: 'Mukhang sinasabi ng iyong "Kasalukuyang ginagawa" na para lang ito sa mga adult.'
+      username: 'Mukhang sinasabi ng iyong username na para lang ito sa mga adult.'
+    category:
+      copyright: 'Dahilan: mukhang gumagamit ito ng gawa ng ibang tao nang walang pahintulot.'
+      sexual_content: 'Dahilan: mukha itong pang-adultong nilalaman.'
+      graphic_violence: 'Dahilan: mukha itong masyadong marahas.'
+      hateful_content: 'Dahilan: mukha itong nakakasakit o mapoot sa iba.'
+      improper_rating: 'Dahilan: mukhang hindi ito angkop para sa mga bata.'
+      spam: 'Dahilan: mukha itong spam.'
+      other: 'Dahilan: may nakitang problema rito ang isang moderator.'
+      inappropriate: 'Dahilan: mukha itong hindi angkop.'
+      harassment: 'Dahilan: mukhang nambu-bully o nanliligalig ito ng isang tao.'
+      impersonation: 'Dahilan: mukhang nagpapanggap ito bilang ibang tao.'
+      inappropriate_profile: 'Dahilan: mukhang hindi angkop ang profile.'
+      spam_account: 'Dahilan: mukha itong spam account.'
+      inappropriate_content: 'Dahilan: mukha itong hindi angkop.'
 clipboard:
   success: 'Nakopya ang link sa clipboard!'
   success_project: 'Nakopya ang link ng proyekto sa clipboard!'
@@ -649,7 +719,6 @@ previous: 'Nakaraan'
 media-packages:
   title: 'Aklatan ng media'
   description: 'Sa mga sumusunod na kategorya, makakahanap ka ng mga actor at object na maidaragdag sa iyong mga proyekto.'
-  theme-special: 'Espesyal na tema ng %flavor%'
   search-results: 'Mga resulta ng paghahanap sa aklatan ng media'
 flavor:
   pocketcode: Pocket Code
@@ -866,6 +935,10 @@ studio:
       ban_failed: 'May nangyaring mali habang bina-ban ang miyembrong ito. Subukan ulit mamaya.'
       demote_member: 'Ibaba ang admin bilang miyembro'
       demotion_failed: 'May nangyaring mali habang ibinababa ang admin na ito. Subukan ulit mamaya.'
+      banned_members: 'Mga na-ban na miyembro'
+      unban_member: 'Alisin ang ban'
+      unban_hint: 'Kapag inalis ang ban, makakasali ulit nang normal ang tao. Hindi siya awtomatikong maibabalik sa studio.'
+      unban_failed: 'Hindi ma-update ang mga na-ban na miyembro. Pakisubukan ulit.'
     join_requests:
       title: 'Mga hiling na sumali'
       accept: 'Tanggapin'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'Paglalarawan'
       toggle_allow_comments: 'Mga komento'
       toggle_privacy: 'Pampubliko'
+    banned: 'Hindi ka maaaring sumali sa studio na ito.'
+    invites:
+      title: 'Mga invite code'
+      hint: 'Sinumang may code o link ay agad na makakasali sa studio na ito, walang kailangang pag-apruba. Kapag binawi ang code, mananatili ang mga miyembrong nakasali na.'
+      expires_on: 'Mag-e-expire sa (opsyonal)'
+      max_uses: 'Max. na paggamit (opsyonal)'
+      create: 'Gumawa ng invite code'
+      uses: 'Nagamit nang %uses% beses'
+      uses_max: 'Nagamit nang %uses% sa %max% beses'
+      expires: 'Mag-e-expire sa %date%'
+      qr_alt: 'I-scan ang QR code na ito para sumali sa studio'
+      copy_link: 'Kopyahin ang link'
+      copied: 'Nakopya na ang invite link sa clipboard!'
+      revoke: 'Bawiin'
+      none: 'Wala pang invite code.'
+      error: 'May nangyaring mali sa invite code. Pakisubukan ulit.'
+  join_with_code:
+    title: 'Sumali gamit ang code'
+    hint: 'May invite code ka ba mula sa iyong guro o sa admin ng studio? Ilagay ito rito para sumali sa studio.'
+    code: 'Invite code'
+    invalid: 'Hindi valid ang code na ito. Maaaring nag-expire na ito o binawi.'
+    banned: 'Na-ban ka sa studio na ito.'
+    rate_limited: 'Masyadong maraming pagsubok. Maghintay ng ilang minuto at subukan ulit.'
 media_library:
   file:
     size: 'Laki: %size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: 'Sinuspinde ang iyong account dahil sa mga ulat ng komunidad. Maaari mong iapela ang desisyong ito.'
 Reports: 'Mga ulat'
 members: 'mga miyembro'
+inactiveAccount:
+  subject: 'Buburahin ang iyong Catrobat account'
+  title: 'Nami-miss ka namin!'
+  content: 'Dalawang taon ka nang hindi nagla-log in sa iyong Catrobat account na "%username%" at wala itong mga proyekto o komento. Para manatiling buhay ang ating komunidad, buburahin namin ito sa loob ng %days% araw. Kung gusto mo itong panatilihin, mag-log in ka lang nang isang beses.'
+  button: 'Mag-log in para panatilihin ang account ko'

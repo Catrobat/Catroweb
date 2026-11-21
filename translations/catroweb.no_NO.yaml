@@ -12,8 +12,6 @@ username: Brukernavn
 password: Passord
 email: E-post
 about: Om Catrobat
-chat: Chat og forum
-others: Annet
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: Hvordan opprettet du dette prosjektet? Bruk du ideer, skript eller kunstverk fra andre folk? Takk dem her.
 projectImportedFromScratch: 'Dette prosjektet ble importert fra MIT Scratch. Du kan se det opprinnelige prosjektet'
 scratchImportedProjectLinkHere: 'her.'
-country: Land
 privacyPolicy: Personvern
 projectDetails: Detaljer
 somethingWentWrong: 'Ooops, noe gikk galt.'
@@ -47,7 +44,6 @@ doesNotExist: 'Den forespurte ressursen finnes ikke.'
 pleaseTryAgain: 'Vennligst prøv igjen!'
 tryAgainButton: 'Prøv igjen'
 more: 'mer'
-less: 'mindre'
 show-more: 'More information'
 more-information: 'Mer informasjon'
 less-information: 'Mindre informasjon'
@@ -68,7 +64,6 @@ users: 'Bruker'
 studios: "Studioer"
 oauthPopUpTitle: "Innloggingsinformasjon for ekstern konto"
 oauthInfo: 'Du har nettopp brukt en ekstern konto for å logge inn. Vi opprettet et tilfeldig brukernavn for deg. Hvis du ønsker å endre brukernavnet ditt eller opprette et nytt passord for din konto, kan du gå til profilsiden din.'
-statistics: "Statistikk"
 languageSelection: 'Språkvalg'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Personer som reagerte på dette prosjektet'
     all: "Alle"
-  languageVersion: 'Catrobat-språkversjon: %languageVersion%'
   updateAppHeaderDownload: 'Nedlasting ikke mulig'
   updateAppTextDownload: 'Oppdater appen din til nyeste versjon. Vær oppmerksom på at ikke alle Android-funksjoner er tilgjengelige på iOS ennå.'
   checkout_this_project: 'Sjekk ut dette Catrobat-prosjektet'
@@ -218,6 +212,18 @@ project:
   createTranslation: 'Opprett oversettelse'
   deletedComment: '**Slettet**'
   notForKids: 'Ikke egnet for barn'
+  customUrl:
+    title: 'Egendefinert URL'
+    hint: 'Velg et kort navn for lenken til dette prosjektet: 3–50 små bokstaver, sifre eller bindestreker. La feltet stå tomt for å fjerne det.'
+  playInBrowser: 'Spill i nettleseren'
+  madeWithVersion: 'Laget med appversjon %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Laget med en eldre appversjon'
+    text: 'Dette prosjektet kan ikke spilles i nettleseren ennå. Åpne det i Pocket Code og last det opp på nytt for å oppdatere det.'
+  translateAgain: 'Oversett på nytt med disse språkene'
+  prefillMachineTranslation: 'Fyll inn maskinoversettelse'
+  machineTranslationFailed: 'Maskinoversettelse er ikke tilgjengelig akkurat nå. Prøv igjen senere.'
+  machineTranslationUnsupported: 'Maskinoversettelse er ikke tilgjengelig for dette språket.'
 remixGraph:
   showRemixGraph: 'Vis Remiks graf'
   by: 'av'
@@ -407,6 +413,10 @@ search:
   noProjects: 'Ingen prosjekter funnet'
   noStudios: 'Ingen studioer funnet'
   sameSearchMessage: 'Det ser ut som du allerede er her! Prøve et annet søk?'
+  noResults: 'Ingen resultater for «%query%»'
+  scratchProjects: 'Scratch-prosjekter'
+  scratchConverting: 'Konverterer for %app%…'
+  scratchConvertingSnackbar: 'Konverterer «%name%» – dette kan ta noen sekunder'
 menu:
   profile: Min profil
   login: Logg på
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: 'Bekreft e-postadressen din'
+  leaderboard:
+    all_time: 'Toppskapere'
+    this_week: 'Ukens toppskapere'
+    points: 'poeng'
 api:
   registerUser:
     emailMissing: 'E-post mangler'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: 'Beskrivelsen er for lang'
     creditsTooLong: 'Notater og kreditter er for lange'
     screenshotInvalid: 'Skjermbildet av prosjektet er ugyldig eller støttes ikke'
+    slugInvalid: 'Egendefinert URL må være 3–50 små bokstaver, sifre eller enkle bindestreker, med minst én bokstav'
+    slugReserved: 'Denne egendefinerte URL-en er reservert'
+    slugTaken: 'Denne egendefinerte URL-en er allerede i bruk'
   projectsPost:
     invalid_checksum: 'Ugyldig sjeksumk. Prøv å laste opp igjen!'
     upload_error: 'Feil under opplasting. Prøv å laste opp igjen!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'Skript'
   looks: 'Utseende'
   sounds: 'Lyder'
+  unavailable: 'Koden til dette prosjektet kan ikke vises.'
+  translation:
+    action: 'Oversett'
+    translateTo: 'Oversett til %language%'
+    translateAgain: 'Oversett på nytt'
+    stillShowing: 'Viser fortsatt %language%'
+    original: 'Vis original'
+    resume: 'Fortsett å oversette'
+    source: 'Fra'
+    target: 'Til'
+    auto: 'Gjenkjenn språk'
+    loading: 'Oversetter koden…'
+    complete: 'Maskinoversatt til %language%'
+    partial: 'Delvis oversatt'
+    partialInLanguage: 'Delvis oversatt til %language%'
+    sourceRequired: 'Velg kildespråket for å oversette denne koden.'
+    unsupported: 'Oversettelse er ikke tilgjengelig for disse språkene.'
+    error: 'Kunne ikke oversette koden. Prøv igjen.'
 codeStatistics:
   title: "Statistikk for kode"
   error: "Kode statistikk kan ikke vises."
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Prosjektet ditt "%project_name%" ble automatisk fjernet på grunn av manglende aktivitet. Last det opp på nytt hvis du fortsatt vil dele det.'
   noProjects: 'Det ser ut som du ikke har noen prosjektvarsler.'
+  studio-deletion-warning:
+    message: 'Studioet ditt «%studio_name%» har ingen prosjekter, og ingenting har skjedd der på 90 dager. Det blir slettet om %days% dager hvis du ikke legger til et prosjekt.'
+  project-files-lost:
+    message: 'En serverfeil førte til at filene til %count% av prosjektene dine gikk tapt: %projects%. De er skjult til du laster dem opp på nytt fra Pocket Code. Prosjekter som ikke lastes opp på nytt innen 14 dager, blir slettet.'
+    more: 'og %count% til'
+  moderation-warning:
+    message: 'En moderator har sett på en rapport om innholdet ditt og funnet ut at det bryter fellesskapsreglene våre. Følg reglene, ellers kan kontoen din bli suspendert neste gang.'
+    deletion: 'Det skjulte innholdet blir slettet %days% dager etter at det ble skjult, med mindre du retter det eller klager.'
+  moderation-hidden:
+    message: 'En moderator har sett på en rapport om innholdet ditt og skjult det fordi det bryter fellesskapsreglene våre.'
+  moderation-reason:
+    image: '{1}Et bilde (%names%) så ut som voksent innhold.|]1,Inf]Noen bilder (%names%) så ut som voksent innhold.'
+    screenshot: 'Skjermbildet så ut som voksent innhold.'
+    cover: 'Forsidebildet så ut som voksent innhold.'
+    text:
+      name: 'Navnet så ut til å si at dette bare er for voksne.'
+      description: 'Beskrivelsen så ut til å si at dette bare er for voksne.'
+      credits: 'Notatene og kredittene så ut til å si at dette bare er for voksne.'
+      about: '«Om meg»-teksten din så ut til å si at dette bare er for voksne.'
+      currently_working_on: '«Jobber med nå»-teksten din så ut til å si at dette bare er for voksne.'
+      username: 'Brukernavnet ditt så ut til å si at dette bare er for voksne.'
+    category:
+      copyright: 'Grunn: det ser ut til å bruke andres arbeid uten tillatelse.'
+      sexual_content: 'Grunn: det så ut som voksent innhold.'
+      graphic_violence: 'Grunn: det så for voldelig ut.'
+      hateful_content: 'Grunn: det så sårende eller hatefullt ut mot andre.'
+      improper_rating: 'Grunn: det så ikke ut til å passe for barn.'
+      spam: 'Grunn: det så ut som spam.'
+      other: 'Grunn: en moderator fant et problem med det.'
+      inappropriate: 'Grunn: det så upassende ut.'
+      harassment: 'Grunn: det så ut som mobbing eller trakassering av noen.'
+      impersonation: 'Grunn: det så ut til å utgi seg for å være noen andre.'
+      inappropriate_profile: 'Grunn: profilen så upassende ut.'
+      spam_account: 'Grunn: det så ut som en spamkonto.'
+      inappropriate_content: 'Grunn: det så upassende ut.'
 clipboard:
   success: 'Lenken er kopiert til utklippstavlen!'
   success_project: 'Lenken til prosjektet er kopiert til utklippstavlen!'
@@ -649,7 +719,6 @@ previous: Forrige
 media-packages:
   title: Media-Pakker
   description: I følgende kategorier kan du finne flere figurer og objekter for å legge til deg PocketCode-prosjekter.
-  theme-special: "%flavor% Tema Spesial"
   search-results: Søkeresultater fra mediebiblioteket
 flavor:
   pocketcode: Pocket Code
@@ -866,6 +935,10 @@ studio:
       ban_failed: 'Noe gikk galt da medlemmet skulle utestenges. Prøv igjen senere.'
       demote_member: 'Gjør administratoren til medlem'
       demotion_failed: 'Noe gikk galt da administratoren skulle degraderes. Prøv igjen senere.'
+      banned_members: 'Utestengte medlemmer'
+      unban_member: 'Opphev utestengelse'
+      unban_hint: 'Når du opphever en utestengelse, kan personen bli med igjen som vanlig. Personen blir ikke lagt til i studioet igjen.'
+      unban_failed: 'Kunne ikke oppdatere de utestengte medlemmene. Prøv igjen.'
     join_requests:
       title: 'Forespørsler om å bli med'
       accept: 'Godta'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'Beskrivelse'
       toggle_allow_comments: 'Kommentarer'
       toggle_privacy: 'Offentlig'
+    banned: 'Du kan ikke bli med i dette studioet.'
+    invites:
+      title: 'Invitasjonskoder'
+      hint: 'Alle med koden eller lenken blir med i dette studioet med en gang, uten godkjenning. Hvis du trekker tilbake en kode, beholdes medlemmene som allerede har blitt med.'
+      expires_on: 'Utløper (valgfritt)'
+      max_uses: 'Maks. antall bruk (valgfritt)'
+      create: 'Lag invitasjonskode'
+      uses: 'Brukt %uses% ganger'
+      uses_max: 'Brukt %uses% av %max% ganger'
+      expires: 'Utløper %date%'
+      qr_alt: 'Skann denne QR-koden for å bli med i studioet'
+      copy_link: 'Kopier lenke'
+      copied: 'Invitasjonslenken er kopiert til utklippstavlen!'
+      revoke: 'Trekk tilbake'
+      none: 'Ingen invitasjonskoder ennå.'
+      error: 'Noe gikk galt med invitasjonskoden. Prøv igjen.'
+  join_with_code:
+    title: 'Bli med med en kode'
+    hint: 'Har du fått en invitasjonskode fra læreren din eller en studioadministrator? Skriv den inn her for å bli med i studioet.'
+    code: 'Invitasjonskode'
+    invalid: 'Denne koden er ikke gyldig. Den kan ha utløpt eller blitt trukket tilbake.'
+    banned: 'Du er utestengt fra dette studioet.'
+    rate_limited: 'For mange forsøk. Vent noen minutter og prøv igjen.'
 media_library:
   file:
     size: 'Størrelse: %size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: 'Kontoen din er suspendert på grunn av rapporter fra fellesskapet. Du kan klage på denne avgjørelsen.'
 Reports: 'Rapporter'
 members: 'medlemmer'
+inactiveAccount:
+  subject: 'Catrobat-kontoen din blir slettet'
+  title: 'Vi savner deg!'
+  content: 'Du har ikke logget på Catrobat-kontoen din «%username%» på to år, og den har ingen prosjekter eller kommentarer. For å holde fellesskapet vårt levende sletter vi den om %days% dager. Hvis du vil beholde den, er det bare å logge på én gang.'
+  button: 'Logg på for å beholde kontoen min'

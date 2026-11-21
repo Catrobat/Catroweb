@@ -12,8 +12,6 @@ username: 'Aha njirimara'
 password: 'Okwuntụghe'
 email: 'Ozi-e'
 about: 'Gbasara Catrobat'
-chat: 'Mkparịta ụka na ọgbakọ'
-others: 'Ndị ọzọ'
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'Kedu ka i si mepụta ọrụ a? I jiri echiche, script ma ọ bụ ihe osise ndị ọzọ? Kelee ha ebe a.'
 projectImportedFromScratch: 'E bubatara ọrụ a site na MIT Scratch. Ị nwere ike ilele ọrụ mbụ ahụ'
 scratchImportedProjectLinkHere: 'ebe a.'
-country: 'Obodo'
 privacyPolicy: 'Iwu Nzuzo'
 projectDetails: 'Nkọwa zuru ezu'
 somethingWentWrong: 'Ewoo, ihe arụghị ọrụ. Biko nwaa ọzọ!'
@@ -47,7 +44,6 @@ doesNotExist: 'Ihe a rịọrọ adịghị.'
 pleaseTryAgain: 'Biko nwaa ọzọ!'
 tryAgainButton: 'Nwaa ọzọ'
 more: 'ọzọ'
-less: 'obere'
 show-more: 'More information'
 more-information: 'Ozi ndị ọzọ'
 less-information: 'Ozi dị obere'
@@ -68,7 +64,6 @@ users: 'Onye ọrụ'
 studios: 'Studio'
 oauthPopUpTitle: 'Ozi nbanye akaụntụ mpụga'
 oauthInfo: 'I jiri akaụntụ mpụga banye. Anyị mepụtaara gị aha njirimara na-enweghị usoro. Ọ bụrụ na ịchọrọ ịgbanwe aha njirimara gị ma ọ bụ mepụta okwuntụghe ọhụrụ maka akaụntụ gị, biko gaa na peeji profaịlụ gị.'
-statistics: 'Ọnụ ọgụgụ'
 languageSelection: 'Nhọrọ asụsụ'
 color-scheme:
   title: 'Isiokwu agba'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Ndị meghachiri omume n'ọrụ ahụ"
     all: 'All'
-  languageVersion: 'Ụdị asụsụ Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Enweghị ike ibudata'
   updateAppTextDownload: 'Biko melite ngwa gị gaa na ụdị kachasị ọhụrụ. Mara na ọ bụghị atụmatụ Android niile dị na IOS ugbu a.'
   checkout_this_project: 'Lelee ọrụ Catrobat a'
@@ -200,6 +194,19 @@ project:
   createTranslation: 'Mepụta ntụgharị'
   deletedComment: '**E hichapụla ya**'
   notForKids: 'Adabaghị ụmụaka'
+  customUrl:
+    title: 'URL nke gị'
+    hint: 'Họrọ aha dị mkpirikpi maka njikọ ọrụ a: mkpụrụedemede obere 3-50, ọnụọgụgụ ma ọ bụ hyphen. Hapụ ya efu iji wepụ ya.'
+  playInBrowser: 'Kpọọ na ihe nchọgharị'
+  madeWithVersion: 'E ji ụdị ngwa %app% mee ya (Catrobat %language%)'
+  oldVersion:
+    title: 'E ji ụdị ngwa ochie mee ya'
+    text: 'Enweghị ike ịkpọ ọrụ a na ihe nchọgharị ugbu a. Mepee ya na Pocket Code ma bulite ya ọzọ iji melite ya.'
+  translatedByLine: 'Igwe tụgharịrị ya site na %sourceLanguage% gaa na %targetLanguage%'
+  translateAgain: 'Tụgharịa ọzọ n''asụsụ ndị a'
+  prefillMachineTranslation: 'Jupụta ya na ntụgharị igwe'
+  machineTranslationFailed: 'Ntụgharị igwe adịghị ugbu a. Biko nwaa ọzọ ma emechaa.'
+  machineTranslationUnsupported: 'Ntụgharị igwe adịghị maka asụsụ a.'
 remixGraph:
   showRemixGraph: 'Eserese remix'
   by: 'by'
@@ -386,6 +393,10 @@ search:
   noProjects: 'Ahụghị ọrụ ọ bụla'
   noStudios: 'Ahụghị studio ọ bụla'
   sameSearchMessage: 'Ọ dị ka ị nọlarị ebe a! Nwaa ọchụchọ ọzọ?'
+  noResults: 'Enweghị nsonaazụ maka “%query%”'
+  scratchProjects: 'Ọrụ Scratch'
+  scratchConverting: 'Na-agbanwe maka %app%…'
+  scratchConvertingSnackbar: 'Na-agbanwe “%name%” — nke a nwere ike were sekọnd ole na ole'
 menu:
   profile: 'Profaịlụ'
   login: 'Banye'
@@ -493,6 +504,10 @@ time:
 user:
   verification:
     email: 'Nyochaa ozi-e gị'
+  leaderboard:
+    all_time: 'Ndị okike kacha mma'
+    this_week: 'Ndị okike kacha mma n''izu a'
+    points: 'akara'
 api:
   registerUser:
     emailMissing: 'Ozi-e adịghị'
@@ -528,6 +543,9 @@ api:
     descriptionTooLong: 'Nkọwa dị ogologo nke ukwuu'
     creditsTooLong: 'Ndetu na ekele dị ogologo nke ukwuu'
     screenshotInvalid: 'Nseta ihuenyo ọrụ adịghị irè ma ọ bụ a kwadoghị ya'
+    slugInvalid: 'URL nke gị ga-enwerịrị mkpụrụedemede obere 3-50, ọnụọgụgụ ma ọ bụ otu hyphen n''otu n''otu, ma ọ dịkarịa ala otu mkpụrụedemede'
+    slugReserved: 'E debere URL a'
+    slugTaken: 'Onye ọzọ ewerela URL a'
   projectsPost:
     invalid_checksum: 'Checksum adịghị irè. Nwaa ibulite ọzọ!'
     upload_error: 'Njehie mgbe a na-ebulite. Nwaa ibulite ọzọ!'
@@ -567,6 +585,24 @@ codeView:
   scripts: 'Script'
   looks: 'Ọdịdị'
   sounds: 'Ụda'
+  unavailable: 'Enweghị ike igosi koodu ọrụ a.'
+  translation:
+    action: 'Tụgharịa'
+    translateTo: 'Tụgharịa gaa na %language%'
+    translateAgain: 'Tụgharịa ọzọ'
+    stillShowing: 'Ka na-egosi %language%'
+    original: 'Gosi nke mbụ'
+    resume: 'Gaa n''ihu ịtụgharị'
+    source: 'Site na'
+    target: 'Gaa na'
+    auto: 'Chọpụta asụsụ'
+    loading: 'Na-atụgharị koodu…'
+    complete: 'Igwe tụgharịrị ya gaa na %language%'
+    partial: 'E tụgharịrị ya ntakịrị'
+    partialInLanguage: 'E tụgharịrị ya ntakịrị gaa na %language%'
+    sourceRequired: 'Họrọ asụsụ mbụ iji tụgharịa koodu a.'
+    unsupported: 'Ntụgharị adịghị maka asụsụ ndị a.'
+    error: 'Enweghị ike ịtụgharị koodu ahụ. Nwaa ọzọ.'
 codeStatistics:
   title: 'Code Statistics'
   error: "Code Statistics can't be displayed."
@@ -617,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: 'E wepụrụ ọrụ gị "%project_name%" na-akpaghị aka n''ihi enweghị ọrụ. Bulitegharịa ya ma ọ bụrụ na ị ka chọrọ ịkesa ya.'
   noProjects: 'Ọ dị ka ị nweghị ọkwa ọrụ.'
+  studio-deletion-warning:
+    message: 'Studio gị "%studio_name%" enweghị ọrụ ọ bụla, ọ dịghịkwa ihe mere na ya ụbọchị 90. A ga-ehichapụ ya n''ime ụbọchị %days% ma ọ bụrụ na ị tinyeghị ọrụ.'
+  project-files-lost:
+    message: 'Njehie sava mere ka faịlụ nke %count% n''ime ọrụ gị furu efu: %projects%. E zoro ha ruo mgbe ị bulitere ha ọzọ site na Pocket Code. A ga-ehichapụ ọrụ ndị a na-ebulitegharịghị n''ime ụbọchị 14.'
+    more: 'na %count% ọzọ'
+  moderation-warning:
+    message: 'Onye nlekọta lebara anya n''akụkọ gbasara ihe gị ma chọpụta na ọ na-emebi iwu obodo anyị. Biko soro iwu ndị ahụ, ma ọ bụghị ya, a nwere ike ịkwụsịtụ akaụntụ gị oge ọzọ.'
+    deletion: 'A ga-ehichapụ ihe ezoro ezo ụbọchị %days% mgbe e zoro ya, ma ọ bụrụ na ị meziteghị ya ma ọ bụ rịọ ka e lebaghachi anya.'
+  moderation-hidden:
+    message: 'Onye nlekọta lebara anya n''akụkọ gbasara ihe gị ma zoo ya n''ihi na ọ na-emebi iwu obodo anyị.'
+  moderation-reason:
+    image: '{1}Otu foto (%names%) yiri ihe e mere maka ndị okenye.|]1,Inf]Ụfọdụ foto (%names%) yiri ihe e mere maka ndị okenye.'
+    screenshot: 'Foto ihuenyo ahụ yiri ihe e mere maka ndị okenye.'
+    cover: 'Foto mkpuchi ahụ yiri ihe e mere maka ndị okenye.'
+    text:
+      name: 'Aha ahụ yiri ka ọ na-ekwu na nke a bụ naanị maka ndị okenye.'
+      description: 'Nkọwa ahụ yiri ka ọ na-ekwu na nke a bụ naanị maka ndị okenye.'
+      credits: 'Ndetu na credits ahụ yiri ka ha na-ekwu na nke a bụ naanị maka ndị okenye.'
+      about: 'Ederede "Gbasara m" gị yiri ka ọ na-ekwu na nke a bụ naanị maka ndị okenye.'
+      currently_working_on: 'Ederede "Ihe m na-arụ ugbu a" gị yiri ka ọ na-ekwu na nke a bụ naanị maka ndị okenye.'
+      username: 'Aha njirimara gị yiri ka ọ na-ekwu na nke a bụ naanị maka ndị okenye.'
+    category:
+      copyright: 'Ihe kpatara ya: o yiri ka ọ na-eji ọrụ ndị ọzọ n''enweghị ikike.'
+      sexual_content: 'Ihe kpatara ya: o yiri ihe e mere maka ndị okenye.'
+      graphic_violence: 'Ihe kpatara ya: o yiri ka o nwere ime ihe ike karịrị akarị.'
+      hateful_content: 'Ihe kpatara ya: o yiri ka ọ na-ewute ndị ọzọ ma ọ bụ na-egosi ịkpọasị n''ebe ha nọ.'
+      improper_rating: 'Ihe kpatara ya: o yiri ka ọ dabaghị maka ụmụaka.'
+      spam: 'Ihe kpatara ya: o yiri spam.'
+      other: 'Ihe kpatara ya: onye nlekọta hụrụ nsogbu na ya.'
+      inappropriate: 'Ihe kpatara ya: o yiri ihe na-ekwesịghị ekwesị.'
+      harassment: 'Ihe kpatara ya: o yiri ka ọ na-emegbu ma ọ bụ na-esogbu mmadụ.'
+      impersonation: 'Ihe kpatara ya: o yiri ka ọ na-eme ka ọ bụ onye ọzọ.'
+      inappropriate_profile: 'Ihe kpatara ya: profaịlụ ahụ yiri ihe na-ekwesịghị ekwesị.'
+      spam_account: 'Ihe kpatara ya: o yiri akaụntụ spam.'
+      inappropriate_content: 'Ihe kpatara ya: o yiri ihe na-ekwesịghị ekwesị.'
 clipboard:
   success: 'E detuola njikọ na clipboard!'
   success_project: 'E detuola njikọ ọrụ na clipboard!'
@@ -626,7 +697,6 @@ previous: 'Nke gara aga'
 media-packages:
   title: 'Ọbá mgbasa ozi'
   description: "N'ụdị ndị a ị ga-ahụ ndị omee na ihe ị ga-etinye n'ọrụ gị."
-  theme-special: 'Isiokwu pụrụ iche %flavor%'
   search-results: 'Nsonaazụ ọchụchọ ọbá mgbasa ozi'
 flavor:
   pocketcode: Pocket Code
@@ -843,6 +913,10 @@ studio:
       ban_failed: 'Ihe mebiri mgbe a na-amachibido onye otu a. Nwaa ọzọ ma emechaa.'
       demote_member: 'Wedata onye nchịkwa ka ọ bụrụ onye otu'
       demotion_failed: 'Ihe mebiri mgbe a na-ewedata onye nchịkwa a. Nwaa ọzọ ma emechaa.'
+      banned_members: 'Ndị otu a machibidoro'
+      unban_member: 'Wepụ mmachibido'
+      unban_hint: 'Iwepụ mmachibido na-enye onye ahụ ohere isonye ọzọ dịka o kwesịrị. Ọ naghị etinyeghachi ha na studio ahụ.'
+      unban_failed: 'Enweghị ike imelite ndị otu a machibidoro. Biko nwaa ọzọ.'
     join_requests:
       title: 'Arịrịọ isonye'
       accept: 'Nabata'
@@ -859,6 +933,29 @@ studio:
       studio_description: 'Nkọwa'
       toggle_allow_comments: 'Nkọwa'
       toggle_privacy: 'Ọha'
+    banned: 'Ị nweghị ike isonye na studio a.'
+    invites:
+      title: 'Koodu òkù'
+      hint: 'Onye ọ bụla nwere koodu ma ọ bụ njikọ ahụ na-esonye na studio a ozugbo, n''achọghị nkwado. Iwepụ koodu anaghị achụpụ ndị otu sonyelarịị.'
+      expires_on: 'Ọ ga-agwụ na (nhọrọ)'
+      max_uses: 'Ojiji kacha (nhọrọ)'
+      create: 'Mepụta koodu òkù'
+      uses: 'E jirila ya ugboro %uses%'
+      uses_max: 'E jirila ya ugboro %uses% n''ime %max%'
+      expires: 'Ọ ga-agwụ na %date%'
+      qr_alt: 'Nyochaa koodu QR a iji sonye na studio ahụ'
+      copy_link: 'Detuo njikọ'
+      copied: 'E detuola njikọ òkù na clipboard!'
+      revoke: 'Wepụ'
+      none: 'Enweghị koodu òkù ọ bụla ugbu a.'
+      error: 'Ihe mebiri na koodu òkù ahụ. Biko nwaa ọzọ.'
+  join_with_code:
+    title: 'Jiri koodu sonye'
+    hint: 'Ị nwetara koodu òkù site n''aka onye nkuzi gị ma ọ bụ onye nchịkwa studio? Tinye ya ebe a iji sonye na studio ahụ.'
+    code: 'Koodu òkù'
+    invalid: 'Koodu a adịghị mma. O nwere ike ịbụ na oge ya agafeela ma ọ bụ na e wepụrụ ya.'
+    banned: 'A machibidola gị na studio a.'
+    rate_limited: 'Ọtụtụ mgbalị karịrị akarị. Biko chere nkeji ole na ole ma nwaa ọzọ.'
 media_library:
   file:
     size: 'Nha: %size%'
@@ -928,3 +1025,8 @@ moderation:
     user_own: "E kwụsịtụla akaụntụ gị n'ihi akụkọ obodo. Ị nwere ike ịrịọ ka e leghachi anya na mkpebi a."
 Reports: 'Akụkọ'
 members: 'ndị otu'
+inactiveAccount:
+  subject: 'A ga-ehichapụ akaụntụ Catrobat gị'
+  title: 'Agụụ gị na-agụ anyị!'
+  content: 'Ị banyebeghị n''akaụntụ Catrobat gị "%username%" afọ abụọ, o nweghịkwa ọrụ ma ọ bụ nkọwa ọ bụla. Iji mee ka obodo anyị dịrị ndụ, anyị ga-ehichapụ ya n''ime ụbọchị %days%. Ọ bụrụ na ịchọrọ idebe ya, banye naanị otu ugboro.'
+  button: 'Banye iji debe akaụntụ m'

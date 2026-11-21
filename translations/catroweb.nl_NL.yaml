@@ -12,8 +12,6 @@ username: Gebruikersnaam
 password: Wachtwoord
 email: 'E-mail'
 about: Over Catrobat
-chat: Chat en forums
-others: Overige
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'Hoe heb je dit project gemaakt? Heb je ideeën, scripts of tekeningen van anderen gebruikt? Bedank ze hier.'
 projectImportedFromScratch: 'Dit project is geïmporteerd uit MIT Scratch. Je kunt het originele project bekijken'
 scratchImportedProjectLinkHere: 'hier.'
-country: Land
 privacyPolicy: Privacybeleid
 projectDetails: Details
 somethingWentWrong: 'Oeps, er is iets fout gegaan.'
@@ -47,7 +44,6 @@ doesNotExist: 'De gevraagde bron bestaat niet.'
 pleaseTryAgain: 'Probeer het opnieuw!'
 tryAgainButton: 'Probeer opnieuw'
 more: 'meer'
-less: 'minder'
 show-more: 'More information'
 more-information: 'Meer informatie'
 less-information: 'Minder informatie'
@@ -68,7 +64,6 @@ users: 'Gebruikers'
 studios: "Studios"
 oauthPopUpTitle: 'Informatie over inloggen met een extern account'
 oauthInfo: 'Je hebt zojuist een extern account gebruikt om in te loggen. We hebben een willekeurige gebruikersnaam voor je aangemaakt. Als je je gebruikersnaam wilt wijzigen of een nieuw wachtwoord voor je account wilt aanmaken, ga dan naar je profielpagina.'
-statistics: 'Statistieken'
 languageSelection: 'Taalkeuze'
 color-scheme:
   title: 'Thema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Mensen die op dit project hebben gereageerd'
     all: "Alle"
-  languageVersion: 'Catrobat-taalversie: %languageVersion%'
   updateAppHeaderDownload: 'Downloaden niet mogelijk'
   updateAppTextDownload: 'Werk je app bij naar de nieuwste versie. Let op: nog niet alle Android-functies zijn beschikbaar op iOS.'
   checkout_this_project: 'Bekijk dit Catrobat-project'
@@ -218,6 +212,18 @@ project:
   createTranslation: 'Vertaling maken'
   deletedComment: '**Verwijderd**'
   notForKids: 'Niet geschikt voor kinderen'
+  customUrl:
+    title: 'Eigen URL'
+    hint: 'Kies een korte naam voor de link van dit project: 3-50 kleine letters, cijfers of koppeltekens. Laat leeg om hem te verwijderen.'
+  playInBrowser: 'Spelen in de browser'
+  madeWithVersion: 'Gemaakt met app-versie %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Gemaakt met een oudere app-versie'
+    text: 'Dit project kan nog niet in de browser worden gespeeld. Open het in Pocket Code en upload het opnieuw om het bij te werken.'
+  translateAgain: 'Opnieuw vertalen met deze talen'
+  prefillMachineTranslation: 'Automatische vertaling invullen'
+  machineTranslationFailed: 'Automatische vertaling is nu niet beschikbaar. Probeer het later opnieuw.'
+  machineTranslationUnsupported: 'Automatische vertaling is niet beschikbaar voor deze taal.'
 remixGraph:
   showRemixGraph: 'Remixdiagram'
   by: 'met'
@@ -407,6 +413,10 @@ search:
   noProjects: 'Geen projecten gevonden'
   noStudios: 'Geen studio''s gevonden'
   sameSearchMessage: 'Het lijkt erop dat je hier al bent! Probeer een andere zoekopdracht?'
+  noResults: 'Geen resultaten voor ‘%query%’'
+  scratchProjects: 'Scratch-projecten'
+  scratchConverting: 'Omzetten voor %app%…'
+  scratchConvertingSnackbar: '‘%name%’ wordt omgezet — dit kan een paar seconden duren'
 menu:
   profile: 'Profiel'
   login: Inloggen
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: 'Bevestig je e-mailadres'
+  leaderboard:
+    all_time: 'Topmakers'
+    this_week: 'Topmakers van deze week'
+    points: 'punten'
 api:
   registerUser:
     emailMissing: 'E-mailadres ontbreekt'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: 'Beschrijving te lang'
     creditsTooLong: 'Notities en credits te lang'
     screenshotInvalid: 'Schermafbeelding van project ongeldig of niet ondersteund'
+    slugInvalid: 'Een eigen URL moet bestaan uit 3-50 kleine letters, cijfers of enkele koppeltekens, met minstens één letter'
+    slugReserved: 'Deze eigen URL is gereserveerd'
+    slugTaken: 'Deze eigen URL is al in gebruik'
   projectsPost:
     invalid_checksum: 'Ongeldige checksum. Probeer opnieuw te uploaden!'
     upload_error: 'Fout bij het uploaden. Probeer opnieuw te uploaden!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'Scripts'
   looks: 'Uiterlijk'
   sounds: 'Geluiden'
+  unavailable: 'De code van dit project kan niet worden getoond.'
+  translation:
+    action: 'Vertalen'
+    translateTo: 'Vertalen naar het %language%'
+    translateAgain: 'Opnieuw vertalen'
+    stillShowing: 'Nog steeds in het %language%'
+    original: 'Origineel tonen'
+    resume: 'Verder vertalen'
+    source: 'Van'
+    target: 'Naar'
+    auto: 'Taal herkennen'
+    loading: 'Code wordt vertaald…'
+    complete: 'Automatisch vertaald naar het %language%'
+    partial: 'Gedeeltelijk vertaald'
+    partialInLanguage: 'Gedeeltelijk vertaald naar het %language%'
+    sourceRequired: 'Kies de brontaal om deze code te vertalen.'
+    unsupported: 'Vertalen is niet beschikbaar voor deze talen.'
+    error: 'De code kon niet worden vertaald. Probeer het opnieuw.'
 codeStatistics:
   title: 'Codestatistieken'
   error: 'Codestatistieken kunnen niet worden weergegeven.'
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Je project "%project_name%" is automatisch verwijderd wegens inactiviteit. Upload het opnieuw als je het nog wilt delen.'
   noProjects: 'Het lijkt erop dat je geen meldingen over projecten hebt.'
+  studio-deletion-warning:
+    message: 'Je studio "%studio_name%" heeft geen projecten en er is 90 dagen niets in gebeurd. Hij wordt over %days% dagen verwijderd, tenzij je een project toevoegt.'
+  project-files-lost:
+    message: 'Door een serverfout zijn de bestanden van %count% van je projecten verloren gegaan: %projects%. Ze zijn verborgen tot je ze opnieuw uploadt vanuit Pocket Code. Projecten die niet binnen 14 dagen opnieuw worden geüpload, worden verwijderd.'
+    more: 'en nog %count%'
+  moderation-warning:
+    message: 'Een moderator heeft een melding over je inhoud bekeken en vond dat die onze communityregels overtreedt. Houd je aan de regels, anders kan je account de volgende keer worden geschorst.'
+    deletion: 'De verborgen inhoud wordt %days% dagen nadat hij verborgen is verwijderd, tenzij je het oplost of bezwaar maakt.'
+  moderation-hidden:
+    message: 'Een moderator heeft een melding over je inhoud bekeken en hem verborgen omdat hij onze communityregels overtreedt.'
+  moderation-reason:
+    image: '{1}Een afbeelding (%names%) leek inhoud voor volwassenen.|]1,Inf]Enkele afbeeldingen (%names%) leken inhoud voor volwassenen.'
+    screenshot: 'De schermafbeelding leek inhoud voor volwassenen.'
+    cover: 'De omslagafbeelding leek inhoud voor volwassenen.'
+    text:
+      name: 'De naam leek te zeggen dat dit alleen voor volwassenen is.'
+      description: 'De beschrijving leek te zeggen dat dit alleen voor volwassenen is.'
+      credits: 'De notities en credits leken te zeggen dat dit alleen voor volwassenen is.'
+      about: 'Je tekst "Over mij" leek te zeggen dat dit alleen voor volwassenen is.'
+      currently_working_on: 'Je tekst "Bezig met" leek te zeggen dat dit alleen voor volwassenen is.'
+      username: 'Je gebruikersnaam leek te zeggen dat dit alleen voor volwassenen is.'
+    category:
+      copyright: 'Reden: het lijkt werk van anderen te gebruiken zonder toestemming.'
+      sexual_content: 'Reden: het leek inhoud voor volwassenen.'
+      graphic_violence: 'Reden: het leek te gewelddadig.'
+      hateful_content: 'Reden: het leek kwetsend of haatdragend tegenover anderen.'
+      improper_rating: 'Reden: het leek niet geschikt voor kinderen.'
+      spam: 'Reden: het leek spam.'
+      other: 'Reden: een moderator vond er een probleem mee.'
+      inappropriate: 'Reden: het leek ongepast.'
+      harassment: 'Reden: het leek iemand te pesten of lastig te vallen.'
+      impersonation: 'Reden: het leek zich voor te doen als iemand anders.'
+      inappropriate_profile: 'Reden: het profiel leek ongepast.'
+      spam_account: 'Reden: het leek een spamaccount.'
+      inappropriate_content: 'Reden: het leek ongepast.'
 clipboard:
   success: 'Link naar klembord gekopieerd!'
   success_project: 'Link naar project naar klembord gekopieerd!'
@@ -649,7 +719,6 @@ previous: 'Vorige'
 media-packages:
   title: 'Mediabibliotheek'
   description: 'In de volgende categorieën vind je acteurs en objecten om aan je projecten toe te voegen.'
-  theme-special: '%flavor%-themaspecial'
   search-results: 'Zoekresultaten in de mediabibliotheek'
 flavor:
   pocketcode: Pocket Code
@@ -866,6 +935,10 @@ studio:
       ban_failed: 'Er ging iets mis bij het verbannen van dit lid. Probeer het later opnieuw.'
       demote_member: 'Beheerder terugzetten naar lid'
       demotion_failed: 'Er ging iets mis bij het terugzetten van deze beheerder. Probeer het later opnieuw.'
+      banned_members: 'Verbannen leden'
+      unban_member: 'Verbanning opheffen'
+      unban_hint: 'Als je een verbanning opheft, kan de persoon gewoon opnieuw lid worden. Hij wordt niet automatisch weer aan de studio toegevoegd.'
+      unban_failed: 'De verbannen leden konden niet worden bijgewerkt. Probeer het opnieuw.'
     join_requests:
       title: 'Lidmaatschapsverzoeken'
       accept: 'Accepteren'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'Beschrijving'
       toggle_allow_comments: 'Reacties'
       toggle_privacy: 'Openbaar'
+    banned: 'Je kunt geen lid worden van deze studio.'
+    invites:
+      title: 'Uitnodigingscodes'
+      hint: 'Iedereen met de code of link wordt meteen lid van deze studio, zonder goedkeuring. Als je een code intrekt, blijven de leden die al lid zijn geworden.'
+      expires_on: 'Verloopt op (optioneel)'
+      max_uses: 'Max. aantal keer gebruiken (optioneel)'
+      create: 'Uitnodigingscode maken'
+      uses: '%uses% keer gebruikt'
+      uses_max: '%uses% van %max% keer gebruikt'
+      expires: 'Verloopt %date%'
+      qr_alt: 'Scan deze QR-code om lid te worden van de studio'
+      copy_link: 'Link kopiëren'
+      copied: 'Uitnodigingslink gekopieerd naar het klembord!'
+      revoke: 'Intrekken'
+      none: 'Nog geen uitnodigingscodes.'
+      error: 'Er is iets misgegaan met de uitnodigingscode. Probeer het opnieuw.'
+  join_with_code:
+    title: 'Lid worden met een code'
+    hint: 'Heb je een uitnodigingscode gekregen van je leraar of een studiobeheerder? Vul hem hier in om lid te worden van de studio.'
+    code: 'Uitnodigingscode'
+    invalid: 'Deze code is niet geldig. Hij is misschien verlopen of ingetrokken.'
+    banned: 'Je bent verbannen uit deze studio.'
+    rate_limited: 'Te veel pogingen. Wacht een paar minuten en probeer het opnieuw.'
 media_library:
   file:
     size: 'Grootte: %size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: 'Je account is geschorst vanwege meldingen uit de community. Je kunt bezwaar maken tegen deze beslissing.'
 Reports: 'Meldingen'
 members: 'leden'
+inactiveAccount:
+  subject: 'Je Catrobat-account wordt verwijderd'
+  title: 'We missen je!'
+  content: 'Je bent al twee jaar niet ingelogd op je Catrobat-account "%username%" en het heeft geen projecten of reacties. Om onze community levendig te houden, verwijderen we het over %days% dagen. Wil je het houden? Log dan gewoon één keer in.'
+  button: 'Inloggen om mijn account te houden'

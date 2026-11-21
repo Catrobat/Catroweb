@@ -12,8 +12,6 @@ username: کارن نوم
 password: رمز
 email: ای میل
 about: د Catrobat په اړه
-chat: چیٹ او فورمونه
-others: نور
 googlePlay: Google Play
 iosAppStore: 'iOS App store'
 instagram: انسټاګرام
@@ -37,7 +35,6 @@ noCredits: 'هیڅ یادښتونه او کریډیټونه شتون نه لري
 notesAndCreditsDescription: 'تا دا پروژه څنګه جوړه کړه؟ ایا تا د نورو خلکو نظریات، سکریپټونه یا هنري کار کارولي؟ دلته ترې مننه وکړه.'
 projectImportedFromScratch: 'دا پروژه له MIT Scratch څخه راوړل شوې ده. اصلي پروژه دلته کتلی شې'
 scratchImportedProjectLinkHere: 'دلته.'
-country: هیواد
 privacyPolicy: د پټتیا تګلاره
 projectDetails: جزیات
 somethingWentWrong: 'او یو څه غلط شو.'
@@ -47,7 +44,6 @@ doesNotExist: 'غوښتل شوې سرچینه شتون نه لري.'
 pleaseTryAgain: 'مهرباني وکړه بیا هڅه وکړه!'
 tryAgainButton: 'بیا هڅه وکړه'
 more: 'نور'
-less: 'لږ'
 show-more: 'نور وښیه'
 more-information: 'نور مالومات'
 less-information: 'لږ معلومات'
@@ -68,7 +64,6 @@ users: 'کاروونکی'
 studios: 'سټوډیوګانې'
 oauthPopUpTitle: "د بهرني حساب د ننوتلو معلومات"
 oauthInfo: 'تا همدا اوس د ننوتلو لپاره یو بهرنی حساب وکاراوه. موږ ستا لپاره یو تصادفي کارن نوم جوړ کړ. که غواړې خپل کارن نوم بدل کړې یا د خپل حساب لپاره نوی پټنوم جوړ کړې، مهرباني وکړه خپل پروفایل پاڼې ته لاړ شه.'
-statistics: "احصایې"
 languageSelection: 'د ژبې ټاکنه'
 color-scheme:
   title: 'بڼه'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'هغه کسان چې دې پروژې ته یې غبرګون ښودلی'
     all: "ټول"
-  languageVersion: 'د Catrobat ژبې نسخه: %languageVersion%'
   updateAppHeaderDownload: 'ډاونلوډ ممکن نه دی'
   updateAppTextDownload: 'مهرباني وکړه خپل اپ تر ټولو نوې نسخې ته تازه کړه. په یاد ولره چې د Android ټولې ځانګړتیاوې لا په IOS کې نشته.'
   checkout_this_project: 'دا Catrobat پروژه وګوره'
@@ -217,6 +211,19 @@ project:
   createTranslation: 'ژباړه جوړه کړه'
   deletedComment: '**حذف شوی**'
   notForKids: 'د ماشومانو لپاره خوندي نه ده'
+  customUrl:
+    title: 'ځانګړی URL'
+    hint: 'د دې پروژې د لینک لپاره یو لنډ نوم وټاکه: ۳-۵۰ واړه انګلیسي توري، شمېرې یا خط تیرې (-). د لرې کولو لپاره یې خالي پرېږده.'
+  playInBrowser: 'په براوزر کې لوبه وکړه'
+  madeWithVersion: 'د اپ په %app% نسخې جوړ شوی (Catrobat %language%)'
+  oldVersion:
+    title: 'د اپ په زړې نسخې جوړ شوی'
+    text: 'دا پروژه لا په براوزر کې نه شي لوبول کېدای. په Pocket Code کې یې پرانیزه او بیا یې پورته کړه چې تازه شي.'
+  translatedByLine: 'له %sourceLanguage% څخه %targetLanguage% ته ماشیني ژباړه'
+  translateAgain: 'په دې ژبو بیا وژباړه'
+  prefillMachineTranslation: 'ماشیني ژباړه ډکه کړه'
+  machineTranslationFailed: 'ماشیني ژباړه اوس شتون نه لري. مهرباني وکړه وروسته بیا هڅه وکړه.'
+  machineTranslationUnsupported: 'د دې ژبې لپاره ماشیني ژباړه شتون نه لري.'
 remixGraph:
   showRemixGraph: 'د ریمکس ګراف'
   by: 'لخوا'
@@ -408,6 +415,10 @@ search:
   noProjects: 'هیڅ پروژه ونه موندل شوه'
   noStudios: 'هیڅ سټوډیو ونه موندل شوه'
   sameSearchMessage: 'داسې ښکاري چې ته لا دمخه دلته یې! بل لټون هڅه کوې؟'
+  noResults: 'د «%query%» لپاره هېڅ پایله نشته'
+  scratchProjects: 'د Scratch پروژې'
+  scratchConverting: 'د %app% لپاره بدلېږي…'
+  scratchConvertingSnackbar: '«%name%» بدلېږي — دا کېدای شي څو ثانیې ونیسي'
 menu:
   profile: زما پېژنيال
   login: د ننه کیدل
@@ -517,6 +528,10 @@ time:
 user:
   verification:
     email: 'خپل ایمیل تایید کړه'
+  leaderboard:
+    all_time: 'غوره جوړونکي'
+    this_week: 'د دې اونۍ غوره جوړونکي'
+    points: 'نمرې'
 api:
   registerUser:
     emailMissing: 'بریښنالیک ورک دی'
@@ -552,6 +567,9 @@ api:
     descriptionTooLong: 'تشریح ډېره اوږده ده'
     creditsTooLong: 'یادښتونه او کریډیټونه ډېر اوږده دي'
     screenshotInvalid: 'د پروژې سکرین شاټ ناسم دی یا ملاتړ یې نه کېږي'
+    slugInvalid: 'ځانګړی URL باید له ۳-۵۰ واړو تورو، شمېرو یا یوازې خط تیرو (-) جوړ وي، او لږ تر لږه یو توری ولري'
+    slugReserved: 'دا ځانګړی URL خوندي شوی دی'
+    slugTaken: 'دا ځانګړی URL دمخه نیول شوی دی'
   projectsPost:
     invalid_checksum: 'ناسم چکسم. بیا د پورته کولو هڅه وکړه!'
     upload_error: 'د پورته کولو پر مهال تېروتنه. بیا د پورته کولو هڅه وکړه!'
@@ -591,6 +609,24 @@ codeView:
   scripts: 'سکریپټ'
   looks: 'ښکاري'
   sounds: 'غږونه'
+  unavailable: 'د دې پروژې کوډ نه شي ښودل کېدای.'
+  translation:
+    action: 'ژباړه'
+    translateTo: '%language% ته وژباړه'
+    translateAgain: 'بیا وژباړه'
+    stillShowing: 'لا هم په %language% ښودل کېږي'
+    original: 'اصلي وښیه'
+    resume: 'ژباړه دوام ورکړه'
+    source: 'له'
+    target: 'ته'
+    auto: 'ژبه وپېژنه'
+    loading: 'کوډ ژباړل کېږي…'
+    complete: '%language% ته ماشیني ژباړل شوی'
+    partial: 'یوه برخه یې ژباړل شوې'
+    partialInLanguage: 'یوه برخه یې %language% ته ژباړل شوې'
+    sourceRequired: 'د دې کوډ د ژباړلو لپاره سرچینه ژبه وټاکه.'
+    unsupported: 'د دې ژبو لپاره ژباړه شتون نه لري.'
+    error: 'کوډ ونه ژباړل شو. بیا هڅه وکړه.'
 codeStatistics:
   title: "د کوډ احصایې"
   error: "د کوډ احصایې نشي ښودل کیدی."
@@ -641,6 +677,41 @@ catro-notifications:
   project-deleted:
     message: 'ستا پروژه "%project_name%" د غیرفعالیت له امله په اوتومات ډول لرې شوه. که لا یې هم شریکول غواړې، بیا یې پورته کړه.'
   noProjects: 'داسې ښکاري چې د پروژو هیڅ خبرتیا نه لرې.'
+  studio-deletion-warning:
+    message: 'ستا سټوډیو "%studio_name%" هېڅ پروژه نه لري او په ۹۰ ورځو کې پکې هېڅ نه دي شوي. په %days% ورځو کې به ړنګه شي، مګر دا چې ته پکې یوه پروژه ورزیاته کړې.'
+  project-files-lost:
+    message: 'د سرور یوې تېروتنې ستا د %count% پروژو فایلونه ورک کړل: %projects%. دا تر هغه پټې دي چې ته یې له Pocket Code څخه بیا پورته کړې. هغه پروژې چې په ۱۴ ورځو کې بیا پورته نه شي، ړنګې به شي.'
+    more: 'او %count% نورې'
+  moderation-warning:
+    message: 'یوه منځګړي ستا د منځپانګې په اړه یو راپور وکوت او ویې موندل چې زموږ د ټولنې قواعد ماتوي. مهرباني وکړه قواعد ومنه، کنه بل ځل به دې حساب وځنډول شي.'
+    deletion: 'پټه منځپانګه به د پټېدو نه %days% ورځې وروسته ړنګه شي، مګر دا چې ته یې سمه کړې یا اعتراض وکړې.'
+  moderation-hidden:
+    message: 'یوه منځګړي ستا د منځپانګې په اړه یو راپور وکوت او هغه یې پټه کړه ځکه چې زموږ د ټولنې قواعد ماتوي.'
+  moderation-reason:
+    image: '{1}یو انځور (%names%) د لویانو منځپانګې ته ورته و.|]1,Inf]ځینې انځورونه (%names%) د لویانو منځپانګې ته ورته وو.'
+    screenshot: 'سکرین شاټ د لویانو منځپانګې ته ورته و.'
+    cover: 'د پوښ انځور د لویانو منځپانګې ته ورته و.'
+    text:
+      name: 'نوم داسې ښکارېده چې وايي دا یوازې د لویانو لپاره دی.'
+      description: 'تفصیل داسې ښکارېده چې وايي دا یوازې د لویانو لپاره دی.'
+      credits: 'یادښتونه او کریډیټونه داسې ښکارېدل چې وايي دا یوازې د لویانو لپاره دی.'
+      about: 'ستا د «زما په اړه» متن داسې ښکارېده چې وايي دا یوازې د لویانو لپاره دی.'
+      currently_working_on: 'ستا د «اوس پرې کار کوم» متن داسې ښکارېده چې وايي دا یوازې د لویانو لپاره دی.'
+      username: 'ستا کارن نوم داسې ښکارېده چې وايي دا یوازې د لویانو لپاره دی.'
+    category:
+      copyright: 'لامل: داسې ښکاري چې د نورو کار پرته له اجازې کاروي.'
+      sexual_content: 'لامل: د لویانو منځپانګې ته ورته و.'
+      graphic_violence: 'لامل: ډېر تاوتریخجن ښکارېده.'
+      hateful_content: 'لامل: نورو ته زیان رسوونکی یا له کرکې ډک ښکارېده.'
+      improper_rating: 'لامل: ماشومانو ته مناسب نه ښکارېده.'
+      spam: 'لامل: سپام ته ورته و.'
+      other: 'لامل: یوه منځګړي پکې ستونزه وموندله.'
+      inappropriate: 'لامل: نامناسب ښکارېده.'
+      harassment: 'لامل: داسې ښکارېده چې یو څوک ځوروي یا تنګوي.'
+      impersonation: 'لامل: داسې ښکارېده چې ځان بل څوک ښيي.'
+      inappropriate_profile: 'لامل: پروفایل نامناسب ښکارېده.'
+      spam_account: 'لامل: د سپام حساب ته ورته و.'
+      inappropriate_content: 'لامل: نامناسب ښکارېده.'
 clipboard:
   success: 'لینک کلیپ بورډ ته کاپي شو!'
   success_project: 'د پروژې لینک کلیپ بورډ ته کاپي شو!'
@@ -650,7 +721,6 @@ previous: مخکینی
 media-packages:
   title: د رسنیو کڅوړې
   description: 'په لاندې کټګوریو کې ته کولی شې لوبغاړي او توکي ومومې څو یې خپلو پروژو ته ورزیات کړې.'
-  theme-special: "%flavor% موضوع ځانګړې"
   search-results: د رسنیو کتابتون د لټون پایلې
 flavor:
   pocketcode: Pocket Code
@@ -867,6 +937,10 @@ studio:
       ban_failed: 'د دې غړي د منع کولو پر مهال یوه ستونزه رامنځته شوه. وروسته بیا هڅه وکړه.'
       demote_member: 'اډمین بېرته غړی کړه'
       demotion_failed: 'د دې اډمین د ټیټولو پر مهال یوه ستونزه رامنځته شوه. وروسته بیا هڅه وکړه.'
+      banned_members: 'منع شوي غړي'
+      unban_member: 'منع لرې کړه'
+      unban_hint: 'د منع لرې کول دې کس ته اجازه ورکوي چې په عادي ډول بیا یوځای شي. دا یې بېرته سټوډیو ته نه ورزیاتوي.'
+      unban_failed: 'منع شوي غړي تازه نه شول. مهرباني وکړه بیا هڅه وکړه.'
     join_requests:
       title: 'د یوځای کېدو غوښتنې'
       accept: 'ومنه'
@@ -883,6 +957,29 @@ studio:
       studio_description: 'تفصیل'
       toggle_allow_comments: 'تبصرې'
       toggle_privacy: 'عامه'
+    banned: 'ته له دې سټوډیو سره نه شې یوځای کېدای.'
+    invites:
+      title: 'د بلنې کوډونه'
+      hint: 'هر څوک چې کوډ یا لینک ولري، سمدستي پرته له منظورۍ له دې سټوډیو سره یوځای کېږي. د کوډ لغوه کول هغه غړي نه لرې کوي چې دمخه یوځای شوي دي.'
+      expires_on: 'د پای نېټه (اختیاري)'
+      max_uses: 'تر ټولو ډېر کارول (اختیاري)'
+      create: 'د بلنې کوډ جوړ کړه'
+      uses: '%uses% ځله کارول شوی'
+      uses_max: 'له %max% څخه %uses% ځله کارول شوی'
+      expires: 'پای ته رسېږي %date%'
+      qr_alt: 'دا QR کوډ سکین کړه چې سټوډیو سره یوځای شې'
+      copy_link: 'لینک کاپي کړه'
+      copied: 'د بلنې لینک کلیپ بورډ ته کاپي شو!'
+      revoke: 'لغوه کړه'
+      none: 'تر اوسه د بلنې کوډونه نشته.'
+      error: 'د بلنې کوډ سره څه ستونزه پېښه شوه. مهرباني وکړه بیا هڅه وکړه.'
+  join_with_code:
+    title: 'د کوډ سره یوځای شه'
+    hint: 'له خپل ښوونکي یا د سټوډیو له اډمین څخه دې د بلنې کوډ ترلاسه کړی؟ دلته یې ولیکه چې سټوډیو سره یوځای شې.'
+    code: 'د بلنې کوډ'
+    invalid: 'دا کوډ سم نه دی. کېدای شي موده یې پای ته رسېدلې وي یا لغوه شوی وي.'
+    banned: 'ته له دې سټوډیو څخه منع شوی یې.'
+    rate_limited: 'ډېرې هڅې. مهرباني وکړه څو دقیقې انتظار وکړه او بیا هڅه وکړه.'
 media_library:
   file:
     size: 'اندازه: %size%'
@@ -952,3 +1049,8 @@ moderation:
     user_own: 'ستا حساب د ټولنې د راپورونو له امله ځنډول شوی دی. ته کولی شې پر دې پرېکړې اعتراض وکړې.'
 Reports: 'راپورونه'
 members: 'غړي'
+inactiveAccount:
+  subject: 'ستا د Catrobat حساب به ړنګ شي'
+  title: 'موږ دې یادوو!'
+  content: 'تا دوه کاله کېږي چې خپل د Catrobat حساب "%username%" ته نه یې ننوتی او په دې کې هېڅ پروژه یا تبصره نشته. د دې لپاره چې زموږ ټولنه ژوندۍ پاتې شي، موږ به یې په %days% ورځو کې ړنګ کړو. که غواړې چې وې ساتې، یوازې یو ځل ننوځه.'
+  button: 'ننوځه چې حساب مې پاتې شي'

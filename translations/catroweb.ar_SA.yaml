@@ -12,8 +12,6 @@ username: اسم المستخدم
 password: كلمة المرور
 email: البريد الإلكتروني
 about: حول كاتروبات
-chat: المحادثات والمنتديات
-others: الآخرين
 googlePlay: متجرجوجل
 iosAppStore: IOS App store
 instagram: إنستغرام
@@ -37,7 +35,6 @@ noCredits: لا توجد ملاحظات أو أرصدة متاحة.
 notesAndCreditsDescription: كيف قمت بإنشاء هذا المشروع؟ هل استخدمت الأفكار أو البرامج النصية أو الأعمال الفنية من أشخاص آخرين؟ شكراً لهم هنا.
 projectImportedFromScratch: "تم استيراد هذا المشروع من MIT Scratch. يمكنك الاطلاع على المشروع الأصلي"
 scratchImportedProjectLinkHere: "هنا."
-country: البلد
 privacyPolicy: سياسة الخصوصية
 projectDetails: التفاصيل
 somethingWentWrong: 'عذرا, هناك شيء خاطئ.'
@@ -47,7 +44,6 @@ doesNotExist: "المورد المطلوب غير موجود."
 pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
 tryAgainButton: "حاول مرة أخرى"
 more: 'المزيد'
-less: 'أقل'
 show-more: 'إظهار المزيد'
 more-information: 'مزيد من المعلومات'
 less-information: 'معلومات أقل'
@@ -68,7 +64,6 @@ users: "المستخدم"
 studios: "الاستوديوهات"
 oauthPopUpTitle: "معلومات تسجيل الدخول للحساب الخارجي"
 oauthInfo: 'لقد استخدمت للتو حساب خارجي لتسجيل الدخول. قمنا بإنشاء اسم مستخدم عشوائي لك. إذا كنت ترغب في تغيير اسم المستخدم الخاص بك أو إنشاء كلمة مرور جديدة للحساب الخاص بك يرجى الذهاب إلى صفحة ملفي الشخصي.'
-statistics: "الإحصائيات"
 languageSelection: "اختيار اللغة"
 color-scheme:
   title: "المظهر"
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "الأشخاص الذين تفاعلوا مع هذا المشروع"
     all: "جميع"
-  languageVersion: "إصدار لغة Catrobat: %languageVersion%"
   updateAppHeaderDownload: "التنزيل غير ممكن"
   updateAppTextDownload: "يرجى تحديث تطبيقك إلى أحدث إصدار. انتبه إلى أن ليست كل ميزات Android متوفرة بعد على iOS."
   checkout_this_project: "اطّلع على مشروع Catrobat هذا"
@@ -218,6 +212,18 @@ project:
   createTranslation: "إنشاء ترجمة"
   deletedComment: "**محذوف**"
   notForKids: "غير مناسب للأطفال"
+  customUrl:
+    title: 'رابط مخصص'
+    hint: 'اختر اسمًا قصيرًا لرابط هذا المشروع: من 3 إلى 50 حرفًا صغيرًا أو رقمًا أو شرطة. اتركه فارغًا لإزالته.'
+  playInBrowser: 'العب في المتصفح'
+  madeWithVersion: 'تم إنشاؤه بإصدار التطبيق %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'تم إنشاؤه بإصدار أقدم من التطبيق'
+    text: 'لا يمكن تشغيل هذا المشروع في المتصفح بعد. افتحه في Pocket Code وارفعه مرة أخرى لتحديثه.'
+  translateAgain: 'ترجم مرة أخرى بهذه اللغات'
+  prefillMachineTranslation: 'املأ بالترجمة الآلية'
+  machineTranslationFailed: 'الترجمة الآلية غير متاحة حاليًا. يرجى المحاولة مرة أخرى لاحقًا.'
+  machineTranslationUnsupported: 'الترجمة الآلية غير متاحة لهذه اللغة.'
 remixGraph:
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'
   by: 'بمقدار'
@@ -407,6 +413,10 @@ search:
   noProjects: "لم يتم العثور على مشاريع"
   noStudios: "لم يتم العثور على استوديوهات"
   sameSearchMessage: "يبدو أنك هنا بالفعل! هل تجرّب بحثًا مختلفًا؟"
+  noResults: 'لا توجد نتائج لـ «%query%»'
+  scratchProjects: 'مشاريع Scratch'
+  scratchConverting: 'جارٍ التحويل لـ %app%…'
+  scratchConvertingSnackbar: 'جارٍ تحويل «%name%» — قد يستغرق ذلك بضع ثوانٍ'
 menu:
   profile: الصفحة الشخصية
   login: تسجيل الدخول
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: "أكّد بريدك الإلكتروني"
+  leaderboard:
+    all_time: 'أفضل المبدعين'
+    this_week: 'أفضل المبدعين هذا الأسبوع'
+    points: 'نقاط'
 api:
   registerUser:
     emailMissing: 'البريد الإلكتروني مفقود'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: "الوصف طويل جدًا"
     creditsTooLong: "الملاحظات والإشادات طويلة جدًا"
     screenshotInvalid: "لقطة شاشة المشروع غير صالحة أو غير مدعومة"
+    slugInvalid: 'يجب أن يتكون الرابط المخصص من 3 إلى 50 حرفًا صغيرًا أو رقمًا أو شرطة مفردة، مع حرف واحد على الأقل'
+    slugReserved: 'هذا الرابط المخصص محجوز'
+    slugTaken: 'هذا الرابط المخصص مستخدم بالفعل'
   projectsPost:
     invalid_checksum: 'المجموع الاختباري غير صالح. حاول التحميل مرة أخرى!'
     upload_error: 'حدث خطأ أثناء التحميل. حاول التحميل مرة أخرى!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'النص البرمجي'
   looks: 'المناظر'
   sounds: 'الأصوات'
+  unavailable: 'لا يمكن عرض كود هذا المشروع.'
+  translation:
+    action: 'ترجم'
+    translateTo: 'ترجم إلى %language%'
+    translateAgain: 'ترجم مرة أخرى'
+    stillShowing: 'لا يزال يعرض %language%'
+    original: 'إظهار الأصل'
+    resume: 'تابع الترجمة'
+    source: 'من'
+    target: 'إلى'
+    auto: 'اكتشاف اللغة'
+    loading: 'جارٍ ترجمة الكود…'
+    complete: 'تُرجم آليًا إلى %language%'
+    partial: 'مترجم جزئيًا'
+    partialInLanguage: 'مترجم جزئيًا إلى %language%'
+    sourceRequired: 'اختر لغة المصدر لترجمة هذا الكود.'
+    unsupported: 'الترجمة غير متاحة لهذه اللغات.'
+    error: 'تعذّرت ترجمة الكود. حاول مرة أخرى.'
 codeStatistics:
   title: "إحصائيات الرمز"
   error: "لا يمكن عرض إحصائيات الرمز."
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: "أُزيل مشروعك \"%project_name%\" تلقائيًا بسبب عدم النشاط. أعد رفعه إذا كنت لا تزال تريد مشاركته."
   noProjects: "يبدو أنه ليست لديك أي إشعارات مشاريع."
+  studio-deletion-warning:
+    message: 'الاستوديو الخاص بك "%studio_name%" لا يحتوي على أي مشاريع ولم يحدث فيه شيء منذ 90 يومًا. سيُحذف خلال %days% يومًا ما لم تُضف مشروعًا.'
+  project-files-lost:
+    message: 'تسبب خطأ في الخادم بفقدان ملفات %count% من مشاريعك: %projects%. ستبقى مخفية حتى ترفعها مرة أخرى من Pocket Code. المشاريع التي لا يُعاد رفعها خلال 14 يومًا سيتم حذفها.'
+    more: 'و%count% أخرى'
+  moderation-warning:
+    message: 'راجع أحد المشرفين بلاغًا عن المحتوى الخاص بك ووجد أنه يخالف قواعد مجتمعنا. يرجى اتباع القواعد، وإلا فقد يتم تعليق حسابك في المرة القادمة.'
+    deletion: 'سيُحذف المحتوى المخفي بعد %days% يومًا من إخفائه ما لم تصلحه أو تقدّم طعنًا.'
+  moderation-hidden:
+    message: 'راجع أحد المشرفين بلاغًا عن المحتوى الخاص بك وأخفاه لأنه يخالف قواعد مجتمعنا.'
+  moderation-reason:
+    image: '{1}بدت صورة (%names%) كمحتوى للبالغين.|]1,Inf]بدت بعض الصور (%names%) كمحتوى للبالغين.'
+    screenshot: 'بدت لقطة الشاشة كمحتوى للبالغين.'
+    cover: 'بدت صورة الغلاف كمحتوى للبالغين.'
+    text:
+      name: 'بدا أن الاسم يقول إن هذا للبالغين فقط.'
+      description: 'بدا أن الوصف يقول إن هذا للبالغين فقط.'
+      credits: 'بدا أن الملاحظات والاعتمادات تقول إن هذا للبالغين فقط.'
+      about: 'بدا أن نص "نبذة عني" الخاص بك يقول إن هذا للبالغين فقط.'
+      currently_working_on: 'بدا أن نص "أعمل حاليًا على" الخاص بك يقول إن هذا للبالغين فقط.'
+      username: 'بدا أن اسم المستخدم الخاص بك يقول إن هذا للبالغين فقط.'
+    category:
+      copyright: 'السبب: يبدو أنه يستخدم أعمال أشخاص آخرين دون إذن.'
+      sexual_content: 'السبب: بدا كمحتوى للبالغين.'
+      graphic_violence: 'السبب: بدا عنيفًا جدًا.'
+      hateful_content: 'السبب: بدا مؤذيًا أو مليئًا بالكراهية تجاه الآخرين.'
+      improper_rating: 'السبب: بدا غير مناسب للأطفال.'
+      spam: 'السبب: بدا كرسائل مزعجة.'
+      other: 'السبب: وجد أحد المشرفين مشكلة فيه.'
+      inappropriate: 'السبب: بدا غير لائق.'
+      harassment: 'السبب: بدا أنه يتنمّر على شخص ما أو يضايقه.'
+      impersonation: 'السبب: بدا أنه ينتحل شخصية شخص آخر.'
+      inappropriate_profile: 'السبب: بدا الملف الشخصي غير لائق.'
+      spam_account: 'السبب: بدا كحساب رسائل مزعجة.'
+      inappropriate_content: 'السبب: بدا غير لائق.'
 clipboard:
   success: "تم نسخ الرابط إلى الحافظة!"
   success_project: "تم نسخ رابط المشروع إلى الحافظة!"
@@ -649,7 +719,6 @@ previous: السابق
 media-packages:
   title: حزم الوسائط
   description: في الفئات التالية يمكنك العثور على جهات فاعلة وعناصر إضافية لإضافتها إليك مشاريع بوكت كوود.
-  theme-special: "مظهر %flavor% خاص"
   search-results: نتائج البحث في مكتبة الوسائط
 flavor:
   pocketcode: بوكت كوود
@@ -866,6 +935,10 @@ studio:
       ban_failed: "حدث خطأ أثناء حظر هذا العضو. حاول مرة أخرى لاحقًا."
       demote_member: "تخفيض المسؤول إلى عضو"
       demotion_failed: "حدث خطأ أثناء تخفيض رتبة هذا المسؤول. حاول مرة أخرى لاحقًا."
+      banned_members: 'الأعضاء المحظورون'
+      unban_member: 'إلغاء الحظر'
+      unban_hint: 'إلغاء الحظر يتيح للشخص الانضمام مجددًا بشكل عادي. لكنه لا يعيده إلى الاستوديو تلقائيًا.'
+      unban_failed: 'تعذّر تحديث الأعضاء المحظورين. يرجى المحاولة مرة أخرى.'
     join_requests:
       title: "طلبات الانضمام"
       accept: 'قبول'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'الوصف'
       toggle_allow_comments: 'التعليقات'
       toggle_privacy: 'عام'
+    banned: 'لا يمكنك الانضمام إلى هذا الاستوديو.'
+    invites:
+      title: 'رموز الدعوة'
+      hint: 'أي شخص لديه الرمز أو الرابط ينضم إلى هذا الاستوديو فورًا دون الحاجة إلى موافقة. إلغاء الرمز لا يزيل الأعضاء الذين انضموا بالفعل.'
+      expires_on: 'تاريخ الانتهاء (اختياري)'
+      max_uses: 'الحد الأقصى للاستخدام (اختياري)'
+      create: 'إنشاء رمز دعوة'
+      uses: 'استُخدم %uses% مرة'
+      uses_max: 'استُخدم %uses% من %max% مرة'
+      expires: 'ينتهي في %date%'
+      qr_alt: 'امسح رمز QR هذا للانضمام إلى الاستوديو'
+      copy_link: 'نسخ الرابط'
+      copied: 'تم نسخ رابط الدعوة إلى الحافظة!'
+      revoke: 'إلغاء'
+      none: 'لا توجد رموز دعوة بعد.'
+      error: 'حدث خطأ في رمز الدعوة. يرجى المحاولة مرة أخرى.'
+  join_with_code:
+    title: 'انضم باستخدام رمز'
+    hint: 'هل حصلت على رمز دعوة من معلمك أو من مسؤول الاستوديو؟ أدخله هنا للانضمام إلى الاستوديو.'
+    code: 'رمز الدعوة'
+    invalid: 'هذا الرمز غير صالح. ربما انتهت صلاحيته أو تم إلغاؤه.'
+    banned: 'لقد تم حظرك من هذا الاستوديو.'
+    rate_limited: 'محاولات كثيرة جدًا. يرجى الانتظار بضع دقائق والمحاولة مرة أخرى.'
 media_library:
   file:
     size: 'الحجم:%size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: "تم تعليق حسابك بسبب بلاغات من المجتمع. يمكنك الطعن في هذا القرار."
 Reports: "البلاغات"
 members: "أعضاء"
+inactiveAccount:
+  subject: 'سيتم حذف حسابك على Catrobat'
+  title: 'اشتقنا إليك!'
+  content: 'لم تسجّل الدخول إلى حسابك على Catrobat "%username%" منذ سنتين، وليس فيه أي مشاريع أو تعليقات. لكي يبقى مجتمعنا حيويًا، سنحذفه خلال %days% يومًا. إذا أردت الاحتفاظ به، فقط سجّل الدخول مرة واحدة.'
+  button: 'سجّل الدخول للاحتفاظ بحسابي'
