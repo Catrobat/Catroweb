@@ -311,12 +311,15 @@ class ProjectRepository extends ServiceEntityRepository
   /**
    * @return Project[]
    */
-  public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null, bool $safe_for_kids_only = false): array
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb->orderBy('e.uploaded_at', \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
+    if ($safe_for_kids_only) {
+      $qb->andWhere($qb->expr()->eq('e.not_for_kids', 0));
+    }
     $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
     $qb->setMaxResults($limit);
 
@@ -326,12 +329,15 @@ class ProjectRepository extends ServiceEntityRepository
   /**
    * @return Project[]
    */
-  public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null, bool $safe_for_kids_only = false): array
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
     $qb->orderBy('e.uploaded_at', \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
+    if ($safe_for_kids_only) {
+      $qb->andWhere($qb->expr()->eq('e.not_for_kids', 0));
+    }
     $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
     $qb->setMaxResults($limit);
 

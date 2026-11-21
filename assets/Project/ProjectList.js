@@ -141,6 +141,7 @@ export class ProjectList {
 
         this.container.classList.remove('loading')
         this.updateChevronVisibility()
+        this.observeEnd()
 
         this.projectsLoaded += items.length
 
@@ -156,6 +157,25 @@ export class ProjectList {
         this.container.classList.remove('loading')
         this.fetchActive = false
       })
+  }
+
+  // For lists laid out in the page flow (profile grid): fetch the next page when the last card
+  // comes near the viewport instead of loading every project up front.
+  loadMoreOnPageScroll() {
+    this.endObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) this.fetchMore()
+      },
+      { rootMargin: '800px 0px' },
+    )
+    return this
+  }
+
+  observeEnd() {
+    if (!this.endObserver) return
+    this.endObserver.disconnect()
+    const last = this.projectsContainer.lastElementChild
+    if (this.hasMoreFromApi && last) this.endObserver.observe(last)
   }
 
   generateProjectElement(data) {
@@ -435,6 +455,7 @@ export class ProjectList {
           })
           if (delResp.ok) {
             wrapper.remove()
+            this.observeEnd()
           } else {
             const { showSnackbar, SnackbarDuration } = await import('../Layout/Snackbar')
             showSnackbar(

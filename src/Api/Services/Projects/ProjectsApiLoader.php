@@ -138,8 +138,8 @@ class ProjectsApiLoader extends AbstractApiLoader
    */
   public function getUserProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
-    return $this->project_manager->filterNotSafeForMinors(
-      $this->project_manager->getUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id)
+    return $this->project_manager->getUserProjectsKeyset(
+      $user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id, $this->project_manager->hidesNotForKidsOf($user_id)
     );
   }
 
@@ -148,8 +148,8 @@ class ProjectsApiLoader extends AbstractApiLoader
    */
   public function getUserPublicProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
-    return $this->project_manager->filterNotSafeForMinors(
-      $this->project_manager->getPublicUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id)
+    return $this->project_manager->getPublicUserProjectsKeyset(
+      $user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id, $this->project_manager->hidesNotForKidsOf($user_id)
     );
   }
 
