@@ -137,7 +137,7 @@ class TextSanitizer
   private function redactMessengerHandles(string $text): string
   {
     return preg_replace(
-      '/(?<![\p{L}\d])(telegram|tg|тгк?|телеграм\w*|телег[аи]|discord|дискорд|дс|whats\s?app|ватсап|snap(?:chat)?|signal|kik)(?![\p{L}\d])([\s:\-–—]*)@[\w.]{2,}(?:[\s,]+@[\w.]{2,})*/iu',
+      '/(?<![\p{L}\d])(telegram\w*|tg|тгк?|телеграм\w*|телег[аи]|discord|дискорд|дс|whats\s?app|ватсап|snapchat|kik)(?![\p{L}\d])((?:\s+(?:is|ist|это))?[\s:\-–—=>(]*)@[\w.]{2,}(?:[\s,]+@[\w.]{2,})*/iu',
       '$1$2'.self::REPLACEMENT_CONTACT,
       $text
     ) ?? $text;
