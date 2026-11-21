@@ -212,6 +212,18 @@ project:
   createTranslation: Luo käännös
   deletedComment: '**Poistettu**'
   notForKids: Ei sovellu lapsille
+  customUrl:
+    title: 'Oma URL-osoite'
+    hint: 'Valitse lyhyt nimi tämän projektin linkille: 3–50 pientä kirjainta, numeroa tai yhdysmerkkiä. Jätä tyhjäksi, jos haluat poistaa sen.'
+  playInBrowser: 'Pelaa selaimessa'
+  madeWithVersion: 'Tehty sovellusversiolla %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Tehty vanhemmalla sovellusversiolla'
+    text: 'Tätä projektia ei voi vielä pelata selaimessa. Avaa se Pocket Codessa ja lataa se uudelleen päivittääksesi sen.'
+  translateAgain: 'Käännä uudelleen näillä kielillä'
+  prefillMachineTranslation: 'Täytä konekäännöksellä'
+  machineTranslationFailed: 'Konekäännös ei ole juuri nyt käytettävissä. Yritä myöhemmin uudelleen.'
+  machineTranslationUnsupported: 'Konekäännös ei ole käytettävissä tälle kielelle.'
 remixGraph:
   showRemixGraph: 'Remiksikaavio'
   by: 'tekijältä'
@@ -401,6 +413,10 @@ search:
   noProjects: Projekteja ei löytynyt
   noStudios: Studioita ei löytynyt
   sameSearchMessage: "Näyttää siltä, että olet jo täällä! Kokeile toista hakua?"
+  noResults: 'Ei tuloksia haulla ”%query%”'
+  scratchProjects: 'Scratch-projektit'
+  scratchConverting: 'Muunnetaan sovellukselle %app%…'
+  scratchConvertingSnackbar: 'Muunnetaan ”%name%” – tämä voi kestää muutaman sekunnin'
 menu:
   profile: Profiili
   login: Kirjaudu sisään
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Vahvista sähköpostiosoitteesi'
+  leaderboard:
+    all_time: 'Parhaat tekijät'
+    this_week: 'Viikon parhaat tekijät'
+    points: 'pistettä'
 api:
   registerUser:
     emailMissing: 'Sähköposti puuttuu'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Kuvaus on liian pitkä'
     creditsTooLong: 'Muistiinpanot ja tekijätiedot ovat liian pitkiä'
     screenshotInvalid: 'Projektin kuvakaappaus on virheellinen tai sitä ei tueta'
+    slugInvalid: 'Oman URL-osoitteen on oltava 3–50 pientä kirjainta, numeroa tai yksittäistä yhdysmerkkiä, ja siinä on oltava vähintään yksi kirjain'
+    slugReserved: 'Tämä URL-osoite on varattu'
+    slugTaken: 'Tämä URL-osoite on jo käytössä'
   projectsPost:
     invalid_checksum: 'Virheellinen tarkistussumma. Yritä lähettää uudelleen!'
     upload_error: 'Virhe lähetyksessä. Yritä lähettää uudelleen!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Skriptit'
   looks: 'Asut'
   sounds: 'Äänet'
+  unavailable: 'Tämän projektin koodia ei voi näyttää.'
+  translation:
+    action: 'Käännä'
+    translateTo: 'Käännä kielelle %language%'
+    translateAgain: 'Käännä uudelleen'
+    stillShowing: 'Näytetään yhä kielellä %language%'
+    original: 'Näytä alkuperäinen'
+    resume: 'Jatka kääntämistä'
+    source: 'Kielestä'
+    target: 'Kieleen'
+    auto: 'Tunnista kieli'
+    loading: 'Käännetään koodia…'
+    complete: 'Konekäännetty kielelle %language%'
+    partial: 'Osittain käännetty'
+    partialInLanguage: 'Osittain käännetty kielelle %language%'
+    sourceRequired: 'Valitse lähdekieli, jotta voit kääntää tämän koodin.'
+    unsupported: 'Käännös ei ole käytettävissä näille kielille.'
+    error: 'Koodia ei voitu kääntää. Yritä uudelleen.'
 codeStatistics:
   title: "Koodin tilastot"
   error: "Koodin tilastoja ei voi näyttää."
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Projektisi "%project_name%" poistettiin automaattisesti käyttämättömyyden vuoksi. Lähetä se uudelleen, jos haluat yhä jakaa sen.'
   noProjects: "Sinulla ei näytä olevan projekti-ilmoituksia."
+  studio-deletion-warning:
+    message: 'Studiossasi "%studio_name%" ei ole projekteja, eikä siellä ole tapahtunut mitään 90 päivään. Se poistetaan %days% päivän kuluttua, ellei siihen lisätä projektia.'
+  project-files-lost:
+    message: 'Palvelinvirheen vuoksi %count% projektisi tiedostot katosivat: %projects%. Ne ovat piilossa, kunnes lataat ne uudelleen Pocket Codesta. Projektit, joita ei ladata uudelleen 14 päivän kuluessa, poistetaan.'
+    more: 'ja %count% muuta'
+  moderation-warning:
+    message: 'Moderaattori tarkisti sisällöstäsi tehdyn ilmoituksen ja totesi, että se rikkoo yhteisömme sääntöjä. Noudata sääntöjä, tai tilisi voidaan jäädyttää seuraavalla kerralla.'
+    deletion: 'Piilotettu sisältö poistetaan %days% päivän kuluttua piilottamisesta, ellet korjaa sitä tai valita.'
+  moderation-hidden:
+    message: 'Moderaattori tarkisti sisällöstäsi tehdyn ilmoituksen ja piilotti sen, koska se rikkoo yhteisömme sääntöjä.'
+  moderation-reason:
+    image: '{1}Kuva (%names%) näytti aikuisille tarkoitetulta sisällöltä.|]1,Inf]Jotkin kuvat (%names%) näyttivät aikuisille tarkoitetulta sisällöltä.'
+    screenshot: 'Kuvakaappaus näytti aikuisille tarkoitetulta sisällöltä.'
+    cover: 'Kansikuva näytti aikuisille tarkoitetulta sisällöltä.'
+    text:
+      name: 'Nimi näytti kertovan, että tämä on vain aikuisille.'
+      description: 'Kuvaus näytti kertovan, että tämä on vain aikuisille.'
+      credits: 'Huomautukset ja tekijät näyttivät kertovan, että tämä on vain aikuisille.'
+      about: '"Tietoja minusta" -tekstisi näytti kertovan, että tämä on vain aikuisille.'
+      currently_working_on: '"Työn alla" -tekstisi näytti kertovan, että tämä on vain aikuisille.'
+      username: 'Käyttäjänimesi näytti kertovan, että tämä on vain aikuisille.'
+    category:
+      copyright: 'Syy: se näyttää käyttävän muiden tekemää työtä ilman lupaa.'
+      sexual_content: 'Syy: se näytti aikuisille tarkoitetulta sisällöltä.'
+      graphic_violence: 'Syy: se näytti liian väkivaltaiselta.'
+      hateful_content: 'Syy: se näytti loukkaavalta tai vihamieliseltä muita kohtaan.'
+      improper_rating: 'Syy: se ei näyttänyt sopivan lapsille.'
+      spam: 'Syy: se näytti roskapostilta.'
+      other: 'Syy: moderaattori löysi siitä ongelman.'
+      inappropriate: 'Syy: se näytti sopimattomalta.'
+      harassment: 'Syy: se näytti jonkun kiusaamiselta tai häirinnältä.'
+      impersonation: 'Syy: se näytti esittävän jotakuta toista.'
+      inappropriate_profile: 'Syy: profiili näytti sopimattomalta.'
+      spam_account: 'Syy: se näytti roskapostitililtä.'
+      inappropriate_content: 'Syy: se näytti sopimattomalta.'
 clipboard:
   success: Linkki kopioitiin leikepöydälle!
   success_project: Projektin linkki kopioitiin leikepöydälle!
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Jäsenen estämisessä tapahtui virhe. Yritä myöhemmin uudelleen.'
       demote_member: 'Alenna ylläpitäjä jäseneksi'
       demotion_failed: 'Ylläpitäjän alentamisessa tapahtui virhe. Yritä myöhemmin uudelleen.'
+      banned_members: 'Estetyt jäsenet'
+      unban_member: 'Poista esto'
+      unban_hint: 'Kun esto poistetaan, henkilö voi taas liittyä normaalisti. Häntä ei lisätä takaisin studioon.'
+      unban_failed: 'Estettyjä jäseniä ei voitu päivittää. Yritä uudelleen.'
     join_requests:
       title: 'Liittymispyynnöt'
       accept: 'Hyväksy'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Kuvaus'
       toggle_allow_comments: 'Kommentit'
       toggle_privacy: 'Julkinen'
+    banned: 'Et voi liittyä tähän studioon.'
+    invites:
+      title: 'Kutsukoodit'
+      hint: 'Kuka tahansa, jolla on koodi tai linkki, liittyy studioon heti ilman hyväksyntää. Kun koodi perutaan, jo liittyneet jäsenet pysyvät.'
+      expires_on: 'Vanhenee (valinnainen)'
+      max_uses: 'Käyttökerrat enint. (valinnainen)'
+      create: 'Luo kutsukoodi'
+      uses: 'Käytetty %uses% kertaa'
+      uses_max: 'Käytetty %uses%/%max% kertaa'
+      expires: 'Vanhenee %date%'
+      qr_alt: 'Skannaa tämä QR-koodi liittyäksesi studioon'
+      copy_link: 'Kopioi linkki'
+      copied: 'Kutsulinkki kopioitu leikepöydälle!'
+      revoke: 'Peru'
+      none: 'Ei vielä kutsukoodeja.'
+      error: 'Kutsukoodin kanssa meni jokin vikaan. Yritä uudelleen.'
+  join_with_code:
+    title: 'Liity koodilla'
+    hint: 'Saitko kutsukoodin opettajaltasi tai studion ylläpitäjältä? Kirjoita se tähän liittyäksesi studioon.'
+    code: 'Kutsukoodi'
+    invalid: 'Tämä koodi ei ole kelvollinen. Se on voinut vanhentua tai se on peruttu.'
+    banned: 'Sinut on estetty tästä studiosta.'
+    rate_limited: 'Liian monta yritystä. Odota muutama minuutti ja yritä uudelleen.'
 media_library:
   file:
     size: 'Koko: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: "Tilisi on jäädytetty yhteisön ilmoitusten vuoksi. Voit valittaa tästä päätöksestä."
 Reports: Ilmoitukset
 members: jäsentä
+inactiveAccount:
+  subject: 'Catrobat-tilisi poistetaan'
+  title: 'Meillä on ikävä sinua!'
+  content: 'Et ole kirjautunut Catrobat-tilillesi "%username%" kahteen vuoteen, eikä sillä ole projekteja tai kommentteja. Jotta yhteisömme pysyy vilkkaana, poistamme sen %days% päivän kuluttua. Jos haluat säilyttää sen, kirjaudu sisään kerran.'
+  button: 'Kirjaudu sisään ja säilytä tilini'

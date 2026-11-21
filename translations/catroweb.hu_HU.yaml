@@ -212,6 +212,18 @@ project:
   createTranslation: 'Fordítás létrehozása'
   deletedComment: '**Törölve**'
   notForKids: 'Gyerekeknek nem való'
+  customUrl:
+    title: 'Egyéni URL'
+    hint: 'Válassz egy rövid nevet a projekt linkjéhez: 3-50 kisbetű, számjegy vagy kötőjel. Hagyd üresen az eltávolításhoz.'
+  playInBrowser: 'Játék a böngészőben'
+  madeWithVersion: 'Készült a(z) %app% alkalmazásverzióval (Catrobat %language%)'
+  oldVersion:
+    title: 'Régebbi alkalmazásverzióval készült'
+    text: 'Ez a projekt még nem játszható a böngészőben. Nyisd meg a Pocket Code-ban, és töltsd fel újra a frissítéshez.'
+  translateAgain: 'Újrafordítás ezekkel a nyelvekkel'
+  prefillMachineTranslation: 'Kitöltés gépi fordítással'
+  machineTranslationFailed: 'A gépi fordítás most nem érhető el. Próbáld újra később.'
+  machineTranslationUnsupported: 'Ehhez a nyelvhez nem érhető el gépi fordítás.'
 remixGraph:
   showRemixGraph: 'Remixgráf'
   by: 'készítette:'
@@ -401,6 +413,10 @@ search:
   noProjects: 'Nem található projekt'
   noStudios: 'Nem található stúdió'
   sameSearchMessage: 'Úgy tűnik, már itt vagy! Próbálkozol egy másik kereséssel?'
+  noResults: 'Nincs találat erre: „%query%”'
+  scratchProjects: 'Scratch-projektek'
+  scratchConverting: 'Átalakítás ehhez: %app%…'
+  scratchConvertingSnackbar: '„%name%” átalakítása — ez eltarthat néhány másodpercig'
 menu:
   profile: Profilom
   login: Bejelentkezés
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Erősítsd meg az e-mail-címed'
+  leaderboard:
+    all_time: 'Legjobb alkotók'
+    this_week: 'A hét legjobb alkotói'
+    points: 'pont'
 api:
   registerUser:
     emailMissing: 'Hiányzik az e-mail-cím'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'A leírás túl hosszú'
     creditsTooLong: 'A jegyzetek és köszönetnyilvánítások túl hosszúak'
     screenshotInvalid: 'A projekt képernyőképe érvénytelen vagy nem támogatott'
+    slugInvalid: 'Az egyéni URL 3-50 kisbetűből, számjegyből vagy egyes kötőjelekből állhat, és legalább egy betűt kell tartalmaznia'
+    slugReserved: 'Ez az egyéni URL foglalt'
+    slugTaken: 'Ezt az egyéni URL-t már valaki használja'
   projectsPost:
     invalid_checksum: 'Érvénytelen ellenőrzőösszeg. Próbáld újra feltölteni!'
     upload_error: 'Hiba a feltöltés közben. Próbáld újra feltölteni!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Szkript'
   looks: 'Kinézetek'
   sounds: 'Hangok'
+  unavailable: 'A projekt kódja nem jeleníthető meg.'
+  translation:
+    action: 'Fordítás'
+    translateTo: 'Fordítás erre: %language%'
+    translateAgain: 'Újrafordítás'
+    stillShowing: 'Még mindig ezen a nyelven: %language%'
+    original: 'Eredeti megjelenítése'
+    resume: 'Fordítás folytatása'
+    source: 'Erről'
+    target: 'Erre'
+    auto: 'Nyelv felismerése'
+    loading: 'Kód fordítása…'
+    complete: 'Gépi fordítás erre: %language%'
+    partial: 'Részben lefordítva'
+    partialInLanguage: 'Részben lefordítva erre: %language%'
+    sourceRequired: 'Válaszd ki a forrásnyelvet a kód lefordításához.'
+    unsupported: 'Ezekhez a nyelvekhez nem érhető el fordítás.'
+    error: 'Nem sikerült lefordítani a kódot. Próbáld újra.'
 codeStatistics:
   title: 'Kódstatisztika'
   error: 'A kódstatisztika nem jeleníthető meg.'
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'A(z) „%project_name%” projektedet inaktivitás miatt automatikusan eltávolítottuk. Töltsd fel újra, ha továbbra is meg szeretnéd osztani.'
   noProjects: 'Úgy tűnik, nincsenek projektekkel kapcsolatos értesítéseid.'
+  studio-deletion-warning:
+    message: 'A(z) "%studio_name%" stúdiódban nincsenek projektek, és 90 napja nem történt benne semmi. %days% nap múlva törlődik, hacsak nem adsz hozzá egy projektet.'
+  project-files-lost:
+    message: 'Egy szerverhiba miatt elvesztek %count% projekted fájljai: %projects%. Rejtve maradnak, amíg újra fel nem töltöd őket a Pocket Code-ból. Azokat a projekteket, amelyeket 14 napon belül nem töltesz fel újra, töröljük.'
+    more: 'és még %count%'
+  moderation-warning:
+    message: 'Egy moderátor megvizsgált egy bejelentést a tartalmadról, és megállapította, hogy megsérti a közösségi szabályainkat. Kérjük, tartsd be a szabályokat, különben legközelebb felfüggeszthetjük a fiókodat.'
+    deletion: 'A rejtett tartalom az elrejtése után %days% nappal törlődik, hacsak nem javítod ki vagy nem fellebbezel.'
+  moderation-hidden:
+    message: 'Egy moderátor megvizsgált egy bejelentést a tartalmadról, és elrejtette, mert megsérti a közösségi szabályainkat.'
+  moderation-reason:
+    image: '{1}Egy kép (%names%) felnőtt tartalomnak tűnt.|]1,Inf]Néhány kép (%names%) felnőtt tartalomnak tűnt.'
+    screenshot: 'A képernyőkép felnőtt tartalomnak tűnt.'
+    cover: 'A borítókép felnőtt tartalomnak tűnt.'
+    text:
+      name: 'Úgy tűnt, a név szerint ez csak felnőtteknek szól.'
+      description: 'Úgy tűnt, a leírás szerint ez csak felnőtteknek szól.'
+      credits: 'Úgy tűnt, a jegyzetek és köszönetnyilvánítás szerint ez csak felnőtteknek szól.'
+      about: 'Úgy tűnt, a "Rólam" szöveged szerint ez csak felnőtteknek szól.'
+      currently_working_on: 'Úgy tűnt, a "Jelenleg ezen dolgozom" szöveged szerint ez csak felnőtteknek szól.'
+      username: 'Úgy tűnt, a felhasználóneved szerint ez csak felnőtteknek szól.'
+    category:
+      copyright: 'Ok: úgy tűnik, mások munkáját használja engedély nélkül.'
+      sexual_content: 'Ok: felnőtt tartalomnak tűnt.'
+      graphic_violence: 'Ok: túl erőszakosnak tűnt.'
+      hateful_content: 'Ok: bántónak vagy gyűlölködőnek tűnt másokkal szemben.'
+      improper_rating: 'Ok: úgy tűnt, nem gyerekeknek való.'
+      spam: 'Ok: spamnek tűnt.'
+      other: 'Ok: egy moderátor problémát talált vele.'
+      inappropriate: 'Ok: nem megfelelőnek tűnt.'
+      harassment: 'Ok: úgy tűnt, valakit bánt vagy zaklat.'
+      impersonation: 'Ok: úgy tűnt, valaki másnak adja ki magát.'
+      inappropriate_profile: 'Ok: a profil nem megfelelőnek tűnt.'
+      spam_account: 'Ok: spamfióknak tűnt.'
+      inappropriate_content: 'Ok: nem megfelelőnek tűnt.'
 clipboard:
   success: 'Link a vágólapra másolva!'
   success_project: 'A projekt linkje a vágólapra másolva!'
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Hiba történt a tag kitiltása közben. Próbáld újra később.'
       demote_member: 'Adminisztrátor visszaminősítése taggá'
       demotion_failed: 'Hiba történt az adminisztrátor visszaminősítése közben. Próbáld újra később.'
+      banned_members: 'Kitiltott tagok'
+      unban_member: 'Kitiltás feloldása'
+      unban_hint: 'A kitiltás feloldása után a személy újra a szokásos módon csatlakozhat. Ez nem adja vissza automatikusan a stúdióhoz.'
+      unban_failed: 'Nem sikerült frissíteni a kitiltott tagokat. Próbáld újra.'
     join_requests:
       title: 'Csatlakozási kérelmek'
       accept: 'Elfogadás'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Leírás'
       toggle_allow_comments: 'Hozzászólások'
       toggle_privacy: 'Nyilvános'
+    banned: 'Nem csatlakozhatsz ehhez a stúdióhoz.'
+    invites:
+      title: 'Meghívókódok'
+      hint: 'Bárki, akinél megvan a kód vagy a link, azonnal csatlakozik a stúdióhoz, jóváhagyás nélkül. Egy kód visszavonása után a már csatlakozott tagok maradnak.'
+      expires_on: 'Lejárat (nem kötelező)'
+      max_uses: 'Max. használat (nem kötelező)'
+      create: 'Meghívókód létrehozása'
+      uses: '%uses% alkalommal használva'
+      uses_max: '%uses%/%max% alkalommal használva'
+      expires: 'Lejár: %date%'
+      qr_alt: 'Olvasd be ezt a QR-kódot a stúdióhoz való csatlakozáshoz'
+      copy_link: 'Link másolása'
+      copied: 'Meghívólink a vágólapra másolva!'
+      revoke: 'Visszavonás'
+      none: 'Még nincsenek meghívókódok.'
+      error: 'Valami hiba történt a meghívókóddal. Próbáld újra.'
+  join_with_code:
+    title: 'Csatlakozás kóddal'
+    hint: 'Kaptál meghívókódot a tanárodtól vagy egy stúdió adminisztrátorától? Írd be ide, hogy csatlakozz a stúdióhoz.'
+    code: 'Meghívókód'
+    invalid: 'Ez a kód nem érvényes. Lehet, hogy lejárt vagy visszavonták.'
+    banned: 'Ki vagy tiltva ebből a stúdióból.'
+    rate_limited: 'Túl sok próbálkozás. Várj néhány percet, és próbáld újra.'
 media_library:
   file:
     size: 'Méret: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: 'A fiókodat közösségi bejelentések miatt felfüggesztettük. A döntés ellen fellebbezhetsz.'
 Reports: 'Jelentések'
 members: 'tagok'
+inactiveAccount:
+  subject: 'A Catrobat-fiókodat törölni fogjuk'
+  title: 'Hiányzol nekünk!'
+  content: 'Két éve nem jelentkeztél be a(z) "%username%" Catrobat-fiókodba, és nincsenek benne projektek vagy hozzászólások. Hogy a közösségünk élénk maradjon, %days% nap múlva töröljük. Ha meg szeretnéd tartani, csak jelentkezz be egyszer.'
+  button: 'Bejelentkezés a fiókom megtartásához'

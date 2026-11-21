@@ -212,6 +212,18 @@ project:
   createTranslation: Übersetzung erstellen
   deletedComment: '**Gelöscht**'
   notForKids: Nicht sicher für Kinder
+  customUrl:
+    title: 'Eigene URL'
+    hint: 'Wähle einen kurzen Namen für den Link zu diesem Projekt: 3–50 Kleinbuchstaben, Ziffern oder Bindestriche. Lass das Feld leer, um ihn zu entfernen.'
+  playInBrowser: 'Im Browser spielen'
+  madeWithVersion: 'Erstellt mit App-Version %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Mit einer älteren App-Version erstellt'
+    text: 'Dieses Projekt kann noch nicht im Browser gespielt werden. Öffne es in Pocket Code und lade es erneut hoch, um es zu aktualisieren.'
+  translateAgain: 'Mit diesen Sprachen erneut übersetzen'
+  prefillMachineTranslation: 'Maschinelle Übersetzung einfügen'
+  machineTranslationFailed: 'Die maschinelle Übersetzung ist gerade nicht verfügbar. Bitte versuche es später noch einmal.'
+  machineTranslationUnsupported: 'Für diese Sprache ist keine maschinelle Übersetzung verfügbar.'
 remixGraph:
   showRemixGraph: 'Remix Graph'
   by: 'um'
@@ -401,6 +413,10 @@ search:
   noProjects: Keine Projekte gefunden
   noStudios: Keine Studios gefunden
   sameSearchMessage: "Sieht so aus, als wärst du schon hier! Probier eine andere Suche?"
+  noResults: 'Keine Ergebnisse für „%query%“'
+  scratchProjects: 'Scratch-Projekte'
+  scratchConverting: 'Wird für %app% umgewandelt…'
+  scratchConvertingSnackbar: '„%name%“ wird umgewandelt — das kann ein paar Sekunden dauern'
 menu:
   profile: Mein Profil
   login: Einloggen
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Bestätige deine E-Mail-Adresse'
+  leaderboard:
+    all_time: 'Top-Creators'
+    this_week: 'Top-Creators dieser Woche'
+    points: 'Punkte'
 api:
   registerUser:
     emailMissing: 'E-Mail fehlt'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Die Beschreibung ist zu lang'
     creditsTooLong: 'Notizen und Danksagungen sind zu lang'
     screenshotInvalid: 'Projekt-Screenshot ungültig oder nicht unterstützt'
+    slugInvalid: 'Die eigene URL muss aus 3–50 Kleinbuchstaben, Ziffern oder einzelnen Bindestrichen bestehen und mindestens einen Buchstaben enthalten'
+    slugReserved: 'Diese URL ist reserviert'
+    slugTaken: 'Diese URL ist bereits vergeben'
   projectsPost:
     invalid_checksum: 'Checksum ungültig. Bitte versuche es erneut!'
     upload_error: 'Fehler während dem Upload. Bitte versuche es erneut!'
@@ -601,6 +624,7 @@ codeView:
     sourceRequired: 'Wähle die Ausgangssprache für die Übersetzung.'
     unsupported: 'Für diese Sprachen ist keine Übersetzung verfügbar.'
     error: 'Der Code konnte nicht übersetzt werden. Versuche es erneut.'
+  unavailable: 'Der Code dieses Projekts kann nicht angezeigt werden.'
 codeStatistics:
   title: "Code-Statistiken"
   error: "Code-Statistiken können nicht angezeigt werden."
@@ -651,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Dein Projekt „%project_name%“ wurde wegen Inaktivität automatisch entfernt. Lade es erneut hoch, wenn du es weiterhin teilen möchtest.'
   noProjects: "Du hast anscheinend keine Projekt-Benachrichtigungen."
+  studio-deletion-warning:
+    message: 'Dein Studio „%studio_name%“ hat keine Projekte, und seit 90 Tagen ist darin nichts passiert. Es wird in %days% Tagen gelöscht, wenn du kein Projekt hinzufügst.'
+  project-files-lost:
+    message: 'Durch einen Serverfehler sind die Dateien von %count% deiner Projekte verloren gegangen: %projects%. Sie sind ausgeblendet, bis du sie erneut aus Pocket Code hochlädst. Projekte, die nicht innerhalb von 14 Tagen erneut hochgeladen werden, werden gelöscht.'
+    more: 'und %count% weitere'
+  moderation-warning:
+    message: 'Ein Moderator hat eine Meldung zu deinem Inhalt geprüft und festgestellt, dass er gegen unsere Community-Regeln verstößt. Bitte halte dich an die Regeln, sonst kann dein Konto beim nächsten Mal gesperrt werden.'
+    deletion: 'Der ausgeblendete Inhalt wird %days% Tage nach dem Ausblenden gelöscht, wenn du ihn nicht korrigierst oder Einspruch einlegst.'
+  moderation-hidden:
+    message: 'Ein Moderator hat eine Meldung zu deinem Inhalt geprüft und ihn ausgeblendet, weil er gegen unsere Community-Regeln verstößt.'
+  moderation-reason:
+    image: '{1}Ein Bild (%names%) sah nach Inhalten für Erwachsene aus.|]1,Inf]Einige Bilder (%names%) sahen nach Inhalten für Erwachsene aus.'
+    screenshot: 'Der Screenshot sah nach Inhalten für Erwachsene aus.'
+    cover: 'Das Titelbild sah nach Inhalten für Erwachsene aus.'
+    text:
+      name: 'Der Name sah so aus, als würde er sagen, dass das nur für Erwachsene ist.'
+      description: 'Die Beschreibung sah so aus, als würde sie sagen, dass das nur für Erwachsene ist.'
+      credits: 'Die Notizen und Credits sahen so aus, als würden sie sagen, dass das nur für Erwachsene ist.'
+      about: 'Dein „Über mich“-Text sah so aus, als würde er sagen, dass das nur für Erwachsene ist.'
+      currently_working_on: 'Dein „Derzeit arbeitet an“-Text sah so aus, als würde er sagen, dass das nur für Erwachsene ist.'
+      username: 'Dein Benutzername sah so aus, als würde er sagen, dass das nur für Erwachsene ist.'
+    category:
+      copyright: 'Grund: Es scheint Werke anderer Leute ohne Erlaubnis zu verwenden.'
+      sexual_content: 'Grund: Es sah nach Inhalten für Erwachsene aus.'
+      graphic_violence: 'Grund: Es sah zu gewalttätig aus.'
+      hateful_content: 'Grund: Es wirkte verletzend oder hasserfüllt gegenüber anderen.'
+      improper_rating: 'Grund: Es sah so aus, als wäre es nicht für Kinder geeignet.'
+      spam: 'Grund: Es sah nach Spam aus.'
+      other: 'Grund: Ein Moderator hat ein Problem damit gefunden.'
+      inappropriate: 'Grund: Es wirkte unangemessen.'
+      harassment: 'Grund: Es sah so aus, als würde es jemanden mobben oder belästigen.'
+      impersonation: 'Grund: Es sah so aus, als würde es sich als jemand anderes ausgeben.'
+      inappropriate_profile: 'Grund: Das Profil wirkte unangemessen.'
+      spam_account: 'Grund: Es sah nach einem Spam-Konto aus.'
+      inappropriate_content: 'Grund: Es wirkte unangemessen.'
 clipboard:
   success: Link in die Zwischenablage kopiert!
   success_project: Link zum Projekt in die Zwischenablage kopiert!
@@ -876,6 +935,10 @@ studio:
       ban_failed: 'Beim Bannen dieses Mitglieds ist etwas schiefgelaufen. Versuche es später noch einmal.'
       demote_member: 'Admin zum Mitglied herabstufen'
       demotion_failed: 'Beim Herabstufen dieses Admins ist etwas schiefgegangen. Versuche es später noch einmal.'
+      banned_members: 'Verbannte Mitglieder'
+      unban_member: 'Bann aufheben'
+      unban_hint: 'Wenn du den Bann aufhebst, kann die Person wieder ganz normal beitreten. Sie wird dadurch nicht wieder zum Studio hinzugefügt.'
+      unban_failed: 'Die verbannten Mitglieder konnten nicht aktualisiert werden. Bitte versuche es noch einmal.'
     join_requests:
       title: 'Beitrittsanfragen'
       accept: 'Akzeptieren'
@@ -892,6 +955,29 @@ studio:
       studio_description: 'Beschreibung'
       toggle_allow_comments: 'Kommentare'
       toggle_privacy: 'Öffentlich'
+    banned: 'Du kannst diesem Studio nicht beitreten.'
+    invites:
+      title: 'Einladungscodes'
+      hint: 'Wer den Code oder Link hat, tritt diesem Studio sofort bei, ohne Freigabe. Wenn du einen Code widerrufst, bleiben die Mitglieder, die schon beigetreten sind.'
+      expires_on: 'Läuft ab am (optional)'
+      max_uses: 'Max. Nutzungen (optional)'
+      create: 'Einladungscode erstellen'
+      uses: '%uses%-mal verwendet'
+      uses_max: '%uses% von %max%-mal verwendet'
+      expires: 'Läuft ab am %date%'
+      qr_alt: 'Scanne diesen QR-Code, um dem Studio beizutreten'
+      copy_link: 'Link kopieren'
+      copied: 'Einladungslink in die Zwischenablage kopiert!'
+      revoke: 'Widerrufen'
+      none: 'Noch keine Einladungscodes.'
+      error: 'Mit dem Einladungscode ist etwas schiefgelaufen. Bitte versuche es noch einmal.'
+  join_with_code:
+    title: 'Mit Code beitreten'
+    hint: 'Hast du einen Einladungscode von deiner Lehrkraft oder einem Studio-Admin bekommen? Gib ihn hier ein, um dem Studio beizutreten.'
+    code: 'Einladungscode'
+    invalid: 'Dieser Code ist ungültig. Er ist vielleicht abgelaufen oder wurde widerrufen.'
+    banned: 'Du wurdest aus diesem Studio verbannt.'
+    rate_limited: 'Zu viele Versuche. Bitte warte ein paar Minuten und versuche es dann noch einmal.'
 media_library:
   file:
     size: 'Größe: %size%'
@@ -961,3 +1047,8 @@ moderation:
     user_own: "Dein Konto wurde aufgrund von Meldungen aus der Community gesperrt. Du kannst Einspruch gegen diese Entscheidung einlegen."
 Reports: Meldungen
 members: Mitglieder
+inactiveAccount:
+  subject: 'Dein Catrobat-Konto wird gelöscht'
+  title: 'Wir vermissen dich!'
+  content: 'Du hast dich seit zwei Jahren nicht mehr bei deinem Catrobat-Konto „%username%“ angemeldet, und es hat keine Projekte oder Kommentare. Damit unsere Community lebendig bleibt, löschen wir es in %days% Tagen. Wenn du es behalten möchtest, melde dich einfach einmal an.'
+  button: 'Anmelden und Konto behalten'

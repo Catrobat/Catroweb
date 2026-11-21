@@ -195,6 +195,18 @@ project:
   createTranslation: "建立翻譯"
   deletedComment: "**已刪除**"
   notForKids: "不適合兒童"
+  customUrl:
+    title: '自訂網址'
+    hint: '為這個專案的連結取一個簡短的名稱：3-50 個小寫字母、數字或連字號。留空即可移除。'
+  playInBrowser: '在瀏覽器中執行'
+  madeWithVersion: '使用應用程式版本 %app% 製作（Catrobat %language%）'
+  oldVersion:
+    title: '使用舊版應用程式製作'
+    text: '這個專案目前還無法在瀏覽器中執行。請在 Pocket Code 中開啟並重新上傳來更新它。'
+  translateAgain: '用這些語言重新翻譯'
+  prefillMachineTranslation: '填入機器翻譯'
+  machineTranslationFailed: '機器翻譯目前無法使用，請稍後再試。'
+  machineTranslationUnsupported: '這個語言不支援機器翻譯。'
 remixGraph:
   showRemixGraph: '混音圖'
   by: '為'
@@ -381,6 +393,10 @@ search:
   noProjects: "找不到專案"
   noStudios: "找不到工作室"
   sameSearchMessage: "看起來你已經在這裡了！要不要換個搜尋試試？"
+  noResults: '找不到「%query%」的結果'
+  scratchProjects: 'Scratch 專案'
+  scratchConverting: '正在為 %app% 轉換…'
+  scratchConvertingSnackbar: '正在轉換「%name%」——這可能需要幾秒鐘'
 menu:
   profile: 我的個人資料
   login: 登入
@@ -490,6 +506,10 @@ time:
 user:
   verification:
     email: "驗證你的電子郵件"
+  leaderboard:
+    all_time: '頂尖創作者'
+    this_week: '本週頂尖創作者'
+    points: '分'
 api:
   registerUser:
     emailMissing: '電子郵件丟失'
@@ -525,6 +545,9 @@ api:
     descriptionTooLong: "說明太長"
     creditsTooLong: "備註和致謝太長"
     screenshotInvalid: "專案截圖無效或不受支援"
+    slugInvalid: '自訂網址必須由 3-50 個小寫字母、數字或單一連字號組成，且至少包含一個字母'
+    slugReserved: '這個自訂網址已被保留'
+    slugTaken: '這個自訂網址已被使用'
   projectsPost:
     invalid_checksum: '校驗和無效。重新上傳試試！'
     upload_error: '上傳時出錯。重新上傳試試！'
@@ -564,6 +587,24 @@ codeView:
   scripts: '腳本'
   looks: '外觀'
   sounds: '音效'
+  unavailable: '無法顯示這個專案的程式碼。'
+  translation:
+    action: '翻譯'
+    translateTo: '翻譯成%language%'
+    translateAgain: '重新翻譯'
+    stillShowing: '仍在顯示%language%'
+    original: '顯示原文'
+    resume: '繼續翻譯'
+    source: '從'
+    target: '到'
+    auto: '偵測語言'
+    loading: '正在翻譯程式碼…'
+    complete: '已機器翻譯成%language%'
+    partial: '部分已翻譯'
+    partialInLanguage: '部分已翻譯成%language%'
+    sourceRequired: '請選擇來源語言以翻譯這段程式碼。'
+    unsupported: '這些語言目前不支援翻譯。'
+    error: '無法翻譯程式碼，請再試一次。'
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
@@ -614,6 +655,41 @@ catro-notifications:
   project-deleted:
     message: "你的專案「%project_name%」因長時間沒有活動已被自動移除。如果你還想分享它，請重新上傳。"
   noProjects: "看起來你沒有任何專案通知。"
+  studio-deletion-warning:
+    message: '你的工作室「%studio_name%」沒有專案，而且 90 天內沒有任何動態。除非你新增一個專案，否則它將在 %days% 天後被刪除。'
+  project-files-lost:
+    message: '一次伺服器錯誤導致你 %count% 個專案的檔案遺失：%projects%。在你從 Pocket Code 重新上傳之前，它們會被隱藏。14 天內沒有重新上傳的專案將會被刪除。'
+    more: '以及另外 %count% 個'
+  moderation-warning:
+    message: '一位管理員審查了關於你內容的檢舉，發現它違反了我們的社群規範。請遵守規範，否則下次你的帳號可能會被停權。'
+    deletion: '被隱藏的內容將在隱藏 %days% 天後被刪除，除非你修正它或提出申訴。'
+  moderation-hidden:
+    message: '一位管理員審查了關於你內容的檢舉，因為它違反了我們的社群規範，已將它隱藏。'
+  moderation-reason:
+    image: '{1}一張圖片（%names%）看起來是成人內容。|]1,Inf]一些圖片（%names%）看起來是成人內容。'
+    screenshot: '截圖看起來是成人內容。'
+    cover: '封面圖片看起來是成人內容。'
+    text:
+      name: '名稱看起來表示這是僅限成人的內容。'
+      description: '描述看起來表示這是僅限成人的內容。'
+      credits: '備註和致謝看起來表示這是僅限成人的內容。'
+      about: '你的「關於我」文字看起來表示這是僅限成人的內容。'
+      currently_working_on: '你的「目前正在做」文字看起來表示這是僅限成人的內容。'
+      username: '你的使用者名稱看起來表示這是僅限成人的內容。'
+    category:
+      copyright: '原因：它似乎未經許可使用了別人的作品。'
+      sexual_content: '原因：它看起來是成人內容。'
+      graphic_violence: '原因：它看起來太暴力了。'
+      hateful_content: '原因：它看起來對他人帶有傷害性或仇恨。'
+      improper_rating: '原因：它看起來不適合兒童。'
+      spam: '原因：它看起來是垃圾訊息。'
+      other: '原因：管理員發現它有問題。'
+      inappropriate: '原因：它看起來不恰當。'
+      harassment: '原因：它看起來是在霸凌或騷擾某人。'
+      impersonation: '原因：它看起來在冒充別人。'
+      inappropriate_profile: '原因：個人檔案看起來不恰當。'
+      spam_account: '原因：它看起來是垃圾帳號。'
+      inappropriate_content: '原因：它看起來不恰當。'
 clipboard:
   success: "連結已複製到剪貼簿！"
   success_project: "專案連結已複製到剪貼簿！"
@@ -839,6 +915,10 @@ studio:
       ban_failed: "封鎖這位成員時發生錯誤，請稍後再試。"
       demote_member: "把管理員降為成員"
       demotion_failed: "降級這位管理員時發生錯誤，請稍後再試。"
+      banned_members: '被封鎖的成員'
+      unban_member: '解除封鎖'
+      unban_hint: '解除封鎖後，這個人可以正常重新加入，但不會自動回到工作室。'
+      unban_failed: '無法更新被封鎖的成員，請再試一次。'
     join_requests:
       title: "加入請求"
       accept: '接受'
@@ -855,6 +935,29 @@ studio:
       studio_description: '描述'
       toggle_allow_comments: '註釋'
       toggle_privacy: "公開"
+    banned: '你無法加入這個工作室。'
+    invites:
+      title: '邀請碼'
+      hint: '任何擁有邀請碼或連結的人都能立即加入這個工作室，不需要核准。撤銷邀請碼不會影響已經加入的成員。'
+      expires_on: '到期日（選填）'
+      max_uses: '最多使用次數（選填）'
+      create: '建立邀請碼'
+      uses: '已使用 %uses% 次'
+      uses_max: '已使用 %uses%/%max% 次'
+      expires: '%date% 到期'
+      qr_alt: '掃描這個 QR 碼加入工作室'
+      copy_link: '複製連結'
+      copied: '邀請連結已複製到剪貼簿！'
+      revoke: '撤銷'
+      none: '還沒有邀請碼。'
+      error: '邀請碼發生問題，請再試一次。'
+  join_with_code:
+    title: '用邀請碼加入'
+    hint: '從老師或工作室管理員那裡拿到邀請碼了嗎？在這裡輸入就能加入工作室。'
+    code: '邀請碼'
+    invalid: '這個邀請碼無效，可能已過期或被撤銷。'
+    banned: '你已被這個工作室封鎖。'
+    rate_limited: '嘗試次數太多。請等幾分鐘後再試一次。'
 media_library:
   file:
     size: '大小：%size%'
@@ -924,3 +1027,8 @@ moderation:
     user_own: "由於社群檢舉，你的帳號已被停權。你可以對這項決定提出申訴。"
 Reports: "檢舉"
 members: "成員"
+inactiveAccount:
+  subject: '你的 Catrobat 帳號即將被刪除'
+  title: '我們想念你！'
+  content: '你已經兩年沒有登入 Catrobat 帳號「%username%」了，而且它沒有任何專案或留言。為了讓社群保持活躍，我們將在 %days% 天後刪除它。如果你想保留帳號，只要登入一次就可以了。'
+  button: '登入以保留我的帳號'

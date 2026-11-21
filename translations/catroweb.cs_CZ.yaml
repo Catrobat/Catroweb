@@ -212,6 +212,18 @@ project:
   createTranslation: Vytvořit překlad
   deletedComment: '**Smazáno**'
   notForKids: Nevhodné pro děti
+  customUrl:
+    title: 'Vlastní URL'
+    hint: 'Vyber krátký název pro odkaz na tento projekt: 3–50 malých písmen, číslic nebo pomlček. Nech prázdné, pokud ho chceš odstranit.'
+  playInBrowser: 'Hrát v prohlížeči'
+  madeWithVersion: 'Vytvořeno ve verzi aplikace %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Vytvořeno ve starší verzi aplikace'
+    text: 'Tento projekt zatím nejde hrát v prohlížeči. Otevři ho v Pocket Code a nahraj ho znovu, aby se aktualizoval.'
+  translateAgain: 'Přeložit znovu s těmito jazyky'
+  prefillMachineTranslation: 'Vyplnit strojovým překladem'
+  machineTranslationFailed: 'Strojový překlad teď není k dispozici. Zkus to prosím později.'
+  machineTranslationUnsupported: 'Strojový překlad není pro tento jazyk k dispozici.'
 remixGraph:
   showRemixGraph: 'Zobrazit graf Remixů'
   by: 'o'
@@ -401,6 +413,10 @@ search:
   noProjects: Nenašly se žádné projekty
   noStudios: Nenašla se žádná studia
   sameSearchMessage: "Vypadá to, že už tu jsi! Zkusíš jiné hledání?"
+  noResults: 'Žádné výsledky pro „%query%“'
+  scratchProjects: 'Projekty ze Scratch'
+  scratchConverting: 'Převádím pro %app%…'
+  scratchConvertingSnackbar: 'Převádím „%name%“ — může to trvat pár sekund'
 menu:
   profile: Můj profil
   login: Přihlásit se
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Ověř svůj e-mail'
+  leaderboard:
+    all_time: 'Nejlepší tvůrci'
+    this_week: 'Nejlepší tvůrci tohoto týdne'
+    points: 'bodů'
 api:
   registerUser:
     emailMissing: 'Chybí e-mail'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Popis je příliš dlouhý'
     creditsTooLong: 'Poznámky a zásluhy jsou příliš dlouhé'
     screenshotInvalid: 'Snímek obrazovky projektu je neplatný nebo není podporovaný'
+    slugInvalid: 'Vlastní URL musí mít 3–50 malých písmen, číslic nebo jednotlivých pomlček a aspoň jedno písmeno'
+    slugReserved: 'Tato vlastní URL je rezervovaná'
+    slugTaken: 'Tato vlastní URL je už obsazená'
   projectsPost:
     invalid_checksum: 'Neplatný kontrolní součet. Zkus projekt nahrát znovu!'
     upload_error: 'Chyba při nahrávání. Zkus projekt nahrát znovu!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Skript'
   looks: 'Vzhledy'
   sounds: 'Zvuky'
+  unavailable: 'Kód tohoto projektu nelze zobrazit.'
+  translation:
+    action: 'Přeložit'
+    translateTo: 'Přeložit do jazyka %language%'
+    translateAgain: 'Přeložit znovu'
+    stillShowing: 'Stále se zobrazuje %language%'
+    original: 'Zobrazit originál'
+    resume: 'Pokračovat v překladu'
+    source: 'Z'
+    target: 'Do'
+    auto: 'Rozpoznat jazyk'
+    loading: 'Překládám kód…'
+    complete: 'Strojově přeloženo do jazyka %language%'
+    partial: 'Částečně přeloženo'
+    partialInLanguage: 'Částečně přeloženo do jazyka %language%'
+    sourceRequired: 'Vyber zdrojový jazyk, abys mohl tento kód přeložit.'
+    unsupported: 'Pro tyto jazyky není překlad k dispozici.'
+    error: 'Kód se nepodařilo přeložit. Zkus to znovu.'
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Tvůj projekt "%project_name%" byl kvůli nečinnosti automaticky odstraněn. Pokud ho chceš dál sdílet, nahraj ho znovu.'
   noProjects: "Vypadá to, že nemáš žádná oznámení o projektech."
+  studio-deletion-warning:
+    message: 'Tvé studio „%studio_name%“ nemá žádné projekty a 90 dní se v něm nic nedělo. Za %days% dní bude smazáno, pokud do něj nepřidáš projekt.'
+  project-files-lost:
+    message: 'Kvůli chybě serveru se ztratily soubory %count% tvých projektů: %projects%. Jsou skryté, dokud je znovu nenahraješ z Pocket Code. Projekty, které nebudou do 14 dní znovu nahrány, budou smazány.'
+    more: 'a %count% dalších'
+  moderation-warning:
+    message: 'Moderátor zkontroloval nahlášení tvého obsahu a zjistil, že porušuje pravidla naší komunity. Dodržuj prosím pravidla, jinak může být tvůj účet příště pozastaven.'
+    deletion: 'Skrytý obsah bude smazán %days% dní po skrytí, pokud ho neopravíš nebo se neodvoláš.'
+  moderation-hidden:
+    message: 'Moderátor zkontroloval nahlášení tvého obsahu a skryl ho, protože porušuje pravidla naší komunity.'
+  moderation-reason:
+    image: '{1}Obrázek (%names%) vypadal jako obsah pro dospělé.|]1,Inf]Některé obrázky (%names%) vypadaly jako obsah pro dospělé.'
+    screenshot: 'Snímek obrazovky vypadal jako obsah pro dospělé.'
+    cover: 'Titulní obrázek vypadal jako obsah pro dospělé.'
+    text:
+      name: 'Název vypadal, jako by říkal, že je to jen pro dospělé.'
+      description: 'Popis vypadal, jako by říkal, že je to jen pro dospělé.'
+      credits: 'Poznámky a credits vypadaly, jako by říkaly, že je to jen pro dospělé.'
+      about: 'Tvůj text „O mně“ vypadal, jako by říkal, že je to jen pro dospělé.'
+      currently_working_on: 'Tvůj text „Momentálně pracuji na“ vypadal, jako by říkal, že je to jen pro dospělé.'
+      username: 'Tvé uživatelské jméno vypadalo, jako by říkalo, že je to jen pro dospělé.'
+    category:
+      copyright: 'Důvod: zdá se, že používá práci jiných lidí bez svolení.'
+      sexual_content: 'Důvod: vypadalo to jako obsah pro dospělé.'
+      graphic_violence: 'Důvod: vypadalo to příliš násilně.'
+      hateful_content: 'Důvod: vypadalo to zraňující nebo nenávistné vůči ostatním.'
+      improper_rating: 'Důvod: vypadalo to, že to není vhodné pro děti.'
+      spam: 'Důvod: vypadalo to jako spam.'
+      other: 'Důvod: moderátor v tom našel problém.'
+      inappropriate: 'Důvod: vypadalo to nevhodně.'
+      harassment: 'Důvod: vypadalo to, že někoho šikanuje nebo obtěžuje.'
+      impersonation: 'Důvod: vypadalo to, že se vydává za někoho jiného.'
+      inappropriate_profile: 'Důvod: profil vypadal nevhodně.'
+      spam_account: 'Důvod: vypadalo to jako spamový účet.'
+      inappropriate_content: 'Důvod: vypadalo to nevhodně.'
 clipboard:
   success: Odkaz zkopírován do schránky!
   success_project: Odkaz na projekt zkopírován do schránky!
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Při vykazování tohoto člena se něco pokazilo. Zkus to později.'
       demote_member: 'Snížit administrátora na člena'
       demotion_failed: 'Při snižování tohoto administrátora se něco pokazilo. Zkus to později.'
+      banned_members: 'Vykázaní členové'
+      unban_member: 'Zrušit vykázání'
+      unban_hint: 'Zrušením vykázání se daný člověk může znovu normálně přidat. Do studia ho to zpátky nepřidá.'
+      unban_failed: 'Vykázané členy se nepodařilo aktualizovat. Zkus to prosím znovu.'
     join_requests:
       title: 'Žádosti o vstup'
       accept: 'Přijmout'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Popis'
       toggle_allow_comments: 'Komentáře'
       toggle_privacy: 'Veřejné'
+    banned: 'K tomuto studiu se nemůžeš přidat.'
+    invites:
+      title: 'Pozvánkové kódy'
+      hint: 'Kdokoli s kódem nebo odkazem se ke studiu přidá hned, bez schválení. Když kód zrušíš, členové, kteří se už přidali, zůstanou.'
+      expires_on: 'Platí do (nepovinné)'
+      max_uses: 'Max. počet použití (nepovinné)'
+      create: 'Vytvořit pozvánkový kód'
+      uses: 'Použito %uses%×'
+      uses_max: 'Použito %uses% z %max%×'
+      expires: 'Vyprší %date%'
+      qr_alt: 'Naskenuj tento QR kód a přidej se ke studiu'
+      copy_link: 'Kopírovat odkaz'
+      copied: 'Odkaz s pozvánkou zkopírován do schránky!'
+      revoke: 'Zrušit'
+      none: 'Zatím žádné pozvánkové kódy.'
+      error: 'S pozvánkovým kódem se něco pokazilo. Zkus to prosím znovu.'
+  join_with_code:
+    title: 'Přidat se pomocí kódu'
+    hint: 'Dostal jsi pozvánkový kód od učitele nebo administrátora studia? Zadej ho sem a přidej se ke studiu.'
+    code: 'Pozvánkový kód'
+    invalid: 'Tento kód není platný. Možná vypršel nebo byl zrušen.'
+    banned: 'Byl jsi z tohoto studia vykázán.'
+    rate_limited: 'Příliš mnoho pokusů. Počkej pár minut a zkus to znovu.'
 media_library:
   file:
     size: 'Velikost: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: "Tvůj účet byl pozastaven kvůli nahlášením od komunity. Proti tomuto rozhodnutí se můžeš odvolat."
 Reports: Nahlášení
 members: členové
+inactiveAccount:
+  subject: 'Tvůj účet Catrobat bude smazán'
+  title: 'Chybíš nám!'
+  content: 'Už dva roky ses nepřihlásil ke svému účtu Catrobat „%username%“ a nemá žádné projekty ani komentáře. Aby naše komunita zůstala živá, za %days% dní ho smažeme. Pokud si ho chceš ponechat, stačí se jednou přihlásit.'
+  button: 'Přihlásit se a ponechat si účet'

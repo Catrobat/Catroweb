@@ -212,6 +212,18 @@ project:
   createTranslation: "Cipta terjemahan"
   deletedComment: "**Dipadam**"
   notForKids: "Tidak selamat untuk kanak-kanak"
+  customUrl:
+    title: 'URL tersuai'
+    hint: 'Pilih nama pendek untuk pautan projek ini: 3-50 huruf kecil, digit atau tanda sempang. Biarkan kosong untuk membuangnya.'
+  playInBrowser: 'Main dalam pelayar'
+  madeWithVersion: 'Dibuat dengan versi aplikasi %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Dibuat dengan versi aplikasi yang lebih lama'
+    text: 'Projek ini belum boleh dimainkan dalam pelayar. Buka dalam Pocket Code dan muat naik semula untuk mengemas kininya.'
+  translateAgain: 'Terjemah semula dengan bahasa ini'
+  prefillMachineTranslation: 'Isi dengan terjemahan mesin'
+  machineTranslationFailed: 'Terjemahan mesin tidak tersedia sekarang. Sila cuba lagi nanti.'
+  machineTranslationUnsupported: 'Terjemahan mesin tidak tersedia untuk bahasa ini.'
 remixGraph:
   showRemixGraph: "Graf remix"
   by: "oleh"
@@ -401,6 +413,10 @@ search:
   noProjects: "Tiada projek ditemui"
   noStudios: "Tiada studio ditemui"
   sameSearchMessage: "Nampaknya kamu sudah berada di sini! Cuba carian lain?"
+  noResults: 'Tiada hasil untuk “%query%”'
+  scratchProjects: 'Projek Scratch'
+  scratchConverting: 'Menukar untuk %app%…'
+  scratchConvertingSnackbar: 'Menukar “%name%” — ini mungkin mengambil masa beberapa saat'
 menu:
   profile: "Profil"
   login: "Log masuk"
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: "Sahkan e-mel kamu"
+  leaderboard:
+    all_time: 'Pencipta terbaik'
+    this_week: 'Pencipta terbaik minggu ini'
+    points: 'mata'
 api:
   registerUser:
     emailMissing: "E-mel tiada"
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: "Huraian terlalu panjang"
     creditsTooLong: "Nota dan kredit terlalu panjang"
     screenshotInvalid: "Tangkapan skrin projek tidak sah atau tidak disokong"
+    slugInvalid: 'URL tersuai mestilah 3-50 huruf kecil, digit atau tanda sempang tunggal, dengan sekurang-kurangnya satu huruf'
+    slugReserved: 'URL tersuai ini dikhaskan'
+    slugTaken: 'URL tersuai ini sudah digunakan'
   projectsPost:
     invalid_checksum: "Checksum tidak sah. Cuba muat naik semula!"
     upload_error: "Ralat semasa memuat naik. Cuba muat naik semula!"
@@ -584,6 +607,24 @@ codeView:
   scripts: "Skrip"
   looks: "Rupa"
   sounds: "Bunyi"
+  unavailable: 'Kod projek ini tidak dapat dipaparkan.'
+  translation:
+    action: 'Terjemah'
+    translateTo: 'Terjemah ke %language%'
+    translateAgain: 'Terjemah semula'
+    stillShowing: 'Masih memaparkan %language%'
+    original: 'Tunjukkan asal'
+    resume: 'Teruskan menterjemah'
+    source: 'Daripada'
+    target: 'Ke'
+    auto: 'Kesan bahasa'
+    loading: 'Menterjemah kod…'
+    complete: 'Diterjemah oleh mesin ke %language%'
+    partial: 'Diterjemah sebahagian'
+    partialInLanguage: 'Diterjemah sebahagian ke %language%'
+    sourceRequired: 'Pilih bahasa sumber untuk menterjemah kod ini.'
+    unsupported: 'Terjemahan tidak tersedia untuk bahasa-bahasa ini.'
+    error: 'Kod tidak dapat diterjemah. Cuba lagi.'
 codeStatistics:
   title: "Statistik kod"
   error: "Statistik kod tidak dapat dipaparkan."
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: "Projek kamu \"%project_name%\" telah dibuang secara automatik kerana tidak aktif. Muat naik semula jika kamu masih mahu berkongsinya."
   noProjects: "Nampaknya kamu tiada pemberitahuan projek."
+  studio-deletion-warning:
+    message: 'Studio kamu "%studio_name%" tiada projek dan tiada apa-apa berlaku di dalamnya selama 90 hari. Ia akan dipadamkan dalam %days% hari melainkan kamu menambah projek.'
+  project-files-lost:
+    message: 'Ralat pelayan telah menghilangkan fail %count% projek kamu: %projects%. Projek itu disembunyikan sehingga kamu memuat naiknya semula daripada Pocket Code. Projek yang tidak dimuat naik semula dalam masa 14 hari akan dipadamkan.'
+    more: 'dan %count% lagi'
+  moderation-warning:
+    message: 'Seorang moderator telah menyemak laporan tentang kandungan kamu dan mendapati ia melanggar peraturan komuniti kami. Sila ikut peraturan, atau akaun kamu mungkin digantung pada kali seterusnya.'
+    deletion: 'Kandungan yang disembunyikan akan dipadamkan %days% hari selepas ia disembunyikan melainkan kamu membetulkannya atau membuat rayuan.'
+  moderation-hidden:
+    message: 'Seorang moderator telah menyemak laporan tentang kandungan kamu dan menyembunyikannya kerana ia melanggar peraturan komuniti kami.'
+  moderation-reason:
+    image: '{1}Satu imej (%names%) kelihatan seperti kandungan dewasa.|]1,Inf]Beberapa imej (%names%) kelihatan seperti kandungan dewasa.'
+    screenshot: 'Tangkapan skrin kelihatan seperti kandungan dewasa.'
+    cover: 'Imej kulit kelihatan seperti kandungan dewasa.'
+    text:
+      name: 'Nama itu kelihatan seperti mengatakan ini hanya untuk orang dewasa.'
+      description: 'Huraian itu kelihatan seperti mengatakan ini hanya untuk orang dewasa.'
+      credits: 'Nota dan kredit itu kelihatan seperti mengatakan ini hanya untuk orang dewasa.'
+      about: 'Teks "Tentang saya" kamu kelihatan seperti mengatakan ini hanya untuk orang dewasa.'
+      currently_working_on: 'Teks "Sedang diusahakan" kamu kelihatan seperti mengatakan ini hanya untuk orang dewasa.'
+      username: 'Nama pengguna kamu kelihatan seperti mengatakan ini hanya untuk orang dewasa.'
+    category:
+      copyright: 'Sebab: ia nampaknya menggunakan hasil kerja orang lain tanpa kebenaran.'
+      sexual_content: 'Sebab: ia kelihatan seperti kandungan dewasa.'
+      graphic_violence: 'Sebab: ia kelihatan terlalu ganas.'
+      hateful_content: 'Sebab: ia kelihatan menyakitkan hati atau membenci orang lain.'
+      improper_rating: 'Sebab: ia kelihatan tidak sesuai untuk kanak-kanak.'
+      spam: 'Sebab: ia kelihatan seperti spam.'
+      other: 'Sebab: seorang moderator menemui masalah padanya.'
+      inappropriate: 'Sebab: ia kelihatan tidak sesuai.'
+      harassment: 'Sebab: ia kelihatan seperti membuli atau mengganggu seseorang.'
+      impersonation: 'Sebab: ia kelihatan seperti menyamar sebagai orang lain.'
+      inappropriate_profile: 'Sebab: profil itu kelihatan tidak sesuai.'
+      spam_account: 'Sebab: ia kelihatan seperti akaun spam.'
+      inappropriate_content: 'Sebab: ia kelihatan tidak sesuai.'
 clipboard:
   success: "Pautan disalin ke papan keratan!"
   success_project: "Pautan ke projek disalin ke papan keratan!"
@@ -859,6 +935,10 @@ studio:
       ban_failed: "Ada masalah semasa menyekat ahli ini. Cuba lagi nanti."
       demote_member: "Turunkan pentadbir menjadi ahli"
       demotion_failed: "Ada masalah semasa menurunkan pentadbir ini. Cuba lagi nanti."
+      banned_members: 'Ahli yang disekat'
+      unban_member: 'Tarik balik sekatan'
+      unban_hint: 'Menarik balik sekatan membolehkan orang itu menyertai semula seperti biasa. Ia tidak menambah mereka semula ke dalam studio.'
+      unban_failed: 'Ahli yang disekat tidak dapat dikemas kini. Sila cuba lagi.'
     join_requests:
       title: "Permintaan Menyertai"
       accept: "Terima"
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Huraian'
       toggle_allow_comments: "Komen"
       toggle_privacy: "Awam"
+    banned: 'Kamu tidak boleh menyertai studio ini.'
+    invites:
+      title: 'Kod jemputan'
+      hint: 'Sesiapa yang ada kod atau pautan akan terus menyertai studio ini, tanpa perlu kelulusan. Membatalkan kod tidak membuang ahli yang sudah menyertai.'
+      expires_on: 'Tamat tempoh pada (pilihan)'
+      max_uses: 'Maks. penggunaan (pilihan)'
+      create: 'Cipta kod jemputan'
+      uses: 'Digunakan %uses% kali'
+      uses_max: 'Digunakan %uses% daripada %max% kali'
+      expires: 'Tamat tempoh %date%'
+      qr_alt: 'Imbas kod QR ini untuk menyertai studio'
+      copy_link: 'Salin pautan'
+      copied: 'Pautan jemputan disalin ke papan keratan!'
+      revoke: 'Batalkan'
+      none: 'Belum ada kod jemputan.'
+      error: 'Ada masalah dengan kod jemputan. Sila cuba lagi.'
+  join_with_code:
+    title: 'Sertai dengan kod'
+    hint: 'Dapat kod jemputan daripada guru kamu atau pentadbir studio? Masukkan di sini untuk menyertai studio.'
+    code: 'Kod jemputan'
+    invalid: 'Kod ini tidak sah. Ia mungkin telah tamat tempoh atau dibatalkan.'
+    banned: 'Kamu telah disekat daripada studio ini.'
+    rate_limited: 'Terlalu banyak cubaan. Sila tunggu beberapa minit dan cuba lagi.'
 media_library:
   file:
     size: "Saiz: %size%"
@@ -944,3 +1047,8 @@ moderation:
     user_own: "Akaun kamu telah digantung kerana laporan komuniti. Kamu boleh merayu keputusan ini."
 Reports: "Laporan"
 members: "ahli"
+inactiveAccount:
+  subject: 'Akaun Catrobat kamu akan dipadamkan'
+  title: 'Kami rindu kamu!'
+  content: 'Kamu tidak log masuk ke akaun Catrobat kamu "%username%" selama dua tahun dan akaun itu tiada projek atau komen. Untuk memastikan komuniti kami terus meriah, kami akan memadamkannya dalam %days% hari. Jika kamu mahu menyimpannya, log masuk sekali sahaja.'
+  button: 'Log masuk untuk simpan akaun saya'

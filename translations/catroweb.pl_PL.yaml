@@ -212,6 +212,18 @@ project:
   createTranslation: Utwórz tłumaczenie
   deletedComment: '**Usunięty**'
   notForKids: Niebezpieczne dla dzieci
+  customUrl:
+    title: 'Własny adres URL'
+    hint: 'Wybierz krótką nazwę do linku tego projektu: 3–50 małych liter, cyfr lub łączników. Zostaw puste, aby ją usunąć.'
+  playInBrowser: 'Graj w przeglądarce'
+  madeWithVersion: 'Utworzono w wersji aplikacji %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Utworzono w starszej wersji aplikacji'
+    text: 'Tego projektu nie można jeszcze uruchomić w przeglądarce. Otwórz go w Pocket Code i prześlij ponownie, aby go zaktualizować.'
+  translateAgain: 'Przetłumacz ponownie z tymi językami'
+  prefillMachineTranslation: 'Wypełnij tłumaczeniem maszynowym'
+  machineTranslationFailed: 'Tłumaczenie maszynowe jest teraz niedostępne. Spróbuj ponownie później.'
+  machineTranslationUnsupported: 'Tłumaczenie maszynowe jest niedostępne dla tego języka.'
 remixGraph:
   showRemixGraph: 'Pokaż Drzewo Remiksów'
   by: 'o'
@@ -401,6 +413,10 @@ search:
   noProjects: Nie znaleziono projektów
   noStudios: Nie znaleziono studiów
   sameSearchMessage: "Wygląda na to, że już tu jesteś! Może spróbujesz innego wyszukiwania?"
+  noResults: 'Brak wyników dla „%query%”'
+  scratchProjects: 'Projekty Scratcha'
+  scratchConverting: 'Konwertowanie dla %app%…'
+  scratchConvertingSnackbar: 'Konwertowanie „%name%” — to może potrwać kilka sekund'
 menu:
   profile: Mój profil
   login: Logowanie
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Potwierdź swój adres e-mail'
+  leaderboard:
+    all_time: 'Najlepsi twórcy'
+    this_week: 'Najlepsi twórcy tego tygodnia'
+    points: 'punkty'
 api:
   registerUser:
     emailMissing: 'Brak adresu e-mail'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Zbyt długi opis'
     creditsTooLong: 'Zbyt długie notatki i kredyty'
     screenshotInvalid: 'Zrzut ekranu projektu jest nieprawidłowy lub nie jest obsługiwany'
+    slugInvalid: 'Własny adres URL musi mieć 3–50 małych liter, cyfr lub pojedynczych łączników i zawierać co najmniej jedną literę'
+    slugReserved: 'Ten własny adres URL jest zarezerwowany'
+    slugTaken: 'Ten własny adres URL jest już zajęty'
   projectsPost:
     invalid_checksum: 'Nieprawidłowa suma kontrolna. Spróbuj ponownie przesłać!'
     upload_error: 'Błąd podczas wysyłania. Spróbuj ponownie przesłać!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Skrypty'
   looks: 'Wygląd'
   sounds: 'Dźwięki'
+  unavailable: 'Nie można wyświetlić kodu tego projektu.'
+  translation:
+    action: 'Przetłumacz'
+    translateTo: 'Przetłumacz na: %language%'
+    translateAgain: 'Przetłumacz ponownie'
+    stillShowing: 'Nadal wyświetlane w języku: %language%'
+    original: 'Pokaż oryginał'
+    resume: 'Kontynuuj tłumaczenie'
+    source: 'Z'
+    target: 'Na'
+    auto: 'Wykryj język'
+    loading: 'Tłumaczenie kodu…'
+    complete: 'Przetłumaczono maszynowo na: %language%'
+    partial: 'Częściowo przetłumaczono'
+    partialInLanguage: 'Częściowo przetłumaczono na: %language%'
+    sourceRequired: 'Wybierz język źródłowy, aby przetłumaczyć ten kod.'
+    unsupported: 'Tłumaczenie jest niedostępne dla tych języków.'
+    error: 'Nie udało się przetłumaczyć kodu. Spróbuj ponownie.'
 codeStatistics:
   title: "Statystyki kodu"
   error: "Statystyki kodu nie mogą być wyświetlane."
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Twój projekt „%project_name%” został automatycznie usunięty z powodu braku aktywności. Prześlij go ponownie, jeśli nadal chcesz go udostępniać.'
   noProjects: "Wygląda na to, że nie masz żadnych powiadomień o projektach."
+  studio-deletion-warning:
+    message: 'Twoje studio „%studio_name%” nie ma projektów i od 90 dni nic się w nim nie działo. Zostanie usunięte za %days% dni, chyba że dodasz projekt.'
+  project-files-lost:
+    message: 'Przez błąd serwera utracono pliki %count% Twoich projektów: %projects%. Są ukryte, dopóki nie prześlesz ich ponownie z Pocket Code. Projekty, które nie zostaną ponownie przesłane w ciągu 14 dni, zostaną usunięte.'
+    more: 'i %count% więcej'
+  moderation-warning:
+    message: 'Moderator sprawdził zgłoszenie dotyczące Twojej treści i stwierdził, że łamie ona zasady naszej społeczności. Przestrzegaj zasad, bo następnym razem Twoje konto może zostać zawieszone.'
+    deletion: 'Ukryta treść zostanie usunięta %days% dni po ukryciu, chyba że ją poprawisz lub się odwołasz.'
+  moderation-hidden:
+    message: 'Moderator sprawdził zgłoszenie dotyczące Twojej treści i ukrył ją, ponieważ łamie zasady naszej społeczności.'
+  moderation-reason:
+    image: '{1}Obraz (%names%) wyglądał na treść dla dorosłych.|]1,Inf]Niektóre obrazy (%names%) wyglądały na treści dla dorosłych.'
+    screenshot: 'Zrzut ekranu wyglądał na treść dla dorosłych.'
+    cover: 'Obraz okładki wyglądał na treść dla dorosłych.'
+    text:
+      name: 'Nazwa wyglądała, jakby mówiła, że to tylko dla dorosłych.'
+      description: 'Opis wyglądał, jakby mówił, że to tylko dla dorosłych.'
+      credits: 'Notatki i podziękowania wyglądały, jakby mówiły, że to tylko dla dorosłych.'
+      about: 'Twój tekst „O mnie” wyglądał, jakby mówił, że to tylko dla dorosłych.'
+      currently_working_on: 'Twój tekst „Obecnie pracuję nad” wyglądał, jakby mówił, że to tylko dla dorosłych.'
+      username: 'Twoja nazwa użytkownika wyglądała, jakby mówiła, że to tylko dla dorosłych.'
+    category:
+      copyright: 'Powód: wygląda na to, że wykorzystuje cudzą pracę bez zgody.'
+      sexual_content: 'Powód: wyglądało na treść dla dorosłych.'
+      graphic_violence: 'Powód: wyglądało na zbyt brutalne.'
+      hateful_content: 'Powód: wyglądało na raniące lub nienawistne wobec innych.'
+      improper_rating: 'Powód: wyglądało na nieodpowiednie dla dzieci.'
+      spam: 'Powód: wyglądało na spam.'
+      other: 'Powód: moderator znalazł w tym problem.'
+      inappropriate: 'Powód: wyglądało na nieodpowiednie.'
+      harassment: 'Powód: wyglądało na nękanie lub prześladowanie kogoś.'
+      impersonation: 'Powód: wyglądało na podszywanie się pod kogoś innego.'
+      inappropriate_profile: 'Powód: profil wyglądał na nieodpowiedni.'
+      spam_account: 'Powód: wyglądało na konto spamowe.'
+      inappropriate_content: 'Powód: wyglądało na nieodpowiednie.'
 clipboard:
   success: Link skopiowany do schowka!
   success_project: Link do projektu skopiowany do schowka!
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Coś poszło nie tak podczas banowania tego użytkownika. Spróbuj ponownie później.'
       demote_member: 'Zdegraduj administratora do członka'
       demotion_failed: 'Coś poszło nie tak podczas degradowania tego administratora. Spróbuj ponownie później.'
+      banned_members: 'Zbanowani członkowie'
+      unban_member: 'Zdejmij bana'
+      unban_hint: 'Zdjęcie bana pozwala tej osobie normalnie dołączyć ponownie. Nie dodaje jej z powrotem do studia.'
+      unban_failed: 'Nie udało się zaktualizować listy zbanowanych członków. Spróbuj ponownie.'
     join_requests:
       title: 'Prośby o dołączenie'
       accept: 'Akceptuję'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Opis'
       toggle_allow_comments: 'Komentarze'
       toggle_privacy: 'Publiczne'
+    banned: 'Nie możesz dołączyć do tego studia.'
+    invites:
+      title: 'Kody zaproszeń'
+      hint: 'Każdy, kto ma kod lub link, od razu dołącza do tego studia, bez zatwierdzania. Unieważnienie kodu nie usuwa członków, którzy już dołączyli.'
+      expires_on: 'Wygasa dnia (opcjonalnie)'
+      max_uses: 'Maks. liczba użyć (opcjonalnie)'
+      create: 'Utwórz kod zaproszenia'
+      uses: 'Użyto %uses% razy'
+      uses_max: 'Użyto %uses% z %max% razy'
+      expires: 'Wygasa %date%'
+      qr_alt: 'Zeskanuj ten kod QR, aby dołączyć do studia'
+      copy_link: 'Kopiuj link'
+      copied: 'Link zaproszenia skopiowano do schowka!'
+      revoke: 'Unieważnij'
+      none: 'Brak kodów zaproszeń.'
+      error: 'Coś poszło nie tak z kodem zaproszenia. Spróbuj ponownie.'
+  join_with_code:
+    title: 'Dołącz za pomocą kodu'
+    hint: 'Masz kod zaproszenia od nauczyciela lub administratora studia? Wpisz go tutaj, aby dołączyć do studia.'
+    code: 'Kod zaproszenia'
+    invalid: 'Ten kod jest nieprawidłowy. Mógł wygasnąć lub zostać unieważniony.'
+    banned: 'Masz bana w tym studiu.'
+    rate_limited: 'Za dużo prób. Poczekaj kilka minut i spróbuj ponownie.'
 media_library:
   file:
     size: 'Rozmiar: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: "Twoje konto zostało zawieszone z powodu zgłoszeń społeczności. Możesz odwołać się od tej decyzji."
 Reports: Zgłoszenia
 members: członków
+inactiveAccount:
+  subject: 'Twoje konto Catrobat zostanie usunięte'
+  title: 'Tęsknimy za Tobą!'
+  content: 'Od dwóch lat nie logujesz się na swoje konto Catrobat „%username%” i nie ma na nim żadnych projektów ani komentarzy. Aby nasza społeczność była aktywna, usuniemy je za %days% dni. Jeśli chcesz je zachować, po prostu zaloguj się raz.'
+  button: 'Zaloguj się, aby zachować konto'

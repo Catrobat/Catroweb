@@ -195,6 +195,18 @@ project:
   createTranslation: "Unda tafsiri"
   deletedComment: "**Imefutwa**"
   notForKids: "Haufai kwa watoto"
+  customUrl:
+    title: 'URL maalum'
+    hint: 'Chagua jina fupi la kiungo cha mradi huu: herufi ndogo, tarakimu au vistari 3–50. Acha wazi ili kuliondoa.'
+  playInBrowser: 'Cheza kwenye kivinjari'
+  madeWithVersion: 'Imetengenezwa kwa toleo la programu %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Imetengenezwa kwa toleo la zamani la programu'
+    text: 'Mradi huu bado hauwezi kuchezwa kwenye kivinjari. Ufungue katika Pocket Code na uupakie tena ili kuusasisha.'
+  translateAgain: 'Tafsiri tena kwa lugha hizi'
+  prefillMachineTranslation: 'Jaza tafsiri ya mashine'
+  machineTranslationFailed: 'Tafsiri ya mashine haipatikani kwa sasa. Tafadhali jaribu tena baadaye.'
+  machineTranslationUnsupported: 'Tafsiri ya mashine haipatikani kwa lugha hii.'
 remixGraph:
   showRemixGraph: "Grafu ya remix"
   by: 'na'
@@ -381,6 +393,10 @@ search:
   noProjects: "Hakuna miradi iliyopatikana"
   noStudios: "Hakuna studio zilizopatikana"
   sameSearchMessage: "Inaonekana tayari uko hapa! Jaribu utafutaji mwingine?"
+  noResults: 'Hakuna matokeo ya “%query%”'
+  scratchProjects: 'Miradi ya Scratch'
+  scratchConverting: 'Inabadilisha kwa ajili ya %app%…'
+  scratchConvertingSnackbar: 'Inabadilisha “%name%” — hii inaweza kuchukua sekunde chache'
 menu:
   profile: Wasifu wangu
   login: Ingia
@@ -488,6 +504,10 @@ time:
 user:
   verification:
     email: "Thibitisha barua pepe yako"
+  leaderboard:
+    all_time: 'Waundaji bora'
+    this_week: 'Waundaji bora wiki hii'
+    points: 'pointi'
 api:
   registerUser:
     emailMissing: "Barua pepe haipo"
@@ -523,6 +543,9 @@ api:
     descriptionTooLong: "Maelezo ni marefu mno"
     creditsTooLong: "Maelezo na shukrani ni marefu mno"
     screenshotInvalid: "Picha ya skrini ya mradi si sahihi au haitumiki"
+    slugInvalid: 'URL maalum lazima iwe na herufi ndogo, tarakimu au vistari kimoja kimoja 3–50, ikiwa na angalau herufi moja'
+    slugReserved: 'URL hii maalum imehifadhiwa'
+    slugTaken: 'URL hii maalum tayari imechukuliwa'
   projectsPost:
     invalid_checksum: "Checksum si sahihi. Jaribu kupakia tena!"
     upload_error: "Hitilafu wakati wa kupakia. Jaribu kupakia tena!"
@@ -562,6 +585,24 @@ codeView:
   scripts: 'Hati'
   looks: 'Muonekano'
   sounds: 'Sauti'
+  unavailable: 'Msimbo wa mradi huu hauwezi kuonyeshwa.'
+  translation:
+    action: 'Tafsiri'
+    translateTo: 'Tafsiri kwa %language%'
+    translateAgain: 'Tafsiri tena'
+    stillShowing: 'Bado inaonyesha %language%'
+    original: 'Onyesha asili'
+    resume: 'Endelea kutafsiri'
+    source: 'Kutoka'
+    target: 'Kwenda'
+    auto: 'Tambua lugha'
+    loading: 'Inatafsiri msimbo…'
+    complete: 'Imetafsiriwa kwa mashine kwenda %language%'
+    partial: 'Imetafsiriwa kwa sehemu'
+    partialInLanguage: 'Imetafsiriwa kwa sehemu kwenda %language%'
+    sourceRequired: 'Chagua lugha asili ili kutafsiri msimbo huu.'
+    unsupported: 'Tafsiri haipatikani kwa lugha hizi.'
+    error: 'Imeshindwa kutafsiri msimbo. Jaribu tena.'
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
@@ -612,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: "Mradi wako \"%project_name%\" umeondolewa kiotomatiki kwa sababu ya kutotumika. Upakie tena kama bado unataka kuushiriki."
   noProjects: "Inaonekana huna arifa zozote za miradi."
+  studio-deletion-warning:
+    message: 'Studio yako "%studio_name%" haina miradi na hakuna kilichotokea ndani yake kwa siku 90. Itafutwa baada ya siku %days% usipoongeza mradi.'
+  project-files-lost:
+    message: 'Hitilafu ya seva imepoteza faili za miradi yako %count%: %projects%. Imefichwa hadi uipakie tena kutoka Pocket Code. Miradi isiyopakiwa tena ndani ya siku 14 itafutwa.'
+    more: 'na mingine %count%'
+  moderation-warning:
+    message: 'Msimamizi amekagua ripoti kuhusu maudhui yako na kugundua kuwa yanavunja sheria za jumuiya yetu. Tafadhali fuata sheria, la sivyo akaunti yako inaweza kusimamishwa wakati ujao.'
+    deletion: 'Maudhui yaliyofichwa yatafutwa siku %days% baada ya kufichwa, usipoyarekebisha au kukata rufaa.'
+  moderation-hidden:
+    message: 'Msimamizi amekagua ripoti kuhusu maudhui yako na kuyaficha kwa sababu yanavunja sheria za jumuiya yetu.'
+  moderation-reason:
+    image: '{1}Picha (%names%) ilionekana kuwa maudhui ya watu wazima.|]1,Inf]Baadhi ya picha (%names%) zilionekana kuwa maudhui ya watu wazima.'
+    screenshot: 'Picha ya skrini ilionekana kuwa maudhui ya watu wazima.'
+    cover: 'Picha ya jalada ilionekana kuwa maudhui ya watu wazima.'
+    text:
+      name: 'Jina lilionekana kusema kuwa hili ni la watu wazima pekee.'
+      description: 'Maelezo yalionekana kusema kuwa hili ni la watu wazima pekee.'
+      credits: 'Maelezo na shukrani yalionekana kusema kuwa hili ni la watu wazima pekee.'
+      about: 'Maandishi yako ya "Kunihusu" yalionekana kusema kuwa hili ni la watu wazima pekee.'
+      currently_working_on: 'Maandishi yako ya "Ninachofanyia kazi sasa" yalionekana kusema kuwa hili ni la watu wazima pekee.'
+      username: 'Jina lako la mtumiaji lilionekana kusema kuwa hili ni la watu wazima pekee.'
+    category:
+      copyright: 'Sababu: inaonekana kutumia kazi za watu wengine bila ruhusa.'
+      sexual_content: 'Sababu: ilionekana kuwa maudhui ya watu wazima.'
+      graphic_violence: 'Sababu: ilionekana kuwa na vurugu nyingi mno.'
+      hateful_content: 'Sababu: ilionekana kuumiza au kuwa na chuki dhidi ya wengine.'
+      improper_rating: 'Sababu: ilionekana kutofaa kwa watoto.'
+      spam: 'Sababu: ilionekana kuwa barua taka (spam).'
+      other: 'Sababu: msimamizi alipata tatizo nalo.'
+      inappropriate: 'Sababu: ilionekana kutofaa.'
+      harassment: 'Sababu: ilionekana kumdhulumu au kumnyanyasa mtu.'
+      impersonation: 'Sababu: ilionekana kujifanya kuwa mtu mwingine.'
+      inappropriate_profile: 'Sababu: wasifu ulionekana kutofaa.'
+      spam_account: 'Sababu: ilionekana kuwa akaunti ya barua taka (spam).'
+      inappropriate_content: 'Sababu: ilionekana kutofaa.'
 clipboard:
   success: "Kiungo kimenakiliwa kwenye ubao wa kunakili!"
   success_project: "Kiungo cha mradi kimenakiliwa kwenye ubao wa kunakili!"
@@ -837,6 +913,10 @@ studio:
       ban_failed: "Kuna hitilafu wakati wa kumpiga marufuku mwanachama huyu. Jaribu tena baadaye."
       demote_member: "Mshushe msimamizi kuwa mwanachama"
       demotion_failed: "Kuna hitilafu wakati wa kumshusha msimamizi huyu. Jaribu tena baadaye."
+      banned_members: 'Wanachama waliopigwa marufuku'
+      unban_member: 'Ondoa marufuku'
+      unban_hint: 'Kuondoa marufuku kunamruhusu mtu kujiunga tena kama kawaida. Hakumrudishi kwenye studio.'
+      unban_failed: 'Imeshindwa kusasisha wanachama waliopigwa marufuku. Tafadhali jaribu tena.'
     join_requests:
       title: "Maombi ya Kujiunga"
       accept: "Kubali"
@@ -853,6 +933,29 @@ studio:
       studio_description: 'Maelezo'
       toggle_allow_comments: 'Maoni'
       toggle_privacy: "Ya umma"
+    banned: 'Huwezi kujiunga na studio hii.'
+    invites:
+      title: 'Misimbo ya mwaliko'
+      hint: 'Yeyote mwenye msimbo au kiungo anajiunga na studio hii mara moja, bila kuhitaji idhini. Kubatilisha msimbo hakuwaondoi wanachama waliokwisha kujiunga.'
+      expires_on: 'Muda unaisha tarehe (si lazima)'
+      max_uses: 'Idadi ya juu ya matumizi (si lazima)'
+      create: 'Unda msimbo wa mwaliko'
+      uses: 'Umetumika mara %uses%'
+      uses_max: 'Umetumika mara %uses% kati ya %max%'
+      expires: 'Muda unaisha %date%'
+      qr_alt: 'Changanua msimbo huu wa QR ili kujiunga na studio'
+      copy_link: 'Nakili kiungo'
+      copied: 'Kiungo cha mwaliko kimenakiliwa!'
+      revoke: 'Batilisha'
+      none: 'Bado hakuna misimbo ya mwaliko.'
+      error: 'Hitilafu imetokea kwenye msimbo wa mwaliko. Tafadhali jaribu tena.'
+  join_with_code:
+    title: 'Jiunge kwa msimbo'
+    hint: 'Umepata msimbo wa mwaliko kutoka kwa mwalimu wako au msimamizi wa studio? Uweke hapa ili kujiunga na studio.'
+    code: 'Msimbo wa mwaliko'
+    invalid: 'Msimbo huu si sahihi. Huenda muda wake umeisha au umebatilishwa.'
+    banned: 'Umepigwa marufuku kwenye studio hii.'
+    rate_limited: 'Majaribio mengi mno. Tafadhali subiri dakika chache kisha ujaribu tena.'
 media_library:
   file:
     size: "Ukubwa: %size%"
@@ -922,3 +1025,8 @@ moderation:
     user_own: "Akaunti yako imesimamishwa kutokana na ripoti za jumuiya. Unaweza kukata rufaa dhidi ya uamuzi huu."
 Reports: "Ripoti"
 members: "wanachama"
+inactiveAccount:
+  subject: 'Akaunti yako ya Catrobat itafutwa'
+  title: 'Tunakukumbuka!'
+  content: 'Hujaingia kwenye akaunti yako ya Catrobat "%username%" kwa miaka miwili na haina miradi wala maoni. Ili jumuiya yetu ibaki hai, tutaifuta baada ya siku %days%. Ukitaka kuiweka, ingia mara moja tu.'
+  button: 'Ingia ili kuweka akaunti yangu'

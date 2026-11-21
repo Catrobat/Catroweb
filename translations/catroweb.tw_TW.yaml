@@ -194,6 +194,19 @@ project:
   createTranslation: 'Yɛ nkyerɛaseɛ'
   deletedComment: '**Wɔayi afi hɔ**'
   notForKids: 'Ɛnfata mmofra'
+  customUrl:
+    title: 'URL a wo ankasa wopawee'
+    hint: 'Paw din tiawa ma saa adwuma yi link: nkyerɛwdeɛ nketewa, nɔma anaa hyphen (-) 3-50. Gyaw no hunu na woayi afi hɔ.'
+  playInBrowser: 'Di agorɔ no wɔ browser mu'
+  madeWithVersion: 'Wɔde app version %app% na ɛyɛeɛ (Catrobat %language%)'
+  oldVersion:
+    title: 'Wɔde app version dada na ɛyɛeɛ'
+    text: 'Wontumi nni saa adwuma yi agorɔ wɔ browser mu seesei. Bue no wɔ Pocket Code mu na san fa to so na ɛnyɛ foforɔ.'
+  translatedByLine: 'Mfidie na ɛkyerɛɛ aseɛ fi %sourceLanguage% kɔ %targetLanguage% mu'
+  translateAgain: 'San kyerɛ aseɛ wɔ saa kasa yi mu'
+  prefillMachineTranslation: 'Fa mfidie nkyerɛaseɛ hyɛ mu'
+  machineTranslationFailed: 'Mfidie nkyerɛaseɛ nni hɔ seesei. Mesrɛ wo, akyiri yi san bɔ mmɔden.'
+  machineTranslationUnsupported: 'Mfidie nkyerɛaseɛ nni hɔ mma saa kasa yi.'
 remixGraph:
   showRemixGraph: 'Remix mfonini'
   by: 'by'
@@ -380,6 +393,10 @@ search:
   noProjects: 'Yɛanhu adwuma biara'
   noStudios: 'Yɛanhu studio biara'
   sameSearchMessage: 'Ɛte sɛ wowɔ ha dada! Hwehwɛ biribi foforɔ?'
+  noResults: 'Yɛanhu biribiara mma “%query%”'
+  scratchProjects: 'Scratch nnwuma'
+  scratchConverting: 'Ɛresesa ama %app%…'
+  scratchConvertingSnackbar: 'Ɛresesa “%name%” — ebetumi agye simma kakra'
 menu:
   profile: 'Profaele'
   login: 'Wura mu'
@@ -403,6 +420,9 @@ login:
   alreadyReset: 'Wɔabisa odwumanifoɔ yi ahintasɛm dada nnɔnhwerew 24 a atwam no mu.'
   username: 'Wo din'
   email: 'E-mail'
+  oauth:
+    google: 'Toa so wɔ Google so'
+    or: 'anaa'
 register:
   title: 'Kyerɛw wo din'
   subText: 'Sɛ wokɔ so a, worebue Catrobat mpɔtamfoɔ akawnt na wopene yɛn %var1% ne %var2% so.'
@@ -484,6 +504,10 @@ time:
 user:
   verification:
     email: 'Si wo e-mail so dua'
+  leaderboard:
+    all_time: 'Abɔdeyɛfoɔ a wɔdi kan'
+    this_week: 'Abɔdeyɛfoɔ a wɔdi kan nnawɔtwe yi'
+    points: 'nkyerɛnneɛ'
 api:
   registerUser:
     emailMissing: 'E-mail nni hɔ'
@@ -519,6 +543,9 @@ api:
     descriptionTooLong: 'Nkyerɛmu no ware dodo'
     creditsTooLong: 'Nkaeɛ ne aseda no ware dodo'
     screenshotInvalid: 'Adwuma screenshot no nteɛ anaa yɛnnye'
+    slugInvalid: 'URL a wo ankasa wopawee no ɛsɛ sɛ ɛyɛ nkyerɛwdeɛ nketewa, nɔma anaa hyphen baako baako 3-50, na nkyerɛwdeɛ baako wɔ mu koraa'
+    slugReserved: 'Wɔakora saa URL yi so dada'
+    slugTaken: 'Obi afa saa URL yi dada'
   projectsPost:
     invalid_checksum: 'Checksum no nteɛ. San bɔ mmɔden de to so!'
     upload_error: 'Mfomsoɔ baeɛ berɛ a na wɔde reto so. San bɔ mmɔden de to so!'
@@ -558,6 +585,24 @@ codeView:
   scripts: 'Scripts'
   looks: 'Nhwɛsoɔ'
   sounds: 'Nnyegyeɛ'
+  unavailable: 'Yɛntumi nkyerɛ saa adwuma yi kood.'
+  translation:
+    action: 'Kyerɛ aseɛ'
+    translateTo: 'Kyerɛ aseɛ kɔ %language% mu'
+    translateAgain: 'San kyerɛ aseɛ'
+    stillShowing: 'Ɛda so ara kyerɛ %language%'
+    original: 'Kyerɛ deɛ ɛdi kan no'
+    resume: 'Kɔ so kyerɛ aseɛ'
+    source: 'Fi'
+    target: 'Kɔ'
+    auto: 'Hu kasa no'
+    loading: 'Ɛrekyerɛ kood no aseɛ…'
+    complete: 'Mfidie akyerɛ aseɛ akɔ %language% mu'
+    partial: 'Wɔakyerɛ aseɛ fa bi'
+    partialInLanguage: 'Wɔakyerɛ aseɛ fa bi akɔ %language% mu'
+    sourceRequired: 'Paw kasa a kood no wɔ mu na yɛakyerɛ aseɛ.'
+    unsupported: 'Nkyerɛaseɛ nni hɔ mma saa kasa yi.'
+    error: 'Yɛantumi ankyerɛ kood no aseɛ. San bɔ mmɔden.'
 codeStatistics:
   title: 'Code Statistics'
   error: "Code Statistics can't be displayed."
@@ -608,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: 'Wɔayi wo adwuma "%project_name%" afi hɔ ɛfiri sɛ wɔamfa anyɛ hwee. Sɛ wopɛ sɛ wokyɛ bio a, san fa to so.'
   noProjects: 'Ɛte sɛ wonni adwuma nkaebɔ biara.'
+  studio-deletion-warning:
+    message: 'Wo studio "%studio_name%" nni adwuma biara, na biribiara nkɔɔ so wɔ mu nna 90. Gye sɛ wode adwuma bi bɛka ho, anyɛ saa a wɔbɛyi afi hɔ nna %days% mu.'
+  project-files-lost:
+    message: 'Server mfomsoɔ bi ama wo nnwuma %count% fael ayera: %projects%. Wɔde besie kosi sɛ wobɛsan de afiri Pocket Code mu ato so. Nnwuma a wɔnsan mfa nto so nna 14 mu no, wɔbɛyi afi hɔ.'
+    more: 'ne %count% bio'
+  moderation-warning:
+    message: 'Ɔhwɛfoɔ bi hwɛɛ amaneɛbɔ bi a ɛfa wo nneɛma ho, na ohuu sɛ ɛbu yɛn mpɔtam mmara so. Mesrɛ wo, di mmara no so, anyɛ saa a, daakye wɔbɛtumi asiw w''akawnt kwan.'
+    deletion: 'Wɔbɛyi nneɛma a wɔde asie no afi hɔ nna %days% akyi a wɔde siee no, gye sɛ wosiesie anaa wotwa gyinaeɛ no.'
+  moderation-hidden:
+    message: 'Ɔhwɛfoɔ bi hwɛɛ amaneɛbɔ bi a ɛfa wo nneɛma ho, na ɔde siee ɛfiri sɛ ɛbu yɛn mpɔtam mmara so.'
+  moderation-reason:
+    image: '{1}Mfonini baako (%names%) te sɛ mpanimfoɔ nneɛma.|]1,Inf]Mfonini bi (%names%) te sɛ mpanimfoɔ nneɛma.'
+    screenshot: 'Screenshot no te sɛ mpanimfoɔ nneɛma.'
+    cover: 'Mfonini a ɛwɔ anim no te sɛ mpanimfoɔ nneɛma.'
+    text:
+      name: 'Ɛte sɛ din no ka sɛ yei yɛ mpanimfoɔ nko ara dea.'
+      description: 'Ɛte sɛ nkyerɛmu no ka sɛ yei yɛ mpanimfoɔ nko ara dea.'
+      credits: 'Ɛte sɛ nsɛm ne nkamfoɔ no ka sɛ yei yɛ mpanimfoɔ nko ara dea.'
+      about: 'Ɛte sɛ wo "Me ho nsɛm" no ka sɛ yei yɛ mpanimfoɔ nko ara dea.'
+      currently_working_on: 'Ɛte sɛ wo "Deɛ meyɛ seesei" no ka sɛ yei yɛ mpanimfoɔ nko ara dea.'
+      username: 'Ɛte sɛ wo din a wode wura mu no ka sɛ yei yɛ mpanimfoɔ nko ara dea.'
+    category:
+      copyright: 'Deɛ enti: ɛte sɛ ɛde afoforɔ adwuma di dwuma a wɔmmaa kwan.'
+      sexual_content: 'Deɛ enti: ɛte sɛ mpanimfoɔ nneɛma.'
+      graphic_violence: 'Deɛ enti: ɛte sɛ ɛwɔ basabasayɛ dodo.'
+      hateful_content: 'Deɛ enti: ɛte sɛ ɛhaw afoforɔ anaa ɛkyiri wɔn.'
+      improper_rating: 'Deɛ enti: ɛte sɛ ɛmfata mmofra.'
+      spam: 'Deɛ enti: ɛte sɛ spam.'
+      other: 'Deɛ enti: ɔhwɛfoɔ bi huu ɔhaw bi wɔ mu.'
+      inappropriate: 'Deɛ enti: ɛte sɛ ɛmfata.'
+      harassment: 'Deɛ enti: ɛte sɛ ɛhyɛ obi so anaa ɛhaw obi.'
+      impersonation: 'Deɛ enti: ɛte sɛ ɛyɛ ne ho sɛ obi foforɔ.'
+      inappropriate_profile: 'Deɛ enti: profaele no te sɛ ɛmfata.'
+      spam_account: 'Deɛ enti: ɛte sɛ spam akawnt.'
+      inappropriate_content: 'Deɛ enti: ɛte sɛ ɛmfata.'
 clipboard:
   success: 'Wɔde link no akɔ clipboard so!'
   success_project: 'Wɔde adwuma link no akɔ clipboard so!'
@@ -833,6 +913,10 @@ studio:
       ban_failed: 'Biribi anyɛ yie berɛ a na yɛrepam ɔfa yi. Akyiri yi san bɔ mmɔden.'
       demote_member: 'Ma ɔhwɛfoɔ no nsan nyɛ ɔfa'
       demotion_failed: 'Biribi anyɛ yie berɛ a na yɛde ɔhwɛfoɔ yi resi fam. Akyiri yi san bɔ mmɔden.'
+      banned_members: 'Mufoɔ a wɔapam wɔn'
+      unban_member: 'Yi pam no fi hɔ'
+      unban_hint: 'Sɛ woyi pam no fi hɔ a, onipa no betumi asan aka ho sɛdeɛ ɛteɛ. Ɛmfa no nsan mma studio no mu.'
+      unban_failed: 'Yɛantumi ansesa mufoɔ a wɔapam wɔn no. Mesrɛ wo, san bɔ mmɔden.'
     join_requests:
       title: 'Abisadeɛ a ɛfa kaa ho'
       accept: 'Gye'
@@ -849,6 +933,29 @@ studio:
       studio_description: 'Nkyerɛmu'
       toggle_allow_comments: 'Adwenkyerɛ'
       toggle_privacy: 'Badwam'
+    banned: 'Wontumi nka saa studio yi ho.'
+    invites:
+      title: 'Nsɛfrɛ kood'
+      hint: 'Obiara a ɔwɔ kood no anaa link no bɛka saa studio yi ho ntɛm ara, wɔmmisa kwan. Sɛ wogye kood bi san a, mufoɔ a wɔaka ho dada no bɛtena hɔ.'
+      expires_on: 'Ne berɛ bɛtwam da (ɛho nhia)'
+      max_uses: 'Mpɛn dodoɔ a wɔde bɛdi dwuma (ɛho nhia)'
+      create: 'Yɛ nsɛfrɛ kood'
+      uses: 'Wɔde adi dwuma mpɛn %uses%'
+      uses_max: 'Wɔde adi dwuma mpɛn %uses% wɔ %max% mu'
+      expires: 'Ne berɛ bɛtwam %date%'
+      qr_alt: 'Scan saa QR kood yi na ka studio no ho'
+      copy_link: 'Fa link no'
+      copied: 'Wɔde nsɛfrɛ link no akɔ clipboard so!'
+      revoke: 'Gye san'
+      none: 'Nsɛfrɛ kood biara nni hɔ seesei.'
+      error: 'Biribi anyɛ yie wɔ nsɛfrɛ kood no ho. Mesrɛ wo, san bɔ mmɔden.'
+  join_with_code:
+    title: 'Fa kood ka ho'
+    hint: 'Wo kyerɛkyerɛfoɔ anaa studio admin de nsɛfrɛ kood bi ama wo? Kyerɛw wɔ ha na ka studio no ho.'
+    code: 'Nsɛfrɛ kood'
+    invalid: 'Saa kood yi nyɛ papa. Ebia ne berɛ atwam anaa wɔagye asan.'
+    banned: 'Wɔapam wo afi saa studio yi mu.'
+    rate_limited: 'Woabɔ mmɔden mpɛn pii dodo. Mesrɛ wo, twɛn simma kakra na san bɔ mmɔden.'
 media_library:
   file:
     size: 'Kɛseɛ: %size%'
@@ -918,3 +1025,8 @@ moderation:
     user_own: 'Wɔasiw wo akawnt kwan esiane mpɔtamfoɔ amaneɛbɔ nti. Wobɛtumi atwa saa gyinaeɛ yi.'
 Reports: 'Amaneɛbɔ'
 members: 'mufoɔ'
+inactiveAccount:
+  subject: 'Wɔbɛyi wo Catrobat akawnt afi hɔ'
+  title: 'Yɛfeɛ wo!'
+  content: 'Wonwuraa wo Catrobat akawnt "%username%" mu mfeɛ mmienu ni, na adwuma anaa adwenkyerɛ biara nni mu. Sɛnea ɛbɛyɛ a yɛn mpɔtam bɛkɔ so ayɛ den no, yɛbɛyi afi hɔ nna %days% mu. Sɛ wopɛ sɛ wokora so a, wura mu prɛko pɛ.'
+  button: 'Wura mu na kora m''akawnt so'

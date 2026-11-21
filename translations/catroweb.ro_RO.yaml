@@ -195,6 +195,18 @@ project:
   createTranslation: "Creează o traducere"
   deletedComment: "**Șters**"
   notForKids: "Nepotrivit pentru copii"
+  customUrl:
+    title: 'URL personalizat'
+    hint: 'Alege un nume scurt pentru linkul acestui proiect: 3-50 de litere mici, cifre sau cratime. Lasă gol ca să-l elimini.'
+  playInBrowser: 'Joacă în browser'
+  madeWithVersion: 'Creat cu versiunea %app% a aplicației (Catrobat %language%)'
+  oldVersion:
+    title: 'Creat cu o versiune mai veche a aplicației'
+    text: 'Acest proiect nu poate fi jucat încă în browser. Deschide-l în Pocket Code și încarcă-l din nou ca să-l actualizezi.'
+  translateAgain: 'Tradu din nou cu aceste limbi'
+  prefillMachineTranslation: 'Completează cu traducerea automată'
+  machineTranslationFailed: 'Traducerea automată nu este disponibilă acum. Încearcă din nou mai târziu.'
+  machineTranslationUnsupported: 'Traducerea automată nu este disponibilă pentru această limbă.'
 remixGraph:
   showRemixGraph: 'Arată graficul remixului'
   by: 'cu'
@@ -381,6 +393,10 @@ search:
   noProjects: "Nu s-au găsit proiecte"
   noStudios: "Nu s-au găsit studiouri"
   sameSearchMessage: "Se pare că ești deja aici! Încerci o altă căutare?"
+  noResults: 'Niciun rezultat pentru „%query%”'
+  scratchProjects: 'Proiecte Scratch'
+  scratchConverting: 'Se convertește pentru %app%…'
+  scratchConvertingSnackbar: 'Se convertește „%name%” — poate dura câteva secunde'
 menu:
   profile: Profilul meu
   login: Intrare
@@ -488,6 +504,10 @@ time:
 user:
   verification:
     email: "Verifică-ți e-mailul"
+  leaderboard:
+    all_time: 'Cei mai buni creatori'
+    this_week: 'Cei mai buni creatori ai săptămânii'
+    points: 'puncte'
 api:
   registerUser:
     emailMissing: "Lipsește e-mailul"
@@ -523,6 +543,9 @@ api:
     descriptionTooLong: "Descrierea este prea lungă"
     creditsTooLong: "Notele și mențiunile sunt prea lungi"
     screenshotInvalid: "Captura de ecran a proiectului este nevalidă sau nu este acceptată"
+    slugInvalid: 'URL-ul personalizat trebuie să aibă 3-50 de litere mici, cifre sau cratime simple, cu cel puțin o literă'
+    slugReserved: 'Acest URL personalizat este rezervat'
+    slugTaken: 'Acest URL personalizat este deja folosit'
   projectsPost:
     invalid_checksum: "Sumă de control nevalidă. Încearcă să încarci din nou!"
     upload_error: "Eroare la încărcare. Încearcă să încarci din nou!"
@@ -562,6 +585,24 @@ codeView:
   scripts: 'Scripte'
   looks: 'Arată'
   sounds: 'Sunete'
+  unavailable: 'Codul acestui proiect nu poate fi afișat.'
+  translation:
+    action: 'Tradu'
+    translateTo: 'Tradu în %language%'
+    translateAgain: 'Tradu din nou'
+    stillShowing: 'Se afișează încă în %language%'
+    original: 'Arată originalul'
+    resume: 'Continuă traducerea'
+    source: 'Din'
+    target: 'În'
+    auto: 'Detectează limba'
+    loading: 'Se traduce codul…'
+    complete: 'Tradus automat în %language%'
+    partial: 'Tradus parțial'
+    partialInLanguage: 'Tradus parțial în %language%'
+    sourceRequired: 'Alege limba sursă ca să traduci acest cod.'
+    unsupported: 'Traducerea nu este disponibilă pentru aceste limbi.'
+    error: 'Codul nu a putut fi tradus. Încearcă din nou.'
 codeStatistics:
   title: "Statisticile codului"
   error: "Statisticile codului nu pot fi afișate."
@@ -612,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: "Proiectul tău „%project_name%” a fost șters automat din cauza inactivității. Încarcă-l din nou dacă vrei în continuare să-l distribui."
   noProjects: "Se pare că nu ai nicio notificare despre proiecte."
+  studio-deletion-warning:
+    message: 'Studioul tău „%studio_name%” nu are proiecte și nu s-a întâmplat nimic în el timp de 90 de zile. Va fi șters în %days% zile dacă nu adaugi un proiect.'
+  project-files-lost:
+    message: 'O eroare de server a pierdut fișierele a %count% dintre proiectele tale: %projects%. Sunt ascunse până când le încarci din nou din Pocket Code. Proiectele care nu sunt încărcate din nou în 14 zile vor fi șterse.'
+    more: 'și încă %count%'
+  moderation-warning:
+    message: 'Un moderator a analizat o raportare despre conținutul tău și a constatat că încalcă regulile comunității noastre. Te rugăm să respecți regulile, altfel contul tău poate fi suspendat data viitoare.'
+    deletion: 'Conținutul ascuns va fi șters la %days% zile după ce a fost ascuns, dacă nu îl corectezi sau nu faci contestație.'
+  moderation-hidden:
+    message: 'Un moderator a analizat o raportare despre conținutul tău și l-a ascuns pentru că încalcă regulile comunității noastre.'
+  moderation-reason:
+    image: '{1}O imagine (%names%) părea conținut pentru adulți.|]1,Inf]Câteva imagini (%names%) păreau conținut pentru adulți.'
+    screenshot: 'Captura de ecran părea conținut pentru adulți.'
+    cover: 'Imaginea de copertă părea conținut pentru adulți.'
+    text:
+      name: 'Numele părea să spună că acesta este doar pentru adulți.'
+      description: 'Descrierea părea să spună că acesta este doar pentru adulți.'
+      credits: 'Notițele și creditele păreau să spună că acesta este doar pentru adulți.'
+      about: 'Textul tău „Despre mine” părea să spună că acesta este doar pentru adulți.'
+      currently_working_on: 'Textul tău „Lucrez acum la” părea să spună că acesta este doar pentru adulți.'
+      username: 'Numele tău de utilizator părea să spună că acesta este doar pentru adulți.'
+    category:
+      copyright: 'Motiv: pare să folosească munca altor persoane fără permisiune.'
+      sexual_content: 'Motiv: părea conținut pentru adulți.'
+      graphic_violence: 'Motiv: părea prea violent.'
+      hateful_content: 'Motiv: părea jignitor sau plin de ură față de alții.'
+      improper_rating: 'Motiv: părea să nu fie potrivit pentru copii.'
+      spam: 'Motiv: părea spam.'
+      other: 'Motiv: un moderator a găsit o problemă.'
+      inappropriate: 'Motiv: părea nepotrivit.'
+      harassment: 'Motiv: părea să hărțuiască sau să agreseze pe cineva.'
+      impersonation: 'Motiv: părea să se dea drept altcineva.'
+      inappropriate_profile: 'Motiv: profilul părea nepotrivit.'
+      spam_account: 'Motiv: părea un cont de spam.'
+      inappropriate_content: 'Motiv: părea nepotrivit.'
 clipboard:
   success: "Linkul a fost copiat în clipboard!"
   success_project: "Linkul către proiect a fost copiat în clipboard!"
@@ -837,6 +913,10 @@ studio:
       ban_failed: "Ceva nu a mers bine la excluderea acestui membru. Încearcă din nou mai târziu."
       demote_member: "Retrogradează administratorul la membru"
       demotion_failed: "Ceva nu a mers bine la retrogradarea acestui administrator. Încearcă din nou mai târziu."
+      banned_members: 'Membri interziși'
+      unban_member: 'Ridică interdicția'
+      unban_hint: 'Ridicarea interdicției îi permite persoanei să se alăture din nou în mod normal. Nu o adaugă înapoi în studio.'
+      unban_failed: 'Membrii interziși nu au putut fi actualizați. Încearcă din nou.'
     join_requests:
       title: "Cereri de alăturare"
       accept: "Acceptă"
@@ -853,6 +933,29 @@ studio:
       studio_description: 'Descrierea'
       toggle_allow_comments: 'Comentarii'
       toggle_privacy: "Public"
+    banned: 'Nu te poți alătura acestui studio.'
+    invites:
+      title: 'Coduri de invitație'
+      hint: 'Oricine are codul sau linkul se alătură imediat acestui studio, fără aprobare. Dacă revoci un cod, membrii care s-au alăturat deja rămân.'
+      expires_on: 'Expiră pe (opțional)'
+      max_uses: 'Nr. max. de utilizări (opțional)'
+      create: 'Creează cod de invitație'
+      uses: 'Folosit de %uses% ori'
+      uses_max: 'Folosit de %uses% din %max% ori'
+      expires: 'Expiră pe %date%'
+      qr_alt: 'Scanează acest cod QR ca să te alături studioului'
+      copy_link: 'Copiază linkul'
+      copied: 'Linkul de invitație a fost copiat în clipboard!'
+      revoke: 'Revocă'
+      none: 'Încă nu există coduri de invitație.'
+      error: 'Ceva nu a mers bine cu codul de invitație. Încearcă din nou.'
+  join_with_code:
+    title: 'Alătură-te cu un cod'
+    hint: 'Ai primit un cod de invitație de la profesorul tău sau de la un admin al studioului? Introdu-l aici ca să te alături studioului.'
+    code: 'Cod de invitație'
+    invalid: 'Acest cod nu este valid. Poate a expirat sau a fost revocat.'
+    banned: 'Ai fost interzis în acest studio.'
+    rate_limited: 'Prea multe încercări. Așteaptă câteva minute și încearcă din nou.'
 media_library:
   file:
     size: "Mărime: %size%"
@@ -922,3 +1025,8 @@ moderation:
     user_own: "Contul tău a fost suspendat în urma raportărilor din comunitate. Poți contesta această decizie."
 Reports: "Rapoarte"
 members: "membri"
+inactiveAccount:
+  subject: 'Contul tău Catrobat va fi șters'
+  title: 'Ne este dor de tine!'
+  content: 'Nu te-ai mai conectat la contul tău Catrobat „%username%” de doi ani și acesta nu are proiecte sau comentarii. Ca să păstrăm comunitatea noastră activă, îl vom șterge în %days% zile. Dacă vrei să-l păstrezi, conectează-te o singură dată.'
+  button: 'Conectează-te ca să-ți păstrezi contul'

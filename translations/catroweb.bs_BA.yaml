@@ -212,6 +212,18 @@ project:
   createTranslation: Kreiraj prijevod
   deletedComment: '**Izbrisano**'
   notForKids: Nije prikladno za djecu
+  customUrl:
+    title: 'Prilagođeni URL'
+    hint: 'Odaberi kratko ime za link ovog projekta: 3-50 malih slova, brojeva ili crtica. Ostavi prazno da ga ukloniš.'
+  playInBrowser: 'Igraj u pregledniku'
+  madeWithVersion: 'Napravljeno s verzijom aplikacije %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Napravljeno sa starijom verzijom aplikacije'
+    text: 'Ovaj projekat se još ne može igrati u pregledniku. Otvori ga u Pocket Code i ponovo ga otpremi da ga ažuriraš.'
+  translateAgain: 'Prevedi ponovo s ovim jezicima'
+  prefillMachineTranslation: 'Popuni mašinskim prijevodom'
+  machineTranslationFailed: 'Mašinski prijevod trenutno nije dostupan. Pokušaj ponovo kasnije.'
+  machineTranslationUnsupported: 'Mašinski prijevod nije dostupan za ovaj jezik.'
 remixGraph:
   showRemixGraph: Graf remiksa
   by: 'od'
@@ -401,6 +413,10 @@ search:
   noProjects: Nema pronađenih projekata
   noStudios: Nema pronađenih studija
   sameSearchMessage: Izgleda da si već ovdje! Probaj drugu pretragu?
+  noResults: 'Nema rezultata za „%query%“'
+  scratchProjects: 'Scratch projekti'
+  scratchConverting: 'Pretvaranje za %app%…'
+  scratchConvertingSnackbar: 'Pretvaram „%name%“ — ovo može potrajati nekoliko sekundi'
 menu:
   profile: Moj profil
   login: Prijava
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: Potvrdi svoj e-mail
+  leaderboard:
+    all_time: 'Najbolji kreatori'
+    this_week: 'Najbolji kreatori ove sedmice'
+    points: 'bodova'
 api:
   registerUser:
     emailMissing: Nedostaje e-mail
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: Opis je predug
     creditsTooLong: Bilješke i zasluge su preduge
     screenshotInvalid: Snimak ekrana projekta nije ispravan ili nije podržan
+    slugInvalid: 'Prilagođeni URL mora imati 3-50 malih slova, brojeva ili pojedinačnih crtica, s najmanje jednim slovom'
+    slugReserved: 'Ovaj prilagođeni URL je rezervisan'
+    slugTaken: 'Ovaj prilagođeni URL je već zauzet'
   projectsPost:
     invalid_checksum: Neispravan kontrolni zbir. Pokušaj ponovo otpremiti!
     upload_error: Greška pri otpremanju. Pokušaj ponovo otpremiti!
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Skripte'
   looks: 'Izgledi'
   sounds: 'Zvuci'
+  unavailable: 'Kôd ovog projekta se ne može prikazati.'
+  translation:
+    action: 'Prevedi'
+    translateTo: 'Prevedi na %language%'
+    translateAgain: 'Prevedi ponovo'
+    stillShowing: 'Još se prikazuje %language%'
+    original: 'Prikaži original'
+    resume: 'Nastavi prevođenje'
+    source: 'Sa'
+    target: 'Na'
+    auto: 'Prepoznaj jezik'
+    loading: 'Prevodim kôd…'
+    complete: 'Mašinski prevedeno na %language%'
+    partial: 'Djelimično prevedeno'
+    partialInLanguage: 'Djelimično prevedeno na %language%'
+    sourceRequired: 'Odaberi izvorni jezik da prevedeš ovaj kôd.'
+    unsupported: 'Prijevod nije dostupan za ove jezike.'
+    error: 'Kôd nije moguće prevesti. Pokušaj ponovo.'
 codeStatistics:
   title: Statistika koda
   error: Statistika koda ne može biti prikazana.
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: Tvoj projekat "%project_name%" je automatski uklonjen zbog neaktivnosti. Otpremi ga ponovo ako ga i dalje želiš dijeliti.
   noProjects: Izgleda da nemaš obavještenja o projektima.
+  studio-deletion-warning:
+    message: 'Tvoj studio "%studio_name%" nema projekata i u njemu se ništa nije dešavalo 90 dana. Bit će obrisan za %days% dana ako ne dodaš projekat.'
+  project-files-lost:
+    message: 'Zbog greške na serveru izgubljeni su fajlovi %count% tvojih projekata: %projects%. Sakriveni su dok ih ponovo ne otpremiš iz Pocket Code. Projekti koji ne budu ponovo otpremljeni u roku od 14 dana bit će obrisani.'
+    more: 'i još %count%'
+  moderation-warning:
+    message: 'Moderator je pregledao prijavu o tvom sadržaju i utvrdio da krši pravila naše zajednice. Molimo te da poštuješ pravila, inače bi tvoj račun sljedeći put mogao biti suspendovan.'
+    deletion: 'Sakriveni sadržaj bit će obrisan %days% dana nakon što je sakriven, osim ako ga ne popraviš ili se ne žališ.'
+  moderation-hidden:
+    message: 'Moderator je pregledao prijavu o tvom sadržaju i sakrio ga jer krši pravila naše zajednice.'
+  moderation-reason:
+    image: '{1}Jedna slika (%names%) je izgledala kao sadržaj za odrasle.|]1,Inf]Neke slike (%names%) su izgledale kao sadržaj za odrasle.'
+    screenshot: 'Snimak ekrana je izgledao kao sadržaj za odrasle.'
+    cover: 'Naslovna slika je izgledala kao sadržaj za odrasle.'
+    text:
+      name: 'Činilo se da naziv kaže da je ovo samo za odrasle.'
+      description: 'Činilo se da opis kaže da je ovo samo za odrasle.'
+      credits: 'Činilo se da napomene i zasluge kažu da je ovo samo za odrasle.'
+      about: 'Činilo se da tvoj tekst „O meni“ kaže da je ovo samo za odrasle.'
+      currently_working_on: 'Činilo se da tvoj tekst „Trenutno radim na“ kaže da je ovo samo za odrasle.'
+      username: 'Činilo se da tvoje korisničko ime kaže da je ovo samo za odrasle.'
+    category:
+      copyright: 'Razlog: izgleda da koristi tuđi rad bez dozvole.'
+      sexual_content: 'Razlog: izgledalo je kao sadržaj za odrasle.'
+      graphic_violence: 'Razlog: izgledalo je previše nasilno.'
+      hateful_content: 'Razlog: izgledalo je uvredljivo ili puno mržnje prema drugima.'
+      improper_rating: 'Razlog: izgledalo je kao da nije prikladno za djecu.'
+      spam: 'Razlog: izgledalo je kao spam.'
+      other: 'Razlog: moderator je pronašao problem s tim.'
+      inappropriate: 'Razlog: izgledalo je neprikladno.'
+      harassment: 'Razlog: izgledalo je kao da nekoga maltretira ili uznemirava.'
+      impersonation: 'Razlog: izgledalo je kao da se predstavlja kao neko drugi.'
+      inappropriate_profile: 'Razlog: profil je izgledao neprikladno.'
+      spam_account: 'Razlog: izgledalo je kao spam račun.'
+      inappropriate_content: 'Razlog: izgledalo je neprikladno.'
 clipboard:
   success: Link je kopiran u međuspremnik!
   success_project: Link na projekat je kopiran u međuspremnik!
@@ -859,6 +935,10 @@ studio:
       ban_failed: Nešto je pošlo po zlu pri zabrani ovog člana. Pokušaj ponovo kasnije.
       demote_member: Vrati administratora u člana
       demotion_failed: Nešto je pošlo po zlu pri vraćanju ovog administratora u člana. Pokušaj ponovo kasnije.
+      banned_members: 'Članovi sa zabranom'
+      unban_member: 'Ukloni zabranu'
+      unban_hint: 'Uklanjanjem zabrane osoba se ponovo može normalno pridružiti. To je ne vraća automatski u studio.'
+      unban_failed: 'Nije moguće ažurirati članove sa zabranom. Pokušaj ponovo.'
     join_requests:
       title: Zahtjevi za pridruživanje
       accept: Prihvati
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Opis'
       toggle_allow_comments: Komentari
       toggle_privacy: Javno
+    banned: 'Ne možeš se pridružiti ovom studiju.'
+    invites:
+      title: 'Pozivni kodovi'
+      hint: 'Svako ko ima kod ili link odmah se pridružuje ovom studiju, bez odobrenja. Kada opozoveš kod, članovi koji su se već pridružili ostaju.'
+      expires_on: 'Ističe (opcionalno)'
+      max_uses: 'Maks. korištenja (opcionalno)'
+      create: 'Kreiraj pozivni kod'
+      uses: 'Korišteno %uses% puta'
+      uses_max: 'Korišteno %uses% od %max% puta'
+      expires: 'Ističe %date%'
+      qr_alt: 'Skeniraj ovaj QR kod da se pridružiš studiju'
+      copy_link: 'Kopiraj link'
+      copied: 'Pozivni link je kopiran u međuspremnik!'
+      revoke: 'Opozovi'
+      none: 'Još nema pozivnih kodova.'
+      error: 'Nešto je pošlo po zlu s pozivnim kodom. Pokušaj ponovo.'
+  join_with_code:
+    title: 'Pridruži se kodom'
+    hint: 'Dobio/la si pozivni kod od nastavnika ili administratora studija? Unesi ga ovdje da se pridružiš studiju.'
+    code: 'Pozivni kod'
+    invalid: 'Ovaj kod nije važeći. Možda je istekao ili je opozvan.'
+    banned: 'Zabranjen ti je pristup ovom studiju.'
+    rate_limited: 'Previše pokušaja. Sačekaj nekoliko minuta i pokušaj ponovo.'
 media_library:
   file:
     size: 'Veličina: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: Tvoj račun je suspendovan zbog prijava zajednice. Na ovu odluku se možeš žaliti.
 Reports: Prijave
 members: članovi
+inactiveAccount:
+  subject: 'Tvoj Catrobat račun će biti obrisan'
+  title: 'Nedostaješ nam!'
+  content: 'Nisi se prijavio/la na svoj Catrobat račun "%username%" već dvije godine, a na njemu nema projekata ni komentara. Da bi naša zajednica ostala živa, obrisat ćemo ga za %days% dana. Ako ga želiš zadržati, samo se jednom prijavi.'
+  button: 'Prijavi se da zadržiš račun'

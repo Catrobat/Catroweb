@@ -212,6 +212,18 @@ project:
   createTranslation: Krijo përkthim
   deletedComment: '**U fshi**'
   notForKids: Jo i sigurt për fëmijë
+  customUrl:
+    title: 'URL e personalizuar'
+    hint: 'Zgjidh një emër të shkurtër për lidhjen e këtij projekti: 3–50 shkronja të vogla, shifra ose viza. Lëre bosh për ta hequr.'
+  playInBrowser: 'Luaj në shfletues'
+  madeWithVersion: 'Krijuar me versionin %app% të aplikacionit (Catrobat %language%)'
+  oldVersion:
+    title: 'Krijuar me një version më të vjetër të aplikacionit'
+    text: 'Ky projekt nuk mund të luhet ende në shfletues. Hape në Pocket Code dhe ngarkoje sërish për ta përditësuar.'
+  translateAgain: 'Përkthe sërish me këto gjuhë'
+  prefillMachineTranslation: 'Plotëso me përkthim automatik'
+  machineTranslationFailed: 'Përkthimi automatik nuk është i disponueshëm tani. Provo përsëri më vonë.'
+  machineTranslationUnsupported: 'Përkthimi automatik nuk është i disponueshëm për këtë gjuhë.'
 remixGraph:
   showRemixGraph: 'Ripërziej grafikun'
   by: 'nga'
@@ -401,6 +413,10 @@ search:
   noProjects: Nuk u gjet asnjë projekt
   noStudios: Nuk u gjet asnjë studio
   sameSearchMessage: "Duket se je tashmë këtu! Provo një kërkim tjetër?"
+  noResults: 'Asnjë rezultat për "%query%"'
+  scratchProjects: 'Projekte Scratch'
+  scratchConverting: 'Po konvertohet për %app%…'
+  scratchConvertingSnackbar: 'Po konvertohet "%name%" – kjo mund të zgjasë disa sekonda'
 menu:
   profile: Profili im
   login: Hyr
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Verifiko e-mailin'
+  leaderboard:
+    all_time: 'Krijuesit më të mirë'
+    this_week: 'Krijuesit më të mirë të kësaj jave'
+    points: 'pikë'
 api:
   registerUser:
     emailMissing: 'Emaili mungon'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Përshkrimi është shumë i gjatë'
     creditsTooLong: 'Shënimet dhe falënderimet janë shumë të gjata'
     screenshotInvalid: 'Pamja e ekranit e projektit është e pavlefshme ose nuk mbështetet'
+    slugInvalid: 'URL e personalizuar duhet të ketë 3–50 shkronja të vogla, shifra ose viza të vetme, me të paktën një shkronjë'
+    slugReserved: 'Kjo URL e personalizuar është e rezervuar'
+    slugTaken: 'Kjo URL e personalizuar është zënë tashmë'
   projectsPost:
     invalid_checksum: 'Checksum e pavlefshme. Provo ta ngarkosh përsëri!'
     upload_error: 'Gabim gjatë ngarkimit. Provo ta ngarkosh përsëri!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Skriptet '
   looks: 'Pamje'
   sounds: 'Tingull'
+  unavailable: 'Kodi i këtij projekti nuk mund të shfaqet.'
+  translation:
+    action: 'Përkthe'
+    translateTo: 'Përkthe në %language%'
+    translateAgain: 'Përkthe sërish'
+    stillShowing: 'Ende po shfaqet %language%'
+    original: 'Shfaq origjinalin'
+    resume: 'Vazhdo përkthimin'
+    source: 'Nga'
+    target: 'Në'
+    auto: 'Zbulo gjuhën'
+    loading: 'Po përkthehet kodi…'
+    complete: 'Përkthyer automatikisht në %language%'
+    partial: 'Përkthyer pjesërisht'
+    partialInLanguage: 'Përkthyer pjesërisht në %language%'
+    sourceRequired: 'Zgjidh gjuhën burimore për ta përkthyer këtë kod.'
+    unsupported: 'Përkthimi nuk është i disponueshëm për këto gjuhë.'
+    error: 'Kodi nuk u përkthye dot. Provo përsëri.'
 codeStatistics:
   title: "Statistikat e kodit "
   error: "Statistikat e kodit nuk mund të shfaqen. "
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Projekti yt "%project_name%" u hoq automatikisht për shkak të pasivitetit. Ngarkoje përsëri nëse dëshiron ende ta ndash.'
   noProjects: "Duket se nuk ke asnjë njoftim për projektet."
+  studio-deletion-warning:
+    message: 'Studioja jote "%studio_name%" nuk ka projekte dhe në të nuk ka ndodhur asgjë prej 90 ditësh. Do të fshihet pas %days% ditësh, përveç nëse shton një projekt.'
+  project-files-lost:
+    message: 'Një gabim i serverit humbi skedarët e %count% projekteve të tua: %projects%. Ato janë të fshehura derisa t''i ngarkosh sërish nga Pocket Code. Projektet që nuk ngarkohen sërish brenda 14 ditëve do të fshihen.'
+    more: 'dhe %count% të tjerë'
+  moderation-warning:
+    message: 'Një moderator shqyrtoi një raportim për përmbajtjen tënde dhe zbuloi se ajo shkel rregullat e komunitetit. Të lutem, respekto rregullat, përndryshe llogaria jote mund të pezullohet herën tjetër.'
+    deletion: 'Përmbajtja e fshehur do të fshihet %days% ditë pasi u fsheh, përveç nëse e rregullon ose e apelon.'
+  moderation-hidden:
+    message: 'Një moderator shqyrtoi një raportim për përmbajtjen tënde dhe e fshehu sepse shkel rregullat e komunitetit.'
+  moderation-reason:
+    image: '{1}Një imazh (%names%) dukej si përmbajtje për të rritur.|]1,Inf]Disa imazhe (%names%) dukeshin si përmbajtje për të rritur.'
+    screenshot: 'Pamja e ekranit dukej si përmbajtje për të rritur.'
+    cover: 'Imazhi i kopertinës dukej si përmbajtje për të rritur.'
+    text:
+      name: 'Emri dukej sikur thotë se kjo është vetëm për të rritur.'
+      description: 'Përshkrimi dukej sikur thotë se kjo është vetëm për të rritur.'
+      credits: 'Shënimet dhe meritat dukeshin sikur thonë se kjo është vetëm për të rritur.'
+      about: 'Teksti yt "Rreth meje" dukej sikur thotë se kjo është vetëm për të rritur.'
+      currently_working_on: 'Teksti yt "Aktualisht po punoj për" dukej sikur thotë se kjo është vetëm për të rritur.'
+      username: 'Emri yt i përdoruesit dukej sikur thotë se kjo është vetëm për të rritur.'
+    category:
+      copyright: 'Arsyeja: duket se përdor punën e njerëzve të tjerë pa leje.'
+      sexual_content: 'Arsyeja: dukej si përmbajtje për të rritur.'
+      graphic_violence: 'Arsyeja: dukej shumë e dhunshme.'
+      hateful_content: 'Arsyeja: dukej fyese ose urrejtëse ndaj të tjerëve.'
+      improper_rating: 'Arsyeja: dukej se nuk është e përshtatshme për fëmijë.'
+      spam: 'Arsyeja: dukej si spam.'
+      other: 'Arsyeja: një moderator gjeti një problem me të.'
+      inappropriate: 'Arsyeja: dukej e papërshtatshme.'
+      harassment: 'Arsyeja: dukej si ngacmim ose bullizëm ndaj dikujt.'
+      impersonation: 'Arsyeja: dukej sikur pretendon të jetë dikush tjetër.'
+      inappropriate_profile: 'Arsyeja: profili dukej i papërshtatshëm.'
+      spam_account: 'Arsyeja: dukej si llogari spam.'
+      inappropriate_content: 'Arsyeja: dukej e papërshtatshme.'
 clipboard:
   success: Linku u kopjua në kujtesën e fragmenteve!
   success_project: Linku me projektin u kopjua në clipboard! 
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Ndodhi një gabim gjatë ndalimit të këtij anëtari. Provo sërish më vonë. '
       demote_member: 'Ule administratorin në anëtar'
       demotion_failed: 'Diçka shkoi keq gjatë uljes së këtij administratori. Provo përsëri më vonë.'
+      banned_members: 'Anëtarët e ndaluar'
+      unban_member: 'Hiq ndalimin'
+      unban_hint: 'Heqja e ndalimit i lejon personit të bashkohet sërish normalisht. Nuk e shton atë përsëri në studio.'
+      unban_failed: 'Anëtarët e ndaluar nuk u përditësuan dot. Provo përsëri.'
     join_requests:
       title: 'Kërkesat për anëtarësim'
       accept: 'Prano'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Përshkrimi'
       toggle_allow_comments: 'Komentet'
       toggle_privacy: 'Publik'
+    banned: 'Nuk mund të bashkohesh me këtë studio.'
+    invites:
+      title: 'Kodet e ftesës'
+      hint: 'Kushdo që ka kodin ose lidhjen bashkohet menjëherë me këtë studio, pa pasur nevojë për miratim. Revokimi i një kodi i mban anëtarët që janë bashkuar tashmë.'
+      expires_on: 'Skadon më (opsionale)'
+      max_uses: 'Maks. përdorime (opsionale)'
+      create: 'Krijo kod ftese'
+      uses: 'Përdorur %uses% herë'
+      uses_max: 'Përdorur %uses% nga %max% herë'
+      expires: 'Skadon më %date%'
+      qr_alt: 'Skano këtë kod QR për t''u bashkuar me studion'
+      copy_link: 'Kopjo lidhjen'
+      copied: 'Lidhja e ftesës u kopjua!'
+      revoke: 'Revoko'
+      none: 'Ende nuk ka kode ftese.'
+      error: 'Diçka shkoi keq me kodin e ftesës. Provo përsëri.'
+  join_with_code:
+    title: 'Bashkohu me një kod'
+    hint: 'Ke marrë një kod ftese nga mësuesi ose nga një administrator i studios? Shkruaje këtu për t''u bashkuar me studion.'
+    code: 'Kodi i ftesës'
+    invalid: 'Ky kod nuk është i vlefshëm. Mund të ketë skaduar ose të jetë revokuar.'
+    banned: 'Je ndaluar nga kjo studio.'
+    rate_limited: 'Shumë përpjekje. Prit disa minuta dhe provo përsëri.'
 media_library:
   file:
     size: 'Madhësia: %size% '
@@ -944,3 +1047,8 @@ moderation:
     user_own: "Llogaria jote është pezulluar për shkak të raportimeve nga komuniteti. Mund ta apelosh këtë vendim."
 Reports: Raportimet
 members: anëtarë
+inactiveAccount:
+  subject: 'Llogaria jote Catrobat do të fshihet'
+  title: 'Na ke marrë malli!'
+  content: 'Nuk je identifikuar në llogarinë tënde Catrobat "%username%" prej dy vitesh dhe ajo nuk ka projekte apo komente. Që komuniteti ynë të mbetet i gjallë, do ta fshijmë pas %days% ditësh. Nëse do ta mbash, mjafton të identifikohesh një herë.'
+  button: 'Identifikohu për ta mbajtur llogarinë'

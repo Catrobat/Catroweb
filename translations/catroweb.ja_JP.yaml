@@ -202,6 +202,18 @@ project:
   createTranslation: "翻訳を作成"
   deletedComment: "**削除済み**"
   notForKids: "子ども向けではありません"
+  customUrl:
+    title: 'カスタムURL'
+    hint: 'このプロジェクトのリンク用の短い名前を選んでください: 3〜50文字の小文字の英字、数字、ハイフン。空欄にすると削除されます。'
+  playInBrowser: 'ブラウザで遊ぶ'
+  madeWithVersion: 'アプリのバージョン %app% で作成 (Catrobat %language%)'
+  oldVersion:
+    title: '古いバージョンのアプリで作成'
+    text: 'このプロジェクトはまだブラウザで遊べません。Pocket Code で開いて、もう一度アップロードすると更新されます。'
+  translateAgain: 'これらの言語でもう一度翻訳'
+  prefillMachineTranslation: '機械翻訳で入力'
+  machineTranslationFailed: '機械翻訳は現在利用できません。しばらくしてからもう一度お試しください。'
+  machineTranslationUnsupported: 'この言語では機械翻訳を利用できません。'
 remixGraph:
   showRemixGraph: 'リミックスのグラフを表示'
   by: 'によって'
@@ -388,6 +400,10 @@ search:
   noProjects: "プロジェクトが見つかりません"
   noStudios: "スタジオが見つかりません"
   sameSearchMessage: "もうこのページにいるようです！別のキーワードで検索してみませんか？"
+  noResults: '「%query%」の検索結果はありません'
+  scratchProjects: 'Scratch のプロジェクト'
+  scratchConverting: '%app% 用に変換中…'
+  scratchConvertingSnackbar: '「%name%」を変換中 — 数秒かかることがあります'
 menu:
   profile: マイプロフィール
   login: ログイン
@@ -497,6 +513,10 @@ time:
 user:
   verification:
     email: "メールアドレスを確認してください"
+  leaderboard:
+    all_time: 'トップクリエイター'
+    this_week: '今週のトップクリエイター'
+    points: 'ポイント'
 api:
   registerUser:
     emailMissing: 'メールアドレスがありません'
@@ -532,6 +552,9 @@ api:
     descriptionTooLong: "説明が長すぎます"
     creditsTooLong: "メモとクレジットが長すぎます"
     screenshotInvalid: "プロジェクトのスクリーンショットが無効か、サポートされていません"
+    slugInvalid: 'カスタムURLは、小文字の英字、数字、単独のハイフンで3〜50文字にし、英字を1文字以上含める必要があります'
+    slugReserved: 'このカスタムURLは予約されています'
+    slugTaken: 'このカスタムURLはすでに使われています'
   projectsPost:
     invalid_checksum: 'チェックサムが無効です。もう一度アップロードしてください！'
     upload_error: 'アップロード中にエラーが発生しました。もう一度アップロードしてください！'
@@ -571,6 +594,24 @@ codeView:
   scripts: 'スクリプト'
   looks: '外見'
   sounds: 'サウンド'
+  unavailable: 'このプロジェクトのコードは表示できません。'
+  translation:
+    action: '翻訳'
+    translateTo: '%language% に翻訳'
+    translateAgain: 'もう一度翻訳'
+    stillShowing: 'まだ %language% で表示中'
+    original: '原文を表示'
+    resume: '翻訳を続ける'
+    source: '翻訳元'
+    target: '翻訳先'
+    auto: '言語を検出'
+    loading: 'コードを翻訳中…'
+    complete: '%language% に機械翻訳されました'
+    partial: '一部のみ翻訳済み'
+    partialInLanguage: '%language% に一部のみ翻訳済み'
+    sourceRequired: 'このコードを翻訳するには、翻訳元の言語を選んでください。'
+    unsupported: 'これらの言語では翻訳を利用できません。'
+    error: 'コードを翻訳できませんでした。もう一度お試しください。'
 codeStatistics:
   title: "コードの統計"
   error: "コードの統計情報を表示できません。"
@@ -621,6 +662,41 @@ catro-notifications:
   project-deleted:
     message: "あなたのプロジェクト「%project_name%」は、アクティビティがなかったため自動的に削除されました。まだ共有したい場合は、もう一度アップロードしてください。"
   noProjects: "プロジェクトの通知はないようです。"
+  studio-deletion-warning:
+    message: 'あなたのスタジオ「%studio_name%」にはプロジェクトがなく、90日間何も動きがありません。プロジェクトを追加しない場合、%days% 日後に削除されます。'
+  project-files-lost:
+    message: 'サーバーエラーにより、あなたのプロジェクトのうち %count% 件のファイルが失われました: %projects%。Pocket Code からもう一度アップロードするまで非表示になります。14日以内に再アップロードされなかったプロジェクトは削除されます。'
+    more: 'ほか %count% 件'
+  moderation-warning:
+    message: 'モデレーターがあなたのコンテンツについての報告を確認し、コミュニティのルールに違反していると判断しました。ルールを守ってください。次回はアカウントが停止される可能性があります。'
+    deletion: '非表示にされたコンテンツは、修正するか異議を申し立てない限り、非表示になってから %days% 日後に削除されます。'
+  moderation-hidden:
+    message: 'モデレーターがあなたのコンテンツについての報告を確認し、コミュニティのルールに違反しているため非表示にしました。'
+  moderation-reason:
+    image: '{1}画像 (%names%) が成人向けコンテンツのように見えました。|]1,Inf]いくつかの画像 (%names%) が成人向けコンテンツのように見えました。'
+    screenshot: 'スクリーンショットが成人向けコンテンツのように見えました。'
+    cover: 'カバー画像が成人向けコンテンツのように見えました。'
+    text:
+      name: '名前が、大人専用だと言っているように見えました。'
+      description: '説明が、大人専用だと言っているように見えました。'
+      credits: 'ノートとクレジットが、大人専用だと言っているように見えました。'
+      about: 'あなたの「自己紹介」の文章が、大人専用だと言っているように見えました。'
+      currently_working_on: 'あなたの「現在取り組んでいること」の文章が、大人専用だと言っているように見えました。'
+      username: 'あなたのユーザー名が、大人専用だと言っているように見えました。'
+    category:
+      copyright: '理由: 他の人の作品を許可なく使っているようです。'
+      sexual_content: '理由: 成人向けコンテンツのように見えました。'
+      graphic_violence: '理由: 暴力的すぎるように見えました。'
+      hateful_content: '理由: 他の人を傷つける、または憎しみのこもった内容に見えました。'
+      improper_rating: '理由: 子ども向けではないように見えました。'
+      spam: '理由: スパムのように見えました。'
+      other: '理由: モデレーターが問題を見つけました。'
+      inappropriate: '理由: 不適切に見えました。'
+      harassment: '理由: 誰かをいじめたり嫌がらせをしたりしているように見えました。'
+      impersonation: '理由: 他の誰かになりすましているように見えました。'
+      inappropriate_profile: '理由: プロフィールが不適切に見えました。'
+      spam_account: '理由: スパムアカウントのように見えました。'
+      inappropriate_content: '理由: 不適切に見えました。'
 clipboard:
   success: "リンクをクリップボードにコピーしました！"
   success_project: "プロジェクトへのリンクをクリップボードにコピーしました！"
@@ -846,6 +922,10 @@ studio:
       ban_failed: "このメンバーを追放する際に問題が発生しました。しばらくしてからもう一度お試しください。"
       demote_member: "管理者をメンバーに戻す"
       demotion_failed: "この管理者をメンバーに戻す際に問題が発生しました。しばらくしてからもう一度お試しください。"
+      banned_members: '追放されたメンバー'
+      unban_member: '追放を解除'
+      unban_hint: '追放を解除すると、その人は通常どおり再参加できるようになります。スタジオに自動で戻されるわけではありません。'
+      unban_failed: '追放されたメンバーを更新できませんでした。もう一度お試しください。'
     join_requests:
       title: "参加リクエスト"
       accept: '同意する'
@@ -862,6 +942,29 @@ studio:
       studio_description: '説明'
       toggle_allow_comments: 'コメント'
       toggle_privacy: "公開"
+    banned: 'このスタジオには参加できません。'
+    invites:
+      title: '招待コード'
+      hint: 'コードかリンクを持っている人は、承認なしですぐにこのスタジオに参加できます。コードを取り消しても、すでに参加したメンバーはそのまま残ります。'
+      expires_on: '有効期限 (任意)'
+      max_uses: '最大使用回数 (任意)'
+      create: '招待コードを作成'
+      uses: '%uses% 回使用'
+      uses_max: '%max% 回中 %uses% 回使用'
+      expires: '有効期限: %date%'
+      qr_alt: 'この QR コードをスキャンしてスタジオに参加'
+      copy_link: 'リンクをコピー'
+      copied: '招待リンクをクリップボードにコピーしました!'
+      revoke: '取り消す'
+      none: '招待コードはまだありません。'
+      error: '招待コードで問題が発生しました。もう一度お試しください。'
+  join_with_code:
+    title: 'コードで参加'
+    hint: '先生やスタジオの管理者から招待コードをもらいましたか? ここに入力してスタジオに参加しましょう。'
+    code: '招待コード'
+    invalid: 'このコードは無効です。期限切れか、取り消された可能性があります。'
+    banned: 'あなたはこのスタジオから追放されています。'
+    rate_limited: '試行回数が多すぎます。数分待ってからもう一度お試しください。'
 media_library:
   file:
     size: 'サイズ：%size%。'
@@ -931,3 +1034,8 @@ moderation:
     user_own: "コミュニティからの報告により、あなたのアカウントは停止されました。この決定に異議を申し立てることができます。"
 Reports: "報告"
 members: "メンバー"
+inactiveAccount:
+  subject: 'あなたの Catrobat アカウントは削除されます'
+  title: '会えなくてさみしいです!'
+  content: 'Catrobat アカウント「%username%」に2年間ログインしておらず、プロジェクトやコメントもありません。コミュニティを活発に保つため、%days% 日後にこのアカウントを削除します。残したい場合は、一度ログインするだけで大丈夫です。'
+  button: 'ログインしてアカウントを残す'

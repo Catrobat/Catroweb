@@ -212,6 +212,18 @@ project:
   createTranslation: 'Tərcümə yarat'
   deletedComment: '**Silinib**'
   notForKids: 'Uşaqlar üçün təhlükəsiz deyil'
+  customUrl:
+    title: 'Fərdi URL'
+    hint: 'Bu layihənin linki üçün qısa ad seç: 3-50 kiçik hərf, rəqəm və ya defis. Silmək üçün boş burax.'
+  playInBrowser: 'Brauzerdə oyna'
+  madeWithVersion: 'Tətbiqin %app% versiyası ilə yaradılıb (Catrobat %language%)'
+  oldVersion:
+    title: 'Tətbiqin köhnə versiyası ilə yaradılıb'
+    text: 'Bu layihəni hələ brauzerdə oynamaq olmur. Yeniləmək üçün onu Pocket Code-da aç və yenidən yüklə.'
+  translateAgain: 'Bu dillərlə yenidən tərcümə et'
+  prefillMachineTranslation: 'Maşın tərcüməsi ilə doldur'
+  machineTranslationFailed: 'Maşın tərcüməsi hazırda əlçatan deyil. Bir az sonra yenidən cəhd et.'
+  machineTranslationUnsupported: 'Bu dil üçün maşın tərcüməsi əlçatan deyil.'
 remixGraph:
   showRemixGraph: 'Remiks qrafiki'
   by: 'müəllif:'
@@ -401,6 +413,10 @@ search:
   noProjects: 'Layihə tapılmadı'
   noStudios: 'Studiya tapılmadı'
   sameSearchMessage: 'Deyəsən artıq buradasan! Başqa axtarış sınayasan?'
+  noResults: '“%query%” üçün nəticə yoxdur'
+  scratchProjects: 'Scratch layihələri'
+  scratchConverting: '%app% üçün çevrilir…'
+  scratchConvertingSnackbar: '“%name%” çevrilir — bu bir neçə saniyə çəkə bilər'
 menu:
   profile: Profilim
   login: Giriş
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'E-poçtunu təsdiqlə'
+  leaderboard:
+    all_time: 'Ən yaxşı yaradıcılar'
+    this_week: 'Bu həftənin ən yaxşı yaradıcıları'
+    points: 'xal'
 api:
   registerUser:
     emailMissing: 'E-poçt yoxdur'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Açıqlama çox uzundur'
     creditsTooLong: 'Qeydlər və töhfə verənlər çox uzundur'
     screenshotInvalid: 'Layihənin ekran görüntüsü etibarsızdır və ya dəstəklənmir'
+    slugInvalid: 'Fərdi URL ən azı bir hərf olmaqla 3-50 kiçik hərf, rəqəm və ya tək defisdən ibarət olmalıdır'
+    slugReserved: 'Bu fərdi URL rezerv edilib'
+    slugTaken: 'Bu fərdi URL artıq tutulub'
   projectsPost:
     invalid_checksum: 'Etibarsız yoxlama cəmi. Yenidən yükləməyə çalış!'
     upload_error: 'Yükləmə zamanı xəta. Yenidən yükləməyə çalış!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Skriptlər'
   looks: 'Görünüşlər'
   sounds: 'Səslər'
+  unavailable: 'Bu layihənin kodu göstərilə bilmir.'
+  translation:
+    action: 'Tərcümə et'
+    translateTo: '%language% dilinə tərcümə et'
+    translateAgain: 'Yenidən tərcümə et'
+    stillShowing: 'Hələ də %language% göstərilir'
+    original: 'Orijinalı göstər'
+    resume: 'Tərcüməyə davam et'
+    source: 'Haradan'
+    target: 'Haraya'
+    auto: 'Dili müəyyən et'
+    loading: 'Kod tərcümə edilir…'
+    complete: '%language% dilinə maşınla tərcümə edilib'
+    partial: 'Qismən tərcümə edilib'
+    partialInLanguage: '%language% dilinə qismən tərcümə edilib'
+    sourceRequired: 'Bu kodu tərcümə etmək üçün mənbə dilini seç.'
+    unsupported: 'Bu dillər üçün tərcümə əlçatan deyil.'
+    error: 'Kodu tərcümə etmək mümkün olmadı. Yenidən cəhd et.'
 codeStatistics:
   title: 'Kod statistikası'
   error: 'Kod statistikasını göstərmək mümkün deyil.'
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: '"%project_name%" layihən aktivlik olmadığı üçün avtomatik silindi. Hələ də paylaşmaq istəyirsənsə, onu yenidən yüklə.'
   noProjects: 'Deyəsən layihə bildirişin yoxdur.'
+  studio-deletion-warning:
+    message: '"%studio_name%" studiyanda heç bir layihə yoxdur və 90 gündür orada heç nə baş verməyib. Layihə əlavə etməsən, %days% gün sonra silinəcək.'
+  project-files-lost:
+    message: 'Server xətası səbəbindən %count% layihənin faylları itdi: %projects%. Onları Pocket Code-dan yenidən yükləyənə qədər gizli qalacaqlar. 14 gün ərzində yenidən yüklənməyən layihələr silinəcək.'
+    more: 'və daha %count%'
+  moderation-warning:
+    message: 'Moderator sənin məzmunun haqqında şikayəti yoxladı və onun cəmiyyət qaydalarımızı pozduğunu müəyyən etdi. Zəhmət olmasa qaydalara əməl et, əks halda növbəti dəfə hesabın dayandırıla bilər.'
+    deletion: 'Gizlədilmiş məzmun, onu düzəltməsən və ya etiraz etməsən, gizlədildikdən %days% gün sonra silinəcək.'
+  moderation-hidden:
+    message: 'Moderator sənin məzmunun haqqında şikayəti yoxladı və cəmiyyət qaydalarımızı pozduğu üçün onu gizlətdi.'
+  moderation-reason:
+    image: '{1}Bir şəkil (%names%) böyüklər üçün məzmuna bənzəyirdi.|]1,Inf]Bəzi şəkillər (%names%) böyüklər üçün məzmuna bənzəyirdi.'
+    screenshot: 'Ekran görüntüsü böyüklər üçün məzmuna bənzəyirdi.'
+    cover: 'Örtük şəkli böyüklər üçün məzmuna bənzəyirdi.'
+    text:
+      name: 'Ad bunun yalnız böyüklər üçün olduğunu deyirmiş kimi görünürdü.'
+      description: 'Təsvir bunun yalnız böyüklər üçün olduğunu deyirmiş kimi görünürdü.'
+      credits: 'Qeydlər və təşəkkürlər bunun yalnız böyüklər üçün olduğunu deyirmiş kimi görünürdü.'
+      about: '"Haqqımda" mətnin bunun yalnız böyüklər üçün olduğunu deyirmiş kimi görünürdü.'
+      currently_working_on: '"Hazırda üzərində işlədiyim" mətnin bunun yalnız böyüklər üçün olduğunu deyirmiş kimi görünürdü.'
+      username: 'İstifadəçi adın bunun yalnız böyüklər üçün olduğunu deyirmiş kimi görünürdü.'
+    category:
+      copyright: 'Səbəb: deyəsən, başqalarının işindən icazəsiz istifadə edir.'
+      sexual_content: 'Səbəb: böyüklər üçün məzmuna bənzəyirdi.'
+      graphic_violence: 'Səbəb: həddindən artıq zorakı görünürdü.'
+      hateful_content: 'Səbəb: başqalarına qarşı incidici və ya nifrət dolu görünürdü.'
+      improper_rating: 'Səbəb: uşaqlar üçün uyğun olmadığı görünürdü.'
+      spam: 'Səbəb: spamə bənzəyirdi.'
+      other: 'Səbəb: moderator onunla bağlı problem tapdı.'
+      inappropriate: 'Səbəb: yersiz görünürdü.'
+      harassment: 'Səbəb: kiməsə zorbalıq və ya təcavüz edirmiş kimi görünürdü.'
+      impersonation: 'Səbəb: başqası kimi özünü təqdim edirmiş kimi görünürdü.'
+      inappropriate_profile: 'Səbəb: profil yersiz görünürdü.'
+      spam_account: 'Səbəb: spam hesabına bənzəyirdi.'
+      inappropriate_content: 'Səbəb: yersiz görünürdü.'
 clipboard:
   success: 'Link panoya kopyalandı!'
   success_project: 'Layihənin linki panoya kopyalandı!'
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Bu üzvü qadağan edərkən nəsə səhv getdi. Bir az sonra yenidən cəhd et.'
       demote_member: 'Admini üzvə endir'
       demotion_failed: 'Bu admini endirərkən nəsə səhv getdi. Bir az sonra yenidən cəhd et.'
+      banned_members: 'Qadağan edilmiş üzvlər'
+      unban_member: 'Qadağanı götür'
+      unban_hint: 'Qadağanı götürmək həmin şəxsin yenidən adi qaydada qoşulmasına imkan verir. Onu studiyaya geri əlavə etmir.'
+      unban_failed: 'Qadağan edilmiş üzvləri yeniləmək mümkün olmadı. Yenidən cəhd et.'
     join_requests:
       title: 'Qoşulma sorğuları'
       accept: 'Qəbul et'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Açıqlama'
       toggle_allow_comments: 'Rəylər'
       toggle_privacy: 'Açıq'
+    banned: 'Bu studiyaya qoşula bilməzsən.'
+    invites:
+      title: 'Dəvət kodları'
+      hint: 'Kodu və ya linki olan hər kəs təsdiq gözləmədən dərhal bu studiyaya qoşulur. Kodu ləğv etsən, artıq qoşulmuş üzvlər qalır.'
+      expires_on: 'Bitmə tarixi (istəyə görə)'
+      max_uses: 'Maks. istifadə sayı (istəyə görə)'
+      create: 'Dəvət kodu yarat'
+      uses: '%uses% dəfə istifadə edilib'
+      uses_max: '%max% dəfədən %uses% dəfə istifadə edilib'
+      expires: 'Bitir: %date%'
+      qr_alt: 'Studiyaya qoşulmaq üçün bu QR kodu skan et'
+      copy_link: 'Linki kopyala'
+      copied: 'Dəvət linki panoya kopyalandı!'
+      revoke: 'Ləğv et'
+      none: 'Hələ dəvət kodu yoxdur.'
+      error: 'Dəvət kodu ilə bağlı nəsə səhv getdi. Yenidən cəhd et.'
+  join_with_code:
+    title: 'Kodla qoşul'
+    hint: 'Müəllimindən və ya studiya adminindən dəvət kodu almısan? Studiyaya qoşulmaq üçün onu bura daxil et.'
+    code: 'Dəvət kodu'
+    invalid: 'Bu kod etibarlı deyil. Onun müddəti bitmiş və ya ləğv edilmiş ola bilər.'
+    banned: 'Bu studiyadan qadağan edilmisən.'
+    rate_limited: 'Çox sayda cəhd. Bir neçə dəqiqə gözlə və yenidən cəhd et.'
 media_library:
   file:
     size: 'Ölçü: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: 'Cəmiyyət şikayətlərinə görə hesabın dayandırılıb. Bu qərara etiraz edə bilərsən.'
 Reports: 'Şikayətlər'
 members: 'üzv'
+inactiveAccount:
+  subject: 'Catrobat hesabın silinəcək'
+  title: 'Biz səni darıxırıq!'
+  content: 'İki ildir ki, "%username%" Catrobat hesabına daxil olmamısan və orada heç bir layihə və ya rəy yoxdur. Cəmiyyətimizi canlı saxlamaq üçün onu %days% gün sonra siləcəyik. Hesabını saxlamaq istəyirsənsə, sadəcə bir dəfə daxil ol.'
+  button: 'Hesabımı saxlamaq üçün daxil ol'

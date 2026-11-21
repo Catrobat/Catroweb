@@ -212,6 +212,18 @@ project:
   createTranslation: "צור תרגום"
   deletedComment: "**נמחק**"
   notForKids: "לא מתאים לילדים"
+  customUrl:
+    title: 'כתובת URL מותאמת'
+    hint: 'בחר שם קצר לקישור של הפרויקט הזה: 3-50 אותיות לטיניות קטנות, ספרות או מקפים. השאר ריק כדי להסיר אותו.'
+  playInBrowser: 'שחק בדפדפן'
+  madeWithVersion: 'נוצר עם גרסת האפליקציה %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'נוצר עם גרסה ישנה של האפליקציה'
+    text: 'עדיין אי אפשר להפעיל את הפרויקט הזה בדפדפן. פתח אותו ב-Pocket Code והעלה אותו שוב כדי לעדכן אותו.'
+  translateAgain: 'תרגם שוב עם השפות האלה'
+  prefillMachineTranslation: 'מלא בתרגום מכונה'
+  machineTranslationFailed: 'תרגום מכונה לא זמין כרגע. נסה שוב מאוחר יותר.'
+  machineTranslationUnsupported: 'תרגום מכונה לא זמין עבור השפה הזו.'
 remixGraph:
   showRemixGraph: "גרף רמיקסים"
   by: 'by'
@@ -401,6 +413,10 @@ search:
   noProjects: "לא נמצאו פרויקטים"
   noStudios: "לא נמצאו סטודיו"
   sameSearchMessage: "נראה שאתה כבר כאן! לנסות חיפוש אחר?"
+  noResults: 'אין תוצאות עבור „%query%”'
+  scratchProjects: 'פרויקטים של Scratch'
+  scratchConverting: 'ממיר עבור %app%…'
+  scratchConvertingSnackbar: 'ממיר את „%name%” — זה יכול לקחת כמה שניות'
 menu:
   profile: הפרופיל שלי
   login: התחברות
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: "אמת את הדוא\"ל שלך"
+  leaderboard:
+    all_time: 'היוצרים המובילים'
+    this_week: 'היוצרים המובילים השבוע'
+    points: 'נקודות'
 api:
   registerUser:
     emailMissing: "חסר דוא\"ל"
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: "התיאור ארוך מדי"
     creditsTooLong: "ההערות והקרדיטים ארוכים מדי"
     screenshotInvalid: "צילום המסך של הפרויקט לא חוקי או לא נתמך"
+    slugInvalid: 'כתובת URL מותאמת חייבת להכיל 3-50 אותיות לטיניות קטנות, ספרות או מקפים בודדים, ולפחות אות אחת'
+    slugReserved: 'כתובת ה-URL המותאמת הזו שמורה'
+    slugTaken: 'כתובת ה-URL המותאמת הזו כבר תפוסה'
   projectsPost:
     invalid_checksum: "סכום ביקורת לא חוקי. נסה להעלות שוב!"
     upload_error: "שגיאה בהעלאה. נסה להעלות שוב!"
@@ -584,6 +607,24 @@ codeView:
   scripts: 'תסריט'
   looks: 'מראה'
   sounds: 'צלילים'
+  unavailable: 'אי אפשר להציג את הקוד של הפרויקט הזה.'
+  translation:
+    action: 'תרגם'
+    translateTo: 'תרגם ל%language%'
+    translateAgain: 'תרגם שוב'
+    stillShowing: 'עדיין מוצג ב%language%'
+    original: 'הצג מקור'
+    resume: 'המשך לתרגם'
+    source: 'מ'
+    target: 'ל'
+    auto: 'זהה שפה'
+    loading: 'מתרגם קוד…'
+    complete: 'תורגם במכונה ל%language%'
+    partial: 'תורגם חלקית'
+    partialInLanguage: 'תורגם חלקית ל%language%'
+    sourceRequired: 'בחר את שפת המקור כדי לתרגם את הקוד הזה.'
+    unsupported: 'תרגום לא זמין עבור השפות האלה.'
+    error: 'לא ניתן לתרגם את הקוד. נסה שוב.'
 codeStatistics:
   title: "סטטיסטיקות קוד"
   error: "לא ניתן להציג את סטטיסטיקות הקוד."
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: "הפרויקט שלך \"%project_name%\" הוסר אוטומטית עקב חוסר פעילות. העלה אותו שוב אם אתה עדיין רוצה לשתף אותו."
   noProjects: "נראה שאין לך התראות על פרויקטים."
+  studio-deletion-warning:
+    message: 'בסטודיו שלך "%studio_name%" אין פרויקטים ולא קרה בו כלום במשך 90 יום. הוא יימחק בעוד %days% ימים אלא אם תוסיף פרויקט.'
+  project-files-lost:
+    message: 'שגיאת שרת גרמה לאובדן הקבצים של %count% מהפרויקטים שלך: %projects%. הם מוסתרים עד שתעלה אותם שוב מ-Pocket Code. פרויקטים שלא יועלו שוב תוך 14 יום יימחקו.'
+    more: 'ועוד %count%'
+  moderation-warning:
+    message: 'מנהל בדק דיווח על התוכן שלך ומצא שהוא מפר את כללי הקהילה שלנו. אנא שמור על הכללים, אחרת בפעם הבאה החשבון שלך עלול להיות מושעה.'
+    deletion: 'התוכן המוסתר יימחק %days% ימים אחרי שהוסתר, אלא אם תתקן אותו או תגיש ערעור.'
+  moderation-hidden:
+    message: 'מנהל בדק דיווח על התוכן שלך והסתיר אותו כי הוא מפר את כללי הקהילה שלנו.'
+  moderation-reason:
+    image: '{1}תמונה (%names%) נראתה כמו תוכן למבוגרים.|]1,Inf]כמה תמונות (%names%) נראו כמו תוכן למבוגרים.'
+    screenshot: 'צילום המסך נראה כמו תוכן למבוגרים.'
+    cover: 'תמונת השער נראתה כמו תוכן למבוגרים.'
+    text:
+      name: 'נראה שהשם אומר שזה מיועד למבוגרים בלבד.'
+      description: 'נראה שהתיאור אומר שזה מיועד למבוגרים בלבד.'
+      credits: 'נראה שההערות והתודות אומרות שזה מיועד למבוגרים בלבד.'
+      about: 'נראה שהטקסט "עליי" שלך אומר שזה מיועד למבוגרים בלבד.'
+      currently_working_on: 'נראה שהטקסט "עובד כרגע על" שלך אומר שזה מיועד למבוגרים בלבד.'
+      username: 'נראה ששם המשתמש שלך אומר שזה מיועד למבוגרים בלבד.'
+    category:
+      copyright: 'סיבה: נראה שנעשה בו שימוש ביצירות של אנשים אחרים בלי רשות.'
+      sexual_content: 'סיבה: זה נראה כמו תוכן למבוגרים.'
+      graphic_violence: 'סיבה: זה נראה אלים מדי.'
+      hateful_content: 'סיבה: זה נראה פוגע או שונא כלפי אחרים.'
+      improper_rating: 'סיבה: נראה שזה לא מתאים לילדים.'
+      spam: 'סיבה: זה נראה כמו ספאם.'
+      other: 'סיבה: מנהל מצא בזה בעיה.'
+      inappropriate: 'סיבה: זה נראה לא הולם.'
+      harassment: 'סיבה: נראה שזה מציק או מטריד מישהו.'
+      impersonation: 'סיבה: נראה שזה מתחזה למישהו אחר.'
+      inappropriate_profile: 'סיבה: הפרופיל נראה לא הולם.'
+      spam_account: 'סיבה: זה נראה כמו חשבון ספאם.'
+      inappropriate_content: 'סיבה: זה נראה לא הולם.'
 clipboard:
   success: "הקישור הועתק ללוח!"
   success_project: "הקישור לפרויקט הועתק ללוח!"
@@ -859,6 +935,10 @@ studio:
       ban_failed: "משהו השתבש בחסימת החבר הזה. נסה שוב מאוחר יותר."
       demote_member: "הורד מנהל לדרגת חבר"
       demotion_failed: "משהו השתבש בהורדת המנהל הזה בדרגה. נסה שוב מאוחר יותר."
+      banned_members: 'חברים חסומים'
+      unban_member: 'הסר חסימה'
+      unban_hint: 'הסרת חסימה מאפשרת לאדם להצטרף שוב כרגיל. היא לא מוסיפה אותו בחזרה לסטודיו.'
+      unban_failed: 'לא ניתן לעדכן את החברים החסומים. נסה שוב.'
     join_requests:
       title: "בקשות הצטרפות"
       accept: 'הסכמה'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'תאור'
       toggle_allow_comments: 'תגובות'
       toggle_privacy: "ציבורי"
+    banned: 'אינך יכול להצטרף לסטודיו הזה.'
+    invites:
+      title: 'קודי הזמנה'
+      hint: 'כל מי שיש לו את הקוד או הקישור מצטרף לסטודיו מיד, בלי צורך באישור. ביטול קוד משאיר את החברים שכבר הצטרפו.'
+      expires_on: 'תוקף עד (לא חובה)'
+      max_uses: 'מקסימום שימושים (לא חובה)'
+      create: 'צור קוד הזמנה'
+      uses: 'נעשה שימוש %uses% פעמים'
+      uses_max: 'נעשה שימוש %uses% מתוך %max% פעמים'
+      expires: 'בתוקף עד %date%'
+      qr_alt: 'סרוק את קוד ה-QR הזה כדי להצטרף לסטודיו'
+      copy_link: 'העתק קישור'
+      copied: 'קישור ההזמנה הועתק ללוח!'
+      revoke: 'בטל'
+      none: 'עדיין אין קודי הזמנה.'
+      error: 'משהו השתבש עם קוד ההזמנה. נסה שוב.'
+  join_with_code:
+    title: 'הצטרף עם קוד'
+    hint: 'קיבלת קוד הזמנה מהמורה שלך או ממנהל סטודיו? הזן אותו כאן כדי להצטרף לסטודיו.'
+    code: 'קוד הזמנה'
+    invalid: 'הקוד הזה לא תקף. ייתכן שפג תוקפו או שבוטל.'
+    banned: 'נחסמת מהסטודיו הזה.'
+    rate_limited: 'יותר מדי ניסיונות. חכה כמה דקות ונסה שוב.'
 media_library:
   file:
     size: "גודל: %size%"
@@ -944,3 +1047,8 @@ moderation:
     user_own: "החשבון שלך הושעה בעקבות דיווחים מהקהילה. אפשר לערער על ההחלטה."
 Reports: "דיווחים"
 members: "חברים"
+inactiveAccount:
+  subject: 'חשבון ה-Catrobat שלך יימחק'
+  title: 'התגעגענו אליך!'
+  content: 'לא התחברת לחשבון ה-Catrobat שלך "%username%" במשך שנתיים, ואין בו פרויקטים או תגובות. כדי לשמור על הקהילה שלנו פעילה, נמחק אותו בעוד %days% ימים. אם אתה רוצה לשמור אותו, פשוט התחבר פעם אחת.'
+  button: 'התחבר כדי לשמור את החשבון שלי'

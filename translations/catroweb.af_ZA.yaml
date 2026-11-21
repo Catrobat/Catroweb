@@ -212,6 +212,18 @@ project:
   createTranslation: Skep vertaling
   deletedComment: '**Geskrap**'
   notForKids: Nie veilig vir kinders nie
+  customUrl:
+    title: 'Eie URL'
+    hint: 'Kies ''n kort naam vir hierdie projek se skakel: 3-50 kleinletters, syfers of koppeltekens. Laat dit leeg om dit te verwyder.'
+  playInBrowser: 'Speel in blaaier'
+  madeWithVersion: 'Gemaak met app-weergawe %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Gemaak met ''n ouer app-weergawe'
+    text: 'Hierdie projek kan nog nie in die blaaier gespeel word nie. Maak dit in Pocket Code oop en laai dit weer op om dit by te werk.'
+  translateAgain: 'Vertaal weer met hierdie tale'
+  prefillMachineTranslation: 'Vul masjienvertaling in'
+  machineTranslationFailed: 'Masjienvertaling is nou nie beskikbaar nie. Probeer asseblief later weer.'
+  machineTranslationUnsupported: 'Masjienvertaling is nie vir hierdie taal beskikbaar nie.'
 remixGraph:
   showRemixGraph: 'Remix-grafiek'
   by: 'deur'
@@ -402,6 +414,10 @@ search:
   noProjects: Geen projekte gevind nie
   noStudios: Geen studio's gevind nie
   sameSearchMessage: "Dit lyk asof jy reeds hier is! Probeer 'n ander soektog?"
+  noResults: 'Geen resultate vir “%query%” nie'
+  scratchProjects: 'Scratch-projekte'
+  scratchConverting: 'Skakel om vir %app%…'
+  scratchConvertingSnackbar: '“%name%” word omgeskakel — dit kan ''n paar sekondes neem'
 menu:
   profile: Profiel
   login: Teken aan
@@ -511,6 +527,10 @@ time:
 user:
   verification:
     email: 'Verifieer jou e-pos'
+  leaderboard:
+    all_time: 'Topskeppers'
+    this_week: 'Topskeppers hierdie week'
+    points: 'punte'
 api:
   registerUser:
     emailMissing: 'E-pos ontbreek'
@@ -546,6 +566,9 @@ api:
     descriptionTooLong: 'Beskrywing te lank'
     creditsTooLong: 'Notas en erkennings te lank'
     screenshotInvalid: 'Projek-skermskoot ongeldig of nie ondersteun nie'
+    slugInvalid: 'Die eie URL moet 3-50 kleinletters, syfers of enkele koppeltekens wees, met ten minste een letter'
+    slugReserved: 'Hierdie eie URL is gereserveer'
+    slugTaken: 'Hierdie eie URL is reeds geneem'
   projectsPost:
     invalid_checksum: 'Ongeldige kontrolesom. Probeer weer oplaai!'
     upload_error: 'Fout tydens oplaai. Probeer weer oplaai!'
@@ -585,6 +608,24 @@ codeView:
   scripts: 'Skripte'
   looks: 'Voorkoms'
   sounds: 'Klanke'
+  unavailable: 'Hierdie projek se kode kan nie gewys word nie.'
+  translation:
+    action: 'Vertaal'
+    translateTo: 'Vertaal na %language%'
+    translateAgain: 'Vertaal weer'
+    stillShowing: 'Wys steeds %language%'
+    original: 'Wys oorspronklike'
+    resume: 'Gaan voort met vertaal'
+    source: 'Van'
+    target: 'Na'
+    auto: 'Bespeur taal'
+    loading: 'Vertaal kode…'
+    complete: 'Masjienvertaal na %language%'
+    partial: 'Gedeeltelik vertaal'
+    partialInLanguage: 'Gedeeltelik vertaal na %language%'
+    sourceRequired: 'Kies die brontaal om hierdie kode te vertaal.'
+    unsupported: 'Vertaling is nie vir hierdie tale beskikbaar nie.'
+    error: 'Kon nie die kode vertaal nie. Probeer weer.'
 codeStatistics:
   title: "Kodestatistieke"
   error: "Kodestatistieke kan nie vertoon word nie."
@@ -635,6 +676,41 @@ catro-notifications:
   project-deleted:
     message: 'Jou projek "%project_name%" is weens onaktiwiteit outomaties verwyder. Laai dit weer op as jy dit nog wil deel.'
   noProjects: "Dit lyk asof jy geen projek-kennisgewings het nie."
+  studio-deletion-warning:
+    message: 'Jou studio "%studio_name%" het geen projekte nie en niks het al 90 dae lank daarin gebeur nie. Dit sal oor %days% dae geskrap word, tensy jy ''n projek byvoeg.'
+  project-files-lost:
+    message: '''n Bedienerfout het die lêers van %count% van jou projekte verloor: %projects%. Hulle is versteek totdat jy hulle weer vanaf Pocket Code oplaai. Projekte wat nie binne 14 dae weer opgelaai word nie, sal geskrap word.'
+    more: 'en %count% meer'
+  moderation-warning:
+    message: '''n Moderator het ''n verslag oor jou inhoud nagegaan en gevind dat dit ons gemeenskapsreëls oortree. Volg asseblief die reëls, anders kan jou rekening volgende keer opgeskort word.'
+    deletion: 'Die versteekte inhoud sal %days% dae nadat dit versteek is, geskrap word, tensy jy dit regmaak of appelleer.'
+  moderation-hidden:
+    message: '''n Moderator het ''n verslag oor jou inhoud nagegaan en dit versteek omdat dit ons gemeenskapsreëls oortree.'
+  moderation-reason:
+    image: '{1}''n Prent (%names%) het na volwasse inhoud gelyk.|]1,Inf]Sommige prente (%names%) het na volwasse inhoud gelyk.'
+    screenshot: 'Die skermskoot het na volwasse inhoud gelyk.'
+    cover: 'Die voorbladprent het na volwasse inhoud gelyk.'
+    text:
+      name: 'Die naam het gelyk asof dit sê dat dit net vir volwassenes is.'
+      description: 'Die beskrywing het gelyk asof dit sê dat dit net vir volwassenes is.'
+      credits: 'Die erkennings het gelyk asof hulle sê dat dit net vir volwassenes is.'
+      about: 'Jou "Oor my"-teks het gelyk asof dit sê dat dit net vir volwassenes is.'
+      currently_working_on: 'Jou "Werk tans aan"-teks het gelyk asof dit sê dat dit net vir volwassenes is.'
+      username: 'Jou gebruikersnaam het gelyk asof dit sê dat dit net vir volwassenes is.'
+    category:
+      copyright: 'Rede: dit lyk asof dit ander mense se werk sonder toestemming gebruik.'
+      sexual_content: 'Rede: dit het na volwasse inhoud gelyk.'
+      graphic_violence: 'Rede: dit het te gewelddadig gelyk.'
+      hateful_content: 'Rede: dit het kwetsend of haatlik teenoor ander gelyk.'
+      improper_rating: 'Rede: dit het gelyk asof dit nie geskik is vir kinders nie.'
+      spam: 'Rede: dit het na strooipos gelyk.'
+      other: 'Rede: ''n moderator het ''n probleem daarmee gevind.'
+      inappropriate: 'Rede: dit het onvanpas gelyk.'
+      harassment: 'Rede: dit het gelyk asof dit iemand boelie of teister.'
+      impersonation: 'Rede: dit het gelyk asof dit voorgee om iemand anders te wees.'
+      inappropriate_profile: 'Rede: die profiel het onvanpas gelyk.'
+      spam_account: 'Rede: dit het na ''n strooiposrekening gelyk.'
+      inappropriate_content: 'Rede: dit het onvanpas gelyk.'
 clipboard:
   success: Skakel na knipbord gekopieer!
   success_project: Skakel na projek na knipbord gekopieer!
@@ -860,6 +936,10 @@ studio:
       ban_failed: 'Iets het verkeerd geloop tydens die verbanning van hierdie lid. Probeer later weer.'
       demote_member: 'Degradeer administrateur tot lid'
       demotion_failed: 'Iets het verkeerd geloop tydens die degradering van hierdie administrateur. Probeer later weer.'
+      banned_members: 'Verbanne lede'
+      unban_member: 'Hef verbanning op'
+      unban_hint: 'As jy ''n verbanning ophef, kan die persoon weer normaal aansluit. Dit voeg hulle nie terug by die studio nie.'
+      unban_failed: 'Kon nie die verbanne lede bywerk nie. Probeer asseblief weer.'
     join_requests:
       title: 'Aansluitversoeke'
       accept: 'Aanvaar'
@@ -876,6 +956,29 @@ studio:
       studio_description: 'Beskrywing'
       toggle_allow_comments: 'Kommentaar'
       toggle_privacy: 'Publiek'
+    banned: 'Jy kan nie by hierdie studio aansluit nie.'
+    invites:
+      title: 'Uitnodigingskodes'
+      hint: 'Enigiemand met die kode of skakel sluit dadelik by hierdie studio aan, sonder goedkeuring. As jy ''n kode herroep, bly die lede wat reeds aangesluit het.'
+      expires_on: 'Verval op (opsioneel)'
+      max_uses: 'Maks. gebruike (opsioneel)'
+      create: 'Skep uitnodigingskode'
+      uses: '%uses% keer gebruik'
+      uses_max: '%uses% van %max% keer gebruik'
+      expires: 'Verval %date%'
+      qr_alt: 'Skandeer hierdie QR-kode om by die studio aan te sluit'
+      copy_link: 'Kopieer skakel'
+      copied: 'Uitnodigingskakel na knipbord gekopieer!'
+      revoke: 'Herroep'
+      none: 'Nog geen uitnodigingskodes nie.'
+      error: 'Iets het verkeerd geloop met die uitnodigingskode. Probeer asseblief weer.'
+  join_with_code:
+    title: 'Sluit aan met ''n kode'
+    hint: 'Het jy ''n uitnodigingskode van jou onderwyser of ''n studio-administrateur gekry? Voer dit hier in om by die studio aan te sluit.'
+    code: 'Uitnodigingskode'
+    invalid: 'Hierdie kode is nie geldig nie. Dit het dalk verval of is herroep.'
+    banned: 'Jy is uit hierdie studio verban.'
+    rate_limited: 'Te veel pogings. Wag asseblief ''n paar minute en probeer weer.'
 media_library:
   file:
     size: 'Grootte: %size%'
@@ -945,3 +1048,8 @@ moderation:
     user_own: "Jou rekening is weens gemeenskapsverslae opgeskort. Jy kan teen hierdie besluit appelleer."
 Reports: Verslae
 members: lede
+inactiveAccount:
+  subject: 'Jou Catrobat-rekening sal geskrap word'
+  title: 'Ons mis jou!'
+  content: 'Jy het al twee jaar lank nie by jou Catrobat-rekening "%username%" aangeteken nie, en dit het geen projekte of kommentaar nie. Om ons gemeenskap lewendig te hou, sal ons dit oor %days% dae skrap. As jy dit wil hou, teken net een keer aan.'
+  button: 'Teken aan om my rekening te hou'

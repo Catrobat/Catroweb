@@ -194,6 +194,19 @@ project:
   createTranslation: 'ᎦᏁᏟᏴᏛ ᏙᏢ'
   deletedComment: '**ᎦᏛᏔᏅ**'
   notForKids: 'ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ'
+  customUrl:
+    title: 'ᏨᏒ URL'
+    hint: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎤᏯᏅᏗ ᎦᏅᎯᏛ ᏂᎨᏒᎾ ᏚᏙᎥ ᎯᏑᏰᏍᏓ: 3-50 ᏧᎾᏍᏗ ᏗᎪᏪᎵ, ᏗᏎᏍᏗ ᎠᎴᏱᎩ -. ᎠᏒᎭ ᎯᎧᎲᏓ ᎯᏄᎪᏫᏍᏗ ᏣᏚᎵᏍᎨᏍᏗ.'
+  playInBrowser: 'browser ᎾᎿᎢ ᎯᏁᏍᎨᎢ'
+  madeWithVersion: 'app ᎢᏳᏓᎴᎩ %app% ᎬᏗ ᎤᏙᏢᏅ (Catrobat %language%)'
+  oldVersion:
+    title: 'ᎤᏪᏘ app ᎢᏳᏓᎴᎩ ᎬᏗ ᎤᏙᏢᏅ'
+    text: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᎠᏏ ᎥᏝ browser ᎾᎿᎢ ᏰᎵ ᎦᏁᏍᎨᏗ ᏱᎩ. Pocket Code ᎾᎿᎢ ᏍᏚᎢᎦ ᎠᎴ ᏔᎵᏁ ᎯᏅᏍᏓ ᎢᏤ ᏂᏨᏁᏗ.'
+  translatedByLine: 'ᎤᏩᏒ ᎦᏁᏟᏴᏛ %sourceLanguage% ᏅᏓᏳᏓᎴᏅᎯ %targetLanguage% ᎢᏗᏢ'
+  translateAgain: 'ᎯᎠ ᏗᎦᏬᏂᎯᏍᏗ ᎬᏗ ᏔᎵᏁ ᎯᏁᏟᏴᏍᏓ'
+  prefillMachineTranslation: 'ᎤᏩᏒ ᎦᏁᏟᏴᏛ ᎯᎧᎲᏓ'
+  machineTranslationFailed: 'ᎤᏩᏒ ᎦᏁᏟᏴᏛ ᎪᎯ ᎥᏝ ᏰᎭ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+  machineTranslationUnsupported: 'ᎯᎠ ᎦᏬᏂᎯᏍᏗ ᎤᏩᏒ ᎦᏁᏟᏴᏛ ᎥᏝ ᏰᎭ.'
 remixGraph:
   showRemixGraph: 'ᎢᏤ ᏂᏛᏁᎸ ᏗᏟᎶᏍᏔᏅ'
   by: 'by'
@@ -380,6 +393,10 @@ search:
   noProjects: 'ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏳᏩᏛ'
   noStudios: 'ᎥᏝ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏳᏩᏛ'
   sameSearchMessage: 'ᎦᏳᎳ ᎠᏂ ᏤᎭ! ᏅᏩᏓᎴ ᏲᎦ?'
+  noResults: '“%query%” ᎥᏝ ᎪᎱᏍᏗ ᏳᏩᏛ'
+  scratchProjects: 'Scratch ᏚᎸᏫᏍᏓᏁᎸᎯ'
+  scratchConverting: '%app% ᎤᎬᏩᎳᏅᎯ ᎠᏁᏟᏴᏍᏗᎭ…'
+  scratchConvertingSnackbar: '“%name%” ᎠᏁᏟᏴᏍᏗᎭ — ᎢᏳᎾᎩᏛ ᏧᏔᏬᏍᏔᏅ ᏰᎵ ᎤᏍᏆᏂᎪᏗ'
 menu:
   profile: 'ᏕᏣᏙᎥ ᏗᎪᏪᎵ'
   login: 'ᏫᏴᎭ'
@@ -403,6 +420,9 @@ login:
   alreadyReset: 'ᎯᎠ ᏴᏫ ᎤᏤᎵ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᎦᏳᎳ ᎦᏔᏲᏒ 24 ᏧᏒᎯᏛ ᎢᏳᏟᎶᏛ ᎤᏁᏙᎸ.'
   username: 'ᏕᏣᏙᎥ'
   email: 'Email'
+  oauth:
+    google: 'Google ᎬᏗ ᏫᏴᎭ'
+    or: 'ᎠᎴᏱᎩ'
 register:
   title: 'ᏕᏣᏙᎥ ᏫᏂᏯ'
   subText: 'ᏣᏍᏆᏗᏍᎬᎾ, Catrobat ᎦᏚᎲ ᏕᏣᏙᎥ ᏫᏂᏯᎭ ᎠᎴ %var1% ᎠᎴ %var2% ᎣᏏᏳ ᏣᏰᎸᏗ.'
@@ -484,6 +504,10 @@ time:
 user:
   verification:
     email: 'ᏣᏤᎵ email ᎤᏙᎯᏳ ᏂᎬᏁᎸ'
+  leaderboard:
+    all_time: 'ᎤᏟ ᎣᏍᏓ ᎠᏂᏲᏢᏍᎩ'
+    this_week: 'ᎯᎠ ᏒᎾᏙᏓᏆᏍᏗ ᎤᏟ ᎣᏍᏓ ᎠᏂᏲᏢᏍᎩ'
+    points: 'ᏗᏎᏍᏗ'
 api:
   registerUser:
     emailMissing: 'Email ᎥᏝ ᏰᎭ'
@@ -519,6 +543,9 @@ api:
     descriptionTooLong: 'ᎧᏃᎮᏛ ᎤᏣᏘ ᎦᏅᎯᏛ'
     creditsTooLong: 'ᏗᎪᏪᎸ ᎠᎴ ᏩᏙ ᎤᏣᏘ ᎦᏅᎯᏛ'
     screenshotInvalid: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᏟᎶᏍᏔᏅ ᎥᏝ ᎣᏏᏳ'
+    slugInvalid: 'ᏨᏒ URL 3-50 ᏧᎾᏍᏗ ᏗᎪᏪᎵ, ᏗᏎᏍᏗ ᎠᎴᏱᎩ ᏌᏉ - ᎨᏎᏍᏗ, ᎠᎴ ᏌᏉ ᎪᏪᎵ ᎦᏁᎮᏍᏗ'
+    slugReserved: 'ᎯᎠ ᏨᏒ URL ᎦᏍᏆᏂᎪᏛ'
+    slugTaken: 'ᎯᎠ ᏨᏒ URL ᎦᏳᎳ ᎠᏂᏁᎭ'
   projectsPost:
     invalid_checksum: 'Checksum ᎥᏝ ᎣᏏᏳ. ᏔᎵᏁ ᎯᏅᏍᏓ!'
     upload_error: 'ᎦᏅᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏔᎵᏁ ᎯᏅᏍᏓ!'
@@ -558,6 +585,24 @@ codeView:
   scripts: 'ᏗᎪᏪᎵ'
   looks: 'ᏄᏍᏛ ᏗᎪᏩᏛᏗ'
   sounds: 'ᏗᎧᏁᎬ'
+  unavailable: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎥᏝ ᏰᎵ ᎬᏂᎨᏒ ᏱᏂᎬᏁᏗ.'
+  translation:
+    action: 'ᎯᏁᏟᏴᏍᏓ'
+    translateTo: '%language% ᎢᏗᏢ ᎯᏁᏟᏴᏍᏓ'
+    translateAgain: 'ᏔᎵᏁ ᎯᏁᏟᏴᏍᏓ'
+    stillShowing: 'ᎠᏏᏉ %language% ᎬᏂᎨᏒ ᏂᎬᏁᎭ'
+    original: 'ᎢᎬᏱᏱ ᎾᎬᏁ'
+    resume: 'ᎯᏁᏟᏴᏍᎬ ᎯᏍᏆᏂᎪᏓ'
+    source: 'ᏅᏓᏳᏓᎴᏅᎯ'
+    target: 'ᎢᏗᏢ'
+    auto: 'ᎦᏬᏂᎯᏍᏗ ᎤᏩᏒ ᎤᏩᏛᏗ'
+    loading: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎠᏁᏟᏴᏍᏗᎭ…'
+    complete: '%language% ᎢᏗᏢ ᎤᏩᏒ ᎦᏁᏟᏴᏛ'
+    partial: 'ᎢᎦᏛ ᎦᏁᏟᏴᏛ'
+    partialInLanguage: '%language% ᎢᏗᏢ ᎢᎦᏛ ᎦᏁᏟᏴᏛ'
+    sourceRequired: 'ᎯᎠ ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎯᏁᏟᏴᏍᏗ, ᏅᏓᏳᏓᎴᏅᎯ ᎦᏬᏂᎯᏍᏗ ᎯᏑᏰᏍᏓ.'
+    unsupported: 'ᎯᎠ ᏗᎦᏬᏂᎯᏍᏗ ᎦᏁᏟᏴᏛ ᎥᏝ ᏰᎭ.'
+    error: 'ᏗᎾᎦᎾᏌᎢᏍᏗ ᏗᎪᏪᎵ ᎥᏝ ᏰᎵ ᏱᎦᏁᏟᏴᏍᏗ ᏱᎨᏎ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
 codeStatistics:
   title: 'Code Statistics'
   error: "Code Statistics can't be displayed."
@@ -608,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: 'ᏚᎸᏫᏍᏓᏁᎸ "%project_name%" ᎤᏩᏒ ᎦᏛᏔᏅ ᎪᎱᏍᏗ ᏄᎵᏍᏔᏅᎾ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ. ᏔᎵᏁ ᎯᏅᏍᏓ ᎢᏳᏃ ᎠᏏᏉ ᏕᎯᏁᎳᏗ ᏣᏚᎵᏍᎨᏍᏗ.'
   noProjects: 'ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
+  studio-deletion-warning:
+    message: 'ᏣᏤᎵ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ "%studio_name%" ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᏱᏓᏁᎭ ᎠᎴ 90 ᏧᏒᎯᏛ ᎥᏝ ᎪᎱᏍᏗ ᏱᏄᎵᏍᏔᏅ. %days% ᏧᏒᎯᏛ ᎣᏂ ᏛᎦᏛᏔᏂ ᎢᏳᏃ ᏚᎸᏫᏍᏓᏁᎸ ᏂᏣᏟᏌᏅᎾ ᎢᎨᏎᏍᏗ.'
+  project-files-lost:
+    message: 'server ᎤᏲ ᏄᎵᏍᏔᏅ ᎠᎴ %count% ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏧᏤᎵ ᎪᏪᎵ ᏚᏲᏒ: %projects%. ᎦᏍᎦᎳ ᎨᏎᏍᏗ Pocket Code ᏅᏓᏳᏓᎴᏅᎯ ᏔᎵᏁ ᏤᏅᏍᏔᏅ ᎢᏯᏍᏗ. ᏚᎸᏫᏍᏓᏁᎸᎯ 14 ᏧᏒᎯᏛ ᎭᏫᏂ ᏔᎵᏁ ᏂᎦᏅᏍᏔᏅᎾ ᏛᎦᏛᏔᏂ.'
+    more: 'ᎠᎴ %count% ᎤᏟ'
+  moderation-warning:
+    message: 'ᎠᎦᏘᏯ ᏣᏤᎵ ᎪᎱᏍᏗ ᎦᏃᎲᏎᎸ ᎤᎦᏔᏅ ᎠᎴ ᎤᏙᎴᎰᏒ ᎦᏚᎲ ᏗᎧᎿᏩᏛᏍᏗ ᎤᏲᏍᏔᏅ. ᏗᎧᎿᏩᏛᏍᏗ ᏍᏓᏩᏕᎨᏍᏗ, ᎢᏳᏃ ᎥᏝ ᏕᏣᏙᎥ ᏰᎵ ᎠᎦᏘᏴᏗ ᏔᎵᏁ ᎢᏳᎵᏍᏔᏅ.'
+    deletion: 'ᎦᏍᎦᎳ ᎪᎱᏍᏗ %days% ᏧᏒᎯᏛ ᎦᏍᎦᎸ ᎣᏂ ᏛᎦᏛᏔᏂ, ᎢᏳᏃ ᏂᏣᏚᏓᎳᎡᎸᎾ ᎠᎴᏱᎩ ᏂᏣᏬᏂᏒᎾ ᎢᎨᏎᏍᏗ.'
+  moderation-hidden:
+    message: 'ᎠᎦᏘᏯ ᏣᏤᎵ ᎪᎱᏍᏗ ᎦᏃᎲᏎᎸ ᎤᎦᏔᏅ ᎠᎴ ᎤᏍᎦᎳᏅ ᎦᏚᎲ ᏗᎧᎿᏩᏛᏍᏗ ᎤᏲᏍᏔᏅ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ.'
+  moderation-reason:
+    image: '{1}ᏌᏉ ᏗᏟᎶᏍᏔᏅ (%names%) ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᎾᏤᎵ ᎪᎱᏍᏗ ᎾᏍᎩᏯ ᎨᏎ.|]1,Inf]ᎢᎦᏛ ᏗᏟᎶᏍᏔᏅ (%names%) ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᎾᏤᎵ ᎪᎱᏍᏗ ᎾᏍᎩᏯ ᎨᏎ.'
+    screenshot: 'ᏚᎸᏫᏍᏓᏁᎸ ᏗᏟᎶᏍᏔᏅ ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᎾᏤᎵ ᎪᎱᏍᏗ ᎾᏍᎩᏯ ᎨᏎ.'
+    cover: 'ᎢᎬᏱᏱ ᏗᏟᎶᏍᏔᏅ ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᎾᏤᎵ ᎪᎱᏍᏗ ᎾᏍᎩᏯ ᎨᏎ.'
+    text:
+      name: 'ᏚᏙᎥ ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᏅᏒ ᎤᏩᏒ ᎯᎠ ᎦᏛᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+      description: 'ᎧᏃᎮᏛ ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᏅᏒ ᎤᏩᏒ ᎯᎠ ᎦᏛᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+      credits: 'Credits ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᏅᏒ ᎤᏩᏒ ᎯᎠ ᎦᏛᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+      about: 'ᏣᏤᎵ "ᎠᏴ ᎧᏃᎮᏛ" ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᏅᏒ ᎤᏩᏒ ᎯᎠ ᎦᏛᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+      currently_working_on: 'ᏣᏤᎵ "ᎪᎯ ᏓᎩᎸᏫᏍᏓᏁᎭ" ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᏅᏒ ᎤᏩᏒ ᎯᎠ ᎦᏛᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+      username: 'ᏕᏣᏙᎥ ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᏅᏒ ᎤᏩᏒ ᎯᎠ ᎦᏛᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+    category:
+      copyright: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᏅᏩᏓᎴ ᏴᏫ ᏚᏂᎸᏫᏍᏓᏁᎸ ᎥᏝ ᎤᏂᎵᏍᎨᏓ ᏳᏁᎸ ᎬᏗ ᎾᏍᎩᏯ ᎨᏐ.'
+      sexual_content: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᎠᏂᎦᏴᎵ ᏴᏫ ᎤᎾᏤᎵ ᎪᎱᏍᏗ ᎾᏍᎩᏯ ᎨᏎ.'
+      graphic_violence: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᎤᏣᏘ ᎤᏍᎦᏎᏗ ᎾᏍᎩᏯ ᎨᏎ.'
+      hateful_content: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᏅᏩᏓᎴ ᏴᏫ ᎤᏲ ᏧᏓᏅᏓᏗᏍᏗ ᎠᎴᏱᎩ ᎤᏂᏍᎦᏍᏗ ᎾᏍᎩᏯ ᎨᏎ.'
+      improper_rating: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᏗᏂᏲᎵ ᎥᏝ ᎣᏏᏳ ᎾᏍᎩᏯ ᎨᏎ.'
+      spam: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: spam ᎾᏍᎩᏯ ᎨᏎ.'
+      other: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᎠᎦᏘᏯ ᎤᏲ ᎤᏩᏛ.'
+      inappropriate: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᎥᏝ ᎣᏏᏳ ᎾᏍᎩᏯ ᎨᏎ.'
+      harassment: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᎩᎶ ᎤᏕᏯᏙᏗᏍᎬ ᎠᎴᏱᎩ ᎤᏯᏪᏍᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+      impersonation: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᏅᏩᏓᎴ ᏴᏫ ᎾᎵᏍᏗᏍᎬ ᎾᏍᎩᏯ ᎨᏎ.'
+      inappropriate_profile: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᎥᏝ ᎣᏏᏳ ᎾᏍᎩᏯ ᎨᏎ.'
+      spam_account: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: spam ᏚᏙᎥ ᎾᏍᎩᏯ ᎨᏎ.'
+      inappropriate_content: 'ᏅᏗᎦᎵᏍᏙᏗᏍᎬ: ᎥᏝ ᎣᏏᏳ ᎾᏍᎩᏯ ᎨᏎ.'
 clipboard:
   success: 'ᎤᏯᏅᏗ ᎦᏯᏅ!'
   success_project: 'ᏚᎸᏫᏍᏓᏁᎸ ᎤᏯᏅᏗ ᎦᏯᏅ!'
@@ -833,6 +913,10 @@ studio:
       ban_failed: 'ᎯᎠ ᎠᏁᎯ ᎦᏄᎪᏫᏍᎬ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
       demote_member: 'ᎠᎦᏘᏯ ᎠᏁᎯ ᏂᎬᏁᎸ'
       demotion_failed: 'ᎯᎠ ᎠᎦᏘᏯ ᎠᏁᎯ ᏂᎬᏁᎲ ᎤᏲ ᏄᎵᏍᏔᏅ. ᎣᏂ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+      banned_members: 'ᎠᏁᎯ ᎤᏂᏄᎪᏫᏒ'
+      unban_member: 'ᎦᏄᎪᏫᏍᎬ ᎯᏲᏍᏓ'
+      unban_hint: 'ᎦᏄᎪᏫᏍᎬ ᎯᏲᏍᏔᏅ, ᎾᏍᎩ ᏴᏫ ᏔᎵᏁ ᏰᎵ ᎤᏴᏍᏗ. ᎥᏝ ᏔᎵᏁ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏴᎦᏟᏌᏂ.'
+      unban_failed: 'ᎠᏁᎯ ᎤᏂᏄᎪᏫᏒ ᎥᏝ ᏰᎵ ᎢᏤ ᏱᏂᎬᏁᏗ ᏱᎨᏎ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
     join_requests:
       title: 'ᎤᏂᏴᏍᏗ ᎤᏂᏔᏲᏒ'
       accept: 'ᎣᏏᏳ'
@@ -849,6 +933,29 @@ studio:
       studio_description: 'ᎧᏃᎮᏛ'
       toggle_allow_comments: 'ᎧᏃᎮᏛ'
       toggle_privacy: 'ᏂᎦᏛ ᎤᏂᎪᏩᏛᏗ'
+    banned: 'ᎯᎠ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎥᏝ ᏰᎵ ᏫᏴᎯᏍᏗ ᏱᎩ.'
+    invites:
+      title: 'ᎦᏯᏂᏍᎬ ᏗᏎᏍᏗ'
+      hint: 'ᎩᎶ ᏗᏎᏍᏗ ᎠᎴᏱᎩ ᎤᏯᏅᏗ ᎤᎭ ᎩᎳᏉ ᎢᏴᏛ ᏓᏴᎯ ᎯᎠ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ, ᎥᏝ ᎣᏏᏳ ᎤᏰᎸᏗ ᏱᎩ. ᏗᏎᏍᏗ ᏣᏲᏍᏔᏅ, ᎠᏁᎯ ᎦᏳᎳ ᎤᏂᏴᏨ ᏓᏂᏁᏍᏗ.'
+      expires_on: 'ᎤᎵᏍᏆᏗᏍᏗ ᎢᎦ (ᏣᏚᎵᏍᎨᏍᏗ)'
+      max_uses: 'ᎤᏟ ᎢᏯᏆ ᎬᏗ (ᏣᏚᎵᏍᎨᏍᏗ)'
+      create: 'ᎦᏯᏂᏍᎬ ᏗᏎᏍᏗ ᏙᏢ'
+      uses: '%uses% ᏂᎪᎯᎸ ᎬᏔᏅ'
+      uses_max: '%max% ᎭᏫᏂ %uses% ᏂᎪᎯᎸ ᎬᏔᏅ'
+      expires: 'ᎤᎵᏍᏆᏗᏍᏗ %date%'
+      qr_alt: 'ᎯᎠ QR ᏗᏎᏍᏗ ᎯᎦᏔ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏫᏴᎯᏍᏗ'
+      copy_link: 'ᎤᏯᏅᏗ ᎯᏯᏅ'
+      copied: 'ᎦᏯᏂᏍᎬ ᎤᏯᏅᏗ ᎦᏯᏅ!'
+      revoke: 'ᎯᏲᏍᏓ'
+      none: 'ᎠᏏ ᎥᏝ ᎦᏯᏂᏍᎬ ᏗᏎᏍᏗ ᏱᏓᏁᎭ.'
+      error: 'ᎦᏯᏂᏍᎬ ᏗᏎᏍᏗ ᎪᎱᏍᏗ ᎤᏲ ᏄᎵᏍᏔᏅ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
+  join_with_code:
+    title: 'ᎦᏯᏂᏍᎬ ᏗᏎᏍᏗ ᎬᏗ ᏫᏴᎭ'
+    hint: 'ᏣᏕᏲᎲᏍᎩ ᎠᎴᏱᎩ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᎠᎦᏘᏯ ᎦᏯᏂᏍᎬ ᏗᏎᏍᏗ ᏍᎩᏁᎸᎢ? ᎠᏂ ᎪᏪᎳ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏫᏴᎯᏍᏗ.'
+    code: 'ᎦᏯᏂᏍᎬ ᏗᏎᏍᏗ'
+    invalid: 'ᎯᎠ ᏗᏎᏍᏗ ᎥᏝ ᎣᏏᏳ. ᎤᎵᏍᏆᏛ ᎠᎴᏱᎩ ᎦᏲᏍᏔᏅ ᏱᎩ.'
+    banned: 'ᎯᎠ ᏗᎦᎸᏫᏍᏓᏁᏗᏱ ᏕᏣᏄᎪᏫᏒ.'
+    rate_limited: 'ᎤᏣᏘ ᏂᎪᎯᎸ ᏣᏯᏛᏁᎸ. ᎢᏳᎾᎩᏛ ᎢᏯᏔᏬᏍᏔᏅ ᎯᎦᏘᏓ ᎠᎴ ᏔᎵᏁ ᎯᏯᏛᏁᎢ.'
 media_library:
   file:
     size: 'ᎢᎦᎢ: %size%'
@@ -918,3 +1025,8 @@ moderation:
     user_own: 'ᏕᏣᏙᎥ ᎠᎦᏘᏴᏒ ᎦᏚᎲ ᎤᏂᏃᎮᎸ ᏅᏗᎦᎵᏍᏙᏗᏍᎬ. ᏰᎵ ᎯᎠ ᎤᏁᏨ ᏣᏬᏂᏍᏗ.'
 Reports: 'ᏗᎦᏃᎲᏍᎩ'
 members: 'ᎠᏁᎯ'
+inactiveAccount:
+  subject: 'ᏣᏤᎵ Catrobat ᏕᏣᏙᎥ ᏛᎦᏛᏔᏂ'
+  title: 'ᎣᎦᏅᏔ!'
+  content: 'ᏔᎵ ᏧᏕᏘᏴᏛ ᎥᏝ ᏱᏫᏣᏴᎭ ᏣᏤᎵ Catrobat ᏕᏣᏙᎥ "%username%", ᎠᎴ ᎥᏝ ᏚᎸᏫᏍᏓᏁᎸᎯ ᎠᎴᏱᎩ ᎧᏃᎮᏛ ᏱᎦᏁᎭ. ᎦᏚᎲ ᎬᏂᏛ ᎤᏍᏆᏂᎪᏙᏗ, %days% ᏧᏒᎯᏛ ᎣᏂ ᏓᏲᏣᏛᏔᏂ. ᎢᏳᏃ ᎯᏍᏆᏂᎪᏙᏗ ᏣᏚᎵᏍᎨᏍᏗ, ᏑᏓᎴᎩ ᎤᏩᏒ ᏫᏴᎭ.'
+  button: 'ᏫᏴᎭ ᏕᏥᏙᎥ ᎦᏍᏆᏂᎪᏙᏗ'

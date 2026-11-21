@@ -212,6 +212,18 @@ project:
   createTranslation: Opret oversættelse
   deletedComment: '**Slettet**'
   notForKids: Ikke egnet for børn
+  customUrl:
+    title: 'Egen URL'
+    hint: 'Vælg et kort navn til dette projekts link: 3-50 små bogstaver, tal eller bindestreger. Lad feltet være tomt for at fjerne det.'
+  playInBrowser: 'Spil i browseren'
+  madeWithVersion: 'Lavet med app-version %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Lavet med en ældre app-version'
+    text: 'Dette projekt kan endnu ikke spilles i browseren. Åbn det i Pocket Code, og upload det igen for at opdatere det.'
+  translateAgain: 'Oversæt igen med disse sprog'
+  prefillMachineTranslation: 'Udfyld med maskinoversættelse'
+  machineTranslationFailed: 'Maskinoversættelse er ikke tilgængelig lige nu. Prøv igen senere.'
+  machineTranslationUnsupported: 'Maskinoversættelse er ikke tilgængelig for dette sprog.'
 remixGraph:
   showRemixGraph: 'Remix-graf'
   by: 'af'
@@ -401,6 +413,10 @@ search:
   noProjects: Ingen projekter fundet
   noStudios: Ingen studier fundet
   sameSearchMessage: "Det ser ud til, at du allerede er her! Prøv en anden søgning?"
+  noResults: 'Ingen resultater for “%query%”'
+  scratchProjects: 'Scratch-projekter'
+  scratchConverting: 'Konverterer til %app%…'
+  scratchConvertingSnackbar: 'Konverterer “%name%” — det kan tage et par sekunder'
 menu:
   profile: Profil
   login: Log på
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Bekræft din e-mail'
+  leaderboard:
+    all_time: 'Topskabere'
+    this_week: 'Ugens topskabere'
+    points: 'point'
 api:
   registerUser:
     emailMissing: 'E-mail mangler'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Beskrivelsen er for lang'
     creditsTooLong: 'Noter og tak er for lange'
     screenshotInvalid: 'Projektets skærmbillede er ugyldigt eller understøttes ikke'
+    slugInvalid: 'Egen URL skal bestå af 3-50 små bogstaver, tal eller enkelte bindestreger og mindst ét bogstav'
+    slugReserved: 'Denne URL er reserveret'
+    slugTaken: 'Denne URL er allerede taget'
   projectsPost:
     invalid_checksum: 'Ugyldig kontrolsum. Prøv at uploade igen!'
     upload_error: 'Fejl under upload. Prøv at uploade igen!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Manuskripter'
   looks: 'Udseender'
   sounds: 'Lyde'
+  unavailable: 'Dette projekts kode kan ikke vises.'
+  translation:
+    action: 'Oversæt'
+    translateTo: 'Oversæt til %language%'
+    translateAgain: 'Oversæt igen'
+    stillShowing: 'Viser stadig %language%'
+    original: 'Vis original'
+    resume: 'Fortsæt oversættelsen'
+    source: 'Fra'
+    target: 'Til'
+    auto: 'Find sprog automatisk'
+    loading: 'Oversætter kode…'
+    complete: 'Maskinoversat til %language%'
+    partial: 'Delvist oversat'
+    partialInLanguage: 'Delvist oversat til %language%'
+    sourceRequired: 'Vælg kildesproget for at oversætte denne kode.'
+    unsupported: 'Oversættelse er ikke tilgængelig for disse sprog.'
+    error: 'Koden kunne ikke oversættes. Prøv igen.'
 codeStatistics:
   title: "Kodestatistik"
   error: "Kodestatistikken kan ikke vises."
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Dit projekt "%project_name%" blev automatisk fjernet på grund af inaktivitet. Upload det igen, hvis du stadig vil dele det.'
   noProjects: "Det ser ud til, at du ikke har nogen notifikationer om projekter."
+  studio-deletion-warning:
+    message: 'Dit studie "%studio_name%" har ingen projekter, og der er ikke sket noget i det i 90 dage. Det bliver slettet om %days% dage, medmindre du tilføjer et projekt.'
+  project-files-lost:
+    message: 'En serverfejl har mistet filerne til %count% af dine projekter: %projects%. De er skjult, indtil du uploader dem igen fra Pocket Code. Projekter, der ikke bliver uploadet igen inden for 14 dage, bliver slettet.'
+    more: 'og %count% mere'
+  moderation-warning:
+    message: 'En moderator har gennemgået en anmeldelse af dit indhold og fundet ud af, at det bryder vores fællesskabsregler. Følg reglerne, ellers kan din konto blive suspenderet næste gang.'
+    deletion: 'Det skjulte indhold bliver slettet %days% dage efter, at det blev skjult, medmindre du retter det eller klager.'
+  moderation-hidden:
+    message: 'En moderator har gennemgået en anmeldelse af dit indhold og skjult det, fordi det bryder vores fællesskabsregler.'
+  moderation-reason:
+    image: '{1}Et billede (%names%) lignede indhold for voksne.|]1,Inf]Nogle billeder (%names%) lignede indhold for voksne.'
+    screenshot: 'Skærmbilledet lignede indhold for voksne.'
+    cover: 'Coverbilledet lignede indhold for voksne.'
+    text:
+      name: 'Navnet så ud til at sige, at det kun er for voksne.'
+      description: 'Beskrivelsen så ud til at sige, at det kun er for voksne.'
+      credits: 'Noterne og takken så ud til at sige, at det kun er for voksne.'
+      about: 'Din "Om mig"-tekst så ud til at sige, at det kun er for voksne.'
+      currently_working_on: 'Din "Arbejder i øjeblikket på"-tekst så ud til at sige, at det kun er for voksne.'
+      username: 'Dit brugernavn så ud til at sige, at det kun er for voksne.'
+    category:
+      copyright: 'Årsag: det ser ud til at bruge andres arbejde uden tilladelse.'
+      sexual_content: 'Årsag: det lignede indhold for voksne.'
+      graphic_violence: 'Årsag: det så for voldeligt ud.'
+      hateful_content: 'Årsag: det så sårende eller hadefuldt ud over for andre.'
+      improper_rating: 'Årsag: det så ud til ikke at være egnet for børn.'
+      spam: 'Årsag: det lignede spam.'
+      other: 'Årsag: en moderator fandt et problem med det.'
+      inappropriate: 'Årsag: det så upassende ud.'
+      harassment: 'Årsag: det så ud til at mobbe eller chikanere nogen.'
+      impersonation: 'Årsag: det så ud til at udgive sig for at være en anden.'
+      inappropriate_profile: 'Årsag: profilen så upassende ud.'
+      spam_account: 'Årsag: det lignede en spamkonto.'
+      inappropriate_content: 'Årsag: det så upassende ud.'
 clipboard:
   success: Link kopieret til udklipsholderen!
   success_project: Link til projektet kopieret til udklipsholderen!
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Noget gik galt under udelukkelsen af dette medlem. Prøv igen senere.'
       demote_member: 'Degradér admin til medlem'
       demotion_failed: 'Noget gik galt under degraderingen af denne admin. Prøv igen senere.'
+      banned_members: 'Udelukkede medlemmer'
+      unban_member: 'Ophæv udelukkelse'
+      unban_hint: 'Når du ophæver en udelukkelse, kan personen blive medlem igen på normal vis. Personen bliver ikke automatisk tilføjet til studiet igen.'
+      unban_failed: 'De udelukkede medlemmer kunne ikke opdateres. Prøv igen.'
     join_requests:
       title: 'Anmodninger om medlemskab'
       accept: 'Acceptér'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Beskrivelse'
       toggle_allow_comments: 'Kommentarer'
       toggle_privacy: 'Offentligt'
+    banned: 'Du kan ikke blive medlem af dette studie.'
+    invites:
+      title: 'Invitationskoder'
+      hint: 'Alle med koden eller linket bliver straks medlem af dette studie uden godkendelse. Hvis du tilbagekalder en kode, beholder du de medlemmer, der allerede er kommet med.'
+      expires_on: 'Udløber den (valgfrit)'
+      max_uses: 'Maks. antal brug (valgfrit)'
+      create: 'Opret invitationskode'
+      uses: 'Brugt %uses% gange'
+      uses_max: 'Brugt %uses% af %max% gange'
+      expires: 'Udløber %date%'
+      qr_alt: 'Scan denne QR-kode for at blive medlem af studiet'
+      copy_link: 'Kopiér link'
+      copied: 'Invitationslink kopieret til udklipsholderen!'
+      revoke: 'Tilbagekald'
+      none: 'Ingen invitationskoder endnu.'
+      error: 'Noget gik galt med invitationskoden. Prøv igen.'
+  join_with_code:
+    title: 'Bliv medlem med en kode'
+    hint: 'Har du fået en invitationskode fra din lærer eller en studie-admin? Indtast den her for at blive medlem af studiet.'
+    code: 'Invitationskode'
+    invalid: 'Denne kode er ikke gyldig. Den kan være udløbet eller tilbagekaldt.'
+    banned: 'Du er blevet udelukket fra dette studie.'
+    rate_limited: 'For mange forsøg. Vent et par minutter, og prøv igen.'
 media_library:
   file:
     size: 'Størrelse: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: "Din konto er blevet suspenderet på grund af anmeldelser fra fællesskabet. Du kan klage over denne afgørelse."
 Reports: Anmeldelser
 members: medlemmer
+inactiveAccount:
+  subject: 'Din Catrobat-konto bliver slettet'
+  title: 'Vi savner dig!'
+  content: 'Du har ikke logget på din Catrobat-konto "%username%" i to år, og den har ingen projekter eller kommentarer. For at holde vores fællesskab levende sletter vi den om %days% dage. Hvis du vil beholde den, skal du bare logge på én gang.'
+  button: 'Log på for at beholde min konto'

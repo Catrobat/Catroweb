@@ -194,6 +194,19 @@ project:
   createTranslation: "Rnu tasuqilt"
   deletedComment: "**Yettwakkes**"
   notForKids: "Ur yelhi ara i yigerdan"
+  customUrl:
+    title: 'URL udmawan'
+    hint: 'Fren isem awezlan i useɣwen n usenfar-a: 3-50 n yisekkilen imeẓyanen, n wuṭṭunen neɣ n yijerriden. Eǧǧ-it d ilem akken ad t-tekkseḍ.'
+  playInBrowser: 'Urar deg yiminig'
+  madeWithVersion: 'Yettwaxdem s lqem n usnas %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Yettwaxdem s lqem aqbur n usnas'
+    text: 'Asenfar-a ur yezmir ara ad yettwaurar deg yiminig akka tura. Ldi-t deg Pocket Code syen sali-t tikkelt-nniḍen akken ad t-tleqqmeḍ.'
+  translatedByLine: 'Yettwasuqel s tmacint seg %sourceLanguage% ɣer %targetLanguage%'
+  translateAgain: 'Suqel tikkelt-nniḍen s tutlayin-a'
+  prefillMachineTranslation: 'Ččar s tsuqilt tawurmant'
+  machineTranslationFailed: 'Tasuqilt tawurmant ulac-itt akka tura. Ttxil-k ɛreḍ ticki.'
+  machineTranslationUnsupported: 'Tasuqilt tawurmant ulac-itt i tutlayt-a.'
 remixGraph:
   showRemixGraph: "Udlif n yiremixen"
   by: 'by'
@@ -380,6 +393,10 @@ search:
   noProjects: "Ulac isenfaren yettwafen"
   noStudios: "Ulac isudyuten yettwafen"
   sameSearchMessage: "Yettban-d telliḍ yakan dagi! Ɛreḍ anadi-nniḍen?"
+  noResults: 'Ulac igmaḍ i “%query%”'
+  scratchProjects: 'Isenfaren Scratch'
+  scratchConverting: 'Aselket i %app%…'
+  scratchConvertingSnackbar: 'Aselket n “%name%” — aya yezmer ad yeṭṭef kra n tsinin'
 menu:
   profile: "Amaɣnu"
   login: "Qqen"
@@ -487,6 +504,10 @@ time:
 user:
   verification:
     email: "Senqed imayl-ik"
+  leaderboard:
+    all_time: 'Imeskar ifazen'
+    this_week: 'Imeskar ifazen n yimalas-a'
+    points: 'tinqiḍin'
 api:
   registerUser:
     emailMissing: "Imayl ulac-it"
@@ -522,6 +543,9 @@ api:
     descriptionTooLong: "Aglam ɣezzif aṭas"
     creditsTooLong: "Tizmilin d yisnemmiren ɣezzifit aṭas"
     screenshotInvalid: "Tuṭṭfa n wegdil n usenfar d tarameɣtut neɣ ur tettwasefrak ara"
+    slugInvalid: 'URL udmawan ilaq ad yesɛu 3-50 n yisekkilen imeẓyanen, n wuṭṭunen neɣ n yijerriden yiwen yiwen, s yiwen n usekkil ma drus'
+    slugReserved: 'URL udmawan-a yettwaṭṭef'
+    slugTaken: 'URL udmawan-a yettwaseqdec yakan'
   projectsPost:
     invalid_checksum: "Checksum d arameɣtu. Ɛreḍ ad tessaliḍ tikkelt-nniḍen!"
     upload_error: "Tuccḍa deg usali. Ɛreḍ ad tessaliḍ tikkelt-nniḍen!"
@@ -561,6 +585,24 @@ codeView:
   scripts: "Iskripten"
   looks: "Udmawen"
   sounds: "Imeslan"
+  unavailable: 'Tangalt n usenfar-a ur tezmir ara ad tettwaskan.'
+  translation:
+    action: 'Suqel'
+    translateTo: 'Suqel ɣer %language%'
+    translateAgain: 'Suqel tikkelt-nniḍen'
+    stillShowing: 'Mazal yettwaskan s %language%'
+    original: 'Sken aɣbalu'
+    resume: 'Kemmel tasuqilt'
+    source: 'Seg'
+    target: 'Ɣer'
+    auto: 'Af-d tutlayt'
+    loading: 'Tasuqilt n tengalt…'
+    complete: 'Yettwasuqel s tmacint ɣer %language%'
+    partial: 'Yettwasuqel s wudem amruḥan'
+    partialInLanguage: 'Yettwasuqel s wudem amruḥan ɣer %language%'
+    sourceRequired: 'Fren tutlayt taɣbalut akken ad tessuqleḍ tangalt-a.'
+    unsupported: 'Tasuqilt ulac-itt i tutlayin-a.'
+    error: 'Ur nezmir ara ad nessuqel tangalt. Ɛreḍ tikkelt-nniḍen.'
 codeStatistics:
   title: "Tidaddanin n tengalt"
   error: "Tidaddanin n tengalt ur zmirent ara ad d-ttwaskanent."
@@ -611,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: "Asenfar-ik \"%project_name%\" yettwakkes s wudem awurman ɣef ssebba n warmud. Ales asali-ines ma mazal tebɣiḍ ad t-tebḍuḍ."
   noProjects: "Yettban-d ulac ɣur-k ilɣa n yisenfaren."
+  studio-deletion-warning:
+    message: 'Asudyu-ik "%studio_name%" ulac deg-s isenfaren, ur yeḍri walu deg-s seg 90 n wussan. Ad yettwakkes deg %days% n wussan ma yella ur ternuḍ ara asenfar.'
+  project-files-lost:
+    message: 'Tuccḍa n uqeddac tesṛuḥ ifuyla n %count% seg yisenfaren-ik: %projects%. Ffren alamma tessaliḍ-ten tikkelt-nniḍen seg Pocket Code. Isenfaren ur nettwasali ara tikkelt-nniḍen deg 14 n wussan ad ttwakksen.'
+    more: 'd %count% nniḍen'
+  moderation-warning:
+    message: 'Ameɣyad yesenqed aneqqis ɣef ugbur-ik yerna yufa-t yerreẓ ilugan n temɣiwant-nneɣ. Ttxil-k ḍfer ilugan, neɣ amiḍan-ik yezmer ad yettwaḥbes tikkelt i d-iteddun.'
+    deletion: 'Agbur yettwaffren ad yettwakkes %days% n wussan seld mi yettwaffer, ma yella ur t-tesseɣtiḍ ara neɣ ur tessutreḍ ara aɛiwed.'
+  moderation-hidden:
+    message: 'Ameɣyad yesenqed aneqqis ɣef ugbur-ik yerna yeffer-it acku yerreẓ ilugan n temɣiwant-nneɣ.'
+  moderation-reason:
+    image: '{1}Tugna (%names%) tettban-d am ugbur n imeqqranen.|]1,Inf]Kra n tugniwin (%names%) ttbanent-d am ugbur n imeqqranen.'
+    screenshot: 'Tuṭṭfa n wegdil tettban-d am ugbur n imeqqranen.'
+    cover: 'Tugna n tɣawsit tettban-d am ugbur n imeqqranen.'
+    text:
+      name: 'Isem yettban-d yeqqar belli aya i imeqqranen kan.'
+      description: 'Aglam yettban-d yeqqar belli aya i imeqqranen kan.'
+      credits: 'Tizmilin d yisnemmiren ttbanen-d qqaren belli aya i imeqqranen kan.'
+      about: 'Aḍris-ik "Ɣef-i" yettban-d yeqqar belli aya i imeqqranen kan.'
+      currently_working_on: 'Aḍris-ik "Akka tura xeddmeɣ ɣef" yettban-d yeqqar belli aya i imeqqranen kan.'
+      username: 'Isem-ik n useqdac yettban-d yeqqar belli aya i imeqqranen kan.'
+    category:
+      copyright: 'Taɣẓint: yettban-d yesseqdac lxedma n medden war turagt.'
+      sexual_content: 'Taɣẓint: yettban-d am ugbur n imeqqranen.'
+      graphic_violence: 'Taɣẓint: yettban-d d amaḥraq aṭas.'
+      hateful_content: 'Taɣẓint: yettban-d yettḍurru neɣ yeččur d lḥiqed ɣef wiyaḍ.'
+      improper_rating: 'Taɣẓint: yettban-d ur yelhi ara i yigerdan.'
+      spam: 'Taɣẓint: yettban-d am uspam.'
+      other: 'Taɣẓint: ameɣyad yufa ugur deg-s.'
+      inappropriate: 'Taɣẓint: yettban-d ur yuɣ ara abrid.'
+      harassment: 'Taɣẓint: yettban-d yettqelliq neɣ yettḍurru yiwen.'
+      impersonation: 'Taɣẓint: yettban-d yettmeslay am akken d yiwen nniḍen.'
+      inappropriate_profile: 'Taɣẓint: amaɣnu yettban-d ur yuɣ ara abrid.'
+      spam_account: 'Taɣẓint: yettban-d am umiḍan n uspam.'
+      inappropriate_content: 'Taɣẓint: yettban-d ur yuɣ ara abrid.'
 clipboard:
   success: "Aseɣwen yettwanɣel ɣer tecfawit!"
   success_project: "Aseɣwen n usenfar yettwanɣel ɣer tecfawit!"
@@ -836,6 +913,10 @@ studio:
       ban_failed: "Yella wayen ur nteddu ara deg ugdal n uɛeggal-a. Ɛreḍ ticki."
       demote_member: "Ṣubb anedbal ɣer uɛeggal"
       demotion_failed: "Yella wayen ur nteddu ara deg usubbu n unedbal-a. Ɛreḍ ticki."
+      banned_members: 'Iɛeggalen yettwagedlen'
+      unban_member: 'Kkes agdal'
+      unban_hint: 'Tukksa n ugdal ad teǧǧ amdan ad d-yernu tikkelt-nniḍen s wudem amagnu. Ur t-id-terri ara ɣer usudyu.'
+      unban_failed: 'Ur nezmir ara ad nleqqem iɛeggalen yettwagedlen. Ttxil-k ɛreḍ tikkelt-nniḍen.'
     join_requests:
       title: "Isuturen n tmerna"
       accept: 'Qbel'
@@ -852,6 +933,29 @@ studio:
       studio_description: "Aglam"
       toggle_allow_comments: 'Iwenniten'
       toggle_privacy: "Azayez"
+    banned: 'Ur tezmireḍ ara ad ternuḍ ɣer usudyu-a.'
+    invites:
+      title: 'Tingalin n tinubga'
+      hint: 'Win yesɛan tangalt neɣ aseɣwen ad yernu ɣer usudyu-a imir-nni, war ma yesra aqbal. Tukksa n tengalt ur tessuffuɣ ara iɛeggalen i d-yernan yakan.'
+      expires_on: 'Ad yifat ass (afrayan)'
+      max_uses: 'Afellay n yiseqdacen (afrayan)'
+      create: 'Snulfu-d tangalt n tinubga'
+      uses: 'Tettwaseqdec %uses% n tikkal'
+      uses_max: 'Tettwaseqdec %uses% seg %max% n tikkal'
+      expires: 'Ad tfat ass n %date%'
+      qr_alt: 'Smiḍen tangalt-a QR akken ad ternuḍ ɣer usudyu'
+      copy_link: 'Nɣel aseɣwen'
+      copied: 'Aseɣwen n tinubga yettwanɣel ɣer tecfawit!'
+      revoke: 'Kkes'
+      none: 'Ulac tingalin n tinubga akka tura.'
+      error: 'Yella wayen ur nteddu ara s tengalt n tinubga. Ttxil-k ɛreḍ tikkelt-nniḍen.'
+  join_with_code:
+    title: 'Rnu s tengalt'
+    hint: 'Tewwiḍ-d tangalt n tinubga sɣur aselmad-ik neɣ sɣur unedbal n usudyu? Sekcem-itt da akken ad ternuḍ ɣer usudyu.'
+    code: 'Tangalt n tinubga'
+    invalid: 'Tangalt-a ur temɣer ara. Yezmer d akken tfat neɣ tettwakkes.'
+    banned: 'Tettwagedleḍ seg usudyu-a.'
+    rate_limited: 'Aṭas n yineɛruḍen. Ttxil-k rǧu kra n tesdatin syen ɛreḍ tikkelt-nniḍen.'
 media_library:
   file:
     size: "Teɣzi: %size%"
@@ -921,3 +1025,8 @@ moderation:
     user_own: "Amiḍan-ik yettwaḥbes ɣef ssebba n yineqqisen n tmɣiwant. Tzemreḍ ad tessutreḍ aɛiwed n tegzemt-a."
 Reports: "Ineqqisen"
 members: "iɛeggalen"
+inactiveAccount:
+  subject: 'Amiḍan-ik Catrobat ad yettwakkes'
+  title: 'Twaḥeššeḍ-aɣ!'
+  content: 'Ur teqqineḍ ara ɣer umiḍan-ik Catrobat "%username%" seg sin iseggasen, ulac deg-s isenfaren neɣ iwenniten. Akken ad teqqim temɣiwant-nneɣ d tudrint, ad t-nekkes deg %days% n wussan. Ma tebɣiḍ ad t-teǧǧeḍ, qqen kan yiwet n tikkelt.'
+  button: 'Qqen akken ad ḥerzeɣ amiḍan-iw'

@@ -194,6 +194,19 @@ project:
   createTranslation: "Ƙirƙiri fassara"
   deletedComment: "**An goge**"
   notForKids: "Bai dace da yara ba"
+  customUrl:
+    title: 'URL na musamman'
+    hint: 'Zaɓi gajeren suna don hanyar haɗin wannan aikin: ƙananan haruffa 3-50, lambobi ko layin haɗi. Bar shi babu komai don cire shi.'
+  playInBrowser: 'Yi wasa a burauza'
+  madeWithVersion: 'An yi shi da sigar manhaja %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'An yi shi da tsohuwar sigar manhaja'
+    text: 'Ba za a iya buga wannan aikin a burauza ba tukuna. Buɗe shi a Pocket Code ka sake ɗora shi don sabunta shi.'
+  translatedByLine: 'Fassarar na''ura daga %sourceLanguage% zuwa %targetLanguage%'
+  translateAgain: 'Sake fassara da waɗannan harsuna'
+  prefillMachineTranslation: 'Cika da fassarar na''ura'
+  machineTranslationFailed: 'Fassarar na''ura ba ta samuwa a yanzu. Don Allah sake gwadawa daga baya.'
+  machineTranslationUnsupported: 'Fassarar na''ura ba ta samuwa don wannan harshe.'
 remixGraph:
   showRemixGraph: "Jadawalin remix"
   by: 'by'
@@ -380,6 +393,10 @@ search:
   noProjects: "Ba a sami ayyuka ba"
   noStudios: "Ba a sami situdiyo ba"
   sameSearchMessage: "Da alama kana nan riga! Gwada wani bincike daban?"
+  noResults: 'Babu sakamako don “%query%”'
+  scratchProjects: 'Ayyukan Scratch'
+  scratchConverting: 'Ana canzawa don %app%…'
+  scratchConvertingSnackbar: 'Ana canza “%name%” — wannan zai iya ɗaukar ɗan daƙiƙoƙi'
 menu:
   profile: "Bayanai"
   login: "Shiga"
@@ -487,6 +504,10 @@ time:
 user:
   verification:
     email: "Tabbatar da imel ɗinka"
+  leaderboard:
+    all_time: 'Manyan masu ƙirƙira'
+    this_week: 'Manyan masu ƙirƙira na wannan makon'
+    points: 'maki'
 api:
   registerUser:
     emailMissing: "Babu imel"
@@ -522,6 +543,9 @@ api:
     descriptionTooLong: "Bayani ya yi tsayi da yawa"
     creditsTooLong: "Bayanan kula da godiya sun yi tsayi da yawa"
     screenshotInvalid: "Hoton allo na aiki bai inganta ba ko ba a goyon bayansa"
+    slugInvalid: 'Dole URL na musamman ya zama ƙananan haruffa 3-50, lambobi ko layin haɗi ɗaya-ɗaya, tare da aƙalla harafi ɗaya'
+    slugReserved: 'An keɓe wannan URL na musamman'
+    slugTaken: 'An riga an ɗauki wannan URL na musamman'
   projectsPost:
     invalid_checksum: "Checksum bai inganta ba. Sake gwada ɗorawa!"
     upload_error: "Kuskure yayin ɗorawa. Sake gwada ɗorawa!"
@@ -561,6 +585,24 @@ codeView:
   scripts: "Rubutun umarni"
   looks: "Kamanni"
   sounds: "Sautuka"
+  unavailable: 'Ba za a iya nuna lambar wannan aikin ba.'
+  translation:
+    action: 'Fassara'
+    translateTo: 'Fassara zuwa %language%'
+    translateAgain: 'Sake fassarawa'
+    stillShowing: 'Har yanzu ana nuna %language%'
+    original: 'Nuna asali'
+    resume: 'Ci gaba da fassarawa'
+    source: 'Daga'
+    target: 'Zuwa'
+    auto: 'Gano harshe'
+    loading: 'Ana fassara lamba…'
+    complete: 'Fassarar na''ura zuwa %language%'
+    partial: 'An fassara wani ɓangare'
+    partialInLanguage: 'An fassara wani ɓangare zuwa %language%'
+    sourceRequired: 'Zaɓi harshen asali don fassara wannan lambar.'
+    unsupported: 'Fassara ba ta samuwa don waɗannan harsuna.'
+    error: 'Ba a iya fassara lambar ba. Sake gwadawa.'
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
@@ -611,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: "An cire aikinka \"%project_name%\" ta atomatik saboda rashin aiki. Sake ɗora shi idan har yanzu kana son raba shi."
   noProjects: "Da alama ba ka da sanarwar ayyuka."
+  studio-deletion-warning:
+    message: 'Situdiyonka "%studio_name%" ba shi da ayyuka kuma babu abin da ya faru a cikinsa tsawon kwanaki 90. Za a goge shi cikin kwanaki %days% sai dai idan ka ƙara aiki.'
+  project-files-lost:
+    message: 'Kuskuren sabar ya sa fayilolin %count% daga cikin ayyukanka sun ɓace: %projects%. An ɓoye su har sai ka sake ɗora su daga Pocket Code. Ayyukan da ba a sake ɗora su ba cikin kwanaki 14 za a goge su.'
+    more: 'da ƙarin %count%'
+  moderation-warning:
+    message: 'Mai daidaitawa ya duba rahoto game da abin da ka saka kuma ya ga cewa ya karya dokokin al''ummarmu. Don Allah ka bi dokokin, in ba haka ba za a iya dakatar da asusunka a gaba.'
+    deletion: 'Za a goge abin da aka ɓoye kwanaki %days% bayan an ɓoye shi sai dai idan ka gyara shi ko ka ɗaukaka ƙara.'
+  moderation-hidden:
+    message: 'Mai daidaitawa ya duba rahoto game da abin da ka saka kuma ya ɓoye shi saboda ya karya dokokin al''ummarmu.'
+  moderation-reason:
+    image: '{1}Wani hoto (%names%) ya yi kama da abin manya.|]1,Inf]Wasu hotuna (%names%) sun yi kama da abin manya.'
+    screenshot: 'Hoton allo ya yi kama da abin manya.'
+    cover: 'Hoton murfi ya yi kama da abin manya.'
+    text:
+      name: 'Sunan ya yi kama yana cewa wannan na manya ne kawai.'
+      description: 'Bayanin ya yi kama yana cewa wannan na manya ne kawai.'
+      credits: 'Bayanan kula da godiya sun yi kama suna cewa wannan na manya ne kawai.'
+      about: 'Rubutunka na "Game da ni" ya yi kama yana cewa wannan na manya ne kawai.'
+      currently_working_on: 'Rubutunka na "Abin da nake aiki a kai yanzu" ya yi kama yana cewa wannan na manya ne kawai.'
+      username: 'Sunan mai amfani naka ya yi kama yana cewa wannan na manya ne kawai.'
+    category:
+      copyright: 'Dalili: da alama yana amfani da aikin wasu mutane ba tare da izini ba.'
+      sexual_content: 'Dalili: ya yi kama da abin manya.'
+      graphic_violence: 'Dalili: ya yi kama da tashin hankali da yawa.'
+      hateful_content: 'Dalili: ya yi kama da mai cutarwa ko ƙiyayya ga wasu.'
+      improper_rating: 'Dalili: ya yi kama bai dace da yara ba.'
+      spam: 'Dalili: ya yi kama da spam.'
+      other: 'Dalili: mai daidaitawa ya sami matsala a ciki.'
+      inappropriate: 'Dalili: ya yi kama bai dace ba.'
+      harassment: 'Dalili: ya yi kama da cin zali ko tsangwamar wani.'
+      impersonation: 'Dalili: ya yi kama yana yin kamar wani ne daban.'
+      inappropriate_profile: 'Dalili: bayanin martaba ya yi kama bai dace ba.'
+      spam_account: 'Dalili: ya yi kama da asusun spam.'
+      inappropriate_content: 'Dalili: ya yi kama bai dace ba.'
 clipboard:
   success: "An kwafi hanyar haɗi zuwa allo!"
   success_project: "An kwafi hanyar haɗin aiki zuwa allo!"
@@ -836,6 +913,10 @@ studio:
       ban_failed: "Wani abu ya faru ba daidai ba yayin hana wannan memba. Sake gwadawa daga baya."
       demote_member: "Sauke mai gudanarwa zuwa memba"
       demotion_failed: "Wani abu ya faru ba daidai ba yayin sauke wannan mai gudanarwa. Sake gwadawa daga baya."
+      banned_members: 'Membobin da aka hana'
+      unban_member: 'Cire hani'
+      unban_hint: 'Cire hani yana bar mutumin ya sake shiga kamar yadda aka saba. Ba ya mayar da shi cikin situdiyon.'
+      unban_failed: 'Ba a iya sabunta membobin da aka hana ba. Don Allah sake gwadawa.'
     join_requests:
       title: "Buƙatun Shiga"
       accept: "Karɓa"
@@ -852,6 +933,29 @@ studio:
       studio_description: "Bayani"
       toggle_allow_comments: "Sharhi"
       toggle_privacy: "Na jama'a"
+    banned: 'Ba za ka iya shiga wannan situdiyo ba.'
+    invites:
+      title: 'Lambobin gayyata'
+      hint: 'Duk wanda ke da lambar ko hanyar haɗin zai shiga wannan situdiyo nan take, ba tare da buƙatar amincewa ba. Soke lamba ba ya cire membobin da suka riga suka shiga.'
+      expires_on: 'Ranar ƙarewa (na zaɓi)'
+      max_uses: 'Iyakar amfani (na zaɓi)'
+      create: 'Ƙirƙiri lambar gayyata'
+      uses: 'An yi amfani da ita sau %uses%'
+      uses_max: 'An yi amfani da ita sau %uses% cikin %max%'
+      expires: 'Zai ƙare %date%'
+      qr_alt: 'Duba wannan lambar QR don shiga situdiyon'
+      copy_link: 'Kwafi hanyar haɗi'
+      copied: 'An kwafi hanyar haɗin gayyata zuwa allon rubutu!'
+      revoke: 'Soke'
+      none: 'Babu lambobin gayyata tukuna.'
+      error: 'Wani abu ya faru ba daidai ba da lambar gayyata. Don Allah sake gwadawa.'
+  join_with_code:
+    title: 'Shiga da lamba'
+    hint: 'Ka sami lambar gayyata daga malaminka ko mai gudanarwa na situdiyo? Shigar da ita a nan don shiga situdiyon.'
+    code: 'Lambar gayyata'
+    invalid: 'Wannan lambar ba ta da inganci. Wataƙila wa''adinta ya ƙare ko an soke ta.'
+    banned: 'An hana ka shiga wannan situdiyo.'
+    rate_limited: 'Ƙoƙari da yawa. Don Allah jira ''yan mintuna ka sake gwadawa.'
 media_library:
   file:
     size: "Girma: %size%"
@@ -921,3 +1025,8 @@ moderation:
     user_own: "An dakatar da asusunka saboda rahotannin al'umma. Za ka iya ɗaukaka ƙara kan wannan hukunci."
 Reports: "Rahotanni"
 members: "membobi"
+inactiveAccount:
+  subject: 'Za a goge asusunka na Catrobat'
+  title: 'Muna kewar ka!'
+  content: 'Ba ka shiga asusunka na Catrobat "%username%" ba tsawon shekaru biyu, kuma ba shi da ayyuka ko sharhi. Don al''ummarmu ta ci gaba da kasancewa mai rai, za mu goge shi cikin kwanaki %days%. Idan kana son ka riƙe shi, kawai ka shiga sau ɗaya.'
+  button: 'Shiga don riƙe asusuna'

@@ -212,6 +212,18 @@ project:
   createTranslation: 'Sukurti vertimą'
   deletedComment: '**Ištrinta**'
   notForKids: 'Netinka vaikams'
+  customUrl:
+    title: 'Pasirinktinis URL'
+    hint: 'Pasirink trumpą šio projekto nuorodos pavadinimą: 3–50 mažųjų raidžių, skaitmenų arba brūkšnelių. Palik tuščią, jei nori jį pašalinti.'
+  playInBrowser: 'Žaisti naršyklėje'
+  madeWithVersion: 'Sukurta su programėlės versija %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Sukurta su senesne programėlės versija'
+    text: 'Šio projekto dar negalima žaisti naršyklėje. Atidaryk jį Pocket Code ir įkelk iš naujo, kad jis būtų atnaujintas.'
+  translateAgain: 'Versti iš naujo šiomis kalbomis'
+  prefillMachineTranslation: 'Užpildyti mašininiu vertimu'
+  machineTranslationFailed: 'Mašininis vertimas šiuo metu nepasiekiamas. Bandyk dar kartą vėliau.'
+  machineTranslationUnsupported: 'Mašininis vertimas šiai kalbai nepasiekiamas.'
 remixGraph:
   showRemixGraph: 'Remiksų grafas'
   by: 'autorius'
@@ -401,6 +413,10 @@ search:
   noProjects: 'Projektų nerasta'
   noStudios: 'Studijų nerasta'
   sameSearchMessage: 'Panašu, kad tu jau čia! Gal pabandyk kitą paiešką?'
+  noResults: 'Nėra rezultatų pagal „%query%“'
+  scratchProjects: 'Scratch projektai'
+  scratchConverting: 'Konvertuojama į %app%…'
+  scratchConvertingSnackbar: 'Konvertuojamas „%name%“ — tai gali užtrukti kelias sekundes'
 menu:
   profile: 'Profilis'
   login: 'Prisijungti'
@@ -510,6 +526,10 @@ time:
 user:
   verification:
     email: 'Patvirtink savo el. paštą'
+  leaderboard:
+    all_time: 'Geriausi kūrėjai'
+    this_week: 'Geriausi šios savaitės kūrėjai'
+    points: 'taškai'
 api:
   registerUser:
     emailMissing: 'Trūksta el. pašto'
@@ -545,6 +565,9 @@ api:
     descriptionTooLong: 'Aprašymas per ilgas'
     creditsTooLong: 'Pastabos ir padėkos per ilgos'
     screenshotInvalid: 'Projekto ekrano kopija netinkama arba nepalaikoma'
+    slugInvalid: 'Pasirinktinį URL turi sudaryti 3–50 mažųjų raidžių, skaitmenų arba pavienių brūkšnelių, ir bent viena raidė'
+    slugReserved: 'Šis pasirinktinis URL rezervuotas'
+    slugTaken: 'Šis pasirinktinis URL jau užimtas'
   projectsPost:
     invalid_checksum: 'Neteisinga kontrolinė suma. Pabandyk įkelti dar kartą!'
     upload_error: 'Įkeliant įvyko klaida. Pabandyk įkelti dar kartą!'
@@ -584,6 +607,24 @@ codeView:
   scripts: 'Scenarijai'
   looks: 'Išvaizdos'
   sounds: 'Garsai'
+  unavailable: 'Šio projekto kodo negalima parodyti.'
+  translation:
+    action: 'Versti'
+    translateTo: 'Versti į: %language%'
+    translateAgain: 'Versti iš naujo'
+    stillShowing: 'Vis dar rodoma kalba: %language%'
+    original: 'Rodyti originalą'
+    resume: 'Tęsti vertimą'
+    source: 'Iš'
+    target: 'Į'
+    auto: 'Atpažinti kalbą'
+    loading: 'Verčiamas kodas…'
+    complete: 'Mašininiu būdu išversta į: %language%'
+    partial: 'Išversta iš dalies'
+    partialInLanguage: 'Iš dalies išversta į: %language%'
+    sourceRequired: 'Pasirink šaltinio kalbą, kad galėtum išversti šį kodą.'
+    unsupported: 'Vertimas šioms kalboms nepasiekiamas.'
+    error: 'Nepavyko išversti kodo. Bandyk dar kartą.'
 codeStatistics:
   title: 'Kodo statistika'
   error: 'Kodo statistikos parodyti negalima.'
@@ -634,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Tavo projektas „%project_name%“ buvo automatiškai pašalintas dėl neaktyvumo. Įkelk jį iš naujo, jei vis dar nori juo dalintis.'
   noProjects: 'Panašu, kad neturi jokių pranešimų apie projektus.'
+  studio-deletion-warning:
+    message: 'Tavo studijoje „%studio_name%“ nėra projektų ir 90 dienų joje nieko nevyko. Ji bus ištrinta po %days% d., nebent pridėsi projektą.'
+  project-files-lost:
+    message: 'Dėl serverio klaidos prarasti %count% tavo projektų failai: %projects%. Jie paslėpti, kol iš naujo juos įkelsi iš Pocket Code. Projektai, kurie nebus įkelti iš naujo per 14 dienų, bus ištrinti.'
+    more: 'ir dar %count%'
+  moderation-warning:
+    message: 'Moderatorius peržiūrėjo pranešimą apie tavo turinį ir nustatė, kad jis pažeidžia mūsų bendruomenės taisykles. Laikykis taisyklių, kitaip kitą kartą tavo paskyra gali būti sustabdyta.'
+    deletion: 'Paslėptas turinys bus ištrintas praėjus %days% d. nuo jo paslėpimo, nebent jį pataisysi arba pateiksi apeliaciją.'
+  moderation-hidden:
+    message: 'Moderatorius peržiūrėjo pranešimą apie tavo turinį ir jį paslėpė, nes jis pažeidžia mūsų bendruomenės taisykles.'
+  moderation-reason:
+    image: '{1}Paveikslėlis (%names%) atrodė kaip turinys suaugusiesiems.|]1,Inf]Kai kurie paveikslėliai (%names%) atrodė kaip turinys suaugusiesiems.'
+    screenshot: 'Ekrano kopija atrodė kaip turinys suaugusiesiems.'
+    cover: 'Viršelio paveikslėlis atrodė kaip turinys suaugusiesiems.'
+    text:
+      name: 'Atrodė, kad pavadinimas sako, jog tai skirta tik suaugusiesiems.'
+      description: 'Atrodė, kad aprašymas sako, jog tai skirta tik suaugusiesiems.'
+      credits: 'Atrodė, kad pastabos ir padėkos sako, jog tai skirta tik suaugusiesiems.'
+      about: 'Atrodė, kad tavo tekstas „Apie mane“ sako, jog tai skirta tik suaugusiesiems.'
+      currently_working_on: 'Atrodė, kad tavo tekstas „Šiuo metu kuriu“ sako, jog tai skirta tik suaugusiesiems.'
+      username: 'Atrodė, kad tavo naudotojo vardas sako, jog tai skirta tik suaugusiesiems.'
+    category:
+      copyright: 'Priežastis: atrodo, kad naudojamas kitų žmonių darbas be leidimo.'
+      sexual_content: 'Priežastis: atrodė kaip turinys suaugusiesiems.'
+      graphic_violence: 'Priežastis: atrodė per daug smurtinga.'
+      hateful_content: 'Priežastis: atrodė įžeidžiama arba kurstanti neapykantą kitiems.'
+      improper_rating: 'Priežastis: atrodė netinkama vaikams.'
+      spam: 'Priežastis: atrodė kaip šlamštas.'
+      other: 'Priežastis: moderatorius rado problemą.'
+      inappropriate: 'Priežastis: atrodė netinkama.'
+      harassment: 'Priežastis: atrodė kaip kažkieno patyčios ar priekabiavimas.'
+      impersonation: 'Priežastis: atrodė, kad apsimetama kitu asmeniu.'
+      inappropriate_profile: 'Priežastis: profilis atrodė netinkamas.'
+      spam_account: 'Priežastis: atrodė kaip šlamšto paskyra.'
+      inappropriate_content: 'Priežastis: atrodė netinkama.'
 clipboard:
   success: 'Nuoroda nukopijuota į iškarpinę!'
   success_project: 'Projekto nuoroda nukopijuota į iškarpinę!'
@@ -859,6 +935,10 @@ studio:
       ban_failed: 'Blokuojant šį narį kažkas nepavyko. Bandyk vėliau.'
       demote_member: 'Pažeminti administratorių iki nario'
       demotion_failed: 'Žeminant šį administratorių kažkas nepavyko. Bandyk vėliau.'
+      banned_members: 'Užblokuoti nariai'
+      unban_member: 'Panaikinti draudimą'
+      unban_hint: 'Panaikinus draudimą, asmuo vėl gali įprastai prisijungti. Jis nėra automatiškai grąžinamas į studiją.'
+      unban_failed: 'Nepavyko atnaujinti užblokuotų narių. Bandyk dar kartą.'
     join_requests:
       title: 'Prašymai prisijungti'
       accept: 'Priimti'
@@ -875,6 +955,29 @@ studio:
       studio_description: 'Aprašymas'
       toggle_allow_comments: 'Komentarai'
       toggle_privacy: 'Vieša'
+    banned: 'Negali prisijungti prie šios studijos.'
+    invites:
+      title: 'Pakvietimo kodai'
+      hint: 'Kiekvienas, turintis kodą ar nuorodą, iškart prisijungia prie šios studijos be patvirtinimo. Atšaukus kodą, jau prisijungę nariai lieka.'
+      expires_on: 'Galioja iki (neprivaloma)'
+      max_uses: 'Maks. panaudojimų (neprivaloma)'
+      create: 'Sukurti pakvietimo kodą'
+      uses: 'Panaudota %uses% k.'
+      uses_max: 'Panaudota %uses% iš %max% k.'
+      expires: 'Galioja iki %date%'
+      qr_alt: 'Nuskenuok šį QR kodą, kad prisijungtum prie studijos'
+      copy_link: 'Kopijuoti nuorodą'
+      copied: 'Pakvietimo nuoroda nukopijuota į iškarpinę!'
+      revoke: 'Atšaukti'
+      none: 'Pakvietimo kodų dar nėra.'
+      error: 'Kažkas nepavyko su pakvietimo kodu. Bandyk dar kartą.'
+  join_with_code:
+    title: 'Prisijungti su kodu'
+    hint: 'Gavai pakvietimo kodą iš mokytojo ar studijos administratoriaus? Įvesk jį čia, kad prisijungtum prie studijos.'
+    code: 'Pakvietimo kodas'
+    invalid: 'Šis kodas negalioja. Galbūt jo galiojimas baigėsi arba jis atšauktas.'
+    banned: 'Tau uždrausta dalyvauti šioje studijoje.'
+    rate_limited: 'Per daug bandymų. Palauk kelias minutes ir bandyk dar kartą.'
 media_library:
   file:
     size: 'Dydis: %size%'
@@ -944,3 +1047,8 @@ moderation:
     user_own: 'Tavo paskyra sustabdyta dėl bendruomenės pranešimų. Šį sprendimą gali apskųsti.'
 Reports: 'Pranešimai'
 members: 'nariai'
+inactiveAccount:
+  subject: 'Tavo Catrobat paskyra bus ištrinta'
+  title: 'Pasiilgome tavęs!'
+  content: 'Jau dvejus metus neprisijungei prie savo Catrobat paskyros „%username%“, ir joje nėra jokių projektų ar komentarų. Kad mūsų bendruomenė būtų gyva, ištrinsime ją po %days% d. Jei nori ją išsaugoti, tiesiog prisijunk vieną kartą.'
+  button: 'Prisijungti ir išsaugoti paskyrą'

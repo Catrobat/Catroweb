@@ -591,6 +591,23 @@ codeView:
   scripts: 'लिपिया:'
   looks: 'नज़ारे:'
   sounds: 'ध्वनियाँ'
+  translation:
+    action: 'अनुवाद करो'
+    translateTo: '%language% में अनुवाद करो'
+    translateAgain: 'फिर से अनुवाद करो'
+    stillShowing: 'अभी भी %language% दिखा रहे हैं'
+    original: 'मूल दिखाओ'
+    resume: 'अनुवाद जारी रखो'
+    source: 'से'
+    target: 'में'
+    auto: 'भाषा पहचानो'
+    loading: 'कोड का अनुवाद हो रहा है…'
+    complete: '%language% में मशीनी अनुवाद'
+    partial: 'आंशिक रूप से अनुवादित'
+    partialInLanguage: '%language% में आंशिक रूप से अनुवादित'
+    sourceRequired: 'इस कोड का अनुवाद करने के लिए मूल भाषा चुनो।'
+    unsupported: 'इन भाषाओं के लिए अनुवाद उपलब्ध नहीं है।'
+    error: 'कोड का अनुवाद नहीं हो सका। फिर से कोशिश करो।'
 codeStatistics:
   title: "कोड आँकड़े"
   error: "कोड आँकड़े प्रदर्शित नहीं किए जा सकते।"
