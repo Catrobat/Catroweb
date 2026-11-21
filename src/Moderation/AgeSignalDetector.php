@@ -19,28 +19,35 @@ class AgeSignalDetector
   private const string NUMBER_CONTEXT = '~(*UCP)\b(?:version|ver|v|level|lvl|android|api|ios|stufe|nivel|nível|уровень|'
     .'chapter|kapitel|part|teil|episode|ep|page|seite|day|tag|wave|round|runde|stage|world|welt)\.?\s*\d[\d.]*\s*\+?~iu';
 
+  /** "1 + 18", "1  + 18", "(a + b) + 18", "x + 18 = 20", "18 + 2 = 20", …: sums and arithmetic equations. */
+  private const string SUM_CONTEXT = '~(*UCP)(?<![\p{L}\p{N}])\d[\d.]*\s*\+\s*18(?!\p{N})'
+    .'|\)\s*\+\s*18(?!\p{N})'
+    .'|(?:\b\w+\s*\+\s*18|(?<![\p{L}\p{N}])18\s*\+\s*[\w.]+|\+?\s*18)\s*=\s*[\d.]+~iu';
+
   /** Right before a match: negations ("no 18+", "kein NSFW") and counters ("Score: 18+", "Seite ab 18"). */
   private const string IGNORED_BEFORE = '~(*UCP)\b(?:no|not|never|kein\w*|nicht|nie|sin|sem|без|нет|не|pas\s+de|non|'
     .'score|punktzahl|seite|page|p[aá]gina|страниц\w*)\s*[:\-]?\s*$~iu';
 
-  /**
-   * Right after a match: a counted noun ("18+ levels", "ab 18 Punkten") or more digits (a phone number).
-   * Not "projects", "games" or "content": "+18 projects" is a signal.
-   */
-  private const string IGNORED_AFTER = '~(*UCP)^(?:[\s\-]*\d|\s*(?:levels?|kills?|times?|points?|pts|coins?|stars?|lives|enemies|'
+  private const string COUNTED_NOUNS = 'levels?|kills?|times?|points?|pts|coins?|stars?|lives|enemies|'
     .'items?|players?|rounds?|seconds?|minutes?|hours?|blocks?|bricks?|sprites?|looks?|sounds?|followers?|likes?|'
     .'downloads?|views?|hp|xp|damage|dmg|boost|speed|grip|power|fuel|health|armou?r|energy|gems?|force|atk|def|'
     .'punkte?n?|stufen|leben|sterne?n?|münzen|spieler\w*|gegner\w*|mal|sekunden|minuten|'
     .'niveles|puntos|monedas|vidas|estrellas|jugadores|enemigos|veces|'
     .'n[ií]veis|pontos|moedas|estrelas|jogadores|inimigos|vezes|'
-    .'уровн\w*|очк\w*|монет\w*|жизн\w*|звезд\w*|игрок\w*|враг\w*|раз)\b)~iu';
+    .'уровн\w*|очк\w*|монет\w*|жизн\w*|звезд\w*|игрок\w*|раз';
+
+  /**
+   * Right after a match: a counted noun ("18+ levels", "ab 18 Punkten") or more digits (a phone number).
+   * Not "projects", "games" or "content": "+18 projects" is a signal.
+   */
+  private const string IGNORED_AFTER = '~(*UCP)^(?:[\s\-]*\d++(?![\s\-]*(?:'.self::COUNTED_NOUNS.')\b)|\s*(?:'.self::COUNTED_NOUNS.')\b)~iu';
 
   /**
    * @var list<string>
    */
   private const array PATTERNS = [
     // 18+ / 18 + / +18 / + 18 as a standalone number, not part of a version, year, phone number or sum
-    '(?<![\p{L}\p{N}.,:/\-])(?<!\d\s)18\s?\+(?!\s*\d)',
+    '(?<![\p{L}\p{N}.,:/\-])(?<!\d\s)18\s?\+(?!\d)',
     '(?<![\p{L}\p{N}.,:/\-])(?<!\d\s)\+\s?18(?!\p{N}|[.,]\d)',
     // R18, R-18, FSK 18, USK 18, PEGI 18
     '\b(?:r-?|fsk\s?|usk\s?|pegi\s?)18\b',
@@ -80,6 +87,7 @@ class AgeSignalDetector
 
       $text = self::removeInvisibleCharacters($text);
       $text = preg_replace(self::NUMBER_CONTEXT, ' ', $text) ?? $text;
+      $text = preg_replace(self::SUM_CONTEXT, ' ', $text) ?? $text;
       foreach (self::PATTERNS as $pattern) {
         preg_match_all('~(*UCP)'.$pattern.'~iu', $text, $matches, PREG_OFFSET_CAPTURE);
         foreach ($matches[0] as [$match, $offset]) {
