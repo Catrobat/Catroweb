@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 final class PreloadLinkHeaderTest extends WebTestCase
 {
   #[Group('functional')]
-  public function testPagePreloadsTheAssetsItRenders(): void
+  public function testPagePreloadsOnlyTheStylesheetsItRenders(): void
   {
     $client = self::createClient();
     $client->request('GET', '/app/login');
@@ -24,22 +24,20 @@ final class PreloadLinkHeaderTest extends WebTestCase
     $this->assertSame(200, $response->getStatusCode());
 
     $header = (string) $response->headers->get('Link');
-    preg_match_all('#<([^>]+)>; rel=preload; as=(style|script); crossorigin#', $header, $links, PREG_SET_ORDER);
+    preg_match_all('#<([^>]+)>; rel=preload; as=style; crossorigin#', $header, $links, PREG_SET_ORDER);
     $this->assertNotEmpty($links, 'Link header: '.$header);
-    $this->assertCount(count(explode(', ', $header)), $links, 'every link is a crossorigin preload: '.$header);
+    $this->assertCount(count(explode(', ', $header)), $links, 'every link is a crossorigin style preload: '.$header);
 
     $html = (string) $response->getContent();
     $public_dir = dirname(__DIR__, 3).'/public';
-    $as_seen = [];
-    foreach ($links as [, $url, $as]) {
+    foreach ($links as [, $url]) {
       // Same URL as in the HTML, or the browser fetches it twice
-      $this->assertStringContainsString(('style' === $as ? 'href="' : 'src="').$url.'"', $html);
+      $this->assertStringContainsString('href="'.$url.'"', $html);
       $this->assertFileExists($public_dir.$url);
-      $as_seen[] = $as;
     }
-    $this->assertContains('style', $as_seen);
-    $this->assertContains('script', $as_seen);
-    $this->assertStringNotContainsString('/chunks/', $header, 'modulepreload chunks stay out of the header');
+    // Scripts would share the line with the render-blocking CSS
+    $this->assertStringNotContainsString('as=script', $header);
+    $this->assertStringNotContainsString('rel="modulepreload"', $html);
   }
 
   #[Group('functional')]

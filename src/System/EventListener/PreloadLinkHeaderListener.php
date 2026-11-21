@@ -11,12 +11,14 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Sends `Link: <…>; rel=preload` for the stylesheets and entry scripts a page rendered, so Cloudflare
- * can answer the next visitor with a 103 Early Hints while the origin still builds the page.
+ * Sends `Link: <…>; rel=preload` for the stylesheets a page rendered, so Cloudflare can answer the next
+ * visitor with a 103 Early Hints while the origin still builds the page.
+ *
+ * Only stylesheets: they block the first paint. Hinting the deferred scripts too made them share the
+ * line with the CSS and pushed the first paint back on slow phones.
  *
  * The URLs come from the Vite bundle's own list of rendered tags, so they match the HTML byte for byte
- * (otherwise the browser downloads twice). modulepreload chunks are left out: Cloudflare only forwards
- * rel=preload/preconnect, and they would only bloat the header.
+ * (otherwise the browser downloads twice).
  */
 #[AsEventListener(event: KernelEvents::RESPONSE, priority: -10)]
 class PreloadLinkHeaderListener
@@ -35,30 +37,26 @@ class PreloadLinkHeaderListener
       return;
     }
 
-    $styles = [];
-    $scripts = [];
+    $links = [];
     foreach ($this->entrypoint_renderer->getRenderedTags() as $tag) {
       if ($tag->isStylesheet()) {
-        $styles[] = $this->link($tag->getAttribute('href'), 'style', $tag->getAttribute('crossorigin'));
-      } elseif ($tag->isScriptTag()) {
-        $scripts[] = $this->link($tag->getAttribute('src'), 'script', $tag->getAttribute('crossorigin'));
+        $links[] = $this->link($tag->getAttribute('href'), $tag->getAttribute('crossorigin'));
       }
     }
 
-    // Stylesheets first: they block rendering, the deferred scripts do not.
-    $links = array_values(array_unique(array_filter([...$styles, ...$scripts])));
+    $links = array_values(array_unique(array_filter($links)));
     if ([] !== $links) {
       $response->headers->set('Link', implode(', ', $links));
     }
   }
 
-  private function link(mixed $url, string $as, mixed $crossorigin): ?string
+  private function link(mixed $url, mixed $crossorigin): ?string
   {
     if (!is_string($url) || '' === $url) {
       return null;
     }
 
-    $link = sprintf('<%s>; rel=preload; as=%s', $url, $as);
+    $link = sprintf('<%s>; rel=preload; as=style', $url);
     if (true === $crossorigin || '' === $crossorigin || 'anonymous' === $crossorigin) {
       $link .= '; crossorigin';
     } elseif (is_string($crossorigin)) {
