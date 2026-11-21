@@ -100,7 +100,7 @@ class ProjectZipReconstructor
       $this->addRemainingFiles($zip, $extractPath, $mappings);
 
       $closed = true;
-      if (!$zip->close()) {
+      if (!@$zip->close()) {
         $this->logger->error('Cannot close ZIP archive', ['path' => $tempPath]);
 
         return null;
