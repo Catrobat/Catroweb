@@ -21,22 +21,6 @@ class TranslationFilesTest extends TestCase
 {
   private const string DIR = __DIR__.'/../../../translations/';
 
-  /**
-   * @return array<string, array{string}>
-   */
-  public static function locales(): array
-  {
-    $locales = [];
-    foreach (glob(self::DIR.'catroweb.*.yaml') ?: [] as $file) {
-      $locale = substr(basename($file, '.yaml'), strlen('catroweb.'));
-      if ('en' !== $locale) {
-        $locales[$locale] = [$locale];
-      }
-    }
-
-    return $locales;
-  }
-
   #[DataProvider('locales')]
   public function testLocaleHasExactlyTheEnglishKeys(string $locale): void
   {
@@ -59,6 +43,22 @@ class TranslationFilesTest extends TestCase
     }
 
     $this->assertSame([], $wrong, "Placeholders like %name% differ from English in catroweb.{$locale}.yaml");
+  }
+
+  /**
+   * @return array<string, array{string}>
+   */
+  public static function locales(): array
+  {
+    $locales = [];
+    foreach (glob(self::DIR.'catroweb.*.yaml') ?: [] as $file) {
+      $locale = substr(basename($file, '.yaml'), strlen('catroweb.'));
+      if ('en' !== $locale) {
+        $locales[$locale] = [$locale];
+      }
+    }
+
+    return $locales;
   }
 
   /**
