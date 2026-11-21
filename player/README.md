@@ -24,6 +24,14 @@ mapping. `./scripts/conformance.sh` plays every `catrobatTests` project on the s
 `conformance.tsv`, where each test is `pass` or `fail` with its reason: a test that passes there must keep passing (CI
 runs it in the Player workflow). After making more tests pass, record them with `./scripts/conformance.sh --update`.
 
+`./scripts/scratch_check.sh` covers Scratch imports: it converts the Scratch projects in `fixtures/scratch/` with
+share's own converter (`scripts/convert_scratch.php`, needs Catroweb's `vendor/`, PHP with imagick, `rsvg-convert` and
+`sox`), runs the loader check on the results and plays each on the stage for 10 s (`scripts/scratch_check.py`). Each
+must start, raise no exception or console error and draw something. Scratch blocks the converter does not support are
+listed but do not fail the check. The Player workflow runs it, also when `src/Project/Scratch/` changes. Add a fixture
+with `python3 scripts/fetch_scratch_fixture.py <scratch id> <name>`, which also writes its `credit.json` (shared
+Scratch projects are CC BY-SA 2.0). On macOS, headless Chrome does not run the stage: play them in Linux Chrome.
+
 ## Bumping Catroid
 
 The Player Catroid pin workflow (`.github/workflows/player-catroid-pin.yaml`) does it nightly: when Catroid's

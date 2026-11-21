@@ -39,3 +39,7 @@ fail on what they add.
   `<language version>-<start of the project id>`, each with only its `code.xml` and the header fields naming the
   author or device emptied. They cover how `ProjectLoader` reads old projects: without scenes, with the XML upgrade
   before 0.93 (`modifyXMLToSupportUnknownFields`) and into the legacy classes before 0.9991.
+- `scratch/`: five shared Scratch projects, as `project.json` plus their costumes and sounds, for
+  `scripts/scratch_check.sh`: Car driving (pen, custom blocks, lists, clones), Space Ping Pong, a 3D cube drawn with
+  maths, Tower Defense (clones) and Xadrez (chess). Each folder's `credit.json` names the title, author and link;
+  shared Scratch projects are CC BY-SA 2.0. Fetched with `scripts/fetch_scratch_fixture.py`.
