@@ -46,6 +46,9 @@ export default defineConfig(({ mode }) => {
       // them to Bugsnag) but the JS bundles carry no sourceMappingURL, so
       // the browser doesn't expose them publicly.
       sourcemap: mode === 'production' ? 'hidden' : true,
+      // Never inline fonts: the small Roboto subsets (as base64 woff) made up ~34 KB of the
+      // render-blocking base CSS, although a browser only downloads the subsets a page uses.
+      assetsInlineLimit: (file) => (/\.(woff2?|ttf|otf)$/.test(file) ? false : undefined),
       rollupOptions: {
         input: { ...jsEntries, ...themes.input },
         output: {
