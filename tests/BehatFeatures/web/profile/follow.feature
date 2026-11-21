@@ -209,3 +209,15 @@ Feature: Follow feature on profiles
     And I wait for AJAX to finish
     And I wait 500 milliseconds
     Then I should see text matching "Catrobat2 is now following you."
+
+  Scenario: Follower pictures load lazily, so the hidden followers tab costs no downloads
+    Given there are followers:
+      | name      | following |
+      | Catrobat2 | Catrobat  |
+      | Catrobat  | Catrobat2 |
+    And I am on "/app/user/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    When I click "#tab-followers"
+    And I wait for the element ".follower-item__avatar img" to be visible
+    Then the element ".follower-item__avatar img" should have a attribute "loading" with value "lazy"
