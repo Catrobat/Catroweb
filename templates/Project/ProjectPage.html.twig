@@ -30,10 +30,13 @@
   {# Preload LCP thumbnail image #}
   {% set _thumb_variants = project_screenshot_variants(project_id) %}
   {% if _thumb_variants and _thumb_variants.detail %}
-    {% set _preload_url = _thumb_variants.detail.avif1x|default(_thumb_variants.detail.webp1x|default(null)) %}
-    {% set _preload_type = _thumb_variants.detail.avif1x is defined and _thumb_variants.detail.avif1x ? 'image/avif' : 'image/webp' %}
+    {% set _d = _thumb_variants.detail %}
+    {% set _fmt = _d.avif1x|default(null) ? 'avif' : 'webp' %}
+    {% set _preload_url = attribute(_d, _fmt ~ '1x')|default(null) %}
+    {% set _preload_2x = attribute(_d, _fmt ~ '2x')|default(null) %}
     {% if _preload_url %}
-      <link rel="preload" as="image" href="{{ _preload_url }}" type="{{ _preload_type }}" fetchpriority="high">
+      {# Same 1x/2x choice as the <picture>, or a high-DPI phone downloads the screenshot twice #}
+      <link rel="preload" as="image" href="{{ _preload_url }}"{% if _preload_2x %} imagesrcset="{{ _preload_url }} 1x, {{ _preload_2x }} 2x"{% endif %} type="image/{{ _fmt }}" fetchpriority="high">
     {% endif %}
   {% else %}
     <link rel="preload" as="image" href="{{ asset(screenshot_big) }}" fetchpriority="high">
@@ -193,21 +196,28 @@
 
   {{ include('Project/ReactionsModal.html.twig') }}
 
-  {# Description and credits -- JS fills content #}
+  {# Description and credits -- server-rendered: the description is the page's LCP element on phones #}
   <div class="row">
     <div class="col mt-3 mb-3">
       <div id="description-headline">
         <span class="h2">{{ 'description'|trans({}, 'catroweb') }}</span>
       </div>
       <div id="description-credits-container" style="height:auto; overflow: hidden;">
-        <div class="skeleton skeleton--block js-skeleton mb-2"></div>
-        <div id="description" class="text-break"></div>
+        <div id="description" class="text-break">
+          {%- if project_description is not empty %}{{ project_description|nl2br }}{% else %}{{ 'noDescription'|trans({}, 'catroweb') }}{% endif -%}
+        </div>
         <div id="description-translation" class="text-break" style="display: none;"></div>
         <div class="mt-3" id="credits-headline">
           <span class="h2">{{ 'credits'|trans({}, 'catroweb') }}</span>
         </div>
-        <div class="skeleton skeleton--block js-skeleton mb-2"></div>
-        <div id="credits" class="text-break"></div>
+        <div id="credits" class="text-break">
+          {%- if project.credits is not empty or project.scratchId -%}
+            {{ project.credits|default('')|nl2br }}
+            {%- if project.scratchId %} {{ 'projectImportedFromScratch'|trans({}, 'catroweb') }} <a href="https://scratch.mit.edu/projects/{{ project.scratchId }}" target="_blank" rel="noopener noreferrer">{{ 'scratchImportedProjectLinkHere'|trans({}, 'catroweb') }}</a>{% endif -%}
+          {%- else -%}
+            {{ 'noCredits'|trans({}, 'catroweb') }}
+          {%- endif -%}
+        </div>
         <div id="credits-translation-wrapper" style="display: none;">
           <div id="credits-translation" class="text-break"></div>
           <span id="project-translation-before-languages" class="translation-credit"></span>
@@ -367,8 +377,8 @@
        data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
        data-machine-translation-languages-url="{{ path('open_api_server_translation_translationlanguagesget') }}"
        data-trans-translate-again="{{ 'project.translateAgain'|trans({}, 'catroweb') }}"
-       data-has-description=""
-       data-has-credits=""
+       data-has-description="{{ project_description is not empty ? 'true' : 'false' }}"
+       data-has-credits="{{ project.credits is not empty ? 'true' : 'false' }}"
        data-theme="{{ theme() }}"
        data-flavor="{{ flavor() }}"
        data-base-url="{{ app.request.getBaseURL() }}"
@@ -393,10 +403,6 @@
        data-trans-rate-limited="{{ 'moderation.reaction.rate_limited'|trans({}, 'catroweb') }}"
        data-trans-views="{{ 'project.views'|trans({}, 'catroweb') }}"
        data-trans-downloads="{{ 'project.downloads'|trans({}, 'catroweb') }}"
-       data-trans-no-description="{{ 'noDescription'|trans({}, 'catroweb') }}"
-       data-trans-no-credits="{{ 'noCredits'|trans({}, 'catroweb') }}"
-       data-trans-imported-from-scratch="{{ 'projectImportedFromScratch'|trans({}, 'catroweb') }}"
-       data-trans-scratch-link="{{ 'scratchImportedProjectLinkHere'|trans({}, 'catroweb') }}"
        data-trans-extensions-title-one="{{ 'extensions.title'|trans({'%count%': 1}, 'catroweb') }}"
        data-trans-extensions-title-other="{{ 'extensions.title'|trans({'%count%': 2}, 'catroweb') }}"
        data-trans-tags-title-one="{{ 'tags.title'|trans({'%count%': 1}, 'catroweb') }}"
@@ -422,8 +428,8 @@
 
   <div class="js-project-description-credits"
        data-project-id="{{ project_id }}"
-       data-has-description=""
-       data-has-credits=""
+       data-has-description="{{ project_description is not empty ? 'true' : 'false' }}"
+       data-has-credits="{{ project.credits is not empty ? 'true' : 'false' }}"
        data-trans-more-info="{{ 'more-information'|trans({}, 'catroweb') }}"
        data-trans-less-info="{{ 'less-information'|trans({}, 'catroweb') }}"
        data-trans-confirm-delete="{{ 'project.confrimDelete'|trans({}, 'catroweb') }}"

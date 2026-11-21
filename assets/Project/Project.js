@@ -59,6 +59,11 @@ export const Project = (config) => {
         lastIndex = urlPattern.lastIndex
       }
 
+      // No link: keep the server-rendered text (and its <br>s) instead of replacing it,
+      // which would also count as a new, later LCP paint.
+      if (lastIndex === 0) {
+        return
+      }
       if (lastIndex < text.length) {
         fragment.appendChild(document.createTextNode(text.slice(lastIndex)))
       }

@@ -11,6 +11,23 @@ Feature: Projects should have descriptions that can be changed by the project ow
       | 1  | project 1 | Catrobat  | my description |
       | 2  | project 2 | OtherUser |                |
 
+  Scenario: Description and credits are in the server HTML, escaped, before any JavaScript runs
+    Given there are projects:
+      | id | name      | owned by | description        | credit       | scratch_id |
+      | 3  | project 3 | Catrobat | <b>not bold</b> hi | thanks to me | 123456     |
+    When I GET "/app/project/3"
+    Then the response status code should be "200"
+    And the client response should contain "&lt;b&gt;not bold&lt;/b&gt; hi"
+    And the client response should contain "thanks to me"
+    And the client response should contain "https://scratch.mit.edu/projects/123456"
+    And the client response should not contain "modulepreload"
+
+  Scenario: A project without description or credits says so in the server HTML
+    When I GET "/app/project/2"
+    Then the response status code should be "200"
+    And the client response should contain "No description available."
+    And the client response should contain "No notes and credits available."
+
   Scenario: Changing description is possible if it's my project
     Given I log in as "OtherUser"
     And I go to "/app/project/2"

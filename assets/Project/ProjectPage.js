@@ -169,37 +169,6 @@ function renderProjectMetadata(data) {
 
   // Not-for-kids indicator is now shown as a thumbnail badge overlay (see renderProjectMetadata)
 
-  // Description
-  const descEl = document.getElementById('description')
-  if (descEl) {
-    if (data.description) {
-      descEl.innerHTML = escapeHtml(data.description).replace(/\n/g, '<br>')
-    } else {
-      descEl.textContent = projectElement.dataset.transNoDescription || 'No description available.'
-    }
-  }
-
-  // Credits
-  const creditsEl = document.getElementById('credits')
-  if (creditsEl) {
-    if (data.credits || data.scratch_id) {
-      let creditsHtml = ''
-      if (data.credits) {
-        creditsHtml += escapeHtml(data.credits).replace(/\n/g, '<br>')
-      }
-      if (data.scratch_id) {
-        const scratchText =
-          projectElement.dataset.transImportedFromScratch ||
-          'This project was imported from Scratch.'
-        const scratchLink = projectElement.dataset.transScratchLink || 'Click here'
-        creditsHtml += ` ${escapeHtml(scratchText)} <a href="https://scratch.mit.edu/projects/${encodeURIComponent(data.scratch_id)}" target="_blank" rel="noopener noreferrer">${escapeHtml(scratchLink)}</a>`
-      }
-      creditsEl.innerHTML = creditsHtml
-    } else {
-      creditsEl.textContent = projectElement.dataset.transNoCredits || 'No notes or credits.'
-    }
-  }
-
   // Update data attributes for downstream components
   projectElement.dataset.projectName = data.name || ''
   projectElement.dataset.hasDescription = data.description ? 'true' : 'false'
