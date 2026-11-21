@@ -329,8 +329,9 @@ class UserNotifications {
   redirectUser(type, id) {
     // Admin notifications open the moderation queue; only same-origin paths are followed.
     if (type === 'review') {
-      if (typeof id === 'string' && id.startsWith('/') && !id.startsWith('//')) {
-        window.location.assign(id)
+      const url = typeof id === 'string' ? new URL(id, window.location.origin) : null
+      if (url && url.origin === window.location.origin) {
+        window.location.assign(url.href)
       }
       return
     }
