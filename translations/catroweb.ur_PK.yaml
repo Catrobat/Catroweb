@@ -12,8 +12,6 @@ username: صارف کا نام
 password: پاس ورڈ
 email: ای-میل
 about: Catrobat کے بارے میں
-chat: چیٹ اور فورم
-others: دیگر
 googlePlay: Google Play Store
 iosAppStore: iOS ایپ اسٹور
 instagram: انسٹاگرام
@@ -37,7 +35,6 @@ noCredits: کوئی نوٹس اور کریڈٹ دستیاب نہیں۔
 notesAndCreditsDescription: تم نے یہ پروجیکٹ کیسے بنایا؟ کیا تم نے دوسرے لوگوں کے خیالات، اسکرپٹس یا آرٹ ورک استعمال کیے؟ یہاں ان کا شکریہ ادا کرو۔
 projectImportedFromScratch: یہ پروجیکٹ MIT Scratch سے درآمد کیا گیا ہے۔ تم اصل پروجیکٹ دیکھ سکتے ہو
 scratchImportedProjectLinkHere: یہاں۔
-country: ملک
 privacyPolicy: پرائیویسی پالیسی
 projectDetails: تفصیلات
 somethingWentWrong: اوہو، کچھ کام نہیں کیا۔ براہ کرم دوبارہ کوشش کرو!
@@ -47,7 +44,6 @@ doesNotExist: مطلوبہ چیز موجود نہیں ہے۔
 pleaseTryAgain: براہ کرم دوبارہ کوشش کرو!
 tryAgainButton: دوبارہ کوشش کرو
 more: 'مزید'
-less: 'کم'
 show-more: مزید دکھاؤ
 more-information: 'مزید معلومات'
 less-information: 'کم معلومات'
@@ -68,7 +64,6 @@ users: صارف
 studios: اسٹوڈیوز
 oauthPopUpTitle: بیرونی اکاؤنٹ سے سائن اِن کی معلومات
 oauthInfo: تم نے ابھی لاگ اِن کرنے کے لیے ایک بیرونی اکاؤنٹ استعمال کیا ہے۔ ہم نے تمہارے لیے ایک بے ترتیب صارف نام بنایا ہے۔ اگر تم اپنا صارف نام بدلنا یا اپنے اکاؤنٹ کے لیے نیا پاس ورڈ بنانا چاہتے ہو تو براہ کرم اپنی پروفائل کے صفحے پر جاؤ۔
-statistics: "اعداد و شمار"
 languageSelection: "زبان کا انتخاب"
 color-scheme:
   title: تھیم
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: وہ لوگ جنہوں نے اس پروجیکٹ پر ردعمل دیا
     all: "تمام"
-  languageVersion: 'Catrobat زبان کا ورژن: %languageVersion%'
   updateAppHeaderDownload: ڈاؤن لوڈ ممکن نہیں
   updateAppTextDownload: براہ کرم اپنی ایپ کو تازہ ترین ورژن پر اپ ڈیٹ کرو۔ دھیان رکھو کہ Android کی تمام خصوصیات ابھی iOS پر دستیاب نہیں ہیں۔
   checkout_this_project: یہ Catrobat پروجیکٹ دیکھو
@@ -649,7 +643,6 @@ previous: پچھلا
 media-packages:
   title: میڈیا لائبریری
   description: درج ذیل زمروں میں تمہیں اپنے پروجیکٹس میں شامل کرنے کے لیے کردار اور اشیاء ملیں گی۔
-  theme-special: '%flavor% تھیم اسپیشل'
   search-results: میڈیا لائبریری تلاش کے نتائج
 flavor:
   pocketcode: Pocket Code

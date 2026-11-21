@@ -12,8 +12,6 @@ username: Пайдаланушы аты
 password: Құпиясөз
 email: Эл. пошта
 about: Туралы
-chat: Чаттар мен форумдар
-others: Басқалар
 googlePlay: Google Play Store
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Жазбалар мен кредиттер жоқ.
 notesAndCreditsDescription: Бұл жобаны қалай жасадың? Басқа адамдардың идеяларын, сценарийлерін немесе өнер туындыларын қолдандың ба? Осы жерде оларға алғыс айт.
 projectImportedFromScratch: "Бұл жоба MIT Scratch-тан импортталған. Түпнұсқа жобаны мына жерден көре аласың:"
 scratchImportedProjectLinkHere: "мұнда."
-country: Ел
 privacyPolicy: Құпиялық саясаты
 projectDetails: Детальдар
 somethingWentWrong: 'Бірдеңе дұрыс болмады.'
@@ -47,7 +44,6 @@ doesNotExist: 'Сұралған ресурс жоқ.'
 pleaseTryAgain: 'Қайталап көр!'
 tryAgainButton: "Қайталап көру"
 more: 'Көбірек'
-less: 'Аздау'
 show-more: 'Көбірек көрсет'
 more-information: 'Көбірек ақпарат'
 less-information: 'Аз ақпарат'
@@ -68,7 +64,6 @@ users: "Пайдаланушылар"
 studios: "Студиялар"
 oauthPopUpTitle: "Сыртқы тіркелгіге кіру ақпараты"
 oauthInfo: 'Жүйеге кіру үшін жаңа ғана сыртқы аккаунтты пайдаландың. Біз сен үшін кездейсоқ пайдаланушы атын жасадық. Пайдаланушы атыңды өзгерткің немесе аккаунтыңа жаңа құпиясөз жасағың келсе, профиль бетіне өт.'
-statistics: "Статисткалар"
 languageSelection: "Тілді таңдау"
 color-scheme:
   title: "Тақырып"
@@ -178,7 +173,6 @@ project:
   likes:
     likersTitle: "Сол жобаға реакция жасаған адамдар"
     all: "Барлық"
-  languageVersion: "Catrobat тілінің нұсқасы: %languageVersion%"
   updateAppHeaderDownload: Жүктеп алу мүмкін емес
   updateAppTextDownload: Қолданбаңды ең жаңа нұсқаға жаңарт. Android-тағы барлық мүмкіндіктер iOS жүйесінде әлі қолжетімді емес екенін ескер.
   checkout_this_project: Осы Catrobat жобасын қарап шық
@@ -650,7 +644,6 @@ previous: Алдыңғы
 media-packages:
   title: Медиа-пакеттер
   description: Келесі категорияларда Pocket Code жобаларына қосу үшін қосымша актерлер мен спрайттарды таба аласың.
-  theme-special: "%flavor% тақырыбы бойынша арнайы"
   search-results: "Медиа кітапханадан іздеу нәтижелері"
 flavor:
   pocketcode: Pocket Code

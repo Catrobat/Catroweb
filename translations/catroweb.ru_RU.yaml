@@ -12,8 +12,6 @@ username: Имя пользователя
 password: Пароль
 email: Электронная почта
 about: О проекте Catrobat
-chat: Общение и форумы
-others: Другие
 googlePlay: Google Play Маркет
 iosAppStore: iOS App Store
 instagram: Инстаграм
@@ -37,7 +35,6 @@ noCredits: Нет примечаний и упоминаний об автора
 notesAndCreditsDescription: Как вы создали этот проект? Вы использовали идеи, скрипты или работы других людей? Поблагодарите их здесь.
 projectImportedFromScratch: Этот проект был импортирован из MIT Scratch. Вы можете посмотреть оригинальный проект
 scratchImportedProjectLinkHere: здесь.
-country: Страна
 privacyPolicy: Политика конфиденциальности
 projectDetails: Подробности
 somethingWentWrong: 'Упс, что-то пошло не так.'
@@ -47,7 +44,6 @@ doesNotExist: 'Запрошенный ресурс не существует.'
 pleaseTryAgain: 'Пожалуйста, попробуйте еще раз!'
 tryAgainButton: 'Попробовать снова'
 more: 'больше'
-less: 'скрыть'
 show-more: 'Показать еще'
 more-information: 'Подробности'
 less-information: 'Меньше информации'
@@ -68,7 +64,6 @@ users: "Пользователи"
 studios: "Студии"
 oauthPopUpTitle: "Информация о входе с помощью аккаунта стороннего ресурса."
 oauthInfo: 'Вы только что использовали аккаунт стороннего ресурса для входа. Мы создали для вас случайное имя пользователя. Если вы хотите изменить имя пользователя или создать новый пароль для вашего аккаунта, пожалуйста, перейдите на страницу вашего профиля.'
-statistics: "Статистика"
 languageSelection: "Выбор языка"
 color-scheme:
   title: 'Тема'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Люди, которые отреагировали на этот проект"
     all: "Все"
-  languageVersion: 'Версия языка Catrobat: %languageVersion%'
   updateAppHeaderDownload: Скачивание невозможно
   updateAppTextDownload: Пожалуйста, обновите приложение до последней версии. Имейте в виду, что еще не все функции Android уже доступны на iOS.
   checkout_this_project: Посмотреть этот проект Catrobat
@@ -649,7 +643,6 @@ previous: Назад
 media-packages:
   title: Медиа-пакеты
   description: В этих категориях, вы можете найти дополнительных актеров и объекты, которых вы можете добавить в ваши проекты Pocket Code.
-  theme-special: "Специальная тема %flavor%"
   search-results: Результаты поиска в медиатеке
 flavor:
   pocketcode: Pocket Code

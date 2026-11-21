@@ -12,8 +12,6 @@ username: "Isem n useqdac"
 password: "Awal uffir"
 email: "Imayl"
 about: "Ɣef Catrobat"
-chat: Aqeṣṣer akked ifoṛumen
-others: Wiyaḍ
 googlePlay: "Google Play Store"
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: "Ulac tizmilin neɣ isnemmiren."
 notesAndCreditsDescription: "Amek i txedmeḍ asenfar-a? Tesqedceḍ tikta, iskripten neɣ tugniwin n wiyaḍ? Snemmer-iten dagi."
 projectImportedFromScratch: "Asenfar-a yettwakter-d seg MIT Scratch. Tzemreḍ ad twaliḍ asenfar aɣbalu"
 scratchImportedProjectLinkHere: "dagi."
-country: Tamurt
 privacyPolicy: "Tasertit n tbaḍnit"
 projectDetails: "Talqayt"
 somethingWentWrong: 'Ooooops yella kra ur yeddan akken iwata.'
@@ -47,7 +44,6 @@ doesNotExist: "Aɣbalu i d-yettwasutren ulac-it."
 pleaseTryAgain: 'Ttxilek ɛreḍ tikkelt nniḍen!'
 tryAgainButton: "Ɛreḍ tikkelt-nniḍen"
 more: 'ugar'
-less: "drus"
 show-more: 'Zken ugar'
 more-information: "Ugar n talɣut"
 less-information: 'Qell n isallen'
@@ -68,7 +64,6 @@ users: "Iseqdacen"
 studios: "Isudyuten"
 oauthPopUpTitle: "Talɣut n tuqqna s umiḍan uffiɣ"
 oauthInfo: "Tqeqneḍ s umiḍan uffiɣ. Nexleq-ak-d isem n useqdac s wudem agacuran. Ma tebɣiḍ ad tbeddleḍ isem n useqdac neɣ ad texleqḍ awal uffir amaynut, ddu ɣer usebter n umaɣnu-ik"
-statistics: "Tidaddanin"
 languageSelection: "Afran n tutlayt"
 color-scheme:
   title: "Asentel"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Imdanen i yesserwen ɣef usenfar-a"
     all: "All"
-  languageVersion: "Lqem n tutlayt Catrobat: %languageVersion%"
   updateAppHeaderDownload: "Asader ur yezmir ara"
   updateAppTextDownload: "Ttxil-k leqqem asnas-ik ɣer lqem amaynut. Ẓer belli mačči akk timahilin n Android llant yakan deg iOS."
   checkout_this_project: "Wali asenfar-a n Catrobat"
@@ -626,7 +620,6 @@ previous: "Uzwir"
 media-packages:
   title: "Tamkarḍit n yimidyaten"
   description: "Deg taggayin-a tzemreḍ ad d-tafeḍ imeskanen d tɣawsiwin ara ternuḍ ɣer yisenfaren-ik."
-  theme-special: "Asentel uzzig %flavor%"
   search-results: "Igmaḍ n unadi deg temkarḍit n yimidyaten"
 flavor:
   pocketcode: Pocket Code

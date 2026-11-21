@@ -12,8 +12,6 @@ username: 'Naudotojo vardas'
 password: Slaptažodis
 email: El. paštas
 about: 'Apie Catrobat'
-chat: 'Pokalbiai ir forumai'
-others: 'Kita'
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Padėkų nėra.'
 notesAndCreditsDescription: 'Kaip sukūrei šį projektą? Ar naudojai kitų žmonių idėjas, scenarijus ar piešinius? Padėkok jiems čia.'
 projectImportedFromScratch: 'Šis projektas buvo importuotas iš MIT Scratch. Originalų projektą gali peržiūrėti'
 scratchImportedProjectLinkHere: 'čia.'
-country: Šalis
 privacyPolicy: Privatumo taisyklės
 projectDetails: 'Išsami informacija'
 somethingWentWrong: 'Oi, kažkas nepavyko.'
@@ -47,7 +44,6 @@ doesNotExist: 'Prašomas išteklius neegzistuoja.'
 pleaseTryAgain: 'Bandyk dar kartą!'
 tryAgainButton: 'Bandyti dar kartą'
 more: 'daugiau'
-less: 'mažiau'
 show-more: 'Daugiau informacijos'
 more-information: 'Daugiau informacijos'
 less-information: 'Mažiau informacijos'
@@ -68,7 +64,6 @@ users: 'Naudotojai'
 studios: 'Studijos'
 oauthPopUpTitle: 'Informacija apie prisijungimą per išorinę paskyrą'
 oauthInfo: 'Ką tik prisijungei naudodamas išorinę paskyrą. Sukūrėme tau atsitiktinį naudotojo vardą. Jei nori pakeisti naudotojo vardą arba susikurti naują paskyros slaptažodį, eik į savo profilio puslapį.'
-statistics: 'Statistika'
 languageSelection: 'Kalbos pasirinkimas'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Žmonės, sureagavę į šį projektą'
     all: 'Visi'
-  languageVersion: 'Catrobat kalbos versija: %languageVersion%'
   updateAppHeaderDownload: 'Atsisiųsti neįmanoma'
   updateAppTextDownload: 'Atnaujink programėlę į naujausią versiją. Atkreipk dėmesį, kad ne visos Android funkcijos jau prieinamos iOS.'
   checkout_this_project: 'Pažiūrėk šį Catrobat projektą'
@@ -649,7 +643,6 @@ previous: 'Ankstesnis'
 media-packages:
   title: 'Medijų biblioteka'
   description: 'Šiose kategorijose rasi veikėjų ir objektų, kuriuos gali įtraukti į savo projektus.'
-  theme-special: '%flavor% teminis rinkinys'
   search-results: 'Medijų bibliotekos paieškos rezultatai'
 flavor:
   pocketcode: Pocket Code

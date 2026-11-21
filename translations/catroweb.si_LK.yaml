@@ -12,8 +12,6 @@ username: පරිශීලක නාමය
 password: මුරපදය
 email: විද්‍යුත් තැපෑල
 about: Catrobat ගැන
-chat: කතාබහ සහ සංසද
-others: වෙනත්
 googlePlay: ගූගල් ප්ලේ ස්ටෝර්
 iosAppStore: අයිඕඑස් ඇප් ස්ටෝර්
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: සටහන් සහ ස්තූතිය නැහැ.
 notesAndCreditsDescription: ඔයා මේ ව්‍යාපෘතිය හැදුවේ කොහොමද? වෙන අයගේ අදහස්, ස්ක්‍රිප්ට් හෝ චිත්‍ර පාවිච්චි කළාද? මෙතන ඔවුන්ට ස්තූති කරන්න.
 projectImportedFromScratch: මේ ව්‍යාපෘතිය MIT Scratch එකෙන් ආනයනය කළේ. මුල් ව්‍යාපෘතිය බලන්න පුළුවන්
 scratchImportedProjectLinkHere: මෙතැනින්.
-country: රට
 privacyPolicy: රහස්‍යතා ප්‍රතිපත්තිය
 projectDetails: විස්තර
 somethingWentWrong: අයියෝ, මොකක්හරි වැඩ කළේ නැහැ. ආයෙත් උත්සාහ කරන්න!
@@ -47,7 +44,6 @@ doesNotExist: ඉල්ලපු දේ නැහැ.
 pleaseTryAgain: 'කරුණාකර නැවත උත්සාහ කරන්න!'
 tryAgainButton: ආයෙත් උත්සාහ කරන්න
 more: තව
-less: අඩුවෙන්
 show-more: 'තව පෙන්වන්න'
 more-information: තව තොරතුරු
 less-information: අඩු තොරතුරු
@@ -68,7 +64,6 @@ users: පරිශීලකයා
 studios: ස්ටූඩියෝ
 oauthPopUpTitle: බාහිර ගිණුමකින් පුරනය වීම ගැන තොරතුරු
 oauthInfo: ඔයා දැන් බාහිර ගිණුමකින් පුරනය වුණා. අපි ඔයාට අහඹු පරිශීලක නාමයක් හැදුවා. ඔයාගේ පරිශීලක නාමය වෙනස් කරන්න හෝ ගිණුමට අලුත් මුරපදයක් හදන්න ඕන නම් ඔයාගේ පැතිකඩ පිටුවට යන්න.
-statistics: සංඛ්‍යාලේඛන
 languageSelection: භාෂාව තෝරන්න
 color-scheme:
   title: තේමාව
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: මේ ව්‍යාපෘතියට ප්‍රතිචාර දැක්වූ අය
     all: "සියල්ල"
-  languageVersion: 'Catrobat භාෂා අනුවාදය: %languageVersion%'
   updateAppHeaderDownload: බාගන්න බැහැ
   updateAppTextDownload: කරුණාකර ඔයාගේ යෙදුම අලුත්ම අනුවාදයට යාවත්කාල කරන්න. Android හි තියෙන හැම විශේෂාංගයක්ම තවම iOS හි නැහැ කියලා මතක තියාගන්න.
   checkout_this_project: මේ Catrobat ව්‍යාපෘතිය බලන්න
@@ -649,7 +643,6 @@ previous: කලින්
 media-packages:
   title: මාධ්‍ය පුස්තකාලය
   description: පහත කාණ්ඩවල ඔයාගේ ව්‍යාපෘතිවලට එකතු කරන්න චරිත සහ වස්තු හොයාගන්න පුළුවන්.
-  theme-special: '%flavor% විශේෂ තේමාව'
   search-results: මාධ්‍ය පුස්තකාල සෙවුම් ප්‍රතිඵල
 flavor:
   pocketcode: Pocket Code

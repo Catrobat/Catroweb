@@ -12,8 +12,6 @@ username: Tên đăng nhập
 password: Mật khẩu
 email: 'Email'
 about: Về Catrobat
-chat: 'Trò chuyện và diễn đàn'
-others: 'Khác'
 googlePlay: googlePlay
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Chưa có ghi chú và ghi công nào.'
 notesAndCreditsDescription: 'Bạn đã tạo dự án này như thế nào? Bạn có dùng ý tưởng, kịch bản hay hình ảnh của người khác không? Hãy cảm ơn họ ở đây.'
 projectImportedFromScratch: 'Dự án này được nhập từ MIT Scratch. Bạn có thể xem dự án gốc'
 scratchImportedProjectLinkHere: 'tại đây.'
-country: Quốc gia
 privacyPolicy: Chính sách bảo mật
 projectDetails: Chi tiêt
 somethingWentWrong: 'Thao tác sai.'
@@ -47,7 +44,6 @@ doesNotExist: 'Tài nguyên được yêu cầu không tồn tại.'
 pleaseTryAgain: 'Làm ơn hãy thử lại!'
 tryAgainButton: 'Thử lại'
 more: 'hơn/thêm/nhiều hơn'
-less: 'ít hơn'
 show-more: 'Xem thêm'
 more-information: 'Thêm thông tin'
 less-information: 'Ít thông tin hơn'
@@ -68,7 +64,6 @@ users: 'Người dùng'
 studios: 'Studio'
 oauthPopUpTitle: 'Thông tin đăng nhập bằng tài khoản bên ngoài'
 oauthInfo: 'Bạn vừa đăng nhập bằng một tài khoản bên ngoài. Chúng mình đã tạo một tên đăng nhập ngẫu nhiên cho bạn. Nếu bạn muốn đổi tên đăng nhập hoặc tạo mật khẩu mới cho tài khoản, hãy vào trang hồ sơ của bạn.'
-statistics: 'Thống kê'
 languageSelection: 'Chọn ngôn ngữ'
 color-scheme:
   title: 'Giao diện'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Những người đã bày tỏ cảm xúc với dự án này'
     all: "Tất cả"
-  languageVersion: 'Phiên bản ngôn ngữ Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Không thể tải về'
   updateAppTextDownload: 'Hãy cập nhật ứng dụng lên phiên bản mới nhất. Lưu ý rằng không phải tất cả tính năng Android đều đã có trên iOS.'
   checkout_this_project: 'Xem dự án Catrobat này'
@@ -650,7 +644,6 @@ previous: 'Trước'
 media-packages:
   title: 'Thư viện đa phương tiện'
   description: 'Trong các danh mục sau, bạn có thể tìm thấy nhân vật và đối tượng để thêm vào dự án của mình.'
-  theme-special: 'Chủ đề đặc biệt %flavor%'
   search-results: 'Kết quả tìm kiếm trong thư viện đa phương tiện'
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: Používateľské meno
 password: Heslo
 email: E-mail
 about: O Catrobat
-chat: Chat a fóra
-others: Ostatné
 googlePlay: Google Play
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Žiadne poďakovania nie sú k dispozícii.
 notesAndCreditsDescription: Ako si vytvoril tento projekt? Použil si nápady, skripty alebo grafiku od iných ľudí? Poďakuj im tu.
 projectImportedFromScratch: Tento projekt bol importovaný z MIT Scratch. Pôvodný projekt si môžeš pozrieť
 scratchImportedProjectLinkHere: tu.
-country: Krajina
 privacyPolicy: Zásady ochrany osobných údajov
 projectDetails: Podrobnosti
 somethingWentWrong: 'Ups, niečo nefungovalo. Skús to znova!'
@@ -47,7 +44,6 @@ doesNotExist: 'Požadovaný zdroj neexistuje.'
 pleaseTryAgain: 'Skús to znova!'
 tryAgainButton: 'Skúsiť znova'
 more: 'viac'
-less: 'menej'
 show-more: 'Viac informácií'
 more-information: 'Viac informácií'
 less-information: 'Menej informácií'
@@ -68,7 +64,6 @@ users: "Používatelia"
 studios: "Štúdiá"
 oauthPopUpTitle: "Informácie o prihlásení cez externý účet"
 oauthInfo: 'Práve si sa prihlásil cez externý účet. Vytvorili sme ti náhodné používateľské meno. Ak chceš zmeniť používateľské meno alebo si vytvoriť nové heslo, prejdi na svoju profilovú stránku.'
-statistics: "Štatistiky"
 languageSelection: "Výber jazyka"
 color-scheme:
   title: 'Motív'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Ľudia, ktorí reagovali na tento projekt"
     all: "Všetky"
-  languageVersion: 'Verzia jazyka Catrobat: %languageVersion%'
   updateAppHeaderDownload: Stiahnutie nie je možné
   updateAppTextDownload: Aktualizuj aplikáciu na najnovšiu verziu. Nie všetky funkcie z Androidu sú už dostupné na iOS.
   checkout_this_project: Pozri si tento projekt Catrobat
@@ -650,7 +644,6 @@ previous: Predchádzajúce
 media-packages:
   title: Knižnica médií
   description: V nasledujúcich kategóriách nájdeš postavy a objekty, ktoré môžeš pridať do svojich projektov.
-  theme-special: "Špeciálna téma %flavor%"
   search-results: Výsledky vyhľadávania v knižnici médií
 flavor:
   pocketcode: Pocket Code

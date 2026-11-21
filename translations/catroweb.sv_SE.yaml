@@ -12,8 +12,6 @@ username: Användarnamn
 password: Lösenord
 email: E-post
 about: Om Catrobat
-chat: Chatt och forum
-others: Övriga
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'Hur skapade du det här projektet? Använde du idéer, skript eller grafik från andra? Tacka dem här.'
 projectImportedFromScratch: 'Det här projektet importerades från MIT Scratch. Du kan kolla in originalprojektet'
 scratchImportedProjectLinkHere: 'här.'
-country: Land
 privacyPolicy: Sekretesspolicy
 projectDetails: Detaljer
 somethingWentWrong: 'Hoppsan! Något gick fel.'
@@ -47,7 +44,6 @@ doesNotExist: 'Den begärda resursen finns inte.'
 pleaseTryAgain: 'Försök igen!'
 tryAgainButton: 'Försök igen'
 more: 'mer'
-less: 'mindre'
 show-more: 'More information'
 more-information: 'Mer information'
 less-information: 'Mindre information'
@@ -68,7 +64,6 @@ users: "Användare"
 studios: 'Studior'
 oauthPopUpTitle: 'Information om inloggning med externt konto'
 oauthInfo: 'Du har precis loggat in med ett externt konto. Vi har skapat ett slumpmässigt användarnamn åt dig. Om du vill ändra ditt användarnamn eller skapa ett nytt lösenord för ditt konto, gå till din profilsida.'
-statistics: "Statistik "
 languageSelection: 'Språkval'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Personer som reagerade på projektet'
     all: "Alla"
-  languageVersion: 'Catrobat-språkversion: %languageVersion%'
   updateAppHeaderDownload: 'Nedladdning inte möjlig'
   updateAppTextDownload: 'Uppdatera din app till den senaste versionen. Observera att inte alla Android-funktioner finns tillgängliga på iOS än.'
   checkout_this_project: 'Kolla in det här Catrobat-projektet'
@@ -649,7 +643,6 @@ previous: Föregående
 media-packages:
   title: 'Mediebibliotek'
   description: 'I följande kategorier hittar du figurer och objekt att lägga till i dina projekt.'
-  theme-special: '%flavor%-temaspecial'
   search-results: 'Sökresultat i mediebiblioteket'
 flavor:
   pocketcode: Pocked Code

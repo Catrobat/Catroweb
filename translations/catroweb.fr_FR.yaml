@@ -12,8 +12,6 @@ username: Nom d'utilisateur
 password: Mot de passe
 email: E-mail
 about: A propos de Catrobat
-chat: Chat et forums
-others: Autres
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: Comment avez-vous créé ce projet ? Avez-vous utilisé des idées, des scripts ou des œuvres d'art d'autres personnes ? Merci ici.
 projectImportedFromScratch: Ce projet a été importé depuis MIT Scratch. Vous pouvez consulter le projet original
 scratchImportedProjectLinkHere: ici.
-country: Pays
 privacyPolicy: Politique de confidentialité
 projectDetails: Détails du produit
 somethingWentWrong: 'Ooooops, quelque chose s''est mal passé.'
@@ -47,7 +44,6 @@ doesNotExist: 'La ressource demandée n''existe pas.'
 pleaseTryAgain: 'Essayez à nouveau !'
 tryAgainButton: 'Réessayer'
 more: 'plus'
-less: 'moins'
 show-more: 'More information'
 more-information: 'Plus d''informations'
 less-information: 'Moins d''informations'
@@ -68,7 +64,6 @@ users: "Utilisateur"
 studios: "Studios"
 oauthPopUpTitle: "Informations de connexion de compte externe"
 oauthInfo: 'Vous venez d''utiliser un compte externe pour vous connecter. Nous avons créé un nom d''utilisateur aléatoire pour vous. Si vous voulez changer votre nom d''utilisateur ou créer un nouveau mot de passe pour votre compte, veuillez vous rendre sur votre page de profil.'
-statistics: "Statistiques"
 languageSelection: "Choix de la langue"
 color-scheme:
   title: 'Thème'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Personnes ayant réagi à ce projet"
     all: "Tous"
-  languageVersion: 'Version du langage Catrobat : %languageVersion%'
   updateAppHeaderDownload: Téléchargement impossible
   updateAppTextDownload: 'Veuillez mettre à jour votre application vers la dernière version. Attention : toutes les fonctionnalités Android ne sont pas encore disponibles sur iOS.'
   checkout_this_project: Découvrez ce projet Catrobat
@@ -649,7 +643,6 @@ previous: Précédent
 media-packages:
   title: Paquets Média
   description: Dans les catégories suivantes vous pouvez trouver des acteurs et des objets supplémentaires à ajouter à vos projets PocketCode.
-  theme-special: "%flavor% Thème Spécial"
   search-results: Résultats de la recherche dans la médiathèque
 flavor:
   pocketcode: Pocket Code

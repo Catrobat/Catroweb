@@ -12,8 +12,6 @@ username: ഉപയോക്തൃനാമം
 password: പാസ്‌വേഡ്
 email: ഇമെയിൽ
 about: Catrobat-നെക്കുറിച്ച്
-chat: ചാറ്റും ഫോറങ്ങളും
-others: മറ്റുള്ളവ
 googlePlay: Google Play
 iosAppStore: iOS ആപ്പ് സ്റ്റോർ
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: കടപ്പാട് ലഭ്യമല്ല.
 notesAndCreditsDescription: ഈ പ്രോജക്റ്റ് നീ എങ്ങനെ സൃഷ്ടിച്ചു? മറ്റുള്ളവരുടെ ആശയങ്ങളോ സ്ക്രിപ്റ്റുകളോ ചിത്രങ്ങളോ ഉപയോഗിച്ചോ? അവർക്ക് ഇവിടെ നന്ദി പറയുക.
 projectImportedFromScratch: ഈ പ്രോജക്റ്റ് MIT Scratch-ൽ നിന്ന് ഇമ്പോർട്ട് ചെയ്തതാണ്. യഥാർത്ഥ പ്രോജക്റ്റ് നിനക്ക് കാണാം
 scratchImportedProjectLinkHere: ഇവിടെ.
-country: രാജ്യം
 privacyPolicy: സ്വകാര്യതാ നയം
 projectDetails: വിശദാംശങ്ങൾ
 somethingWentWrong: 'അയ്യോ, എന്തോ പ്രവർത്തിച്ചില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക!'
@@ -47,7 +44,6 @@ doesNotExist: 'ആവശ്യപ്പെട്ട ഉറവിടം നില
 pleaseTryAgain: 'ദയവായി വീണ്ടും ശ്രമിക്കുക!'
 tryAgainButton: 'വീണ്ടും ശ്രമിക്കുക'
 more: 'കൂടുതൽ'
-less: 'കുറവ്'
 show-more: 'കൂടുതൽ വിവരങ്ങൾ'
 more-information: 'കൂടുതൽ വിവരങ്ങൾ'
 less-information: 'കുറച്ച് വിവരങ്ങൾ'
@@ -68,7 +64,6 @@ users: "ഉപയോക്താക്കൾ"
 studios: "സ്റ്റുഡിയോകൾ"
 oauthPopUpTitle: "ബാഹ്യ അക്കൗണ്ട് സൈൻ ഇൻ വിവരങ്ങൾ"
 oauthInfo: 'നീ ഇപ്പോൾ ഒരു ബാഹ്യ അക്കൗണ്ട് ഉപയോഗിച്ച് ലോഗിൻ ചെയ്തു. ഞങ്ങൾ നിനക്കായി ഒരു ക്രമരഹിത ഉപയോക്തൃനാമം സൃഷ്ടിച്ചു. ഉപയോക്തൃനാമം മാറ്റാനോ അക്കൗണ്ടിന് പുതിയ പാസ്‌വേഡ് സൃഷ്ടിക്കാനോ നിന്റെ പ്രൊഫൈൽ പേജിലേക്ക് പോകുക.'
-statistics: "സ്ഥിതിവിവരക്കണക്കുകൾ"
 languageSelection: "ഭാഷ തിരഞ്ഞെടുക്കൽ"
 color-scheme:
   title: 'തീം'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "ആ പ്രോജക്റ്റിനോട് പ്രതികരിച്ചവർ"
     all: "എല്ലാം"
-  languageVersion: 'Catrobat ഭാഷാ പതിപ്പ്: %languageVersion%'
   updateAppHeaderDownload: ഡൗൺലോഡ് സാധ്യമല്ല
   updateAppTextDownload: ദയവായി നിന്റെ ആപ്പ് ഏറ്റവും പുതിയ പതിപ്പിലേക്ക് അപ്ഡേറ്റ് ചെയ്യുക. എല്ലാ Android ഫീച്ചറുകളും iOS-ൽ ഇതുവരെ ലഭ്യമല്ലെന്ന് ഓർക്കുക.
   checkout_this_project: ഈ Catrobat പ്രോജക്റ്റ് നോക്കൂ
@@ -649,7 +643,6 @@ previous: മുമ്പത്തേത്
 media-packages:
   title: മീഡിയ ലൈബ്രറി
   description: നിന്റെ പ്രോജക്റ്റുകളിലേക്ക് ചേർക്കാനുള്ള കഥാപാത്രങ്ങളും വസ്തുക്കളും താഴെയുള്ള വിഭാഗങ്ങളിൽ കണ്ടെത്താം.
-  theme-special: "%flavor% തീം സ്പെഷ്യൽ"
   search-results: മീഡിയ ലൈബ്രറി തിരയൽ ഫലങ്ങൾ
 flavor:
   pocketcode: പോക്കറ്റ് കോഡ്

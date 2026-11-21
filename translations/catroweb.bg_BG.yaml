@@ -12,8 +12,6 @@ username: Потребителско име
 password: Парола
 email: Имейл
 about: За Catrobat
-chat: Чат и форуми
-others: Други
 googlePlay: Google Play Store
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Няма бележки и благодарности.
 notesAndCreditsDescription: Как създаде този проект? Използва ли идеи, скриптове или графики от други хора? Благодари им тук.
 projectImportedFromScratch: Този проект е импортиран от MIT Scratch. Можеш да разгледаш оригиналния проект
 scratchImportedProjectLinkHere: тук.
-country: Страна
 privacyPolicy: Правила за поверителност
 projectDetails: Подробности
 somethingWentWrong: 'Опа, нещо не се получи. Опитай отново!'
@@ -47,7 +44,6 @@ doesNotExist: 'Търсеният ресурс не съществува.'
 pleaseTryAgain: 'Опитай отново!'
 tryAgainButton: 'Опитай отново'
 more: 'още'
-less: 'по-малко'
 show-more: 'Покажи още'
 more-information: 'Повече информация'
 less-information: 'По-малко информация'
@@ -68,7 +64,6 @@ users: "Потребител"
 studios: "Студиа"
 oauthPopUpTitle: "Информация за вход с външен акаунт"
 oauthInfo: 'Току-що влезе с външен акаунт. Създадохме случайно потребителско име за теб. Ако искаш да промениш потребителското си име или да създадеш нова парола за акаунта си, отиди на страницата на профила си.'
-statistics: "Статистика"
 languageSelection: "Избор на език"
 color-scheme:
   title: 'Тема'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Хора, които реагираха на този проект"
     all: "Всички"
-  languageVersion: 'Версия на езика Catrobat: %languageVersion%'
   updateAppHeaderDownload: Изтеглянето не е възможно
   updateAppTextDownload: Обнови приложението си до най-новата версия. Имай предвид, че не всички функции от Android вече са налични на iOS.
   checkout_this_project: Виж този проект в Catrobat
@@ -650,7 +644,6 @@ previous: Назад
 media-packages:
   title: Медийна библиотека
   description: В следващите категории можеш да намериш актьори и обекти, които да добавиш към проектите си.
-  theme-special: "Специална тема %flavor%"
   search-results: Резултати от търсенето в медийната библиотека
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: Корисничко име
 password: Лозинка
 email: Имејл
 about: О Catrobat
-chat: Ћаскање и форуми
-others: Остало
 googlePlay: Google Play Store
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Нема белешки и заслуга.
 notesAndCreditsDescription: Како си направио овај пројекат? Да ли си користио идеје, скрипте или графику других људи? Захвали им се овде.
 projectImportedFromScratch: Овај пројекат је увезен из MIT Scratch-а. Оригинални пројекат можеш погледати
 scratchImportedProjectLinkHere: овде.
-country: Држава
 privacyPolicy: Правила о приватности
 projectDetails: Детаљи
 somethingWentWrong: Упс, нешто није успело. Покушај поново!
@@ -47,7 +44,6 @@ doesNotExist: Тражени ресурс не постоји.
 pleaseTryAgain: Покушај поново!
 tryAgainButton: Покушај поново
 more: 'још'
-less: 'мање'
 show-more: 'Прикажи више'
 more-information: 'Више информација'
 less-information: Мање информација
@@ -68,7 +64,6 @@ users: Корисник
 studios: Студији
 oauthPopUpTitle: Информације о пријави спољним налогом
 oauthInfo: Управо си се пријавио помоћу спољног налога. Направили смо ти насумично корисничко име. Ако желиш да промениш корисничко име или направиш нову лозинку за свој налог, иди на страницу свог профила.
-statistics: Статистика
 languageSelection: Избор језика
 color-scheme:
   title: Тема
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: Људи који су реаговали на овај пројекат
     all: "Све"
-  languageVersion: 'Верзија Catrobat језика: %languageVersion%'
   updateAppHeaderDownload: Преузимање није могуће
   updateAppTextDownload: Ажурирај апликацију на најновију верзију. Имај у виду да све Android функције још нису доступне на iOS-у.
   checkout_this_project: Погледај овај Catrobat пројекат
@@ -649,7 +643,6 @@ previous: Претходно
 media-packages:
   title: Медијатека
   description: У следећим категоријама можеш пронаћи ликове и објекте које можеш додати у своје пројекте.
-  theme-special: '%flavor% тематски специјал'
   search-results: Резултати претраге медијатеке
 flavor:
   pocketcode: Pocket Code

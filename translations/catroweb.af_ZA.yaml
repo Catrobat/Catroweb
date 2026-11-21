@@ -12,8 +12,6 @@ username: Gebruikersnaam
 password: Wagwoord
 email: E-pos
 about: Oor Catrobat
-chat: Klets en forums
-others: Ander
 googlePlay: Google Play
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Geen erkennings beskikbaar nie.
 notesAndCreditsDescription: Hoe het jy hierdie projek geskep? Het jy idees, skripte of kunswerk van ander mense gebruik? Bedank hulle hier.
 projectImportedFromScratch: Hierdie projek is vanaf MIT Scratch ingevoer. Jy kan die oorspronklike projek bekyk
 scratchImportedProjectLinkHere: hier.
-country: Land
 privacyPolicy: Privaatheidsbeleid
 projectDetails: Besonderhede
 somethingWentWrong: 'Oeps, iets het nie gewerk nie. Probeer asseblief weer!'
@@ -47,7 +44,6 @@ doesNotExist: 'Die versoekte hulpbron bestaan nie.'
 pleaseTryAgain: 'Probeer asseblief weer!'
 tryAgainButton: 'Probeer weer'
 more: 'meer'
-less: 'minder'
 show-more: 'Meer inligting'
 more-information: 'Meer inligting'
 less-information: 'Minder inligting'
@@ -68,7 +64,6 @@ users: "Gebruiker"
 studios: "Studio's"
 oauthPopUpTitle: "Inligting oor aanteken met eksterne rekening"
 oauthInfo: "Jy het pas 'n eksterne rekening gebruik om aan te teken. Ons het 'n ewekansige gebruikersnaam vir jou geskep. As jy jou gebruikersnaam wil verander of 'n nuwe wagwoord vir jou rekening wil skep, gaan asseblief na jou profielblad."
-statistics: "Statistieke"
 languageSelection: "Taalkeuse"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Mense wat op hierdie projek gereageer het"
     all: "Alles"
-  languageVersion: 'Catrobat-taalweergawe: %languageVersion%'
   updateAppHeaderDownload: Aflaai nie moontlik nie
   updateAppTextDownload: Dateer asseblief jou app op na die nuutste weergawe. Let daarop dat nog nie alle Android-funksies op iOS beskikbaar is nie.
   checkout_this_project: Kyk na hierdie Catrobat-projek
@@ -650,7 +644,6 @@ previous: Vorige
 media-packages:
   title: Mediabiblioteek
   description: In die volgende kategorieë kan jy akteurs en objekte vind om by jou projekte te voeg.
-  theme-special: "%flavor%-temaspesiaal"
   search-results: Soekresultate in mediabiblioteek
 flavor:
   pocketcode: Pocket Code

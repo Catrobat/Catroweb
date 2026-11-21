@@ -12,8 +12,6 @@ username: 'Όνομα χρήστη'
 password: 'Κωδικός πρόσβασης'
 email: 'Email'
 about: Σχετικά με το Catrobat
-chat: 'Συνομιλία και φόρουμ'
-others: 'Άλλα'
 googlePlay: Google Play
 iosAppStore: 'App Store για iOS'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Δεν υπάρχουν διαθέσιμες ευχαριστίες.
 notesAndCreditsDescription: 'Πώς δημιούργησες αυτό το έργο; Χρησιμοποίησες ιδέες, σενάρια ή γραφικά από άλλους; Ευχαρίστησέ τους εδώ.'
 projectImportedFromScratch: 'Αυτό το έργο εισήχθη από το MIT Scratch. Μπορείς να δεις το αρχικό έργο'
 scratchImportedProjectLinkHere: 'εδώ.'
-country: Χώρα
 privacyPolicy: Πολιτική απορρήτου
 projectDetails: 'Λεπτομέρειες'
 somethingWentWrong: 'Ούπς, κάτι πήγε στραβά...'
@@ -47,7 +44,6 @@ doesNotExist: 'Το ζητούμενο στοιχείο δεν υπάρχει.'
 pleaseTryAgain: 'Δοκίμασε ξανά!'
 tryAgainButton: 'Δοκίμασε ξανά'
 more: 'Περισσότερα'
-less: 'λιγότερο'
 show-more: 'Περισσότερες πληροφορίες'
 more-information: 'Περισσότερες πληροφορίες'
 less-information: 'Λιγότερες πληροφορίες'
@@ -68,7 +64,6 @@ users: 'Χρήστες'
 studios: 'Στούντιο'
 oauthPopUpTitle: 'Πληροφορίες σύνδεσης με εξωτερικό λογαριασμό'
 oauthInfo: 'Μόλις συνδέθηκες με εξωτερικό λογαριασμό. Δημιουργήσαμε για σένα ένα τυχαίο όνομα χρήστη. Αν θέλεις να αλλάξεις το όνομα χρήστη ή να ορίσεις νέο κωδικό πρόσβασης για τον λογαριασμό σου, πήγαινε στη σελίδα του προφίλ σου.'
-statistics: 'Στατιστικά'
 languageSelection: 'Επιλογή γλώσσας'
 color-scheme:
   title: 'Θέμα'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Άτομα που αντέδρασαν σε αυτό το έργο'
     all: 'Όλα'
-  languageVersion: 'Έκδοση γλώσσας Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Η λήψη δεν είναι δυνατή'
   updateAppTextDownload: 'Ενημέρωσε την εφαρμογή σου στη νεότερη έκδοση. Έχε υπόψη ότι δεν είναι ακόμα διαθέσιμες όλες οι λειτουργίες του Android στο iOS.'
   checkout_this_project: 'Δες αυτό το έργο Catrobat'
@@ -649,7 +643,6 @@ previous: 'Προηγούμενο'
 media-packages:
   title: 'Βιβλιοθήκη πολυμέσων'
   description: 'Στις παρακάτω κατηγορίες θα βρεις χαρακτήρες και αντικείμενα για να τα προσθέσεις στα έργα σου.'
-  theme-special: 'Ειδικό θέμα %flavor%'
   search-results: 'Αποτελέσματα αναζήτησης στη βιβλιοθήκη πολυμέσων'
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: nume de utilizator
 password: Parolă
 email: "E-mail"
 about: Despre Catrobat
-chat: "Chat și forumuri"
-others: "Altele"
 googlePlay: Magazin Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: "Nicio mențiune disponibilă."
 notesAndCreditsDescription: "Cum ai creat acest proiect? Ai folosit idei, scripturi sau grafică de la alte persoane? Mulțumește-le aici."
 projectImportedFromScratch: "Acest proiect a fost importat din MIT Scratch. Poți vedea proiectul original"
 scratchImportedProjectLinkHere: "aici."
-country: Țară
 privacyPolicy: Politică de confidenţialitate
 projectDetails: "Detalii"
 somethingWentWrong: 'Ups... ceva nu a mers bine.'
@@ -47,7 +44,6 @@ doesNotExist: "Resursa solicitată nu există."
 pleaseTryAgain: 'Încearcă din nou!'
 tryAgainButton: "Încearcă din nou"
 more: 'Mai mult'
-less: 'Mai puțin'
 show-more: "Mai multe informații"
 more-information: "Mai multe informații"
 less-information: "Mai puține informații"
@@ -68,7 +64,6 @@ users: "Utilizatori"
 studios: "Studiouri"
 oauthPopUpTitle: "Informații despre conectarea cu un cont extern"
 oauthInfo: "Tocmai te-ai conectat cu un cont extern. Ți-am creat un nume de utilizator aleatoriu. Dacă vrei să-ți schimbi numele de utilizator sau să creezi o parolă nouă pentru contul tău, mergi la pagina ta de profil."
-statistics: "Statistici"
 languageSelection: "Alegerea limbii"
 color-scheme:
   title: "Temă"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Persoane care au reacționat la acest proiect"
     all: "Toate"
-  languageVersion: "Versiunea limbajului Catrobat: %languageVersion%"
   updateAppHeaderDownload: "Descărcarea nu este posibilă"
   updateAppTextDownload: "Actualizează aplicația la cea mai nouă versiune. Reține că nu toate funcțiile Android sunt deja disponibile pe iOS."
   checkout_this_project: "Descoperă acest proiect Catrobat"
@@ -627,7 +621,6 @@ previous: "Anterior"
 media-packages:
   title: "Biblioteca media"
   description: "În categoriile următoare găsești actori și obiecte pe care să le adaugi în proiectele tale."
-  theme-special: "Ediție specială %flavor%"
   search-results: "Rezultatele căutării în biblioteca media"
 flavor:
   pocketcode: Pocket Code

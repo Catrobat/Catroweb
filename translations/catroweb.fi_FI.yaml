@@ -12,8 +12,6 @@ username: Käyttäjänimi
 password: Salasana
 email: Sähköposti
 about: Tietoa Catrobatista
-chat: Chat ja foorumit
-others: Muut
 googlePlay: Google Play
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Tekijätietoja ei ole saatavilla.
 notesAndCreditsDescription: Miten loit tämän projektin? Käytitkö muiden ideoita, skriptejä tai grafiikkaa? Kiitä heitä tässä.
 projectImportedFromScratch: Tämä projekti on tuotu MIT Scratchista. Voit katsoa alkuperäisen projektin
 scratchImportedProjectLinkHere: täältä.
-country: Maa
 privacyPolicy: Tietosuojakäytäntö
 projectDetails: Tiedot
 somethingWentWrong: 'Hups, jokin ei toiminut. Yritä uudelleen!'
@@ -47,7 +44,6 @@ doesNotExist: 'Pyydettyä resurssia ei ole olemassa.'
 pleaseTryAgain: 'Yritä uudelleen!'
 tryAgainButton: 'Yritä uudelleen'
 more: 'lisää'
-less: 'vähemmän'
 show-more: 'Lisätietoja'
 more-information: 'Lisätietoja'
 less-information: 'Vähemmän tietoja'
@@ -68,7 +64,6 @@ users: "Käyttäjät"
 studios: "Studiot"
 oauthPopUpTitle: "Tietoa kirjautumisesta ulkoisella tilillä"
 oauthInfo: 'Kirjauduit juuri sisään ulkoisella tilillä. Loimme sinulle satunnaisen käyttäjänimen. Jos haluat vaihtaa käyttäjänimesi tai luoda tilillesi uuden salasanan, siirry profiilisivullesi.'
-statistics: "Tilastot"
 languageSelection: "Kielen valinta"
 color-scheme:
   title: 'Teema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Projektiin reagoineet"
     all: "Kaikki"
-  languageVersion: 'Catrobat-kielen versio: %languageVersion%'
   updateAppHeaderDownload: Lataus ei ole mahdollinen
   updateAppTextDownload: Päivitä sovelluksesi uusimpaan versioon. Huomaa, että kaikki Android-ominaisuudet eivät ole vielä saatavilla iOS:ssä.
   checkout_this_project: Katso tämä Catrobat-projekti
@@ -649,7 +643,6 @@ previous: Edellinen
 media-packages:
   title: Mediakirjasto
   description: Seuraavista kategorioista löydät hahmoja ja objekteja lisättäväksi projekteihisi.
-  theme-special: "%flavor%-teeman erikoisuudet"
   search-results: Mediakirjaston hakutulokset
 flavor:
   pocketcode: Pocket Code

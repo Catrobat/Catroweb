@@ -12,8 +12,6 @@ username: பயனர் பெயர்
 password: கடவுச்சொல்
 email: மின்னஞ்சல்
 about: கேட்ரோபாட் பற்றி
-chat: அரட்டை மற்றும் மன்றங்கள்
-others: மற்றவைகள்
 googlePlay: கூகுள் பிளே அங்காடி
 iosAppStore: iOS பயனி அங்காடி
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: எந்த குறிப்புகளும் பொதுவ�
 notesAndCreditsDescription: 'இந்தத் திட்டத்தை நீ எப்படி உருவாக்கினாய்? மற்றவர்களின் யோசனைகள், ஸ்கிரிப்டுகள் அல்லது படங்களைப் பயன்படுத்தினாயா? இங்கே அவர்களுக்கு நன்றி சொல்.'
 projectImportedFromScratch: 'இந்தத் திட்டம் MIT Scratch-இலிருந்து இறக்குமதி செய்யப்பட்டது. அசல் திட்டத்தை நீ பார்க்கலாம்'
 scratchImportedProjectLinkHere: 'இங்கே.'
-country: நாடு
 privacyPolicy: சுய செயலிட கொள்கை
 projectDetails: விவரங்கள்
 somethingWentWrong: 'ஐய்யோ! ஏதோ தவறாய் நிகழ்ந்து விட்டது.'
@@ -47,7 +44,6 @@ doesNotExist: 'கோரப்பட்ட வளம் இல்லை.'
 pleaseTryAgain: 'தயவுசெய்து மீண்டும் முயற்சிக்கவும்!'
 tryAgainButton: 'மீண்டும் முயற்சி செய்'
 more: 'மிகுதி'
-less: 'குறைவு'
 show-more: 'மேலும் காட்டுக'
 more-information: 'மேற்கொண்ட தகவல்கள்'
 less-information: 'குறைந்த தகவல்களுக்கு'
@@ -68,7 +64,6 @@ users: 'பயனர்'
 studios: 'ஸ்டுடியோக்கள்'
 oauthPopUpTitle: 'வெளிக் கணக்கு உள்நுழைவு தகவல்'
 oauthInfo: 'தற்போது நீங்கள் உள்நுழைய ஒரு வெளிக் கணக்கைப் பயன்படுத்தியுள்ளீர்கள். உங்களுக்காக ஒரு சீரற்ற பயனர்பெயரை நாங்கள் உருவாக்கியுள்ளோம்.  உங்கள் பயனர்பெயரை மாற்ற விரும்பினால் அல்லது உங்கள் கணக்கிற்கு புதிய கடவுச்சொல்லை உருவாக்க விரும்பினால் எனது சுயவிவரப் பக்கத்திற்குச் செல்லவும்.  உங்கள் சுயவிவரப் பக்கத்திற்குச் செல்ல %link_start% இங்கே %link_end% தோட்டு எடுங்கள்'
-statistics: 'புள்ளிவிவரம்'
 languageSelection: 'மொழித் தேர்வு'
 color-scheme:
   title: 'தீம்'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: 'இந்தத் திட்டத்துக்கு எதிர்வினையாற்றியவர்கள்'
     all: 'அனைத்தும்'
-  languageVersion: 'Catrobat மொழிப் பதிப்பு: %languageVersion%'
   updateAppHeaderDownload: 'பதிவிறக்கம் சாத்தியமில்லை'
   updateAppTextDownload: 'உன் செயலியைச் சமீபத்திய பதிப்புக்குப் புதுப்பி. எல்லா Android அம்சங்களும் iOS-இல் இன்னும் கிடைக்கவில்லை என்பதைக் கவனி.'
   checkout_this_project: 'இந்த Catrobat திட்டத்தைப் பார்'
@@ -629,7 +623,6 @@ previous: முந்தைய
 media-packages:
   title: மீடியா-தொகுப்புகள்
   description: பின்வரும் வகைகளில் நீங்கள் உங்கல் Pocket Code திட்டங்கலில் சேர்க்க கூடுதல் நடிகர்கள் மற்றும் பொருள்களைக் காணலாம்.
-  theme-special: '%flavor% சிறப்பு தீம்'
   search-results: ஊடக நூலக தேடல் முடிவுகள்
 flavor:
   pocketcode: Pocket Code

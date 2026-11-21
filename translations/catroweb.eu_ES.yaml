@@ -12,8 +12,6 @@ username: 'Erabiltzaile-izena'
 password: 'Pasahitza'
 email: 'Helbide elektronikoa:'
 about: Catrobati buruz
-chat: Txata eta foroak
-others: Bestelakoak
 googlePlay: Google Play Denda
 iosAppStore: iOS App denda
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Ez dago aipamenik eskuragarri.
 notesAndCreditsDescription: Nola sortu duzu proiektu hau? Beste jende batzuen ideia, script edo artelanak erabili al dituzu? Eskerrak eman iezazkiezu hemen.
 projectImportedFromScratch: 'Proiektu hau MIT Scratch-etik inportatu da. Jatorrizko proiektua ikus dezakezu'
 scratchImportedProjectLinkHere: 'hemen.'
-country: Herrialdea
 privacyPolicy: Pribatutasun politika
 projectDetails: 'Xehetasunak'
 somethingWentWrong: 'Ai ene! Zerbait ez doa ongi.'
@@ -47,7 +44,6 @@ doesNotExist: 'Eskatutako baliabidea ez da existitzen.'
 pleaseTryAgain: 'Saiatu berriro mesedez!'
 tryAgainButton: 'Saiatu berriro'
 more: 'gehiago'
-less: 'gutxiago'
 show-more: 'Erakutsi gehiago'
 more-information: 'Informazio gehiago'
 less-information: 'Informazio gutxiago'
@@ -68,7 +64,6 @@ users: "Erabiltzaileak"
 studios: 'Estudioak'
 oauthPopUpTitle: "Kanpoko kontu baten saio hasteari buruzko informazioa"
 oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat asmatu dugu zuretzat. Erabiltzailearen izena edo pasahitza aldatu nahi baduzu joan mesedez zure profilaren orrialdera.'
-statistics: "Estatistikak"
 languageSelection: 'Hizkuntza-hautaketa'
 color-scheme:
   title: 'Gaia'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Proiektu horri erreakzionatu dioten pertsonak'
     all: "Dena"
-  languageVersion: 'Catrobat hizkuntzaren bertsioa: %languageVersion%'
   updateAppHeaderDownload: 'Ezin da deskargatu'
   updateAppTextDownload: 'Eguneratu zure aplikazioa azken bertsiora. Kontuan izan Androideko eginbide guztiak ez daudela oraindik iOSen eskuragarri.'
   checkout_this_project: 'Begiratu Catrobat proiektu hau'
@@ -649,7 +643,6 @@ previous: 'Aurrekoa'
 media-packages:
   title: 'Multimedia-liburutegia'
   description: 'Kategoria hauetan zure proiektuetan gehitzeko aktoreak eta objektuak aurki ditzakezu.'
-  theme-special: '%flavor% gai berezia'
   search-results: 'Multimedia-liburutegiko bilaketa-emaitzak'
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: ชื่อผู้ใช้
 password: รหัสผ่าน
 email: อีเมล
 about: เกี่ยวกับ Catrobat
-chat: แชทและฟอรัม
-others: อื่นๆ
 googlePlay: Google Play สโตร์
 iosAppStore: IOS App store
 instagram: อินสตาแกรม
@@ -37,7 +35,6 @@ noCredits: ไม่มีเครดิต
 notesAndCreditsDescription: คุณสร้างโครงการนี้ได้อย่างไร คุณใช้ไอเดียสคริปต์หรืออาร์ตเวิร์คจากคนอื่นหรือไม่? ขอบคุณพวกเขาที่นี่
 projectImportedFromScratch: โปรเจ็กต์นี้นำเข้าจาก MIT Scratch สามารถตรวจสอบโครงการเดิมได้
 scratchImportedProjectLinkHere: ที่นี่
-country: ประเทศ
 privacyPolicy: นโยบายความเป็นส่วนตัว
 projectDetails: รายละเอียด
 somethingWentWrong: 'Ooooops เกิดข้อผิดพลาดบางอย่าง'
@@ -47,7 +44,6 @@ doesNotExist: 'ไม่มีทรัพยากรที่ร้องข�
 pleaseTryAgain: 'กรุณาลองอีกครั้ง!'
 tryAgainButton: "ลองอีกครั้ง"
 more: 'เพิ่มเติม'
-less: 'ย่อ'
 show-more: 'ดูเพิ่มเติม'
 more-information: 'ข้อมูลมากกว่านี้'
 less-information: 'ข้อมูลน้อยลง'
@@ -68,7 +64,6 @@ users: "ผู้ใช้"
 studios: "สตูดิโอ"
 oauthPopUpTitle: "ข้อมูลการลงชื่อเข้าใช้บัญชีภายนอก"
 oauthInfo: "คุณเพิ่งใช้บัญชีภายนอกเพื่อเข้าสู่ระบบ เราได้สร้างชื่อผู้ใช้แบบสุ่มให้คุณ ถ้าอยากเปลี่ยนชื่อผู้ใช้หรือสร้างรหัสผ่านใหม่สำหรับบัญชี ไปที่หน้าโปรไฟล์ของคุณได้เลย"
-statistics: "สถิติ"
 languageSelection: "การเลือกภาษา"
 color-scheme:
   title: "ธีม"
@@ -178,7 +173,6 @@ project:
   likes:
     likersTitle: "ผู้ที่ตอบสนองต่อโครงการนั้น"
     all: "ทั้งหมด"
-  languageVersion: 'เวอร์ชันภาษา Catrobat: %languageVersion%'
   updateAppHeaderDownload: ดาวน์โหลดไม่ได้
   updateAppTextDownload: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันใหม่ล่าสุด โปรดทราบว่าคุณลักษณะของ Android บางรายการอาจไม่พร้อมใช้งานบน IOS อยู่แล้ว
   checkout_this_project: ชำระเงินโครงการ Catrobat นี้
@@ -649,7 +643,6 @@ previous: ก่อนหน้า
 media-packages:
   title: แพ็คเกจสื่อ
   description: ในหมวดหมู่ต่อไปนี้คุณสามารถค้นหาตัวแสดงและวัตถุเพิ่มเติมเพื่อเพิ่มให้กับโปรเจ็กต์ PocketCode ของคุณ
-  theme-special: "%flavor% ธีมพิเศษ"
   search-results: ผลการค้นหาไลบรารีสื่อ
 flavor:
   pocketcode: พอกเก็ต โค้ด

@@ -12,8 +12,6 @@ username: Jina la mtumiaji
 password: Nenosiri
 email: Barua pepe
 about: Kuhusu Catrobat
-chat: "Gumzo na majukwaa"
-others: "Mengineyo"
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: "Uliundaje mradi huu? Je, ulitumia mawazo, hati au michoro ya watu wengine? Washukuru hapa."
 projectImportedFromScratch: "Mradi huu uliletwa kutoka MIT Scratch. Unaweza kuangalia mradi asili"
 scratchImportedProjectLinkHere: "hapa."
-country: Nchi
 privacyPolicy: Sera ya Faragha
 projectDetails: Maelezo
 somethingWentWrong: 'Ooooops kitu kilienda vibaya.'
@@ -47,7 +44,6 @@ doesNotExist: "Rasilimali uliyoomba haipo."
 pleaseTryAgain: 'Tafadhali jaribu tena!'
 tryAgainButton: "Jaribu tena"
 more: 'zaidi'
-less: "kidogo"
 show-more: 'More information'
 more-information: "Maelezo zaidi"
 less-information: "Maelezo machache"
@@ -68,7 +64,6 @@ users: "Watumiaji"
 studios: "Studio"
 oauthPopUpTitle: "Taarifa za kuingia kwa akaunti ya nje"
 oauthInfo: "Umetumia akaunti ya nje kuingia. Tumekuundia jina la mtumiaji la nasibu. Ukitaka kubadilisha jina lako la mtumiaji au kuunda nenosiri jipya la akaunti yako, nenda kwenye ukurasa wako wa wasifu."
-statistics: "Takwimu"
 languageSelection: "Uchaguzi wa lugha"
 color-scheme:
   title: "Mandhari"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Watu walioitikia mradi huo"
     all: "Vyote/Yote"
-  languageVersion: "Toleo la lugha ya Catrobat: %languageVersion%"
   updateAppHeaderDownload: "Kupakua hakuwezekani"
   updateAppTextDownload: "Tafadhali sasisha programu yako hadi toleo jipya zaidi. Fahamu kwamba si vipengele vyote vya Android vinapatikana tayari kwenye IOS."
   checkout_this_project: "Angalia mradi huu wa Catrobat"
@@ -627,7 +621,6 @@ previous: "Iliyotangulia"
 media-packages:
   title: "Maktaba ya Media"
   description: "Katika kategoria zifuatazo unaweza kupata wahusika na vitu vya kuongeza kwenye miradi yako."
-  theme-special: "Maalum ya Mandhari ya %flavor%"
   search-results: "Matokeo ya utafutaji wa maktaba ya media"
 flavor:
   pocketcode: Msimbo Mfuko

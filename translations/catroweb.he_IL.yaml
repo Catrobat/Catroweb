@@ -12,8 +12,6 @@ username: שם משתמש
 password: סיסמה
 email: "דוא\"ל"
 about: על אודות Catrobat
-chat: "צ'אט ופורומים"
-others: "אחרים"
 googlePlay: חנות Google Play
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: "אין הערות וקרדיטים."
 notesAndCreditsDescription: "איך יצרת את הפרויקט הזה? השתמשת ברעיונות, בתסריטים או ביצירות של אנשים אחרים? הודה להם כאן."
 projectImportedFromScratch: "פרויקט זה יובא מ-MIT Scratch. אפשר לראות את הפרויקט המקורי"
 scratchImportedProjectLinkHere: "כאן."
-country: מדינה
 privacyPolicy: מדיניות פרטיות
 projectDetails: "פרטים"
 somethingWentWrong: 'Ooooops משהו השתבש.'
@@ -47,7 +44,6 @@ doesNotExist: "המשאב המבוקש לא קיים."
 pleaseTryAgain: 'אנא נסה שנית!'
 tryAgainButton: "נסה שוב"
 more: 'יותר'
-less: 'פחות'
 show-more: "הצג עוד"
 more-information: "מידע נוסף"
 less-information: "פחות מידע"
@@ -68,7 +64,6 @@ users: "משתמש"
 studios: "סטודיו"
 oauthPopUpTitle: "מידע על התחברות עם חשבון חיצוני"
 oauthInfo: "הרגע התחברת עם חשבון חיצוני. יצרנו עבורך שם משתמש אקראי. אם ברצונך לשנות את שם המשתמש או ליצור סיסמה חדשה לחשבון שלך, עבור לדף הפרופיל שלך."
-statistics: "סטטיסטיקה"
 languageSelection: "בחירת שפה"
 color-scheme:
   title: "ערכת נושא"
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "אנשים שהגיבו לפרויקט הזה"
     all: "הכל"
-  languageVersion: "גרסת שפת Catrobat: %languageVersion%"
   updateAppHeaderDownload: "ההורדה אינה אפשרית"
   updateAppTextDownload: "עדכן את האפליקציה שלך לגרסה העדכנית ביותר. שים לב שלא כל התכונות של Android זמינות כבר ב-iOS."
   checkout_this_project: "בוא לראות את פרויקט ה-Catrobat הזה"
@@ -649,7 +643,6 @@ previous: "הקודם"
 media-packages:
   title: "ספריית מדיה"
   description: "בקטגוריות הבאות אפשר למצוא דמויות ואובייקטים להוספה לפרויקטים שלך."
-  theme-special: "מיוחד לערכת הנושא %flavor%"
   search-results: "תוצאות חיפוש בספריית המדיה"
 flavor:
   pocketcode: פוקטקוד

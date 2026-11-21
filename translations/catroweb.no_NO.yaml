@@ -12,8 +12,6 @@ username: Brukernavn
 password: Passord
 email: E-post
 about: Om Catrobat
-chat: Chat og forum
-others: Annet
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: Hvordan opprettet du dette prosjektet? Bruk du ideer, skript eller kunstverk fra andre folk? Takk dem her.
 projectImportedFromScratch: 'Dette prosjektet ble importert fra MIT Scratch. Du kan se det opprinnelige prosjektet'
 scratchImportedProjectLinkHere: 'her.'
-country: Land
 privacyPolicy: Personvern
 projectDetails: Detaljer
 somethingWentWrong: 'Ooops, noe gikk galt.'
@@ -47,7 +44,6 @@ doesNotExist: 'Den forespurte ressursen finnes ikke.'
 pleaseTryAgain: 'Vennligst prøv igjen!'
 tryAgainButton: 'Prøv igjen'
 more: 'mer'
-less: 'mindre'
 show-more: 'More information'
 more-information: 'Mer informasjon'
 less-information: 'Mindre informasjon'
@@ -68,7 +64,6 @@ users: 'Bruker'
 studios: "Studioer"
 oauthPopUpTitle: "Innloggingsinformasjon for ekstern konto"
 oauthInfo: 'Du har nettopp brukt en ekstern konto for å logge inn. Vi opprettet et tilfeldig brukernavn for deg. Hvis du ønsker å endre brukernavnet ditt eller opprette et nytt passord for din konto, kan du gå til profilsiden din.'
-statistics: "Statistikk"
 languageSelection: 'Språkvalg'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Personer som reagerte på dette prosjektet'
     all: "Alle"
-  languageVersion: 'Catrobat-språkversjon: %languageVersion%'
   updateAppHeaderDownload: 'Nedlasting ikke mulig'
   updateAppTextDownload: 'Oppdater appen din til nyeste versjon. Vær oppmerksom på at ikke alle Android-funksjoner er tilgjengelige på iOS ennå.'
   checkout_this_project: 'Sjekk ut dette Catrobat-prosjektet'
@@ -649,7 +643,6 @@ previous: Forrige
 media-packages:
   title: Media-Pakker
   description: I følgende kategorier kan du finne flere figurer og objekter for å legge til deg PocketCode-prosjekter.
-  theme-special: "%flavor% Tema Spesial"
   search-results: Søkeresultater fra mediebiblioteket
 flavor:
   pocketcode: Pocket Code

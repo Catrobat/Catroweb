@@ -12,8 +12,6 @@ username: Nome de usuário
 password: Senha
 email: 'E-mail'
 about: Sobre o Catrobat
-chat: Bate-papo e fóruns
-others: Outros
 googlePlay: Google Play Store
 iosAppStore: Loja de Aplicativos IOS
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Créditos não disponíveis.
 notesAndCreditsDescription: Como você criou este projeto? Você usou ideias, scripts ou artes de outras pessoas? Agradeça elas aqui.
 projectImportedFromScratch: Este projeto foi importado do MIT Scratch. Você poderá conferir o projeto original
 scratchImportedProjectLinkHere: aqui.
-country: País
 privacyPolicy: Política de Privacidade
 projectDetails: Detalhes
 somethingWentWrong: 'Ooooops! Algo deu errado.'
@@ -47,7 +44,6 @@ doesNotExist: 'O recurso solicitado não existe.'
 pleaseTryAgain: 'Por favor, tente de novo!'
 tryAgainButton: 'Tentar novamente'
 more: 'mais'
-less: 'menos'
 show-more: 'Mostre mais'
 more-information: 'Mais informações'
 less-information: 'Menos informações'
@@ -68,7 +64,6 @@ users: "Usuários"
 studios: "Estúdios"
 oauthPopUpTitle: "Informação de login da conta externa"
 oauthInfo: 'Você acabou de usar uma conta externa para entrar. Criamos um nome de usuário aleatório para você. Se quiser mudar seu nome de usuário ou criar uma nova senha para sua conta, acesse sua página de perfil.'
-statistics: "Estatísticas"
 languageSelection: "Seleção de idioma"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Pessoas que reagiram a este projeto"
     all: "Todos"
-  languageVersion: 'Versão da Linguagem Catrobat: %languageVersion%'
   updateAppHeaderDownload: Não foi possível baixar
   updateAppTextDownload: Por favor, atualize seu aplicativo para a versão mais recente. Esteja ciente de que nem todos os recursos do Android já estão disponíveis no IOS.
   checkout_this_project: Confira este projeto do Catrobat
@@ -649,7 +643,6 @@ previous: Anterior
 media-packages:
   title: Mídia-Pacotes
   description: Nas seguintes categorias, você pode encontrar atores e objetos para adicionar a seus projetos do Pocket Code.
-  theme-special: "Tema especial para %flavor%"
   search-results: Resultados da pesquisa da biblioteca
 flavor:
   pocketcode: Pocket Code

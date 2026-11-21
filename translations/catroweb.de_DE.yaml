@@ -12,8 +12,6 @@ username: Benutzername
 password: Passwort
 email: E-Mail
 about: Über Catrobat
-chat: Chat und Foren
-others: Andere
 googlePlay: Google Play Store
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Keine Notizen und Credits verfügbar.
 notesAndCreditsDescription: Wie hast du dieses Projekt erstellt? Hast du Ideen, Skripte oder Kunstwerke von anderen Leuten verwendet? Danke ihnen hier.
 projectImportedFromScratch: Dieses Projekt wurde von MIT Scratch importiert. Du kannst sich das ursprüngliche Projekt ansehen
 scratchImportedProjectLinkHere: hier.
-country: Land
 privacyPolicy: Datenschutz-Vereinbarung
 projectDetails: Einzelheiten
 somethingWentWrong: 'Ooooops etwas ging schief.'
@@ -47,7 +44,6 @@ doesNotExist: 'Die angefragte Ressource existiert nicht.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 tryAgainButton: 'Erneut versuchen'
 more: 'mehr'
-less: 'weniger'
 show-more: 'Mehr'
 more-information: 'Mehr Information'
 less-information: 'Weniger Informationen'
@@ -68,7 +64,6 @@ users: "Benutzer"
 studios: "Studios"
 oauthPopUpTitle: "Externe Logininformationen"
 oauthInfo: 'Du hast dich gerade mit einem externen Konto angemeldet. Wir haben einen zufälligen Benutzernamen für dich erstellt. Wenn du deinen Benutzernamen ändern oder ein neues Passwort für dein Konto festlegen möchtest, geh bitte auf deine Profilseite.'
-statistics: "Statistiken"
 languageSelection: "Sprachwahl"
 color-scheme:
   title: 'Design'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Benutzer, die auf dieses Projekt reagiert haben"
     all: "Alle"
-  languageVersion: 'Catrobat Sprachversion: %languageVersion%'
   updateAppHeaderDownload: Download nicht möglich
   updateAppTextDownload: Bitte aktualisiere deine App auf die neueste Version. Sei dir bewusst, dass nicht alle Android Funktionen bereits auf IOS verfügbar sind.
   checkout_this_project: Sieh dir diese Catrobat Projekt an
@@ -666,7 +660,6 @@ previous: Vorheriges
 media-packages:
   title: Medien-Pakete
   description: In den folgenden Kategorien kannst du zusätzliche Figuren und Objekte zu deinem PocketCode Programm hinzufügen.
-  theme-special: "%flavor% Themen-Special"
   search-results: Medienbibliothek Suchergebnisse
 flavor:
   pocketcode: Pocket Code

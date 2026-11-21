@@ -12,8 +12,6 @@ username: Імʼя користувача
 password: Пароль
 email: Електронна пошта
 about: Про нас
-chat: Чат та форуми
-others: Інше
 googlePlay: Google Play Store
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Немає доступних приміток та авторів.
 notesAndCreditsDescription: Як ти створив(-ла) цей проєкт? Чи використовував(-ла) ідеї, скрипти чи витвори інших людей? Скажи їм спасибі тут.
 projectImportedFromScratch: Цей проєкт імпортовано з MIT Scratch. Ти можеш переглянути оригінальний проєкт
 scratchImportedProjectLinkHere: тут.
-country: Країна
 privacyPolicy: Політика конфіденційності
 projectDetails: Подробиці
 somethingWentWrong: 'Упс, щось пішло не так.'
@@ -47,7 +44,6 @@ doesNotExist: 'Наведеного ресурсу не існує.'
 pleaseTryAgain: 'Будь ласка, спробуй ще раз!'
 tryAgainButton: "Спробувати ще раз"
 more: 'більше'
-less: 'менше'
 show-more: 'Показати більше'
 more-information: 'Більше інформації'
 less-information: 'Менше інформації'
@@ -68,7 +64,6 @@ users: "Користувачі"
 studios: "Студії"
 oauthPopUpTitle: "Інформація про вхід через зовнішній обліковий запис"
 oauthInfo: 'Ти щойно використав(-ла) зовнішній обліковий запис для входу. Ми створили для тебе випадкове ім’я користувача. Якщо хочеш змінити ім’я користувача або створити новий пароль для свого облікового запису, перейди на сторінку свого профілю.'
-statistics: "Показники"
 languageSelection: "Вибір мови"
 color-scheme:
   title: "Тема"
@@ -178,7 +173,6 @@ project:
   likes:
     likersTitle: "Люди, які відреагували на цей проєкт"
     all: "Усі"
-  languageVersion: 'Версія мови Catrobat: %languageVersion%'
   updateAppHeaderDownload: Завантажити неможливо
   updateAppTextDownload: Будь ласка, онови додаток до найновішої версії. Май на увазі, що не всі функції Android вже доступні на IOS.
   checkout_this_project: Оціни цей проєкт Catrobat
@@ -650,7 +644,6 @@ previous: Попередній
 media-packages:
   title: Медіа пакети
   description: У наступних категоріях ти можеш знайти додаткових персонажів й об’єктів, щоб додати у свої проєкти Pocket Code.
-  theme-special: "Спеціальна тема %flavor%"
   search-results: Результати пошуку медіатеки
 flavor:
   pocketcode: Pocket Code

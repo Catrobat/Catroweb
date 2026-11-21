@@ -12,8 +12,6 @@ username: Nama pengguna
 password: Kata sandi
 email: E-mail
 about: Tentang Catrobat
-chat: Obrolan dan forum
-others: Lainnya
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Tidak ada catatan dan kredit yang tersedia.
 notesAndCreditsDescription: Bagaimana kamu membuat proyek ini? Apakah kamu menggunakan ide, skrip, atau karya seni dari orang lain? Berterimakasihlah di sini.
 projectImportedFromScratch: 'Proyek ini diimpor dari MIT Scratch. Kamu bisa melihat proyek aslinya'
 scratchImportedProjectLinkHere: 'di sini.'
-country: Negara
 privacyPolicy: Kebijakan privasi
 projectDetails: Rincian
 somethingWentWrong: 'Ups ada kesalahan.'
@@ -47,7 +44,6 @@ doesNotExist: 'Sumber yang diminta tidak ada.'
 pleaseTryAgain: 'Silahkan coba lagi!'
 tryAgainButton: 'Coba lagi'
 more: 'lebih'
-less: 'kurang'
 show-more: 'Menampilkan lebih banyak'
 more-information: 'Informasi lebih lanjut'
 less-information: 'Lebih sedikit informasi'
@@ -68,7 +64,6 @@ users: 'Pengguna'
 studios: 'Studio'
 oauthPopUpTitle: "Informasi masuk akun eksternal"
 oauthInfo: 'Kamu baru saja menggunakan akun eksternal untuk masuk. Kami membuat nama pengguna acak untuk kamu. Jika kamu ingin mengubah nama pengguna atau membuat kata sandi baru untuk akun kamu, silakan buka halaman profil saya.'
-statistics: "Statistik"
 languageSelection: 'Pilihan bahasa'
 color-scheme:
   title: 'Tema'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: 'Orang yang bereaksi pada proyek ini'
     all: "Semua"
-  languageVersion: 'Versi bahasa Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Unduhan tidak memungkinkan'
   updateAppTextDownload: 'Perbarui aplikasimu ke versi terbaru. Perlu diketahui, belum semua fitur Android tersedia di iOS.'
   checkout_this_project: 'Lihat proyek Catrobat ini'
@@ -629,7 +623,6 @@ previous: Sebelumnya
 media-packages:
   title: Paket Media
   description: Dalam kategori berikut, kamu dapat menemukan aktor dan objek tambahan untuk ditambahkan ke proyek PocketCode kamu.
-  theme-special: "%flavor% Tema Spesial"
   search-results: Hasil pencarian perpustakaan media
 flavor:
   pocketcode: Pocket Code

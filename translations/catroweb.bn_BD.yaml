@@ -12,8 +12,6 @@ username: ব্যবহারকারীর নাম
 password: পাসওয়ার্ড
 email: ই-মেল
 about: ক্যাট্রোব্যাট সম্পর্কে
-chat: চ্যাট এবং ফোরাম
-others: অন্যান্য
 googlePlay: গুগল প্লে
 iosAppStore: iOS অ্যাপ স্টোর
 instagram: ইনস্টাগ্রাম
@@ -37,7 +35,6 @@ noCredits: কোনো নোট ও কৃতজ্ঞতা নেই।
 notesAndCreditsDescription: তুমি এই প্রকল্পটি কীভাবে তৈরি করলে? তুমি কি অন্যদের ধারণা, স্ক্রিপ্ট বা ছবি ব্যবহার করেছ? এখানে তাদের ধন্যবাদ জানাও।
 projectImportedFromScratch: এই প্রকল্পটি MIT Scratch থেকে আনা হয়েছে। তুমি মূল প্রকল্পটি দেখতে পারো
 scratchImportedProjectLinkHere: এখানে।
-country: দেশ
 privacyPolicy: গোপনীয়তার নীতি
 projectDetails: বিস্তারিত
 somethingWentWrong: 'উফ, কিছু একটা কাজ করেনি। আবার চেষ্টা করো!'
@@ -47,7 +44,6 @@ doesNotExist: 'যা খুঁজছ তা নেই।'
 pleaseTryAgain: 'আবার চেষ্টা করো!'
 tryAgainButton: 'আবার চেষ্টা করো'
 more: 'আরও'
-less: 'কম'
 show-more: 'আরও দেখাও'
 more-information: 'আরো তথ্য'
 less-information: 'কম তথ্য'
@@ -68,7 +64,6 @@ users: "ব্যবহারকারী"
 studios: "স্টুডিও"
 oauthPopUpTitle: "বাহ্যিক অ্যাকাউন্ট সাইন ইন তথ্য"
 oauthInfo: 'তুমি এইমাত্র একটি বাহ্যিক অ্যাকাউন্ট দিয়ে লগ ইন করেছ। আমরা তোমার জন্য একটি এলোমেলো ব্যবহারকারীর নাম তৈরি করেছি। তুমি যদি তোমার ব্যবহারকারীর নাম বদলাতে বা তোমার অ্যাকাউন্টের জন্য নতুন পাসওয়ার্ড তৈরি করতে চাও, তাহলে তোমার প্রোফাইল পেজে যাও।'
-statistics: "পরিসংখ্যান"
 languageSelection: "ভাষা নির্বাচন"
 color-scheme:
   title: 'থিম'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "যারা এই প্রকল্পে প্রতিক্রিয়া দিয়েছে"
     all: "সব"
-  languageVersion: 'ক্যাট্রোব্যাট ভাষার সংস্করণ: %languageVersion%'
   updateAppHeaderDownload: ডাউনলোড সম্ভব নয়
   updateAppTextDownload: তোমার অ্যাপটি সবচেয়ে নতুন সংস্করণে আপডেট করো। মনে রেখো, Android-এর সব ফিচার এখনো iOS-এ পাওয়া যায় না।
   checkout_this_project: এই ক্যাট্রোব্যাট প্রকল্পটি দেখো
@@ -649,7 +643,6 @@ previous: পূর্ববর্তী
 media-packages:
   title: মিডিয়া লাইব্রেরি
   description: নিচের বিভাগগুলোতে তুমি তোমার প্রকল্পে যোগ করার জন্য চরিত্র ও অবজেক্ট খুঁজে পাবে।
-  theme-special: "%flavor% থিম বিশেষ"
   search-results: মিডিয়া লাইব্রেরি অনুসন্ধান ফলাফল
 flavor:
   pocketcode: পকেট কোড

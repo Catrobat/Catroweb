@@ -12,8 +12,6 @@ username: "Sunan mai amfani"
 password: "Kalmar sirri"
 email: "Imel"
 about: "Game da Catrobat"
-chat: "Hira da dandali"
-others: "Sauran"
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: "Yaya ka ƙirƙiri wannan aikin? Ka yi amfani da ra'ayoyi, rubuce-rubuce ko zane-zane na wasu mutane? Gode musu a nan."
 projectImportedFromScratch: "An shigo da wannan aikin daga MIT Scratch. Za ka iya duba asalin aikin"
 scratchImportedProjectLinkHere: "a nan."
-country: "Ƙasa"
 privacyPolicy: "Manufar Sirri"
 projectDetails: "Cikakkun bayanai"
 somethingWentWrong: "Kai, wani abu bai yi aiki ba. Don Allah sake gwadawa!"
@@ -47,7 +44,6 @@ doesNotExist: "Abin da aka nema babu shi."
 pleaseTryAgain: "Don Allah sake gwadawa!"
 tryAgainButton: "Sake gwadawa"
 more: "ƙari"
-less: "kaɗan"
 show-more: 'More information'
 more-information: "Ƙarin bayani"
 less-information: "Ƙarancin bayani"
@@ -68,7 +64,6 @@ users: "Masu amfani"
 studios: "Situdiyo"
 oauthPopUpTitle: "Bayanin shiga da asusun waje"
 oauthInfo: "Yanzu ka yi amfani da asusun waje don shiga. Mun ƙirƙira maka sunan mai amfani na bazuwar. Idan kana son canza sunan mai amfani ko ƙirƙirar sabuwar kalmar sirri don asusunka, don Allah je shafin bayananka."
-statistics: "Ƙididdiga"
 languageSelection: "Zaɓin harshe"
 color-scheme:
   title: "Jigo"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Mutanen da suka yi martani ga wannan aikin"
     all: "All"
-  languageVersion: "Sigar harshen Catrobat: %languageVersion%"
   updateAppHeaderDownload: "Saukewa ba zai yiwu ba"
   updateAppTextDownload: "Don Allah sabunta manhajarka zuwa sabuwar sigar. Ka sani cewa ba duk fasalolin Android ne ke samuwa a IOS ba tukuna."
   checkout_this_project: "Duba wannan aikin Catrobat"
@@ -626,7 +620,6 @@ previous: "Na baya"
 media-packages:
   title: "Ɗakin Kafofin Watsa Labarai"
   description: "A cikin rukunan da ke biye za ka iya samun 'yan wasa da abubuwa don ƙarawa ga ayyukanka."
-  theme-special: "Na Musamman na Jigon %flavor%"
   search-results: "Sakamakon bincike a ɗakin kafofin watsa labarai"
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: 'उपयोगकर्ता नाम:'
 password: 'पारण शब्द:'
 email: ई-मेल
 about: कैटरोबैट के बारे में
-chat: चैट और फ़ोरम
-others: अन्य
 googlePlay: गूगल प्ले स्टोर
 iosAppStore: IOS App store
 instagram: इंस्टाग्राम
@@ -37,7 +35,6 @@ noCredits: कोई श्रेय उपलब्ध नहीं है।
 notesAndCreditsDescription: "तुमने यह प्रोजेक्ट कैसे बनाया? क्या तुमने अन्य लोगों से विचारों, लिपियों या कलाकृति का उपयोग किया था? उन्हें यहाँ धन्यवाद।"
 projectImportedFromScratch: "यह प्रोजेक्ट MIT Scratch से आयात किया गया था। तुम मूल प्रोजेक्ट देख सकते हो"
 scratchImportedProjectLinkHere: "यहाँ।"
-country: देश
 privacyPolicy: गोपनीयता नीति
 projectDetails: विवरण
 somethingWentWrong: 'ओह, कुछ गलत हो गया।'
@@ -47,7 +44,6 @@ doesNotExist: 'अनुरोधित संसाधन मौजूद न�
 pleaseTryAgain: "कृपया फिर से कोशिश करो!"
 tryAgainButton: "फिर से कोशिश करो"
 more: 'अधिक'
-less: 'कम'
 show-more: 'और दिखाओ'
 more-information: 'अधिक जानकारी'
 less-information: 'कम जानकारी'
@@ -68,7 +64,6 @@ users: "उपयोगकर्ता"
 studios: "स्टूडियो"
 oauthPopUpTitle: "बाहरी अकाउंट में प्रवेश की जानकारी"
 oauthInfo: "\nतुमने अभी प्रवेश करने के लिए किसी बाहरी अकाउंट का उपयोग किया है। हमने तुम्हारे लिए नया उपभोक्ता नाम बनाया है। अगर तुम अपना उपभोक्ता नाम बदलना चाहते हो या नया पासवर्ड बनाना चाहते हो तो अपने प्रोफाइल पेज पर जाओ।"
-statistics: "आंकड़े"
 languageSelection: "भाषा चयन"
 color-scheme:
   title: "थीम"
@@ -163,7 +158,6 @@ project:
   likes:
     likersTitle: "इस प्रोजेक्ट पर प्रतिक्रिया देने वाले लोग"
     all: "सब"
-  languageVersion: "Catrobat भाषा संस्करण: %languageVersion%"
   updateAppHeaderDownload: डाउनलोड संभव नहीं है
   updateAppTextDownload: "कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करो। सावधान रहो कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।"
   checkout_this_project: "यह Catrobat प्रोजेक्ट देखो"
@@ -691,7 +685,6 @@ previous: पहले का
 media-packages:
   title: मीडिया-संकुल
   description: "निम्नलिखित श्रेणियों में तुम पॉकेटकोड परियोजनाओं को जोड़ने के लिए अतिरिक्त अभिनेताओं और वस्तुओं को पा सकते हो।"
-  theme-special: "%flavor% थीम विशेष"
   search-results: मीडिया लाइब्रेरी खोज परिणाम
 flavor:
   pocketcode: पॉकेट कोड

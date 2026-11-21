@@ -12,8 +12,6 @@ username: Корисничко име
 password: Лозинка
 email: 'Е-пошта'
 about: 'За Catrobat'
-chat: 'Разговор и форуми'
-others: 'Друго'
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Нема наведени заслуги.'
 notesAndCreditsDescription: 'Како го создаде овој проект? Дали користеше идеи, скрипти или слики од други луѓе? Заблагодари им се овде.'
 projectImportedFromScratch: 'Овој проект е увезен од MIT Scratch. Можеш да го погледнеш оригиналниот проект'
 scratchImportedProjectLinkHere: 'овде.'
-country: Држава
 privacyPolicy: Политика за приватност
 projectDetails: 'Детали'
 somethingWentWrong: 'Уупс, се појави неочекувана грешка.'
@@ -47,7 +44,6 @@ doesNotExist: 'Бараниот ресурс не постои.'
 pleaseTryAgain: 'Обиди се повторно!'
 tryAgainButton: 'Обиди се повторно'
 more: 'повеќе'
-less: 'помалку'
 show-more: 'Прикажи повеќе'
 more-information: 'Повеќе информации'
 less-information: 'Помалку информации'
@@ -68,7 +64,6 @@ users: 'Корисници'
 studios: 'Студија'
 oauthPopUpTitle: 'Информации за најава со надворешна сметка'
 oauthInfo: 'Штотуку се најави со надворешна сметка. Создадовме случајно корисничко име за тебе. Ако сакаш да го промениш корисничкото име или да создадеш нова лозинка за сметката, оди на страницата на твојот профил.'
-statistics: 'Статистика'
 languageSelection: 'Избор на јазик'
 color-scheme:
   title: 'Тема'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: 'Луѓе што реагирале на тој проект'
     all: 'Сите'
-  languageVersion: 'Верзија на јазикот Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Преземањето не е можно'
   updateAppTextDownload: 'Ажурирај ја апликацијата на најновата верзија. Имај предвид дека не сите функции од Android се веќе достапни на iOS.'
   checkout_this_project: 'Погледни го овој Catrobat проект'
@@ -627,7 +621,6 @@ previous: 'Претходно'
 media-packages:
   title: 'Медиумска библиотека'
   description: 'Во следниве категории можеш да најдеш ликови и објекти за да ги додадеш во своите проекти.'
-  theme-special: '%flavor% тематски специјал'
   search-results: 'Резултати од пребарувањето во медиумската библиотека'
 flavor:
   pocketcode: Pocket Code

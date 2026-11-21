@@ -12,8 +12,6 @@ username: يُوزرنانءُ
 password: ڳجھو لفظ
 email: اي ميل
 about: ڪيٽروبيٽ جي باري ۾
-chat: 'چيٽ ۽ فورم'
-others: 'ٻيا'
 googlePlay: گوگل پلي
 iosAppStore: 'IOS ايپ اسٽور'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'ڪي به ڪريڊٽس موجود ناهن.'
 notesAndCreditsDescription: 'تو هي پروجيڪٽ ڪيئن ٺاهيو؟ ڇا تو ٻين ماڻهن جا خيال، اسڪرپٽ يا آرٽ ورڪ استعمال ڪيا؟ هتي انهن جو شڪريو ادا ڪر.'
 projectImportedFromScratch: 'هي پروجيڪٽ MIT Scratch مان امپورٽ ڪيو ويو هو. تون اصل پروجيڪٽ ڏسي سگهين ٿو'
 scratchImportedProjectLinkHere: 'هتي.'
-country: ملڪ
 privacyPolicy: پرئيويسي پوليسي
 projectDetails: 'تفصيل'
 somethingWentWrong: 'اوه... ڪجھ ڳڙ ٻڙ ٿي وئي آهي.'
@@ -47,7 +44,6 @@ doesNotExist: 'گهربل وسيلو موجود ناهي.'
 pleaseTryAgain: 'ٻيهر ڪوشش ڪر!'
 tryAgainButton: 'ٻيهر ڪوشش ڪر'
 more: 'وڌيڪ'
-less: 'گھٽ'
 show-more: 'وڌيڪ معلومات'
 more-information: 'وڌيڪ معلومات'
 less-information: 'گهٽ معلومات'
@@ -68,7 +64,6 @@ users: 'يوزر'
 studios: 'اسٽوڊيوز'
 oauthPopUpTitle: 'ٻاهرين کاتي سان سائن اِن جي معلومات'
 oauthInfo: 'تو لاگ اِن ڪرڻ لاءِ هڪ ٻاهريون کاتو استعمال ڪيو آهي. اسان تنهنجي لاءِ هڪ بي ترتيب يوزرنيم ٺاهيو آهي. جيڪڏهن تون پنهنجو يوزرنيم بدلائڻ يا پنهنجي کاتي لاءِ نئون پاسورڊ ٺاهڻ چاهين ٿو ته مهرباني ڪري پنهنجي پروفائل صفحي تي وڃ.'
-statistics: 'انگ اکر'
 languageSelection: 'ٻولي جي چونڊ'
 color-scheme:
   title: 'ٿيم'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'ماڻهو جن هن پروجيڪٽ تي ردعمل ڏنو'
     all: 'سڀ'
-  languageVersion: 'Catrobat ٻولي جو ورزن: %languageVersion%'
   updateAppHeaderDownload: 'ڊائونلوڊ ممڪن ناهي'
   updateAppTextDownload: 'مهرباني ڪري پنهنجي ايپ کي تازي ورزن تي اپڊيٽ ڪر. ياد رک ته Android جون سڀ خاصيتون اڃا IOS تي موجود ناهن.'
   checkout_this_project: 'هي Catrobat پروجيڪٽ ڏس'
@@ -648,7 +642,6 @@ previous: 'پويون'
 media-packages:
   title: 'ميڊيا لائبريري'
   description: 'هيٺين ڪيٽيگرين ۾ تون پنهنجن پروجيڪٽن ۾ شامل ڪرڻ لاءِ اداڪار ۽ شيون ڳولي سگهين ٿو.'
-  theme-special: '%flavor% ٿيم اسپيشل'
   search-results: 'ميڊيا لائبريري جي ڳولا جا نتيجا'
 flavor:
   pocketcode: پاڪيٽ ڪوڊ

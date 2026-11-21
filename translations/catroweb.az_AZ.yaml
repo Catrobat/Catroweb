@@ -12,8 +12,6 @@ username: İstifadəçi adı
 password: Şifrə
 email: E-poçt
 about: Catrobat haqqında
-chat: Söhbət və forumlar
-others: Digərləri
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Heç kim yoxdur.
 notesAndCreditsDescription: 'Bu layihəni necə yaratdın? Başqalarının ideyalarından, skriptlərindən və ya rəsmlərindən istifadə etdin? Onlara burada təşəkkür et.'
 projectImportedFromScratch: 'Bu layihə MIT Scratch-dan idxal edilib. Orijinal layihəyə baxa bilərsən'
 scratchImportedProjectLinkHere: 'burada.'
-country: Ölkə
 privacyPolicy: Gizlilik Siyasəti
 projectDetails: 'Ətraflı'
 somethingWentWrong: 'Ups, nəsə səhv getdi.'
@@ -47,7 +44,6 @@ doesNotExist: 'İstənilən resurs mövcud deyil.'
 pleaseTryAgain: 'Yenidən cəhd et!'
 tryAgainButton: 'Yenidən cəhd et'
 more: 'daha çox'
-less: 'daha az'
 show-more: 'Daha çox göstər'
 more-information: 'Daha çox məlumat'
 less-information: 'Daha az məlumat'
@@ -68,7 +64,6 @@ users: 'İstifadəçilər'
 studios: 'Studiyalar'
 oauthPopUpTitle: "Xarici hesabla daxil olma məlumatları"
 oauthInfo: 'Giriş üçün indicə xarici hesabdan istifadə etdin. Sənin üçün təsadüfi istifadəçi adı yaratdıq. İstifadəçi adını dəyişmək və ya hesabın üçün yeni şifrə yaratmaq istəyirsənsə, profil səhifənə keç.'
-statistics: "Statistikalar"
 languageSelection: 'Dil seçimi'
 color-scheme:
   title: 'Mövzu'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Bu layihəyə reaksiya verənlər'
     all: 'Hamısı'
-  languageVersion: 'Catrobat dil versiyası: %languageVersion%'
   updateAppHeaderDownload: 'Endirmək mümkün deyil'
   updateAppTextDownload: 'Tətbiqini ən yeni versiyaya yenilə. Nəzərə al ki, bütün Android funksiyaları hələ iOS-da mövcud deyil.'
   checkout_this_project: 'Bu Catrobat layihəsinə bax'
@@ -649,7 +643,6 @@ previous: Əvvəlki
 media-packages:
   title: Media Paketləri
   description: 'Aşağıdakı kateqoriyalarda layihələrinə əlavə etmək üçün aktyorlar və obyektlər tapa bilərsən.'
-  theme-special: '%flavor% xüsusi mövzusu'
   search-results: 'Media kitabxanasında axtarış nəticələri'
 flavor:
   pocketcode: Pocket Code

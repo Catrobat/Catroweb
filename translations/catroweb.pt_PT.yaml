@@ -12,8 +12,6 @@ username: Nome de utilizador
 password: Palavra-passe
 email: Endereço de Correio Electrónico
 about: Sobre o Catrobat
-chat: 'Chat e fóruns'
-others: 'Outros'
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: 'Instagram'
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'Como criaste este projeto? Usaste ideias, scripts ou imagens de outras pessoas? Agradece-lhes aqui.'
 projectImportedFromScratch: 'Este projeto foi importado do MIT Scratch. Podes ver o projeto original'
 scratchImportedProjectLinkHere: 'aqui.'
-country: País
 privacyPolicy: Política de Privacidade
 projectDetails: Pormenores
 somethingWentWrong: 'Ooooops! Algo correu mal.'
@@ -47,7 +44,6 @@ doesNotExist: 'O recurso pedido não existe.'
 pleaseTryAgain: 'Por favor, tente de novo!'
 tryAgainButton: 'Tentar novamente'
 more: 'mais'
-less: 'menos'
 show-more: 'More information'
 more-information: 'Mais informações'
 less-information: 'Menos informações'
@@ -68,7 +64,6 @@ users: 'Utilizador'
 studios: 'Estúdios'
 oauthPopUpTitle: 'Informação sobre o início de sessão com conta externa'
 oauthInfo: 'Acabaste de usar uma conta externa para iniciar sessão. Criámos um nome de utilizador aleatório para ti. Se quiseres mudar o teu nome de utilizador ou criar uma nova palavra-passe para a tua conta, vai à tua página de perfil.'
-statistics: 'Estatísticas'
 languageSelection: 'Seleção de idioma'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Pessoas que reagiram a este projeto'
     all: "Todos"
-  languageVersion: 'Versão da linguagem Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Não é possível descarregar'
   updateAppTextDownload: 'Atualiza a tua aplicação para a versão mais recente. Tem em conta que nem todas as funcionalidades do Android estão já disponíveis no iOS.'
   checkout_this_project: 'Vê este projeto Catrobat'
@@ -649,7 +643,6 @@ previous: 'Anterior'
 media-packages:
   title: 'Biblioteca multimédia'
   description: 'Nas categorias seguintes podes encontrar atores e objetos para adicionares aos teus projetos.'
-  theme-special: 'Especial do tema %flavor%'
   search-results: 'Resultados da pesquisa na biblioteca multimédia'
 flavor:
   pocketcode: Pocket Code

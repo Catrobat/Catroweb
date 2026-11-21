@@ -12,8 +12,6 @@ username: Korisničko ime
 password: Lozinka
 email: E-mail
 about: O Catrobat
-chat: 'Ćaskanje i forumi'
-others: 'Ostalo'
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Zasluge nisu navedene.
 notesAndCreditsDescription: 'Kako je nastao ovaj projekat? Da li su korišćene ideje, skripte ili slike drugih ljudi? Zahvali im se ovde.'
 projectImportedFromScratch: 'Ovaj projekat je uvezen sa MIT Scratch-a. Originalni projekat možeš pogledati'
 scratchImportedProjectLinkHere: 'ovde.'
-country: Država
 privacyPolicy: Pravila privatnosti
 projectDetails: Detalji
 somethingWentWrong: 'Izvini, došlo je do greške.'
@@ -47,7 +44,6 @@ doesNotExist: 'Traženi resurs ne postoji.'
 pleaseTryAgain: 'Pokušaj ponovo!'
 tryAgainButton: 'Pokušaj ponovo'
 more: 'više'
-less: 'manje'
 show-more: 'Prikaži još'
 more-information: 'Više informacija'
 less-information: 'Manje informacija'
@@ -68,7 +64,6 @@ users: 'Korisnik'
 studios: 'Studiji'
 oauthPopUpTitle: 'Informacije o prijavi preko spoljnog naloga'
 oauthInfo: 'Za prijavu je upravo korišćen spoljni nalog. Napravili smo ti nasumično korisničko ime. Ako želiš da promeniš korisničko ime ili napraviš novu lozinku za svoj nalog, idi na stranicu svog profila.'
-statistics: 'Statistika'
 languageSelection: 'Izbor jezika'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Ljudi koji su reagovali na ovaj projekat'
     all: "Sve"
-  languageVersion: 'Verzija Catrobat jezika: %languageVersion%'
   updateAppHeaderDownload: 'Preuzimanje nije moguće'
   updateAppTextDownload: 'Ažuriraj aplikaciju na najnoviju verziju. Imaj na umu da sve Android funkcije još nisu dostupne na iOS-u.'
   checkout_this_project: 'Pogledaj ovaj Catrobat projekat'
@@ -649,7 +643,6 @@ previous: Prethodno
 media-packages:
   title: 'Medijska biblioteka'
   description: 'U sledećim kategorijama možeš pronaći dodatne glumce i objekte koje možeš dodati u svoje Pocket Code projekte.'
-  theme-special: 'Specijalna tema: %flavor%'
   search-results: Rezultati pretrage medijske biblioteke
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: ユーザー名
 password: パスワード
 email: メール
 about: キャトロバットについて
-chat: チャットとフォーラム
-others: その他
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 利用可能なメモとクレジットはありません。
 notesAndCreditsDescription: どのようにしてこのプロジェクトを作ったのですか? アイデア、スクリプト、または他の人々のアートワークを使ったのですか?
 projectImportedFromScratch: "このプロジェクトは MIT Scratch からインポートされました。元のプロジェクトはこちらで確認できます："
 scratchImportedProjectLinkHere: "ここ。"
-country: 国
 privacyPolicy: プライバシーポリシー
 projectDetails: 詳細
 somethingWentWrong: '何か間違っています。'
@@ -47,7 +44,6 @@ doesNotExist: "リクエストされたリソースは存在しません。"
 pleaseTryAgain: 'もう一度やり直してください。'
 tryAgainButton: "もう一度試す"
 more: '詳細'
-less: '少ない'
 show-more: '詳細を表示'
 more-information: '詳細情報'
 less-information: '情報を減らす'
@@ -68,7 +64,6 @@ users: "ユーザー"
 studios: "スタジオ"
 oauthPopUpTitle: "外部アカウントのサインイン情報"
 oauthInfo: '外部アカウントを使用してログインしました。ランダムなユーザー名を作成しました。 ユーザー名を変更したい場合、またはアカウントの新しいパスワードを作成したい場合は、プロフィールページにアクセスしてください。'
-statistics: "統計情報"
 languageSelection: "言語の選択"
 color-scheme:
   title: "テーマ"
@@ -167,7 +162,6 @@ project:
   likes:
     likersTitle: "このプロジェクトにリアクションした人"
     all: "すべて"
-  languageVersion: "Catrobat 言語バージョン：%languageVersion%"
   updateAppHeaderDownload: "ダウンロードできません"
   updateAppTextDownload: "アプリを最新バージョンに更新してください。なお、Android のすべての機能が IOS で使えるわけではありません。"
   checkout_this_project: "この Catrobat プロジェクトを見てみてください"
@@ -636,7 +630,6 @@ previous: 前
 media-packages:
   title: メディアパッケージ
   description: 以下のカテゴリでは、PocketCode プロジェクトに追加する追加のアクターやオブジェクトを見つけることができます。
-  theme-special: "%flavor% テーマスペシャル"
   search-results: メディアライブラリの検索結果
 flavor:
   pocketcode: ポケット\nコード

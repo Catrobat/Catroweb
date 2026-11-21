@@ -12,8 +12,6 @@ username: 'Wo din'
 password: 'Ahintasɛm'
 email: 'E-Mail'
 about: 'Fa Catrobat ho'
-chat: 'Nkɔmmɔ ne fɔrɔm'
-others: 'Afoforɔ'
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: 'Instagram'
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'Ɛyɛɛ dɛn na woyɛɛ adwuma yi? Wode afoforɔ adwene, scripts anaa mfonini dii dwuma? Da wɔn ase wɔ ha.'
 projectImportedFromScratch: 'Wɔde adwuma yi fi MIT Scratch na ɛbaeɛ. Wobɛtumi ahwɛ adwuma a ɛdi kan no'
 scratchImportedProjectLinkHere: 'ha.'
-country: 'Ɔman'
 privacyPolicy: 'Kokoamsɛm nhyehyɛeɛ'
 projectDetails: 'Nsɛm a ɛfa ho'
 somethingWentWrong: 'Ao, biribi anyɛ yie. Mesrɛ wo, san bɔ mmɔden!'
@@ -47,7 +44,6 @@ doesNotExist: 'Adeɛ a wohwehwɛ no nni hɔ.'
 pleaseTryAgain: 'Mesrɛ wo, san bɔ mmɔden!'
 tryAgainButton: 'San bɔ mmɔden'
 more: 'pii'
-less: 'kakra'
 show-more: 'More information'
 more-information: 'Nsɛm pii'
 less-information: 'Nsɛm kakra'
@@ -68,7 +64,6 @@ users: 'Odwumanifoɔ'
 studios: 'Studios'
 oauthPopUpTitle: 'Akawnt foforɔ a wode wura mu ho nsɛm'
 oauthInfo: 'Woade akawnt foforɔ awura mu seesei ara. Yɛayɛ din bi ama wo. Sɛ wopɛ sɛ wosesa wo din anaa woyɛ ahintasɛm foforɔ ma wo akawnt a, kɔ wo profaele kratafa so.'
-statistics: 'Akontaabuo'
 languageSelection: 'Kasa a wopɛ'
 color-scheme:
   title: 'Ahosuo'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: 'Nnipa a wɔamua adwuma no'
     all: 'All'
-  languageVersion: 'Catrobat kasa nkyekyɛmu: %languageVersion%'
   updateAppHeaderDownload: 'Wontumi ntwe'
   updateAppTextDownload: 'Mesrɛ wo, yɛ wo app no foforɔ. Hyɛ no nsow sɛ Android nneɛma nyinaa nni IOS so ɛ.'
   checkout_this_project: 'Hwɛ Catrobat adwuma yi'
@@ -623,7 +617,6 @@ previous: 'Deɛ atwam'
 media-packages:
   title: 'Media korabea'
   description: 'Wobɛhu agofomma ne nneɛma a wobɛtumi de aka wo nnwuma ho wɔ nkyekyɛmu a ɛdi so yi mu.'
-  theme-special: '%flavor% ahosuo soronko'
   search-results: 'Media korabea nhwehwɛmu nsunsuansoɔ'
 flavor:
   pocketcode: Pocket Code

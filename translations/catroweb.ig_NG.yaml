@@ -12,8 +12,6 @@ username: 'Aha njirimara'
 password: 'Okwuntụghe'
 email: 'Ozi-e'
 about: 'Gbasara Catrobat'
-chat: 'Mkparịta ụka na ọgbakọ'
-others: 'Ndị ọzọ'
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'Kedu ka i si mepụta ọrụ a? I jiri echiche, script ma ọ bụ ihe osise ndị ọzọ? Kelee ha ebe a.'
 projectImportedFromScratch: 'E bubatara ọrụ a site na MIT Scratch. Ị nwere ike ilele ọrụ mbụ ahụ'
 scratchImportedProjectLinkHere: 'ebe a.'
-country: 'Obodo'
 privacyPolicy: 'Iwu Nzuzo'
 projectDetails: 'Nkọwa zuru ezu'
 somethingWentWrong: 'Ewoo, ihe arụghị ọrụ. Biko nwaa ọzọ!'
@@ -47,7 +44,6 @@ doesNotExist: 'Ihe a rịọrọ adịghị.'
 pleaseTryAgain: 'Biko nwaa ọzọ!'
 tryAgainButton: 'Nwaa ọzọ'
 more: 'ọzọ'
-less: 'obere'
 show-more: 'More information'
 more-information: 'Ozi ndị ọzọ'
 less-information: 'Ozi dị obere'
@@ -68,7 +64,6 @@ users: 'Onye ọrụ'
 studios: 'Studio'
 oauthPopUpTitle: 'Ozi nbanye akaụntụ mpụga'
 oauthInfo: 'I jiri akaụntụ mpụga banye. Anyị mepụtaara gị aha njirimara na-enweghị usoro. Ọ bụrụ na ịchọrọ ịgbanwe aha njirimara gị ma ọ bụ mepụta okwuntụghe ọhụrụ maka akaụntụ gị, biko gaa na peeji profaịlụ gị.'
-statistics: 'Ọnụ ọgụgụ'
 languageSelection: 'Nhọrọ asụsụ'
 color-scheme:
   title: 'Isiokwu agba'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Ndị meghachiri omume n'ọrụ ahụ"
     all: 'All'
-  languageVersion: 'Ụdị asụsụ Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Enweghị ike ibudata'
   updateAppTextDownload: 'Biko melite ngwa gị gaa na ụdị kachasị ọhụrụ. Mara na ọ bụghị atụmatụ Android niile dị na IOS ugbu a.'
   checkout_this_project: 'Lelee ọrụ Catrobat a'
@@ -626,7 +620,6 @@ previous: 'Nke gara aga'
 media-packages:
   title: 'Ọbá mgbasa ozi'
   description: "N'ụdị ndị a ị ga-ahụ ndị omee na ihe ị ga-etinye n'ọrụ gị."
-  theme-special: 'Isiokwu pụrụ iche %flavor%'
   search-results: 'Nsonaazụ ọchụchọ ọbá mgbasa ozi'
 flavor:
   pocketcode: Pocket Code

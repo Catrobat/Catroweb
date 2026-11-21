@@ -12,8 +12,6 @@ username: Usuario
 password: Contrasinal
 email: Correo electrónico
 about: 'Sobre Catrobat'
-chat: 'Chat e foros'
-others: 'Outros'
 googlePlay: Google Play
 iosAppStore: 'App Store de iOS'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Non hai créditos dispoñibles.'
 notesAndCreditsDescription: 'Como creaches este proxecto? Usaches ideas, scripts ou deseños doutras persoas? Agradécellelo aquí.'
 projectImportedFromScratch: 'Este proxecto importouse de MIT Scratch. Podes ver o proxecto orixinal'
 scratchImportedProjectLinkHere: 'aquí.'
-country: País
 privacyPolicy: Política de privacidade
 projectDetails: 'Detalles'
 somethingWentWrong: 'Algo non saíu ben.'
@@ -47,7 +44,6 @@ doesNotExist: 'O recurso solicitado non existe.'
 pleaseTryAgain: 'Téntao de novo!'
 tryAgainButton: 'Tentar de novo'
 more: 'máis'
-less: 'menos'
 show-more: 'Máis información'
 more-information: 'Máis información'
 less-information: 'Menos información'
@@ -68,7 +64,6 @@ users: 'Usuario'
 studios: 'Estudios'
 oauthPopUpTitle: 'Información sobre o inicio de sesión cunha conta externa'
 oauthInfo: 'Acabas de iniciar sesión cunha conta externa. Creamos un nome de usuario aleatorio para ti. Se queres cambiar o teu nome de usuario ou crear un novo contrasinal para a túa conta, vai á páxina do teu perfil.'
-statistics: 'Estatísticas'
 languageSelection: 'Selección de idioma'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Persoas que reaccionaron a este proxecto'
     all: 'Todas'
-  languageVersion: 'Versión da linguaxe Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Non é posible descargar'
   updateAppTextDownload: 'Actualiza a túa aplicación á versión máis recente. Ten en conta que non todas as funcións de Android están dispoñibles aínda en iOS.'
   checkout_this_project: 'Bota unha ollada a este proxecto de Catrobat'
@@ -649,7 +643,6 @@ previous: 'Anterior'
 media-packages:
   title: 'Mediateca'
   description: 'Nas seguintes categorías podes atopar actores e obxectos para engadir aos teus proxectos.'
-  theme-special: 'Especial do tema %flavor%'
   search-results: 'Resultados da busca na mediateca'
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: کارن نوم
 password: رمز
 email: ای میل
 about: د Catrobat په اړه
-chat: چیٹ او فورمونه
-others: نور
 googlePlay: Google Play
 iosAppStore: 'iOS App store'
 instagram: انسټاګرام
@@ -37,7 +35,6 @@ noCredits: 'هیڅ یادښتونه او کریډیټونه شتون نه لري
 notesAndCreditsDescription: 'تا دا پروژه څنګه جوړه کړه؟ ایا تا د نورو خلکو نظریات، سکریپټونه یا هنري کار کارولي؟ دلته ترې مننه وکړه.'
 projectImportedFromScratch: 'دا پروژه له MIT Scratch څخه راوړل شوې ده. اصلي پروژه دلته کتلی شې'
 scratchImportedProjectLinkHere: 'دلته.'
-country: هیواد
 privacyPolicy: د پټتیا تګلاره
 projectDetails: جزیات
 somethingWentWrong: 'او یو څه غلط شو.'
@@ -47,7 +44,6 @@ doesNotExist: 'غوښتل شوې سرچینه شتون نه لري.'
 pleaseTryAgain: 'مهرباني وکړه بیا هڅه وکړه!'
 tryAgainButton: 'بیا هڅه وکړه'
 more: 'نور'
-less: 'لږ'
 show-more: 'نور وښیه'
 more-information: 'نور مالومات'
 less-information: 'لږ معلومات'
@@ -68,7 +64,6 @@ users: 'کاروونکی'
 studios: 'سټوډیوګانې'
 oauthPopUpTitle: "د بهرني حساب د ننوتلو معلومات"
 oauthInfo: 'تا همدا اوس د ننوتلو لپاره یو بهرنی حساب وکاراوه. موږ ستا لپاره یو تصادفي کارن نوم جوړ کړ. که غواړې خپل کارن نوم بدل کړې یا د خپل حساب لپاره نوی پټنوم جوړ کړې، مهرباني وکړه خپل پروفایل پاڼې ته لاړ شه.'
-statistics: "احصایې"
 languageSelection: 'د ژبې ټاکنه'
 color-scheme:
   title: 'بڼه'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'هغه کسان چې دې پروژې ته یې غبرګون ښودلی'
     all: "ټول"
-  languageVersion: 'د Catrobat ژبې نسخه: %languageVersion%'
   updateAppHeaderDownload: 'ډاونلوډ ممکن نه دی'
   updateAppTextDownload: 'مهرباني وکړه خپل اپ تر ټولو نوې نسخې ته تازه کړه. په یاد ولره چې د Android ټولې ځانګړتیاوې لا په IOS کې نشته.'
   checkout_this_project: 'دا Catrobat پروژه وګوره'
@@ -650,7 +644,6 @@ previous: مخکینی
 media-packages:
   title: د رسنیو کڅوړې
   description: 'په لاندې کټګوریو کې ته کولی شې لوبغاړي او توکي ومومې څو یې خپلو پروژو ته ورزیات کړې.'
-  theme-special: "%flavor% موضوع ځانګړې"
   search-results: د رسنیو کتابتون د لټون پایلې
 flavor:
   pocketcode: Pocket Code

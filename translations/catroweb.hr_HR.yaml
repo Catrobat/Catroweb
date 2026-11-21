@@ -12,8 +12,6 @@ username: Korisničko ime
 password: Lozinka
 email: E-pošta
 about: O Catrobat-u
-chat: Chat i forumi
-others: Ostalo
 googlePlay: Google Play
 iosAppStore: Otvori IOS trgovinu aplikacijama
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Nema dostupnih zasluga.
 notesAndCreditsDescription: Kako je nastao ovaj projekt? Jesi li koristio/la ideje, skripte ili grafike drugih ljudi? Zahvali im ovdje.
 projectImportedFromScratch: Ovaj je projekt uvezen iz MIT Scratcha. Originalni projekt možeš pogledati
 scratchImportedProjectLinkHere: ovdje.
-country: Država
 privacyPolicy: Pravila privatnosti
 projectDetails: Detalji
 somethingWentWrong: 'Ups... nešto je pošlo po zlu.'
@@ -47,7 +44,6 @@ doesNotExist: 'Traženi resurs ne postoji.'
 pleaseTryAgain: 'Pokušaj ponovno!'
 tryAgainButton: 'Pokušaj ponovno'
 more: 'više'
-less: 'manje'
 show-more: 'Prikaži više'
 more-information: 'Više informacija'
 less-information: 'Manje informacija'
@@ -68,7 +64,6 @@ users: "Korisnici"
 studios: "Studiji"
 oauthPopUpTitle: "Informacije o prijavi vanjskim računom"
 oauthInfo: 'Upravo si se prijavio/la vanjskim računom. Izradili smo ti nasumično korisničko ime. Ako želiš promijeniti korisničko ime ili izraditi novu lozinku za svoj račun, idi na stranicu svog profila.'
-statistics: "Statistika"
 languageSelection: "Odabir jezika"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Ljudi koji su reagirali na ovaj projekt"
     all: "Sve"
-  languageVersion: 'Verzija jezika Catrobat: %languageVersion%'
   updateAppHeaderDownload: Preuzimanje nije moguće
   updateAppTextDownload: Ažuriraj aplikaciju na najnoviju verziju. Imaj na umu da sve Android značajke još nisu dostupne na iOS-u.
   checkout_this_project: Pogledaj ovaj Catrobat projekt
@@ -649,7 +643,6 @@ previous: Prethodno
 media-packages:
   title: Medijska biblioteka
   description: U sljedećim kategorijama možeš pronaći likove i objekte koje možeš dodati svojim projektima.
-  theme-special: "%flavor% – posebna tema"
   search-results: Rezultati pretraživanja medijske biblioteke
 flavor:
   pocketcode: Pocket Code

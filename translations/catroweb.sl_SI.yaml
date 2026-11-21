@@ -12,8 +12,6 @@ username: Uporabniško ime
 password: Geslo
 email: E-pošta
 about: O Catrobat
-chat: Klepet in forumi
-others: Drugi
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Ni opomb in zahval.'
 notesAndCreditsDescription: 'Kako si ustvaril/a ta projekt? Si uporabil/a zamisli, skripte ali umetnine drugih ljudi? Zahvali se jim tukaj.'
 projectImportedFromScratch: 'Ta projekt je bil uvožen iz MIT Scratch. Izvirni projekt si lahko ogledaš'
 scratchImportedProjectLinkHere: tukaj.
-country: Država
 privacyPolicy: Pravilnik o zasebnosti
 projectDetails: Podrobnosti
 somethingWentWrong: 'Ojej, nekaj ni šlo prav.'
@@ -47,7 +44,6 @@ doesNotExist: 'Zahtevani vir ne obstaja.'
 pleaseTryAgain: 'Poskusi znova!'
 tryAgainButton: 'Poskusi znova'
 more: 'več'
-less: 'manj'
 show-more: 'Pokaži več'
 more-information: 'Več informacij'
 less-information: 'Manj informacij'
@@ -68,7 +64,6 @@ users: "Uporabniki"
 studios: 'Studii'
 oauthPopUpTitle: "Podatki za prijavo v zunanji račun"
 oauthInfo: 'Pravkar si se prijavil/a z zunanjim računom. Zate smo ustvarili naključno uporabniško ime. Če želiš spremeniti uporabniško ime ali ustvariti novo geslo za svoj račun, pojdi na svojo stran profila.'
-statistics: "Statistike"
 languageSelection: 'Izbira jezika'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Ljudje, ki so se odzvali na ta projekt"
     all: "Vse"
-  languageVersion: 'Različica jezika Catrobat: %languageVersion%'
   updateAppHeaderDownload: Prenos ni možen
   updateAppTextDownload: 'Posodobi aplikacijo na najnovejšo različico. Upoštevaj, da v iOS še niso na voljo vse funkcije iz Androida.'
   checkout_this_project: Oglej si ta Catrobat projekt
@@ -649,7 +643,6 @@ previous: 'Nazaj'
 media-packages:
   title: 'Medijska knjižnica'
   description: 'V naslednjih kategorijah najdeš igralce in predmete, ki jih lahko dodaš v svoje projekte.'
-  theme-special: 'Posebna tema %flavor%'
   search-results: 'Rezultati iskanja v medijski knjižnici'
 flavor:
   pocketcode: Pocket Code

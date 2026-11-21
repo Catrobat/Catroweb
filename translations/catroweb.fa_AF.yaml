@@ -12,8 +12,6 @@ username: نام کاربری
 password: رمز عبور
 email: ایمیل
 about: درباره "کت ربات"
-chat: چت و انجمن ها
-others: دیگر
 googlePlay: گوگل پلی
 iosAppStore: IOS App store
 instagram: اینستاگرام
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'این پروژه را چطور ساختی؟ از ایده‌ها، اسکریپت‌ها یا آثار هنری دیگران استفاده کردی؟ اینجا از آن‌ها تشکر کن.'
 projectImportedFromScratch: 'این پروژه از MIT Scratch وارد شده است. می‌توانی پروژه اصلی را ببینی'
 scratchImportedProjectLinkHere: 'اینجا.'
-country: کشور
 privacyPolicy: حریم خصوصی
 projectDetails: جزئيات
 somethingWentWrong: 'ای وای یک مشکلی پیش اومد.'
@@ -47,7 +44,6 @@ doesNotExist: 'منبع درخواست‌شده وجود ندارد.'
 pleaseTryAgain: 'لطفا دوباره سعی کن!'
 tryAgainButton: 'دوباره امتحان کن'
 more: 'بیشتر'
-less: 'کمتر'
 show-more: 'More information'
 more-information: 'اطلاعات بیشتر'
 less-information: 'اطلاعات کمتر'
@@ -68,7 +64,6 @@ users: 'کاربر'
 studios: 'استودیوها'
 oauthPopUpTitle: "حساب خارجی ورود به سیستم اطلاعات"
 oauthInfo: 'تو همین الان با یک حساب خارجی وارد شدی. ما یک نام کاربری تصادفی برایت ساختیم. اگر می‌خواهی نام کاربری‌ات را تغییر دهی یا یک رمز عبور جدید برای حسابت بسازی، لطفاً به صفحه پروفایلت برو.'
-statistics: "آمارها"
 languageSelection: 'انتخاب زبان'
 color-scheme:
   title: 'پوسته'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'کسانی که به این پروژه واکنش نشان دادند'
     all: "همه"
-  languageVersion: 'نسخه زبان Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'دانلود ممکن نیست'
   updateAppTextDownload: 'لطفاً اپلیکیشنت را به جدیدترین نسخه به‌روز کن. توجه داشته باش که همه قابلیت‌های اندروید هنوز روی iOS در دسترس نیستند.'
   checkout_this_project: 'این پروژه Catrobat را ببین'
@@ -652,7 +646,6 @@ previous: قبلی
 media-packages:
   title: بسته های رسانه ای
   description: 'در دسته‌های زیر می‌توانی بازیگرها و اشیای دیگری برای افزودن به پروژه‌های Pocket Code خودت پیدا کنی.'
-  theme-special: "%flavor% موضوع ویژه"
   search-results: نتایج جستجوی کتابخانه رسانه ها
 flavor:
   pocketcode: پاکت کد

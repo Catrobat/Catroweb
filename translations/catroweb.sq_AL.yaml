@@ -12,8 +12,6 @@ username: Përdoruesi
 password: Fjalëkalimi
 email: Email
 about: Rreth Catrobat
-chat: Biseda dhe Forume
-others: Të Tjera
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Nuk ka shënime dhe falënderime.
 notesAndCreditsDescription: Si e krijove këtë projekt? A përdore ide, skripte apo vepra arti nga njerëz të tjerë? Falënderoji këtu.
 projectImportedFromScratch: Ky projekt u importua nga MIT Scratch. Mund ta shikosh projektin origjinal
 scratchImportedProjectLinkHere: këtu.
-country: Shteti
 privacyPolicy: Privatësia
 projectDetails: Detajet
 somethingWentWrong: 'Uuups, diçka shkoi keq.'
@@ -47,7 +44,6 @@ doesNotExist: 'Burimi i kërkuar nuk ekziston'
 pleaseTryAgain: 'Të lutem provo përsëri!'
 tryAgainButton: 'Provo përsëri'
 more: 'më shumë'
-less: 'më pak'
 show-more: 'Shfaq më shumë'
 more-information: 'Më shumë informacion'
 less-information: 'Më pak të dhëna'
@@ -68,7 +64,6 @@ users: "Përdoruesit"
 studios: "Studiot"
 oauthPopUpTitle: "të dhënat e identifikimit të llogarisë së jashtme"
 oauthInfo: 'Sapo përdore një llogari të jashtme për t''u identifikuar. Krijuam një emër përdoruesi të rastësishëm për ty. Nëse dëshiron të ndryshosh emrin e përdoruesit ose të krijosh një fjalëkalim të ri për llogarinë tënde, të lutem shko te faqja e profilit tënd.'
-statistics: "Statistikat"
 languageSelection: "Zgjedhja e gjuhës"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Njerëzit që reaguan ndaj këtij projekti"
     all: "Të gjitha"
-  languageVersion: 'Versioni i gjuhës Catrobat: %languageVersion%'
   updateAppHeaderDownload: Shkarkimi nuk është i mundur
   updateAppTextDownload: Të lutem përditëso aplikacionin në versionin më të ri. Ki parasysh që jo të gjitha veçoritë e Android janë ende të disponueshme në iOS.
   checkout_this_project: Shiko këtë projekt Catrobat
@@ -649,7 +643,6 @@ previous: I mëparshmi
 media-packages:
   title: Paketat e mediave 
   description: Në kategoritë e mëposhtme mund të gjesh aktorë dhe objekte për t'i shtuar te projektet e tua.
-  theme-special: "%flavor% Temë speciale "
   search-results: Rezultatet e kërkimit të bibliotekës mediatike 
 flavor:
   pocketcode: Pocket Code

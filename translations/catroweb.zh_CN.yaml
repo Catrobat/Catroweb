@@ -12,8 +12,6 @@ username: 用户名
 password: 密码
 email: 邮箱
 about: 关于 Catrobat
-chat: 聊天和论坛
-others: 其它
 googlePlay: 谷歌 Play 商店
 iosAppStore: IOS 应用商店
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 没有说明和版权信息
 notesAndCreditsDescription: 您是如何创建这个项目的？是否使用了其他人的想法、脚本或艺术作品？您可以在此对他们表示感谢。
 projectImportedFromScratch: "此项目从 MIT Scratch 导入。你可以查看原始项目"
 scratchImportedProjectLinkHere: "这里。"
-country: 国家
 privacyPolicy: Chính sách bảo mật
 projectDetails: 详细信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
@@ -47,7 +44,6 @@ doesNotExist: '请求的资源不存在。'
 pleaseTryAgain: '再试一次吧！'
 tryAgainButton: "重试"
 more: '更多'
-less: '更少'
 show-more: '显示更多'
 more-information: '详细信息'
 less-information: '隐藏'
@@ -68,7 +64,6 @@ users: "用户"
 studios: "工作室"
 oauthPopUpTitle: "外部帐户登录信息"
 oauthInfo: '您刚刚使用了一个外部帐户登录。我们为您创建了一个随机用户名。 如果你想要更改你的用户名或为你的帐户创建一个新的密码，请访问我的个人资料页面。'
-statistics: "统计"
 languageSelection: "语言选择"
 color-scheme:
   title: "主题"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "对此项目做出反应的人"
     all: "所有"
-  languageVersion: "Catrobat 语言版本：%languageVersion%"
   updateAppHeaderDownload: "无法下载"
   updateAppTextDownload: "请将应用更新到最新版本。请注意，并非所有 Android 功能都已在 IOS 上提供。"
   checkout_this_project: "来看看这个 Catrobat 项目"
@@ -632,7 +626,6 @@ previous: 上一步
 media-packages:
   title: 媒体包
   description: 在以下类别中，您可以找到更多的演员和对象来添加到您的 PocketCode 项目。
-  theme-special: "%flavor% 主题"
   search-results: 媒体库搜索结果
 flavor:
   pocketcode: 口袋编程

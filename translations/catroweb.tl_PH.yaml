@@ -12,8 +12,6 @@ username: Pangalan ng gumagamit
 password: Password
 email: 'Email'
 about: Tungkol sa Catrobat
-chat: Mga usapan at forums
-others: Iba pa
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Walang tala at credits.'
 notesAndCreditsDescription: Paano mo nabuo ang iyong proyekto? Gumamit ka ba ng mga ideya,mga script o artwork mula sa ibang tao? Pasalamatan mo sila rito.
 projectImportedFromScratch: 'Ang proyektong ito ay inangkat mula sa MIT Scratch. Maaari mong tingnan ang orihinal na proyekto'
 scratchImportedProjectLinkHere: 'dito.'
-country: 'Bansa'
 privacyPolicy: Patakaran sa Privacy
 projectDetails: 'Mga detalye'
 somethingWentWrong: 'Naku, may hindi gumana. Pakisubukan ulit!'
@@ -47,7 +44,6 @@ doesNotExist: 'Hindi umiiral ang hinihinging resource.'
 pleaseTryAgain: 'Pakisubukan ulit!'
 tryAgainButton: 'Subukan ulit'
 more: 'higit pa'
-less: 'mas kaunti'
 show-more: 'Ipakita ang higit pa'
 more-information: 'Higit pang impormasyon'
 less-information: 'Mas kaunting impormasyon'
@@ -68,7 +64,6 @@ users: 'Mga user'
 studios: 'Mga studio'
 oauthPopUpTitle: 'Impormasyon sa pag-sign in gamit ang external na account'
 oauthInfo: 'Gumamit ka ng external na account para mag-login. Gumawa kami ng random na username para sa iyo. Kung gusto mong palitan ang iyong username o gumawa ng bagong password para sa iyong account, pumunta sa iyong profile page.'
-statistics: 'Estadistika'
 languageSelection: 'Pagpili ng wika'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Mga taong nag-react sa proyektong iyon'
     all: "All"
-  languageVersion: 'Bersyon ng wikang Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Hindi ma-download'
   updateAppTextDownload: 'Pakiupdate ang iyong app sa pinakabagong bersyon. Tandaan na hindi pa available sa iOS ang lahat ng feature ng Android.'
   checkout_this_project: 'Tingnan ang proyektong ito sa Catrobat'
@@ -649,7 +643,6 @@ previous: 'Nakaraan'
 media-packages:
   title: 'Aklatan ng media'
   description: 'Sa mga sumusunod na kategorya, makakahanap ka ng mga actor at object na maidaragdag sa iyong mga proyekto.'
-  theme-special: 'Espesyal na tema ng %flavor%'
   search-results: 'Mga resulta ng paghahanap sa aklatan ng media'
 flavor:
   pocketcode: Pocket Code

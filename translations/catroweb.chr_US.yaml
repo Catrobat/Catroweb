@@ -12,8 +12,6 @@ username: 'ᏕᏣᏙᎥ'
 password: 'ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ'
 email: 'Email'
 about: 'Catrobat ᎧᏃᎮᏛ'
-chat: 'ᏗᎦᏬᏂᏍᏗ ᎠᎴ ᏗᎦᎳᏫᎢᏍᏗ'
-others: 'ᏅᏩᏓᎴ'
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'ᎢᏳᏍᏗ ᏂᏣᏛᏁᎸ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ? ᏅᏩᏓᎴ ᏴᏫ ᎤᏁᎳᏅᎯ ᎤᎾᏓᏅᏖᏗ, ᏗᎪᏪᎵ ᎠᎴᏱᎩ ᏗᏟᎶᏍᏔᏅ ᏣᏛᏁᎸᎢ? ᎠᏂ ᏩᏙ ᏫᎾᏕᏥᏪᏏ.'
 projectImportedFromScratch: 'ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ MIT Scratch ᏅᏓᏳᏓᎴᏅᎯ. ᎯᎦᏔᏰᏏ ᎢᎬᏱᏱ ᏚᎸᏫᏍᏓᏁᎸ'
 scratchImportedProjectLinkHere: 'ᎠᏂ.'
-country: 'ᎦᏙᎯ'
 privacyPolicy: 'ᎤᏕᎵᏛ ᏗᏍᏆᏂᎪᏗ ᏗᎧᎿᏩᏛᏍᏗ'
 projectDetails: 'ᏗᎧᏃᎮᏛ'
 somethingWentWrong: 'ᎤᏲ, ᎪᎱᏍᏗ ᎥᏝ ᏳᏍᏆᏛ. ᏔᎵᏁ ᎯᏯᏛᏁᎢ!'
@@ -47,7 +44,6 @@ doesNotExist: 'ᎯᎠ ᎪᎱᏍᏗ ᏣᏲᎲ ᎥᏝ ᏰᎭ.'
 pleaseTryAgain: 'ᏔᎵᏁ ᎯᏯᏛᏁᎢ!'
 tryAgainButton: 'ᏔᎵᏁ ᎯᏯᏛᏁᎢ'
 more: 'ᎤᏟ'
-less: 'ᎤᏍᏗ'
 show-more: 'More information'
 more-information: 'ᎤᏟ ᎧᏃᎮᏛ'
 less-information: 'ᎤᏍᏗ ᎧᏃᎮᏛ'
@@ -68,7 +64,6 @@ users: 'ᏴᏫ'
 studios: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
 oauthPopUpTitle: 'ᏐᎢ ᏕᏣᏙᎥ ᏫᏴᎭ ᎧᏃᎮᏛ'
 oauthInfo: 'ᏐᎢ ᏕᏣᏙᎥ ᏣᏁᏅ ᏫᏴᎯᎲᎢ. ᎪᎱᏍᏗ ᏚᏙᎥ ᏙᏨᏯᏙᏢᏏ. ᎢᏳᏃ ᏕᏣᏙᎥ ᏣᏁᏟᏴᏍᏗ ᎠᎴᏱᎩ ᎢᏤ ᎤᏕᎵᏛ ᎧᏁᎢᏍᏗ ᏣᏙᏢᏍᏗ ᏣᏚᎵᏍᎨᏍᏗ, ᏕᏣᏙᎥ ᏗᎪᏪᎵ ᏫᎷᎩ.'
-statistics: 'ᏗᏎᏍᏗ'
 languageSelection: 'ᎦᏬᏂᎯᏍᏗ ᎯᏑᏰᏍᏓ'
 color-scheme:
   title: 'ᏓᎦᎸᏉᏗ ᎤᏍᏗᎩᏛ'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: 'ᏴᏫ ᎯᎠ ᏚᎸᏫᏍᏓᏁᎸ ᏄᏛᏁᎸ'
     all: 'All'
-  languageVersion: 'Catrobat ᎦᏬᏂᎯᏍᏗ ᎢᏳᏓᎴᎩ: %languageVersion%'
   updateAppHeaderDownload: 'ᎥᏝ ᏰᎵ ᏱᎦᏯᏅ'
   updateAppTextDownload: 'ᎢᏤ app ᎯᏯᏅ. ᎥᏝ ᏂᎦᏛ Android ᎪᎱᏍᏗ ᎠᏏ IOS ᎾᎿᎢ ᏱᏓᏁᎭ.'
   checkout_this_project: 'ᎯᎠ Catrobat ᏚᎸᏫᏍᏓᏁᎸ ᎯᎦᏔ'
@@ -623,7 +617,6 @@ previous: 'ᎢᎬᏱᏱ'
 media-packages:
   title: 'ᏗᏟᎶᏍᏔᏅ ᎠᎴ ᏗᎧᏁᎬ ᏗᏍᏆᏂᎪᏗᏱ'
   description: 'ᎯᎠ ᏧᏓᎴᏅᏛ ᎾᎿᎢ ᏰᎵ ᏣᏩᏛᏗ ᎠᏂᏁᎸᏗᏍᎩ ᎠᎴ ᏧᏓᎴᏅᏓ ᏕᏣᎸᏫᏍᏓᏁᎸᎯ ᏣᏟᏌᏗ.'
-  theme-special: '%flavor% ᎤᏓᏁᏟᏴᏛ'
   search-results: 'ᏗᏟᎶᏍᏔᏅ ᎠᎴ ᏗᎧᏁᎬ ᏗᏍᏆᏂᎪᏗᏱ ᏣᏩᏛ'
 flavor:
   pocketcode: Pocket Code

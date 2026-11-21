@@ -12,8 +12,6 @@ username: યુઝરનેમ
 password: પાસવર્ડ
 email: 'ઇમેઇલ'
 about: 'Catrobat વિશે'
-chat: 'ચેટ અને ફોરમ'
-others: 'અન્ય'
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'કોઈ નોંધો અને ક્રેડિટ્સ ઉ�
 notesAndCreditsDescription: 'તેં આ પ્રોજેક્ટ કેવી રીતે બનાવ્યો? શું તેં બીજા લોકોના વિચારો, સ્ક્રિપ્ટ્સ કે ચિત્રોનો ઉપયોગ કર્યો? અહીં તેમનો આભાર માન.'
 projectImportedFromScratch: 'આ પ્રોજેક્ટ MIT Scratch માંથી ઇમ્પોર્ટ કરવામાં આવ્યો છે. તું મૂળ પ્રોજેક્ટ જોઈ શકે છે'
 scratchImportedProjectLinkHere: 'અહીં.'
-country: દેશ
 privacyPolicy: 'ગોપનીયતા નીતિ'
 projectDetails: 'વિગતો'
 somethingWentWrong: 'અરે, કંઈક કામ ન કર્યું. કૃપા કરીને ફરી પ્રયત્ન કર!'
@@ -47,7 +44,6 @@ doesNotExist: 'માંગેલ સંસાધન અસ્તિત્વમ
 pleaseTryAgain: 'કૃપા કરીને ફરી પ્રયત્ન કર!'
 tryAgainButton: 'ફરી પ્રયત્ન કર'
 more: 'વધુ'
-less: 'ઓછું'
 show-more: 'વધુ બતાવ'
 more-information: 'વધુ માહિતી'
 less-information: 'ઓછી માહિતી'
@@ -68,7 +64,6 @@ users: 'યુઝર'
 studios: 'સ્ટુડિયો'
 oauthPopUpTitle: 'બાહ્ય એકાઉન્ટ લૉગ ઇન માહિતી'
 oauthInfo: 'તેં હમણાં જ લૉગ ઇન કરવા માટે બાહ્ય એકાઉન્ટનો ઉપયોગ કર્યો છે. અમે તારા માટે એક રેન્ડમ યુઝરનેમ બનાવ્યું છે. જો તું તારું યુઝરનેમ બદલવા અથવા તારા એકાઉન્ટ માટે નવો પાસવર્ડ બનાવવા માંગે છે, તો કૃપા કરીને તારા પ્રોફાઇલ પેજ પર જા.'
-statistics: 'આંકડા'
 languageSelection: 'ભાષા પસંદગી'
 color-scheme:
   title: 'થીમ'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'આ પ્રોજેક્ટ પર પ્રતિક્રિયા આપનાર લોકો'
     all: "All"
-  languageVersion: 'Catrobat ભાષા વર્ઝન: %languageVersion%'
   updateAppHeaderDownload: 'ડાઉનલોડ શક્ય નથી'
   updateAppTextDownload: 'કૃપા કરીને તારી ઍપને નવા વર્ઝનમાં અપડેટ કર. ધ્યાન રાખ કે Android ની બધી સુવિધાઓ હજી iOS પર ઉપલબ્ધ નથી.'
   checkout_this_project: 'આ Catrobat પ્રોજેક્ટ જો'
@@ -649,7 +643,6 @@ previous: 'પાછળ'
 media-packages:
   title: 'મીડિયા લાઇબ્રેરી'
   description: 'નીચેની કેટેગરીઓમાં તને તારા પ્રોજેક્ટ્સમાં ઉમેરવા માટે પાત્રો અને વસ્તુઓ મળશે.'
-  theme-special: '%flavor% ખાસ થીમ'
   search-results: 'મીડિયા લાઇબ્રેરી શોધ પરિણામો'
 flavor:
   pocketcode: Pocket Code

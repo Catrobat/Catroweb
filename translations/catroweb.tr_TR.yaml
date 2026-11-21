@@ -12,8 +12,6 @@ username: Kullanıcı adı
 password: Şifre
 email: E-Posta
 about: Catrobat hakkında
-chat: Sohbet ve forumlar
-others: Diğerleri
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Her hangi bir yapanlar yok.
 notesAndCreditsDescription: Bu projeyi nasıl yarattınız? Başkalarının fikirlerini, senaryolarını veya sanat eserlerini kullandınız mı? Onlara burada teşekkür edin.
 projectImportedFromScratch: 'Bu proje MIT Scratch''ten içe aktarıldı. Orijinal projeye göz atabilirsin:'
 scratchImportedProjectLinkHere: buradan.
-country: Ülke
 privacyPolicy: Gizlilik politikası
 projectDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
@@ -47,7 +44,6 @@ doesNotExist: 'İstenen kaynak mevcut değil.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
 tryAgainButton: 'Tekrar dene'
 more: 'daha fazla'
-less: 'daha az'
 show-more: 'Daha fazla göster'
 more-information: 'Daha fazla bilgi'
 less-information: 'Daha az bilgi'
@@ -68,7 +64,6 @@ users: "Kullanıcılar"
 studios: "Stüdyolar"
 oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
 oauthInfo: 'Giriş yapmak için harici bir hesap kullandın. Senin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adını değiştirmek veya hesabın için yeni bir şifre oluşturmak istiyorsan lütfen profil sayfana git.'
-statistics: "İstatistik"
 languageSelection: "Dil seçimi"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Bu projeye tepki verenler"
     all: "Tüm"
-  languageVersion: 'Catrobat dil sürümü: %languageVersion%'
   updateAppHeaderDownload: İndirme mümkün değil
   updateAppTextDownload: Lütfen uygulamanı en yeni sürüme güncelle. Tüm Android özelliklerinin henüz iOS'ta bulunmadığını unutma.
   checkout_this_project: Bu Catrobat projesine göz at
@@ -648,7 +642,6 @@ previous: Önceki
 media-packages:
   title: Medya-Paketler
   description: Aşağıdaki kategorilerde size Cep Kodu projeleri eklemek için ek aktörler ve nesneler bulabilirsiniz.
-  theme-special: "%flavor% Tema Özel"
   search-results: Medya kitaplığı arama sonuçları
 flavor:
   pocketcode: Cep Kodu

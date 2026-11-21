@@ -12,8 +12,6 @@ username: వినియోగదారు పేరు
 password: పాస్‌వర్డ్
 email: ఇ-మెయిల్
 about: Catrobat గురించి
-chat: చాట్ మరియు ఫోరమ్‌లు
-others: ఇతరులు
 googlePlay: Google Play Store
 iosAppStore: iOS App Store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: గమనికలు మరియు క్రెడిట్స్ 
 notesAndCreditsDescription: నువ్వు ఈ ప్రాజెక్ట్‌ను ఎలా సృష్టించావు? ఇతరుల ఆలోచనలు, స్క్రిప్ట్‌లు లేదా కళాకృతులను ఉపయోగించావా? వారికి ఇక్కడ ధన్యవాదాలు చెప్పు.
 projectImportedFromScratch: ఈ ప్రాజెక్ట్ MIT Scratch నుండి దిగుమతి చేయబడింది. అసలు ప్రాజెక్ట్‌ను నువ్వు చూడవచ్చు
 scratchImportedProjectLinkHere: ఇక్కడ.
-country: దేశం
 privacyPolicy: గోప్యతా విధానం
 projectDetails: వివరాలు
 somethingWentWrong: 'అయ్యో, ఏదో పని చేయలేదు. దయచేసి మళ్ళీ ప్రయత్నించు!'
@@ -47,7 +44,6 @@ doesNotExist: 'నువ్వు అడిగిన వనరు ఉనిక�
 pleaseTryAgain: 'దయచేసి మళ్ళీ ప్రయత్నించు!'
 tryAgainButton: 'మళ్ళీ ప్రయత్నించు'
 more: 'ఎక్కువ'
-less: 'తక్కువ'
 show-more: 'ఇంకా చూపించు'
 more-information: 'మరింత సమాచారం'
 less-information: 'తక్కువ సమాచారం'
@@ -68,7 +64,6 @@ users: "వినియోగదారులు"
 studios: "స్టూడియోలు"
 oauthPopUpTitle: "బాహ్య ఖాతా సైన్ ఇన్ సమాచారం"
 oauthInfo: 'నువ్వు ఇప్పుడే లాగిన్ అవ్వడానికి ఒక బాహ్య ఖాతాను ఉపయోగించావు. మేము నీ కోసం ఒక యాదృచ్ఛిక వినియోగదారు పేరును సృష్టించాము. నీ వినియోగదారు పేరు మార్చాలనుకుంటే లేదా నీ ఖాతాకు కొత్త పాస్‌వర్డ్ సృష్టించాలనుకుంటే, దయచేసి నీ ప్రొఫైల్ పేజీకి వెళ్ళు.'
-statistics: "గణాంకాలు"
 languageSelection: "భాష ఎంపిక"
 color-scheme:
   title: 'థీమ్'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "ఈ ప్రాజెక్ట్‌కు ప్రతిస్పందించినవారు"
     all: "అన్నీ"
-  languageVersion: 'Catrobat భాష వెర్షన్: %languageVersion%'
   updateAppHeaderDownload: డౌన్‌లోడ్ సాధ్యం కాదు
   updateAppTextDownload: దయచేసి నీ యాప్‌ను కొత్త వెర్షన్‌కు అప్‌డేట్ చేయి. Androidలోని అన్ని ఫీచర్లు ఇంకా iOSలో అందుబాటులో లేవని గుర్తుంచుకో.
   checkout_this_project: ఈ Catrobat ప్రాజెక్ట్‌ను చూడు
@@ -651,7 +645,6 @@ previous: మునుపటి
 media-packages:
   title: మీడియా లైబ్రరీ
   description: కింది వర్గాలలో నీ ప్రాజెక్ట్‌లకు జోడించడానికి నటులు, వస్తువులను నువ్వు కనుగొనవచ్చు.
-  theme-special: "%flavor% థీమ్ స్పెషల్"
   search-results: మీడియా లైబ్రరీ శోధన ఫలితాలు
 flavor:
   pocketcode: Pocket Code

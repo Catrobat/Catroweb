@@ -12,8 +12,6 @@ username: ਉਪਯੋਗਕਰਤਾ ਨਾਮ
 password: ਪਾਸਵਰਡ
 email: 'ਈ-ਮੇਲ'
 about: ਕੈਟਰੋਬੈਟ ਬਾਰੇ
-chat: ਗੱਲਬਾਤ ਅਤੇ ਫੋਰਮ
-others: ਹੋਰ
 googlePlay: ਗੂਗਲ ਪਲੇ ਸਟੋਰ
 iosAppStore: ਆਈਓਐਸ ਐਪ ਸਟੋਰ
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: ਕੋਈ ਨੋਟਸ ਅਤੇ ਕ੍ਰੈਡਿਟ ਉਪਲਬ�
 notesAndCreditsDescription: 'ਤੂੰ ਇਹ ਪ੍ਰੋਜੈਕਟ ਕਿਵੇਂ ਬਣਾਇਆ? ਕੀ ਤੂੰ ਦੂਜੇ ਲੋਕਾਂ ਦੇ ਵਿਚਾਰ, ਸਕ੍ਰਿਪਟਾਂ ਜਾਂ ਕਲਾਕਾਰੀ ਵਰਤੀ? ਇੱਥੇ ਉਹਨਾਂ ਦਾ ਧੰਨਵਾਦ ਕਰ।'
 projectImportedFromScratch: 'ਇਹ ਪ੍ਰੋਜੈਕਟ MIT Scratch ਤੋਂ ਇੰਪੋਰਟ ਕੀਤਾ ਗਿਆ ਸੀ। ਤੂੰ ਅਸਲੀ ਪ੍ਰੋਜੈਕਟ ਦੇਖ ਸਕਦਾ ਹੈਂ'
 scratchImportedProjectLinkHere: 'ਇੱਥੇ।'
-country: ਦੇਸ਼
 privacyPolicy: ਪਰਾਈਵੇਟ ਨੀਤੀ
 projectDetails: ਵੇਰਵਾ
 somethingWentWrong: 'ਓਹੋ, ਕੁਝ ਕੰਮ ਨਹੀਂ ਕੀਤਾ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰ!'
@@ -47,7 +44,6 @@ doesNotExist: 'ਮੰਗਿਆ ਗਿਆ ਸਰੋਤ ਮੌਜੂਦ ਨਹੀ�
 pleaseTryAgain: 'ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰ!'
 tryAgainButton: 'ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰ'
 more: 'ਹੋਰ'
-less: 'ਘੱਟ'
 show-more: 'ਹੋਰ ਦਿਖਾ'
 more-information: 'ਹੋਰ ਜਾਣਕਾਰੀ'
 less-information: 'ਘੱਟ ਜਾਣਕਾਰੀ'
@@ -68,7 +64,6 @@ users: 'ਵਰਤੋਂਕਾਰ'
 studios: 'ਸਟੂਡੀਓ'
 oauthPopUpTitle: "ਬਾਹਰੀ ਖਾਤਾ ਸਾਈਨ ਇਨ ਜਾਣਕਾਰੀ"
 oauthInfo: 'ਤੂੰ ਲੌਗ ਇਨ ਕਰਨ ਲਈ ਹੁਣੇ ਇੱਕ ਬਾਹਰੀ ਖਾਤਾ ਵਰਤਿਆ ਹੈ। ਅਸੀਂ ਤੇਰੇ ਲਈ ਇੱਕ ਬੇਤਰਤੀਬ ਵਰਤੋਂਕਾਰ ਨਾਮ ਬਣਾਇਆ ਹੈ। ਜੇ ਤੂੰ ਆਪਣਾ ਵਰਤੋਂਕਾਰ ਨਾਮ ਬਦਲਣਾ ਜਾਂ ਆਪਣੇ ਖਾਤੇ ਲਈ ਨਵਾਂ ਪਾਸਵਰਡ ਬਣਾਉਣਾ ਚਾਹੁੰਦਾ ਹੈਂ, ਤਾਂ ਆਪਣੇ ਪ੍ਰੋਫਾਈਲ ਪੰਨੇ ''ਤੇ ਜਾ।'
-statistics: "ਅੰਕੜੇ"
 languageSelection: 'ਭਾਸ਼ਾ ਚੋਣ'
 color-scheme:
   title: 'ਥੀਮ'
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: 'ਉਹ ਲੋਕ ਜਿਨ੍ਹਾਂ ਨੇ ਇਸ ਪ੍ਰੋਜੈਕਟ ''ਤੇ ਪ੍ਰਤੀਕਿਰਿਆ ਦਿੱਤੀ'
     all: "ਸਾਰੇ"
-  languageVersion: 'Catrobat ਭਾਸ਼ਾ ਸੰਸਕਰਣ: %languageVersion%'
   updateAppHeaderDownload: 'ਡਾਊਨਲੋਡ ਸੰਭਵ ਨਹੀਂ'
   updateAppTextDownload: 'ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਐਪ ਨੂੰ ਸਭ ਤੋਂ ਨਵੇਂ ਸੰਸਕਰਣ ''ਤੇ ਅਪਡੇਟ ਕਰ। ਧਿਆਨ ਰੱਖ ਕਿ Android ਦੀਆਂ ਸਾਰੀਆਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਹਾਲੇ iOS ''ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹਨ।'
   checkout_this_project: 'ਇਹ Catrobat ਪ੍ਰੋਜੈਕਟ ਦੇਖ'
@@ -628,7 +622,6 @@ previous: ਪਿਛਲਾ
 media-packages:
   title: ਮੀਡੀਆ-ਪੈਕੇਜ
   description: 'ਹੇਠ ਲਿਖੀਆਂ ਸ਼੍ਰੇਣੀਆਂ ਵਿੱਚ ਤੈਨੂੰ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟਾਂ ਵਿੱਚ ਜੋੜਨ ਲਈ ਕਿਰਦਾਰ ਅਤੇ ਵਸਤੂਆਂ ਮਿਲ ਸਕਦੀਆਂ ਹਨ।'
-  theme-special: "%flavor% ਥੀਮ ਵਿਸ਼ੇਸ਼"
   search-results: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਖੋਜ ਨਤੀਜੇ
 flavor:
   pocketcode: ਪਾਕੇਟ ਕੋਡ

@@ -12,8 +12,6 @@ username: Nome utente
 password: Password
 email: Email
 about: Su Catrobat
-chat: Chat e forum
-others: Altri
 googlePlay: Google Play Store
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Nessun riconoscimento disponibile.
 notesAndCreditsDescription: Come hai creato questo progetto? Hai usato idee, script o opere altrui? Ringraziali qui.
 projectImportedFromScratch: Questo progetto è stato importato da Scratch. Puoi controllare il progetto originale
 scratchImportedProjectLinkHere: qui.
-country: Paese
 privacyPolicy: Politica sulla Privacy
 projectDetails: Dettagli
 somethingWentWrong: 'Ooooops qualcosa è andato storto.'
@@ -47,7 +44,6 @@ doesNotExist: 'La risorsa richiesta non esiste.'
 pleaseTryAgain: 'Per favore riprova!'
 tryAgainButton: 'Riprova'
 more: 'altro'
-less: 'meno'
 show-more: 'Mostra di più'
 more-information: 'Ulteriori informazioni'
 less-information: 'Meno informazioni'
@@ -68,7 +64,6 @@ users: "Utenti"
 studios: 'Studi'
 oauthPopUpTitle: "Informazioni accesso account esterno"
 oauthInfo: 'Hai appena usato un account esterno per accedere. Abbiamo creato un nome utente casuale. Se vuoi cambiare il tuo nome utente o creare una nuova password per il tuo account, vai alla pagina del profilo.'
-statistics: "Statistiche"
 languageSelection: "Seleziona la lingua"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Persone che hanno reagito a questo progetto'
     all: "Tutti"
-  languageVersion: 'Versione del linguaggio di Catrobat: %languageVersion%'
   updateAppHeaderDownload: Download non possibile
   updateAppTextDownload: Aggiorna l'app alla versione più recente. Tieni presente che non tutte le funzionalità Android sono ancora disponibili su IOS.
   checkout_this_project: 'Dai un''occhiata a questo progetto Catrobat'
@@ -649,7 +643,6 @@ previous: Precedente
 media-packages:
   title: Risorse multimediali
   description: Nelle seguenti categorie è possibile trovare altri attori e oggetti da aggiungere ai progetti PocketCode.
-  theme-special: "%flavor% Tema Speciale"
   search-results: Risultati di ricerca nelle librerie multimediali
 flavor:
   pocketcode: Pocket Code

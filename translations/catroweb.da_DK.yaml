@@ -12,8 +12,6 @@ username: Brugernavn
 password: Adgangskode
 email: E-mail
 about: Om Catrobat
-chat: Chat og fora
-others: Andet
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Ingen tak tilgængelig.
 notesAndCreditsDescription: Hvordan har du lavet dette projekt? Har du brugt idéer, scripts eller grafik fra andre? Tak dem her.
 projectImportedFromScratch: Dette projekt er importeret fra MIT Scratch. Du kan se det oprindelige projekt
 scratchImportedProjectLinkHere: her.
-country: Land
 privacyPolicy: Privatlivspolitik
 projectDetails: Detaljer
 somethingWentWrong: 'Ups, noget virkede ikke. Prøv igen!'
@@ -47,7 +44,6 @@ doesNotExist: 'Den ønskede ressource findes ikke.'
 pleaseTryAgain: 'Prøv igen!'
 tryAgainButton: 'Prøv igen'
 more: 'mere'
-less: 'mindre'
 show-more: 'Flere oplysninger'
 more-information: 'Flere oplysninger'
 less-information: 'Færre oplysninger'
@@ -68,7 +64,6 @@ users: "Brugere"
 studios: "Studier"
 oauthPopUpTitle: "Oplysninger om login med ekstern konto"
 oauthInfo: 'Du har lige brugt en ekstern konto til at logge på. Vi har oprettet et tilfældigt brugernavn til dig. Hvis du vil ændre dit brugernavn eller oprette en ny adgangskode til din konto, så gå til din profilside.'
-statistics: "Statistik"
 languageSelection: "Sprogvalg"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Personer, der har reageret på projektet"
     all: "Alle"
-  languageVersion: 'Catrobat-sprogversion: %languageVersion%'
   updateAppHeaderDownload: Download ikke muligt
   updateAppTextDownload: Opdater din app til den nyeste version. Vær opmærksom på, at ikke alle Android-funktioner er tilgængelige på IOS endnu.
   checkout_this_project: Se dette Catrobat-projekt
@@ -649,7 +643,6 @@ previous: Forrige
 media-packages:
   title: Mediebibliotek
   description: I følgende kategorier kan du finde aktører og objekter, som du kan tilføje til dine projekter.
-  theme-special: "%flavor%-tema special"
   search-results: Søgeresultater i mediebiblioteket
 flavor:
   pocketcode: Pocket Code

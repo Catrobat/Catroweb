@@ -12,8 +12,6 @@ username: Usuari
 password: Contrasenya
 email: Correu electrònic
 about: Quant a Catrobat
-chat: Xat i fòrums
-others: Altres
 googlePlay: Google Play
 iosAppStore: App Store d'iOS
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No hi ha notes ni crèdits disponibles.
 notesAndCreditsDescription: Com has creat aquest projecte? Has fet servir idees, scripts o dibuixos d'altres persones? Dona'ls les gràcies aquí.
 projectImportedFromScratch: Aquest projecte s'ha importat de MIT Scratch. Pots veure el projecte original
 scratchImportedProjectLinkHere: aquí.
-country: País
 privacyPolicy: Política de privacitat
 projectDetails: Detalls
 somethingWentWrong: 'Ups... alguna cosa ha anat malament.'
@@ -47,7 +44,6 @@ doesNotExist: 'El recurs sol·licitat no existeix.'
 pleaseTryAgain: 'Torna-ho a provar!'
 tryAgainButton: 'Torna-ho a provar'
 more: 'més'
-less: 'menys'
 show-more: 'Més informació'
 more-information: 'Més informació'
 less-information: 'Menys informació'
@@ -68,7 +64,6 @@ users: "Usuari"
 studios: "Estudis"
 oauthPopUpTitle: "Informació sobre l'inici de sessió amb un compte extern"
 oauthInfo: 'Acabes d''iniciar sessió amb un compte extern. Hem creat un nom d''usuari aleatori per a tu. Si vols canviar el teu nom d''usuari o crear una contrasenya nova per al teu compte, ves a la teva pàgina de perfil.'
-statistics: "Estadístiques"
 languageSelection: "Selecció d'idioma"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Persones que han reaccionat a aquest projecte"
     all: "Totes"
-  languageVersion: 'Versió del llenguatge Catrobat: %languageVersion%'
   updateAppHeaderDownload: No es pot descarregar
   updateAppTextDownload: Actualitza l'aplicació a la versió més recent. Tingues en compte que no totes les funcions d'Android estan disponibles encara a iOS.
   checkout_this_project: Fes una ullada a aquest projecte de Catrobat
@@ -649,7 +643,6 @@ previous: Anterior
 media-packages:
   title: Mediateca
   description: A les categories següents trobaràs actors i objectes per afegir als teus projectes.
-  theme-special: "Especial temàtic de %flavor%"
   search-results: Resultats de la cerca a la mediateca
 flavor:
   pocketcode: Pocket Code

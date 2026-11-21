@@ -12,8 +12,6 @@ username: 아이디
 password: 비밀번호
 email: 이메일
 about: Catrobat에 대하여
-chat: 채팅과 포럼
-others: 기타
 googlePlay: 구글 플레이
 iosAppStore: IOS 앱 스토어
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 만든이 없음
 notesAndCreditsDescription: 어떻게 이 프로젝트를 만드셨나요? 다른 사람의 아이디어나 작품을 이용했나요? 여기에 감사를 써보세요.
 projectImportedFromScratch: "이 프로젝트는 MIT Scratch에서 가져왔어요. 원본 프로젝트는 여기에서 볼 수 있어요:"
 scratchImportedProjectLinkHere: "여기"
-country: 국가
 privacyPolicy: 개인 정보 보호 정책
 projectDetails: 세부 사항
 somethingWentWrong: '죄송합니다. 오류가 발생했습니다.'
@@ -47,7 +44,6 @@ doesNotExist: "요청한 항목이 존재하지 않아요."
 pleaseTryAgain: '다시 시도하세요!'
 tryAgainButton: "다시 시도"
 more: '자세히'
-less: '간단히'
 show-more: '더 보기'
 more-information: '자세한 정보 보기'
 less-information: '작은 정보보기'
@@ -68,7 +64,6 @@ users: "사용자"
 studios: "스튜디오"
 oauthPopUpTitle: "외부 계정 정보"
 oauthInfo: "방금 외부 계정으로 로그인했어요. 무작위 사용자 이름을 만들어 두었어요. 사용자 이름을 바꾸거나 계정의 새 비밀번호를 만들고 싶다면 내 프로필 페이지로 가세요."
-statistics: "통계"
 languageSelection: "언어 선택"
 color-scheme:
   title: "테마"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "이 프로젝트에 반응한 사람들"
     all: "모두"
-  languageVersion: "Catrobat 언어 버전: %languageVersion%"
   updateAppHeaderDownload: "다운로드할 수 없어요"
   updateAppTextDownload: "앱을 최신 버전으로 업데이트해 주세요. Android의 모든 기능이 아직 iOS에서 되는 건 아니에요."
   checkout_this_project: "이 Catrobat 프로젝트를 확인해 보세요"
@@ -629,7 +623,6 @@ previous: 이전
 media-packages:
   title: 미디어 묶음
   description: 포켓코드 프로그램으로 오브젝트 추가 가능
-  theme-special: "%flavor% 특별한 테마"
   search-results: 미디어 검색 결과
 flavor:
   pocketcode: 포켓 코드

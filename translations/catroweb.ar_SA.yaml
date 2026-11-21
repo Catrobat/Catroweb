@@ -12,8 +12,6 @@ username: اسم المستخدم
 password: كلمة المرور
 email: البريد الإلكتروني
 about: حول كاتروبات
-chat: المحادثات والمنتديات
-others: الآخرين
 googlePlay: متجرجوجل
 iosAppStore: IOS App store
 instagram: إنستغرام
@@ -37,7 +35,6 @@ noCredits: لا توجد ملاحظات أو أرصدة متاحة.
 notesAndCreditsDescription: كيف قمت بإنشاء هذا المشروع؟ هل استخدمت الأفكار أو البرامج النصية أو الأعمال الفنية من أشخاص آخرين؟ شكراً لهم هنا.
 projectImportedFromScratch: "تم استيراد هذا المشروع من MIT Scratch. يمكنك الاطلاع على المشروع الأصلي"
 scratchImportedProjectLinkHere: "هنا."
-country: البلد
 privacyPolicy: سياسة الخصوصية
 projectDetails: التفاصيل
 somethingWentWrong: 'عذرا, هناك شيء خاطئ.'
@@ -47,7 +44,6 @@ doesNotExist: "المورد المطلوب غير موجود."
 pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
 tryAgainButton: "حاول مرة أخرى"
 more: 'المزيد'
-less: 'أقل'
 show-more: 'إظهار المزيد'
 more-information: 'مزيد من المعلومات'
 less-information: 'معلومات أقل'
@@ -68,7 +64,6 @@ users: "المستخدم"
 studios: "الاستوديوهات"
 oauthPopUpTitle: "معلومات تسجيل الدخول للحساب الخارجي"
 oauthInfo: 'لقد استخدمت للتو حساب خارجي لتسجيل الدخول. قمنا بإنشاء اسم مستخدم عشوائي لك. إذا كنت ترغب في تغيير اسم المستخدم الخاص بك أو إنشاء كلمة مرور جديدة للحساب الخاص بك يرجى الذهاب إلى صفحة ملفي الشخصي.'
-statistics: "الإحصائيات"
 languageSelection: "اختيار اللغة"
 color-scheme:
   title: "المظهر"
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "الأشخاص الذين تفاعلوا مع هذا المشروع"
     all: "جميع"
-  languageVersion: "إصدار لغة Catrobat: %languageVersion%"
   updateAppHeaderDownload: "التنزيل غير ممكن"
   updateAppTextDownload: "يرجى تحديث تطبيقك إلى أحدث إصدار. انتبه إلى أن ليست كل ميزات Android متوفرة بعد على iOS."
   checkout_this_project: "اطّلع على مشروع Catrobat هذا"
@@ -649,7 +643,6 @@ previous: السابق
 media-packages:
   title: حزم الوسائط
   description: في الفئات التالية يمكنك العثور على جهات فاعلة وعناصر إضافية لإضافتها إليك مشاريع بوكت كوود.
-  theme-special: "مظهر %flavor% خاص"
   search-results: نتائج البحث في مكتبة الوسائط
 flavor:
   pocketcode: بوكت كوود

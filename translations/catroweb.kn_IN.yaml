@@ -12,8 +12,6 @@ username: ಬಳಕೆದಾರ ಹೆಸರು
 password: ಪಾಸ್‌ವರ್ಡ್
 email: ಇಮೇಲ್
 about: ಕ್ಯಾಟ್ರೊಬ್ಯಾಟ್ ಬಗ್ಗೆ
-chat: ಚಾಟ್ ಮತ್ತು ಫೋರಮ್‌ಗಳು
-others: ಇತರೆ
 googlePlay: ಗೂಗಲ್ ಪ್ಲೇ
 iosAppStore: iOS ಆ್ಯಪ್ ಸ್ಟೋರ್
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: ಯಾವುದೇ ಕೃತಜ್ಞತೆಗಳು ಲಭ್ಯವ�
 notesAndCreditsDescription: ನೀನು ಈ ಪ್ರಾಜೆಕ್ಟ್ ಅನ್ನು ಹೇಗೆ ರಚಿಸಿದೆ? ಬೇರೆಯವರ ಆಲೋಚನೆಗಳು, ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು ಅಥವಾ ಕಲಾಕೃತಿಗಳನ್ನು ಬಳಸಿದೆಯಾ? ಇಲ್ಲಿ ಅವರಿಗೆ ಧನ್ಯವಾದ ಹೇಳು.
 projectImportedFromScratch: ಈ ಪ್ರಾಜೆಕ್ಟ್ ಅನ್ನು MIT Scratch ನಿಂದ ಆಮದು ಮಾಡಲಾಗಿದೆ. ಮೂಲ ಪ್ರಾಜೆಕ್ಟ್ ಅನ್ನು ನೀನು ನೋಡಬಹುದು
 scratchImportedProjectLinkHere: ಇಲ್ಲಿ.
-country: ದೇಶ
 privacyPolicy: ಗೌಪ್ಯತಾ ನೀತಿ
 projectDetails: ವಿವರಗಳು
 somethingWentWrong: 'ಅಯ್ಯೋ, ಏನೋ ತಪ್ಪಾಯಿತು.'
@@ -47,7 +44,6 @@ doesNotExist: 'ಕೇಳಿದ ಸಂಪನ್ಮೂಲ ಅಸ್ತಿತ್ವ
 pleaseTryAgain: 'ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸು!'
 tryAgainButton: 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸು'
 more: 'ಇನ್ನಷ್ಟು'
-less: 'ಕಡಿಮೆ'
 show-more: 'ಹೆಚ್ಚಿನ ಮಾಹಿತಿ'
 more-information: 'ಹೆಚ್ಚಿನ ಮಾಹಿತಿ'
 less-information: 'ಕಡಿಮೆ ಮಾಹಿತಿ'
@@ -68,7 +64,6 @@ users: "ಬಳಕೆದಾರರು"
 studios: "ಸ್ಟುಡಿಯೋಗಳು"
 oauthPopUpTitle: "ಬಾಹ್ಯ ಖಾತೆ ಸೈನ್ ಇನ್ ಮಾಹಿತಿ"
 oauthInfo: 'ನೀನು ಈಗಷ್ಟೇ ಬಾಹ್ಯ ಖಾತೆಯಿಂದ ಲಾಗಿನ್ ಆಗಿದ್ದೀಯ. ನಾವು ನಿನಗಾಗಿ ಒಂದು ಯಾದೃಚ್ಛಿಕ ಬಳಕೆದಾರ ಹೆಸರನ್ನು ರಚಿಸಿದ್ದೇವೆ. ನಿನ್ನ ಬಳಕೆದಾರ ಹೆಸರನ್ನು ಬದಲಾಯಿಸಲು ಅಥವಾ ನಿನ್ನ ಖಾತೆಗೆ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ರಚಿಸಲು ಬಯಸಿದರೆ, ದಯವಿಟ್ಟು ನಿನ್ನ ಪ್ರೊಫೈಲ್ ಪುಟಕ್ಕೆ ಹೋಗು.'
-statistics: "ಅಂಕಿಅಂಶಗಳು"
 languageSelection: "ಭಾಷೆ ಆಯ್ಕೆ"
 color-scheme:
   title: 'ಥೀಮ್'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "ಆ ಪ್ರಾಜೆಕ್ಟ್‌ಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಿದವರು"
     all: "ಎಲ್ಲಾ"
-  languageVersion: 'ಕ್ಯಾಟ್ರೊಬ್ಯಾಟ್ ಭಾಷಾ ಆವೃತ್ತಿ: %languageVersion%'
   updateAppHeaderDownload: ಡೌನ್‌ಲೋಡ್ ಸಾಧ್ಯವಿಲ್ಲ
   updateAppTextDownload: ದಯವಿಟ್ಟು ನಿನ್ನ ಆ್ಯಪ್ ಅನ್ನು ಹೊಸ ಆವೃತ್ತಿಗೆ ಅಪ್‌ಡೇಟ್ ಮಾಡು. ಎಲ್ಲಾ Android ವೈಶಿಷ್ಟ್ಯಗಳು ಇನ್ನೂ iOS ನಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ ಎಂಬುದನ್ನು ಗಮನಿಸು.
   checkout_this_project: ಈ ಕ್ಯಾಟ್ರೊಬ್ಯಾಟ್ ಪ್ರಾಜೆಕ್ಟ್ ನೋಡು
@@ -650,7 +644,6 @@ previous: ಹಿಂದೆ
 media-packages:
   title: ಮೀಡಿಯಾ ಲೈಬ್ರರಿ
   description: ಈ ಕೆಳಗಿನ ವರ್ಗಗಳಲ್ಲಿ ನಿನ್ನ ಪ್ರಾಜೆಕ್ಟ್‌ಗಳಿಗೆ ಸೇರಿಸಲು ಪಾತ್ರಗಳು ಮತ್ತು ವಸ್ತುಗಳನ್ನು ಕಾಣಬಹುದು.
-  theme-special: "%flavor% ಥೀಮ್ ವಿಶೇಷ"
   search-results: ಮೀಡಿಯಾ ಲೈಬ್ರರಿ ಹುಡುಕಾಟ ಫಲಿತಾಂಶಗಳು
 flavor:
   pocketcode: Pocket Code

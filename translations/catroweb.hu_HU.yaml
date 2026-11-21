@@ -12,8 +12,6 @@ username: Felhasználónév
 password: Jelszó
 email: E-mail
 about: A Catrobatról
-chat: 'Csevegés és fórumok'
-others: 'Egyéb'
 googlePlay: Google Play
 iosAppStore: 'iOS App Store'
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Nincsenek jegyzetek és köszönetnyilvánítások.'
 notesAndCreditsDescription: 'Hogyan készítetted ezt a projektet? Használtál mások ötleteit, szkriptjeit vagy grafikáit? Itt köszönd meg nekik.'
 projectImportedFromScratch: 'Ezt a projektet az MIT Scratchből importálták. Az eredeti projektet megnézheted'
 scratchImportedProjectLinkHere: 'itt.'
-country: Ország
 privacyPolicy: Adatvédelem
 projectDetails: Részletek
 somethingWentWrong: 'Hoppá, hiba történt.'
@@ -47,7 +44,6 @@ doesNotExist: 'A kért erőforrás nem létezik.'
 pleaseTryAgain: 'Kérlek, próbáld újra!'
 tryAgainButton: 'Próbáld újra'
 more: 'több'
-less: 'kevesebb'
 show-more: 'Több mutatása'
 more-information: 'További információ'
 less-information: 'Kevesebb információ'
@@ -68,7 +64,6 @@ users: 'Felhasználó'
 studios: 'Stúdiók'
 oauthPopUpTitle: 'Információ a külső fiókkal való bejelentkezésről'
 oauthInfo: 'Most külső fiókkal jelentkeztél be. Létrehoztunk neked egy véletlenszerű felhasználónevet. Ha módosítani szeretnéd a felhasználóneved, vagy új jelszót szeretnél létrehozni a fiókodhoz, látogass el a profiloldaladra.'
-statistics: 'Statisztikák'
 languageSelection: 'Nyelvválasztás'
 color-scheme:
   title: 'Téma'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Akik reagáltak erre a projektre'
     all: "Mind"
-  languageVersion: 'Catrobat nyelvi verzió: %languageVersion%'
   updateAppHeaderDownload: 'A letöltés nem lehetséges'
   updateAppTextDownload: 'Frissítsd az alkalmazásodat a legújabb verzióra. Vedd figyelembe, hogy nem minden Android-funkció érhető el már iOS-en.'
   checkout_this_project: 'Nézd meg ezt a Catrobat-projektet'
@@ -649,7 +643,6 @@ previous: 'Előző'
 media-packages:
   title: 'Médiatár'
   description: 'Az alábbi kategóriákban szereplőket és objektumokat találsz, amelyeket hozzáadhatsz a projektjeidhez.'
-  theme-special: '%flavor% téma különlegességei'
   search-results: 'Médiatár keresési találatai'
 flavor:
   pocketcode: Pocket Code

@@ -12,8 +12,6 @@ username: "Foydalanuvchi nomi"
 password: "Parol"
 email: "E-pochta"
 about: "Catrobat haqida"
-chat: "Chat va forumlar"
-others: "Boshqalar"
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: "Mualliflar haqida maʼlumot yoʻq."
 notesAndCreditsDescription: "Bu loyihani qanday yaratding? Boshqalarning gʻoyalari, skriptlari yoki rasmlaridan foydalandingmi? Ularga shu yerda rahmat ayt."
 projectImportedFromScratch: "Bu loyiha MIT Scratch'dan import qilingan. Asl loyihani koʻrishing mumkin"
 scratchImportedProjectLinkHere: "shu yerda."
-country: "Mamlakat"
 privacyPolicy: "Maxfiylik siyosati"
 projectDetails: "Tafsilotlar"
 somethingWentWrong: "Voy, nimadir ishlamadi. Iltimos, qaytadan urinib koʻr!"
@@ -47,7 +44,6 @@ doesNotExist: "Soʻralgan resurs mavjud emas."
 pleaseTryAgain: "Iltimos, qaytadan urinib koʻr!"
 tryAgainButton: "Qayta urinish"
 more: "koʻproq"
-less: "kamroq"
 show-more: "Batafsil maʼlumot"
 more-information: "Batafsil maʼlumot"
 less-information: "Qisqaroq maʼlumot"
@@ -68,7 +64,6 @@ users: "Foydalanuvchilar"
 studios: "Studiyalar"
 oauthPopUpTitle: "Tashqi hisob orqali kirish haqida maʼlumot"
 oauthInfo: "Sen hozirgina tashqi hisob orqali kirding. Biz senga tasodifiy foydalanuvchi nomi yaratdik. Foydalanuvchi nomingni oʻzgartirmoqchi yoki hisobing uchun yangi parol yaratmoqchi boʻlsang, profil sahifangga oʻt."
-statistics: "Statistika"
 languageSelection: "Tilni tanlash"
 color-scheme:
   title: "Mavzu"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Bu loyihaga reaksiya bildirganlar"
     all: "All"
-  languageVersion: "Catrobat til versiyasi: %languageVersion%"
   updateAppHeaderDownload: "Yuklab olish imkonsiz"
   updateAppTextDownload: "Iltimos, ilovangni eng yangi versiyaga yangila. Eʼtibor ber: Android'dagi barcha funksiyalar hali iOS'da mavjud emas."
   checkout_this_project: "Bu Catrobat loyihasini koʻr"
@@ -627,7 +621,6 @@ previous: "Oldingi"
 media-packages:
   title: "Media kutubxonasi"
   description: "Quyidagi toifalarda loyihalaringga qoʻshish uchun aktyorlar va obyektlarni topishing mumkin."
-  theme-special: "%flavor% mavzusi uchun maxsus"
   search-results: "Media kutubxonasidagi qidiruv natijalari"
 flavor:
   pocketcode: Pocket Code

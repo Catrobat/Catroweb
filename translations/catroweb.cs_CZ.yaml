@@ -12,8 +12,6 @@ username: Uživatelské jméno
 password: Heslo
 email: E-mail
 about: O Catrobat
-chat: Chat a fóra
-others: Ostatní
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: Jak jsi tento projekt vytvořil? Použil jsi nápady, skripty nebo grafiku od jiných lidí? Poděkuj jim tady.
 projectImportedFromScratch: Tento projekt byl importován z MIT Scratch. Původní projekt si můžeš prohlédnout
 scratchImportedProjectLinkHere: zde.
-country: Stát
 privacyPolicy: Ochrana soukromí
 projectDetails: Podrobnosti
 somethingWentWrong: 'Ooooops něco se pokazilo.'
@@ -47,7 +44,6 @@ doesNotExist: 'Požadovaný zdroj neexistuje.'
 pleaseTryAgain: 'Prosím, zkuste to znovu!'
 tryAgainButton: 'Zkusit znovu'
 more: 'více'
-less: 'Méně'
 show-more: 'More information'
 more-information: 'Více informací'
 less-information: 'Méně informací'
@@ -68,7 +64,6 @@ users: "Uživatel"
 studios: "Studia"
 oauthPopUpTitle: "Informace o přihlášení externím účtem"
 oauthInfo: 'Právě ses přihlásil pomocí externího účtu. Vytvořili jsme ti náhodné uživatelské jméno. Pokud chceš změnit své uživatelské jméno nebo si vytvořit nové heslo, přejdi na stránku svého profilu.'
-statistics: "Statistiky"
 languageSelection: "Výběr jazyka"
 color-scheme:
   title: 'Motiv'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Lidé, kteří na projekt reagovali"
     all: "Všechny"
-  languageVersion: 'Verze jazyka Catrobat: %languageVersion%'
   updateAppHeaderDownload: Stažení není možné
   updateAppTextDownload: Aktualizuj si prosím aplikaci na nejnovější verzi. Pamatuj, že ne všechny funkce z Androidu jsou už dostupné na iOS.
   checkout_this_project: Mrkni na tento projekt Catrobat
@@ -649,7 +643,6 @@ previous: Předchozí
 media-packages:
   title: Knihovna médií
   description: V následujících kategoriích najdeš postavy a objekty, které můžeš přidat do svých projektů.
-  theme-special: "Speciální motiv %flavor%"
   search-results: Výsledky hledání v knihovně médií
 flavor:
   pocketcode: Pocket Code

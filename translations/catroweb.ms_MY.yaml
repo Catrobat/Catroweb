@@ -12,8 +12,6 @@ username: Nama Pengguna
 password: Kata Laluan
 email: "E-mel"
 about: "Tentang Catrobat"
-chat: "Sembang dan forum"
-others: "Lain-lain"
 googlePlay: Google Play
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: "Tiada nota dan kredit."
 notesAndCreditsDescription: "Bagaimana kamu mencipta projek ini? Adakah kamu menggunakan idea, skrip atau karya seni orang lain? Ucapkan terima kasih kepada mereka di sini."
 projectImportedFromScratch: "Projek ini diimport dari MIT Scratch. Kamu boleh lihat projek asalnya"
 scratchImportedProjectLinkHere: "di sini."
-country: Negara
 privacyPolicy: "Dasar privasi"
 projectDetails: "Butiran"
 somethingWentWrong: "Alamak, ada masalah."
@@ -47,7 +44,6 @@ doesNotExist: "Sumber yang diminta tidak wujud."
 pleaseTryAgain: 'Sila cuba sekali lagi!'
 tryAgainButton: "Cuba lagi"
 more: 'lebih'
-less: 'kurang'
 show-more: "Tunjuk lagi"
 more-information: "Maklumat lanjut"
 less-information: "Kurang maklumat"
@@ -68,7 +64,6 @@ users: "Pengguna"
 studios: "Studio"
 oauthPopUpTitle: "Maklumat log masuk akaun luaran"
 oauthInfo: "Kamu baru sahaja menggunakan akaun luaran untuk log masuk. Kami telah mencipta nama pengguna rawak untuk kamu. Jika kamu mahu menukar nama pengguna atau mencipta kata laluan baharu untuk akaun kamu, sila pergi ke halaman profil kamu."
-statistics: "Statistik"
 languageSelection: "Pilihan bahasa"
 color-scheme:
   title: "Tema"
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Orang yang memberi reaksi kepada projek itu"
     all: "Semua"
-  languageVersion: "Versi bahasa Catrobat: %languageVersion%"
   updateAppHeaderDownload: "Muat turun tidak dapat dilakukan"
   updateAppTextDownload: "Sila kemas kini aplikasi kamu ke versi terbaharu. Ambil perhatian bahawa tidak semua ciri Android sudah tersedia di iOS."
   checkout_this_project: "Lihat projek Catrobat ini"
@@ -649,7 +643,6 @@ previous: "Sebelumnya"
 media-packages:
   title: "Pustaka Media"
   description: "Dalam kategori berikut kamu boleh menemui pelakon dan objek untuk ditambah ke projek kamu."
-  theme-special: "Tema Istimewa %flavor%"
   search-results: "Hasil carian pustaka media"
 flavor:
   pocketcode: Pocket Code
