@@ -6,6 +6,7 @@ namespace App\Api\Services\Notifications;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Traits\KeysetCursorTrait;
+use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -24,6 +25,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportCategory;
+use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportProcessor;
 use App\System\Commands\Maintenance\PurgeHiddenContentCommand;
@@ -32,6 +34,8 @@ use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationResponse;
 use OpenAPI\Server\Model\NotificationsCountResponse;
 use OpenAPI\Server\Service\SerializerInterface;
+use Sonata\AdminBundle\Form\Type\Operator\StringOperatorType;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotificationsResponseManager extends AbstractResponseManager
@@ -40,6 +44,13 @@ class NotificationsResponseManager extends AbstractResponseManager
 
   private const int LOST_FILES_LISTED_NAMES = 10;
 
+  /** Moderation notifications that only admins get: they link to the moderation queue instead of the content. */
+  private const array ADMIN_REVIEW_ACTIONS = [
+    ContentModerationAction::ACTION_AUTO_HIDDEN,
+    ContentModerationAction::ACTION_BRIGADING_SUSPECTED,
+    AutoModerationService::ACTION_REVIEW_REQUESTED,
+  ];
+
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
@@ -47,6 +58,7 @@ class NotificationsResponseManager extends AbstractResponseManager
     private readonly NotificationRepository $notification_repository,
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly UserAvatarService $user_avatar_service,
+    private readonly UrlGeneratorInterface $url_generator,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -246,6 +258,13 @@ class NotificationsResponseManager extends AbstractResponseManager
 
       $content_type = $notification->getContentType();
       $content_id = $notification->getContentId();
+
+      // Owners get auto_hidden too; only admins can open the queue.
+      if (null !== $content_id && $user->hasRole('ROLE_ADMIN') && in_array($action, self::ADMIN_REVIEW_ACTIONS, true)) {
+        $response['review_url'] = $this->url_generator->generate('admin_moderation_reports_list', [
+          'filter' => ['content_id' => ['type' => StringOperatorType::TYPE_EQUAL, 'value' => $content_id]],
+        ]);
+      }
 
       if ('project' === $content_type && null !== $content_id) {
         $response['project'] = $content_id;

@@ -15,6 +15,7 @@ use OpenAPI\Server\Service\SerializerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -118,6 +119,7 @@ class ModerationWarningNotificationResponseTest extends TestCase
       $this->createStub(NotificationRepository::class),
       $visibility,
       $this->createStub(UserAvatarService::class),
+      $this->createStub(UrlGeneratorInterface::class),
     );
 
     $notification = new ModerationNotification(new User(), 'studio', 'studio-id', $moderation_action, $message);
