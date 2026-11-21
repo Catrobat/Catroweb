@@ -383,8 +383,8 @@ function initOwnProjectList(container) {
     `${baseUrl}/api/projects/user`,
     container.dataset.property,
     theme,
-    999,
+    30,
     emptyMessage,
     {},
-  )
+  ).loadMoreOnPageScroll()
 }
