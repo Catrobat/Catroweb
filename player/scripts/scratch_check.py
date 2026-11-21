@@ -20,6 +20,8 @@ STATE = """(() => {
 })()"""
 
 chrome, url, ids = sys.argv[1], sys.argv[2], sys.argv[3:]
+if not ids:
+    sys.exit("No projects to play.")
 failed = []
 with Chrome(chrome, ["--window-size=480,800", "--autoplay-policy=no-user-gesture-required"]) as browser:
     page = browser.open()
@@ -34,6 +36,10 @@ with Chrome(chrome, ["--window-size=480,800", "--autoplay-policy=no-user-gesture
             state = browser.evaluate(page, STATE)
             if state.startswith("running") and not any(line.startswith('player: loaded "') for line in browser.console):
                 state = "starting"
+        # Loaded comes before sounds are decoded and the stage is made: count the seconds from its first drawing.
+        while state == "running 1" and not browser.errors and time.monotonic() < end + 60:
+            time.sleep(1)
+            state = browser.evaluate(page, STATE)
         if state.startswith("running") and not browser.errors:
             time.sleep(SECONDS)
             state = browser.evaluate(page, STATE)

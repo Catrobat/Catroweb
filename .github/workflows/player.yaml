@@ -74,6 +74,7 @@ jobs:
       - name: Catroweb's PHP dependencies (the converter's autoloader)
         working-directory: .
         run: |
+          sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends librsvg2-bin sox libsox-fmt-mp3
           composer install --no-dev --no-scripts --prefer-dist --no-progress
 

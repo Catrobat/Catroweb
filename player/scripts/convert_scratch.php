@@ -14,11 +14,12 @@ use App\Project\Scratch\Converter\ScratchToCatrobatConverter;
 
 require dirname(__DIR__, 2).'/vendor/autoload.php';
 
-$out = $argv[1] ?? exit("Usage: php convert_scratch.php <out dir>\n");
+$out = $argv[1] ?? throw new InvalidArgumentException('Usage: php convert_scratch.php <out dir>');
 @mkdir($out, 0o777, true);
 $converter = new ScratchToCatrobatConverter(new AssetNormalizer());
 $failed = 0;
-foreach (glob(dirname(__DIR__).'/fixtures/scratch/*', GLOB_ONLYDIR) ?: [] as $dir) {
+$dirs = glob(dirname(__DIR__).'/fixtures/scratch/*', GLOB_ONLYDIR) ?: throw new RuntimeException('No Scratch fixtures found.');
+foreach ($dirs as $dir) {
   $name = basename($dir);
   $credit = json_decode((string) file_get_contents($dir.'/credit.json'), true, 512, JSON_THROW_ON_ERROR);
   $project = json_decode((string) file_get_contents($dir.'/project.json'), true, 512, JSON_THROW_ON_ERROR);
