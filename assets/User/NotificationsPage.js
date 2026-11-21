@@ -240,6 +240,7 @@ class UserNotifications {
   }
 
   getInstanceType(fetched) {
+    if (fetched.review_url) return 'review'
     if (fetched.type === 'follow' && fetched.project) return 'program'
     if (fetched.type === 'moderation' && fetched.project) return 'program'
     if (fetched.type === 'studio') return 'studio'
@@ -249,6 +250,7 @@ class UserNotifications {
   }
 
   getRedirectTarget(fetched) {
+    if (fetched.review_url) return fetched.review_url
     if (fetched.type === 'studio' && fetched.studio) return fetched.studio
     if (fetched.project) return fetched.project
     if (fetched.type === 'follow' && fetched.from) return fetched.from
@@ -325,6 +327,13 @@ class UserNotifications {
   }
 
   redirectUser(type, id) {
+    // Admin notifications open the moderation queue; only same-origin paths are followed.
+    if (type === 'review') {
+      if (typeof id === 'string' && id.startsWith('/') && !id.startsWith('//')) {
+        window.location.assign(id)
+      }
+      return
+    }
     if (type === 'follow') {
       window.location.assign('follower')
       return

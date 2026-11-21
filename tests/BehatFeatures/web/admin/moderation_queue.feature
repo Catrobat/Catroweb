@@ -126,3 +126,17 @@ Feature: Admin moderation queue guards
     Then I should see "Flagged (1)"
     And I should see "old_look.png"
     And I should see "NSFW score 0.990"
+
+  Scenario: The queue can be filtered to one piece of content, as admin notifications link it
+    Given there are projects:
+      | id | name          | owned by | description |
+      | 2  | other project | Owner    | test        |
+    And there are moderation reports:
+      | id                                   | reporter | content_type | content_id | category | state | created_at          |
+      | 00000000-0000-0000-0000-000000000403 | Reporter | project      | 1          | spam     | new   | 2024-01-01 10:00:00 |
+      | 00000000-0000-0000-0000-000000000404 | Reporter | project      | 2          | spam     | new   | 2024-01-01 11:00:00 |
+    And I log in as "Admin" with the password "123456"
+    And I am on "/admin/moderation/report/list?filter[content_id][type]=3&filter[content_id][value]=2"
+    And I wait for the page to be loaded
+    Then the element "a[href*='/admin/moderation/report/00000000-0000-0000-0000-000000000404/acceptReport']" should exist
+    And the element "a[href*='/admin/moderation/report/00000000-0000-0000-0000-000000000403/acceptReport']" should not exist

@@ -5471,6 +5471,10 @@ components:
         prize:
           type: string
           description: 'Prize for anniversary notifications'
+        review_url:
+          type: string
+          example: '/admin/moderation/report/list?filter%5Bcontent_id%5D%5Bvalue%5D=1234'
+          description: 'Admin page to review the content, for moderation notifications sent to admins'
 
     ######################################################
     # Achievement Schemas
