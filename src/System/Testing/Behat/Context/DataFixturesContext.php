@@ -516,6 +516,17 @@ class DataFixturesContext implements Context
   }
 
   /**
+   * @Given /^the project "([^"]*)" has the description:$/
+   */
+  public function theProjectHasTheDescription(string $project_name, PyStringNode $description): void
+  {
+    $project = $this->getProjectManager()->findOneByName($project_name);
+    Assert::assertNotNull($project, 'Project not found: '.$project_name);
+    $project->setDescription((string) $description);
+    $this->getManager()->flush();
+  }
+
+  /**
    * @Given /^project "([^"]*)" has extracted code xml:$/
    */
   public function projectHasExtractedCodeXml(string $project_id, PyStringNode $xml): void

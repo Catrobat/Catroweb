@@ -28,6 +28,20 @@ Feature: Projects should have descriptions that can be changed by the project ow
     And the client response should contain "No description available."
     And the client response should contain "No notes and credits available."
 
+  Scenario: A description with a link keeps its line breaks
+    Given the project "project 1" has the description:
+      """
+      first line
+      see https://catrobat.org
+      last line
+      """
+    When I go to "/app/project/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then the element "#description a[href='https://catrobat.org/']" should exist
+    And the element "#description br" should exist
+    And I should see "last line"
+
   Scenario: Changing description is possible if it's my project
     Given I log in as "OtherUser"
     And I go to "/app/project/2"

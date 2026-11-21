@@ -39,7 +39,7 @@ export const Project = (config) => {
       // biome-ignore lint/suspicious/noAssignInExpressions: idiomatic regex exec loop
       while ((match = urlPattern.exec(text)) !== null) {
         if (match.index > lastIndex) {
-          fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)))
+          appendLines(fragment, text.slice(lastIndex, match.index))
         }
         const url = match[0]
         const a = document.createElement('a')
@@ -65,11 +65,21 @@ export const Project = (config) => {
         return
       }
       if (lastIndex < text.length) {
-        fragment.appendChild(document.createTextNode(text.slice(lastIndex)))
+        appendLines(fragment, text.slice(lastIndex))
       }
 
       element.textContent = ''
       element.appendChild(fragment)
+    })
+  }
+
+  // The server renders line breaks as <br>\n; textContent keeps only the \n, so put the <br>s back
+  function appendLines(fragment, text) {
+    text.split('\n').forEach((line, i) => {
+      if (i > 0) {
+        fragment.appendChild(document.createElement('br'))
+      }
+      fragment.appendChild(document.createTextNode(line))
     })
   }
 
