@@ -13,7 +13,7 @@ every key is added there first.
 1. Add or change the key in `translations/catroweb.en.yaml`.
 2. Add the translations for **all** other locales in the same pull request. AI-generated translations are
    fine; mention it in the PR description so reviewers know to spot-check them. Keep placeholders like
-   `%username%` exactly, and address users informally where the language distinguishes (most are kids).
+   `%username%` exactly, and match the form of address the file already uses (most locales are informal; many users are kids).
 3. Remove a key from every locale when the code stops using it.
 
 `tests/PhpUnit/Translation/TranslationFilesTest.php` fails when a locale misses an English key, has a key

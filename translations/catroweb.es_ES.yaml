@@ -973,7 +973,7 @@ studio:
       error: 'Algo salió mal con el código de invitación. Inténtalo de nuevo.'
   join_with_code:
     title: 'Unirse con un código'
-    hint: '¿Te ha dado tu profe o un administrador del estudio un código de invitación? Escríbelo aquí para unirte al estudio.'
+    hint: '¿Te ha dado tu profesor o un administrador del estudio un código de invitación? Escríbelo aquí para unirte al estudio.'
     code: 'Código de invitación'
     invalid: 'Este código no es válido. Puede que haya caducado o se haya revocado.'
     banned: 'Te han expulsado de este estudio.'

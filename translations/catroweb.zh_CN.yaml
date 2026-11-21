@@ -603,7 +603,7 @@ codeView:
     auto: '检测语言'
     loading: '正在翻译代码…'
     complete: '已机器翻译成%language%'
-    partial: '部分已翻译'
+    partial: '已部分翻译'
     partialInLanguage: '部分已翻译成%language%'
     sourceRequired: '请选择源语言来翻译这段代码。'
     unsupported: '这些语言暂不支持翻译。'
