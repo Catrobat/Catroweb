@@ -69,6 +69,9 @@ class AgeSignalDetectorTest extends TestCase
       'negated elsewhere' => ['no spam here, 18+ only'],
       'second match counts' => ['18+ levels and 18+ content'],
       'adult games' => ['18+ games'],
+      'game with article' => ['This is a +18 game'],
+      'rated r' => ['Rated R +18'],
+      'age rating and levels' => ['18+ 13 levels of horror'],
     ];
   }
 
@@ -101,6 +104,15 @@ class AgeSignalDetectorTest extends TestCase
       'larger number' => ['118+ levels'],
       'sum' => ['what is 18+2?'],
       'spaced sum' => ['1 + 18 = 19'],
+      'spaced sum multi space' => ['1  + 18 = 19'],
+      'sum without result' => ['1  + 18'],
+      'large number sum' => ['100  + 18'],
+      'decimal sum' => ['2.5  + 18'],
+      'parenthesized sum' => ['(a + b) + 18'],
+      'equation sum with number' => ['18 + 2 = 20'],
+      'algebraic equation' => ['x + 18 = 20'],
+      'equation reverse sum' => ['18 + x = 20'],
+      'unary equation' => ['+ 18 = 19'],
       'score' => ['+18 points per coin'],
       'phone like' => ['+18005551234'],
       'time de' => ['Treffen ab 18 Uhr'],
