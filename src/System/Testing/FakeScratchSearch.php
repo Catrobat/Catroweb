@@ -22,12 +22,12 @@ class FakeScratchSearch extends ScratchSearch
   public function __construct(
     HttpClientInterface $http_client,
     CacheInterface $cache,
-    RateLimiterFactoryInterface $scratchSearchBurstLimiter,
+    RateLimiterFactoryInterface $scratchUpstreamSearchBurstLimiter,
     ProjectRepository $project_repository,
     LoggerInterface $logger,
     private readonly ScratchProjectRepository $scratch_project_repository,
   ) {
-    parent::__construct($http_client, $cache, $scratchSearchBurstLimiter, $project_repository, $logger);
+    parent::__construct($http_client, $cache, $scratchUpstreamSearchBurstLimiter, $project_repository, $logger);
   }
 
   #[\Override]

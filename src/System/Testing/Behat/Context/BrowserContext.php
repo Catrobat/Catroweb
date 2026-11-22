@@ -223,6 +223,47 @@ class BrowserContext extends MinkContext implements Context
     $this->getSession()->executeScript("localStorage.removeItem('oauthSignIn')");
   }
 
+  private bool $urls_blocked = false;
+
+  /**
+   * Makes the browser's requests to matching URLs fail like a network error, until the scenario ends.
+   *
+   * @Given the browser's requests to :pattern fail
+   */
+  public function theBrowsersRequestsToFail(string $pattern): void
+  {
+    $this->setBlockedUrls([$pattern]);
+    $this->urls_blocked = true;
+  }
+
+  /**
+   * @AfterScenario
+   */
+  public function unblockUrls(): void
+  {
+    if ($this->urls_blocked) {
+      $this->urls_blocked = false;
+      try {
+        $this->setBlockedUrls([]);
+      } catch (\Throwable) {
+        // A dead session has no blocked URLs left; don't hide the scenario's own failure.
+      }
+    }
+  }
+
+  /**
+   * The session (and its Chrome tab) outlives the scenario, so blocked URLs must be cleared again.
+   *
+   * @param string[] $patterns with * wildcards
+   */
+  private function setBlockedUrls(array $patterns): void
+  {
+    $driver = $this->getSession()->getDriver();
+    // chrome-mink-driver (2.11) has no API for this; its DevTools page connection is private.
+    $page = new \ReflectionProperty($driver, 'page')->getValue($driver);
+    $page->send('Network.setBlockedURLs', ['urls' => $patterns]);
+  }
+
   /**
    * @Given I start a new session
    */

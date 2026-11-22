@@ -53,8 +53,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 30,
         'interval' => '1 minute',
       ],
-      // Every search not yet cached asks Scratch's search API live.
-      'scratch_search_burst' => [
+      // Calls we send to Scratch's search API (only searches not yet cached). Requests to our own type=scratch search
+      // are limited by search_scratch_burst.
+      'scratch_upstream_search_burst' => [
         'policy' => 'sliding_window',
         'limit' => 30,
         'interval' => '1 minute',
@@ -107,7 +108,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 30,
         'interval' => '1 minute',
       ],
-      // type=scratch: the search page sends it next to every search, so it gets its own budget instead of halving search_burst.
+      // Requests to our type=scratch search: the search page sends one next to every search, so it gets its own budget
+      // instead of halving search_burst. Calls that actually reach Scratch are limited by scratch_upstream_search_burst.
       'search_scratch_burst' => [
         'policy' => 'sliding_window',
         'limit' => 30,
