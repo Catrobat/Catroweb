@@ -57,6 +57,7 @@ Ports: app 8080, phpMyAdmin 8081, MariaDB 3306 (`db.catroweb.dev` / `catroweb_de
 ## Frontend
 
 - New page-level UI behavior goes into Stimulus controllers. Migrate existing vanilla files incrementally when touching them; no new `DOMContentLoaded` bootstrapping where a controller can own the lifecycle.
+- Stimulus controllers are not registered globally: the entry of the page that renders the markup calls `app.register('<identifier>', Controller)` (`app` from `assets/bootstrap.js`), or the markup stays inert without an error. A page that needs a component (e.g. `md-filled-text-field`) imports it in its own entry; nothing global defines it.
 - Event delegation: use `.closest()`, not `.matches()`.
 - Nothing may download alongside the render-blocking CSS: `modulepreload` is off (`config/packages/pentatrion_vite.php`) and Early Hints carry only stylesheets. On a slow phone the ~30 JS chunks shared the line with the CSS and delayed the first paint by ~0.7 s. Render the LCP text in Twig, not from an API fetch.
 - A new or removed translation key goes into **all 73** `translations/catroweb.*.yaml` in the same PR (AI translation is fine, say so in the PR); `TranslationFilesTest` fails otherwise. See `docs/contributor-guide/Translations.md`.

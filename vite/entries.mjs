@@ -7,6 +7,7 @@ export const jsEntries = {
 
   login_page: './assets/Security/LoginPage.js',
   registration_page: './assets/Security/RegistrationPage.js',
+  complete_registration_page: './assets/Security/CompleteRegistrationPage.js',
   password_reset_page: './assets/Security/PasswordResetPage.js',
   request_to_reset_password_page: './assets/Security/RequestPasswordResetPage.js',
 
