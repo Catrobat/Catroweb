@@ -66,6 +66,14 @@ Feature: Pocketcode homepage
     Then I should see the featured slider
     And I should see the slider with the values "http://www.google.at/,project 2,project 3"
 
+  Scenario: Featured slider controls switch slides
+    Given I am on homepage
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then I should see the featured slider
+    When I click "#feature-slider [data-bs-slide-to='2']"
+    Then I wait for the element "#feature-slider .carousel-item:nth-child(3).active" to be visible
+
   @disabled
   Scenario: Example Programs
     Given I am on homepage
