@@ -20,7 +20,7 @@ export class FeaturedBanner {
     const params = flavor ? `?flavor=${encodeURIComponent(flavor)}` : ''
     const apiUrl = `${baseUrl}/api/featured-banners${params}`
 
-    // Bootstrap (~24 kB) is imported here, not statically: a static import downloads alongside the SSR banner
+    // Bootstrap is imported here, not statically: a static import downloads alongside the SSR banner
     // image, the page's LCP element, and delays it on slow connections.
     Promise.all([
       fetch(apiUrl, { headers: { 'Accept-Language': new AcceptLanguage().get() } }).then((r) => {
@@ -55,6 +55,8 @@ export class FeaturedBanner {
       })
       .catch((error) => {
         console.error('Failed to load featured banners', error)
+        // The server-rendered first banner is already painted and needs no JS: keep it.
+        if (this.container.querySelector('.featured-slider__ssr')) return
         this.removeSkeleton()
         this.container.style.display = 'none'
       })
