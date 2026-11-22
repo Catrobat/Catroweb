@@ -108,10 +108,9 @@ function renderPage(container, query, theme, baseUrl, trans) {
 
   // Scratch is searched live and takes ~200 ms when not cached, so it gets its own request and doesn't hold up ours.
   let found = null // [projects, users, studios] once our results are in
+  let scratchFound = false
   const arrange = () => {
-    if (!found) return
-    const hasScratch = !scratchSection.classList.contains('d-none')
-    arrangeSections(container, sections, [...found, hasScratch], query, trans)
+    if (found) arrangeSections(container, sections, [...found, scratchFound], query, trans)
   }
 
   search('all')
@@ -142,9 +141,12 @@ function renderPage(container, query, theme, baseUrl, trans) {
         theme,
         trans,
       )
-      // renderScratchProjects shows the section in its slot; arranging again would re-insert (and unfocus) every
-      // section, so only do it to replace the "no results" line.
-      if (found && !found.some(Boolean)) arrange()
+      scratchFound = !scratchSection.classList.contains('d-none')
+      // Before our results: stay hidden, or they would push the Scratch cards down when they arrive.
+      // After them: renderScratchProjects already showed the section in its slot; arranging again would re-insert
+      // (and unfocus) every section, so only do it to replace the "no results" line.
+      if (!found) scratchSection.classList.add('d-none')
+      else if (!found.some(Boolean)) arrange()
       wireShowMore(scratchSection, 'scratch', query, baseUrl, theme, trans)
     })
     .catch((error) => console.error('Scratch search error:', error))

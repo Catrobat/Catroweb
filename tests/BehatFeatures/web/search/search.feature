@@ -178,6 +178,9 @@ Feature: Searching for projects & users
     And the element "#search-scratch-projects .search-card__badge" should contain "Scratch"
     And the element "#search-scratch-projects button.search-card" should exist
     And the element "#search-scratch-projects img.search-card__image[data-scratch-thumbnail='https://uploads.scratch.mit.edu/get_image/project/70058680_480x360.png']" should exist
+    # Scratch comes in its own request: its results replace the "no results" line our empty search left.
+    And the element "#search-empty-summary" should contain "No projects found"
+    And the element "#search-empty-summary" should not contain "No results for"
 
   Scenario: No Scratch section without Scratch matches
     Given I am on "/app/search/gmail"
