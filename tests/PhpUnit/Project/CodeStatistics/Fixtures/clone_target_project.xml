@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <programName>Clone Target</programName>
+    <catrobatLanguageVersion>1.12</catrobatLanguageVersion>
+  </header>
+  <scenes>
+    <scene>
+      <name>Scene 1</name>
+      <objectList>
+        <object type="Sprite" name="Background">
+          <lookList/>
+          <soundList/>
+          <scriptList>
+            <script type="StartScript">
+              <brickList>
+                <brick type="CloneBrick">
+                  <objectToClone type="Sprite" name="Cat">
+                    <lookList/>
+                    <soundList/>
+                    <scriptList>
+                      <script type="WhenTouchDownScript">
+                        <brickList>
+                          <brick type="HideBrick"/>
+                        </brickList>
+                      </script>
+                      <script type="WhenScript">
+                        <action>Tapped</action>
+                        <brickList>
+                          <brick type="ShowBrick"/>
+                        </brickList>
+                      </script>
+                    </scriptList>
+                  </objectToClone>
+                </brick>
+              </brickList>
+            </script>
+          </scriptList>
+        </object>
+        <object reference="../object/scriptList/script/brickList/brick/objectToClone"/>
+      </objectList>
+    </scene>
+  </scenes>
+</program>
