@@ -4,17 +4,16 @@ import '../Components/Switch'
 import '../Components/TextArea'
 import '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
+import { app } from '../bootstrap'
 import { escapeHtml } from '../Components/HtmlEscape'
+import ActivityListController from '../controllers/studio/activity-list_controller'
+import CommentController from '../controllers/studio/comment_controller'
+import JoinRequestsController from '../controllers/studio/join-requests_controller'
+import MemberListController from '../controllers/studio/member-list_controller'
+import ProjectListController from '../controllers/studio/project-list_controller'
 import { updatePictureSources } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
-// Stimulus loads controllers lazily; import this page's own (including those of the markup injected below) so they
-// download with the page, not after it, when a click could hit a controller that is not there yet.
-import '../controllers/studio/activity-list_controller'
-import '../controllers/studio/comment_controller'
-import '../controllers/studio/join-requests_controller'
-import '../controllers/studio/member-list_controller'
-import '../controllers/studio/project-list_controller'
 
 import '../Project/ProjectList.css'
 import './AdminSettings.css'
@@ -770,3 +769,10 @@ function renderInvite(invite) {
   li.append(meta, actions)
   return li
 }
+
+// assets/bootstrap.js registers no controllers; each page registers its own, including those of the markup above.
+app.register('studio--activity-list', ActivityListController)
+app.register('studio--comment', CommentController)
+app.register('studio--join-requests', JoinRequestsController)
+app.register('studio--member-list', MemberListController)
+app.register('studio--project-list', ProjectListController)

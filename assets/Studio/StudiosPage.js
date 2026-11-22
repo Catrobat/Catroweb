@@ -2,8 +2,8 @@
 import '@material/web/iconbutton/icon-button.js'
 import '@material/web/menu/menu-item.js'
 import '@material/web/menu/menu.js'
-// Stimulus loads controllers lazily; import this page's own so it downloads with the page, not one round trip later.
-import '../controllers/studio/overview_controller'
+import { app } from '../bootstrap'
+import OverviewController from '../controllers/studio/overview_controller'
 
 import './Studios.css'
 import '../Project/ProjectList.css'
@@ -16,3 +16,6 @@ for (const button of document.querySelectorAll('[id^="studios-list-item--button-
     if (menu) menu.open = true
   })
 }
+
+// assets/bootstrap.js registers no controllers; each page registers its own.
+app.register('studio--overview', OverviewController)

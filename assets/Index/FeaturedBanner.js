@@ -56,7 +56,10 @@ export class FeaturedBanner {
       .catch((error) => {
         console.error('Failed to load featured banners', error)
         // The server-rendered first banner is already painted and needs no JS: keep it.
-        if (this.container.querySelector('.featured-slider__ssr')) return
+        if (this.container.querySelector('.featured-slider__ssr')) {
+          this.container.querySelector('#feature-slider')?.remove()
+          return
+        }
         this.removeSkeleton()
         this.container.style.display = 'none'
       })
