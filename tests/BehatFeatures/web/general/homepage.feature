@@ -72,7 +72,8 @@ Feature: Pocketcode homepage
     And I wait for AJAX to finish
     Then I should see the featured slider
     When I click "#feature-slider [data-bs-slide-to='2']"
-    Then I wait for the element "#feature-slider .carousel-item:nth-child(3).active" to be visible
+    # Checked at once: the carousel auto-advances every 5 s and would reach slide 3 on its own.
+    Then the element "#feature-slider [data-bs-slide-to='2'][aria-current='true']" should exist
 
   @disabled
   Scenario: Example Programs
