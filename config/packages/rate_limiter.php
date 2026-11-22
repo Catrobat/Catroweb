@@ -107,6 +107,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 30,
         'interval' => '1 minute',
       ],
+      // type=scratch: the search page sends it next to every search, so it gets its own budget instead of halving search_burst.
+      'search_scratch_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 30,
+        'interval' => '1 minute',
+      ],
       // Machine translation runs on our own LibreTranslate, on the web host's CPU. translation_burst: requests per
       // client IP (schools share one). translation_global: LibreTranslate calls site-wide (cache hits are free; a
       // project is up to 3 calls; the container itself takes 120 a minute). Comments are translated within the

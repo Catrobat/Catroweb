@@ -86,7 +86,7 @@ class ScratchSearch
     try {
       $response = $this->http_client->request('GET', 'https://api.scratch.mit.edu/search/projects', [
         'query' => ['q' => $query, 'mode' => 'popular', 'language' => 'en', 'limit' => $limit, 'offset' => $offset],
-        // Runs inside every default search, so a slow Scratch may delay it by at most 2 s.
+        // The search page asks for it in its own request (type=scratch), so a slow Scratch delays only that, by at most 2 s.
         'timeout' => 2,
         'max_duration' => 2,
         'max_redirects' => 0,

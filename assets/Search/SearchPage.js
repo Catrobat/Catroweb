@@ -85,11 +85,12 @@ function renderPage(container, query, theme, baseUrl, trans) {
   container.appendChild(scratchSection)
 
   // Fixed priority, not relevance: scores from different indexes (and Scratch, which has none) don't compare.
+  // Scratch is last because it can arrive after the rest: showing it then must not push results the user is about to tap.
   const sections = [
     { section: projectsSection, empty: trans.noProjects },
-    { section: scratchSection, empty: null },
     { section: usersSection, empty: trans.noUsers },
     { section: studiosSection, empty: trans.noStudios },
+    { section: scratchSection, empty: null },
   ]
 
   if (!query) {
@@ -110,7 +111,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
   const arrange = () => {
     if (!found) return
     const hasScratch = !scratchSection.classList.contains('d-none')
-    arrangeSections(container, sections, [found[0], hasScratch, found[1], found[2]], query, trans)
+    arrangeSections(container, sections, [...found, hasScratch], query, trans)
   }
 
   search('all')
@@ -141,7 +142,9 @@ function renderPage(container, query, theme, baseUrl, trans) {
         theme,
         trans,
       )
-      arrange()
+      // renderScratchProjects shows the section in its slot; arranging again would re-insert (and unfocus) every
+      // section, so only do it to replace the "no results" line.
+      if (found && !found.some(Boolean)) arrange()
       wireShowMore(scratchSection, 'scratch', query, baseUrl, theme, trans)
     })
     .catch((error) => console.error('Scratch search error:', error))

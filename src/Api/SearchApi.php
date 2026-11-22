@@ -21,6 +21,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
   public function __construct(
     private readonly SearchApiFacade $facade,
     private readonly RateLimiterFactory $searchBurstLimiter,
+    private readonly RateLimiterFactory $searchScratchBurstLimiter,
     private readonly RequestStack $request_stack,
   ) {
   }
@@ -34,8 +35,9 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
     // Elasticsearch only supports offset-based pagination (from/size), not keyset cursors
     $offset = $this->decodeCursorToOffset($cursor);
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    // The search page asks for Scratch alongside every search; ScratchSearch limits the calls that reach Scratch.
-    if ('scratch' !== $type && null === $this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {
+    // The search page asks for Scratch alongside every search, so type=scratch has its own budget.
+    $limiter = 'scratch' === $type ? $this->searchScratchBurstLimiter : $this->searchBurstLimiter;
+    if (null === $this->checkIpRateLimit($ip, $limiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return [];
