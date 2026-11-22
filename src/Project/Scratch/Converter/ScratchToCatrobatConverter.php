@@ -16,9 +16,10 @@ class ScratchToCatrobatConverter
 {
   /**
    * Raise when a change should reach projects converted before it: older copies are converted again on their next
-   * import, or all at once with catro:scratch:reconvert. 2: loops yield a frame per pass, like Scratch.
+   * import, or all at once with catro:scratch:reconvert. 2: loops yield a frame per pass, like Scratch. 4: "create
+   * clone of <sprite>" is a native CloneBrick.
    */
-  public const int VERSION = 3;
+  public const int VERSION = 4;
 
   private const string SCENE = 'Scene';
   private const int MAX_BLOCKS = 100_000;

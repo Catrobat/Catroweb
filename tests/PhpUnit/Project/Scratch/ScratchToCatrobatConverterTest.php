@@ -71,11 +71,11 @@ final class ScratchToCatrobatConverterTest extends TestCase
       'clone' => ['opcode' => 'control_create_clone_of', 'next' => null, 'inputs' => ['CLONE_OPTION' => [1, 'menu']], 'fields' => []],
       'menu' => ['opcode' => 'control_create_clone_of_menu', 'shadow' => true, 'inputs' => [], 'fields' => ['CLONE_OPTION' => [$sprite, null]]],
     ];
-    $sprite = static fn (string $name, array $blocks): array => ['isStage' => false, 'name' => $name, 'variables' => [], 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []];
+    $sprite = static fn (string $name, array $blocks, array $variables = []): array => ['isStage' => false, 'name' => $name, 'variables' => $variables, 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []];
     $xml = self::convertProject(['targets' => [
       ['isStage' => true, 'name' => 'Stage', 'variables' => [], 'lists' => [], 'blocks' => [], 'costumes' => [], 'sounds' => []],
       $sprite('A', $clone_of('B')),
-      $sprite('B', $clone_of('A')),
+      $sprite('B', [...$clone_of('A'), 'set' => ['opcode' => 'data_setvariableto', 'topLevel' => true, 'next' => null, 'inputs' => ['VALUE' => [1, [10, '1']]], 'fields' => ['VARIABLE' => ['score', 'score']]]], ['score' => ['score', 0]]),
       $sprite('C', $clone_of('Nope')),
     ]]);
     $xpath = new \DOMXPath($xml);
@@ -90,6 +90,8 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame(1.0, $xpath->evaluate('count(//objectList/object[3][@reference])'));
     $this->assertSame(0.0, $xpath->evaluate('count(//object[@name="C"]//brick[@type="CloneBrick"])'));
     $this->assertStringContainsString('unknown sprite', $xpath->evaluate('string(//object[@name="C"]//brick[@type="NoteBrick"])'));
+    // B's variable is first written by its own brick, now inside A, so B's variable list refers to it there.
+    $this->assertSame(1.0, $xpath->evaluate('count('.$b.'/userVariables/userVariable[@reference])'));
     // B's brick refers back to A, the object it sits in.
     $this->assertSame(1.0, $xpath->evaluate('count('.$b.'//brick[@type="CloneBrick"]/objectToClone[@reference])'));
     self::assertReferencesPointBack($xml);
