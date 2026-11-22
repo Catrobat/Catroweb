@@ -129,7 +129,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
     const parts = []
     if (failed) parts.push(trans.error)
     if (found && scratchCount > 0) parts.push(`${trans.scratchProjects}: ${scratchCount}`)
-    status.textContent = parts.join('. ')
+    status.textContent = parts.join(' ')
   }
 
   search('all')

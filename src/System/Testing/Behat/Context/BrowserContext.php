@@ -243,7 +243,11 @@ class BrowserContext extends MinkContext implements Context
   {
     if ($this->urls_blocked) {
       $this->urls_blocked = false;
-      $this->setBlockedUrls([]);
+      try {
+        $this->setBlockedUrls([]);
+      } catch (\Throwable) {
+        // A dead session has no blocked URLs left; don't hide the scenario's own failure.
+      }
     }
   }
 
@@ -255,7 +259,7 @@ class BrowserContext extends MinkContext implements Context
   private function setBlockedUrls(array $patterns): void
   {
     $driver = $this->getSession()->getDriver();
-    // chrome-mink-driver has no API for this; its DevTools page connection is private.
+    // chrome-mink-driver (2.11) has no API for this; its DevTools page connection is private.
     $page = new \ReflectionProperty($driver, 'page')->getValue($driver);
     $page->send('Network.setBlockedURLs', ['urls' => $patterns]);
   }
