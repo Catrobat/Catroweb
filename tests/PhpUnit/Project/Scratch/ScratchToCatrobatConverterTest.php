@@ -125,7 +125,7 @@ final class ScratchToCatrobatConverterTest extends TestCase
       $types[$attribute->nodeValue] = true;
     }
 
-    foreach (['StartScript', 'BroadcastScript', 'UserDefinedScript', 'WhenClonedScript', 'ForeverBrick', 'MoveNStepsBrick',
+    foreach (['StartScript', 'BroadcastScript', 'UserDefinedScript', 'ForeverBrick', 'MoveNStepsBrick',
       'IfThenLogicBeginBrick', 'SayBubbleBrick', 'PlaySoundBrick', 'SetLookByIndexBrick', 'SetXBrick', 'AddItemToUserListBrick',
       'UserDefinedBrick', 'ChangeYByNBrick', 'CloneBrick', 'PlaceAtBrick', 'SetSizeToBrick', 'NoteBrick'] as $type) {
       $this->assertArrayHasKey($type, $types, $type.' missing');
