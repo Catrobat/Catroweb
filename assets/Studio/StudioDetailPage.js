@@ -8,11 +8,13 @@ import { escapeHtml } from '../Components/HtmlEscape'
 import { updatePictureSources } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
-// Stimulus loads controllers lazily; these back markup this file injects, so they download with the page
-// instead of after the injection, when a click could hit a controller that is not there yet.
+// Stimulus loads controllers lazily; import this page's own (including those of the markup injected below) so they
+// download with the page, not after it, when a click could hit a controller that is not there yet.
 import '../controllers/studio/activity-list_controller'
+import '../controllers/studio/comment_controller'
 import '../controllers/studio/join-requests_controller'
 import '../controllers/studio/member-list_controller'
+import '../controllers/studio/project-list_controller'
 
 import '../Project/ProjectList.css'
 import './AdminSettings.css'

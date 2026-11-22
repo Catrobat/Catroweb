@@ -71,9 +71,10 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see the featured slider
-    When I click "#feature-slider [data-bs-slide-to='2']"
-    # Checked at once: the carousel auto-advances every 5 s and would reach slide 3 on its own.
-    Then the element "#feature-slider [data-bs-slide-to='2'][aria-current='true']" should exist
+    # Paused first: auto-advance would otherwise reach slide 3 on its own.
+    When I click "#feature-slider .featured-banner__pause-btn"
+    And I click "#feature-slider [data-bs-slide-to='2']"
+    Then I wait for the element "#feature-slider [data-bs-slide-to='2'][aria-current='true']" to be visible
 
   @disabled
   Scenario: Example Programs

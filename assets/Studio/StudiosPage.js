@@ -2,6 +2,8 @@
 import '@material/web/iconbutton/icon-button.js'
 import '@material/web/menu/menu-item.js'
 import '@material/web/menu/menu.js'
+// Stimulus loads controllers lazily; import this page's own so it downloads with the page, not one round trip later.
+import '../controllers/studio/overview_controller'
 
 import './Studios.css'
 import '../Project/ProjectList.css'
