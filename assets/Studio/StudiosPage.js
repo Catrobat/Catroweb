@@ -2,6 +2,8 @@
 import '@material/web/iconbutton/icon-button.js'
 import '@material/web/menu/menu-item.js'
 import '@material/web/menu/menu.js'
+import { app } from '../bootstrap'
+import OverviewController from '../controllers/studio/overview_controller'
 
 import './Studios.css'
 import '../Project/ProjectList.css'
@@ -14,3 +16,5 @@ for (const button of document.querySelectorAll('[id^="studios-list-item--button-
     if (menu) menu.open = true
   })
 }
+
+app.register('studio--overview', OverviewController)

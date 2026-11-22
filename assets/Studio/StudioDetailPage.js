@@ -4,7 +4,13 @@ import '../Components/Switch'
 import '../Components/TextArea'
 import '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
+import { app } from '../bootstrap'
 import { escapeHtml } from '../Components/HtmlEscape'
+import ActivityListController from '../controllers/studio/activity-list_controller'
+import CommentController from '../controllers/studio/comment_controller'
+import JoinRequestsController from '../controllers/studio/join-requests_controller'
+import MemberListController from '../controllers/studio/member-list_controller'
+import ProjectListController from '../controllers/studio/project-list_controller'
 import { updatePictureSources } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
@@ -14,6 +20,13 @@ import './AdminSettings.css'
 import './MembersList.css'
 import './ActivityList.css'
 import './Studio.css'
+
+// Includes the controllers of the markup this file injects.
+app.register('studio--activity-list', ActivityListController)
+app.register('studio--comment', CommentController)
+app.register('studio--join-requests', JoinRequestsController)
+app.register('studio--member-list', MemberListController)
+app.register('studio--project-list', ProjectListController)
 
 document.getElementById('studio-detail-tabs')?.addEventListener('change', (event) => {
   const tabs = Array.from(event.currentTarget.querySelectorAll('md-primary-tab'))

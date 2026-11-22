@@ -1,4 +1,3 @@
-import { Carousel } from 'bootstrap'
 import AcceptLanguage from '../Api/AcceptLanguage'
 import { createPictureElement } from '../Layout/ImageVariants'
 
@@ -21,12 +20,16 @@ export class FeaturedBanner {
     const params = flavor ? `?flavor=${encodeURIComponent(flavor)}` : ''
     const apiUrl = `${baseUrl}/api/featured-banners${params}`
 
-    fetch(apiUrl, { headers: { 'Accept-Language': new AcceptLanguage().get() } })
-      .then((r) => {
+    // Bootstrap is imported here, not statically: a static import downloads alongside the SSR banner
+    // image, the page's LCP element, and delays it on slow connections.
+    Promise.all([
+      fetch(apiUrl, { headers: { 'Accept-Language': new AcceptLanguage().get() } }).then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()
-      })
-      .then((response) => {
+      }),
+      import('bootstrap'),
+    ])
+      .then(([response, { Carousel }]) => {
         const items = Array.isArray(response) ? response : response?.data || []
         if (!Array.isArray(items) || items.length === 0) {
           this.removeSkeleton()
@@ -48,16 +51,22 @@ export class FeaturedBanner {
           }
         })
 
-        this.renderCarousel(slides)
+        this.renderCarousel(slides, Carousel)
       })
       .catch((error) => {
         console.error('Failed to load featured banners', error)
+        // The server-rendered first banner is already painted and needs no JS: keep it.
+        if (this.container.querySelector('.featured-slider__ssr')) {
+          this.keepSsrBanner = true // a detached slide image may still load and call removeSkeleton()
+          this.container.querySelector('#feature-slider')?.remove()
+          return
+        }
         this.removeSkeleton()
         this.container.style.display = 'none'
       })
   }
 
-  renderCarousel(slides) {
+  renderCarousel(slides, Carousel) {
     const carouselId = 'feature-slider'
 
     const carouselDiv = document.createElement('div')
@@ -146,6 +155,7 @@ export class FeaturedBanner {
       // can restart cycling on mouseleave/touchend via `_maybeEnableCycle()`.
       pause: false,
     })
+    this.carouselInstance = carouselInstance
 
     // Pause/play toggle button for auto-playing carousel (a11y)
     if (slides.length > 1) {
@@ -248,11 +258,7 @@ export class FeaturedBanner {
       container.replaceWith(iframe)
 
       // Pause carousel auto-rotation while video plays
-      const carouselEl = this.container.querySelector('.carousel')
-      if (carouselEl) {
-        const bsCarousel = Carousel.getInstance(carouselEl)
-        if (bsCarousel) bsCarousel.pause()
-      }
+      this.carouselInstance?.pause()
     })
 
     return container
@@ -265,6 +271,7 @@ export class FeaturedBanner {
   }
 
   removeSkeleton() {
+    if (this.keepSsrBanner) return
     this.container
       .querySelectorAll('.featured-slider__skeleton, .featured-slider__ssr')
       .forEach((el) => {
