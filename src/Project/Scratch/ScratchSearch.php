@@ -27,7 +27,7 @@ class ScratchSearch
   public function __construct(
     private readonly HttpClientInterface $http_client,
     private readonly CacheInterface $cache,
-    private readonly RateLimiterFactoryInterface $scratchSearchBurstLimiter,
+    private readonly RateLimiterFactoryInterface $scratchUpstreamSearchBurstLimiter,
     private readonly ProjectRepository $project_repository,
     private readonly LoggerInterface $logger,
   ) {
@@ -52,7 +52,7 @@ class ScratchSearch
       function (ItemInterface $item, bool &$save) use ($query, $limit, $offset, $ip): array {
         $item->expiresAfter(self::CACHE_TTL);
         // Only cache misses ask Scratch, so only they count against the limit.
-        $page = $this->scratchSearchBurstLimiter->create($ip)->consume()->isAccepted()
+        $page = $this->scratchUpstreamSearchBurstLimiter->create($ip)->consume()->isAccepted()
           ? $this->fetch($query, $limit, $offset)
           : null;
         $save = null !== $page;

@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scratchConvertingSnackbar:
       container.dataset.transScratchConvertingSnackbar ||
       'Converting “%name%” — this can take a few seconds',
+    error: container.dataset.transError || 'Oops, something did not work. Please try again!',
   }
 
   const searchInput = document.querySelector('#top-app-bar__search-input')
@@ -60,6 +61,15 @@ function renderPage(container, query, theme, baseUrl, trans) {
   }
   titleDiv.appendChild(h1)
   container.appendChild(titleDiv)
+
+  // Scratch results arrive late, at the bottom: screen readers hear about them (and about a failed search) here.
+  // Present from the start, so the text set later is announced.
+  const status = document.createElement('p')
+  status.id = 'search-status'
+  status.className = 'visually-hidden'
+  status.setAttribute('role', 'status')
+  status.setAttribute('aria-live', 'polite')
+  container.appendChild(status)
 
   const projectsSection = createSection(
     'search-projects',
@@ -109,8 +119,9 @@ function renderPage(container, query, theme, baseUrl, trans) {
   // Scratch is searched live and takes ~200 ms when not cached, so it gets its own request and doesn't hold up ours.
   let found = null // [projects, users, studios] once our results are in
   let scratchFound = false
+  let failed = false // our search failed: say so instead of "no results"
   const arrange = () => {
-    if (found) arrangeSections(container, sections, [...found, scratchFound], query, trans)
+    if (found) arrangeSections(container, sections, [...found, scratchFound], query, trans, failed)
   }
 
   search('all')
@@ -128,7 +139,9 @@ function renderPage(container, query, theme, baseUrl, trans) {
     .catch((error) => {
       console.error('Search API error:', error)
       found = [false, false, false]
+      failed = true
       arrange()
+      status.textContent = trans.error
     })
 
   search('scratch')
@@ -142,6 +155,9 @@ function renderPage(container, query, theme, baseUrl, trans) {
         trans,
       )
       scratchFound = !scratchSection.classList.contains('d-none')
+      if (scratchFound) {
+        status.textContent = `${trans.scratchProjects}: ${(data.scratch_projects || []).length}`
+      }
       // Before our results: stay hidden, or they would push the Scratch cards down when they arrive.
       // After them: renderScratchProjects already showed the section in its slot; arranging again would re-insert
       // (and unfocus) every section, so only do it to replace the "no results" line.
@@ -153,7 +169,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
 }
 
 // Sections with results first, in their fixed order; the empty ones collapse into one line at the bottom.
-function arrangeSections(container, sections, hasResults, query, trans) {
+function arrangeSections(container, sections, hasResults, query, trans, failed = false) {
   container.querySelector('#search-empty-summary')?.remove()
   const empties = []
   sections.forEach(({ section, empty }, i) => {
@@ -165,8 +181,9 @@ function arrangeSections(container, sections, hasResults, query, trans) {
   const summary = document.createElement('p')
   summary.id = 'search-empty-summary'
   summary.className = 'search-section__empty'
-  summary.textContent =
-    query && !hasResults.some(Boolean)
+  summary.textContent = failed
+    ? trans.error
+    : query && !hasResults.some(Boolean)
       ? trans.noResults.replace('%query%', query)
       : empties.join(' · ')
   if (summary.textContent) container.appendChild(summary)

@@ -98,7 +98,7 @@ class ScratchSearchTest extends TestCase
 
       return array_shift($responses) ?? new MockResponse('', ['http_code' => 500]);
     });
-    $limiter = new RateLimiterFactory(['id' => 'scratch_search', 'policy' => 'sliding_window', 'limit' => $limit, 'interval' => '1 minute'], new InMemoryStorage());
+    $limiter = new RateLimiterFactory(['id' => 'scratch_upstream_search', 'policy' => 'sliding_window', 'limit' => $limit, 'interval' => '1 minute'], new InMemoryStorage());
     $project_repository = $this->createStub(ProjectRepository::class);
     $project_repository->method('findImportedScratchIds')->willReturn($imported);
 
