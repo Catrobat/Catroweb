@@ -12,6 +12,10 @@ namespace App\Project\Scratch\Converter;
  * The converter writes shared objects (looks, sounds, variables, lists, custom-block signatures) in full
  * wherever they are used, tagged with a `x-ref` key. This pass keeps the first occurrence of each key and turns
  * every later one into a back-reference, so forward references cannot happen.
+ *
+ * A sprite is written in full only in the object list; a brick naming it ("create clone of") holds an empty
+ * element with the sprite's key. When that brick comes first, the sprite's content moves into it, as XStream
+ * writes it, and the object list entry becomes the back-reference.
  */
 final class XStreamReferences
 {
@@ -20,10 +24,21 @@ final class XStreamReferences
   /** @var array<string, list<string>> key => absolute path steps of the first occurrence */
   private array $first = [];
 
+  /** @var array<string, \DOMElement> sprite key => its object in the object list */
+  private array $full = [];
+
   public static function resolve(\DOMDocument $doc): void
   {
     $root = $doc->documentElement ?? throw new \LogicException('Empty document');
-    (new self())->walk($root, [$root->tagName]);
+    $self = new self();
+    // Only sprites: every other keyed object is written in full at each use.
+    foreach ((new \DOMXPath($doc))->query('//*[starts-with(@'.self::KEY.', "object:")][*]') ?: [] as $full) {
+      if ($full instanceof \DOMElement) {
+        $self->full[$full->getAttribute(self::KEY)] ??= $full;
+      }
+    }
+
+    $self->walk($root, [$root->tagName]);
   }
 
   /**
@@ -43,6 +58,16 @@ final class XStreamReferences
       }
 
       $this->first[$key] = $path;
+      $full = $this->full[$key] ?? null;
+      if (null === $element->firstElementChild && null !== $full) {
+        foreach ($full->attributes ?? [] as $attribute) {
+          $element->setAttribute($attribute->name, $attribute->value);
+        }
+        $element->removeAttribute(self::KEY);
+        while (null !== $full->firstChild) {
+          $element->appendChild($full->firstChild);
+        }
+      }
     }
 
     $counts = [];

@@ -61,22 +61,40 @@ final class ScratchToCatrobatConverterTest extends TestCase
 
   public function testEveryReferencePointsBackToAFullObject(): void
   {
-    $xpath = new \DOMXPath($this->xml);
-    $references = $xpath->query('//*[@reference]');
-    $this->assertNotFalse($references);
-    $this->assertGreaterThan(5, $references->length);
+    $this->assertGreaterThan(5, self::assertReferencesPointBack($this->xml));
+  }
 
-    foreach ($references as $reference) {
-      $this->assertInstanceOf(\DOMElement::class, $reference);
-      $target = $reference;
-      foreach (explode('/', $reference->getAttribute('reference')) as $step) {
-        $target = '..' === $step ? $target->parentNode : self::child($target, $step);
-        $this->assertInstanceOf(\DOMElement::class, $target, 'Dangling reference '.$reference->getAttribute('reference'));
-      }
+  public function testCreateCloneOfAnotherSpriteNamesThatSpriteLikePocketCodeWritesIt(): void
+  {
+    $clone_of = static fn (string $sprite): array => [
+      'hat' => ['opcode' => 'event_whenflagclicked', 'topLevel' => true, 'next' => 'clone', 'inputs' => [], 'fields' => []],
+      'clone' => ['opcode' => 'control_create_clone_of', 'next' => null, 'inputs' => ['CLONE_OPTION' => [1, 'menu']], 'fields' => []],
+      'menu' => ['opcode' => 'control_create_clone_of_menu', 'shadow' => true, 'inputs' => [], 'fields' => ['CLONE_OPTION' => [$sprite, null]]],
+    ];
+    $sprite = static fn (string $name, array $blocks, array $variables = []): array => ['isStage' => false, 'name' => $name, 'variables' => $variables, 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []];
+    $xml = self::convertProject(['targets' => [
+      ['isStage' => true, 'name' => 'Stage', 'variables' => [], 'lists' => [], 'blocks' => [], 'costumes' => [], 'sounds' => []],
+      $sprite('A', $clone_of('B')),
+      $sprite('B', [...$clone_of('A'), 'set' => ['opcode' => 'data_setvariableto', 'topLevel' => true, 'next' => null, 'inputs' => ['VALUE' => [1, [10, '1']]], 'fields' => ['VARIABLE' => ['score', 'score']]]], ['score' => ['score', 0]]),
+      $sprite('C', $clone_of('Nope')),
+    ]]);
+    $xpath = new \DOMXPath($xml);
 
-      $this->assertFalse($target->hasAttribute('reference'), 'Reference to a reference');
-      $this->assertSame(\DOMNode::DOCUMENT_POSITION_PRECEDING, $reference->compareDocumentPosition($target) & \DOMNode::DOCUMENT_POSITION_PRECEDING, 'Forward reference');
-    }
+    // A native clone, no request broadcast that another clone could take (#7467).
+    $this->assertSame(0.0, $xpath->evaluate('count(//broadcastMessage[contains(., "clone")])'));
+    // B comes later in the object list, so A's brick holds B in full and the list entry refers back to it.
+    $b = '//object[@name="A"]//brick[@type="CloneBrick"]/objectToClone';
+    $this->assertSame('B', $xpath->evaluate('string('.$b.'/@name)'));
+    $this->assertSame('Sprite', $xpath->evaluate('string('.$b.'/@type)'));
+    $this->assertSame(1.0, $xpath->evaluate('count('.$b.'/scriptList)'));
+    $this->assertSame(1.0, $xpath->evaluate('count(//objectList/object[3][@reference])'));
+    $this->assertSame(0.0, $xpath->evaluate('count(//object[@name="C"]//brick[@type="CloneBrick"])'));
+    $this->assertStringContainsString('unknown sprite', $xpath->evaluate('string(//object[@name="C"]//brick[@type="NoteBrick"])'));
+    // B's variable is first written by its own brick, now inside A, so B's variable list refers to it there.
+    $this->assertSame(1.0, $xpath->evaluate('count('.$b.'/userVariables/userVariable[@reference])'));
+    // B's brick refers back to A, the object it sits in.
+    $this->assertSame(1.0, $xpath->evaluate('count('.$b.'//brick[@type="CloneBrick"]/objectToClone[@reference])'));
+    self::assertReferencesPointBack($xml);
   }
 
   public function testEveryLookAndSoundHasItsFile(): void
@@ -107,7 +125,7 @@ final class ScratchToCatrobatConverterTest extends TestCase
       $types[$attribute->nodeValue] = true;
     }
 
-    foreach (['StartScript', 'BroadcastScript', 'UserDefinedScript', 'WhenClonedScript', 'ForeverBrick', 'MoveNStepsBrick',
+    foreach (['StartScript', 'BroadcastScript', 'UserDefinedScript', 'ForeverBrick', 'MoveNStepsBrick',
       'IfThenLogicBeginBrick', 'SayBubbleBrick', 'PlaySoundBrick', 'SetLookByIndexBrick', 'SetXBrick', 'AddItemToUserListBrick',
       'UserDefinedBrick', 'ChangeYByNBrick', 'CloneBrick', 'PlaceAtBrick', 'SetSizeToBrick', 'NoteBrick'] as $type) {
       $this->assertArrayHasKey($type, $types, $type.' missing');
@@ -601,6 +619,26 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame('123', (new \DOMXPath($xml))->evaluate('string(//userDefinedBrickLabel/label)'));
   }
 
+  /** @return int the number of references */
+  private static function assertReferencesPointBack(\DOMDocument $xml): int
+  {
+    $references = (new \DOMXPath($xml))->query('//*[@reference]');
+    self::assertNotFalse($references);
+    foreach ($references as $reference) {
+      self::assertInstanceOf(\DOMElement::class, $reference);
+      $target = $reference;
+      foreach (explode('/', $reference->getAttribute('reference')) as $step) {
+        $target = '..' === $step ? $target->parentNode : self::child($target, $step);
+        self::assertInstanceOf(\DOMElement::class, $target, 'Dangling reference '.$reference->getAttribute('reference'));
+      }
+
+      self::assertFalse($target->hasAttribute('reference'), 'Reference to a reference');
+      self::assertSame(\DOMNode::DOCUMENT_POSITION_PRECEDING, $reference->compareDocumentPosition($target) & \DOMNode::DOCUMENT_POSITION_PRECEDING, 'Forward reference');
+    }
+
+    return $references->length;
+  }
+
   /** Evaluates a formula like Catroid's FormulaElement does, for the few element types the costume wrap uses. */
   private static function evaluate(\DOMElement $element, float $x): float
   {
@@ -632,10 +670,18 @@ final class ScratchToCatrobatConverterTest extends TestCase
    */
   private static function convertBlocks(array $blocks, array $sprite = [], array $assets = [], array $monitors = []): \DOMDocument
   {
-    $project = ['targets' => [
+    return self::convertProject(['targets' => [
       ['isStage' => true, 'name' => 'Stage', 'variables' => [], 'lists' => [], 'blocks' => [], 'costumes' => [], 'sounds' => []],
       [...['isStage' => false, 'name' => 'Sprite', 'variables' => [], 'lists' => [], 'blocks' => $blocks, 'costumes' => [], 'sounds' => []], ...$sprite],
-    ], 'monitors' => $monitors];
+    ], 'monitors' => $monitors], $assets);
+  }
+
+  /**
+   * @param array<string, mixed>  $project
+   * @param array<string, string> $assets  md5ext => bytes
+   */
+  private static function convertProject(array $project, array $assets = []): \DOMDocument
+  {
     $archive = (string) tempnam(sys_get_temp_dir(), 'scratch-test');
     (new ScratchToCatrobatConverter(new AssetNormalizer()))->convert(1, $project, ['title' => 'Blocks'], $assets, null, $archive);
     $zip = new \ZipArchive();
