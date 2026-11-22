@@ -411,16 +411,9 @@ final class BlockConverter
           return [$this->brick('CloneBrick')];
         }
 
-        $request = $this->model->cloneRequest($of);
-        if (null === $request) {
-          return [$this->note('create clone of an unknown sprite')];
-        }
+        $target = $this->model->cloneTarget($of);
 
-        // Count the request first: a broadcast that arrives while the handler still runs restarts it.
-        return [
-          $this->brick('ChangeVariableBrick', ['VARIABLE_CHANGE' => Formula::number(1)], [], [$this->model->variableElement(null, $request['counter'])]),
-          $this->brick('BroadcastBrick', [], [], [$this->text('broadcastMessage', $request['message'])]),
-        ];
+        return [null === $target ? $this->note('create clone of an unknown sprite') : $this->brick('CloneBrick', [], [], [$target])];
       case 'control_delete_this_clone': return [$this->brick('DeleteThisCloneBrick')];
         // sensing
       case 'sensing_askandwait':

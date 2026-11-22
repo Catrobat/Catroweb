@@ -6,7 +6,7 @@ namespace App\Project\Scratch\Converter;
 
 /**
  * What the block converter needs to know about the whole project: sprites, their looks/sounds/variables, and
- * the helper state it asks for along the way (cross-sprite values, clone requests, backdrop stepping).
+ * the helper state it asks for along the way (cross-sprite values, backdrop stepping).
  *
  * Every look, sound, variable and list is written in full wherever it is used and tagged with a stable key;
  * XStreamReferences turns all but the first occurrence into back-references.
@@ -35,9 +35,6 @@ final class ProjectModel
 
   /** @var array<string, array{sprite: string, formula: Formula}> program variable name => value source */
   private array $shadows = [];
-
-  /** @var array<string, true> sprite keys that receive "create clone of" broadcasts */
-  private array $clone_requests = [];
 
   private bool $uses_answer = false;
 
@@ -289,9 +286,7 @@ final class ProjectModel
       $names[] = $this->helper('answer');
     }
 
-    $counters = array_map(fn (string $key): string => $this->cloneRequestNames($key)['counter'], array_keys($this->clone_requests));
-
-    return array_values(array_unique([...$names, ...array_keys($this->shadows), ...$counters]));
+    return array_values(array_unique([...$names, ...array_keys($this->shadows)]));
   }
 
   /** @param list<string> $keys */
@@ -348,32 +343,20 @@ final class ProjectModel
   }
 
   /**
-   * "create clone of <sprite>" becomes a counted request: the requester increments a counter and broadcasts,
-   * the original sprite clones itself until the counter is back at zero.
-   *
-   * @return array{message: string, counter: string}|null
+   * CloneBrick's objectToClone, naming a sprite. Left empty here: XStreamReferences fills it with the sprite or
+   * makes it a reference to the sprite's object.
    */
-  public function cloneRequest(string $sprite_name): ?array
+  public function cloneTarget(string $sprite_name): ?\DOMElement
   {
     $key = $this->keys_by_name[$sprite_name] ?? null;
-    if (null === $key) {
+    if (null === $key || self::STAGE === $key) {
       return null;
     }
 
-    $this->clone_requests[$key] = true;
+    $element = $this->doc->createElement('objectToClone');
+    $element->setAttribute(XStreamReferences::KEY, 'object:'.$key);
 
-    return $this->cloneRequestNames($key);
-  }
-
-  /** @return array{message: string, counter: string} */
-  public function cloneRequestNames(string $key): array
-  {
-    return ['message' => $this->helper('clone '.$this->names[$key]), 'counter' => $this->helper('clone requests '.$this->names[$key])];
-  }
-
-  public function receivesCloneRequests(string $key): bool
-  {
-    return isset($this->clone_requests[$key]);
+    return $element;
   }
 
   public function unsupported(string $opcode): void
