@@ -97,22 +97,42 @@ function renderPage(container, query, theme, baseUrl, trans) {
     return
   }
 
-  const apiUrl =
-    baseUrl +
-    '/api/search?query=' +
-    encodeURIComponent(query) +
-    '&type=all&limit=' +
-    RESULTS_PER_PAGE
-
-  fetch(apiUrl)
-    .then((response) => {
+  const search = (type) =>
+    fetch(
+      `${baseUrl}/api/search?query=${encodeURIComponent(query)}&type=${type}&limit=${RESULTS_PER_PAGE}`,
+    ).then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       return response.json()
     })
+
+  // Scratch is searched live and takes ~200 ms when not cached, so it gets its own request and doesn't hold up ours.
+  let found = null // [projects, users, studios] once our results are in
+  const arrange = () => {
+    if (!found) return
+    const hasScratch = !scratchSection.classList.contains('d-none')
+    arrangeSections(container, sections, [found[0], hasScratch, found[1], found[2]], query, trans)
+  }
+
+  search('all')
     .then((data) => {
       renderProjects(projectsSection, data.projects || [], theme)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
+      found = [data.projects, data.users, data.studios].map((items) => (items || []).length > 0)
+      arrange()
+
+      wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
+      wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
+      wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
+    })
+    .catch((error) => {
+      console.error('Search API error:', error)
+      found = [false, false, false]
+      arrange()
+    })
+
+  search('scratch')
+    .then((data) => {
       renderScratchProjects(
         scratchSection,
         data.scratch_projects || [],
@@ -121,33 +141,15 @@ function renderPage(container, query, theme, baseUrl, trans) {
         theme,
         trans,
       )
-
-      arrangeSections(
-        container,
-        sections,
-        [
-          (data.projects || []).length > 0,
-          !scratchSection.classList.contains('d-none'),
-          (data.users || []).length > 0,
-          (data.studios || []).length > 0,
-        ],
-        query,
-        trans,
-      )
-
-      wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
-      wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
-      wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
+      arrange()
       wireShowMore(scratchSection, 'scratch', query, baseUrl, theme, trans)
     })
-    .catch((error) => {
-      console.error('Search API error:', error)
-      arrangeSections(container, sections, [], query, trans)
-    })
+    .catch((error) => console.error('Scratch search error:', error))
 }
 
 // Sections with results first, in their fixed order; the empty ones collapse into one line at the bottom.
 function arrangeSections(container, sections, hasResults, query, trans) {
+  container.querySelector('#search-empty-summary')?.remove()
   const empties = []
   sections.forEach(({ section, empty }, i) => {
     section.classList.toggle('d-none', !hasResults[i])

@@ -34,10 +34,7 @@ final class SearchApiTest extends TestCase
   #[\Override]
   protected function setUp(): void
   {
-    $scratch_search = $this->createStub(ScratchSearch::class);
-    $scratch_search->method('search')->willReturn(['projects' => [], 'total' => 0]);
     $this->facade = $this->createStub(SearchApiFacade::class);
-    $this->facade->method('getScratchSearch')->willReturn($scratch_search);
     $this->search_api = new SearchApi(
       $this->facade,
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
@@ -58,5 +55,30 @@ final class SearchApiTest extends TestCase
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(SearchResponse::class, $response);
+  }
+
+  /**
+   * Scratch's live search is slow when not cached, so the default search must not wait for it.
+   *
+   * @throws \JsonException
+   */
+  #[Group('unit')]
+  public function testDefaultSearchDoesNotAskScratch(): void
+  {
+    $scratch_search = $this->createMock(ScratchSearch::class);
+    $scratch_search->expects($this->never())->method('search');
+    $facade = $this->createStub(SearchApiFacade::class);
+    $facade->method('getScratchSearch')->willReturn($scratch_search);
+    $search_api = new SearchApi(
+      $facade,
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      $this->createStub(RequestStack::class),
+    );
+    $response_code = 200;
+    $response_headers = [];
+
+    $search_api->searchGet('query', 'all', 20, null, $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_OK, $response_code);
   }
 }

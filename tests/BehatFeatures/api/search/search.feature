@@ -153,13 +153,13 @@ Feature: Search projects and users
     Then the response code should be "200"
     And the search response should contain 0 scratch_projects
 
-  Scenario: Scratch projects are part of the default search results
+  # Scratch's live search is slow, so the default search leaves it out; the search page asks for it in parallel.
+  Scenario: Scratch projects are not part of the default search results
     Given there are Scratch projects:
       | id       | name            | username   |
       | 70058680 | Fritz goes Pong | scratchcat |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/search?query=Pong"
     Then the response code should be "200"
-    And the search response should contain 1 scratch_projects
-    And the client response should contain "Fritz goes Pong"
-    And the client response should contain "scratchcat"
+    And the search response should contain 0 scratch_projects
+    And the client response should not contain "Fritz goes Pong"
