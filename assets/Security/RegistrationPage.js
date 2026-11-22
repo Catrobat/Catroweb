@@ -6,8 +6,8 @@ import RegistrationController from '../controllers/security/registration_control
 
 import './login.css'
 
+app.register('security--registration', RegistrationController)
+
 new PasswordVisibilityToggle()
 
 document.getElementById('username').focus()
-
-app.register('security--registration', RegistrationController)
