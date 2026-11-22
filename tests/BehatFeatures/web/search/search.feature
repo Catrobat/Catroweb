@@ -198,9 +198,15 @@ Feature: Searching for projects & users
     Then I wait for the element "#search-status[role='status'][aria-live='polite']" to contain "Scratch projects: 1"
 
   Scenario: A failed search says so instead of "no results"
-    Given the browser's requests to "*type=all*" fail
-    And I am on "/app/search/project"
+    Given there are Scratch projects:
+      | id       | name             | username   |
+      | 70058680 | Gamma Ray Racer  | scratchcat |
+    And the browser's requests to "*type=all*" fail
+    And I am on "/app/search/Gamma"
     And I wait for the page to be loaded
     Then I wait for the element "#search-empty-summary" to contain "Oops, something did not work"
     And the element "#search-empty-summary" should not contain "No results for"
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    # Neither message replaces the other in the status.
+    And I wait for the element "#search-status" to contain "Scratch projects: 1"
     And I wait for the element "#search-status" to contain "Oops, something did not work"

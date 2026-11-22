@@ -120,8 +120,16 @@ function renderPage(container, query, theme, baseUrl, trans) {
   let found = null // [projects, users, studios] once our results are in
   let scratchFound = false
   let failed = false // our search failed: say so instead of "no results"
+  let scratchCount = 0
   const arrange = () => {
     if (found) arrangeSections(container, sections, [...found, scratchFound], query, trans, failed)
+  }
+  // Built from all state, so neither message replaces the other; Scratch only once its section can be shown.
+  const announce = () => {
+    const parts = []
+    if (failed) parts.push(trans.error)
+    if (found && scratchCount > 0) parts.push(`${trans.scratchProjects}: ${scratchCount}`)
+    status.textContent = parts.join('. ')
   }
 
   search('all')
@@ -131,6 +139,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
       found = [data.projects, data.users, data.studios].map((items) => (items || []).length > 0)
       arrange()
+      announce()
 
       wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
       wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
@@ -141,7 +150,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
       found = [false, false, false]
       failed = true
       arrange()
-      status.textContent = trans.error
+      announce()
     })
 
   search('scratch')
@@ -155,14 +164,13 @@ function renderPage(container, query, theme, baseUrl, trans) {
         trans,
       )
       scratchFound = !scratchSection.classList.contains('d-none')
-      if (scratchFound) {
-        status.textContent = `${trans.scratchProjects}: ${(data.scratch_projects || []).length}`
-      }
+      scratchCount = (data.scratch_projects || []).length
       // Before our results: stay hidden, or they would push the Scratch cards down when they arrive.
       // After them: renderScratchProjects already showed the section in its slot; arranging again would re-insert
       // (and unfocus) every section, so only do it to replace the "no results" line.
       if (!found) scratchSection.classList.add('d-none')
       else if (!found.some(Boolean)) arrange()
+      announce()
       wireShowMore(scratchSection, 'scratch', query, baseUrl, theme, trans)
     })
     .catch((error) => console.error('Scratch search error:', error))
