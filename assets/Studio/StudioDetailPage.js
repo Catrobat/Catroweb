@@ -21,6 +21,13 @@ import './MembersList.css'
 import './ActivityList.css'
 import './Studio.css'
 
+// Includes the controllers of the markup this file injects.
+app.register('studio--activity-list', ActivityListController)
+app.register('studio--comment', CommentController)
+app.register('studio--join-requests', JoinRequestsController)
+app.register('studio--member-list', MemberListController)
+app.register('studio--project-list', ProjectListController)
+
 document.getElementById('studio-detail-tabs')?.addEventListener('change', (event) => {
   const tabs = Array.from(event.currentTarget.querySelectorAll('md-primary-tab'))
   const activeTab = tabs[event.currentTarget.activeTabIndex]
@@ -769,10 +776,3 @@ function renderInvite(invite) {
   li.append(meta, actions)
   return li
 }
-
-// assets/bootstrap.js registers no controllers; each page registers its own, including those of the markup above.
-app.register('studio--activity-list', ActivityListController)
-app.register('studio--comment', CommentController)
-app.register('studio--join-requests', JoinRequestsController)
-app.register('studio--member-list', MemberListController)
-app.register('studio--project-list', ProjectListController)

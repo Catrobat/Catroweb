@@ -17,5 +17,4 @@ for (const button of document.querySelectorAll('[id^="studios-list-item--button-
   })
 }
 
-// assets/bootstrap.js registers no controllers; each page registers its own.
 app.register('studio--overview', OverviewController)

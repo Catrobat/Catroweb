@@ -10,5 +10,4 @@ new PasswordVisibilityToggle()
 
 document.getElementById('username').focus()
 
-// assets/bootstrap.js registers no controllers; each page registers its own.
 app.register('security--registration', RegistrationController)

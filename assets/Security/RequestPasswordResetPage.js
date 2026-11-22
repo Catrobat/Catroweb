@@ -5,6 +5,5 @@ import ResetPasswordController from '../controllers/security/reset-password_cont
 
 import './login.css'
 
-// assets/bootstrap.js registers no controllers; each page registers its own.
 app.register('security--parent-portal', ParentPortalController)
 app.register('security--reset-password', ResetPasswordController)
