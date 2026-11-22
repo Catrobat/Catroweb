@@ -76,6 +76,7 @@ final class ScratchToCatrobatConverterTest extends TestCase
       ['isStage' => true, 'name' => 'Stage', 'variables' => [], 'lists' => [], 'blocks' => [], 'costumes' => [], 'sounds' => []],
       $sprite('A', $clone_of('B')),
       $sprite('B', $clone_of('A')),
+      $sprite('C', $clone_of('Nope')),
     ]]);
     $xpath = new \DOMXPath($xml);
 
@@ -87,6 +88,8 @@ final class ScratchToCatrobatConverterTest extends TestCase
     $this->assertSame('Sprite', $xpath->evaluate('string('.$b.'/@type)'));
     $this->assertSame(1.0, $xpath->evaluate('count('.$b.'/scriptList)'));
     $this->assertSame(1.0, $xpath->evaluate('count(//objectList/object[3][@reference])'));
+    $this->assertSame(0.0, $xpath->evaluate('count(//object[@name="C"]//brick[@type="CloneBrick"])'));
+    $this->assertStringContainsString('unknown sprite', $xpath->evaluate('string(//object[@name="C"]//brick[@type="NoteBrick"])'));
     // B's brick refers back to A, the object it sits in.
     $this->assertSame(1.0, $xpath->evaluate('count('.$b.'//brick[@type="CloneBrick"]/objectToClone[@reference])'));
     self::assertReferencesPointBack($xml);

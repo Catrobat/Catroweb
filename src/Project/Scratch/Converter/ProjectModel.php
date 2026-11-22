@@ -343,13 +343,13 @@ final class ProjectModel
   }
 
   /**
-   * CloneBrick's objectToClone, naming a sprite. Left empty here: XStreamReferences fills it with the sprite or
+   * CloneBrick's objectToClone, naming a sprite. It must stay empty: XStreamReferences fills it with the sprite or
    * makes it a reference to the sprite's object.
    */
   public function cloneTarget(string $sprite_name): ?\DOMElement
   {
     $key = $this->keys_by_name[$sprite_name] ?? null;
-    if (null === $key || self::STAGE === $key) {
+    if (null === $key) {
       return null;
     }
 

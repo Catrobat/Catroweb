@@ -24,14 +24,15 @@ final class XStreamReferences
   /** @var array<string, list<string>> key => absolute path steps of the first occurrence */
   private array $first = [];
 
-  /** @var array<string, \DOMElement> key => first occurrence written with content */
+  /** @var array<string, \DOMElement> sprite key => its object in the object list */
   private array $full = [];
 
   public static function resolve(\DOMDocument $doc): void
   {
     $root = $doc->documentElement ?? throw new \LogicException('Empty document');
     $self = new self();
-    foreach ((new \DOMXPath($doc))->query('//*[@'.self::KEY.'][*]') ?: [] as $full) {
+    // Only sprites: every other keyed object is written in full at each use.
+    foreach ((new \DOMXPath($doc))->query('//*[starts-with(@'.self::KEY.', "object:")][*]') ?: [] as $full) {
       if ($full instanceof \DOMElement) {
         $self->full[$full->getAttribute(self::KEY)] ??= $full;
       }
