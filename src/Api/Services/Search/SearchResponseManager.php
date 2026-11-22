@@ -32,7 +32,7 @@ class SearchResponseManager extends AbstractResponseManager
     parent::__construct($translator, $serializer, $cache);
   }
 
-  public function getSearchResponse(array $projects_response, array $users_response, array $studios_response = [], array $scratch_response = []): SearchResponse
+  public function getSearchResponse(array $projects_response, array $users_response, array $studios_response = []): SearchResponse
   {
     return new SearchResponse([
       'projects' => $projects_response['projects'],
@@ -41,8 +41,8 @@ class SearchResponseManager extends AbstractResponseManager
       'users_total' => $users_response['users_total'],
       'studios' => $studios_response['studios'] ?? [],
       'studios_total' => $studios_response['studios_total'] ?? 0,
-      'scratch_projects' => $scratch_response['scratch_projects'] ?? [],
-      'scratch_projects_total' => $scratch_response['scratch_projects_total'] ?? 0,
+      'scratch_projects' => [],
+      'scratch_projects_total' => 0,
     ]);
   }
 

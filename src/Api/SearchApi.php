@@ -21,6 +21,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
   public function __construct(
     private readonly SearchApiFacade $facade,
     private readonly RateLimiterFactory $searchBurstLimiter,
+    private readonly RateLimiterFactory $searchScratchBurstLimiter,
     private readonly RequestStack $request_stack,
   ) {
   }
@@ -34,7 +35,9 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
     // Elasticsearch only supports offset-based pagination (from/size), not keyset cursors
     $offset = $this->decodeCursorToOffset($cursor);
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (null === $this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {
+    // The search page asks for Scratch alongside every search, so type=scratch has its own budget.
+    $limiter = 'scratch' === $type ? $this->searchScratchBurstLimiter : $this->searchBurstLimiter;
+    if (null === $this->checkIpRateLimit($ip, $limiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return [];
@@ -63,6 +66,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         break;
       case 'all':
       default:
+        // No Scratch here: its live search takes ~200 ms when not cached, so clients ask for it separately (type=scratch).
         $projects_response = $this->searchProjects($query, $limit, $offset);
 
         $users = $this->facade->getUserManager()->search($query, $limit, $offset);
@@ -73,12 +77,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         $studios_total = $this->facade->getStudioSearchService()->searchCount($query);
         $studios_response = $this->facade->getResponseManager()->getStudiosSearchResponse($studios, $studios_total, $this->facade->getAuthenticationManager()->getAuthenticatedUser());
 
-        $result = $this->facade->getResponseManager()->getSearchResponse(
-          $projects_response,
-          $users_response,
-          $studios_response,
-          $this->searchScratchProjects($query, $limit, $offset, $ip),
-        );
+        $result = $this->facade->getResponseManager()->getSearchResponse($projects_response, $users_response, $studios_response);
         break;
     }
 

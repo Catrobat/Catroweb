@@ -85,11 +85,12 @@ function renderPage(container, query, theme, baseUrl, trans) {
   container.appendChild(scratchSection)
 
   // Fixed priority, not relevance: scores from different indexes (and Scratch, which has none) don't compare.
+  // Scratch is last because it can arrive after the rest: showing it then must not push results the user is about to tap.
   const sections = [
     { section: projectsSection, empty: trans.noProjects },
-    { section: scratchSection, empty: null },
     { section: usersSection, empty: trans.noUsers },
     { section: studiosSection, empty: trans.noStudios },
+    { section: scratchSection, empty: null },
   ]
 
   if (!query) {
@@ -97,22 +98,41 @@ function renderPage(container, query, theme, baseUrl, trans) {
     return
   }
 
-  const apiUrl =
-    baseUrl +
-    '/api/search?query=' +
-    encodeURIComponent(query) +
-    '&type=all&limit=' +
-    RESULTS_PER_PAGE
-
-  fetch(apiUrl)
-    .then((response) => {
+  const search = (type) =>
+    fetch(
+      `${baseUrl}/api/search?query=${encodeURIComponent(query)}&type=${type}&limit=${RESULTS_PER_PAGE}`,
+    ).then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       return response.json()
     })
+
+  // Scratch is searched live and takes ~200 ms when not cached, so it gets its own request and doesn't hold up ours.
+  let found = null // [projects, users, studios] once our results are in
+  let scratchFound = false
+  const arrange = () => {
+    if (found) arrangeSections(container, sections, [...found, scratchFound], query, trans)
+  }
+
+  search('all')
     .then((data) => {
       renderProjects(projectsSection, data.projects || [], theme)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
+      found = [data.projects, data.users, data.studios].map((items) => (items || []).length > 0)
+      arrange()
+
+      wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
+      wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
+      wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
+    })
+    .catch((error) => {
+      console.error('Search API error:', error)
+      found = [false, false, false]
+      arrange()
+    })
+
+  search('scratch')
+    .then((data) => {
       renderScratchProjects(
         scratchSection,
         data.scratch_projects || [],
@@ -121,33 +141,20 @@ function renderPage(container, query, theme, baseUrl, trans) {
         theme,
         trans,
       )
-
-      arrangeSections(
-        container,
-        sections,
-        [
-          (data.projects || []).length > 0,
-          !scratchSection.classList.contains('d-none'),
-          (data.users || []).length > 0,
-          (data.studios || []).length > 0,
-        ],
-        query,
-        trans,
-      )
-
-      wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
-      wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
-      wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
+      scratchFound = !scratchSection.classList.contains('d-none')
+      // Before our results: stay hidden, or they would push the Scratch cards down when they arrive.
+      // After them: renderScratchProjects already showed the section in its slot; arranging again would re-insert
+      // (and unfocus) every section, so only do it to replace the "no results" line.
+      if (!found) scratchSection.classList.add('d-none')
+      else if (!found.some(Boolean)) arrange()
       wireShowMore(scratchSection, 'scratch', query, baseUrl, theme, trans)
     })
-    .catch((error) => {
-      console.error('Search API error:', error)
-      arrangeSections(container, sections, [], query, trans)
-    })
+    .catch((error) => console.error('Scratch search error:', error))
 }
 
 // Sections with results first, in their fixed order; the empty ones collapse into one line at the bottom.
 function arrangeSections(container, sections, hasResults, query, trans) {
+  container.querySelector('#search-empty-summary')?.remove()
   const empties = []
   sections.forEach(({ section, empty }, i) => {
     section.classList.toggle('d-none', !hasResults[i])
