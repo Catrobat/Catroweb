@@ -4041,6 +4041,50 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/docs/reference/catalog':
+    get:
+      tags:
+        - 'Docs'
+      summary: 'Every brick and formula element, as the app lists them'
+      description: "Catroid's brick categories with their bricks and the formula editor's functions, sensors and operators, generated from Catroid itself (the player build's catalog) and in the requested language. A brick's `type` is its code.xml type, the key of its page (`/app/docs/reference/bricks/<type>`). A brick may be listed in several categories. Empty while no catalog is deployed."
+      parameters:
+        - $ref: '#/components/parameters/DocsLocale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsCatalogResponse'
+
+  '/docs/reference/bricks/{type}':
+    get:
+      tags:
+        - 'Docs'
+      summary: 'A brick of the reference'
+      description: 'The brick as the app shows it, the categories that list it and its explanation from the docs repo (`reference/bricks/<type>.md`) in the requested language, or in English when it has no translation yet (`fallback`). Bricks without an explanation have `html` null.'
+      parameters:
+        - name: type
+          in: path
+          required: true
+          description: 'Brick type as written in code.xml'
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_]{0,99}$'
+            example: 'SetXBrick'
+        - $ref: '#/components/parameters/DocsLocale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsBrickResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   ##############################################
   # Default Response messages
@@ -7227,6 +7271,179 @@ components:
           type: string
           format: date-time
           description: 'When the sync last saw the file change'
+
+    DocsCatalogResponse:
+      type: object
+      required:
+        - locale
+        - categories
+        - formula
+      properties:
+        locale:
+          type: string
+          example: 'de'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsCatalogCategory'
+        formula:
+          $ref: '#/components/schemas/DocsFormulaCatalog'
+
+    DocsCatalogCategory:
+      type: object
+      required:
+        - key
+        - name
+        - color
+        - bricks
+      properties:
+        key:
+          type: string
+          description: "Catroid's string key of the category"
+          example: 'category_motion'
+        name:
+          type: string
+          example: 'Bewegung'
+        color:
+          type: string
+          description: 'Colour of the category as in the code view (most of its bricks have it)'
+          enum:
+            [
+              'event',
+              'control',
+              'motion',
+              'sound',
+              'looks',
+              'data',
+              'pen',
+              'device',
+              'user_defined',
+              'lego',
+              'embroidery',
+              'extension',
+              'unknown',
+            ]
+        bricks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewBrick'
+
+    DocsFormulaCatalog:
+      type: object
+      required:
+        - functions
+        - sensors
+        - operators
+      properties:
+        functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsFormulaElement'
+        sensors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsFormulaElement'
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsFormulaElement'
+
+    DocsFormulaElement:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: "Catroid's name of the element, the key of its page (`/app/docs/reference/formula/<name>`)"
+          example: 'SIN'
+        label:
+          type: string
+          nullable: true
+          description: 'Its name in the formula editor; null for operators shown only as a sign'
+          example: 'sin'
+
+    DocsBrickResponse:
+      type: object
+      required:
+        - type
+        - locale
+        - title
+        - brick
+        - categories
+        - fallback
+        - source_url
+      properties:
+        type:
+          type: string
+          example: 'SetXBrick'
+        locale:
+          type: string
+          description: 'Language of the brick'
+          example: 'de'
+        title:
+          type: string
+          description: "The brick's text"
+          example: 'Setze x auf 100'
+        brick:
+          $ref: '#/components/schemas/CodeViewBrick'
+        categories:
+          type: array
+          description: 'The categories that list the brick, its own first'
+          items:
+            $ref: '#/components/schemas/DocsCatalogCategoryRef'
+        html:
+          type: string
+          nullable: true
+          description: 'The explanation from the docs repo, rendered; null when the brick has none'
+        html_locale:
+          type: string
+          nullable: true
+          description: 'Locale of the explanation'
+        fallback:
+          type: boolean
+          description: 'True when the explanation has no translation in the requested locale and the English one is returned'
+        translation_state:
+          type: string
+          nullable: true
+          description: 'Of the explanation: `source` (English), `current` or `stale` (as for pages); null without one'
+        reviewed:
+          type: boolean
+        source_url:
+          type: string
+          description: 'The English explanation in the GitHub editor, or a new file there when there is none ("Improve this page")'
+
+    DocsCatalogCategoryRef:
+      type: object
+      required:
+        - key
+        - name
+        - color
+      properties:
+        key:
+          type: string
+          example: 'category_motion'
+        name:
+          type: string
+          example: 'Bewegung'
+        color:
+          type: string
+          enum:
+            [
+              'event',
+              'control',
+              'motion',
+              'sound',
+              'looks',
+              'data',
+              'pen',
+              'device',
+              'user_defined',
+              'lego',
+              'embroidery',
+              'extension',
+              'unknown',
+            ]
 
     DocsTocEntry:
       type: object
