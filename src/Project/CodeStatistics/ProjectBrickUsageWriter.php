@@ -53,7 +53,8 @@ class ProjectBrickUsageWriter implements ResetInterface
     $pending = $this->pending;
     $this->pending = [];
     foreach ($pending as $project_id => $brick_counts) {
-      $this->replace($project_id, $brick_counts);
+      // A numeric id (test fixtures) becomes an int array key
+      $this->replace((string) $project_id, $brick_counts);
     }
   }
 
