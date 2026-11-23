@@ -14,16 +14,19 @@ class AsyncHttpClient
 
   private ?array $scratch_info_data = null;
 
-  public function __construct(private array $config = [])
+  public function __construct(private array $config = [], ?Client $client = null)
   {
-    if ([] === $this->config) {
-      $this->config = [
-        'timeout' => 8.0,
-        'max_number_of_total_requests' => 12,
-        'max_number_of_concurrent_requests' => 4,
-      ];
-    }
-    $this->async_http_client = new Client($config);
+    $this->config = array_merge([
+      'timeout' => 8.0,
+      'max_number_of_total_requests' => 12,
+      'max_number_of_concurrent_requests' => 4,
+    ], $config);
+    $this->async_http_client = $client ?? new Client($this->config);
+  }
+
+  public function getConfig(): array
+  {
+    return $this->config;
   }
 
   public function fetchScratchProjectDetails(array $scratch_project_ids): array
@@ -51,9 +54,13 @@ class AsyncHttpClient
     new EachPromise($promises, [
       'concurrency' => $max_number_of_concurrent_requests,
       'fulfilled' => function (ResponseInterface $responses): void {
-        $data = json_decode($responses->getBody()->__toString(), true, 512, JSON_THROW_ON_ERROR);
-        if (null != $data && array_key_exists('id', $data) && (int) $data['id'] > 0) {
-          $this->scratch_info_data[(int) $data['id']] = $data;
+        try {
+          $data = json_decode($responses->getBody()->__toString(), true, 512, JSON_THROW_ON_ERROR);
+          if (null != $data && array_key_exists('id', $data) && (int) $data['id'] > 0) {
+            $this->scratch_info_data[(int) $data['id']] = $data;
+          }
+        } catch (\JsonException) {
+          // Ignore malformed responses from external API
         }
       },
       'rejected' => function ($reason, $index): void {

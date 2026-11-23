@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Project\Scratch;
 
 use App\Project\Scratch\AsyncHttpClient;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -82,6 +86,38 @@ class AsyncHttpClientTest extends TestCase
       $expected_id_of_second_program, $expected_id_of_third_program, ]);
 
     $this->assertTheTwoFetchedPrograms($scratch_info_data, $expected_id_of_first_program, $expected_id_of_second_program);
+  }
+
+  public function testInitializesDefaultConfigWhenNoConfigProvided(): void
+  {
+    $client = new AsyncHttpClient();
+    Assert::assertEquals([
+      'timeout' => 8.0,
+      'max_number_of_total_requests' => 12,
+      'max_number_of_concurrent_requests' => 4,
+    ], $client->getConfig());
+  }
+
+  public function testMergesDefaultsWhenPartialConfigProvided(): void
+  {
+    $client = new AsyncHttpClient(['timeout' => 15.0]);
+    Assert::assertEquals([
+      'timeout' => 15.0,
+      'max_number_of_total_requests' => 12,
+      'max_number_of_concurrent_requests' => 4,
+    ], $client->getConfig());
+  }
+
+  public function testHandlesMalformedJsonResponseBodyGracefully(): void
+  {
+    $mock_handler = new MockHandler([
+      new Response(200, [], '<html>502 Bad Gateway</html>'),
+    ]);
+    $guzzle_client = new Client(['handler' => HandlerStack::create($mock_handler)]);
+    $async_client = new AsyncHttpClient([], $guzzle_client);
+
+    $result = $async_client->fetchScratchProjectDetails([123_456]);
+    Assert::assertEmpty($result);
   }
 
   private function assertTheTwoFetchedPrograms(array $scratch_info_data, int $expected_id_of_first_program, int $expected_id_of_second_program): void
