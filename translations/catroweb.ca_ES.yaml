@@ -1066,3 +1066,12 @@ docs:
   video: "Reprodueix el vídeo (es carrega des de YouTube)"
   comments: "Comentaris i consells"
   comments_empty: "Encara no hi ha comentaris. Hi ha alguna cosa que no és clara o tens un consell? Escriu-lo aquí."
+  reference:
+    title: "Blocs i fórmules"
+    formula: "Elements de fórmula"
+    functions: "Funcions"
+    sensors: "Sensors"
+    operators: "Operadors"
+    examples: "Projectes d'exemple"
+    no_prose: "Encara ningú no ha explicat aquest bloc. Pots escriure la primera explicació."
+    empty: "La referència de blocs no està disponible ara mateix."

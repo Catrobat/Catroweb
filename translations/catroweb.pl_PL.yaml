@@ -1066,3 +1066,12 @@ docs:
   video: "Odtwórz wideo (ładuje się z YouTube)"
   comments: "Komentarze i wskazówki"
   comments_empty: "Nie ma jeszcze komentarzy. Coś jest niejasne albo masz wskazówkę? Napisz ją tutaj."
+  reference:
+    title: "Klocki i formuły"
+    formula: "Elementy formuł"
+    functions: "Funkcje"
+    sensors: "Czujniki"
+    operators: "Operatory"
+    examples: "Przykładowe projekty"
+    no_prose: "Nikt jeszcze nie objaśnił tego klocka. Możesz napisać pierwsze objaśnienie."
+    empty: "Spis klocków jest teraz niedostępny."

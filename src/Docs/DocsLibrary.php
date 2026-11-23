@@ -39,6 +39,12 @@ class DocsLibrary
     return $this->pages->findGuide($path, $this->locales($locale));
   }
 
+  /** A brick's explanation (reference/bricks/<type>.md), in the best locale like page(). */
+  public function brickProse(string $type, string $locale): ?DocPage
+  {
+    return $this->pages->findGuide($type, $this->locales($locale), DocPage::BRICK);
+  }
+
   /** The English page stands in for a translation that does not exist yet. */
   public static function isFallback(DocPage $page, string $requested_locale): bool
   {

@@ -69,6 +69,7 @@ final class CommentsApiTest extends TestCase
       $text_sanitizer ?? $this->createPassthroughTextSanitizer(),
       $user_avatar_service ?? $this->createStub(\App\User\UserAvatarService::class),
       $this->createStub(\App\Docs\DocsLibrary::class),
+      $this->createStub(\App\Docs\DocsCatalog::class),
     );
   }
 

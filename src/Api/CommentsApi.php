@@ -13,6 +13,7 @@ use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\DocCommentNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\Docs\DocsCatalog;
 use App\Docs\DocsLibrary;
 use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
@@ -56,6 +57,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly TextSanitizer $textSanitizer,
     private readonly UserAvatarService $user_avatar_service,
     private readonly DocsLibrary $docs_library,
+    private readonly DocsCatalog $docs_catalog,
   ) {
   }
 
@@ -523,7 +525,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
    */
   private function isCommentableDocPage(string $path): bool
   {
-    return 1 === preg_match('#^reference/bricks/[A-Z][A-Za-z0-9]*$#', $path)
+    // A brick page exists for every type of the catalog, whether or not it has an explanation.
+    return (str_starts_with($path, 'reference/bricks/') && \in_array(substr($path, \strlen('reference/bricks/')), $this->docs_catalog->types(), true))
       || $this->docs_library->page($path, 'en') instanceof DocPage;
   }
 

@@ -1066,3 +1066,12 @@ docs:
   video: "Pusti video (učitava se sa YouTube-a)"
   comments: "Komentari i saveti"
   comments_empty: "Još nema komentara. Da li je nešto nejasno ili imaš savet? Napiši ga ovde."
+  reference:
+    title: "Blokovi i formule"
+    formula: "Elementi formula"
+    functions: "Funkcije"
+    sensors: "Senzori"
+    operators: "Operatori"
+    examples: "Primeri projekata"
+    no_prose: "Niko još nije objasnio ovaj blok. Možeš da napišeš prvo objašnjenje."
+    empty: "Pregled blokova trenutno nije dostupan."

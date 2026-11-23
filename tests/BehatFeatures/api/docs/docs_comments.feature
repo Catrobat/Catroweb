@@ -149,3 +149,5 @@ Feature: Comments and tips on docs pages, /api/docs/pages/{path}/comments
     Then the JSON response field "data.0.message" should be '"Set x to 0 puts the actor in the middle"'
     When I request "GET" "/api/docs/pages/reference/bricks/not-a-type/comments"
     Then the response status code should be "404"
+    When I request "GET" "/api/docs/pages/reference/bricks/NoSuchBrick/comments"
+    Then the response status code should be "404"

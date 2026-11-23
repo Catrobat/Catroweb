@@ -1066,3 +1066,12 @@ docs:
   video: "Luaj videon (ngarkohet nga YouTube)"
   comments: "Komente dhe këshilla"
   comments_empty: "Ende nuk ka komente. A ka diçka të paqartë, apo ke një këshillë? Shkruaje këtu."
+  reference:
+    title: "Blloqe dhe formula"
+    formula: "Elementet e formulave"
+    functions: "Funksione"
+    sensors: "Sensorë"
+    operators: "Operatorë"
+    examples: "Projekte shembull"
+    no_prose: "Askush nuk e ka shpjeguar ende këtë bllok. Mund të shkruash shpjegimin e parë."
+    empty: "Udhëzuesi i blloqeve nuk është i disponueshëm tani."

@@ -1,0 +1,34 @@
+{
+  "classes": [
+    "event",
+    "control",
+    "motion",
+    "sound",
+    "looks",
+    "data",
+    "pen",
+    "device",
+    "user_defined",
+    "lego",
+    "embroidery",
+    "extension",
+    "unknown"
+  ],
+  "aliases": {
+    "look": "looks",
+    "uservariables": "data",
+    "userlist": "data",
+    "userdefinedbrick": "user_defined",
+    "script": "user_defined",
+    "report": "user_defined",
+    "arduino": "extension",
+    "phiro": "extension",
+    "raspi": "extension",
+    "drone": "extension",
+    "jumpingsumo": "extension",
+    "chromecast": "extension",
+    "plot": "extension",
+    "laser": "extension",
+    "test": "extension"
+  }
+}

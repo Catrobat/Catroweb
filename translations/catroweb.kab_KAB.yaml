@@ -1044,3 +1044,12 @@ docs:
   video: "Urar tavidyut (tettali-d seg YouTube)"
   comments: "Iwenniten d iwellihen"
   comments_empty: "Ulac iwenniten ar tura. Yella kra ur nban ara, neɣ tesɛiḍ awellih? Aru-t da."
+  reference:
+    title: "Iḥedren d tnfaliyin"
+    formula: "Iferdisen n tnfalit"
+    functions: "Tiwuriwin"
+    sensors: "Imeṭṭafen"
+    operators: "Imsedkan"
+    examples: "Isenfaren n umedya"
+    no_prose: "Ulac win yessegzan aḥedri-a ar tura. Tzemreḍ ad taruḍ asegzi amezwaru."
+    empty: "Amuɣ n yiḥedren ulac-it tura."

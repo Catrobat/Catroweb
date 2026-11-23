@@ -1066,3 +1066,12 @@ docs:
   video: "Erreproduzitu bideoa (YouTubetik kargatzen da)"
   comments: "Iruzkinak eta aholkuak"
   comments_empty: "Oraindik ez dago iruzkinik. Zerbait ez dago argi, ala aholkuren bat duzu? Idatzi hemen."
+  reference:
+    title: "Blokeak eta formulak"
+    formula: "Formula-elementuak"
+    functions: "Funtzioak"
+    sensors: "Sentsoreak"
+    operators: "Eragileak"
+    examples: "Adibide-proiektuak"
+    no_prose: "Inork ez du bloke hau oraindik azaldu. Lehen azalpena zuk idatz dezakezu."
+    empty: "Blokeen erreferentzia ez dago erabilgarri une honetan."

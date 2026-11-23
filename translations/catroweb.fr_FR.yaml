@@ -1066,3 +1066,12 @@ docs:
   video: "Lire la vidéo (chargée depuis YouTube)"
   comments: "Commentaires et astuces"
   comments_empty: "Pas encore de commentaires. Quelque chose n’est pas clair, ou tu as une astuce ? Écris-la ici."
+  reference:
+    title: "Briques et formules"
+    formula: "Éléments de formule"
+    functions: "Fonctions"
+    sensors: "Capteurs"
+    operators: "Opérateurs"
+    examples: "Projets d'exemple"
+    no_prose: "Personne n'a encore expliqué cette brique. Tu peux écrire la première explication."
+    empty: "La référence des briques n'est pas disponible pour le moment."

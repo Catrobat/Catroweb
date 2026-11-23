@@ -1,0 +1,45 @@
+{% extends 'Docs/DocsLayout.html.twig' %}
+
+{% set current = 'reference' %}
+{% set kinds = {
+  functions: 'docs.reference.functions'|trans({}, 'catroweb'),
+  sensors: 'docs.reference.sensors'|trans({}, 'catroweb'),
+  operators: 'docs.reference.operators'|trans({}, 'catroweb'),
+} %}
+
+{% block title %}{{ 'docs.reference.title'|trans({}, 'catroweb') }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block docs_article %}
+  <article class="docs-article">
+    <h1 class="docs-article__title">{{ 'docs.reference.title'|trans({}, 'catroweb') }}</h1>
+
+    {% if categories is empty %}
+      <p class="docs-note">{{ 'docs.reference.empty'|trans({}, 'catroweb') }}</p>
+    {% endif %}
+
+    {% for category in categories %}
+      <section class="docs-reference__category" id="{{ category.key }}">
+        <h2 class="docs-reference__heading cv-block cv-block--{{ category.color }}">{{ category.name }}</h2>
+        <ul class="docs-reference__bricks">
+          {% for brick in category.bricks %}
+            <li><a class="docs-reference__brick" href="{{ path('docs_brick', {type: brick.type}) }}">{{ category.html[loop.index0]|raw }}</a></li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+
+    {% if formula.functions is not empty or formula.sensors is not empty or formula.operators is not empty %}
+      <section class="docs-reference__category" id="formula">
+        <h2>{{ 'docs.reference.formula'|trans({}, 'catroweb') }}</h2>
+        {% for kind, label in kinds %}
+          <h3>{{ label }}</h3>
+          <ul class="docs-reference__formula">
+            {% for element in formula[kind] %}
+              <li><a href="{{ path('docs_formula', {name: element.name}) }}"><span class="cv-field">{{ element.label ?? element.name }}</span></a></li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </section>
+    {% endif %}
+  </article>
+{% endblock %}

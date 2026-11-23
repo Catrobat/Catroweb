@@ -1066,3 +1066,12 @@ docs:
   video: "Videonu oynat (YouTube-dan yüklənir)"
   comments: "Şərhlər və məsləhətlər"
   comments_empty: "Hələ şərh yoxdur. Nəsə aydın deyil, yoxsa məsləhətin var? Buraya yaz."
+  reference:
+    title: "Bloklar və düsturlar"
+    formula: "Düstur elementləri"
+    functions: "Funksiyalar"
+    sensors: "Sensorlar"
+    operators: "Operatorlar"
+    examples: "Nümunə layihələr"
+    no_prose: "Bu bloku hələ heç kim izah etməyib. İlk izahı sən yaza bilərsən."
+    empty: "Blok sorğu kitabçası hazırda əlçatan deyil."

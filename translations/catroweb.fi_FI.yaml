@@ -1066,3 +1066,12 @@ docs:
   video: "Toista video (ladataan YouTubesta)"
   comments: "Kommentit ja vinkit"
   comments_empty: "Ei vielä kommentteja. Onko jokin epäselvää, vai onko sinulla vinkki? Kirjoita se tähän."
+  reference:
+    title: "Palikat ja kaavat"
+    formula: "Kaavan osat"
+    functions: "Funktiot"
+    sensors: "Anturit"
+    operators: "Operaattorit"
+    examples: "Esimerkkiprojektit"
+    no_prose: "Kukaan ei ole vielä selittänyt tätä palikkaa. Voit kirjoittaa ensimmäisen selityksen."
+    empty: "Palikkahakemisto ei ole juuri nyt saatavilla."

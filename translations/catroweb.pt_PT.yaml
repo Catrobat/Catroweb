@@ -1066,3 +1066,12 @@ docs:
   video: "Reproduzir vídeo (carrega a partir do YouTube)"
   comments: "Comentários e dicas"
   comments_empty: "Ainda não há comentários. Há algo que não está claro ou tens uma dica? Escreve-a aqui."
+  reference:
+    title: "Blocos e fórmulas"
+    formula: "Elementos de fórmula"
+    functions: "Funções"
+    sensors: "Sensores"
+    operators: "Operadores"
+    examples: "Projetos de exemplo"
+    no_prose: "Ainda ninguém explicou este bloco. Podes escrever a primeira explicação."
+    empty: "A referência de blocos não está disponível neste momento."

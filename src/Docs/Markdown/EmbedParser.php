@@ -30,7 +30,7 @@ final class EmbedParser implements BlockStartParserInterface
   #[\Override]
   public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
   {
-    if ($cursor->isIndented() || 1 !== preg_match('/^::(\w+)\{([^}]*)\}\s*$/', $cursor->getRemainder(), $line)) {
+    if ($cursor->isIndented() || 1 !== preg_match('/^[ \t]*::(\w+)\{([^}]*)\}\s*$/', $cursor->getRemainder(), $line)) {
       return BlockStart::none();
     }
     [$argument, $pattern] = self::KINDS[$line[1]] ?? [null, null];

@@ -1067,3 +1067,12 @@ docs:
   video: "Phát video (tải từ YouTube)"
   comments: "Bình luận và mẹo"
   comments_empty: "Chưa có bình luận nào. Có điều gì chưa rõ, hay bạn có mẹo nào không? Hãy viết ở đây."
+  reference:
+    title: "Khối lệnh và công thức"
+    formula: "Thành phần công thức"
+    functions: "Hàm"
+    sensors: "Cảm biến"
+    operators: "Toán tử"
+    examples: "Dự án mẫu"
+    no_prose: "Chưa ai giải thích khối lệnh này. Bạn có thể viết lời giải thích đầu tiên."
+    empty: "Tài liệu tra cứu khối lệnh hiện không khả dụng."

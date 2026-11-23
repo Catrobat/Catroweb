@@ -1044,3 +1044,12 @@ docs:
   video: "Cheza video (inapakiwa kutoka YouTube)"
   comments: "Maoni na vidokezo"
   comments_empty: "Bado hakuna maoni. Kuna kitu kisicho wazi, au una kidokezo? Kiandike hapa."
+  reference:
+    title: "Matofali na fomula"
+    formula: "Vipengele vya fomula"
+    functions: "Vitendakazi"
+    sensors: "Vihisi"
+    operators: "Viendeshaji"
+    examples: "Miradi ya mfano"
+    no_prose: "Bado hakuna aliyeeleza tofali hili. Unaweza kuandika maelezo ya kwanza."
+    empty: "Marejeo ya matofali hayapatikani sasa hivi."

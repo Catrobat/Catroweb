@@ -1046,3 +1046,12 @@ docs:
   video: "Putar video (dimuat dari YouTube)"
   comments: "Komentar dan tips"
   comments_empty: "Belum ada komentar. Ada yang kurang jelas, atau punya tips? Tulis di sini."
+  reference:
+    title: "Balok dan rumus"
+    formula: "Elemen rumus"
+    functions: "Fungsi"
+    sensors: "Sensor"
+    operators: "Operator"
+    examples: "Contoh proyek"
+    no_prose: "Belum ada yang menjelaskan balok ini. Kamu bisa menulis penjelasan pertama."
+    empty: "Referensi balok tidak tersedia saat ini."

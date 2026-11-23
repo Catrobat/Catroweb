@@ -1066,3 +1066,12 @@ docs:
   video: "Spela upp video (laddas från YouTube)"
   comments: "Kommentarer och tips"
   comments_empty: "Inga kommentarer än. Är något oklart, eller har du ett tips? Skriv det här."
+  reference:
+    title: "Block och formler"
+    formula: "Formelelement"
+    functions: "Funktioner"
+    sensors: "Sensorer"
+    operators: "Operatorer"
+    examples: "Exempelprojekt"
+    no_prose: "Ingen har förklarat det här blocket än. Du kan skriva den första förklaringen."
+    empty: "Blocköversikten är inte tillgänglig just nu."

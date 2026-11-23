@@ -1044,3 +1044,12 @@ docs:
   video: "Kunna bidiyo (yana lodawa daga YouTube)"
   comments: "Sharhi da shawarwari"
   comments_empty: "Babu sharhi tukuna. Akwai abin da bai fito fili ba, ko kana da shawara? Rubuta shi a nan."
+  reference:
+    title: "Bulo-bulo da dabaru"
+    formula: "Abubuwan dabara"
+    functions: "Ayyuka"
+    sensors: "Na'urorin ji"
+    operators: "Masu aiki"
+    examples: "Ayyukan misali"
+    no_prose: "Babu wanda ya bayyana wannan bulo tukuna. Kai za ka iya rubuta bayani na farko."
+    empty: "Bayanin bulo-bulo ba ya samuwa yanzu."

@@ -1,0 +1,20 @@
+{% extends 'Docs/DocsLayout.html.twig' %}
+
+{% set current = 'reference' %}
+{% set kinds = {
+  functions: 'docs.reference.functions'|trans({}, 'catroweb'),
+  sensors: 'docs.reference.sensors'|trans({}, 'catroweb'),
+  operators: 'docs.reference.operators'|trans({}, 'catroweb'),
+} %}
+
+{% block title %}{{ element.label ?? element.name }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block docs_article %}
+  <article class="docs-article">
+    <h1 class="docs-article__title">{{ element.label ?? element.name }}</h1>
+    <p class="docs-reference__meta">
+      <code>{{ element.name }}</code>
+      <a class="docs-reference__category-link" href="{{ path('docs_reference') }}#formula">{{ kinds[element.kind] }}</a>
+    </p>
+  </article>
+{% endblock %}

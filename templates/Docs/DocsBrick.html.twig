@@ -1,0 +1,39 @@
+{% extends 'Docs/DocsLayout.html.twig' %}
+
+{% from 'Docs/DocsLayout.html.twig' import translation_note %}
+
+{% set current = 'reference' %}
+
+{% block title %}{{ title }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block docs_article %}
+  <article class="docs-article">
+    <h1 class="docs-article__title">{{ title }}</h1>
+    <p class="docs-reference__meta">
+      <code>{{ type }}</code>
+      {% for category in categories %}
+        <a class="docs-reference__category-link" href="{{ path('docs_reference') }}#{{ category.key }}">{{ category.name }}</a>
+      {% endfor %}
+    </p>
+
+    <div class="docs-reference__shown">{{ brick_html|raw }}</div>
+
+    {% if prose %}
+      {{ translation_note(prose, fallback) }}
+      <div class="docs-content" lang="{{ prose.locale|replace({_: '-'}) }}">{{ prose.html|raw }}</div>
+    {% else %}
+      <p class="docs-note docs-note--quiet">{{ 'docs.reference.no_prose'|trans({}, 'catroweb') }}</p>
+    {% endif %}
+
+    <h2>{{ 'docs.reference.examples'|trans({}, 'catroweb') }}</h2>
+    {{ include('Docs/BrickExamples.html.twig', {brick_type: type}) }}
+
+    <p class="docs-improve">
+      <a href="{{ edit_url }}" target="_blank" rel="noopener noreferrer">
+        <span class="material-icons" aria-hidden="true">edit</span>{{ 'docs.improve'|trans({}, 'catroweb') }}
+      </a>
+    </p>
+
+    {{ include('Docs/Comments.html.twig', {doc_path: 'reference/bricks/' ~ type}) }}
+  </article>
+{% endblock %}

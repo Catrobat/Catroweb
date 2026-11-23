@@ -1,0 +1,68 @@
+{# The docs frame: navigation beside the page (guides, then the brick reference) and the docs entry. Pages fill
+   docs_article and pass navigation, alternates, x_default_url (and canonical_url). #}
+{% extends 'Layout/Base.html.twig' %}
+
+{% macro nav_items(items, current) %}
+  <ul class="docs-nav__list">
+    {% for item in items %}
+      <li>
+        <a class="docs-nav__link{% if item.path == current %} docs-nav__link--current{% endif %}"
+           href="{{ path('docs', {path: item.path == 'index' ? '' : item.path}) }}"
+           {% if item.path == current %}aria-current="page"{% endif %}>{{ item.title }}</a>
+        {% if item.children is not empty %}{{ _self.nav_items(item.children, current) }}{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{# Whether the shown text is English standing in, an outdated or an automatic translation. #}
+{% macro translation_note(page, fallback) %}
+  {% if fallback %}
+    <p class="docs-note" lang="{{ app.request.locale|slice(0, 2) }}">{{ 'docs.fallback'|trans({}, 'catroweb') }}</p>
+  {% elseif page.translationState == 'stale' %}
+    <p class="docs-note" lang="{{ app.request.locale|slice(0, 2) }}">{{ 'docs.stale'|trans({}, 'catroweb') }}</p>
+  {% elseif page.translationState == 'current' and not page.reviewed %}
+    <p class="docs-note docs-note--quiet" lang="{{ app.request.locale|slice(0, 2) }}">{{ 'docs.machine_translated'|trans({}, 'catroweb') }}</p>
+  {% endif %}
+{% endmacro %}
+
+{% block top_bar_page_title %}{{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block hreflang %}
+  {% for alternate in alternates %}
+    <link rel="alternate" hreflang="{{ alternate.locale|replace({_: '-'}) }}" href="{{ alternate.url }}">
+  {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ x_default_url }}">
+{% endblock %}
+
+{% block head %}
+  {{ vite_entry_link_tags('docs_page') }}
+{% endblock %}
+
+{% block javascript %}
+  {{ vite_entry_script_tags('docs_page') }}
+{% endblock %}
+
+{% block body %}
+  {% set current = current|default('') %}
+  <div class="docs" {{ stimulus_controller('docs') }} data-action="click->docs#playVideo"
+       data-trans-video="{{ 'docs.video'|trans({}, 'catroweb')|e('html_attr') }}">
+    <details class="docs-nav" {{ stimulus_target('docs', 'nav') }}>
+      <summary class="docs-nav__summary">
+        <span class="material-icons" aria-hidden="true">menu_book</span>{{ 'docs.contents'|trans({}, 'catroweb') }}
+      </summary>
+      <nav aria-label="{{ 'docs.contents'|trans({}, 'catroweb')|e('html_attr') }}">
+        {{ _self.nav_items(navigation, current) }}
+        <ul class="docs-nav__list">
+          <li>
+            <a class="docs-nav__link{% if current == 'reference' %} docs-nav__link--current{% endif %}"
+               href="{{ path('docs_reference') }}"
+               {% if current == 'reference' %}aria-current="page"{% endif %}>{{ 'docs.reference.title'|trans({}, 'catroweb') }}</a>
+          </li>
+        </ul>
+      </nav>
+    </details>
+
+    {% block docs_article %}{% endblock %}
+  </div>
+{% endblock %}

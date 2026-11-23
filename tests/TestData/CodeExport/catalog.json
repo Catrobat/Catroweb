@@ -1,0 +1,1091 @@
+{
+  "categories": [
+    {
+      "key": "category_arduino",
+      "name": "\u0001s:category_arduino\u0002",
+      "bricks": [
+        {
+          "type": "ArduinoSendDigitalValueBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_arduino_select_digital_value\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "13"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_arduino_set_pin_value_to\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "1"
+            }
+          ],
+          "category": "arduino"
+        },
+        {
+          "type": "ArduinoSendPWMValueBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_arduino_select_analog_value\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "3"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_arduino_set_pin_value_to\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "255"
+            }
+          ],
+          "category": "arduino"
+        }
+      ]
+    },
+    {
+      "key": "category_assertions",
+      "name": "\u0001s:category_assertions\u0002",
+      "bricks": [
+        {
+          "type": "AssertEqualsBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_assert_that\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "0"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_is_equal_to\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "0"
+            }
+          ],
+          "category": "test"
+        },
+        {
+          "type": "AssertUserListsBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_assert_lists\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_assert_actual\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_assert_expected\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            }
+          ],
+          "category": "test"
+        }
+      ]
+    },
+    {
+      "key": "category_cast",
+      "name": "\u0001s:category_cast\u0002",
+      "bricks": [
+        {
+          "type": "WhenGamepadButtonScript",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_when_gamepad_button\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:cast_gamepad_A\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_when_gamepad_button_tapped\u0002"
+            }
+          ],
+          "category": "script"
+        }
+      ]
+    },
+    {
+      "key": "category_control",
+      "name": "\u0001s:category_control\u0002",
+      "bricks": [
+        {
+          "type": "NoteBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_note\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "'\u0001s:brick_note_default_value\u0002'",
+              "segments": [
+                {
+                  "kind": "formula",
+                  "text": "'"
+                },
+                {
+                  "kind": "string",
+                  "text": "\u0001s:brick_note_default_value\u0002",
+                  "source": "\u0001s:brick_note_default_value\u0002"
+                },
+                {
+                  "kind": "formula",
+                  "text": "'"
+                }
+              ]
+            }
+          ],
+          "category": "control"
+        },
+        {
+          "type": "ForeverBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_forever\u0002"
+            }
+          ],
+          "category": "control",
+          "sections": [
+            {
+              "bricks": []
+            },
+            {
+              "parts": [
+                {
+                  "kind": "label",
+                  "text": "\u0001s:brick_loop_end\u0002"
+                }
+              ],
+              "category": "control",
+              "bricks": []
+            }
+          ]
+        },
+        {
+          "type": "IfLogicBeginBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_if_begin\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "1 \u0001s:formula_editor_logic_lesserthan\u0002 2"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_if_begin_second_part\u0002"
+            }
+          ],
+          "category": "control",
+          "sections": [
+            {
+              "bricks": []
+            },
+            {
+              "parts": [
+                {
+                  "kind": "label",
+                  "text": "\u0001s:brick_if_else\u0002"
+                }
+              ],
+              "category": "control",
+              "bricks": []
+            },
+            {
+              "parts": [
+                {
+                  "kind": "label",
+                  "text": "\u0001s:brick_if_end\u0002"
+                }
+              ],
+              "category": "control",
+              "bricks": []
+            }
+          ]
+        },
+        {
+          "type": "RepeatBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_repeat\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "10"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001p:time_plural\u001f10\u0002"
+            }
+          ],
+          "category": "control",
+          "sections": [
+            {
+              "bricks": []
+            },
+            {
+              "parts": [
+                {
+                  "kind": "label",
+                  "text": "\u0001s:brick_loop_end\u0002"
+                }
+              ],
+              "category": "control",
+              "bricks": []
+            }
+          ]
+        },
+        {
+          "type": "BroadcastScript",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_broadcast_receive\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:brick_broadcast_default_value\u0002"
+            }
+          ],
+          "category": "event"
+        }
+      ]
+    },
+    {
+      "key": "category_data",
+      "name": "\u0001s:category_data\u0002",
+      "bricks": [
+        {
+          "type": "SetVariableBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_variable\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:to_label\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "1"
+            }
+          ],
+          "category": "uservariables"
+        },
+        {
+          "type": "ChangeVariableBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_change_variable\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:by_label\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "1"
+            }
+          ],
+          "category": "uservariables"
+        }
+      ]
+    },
+    {
+      "key": "category_device",
+      "name": "\u0001s:category_device\u0002",
+      "bricks": [
+        {
+          "type": "ResetTimerBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_reset_timer\u0002"
+            }
+          ],
+          "category": "device"
+        },
+        {
+          "type": "WhenScript",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_when\u0002"
+            }
+          ],
+          "category": "event"
+        }
+      ]
+    },
+    {
+      "key": "category_drone",
+      "name": "\u0001s:category_drone\u0002",
+      "bricks": [
+        {
+          "type": "DroneTakeOffLandBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_drone_takeoff_land\u0002"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "DroneEmergencyBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_drone_emergency\u0002"
+            }
+          ],
+          "category": "motion"
+        }
+      ]
+    },
+    {
+      "key": "category_embroidery",
+      "name": "\u0001s:category_embroidery\u0002",
+      "bricks": [
+        {
+          "type": "SetXBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_x\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "ChangeYByNBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_change_y_by\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "10"
+            }
+          ],
+          "category": "motion"
+        }
+      ]
+    },
+    {
+      "key": "category_event",
+      "name": "\u0001s:category_event\u0002",
+      "bricks": [
+        {
+          "type": "StartScript",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_when_started\u0002"
+            }
+          ],
+          "category": "event"
+        },
+        {
+          "type": "WhenScript",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_when\u0002"
+            }
+          ],
+          "category": "event"
+        },
+        {
+          "type": "BroadcastScript",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_broadcast_receive\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:brick_broadcast_default_value\u0002"
+            }
+          ],
+          "category": "event"
+        }
+      ]
+    },
+    {
+      "key": "category_jumping_sumo",
+      "name": "\u0001s:category_jumping_sumo\u0002",
+      "bricks": [
+        {
+          "type": "JumpingSumoMoveForwardBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_jumping_sumo_move_forward\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "1"
+            },
+            {
+              "kind": "formula",
+              "text": "80"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:percent_symbol\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_drone_power\u0002"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "JumpingSumoMoveBackwardBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_jumping_sumo_move_backward\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "1"
+            },
+            {
+              "kind": "formula",
+              "text": "80"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:percent_symbol\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_drone_power\u0002"
+            }
+          ],
+          "category": "motion"
+        }
+      ]
+    },
+    {
+      "key": "category_laser",
+      "name": "\u0001s:category_laser\u0002",
+      "bricks": [
+        {
+          "type": "SetXBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_x\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "ChangeYByNBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_change_y_by\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "10"
+            }
+          ],
+          "category": "motion"
+        }
+      ]
+    },
+    {
+      "key": "category_lego_ev3",
+      "name": "\u0001s:category_lego_ev3\u0002",
+      "bricks": [
+        {
+          "type": "LegoEv3MotorTurnAngleBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:ev3_brick_motor_turn_angle\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001a:ev3_motor_chooser\u001f0\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:ev3_motor_move_by\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "180"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:degree_symbol\u0002"
+            }
+          ],
+          "category": "lego"
+        },
+        {
+          "type": "LegoEv3MotorMoveBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:ev3_motor_move\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001a:ev3_motor_chooser\u001f0\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:nxt_motor_speed_to\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:percent_symbol\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:nxt_motor_speed\u0002"
+            }
+          ],
+          "category": "lego"
+        }
+      ]
+    },
+    {
+      "key": "category_lego_nxt",
+      "name": "\u0001s:category_lego_nxt\u0002",
+      "bricks": [
+        {
+          "type": "LegoNxtMotorTurnAngleBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:nxt_brick_motor_turn_angle\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001a:nxt_motor_chooser\u001f0\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:nxt_motor_move_by\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "180"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:degree_symbol\u0002"
+            }
+          ],
+          "category": "lego"
+        },
+        {
+          "type": "LegoNxtMotorStopBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:nxt_motor_stop\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001a:nxt_stop_motor_chooser\u001f0\u0002"
+            }
+          ],
+          "category": "lego"
+        }
+      ]
+    },
+    {
+      "key": "category_looks",
+      "name": "\u0001s:category_looks\u0002",
+      "bricks": [
+        {
+          "type": "SetLookBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_look\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            }
+          ],
+          "category": "look"
+        },
+        {
+          "type": "SetLookByIndexBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_look_by_index\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "1"
+            }
+          ],
+          "category": "look"
+        }
+      ]
+    },
+    {
+      "key": "category_motion",
+      "name": "\u0001s:category_motion\u0002",
+      "bricks": [
+        {
+          "type": "SetXBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_x\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "ChangeYByNBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_change_y_by\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "10"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "PlaceAtBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_place_at\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:x_label\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:y_label\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "200"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "SetYBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_y\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "200"
+            }
+          ],
+          "category": "motion"
+        }
+      ]
+    },
+    {
+      "key": "category_pen",
+      "name": "\u0001s:category_pen\u0002",
+      "bricks": [
+        {
+          "type": "PenDownBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_pen_down\u0002"
+            }
+          ],
+          "category": "pen"
+        },
+        {
+          "type": "PenUpBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_pen_up\u0002"
+            }
+          ],
+          "category": "pen"
+        }
+      ]
+    },
+    {
+      "key": "category_phiro",
+      "name": "\u0001s:category_phiro\u0002",
+      "bricks": [
+        {
+          "type": "SetVariableBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_variable\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:to_label\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "\u0001s:formula_editor_phiro_sensor_front_left\u0002"
+            }
+          ],
+          "category": "uservariables"
+        },
+        {
+          "type": "PhiroMotorMoveForwardBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_phiro_motor_forward_action\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001a:brick_phiro_select_motor_spinner\u001f0\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:phiro_motor_speed\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:percent_symbol\u0002"
+            }
+          ],
+          "category": "phiro"
+        }
+      ]
+    },
+    {
+      "key": "category_plot",
+      "name": "\u0001s:category_plot\u0002",
+      "bricks": [
+        {
+          "type": "SetXBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_x\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "ChangeYByNBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_change_y_by\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "10"
+            }
+          ],
+          "category": "motion"
+        }
+      ]
+    },
+    {
+      "key": "category_raspi",
+      "name": "\u0001s:category_raspi\u0002",
+      "bricks": [
+        {
+          "type": "RaspiInterruptScript",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_raspi_when_begin\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "3"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_raspi_when_equals\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:brick_raspi_pressed_text\u0002"
+            }
+          ],
+          "category": "script"
+        },
+        {
+          "type": "RaspiIfLogicBeginBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_raspi_if_begin\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "3"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_raspi_if_begin_second_part\u0002"
+            }
+          ],
+          "category": "control",
+          "sections": [
+            {
+              "bricks": []
+            },
+            {
+              "parts": [
+                {
+                  "kind": "label",
+                  "text": "\u0001s:brick_if_else\u0002"
+                }
+              ],
+              "category": "control",
+              "bricks": []
+            },
+            {
+              "parts": [
+                {
+                  "kind": "label",
+                  "text": "\u0001s:brick_if_end\u0002"
+                }
+              ],
+              "category": "control",
+              "bricks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "category_sound",
+      "name": "\u0001s:category_sound\u0002",
+      "bricks": [
+        {
+          "type": "PlaySoundBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_play_sound\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            }
+          ],
+          "category": "sound"
+        },
+        {
+          "type": "PlaySoundAndWaitBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_play_sound_and_wait\u0002"
+            },
+            {
+              "kind": "choice",
+              "text": "\u0001s:new_option\u0002"
+            }
+          ],
+          "category": "sound"
+        }
+      ]
+    },
+    {
+      "key": "category_user_bricks",
+      "name": "\u0001s:category_user_bricks\u0002",
+      "bricks": [
+        {
+          "type": "ReportBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_report\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "0"
+            }
+          ],
+          "category": "report"
+        }
+      ]
+    }
+  ],
+  "formula": {
+    "functions": [
+      {
+        "name": "SIN",
+        "label": "\u0001s:formula_editor_function_sin\u0002"
+      },
+      {
+        "name": "COS",
+        "label": "\u0001s:formula_editor_function_cos\u0002"
+      },
+      {
+        "name": "RAND",
+        "label": "\u0001s:formula_editor_function_rand\u0002"
+      }
+    ],
+    "sensors": [
+      {
+        "name": "X_ACCELERATION",
+        "label": "\u0001s:formula_editor_sensor_x_acceleration\u0002"
+      },
+      {
+        "name": "OBJECT_X",
+        "label": "\u0001s:formula_editor_object_x\u0002"
+      }
+    ],
+    "operators": [
+      {
+        "name": "LOGICAL_AND",
+        "label": "\u0001s:formula_editor_logic_and\u0002"
+      },
+      {
+        "name": "PLUS",
+        "label": "\u0001s:formula_editor_operator_plus\u0002"
+      },
+      {
+        "name": "POW",
+        "label": null
+      }
+    ]
+  }
+}

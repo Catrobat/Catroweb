@@ -1,45 +1,13 @@
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
+import CATEGORIES from './CodeViewCategories.json'
 import './CodeViewInline.css'
 import { bindCodeViewTranslation } from './CodeViewTranslation'
 
-const COLORS = {
-  event: '#CF5717',
-  control: '#E89025',
-  motion: '#408AC5',
-  sound: '#9553AF',
-  looks: '#6B9C49',
-  data: '#D32F2F',
-  pen: '#2E7D32',
-  device: '#FFC107',
-  user_defined: '#03A9F4',
-  lego: '#FFEB3B',
-  embroidery: '#E91E63',
-  extension: '#03A9F4',
-  unknown: '#9E9E9E',
-}
-
-// Catroid's brick categories (its layout styles) that share's colors name differently
-const CATEGORY_CLASSES = {
-  look: 'looks',
-  uservariables: 'data',
-  userlist: 'data',
-  userdefinedbrick: 'user_defined',
-  script: 'user_defined',
-  report: 'user_defined',
-  arduino: 'extension',
-  phiro: 'extension',
-  raspi: 'extension',
-  drone: 'extension',
-  jumpingsumo: 'extension',
-  chromecast: 'extension',
-  plot: 'extension',
-  laser: 'extension',
-  test: 'extension',
-}
-
+// Catroid's brick categories (its layout styles) as share's cv-block--* classes. The docs' brick reference
+// (src/Docs/DocsCatalog.php) reads the same file.
 function categoryClass(category) {
-  const name = CATEGORY_CLASSES[category] || category
-  return COLORS[name] ? name : 'unknown'
+  const name = CATEGORIES.aliases[category] || category
+  return CATEGORIES.classes.includes(name) ? name : 'unknown'
 }
 
 // A brick's text as the app shows it: labels, formula fields and drop-down choices

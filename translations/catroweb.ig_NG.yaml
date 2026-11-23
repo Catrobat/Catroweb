@@ -1044,3 +1044,12 @@ docs:
   video: "Kpọọ vidiyo (na-ebunye site na YouTube)"
   comments: "Nkọwa na ndụmọdụ"
   comments_empty: "Enweghị nkọwa ọ bụla ugbu a. Ọ dị ihe na-edoghị anya, ka ị nwere ndụmọdụ? Dee ya ebe a."
+  reference:
+    title: "Blọọkụ na usoro"
+    formula: "Akụkụ usoro"
+    functions: "Ọrụ"
+    sensors: "Ihe nchọpụta"
+    operators: "Ndị na-arụ ọrụ"
+    examples: "Ọmụmaatụ ọrụ"
+    no_prose: "Ọ dịbeghị onye kọwara blọọkụ a. Ị nwere ike ide nkọwa mbụ."
+    empty: "Ntụaka blọọkụ adịghị ugbu a."

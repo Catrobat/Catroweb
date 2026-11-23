@@ -12,6 +12,7 @@ use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
 use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
+use App\Docs\DocsCatalog;
 use App\System\Testing\Behat\ContextTrait;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterStepScope;
@@ -539,6 +540,32 @@ class ApiContext implements Context
       $status_code, $response->getStatusCode(),
       'Response contains invalid status code "'.$response->getStatusCode().'"'
     );
+  }
+
+  /**
+   * Every brick of the catalog (tests/TestData/CodeExport/catalog.json): its page and its API answer exist, and all of
+   * Catroid's strings in them are filled in, none left as a marker or as its bare name.
+   *
+   * @Then every brick of the docs catalog has a page in :locale
+   */
+  public function everyBrickOfTheDocsCatalogHasAPageIn(string $locale): void
+  {
+    $catalog = $this->getSymfonyService(DocsCatalog::class);
+    Assert::assertInstanceOf(DocsCatalog::class, $catalog);
+    $types = $catalog->types();
+    Assert::assertGreaterThan(20, \count($types));
+    foreach ($types as $type) {
+      foreach (['/app/docs/reference/bricks/', '/api/docs/reference/bricks/'] as $prefix) {
+        $uri = $prefix.$type.'?locale='.$locale;
+        $this->iRequestWith('GET', $uri);
+        $response = $this->getKernelBrowser()->getResponse();
+        Assert::assertSame(200, $response->getStatusCode(), $uri);
+        Assert::assertDoesNotMatchRegularExpression('/[\x01\x02\x1f]|\\\u000[12]|\\\u001f/', (string) $response->getContent(), $uri.' shows a string marker');
+      }
+      $brick = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+      $shown = json_encode([$brick['title'], $brick['brick']['parts'], $brick['brick']['sections'] ?? [], array_column($brick['categories'], 'name')], JSON_THROW_ON_ERROR);
+      Assert::assertDoesNotMatchRegularExpression('/\b(brick|category|formula_editor)_[a-z0-9_]+/', $shown, $type.' shows the name of a string instead of its text');
+    }
   }
 
   /**

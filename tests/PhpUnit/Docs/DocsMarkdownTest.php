@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Docs;
 
+use App\Docs\DocsCatalog;
 use App\Docs\DocsMarkdown;
 use App\Docs\Markdown\EmbedParser;
+use App\Project\CodeView\CodeExportRunner;
+use App\Project\CodeView\CodeTreeBuilder;
+use App\Project\CodeView\CodeViewExportStore;
+use App\Project\CodeView\CodeViewLocalizer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
@@ -87,6 +95,15 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('<span class="docs-embed__name">Jump &amp; Run</span>', $html);
   }
 
+  public function testEmbedsMayBeIndentedLikeOtherBlocks(): void
+  {
+    $html = $this->markdown()->convert("  ::video{youtube=dQw4w9WgXcQ}\n\n- ::video{youtube=dQw4w9WgXcQ}\n", 'en/index.md')['html'];
+    $this->assertSame(2, substr_count($html, 'data-youtube-id'), 'up to three spaces, and in a list');
+
+    $code = $this->markdown()->convert("    ::video{youtube=dQw4w9WgXcQ}\n", 'en/index.md')['html'];
+    $this->assertStringNotContainsString('data-youtube-id', $code, 'four spaces are a code block');
+  }
+
   public function testInvalidEmbedsStayVisibleAsText(): void
   {
     $html = $this->markdown()->convert("::video{youtube=\"><script>}\n\n::unknown{x=1}\n\n::project{id=gone}\n", 'en/index.md')['html'];
@@ -96,12 +113,37 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('<p class="docs-embed docs-embed--project-missing"><a href="project/gone">gone</a></p>', $html);
   }
 
-  public function testFileLinksGoToGitHub(): void
+  public function testFileAndBrickLinksStayOnShare(): void
   {
-    $html = $this->markdown()->convert("[Worksheet](../media/teachers/sheet-1.pdf) [Brick](../reference/bricks/SetXBrick.md)\n", 'en/index.md')['html'];
+    $html = $this->markdown()->convert("[Worksheet](../media/teachers/sheet-1.pdf) [Brick](../reference/bricks/SetXBrick.md) [Notes](../scripts/notes.txt)\n", 'en/index.md')['html'];
 
     $this->assertStringContainsString('href="docs/_media/teachers/sheet-1.pdf"', $html);
-    $this->assertStringContainsString('href="https://blob.example/reference/bricks/SetXBrick.md"', $html);
+    $this->assertStringContainsString('href="docs/reference/bricks/SetXBrick"', $html);
+    $this->assertStringContainsString('href="https://blob.example/scripts/notes.txt"', $html);
+  }
+
+  public function testABrickExplanationLinksFromItsBrickPage(): void
+  {
+    $html = $this->markdown()->convert("[Jump](../../en/tutorials/jump.md) [Set y](ChangeYByNBrick.md)\n", 'reference/bricks/SetXBrick.md')['html'];
+
+    $this->assertStringContainsString('href="../../tutorials/jump"', $html);
+    $this->assertStringContainsString('href="ChangeYByNBrick"', $html);
+  }
+
+  public function testEmbedsShowTheBrickAndFormulaFromTheCatalog(): void
+  {
+    $runner = new CodeExportRunner(self::FIXTURES.'../CodeExport', new NullLogger());
+    $localizer = new CodeViewLocalizer($runner);
+    $catalog = new DocsCatalog($runner, $localizer, new CodeTreeBuilder($this->createStub(CodeViewExportStore::class), $localizer, new RequestStack()), new ArrayAdapter(), __DIR__.'/../../../assets/Project/CodeViewCategories.json');
+    $markdown = new DocsMarkdown('https://blob.example/', static fn (string $id): ?array => null, $catalog);
+
+    $html = $markdown->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md')['html'];
+    $this->assertStringContainsString('<a class="docs-embed docs-embed--brick" href="../reference/bricks/SetXBrick" data-brick-type="SetXBrick"><div class="cv-block cv-block--motion">Set x to <span class="cv-field">100</span></div></a>', $html);
+    $this->assertStringContainsString('<a class="docs-embed docs-embed--formula" href="../reference/formula/SIN" data-formula-name="SIN"><span class="cv-field">sine</span></a>', $html);
+
+    $german = $markdown->convert("::brick{type=SetXBrick}\n\n::brick{type=NoSuchBrick}\n", 'de_DE/index.md')['html'];
+    $this->assertStringContainsString('Setze x auf', $german, 'in the language of the page');
+    $this->assertStringContainsString('<div class="docs-embed docs-embed--brick" data-brick-type="NoSuchBrick">', $german, 'an unknown brick shows its name');
   }
 
   private function markdown(): DocsMarkdown

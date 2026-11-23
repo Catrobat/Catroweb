@@ -1066,3 +1066,12 @@ docs:
   video: "Riproduci video (caricato da YouTube)"
   comments: "Commenti e suggerimenti"
   comments_empty: "Ancora nessun commento. Qualcosa non è chiaro o hai un suggerimento? Scrivilo qui."
+  reference:
+    title: "Mattoncini e formule"
+    formula: "Elementi delle formule"
+    functions: "Funzioni"
+    sensors: "Sensori"
+    operators: "Operatori"
+    examples: "Progetti di esempio"
+    no_prose: "Nessuno ha ancora spiegato questo mattoncino. Puoi scrivere la prima spiegazione."
+    empty: "La guida ai mattoncini non è disponibile in questo momento."

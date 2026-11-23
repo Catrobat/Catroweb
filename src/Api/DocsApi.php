@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace App\Api;
 
 use App\Api\Exceptions\ApiErrorResponse;
+use App\Docs\DocsCatalog;
 use App\Docs\DocsLibrary;
 use App\Docs\DocsSync;
 use OpenAPI\Server\Api\DocsApiInterface;
+use OpenAPI\Server\Model\CodeViewBrick;
+use OpenAPI\Server\Model\DocsBrickResponse;
+use OpenAPI\Server\Model\DocsCatalogResponse;
+use OpenAPI\Server\Model\DocsFormulaCatalog;
 use OpenAPI\Server\Model\DocsNavigationResponse;
 use OpenAPI\Server\Model\DocsPageResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -19,6 +24,7 @@ class DocsApi implements DocsApiInterface
     private readonly DocsLibrary $library,
     private readonly DocsSync $sync,
     private readonly RequestStack $requests,
+    private readonly DocsCatalog $catalog,
   ) {
   }
 
@@ -71,6 +77,51 @@ class DocsApi implements DocsApiInterface
       'flavors' => $page->getFlavors(),
       'source_url' => $this->sync->editUrl($page),
       'updated_at' => $page->getUpdatedAt(),
+    ]);
+  }
+
+  #[\Override]
+  public function docsReferenceCatalogGet(?string $locale, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $responseCode = Response::HTTP_OK;
+    $responseHeaders['Cache-Control'] = self::cacheControl($locale);
+    $locale = $this->locale($locale);
+    $catalog = $this->catalog->catalog($locale);
+
+    return new DocsCatalogResponse([
+      'locale' => $locale,
+      'categories' => $catalog['categories'],
+      'formula' => new DocsFormulaCatalog($catalog['formula']),
+    ]);
+  }
+
+  #[\Override]
+  public function docsReferenceBricksTypeGet(string $type, ?string $locale, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $cache_control = self::cacheControl($locale);
+    $locale = $this->locale($locale);
+    $brick = $this->catalog->brick($type, $locale);
+    if (null === $brick) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return ApiErrorResponse::createModel($responseCode, 'not_found', 'Brick not found.');
+    }
+    $responseCode = Response::HTTP_OK;
+    $responseHeaders['Cache-Control'] = $cache_control;
+    $prose = $this->library->brickProse($type, $locale);
+
+    return new DocsBrickResponse([
+      'type' => $type,
+      'locale' => $locale,
+      'title' => $this->catalog->title($brick['brick']),
+      'brick' => new CodeViewBrick($brick['brick']),
+      'categories' => $brick['categories'],
+      'html' => $prose?->getHtml(),
+      'html_locale' => $prose?->getLocale(),
+      'fallback' => null !== $prose && DocsLibrary::isFallback($prose, $locale),
+      'translation_state' => $prose?->getTranslationState(),
+      'reviewed' => $prose?->isReviewed() ?? false,
+      'source_url' => $this->sync->brickEditUrl($type, null !== $this->library->brickProse($type, 'en')),
     ]);
   }
 }
