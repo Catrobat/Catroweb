@@ -646,6 +646,8 @@ footer:
 privacy-policy:
   header: Privaatheidsbeleid
 catro-notifications:
+  doc-comment:
+    message: "%user_link% het kommentaar op 'n dokumentasiebladsy gelewer: %page_title%"
   noFollowers: "Dit lyk asof jy geen volgeling-kennisgewings het nie."
   noComments: "Dit lyk asof jy geen kommentaar-kennisgewings het nie."
   noReactions: "Dit lyk asof jy geen reaksie-kennisgewings het nie."
@@ -1063,3 +1065,5 @@ docs:
   machine_translated: "Hierdie bladsy is outomaties vertaal."
   stale: "Die Engelse bladsy het verander sedert hierdie vertaling gemaak is, so dele daarvan is dalk verouderd."
   video: "Speel video (laai van YouTube)"
+  comments: "Kommentaar en wenke"
+  comments_empty: "Nog geen kommentaar nie. Is iets onduidelik, of het jy 'n wenk? Skryf dit hier."

@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% 在說明文件頁面留言：%page_title%"
   noFollowers: 'Ɛte sɛ wonni akyidifoɔ nkaebɔ biara.'
   noComments: 'Ɛte sɛ wonni adwenkyerɛ nkaebɔ biara.'
   noReactions: 'Ɛte sɛ wonni mmuaeɛ nkaebɔ biara.'
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "Wɔde mfiri kyerɛɛ kratafa yi ase."
   stale: "Borɔfo kratafa no asesa fi bere a wɔkyerɛɛ yi ase, enti ne fã bi betumi ayɛ dedaw."
   video: "Bɔ video no (efi YouTube)"
+  comments: "留言與小技巧"
+  comments_empty: "還沒有留言。有不清楚的地方，或是有小技巧嗎？寫在這裡吧。"

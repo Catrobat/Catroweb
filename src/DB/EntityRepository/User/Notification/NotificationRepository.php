@@ -9,6 +9,7 @@ use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
+use App\DB\Entity\User\Notifications\DocCommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
@@ -314,7 +315,7 @@ class NotificationRepository extends ServiceEntityRepository
     match ($type) {
       'reaction' => $qb->andWhere('n INSTANCE OF '.LikeNotification::class),
       'follow' => $qb->andWhere('(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProjectNotification::class.')'),
-      'comment' => $qb->andWhere('(n INSTANCE OF '.CommentNotification::class.' OR n INSTANCE OF '.StudioCommentNotification::class.')'),
+      'comment' => $qb->andWhere('(n INSTANCE OF '.CommentNotification::class.' OR n INSTANCE OF '.StudioCommentNotification::class.' OR n INSTANCE OF '.DocCommentNotification::class.')'),
       'remix' => $qb->andWhere('n INSTANCE OF '.RemixNotification::class),
       'moderation' => $qb->andWhere('n INSTANCE OF '.ModerationNotification::class),
       'studio' => $qb->andWhere('(n INSTANCE OF '.StudioCommentNotification::class.' OR n INSTANCE OF '.StudioProjectNotification::class.' OR n INSTANCE OF '.StudioJoinRequestNotification::class.')'),

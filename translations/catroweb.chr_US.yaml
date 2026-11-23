@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% commented on a docs page: %page_title%"
   noFollowers: 'ᎥᏝ ᎠᏂᏍᏓᏩᏗᏙᎯ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
   noComments: 'ᎥᏝ ᎧᏃᎮᏛ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
   noReactions: 'ᎥᏝ ᏄᏛᏁᎸ ᏗᎦᏃᎮᎵᏍᎩ ᏱᏣᎭ.'
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "This page was translated automatically."
   stale: "The English page has changed since this translation was made, so parts of it may be out of date."
   video: "Play video (loads from YouTube)"
+  comments: "Comments and tips"
+  comments_empty: "No comments yet. Is something unclear, or do you have a tip? Write it here."

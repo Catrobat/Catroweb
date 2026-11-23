@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% commented on a docs page: %page_title%"
   noFollowers: "It looks like you don't have any follower notifications."
   noComments: "It looks like you don't have any comment notifications."
   noReactions: "It looks like you don't have any reaction notifications."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "This page was translated automatically."
   stale: "The English page has changed since this translation was made, so parts of it may be out of date."
   video: "Play video (loads from YouTube)"
+  comments: "Comments and tips"
+  comments_empty: "No comments yet. Is something unclear, or do you have a tip? Write it here."

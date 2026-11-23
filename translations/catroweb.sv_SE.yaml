@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Integritetspolicy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% kommenterade en dokumentationssida: %page_title%"
   noFollowers: 'Det verkar som att du inte har några aviseringar om följare.'
   noComments: 'Det verkar som att du inte har några aviseringar om kommentarer.'
   noReactions: 'Det verkar som att du inte har några aviseringar om reaktioner.'
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Den här sidan har översatts automatiskt."
   stale: "Den engelska sidan har ändrats sedan den här översättningen gjordes, så delar av den kan vara inaktuella."
   video: "Spela upp video (laddas från YouTube)"
+  comments: "Kommentarer och tips"
+  comments_empty: "Inga kommentarer än. Är något oklart, eller har du ett tips? Skriv det här."

@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Privatlivspolitik
 catro-notifications:
+  doc-comment:
+    message: "%user_link% kommenterede en dokumentationsside: %page_title%"
   noFollowers: "Det ser ud til, at du ikke har nogen notifikationer om følgere."
   noComments: "Det ser ud til, at du ikke har nogen notifikationer om kommentarer."
   noReactions: "Det ser ud til, at du ikke har nogen notifikationer om reaktioner."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Denne side er oversat automatisk."
   stale: "Den engelske side er ændret siden denne oversættelse blev lavet, så dele af den kan være forældede."
   video: "Afspil video (indlæses fra YouTube)"
+  comments: "Kommentarer og tips"
+  comments_empty: "Ingen kommentarer endnu. Er noget uklart, eller har du et tip? Skriv det her."

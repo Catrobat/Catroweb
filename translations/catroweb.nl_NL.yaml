@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: 'Privacybeleid'
 catro-notifications:
+  doc-comment:
+    message: "%user_link% reageerde op een pagina van de documentatie: %page_title%"
   noFollowers: 'Het lijkt erop dat je geen meldingen over volgers hebt.'
   noComments: 'Het lijkt erop dat je geen meldingen over reacties hebt.'
   noReactions: 'Het lijkt erop dat je geen meldingen over emoji-reacties hebt.'
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Deze pagina is automatisch vertaald."
   stale: "De Engelse pagina is veranderd sinds deze vertaling is gemaakt, dus delen ervan kunnen verouderd zijn."
   video: "Video afspelen (laadt van YouTube)"
+  comments: "Reacties en tips"
+  comments_empty: "Nog geen reacties. Is iets onduidelijk, of heb je een tip? Schrijf het hier."

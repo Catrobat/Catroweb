@@ -6,11 +6,14 @@ namespace App\Api;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiController;
+use App\DB\Entity\Docs\DocPage;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
+use App\DB\Entity\User\Notifications\DocCommentNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\Docs\DocsLibrary;
 use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
 use App\Translation\LibreTranslateApi;
@@ -52,6 +55,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly RateLimiterFactory $translationBurstLimiter,
     private readonly TextSanitizer $textSanitizer,
     private readonly UserAvatarService $user_avatar_service,
+    private readonly DocsLibrary $docs_library,
   ) {
   }
 
@@ -94,24 +98,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   #[\Override]
   public function projectsIdCommentsPost(string $id, CommentCreateRequest $comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $user = $this->authentication_manager->getAuthenticatedUser();
+    $user = $this->authorizeCommentPost($responseCode);
     if (!$user instanceof User) {
-      $responseCode = Response::HTTP_UNAUTHORIZED;
-
-      return null;
-    }
-
-    if ($user->isMinor()) {
-      $responseCode = Response::HTTP_FORBIDDEN;
-
-      return null;
-    }
-
-    if (!$this->authorization_checker->isGranted('ROLE_ADMIN')
-      && (null === $this->checkUserRateLimit($user, $this->commentBurstLimiter)
-        || null === $this->checkUserRateLimit($user, $this->commentDailyLimiter))) {
-      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
-
       return null;
     }
 
@@ -121,50 +109,18 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
 
       return null;
     }
+    $project_id = (string) $project->getId();
 
-    $message = $this->textSanitizer->sanitize(trim((string) $comment_create_request->getMessage())) ?? '';
-    if ('' === $message) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
+    $comment = $this->createComment(
+      $user,
+      $comment_create_request,
+      static fn (UserComment $parent): bool => $parent->getProject()?->getId() === $project_id,
+      static fn (UserComment $comment): UserComment => $comment->setProject($project),
+      $responseCode,
+    );
+    if (!$comment instanceof UserComment) {
       return null;
     }
-
-    $parent_id = $comment_create_request->getParentId();
-    if (null !== $parent_id) {
-      $parent_comment = $this->comment_repository->findOneBy(['id' => $parent_id]);
-      if (!$parent_comment instanceof UserComment) {
-        $responseCode = Response::HTTP_NOT_FOUND;
-
-        return null;
-      }
-
-      if ($parent_comment->getProject()?->getId() !== $project->getId()) {
-        $responseCode = Response::HTTP_BAD_REQUEST;
-
-        return null;
-      }
-
-      if ($parent_comment->getAutoHidden() && !$this->canAccessHiddenComment($parent_comment)) {
-        $responseCode = Response::HTTP_NOT_FOUND;
-
-        return null;
-      }
-    }
-
-    $comment = new UserComment();
-    $comment->setUser($user);
-    $comment->setUsername($user->getUsername() ?? '');
-    $comment->setText($message);
-    $comment->setProject($project);
-    $comment->setUploadDate(new \DateTime('now', new \DateTimeZone('UTC')));
-    $comment->setIsDeleted(false);
-    if (null !== $parent_id) {
-      $comment->setParentId($parent_id);
-    }
-
-    $this->entity_manager->persist($comment);
-    $this->entity_manager->flush();
-    $this->entity_manager->refresh($comment);
 
     $project_owner = $project->getUser();
     if ($project_owner instanceof User && $project_owner->getId() !== $user->getId()) {
@@ -175,17 +131,69 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       $this->entity_manager->flush();
     }
 
-    $comment_data = $this->buildCommentDataFromEntity($comment, 0);
-    $project_id = $project->getId();
-    if (null === $project_id) {
-      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+    return $this->createCommentResponse($this->buildCommentDataFromEntity($comment, 0), $project_id);
+  }
+
+  #[\Override]
+  public function docsPagesPathCommentsGet(string $path, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    if (!$this->docs_library->page($path, 'en') instanceof DocPage) {
+      $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
     }
-    $response = $this->createCommentResponse($comment_data, $project_id);
-    $responseCode = Response::HTTP_CREATED;
 
-    return $response;
+    $cursor_data = $this->decodeCursor($cursor);
+    if (null === $cursor_data && null !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $page = $this->comment_repository->getDocCommentsPageData($path, $this->normalizeLimit($limit), $cursor_data['date'] ?? null, $cursor_data['id'] ?? null);
+    $responseCode = Response::HTTP_OK;
+
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], null);
+  }
+
+  /** A comment on a docs page is shared by all languages of the page; the docs maintainers (admins) are notified. */
+  #[\Override]
+  public function docsPagesPathCommentsPost(string $path, CommentCreateRequest $comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->authorizeCommentPost($responseCode);
+    if (!$user instanceof User) {
+      return null;
+    }
+
+    if (!$this->docs_library->page($path, 'en') instanceof DocPage) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $comment = $this->createComment(
+      $user,
+      $comment_create_request,
+      static fn (UserComment $parent): bool => $parent->getDocPath() === $path,
+      static fn (UserComment $comment): UserComment => $comment->setDocPath($path),
+      $responseCode,
+    );
+    if (!$comment instanceof UserComment) {
+      return null;
+    }
+
+    // ponytail: every admin is a docs maintainer; a configurable list when admins want fewer notifications.
+    /** @var User[] $maintainers */
+    $maintainers = $this->entity_manager->createQueryBuilder()
+      ->select('u')->from(User::class, 'u')
+      ->where('u.roles LIKE :admin OR u.roles LIKE :super_admin')->andWhere('u.id != :author')
+      ->setParameter('admin', '%"ROLE_ADMIN"%')->setParameter('super_admin', '%"ROLE_SUPER_ADMIN"%')
+      ->setParameter('author', $user->getId())
+      ->getQuery()->getResult()
+    ;
+    $this->notification_manager->addNotifications(array_map(static fn (User $maintainer): DocCommentNotification => new DocCommentNotification($maintainer, $comment), $maintainers));
+
+    return $this->createCommentResponse($this->buildCommentDataFromEntity($comment, 0), null);
   }
 
   #[\Override]
@@ -246,7 +254,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $project = $comment->getProject();
-    if (!$project instanceof Project || !$this->project_manager->findProjectIfVisibleToCurrentUser($project->getId()) instanceof Project) {
+    if (null === $comment->getDocPath()
+      && (!$project instanceof Project || !$this->project_manager->findProjectIfVisibleToCurrentUser($project->getId()) instanceof Project)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -268,14 +277,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     );
 
     $responseCode = Response::HTTP_OK;
-    $project_id = $project->getId();
-    if (null === $project_id) {
-      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
-      return null;
-    }
-
-    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project_id);
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project?->getId());
   }
 
   #[\Override]
@@ -366,7 +369,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     return $response;
   }
 
-  private function createCommentListResponse(array $comments, bool $has_more, string $project_id): CommentListResponse
+  private function createCommentListResponse(array $comments, bool $has_more, ?string $project_id): CommentListResponse
   {
     $response = new CommentListResponse();
     $data = [];
@@ -388,7 +391,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     return $response;
   }
 
-  private function createCommentResponse(array $comment_data, string $project_id): CommentResponse
+  private function createCommentResponse(array $comment_data, ?string $project_id): CommentResponse
   {
     $response = new CommentResponse();
     $response->setId((string) $comment_data['id']);
@@ -426,6 +429,91 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       'parent_id' => $comment->getParentId(),
       'number_of_replies' => $reply_count,
     ];
+  }
+
+  /**
+   * The author of a new comment: logged in, not a minor (comments are hidden from minors), within the rate limits.
+   * Unverified and suspended accounts never get here (AccountStateEventListener answers 403).
+   */
+  private function authorizeCommentPost(int &$responseCode): ?User
+  {
+    $user = $this->authentication_manager->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    if ($user->isMinor()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    if (!$this->authorization_checker->isGranted('ROLE_ADMIN')
+      && (null === $this->checkUserRateLimit($user, $this->commentBurstLimiter)
+        || null === $this->checkUserRateLimit($user, $this->commentDailyLimiter))) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    return $user;
+  }
+
+  /**
+   * Saves a comment, or a reply to a visible comment on the same target.
+   *
+   * @param callable(UserComment): bool        $same_target whether a parent comment is on this target
+   * @param callable(UserComment): UserComment $set_target  puts the new comment on the target
+   */
+  private function createComment(User $user, CommentCreateRequest $request, callable $same_target, callable $set_target, int &$responseCode): ?UserComment
+  {
+    $message = $this->textSanitizer->sanitize(trim((string) $request->getMessage())) ?? '';
+    if ('' === $message) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $parent_id = $request->getParentId();
+    if (null !== $parent_id) {
+      $parent_comment = $this->comment_repository->findOneBy(['id' => $parent_id]);
+      if (!$parent_comment instanceof UserComment) {
+        $responseCode = Response::HTTP_NOT_FOUND;
+
+        return null;
+      }
+
+      if (!$same_target($parent_comment)) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return null;
+      }
+
+      if ($parent_comment->getAutoHidden() && !$this->canAccessHiddenComment($parent_comment)) {
+        $responseCode = Response::HTTP_NOT_FOUND;
+
+        return null;
+      }
+    }
+
+    $comment = new UserComment();
+    $comment->setUser($user);
+    $comment->setUsername($user->getUsername() ?? '');
+    $comment->setText($message);
+    $set_target($comment);
+    $comment->setUploadDate(new \DateTime('now', new \DateTimeZone('UTC')));
+    $comment->setIsDeleted(false);
+    $comment->setParentId($parent_id);
+
+    $this->entity_manager->persist($comment);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($comment);
+
+    $responseCode = Response::HTTP_CREATED;
+
+    return $comment;
   }
 
   private function canAccessHiddenComment(UserComment $comment): bool

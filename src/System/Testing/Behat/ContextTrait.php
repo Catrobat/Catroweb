@@ -572,8 +572,8 @@ trait ContextTrait
    */
   public function insertUserComment(array $config, bool $andFlush = true): UserComment
   {
-    /** @var Project $project */
-    $project = $this->getProjectManager()->find($config['project_id']);
+    /** @var Project|null $project */
+    $project = isset($config['project_id']) && '' !== $config['project_id'] ? $this->getProjectManager()->find($config['project_id']) : null;
 
     /** @var User|null $user */
     $user = isset($config['user_id'])
@@ -591,7 +591,10 @@ trait ContextTrait
       new \DateTime($config['upload_date'], new \DateTimeZone('UTC')) :
       new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
     );
-    $new_comment->setProject($project);
+    if (null !== $project) {
+      $new_comment->setProject($project);
+    }
+    $new_comment->setDocPath(isset($config['doc_path']) && '' !== $config['doc_path'] ? $config['doc_path'] : null);
     $new_comment->setUser($user);
     $new_comment->setParentId($parent_id);
     $new_comment->setIsDeleted($is_deleted);

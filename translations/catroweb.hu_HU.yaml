@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: 'Adatvédelmi irányelvek'
 catro-notifications:
+  doc-comment:
+    message: "%user_link% hozzászólt egy dokumentációs oldalhoz: %page_title%"
   noFollowers: 'Úgy tűnik, nincsenek követőkkel kapcsolatos értesítéseid.'
   noComments: 'Úgy tűnik, nincsenek hozzászólásokkal kapcsolatos értesítéseid.'
   noReactions: 'Úgy tűnik, nincsenek reakciókkal kapcsolatos értesítéseid.'
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Ezt az oldalt automatikusan fordították."
   stale: "Az angol oldal megváltozott a fordítás óta, ezért egyes részei elavultak lehetnek."
   video: "Videó lejátszása (a YouTube-ról töltődik be)"
+  comments: "Hozzászólások és tippek"
+  comments_empty: "Még nincs hozzászólás. Valami nem világos, vagy van egy tipped? Írd ide."

@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Tietosuojakäytäntö
 catro-notifications:
+  doc-comment:
+    message: "%user_link% kommentoi dokumentaation sivua: %page_title%"
   noFollowers: "Sinulla ei näytä olevan seuraajailmoituksia."
   noComments: "Sinulla ei näytä olevan kommentti-ilmoituksia."
   noReactions: "Sinulla ei näytä olevan reaktioilmoituksia."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Tämä sivu on käännetty automaattisesti."
   stale: "Englanninkielinen sivu on muuttunut tämän käännöksen jälkeen, joten osa siitä voi olla vanhentunutta."
   video: "Toista video (ladataan YouTubesta)"
+  comments: "Kommentit ja vinkit"
+  comments_empty: "Ei vielä kommentteja. Onko jokin epäselvää, vai onko sinulla vinkki? Kirjoita se tähän."

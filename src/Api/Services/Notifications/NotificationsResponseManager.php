@@ -9,6 +9,7 @@ use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
+use App\DB\Entity\User\Notifications\DocCommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
@@ -25,6 +26,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportCategory;
+use App\Docs\DocsLibrary;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportProcessor;
@@ -59,6 +61,7 @@ class NotificationsResponseManager extends AbstractResponseManager
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly UserAvatarService $user_avatar_service,
     private readonly UrlGeneratorInterface $url_generator,
+    private readonly DocsLibrary $docs_library,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -202,6 +205,25 @@ class NotificationsResponseManager extends AbstractResponseManager
         'project_name' => $notification->getComment()?->getProject()?->getName(),
         'avatar' => $this->user_avatar_service->getVariants($notification->getComment()?->getUser()),
         'message' => $this->trans('catro-notifications.comment.message'),
+      ]);
+    }
+
+    if ($notification instanceof DocCommentNotification) {
+      $comment = $notification->getComment();
+      $path = (string) $comment?->getDocPath();
+
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'comment',
+        'seen' => $notification->getSeen(),
+        'from' => $comment?->getUser()?->getId(),
+        'from_name' => $comment?->getUser()?->getUserIdentifier(),
+        'avatar' => $this->user_avatar_service->getVariants($comment?->getUser()),
+        'url' => $this->url_generator->generate('docs', ['theme' => 'app', 'path' => 'index' === $path ? '' : $path]).'#comments',
+        'message' => $this->trans('catro-notifications.doc-comment.message', [
+          '%user_link%' => '%user_link%',
+          '%page_title%' => $this->docs_library->page($path, 'en')?->getTitle() ?? $path,
+        ]),
       ]);
     }
 

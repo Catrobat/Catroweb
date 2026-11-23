@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% ya yi sharhi a kan shafin takardu: %page_title%"
   noFollowers: "Da alama ba ka da sanarwar mabiya."
   noComments: "Da alama ba ka da sanarwar sharhi."
   noReactions: "Da alama ba ka da sanarwar martani."
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "An fassara wannan shafi ta atomatik."
   stale: "Shafin Turanci ya canza tun bayan wannan fassarar, don haka wasu sassa na iya zama tsofaffi."
   video: "Kunna bidiyo (yana lodawa daga YouTube)"
+  comments: "Sharhi da shawarwari"
+  comments_empty: "Babu sharhi tukuna. Akwai abin da bai fito fili ba, ko kana da shawara? Rubuta shi a nan."

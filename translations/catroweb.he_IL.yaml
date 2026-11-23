@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: "מדיניות פרטיות"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% הגיב/ה על דף בתיעוד: %page_title%"
   noFollowers: "נראה שאין לך התראות על עוקבים."
   noComments: "נראה שאין לך התראות על תגובות."
   noReactions: "נראה שאין לך התראות על ריאקציות."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "הדף הזה תורגם אוטומטית."
   stale: "הדף באנגלית השתנה מאז שנעשה התרגום הזה, ולכן חלקים ממנו עשויים להיות לא עדכניים."
   video: "הפעל וידאו (נטען מ-YouTube)"
+  comments: "תגובות וטיפים"
+  comments_empty: "עדיין אין תגובות. משהו לא ברור, או שיש לך טיפ? כתבו אותו כאן."

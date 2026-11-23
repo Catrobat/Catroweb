@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: "Politica de confidențialitate"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% a comentat o pagină din documentație: %page_title%"
   noFollowers: "Se pare că nu ai nicio notificare despre urmăritori."
   noComments: "Se pare că nu ai nicio notificare despre comentarii."
   noReactions: "Se pare că nu ai nicio notificare despre reacții."
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "Această pagină a fost tradusă automat."
   stale: "Pagina în engleză s-a schimbat de când a fost făcută această traducere, așa că unele părți pot fi depășite."
   video: "Redă videoclipul (se încarcă de pe YouTube)"
+  comments: "Comentarii și sfaturi"
+  comments_empty: "Încă nu există comentarii. E ceva neclar sau ai un sfat? Scrie-l aici."

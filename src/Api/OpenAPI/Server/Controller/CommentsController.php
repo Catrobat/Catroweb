@@ -31,6 +31,7 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\CommentsApiInterface;
+use OpenAPI\Server\Model\CommentCreateRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -335,6 +336,218 @@ class CommentsController extends Controller
   }
 
   /**
+   * Operation docsPagesPathCommentsGet.
+   *
+   * Get the comments on a docs page
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function docsPagesPathCommentsGetAction(Request $request, $path): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $cursor = $request->query->get('cursor');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $path = $this->deserialize($path, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*$/');
+    $response = $this->validate($path, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->docsPagesPathCommentsGet($path, $accept_language, $limit, $cursor, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation docsPagesPathCommentsPost.
+   *
+   * Comment on a docs page
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function docsPagesPathCommentsPostAction(Request $request, $path): Response
+  {
+    // Make sure that the client is providing something that we can consume
+    $consumes = ['application/json'];
+    if (!static::isContentTypeAllowed($request, $consumes)) {
+      // We can't consume the content that the client is sending us
+      return new Response('', 415);
+    }
+
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+    $comment_create_request = $request->getContent();
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $path = $this->deserialize($path, 'string', 'string');
+      $inputFormat = $request->getMimeType($request->getContentTypeFormat());
+      $comment_create_request = $this->deserialize($comment_create_request, CommentCreateRequest::class, $inputFormat);
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*$/');
+    $response = $this->validate($path, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type(CommentCreateRequest::class);
+    $asserts[] = new Assert\Valid();
+    $response = $this->validate($comment_create_request, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->docsPagesPathCommentsPost($path, $comment_create_request, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        201 => 'Created',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        415 => 'Unsupported Media Type - request must use application/json as content type',
+        422 => 'Unprocessable Entity',
+        429 => 'Too Many Requests',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation projectsIdCommentsGet.
    *
    * Get project comments
@@ -476,7 +689,7 @@ class CommentsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $comment_create_request = $this->deserialize($comment_create_request, \OpenAPI\Server\Model\CommentCreateRequest::class, $inputFormat);
+      $comment_create_request = $this->deserialize($comment_create_request, CommentCreateRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -493,7 +706,7 @@ class CommentsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\CommentCreateRequest::class);
+    $asserts[] = new Assert\Type(CommentCreateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($comment_create_request, $asserts);
     if ($response instanceof Response) {

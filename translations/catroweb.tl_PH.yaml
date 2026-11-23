@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: 'Patakaran sa privacy'
 catro-notifications:
+  doc-comment:
+    message: "Nagkomento si %user_link% sa isang pahina ng dokumentasyon: %page_title%"
   noFollowers: 'Mukhang wala kang mga abiso tungkol sa tagasunod.'
   noComments: 'Mukhang wala kang mga abiso tungkol sa komento.'
   noReactions: 'Mukhang wala kang mga abiso tungkol sa reaksyon.'
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Awtomatikong isinalin ang pahinang ito."
   stale: "Nagbago ang pahinang Ingles mula nang gawin ang salin na ito, kaya maaaring luma na ang ilang bahagi nito."
   video: "I-play ang video (naglo-load mula sa YouTube)"
+  comments: "Mga komento at tip"
+  comments_empty: "Wala pang komento. May hindi ba malinaw, o may tip ka? Isulat mo rito."

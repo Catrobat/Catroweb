@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: Sera ya Faragha
 catro-notifications:
+  doc-comment:
+    message: "%user_link% alitoa maoni kwenye ukurasa wa nyaraka: %page_title%"
   noFollowers: "Inaonekana huna arifa zozote za wafuasi."
   noComments: "Inaonekana huna arifa zozote za maoni."
   noReactions: "Inaonekana huna arifa zozote za maitikio."
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "Ukurasa huu ulitafsiriwa kiotomatiki."
   stale: "Ukurasa wa Kiingereza umebadilika tangu tafsiri hii ifanywe, kwa hiyo baadhi ya sehemu zinaweza kuwa za zamani."
   video: "Cheza video (inapakiwa kutoka YouTube)"
+  comments: "Maoni na vidokezo"
+  comments_empty: "Bado hakuna maoni. Kuna kitu kisicho wazi, au una kidokezo? Kiandike hapa."
