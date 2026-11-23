@@ -131,6 +131,18 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertNull($this->sync->mediaFile('tutorials/not-served.html'));
     $this->assertNull($this->sync->mediaFile('../en/index.md'));
     $this->assertNull($this->sync->mediaFile('../../../.env'));
+    $outside = sys_get_temp_dir().'/docs_outside_'.uniqid();
+    mkdir($outside);
+    copy(self::FIXTURES.'/media/tutorials/jump.png', $outside.'/secret.png');
+    $link = self::FIXTURES.'/media/outside-link';
+    symlink($outside, $link); // a linked folder leading out of media/
+    try {
+      $this->assertNull($this->sync->mediaFile('outside-link/secret.png'));
+    } finally {
+      unlink($link);
+      unlink($outside.'/secret.png');
+      rmdir($outside);
+    }
 
     $kernel = self::$kernel;
     $this->assertNotNull($kernel);

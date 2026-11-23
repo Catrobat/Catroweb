@@ -38,13 +38,10 @@ class DocsSyncCommand extends Command
 
       return Command::SUCCESS;
     }
-    // One sync at a time, e.g. a deploy and the publish workflow.
+    // One sync at a time, e.g. a deploy and the publish workflow. Waits for a running one (it takes seconds), so a
+    // deploy always ends with its own docs in the database.
     $lock = $this->locks->createLock('docs-sync', 1800);
-    if (!$lock->acquire()) {
-      $output->writeln('A docs sync is already running.');
-
-      return Command::SUCCESS;
-    }
+    $lock->acquire(true);
     try {
       $result = $this->sync->import(DocsSync::readDirectory($dir));
     } finally {

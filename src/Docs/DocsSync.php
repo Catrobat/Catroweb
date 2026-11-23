@@ -86,12 +86,13 @@ class DocsSync
     return $m[1];
   }
 
-  /** A media file of the docs folder that may be served, or null. Symlinks are never followed. */
+  /** A media file of the docs folder that may be served, or null. Its real path must stay inside media/, so no link (to a file or a folder) leads out. */
   public function mediaFile(string $path): ?string
   {
-    $file = rtrim($this->docs_dir, '/').'/media/'.$path;
+    $root = realpath(rtrim($this->docs_dir, '/').'/media');
+    $file = false === $root || null === self::mediaPath('media/'.$path) ? false : realpath($root.'/'.$path);
 
-    return null !== self::mediaPath('media/'.$path) && is_file($file) && !is_link($file) ? $file : null;
+    return false !== $file && str_starts_with($file, $root.\DIRECTORY_SEPARATOR) && is_file($file) ? $file : null;
   }
 
   /**

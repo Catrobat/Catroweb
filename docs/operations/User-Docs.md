@@ -6,14 +6,14 @@ The user documentation is written in `user-docs/` of this repo (Markdown, review
 
 `bin/console catrobat:docs:sync` reads `user-docs/` (`catrobat.user_docs.dir`) and imports its Markdown files in one transaction: new and changed files are rendered, pages whose file is gone are deleted. It runs
 
-- on every deploy (`deploy.php`, task `update:docs`, after the migrations and before the new release goes live), so a release always shows the docs it ships with, and
-- from the docs publish workflow, so a docs change can go live without a full deploy.
+- on every deploy (`deploy.php`, task `update:docs`, after the migrations): the database is written **before** `deploy:symlink`, so for a moment the old release shows the new docs (harmless: the table layout is the same). `deploy:rollback` does **not** sync again: after a rollback run `bin/console catrobat:docs:sync` in the current release.
+- from the docs publish workflow (added by the content-move PR): it copies `user-docs/` into the current release and then syncs, so a docs change goes live, media included, without a full deploy.
 
 Details:
 
 - `bin/console catrobat:docs:sync path/to/folder` imports another folder with the same layout. Without a docs folder the command does nothing.
 - A folder without `en/index.md` is refused, so a broken checkout never wipes the docs.
-- A lock (`docs-sync`) keeps two syncs from running at once (a deploy and the publish workflow).
+- A lock (`docs-sync`) keeps two syncs from running at once (a deploy and the publish workflow); the second one waits.
 - A file with broken front matter or no `title` is skipped and named in the output; the rest is imported.
 - A file is rendered again only when it changed, or when it embeds a project (`::project`), whose name and picture can change.
 
@@ -54,7 +54,7 @@ A visitor's language comes from the `hl` cookie or Accept-Language (`de`, `de_AT
 Share never loads docs media from a third party: every page view would hand the visitor's IP to it, and most visitors are children.
 
 - `DocsController::media` serves files straight from `user-docs/media/` of the running release, so they always match the deployed pages.
-- Only the writer guide's image types and PDF are served (`png`, `jpg`, `jpeg`, `gif`, `webp`, `svg`, `pdf`, `DocsSync::MEDIA_TYPES`). Every path segment must be a plain name (letters, digits, `.`, `_`, `-`, not starting with `.`, no `..`) and symlinks are not followed, so no URL reaches outside the folder.
+- Only the writer guide's image types and PDF are served (`png`, `jpg`, `jpeg`, `gif`, `webp`, `svg`, `pdf`, `DocsSync::MEDIA_TYPES`). Every path segment must be a plain name (letters, digits, `.`, `_`, `-`, not starting with `.`, no `..`), and the file's real path must lie inside `media/`, so neither a URL nor a linked file or folder reaches outside it.
 - Content type of the extension, `nosniff` and a day of public caching. SVG is served as `image/svg+xml` (it works in `<img>`) with `Content-Security-Policy: sandbox; default-src 'none'`, the same policy as SVGs in project files, so opening one directly cannot run script on share's origin.
 
 ## API and pages
