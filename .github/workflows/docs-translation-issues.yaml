@@ -1,0 +1,29 @@
+name: 'User docs: translation issues'
+
+# Keeps the "User docs translations" issue and its one sub-issue per locale (label translation) in line with
+# user-docs/scripts/translation_status.py.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'user-docs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: translation-issues
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          sparse-checkout: user-docs
+      - name: Update the translation issues
+        run: python3 user-docs/scripts/sync_translation_issues.py
+        env:
+          GH_TOKEN: ${{ github.token }}

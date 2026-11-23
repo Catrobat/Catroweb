@@ -1,0 +1,14 @@
+---
+title: Fox
+description: "When the plot starts, every movement is drawn as if with a pen."
+order: 0
+translated_from: de
+---
+
+[Fox (PDF, German)](../../../media/plot-tutorials/Fuchs.pdf)
+
+When the plot starts, every movement is drawn as if with a pen. These are the lines the plotter cuts along later.
+
+This fox is made only of straight lines ("Move \_\_\_ steps") and turns.
+
+**Tip**: Test your program while you build it.

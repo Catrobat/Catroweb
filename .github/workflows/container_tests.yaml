@@ -33,6 +33,27 @@ concurrency:
 
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Changed files:
+  #
+  #   - A pull request that changes only the user docs (user-docs/) skips the jobs below; the user-docs job (code_quality.yaml) checks it.
+  #     Skipped jobs count as passing, so the required checks stay green. If this job fails, the jobs below run
+  #     anyway.
+  #
+  changes:
+    name: Changed files
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.changes.outputs.code }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 2 # the merge commit and its first parent, the base branch
+          filter: blob:none
+          sparse-checkout: .github
+      - id: changes
+        uses: ./.github/actions/code-changed
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Developer Container:
   #
   #   - The Docker test container is already thoroughly tested during dynamic software tests.
@@ -46,6 +67,8 @@ jobs:
   #
   dev_container_checks:
     name: Development Container
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

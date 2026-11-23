@@ -77,7 +77,29 @@ jobs:
     needs: player
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read # the wait for a running docs publish
     steps:
+      # A docs publish (docs-publish.yaml, running or queued) holds Deployer's deploy lock for a few minutes; wait for it instead of
+      # failing on the lock.
+      - name: Wait for a running docs publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for delay in 15 30 60 120 300 300 300 300 300 300; do
+            running=0
+            for status in in_progress queued; do
+              n=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow docs-publish.yaml --status "$status" --json databaseId --jq length)
+              running=$((running + n))
+            done
+            [ "$running" = 0 ] && exit 0
+            echo "A docs publish is running or queued, waiting ${delay}s"
+            sleep "$delay"
+          done
+          echo "::error::A docs publish has been running for more than 30 minutes"
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v7.0.1
         with:

@@ -1,1 +1,4 @@
 * @dmetzner
+/user-docs/scripts/ @dmetzner
+/.github/workflows/docs-*.yaml @dmetzner
+/.github/actions/code-changed/ @dmetzner

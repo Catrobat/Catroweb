@@ -1,0 +1,28 @@
+name: 'Did code change?'
+description: >-
+  Outputs for a pull request: `code` is false when it changes only files in user-docs/, `docs` is true when it
+  changes any file there. Anything but a pull request gets true for both. Needs a checkout of the pull request's
+  merge commit with fetch-depth 2 (its first parent is the base branch). Self-test: test.sh.
+outputs:
+  code:
+    description: "'true' unless the pull request changes only files in user-docs/"
+    value: ${{ steps.diff.outputs.code }}
+  docs:
+    description: "'true' if the pull request changes files in user-docs/"
+    value: ${{ steps.diff.outputs.docs }}
+runs:
+  using: 'composite'
+  steps:
+    - id: diff
+      shell: bash
+      env:
+        EVENT: ${{ github.event_name }}
+      run: |
+        # Schedules and manual runs check everything. A failing git diff fails the step, so nothing is skipped by mistake.
+        if [ "$EVENT" = pull_request ]; then
+          "$GITHUB_ACTION_PATH/changed.sh" HEAD^1 HEAD > "$RUNNER_TEMP/changed"
+        else
+          printf 'code=true\ndocs=true\n' > "$RUNNER_TEMP/changed"
+        fi
+        cat "$RUNNER_TEMP/changed" >> "$GITHUB_OUTPUT"
+        cat "$RUNNER_TEMP/changed"

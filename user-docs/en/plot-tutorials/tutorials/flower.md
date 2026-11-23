@@ -1,0 +1,14 @@
+---
+title: Flower
+description: "When the plot starts, every movement is drawn as if with a pen."
+order: 0
+translated_from: de
+---
+
+[Flower (PDF, German)](../../../media/plot-tutorials/Blume.pdf)
+
+When the plot starts, every movement is drawn as if with a pen. These are the lines the plotter cuts along later.
+
+This flower has 7 petals. Each petal is an arc: you draw a tiny line, turn, draw another tiny line and turn again (look at the loop "Repeat 10 times" – "Move 10 steps" – "Turn right 16 degrees").
+
+Before the next petal starts, you have to turn once more.

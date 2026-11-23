@@ -1,0 +1,22 @@
+name: 'User docs: reviewed label'
+
+# A new push to a pull request removes update-reviewed: a maintainer adds it again after checking the new commits
+# (user-docs job in code_quality.yaml). pull_request_target so it also works for pull requests from forks; it checks out no code.
+on:
+  pull_request_target:
+    types: [synchronize]
+    paths:
+      - 'user-docs/**'
+
+permissions:
+  pull-requests: write
+
+jobs:
+  drop-label:
+    if: contains(github.event.pull_request.labels.*.name, 'update-reviewed')
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --remove-label update-reviewed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}

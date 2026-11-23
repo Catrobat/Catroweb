@@ -36,3 +36,6 @@ docs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# User docs: not copied into the image (63 MB of media); docker-compose.dev.yaml mounts them
+user-docs/

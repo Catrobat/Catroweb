@@ -1,0 +1,28 @@
+---
+title: Kreis – Zickzack
+description: "In diesem Tutorial erfährst du, wie du einen Kreis im Zickzack-Muster (54,7 x 54,8mm) sticken kannst."
+order: 3
+reviewed: true
+---
+
+In diesem Tutorial erfährst du, wie du einen Kreis im Zickzack-Muster (54,7 x 54,8mm) sticken kannst.
+
+![image (8)](../../../media/embroidery-tutorials/image-8.png)
+
+Du solltest dafür schon wissen, wie man ein neues Objekt erstellt und dort Bausteine einfügt. Sieh dir gerne die Tutorials der [Starter-Reihe](../../game-tutorials/starter-tutorials/index.md) an, wenn du da noch Hilfe benötigst. Außerdem müssen die Stickbausteine schon aktiviert sein. Wie das geht erfährst du im Tutorial **[Stickbausteine aktivieren](activate-embroidery-bricks.md)**.
+
+Für mehr Informationen oder Designvorschläge schau dir doch auch die anderen Tutorials an.
+
+*Hier kannst du das Tutorial im PDF-Format herunterladen:*
+
+[Kreis Zickzack](../../../media/embroidery-tutorials/Kreis-Zickzack.pdf)
+
+### 1. Erstelle zuerst ein neues Stick-Objekt (siehe Tutorial [Stickobjekte erstellen](create-embroidery-objects.md)).
+
+### 2. Füge jetzt Schritt für Schritt die Bausteine zu deinem Skript hinzu:
+
+![Kreis Zickzack](../../../media/embroidery-tutorials/Kreis-Zickzack.png)
+
+### 3. Drücke auf den Play-Button um zu starten.
+
+Schau dir das Tutorial **[Kreis](circle.md)** an, um weitere Informationen zum Sticken eines Kreises zu finden.

@@ -42,6 +42,8 @@ on:
   pull_request:
     branches:
       - '**' # all branches
+    # labeled/unlabeled: the label update-reviewed lets the user-docs job accept changes to reviewed pages
+    types: [opened, synchronize, reopened, labeled, unlabeled]
   workflow_dispatch: # player-catroid-pin.yaml runs it on its bump PRs, which GITHUB_TOKEN opens without PR events
 
 concurrency:
@@ -49,6 +51,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Changed files:
+  #
+  #   - A pull request that changes only the user docs (user-docs/) skips the jobs below; the user-docs job (code_quality.yaml) checks it.
+  #     Skipped jobs count as passing, so the required checks stay green. If this job fails, the jobs below run
+  #     anyway.
+  #
+  changes:
+    name: Changed files
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.changes.outputs.code }}
+      docs: ${{ steps.changes.outputs.docs }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 2 # the merge commit and its first parent, the base branch
+          filter: blob:none
+          sparse-checkout: .github
+      - name: Self-test of the change detection
+        run: .github/actions/code-changed/test.sh
+      - id: changes
+        uses: ./.github/actions/code-changed
+
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Javascript / CSS **
   #
@@ -61,6 +87,8 @@ jobs:
   #
   biome:
     name: JavaScript,JSON,CSS [Biome]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -80,6 +108,8 @@ jobs:
   #
   prettier:
     name: MD,YAML formatting [Prettier]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -99,6 +129,8 @@ jobs:
   #
   php-cs-fixer:
     name: PHP Code Style [Php-CS-Fixer]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -116,6 +148,8 @@ jobs:
   #
   phpstan:
     name: PHP Static Analysis [Php-Stan]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -133,6 +167,8 @@ jobs:
   #
   psalm:
     name: PHP Static Analysis [Psalm]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -161,6 +197,8 @@ jobs:
   #
   lint-twig:
     name: Twig [Lint]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -175,6 +213,8 @@ jobs:
   #
   lint-yaml:
     name: Yaml [Lint]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -190,6 +230,8 @@ jobs:
   #
   lint-container:
     name: Symfony Container [Lint]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -205,10 +247,63 @@ jobs:
   #
   check-secrets:
     name: Secrets [Check Default Secrets]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
       - run: bin/check-default-secrets
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** User docs **
+  #
+  #  - Only when user-docs/ changes: front matter, links, media, redirects and translations (user-docs/check.sh), and
+  #    pages a person reviewed (`reviewed: true` on the base branch) only change with the label update-reviewed
+  #    (user-docs/TRANSLATING.md). A new push drops the label (docs-reviewed-label.yaml), so it only covers the commit
+  #    a maintainer looked at.
+  #
+  user-docs:
+    name: User docs [check]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.docs != 'false' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read # the label update-reviewed
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0 # the merge base with the base branch
+          filter: blob:none
+          sparse-checkout: user-docs
+      - name: Pages, links and media
+        run: user-docs/check.sh
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+      # The label is read from the pull request now, not from the event: a re-run of an old labeled event must not
+      # skip the check. On a new push it never counts (docs-reviewed-label.yaml is removing it at the same time).
+      - name: Reviewed pages unchanged
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          PR: ${{ github.event.pull_request.number }}
+          ACTION: ${{ github.event.action }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          labels=$(gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json labels --jq '[.labels[].name] | join(" ")')
+          if [ "$ACTION" != synchronize ] && [[ " $labels " == *" update-reviewed "* ]]; then
+            echo "Label update-reviewed: changes to reviewed pages accepted"
+            exit 0
+          fi
+          changed=$(git diff --name-only --no-renames "$BASE"...HEAD -- 'user-docs/*.md' | while read -r f; do
+            if git show "$BASE:$f" 2>/dev/null | awk 'NR==1 && $0!="---" {exit} NR>1 && $0=="---" {exit} tolower($0) ~ /^reviewed: *true *$/ {r=1} END {exit !r}'; then echo "$f"; fi
+          done)
+          if [ -n "$changed" ]; then
+            { echo "### Pages with reviewed: true changed"; echo "A maintainer adds the label update-reviewed after checking them:"; echo "$changed" | sed 's/^/- /'; } >> "$GITHUB_STEP_SUMMARY"
+            echo "These pages have reviewed: true on the base branch. Changing them needs the label update-reviewed:"
+            echo "$changed"
+            exit 1
+          fi
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # CI gate:
@@ -222,6 +317,7 @@ jobs:
   ci_gate:
     name: 'CI gate: static analysis'
     needs:
+      - changes
       - biome
       - prettier
       - php-cs-fixer
@@ -231,12 +327,14 @@ jobs:
       - lint-yaml
       - lint-container
       - check-secrets
+      - user-docs
     if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Check results of all jobs
         env:
           RESULTS: |
+            changes ${{ needs.changes.result }}
             biome ${{ needs.biome.result }}
             prettier ${{ needs.prettier.result }}
             php-cs-fixer ${{ needs.php-cs-fixer.result }}
@@ -246,6 +344,7 @@ jobs:
             lint-yaml ${{ needs.lint-yaml.result }}
             lint-container ${{ needs.lint-container.result }}
             check-secrets ${{ needs.check-secrets.result }}
+            user-docs ${{ needs.user-docs.result }}
         run: |
           echo "$RESULTS"
           failed=0
