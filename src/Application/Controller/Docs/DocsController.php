@@ -130,12 +130,15 @@ class DocsController extends AbstractController
   public function brickByClass(Request $request, string $class): Response
   {
     $type = $this->catalog->typeOfClass($class);
+    // The app's help asks in its language (?locale=): the page it is sent to keeps it.
+    [$locale, $explicit] = $this->locale($request);
+    $query = $explicit ? ['locale' => $locale] : [];
     if (null === $type) {
       // A brick Catroid no longer has: the reference is the best page left (temporary, Catroid may bring it back).
-      return $this->redirectToRoute('docs_reference', [], Response::HTTP_FOUND);
+      return $this->redirectToRoute('docs_reference', $query, Response::HTTP_FOUND);
     }
 
-    return $this->redirectToRoute('docs_brick', ['type' => $type], Response::HTTP_MOVED_PERMANENTLY);
+    return $this->redirectToRoute('docs_brick', ['type' => $type] + $query, Response::HTTP_MOVED_PERMANENTLY);
   }
 
   #[Route(path: '/docs/reference/bricks/{type}', name: 'docs_brick', requirements: ['type' => '[A-Za-z][A-Za-z0-9_]{0,99}'], methods: ['GET'], priority: 1)]
