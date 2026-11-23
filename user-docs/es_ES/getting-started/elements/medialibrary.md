@@ -7,13 +7,13 @@ source_hash: '033e4596481d0050d8912025b0b5c56ea1298d0aa5b1c34b7e2e2e09efb04561'
 
 La librería de medios de Catrobat es una colección de **actores**, **fondos**, sonidos y objetos que puedes usar en tus proyectos. ¡Puedes cambiarlo todo para que encaje con tus ideas!
 
-[Actor](#add-a-new-actor-from-the-media-library)
+[Actor](#añadir-un-actor-nuevo-de-la-librería-de-medios)
 
-[Fondo](#add-a-background-from-the-media-library)
+[Fondo](#añadir-un-fondo-de-la-librería-de-medios)
 
-[Sonido](#add-a-sound-from-the-media-library)
+[Sonido](#añadir-un-sonido-de-la-librería-de-medios)
 
-[Objeto](#add-an-object-from-the-media-library)
+[Objeto](#añadir-un-objeto-de-la-librería-de-medios)
 
 ***
 

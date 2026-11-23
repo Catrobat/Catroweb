@@ -4,9 +4,11 @@ Run from anywhere: python3 user-docs/scripts/check.py [--base <ref>], or user-do
 With --base, translations added or changed since that ref must be current (CI passes the PR's base branch).
 """
 import hashlib
+import html
 import re
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -15,6 +17,8 @@ MEDIA_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
 LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 EMBED = re.compile(r"^::(\w+)\{([^}]*)\}\s*$", re.M)
 EMBEDS = {"brick": "type", "formula": "name", "project": "id", "video": "youtube"}
+HEADING = re.compile(r"^ {0,3}#{1,6}[ \t]+(.*?)(?:[ \t]+#+)?[ \t]*$", re.M)
+FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,}).*?^ {0,3}\1[ \t]*$", re.M | re.S)
 SOURCE_HASH = re.compile(r"""^(['"])([0-9a-f]{7,64})\1$""")  # quoted: YAML reads an unquoted 1234567 as a number
 
 
@@ -77,6 +81,25 @@ def front_matter(text):
     return fields
 
 
+def slug(title):
+    """share's heading id: league/commonmark's SlugNormalizer as src/Docs/DocsMarkdown.php calls it."""
+    slug = re.sub(r"\s+", "-", title.strip(" \t\n\r\0\x0b").lower())  # PHP trim() strips only these
+    slug = "".join(c for c in slug if c == "-" or unicodedata.category(c)[0] in "LM" or unicodedata.category(c) in ("Nd", "Nl"))
+    return slug[:255]
+
+
+def heading_ids(text):
+    """The ids share gives the headings of a page, duplicates numbered -1, -2 … like DocsMarkdown::convert()."""
+    ids, used = set(), {}
+    for title in HEADING.findall(FENCE.sub("", text)):
+        title = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", title)  # a link or image counts with its text only
+        title = html.unescape(re.sub(r"<[^>]+>", "", title))  # inline HTML is dropped, entities decoded
+        base = slug(title) or "section"
+        used[base] = used.get(base, 0) + 1
+        ids.add(base if used[base] == 1 else f"{base}-{used[base] - 1}")
+    return ids
+
+
 def check_page(page, touched=False):
     errors = []
     text = page.read_text(encoding="utf-8")
@@ -91,13 +114,17 @@ def check_page(page, touched=False):
     if translation:
         errors += check_translation(page, text, fields or {}, touched)
     for target in LINK.findall(text):
-        if re.match(r"^[a-z][a-z0-9+.-]*:|^#|^/", target):
-            continue  # external, anchor or site-absolute link
-        path = (page.parent / target.split("#")[0]).resolve()
+        if re.match(r"^[a-z][a-z0-9+.-]*:|^/", target):
+            continue  # external or site-absolute link
+        file, _, anchor = target.partition("#")
+        path = (page.parent / file).resolve() if file else page
         if not path.exists() and translation and path.is_relative_to(ROOT / rel[0]):
             path = english_source(path.relative_to(ROOT))  # share shows the English page until this one is translated
         if not path.exists():
             errors.append(f"broken link: {target}")
+        elif anchor and path.suffix == ".md" and anchor not in heading_ids(path.read_text(encoding="utf-8")):
+            # Untouched pages only warn, so an older page does not block an unrelated pull request.
+            errors.append(f"{'' if touched else 'warning: '}broken anchor: {target} (the target has no heading with that id)")
     for kind, args in EMBED.findall(text):
         if kind not in EMBEDS:
             errors.append(f"unknown embed ::{kind}")
@@ -155,8 +182,9 @@ def main(argv):
             problems.append(f"{media.relative_to(ROOT)}: {media.stat().st_size} bytes, more than {MAX_MEDIA_BYTES}")
     for problem in problems:
         print(problem)
-    print(f"{len(problems)} problem(s)")
-    return 1 if problems else 0
+    warnings = sum(": warning: " in p for p in problems)
+    print(f"{len(problems) - warnings} problem(s), {warnings} warning(s)")
+    return 1 if len(problems) > warnings else 0
 
 
 if __name__ == "__main__":

@@ -14,7 +14,7 @@ with tempfile.TemporaryDirectory() as tmp:
     (root / "reference" / "bricks").mkdir(parents=True)
     (root / "en" / "other.md").write_text("---\ntitle: Other\n---\n")
     cases = {
-        "good.md": ("---\ntitle: Good\n---\n[x](other.md) [y](https://a.b) [z](#top)\n::brick{type=SetXBrick}\n", []),
+        "good.md": ("---\ntitle: Good\n---\n## Top\n[x](other.md) [y](https://a.b) [z](#top)\n::brick{type=SetXBrick}\n", []),
         "nofm.md": ("Text\n", ["missing front matter"]),
         "notitle.md": ("---\norder: 1\n---\n", ["front matter has no title"]),
         "link.md": ("---\ntitle: L\n---\n[x](missing.md)\n", ["broken link: missing.md"]),
@@ -68,4 +68,24 @@ with tempfile.TemporaryDirectory() as tmp:
     tsv = root / "redirects.tsv"
     tsv.write_text("old_url\tnew_path\na\t/\nb\t/other\nc\t/reference/bricks/StartScript\nd\t/de_DE/reference/bricks/X\ne\t/gone\nf\t/de_DE\n")
     assert check.check_redirects(tsv) == ["redirect target missing: e -> /gone", "redirect target missing: f -> /de_DE"], check.check_redirects(tsv)
+    # Heading ids as share renders them: expected values from league/commonmark's SlugNormalizer (PHP).
+    slugs = {
+        "Füge ein Objekt aus der Medienbibliothek hinzu": "füge-ein-objekt-aus-der-medienbibliothek-hinzu",
+        "Añadir un objeto de la librería de medios": "añadir-un-objeto-de-la-librería-de-medios",
+        "  Ça va? Größe & Ü-Ei: 3 Schritte!  ": "ça-va-größe--ü-ei-3-schritte",
+        "Ein  — Gedankenstrich": "ein--gedankenstrich",
+        "Wähle „Speichern“ (2/3)": "wähle-speichern-23",
+        "Ελληνικά & 中文 標題": "ελληνικά--中文-標題",
+        "Tab\tund_Unterstrich": "tab-undunterstrich",
+    }
+    for title, expected in slugs.items():
+        assert check.slug(title) == expected, (title, check.slug(title))
+    page_text = "## Intro\n```\n# not a heading\n```\n## Intro ##\n### [Link](x.md) `code` <b>bold</b> &amp; more\n#### !!!\n"
+    assert check.heading_ids(page_text) == {"intro", "intro-1", "link-code-bold--more", "section"}, check.heading_ids(page_text)
+    (root / "en" / "target.md").write_text("---\ntitle: T\n---\n## Añadir un objeto\n")
+    anchors = root / "en" / "anchors.md"
+    anchors.write_text("---\ntitle: A\n---\n## Top\n[a](#top) [b](target.md#añadir-un-objeto) [c](#Object) [d](target.md#Object)\n")
+    broken = ["broken anchor: #Object (the target has no heading with that id)", "broken anchor: target.md#Object (the target has no heading with that id)"]
+    assert check.check_page(anchors, touched=True) == broken, check.check_page(anchors, touched=True)
+    assert check.check_page(anchors) == ["warning: " + e for e in broken]  # untouched pages only warn
 print("check.py self-test passed")

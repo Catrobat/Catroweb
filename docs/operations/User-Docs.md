@@ -39,7 +39,7 @@ A visitor's language comes from the `hl` cookie or Accept-Language (`de`, `de_AT
 
 ## Rendering
 
-[league/commonmark](https://commonmark.thephpleague.com/) with GitHub-flavoured Markdown, `html_input: escape` (raw HTML in a page shows as text) and `allow_unsafe_links: false`. Headings get ids; level 2 and 3 headings make the table of contents.
+[league/commonmark](https://commonmark.thephpleague.com/) with GitHub-flavoured Markdown, `html_input: escape` (raw HTML in a page shows as text) and `allow_unsafe_links: false`. Headings get ids (`SlugNormalizer`, duplicates numbered `-1`, `-2`); level 2 and 3 headings make the table of contents. `user-docs/scripts/check.py` (`slug()`, `heading_ids()`) replicates these ids to check link anchors: change both together.
 
 - **Links between pages** become URLs relative to the page's own URL, so the same HTML works on every theme (`/pocketcode/docs/...`, `/embroidery/docs/...`). A link to `reference/bricks/<type>.md` leads to the brick's page on share.
 - **Images and PDFs** in `media/` are served by share, `/{theme}/docs/_media/<path>` (a guide path segment never starts with `_`, so media never shadow a page), so a page view sends nothing to a third party. **Other files** link to their GitHub page (`Catrobat/Catroweb`, `main`).

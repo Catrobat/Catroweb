@@ -64,4 +64,4 @@ A human-checked translation gets `reviewed: true` in its front matter. It is not
 
 ## Checks
 
-`./check.sh` (or `user-docs/check.sh` from the repository root) runs the same checks as CI: front matter, links between pages, image references, image sizes, the targets in `import/redirects.tsv`, and for translations `source_hash` and embeds.
+`./check.sh` (or `user-docs/check.sh` from the repository root) runs the same checks as CI: front matter, links between pages and their `#anchors`, image references, image sizes, the targets in `import/redirects.tsv`, and for translations `source_hash` and embeds.
