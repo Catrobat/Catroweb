@@ -52,8 +52,8 @@ def todo(files):
 
 def locale_body(locale, language, sections):
     lines = [
-        f"Translate the Catrobat docs into {language} (`{locale}`). Pick an unchecked task, say in a comment that you take it, "
-        f"follow [TRANSLATING.md]({GUIDE}) and open one pull request per task, titled like the task.",
+        f"Translate the Catrobat docs into {language} (`{locale}`). Pick an unchecked task (a comment that you take it is welcome, not required), "
+        f"follow [TRANSLATING.md]({GUIDE}) and open one pull request per task, titled like the task and mentioning this issue.",
         "",
     ]
     for section, files in sections.items():

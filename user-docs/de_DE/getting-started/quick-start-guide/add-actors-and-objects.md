@@ -3,6 +3,7 @@ title: Figuren und Objekte hinzufügen
 description: "Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Projekt hinzuzufügen."
 order: 2
 reviewed: true
+source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 ---
 
 Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Projekt hinzuzufügen.
@@ -17,7 +18,7 @@ In Pocket Code kannst du auf verschiedene Arten eine Figur oder ein Objekt zu de
 
 **Bild auswählen**: Du kannst ein Bild aus der Galerie deines Smartphones auswählen.
 
-**Bibliothek**: In der Bibliothek findest du Figuren und Objekte, die bereits programmiert sind, also bereits ein Skript besitzen. Du kannst sie auswählen, wenn du bereits fertige Elemente in deinem Spiel verwenden willst (z.B. einen Countdown) ([mehr zur Bibliothek](../elements/medialibrary.md#Objekt-Medienbibliothek)).
+**Bibliothek**: In der Bibliothek findest du Figuren und Objekte, die bereits programmiert sind, also bereits ein Skript besitzen. Du kannst sie auswählen, wenn du bereits fertige Elemente in deinem Spiel verwenden willst (z.B. einen Countdown) ([mehr zur Bibliothek](../elements/medialibrary.md#füge-ein-objekt-aus-der-medienbibliothek-hinzu)).
 
 **Foto schießen**: Du kannst die Kamera deines Geräts nutzen, um ein Foto zu machen, und dieses als Figur hinzufügen.
 

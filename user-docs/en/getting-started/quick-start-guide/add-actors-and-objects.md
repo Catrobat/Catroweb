@@ -16,7 +16,7 @@ In Pocket Code, you can add a character or an object to your project in various 
 
 **Gallery**: You can choose an image from your smartphone’s gallery.
 
-**Library**: In the library, you will find actors and objects that are already programmed, meaning they already have a script. You can select them if you want to use ready-made elements in your game (e.g., a countdown) ([more about the library](../elements/medialibrary.md#Object)).
+**Library**: In the library, you will find actors and objects that are already programmed, meaning they already have a script. You can select them if you want to use ready-made elements in your game (e.g., a countdown) ([more about the library](../elements/medialibrary.md#add-an-object-from-the-media-library)).
 
 **Camera**: You can use your device’s camera to take a photo and add it as a character.
 

@@ -2,7 +2,7 @@
 title: Añadir actores y objetos
 description: Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.
 order: 2
-source_hash: '394b960b91cfb90559b9d281216c34c7bd0737bd0df17975c7a17c85230525a0'
+source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 ---
 
 Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.
@@ -17,7 +17,7 @@ En Pocket Code puedes añadir un personaje o un objeto a tu proyecto de varias f
 
 **Galería**: Elige una imagen de la galería de tu móvil.
 
-**Biblioteca**: En la biblioteca hay actores y objetos que ya están programados, es decir, ya tienen un script. Elígelos si quieres usar piezas listas en tu juego, por ejemplo una cuenta atrás ([más sobre la biblioteca](../elements/medialibrary.md#Object)).
+**Biblioteca**: En la biblioteca hay actores y objetos que ya están programados, es decir, ya tienen un script. Elígelos si quieres usar piezas listas en tu juego, por ejemplo una cuenta atrás ([más sobre la biblioteca](../elements/medialibrary.md#añadir-un-objeto-de-la-librería-de-medios)).
 
 **Cámara**: Haz una foto con la cámara de tu dispositivo y añádela como personaje.
 
