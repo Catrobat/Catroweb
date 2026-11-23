@@ -10,6 +10,7 @@ use App\Docs\DocsSync;
 use OpenAPI\Server\Api\DocsApiInterface;
 use OpenAPI\Server\Model\DocsNavigationResponse;
 use OpenAPI\Server\Model\DocsPageResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 class DocsApi implements DocsApiInterface
@@ -17,7 +18,14 @@ class DocsApi implements DocsApiInterface
   public function __construct(
     private readonly DocsLibrary $library,
     private readonly DocsSync $sync,
+    private readonly RequestStack $requests,
   ) {
+  }
+
+  /** Without `locale`, the client's language (Accept-Language, as everywhere in the API). */
+  private function locale(?string $locale): string
+  {
+    return $locale ?? $this->requests->getCurrentRequest()?->getLocale() ?? 'en';
   }
 
   #[\Override]
@@ -26,13 +34,15 @@ class DocsApi implements DocsApiInterface
     $responseCode = Response::HTTP_OK;
     $responseHeaders['Cache-Control'] = 'public, max-age=300';
 
-    return new DocsNavigationResponse(['locale' => $locale ?? 'en', 'items' => $this->library->navigation($locale ?? 'en', $flavor)]);
+    $locale = $this->locale($locale);
+
+    return new DocsNavigationResponse(['locale' => $locale, 'items' => $this->library->navigation($locale, $flavor)]);
   }
 
   #[\Override]
   public function docsPagesPathGet(string $path, ?string $locale, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $locale ??= 'en';
+    $locale = $this->locale($locale);
     $page = $this->library->page($path, $locale);
     if (null === $page) {
       $responseCode = Response::HTTP_NOT_FOUND;

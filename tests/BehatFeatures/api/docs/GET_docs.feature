@@ -25,7 +25,7 @@ Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
   Scenario: A translation that is stale
     When I request "GET" "/api/docs/pages/tutorials/jump?locale=de_DE"
     Then the response status code should be "200"
-    And the JSON response field "locale" should be '"de"'
+    And the JSON response field "locale" should be '"de_DE"'
     And the JSON response field "fallback" should be 'false'
     And the JSON response field "translation_state" should be '"stale"'
     And the JSON response field "reviewed" should be 'true'
@@ -45,15 +45,38 @@ Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
     Then the response status code should be "404"
 
   Scenario: Docs images are served by share itself
-    When I request "GET" "/app/docs/media/tutorials/jump.png"
+    When I request "GET" "/app/docs/_media/tutorials/jump.png"
     Then the response status code should be "200"
     And the response Header should contain the key "Content-Type" with the value 'image/png'
 
   Scenario: Docs SVGs are sandboxed
-    When I request "GET" "/app/docs/media/tutorials/star.svg"
+    When I request "GET" "/app/docs/_media/tutorials/star.svg"
     Then the response status code should be "200"
     And the response Header should contain the key "Content-Type" with the value 'image/svg+xml'
 
   Scenario: Other repo files are not served
-    When I request "GET" "/app/docs/media/tutorials/not-served.html"
+    When I request "GET" "/app/docs/_media/tutorials/not-served.html"
     Then the response status code should be "404"
+
+  Scenario Outline: The language of the request finds the share locale folder (de_DE/)
+    Given I have a request header "HTTP_ACCEPT_LANGUAGE" with value "<language>"
+    When I request "GET" "/api/docs/pages/index"
+    Then the response status code should be "200"
+    And the JSON response field "locale" should be '"de_DE"'
+    And the JSON response field "fallback" should be 'false'
+
+    Examples:
+      | language |
+      | de       |
+      | de-AT    |
+
+  Scenario Outline: The docs page is shown in the visitor's language
+    Given I have a request header "HTTP_ACCEPT_LANGUAGE" with value "<language>"
+    When I request "GET" "/app/docs"
+    Then the response status code should be "200"
+    And the client response should contain "Catrobat-Dokumentation"
+
+    Examples:
+      | language |
+      | de       |
+      | de-AT    |

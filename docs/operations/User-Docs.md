@@ -7,7 +7,9 @@ The user documentation is written in the public repo [Catrobat/docs](https://git
 `bin/console catrobat:docs:sync` downloads the tarball of `DOCS_REPOSITORY` at `DOCS_REF` (`.env`: `Catrobat/docs`, `main`), unpacks it with the system `tar` into a temporary folder (PharData drops entries with long names; symlinks in the archive are ignored) and imports the Markdown files in one transaction: new and changed files are rendered, pages whose file is gone are deleted. Then it copies the repo's media (below). A periodic task runs it every hour (`CronTasks`, see [Background-Jobs.md](./Background-Jobs.md)).
 
 - `bin/console catrobat:docs:sync path/to/checkout` (or a `.tar.gz`) imports a local copy, e.g. while writing docs.
-- An archive without `en/index.md` is refused, so a broken download never wipes the docs.
+- An archive without `en/index.md` is refused, so a broken download never wipes the docs. So is an archive without media while share has some (the synced copy is kept).
+- Limits against a broken or hostile archive: `DOCS_MAX_DOWNLOAD_BYTES` (500 MB) for the download, `DOCS_MAX_UNPACKED_BYTES` (1 GB) for what it unpacks to, measured before anything is unpacked. `tar` refuses `..` and absolute names; symlinks are never read.
+- A lock (`docs-sync`) keeps two syncs from running at once, whether started by the cron task or by hand.
 - A file with broken front matter or no `title` is skipped and named in the output; the rest is imported.
 - A file is rendered again only when it changed, or when it embeds a project (`::project`), whose name and picture can change.
 
@@ -19,18 +21,24 @@ Code: `src/Docs/` (`DocsSync`, `DocsMarkdown`, `DocsLibrary`), entity `DocPage`.
 | ------------------------------------------------------ | ----------------------------------------------- |
 | `en/index.md`                                          | guide `index`, locale `en` (`/docs`)            |
 | `en/tutorials/index.md`                                | guide `tutorials` (a folder's page)             |
-| `en/tutorials/jump.md`, `de/tutorials/jump.md`         | guide `tutorials/jump` in `en` and `de`         |
-| `reference/bricks/SetXBrick.md` (`de/reference/...`)   | kind `brick`, path `SetXBrick`, for brick pages |
+| `en/tutorials/jump.md`, `de_DE/tutorials/jump.md`      | guide `tutorials/jump` in `en` and `de_DE`      |
+| `reference/bricks/SetXBrick.md` (`de_DE/reference/…`)  | kind `brick`, path `SetXBrick`, for brick pages |
 | anything else (`README.md`, `media/`, `scripts/`, ...) | not imported                                    |
 
 Front matter: `title` (required for guides), `description`, `order` (default 1000), `flavors`, `reviewed`, and for a translation `source_hash`: the sha256 (or a prefix of at least 7 hex digits, quoted) of the English file it was translated from. A translation is `current` while that hash matches today's English file and `stale` after the English page changed; English pages are `source`. Pages show "translated automatically" for current, unreviewed translations and a stale note for stale ones.
+
+Translation folders are named like share's translation files (`de_DE`, `pt_BR`, `sr_Latn`).
+
+## Languages
+
+A visitor's language comes from the `hl` cookie or Accept-Language (`de`, `de_AT`, `zh_TW`), the API's from `?locale=` or Accept-Language. `DocsLibrary::locales()` tries, in order: the locale itself, its `_`/`-` forms, the bare language, share's own locale for that language (the mapping in `TranslatorAwareTrait`: `de` → `de_DE`, `pt` → `pt_BR`, `zh` → `zh_CN`), then English. `de_AT` thus finds `de_DE`. Navigation and pages use the same order; a page shown in English instead of the visitor's language says so.
 
 ## Rendering
 
 [league/commonmark](https://commonmark.thephpleague.com/) with GitHub-flavoured Markdown, `html_input: escape` (raw HTML in a page shows as text) and `allow_unsafe_links: false`. Headings get ids; level 2 and 3 headings make the table of contents.
 
 - **Links between pages** become URLs relative to the page's own URL, so the same HTML works on every theme (`/pocketcode/docs/...`, `/embroidery/docs/...`).
-- **Images and PDFs** in `media/` point at share's own copy, `/{theme}/docs/media/<path>`, so a page view sends nothing to a third party. **Other repo files** link to their GitHub page.
+- **Images and PDFs** in `media/` point at share's own copy, `/{theme}/docs/_media/<path>` (a guide path segment never starts with `_`, so media never shadow a page), so a page view sends nothing to a third party. **Other repo files** link to their GitHub page.
 - **Embeds**, each on a line of its own:
   - `::brick{type=SetXBrick}` and `::formula{name=SIN}`: a placeholder carrying the type or name (`data-brick-type`, `data-formula-name`) that shows the name until the brick reference (M2) renders the real brick.
   - `::project{id=…}`: a card with the project's name, author and thumbnail, linking to the project page; a hidden or missing project shows a plain link.

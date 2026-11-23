@@ -31,7 +31,7 @@ final class DocsMarkdownTest extends TestCase
   {
     return [
       'root index' => ['en/index.md', ['kind' => 'guide', 'locale' => 'en', 'path' => 'index']],
-      'folder index' => ['de/tutorials/index.md', ['kind' => 'guide', 'locale' => 'de', 'path' => 'tutorials']],
+      'folder index' => ['de_DE/tutorials/index.md', ['kind' => 'guide', 'locale' => 'de_DE', 'path' => 'tutorials']],
       'page' => ['pt-BR/tutorials/jump.md', ['kind' => 'guide', 'locale' => 'pt-BR', 'path' => 'tutorials/jump']],
       'brick' => ['reference/bricks/SetXBrick.md', ['kind' => 'brick', 'locale' => 'en', 'path' => 'SetXBrick']],
       'translated brick' => ['de/reference/bricks/SetXBrick.md', ['kind' => 'brick', 'locale' => 'de', 'path' => 'SetXBrick']],
@@ -39,6 +39,7 @@ final class DocsMarkdownTest extends TestCase
       'media' => ['media/tutorials/jump.png', null],
       'scripts' => ['scripts/notes.md', null],
       'traversal' => ['en/../secret.md', null],
+      'underscore segment' => ['en/_media/page.md', null],
     ];
   }
 
@@ -70,7 +71,7 @@ final class DocsMarkdownTest extends TestCase
     // Page links relative to /{theme}/docs/getting-started/first-project; media from GitHub.
     $this->assertStringContainsString('href="../../docs"', $html);
     $this->assertStringContainsString('href="../tutorials/jump#jump-higher"', $html);
-    $this->assertStringContainsString('src="../media/tutorials/jump.png"', $html, 'served by share, not a third party');
+    $this->assertStringContainsString('src="../_media/tutorials/jump.png"', $html, 'served by share, not a third party');
   }
 
   public function testRendersEmbeds(): void
@@ -99,7 +100,7 @@ final class DocsMarkdownTest extends TestCase
   {
     $html = $this->markdown()->convert("[Worksheet](../media/teachers/sheet-1.pdf) [Brick](../reference/bricks/SetXBrick.md)\n", 'en/index.md')['html'];
 
-    $this->assertStringContainsString('href="docs/media/teachers/sheet-1.pdf"', $html);
+    $this->assertStringContainsString('href="docs/_media/teachers/sheet-1.pdf"', $html);
     $this->assertStringContainsString('href="https://blob.example/reference/bricks/SetXBrick.md"', $html);
   }
 

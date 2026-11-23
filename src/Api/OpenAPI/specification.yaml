@@ -4069,7 +4069,7 @@ components:
       name: locale
       in: query
       required: false
-      description: 'Language of the docs: `de`, `de_DE` and `de-DE` all find the German pages. Defaults to en.'
+      description: 'Language of the docs: `de`, `de_AT`, `de-DE` and `de_DE` all find the German pages (folder `de_DE` in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language).'
       schema:
         type: string
         pattern: '^[a-zA-Z]{2,3}([_-][a-zA-Z0-9]{2,8})?$'

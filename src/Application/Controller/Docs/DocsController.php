@@ -28,7 +28,8 @@ class DocsController extends AbstractController
    * reaches a third party. Only the types in DocsSync::MEDIA_TYPES exist there. SVG is served as an image but
    * sandboxed, so opening one directly cannot run script on share's origin.
    */
-  #[Route(path: '/docs/media/{path}', name: 'docs_media', requirements: ['path' => '.+'], methods: ['GET'], priority: 1)]
+  // `_media`: a guide segment never starts with `_` (DocsMarkdown::locate), so no page can be shadowed.
+  #[Route(path: '/docs/_media/{path}', name: 'docs_media', requirements: ['path' => '.+'], methods: ['GET'], priority: 1)]
   public function media(string $path): Response
   {
     $file = $this->sync->mediaFile($path);

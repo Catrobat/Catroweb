@@ -30,7 +30,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
  *
  * Links are rewritten so the HTML works on every theme without knowing it: a link to another page becomes a URL
  * relative to the page's own URL (`/{theme}/docs/<path>`), a file in media/ points at share's synced copy
- * (`/{theme}/docs/media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
+ * (`/{theme}/docs/_media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
  */
 final class DocsMarkdown implements NodeRendererInterface
 {
@@ -75,7 +75,7 @@ final class DocsMarkdown implements NodeRendererInterface
     if (1 === preg_match('#^(?:([a-z]{2,3}(?:[_-][A-Za-z0-9]{2,8})?)/)?reference/bricks/(\w+)\.md$#', $file, $m)) {
       return ['kind' => DocPage::BRICK, 'locale' => '' === $m[1] ? 'en' : $m[1], 'path' => $m[2]];
     }
-    if (1 !== preg_match('#^([a-z]{2,3}(?:[_-][A-Za-z0-9]{2,8})?)/((?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+)\.md$#', $file, $m)) {
+    if (1 !== preg_match('#^([a-z]{2,3}(?:[_-][A-Za-z0-9]{2,8})?)/((?:[A-Za-z0-9][A-Za-z0-9_-]*/)*[A-Za-z0-9][A-Za-z0-9_-]*)\.md$#', $file, $m)) {
       return null;
     }
     $path = (string) preg_replace('#(^|/)index$#', '', $m[2]);
@@ -174,7 +174,7 @@ final class DocsMarkdown implements NodeRendererInterface
     }
     $encoded = implode('/', array_map(rawurlencode(...), explode('/', $resolved)));
 
-    return null === DocsSync::mediaPath($resolved) ? $this->blob_base.$encoded : self::relativeUrl($this->page_url, 'docs/'.$encoded);
+    return null === DocsSync::mediaPath($resolved) ? $this->blob_base.$encoded : self::relativeUrl($this->page_url, 'docs/_'.$encoded);
   }
 
   /** `en/tutorials` + `../media/a.png` = `media/a.png`; null when it leaves the repo. */

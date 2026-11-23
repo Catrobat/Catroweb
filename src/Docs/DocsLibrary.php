@@ -4,31 +4,39 @@ declare(strict_types=1);
 
 namespace App\Docs;
 
+use App\Api\Services\Base\TranslatorAwareTrait;
 use App\DB\Entity\Docs\DocPage;
 use App\DB\EntityRepository\Docs\DocPageRepository;
 
 /** Reads the synced docs for the API and the pages: navigation, a page with English fallback, its translations. */
 class DocsLibrary
 {
+  use TranslatorAwareTrait;
+
   public function __construct(private readonly DocPageRepository $pages)
   {
   }
 
   /**
-   * The docs locales to try, best first: `de_DE` → de_DE, de-DE, de, en.
+   * The docs locales to try, best first. The docs repo names its folders like share's translation files (de_DE,
+   * pt_BR, sr_Latn), while browsers ask for `de`, `de-AT` or `zh_TW`: after the locale itself and its hyphen form comes
+   * the bare language, then share's own locale for that language (`de` → de_DE, `pt` → pt_BR), then English.
+   * `de_AT` → de_AT, de-AT, de, de_DE, en.
    *
    * @return list<string>
    */
-  public static function locales(string $locale): array
+  public function locales(string $locale): array
   {
-    $language = strtolower((string) preg_replace('/[_-].*$/', '', $locale));
+    $underscore = str_replace('-', '_', $locale);
+    $language = strtolower(explode('_', $underscore)[0]);
+    $share_locale = 'en' === $language ? 'en' : $this->mapTwoLetterCodeToLocaleWithUnderscore($language);
 
-    return array_values(array_unique([$locale, str_replace('_', '-', $locale), $language, 'en']));
+    return array_values(array_unique([$locale, $underscore, str_replace('_', '-', $underscore), $language, $share_locale, 'en']));
   }
 
   public function page(string $path, string $locale): ?DocPage
   {
-    return $this->pages->findGuide($path, self::locales($locale));
+    return $this->pages->findGuide($path, $this->locales($locale));
   }
 
   /** The English page stands in for a translation that does not exist yet. */
@@ -45,7 +53,7 @@ class DocsLibrary
    */
   public function navigation(string $locale, ?string $flavor = null): array
   {
-    $locales = self::locales($locale);
+    $locales = $this->locales($locale);
     $best = [];
     /** @var list<array{path: string, locale: string, title: string, sort_order: int, flavors: list<string>, updated_at: \DateTime}> $rows */
     $rows = $this->pages->guideSummaries($locales);

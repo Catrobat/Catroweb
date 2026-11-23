@@ -43,6 +43,11 @@ class DocsSync
     public readonly string $ref,
     #[Autowire('%catrobat.docs_media.dir%')]
     private readonly string $media_dir,
+    /** Limits against a hostile or broken archive: the download, and everything it unpacks to. */
+    #[Autowire(env: 'int:DOCS_MAX_DOWNLOAD_BYTES')]
+    public readonly int $max_download_bytes,
+    #[Autowire(env: 'int:DOCS_MAX_UNPACKED_BYTES')]
+    public readonly int $max_unpacked_bytes,
   ) {
     $this->markdown = new DocsMarkdown('https://github.com/'.$repository.'/blob/'.$ref.'/', $this->projectCard(...));
   }
@@ -65,8 +70,21 @@ class DocsSync
    * The system tar, because PharData skips entries with long (pax) names, such as some brick screenshots. tar
    * refuses `..` and absolute names; symlinks it creates are skipped by readDirectory().
    */
-  public static function extractTarball(string $tarball, string $into): string
+  public static function extractTarball(string $tarball, string $into, int $max_bytes): string
   {
+    // The unpacked size is at least the tar stream's: measure that before anything lands on disk.
+    $gz = gzopen($tarball, 'rb');
+    if (false === $gz) {
+      throw new \RuntimeException('Cannot read the docs tarball.');
+    }
+    $size = 0;
+    while (!gzeof($gz) && $size <= $max_bytes) {
+      $size += \strlen((string) gzread($gz, 1 << 20));
+    }
+    gzclose($gz);
+    if ($size > $max_bytes) {
+      throw new \RuntimeException('The docs tarball unpacks to more than '.$max_bytes.' bytes.');
+    }
     (new Process(['tar', '-xzf', $tarball, '-C', $into, '--no-same-owner', '--no-same-permissions']))->setTimeout(300)->mustRun();
     $top = glob(rtrim($into, '/').'/*', GLOB_ONLYDIR) ?: [];
     if (1 !== \count($top)) {
@@ -129,6 +147,9 @@ class DocsSync
     $filesystem = new Filesystem();
     $current = $this->media_dir.'files';
     $next = $current.'.new';
+    if ([] === $media && [] !== (glob($current.'/*') ?: [])) {
+      throw new \RuntimeException('The docs repo has no media any more, the synced copy is kept.'); // more likely a broken archive
+    }
     $filesystem->remove([$next, $current.'.old']);
     $filesystem->mkdir($next);
     foreach ($media as $path => $source) {
