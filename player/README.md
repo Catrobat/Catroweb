@@ -167,6 +167,17 @@ empty environment the export has no secrets to send anywhere.
   not export or brick that shows wrong (getView failed, a layout or category missing, an empty formula field, a
   drop-down without a selection, a string marker that Catroid's code cut or joined); the Player workflow runs it.
 
+### Brick catalog
+
+`build.sh` also writes `code-export/catalog.json` (`node export.mjs --catalog`, `codeview/CodeCatalog`): every brick
+of every category of Catroid's `CategoryBricksFactory` (the brick picker's lists, every brick set switched on, for an
+object and the background), each written like a brick of the code export, and the formula editor's `Functions`,
+`Sensors` and `Operators` with the marker of their name. Categories come from Catroid's `category_*` strings, bricks
+from the factory: nothing is listed by hand. A brick's `type` is its code.xml type (a script brick's is its script's,
+`StartScript`), the key share's docs use. `scripts/check_catalog.py` fails on a category of the factory that is
+missing, fewer than 200 bricks, a brick that shows wrong (as in the code export's check), a formula element without
+a name, and any brick method TeaVM stubbed (`stub-report.tsv`); the Player workflow runs it.
+
 ## Deployment
 
 The deployment workflow builds the player in its own job, without secrets, and hands only the built files to the

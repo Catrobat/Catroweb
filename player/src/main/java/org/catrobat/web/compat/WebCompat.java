@@ -71,6 +71,26 @@ public final class WebCompat {
 		text.append(colorString.substring(0, colorString.length() - 1) + " ").append("' ");
 	}
 
+	/**
+	 * The settings, from the context as on Android: the web's own context has none (null, as the mockable SDK gives),
+	 * the brick catalog's has every brick set on (codeview/CodeCatalog).
+	 */
+	public static android.content.SharedPreferences defaultSharedPreferences(android.content.Context context) {
+		return null == context ? null : context.getSharedPreferences(context.getPackageName() + "_preferences", 0);
+	}
+
+	/** The mockable SDK's gives null: an adapter over the array's strings (markers in the code export), as Android's. */
+	public static android.widget.ArrayAdapter<CharSequence> arrayAdapterFromResource(android.content.Context context, int arrayId,
+			int layout) {
+		return new org.catrobat.web.codeview.CodeArrayAdapter<>(context, layout, context.getResources().getTextArray(arrayId));
+	}
+
+	/** TeaVM's Locale has no forLanguageTag: "pt-BR" is language and country, as Catroid's speech languages are. */
+	public static java.util.Locale forLanguageTag(String tag) {
+		String[] parts = tag.split("-");
+		return parts.length > 1 ? new java.util.Locale(parts[0], parts[1]) : new java.util.Locale(parts[0]);
+	}
+
 	/** Bricks inflate their layouts through it: into views the code export reads (codeview/CodeLayoutInflater). */
 	public static android.view.LayoutInflater layoutInflater(android.content.Context context) {
 		return new org.catrobat.web.codeview.CodeLayoutInflater(context);

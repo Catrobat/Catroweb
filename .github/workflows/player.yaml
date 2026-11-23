@@ -61,6 +61,9 @@ jobs:
       - name: Code view export (Catroid's catrobatTests and the fixtures show as in the app)
         run: python3 scripts/check_code_export.py build/dist/js/webapp/code-export build/catroid/catroid/src/androidTest/assets/catrobatTests fixtures
 
+      - name: Brick catalog (every category, brick and formula element of Catroid, no brick stubbed)
+        run: python3 scripts/check_catalog.py build/dist/js/webapp/code-export build/web/stub-report.tsv build/catroid/catroid/src/main/java/org/catrobat/catroid/ui/fragment/CategoryBricksFactory.kt
+
       - name: Conformance (Catroid's catrobatTests on the stage, compared with conformance.tsv)
         run: ./scripts/conformance.sh
 

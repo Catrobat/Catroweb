@@ -14,6 +14,7 @@ import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.content.bricks.CompositeBrick;
+import org.catrobat.catroid.content.bricks.ScriptBrick;
 import org.catrobat.web.android.WebContext;
 import org.catrobat.web.loader.ProjectLoader;
 import org.teavm.jso.JSBody;
@@ -47,6 +48,11 @@ public final class CodeExport {
 		String export(String xml);
 	}
 
+	@JSFunctor
+	interface Catalog extends JSObject {
+		String catalog();
+	}
+
 	public static void main(String[] args) {
 		// XStream sniffs the JVM from these; TeaVM leaves them unset (as WebLauncher).
 		for (String key : new String[] {"java.vm.vendor", "java.vm.name", "java.vendor", "java.specification.vendor",
@@ -59,11 +65,11 @@ public final class CodeExport {
 		} catch (RuntimeException e) {
 			// It registers itself, then reads the device's downloaded-project list, which the web has not.
 		}
-		register(CodeExport::export);
+		register(CodeExport::export, CodeCatalog::catalog);
 	}
 
-	@JSBody(params = "exporter", script = "globalThis.catrobatCodeExport = exporter;")
-	private static native void register(Exporter exporter);
+	@JSBody(params = {"exporter", "catalog"}, script = "globalThis.catrobatCodeExport = exporter; globalThis.catrobatCatalog = catalog;")
+	private static native void register(Exporter exporter, Catalog catalog);
 
 	static void missingLayout(int id) {
 		missingLayouts++;
@@ -142,13 +148,13 @@ public final class CodeExport {
 	}
 
 	/** Each brick on its own: one that cannot be shown shows as such, the others as usual. */
-	private static void bricks(Json json, String key, List<Brick> bricks, CodeSymbols symbols) {
+	static void bricks(Json json, String key, List<Brick> bricks, CodeSymbols symbols) {
 		json.key(key).open('[');
 		for (Brick brick : bricks) {
 			Json one = new Json();
 			try {
 				one.open('{');
-				brick(one, brick.getClass().getSimpleName(), brick, brick.isCommentedOut(), symbols);
+				brick(one, type(brick), brick, brick.isCommentedOut(), symbols);
 				if (brick instanceof CompositeBrick composite) {
 					// The app shows an if's "else" and "end if", a loop's end, as bricks of their own (getAllParts).
 					List<Brick> parts = brick.getAllParts();
@@ -165,11 +171,17 @@ public final class CodeExport {
 				}
 				one.close('}');
 			} catch (Throwable e) {
-				one = failed(brick.getClass().getSimpleName(), brick.isCommentedOut(), e);
+				one = failed(type(brick), brick.isCommentedOut(), e);
 			}
 			json.raw(one);
 		}
 		json.close(']');
+	}
+
+	/** The brick's type in code.xml: a script brick (only the catalog has them on their own) is its script's. */
+	static String type(Brick brick) {
+		Object script = brick instanceof ScriptBrick scriptBrick ? scriptBrick.getScript() : null;
+		return (null == script ? brick : script).getClass().getSimpleName();
 	}
 
 	private static Json failed(String type, boolean commentedOut, Throwable e) {
