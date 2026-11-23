@@ -74,7 +74,7 @@ Readers can leave comments and tips below a page (`templates/Docs/Comments.html.
 - Every admin is a docs maintainer and gets a notification (`DocCommentNotification`) for each new comment.
 - A moderation notification about a docs comment (hidden, warned) links its author to the docs page (`url`).
 - **Rollback** to a release before docs comments: run `DELETE FROM CatroNotification WHERE notification_type = 'doc_comment';` (a rollback does not run the migration's `down()`). The old code has no `doc_comment` notification type, so an admin's notification page fails while such rows exist.
-- Another docs page (e.g. a brick page) shows comments with `{{ include('Docs/Comments.html.twig', {doc_path: …}) }}` and the controller registered in its entry. The API accepts the path of a guide that has an English page and `reference/bricks/<Type>` for brick pages (`CommentsApi::isCommentableDocPage`).
+- Another docs page shows comments with `{{ include('Docs/Comments.html.twig', {doc_path: …}) }}` and the controller registered in its entry; brick pages do so with `reference/bricks/<type>`. The API accepts the path of a guide that has an English page and `reference/bricks/<type>` for a type the brick catalog knows (`CommentsApi::isCommentableDocPage`).
 
 Tests: `tests/PhpUnit/Docs/`, Behat suites `api-docs` and `web-docs`. Both use `tests/TestData/Docs/`, a small folder with the same layout (`catrobat.user_docs.dir` in the test environment).
 

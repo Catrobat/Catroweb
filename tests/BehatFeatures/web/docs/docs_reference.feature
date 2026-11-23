@@ -33,6 +33,7 @@ Feature: Brick and formula reference pages, generated from Catroid's catalog
     And I wait for AJAX to finish
     And the element ".brick-examples" should contain "Jumping"
     And I should see a ".docs-improve a[href$='/edit/main/user-docs/reference/bricks/SetXBrick.md']" element
+    And I should see a "#comments.docs-comments" element
 
   Scenario: A brick page in another language
     When I go to "/app/docs/reference/bricks/SetXBrick?locale=de"
