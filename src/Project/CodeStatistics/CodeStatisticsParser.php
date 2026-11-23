@@ -199,7 +199,13 @@ class CodeStatisticsParser
     }
 
     $xml_content = file_get_contents($code_xml_path);
-    if (false === $xml_content || '' === $xml_content) {
+
+    return false === $xml_content ? new ProjectCodeStatistics() : $this->parseXml($xml_content);
+  }
+
+  public function parseXml(string $xml_content): ProjectCodeStatistics
+  {
+    if ('' === $xml_content) {
       return new ProjectCodeStatistics();
     }
 

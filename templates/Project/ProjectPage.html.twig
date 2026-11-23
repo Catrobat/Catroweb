@@ -46,8 +46,7 @@
 {% endblock %}
 
 {% block body %}
-  {# The browser player loads projects from this Catrobat language version on, as the app does. #}
-  {% set player_min_language_version = 0.9 %}
+  {% set player_min_language_version = constant('App\\DB\\Entity\\Project\\Project::PLAYER_MIN_LANGUAGE_VERSION') %}
   {# Auto-hidden banner (server-rendered since it requires auth context) #}
   {% if auto_hidden and (my_project|default(false) or is_granted('ROLE_ADMIN')) %}
     <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">

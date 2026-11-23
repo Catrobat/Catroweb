@@ -521,6 +521,13 @@ class DataFixturesContext implements Context
       $stats->setScoreDataRepresentation((int) ($config['score_data_representation'] ?? 0));
       $stats->setScoreBonus((int) ($config['score_bonus'] ?? 0));
       $stats->setScoringVersion((string) ($config['scoring_version'] ?? CodeStatisticsParser::CURRENT_SCORING_VERSION));
+      // e.g. "SetXBrick:2,WaitBrick:1"
+      $brick_counts = [];
+      foreach (array_filter(explode(',', (string) ($config['brick_counts'] ?? ''))) as $pair) {
+        [$brick_type, $count] = explode(':', trim($pair)) + [1 => '1'];
+        $brick_counts[$brick_type] = (int) $count;
+      }
+      $stats->setBrickCounts($brick_counts);
 
       $em->persist($stats);
     }

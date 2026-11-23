@@ -69,6 +69,10 @@ class AgeSignalDetectorTest extends TestCase
       'negated elsewhere' => ['no spam here, 18+ only'],
       'second match counts' => ['18+ levels and 18+ content'],
       'adult games' => ['18+ games'],
+      'game with article' => ['This is a +18 game'],
+      'rated r' => ['Rated R +18'],
+      'age rating and levels' => ['18+ 13 levels of horror'],
+      'parenthesized label' => ['Zombie Game (Horror) +18'],
     ];
   }
 
@@ -101,6 +105,14 @@ class AgeSignalDetectorTest extends TestCase
       'larger number' => ['118+ levels'],
       'sum' => ['what is 18+2?'],
       'spaced sum' => ['1 + 18 = 19'],
+      'spaced sum multi space' => ['1  + 18 = 19'],
+      'sum without result' => ['1  + 18'],
+      'large number sum' => ['100  + 18'],
+      'decimal sum' => ['2.5  + 18'],
+      'equation sum with number' => ['18 + 2 = 20'],
+      'algebraic equation' => ['x + 18 = 20'],
+      'equation reverse sum' => ['18 + x = 20'],
+      'unary equation' => ['+ 18 = 19'],
       'score' => ['+18 points per coin'],
       'phone like' => ['+18005551234'],
       'time de' => ['Treffen ab 18 Uhr'],
@@ -123,6 +135,7 @@ class AgeSignalDetectorTest extends TestCase
       'counted de' => ['Ab 18 Punkten gibt es Bonus'],
       'counted es' => ['más de 18+ niveles'],
       'counted ru' => ['18+ уровней'],
+      'counted ru enemies' => ['18+ врагов'],
       'score label' => ['Score: 18+'],
       'page de' => ['Seite ab 18'],
       'phone spaced' => ['Telefon +18 123'],

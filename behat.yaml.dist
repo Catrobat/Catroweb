@@ -122,6 +122,7 @@ default:
             paths:
                 - tests/BehatFeatures/api/projects/GET_project_id
                 - tests/BehatFeatures/api/projects/GET_project_id_catrobat
+                - tests/BehatFeatures/api/projects/GET_docs_reference_bricks_type_projects
                 - tests/BehatFeatures/api/projects/GET_project_id_code_statistics
                 - tests/BehatFeatures/api/projects/GET_project_id_recommendations
                 - tests/BehatFeatures/api/projects/GET_projects

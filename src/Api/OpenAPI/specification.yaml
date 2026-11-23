@@ -1653,6 +1653,39 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  '/docs/reference/bricks/{type}/projects':
+    get:
+      tags:
+        - 'Projects'
+      summary: 'Get public example projects that use a brick'
+      description: 'Visible public projects whose code uses the brick, most downloaded first. Uses cursor-based pagination.'
+      parameters:
+        - name: type
+          in: path
+          required: true
+          description: 'Brick type as written in code.xml'
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9_]+$'
+            example: 'SetXBrick'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Attributes'
+      responses:
+        '200':
+          description: 'OK'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectsListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
   ################################################
   # Comments
   #

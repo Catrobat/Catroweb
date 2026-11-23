@@ -435,6 +435,14 @@ open_api_server_projects_projectsuserget:
   defaults:
     _controller: open_api_server.controller.projects::projectsUserGetAction
 
+open_api_server_projects_docsreferencebrickstypeprojectsget:
+  path: /docs/reference/bricks/{type}/projects
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::docsReferenceBricksTypeProjectsGetAction
+  requirements:
+    type: '^[A-Za-z0-9_]+$'
+
 open_api_server_projects_projectsscratchscratchidpost:
   path: /projects/scratch/{scratch_id}
   methods: [POST]

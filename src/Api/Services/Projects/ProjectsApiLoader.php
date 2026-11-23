@@ -119,6 +119,14 @@ class ProjectsApiLoader extends AbstractApiLoader
   /**
    * @return array<Project>
    */
+  public function getProjectsUsingBrickKeyset(string $brick_type, int $limit, ?int $cursor_downloads = null, ?string $cursor_id = null): array
+  {
+    return $this->project_manager->getProjectsUsingBrickKeyset($brick_type, $limit, $cursor_downloads, $cursor_id);
+  }
+
+  /**
+   * @return array<Project>
+   */
   public function getFeaturedProjectsKeyset(?string $flavor, int $limit, string $platform, string $max_version, ?int $cursor_priority = null, ?int $cursor_id = null): array
   {
     $featured = $this->featured_repository->getFeaturedProgramsKeyset($flavor, $limit, $platform, $max_version, $cursor_priority, $cursor_id);

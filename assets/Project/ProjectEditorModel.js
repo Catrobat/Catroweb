@@ -203,12 +203,14 @@ export function ProjectEditorModel(programId, textFieldModels, preloadedLanguage
       this.programId,
     )
 
-    Promise.all([languagesPromise, definedLanguagesPromise]).then((results) => {
-      this.languages = results[0]
-      this.definedLanguages = results[1]
-      this.filterLanguages()
-      this.onLanguageList(this.languages)
-    })
+    Promise.all([languagesPromise, definedLanguagesPromise])
+      .then((results) => {
+        this.languages = results[0]
+        this.definedLanguages = results[1]
+        this.filterLanguages()
+        this.onLanguageList(this.languages)
+      })
+      .catch((error) => console.error('Error fetching languages:', error))
   }
 
   if (document.readyState === 'loading') {

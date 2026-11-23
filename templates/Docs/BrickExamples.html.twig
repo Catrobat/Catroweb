@@ -1,0 +1,20 @@
+{# Example projects of a brick, most downloaded first, from GET /api/docs/reference/bricks/{type}/projects.
+   Include with brick_type (the code.xml type, e.g. SetXBrick); the page entry registers
+   assets/controllers/docs/brick-examples_controller.js as 'docs--brick-examples'. #}
+<div class="brick-examples"
+    {{ stimulus_controller('docs--brick-examples', {
+      url: app.request.baseUrl ~ '/api/docs/reference/bricks/' ~ brick_type|url_encode ~ '/projects',
+      theme: theme(),
+      playerOrigin: player_origin,
+    }) }}>
+  <div class="project-list horizontal loading"
+       data-docs--brick-examples-target="list"
+       data-action="click->docs--brick-examples#play">
+    <div class="project-list__wrapper">
+      <div class="projects-container"></div>
+    </div>
+  </div>
+  <div class="ratio ratio-4x3 mt-3" data-docs--brick-examples-target="player" hidden>
+    <iframe title="{{ 'project.playInBrowser'|trans({}, 'catroweb') }}" allow="fullscreen; autoplay" allowfullscreen></iframe>
+  </div>
+</div>
