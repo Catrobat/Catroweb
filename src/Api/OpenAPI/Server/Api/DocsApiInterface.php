@@ -46,7 +46,7 @@ interface DocsApiInterface
    *
    * Navigation tree of the user docs
    *
-   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
+   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
    * @param string|null $flavor          App flavour, e.g. pocketcode, embroidery, mindstorms (optional)
    * @param int         &$responseCode   The HTTP Response Code
    * @param array       $responseHeaders Additional HTTP headers to return with the response ()
@@ -64,7 +64,7 @@ interface DocsApiInterface
    * A docs page
    *
    * @param string      $path            Page path without locale and &#x60;.md&#x60;: &#x60;tutorials/jump&#x60;; a folder&#39;s page is the folder, the start page is &#x60;index&#x60;. (required)
-   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
+   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
    * @param int         &$responseCode   The HTTP Response Code
    * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */

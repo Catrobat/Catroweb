@@ -1,8 +1,8 @@
 @web @docs
-Feature: User docs pages, synced from the docs repo
+Feature: User docs pages, synced from user-docs/
 
   Background:
-    Given the docs are synced from the test docs repo
+    Given the docs are synced from the test docs folder
 
   Scenario Outline: Every page of the repo renders in English
     When I go to "<url>"

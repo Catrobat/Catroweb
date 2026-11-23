@@ -64,7 +64,7 @@ tags:
     description: 'Status of background jobs started with `Prefer: respond-async` (Scratch import, project upload)'
 
   - name: 'Docs'
-    description: 'User documentation, synced from the Catrobat/docs repository'
+    description: 'User documentation, written in user-docs/ of the Catroweb repository'
 
 paths:
   ##############################################
@@ -4102,7 +4102,7 @@ components:
       name: locale
       in: query
       required: false
-      description: 'Language of the docs: `de`, `de_AT`, `de-DE` and `de_DE` all find the German pages (folder `de_DE` in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language).'
+      description: 'Language of the docs: `de`, `de_AT`, `de-DE` and `de_DE` all find the German pages (folder `de_DE` in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language).'
       schema:
         type: string
         pattern: '^[a-zA-Z]{2,3}([_-][a-zA-Z0-9]{2,8})?$'

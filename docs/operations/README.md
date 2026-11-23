@@ -16,7 +16,7 @@
 - [Redis-Cache.md](./Redis-Cache.md) — Redis as the production application cache backend (Symfony, Doctrine, trust scores).
 - [Secret-Management.md](./Secret-Management.md) — Symfony `.env` hierarchy and how production overrides committed dev defaults.
 - [Storage-Architecture.md](./Storage-Architecture.md) — Symlink chain under `public/resources/` for user-generated content storage.
-- [User-Docs.md](./User-Docs.md) — The user docs from the Catrobat/docs repo: hourly sync, rendering, embeds, API and pages.
+- [User-Docs.md](./User-Docs.md) — The user docs in user-docs/: sync on deploy, rendering, embeds, media, API and pages.
 
 ## Production infrastructure
 

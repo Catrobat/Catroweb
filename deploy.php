@@ -38,7 +38,6 @@ set('keep_releases', 5);
 set('shared_dirs', [
   'var/log',
   'var/code-view', // code views made by the player's code export (App\Project\CodeView)
-  'var/docs-media', // images and PDFs of the user docs, copied by catrobat:docs:sync (App\Docs\DocsSync)
   'var/sessions',
   'var/resumable_uploads', // project files arriving in chunks (App\Project\Upload); must survive a deploy mid-upload
   'public/resources',
@@ -56,7 +55,6 @@ set('writable_dirs', [
   'var/cache',
   'var/log',
   'var/code-view',
-  'var/docs-media',
   'var/sessions',
   'public/resources',
 ]);
@@ -225,6 +223,12 @@ task('update:flavors', function () {
   run('bin/console catrobat:update:flavors');
 });
 
+// The user docs (user-docs/) of this release into the database, before it goes live
+task('update:docs', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:docs:sync');
+});
+
 task('update:special', function () {
   cd('{{release_path}}');
   run('bin/console catrobat:update:special');
@@ -278,6 +282,7 @@ task('deploy', [
   'deploy:jwt',
   'deploy:cache:clear',
   'database:migrate',
+  'update:docs',
   'deploy:symlink',
   'restart:nginx',
   'restart:php-fpm',

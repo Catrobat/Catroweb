@@ -2,7 +2,7 @@
 Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
 
   Background:
-    Given the docs are synced from the test docs repo
+    Given the docs are synced from the test docs folder
 
   Scenario: The navigation tree
     When I request "GET" "/api/docs?locale=de&flavor=embroidery"

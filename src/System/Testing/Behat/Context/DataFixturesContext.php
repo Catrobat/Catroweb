@@ -105,15 +105,13 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given the docs are synced from the test docs repo
+   * @Given the docs are synced from the test docs folder
    */
   public function theDocsAreSyncedFromTheTestDocsRepo(): void
   {
     $sync = $this->getSymfonyService(DocsSync::class);
     Assert::assertInstanceOf(DocsSync::class, $sync);
-    $files = DocsSync::readDirectory($this->getSymfonyParameterAsString('kernel.project_dir').'/tests/TestData/Docs');
-    $sync->import($files['pages']);
-    $sync->importMedia($files['media']);
+    $sync->import(DocsSync::readDirectory($sync->docs_dir)); // tests/TestData/Docs in the test environment
   }
 
   /**

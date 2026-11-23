@@ -24,9 +24,9 @@ class DocsController extends AbstractController
   }
 
   /**
-   * Images and PDFs of the docs repo, from the copy the sync keeps (DocsSync::importMedia), so a page view never
-   * reaches a third party. Only the types in DocsSync::MEDIA_TYPES exist there. SVG is served as an image but
-   * sandboxed, so opening one directly cannot run script on share's origin.
+   * Images and PDFs from user-docs/media/ of this release, so a page view never reaches a third party. Only the
+   * types in DocsSync::MEDIA_TYPES are served. SVG is served as an image but sandboxed, so opening one directly
+   * cannot run script on share's origin.
    */
   // `_media`: a guide segment never starts with `_` (DocsMarkdown::locate), so no page can be shadowed.
   #[Route(path: '/docs/_media/{path}', name: 'docs_media', requirements: ['path' => '.+'], methods: ['GET'], priority: 1)]

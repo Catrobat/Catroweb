@@ -10,14 +10,12 @@ use App\Docs\DocsSync;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\Process\Process;
 
 /**
- * The sync against the real database, from the fixture copy of the docs repo (no network).
+ * The sync against the real database, from the fixture docs folder (the test environment's catrobat.user_docs.dir).
  *
  * @internal
  */
@@ -50,7 +48,7 @@ final class DocsSyncTest extends KernelTestCase
 
   public function testImportsUpdatesAndDeletes(): void
   {
-    $files = DocsSync::readDirectory(self::FIXTURES)['pages'];
+    $files = DocsSync::readDirectory(self::FIXTURES);
     // Imported from WordPress: written by a person, no source hash.
     $files['de_DE/reference/bricks/SetXBrick.md'] = "---\nreviewed: true\n---\n\n\"Setze X auf\" setzt das Objekt an eine Stelle.\n";
 
@@ -71,7 +69,7 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertStringContainsString('Set x to', $brick->getHtml());
     $german_brick = $this->pages->findOneBy(['kind' => DocPage::BRICK, 'path' => 'SetXBrick', 'locale' => 'de_DE']);
     $this->assertSame(DocPage::STATE_CURRENT, $german_brick?->getTranslationState());
-    $this->assertSame('https://github.com/Catrobat/docs/edit/main/en/tutorials/jump.md', $this->sync->editUrl($stale));
+    $this->assertSame('https://github.com/Catrobat/Catroweb/edit/main/user-docs/en/tutorials/jump.md', $this->sync->editUrl($stale));
 
     // Nothing changed: nothing is rewritten except the page embedding a project.
     $this->assertSame(['created' => 0, 'updated' => 1, 'deleted' => 0, 'skipped' => []], $this->sync->import($files));
@@ -89,7 +87,7 @@ final class DocsSyncTest extends KernelTestCase
 
   public function testRefusesAnImportWithoutStartPage(): void
   {
-    $this->sync->import(DocsSync::readDirectory(self::FIXTURES)['pages']);
+    $this->sync->import(DocsSync::readDirectory(self::FIXTURES));
 
     try {
       $this->sync->import(['README.md' => 'empty download']);
@@ -99,66 +97,9 @@ final class DocsSyncTest extends KernelTestCase
     }
   }
 
-  public function testReadsAGitHubTarball(): void
-  {
-    $dir = sys_get_temp_dir().'/docs_tarball_test_'.uniqid();
-    $filesystem = new Filesystem();
-    $top = $dir.'/src/Catrobat-docs-0123abc';
-    $filesystem->mirror(self::FIXTURES, $top);
-    // Longer than ustar's 100 characters: PharData would drop it.
-    $long = 'tutorials/'.str_repeat('Store_column_1_of_the_comma-separated_values_', 3).'.png';
-    $filesystem->copy(self::FIXTURES.'/media/tutorials/jump.png', $top.'/media/'.$long);
-    $filesystem->symlink('/etc/hosts', $top.'/media/tutorials/hosts.png');
-    try {
-      (new Process(['tar', '-czf', $dir.'/docs.tar.gz', '-C', $dir.'/src', 'Catrobat-docs-0123abc']))->mustRun();
-      $filesystem->mkdir($dir.'/out');
-
-      $files = DocsSync::readDirectory(DocsSync::extractTarball($dir.'/docs.tar.gz', $dir.'/out', 10_000_000));
-
-      $directory = DocsSync::readDirectory(self::FIXTURES);
-      $this->assertEqualsCanonicalizing(array_keys($directory['pages']), array_keys($files['pages']));
-      $this->assertSame(file_get_contents(self::FIXTURES.'/en/index.md'), $files['pages']['en/index.md']);
-      $this->assertEqualsCanonicalizing(['tutorials/jump.png', 'tutorials/star.svg', $long], array_keys($files['media']), 'the symlink is skipped');
-      $this->assertFileEquals(self::FIXTURES.'/media/tutorials/jump.png', $files['media'][$long]);
-    } finally {
-      $filesystem->remove($dir);
-    }
-  }
-
-  public function testAHostileTarballStaysInItsFolder(): void
-  {
-    $dir = sys_get_temp_dir().'/docs_hostile_test_'.uniqid();
-    $absolute = '/tmp/docs_hostile_absolute_'.uniqid().'.md'; // short: a ustar name has 100 bytes
-    $filesystem = new Filesystem();
-    $filesystem->mkdir($dir.'/out/inner');
-    file_put_contents($dir.'/docs.tar.gz', (string) gzencode(
-      self::tarEntry('Catrobat-docs-x/en/index.md', "---\ntitle: Docs\n---\n")
-      .self::tarEntry('Catrobat-docs-x/../../evil.md', 'escaped')
-      .self::tarEntry($absolute, 'absolute')
-      .self::tarEntry('Catrobat-docs-x/media/hosts.png', '', '2', '/etc/hosts')
-      .str_repeat("\0", 1024)
-    ));
-    try {
-      try {
-        $files = DocsSync::readDirectory(DocsSync::extractTarball($dir.'/docs.tar.gz', $dir.'/out/inner', 10_000_000));
-        $this->assertSame([], $files['media'], 'the symlink is not read');
-      } catch (\RuntimeException) {
-        // tar refused the archive: just as good
-      }
-      $this->assertFileDoesNotExist($dir.'/evil.md');
-      $this->assertFileDoesNotExist($dir.'/out/evil.md');
-      $this->assertFileDoesNotExist($absolute);
-
-      $this->expectException(\RuntimeException::class);
-      DocsSync::extractTarball($dir.'/docs.tar.gz', $dir.'/out', 1000); // unpacks to more than 1000 bytes
-    } finally {
-      $filesystem->remove([$dir, $absolute]);
-    }
-  }
-
   public function testOnlyAnExplicitLocaleMayBeCachedByACdn(): void
   {
-    $this->sync->import(DocsSync::readDirectory(self::FIXTURES)['pages']);
+    $this->sync->import(DocsSync::readDirectory(self::FIXTURES));
     $kernel = self::$kernel;
     $this->assertNotNull($kernel);
     foreach (['/api/docs', '/api/docs/pages/index'] as $url) {
@@ -167,36 +108,6 @@ final class DocsSyncTest extends KernelTestCase
       $this->assertTrue($by_language->headers->getCacheControlDirective('private'), $url.' depends on Accept-Language');
       $explicit = $kernel->handle(Request::create($url.'?locale=de'), HttpKernelInterface::MAIN_REQUEST, false);
       $this->assertTrue($explicit->headers->getCacheControlDirective('public'), $url.'?locale=de');
-    }
-  }
-
-  public function testRefusesAnOversizedFile(): void
-  {
-    $dir = sys_get_temp_dir().'/docs_oversize_test_'.uniqid();
-    $filesystem = new Filesystem();
-    $filesystem->mkdir($dir.'/en');
-    // Sparse, like a hostile tar entry: no disk space used, but filesize() says 6 MB.
-    $handle = fopen($dir.'/en/index.md', 'w');
-    $this->assertNotFalse($handle);
-    ftruncate($handle, 6_000_000);
-    fclose($handle);
-    try {
-      $this->expectExceptionMessage('Docs file too large: en/index.md');
-      DocsSync::readDirectory($dir);
-    } finally {
-      $filesystem->remove($dir);
-    }
-  }
-
-  public function testKeepsTheMediaWhenAnArchiveHasNone(): void
-  {
-    $this->sync->importMedia(DocsSync::readDirectory(self::FIXTURES)['media']);
-
-    try {
-      $this->sync->importMedia([]);
-      $this->fail('expected the empty media list to be refused');
-    } catch (\RuntimeException) {
-      $this->assertNotNull($this->sync->mediaFile('tutorials/jump.png'));
     }
   }
 
@@ -211,15 +122,15 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertNull(DocsSync::mediaPath('media/a/..png/../b.png'));
   }
 
-  public function testCopiesTheMediaAndReplacesTheOldCopy(): void
+  public function testServesMediaStraightFromTheDocsFolder(): void
   {
-    $this->assertSame(2, $this->sync->importMedia(DocsSync::readDirectory(self::FIXTURES)['media']));
+    $this->assertSame(realpath(self::FIXTURES), realpath($this->sync->docs_dir));
     $file = $this->sync->mediaFile('tutorials/jump.png');
     $this->assertNotNull($file);
     $this->assertFileEquals(self::FIXTURES.'/media/tutorials/jump.png', $file);
-    $this->assertNotNull($this->sync->mediaFile('tutorials/star.svg'));
     $this->assertNull($this->sync->mediaFile('tutorials/not-served.html'));
-    $this->assertNull($this->sync->mediaFile('../../.env'));
+    $this->assertNull($this->sync->mediaFile('../en/index.md'));
+    $this->assertNull($this->sync->mediaFile('../../../.env'));
 
     $kernel = self::$kernel;
     $this->assertNotNull($kernel);
@@ -232,12 +143,6 @@ final class DocsSyncTest extends KernelTestCase
       $this->fail('only media types are served');
     } catch (NotFoundHttpException) {
     }
-
-    $this->sync->importMedia(['tutorials/star.svg' => self::FIXTURES.'/media/tutorials/star.svg']);
-    $this->assertNull($this->sync->mediaFile('tutorials/jump.png'), 'a file gone from the repo is gone from share');
-
-    $this->expectException(\InvalidArgumentException::class);
-    $this->sync->importMedia(['../escape.png' => self::FIXTURES.'/media/tutorials/jump.png']);
   }
 
   private function page(string $path, string $locale): DocPage
@@ -246,18 +151,5 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertNotNull($page);
 
     return $page;
-  }
-
-  /** One ustar entry, written by hand: PharData and tar refuse to build hostile names. */
-  private static function tarEntry(string $name, string $content, string $type = '0', string $link = ''): string
-  {
-    $header = str_pad($name, 100, "\0").str_pad('0000644', 8, "\0").str_pad('0000000', 8, "\0").str_pad('0000000', 8, "\0")
-      .str_pad(decoct(\strlen($content)), 11, '0', STR_PAD_LEFT)."\0".str_pad(decoct(time()), 11, '0', STR_PAD_LEFT)."\0"
-      .'        '.$type.str_pad($link, 100, "\0")."ustar\00000";
-    $header = str_pad($header, 512, "\0");
-    $checksum = array_sum(array_map(\ord(...), str_split($header)));
-    $header = substr_replace($header, str_pad(decoct($checksum), 6, '0', STR_PAD_LEFT)."\0 ", 148, 8);
-
-    return $header.str_pad($content, (int) ceil(\strlen($content) / 512) * 512, "\0");
   }
 }

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
 /**
- * One page of the user docs in one locale, rendered from the Catrobat/docs repo by DocsSync (catrobat:docs:sync).
+ * One page of the user docs in one locale, rendered from user-docs/ by DocsSync (catrobat:docs:sync).
  * The table is a cache of the repo, and the seam for a later editor in the database: the API and the pages only
  * read these rows. A brick explanation (`reference/bricks/<type>.md`) is a row of kind `brick`, keyed by brick type.
  */
@@ -65,7 +65,7 @@ class DocPage
   #[ORM\Column(type: Types::BOOLEAN)]
   private bool $reviewed = false;
 
-  /** When the sync last saw the file change (a tarball has no commit dates). */
+  /** When the sync last saw the file change. */
   #[ORM\Column(type: 'utc_datetime')]
   private \DateTime $updated_at;
 
@@ -77,7 +77,7 @@ class DocPage
     private string $path,
     #[ORM\Column(type: Types::STRING, length: 16)]
     private string $locale,
-    /** File in the docs repo, for "Improve this page". */
+    /** File in user-docs/, for "Improve this page". */
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $source_file,
   ) {
