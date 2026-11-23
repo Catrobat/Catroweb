@@ -41,7 +41,7 @@ A visitor's language comes from the `hl` cookie or Accept-Language (`de`, `de_AT
 
 [league/commonmark](https://commonmark.thephpleague.com/) with GitHub-flavoured Markdown, `html_input: escape` (raw HTML in a page shows as text) and `allow_unsafe_links: false`. Headings get ids (`SlugNormalizer`, duplicates numbered `-1`, `-2`); level 2 and 3 headings make the table of contents. `user-docs/scripts/check.py` (`slug()`, `heading_ids()`) replicates these ids to check link anchors: change both together.
 
-- **Links between pages** become URLs relative to the page's own URL, so the same HTML works on every theme (`/pocketcode/docs/...`, `/embroidery/docs/...`). A link to `reference/bricks/<type>.md` leads to the brick's page on share.
+- **Links between pages** become URLs relative to the page's own URL, so the same HTML works on every theme (`/pocketcode/docs/...`, `/embroidery/docs/...`). A link to `reference/bricks/<type>.md` leads to the brick's page on share. A link to the `reference/` folder leads to the reference, with an anchor to a category: `[Looks](../reference/#category_looks)`.
 - **Images and PDFs** in `media/` link to share's static copy, `/docs-media/<path>` (see Media), so a page view sends nothing to a third party. A link to a missing media file is left as written (`check.sh` reports it). **Other files** link to their GitHub page (`Catrobat/Catroweb`, `main`).
 - **Embeds**, each on a line of its own:
   - `::brick{type=SetXBrick}` and `::formula{name=SIN}`: the brick or formula element as the reference shows it, in the page's language, linked to its reference page. A type or name the catalog does not know shows as its name.
@@ -90,6 +90,10 @@ The reference is generated, nothing in it is kept by hand. The player build writ
 - `GET /api/docs/reference/catalog?locale=`: categories with their localised bricks and colour, and the formula elements. A docs check can validate brick types against it.
 - `GET /api/docs/reference/bricks/{type}?locale=`: the brick, its categories, its explanation (`user-docs/reference/bricks/<type>.md`, in the best language as for pages, `fallback` when English stands in) with its translation state, and the "Improve this page" URL: the English file in GitHub's editor, or a new file there when the brick has none. An unknown type is 404, a type that is not a class name (`^[A-Za-z][A-Za-z0-9_]{0,99}$`) is refused. Cache rule as above (`private` without `?locale=`).
 - `/{theme}/docs/reference` lists the categories in their colours, `/{theme}/docs/reference/bricks/{type}` shows the brick, its explanation, its example projects ([Brick-Examples.md](./Brick-Examples.md)) and "Improve this page", `/{theme}/docs/reference/formula/{name}` names a formula element and its kind. They exist in every language share speaks: `hreflang` lists all of them, `rel=canonical` points at `/app/docs/...` (with `?locale=` in share's own locale code). The sitemap lists the English pages. They are one more section: the breadcrumb runs through the brick's own category, "In this section" lists the category's bricks (a formula element: its kind's elements).
+
+### The imported brick section
+
+The catrobat.org import had a brick section (`bricks/<category>`: a short intro and the category's bricks). It is folded into the reference: `/{theme}/docs/bricks` (also `/{theme}/docs/<locale>/bricks`) answers with a 301 to the reference, `/{theme}/docs/bricks/<category>` to its category (`#category_looks`; `yourbricks` is `#category_user_bricks`), a `?locale=` or a locale in the path kept as `?locale=` (`DocsController::oldBrickPage`). The old catrobat.org URLs of the section point at the reference directly (`user-docs/import/redirects.tsv`).
 
 ### Old wiki URLs
 

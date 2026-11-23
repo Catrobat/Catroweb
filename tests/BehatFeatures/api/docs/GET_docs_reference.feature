@@ -75,3 +75,17 @@ Feature: The brick and formula reference, generated from Catroid's catalog (test
     When I request "GET" "/app/docs/reference/bricks/by-class/NoSuchBrick"
     Then the response status code should be "302"
     And the response Location header should be "/app/docs/reference"
+
+  Scenario Outline: The brick section imported from catrobat.org is folded into the reference
+    Given I do not follow redirects
+    When I request "GET" "<url>"
+    Then the response status code should be "301"
+    And the response Location header should be "<location>"
+
+    Examples:
+      | url                               | location                                             |
+      | /app/docs/bricks                  | /app/docs/reference                                  |
+      | /app/docs/bricks/looks            | /app/docs/reference#category_looks                   |
+      | /app/docs/bricks/yourbricks       | /app/docs/reference#category_user_bricks             |
+      | /app/docs/bricks/motion?locale=de | /app/docs/reference?locale=de#category_motion        |
+      | /app/docs/de_DE/bricks/embroidery | /app/docs/reference?locale=de_DE#category_embroidery |

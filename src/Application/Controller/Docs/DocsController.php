@@ -20,6 +20,12 @@ class DocsController extends AbstractController
   /** The longest "In this section" list: a longer section shows the nearest pages and links to all of them. */
   public const int MAX_SIBLINGS = 15;
 
+  /**
+   * The brick section imported from catrobat.org (bricks/<category>) is folded into the reference: its pages lead to
+   * the reference's category. Its own name for a category, where the reference's key is not category_<name>.
+   */
+  private const array OLD_BRICK_CATEGORIES = ['yourbricks' => 'user_bricks'];
+
   public function __construct(
     private readonly DocsLibrary $library,
     private readonly DocsSync $sync,
@@ -39,6 +45,10 @@ class DocsController extends AbstractController
     }
     $path = '' === $path ? 'index' : trim($path, '/');
     [$locale, $explicit] = $this->locale($request);
+    // Also with the language in the path, as the import's redirects name a translation (de_DE/bricks/looks).
+    if (1 === preg_match('#^(?:([a-z]{2,3}(?:_[A-Za-z0-9]{2,8})?)/)?bricks(?:/([a-z]+))?(?:/|$)#', $path, $m)) {
+      return $this->oldBrickPage($m[2] ?? '', $explicit ? $locale : ('' === ($m[1] ?? '') ? null : $m[1]));
+    }
 
     $page = $this->library->page($path, $locale);
     if (null === $page) {
@@ -102,6 +112,14 @@ class DocsController extends AbstractController
         [$this->home(), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference'), 'current' => true]],
       ),
     ] + $this->alternates('docs_reference', [], $locale, $explicit));
+  }
+
+  /** An old brick section page: the reference, at the category when it was a category page (`#category_looks`). */
+  private function oldBrickPage(string $category, ?string $locale): Response
+  {
+    $url = $this->generateUrl('docs_reference', null === $locale ? [] : ['locale' => $locale]);
+
+    return $this->redirect('' === $category ? $url : $url.'#category_'.(self::OLD_BRICK_CATEGORIES[$category] ?? $category), Response::HTTP_MOVED_PERMANENTLY);
   }
 
   /**

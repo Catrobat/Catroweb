@@ -3,6 +3,7 @@ title: Stickbausteine aktivieren
 description: "In diesem Tutorial wird erklärt, wie du die Stickbausteine aktivierst."
 order: 0
 reviewed: true
+source_hash: 'c941ea8a14749c3f461c6c6252e36fd9bb91033502dfedcc8dcfc426ce954dc5'
 ---
 
 In diesem Tutorial wird erklärt, wie du die Stickbausteine aktivierst.
@@ -33,11 +34,11 @@ Für mehr Informationen oder Designvorschläge schau dir doch auch die anderen T
 
 ### 5. Du findest die Stick-Bausteine jetzt als eigene Kategorie bei den Bausteinen!
 
-[![image (13)](../../../media/embroidery-tutorials/image-13.png)](../../bricks/embroidery.md)
+[![image (13)](../../../media/embroidery-tutorials/image-13.png)](../../../reference/#category_embroidery)
 
 Jetzt findest du auch alle Stickbausteine bei den anderen Bausteinen.
 
-Für weitere Informationen zu jedem Baustein kannst du dir die Dokumentation der Bausteine [hier](../../bricks/index.md) ansehen oder das Tutorial **[Stickbausteine](embroidery-bricks/index.md)** dazu machen.
+Für weitere Informationen zu jedem Baustein kannst du dir die Dokumentation der Bausteine [hier](../../../reference/) ansehen oder das Tutorial **[Stickbausteine](embroidery-bricks/index.md)** dazu machen.
 
 Jetzt kannst du loslegen und deine eigenen Designs erstellen!
 

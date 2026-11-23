@@ -39,6 +39,6 @@ If you have not yet activated the Embroidery-Bricks, have a look at the **[Activ
 
 *Lets the current stitch stop.*
 
-You can find more Embroidery-Bricks and information about them [here](../../../bricks/embroidery.md).
+You can find more Embroidery-Bricks and information about them [here](../../../../reference/#category_embroidery).
 
 For more information or design suggestions check out the other tutorials!
