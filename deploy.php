@@ -229,19 +229,40 @@ task('update:special', function () {
 });
 
 // The user docs (user-docs/) without a full deploy (.github/workflows/docs-publish.yaml): replace the live release's
-// copy and sync it into the database. A full deploy ships user-docs/ with the release and syncs it itself. The lock
-// keeps this away from a running deploy, also a manual one.
+// copy and sync it into the database. A full deploy ships user-docs/ with the release and syncs it itself, so the
+// publish is done as soon as the live copy matches. It waits (up to ~30 min) while a deploy, also a manual one, holds
+// the deploy lock, and holds the lock itself while it changes the release.
 desc('Publish the user docs to the live release');
 task('docs:publish', function () {
-  invoke('deploy:lock'); // fails while a deploy holds the lock, and then must not release it
+  $hash = "cd %s && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum | sha256sum | cut -d' ' -f1";
+  $wanted = trim(runLocally(sprintf($hash, __DIR__.'/user-docs')));
+  $live = static fn (): string => trim(run(sprintf($hash, '{{current_path}}/user-docs').' 2>/dev/null || true'));
+  $waited = 0;
+  for ($delay = 15;; $delay = min(2 * $delay, 300)) {
+    if ($live() === $wanted) {
+      info('The live release already has these user docs');
+
+      return;
+    }
+    if ('+locked' !== run('[ -f {{deploy_path}}/.dep/deploy.lock ] && echo +locked || echo docs:publish > {{deploy_path}}/.dep/deploy.lock')) {
+      break;
+    }
+    if ($waited >= 1800) {
+      throw new \RuntimeException('The deploy lock was held for more than 30 minutes; run the publish again later');
+    }
+    warning("A deploy holds the lock, retrying in {$delay}s");
+    sleep($delay);
+    $waited += $delay;
+  }
   try {
     // Into a new folder next to the live one (unchanged files hard-linked from it), then swapped in by rename, so
     // share never serves a half-copied user-docs/ (media are served straight from it).
     run('rm -rf {{current_path}}/user-docs.new {{current_path}}/user-docs.old');
     upload(__DIR__.'/user-docs/', '{{current_path}}/user-docs.new/', ['options' => ['--delete', '--link-dest=../user-docs']]);
-    run('cd {{current_path}} && { [ ! -e user-docs ] || mv user-docs user-docs.old; } && mv user-docs.new user-docs && rm -rf user-docs.old');
+    // Synced before the swap: if the sync fails, the live copy still differs and a rerun publishes again.
     // Not {{bin/console}}: that points at an unfinished release if a failed deploy left one behind.
-    run('cd {{current_path}} && {{bin/php}} bin/console catrobat:docs:sync --no-interaction');
+    run('cd {{current_path}} && {{bin/php}} bin/console catrobat:docs:sync --no-interaction {{current_path}}/user-docs.new');
+    run('cd {{current_path}} && { [ ! -e user-docs ] || mv user-docs user-docs.old; } && mv user-docs.new user-docs && rm -rf user-docs.old');
   } finally {
     invoke('deploy:unlock');
   }

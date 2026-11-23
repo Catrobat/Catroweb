@@ -13,11 +13,12 @@ Deployer's `smoke_test` task checks health on the server after the release is li
 
 The user docs (`user-docs/`) ship with every release and are synced into the database by the deploy (`catrobat:docs:sync`). A merged change to `user-docs/` goes live without a full deploy: the **User docs publish** workflow (`.github/workflows/docs-publish.yaml`, also startable by hand) runs Deployer's `docs:publish` task, which
 
-1. takes the deploy lock (it fails while a deploy runs),
-2. copies `user-docs/` of `main` into `current/user-docs.new/` (unchanged files hard-linked from the live copy) and swaps it in by renaming, so the live release never serves a half-copied folder,
-3. runs `bin/console catrobat:docs:sync` in the live release.
+1. stops right away when the live release's `user-docs/` already matches `main` (same content hash), for example because a deploy shipped it,
+2. otherwise takes Deployer's deploy lock; while a deploy (also a manual one) holds it, it waits and retries with backoff for up to 30 minutes, then fails,
+3. copies `user-docs/` of `main` into `current/user-docs.new/` (unchanged files hard-linked from the live copy) and runs `bin/console catrobat:docs:sync` on that folder in the live release,
+4. swaps the new folder in by renaming, so the live release never serves a half-copied folder, and releases the lock. A failed sync leaves the live folder as it was, so running the workflow again retries.
 
-It uses the Deployment workflow's connection and secrets and its concurrency group (`deploy-production`), so a publish and a deploy never overlap. GitHub keeps only one pending run per group: a publish queued behind a running deploy replaces an older queued publish (harmless, it checks out the newest `main`), but it would also replace a queued deploy; restart that deploy by hand if it shows as cancelled. A later full deploy replaces the published copy with the same content from git.
+It uses the Deployment workflow's connection and secrets, but its own concurrency group (`docs-publish`): it never queues behind or cancels a deploy. A newer publish replaces a queued older one (it checks out the newest `main`); a running one is not cancelled, since a cancelled run would leave the deploy lock behind (`bin/dep deploy:unlock share` removes it). A later full deploy replaces the published copy with the same content from git.
 
 Pull requests that change only `user-docs/` run the **User docs** checks (`.github/workflows/docs-check.yaml`, locally `user-docs/check.sh`) and skip the other workflows' jobs (`.github/actions/code-changed`); the required checks report success for the skipped jobs.
 

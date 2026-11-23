@@ -5,7 +5,10 @@
 #  into the live release and runs catrobat:docs:sync there. See docs/operations/How-To-Deploy.md.
 #
 #  - Same connection and secrets as deployment.yaml.
-#  - Same concurrency group as deployment.yaml, so a publish and a deploy never run at the same time.
+#  - Kept apart from deploys by Deployer's deploy lock (the task waits for it), not by deployment.yaml's concurrency
+#    group: GitHub keeps one pending run per group, so a publish there could replace a queued deploy.
+#  - Its own group: a newer publish replaces a queued older one. A running one is not cancelled, because it may hold
+#    the deploy lock, which a cancelled run would leave behind and block the next deploy.
 #
 name: 'User docs publish'
 permissions:
@@ -20,7 +23,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-production
+  group: docs-publish
   cancel-in-progress: false
 
 env:
