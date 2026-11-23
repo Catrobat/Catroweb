@@ -10,6 +10,8 @@ use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 
 /**
  * Imports the docs repo into doc_page: renders new and changed files, deletes pages whose file is gone, all in one
@@ -17,6 +19,17 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
  */
 class DocsSync
 {
+  /** Extension => content type of the media share serves from the docs repo. */
+  final public const array MEDIA_TYPES = [
+    'png' => 'image/png',
+    'jpg' => 'image/jpeg',
+    'jpeg' => 'image/jpeg',
+    'gif' => 'image/gif',
+    'webp' => 'image/webp',
+    'svg' => 'image/svg+xml',
+    'pdf' => 'application/pdf',
+  ];
+
   private readonly DocsMarkdown $markdown;
 
   public function __construct(
@@ -28,12 +41,10 @@ class DocsSync
     public readonly string $repository,
     #[Autowire(env: 'DOCS_REF')]
     public readonly string $ref,
+    #[Autowire('%catrobat.docs_media.dir%')]
+    private readonly string $media_dir,
   ) {
-    $this->markdown = new DocsMarkdown(
-      'https://raw.githubusercontent.com/'.$repository.'/'.$ref.'/',
-      'https://github.com/'.$repository.'/blob/'.$ref.'/',
-      $this->projectCard(...),
-    );
+    $this->markdown = new DocsMarkdown('https://github.com/'.$repository.'/blob/'.$ref.'/', $this->projectCard(...));
   }
 
   public function tarballUrl(): string
@@ -50,44 +61,111 @@ class DocsSync
   }
 
   /**
-   * The Markdown files of a GitHub tarball, keyed by their path in the repo (without the tarball's top folder).
-   * Read straight from the archive: nothing is extracted to disk.
-   *
-   * @return array<string, string>
+   * Unpacks a GitHub tarball into $into (an empty folder the caller removes) and returns the repo's top folder.
+   * The system tar, because PharData skips entries with long (pax) names, such as some brick screenshots. tar
+   * refuses `..` and absolute names; symlinks it creates are skipped by readDirectory().
    */
-  public static function readTarball(string $tarball): array
+  public static function extractTarball(string $tarball, string $into): string
   {
-    $files = [];
-    $root = 'phar://'.realpath($tarball).'/'; // PharData reports the resolved path (/tmp is a symlink on macOS)
-    foreach (new \RecursiveIteratorIterator(new \PharData($tarball)) as $entry) {
-      \assert($entry instanceof \SplFileInfo);
-      $name = substr($entry->getPathname(), \strlen($root));
-      $path = substr($name, (int) strpos($name, '/') + 1);
-      if ($entry->isFile() && str_ends_with($path, '.md')) {
-        $files[$path] = (string) file_get_contents($entry->getPathname());
-      }
+    (new Process(['tar', '-xzf', $tarball, '-C', $into, '--no-same-owner', '--no-same-permissions']))->setTimeout(300)->mustRun();
+    $top = glob(rtrim($into, '/').'/*', GLOB_ONLYDIR) ?: [];
+    if (1 !== \count($top)) {
+      throw new \RuntimeException('The docs tarball has no single top folder.');
     }
 
-    return $files;
+    return $top[0];
   }
 
   /**
-   * The Markdown files of a local checkout, keyed like readTarball().
+   * The Markdown files (content) and media files (source path to copy from) of a checkout, keyed by their path in
+   * the repo.
    *
-   * @return array<string, string>
+   * @return array{pages: array<string, string>, media: array<string, string>}
    */
   public static function readDirectory(string $dir): array
   {
-    $files = [];
     $dir = rtrim($dir, '/').'/';
+    $files = [];
     foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS)) as $file) {
       \assert($file instanceof \SplFileInfo);
-      if ($file->isFile() && 'md' === $file->getExtension()) {
-        $files[substr($file->getPathname(), \strlen($dir))] = (string) file_get_contents($file->getPathname());
+      if ($file->isFile() && !$file->isLink()) { // a link could point anywhere on the server
+        $files[substr($file->getPathname(), \strlen($dir))] = $file->getPathname();
       }
     }
 
-    return $files;
+    return self::split($files);
+  }
+
+  /**
+   * A file of the repo's media/ folder that share serves (CONTRIBUTING's image types and PDF): its path inside media/,
+   * or null. Every segment must be a plain name, so nothing from an archive can point outside the media folder.
+   */
+  public static function mediaPath(string $repo_path): ?string
+  {
+    $pattern = '#^media/((?:[A-Za-z0-9_-][A-Za-z0-9._-]*/)*[A-Za-z0-9_-][A-Za-z0-9._-]*\.([A-Za-z0-9]+))$#';
+    if (1 !== preg_match($pattern, $repo_path, $m) || !isset(self::MEDIA_TYPES[strtolower($m[2])]) || str_contains($m[1], '..')) {
+      return null;
+    }
+
+    return $m[1];
+  }
+
+  /** The synced copy of a media file, or null. */
+  public function mediaFile(string $path): ?string
+  {
+    $file = $this->media_dir.'files/'.$path;
+
+    return null !== self::mediaPath('media/'.$path) && is_file($file) ? $file : null;
+  }
+
+  /**
+   * Replaces the synced media with the given files. Written next to the old copy and swapped in, so pages never see a
+   * half-copied folder. The swap happens below media_dir, which may be a symlink to storage that survives deploys.
+   *
+   * @param array<string, string> $media path inside media/ => file to copy from
+   */
+  public function importMedia(array $media): int
+  {
+    $filesystem = new Filesystem();
+    $current = $this->media_dir.'files';
+    $next = $current.'.new';
+    $filesystem->remove([$next, $current.'.old']);
+    $filesystem->mkdir($next);
+    foreach ($media as $path => $source) {
+      if (null === self::mediaPath('media/'.$path)) {
+        throw new \InvalidArgumentException('Not a docs media file: '.$path);
+      }
+      $filesystem->mkdir(\dirname($next.'/'.$path));
+      if (!copy($source, $next.'/'.$path)) {
+        throw new \RuntimeException('Could not copy docs media '.$path);
+      }
+    }
+    if (is_dir($current)) {
+      $filesystem->rename($current, $current.'.old');
+    }
+    $filesystem->rename($next, $current);
+    $filesystem->remove($current.'.old');
+
+    return \count($media);
+  }
+
+  /**
+   * @param array<string, string> $files repo path => file
+   *
+   * @return array{pages: array<string, string>, media: array<string, string>}
+   */
+  private static function split(array $files): array
+  {
+    $pages = $media = [];
+    foreach ($files as $path => $file) {
+      if (str_ends_with($path, '.md')) {
+        $pages[$path] = (string) file_get_contents($file);
+      } elseif (null !== ($media_path = self::mediaPath($path))) {
+        $media[$media_path] = $file;
+      }
+    }
+
+    return ['pages' => $pages, 'media' => $media];
   }
 
   /**

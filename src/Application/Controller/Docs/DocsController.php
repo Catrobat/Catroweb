@@ -7,8 +7,10 @@ namespace App\Application\Controller\Docs;
 use App\Docs\DocsLibrary;
 use App\Docs\DocsSync;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -19,6 +21,30 @@ class DocsController extends AbstractController
     private readonly DocsLibrary $library,
     private readonly DocsSync $sync,
   ) {
+  }
+
+  /**
+   * Images and PDFs of the docs repo, from the copy the sync keeps (DocsSync::importMedia), so a page view never
+   * reaches a third party. Only the types in DocsSync::MEDIA_TYPES exist there. SVG is served as an image but
+   * sandboxed, so opening one directly cannot run script on share's origin.
+   */
+  #[Route(path: '/docs/media/{path}', name: 'docs_media', requirements: ['path' => '.+'], methods: ['GET'], priority: 1)]
+  public function media(string $path): Response
+  {
+    $file = $this->sync->mediaFile($path);
+    if (null === $file) {
+      throw $this->createNotFoundException('Docs media not found.');
+    }
+    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+    $response = new BinaryFileResponse($file, Response::HTTP_OK, ['Content-Type' => DocsSync::MEDIA_TYPES[$extension]], true, ResponseHeaderBag::DISPOSITION_INLINE, false, true);
+    $response->setPublic();
+    $response->setMaxAge(86400);
+    $response->headers->set('X-Content-Type-Options', 'nosniff');
+    if ('svg' === $extension) {
+      $response->headers->set('Content-Security-Policy', "sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:");
+    }
+
+    return $response;
   }
 
   #[Route(path: '/docs/{path}', name: 'docs', requirements: ['path' => '[A-Za-z0-9_/-]*'], defaults: ['path' => ''], methods: ['GET'])]

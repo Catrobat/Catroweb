@@ -33,14 +33,13 @@ class DocsSyncCommand extends Command
   {
     $source = $input->getArgument('source');
     $filesystem = new Filesystem();
-    $tarball = null;
+    $tarball = $unpacked = null;
     try {
       if (\is_string($source) && is_dir($source)) {
         $files = DocsSync::readDirectory($source);
       } else {
         if (!\is_string($source)) {
-          // PharData recognises the archive by its extension.
-          $tarball = $filesystem->tempnam(sys_get_temp_dir(), 'docs_', '.tar.gz');
+          $tarball = $filesystem->tempnam(sys_get_temp_dir(), 'docs_');
           $response = $this->http_client->request('GET', $this->sync->tarballUrl(), ['timeout' => 60]);
           if (200 !== $response->getStatusCode()) {
             throw new \RuntimeException('Docs download failed with HTTP '.$response->getStatusCode());
@@ -52,16 +51,18 @@ class DocsSyncCommand extends Command
           }
           fclose($handle);
         }
-        $files = DocsSync::readTarball($tarball ?? (string) $source);
+        $unpacked = $filesystem->tempnam(sys_get_temp_dir(), 'docs_');
+        $filesystem->remove($unpacked);
+        $filesystem->mkdir($unpacked);
+        $files = DocsSync::readDirectory(DocsSync::extractTarball($tarball ?? (string) $source, $unpacked));
       }
-      $result = $this->sync->import($files);
+      $result = $this->sync->import($files['pages']); // refuses a broken archive before the media are touched
+      $media = $this->sync->importMedia($files['media']);
     } finally {
-      if (null !== $tarball) {
-        $filesystem->remove($tarball);
-      }
+      $filesystem->remove(array_filter([$tarball, $unpacked]));
     }
 
-    $output->writeln(\sprintf('Docs: %d created, %d updated, %d deleted.', $result['created'], $result['updated'], $result['deleted']));
+    $output->writeln(\sprintf('Docs: %d created, %d updated, %d deleted, %d media files.', $result['created'], $result['updated'], $result['deleted'], $media));
     foreach ($result['skipped'] as $problem) {
       $output->writeln('Skipped '.$problem);
     }

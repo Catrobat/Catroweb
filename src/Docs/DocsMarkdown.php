@@ -29,8 +29,8 @@ use League\CommonMark\Renderer\NodeRendererInterface;
  * heading ids and the table of contents.
  *
  * Links are rewritten so the HTML works on every theme without knowing it: a link to another page becomes a URL
- * relative to the page's own URL (`/{theme}/docs/<path>`), an image points at the raw file on GitHub, any other repo
- * file at its GitHub page. Nothing from the repo is served from share's own origin.
+ * relative to the page's own URL (`/{theme}/docs/<path>`), a file in media/ points at share's synced copy
+ * (`/{theme}/docs/media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
  */
 final class DocsMarkdown implements NodeRendererInterface
 {
@@ -47,12 +47,10 @@ final class DocsMarkdown implements NodeRendererInterface
   private string $page_url = 'docs';
 
   /**
-   * @param string                                                                    $raw_base     raw files of the repo at the synced ref, with trailing slash
    * @param string                                                                    $blob_base    GitHub's page of a file at the synced ref, with trailing slash
    * @param \Closure(string): ?array{name: string, author: string, thumbnail: string} $project_card a public project, or null
    */
   public function __construct(
-    private readonly string $raw_base,
     private readonly string $blob_base,
     private readonly \Closure $project_card,
   ) {
@@ -117,7 +115,7 @@ final class DocsMarkdown implements NodeRendererInterface
           $toc[] = ['id' => $id, 'title' => $title, 'level' => $node->getLevel()];
         }
       } elseif ($node instanceof Link || $node instanceof Image) {
-        $node->setUrl($this->rewriteUrl($node->getUrl(), $file, $node instanceof Image));
+        $node->setUrl($this->rewriteUrl($node->getUrl(), $file));
       }
     }
 
@@ -158,7 +156,7 @@ final class DocsMarkdown implements NodeRendererInterface
       .'<span class="docs-embed__author">'.htmlspecialchars($card['author'], ENT_QUOTES).'</span></span></a>';
   }
 
-  private function rewriteUrl(string $url, string $file, bool $image): string
+  private function rewriteUrl(string $url, string $file): string
   {
     if ('' === $url || 1 === preg_match('#^([a-z][a-z0-9+.-]*:|/|\#|\?)#i', $url)) {
       return $url; // external, site-absolute or an anchor on the page
@@ -171,11 +169,12 @@ final class DocsMarkdown implements NodeRendererInterface
       return $url;
     }
     $location = self::locate($resolved);
-    if (!$image && null !== $location && DocPage::GUIDE === $location['kind']) {
+    if (null !== $location && DocPage::GUIDE === $location['kind']) {
       return self::relativeUrl($this->page_url, self::pageUrl($location['path'])).(null === $fragment ? '' : '#'.$fragment);
     }
+    $encoded = implode('/', array_map(rawurlencode(...), explode('/', $resolved)));
 
-    return ($image ? $this->raw_base : $this->blob_base).implode('/', array_map(rawurlencode(...), explode('/', $resolved)));
+    return null === DocsSync::mediaPath($resolved) ? $this->blob_base.$encoded : self::relativeUrl($this->page_url, 'docs/'.$encoded);
   }
 
   /** `en/tutorials` + `../media/a.png` = `media/a.png`; null when it leaves the repo. */

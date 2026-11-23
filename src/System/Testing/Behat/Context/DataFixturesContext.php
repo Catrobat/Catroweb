@@ -111,7 +111,9 @@ class DataFixturesContext implements Context
   {
     $sync = $this->getSymfonyService(DocsSync::class);
     Assert::assertInstanceOf(DocsSync::class, $sync);
-    $sync->import(DocsSync::readDirectory($this->getSymfonyParameterAsString('kernel.project_dir').'/tests/TestData/Docs'));
+    $files = DocsSync::readDirectory($this->getSymfonyParameterAsString('kernel.project_dir').'/tests/TestData/Docs');
+    $sync->import($files['pages']);
+    $sync->importMedia($files['media']);
   }
 
   /**

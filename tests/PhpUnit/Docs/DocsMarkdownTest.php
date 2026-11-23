@@ -70,7 +70,7 @@ final class DocsMarkdownTest extends TestCase
     // Page links relative to /{theme}/docs/getting-started/first-project; media from GitHub.
     $this->assertStringContainsString('href="../../docs"', $html);
     $this->assertStringContainsString('href="../tutorials/jump#jump-higher"', $html);
-    $this->assertStringContainsString('src="https://raw.example/media/tutorials/jump.png"', $html);
+    $this->assertStringContainsString('src="../media/tutorials/jump.png"', $html, 'served by share, not a third party');
   }
 
   public function testRendersEmbeds(): void
@@ -97,15 +97,15 @@ final class DocsMarkdownTest extends TestCase
 
   public function testFileLinksGoToGitHub(): void
   {
-    $html = $this->markdown()->convert("[Worksheet](../media/teachers/sheet%201.pdf) [Brick](../reference/bricks/SetXBrick.md)\n", 'en/index.md')['html'];
+    $html = $this->markdown()->convert("[Worksheet](../media/teachers/sheet-1.pdf) [Brick](../reference/bricks/SetXBrick.md)\n", 'en/index.md')['html'];
 
-    $this->assertStringContainsString('href="https://blob.example/media/teachers/sheet%201.pdf"', $html);
+    $this->assertStringContainsString('href="docs/media/teachers/sheet-1.pdf"', $html);
     $this->assertStringContainsString('href="https://blob.example/reference/bricks/SetXBrick.md"', $html);
   }
 
   private function markdown(): DocsMarkdown
   {
-    return new DocsMarkdown('https://raw.example/', 'https://blob.example/', static fn (string $id): ?array => 'docs-example-project' === $id
+    return new DocsMarkdown('https://blob.example/', static fn (string $id): ?array => 'docs-example-project' === $id
       ? ['name' => 'Jump & Run', 'author' => 'Catrobat', 'thumbnail' => '/thumb.png'] : null);
   }
 

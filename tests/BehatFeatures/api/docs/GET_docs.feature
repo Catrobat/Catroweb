@@ -43,3 +43,17 @@ Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
   Scenario: An unknown page
     When I request "GET" "/api/docs/pages/does-not-exist"
     Then the response status code should be "404"
+
+  Scenario: Docs images are served by share itself
+    When I request "GET" "/app/docs/media/tutorials/jump.png"
+    Then the response status code should be "200"
+    And the response Header should contain the key "Content-Type" with the value 'image/png'
+
+  Scenario: Docs SVGs are sandboxed
+    When I request "GET" "/app/docs/media/tutorials/star.svg"
+    Then the response status code should be "200"
+    And the response Header should contain the key "Content-Type" with the value 'image/svg+xml'
+
+  Scenario: Other repo files are not served
+    When I request "GET" "/app/docs/media/tutorials/not-served.html"
+    Then the response status code should be "404"

@@ -38,6 +38,7 @@ set('keep_releases', 5);
 set('shared_dirs', [
   'var/log',
   'var/code-view', // code views made by the player's code export (App\Project\CodeView)
+  'var/docs-media', // images and PDFs of the user docs, copied by catrobat:docs:sync (App\Docs\DocsSync)
   'var/sessions',
   'var/resumable_uploads', // project files arriving in chunks (App\Project\Upload); must survive a deploy mid-upload
   'public/resources',
@@ -55,6 +56,7 @@ set('writable_dirs', [
   'var/cache',
   'var/log',
   'var/code-view',
+  'var/docs-media',
   'var/sessions',
   'public/resources',
 ]);
