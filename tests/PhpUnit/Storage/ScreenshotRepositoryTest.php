@@ -152,6 +152,28 @@ class ScreenshotRepositoryTest extends TestCase
   /**
    * @throws \ImagickException
    */
+  public function testInvalidatesCachedProjectZipWhenScreenshotIsOverwritten(): void
+  {
+    $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $cached_zip = $this->tmp_zip_dir.$this->project_id.'.catrobat';
+    $this->filesystem->touch($cached_zip);
+    Assert::assertFileExists($cached_zip);
+
+    $this->screenshot_repository->saveProjectAssets($filepath, $this->project_id);
+
+    Assert::assertFileDoesNotExist($cached_zip);
+  }
+
+  public function testGetImagickReturnsFreshInstance(): void
+  {
+    $first = $this->screenshot_repository->getImagick();
+    $second = $this->screenshot_repository->getImagick();
+    Assert::assertNotSame($first, $second);
+  }
+
+  /**
+   * @throws \ImagickException
+   */
   public function testGeneratesAThumbnail(): void
   {
     $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
