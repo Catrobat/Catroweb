@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Nami-miss ka namin!'
   content: 'Dalawang taon ka nang hindi nagla-log in sa iyong Catrobat account na "%username%" at wala itong mga proyekto o komento. Para manatiling buhay ang ating komunidad, buburahin namin ito sa loob ng %days% araw. Kung gusto mo itong panatilihin, mag-log in ka lang nang isang beses.'
   button: 'Mag-log in para panatilihin ang account ko'
+
+docs:
+  title: "Dokumentasyon"
+  contents: "Mga nilalaman"
+  on_this_page: "Sa pahinang ito"
+  improve: "Pagandahin ang pahinang ito"
+  fallback: "Hindi pa naisasalin ang pahinang ito sa wika mo, kaya ipinapakita ito sa Ingles."
+  machine_translated: "Awtomatikong isinalin ang pahinang ito."
+  stale: "Nagbago ang pahinang Ingles mula nang gawin ang salin na ito, kaya maaaring luma na ang ilang bahagi nito."
+  video: "I-play ang video (naglo-load mula sa YouTube)"

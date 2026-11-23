@@ -1030,3 +1030,13 @@ inactiveAccount:
   title: 'Twaḥeššeḍ-aɣ!'
   content: 'Ur teqqineḍ ara ɣer umiḍan-ik Catrobat "%username%" seg sin iseggasen, ulac deg-s isenfaren neɣ iwenniten. Akken ad teqqim temɣiwant-nneɣ d tudrint, ad t-nekkes deg %days% n wussan. Ma tebɣiḍ ad t-teǧǧeḍ, qqen kan yiwet n tikkelt.'
   button: 'Qqen akken ad ḥerzeɣ amiḍan-iw'
+
+docs:
+  title: "Tasemlit"
+  contents: "Agbur"
+  on_this_page: "Deg usebter-a"
+  improve: "Senfel asebter-a"
+  fallback: "Asebter-a ur yettwasuqqel ara yakan ɣer tutlayt-ik, ihi yettwaskan s Teglizit."
+  machine_translated: "Asebter-a yettwasuqqel s wudem awurman."
+  stale: "Asebter s Teglizit ibeddel seg mi yettwag usuqqel-a, ihi kra n yiḥricen zemren ad ilin d iqburen."
+  video: "Urar tavidyut (tettali-d seg YouTube)"

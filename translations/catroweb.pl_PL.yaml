@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Tęsknimy za Tobą!'
   content: 'Od dwóch lat nie logujesz się na swoje konto Catrobat „%username%” i nie ma na nim żadnych projektów ani komentarzy. Aby nasza społeczność była aktywna, usuniemy je za %days% dni. Jeśli chcesz je zachować, po prostu zaloguj się raz.'
   button: 'Zaloguj się, aby zachować konto'
+
+docs:
+  title: "Dokumentacja"
+  contents: "Spis treści"
+  on_this_page: "Na tej stronie"
+  improve: "Ulepsz tę stronę"
+  fallback: "Ta strona nie jest jeszcze przetłumaczona na twój język, więc jest wyświetlana po angielsku."
+  machine_translated: "Ta strona została przetłumaczona automatycznie."
+  stale: "Angielska strona zmieniła się od czasu tego tłumaczenia, więc niektóre części mogą być nieaktualne."
+  video: "Odtwórz wideo (ładuje się z YouTube)"

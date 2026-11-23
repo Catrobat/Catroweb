@@ -1032,3 +1032,13 @@ inactiveAccount:
   title: 'Kami merindukanmu!'
   content: 'Kamu belum masuk ke akun Catrobat-mu "%username%" selama dua tahun dan akun itu tidak punya proyek atau komentar. Supaya komunitas kami tetap hidup, kami akan menghapusnya dalam %days% hari. Kalau kamu ingin menyimpannya, cukup masuk sekali saja.'
   button: 'Masuk untuk menyimpan akunku'
+
+docs:
+  title: "Dokumentasi"
+  contents: "Daftar isi"
+  on_this_page: "Di halaman ini"
+  improve: "Perbaiki halaman ini"
+  fallback: "Halaman ini belum diterjemahkan ke bahasamu, jadi ditampilkan dalam bahasa Inggris."
+  machine_translated: "Halaman ini diterjemahkan secara otomatis."
+  stale: "Halaman bahasa Inggris telah berubah sejak terjemahan ini dibuat, jadi sebagian isinya mungkin sudah usang."
+  video: "Putar video (dimuat dari YouTube)"

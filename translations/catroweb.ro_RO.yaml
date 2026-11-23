@@ -1030,3 +1030,13 @@ inactiveAccount:
   title: 'Ne este dor de tine!'
   content: 'Nu te-ai mai conectat la contul tău Catrobat „%username%” de doi ani și acesta nu are proiecte sau comentarii. Ca să păstrăm comunitatea noastră activă, îl vom șterge în %days% zile. Dacă vrei să-l păstrezi, conectează-te o singură dată.'
   button: 'Conectează-te ca să-ți păstrezi contul'
+
+docs:
+  title: "Documentație"
+  contents: "Cuprins"
+  on_this_page: "Pe această pagină"
+  improve: "Îmbunătățește această pagină"
+  fallback: "Această pagină nu este încă tradusă în limba ta, așa că este afișată în engleză."
+  machine_translated: "Această pagină a fost tradusă automat."
+  stale: "Pagina în engleză s-a schimbat de când a fost făcută această traducere, așa că unele părți pot fi depășite."
+  video: "Redă videoclipul (se încarcă de pe YouTube)"

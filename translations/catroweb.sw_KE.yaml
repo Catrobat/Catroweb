@@ -1030,3 +1030,13 @@ inactiveAccount:
   title: 'Tunakukumbuka!'
   content: 'Hujaingia kwenye akaunti yako ya Catrobat "%username%" kwa miaka miwili na haina miradi wala maoni. Ili jumuiya yetu ibaki hai, tutaifuta baada ya siku %days%. Ukitaka kuiweka, ingia mara moja tu.'
   button: 'Ingia ili kuweka akaunti yangu'
+
+docs:
+  title: "Nyaraka"
+  contents: "Yaliyomo"
+  on_this_page: "Kwenye ukurasa huu"
+  improve: "Boresha ukurasa huu"
+  fallback: "Ukurasa huu bado haujatafsiriwa kwa lugha yako, kwa hiyo unaonyeshwa kwa Kiingereza."
+  machine_translated: "Ukurasa huu ulitafsiriwa kiotomatiki."
+  stale: "Ukurasa wa Kiingereza umebadilika tangu tafsiri hii ifanywe, kwa hiyo baadhi ya sehemu zinaweza kuwa za zamani."
+  video: "Cheza video (inapakiwa kutoka YouTube)"

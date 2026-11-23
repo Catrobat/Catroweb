@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Et trobem a faltar!'
   content: 'Fa dos anys que no inicies sessió al teu compte de Catrobat "%username%" i no té cap projecte ni comentari. Per mantenir viva la nostra comunitat, l''eliminarem d''aquí a %days% dies. Si el vols conservar, només cal que iniciïs sessió una vegada.'
   button: 'Inicia sessió per conservar el meu compte'
+
+docs:
+  title: "Documentació"
+  contents: "Continguts"
+  on_this_page: "En aquesta pàgina"
+  improve: "Millora aquesta pàgina"
+  fallback: "Aquesta pàgina encara no està traduïda al teu idioma, així que es mostra en anglès."
+  machine_translated: "Aquesta pàgina s'ha traduït automàticament."
+  stale: "La pàgina en anglès ha canviat des que es va fer aquesta traducció, així que algunes parts poden estar desactualitzades."
+  video: "Reprodueix el vídeo (es carrega des de YouTube)"

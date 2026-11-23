@@ -1053,3 +1053,13 @@ inactiveAccount:
   title: 'Ons mis jou!'
   content: 'Jy het al twee jaar lank nie by jou Catrobat-rekening "%username%" aangeteken nie, en dit het geen projekte of kommentaar nie. Om ons gemeenskap lewendig te hou, sal ons dit oor %days% dae skrap. As jy dit wil hou, teken net een keer aan.'
   button: 'Teken aan om my rekening te hou'
+
+docs:
+  title: "Dokumentasie"
+  contents: "Inhoud"
+  on_this_page: "Op hierdie bladsy"
+  improve: "Verbeter hierdie bladsy"
+  fallback: "Hierdie bladsy is nog nie in jou taal vertaal nie, daarom word dit in Engels gewys."
+  machine_translated: "Hierdie bladsy is outomaties vertaal."
+  stale: "Die Engelse bladsy het verander sedert hierdie vertaling gemaak is, so dele daarvan is dalk verouderd."
+  video: "Speel video (laai van YouTube)"

@@ -110,6 +110,21 @@ open_api_server_comments_projectsidcommentspost:
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
 
+# docs
+open_api_server_docs_docsget:
+  path: /docs
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.docs::docsGetAction
+
+open_api_server_docs_docspagespathget:
+  path: /docs/pages/{path}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.docs::docsPagesPathGetAction
+  requirements:
+    path: '^[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*$'
+
 # followers
 open_api_server_followers_usersidfollowpost:
   path: /users/{id}/follow

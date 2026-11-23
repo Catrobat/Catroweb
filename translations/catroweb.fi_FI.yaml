@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Meillä on ikävä sinua!'
   content: 'Et ole kirjautunut Catrobat-tilillesi "%username%" kahteen vuoteen, eikä sillä ole projekteja tai kommentteja. Jotta yhteisömme pysyy vilkkaana, poistamme sen %days% päivän kuluttua. Jos haluat säilyttää sen, kirjaudu sisään kerran.'
   button: 'Kirjaudu sisään ja säilytä tilini'
+
+docs:
+  title: "Dokumentaatio"
+  contents: "Sisältö"
+  on_this_page: "Tällä sivulla"
+  improve: "Paranna tätä sivua"
+  fallback: "Tätä sivua ei ole vielä käännetty kielellesi, joten se näytetään englanniksi."
+  machine_translated: "Tämä sivu on käännetty automaattisesti."
+  stale: "Englanninkielinen sivu on muuttunut tämän käännöksen jälkeen, joten osa siitä voi olla vanhentunutta."
+  video: "Toista video (ladataan YouTubesta)"

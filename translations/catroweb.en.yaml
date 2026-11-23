@@ -1136,3 +1136,13 @@ moderation:
 
 Reports: Reports
 members: members
+
+docs:
+  title: "Documentation"
+  contents: "Contents"
+  on_this_page: "On this page"
+  improve: "Improve this page"
+  fallback: "This page is not translated into your language yet, so it is shown in English."
+  machine_translated: "This page was translated automatically."
+  stale: "The English page has changed since this translation was made, so parts of it may be out of date."
+  video: "Play video (loads from YouTube)"

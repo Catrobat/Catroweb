@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Sentimos sua falta!'
   content: 'Você não entra na sua conta Catrobat "%username%" há dois anos, e ela não tem projetos nem comentários. Para manter nossa comunidade ativa, vamos excluí-la em %days% dias. Se quiser mantê-la, é só entrar uma vez.'
   button: 'Entrar para manter minha conta'
+
+docs:
+  title: "Documentação"
+  contents: "Conteúdo"
+  on_this_page: "Nesta página"
+  improve: "Melhore esta página"
+  fallback: "Esta página ainda não foi traduzida para o seu idioma, por isso aparece em inglês."
+  machine_translated: "Esta página foi traduzida automaticamente."
+  stale: "A página em inglês mudou desde que esta tradução foi feita, então algumas partes podem estar desatualizadas."
+  video: "Reproduzir vídeo (carrega do YouTube)"

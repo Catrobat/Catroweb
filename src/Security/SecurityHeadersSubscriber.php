@@ -88,6 +88,8 @@ class SecurityHeadersSubscriber
       'font-src '."'self'".' data:',
       'connect-src '.implode(' ', $connect_src),
       'worker-src '.implode(' ', $worker_src),
+      // Docs videos (::video), loaded only when the reader clicks play.
+      "frame-src 'self' https://www.youtube-nocookie.com",
       "frame-ancestors 'self'",
     ]);
   }

@@ -1032,3 +1032,13 @@ inactiveAccount:
   title: '我們想念你！'
   content: '你已經兩年沒有登入 Catrobat 帳號「%username%」了，而且它沒有任何專案或留言。為了讓社群保持活躍，我們將在 %days% 天後刪除它。如果你想保留帳號，只要登入一次就可以了。'
   button: '登入以保留我的帳號'
+
+docs:
+  title: "說明文件"
+  contents: "目錄"
+  on_this_page: "本頁內容"
+  improve: "改善此頁面"
+  fallback: "此頁面尚未翻譯成你的語言，因此以英文顯示。"
+  machine_translated: "此頁面為自動翻譯。"
+  stale: "此翻譯完成後英文頁面已有變更，部分內容可能已過時。"
+  video: "播放影片（從 YouTube 載入）"

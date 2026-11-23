@@ -227,6 +227,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(TranslationApi::class)->tag('open_api_server.api', ['api' => 'translation']);
   $services->set(App\Api\CodeViewTranslationApi::class)->tag('open_api_server.api', ['api' => 'codeViewTranslation']);
   $services->set(JobsApi::class)->tag('open_api_server.api', ['api' => 'jobs']);
+  $services->set(App\Api\DocsApi::class)->tag('open_api_server.api', ['api' => 'docs']);
 
   // Messenger's restart signal (messenger:stop-workers), shared by every release: in the database, not the release's
   // own var/cache, and with a fixed namespace. A cache.pool would derive its namespace from the release directory.

@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Pogrešamo te!'
   content: 'V svoj račun Catrobat »%username%« se nisi prijavil(a) že dve leti in nima nobenih projektov ali komentarjev. Da ostane naša skupnost živahna, ga bomo izbrisali čez %days% dni. Če ga želiš obdržati, se samo enkrat prijavi.'
   button: 'Prijavi se in obdrži račun'
+
+docs:
+  title: "Dokumentacija"
+  contents: "Vsebina"
+  on_this_page: "Na tej strani"
+  improve: "Izboljšaj to stran"
+  fallback: "Ta stran še ni prevedena v tvoj jezik, zato je prikazana v angleščini."
+  machine_translated: "Ta stran je bila prevedena samodejno."
+  stale: "Angleška stran se je od tega prevoda spremenila, zato so nekateri deli morda zastareli."
+  video: "Predvajaj video (naloži se z YouTuba)"

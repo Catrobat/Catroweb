@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Na ke marrë malli!'
   content: 'Nuk je identifikuar në llogarinë tënde Catrobat "%username%" prej dy vitesh dhe ajo nuk ka projekte apo komente. Që komuniteti ynë të mbetet i gjallë, do ta fshijmë pas %days% ditësh. Nëse do ta mbash, mjafton të identifikohesh një herë.'
   button: 'Identifikohu për ta mbajtur llogarinë'
+
+docs:
+  title: "Dokumentacioni"
+  contents: "Përmbajtja"
+  on_this_page: "Në këtë faqe"
+  improve: "Përmirëso këtë faqe"
+  fallback: "Kjo faqe ende nuk është përkthyer në gjuhën tënde, prandaj shfaqet në anglisht."
+  machine_translated: "Kjo faqe është përkthyer automatikisht."
+  stale: "Faqja në anglisht ka ndryshuar që kur u bë ky përkthim, prandaj disa pjesë mund të jenë të vjetruara."
+  video: "Luaj videon (ngarkohet nga YouTube)"
