@@ -426,7 +426,6 @@ menu:
   logout: خروج
   admin: مدیر سیستم
   home: صفحهٔ اصلی
-  helpAndTutorials: کمک و آموزش
   followersAndFollowing: پی‌گیر
   mediaLibrary: کتابخانه ی رسانه
   studio: 'استودیوها'
@@ -1060,7 +1059,9 @@ inactiveAccount:
 
 docs:
   title: "مستندات"
-  contents: "فهرست"
+  in_section: "در این بخش"
+  all_in_section: "همه صفحه‌های این بخش"
+  breadcrumb: "مسیر راهنما"
   on_this_page: "در این صفحه"
   improve: "این صفحه را بهتر کنید"
   fallback: "این صفحه هنوز به زبان شما ترجمه نشده است، به همین دلیل به انگلیسی نمایش داده می‌شود."

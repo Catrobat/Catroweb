@@ -423,7 +423,6 @@ menu:
   logout: لاگ آؤٹ
   admin: منتظم
   home: صفحہ اول
-  helpAndTutorials: مدد اور ٹیوٹوریلز
   followersAndFollowing: فالوورز
   mediaLibrary: میڈیا لائبریری
   studio: اسٹوڈیوز
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "دستاویزات"
-  contents: "فہرست"
+  in_section: "اس حصے میں"
+  all_in_section: "اس حصے کے تمام صفحات"
+  breadcrumb: "بریڈکرمب"
   on_this_page: "اس صفحے پر"
   improve: "اس صفحے کو بہتر بنائیں"
   fallback: "یہ صفحہ ابھی آپ کی زبان میں ترجمہ نہیں ہوا، اس لیے انگریزی میں دکھایا جا رہا ہے۔"

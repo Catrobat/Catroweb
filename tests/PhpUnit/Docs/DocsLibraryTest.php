@@ -62,4 +62,27 @@ final class DocsLibraryTest extends TestCase
     );
     $this->assertSame(['tutorials/deep/page', 'tutorials/jump', 'tutorials/stitch'], array_column($library->navigation('de')[2]['children'], 'path'));
   }
+
+  public function testTrailLeadsFromTheSectionToThePage(): void
+  {
+    $page = ['path' => 'tutorials/deep/page', 'title' => 'Page', 'children' => []];
+    $deep = ['path' => 'tutorials/deep', 'title' => 'Deep', 'children' => [$page]];
+    $navigation = [
+      ['path' => 'index', 'title' => 'Home', 'children' => []],
+      ['path' => 'tutorials', 'title' => 'Tutorials', 'children' => [$deep]],
+    ];
+
+    $this->assertSame(['tutorials', 'tutorials/deep', 'tutorials/deep/page'], array_column(DocsLibrary::trail($navigation, 'tutorials/deep/page'), 'path'));
+    $this->assertSame(['index'], array_column(DocsLibrary::trail($navigation, 'index'), 'path'));
+    $this->assertSame([], DocsLibrary::trail($navigation, 'missing'));
+  }
+
+  public function testWindowKeepsTheNearestEntries(): void
+  {
+    $items = range(0, 29);
+    $this->assertSame(range(0, 14), DocsLibrary::window($items, 0, 15));
+    $this->assertSame(range(13, 27), DocsLibrary::window($items, 20, 15));
+    $this->assertSame(range(15, 29), DocsLibrary::window($items, 29, 15));
+    $this->assertSame([0, 1, 2], DocsLibrary::window([0, 1, 2], 1, 15));
+  }
 }

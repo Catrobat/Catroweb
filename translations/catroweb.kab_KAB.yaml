@@ -403,7 +403,6 @@ menu:
   logout: "Ffeɣ"
   admin: "Anedbal"
   home: "Agejdan"
-  helpAndTutorials: "Tallalt d yimenhayen"
   followersAndFollowing: "Imeḍfaren"
   mediaLibrary: "Tamkarḍit n yimidyaten"
   studio: "Isudyuten"
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Tasemlit"
-  contents: "Agbur"
+  in_section: "Deg tigezmi-a"
+  all_in_section: "Akk isebtar n tigezmi-a"
+  breadcrumb: "Abrid n tunigin"
   on_this_page: "Deg usebter-a"
   improve: "Senfel asebter-a"
   fallback: "Asebter-a ur yettwasuqqel ara yakan ɣer tutlayt-ik, ihi yettwaskan s Teglizit."

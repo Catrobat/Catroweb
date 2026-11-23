@@ -403,7 +403,6 @@ menu:
   logout: "Jáde"
   admin: "Alábòójútó"
   home: "Ilé"
-  helpAndTutorials: "Ìrànlọ́wọ́ & ẹ̀kọ́"
   followersAndFollowing: "Olùtẹ̀lé"
   mediaLibrary: "Ibi ìkówèésí mídíà"
   studio: "Àwọn ilé-iṣẹ́ ọnà"
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Ìwé ìtọ́sọ́nà"
-  contents: "Àwọn àkóónú"
+  in_section: "Nínú abala yìí"
+  all_in_section: "Gbogbo ojú-ìwé nínú abala yìí"
+  breadcrumb: "Ipa ọ̀nà ìtọ́sọ́nà"
   on_this_page: "Lórí ojú-ìwé yìí"
   improve: "Mú ojú-ìwé yìí dára síi"
   fallback: "A kò tíì túmọ̀ ojú-ìwé yìí sí èdè rẹ, nítorí náà a ń fi hàn ní èdè Gẹ̀ẹ́sì."

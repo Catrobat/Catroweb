@@ -424,7 +424,6 @@ menu:
   logout: ออกจากระบบ
   admin: ธุรการ
   home: บ้าน
-  helpAndTutorials: ความช่วยเหลือและแบบฝึกหัด
   followersAndFollowing: ผู้ติดตาม
   mediaLibrary: ไลบรารีสื่อ
   studio: สตูดิโอ
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "เอกสาร"
-  contents: "สารบัญ"
+  in_section: "ในส่วนนี้"
+  all_in_section: "ทุกหน้าในส่วนนี้"
+  breadcrumb: "เส้นทางนำทาง"
   on_this_page: "ในหน้านี้"
   improve: "ปรับปรุงหน้านี้"
   fallback: "หน้านี้ยังไม่ได้แปลเป็นภาษาของคุณ จึงแสดงเป็นภาษาอังกฤษ"

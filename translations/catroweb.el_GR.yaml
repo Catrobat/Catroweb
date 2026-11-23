@@ -423,7 +423,6 @@ menu:
   logout: Αποσύνδεση
   admin: 'Διαχείριση'
   home: 'Αρχική'
-  helpAndTutorials: 'Βοήθεια & οδηγοί'
   followersAndFollowing: 'Ακόλουθοι'
   mediaLibrary: Βιβλιοθήκη πολυμέσων
   studio: 'Στούντιο'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Τεκμηρίωση"
-  contents: "Περιεχόμενα"
+  in_section: "Σε αυτή την ενότητα"
+  all_in_section: "Όλες οι σελίδες αυτής της ενότητας"
+  breadcrumb: "Διαδρομή πλοήγησης"
   on_this_page: "Σε αυτή τη σελίδα"
   improve: "Βελτίωσε αυτή τη σελίδα"
   fallback: "Αυτή η σελίδα δεν έχει μεταφραστεί ακόμα στη γλώσσα σου, γι' αυτό εμφανίζεται στα αγγλικά."

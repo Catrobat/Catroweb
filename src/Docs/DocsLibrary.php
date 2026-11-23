@@ -115,6 +115,47 @@ class DocsLibrary
   }
 
   /**
+   * The navigation entries from the top level down to the page: its section first, the page last. Empty when the page
+   * is not in the navigation.
+   *
+   * @param list<array{path: string, title: string, children: array<mixed>}> $navigation
+   *
+   * @return list<array{path: string, title: string, children: array<mixed>}>
+   */
+  public static function trail(array $navigation, string $path): array
+  {
+    foreach ($navigation as $item) {
+      if ($item['path'] === $path) {
+        return [$item];
+      }
+      /** @var list<array{path: string, title: string, children: array<mixed>}> $children */
+      $children = $item['children'];
+      $below = self::trail($children, $path);
+      if ([] !== $below) {
+        return [$item, ...$below];
+      }
+    }
+
+    return [];
+  }
+
+  /**
+   * At most $max entries of a list, the nearest ones around the entry at $current.
+   *
+   * @template T
+   *
+   * @param list<T> $items
+   *
+   * @return list<T>
+   */
+  public static function window(array $items, int $current, int $max): array
+  {
+    $start = max(0, min($current - intdiv($max, 2), \count($items) - $max));
+
+    return \array_slice($items, $start, $max);
+  }
+
+  /**
    * Locales the guide exists in.
    *
    * @return list<string>

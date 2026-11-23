@@ -403,7 +403,6 @@ menu:
   logout: 登出
   admin: 行政
   home: 家
-  helpAndTutorials: 幫助和教程
   followersAndFollowing: 追隨者
   mediaLibrary: 媒體庫
   studio: "工作室"
@@ -1037,7 +1036,9 @@ inactiveAccount:
 
 docs:
   title: "說明文件"
-  contents: "目錄"
+  in_section: "本節內容"
+  all_in_section: "本節的所有頁面"
+  breadcrumb: "導覽路徑"
   on_this_page: "本頁內容"
   improve: "改善此頁面"
   fallback: "此頁面尚未翻譯成你的語言，因此以英文顯示。"

@@ -1,65 +1,125 @@
 .docs {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem 1.5rem;
   grid-template-columns: minmax(0, 1fr);
   padding-block: 1rem 2rem;
 }
 
+/* On a wide screen the section's pages stand left of the breadcrumb and the article */
 @media (min-width: 992px) {
-  .docs {
-    grid-template-columns: 16rem minmax(0, 1fr);
+  .docs:has(.docs-section) {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
     align-items: start;
   }
 
-  .docs-nav {
+  .docs:has(.docs-section) > :not(.docs-section) {
+    grid-column: 2;
+  }
+
+  .docs-section {
     position: sticky;
     top: 5rem;
+    grid-column: 1;
+    grid-row: 1 / span 2;
     max-height: calc(100vh - 6rem);
     overflow-y: auto;
   }
+
+  /* Open here from the first paint; the docs controller opens it where ::details-content is unknown */
+  .docs-section::details-content {
+    content-visibility: visible;
+  }
+
+  .docs-section__summary {
+    pointer-events: none;
+    list-style: none;
+  }
+
+  .docs-section__summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
-.docs-nav {
+.docs-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.docs-breadcrumb__item + .docs-breadcrumb__item::before {
+  content: '\203A';
+  padding-inline: 0.4rem;
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-breadcrumb__item [aria-current] {
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-section {
+  padding: 0.5rem 0.75rem;
   border: 1px solid var(--bs-border-color);
   border-radius: 0.5rem;
-  padding: 0.5rem 0.75rem;
 }
 
-.docs-nav__summary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-weight: 600;
+.docs-section__summary {
   padding-block: 0.25rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.docs-nav__list {
-  list-style: none;
+.docs-section__list {
   margin: 0;
   padding-left: 0;
+  list-style: none;
 }
 
-.docs-nav__list .docs-nav__list {
-  padding-left: 1rem;
-}
-
-.docs-nav__link {
+.docs-section__link,
+.docs-section__all {
   display: block;
   padding: 0.3rem 0.5rem;
   border-radius: 0.25rem;
+}
+
+.docs-section__link {
   color: var(--bs-body-color);
   text-decoration: none;
 }
 
-.docs-nav__link:hover,
-.docs-nav__link:focus-visible {
+.docs-section__link:hover,
+.docs-section__link:focus-visible {
   background: light-dark(#eef1f5, #2a2f37);
 }
 
-.docs-nav__link--current {
+.docs-section__link--current {
   color: var(--primary);
   font-weight: 600;
+}
+
+.docs-pages {
+  display: grid;
+  gap: 0.5rem;
+  margin-block: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.docs-pages__link {
+  display: block;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.docs-pages__link:hover,
+.docs-pages__link:focus-visible {
+  border-color: var(--primary);
 }
 
 .docs-article {
@@ -366,7 +426,8 @@
 }
 
 @media print {
-  .docs-nav,
+  .docs-breadcrumb,
+  .docs-section,
   .docs-pager,
   .docs-improve,
   .docs-comments {

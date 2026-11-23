@@ -423,7 +423,6 @@ menu:
   logout: Выйти из аккаунта
   admin: Админ
   home: Главная
-  helpAndTutorials: Помощь и туториалы
   followersAndFollowing: Подписчик
   mediaLibrary: Медиатека
   studio: Студии
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Документация"
-  contents: "Содержание"
+  in_section: "В этом разделе"
+  all_in_section: "Все страницы этого раздела"
+  breadcrumb: "Навигационная цепочка"
   on_this_page: "На этой странице"
   improve: "Улучшить эту страницу"
   fallback: "Эта страница ещё не переведена на твой язык, поэтому показана на английском."

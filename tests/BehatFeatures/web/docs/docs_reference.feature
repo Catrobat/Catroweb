@@ -12,7 +12,17 @@ Feature: Brick and formula reference pages, generated from Catroid's catalog
     And I should see a "#category_motion .docs-reference__heading.cv-block--motion" element
     And I should see a "#category_motion a[href$='/docs/reference/bricks/SetXBrick'] .cv-block--motion" element
     And I should see a "#formula a[href$='/docs/reference/formula/SIN']" element
-    And the element ".docs-nav" should contain "Bricks and formulas"
+    And the element "#sidebar .sidebar-docs-section--current[aria-current='page']" should contain "Bricks and formulas"
+    And the element ".docs-breadcrumb [aria-current='page']" should contain "Bricks and formulas"
+
+  Scenario: A brick page sits in its category: breadcrumb and the category's other bricks
+    Given I use a 1280 x 900 viewport
+    When I go to "/app/docs/reference/bricks/SetXBrick"
+    And I wait for the page to be loaded
+    Then the element "#sidebar .sidebar-docs-section--current[aria-current='true']" should contain "Bricks and formulas"
+    And the element ".docs-breadcrumb li:nth-child(2) a" should contain "Bricks and formulas"
+    And I should see a ".docs-breadcrumb li:nth-child(3) a[href$='/docs/reference#category_motion']" element
+    And the element ".docs-section__link--current[aria-current='page']" should contain "Set x to 100"
 
   Scenario: A brick page shows the brick, its explanation and its example projects
     Given there are users:

@@ -423,7 +423,6 @@ menu:
   logout: התנתקות
   admin: "ניהול"
   home: "בית"
-  helpAndTutorials: "עזרה ומדריכים"
   followersAndFollowing: "עוקבים"
   mediaLibrary: "ספריית מדיה"
   studio: "סטודיו"
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "תיעוד"
-  contents: "תוכן העניינים"
+  in_section: "בחלק זה"
+  all_in_section: "כל הדפים בחלק זה"
+  breadcrumb: "פירורי לחם"
   on_this_page: "בדף הזה"
   improve: "שפר את הדף הזה"
   fallback: "הדף הזה עדיין לא תורגם לשפה שלך, ולכן הוא מוצג באנגלית."

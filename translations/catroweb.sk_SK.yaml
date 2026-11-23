@@ -424,7 +424,6 @@ menu:
   logout: Odhlásiť
   admin: Administrácia
   home: Domov
-  helpAndTutorials: Pomoc a návody
   followersAndFollowing: Sledujúci
   mediaLibrary: Knižnica médií
   studio: Štúdiá
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentácia"
-  contents: "Obsah"
+  in_section: "V tejto sekcii"
+  all_in_section: "Všetky stránky v tejto sekcii"
+  breadcrumb: "Omrvinková navigácia"
   on_this_page: "Na tejto stránke"
   improve: "Vylepši túto stránku"
   fallback: "Táto stránka ešte nie je preložená do tvojho jazyka, preto sa zobrazuje v angličtine."

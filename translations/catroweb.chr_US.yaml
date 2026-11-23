@@ -403,7 +403,6 @@ menu:
   logout: 'ᎯᏄᎪᎢ'
   admin: 'ᎠᎦᏘᏯ'
   home: 'ᏗᏓᏁᎸ'
-  helpAndTutorials: 'ᏗᏍᏕᎸᏗ ᎠᎴ ᏗᏕᏲᏗ'
   followersAndFollowing: 'ᎠᏂᏍᏓᏩᏗᏙᎯ'
   mediaLibrary: 'ᏗᏟᎶᏍᏔᏅ ᎠᎴ ᏗᎧᏁᎬ ᏗᏍᏆᏂᎪᏗᏱ'
   studio: 'ᏗᎦᎸᏫᏍᏓᏁᏗᏱ'
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Documentation"
-  contents: "Contents"
+  in_section: "In this section"
+  all_in_section: "All pages in this section"
+  breadcrumb: "Breadcrumb"
   on_this_page: "On this page"
   improve: "Improve this page"
   fallback: "This page is not translated into your language yet, so it is shown in English."

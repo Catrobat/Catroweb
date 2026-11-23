@@ -423,7 +423,6 @@ menu:
   logout: 'લૉગ આઉટ'
   admin: 'એડમિન'
   home: 'હોમ'
-  helpAndTutorials: 'મદદ અને ટ્યુટોરિયલ્સ'
   followersAndFollowing: 'ફોલોઅર્સ'
   mediaLibrary: 'મીડિયા લાઇબ્રેરી'
   studio: 'સ્ટુડિયો'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "દસ્તાવેજીકરણ"
-  contents: "અનુક્રમણિકા"
+  in_section: "આ વિભાગમાં"
+  all_in_section: "આ વિભાગના બધા પૃષ્ઠો"
+  breadcrumb: "બ્રેડક્રમ્બ"
   on_this_page: "આ પાનાં પર"
   improve: "આ પાનું સુધારો"
   fallback: "આ પાનું હજી તમારી ભાષામાં અનુવાદિત નથી, તેથી તે અંગ્રેજીમાં બતાવવામાં આવે છે."

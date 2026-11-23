@@ -1,13 +1,14 @@
 import { Controller } from '@hotwired/stimulus'
 
-// Docs page: the contents list and the YouTube embeds (`::video`), which load nothing from YouTube until clicked.
+// Docs page: "In this section" and the YouTube embeds (`::video`), which load nothing from YouTube until clicked.
 export default class extends Controller {
-  static targets = ['nav']
+  static targets = ['section']
 
   connect() {
-    // Closed on a phone so it does not push the page down; beside the page there is room to show it.
-    if (window.matchMedia('(min-width: 992px)').matches) {
-      this.navTarget.open = true
+    // "In this section" is closed on a phone; beside the page it is open (DocsPage.css shows it from the first paint
+    // where the browser knows ::details-content).
+    if (this.hasSectionTarget && window.matchMedia('(min-width: 992px)').matches) {
+      this.sectionTarget.open = true
     }
     const label = this.element.dataset.transVideo
     this.element.querySelectorAll('.docs-video').forEach((link) => {

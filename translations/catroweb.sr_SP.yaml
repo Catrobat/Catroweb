@@ -423,7 +423,6 @@ menu:
   logout: Одјави се
   admin: Админ
   home: Почетна
-  helpAndTutorials: Помоћ и туторијали
   followersAndFollowing: Пратиоци
   mediaLibrary: Медијатека
   studio: Студији
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Документација"
-  contents: "Садржај"
+  in_section: "У овом одељку"
+  all_in_section: "Све странице у овом одељку"
+  breadcrumb: "Путања"
   on_this_page: "На овој страници"
   improve: "Побољшај ову страницу"
   fallback: "Ова страница још није преведена на твој језик, па се приказује на енглеском."

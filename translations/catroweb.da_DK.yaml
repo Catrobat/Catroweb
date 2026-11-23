@@ -423,7 +423,6 @@ menu:
   logout: Log ud
   admin: Admin
   home: Hjem
-  helpAndTutorials: Hjælp og vejledninger
   followersAndFollowing: Følgere
   mediaLibrary: Mediebibliotek
   studio: Studier
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentation"
-  contents: "Indhold"
+  in_section: "I dette afsnit"
+  all_in_section: "Alle sider i dette afsnit"
+  breadcrumb: "Brødkrummesti"
   on_this_page: "På denne side"
   improve: "Forbedr denne side"
   fallback: "Denne side er ikke oversat til dit sprog endnu, så den vises på engelsk."

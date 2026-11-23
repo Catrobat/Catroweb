@@ -425,7 +425,6 @@ menu:
   logout: وتون
   admin: اډمین
   home: کور
-  helpAndTutorials: مرسته او درسونه
   followersAndFollowing: پیروونکی
   mediaLibrary: د رسنیو کتابتون
   studio: 'سټوډیوګانې'
@@ -1059,7 +1058,9 @@ inactiveAccount:
 
 docs:
   title: "لاسوند"
-  contents: "منځپانګه"
+  in_section: "په دې برخه کې"
+  all_in_section: "د دې برخې ټولې پاڼې"
+  breadcrumb: "د لارښوونې لار"
   on_this_page: "په دې پاڼه کې"
   improve: "دا پاڼه ښه کړئ"
   fallback: "دا پاڼه لا ستاسو ژبې ته نه ده ژباړل شوې، نو په انګلیسي ښودل کېږي."

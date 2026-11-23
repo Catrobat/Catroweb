@@ -424,7 +424,6 @@ menu:
   logout: Đăng xuất
   admin: 'Quản trị'
   home: 'Trang chủ'
-  helpAndTutorials: 'Trợ giúp & hướng dẫn'
   followersAndFollowing: 'Người theo dõi'
   mediaLibrary: 'Thư viện đa phương tiện'
   studio: 'Studio'
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "Tài liệu"
-  contents: "Mục lục"
+  in_section: "Trong phần này"
+  all_in_section: "Tất cả trang trong phần này"
+  breadcrumb: "Đường dẫn điều hướng"
   on_this_page: "Trên trang này"
   improve: "Cải thiện trang này"
   fallback: "Trang này chưa được dịch sang ngôn ngữ của bạn nên đang hiển thị bằng tiếng Anh."

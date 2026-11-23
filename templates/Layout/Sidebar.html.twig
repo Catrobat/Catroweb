@@ -138,10 +138,22 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('help') }}" id="btn-tutorials">
-        <span class="sidebar-link-icon material-icons">help_outline</span>
-        <span class="sidebar-link-text">{{ 'menu.helpAndTutorials'|trans({}, 'catroweb') }}</span>
+      <a class="nav-link" href="{{ path('docs') }}" id="btn-docs"
+         {% if docs_nav is defined and docs_nav.crumbs is empty %}aria-current="page"{% endif %}>
+        <span class="sidebar-link-icon material-icons">menu_book</span>
+        <span class="sidebar-link-text">{{ 'docs.title'|trans({}, 'catroweb') }}</span>
       </a>
+      {# On a docs page: its sections (DocsController::sections), the current one marked. #}
+      {% if docs_nav is defined %}
+        <ul class="list-unstyled sidebar-docs-sections">
+          {% for section in docs_nav.sections %}
+            <li>
+              <a class="nav-link sidebar-docs-section{% if section.current %} sidebar-docs-section--current{% endif %}" href="{{ section.url }}"
+                 {% if section.current %}aria-current="{{ section.url == app.request.baseUrl ~ app.request.pathInfo ? 'page' : 'true' }}"{% endif %}>{{ section.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </li>
 
     {% if app.user and not app.user.isMinor() %}

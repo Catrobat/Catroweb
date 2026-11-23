@@ -1,19 +1,7 @@
-{# The docs frame: navigation beside the page (guides, then the brick reference) and the docs entry. Pages fill
-   docs_article and pass navigation, alternates, x_default_url (and canonical_url). #}
+{# The docs frame: breadcrumb, the pages of the section beside the page and the docs entry. The sections themselves are
+   in the app sidebar (Layout/Sidebar.html.twig). Pages fill docs_article and pass docs_nav (DocsController::docsNav),
+   alternates, x_default_url (and canonical_url). #}
 {% extends 'Layout/Base.html.twig' %}
-
-{% macro nav_items(items, current) %}
-  <ul class="docs-nav__list">
-    {% for item in items %}
-      <li>
-        <a class="docs-nav__link{% if item.path == current %} docs-nav__link--current{% endif %}"
-           href="{{ path('docs', {path: item.path == 'index' ? '' : item.path}) }}"
-           {% if item.path == current %}aria-current="page"{% endif %}>{{ item.title }}</a>
-        {% if item.children is not empty %}{{ _self.nav_items(item.children, current) }}{% endif %}
-      </li>
-    {% endfor %}
-  </ul>
-{% endmacro %}
 
 {# Whether the shown text is English standing in, an outdated or an automatic translation. #}
 {% macro translation_note(page, fallback) %}
@@ -44,24 +32,43 @@
 {% endblock %}
 
 {% block body %}
-  {% set current = current|default('') %}
   <div class="docs" {{ stimulus_controller('docs') }} data-action="click->docs#playVideo"
        data-trans-video="{{ 'docs.video'|trans({}, 'catroweb')|e('html_attr') }}">
-    <details class="docs-nav" {{ stimulus_target('docs', 'nav') }}>
-      <summary class="docs-nav__summary">
-        <span class="material-icons" aria-hidden="true">menu_book</span>{{ 'docs.contents'|trans({}, 'catroweb') }}
-      </summary>
-      <nav aria-label="{{ 'docs.contents'|trans({}, 'catroweb')|e('html_attr') }}">
-        {{ _self.nav_items(navigation, current) }}
-        <ul class="docs-nav__list">
-          <li>
-            <a class="docs-nav__link{% if current == 'reference' %} docs-nav__link--current{% endif %}"
-               href="{{ path('docs_reference') }}"
-               {% if current == 'reference' %}aria-current="page"{% endif %}>{{ 'docs.reference.title'|trans({}, 'catroweb') }}</a>
-          </li>
-        </ul>
+    {% if docs_nav.crumbs is not empty %}
+      <nav class="docs-breadcrumb" aria-label="{{ 'docs.breadcrumb'|trans({}, 'catroweb')|e('html_attr') }}">
+        <ol class="docs-breadcrumb__list">
+          {% for crumb in docs_nav.crumbs %}
+            <li class="docs-breadcrumb__item">
+              {% if crumb.current %}
+                <span aria-current="page">{{ crumb.title }}</span>
+              {% else %}
+                <a href="{{ crumb.url }}">{{ crumb.title }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ol>
       </nav>
-    </details>
+    {% endif %}
+
+    {% if docs_nav.siblings is not empty %}
+      {# Closed on a phone so it does not push the page down, shown beside the page on a wide screen (DocsPage.css). #}
+      <details class="docs-section" {{ stimulus_target('docs', 'section') }}>
+        <summary class="docs-section__summary">{{ 'docs.in_section'|trans({}, 'catroweb') }}</summary>
+        <nav aria-label="{{ 'docs.in_section'|trans({}, 'catroweb')|e('html_attr') }}">
+          <ul class="docs-section__list">
+            {% for item in docs_nav.siblings %}
+              <li>
+                <a class="docs-section__link{% if item.current %} docs-section__link--current{% endif %}" href="{{ item.url }}"
+                   {% if item.current %}aria-current="page"{% endif %}>{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          {% if docs_nav.all_url %}
+            <a class="docs-section__all" href="{{ docs_nav.all_url }}">{{ 'docs.all_in_section'|trans({}, 'catroweb') }}</a>
+          {% endif %}
+        </nav>
+      </details>
+    {% endif %}
 
     {% block docs_article %}{% endblock %}
   </div>

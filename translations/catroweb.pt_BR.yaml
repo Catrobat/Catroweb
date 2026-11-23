@@ -423,7 +423,6 @@ menu:
   logout: Encerrar Sessão
   admin: Administrador
   home: Página Inicial
-  helpAndTutorials: Ajuda e tutoriais
   followersAndFollowing: Seguidor
   mediaLibrary: Biblioteca de mídia
   studio: Estúdios
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Documentação"
-  contents: "Conteúdo"
+  in_section: "Nesta seção"
+  all_in_section: "Todas as páginas desta seção"
+  breadcrumb: "Trilha de navegação"
   on_this_page: "Nesta página"
   improve: "Melhore esta página"
   fallback: "Esta página ainda não foi traduzida para o seu idioma, por isso aparece em inglês."

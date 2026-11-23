@@ -423,7 +423,6 @@ menu:
   logout: Çıkış yap
   admin: Yönetici
   home: Ev
-  helpAndTutorials: Yardım ve öğretiçiler
   followersAndFollowing: Takipçin
   mediaLibrary: Medya kütüphanesi
   studio: Stüdyolar
@@ -1056,7 +1055,9 @@ inactiveAccount:
 
 docs:
   title: "Belgeler"
-  contents: "İçindekiler"
+  in_section: "Bu bölümde"
+  all_in_section: "Bu bölümdeki tüm sayfalar"
+  breadcrumb: "İçerik haritası"
   on_this_page: "Bu sayfada"
   improve: "Bu sayfayı geliştir"
   fallback: "Bu sayfa henüz senin diline çevrilmedi, bu yüzden İngilizce gösteriliyor."

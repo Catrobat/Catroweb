@@ -423,7 +423,6 @@ menu:
   logout: Tanca la sessió
   admin: Administració
   home: Inici
-  helpAndTutorials: Ajuda i tutorials
   followersAndFollowing: Seguidors
   mediaLibrary: Mediateca
   studio: Estudis
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Documentació"
-  contents: "Continguts"
+  in_section: "En aquesta secció"
+  all_in_section: "Totes les pàgines d'aquesta secció"
+  breadcrumb: "Ruta de navegació"
   on_this_page: "En aquesta pàgina"
   improve: "Millora aquesta pàgina"
   fallback: "Aquesta pàgina encara no està traduïda al teu idioma, així que es mostra en anglès."

@@ -403,7 +403,6 @@ menu:
   logout: "Chiqish"
   admin: Admin
   home: "Bosh sahifa"
-  helpAndTutorials: "Yordam va qoʻllanmalar"
   followersAndFollowing: "Obunachilar"
   mediaLibrary: "Media kutubxonasi"
   studio: "Studiyalar"
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Hujjatlar"
-  contents: "Mundarija"
+  in_section: "Ushbu boʻlimda"
+  all_in_section: "Ushbu boʻlimning barcha sahifalari"
+  breadcrumb: "Navigatsiya yoʻli"
   on_this_page: "Ushbu sahifada"
   improve: "Ushbu sahifani yaxshilash"
   fallback: "Bu sahifa hali sening tilingga tarjima qilinmagan, shuning uchun inglizcha ko'rsatilmoqda."

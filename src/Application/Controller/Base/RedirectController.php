@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Application\Controller\Base;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -13,14 +12,9 @@ class RedirectController extends AbstractController
 {
   #[Route(path: '/stepByStep', name: 'legacy_stepByStep_routed_used_by_unkwown', methods: ['GET'])]
   #[Route(path: '/help', name: 'help', methods: ['GET'])]
-  public function help(Request $request): Response
+  public function help(): Response
   {
-    $locale = $request->getLocale();
-    if (str_contains($locale, 'de')) {
-      return $this->redirect('https://catrobat.org/de/dokumentation/');
-    }
-
-    return $this->redirect('https://catrobat.org/docs/');
+    return $this->redirectToRoute('docs');
   }
 
   #[Route(path: '/gp', name: 'google_play_store', methods: ['GET'])]

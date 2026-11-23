@@ -424,7 +424,6 @@ menu:
   logout: Шығу
   admin: Админ
   home: Басты мәзір
-  helpAndTutorials: Анықтама және туториалдар
   followersAndFollowing: Бақылау
   mediaLibrary: Медиатека
   studio: "Студиялар"
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "Құжаттама"
-  contents: "Мазмұны"
+  in_section: "Осы бөлімде"
+  all_in_section: "Осы бөлімнің барлық беттері"
+  breadcrumb: "Навигация жолы"
   on_this_page: "Бұл бетте"
   improve: "Бұл бетті жақсарту"
   fallback: "Бұл бет әлі сенің тіліңе аударылмаған, сондықтан ағылшынша көрсетіледі."

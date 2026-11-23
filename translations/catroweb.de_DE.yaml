@@ -423,7 +423,6 @@ menu:
   logout: Abmelden
   admin: Administrator
   home: Start
-  helpAndTutorials: Hilfe & Tutorials
   followersAndFollowing: Abonnenten
   mediaLibrary: Medienbibliothek
   studio: Studios
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentation"
-  contents: "Inhalt"
+  in_section: "In diesem Bereich"
+  all_in_section: "Alle Seiten in diesem Bereich"
+  breadcrumb: "Brotkrümelnavigation"
   on_this_page: "Auf dieser Seite"
   improve: "Diese Seite verbessern"
   fallback: "Diese Seite ist noch nicht in deine Sprache übersetzt, deshalb wird sie auf Englisch angezeigt."

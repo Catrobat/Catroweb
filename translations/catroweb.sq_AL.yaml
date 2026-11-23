@@ -423,7 +423,6 @@ menu:
   logout: Dil
   admin: Administratori
   home: Shtëpia
-  helpAndTutorials: Ndihmë & tutoriale
   followersAndFollowing: Ndjekës
   mediaLibrary: Biblioteka e mediave
   studio: Studiot
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentacioni"
-  contents: "Përmbajtja"
+  in_section: "Në këtë seksion"
+  all_in_section: "Të gjitha faqet në këtë seksion"
+  breadcrumb: "Shtegu i navigimit"
   on_this_page: "Në këtë faqe"
   improve: "Përmirëso këtë faqe"
   fallback: "Kjo faqe ende nuk është përkthyer në gjuhën tënde, prandaj shfaqet në anglisht."

@@ -424,7 +424,6 @@ menu:
   logout: Изход
   admin: Администрация
   home: Начало
-  helpAndTutorials: Помощ и уроци
   followersAndFollowing: Последователи
   mediaLibrary: Медийна библиотека
   studio: Студиа
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "Документация"
-  contents: "Съдържание"
+  in_section: "В този раздел"
+  all_in_section: "Всички страници в този раздел"
+  breadcrumb: "Навигационна пътека"
   on_this_page: "На тази страница"
   improve: "Подобри тази страница"
   fallback: "Тази страница още не е преведена на твоя език, затова се показва на английски."

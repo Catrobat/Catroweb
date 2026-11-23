@@ -423,7 +423,6 @@ menu:
   logout: Wyloguj się
   admin: Administrator
   home: Strona główna
-  helpAndTutorials: Pomoc i samouczki
   followersAndFollowing: Obserwujący
   mediaLibrary: Biblioteka
   studio: Studia
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentacja"
-  contents: "Spis treści"
+  in_section: "W tej sekcji"
+  all_in_section: "Wszystkie strony w tej sekcji"
+  breadcrumb: "Ścieżka nawigacji"
   on_this_page: "Na tej stronie"
   improve: "Ulepsz tę stronę"
   fallback: "Ta strona nie jest jeszcze przetłumaczona na twój język, więc jest wyświetlana po angielsku."

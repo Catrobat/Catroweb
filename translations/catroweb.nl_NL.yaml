@@ -423,7 +423,6 @@ menu:
   logout: 'Uitloggen'
   admin: 'Beheer'
   home: Start
-  helpAndTutorials: 'Hulp en tutorials'
   followersAndFollowing: 'Volgers'
   mediaLibrary: 'Mediabibliotheek'
   studio: 'Studio''s'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Documentatie"
-  contents: "Inhoud"
+  in_section: "In dit onderdeel"
+  all_in_section: "Alle pagina's in dit onderdeel"
+  breadcrumb: "Kruimelpad"
   on_this_page: "Op deze pagina"
   improve: "Verbeter deze pagina"
   fallback: "Deze pagina is nog niet vertaald in jouw taal, daarom wordt hij in het Engels getoond."

@@ -423,7 +423,6 @@ menu:
   logout: Disconnettiti
   admin: 'Amministrazione'
   home: Home
-  helpAndTutorials: Tutorial e aiuto
   followersAndFollowing: Seguace
   mediaLibrary: Libreria multimediale
   studio: 'Studi'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Documentazione"
-  contents: "Indice"
+  in_section: "In questa sezione"
+  all_in_section: "Tutte le pagine di questa sezione"
+  breadcrumb: "Percorso di navigazione"
   on_this_page: "In questa pagina"
   improve: "Migliora questa pagina"
   fallback: "Questa pagina non è ancora tradotta nella tua lingua, quindi è mostrata in inglese."

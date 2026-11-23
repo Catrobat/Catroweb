@@ -410,7 +410,6 @@ menu:
   logout: ログアウト
   admin: 管理者
   home: ホーム
-  helpAndTutorials: ヘルプとチュートリアル
   followersAndFollowing: フォロワー
   mediaLibrary: メディア ライブラリー
   studio: "スタジオ"
@@ -1044,7 +1043,9 @@ inactiveAccount:
 
 docs:
   title: "ドキュメント"
-  contents: "目次"
+  in_section: "このセクション"
+  all_in_section: "このセクションのすべてのページ"
+  breadcrumb: "パンくずリスト"
   on_this_page: "このページの内容"
   improve: "このページを改善する"
   fallback: "このページはまだあなたの言語に翻訳されていないため、英語で表示しています。"

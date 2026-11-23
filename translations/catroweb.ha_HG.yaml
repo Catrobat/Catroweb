@@ -403,7 +403,6 @@ menu:
   logout: "Fita"
   admin: "Mai gudanarwa"
   home: "Gida"
-  helpAndTutorials: "Taimako & koyarwa"
   followersAndFollowing: "Mabiya"
   mediaLibrary: "Ɗakin kafofin watsa labarai"
   studio: "Situdiyo"
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Bayanai"
-  contents: "Abubuwan ciki"
+  in_section: "A wannan sashe"
+  all_in_section: "Duk shafukan wannan sashe"
+  breadcrumb: "Hanyar kewayawa"
   on_this_page: "A wannan shafi"
   improve: "Inganta wannan shafi"
   fallback: "Ba a fassara wannan shafi zuwa harshenka ba tukuna, don haka ana nuna shi da Turanci."
