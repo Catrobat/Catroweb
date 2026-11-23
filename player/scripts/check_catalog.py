@@ -14,8 +14,17 @@ from check_code_export import problems  # noqa: E402
 
 MIN_BRICKS = 200
 NOT_A_CATEGORY = {"category_recently_used"}  # the picker's history, not a list of the factory's own
-# An empty project has no looks, sounds or variables to select (the app shows "new ..." there)
-EXPECTED = "drop-down without a selection"
+MISSING = "drop-down without a selection"
+
+
+def allowed(brick, problem):
+    """A drop-down may select nothing only where it has nothing to choose from: the project's or the device's choices
+    (the browser has no speech languages), which the empty project lacks. An array resource's cannot be empty
+    (WebCompat.arrayAdapterFromResource)."""
+    if not problem.endswith(MISSING):
+        return False
+    parts = brick.get("parts", []) + [p for s in brick.get("sections") or [] for p in s.get("parts", [])]
+    return all(p.get("choices") == 0 for p in parts if p.get("missing"))
 
 
 def factory_categories(source):
@@ -37,7 +46,7 @@ def check(catalog, stubs, categories):
             found.append(f"category {category['key']}: no bricks")
         for brick in category["bricks"]:
             types.add(brick["type"])
-            found += [p for p in problems(brick, f"{category['key']}:") if not p.endswith(EXPECTED)]
+            found += [p for p in problems(brick, f"{category['key']}:") if not allowed(brick, p)]
     if len(types) < MIN_BRICKS:
         found.append(f"only {len(types)} different bricks, expected at least {MIN_BRICKS}")
     for kind in ("functions", "sensors", "operators"):
@@ -68,9 +77,11 @@ if __name__ == "__main__":
                               ' context.getString(R.string.category_recently_used) -> b()\n else -> c()\n'
                               ' R.string.category_pen') == {"category_motion"}
     ok = {"categories": [{"key": "category_motion", "bricks": [{"type": "SetXBrick", "category": "motion", "parts": [
-        {"kind": "choice", "text": "", "missing": True}]}]}], "formula": {k: [{"name": "X", "label": "x"}] for k in (
+        {"kind": "choice", "text": "", "missing": True, "choices": 0}]}]}], "formula": {k: [{"name": "X", "label": "x"}] for k in (
             "functions", "sensors", "operators")}}
     assert check(ok, [], {"category_motion"}) == ([f"only 1 different bricks, expected at least {MIN_BRICKS}"], 1)
+    ok["categories"][0]["bricks"][0]["parts"][0]["choices"] = 3
+    assert check(ok, [], {"category_motion"})[0][0] == "category_motion: SetXBrick: drop-down without a selection"
     found, _ = check(ok, ["org/catrobat/catroid/content/bricks/SetXBrick.getView()V\tjava/util/Locale.x()"], {"category_pen"})
     assert found[0] == "category category_pen missing" and found[-1].startswith("stubbed: org/catrobat/catroid/content/bricks/SetXBrick")
     sys.exit(main(*sys.argv[1:]))

@@ -167,6 +167,7 @@ public final class Rewrite {
 			Map.entry("java/util/Locale.forLanguageTag(Ljava/lang/String;)Ljava/util/Locale;", "forLanguageTag"),
 			Map.entry("android/widget/ArrayAdapter.createFromResource(Landroid/content/Context;II)Landroid/widget/ArrayAdapter;",
 					"arrayAdapterFromResource"),
+			Map.entry("android/text/TextUtils.isEmpty(Ljava/lang/CharSequence;)Z", "isEmpty"),
 			Map.entry("org/catrobat/catroid/formulaeditor/FormulaSpannableStringBuilder.addColoredSquareToColorString("
 					+ "Landroid/content/Context;Ljava/lang/String;FLandroid/text/SpannableStringBuilder;)V", "colorSquare"),
 			// No activity and no fragments on the web: a user-defined brick's getView asks its context for them

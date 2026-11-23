@@ -240,7 +240,9 @@ public final class CodeExport {
 			String value = item instanceof Nameable nameable ? nameable.getName() : null == item ? "" : String.valueOf(item);
 			json.open('{').key("kind").value("choice").key("text").value(null == value ? "" : value);
 			if (null == item) {
-				json.key("missing").value(true); // nothing selected: what scripts/check_code_export.py looks for
+				// nothing selected: what scripts/check_code_export.py looks for; the catalog's check allows it only
+				// where there is nothing to choose from (an empty project's, or the device's, choices)
+				json.key("missing").value(true).key("choices").value(null == spinner.getAdapter() ? 0 : spinner.getAdapter().getCount());
 			} else if (value != null) {
 				symbols.addChoice(json, item, value);
 			}

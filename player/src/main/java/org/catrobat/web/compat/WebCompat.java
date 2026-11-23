@@ -82,7 +82,16 @@ public final class WebCompat {
 	/** The mockable SDK's gives null: an adapter over the array's strings (markers in the code export), as Android's. */
 	public static android.widget.ArrayAdapter<CharSequence> arrayAdapterFromResource(android.content.Context context, int arrayId,
 			int layout) {
-		return new org.catrobat.web.codeview.CodeArrayAdapter<>(context, layout, context.getResources().getTextArray(arrayId));
+		CharSequence[] items = context.getResources().getTextArray(arrayId);
+		if (0 == items.length) {
+			throw new IllegalStateException("empty array resource #" + arrayId); // its drop-down would show nothing
+		}
+		return new org.catrobat.web.codeview.CodeArrayAdapter<>(context, layout, items);
+	}
+
+	/** The mockable SDK's is always false: the drone's LED brick then selects nothing. */
+	public static boolean isEmpty(CharSequence text) {
+		return null == text || 0 == text.length();
 	}
 
 	/** TeaVM's Locale has no forLanguageTag: "pt-BR" is language and country, as Catroid's speech languages are. */

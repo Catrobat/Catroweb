@@ -175,7 +175,8 @@ object and the background), each written like a brick of the code export, and th
 `Sensors` and `Operators` with the marker of their name. Categories come from Catroid's `category_*` strings, bricks
 from the factory: nothing is listed by hand. A brick's `type` is its code.xml type (a script brick's is its script's,
 `StartScript`), the key share's docs use. `scripts/check_catalog.py` fails on a category of the factory that is
-missing, fewer than 200 bricks, a brick that shows wrong (as in the code export's check), a formula element without
+missing, fewer than 200 bricks, a brick that shows wrong (as in the code export's check; a drop-down may select
+nothing only when it has nothing to choose from, such as the browser's speech languages), a function or sensor without
 a name, and any brick method TeaVM stubbed (`stub-report.tsv`); the Player workflow runs it.
 
 ## Deployment
