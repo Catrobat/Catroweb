@@ -16,9 +16,10 @@ class ScratchToCatrobatConverter
 {
   /**
    * Raise when a change should reach projects converted before it: older copies are converted again on their next
-   * import, or all at once with catro:scratch:reconvert. 2: loops yield a frame per pass, like Scratch.
+   * import, or all at once with catro:scratch:reconvert. 2: loops yield a frame per pass, like Scratch. 4: "create
+   * clone of <sprite>" is a native CloneBrick.
    */
-  public const int VERSION = 3;
+  public const int VERSION = 4;
 
   private const string SCENE = 'Scene';
   private const int MAX_BLOCKS = 100_000;
@@ -108,7 +109,6 @@ class ScratchToCatrobatConverter
       $stage['variables'][$model->helper('started')] = [$model->helper('started'), 0];
     }
 
-    $cloned = self::clonedSprites($targets);
     foreach ($project['monitors'] ?? [] as $monitor) {
       if (!($monitor['visible'] ?? false) || 'data_variable' !== ($monitor['opcode'] ?? null)) {
         continue;
@@ -146,12 +146,6 @@ class ScratchToCatrobatConverter
     $used = ['background' => true];
     foreach ($sprites as $i => $sprite) {
       $key = 's'.$i;
-      if (isset($cloned[(string) $sprite['name']])) {
-        foreach (['is clone', 'cloning'] as $purpose) {
-          $sprite['variables'][$model->helper($purpose)] = [$model->helper($purpose), 0];
-        }
-      }
-
       if (self::touchesMouse($sprite)) {
         $sprite['variables'][$model->helper('finger on me')] = [$model->helper('finger on me'), 0];
       }
@@ -325,10 +319,6 @@ class ScratchToCatrobatConverter
         ])]);
         $scripts = [...$scripts, ...$this->helperLoop($c, $model, $remember)];
       }
-
-      if ($model->receivesCloneRequests($key)) {
-        $scripts = [...$scripts, ...$this->cloneRequestScripts($c, $model, $key)];
-      }
     }
 
     $copies = [];
@@ -370,48 +360,6 @@ class ScratchToCatrobatConverter
       $c->script('StartScript', [$loop()]),
       $c->script('WhenClonedScript', [$loop()]),
       $c->script('BroadcastScript', [$loop()], [$c->text('receivedMessage', $model->helper('restart helpers'))]),
-    ];
-  }
-
-  /**
-   * The original sprite clones itself once per counted request ("create clone of <sprite>" from elsewhere).
-   *
-   * Catroid runs one brick of a script per frame, and a new request broadcast restarts this script between frames,
-   * so "clone" and "count it" can't be two steps of the handler: a restart between them would clone twice. The
-   * clone counts itself instead. "cloning" is 1 only around the CloneBrick, the clone inherits it with the other
-   * variables, and its first frame subtracts it from the counter; clones are placed before their original on
-   * stage, so they act first in the next frame, before the handler checks the counter again.
-   * ponytail: another "create clone of myself" by the original in that one frame also counts as a request.
-   *
-   * @return list<\DOMElement>
-   */
-  private function cloneRequestScripts(BlockConverter $c, ProjectModel $model, string $key): array
-  {
-    $request = $model->cloneRequestNames($key);
-    $cloning = fn (): \DOMElement => $model->variableElement($key, $model->helper('cloning'));
-    $set_cloning = fn (int $value): \DOMElement => $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number($value)], [], [$cloning()]);
-    // Clones hear the broadcast too; only the original may answer it, as in Scratch.
-    $is_original = Formula::op('EQUAL', Formula::variable($model->helper('is clone')), Formula::number(0));
-
-    return [
-      $c->script('BroadcastScript', [
-        $c->brick('IfThenLogicBeginBrick', ['IF_CONDITION' => $is_original], [$c->list('ifBranchBricks', [
-          $set_cloning(0),
-          $c->brick('RepeatUntilBrick', ['REPEAT_UNTIL_CONDITION' => Formula::op('SMALLER_THAN', Formula::variable($request['counter']), Formula::number(1))], [$c->list('loopBricks', [
-            $set_cloning(1),
-            $c->brick('CloneBrick'),
-            $set_cloning(0),
-          ])]),
-        ])]),
-      ], [$c->text('receivedMessage', $request['message'])]),
-      // Separate scripts, so all three run in the clone's first frame, before its own scripts can clone again.
-      $c->script('WhenClonedScript', [
-        $c->brick('ChangeVariableBrick', ['VARIABLE_CHANGE' => Formula::unary('MINUS', Formula::variable($model->helper('cloning')))], [], [$model->variableElement(null, $request['counter'])]),
-      ]),
-      $c->script('WhenClonedScript', [$set_cloning(0)]),
-      $c->script('WhenClonedScript', [
-        $c->brick('SetVariableBrick', ['VARIABLE' => Formula::number(1)], [], [$model->variableElement($key, $model->helper('is clone'))]),
-      ]),
     ];
   }
 
@@ -538,6 +486,7 @@ class ScratchToCatrobatConverter
   private function object(\DOMDocument $doc, BlockConverter $c, ProjectModel $model, string $key, array $target, array $scripts, array $definitions): \DOMElement
   {
     $object = $doc->createElement('object');
+    $object->setAttribute(XStreamReferences::KEY, 'object:'.$key);
     $object->setAttribute('type', 'Sprite');
     $object->setAttribute('name', $model->objectName($key));
 
@@ -687,28 +636,6 @@ class ScratchToCatrobatConverter
       'name' => '⌨ '.$key, 'scratchKeys' => $pressed, 'visible' => false, 'x' => $x, 'y' => $y, 'rotationStyle' => "don't rotate",
       'costumes' => [['name' => $key, 'md5ext' => $md5.'.svg', 'assetId' => $md5, 'dataFormat' => 'svg', 'rotationCenterX' => $width / 2, 'rotationCenterY' => 20]],
     ];
-  }
-
-  /**
-   * Names of sprites that another sprite clones ("create clone of <sprite>").
-   *
-   * @param list<array<string, mixed>> $targets
-   *
-   * @return array<string, true>
-   */
-  private static function clonedSprites(array $targets): array
-  {
-    $names = [];
-    foreach ($targets as $target) {
-      foreach ($target['blocks'] ?? [] as $block) {
-        $option = \is_array($block) && 'control_create_clone_of_menu' === ($block['opcode'] ?? null) ? ($block['fields']['CLONE_OPTION'][0] ?? null) : null;
-        if (\is_string($option) && '_myself_' !== $option) {
-          $names[$option] = true;
-        }
-      }
-    }
-
-    return $names;
   }
 
   /** @param list<array<string, mixed>> $targets */

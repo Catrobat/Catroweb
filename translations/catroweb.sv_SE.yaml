@@ -12,8 +12,6 @@ username: Användarnamn
 password: Lösenord
 email: E-post
 about: Om Catrobat
-chat: Chatt och forum
-others: Övriga
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: 'Hur skapade du det här projektet? Använde du idéer, skript eller grafik från andra? Tacka dem här.'
 projectImportedFromScratch: 'Det här projektet importerades från MIT Scratch. Du kan kolla in originalprojektet'
 scratchImportedProjectLinkHere: 'här.'
-country: Land
 privacyPolicy: Sekretesspolicy
 projectDetails: Detaljer
 somethingWentWrong: 'Hoppsan! Något gick fel.'
@@ -47,7 +44,6 @@ doesNotExist: 'Den begärda resursen finns inte.'
 pleaseTryAgain: 'Försök igen!'
 tryAgainButton: 'Försök igen'
 more: 'mer'
-less: 'mindre'
 show-more: 'More information'
 more-information: 'Mer information'
 less-information: 'Mindre information'
@@ -68,7 +64,6 @@ users: "Användare"
 studios: 'Studior'
 oauthPopUpTitle: 'Information om inloggning med externt konto'
 oauthInfo: 'Du har precis loggat in med ett externt konto. Vi har skapat ett slumpmässigt användarnamn åt dig. Om du vill ändra ditt användarnamn eller skapa ett nytt lösenord för ditt konto, gå till din profilsida.'
-statistics: "Statistik "
 languageSelection: 'Språkval'
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Personer som reagerade på projektet'
     all: "Alla"
-  languageVersion: 'Catrobat-språkversion: %languageVersion%'
   updateAppHeaderDownload: 'Nedladdning inte möjlig'
   updateAppTextDownload: 'Uppdatera din app till den senaste versionen. Observera att inte alla Android-funktioner finns tillgängliga på iOS än.'
   checkout_this_project: 'Kolla in det här Catrobat-projektet'
@@ -218,6 +212,18 @@ project:
   createTranslation: 'Skapa översättning'
   deletedComment: '**Borttagen**'
   notForKids: 'Olämpligt för barn'
+  customUrl:
+    title: 'Egen URL'
+    hint: 'Välj ett kort namn för projektets länk: 3–50 små bokstäver, siffror eller bindestreck. Lämna tomt för att ta bort det.'
+  playInBrowser: 'Spela i webbläsaren'
+  madeWithVersion: 'Skapat med appversion %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Skapat med en äldre appversion'
+    text: 'Det här projektet kan inte spelas i webbläsaren än. Öppna det i Pocket Code och ladda upp det igen för att uppdatera det.'
+  translateAgain: 'Översätt igen med de här språken'
+  prefillMachineTranslation: 'Fyll i maskinöversättning'
+  machineTranslationFailed: 'Maskinöversättning är inte tillgänglig just nu. Försök igen senare.'
+  machineTranslationUnsupported: 'Maskinöversättning är inte tillgänglig för det här språket.'
 remixGraph:
   showRemixGraph: 'Remixgraf'
   by: 'med'
@@ -407,6 +413,10 @@ search:
   noProjects: 'Inga projekt hittades'
   noStudios: 'Inga studior hittades'
   sameSearchMessage: 'Det verkar som att du redan är här! Vill du testa en annan sökning?'
+  noResults: 'Inga resultat för ”%query%”'
+  scratchProjects: 'Scratch-projekt'
+  scratchConverting: 'Konverterar för %app%…'
+  scratchConvertingSnackbar: 'Konverterar ”%name%” – det kan ta några sekunder'
 menu:
   profile: Min Profil
   login: Logga in
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: 'Verifiera din e-postadress'
+  leaderboard:
+    all_time: 'Toppskapare'
+    this_week: 'Veckans toppskapare'
+    points: 'poäng'
 api:
   registerUser:
     emailMissing: 'E-postadress saknas'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: 'Beskrivningen är för lång'
     creditsTooLong: 'Anteckningar och tack är för långa'
     screenshotInvalid: 'Projektets skärmbild är ogiltig eller stöds inte'
+    slugInvalid: 'Egen URL måste bestå av 3–50 små bokstäver, siffror eller enstaka bindestreck, med minst en bokstav'
+    slugReserved: 'Den här egna URL:en är reserverad'
+    slugTaken: 'Den här egna URL:en är redan upptagen'
   projectsPost:
     invalid_checksum: 'Ogiltig kontrollsumma. Försök ladda upp igen!'
     upload_error: 'Fel vid uppladdning. Försök ladda upp igen!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'Skript'
   looks: 'Utseenden'
   sounds: 'Ljud'
+  unavailable: 'Det går inte att visa koden för det här projektet.'
+  translation:
+    action: 'Översätt'
+    translateTo: 'Översätt till %language%'
+    translateAgain: 'Översätt igen'
+    stillShowing: 'Visar fortfarande %language%'
+    original: 'Visa original'
+    resume: 'Fortsätt översätta'
+    source: 'Från'
+    target: 'Till'
+    auto: 'Identifiera språk'
+    loading: 'Översätter koden…'
+    complete: 'Maskinöversatt till %language%'
+    partial: 'Delvis översatt'
+    partialInLanguage: 'Delvis översatt till %language%'
+    sourceRequired: 'Välj källspråk för att översätta koden.'
+    unsupported: 'Översättning är inte tillgänglig för de här språken.'
+    error: 'Det gick inte att översätta koden. Försök igen.'
 codeStatistics:
   title: "Kodstatistik"
   error: 'Kodstatistiken kan inte visas.'
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Ditt projekt "%project_name%" togs automatiskt bort på grund av inaktivitet. Ladda upp det igen om du fortfarande vill dela det.'
   noProjects: 'Det verkar som att du inte har några aviseringar om projekt.'
+  studio-deletion-warning:
+    message: 'Din studio ”%studio_name%” har inga projekt och inget har hänt i den på 90 dagar. Den tas bort om %days% dagar om du inte lägger till ett projekt.'
+  project-files-lost:
+    message: 'Ett serverfel gjorde att filerna för %count% av dina projekt försvann: %projects%. De är dolda tills du laddar upp dem igen från Pocket Code. Projekt som inte laddas upp igen inom 14 dagar tas bort.'
+    more: 'och %count% till'
+  moderation-warning:
+    message: 'En moderator har granskat en rapport om ditt innehåll och kommit fram till att det bryter mot communityns regler. Följ reglerna, annars kan ditt konto stängas av nästa gång.'
+    deletion: 'Det dolda innehållet tas bort %days% dagar efter att det dolts, om du inte rättar till det eller överklagar.'
+  moderation-hidden:
+    message: 'En moderator har granskat en rapport om ditt innehåll och dolt det eftersom det bryter mot communityns regler.'
+  moderation-reason:
+    image: '{1}En bild (%names%) såg ut som innehåll för vuxna.|]1,Inf]Några bilder (%names%) såg ut som innehåll för vuxna.'
+    screenshot: 'Skärmbilden såg ut som innehåll för vuxna.'
+    cover: 'Omslagsbilden såg ut som innehåll för vuxna.'
+    text:
+      name: 'Namnet såg ut att säga att det här bara är för vuxna.'
+      description: 'Beskrivningen såg ut att säga att det här bara är för vuxna.'
+      credits: 'Anteckningarna och tackorden såg ut att säga att det här bara är för vuxna.'
+      about: 'Din text ”Om mig” såg ut att säga att det här bara är för vuxna.'
+      currently_working_on: 'Din text ”Jobbar just nu med” såg ut att säga att det här bara är för vuxna.'
+      username: 'Ditt användarnamn såg ut att säga att det här bara är för vuxna.'
+    category:
+      copyright: 'Anledning: det verkar använda andras verk utan tillstånd.'
+      sexual_content: 'Anledning: det såg ut som innehåll för vuxna.'
+      graphic_violence: 'Anledning: det såg för våldsamt ut.'
+      hateful_content: 'Anledning: det såg sårande eller hatiskt ut mot andra.'
+      improper_rating: 'Anledning: det såg inte ut att passa för barn.'
+      spam: 'Anledning: det såg ut som spam.'
+      other: 'Anledning: en moderator hittade ett problem med det.'
+      inappropriate: 'Anledning: det såg olämpligt ut.'
+      harassment: 'Anledning: det såg ut som mobbning eller trakasserier mot någon.'
+      impersonation: 'Anledning: det såg ut att utge sig för att vara någon annan.'
+      inappropriate_profile: 'Anledning: profilen såg olämplig ut.'
+      spam_account: 'Anledning: det såg ut som ett spamkonto.'
+      inappropriate_content: 'Anledning: det såg olämpligt ut.'
 clipboard:
   success: 'Länken har kopierats till urklipp!'
   success_project: 'Länken till projektet har kopierats till urklipp!'
@@ -649,7 +719,6 @@ previous: Föregående
 media-packages:
   title: 'Mediebibliotek'
   description: 'I följande kategorier hittar du figurer och objekt att lägga till i dina projekt.'
-  theme-special: '%flavor%-temaspecial'
   search-results: 'Sökresultat i mediebiblioteket'
 flavor:
   pocketcode: Pocked Code
@@ -866,6 +935,10 @@ studio:
       ban_failed: 'Något gick fel när medlemmen skulle stängas av. Försök igen senare.'
       demote_member: 'Gör administratören till medlem'
       demotion_failed: 'Något gick fel när administratören skulle degraderas. Försök igen senare.'
+      banned_members: 'Avstängda medlemmar'
+      unban_member: 'Häv avstängning'
+      unban_hint: 'När avstängningen hävs kan personen gå med igen som vanligt. Personen läggs inte tillbaka i studion.'
+      unban_failed: 'Det gick inte att uppdatera de avstängda medlemmarna. Försök igen.'
     join_requests:
       title: 'Förfrågningar om att gå med'
       accept: 'Acceptera'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'Beskrivning'
       toggle_allow_comments: 'Kommentarer'
       toggle_privacy: 'Offentlig'
+    banned: 'Du kan inte gå med i den här studion.'
+    invites:
+      title: 'Inbjudningskoder'
+      hint: 'Alla som har koden eller länken går med i studion direkt, utan godkännande. Om du återkallar en kod får medlemmar som redan gått med vara kvar.'
+      expires_on: 'Går ut den (valfritt)'
+      max_uses: 'Max. antal användningar (valfritt)'
+      create: 'Skapa inbjudningskod'
+      uses: 'Använd %uses% gånger'
+      uses_max: 'Använd %uses% av %max% gånger'
+      expires: 'Går ut %date%'
+      qr_alt: 'Skanna QR-koden för att gå med i studion'
+      copy_link: 'Kopiera länk'
+      copied: 'Inbjudningslänken har kopierats till urklipp!'
+      revoke: 'Återkalla'
+      none: 'Inga inbjudningskoder än.'
+      error: 'Något gick fel med inbjudningskoden. Försök igen.'
+  join_with_code:
+    title: 'Gå med med en kod'
+    hint: 'Har du fått en inbjudningskod från din lärare eller en studioadministratör? Ange den här för att gå med i studion.'
+    code: 'Inbjudningskod'
+    invalid: 'Den här koden är inte giltig. Den kan ha gått ut eller återkallats.'
+    banned: 'Du har stängts av från den här studion.'
+    rate_limited: 'För många försök. Vänta några minuter och försök igen.'
 media_library:
   file:
     size: 'Storlek: %size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: 'Ditt konto har stängts av på grund av rapporter från communityn. Du kan överklaga beslutet.'
 Reports: 'Rapporter'
 members: 'medlemmar'
+inactiveAccount:
+  subject: 'Ditt Catrobat-konto kommer att tas bort'
+  title: 'Vi saknar dig!'
+  content: 'Du har inte loggat in på ditt Catrobat-konto ”%username%” på två år och det har inga projekt eller kommentarer. För att hålla vår community levande tar vi bort det om %days% dagar. Om du vill behålla det räcker det att du loggar in en gång.'
+  button: 'Logga in för att behålla mitt konto'

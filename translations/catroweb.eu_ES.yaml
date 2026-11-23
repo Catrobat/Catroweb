@@ -12,8 +12,6 @@ username: 'Erabiltzaile-izena'
 password: 'Pasahitza'
 email: 'Helbide elektronikoa:'
 about: Catrobati buruz
-chat: Txata eta foroak
-others: Bestelakoak
 googlePlay: Google Play Denda
 iosAppStore: iOS App denda
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Ez dago aipamenik eskuragarri.
 notesAndCreditsDescription: Nola sortu duzu proiektu hau? Beste jende batzuen ideia, script edo artelanak erabili al dituzu? Eskerrak eman iezazkiezu hemen.
 projectImportedFromScratch: 'Proiektu hau MIT Scratch-etik inportatu da. Jatorrizko proiektua ikus dezakezu'
 scratchImportedProjectLinkHere: 'hemen.'
-country: Herrialdea
 privacyPolicy: Pribatutasun politika
 projectDetails: 'Xehetasunak'
 somethingWentWrong: 'Ai ene! Zerbait ez doa ongi.'
@@ -47,7 +44,6 @@ doesNotExist: 'Eskatutako baliabidea ez da existitzen.'
 pleaseTryAgain: 'Saiatu berriro mesedez!'
 tryAgainButton: 'Saiatu berriro'
 more: 'gehiago'
-less: 'gutxiago'
 show-more: 'Erakutsi gehiago'
 more-information: 'Informazio gehiago'
 less-information: 'Informazio gutxiago'
@@ -68,7 +64,6 @@ users: "Erabiltzaileak"
 studios: 'Estudioak'
 oauthPopUpTitle: "Kanpoko kontu baten saio hasteari buruzko informazioa"
 oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat asmatu dugu zuretzat. Erabiltzailearen izena edo pasahitza aldatu nahi baduzu joan mesedez zure profilaren orrialdera.'
-statistics: "Estatistikak"
 languageSelection: 'Hizkuntza-hautaketa'
 color-scheme:
   title: 'Gaia'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Proiektu horri erreakzionatu dioten pertsonak'
     all: "Dena"
-  languageVersion: 'Catrobat hizkuntzaren bertsioa: %languageVersion%'
   updateAppHeaderDownload: 'Ezin da deskargatu'
   updateAppTextDownload: 'Eguneratu zure aplikazioa azken bertsiora. Kontuan izan Androideko eginbide guztiak ez daudela oraindik iOSen eskuragarri.'
   checkout_this_project: 'Begiratu Catrobat proiektu hau'
@@ -218,6 +212,18 @@ project:
   createTranslation: 'Sortu itzulpena'
   deletedComment: '**Ezabatua**'
   notForKids: 'Ez da egokia haurrentzat'
+  customUrl:
+    title: 'URL pertsonalizatua'
+    hint: 'Aukeratu izen labur bat proiektu honen estekarako: 3-50 letra xehe, zenbaki edo marratxo. Utzi hutsik kentzeko.'
+  playInBrowser: 'Jolastu nabigatzailean'
+  madeWithVersion: 'Aplikazioaren %app% bertsioarekin egina (Catrobat %language%)'
+  oldVersion:
+    title: 'Aplikazioaren bertsio zaharrago batekin egina'
+    text: 'Proiektu honekin ezin da oraindik nabigatzailean jolastu. Ireki Pocket Code-n eta igo berriro eguneratzeko.'
+  translateAgain: 'Itzuli berriro hizkuntza hauekin'
+  prefillMachineTranslation: 'Bete itzulpen automatikoarekin'
+  machineTranslationFailed: 'Itzulpen automatikoa ez dago erabilgarri une honetan. Saiatu berriro geroago.'
+  machineTranslationUnsupported: 'Itzulpen automatikoa ez dago erabilgarri hizkuntza honetarako.'
 remixGraph:
   showRemixGraph: 'Remix grafikoa'
   by: 'by'
@@ -407,6 +413,10 @@ search:
   noProjects: 'Ez da proiekturik aurkitu'
   noStudios: 'Ez da estudiorik aurkitu'
   sameSearchMessage: 'Dagoeneko hemen zaudela dirudi! Beste bilaketa bat probatu nahi duzu?'
+  noResults: 'Ez dago emaitzarik «%query%» bilaketarako'
+  scratchProjects: 'Scratch proiektuak'
+  scratchConverting: '%app%-rako bihurtzen…'
+  scratchConvertingSnackbar: '«%name%» bihurtzen: segundo batzuk behar izan ditzake'
 menu:
   profile: 'Profila'
   login: 'Hasi saioa'
@@ -516,6 +526,10 @@ time:
 user:
   verification:
     email: 'Egiaztatu zure helbide elektronikoa'
+  leaderboard:
+    all_time: 'Sortzaile onenak'
+    this_week: 'Asteko sortzaile onenak'
+    points: 'puntu'
 api:
   registerUser:
     emailMissing: 'Helbide elektronikoa falta da'
@@ -551,6 +565,9 @@ api:
     descriptionTooLong: 'Deskribapena luzeegia da'
     creditsTooLong: 'Oharrak eta kredituak luzeegiak dira'
     screenshotInvalid: 'Proiektuaren pantaila-argazkia baliogabea da edo ez da onartzen'
+    slugInvalid: 'URL pertsonalizatuak 3-50 letra xehe, zenbaki edo marratxo bakun izan behar ditu, eta gutxienez letra bat'
+    slugReserved: 'URL pertsonalizatu hau erreserbatuta dago'
+    slugTaken: 'URL pertsonalizatu hau hartuta dago jada'
   projectsPost:
     invalid_checksum: 'Kontrol-batura baliogabea. Saiatu berriro igotzen!'
     upload_error: 'Errorea igotzean. Saiatu berriro igotzen!'
@@ -590,6 +607,24 @@ codeView:
   scripts: 'Scriptak'
   looks: 'Itxurak'
   sounds: 'Soinuak'
+  unavailable: 'Ezin da proiektu honen kodea erakutsi.'
+  translation:
+    action: 'Itzuli'
+    translateTo: 'Itzuli hona: %language%'
+    translateAgain: 'Itzuli berriro'
+    stillShowing: 'Oraindik hizkuntza honetan: %language%'
+    original: 'Erakutsi jatorrizkoa'
+    resume: 'Jarraitu itzultzen'
+    source: 'Nondik'
+    target: 'Nora'
+    auto: 'Hauteman hizkuntza'
+    loading: 'Kodea itzultzen…'
+    complete: 'Itzulpen automatikoa hizkuntza honetara: %language%'
+    partial: 'Partzialki itzulita'
+    partialInLanguage: 'Partzialki itzulita hizkuntza honetara: %language%'
+    sourceRequired: 'Aukeratu jatorrizko hizkuntza kode hau itzultzeko.'
+    unsupported: 'Itzulpena ez dago erabilgarri hizkuntza hauetarako.'
+    error: 'Ezin izan da kodea itzuli. Saiatu berriro.'
 codeStatistics:
   title: 'Kodearen estatistikak'
   error: 'Ezin dira kodearen estatistikak bistaratu.'
@@ -640,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Zure "%project_name%" proiektua automatikoki ezabatu da jarduerarik ez zegoelako. Igo berriro oraindik partekatu nahi baduzu.'
   noProjects: 'Badirudi ez duzula proiektuen jakinarazpenik.'
+  studio-deletion-warning:
+    message: 'Zure "%studio_name%" estudioak ez du proiekturik eta 90 egunetan ez da ezer gertatu bertan. %days% egun barru ezabatuko da, proiektu bat gehitzen ez baduzu.'
+  project-files-lost:
+    message: 'Zerbitzariko errore baten ondorioz, zure %count% proiekturen fitxategiak galdu dira: %projects%. Ezkutatuta egongo dira Pocket Code-tik berriro igotzen dituzun arte. 14 egunen buruan berriro igotzen ez diren proiektuak ezabatu egingo dira.'
+    more: 'eta beste %count%'
+  moderation-warning:
+    message: 'Moderatzaile batek zure edukiari buruzko salaketa bat berrikusi du, eta gure komunitatearen arauak hausten dituela ikusi du. Bete arauak; bestela, zure kontua eten egin daiteke hurrengoan.'
+    deletion: 'Ezkutatutako edukia ezkutatu eta %days% egunera ezabatuko da, konpontzen edo errekurritzen ez baduzu.'
+  moderation-hidden:
+    message: 'Moderatzaile batek zure edukiari buruzko salaketa bat berrikusi du eta ezkutatu egin du, gure komunitatearen arauak hausten dituelako.'
+  moderation-reason:
+    image: '{1}Irudi batek (%names%) helduentzako edukia zirudien.|]1,Inf]Irudi batzuek (%names%) helduentzako edukia zirudien.'
+    screenshot: 'Pantaila-argazkiak helduentzako edukia zirudien.'
+    cover: 'Azaleko irudiak helduentzako edukia zirudien.'
+    text:
+      name: 'Izenak helduentzat bakarrik dela esaten zuela zirudien.'
+      description: 'Deskribapenak helduentzat bakarrik dela esaten zuela zirudien.'
+      credits: 'Oharrek eta aipamenek helduentzat bakarrik dela esaten zutela zirudien.'
+      about: 'Zure "Niri buruz" testuak helduentzat bakarrik dela esaten zuela zirudien.'
+      currently_working_on: 'Zure "Orain lantzen ari naizena" testuak helduentzat bakarrik dela esaten zuela zirudien.'
+      username: 'Zure erabiltzaile-izenak helduentzat bakarrik dela esaten zuela zirudien.'
+    category:
+      copyright: 'Arrazoia: beste pertsona batzuen lana baimenik gabe erabiltzen duela dirudi.'
+      sexual_content: 'Arrazoia: helduentzako edukia zirudien.'
+      graphic_violence: 'Arrazoia: bortitzegia zirudien.'
+      hateful_content: 'Arrazoia: besteentzat mingarria edo gorrotozkoa zirudien.'
+      improper_rating: 'Arrazoia: ez zirudien haurrentzat egokia.'
+      spam: 'Arrazoia: spama zirudien.'
+      other: 'Arrazoia: moderatzaile batek arazo bat aurkitu du.'
+      inappropriate: 'Arrazoia: desegokia zirudien.'
+      harassment: 'Arrazoia: norbait jazartzen edo iraintzen zuela zirudien.'
+      impersonation: 'Arrazoia: beste norbait zela itxuratzen zuela zirudien.'
+      inappropriate_profile: 'Arrazoia: profilak desegokia zirudien.'
+      spam_account: 'Arrazoia: spam-kontua zirudien.'
+      inappropriate_content: 'Arrazoia: desegokia zirudien.'
 clipboard:
   success: 'Esteka arbelean kopiatu da!'
   success_project: 'Proiekturako esteka arbelean kopiatu da!'
@@ -649,7 +719,6 @@ previous: 'Aurrekoa'
 media-packages:
   title: 'Multimedia-liburutegia'
   description: 'Kategoria hauetan zure proiektuetan gehitzeko aktoreak eta objektuak aurki ditzakezu.'
-  theme-special: '%flavor% gai berezia'
   search-results: 'Multimedia-liburutegiko bilaketa-emaitzak'
 flavor:
   pocketcode: Pocket Code
@@ -866,6 +935,10 @@ studio:
       ban_failed: 'Zerbait gaizki joan da kide hau debekatzean. Saiatu berriro geroago.'
       demote_member: 'Jaitsi administratzailea kide izatera'
       demotion_failed: 'Zerbait gaizki joan da administratzaile hau jaistean. Saiatu berriro geroago.'
+      banned_members: 'Debekatutako kideak'
+      unban_member: 'Kendu debekua'
+      unban_hint: 'Debekua kentzean, pertsona berriro batu daiteke ohiko moduan. Ez du estudiora berriro gehitzen.'
+      unban_failed: 'Ezin izan dira debekatutako kideak eguneratu. Saiatu berriro.'
     join_requests:
       title: 'Batzeko eskaerak'
       accept: 'Onartu'
@@ -882,6 +955,29 @@ studio:
       studio_description: 'Deskribapena'
       toggle_allow_comments: 'Iruzkinak'
       toggle_privacy: 'Publikoa'
+    banned: 'Ezin zara estudio honetara batu.'
+    invites:
+      title: 'Gonbidapen-kodeak'
+      hint: 'Kodea edo esteka duen edonor berehala batzen da estudio honetara, onarpenik gabe. Kode bat baliogabetzean, dagoeneko batu diren kideak geratu egiten dira.'
+      expires_on: 'Iraungitze-data (aukerakoa)'
+      max_uses: 'Gehienezko erabilerak (aukerakoa)'
+      create: 'Sortu gonbidapen-kodea'
+      uses: '%uses% aldiz erabilia'
+      uses_max: '%uses%/%max% aldiz erabilia'
+      expires: 'Iraungitze-data: %date%'
+      qr_alt: 'Eskaneatu QR kode hau estudiora batzeko'
+      copy_link: 'Kopiatu esteka'
+      copied: 'Gonbidapen-esteka arbelean kopiatu da!'
+      revoke: 'Baliogabetu'
+      none: 'Oraindik ez dago gonbidapen-koderik.'
+      error: 'Arazo bat egon da gonbidapen-kodearekin. Saiatu berriro.'
+  join_with_code:
+    title: 'Batu kode batekin'
+    hint: 'Irakasleak edo estudioko administratzaile batek gonbidapen-kode bat eman dizu? Idatzi hemen estudiora batzeko.'
+    code: 'Gonbidapen-kodea'
+    invalid: 'Kode hau ez da baliozkoa. Iraungita edo baliogabetuta egon daiteke.'
+    banned: 'Estudio honetatik debekatu zaituzte.'
+    rate_limited: 'Saiakera gehiegi. Itxaron minutu batzuk eta saiatu berriro.'
 media_library:
   file:
     size: 'Tamaina: %size%'
@@ -951,3 +1047,8 @@ moderation:
     user_own: 'Zure kontua eten egin da komunitatearen salaketengatik. Erabaki hau errekurritu dezakezu.'
 Reports: 'Salaketak'
 members: 'kide'
+inactiveAccount:
+  subject: 'Zure Catrobat kontua ezabatu egingo da'
+  title: 'Faltan botatzen zaitugu!'
+  content: 'Bi urte daramatzazu zure "%username%" Catrobat kontuan saioa hasi gabe, eta ez du proiekturik ez iruzkinik. Gure komunitatea bizirik mantentzeko, %days% egun barru ezabatuko dugu. Gorde nahi baduzu, hasi saioa behin.'
+  button: 'Hasi saioa nire kontua gordetzeko'

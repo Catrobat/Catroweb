@@ -279,24 +279,15 @@ class CodeStatisticsParser
   }
 
   /**
-   * Counts object/sprite elements.
+   * Counts sprites (group sprites excluded). Pocket Code writes a sprite in full where it first occurs, which can
+   * be inside a brick (`<objectToClone type="Sprite" ...>`); every other occurrence is a `reference` without type.
    */
   private function countObjects(string $xml_content): int
   {
-    $count = 0;
-    if (preg_match_all('/<object\s+type="([^"]+)"/', $xml_content, $matches)) {
-      foreach ($matches[1] as $type) {
-        if ('SingleSprite' === $type || 'GroupItemSprite' === $type) {
-          ++$count;
-        }
-      }
-    }
+    $count = (int) preg_match_all('/<\w+\s+type="(?:Sprite|SingleSprite|GroupItemSprite)"/', $xml_content);
 
-    if (preg_match_all('/<object\s+name="[^"]*"(?!\s+type=)/', $xml_content, $matches)) {
-      $count += count($matches[0]);
-    }
-
-    return $count;
+    // Old files without a type attribute
+    return $count + (int) preg_match_all('/<object\s+name="[^"]*"(?!\s+type=)/', $xml_content);
   }
 
   /**
@@ -485,7 +476,8 @@ class CodeStatisticsParser
     }
     $context['duplicate_condition_keys'] = $this->hasDuplicateCount($condition_counts);
 
-    foreach ($xml->xpath('//object') ?: [] as $object) {
+    // Every sprite written in full, also one stored inside a brick (objectToClone); references have no children.
+    foreach ($xml->xpath('//*[scriptList]') ?: [] as $object) {
       $this->analyzeObjectScripts($object, $context);
       if ($context['tapped_scripts_same_object'] && $context['has_script_with_brick']) {
         break;

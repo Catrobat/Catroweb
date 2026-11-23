@@ -254,4 +254,66 @@ class ProjectZipReconstructorTest extends TestCase
     // Should not throw
     $this->reconstructor->invalidateCache('no-cache-project');
   }
+
+  #[Group('unit')]
+  public function testReconstructCleansUpTempFileWhenExceptionThrown(): void
+  {
+    $project_id = 'exception-project';
+    $project_extract = $this->extract_dir.$project_id;
+    $this->filesystem->mkdir($project_extract);
+    file_put_contents($project_extract.'/code.xml', '<xml>test</xml>');
+
+    $asset = new ProjectAsset('faultyhash', 10, 'image/png', 'fa/ul/faultyhash');
+    $mapping = $this->createStub(ProjectAssetMapping::class);
+    $mapping->method('getAsset')->willReturn($asset);
+    $mapping->method('getPathInZip')->willReturn('images/faulty.png');
+
+    $this->mapping_repository->method('findByProjectId')->willReturn([$mapping]);
+    $this->store->method('getAbsolutePathFromRelative')->willThrowException(new \RuntimeException('CAS failure'));
+
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessage('CAS failure');
+
+    try {
+      $this->reconstructor->reconstruct($project_id);
+    } finally {
+      $temp_files = glob($this->zip_dir.'*.tmp.*') ?: [];
+      $this->assertSame([], $temp_files, 'Temporary files must be cleaned up on failure');
+    }
+  }
+
+  #[Group('unit')]
+  public function testReconstructReturnsNullAndCleansUpWhenZipCloseFails(): void
+  {
+    $project_id = 'close-failure-project';
+    $project_extract = $this->extract_dir.$project_id;
+    $this->filesystem->mkdir($project_extract);
+    $code_xml = $project_extract.'/code.xml';
+    file_put_contents($code_xml, '<xml>test</xml>');
+
+    $image_content = 'test image';
+    $image_path = $this->assets_dir.'test_image';
+    file_put_contents($image_path, $image_content);
+
+    $asset = new ProjectAsset('imagehash', strlen($image_content), 'image/png', 'im/ag/imagehash');
+    $mapping = $this->createStub(ProjectAssetMapping::class);
+    $mapping->method('getAsset')->willReturn($asset);
+    $mapping->method('getPathInZip')->willReturn('images/test.png');
+
+    $this->mapping_repository->method('findByProjectId')->willReturn([$mapping]);
+
+    // Delete the already-added code.xml before close() so ZipArchive::close() fails
+    $this->store->method('getAbsolutePathFromRelative')->willReturnCallback(function () use ($code_xml, $image_path) {
+      if (file_exists($code_xml)) {
+        unlink($code_xml);
+      }
+
+      return $image_path;
+    });
+
+    $result = $this->reconstructor->reconstruct($project_id);
+
+    $this->assertNull($result);
+    $this->assertSame([], glob($this->zip_dir.'*.tmp.*') ?: [], 'Temporary files must be cleaned up on close failure');
+  }
 }

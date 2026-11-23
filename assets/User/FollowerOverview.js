@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="follower-item">
           <div class="follower-item__avatar">
             <a href="${profileUrl}">
-              ${buildPictureHTML(user.avatar, 'thumb', avatarFallback, 'class="round" alt=""')}
+              ${buildPictureHTML(user.avatar, 'thumb', avatarFallback, 'class="round" alt="" loading="lazy"')}
             </a>
           </div>
           <div class="follower-item__text">

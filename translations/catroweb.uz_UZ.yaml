@@ -12,8 +12,6 @@ username: "Foydalanuvchi nomi"
 password: "Parol"
 email: "E-pochta"
 about: "Catrobat haqida"
-chat: "Chat va forumlar"
-others: "Boshqalar"
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: "Mualliflar haqida maʼlumot yoʻq."
 notesAndCreditsDescription: "Bu loyihani qanday yaratding? Boshqalarning gʻoyalari, skriptlari yoki rasmlaridan foydalandingmi? Ularga shu yerda rahmat ayt."
 projectImportedFromScratch: "Bu loyiha MIT Scratch'dan import qilingan. Asl loyihani koʻrishing mumkin"
 scratchImportedProjectLinkHere: "shu yerda."
-country: "Mamlakat"
 privacyPolicy: "Maxfiylik siyosati"
 projectDetails: "Tafsilotlar"
 somethingWentWrong: "Voy, nimadir ishlamadi. Iltimos, qaytadan urinib koʻr!"
@@ -47,7 +44,6 @@ doesNotExist: "Soʻralgan resurs mavjud emas."
 pleaseTryAgain: "Iltimos, qaytadan urinib koʻr!"
 tryAgainButton: "Qayta urinish"
 more: "koʻproq"
-less: "kamroq"
 show-more: "Batafsil maʼlumot"
 more-information: "Batafsil maʼlumot"
 less-information: "Qisqaroq maʼlumot"
@@ -68,7 +64,6 @@ users: "Foydalanuvchilar"
 studios: "Studiyalar"
 oauthPopUpTitle: "Tashqi hisob orqali kirish haqida maʼlumot"
 oauthInfo: "Sen hozirgina tashqi hisob orqali kirding. Biz senga tasodifiy foydalanuvchi nomi yaratdik. Foydalanuvchi nomingni oʻzgartirmoqchi yoki hisobing uchun yangi parol yaratmoqchi boʻlsang, profil sahifangga oʻt."
-statistics: "Statistika"
 languageSelection: "Tilni tanlash"
 color-scheme:
   title: "Mavzu"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Bu loyihaga reaksiya bildirganlar"
     all: "All"
-  languageVersion: "Catrobat til versiyasi: %languageVersion%"
   updateAppHeaderDownload: "Yuklab olish imkonsiz"
   updateAppTextDownload: "Iltimos, ilovangni eng yangi versiyaga yangila. Eʼtibor ber: Android'dagi barcha funksiyalar hali iOS'da mavjud emas."
   checkout_this_project: "Bu Catrobat loyihasini koʻr"
@@ -201,6 +195,18 @@ project:
   createTranslation: "Tarjima yaratish"
   deletedComment: "**Oʻchirilgan**"
   notForKids: "Bolalar uchun xavfsiz emas"
+  customUrl:
+    title: 'Maxsus URL'
+    hint: 'Bu loyiha havolasi uchun qisqa nom tanla: 3-50 ta kichik harf, raqam yoki defis. Olib tashlash uchun boʻsh qoldir.'
+  playInBrowser: 'Brauzerda oʻynash'
+  madeWithVersion: 'Ilovaning %app% versiyasida yaratilgan (Catrobat %language%)'
+  oldVersion:
+    title: 'Ilovaning eski versiyasida yaratilgan'
+    text: 'Bu loyihani hozircha brauzerda oʻynab boʻlmaydi. Yangilash uchun uni Pocket Code''da och va qaytadan yukla.'
+  translateAgain: 'Shu tillar bilan qayta tarjima qilish'
+  prefillMachineTranslation: 'Mashina tarjimasi bilan toʻldirish'
+  machineTranslationFailed: 'Mashina tarjimasi hozir mavjud emas. Iltimos, keyinroq qayta urinib koʻr.'
+  machineTranslationUnsupported: 'Bu til uchun mashina tarjimasi mavjud emas.'
 remixGraph:
   showRemixGraph: "Remiks grafigi"
   by: 'by'
@@ -387,6 +393,10 @@ search:
   noProjects: "Loyihalar topilmadi"
   noStudios: "Studiyalar topilmadi"
   sameSearchMessage: "Koʻrinishidan, sen allaqachon shu yerdasan! Boshqacha qidirib koʻrasanmi?"
+  noResults: '“%query%” boʻyicha natija topilmadi'
+  scratchProjects: 'Scratch loyihalari'
+  scratchConverting: '%app% uchun oʻgirilmoqda…'
+  scratchConvertingSnackbar: '“%name%” oʻgirilmoqda — bu bir necha soniya olishi mumkin'
 menu:
   profile: "Profil"
   login: "Kirish"
@@ -494,6 +504,10 @@ time:
 user:
   verification:
     email: "E-pochtangni tasdiqla"
+  leaderboard:
+    all_time: 'Eng yaxshi ijodkorlar'
+    this_week: 'Bu haftaning eng yaxshi ijodkorlari'
+    points: 'ball'
 api:
   registerUser:
     emailMissing: "E-pochta koʻrsatilmagan"
@@ -529,6 +543,9 @@ api:
     descriptionTooLong: "Tavsif juda uzun"
     creditsTooLong: "Eslatmalar va mualliflar juda uzun"
     screenshotInvalid: "Loyiha skrinshoti yaroqsiz yoki qoʻllab-quvvatlanmaydi"
+    slugInvalid: 'Maxsus URL 3-50 ta kichik harf, raqam yoki yakka defisdan iborat boʻlishi va kamida bitta harfni oʻz ichiga olishi kerak'
+    slugReserved: 'Bu maxsus URL band qilingan'
+    slugTaken: 'Bu maxsus URL allaqachon olingan'
   projectsPost:
     invalid_checksum: "Notoʻgʻri nazorat summasi. Qaytadan yuklab koʻr!"
     upload_error: "Yuklashda xatolik. Qaytadan yuklab koʻr!"
@@ -568,6 +585,24 @@ codeView:
   scripts: "Skriptlar"
   looks: "Koʻrinishlar"
   sounds: "Tovushlar"
+  unavailable: 'Bu loyihaning kodini koʻrsatib boʻlmaydi.'
+  translation:
+    action: 'Tarjima qilish'
+    translateTo: '%language% tiliga tarjima qilish'
+    translateAgain: 'Qayta tarjima qilish'
+    stillShowing: 'Hali ham %language% koʻrsatilmoqda'
+    original: 'Asl nusxani koʻrsatish'
+    resume: 'Tarjimani davom ettirish'
+    source: 'Qaysi tildan'
+    target: 'Qaysi tilga'
+    auto: 'Tilni aniqlash'
+    loading: 'Kod tarjima qilinmoqda…'
+    complete: '%language% tiliga mashina tarjimasi qilindi'
+    partial: 'Qisman tarjima qilingan'
+    partialInLanguage: '%language% tiliga qisman tarjima qilingan'
+    sourceRequired: 'Bu kodni tarjima qilish uchun manba tilini tanla.'
+    unsupported: 'Bu tillar uchun tarjima mavjud emas.'
+    error: 'Kodni tarjima qilib boʻlmadi. Qayta urinib koʻr.'
 codeStatistics:
   title: "Code Statistics"
   error: "Kod statistikasini koʻrsatib boʻlmaydi."
@@ -618,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: "\"%project_name%\" loyihang faolsizlik sababli avtomatik oʻchirildi. Agar hali ham ulashmoqchi boʻlsang, uni qayta yukla."
   noProjects: "Koʻrinishidan, loyihalar haqida bildirishnomalaring yoʻq."
+  studio-deletion-warning:
+    message: '“%studio_name%” studiyangda loyihalar yoʻq va 90 kun davomida unda hech narsa sodir boʻlmadi. Agar loyiha qoʻshmasang, u %days% kundan keyin oʻchiriladi.'
+  project-files-lost:
+    message: 'Server xatosi tufayli %count% ta loyihangning fayllari yoʻqoldi: %projects%. Ularni Pocket Code''dan qayta yuklamaguningcha ular yashirin boʻladi. 14 kun ichida qayta yuklanmagan loyihalar oʻchiriladi.'
+    more: 'va yana %count% ta'
+  moderation-warning:
+    message: 'Moderator kontenting haqidagi shikoyatni koʻrib chiqdi va u hamjamiyat qoidalarimizni buzishini aniqladi. Iltimos, qoidalarga amal qil, aks holda keyingi safar hisobing toʻxtatilishi mumkin.'
+    deletion: 'Yashirilgan kontent, agar uni tuzatmasang yoki eʼtiroz bildirmasang, yashirilganidan %days% kun oʻtib oʻchiriladi.'
+  moderation-hidden:
+    message: 'Moderator kontenting haqidagi shikoyatni koʻrib chiqdi va u hamjamiyat qoidalarimizni buzgani uchun uni yashirdi.'
+  moderation-reason:
+    image: '{1}Rasm (%names%) kattalar uchun kontentga oʻxshardi.|]1,Inf]Baʼzi rasmlar (%names%) kattalar uchun kontentga oʻxshardi.'
+    screenshot: 'Skrinshot kattalar uchun kontentga oʻxshardi.'
+    cover: 'Muqova rasmi kattalar uchun kontentga oʻxshardi.'
+    text:
+      name: 'Nom bu faqat kattalar uchun ekanini aytayotganga oʻxshardi.'
+      description: 'Tavsif bu faqat kattalar uchun ekanini aytayotganga oʻxshardi.'
+      credits: 'Izohlar va mualliflar bu faqat kattalar uchun ekanini aytayotganga oʻxshardi.'
+      about: '“Men haqimda” matning bu faqat kattalar uchun ekanini aytayotganga oʻxshardi.'
+      currently_working_on: '“Hozir ustida ishlayapman” matning bu faqat kattalar uchun ekanini aytayotganga oʻxshardi.'
+      username: 'Foydalanuvchi noming bu faqat kattalar uchun ekanini aytayotganga oʻxshardi.'
+    category:
+      copyright: 'Sabab: unda boshqa odamlarning ishi ruxsatsiz ishlatilganga oʻxshaydi.'
+      sexual_content: 'Sabab: u kattalar uchun kontentga oʻxshardi.'
+      graphic_violence: 'Sabab: u haddan tashqari zoʻravonlikka oʻxshardi.'
+      hateful_content: 'Sabab: u boshqalarga nisbatan haqoratli yoki nafratli koʻrinardi.'
+      improper_rating: 'Sabab: u bolalar uchun mos emasga oʻxshardi.'
+      spam: 'Sabab: u spamga oʻxshardi.'
+      other: 'Sabab: moderator unda muammo topdi.'
+      inappropriate: 'Sabab: u nomaqbul koʻrinardi.'
+      harassment: 'Sabab: u kimnidir haqorat qilish yoki bezovta qilishga oʻxshardi.'
+      impersonation: 'Sabab: u oʻzini boshqa birov qilib koʻrsatayotganga oʻxshardi.'
+      inappropriate_profile: 'Sabab: profil nomaqbul koʻrinardi.'
+      spam_account: 'Sabab: u spam hisobga oʻxshardi.'
+      inappropriate_content: 'Sabab: u nomaqbul koʻrinardi.'
 clipboard:
   success: "Havola nusxalandi!"
   success_project: "Loyiha havolasi nusxalandi!"
@@ -627,7 +697,6 @@ previous: "Oldingi"
 media-packages:
   title: "Media kutubxonasi"
   description: "Quyidagi toifalarda loyihalaringga qoʻshish uchun aktyorlar va obyektlarni topishing mumkin."
-  theme-special: "%flavor% mavzusi uchun maxsus"
   search-results: "Media kutubxonasidagi qidiruv natijalari"
 flavor:
   pocketcode: Pocket Code
@@ -844,6 +913,10 @@ studio:
       ban_failed: "Bu aʼzoni bloklashda nimadir xato ketdi. Keyinroq urinib koʻr."
       demote_member: "Adminni aʼzoga tushirish"
       demotion_failed: "Bu adminni tushirishda nimadir xato ketdi. Keyinroq urinib koʻr."
+      banned_members: 'Bloklangan aʼzolar'
+      unban_member: 'Blokdan chiqarish'
+      unban_hint: 'Blokdan chiqarilgan odam odatdagidek qayta qoʻshila oladi. Bu uni studiyaga avtomatik qaytarmaydi.'
+      unban_failed: 'Bloklangan aʼzolarni yangilab boʻlmadi. Iltimos, qayta urinib koʻr.'
     join_requests:
       title: "Qoʻshilish soʻrovlari"
       accept: "Qabul qilish"
@@ -860,6 +933,29 @@ studio:
       studio_description: "Tavsif"
       toggle_allow_comments: "Izohlar"
       toggle_privacy: "Ommaviy"
+    banned: 'Sen bu studiyaga qoʻshila olmaysan.'
+    invites:
+      title: 'Taklif kodlari'
+      hint: 'Kod yoki havolaga ega boʻlgan har kim tasdiqlashsiz darhol bu studiyaga qoʻshiladi. Kodni bekor qilish allaqachon qoʻshilgan aʼzolarga taʼsir qilmaydi.'
+      expires_on: 'Amal qilish muddati (ixtiyoriy)'
+      max_uses: 'Maks. foydalanish soni (ixtiyoriy)'
+      create: 'Taklif kodini yaratish'
+      uses: '%uses% marta ishlatilgan'
+      uses_max: '%max% martadan %uses% marta ishlatilgan'
+      expires: 'Muddati: %date%'
+      qr_alt: 'Studiyaga qoʻshilish uchun bu QR kodni skanerla'
+      copy_link: 'Havolani nusxalash'
+      copied: 'Taklif havolasi buferga nusxalandi!'
+      revoke: 'Bekor qilish'
+      none: 'Hali taklif kodlari yoʻq.'
+      error: 'Taklif kodi bilan nimadir xato ketdi. Iltimos, qayta urinib koʻr.'
+  join_with_code:
+    title: 'Kod orqali qoʻshilish'
+    hint: 'Oʻqituvchingdan yoki studiya adminidan taklif kodi oldingmi? Studiyaga qoʻshilish uchun uni shu yerga kirit.'
+    code: 'Taklif kodi'
+    invalid: 'Bu kod yaroqsiz. Uning muddati tugagan yoki u bekor qilingan boʻlishi mumkin.'
+    banned: 'Sen bu studiyadan bloklangansan.'
+    rate_limited: 'Juda koʻp urinish. Iltimos, bir necha daqiqa kutib, qayta urinib koʻr.'
 media_library:
   file:
     size: "Hajmi: %size%"
@@ -929,3 +1025,8 @@ moderation:
     user_own: "Hamjamiyat shikoyatlari sababli hisobing toʻxtatildi. Bu qarorga eʼtiroz bildirishing mumkin."
 Reports: "Shikoyatlar"
 members: "aʼzolar"
+inactiveAccount:
+  subject: 'Catrobat hisobing oʻchiriladi'
+  title: 'Seni sogʻindik!'
+  content: 'Sen ikki yildan beri “%username%” Catrobat hisobingga kirmading va unda hech qanday loyiha yoki izoh yoʻq. Hamjamiyatimiz faol boʻlib qolishi uchun uni %days% kundan keyin oʻchiramiz. Agar uni saqlab qolmoqchi boʻlsang, bir marta kirishing kifoya.'
+  button: 'Hisobimni saqlash uchun kirish'

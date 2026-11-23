@@ -217,8 +217,21 @@ class TranslationDelegate
     }
 
     $texts = ['name' => $project->getName(), 'description' => $project->getDescription(), 'credits' => $project->getCredits()];
+    $source = $source_language;
+    if (null === $source) {
+      $available = array_filter($texts, static fn (?string $text): bool => null !== $text && '' !== trim($text));
+      if ([] === $available) {
+        return false;
+      }
+
+      $detected = $this->api->detectLanguage(implode("\n", $available));
+      $source = null !== $detected && '' !== $detected['language'] ? $detected['language'] : null;
+      if (null === $source) {
+        return false;
+      }
+    }
+
     $translated = [];
-    $detected = null;
     foreach ($texts as $field => $text) {
       // Uploads store missing descriptions and credits as ''; there is nothing to translate or show.
       if (null === $text || '' === trim($text)) {
@@ -226,20 +239,16 @@ class TranslationDelegate
       }
 
       // LibreTranslateApi logs the failure.
-      $result = $this->api->translate($text, $source_language, $target_language, self::JOB_CALL_TIMEOUT);
+      $result = $this->api->translate($text, $source, $target_language, self::JOB_CALL_TIMEOUT);
       if (!$result instanceof TranslationResult) {
         return false;
       }
 
       $translated[$field] = $result->translation;
-      if ('name' === $field) {
-        $detected = $result->detected_source_language;
-      }
     }
 
-    $source = $source_language ?? $detected;
     $name = $translated['name'] ?? null;
-    if (null === $source || null === $name) {
+    if (null === $name) {
       return false;
     }
 

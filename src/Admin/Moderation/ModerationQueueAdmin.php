@@ -218,6 +218,7 @@ class ModerationQueueAdmin extends AbstractAdmin
   {
     $filter
       ->add('content_type', null, ['label' => 'Content Type'])
+      ->add('content_id', null, ['label' => 'Content ID'])
       ->add('state', NumberFilter::class, [
         'field_type' => SymfonyChoiceType::class,
         'field_options' => ['choices' => ['New' => 1, 'Accepted' => 2, 'Rejected' => 3]],

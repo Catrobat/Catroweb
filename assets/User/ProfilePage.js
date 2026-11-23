@@ -210,10 +210,10 @@ function initUserProjects() {
       url,
       property,
       theme,
-      999,
+      30,
       emptyMessage,
       authHeaders,
-    )
+    ).loadMoreOnPageScroll()
   })
 }
 

@@ -5471,6 +5471,10 @@ components:
         prize:
           type: string
           description: 'Prize for anniversary notifications'
+        review_url:
+          type: string
+          example: '/admin/moderation/report/list?filter%5Bcontent_id%5D%5Btype%5D=3&filter%5Bcontent_id%5D%5Bvalue%5D=1234'
+          description: 'Admin page to review the content, for moderation notifications sent to admins'
 
     ######################################################
     # Achievement Schemas
@@ -6133,7 +6137,7 @@ components:
           example: 5
         scratch_projects:
           type: array
-          description: "Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it."
+          description: "Only filled for type=scratch (type=all leaves Scratch out, as its live search is slow). Live results of Scratch's public project search (cached for a few minutes, rate limited per client, empty when Scratch is unavailable). Projects already imported to this site are left out (they appear under projects), and so are projects not saved since Scratch 3 launched (2019-01-02), which are in an older format that cannot be converted. Import one with POST /projects/scratch/{id}, which converts it."
           items:
             type: object
             properties:

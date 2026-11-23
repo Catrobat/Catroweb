@@ -219,4 +219,16 @@ class CodeStatisticsParserTest extends TestCase
     self::assertSame(CodeStatisticsParser::CURRENT_SCORING_VERSION, $stats->getScoringVersion());
     self::assertSame(4, $stats->getScoreTotal());
   }
+
+  public function testSpriteStoredInsideCloneBrickIsCountedOnce(): void
+  {
+    // Cat is written in full inside the CloneBrick; its object list entry is only a back-reference.
+    $stats = $this->parser->parse($this->fixtures_path.'clone_target_project.xml');
+
+    self::assertSame(2, $stats->getObjects());
+    self::assertSame(3, $stats->getScripts());
+    self::assertSame(3, $stats->getBricks());
+    // Cat's two tap scripts are found: tapped scripts on the same object (2 points).
+    self::assertSame(2, $stats->getScoreParallelism());
+  }
 }

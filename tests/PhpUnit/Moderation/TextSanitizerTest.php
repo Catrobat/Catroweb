@@ -169,6 +169,34 @@ class TextSanitizerTest extends TestCase
     ];
   }
 
+  #[DataProvider('messengerHandleProvider')]
+  public function testRedactsMessengerHandles(string $input, string $expected): void
+  {
+    $this->assertSame($expected, $this->sanitizer->sanitizeWithLocale($input));
+  }
+
+  /**
+   * @return array<string, array{string, string}>
+   */
+  public static function messengerHandleProvider(): array
+  {
+    return [
+      'russian telegram channels' => ['ТГК: @Some_Chan @OtherOne', 'ТГК: [contact removed]'],
+      'tg' => ['my tg @someuser', 'my tg [contact removed]'],
+      'telegram' => ['Telegram - @someuser, @second', 'Telegram - [contact removed]'],
+      'discord' => ['add me on discord @coolkid', 'add me on discord [contact removed]'],
+      'snapchat' => ['SNAPCHAT: @cool.kid', 'SNAPCHAT: [contact removed]'],
+      'german spelling' => ['telegramm @someuser', 'telegramm [contact removed]'],
+      'is' => ['my telegram is @someuser', 'my telegram is [contact removed]'],
+      'arrow' => ['tg -> @someuser', 'tg -> [contact removed]'],
+      'snap the coding language stays' => ['I made this in Snap @lena thanks', 'I made this in Snap @lena thanks'],
+      'signal as game word stays' => ['when I receive signal @player1', 'when I receive signal @player1'],
+      'mention stays' => ['thanks @coolkid for the art', 'thanks @coolkid for the art'],
+      'messenger without handle stays' => ['my most used app is Discord', 'my most used app is Discord'],
+      'word containing tg stays' => ['bigtg @coolkid', 'bigtg @coolkid'],
+    ];
+  }
+
   // --- URI scheme redaction ---
 
   #[DataProvider('uriSchemeProvider')]

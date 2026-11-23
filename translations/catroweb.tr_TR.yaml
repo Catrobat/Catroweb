@@ -12,8 +12,6 @@ username: Kullanıcı adı
 password: Şifre
 email: E-Posta
 about: Catrobat hakkında
-chat: Sohbet ve forumlar
-others: Diğerleri
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: Her hangi bir yapanlar yok.
 notesAndCreditsDescription: Bu projeyi nasıl yarattınız? Başkalarının fikirlerini, senaryolarını veya sanat eserlerini kullandınız mı? Onlara burada teşekkür edin.
 projectImportedFromScratch: 'Bu proje MIT Scratch''ten içe aktarıldı. Orijinal projeye göz atabilirsin:'
 scratchImportedProjectLinkHere: buradan.
-country: Ülke
 privacyPolicy: Gizlilik politikası
 projectDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
@@ -47,7 +44,6 @@ doesNotExist: 'İstenen kaynak mevcut değil.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
 tryAgainButton: 'Tekrar dene'
 more: 'daha fazla'
-less: 'daha az'
 show-more: 'Daha fazla göster'
 more-information: 'Daha fazla bilgi'
 less-information: 'Daha az bilgi'
@@ -68,7 +64,6 @@ users: "Kullanıcılar"
 studios: "Stüdyolar"
 oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
 oauthInfo: 'Giriş yapmak için harici bir hesap kullandın. Senin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adını değiştirmek veya hesabın için yeni bir şifre oluşturmak istiyorsan lütfen profil sayfana git.'
-statistics: "İstatistik"
 languageSelection: "Dil seçimi"
 color-scheme:
   title: 'Tema'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "Bu projeye tepki verenler"
     all: "Tüm"
-  languageVersion: 'Catrobat dil sürümü: %languageVersion%'
   updateAppHeaderDownload: İndirme mümkün değil
   updateAppTextDownload: Lütfen uygulamanı en yeni sürüme güncelle. Tüm Android özelliklerinin henüz iOS'ta bulunmadığını unutma.
   checkout_this_project: Bu Catrobat projesine göz at
@@ -218,6 +212,18 @@ project:
   createTranslation: Çeviri oluştur
   deletedComment: '**Silindi**'
   notForKids: Çocuklar için uygun değil
+  customUrl:
+    title: 'Özel URL'
+    hint: 'Bu projenin bağlantısı için kısa bir ad seç: 3-50 küçük harf, rakam veya kısa çizgi. Kaldırmak için boş bırak.'
+  playInBrowser: 'Tarayıcıda oyna'
+  madeWithVersion: 'Uygulama sürümü %app% ile yapıldı (Catrobat %language%)'
+  oldVersion:
+    title: 'Eski bir uygulama sürümüyle yapıldı'
+    text: 'Bu proje henüz tarayıcıda oynanamıyor. Güncellemek için Pocket Code''da aç ve tekrar yükle.'
+  translateAgain: 'Bu dillerle tekrar çevir'
+  prefillMachineTranslation: 'Makine çevirisini doldur'
+  machineTranslationFailed: 'Makine çevirisi şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.'
+  machineTranslationUnsupported: 'Bu dil için makine çevirisi kullanılamıyor.'
 remixGraph:
   showRemixGraph: 'Remixleri'
   by: 'değiştir'
@@ -407,6 +413,10 @@ search:
   noProjects: Proje bulunamadı
   noStudios: Stüdyo bulunamadı
   sameSearchMessage: "Görünüşe göre zaten buradasın! Farklı bir arama denemek ister misin?"
+  noResults: '“%query%” için sonuç yok'
+  scratchProjects: 'Scratch projeleri'
+  scratchConverting: '%app% için dönüştürülüyor…'
+  scratchConvertingSnackbar: '“%name%” dönüştürülüyor — bu birkaç saniye sürebilir'
 menu:
   profile: Benim profilim
   login: Oturum aç
@@ -515,6 +525,10 @@ time:
 user:
   verification:
     email: 'Eposta adresinizi doğrulayın'
+  leaderboard:
+    all_time: 'En iyi yaratıcılar'
+    this_week: 'Bu haftanın en iyi yaratıcıları'
+    points: 'puan'
 api:
   registerUser:
     emailMissing: 'E-posta eksik'
@@ -550,6 +564,9 @@ api:
     descriptionTooLong: 'Açıklama çok uzun'
     creditsTooLong: 'Notlar ve krediler çok uzun'
     screenshotInvalid: 'Proje ekran görüntüsü geçersiz veya desteklenmiyor'
+    slugInvalid: 'Özel URL, en az bir harf içeren 3-50 küçük harf, rakam veya tek kısa çizgiden oluşmalıdır'
+    slugReserved: 'Bu özel URL ayrılmış'
+    slugTaken: 'Bu özel URL zaten alınmış'
   projectsPost:
     invalid_checksum: 'Geçersiz sağlama toplamı. Tekrar yüklemeyi deneyin!'
     upload_error: 'Yüklenirken hata oluştu. Tekrar yüklemeyi deneyin!'
@@ -589,6 +606,24 @@ codeView:
   scripts: 'Komut dosyaları'
   looks: 'Görüntü'
   sounds: 'Sesler'
+  unavailable: 'Bu projenin kodu gösterilemiyor.'
+  translation:
+    action: 'Çevir'
+    translateTo: '%language% diline çevir'
+    translateAgain: 'Tekrar çevir'
+    stillShowing: 'Hâlâ %language% gösteriliyor'
+    original: 'Orijinali göster'
+    resume: 'Çevirmeye devam et'
+    source: 'Kaynak'
+    target: 'Hedef'
+    auto: 'Dili algıla'
+    loading: 'Kod çevriliyor…'
+    complete: '%language% diline makine çevirisi yapıldı'
+    partial: 'Kısmen çevrildi'
+    partialInLanguage: 'Kısmen %language% diline çevrildi'
+    sourceRequired: 'Bu kodu çevirmek için kaynak dili seç.'
+    unsupported: 'Bu diller için çeviri kullanılamıyor.'
+    error: 'Kod çevrilemedi. Tekrar dene.'
 codeStatistics:
   title: "Kod istatistikleri"
   error: "Kod istatistikleri görüntülenemez."
@@ -639,6 +674,41 @@ catro-notifications:
   project-deleted:
     message: '"%project_name%" projen etkinlik olmadığı için otomatik olarak kaldırıldı. Hâlâ paylaşmak istiyorsan yeniden yükle.'
   noProjects: "Görünüşe göre hiç proje bildirimin yok."
+  studio-deletion-warning:
+    message: '“%studio_name%” stüdyonda hiç proje yok ve 90 gündür içinde hiçbir şey olmadı. Bir proje eklemezsen %days% gün içinde silinecek.'
+  project-files-lost:
+    message: 'Bir sunucu hatası, %count% projenin dosyalarının kaybolmasına neden oldu: %projects%. Pocket Code''dan tekrar yükleyene kadar gizli kalacaklar. 14 gün içinde tekrar yüklenmeyen projeler silinecek.'
+    more: 've %count% tane daha'
+  moderation-warning:
+    message: 'Bir moderatör içeriğinle ilgili bir bildirimi inceledi ve topluluk kurallarımızı çiğnediğini tespit etti. Lütfen kurallara uy, yoksa bir dahaki sefere hesabın askıya alınabilir.'
+    deletion: 'Gizlenen içerik, düzeltmez veya itiraz etmezsen gizlendikten %days% gün sonra silinecek.'
+  moderation-hidden:
+    message: 'Bir moderatör içeriğinle ilgili bir bildirimi inceledi ve topluluk kurallarımızı çiğnediği için gizledi.'
+  moderation-reason:
+    image: '{1}Bir görsel (%names%) yetişkin içeriği gibi görünüyordu.|]1,Inf]Bazı görseller (%names%) yetişkin içeriği gibi görünüyordu.'
+    screenshot: 'Ekran görüntüsü yetişkin içeriği gibi görünüyordu.'
+    cover: 'Kapak görseli yetişkin içeriği gibi görünüyordu.'
+    text:
+      name: 'Ad, bunun sadece yetişkinlere yönelik olduğunu söylüyor gibi görünüyordu.'
+      description: 'Açıklama, bunun sadece yetişkinlere yönelik olduğunu söylüyor gibi görünüyordu.'
+      credits: 'Notlar ve emeği geçenler, bunun sadece yetişkinlere yönelik olduğunu söylüyor gibi görünüyordu.'
+      about: '“Hakkımda” metnin, bunun sadece yetişkinlere yönelik olduğunu söylüyor gibi görünüyordu.'
+      currently_working_on: '“Şu an üzerinde çalıştığım” metnin, bunun sadece yetişkinlere yönelik olduğunu söylüyor gibi görünüyordu.'
+      username: 'Kullanıcı adın, bunun sadece yetişkinlere yönelik olduğunu söylüyor gibi görünüyordu.'
+    category:
+      copyright: 'Sebep: başkalarının çalışmalarını izinsiz kullanıyor gibi görünüyor.'
+      sexual_content: 'Sebep: yetişkin içeriği gibi görünüyordu.'
+      graphic_violence: 'Sebep: fazla şiddet içeriyor gibi görünüyordu.'
+      hateful_content: 'Sebep: başkalarına karşı incitici veya nefret dolu görünüyordu.'
+      improper_rating: 'Sebep: çocuklar için uygun değil gibi görünüyordu.'
+      spam: 'Sebep: spam gibi görünüyordu.'
+      other: 'Sebep: bir moderatör bununla ilgili bir sorun buldu.'
+      inappropriate: 'Sebep: uygunsuz görünüyordu.'
+      harassment: 'Sebep: birine zorbalık veya taciz ediyor gibi görünüyordu.'
+      impersonation: 'Sebep: başka biri gibi davranıyor gibi görünüyordu.'
+      inappropriate_profile: 'Sebep: profil uygunsuz görünüyordu.'
+      spam_account: 'Sebep: spam hesabı gibi görünüyordu.'
+      inappropriate_content: 'Sebep: uygunsuz görünüyordu.'
 clipboard:
   success: Bağlantı panoya kopyalandı!
   success_project: Proje bağlantısı panoya kopyalandı!
@@ -648,7 +718,6 @@ previous: Önceki
 media-packages:
   title: Medya-Paketler
   description: Aşağıdaki kategorilerde size Cep Kodu projeleri eklemek için ek aktörler ve nesneler bulabilirsiniz.
-  theme-special: "%flavor% Tema Özel"
   search-results: Medya kitaplığı arama sonuçları
 flavor:
   pocketcode: Cep Kodu
@@ -865,6 +934,10 @@ studio:
       ban_failed: 'Bu üye yasaklanırken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
       demote_member: 'Yöneticiyi üyeliğe düşür'
       demotion_failed: 'Bu yöneticinin yetkisi düşürülürken bir sorun oluştu. Daha sonra tekrar dene.'
+      banned_members: 'Yasaklanan üyeler'
+      unban_member: 'Yasağı kaldır'
+      unban_hint: 'Yasağı kaldırmak, kişinin normal şekilde tekrar katılmasına izin verir. Onu stüdyoya geri eklemez.'
+      unban_failed: 'Yasaklanan üyeler güncellenemedi. Lütfen tekrar dene.'
     join_requests:
       title: 'Katılma istekleri'
       accept: 'Kabul et'
@@ -881,6 +954,29 @@ studio:
       studio_description: 'Açıklama'
       toggle_allow_comments: 'Yorumlar'
       toggle_privacy: 'Herkese açık'
+    banned: 'Bu stüdyoya katılamazsın.'
+    invites:
+      title: 'Davet kodları'
+      hint: 'Kodu veya bağlantıyı olan herkes, onay gerekmeden bu stüdyoya hemen katılır. Bir kodu iptal etmek, zaten katılmış üyeleri etkilemez.'
+      expires_on: 'Son geçerlilik tarihi (isteğe bağlı)'
+      max_uses: 'En fazla kullanım (isteğe bağlı)'
+      create: 'Davet kodu oluştur'
+      uses: '%uses% kez kullanıldı'
+      uses_max: '%max% kullanımdan %uses% kez kullanıldı'
+      expires: 'Son geçerlilik: %date%'
+      qr_alt: 'Stüdyoya katılmak için bu QR kodunu tara'
+      copy_link: 'Bağlantıyı kopyala'
+      copied: 'Davet bağlantısı panoya kopyalandı!'
+      revoke: 'İptal et'
+      none: 'Henüz davet kodu yok.'
+      error: 'Davet koduyla ilgili bir sorun oluştu. Lütfen tekrar dene.'
+  join_with_code:
+    title: 'Kodla katıl'
+    hint: 'Öğretmeninden veya bir stüdyo yöneticisinden davet kodu mu aldın? Stüdyoya katılmak için buraya gir.'
+    code: 'Davet kodu'
+    invalid: 'Bu kod geçerli değil. Süresi dolmuş veya iptal edilmiş olabilir.'
+    banned: 'Bu stüdyodan yasaklandın.'
+    rate_limited: 'Çok fazla deneme. Lütfen birkaç dakika bekle ve tekrar dene.'
 media_library:
   file:
     size: 'Boyutu: %size%'
@@ -950,3 +1046,8 @@ moderation:
     user_own: "Hesabın topluluk bildirimleri nedeniyle askıya alındı. Bu karara itiraz edebilirsin."
 Reports: Bildirimler
 members: üye
+inactiveAccount:
+  subject: 'Catrobat hesabın silinecek'
+  title: 'Seni özledik!'
+  content: 'İki yıldır “%username%” Catrobat hesabına giriş yapmadın ve hesabında hiç proje veya yorum yok. Topluluğumuzu canlı tutmak için hesabını %days% gün içinde sileceğiz. Hesabını tutmak istiyorsan bir kez giriş yapman yeterli.'
+  button: 'Hesabımı tutmak için giriş yap'

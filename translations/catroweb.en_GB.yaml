@@ -12,8 +12,6 @@ username: Username
 password: Password
 email: E-Mail
 about: About Catrobat
-chat: Chat and forums
-others: Others
 googlePlay: Google Play
 iosAppStore: iOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: No credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
 scratchImportedProjectLinkHere: here.
-country: Country
 privacyPolicy: Privacy Policy
 projectDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
@@ -47,7 +44,6 @@ doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Please try again!'
 tryAgainButton: 'Try again'
 more: 'more'
-less: 'less'
 show-more: 'More information'
 more-information: 'More information'
 less-information: 'Less information'
@@ -68,7 +64,6 @@ users: "Users"
 studios: "Studios"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-statistics: "Statistics"
 languageSelection: "Language selection"
 color-scheme:
   title: 'Theme'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: "People who reacted to that project"
     all: "All"
-  languageVersion: 'Catrobat language version: %languageVersion%'
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on iOS.
   checkout_this_project: Checkout this Catrobat project
@@ -218,6 +212,18 @@ project:
   createTranslation: Create translation
   deletedComment: '**Deleted**'
   notForKids: Not safe for kids
+  customUrl:
+    title: 'Custom URL'
+    hint: 'Choose a short name for this project''s link: 3-50 lowercase letters, digits or hyphens. Leave empty to remove it.'
+  playInBrowser: 'Play in browser'
+  madeWithVersion: 'Made with app version %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Made with an older app version'
+    text: 'This project can''t be played in the browser yet. Open it in Pocket Code and upload it again to update it.'
+  translateAgain: 'Translate again with these languages'
+  prefillMachineTranslation: 'Fill in machine translation'
+  machineTranslationFailed: 'Machine translation is not available right now. Please try again later.'
+  machineTranslationUnsupported: 'Machine translation is not available for this language.'
 remixGraph:
   showRemixGraph: 'Remix graph'
   by: 'by'
@@ -237,8 +243,7 @@ remixGraph:
   projectNotAvailableErrorDescription: 'The project is not available any more!'
   projectNotAvailable: 'Not available'
   projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+noReply: 'This is an automated message - Please do not reply directly to this email.'
 newAccountConfirmation:
   subject: "Verify your email address"
   welcome: "Welcome to Catrobat!"
@@ -408,6 +413,10 @@ search:
   noProjects: No projects found
   noStudios: No studios found
   sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noResults: 'No results for “%query%”'
+  scratchProjects: 'Scratch projects'
+  scratchConverting: 'Converting for %app%…'
+  scratchConvertingSnackbar: 'Converting “%name%” — this can take a few seconds'
 menu:
   profile: My Profile
   login: Login
@@ -517,6 +526,10 @@ time:
 user:
   verification:
     email: 'Verify your email'
+  leaderboard:
+    all_time: 'Top creators'
+    this_week: 'Top creators this week'
+    points: 'points'
 api:
   registerUser:
     emailMissing: 'Email missing'
@@ -552,6 +565,9 @@ api:
     descriptionTooLong: 'Description too long'
     creditsTooLong: 'Notes and credits too long'
     screenshotInvalid: 'Project screenshot invalid or not supported'
+    slugInvalid: 'Custom URL must be 3-50 lowercase letters, digits or single hyphens, with at least one letter'
+    slugReserved: 'This custom URL is reserved'
+    slugTaken: 'This custom URL is already taken'
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -591,6 +607,24 @@ codeView:
   scripts: 'Scripts'
   looks: 'Looks'
   sounds: 'Sounds'
+  unavailable: 'This project''s code can''t be shown.'
+  translation:
+    action: 'Translate'
+    translateTo: 'Translate to %language%'
+    translateAgain: 'Translate again'
+    stillShowing: 'Still showing %language%'
+    original: 'Show original'
+    resume: 'Continue translating'
+    source: 'From'
+    target: 'To'
+    auto: 'Detect language'
+    loading: 'Translating code…'
+    complete: 'Machine translated into %language%'
+    partial: 'Partially translated'
+    partialInLanguage: 'Partially translated into %language%'
+    sourceRequired: 'Choose the source language to translate this code.'
+    unsupported: 'Translation is unavailable for these languages.'
+    error: 'Could not translate the code. Try again.'
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
@@ -641,6 +675,41 @@ catro-notifications:
   project-deleted:
     message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
   noProjects: "It looks like you don't have any project notifications."
+  studio-deletion-warning:
+    message: 'Your studio "%studio_name%" has no projects and nothing happened in it for 90 days. It will be deleted in %days% days unless you add a project.'
+  project-files-lost:
+    message: 'A server error lost the files of %count% of your projects: %projects%. They are hidden until you upload them again from Pocket Code. Projects that are not uploaded again within 14 days will be deleted.'
+    more: 'and %count% more'
+  moderation-warning:
+    message: 'A moderator reviewed a report about your content and found that it breaks our community rules. Please follow the rules, or your account may be suspended next time.'
+    deletion: 'The hidden content will be deleted %days% days after it was hidden unless you fix it or appeal.'
+  moderation-hidden:
+    message: 'A moderator reviewed a report about your content and hid it because it breaks our community rules.'
+  moderation-reason:
+    image: '{1}An image (%names%) looked like adult content.|]1,Inf]Some images (%names%) looked like adult content.'
+    screenshot: 'The screenshot looked like adult content.'
+    cover: 'The cover image looked like adult content.'
+    text:
+      name: 'The name looked like it says this is only for adults.'
+      description: 'The description looked like it says this is only for adults.'
+      credits: 'The notes and credits looked like they say this is only for adults.'
+      about: 'Your "About me" text looked like it says this is only for adults.'
+      currently_working_on: 'Your "Currently working on" text looked like it says this is only for adults.'
+      username: 'Your username looked like it says this is only for adults.'
+    category:
+      copyright: 'Reason: it seems to use work of other people without permission.'
+      sexual_content: 'Reason: it looked like adult content.'
+      graphic_violence: 'Reason: it looked too violent.'
+      hateful_content: 'Reason: it looked hurtful or hateful towards others.'
+      improper_rating: 'Reason: it looked like it is not suitable for kids.'
+      spam: 'Reason: it looked like spam.'
+      other: 'Reason: a moderator found a problem with it.'
+      inappropriate: 'Reason: it looked inappropriate.'
+      harassment: 'Reason: it looked like it is bullying or harassing someone.'
+      impersonation: 'Reason: it looked like it pretends to be someone else.'
+      inappropriate_profile: 'Reason: the profile looked inappropriate.'
+      spam_account: 'Reason: it looked like a spam account.'
+      inappropriate_content: 'Reason: it looked inappropriate.'
 clipboard:
   success: Link copied to clipboard!
   success_project: Link to project copied to clipboard!
@@ -650,7 +719,6 @@ previous: Previous
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to your Pocket Code projects.
-  theme-special: "%flavor% Theme Special"
   search-results: Media library search results
 flavor:
   pocketcode: Pocket Code
@@ -867,6 +935,10 @@ studio:
       ban_failed: 'Something went wrong while banning this member. Try again later.'
       demote_member: 'Demote admin to member'
       demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
+      banned_members: 'Banned members'
+      unban_member: 'Remove ban'
+      unban_hint: 'Removing a ban lets the person rejoin normally. It does not add them back to the studio.'
+      unban_failed: 'Could not update the banned members. Please try again.'
     join_requests:
       title: 'Join Requests'
       accept: 'Accept'
@@ -883,6 +955,29 @@ studio:
       studio_description: 'Description'
       toggle_allow_comments: 'Comments'
       toggle_privacy: 'Public'
+    banned: 'You can''t join this studio.'
+    invites:
+      title: 'Invite codes'
+      hint: 'Anyone with the code or link joins this studio right away, no approval needed. Revoking a code keeps the members who already joined.'
+      expires_on: 'Expires on (optional)'
+      max_uses: 'Max. uses (optional)'
+      create: 'Create invite code'
+      uses: 'Used %uses% times'
+      uses_max: 'Used %uses% of %max% times'
+      expires: 'Expires %date%'
+      qr_alt: 'Scan this QR code to join the studio'
+      copy_link: 'Copy link'
+      copied: 'Invite link copied to clipboard!'
+      revoke: 'Revoke'
+      none: 'No invite codes yet.'
+      error: 'Something went wrong with the invite code. Please try again.'
+  join_with_code:
+    title: 'Join with a code'
+    hint: 'Got an invite code from your teacher or a studio admin? Enter it here to join the studio.'
+    code: 'Invite code'
+    invalid: 'This code is not valid. It may have expired or been revoked.'
+    banned: 'You have been banned from this studio.'
+    rate_limited: 'Too many attempts. Please wait a few minutes and try again.'
 media_library:
   file:
     size: 'Size: %size%'
@@ -952,3 +1047,8 @@ moderation:
     user_own: "Your account has been suspended due to community reports. You may appeal this decision."
 Reports: Reports
 members: members
+inactiveAccount:
+  subject: 'Your Catrobat account will be deleted'
+  title: 'We miss you!'
+  content: 'You have not logged in to your Catrobat account "%username%" for two years and it has no projects or comments. To keep our community lively, we will delete it in %days% days. If you want to keep it, just log in once.'
+  button: 'Log in to keep my account'

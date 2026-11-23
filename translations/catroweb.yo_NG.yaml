@@ -12,8 +12,6 @@ username: "Orúkọ olùmúlò"
 password: "Ọ̀rọ̀ aṣínà"
 email: "Ímeèlì"
 about: "Nípa Catrobat"
-chat: "Ìjíròrò àti àwọn àpéjọ"
-others: "Àwọn mìíràn"
 googlePlay: Google Play Store
 iosAppStore: "iOS App Store"
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: "Kò sí àkọsílẹ̀ àti ìdúpẹ́."
 notesAndCreditsDescription: "Báwo ni o ṣe ṣẹ̀dá iṣẹ́ yìí? Ṣé o lo èrò, ìwé àfọwọ́kọ tàbí iṣẹ́ ọnà àwọn ẹlòmíràn? Dúpẹ́ lọ́wọ́ wọn níbí."
 projectImportedFromScratch: "A kó iṣẹ́ yìí wọlé láti MIT Scratch. O lè wo iṣẹ́ àtilẹ̀wá náà"
 scratchImportedProjectLinkHere: "níbí."
-country: "Orílẹ̀-èdè"
 privacyPolicy: "Ìlànà Ìpamọ́"
 projectDetails: "Àlàyé"
 somethingWentWrong: "Háà, nǹkan kan kò ṣiṣẹ́. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i!"
@@ -47,7 +44,6 @@ doesNotExist: "Ohun tí o béèrè kò sí."
 pleaseTryAgain: "Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i!"
 tryAgainButton: "Gbìyànjú lẹ́ẹ̀kan sí i"
 more: "síi"
-less: "dínkù"
 show-more: "Fi púpọ̀ hàn"
 more-information: "Àlàyé síwájú sí i"
 less-information: "Àlàyé díẹ̀"
@@ -68,7 +64,6 @@ users: "Olùmúlò"
 studios: "Àwọn ilé-iṣẹ́ ọnà"
 oauthPopUpTitle: "Àlàyé ìwọlé pẹ̀lú àkáǹtì òde"
 oauthInfo: "O ṣẹ̀ṣẹ̀ lo àkáǹtì òde láti wọlé. A ṣẹ̀dá orúkọ olùmúlò àìròtẹ́lẹ̀ fún ọ. Tí o bá fẹ́ yí orúkọ olùmúlò rẹ padà tàbí ṣẹ̀dá ọ̀rọ̀ aṣínà tuntun fún àkáǹtì rẹ, jọ̀wọ́ lọ sí ojú-ìwé profaili rẹ."
-statistics: "Ìṣirò"
 languageSelection: "Yíyan èdè"
 color-scheme:
   title: "Àwọ̀"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "Àwọn ènìyàn tí ó hùwà sí iṣẹ́ yẹn"
     all: "All"
-  languageVersion: "Ẹ̀yà èdè Catrobat: %languageVersion%"
   updateAppHeaderDownload: "Ìgbàsílẹ̀ kò ṣeé ṣe"
   updateAppTextDownload: "Jọ̀wọ́ ṣe ìmúdójúìwọ̀n áàpù rẹ sí ẹ̀yà tuntun jùlọ. Mọ̀ pé kì í ṣe gbogbo ẹ̀yà Android ló ti wà lórí iOS."
   checkout_this_project: "Wo iṣẹ́ Catrobat yìí"
@@ -200,6 +194,19 @@ project:
   createTranslation: "Ṣẹ̀dá ìtumọ̀"
   deletedComment: "**A ti pa á rẹ́**"
   notForKids: "Kò yẹ fún àwọn ọmọdé"
+  customUrl:
+    title: 'URL àdáni'
+    hint: 'Yan orúkọ kúkúrú fún ìjápọ̀ iṣẹ́ yìí: lẹ́tà kékeré, nọ́mbà tàbí àmì-ìdápọ̀ (-) 3-50. Fi sílẹ̀ ní òfo láti yọ ọ́ kúrò.'
+  playInBrowser: 'Ṣeré nínú aṣàwákiri'
+  madeWithVersion: 'A fi ẹ̀yà áàpù %app% ṣe é (Catrobat %language%)'
+  oldVersion:
+    title: 'A fi ẹ̀yà áàpù àtijọ́ ṣe é'
+    text: 'A kò tíì lè ṣe iṣẹ́ yìí nínú aṣàwákiri. Ṣí i nínú Pocket Code kí o sì tún gbé e sókè láti ṣe àtúnṣe rẹ̀.'
+  translatedByLine: 'Ẹ̀rọ ló túmọ̀ rẹ̀ láti %sourceLanguage% sí %targetLanguage%'
+  translateAgain: 'Tún túmọ̀ pẹ̀lú àwọn èdè wọ̀nyí'
+  prefillMachineTranslation: 'Fi ìtumọ̀ ẹ̀rọ kún un'
+  machineTranslationFailed: 'Ìtumọ̀ ẹ̀rọ kò sí lọ́wọ́lọ́wọ́. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i nígbà míì.'
+  machineTranslationUnsupported: 'Ìtumọ̀ ẹ̀rọ kò sí fún èdè yìí.'
 remixGraph:
   showRemixGraph: "Àwòrán àtúnṣe"
   by: 'by'
@@ -386,6 +393,10 @@ search:
   noProjects: "A kò rí iṣẹ́ kankan"
   noStudios: "A kò rí ilé-iṣẹ́ ọnà kankan"
   sameSearchMessage: "Ó dàbí pé o ti wà níbí tẹ́lẹ̀! Gbìyànjú ìwádìí mìíràn?"
+  noResults: 'Kò sí àbájáde fún “%query%”'
+  scratchProjects: 'Àwọn iṣẹ́ Scratch'
+  scratchConverting: 'Ń yí i padà fún %app%…'
+  scratchConvertingSnackbar: 'Ń yí “%name%” padà — èyí lè gba ìṣẹ́jú-àáyá díẹ̀'
 menu:
   profile: "Profaili"
   login: "Wọlé"
@@ -493,6 +504,10 @@ time:
 user:
   verification:
     email: "Jẹ́rìí ímeèlì rẹ"
+  leaderboard:
+    all_time: 'Àwọn olùṣẹ̀dá tó ga jù'
+    this_week: 'Àwọn olùṣẹ̀dá tó ga jù ní ọ̀sẹ̀ yìí'
+    points: 'àmì'
 api:
   registerUser:
     emailMissing: "Ímeèlì kò sí"
@@ -528,6 +543,9 @@ api:
     descriptionTooLong: "Àpèjúwe gùn jù"
     creditsTooLong: "Àkọsílẹ̀ àti ìdúpẹ́ gùn jù"
     screenshotInvalid: "Àwòrán iboju iṣẹ́ kò wúlò tàbí a kò ṣe àtìlẹ́yìn fún un"
+    slugInvalid: 'URL àdáni gbọ́dọ̀ jẹ́ lẹ́tà kékeré, nọ́mbà tàbí àmì-ìdápọ̀ ẹyọ kan 3-50, pẹ̀lú ó kéré tán lẹ́tà kan'
+    slugReserved: 'A ti ya URL àdáni yìí sọ́tọ̀'
+    slugTaken: 'Ẹlòmíràn ti gba URL àdáni yìí'
   projectsPost:
     invalid_checksum: "Checksum kò wúlò. Gbìyànjú láti gbé sókè lẹ́ẹ̀kan sí i!"
     upload_error: "Àṣìṣe nígbà gbígbé sókè. Gbìyànjú láti gbé sókè lẹ́ẹ̀kan sí i!"
@@ -567,6 +585,24 @@ codeView:
   scripts: "Àwọn ìwé àfọwọ́kọ"
   looks: "Àwọn ìrísí"
   sounds: "Àwọn ohùn"
+  unavailable: 'A kò lè fi kóòdù iṣẹ́ yìí hàn.'
+  translation:
+    action: 'Túmọ̀'
+    translateTo: 'Túmọ̀ sí %language%'
+    translateAgain: 'Tún túmọ̀'
+    stillShowing: 'Ṣì ń fi %language% hàn'
+    original: 'Fi àkọ́kọ́ hàn'
+    resume: 'Tẹ̀síwájú láti túmọ̀'
+    source: 'Láti'
+    target: 'Sí'
+    auto: 'Ṣàwárí èdè'
+    loading: 'Ń túmọ̀ kóòdù…'
+    complete: 'Ẹ̀rọ ti túmọ̀ rẹ̀ sí %language%'
+    partial: 'A ti túmọ̀ díẹ̀ nínú rẹ̀'
+    partialInLanguage: 'A ti túmọ̀ díẹ̀ nínú rẹ̀ sí %language%'
+    sourceRequired: 'Yan èdè orísun láti túmọ̀ kóòdù yìí.'
+    unsupported: 'Ìtumọ̀ kò sí fún àwọn èdè wọ̀nyí.'
+    error: 'A kò lè túmọ̀ kóòdù náà. Gbìyànjú lẹ́ẹ̀kan sí i.'
 codeStatistics:
   title: "Ìṣirò kóòdù"
   error: "A kò lè fi ìṣirò kóòdù hàn."
@@ -617,6 +653,41 @@ catro-notifications:
   project-deleted:
     message: "A ti yọ iṣẹ́ rẹ \"%project_name%\" kúrò fúnra rẹ̀ nítorí àìṣiṣẹ́. Tún gbé e sókè tí o bá ṣì fẹ́ pín in."
   noProjects: "Ó dàbí pé o kò ní ìfitónilétí iṣẹ́ kankan."
+  studio-deletion-warning:
+    message: 'Ilé-iṣẹ́ ọnà rẹ "%studio_name%" kò ní iṣẹ́ kankan, kò sì sí ohun tó ṣẹlẹ̀ nínú rẹ̀ fún ọjọ́ 90. A óò pa á rẹ́ ní ọjọ́ %days% àyàfi tí o bá fi iṣẹ́ kan kún un.'
+  project-files-lost:
+    message: 'Àṣìṣe sáfà kan mú kí àwọn fáìlì %count% nínú àwọn iṣẹ́ rẹ sọnù: %projects%. A ti fi wọ́n pamọ́ títí tí o fi máa tún gbé wọn sókè láti Pocket Code. A óò pa àwọn iṣẹ́ tí a kò tún gbé sókè láàárín ọjọ́ 14 rẹ́.'
+    more: 'àti %count% mìíràn'
+  moderation-warning:
+    message: 'Alábòójútó kan ṣàyẹ̀wò ìròyìn kan nípa àkóónú rẹ, ó sì rí i pé ó rú àwọn òfin àwùjọ wa. Jọ̀wọ́ tẹ̀lé àwọn òfin náà, bí bẹ́ẹ̀ kọ́ a lè dá àkáǹtì rẹ dúró nígbà míì.'
+    deletion: 'A óò pa àkóónú tí a fi pamọ́ rẹ́ ní ọjọ́ %days% lẹ́yìn tí a fi í pamọ́, àyàfi tí o bá ṣàtúnṣe rẹ̀ tàbí pe ẹjọ́.'
+  moderation-hidden:
+    message: 'Alábòójútó kan ṣàyẹ̀wò ìròyìn kan nípa àkóónú rẹ, ó sì fi í pamọ́ nítorí pé ó rú àwọn òfin àwùjọ wa.'
+  moderation-reason:
+    image: '{1}Àwòrán kan (%names%) dàbí àkóónú àwọn àgbàlagbà.|]1,Inf]Àwọn àwòrán kan (%names%) dàbí àkóónú àwọn àgbàlagbà.'
+    screenshot: 'Àwòrán ojú-ìbojú náà dàbí àkóónú àwọn àgbàlagbà.'
+    cover: 'Àwòrán ìbòrí náà dàbí àkóónú àwọn àgbàlagbà.'
+    text:
+      name: 'Orúkọ náà dàbí pé ó ń sọ pé fún àwọn àgbàlagbà nìkan ni èyí.'
+      description: 'Àpèjúwe náà dàbí pé ó ń sọ pé fún àwọn àgbàlagbà nìkan ni èyí.'
+      credits: 'Àwọn àkọsílẹ̀ àti ìdúpẹ́ náà dàbí pé wọ́n ń sọ pé fún àwọn àgbàlagbà nìkan ni èyí.'
+      about: 'Ọ̀rọ̀ "Nípa mi" rẹ dàbí pé ó ń sọ pé fún àwọn àgbàlagbà nìkan ni èyí.'
+      currently_working_on: 'Ọ̀rọ̀ "Ohun tí mò ń ṣe lọ́wọ́" rẹ dàbí pé ó ń sọ pé fún àwọn àgbàlagbà nìkan ni èyí.'
+      username: 'Orúkọ olùmúlò rẹ dàbí pé ó ń sọ pé fún àwọn àgbàlagbà nìkan ni èyí.'
+    category:
+      copyright: 'Ìdí: ó dàbí pé ó lo iṣẹ́ àwọn ẹlòmíràn láìgba àṣẹ.'
+      sexual_content: 'Ìdí: ó dàbí àkóónú àwọn àgbàlagbà.'
+      graphic_violence: 'Ìdí: ó dàbí ìwà ipá jù.'
+      hateful_content: 'Ìdí: ó dàbí pé ó ń pa àwọn ẹlòmíràn lára tàbí ó kún fún ìkórìíra.'
+      improper_rating: 'Ìdí: ó dàbí pé kò yẹ fún àwọn ọmọdé.'
+      spam: 'Ìdí: ó dàbí spam.'
+      other: 'Ìdí: alábòójútó kan rí ìṣòro kan nínú rẹ̀.'
+      inappropriate: 'Ìdí: ó dàbí pé kò yẹ.'
+      harassment: 'Ìdí: ó dàbí pé ó ń halẹ̀ mọ́ ẹnìkan tàbí ó ń yọ ọ́ lẹ́nu.'
+      impersonation: 'Ìdí: ó dàbí pé ó ń ṣe bí ẹni pé òun ni ẹlòmíràn.'
+      inappropriate_profile: 'Ìdí: profaili náà dàbí pé kò yẹ.'
+      spam_account: 'Ìdí: ó dàbí àkáǹtì spam.'
+      inappropriate_content: 'Ìdí: ó dàbí pé kò yẹ.'
 clipboard:
   success: "A ti da ìjápọ̀ kọ sí pátákó àgékọ!"
   success_project: "A ti da ìjápọ̀ iṣẹ́ kọ sí pátákó àgékọ!"
@@ -626,7 +697,6 @@ previous: "Ti tẹ́lẹ̀"
 media-packages:
   title: "Ibi Ìkówèésí Mídíà"
   description: "Nínú àwọn ẹ̀ka wọ̀nyí, o lè rí àwọn òṣèré àti ohun láti fi kún àwọn iṣẹ́ rẹ."
-  theme-special: "Àkànṣe Àwọ̀ %flavor%"
   search-results: "Àbájáde ìwádìí ibi ìkówèésí mídíà"
 flavor:
   pocketcode: Pocket Code
@@ -843,6 +913,10 @@ studio:
       ban_failed: "Nǹkan kan ṣàṣìṣe nígbà lílé ọmọ ẹgbẹ́ yìí kúrò. Gbìyànjú lẹ́yìn náà."
       demote_member: "Sọ alábòójútó kalẹ̀ sí ọmọ ẹgbẹ́"
       demotion_failed: "Nǹkan kan ṣàṣìṣe nígbà sísọ alábòójútó yìí kalẹ̀. Gbìyànjú lẹ́yìn náà."
+      banned_members: 'Àwọn ọmọ ẹgbẹ́ tí a lé kúrò'
+      unban_member: 'Mú ìlé-kúrò kúrò'
+      unban_hint: 'Mímú ìlé-kúrò kúrò jẹ́ kí ẹni náà lè tún darapọ̀ bí ó ti yẹ. Kò dá a padà sínú ilé-iṣẹ́ ọnà fúnra rẹ̀.'
+      unban_failed: 'A kò lè ṣe àtúnṣe àwọn ọmọ ẹgbẹ́ tí a lé kúrò. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.'
     join_requests:
       title: "Àwọn Ìbéèrè Láti Darapọ̀"
       accept: "Gbà á"
@@ -859,6 +933,29 @@ studio:
       studio_description: "Àpèjúwe"
       toggle_allow_comments: "Àwọn àsọyé"
       toggle_privacy: "Gbangba"
+    banned: 'O kò lè darapọ̀ mọ́ ilé-iṣẹ́ ọnà yìí.'
+    invites:
+      title: 'Àwọn kóòdù ìpè'
+      hint: 'Ẹnikẹ́ni tó bá ní kóòdù tàbí ìjápọ̀ náà yóò darapọ̀ mọ́ ilé-iṣẹ́ ọnà yìí lẹ́sẹ̀kẹsẹ̀, kò nílò ìfọwọ́sí. Fífagilé kóòdù kò ní yọ àwọn ọmọ ẹgbẹ́ tí wọ́n ti darapọ̀ kúrò.'
+      expires_on: 'Yóò parí ní (àṣàyàn)'
+      max_uses: 'Iye ìlò tó pọ̀ jù (àṣàyàn)'
+      create: 'Ṣẹ̀dá kóòdù ìpè'
+      uses: 'A ti lò ó nígbà %uses%'
+      uses_max: 'A ti lò ó nígbà %uses% nínú %max%'
+      expires: 'Yóò parí ní %date%'
+      qr_alt: 'Ṣàyẹ̀wò kóòdù QR yìí láti darapọ̀ mọ́ ilé-iṣẹ́ ọnà náà'
+      copy_link: 'Da ìjápọ̀ kọ'
+      copied: 'A ti da ìjápọ̀ ìpè kọ sí pátákó àgékọ!'
+      revoke: 'Fagilé'
+      none: 'Kò sí kóòdù ìpè kankan síbẹ̀.'
+      error: 'Nǹkan kan ṣàṣìṣe pẹ̀lú kóòdù ìpè náà. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.'
+  join_with_code:
+    title: 'Darapọ̀ pẹ̀lú kóòdù'
+    hint: 'Ṣé olùkọ́ rẹ tàbí alábòójútó ilé-iṣẹ́ ọnà fún ọ ní kóòdù ìpè? Tẹ̀ ẹ́ síbí láti darapọ̀ mọ́ ilé-iṣẹ́ ọnà náà.'
+    code: 'Kóòdù ìpè'
+    invalid: 'Kóòdù yìí kò wúlò. Ó lè ti parí tàbí kí a ti fagilé e.'
+    banned: 'A ti lé ọ kúrò nínú ilé-iṣẹ́ ọnà yìí.'
+    rate_limited: 'Ìgbìyànjú ti pọ̀ jù. Jọ̀wọ́ dúró fún ìṣẹ́jú díẹ̀ kí o sì gbìyànjú lẹ́ẹ̀kan sí i.'
 media_library:
   file:
     size: "Ìwọ̀n: %size%"
@@ -928,3 +1025,8 @@ moderation:
     user_own: "A ti dá àkáǹtì rẹ dúró nítorí ìròyìn láti ọ̀dọ̀ àwùjọ. O lè pe ẹjọ́ ìpinnu yìí."
 Reports: "Àwọn ìròyìn"
 members: "àwọn ọmọ ẹgbẹ́"
+inactiveAccount:
+  subject: 'A óò pa àkáǹtì Catrobat rẹ rẹ́'
+  title: 'Àárò rẹ ń sọ wá!'
+  content: 'O kò tíì wọlé sí àkáǹtì Catrobat rẹ "%username%" fún ọdún méjì, kò sì ní iṣẹ́ tàbí àsọyé kankan. Kí àwùjọ wa lè máa wà láàyè, a óò pa á rẹ́ ní ọjọ́ %days%. Tí o bá fẹ́ pa á mọ́, kàn wọlé lẹ́ẹ̀kan ṣoṣo.'
+  button: 'Wọlé láti pa àkáǹtì mi mọ́'

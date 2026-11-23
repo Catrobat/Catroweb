@@ -82,12 +82,102 @@ class TranslationDelegateTest extends TestCase
   public function testTranslateProjectSkipsBlankTextsAndWaitsLongerThanAWebRequest(): void
   {
     $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('detectLanguage')->with('name')->willReturn(['language' => 'de', 'confidence' => 100.0]);
     $api->expects($this->once())->method('translate')
-      ->with('name', null, 'fr', $this->greaterThan(5))
+      ->with('name', 'de', 'fr', $this->greaterThan(5))
       ->willReturn($this->translationResult('translated name', 'de'))
     ;
 
     $this->delegate($api)->translateProject($this->project('name', '', '  '), null, 'fr');
+  }
+
+  public function testTranslateProjectDetectsLanguageFromCombinedTextWhenTitleIsMisleading(): void
+  {
+    $project = $this->project('Flappy', 'Ein tolles Spiel für alle', null);
+    $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('detectLanguage')
+      ->with("Flappy\nEin tolles Spiel für alle")
+      ->willReturn(['language' => 'de', 'confidence' => 95.0])
+    ;
+    $api->expects($this->exactly(2))->method('translate')->willReturnCallback(
+      fn (string $text, ?string $source, string $target): TranslationResult => match ([$text, $source, $target]) {
+        ['Flappy', 'de', 'en'] => $this->translationResult('Flappy'),
+        ['Ein tolles Spiel für alle', 'de', 'en'] => $this->translationResult('A great game for everyone'),
+        default => throw new \UnexpectedValueException("Unexpected call: {$text}, {$source}, {$target}"),
+      }
+    );
+
+    $repository = $this->createMock(ProjectMachineTranslationRepository::class);
+    $repository->expects($this->once())->method('cacheTranslation')
+      ->with($project, 'de', 'en', true, 'Flappy', 'A great game for everyone', null)
+    ;
+
+    $this->delegate($api, $repository)->translateProject($project, null, 'en');
+  }
+
+  public function testTranslateProjectDetectsLanguageFromCombinedTextWhenTitleIsShort(): void
+  {
+    $project = $this->project('123', 'Ein tolles Spiel', null);
+    $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('detectLanguage')
+      ->with("123\nEin tolles Spiel")
+      ->willReturn(['language' => 'de', 'confidence' => 85.0])
+    ;
+    $api->expects($this->exactly(2))->method('translate')->willReturnCallback(
+      fn (string $text, ?string $source, string $target): TranslationResult => match ([$text, $source, $target]) {
+        ['123', 'de', 'en'] => $this->translationResult('123'),
+        ['Ein tolles Spiel', 'de', 'en'] => $this->translationResult('A great game'),
+        default => throw new \UnexpectedValueException('Unexpected text: '.$text),
+      }
+    );
+
+    $repository = $this->createMock(ProjectMachineTranslationRepository::class);
+    $repository->expects($this->once())->method('cacheTranslation')
+      ->with($project, 'de', 'en', true, '123', 'A great game', null)
+    ;
+
+    $this->delegate($api, $repository)->translateProject($project, null, 'en');
+  }
+
+  public function testTranslateProjectDetectsLanguageFromCreditsWhenTitleAndDescriptionAreShort(): void
+  {
+    $project = $this->project('Game', 'v1', 'Gracias a todos');
+    $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('detectLanguage')
+      ->with("Game\nv1\nGracias a todos")
+      ->willReturn(['language' => 'es', 'confidence' => 90.0])
+    ;
+    $api->expects($this->exactly(3))->method('translate')->willReturnCallback(
+      fn (string $text, ?string $source, string $target): TranslationResult => match ([$text, $source, $target]) {
+        ['Game', 'es', 'en'] => $this->translationResult('Game'),
+        ['v1', 'es', 'en'] => $this->translationResult('v1'),
+        ['Gracias a todos', 'es', 'en'] => $this->translationResult('Thanks everyone'),
+        default => throw new \UnexpectedValueException('Unexpected text: '.$text),
+      }
+    );
+
+    $repository = $this->createMock(ProjectMachineTranslationRepository::class);
+    $repository->expects($this->once())->method('cacheTranslation')
+      ->with($project, 'es', 'en', true, 'Game', 'v1', 'Thanks everyone')
+    ;
+
+    $this->delegate($api, $repository)->translateProject($project, null, 'en');
+  }
+
+  public function testTranslateProjectFailsWhenLanguageCannotBeDetected(): void
+  {
+    $project = $this->project('123', null, null);
+    $api = $this->createMock(LibreTranslateApi::class);
+    $api->expects($this->once())->method('detectLanguage')
+      ->with('123')
+      ->willReturn(null)
+    ;
+    $api->expects($this->never())->method('translate');
+
+    $repository = $this->createMock(ProjectMachineTranslationRepository::class);
+    $repository->expects($this->never())->method('cacheTranslation');
+
+    $this->delegate($api, $repository)->translateProject($project, null, 'en');
   }
 
   public function testRequestQueuesOneJobUntilItIsDone(): void
@@ -134,6 +224,7 @@ class TranslationDelegateTest extends TestCase
   public function testAFailedJobIsReportedOnceThenQueuedAgain(): void
   {
     $api = $this->createStub(LibreTranslateApi::class);
+    $api->method('detectLanguage')->willReturn(['language' => 'de', 'confidence' => 100.0]);
     $api->method('translate')->willReturn(null);
     $repository = $this->createMock(ProjectMachineTranslationRepository::class);
     $repository->expects($this->never())->method('cacheTranslation');
@@ -151,6 +242,7 @@ class TranslationDelegateTest extends TestCase
   public function testAJobWithoutALanguageModelIsReportedAsUnsupported(): void
   {
     $api = $this->createStub(LibreTranslateApi::class);
+    $api->method('detectLanguage')->willReturn(['language' => 'de', 'confidence' => 100.0]);
     $api->method('translate')->willThrowException(new UnsupportedLanguageException('kk is not supported'));
     $logger = $this->createMock(LoggerInterface::class);
     $logger->expects($this->never())->method('error');
@@ -238,6 +330,7 @@ class TranslationDelegateTest extends TestCase
   private function translatingApi(): LibreTranslateApi
   {
     $api = $this->createStub(LibreTranslateApi::class);
+    $api->method('detectLanguage')->willReturn(['language' => 'de', 'confidence' => 100.0]);
     $api->method('translate')->willReturnCallback(fn (string $text, ?string $source): TranslationResult => $this->translationResult('translated '.$text, null === $source ? 'de' : null));
 
     return $api;

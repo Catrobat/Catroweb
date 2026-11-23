@@ -180,6 +180,17 @@ class NotificationResponse
   protected ?string $prize = null;
 
   /**
+   * Admin page to review the content, for moderation notifications sent to admins.
+   *
+   * @SerializedName("review_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $review_url = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -199,6 +210,7 @@ class NotificationResponse
       $this->remixed_project_name = array_key_exists('remixed_project_name', $data) ? $data['remixed_project_name'] : $this->remixed_project_name;
       $this->message = array_key_exists('message', $data) ? $data['message'] : $this->message;
       $this->prize = array_key_exists('prize', $data) ? $data['prize'] : $this->prize;
+      $this->review_url = array_key_exists('review_url', $data) ? $data['review_url'] : $this->review_url;
     }
   }
 
@@ -460,6 +472,28 @@ class NotificationResponse
   public function setPrize(?string $prize = null): self
   {
     $this->prize = $prize;
+
+    return $this;
+  }
+
+  /**
+   * Gets review_url.
+   */
+  public function getReviewUrl(): ?string
+  {
+    return $this->review_url;
+  }
+
+  /**
+   * Sets review_url.
+   *
+   * @param string|null $review_url Admin page to review the content, for moderation notifications sent to admins
+   *
+   * @return $this
+   */
+  public function setReviewUrl(?string $review_url = null): self
+  {
+    $this->review_url = $review_url;
 
     return $this;
   }

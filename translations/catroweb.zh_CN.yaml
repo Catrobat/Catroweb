@@ -12,8 +12,6 @@ username: 用户名
 password: 密码
 email: 邮箱
 about: 关于 Catrobat
-chat: 聊天和论坛
-others: 其它
 googlePlay: 谷歌 Play 商店
 iosAppStore: IOS 应用商店
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 没有说明和版权信息
 notesAndCreditsDescription: 您是如何创建这个项目的？是否使用了其他人的想法、脚本或艺术作品？您可以在此对他们表示感谢。
 projectImportedFromScratch: "此项目从 MIT Scratch 导入。你可以查看原始项目"
 scratchImportedProjectLinkHere: "这里。"
-country: 国家
 privacyPolicy: Chính sách bảo mật
 projectDetails: 详细信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
@@ -47,7 +44,6 @@ doesNotExist: '请求的资源不存在。'
 pleaseTryAgain: '再试一次吧！'
 tryAgainButton: "重试"
 more: '更多'
-less: '更少'
 show-more: '显示更多'
 more-information: '详细信息'
 less-information: '隐藏'
@@ -68,7 +64,6 @@ users: "用户"
 studios: "工作室"
 oauthPopUpTitle: "外部帐户登录信息"
 oauthInfo: '您刚刚使用了一个外部帐户登录。我们为您创建了一个随机用户名。 如果你想要更改你的用户名或为你的帐户创建一个新的密码，请访问我的个人资料页面。'
-statistics: "统计"
 languageSelection: "语言选择"
 color-scheme:
   title: "主题"
@@ -160,7 +155,6 @@ project:
   likes:
     likersTitle: "对此项目做出反应的人"
     all: "所有"
-  languageVersion: "Catrobat 语言版本：%languageVersion%"
   updateAppHeaderDownload: "无法下载"
   updateAppTextDownload: "请将应用更新到最新版本。请注意，并非所有 Android 功能都已在 IOS 上提供。"
   checkout_this_project: "来看看这个 Catrobat 项目"
@@ -201,6 +195,18 @@ project:
   createTranslation: 创建翻译
   deletedComment: '**已删除**'
   notForKids: 对儿童不安全
+  customUrl:
+    title: '自定义网址'
+    hint: '为这个项目的链接取一个简短的名字：3-50 个小写字母、数字或连字符。留空即可删除。'
+  playInBrowser: '在浏览器中运行'
+  madeWithVersion: '使用应用版本 %app% 制作（Catrobat %language%）'
+  oldVersion:
+    title: '使用旧版应用制作'
+    text: '这个项目暂时还不能在浏览器中运行。请在 Pocket Code 中打开它并重新上传来更新。'
+  translateAgain: '用这些语言重新翻译'
+  prefillMachineTranslation: '填入机器翻译'
+  machineTranslationFailed: '机器翻译暂时不可用，请稍后再试。'
+  machineTranslationUnsupported: '这种语言不支持机器翻译。'
 remixGraph:
   showRemixGraph: '显示调制关系图'
   by: 'bởi'
@@ -390,6 +396,10 @@ search:
   noProjects: 未找到项目
   noStudios: "未找到工作室"
   sameSearchMessage: "看起来你已经在这里了！换个搜索试试？"
+  noResults: '没有找到“%query%”的结果'
+  scratchProjects: 'Scratch 项目'
+  scratchConverting: '正在为 %app% 转换…'
+  scratchConvertingSnackbar: '正在转换“%name%”——这可能需要几秒钟'
 menu:
   profile: 我的个人资料
   login: 登录
@@ -499,6 +509,10 @@ time:
 user:
   verification:
     email: '验证您的电子邮件'
+  leaderboard:
+    all_time: '顶尖创作者'
+    this_week: '本周顶尖创作者'
+    points: '分'
 api:
   registerUser:
     emailMissing: '电子邮件丢失'
@@ -534,6 +548,9 @@ api:
     descriptionTooLong: '描述太长'
     creditsTooLong: '说明和版权信息太长'
     screenshotInvalid: '项目截图无效或不支持'
+    slugInvalid: '自定义网址必须由 3-50 个小写字母、数字或单个连字符组成，且至少包含一个字母'
+    slugReserved: '这个自定义网址已被保留'
+    slugTaken: '这个自定义网址已被占用'
   projectsPost:
     invalid_checksum: '无效的校验和。请重新上传！'
     upload_error: '上传时出错。请重试上传！'
@@ -573,6 +590,24 @@ codeView:
   scripts: '脚本'
   looks: '外观'
   sounds: '声音'
+  unavailable: '无法显示这个项目的代码。'
+  translation:
+    action: '翻译'
+    translateTo: '翻译成%language%'
+    translateAgain: '重新翻译'
+    stillShowing: '仍在显示%language%'
+    original: '显示原文'
+    resume: '继续翻译'
+    source: '从'
+    target: '到'
+    auto: '检测语言'
+    loading: '正在翻译代码…'
+    complete: '已机器翻译成%language%'
+    partial: '已部分翻译'
+    partialInLanguage: '部分已翻译成%language%'
+    sourceRequired: '请选择源语言来翻译这段代码。'
+    unsupported: '这些语言暂不支持翻译。'
+    error: '无法翻译代码，请重试。'
 codeStatistics:
   title: "代码统计"
   error: "无法显示代码统计信息。"
@@ -623,6 +658,41 @@ catro-notifications:
   project-deleted:
     message: "你的项目“%project_name%”因长期不活跃已被自动删除。如果你仍想分享它，请重新上传。"
   noProjects: "看起来你没有任何项目通知。"
+  studio-deletion-warning:
+    message: '你的工作室“%studio_name%”没有项目，并且 90 天内没有任何动态。除非你添加一个项目，否则它将在 %days% 天后被删除。'
+  project-files-lost:
+    message: '一次服务器错误导致你的 %count% 个项目的文件丢失：%projects%。在你从 Pocket Code 重新上传之前，它们会被隐藏。14 天内没有重新上传的项目将被删除。'
+    more: '以及另外 %count% 个'
+  moderation-warning:
+    message: '一位版主审核了关于你内容的举报，发现它违反了我们的社区规则。请遵守规则，否则下次你的帐户可能会被暂停。'
+    deletion: '被隐藏的内容将在隐藏 %days% 天后被删除，除非你修改它或提出申诉。'
+  moderation-hidden:
+    message: '一位版主审核了关于你内容的举报，因为它违反了我们的社区规则，已将其隐藏。'
+  moderation-reason:
+    image: '{1}一张图片（%names%）看起来是成人内容。|]1,Inf]一些图片（%names%）看起来是成人内容。'
+    screenshot: '截图看起来是成人内容。'
+    cover: '封面图片看起来是成人内容。'
+    text:
+      name: '名称看起来表示这是仅限成人的内容。'
+      description: '描述看起来表示这是仅限成人的内容。'
+      credits: '备注和致谢看起来表示这是仅限成人的内容。'
+      about: '你的“关于我”文字看起来表示这是仅限成人的内容。'
+      currently_working_on: '你的“目前正在做”文字看起来表示这是仅限成人的内容。'
+      username: '你的用户名看起来表示这是仅限成人的内容。'
+    category:
+      copyright: '原因：它似乎未经许可使用了别人的作品。'
+      sexual_content: '原因：它看起来是成人内容。'
+      graphic_violence: '原因：它看起来太暴力了。'
+      hateful_content: '原因：它看起来对他人有伤害性或仇恨性。'
+      improper_rating: '原因：它看起来不适合儿童。'
+      spam: '原因：它看起来是垃圾信息。'
+      other: '原因：版主发现它有问题。'
+      inappropriate: '原因：它看起来不恰当。'
+      harassment: '原因：它看起来是在欺负或骚扰某人。'
+      impersonation: '原因：它看起来在冒充别人。'
+      inappropriate_profile: '原因：个人资料看起来不恰当。'
+      spam_account: '原因：它看起来是垃圾帐户。'
+      inappropriate_content: '原因：它看起来不恰当。'
 clipboard:
   success: "链接已复制到剪贴板！"
   success_project: 项目链接已复制到剪贴板！
@@ -632,7 +702,6 @@ previous: 上一步
 media-packages:
   title: 媒体包
   description: 在以下类别中，您可以找到更多的演员和对象来添加到您的 PocketCode 项目。
-  theme-special: "%flavor% 主题"
   search-results: 媒体库搜索结果
 flavor:
   pocketcode: 口袋编程
@@ -849,6 +918,10 @@ studio:
       ban_failed: '禁用此成员时出错。请稍后再试。'
       demote_member: "将管理员降为成员"
       demotion_failed: "降级该管理员时出了点问题，请稍后再试。"
+      banned_members: '被封禁的成员'
+      unban_member: '解除封禁'
+      unban_hint: '解除封禁后，这个人可以正常重新加入，但不会自动回到工作室。'
+      unban_failed: '无法更新被封禁的成员，请重试。'
     join_requests:
       title: "加入请求"
       accept: '接受'
@@ -865,6 +938,29 @@ studio:
       studio_description: '描述'
       toggle_allow_comments: '评论'
       toggle_privacy: '公开'
+    banned: '你不能加入这个工作室。'
+    invites:
+      title: '邀请码'
+      hint: '任何拥有邀请码或链接的人都可以立即加入这个工作室，无需批准。撤销邀请码不会影响已经加入的成员。'
+      expires_on: '过期日期（可选）'
+      max_uses: '最多使用次数（可选）'
+      create: '创建邀请码'
+      uses: '已使用 %uses% 次'
+      uses_max: '已使用 %uses%/%max% 次'
+      expires: '%date% 过期'
+      qr_alt: '扫描这个二维码加入工作室'
+      copy_link: '复制链接'
+      copied: '邀请链接已复制到剪贴板！'
+      revoke: '撤销'
+      none: '还没有邀请码。'
+      error: '邀请码出了点问题，请重试。'
+  join_with_code:
+    title: '用邀请码加入'
+    hint: '从老师或工作室管理员那里拿到了邀请码？在这里输入即可加入工作室。'
+    code: '邀请码'
+    invalid: '这个邀请码无效，可能已过期或被撤销。'
+    banned: '你已被这个工作室封禁。'
+    rate_limited: '尝试次数太多。请等几分钟后再试。'
 media_library:
   file:
     size: '大小: %size%'
@@ -934,3 +1030,8 @@ moderation:
     user_own: "由于社区举报，你的帐户已被暂停。你可以对此决定提出申诉。"
 Reports: "举报"
 members: "成员"
+inactiveAccount:
+  subject: '你的 Catrobat 帐户将被删除'
+  title: '我们想你了！'
+  content: '你已经两年没有登录 Catrobat 帐户“%username%”了，而且它没有任何项目或评论。为了让社区保持活跃，我们将在 %days% 天后删除它。如果你想保留它，只需登录一次即可。'
+  button: '登录以保留我的帐户'

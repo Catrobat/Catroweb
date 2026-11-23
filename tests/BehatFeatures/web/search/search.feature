@@ -178,6 +178,9 @@ Feature: Searching for projects & users
     And the element "#search-scratch-projects .search-card__badge" should contain "Scratch"
     And the element "#search-scratch-projects button.search-card" should exist
     And the element "#search-scratch-projects img.search-card__image[data-scratch-thumbnail='https://uploads.scratch.mit.edu/get_image/project/70058680_480x360.png']" should exist
+    # Scratch comes in its own request: its results replace the "no results" line our empty search left.
+    And the element "#search-empty-summary" should contain "No projects found"
+    And the element "#search-empty-summary" should not contain "No results for"
 
   Scenario: No Scratch section without Scratch matches
     Given I am on "/app/search/gmail"
@@ -185,3 +188,25 @@ Feature: Searching for projects & users
     And I wait for AJAX to finish
     Then I should see "No results for"
     And the element "#search-scratch-projects" should not be visible
+
+  Scenario: Late Scratch results are announced to screen readers
+    Given there are Scratch projects:
+      | id       | name             | username   |
+      | 70058680 | Gamma Ray Racer  | scratchcat |
+    And I am on "/app/search/Gamma"
+    And I wait for the page to be loaded
+    Then I wait for the element "#search-status[role='status'][aria-live='polite']" to contain "Scratch projects: 1"
+
+  Scenario: A failed search says so instead of "no results"
+    Given there are Scratch projects:
+      | id       | name             | username   |
+      | 70058680 | Gamma Ray Racer  | scratchcat |
+    And the browser's requests to "*type=all*" fail
+    And I am on "/app/search/Gamma"
+    And I wait for the page to be loaded
+    Then I wait for the element "#search-empty-summary" to contain "Oops, something did not work"
+    And the element "#search-empty-summary" should not contain "No results for"
+    And I wait for the element "#search-scratch-projects .search-card" to be visible
+    # Neither message replaces the other in the status.
+    And I wait for the element "#search-status" to contain "Scratch projects: 1"
+    And I wait for the element "#search-status" to contain "Oops, something did not work"

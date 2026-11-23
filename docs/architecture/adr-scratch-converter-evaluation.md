@@ -41,11 +41,12 @@ Scratch is served from Share without converting again.
 __init_sprites` restores each sprite's position, size, direction, costume and visibility, and only then
   `__green_flag` starts the "when flag clicked" scripts.
 - **Cross-sprite reads** (`sensing_of`, go to/point towards/distance to a sprite) read `__<sprite>_<property>`
-  program variables that the owner updates every frame. "Create clone of <sprite>" becomes a broadcast that only
-  the original sprite answers.
+  program variables that the owner updates every frame. "Create clone of <sprite>" is a native `CloneBrick`
+  whose `objectToClone` names that sprite.
 - **References:** looks, sounds, variables, lists and custom-block signatures are written in full at every use.
   `XStreamReferences` then turns all but the first occurrence into back-references, so forward references (which
-  fail the load) cannot happen.
+  fail the load) cannot happen. A sprite named by a `CloneBrick` before its place in the object list is written
+  in full inside that brick, as XStream does, and the list entry becomes the back-reference.
 - **Unsupported blocks** become NoteBricks, so the project still loads and shows what was dropped. Examples:
   drag mode, sound effects, list monitors, and graphic effects other than color, ghost and brightness.
 - **Loop pace:** Scratch ends every pass of a loop with a frame (30 per second) once anything on stage changed;

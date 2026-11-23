@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scratchConvertingSnackbar:
       container.dataset.transScratchConvertingSnackbar ||
       'Converting “%name%” — this can take a few seconds',
+    error: container.dataset.transError || 'Oops, something did not work. Please try again!',
   }
 
   const searchInput = document.querySelector('#top-app-bar__search-input')
@@ -61,6 +62,15 @@ function renderPage(container, query, theme, baseUrl, trans) {
   titleDiv.appendChild(h1)
   container.appendChild(titleDiv)
 
+  // Scratch results arrive late, at the bottom: screen readers hear about them (and about a failed search) here.
+  // Present from the start, so the text set later is announced.
+  const status = document.createElement('p')
+  status.id = 'search-status'
+  status.className = 'visually-hidden'
+  status.setAttribute('role', 'status')
+  status.setAttribute('aria-live', 'polite')
+  container.appendChild(status)
+
   const projectsSection = createSection(
     'search-projects',
     'projects',
@@ -85,11 +95,12 @@ function renderPage(container, query, theme, baseUrl, trans) {
   container.appendChild(scratchSection)
 
   // Fixed priority, not relevance: scores from different indexes (and Scratch, which has none) don't compare.
+  // Scratch is last because it can arrive after the rest: showing it then must not push results the user is about to tap.
   const sections = [
     { section: projectsSection, empty: trans.noProjects },
-    { section: scratchSection, empty: null },
     { section: usersSection, empty: trans.noUsers },
     { section: studiosSection, empty: trans.noStudios },
+    { section: scratchSection, empty: null },
   ]
 
   if (!query) {
@@ -97,22 +108,53 @@ function renderPage(container, query, theme, baseUrl, trans) {
     return
   }
 
-  const apiUrl =
-    baseUrl +
-    '/api/search?query=' +
-    encodeURIComponent(query) +
-    '&type=all&limit=' +
-    RESULTS_PER_PAGE
-
-  fetch(apiUrl)
-    .then((response) => {
+  const search = (type) =>
+    fetch(
+      `${baseUrl}/api/search?query=${encodeURIComponent(query)}&type=${type}&limit=${RESULTS_PER_PAGE}`,
+    ).then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       return response.json()
     })
+
+  // Scratch is searched live and takes ~200 ms when not cached, so it gets its own request and doesn't hold up ours.
+  let found = null // [projects, users, studios] once our results are in
+  let scratchFound = false
+  let failed = false // our search failed: say so instead of "no results"
+  let scratchCount = 0
+  const arrange = () => {
+    if (found) arrangeSections(container, sections, [...found, scratchFound], query, trans, failed)
+  }
+  // Built from all state, so neither message replaces the other; Scratch only once its section can be shown.
+  const announce = () => {
+    const parts = []
+    if (failed) parts.push(trans.error)
+    if (found && scratchCount > 0) parts.push(`${trans.scratchProjects}: ${scratchCount}`)
+    status.textContent = parts.join(' ')
+  }
+
+  search('all')
     .then((data) => {
       renderProjects(projectsSection, data.projects || [], theme)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
+      found = [data.projects, data.users, data.studios].map((items) => (items || []).length > 0)
+      arrange()
+      announce()
+
+      wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
+      wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
+      wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
+    })
+    .catch((error) => {
+      console.error('Search API error:', error)
+      found = [false, false, false]
+      failed = true
+      arrange()
+      announce()
+    })
+
+  search('scratch')
+    .then((data) => {
       renderScratchProjects(
         scratchSection,
         data.scratch_projects || [],
@@ -121,33 +163,22 @@ function renderPage(container, query, theme, baseUrl, trans) {
         theme,
         trans,
       )
-
-      arrangeSections(
-        container,
-        sections,
-        [
-          (data.projects || []).length > 0,
-          !scratchSection.classList.contains('d-none'),
-          (data.users || []).length > 0,
-          (data.studios || []).length > 0,
-        ],
-        query,
-        trans,
-      )
-
-      wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
-      wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
-      wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
+      scratchFound = !scratchSection.classList.contains('d-none')
+      scratchCount = (data.scratch_projects || []).length
+      // Before our results: stay hidden, or they would push the Scratch cards down when they arrive.
+      // After them: renderScratchProjects already showed the section in its slot; arranging again would re-insert
+      // (and unfocus) every section, so only do it to replace the "no results" line.
+      if (!found) scratchSection.classList.add('d-none')
+      else if (!found.some(Boolean)) arrange()
+      announce()
       wireShowMore(scratchSection, 'scratch', query, baseUrl, theme, trans)
     })
-    .catch((error) => {
-      console.error('Search API error:', error)
-      arrangeSections(container, sections, [], query, trans)
-    })
+    .catch((error) => console.error('Scratch search error:', error))
 }
 
 // Sections with results first, in their fixed order; the empty ones collapse into one line at the bottom.
-function arrangeSections(container, sections, hasResults, query, trans) {
+function arrangeSections(container, sections, hasResults, query, trans, failed = false) {
+  container.querySelector('#search-empty-summary')?.remove()
   const empties = []
   sections.forEach(({ section, empty }, i) => {
     section.classList.toggle('d-none', !hasResults[i])
@@ -158,8 +189,9 @@ function arrangeSections(container, sections, hasResults, query, trans) {
   const summary = document.createElement('p')
   summary.id = 'search-empty-summary'
   summary.className = 'search-section__empty'
-  summary.textContent =
-    query && !hasResults.some(Boolean)
+  summary.textContent = failed
+    ? trans.error
+    : query && !hasResults.some(Boolean)
       ? trans.noResults.replace('%query%', query)
       : empties.join(' · ')
   if (summary.textContent) container.appendChild(summary)

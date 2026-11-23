@@ -12,8 +12,6 @@ username: Tên đăng nhập
 password: Mật khẩu
 email: 'Email'
 about: Về Catrobat
-chat: 'Trò chuyện và diễn đàn'
-others: 'Khác'
 googlePlay: googlePlay
 iosAppStore: IOS App store
 instagram: Instagram
@@ -37,7 +35,6 @@ noCredits: 'Chưa có ghi chú và ghi công nào.'
 notesAndCreditsDescription: 'Bạn đã tạo dự án này như thế nào? Bạn có dùng ý tưởng, kịch bản hay hình ảnh của người khác không? Hãy cảm ơn họ ở đây.'
 projectImportedFromScratch: 'Dự án này được nhập từ MIT Scratch. Bạn có thể xem dự án gốc'
 scratchImportedProjectLinkHere: 'tại đây.'
-country: Quốc gia
 privacyPolicy: Chính sách bảo mật
 projectDetails: Chi tiêt
 somethingWentWrong: 'Thao tác sai.'
@@ -47,7 +44,6 @@ doesNotExist: 'Tài nguyên được yêu cầu không tồn tại.'
 pleaseTryAgain: 'Làm ơn hãy thử lại!'
 tryAgainButton: 'Thử lại'
 more: 'hơn/thêm/nhiều hơn'
-less: 'ít hơn'
 show-more: 'Xem thêm'
 more-information: 'Thêm thông tin'
 less-information: 'Ít thông tin hơn'
@@ -68,7 +64,6 @@ users: 'Người dùng'
 studios: 'Studio'
 oauthPopUpTitle: 'Thông tin đăng nhập bằng tài khoản bên ngoài'
 oauthInfo: 'Bạn vừa đăng nhập bằng một tài khoản bên ngoài. Chúng mình đã tạo một tên đăng nhập ngẫu nhiên cho bạn. Nếu bạn muốn đổi tên đăng nhập hoặc tạo mật khẩu mới cho tài khoản, hãy vào trang hồ sơ của bạn.'
-statistics: 'Thống kê'
 languageSelection: 'Chọn ngôn ngữ'
 color-scheme:
   title: 'Giao diện'
@@ -177,7 +172,6 @@ project:
   likes:
     likersTitle: 'Những người đã bày tỏ cảm xúc với dự án này'
     all: "Tất cả"
-  languageVersion: 'Phiên bản ngôn ngữ Catrobat: %languageVersion%'
   updateAppHeaderDownload: 'Không thể tải về'
   updateAppTextDownload: 'Hãy cập nhật ứng dụng lên phiên bản mới nhất. Lưu ý rằng không phải tất cả tính năng Android đều đã có trên iOS.'
   checkout_this_project: 'Xem dự án Catrobat này'
@@ -218,6 +212,18 @@ project:
   createTranslation: 'Tạo bản dịch'
   deletedComment: '**Đã xóa**'
   notForKids: 'Không phù hợp với trẻ em'
+  customUrl:
+    title: 'URL tùy chỉnh'
+    hint: 'Chọn một tên ngắn cho liên kết của dự án này: 3-50 chữ cái thường, chữ số hoặc dấu gạch ngang. Để trống để xóa.'
+  playInBrowser: 'Chơi trên trình duyệt'
+  madeWithVersion: 'Được tạo bằng ứng dụng phiên bản %app% (Catrobat %language%)'
+  oldVersion:
+    title: 'Được tạo bằng phiên bản ứng dụng cũ hơn'
+    text: 'Dự án này chưa thể chơi trên trình duyệt. Hãy mở nó trong Pocket Code và tải lên lại để cập nhật.'
+  translateAgain: 'Dịch lại với các ngôn ngữ này'
+  prefillMachineTranslation: 'Điền bản dịch máy'
+  machineTranslationFailed: 'Dịch máy hiện không khả dụng. Hãy thử lại sau.'
+  machineTranslationUnsupported: 'Dịch máy không khả dụng cho ngôn ngữ này.'
 remixGraph:
   showRemixGraph: 'Sơ đồ remix'
   by: 'bởi'
@@ -408,6 +414,10 @@ search:
   noProjects: 'Không tìm thấy dự án nào'
   noStudios: 'Không tìm thấy studio nào'
   sameSearchMessage: 'Có vẻ bạn đang ở đây rồi! Thử tìm từ khác nhé?'
+  noResults: 'Không có kết quả cho “%query%”'
+  scratchProjects: 'Dự án Scratch'
+  scratchConverting: 'Đang chuyển đổi cho %app%…'
+  scratchConvertingSnackbar: 'Đang chuyển đổi “%name%” — việc này có thể mất vài giây'
 menu:
   profile: Hồ sơ của Tôi
   login: Đăng nhập
@@ -517,6 +527,10 @@ time:
 user:
   verification:
     email: 'Xác minh email của bạn'
+  leaderboard:
+    all_time: 'Nhà sáng tạo hàng đầu'
+    this_week: 'Nhà sáng tạo hàng đầu tuần này'
+    points: 'điểm'
 api:
   registerUser:
     emailMissing: 'Thiếu email'
@@ -552,6 +566,9 @@ api:
     descriptionTooLong: 'Mô tả quá dài'
     creditsTooLong: 'Ghi chú và ghi công quá dài'
     screenshotInvalid: 'Ảnh chụp màn hình dự án không hợp lệ hoặc không được hỗ trợ'
+    slugInvalid: 'URL tùy chỉnh phải gồm 3-50 chữ cái thường, chữ số hoặc dấu gạch ngang đơn, và có ít nhất một chữ cái'
+    slugReserved: 'URL tùy chỉnh này đã được giữ trước'
+    slugTaken: 'URL tùy chỉnh này đã có người dùng'
   projectsPost:
     invalid_checksum: 'Mã kiểm tra không hợp lệ. Hãy thử tải lên lại!'
     upload_error: 'Lỗi khi tải lên. Hãy thử tải lên lại!'
@@ -591,6 +608,24 @@ codeView:
   scripts: 'Các kịch bản'
   looks: 'Các giao diện'
   sounds: 'Âm thanh'
+  unavailable: 'Không thể hiển thị mã của dự án này.'
+  translation:
+    action: 'Dịch'
+    translateTo: 'Dịch sang %language%'
+    translateAgain: 'Dịch lại'
+    stillShowing: 'Vẫn đang hiển thị %language%'
+    original: 'Hiện bản gốc'
+    resume: 'Tiếp tục dịch'
+    source: 'Từ'
+    target: 'Sang'
+    auto: 'Phát hiện ngôn ngữ'
+    loading: 'Đang dịch mã…'
+    complete: 'Đã dịch máy sang %language%'
+    partial: 'Đã dịch một phần'
+    partialInLanguage: 'Đã dịch một phần sang %language%'
+    sourceRequired: 'Hãy chọn ngôn ngữ gốc để dịch mã này.'
+    unsupported: 'Không thể dịch giữa các ngôn ngữ này.'
+    error: 'Không thể dịch mã. Hãy thử lại.'
 codeStatistics:
   title: 'Thống kê mã'
   error: 'Không thể hiển thị thống kê mã.'
@@ -641,6 +676,41 @@ catro-notifications:
   project-deleted:
     message: 'Dự án "%project_name%" của bạn đã tự động bị xóa do không hoạt động. Hãy tải lên lại nếu bạn vẫn muốn chia sẻ nó.'
   noProjects: 'Có vẻ bạn chưa có thông báo nào về dự án.'
+  studio-deletion-warning:
+    message: 'Studio “%studio_name%” của bạn không có dự án nào và không có hoạt động gì trong 90 ngày. Nó sẽ bị xóa sau %days% ngày nếu bạn không thêm một dự án.'
+  project-files-lost:
+    message: 'Một lỗi máy chủ đã làm mất tệp của %count% dự án của bạn: %projects%. Chúng bị ẩn cho đến khi bạn tải lên lại từ Pocket Code. Các dự án không được tải lên lại trong vòng 14 ngày sẽ bị xóa.'
+    more: 'và %count% dự án khác'
+  moderation-warning:
+    message: 'Một người kiểm duyệt đã xem xét báo cáo về nội dung của bạn và thấy rằng nó vi phạm quy tắc cộng đồng. Hãy tuân thủ quy tắc, nếu không lần sau tài khoản của bạn có thể bị đình chỉ.'
+    deletion: 'Nội dung bị ẩn sẽ bị xóa sau %days% ngày kể từ khi bị ẩn, trừ khi bạn sửa nó hoặc kháng nghị.'
+  moderation-hidden:
+    message: 'Một người kiểm duyệt đã xem xét báo cáo về nội dung của bạn và đã ẩn nó vì nó vi phạm quy tắc cộng đồng.'
+  moderation-reason:
+    image: '{1}Một hình ảnh (%names%) trông giống nội dung người lớn.|]1,Inf]Một số hình ảnh (%names%) trông giống nội dung người lớn.'
+    screenshot: 'Ảnh chụp màn hình trông giống nội dung người lớn.'
+    cover: 'Ảnh bìa trông giống nội dung người lớn.'
+    text:
+      name: 'Tên trông như đang nói rằng đây là nội dung chỉ dành cho người lớn.'
+      description: 'Mô tả trông như đang nói rằng đây là nội dung chỉ dành cho người lớn.'
+      credits: 'Ghi chú và ghi công trông như đang nói rằng đây là nội dung chỉ dành cho người lớn.'
+      about: 'Phần “Giới thiệu về tôi” của bạn trông như đang nói rằng đây là nội dung chỉ dành cho người lớn.'
+      currently_working_on: 'Phần “Đang thực hiện” của bạn trông như đang nói rằng đây là nội dung chỉ dành cho người lớn.'
+      username: 'Tên người dùng của bạn trông như đang nói rằng đây là nội dung chỉ dành cho người lớn.'
+    category:
+      copyright: 'Lý do: có vẻ nó sử dụng tác phẩm của người khác mà không được phép.'
+      sexual_content: 'Lý do: nó trông giống nội dung người lớn.'
+      graphic_violence: 'Lý do: nó trông quá bạo lực.'
+      hateful_content: 'Lý do: nó trông gây tổn thương hoặc thù ghét người khác.'
+      improper_rating: 'Lý do: nó trông không phù hợp với trẻ em.'
+      spam: 'Lý do: nó trông giống thư rác.'
+      other: 'Lý do: người kiểm duyệt phát hiện có vấn đề với nó.'
+      inappropriate: 'Lý do: nó trông không phù hợp.'
+      harassment: 'Lý do: nó trông như đang bắt nạt hoặc quấy rối ai đó.'
+      impersonation: 'Lý do: nó trông như đang giả mạo người khác.'
+      inappropriate_profile: 'Lý do: hồ sơ trông không phù hợp.'
+      spam_account: 'Lý do: nó trông giống tài khoản spam.'
+      inappropriate_content: 'Lý do: nó trông không phù hợp.'
 clipboard:
   success: 'Đã sao chép liên kết vào bộ nhớ tạm!'
   success_project: 'Đã sao chép liên kết dự án vào bộ nhớ tạm!'
@@ -650,7 +720,6 @@ previous: 'Trước'
 media-packages:
   title: 'Thư viện đa phương tiện'
   description: 'Trong các danh mục sau, bạn có thể tìm thấy nhân vật và đối tượng để thêm vào dự án của mình.'
-  theme-special: 'Chủ đề đặc biệt %flavor%'
   search-results: 'Kết quả tìm kiếm trong thư viện đa phương tiện'
 flavor:
   pocketcode: Pocket Code
@@ -867,6 +936,10 @@ studio:
       ban_failed: 'Đã có lỗi khi cấm thành viên này. Hãy thử lại sau.'
       demote_member: 'Hạ quản trị viên xuống thành viên'
       demotion_failed: 'Đã có lỗi khi hạ quyền quản trị viên này. Hãy thử lại sau.'
+      banned_members: 'Thành viên bị cấm'
+      unban_member: 'Bỏ cấm'
+      unban_hint: 'Bỏ cấm cho phép người đó tham gia lại bình thường. Việc này không tự động thêm họ trở lại studio.'
+      unban_failed: 'Không thể cập nhật danh sách thành viên bị cấm. Hãy thử lại.'
     join_requests:
       title: 'Yêu cầu tham gia'
       accept: 'Chấp nhận'
@@ -883,6 +956,29 @@ studio:
       studio_description: 'Mô tả'
       toggle_allow_comments: 'Bình luận'
       toggle_privacy: 'Công khai'
+    banned: 'Bạn không thể tham gia studio này.'
+    invites:
+      title: 'Mã mời'
+      hint: 'Bất kỳ ai có mã hoặc liên kết đều tham gia studio này ngay lập tức, không cần phê duyệt. Thu hồi mã vẫn giữ lại những thành viên đã tham gia.'
+      expires_on: 'Hết hạn vào (không bắt buộc)'
+      max_uses: 'Số lần dùng tối đa (không bắt buộc)'
+      create: 'Tạo mã mời'
+      uses: 'Đã dùng %uses% lần'
+      uses_max: 'Đã dùng %uses%/%max% lần'
+      expires: 'Hết hạn %date%'
+      qr_alt: 'Quét mã QR này để tham gia studio'
+      copy_link: 'Sao chép liên kết'
+      copied: 'Đã sao chép liên kết mời vào bộ nhớ tạm!'
+      revoke: 'Thu hồi'
+      none: 'Chưa có mã mời nào.'
+      error: 'Đã có lỗi với mã mời. Hãy thử lại.'
+  join_with_code:
+    title: 'Tham gia bằng mã'
+    hint: 'Bạn nhận được mã mời từ giáo viên hoặc quản trị viên studio? Nhập vào đây để tham gia studio.'
+    code: 'Mã mời'
+    invalid: 'Mã này không hợp lệ. Có thể nó đã hết hạn hoặc bị thu hồi.'
+    banned: 'Bạn đã bị cấm khỏi studio này.'
+    rate_limited: 'Quá nhiều lần thử. Hãy đợi vài phút rồi thử lại.'
 media_library:
   file:
     size: 'Kích thước: %size%'
@@ -952,3 +1048,8 @@ moderation:
     user_own: 'Tài khoản của bạn đã bị tạm khóa do bị cộng đồng báo cáo. Bạn có thể kháng nghị quyết định này.'
 Reports: 'Báo cáo'
 members: 'thành viên'
+inactiveAccount:
+  subject: 'Tài khoản Catrobat của bạn sẽ bị xóa'
+  title: 'Chúng mình nhớ bạn!'
+  content: 'Bạn đã không đăng nhập vào tài khoản Catrobat “%username%” trong hai năm và tài khoản này không có dự án hay bình luận nào. Để cộng đồng luôn sôi nổi, chúng mình sẽ xóa nó sau %days% ngày. Nếu bạn muốn giữ lại, chỉ cần đăng nhập một lần.'
+  button: 'Đăng nhập để giữ tài khoản'

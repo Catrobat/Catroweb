@@ -34,7 +34,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'scratch_open_burst' => [
         'policy' => 'no_limit',
       ],
-      'scratch_search_burst' => [
+      'scratch_upstream_search_burst' => [
         'policy' => 'no_limit',
       ],
       'scratch_convert_burst' => [
@@ -59,6 +59,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'policy' => 'no_limit',
       ],
       'search_burst' => [
+        'policy' => 'no_limit',
+      ],
+      'search_scratch_burst' => [
         'policy' => 'no_limit',
       ],
       'translation_burst' => [

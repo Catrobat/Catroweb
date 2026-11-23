@@ -14,6 +14,7 @@ use OpenAPI\Server\Service\SerializerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -57,6 +58,7 @@ class ProjectFilesLostNotificationResponseTest extends TestCase
       $this->createStub(NotificationRepository::class),
       $this->createStub(ContentVisibilityManager::class),
       $this->createStub(UserAvatarService::class),
+      $this->createStub(UrlGeneratorInterface::class),
     );
 
     $data = $manager->createNotificationListResponse([$notification], false, new User())->getData();
