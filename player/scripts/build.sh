@@ -84,6 +84,8 @@ for round in $(seq 1 12); do
     python3 scripts/export_code_resources.py ${JAVA_HOME:+$JAVA_HOME/bin/}javap $IN/R.jar build/catroid/catroid/src/main/res \
       build/catroid/catroid/src/catroid/res $E
     (cd $E && npm ci --omit=dev --ignore-scripts --no-audit --no-fund --silent && rm package.json package-lock.json)
+    # The brick and formula catalog (codeview/CodeCatalog) that share's docs are generated from
+    node $E/export.mjs --catalog > $E/catalog.json
     # From what the export is built from, not from code-export.js: TeaVM orders its output differently on every build.
     python3 scripts/build_version.py > build/dist/js/webapp/version.txt
     cp build/dist/js/webapp/version.txt $E/version.txt

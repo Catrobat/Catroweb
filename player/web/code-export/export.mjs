@@ -2,6 +2,7 @@
 // view's JSON out. The player's loader reads code.xml with the browser's DOMParser, which Node gets from xmldom.
 //
 //   node export.mjs code.xml > code.json
+//   node export.mjs --catalog > catalog.json   (every brick and formula element, codeview/CodeCatalog; build.sh)
 //
 // share runs it with Node's permission model, allowed to read only this folder and the file it exports (no writes,
 // child processes or workers), and with an empty environment: the XML is untrusted (CodeExportRunner on share).
@@ -67,6 +68,12 @@ globalThis.exports = teavm
 runInThisContext(readFileSync(join(here, 'code-export.js'), 'utf8'), { filename: 'code-export.js' })
 delete globalThis.exports
 teavm.main([])
+
+if (process.argv[2] === '--catalog') {
+  // exit only once written: a pipe takes stdout asynchronously
+  await new Promise((done) => process.stdout.write(globalThis.catrobatCatalog(), done))
+  process.exit(0)
+}
 
 // The export's strings are markers made of U+0001, U+0002 and U+001F (CodeExport): a name in code.xml must not
 // contain them, written out or as a character reference, or it could show as any of Catroid's strings.
