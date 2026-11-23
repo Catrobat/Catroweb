@@ -89,3 +89,15 @@ Feature: The brick and formula reference, generated from Catroid's catalog (test
       | /app/docs/bricks/yourbricks       | /app/docs/reference#category_user_bricks             |
       | /app/docs/bricks/motion?locale=de | /app/docs/reference?locale=de#category_motion        |
       | /app/docs/de_DE/bricks/embroidery | /app/docs/reference?locale=de_DE#category_embroidery |
+
+  Scenario: The app's language is kept, other query values are not
+    Given I do not follow redirects
+    When I request "GET" "/app/docs/reference/bricks/by-class/SetXBrick?locale=de&theme=luna"
+    Then the response status code should be "301"
+    And the response Location header should be "/app/docs/reference/bricks/SetXBrick?locale=de"
+
+  Scenario: An unknown class keeps the language too
+    Given I do not follow redirects
+    When I request "GET" "/app/docs/reference/bricks/by-class/NoSuchBrick?locale=de"
+    Then the response status code should be "302"
+    And the response Location header should be "/app/docs/reference?locale=de"

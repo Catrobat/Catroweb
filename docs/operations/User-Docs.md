@@ -116,7 +116,7 @@ The catrobat.org import had a brick section (`bricks/<category>`: a short intro 
 
 ### Old wiki URLs
 
-The old brick help (`wiki.catrobat.org/bin/view/Documentation/BrickDocumentation/<Class>`) named bricks by their Catroid class. `/app/docs/reference/bricks/by-class/<Class>` answers with a 301 to the brick's page: a class that is a type goes to its page, a script brick's class to its script's (`WhenStartedBrick` → `StartScript`, `WhenClonedBrick` → `WhenClonedScript`); an unknown class (a brick Catroid no longer has) gets a 302 to the reference.
+The old brick help (`wiki.catrobat.org/bin/view/Documentation/BrickDocumentation/<Class>`) named bricks by their Catroid class. `/app/docs/reference/bricks/by-class/<Class>` answers with a 301 to the brick's page: a class that is a type goes to its page, a script brick's class to its script's (`WhenStartedBrick` → `StartScript`, `WhenClonedBrick` → `WhenClonedScript`); an unknown class (a brick Catroid no longer has) gets a 302 to the reference. A `?locale=` (the app's help sends its language) is kept, nothing else.
 
 To make the old URLs work, `wiki.catrobat.org` needs a DNS record proxied by Cloudflare (no origin needed) and a Cloudflare redirect rule (Rules → Redirect Rules, dynamic):
 
