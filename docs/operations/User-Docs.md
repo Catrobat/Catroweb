@@ -82,7 +82,7 @@ Try it: `bin/console catrobat:docs:search "make my cat jump" --locale=de` prints
 
 **Development:** `docker compose -f docker/docker-compose.dev.yaml --profile docs-search up -d` starts the embedding server (`embeddings`, pinned image `text-embeddings-inference:cpu-1.9.0`; the first start downloads the model into a volume). The app container reaches it at `http://embeddings`, the host at `http://127.0.0.1:5006`. Then run `bin/console catrobat:docs:sync`.
 
-**Production** needs the same server reachable from the web host, with `DOCS_EMBEDDING_URL` set to it (the container is defined with the server setup, not in this repo), followed by `bin/console catrobat:docs:sync`. Until then the search works as a keyword search. The model needs about 500 MB of RAM and a CPU core while a sync embeds the pages.
+**Production** runs the same server on the web host (container `docs-embeddings`, compose file `~deploy/docs-embeddings/docker-compose.yml`, CPU and memory capped, published on `127.0.0.1:5006`); `.env.prod` sets `DOCS_EMBEDDING_URL` to it, followed by `bin/console catrobat:docs:sync`. Until then the search works as a keyword search. The model needs about 500 MB of RAM and a CPU core while a sync embeds the pages.
 
 Tests use `FakeDocsEmbedder` (test environment): deterministic vectors in which "jump", "springen" and "y" share a meaning, so Behat proves the hybrid path without the model.
 
