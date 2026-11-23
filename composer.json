@@ -39,7 +39,7 @@
     "sonata-project/admin-bundle": "4.43.*",
     "sonata-project/doctrine-orm-admin-bundle": "4.21.*",
     "sonata-project/exporter": "3.4.*",
-    "sonata-project/twig-extensions": "2.6.*",
+    "sonata-project/twig-extensions": "2.7.*",
     "symfony/asset": "8.1.*",
     "symfony/brevo-mailer": "8.1.*",
     "symfony/cache": "8.1.*",

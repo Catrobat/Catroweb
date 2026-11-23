@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f8767a4d329bf6da563ae3401a19210",
+    "content-hash": "3dbb2538638f116f8a42ff9d7f4260fb",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -6806,28 +6806,28 @@
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "bbc173ad144d30f87e94f544cbec4ab8de1b4b20"
+                "reference": "008c13261c52ac87b014e76b38c0646064bec710"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/bbc173ad144d30f87e94f544cbec4ab8de1b4b20",
-                "reference": "bbc173ad144d30f87e94f544cbec4ab8de1b4b20",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/008c13261c52ac87b014e76b38c0646064bec710",
+                "reference": "008c13261c52ac87b014e76b38c0646064bec710",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.2",
-                "symfony/config": "^6.4 || ^7.3 || ^8.0",
-                "symfony/twig-bridge": "^6.4 || ^7.3 || ^8.0",
+                "symfony/config": "^6.4 || ^7.4 || ^8.1",
+                "symfony/twig-bridge": "^6.4 || ^7.4 || ^8.1",
                 "twig/twig": "^3.13"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.4",
                 "matthiasnoback/symfony-config-test": "^6.1",
-                "matthiasnoback/symfony-dependency-injection-test": "dev-ci-updates as 6.1.0.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^6.2",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.0 || ^2.0",
                 "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
@@ -6835,13 +6835,13 @@
                 "phpstan/phpstan-symfony": "^1.0 || ^2.0",
                 "phpunit/phpunit": "^11.5.38 || ^12.3.10",
                 "rector/rector": "^1.1 || ^2.0",
-                "symfony/browser-kit": "^6.4 || ^7.3 || ^8.0",
-                "symfony/dependency-injection": "^6.4 || ^7.3 || ^8.0",
-                "symfony/framework-bundle": "^6.4 || ^7.3 || ^8.0",
-                "symfony/http-foundation": "^6.4 || ^7.3 || ^8.0",
-                "symfony/http-kernel": "^6.4 || ^7.3 || ^8.0",
-                "symfony/translation": "^6.4 || ^7.3 || ^8.0",
-                "symfony/twig-bundle": "^6.4 || ^7.3 || ^8.0"
+                "symfony/browser-kit": "^6.4 || ^7.4 || ^8.1",
+                "symfony/dependency-injection": "^6.4 || ^7.4 || ^8.1",
+                "symfony/framework-bundle": "^6.4 || ^7.4 || ^8.1",
+                "symfony/http-foundation": "^6.4 || ^7.4 || ^8.1",
+                "symfony/http-kernel": "^6.4 || ^7.4 || ^8.1",
+                "symfony/translation": "^6.4 || ^7.4 || ^8.1",
+                "symfony/twig-bundle": "^6.4 || ^7.4 || ^8.1"
             },
             "type": "library",
             "autoload": {
@@ -6874,7 +6874,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/2.6.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/2.7.0"
             },
             "funding": [
                 {
@@ -6894,7 +6894,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-23T16:41:45+00:00"
+            "time": "2026-11-15T09:48:55+00:00"
         },
         {
             "name": "symfony/asset",
