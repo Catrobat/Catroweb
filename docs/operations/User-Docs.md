@@ -9,6 +9,7 @@ The user documentation is written in the public repo [Catrobat/docs](https://git
 - `bin/console catrobat:docs:sync path/to/checkout` (or a `.tar.gz`) imports a local copy, e.g. while writing docs.
 - An archive without `en/index.md` is refused, so a broken download never wipes the docs. So is an archive without media while share has some (the synced copy is kept).
 - Limits against a broken or hostile archive: `DOCS_MAX_DOWNLOAD_BYTES` (500 MB) for the download, `DOCS_MAX_UNPACKED_BYTES` (1 GB) for what it unpacks to, measured before anything is unpacked. `tar` refuses `..` and absolute names; symlinks are never read.
+- Each file is checked before it is read or copied: at most 5 MB for a page, 50 MB for a media file (a sparse tar entry can unpack far beyond the archive's size).
 - A lock (`docs-sync`) keeps two syncs from running at once, whether started by the cron task or by hand.
 - A file with broken front matter or no `title` is skipped and named in the output; the rest is imported.
 - A file is rendered again only when it changed, or when it embeds a project (`::project`), whose name and picture can change.
@@ -56,6 +57,7 @@ Share never loads docs media from GitHub: every page view would hand the visitor
 ## API and pages
 
 - `GET /api/docs?locale=&flavor=`: the navigation tree. A page's parent is the nearest folder above it that has a page.
+- Without `?locale=` the API answers in the request's language and sends `Cache-Control: private`, so a CDN never hands one visitor's language to another; with it the answer is `public`.
 - `GET /api/docs/pages/{path}?locale=`: title, HTML, table of contents, translation state, `fallback` (true when the English page stands in for a missing translation), the "Improve this page" URL and when the sync last saw the file change.
 - `/{theme}/docs` and `/{theme}/docs/{path}` render the same data in Twig: navigation (pages for the theme's flavour first, collapsed on phones), table of contents, previous and next, the fallback or translation note and "Improve this page" (the English file in GitHub's editor). The language is the visitor's, or `?locale=`. `rel=canonical` points at `/app/docs/...` (with `?locale=` for a translation), `hreflang` alternates list every language the page exists in, and the sitemap lists every page in every language.
 

@@ -156,6 +156,38 @@ final class DocsSyncTest extends KernelTestCase
     }
   }
 
+  public function testOnlyAnExplicitLocaleMayBeCachedByACdn(): void
+  {
+    $this->sync->import(DocsSync::readDirectory(self::FIXTURES)['pages']);
+    $kernel = self::$kernel;
+    $this->assertNotNull($kernel);
+    foreach (['/api/docs', '/api/docs/pages/index'] as $url) {
+      $by_language = $kernel->handle(Request::create($url, server: ['HTTP_ACCEPT_LANGUAGE' => 'de']), HttpKernelInterface::MAIN_REQUEST, false);
+      $this->assertSame(200, $by_language->getStatusCode());
+      $this->assertTrue($by_language->headers->getCacheControlDirective('private'), $url.' depends on Accept-Language');
+      $explicit = $kernel->handle(Request::create($url.'?locale=de'), HttpKernelInterface::MAIN_REQUEST, false);
+      $this->assertTrue($explicit->headers->getCacheControlDirective('public'), $url.'?locale=de');
+    }
+  }
+
+  public function testRefusesAnOversizedFile(): void
+  {
+    $dir = sys_get_temp_dir().'/docs_oversize_test_'.uniqid();
+    $filesystem = new Filesystem();
+    $filesystem->mkdir($dir.'/en');
+    // Sparse, like a hostile tar entry: no disk space used, but filesize() says 6 MB.
+    $handle = fopen($dir.'/en/index.md', 'w');
+    $this->assertNotFalse($handle);
+    ftruncate($handle, 6_000_000);
+    fclose($handle);
+    try {
+      $this->expectExceptionMessage('Docs file too large: en/index.md');
+      DocsSync::readDirectory($dir);
+    } finally {
+      $filesystem->remove($dir);
+    }
+  }
+
   public function testKeepsTheMediaWhenAnArchiveHasNone(): void
   {
     $this->sync->importMedia(DocsSync::readDirectory(self::FIXTURES)['media']);

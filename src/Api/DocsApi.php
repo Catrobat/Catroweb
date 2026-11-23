@@ -28,12 +28,17 @@ class DocsApi implements DocsApiInterface
     return $locale ?? $this->requests->getCurrentRequest()?->getLocale() ?? 'en';
   }
 
+  /** A CDN may only share a response that depends on the URL alone, not on Accept-Language or the hl cookie. */
+  private static function cacheControl(?string $locale): string
+  {
+    return null === $locale ? 'private, max-age=300' : 'public, max-age=300';
+  }
+
   #[\Override]
   public function docsGet(?string $locale, ?string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'public, max-age=300';
-
+    $responseHeaders['Cache-Control'] = self::cacheControl($locale);
     $locale = $this->locale($locale);
 
     return new DocsNavigationResponse(['locale' => $locale, 'items' => $this->library->navigation($locale, $flavor)]);
@@ -42,6 +47,7 @@ class DocsApi implements DocsApiInterface
   #[\Override]
   public function docsPagesPathGet(string $path, ?string $locale, int &$responseCode, array &$responseHeaders): array|object|null
   {
+    $cache_control = self::cacheControl($locale);
     $locale = $this->locale($locale);
     $page = $this->library->page($path, $locale);
     if (null === $page) {
@@ -50,7 +56,7 @@ class DocsApi implements DocsApiInterface
       return ApiErrorResponse::createModel($responseCode, 'not_found', 'Page not found.');
     }
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'public, max-age=300';
+    $responseHeaders['Cache-Control'] = $cache_control;
 
     return new DocsPageResponse([
       'path' => $page->getPath(),

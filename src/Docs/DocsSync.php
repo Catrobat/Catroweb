@@ -19,6 +19,11 @@ use Symfony\Component\Process\Process;
  */
 class DocsSync
 {
+  final public const int MAX_PAGE_BYTES = 5_000_000;
+
+  /** The docs repo's CI rejects images over 1 MB; PDFs (worksheets) may be larger. */
+  final public const int MAX_MEDIA_BYTES = 50_000_000;
+
   /** Extension => content type of the media share serves from the docs repo. */
   final public const array MEDIA_TYPES = [
     'png' => 'image/png',
@@ -179,9 +184,18 @@ class DocsSync
   {
     $pages = $media = [];
     foreach ($files as $path => $file) {
-      if (str_ends_with($path, '.md')) {
+      $media_path = self::mediaPath($path);
+      $limit = str_ends_with($path, '.md') ? self::MAX_PAGE_BYTES : (null === $media_path ? null : self::MAX_MEDIA_BYTES);
+      if (null === $limit) {
+        continue;
+      }
+      // A sparse tar entry can unpack far beyond the archive's size: check each file before reading or copying it.
+      if (filesize($file) > $limit) {
+        throw new \RuntimeException('Docs file too large: '.$path);
+      }
+      if (null === $media_path) {
         $pages[$path] = (string) file_get_contents($file);
-      } elseif (null !== ($media_path = self::mediaPath($path))) {
+      } else {
         $media[$media_path] = $file;
       }
     }
