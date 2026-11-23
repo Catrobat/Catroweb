@@ -284,6 +284,42 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
+  /**
+   * @throws \JsonException
+   * @throws \Psr\Cache\InvalidArgumentException
+   */
+  #[\Override]
+  public function docsReferenceBricksTypeProjectsGet(string $type, int $limit, ?string $cursor, string $attributes, int &$responseCode, array &$responseHeaders): ProjectsListResponse
+  {
+    $cursor_data = $this->decodeIntKeysetCursor($cursor);
+    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return new ProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);
+    }
+
+    $response_manager = $this->facade->getResponseManager();
+    $cache_id = $this->sharedListCacheId(sprintf('docsBrickProjects_%s_%d_%s_%s', $type, $limit, $cursor ?? '', md5($attributes)));
+    $cached = null === $cache_id ? null : $response_manager->getCachedResponse($cache_id);
+    if (null !== $cached) {
+      $responseCode = $cached['response_code'];
+      $responseHeaders = $cached['response_headers'];
+
+      return $cached['response'];
+    }
+
+    $projects = $this->facade->getLoader()->getProjectsUsingBrickKeyset($type, $limit + 1, $cursor_data['value'] ?? null, $cursor_data['id'] ?? null);
+
+    $responseCode = Response::HTTP_OK;
+    $response = $response_manager->createProjectsKeysetResponse($projects, $limit, 'downloads', $attributes);
+    $response_manager->addResponseHashToHeaders($responseHeaders, $response);
+    if (null !== $cache_id) {
+      $response_manager->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+    }
+
+    return $response;
+  }
+
   #[\Override]
   public function projectsIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?ProjectsListResponse
   {

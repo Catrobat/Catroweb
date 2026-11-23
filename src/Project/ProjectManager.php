@@ -544,6 +544,16 @@ class ProjectManager
   /**
    * @return Project[]
    */
+  public function getProjectsUsingBrickKeyset(string $brick_type, int $limit, ?int $cursor_downloads = null, ?string $cursor_id = null): array
+  {
+    return $this->filterNotSafeForMinors(
+      $this->project_repository->getProjectsUsingBrickKeyset($brick_type, $limit, $cursor_downloads, $cursor_id)
+    );
+  }
+
+  /**
+   * @return Project[]
+   */
   public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null, bool $safe_for_kids_only = false): array
   {
     return $this->project_repository->getPublicUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id, $safe_for_kids_only);

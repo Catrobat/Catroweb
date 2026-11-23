@@ -6,6 +6,7 @@ namespace App\DB\EntityRepository\Project;
 
 use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectBrickUsage;
 use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
 use App\DB\Entity\User\Comment\UserComment;
 use App\Utils\ElasticsearchPagination;
@@ -13,6 +14,7 @@ use App\Utils\RequestHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Elastica\Query;
@@ -303,6 +305,27 @@ class ProjectRepository extends ServiceEntityRepository
     $qb->orderBy($sort_field, \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $cursor_value_param = 'uploaded_at' === $order_by ? $cursor_date : $cursor_value;
     $this->applyKeysetCursor($qb, $sort_field, $cursor_value_param, $cursor_id);
+    $qb->setMaxResults($limit);
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**
+   * Public projects whose code uses the brick, most downloaded first.
+   *
+   * @return Project[]
+   */
+  public function getProjectsUsingBrickKeyset(string $brick_type, int $limit, ?int $cursor_downloads = null, ?string $cursor_id = null): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb);
+    $qb->innerJoin(ProjectBrickUsage::class, 'bu', Join::WITH, 'bu.project = e')
+      ->andWhere($qb->expr()->eq('bu.brick_type', ':brick_type'))
+      ->andWhere($qb->expr()->eq('u.profile_hidden', $qb->expr()->literal(false)))
+      ->setParameter('brick_type', $brick_type)
+    ;
+    $qb->orderBy('e.downloads', \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
+    $this->applyKeysetCursor($qb, 'e.downloads', $cursor_downloads, $cursor_id);
     $qb->setMaxResults($limit);
 
     return $qb->getQuery()->getResult();
