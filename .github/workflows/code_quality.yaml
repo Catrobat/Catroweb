@@ -285,7 +285,7 @@ jobs:
           BASE: ${{ github.event.pull_request.base.sha }}
         run: |
           changed=$(git diff --name-only --no-renames "$BASE"...HEAD -- 'user-docs/*.md' | while read -r f; do
-            git show "$BASE:$f" 2>/dev/null | awk 'NR==1 && $0!="---" {exit} NR>1 && $0=="---" {exit} tolower($0) ~ /^reviewed: *true *$/ {r=1} END {exit !r}' && echo "$f"
+            if git show "$BASE:$f" 2>/dev/null | awk 'NR==1 && $0!="---" {exit} NR>1 && $0=="---" {exit} tolower($0) ~ /^reviewed: *true *$/ {r=1} END {exit !r}'; then echo "$f"; fi
           done)
           if [ -n "$changed" ]; then
             { echo "### Pages with reviewed: true changed"; echo "A maintainer adds the label update-reviewed after checking them:"; echo "$changed" | sed 's/^/- /'; } >> "$GITHUB_STEP_SUMMARY"
