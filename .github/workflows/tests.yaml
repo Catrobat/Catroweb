@@ -38,7 +38,7 @@ jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Changed files:
   #
-  #   - A pull request that changes only the user docs (user-docs/) skips the jobs below; docs-check.yaml checks it.
+  #   - A pull request that changes only the user docs (user-docs/) skips the jobs below; the user-docs job (code_quality.yaml) checks it.
   #     Skipped jobs count as passing, so the required checks stay green. If this job fails, the jobs below run
   #     anyway.
   #

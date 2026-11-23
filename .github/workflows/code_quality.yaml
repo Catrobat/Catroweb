@@ -42,6 +42,8 @@ on:
   pull_request:
     branches:
       - '**' # all branches
+    # labeled/unlabeled: the label update-reviewed lets the user-docs job accept changes to reviewed pages
+    types: [opened, synchronize, reopened, labeled, unlabeled]
   workflow_dispatch: # player-catroid-pin.yaml runs it on its bump PRs, which GITHUB_TOKEN opens without PR events
 
 concurrency:
@@ -52,7 +54,7 @@ jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Changed files:
   #
-  #   - A pull request that changes only the user docs (user-docs/) skips the jobs below; docs-check.yaml checks it.
+  #   - A pull request that changes only the user docs (user-docs/) skips the jobs below; the user-docs job (code_quality.yaml) checks it.
   #     Skipped jobs count as passing, so the required checks stay green. If this job fails, the jobs below run
   #     anyway.
   #
@@ -61,12 +63,15 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       code: ${{ steps.changes.outputs.code }}
+      docs: ${{ steps.changes.outputs.docs }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 2 # the merge commit and its first parent, the base branch
           filter: blob:none
           sparse-checkout: .github
+      - name: Self-test of the change detection
+        run: .github/actions/code-changed/test.sh
       - id: changes
         uses: ./.github/actions/code-changed
 
@@ -250,6 +255,46 @@ jobs:
       - run: bin/check-default-secrets
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** User docs **
+  #
+  #  - Only when user-docs/ changes: front matter, links, media, redirects and translations (user-docs/check.sh), and
+  #    pages a person reviewed (`reviewed: true` on the base branch) only change with the label update-reviewed
+  #    (user-docs/TRANSLATING.md). A new push drops the label (docs-reviewed-label.yaml), so it only covers the commit
+  #    a maintainer looked at.
+  #
+  user-docs:
+    name: User docs [check]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.docs != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0 # the merge base with the base branch
+          filter: blob:none
+          sparse-checkout: user-docs
+      - name: Pages, links and media
+        run: user-docs/check.sh
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+      - name: Reviewed pages unchanged
+        if: >-
+          github.event_name == 'pull_request' && (github.event.action == 'synchronize'
+          || !contains(github.event.pull_request.labels.*.name, 'update-reviewed'))
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          changed=$(git diff --name-only --no-renames "$BASE"...HEAD -- 'user-docs/*.md' | while read -r f; do
+            git show "$BASE:$f" 2>/dev/null | awk 'NR==1 && $0!="---" {exit} NR>1 && $0=="---" {exit} tolower($0) ~ /^reviewed: *true *$/ {r=1} END {exit !r}' && echo "$f"
+          done)
+          if [ -n "$changed" ]; then
+            { echo "### Pages with reviewed: true changed"; echo "A maintainer adds the label update-reviewed after checking them:"; echo "$changed" | sed 's/^/- /'; } >> "$GITHUB_STEP_SUMMARY"
+            echo "These pages have reviewed: true on the base branch. Changing them needs the label update-reviewed:"
+            echo "$changed"
+            exit 1
+          fi
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # CI gate:
   #
   #   - Aggregates every job of this workflow into a single status check, so branch protection can require one stable
@@ -271,6 +316,7 @@ jobs:
       - lint-yaml
       - lint-container
       - check-secrets
+      - user-docs
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -287,6 +333,7 @@ jobs:
             lint-yaml ${{ needs.lint-yaml.result }}
             lint-container ${{ needs.lint-container.result }}
             check-secrets ${{ needs.check-secrets.result }}
+            user-docs ${{ needs.user-docs.result }}
         run: |
           echo "$RESULTS"
           failed=0

@@ -1,7 +1,7 @@
 name: 'User docs: reviewed label'
 
 # A new push to a pull request removes update-reviewed: a maintainer adds it again after checking the new commits
-# (docs-check.yaml). pull_request_target so it also works for pull requests from forks; it checks out no code.
+# (user-docs job in code_quality.yaml). pull_request_target so it also works for pull requests from forks; it checks out no code.
 on:
   pull_request_target:
     types: [synchronize]

@@ -228,18 +228,24 @@ task('update:special', function () {
   run('bin/console catrobat:update:special');
 });
 
-// The user docs (user-docs/) without a full deploy (.github/workflows/docs-publish.yaml): replace the live release's
-// copy and sync it into the database. A full deploy ships user-docs/ with the release and syncs it itself, so the
-// publish is done as soon as the live copy matches. It waits (up to ~30 min) while a deploy, also a manual one, holds
-// the deploy lock, and holds the lock itself while it changes the release.
+// The user docs (user-docs/) without a full deploy (.github/workflows/docs-publish.yaml): a new copy in the live
+// release, synced into the database, then swapped in. A full deploy ships user-docs/ with the release and syncs it
+// itself, so the publish is done as soon as the live copy matches. It waits (up to ~30 min) while a deploy, also a
+// manual one, holds the deploy lock, and holds the lock itself while it changes the release.
 desc('Publish the user docs to the live release');
 task('docs:publish', function () {
+  // Not {{bin/console}}: that points at an unfinished release if a failed deploy left one behind.
+  $console = 'cd {{current_path}} && {{bin/php}} bin/console --no-interaction';
+  if (!test("{$console} help catrobat:docs:sync >/dev/null 2>&1")) {
+    warning('The live release has no catrobat:docs:sync yet: nothing published, the next deploy ships the docs');
+
+    return;
+  }
   $hash = "cd %s && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum | sha256sum | cut -d' ' -f1";
   $wanted = trim(runLocally(sprintf($hash, __DIR__.'/user-docs')));
-  $live = static fn (): string => trim(run(sprintf($hash, '{{current_path}}/user-docs').' 2>/dev/null || true'));
   $waited = 0;
   for ($delay = 15;; $delay = min(2 * $delay, 300)) {
-    if ($live() === $wanted) {
+    if (trim(run(sprintf($hash, '{{current_path}}/user-docs').' 2>/dev/null || true')) === $wanted) {
       info('The live release already has these user docs');
 
       return;
@@ -254,16 +260,34 @@ task('docs:publish', function () {
     sleep($delay);
     $waited += $delay;
   }
+
+  // Each version in its own folder; user-docs becomes a symlink to it, replaced atomically (mv -T renames over it).
+  $version = 'user-docs.'.substr($wanted, 0, 12);
+  $new = "{{current_path}}/{$version}";
+  $swapped = false;
   try {
-    // Into a new folder next to the live one (unchanged files hard-linked from it), then swapped in by rename, so
-    // share never serves a half-copied user-docs/ (media are served straight from it).
-    run('rm -rf {{current_path}}/user-docs.new {{current_path}}/user-docs.old');
-    upload(__DIR__.'/user-docs/', '{{current_path}}/user-docs.new/', ['options' => ['--delete', '--link-dest=../user-docs']]);
-    // Synced before the swap: if the sync fails, the live copy still differs and a rerun publishes again.
-    // Not {{bin/console}}: that points at an unfinished release if a failed deploy left one behind.
-    run('cd {{current_path}} && {{bin/php}} bin/console catrobat:docs:sync --no-interaction {{current_path}}/user-docs.new');
-    run('cd {{current_path}} && { [ ! -e user-docs ] || mv user-docs user-docs.old; } && mv user-docs.new user-docs && rm -rf user-docs.old');
+    run("rm -rf {$new}");
+    // No -t/-p: files differ from the live ones in mtime only, and --link-dest hard-links only identical files.
+    upload(__DIR__.'/user-docs/', "{$new}/", ['flags' => '-rlz', 'options' => ['--checksum', '--delete', '--link-dest=../user-docs/']]);
+    run("{$console} catrobat:docs:sync {$new}"); // before the swap: a failed sync leaves the live copy, a rerun retries
+    // The release's own folder from git becomes user-docs.git once (put back if the swap fails).
+    $previous = trim(run(<<<SH
+      cd {{current_path}}
+      if [ -L user-docs ]; then prev=\$(readlink user-docs); elif [ -e user-docs ]; then mv user-docs user-docs.git && prev=user-docs.git; fi
+      if ! { ln -sfn {$version} user-docs.link && mv -T user-docs.link user-docs; }; then
+        [ "\$prev" != user-docs.git ] || mv -T user-docs.git user-docs
+        exit 1
+      fi
+      echo "\$prev"
+      SH));
+    $swapped = true;
+    if ('' !== $previous && $previous !== $version) {
+      run("rm -rf {{current_path}}/{$previous}");
+    }
   } finally {
+    if (!$swapped) {
+      run("rm -rf {$new} {{current_path}}/user-docs.link");
+    }
     invoke('deploy:unlock');
   }
 });
