@@ -284,6 +284,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/docs/reference/bricks/[a-zA-Z0-9_]+/projects/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/media/library/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

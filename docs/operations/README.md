@@ -1,5 +1,6 @@
 # Operations
 
+- [Brick-Examples.md](./Brick-Examples.md) — Example projects per brick for the docs, `project_brick_usage` and its backfill command.
 - [Code-View.md](./Code-View.md) — The project page's code view, made by the player's code export (Catroid's own code) under Node.
 - [Background-Jobs.md](./Background-Jobs.md) — Queues, workers and periodic tasks (Symfony Messenger + Scheduler), async API jobs, operations.
 - [Protected-Project-Files.md](./Protected-Project-Files.md) — Authorized delivery of project files and the nginx rollout order.
