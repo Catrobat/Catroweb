@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Politika e privatësisë 
 catro-notifications:
+  doc-comment:
+    message: "%user_link% komentoi një faqe të dokumentacionit: %page_title%"
   noFollowers: "Me sa duket nuk ke asnjë njoftim nga ndjekësit."
   noComments: "Me sa duket nuk ke asnjë njoftim për koment."
   noReactions: "Me sa duket nuk ke asnjë njoftim reagimi. "
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Kjo faqe është përkthyer automatikisht."
   stale: "Faqja në anglisht ka ndryshuar që kur u bë ky përkthim, prandaj disa pjesë mund të jenë të vjetruara."
   video: "Luaj videon (ngarkohet nga YouTube)"
+  comments: "Komente dhe këshilla"
+  comments_empty: "Ende nuk ka komente. A ka diçka të paqartë, apo ke një këshillë? Shkruaje këtu."

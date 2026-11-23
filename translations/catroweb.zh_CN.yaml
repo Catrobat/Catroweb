@@ -628,6 +628,8 @@ footer:
 privacy-policy:
   header: 隐私策略
 catro-notifications:
+  doc-comment:
+    message: "%user_link% 评论了文档页面：%page_title%"
   noFollowers: "看起来您没有任何关注者通知。"
   noComments: "您似乎没有任何评论通知。"
   noReactions: "看起来你没有任何反应通知。"
@@ -1045,3 +1047,5 @@ docs:
   machine_translated: "此页面为自动翻译。"
   stale: "此翻译完成后英文页面已有改动，部分内容可能已过时。"
   video: "播放视频（从 YouTube 加载）"
+  comments: "评论与技巧"
+  comments_empty: "还没有评论。有不清楚的地方，或者有什么技巧吗？写在这里吧。"

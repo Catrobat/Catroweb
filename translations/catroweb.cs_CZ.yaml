@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Ochrana soukromí
 catro-notifications:
+  doc-comment:
+    message: "%user_link% okomentoval stránku dokumentace: %page_title%"
   noFollowers: "Vypadá to, že nemáš žádná oznámení o sledujících."
   noComments: "Vypadá to, že nemáš žádná oznámení o komentářích."
   noReactions: "Vypadá to, že nemáš žádná oznámení o reakcích."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Tato stránka byla přeložena automaticky."
   stale: "Anglická stránka se od tohoto překladu změnila, takže části mohou být zastaralé."
   video: "Přehrát video (načte se z YouTube)"
+  comments: "Komentáře a tipy"
+  comments_empty: "Zatím žádné komentáře. Je něco nejasné, nebo máš tip? Napiš ho sem."

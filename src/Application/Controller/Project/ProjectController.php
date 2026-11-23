@@ -105,6 +105,12 @@ class ProjectController extends AbstractController
   #[Route(path: 'project/comment/{id}', name: 'project_comment', methods: ['GET'])]
   public function projectCommentDetail(string $id): Response
   {
+    // A comment on a docs page (linked from the moderation queue) is shown on that page.
+    $doc_path = $this->comment_repository->find($id)?->getDocPath();
+    if (null !== $doc_path) {
+      return $this->redirect($this->generateUrl('docs', ['path' => 'index' === $doc_path ? '' : $doc_path]).'#comments');
+    }
+
     $arr_comment = $this->comment_repository->getProjectCommentDetailViewData($id);
     if (!isset($arr_comment['program_id'])) {
       return $this->redirectToIndexOnError();

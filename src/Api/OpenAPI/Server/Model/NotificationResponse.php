@@ -191,6 +191,17 @@ class NotificationResponse
   protected ?string $review_url = null;
 
   /**
+   * Page the notification is about, when it is not a project, studio or user (a docs page).
+   *
+   * @SerializedName("url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $url = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -211,6 +222,7 @@ class NotificationResponse
       $this->message = array_key_exists('message', $data) ? $data['message'] : $this->message;
       $this->prize = array_key_exists('prize', $data) ? $data['prize'] : $this->prize;
       $this->review_url = array_key_exists('review_url', $data) ? $data['review_url'] : $this->review_url;
+      $this->url = array_key_exists('url', $data) ? $data['url'] : $this->url;
     }
   }
 
@@ -494,6 +506,28 @@ class NotificationResponse
   public function setReviewUrl(?string $review_url = null): self
   {
     $this->review_url = $review_url;
+
+    return $this;
+  }
+
+  /**
+   * Gets url.
+   */
+  public function getUrl(): ?string
+  {
+    return $this->url;
+  }
+
+  /**
+   * Sets url.
+   *
+   * @param string|null $url Page the notification is about, when it is not a project, studio or user (a docs page)
+   *
+   * @return $this
+   */
+  public function setUrl(?string $url = null): self
+  {
+    $this->url = $url;
 
     return $this;
   }

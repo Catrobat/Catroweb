@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Pravila privatnosti
 catro-notifications:
+  doc-comment:
+    message: "%user_link% je komentirao stranicu dokumentacije: %page_title%"
   noFollowers: "Izgleda da nemaš obavijesti o pratiteljima."
   noComments: "Izgleda da nemaš obavijesti o komentarima."
   noReactions: "Izgleda da nemaš obavijesti o reakcijama."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Ova je stranica automatski prevedena."
   stale: "Engleska se stranica promijenila nakon ovog prijevoda, pa dijelovi mogu biti zastarjeli."
   video: "Pokreni video (učitava se s YouTubea)"
+  comments: "Komentari i savjeti"
+  comments_empty: "Još nema komentara. Je li nešto nejasno ili imaš savjet? Napiši ga ovdje."

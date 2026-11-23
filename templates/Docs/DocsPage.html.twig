@@ -86,6 +86,8 @@
           <span class="material-icons" aria-hidden="true">edit</span>{{ 'docs.improve'|trans({}, 'catroweb') }}
         </a>
       </p>
+
+      {{ include('Docs/Comments.html.twig', {doc_path: page.path}) }}
     </article>
   </div>
 {% endblock %}

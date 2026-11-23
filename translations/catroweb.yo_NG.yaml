@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: "Ìlànà ìpamọ́"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% sọ àsọyé lórí ojú-ìwé ìwé-àlàyé kan: %page_title%"
   noFollowers: "Ó dàbí pé o kò ní ìfitónilétí olùtẹ̀lé kankan."
   noComments: "Ó dàbí pé o kò ní ìfitónilétí àsọyé kankan."
   noReactions: "Ó dàbí pé o kò ní ìfitónilétí ìhùwàsí kankan."
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "A túmọ̀ ojú-ìwé yìí láìfọwọ́yí."
   stale: "Ojú-ìwé Gẹ̀ẹ́sì ti yí padà láti ìgbà tí a ti ṣe ìtumọ̀ yìí, nítorí náà àwọn apá kan lè ti di àtijọ́."
   video: "Ṣe fídíò (ó ń gbé wọlé láti YouTube)"
+  comments: "Àwọn àsọyé àti ìmọ̀ràn"
+  comments_empty: "Kò sí àsọyé kankan síbẹ̀. Ṣé ohun kan kò yé ọ, tàbí o ní ìmọ̀ràn kan? Kọ ọ́ síbí."

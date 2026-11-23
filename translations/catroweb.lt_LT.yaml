@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Privatumo taisyklės
 catro-notifications:
+  doc-comment:
+    message: "%user_link% pakomentavo dokumentacijos puslapį: %page_title%"
   noFollowers: 'Panašu, kad neturi jokių pranešimų apie sekėjus.'
   noComments: 'Panašu, kad neturi jokių pranešimų apie komentarus.'
   noReactions: 'Panašu, kad neturi jokių pranešimų apie reakcijas.'
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Šis puslapis išverstas automatiškai."
   stale: "Angliškas puslapis pasikeitė po šio vertimo, todėl kai kurios dalys gali būti pasenusios."
   video: "Paleisti vaizdo įrašą (įkeliamas iš YouTube)"
+  comments: "Komentarai ir patarimai"
+  comments_empty: "Komentarų dar nėra. Kažkas neaišku, ar turi patarimą? Parašyk jį čia."

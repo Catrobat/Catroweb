@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Gizlilik Siyasəti
 catro-notifications:
+  doc-comment:
+    message: "%user_link% sənədləşmə səhifəsinə şərh yazdı: %page_title%"
   noFollowers: 'Deyəsən izləyici bildirişin yoxdur.'
   noComments: 'Deyəsən rəy bildirişin yoxdur.'
   noReactions: 'Deyəsən reaksiya bildirişin yoxdur.'
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Bu səhifə avtomatik tərcümə edilib."
   stale: "Bu tərcümə ediləndən sonra ingiliscə səhifə dəyişib, ona görə bəzi hissələr köhnə ola bilər."
   video: "Videonu oynat (YouTube-dan yüklənir)"
+  comments: "Şərhlər və məsləhətlər"
+  comments_empty: "Hələ şərh yoxdur. Nəsə aydın deyil, yoxsa məsləhətin var? Buraya yaz."

@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: سياسة الخصوصية
 catro-notifications:
+  doc-comment:
+    message: "علّق %user_link% على صفحة في التوثيق: %page_title%"
   noFollowers: "يبدو أنك لا تملك أي إشعارات متابعة."
   noComments: "يبدو أنك لا تملك أي إشعارات تعليق."
   noReactions: "يبدو أنك لا تملك أي إشعارات رد فعل."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "تُرجمت هذه الصفحة تلقائيًا."
   stale: "تغيّرت الصفحة الإنجليزية منذ إعداد هذه الترجمة، لذا قد تكون بعض أجزائها قديمة."
   video: "تشغيل الفيديو (يُحمَّل من YouTube)"
+  comments: "التعليقات والنصائح"
+  comments_empty: "لا توجد تعليقات بعد. هل هناك شيء غير واضح، أو لديك نصيحة؟ اكتبها هنا."

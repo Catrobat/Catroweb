@@ -8,7 +8,6 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\Comment\UserComment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -83,108 +82,19 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function getProjectCommentsPageData(Project $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
   {
-    $qb = $this->createQueryBuilder('c');
+    return $this->getCommentsPageData('c.project = :target AND c.parent_id IS NULL', $project, $limit, $cursor_date, $cursor_id);
+  }
 
-    $qb->innerJoin('c.user', 'cu')
-      ->select(
-        'c.id',
-        'c.username',
-        'c.text',
-        'c.is_deleted',
-        'c.auto_hidden as is_reported',
-        'c.uploadDate as upload_date',
-        'c.parent_id as parent_id',
-        'cu.id as user_id',
-        'cu.approved as user_approved')
-      ->where('c.project = :project')
-      ->andWhere('c.parent_id IS NULL')
-      ->andWhere('c.auto_hidden = false')
-      ->setParameter('project', $project)
-      ->orderBy('c.uploadDate', \SortDirection::Descending)
-      ->addOrderBy('c.id', \SortDirection::Descending)
-      ->setMaxResults($limit + 1)
-    ;
-
-    if ($cursor_date instanceof \DateTimeInterface && null !== $cursor_id) {
-      $qb->andWhere(
-        $qb->expr()->orX(
-          $qb->expr()->lt('c.uploadDate', ':cursorDate'),
-          $qb->expr()->andX(
-            $qb->expr()->eq('c.uploadDate', ':cursorDate'),
-            $qb->expr()->lt('c.id', ':cursorId')
-          )
-        )
-      )
-        ->setParameter('cursorDate', $cursor_date)
-        ->setParameter('cursorId', $cursor_id)
-      ;
-    }
-
-    $results = $qb->getQuery()->getResult();
-    $has_more = count($results) > $limit;
-    if ($has_more) {
-      $results = array_slice($results, 0, $limit);
-    }
-
-    return [
-      'comments' => $this->attachReplyCounts($results),
-      'has_more' => $has_more,
-    ];
+  public function getDocCommentsPageData(string $doc_path, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
+  {
+    return $this->getCommentsPageData('c.doc_path = :target AND c.parent_id IS NULL', $doc_path, $limit, $cursor_date, $cursor_id);
   }
 
   public function getCommentRepliesPageData(string $comment_id, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
   {
-    $qb = $this->createQueryBuilder('c');
-
-    $qb->innerJoin('c.user', 'cu')
-      ->select(
-        'c.id',
-        'c.username',
-        'c.text',
-        'c.is_deleted',
-        'c.auto_hidden as is_reported',
-        'c.uploadDate as upload_date',
-        'c.parent_id as parent_id',
-        'cu.id as user_id',
-        'cu.approved as user_approved')
-      ->where('c.parent_id = :parentId')
-      ->andWhere('c.auto_hidden = false')
-      ->setParameter('parentId', $comment_id)
-      ->orderBy('c.uploadDate', \SortDirection::Descending)
-      ->addOrderBy('c.id', \SortDirection::Descending)
-      ->setMaxResults($limit + 1)
-    ;
-
-    if ($cursor_date instanceof \DateTimeInterface && null !== $cursor_id) {
-      $qb->andWhere(
-        $qb->expr()->orX(
-          $qb->expr()->lt('c.uploadDate', ':cursorDate'),
-          $qb->expr()->andX(
-            $qb->expr()->eq('c.uploadDate', ':cursorDate'),
-            $qb->expr()->lt('c.id', ':cursorId')
-          )
-        )
-      )
-        ->setParameter('cursorDate', $cursor_date)
-        ->setParameter('cursorId', $cursor_id)
-      ;
-    }
-
-    $results = $qb->getQuery()->getResult();
-    $has_more = count($results) > $limit;
-    if ($has_more) {
-      $results = array_slice($results, 0, $limit);
-    }
-
-    return [
-      'comments' => $this->attachReplyCounts($results),
-      'has_more' => $has_more,
-    ];
+    return $this->getCommentsPageData('c.parent_id = :target', $comment_id, $limit, $cursor_date, $cursor_id);
   }
 
-  /**
-   * @throws NonUniqueResultException
-   */
   public function getProjectCommentDetailViewData(string $comment_id): ?array
   {
     $result = $this->createQueryBuilder('c')
@@ -215,6 +125,61 @@ class UserCommentRepository extends ServiceEntityRepository
     $results = $this->attachReplyCounts([$result]);
 
     return $results[0];
+  }
+
+  /**
+   * Visible comments matching $condition (on the parameter `target`), newest first, after the cursor.
+   *
+   * @return array{comments: array<int, array<string, mixed>>, has_more: bool}
+   */
+  private function getCommentsPageData(string $condition, mixed $target, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
+  {
+    $qb = $this->createQueryBuilder('c');
+
+    $qb->innerJoin('c.user', 'cu')
+      ->select(
+        'c.id',
+        'c.username',
+        'c.text',
+        'c.is_deleted',
+        'c.auto_hidden as is_reported',
+        'c.uploadDate as upload_date',
+        'c.parent_id as parent_id',
+        'cu.id as user_id',
+        'cu.approved as user_approved')
+      ->where($condition)
+      ->andWhere('c.auto_hidden = false')
+      ->setParameter('target', $target)
+      ->orderBy('c.uploadDate', \SortDirection::Descending)
+      ->addOrderBy('c.id', \SortDirection::Descending)
+      ->setMaxResults($limit + 1)
+    ;
+
+    if ($cursor_date instanceof \DateTimeInterface && null !== $cursor_id) {
+      $qb->andWhere(
+        $qb->expr()->orX(
+          $qb->expr()->lt('c.uploadDate', ':cursorDate'),
+          $qb->expr()->andX(
+            $qb->expr()->eq('c.uploadDate', ':cursorDate'),
+            $qb->expr()->lt('c.id', ':cursorId')
+          )
+        )
+      )
+        ->setParameter('cursorDate', $cursor_date)
+        ->setParameter('cursorId', $cursor_id)
+      ;
+    }
+
+    $results = $qb->getQuery()->getResult();
+    $has_more = count($results) > $limit;
+    if ($has_more) {
+      $results = array_slice($results, 0, $limit);
+    }
+
+    return [
+      'comments' => $this->attachReplyCounts($results),
+      'has_more' => $has_more,
+    ];
   }
 
   /**

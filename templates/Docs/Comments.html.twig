@@ -1,0 +1,58 @@
+{#
+  Comments and tips on a docs page, shared by all its languages: {{ include('Docs/Comments.html.twig', {doc_path: page.path}) }}.
+  The page's entry must register the `docs--comments` Stimulus controller (assets/Docs/DocsPage.js).
+  Hidden from minors, like the comments on projects.
+#}
+{% if not app.user or not app.user.isMinor() %}
+  <section id="comments" class="docs-comments"
+           {{ stimulus_controller('docs--comments', {
+             docPath: doc_path,
+             listUrl: path('open_api_server_comments_docspagespathcommentsget', {path: doc_path}),
+             commentsUrl: path('open_api_server_comments_commentsiddelete', {id: 0})|replace({'/0': ''}),
+             loginUrl: path('login'),
+             isLoggedIn: app.user is not null,
+             isAdmin: is_granted('ROLE_ADMIN'),
+             currentUserId: app.user ? app.user.id : '',
+             profileUrl: path('profile', {id: '__USER_ID__'}),
+             defaultAvatarUrl: asset('images/default/avatar_default-thumb@1x.webp'),
+           }) }}
+           data-trans-reply="{{ 'project.reply'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report="{{ 'project.report'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-delete="{{ 'project.delete'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-deleted="{{ 'project.deletedComment'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-delete-confirmation="{{ 'project.deleteCommentConfirmation'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-are-you-sure="{{ 'areYouSure'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-delete-it="{{ 'deleteIt'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-unverified="{{ 'accountNotVerified'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-suspended="{{ 'accountSuspended'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-rate-limited="{{ 'moderation.comment.rate_limited'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'comment'}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-error="{{ 'moderation.report.error'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-duplicate="{{ 'moderation.report.duplicate'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-unverified="{{ 'moderation.report.unverified'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb')|e('html_attr') }}"
+           data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb')|e('html_attr') }}">
+    <h2 class="docs-comments__title">{{ 'docs.comments'|trans({}, 'catroweb') }}</h2>
+
+    <form class="docs-comments__form" {{ stimulus_target('docs--comments', 'form') }} data-action="submit->docs--comments#post">
+      <textarea class="docs-comments__input" {{ stimulus_target('docs--comments', 'input') }} required maxlength="5000" rows="3"
+                aria-label="{{ 'project.addComment'|trans({}, 'catroweb')|e('html_attr') }}"
+                placeholder="{{ 'project.addComment'|trans({}, 'catroweb')|e('html_attr') }}"></textarea>
+      <div class="docs-comments__buttons">
+        <button type="button" class="btn btn-outline-secondary rounded-pill docs-comments__cancel" {{ stimulus_target('docs--comments', 'cancel') }}
+                data-action="docs--comments#cancelReply" hidden>{{ 'cancel'|trans({}, 'catroweb') }}</button>
+        <button type="submit" class="btn btn-primary rounded-pill docs-comments__send">{{ 'project.send'|trans({}, 'catroweb') }}</button>
+      </div>
+    </form>
+
+    <p class="docs-comments__empty" {{ stimulus_target('docs--comments', 'empty') }} hidden>{{ 'docs.comments_empty'|trans({}, 'catroweb') }}</p>
+    <div class="docs-comments__list" {{ stimulus_target('docs--comments', 'list') }} data-action="click->docs--comments#act"></div>
+    <button type="button" class="btn btn-outline-primary rounded-pill docs-comments__more" {{ stimulus_target('docs--comments', 'more') }}
+            data-action="docs--comments#load" hidden>{{ 'show-more'|trans({}, 'catroweb') }}</button>
+  </section>
+{% endif %}

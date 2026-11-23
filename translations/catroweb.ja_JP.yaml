@@ -632,6 +632,8 @@ footer:
 privacy-policy:
   header: プライバシーポリシー
 catro-notifications:
+  doc-comment:
+    message: "%user_link% さんがドキュメントのページにコメントしました: %page_title%"
   noFollowers: "フォロワーの通知がないようです。"
   noComments: "コメント通知がないようです。"
   noReactions: "リアクション通知がないようです。"
@@ -1049,3 +1051,5 @@ docs:
   machine_translated: "このページは自動翻訳されました。"
   stale: "この翻訳の後に英語のページが変更されたため、一部が古くなっている可能性があります。"
   video: "動画を再生（YouTube から読み込みます）"
+  comments: "コメントとヒント"
+  comments_empty: "まだコメントはありません。わかりにくいところや、ヒントはありますか？ここに書いてください。"

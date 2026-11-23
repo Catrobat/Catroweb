@@ -110,6 +110,46 @@ interface CommentsApiInterface
   ): array|object|null;
 
   /**
+   * Operation docsPagesPathCommentsGet.
+   *
+   * Get the comments on a docs page
+   *
+   * @param string      $path            Page path without locale and &#x60;.md&#x60;: &#x60;tutorials/jump&#x60;; a folder&#39;s page is the folder, the start page is &#x60;index&#x60;. (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function docsPagesPathCommentsGet(
+    string $path,
+    string $accept_language,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation docsPagesPathCommentsPost.
+   *
+   * Comment on a docs page
+   *
+   * @param string               $path                   Page path without locale and &#x60;.md&#x60;: &#x60;tutorials/jump&#x60;; a folder&#39;s page is the folder, the start page is &#x60;index&#x60;. (required)
+   * @param CommentCreateRequest $comment_create_request (required)
+   * @param string               $accept_language        (optional, default to 'en')
+   * @param int                  &$responseCode          The HTTP Response Code
+   * @param array                $responseHeaders        Additional HTTP headers to return with the response ()
+   */
+  public function docsPagesPathCommentsPost(
+    string $path,
+    CommentCreateRequest $comment_create_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation projectsIdCommentsGet.
    *
    * Get project comments

@@ -71,6 +71,7 @@ class AdminReviewNotificationResponseTest extends TestCase
       $this->createStub(ContentVisibilityManager::class),
       $this->createStub(UserAvatarService::class),
       $url_generator,
+      $this->createStub(\App\Docs\DocsLibrary::class),
     );
 
     $notification = new ModerationNotification(new User(), 'project', 'project-id', $action, 'Content (project "x") was auto-hidden and needs review.');

@@ -64,4 +64,16 @@ Share never loads docs media from a third party: every page view would hand the 
 - `GET /api/docs/pages/{path}?locale=`: title, HTML, table of contents, translation state, `fallback` (true when the English page stands in for a missing translation), the "Improve this page" URL and when the sync last saw the file change.
 - `/{theme}/docs` and `/{theme}/docs/{path}` render the same data in Twig: navigation (pages for the theme's flavour first, collapsed on phones), table of contents, previous and next, the fallback or translation note and "Improve this page" (the English file in GitHub's editor: `github.com/Catrobat/Catroweb/edit/main/user-docs/…`). The language is the visitor's, or `?locale=`. `rel=canonical` points at `/app/docs/...` (with `?locale=` for a translation), `hreflang` alternates list every language the page exists in, and the sitemap lists every page in every language.
 
+## Comments
+
+Readers can leave comments and tips below a page (`templates/Docs/Comments.html.twig`, Stimulus controller `docs--comments`); good tips go into the guides by a docs pull request.
+
+- A comment is a `user_comment` row with `doc_path` set to the page path (`tutorials/jump`), not a `doc_page` id: the rows are a per-language cache the sync replaces, and one page shares its comments across all languages.
+- `GET`/`POST /api/docs/pages/{path}/comments` list and create them (a reply has `parent_id`, on the same page); everything else is the generic comment API (`/api/comments/{id}/replies`, delete, report, translation). Writing follows the project comments: logged in, verified and not suspended (`AccountStateEventListener`), not a minor, the comment rate limits, `TextSanitizer`.
+- Reports, the moderation queue, hiding and appeals treat them as any `comment`. The queue's link opens the docs page.
+- Every admin is a docs maintainer and gets a notification (`DocCommentNotification`) for each new comment.
+- A moderation notification about a docs comment (hidden, warned) links its author to the docs page (`url`).
+- **Rollback** to a release before docs comments: run `DELETE FROM CatroNotification WHERE notification_type = 'doc_comment';` (a rollback does not run the migration's `down()`). The old code has no `doc_comment` notification type, so an admin's notification page fails while such rows exist.
+- Another docs page (e.g. a brick page) shows comments with `{{ include('Docs/Comments.html.twig', {doc_path: …}) }}` and the controller registered in its entry. The API accepts the path of a guide that has an English page and `reference/bricks/<Type>` for brick pages (`CommentsApi::isCommentableDocPage`).
+
 Tests: `tests/PhpUnit/Docs/`, Behat suites `api-docs` and `web-docs`. Both use `tests/TestData/Docs/`, a small folder with the same layout (`catrobat.user_docs.dir` in the test environment).

@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% kọwara ihe na peeji akwụkwọ ntuziaka: %page_title%"
   noFollowers: 'Ọ dị ka ị nweghị ọkwa ndị na-eso.'
   noComments: 'Ọ dị ka ị nweghị ọkwa nkọwa.'
   noReactions: 'Ọ dị ka ị nweghị ọkwa mmeghachi omume.'
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "A sụgharịrị peeji a na-akpaghị aka."
   stale: "Peeji Bekee agbanweela kemgbe e mere nsụgharị a, ya mere akụkụ ya nwere ike ịbụ ochie."
   video: "Kpọọ vidiyo (na-ebunye site na YouTube)"
+  comments: "Nkọwa na ndụmọdụ"
+  comments_empty: "Enweghị nkọwa ọ bụla ugbu a. Ọ dị ihe na-edoghị anya, ka ị nwere ndụmọdụ? Dee ya ebe a."

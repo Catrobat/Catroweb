@@ -248,10 +248,128 @@
   gap: 0.25rem;
 }
 
+.docs-comments {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.docs-comments__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.docs-comments__form {
+  margin: 1rem 0 1.5rem;
+}
+
+.docs-comments__input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: inherit;
+  resize: vertical;
+}
+
+.docs-comments__input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.docs-comments__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.docs-comments__empty {
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-comments .single-comment,
+.docs-comments .single-reply {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid light-dark(#edf2f7, #2d3748);
+  border-radius: 0.75rem;
+}
+
+.docs-comments .single-reply {
+  margin: 0.75rem 0 0;
+  padding: 0.75rem 0 0;
+  border: none;
+  border-top: 1px solid light-dark(#edf2f7, #2d3748);
+  border-radius: 0;
+}
+
+.docs-comments .comment-avatar-img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.docs-comments .comment-payload-wrapper {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.docs-comments .comment-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docs-comments .usr-name {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.docs-comments .comment-meta {
+  font-size: 0.8rem;
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-comments .comment-actions {
+  margin-left: auto;
+}
+
+.docs-comments .catro-icon-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: none;
+  background: none;
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-comments .comment-delete-button {
+  color: light-dark(#c53030, #fc8181);
+}
+
+.docs-comments .comment-text {
+  margin: 0.25rem 0 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.docs-comments .deleted-comment {
+  font-style: italic;
+  color: light-dark(#5a6374, #a0aec0);
+}
+
 @media print {
   .docs-nav,
   .docs-pager,
-  .docs-improve {
+  .docs-improve,
+  .docs-comments {
     display: none;
   }
 }

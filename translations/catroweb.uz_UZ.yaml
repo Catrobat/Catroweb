@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: "Maxfiylik siyosati"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% hujjatlar sahifasiga izoh qoldirdi: %page_title%"
   noFollowers: "Koʻrinishidan, obunachilar haqida bildirishnomalaring yoʻq."
   noComments: "Koʻrinishidan, izohlar haqida bildirishnomalaring yoʻq."
   noReactions: "Koʻrinishidan, reaksiyalar haqida bildirishnomalaring yoʻq."
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "Bu sahifa avtomatik tarjima qilingan."
   stale: "Bu tarjimadan keyin inglizcha sahifa o'zgargan, shuning uchun ba'zi qismlari eskirgan bo'lishi mumkin."
   video: "Videoni ijro etish (YouTube'dan yuklanadi)"
+  comments: "Izohlar va maslahatlar"
+  comments_empty: "Hali izohlar yo‘q. Biror narsa tushunarsizmi yoki maslahatingiz bormi? Shu yerga yozing."

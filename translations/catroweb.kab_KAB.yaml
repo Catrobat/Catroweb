@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: "Tasertit n tbaḍnit"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% yewwi-d awennit ɣef usebter n tsemlit: %page_title%"
   noFollowers: "Yettban-d ulac ɣur-k ilɣa n yimeḍfaren."
   noComments: "Yettban-d ulac ɣur-k ilɣa n yiwenniten."
   noReactions: "Yettban-d ulac ɣur-k ilɣa n tsedmirin."
@@ -1040,3 +1042,5 @@ docs:
   machine_translated: "Asebter-a yettwasuqqel s wudem awurman."
   stale: "Asebter s Teglizit ibeddel seg mi yettwag usuqqel-a, ihi kra n yiḥricen zemren ad ilin d iqburen."
   video: "Urar tavidyut (tettali-d seg YouTube)"
+  comments: "Iwenniten d iwellihen"
+  comments_empty: "Ulac iwenniten ar tura. Yella kra ur nban ara, neɣ tesɛiḍ awellih? Aru-t da."

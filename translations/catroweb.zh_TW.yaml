@@ -625,6 +625,8 @@ footer:
 privacy-policy:
   header: 隱私權政策
 catro-notifications:
+  doc-comment:
+    message: "%user_link% 在說明文件頁面留言：%page_title%"
   noFollowers: "你似乎沒有任何追蹤者通知。"
   noComments: "你似乎沒有任何留言通知。"
   noReactions: "你似乎沒有任何反應通知。"
@@ -1042,3 +1044,5 @@ docs:
   machine_translated: "此頁面為自動翻譯。"
   stale: "此翻譯完成後英文頁面已有變更，部分內容可能已過時。"
   video: "播放影片（從 YouTube 載入）"
+  comments: "留言與小技巧"
+  comments_empty: "還沒有留言。有不清楚的地方，或是有小技巧嗎？寫在這裡吧。"

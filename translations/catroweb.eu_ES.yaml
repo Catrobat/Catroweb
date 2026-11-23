@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: 'Pribatutasun-politika'
 catro-notifications:
+  doc-comment:
+    message: "%user_link% erabiltzaileak dokumentazioko orri bat iruzkindu du: %page_title%"
   noFollowers: 'Badirudi ez duzula jarraitzaileen jakinarazpenik.'
   noComments: 'Badirudi ez duzula iruzkinen jakinarazpenik.'
   noReactions: 'Badirudi ez duzula erreakzioen jakinarazpenik.'
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Orri hau automatikoki itzuli da."
   stale: "Ingelesezko orria aldatu egin da itzulpen hau egin zenetik, beraz zati batzuk zaharkituta egon daitezke."
   video: "Erreproduzitu bideoa (YouTubetik kargatzen da)"
+  comments: "Iruzkinak eta aholkuak"
+  comments_empty: "Oraindik ez dago iruzkinik. Zerbait ez dago argi, ala aholkuren bat duzu? Idatzi hemen."

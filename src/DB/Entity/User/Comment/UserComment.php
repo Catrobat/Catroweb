@@ -22,6 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'upload_date_idx', columns: ['uploadDate'])]
 #[ORM\Index(name: 'idx_comment_project_date', columns: ['programId', 'uploadDate'])]
 #[ORM\Index(name: 'idx_comment_parent_date', columns: ['parent_id', 'uploadDate'])]
+#[ORM\Index(name: 'idx_comment_doc_date', columns: ['doc_path', 'uploadDate'])]
 #[ORM\Entity(repositoryClass: UserCommentRepository::class)]
 class UserComment implements \Stringable
 {
@@ -67,6 +68,13 @@ class UserComment implements \Stringable
   #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'], inversedBy: 'user_comments')]
   protected ?Studio $studio = null;
+
+  /**
+   * The docs page this comments on (DocPage path, `tutorials/jump`). A path, not a DocPage row: the rows are a cache
+   * per locale that every sync may replace, and a comment belongs to the page in all of its languages.
+   */
+  #[ORM\Column(type: Types::STRING, length: 191, nullable: true)]
+  protected ?string $doc_path = null;
 
   #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => false])]
   protected bool $is_deleted = false;
@@ -203,6 +211,18 @@ class UserComment implements \Stringable
   public function setStudio(?Studio $studio): UserComment
   {
     $this->studio = $studio;
+
+    return $this;
+  }
+
+  public function getDocPath(): ?string
+  {
+    return $this->doc_path;
+  }
+
+  public function setDocPath(?string $doc_path): UserComment
+  {
+    $this->doc_path = $doc_path;
 
     return $this;
   }

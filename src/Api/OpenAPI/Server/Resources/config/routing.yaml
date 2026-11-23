@@ -70,6 +70,22 @@ open_api_server_codeViewTranslation_projectsidcodetranslationget:
     id: '^[a-zA-Z0-9\-]+$'
 
 # comments
+open_api_server_comments_docspagespathcommentsget:
+  path: /docs/pages/{path}/comments
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.comments::docsPagesPathCommentsGetAction
+  requirements:
+    path: '^[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*$'
+
+open_api_server_comments_docspagespathcommentspost:
+  path: /docs/pages/{path}/comments
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.comments::docsPagesPathCommentsPostAction
+  requirements:
+    path: '^[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*$'
+
 open_api_server_comments_commentsiddelete:
   path: /comments/{id}
   methods: [DELETE]

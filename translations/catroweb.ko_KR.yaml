@@ -625,6 +625,8 @@ footer:
 privacy-policy:
   header: 개인 정보 보호 정책
 catro-notifications:
+  doc-comment:
+    message: "%user_link% 님이 문서 페이지에 댓글을 남겼습니다: %page_title%"
   noFollowers: "팔로어 알림이없는 것 같습니다."
   noComments: "댓글 알림이없는 것 같습니다."
   noReactions: "\n반응 알림이없는 것 같습니다."
@@ -1042,3 +1044,5 @@ docs:
   machine_translated: "이 페이지는 자동으로 번역되었어요."
   stale: "이 번역 이후 영어 페이지가 바뀌어서 일부 내용이 오래되었을 수 있어요."
   video: "동영상 재생 (YouTube에서 불러옴)"
+  comments: "댓글과 팁"
+  comments_empty: "아직 댓글이 없어요. 이해하기 어려운 부분이 있거나 팁이 있나요? 여기에 적어 주세요."

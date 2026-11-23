@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: "Dasar privasi"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% mengulas halaman dokumentasi: %page_title%"
   noFollowers: "Nampaknya kamu tiada pemberitahuan pengikut."
   noComments: "Nampaknya kamu tiada pemberitahuan komen."
   noReactions: "Nampaknya kamu tiada pemberitahuan reaksi."
@@ -1062,3 +1064,5 @@ docs:
   machine_translated: "Halaman ini diterjemahkan secara automatik."
   stale: "Halaman bahasa Inggeris telah berubah sejak terjemahan ini dibuat, jadi sebahagiannya mungkin sudah lapuk."
   video: "Main video (dimuatkan dari YouTube)"
+  comments: "Komen dan petua"
+  comments_empty: "Belum ada komen. Ada yang kurang jelas, atau ada petua? Tulis di sini."

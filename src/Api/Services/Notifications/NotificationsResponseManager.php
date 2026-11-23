@@ -9,6 +9,7 @@ use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
+use App\DB\Entity\User\Notifications\DocCommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
@@ -25,6 +26,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportCategory;
+use App\Docs\DocsLibrary;
 use App\Moderation\AutoModerationService;
 use App\Moderation\ContentVisibilityManager;
 use App\Moderation\ReportProcessor;
@@ -59,8 +61,14 @@ class NotificationsResponseManager extends AbstractResponseManager
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly UserAvatarService $user_avatar_service,
     private readonly UrlGeneratorInterface $url_generator,
+    private readonly DocsLibrary $docs_library,
   ) {
     parent::__construct($translator, $serializer, $cache);
+  }
+
+  private function docCommentsUrl(string $doc_path): string
+  {
+    return $this->url_generator->generate('docs', ['theme' => 'app', 'path' => 'index' === $doc_path ? '' : $doc_path]).'#comments';
   }
 
   /** The text fields a moderation reason can name (catro-notifications.moderation-reason.text.*). */
@@ -205,6 +213,25 @@ class NotificationsResponseManager extends AbstractResponseManager
       ]);
     }
 
+    if ($notification instanceof DocCommentNotification) {
+      $comment = $notification->getComment();
+      $path = (string) $comment?->getDocPath();
+
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'comment',
+        'seen' => $notification->getSeen(),
+        'from' => $comment?->getUser()?->getId(),
+        'from_name' => $comment?->getUser()?->getUserIdentifier(),
+        'avatar' => $this->user_avatar_service->getVariants($comment?->getUser()),
+        'url' => $this->docCommentsUrl($path),
+        'message' => $this->trans('catro-notifications.doc-comment.message', [
+          '%user_link%' => '%user_link%',
+          '%page_title%' => $this->docs_library->page($path, 'en')?->getTitle() ?? $path,
+        ]),
+      ]);
+    }
+
     if ($notification instanceof RemixNotification) {
       if ($notification->getRemixFrom() === $user) {
         return null;
@@ -272,6 +299,10 @@ class NotificationsResponseManager extends AbstractResponseManager
       } elseif ('comment' === $content_type && null !== $content_id) {
         $response['project'] = $this->content_visibility_manager->getCommentProjectId($content_id);
         $response['project_name'] = $this->content_visibility_manager->getCommentProjectName($content_id);
+        $doc_path = $this->content_visibility_manager->getCommentDocPath($content_id);
+        if (null !== $doc_path) {
+          $response['url'] = $this->docCommentsUrl($doc_path);
+        }
       }
 
       return new NotificationResponse($response);
