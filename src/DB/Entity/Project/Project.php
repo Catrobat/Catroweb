@@ -43,6 +43,9 @@ class Project implements \Stringable
 {
   final public const int INITIAL_VERSION = 1;
 
+  /** The browser player (player/) loads projects from this Catrobat language version on, as the app does. */
+  final public const string PLAYER_MIN_LANGUAGE_VERSION = '0.9';
+
   #[ORM\Id]
   #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]

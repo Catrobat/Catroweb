@@ -7,16 +7,17 @@ Feature: Example projects that use a brick, for the docs brick pages
       | 1  | Catrobat | 123456   | false          |
       | 2  | Banned   | 123456   | true           |
     And there are projects:
-      | id | name        | owned by | downloads | private | visible | auto_hidden |
-      | 1  | popular     | Catrobat | 30        | false   | true    | false       |
-      | 2  | rare        | Catrobat | 10        | false   | true    | false       |
-      | 3  | tie low id  | Catrobat | 20        | false   | true    | false       |
-      | 4  | tie high id | Catrobat | 20        | false   | true    | false       |
-      | 5  | private     | Catrobat | 100       | true    | true    | false       |
-      | 6  | invisible   | Catrobat | 100       | false   | false   | false       |
-      | 7  | auto hidden | Catrobat | 100       | false   | true    | true        |
-      | 8  | banned      | Banned   | 100       | false   | true    | false       |
-      | 9  | other brick | Catrobat | 100       | false   | true    | false       |
+      | id | name        | owned by | downloads | private | visible | auto_hidden | language version |
+      | 1  | popular     | Catrobat | 30        | false   | true    | false       | 0.999            |
+      | 2  | rare        | Catrobat | 10        | false   | true    | false       | 0.999            |
+      | 3  | tie low id  | Catrobat | 20        | false   | true    | false       | 0.999            |
+      | 4  | tie high id | Catrobat | 20        | false   | true    | false       | 0.999            |
+      | 5  | private     | Catrobat | 100       | true    | true    | false       | 0.999            |
+      | 6  | invisible   | Catrobat | 100       | false   | false   | false       | 0.999            |
+      | 7  | auto hidden | Catrobat | 100       | false   | true    | true        | 0.999            |
+      | 8  | banned      | Banned   | 100       | false   | true    | false       | 0.999            |
+      | 9  | other brick | Catrobat | 100       | false   | true    | false       | 0.999            |
+      | 10 | too old     | Catrobat | 100       | false   | true    | false       | 0.8              |
     And there are project code statistics:
       | project_id | brick_counts            |
       | 1          | SetXBrick:2,WaitBrick:1 |
@@ -28,9 +29,10 @@ Feature: Example projects that use a brick, for the docs brick pages
       | 7          | SetXBrick:1             |
       | 8          | SetXBrick:1             |
       | 9          | WaitBrick:4             |
+      | 10         | SetXBrick:1             |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
 
-  Scenario: Only public, visible projects using the brick, most downloaded first
+  Scenario: Only public, visible, playable projects using the brick, most downloaded first
     When I request "GET" "/api/docs/reference/bricks/SetXBrick/projects"
     Then the response status code should be "200"
     And the response should have the default projects model structure

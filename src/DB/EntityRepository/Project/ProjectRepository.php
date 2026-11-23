@@ -311,7 +311,7 @@ class ProjectRepository extends ServiceEntityRepository
   }
 
   /**
-   * Public projects whose code uses the brick, most downloaded first.
+   * Public projects whose code uses the brick and the browser player can run, most downloaded first.
    *
    * @return Project[]
    */
@@ -322,7 +322,10 @@ class ProjectRepository extends ServiceEntityRepository
     $qb->innerJoin(ProjectBrickUsage::class, 'bu', Join::WITH, 'bu.project = e')
       ->andWhere($qb->expr()->eq('bu.brick_type', ':brick_type'))
       ->andWhere($qb->expr()->eq('u.profile_hidden', $qb->expr()->literal(false)))
+      // Examples play inline: only what the browser player runs
+      ->andWhere($qb->expr()->gte('e.language_version', ':player_min_language_version'))
       ->setParameter('brick_type', $brick_type)
+      ->setParameter('player_min_language_version', Project::PLAYER_MIN_LANGUAGE_VERSION)
     ;
     $qb->orderBy('e.downloads', \SortDirection::Descending)->addOrderBy('e.id', \SortDirection::Descending);
     $this->applyKeysetCursor($qb, 'e.downloads', $cursor_downloads, $cursor_id);

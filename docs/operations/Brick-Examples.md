@@ -2,8 +2,13 @@
 
 The docs brick pages list community projects that use a brick:
 `GET /api/docs/reference/bricks/{type}/projects` (`{type}` is the code.xml brick type, e.g. `SetXBrick`). It returns
-public, visible projects whose owner is not hidden, most downloaded first, in the usual project list format with a keyset
-cursor. Logged-out and adult responses are cached like the other project lists.
+public, visible projects whose owner is not hidden and that the browser player can run (language version from
+`Project::PLAYER_MIN_LANGUAGE_VERSION` on, the same constant that decides whether the project page offers the player),
+most downloaded first, in the usual project list format with a keyset cursor. Logged-out and adult responses are cached
+like the other project lists.
+
+The query joins and sorts every project that uses the brick. For common bricks (`SetXBrick`, `WaitBrick`, …) a cold
+cache can take around a second; this is accepted because the list cache absorbs repeat requests.
 
 ## Data
 
