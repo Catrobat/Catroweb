@@ -1051,3 +1051,13 @@ inactiveAccount:
   title: 'Seni özledik!'
   content: 'İki yıldır “%username%” Catrobat hesabına giriş yapmadın ve hesabında hiç proje veya yorum yok. Topluluğumuzu canlı tutmak için hesabını %days% gün içinde sileceğiz. Hesabını tutmak istiyorsan bir kez giriş yapman yeterli.'
   button: 'Hesabımı tutmak için giriş yap'
+
+docs:
+  title: "Belgeler"
+  contents: "İçindekiler"
+  on_this_page: "Bu sayfada"
+  improve: "Bu sayfayı geliştir"
+  fallback: "Bu sayfa henüz senin diline çevrilmedi, bu yüzden İngilizce gösteriliyor."
+  machine_translated: "Bu sayfa otomatik olarak çevrildi."
+  stale: "Bu çeviri yapıldıktan sonra İngilizce sayfa değişti, bu yüzden bazı bölümleri güncel olmayabilir."
+  video: "Videoyu oynat (YouTube'dan yüklenir)"

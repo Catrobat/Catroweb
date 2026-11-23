@@ -1030,3 +1030,13 @@ inactiveAccount:
   title: 'Muna kewar ka!'
   content: 'Ba ka shiga asusunka na Catrobat "%username%" ba tsawon shekaru biyu, kuma ba shi da ayyuka ko sharhi. Don al''ummarmu ta ci gaba da kasancewa mai rai, za mu goge shi cikin kwanaki %days%. Idan kana son ka riƙe shi, kawai ka shiga sau ɗaya.'
   button: 'Shiga don riƙe asusuna'
+
+docs:
+  title: "Bayanai"
+  contents: "Abubuwan ciki"
+  on_this_page: "A wannan shafi"
+  improve: "Inganta wannan shafi"
+  fallback: "Ba a fassara wannan shafi zuwa harshenka ba tukuna, don haka ana nuna shi da Turanci."
+  machine_translated: "An fassara wannan shafi ta atomatik."
+  stale: "Shafin Turanci ya canza tun bayan wannan fassarar, don haka wasu sassa na iya zama tsofaffi."
+  video: "Kunna bidiyo (yana lodawa daga YouTube)"

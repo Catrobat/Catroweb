@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Vi saknar dig!'
   content: 'Du har inte loggat in på ditt Catrobat-konto ”%username%” på två år och det har inga projekt eller kommentarer. För att hålla vår community levande tar vi bort det om %days% dagar. Om du vill behålla det räcker det att du loggar in en gång.'
   button: 'Logga in för att behålla mitt konto'
+
+docs:
+  title: "Dokumentation"
+  contents: "Innehåll"
+  on_this_page: "På den här sidan"
+  improve: "Förbättra den här sidan"
+  fallback: "Den här sidan är inte översatt till ditt språk än, så den visas på engelska."
+  machine_translated: "Den här sidan har översatts automatiskt."
+  stale: "Den engelska sidan har ändrats sedan den här översättningen gjordes, så delar av den kan vara inaktuella."
+  video: "Spela upp video (laddas från YouTube)"

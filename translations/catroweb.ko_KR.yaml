@@ -1032,3 +1032,13 @@ inactiveAccount:
   title: '보고 싶어요!'
   content: 'Catrobat 계정 "%username%"에 2년 동안 로그인하지 않았고, 계정에 프로젝트나 댓글도 없어요. 커뮤니티를 활기차게 유지하기 위해 %days%일 후에 계정을 삭제할 거예요. 계정을 지키고 싶다면 한 번만 로그인하면 돼요.'
   button: '로그인해서 계정 유지하기'
+
+docs:
+  title: "문서"
+  contents: "목차"
+  on_this_page: "이 페이지에서"
+  improve: "이 페이지 개선하기"
+  fallback: "이 페이지는 아직 네 언어로 번역되지 않아서 영어로 보여 줘요."
+  machine_translated: "이 페이지는 자동으로 번역되었어요."
+  stale: "이 번역 이후 영어 페이지가 바뀌어서 일부 내용이 오래되었을 수 있어요."
+  video: "동영상 재생 (YouTube에서 불러옴)"

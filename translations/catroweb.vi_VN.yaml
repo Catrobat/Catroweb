@@ -1053,3 +1053,13 @@ inactiveAccount:
   title: 'Chúng mình nhớ bạn!'
   content: 'Bạn đã không đăng nhập vào tài khoản Catrobat “%username%” trong hai năm và tài khoản này không có dự án hay bình luận nào. Để cộng đồng luôn sôi nổi, chúng mình sẽ xóa nó sau %days% ngày. Nếu bạn muốn giữ lại, chỉ cần đăng nhập một lần.'
   button: 'Đăng nhập để giữ tài khoản'
+
+docs:
+  title: "Tài liệu"
+  contents: "Mục lục"
+  on_this_page: "Trên trang này"
+  improve: "Cải thiện trang này"
+  fallback: "Trang này chưa được dịch sang ngôn ngữ của bạn nên đang hiển thị bằng tiếng Anh."
+  machine_translated: "Trang này được dịch tự động."
+  stale: "Trang tiếng Anh đã thay đổi kể từ khi bản dịch này được làm, nên một số phần có thể đã cũ."
+  video: "Phát video (tải từ YouTube)"

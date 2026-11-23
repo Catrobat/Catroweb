@@ -6,6 +6,7 @@ namespace App\Application\EventListener;
 
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Docs\DocPageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
@@ -22,12 +23,14 @@ class SitemapListener
   public function __construct(
     private readonly EntityManagerInterface $entityManager,
     private readonly UrlGeneratorInterface $urlGenerator,
+    private readonly DocPageRepository $docPages,
   ) {
   }
 
   public function populate(SitemapPopulateEvent $event): void
   {
     $this->addStaticPages($event->getUrlContainer());
+    $this->addDocs($event->getUrlContainer());
     $this->addProjects($event->getUrlContainer());
     $this->addUsers($event->getUrlContainer());
   }
@@ -43,6 +46,20 @@ class SitemapListener
       ),
       'default',
     );
+  }
+
+  /** Every guide in every language it exists in; a translation is its own URL (?locale=). */
+  private function addDocs(UrlContainerInterface $urls): void
+  {
+    /** @var list<array{path: string, locale: string, title: string, sort_order: int, flavors: list<string>, updated_at: \DateTime}> $pages */
+    $pages = $this->docPages->guideSummaries();
+    foreach ($pages as $page) {
+      $params = ['theme' => 'app', 'path' => 'index' === $page['path'] ? '' : $page['path']] + ('en' === $page['locale'] ? [] : ['locale' => $page['locale']]);
+      $urls->addUrl(
+        new UrlConcrete($this->urlGenerator->generate('docs', $params, UrlGeneratorInterface::ABSOLUTE_URL), $page['updated_at'], UrlConcrete::CHANGEFREQ_WEEKLY, 0.7),
+        'docs',
+      );
+    }
   }
 
   private function addProjects(UrlContainerInterface $urls): void

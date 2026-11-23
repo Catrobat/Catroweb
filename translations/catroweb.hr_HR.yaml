@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Nedostaješ nam!'
   content: 'Nisi se prijavio/la u svoj Catrobat račun "%username%" već dvije godine, a on nema projekata ni komentara. Kako bi naša zajednica ostala živa, izbrisat ćemo ga za %days% dana. Ako ga želiš zadržati, samo se jednom prijavi.'
   button: 'Prijavi se i zadrži račun'
+
+docs:
+  title: "Dokumentacija"
+  contents: "Sadržaj"
+  on_this_page: "Na ovoj stranici"
+  improve: "Poboljšaj ovu stranicu"
+  fallback: "Ova stranica još nije prevedena na tvoj jezik, pa se prikazuje na engleskom."
+  machine_translated: "Ova je stranica automatski prevedena."
+  stale: "Engleska se stranica promijenila nakon ovog prijevoda, pa dijelovi mogu biti zastarjeli."
+  video: "Pokreni video (učitava se s YouTubea)"

@@ -47,6 +47,9 @@ const PURGE_SAFELIST = [
   /^studio-/,
   /^lazyload/,
   /^carousel/,
+  // Synced docs HTML is rendered in PHP (DocsMarkdown), not in templates: its classes and Markdown's elements
+  /^docs-/,
+  /^(table|thead|tbody|tr|th|td|pre|blockquote|img)$/,
 ]
 
 export function purgeCssPlugin({ rootDir }) {

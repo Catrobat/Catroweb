@@ -108,6 +108,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   // The player's code export (player/README.md) and the code views made with it (App\Project\CodeView).
   $parameters->set('catrobat.code_export.dir', '%kernel.project_dir%/var/code-export');
   $parameters->set('catrobat.code_view.dir', '%kernel.project_dir%/var/code-view/');
+  $parameters->set('catrobat.user_docs.dir', '%kernel.project_dir%/user-docs/');
   $parameters->set('catrobat.file.extract.dir', '%kernel.project_dir%/public/resources/extract/');
   $parameters->set('catrobat.file.extract.path', 'resources/extract/');
   $parameters->set('catrobat.file.storage.dir', '%kernel.project_dir%/public/resources/programs/');
@@ -227,6 +228,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(TranslationApi::class)->tag('open_api_server.api', ['api' => 'translation']);
   $services->set(App\Api\CodeViewTranslationApi::class)->tag('open_api_server.api', ['api' => 'codeViewTranslation']);
   $services->set(JobsApi::class)->tag('open_api_server.api', ['api' => 'jobs']);
+  $services->set(App\Api\DocsApi::class)->tag('open_api_server.api', ['api' => 'docs']);
 
   // Messenger's restart signal (messenger:stop-workers), shared by every release: in the database, not the release's
   // own var/cache, and with a fixed namespace. A cache.pool would derive its namespace from the release directory.

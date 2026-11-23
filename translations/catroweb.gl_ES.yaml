@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Botámoste de menos!'
   content: 'Hai dous anos que non inicias sesión na túa conta de Catrobat "%username%" e non ten proxectos nin comentarios. Para que a nosa comunidade siga activa, eliminarémola dentro de %days% días. Se a queres conservar, só tes que iniciar sesión unha vez.'
   button: 'Iniciar sesión para conservar a miña conta'
+
+docs:
+  title: "Documentación"
+  contents: "Contidos"
+  on_this_page: "Nesta páxina"
+  improve: "Mellora esta páxina"
+  fallback: "Esta páxina aínda non está traducida ao teu idioma, así que se amosa en inglés."
+  machine_translated: "Esta páxina traduciuse automaticamente."
+  stale: "A páxina en inglés cambiou desde que se fixo esta tradución, así que algunhas partes poden estar desactualizadas."
+  video: "Reproducir vídeo (cárgase desde YouTube)"

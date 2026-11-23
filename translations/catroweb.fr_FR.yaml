@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Vous nous manquez !'
   content: 'Vous ne vous êtes pas connecté(e) à votre compte Catrobat « %username% » depuis deux ans et il ne contient ni projets ni commentaires. Pour que notre communauté reste active, nous le supprimerons dans %days% jours. Pour le garder, il suffit de vous connecter une fois.'
   button: 'Me connecter pour garder mon compte'
+
+docs:
+  title: "Documentation"
+  contents: "Sommaire"
+  on_this_page: "Sur cette page"
+  improve: "Améliorer cette page"
+  fallback: "Cette page n'est pas encore traduite dans ta langue, elle est donc affichée en anglais."
+  machine_translated: "Cette page a été traduite automatiquement."
+  stale: "La page anglaise a changé depuis cette traduction, certaines parties peuvent donc être dépassées."
+  video: "Lire la vidéo (chargée depuis YouTube)"

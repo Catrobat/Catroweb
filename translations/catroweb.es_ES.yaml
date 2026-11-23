@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: '¡Te echamos de menos!'
   content: 'Hace dos años que no inicias sesión en tu cuenta de Catrobat "%username%" y no tiene proyectos ni comentarios. Para que nuestra comunidad siga activa, la eliminaremos dentro de %days% días. Si quieres conservarla, solo tienes que iniciar sesión una vez.'
   button: 'Iniciar sesión para conservar mi cuenta'
+
+docs:
+  title: "Documentación"
+  contents: "Contenido"
+  on_this_page: "En esta página"
+  improve: "Mejora esta página"
+  fallback: "Esta página aún no está traducida a tu idioma, así que se muestra en inglés."
+  machine_translated: "Esta página se tradujo automáticamente."
+  stale: "La página en inglés ha cambiado desde que se hizo esta traducción, así que algunas partes pueden estar desactualizadas."
+  video: "Reproducir vídeo (se carga desde YouTube)"

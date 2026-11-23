@@ -263,7 +263,7 @@ jobs:
           - api-moderation
           - api-projects-get # split from api-projects (~10m)
           - api-projects-write # split from api-projects (~10m)
-          - api-search api-translation
+          - api-search api-translation api-docs
           - api-user
 
           # --- Web suites ---
@@ -278,7 +278,7 @@ jobs:
           - web-profile-2 # split: follow, user_projects, verification, suspended, many_follower (~9m)
           - web-project-details
           - web-project-list web-remix-system web-reactions
-          - web-search web-top-bar
+          - web-search web-top-bar web-docs
           - web-studio
           - web-translation
 
