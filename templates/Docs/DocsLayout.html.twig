@@ -52,7 +52,7 @@
 
     {% if docs_nav.siblings is not empty %}
       {# Closed on a phone so it does not push the page down, shown beside the page on a wide screen (DocsPage.css). #}
-      <details class="docs-section" {{ stimulus_target('docs', 'section') }}>
+      <details class="docs-section" {{ stimulus_target('docs', 'section') }} data-action="toggle->docs#keepSectionOpen">
         <summary class="docs-section__summary">{{ 'docs.in_section'|trans({}, 'catroweb') }}</summary>
         <nav aria-label="{{ 'docs.in_section'|trans({}, 'catroweb')|e('html_attr') }}">
           <ul class="docs-section__list">

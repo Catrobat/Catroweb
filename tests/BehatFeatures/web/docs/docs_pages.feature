@@ -57,6 +57,7 @@ Feature: User docs pages, synced from user-docs/
     And the element ".docs-breadcrumb li:nth-child(2) a" should contain "Getting started"
     And the element ".docs-breadcrumb [aria-current='page']" should contain "Your first project"
     And I should see a "details.docs-section[open]" element
+    And I should see a ".docs-section__summary[tabindex='-1'][aria-hidden='true']" element
     And the element ".docs-section__link--current[aria-current='page']" should contain "Your first project"
     And I should not see a ".docs-section__all" element
 
@@ -65,6 +66,7 @@ Feature: User docs pages, synced from user-docs/
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded
     Then I should see a "details.docs-section:not([open])" element
+    And I should not see a ".docs-section__summary[tabindex]" element
     And I should see a ".docs-breadcrumb" element
 
   Scenario: A section's page lists its pages, the docs home lists the sections
