@@ -21,6 +21,9 @@ import '../bootstrap'
 
 // A deploy deletes the previous build's chunks, so a page opened before it fails its next lazy import: reload once
 // to pick up the new build. The timestamp guard stops a reload loop when the chunk is missing for another reason.
+// After preventDefault() the failed import resolves to undefined, so its caller throws once before the reload;
+// `reloading` keeps that error out of Bugsnag.
+let reloading = false
 window.addEventListener('vite:preloadError', (event) => {
   try {
     const last = Number(sessionStorage.getItem('chunkReloadAt'))
@@ -30,6 +33,7 @@ window.addEventListener('vite:preloadError', (event) => {
     return
   }
   event.preventDefault()
+  reloading = true
   window.location.reload()
 })
 
@@ -37,7 +41,7 @@ const appVersion = document.getElementById('app-version').dataset.appVersion
 const bugsnagApiKey = document.getElementById('bugsnag').dataset.apiKey
 if (bugsnagApiKey) {
   import('@bugsnag/js').then(({ default: Bugsnag }) => {
-    Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
+    Bugsnag.start({ apiKey: bugsnagApiKey, appVersion, onError: () => !reloading })
     import('@bugsnag/browser-performance').then(({ default: BugsnagPerformance }) => {
       BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
     })
