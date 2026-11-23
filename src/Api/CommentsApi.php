@@ -137,7 +137,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   #[\Override]
   public function docsPagesPathCommentsGet(string $path, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    if (!$this->docs_library->page($path, 'en') instanceof DocPage) {
+    if (!$this->isCommentableDocPage($path)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -165,7 +165,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    if (!$this->docs_library->page($path, 'en') instanceof DocPage) {
+    if (!$this->isCommentableDocPage($path)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -514,6 +514,17 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $responseCode = Response::HTTP_CREATED;
 
     return $comment;
+  }
+
+  /**
+   * A guide (it has an English page) or a brick reference page, `reference/bricks/<code.xml type>`.
+   *
+   * ponytail: any type-shaped name is accepted; check it against the brick catalog once share has a catalog service.
+   */
+  private function isCommentableDocPage(string $path): bool
+  {
+    return 1 === preg_match('#^reference/bricks/[A-Z][A-Za-z0-9]*$#', $path)
+      || $this->docs_library->page($path, 'en') instanceof DocPage;
   }
 
   private function canAccessHiddenComment(UserComment $comment): bool

@@ -2,7 +2,7 @@
 Feature: Comments and tips on docs pages, /api/docs/pages/{path}/comments
 
   Background:
-    Given the docs are synced from the test docs repo
+    Given the docs are synced from the test docs folder
     And there are admins:
       | id | name       |
       | 9  | Maintainer |
@@ -135,3 +135,17 @@ Feature: Comments and tips on docs pages, /api/docs/pages/{path}/comments
     Given the comment "00000000-0000-0000-0000-000000000010" is auto-hidden
     When I request "GET" "/api/docs/pages/tutorials/jump/comments"
     Then the client response should not contain "jump tip"
+
+  Scenario: Brick reference pages take comments
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"message": "Set x to 0 puts the actor in the middle"}
+      """
+    When I request "POST" "/api/docs/pages/reference/bricks/SetXBrick/comments"
+    Then the response status code should be "201"
+    When I request "GET" "/api/docs/pages/reference/bricks/SetXBrick/comments"
+    Then the JSON response field "data.0.message" should be '"Set x to 0 puts the actor in the middle"'
+    When I request "GET" "/api/docs/pages/reference/bricks/not-a-type/comments"
+    Then the response status code should be "404"

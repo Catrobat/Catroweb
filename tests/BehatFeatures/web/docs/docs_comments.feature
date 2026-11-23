@@ -2,7 +2,7 @@
 Feature: Comments and tips below a docs page, moderated like every comment
 
   Background:
-    Given the docs are synced from the test docs repo
+    Given the docs are synced from the test docs folder
     And there are admins:
       | id | name  | password |
       | 9  | Admin | 123456   |

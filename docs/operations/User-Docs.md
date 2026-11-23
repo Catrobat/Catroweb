@@ -72,6 +72,6 @@ Readers can leave comments and tips below a page (`templates/Docs/Comments.html.
 - `GET`/`POST /api/docs/pages/{path}/comments` list and create them (a reply has `parent_id`, on the same page); everything else is the generic comment API (`/api/comments/{id}/replies`, delete, report, translation). Writing follows the project comments: logged in, verified and not suspended (`AccountStateEventListener`), not a minor, the comment rate limits, `TextSanitizer`.
 - Reports, the moderation queue, hiding and appeals treat them as any `comment`. The queue's link opens the docs page.
 - Every admin is a docs maintainer and gets a notification (`DocCommentNotification`) for each new comment.
-- Another docs page (e.g. a brick page) shows comments with `{{ include('Docs/Comments.html.twig', {doc_path: …}) }}` and the controller registered in its entry. The API accepts paths that have an English guide; extend `CommentsApi::docsPagesPathComments*` for other keys.
+- Another docs page (e.g. a brick page) shows comments with `{{ include('Docs/Comments.html.twig', {doc_path: …}) }}` and the controller registered in its entry. The API accepts the path of a guide that has an English page and `reference/bricks/<Type>` for brick pages (`CommentsApi::isCommentableDocPage`).
 
 Tests: `tests/PhpUnit/Docs/`, Behat suites `api-docs` and `web-docs`. Both use `tests/TestData/Docs/`, a small folder with the same layout (`catrobat.user_docs.dir` in the test environment).
