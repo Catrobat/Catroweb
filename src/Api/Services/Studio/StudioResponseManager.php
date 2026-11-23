@@ -88,7 +88,7 @@ class StudioResponseManager extends AbstractResponseManager
       $response->setIsMember($is_active);
       $response->setIsBanned(StudioUser::STATUS_BANNED === $studio_user?->getStatus());
 
-      $userRole = $is_active ? $studio_user->getRole() : null;
+      $userRole = $is_active ? $studio_user?->getRole() : null;
       $response->setUserRole($userRole);
 
       if ('admin' === $userRole) {
