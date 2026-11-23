@@ -236,10 +236,16 @@ desc('Publish the user docs to the live release');
 task('docs:publish', function () {
   // Not {{bin/console}}: that points at an unfinished release if a failed deploy left one behind.
   $console = 'cd {{current_path}} && {{bin/php}} bin/console --no-interaction';
-  if (!test("{$console} help catrobat:docs:sync >/dev/null 2>&1")) {
-    warning('The live release has no catrobat:docs:sync yet: nothing published, the next deploy ships the docs');
+  // Only a release from before the command (#7786) is a no-op; any other console failure fails the publish.
+  $help = run("{$console} help catrobat:docs:sync 2>&1 >/dev/null; echo \"exit=\$?\"");
+  if (!str_ends_with($help, 'exit=0')) {
+    if (str_contains($help, 'Command "catrobat:docs:sync" is not defined')) {
+      warning('The live release has no catrobat:docs:sync yet: nothing published, the next deploy ships the docs');
 
-    return;
+      return;
+    }
+
+    throw new \RuntimeException("bin/console failed in the live release:\n{$help}");
   }
   $hash = "cd %s && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum | sha256sum | cut -d' ' -f1";
   $wanted = trim(runLocally(sprintf($hash, __DIR__.'/user-docs')));
@@ -281,9 +287,9 @@ task('docs:publish', function () {
       echo "\$prev"
       SH));
     $swapped = true;
-    if ('' !== $previous && $previous !== $version) {
-      run("rm -rf {{current_path}}/{$previous}");
-    }
+    // Keep the previous version: PHP-FPM's realpath cache (120 s per worker) may still resolve user-docs to it.
+    // Older ones go.
+    run("cd {{current_path}} && for d in user-docs.*; do case \"\$d\" in user-docs.link|{$version}|'{$previous}') ;; *) rm -rf \"\$d\" ;; esac; done");
   } finally {
     if (!$swapped) {
       run("rm -rf {$new} {{current_path}}/user-docs.link");

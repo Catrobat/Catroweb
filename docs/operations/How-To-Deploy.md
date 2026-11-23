@@ -13,15 +13,15 @@ Deployer's `smoke_test` task checks health on the server after the release is li
 
 The user docs (`user-docs/`) ship with every release and are synced into the database by the deploy (`catrobat:docs:sync`). A merged change to `user-docs/` goes live without a full deploy: the **User docs publish** workflow (`.github/workflows/docs-publish.yaml`, also startable by hand) runs Deployer's `docs:publish` task, which
 
-1. does nothing (with a notice) while the live release has no `catrobat:docs:sync` command,
+1. does nothing (with a notice) while the live release has no `catrobat:docs:sync` command; any other console failure fails it,
 2. stops right away when the live release's `user-docs/` already matches `main` (same content hash), for example because a deploy shipped it,
 3. otherwise takes Deployer's deploy lock; while a deploy (also a manual one) holds it, it waits and retries with backoff for up to 30 minutes, then fails,
 4. copies `user-docs/` of `main` into a versioned folder `current/user-docs.<hash>/` (rsync `--checksum`, unchanged files hard-linked from the live copy) and runs `bin/console catrobat:docs:sync` on that folder,
-5. points `current/user-docs` at it: a symlink replaced atomically (`ln -sfn` to a temporary link, then `mv -T` over it). The first publish into a release moves the release's own folder to `user-docs.git`. Then it deletes the previous version and releases the lock.
+5. points `current/user-docs` at it: a symlink replaced atomically (`ln -sfn` to a temporary link, then `mv -T` over it). The first publish into a release moves the release's own folder to `user-docs.git`. It keeps the previous version (PHP-FPM's realpath cache can resolve the symlink to it for up to 120 s), deletes older ones and releases the lock.
 
 On any failure before the swap, the new folder is deleted and the live docs stay as they were, so running the workflow again retries.
 
-It uses the Deployment workflow's connection and secrets, but its own concurrency group (`docs-publish`): it never cancels a queued deploy. A newer publish replaces a queued older one (it checks out the newest `main`); a running one is not cancelled, since a cancelled run would leave the deploy lock behind (`bin/dep deploy:unlock share` removes it). The Deployment workflow in turn waits (up to 30 minutes) while a docs publish is running. A later full deploy replaces the published copy with the same content from git.
+It uses the Deployment workflow's connection and secrets, but its own concurrency group (`docs-publish`): it never cancels a queued deploy. A newer publish replaces a queued older one (it checks out the newest `main`); a running one is not cancelled, since a cancelled run would leave the deploy lock behind (`bin/dep deploy:unlock share` removes it). The Deployment workflow in turn waits (up to 30 minutes) while a docs publish is running or queued. A later full deploy replaces the published copy with the same content from git.
 
 Pull requests that change `user-docs/` run the `User docs [check]` job (locally `user-docs/check.sh`), which is part of `CI gate: static analysis`. Pull requests that change only `user-docs/` skip every other job (`.github/actions/code-changed`, self-test `test.sh`); skipped jobs count as passing for the required checks. Code-only pull requests skip the docs job.
 

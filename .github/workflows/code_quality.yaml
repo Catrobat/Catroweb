@@ -267,6 +267,9 @@ jobs:
     needs: changes
     if: ${{ !cancelled() && needs.changes.outputs.docs != 'false' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read # the label update-reviewed
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -277,13 +280,21 @@ jobs:
         run: user-docs/check.sh
         env:
           BASE: ${{ github.event.pull_request.base.sha }}
+      # The label is read from the pull request now, not from the event: a re-run of an old labeled event must not
+      # skip the check. On a new push it never counts (docs-reviewed-label.yaml is removing it at the same time).
       - name: Reviewed pages unchanged
-        if: >-
-          github.event_name == 'pull_request' && (github.event.action == 'synchronize'
-          || !contains(github.event.pull_request.labels.*.name, 'update-reviewed'))
+        if: github.event_name == 'pull_request'
         env:
           BASE: ${{ github.event.pull_request.base.sha }}
+          PR: ${{ github.event.pull_request.number }}
+          ACTION: ${{ github.event.action }}
+          GH_TOKEN: ${{ github.token }}
         run: |
+          labels=$(gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json labels --jq '[.labels[].name] | join(" ")')
+          if [ "$ACTION" != synchronize ] && [[ " $labels " == *" update-reviewed "* ]]; then
+            echo "Label update-reviewed: changes to reviewed pages accepted"
+            exit 0
+          fi
           changed=$(git diff --name-only --no-renames "$BASE"...HEAD -- 'user-docs/*.md' | while read -r f; do
             if git show "$BASE:$f" 2>/dev/null | awk 'NR==1 && $0!="---" {exit} NR>1 && $0=="---" {exit} tolower($0) ~ /^reviewed: *true *$/ {r=1} END {exit !r}'; then echo "$f"; fi
           done)
