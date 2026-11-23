@@ -425,7 +425,6 @@ menu:
   logout: లాగ్ అవుట్
   admin: అడ్మిన్
   home: హోమ్
-  helpAndTutorials: సహాయం & ట్యుటోరియల్స్
   followersAndFollowing: ఫాలోవర్
   mediaLibrary: మీడియా లైబ్రరీ
   studio: స్టూడియోలు
@@ -1059,7 +1058,9 @@ inactiveAccount:
 
 docs:
   title: "డాక్యుమెంటేషన్"
-  contents: "విషయసూచిక"
+  in_section: "ఈ విభాగంలో"
+  all_in_section: "ఈ విభాగంలోని అన్ని పేజీలు"
+  breadcrumb: "బ్రెడ్‌క్రంబ్"
   on_this_page: "ఈ పేజీలో"
   improve: "ఈ పేజీని మెరుగుపరచండి"
   fallback: "ఈ పేజీ ఇంకా మీ భాషలోకి అనువదించబడలేదు, కాబట్టి ఇంగ్లీషులో చూపబడుతోంది."

@@ -404,7 +404,6 @@ menu:
   logout: ਬਾਹਰ ਆਉਣਾ
   admin: ਐਡਮਿਨ
   home: ਘਰ
-  helpAndTutorials: ਮਦਦ ਅਤੇ ਟਿਊਟੋਰਿਯਲ
   followersAndFollowing: ਚੇਲਾ
   mediaLibrary: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ
   studio: 'ਸਟੂਡੀਓ'
@@ -1036,7 +1035,9 @@ inactiveAccount:
 
 docs:
   title: "ਦਸਤਾਵੇਜ਼"
-  contents: "ਸਮੱਗਰੀ"
+  in_section: "ਇਸ ਭਾਗ ਵਿੱਚ"
+  all_in_section: "ਇਸ ਭਾਗ ਦੇ ਸਾਰੇ ਪੰਨੇ"
+  breadcrumb: "ਬ੍ਰੈੱਡਕ੍ਰੰਬ"
   on_this_page: "ਇਸ ਪੰਨੇ 'ਤੇ"
   improve: "ਇਸ ਪੰਨੇ ਨੂੰ ਸੁਧਾਰੋ"
   fallback: "ਇਹ ਪੰਨਾ ਹਾਲੇ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ ਅਨੁਵਾਦ ਨਹੀਂ ਹੋਇਆ, ਇਸ ਲਈ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਦਿਖਾਇਆ ਜਾ ਰਿਹਾ ਹੈ।"

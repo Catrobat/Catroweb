@@ -424,7 +424,6 @@ menu:
   logout: ඉවත් වෙන්න
   admin: පරිපාලක
   home: මුල් පිටුව
-  helpAndTutorials: උදව් සහ නිබන්ධන
   followersAndFollowing: අනුගාමිකයන්
   mediaLibrary: මාධ්‍ය පුස්තකාලය
   studio: ස්ටූඩියෝ
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "ලේඛන"
-  contents: "අන්තර්ගතය"
+  in_section: "මෙම කොටසේ"
+  all_in_section: "මෙම කොටසේ සියලු පිටු"
+  breadcrumb: "සංචාලන මාර්ගය"
   on_this_page: "මෙම පිටුවේ"
   improve: "මෙම පිටුව වැඩිදියුණු කරන්න"
   fallback: "මෙම පිටුව තවමත් ඔබේ භාෂාවට පරිවර්තනය කර නැති නිසා ඉංග්‍රීසියෙන් පෙන්වයි."

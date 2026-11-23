@@ -408,7 +408,6 @@ menu:
   logout: बाहर जाए
   admin: व्यवस्थापक
   home: घर
-  helpAndTutorials: सहायता और ट्यूटोरियल
   followersAndFollowing: अनुगामी
   mediaLibrary: मीडिया लाइब्रेरी
   studio: "स्टूडियो"
@@ -1039,7 +1038,9 @@ members: "सदस्य"
 
 docs:
   title: "दस्तावेज़"
-  contents: "विषय-सूची"
+  in_section: "इस खंड में"
+  all_in_section: "इस खंड के सभी पेज"
+  breadcrumb: "ब्रेडक्रंब"
   on_this_page: "इस पेज पर"
   improve: "इस पेज को बेहतर बनाओ"
   fallback: "यह पेज अभी तुम्हारी भाषा में अनुवादित नहीं है, इसलिए इसे अंग्रेज़ी में दिखाया जा रहा है।"

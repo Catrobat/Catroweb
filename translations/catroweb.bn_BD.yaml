@@ -423,7 +423,6 @@ menu:
   logout: লগআউট
   admin: অ্যাডমিন
   home: মূল পাতা
-  helpAndTutorials: সহায়তা ও টিউটোরিয়াল
   followersAndFollowing: অনুসরণকারী
   mediaLibrary: মিডিয়া লাইব্রেরি
   studio: স্টুডিও
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "ডকুমেন্টেশন"
-  contents: "সূচিপত্র"
+  in_section: "এই বিভাগে"
+  all_in_section: "এই বিভাগের সব পৃষ্ঠা"
+  breadcrumb: "ব্রেডক্রাম্ব"
   on_this_page: "এই পাতায়"
   improve: "এই পাতাটি উন্নত করো"
   fallback: "এই পাতাটি এখনও তোমার ভাষায় অনুবাদ করা হয়নি, তাই ইংরেজিতে দেখানো হচ্ছে।"

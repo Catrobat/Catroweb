@@ -423,7 +423,6 @@ menu:
   logout: 'Atsijungti'
   admin: 'Administravimas'
   home: 'Pradžia'
-  helpAndTutorials: 'Pagalba ir pamokos'
   followersAndFollowing: 'Sekėjai'
   mediaLibrary: 'Medijų biblioteka'
   studio: 'Studijos'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentacija"
-  contents: "Turinys"
+  in_section: "Šiame skyriuje"
+  all_in_section: "Visi šio skyriaus puslapiai"
+  breadcrumb: "Naršymo kelias"
   on_this_page: "Šiame puslapyje"
   improve: "Patobulink šį puslapį"
   fallback: "Šis puslapis dar neišverstas į tavo kalbą, todėl rodomas angliškai."

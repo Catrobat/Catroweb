@@ -2,8 +2,6 @@
 
 {% from 'Docs/DocsLayout.html.twig' import translation_note %}
 
-{% set current = page.path %}
-
 {% block title %}{{ page.title }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
 {% block meta_description %}{{ page.description }}{% endblock %}
 
@@ -25,6 +23,14 @@
     {% endif %}
 
     <div class="docs-content">{{ page.html|raw }}</div>
+
+    {% if docs_nav.pages is not empty %}
+      <ul class="docs-pages">
+        {% for item in docs_nav.pages %}
+          <li><a class="docs-pages__link" href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     <nav class="docs-pager" aria-label="{{ ('previous'|trans({}, 'catroweb') ~ ' / ' ~ 'next'|trans({}, 'catroweb'))|e('html_attr') }}">
       {% if previous %}

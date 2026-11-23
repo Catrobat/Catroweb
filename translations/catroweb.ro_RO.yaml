@@ -403,7 +403,6 @@ menu:
   logout: Deconectare
   admin: Admin
   home: "Acasă"
-  helpAndTutorials: "Ajutor și tutoriale"
   followersAndFollowing: "Urmăritori"
   mediaLibrary: "Biblioteca media"
   studio: "Studiouri"
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Documentație"
-  contents: "Cuprins"
+  in_section: "În această secțiune"
+  all_in_section: "Toate paginile din această secțiune"
+  breadcrumb: "Cale de navigare"
   on_this_page: "Pe această pagină"
   improve: "Îmbunătățește această pagină"
   fallback: "Această pagină nu este încă tradusă în limba ta, așa că este afișată în engleză."

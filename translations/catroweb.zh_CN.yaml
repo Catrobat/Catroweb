@@ -406,7 +406,6 @@ menu:
   logout: 登出
   admin: 管理人员
   home: 首页
-  helpAndTutorials: 帮助和教程
   followersAndFollowing: 关注者
   mediaLibrary: 媒体库
   studio: 工作室
@@ -1040,7 +1039,9 @@ inactiveAccount:
 
 docs:
   title: "文档"
-  contents: "目录"
+  in_section: "本部分"
+  all_in_section: "本部分的所有页面"
+  breadcrumb: "导航路径"
   on_this_page: "本页内容"
   improve: "改进此页面"
   fallback: "此页面还没有翻译成你的语言，因此以英文显示。"

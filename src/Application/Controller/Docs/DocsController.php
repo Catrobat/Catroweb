@@ -14,14 +14,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /** The user docs, rendered from doc_page in the language of the visitor (or `?locale=`), English when untranslated. */
 class DocsController extends AbstractController
 {
+  /** The longest "In this section" list: a longer section shows the nearest pages and links to all of them. */
+  public const int MAX_SIBLINGS = 15;
+
   public function __construct(
     private readonly DocsLibrary $library,
     private readonly DocsSync $sync,
     private readonly DocsCatalog $catalog,
+    private readonly TranslatorInterface $translator,
   ) {
   }
 
@@ -70,6 +75,14 @@ class DocsController extends AbstractController
     $navigation = $this->navigation($request, $locale);
     $flat = DocsLibrary::flatten($navigation);
     $position = array_search($path, array_column($flat, 'path'), true);
+    $trail = DocsLibrary::trail($navigation, $path);
+    $parent = $trail[\count($trail) - 2] ?? null;
+    $link = fn (array $item): array => ['title' => $item['title'], 'url' => $this->guideUrl($item['path']), 'current' => $item['path'] === $path];
+    $sections = $this->sections($navigation, $trail[0]['path'] ?? '');
+    /** @var list<array{path: string, title: string, children: array<mixed>}> $children */
+    $children = ([] === $trail ? [] : $trail[\count($trail) - 1]['children']);
+    /** @var list<array{path: string, title: string, children: array<mixed>}> $siblings */
+    $siblings = $parent['children'] ?? [];
     $url = fn (string $page_path, ?string $page_locale = null): string => $this->generateUrl(
       'docs',
       ['theme' => 'app', 'path' => 'index' === $page_path ? '' : $page_path] + (null === $page_locale || 'en' === $page_locale ? [] : ['locale' => $page_locale]),
@@ -78,7 +91,14 @@ class DocsController extends AbstractController
 
     return $this->render('Docs/DocsPage.html.twig', [
       'page' => $page,
-      'navigation' => $navigation,
+      'docs_nav' => $this->docsNav(
+        $sections,
+        'index' === $path ? [] : [$this->home(), ...array_map($link, $trail)],
+        array_map($link, $siblings),
+        null === $parent ? null : $this->guideUrl($parent['path']),
+        // The docs home lists the sections; on a phone the app sidebar that also lists them is closed.
+        'index' === $path ? $sections : array_map($link, $children),
+      ),
       'previous' => false === $position ? null : ($flat[$position - 1] ?? null),
       'next' => false === $position ? null : ($flat[$position + 1] ?? null),
       'fallback' => DocsLibrary::isFallback($page, $locale),
@@ -104,7 +124,10 @@ class DocsController extends AbstractController
     return $this->render('Docs/DocsReference.html.twig', [
       'categories' => $catalog['categories'],
       'formula' => $catalog['formula'],
-      'navigation' => $this->navigation($request, $locale),
+      'docs_nav' => $this->docsNav(
+        $this->sections($this->navigation($request, $locale), 'reference'),
+        [$this->home(), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference'), 'current' => true]],
+      ),
     ] + $this->alternates('docs_reference', [], $locale, $explicit));
   }
 
@@ -133,16 +156,30 @@ class DocsController extends AbstractController
       throw $this->createNotFoundException('Unknown brick.');
     }
     $prose = $this->library->brickProse($type, $locale);
+    $title = $this->catalog->title($brick['brick']);
+    // Its section is its own category, the first one (DocsCatalog::brick).
+    $category = $brick['categories'][0];
+    $bricks = array_values(array_filter($this->catalog->catalog($locale)['categories'], static fn (array $listed): bool => $listed['key'] === $category['key']))[0]['bricks'] ?? [];
+    $category_url = $this->generateUrl('docs_reference').'#'.$category['key'];
 
     return $this->render('Docs/DocsBrick.html.twig', [
       'type' => $type,
-      'title' => $this->catalog->title($brick['brick']),
+      'title' => $title,
       'brick_html' => $this->catalog->html($brick['brick']),
       'categories' => $brick['categories'],
       'prose' => $prose,
       'fallback' => null !== $prose && DocsLibrary::isFallback($prose, $locale),
       'edit_url' => $this->sync->brickEditUrl($type, null !== $this->library->brickProse($type, 'en')),
-      'navigation' => $this->navigation($request, $locale),
+      'docs_nav' => $this->docsNav(
+        $this->sections($this->navigation($request, $locale), 'reference'),
+        [...$this->referenceCrumbs(), ['title' => $category['name'], 'url' => $category_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
+        array_map(fn (array $listed): array => [
+          'title' => $this->catalog->title($listed),
+          'url' => $this->generateUrl('docs_brick', ['type' => $listed['type']]),
+          'current' => $listed['type'] === $type,
+        ], $bricks),
+        $category_url,
+      ),
     ] + $this->alternates('docs_brick', ['type' => $type], $locale, $explicit));
   }
 
@@ -155,10 +192,84 @@ class DocsController extends AbstractController
       throw $this->createNotFoundException('Unknown formula element.');
     }
 
+    $title = $element['label'] ?? $element['name'];
+    $kind_url = $this->generateUrl('docs_reference').'#formula';
+
     return $this->render('Docs/DocsFormula.html.twig', [
       'element' => $element,
-      'navigation' => $this->navigation($request, $locale),
+      'docs_nav' => $this->docsNav(
+        $this->sections($this->navigation($request, $locale), 'reference'),
+        [...$this->referenceCrumbs(), ['title' => $this->translator->trans('docs.reference.'.$element['kind'], [], 'catroweb'), 'url' => $kind_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
+        array_map(fn (array $listed): array => [
+          'title' => $listed['label'] ?? $listed['name'],
+          'url' => $this->generateUrl('docs_formula', ['name' => $listed['name']]),
+          'current' => $listed['name'] === $name,
+        ], $this->catalog->catalog($locale)['formula'][$element['kind']] ?? []),
+        $kind_url,
+      ),
     ] + $this->alternates('docs_formula', ['name' => $name], $locale, $explicit));
+  }
+
+  /**
+   * The docs navigation (docs/operations/User-Docs.md): the sections for the app sidebar, the breadcrumb, the pages
+   * beside the page in its section and the pages below it. Of a long section only the nearest MAX_SIBLINGS show, with
+   * a link to all of them.
+   *
+   * @param list<array{title: string, url: string, current: bool}> $sections
+   * @param list<array{title: string, url: string, current: bool}> $crumbs
+   * @param list<array{title: string, url: string, current: bool}> $siblings
+   * @param list<array{title: string, url: string, current: bool}> $pages
+   *
+   * @return array{sections: list<array{title: string, url: string, current: bool}>, crumbs: list<array{title: string, url: string, current: bool}>, siblings: list<array{title: string, url: string, current: bool}>, all_url: string|null, pages: list<array{title: string, url: string, current: bool}>}
+   */
+  private function docsNav(array $sections, array $crumbs, array $siblings = [], ?string $all_url = null, array $pages = []): array
+  {
+    $current = array_search(true, array_column($siblings, 'current'), true);
+
+    return [
+      'sections' => $sections,
+      'crumbs' => $crumbs,
+      'siblings' => DocsLibrary::window($siblings, false === $current ? 0 : $current, self::MAX_SIBLINGS),
+      'all_url' => \count($siblings) > self::MAX_SIBLINGS ? $all_url : null,
+      'pages' => $pages,
+    ];
+  }
+
+  /**
+   * The top-level guides except the docs home, then the brick reference.
+   *
+   * @param list<array{path: string, title: string, children: array<mixed>}> $navigation
+   *
+   * @return list<array{title: string, url: string, current: bool}>
+   */
+  private function sections(array $navigation, string $current): array
+  {
+    $sections = [];
+    foreach ($navigation as $item) {
+      if ('index' !== $item['path']) {
+        $sections[] = ['title' => $item['title'], 'url' => $this->guideUrl($item['path']), 'current' => $item['path'] === $current];
+      }
+    }
+    $sections[] = ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference'), 'current' => 'reference' === $current];
+
+    return $sections;
+  }
+
+  /** @return array{title: string, url: string, current: bool} */
+  private function home(): array
+  {
+    return ['title' => $this->translator->trans('docs.title', [], 'catroweb'), 'url' => $this->guideUrl('index'), 'current' => false];
+  }
+
+  /** @return list<array{title: string, url: string, current: bool}> */
+  private function referenceCrumbs(): array
+  {
+    return [$this->home(), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference'), 'current' => false]];
+  }
+
+  private function guideUrl(string $path): string
+  {
+    return $this->generateUrl('docs', ['path' => 'index' === $path ? '' : $path]);
   }
 
   /**

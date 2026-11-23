@@ -423,7 +423,6 @@ menu:
   logout: 'Amaitu saioa'
   admin: 'Administrazioa'
   home: 'Hasiera'
-  helpAndTutorials: 'Laguntza eta tutorialak'
   followersAndFollowing: 'Jarraitzaileak'
   mediaLibrary: 'Multimedia-liburutegia'
   studio: 'Estudioak'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentazioa"
-  contents: "Edukiak"
+  in_section: "Atal honetan"
+  all_in_section: "Atal honetako orri guztiak"
+  breadcrumb: "Nabigazio-bidea"
   on_this_page: "Orri honetan"
   improve: "Hobetu orri hau"
   fallback: "Orri hau oraindik ez dago zure hizkuntzara itzulita, beraz ingelesez erakusten da."

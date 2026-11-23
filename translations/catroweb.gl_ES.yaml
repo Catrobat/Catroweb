@@ -423,7 +423,6 @@ menu:
   logout: Pechar sesión
   admin: 'Administración'
   home: 'Inicio'
-  helpAndTutorials: 'Axuda e titoriais'
   followersAndFollowing: 'Seguidores'
   mediaLibrary: 'Mediateca'
   studio: 'Estudios'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Documentación"
-  contents: "Contidos"
+  in_section: "Nesta sección"
+  all_in_section: "Todas as páxinas desta sección"
+  breadcrumb: "Ruta de navegación"
   on_this_page: "Nesta páxina"
   improve: "Mellora esta páxina"
   fallback: "Esta páxina aínda non está traducida ao teu idioma, así que se amosa en inglés."

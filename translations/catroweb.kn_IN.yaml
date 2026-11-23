@@ -424,7 +424,6 @@ menu:
   logout: ಲಾಗ್ ಔಟ್
   admin: ನಿರ್ವಾಹಕ
   home: ಮುಖಪುಟ
-  helpAndTutorials: ಸಹಾಯ ಮತ್ತು ಟ್ಯುಟೋರಿಯಲ್‌ಗಳು
   followersAndFollowing: ಅನುಯಾಯಿಗಳು
   mediaLibrary: ಮೀಡಿಯಾ ಲೈಬ್ರರಿ
   studio: ಸ್ಟುಡಿಯೋಗಳು
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "ದಾಖಲೀಕರಣ"
-  contents: "ಪರಿವಿಡಿ"
+  in_section: "ಈ ವಿಭಾಗದಲ್ಲಿ"
+  all_in_section: "ಈ ವಿಭಾಗದ ಎಲ್ಲಾ ಪುಟಗಳು"
+  breadcrumb: "ಬ್ರೆಡ್‌ಕ್ರಂಬ್"
   on_this_page: "ಈ ಪುಟದಲ್ಲಿ"
   improve: "ಈ ಪುಟವನ್ನು ಸುಧಾರಿಸಿ"
   fallback: "ಈ ಪುಟವನ್ನು ಇನ್ನೂ ನಿಮ್ಮ ಭಾಷೆಗೆ ಅನುವಾದಿಸಿಲ್ಲ, ಆದ್ದರಿಂದ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ತೋರಿಸಲಾಗಿದೆ."

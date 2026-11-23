@@ -403,7 +403,6 @@ menu:
   logout: 'Одјави се'
   admin: 'Администрација'
   home: 'Почетна'
-  helpAndTutorials: 'Помош и упатства'
   followersAndFollowing: 'Следбеници'
   mediaLibrary: 'Медиумска библиотека'
   studio: 'Студија'
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Документација"
-  contents: "Содржина"
+  in_section: "Во овој дел"
+  all_in_section: "Сите страници во овој дел"
+  breadcrumb: "Навигациска патека"
   on_this_page: "На оваа страница"
   improve: "Подобри ја оваа страница"
   fallback: "Оваа страница сè уште не е преведена на твојот јазик, па се прикажува на англиски."

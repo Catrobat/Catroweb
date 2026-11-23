@@ -423,7 +423,6 @@ menu:
   logout: "Log keluar"
   admin: "Pentadbir"
   home: "Laman utama"
-  helpAndTutorials: "Bantuan & tutorial"
   followersAndFollowing: "Pengikut"
   mediaLibrary: "Pustaka media"
   studio: "Studio"
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentasi"
-  contents: "Kandungan"
+  in_section: "Dalam bahagian ini"
+  all_in_section: "Semua halaman dalam bahagian ini"
+  breadcrumb: "Jejak navigasi"
   on_this_page: "Di halaman ini"
   improve: "Perbaiki halaman ini"
   fallback: "Halaman ini belum diterjemahkan ke dalam bahasa anda, jadi ia dipaparkan dalam bahasa Inggeris."

@@ -403,7 +403,6 @@ menu:
   logout: வெளியேறு
   admin: நிர்வாகி
   home: முகப்பு
-  helpAndTutorials: உதவி & பயிற்சிகள்
   followersAndFollowing: பின்பற்றுபவர்
   mediaLibrary: ஊடக நூலகம்
   studio: 'ஸ்டுடியோக்கள்'
@@ -1037,7 +1036,9 @@ inactiveAccount:
 
 docs:
   title: "ஆவணங்கள்"
-  contents: "உள்ளடக்கம்"
+  in_section: "இந்தப் பிரிவில்"
+  all_in_section: "இந்தப் பிரிவின் அனைத்துப் பக்கங்களும்"
+  breadcrumb: "வழிச்சுவடு"
   on_this_page: "இந்தப் பக்கத்தில்"
   improve: "இந்தப் பக்கத்தை மேம்படுத்து"
   fallback: "இந்தப் பக்கம் இன்னும் உன் மொழியில் மொழிபெயர்க்கப்படவில்லை, அதனால் ஆங்கிலத்தில் காட்டப்படுகிறது."

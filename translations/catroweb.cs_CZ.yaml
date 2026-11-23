@@ -423,7 +423,6 @@ menu:
   logout: Odhlásit se
   admin: Administrace
   home: Domů
-  helpAndTutorials: Nápověda a návody
   followersAndFollowing: Sledující
   mediaLibrary: Knihovna médií
   studio: Studia
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentace"
-  contents: "Obsah"
+  in_section: "V této sekci"
+  all_in_section: "Všechny stránky v této sekci"
+  breadcrumb: "Drobečková navigace"
   on_this_page: "Na této stránce"
   improve: "Vylepši tuto stránku"
   fallback: "Tato stránka ještě není přeložená do tvého jazyka, proto se zobrazuje v angličtině."

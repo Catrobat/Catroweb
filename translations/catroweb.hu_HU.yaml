@@ -423,7 +423,6 @@ menu:
   logout: Kijelentkezés
   admin: 'Adminisztráció'
   home: 'Kezdőlap'
-  helpAndTutorials: 'Súgó és oktatóanyagok'
   followersAndFollowing: 'Követők'
   mediaLibrary: 'Médiatár'
   studio: 'Stúdiók'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentáció"
-  contents: "Tartalom"
+  in_section: "Ebben a részben"
+  all_in_section: "A rész összes oldala"
+  breadcrumb: "Morzsamenü"
   on_this_page: "Ezen az oldalon"
   improve: "Az oldal javítása"
   fallback: "Ez az oldal még nincs lefordítva a nyelvedre, ezért angolul jelenik meg."

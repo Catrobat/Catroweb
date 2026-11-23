@@ -403,7 +403,6 @@ menu:
   logout: 로그아웃
   admin: 운영자
   home: 홈
-  helpAndTutorials: 도움말 & 튜터리얼
   followersAndFollowing: 팔로워
   mediaLibrary: 미디어 라이브러리
   studio: "스튜디오"
@@ -1037,7 +1036,9 @@ inactiveAccount:
 
 docs:
   title: "문서"
-  contents: "목차"
+  in_section: "이 섹션의 페이지"
+  all_in_section: "이 섹션의 모든 페이지"
+  breadcrumb: "이동 경로"
   on_this_page: "이 페이지에서"
   improve: "이 페이지 개선하기"
   fallback: "이 페이지는 아직 네 언어로 번역되지 않아서 영어로 보여 줘요."

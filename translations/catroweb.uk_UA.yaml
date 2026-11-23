@@ -424,7 +424,6 @@ menu:
   logout: Вийти з облікового запису
   admin: Адмін
   home: Головна
-  helpAndTutorials: Довідка та посібники
   followersAndFollowing: Підписник
   mediaLibrary: Медіатека
   studio: Студії
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "Документація"
-  contents: "Зміст"
+  in_section: "У цьому розділі"
+  all_in_section: "Усі сторінки цього розділу"
+  breadcrumb: "Навігаційний ланцюжок"
   on_this_page: "На цій сторінці"
   improve: "Покращити цю сторінку"
   fallback: "Цю сторінку ще не перекладено твоєю мовою, тому вона показана англійською."

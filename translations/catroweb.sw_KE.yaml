@@ -403,7 +403,6 @@ menu:
   logout: Kutoka
   admin: "Msimamizi"
   home: "Nyumbani"
-  helpAndTutorials: "Msaada na mafunzo"
   followersAndFollowing: "Wafuasi"
   mediaLibrary: Maktaba ya midia
   studio: "Studio"
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Nyaraka"
-  contents: "Yaliyomo"
+  in_section: "Katika sehemu hii"
+  all_in_section: "Kurasa zote katika sehemu hii"
+  breadcrumb: "Njia ya urambazaji"
   on_this_page: "Kwenye ukurasa huu"
   improve: "Boresha ukurasa huu"
   fallback: "Ukurasa huu bado haujatafsiriwa kwa lugha yako, kwa hiyo unaonyeshwa kwa Kiingereza."

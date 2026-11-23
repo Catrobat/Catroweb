@@ -403,7 +403,6 @@ menu:
   logout: 'Fi mu'
   admin: 'Ɔhwɛfoɔ'
   home: 'Fie'
-  helpAndTutorials: 'Mmoa ne nkyerɛkyerɛ'
   followersAndFollowing: 'Akyidifoɔ'
   mediaLibrary: 'Media korabea'
   studio: 'Studios'
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Nkyerɛkyerɛmu"
-  contents: "Nneɛma a ɛwɔ mu"
+  in_section: "Wɔ ɔfa yi mu"
+  all_in_section: "Nkrataafa nyinaa a ɛwɔ ɔfa yi mu"
+  breadcrumb: "Ɔkwan a wɔfa so"
   on_this_page: "Wɔ kratafa yi so"
   improve: "Ma kratafa yi nyɛ papa"
   fallback: "Wɔnnya nkyerɛɛ kratafa yi ase wɔ wo kasa mu, enti wɔde Borɔfo kasa reda no adi."

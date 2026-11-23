@@ -424,7 +424,6 @@ menu:
   logout: Teken uit
   admin: Administrasie
   home: Tuis
-  helpAndTutorials: Hulp en tutoriale
   followersAndFollowing: Volgelinge
   mediaLibrary: Mediabiblioteek
   studio: Studio's
@@ -1058,7 +1057,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentasie"
-  contents: "Inhoud"
+  in_section: "In hierdie afdeling"
+  all_in_section: "Alle bladsye in hierdie afdeling"
+  breadcrumb: "Broodkrummels"
   on_this_page: "Op hierdie bladsy"
   improve: "Verbeter hierdie bladsy"
   fallback: "Hierdie bladsy is nog nie in jou taal vertaal nie, daarom word dit in Engels gewys."

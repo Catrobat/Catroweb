@@ -423,7 +423,6 @@ menu:
   logout: Kirjaudu ulos
   admin: Ylläpito
   home: Etusivu
-  helpAndTutorials: Ohjeet ja opetusohjelmat
   followersAndFollowing: Seuraajat
   mediaLibrary: Mediakirjasto
   studio: Studiot
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentaatio"
-  contents: "Sisältö"
+  in_section: "Tässä osiossa"
+  all_in_section: "Kaikki tämän osion sivut"
+  breadcrumb: "Murupolku"
   on_this_page: "Tällä sivulla"
   improve: "Paranna tätä sivua"
   fallback: "Tätä sivua ei ole vielä käännetty kielellesi, joten se näytetään englanniksi."

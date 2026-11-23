@@ -423,7 +423,6 @@ menu:
   logout: Mag-Logout
   admin: Admin
   home: Home
-  helpAndTutorials: 'Tulong at mga tutorial'
   followersAndFollowing: 'Mga tagasunod'
   mediaLibrary: 'Aklatan ng media'
   studio: 'Mga studio'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentasyon"
-  contents: "Mga nilalaman"
+  in_section: "Sa seksyong ito"
+  all_in_section: "Lahat ng pahina sa seksyong ito"
+  breadcrumb: "Breadcrumb"
   on_this_page: "Sa pahinang ito"
   improve: "Pagandahin ang pahinang ito"
   fallback: "Hindi pa naisasalin ang pahinang ito sa wika mo, kaya ipinapakita ito sa Ingles."

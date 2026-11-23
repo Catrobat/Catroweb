@@ -403,7 +403,6 @@ menu:
   logout: "გასვლა"
   admin: "ადმინი"
   home: "მთავარი"
-  helpAndTutorials: "დახმარება და გაკვეთილები"
   followersAndFollowing: "გამომწერები"
   mediaLibrary: "მედიაბიბლიოთეკა"
   studio: "სტუდიები"
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "დოკუმენტაცია"
-  contents: "შინაარსი"
+  in_section: "ამ განყოფილებაში"
+  all_in_section: "ამ განყოფილების ყველა გვერდი"
+  breadcrumb: "ნავიგაციის ბილიკი"
   on_this_page: "ამ გვერდზე"
   improve: "გააუმჯობესე ეს გვერდი"
   fallback: "ეს გვერდი ჯერ არ არის თარგმნილი შენს ენაზე, ამიტომ ინგლისურად ჩანს."

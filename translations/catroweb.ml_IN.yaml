@@ -423,7 +423,6 @@ menu:
   logout: ലോഗൗട്ട്
   admin: അഡ്മിൻ
   home: ഹോം
-  helpAndTutorials: സഹായവും ട്യൂട്ടോറിയലുകളും
   followersAndFollowing: പിന്തുടരുന്നവർ
   mediaLibrary: മീഡിയ ലൈബ്രറി
   studio: സ്റ്റുഡിയോകൾ
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "ഡോക്യുമെന്റേഷൻ"
-  contents: "ഉള്ളടക്കം"
+  in_section: "ഈ വിഭാഗത്തിൽ"
+  all_in_section: "ഈ വിഭാഗത്തിലെ എല്ലാ പേജുകളും"
+  breadcrumb: "ബ്രെഡ്ക്രംബ്"
   on_this_page: "ഈ പേജിൽ"
   improve: "ഈ പേജ് മെച്ചപ്പെടുത്തുക"
   fallback: "ഈ പേജ് ഇതുവരെ നിങ്ങളുടെ ഭാഷയിലേക്ക് വിവർത്തനം ചെയ്തിട്ടില്ല, അതിനാൽ ഇംഗ്ലീഷിൽ കാണിക്കുന്നു."

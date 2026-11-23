@@ -423,7 +423,6 @@ menu:
   logout: Çıxış
   admin: Admin
   home: Əsas səhifə
-  helpAndTutorials: Kömək və təlimatlar
   followersAndFollowing: İzləyici
   mediaLibrary: 'Media kitabxanası'
   studio: 'Studiyalar'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Sənədlər"
-  contents: "Mündəricat"
+  in_section: "Bu bölmədə"
+  all_in_section: "Bu bölmənin bütün səhifələri"
+  breadcrumb: "Naviqasiya yolu"
   on_this_page: "Bu səhifədə"
   improve: "Bu səhifəni yaxşılaşdır"
   fallback: "Bu səhifə hələ sənin dilinə tərcümə edilməyib, ona görə ingiliscə göstərilir."

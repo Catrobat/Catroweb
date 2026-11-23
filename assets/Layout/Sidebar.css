@@ -104,3 +104,15 @@
   display: block;
   opacity: 1;
 }
+
+/* On a docs page: the docs sections under "Documentation" */
+#sidebar .sidebar-docs-sections .nav-link {
+  padding: 0.5rem 1rem 0.5rem 3rem;
+  font-size: 0.9rem;
+}
+
+#sidebar .sidebar-docs-sections .sidebar-docs-section--current {
+  box-shadow: inset 3px 0 0 var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}

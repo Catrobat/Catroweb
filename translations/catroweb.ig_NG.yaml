@@ -403,7 +403,6 @@ menu:
   logout: 'Pụọ'
   admin: 'Nchịkwa'
   home: 'Ụlọ'
-  helpAndTutorials: 'Enyemaka & nkuzi'
   followersAndFollowing: 'Ndị na-eso & ndị m na-eso'
   mediaLibrary: 'Ọbá mgbasa ozi'
   studio: 'Studio'
@@ -1035,7 +1034,9 @@ inactiveAccount:
 
 docs:
   title: "Akwụkwọ ntuziaka"
-  contents: "Ihe dị n'ime"
+  in_section: "N'akụkụ a"
+  all_in_section: "Ibe niile n'akụkụ a"
+  breadcrumb: "Ụzọ nchọgharị"
   on_this_page: "Na peeji a"
   improve: "Meziwanye peeji a"
   fallback: "A sụgharịbeghị peeji a n'asụsụ gị, ya mere e ji Bekee gosi ya."

@@ -423,7 +423,6 @@ menu:
   logout: Odjavi se
   admin: Administrator
   home: Domov
-  helpAndTutorials: Pomoč & vodniki
   followersAndFollowing: Sledilec
   mediaLibrary: Medijska knjižnica
   studio: 'Studii'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentacija"
-  contents: "Vsebina"
+  in_section: "V tem razdelku"
+  all_in_section: "Vse strani v tem razdelku"
+  breadcrumb: "Drobtinice"
   on_this_page: "Na tej strani"
   improve: "Izboljšaj to stran"
   fallback: "Ta stran še ni prevedena v tvoj jezik, zato je prikazana v angleščini."

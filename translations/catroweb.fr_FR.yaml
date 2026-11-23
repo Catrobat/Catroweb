@@ -423,7 +423,6 @@ menu:
   logout: Déconnexion
   admin: Administrateur
   home: Domicile
-  helpAndTutorials: Aide et tutoriels
   followersAndFollowing: Suiveurs
   mediaLibrary: Bibliothèque multimédia
   studio: Studios
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Documentation"
-  contents: "Sommaire"
+  in_section: "Dans cette section"
+  all_in_section: "Toutes les pages de cette section"
+  breadcrumb: "Fil d'Ariane"
   on_this_page: "Sur cette page"
   improve: "Améliorer cette page"
   fallback: "Cette page n'est pas encore traduite dans ta langue, elle est donc affichée en anglais."

@@ -423,7 +423,6 @@ menu:
   logout: Odjava
   admin: Administrator
   home: Početna
-  helpAndTutorials: Pomoć i vodiči
   followersAndFollowing: Pratitelji i praćeni
   mediaLibrary: Biblioteka medijskih sadržaja
   studio: Studiji
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentacija"
-  contents: "Sadržaj"
+  in_section: "U ovom odjeljku"
+  all_in_section: "Sve stranice u ovom odjeljku"
+  breadcrumb: "Putanja"
   on_this_page: "Na ovoj stranici"
   improve: "Poboljšaj ovu stranicu"
   fallback: "Ova stranica još nije prevedena na tvoj jezik, pa se prikazuje na engleskom."

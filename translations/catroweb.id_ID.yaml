@@ -403,7 +403,6 @@ menu:
   logout: 'Keluar'
   admin: Admin
   home: Rumah
-  helpAndTutorials: Bantuan & tutorial
   followersAndFollowing: Pengikut
   mediaLibrary: Perpustakaan media
   studio: 'Studio'
@@ -1037,7 +1036,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentasi"
-  contents: "Daftar isi"
+  in_section: "Di bagian ini"
+  all_in_section: "Semua halaman di bagian ini"
+  breadcrumb: "Jejak navigasi"
   on_this_page: "Di halaman ini"
   improve: "Perbaiki halaman ini"
   fallback: "Halaman ini belum diterjemahkan ke bahasamu, jadi ditampilkan dalam bahasa Inggris."

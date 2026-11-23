@@ -423,7 +423,6 @@ menu:
   logout: خروج
   admin: المشرف
   home: الرئيسية
-  helpAndTutorials: تعليمات ودروس
   followersAndFollowing: متابع
   mediaLibrary: مكتبة الوسائط
   studio: "الاستوديوهات"
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "التوثيق"
-  contents: "المحتويات"
+  in_section: "في هذا القسم"
+  all_in_section: "كل صفحات هذا القسم"
+  breadcrumb: "مسار التنقل"
   on_this_page: "في هذه الصفحة"
   improve: "حسّن هذه الصفحة"
   fallback: "هذه الصفحة غير مترجمة إلى لغتك بعد، لذلك تُعرض بالإنجليزية."

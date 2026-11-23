@@ -423,7 +423,6 @@ menu:
   logout: Logga ut
   admin: 'Administration'
   home: Hem
-  helpAndTutorials: 'Hjälp och guider'
   followersAndFollowing: Följare
   mediaLibrary: Mediabibliotek
   studio: 'Studior'
@@ -1057,7 +1056,9 @@ inactiveAccount:
 
 docs:
   title: "Dokumentation"
-  contents: "Innehåll"
+  in_section: "I det här avsnittet"
+  all_in_section: "Alla sidor i det här avsnittet"
+  breadcrumb: "Brödsmulor"
   on_this_page: "På den här sidan"
   improve: "Förbättra den här sidan"
   fallback: "Den här sidan är inte översatt till ditt språk än, så den visas på engelska."
