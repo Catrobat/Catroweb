@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Informativa sulla privacy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% ha commentato una pagina della documentazione: %page_title%"
   noFollowers: "Sembra che tu non abbia alcuna notifica di follower."
   noComments: "Sembra che tu non abbia alcuna notifica di commenti."
   noReactions: "Sembra che tu non abbia alcuna notifica di reazioni."
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Ci manchi!'
   content: 'Non accedi al tuo account Catrobat "%username%" da due anni e non contiene progetti né commenti. Per mantenere viva la nostra community, lo elimineremo tra %days% giorni. Se vuoi tenerlo, basta accedere una volta.'
   button: 'Accedi per tenere il mio account'
+
+docs:
+  title: "Documentazione"
+  contents: "Indice"
+  on_this_page: "In questa pagina"
+  improve: "Migliora questa pagina"
+  fallback: "Questa pagina non è ancora tradotta nella tua lingua, quindi è mostrata in inglese."
+  machine_translated: "Questa pagina è stata tradotta automaticamente."
+  stale: "La pagina inglese è cambiata da quando è stata fatta questa traduzione, quindi alcune parti potrebbero essere superate."
+  video: "Riproduci video (caricato da YouTube)"
+  comments: "Commenti e suggerimenti"
+  comments_empty: "Ancora nessun commento. Qualcosa non è chiaro o hai un suggerimento? Scrivilo qui."
+  reference:
+    title: "Mattoncini e formule"
+    formula: "Elementi delle formule"
+    functions: "Funzioni"
+    sensors: "Sensori"
+    operators: "Operatori"
+    examples: "Progetti di esempio"
+    no_prose: "Nessuno ha ancora spiegato questo mattoncino. Puoi scrivere la prima spiegazione."
+    empty: "La guida ai mattoncini non è disponibile in questo momento."

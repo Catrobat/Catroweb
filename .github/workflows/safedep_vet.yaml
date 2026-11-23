@@ -15,6 +15,7 @@ name: SafeDep vet
 on:
   pull_request:
     branches: [main]
+    paths-ignore: ['user-docs/**']
   push:
     branches: [main]
   workflow_dispatch:

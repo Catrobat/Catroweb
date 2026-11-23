@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: "Ìlànà ìpamọ́"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% sọ àsọyé lórí ojú-ìwé ìwé-àlàyé kan: %page_title%"
   noFollowers: "Ó dàbí pé o kò ní ìfitónilétí olùtẹ̀lé kankan."
   noComments: "Ó dàbí pé o kò ní ìfitónilétí àsọyé kankan."
   noReactions: "Ó dàbí pé o kò ní ìfitónilétí ìhùwàsí kankan."
@@ -1030,3 +1032,24 @@ inactiveAccount:
   title: 'Àárò rẹ ń sọ wá!'
   content: 'O kò tíì wọlé sí àkáǹtì Catrobat rẹ "%username%" fún ọdún méjì, kò sì ní iṣẹ́ tàbí àsọyé kankan. Kí àwùjọ wa lè máa wà láàyè, a óò pa á rẹ́ ní ọjọ́ %days%. Tí o bá fẹ́ pa á mọ́, kàn wọlé lẹ́ẹ̀kan ṣoṣo.'
   button: 'Wọlé láti pa àkáǹtì mi mọ́'
+
+docs:
+  title: "Ìwé ìtọ́sọ́nà"
+  contents: "Àwọn àkóónú"
+  on_this_page: "Lórí ojú-ìwé yìí"
+  improve: "Mú ojú-ìwé yìí dára síi"
+  fallback: "A kò tíì túmọ̀ ojú-ìwé yìí sí èdè rẹ, nítorí náà a ń fi hàn ní èdè Gẹ̀ẹ́sì."
+  machine_translated: "A túmọ̀ ojú-ìwé yìí láìfọwọ́yí."
+  stale: "Ojú-ìwé Gẹ̀ẹ́sì ti yí padà láti ìgbà tí a ti ṣe ìtumọ̀ yìí, nítorí náà àwọn apá kan lè ti di àtijọ́."
+  video: "Ṣe fídíò (ó ń gbé wọlé láti YouTube)"
+  comments: "Àwọn àsọyé àti ìmọ̀ràn"
+  comments_empty: "Kò sí àsọyé kankan síbẹ̀. Ṣé ohun kan kò yé ọ, tàbí o ní ìmọ̀ràn kan? Kọ ọ́ síbí."
+  reference:
+    title: "Àwọn búlọ́ọ̀kù àti àgbékalẹ̀"
+    formula: "Àwọn ẹ̀yà àgbékalẹ̀"
+    functions: "Àwọn iṣẹ́"
+    sensors: "Àwọn sẹ́ńsọ̀"
+    operators: "Àwọn olùṣiṣẹ́"
+    examples: "Àwọn iṣẹ́ àpẹẹrẹ"
+    no_prose: "Kò sí ẹni tó ti ṣàlàyé búlọ́ọ̀kù yìí síbẹ̀. O lè kọ àlàyé àkọ́kọ́."
+    empty: "Ìtọ́kasí búlọ́ọ̀kù kò sí nísinsìnyí."

@@ -646,6 +646,8 @@ footer:
 privacy-policy:
   header: 'Chính sách quyền riêng tư'
 catro-notifications:
+  doc-comment:
+    message: "%user_link% đã bình luận về một trang tài liệu: %page_title%"
   noFollowers: 'Có vẻ bạn chưa có thông báo nào về người theo dõi.'
   noComments: 'Có vẻ bạn chưa có thông báo nào về bình luận.'
   noReactions: 'Có vẻ bạn chưa có thông báo nào về cảm xúc.'
@@ -1053,3 +1055,24 @@ inactiveAccount:
   title: 'Chúng mình nhớ bạn!'
   content: 'Bạn đã không đăng nhập vào tài khoản Catrobat “%username%” trong hai năm và tài khoản này không có dự án hay bình luận nào. Để cộng đồng luôn sôi nổi, chúng mình sẽ xóa nó sau %days% ngày. Nếu bạn muốn giữ lại, chỉ cần đăng nhập một lần.'
   button: 'Đăng nhập để giữ tài khoản'
+
+docs:
+  title: "Tài liệu"
+  contents: "Mục lục"
+  on_this_page: "Trên trang này"
+  improve: "Cải thiện trang này"
+  fallback: "Trang này chưa được dịch sang ngôn ngữ của bạn nên đang hiển thị bằng tiếng Anh."
+  machine_translated: "Trang này được dịch tự động."
+  stale: "Trang tiếng Anh đã thay đổi kể từ khi bản dịch này được làm, nên một số phần có thể đã cũ."
+  video: "Phát video (tải từ YouTube)"
+  comments: "Bình luận và mẹo"
+  comments_empty: "Chưa có bình luận nào. Có điều gì chưa rõ, hay bạn có mẹo nào không? Hãy viết ở đây."
+  reference:
+    title: "Khối lệnh và công thức"
+    formula: "Thành phần công thức"
+    functions: "Hàm"
+    sensors: "Cảm biến"
+    operators: "Toán tử"
+    examples: "Dự án mẫu"
+    no_prose: "Chưa ai giải thích khối lệnh này. Bạn có thể viết lời giải thích đầu tiên."
+    empty: "Tài liệu tra cứu khối lệnh hiện không khả dụng."

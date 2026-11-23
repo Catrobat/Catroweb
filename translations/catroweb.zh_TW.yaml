@@ -625,6 +625,8 @@ footer:
 privacy-policy:
   header: 隱私權政策
 catro-notifications:
+  doc-comment:
+    message: "%user_link% 在說明文件頁面留言：%page_title%"
   noFollowers: "你似乎沒有任何追蹤者通知。"
   noComments: "你似乎沒有任何留言通知。"
   noReactions: "你似乎沒有任何反應通知。"
@@ -1032,3 +1034,24 @@ inactiveAccount:
   title: '我們想念你！'
   content: '你已經兩年沒有登入 Catrobat 帳號「%username%」了，而且它沒有任何專案或留言。為了讓社群保持活躍，我們將在 %days% 天後刪除它。如果你想保留帳號，只要登入一次就可以了。'
   button: '登入以保留我的帳號'
+
+docs:
+  title: "說明文件"
+  contents: "目錄"
+  on_this_page: "本頁內容"
+  improve: "改善此頁面"
+  fallback: "此頁面尚未翻譯成你的語言，因此以英文顯示。"
+  machine_translated: "此頁面為自動翻譯。"
+  stale: "此翻譯完成後英文頁面已有變更，部分內容可能已過時。"
+  video: "播放影片（從 YouTube 載入）"
+  comments: "留言與小技巧"
+  comments_empty: "還沒有留言。有不清楚的地方，或是有小技巧嗎？寫在這裡吧。"
+  reference:
+    title: "積木和公式"
+    formula: "公式元素"
+    functions: "函式"
+    sensors: "感測器"
+    operators: "運算子"
+    examples: "範例專案"
+    no_prose: "還沒有人解釋過這個積木。你可以寫第一個解釋。"
+    empty: "積木參考暫時無法使用。"

@@ -625,6 +625,8 @@ footer:
 privacy-policy:
   header: Kebijakan privasi
 catro-notifications:
+  doc-comment:
+    message: "%user_link% mengomentari halaman dokumentasi: %page_title%"
   noFollowers: "Sepertinya kamu tidak memiliki notifikasi pengikut."
   noComments: "Sepertinya kamu tidak memiliki pemberitahuan komentar."
   noReactions: "Sepertinya kamu tidak memiliki pemberitahuan reaksi."
@@ -1032,3 +1034,24 @@ inactiveAccount:
   title: 'Kami merindukanmu!'
   content: 'Kamu belum masuk ke akun Catrobat-mu "%username%" selama dua tahun dan akun itu tidak punya proyek atau komentar. Supaya komunitas kami tetap hidup, kami akan menghapusnya dalam %days% hari. Kalau kamu ingin menyimpannya, cukup masuk sekali saja.'
   button: 'Masuk untuk menyimpan akunku'
+
+docs:
+  title: "Dokumentasi"
+  contents: "Daftar isi"
+  on_this_page: "Di halaman ini"
+  improve: "Perbaiki halaman ini"
+  fallback: "Halaman ini belum diterjemahkan ke bahasamu, jadi ditampilkan dalam bahasa Inggris."
+  machine_translated: "Halaman ini diterjemahkan secara otomatis."
+  stale: "Halaman bahasa Inggris telah berubah sejak terjemahan ini dibuat, jadi sebagian isinya mungkin sudah usang."
+  video: "Putar video (dimuat dari YouTube)"
+  comments: "Komentar dan tips"
+  comments_empty: "Belum ada komentar. Ada yang kurang jelas, atau punya tips? Tulis di sini."
+  reference:
+    title: "Balok dan rumus"
+    formula: "Elemen rumus"
+    functions: "Fungsi"
+    sensors: "Sensor"
+    operators: "Operator"
+    examples: "Contoh proyek"
+    no_prose: "Belum ada yang menjelaskan balok ini. Kamu bisa menulis penjelasan pertama."
+    empty: "Referensi balok tidak tersedia saat ini."

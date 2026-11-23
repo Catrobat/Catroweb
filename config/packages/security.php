@@ -211,6 +211,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'methods' => ['GET'],
         ],
         [
+          'path' => '^/api/docs(/pages/[A-Za-z0-9_/-]+|/reference/catalog|/reference/bricks/[A-Za-z0-9_]+)?/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+        ],
+        [
           'path' => '^/api/projects/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
@@ -279,6 +284,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         [
           'path' => '^/api/projects/[a-zA-Z0-9_-]+/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/docs/reference/bricks/[a-zA-Z0-9_]+/projects/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',

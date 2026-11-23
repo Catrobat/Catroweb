@@ -146,6 +146,7 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 ## Git
 
 - Main branch `main`; feature branches via PR; CI is GitHub Actions.
+- `user-docs/` (user guides, CC BY-SA 4.0) is Prettier-ignored and checked by `user-docs/check.sh`. A PR touching only `user-docs/` skips every other workflow's jobs (`.github/actions/code-changed`); a new heavy workflow or required job needs the same `changes` gate.
 - New issue in a worktree: `git worktree add .claude/worktrees/<name> -b feature/<issue>-<desc> origin/main`.
 
 ## Deploy Gotcha

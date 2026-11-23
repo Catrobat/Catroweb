@@ -1,0 +1,10 @@
+# German-only WordPress pages: the English slug for the page translated on import.
+# The English text is in translations/<wp_id>.md (body only; title on the first line as "# Title").
+# de_wp_id	en_slug
+10134	tutorials
+10135	materials
+10136	cat
+10137	star
+10138	flower
+10139	fox
+11529	christmas-cards

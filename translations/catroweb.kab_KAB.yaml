@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: "Tasertit n tbaḍnit"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% yewwi-d awennit ɣef usebter n tsemlit: %page_title%"
   noFollowers: "Yettban-d ulac ɣur-k ilɣa n yimeḍfaren."
   noComments: "Yettban-d ulac ɣur-k ilɣa n yiwenniten."
   noReactions: "Yettban-d ulac ɣur-k ilɣa n tsedmirin."
@@ -1030,3 +1032,24 @@ inactiveAccount:
   title: 'Twaḥeššeḍ-aɣ!'
   content: 'Ur teqqineḍ ara ɣer umiḍan-ik Catrobat "%username%" seg sin iseggasen, ulac deg-s isenfaren neɣ iwenniten. Akken ad teqqim temɣiwant-nneɣ d tudrint, ad t-nekkes deg %days% n wussan. Ma tebɣiḍ ad t-teǧǧeḍ, qqen kan yiwet n tikkelt.'
   button: 'Qqen akken ad ḥerzeɣ amiḍan-iw'
+
+docs:
+  title: "Tasemlit"
+  contents: "Agbur"
+  on_this_page: "Deg usebter-a"
+  improve: "Senfel asebter-a"
+  fallback: "Asebter-a ur yettwasuqqel ara yakan ɣer tutlayt-ik, ihi yettwaskan s Teglizit."
+  machine_translated: "Asebter-a yettwasuqqel s wudem awurman."
+  stale: "Asebter s Teglizit ibeddel seg mi yettwag usuqqel-a, ihi kra n yiḥricen zemren ad ilin d iqburen."
+  video: "Urar tavidyut (tettali-d seg YouTube)"
+  comments: "Iwenniten d iwellihen"
+  comments_empty: "Ulac iwenniten ar tura. Yella kra ur nban ara, neɣ tesɛiḍ awellih? Aru-t da."
+  reference:
+    title: "Iḥedren d tnfaliyin"
+    formula: "Iferdisen n tnfalit"
+    functions: "Tiwuriwin"
+    sensors: "Imeṭṭafen"
+    operators: "Imsedkan"
+    examples: "Isenfaren n umedya"
+    no_prose: "Ulac win yessegzan aḥedri-a ar tura. Tzemreḍ ad taruḍ asegzi amezwaru."
+    empty: "Amuɣ n yiḥedren ulac-it tura."

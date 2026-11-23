@@ -109,6 +109,17 @@ class SecurityHeadersSubscriberTest extends TestCase
     $this->assertStringContainsString('http://localhost:3000', $csp);
   }
 
+  public function testAllowsFramingThePlayer(): void
+  {
+    $subscriber = new SecurityHeadersSubscriber('prod', false, '', 'https://play.catrobat.org');
+    $event = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
+
+    $subscriber->onKernelResponse($event);
+
+    $csp = (string) $event->getResponse()->headers->get('Content-Security-Policy');
+    $this->assertStringContainsString("frame-src 'self' https://play.catrobat.org https://www.youtube-nocookie.com", $csp);
+  }
+
   public function testSkipsSubRequests(): void
   {
     $subscriber = new SecurityHeadersSubscriber('prod');

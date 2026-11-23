@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Politique de confidentialité
 catro-notifications:
+  doc-comment:
+    message: "%user_link% a commenté une page de la documentation : %page_title%"
   noFollowers: "Il semble que vous n'ayez aucune notification suiveur."
   noComments: "Il semble que vous n'ayez aucune notification de commentaire."
   noReactions: "Il semble que vous n'ayez aucune notification de réaction."
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Vous nous manquez !'
   content: 'Vous ne vous êtes pas connecté(e) à votre compte Catrobat « %username% » depuis deux ans et il ne contient ni projets ni commentaires. Pour que notre communauté reste active, nous le supprimerons dans %days% jours. Pour le garder, il suffit de vous connecter une fois.'
   button: 'Me connecter pour garder mon compte'
+
+docs:
+  title: "Documentation"
+  contents: "Sommaire"
+  on_this_page: "Sur cette page"
+  improve: "Améliorer cette page"
+  fallback: "Cette page n'est pas encore traduite dans ta langue, elle est donc affichée en anglais."
+  machine_translated: "Cette page a été traduite automatiquement."
+  stale: "La page anglaise a changé depuis cette traduction, certaines parties peuvent donc être dépassées."
+  video: "Lire la vidéo (chargée depuis YouTube)"
+  comments: "Commentaires et astuces"
+  comments_empty: "Pas encore de commentaires. Quelque chose n’est pas clair, ou tu as une astuce ? Écris-la ici."
+  reference:
+    title: "Briques et formules"
+    formula: "Éléments de formule"
+    functions: "Fonctions"
+    sensors: "Capteurs"
+    operators: "Opérateurs"
+    examples: "Projets d'exemple"
+    no_prose: "Personne n'a encore expliqué cette brique. Tu peux écrire la première explication."
+    empty: "La référence des briques n'est pas disponible pour le moment."

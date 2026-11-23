@@ -84,6 +84,14 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
                 - App\System\Testing\Behat\Context\SanitizerContext
 
+        api-docs:
+            paths:
+                - tests/BehatFeatures/api/docs
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+
         api-moderation:
             paths:
                 - tests/BehatFeatures/api/moderation
@@ -114,6 +122,7 @@ default:
             paths:
                 - tests/BehatFeatures/api/projects/GET_project_id
                 - tests/BehatFeatures/api/projects/GET_project_id_catrobat
+                - tests/BehatFeatures/api/projects/GET_docs_reference_bricks_type_projects
                 - tests/BehatFeatures/api/projects/GET_project_id_code_statistics
                 - tests/BehatFeatures/api/projects/GET_project_id_recommendations
                 - tests/BehatFeatures/api/projects/GET_projects
@@ -300,6 +309,14 @@ default:
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
                 - App\System\Testing\Behat\Context\ApiContext
+
+        web-docs:
+            paths:
+                - tests/BehatFeatures/web/docs
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         web-general:
             paths:

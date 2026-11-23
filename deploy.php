@@ -110,14 +110,14 @@ task('check:workers', function () {
   // One by one: with several units, `systemctl is-active` succeeds when any of them runs.
   $units = implode(' ', array_map(static fn (string $worker): string => 'catroweb-worker@'.$worker, $workers));
   if (!test('(for unit in '.$units.'; do systemctl is-active --quiet "$unit" || exit 1; done)')) {
-    throw new RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
+    throw new \RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
   }
 
   // ponytail: the translation worker only has to be enabled. Until a release with its queue is live it restarts in a
   // loop (unknown transport), so is-active would block the very deploy that adds the queue. Move it into $workers
   // once that release is out.
   if (!test('systemctl is-enabled --quiet catroweb-worker@translation')) {
-    throw new RuntimeException('The translation worker is not enabled: sudo systemctl enable --now catroweb-worker@translation (docs/operations/Background-Jobs.md)');
+    throw new \RuntimeException('The translation worker is not enabled: sudo systemctl enable --now catroweb-worker@translation (docs/operations/Background-Jobs.md)');
   }
 });
 
@@ -223,9 +223,85 @@ task('update:flavors', function () {
   run('bin/console catrobat:update:flavors');
 });
 
+// The user docs (user-docs/) of this release into the database, before it goes live
+task('update:docs', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:docs:sync');
+});
+
 task('update:special', function () {
   cd('{{release_path}}');
   run('bin/console catrobat:update:special');
+});
+
+// The user docs (user-docs/) without a full deploy (.github/workflows/docs-publish.yaml): a new copy in the live
+// release, synced into the database, then swapped in. A full deploy ships user-docs/ with the release and syncs it
+// itself, so the publish is done as soon as the live copy matches. It waits (up to ~30 min) while a deploy, also a
+// manual one, holds the deploy lock, and holds the lock itself while it changes the release.
+desc('Publish the user docs to the live release');
+task('docs:publish', function () {
+  // Not {{bin/console}}: that points at an unfinished release if a failed deploy left one behind.
+  $console = 'cd {{current_path}} && {{bin/php}} bin/console --no-interaction';
+  // Only a release from before the command (#7786) is a no-op; any other console failure fails the publish.
+  $help = run("{$console} help catrobat:docs:sync 2>&1 >/dev/null; echo \"exit=\$?\"");
+  if (!str_ends_with($help, 'exit=0')) {
+    if (str_contains($help, 'Command "catrobat:docs:sync" is not defined')) {
+      warning('The live release has no catrobat:docs:sync yet: nothing published, the next deploy ships the docs');
+
+      return;
+    }
+
+    throw new \RuntimeException("bin/console failed in the live release:\n{$help}");
+  }
+  $hash = "cd %s && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum | sha256sum | cut -d' ' -f1";
+  $wanted = trim(runLocally(sprintf($hash, __DIR__.'/user-docs')));
+  $waited = 0;
+  for ($delay = 15;; $delay = min(2 * $delay, 300)) {
+    if (trim(run(sprintf($hash, '{{current_path}}/user-docs').' 2>/dev/null || true')) === $wanted) {
+      info('The live release already has these user docs');
+
+      return;
+    }
+    if ('+locked' !== run('[ -f {{deploy_path}}/.dep/deploy.lock ] && echo +locked || echo docs:publish > {{deploy_path}}/.dep/deploy.lock')) {
+      break;
+    }
+    if ($waited >= 1800) {
+      throw new \RuntimeException('The deploy lock was held for more than 30 minutes; run the publish again later');
+    }
+    warning("A deploy holds the lock, retrying in {$delay}s");
+    sleep($delay);
+    $waited += $delay;
+  }
+
+  // Each version in its own folder; user-docs becomes a symlink to it, replaced atomically (mv -T renames over it).
+  $version = 'user-docs.'.substr($wanted, 0, 12);
+  $new = "{{current_path}}/{$version}";
+  $swapped = false;
+  try {
+    run("rm -rf {$new}");
+    // No -t/-p: files differ from the live ones in mtime only, and --link-dest hard-links only identical files.
+    upload(__DIR__.'/user-docs/', "{$new}/", ['flags' => '-rlz', 'options' => ['--checksum', '--delete', '--link-dest=../user-docs/']]);
+    run("{$console} catrobat:docs:sync {$new}"); // before the swap: a failed sync leaves the live copy, a rerun retries
+    // The release's own folder from git becomes user-docs.git once (put back if the swap fails).
+    $previous = trim(run(<<<SH
+      cd {{current_path}}
+      if [ -L user-docs ]; then prev=\$(readlink user-docs); elif [ -e user-docs ]; then mv user-docs user-docs.git && prev=user-docs.git; fi
+      if ! { ln -sfn {$version} user-docs.link && mv -T user-docs.link user-docs; }; then
+        [ "\$prev" != user-docs.git ] || mv -T user-docs.git user-docs
+        exit 1
+      fi
+      echo "\$prev"
+      SH));
+    $swapped = true;
+    // Keep the previous version: PHP-FPM's realpath cache (120 s per worker) may still resolve user-docs to it.
+    // Older ones go.
+    run("cd {{current_path}} && for d in user-docs.*; do case \"\$d\" in user-docs.link|{$version}|'{$previous}') ;; *) rm -rf \"\$d\" ;; esac; done");
+  } finally {
+    if (!$swapped) {
+      run("rm -rf {$new} {{current_path}}/user-docs.link");
+    }
+    invoke('deploy:unlock');
+  }
 });
 
 // dump the .env file as .env.local.php to speed up the loading of the env vars
@@ -238,6 +314,7 @@ task('dump:env', function () {
 task('smoke_test', function () {
   $maxRetries = 5;
   $retryDelay = 5;
+  $result = '000';
   for ($i = 1; $i <= $maxRetries; ++$i) {
     $result = run('curl -sf -o /dev/null -w "%{http_code}" -H "Host: share.catrobat.org" https://localhost/api/health --max-time 10 -k || echo "000"');
     if ('200' === trim($result)) {
@@ -276,6 +353,7 @@ task('deploy', [
   'deploy:jwt',
   'deploy:cache:clear',
   'database:migrate',
+  'update:docs',
   'deploy:symlink',
   'restart:nginx',
   'restart:php-fpm',

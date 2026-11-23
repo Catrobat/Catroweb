@@ -632,6 +632,8 @@ footer:
 privacy-policy:
   header: プライバシーポリシー
 catro-notifications:
+  doc-comment:
+    message: "%user_link% さんがドキュメントのページにコメントしました: %page_title%"
   noFollowers: "フォロワーの通知がないようです。"
   noComments: "コメント通知がないようです。"
   noReactions: "リアクション通知がないようです。"
@@ -1039,3 +1041,24 @@ inactiveAccount:
   title: '会えなくてさみしいです!'
   content: 'Catrobat アカウント「%username%」に2年間ログインしておらず、プロジェクトやコメントもありません。コミュニティを活発に保つため、%days% 日後にこのアカウントを削除します。残したい場合は、一度ログインするだけで大丈夫です。'
   button: 'ログインしてアカウントを残す'
+
+docs:
+  title: "ドキュメント"
+  contents: "目次"
+  on_this_page: "このページの内容"
+  improve: "このページを改善する"
+  fallback: "このページはまだあなたの言語に翻訳されていないため、英語で表示しています。"
+  machine_translated: "このページは自動翻訳されました。"
+  stale: "この翻訳の後に英語のページが変更されたため、一部が古くなっている可能性があります。"
+  video: "動画を再生（YouTube から読み込みます）"
+  comments: "コメントとヒント"
+  comments_empty: "まだコメントはありません。わかりにくいところや、ヒントはありますか？ここに書いてください。"
+  reference:
+    title: "ブロックと数式"
+    formula: "数式の要素"
+    functions: "関数"
+    sensors: "センサー"
+    operators: "演算子"
+    examples: "サンプルプロジェクト"
+    no_prose: "このブロックの説明はまだありません。最初の説明を書いてみよう。"
+    empty: "ブロックリファレンスは現在利用できません。"

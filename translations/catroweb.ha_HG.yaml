@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% ya yi sharhi a kan shafin takardu: %page_title%"
   noFollowers: "Da alama ba ka da sanarwar mabiya."
   noComments: "Da alama ba ka da sanarwar sharhi."
   noReactions: "Da alama ba ka da sanarwar martani."
@@ -1030,3 +1032,24 @@ inactiveAccount:
   title: 'Muna kewar ka!'
   content: 'Ba ka shiga asusunka na Catrobat "%username%" ba tsawon shekaru biyu, kuma ba shi da ayyuka ko sharhi. Don al''ummarmu ta ci gaba da kasancewa mai rai, za mu goge shi cikin kwanaki %days%. Idan kana son ka riƙe shi, kawai ka shiga sau ɗaya.'
   button: 'Shiga don riƙe asusuna'
+
+docs:
+  title: "Bayanai"
+  contents: "Abubuwan ciki"
+  on_this_page: "A wannan shafi"
+  improve: "Inganta wannan shafi"
+  fallback: "Ba a fassara wannan shafi zuwa harshenka ba tukuna, don haka ana nuna shi da Turanci."
+  machine_translated: "An fassara wannan shafi ta atomatik."
+  stale: "Shafin Turanci ya canza tun bayan wannan fassarar, don haka wasu sassa na iya zama tsofaffi."
+  video: "Kunna bidiyo (yana lodawa daga YouTube)"
+  comments: "Sharhi da shawarwari"
+  comments_empty: "Babu sharhi tukuna. Akwai abin da bai fito fili ba, ko kana da shawara? Rubuta shi a nan."
+  reference:
+    title: "Bulo-bulo da dabaru"
+    formula: "Abubuwan dabara"
+    functions: "Ayyuka"
+    sensors: "Na'urorin ji"
+    operators: "Masu aiki"
+    examples: "Ayyukan misali"
+    no_prose: "Babu wanda ya bayyana wannan bulo tukuna. Kai za ka iya rubuta bayani na farko."
+    empty: "Bayanin bulo-bulo ba ya samuwa yanzu."

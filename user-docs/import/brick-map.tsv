@@ -1,0 +1,277 @@
+wp_id	lang	slug	title	brick_class	type	method
+7559	en	when-scene-starts	When scene starts	WhenStartedBrick	StartScript	hand
+7560	en	when-tapped	When tapped	WhenBrick	WhenScript	hand
+7561	en	when-stage-is-tapped	When stage is tapped	WhenTouchDownBrick	WhenTouchDownScript	hand
+7562	en	when-you-receive	When you receive	BroadcastReceiverBrick	BroadcastScript	hand
+7563	en	when-1	When(…) becomes true	WhenConditionBrick	WhenConditionScript	hand
+7564	en	when-background-changes-to	When background changes to	WhenBackgroundChangesBrick	WhenBackgroundChangesScript	auto
+7565	en	when-you-start-as-a-clone	When you start as a clone	WhenClonedBrick	WhenClonedScript	hand
+7634	en	wait-1-second	Wait	WaitBrick	WaitBrick	hand
+7635	en	note-add-comment-here	Note	NoteBrick	NoteBrick	hand
+7636	en	forever	Forever	ForeverBrick	ForeverBrick	auto
+7637	en	if-1	If … Then … Else …	IfLogicBeginBrick	IfLogicBeginBrick	hand
+7638	en	if-1-2	If(…) is true then	IfThenLogicBeginBrick	IfThenLogicBeginBrick	hand
+7639	en	wait-until-1	Wait until … is true	WaitUntilBrick	WaitUntilBrick	auto
+7640	en	repeat-10-times	Repeat … times	RepeatBrick	RepeatBrick	hand
+7641	en	repeat-until-1	Repeat until …	RepeatUntilBrick	RepeatUntilBrick	auto
+7642	en	for-values-from-1-to-10-in	For values from 1 to 10 in	ForVariableFromToBrick	ForVariableFromToBrick	hand
+7643	en	for-each-value-from-in	For each value from .. in ..	ForItemInUserListBrick	ForItemInUserListBrick	hand
+7644	en	continue-scene	Continue scene	SceneTransitionBrick	SceneTransitionBrick	hand
+7645	en	start-scene	Start scene	SceneStartBrick	SceneStartBrick	hand
+7646	en	finish-stage	Finish stage	FinishStageBrick	FinishStageBrick	auto
+7647	en	stop-this-script	Stop	StopScriptBrick	StopScriptBrick	hand
+7648	en	wait-until-all-other-scripts-have-stopped	Wait until all other scripts have stopped	WaitTillIdleBrick	WaitTillIdleBrick	hand
+7649	en	create-clone-of	Create clone of	CloneBrick	CloneBrick	hand
+7650	en	delete-this-clone	Delete this clone	DeleteThisCloneBrick	DeleteThisCloneBrick	auto
+7651	en	broadcast	Broadcast	BroadcastBrick	BroadcastBrick	auto
+7652	en	broadcast-and-wait	Broadcast and wait	BroadcastWaitBrick	BroadcastWaitBrick	hand
+7738	en	place-at	Place at	PlaceAtBrick	PlaceAtBrick	auto
+7739	en	set-x-to	Set X to	SetXBrick	SetXBrick	auto
+7740	en	set-y-to	Set Y to	SetYBrick	SetYBrick	auto
+7741	en	change-x-by	Change X by	ChangeXByNBrick	ChangeXByNBrick	auto
+7742	en	change-y-by	Change Y by	ChangeYByNBrick	ChangeYByNBrick	auto
+7743	en	go-to	Go to	GoToBrick	GoToBrick	auto
+7744	en	if-on-edge-bounce	If on edge, bounce	IfOnEdgeBounceBrick	IfOnEdgeBounceBrick	auto
+7745	en	move-steps	Move … steps	MoveNStepsBrick	MoveNStepsBrick	auto
+7746	en	turn-left-degrees	Turn left … degrees	TurnLeftBrick	TurnLeftBrick	hand
+7747	en	turn-right-degrees	Turn right … degrees	TurnRightBrick	TurnRightBrick	hand
+7748	en	point-in-direction-degrees	Point in direction … degrees	PointInDirectionBrick	PointInDirectionBrick	hand
+7749	en	point-towards	Point towards	PointToBrick	PointToBrick	hand
+7750	en	set-rotation-style	Set rotation style	SetRotationStyleBrick	SetRotationStyleBrick	auto
+7751	en	glide-second-to	Glide … second to	GlideToBrick	GlideToBrick	hand
+7752	en	go-back-layer	Go back … layer	GoNStepsBackBrick	GoNStepsBackBrick	hand
+7753	en	go-to-front	Go to front	ComeToFrontBrick	ComeToFrontBrick	hand
+7754	en	vibrate-for-second	Vibrate for … second	VibrationBrick	VibrationBrick	hand
+7755	en	set-your-motion-type-to	Set your motion type to …	SetPhysicsObjectTypeBrick	SetPhysicsObjectTypeBrick	hand
+7756	en	when-you-bounce-off	When you bounce off …	WhenBounceOffBrick	WhenBounceOffScript	hand
+7757	en	set-velocity-to	Set velocity to	SetVelocityBrick	SetVelocityBrick	auto
+7758	en	spin-left-degrees-second	Spin left … degrees/second	TurnLeftSpeedBrick	TurnLeftSpeedBrick	hand
+7759	en	spin-right-degrees-second	Spin right … degrees/second	TurnRightSpeedBrick	TurnRightSpeedBrick	hand
+7761	en	set-gravity-for-all-actors-and-objects-to	Set gravity for all actors and objects to …	SetGravityBrick	SetGravityBrick	hand
+7762	en	set-mass-to-kilogram	Set mass to … kilogram	SetMassBrick	SetMassBrick	hand
+7763	en	set-bounce-factor-to	Set bounce factor to …%	SetBounceBrick	SetBounceBrick	hand
+7764	en	set-friction-to	Set friction to …%	SetFrictionBrick	SetFrictionBrick	auto
+7847	en	start-sound	Start sound	PlaySoundBrick	PlaySoundBrick	hand
+7848	en	start-sound-and-wait	Start sound and wait	PlaySoundAndWaitBrick	PlaySoundAndWaitBrick	hand
+7849	en	stop-sound	Stop sound	StopSoundBrick	StopSoundBrick	auto
+7850	en	stop-all-sounds	Stop all sounds	StopAllSoundsBrick	StopAllSoundsBrick	auto
+7851	en	set-volume-to	Set volume to …%	SetVolumeToBrick	SetVolumeToBrick	auto
+7852	en	change-volume-by	Change volume by …	ChangeVolumeByNBrick	ChangeVolumeByNBrick	auto
+7853	en	set-instrument-to	Set instrument to	SetInstrumentBrick	SetInstrumentBrick	auto
+7854	en	play-note-for	Play note … for … beats	PlayNoteForBeatsBrick	PlayNoteForBeatsBrick	hand
+7855	en	play-drum-for-beats	Play drum … for … beats	PlayDrumForBeatsBrick	PlayDrumForBeatsBrick	auto
+7857	en	set-tempo-to	Set tempo to …	SetTempoBrick	SetTempoBrick	auto
+7858	en	change-tempo-by	Change tempo by …	ChangeTempoByNBrick	ChangeTempoByNBrick	auto
+7859	en	pause-for-beats	Pause for … beats	PauseForBeatsBrick	PauseForBeatsBrick	auto
+7905	en	switch-to-look	Switch to look	SetLookBrick	SetLookBrick	hand
+7906	en	switch-to-look-with-number	Switch to look with number …	SetLookByIndexBrick	SetLookByIndexBrick	hand
+7907	en	next-look	Next look	NextLookBrick	NextLookBrick	auto
+7908	en	previous-look	Previous look	PreviousLookBrick	PreviousLookBrick	auto
+7909	en	set-size-to	Set size to …%	SetSizeToBrick	SetSizeToBrick	auto
+7910	en	change-size-by	Change size by …	ChangeSizeByNBrick	ChangeSizeByNBrick	auto
+7911	en	hide	Hide	HideBrick	HideBrick	auto
+7912	en	show	Show	ShowBrick	ShowBrick	auto
+7913	en	ask-and-store-written-answer-in	Ask … and store written answer in …	AskBrick	AskBrick	hand
+7914	en	say	Say …	SayBubbleBrick	SayBubbleBrick	hand
+7915	en	say-for-second	Say … for .. second	SayForBubbleBrick	SayForBubbleBrick	hand
+7916	en	think	Think …	ThinkBubbleBrick	ThinkBubbleBrick	hand
+7917	en	think-for-second	Think .. for … second	ThinkForBubbleBrick	ThinkForBubbleBrick	hand
+7918	en	set-transparency-to	Set transparency to …	SetTransparencyBrick	SetTransparencyBrick	auto
+7919	en	change-transparency-by	Change transparency by …	ChangeTransparencyByNBrick	ChangeTransparencyByNBrick	auto
+7920	en	set-brightness-to	Set brightness to …%	SetBrightnessBrick	SetBrightnessBrick	auto
+7921	en	change-brightness-by	Change brightness by …	ChangeBrightnessByNBrick	ChangeBrightnessByNBrick	auto
+7922	en	set-colour-to	Set colour to …	SetColorBrick	SetColorBrick	hand
+7923	en	change-colour-by	Change colour by …	ChangeColorByNBrick	ChangeColorByNBrick	hand
+7924	en	fade-particle-effect	Fade particle effect	FadeParticleEffectBrick	FadeParticleEffectBrick	auto
+7925	en	turn-particle-effect-additivity	Turn particle effect additivity	ParticleEffectAdditivityBrick	ParticleEffectAdditivityBrick	hand
+7926	en	set-particle-color-to	Set particle color to …	SetParticleColorBrick	SetParticleColorBrick	auto
+7927	en	clear-graphic-effects	Clear graphic effects	ClearGraphicEffectBrick	ClearGraphicEffectBrick	hand
+7928	en	become-focus-point-with-horizontal-and-vertical-flexibility	Become focus point with …% horizontal and …% vertical flexibility	SetCameraFocusPointBrick	SetCameraFocusPointBrick	hand
+7929	en	set-background	Set background	SetBackgroundBrick	SetBackgroundBrick	auto
+7930	en	set-background-to-number	Set background to number …	SetBackgroundByIndexBrick	SetBackgroundByIndexBrick	hand
+7931	en	set-background-and-wait	Set background and wait	SetBackgroundAndWaitBrick	SetBackgroundAndWaitBrick	auto
+7932	en	turn-camera	Turn camera	CameraBrick	CameraBrick	hand
+7933	en	use-camera	Use camera	ChooseCameraBrick	ChooseCameraBrick	hand
+7934	en	turn-flashlight	Turn flashlight	FlashBrick	FlashBrick	hand
+7935	en	get-image-from-and-use-as-current-look	Get image from … and use as current look	LookRequestBrick	LookRequestBrick	hand
+7936	en	paint-new-look	Paint new look …	PaintNewLookBrick	PaintNewLookBrick	auto
+7937	en	edit-look	Edit look	EditLookBrick	EditLookBrick	auto
+7938	en	copy-look-and-name-it	Copy look and name it …	CopyLookBrick	CopyLookBrick	hand
+7939	en	delete-look	Delete look	DeleteLookBrick	DeleteLookBrick	auto
+8042	en	set-background-to-number-and-wait	Set background to number … and wait	SetBackgroundByIndexAndWaitBrick	SetBackgroundByIndexAndWaitBrick	hand
+8049	en	pen-down	Pen down	PenDownBrick	PenDownBrick	auto
+8050	en	pen-up	Pen up	PenUpBrick	PenUpBrick	auto
+8051	en	set-pen-size-to	Set pen size to …	SetPenSizeBrick	SetPenSizeBrick	auto
+8052	en	stamp	Stamp	StampBrick	StampBrick	auto
+8053	en	clear	Clear	ClearBackgroundBrick	ClearBackgroundBrick	hand
+8074	en	set-pen-colour-to-red-green-blue	Set pen colour to red .. green .. blue	SetPenColorBrick	SetPenColorBrick	hand
+8081	en	set-variable-to	Set variable … to …	SetVariableBrick	SetVariableBrick	auto
+8082	en	change-variable-by	Change variable … by …	ChangeVariableBrick	ChangeVariableBrick	auto
+8083	en	show-variable-at-x-y	Show variable … at X:… Y:…	ShowTextBrick	ShowTextBrick	hand
+8084	en	show-variable-at-x-y-size-colour-aligned	Show variable … at X:… Y:… size:.. colour:… aligned…	ShowTextColorSizeAlignmentBrick	ShowTextColorSizeAlignmentBrick	hand
+8085	en	hide-variable	Hide variable …	HideTextBrick	HideTextBrick	hand
+8086	en	write-variable-on-device	Write variable on device …	WriteVariableOnDeviceBrick	WriteVariableOnDeviceBrick	auto
+8087	en	read-variable-from-device	Read variable from device …	ReadVariableFromDeviceBrick	ReadVariableFromDeviceBrick	auto
+8088	en	write-variable-to-file	Write  variable … to file …	WriteVariableToFileBrick	WriteVariableToFileBrick	auto
+8089	en	read-variable-from-file-and	Read  variable … from file … AND …	ReadVariableFromFileBrick	ReadVariableFromFileBrick	hand
+8090	en	add-to-list	Add … to list …	AddItemToUserListBrick	AddItemToUserListBrick	hand
+8091	en	delete-item-from-list-at-position	Delete item from list … at position …	DeleteItemOfUserListBrick	DeleteItemOfUserListBrick	hand
+8092	en	delete-all-items-from-list	Delete all items from list …	ClearUserListBrick	ClearUserListBrick	hand
+8093	en	insert-into-list-at-position	Insert … into list … at position …	InsertItemIntoUserListBrick	InsertItemIntoUserListBrick	hand
+8094	en	replace-item-in-list-at-position-with	Replace item in list … at position … with …	ReplaceItemInUserListBrick	ReplaceItemInUserListBrick	hand
+8096	en	write-list-on-device	Write list on device …	WriteListOnDeviceBrick	WriteListOnDeviceBrick	auto
+8097	en	read-list-from-device	Read list from device …	ReadListFromDeviceBrick	ReadListFromDeviceBrick	auto
+8098	en	store-column-of-the-comma-separated-values	Store column … of the comma-separated values …	StoreCSVIntoUserListBrick	StoreCSVIntoUserListBrick	hand
+8099	en	send-web-request-to-and-store-answer-in	Send web request to … and store answer in …	WebRequestBrick	WebRequestBrick	hand
+8182	en	stitch	Stitch	StitchBrick	StitchBrick	auto
+8183	en	set-thread-color-to	Set thread color to …	SetThreadColorBrick	SetThreadColorBrick	auto
+8184	en	start-running-stitch-with-length	Start running stitch with length …	RunningStitchBrick	RunningStitchBrick	hand
+8185	en	start-zigzag-stitch-with-lenght-and-width	Start zigzag stitch with lenght … and width …	ZigZagStitchBrick	ZigZagStitchBrick	hand
+8186	en	start-triple-stitch-with-length	Start triple stitch with length …	TripleStitchBrick	TripleStitchBrick	hand
+8187	en	sew-up	Sew up	SewUpBrick	SewUpBrick	auto
+8188	en	stop-current-stitch	Stop current stitch	StopRunningStitchBrick	StopRunningStitchBrick	hand
+8189	en	write-embroidery-data-to-file	Write embroidery data to file …	WriteEmbroideryToFileBrick	WriteEmbroideryToFileBrick	hand
+8236	en	start-to-plot	Start to plot	StartPlotBrick	StartPlotBrick	auto
+8237	en	stop-to-plot	Stop to plot	StopPlotBrick	StopPlotBrick	auto
+8238	en	save-plot	Save plot as SVG	SavePlotBrick	SavePlotBrick	auto
+8683	de	wenn-szene-startet	Wenn Szene startet	WhenStartedBrick	StartScript	hand
+8684	de	wenn-angetippt	Wenn angetippt	WhenBrick	WhenScript	hand
+8685	de	wenn-der-bildschirm-beruhrt-wird	Wenn der Bildschirm berührt wird	WhenTouchDownBrick	WhenTouchDownScript	hand
+8686	de	wenn-du-empfangst	Wenn du empfängst …	BroadcastReceiverBrick	BroadcastScript	hand
+8687	de	wenn-wahr-wird	Wenn … wahr wird	WhenConditionBrick	WhenConditionScript	hand
+8688	de	wenn-der-hintergrund-wechselt-zu	Wenn der Hintergrund wechselt zu …	WhenBackgroundChangesBrick	WhenBackgroundChangesScript	hand
+8689	de	als-klon-starte	Wenn ich als Klon starte	WhenClonedBrick	WhenClonedScript	hand
+8704	de	warte-sekunde	Warte … Sekunde	WaitBrick	WaitBrick	hand
+8705	de	notiz	Notiz	NoteBrick	NoteBrick	hand
+8706	de	wiederhole-fortlaufend	Wiederhole fortlaufend	ForeverBrick	ForeverBrick	hand
+8707	de	wenn-wahr-ist-dann	Wenn … wahr ist, dann …	IfThenLogicBeginBrick	IfThenLogicBeginBrick	hand
+8708	de	wenn-wahr-ist-dann-sonst	Wenn … wahr ist, dann … sonst …	IfLogicBeginBrick	IfLogicBeginBrick	hand
+8709	de	warte-bis-wahr-ist	Warte bis … wahr ist	WaitUntilBrick	WaitUntilBrick	hand
+8710	de	wiederhole-mal	Wiederhole … mal	RepeatBrick	RepeatBrick	hand
+8711	de	wiederhole-bis-wahr-ist	Wiederhole bis … wahr ist	RepeatUntilBrick	RepeatUntilBrick	hand
+8712	de	fur-werte-von-auf-im	Für Werte von … auf … im …	ForVariableFromToBrick	ForVariableFromToBrick	hand
+8713	de	fur-jeden-wert-von-im	Für jeden Wert von … im …	ForItemInUserListBrick	ForItemInUserListBrick	hand
+8714	de	szene-fortsetzen	Szene fortsetzen	SceneTransitionBrick	SceneTransitionBrick	hand
+8715	de	beginne-szene	Beginne Szene	SceneStartBrick	SceneStartBrick	hand
+8716	de	stufe-beenden	Stufe beenden	FinishStageBrick	FinishStageBrick	hand
+8717	de	stoppe	Stoppe …	StopScriptBrick	StopScriptBrick	hand
+8718	de	warte-bis-alle-anderen-skripte-gestoppt	Warte bis alle anderen Skripte gestoppt	WaitTillIdleBrick	WaitTillIdleBrick	hand
+8719	de	erzeuge-klon-von	Erzeuge Klon von …	CloneBrick	CloneBrick	hand
+8720	de	losche-diesen-klon	Lösche diesen Klon	DeleteThisCloneBrick	DeleteThisCloneBrick	hand
+8721	de	verschicke-an-alle	Verschicke an alle: …	BroadcastBrick	BroadcastBrick	hand
+8722	de	verschicke-und-warte	Verschicke und warte	BroadcastWaitBrick	BroadcastWaitBrick	hand
+8756	de	setze-an-position-x-y	Setze an Position x:… y:…	PlaceAtBrick	PlaceAtBrick	hand
+8758	de	setze-x-auf	Setze x auf …	SetXBrick	SetXBrick	hand
+8759	de	setze-y-auf	Setze y auf …	SetYBrick	SetYBrick	hand
+8760	de	andere-x-um	Ändere x um …	ChangeXByNBrick	ChangeXByNBrick	hand
+8761	de	andere-y-um	Ändere y um …	ChangeYByNBrick	ChangeYByNBrick	hand
+8762	de	gehe-zu	Gehe zu …	GoToBrick	GoToBrick	hand
+8763	de	pralle-vom-rand-ab	Pralle vom Rand ab	IfOnEdgeBounceBrick	IfOnEdgeBounceBrick	hand
+8764	de	verschiebe-um-schritte	Verschiebe um … Schritte	MoveNStepsBrick	MoveNStepsBrick	hand
+8765	de	drehe-links-grad	Drehe links … Grad	TurnLeftBrick	TurnLeftBrick	hand
+8766	de	drehe-rechts-grad	Drehe rechts … Grad	TurnRightBrick	TurnRightBrick	hand
+8767	de	zeige-in-richtung	Zeige in Richtung …	PointInDirectionBrick	PointInDirectionBrick	hand
+8768	de	zeige-auf	Zeige auf …	PointToBrick	PointToBrick	hand
+8769	de	setze-rotations-stil	Setze Rotations-Stil	SetRotationStyleBrick	SetRotationStyleBrick	hand
+8770	de	gleite-sekunde-zu-x-y	Gleite … Sekunde zu x:… y:…	GlideToBrick	GlideToBrick	hand
+8771	de	gehe-nach-hinten-ebene	Gehe nach hinten … Ebene	GoNStepsBackBrick	GoNStepsBackBrick	hand
+8772	de	gehe-nach-vorne	Gehe nach vorne	ComeToFrontBrick	ComeToFrontBrick	hand
+8773	de	vibriere-fur-sekunde	Vibriere für … Sekunde	VibrationBrick	VibrationBrick	hand
+8774	de	setze-bewegungstyp-auf	Setze Bewegungstyp auf …	SetPhysicsObjectTypeBrick	SetPhysicsObjectTypeBrick	hand
+8775	de	wenn-du-abprallst-von	Wenn du abprallst von …	WhenBounceOffBrick	WhenBounceOffScript	hand
+8776	de	setze-geschwindigkeit-auf-x-y-schritt-sekunde	Setze Geschwindigkeit auf x:… y:… Schritt/Sekunde	SetVelocityBrick	SetVelocityBrick	hand
+8777	de	nach-links-drehen-grad-sekunde	Nach links drehen … Grad/Sekunde	TurnLeftSpeedBrick	TurnLeftSpeedBrick	hand
+8778	de	nach-rechts-drehen-grad-sekunde	Nach rechts drehen … Grad/Sekunde	TurnRightSpeedBrick	TurnRightSpeedBrick	hand
+8779	de	setze-gravitation-fur-alle-figuren-und-objekte	Setze Gravitation für alle Figuren und Objekte…	SetGravityBrick	SetGravityBrick	hand
+8780	de	setze-masse-auf-kilogramm	Setze Masse auf … Kilogramm	SetMassBrick	SetMassBrick	hand
+8781	de	setze-aufprallfaktor-auf	Setze Aufprallfaktor auf …%	SetBounceBrick	SetBounceBrick	hand
+8782	de	setze-reibung-auf	Setze Reibung auf …%	SetFrictionBrick	SetFrictionBrick	hand
+8820	de	klang-starten	Klang starten …	PlaySoundBrick	PlaySoundBrick	hand
+8821	de	starte-klang-und-warte	Starte Klang und warte	PlaySoundAndWaitBrick	PlaySoundAndWaitBrick	hand
+8822	de	stoppe-klang	Stoppe Klang	StopSoundBrick	StopSoundBrick	hand
+8823	de	alle-klange-stoppen	Alle Klänge stoppen	StopAllSoundsBrick	StopAllSoundsBrick	hand
+8824	de	setze-lautstarke-auf	Setze Lautstärke auf	SetVolumeToBrick	SetVolumeToBrick	hand
+8825	de	andere-lautstarke-um	Ändere Lautstärke um	ChangeVolumeByNBrick	ChangeVolumeByNBrick	hand
+8826	de	setze-instrument-auf	Setze Instrument auf …	SetInstrumentBrick	SetInstrumentBrick	hand
+8827	de	musiknote-abspielen-fur-sekunden	Musiknote abspielen … für … Sekunden	PlayNoteForBeatsBrick	PlayNoteForBeatsBrick	hand
+8828	de	trommel-abspielen-fur-schlage	Trommel abspielen … für … Schläge	PlayDrumForBeatsBrick	PlayDrumForBeatsBrick	hand
+8829	de	setze-tempo-auf	Setze Tempo auf …	SetTempoBrick	SetTempoBrick	hand
+8830	de	andere-tempo-um	Ändere Tempo um …	ChangeTempoByNBrick	ChangeTempoByNBrick	hand
+8831	de	pausiere-fur-schlage	Pausiere für … Schläge	PauseForBeatsBrick	PauseForBeatsBrick	hand
+8856	de	setze-aussehen	Setze Aussehen …	SetLookBrick	SetLookBrick	hand
+8857	de	setze-aussehen-auf-nummer	Setze Aussehen auf Nummer …	SetLookByIndexBrick	SetLookByIndexBrick	hand
+8858	de	nachstes-aussehen	Nächstes Aussehen	NextLookBrick	NextLookBrick	hand
+8859	de	voriges-aussehen	Voriges Aussehen	PreviousLookBrick	PreviousLookBrick	hand
+8860	de	setze-grose-auf	Setze Größe auf …%	SetSizeToBrick	SetSizeToBrick	hand
+8861	de	andere-grose-um	Ändere Größe um …	ChangeSizeByNBrick	ChangeSizeByNBrick	hand
+8862	de	verbergen	Verbergen	HideBrick	HideBrick	hand
+8863	de	anzeigen	Anzeigen	ShowBrick	ShowBrick	hand
+8864	de	frage-und-speichere-das-eingegebene-in	Frage … und speichere das Eingegebene in …	AskBrick	AskBrick	hand
+8865	de	frage-und-speichere-das-eingegebene-in-2	Frage … und speichere das Eingegebene in …	AskBrick	AskBrick	hand
+8866	de	sage	Sage …	SayBubbleBrick	SayBubbleBrick	hand
+8867	de	sage-fur-sekunde	Sage … für … Sekunde	SayForBubbleBrick	SayForBubbleBrick	hand
+8868	de	denke	Denke …	ThinkBubbleBrick	ThinkBubbleBrick	hand
+8869	de	denke-fur-sekunde	Denke … für … Sekunde	ThinkForBubbleBrick	ThinkForBubbleBrick	hand
+8870	de	setze-transparenz-auf	Setze Transparenz auf …%	SetTransparencyBrick	SetTransparencyBrick	hand
+8871	de	andere-transparenz-um	Ändere Transparenz um …	ChangeTransparencyByNBrick	ChangeTransparencyByNBrick	hand
+8872	de	setze-helligkeit-auf	Setze Helligkeit auf …%	SetBrightnessBrick	SetBrightnessBrick	hand
+8873	de	andere-helligkeit-um	Ändere Helligkeit um …	ChangeBrightnessByNBrick	ChangeBrightnessByNBrick	hand
+8874	de	setze-farbe-auf	Setze Farbe auf …	SetColorBrick	SetColorBrick	hand
+8875	de	andere-farbe-um	Ändere Farbe um …	ChangeColorByNBrick	ChangeColorByNBrick	hand
+8876	de	blende-partikeleffekt	Blende Partikeleffekt …	FadeParticleEffectBrick	FadeParticleEffectBrick	hand
+8877	de	schalte-partikeleffekt-additivitat	Schalte Partikeleffekt-Additivität …	ParticleEffectAdditivityBrick	ParticleEffectAdditivityBrick	hand
+8878	de	setze-partikelfarbe-auf	Setze Partikelfarbe auf …	SetParticleColorBrick	SetParticleColorBrick	hand
+8879	de	grafikeffekt-zurucksetzen	Grafikeffekt zurücksetzen	ClearGraphicEffectBrick	ClearGraphicEffectBrick	hand
+8880	de	fokuspunkt-werden-mit-horizontal-und-vertikale-flexibilitat	Fokuspunkt werden mit …% horizontal und …% vertikale Flexibilität	SetCameraFocusPointBrick	SetCameraFocusPointBrick	hand
+8881	de	setze-hintergrund	Setze Hintergrund …	SetBackgroundBrick	SetBackgroundBrick	hand
+8916	de	setze-hintergrund-auf-nummer	Setze Hintergrund auf Nummer …	SetBackgroundByIndexBrick	SetBackgroundByIndexBrick	hand
+8917	de	setze-hintergrund-auf-nummer-und-warte	Setze Hintergrund auf Nummer … und warte	SetBackgroundByIndexAndWaitBrick	SetBackgroundByIndexAndWaitBrick	hand
+8918	de	schalte-kamera	Schalte Kamera …	CameraBrick	CameraBrick	hand
+8919	de	verwende-kamera	Verwende Kamera …	ChooseCameraBrick	ChooseCameraBrick	hand
+8920	de	schalte-blitz	Schalte Blitz …	FlashBrick	FlashBrick	hand
+8921	de	bild-abrufen-von	Bild abrufen von …	LookRequestBrick	LookRequestBrick	hand
+8922	de	neuen-look-malen	Neuen Look malen …	PaintNewLookBrick	PaintNewLookBrick	hand
+8923	de	aussehen-bearbeiten	Aussehen bearbeiten	EditLookBrick	EditLookBrick	hand
+8924	de	look-kopieren-und-namen-geben	Look kopieren und Namen geben …	CopyLookBrick	CopyLookBrick	hand
+8925	de	losche-aussehen	Lösche Aussehen	DeleteLookBrick	DeleteLookBrick	hand
+8929	de	setze-hintergrund-und-warte	Setze Hintergrund und warte	SetBackgroundAndWaitBrick	SetBackgroundAndWaitBrick	hand
+8945	de	schalte-stift-ein	Schalte Stift ein	PenDownBrick	PenDownBrick	hand
+8946	de	schalte-stift-aus	Schalte Stift aus	PenUpBrick	PenUpBrick	hand
+8947	de	setze-stiftdicke-auf	Setze Stiftdicke auf …	SetPenSizeBrick	SetPenSizeBrick	hand
+8948	de	setze-stiftfarbe-auf-rot-grun-blau	Setze Stiftfarbe auf Rot… Grün… Blau…	SetPenColorBrick	SetPenColorBrick	hand
+8949	de	stempel	Stempel	StampBrick	StampBrick	hand
+8950	de	wische-malspur-weg	Wische Malspur weg	ClearBackgroundBrick	ClearBackgroundBrick	hand
+8960	de	setze-variable-auf	Setze Variable … auf …	SetVariableBrick	SetVariableBrick	hand
+8961	de	andere-variable-um	Ändere Variable … um …	ChangeVariableBrick	ChangeVariableBrick	hand
+8962	de	zeige-variable-bei-x-y	Zeige Variable … bei x… y…	ShowTextBrick	ShowTextBrick	hand
+8963	de	zeige-variable-bei-x-y-grose-farbe-ausrichtung	Zeige Variable … bei x… y… Größe… Farbe… Ausrichtung…	ShowTextColorSizeAlignmentBrick	ShowTextColorSizeAlignmentBrick	hand
+8964	de	verstecke-variable	Verstecke Variable…	HideTextBrick	HideTextBrick	hand
+8965	de	variable-auf-gerat-schreiben	Variable auf Gerät schreiben …	WriteVariableOnDeviceBrick	WriteVariableOnDeviceBrick	hand
+8966	de	variable-von-gerat-lesen	Variable von Gerät lesen …	ReadVariableFromDeviceBrick	ReadVariableFromDeviceBrick	hand
+8967	de	schreibe-variable-zur-datei	Schreibe Variable … zur Datei …	WriteVariableToFileBrick	WriteVariableToFileBrick	hand
+8968	de	lese-variable-aus-datei-und	Lese Variable … aus Datei … und …	ReadVariableFromFileBrick	ReadVariableFromFileBrick	hand
+8969	de	hinzufugen-zur-liste	Hinzufügen … zur Liste …	AddItemToUserListBrick	AddItemToUserListBrick	hand
+8970	de	elemente-aus-liste-loschen-auf-position	Elemente aus Liste löschen … auf Position …	DeleteItemOfUserListBrick	DeleteItemOfUserListBrick	hand
+8971	de	alle-elemente-aus-der-liste-loschen	Alle Elemente aus der Liste löschen …	ClearUserListBrick	ClearUserListBrick	hand
+8972	de	einfugen-in-liste-auf-position	Einfügen … in Liste … auf Position …	InsertItemIntoUserListBrick	InsertItemIntoUserListBrick	hand
+8973	de	elemente-in-liste-ersetzen-auf-position-im	Elemente in Liste ersetzen … auf Position … im …	ReplaceItemInUserListBrick	ReplaceItemInUserListBrick	hand
+8974	de	liste-auf-gerat-speichern	Liste auf Gerät speichern …	WriteListOnDeviceBrick	WriteListOnDeviceBrick	hand
+8975	de	liste-von-gerat-lesen	Liste von Gerät lesen …	ReadListFromDeviceBrick	ReadListFromDeviceBrick	hand
+8976	de	speichere-spalte-von-den-durch-kommas-getrennten-werten-in-liste	Speichere Spalte … von den durch Kommas getrennten Werten … in Liste …	StoreCSVIntoUserListBrick	StoreCSVIntoUserListBrick	hand
+8977	de	webanfrage-senden-an-und-speichere-antwort-in	Webanfrage senden an … und speichere Antwort in …	WebRequestBrick	WebRequestBrick	hand
+9010	de	timer-zurucksetzen	Timer zurücksetzen	ResetTimerBrick	ResetTimerBrick	hand
+9011	de	offne-im-browser	Öffne … im Browser	OpenUrlBrick	OpenUrlBrick	hand
+9012	de	einfaches-tippen-auf-x-y	Einfaches tippen auf x… y…	TapAtBrick	TapAtBrick	hand
+9013	de	beruhre-bei-x-y-fur-sekunden	Berühre bei x… y… für … Sekunden	TapForBrick	TapForBrick	hand
+9014	de	beruhren-und-wischen-von-x-y-zu-x-y-im-sekunden	Berühren und wischen von x… y… zu x… y… im … Sekunden	TouchAndSlideBrick	TouchAndSlideBrick	hand
+9026	de	stich	Stich	StitchBrick	StitchBrick	hand
+9027	de	setze-auf-farbe	Setze auf Farbe …	SetThreadColorBrick	SetThreadColorBrick	hand
+9028	de	starte-laufstich-mit-lange	Starte Laufstich mit Länge …	RunningStitchBrick	RunningStitchBrick	hand
+9029	de	starte-zickzack-stich-mit-lange-und-breite	Starte Zickzack Stich mit Länge … und Breite …	ZigZagStitchBrick	ZigZagStitchBrick	hand
+9030	de	starte-dreifachstich-mit-lange	Starte Dreifachstich mit Länge …	TripleStitchBrick	TripleStitchBrick	hand
+9031	de	vernahen	Vernähen	SewUpBrick	SewUpBrick	hand
+9032	de	beende-aktuellen-stich	Beende aktuellen Stich	StopRunningStitchBrick	StopRunningStitchBrick	hand
+9033	de	schreibe-stickdaten-in-die-datei	Schreibe Stickdaten in die Datei …	WriteEmbroideryToFileBrick	WriteEmbroideryToFileBrick	hand
+9667	de	plotten-starten	Plotten starten	StartPlotBrick	StartPlotBrick	hand
+9668	de	plotten-beenden	Plotten beenden	StopPlotBrick	StopPlotBrick	hand
+9669	de	plot-als-svg-speichern	Plot als SVG speichern	SavePlotBrick	SavePlotBrick	hand

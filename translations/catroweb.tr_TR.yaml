@@ -644,6 +644,8 @@ footer:
 privacy-policy:
   header: Gizlilik politikası
 catro-notifications:
+  doc-comment:
+    message: "%user_link% bir belge sayfasına yorum yaptı: %page_title%"
   noFollowers: "Görünüşe göre hiç takipçi bildiriminiz yok."
   noComments: "Görünüşe göre herhangi bir yorum bildiriminiz yok."
   noReactions: "Görünüşe göre herhangi bir tepki bildiriminiz yok."
@@ -1051,3 +1053,24 @@ inactiveAccount:
   title: 'Seni özledik!'
   content: 'İki yıldır “%username%” Catrobat hesabına giriş yapmadın ve hesabında hiç proje veya yorum yok. Topluluğumuzu canlı tutmak için hesabını %days% gün içinde sileceğiz. Hesabını tutmak istiyorsan bir kez giriş yapman yeterli.'
   button: 'Hesabımı tutmak için giriş yap'
+
+docs:
+  title: "Belgeler"
+  contents: "İçindekiler"
+  on_this_page: "Bu sayfada"
+  improve: "Bu sayfayı geliştir"
+  fallback: "Bu sayfa henüz senin diline çevrilmedi, bu yüzden İngilizce gösteriliyor."
+  machine_translated: "Bu sayfa otomatik olarak çevrildi."
+  stale: "Bu çeviri yapıldıktan sonra İngilizce sayfa değişti, bu yüzden bazı bölümleri güncel olmayabilir."
+  video: "Videoyu oynat (YouTube'dan yüklenir)"
+  comments: "Yorumlar ve ipuçları"
+  comments_empty: "Henüz yorum yok. Anlaşılmayan bir şey mi var, yoksa bir ipucun mu var? Buraya yaz."
+  reference:
+    title: "Bloklar ve formüller"
+    formula: "Formül öğeleri"
+    functions: "Fonksiyonlar"
+    sensors: "Sensörler"
+    operators: "Operatörler"
+    examples: "Örnek projeler"
+    no_prose: "Bu bloğu henüz kimse açıklamadı. İlk açıklamayı sen yazabilirsin."
+    empty: "Blok başvuru kılavuzu şu anda kullanılamıyor."

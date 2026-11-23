@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% 在說明文件頁面留言：%page_title%"
   noFollowers: 'Ɛte sɛ wonni akyidifoɔ nkaebɔ biara.'
   noComments: 'Ɛte sɛ wonni adwenkyerɛ nkaebɔ biara.'
   noReactions: 'Ɛte sɛ wonni mmuaeɛ nkaebɔ biara.'
@@ -1030,3 +1032,24 @@ inactiveAccount:
   title: 'Yɛfeɛ wo!'
   content: 'Wonwuraa wo Catrobat akawnt "%username%" mu mfeɛ mmienu ni, na adwuma anaa adwenkyerɛ biara nni mu. Sɛnea ɛbɛyɛ a yɛn mpɔtam bɛkɔ so ayɛ den no, yɛbɛyi afi hɔ nna %days% mu. Sɛ wopɛ sɛ wokora so a, wura mu prɛko pɛ.'
   button: 'Wura mu na kora m''akawnt so'
+
+docs:
+  title: "Nkyerɛkyerɛmu"
+  contents: "Nneɛma a ɛwɔ mu"
+  on_this_page: "Wɔ kratafa yi so"
+  improve: "Ma kratafa yi nyɛ papa"
+  fallback: "Wɔnnya nkyerɛɛ kratafa yi ase wɔ wo kasa mu, enti wɔde Borɔfo kasa reda no adi."
+  machine_translated: "Wɔde mfiri kyerɛɛ kratafa yi ase."
+  stale: "Borɔfo kratafa no asesa fi bere a wɔkyerɛɛ yi ase, enti ne fã bi betumi ayɛ dedaw."
+  video: "Bɔ video no (efi YouTube)"
+  comments: "留言與小技巧"
+  comments_empty: "還沒有留言。有不清楚的地方，或是有小技巧嗎？寫在這裡吧。"
+  reference:
+    title: "Blɔk ne fɔmula"
+    formula: "Fɔmula mu nneɛma"
+    functions: "Dwumadie"
+    sensors: "Nneɛma a ɛte nka"
+    operators: "Ɔyɛfo"
+    examples: "Nhwɛso nnwuma"
+    no_prose: "Obiara nnya nkyerɛkyerɛɛ blɔk yi mu. Wobɛtumi akyerɛw nkyerɛkyerɛmu a edi kan."
+    empty: "Blɔk ho nsɛm nni hɔ seesei."

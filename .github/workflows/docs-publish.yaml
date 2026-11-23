@@ -1,0 +1,52 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** User docs publish **
+#
+#  A merged docs change goes live without a full deploy: Deployer's docs:publish task (deploy.php) copies user-docs/
+#  into a new folder of the live release, runs catrobat:docs:sync on it and swaps it in. See
+#  docs/operations/How-To-Deploy.md.
+#
+#  - Same connection and secrets as deployment.yaml.
+#  - Kept apart from deploys by Deployer's deploy lock (the task waits for it), not by deployment.yaml's concurrency
+#    group: GitHub keeps one pending run per group, so a publish there could replace a queued deploy. deployment.yaml
+#    waits while a publish runs.
+#  - Its own group: a newer publish replaces a queued older one. A running one is not cancelled, because it may hold
+#    the deploy lock, which a cancelled run would leave behind and block the next deploy.
+#
+name: 'User docs publish'
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'user-docs/**'
+  workflow_dispatch:
+
+concurrency:
+  group: docs-publish
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: main
+
+      - name: 'Setup PHP and composer packages'
+        uses: ./.github/actions/setup-php-composer
+
+      - name: Publish the user docs
+        uses: deployphp/action@v1
+        with:
+          private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
+          dep: docs:publish
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}

@@ -63,6 +63,9 @@ tags:
   - name: 'Jobs'
     description: 'Status of background jobs started with `Prefer: respond-async` (Scratch import, project upload)'
 
+  - name: 'Docs'
+    description: 'User documentation, written in user-docs/ of the Catroweb repository'
+
 paths:
   ##############################################
   # Authentication
@@ -1650,6 +1653,39 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  '/docs/reference/bricks/{type}/projects':
+    get:
+      tags:
+        - 'Projects'
+      summary: 'Get public example projects that use a brick'
+      description: 'Visible public projects whose code uses the brick, most downloaded first. Uses cursor-based pagination.'
+      parameters:
+        - name: type
+          in: path
+          required: true
+          description: 'Brick type as written in code.xml'
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9_]+$'
+            example: 'SetXBrick'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Attributes'
+      responses:
+        '200':
+          description: 'OK'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectsListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
   ################################################
   # Comments
   #
@@ -1883,6 +1919,66 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '503':
           description: 'Translation service unavailable'
+
+  '/docs/pages/{path}/comments':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+      - $ref: '#/components/parameters/DocsPagePath'
+
+    get:
+      tags:
+        - 'Comments'
+      summary: 'Get the comments on a docs page'
+      description: 'Top-level comments and tips on a docs page, newest first, shared by every language of the page. Replies via `/comments/{id}/replies`; reporting, deleting and translating as for every comment. Uses cursor-based pagination.'
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Comments'
+      summary: 'Comment on a docs page'
+      description: 'A comment or tip on a docs page, or a reply with `parent_id`. The docs maintainers are notified.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreateRequest'
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   ##############################################
   # Translation
@@ -3901,6 +3997,94 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  ##############################################
+  # Docs
+  ###
+  /docs:
+    get:
+      tags:
+        - 'Docs'
+      summary: 'Navigation tree of the user docs'
+      description: "Every guide, as a tree: a page in a folder is a child of the folder's page. Titles are in the requested locale where a translation exists, else in English. With `flavor`, the pages written for that app flavour come first on every level."
+      parameters:
+        - $ref: '#/components/parameters/DocsLocale'
+        - name: flavor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'App flavour, e.g. pocketcode, embroidery, mindstorms'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsNavigationResponse'
+
+  '/docs/pages/{path}':
+    get:
+      tags:
+        - 'Docs'
+      summary: 'A docs page'
+      description: "The page in the requested locale, or in English when it has no translation yet (`fallback` is true then). Links in `html` are relative to the page's web URL, `/app/docs/<path>` (`/app/docs` for `index`)."
+      parameters:
+        - $ref: '#/components/parameters/DocsPagePath'
+        - $ref: '#/components/parameters/DocsLocale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsPageResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/docs/reference/catalog':
+    get:
+      tags:
+        - 'Docs'
+      summary: 'Every brick and formula element, as the app lists them'
+      description: "Catroid's brick categories with their bricks and the formula editor's functions, sensors and operators, generated from Catroid itself (the player build's catalog) and in the requested language. A brick's `type` is its code.xml type, the key of its page (`/app/docs/reference/bricks/<type>`). A brick may be listed in several categories. Empty while no catalog is deployed."
+      parameters:
+        - $ref: '#/components/parameters/DocsLocale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsCatalogResponse'
+
+  '/docs/reference/bricks/{type}':
+    get:
+      tags:
+        - 'Docs'
+      summary: 'A brick of the reference'
+      description: 'The brick as the app shows it, the categories that list it and its explanation from the docs repo (`reference/bricks/<type>.md`) in the requested language, or in English when it has no translation yet (`fallback`). Bricks without an explanation have `html` null.'
+      parameters:
+        - name: type
+          in: path
+          required: true
+          description: 'Brick type as written in code.xml'
+          schema:
+            type: string
+            pattern: '^[A-Za-z][A-Za-z0-9_]{0,99}$'
+            example: 'SetXBrick'
+        - $ref: '#/components/parameters/DocsLocale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsBrickResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   ##############################################
   # Default Response messages
@@ -4012,6 +4196,24 @@ components:
     ##
     # Default
     #
+    DocsLocale:
+      name: locale
+      in: query
+      required: false
+      description: 'Language of the docs: `de`, `de_AT`, `de-DE` and `de_DE` all find the German pages (folder `de_DE` in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language).'
+      schema:
+        type: string
+        pattern: '^[a-zA-Z]{2,3}([_-][a-zA-Z0-9]{2,8})?$'
+
+    DocsPagePath:
+      name: path
+      in: path
+      required: true
+      description: "Page path without locale and `.md`: `tutorials/jump`; a folder's page is the folder, the start page is `index`."
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*$' # '.' stands for the '/' between segments: the generator cannot write a slash into its PHP regex
+
     PreferAsync:
       in: header
       name: Prefer
@@ -5475,6 +5677,10 @@ components:
           type: string
           example: '/admin/moderation/report/list?filter%5Bcontent_id%5D%5Btype%5D=3&filter%5Bcontent_id%5D%5Bvalue%5D=1234'
           description: 'Admin page to review the content, for moderation notifications sent to admins'
+        url:
+          type: string
+          example: '/app/docs/tutorials/jump#comments'
+          description: 'Page the notification is about, when it is not a project, studio or user (a docs page)'
 
     ######################################################
     # Achievement Schemas
@@ -6975,3 +7181,281 @@ components:
           type: string
           description: 'Target node id'
           example: 'catrobat_2234abcd-12ab-12ab-12ab-123456abcdef'
+
+    DocsNavigationResponse:
+      type: object
+      required:
+        - locale
+        - items
+      properties:
+        locale:
+          type: string
+          example: 'de'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsNavigationItem'
+
+    DocsNavigationItem:
+      type: object
+      required:
+        - path
+        - title
+        - children
+      properties:
+        path:
+          type: string
+          example: 'tutorials/jump'
+        title:
+          type: string
+          example: 'Make your cat jump'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsNavigationItem'
+
+    DocsPageResponse:
+      type: object
+      required:
+        - path
+        - locale
+        - fallback
+        - title
+        - html
+        - toc
+        - translation_state
+        - reviewed
+        - flavors
+        - source_url
+        - updated_at
+      properties:
+        path:
+          type: string
+          example: 'tutorials/jump'
+        locale:
+          type: string
+          description: 'Locale of the content: the requested one, or en when `fallback` is true'
+          example: 'de'
+        fallback:
+          type: boolean
+          description: 'True when the page has no translation in the requested locale and the English page is returned'
+        title:
+          type: string
+          example: 'Make your cat jump'
+        description:
+          type: string
+          nullable: true
+        html:
+          type: string
+          description: 'The rendered page, without its title. Raw HTML of the source is escaped.'
+        toc:
+          type: array
+          description: "Level 2 and 3 headings; `id` is the heading's id in `html`"
+          items:
+            $ref: '#/components/schemas/DocsTocEntry'
+        translation_state:
+          type: string
+          enum: ['source', 'current', 'stale']
+          description: '`source` for English, `current` for a translation of the current English page, `stale` when the English page changed since'
+        reviewed:
+          type: boolean
+          description: 'A translation checked by a person'
+        flavors:
+          type: array
+          items:
+            type: string
+        source_url:
+          type: string
+          description: 'The English source file in the GitHub editor ("Improve this page")'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'When the sync last saw the file change'
+
+    DocsCatalogResponse:
+      type: object
+      required:
+        - locale
+        - categories
+        - formula
+      properties:
+        locale:
+          type: string
+          example: 'de'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsCatalogCategory'
+        formula:
+          $ref: '#/components/schemas/DocsFormulaCatalog'
+
+    DocsCatalogCategory:
+      type: object
+      required:
+        - key
+        - name
+        - color
+        - bricks
+      properties:
+        key:
+          type: string
+          description: "Catroid's string key of the category"
+          example: 'category_motion'
+        name:
+          type: string
+          example: 'Bewegung'
+        color:
+          type: string
+          description: 'Colour of the category as in the code view (most of its bricks have it)'
+          enum:
+            [
+              'event',
+              'control',
+              'motion',
+              'sound',
+              'looks',
+              'data',
+              'pen',
+              'device',
+              'user_defined',
+              'lego',
+              'embroidery',
+              'extension',
+              'unknown',
+            ]
+        bricks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewBrick'
+
+    DocsFormulaCatalog:
+      type: object
+      required:
+        - functions
+        - sensors
+        - operators
+      properties:
+        functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsFormulaElement'
+        sensors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsFormulaElement'
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsFormulaElement'
+
+    DocsFormulaElement:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: "Catroid's name of the element, the key of its page (`/app/docs/reference/formula/<name>`)"
+          example: 'SIN'
+        label:
+          type: string
+          nullable: true
+          description: 'Its name in the formula editor; null for operators shown only as a sign'
+          example: 'sin'
+
+    DocsBrickResponse:
+      type: object
+      required:
+        - type
+        - locale
+        - title
+        - brick
+        - categories
+        - fallback
+        - source_url
+      properties:
+        type:
+          type: string
+          example: 'SetXBrick'
+        locale:
+          type: string
+          description: 'Language of the brick'
+          example: 'de'
+        title:
+          type: string
+          description: "The brick's text"
+          example: 'Setze x auf 100'
+        brick:
+          $ref: '#/components/schemas/CodeViewBrick'
+        categories:
+          type: array
+          description: 'The categories that list the brick, its own first'
+          items:
+            $ref: '#/components/schemas/DocsCatalogCategoryRef'
+        html:
+          type: string
+          nullable: true
+          description: 'The explanation from the docs repo, rendered; null when the brick has none'
+        html_locale:
+          type: string
+          nullable: true
+          description: 'Locale of the explanation'
+        fallback:
+          type: boolean
+          description: 'True when the explanation has no translation in the requested locale and the English one is returned'
+        translation_state:
+          type: string
+          nullable: true
+          description: 'Of the explanation: `source` (English), `current` or `stale` (as for pages); null without one'
+        reviewed:
+          type: boolean
+        source_url:
+          type: string
+          description: 'The English explanation in the GitHub editor, or a new file there when there is none ("Improve this page")'
+
+    DocsCatalogCategoryRef:
+      type: object
+      required:
+        - key
+        - name
+        - color
+      properties:
+        key:
+          type: string
+          example: 'category_motion'
+        name:
+          type: string
+          example: 'Bewegung'
+        color:
+          type: string
+          enum:
+            [
+              'event',
+              'control',
+              'motion',
+              'sound',
+              'looks',
+              'data',
+              'pen',
+              'device',
+              'user_defined',
+              'lego',
+              'embroidery',
+              'extension',
+              'unknown',
+            ]
+
+    DocsTocEntry:
+      type: object
+      required:
+        - id
+        - title
+        - level
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        level:
+          type: integer
+          example: 2

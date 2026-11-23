@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: 'Patakaran sa privacy'
 catro-notifications:
+  doc-comment:
+    message: "Nagkomento si %user_link% sa isang pahina ng dokumentasyon: %page_title%"
   noFollowers: 'Mukhang wala kang mga abiso tungkol sa tagasunod.'
   noComments: 'Mukhang wala kang mga abiso tungkol sa komento.'
   noReactions: 'Mukhang wala kang mga abiso tungkol sa reaksyon.'
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Nami-miss ka namin!'
   content: 'Dalawang taon ka nang hindi nagla-log in sa iyong Catrobat account na "%username%" at wala itong mga proyekto o komento. Para manatiling buhay ang ating komunidad, buburahin namin ito sa loob ng %days% araw. Kung gusto mo itong panatilihin, mag-log in ka lang nang isang beses.'
   button: 'Mag-log in para panatilihin ang account ko'
+
+docs:
+  title: "Dokumentasyon"
+  contents: "Mga nilalaman"
+  on_this_page: "Sa pahinang ito"
+  improve: "Pagandahin ang pahinang ito"
+  fallback: "Hindi pa naisasalin ang pahinang ito sa wika mo, kaya ipinapakita ito sa Ingles."
+  machine_translated: "Awtomatikong isinalin ang pahinang ito."
+  stale: "Nagbago ang pahinang Ingles mula nang gawin ang salin na ito, kaya maaaring luma na ang ilang bahagi nito."
+  video: "I-play ang video (naglo-load mula sa YouTube)"
+  comments: "Mga komento at tip"
+  comments_empty: "Wala pang komento. May hindi ba malinaw, o may tip ka? Isulat mo rito."
+  reference:
+    title: "Mga brick at formula"
+    formula: "Mga elemento ng formula"
+    functions: "Mga function"
+    sensors: "Mga sensor"
+    operators: "Mga operator"
+    examples: "Mga halimbawang proyekto"
+    no_prose: "Wala pang nagpaliwanag sa brick na ito. Ikaw ang puwedeng sumulat ng unang paliwanag."
+    empty: "Hindi available ngayon ang sanggunian ng mga brick."

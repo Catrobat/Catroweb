@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: 'Adatvédelmi irányelvek'
 catro-notifications:
+  doc-comment:
+    message: "%user_link% hozzászólt egy dokumentációs oldalhoz: %page_title%"
   noFollowers: 'Úgy tűnik, nincsenek követőkkel kapcsolatos értesítéseid.'
   noComments: 'Úgy tűnik, nincsenek hozzászólásokkal kapcsolatos értesítéseid.'
   noReactions: 'Úgy tűnik, nincsenek reakciókkal kapcsolatos értesítéseid.'
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Hiányzol nekünk!'
   content: 'Két éve nem jelentkeztél be a(z) "%username%" Catrobat-fiókodba, és nincsenek benne projektek vagy hozzászólások. Hogy a közösségünk élénk maradjon, %days% nap múlva töröljük. Ha meg szeretnéd tartani, csak jelentkezz be egyszer.'
   button: 'Bejelentkezés a fiókom megtartásához'
+
+docs:
+  title: "Dokumentáció"
+  contents: "Tartalom"
+  on_this_page: "Ezen az oldalon"
+  improve: "Az oldal javítása"
+  fallback: "Ez az oldal még nincs lefordítva a nyelvedre, ezért angolul jelenik meg."
+  machine_translated: "Ezt az oldalt automatikusan fordították."
+  stale: "Az angol oldal megváltozott a fordítás óta, ezért egyes részei elavultak lehetnek."
+  video: "Videó lejátszása (a YouTube-ról töltődik be)"
+  comments: "Hozzászólások és tippek"
+  comments_empty: "Még nincs hozzászólás. Valami nem világos, vagy van egy tipped? Írd ide."
+  reference:
+    title: "Blokkok és képletek"
+    formula: "Képletelemek"
+    functions: "Függvények"
+    sensors: "Érzékelők"
+    operators: "Műveleti jelek"
+    examples: "Példaprojektek"
+    no_prose: "Ezt a blokkot még senki sem magyarázta el. Megírhatod az első magyarázatot."
+    empty: "A blokkleírás most nem érhető el."

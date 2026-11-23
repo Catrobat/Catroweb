@@ -21,6 +21,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
 
   $parameters->set('catrobat.code_export.dir', '%kernel.project_dir%/tests/TestData/CodeExport');
+  $parameters->set('catrobat.user_docs.dir', '%kernel.project_dir%/tests/TestData/Docs/');
   $parameters->set('catrobat.code_view.dir', '%catrobat.pubdir%resources_test/code-view/');
   $parameters->set('catrobat.file.extract.dir', '%catrobat.pubdir%resources_test/extract/');
   $parameters->set('catrobat.file.extract.path', 'resources_test/extract/');

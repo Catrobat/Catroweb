@@ -116,3 +116,5 @@ behat.yaml
 /node_modules
 /public/build/
 ###< pentatrion/vite-bundle ###
+!/user-docs/check.sh
+!/.github/actions/code-changed/*.sh

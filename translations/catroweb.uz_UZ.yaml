@@ -623,6 +623,8 @@ footer:
 privacy-policy:
   header: "Maxfiylik siyosati"
 catro-notifications:
+  doc-comment:
+    message: "%user_link% hujjatlar sahifasiga izoh qoldirdi: %page_title%"
   noFollowers: "Koʻrinishidan, obunachilar haqida bildirishnomalaring yoʻq."
   noComments: "Koʻrinishidan, izohlar haqida bildirishnomalaring yoʻq."
   noReactions: "Koʻrinishidan, reaksiyalar haqida bildirishnomalaring yoʻq."
@@ -1030,3 +1032,24 @@ inactiveAccount:
   title: 'Seni sogʻindik!'
   content: 'Sen ikki yildan beri “%username%” Catrobat hisobingga kirmading va unda hech qanday loyiha yoki izoh yoʻq. Hamjamiyatimiz faol boʻlib qolishi uchun uni %days% kundan keyin oʻchiramiz. Agar uni saqlab qolmoqchi boʻlsang, bir marta kirishing kifoya.'
   button: 'Hisobimni saqlash uchun kirish'
+
+docs:
+  title: "Hujjatlar"
+  contents: "Mundarija"
+  on_this_page: "Ushbu sahifada"
+  improve: "Ushbu sahifani yaxshilash"
+  fallback: "Bu sahifa hali sening tilingga tarjima qilinmagan, shuning uchun inglizcha ko'rsatilmoqda."
+  machine_translated: "Bu sahifa avtomatik tarjima qilingan."
+  stale: "Bu tarjimadan keyin inglizcha sahifa o'zgargan, shuning uchun ba'zi qismlari eskirgan bo'lishi mumkin."
+  video: "Videoni ijro etish (YouTube'dan yuklanadi)"
+  comments: "Izohlar va maslahatlar"
+  comments_empty: "Hali izohlar yo‘q. Biror narsa tushunarsizmi yoki maslahatingiz bormi? Shu yerga yozing."
+  reference:
+    title: "Bloklar va formulalar"
+    formula: "Formula elementlari"
+    functions: "Funksiyalar"
+    sensors: "Sensorlar"
+    operators: "Operatorlar"
+    examples: "Namuna loyihalar"
+    no_prose: "Bu blokni hali hech kim tushuntirmagan. Birinchi tushuntirishni sen yozishing mumkin."
+    empty: "Bloklar maʼlumotnomasi hozir mavjud emas."

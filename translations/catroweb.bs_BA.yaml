@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Pravila o privatnosti
 catro-notifications:
+  doc-comment:
+    message: "%user_link% je komentarisao stranicu dokumentacije: %page_title%"
   noFollowers: Izgleda da nemaš obavještenja o pratiocima.
   noComments: Izgleda da nemaš obavještenja o komentarima.
   noReactions: Izgleda da nemaš obavještenja o reakcijama.
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Nedostaješ nam!'
   content: 'Nisi se prijavio/la na svoj Catrobat račun "%username%" već dvije godine, a na njemu nema projekata ni komentara. Da bi naša zajednica ostala živa, obrisat ćemo ga za %days% dana. Ako ga želiš zadržati, samo se jednom prijavi.'
   button: 'Prijavi se da zadržiš račun'
+
+docs:
+  title: "Dokumentacija"
+  contents: "Sadržaj"
+  on_this_page: "Na ovoj stranici"
+  improve: "Poboljšaj ovu stranicu"
+  fallback: "Ova stranica još nije prevedena na tvoj jezik, pa se prikazuje na engleskom."
+  machine_translated: "Ova stranica je automatski prevedena."
+  stale: "Engleska stranica se promijenila nakon ovog prijevoda, pa dijelovi mogu biti zastarjeli."
+  video: "Pokreni video (učitava se s YouTubea)"
+  comments: "Komentari i savjeti"
+  comments_empty: "Još nema komentara. Je li nešto nejasno ili imaš savjet? Napiši ga ovdje."
+  reference:
+    title: "Blokovi i formule"
+    formula: "Elementi formula"
+    functions: "Funkcije"
+    sensors: "Senzori"
+    operators: "Operatori"
+    examples: "Primjeri projekata"
+    no_prose: "Niko još nije objasnio ovaj blok. Možeš napisati prvo objašnjenje."
+    empty: "Pregled blokova trenutno nije dostupan."

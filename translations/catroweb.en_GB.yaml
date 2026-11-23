@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Privacy Policy
 catro-notifications:
+  doc-comment:
+    message: "%user_link% commented on a docs page: %page_title%"
   noFollowers: "It looks like you don't have any follower notifications."
   noComments: "It looks like you don't have any comment notifications."
   noReactions: "It looks like you don't have any reaction notifications."
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'We miss you!'
   content: 'You have not logged in to your Catrobat account "%username%" for two years and it has no projects or comments. To keep our community lively, we will delete it in %days% days. If you want to keep it, just log in once.'
   button: 'Log in to keep my account'
+
+docs:
+  title: "Documentation"
+  contents: "Contents"
+  on_this_page: "On this page"
+  improve: "Improve this page"
+  fallback: "This page is not translated into your language yet, so it is shown in English."
+  machine_translated: "This page was translated automatically."
+  stale: "The English page has changed since this translation was made, so parts of it may be out of date."
+  video: "Play video (loads from YouTube)"
+  comments: "Comments and tips"
+  comments_empty: "No comments yet. Is something unclear, or do you have a tip? Write it here."
+  reference:
+    title: "Bricks and formulas"
+    formula: "Formula elements"
+    functions: "Functions"
+    sensors: "Sensors"
+    operators: "Operators"
+    examples: "Example projects"
+    no_prose: "Nobody has explained this brick yet. You can write the first explanation."
+    empty: "The brick reference is not available right now."

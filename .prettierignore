@@ -8,3 +8,4 @@ composer.lock
 package-lock.json
 symfony.lock
 webpack.config.js
+user-docs

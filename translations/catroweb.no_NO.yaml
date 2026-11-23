@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Personvernregler
 catro-notifications:
+  doc-comment:
+    message: "%user_link% kommenterte en dokumentasjonsside: %page_title%"
   noFollowers: "Det ser ut til at du ikke har noen følgere varsler."
   noComments: "Det ser ut til at du ikke har noen kommentarmeldinger."
   noReactions: "Det ser ut til at du ikke har noen reaksjonvarsler."
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Vi savner deg!'
   content: 'Du har ikke logget på Catrobat-kontoen din «%username%» på to år, og den har ingen prosjekter eller kommentarer. For å holde fellesskapet vårt levende sletter vi den om %days% dager. Hvis du vil beholde den, er det bare å logge på én gang.'
   button: 'Logg på for å beholde kontoen min'
+
+docs:
+  title: "Dokumentasjon"
+  contents: "Innhold"
+  on_this_page: "På denne siden"
+  improve: "Forbedre denne siden"
+  fallback: "Denne siden er ikke oversatt til språket ditt ennå, så den vises på engelsk."
+  machine_translated: "Denne siden ble oversatt automatisk."
+  stale: "Den engelske siden er endret siden denne oversettelsen ble laget, så deler av den kan være utdatert."
+  video: "Spill av video (lastes fra YouTube)"
+  comments: "Kommentarer og tips"
+  comments_empty: "Ingen kommentarer ennå. Er noe uklart, eller har du et tips? Skriv det her."
+  reference:
+    title: "Klosser og formler"
+    formula: "Formelelementer"
+    functions: "Funksjoner"
+    sensors: "Sensorer"
+    operators: "Operatorer"
+    examples: "Eksempelprosjekter"
+    no_prose: "Ingen har forklart denne klossen ennå. Du kan skrive den første forklaringen."
+    empty: "Klossoversikten er ikke tilgjengelig akkurat nå."

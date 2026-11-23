@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Politika e privatësisë 
 catro-notifications:
+  doc-comment:
+    message: "%user_link% komentoi një faqe të dokumentacionit: %page_title%"
   noFollowers: "Me sa duket nuk ke asnjë njoftim nga ndjekësit."
   noComments: "Me sa duket nuk ke asnjë njoftim për koment."
   noReactions: "Me sa duket nuk ke asnjë njoftim reagimi. "
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Na ke marrë malli!'
   content: 'Nuk je identifikuar në llogarinë tënde Catrobat "%username%" prej dy vitesh dhe ajo nuk ka projekte apo komente. Që komuniteti ynë të mbetet i gjallë, do ta fshijmë pas %days% ditësh. Nëse do ta mbash, mjafton të identifikohesh një herë.'
   button: 'Identifikohu për ta mbajtur llogarinë'
+
+docs:
+  title: "Dokumentacioni"
+  contents: "Përmbajtja"
+  on_this_page: "Në këtë faqe"
+  improve: "Përmirëso këtë faqe"
+  fallback: "Kjo faqe ende nuk është përkthyer në gjuhën tënde, prandaj shfaqet në anglisht."
+  machine_translated: "Kjo faqe është përkthyer automatikisht."
+  stale: "Faqja në anglisht ka ndryshuar që kur u bë ky përkthim, prandaj disa pjesë mund të jenë të vjetruara."
+  video: "Luaj videon (ngarkohet nga YouTube)"
+  comments: "Komente dhe këshilla"
+  comments_empty: "Ende nuk ka komente. A ka diçka të paqartë, apo ke një këshillë? Shkruaje këtu."
+  reference:
+    title: "Blloqe dhe formula"
+    formula: "Elementet e formulave"
+    functions: "Funksione"
+    sensors: "Sensorë"
+    operators: "Operatorë"
+    examples: "Projekte shembull"
+    no_prose: "Askush nuk e ka shpjeguar ende këtë bllok. Mund të shkruash shpjegimin e parë."
+    empty: "Udhëzuesi i blloqeve nuk është i disponueshëm tani."

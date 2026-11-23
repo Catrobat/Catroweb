@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Datenschutz-Vereinbarung
 catro-notifications:
+  doc-comment:
+    message: "%user_link% hat eine Seite der Dokumentation kommentiert: %page_title%"
   noFollowers: "Es sieht so aus, als hättest du keine Follower-Benachrichtigungen"
   noComments: "Es sieht so aus, als hättest du keine Kommentarbenachrichtigungen"
   noReactions: "Es sieht so aus, als hättest du keine Reaktionsbenachrichtigungen"
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Wir vermissen dich!'
   content: 'Du hast dich seit zwei Jahren nicht mehr bei deinem Catrobat-Konto „%username%“ angemeldet, und es hat keine Projekte oder Kommentare. Damit unsere Community lebendig bleibt, löschen wir es in %days% Tagen. Wenn du es behalten möchtest, melde dich einfach einmal an.'
   button: 'Anmelden und Konto behalten'
+
+docs:
+  title: "Dokumentation"
+  contents: "Inhalt"
+  on_this_page: "Auf dieser Seite"
+  improve: "Diese Seite verbessern"
+  fallback: "Diese Seite ist noch nicht in deine Sprache übersetzt, deshalb wird sie auf Englisch angezeigt."
+  machine_translated: "Diese Seite wurde automatisch übersetzt."
+  stale: "Die englische Seite hat sich seit dieser Übersetzung geändert, Teile davon können veraltet sein."
+  video: "Video abspielen (lädt von YouTube)"
+  comments: "Kommentare und Tipps"
+  comments_empty: "Noch keine Kommentare. Ist etwas unklar, oder hast du einen Tipp? Schreib ihn hier."
+  reference:
+    title: "Bausteine und Formeln"
+    formula: "Formelelemente"
+    functions: "Funktionen"
+    sensors: "Sensoren"
+    operators: "Operatoren"
+    examples: "Beispielprojekte"
+    no_prose: "Diesen Baustein hat noch niemand erklärt. Du kannst die erste Erklärung schreiben."
+    empty: "Die Baustein-Referenz ist gerade nicht verfügbar."

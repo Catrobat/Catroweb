@@ -51,6 +51,7 @@ services:
       - ./../templates:/var/www/catroweb/templates:cached
       - ./../tests:/var/www/catroweb/tests:cached
       - ./../translations:/var/www/catroweb/translations:cached
+      - ./../user-docs:/var/www/catroweb/user-docs:cached
       #
       # For quicker debugging in case of errors
       - ./../var:/var/www/catroweb/var:cached

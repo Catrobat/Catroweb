@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Ochrana soukromí
 catro-notifications:
+  doc-comment:
+    message: "%user_link% okomentoval stránku dokumentace: %page_title%"
   noFollowers: "Vypadá to, že nemáš žádná oznámení o sledujících."
   noComments: "Vypadá to, že nemáš žádná oznámení o komentářích."
   noReactions: "Vypadá to, že nemáš žádná oznámení o reakcích."
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Chybíš nám!'
   content: 'Už dva roky ses nepřihlásil ke svému účtu Catrobat „%username%“ a nemá žádné projekty ani komentáře. Aby naše komunita zůstala živá, za %days% dní ho smažeme. Pokud si ho chceš ponechat, stačí se jednou přihlásit.'
   button: 'Přihlásit se a ponechat si účet'
+
+docs:
+  title: "Dokumentace"
+  contents: "Obsah"
+  on_this_page: "Na této stránce"
+  improve: "Vylepši tuto stránku"
+  fallback: "Tato stránka ještě není přeložená do tvého jazyka, proto se zobrazuje v angličtině."
+  machine_translated: "Tato stránka byla přeložena automaticky."
+  stale: "Anglická stránka se od tohoto překladu změnila, takže části mohou být zastaralé."
+  video: "Přehrát video (načte se z YouTube)"
+  comments: "Komentáře a tipy"
+  comments_empty: "Zatím žádné komentáře. Je něco nejasné, nebo máš tip? Napiš ho sem."
+  reference:
+    title: "Bloky a vzorce"
+    formula: "Prvky vzorců"
+    functions: "Funkce"
+    sensors: "Senzory"
+    operators: "Operátory"
+    examples: "Ukázkové projekty"
+    no_prose: "Tento blok zatím nikdo nevysvětlil. Můžeš napsat první vysvětlení."
+    empty: "Přehled bloků teď není k dispozici."

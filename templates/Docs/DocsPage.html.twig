@@ -1,0 +1,50 @@
+{% extends 'Docs/DocsLayout.html.twig' %}
+
+{% from 'Docs/DocsLayout.html.twig' import translation_note %}
+
+{% set current = page.path %}
+
+{% block title %}{{ page.title }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
+{% block meta_description %}{{ page.description }}{% endblock %}
+
+{% block docs_article %}
+  <article class="docs-article" lang="{{ page.locale|replace({_: '-'}) }}">
+    {{ translation_note(page, fallback) }}
+
+    <h1 class="docs-article__title">{{ page.title }}</h1>
+
+    {% if page.toc|length > 1 %}
+      <nav class="docs-toc" aria-labelledby="docs-toc-title">
+        <h2 class="docs-toc__title" id="docs-toc-title">{{ 'docs.on_this_page'|trans({}, 'catroweb') }}</h2>
+        <ul class="docs-toc__list">
+          {% for entry in page.toc %}
+            <li class="docs-toc__entry docs-toc__entry--level-{{ entry.level }}"><a href="#{{ entry.id }}">{{ entry.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
+
+    <div class="docs-content">{{ page.html|raw }}</div>
+
+    <nav class="docs-pager" aria-label="{{ ('previous'|trans({}, 'catroweb') ~ ' / ' ~ 'next'|trans({}, 'catroweb'))|e('html_attr') }}">
+      {% if previous %}
+        <a class="docs-pager__link docs-pager__link--previous" rel="prev" href="{{ path('docs', {path: previous.path == 'index' ? '' : previous.path}) }}">
+          <span class="docs-pager__label">{{ 'previous'|trans({}, 'catroweb') }}</span>{{ previous.title }}
+        </a>
+      {% endif %}
+      {% if next %}
+        <a class="docs-pager__link docs-pager__link--next" rel="next" href="{{ path('docs', {path: next.path == 'index' ? '' : next.path}) }}">
+          <span class="docs-pager__label">{{ 'next'|trans({}, 'catroweb') }}</span>{{ next.title }}
+        </a>
+      {% endif %}
+    </nav>
+
+    <p class="docs-improve">
+      <a href="{{ edit_url }}" target="_blank" rel="noopener noreferrer">
+        <span class="material-icons" aria-hidden="true">edit</span>{{ 'docs.improve'|trans({}, 'catroweb') }}
+      </a>
+    </p>
+
+    {{ include('Docs/Comments.html.twig', {doc_path: page.path}) }}
+  </article>
+{% endblock %}

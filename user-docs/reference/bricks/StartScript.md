@@ -1,0 +1,3 @@
+![When_scene_starts_btn2](../../media/bricks/When_scene_starts_btn2.png)
+
+If you use this block, the script will start immediately when the scene starts. A scene is the beginning of your program. A scene is a new view in your program in which other elements can be displayed and different interactions can take place. You can have many scenes for different phases in your program. For example one scene for the intro, one scene for the main menu, one for the first level, one for the second level and so on. With simpler programs, a single scene can also suffice, then the beginning of your program is also the beginning of the scene.

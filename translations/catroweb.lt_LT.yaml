@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Privatumo taisyklės
 catro-notifications:
+  doc-comment:
+    message: "%user_link% pakomentavo dokumentacijos puslapį: %page_title%"
   noFollowers: 'Panašu, kad neturi jokių pranešimų apie sekėjus.'
   noComments: 'Panašu, kad neturi jokių pranešimų apie komentarus.'
   noReactions: 'Panašu, kad neturi jokių pranešimų apie reakcijas.'
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Pasiilgome tavęs!'
   content: 'Jau dvejus metus neprisijungei prie savo Catrobat paskyros „%username%“, ir joje nėra jokių projektų ar komentarų. Kad mūsų bendruomenė būtų gyva, ištrinsime ją po %days% d. Jei nori ją išsaugoti, tiesiog prisijunk vieną kartą.'
   button: 'Prisijungti ir išsaugoti paskyrą'
+
+docs:
+  title: "Dokumentacija"
+  contents: "Turinys"
+  on_this_page: "Šiame puslapyje"
+  improve: "Patobulink šį puslapį"
+  fallback: "Šis puslapis dar neišverstas į tavo kalbą, todėl rodomas angliškai."
+  machine_translated: "Šis puslapis išverstas automatiškai."
+  stale: "Angliškas puslapis pasikeitė po šio vertimo, todėl kai kurios dalys gali būti pasenusios."
+  video: "Paleisti vaizdo įrašą (įkeliamas iš YouTube)"
+  comments: "Komentarai ir patarimai"
+  comments_empty: "Komentarų dar nėra. Kažkas neaišku, ar turi patarimą? Parašyk jį čia."
+  reference:
+    title: "Blokai ir formulės"
+    formula: "Formulių elementai"
+    functions: "Funkcijos"
+    sensors: "Jutikliai"
+    operators: "Operatoriai"
+    examples: "Projektų pavyzdžiai"
+    no_prose: "Šio bloko dar niekas nepaaiškino. Gali parašyti pirmą paaiškinimą."
+    empty: "Blokų žinynas šiuo metu nepasiekiamas."

@@ -19,6 +19,8 @@ class SecurityHeadersSubscriber
     private readonly bool $captchaEnabled = false,
     #[Autowire('%env(CAPTCHA_PUBLIC_URL)%')]
     private readonly string $captchaPublicUrl = '',
+    #[Autowire('%env(PLAYER_ORIGIN)%')]
+    private readonly string $playerOrigin = '',
   ) {
   }
 
@@ -80,6 +82,15 @@ class SecurityHeadersSubscriber
       $worker_src[] = 'blob:';
     }
 
+    // The docs embed the browser player (play.catrobat.org allows share as frame ancestor).
+    $frame_src = ["'self'"];
+    $player_origin = $this->originFromUrl($this->playerOrigin);
+    if (null !== $player_origin) {
+      $frame_src[] = $player_origin;
+    }
+    // Docs videos (::video), loaded only when the reader clicks play.
+    $frame_src[] = 'https://www.youtube-nocookie.com';
+
     return implode('; ', [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com",
@@ -88,6 +99,7 @@ class SecurityHeadersSubscriber
       'font-src '."'self'".' data:',
       'connect-src '.implode(' ', $connect_src),
       'worker-src '.implode(' ', $worker_src),
+      'frame-src '.implode(' ', $frame_src),
       "frame-ancestors 'self'",
     ]);
   }

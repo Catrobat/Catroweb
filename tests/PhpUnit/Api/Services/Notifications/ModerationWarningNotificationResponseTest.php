@@ -120,6 +120,7 @@ class ModerationWarningNotificationResponseTest extends TestCase
       $visibility,
       $this->createStub(UserAvatarService::class),
       $this->createStub(UrlGeneratorInterface::class),
+      $this->createStub(\App\Docs\DocsLibrary::class),
     );
 
     $notification = new ModerationNotification(new User(), 'studio', 'studio-id', $moderation_action, $message);

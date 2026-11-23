@@ -1,5 +1,6 @@
 # Operations
 
+- [Brick-Examples.md](./Brick-Examples.md) — Example projects per brick for the docs, `project_brick_usage` and its backfill command.
 - [Code-View.md](./Code-View.md) — The project page's code view, made by the player's code export (Catroid's own code) under Node.
 - [Background-Jobs.md](./Background-Jobs.md) — Queues, workers and periodic tasks (Symfony Messenger + Scheduler), async API jobs, operations.
 - [Protected-Project-Files.md](./Protected-Project-Files.md) — Authorized delivery of project files and the nginx rollout order.
@@ -15,6 +16,7 @@
 - [Redis-Cache.md](./Redis-Cache.md) — Redis as the production application cache backend (Symfony, Doctrine, trust scores).
 - [Secret-Management.md](./Secret-Management.md) — Symfony `.env` hierarchy and how production overrides committed dev defaults.
 - [Storage-Architecture.md](./Storage-Architecture.md) — Symlink chain under `public/resources/` for user-generated content storage.
+- [User-Docs.md](./User-Docs.md) — The user docs in user-docs/: sync on deploy, rendering, embeds, media, API and pages.
 
 ## Production infrastructure
 

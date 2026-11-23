@@ -1,0 +1,424 @@
+wp_id	lang	status	old_url	new_path	pair_wp_id	title
+7545	en	imported	https://catrobat.org/docs/brickdocumentation/	en/bricks/index.md	8655	Brick Documentation
+7546	en	imported	https://catrobat.org/docs/brickdocumentation/event/	en/bricks/event.md	8671	Event
+7547	en	imported	https://catrobat.org/docs/brickdocumentation/control/	en/bricks/control.md	8672	Control
+7548	en	imported	https://catrobat.org/docs/brickdocumentation/motion/	en/bricks/motion.md	8673	Motion
+7549	en	imported	https://catrobat.org/docs/brickdocumentation/sound/	en/bricks/sound.md	8676	Sound
+7550	en	imported	https://catrobat.org/docs/brickdocumentation/looks/	en/bricks/looks.md	8677	Looks
+7551	en	imported	https://catrobat.org/docs/brickdocumentation/pen/	en/bricks/pen.md	8678	Pen
+7552	en	imported	https://catrobat.org/docs/brickdocumentation/data/	en/bricks/data.md	8679	Data
+7553	en	imported	https://catrobat.org/docs/brickdocumentation/yourbricks/	en/bricks/yourbricks.md	8681	YourBricks
+7554	en	imported	https://catrobat.org/docs/brickdocumentation/embroidery/	en/bricks/embroidery.md	8682	Embroidery
+7559	en	brick	https://catrobat.org/docs/brickdocumentation/event/when-scene-starts/	reference/bricks/StartScript.md	8683	When scene starts
+7560	en	brick	https://catrobat.org/docs/brickdocumentation/event/when-tapped/	reference/bricks/WhenScript.md	8684	When tapped
+7561	en	brick	https://catrobat.org/docs/brickdocumentation/event/when-stage-is-tapped/	reference/bricks/WhenTouchDownScript.md	8685	When stage is tapped
+7562	en	brick	https://catrobat.org/docs/brickdocumentation/event/when-you-receive/	reference/bricks/BroadcastScript.md	8686	When you receive
+7563	en	brick	https://catrobat.org/docs/brickdocumentation/event/when-1/	reference/bricks/WhenConditionScript.md	8687	When(…) becomes true
+7564	en	brick	https://catrobat.org/docs/brickdocumentation/event/when-background-changes-to/	reference/bricks/WhenBackgroundChangesScript.md	8688	When background changes to
+7565	en	brick	https://catrobat.org/docs/brickdocumentation/event/when-you-start-as-a-clone/	reference/bricks/WhenClonedScript.md	8689	When you start as a clone
+7620	en	imported	https://catrobat.org/docs/brickdocumentation/device/	en/bricks/device.md	8680	Device
+7622	en	imported	https://catrobat.org/docs/tutorials/	en/embroidery-tutorials/index.md	8656	Embroidery Tutorials
+7624	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/	en/embroidery-tutorials/embroidery-tutorials-beginner/index.md	9084	Embroidery Tutorials Beginner
+7634	en	brick	https://catrobat.org/docs/brickdocumentation/control/wait-1-second/	reference/bricks/WaitBrick.md	8704	Wait
+7635	en	brick	https://catrobat.org/docs/brickdocumentation/control/note-add-comment-here/	reference/bricks/NoteBrick.md	8705	Note
+7636	en	brick	https://catrobat.org/docs/brickdocumentation/control/forever/	reference/bricks/ForeverBrick.md	8706	Forever
+7637	en	brick	https://catrobat.org/docs/brickdocumentation/control/if-1/	reference/bricks/IfLogicBeginBrick.md	8708	If … Then … Else …
+7638	en	brick	https://catrobat.org/docs/brickdocumentation/control/if-1-2/	reference/bricks/IfThenLogicBeginBrick.md	8707	If(…) is true then
+7639	en	brick	https://catrobat.org/docs/brickdocumentation/control/wait-until-1/	reference/bricks/WaitUntilBrick.md	8709	Wait until … is true
+7640	en	brick	https://catrobat.org/docs/brickdocumentation/control/repeat-10-times/	reference/bricks/RepeatBrick.md	8710	Repeat … times
+7641	en	brick	https://catrobat.org/docs/brickdocumentation/control/repeat-until-1/	reference/bricks/RepeatUntilBrick.md	8711	Repeat until …
+7642	en	brick	https://catrobat.org/docs/brickdocumentation/control/for-values-from-1-to-10-in/	reference/bricks/ForVariableFromToBrick.md	8712	For values from 1 to 10 in
+7643	en	brick	https://catrobat.org/docs/brickdocumentation/control/for-each-value-from-in/	reference/bricks/ForItemInUserListBrick.md	8713	For each value from .. in ..
+7644	en	brick	https://catrobat.org/docs/brickdocumentation/control/continue-scene/	reference/bricks/SceneTransitionBrick.md	8714	Continue scene
+7645	en	brick	https://catrobat.org/docs/brickdocumentation/control/start-scene/	reference/bricks/SceneStartBrick.md	8715	Start scene
+7646	en	brick	https://catrobat.org/docs/brickdocumentation/control/finish-stage/	reference/bricks/FinishStageBrick.md	8716	Finish stage
+7647	en	brick	https://catrobat.org/docs/brickdocumentation/control/stop-this-script/	reference/bricks/StopScriptBrick.md	8717	Stop
+7648	en	brick	https://catrobat.org/docs/brickdocumentation/control/wait-until-all-other-scripts-have-stopped/	reference/bricks/WaitTillIdleBrick.md	8718	Wait until all other scripts have stopped
+7649	en	brick	https://catrobat.org/docs/brickdocumentation/control/create-clone-of/	reference/bricks/CloneBrick.md	8719	Create clone of
+7650	en	brick	https://catrobat.org/docs/brickdocumentation/control/delete-this-clone/	reference/bricks/DeleteThisCloneBrick.md	8720	Delete this clone
+7651	en	brick	https://catrobat.org/docs/brickdocumentation/control/broadcast/	reference/bricks/BroadcastBrick.md	8721	Broadcast
+7652	en	brick	https://catrobat.org/docs/brickdocumentation/control/broadcast-and-wait/	reference/bricks/BroadcastWaitBrick.md	8722	Broadcast and wait
+7738	en	brick	https://catrobat.org/docs/brickdocumentation/motion/place-at/	reference/bricks/PlaceAtBrick.md	8756	Place at
+7739	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-x-to/	reference/bricks/SetXBrick.md	8758	Set X to
+7740	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-y-to/	reference/bricks/SetYBrick.md	8759	Set Y to
+7741	en	brick	https://catrobat.org/docs/brickdocumentation/motion/change-x-by/	reference/bricks/ChangeXByNBrick.md	8760	Change X by
+7742	en	brick	https://catrobat.org/docs/brickdocumentation/motion/change-y-by/	reference/bricks/ChangeYByNBrick.md	8761	Change Y by
+7743	en	brick	https://catrobat.org/docs/brickdocumentation/motion/go-to/	reference/bricks/GoToBrick.md	8762	Go to
+7744	en	brick	https://catrobat.org/docs/brickdocumentation/motion/if-on-edge-bounce/	reference/bricks/IfOnEdgeBounceBrick.md	8763	If on edge, bounce
+7745	en	brick	https://catrobat.org/docs/brickdocumentation/motion/move-steps/	reference/bricks/MoveNStepsBrick.md	8764	Move … steps
+7746	en	brick	https://catrobat.org/docs/brickdocumentation/motion/turn-left-degrees/	reference/bricks/TurnLeftBrick.md	8765	Turn left … degrees
+7747	en	brick	https://catrobat.org/docs/brickdocumentation/motion/turn-right-degrees/	reference/bricks/TurnRightBrick.md	8766	Turn right … degrees
+7748	en	brick	https://catrobat.org/docs/brickdocumentation/motion/point-in-direction-degrees/	reference/bricks/PointInDirectionBrick.md	8767	Point in direction … degrees
+7749	en	brick	https://catrobat.org/docs/brickdocumentation/motion/point-towards/	reference/bricks/PointToBrick.md	8768	Point towards
+7750	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-rotation-style/	reference/bricks/SetRotationStyleBrick.md	8769	Set rotation style
+7751	en	brick	https://catrobat.org/docs/brickdocumentation/motion/glide-second-to/	reference/bricks/GlideToBrick.md	8770	Glide … second to
+7752	en	brick	https://catrobat.org/docs/brickdocumentation/motion/go-back-layer/	reference/bricks/GoNStepsBackBrick.md	8771	Go back … layer
+7753	en	brick	https://catrobat.org/docs/brickdocumentation/motion/go-to-front/	reference/bricks/ComeToFrontBrick.md	8772	Go to front
+7754	en	brick	https://catrobat.org/docs/brickdocumentation/motion/vibrate-for-second/	reference/bricks/VibrationBrick.md	8773	Vibrate for … second
+7755	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-your-motion-type-to/	reference/bricks/SetPhysicsObjectTypeBrick.md	8774	Set your motion type to …
+7756	en	brick	https://catrobat.org/docs/brickdocumentation/motion/when-you-bounce-off/	reference/bricks/WhenBounceOffScript.md	8775	When you bounce off …
+7757	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-velocity-to/	reference/bricks/SetVelocityBrick.md	8776	Set velocity to
+7758	en	brick	https://catrobat.org/docs/brickdocumentation/motion/spin-left-degrees-second/	reference/bricks/TurnLeftSpeedBrick.md	8777	Spin left … degrees/second
+7759	en	brick	https://catrobat.org/docs/brickdocumentation/motion/spin-right-degrees-second/	reference/bricks/TurnRightSpeedBrick.md	8778	Spin right … degrees/second
+7761	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-gravity-for-all-actors-and-objects-to/	reference/bricks/SetGravityBrick.md	8779	Set gravity for all actors and objects to …
+7762	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-mass-to-kilogram/	reference/bricks/SetMassBrick.md	8780	Set mass to … kilogram
+7763	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-bounce-factor-to/	reference/bricks/SetBounceBrick.md	8781	Set bounce factor to …%
+7764	en	brick	https://catrobat.org/docs/brickdocumentation/motion/set-friction-to/	reference/bricks/SetFrictionBrick.md	8782	Set friction to …%
+7847	en	brick	https://catrobat.org/docs/brickdocumentation/sound/start-sound/	reference/bricks/PlaySoundBrick.md	8820	Start sound
+7848	en	brick	https://catrobat.org/docs/brickdocumentation/sound/start-sound-and-wait/	reference/bricks/PlaySoundAndWaitBrick.md	8821	Start sound and wait
+7849	en	brick	https://catrobat.org/docs/brickdocumentation/sound/stop-sound/	reference/bricks/StopSoundBrick.md	8822	Stop sound
+7850	en	brick	https://catrobat.org/docs/brickdocumentation/sound/stop-all-sounds/	reference/bricks/StopAllSoundsBrick.md	8823	Stop all sounds
+7851	en	brick	https://catrobat.org/docs/brickdocumentation/sound/set-volume-to/	reference/bricks/SetVolumeToBrick.md	8824	Set volume to …%
+7852	en	brick	https://catrobat.org/docs/brickdocumentation/sound/change-volume-by/	reference/bricks/ChangeVolumeByNBrick.md	8825	Change volume by …
+7853	en	brick	https://catrobat.org/docs/brickdocumentation/sound/set-instrument-to/	reference/bricks/SetInstrumentBrick.md	8826	Set instrument to
+7854	en	brick	https://catrobat.org/docs/brickdocumentation/sound/play-note-for/	reference/bricks/PlayNoteForBeatsBrick.md	8827	Play note … for … beats
+7855	en	brick	https://catrobat.org/docs/brickdocumentation/sound/play-drum-for-beats/	reference/bricks/PlayDrumForBeatsBrick.md	8828	Play drum … for … beats
+7857	en	brick	https://catrobat.org/docs/brickdocumentation/sound/set-tempo-to/	reference/bricks/SetTempoBrick.md	8829	Set tempo to …
+7858	en	brick	https://catrobat.org/docs/brickdocumentation/sound/change-tempo-by/	reference/bricks/ChangeTempoByNBrick.md	8830	Change tempo by …
+7859	en	brick	https://catrobat.org/docs/brickdocumentation/sound/pause-for-beats/	reference/bricks/PauseForBeatsBrick.md	8831	Pause for … beats
+7905	en	brick	https://catrobat.org/docs/brickdocumentation/looks/switch-to-look/	reference/bricks/SetLookBrick.md	8856	Switch to look
+7906	en	brick	https://catrobat.org/docs/brickdocumentation/looks/switch-to-look-with-number/	reference/bricks/SetLookByIndexBrick.md	8857	Switch to look with number …
+7907	en	brick	https://catrobat.org/docs/brickdocumentation/looks/next-look/	reference/bricks/NextLookBrick.md	8858	Next look
+7908	en	brick	https://catrobat.org/docs/brickdocumentation/looks/previous-look/	reference/bricks/PreviousLookBrick.md	8859	Previous look
+7909	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-size-to/	reference/bricks/SetSizeToBrick.md	8860	Set size to …%
+7910	en	brick	https://catrobat.org/docs/brickdocumentation/looks/change-size-by/	reference/bricks/ChangeSizeByNBrick.md	8861	Change size by …
+7911	en	brick	https://catrobat.org/docs/brickdocumentation/looks/hide/	reference/bricks/HideBrick.md	8862	Hide
+7912	en	brick	https://catrobat.org/docs/brickdocumentation/looks/show/	reference/bricks/ShowBrick.md	8863	Show
+7913	en	brick	https://catrobat.org/docs/brickdocumentation/looks/ask-and-store-written-answer-in/	reference/bricks/AskBrick.md	8864	Ask … and store written answer in …
+7914	en	brick	https://catrobat.org/docs/brickdocumentation/looks/say/	reference/bricks/SayBubbleBrick.md	8866	Say …
+7915	en	brick	https://catrobat.org/docs/brickdocumentation/looks/say-for-second/	reference/bricks/SayForBubbleBrick.md	8867	Say … for .. second
+7916	en	brick	https://catrobat.org/docs/brickdocumentation/looks/think/	reference/bricks/ThinkBubbleBrick.md	8868	Think …
+7917	en	brick	https://catrobat.org/docs/brickdocumentation/looks/think-for-second/	reference/bricks/ThinkForBubbleBrick.md	8869	Think .. for … second
+7918	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-transparency-to/	reference/bricks/SetTransparencyBrick.md	8870	Set transparency to …
+7919	en	brick	https://catrobat.org/docs/brickdocumentation/looks/change-transparency-by/	reference/bricks/ChangeTransparencyByNBrick.md	8871	Change transparency by …
+7920	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-brightness-to/	reference/bricks/SetBrightnessBrick.md	8872	Set brightness to …%
+7921	en	brick	https://catrobat.org/docs/brickdocumentation/looks/change-brightness-by/	reference/bricks/ChangeBrightnessByNBrick.md	8873	Change brightness by …
+7922	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-colour-to/	reference/bricks/SetColorBrick.md	8874	Set colour to …
+7923	en	brick	https://catrobat.org/docs/brickdocumentation/looks/change-colour-by/	reference/bricks/ChangeColorByNBrick.md	8875	Change colour by …
+7924	en	brick	https://catrobat.org/docs/brickdocumentation/looks/fade-particle-effect/	reference/bricks/FadeParticleEffectBrick.md	8876	Fade particle effect
+7925	en	brick	https://catrobat.org/docs/brickdocumentation/looks/turn-particle-effect-additivity/	reference/bricks/ParticleEffectAdditivityBrick.md	8877	Turn particle effect additivity
+7926	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-particle-color-to/	reference/bricks/SetParticleColorBrick.md	8878	Set particle color to …
+7927	en	brick	https://catrobat.org/docs/brickdocumentation/looks/clear-graphic-effects/	reference/bricks/ClearGraphicEffectBrick.md	8879	Clear graphic effects
+7928	en	brick	https://catrobat.org/docs/brickdocumentation/looks/become-focus-point-with-horizontal-and-vertical-flexibility/	reference/bricks/SetCameraFocusPointBrick.md	8880	Become focus point with …% horizontal and …% vertical flexibility
+7929	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-background/	reference/bricks/SetBackgroundBrick.md	8881	Set background
+7930	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-background-to-number/	reference/bricks/SetBackgroundByIndexBrick.md	8916	Set background to number …
+7931	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-background-and-wait/	reference/bricks/SetBackgroundAndWaitBrick.md	8929	Set background and wait
+7932	en	brick	https://catrobat.org/docs/brickdocumentation/looks/turn-camera/	reference/bricks/CameraBrick.md	8918	Turn camera
+7933	en	brick	https://catrobat.org/docs/brickdocumentation/looks/use-camera/	reference/bricks/ChooseCameraBrick.md	8919	Use camera
+7934	en	brick	https://catrobat.org/docs/brickdocumentation/looks/turn-flashlight/	reference/bricks/FlashBrick.md	8920	Turn flashlight
+7935	en	brick	https://catrobat.org/docs/brickdocumentation/looks/get-image-from-and-use-as-current-look/	reference/bricks/LookRequestBrick.md	8921	Get image from … and use as current look
+7936	en	brick	https://catrobat.org/docs/brickdocumentation/looks/paint-new-look/	reference/bricks/PaintNewLookBrick.md	8922	Paint new look …
+7937	en	brick	https://catrobat.org/docs/brickdocumentation/looks/edit-look/	reference/bricks/EditLookBrick.md	8923	Edit look
+7938	en	brick	https://catrobat.org/docs/brickdocumentation/looks/copy-look-and-name-it/	reference/bricks/CopyLookBrick.md	8924	Copy look and name it …
+7939	en	brick	https://catrobat.org/docs/brickdocumentation/looks/delete-look/	reference/bricks/DeleteLookBrick.md	8925	Delete look
+7970	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/activate-embroidery-bricks/	en/embroidery-tutorials/embroidery-tutorials-beginner/activate-embroidery-bricks.md	9089	Activate Embroidery-Bricks
+8042	en	brick	https://catrobat.org/docs/brickdocumentation/looks/set-background-to-number-and-wait/	reference/bricks/SetBackgroundByIndexAndWaitBrick.md	8917	Set background to number … and wait
+8049	en	brick	https://catrobat.org/docs/brickdocumentation/pen/pen-down/	reference/bricks/PenDownBrick.md	8945	Pen down
+8050	en	brick	https://catrobat.org/docs/brickdocumentation/pen/pen-up/	reference/bricks/PenUpBrick.md	8946	Pen up
+8051	en	brick	https://catrobat.org/docs/brickdocumentation/pen/set-pen-size-to/	reference/bricks/SetPenSizeBrick.md	8947	Set pen size to …
+8052	en	brick	https://catrobat.org/docs/brickdocumentation/pen/stamp/	reference/bricks/StampBrick.md	8949	Stamp
+8053	en	brick	https://catrobat.org/docs/brickdocumentation/pen/clear/	reference/bricks/ClearBackgroundBrick.md	8950	Clear
+8074	en	brick	https://catrobat.org/docs/brickdocumentation/pen/set-pen-colour-to-red-green-blue/	reference/bricks/SetPenColorBrick.md	8948	Set pen colour to red .. green .. blue
+8081	en	brick	https://catrobat.org/docs/brickdocumentation/data/set-variable-to/	reference/bricks/SetVariableBrick.md	8960	Set variable … to …
+8082	en	brick	https://catrobat.org/docs/brickdocumentation/data/change-variable-by/	reference/bricks/ChangeVariableBrick.md	8961	Change variable … by …
+8083	en	brick	https://catrobat.org/docs/brickdocumentation/data/show-variable-at-x-y/	reference/bricks/ShowTextBrick.md	8962	Show variable … at X:… Y:…
+8084	en	brick	https://catrobat.org/docs/brickdocumentation/data/show-variable-at-x-y-size-colour-aligned/	reference/bricks/ShowTextColorSizeAlignmentBrick.md	8963	Show variable … at X:… Y:… size:.. colour:… aligned…
+8085	en	brick	https://catrobat.org/docs/brickdocumentation/data/hide-variable/	reference/bricks/HideTextBrick.md	8964	Hide variable …
+8086	en	brick	https://catrobat.org/docs/brickdocumentation/data/write-variable-on-device/	reference/bricks/WriteVariableOnDeviceBrick.md	8965	Write variable on device …
+8087	en	brick	https://catrobat.org/docs/brickdocumentation/data/read-variable-from-device/	reference/bricks/ReadVariableFromDeviceBrick.md	8966	Read variable from device …
+8088	en	brick	https://catrobat.org/docs/brickdocumentation/data/write-variable-to-file/	reference/bricks/WriteVariableToFileBrick.md	8967	Write  variable … to file …
+8089	en	brick	https://catrobat.org/docs/brickdocumentation/data/read-variable-from-file-and/	reference/bricks/ReadVariableFromFileBrick.md	8968	Read  variable … from file … AND …
+8090	en	brick	https://catrobat.org/docs/brickdocumentation/data/add-to-list/	reference/bricks/AddItemToUserListBrick.md	8969	Add … to list …
+8091	en	brick	https://catrobat.org/docs/brickdocumentation/data/delete-item-from-list-at-position/	reference/bricks/DeleteItemOfUserListBrick.md	8970	Delete item from list … at position …
+8092	en	brick	https://catrobat.org/docs/brickdocumentation/data/delete-all-items-from-list/	reference/bricks/ClearUserListBrick.md	8971	Delete all items from list …
+8093	en	brick	https://catrobat.org/docs/brickdocumentation/data/insert-into-list-at-position/	reference/bricks/InsertItemIntoUserListBrick.md	8972	Insert … into list … at position …
+8094	en	brick	https://catrobat.org/docs/brickdocumentation/data/replace-item-in-list-at-position-with/	reference/bricks/ReplaceItemInUserListBrick.md	8973	Replace item in list … at position … with …
+8096	en	brick	https://catrobat.org/docs/brickdocumentation/data/write-list-on-device/	reference/bricks/WriteListOnDeviceBrick.md	8974	Write list on device …
+8097	en	brick	https://catrobat.org/docs/brickdocumentation/data/read-list-from-device/	reference/bricks/ReadListFromDeviceBrick.md	8975	Read list from device …
+8098	en	brick	https://catrobat.org/docs/brickdocumentation/data/store-column-of-the-comma-separated-values/	reference/bricks/StoreCSVIntoUserListBrick.md	8976	Store column … of the comma-separated values …
+8099	en	brick	https://catrobat.org/docs/brickdocumentation/data/send-web-request-to-and-store-answer-in/	reference/bricks/WebRequestBrick.md	8977	Send web request to … and store answer in …
+8182	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/stitch/	reference/bricks/StitchBrick.md	9026	Stitch
+8183	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/set-thread-color-to/	reference/bricks/SetThreadColorBrick.md	9027	Set thread color to …
+8184	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/start-running-stitch-with-length/	reference/bricks/RunningStitchBrick.md	9028	Start running stitch with length …
+8185	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/start-zigzag-stitch-with-lenght-and-width/	reference/bricks/ZigZagStitchBrick.md	9029	Start zigzag stitch with lenght … and width …
+8186	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/start-triple-stitch-with-length/	reference/bricks/TripleStitchBrick.md	9030	Start triple stitch with length …
+8187	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/sew-up/	reference/bricks/SewUpBrick.md	9031	Sew up
+8188	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/stop-current-stitch/	reference/bricks/StopRunningStitchBrick.md	9032	Stop current stitch
+8189	en	brick	https://catrobat.org/docs/brickdocumentation/embroidery/write-embroidery-data-to-file/	reference/bricks/WriteEmbroideryToFileBrick.md	9033	Write embroidery data to file …
+8235	en	imported	https://catrobat.org/docs/brickdocumentation/plot/	en/bricks/plot.md	9666	Plot
+8236	en	brick	https://catrobat.org/docs/brickdocumentation/plot/start-to-plot/	reference/bricks/StartPlotBrick.md	9667	Start to plot
+8237	en	brick	https://catrobat.org/docs/brickdocumentation/plot/stop-to-plot/	reference/bricks/StopPlotBrick.md	9668	Stop to plot
+8238	en	brick	https://catrobat.org/docs/brickdocumentation/plot/save-plot/	reference/bricks/SavePlotBrick.md	9669	Save plot as SVG
+8239	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/create-embroidery-objects/	en/embroidery-tutorials/embroidery-tutorials-beginner/create-embroidery-objects.md	9103	Create Embroidery-Objects
+8260	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/embroidery-bricks/	en/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/index.md	9102	Embroidery-Bricks
+8262	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/embroidery-bricks/stitch/	en/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/stitch.md	9131	Stitch
+8271	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/embroidery-bricks/running-stitch/	en/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/running-stitch.md	9132	Running Stitch
+8272	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/embroidery-bricks/zigzag-stitch/	en/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/zigzag-stitch.md	9133	Zigzag Stitch
+8273	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/embroidery-bricks/triple-stitch/	en/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/triple-stitch.md	9134	Triple Stitch
+8274	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/embroidery-bricks/stop-current-stitch/	en/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/stop-current-stitch.md	9135	Stop Current Stitch
+8325	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/export-designs/	en/embroidery-tutorials/embroidery-tutorials-beginner/export-designs.md	9168	Export Designs
+8339	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/square/	en/embroidery-tutorials/embroidery-tutorials-beginner/square.md	9177	Square
+8350	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/star-zigzag/	en/embroidery-tutorials/embroidery-tutorials-beginner/star-zigzag.md	9213	Star – Zigzag
+8360	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/star/	en/embroidery-tutorials/embroidery-tutorials-beginner/star.md	9212	Star
+8371	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/circle/	en/embroidery-tutorials/embroidery-tutorials-beginner/circle.md	9190	Circle
+8380	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/semicircle/	en/embroidery-tutorials/embroidery-tutorials-beginner/semicircle.md	9189	Semicircle
+8392	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/circle-zigzag/	en/embroidery-tutorials/embroidery-tutorials-beginner/circle-zigzag.md	9188	Circle – Zigzag
+8402	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-beginner/lollipop/	en/embroidery-tutorials/embroidery-tutorials-beginner/lollipop.md	9214	Lollipop
+8408	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/	en/embroidery-tutorials/embroidery-tutorials-medium/index.md	9085	Embroidery Tutorials Medium
+8409	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-pro/	en/embroidery-tutorials/embroidery-tutorials-pro/index.md	9086	Embroidery Tutorials Pro
+8419	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/heart/	en/embroidery-tutorials/embroidery-tutorials-medium/heart.md	9262	Heart
+8456	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/flower/	en/embroidery-tutorials/embroidery-tutorials-medium/flower.md	9281	Flower
+8469	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/lotus/	en/embroidery-tutorials/embroidery-tutorials-medium/lotus.md	9272	Lotus
+8655	de	imported	https://catrobat.org/docs/brick-dokumentation-de/	de_DE/bricks/index.md	7545	Brick Dokumentation
+8656	de	imported	https://catrobat.org/docs/tutorials-de/	de_DE/embroidery-tutorials/index.md	7622	Stick Tutorials
+8671	de	imported	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/	de_DE/bricks/event.md	7546	Ereignisse
+8672	de	imported	https://catrobat.org/docs/brick-dokumentation-de/steuerung/	de_DE/bricks/control.md	7547	Steuerung
+8673	de	imported	https://catrobat.org/docs/brick-dokumentation-de/bewegung/	de_DE/bricks/motion.md	7548	Bewegung
+8676	de	imported	https://catrobat.org/docs/brick-dokumentation-de/klang/	de_DE/bricks/sound.md	7549	Klang
+8677	de	imported	https://catrobat.org/docs/brick-dokumentation-de/aussehen/	de_DE/bricks/looks.md	7550	Aussehen
+8678	de	imported	https://catrobat.org/docs/brick-dokumentation-de/malstift/	de_DE/bricks/pen.md	7551	Malstift
+8679	de	imported	https://catrobat.org/docs/brick-dokumentation-de/daten/	de_DE/bricks/data.md	7552	Daten
+8680	de	imported	https://catrobat.org/docs/brick-dokumentation-de/gerat/	de_DE/bricks/device.md	7620	Gerät
+8681	de	imported	https://catrobat.org/docs/brick-dokumentation-de/deine-bausteine/	de_DE/bricks/yourbricks.md	7553	Deine Bausteine
+8682	de	imported	https://catrobat.org/docs/brick-dokumentation-de/sticken/	de_DE/bricks/embroidery.md	7554	Sticken
+8683	de	brick	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/wenn-szene-startet/	de_DE/reference/bricks/StartScript.md	7559	Wenn Szene startet
+8684	de	brick	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/wenn-angetippt/	de_DE/reference/bricks/WhenScript.md	7560	Wenn angetippt
+8685	de	brick	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/wenn-der-bildschirm-beruhrt-wird/	de_DE/reference/bricks/WhenTouchDownScript.md	7561	Wenn der Bildschirm berührt wird
+8686	de	brick	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/wenn-du-empfangst/	de_DE/reference/bricks/BroadcastScript.md	7562	Wenn du empfängst …
+8687	de	brick	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/wenn-wahr-wird/	de_DE/reference/bricks/WhenConditionScript.md	7563	Wenn … wahr wird
+8688	de	brick	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/wenn-der-hintergrund-wechselt-zu/	de_DE/reference/bricks/WhenBackgroundChangesScript.md	7564	Wenn der Hintergrund wechselt zu …
+8689	de	brick	https://catrobat.org/docs/brick-dokumentation-de/ereignisse/als-klon-starte/	de_DE/reference/bricks/WhenClonedScript.md	7565	Wenn ich als Klon starte
+8704	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/warte-sekunde/	de_DE/reference/bricks/WaitBrick.md	7634	Warte … Sekunde
+8705	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/notiz/	de_DE/reference/bricks/NoteBrick.md	7635	Notiz
+8706	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/wiederhole-fortlaufend/	de_DE/reference/bricks/ForeverBrick.md	7636	Wiederhole fortlaufend
+8707	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/wenn-wahr-ist-dann/	de_DE/reference/bricks/IfThenLogicBeginBrick.md	7638	Wenn … wahr ist, dann …
+8708	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/wenn-wahr-ist-dann-sonst/	de_DE/reference/bricks/IfLogicBeginBrick.md	7637	Wenn … wahr ist, dann … sonst …
+8709	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/warte-bis-wahr-ist/	de_DE/reference/bricks/WaitUntilBrick.md	7639	Warte bis … wahr ist
+8710	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/wiederhole-mal/	de_DE/reference/bricks/RepeatBrick.md	7640	Wiederhole … mal
+8711	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/wiederhole-bis-wahr-ist/	de_DE/reference/bricks/RepeatUntilBrick.md	7641	Wiederhole bis … wahr ist
+8712	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/fur-werte-von-auf-im/	de_DE/reference/bricks/ForVariableFromToBrick.md	7642	Für Werte von … auf … im …
+8713	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/fur-jeden-wert-von-im/	de_DE/reference/bricks/ForItemInUserListBrick.md	7643	Für jeden Wert von … im …
+8714	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/szene-fortsetzen/	de_DE/reference/bricks/SceneTransitionBrick.md	7644	Szene fortsetzen
+8715	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/beginne-szene/	de_DE/reference/bricks/SceneStartBrick.md	7645	Beginne Szene
+8716	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/stufe-beenden/	de_DE/reference/bricks/FinishStageBrick.md	7646	Stufe beenden
+8717	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/stoppe/	de_DE/reference/bricks/StopScriptBrick.md	7647	Stoppe …
+8718	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/warte-bis-alle-anderen-skripte-gestoppt/	de_DE/reference/bricks/WaitTillIdleBrick.md	7648	Warte bis alle anderen Skripte gestoppt
+8719	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/erzeuge-klon-von/	de_DE/reference/bricks/CloneBrick.md	7649	Erzeuge Klon von …
+8720	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/losche-diesen-klon/	de_DE/reference/bricks/DeleteThisCloneBrick.md	7650	Lösche diesen Klon
+8721	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/verschicke-an-alle/	de_DE/reference/bricks/BroadcastBrick.md	7651	Verschicke an alle: …
+8722	de	brick	https://catrobat.org/docs/brick-dokumentation-de/steuerung/verschicke-und-warte/	de_DE/reference/bricks/BroadcastWaitBrick.md	7652	Verschicke und warte
+8756	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-an-position-x-y/	de_DE/reference/bricks/PlaceAtBrick.md	7738	Setze an Position x:… y:…
+8758	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-x-auf/	de_DE/reference/bricks/SetXBrick.md	7739	Setze x auf …
+8759	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-y-auf/	de_DE/reference/bricks/SetYBrick.md	7740	Setze y auf …
+8760	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/andere-x-um/	de_DE/reference/bricks/ChangeXByNBrick.md	7741	Ändere x um …
+8761	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/andere-y-um/	de_DE/reference/bricks/ChangeYByNBrick.md	7742	Ändere y um …
+8762	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/gehe-zu/	de_DE/reference/bricks/GoToBrick.md	7743	Gehe zu …
+8763	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/pralle-vom-rand-ab/	de_DE/reference/bricks/IfOnEdgeBounceBrick.md	7744	Pralle vom Rand ab
+8764	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/verschiebe-um-schritte/	de_DE/reference/bricks/MoveNStepsBrick.md	7745	Verschiebe um … Schritte
+8765	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/drehe-links-grad/	de_DE/reference/bricks/TurnLeftBrick.md	7746	Drehe links … Grad
+8766	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/drehe-rechts-grad/	de_DE/reference/bricks/TurnRightBrick.md	7747	Drehe rechts … Grad
+8767	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/zeige-in-richtung/	de_DE/reference/bricks/PointInDirectionBrick.md	7748	Zeige in Richtung …
+8768	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/zeige-auf/	de_DE/reference/bricks/PointToBrick.md	7749	Zeige auf …
+8769	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-rotations-stil/	de_DE/reference/bricks/SetRotationStyleBrick.md	7750	Setze Rotations-Stil
+8770	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/gleite-sekunde-zu-x-y/	de_DE/reference/bricks/GlideToBrick.md	7751	Gleite … Sekunde zu x:… y:…
+8771	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/gehe-nach-hinten-ebene/	de_DE/reference/bricks/GoNStepsBackBrick.md	7752	Gehe nach hinten … Ebene
+8772	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/gehe-nach-vorne/	de_DE/reference/bricks/ComeToFrontBrick.md	7753	Gehe nach vorne
+8773	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/vibriere-fur-sekunde/	de_DE/reference/bricks/VibrationBrick.md	7754	Vibriere für … Sekunde
+8774	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-bewegungstyp-auf/	de_DE/reference/bricks/SetPhysicsObjectTypeBrick.md	7755	Setze Bewegungstyp auf …
+8775	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/wenn-du-abprallst-von/	de_DE/reference/bricks/WhenBounceOffScript.md	7756	Wenn du abprallst von …
+8776	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-geschwindigkeit-auf-x-y-schritt-sekunde/	de_DE/reference/bricks/SetVelocityBrick.md	7757	Setze Geschwindigkeit auf x:… y:… Schritt/Sekunde
+8777	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/nach-links-drehen-grad-sekunde/	de_DE/reference/bricks/TurnLeftSpeedBrick.md	7758	Nach links drehen … Grad/Sekunde
+8778	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/nach-rechts-drehen-grad-sekunde/	de_DE/reference/bricks/TurnRightSpeedBrick.md	7759	Nach rechts drehen … Grad/Sekunde
+8779	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-gravitation-fur-alle-figuren-und-objekte/	de_DE/reference/bricks/SetGravityBrick.md	7761	Setze Gravitation für alle Figuren und Objekte…
+8780	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-masse-auf-kilogramm/	de_DE/reference/bricks/SetMassBrick.md	7762	Setze Masse auf … Kilogramm
+8781	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-aufprallfaktor-auf/	de_DE/reference/bricks/SetBounceBrick.md	7763	Setze Aufprallfaktor auf …%
+8782	de	brick	https://catrobat.org/docs/brick-dokumentation-de/bewegung/setze-reibung-auf/	de_DE/reference/bricks/SetFrictionBrick.md	7764	Setze Reibung auf …%
+8820	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/klang-starten/	de_DE/reference/bricks/PlaySoundBrick.md	7847	Klang starten …
+8821	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/starte-klang-und-warte/	de_DE/reference/bricks/PlaySoundAndWaitBrick.md	7848	Starte Klang und warte
+8822	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/stoppe-klang/	de_DE/reference/bricks/StopSoundBrick.md	7849	Stoppe Klang
+8823	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/alle-klange-stoppen/	de_DE/reference/bricks/StopAllSoundsBrick.md	7850	Alle Klänge stoppen
+8824	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/setze-lautstarke-auf/	de_DE/reference/bricks/SetVolumeToBrick.md	7851	Setze Lautstärke auf
+8825	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/andere-lautstarke-um/	de_DE/reference/bricks/ChangeVolumeByNBrick.md	7852	Ändere Lautstärke um
+8826	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/setze-instrument-auf/	de_DE/reference/bricks/SetInstrumentBrick.md	7853	Setze Instrument auf …
+8827	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/musiknote-abspielen-fur-sekunden/	de_DE/reference/bricks/PlayNoteForBeatsBrick.md	7854	Musiknote abspielen … für … Sekunden
+8828	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/trommel-abspielen-fur-schlage/	de_DE/reference/bricks/PlayDrumForBeatsBrick.md	7855	Trommel abspielen … für … Schläge
+8829	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/setze-tempo-auf/	de_DE/reference/bricks/SetTempoBrick.md	7857	Setze Tempo auf …
+8830	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/andere-tempo-um/	de_DE/reference/bricks/ChangeTempoByNBrick.md	7858	Ändere Tempo um …
+8831	de	brick	https://catrobat.org/docs/brick-dokumentation-de/klang/pausiere-fur-schlage/	de_DE/reference/bricks/PauseForBeatsBrick.md	7859	Pausiere für … Schläge
+8856	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-aussehen/	de_DE/reference/bricks/SetLookBrick.md	7905	Setze Aussehen …
+8857	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-aussehen-auf-nummer/	de_DE/reference/bricks/SetLookByIndexBrick.md	7906	Setze Aussehen auf Nummer …
+8858	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/nachstes-aussehen/	de_DE/reference/bricks/NextLookBrick.md	7907	Nächstes Aussehen
+8859	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/voriges-aussehen/	de_DE/reference/bricks/PreviousLookBrick.md	7908	Voriges Aussehen
+8860	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-grose-auf/	de_DE/reference/bricks/SetSizeToBrick.md	7909	Setze Größe auf …%
+8861	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/andere-grose-um/	de_DE/reference/bricks/ChangeSizeByNBrick.md	7910	Ändere Größe um …
+8862	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/verbergen/	de_DE/reference/bricks/HideBrick.md	7911	Verbergen
+8863	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/anzeigen/	de_DE/reference/bricks/ShowBrick.md	7912	Anzeigen
+8864	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/frage-und-speichere-das-eingegebene-in/	de_DE/reference/bricks/AskBrick.md	7913	Frage … und speichere das Eingegebene in …
+8865	de	empty-container	https://catrobat.org/docs/brick-dokumentation-de/aussehen/frage-und-speichere-das-eingegebene-in-2/			Frage … und speichere das Eingegebene in …
+8866	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/sage/	de_DE/reference/bricks/SayBubbleBrick.md	7914	Sage …
+8867	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/sage-fur-sekunde/	de_DE/reference/bricks/SayForBubbleBrick.md	7915	Sage … für … Sekunde
+8868	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/denke/	de_DE/reference/bricks/ThinkBubbleBrick.md	7916	Denke …
+8869	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/denke-fur-sekunde/	de_DE/reference/bricks/ThinkForBubbleBrick.md	7917	Denke … für … Sekunde
+8870	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-transparenz-auf/	de_DE/reference/bricks/SetTransparencyBrick.md	7918	Setze Transparenz auf …%
+8871	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/andere-transparenz-um/	de_DE/reference/bricks/ChangeTransparencyByNBrick.md	7919	Ändere Transparenz um …
+8872	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-helligkeit-auf/	de_DE/reference/bricks/SetBrightnessBrick.md	7920	Setze Helligkeit auf …%
+8873	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/andere-helligkeit-um/	de_DE/reference/bricks/ChangeBrightnessByNBrick.md	7921	Ändere Helligkeit um …
+8874	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-farbe-auf/	de_DE/reference/bricks/SetColorBrick.md	7922	Setze Farbe auf …
+8875	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/andere-farbe-um/	de_DE/reference/bricks/ChangeColorByNBrick.md	7923	Ändere Farbe um …
+8876	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/blende-partikeleffekt/	de_DE/reference/bricks/FadeParticleEffectBrick.md	7924	Blende Partikeleffekt …
+8877	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/schalte-partikeleffekt-additivitat/	de_DE/reference/bricks/ParticleEffectAdditivityBrick.md	7925	Schalte Partikeleffekt-Additivität …
+8878	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-partikelfarbe-auf/	de_DE/reference/bricks/SetParticleColorBrick.md	7926	Setze Partikelfarbe auf …
+8879	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/grafikeffekt-zurucksetzen/	de_DE/reference/bricks/ClearGraphicEffectBrick.md	7927	Grafikeffekt zurücksetzen
+8880	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/fokuspunkt-werden-mit-horizontal-und-vertikale-flexibilitat/	de_DE/reference/bricks/SetCameraFocusPointBrick.md	7928	Fokuspunkt werden mit …% horizontal und …% vertikale Flexibilität
+8881	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-hintergrund/	de_DE/reference/bricks/SetBackgroundBrick.md	7929	Setze Hintergrund …
+8916	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-hintergrund-auf-nummer/	de_DE/reference/bricks/SetBackgroundByIndexBrick.md	7930	Setze Hintergrund auf Nummer …
+8917	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-hintergrund-auf-nummer-und-warte/	de_DE/reference/bricks/SetBackgroundByIndexAndWaitBrick.md	8042	Setze Hintergrund auf Nummer … und warte
+8918	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/schalte-kamera/	de_DE/reference/bricks/CameraBrick.md	7932	Schalte Kamera …
+8919	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/verwende-kamera/	de_DE/reference/bricks/ChooseCameraBrick.md	7933	Verwende Kamera …
+8920	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/schalte-blitz/	de_DE/reference/bricks/FlashBrick.md	7934	Schalte Blitz …
+8921	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/bild-abrufen-von/	de_DE/reference/bricks/LookRequestBrick.md	7935	Bild abrufen von …
+8922	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/neuen-look-malen/	de_DE/reference/bricks/PaintNewLookBrick.md	7936	Neuen Look malen …
+8923	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/aussehen-bearbeiten/	de_DE/reference/bricks/EditLookBrick.md	7937	Aussehen bearbeiten
+8924	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/look-kopieren-und-namen-geben/	de_DE/reference/bricks/CopyLookBrick.md	7938	Look kopieren und Namen geben …
+8925	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/losche-aussehen/	de_DE/reference/bricks/DeleteLookBrick.md	7939	Lösche Aussehen
+8929	de	brick	https://catrobat.org/docs/brick-dokumentation-de/aussehen/setze-hintergrund-und-warte/	de_DE/reference/bricks/SetBackgroundAndWaitBrick.md	7931	Setze Hintergrund und warte
+8945	de	brick	https://catrobat.org/docs/brick-dokumentation-de/malstift/schalte-stift-ein/	de_DE/reference/bricks/PenDownBrick.md	8049	Schalte Stift ein
+8946	de	brick	https://catrobat.org/docs/brick-dokumentation-de/malstift/schalte-stift-aus/	de_DE/reference/bricks/PenUpBrick.md	8050	Schalte Stift aus
+8947	de	brick	https://catrobat.org/docs/brick-dokumentation-de/malstift/setze-stiftdicke-auf/	de_DE/reference/bricks/SetPenSizeBrick.md	8051	Setze Stiftdicke auf …
+8948	de	brick	https://catrobat.org/docs/brick-dokumentation-de/malstift/setze-stiftfarbe-auf-rot-grun-blau/	de_DE/reference/bricks/SetPenColorBrick.md	8074	Setze Stiftfarbe auf Rot… Grün… Blau…
+8949	de	brick	https://catrobat.org/docs/brick-dokumentation-de/malstift/stempel/	de_DE/reference/bricks/StampBrick.md	8052	Stempel
+8950	de	brick	https://catrobat.org/docs/brick-dokumentation-de/malstift/wische-malspur-weg/	de_DE/reference/bricks/ClearBackgroundBrick.md	8053	Wische Malspur weg
+8960	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/setze-variable-auf/	de_DE/reference/bricks/SetVariableBrick.md	8081	Setze Variable … auf …
+8961	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/andere-variable-um/	de_DE/reference/bricks/ChangeVariableBrick.md	8082	Ändere Variable … um …
+8962	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/zeige-variable-bei-x-y/	de_DE/reference/bricks/ShowTextBrick.md	8083	Zeige Variable … bei x… y…
+8963	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/zeige-variable-bei-x-y-grose-farbe-ausrichtung/	de_DE/reference/bricks/ShowTextColorSizeAlignmentBrick.md	8084	Zeige Variable … bei x… y… Größe… Farbe… Ausrichtung…
+8964	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/verstecke-variable/	de_DE/reference/bricks/HideTextBrick.md	8085	Verstecke Variable…
+8965	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/variable-auf-gerat-schreiben/	de_DE/reference/bricks/WriteVariableOnDeviceBrick.md	8086	Variable auf Gerät schreiben …
+8966	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/variable-von-gerat-lesen/	de_DE/reference/bricks/ReadVariableFromDeviceBrick.md	8087	Variable von Gerät lesen …
+8967	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/schreibe-variable-zur-datei/	de_DE/reference/bricks/WriteVariableToFileBrick.md	8088	Schreibe Variable … zur Datei …
+8968	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/lese-variable-aus-datei-und/	de_DE/reference/bricks/ReadVariableFromFileBrick.md	8089	Lese Variable … aus Datei … und …
+8969	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/hinzufugen-zur-liste/	de_DE/reference/bricks/AddItemToUserListBrick.md	8090	Hinzufügen … zur Liste …
+8970	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/elemente-aus-liste-loschen-auf-position/	de_DE/reference/bricks/DeleteItemOfUserListBrick.md	8091	Elemente aus Liste löschen … auf Position …
+8971	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/alle-elemente-aus-der-liste-loschen/	de_DE/reference/bricks/ClearUserListBrick.md	8092	Alle Elemente aus der Liste löschen …
+8972	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/einfugen-in-liste-auf-position/	de_DE/reference/bricks/InsertItemIntoUserListBrick.md	8093	Einfügen … in Liste … auf Position …
+8973	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/elemente-in-liste-ersetzen-auf-position-im/	de_DE/reference/bricks/ReplaceItemInUserListBrick.md	8094	Elemente in Liste ersetzen … auf Position … im …
+8974	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/liste-auf-gerat-speichern/	de_DE/reference/bricks/WriteListOnDeviceBrick.md	8096	Liste auf Gerät speichern …
+8975	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/liste-von-gerat-lesen/	de_DE/reference/bricks/ReadListFromDeviceBrick.md	8097	Liste von Gerät lesen …
+8976	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/speichere-spalte-von-den-durch-kommas-getrennten-werten-in-liste/	de_DE/reference/bricks/StoreCSVIntoUserListBrick.md	8098	Speichere Spalte … von den durch Kommas getrennten Werten … in Liste …
+8977	de	brick	https://catrobat.org/docs/brick-dokumentation-de/daten/webanfrage-senden-an-und-speichere-antwort-in/	de_DE/reference/bricks/WebRequestBrick.md	8099	Webanfrage senden an … und speichere Antwort in …
+9010	de	empty-container	https://catrobat.org/docs/brick-dokumentation-de/gerat/timer-zurucksetzen/			Timer zurücksetzen
+9011	de	empty-container	https://catrobat.org/docs/brick-dokumentation-de/gerat/offne-im-browser/			Öffne … im Browser
+9012	de	empty-container	https://catrobat.org/docs/brick-dokumentation-de/gerat/einfaches-tippen-auf-x-y/			Einfaches tippen auf x… y…
+9013	de	empty-container	https://catrobat.org/docs/brick-dokumentation-de/gerat/beruhre-bei-x-y-fur-sekunden/			Berühre bei x… y… für … Sekunden
+9014	de	empty-container	https://catrobat.org/docs/brick-dokumentation-de/gerat/beruhren-und-wischen-von-x-y-zu-x-y-im-sekunden/			Berühren und wischen von x… y… zu x… y… im … Sekunden
+9026	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/stich/	de_DE/reference/bricks/StitchBrick.md	8182	Stich
+9027	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/setze-auf-farbe/	de_DE/reference/bricks/SetThreadColorBrick.md	8183	Setze auf Farbe …
+9028	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/starte-laufstich-mit-lange/	de_DE/reference/bricks/RunningStitchBrick.md	8184	Starte Laufstich mit Länge …
+9029	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/starte-zickzack-stich-mit-lange-und-breite/	de_DE/reference/bricks/ZigZagStitchBrick.md	8185	Starte Zickzack Stich mit Länge … und Breite …
+9030	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/starte-dreifachstich-mit-lange/	de_DE/reference/bricks/TripleStitchBrick.md	8186	Starte Dreifachstich mit Länge …
+9031	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/vernahen/	de_DE/reference/bricks/SewUpBrick.md	8187	Vernähen
+9032	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/beende-aktuellen-stich/	de_DE/reference/bricks/StopRunningStitchBrick.md	8188	Beende aktuellen Stich
+9033	de	brick	https://catrobat.org/docs/brick-dokumentation-de/sticken/schreibe-stickdaten-in-die-datei/	de_DE/reference/bricks/WriteEmbroideryToFileBrick.md	8189	Schreibe Stickdaten in die Datei …
+9084	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/index.md	7624	Stick Tutorials Beginner
+9085	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/index.md	8408	Stick Tutorials Medium
+9086	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-pro/	de_DE/embroidery-tutorials/embroidery-tutorials-pro/index.md	8409	Stick Tutorials Pro
+9089	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickbausteine-aktivieren/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/activate-embroidery-bricks.md	7970	Stickbausteine aktivieren
+9102	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickbausteine/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/index.md	8260	Stickbausteine
+9103	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickobjekte-erstellen/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/create-embroidery-objects.md	8239	Stickobjekte erstellen
+9131	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickbausteine/stich/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/stitch.md	8262	Stich
+9132	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickbausteine/laufstich/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/running-stitch.md	8271	Laufstich
+9133	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickbausteine/zickzack-stich/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/zigzag-stitch.md	8272	Zickzack-Stich
+9134	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickbausteine/dreifachstich/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/triple-stitch.md	8273	Dreifachstich
+9135	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stickbausteine/beende-aktuellen-stich/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/embroidery-bricks/stop-current-stitch.md	8274	Beende aktuellen Stich
+9168	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/designs-exportieren/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/export-designs.md	8325	Designs exportieren
+9177	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/viereck/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/square.md	8339	Viereck
+9188	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/kreis-zickzack/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/circle-zigzag.md	8392	Kreis – Zickzack
+9189	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/halbkreis/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/semicircle.md	8380	Halbkreis
+9190	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/kreis/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/circle.md	8371	Kreis
+9212	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stern/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/star.md	8360	Stern
+9213	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/stern-zickzack/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/star-zigzag.md	8350	Stern – Zickzack
+9214	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-beginner/lollipop/	de_DE/embroidery-tutorials/embroidery-tutorials-beginner/lollipop.md	8402	Lollipop
+9262	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/herz/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/heart.md	8419	Herz
+9272	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/lotus/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/lotus.md	8469	Lotus
+9281	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/blume/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/flower.md	8456	Blume
+9293	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/spirale/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/spiral.md	9307	Spirale
+9307	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/spiral/	en/embroidery-tutorials/embroidery-tutorials-medium/spiral.md	9293	Spiral
+9315	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/optical-illusion/	en/embroidery-tutorials/embroidery-tutorials-medium/optical-illusion.md	9353	Optical Illusion
+9325	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/penrose-triangle/	en/embroidery-tutorials/embroidery-tutorials-medium/penrose-triangle.md	9354	Penrose Triangle
+9339	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/triangle-spiral/	en/embroidery-tutorials/embroidery-tutorials-medium/triangle-spiral.md	9355	Triangle-Spiral
+9353	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/optische-tauschung/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/optical-illusion.md	9315	Optische Täuschung
+9354	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/penrose-dreieck/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/penrose-triangle.md	9325	Penrose Dreieck
+9355	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/dreieck-spirale/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/triangle-spiral.md	9339	Dreieck Spirale
+9666	de	imported	https://catrobat.org/docs/brick-dokumentation-de/plotten/	de_DE/bricks/plot.md	8235	Plotten
+9667	de	brick	https://catrobat.org/docs/brick-dokumentation-de/plotten/plotten-starten/	de_DE/reference/bricks/StartPlotBrick.md	8236	Plotten starten
+9668	de	brick	https://catrobat.org/docs/brick-dokumentation-de/plotten/plotten-beenden/	de_DE/reference/bricks/StopPlotBrick.md	8237	Plotten beenden
+9669	de	brick	https://catrobat.org/docs/brick-dokumentation-de/plotten/plot-als-svg-speichern/	de_DE/reference/bricks/SavePlotBrick.md	8238	Plot als SVG speichern
+9683	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/night-sky/	en/embroidery-tutorials/embroidery-tutorials-medium/night-sky.md	9684	Night Sky
+9684	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/nachthimmel/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/night-sky.md	9683	Nachthimmel
+9710	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/papierflieger/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/paperplane.md	9800	Papierflieger
+9711	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/creeper/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/creeper.md	9801	Creeper (Minecraft)
+9712	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/regenbogen/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/rainbow.md	9802	Regenbogen
+9745	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-medium/yin-yang/	de_DE/embroidery-tutorials/embroidery-tutorials-medium/yin-yang.md	9803	Yin & Yang
+9764	de	imported	https://catrobat.org/docs/tutorials-de/stick-tutorials-pro/lollipop/	de_DE/embroidery-tutorials/embroidery-tutorials-pro/lollipop.md	9792	Lollipop
+9792	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-pro/lollipop/	en/embroidery-tutorials/embroidery-tutorials-pro/lollipop.md	9764	Lollipop
+9800	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/paperplane/	en/embroidery-tutorials/embroidery-tutorials-medium/paperplane.md	9710	Paperplane
+9801	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/creeper/	en/embroidery-tutorials/embroidery-tutorials-medium/creeper.md	9711	Creeper (Minecraft)
+9802	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/rainbow/	en/embroidery-tutorials/embroidery-tutorials-medium/rainbow.md	9712	Rainbow
+9803	en	imported	https://catrobat.org/docs/tutorials/embroidery-tutorials-medium/yin-yang/	en/embroidery-tutorials/embroidery-tutorials-medium/yin-yang.md	9745	Yin & Yang
+9850	en	imported	https://catrobat.org/docs/game-tutorials/	en/game-tutorials/index.md	9852	Game Tutorials
+9852	de	imported	https://catrobat.org/docs/spiele-tutorials/	de_DE/game-tutorials/index.md	9850	Spiele Tutorials
+9853	en	imported	https://catrobat.org/docs/plot-tutorials/	en/plot-tutorials/index.md	9854	Plot Tutorials
+9854	de	imported	https://catrobat.org/docs/plot-tutorials-de/	de_DE/plot-tutorials/index.md	9853	Plot Tutorials (de)
+9874	de	imported	https://catrobat.org/docs/spiele-tutorials/starter-tutorials/	de_DE/game-tutorials/starter-tutorials/index.md	9875	Starter Tutorials
+9875	en	imported	https://catrobat.org/docs/game-tutorials/starter-tutorials/	en/game-tutorials/starter-tutorials/index.md	9874	Starter Tutorials
+9876	en	imported	https://catrobat.org/docs/game-tutorials/starter-tutorials/new-project/	en/game-tutorials/starter-tutorials/new-project.md	9877	New Project
+9877	de	imported	https://catrobat.org/docs/spiele-tutorials/starter-tutorials/neues-projekt/	de_DE/game-tutorials/starter-tutorials/new-project.md	9876	Neues Projekt
+9886	de	imported	https://catrobat.org/docs/spiele-tutorials/starter-tutorials/neues-objekt/	de_DE/game-tutorials/starter-tutorials/new-object.md	9933	Neues Objekt
+9887	de	imported	https://catrobat.org/docs/spiele-tutorials/starter-tutorials/erste-bausteine/	de_DE/game-tutorials/starter-tutorials/first-bricks.md	9934	Erste Bausteine
+9889	de	imported	https://catrobat.org/docs/spiele-tutorials/starter-tutorials/hochladen-und-teilen/	de_DE/game-tutorials/starter-tutorials/upload-and-share.md	9935	Hochladen und Teilen
+9933	en	imported	https://catrobat.org/docs/game-tutorials/starter-tutorials/new-object/	en/game-tutorials/starter-tutorials/new-object.md	9886	New Object
+9934	en	imported	https://catrobat.org/docs/game-tutorials/starter-tutorials/first-bricks/	en/game-tutorials/starter-tutorials/first-bricks.md	9887	First Bricks
+9935	en	imported	https://catrobat.org/docs/game-tutorials/starter-tutorials/upload-and-share/	en/game-tutorials/starter-tutorials/upload-and-share.md	9889	Upload and Share
+9987	en	empty-container	https://catrobat.org/docs/game-tutorials/beginner-tutorials/		9990	Beginner Tutorials
+9988	en	empty-container	https://catrobat.org/docs/game-tutorials/medium-tutorials/		9991	Medium Tutorials
+9989	en	empty-container	https://catrobat.org/docs/game-tutorials/pro-tutorials/		9992	Pro Tutorials
+9990	de	empty-container	https://catrobat.org/docs/spiele-tutorials/beginner-tutorials/		9987	Beginner Tutorials
+9991	de	empty-container	https://catrobat.org/docs/spiele-tutorials/medium-tutorials/		9988	Medium Tutorials
+9992	de	empty-container	https://catrobat.org/docs/spiele-tutorials/pro-tutorials/		9989	Pro Tutorials
+10134	de	imported	https://catrobat.org/docs/plot-tutorials-de/tutorials/	de_DE/plot-tutorials/tutorials/index.md		Tutorials
+10135	de	empty-container	https://catrobat.org/docs/plot-tutorials-de/unterlagen/			Unterlagen
+10136	de	imported	https://catrobat.org/docs/plot-tutorials-de/tutorials/katze/	de_DE/plot-tutorials/tutorials/cat.md		Katze
+10137	de	imported	https://catrobat.org/docs/plot-tutorials-de/tutorials/stern/	de_DE/plot-tutorials/tutorials/star.md		Stern
+10138	de	imported	https://catrobat.org/docs/plot-tutorials-de/tutorials/blume/	de_DE/plot-tutorials/tutorials/flower.md		Blume
+10139	de	imported	https://catrobat.org/docs/plot-tutorials-de/tutorials/fuchs/	de_DE/plot-tutorials/tutorials/fox.md		Fuchs
+10193	en	imported	https://catrobat.org/docs/getting-started/	en/getting-started/index.md	10206	Getting started
+10196	en	imported	https://catrobat.org/docs/getting-started/quick-start-guide/	en/getting-started/quick-start-guide/index.md	10219	Quick Start Guide
+10199	en	imported	https://catrobat.org/docs/getting-started/what-is-catrobat/	en/getting-started/what-is-catrobat.md	10207	What is Catrobat?
+10200	en	imported	https://catrobat.org/docs/getting-started/what-is-pocket-code/	en/getting-started/what-is-pocket-code.md	10216	What is Pocket Code?
+10206	de	imported	https://catrobat.org/docs/erste-schritte/	de_DE/getting-started/index.md	10193	Erste Schritte
+10207	de	imported	https://catrobat.org/docs/erste-schritte/was-ist-catrobat/	de_DE/getting-started/what-is-catrobat.md	10199	Was ist Catrobat?
+10216	de	imported	https://catrobat.org/docs/erste-schritte/was-ist-pocket-code/	de_DE/getting-started/what-is-pocket-code.md	10200	Was ist Pocket Code?
+10219	de	imported	https://catrobat.org/docs/erste-schritte/schnellstartanleitung/	de_DE/getting-started/quick-start-guide/index.md	10196	Schnellstartanleitung
+10221	en	imported	https://catrobat.org/docs/getting-started/quick-start-guide/navigate-the-interface/	en/getting-started/quick-start-guide/navigate-the-interface.md	10304	Navigate the interface
+10222	en	empty-container	https://catrobat.org/docs/example-projects/		10265	Example Projects
+10223	en	imported	https://catrobat.org/docs/educators/	en/educators.md	10256	Educators
+10224	en	empty-container	https://catrobat.org/docs/pocket-code/			Pocket Code
+10225	en	empty-container	https://catrobat.org/docs/embroidery-designer/			Embroidery Designer
+10226	en	empty-container	https://catrobat.org/docs/createschool/			Create@School
+10227	en	empty-container	https://catrobat.org/docs/pocket-paint/			Pocket Paint
+10256	de	empty-container	https://catrobat.org/docs/lehrpersonen-und-workshopleiterinnen/		10223	Lehrpersonen und Workshopleiter:innen
+10265	de	empty-container	https://catrobat.org/docs/beispielprojekte/		10222	Beispielprojekte
+10304	de	imported	https://catrobat.org/docs/erste-schritte/schnellstartanleitung/navigiere-durch-den-start-screen/	de_DE/getting-started/quick-start-guide/navigate-the-interface.md	10221	Navigiere durch den Start Screen
+10309	en	imported	https://catrobat.org/docs/getting-started/quick-start-guide/create-a-new-project/	en/getting-started/quick-start-guide/create-a-new-project.md	10311	Create a new project
+10311	de	imported	https://catrobat.org/docs/erste-schritte/schnellstartanleitung/erstelle-ein-neues-projekt/	de_DE/getting-started/quick-start-guide/create-a-new-project.md	10309	Erstelle ein neues Projekt
+10345	en	imported	https://catrobat.org/docs/getting-started/quick-start-guide/add-actors-and-objects/	en/getting-started/quick-start-guide/add-actors-and-objects.md	10346	Add Actors and Objects
+10346	de	imported	https://catrobat.org/docs/erste-schritte/schnellstartanleitung/fuge-figuren-und-objekte-hinzu/	de_DE/getting-started/quick-start-guide/add-actors-and-objects.md	10345	Figuren und Objekte hinzufügen
+10353	de	imported	https://catrobat.org/docs/erste-schritte/elemente/rucksack/	de_DE/getting-started/elements/backpack.md	10360	Rucksack
+10360	en	imported	https://catrobat.org/docs/getting-started/elements/backpack/	en/getting-started/elements/backpack.md	10353	Backpack
+10364	de	imported	https://catrobat.org/docs/erste-schritte/elemente/	de_DE/getting-started/elements/index.md	10366	Elemente
+10366	en	imported	https://catrobat.org/docs/getting-started/elements/	en/getting-started/elements/index.md	10364	Elements
+10446	de	imported	https://catrobat.org/docs/erste-schritte/schnellstartanleitung/hintergrund-hinzufugen/	de_DE/getting-started/quick-start-guide/add-background.md	10465	Hintergrund hinzufügen
+10462	de	imported	https://catrobat.org/docs/erste-schritte/elemente/medienbibliothek/	de_DE/getting-started/elements/medialibrary.md	10470	Medienbibliothek
+10465	en	imported	https://catrobat.org/docs/getting-started/quick-start-guide/add-background/	en/getting-started/quick-start-guide/add-background.md	10446	Add Background
+10470	en	imported	https://catrobat.org/docs/getting-started/elements/medialibrary/	en/getting-started/elements/medialibrary.md	10462	Medialibrary
+11529	de	imported	https://catrobat.org/docs/plot-tutorials-de/tutorials/weihnachtskarten/	de_DE/plot-tutorials/tutorials/christmas-cards.md		Weihnachtskarten

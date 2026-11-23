@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: 'Pribatutasun-politika'
 catro-notifications:
+  doc-comment:
+    message: "%user_link% erabiltzaileak dokumentazioko orri bat iruzkindu du: %page_title%"
   noFollowers: 'Badirudi ez duzula jarraitzaileen jakinarazpenik.'
   noComments: 'Badirudi ez duzula iruzkinen jakinarazpenik.'
   noReactions: 'Badirudi ez duzula erreakzioen jakinarazpenik.'
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Faltan botatzen zaitugu!'
   content: 'Bi urte daramatzazu zure "%username%" Catrobat kontuan saioa hasi gabe, eta ez du proiekturik ez iruzkinik. Gure komunitatea bizirik mantentzeko, %days% egun barru ezabatuko dugu. Gorde nahi baduzu, hasi saioa behin.'
   button: 'Hasi saioa nire kontua gordetzeko'
+
+docs:
+  title: "Dokumentazioa"
+  contents: "Edukiak"
+  on_this_page: "Orri honetan"
+  improve: "Hobetu orri hau"
+  fallback: "Orri hau oraindik ez dago zure hizkuntzara itzulita, beraz ingelesez erakusten da."
+  machine_translated: "Orri hau automatikoki itzuli da."
+  stale: "Ingelesezko orria aldatu egin da itzulpen hau egin zenetik, beraz zati batzuk zaharkituta egon daitezke."
+  video: "Erreproduzitu bideoa (YouTubetik kargatzen da)"
+  comments: "Iruzkinak eta aholkuak"
+  comments_empty: "Oraindik ez dago iruzkinik. Zerbait ez dago argi, ala aholkuren bat duzu? Idatzi hemen."
+  reference:
+    title: "Blokeak eta formulak"
+    formula: "Formula-elementuak"
+    functions: "Funtzioak"
+    sensors: "Sentsoreak"
+    operators: "Eragileak"
+    examples: "Adibide-proiektuak"
+    no_prose: "Inork ez du bloke hau oraindik azaldu. Lehen azalpena zuk idatz dezakezu."
+    empty: "Blokeen erreferentzia ez dago erabilgarri une honetan."

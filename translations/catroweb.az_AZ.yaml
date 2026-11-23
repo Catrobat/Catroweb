@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Gizlilik Siyasəti
 catro-notifications:
+  doc-comment:
+    message: "%user_link% sənədləşmə səhifəsinə şərh yazdı: %page_title%"
   noFollowers: 'Deyəsən izləyici bildirişin yoxdur.'
   noComments: 'Deyəsən rəy bildirişin yoxdur.'
   noReactions: 'Deyəsən reaksiya bildirişin yoxdur.'
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Biz səni darıxırıq!'
   content: 'İki ildir ki, "%username%" Catrobat hesabına daxil olmamısan və orada heç bir layihə və ya rəy yoxdur. Cəmiyyətimizi canlı saxlamaq üçün onu %days% gün sonra siləcəyik. Hesabını saxlamaq istəyirsənsə, sadəcə bir dəfə daxil ol.'
   button: 'Hesabımı saxlamaq üçün daxil ol'
+
+docs:
+  title: "Sənədlər"
+  contents: "Mündəricat"
+  on_this_page: "Bu səhifədə"
+  improve: "Bu səhifəni yaxşılaşdır"
+  fallback: "Bu səhifə hələ sənin dilinə tərcümə edilməyib, ona görə ingiliscə göstərilir."
+  machine_translated: "Bu səhifə avtomatik tərcümə edilib."
+  stale: "Bu tərcümə ediləndən sonra ingiliscə səhifə dəyişib, ona görə bəzi hissələr köhnə ola bilər."
+  video: "Videonu oynat (YouTube-dan yüklənir)"
+  comments: "Şərhlər və məsləhətlər"
+  comments_empty: "Hələ şərh yoxdur. Nəsə aydın deyil, yoxsa məsləhətin var? Buraya yaz."
+  reference:
+    title: "Bloklar və düsturlar"
+    formula: "Düstur elementləri"
+    functions: "Funksiyalar"
+    sensors: "Sensorlar"
+    operators: "Operatorlar"
+    examples: "Nümunə layihələr"
+    no_prose: "Bu bloku hələ heç kim izah etməyib. İlk izahı sən yaza bilərsən."
+    empty: "Blok sorğu kitabçası hazırda əlçatan deyil."

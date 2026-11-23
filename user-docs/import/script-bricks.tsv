@@ -1,0 +1,14 @@
+# Script bricks: the brick class in CategoryBricksFactory -> the code.xml type of the script it starts
+# (ScriptBrick.getScript(); XStream writes the script's class name). Catroid commit 2bc01afc82e2309d4b80841fb124c43fc4c8a903
+# brick_class	type
+BroadcastReceiverBrick	BroadcastScript
+WhenBackgroundChangesBrick	WhenBackgroundChangesScript
+WhenBounceOffBrick	WhenBounceOffScript
+WhenBrick	WhenScript
+WhenClonedBrick	WhenClonedScript
+WhenConditionBrick	WhenConditionScript
+WhenGamepadButtonBrick	WhenGamepadButtonScript
+WhenNfcBrick	WhenNfcScript
+WhenRaspiPinChangedBrick	RaspiInterruptScript
+WhenStartedBrick	StartScript
+WhenTouchDownBrick	WhenTouchDownScript

@@ -153,6 +153,14 @@ class ContentVisibilityManager
     return $comment?->getProject()?->getName();
   }
 
+  /**
+   * For comment content, returns the docs page path the comment is on (null for other comments).
+   */
+  public function getCommentDocPath(string $content_id): ?string
+  {
+    return $this->entity_manager->find(UserComment::class, $content_id)?->getDocPath();
+  }
+
   public function isWhitelisted(ContentType $content_type, string $content_id): bool
   {
     $entity = $this->findEntity($content_type, $content_id);

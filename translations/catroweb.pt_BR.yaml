@@ -645,6 +645,8 @@ footer:
 privacy-policy:
   header: Política de Privacidade
 catro-notifications:
+  doc-comment:
+    message: "%user_link% comentou em uma página da documentação: %page_title%"
   noFollowers: "Parece que você não tem nenhuma notificação de seguidores."
   noComments: "Parece que você não tem nenhuma notificação de comentários."
   noReactions: "Parece que você não tem notificações de reações."
@@ -1052,3 +1054,24 @@ inactiveAccount:
   title: 'Sentimos sua falta!'
   content: 'Você não entra na sua conta Catrobat "%username%" há dois anos, e ela não tem projetos nem comentários. Para manter nossa comunidade ativa, vamos excluí-la em %days% dias. Se quiser mantê-la, é só entrar uma vez.'
   button: 'Entrar para manter minha conta'
+
+docs:
+  title: "Documentação"
+  contents: "Conteúdo"
+  on_this_page: "Nesta página"
+  improve: "Melhore esta página"
+  fallback: "Esta página ainda não foi traduzida para o seu idioma, por isso aparece em inglês."
+  machine_translated: "Esta página foi traduzida automaticamente."
+  stale: "A página em inglês mudou desde que esta tradução foi feita, então algumas partes podem estar desatualizadas."
+  video: "Reproduzir vídeo (carrega do YouTube)"
+  comments: "Comentários e dicas"
+  comments_empty: "Ainda não há comentários. Algo não está claro ou você tem uma dica? Escreva aqui."
+  reference:
+    title: "Blocos e fórmulas"
+    formula: "Elementos de fórmula"
+    functions: "Funções"
+    sensors: "Sensores"
+    operators: "Operadores"
+    examples: "Projetos de exemplo"
+    no_prose: "Ninguém explicou este bloco ainda. Você pode escrever a primeira explicação."
+    empty: "A referência de blocos não está disponível no momento."

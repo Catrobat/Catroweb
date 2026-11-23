@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class CatrobatFileExtractor
 {
+  /** Keep within clamd MaxFileSize/MaxScanSize, or ClamAV only scans part of the upload. */
+  final public const int MAX_TOTAL_SIZE = 300 * 1024 * 1024;
+
   private readonly string $extract_dir;
 
   /**
@@ -52,7 +55,6 @@ class CatrobatFileExtractor
       throw new InvalidCatrobatFileException('errors.file.invalid', 505);
     }
 
-    $max_total_size = 300 * 1024 * 1024; // keep within clamd MaxFileSize/MaxScanSize, or ClamAV only scans part of the upload
     $max_file_count = 5_000;
     $total_size = 0;
     $num_entries = $zip->numFiles;
@@ -76,7 +78,7 @@ class CatrobatFileExtractor
       }
 
       $total_size += $stat['size'];
-      if ($total_size > $max_total_size) {
+      if ($total_size > self::MAX_TOTAL_SIZE) {
         $zip->close();
         throw new InvalidCatrobatFileException('errors.file.invalid', 505, 'Uncompressed size exceeds limit');
       }

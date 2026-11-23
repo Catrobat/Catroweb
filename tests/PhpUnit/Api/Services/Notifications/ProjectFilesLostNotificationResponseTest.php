@@ -59,6 +59,7 @@ class ProjectFilesLostNotificationResponseTest extends TestCase
       $this->createStub(ContentVisibilityManager::class),
       $this->createStub(UserAvatarService::class),
       $this->createStub(UrlGeneratorInterface::class),
+      $this->createStub(\App\Docs\DocsLibrary::class),
     );
 
     $data = $manager->createNotificationListResponse([$notification], false, new User())->getData();

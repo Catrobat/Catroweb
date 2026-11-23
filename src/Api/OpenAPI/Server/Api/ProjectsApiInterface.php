@@ -54,6 +54,27 @@ interface ProjectsApiInterface
   public function setBearerAuth(?string $value): void;
 
   /**
+   * Operation docsReferenceBricksTypeProjectsGet.
+   *
+   * Get public example projects that use a brick
+   *
+   * @param string      $type            Brick type as written in code.xml (required)
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function docsReferenceBricksTypeProjectsGet(
+    string $type,
+    int $limit,
+    ?string $cursor,
+    string $attributes,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation projectsCategoriesGet.
    *
    * Get default number of projects per category (Most downloaded etc.)
