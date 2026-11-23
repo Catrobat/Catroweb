@@ -44,23 +44,12 @@ Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
     When I request "GET" "/api/docs/pages/does-not-exist"
     Then the response status code should be "404"
 
-  Scenario: Docs images are served by share itself
-    When I request "GET" "/app/docs/_media/tutorials/jump.png"
+  # The files themselves are static (public/docs-media), served by the web server, not by Symfony.
+  Scenario: Docs images link to share's static copy
+    When I request "GET" "/api/docs/pages/getting-started/first-project"
     Then the response status code should be "200"
-    And the response Header should contain the key "Content-Type" with the value 'image/png'
-
-  Scenario: Docs SVGs are sandboxed
-    When I request "GET" "/app/docs/_media/tutorials/star.svg"
-    Then the response status code should be "200"
-    And the response Header should contain the key "Content-Type" with the value 'image/svg+xml'
-
-  # A not-found page under /{theme}/ redirects to the start page (ExceptionEventListener), so "not served" is a
-  # redirect without the file's content.
-  Scenario: Other repo files are not served
-    Given I do not follow redirects
-    When I request "GET" "/app/docs/_media/tutorials/not-served.html"
-    Then the response status code should be "302"
-    And the client response should not contain "alert(1)"
+    And the client response should contain "\/docs-media\/tutorials\/jump.png"
+    And the client response should not contain "_media"
 
   Scenario Outline: The language of the request finds the share locale folder (de_DE/)
     Given I have a request header "HTTP_ACCEPT_LANGUAGE" with value "<language>"

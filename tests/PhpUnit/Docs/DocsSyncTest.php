@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -110,49 +109,29 @@ final class DocsSyncTest extends KernelTestCase
     }
   }
 
-  public function testOnlyServesMediaTypesFromTheMediaFolder(): void
+  public function testReadsTheMedia(): void
   {
-    $this->assertSame('tutorials/jump.png', DocsSync::mediaPath('media/tutorials/jump.png'));
-    $this->assertSame('sheet.PDF', DocsSync::mediaPath('media/sheet.PDF'));
-    $this->assertNull(DocsSync::mediaPath('media/tutorials/not-served.html'));
-    $this->assertNull(DocsSync::mediaPath('media/../en/index.png'));
-    $this->assertNull(DocsSync::mediaPath('media/.hidden.png'));
-    $this->assertNull(DocsSync::mediaPath('en/jump.png'));
-    $this->assertNull(DocsSync::mediaPath('media/a/..png/../b.png'));
+    $this->assertSame(['tutorials/jump.png'], DocsSync::readMedia(self::FIXTURES));
+    $this->assertSame([], DocsSync::readMedia(self::FIXTURES.'/en'));
   }
 
-  public function testServesMediaStraightFromTheDocsFolder(): void
+  public function testRefusesMediaThatMayNotGoLive(): void
   {
-    $this->assertSame(realpath(self::FIXTURES), realpath($this->sync->docs_dir));
-    $file = $this->sync->mediaFile('tutorials/jump.png');
-    $this->assertNotNull($file);
-    $this->assertFileEquals(self::FIXTURES.'/media/tutorials/jump.png', $file);
-    $this->assertNull($this->sync->mediaFile('tutorials/not-served.html'));
-    $this->assertNull($this->sync->mediaFile('../en/index.md'));
-    $this->assertNull($this->sync->mediaFile('../../../.env'));
-    $outside = sys_get_temp_dir().'/docs_outside_'.uniqid();
-    mkdir($outside);
-    copy(self::FIXTURES.'/media/tutorials/jump.png', $outside.'/secret.png');
-    $link = self::FIXTURES.'/media/outside-link';
-    symlink($outside, $link); // a linked folder leading out of media/
+    $dir = sys_get_temp_dir().'/docs_media_'.uniqid();
+    mkdir($dir.'/media/a', 0o777, true);
+    touch($dir.'/media/.gitkeep');
+    touch($dir.'/media/a/ok.PNG');
+    touch($dir.'/media/a/x.svg');
+    touch($dir.'/media/page.html');
+    symlink(sys_get_temp_dir(), $dir.'/media/out'); // a linked folder leading out of media/
+    symlink($dir.'/media/a/ok.PNG', $dir.'/media/linked.png');
     try {
-      $this->assertNull($this->sync->mediaFile('outside-link/secret.png'));
+      DocsSync::readMedia($dir);
+      $this->fail('expected the media to be refused');
+    } catch (\RuntimeException $e) {
+      $this->assertStringEndsWith(': a/x.svg, linked.png, out, page.html', $e->getMessage());
     } finally {
-      unlink($link);
-      unlink($outside.'/secret.png');
-      rmdir($outside);
-    }
-
-    $kernel = self::$kernel;
-    $this->assertNotNull($kernel);
-    $svg = $kernel->handle(Request::create('/app/docs/_media/tutorials/star.svg'), HttpKernelInterface::MAIN_REQUEST, false);
-    $this->assertSame(200, $svg->getStatusCode());
-    $this->assertSame('image/svg+xml', $svg->headers->get('Content-Type'));
-    $this->assertStringStartsWith('sandbox;', (string) $svg->headers->get('Content-Security-Policy'), 'an SVG opened directly runs no script');
-    try {
-      $kernel->handle(Request::create('/app/docs/_media/tutorials/not-served.html'), HttpKernelInterface::MAIN_REQUEST, false);
-      $this->fail('only media types are served');
-    } catch (NotFoundHttpException) {
+      (new \Symfony\Component\Filesystem\Filesystem())->remove($dir);
     }
   }
 

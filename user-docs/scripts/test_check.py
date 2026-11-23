@@ -88,4 +88,21 @@ with tempfile.TemporaryDirectory() as tmp:
     broken = ["broken anchor: #Object (the target has no heading with that id)", "broken anchor: target.md#Object (the target has no heading with that id)"]
     assert check.check_page(anchors, touched=True) == broken, check.check_page(anchors, touched=True)
     assert check.check_page(anchors) == ["warning: " + e for e in broken]  # untouched pages only warn
+    media = root / "media"
+    media.mkdir()
+    for name, expected in {"a.png": [], "b.PDF": [], ".gitkeep": [], "c.svg": [".svg is not allowed, only .gif, .jpeg, .jpg, .pdf, .png, .webp"], "d.html": [".html is not allowed, only .gif, .jpeg, .jpg, .pdf, .png, .webp"]}.items():
+        (media / name).write_bytes(b"x")
+        assert check.check_media(media / name) == expected, (name, check.check_media(media / name))
+    (media / "big.png").write_bytes(b"x" * (check.MAX_MEDIA_BYTES + 1))
+    assert check.check_media(media / "big.png") == [f"{check.MAX_MEDIA_BYTES + 1} bytes, more than {check.MAX_MEDIA_BYTES}"]
+    (media / "out").symlink_to(root / "en")
+    assert check.check_media(media / "out") == ["a link: put the file itself into media/"]
+    # A media file may be added or deleted, never changed (it is cached for a year).
+    check.git("init", "-q")
+    check.git("-c", "user.name=t", "-c", "user.email=t@t", "add", "media/a.png", "media/b.PDF")
+    check.git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-q", "-m", "media")
+    (media / "a.png").write_bytes(b"new")
+    (media / "b.PDF").unlink()
+    (media / "e.png").write_bytes(b"added")
+    assert check.changed_media("HEAD") == ["media/a.png"], check.changed_media("HEAD")
 print("check.py self-test passed")

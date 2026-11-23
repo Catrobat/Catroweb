@@ -39,6 +39,7 @@ public/**
 !public/index_test.php
 !public/webp-on-demand.php
 !public/robots.txt
+!public/docs-media
 
 ### tests ###
 tests/style-report/**

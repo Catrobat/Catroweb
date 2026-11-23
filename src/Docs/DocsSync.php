@@ -15,23 +15,19 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
  * Imports the user docs (`user-docs/` in this repo, the same layout the Catrobat/docs repo had) into doc_page: renders
  * new and changed files, deletes pages whose file is gone, all in one transaction. A file is re-rendered only when it
  * changed, or when it embeds a project (name and picture may change), a brick or a formula element (a new catalog may
- * show it differently). Media are served straight from the folder.
+ * show it differently). Media are served by the web server as static files (public/docs-media links to
+ * user-docs/media); a media file never changes once added (check.py).
  */
 class DocsSync
 {
   /** The docs live in this repo: "Improve this page" and links to other repo files go to GitHub's copy of main. */
   final public const string GITHUB = 'https://github.com/Catrobat/Catroweb/';
 
-  /** Extension => content type of the media share serves from the docs' media/ folder. */
-  final public const array MEDIA_TYPES = [
-    'png' => 'image/png',
-    'jpg' => 'image/jpeg',
-    'jpeg' => 'image/jpeg',
-    'gif' => 'image/gif',
-    'webp' => 'image/webp',
-    'svg' => 'image/svg+xml',
-    'pdf' => 'application/pdf',
-  ];
+  /**
+   * The file types allowed in media/ (the writer guide's image types and PDF). No SVG: the web server serves media as
+   * static files and cannot sandbox one opened directly.
+   */
+  final public const array MEDIA_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf'];
 
   private readonly DocsMarkdown $markdown;
 
@@ -86,34 +82,48 @@ class DocsSync
   }
 
   /**
-   * A file of the media/ folder that share serves (the image types the writer guide allows, and PDF): its path inside
-   * media/, or null. Every segment must be a plain name, so no URL can reach outside the media folder.
+   * The media files of a docs folder (paths inside media/). They go live as static files (public/docs-media), so a
+   * file of another type (SVG, HTML, ...) or a link fails the sync before anything changes: in a deploy and in the
+   * docs publish the sync runs before the new docs go live.
+   *
+   * @return list<string>
    */
-  public static function mediaPath(string $repo_path): ?string
+  public static function readMedia(string $dir): array
   {
-    $pattern = '#^media/((?:[A-Za-z0-9_-][A-Za-z0-9._-]*/)*[A-Za-z0-9_-][A-Za-z0-9._-]*\.([A-Za-z0-9]+))$#';
-    if (1 !== preg_match($pattern, $repo_path, $m) || !isset(self::MEDIA_TYPES[strtolower($m[2])]) || str_contains($m[1], '..')) {
-      return null;
+    $root = rtrim($dir, '/').'/media/';
+    if (!is_dir($root)) {
+      return [];
     }
+    $media = [];
+    $refused = [];
+    foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS)) as $file) {
+      \assert($file instanceof \SplFileInfo);
+      $path = substr($file->getPathname(), \strlen($root));
+      if ($file->isLink() || !$file->isFile() || !\in_array(strtolower($file->getExtension()), self::MEDIA_EXTENSIONS, true)) {
+        if ('.gitkeep' !== $path) {
+          $refused[] = $path;
+        }
+        continue;
+      }
+      $media[] = $path;
+    }
+    if ([] !== $refused) {
+      sort($refused);
 
-    return $m[1];
-  }
+      throw new \RuntimeException('The user docs have media that may not go live (only '.implode(', ', self::MEDIA_EXTENSIONS).', no links): '.implode(', ', $refused));
+    }
+    sort($media);
 
-  /** A media file of the docs folder that may be served, or null. Its real path must stay inside media/, so no link (to a file or a folder) leads out. */
-  public function mediaFile(string $path): ?string
-  {
-    $root = realpath(rtrim($this->docs_dir, '/').'/media');
-    $file = false === $root || null === self::mediaPath('media/'.$path) ? false : realpath($root.'/'.$path);
-
-    return false !== $file && str_starts_with($file, $root.\DIRECTORY_SEPARATOR) && is_file($file) ? $file : null;
+    return $media;
   }
 
   /**
    * @param array<string, string> $files repo path => content
+   * @param list<string>          $media paths inside media/ (readMedia)
    *
    * @return array{created: int, updated: int, deleted: int, skipped: list<string>}
    */
-  public function import(array $files): array
+  public function import(array $files, array $media = []): array
   {
     $entries = [];
     $skipped = [];
@@ -139,7 +149,7 @@ class DocsSync
       throw new \RuntimeException('The user docs have no en/index.md, nothing imported.');
     }
 
-    return $this->entity_manager->wrapInTransaction(function () use ($entries, $english_hashes, $skipped): array {
+    return $this->entity_manager->wrapInTransaction(function () use ($entries, $english_hashes, $skipped, $media): array {
       $existing = [];
       foreach ($this->pages->createQueryBuilder('p')->select('p.id', 'p.kind', 'p.locale', 'p.path', 'p.content_hash', 'p.source_hash', 'p.reviewed', 'p.translation_state')->getQuery()->getArrayResult() as $row) {
         $existing[$row['kind'].'|'.$row['locale'].'|'.$row['path']] = $row;
@@ -157,7 +167,7 @@ class DocsSync
           continue;
         }
         try {
-          $rendered = $this->markdown->convert($entry['content'], $entry['file']);
+          $rendered = $this->markdown->convert($entry['content'], $entry['file'], $media);
         } catch (\Throwable $e) {
           $skipped[] = $entry['file'].': '.$e->getMessage();
           continue;
