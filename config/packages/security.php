@@ -211,7 +211,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'methods' => ['GET'],
         ],
         [
-          'path' => '^/api/docs(/pages/[A-Za-z0-9_/-]+|/reference/catalog|/reference/bricks/[A-Za-z0-9_]+)?/?$',
+          'path' => '^/api/docs(/pages/[A-Za-z0-9_/-]+|/reference/catalog|/reference/bricks/[A-Za-z0-9_]+|/search)?/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
         ],

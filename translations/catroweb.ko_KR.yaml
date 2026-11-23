@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: '%email-webmaster% 이용 약관에 대 한 어떤 제안을 우송 하십시오.'
   version: 버전 1.3, 4 March 2014
 search:
-  search: "프로젝트, 사용자, 스튜디오 검색"
+  noDocs: "문서 페이지를 찾을 수 없습니다"
+  search: "프로젝트, 사용자, 스튜디오, 문서 검색"
   inMediaLib: 미디어 라이브러리 검색
   inMediaCategory: "미디어 카테고리에서 검색"
   results: 검색 결과
@@ -1035,6 +1036,9 @@ inactiveAccount:
   button: '로그인해서 계정 유지하기'
 
 docs:
+  search_guides: "가이드"
+  search_bricks: "블록"
+  search_formula: "수식 요소"
   title: "문서"
   in_section: "이 섹션의 페이지"
   all_in_section: "이 섹션의 모든 페이지"

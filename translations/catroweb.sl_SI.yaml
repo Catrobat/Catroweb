@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Za dodatne informacije o pogojih uporabe se obrni na %email-webmaster%.'
   version: Različici 1.3, 4 marec 2014
 search:
-  search: 'Išči projekte, uporabnike in studie'
+  noDocs: "Ni najdenih strani dokumentacije"
+  search: "Išči projekte, uporabnike, studie in dokumentacijo"
   inMediaLib: 'Išči v medijski knjižnici'
   inMediaCategory: 'Išči v medijski kategoriji'
   results: Rezultati iskanja
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Prijavi se in obdrži račun'
 
 docs:
+  search_guides: "Vodniki"
+  search_bricks: "Bloki"
+  search_formula: "Elementi formule"
   title: "Dokumentacija"
   in_section: "V tem razdelku"
   all_in_section: "Vse strani v tem razdelku"

@@ -24,6 +24,13 @@
        data-trans-scratch-converting="{{ 'search.scratchConverting'|trans({'%app%': getThemeDisplayName()}, 'catroweb') }}"
        data-trans-scratch-converting-snackbar="{{ 'search.scratchConvertingSnackbar'|trans({}, 'catroweb') }}"
        data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+       data-locale="{{ app.request.locale }}"
+       data-docs-first="{{ app.request.query.get('context', '') == 'docs' ? 'true' : 'false' }}"
+       data-trans-docs="{{ 'docs.title'|trans({}, 'catroweb') }}"
+       data-trans-no-docs="{{ 'search.noDocs'|trans({}, 'catroweb') }}"
+       data-trans-docs-guides="{{ 'docs.search_guides'|trans({}, 'catroweb') }}"
+       data-trans-docs-bricks="{{ 'docs.search_bricks'|trans({}, 'catroweb') }}"
+       data-trans-docs-formula="{{ 'docs.search_formula'|trans({}, 'catroweb') }}"
   >
   </div>
 

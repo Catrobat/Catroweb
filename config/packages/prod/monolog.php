@@ -14,6 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'upload',
         'login',
         'cleanup',
+        'docs_search',
       ],
       'handlers' => [
         'main' => [
@@ -22,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'handler' => 'mainHandler',
           'excluded_http_codes' => [400, 401, 402, 403, 404, 405, 406, 429],
           'buffer_size' => 50,
-          'channels' => ['!login', '!cleanup'],
+          'channels' => ['!login', '!cleanup', '!docs_search'],
         ],
         'mainHandler' => [
           'type' => 'rotating_file',
@@ -77,6 +78,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'level' => 'info',
           'max_files' => 30,
           'channels' => ['cleanup'],
+          'formatter' => 'monolog.formatter.login_formatter',
+        ],
+        // Docs searches without results (content gaps): query and language only, no ip or user. Same shipping as login.
+        'docs_search' => [
+          'type' => 'rotating_file',
+          'path' => '%kernel.logs_dir%/%kernel.environment%/docs_search.log',
+          'level' => 'info',
+          'max_files' => 30,
+          'channels' => ['docs_search'],
           'formatter' => 'monolog.formatter.login_formatter',
         ],
         'console' => [

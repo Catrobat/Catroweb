@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Por favor, envie quaisquer sugestões sobre estes Termos de Uso para %email-webmaster%.'
   version: Versão 1.3, 4 de março de 2014
 search:
-  search: 'Buscar projetos, usuários e estúdios'
+  noDocs: "Nenhuma página da documentação encontrada"
+  search: "Buscar projetos, usuários, estúdios e documentação"
   inMediaLib: Pesquisar na biblioteca de mídia
   inMediaCategory: 'Buscar na categoria de mídia'
   results: Resultados da Busca
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Entrar para manter minha conta'
 
 docs:
+  search_guides: "Guias"
+  search_bricks: "Blocos"
+  search_formula: "Elementos de fórmula"
   title: "Documentação"
   in_section: "Nesta seção"
   all_in_section: "Todas as páginas desta seção"

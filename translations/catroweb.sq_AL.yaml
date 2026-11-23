@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Të lutem dërgo çdo sugjerim në lidhje me këto kushte të përdorimit te %email-webmaster%'
   version: Versioni 1.3, 4 mars 2014
 search:
-  search: Kërko projekte, përdorues dhe studio
+  noDocs: "Nuk u gjetën faqe dokumentacioni"
+  search: "Kërko projekte, përdorues, studio dhe dokumentacion"
   inMediaLib: Kërko në bibliotekën e mediave
   inMediaCategory: Kërko në kategorinë e mediave
   results: Rezultatet për
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Identifikohu për ta mbajtur llogarinë'
 
 docs:
+  search_guides: "Udhëzues"
+  search_bricks: "Blloqe"
+  search_formula: "Elementet e formulës"
   title: "Dokumentacioni"
   in_section: "Në këtë seksion"
   all_in_section: "Të gjitha faqet në këtë seksion"

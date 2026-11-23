@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: "Ttxil-k azen yal asumer ɣef tewtilin-a n useqdec ɣer %email-webmaster%."
   version: "Lqem 1.3, 4 Meɣres 2014"
 search:
-  search: "Nadi isenfaren, iseqdacen d yisudyuten"
+  noDocs: "Ulac isebtar n tsemlit i yettwafen"
+  search: "Nadi isenfaren, iseqdacen, isudyuten d tsemlit"
   inMediaLib: "Nadi deg temkarḍit n yimidyaten"
   inMediaCategory: "Nadi deg taggayt n yimidyaten"
   results: "Igmaḍ i"
@@ -1033,6 +1034,9 @@ inactiveAccount:
   button: 'Qqen akken ad ḥerzeɣ amiḍan-iw'
 
 docs:
+  search_guides: "Imniren"
+  search_bricks: "Iblokan"
+  search_formula: "Iferdisen n tasemselt"
   title: "Tasemlit"
   in_section: "Deg tigezmi-a"
   all_in_section: "Akk isebtar n tigezmi-a"

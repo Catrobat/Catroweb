@@ -129,7 +129,9 @@ export function showDefaultTopBarTitle() {
 function submitSearchForm(event) {
   event.preventDefault()
   const query = searchInput.value.trim()
-  const targetUrl = searchUrl + encodeURIComponent(query)
+  // Started on a docs page: the search page shows the docs results first.
+  const context = document.querySelector('.js-header').dataset.searchContext
+  const targetUrl = searchUrl + encodeURIComponent(query) + (context ? `?context=${context}` : '')
 
   const target = new URL(targetUrl, window.location.origin)
   const current = new URL(window.location.href)

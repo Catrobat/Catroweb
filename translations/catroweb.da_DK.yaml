@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Send venligst forslag til disse brugsvilkår til %email-webmaster%.'
   version: Version 1.3, 4. marts 2014
 search:
-  search: Søg efter projekter, brugere og studier
+  noDocs: "Ingen dokumentationssider fundet"
+  search: "Søg efter projekter, brugere, studier og dokumentation"
   inMediaLib: Søg i mediebiblioteket
   inMediaCategory: Søg i mediekategorien
   results: Resultater for
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Log på for at beholde min konto'
 
 docs:
+  search_guides: "Vejledninger"
+  search_bricks: "Klodser"
+  search_formula: "Formelelementer"
   title: "Dokumentation"
   in_section: "I dette afsnit"
   all_in_section: "Alle sider i dette afsnit"

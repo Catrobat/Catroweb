@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Lähetä näitä käyttöehtoja koskevat ehdotukset osoitteeseen %email-webmaster%.'
   version: Versio 1.3, 4. maaliskuuta 2014
 search:
-  search: Hae projekteja, käyttäjiä ja studioita
+  noDocs: "Dokumentaatiosivuja ei löytynyt"
+  search: "Hae projekteja, käyttäjiä, studioita ja ohjeita"
   inMediaLib: Hae mediakirjastosta
   inMediaCategory: Hae mediakategoriasta
   results: Hakutulokset
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Kirjaudu sisään ja säilytä tilini'
 
 docs:
+  search_guides: "Oppaat"
+  search_bricks: "Palikat"
+  search_formula: "Kaavan osat"
   title: "Dokumentaatio"
   in_section: "Tässä osiossa"
   all_in_section: "Kaikki tämän osion sivut"

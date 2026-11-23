@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Lütfen Kullanım koşulları ile ilgili önerilerinizi %email-webmaster%''a mail atın.'
   version: Sürüm 1.3, 4 Mart 2014
 search:
-  search: Proje, kullanıcı ve stüdyo ara
+  noDocs: "Belge sayfası bulunamadı"
+  search: "Proje, kullanıcı, stüdyo ve belge ara"
   inMediaLib: Medya kitaplığında ara
   inMediaCategory: Medya kategorisinde ara
   results: Sonuçlarda Ara
@@ -1054,6 +1055,9 @@ inactiveAccount:
   button: 'Hesabımı tutmak için giriş yap'
 
 docs:
+  search_guides: "Kılavuzlar"
+  search_bricks: "Bloklar"
+  search_formula: "Formül öğeleri"
   title: "Belgeler"
   in_section: "Bu bölümde"
   all_in_section: "Bu bölümdeki tüm sayfalar"

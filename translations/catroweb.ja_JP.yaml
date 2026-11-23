@@ -392,7 +392,8 @@ termsOfUse:
   bottom2: 'これらの利用規約に関するあらゆる提案を、%email-webmaster% までメールしてください。'
   version: バージョン 1.3、2014/3/4
 search:
-  search: "プロジェクト、ユーザー、スタジオを検索"
+  noDocs: "ドキュメントのページが見つかりません"
+  search: "プロジェクト、ユーザー、スタジオ、ドキュメントを検索"
   inMediaLib: メディアライブラリ内で検索
   inMediaCategory: "メディアカテゴリ内を検索"
   results: 検索結果
@@ -1042,6 +1043,9 @@ inactiveAccount:
   button: 'ログインしてアカウントを残す'
 
 docs:
+  search_guides: "ガイド"
+  search_bricks: "ブロック"
+  search_formula: "数式の要素"
   title: "ドキュメント"
   in_section: "このセクション"
   all_in_section: "このセクションのすべてのページ"

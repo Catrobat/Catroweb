@@ -20,6 +20,8 @@ services:
     environment:
       # Only reachable with the "translation" profile, see the libretranslate service.
       - LIBRETRANSLATE_URL=http://libretranslate:5000
+      # Only reachable with the "docs-search" profile, see the embeddings service. Without it: keyword search only.
+      - DOCS_EMBEDDING_URL=http://embeddings
     volumes:
       #
       # Changes to the following files are shared between host and container.
@@ -211,6 +213,24 @@ services:
       retries: 3
     restart: unless-stopped
 
+  # --- Docs search: text embeddings for the hybrid docs search (docs/operations/User-Docs.md, "Search"). Optional:
+  #   docker compose -f docker-compose.dev.yaml --profile docs-search up -d
+  # The first start downloads the model into the volume (about 500 MB). Then run bin/console catrobat:docs:sync, and
+  # try it with bin/console catrobat:docs:search "make my cat jump".
+  # The image is built for amd64 only; on Apple silicon Docker runs it emulated (slower, fine for trying it out).
+
+  embeddings:
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.9.0
+    container_name: embeddings.catroweb
+    platform: linux/amd64
+    profiles: ['docs-search']
+    command: ['--model-id', 'intfloat/multilingual-e5-small']
+    ports:
+      - '127.0.0.1:5006:80'
+    volumes:
+      - embedding-models:/data
+    restart: unless-stopped
+
   # --- Email testing:
 
   mailpit:
@@ -270,4 +290,6 @@ volumes:
   clamav-data:
     driver: local
   libretranslate-models:
+    driver: local
+  embedding-models:
     driver: local

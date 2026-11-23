@@ -406,7 +406,8 @@ termsOfUse:
   bottom2: මේ භාවිත නියම ගැන ඕනම යෝජනාවක් කරුණාකර %email-webmaster% වෙත එවන්න.
   version: අනුවාදය 1.3, 2014 මාර්තු 4
 search:
-  search: ව්‍යාපෘති, පරිශීලකයන් සහ ස්ටූඩියෝ සොයන්න
+  noDocs: "ලේඛන පිටු කිසිවක් හමු නොවීය"
+  search: "ව්‍යාපෘති, පරිශීලකයන්, ස්ටූඩියෝ සහ ලේඛන සොයන්න"
   inMediaLib: මාධ්‍ය පුස්තකාලයේ සොයන්න
   inMediaCategory: මාධ්‍ය කාණ්ඩයේ සොයන්න
   results: සෙවුම් ප්‍රතිඵල
@@ -1056,6 +1057,9 @@ inactiveAccount:
   button: 'මගේ ගිණුම තියාගන්න පුරනය වෙන්න'
 
 docs:
+  search_guides: "මාර්ගෝපදේශ"
+  search_bricks: "බ්‍රික්ස්"
+  search_formula: "සූත්‍ර මූලද්‍රව්‍ය"
   title: "ලේඛන"
   in_section: "මෙම කොටසේ"
   all_in_section: "මෙම කොටසේ සියලු පිටු"

@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Vennligst send forslag om disse vilkårene for bruk til %email-webmaster%.'
   version: Versjon 1.3, 4. mars 2014
 search:
-  search: 'Søk etter prosjekter, brukere og studioer'
+  noDocs: "Fant ingen dokumentasjonssider"
+  search: "Søk etter prosjekter, brukere, studioer og dokumentasjon"
   inMediaLib: Søk i mediebiblioteket
   inMediaCategory: 'Søk i mediekategori'
   results: Søkeresultater
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Logg på for å beholde kontoen min'
 
 docs:
+  search_guides: "Veiledninger"
+  search_bricks: "Klosser"
+  search_formula: "Formelelementer"
   title: "Dokumentasjon"
   in_section: "I denne delen"
   all_in_section: "Alle sider i denne delen"

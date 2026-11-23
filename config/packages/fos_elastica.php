@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use App\DB\Entity\Docs\DocPage;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
+use App\Docs\Search\DocsEmbedder;
+use App\Docs\Search\DocsSearchIndexer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -123,6 +126,30 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'persistence' => [
             'driver' => 'orm',
             'model' => User::class,
+          ],
+        ],
+        // The user docs search (docs/operations/User-Docs.md, "Search"): guides and bricks in every locale. Documents are
+        // built by DocsSearchIndexer (after every docs sync, and by fos:elastica:populate), not from DocPage rows directly.
+        'app_doc' => [
+          'settings' => [
+            // The standard analyzer: the docs come in 70 languages, an English stopword list would only hurt.
+            'analysis' => ['analyzer' => ['default' => ['type' => 'standard']]],
+          ],
+          'properties' => [
+            'type' => ['type' => 'keyword'],
+            'path' => ['type' => 'keyword'],
+            'locale' => ['type' => 'keyword'],
+            'title' => ['type' => 'text'],
+            'text' => ['type' => 'text'],
+            'snippet' => ['type' => 'text', 'index' => false],
+            'embedding' => ['type' => 'dense_vector', 'dims' => DocsEmbedder::DIMS, 'index' => true, 'similarity' => 'cosine'],
+          ],
+          'persistence' => [
+            'driver' => 'orm',
+            'model' => DocPage::class,
+            'listener' => ['enabled' => false],
+            'provider' => ['service' => DocsSearchIndexer::class],
+            'model_to_elastica_transformer' => ['service' => DocsSearchIndexer::class],
           ],
         ],
         'app_studio' => [

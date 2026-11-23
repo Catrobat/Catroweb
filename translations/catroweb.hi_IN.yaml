@@ -390,7 +390,8 @@ termsOfUse:
   bottom2: "कृपया इन उपयोग की शर्तों के बारे में कोई सुझाव मेल करो %email-webmaster%।"
   version: संस्करण 1.3, 4 मार्च 2014
 search:
-  search: "प्रोजेक्ट, उपयोगकर्ता और स्टूडियो खोजो"
+  noDocs: "दस्तावेज़ का कोई पेज नहीं मिला"
+  search: "प्रोजेक्ट, उपयोगकर्ता, स्टूडियो और दस्तावेज़ खोजो"
   inMediaLib: "मीडिया लाइब्रेरी में खोजो"
   inMediaCategory: "मीडिया श्रेणी में खोजो"
   results: खोज परिणाम
@@ -1037,6 +1038,9 @@ Reports: "रिपोर्ट"
 members: "सदस्य"
 
 docs:
+  search_guides: "गाइड"
+  search_bricks: "ब्रिक्स"
+  search_formula: "सूत्र के तत्व"
   title: "दस्तावेज़"
   in_section: "इस खंड में"
   all_in_section: "इस खंड के सभी पेज"

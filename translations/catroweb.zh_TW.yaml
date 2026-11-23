@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: '請將有關這些使用條款的任何建議郵寄給 %email-webmaster%。'
   version: 1.3 版，2014 年 3 月 4 日
 search:
-  search: "搜尋專案、使用者和工作室"
+  noDocs: "找不到文件頁面"
+  search: "搜尋專案、使用者、工作室和文件"
   inMediaLib: 在媒體庫中搜尋
   inMediaCategory: "在媒體分類中搜尋"
   results: 搜尋結果
@@ -1035,6 +1036,9 @@ inactiveAccount:
   button: '登入以保留我的帳號'
 
 docs:
+  search_guides: "指南"
+  search_bricks: "積木"
+  search_formula: "公式元素"
   title: "說明文件"
   in_section: "本節內容"
   all_in_section: "本節的所有頁面"

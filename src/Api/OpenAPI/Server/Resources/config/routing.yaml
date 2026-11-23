@@ -133,6 +133,12 @@ open_api_server_docs_docsget:
   defaults:
     _controller: open_api_server.controller.docs::docsGetAction
 
+open_api_server_docs_docssearchget:
+  path: /docs/search
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.docs::docsSearchGetAction
+
 open_api_server_docs_docsreferencecatalogget:
   path: /docs/reference/catalog
   methods: [GET]

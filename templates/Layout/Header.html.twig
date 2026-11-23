@@ -73,6 +73,8 @@
             {% else %}
               data-path-search-url="{{ path('empty_search') }}"
             {% endif %}
+            {# A search started on a docs page shows the docs results first. #}
+            {% if app.request.attributes.get('_route')|default('') starts with 'docs' %}data-search-context="docs"{% endif %}
             data-same-search-message="{{ 'search.sameSearchMessage'|trans({}, 'catroweb') }}"
         ></div>
       {% endblock %}

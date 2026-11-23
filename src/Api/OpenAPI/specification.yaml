@@ -4022,6 +4022,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocsNavigationResponse'
 
+  /docs/search:
+    get:
+      tags:
+        - 'Docs'
+      summary: 'Search the user docs'
+      description: 'Guides, bricks and formula elements matching the words or the meaning of `q`, best first, at most `limit` per group. Searches the requested locale and English; a page shows once, in the best of them. Meaning-based results need the embedding server (DOCS_EMBEDDING_URL); without it, keyword results only (`semantic` is false).'
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: 'Words or a question, e.g. "make my cat jump"; 1 to 200 characters'
+        - $ref: '#/components/parameters/DocsLocale'
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+          description: 'Results per group'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
   '/docs/pages/{path}':
     get:
       tags:
@@ -7213,6 +7248,60 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocsNavigationItem'
+
+    DocsSearchResponse:
+      type: object
+      required:
+        - locale
+        - semantic
+        - guides
+        - bricks
+        - formula
+      properties:
+        locale:
+          type: string
+          example: 'de'
+        semantic:
+          type: boolean
+          description: 'False when the search used keywords only (no embedding server, or it did not answer in time)'
+        guides:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsSearchResult'
+        bricks:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsSearchResult'
+        formula:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsSearchResult'
+
+    DocsSearchResult:
+      type: object
+      required:
+        - type
+        - path
+        - locale
+        - title
+        - snippet
+      properties:
+        type:
+          type: string
+          enum: [guide, brick, formula]
+        path:
+          type: string
+          description: "Docs path: the page's web URL is `/app/docs/<path>`"
+          example: 'tutorials/jump'
+        locale:
+          type: string
+          example: 'de_DE'
+        title:
+          type: string
+          example: 'Lass deine Katze springen'
+        snippet:
+          type: string
+          description: 'Plain text: the description or the start of the page'
 
     DocsPageResponse:
       type: object

@@ -42,6 +42,7 @@ use App\DB\Enum\AppealState;
 use App\DB\Enum\ReportState;
 use App\DB\Generator\MyUuidGenerator;
 use App\Docs\DocsSync;
+use App\Docs\Search\DocsSearchIndexer;
 use App\Moderation\ReportProcessor;
 use App\Project\CodeStatistics\CodeStatisticsParser;
 use App\Storage\FileHelper;
@@ -112,6 +113,18 @@ class DataFixturesContext implements Context
     $sync = $this->getSymfonyService(DocsSync::class);
     Assert::assertInstanceOf(DocsSync::class, $sync);
     $sync->import(DocsSync::readDirectory($sync->docs_dir), DocsSync::readMedia($sync->docs_dir)); // tests/TestData/Docs in the test environment
+  }
+
+  /**
+   * Indexes the synced docs for the docs search (the fake embedder gives them vectors).
+   *
+   * @Given the docs search index is up-to-date
+   */
+  public function theDocsSearchIndexIsUpToDate(): void
+  {
+    $indexer = $this->getSymfonyService(DocsSearchIndexer::class);
+    Assert::assertInstanceOf(DocsSearchIndexer::class, $indexer);
+    $indexer->rebuild();
   }
 
   /**
