@@ -66,6 +66,11 @@ class NotificationsResponseManager extends AbstractResponseManager
     parent::__construct($translator, $serializer, $cache);
   }
 
+  private function docCommentsUrl(string $doc_path): string
+  {
+    return $this->url_generator->generate('docs', ['theme' => 'app', 'path' => 'index' === $doc_path ? '' : $doc_path]).'#comments';
+  }
+
   /** The text fields a moderation reason can name (catro-notifications.moderation-reason.text.*). */
   private const array MODERATION_REASON_FIELDS = ['name', 'description', 'credits', 'about', 'currently_working_on', 'username'];
 
@@ -219,7 +224,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'from' => $comment?->getUser()?->getId(),
         'from_name' => $comment?->getUser()?->getUserIdentifier(),
         'avatar' => $this->user_avatar_service->getVariants($comment?->getUser()),
-        'url' => $this->url_generator->generate('docs', ['theme' => 'app', 'path' => 'index' === $path ? '' : $path]).'#comments',
+        'url' => $this->docCommentsUrl($path),
         'message' => $this->trans('catro-notifications.doc-comment.message', [
           '%user_link%' => '%user_link%',
           '%page_title%' => $this->docs_library->page($path, 'en')?->getTitle() ?? $path,
@@ -294,6 +299,10 @@ class NotificationsResponseManager extends AbstractResponseManager
       } elseif ('comment' === $content_type && null !== $content_id) {
         $response['project'] = $this->content_visibility_manager->getCommentProjectId($content_id);
         $response['project_name'] = $this->content_visibility_manager->getCommentProjectName($content_id);
+        $doc_path = $this->content_visibility_manager->getCommentDocPath($content_id);
+        if (null !== $doc_path) {
+          $response['url'] = $this->docCommentsUrl($doc_path);
+        }
       }
 
       return new NotificationResponse($response);
