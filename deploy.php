@@ -228,6 +228,25 @@ task('update:special', function () {
   run('bin/console catrobat:update:special');
 });
 
+// The user docs (user-docs/) without a full deploy (.github/workflows/docs-publish.yaml): replace the live release's
+// copy and sync it into the database. A full deploy ships user-docs/ with the release and syncs it itself. The lock
+// keeps this away from a running deploy, also a manual one.
+desc('Publish the user docs to the live release');
+task('docs:publish', function () {
+  invoke('deploy:lock'); // fails while a deploy holds the lock, and then must not release it
+  try {
+    // Into a new folder next to the live one (unchanged files hard-linked from it), then swapped in by rename, so
+    // share never serves a half-copied user-docs/ (media are served straight from it).
+    run('rm -rf {{current_path}}/user-docs.new {{current_path}}/user-docs.old');
+    upload(__DIR__.'/user-docs/', '{{current_path}}/user-docs.new/', ['options' => ['--delete', '--link-dest=../user-docs']]);
+    run('cd {{current_path}} && { [ ! -e user-docs ] || mv user-docs user-docs.old; } && mv user-docs.new user-docs && rm -rf user-docs.old');
+    // Not {{bin/console}}: that points at an unfinished release if a failed deploy left one behind.
+    run('cd {{current_path}} && {{bin/php}} bin/console catrobat:docs:sync --no-interaction');
+  } finally {
+    invoke('deploy:unlock');
+  }
+});
+
 // dump the .env file as .env.local.php to speed up the loading of the env vars
 task('dump:env', function () {
   cd('{{release_path}}');

@@ -1,0 +1,15 @@
+---
+title: Tutorials
+order: 0
+translated_from: de
+---
+
+[![Star](../../../media/plot-tutorials/Stern_svg.png)](star.md)
+
+[![Flower](../../../media/plot-tutorials/Blume_svg.png)](flower.md)
+
+[![Fox](../../../media/plot-tutorials/Fuchs_svg.png)](fox.md)
+
+[![Cat](../../../media/plot-tutorials/Katze_svg.png)](cat.md)
+
+[Christmas cards](christmas-cards.md)

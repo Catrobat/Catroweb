@@ -1,0 +1,47 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** User docs publish **
+#
+#  A merged docs change goes live without a full deploy: Deployer's docs:publish task (deploy.php) copies user-docs/
+#  into the live release and runs catrobat:docs:sync there. See docs/operations/How-To-Deploy.md.
+#
+#  - Same connection and secrets as deployment.yaml.
+#  - Same concurrency group as deployment.yaml, so a publish and a deploy never run at the same time.
+#
+name: 'User docs publish'
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'user-docs/**'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: main
+
+      - name: 'Setup PHP and composer packages'
+        uses: ./.github/actions/setup-php-composer
+
+      - name: Publish the user docs
+        uses: deployphp/action@v1
+        with:
+          private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
+          dep: docs:publish
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}

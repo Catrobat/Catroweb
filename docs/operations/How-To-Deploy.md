@@ -9,6 +9,18 @@ The app is deployed with Deployer (`deploy.php`, one `share` stage). Production 
 
 Deployer's `smoke_test` task checks health on the server after the release is live; a failure fails the deploy but does not roll back (`bin/dep rollback share` does). After a passing smoke test, `deploy:cleanup` keeps the newest 5 releases (`keep_releases`) and deletes older ones.
 
+## User docs
+
+The user docs (`user-docs/`) ship with every release and are synced into the database by the deploy (`catrobat:docs:sync`). A merged change to `user-docs/` goes live without a full deploy: the **User docs publish** workflow (`.github/workflows/docs-publish.yaml`, also startable by hand) runs Deployer's `docs:publish` task, which
+
+1. takes the deploy lock (it fails while a deploy runs),
+2. copies `user-docs/` of `main` into `current/user-docs.new/` (unchanged files hard-linked from the live copy) and swaps it in by renaming, so the live release never serves a half-copied folder,
+3. runs `bin/console catrobat:docs:sync` in the live release.
+
+It uses the Deployment workflow's connection and secrets and its concurrency group (`deploy-production`), so a publish and a deploy never overlap. GitHub keeps only one pending run per group: a publish queued behind a running deploy replaces an older queued publish (harmless, it checks out the newest `main`), but it would also replace a queued deploy; restart that deploy by hand if it shows as cancelled. A later full deploy replaces the published copy with the same content from git.
+
+Pull requests that change only `user-docs/` run the **User docs** checks (`.github/workflows/docs-check.yaml`, locally `user-docs/check.sh`) and skip the other workflows' jobs (`.github/actions/code-changed`); the required checks report success for the skipped jobs.
+
 ## Manual deploy
 
 Set in `.env.local` (credentials from the coordinator; VPN may be required):

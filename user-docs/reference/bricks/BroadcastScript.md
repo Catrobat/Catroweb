@@ -1,0 +1,17 @@
+![when-you-receive-__2](../../media/bricks/when-you-receive-__2.png)
+
+With this block your object listens for a specific broadcast message and then runs the script when the message is received. Useful to communicate between objects and tell them when to do something.
+
+![broadcast2](../../media/bricks/broadcast2.png)
+
+**Why send broadcast messages?**
+
+With messages you can communicate and interact between different objects within a scene. It allows one object to send a message to all other objects, and the receiving objects can then react or respond to that message.
+
+These messages are **not displayed** on the screen! If you want to display messages, use the bricks in the “Looks” category!
+
+**How does it work?**
+
+- *Sender object:* The sender object starts the communication by using a *“Broadcast”* block. This block is used to send a message to all other objects in the scene (also the background).
+- *Receiving object:* The receiving object is the one that listens for and responds to messages. It uses the *“When you receive”* block to detect when a specific message is being received.
+- *Message Handling:* When the receiving object gets the message, it will execute all the blocks that are beneath the *“When you receive”* block. This allows you to define custom behavior or actions that occur when a particular message is received.

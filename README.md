@@ -76,6 +76,8 @@ Core project docs are maintained in-repo:
 - [docs/setup/Developer-Quickstart.md](./docs/setup/Developer-Quickstart.md)
 - [docs/architecture/Architecture-Overview.md](./docs/architecture/Architecture-Overview.md)
 
+The user documentation (guides at `/app/docs`, written for app users, not developers) lives in [`user-docs/`](./user-docs/README.md). Its content is licensed under CC BY-SA 4.0 ([`user-docs/LICENSE`](./user-docs/LICENSE)); that license covers `user-docs/` only, the rest of Catroweb stays under the AGPL-3.0 ([`LICENSE`](./LICENSE)).
+
 The recommended Docker setup includes Node 22 and Yarn 4.12.0 for frontend builds.
 
 ## Operations & Infrastructure

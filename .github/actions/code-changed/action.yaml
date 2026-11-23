@@ -1,0 +1,23 @@
+name: 'Did code change?'
+description: >-
+  Output `code`: false for a pull request that changes only the user docs (user-docs/), true for anything else.
+  Needs a checkout of the pull request's merge commit with fetch-depth 2 (its first parent is the base branch).
+outputs:
+  code:
+    description: "'true' unless the pull request changes only files in user-docs/"
+    value: ${{ steps.diff.outputs.code }}
+runs:
+  using: 'composite'
+  steps:
+    - id: diff
+      shell: bash
+      env:
+        EVENT: ${{ github.event_name }}
+      run: |
+        # Schedules and manual runs check everything. A failing git diff fails the step, so nothing is skipped by mistake.
+        code=true
+        if [ "$EVENT" = pull_request ]; then
+          files=$(git diff --name-only HEAD^1 HEAD)
+          echo "$files" | grep -qv '^user-docs/' || code=false
+        fi
+        echo "code=$code" | tee -a "$GITHUB_OUTPUT"

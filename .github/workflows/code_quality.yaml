@@ -50,6 +50,27 @@ concurrency:
 
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Changed files:
+  #
+  #   - A pull request that changes only the user docs (user-docs/) skips the jobs below; docs-check.yaml checks it.
+  #     Skipped jobs count as passing, so the required checks stay green. If this job fails, the jobs below run
+  #     anyway.
+  #
+  changes:
+    name: Changed files
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.changes.outputs.code }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 2 # the merge commit and its first parent, the base branch
+          filter: blob:none
+          sparse-checkout: .github
+      - id: changes
+        uses: ./.github/actions/code-changed
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Javascript / CSS **
   #
   # Biome:
@@ -61,6 +82,8 @@ jobs:
   #
   biome:
     name: JavaScript,JSON,CSS [Biome]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -80,6 +103,8 @@ jobs:
   #
   prettier:
     name: MD,YAML formatting [Prettier]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -99,6 +124,8 @@ jobs:
   #
   php-cs-fixer:
     name: PHP Code Style [Php-CS-Fixer]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -116,6 +143,8 @@ jobs:
   #
   phpstan:
     name: PHP Static Analysis [Php-Stan]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -133,6 +162,8 @@ jobs:
   #
   psalm:
     name: PHP Static Analysis [Psalm]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -161,6 +192,8 @@ jobs:
   #
   lint-twig:
     name: Twig [Lint]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -175,6 +208,8 @@ jobs:
   #
   lint-yaml:
     name: Yaml [Lint]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -190,6 +225,8 @@ jobs:
   #
   lint-container:
     name: Symfony Container [Lint]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -205,6 +242,8 @@ jobs:
   #
   check-secrets:
     name: Secrets [Check Default Secrets]
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.code != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -222,6 +261,7 @@ jobs:
   ci_gate:
     name: 'CI gate: static analysis'
     needs:
+      - changes
       - biome
       - prettier
       - php-cs-fixer
@@ -237,6 +277,7 @@ jobs:
       - name: Check results of all jobs
         env:
           RESULTS: |
+            changes ${{ needs.changes.result }}
             biome ${{ needs.biome.result }}
             prettier ${{ needs.prettier.result }}
             php-cs-fixer ${{ needs.php-cs-fixer.result }}
