@@ -26,8 +26,6 @@ class ScreenshotRepository
 
   private readonly string $screenshot_path;
 
-  private ?\Imagick $imagick = null;
-
   private readonly string $tmp_dir;
 
   private readonly string $extracted_project_dir;
@@ -116,6 +114,7 @@ class ScreenshotRepository
     $screen->readImage($filepath);
     $this->saveImagickScreenshot($screen, $id);
     $this->overwriteOriginalScreenshot($screen, $id);
+    $screen->clear();
     $screen->destroy();
     $this->generateScreenshotVariants($filepath, $id);
   }
@@ -186,11 +185,7 @@ class ScreenshotRepository
 
   public function getImagick(): \Imagick
   {
-    if (null === $this->imagick) {
-      $this->imagick = new \Imagick();
-    }
-
-    return $this->imagick;
+    return new \Imagick();
   }
 
   public function deleteThumbnail(string $id): void
@@ -250,6 +245,7 @@ class ScreenshotRepository
 
     $screen->writeImage($filename);
     chmod($filename, 0777);
+    $screen->clear();
     $screen->destroy();
   }
 
@@ -282,6 +278,7 @@ class ScreenshotRepository
 
     $thumb->writeImage($filename);
     chmod($filename, 0777);
+    $thumb->clear();
     $thumb->destroy();
   }
 
@@ -315,6 +312,7 @@ class ScreenshotRepository
 
     $thumb->writeImage($filename);
     chmod($filename, 0777);
+    $thumb->clear();
     $thumb->destroy();
   }
 
@@ -353,7 +351,7 @@ class ScreenshotRepository
 
   private function preventInvalidImagesInCacheZips(string $id): void
   {
-    $filename = $this->project_zip_dir.$id.'catrobat'; // prevent invalid cached images
+    $filename = $this->project_zip_dir.$id.'.catrobat'; // prevent invalid cached images
     if (file_exists($filename)) {
       unlink($filename);
     }
