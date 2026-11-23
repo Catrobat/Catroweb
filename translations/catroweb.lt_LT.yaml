@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Pasiūlymus dėl šių naudojimo sąlygų siųsk el. paštu %email-webmaster%.'
   version: 'Versija 1.3, 2014 m. kovo 4 d.'
 search:
-  search: 'Ieškok projektų, naudotojų ir studijų'
+  noDocs: "Dokumentacijos puslapių nerasta"
+  search: "Ieškok projektų, naudotojų, studijų ir dokumentacijos"
   inMediaLib: 'Ieškoti medijų bibliotekoje'
   inMediaCategory: 'Ieškoti medijų kategorijoje'
   results: 'Paieškos rezultatai'
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Prisijungti ir išsaugoti paskyrą'
 
 docs:
+  search_guides: "Vadovai"
+  search_bricks: "Blokai"
+  search_formula: "Formulės elementai"
   title: "Dokumentacija"
   in_section: "Šiame skyriuje"
   all_in_section: "Visi šio skyriaus puslapiai"

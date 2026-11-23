@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Docs;
 
+use App\Docs\Search\DocsSearchIndexer;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,6 +19,7 @@ class DocsSyncCommand extends Command
   public function __construct(
     private readonly DocsSync $sync,
     private readonly LockFactory $locks,
+    private readonly DocsSearchIndexer $search_index,
   ) {
     parent::__construct();
   }
@@ -44,11 +46,17 @@ class DocsSyncCommand extends Command
     $lock->acquire(true);
     try {
       $result = $this->sync->import(DocsSync::readDirectory($dir), DocsSync::readMedia($dir));
+      $output->writeln(\sprintf('Docs: %d created, %d updated, %d deleted.', $result['created'], $result['updated'], $result['deleted']));
+      try {
+        $output->writeln(\sprintf('Docs search: %d entries indexed.', $this->search_index->rebuild()));
+      } catch (\Throwable $e) {
+        // The pages are imported; an Elasticsearch problem must not fail the deploy. Run the sync again once it is back.
+        $output->writeln('<error>Docs search not updated: '.$e->getMessage().'</error>');
+      }
     } finally {
       $lock->release();
     }
 
-    $output->writeln(\sprintf('Docs: %d created, %d updated, %d deleted.', $result['created'], $result['updated'], $result['deleted']));
     foreach ($result['skipped'] as $problem) {
       $output->writeln('Skipped '.$problem);
     }

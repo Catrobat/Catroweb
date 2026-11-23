@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: 'Biko zigara aro ọ bụla gbasara Usoro ojiji ndị a na %email-webmaster%.'
   version: 'Ụdị 1.3, 4 Maachị 2014'
 search:
-  search: 'Chọọ ọrụ, ndị ọrụ & studio'
+  noDocs: "Ahụghị peeji akwụkwọ ntụziaka ọ bụla"
+  search: "Chọọ ọrụ, ndị ọrụ, studio & akwụkwọ ntụziaka"
   inMediaLib: "Chọọ n'ọbá mgbasa ozi"
   inMediaCategory: "Chọọ n'ụdị mgbasa ozi"
   results: Search Results
@@ -1033,6 +1034,9 @@ inactiveAccount:
   button: 'Banye iji debe akaụntụ m'
 
 docs:
+  search_guides: "Ntụziaka"
+  search_bricks: "Brik"
+  search_formula: "Akụkụ usoro"
   title: "Akwụkwọ ntuziaka"
   in_section: "N'akụkụ a"
   all_in_section: "Ibe niile n'akụkụ a"

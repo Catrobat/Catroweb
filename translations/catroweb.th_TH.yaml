@@ -406,7 +406,8 @@ termsOfUse:
   bottom2: 'โปรดส่งอีเมล์คำแนะนำเกี่ยวกับเงื่อนไขการใช้งานมาที่ %email-webmaster%.'
   version: เวอร์ชัน 1.3 ณ วันที่ 4 มีนาคม 2014
 search:
-  search: "ค้นหาโปรเจกต์ ผู้ใช้ และสตูดิโอ"
+  noDocs: "ไม่พบหน้าเอกสาร"
+  search: "ค้นหาโปรเจกต์ ผู้ใช้ สตูดิโอ และเอกสาร"
   inMediaLib: ค้นหาในไลบรารีสื่อ
   inMediaCategory: "ค้นหาในหมวดหมู่สื่อ"
   results: ผลการค้นหา
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'เข้าสู่ระบบเพื่อเก็บบัญชีไว้'
 
 docs:
+  search_guides: "คู่มือ"
+  search_bricks: "บล็อก"
+  search_formula: "องค์ประกอบสูตร"
   title: "เอกสาร"
   in_section: "ในส่วนนี้"
   all_in_section: "ทุกหน้าในส่วนนี้"

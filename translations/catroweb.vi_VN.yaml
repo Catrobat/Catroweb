@@ -406,7 +406,8 @@ termsOfUse:
   bottom2: 'Vui lòng gửi bất cứ gợi ý nào về điều khoản sự dụng tới %email-webmaster%.'
   version: Phiên bản 1.3, Ngày 4 Tháng 3 Năm 2014
 search:
-  search: 'Tìm dự án, người dùng & studio'
+  noDocs: "Không tìm thấy trang tài liệu nào"
+  search: "Tìm dự án, người dùng, studio & tài liệu"
   inMediaLib: 'Tìm trong thư viện đa phương tiện'
   inMediaCategory: 'Tìm trong danh mục đa phương tiện'
   results: Kết quả tìm kiếm
@@ -1056,6 +1057,9 @@ inactiveAccount:
   button: 'Đăng nhập để giữ tài khoản'
 
 docs:
+  search_guides: "Hướng dẫn"
+  search_bricks: "Khối lệnh"
+  search_formula: "Thành phần công thức"
   title: "Tài liệu"
   in_section: "Trong phần này"
   all_in_section: "Tất cả trang trong phần này"

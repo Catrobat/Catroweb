@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Por favor envíenos por correo electrónico cualquier sugerencia con respecto a los Términos de uso a %email-webmaster%.'
   version: Versión 1.3, 04 de marzo de 2014
 search:
-  search: 'Buscar proyectos, usuarios y estudios'
+  noDocs: "No se encontraron páginas de documentación"
+  search: "Buscar proyectos, usuarios, estudios y documentación"
   inMediaLib: Buscar en la biblioteca de medios
   inMediaCategory: 'Buscar en la categoría multimedia'
   results: Resultados de la búsqueda
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Iniciar sesión para conservar mi cuenta'
 
 docs:
+  search_guides: "Guías"
+  search_bricks: "Bloques"
+  search_formula: "Elementos de fórmula"
   title: "Documentación"
   in_section: "En esta sección"
   all_in_section: "Todas las páginas de esta sección"

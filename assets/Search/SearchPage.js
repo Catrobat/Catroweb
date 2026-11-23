@@ -31,6 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
       container.dataset.transScratchConvertingSnackbar ||
       'Converting “%name%” — this can take a few seconds',
     error: container.dataset.transError || 'Oops, something did not work. Please try again!',
+    docs: container.dataset.transDocs || 'Documentation',
+    noDocs: container.dataset.transNoDocs || 'No documentation pages found',
+    docsGroups: {
+      guides: container.dataset.transDocsGuides || 'Guides',
+      bricks: container.dataset.transDocsBricks || 'Bricks',
+      formula: container.dataset.transDocsFormula || 'Formula elements',
+    },
+  }
+  const docs = {
+    locale: container.dataset.locale || '',
+    first: container.dataset.docsFirst === 'true',
   }
 
   const searchInput = document.querySelector('#top-app-bar__search-input')
@@ -41,10 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
   showTopBarSearch()
   controlTopBarSearchClearButton()
 
-  renderPage(container, query, theme, baseUrl, trans)
+  renderPage(container, query, theme, baseUrl, trans, docs)
 })
 
-function renderPage(container, query, theme, baseUrl, trans) {
+function renderPage(container, query, theme, baseUrl, trans, docs) {
   container.innerHTML = ''
 
   const titleDiv = document.createElement('div')
@@ -79,6 +90,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
   )
   const usersSection = createSection('search-users', 'users', trans.users, trans.showMore)
   const studiosSection = createSection('search-studios', 'studios', trans.studios, trans.showMore)
+  const docsSection = createSection('search-docs', 'docs', trans.docs, trans.showMore)
 
   // Only shown when there are matches: most searches have none, and an empty section is noise.
   const scratchSection = createSection(
@@ -89,19 +101,20 @@ function renderPage(container, query, theme, baseUrl, trans) {
   )
   scratchSection.classList.add('d-none')
 
-  container.appendChild(projectsSection)
-  container.appendChild(usersSection)
-  container.appendChild(studiosSection)
-  container.appendChild(scratchSection)
-
   // Fixed priority, not relevance: scores from different indexes (and Scratch, which has none) don't compare.
+  // Docs come first when the search was started on a docs page, else after studios.
   // Scratch is last because it can arrive after the rest: showing it then must not push results the user is about to tap.
-  const sections = [
+  const ours = [
     { section: projectsSection, empty: trans.noProjects },
     { section: usersSection, empty: trans.noUsers },
     { section: studiosSection, empty: trans.noStudios },
+  ]
+  const docsEntry = { section: docsSection, empty: trans.noDocs }
+  const sections = [
+    ...(docs.first ? [docsEntry, ...ours] : [...ours, docsEntry]),
     { section: scratchSection, empty: null },
   ]
+  for (const { section } of sections) container.appendChild(section)
 
   if (!query) {
     arrangeSections(container, sections, [], query, trans)
@@ -117,7 +130,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
     })
 
   // Scratch is searched live and takes ~200 ms when not cached, so it gets its own request and doesn't hold up ours.
-  let found = null // [projects, users, studios] once our results are in
+  let found = null // per section except Scratch (in the order of sections), once our results are in
   let scratchFound = false
   let failed = false // our search failed: say so instead of "no results"
   let scratchCount = 0
@@ -132,12 +145,26 @@ function renderPage(container, query, theme, baseUrl, trans) {
     status.textContent = parts.join(' ')
   }
 
-  search('all')
-    .then((data) => {
+  // The docs search is optional: when it fails, the rest is still shown.
+  const docsSearch = fetch(
+    `${baseUrl}/api/docs/search?${new URLSearchParams({ q: query.slice(0, 200), locale: docs.locale })}`,
+  )
+    .then((response) => (response.ok ? response.json() : null))
+    .catch(() => null)
+
+  Promise.all([search('all'), docsSearch])
+    .then(([data, docsData]) => {
       renderProjects(projectsSection, data.projects || [], theme)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
-      found = [data.projects, data.users, data.studios].map((items) => (items || []).length > 0)
+      const docsFound = renderDocs(docsSection, docsData, baseUrl, theme, trans)
+      const hits = new Map([
+        [projectsSection, (data.projects || []).length > 0],
+        [usersSection, (data.users || []).length > 0],
+        [studiosSection, (data.studios || []).length > 0],
+        [docsSection, docsFound],
+      ])
+      found = sections.slice(0, -1).map(({ section }) => hits.get(section))
       arrange()
       announce()
 
@@ -147,7 +174,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
     })
     .catch((error) => {
       console.error('Search API error:', error)
-      found = [false, false, false]
+      found = sections.slice(0, -1).map(() => false)
       failed = true
       arrange()
       announce()
@@ -327,6 +354,39 @@ function createSection(id, variant, title, showMoreText) {
   section.appendChild(items)
 
   return section
+}
+
+// Docs results in groups (guides, bricks, formula elements), each a link with its snippet. True when there are any.
+function renderDocs(section, data, baseUrl, theme, trans) {
+  const items = section.querySelector('.search-section__items')
+  items.replaceChildren()
+  let found = false
+  for (const [group, title] of Object.entries(trans.docsGroups)) {
+    const results = data?.[group] || []
+    if (results.length === 0) continue
+    found = true
+    const heading = document.createElement('h3')
+    heading.className = 'search-docs__group'
+    heading.textContent = title
+    const list = document.createElement('ul')
+    list.className = 'search-docs__list'
+    list.id = `search-docs-${group}`
+    for (const result of results) {
+      const link = document.createElement('a')
+      link.className = 'search-docs__link'
+      link.href = `${baseUrl}/${theme}/docs${result.path === 'index' ? '' : `/${result.path}`}`
+      link.textContent = result.title
+      const snippet = document.createElement('p')
+      snippet.className = 'search-docs__snippet'
+      snippet.textContent = result.snippet
+      const item = document.createElement('li')
+      item.lang = result.locale.replace('_', '-')
+      item.append(link, snippet)
+      list.append(item)
+    }
+    items.append(heading, list)
+  }
+  return found
 }
 
 function renderProjects(section, projects, theme) {

@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Ipadala ang anumang mungkahi tungkol sa Mga Tuntunin ng Paggamit na ito sa %email-webmaster%.'
   version: 'Bersyon 1.3, 4 Marso 2014'
 search:
-  search: 'Maghanap ng mga proyekto, user at studio'
+  noDocs: "Walang nahanap na pahina ng dokumentasyon"
+  search: "Maghanap ng mga proyekto, user, studio at dokumentasyon"
   inMediaLib: 'Maghanap sa media library'
   inMediaCategory: 'Maghanap sa kategorya ng media'
   results: 'Mga resulta para sa'
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Mag-log in para panatilihin ang account ko'
 
 docs:
+  search_guides: "Mga gabay"
+  search_bricks: "Mga brick"
+  search_formula: "Mga elemento ng formula"
   title: "Dokumentasyon"
   in_section: "Sa seksyong ito"
   all_in_section: "Lahat ng pahina sa seksyong ito"

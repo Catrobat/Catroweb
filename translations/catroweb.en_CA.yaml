@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 March 2014
 search:
-  search: Search projects, users & studios
+  noDocs: "No documentation pages found"
+  search: "Search projects, users, studios & docs"
   inMediaLib: Search in media library
   inMediaCategory: Search in media category
   results: Search Results
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Log in to keep my account'
 
 docs:
+  search_guides: "Guides"
+  search_bricks: "Bricks"
+  search_formula: "Formula elements"
   title: "Documentation"
   in_section: "In this section"
   all_in_section: "All pages in this section"

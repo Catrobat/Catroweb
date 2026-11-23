@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'এই ব্যবহারের শর্তাবলী নিয়ে তোমার কোনো পরামর্শ থাকলে %email-webmaster%-এ মেইল করো।'
   version: সংস্করণ ১.৩, ৪ মার্চ ২০১৪
 search:
-  search: প্রকল্প, ব্যবহারকারী ও স্টুডিও খোঁজো
+  noDocs: "কোনো ডকুমেন্টেশন পৃষ্ঠা পাওয়া যায়নি"
+  search: "প্রকল্প, ব্যবহারকারী, স্টুডিও ও ডকুমেন্টেশন খোঁজো"
   inMediaLib: মিডিয়া লাইব্রেরিতে খোঁজো
   inMediaCategory: মিডিয়া বিভাগে খোঁজো
   results: 'যার ফলাফল:'
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'অ্যাকাউন্ট রাখতে লগ ইন করো'
 
 docs:
+  search_guides: "নির্দেশিকা"
+  search_bricks: "ব্রিক"
+  search_formula: "সূত্রের উপাদান"
   title: "ডকুমেন্টেশন"
   in_section: "এই বিভাগে"
   all_in_section: "এই বিভাগের সব পৃষ্ঠা"

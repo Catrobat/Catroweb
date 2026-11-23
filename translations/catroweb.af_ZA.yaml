@@ -406,7 +406,8 @@ termsOfUse:
   bottom2: 'Stuur asseblief enige voorstelle oor hierdie gebruiksvoorwaardes na %email-webmaster%.'
   version: Weergawe 1.3, 4 Maart 2014
 search:
-  search: Soek projekte, gebruikers en studio's
+  noDocs: "Geen dokumentasiebladsye gevind nie"
+  search: "Soek projekte, gebruikers, studio's en dokumentasie"
   inMediaLib: Soek in mediabiblioteek
   inMediaCategory: Soek in mediakategorie
   results: Soekresultate
@@ -1056,6 +1057,9 @@ inactiveAccount:
   button: 'Teken aan om my rekening te hou'
 
 docs:
+  search_guides: "Gidse"
+  search_bricks: "Blokke"
+  search_formula: "Formule-elemente"
   title: "Dokumentasie"
   in_section: "In hierdie afdeling"
   all_in_section: "Alle bladsye in hierdie afdeling"

@@ -52,7 +52,7 @@ final class DocsSyncTest extends KernelTestCase
 
     $result = $this->sync->import($files);
 
-    $this->assertSame(['created' => 8, 'updated' => 0, 'deleted' => 0, 'skipped' => []], $result);
+    $this->assertSame(['created' => 9, 'updated' => 0, 'deleted' => 0, 'skipped' => []], $result);
     $jump = $this->page('tutorials/jump', 'en');
     $this->assertSame('Make your cat jump', $jump->getTitle());
     $this->assertSame(['embroidery'], $jump->getFlavors());
@@ -91,7 +91,7 @@ final class DocsSyncTest extends KernelTestCase
       $this->sync->import(['README.md' => 'empty download']);
       $this->fail('expected the import to be refused');
     } catch (\RuntimeException) {
-      $this->assertSame(8, $this->pages->count([]));
+      $this->assertSame(9, $this->pages->count([]));
     }
   }
 

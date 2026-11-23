@@ -8,6 +8,8 @@ use App\Api\Exceptions\ApiErrorResponse;
 use App\Docs\DocsCatalog;
 use App\Docs\DocsLibrary;
 use App\Docs\DocsSync;
+use App\Docs\Search\DocsSearch;
+use App\Docs\Search\DocsSearchIndexer;
 use OpenAPI\Server\Api\DocsApiInterface;
 use OpenAPI\Server\Model\CodeViewBrick;
 use OpenAPI\Server\Model\DocsBrickResponse;
@@ -15,16 +17,23 @@ use OpenAPI\Server\Model\DocsCatalogResponse;
 use OpenAPI\Server\Model\DocsFormulaCatalog;
 use OpenAPI\Server\Model\DocsNavigationResponse;
 use OpenAPI\Server\Model\DocsPageResponse;
+use OpenAPI\Server\Model\DocsSearchResponse;
+use OpenAPI\Server\Model\DocsSearchResult;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class DocsApi implements DocsApiInterface
 {
+  use RateLimitTrait;
+
   public function __construct(
     private readonly DocsLibrary $library,
     private readonly DocsSync $sync,
     private readonly RequestStack $requests,
     private readonly DocsCatalog $catalog,
+    private readonly DocsSearch $search,
+    private readonly RateLimiterFactory $docsSearchBurstLimiter,
   ) {
   }
 
@@ -122,6 +131,40 @@ class DocsApi implements DocsApiInterface
       'translation_state' => $prose?->getTranslationState(),
       'reviewed' => $prose?->isReviewed() ?? false,
       'source_url' => $this->sync->brickEditUrl($type, null !== $this->library->brickProse($type, 'en')),
+    ]);
+  }
+
+  /** The search page asks this next to every /api/search call: docs_search_burst, per client IP. */
+  #[\Override]
+  public function docsSearchGet(string $q, ?string $locale, int $limit, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $rate_limit = $this->checkIpRateLimit($this->requests->getCurrentRequest()?->getClientIp() ?? 'unknown', $this->docsSearchBurstLimiter);
+    if (null === $rate_limit) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+    $length = mb_strlen(trim($q));
+    if (0 === $length || $length > DocsSearch::MAX_QUERY_LENGTH) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return ApiErrorResponse::createModel($responseCode, 'invalid_query', 'q must have 1 to '.DocsSearch::MAX_QUERY_LENGTH.' characters.');
+    }
+    $responseCode = Response::HTTP_OK;
+    $responseHeaders['Cache-Control'] = self::cacheControl($locale);
+    $locale = $this->locale($locale);
+    $result = $this->search->search($q, $locale, $limit);
+    $group = static fn (string $type): array => array_map(
+      static fn (array $hit): DocsSearchResult => new DocsSearchResult($hit),
+      $result['groups'][$type] ?? [],
+    );
+
+    return new DocsSearchResponse([
+      'locale' => $locale,
+      'semantic' => $result['semantic'],
+      'guides' => $group(DocsSearchIndexer::GUIDE),
+      'bricks' => $group(DocsSearchIndexer::BRICK),
+      'formula' => $group(DocsSearchIndexer::FORMULA),
     ]);
   }
 }

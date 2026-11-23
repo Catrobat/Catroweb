@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: 'Silahkan email saran-saran mengenai syarat penggunaan ke %email-webmaster%.'
   version: Versi 1.3, 4 Maret 2014
 search:
-  search: 'Cari proyek, pengguna & studio'
+  noDocs: "Tidak ada halaman dokumentasi yang ditemukan"
+  search: "Cari proyek, pengguna, studio & dokumentasi"
   inMediaLib: Cari di perpustakaan media
   inMediaCategory: 'Cari di kategori media'
   results: Hasil pencarian
@@ -1035,6 +1036,9 @@ inactiveAccount:
   button: 'Masuk untuk menyimpan akunku'
 
 docs:
+  search_guides: "Panduan"
+  search_bricks: "Balok"
+  search_formula: "Elemen rumus"
   title: "Dokumentasi"
   in_section: "Di bagian ini"
   all_in_section: "Semua halaman di bagian ini"

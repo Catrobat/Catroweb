@@ -406,6 +406,7 @@ termsOfUse:
   bottom2: "Осы Пайдалану шарттарына қатысты кез келген ұсынысыңды %email-webmaster% мекенжайына жібер."
   version: 1.3 нұсқасы, 4 наурыз 2014 ж
 search:
+  noDocs: "Құжаттама беттері табылмады"
   search: Іздеу
   inMediaLib: Медиаханадан іздеу
   inMediaCategory: "Медиа санатынан іздеу"
@@ -1056,6 +1057,9 @@ inactiveAccount:
   button: 'Аккаунтымды сақтау үшін кіру'
 
 docs:
+  search_guides: "Нұсқаулықтар"
+  search_bricks: "Блоктар"
+  search_formula: "Формула элементтері"
   title: "Құжаттама"
   in_section: "Осы бөлімде"
   all_in_section: "Осы бөлімнің барлық беттері"

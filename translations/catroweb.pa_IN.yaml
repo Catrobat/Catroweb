@@ -386,7 +386,8 @@ termsOfUse:
   bottom2: 'ਇਹਨਾਂ ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ ਬਾਰੇ ਕੋਈ ਵੀ ਸੁਝਾਅ ਕਿਰਪਾ ਕਰਕੇ %email-webmaster% ਨੂੰ ਈ-ਮੇਲ ਕਰ।'
   version: ਸੰਸਕਰਣ 1.3, 4 ਮਾਰਚ 2014
 search:
-  search: 'ਪ੍ਰੋਜੈਕਟ, ਵਰਤੋਂਕਾਰ ਅਤੇ ਸਟੂਡੀਓ ਖੋਜ'
+  noDocs: "ਦਸਤਾਵੇਜ਼ਾਂ ਦਾ ਕੋਈ ਪੰਨਾ ਨਹੀਂ ਮਿਲਿਆ"
+  search: "ਪ੍ਰੋਜੈਕਟ, ਵਰਤੋਂਕਾਰ, ਸਟੂਡੀਓ ਅਤੇ ਦਸਤਾਵੇਜ਼ ਖੋਜ"
   inMediaLib: 'ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚ ਖੋਜ'
   inMediaCategory: 'ਮੀਡੀਆ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਖੋਜ'
   results: ਖੋਜ ਨਤੀਜੇ
@@ -1034,6 +1035,9 @@ inactiveAccount:
   button: 'ਮੇਰਾ ਖਾਤਾ ਰੱਖਣ ਲਈ ਲਾਗਿਨ ਕਰ'
 
 docs:
+  search_guides: "ਗਾਈਡਾਂ"
+  search_bricks: "ਬ੍ਰਿਕਸ"
+  search_formula: "ਫਾਰਮੂਲੇ ਦੇ ਤੱਤ"
   title: "ਦਸਤਾਵੇਜ਼"
   in_section: "ਇਸ ਭਾਗ ਵਿੱਚ"
   all_in_section: "ਇਸ ਭਾਗ ਦੇ ਸਾਰੇ ਪੰਨੇ"

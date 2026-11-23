@@ -81,7 +81,7 @@ interface DocsApiInterface
    * A brick of the reference
    *
    * @param string      $type            Brick type as written in code.xml (required)
-   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
+   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
    * @param int         &$responseCode   The HTTP Response Code
    * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
@@ -97,12 +97,31 @@ interface DocsApiInterface
    *
    * Every brick and formula element, as the app lists them
    *
-   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
+   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
    * @param int         &$responseCode   The HTTP Response Code
    * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function docsReferenceCatalogGet(
     ?string $locale,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation docsSearchGet.
+   *
+   * Search the user docs
+   *
+   * @param string      $q               Words or a question, e.g. \&quot;make my cat jump\&quot;; 1 to 200 characters (required)
+   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
+   * @param int         $limit           Results per group (optional, default to 10)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function docsSearchGet(
+    string $q,
+    ?string $locale,
+    int $limit,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;

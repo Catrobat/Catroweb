@@ -430,7 +430,8 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 
 search:
-  search: Search projects, users & studios
+  noDocs: "No documentation pages found"
+  search: "Search projects, users, studios & docs"
   inMediaLib: Search in media library
   inMediaCategory: Search in media category
   results: Results for
@@ -1139,6 +1140,9 @@ Reports: Reports
 members: members
 
 docs:
+  search_guides: "Guides"
+  search_bricks: "Bricks"
+  search_formula: "Formula elements"
   title: "Documentation"
   in_section: "In this section"
   all_in_section: "All pages in this section"

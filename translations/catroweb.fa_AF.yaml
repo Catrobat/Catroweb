@@ -408,7 +408,8 @@ termsOfUse:
   bottom2: 'لطفا پیشنهاداتت رو در مورد ضوابط استفاده به %email-webmaster% ایمیل کن.'
   version: نسخهٔ ۱.۳، ۴ مارس ۲۰۱۴
 search:
-  search: 'جستجوی پروژه‌ها، کاربران و استودیوها'
+  noDocs: "هیچ صفحه‌ای از مستندات پیدا نشد"
+  search: "جستجوی پروژه‌ها، کاربران، استودیوها و مستندات"
   inMediaLib: جستجو در کتابخانه رسانه
   inMediaCategory: 'جستجو در دسته رسانه'
   results: نتایج جستجو
@@ -1058,6 +1059,9 @@ inactiveAccount:
   button: 'ورود برای نگه داشتن حسابم'
 
 docs:
+  search_guides: "راهنماها"
+  search_bricks: "بلوک‌ها"
+  search_formula: "اجزای فرمول"
   title: "مستندات"
   in_section: "در این بخش"
   all_in_section: "همه صفحه‌های این بخش"

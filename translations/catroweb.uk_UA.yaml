@@ -406,6 +406,7 @@ termsOfUse:
   bottom2: 'Надсилай будь-які пропозиції щодо цих Умов використання на %email-webmaster%.'
   version: Версія 1.3, 4 березня 2014
 search:
+  noDocs: "Сторінок документації не знайдено"
   search: Пошук
   inMediaLib: Пошук у медіатеці
   inMediaCategory: "Пошук у медіакатегорії"
@@ -1056,6 +1057,9 @@ inactiveAccount:
   button: 'Увійти, щоб зберегти обліковий запис'
 
 docs:
+  search_guides: "Посібники"
+  search_bricks: "Блоки"
+  search_formula: "Елементи формул"
   title: "Документація"
   in_section: "У цьому розділі"
   all_in_section: "Усі сторінки цього розділу"

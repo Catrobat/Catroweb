@@ -8,6 +8,7 @@ use App\Api\DocsApi;
 use App\Docs\DocsCatalog;
 use App\Docs\DocsLibrary;
 use App\Docs\DocsSync;
+use App\Docs\Search\DocsSearch;
 use App\Project\CodeView\CodeExportRunner;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeViewExportStore;
@@ -18,6 +19,8 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * The brick reference from tests/TestData/CodeExport/catalog.json, a subset of a real catalog.json, and from the real
@@ -113,7 +116,7 @@ final class DocsCatalogTest extends TestCase
     $this->assertNull($catalog->formula('SIN', 'en'));
     $this->assertNull($catalog->typeOfClass('WhenStartedBrick'));
 
-    $api = new DocsApi($this->createStub(DocsLibrary::class), $this->createStub(DocsSync::class), new RequestStack(), $catalog);
+    $api = new DocsApi($this->createStub(DocsLibrary::class), $this->createStub(DocsSync::class), new RequestStack(), $catalog, $this->createStub(DocsSearch::class), new RateLimiterFactory(['id' => 'docs_search', 'policy' => 'no_limit'], new InMemoryStorage()));
     $code = 0;
     $headers = [];
     $api->docsReferenceBricksTypeGet('SetXBrick', 'en', $code, $headers);

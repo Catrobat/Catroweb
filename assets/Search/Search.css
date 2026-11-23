@@ -794,3 +794,33 @@ button.search-card {
 .search-card__meta .material-icons {
   font-size: 0.85rem;
 }
+
+/* Docs results (renderDocs in SearchPage.js): links with a snippet, grouped */
+.search-section--docs {
+  background: light-dark(
+    linear-gradient(135deg, #f4f8fb 0%, #eaf2f8 100%),
+    linear-gradient(135deg, #14222e 0%, #182834 100%)
+  );
+  border-color: light-dark(#dce8f1, #283a48);
+}
+.search-docs__group {
+  padding: 0 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.search-docs__list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0 1.25rem;
+}
+.search-docs__list li {
+  padding-block: 0.4rem;
+}
+.search-docs__link {
+  color: var(--primary);
+  font-weight: 600;
+}
+.search-docs__snippet {
+  margin: 0.15rem 0 0;
+  color: light-dark(#5a6374, #a0aec0);
+}

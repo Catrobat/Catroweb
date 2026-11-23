@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: "Jọ̀wọ́ fi àbá èyíkéyìí nípa Àwọn Òfin Lílò wọ̀nyí ránṣẹ́ sí %email-webmaster%."
   version: "Ẹ̀yà 1.3, 4 Oṣù Kẹta 2014"
 search:
-  search: "Wá àwọn iṣẹ́, olùmúlò & ilé-iṣẹ́ ọnà"
+  noDocs: "A kò rí ojú-ìwé àkọsílẹ̀ kankan"
+  search: "Wá àwọn iṣẹ́, olùmúlò, ilé-iṣẹ́ ọnà & àkọsílẹ̀"
   inMediaLib: "Wá nínú ibi ìkówèésí mídíà"
   inMediaCategory: "Wá nínú ẹ̀ka mídíà"
   results: "Àbájáde fún"
@@ -1033,6 +1034,9 @@ inactiveAccount:
   button: 'Wọlé láti pa àkáǹtì mi mọ́'
 
 docs:
+  search_guides: "Àwọn ìtọ́sọ́nà"
+  search_bricks: "Àwọn bíríkì"
+  search_formula: "Àwọn èròjà àgbékalẹ̀"
   title: "Ìwé ìtọ́sọ́nà"
   in_section: "Nínú abala yìí"
   all_in_section: "Gbogbo ojú-ìwé nínú abala yìí"

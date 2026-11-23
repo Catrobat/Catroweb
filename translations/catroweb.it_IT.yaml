@@ -405,7 +405,8 @@ termsOfUse:
   bottom2: 'Sono graditi eventuali suggerimenti in merito a questi Termini d''Uso inviando una mail a %email-webmaster%.'
   version: Versione 1.3, 4 marzo 2014
 search:
-  search: 'Cerca progetti, utenti e studi'
+  noDocs: "Nessuna pagina della documentazione trovata"
+  search: "Cerca progetti, utenti, studi e documentazione"
   inMediaLib: Cerca nella libreria multimediale
   inMediaCategory: 'Cerca nella categoria multimediale'
   results: Risultati della ricerca
@@ -1055,6 +1056,9 @@ inactiveAccount:
   button: 'Accedi per tenere il mio account'
 
 docs:
+  search_guides: "Guide"
+  search_bricks: "Mattoncini"
+  search_formula: "Elementi della formula"
   title: "Documentazione"
   in_section: "In questa sezione"
   all_in_section: "Tutte le pagine di questa sezione"

@@ -14,6 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'upload',
         'login',
         'cleanup',
+        'docs_search',
       ],
       'handlers' => [
         'main' => [

@@ -388,7 +388,8 @@ termsOfUse:
   bottom2: '请发邮件到 %email-webmaster%反馈关于本使用条款的任何意见。'
   version: 版本 1.3，2014 年 3 月 4 日
 search:
-  search: "搜索项目、用户和工作室"
+  noDocs: "未找到文档页面"
+  search: "搜索项目、用户、工作室和文档"
   inMediaLib: 在媒体库中搜索
   inMediaCategory: "在媒体分类中搜索"
   results: 搜索结果
@@ -1038,6 +1039,9 @@ inactiveAccount:
   button: '登录以保留我的帐户'
 
 docs:
+  search_guides: "指南"
+  search_bricks: "积木"
+  search_formula: "公式元素"
   title: "文档"
   in_section: "本部分"
   all_in_section: "本部分的所有页面"

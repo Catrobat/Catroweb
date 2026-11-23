@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: "Tafadhali tuma mapendekezo yoyote kuhusu Masharti haya ya Matumizi kwa %email-webmaster%."
   version: Toleo 1.1, 2 Aprili 2013
 search:
-  search: "Tafuta miradi, watumiaji na studio"
+  noDocs: "Hakuna kurasa za nyaraka zilizopatikana"
+  search: "Tafuta miradi, watumiaji, studio na nyaraka"
   inMediaLib: "Tafuta kwenye maktaba ya media"
   inMediaCategory: "Tafuta kwenye kategoria ya media"
   results: Matokeo yaliyotafutwa
@@ -1033,6 +1034,9 @@ inactiveAccount:
   button: 'Ingia ili kuweka akaunti yangu'
 
 docs:
+  search_guides: "Miongozo"
+  search_bricks: "Matofali"
+  search_formula: "Vipengele vya fomula"
   title: "Nyaraka"
   in_section: "Katika sehemu hii"
   all_in_section: "Kurasa zote katika sehemu hii"

@@ -385,7 +385,8 @@ termsOfUse:
   bottom2: "Bu foydalanish shartlari boʻyicha takliflaringni %email-webmaster% manziliga yubor."
   version: "Versiya 1.3, 2014-yil 4-mart"
 search:
-  search: "Loyihalar, foydalanuvchilar va studiyalarni qidirish"
+  noDocs: "Hujjat sahifalari topilmadi"
+  search: "Loyihalar, foydalanuvchilar, studiyalar va hujjatlarni qidirish"
   inMediaLib: "Media kutubxonasidan qidirish"
   inMediaCategory: "Media toifasidan qidirish"
   results: "Qidiruv natijalari"
@@ -1033,6 +1034,9 @@ inactiveAccount:
   button: 'Hisobimni saqlash uchun kirish'
 
 docs:
+  search_guides: "Qoʻllanmalar"
+  search_bricks: "Bloklar"
+  search_formula: "Formula elementlari"
   title: "Hujjatlar"
   in_section: "Ushbu boʻlimda"
   all_in_section: "Ushbu boʻlimning barcha sahifalari"

@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Docs\Search\DocsEmbedder;
 use App\Project\CodeView\CodeViewTranslation;
 use App\Project\Scratch\Converter\ScratchFetcher;
 use App\Project\Scratch\ScratchSearch;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
 use App\System\Testing\DataFixtures\UserDataFixtures;
+use App\System\Testing\FakeDocsEmbedder;
 use App\System\Testing\FakeLibreTranslateApi;
 use App\System\Testing\FakeScratchFetcher;
 use App\System\Testing\FakeScratchSearch;
@@ -48,6 +50,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   // Overwrite services to ensure testability
   $services->set(LibreTranslateApi::class, FakeLibreTranslateApi::class);
+  // Deterministic vectors instead of the model, so the tests cover the hybrid docs search.
+  $services->set(DocsEmbedder::class, FakeDocsEmbedder::class);
   // A job and its status poll run in different kernels, even with the synchronous test transport.
   $services->set(CodeViewTranslation::class)->arg('$cache', service('cache.code_view_translation_test'));
   // Never ask the real Scratch API. Imports come from offline fixtures; search has no cache, so one
