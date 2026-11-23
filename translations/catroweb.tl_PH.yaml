@@ -1066,3 +1066,12 @@ docs:
   video: "I-play ang video (naglo-load mula sa YouTube)"
   comments: "Mga komento at tip"
   comments_empty: "Wala pang komento. May hindi ba malinaw, o may tip ka? Isulat mo rito."
+  reference:
+    title: "Mga brick at formula"
+    formula: "Mga elemento ng formula"
+    functions: "Mga function"
+    sensors: "Mga sensor"
+    operators: "Mga operator"
+    examples: "Mga halimbawang proyekto"
+    no_prose: "Wala pang nagpaliwanag sa brick na ito. Ikaw ang puwedeng sumulat ng unang paliwanag."
+    empty: "Hindi available ngayon ang sanggunian ng mga brick."

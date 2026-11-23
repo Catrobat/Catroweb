@@ -14,7 +14,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 /**
  * Imports the user docs (`user-docs/` in this repo, the same layout the Catrobat/docs repo had) into doc_page: renders
  * new and changed files, deletes pages whose file is gone, all in one transaction. A file is re-rendered only when it
- * changed, or when it embeds a project (name and picture may change). Media are served straight from the folder.
+ * changed, or when it embeds a project (name and picture may change), a brick or a formula element (a new catalog may
+ * show it differently). Media are served straight from the folder.
  */
 class DocsSync
 {
@@ -41,8 +42,9 @@ class DocsSync
     private readonly ScreenshotRepository $screenshots,
     #[Autowire('%catrobat.user_docs.dir%')]
     public readonly string $docs_dir,
+    DocsCatalog $catalog,
   ) {
-    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...));
+    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...), $catalog);
   }
 
   /** "Improve this page": the English file in GitHub's editor (translations are generated from it). */
@@ -51,6 +53,17 @@ class DocsSync
     $file = DocPage::GUIDE === $page->getKind() ? preg_replace('#^[^/]+/#', 'en/', $page->getSourceFile(), 1) : $page->getSourceFile();
 
     return self::GITHUB.'edit/main/user-docs/'.$file;
+  }
+
+  /**
+   * "Improve this page" of a brick: its English explanation in GitHub's editor, or a new file there when it has none
+   * (a brick page needs no file to exist).
+   */
+  public function brickEditUrl(string $type, bool $exists): string
+  {
+    return $exists
+      ? self::GITHUB.'edit/main/user-docs/reference/bricks/'.rawurlencode($type).'.md'
+      : self::GITHUB.'new/main/user-docs/reference/bricks?filename='.rawurlencode($type).'.md';
   }
 
   /**
@@ -136,7 +149,7 @@ class DocsSync
         $row = $existing[$key] ?? null;
         unset($existing[$key]);
         $state = 'en' === $entry['locale'] ? DocPage::STATE_SOURCE : null; // translations: known after the front matter is read
-        if (null !== $row && $row['content_hash'] === $entry['content_hash'] && !str_contains($entry['content'], '::project{')) {
+        if (null !== $row && $row['content_hash'] === $entry['content_hash'] && 1 !== preg_match('/^::(project|brick|formula)\{/m', $entry['content'])) {
           $state ??= self::translationState($english_hashes[$entry['kind'].'|'.$entry['path']] ?? null, $row['source_hash'], $row['reviewed']);
           if ($state !== $row['translation_state']) {
             $this->pages->find($row['id'])?->setTranslationState($state);

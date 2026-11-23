@@ -1044,3 +1044,12 @@ docs:
   video: "Ṣe fídíò (ó ń gbé wọlé láti YouTube)"
   comments: "Àwọn àsọyé àti ìmọ̀ràn"
   comments_empty: "Kò sí àsọyé kankan síbẹ̀. Ṣé ohun kan kò yé ọ, tàbí o ní ìmọ̀ràn kan? Kọ ọ́ síbí."
+  reference:
+    title: "Àwọn búlọ́ọ̀kù àti àgbékalẹ̀"
+    formula: "Àwọn ẹ̀yà àgbékalẹ̀"
+    functions: "Àwọn iṣẹ́"
+    sensors: "Àwọn sẹ́ńsọ̀"
+    operators: "Àwọn olùṣiṣẹ́"
+    examples: "Àwọn iṣẹ́ àpẹẹrẹ"
+    no_prose: "Kò sí ẹni tó ti ṣàlàyé búlọ́ọ̀kù yìí síbẹ̀. O lè kọ àlàyé àkọ́kọ́."
+    empty: "Ìtọ́kasí búlọ́ọ̀kù kò sí nísinsìnyí."

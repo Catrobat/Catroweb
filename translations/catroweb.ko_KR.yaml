@@ -1046,3 +1046,12 @@ docs:
   video: "동영상 재생 (YouTube에서 불러옴)"
   comments: "댓글과 팁"
   comments_empty: "아직 댓글이 없어요. 이해하기 어려운 부분이 있거나 팁이 있나요? 여기에 적어 주세요."
+  reference:
+    title: "블록과 수식"
+    formula: "수식 요소"
+    functions: "함수"
+    sensors: "센서"
+    operators: "연산자"
+    examples: "예제 프로젝트"
+    no_prose: "아직 아무도 이 블록을 설명하지 않았어요. 첫 번째 설명을 써 보세요."
+    empty: "지금은 블록 참고서를 사용할 수 없습니다."

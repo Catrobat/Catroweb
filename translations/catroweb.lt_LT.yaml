@@ -1066,3 +1066,12 @@ docs:
   video: "Paleisti vaizdo įrašą (įkeliamas iš YouTube)"
   comments: "Komentarai ir patarimai"
   comments_empty: "Komentarų dar nėra. Kažkas neaišku, ar turi patarimą? Parašyk jį čia."
+  reference:
+    title: "Blokai ir formulės"
+    formula: "Formulių elementai"
+    functions: "Funkcijos"
+    sensors: "Jutikliai"
+    operators: "Operatoriai"
+    examples: "Projektų pavyzdžiai"
+    no_prose: "Šio bloko dar niekas nepaaiškino. Gali parašyti pirmą paaiškinimą."
+    empty: "Blokų žinynas šiuo metu nepasiekiamas."

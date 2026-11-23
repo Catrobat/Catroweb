@@ -1066,3 +1066,12 @@ docs:
   video: "Videó lejátszása (a YouTube-ról töltődik be)"
   comments: "Hozzászólások és tippek"
   comments_empty: "Még nincs hozzászólás. Valami nem világos, vagy van egy tipped? Írd ide."
+  reference:
+    title: "Blokkok és képletek"
+    formula: "Képletelemek"
+    functions: "Függvények"
+    sensors: "Érzékelők"
+    operators: "Műveleti jelek"
+    examples: "Példaprojektek"
+    no_prose: "Ezt a blokkot még senki sem magyarázta el. Megírhatod az első magyarázatot."
+    empty: "A blokkleírás most nem érhető el."

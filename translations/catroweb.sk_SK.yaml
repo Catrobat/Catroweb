@@ -1067,3 +1067,12 @@ docs:
   video: "Prehrať video (načíta sa z YouTube)"
   comments: "Komentáre a tipy"
   comments_empty: "Zatiaľ žiadne komentáre. Je niečo nejasné, alebo máš tip? Napíš ho sem."
+  reference:
+    title: "Bloky a vzorce"
+    formula: "Prvky vzorcov"
+    functions: "Funkcie"
+    sensors: "Senzory"
+    operators: "Operátory"
+    examples: "Ukážkové projekty"
+    no_prose: "Tento blok zatiaľ nikto nevysvetlil. Môžeš napísať prvé vysvetlenie."
+    empty: "Prehľad blokov teraz nie je dostupný."

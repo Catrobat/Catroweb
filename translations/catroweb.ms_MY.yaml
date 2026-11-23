@@ -1066,3 +1066,12 @@ docs:
   video: "Main video (dimuatkan dari YouTube)"
   comments: "Komen dan petua"
   comments_empty: "Belum ada komen. Ada yang kurang jelas, atau ada petua? Tulis di sini."
+  reference:
+    title: "Blok dan formula"
+    formula: "Elemen formula"
+    functions: "Fungsi"
+    sensors: "Penderia"
+    operators: "Operator"
+    examples: "Contoh projek"
+    no_prose: "Belum ada sesiapa yang menerangkan blok ini. Anda boleh menulis penerangan pertama."
+    empty: "Rujukan blok tidak tersedia sekarang."

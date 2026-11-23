@@ -19,14 +19,14 @@ class DocPageRepository extends ServiceEntityRepository
   }
 
   /**
-   * The guide in the first of the locales that has it.
+   * The guide (or with $kind a brick's explanation) in the first of the locales that has it.
    *
    * @param list<string> $locales in order of preference
    */
-  public function findGuide(string $path, array $locales): ?DocPage
+  public function findGuide(string $path, array $locales, string $kind = DocPage::GUIDE): ?DocPage
   {
     /** @var list<DocPage> $pages */
-    $pages = $this->findBy(['kind' => DocPage::GUIDE, 'path' => $path, 'locale' => $locales]);
+    $pages = $this->findBy(['kind' => $kind, 'path' => $path, 'locale' => $locales]);
     usort($pages, static fn (DocPage $a, DocPage $b): int => array_search($a->getLocale(), $locales, true) <=> array_search($b->getLocale(), $locales, true));
 
     return $pages[0] ?? null;

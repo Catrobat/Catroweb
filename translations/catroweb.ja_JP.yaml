@@ -1053,3 +1053,12 @@ docs:
   video: "動画を再生（YouTube から読み込みます）"
   comments: "コメントとヒント"
   comments_empty: "まだコメントはありません。わかりにくいところや、ヒントはありますか？ここに書いてください。"
+  reference:
+    title: "ブロックと数式"
+    formula: "数式の要素"
+    functions: "関数"
+    sensors: "センサー"
+    operators: "演算子"
+    examples: "サンプルプロジェクト"
+    no_prose: "このブロックの説明はまだありません。最初の説明を書いてみよう。"
+    empty: "ブロックリファレンスは現在利用できません。"

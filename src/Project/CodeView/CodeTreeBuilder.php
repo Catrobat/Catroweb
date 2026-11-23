@@ -90,12 +90,13 @@ class CodeTreeBuilder
 
   /**
    * A script or brick: its parts, the bricks in it (a script's) and its sections (an if's else and end, a loop's end).
+   * Also the docs' brick reference (DocsCatalog), whose bricks are written like the code export's.
    *
    * @param array<string, mixed> $brick
    *
    * @return array<string, mixed>
    */
-  private function brick(array $brick, string $locale): array
+  public function brick(array $brick, string $locale): array
   {
     $out = [
       'type' => (string) ($brick['type'] ?? ''),
@@ -133,7 +134,8 @@ class CodeTreeBuilder
         $localized['segments'] = array_map(function (array $segment) use ($locale): array {
           $kind = in_array($segment['kind'] ?? null, ['string', 'variable', 'list'], true) ? $segment['kind'] : 'formula';
           $text = (string) ($segment['text'] ?? '');
-          $out = ['kind' => $kind, 'text' => 'formula' === $kind ? $this->localizer->localize($text, $locale) : $text];
+          // A project's own strings hold no markers (XML cannot carry \x01); the catalog's defaults do ("Hello!").
+          $out = ['kind' => $kind, 'text' => $this->localizer->localize($text, $locale)];
           $key = CodeViewTranslationContent::key($segment);
           if (null !== $key) {
             $out['key'] = $key;

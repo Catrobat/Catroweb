@@ -28,14 +28,18 @@ use League\CommonMark\Renderer\NodeRendererInterface;
  * Renders one file of the docs repo: front matter, Markdown (raw HTML escaped, unsafe links dropped), the embeds,
  * heading ids and the table of contents.
  *
- * Links are rewritten so the HTML works on every theme without knowing it: a link to another page becomes a URL
- * relative to the page's own URL (`/{theme}/docs/<path>`), a file in media/ points at share's synced copy
+ * Links are rewritten so the HTML works on every theme without knowing it: a link to another page or to a brick's
+ * explanation becomes a URL relative to the page's own URL (`/{theme}/docs/<path>`,
+ * `/{theme}/docs/reference/bricks/<type>`), a file in media/ points at share's synced copy
  * (`/{theme}/docs/_media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
+ *
+ * `::brick` and `::formula` show the brick or formula element as the brick reference does (DocsCatalog), in the
+ * page's language, linked to its reference page.
  */
 final class DocsMarkdown implements NodeRendererInterface
 {
   /** Bump when the HTML for the same Markdown changes: the next sync renders every page again. */
-  public const int VERSION = 1;
+  public const int VERSION = 2;
 
   private readonly MarkdownParser $parser;
 
@@ -46,6 +50,9 @@ final class DocsMarkdown implements NodeRendererInterface
   /** URL of the page being rendered, relative to the theme root (`docs/tutorials/jump`). */
   private string $page_url = 'docs';
 
+  /** Language of the page being rendered, for the bricks it embeds. */
+  private string $locale = 'en';
+
   /**
    * @param string                                                                    $blob_base    GitHub's page of a file at the synced ref, with trailing slash
    * @param \Closure(string): ?array{name: string, author: string, thumbnail: string} $project_card a public project, or null
@@ -53,6 +60,7 @@ final class DocsMarkdown implements NodeRendererInterface
   public function __construct(
     private readonly string $blob_base,
     private readonly \Closure $project_card,
+    private readonly ?DocsCatalog $catalog = null,
   ) {
     $environment = new Environment(['html_input' => 'escape', 'allow_unsafe_links' => false]);
     $environment->addExtension(new CommonMarkCoreExtension());
@@ -89,6 +97,12 @@ final class DocsMarkdown implements NodeRendererInterface
     return 'index' === $path ? 'docs' : 'docs/'.$path;
   }
 
+  /** A brick's reference page relative to the theme root. */
+  public static function brickUrl(string $type): string
+  {
+    return 'docs/reference/bricks/'.$type;
+  }
+
   /**
    * @return array{front_matter: array<array-key, mixed>, html: string, toc: list<array{id: string, title: string, level: int}>}
    */
@@ -97,7 +111,12 @@ final class DocsMarkdown implements NodeRendererInterface
     $input = $this->front_matter->parse($markdown);
     $front_matter = $input->getFrontMatter();
     $location = self::locate($file);
-    $this->page_url = null !== $location && DocPage::GUIDE === $location['kind'] ? self::pageUrl($location['path']) : 'docs';
+    $this->page_url = null === $location ? 'docs' : match ($location['kind']) {
+      DocPage::GUIDE => self::pageUrl($location['path']),
+      DocPage::BRICK => self::brickUrl($location['path']),
+      default => 'docs',
+    };
+    $this->locale = $location['locale'] ?? 'en';
 
     $document = $this->parser->parse($input->getContent());
     $toc = [];
@@ -133,13 +152,39 @@ final class DocsMarkdown implements NodeRendererInterface
     $value = htmlspecialchars($node->value, ENT_QUOTES);
 
     return match ($node->kind) {
-      // M2 replaces these with the brick and formula element as Catroid renders them; until then the name shows.
-      'brick' => '<div class="docs-embed docs-embed--brick" data-brick-type="'.$value.'"><span class="material-icons" aria-hidden="true">extension</span><code>'.$value.'</code></div>',
-      'formula' => '<div class="docs-embed docs-embed--formula" data-formula-name="'.$value.'"><span class="material-icons" aria-hidden="true">functions</span><code>'.$value.'</code></div>',
+      'brick' => $this->renderBrick($node->value),
+      'formula' => $this->renderFormula($node->value),
       // Nothing loads from YouTube until the reader clicks (docs Stimulus controller); without JS it is a plain link.
       'video' => '<div class="docs-embed docs-embed--video"><a class="docs-video" href="https://www.youtube.com/watch?v='.$value.'" data-youtube-id="'.$value.'" target="_blank" rel="noopener noreferrer"><span class="material-icons" aria-hidden="true">play_circle</span><span class="docs-video__label">YouTube</span></a></div>',
       default => $this->renderProject($node->value),
     };
+  }
+
+  /** The brick as the reference shows it; a type the catalog does not know shows its name (the docs repo's CI flags it). */
+  private function renderBrick(string $type): string
+  {
+    $value = htmlspecialchars($type, ENT_QUOTES);
+    $catalog = $this->catalog;
+    $brick = null === $catalog ? null : $catalog->brick($type, $this->locale);
+    if (null === $catalog || null === $brick) {
+      return '<div class="docs-embed docs-embed--brick" data-brick-type="'.$value.'"><span class="material-icons" aria-hidden="true">extension</span><code>'.$value.'</code></div>';
+    }
+    $href = htmlspecialchars(self::relativeUrl($this->page_url, self::brickUrl($type)), ENT_QUOTES);
+
+    return '<a class="docs-embed docs-embed--brick" href="'.$href.'" data-brick-type="'.$value.'">'.$catalog->html($brick['brick']).'</a>';
+  }
+
+  private function renderFormula(string $name): string
+  {
+    $value = htmlspecialchars($name, ENT_QUOTES);
+    $element = $this->catalog?->formula($name, $this->locale);
+    if (null === $element) {
+      return '<div class="docs-embed docs-embed--formula" data-formula-name="'.$value.'"><span class="material-icons" aria-hidden="true">functions</span><code>'.$value.'</code></div>';
+    }
+    $href = htmlspecialchars(self::relativeUrl($this->page_url, 'docs/reference/formula/'.$name), ENT_QUOTES);
+
+    return '<a class="docs-embed docs-embed--formula" href="'.$href.'" data-formula-name="'.$value.'"><span class="cv-field">'
+      .htmlspecialchars($element['label'] ?? $name, ENT_QUOTES).'</span></a>';
   }
 
   private function renderProject(string $id): string
@@ -169,8 +214,10 @@ final class DocsMarkdown implements NodeRendererInterface
       return $url;
     }
     $location = self::locate($resolved);
-    if (null !== $location && DocPage::GUIDE === $location['kind']) {
-      return self::relativeUrl($this->page_url, self::pageUrl($location['path'])).(null === $fragment ? '' : '#'.$fragment);
+    if (null !== $location) {
+      $to = DocPage::GUIDE === $location['kind'] ? self::pageUrl($location['path']) : self::brickUrl($location['path']);
+
+      return self::relativeUrl($this->page_url, $to).(null === $fragment ? '' : '#'.$fragment);
     }
     $encoded = implode('/', array_map(rawurlencode(...), explode('/', $resolved)));
 

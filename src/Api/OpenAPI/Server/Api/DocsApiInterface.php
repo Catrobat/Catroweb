@@ -74,4 +74,36 @@ interface DocsApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
+
+  /**
+   * Operation docsReferenceBricksTypeGet.
+   *
+   * A brick of the reference
+   *
+   * @param string      $type            Brick type as written in code.xml (required)
+   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function docsReferenceBricksTypeGet(
+    string $type,
+    ?string $locale,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation docsReferenceCatalogGet.
+   *
+   * Every brick and formula element, as the app lists them
+   *
+   * @param string|null $locale          Language of the docs: &#x60;de&#x60;, &#x60;de_AT&#x60;, &#x60;de-DE&#x60; and &#x60;de_DE&#x60; all find the German pages (folder &#x60;de_DE&#x60; in the docs repo), English when a page has no translation. Without it, the language of the request (Accept-Language). (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function docsReferenceCatalogGet(
+    ?string $locale,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
 }

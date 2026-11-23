@@ -1066,3 +1066,12 @@ docs:
   video: "Video abspielen (lädt von YouTube)"
   comments: "Kommentare und Tipps"
   comments_empty: "Noch keine Kommentare. Ist etwas unklar, oder hast du einen Tipp? Schreib ihn hier."
+  reference:
+    title: "Bausteine und Formeln"
+    formula: "Formelelemente"
+    functions: "Funktionen"
+    sensors: "Sensoren"
+    operators: "Operatoren"
+    examples: "Beispielprojekte"
+    no_prose: "Diesen Baustein hat noch niemand erklärt. Du kannst die erste Erklärung schreiben."
+    empty: "Die Baustein-Referenz ist gerade nicht verfügbar."

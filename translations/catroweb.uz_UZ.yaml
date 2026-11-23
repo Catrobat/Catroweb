@@ -1044,3 +1044,12 @@ docs:
   video: "Videoni ijro etish (YouTube'dan yuklanadi)"
   comments: "Izohlar va maslahatlar"
   comments_empty: "Hali izohlar yo‘q. Biror narsa tushunarsizmi yoki maslahatingiz bormi? Shu yerga yozing."
+  reference:
+    title: "Bloklar va formulalar"
+    formula: "Formula elementlari"
+    functions: "Funksiyalar"
+    sensors: "Sensorlar"
+    operators: "Operatorlar"
+    examples: "Namuna loyihalar"
+    no_prose: "Bu blokni hali hech kim tushuntirmagan. Birinchi tushuntirishni sen yozishing mumkin."
+    empty: "Bloklar maʼlumotnomasi hozir mavjud emas."

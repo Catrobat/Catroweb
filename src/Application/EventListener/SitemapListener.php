@@ -7,6 +7,7 @@ namespace App\Application\EventListener;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Docs\DocPageRepository;
+use App\Docs\DocsCatalog;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
@@ -24,6 +25,7 @@ class SitemapListener
     private readonly EntityManagerInterface $entityManager,
     private readonly UrlGeneratorInterface $urlGenerator,
     private readonly DocPageRepository $docPages,
+    private readonly DocsCatalog $docsCatalog,
   ) {
   }
 
@@ -57,6 +59,23 @@ class SitemapListener
       $params = ['theme' => 'app', 'path' => 'index' === $page['path'] ? '' : $page['path']] + ('en' === $page['locale'] ? [] : ['locale' => $page['locale']]);
       $urls->addUrl(
         new UrlConcrete($this->urlGenerator->generate('docs', $params, UrlGeneratorInterface::ABSOLUTE_URL), $page['updated_at'], UrlConcrete::CHANGEFREQ_WEEKLY, 0.7),
+        'docs',
+      );
+    }
+
+    // The brick reference in English; its pages name their translations (hreflang).
+    $reference = [['docs_reference', []]];
+    foreach ($this->docsCatalog->types() as $type) {
+      $reference[] = ['docs_brick', ['type' => $type]];
+    }
+    foreach ($this->docsCatalog->catalog('en')['formula'] as $elements) {
+      foreach ($elements as $element) {
+        $reference[] = ['docs_formula', ['name' => $element['name']]];
+      }
+    }
+    foreach ($reference as [$route, $params]) {
+      $urls->addUrl(
+        new UrlConcrete($this->urlGenerator->generate($route, ['theme' => 'app'] + $params, UrlGeneratorInterface::ABSOLUTE_URL), null, UrlConcrete::CHANGEFREQ_WEEKLY, 0.6),
         'docs',
       );
     }

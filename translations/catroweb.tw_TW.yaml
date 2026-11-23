@@ -1044,3 +1044,12 @@ docs:
   video: "Bɔ video no (efi YouTube)"
   comments: "留言與小技巧"
   comments_empty: "還沒有留言。有不清楚的地方，或是有小技巧嗎？寫在這裡吧。"
+  reference:
+    title: "Blɔk ne fɔmula"
+    formula: "Fɔmula mu nneɛma"
+    functions: "Dwumadie"
+    sensors: "Nneɛma a ɛte nka"
+    operators: "Ɔyɛfo"
+    examples: "Nhwɛso nnwuma"
+    no_prose: "Obiara nnya nkyerɛkyerɛɛ blɔk yi mu. Wobɛtumi akyerɛw nkyerɛkyerɛmu a edi kan."
+    empty: "Blɔk ho nsɛm nni hɔ seesei."

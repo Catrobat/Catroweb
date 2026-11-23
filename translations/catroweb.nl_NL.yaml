@@ -1066,3 +1066,12 @@ docs:
   video: "Video afspelen (laadt van YouTube)"
   comments: "Reacties en tips"
   comments_empty: "Nog geen reacties. Is iets onduidelijk, of heb je een tip? Schrijf het hier."
+  reference:
+    title: "Blokken en formules"
+    formula: "Formule-elementen"
+    functions: "Functies"
+    sensors: "Sensoren"
+    operators: "Operatoren"
+    examples: "Voorbeeldprojecten"
+    no_prose: "Niemand heeft dit blok nog uitgelegd. Jij kunt de eerste uitleg schrijven."
+    empty: "Het blokkenoverzicht is nu niet beschikbaar."

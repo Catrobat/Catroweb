@@ -1067,3 +1067,12 @@ docs:
   video: "Speel video (laai van YouTube)"
   comments: "Kommentaar en wenke"
   comments_empty: "Nog geen kommentaar nie. Is iets onduidelik, of het jy 'n wenk? Skryf dit hier."
+  reference:
+    title: "Blokke en formules"
+    formula: "Formule-elemente"
+    functions: "Funksies"
+    sensors: "Sensors"
+    operators: "Operateurs"
+    examples: "Voorbeeldprojekte"
+    no_prose: "Niemand het hierdie blok nog verduidelik nie. Jy kan die eerste verduideliking skryf."
+    empty: "Die blokverwysing is nie nou beskikbaar nie."

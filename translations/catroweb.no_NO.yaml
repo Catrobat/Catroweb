@@ -1066,3 +1066,12 @@ docs:
   video: "Spill av video (lastes fra YouTube)"
   comments: "Kommentarer og tips"
   comments_empty: "Ingen kommentarer ennå. Er noe uklart, eller har du et tips? Skriv det her."
+  reference:
+    title: "Klosser og formler"
+    formula: "Formelelementer"
+    functions: "Funksjoner"
+    sensors: "Sensorer"
+    operators: "Operatorer"
+    examples: "Eksempelprosjekter"
+    no_prose: "Ingen har forklart denne klossen ennå. Du kan skrive den første forklaringen."
+    empty: "Klossoversikten er ikke tilgjengelig akkurat nå."

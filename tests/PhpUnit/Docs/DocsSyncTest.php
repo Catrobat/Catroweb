@@ -49,8 +49,7 @@ final class DocsSyncTest extends KernelTestCase
   public function testImportsUpdatesAndDeletes(): void
   {
     $files = DocsSync::readDirectory(self::FIXTURES);
-    // Imported from WordPress: written by a person, no source hash.
-    $files['de_DE/reference/bricks/SetXBrick.md'] = "---\nreviewed: true\n---\n\n\"Setze X auf\" setzt das Objekt an eine Stelle.\n";
+    // de_DE/reference/bricks/SetXBrick.md was imported from WordPress: written by a person, no source hash.
 
     $result = $this->sync->import($files);
 
@@ -93,7 +92,7 @@ final class DocsSyncTest extends KernelTestCase
       $this->sync->import(['README.md' => 'empty download']);
       $this->fail('expected the import to be refused');
     } catch (\RuntimeException) {
-      $this->assertSame(7, $this->pages->count([]));
+      $this->assertSame(8, $this->pages->count([]));
     }
   }
 

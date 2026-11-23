@@ -1065,3 +1065,12 @@ docs:
   video: "Videoyu oynat (YouTube'dan yüklenir)"
   comments: "Yorumlar ve ipuçları"
   comments_empty: "Henüz yorum yok. Anlaşılmayan bir şey mi var, yoksa bir ipucun mu var? Buraya yaz."
+  reference:
+    title: "Bloklar ve formüller"
+    formula: "Formül öğeleri"
+    functions: "Fonksiyonlar"
+    sensors: "Sensörler"
+    operators: "Operatörler"
+    examples: "Örnek projeler"
+    no_prose: "Bu bloğu henüz kimse açıklamadı. İlk açıklamayı sen yazabilirsin."
+    empty: "Blok başvuru kılavuzu şu anda kullanılamıyor."

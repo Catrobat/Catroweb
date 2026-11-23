@@ -133,6 +133,20 @@ open_api_server_docs_docsget:
   defaults:
     _controller: open_api_server.controller.docs::docsGetAction
 
+open_api_server_docs_docsreferencecatalogget:
+  path: /docs/reference/catalog
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.docs::docsReferenceCatalogGetAction
+
+open_api_server_docs_docsreferencebrickstypeget:
+  path: /docs/reference/bricks/{type}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.docs::docsReferenceBricksTypeGetAction
+  requirements:
+    type: '^[A-Za-z][A-Za-z0-9_]{0,99}$'
+
 open_api_server_docs_docspagespathget:
   path: /docs/pages/{path}
   methods: [GET]
