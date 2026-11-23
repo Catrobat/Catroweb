@@ -33,11 +33,11 @@ For more information or design suggestions check out the other tutorials.
 
 ### 5. You will find the Embroidery-Bricks as an own category within your bricks!
 
-[![Activate Embroidery-Bricks5](../../../media/embroidery-tutorials/Activate-Embroidery-Bricks5.png)](../../bricks/embroidery.md)
+[![Activate Embroidery-Bricks5](../../../media/embroidery-tutorials/Activate-Embroidery-Bricks5.png)](../../../reference/#category_embroidery)
 
 Now you will also find all embroidery bricks among the other bricks.
 
-For more information about each brick, feel free to check the documentation of the bricks [here](../../bricks/index.md) or follow the **[Embroidery-Bricks](embroidery-bricks/index.md)**-tutorial for that.
+For more information about each brick, feel free to check the documentation of the bricks [here](../../../reference/) or follow the **[Embroidery-Bricks](embroidery-bricks/index.md)**-tutorial for that.
 
 Now you can get started and create your own designs!
 

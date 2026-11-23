@@ -3,6 +3,7 @@ title: Stickbausteine
 description: "In diesem Tutorial lernst du alles, was du über die Stickbausteine wissen musst!"
 order: 1
 reviewed: true
+source_hash: 'ad94a0ac417aa8d56e85f23738d9d4f1218a2aa8d0ec6810b87c0a6471cb40c9'
 ---
 
 In diesem Tutorial lernst du alles, was du über die Stickbausteine wissen musst!
@@ -37,6 +38,6 @@ Klicke auf die verschiedenen Bausteine, um mehr über sie zu erfahren:
 
 *Stoppt den aktuellen Lauf-, Zickzack- oder Dreifachstich.*
 
-Weitere Stickbausteine und Informationen darüber findest du [hier](../../../bricks/embroidery.md).
+Weitere Stickbausteine und Informationen darüber findest du [hier](../../../../reference/#category_embroidery).
 
 Für mehr Informationen oder Designideen schau dir doch auch die anderen Tutorials an!

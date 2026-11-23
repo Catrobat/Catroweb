@@ -54,4 +54,4 @@ Now you have programed you first Object!
 
 If you want to share your project with your friends, you can check out the **[Upload and Share](upload-and-share.md)**-tutorial, where it will be explained exactly how it works. Otherwise, you can already start with your first own project. If you need help or inspiration, feel free to check out our tutorials from the Beginner series.
 
-You can find more information about all bricks [here](../../bricks/index.md)!
+You can find more information about all bricks [here](../../../reference/)!

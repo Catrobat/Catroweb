@@ -176,12 +176,13 @@ def check_media(path):
 
 
 def check_redirects(tsv):
-    """Every redirect target is a page file, or a generated brick page (/reference/bricks/<Type>, /de_DE/reference/bricks/<Type>)."""
+    """Every redirect target is a page file, or a generated reference page: /reference (a category: /reference#category_looks),
+    /reference/bricks/<Type>, also with a locale (/de_DE/reference/bricks/<Type>)."""
     errors = []
     for line in tsv.read_text(encoding="utf-8").splitlines()[1:]:
         old, _, target = line.partition("\t")
         rel = target.strip("/")
-        if re.fullmatch(r"(?:[a-z]{2}(?:_[A-Z]{2})?/)?reference/bricks/\w+", rel):
+        if re.fullmatch(r"(?:[a-z]{2}(?:_[A-Z]{2})?/)?reference(?:/bricks/\w+|#category_\w+)?", rel):
             continue
         base = rel if re.match(r"^[a-z]{2}(?:_[A-Z]{2})?(?:/|$)", rel) else ("en/" + rel).rstrip("/")
         if not ((ROOT / (base + ".md")).exists() or (ROOT / base / "index.md").exists()):

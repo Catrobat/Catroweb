@@ -121,6 +121,14 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('href="https://blob.example/scripts/notes.txt"', $html);
   }
 
+  public function testALinkToTheReferenceFolderLeadsToTheReference(): void
+  {
+    $html = $this->markdown()->convert("[All](../../reference/) [Looks](../../reference/#category_looks)\n", 'de_DE/tutorials/jump.md')['html'];
+
+    $this->assertStringContainsString('href="../reference"', $html);
+    $this->assertStringContainsString('href="../reference#category_looks"', $html);
+  }
+
   public function testABrickExplanationLinksFromItsBrickPage(): void
   {
     $html = $this->markdown()->convert("[Jump](../../en/tutorials/jump.md) [Set y](ChangeYByNBrick.md)\n", 'reference/bricks/SetXBrick.md')['html'];

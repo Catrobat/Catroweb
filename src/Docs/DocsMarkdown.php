@@ -30,7 +30,8 @@ use League\CommonMark\Renderer\NodeRendererInterface;
  *
  * Links are rewritten so the HTML works on every theme without knowing it: a link to another page or to a brick's
  * explanation becomes a URL relative to the page's own URL (`/{theme}/docs/<path>`,
- * `/{theme}/docs/reference/bricks/<type>`), a file in media/ points at share's static copy
+ * `/{theme}/docs/reference/bricks/<type>`), a link to the reference/ folder leads to the reference (`/{theme}/docs/reference`,
+ * with its anchor: `#category_looks`), a file in media/ points at share's static copy
  * (`/docs-media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
  *
  * `::brick` and `::formula` show the brick or formula element as the brick reference does (DocsCatalog), in the
@@ -39,7 +40,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 final class DocsMarkdown implements NodeRendererInterface
 {
   /** Bump when the HTML for the same Markdown changes: the next sync renders every page again. */
-  public const int VERSION = 3;
+  public const int VERSION = 4;
 
   private readonly MarkdownParser $parser;
 
@@ -218,6 +219,10 @@ final class DocsMarkdown implements NodeRendererInterface
     $resolved = self::resolve(\dirname($file), $target);
     if (null === $resolved) {
       return $url;
+    }
+    // The reference folder is the reference: [Bricks](../reference/#category_looks).
+    if (1 === preg_match('#^(?:[a-z]{2,3}(?:[_-][A-Za-z0-9]{2,8})?/)?reference$#', $resolved)) {
+      return self::relativeUrl($this->page_url, 'docs/reference').(null === $fragment ? '' : '#'.$fragment);
     }
     $location = self::locate($resolved);
     if (null !== $location) {

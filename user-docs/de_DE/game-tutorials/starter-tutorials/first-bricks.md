@@ -3,6 +3,7 @@ title: Erste Bausteine
 description: "In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren."
 order: 0
 reviewed: true
+source_hash: '2c21c4e57a1fb21192af99053f6655a1afdde16e6c793806049b43bf520cf2fa'
 ---
 
 In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren. Außerdem gibt dir dieses Tutorial einen guten Überblick über die Baustein-Kategorien.
@@ -51,4 +52,4 @@ Nun hast du dein erstes Objekt programmiert!
 
 Wenn du dein Projekt mit deinen Freunden teilen möchtest, kannst du das Tutorial **[Hochladen und Teilen](upload-and-share.md)** ausprobieren, wo genau erklärt wird, wie es funktioniert. Andernfalls kannst du bereits mit deinem ersten eigenen Projekt beginnen. Wenn du Hilfe oder Inspiration benötigst, schau dir gerne unsere Tutorials aus der Beginner-Serie an.
 
-[Hier](../../bricks/index.md) findest du weitere Informationen zu allen Bausteinen!
+[Hier](../../../reference/) findest du weitere Informationen zu allen Bausteinen!
