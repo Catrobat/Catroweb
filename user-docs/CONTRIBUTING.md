@@ -53,6 +53,8 @@ Show real bricks instead of screenshots. They are rendered by Catroid itself, in
 ## Images and files
 
 - Put them in `media/<section>/` and link them relatively.
+- Allowed: PNG, JPEG, GIF, WebP and PDF. No SVG (CI rejects it): share serves media as plain files and cannot make an SVG opened on its own safe. Export a PNG instead.
+- A file in `media/` never changes once added (CI rejects a change): browsers keep images for a year. Replacing an image? Give the new one a new file name and update the links.
 - Screenshots: PNG, cropped to what matters, at most 1 MB (CI rejects larger files). Prefer `::brick{…}` over a screenshot of a brick.
 - Every image needs alt text: `![The cat in the middle of a jump](../media/tutorials/jump.png)`.
 

@@ -13,7 +13,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 MAX_MEDIA_BYTES = 1_000_000
-MEDIA_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
+# What share links (DocsSync::MEDIA_EXTENSIONS). The web server serves media/ as static files: no SVG (it could run
+# script on share's origin when opened directly), no HTML, no links leading out of media/.
+MEDIA_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf"}
 LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 EMBED = re.compile(r"^::(\w+)\{([^}]*)\}\s*$", re.M)
 EMBEDS = {"brick": "type", "formula": "name", "project": "id", "video": "youtube"}
@@ -42,10 +44,19 @@ def is_reviewed(fields):
     return fields.get("reviewed", "").lower() == "true"
 
 
+def git(*args):
+    return subprocess.run(["git", *args], cwd=ROOT, check=True, capture_output=True, text=True).stdout.split("\n")
+
+
+def changed_media(base):
+    """Files in media/ modified (not added or deleted) since the merge base with `base`, uncommitted changes included.
+    Media are cached for a year, so a changed file would show the old version: it needs a new name."""
+    merge_base = git("merge-base", base, "HEAD")[0]
+    return [f for f in git("diff", "--name-only", "--relative", "--no-renames", "--diff-filter=M", merge_base, "--", "media") if f]
+
+
 def touched_since(base):
     """Files added or changed since the merge base with `base`, including uncommitted and untracked ones."""
-    def git(*args):
-        return subprocess.run(["git", *args], cwd=ROOT, check=True, capture_output=True, text=True).stdout.split("\n")
     merge_base = git("merge-base", base, "HEAD")[0]
     if not git("ls-tree", "--name-only", merge_base, "--", ".")[0]:
         return set()  # the base has no docs yet (the move from Catrobat/docs): nothing was translated against it
@@ -152,6 +163,18 @@ def check_translation(page, text, fields, touched=False):
     return []
 
 
+def check_media(path):
+    if path.is_symlink():
+        return ["a link: put the file itself into media/"]
+    if path.name == ".gitkeep" or not path.is_file():
+        return []
+    if path.suffix.lower() not in MEDIA_SUFFIXES:
+        return [f"{path.suffix or 'no extension'} is not allowed, only {', '.join(sorted(MEDIA_SUFFIXES))}"]
+    if path.suffix.lower() != ".pdf" and path.stat().st_size > MAX_MEDIA_BYTES:
+        return [f"{path.stat().st_size} bytes, more than {MAX_MEDIA_BYTES}"]
+    return []
+
+
 def check_redirects(tsv):
     """Every redirect target is a page file, or a generated brick page (/reference/bricks/<Type>, /de_DE/reference/bricks/<Type>)."""
     errors = []
@@ -169,6 +192,8 @@ def check_redirects(tsv):
 def main(argv):
     problems = [] if (ROOT / "en" / "index.md").is_file() else ["en/index.md missing: share refuses to sync docs without it"]
     touched = touched_since(argv[argv.index("--base") + 1]) if "--base" in argv else set()
+    if "--base" in argv:
+        problems += [f"{f}: changed; replacing an image? give it a new file name" for f in changed_media(argv[argv.index("--base") + 1])]
     redirects = ROOT / "import" / "redirects.tsv"
     if redirects.exists():
         problems += [f"import/redirects.tsv: {e}" for e in check_redirects(redirects)]
@@ -178,8 +203,7 @@ def main(argv):
             continue  # repo files (README, CONTRIBUTING), not pages
         problems += [f"{rel}: {e}" for e in check_page(page, page in touched)]
     for media in sorted((ROOT / "media").rglob("*")):
-        if media.is_file() and media.suffix.lower() in MEDIA_SUFFIXES and media.stat().st_size > MAX_MEDIA_BYTES:
-            problems.append(f"{media.relative_to(ROOT)}: {media.stat().st_size} bytes, more than {MAX_MEDIA_BYTES}")
+        problems += [f"{media.relative_to(ROOT)}: {e}" for e in check_media(media)]
     for problem in problems:
         print(problem)
     warnings = sum(": warning: " in p for p in problems)

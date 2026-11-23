@@ -30,8 +30,8 @@ use League\CommonMark\Renderer\NodeRendererInterface;
  *
  * Links are rewritten so the HTML works on every theme without knowing it: a link to another page or to a brick's
  * explanation becomes a URL relative to the page's own URL (`/{theme}/docs/<path>`,
- * `/{theme}/docs/reference/bricks/<type>`), a file in media/ points at share's synced copy
- * (`/{theme}/docs/_media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
+ * `/{theme}/docs/reference/bricks/<type>`), a file in media/ points at share's static copy
+ * (`/docs-media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
  *
  * `::brick` and `::formula` show the brick or formula element as the brick reference does (DocsCatalog), in the
  * page's language, linked to its reference page.
@@ -39,7 +39,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 final class DocsMarkdown implements NodeRendererInterface
 {
   /** Bump when the HTML for the same Markdown changes: the next sync renders every page again. */
-  public const int VERSION = 2;
+  public const int VERSION = 3;
 
   private readonly MarkdownParser $parser;
 
@@ -52,6 +52,9 @@ final class DocsMarkdown implements NodeRendererInterface
 
   /** Language of the page being rendered, for the bricks it embeds. */
   private string $locale = 'en';
+
+  /** @var array<string, int> media of the sync: path inside media/ => index */
+  private array $media = [];
 
   /**
    * @param string                                                                    $blob_base    GitHub's page of a file at the synced ref, with trailing slash
@@ -104,10 +107,13 @@ final class DocsMarkdown implements NodeRendererInterface
   }
 
   /**
+   * @param list<string> $media paths inside media/ (DocsSync::readMedia)
+   *
    * @return array{front_matter: array<array-key, mixed>, html: string, toc: list<array{id: string, title: string, level: int}>}
    */
-  public function convert(string $markdown, string $file): array
+  public function convert(string $markdown, string $file, array $media = []): array
   {
+    $this->media = array_flip($media);
     $input = $this->front_matter->parse($markdown);
     $front_matter = $input->getFrontMatter();
     $location = self::locate($file);
@@ -220,8 +226,12 @@ final class DocsMarkdown implements NodeRendererInterface
       return self::relativeUrl($this->page_url, $to).(null === $fragment ? '' : '#'.$fragment);
     }
     $encoded = implode('/', array_map(rawurlencode(...), explode('/', $resolved)));
+    if (!str_starts_with($resolved, 'media/')) {
+      return $this->blob_base.$encoded;
+    }
 
-    return null === DocsSync::mediaPath($resolved) ? $this->blob_base.$encoded : self::relativeUrl($this->page_url, 'docs/_'.$encoded);
+    // A missing media file keeps its link; user-docs/check.sh reports it.
+    return isset($this->media[substr($resolved, 6)]) ? '/docs-'.$encoded : $url;
   }
 
   /** `en/tutorials` + `../media/a.png` = `media/a.png`; null when it leaves the repo. */

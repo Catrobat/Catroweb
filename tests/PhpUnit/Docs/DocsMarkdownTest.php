@@ -63,7 +63,7 @@ final class DocsMarkdownTest extends TestCase
 
   public function testRendersAPageSafely(): void
   {
-    $result = $this->markdown()->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md');
+    $result = $this->markdown()->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md', ['tutorials/jump.png']);
 
     $this->assertSame('Your first project', $result['front_matter']['title']);
     $this->assertSame([
@@ -76,10 +76,10 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('&lt;script&gt;', $html);
     $this->assertStringNotContainsString('<script>', $html);
     $this->assertStringNotContainsString('javascript:', $html);
-    // Page links relative to /{theme}/docs/getting-started/first-project; media from GitHub.
+    // Page links relative to /{theme}/docs/getting-started/first-project; media from share's static copy.
     $this->assertStringContainsString('href="../../docs"', $html);
     $this->assertStringContainsString('href="../tutorials/jump#jump-higher"', $html);
-    $this->assertStringContainsString('src="../_media/tutorials/jump.png"', $html, 'served by share, not a third party');
+    $this->assertStringContainsString('src="/docs-media/tutorials/jump.png"', $html, 'served by share, not a third party');
   }
 
   public function testRendersEmbeds(): void
@@ -115,9 +115,8 @@ final class DocsMarkdownTest extends TestCase
 
   public function testFileAndBrickLinksStayOnShare(): void
   {
-    $html = $this->markdown()->convert("[Worksheet](../media/teachers/sheet-1.pdf) [Brick](../reference/bricks/SetXBrick.md) [Notes](../scripts/notes.txt)\n", 'en/index.md')['html'];
+    $html = $this->markdown()->convert("[Brick](../reference/bricks/SetXBrick.md) [Notes](../scripts/notes.txt)\n", 'en/index.md')['html'];
 
-    $this->assertStringContainsString('href="docs/_media/teachers/sheet-1.pdf"', $html);
     $this->assertStringContainsString('href="docs/reference/bricks/SetXBrick"', $html);
     $this->assertStringContainsString('href="https://blob.example/scripts/notes.txt"', $html);
   }
@@ -144,6 +143,21 @@ final class DocsMarkdownTest extends TestCase
     $german = $markdown->convert("::brick{type=SetXBrick}\n\n::brick{type=NoSuchBrick}\n", 'de_DE/index.md')['html'];
     $this->assertStringContainsString('Setze x auf', $german, 'in the language of the page');
     $this->assertStringContainsString('<div class="docs-embed docs-embed--brick" data-brick-type="NoSuchBrick">', $german, 'an unknown brick shows its name');
+  }
+
+  public function testMediaLinksGoToTheStaticCopy(): void
+  {
+    $media = ['a.png', 'teachers/sheet 1.pdf'];
+    $markdown = '[Sheet](../../media/teachers/sheet%201.pdf) ![A](../../media/a.png) [Gone](../../media/gone.png)'
+      ." [Out](../../media/../en/a.png) [Up](../../../a.png)\n";
+    $html = $this->markdown()->convert($markdown, 'en/tutorials/jump.md', $media)['html'];
+
+    $this->assertStringContainsString('href="/docs-media/teachers/sheet%201.pdf"', $html, 'from a nested page');
+    $this->assertStringContainsString('src="/docs-media/a.png"', $html);
+    $this->assertStringContainsString('href="../../media/gone.png"', $html, 'a missing file keeps its link');
+    $this->assertStringContainsString('href="https://blob.example/en/a.png"', $html, 'no way out of media/');
+    $this->assertStringContainsString('href="../../../a.png"', $html, 'no way out of the repo');
+    $this->assertStringNotContainsString('/docs-media/../', $html);
   }
 
   private function markdown(): DocsMarkdown

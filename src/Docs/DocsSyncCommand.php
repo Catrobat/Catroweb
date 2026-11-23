@@ -43,7 +43,7 @@ class DocsSyncCommand extends Command
     $lock = $this->locks->createLock('docs-sync', 1800);
     $lock->acquire(true);
     try {
-      $result = $this->sync->import(DocsSync::readDirectory($dir));
+      $result = $this->sync->import(DocsSync::readDirectory($dir), DocsSync::readMedia($dir));
     } finally {
       $lock->release();
     }

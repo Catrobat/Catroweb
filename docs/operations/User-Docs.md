@@ -42,7 +42,7 @@ A visitor's language comes from the `hl` cookie or Accept-Language (`de`, `de_AT
 [league/commonmark](https://commonmark.thephpleague.com/) with GitHub-flavoured Markdown, `html_input: escape` (raw HTML in a page shows as text) and `allow_unsafe_links: false`. Headings get ids (`SlugNormalizer`, duplicates numbered `-1`, `-2`); level 2 and 3 headings make the table of contents. `user-docs/scripts/check.py` (`slug()`, `heading_ids()`) replicates these ids to check link anchors: change both together.
 
 - **Links between pages** become URLs relative to the page's own URL, so the same HTML works on every theme (`/pocketcode/docs/...`, `/embroidery/docs/...`). A link to `reference/bricks/<type>.md` leads to the brick's page on share.
-- **Images and PDFs** in `media/` are served by share, `/{theme}/docs/_media/<path>` (a guide path segment never starts with `_`, so media never shadow a page), so a page view sends nothing to a third party. **Other files** link to their GitHub page (`Catrobat/Catroweb`, `main`).
+- **Images and PDFs** in `media/` link to share's static copy, `/docs-media/<path>` (see Media), so a page view sends nothing to a third party. A link to a missing media file is left as written (`check.sh` reports it). **Other files** link to their GitHub page (`Catrobat/Catroweb`, `main`).
 - **Embeds**, each on a line of its own:
   - `::brick{type=SetXBrick}` and `::formula{name=SIN}`: the brick or formula element as the reference shows it, in the page's language, linked to its reference page. A type or name the catalog does not know shows as its name.
   - `::project{id=…}`: a card with the project's name, author and thumbnail, linking to the project page; a hidden or missing project shows a plain link.
@@ -53,9 +53,11 @@ A visitor's language comes from the `hl` cookie or Accept-Language (`de`, `de_AT
 
 Share never loads docs media from a third party: every page view would hand the visitor's IP to it, and most visitors are children.
 
-- `DocsController::media` serves files straight from `user-docs/media/` of the running release, so they always match the deployed pages.
-- Only the writer guide's image types and PDF are served (`png`, `jpg`, `jpeg`, `gif`, `webp`, `svg`, `pdf`, `DocsSync::MEDIA_TYPES`). Every path segment must be a plain name (letters, digits, `.`, `_`, `-`, not starting with `.`, no `..`), and the file's real path must lie inside `media/`, so neither a URL nor a linked file or folder reaches outside it.
-- Content type of the extension, `nosniff` and a day of public caching. SVG is served as `image/svg+xml` (it works in `<img>`) with `Content-Security-Policy: sandbox; default-src 'none'`, the same policy as SVGs in project files, so opening one directly cannot run script on share's origin.
+- The web server serves them as static files: `public/docs-media` is a symlink (in git) to `../user-docs/media`. Production nginx answers every `.png`, `.jpg`, `.webp`, … URL from disk (`try_files $uri =404`, cached for a year as immutable) and never passes it to PHP, so media cannot be served by a Symfony route. PDFs reach the disk through `location /` (`try_files $uri`) the same way.
+- The symlink is relative, so it follows the docs publish: `current/user-docs` is itself a symlink to the swapped-in `user-docs.<hash>` folder. In the Docker dev setup the image copies the symlink with `public/` and `user-docs/` is mounted, so it resolves there too.
+- **A media file never changes once added**: browsers and Cloudflare keep an image for a year, so a new image under an old name would show the old one. `check.sh` fails a pull request that modifies a file in `media/`; a replaced image gets a new file name. Adding and deleting is fine.
+- Only the writer guide's image types and PDF are allowed (`png`, `jpg`, `jpeg`, `gif`, `webp`, `pdf`, `DocsSync::MEDIA_EXTENSIONS`). No SVG: a static SVG opened directly could run script on share's origin, and nginx cannot add the sandbox CSP that project-file SVGs get. `check.sh` rejects any other file and any link in `media/`, and so does the sync itself (`DocsSync::readMedia` throws): it runs before the new docs go live, in a deploy and in the publish, so such a file never goes live. A link resolving outside `media/` is not rewritten.
+- **After a rollback, run `bin/console catrobat:docs:sync`** in the live release: the pages in the database come from the newer docs and may link media files the old release does not have.
 
 ## API and pages
 
