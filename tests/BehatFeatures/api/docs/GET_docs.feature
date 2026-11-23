@@ -54,9 +54,13 @@ Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
     Then the response status code should be "200"
     And the response Header should contain the key "Content-Type" with the value 'image/svg+xml'
 
+  # A not-found page under /{theme}/ redirects to the start page (ExceptionEventListener), so "not served" is a
+  # redirect without the file's content.
   Scenario: Other repo files are not served
+    Given I do not follow redirects
     When I request "GET" "/app/docs/_media/tutorials/not-served.html"
-    Then the response status code should be "404"
+    Then the response status code should be "302"
+    And the client response should not contain "alert(1)"
 
   Scenario Outline: The language of the request finds the share locale folder (de_DE/)
     Given I have a request header "HTTP_ACCEPT_LANGUAGE" with value "<language>"
