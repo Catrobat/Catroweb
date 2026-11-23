@@ -63,6 +63,9 @@ tags:
   - name: 'Jobs'
     description: 'Status of background jobs started with `Prefer: respond-async` (Scratch import, project upload)'
 
+  - name: 'Docs'
+    description: 'User documentation, written in user-docs/ of the Catroweb repository'
+
 paths:
   ##############################################
   # Authentication
@@ -3934,6 +3937,56 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  ##############################################
+  # Docs
+  ###
+  /docs:
+    get:
+      tags:
+        - 'Docs'
+      summary: 'Navigation tree of the user docs'
+      description: "Every guide, as a tree: a page in a folder is a child of the folder's page. Titles are in the requested locale where a translation exists, else in English. With `flavor`, the pages written for that app flavour come first on every level."
+      parameters:
+        - $ref: '#/components/parameters/DocsLocale'
+        - name: flavor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'App flavour, e.g. pocketcode, embroidery, mindstorms'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsNavigationResponse'
+
+  '/docs/pages/{path}':
+    get:
+      tags:
+        - 'Docs'
+      summary: 'A docs page'
+      description: "The page in the requested locale, or in English when it has no translation yet (`fallback` is true then). Links in `html` are relative to the page's web URL, `/app/docs/<path>` (`/app/docs` for `index`)."
+      parameters:
+        - name: path
+          in: path
+          required: true
+          description: "Page path without locale and `.md`: `tutorials/jump`; a folder's page is the folder, the start page is `index`."
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*$' # '.' stands for the '/' between segments: the generator cannot write a slash into its PHP regex
+        - $ref: '#/components/parameters/DocsLocale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsPageResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 components:
   ##############################################
   # Default Response messages
@@ -4045,6 +4098,15 @@ components:
     ##
     # Default
     #
+    DocsLocale:
+      name: locale
+      in: query
+      required: false
+      description: 'Language of the docs: `de`, `de_AT`, `de-DE` and `de_DE` all find the German pages (folder `de_DE` in user-docs/), English when a page has no translation. Without it, the language of the request (Accept-Language).'
+      schema:
+        type: string
+        pattern: '^[a-zA-Z]{2,3}([_-][a-zA-Z0-9]{2,8})?$'
+
     PreferAsync:
       in: header
       name: Prefer
@@ -7008,3 +7070,108 @@ components:
           type: string
           description: 'Target node id'
           example: 'catrobat_2234abcd-12ab-12ab-12ab-123456abcdef'
+
+    DocsNavigationResponse:
+      type: object
+      required:
+        - locale
+        - items
+      properties:
+        locale:
+          type: string
+          example: 'de'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsNavigationItem'
+
+    DocsNavigationItem:
+      type: object
+      required:
+        - path
+        - title
+        - children
+      properties:
+        path:
+          type: string
+          example: 'tutorials/jump'
+        title:
+          type: string
+          example: 'Make your cat jump'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocsNavigationItem'
+
+    DocsPageResponse:
+      type: object
+      required:
+        - path
+        - locale
+        - fallback
+        - title
+        - html
+        - toc
+        - translation_state
+        - reviewed
+        - flavors
+        - source_url
+        - updated_at
+      properties:
+        path:
+          type: string
+          example: 'tutorials/jump'
+        locale:
+          type: string
+          description: 'Locale of the content: the requested one, or en when `fallback` is true'
+          example: 'de'
+        fallback:
+          type: boolean
+          description: 'True when the page has no translation in the requested locale and the English page is returned'
+        title:
+          type: string
+          example: 'Make your cat jump'
+        description:
+          type: string
+          nullable: true
+        html:
+          type: string
+          description: 'The rendered page, without its title. Raw HTML of the source is escaped.'
+        toc:
+          type: array
+          description: "Level 2 and 3 headings; `id` is the heading's id in `html`"
+          items:
+            $ref: '#/components/schemas/DocsTocEntry'
+        translation_state:
+          type: string
+          enum: ['source', 'current', 'stale']
+          description: '`source` for English, `current` for a translation of the current English page, `stale` when the English page changed since'
+        reviewed:
+          type: boolean
+          description: 'A translation checked by a person'
+        flavors:
+          type: array
+          items:
+            type: string
+        source_url:
+          type: string
+          description: 'The English source file in the GitHub editor ("Improve this page")'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'When the sync last saw the file change'
+
+    DocsTocEntry:
+      type: object
+      required:
+        - id
+        - title
+        - level
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        level:
+          type: integer
+          example: 2

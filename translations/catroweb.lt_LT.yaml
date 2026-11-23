@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Pasiilgome tavęs!'
   content: 'Jau dvejus metus neprisijungei prie savo Catrobat paskyros „%username%“, ir joje nėra jokių projektų ar komentarų. Kad mūsų bendruomenė būtų gyva, ištrinsime ją po %days% d. Jei nori ją išsaugoti, tiesiog prisijunk vieną kartą.'
   button: 'Prisijungti ir išsaugoti paskyrą'
+
+docs:
+  title: "Dokumentacija"
+  contents: "Turinys"
+  on_this_page: "Šiame puslapyje"
+  improve: "Patobulink šį puslapį"
+  fallback: "Šis puslapis dar neišverstas į tavo kalbą, todėl rodomas angliškai."
+  machine_translated: "Šis puslapis išverstas automatiškai."
+  stale: "Angliškas puslapis pasikeitė po šio vertimo, todėl kai kurios dalys gali būti pasenusios."
+  video: "Paleisti vaizdo įrašą (įkeliamas iš YouTube)"

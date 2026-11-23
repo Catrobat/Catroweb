@@ -88,6 +88,8 @@ class SecurityHeadersSubscriber
     if (null !== $player_origin) {
       $frame_src[] = $player_origin;
     }
+    // Docs videos (::video), loaded only when the reader clicks play.
+    $frame_src[] = 'https://www.youtube-nocookie.com';
 
     return implode('; ', [
       "default-src 'self'",

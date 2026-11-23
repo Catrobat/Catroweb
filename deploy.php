@@ -110,14 +110,14 @@ task('check:workers', function () {
   // One by one: with several units, `systemctl is-active` succeeds when any of them runs.
   $units = implode(' ', array_map(static fn (string $worker): string => 'catroweb-worker@'.$worker, $workers));
   if (!test('(for unit in '.$units.'; do systemctl is-active --quiet "$unit" || exit 1; done)')) {
-    throw new RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
+    throw new \RuntimeException('Not every background worker is running ('.$units.'): install and start them first (docs/operations/Background-Jobs.md)');
   }
 
   // ponytail: the translation worker only has to be enabled. Until a release with its queue is live it restarts in a
   // loop (unknown transport), so is-active would block the very deploy that adds the queue. Move it into $workers
   // once that release is out.
   if (!test('systemctl is-enabled --quiet catroweb-worker@translation')) {
-    throw new RuntimeException('The translation worker is not enabled: sudo systemctl enable --now catroweb-worker@translation (docs/operations/Background-Jobs.md)');
+    throw new \RuntimeException('The translation worker is not enabled: sudo systemctl enable --now catroweb-worker@translation (docs/operations/Background-Jobs.md)');
   }
 });
 
@@ -223,6 +223,12 @@ task('update:flavors', function () {
   run('bin/console catrobat:update:flavors');
 });
 
+// The user docs (user-docs/) of this release into the database, before it goes live
+task('update:docs', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:docs:sync');
+});
+
 task('update:special', function () {
   cd('{{release_path}}');
   run('bin/console catrobat:update:special');
@@ -308,6 +314,7 @@ task('dump:env', function () {
 task('smoke_test', function () {
   $maxRetries = 5;
   $retryDelay = 5;
+  $result = '000';
   for ($i = 1; $i <= $maxRetries; ++$i) {
     $result = run('curl -sf -o /dev/null -w "%{http_code}" -H "Host: share.catrobat.org" https://localhost/api/health --max-time 10 -k || echo "000"');
     if ('200' === trim($result)) {
@@ -346,6 +353,7 @@ task('deploy', [
   'deploy:jwt',
   'deploy:cache:clear',
   'database:migrate',
+  'update:docs',
   'deploy:symlink',
   'restart:nginx',
   'restart:php-fpm',

@@ -117,7 +117,7 @@ class SecurityHeadersSubscriberTest extends TestCase
     $subscriber->onKernelResponse($event);
 
     $csp = (string) $event->getResponse()->headers->get('Content-Security-Policy');
-    $this->assertStringContainsString("frame-src 'self' https://play.catrobat.org", $csp);
+    $this->assertStringContainsString("frame-src 'self' https://play.catrobat.org https://www.youtube-nocookie.com", $csp);
   }
 
   public function testSkipsSubRequests(): void

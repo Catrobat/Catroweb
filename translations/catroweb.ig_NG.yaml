@@ -1030,3 +1030,13 @@ inactiveAccount:
   title: 'Agụụ gị na-agụ anyị!'
   content: 'Ị banyebeghị n''akaụntụ Catrobat gị "%username%" afọ abụọ, o nweghịkwa ọrụ ma ọ bụ nkọwa ọ bụla. Iji mee ka obodo anyị dịrị ndụ, anyị ga-ehichapụ ya n''ime ụbọchị %days%. Ọ bụrụ na ịchọrọ idebe ya, banye naanị otu ugboro.'
   button: 'Banye iji debe akaụntụ m'
+
+docs:
+  title: "Akwụkwọ ntuziaka"
+  contents: "Ihe dị n'ime"
+  on_this_page: "Na peeji a"
+  improve: "Meziwanye peeji a"
+  fallback: "A sụgharịbeghị peeji a n'asụsụ gị, ya mere e ji Bekee gosi ya."
+  machine_translated: "A sụgharịrị peeji a na-akpaghị aka."
+  stale: "Peeji Bekee agbanweela kemgbe e mere nsụgharị a, ya mere akụkụ ya nwere ike ịbụ ochie."
+  video: "Kpọọ vidiyo (na-ebunye site na YouTube)"

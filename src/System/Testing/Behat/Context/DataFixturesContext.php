@@ -41,6 +41,7 @@ use App\DB\Entity\User\User;
 use App\DB\Enum\AppealState;
 use App\DB\Enum\ReportState;
 use App\DB\Generator\MyUuidGenerator;
+use App\Docs\DocsSync;
 use App\Moderation\ReportProcessor;
 use App\Project\CodeStatistics\CodeStatisticsParser;
 use App\Storage\FileHelper;
@@ -101,6 +102,16 @@ class DataFixturesContext implements Context
   {
     $process = new Process(['bin/console', 'fos:elastica:reset', '-q']);
     $process->run();
+  }
+
+  /**
+   * @Given the docs are synced from the test docs folder
+   */
+  public function theDocsAreSyncedFromTheTestDocsRepo(): void
+  {
+    $sync = $this->getSymfonyService(DocsSync::class);
+    Assert::assertInstanceOf(DocsSync::class, $sync);
+    $sync->import(DocsSync::readDirectory($sync->docs_dir)); // tests/TestData/Docs in the test environment
   }
 
   /**

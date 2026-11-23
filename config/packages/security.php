@@ -211,6 +211,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'methods' => ['GET'],
         ],
         [
+          'path' => '^/api/docs(/pages/[A-Za-z0-9_/-]+)?/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+        ],
+        [
           'path' => '^/api/projects/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

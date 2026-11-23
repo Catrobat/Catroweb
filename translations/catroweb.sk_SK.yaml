@@ -1053,3 +1053,13 @@ inactiveAccount:
   title: 'Chýbaš nám!'
   content: 'Do svojho účtu Catrobat „%username%“ si sa neprihlásil(a) už dva roky a nemá žiadne projekty ani komentáre. Aby naša komunita zostala živá, vymažeme ho o %days% dní. Ak si ho chceš ponechať, stačí sa raz prihlásiť.'
   button: 'Prihlásiť sa a ponechať si účet'
+
+docs:
+  title: "Dokumentácia"
+  contents: "Obsah"
+  on_this_page: "Na tejto stránke"
+  improve: "Vylepši túto stránku"
+  fallback: "Táto stránka ešte nie je preložená do tvojho jazyka, preto sa zobrazuje v angličtine."
+  machine_translated: "Táto stránka bola preložená automaticky."
+  stale: "Anglická stránka sa od tohto prekladu zmenila, takže niektoré časti môžu byť zastarané."
+  video: "Prehrať video (načíta sa z YouTube)"

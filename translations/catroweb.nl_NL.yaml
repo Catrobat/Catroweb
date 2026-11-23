@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'We missen je!'
   content: 'Je bent al twee jaar niet ingelogd op je Catrobat-account "%username%" en het heeft geen projecten of reacties. Om onze community levendig te houden, verwijderen we het over %days% dagen. Wil je het houden? Log dan gewoon één keer in.'
   button: 'Inloggen om mijn account te houden'
+
+docs:
+  title: "Documentatie"
+  contents: "Inhoud"
+  on_this_page: "Op deze pagina"
+  improve: "Verbeter deze pagina"
+  fallback: "Deze pagina is nog niet vertaald in jouw taal, daarom wordt hij in het Engels getoond."
+  machine_translated: "Deze pagina is automatisch vertaald."
+  stale: "De Engelse pagina is veranderd sinds deze vertaling is gemaakt, dus delen ervan kunnen verouderd zijn."
+  video: "Video afspelen (laadt van YouTube)"

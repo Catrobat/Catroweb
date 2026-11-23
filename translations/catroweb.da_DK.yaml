@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Vi savner dig!'
   content: 'Du har ikke logget på din Catrobat-konto "%username%" i to år, og den har ingen projekter eller kommentarer. For at holde vores fællesskab levende sletter vi den om %days% dage. Hvis du vil beholde den, skal du bare logge på én gang.'
   button: 'Log på for at beholde min konto'
+
+docs:
+  title: "Dokumentation"
+  contents: "Indhold"
+  on_this_page: "På denne side"
+  improve: "Forbedr denne side"
+  fallback: "Denne side er ikke oversat til dit sprog endnu, så den vises på engelsk."
+  machine_translated: "Denne side er oversat automatisk."
+  stale: "Den engelske side er ændret siden denne oversættelse blev lavet, så dele af den kan være forældede."
+  video: "Afspil video (indlæses fra YouTube)"

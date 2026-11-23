@@ -1052,3 +1052,13 @@ inactiveAccount:
   title: 'Faltan botatzen zaitugu!'
   content: 'Bi urte daramatzazu zure "%username%" Catrobat kontuan saioa hasi gabe, eta ez du proiekturik ez iruzkinik. Gure komunitatea bizirik mantentzeko, %days% egun barru ezabatuko dugu. Gorde nahi baduzu, hasi saioa behin.'
   button: 'Hasi saioa nire kontua gordetzeko'
+
+docs:
+  title: "Dokumentazioa"
+  contents: "Edukiak"
+  on_this_page: "Orri honetan"
+  improve: "Hobetu orri hau"
+  fallback: "Orri hau oraindik ez dago zure hizkuntzara itzulita, beraz ingelesez erakusten da."
+  machine_translated: "Orri hau automatikoki itzuli da."
+  stale: "Ingelesezko orria aldatu egin da itzulpen hau egin zenetik, beraz zati batzuk zaharkituta egon daitezke."
+  video: "Erreproduzitu bideoa (YouTubetik kargatzen da)"

@@ -65,7 +65,7 @@
 
   <meta property="og:site_name" content="Catrobat">
   {% if app.request.attributes.get('_route') %}
-    {% set _canonical_url = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|default({})) %}
+    {% set _canonical_url = canonical_url|default(url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|default({}))) %}
     <link rel="canonical" href="{{ _canonical_url }}">
   {% endif %}
 
@@ -85,10 +85,12 @@
     <meta name="twitter:card" content="summary">
   {% endblock %}
 
-  {% if _canonical_url is defined %}
-    <link rel="alternate" hreflang="{{ app.request.locale|slice(0, 2) }}" href="{{ _canonical_url }}">
-    <link rel="alternate" hreflang="x-default" href="{{ _canonical_url }}">
-  {% endif %}
+  {% block hreflang %}
+    {% if _canonical_url is defined %}
+      <link rel="alternate" hreflang="{{ app.request.locale|slice(0, 2) }}" href="{{ _canonical_url }}">
+      <link rel="alternate" hreflang="x-default" href="{{ _canonical_url }}">
+    {% endif %}
+  {% endblock %}
 
   {% block head %}{% endblock %}
 </head>

@@ -1030,3 +1030,13 @@ inactiveAccount:
   title: 'Àárò rẹ ń sọ wá!'
   content: 'O kò tíì wọlé sí àkáǹtì Catrobat rẹ "%username%" fún ọdún méjì, kò sì ní iṣẹ́ tàbí àsọyé kankan. Kí àwùjọ wa lè máa wà láàyè, a óò pa á rẹ́ ní ọjọ́ %days%. Tí o bá fẹ́ pa á mọ́, kàn wọlé lẹ́ẹ̀kan ṣoṣo.'
   button: 'Wọlé láti pa àkáǹtì mi mọ́'
+
+docs:
+  title: "Ìwé ìtọ́sọ́nà"
+  contents: "Àwọn àkóónú"
+  on_this_page: "Lórí ojú-ìwé yìí"
+  improve: "Mú ojú-ìwé yìí dára síi"
+  fallback: "A kò tíì túmọ̀ ojú-ìwé yìí sí èdè rẹ, nítorí náà a ń fi hàn ní èdè Gẹ̀ẹ́sì."
+  machine_translated: "A túmọ̀ ojú-ìwé yìí láìfọwọ́yí."
+  stale: "Ojú-ìwé Gẹ̀ẹ́sì ti yí padà láti ìgbà tí a ti ṣe ìtumọ̀ yìí, nítorí náà àwọn apá kan lè ti di àtijọ́."
+  video: "Ṣe fídíò (ó ń gbé wọlé láti YouTube)"

@@ -1,0 +1,257 @@
+.docs {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: 1rem 2rem;
+}
+
+@media (min-width: 992px) {
+  .docs {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .docs-nav {
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+}
+
+.docs-nav {
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.docs-nav__summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  padding-block: 0.25rem;
+}
+
+.docs-nav__list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.docs-nav__list .docs-nav__list {
+  padding-left: 1rem;
+}
+
+.docs-nav__link {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.25rem;
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+.docs-nav__link:hover,
+.docs-nav__link:focus-visible {
+  background: light-dark(#eef1f5, #2a2f37);
+}
+
+.docs-nav__link--current {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.docs-article {
+  min-width: 0;
+  max-width: 48rem;
+  line-height: 1.6;
+}
+
+.docs-article__title {
+  margin-bottom: 1rem;
+}
+
+.docs-note {
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--primary);
+  border-radius: 0.25rem;
+  background: light-dark(#eef4fb, #1f2a36);
+}
+
+.docs-note--quiet {
+  border-left-color: var(--bs-border-color);
+  background: none;
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-toc {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+}
+
+.docs-toc__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.docs-toc__list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.docs-toc__entry--level-3 {
+  margin-left: 1rem;
+}
+
+.docs-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.docs-content pre {
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  background: light-dark(#f4f6f8, #1e2228);
+  overflow-x: auto;
+}
+
+.docs-content table {
+  display: block;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+}
+
+.docs-content th,
+.docs-content td {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--bs-border-color);
+}
+
+.docs-content blockquote {
+  margin-inline: 0;
+  padding-left: 1rem;
+  border-left: 4px solid var(--bs-border-color);
+}
+
+.docs-embed {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+}
+
+.docs-embed code {
+  color: inherit;
+  font-weight: 600;
+}
+
+.docs-embed--project {
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+.docs-embed--project:hover,
+.docs-embed--project:focus-visible {
+  border-color: var(--primary);
+}
+
+.docs-embed__image {
+  flex: none;
+  border-radius: 0.25rem;
+  object-fit: cover;
+}
+
+.docs-embed__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.docs-embed__name {
+  font-weight: 600;
+}
+
+.docs-embed__author {
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-embed--video {
+  aspect-ratio: 16 / 9;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.docs-video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  text-decoration: none;
+}
+
+.docs-video .material-icons {
+  font-size: 4rem;
+}
+
+.docs-video__frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.docs-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.docs-pager__link {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+
+.docs-pager__link--next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.docs-pager__label {
+  font-size: 0.85rem;
+  color: light-dark(#5a6374, #a0aec0);
+}
+
+.docs-improve {
+  margin-top: 1.5rem;
+}
+
+.docs-improve a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media print {
+  .docs-nav,
+  .docs-pager,
+  .docs-improve {
+    display: none;
+  }
+}

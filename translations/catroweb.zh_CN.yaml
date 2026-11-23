@@ -1035,3 +1035,13 @@ inactiveAccount:
   title: '我们想你了！'
   content: '你已经两年没有登录 Catrobat 帐户“%username%”了，而且它没有任何项目或评论。为了让社区保持活跃，我们将在 %days% 天后删除它。如果你想保留它，只需登录一次即可。'
   button: '登录以保留我的帐户'
+
+docs:
+  title: "文档"
+  contents: "目录"
+  on_this_page: "本页内容"
+  improve: "改进此页面"
+  fallback: "此页面还没有翻译成你的语言，因此以英文显示。"
+  machine_translated: "此页面为自动翻译。"
+  stale: "此翻译完成后英文页面已有改动，部分内容可能已过时。"
+  video: "播放视频（从 YouTube 加载）"

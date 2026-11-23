@@ -28,6 +28,7 @@
     "guzzlehttp/guzzle": "7.16.*",
     "hwi/oauth-bundle": "2.5.*",
     "jms/serializer-bundle": "*",
+    "league/commonmark": "2.10.*",
     "lexik/jwt-authentication-bundle": "3.2.*",
     "pentatrion/vite-bundle": "^8.2",
     "php-http/httplug-bundle": "^2.0",

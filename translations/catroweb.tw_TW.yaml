@@ -1030,3 +1030,13 @@ inactiveAccount:
   title: 'Yɛfeɛ wo!'
   content: 'Wonwuraa wo Catrobat akawnt "%username%" mu mfeɛ mmienu ni, na adwuma anaa adwenkyerɛ biara nni mu. Sɛnea ɛbɛyɛ a yɛn mpɔtam bɛkɔ so ayɛ den no, yɛbɛyi afi hɔ nna %days% mu. Sɛ wopɛ sɛ wokora so a, wura mu prɛko pɛ.'
   button: 'Wura mu na kora m''akawnt so'
+
+docs:
+  title: "Nkyerɛkyerɛmu"
+  contents: "Nneɛma a ɛwɔ mu"
+  on_this_page: "Wɔ kratafa yi so"
+  improve: "Ma kratafa yi nyɛ papa"
+  fallback: "Wɔnnya nkyerɛɛ kratafa yi ase wɔ wo kasa mu, enti wɔde Borɔfo kasa reda no adi."
+  machine_translated: "Wɔde mfiri kyerɛɛ kratafa yi ase."
+  stale: "Borɔfo kratafa no asesa fi bere a wɔkyerɛɛ yi ase, enti ne fã bi betumi ayɛ dedaw."
+  video: "Bɔ video no (efi YouTube)"
