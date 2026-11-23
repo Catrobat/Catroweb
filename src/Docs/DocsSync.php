@@ -149,7 +149,7 @@ class DocsSync
         $row = $existing[$key] ?? null;
         unset($existing[$key]);
         $state = 'en' === $entry['locale'] ? DocPage::STATE_SOURCE : null; // translations: known after the front matter is read
-        if (null !== $row && $row['content_hash'] === $entry['content_hash'] && 1 !== preg_match('/^::(project|brick|formula)\{/m', $entry['content'])) {
+        if (null !== $row && $row['content_hash'] === $entry['content_hash'] && 1 !== preg_match('/::(project|brick|formula)\{/', $entry['content'])) {
           $state ??= self::translationState($english_hashes[$entry['kind'].'|'.$entry['path']] ?? null, $row['source_hash'], $row['reviewed']);
           if ($state !== $row['translation_state']) {
             $this->pages->find($row['id'])?->setTranslationState($state);

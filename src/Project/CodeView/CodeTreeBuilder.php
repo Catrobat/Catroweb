@@ -134,7 +134,9 @@ class CodeTreeBuilder
         $localized['segments'] = array_map(function (array $segment) use ($locale): array {
           $kind = in_array($segment['kind'] ?? null, ['string', 'variable', 'list'], true) ? $segment['kind'] : 'formula';
           $text = (string) ($segment['text'] ?? '');
-          // A project's own strings hold no markers (XML cannot carry \x01); the catalog's defaults do ("Hello!").
+          // The catalog's default texts are markers ("Hello!"), so string segments are localized too. A project's own
+          // strings almost never hold \x01 (XML 1.0 forbids it, only XML 1.1 allows it as &#x1;); one that does is
+          // the uploader's own text shown to the viewer as a translated Catroid string, nothing more.
           $out = ['kind' => $kind, 'text' => $this->localizer->localize($text, $locale)];
           $key = CodeViewTranslationContent::key($segment);
           if (null !== $key) {

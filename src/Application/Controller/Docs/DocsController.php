@@ -54,7 +54,10 @@ class DocsController extends AbstractController
   public function page(Request $request, string $path): Response
   {
     if ('index' === $path) {
-      return $this->redirectToRoute('docs', $request->query->all(), Response::HTTP_MOVED_PERMANENTLY);
+      // Only the language survives: other query values (?theme=) must not reach the route.
+      [$locale, $explicit] = $this->locale($request);
+
+      return $this->redirectToRoute('docs', $explicit ? ['locale' => $locale] : [], Response::HTTP_MOVED_PERMANENTLY);
     }
     $path = '' === $path ? 'index' : trim($path, '/');
     [$locale, $explicit] = $this->locale($request);
@@ -118,7 +121,7 @@ class DocsController extends AbstractController
       return $this->redirectToRoute('docs_reference', [], Response::HTTP_FOUND);
     }
 
-    return $this->redirectToRoute('docs_brick', ['type' => $type] + $request->query->all(), Response::HTTP_MOVED_PERMANENTLY);
+    return $this->redirectToRoute('docs_brick', ['type' => $type], Response::HTTP_MOVED_PERMANENTLY);
   }
 
   #[Route(path: '/docs/reference/bricks/{type}', name: 'docs_brick', requirements: ['type' => '[A-Za-z][A-Za-z0-9_]{0,99}'], methods: ['GET'], priority: 1)]

@@ -9,6 +9,7 @@ use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeViewLocalizer;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * The brick and formula reference: the player build's catalog.json (player/README.md, "Brick catalog"), next to the
@@ -19,7 +20,7 @@ use Symfony\Contracts\Cache\CacheInterface;
  * A brick's key is its code.xml type (SetXBrick, StartScript for a script). It may be listed in several categories,
  * as in the app's brick picker; its own is the one with the most bricks of its colour.
  */
-class DocsCatalog
+class DocsCatalog implements ResetInterface
 {
   private const string TYPE_PATTERN = '/^[A-Za-z][A-Za-z0-9_]{0,99}$/';
 
@@ -64,10 +65,19 @@ class DocsCatalog
     clearstatcache(true, $file);
     $version = is_file($file) ? filemtime($file).'-'.filesize($file) : 'none';
 
-    return $this->localized[$android] ??= $this->cache->get(
-      'docs_catalog.'.hash('xxh128', $file.'|'.$version).'.'.$android,
+    $key = 'docs_catalog.'.hash('xxh128', $file.'|'.$version).'.'.$android;
+
+    // Keyed by version too: a worker serving many requests sees a newly deployed catalog.
+    return $this->localized[$key] ??= $this->cache->get(
+      $key,
       fn (): array => $this->localize($this->read($file), str_replace('-r', '_', $android)),
     );
+  }
+
+  #[\Override]
+  public function reset(): void
+  {
+    $this->localized = [];
   }
 
   /**

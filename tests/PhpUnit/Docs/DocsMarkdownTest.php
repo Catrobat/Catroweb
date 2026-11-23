@@ -95,6 +95,15 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('<span class="docs-embed__name">Jump &amp; Run</span>', $html);
   }
 
+  public function testEmbedsMayBeIndentedLikeOtherBlocks(): void
+  {
+    $html = $this->markdown()->convert("  ::video{youtube=dQw4w9WgXcQ}\n\n- ::video{youtube=dQw4w9WgXcQ}\n", 'en/index.md')['html'];
+    $this->assertSame(2, substr_count($html, 'data-youtube-id'), 'up to three spaces, and in a list');
+
+    $code = $this->markdown()->convert("    ::video{youtube=dQw4w9WgXcQ}\n", 'en/index.md')['html'];
+    $this->assertStringNotContainsString('data-youtube-id', $code, 'four spaces are a code block');
+  }
+
   public function testInvalidEmbedsStayVisibleAsText(): void
   {
     $html = $this->markdown()->convert("::video{youtube=\"><script>}\n\n::unknown{x=1}\n\n::project{id=gone}\n", 'en/index.md')['html'];

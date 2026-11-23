@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Docs;
 
+use App\Api\DocsApi;
 use App\Docs\DocsCatalog;
+use App\Docs\DocsLibrary;
+use App\Docs\DocsSync;
 use App\Project\CodeView\CodeExportRunner;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeViewExportStore;
 use App\Project\CodeView\CodeViewLocalizer;
+use OpenAPI\Server\Model\DocsCatalogResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -22,6 +26,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @internal
  */
 #[CoversClass(DocsCatalog::class)]
+#[CoversClass(DocsApi::class)]
 final class DocsCatalogTest extends TestCase
 {
   private const string FIXTURES = __DIR__.'/../../TestData/CodeExport';
@@ -103,6 +108,48 @@ final class DocsCatalogTest extends TestCase
 
     $this->assertSame([], $catalog->catalog('en')['categories']);
     $this->assertSame([], $catalog->types());
+    $this->assertNull($catalog->brick('SetXBrick', 'en'));
+    $this->assertNull($catalog->formula('SIN', 'en'));
+    $this->assertNull($catalog->typeOfClass('WhenStartedBrick'));
+
+    $api = new DocsApi($this->createStub(DocsLibrary::class), $this->createStub(DocsSync::class), new RequestStack(), $catalog);
+    $code = 0;
+    $headers = [];
+    $api->docsReferenceBricksTypeGet('SetXBrick', 'en', $code, $headers);
+    $this->assertSame(404, $code, 'a brick page of an empty reference is not found, not an error');
+    $response = $api->docsReferenceCatalogGet('en', $code, $headers);
+    $this->assertSame(200, $code);
+    $this->assertInstanceOf(DocsCatalogResponse::class, $response);
+    $this->assertSame([], $response->getCategories());
+  }
+
+  public function testCatalogTextIsEscaped(): void
+  {
+    $dir = sys_get_temp_dir().'/docs-catalog-test-'.bin2hex(random_bytes(4));
+    mkdir($dir.'/strings', 0o777, true);
+    $write = static fn (string $label): int|false => file_put_contents($dir.'/catalog.json', json_encode(['categories' => [[
+      'key' => 'category_motion', 'name' => '<i>Motion</i>',
+      'bricks' => [['type' => 'SetXBrick', 'category' => 'motion', 'parts' => [['kind' => 'label', 'text' => $label], ['kind' => 'formula', 'text' => '1 < 2']]]],
+    ]], 'formula' => []]));
+    $write('<script>alert(1)</script>');
+
+    try {
+      $catalog = $this->catalog($dir);
+      $brick = $catalog->brick('SetXBrick', 'en');
+      $this->assertNotNull($brick);
+      $html = $catalog->html($brick['brick']);
+      $this->assertStringNotContainsString('<script>', $html);
+      $this->assertStringContainsString('&lt;script&gt;alert(1)&lt;/script&gt; <span class="cv-field">1 &lt; 2</span>', $html);
+      $this->assertSame('<i>Motion</i>', $brick['categories'][0]['name'], 'plain text, escaped where it is shown (Twig, JSON)');
+
+      // A newly deployed catalog is seen by a long-running worker without reset().
+      $write('Set x to');
+      $this->assertSame('Set x to 1 < 2', $catalog->title((array) $catalog->brick('SetXBrick', 'en')['brick']));
+    } finally {
+      array_map(unlink(...), glob($dir.'/*.json') ?: []);
+      rmdir($dir.'/strings');
+      rmdir($dir);
+    }
   }
 
   private function assertNoMarkers(DocsCatalog $catalog, string $export_dir): void
