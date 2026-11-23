@@ -22,7 +22,7 @@ class ProjectBrickUsage
     #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private Project $project,
     #[ORM\Id]
-    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 100, options: ['collation' => 'utf8mb4_bin'])]
     private string $brick_type,
     #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
     private int $count = 0,

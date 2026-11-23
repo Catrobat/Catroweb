@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\System\Commands;
 
 use App\DB\Entity\Project\Project;
+use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\CodeStatistics\CodeStatisticsParser;
 use App\Project\CodeStatistics\ProjectBrickUsageWriter;
 use Doctrine\DBAL\ArrayParameterType;
@@ -145,7 +146,8 @@ class BackfillBrickUsageCommand extends Command
 
     // Some apps wrap the project in a subdirectory
     $index = $zip->locateName('code.xml', \ZipArchive::FL_NODIR);
-    $xml = false === $index ? false : $zip->getFromIndex($index);
+    $stat = false === $index ? false : $zip->statIndex($index);
+    $xml = false === $stat || $stat['size'] > CatrobatFileExtractor::MAX_TOTAL_SIZE ? false : $zip->getFromIndex($stat['index']);
     $zip->close();
 
     return false === $xml ? null : $xml;

@@ -8,7 +8,8 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
- * A new table only: the old release neither reads nor writes it. Fill it with catro:backfill:brick-usage.
+ * A new table only: the old release neither reads nor writes it. Binary collation: brick types are case-sensitive class
+ * names, and types differing only in case or trailing spaces must not collide on the primary key. Fill it with catro:backfill:brick-usage.
  */
 final class Version20261123120000 extends AbstractMigration
 {
@@ -23,7 +24,7 @@ final class Version20261123120000 extends AbstractMigration
   {
     $this->addSql('CREATE TABLE project_brick_usage (
       project_id CHAR(36) NOT NULL,
-      brick_type VARCHAR(255) NOT NULL,
+      brick_type VARCHAR(100) NOT NULL COLLATE `utf8mb4_bin`,
       count INT DEFAULT 0 NOT NULL,
       INDEX pbu_brick_type_idx (brick_type),
       INDEX IDX_9548A7BC166D1F9C (project_id),

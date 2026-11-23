@@ -69,6 +69,8 @@ Feature: Example projects that use a brick, for the docs brick pages
     Then the response status code should be "200"
     And the JSON response field "data" should be "[]"
 
-  Scenario: An invalid cursor is a bad request
+  Scenario: An invalid cursor or brick type is a bad request
     When I request "GET" "/api/docs/reference/bricks/SetXBrick/projects?cursor=not-a-cursor"
+    Then the response status code should be "400"
+    When I request "GET" "/api/docs/reference/bricks/_SetXBrick/projects"
     Then the response status code should be "400"

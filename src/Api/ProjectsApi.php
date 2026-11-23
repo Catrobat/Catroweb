@@ -16,6 +16,7 @@ use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
+use App\Project\CodeStatistics\ProjectBrickUsageWriter;
 use App\Project\CodeView\CodeExportUnavailableException;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
@@ -292,7 +293,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   public function docsReferenceBricksTypeProjectsGet(string $type, int $limit, ?string $cursor, string $attributes, int &$responseCode, array &$responseHeaders): ProjectsListResponse
   {
     $cursor_data = $this->decodeIntKeysetCursor($cursor);
-    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+    $invalid_cursor = null === $cursor_data && null !== $cursor && '' !== $cursor;
+    if ($invalid_cursor || !ProjectBrickUsageWriter::isValidBrickType($type)) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return new ProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);

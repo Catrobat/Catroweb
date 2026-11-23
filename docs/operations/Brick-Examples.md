@@ -15,7 +15,8 @@ cache can take around a second; this is accepted because the list cache absorbs 
 `project_brick_usage (project_id, brick_type, count)` is a queryable copy of the brick counts of a project's newest
 `project_code_statistics` row (`brick_counts` is JSON and cannot be searched per brick). Persisting a statistics row
 replaces the project's usage rows (`ProjectBrickUsageWriter`), so uploads and the lazy parse on the code statistics
-endpoint keep it current.
+endpoint keep it current. The rows are written after the statistics commit, as an upsert; a failure is logged and never
+breaks the statistics write. Only class-name types (`^[A-Za-z][A-Za-z0-9_]{0,99}$`) are stored, in a binary collation.
 
 ## Backfill
 

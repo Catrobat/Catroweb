@@ -56,6 +56,18 @@ final class BackfillBrickUsageCommandTest extends KernelTestCase
     $this->assertSame(['SetXBrick' => 5], $this->usage($id));
   }
 
+  public function testStoresOnlyClassNameTypesAndKeepsCaseApart(): void
+  {
+    $id = (string) $this->fixtures()->insertProject(['name' => 'types '.uniqid(), 'owned by' => $this->owner])->getId();
+
+    $this->persistStatistics($id, ['WaitBrick' => 1, 'waitbrick' => 1, 'WaitBrick ' => 1, '<x>' => 1]);
+
+    $this->assertSame(['WaitBrick' => 1, 'waitbrick' => 1], $this->usage($id));
+    $this->assertSame(1, (int) $this->entity_manager->getConnection()->fetchOne(
+      'SELECT COUNT(*) FROM project_code_statistics WHERE program_id = ?', [$id],
+    ));
+  }
+
   public function testFillsUsageFromStatisticsAndStoredFilesAndIsSafeToRerun(): void
   {
     $fixtures = $this->fixtures();
