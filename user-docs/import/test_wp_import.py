@@ -9,8 +9,10 @@ assert w.media_key("http://www.catrobat.org/wp-content/uploads/2024/07/a_b-1024x
     "https://catrobat.org/wp-content/uploads/2024/07/a_b.png"
 assert w.auto_brick("set-x-to", {"SetXBrick", "SetYBrick"}) == "SetXBrick"
 assert w.auto_brick("when-tapped", {"WhenBrick"}) is None
-assert w.redirect_target("en/a/index.md") == "/a" and w.redirect_target("de_DE/a/b.md") == "/de_DE/a/b"
+assert w.redirect_target("en/a/index.md") == "/a" and w.redirect_target("de_DE/a/b.md") == "/a/b?locale=de_DE"
 assert w.redirect_target("en/index.md") == "/" and w.redirect_target("reference/bricks/SetXBrick.md") == "/reference/bricks/SetXBrick"
+
+assert w.redirect_target("de_DE/index.md") == "/?locale=de_DE"
 
 html = (
     '<p id="A"><strong>Head</strong></p><p>One <em>two <strong>three</strong></em><br>x_1 _y_ [z]</p>'

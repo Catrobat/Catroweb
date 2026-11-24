@@ -10,7 +10,7 @@ Tap the plus button to add a new figure or object to your project.
 
 In Pocket Code, you can add a character or an object to your project in various ways:
 
-**Draw**: You can create your own character with **Pocket Paint**. Pocket Paint is a drawing program ([more about Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Draw**: You can create your own character with **Pocket Paint**. Pocket Paint is a drawing program ([more about Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Looks**: Choose one from a collection of pre-made actors and objects ([more about the media library](../elements/medialibrary.md)).
 

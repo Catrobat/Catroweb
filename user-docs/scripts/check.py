@@ -169,15 +169,24 @@ def check_media(path):
 
 
 def check_redirects(tsv):
-    """Every redirect target is a page file, or a generated reference page: /reference (a category: /reference#category_looks),
-    /reference/bricks/<Type>, also with a locale (/de_DE/reference/bricks/<Type>)."""
+    """Every destination resolves to a guide or generated reference route on Share."""
     errors = []
+    available = set(locales()) | {"en"}
     for line in tsv.read_text(encoding="utf-8").splitlines()[1:]:
         old, _, target = line.partition("\t")
-        rel = target.strip("/")
-        if re.fullmatch(r"(?:[a-z]{2}(?:_[A-Z]{2})?/)?reference(?:/bricks/\w+|#category_\w+)?", rel):
+        route, _, fragment = target.partition("#")
+        path, query_separator, query = route.partition("?")
+        locale = "en"
+        if query_separator:
+            if not query.startswith("locale=") or query.removeprefix("locale=") not in available:
+                errors.append(f"invalid redirect locale: {old} -> {target}")
+                continue
+            locale = query.removeprefix("locale=")
+        rel = path.strip("/")
+        reference = rel + ("#" + fragment if fragment else "")
+        if re.fullmatch(r"reference(?:/bricks/\w+|#category_\w+)?", reference):
             continue
-        base = rel if re.match(r"^[a-z]{2}(?:_[A-Z]{2})?(?:/|$)", rel) else ("en/" + rel).rstrip("/")
+        base = (locale + "/" + rel).rstrip("/")
         if not ((ROOT / (base + ".md")).exists() or (ROOT / base / "index.md").exists()):
             errors.append(f"redirect target missing: {old} -> {target}")
     return errors

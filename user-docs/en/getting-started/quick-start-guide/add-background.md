@@ -22,7 +22,7 @@ In the **looks section(1)**, you add a background. To do this, tap the + symbol.
 
 You can upload your own images, use predefined backgrounds, or create a background yourself.
 
-**Draw**: You can create your own background with **Pocket Paint**. Pocket Paint is a drawing program ([more about Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Draw**: You can create your own background with **Pocket Paint**. Pocket Paint is a drawing program ([more about Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Looks**: Choose one from a collection of pre-made backgrounds ([more about Medialibrary](../elements/medialibrary.md)).
 

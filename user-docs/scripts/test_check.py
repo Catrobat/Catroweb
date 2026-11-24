@@ -65,9 +65,10 @@ with tempfile.TemporaryDirectory() as tmp:
     assert check.translation_state({"reviewed": "true"}, h) == "current"
     assert check.translation_state({}, h) == "stale"
     assert check.translation_state({"source_hash": "'0000000'", "reviewed": "TRUE"}, h) == "reviewed-stale"
+    (root / "locales.txt").write_text("es_ES Spanish\nde_DE German\n")
     tsv = root / "redirects.tsv"
-    tsv.write_text("old_url\tnew_path\na\t/\nb\t/other\nc\t/reference/bricks/StartScript\nd\t/de_DE/reference/bricks/X\ne\t/gone\nf\t/de_DE\ng\t/reference\nh\t/de_DE/reference#category_looks\ni\t/reference#looks\n")
-    assert check.check_redirects(tsv) == ["redirect target missing: e -> /gone", "redirect target missing: f -> /de_DE", "redirect target missing: i -> /reference#looks"], check.check_redirects(tsv)
+    tsv.write_text("old_url\tnew_path\na\t/\nb\t/other\nc\t/reference/bricks/StartScript\nd\t/reference/bricks/X?locale=de_DE\ne\t/gone\nf\t/?locale=de_DE\ng\t/reference\nh\t/reference?locale=de_DE#category_looks\ni\t/reference#looks\nj\t/reference?lang=de_DE\n")
+    assert check.check_redirects(tsv) == ["redirect target missing: e -> /gone", "redirect target missing: f -> /?locale=de_DE", "redirect target missing: i -> /reference#looks", "invalid redirect locale: j -> /reference?lang=de_DE"], check.check_redirects(tsv)
     # Heading ids as share renders them: expected values from league/commonmark's SlugNormalizer (PHP).
     slugs = {
         "Füge ein Objekt aus der Medienbibliothek hinzu": "füge-ein-objekt-aus-der-medienbibliothek-hinzu",

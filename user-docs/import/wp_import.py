@@ -26,6 +26,14 @@ IMP = ROOT / "import"
 CACHE = IMP / ".cache"
 API = "https://catrobat.org/wp-json/wp/v2/docs?per_page=100&orderby=id&order=asc&page={}"
 OLD = "https://catrobat.org/docs/"
+# The landing page and historical slugs are outside the WordPress docs API.
+OLD_REDIRECT_ALIASES = {
+    OLD.rstrip("/"): "en/index.md",
+    OLD: "en/index.md",
+    OLD + "getting-started/quick-start-guide/backpack/": "en/getting-started/elements/backpack.md",
+    OLD + "erste-schritte/schnellstartanleitung/rucksack/": "de_DE/getting-started/elements/backpack.md",
+    OLD + "brick-dokumentation-de/ereignisse/wenn-ich-als-klon-starte/": "de_DE/reference/bricks/WhenClonedScript.md",
+}
 UA = {"User-Agent": "catrobat-docs-import/1.0"}
 MAX_MEDIA = 1_000_000
 UPLOAD = re.compile(r"https?://(?:www\.)?catrobat\.org/wp-content/uploads/[^\s\"'<>)?]+")
@@ -710,8 +718,8 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
         rows.append(f"{pid}\t{lang[pid]}\t{by_id[pid]['slug']}\t{title[pid]}\t{brick_class.get(pid, '')}\t{brick_type.get(pid, '')}\t{method.get(pid, 'unmapped')}")
     (IMP / "brick-map.tsv").write_text("\n".join(rows) + "\n", encoding="utf-8")
 
-    rows = ["old_url\tnew_path"]
-    for p in sorted(pages, key=lambda p: p["link"]):
+    redirects = {url: redirect_target(file) for url, file in OLD_REDIRECT_ALIASES.items()}
+    for p in pages:
         pid = p["id"]
         new = path[pid]
         if not new and pid in brick_type:  # empty brick page: the generated brick page still exists
@@ -723,7 +731,8 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
             anc = by_id[anc["parent"]]
             new = path[anc["id"]]
         new = new or ("de_DE/index.md" if lang[pid] == "de" else "en/index.md")
-        rows.append(f"{p['link']}\t{redirect_target(new)}")
+        redirects[p["link"]] = redirect_target(new)
+    rows = ["old_url\tnew_path"] + [f"{url}\t{target}" for url, target in sorted(redirects.items())]
     (IMP / "redirects.tsv").write_text("\n".join(rows) + "\n", encoding="utf-8")
 
     rows = ["url\tstatus\tbytes\tnew_path\treferenced_in_markdown"]
@@ -770,7 +779,7 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
         f"EN/DE pairs mapped (both sides have a file): {n_pairs}. Every pair is in `pages.tsv`.",
         "",
         "Every page with its status, old URL, new path and EN/DE pair: [`pages.tsv`](pages.tsv).",
-        "Old URL to new docs path for the redirects (M9): [`redirects.tsv`](redirects.tsv). Paths are relative to the docs root (`/getting-started/what-is-catrobat`, `/de_DE/…` for German, `/reference/bricks/<Type>` for bricks); an empty page redirects to its nearest ancestor with a page, or to the docs home.",
+        "Old URL to new docs path for the redirects (M9): [`redirects.tsv`](redirects.tsv). Append paths to the Share docs root, keeping the locale query before any fragment. For example, German reference pages use `/reference?locale=de_DE#category_looks`. An empty page redirects to its nearest ancestor with a page, or to the docs home.",
         "",
         "## Media",
         "",
@@ -823,9 +832,11 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
 
 
 def redirect_target(rel):
-    """The docs path a file becomes, from the docs root: en/a/b.md -> /a/b, de_DE/a/index.md -> /de_DE/a, en/index.md -> /."""
-    rel = re.sub(r"(^|/)index\.md$", "", rel).removesuffix(".md")
-    return "/" + (rel[3:] if rel.startswith("en/") else "" if rel == "en" else rel)
+    """Build a Share docs route from an imported file, selecting German via the locale query."""
+    german = rel.startswith("de_DE/")
+    rel = rel.removeprefix("de_DE/" if german else "en/")
+    path = "/" + re.sub(r"(^|/)index\.md$", "", rel).removesuffix(".md")
+    return path + "?locale=de_DE" if german else path
 
 
 if __name__ == "__main__":
