@@ -1,24 +1,24 @@
 ---
 title: Lolipop
-description: "Bu derste bir lolipop (124.6 x 65.6mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir lolipop (124.6 x 65.6mm) nakışlamayı öğreneceksin."
 order: 0
 flavors: [embroidery]
 source_hash: '2b7b6f093d64566e2fbac912661eb2e1496bd4b95f583ae7c9ff27989d236ae4'
 ---
 
-Bu derste bir lolipop (124.6 x 65.6mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir lolipop (124.6 x 65.6mm) nakışlamayı öğreneceksin.
 
 ![Lolipop (2)](../../../media/embroidery-tutorials/Lollipop-2.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Daire](../embroidery-tutorials-beginner/circle.md)** dersi bu ders için faydalı olabilir.
+**[Daire](../embroidery-tutorials-beginner/circle.md)** eğitimi bu eğitim için faydalı olabilir.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [LollipopPro](../../../media/embroidery-tutorials/LollipopPro.pdf)
 

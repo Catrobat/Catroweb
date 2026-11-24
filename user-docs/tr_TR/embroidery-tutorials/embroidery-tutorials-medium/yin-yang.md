@@ -1,24 +1,24 @@
 ---
 title: "Yin ve Yang"
-description: "Bu derste Yin ve Yang’ı (78.4 x 78.4mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde Yin ve Yang’ı (78.4 x 78.4mm) nakışlamayı öğreneceksin."
 order: 8
 flavors: [embroidery]
 source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
 ---
 
-Bu derste Yin ve Yang’ı (78.4 x 78.4mm) nakışlamayı öğreneceksin.
+Bu eğitimde Yin ve Yang’ı (78.4 x 78.4mm) nakışlamayı öğreneceksin.
 
 ![Yin ve Yang](../../../media/embroidery-tutorials/Yin-und-Yang.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Daire](../embroidery-tutorials-beginner/circle.md)** dersi bu ders için faydalı olabilir.
+**[Daire](../embroidery-tutorials-beginner/circle.md)** eğitimi bu eğitim için faydalı olabilir.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Yin ve Yang](../../../media/embroidery-tutorials/Yin-and-Yang.pdf)
 

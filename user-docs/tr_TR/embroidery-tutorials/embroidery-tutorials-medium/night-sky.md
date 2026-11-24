@@ -1,26 +1,26 @@
 ---
 title: Gece gökyüzü
-description: "Bu derste bir gece gökyüzü (48.5 x 96.1mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir gece gökyüzü (48.5 x 96.1mm) nakışlamayı öğreneceksin."
 order: 7
 flavors: [embroidery]
 source_hash: '3f0da383f72687df710f8b32a8618b97a678b7575849b1f8a3d1796eed75acb6'
 ---
 
-Bu derste bir gece gökyüzü (48.5 x 96.1mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir gece gökyüzü (48.5 x 96.1mm) nakışlamayı öğreneceksin.
 
 ![Gece gökyüzü](../../../media/embroidery-tutorials/Nachthimmel.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Yıldız](../embroidery-tutorials-beginner/star.md)** dersi bu ders için faydalı olabilir.
+**[Yıldız](../embroidery-tutorials-beginner/star.md)** eğitimi bu eğitim için faydalı olabilir.
 
 Mesaj gönderme işlevini zaten biliyorsan bu da işine yarar.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Gece gökyüzü](../../../media/embroidery-tutorials/Night-Sky.pdf)
 

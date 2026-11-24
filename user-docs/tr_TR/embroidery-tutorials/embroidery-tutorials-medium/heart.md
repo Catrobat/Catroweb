@@ -1,24 +1,24 @@
 ---
 title: Kalp
-description: "Bu derste bir kalp (103.6 x 112.8mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir kalp (103.6 x 112.8mm) nakışlamayı öğreneceksin."
 order: 0
 flavors: [embroidery]
 source_hash: '311eb3757aceb623e34bef1fa09a9105437aa04092cf93219094cf30613ac926'
 ---
 
-Bu derste bir kalp (103.6 x 112.8mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir kalp (103.6 x 112.8mm) nakışlamayı öğreneceksin.
 
 ![resim (10)](../../../media/embroidery-tutorials/image-10.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Yarım daire](../embroidery-tutorials-beginner/semicircle.md)** dersi bu ders için faydalı olabilir.
+**[Yarım daire](../embroidery-tutorials-beginner/semicircle.md)** eğitimi bu eğitim için faydalı olabilir.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Kalp](../../../media/embroidery-tutorials/Heart.pdf)
 

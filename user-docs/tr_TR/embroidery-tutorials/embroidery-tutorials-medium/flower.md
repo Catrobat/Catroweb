@@ -1,24 +1,24 @@
 ---
 title: Çiçek
-description: "Bu derste bir çiçek (73 x 74.2mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir çiçek (73 x 74.2mm) nakışlamayı öğreneceksin."
 order: 1
 flavors: [embroidery]
 source_hash: '4e8b3b0f4b29099b82f15363b58d59055c916bcd8764b0d9da15e7570edc2729'
 ---
 
-Bu derste bir çiçek (73 x 74.2mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir çiçek (73 x 74.2mm) nakışlamayı öğreneceksin.
 
 ![resim (11)](../../../media/embroidery-tutorials/image-11.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Daire](../embroidery-tutorials-beginner/circle.md)** dersi bu ders için faydalı olabilir.
+**[Daire](../embroidery-tutorials-beginner/circle.md)** eğitimi bu eğitim için faydalı olabilir.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Çiçek](../../../media/embroidery-tutorials/Flower.pdf)
 

@@ -1,24 +1,24 @@
 ---
 title: Spiral
-description: "Bu derste bir spiral (103.9 x 116.6mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir spiral (103.9 x 116.6mm) nakışlamayı öğreneceksin."
 order: 3
 flavors: [embroidery]
 source_hash: '7851b84ec24a676be2eb71f22afce741dde53df6c32e46030e48e15510bddd38'
 ---
 
-Bu derste bir spiral (103.9 x 116.6mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir spiral (103.9 x 116.6mm) nakışlamayı öğreneceksin.
 
 ![resim (14)](../../../media/embroidery-tutorials/image-14.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Daire](../embroidery-tutorials-beginner/circle.md)** dersi bu ders için faydalı olabilir.
+**[Daire](../embroidery-tutorials-beginner/circle.md)** eğitimi bu eğitim için faydalı olabilir.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Spiral](../../../media/embroidery-tutorials/Spiral.pdf)
 

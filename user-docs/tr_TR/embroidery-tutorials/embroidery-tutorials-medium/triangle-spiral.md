@@ -1,22 +1,22 @@
 ---
 title: Üçgen spiral
-description: "Bu derste bir üçgen spiral (50.2 x 58mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir üçgen spiral (50.2 x 58mm) nakışlamayı öğreneceksin."
 order: 6
 flavors: [embroidery]
 source_hash: '04b8bda9e77d4107c2717c77df26998012ae1cfe1a2f5ec794f24340f956b490'
 ---
 
-Bu derste bir üçgen spiral (50.2 x 58mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir üçgen spiral (50.2 x 58mm) nakışlamayı öğreneceksin.
 
 ![Üçgen spiral](../../../media/embroidery-tutorials/Triangle-Spiral.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Üçgen spiral](../../../media/embroidery-tutorials/Triangle-Spiral-1.pdf)
 

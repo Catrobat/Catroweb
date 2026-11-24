@@ -1,24 +1,24 @@
 ---
 title: Gökkuşağı
-description: "Bu derste bir gökkuşağı (112 x 57.2mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir gökkuşağı (112 x 57.2mm) nakışlamayı öğreneceksin."
 order: 8
 flavors: [embroidery]
 source_hash: 'd242a49d057bdd44a5c6b4c3536ff4575260ebd89a0214f6d222c27628108c95'
 ---
 
-Bu derste bir gökkuşağı (112 x 57.2mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir gökkuşağı (112 x 57.2mm) nakışlamayı öğreneceksin.
 
 ![Gökkuşağı](../../../media/embroidery-tutorials/Regenbogen.webp)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Yarım daire](../embroidery-tutorials-beginner/semicircle.md)** dersi bu ders için faydalı olabilir.
+**[Yarım daire](../embroidery-tutorials-beginner/semicircle.md)** eğitimi bu eğitim için faydalı olabilir.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Gökkuşağı](../../../media/embroidery-tutorials/Rainbow.pdf)
 

@@ -1,24 +1,24 @@
 ---
 title: Creeper (Minecraft)
-description: "Bu derste Minecraft’tan Creeper’ı (80 x 80mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde Minecraft’tan Creeper’ı (80 x 80mm) nakışlamayı öğreneceksin."
 order: 8
 flavors: [embroidery]
 source_hash: 'c6d16a562d32bda9647521b9c5820c8cee4aad5c319dbb82eef2a280fccf0385'
 ---
 
-Bu derste Minecraft’tan Creeper’ı (80 x 80mm) nakışlamayı öğreneceksin.
+Bu eğitimde Minecraft’tan Creeper’ı (80 x 80mm) nakışlamayı öğreneceksin.
 
 ![Creeper-Minecraft](../../../media/embroidery-tutorials/Creeper-Minecraft.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-**[Kare](../embroidery-tutorials-beginner/square.md)** dersi bu ders için faydalı olabilir.
+**[Kare](../embroidery-tutorials-beginner/square.md)** eğitimi bu eğitim için faydalı olabilir.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Creeper-Minecraft-en](../../../media/embroidery-tutorials/Creeper-Minecraft-en.pdf)
 

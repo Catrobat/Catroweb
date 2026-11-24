@@ -1,20 +1,20 @@
 ---
 title: Kâğıt uçak
-description: "Bu derste bir kâğıt uçak (58.2 x 80.7mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir kâğıt uçak (58.2 x 80.7mm) nakışlamayı öğreneceksin."
 order: 8
 flavors: [embroidery]
 source_hash: '1611f791a313e11f451ed47580f30396a90af16ec40ca33ee7de21f22437e5a4'
 ---
 
-Bu derste bir kâğıt uçak (58.2 x 80.7mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir kâğıt uçak (58.2 x 80.7mm) nakışlamayı öğreneceksin.
 
 ![Kâğıt uçak](../../../media/embroidery-tutorials/Papierflieger.png)
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Kâğıt uçak](../../../media/embroidery-tutorials/Paper-Plane.pdf)
 

@@ -1,20 +1,20 @@
 ---
 title: Göz yanılması
-description: "Bu derste bir göz yanılması (101.8 x 170.2mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir göz yanılması (101.8 x 170.2mm) nakışlamayı öğreneceksin."
 order: 4
 flavors: [embroidery]
 source_hash: 'e89fe35a554276507ac4bcef92188912a6b3df2583ee1f113a0891caaa1969e5'
 ---
 
-Bu derste bir göz yanılması (101.8 x 170.2mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir göz yanılması (101.8 x 170.2mm) nakışlamayı öğreneceksin.
 
 ![resim (16)](../../../media/embroidery-tutorials/image-16.png)
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Göz yanılması](../../../media/embroidery-tutorials/Optical-Illusion.pdf)
 

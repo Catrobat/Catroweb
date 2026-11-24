@@ -1,20 +1,20 @@
 ---
 title: Penrose üçgeni
-description: "Bu derste bir Penrose üçgeni (105.6 x 120.6mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir Penrose üçgeni (105.6 x 120.6mm) nakışlamayı öğreneceksin."
 order: 4
 flavors: [embroidery]
 source_hash: '9d9e0500445c12d4069a894603ef84de20c8398335122eb8f91276c5e368ac0c'
 ---
 
-Bu derste bir Penrose üçgeni (105.6 x 120.6mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir Penrose üçgeni (105.6 x 120.6mm) nakışlamayı öğreneceksin.
 
 ![resim (17)](../../../media/embroidery-tutorials/image-17.png)
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Penrose üçgeni](../../../media/embroidery-tutorials/Penrose-Triangle.pdf)
 

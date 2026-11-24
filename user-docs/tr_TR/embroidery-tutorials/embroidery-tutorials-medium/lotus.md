@@ -1,22 +1,22 @@
 ---
 title: Lotus
-description: "Bu derste bir lotus çiçeği (64.8 x 64.8mm) nakışlamayı öğreneceksin."
+description: "Bu eğitimde bir lotus çiçeği (64.8 x 64.8mm) nakışlamayı öğreneceksin."
 order: 1
 flavors: [embroidery]
 source_hash: '964bdf5c874fb1e229ad33207011f3652011485340d5e22c9520e5f6689ab210'
 ---
 
-Bu derste bir lotus çiçeği (64.8 x 64.8mm) nakışlamayı öğreneceksin.
+Bu eğitimde bir lotus çiçeği (64.8 x 64.8mm) nakışlamayı öğreneceksin.
 
 ![resim (12)](../../../media/embroidery-tutorials/image-12.png)
 
 Döngünün ne olduğunu ve nasıl çalıştığını zaten bilmelisin.
 
-Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış derslerine bir bak.
+Daha önce hiç nakış yapmadıysan [Başlangıç](../embroidery-tutorials-beginner/index.md) serisindeki nakış eğitimlerine bir bak.
 
-Daha fazla bilgi veya tasarım fikirleri için diğer derslere de göz at.
+Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
-*Dersi buradan PDF olarak indirebilirsin*:
+*Eğitimi buradan PDF olarak indirebilirsin*:
 
 [Lotus](../../../media/embroidery-tutorials/Lotus.pdf)
 
