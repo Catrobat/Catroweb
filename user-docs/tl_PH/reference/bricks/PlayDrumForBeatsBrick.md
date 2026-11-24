@@ -1,0 +1,6 @@
+---
+source_hash: '8eca99605bdceb9999a031e72b65211697adb292921f0ff8c3e6c1e03ba96896'
+---
+![Maglaro ng tambol trap drum para sa 1 beat](../../../media/bricks/Play_drum_snare_drum___for_1_beats_.png)
+
+Ang bloke ng code na ito ay naglalaro ng isang tunog sa tambol para sa isang tinukoy na bilang ng mga beat. Isipin ang iyong karakter na dumarming sa isang tiyak na panahon.
