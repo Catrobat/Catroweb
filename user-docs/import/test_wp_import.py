@@ -14,6 +14,15 @@ assert w.redirect_target("en/index.md") == "/" and w.redirect_target("reference/
 
 assert w.redirect_target("de_DE/index.md") == "/?locale=de_DE"
 
+page = {"content": {"rendered": (
+    '<img data-attachment-id="12" data-permalink="https://catrobat.org/docs/a/photo/"'
+    ' src="https://catrobat.org/wp-content/uploads/2024/07/p-300x58.png"/>'
+)}}
+assert w.attachment_redirects([page], {"https://catrobat.org/wp-content/uploads/2024/07/p.png": "media/a/p.png"}, {}) == {
+    "https://catrobat.org/docs/a/photo/": "https://share.catrobat.org/docs-media/a/p.png",
+    "https://catrobat.org/?attachment_id=12": "https://share.catrobat.org/docs-media/a/p.png",
+}
+
 html = (
     '<p id="A"><strong>Head</strong></p><p>One <em>two <strong>three</strong></em><br>x_1 _y_ [z]</p>'
     '<div class="wp-block-button"><a href="#A">Go</a></div>'

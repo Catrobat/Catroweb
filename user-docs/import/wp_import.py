@@ -20,6 +20,7 @@ import urllib.request
 import zlib
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 IMP = ROOT / "import"
@@ -735,6 +736,10 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
     rows = ["old_url\tnew_path"] + [f"{url}\t{target}" for url, target in sorted(redirects.items())]
     (IMP / "redirects.tsv").write_text("\n".join(rows) + "\n", encoding="utf-8")
 
+    attachments = attachment_redirects(pages, media_path, redirects)
+    rows = ["old_url\tnew_url"] + [f"{url}\t{target}" for url, target in sorted(attachments.items())]
+    (IMP / "attachment-redirects.tsv").write_text("\n".join(rows) + "\n", encoding="utf-8")
+
     rows = ["url\tstatus\tbytes\tnew_path\treferenced_in_markdown"]
     total = 0
     for url in sorted(refs):
@@ -780,6 +785,8 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
         "",
         "Every page with its status, old URL, new path and EN/DE pair: [`pages.tsv`](pages.tsv).",
         "Old URL to new docs path for the redirects (M9): [`redirects.tsv`](redirects.tsv). Append paths to the Share docs root, keeping the locale query before any fragment. For example, German reference pages use `/reference?locale=de_DE#category_looks`. An empty page redirects to its nearest ancestor with a page, or to the docs home.",
+        "",
+        "Legacy attachment permalinks and `?attachment_id=` URLs from the imported HTML map to full Share media URLs in [`attachment-redirects.tsv`](attachment-redirects.tsv). Apply this mapping alongside the page redirects.",
         "",
         "## Media",
         "",
@@ -829,6 +836,32 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
         lines += ["## Missing translations", ""] + [f"- {pid} {title[pid]}" for pid in missing_translations] + [""]
     (IMP / "REPORT.md").write_text("\n".join(lines), encoding="utf-8")
     print(f"pages {accounted}/{len(pages)} {counts}; media {len(refs) - len(missing)}+{len(missing)} missing/{len(refs)}; big {len(big)}; unresolved {len(set(unresolved))}; untranslated {len(missing_translations)}")
+
+
+def attachment_redirects(pages, media_path, guide_urls):
+    """Map old WordPress attachment URLs to the imported files they represented."""
+    redirects = {}
+    for page in pages:
+        nodes = [Tree(page["content"]["rendered"]).root]
+        while nodes:
+            node = nodes.pop()
+            nodes.extend(child for child in node.kids if isinstance(child, Node))
+            old = node.attrs.get("data-permalink") or ""
+            attachment_id = node.attrs.get("data-attachment-id") or ""
+            src = node.attrs.get("src") or ""
+            if node.tag != "img" or not old.startswith(OLD) or not attachment_id.isascii() or not attachment_id.isdecimal() or not src:
+                continue
+            rel = media_path.get(media_key(src))
+            if not rel:
+                continue
+            target = "https://share.catrobat.org/docs-media/" + quote(rel.removeprefix("media/"))
+            for source in (old, "https://catrobat.org/?attachment_id=" + attachment_id):
+                if source in guide_urls:
+                    continue  # do not shadow a documentation page
+                if source in redirects and redirects[source] != target:
+                    raise ValueError(f"conflicting attachment redirect: {source}")
+                redirects[source] = target
+    return redirects
 
 
 def redirect_target(rel):

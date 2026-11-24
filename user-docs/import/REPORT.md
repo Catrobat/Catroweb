@@ -23,6 +23,8 @@ EN/DE pairs mapped (both sides have a file): 198. Every pair is in `pages.tsv`.
 Every page with its status, old URL, new path and EN/DE pair: [`pages.tsv`](pages.tsv).
 Old URL to new docs path for the redirects (M9): [`redirects.tsv`](redirects.tsv). Append paths to the Share docs root, keeping the locale query before any fragment. For example, German reference pages use `/reference?locale=de_DE#category_looks`. An empty page redirects to its nearest ancestor with a page, or to the docs home.
 
+Legacy attachment permalinks and `?attachment_id=` URLs from the imported HTML map to full Share media URLs in [`attachment-redirects.tsv`](attachment-redirects.tsv). Apply this mapping alongside the page redirects.
+
 ## Media
 
 **611/611** referenced uploads accounted for: 608 stored in `media/`, 3 missing on the server (404; the pages keep the original URL).
