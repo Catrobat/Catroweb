@@ -1,5 +1,5 @@
 ---
-title: "Penrose Triangle"
+title: "Pembetatu ya Penrose"
 description: "Katika mafunzo haya, utajifunza jinsi ya embroider penrose triangle (105.6 x 120.6mm)."
 order: 4
 flavors: [embroidery]
@@ -16,16 +16,16 @@ Ili kupata habari zaidi au mapendekezo ya kubuni, soma mafunzo mengine.
 
 *Hapa unaweza kupakua mafunzo katika PDF-format*:
 
-[Penrose Triangle](../../../media/embroidery-tutorials/Penrose-Triangle.pdf)
+[Pembetatu ya Penrose](../../../media/embroidery-tutorials/Penrose-Triangle.pdf)
 
 ### 1. Kujenga kitu kipya embroidery (angalia [Kujenga vitu embroidery](../embroidery-tutorials-beginner/create-embroidery-objects.md)) na kuingiza script yafuatayo:
 
 ### 2. Sehemu ya Kwanza:
 
-![Penrose Triangle](../../../media/embroidery-tutorials/Penrose-Triangle.png)
+![Pembetatu ya Penrose](../../../media/embroidery-tutorials/Penrose-Triangle.png)
 
 ### 3. Sehemu ya Pili
 
-![Penrose Triangle (1)](../../../media/embroidery-tutorials/Penrose-Triangle-1.png)
+![Pembetatu ya Penrose (1)](../../../media/embroidery-tutorials/Penrose-Triangle-1.png)
 
 ### 4. Bonyeza kucheza ili uanze kubuni!
