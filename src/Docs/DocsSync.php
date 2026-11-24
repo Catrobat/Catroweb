@@ -15,8 +15,8 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
  * Imports the user docs (`user-docs/` in this repo, the same layout the Catrobat/docs repo had) into doc_page: renders
  * new and changed files, deletes pages whose file is gone, all in one transaction. A file is re-rendered only when it
  * changed, or when it embeds a project (name and picture may change), a brick or a formula element (a new catalog may
- * show it differently). Media are served by the web server as static files (public/docs-media links to
- * user-docs/media); a media file never changes once added (check.py).
+ * show it differently), or when a media file it links changed. Media are served by the web server as static files
+ * (public/docs-media links to user-docs/media); their URLs carry a content hash, so a replaced file is a new URL.
  */
 class DocsSync
 {
@@ -40,7 +40,7 @@ class DocsSync
     public readonly string $docs_dir,
     DocsCatalog $catalog,
   ) {
-    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...), $catalog);
+    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...), $catalog, $docs_dir);
   }
 
   /** "Improve this page": the English file in GitHub's editor (translations are generated from it). */
@@ -94,11 +94,11 @@ class DocsSync
   }
 
   /**
-   * The media files of a docs folder (paths inside media/). They go live as static files (public/docs-media), so a
-   * file of another type (SVG, HTML, ...) or a link fails the sync before anything changes: in a deploy and in the
-   * docs publish the sync runs before the new docs go live.
+   * The media files of a docs folder (path inside media/ => version, DocsMarkdown::mediaVersion). They go live as
+   * static files (public/docs-media), so a file of another type (SVG, HTML, ...) or a link fails the sync before
+   * anything changes: in a deploy and in the docs publish the sync runs before the new docs go live.
    *
-   * @return list<string>
+   * @return array<string, string>
    */
   public static function readMedia(string $dir): array
   {
@@ -117,21 +117,21 @@ class DocsSync
         }
         continue;
       }
-      $media[] = $path;
+      $media[$path] = (string) DocsMarkdown::mediaVersion($file->getPathname());
     }
     if ([] !== $refused) {
       sort($refused);
 
       throw new \RuntimeException('The user docs have media that may not go live (only '.implode(', ', self::MEDIA_EXTENSIONS).', no links): '.implode(', ', $refused));
     }
-    sort($media);
+    ksort($media);
 
     return $media;
   }
 
   /**
    * @param array<string, string> $files repo path => content
-   * @param list<string>          $media paths inside media/ (readMedia)
+   * @param array<string, string> $media path inside media/ => version (readMedia)
    *
    * @return array{created: int, updated: int, deleted: int, skipped: list<string>}
    */
@@ -150,8 +150,16 @@ class DocsSync
         $skipped[] = $file.': same page as '.$entries[$key]['file'];
         continue;
       }
-      // The render version is part of the change check, so a release that renders differently re-renders every page.
-      $entries[$key] = ['file' => $file, 'content' => $content, 'hash' => hash('sha256', $content), 'content_hash' => hash('sha256', DocsMarkdown::VERSION."\n".$content)] + $location;
+      // The render version is part of the change check, so a release that renders differently re-renders every page,
+      // and so are the versions of the media the page names, so a replaced image gets its new URL.
+      // ponytail: a media file counts as named when its path inside media/ appears in the text, raw or URL-encoded.
+      $versions = '';
+      foreach ($media as $path => $version) {
+        if (str_contains($content, $path) || str_contains($content, implode('/', array_map(rawurlencode(...), explode('/', $path))))) {
+          $versions .= "\n".$path.'='.$version;
+        }
+      }
+      $entries[$key] = ['file' => $file, 'content' => $content, 'hash' => hash('sha256', $content), 'content_hash' => hash('sha256', DocsMarkdown::VERSION."\n".$content.$versions)] + $location;
       if ('en' === $location['locale']) {
         $english_hashes[$location['kind'].'|'.$location['path']] = $entries[$key]['hash'];
       }

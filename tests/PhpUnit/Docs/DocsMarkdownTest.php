@@ -63,7 +63,7 @@ final class DocsMarkdownTest extends TestCase
 
   public function testRendersAPageSafely(): void
   {
-    $result = $this->markdown()->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md', ['tutorials/jump.png']);
+    $result = $this->markdown()->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md', ['tutorials/jump.png' => '6b7fa434f9']);
 
     $this->assertSame('Your first project', $result['front_matter']['title']);
     $this->assertSame([
@@ -79,7 +79,7 @@ final class DocsMarkdownTest extends TestCase
     // Page links relative to /{theme}/docs/getting-started/first-project; media from share's static copy.
     $this->assertStringContainsString('href="../../docs"', $html);
     $this->assertStringContainsString('href="../tutorials/jump#jump-higher"', $html);
-    $this->assertStringContainsString('src="/docs-media/tutorials/jump.png"', $html, 'served by share, not a third party');
+    $this->assertStringContainsString('src="/docs-media/tutorials/jump.png?v=6b7fa434f9"', $html, 'served by share, not a third party, versioned');
   }
 
   public function testRendersEmbeds(): void
@@ -155,13 +155,13 @@ final class DocsMarkdownTest extends TestCase
 
   public function testMediaLinksGoToTheStaticCopy(): void
   {
-    $media = ['a.png', 'teachers/sheet 1.pdf'];
+    $media = ['a.png' => '0123456789', 'teachers/sheet 1.pdf' => 'abcdef0123'];
     $markdown = '[Sheet](../../media/teachers/sheet%201.pdf) ![A](../../media/a.png) [Gone](../../media/gone.png)'
       ." [Out](../../media/../en/a.png) [Up](../../../a.png)\n";
     $html = $this->markdown()->convert($markdown, 'en/tutorials/jump.md', $media)['html'];
 
-    $this->assertStringContainsString('href="/docs-media/teachers/sheet%201.pdf"', $html, 'from a nested page');
-    $this->assertStringContainsString('src="/docs-media/a.png"', $html);
+    $this->assertStringContainsString('href="/docs-media/teachers/sheet%201.pdf?v=abcdef0123"', $html, 'from a nested page');
+    $this->assertStringContainsString('src="/docs-media/a.png?v=0123456789"', $html);
     $this->assertStringContainsString('href="../../media/gone.png"', $html, 'a missing file keeps its link');
     $this->assertStringContainsString('href="https://blob.example/en/a.png"', $html, 'no way out of media/');
     $this->assertStringContainsString('href="../../../a.png"', $html, 'no way out of the repo');
@@ -173,7 +173,7 @@ final class DocsMarkdownTest extends TestCase
     $runner = new CodeExportRunner(self::FIXTURES.'../CodeExport', new NullLogger());
     $localizer = new CodeViewLocalizer($runner);
     $catalog = new DocsCatalog($runner, $localizer, new CodeTreeBuilder($this->createStub(CodeViewExportStore::class), $localizer, new RequestStack()), new ArrayAdapter(), __DIR__.'/../../../assets/Project/CodeViewCategories.json');
-    $markdown = new DocsMarkdown('https://blob.example/', static fn (string $id): ?array => null, $catalog);
+    $markdown = new DocsMarkdown('https://blob.example/', static fn (string $id): ?array => null, $catalog, self::FIXTURES);
 
     $text = $markdown->markdown($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md', 'https://share.example/app/');
 
@@ -185,7 +185,8 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('[docs-example-project](https://share.example/app/project/docs-example-project)', $text);
     $this->assertStringContainsString('[back to the start](https://share.example/app/docs)', $text);
     $this->assertStringContainsString('[how to jump](https://share.example/app/docs/tutorials/jump#jump-higher)', $text);
-    $this->assertStringContainsString('](https://share.example/docs-media/tutorials/jump.png)', $text);
+    $this->assertStringContainsString('](https://share.example/docs-media/tutorials/jump.png?v=6b7fa434f9)', $text, 'versioned from the file on disk');
+    $this->assertStringContainsString('](https://share.example/docs-media/gone.png)', $markdown->markdown('![Gone](../media/gone.png)', 'en/index.md', 'https://share.example/app/'), 'a missing file has no version');
 
     // The HTML rendering afterwards is relative again.
     $html = $markdown->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md')['html'];
