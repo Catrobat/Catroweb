@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatori"
     examples: "Progetti di esempio"
     no_prose: "Nessuno ha ancora spiegato questo mattoncino. Puoi scrivere la prima spiegazione."
+    setting: "Per vedere questo mattoncino nell’app, attiva «%setting%» nelle impostazioni."
     empty: "La guida ai mattoncini non è disponibile in questo momento."

@@ -136,6 +136,8 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertSame(200, $brick->getStatusCode());
     $this->assertStringStartsWith("# Set x to 100\n\nCatrobat brick `SetXBrick`, in ", (string) $brick->getContent());
     $this->assertStringContainsString('puts the object at a position', (string) $brick->getContent());
+    $this->assertStringNotContainsString('To see this brick', (string) $brick->getContent(), 'always shown');
+    $this->assertStringContainsString("\n> To see this brick in the app, turn on “Lego Mindstorms NXT extension” in the settings.\n", (string) $get('/app/docs/reference/bricks/LegoNxtMotorTurnAngleBrick.md')->getContent());
     foreach (['/app/docs/does-not-exist.md', '/app/docs/reference/bricks/NoSuchBrick.md'] as $missing) {
       try {
         $get($missing);

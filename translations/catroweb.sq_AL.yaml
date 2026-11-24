@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatorë"
     examples: "Projekte shembull"
     no_prose: "Askush nuk e ka shpjeguar ende këtë bllok. Mund të shkruash shpjegimin e parë."
+    setting: "Për ta parë këtë bllok në aplikacion, aktivizo “%setting%” te cilësimet."
     empty: "Udhëzuesi i blloqeve nuk është i disponueshëm tani."

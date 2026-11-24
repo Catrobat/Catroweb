@@ -1080,4 +1080,5 @@ docs:
     operators: "Operateurs"
     examples: "Voorbeeldprojekte"
     no_prose: "Niemand het hierdie blok nog verduidelik nie. Jy kan die eerste verduideliking skryf."
+    setting: "Om hierdie blok in die app te sien, skakel “%setting%” in die instellings aan."
     empty: "Die blokverwysing is nie nou beskikbaar nie."

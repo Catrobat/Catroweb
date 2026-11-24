@@ -51,6 +51,11 @@ Feature: Brick and formula reference pages, generated from Catroid's catalog
     Then the element ".docs-article__title" should contain "Setze x auf 100"
     And the element ".docs-content" should contain "setzt das Objekt an eine Stelle"
 
+  Scenario: A brick the app shows only after a setting is switched on says which setting
+    When I go to "/app/docs/reference/bricks/LegoNxtMotorTurnAngleBrick?locale=de"
+    And I wait for the page to be loaded
+    Then the element ".docs-note[role='note']" should contain "Damit du diesen Baustein in der App siehst, schalte in den Einstellungen „Erweiterung Lego Mindstorms NXT“ ein."
+
   Scenario: A brick without explanation invites to write one
     When I go to "/app/docs/reference/bricks/StartScript"
     And I wait for the page to be loaded

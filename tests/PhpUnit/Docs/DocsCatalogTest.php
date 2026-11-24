@@ -58,6 +58,22 @@ final class DocsCatalogTest extends TestCase
     $this->assertNull($this->catalog()->brick('NoSuchBrick', 'de'));
   }
 
+  public function testTheSettingThatShowsABrick(): void
+  {
+    $catalog = $this->catalog();
+    $setting = static fn (string $type, string $locale = 'en'): ?string => $catalog->brick($type, $locale)['setting'] ?? null;
+
+    $this->assertSame('Lego Mindstorms NXT extension', $setting('LegoNxtMotorTurnAngleBrick'));
+    $this->assertSame('Erweiterung Lego Mindstorms NXT', $setting('LegoNxtMotorTurnAngleBrick', 'de_DE'));
+    $this->assertSame('Testing extension', $setting('AssertEqualsBrick'));
+    $this->assertSame('Chromecast extension', $setting('WhenGamepadButtonScript'));
+    $this->assertSame('Parrot AR.Drone 2.0 extension', $setting('DroneTakeOffLandBrick'));
+    $this->assertSame("RobotixEdu's Phiro extension", $setting('PhiroMotorMoveForwardBrick'), 'by its type: also listed under Motion');
+    $this->assertNull($setting('SetXBrick'), 'also listed under Motion, which is always shown');
+    $this->assertNull($setting('SetVariableBrick'), 'listed under Phiro but also under Data');
+    $this->assertNull($setting('ResetTimerBrick'), 'only under Device, which is always shown');
+  }
+
   public function testEveryBrickIsLocalizedInEveryLanguage(): void
   {
     $this->assertNoMarkers($this->catalog(), self::FIXTURES);

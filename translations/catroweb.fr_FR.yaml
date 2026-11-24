@@ -1079,4 +1079,5 @@ docs:
     operators: "Opérateurs"
     examples: "Projets d'exemple"
     no_prose: "Personne n'a encore expliqué cette brique. Tu peux écrire la première explication."
+    setting: "Pour voir cette brique dans l’application, active « %setting% » dans les paramètres."
     empty: "La référence des briques n'est pas disponible pour le moment."

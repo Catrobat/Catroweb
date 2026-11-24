@@ -1059,4 +1059,5 @@ docs:
     operators: "運算子"
     examples: "範例專案"
     no_prose: "還沒有人解釋過這個積木。你可以寫第一個解釋。"
+    setting: "要在應用程式中看到這個積木，請在設定中開啟「%setting%」。"
     empty: "積木參考暫時無法使用。"

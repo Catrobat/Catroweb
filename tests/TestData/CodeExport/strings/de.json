@@ -106,6 +106,21 @@
     "percent_symbol": "%",
     "phiro_motor_speed": "Geschwindigkeit",
     "to_label": "auf",
-    "y_label": "y:"
+    "y_label": "y:",
+    "preference_title_ai": "Erweiterung Künstliche Intelligenz (KI)",
+    "preference_title_ai_speech_recognition": "Spracherkennung",
+    "preference_title_ai_speech_synthetization": "Sprachausgabe",
+    "preference_title_cast_feature_globally_enabled": "Erweiterung Chromecast",
+    "preference_title_enable_arduino_bricks": "Erweiterung Arduino",
+    "preference_title_enable_embroidery_bricks": "Erweiterung Stickerei",
+    "preference_title_enable_jumpingsumo_bricks": "Erweiterung Parrot Jumping Sumo",
+    "preference_title_enable_mindstorms_ev3_bricks": "Erweiterung Lego Mindstorms EV3",
+    "preference_title_enable_mindstorms_nxt_bricks": "Erweiterung Lego Mindstorms NXT",
+    "preference_title_enable_nfc_bricks": "Erweiterung Nahfeldkommunikation (NFC)",
+    "preference_title_enable_phiro_bricks": "Erweiterung Phiro von RobotixEdu",
+    "preference_title_enable_plot_bricks": "Erweiterung Plotter und Laser",
+    "preference_title_enable_quadcopter_bricks": "Erweiterung Parrot AR.Drone 2.0",
+    "preference_title_enable_raspi_bricks": "Erweiterung Raspberry Pi",
+    "preference_title_enable_test_bricks": "Erweiterung Tests"
   }
 }

@@ -1057,4 +1057,5 @@ docs:
     operators: "Masu aiki"
     examples: "Ayyukan misali"
     no_prose: "Babu wanda ya bayyana wannan bulo tukuna. Kai za ka iya rubuta bayani na farko."
+    setting: "Don ganin wannan bulo a cikin manhaja, kunna “%setting%” a cikin saituna."
     empty: "Bayanin bulo-bulo ba ya samuwa yanzu."

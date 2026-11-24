@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatoriai"
     examples: "Projektų pavyzdžiai"
     no_prose: "Šio bloko dar niekas nepaaiškino. Gali parašyti pirmą paaiškinimą."
+    setting: "Kad šį bloką matytum programėlėje, nustatymuose įjunk „%setting%“."
     empty: "Blokų žinynas šiuo metu nepasiekiamas."

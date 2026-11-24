@@ -36,6 +36,45 @@ class DocsCatalog implements ResetInterface
     'WhenRaspiPinChangedBrick' => 'RaspiInterruptScript',
   ];
 
+  /**
+   * The app settings that show a category's bricks (Catroid's BrickCategoryListBuilder, CategoryBricksFactory), as the
+   * strings of their titles in Catroid's settings: outer screen first. The catalog lists every brick with every setting
+   * on. A brick listed in another category too is shown without the setting, except for Device, which lists the
+   * bricks of every switched-on category.
+   */
+  private const array CATEGORY_SETTINGS = [
+    'category_arduino' => ['preference_title_enable_arduino_bricks'],
+    'category_assertions' => ['preference_title_enable_test_bricks'],
+    'category_cast' => ['preference_title_cast_feature_globally_enabled'],
+    'category_drone' => ['preference_title_enable_quadcopter_bricks'],
+    'category_embroidery' => ['preference_title_enable_embroidery_bricks'],
+    'category_jumping_sumo' => ['preference_title_enable_jumpingsumo_bricks'],
+    'category_laser' => ['preference_title_enable_plot_bricks'],
+    'category_lego_ev3' => ['preference_title_enable_mindstorms_ev3_bricks'],
+    'category_lego_nxt' => ['preference_title_enable_mindstorms_nxt_bricks'],
+    'category_phiro' => ['preference_title_enable_phiro_bricks'],
+    'category_plot' => ['preference_title_enable_plot_bricks'],
+    'category_raspi' => ['preference_title_enable_raspi_bricks'],
+  ];
+
+  /** Bricks of the other categories that a setting shows (CategoryBricksFactory), as in CATEGORY_SETTINGS. */
+  private const array BRICK_SETTINGS = [
+    'AskSpeechBrick' => ['preference_title_ai', 'preference_title_ai_speech_recognition'],
+    'PhiroIfLogicBeginBrick' => ['preference_title_enable_phiro_bricks'],
+    'PhiroMotorMoveBackwardBrick' => ['preference_title_enable_phiro_bricks'],
+    'PhiroMotorMoveForwardBrick' => ['preference_title_enable_phiro_bricks'],
+    'PhiroMotorStopBrick' => ['preference_title_enable_phiro_bricks'],
+    'PhiroPlayToneBrick' => ['preference_title_enable_phiro_bricks'],
+    'PhiroRGBLightBrick' => ['preference_title_enable_phiro_bricks'],
+    'SetListeningLanguageBrick' => ['preference_title_ai', 'preference_title_ai_speech_recognition'],
+    'SetNfcTagBrick' => ['preference_title_enable_nfc_bricks'],
+    'SpeakAndWaitBrick' => ['preference_title_ai', 'preference_title_ai_speech_synthetization'],
+    'SpeakBrick' => ['preference_title_ai', 'preference_title_ai_speech_synthetization'],
+    'StartListeningBrick' => ['preference_title_ai', 'preference_title_ai_speech_recognition'],
+    'WhenNfcScript' => ['preference_title_enable_nfc_bricks'],
+    'WriteEmbroideryToFileBrick' => ['preference_title_enable_embroidery_bricks'],
+  ];
+
   /** @var array<string, array{categories: list<array{key: string, name: string, color: string, bricks: list<array<string, mixed>>}>, formula: array<string, list<array{name: string, label: string|null}>>}> */
   private array $localized = [];
 
@@ -81,9 +120,9 @@ class DocsCatalog implements ResetInterface
   }
 
   /**
-   * The localized brick and the categories that list it, or null.
+   * The localized brick, the categories that list it and the app setting that shows it (null: always shown), or null.
    *
-   * @return array{brick: array<string, mixed>, categories: list<array{key: string, name: string, color: string}>}|null
+   * @return array{brick: array<string, mixed>, categories: list<array{key: string, name: string, color: string}>, setting: string|null}|null
    */
   public function brick(string $type, string $locale): ?array
   {
@@ -104,7 +143,36 @@ class DocsCatalog implements ResetInterface
     return [
       'brick' => $found,
       'categories' => array_map(static fn (array $category): array => ['key' => $category['key'], 'name' => $category['name'], 'color' => $category['color']], $listed),
+      'setting' => $this->setting($type, array_column($listed, 'key'), $locale),
     ];
+  }
+
+  /**
+   * The title of the app setting that shows this brick ("Lego Mindstorms NXT extension"), or null if it is always
+   * shown or its title is not in the deployed strings.
+   *
+   * @param list<string> $categories the keys of the categories listing it, its own first
+   */
+  private function setting(string $type, array $categories, string $locale): ?string
+  {
+    $names = self::BRICK_SETTINGS[$type] ?? null;
+    if (null === $names) {
+      $gated = array_values(array_intersect($categories, array_keys(self::CATEGORY_SETTINGS)));
+      if ([] === $gated || [] !== array_diff($categories, $gated, ['category_device'])) {
+        return null;
+      }
+      $names = self::CATEGORY_SETTINGS[$gated[0]];
+    }
+    $titles = [];
+    foreach ($names as $name) {
+      $title = $this->localizer->localize("\x01s:".$name."\x02", $locale);
+      if ($title === $name) {
+        return null; // not in this export's strings: no hint rather than a string's name
+      }
+      $titles[] = $title;
+    }
+
+    return implode(' › ', $titles);
   }
 
   /**

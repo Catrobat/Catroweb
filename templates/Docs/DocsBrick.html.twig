@@ -16,6 +16,10 @@
 
     <div class="docs-reference__shown">{{ brick_html|raw }}</div>
 
+    {% if setting_hint %}
+      <p class="docs-note" role="note">{{ setting_hint }}</p>
+    {% endif %}
+
     {% if prose %}
       {{ translation_note(prose, fallback) }}
       <div class="docs-content" lang="{{ prose.locale|replace({_: '-'}) }}">{{ prose.html|raw }}</div>

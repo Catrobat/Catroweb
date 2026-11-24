@@ -1062,4 +1062,5 @@ docs:
     operators: "运算符"
     examples: "示例项目"
     no_prose: "还没有人解释过这个积木。你可以写第一个解释。"
+    setting: "要在应用中看到这个积木，请在设置中打开“%setting%”。"
     empty: "积木参考暂时不可用。"

@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatorer"
     examples: "Eksempelprosjekter"
     no_prose: "Ingen har forklart denne klossen ennå. Du kan skrive den første forklaringen."
+    setting: "For å se denne klossen i appen, slå på «%setting%» i innstillingene."
     empty: "Klossoversikten er ikke tilgjengelig akkurat nå."

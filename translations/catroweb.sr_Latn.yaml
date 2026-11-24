@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatori"
     examples: "Primeri projekata"
     no_prose: "Niko još nije objasnio ovaj blok. Možeš da napišeš prvo objašnjenje."
+    setting: "Da bi video ovaj blok u aplikaciji, uključi „%setting%“ u podešavanjima."
     empty: "Pregled blokova trenutno nije dostupan."

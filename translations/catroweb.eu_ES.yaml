@@ -1079,4 +1079,5 @@ docs:
     operators: "Eragileak"
     examples: "Adibide-proiektuak"
     no_prose: "Inork ez du bloke hau oraindik azaldu. Lehen azalpena zuk idatz dezakezu."
+    setting: "Bloke hau aplikazioan ikusteko, aktibatu «%setting%» ezarpenetan."
     empty: "Blokeen erreferentzia ez dago erabilgarri une honetan."
