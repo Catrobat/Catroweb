@@ -1,0 +1,19 @@
+---
+source_hash: '506490e42f1db106d6247eedb85c4a03ab23d2028796ed83688a2d63eb2964b8'
+---
+
+![Siųsti visiems](../../../media/bricks/broadcast2-1.png)
+
+Siunčia žinutę kitoms projekto dalims ir liepia joms pradėti savo scenarijus. Tai kaip paskelbimas, kurį visi girdi.
+
+**Kodėl siųsti žinutes?**
+
+Žinutėmis gali bendrauti ir sąveikauti įvairūs objektai scenoje. Vienas objektas gali išsiųsti žinutę visiems kitiems objektams, o gavėjai gali į ją reaguoti.
+
+Šios žinutės **nerodomos** ekrane! Jei nori rodyti žinutes, naudok blokus kategorijoje „Išvaizda“!
+
+**Kaip tai veikia?**
+
+- *Siunčiantis objektas:* Siunčiantis objektas pradeda bendravimą naudodamas bloką *„Siųsti visiems“*. Šis blokas siunčia žinutę visiems kitiems scenos objektams (taip pat ir fonui).
+- *Gaunantis objektas:* Gaunantis objektas klauso žinučių ir į jas reaguoja. Jis naudoja bloką *„Kai gauni“*, kad pastebėtų konkrečią gaunamą žinutę.
+- *Žinutės apdorojimas:* Kai gaunantis objektas gauna žinutę, jis įvykdo visus blokus, esančius po bloku *„Kai gauni“*. Taip gali nustatyti savo veiksmus, kurie įvyksta gavus konkrečią žinutę.
