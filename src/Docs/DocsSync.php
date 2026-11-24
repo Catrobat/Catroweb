@@ -63,6 +63,18 @@ class DocsSync
   }
 
   /**
+   * The page's Markdown source with absolute links (DocsMarkdown::markdown), null when its file is gone.
+   *
+   * @param string $root absolute URL of the theme root, with trailing slash
+   */
+  public function markdown(DocPage $page, string $root): ?string
+  {
+    $file = rtrim($this->docs_dir, '/').'/'.$page->getSourceFile();
+
+    return is_file($file) ? $this->markdown->markdown((string) file_get_contents($file), $page->getSourceFile(), $root) : null;
+  }
+
+  /**
    * The Markdown files of a docs folder, keyed by their path in it.
    *
    * @return array<string, string>

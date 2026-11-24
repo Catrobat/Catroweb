@@ -168,6 +168,30 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringNotContainsString('/docs-media/../', $html);
   }
 
+  public function testMarkdownHasAbsoluteLinksAndEmbedsAsLinks(): void
+  {
+    $runner = new CodeExportRunner(self::FIXTURES.'../CodeExport', new NullLogger());
+    $localizer = new CodeViewLocalizer($runner);
+    $catalog = new DocsCatalog($runner, $localizer, new CodeTreeBuilder($this->createStub(CodeViewExportStore::class), $localizer, new RequestStack()), new ArrayAdapter(), __DIR__.'/../../../assets/Project/CodeViewCategories.json');
+    $markdown = new DocsMarkdown('https://blob.example/', static fn (string $id): ?array => null, $catalog);
+
+    $text = $markdown->markdown($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md', 'https://share.example/app/');
+
+    $this->assertStringStartsWith('## Move the cat', $text, 'no front matter');
+    $this->assertStringContainsString('[Set x to 100](https://share.example/app/docs/reference/bricks/SetXBrick)', $text);
+    $this->assertStringContainsString('[sine](https://share.example/app/docs/reference/formula/SIN)', $text);
+    $this->assertStringContainsString('The formula ::formula{name=SIN} only works', $text, 'an embed inside a line stays text');
+    $this->assertStringContainsString('[YouTube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)', $text);
+    $this->assertStringContainsString('[docs-example-project](https://share.example/app/project/docs-example-project)', $text);
+    $this->assertStringContainsString('[back to the start](https://share.example/app/docs)', $text);
+    $this->assertStringContainsString('[how to jump](https://share.example/app/docs/tutorials/jump#jump-higher)', $text);
+    $this->assertStringContainsString('](https://share.example/docs-media/tutorials/jump.png)', $text);
+
+    // The HTML rendering afterwards is relative again.
+    $html = $markdown->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md')['html'];
+    $this->assertStringNotContainsString('share.example', $html);
+  }
+
   private function markdown(): DocsMarkdown
   {
     return new DocsMarkdown('https://blob.example/', static fn (string $id): ?array => 'docs-example-project' === $id

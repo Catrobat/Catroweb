@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Docs;
 
+use App\Application\Controller\Docs\DocsController;
 use App\DB\Entity\Docs\DocPage;
 use App\DB\EntityRepository\Docs\DocPageRepository;
 use App\Docs\DocsSync;
@@ -11,6 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -19,6 +22,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * @internal
  */
 #[CoversClass(DocsSync::class)]
+#[CoversClass(DocsController::class)]
 final class DocsSyncTest extends KernelTestCase
 {
   private const string FIXTURES = __DIR__.'/../../TestData/Docs';
@@ -107,6 +111,52 @@ final class DocsSyncTest extends KernelTestCase
       $explicit = $kernel->handle(Request::create($url.'?locale=de'), HttpKernelInterface::MAIN_REQUEST, false);
       $this->assertTrue($explicit->headers->getCacheControlDirective('public'), $url.'?locale=de');
     }
+  }
+
+  public function testServesThePagesAsMarkdownAndLlmsTxt(): void
+  {
+    $this->sync->import(DocsSync::readDirectory(self::FIXTURES));
+    $kernel = self::$kernel;
+    $this->assertNotNull($kernel);
+    $get = static fn (string $url): Response => $kernel->handle(Request::create($url), HttpKernelInterface::MAIN_REQUEST, false);
+
+    $page = $get('/pocketcode/docs/getting-started/first-project.md');
+    $this->assertSame(200, $page->getStatusCode());
+    $this->assertSame('text/markdown; charset=utf-8', $page->headers->get('Content-Type'));
+    $this->assertSame('nosniff', $page->headers->get('X-Content-Type-Options'));
+    $this->assertStringStartsWith("# Your first project\n\n> Make an object move.\n\n## Move the cat", (string) $page->getContent());
+    $this->assertStringContainsString('(http://localhost/app/docs/tutorials/jump#jump-higher)', (string) $page->getContent(), 'links lead to /app/');
+
+    $german = $get('/app/docs/tutorials/jump.md?locale=de_DE');
+    $this->assertStringStartsWith('# Lass deine Katze springen', (string) $german->getContent());
+    $this->assertTrue($german->headers->getCacheControlDirective('public'));
+    $this->assertSame(200, $get('/app/docs/index.md')->getStatusCode());
+
+    $brick = $get('/app/docs/reference/bricks/SetXBrick.md');
+    $this->assertSame(200, $brick->getStatusCode());
+    $this->assertStringStartsWith("# Set x to 100\n\nCatrobat brick `SetXBrick`, in ", (string) $brick->getContent());
+    $this->assertStringContainsString('puts the object at a position', (string) $brick->getContent());
+    foreach (['/app/docs/does-not-exist.md', '/app/docs/reference/bricks/NoSuchBrick.md'] as $missing) {
+      try {
+        $get($missing);
+        $this->fail($missing.' should not be found');
+      } catch (NotFoundHttpException) {
+        $this->addToAssertionCount(1);
+      }
+    }
+
+    $html = (string) $get('/app/docs/tutorials/jump')->getContent();
+    $this->assertStringContainsString('<link rel="alternate" type="text/markdown" href="/app/docs/tutorials/jump.md">', $html);
+
+    $llms = $get('/llms.txt');
+    $this->assertSame(200, $llms->getStatusCode());
+    $this->assertSame('text/plain; charset=utf-8', $llms->headers->get('Content-Type'));
+    $this->assertTrue($llms->headers->getCacheControlDirective('public'));
+    $text = (string) $llms->getContent();
+    $this->assertStringStartsWith("# Catrobat documentation\n\n> Learn to make games", $text);
+    $this->assertStringContainsString('## Getting started', $text);
+    $this->assertStringContainsString('- [Your first project](http://localhost/app/docs/getting-started/first-project.md)', $text);
+    $this->assertStringContainsString('- [Set x to 100](http://localhost/app/docs/reference/bricks/SetXBrick.md): ', $text);
   }
 
   public function testReadsTheMedia(): void

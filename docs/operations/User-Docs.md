@@ -67,6 +67,16 @@ Share never loads docs media from a third party: every page view would hand the 
 - The app sidebar's "Documentation" entry leads to `/{theme}/docs` (`/help` and `/stepByStep` redirect there). On a docs page the sidebar also lists the sections below it: the top-level guides (the theme's flavour first, the docs home left out), then the brick reference, the current one marked (`DocsController::docsNav`). There is no separate docs tree.
 - `/{theme}/docs` and `/{theme}/docs/{path}` render the same data in Twig: breadcrumb, "In this section" (the pages beside it in its section, at most 15 nearest ones and a link to the section page; closed on phones, beside the page on wide screens), a section page's pages (the docs home: the sections), table of contents, previous and next, the fallback or translation note and "Improve this page" (the English file in GitHub's editor: `github.com/Catrobat/Catroweb/edit/main/user-docs/…`). The language is the visitor's, or `?locale=`. `rel=canonical` points at `/app/docs/...` (with `?locale=` for a translation), `hreflang` alternates list every language the page exists in, and the sitemap lists every page in every language.
 
+### Markdown and llms.txt
+
+For AI assistants and other readers that want text:
+
+- `/{theme}/docs/{path}.md` (`/app/docs/index.md` for the docs home) is the guide's Markdown file from `user-docs/` (`DocsSync::markdown`, read from disk next to the release), in the language chosen as for the page: the title as `#` heading, the description as quote, no front matter. Links and images are absolute (`https://share.catrobat.org/app/docs/...`, `/docs-media/...`), embeds become links (`DocsMarkdown::markdown`).
+- `/{theme}/docs/reference/bricks/{type}.md`: the brick's text and categories from the catalog, then its explanation.
+- `/llms.txt` ([llmstxt.org](https://llmstxt.org)): the English docs home, every section with its pages, then every brick, each linked to its `.md` URL on `/app/`. Built from `doc_page` and the catalog on each request.
+- The HTML page links its Markdown with `<link rel="alternate" type="text/markdown">`.
+- Answers are `text/markdown` (`llms.txt`: `text/plain`) with `X-Content-Type-Options: nosniff` and the API's cache rule (`public, max-age=300` with `?locale=` and for `llms.txt`, else `private`). These URLs have their own firewall without security (`docs_markdown` in `config/packages/security.php`): no session is touched, so Symfony does not turn them `private`.
+
 ## Search
 
 Share's search (the magnifier in the top bar, `/{theme}/search/<words>`) shows a "Documentation" section next to projects, users and studios: guides, bricks and formula elements, each with a link and a snippet. A search started on a docs page (`?context=docs`) shows the docs first. The page asks `GET /api/docs/search?q=&locale=&limit=` (at most `limit` results per group, `q` 1 to 200 characters, rate limit `docs_search_burst`; `Cache-Control` follows the rule of the other docs endpoints).

@@ -73,3 +73,16 @@ Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
       | language |
       | de       |
       | de-AT    |
+
+  Scenario: A page as Markdown, for AI assistants
+    When I request "GET" "/app/docs/getting-started/first-project.md"
+    Then the response status code should be "200"
+    And the response Header should contain the key "Content-Type" with the value 'text/markdown; charset=utf-8'
+    And the client response should contain "# Your first project"
+    And the client response should contain "/app/docs/tutorials/jump#jump-higher"
+
+  Scenario: llms.txt lists the docs as Markdown
+    When I request "GET" "/llms.txt"
+    Then the response status code should be "200"
+    And the client response should contain "# Catrobat documentation"
+    And the client response should contain "/app/docs/getting-started/first-project.md"

@@ -1,6 +1,6 @@
 {# The docs frame: breadcrumb, the pages of the section beside the page and the docs entry. The sections themselves are
    in the app sidebar (Layout/Sidebar.html.twig). Pages fill docs_article and pass docs_nav (DocsController::docsNav),
-   alternates, x_default_url (and canonical_url). #}
+   alternates, x_default_url (and canonical_url, markdown_url). #}
 {% extends 'Layout/Base.html.twig' %}
 
 {# Whether the shown text is English standing in, an outdated or an automatic translation. #}
@@ -21,6 +21,9 @@
     <link rel="alternate" hreflang="{{ alternate.locale|replace({_: '-'}) }}" href="{{ alternate.url }}">
   {% endfor %}
   <link rel="alternate" hreflang="x-default" href="{{ x_default_url }}">
+  {% if markdown_url is defined %}
+    <link rel="alternate" type="text/markdown" href="{{ markdown_url }}">
+  {% endif %}
 {% endblock %}
 
 {% block head %}
