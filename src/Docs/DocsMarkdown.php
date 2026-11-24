@@ -32,7 +32,8 @@ use League\CommonMark\Renderer\NodeRendererInterface;
  * explanation becomes a URL relative to the page's own URL (`/{theme}/docs/<path>`,
  * `/{theme}/docs/reference/bricks/<type>`), a link to the reference/ folder leads to the reference (`/{theme}/docs/reference`,
  * with its anchor: `#category_looks`), a file in media/ points at share's static copy
- * (`/docs-media/<path>`, so no page view reaches a third party), any other repo file at its GitHub page.
+ * (`/docs-media/<path>?v=<hash>`, so no page view reaches a third party; the hash makes a replaced file a new URL),
+ * any other repo file at its GitHub page.
  *
  * `::brick` and `::formula` show the brick or formula element as the brick reference does (DocsCatalog), in the
  * page's language, linked to its reference page.
@@ -40,7 +41,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 final class DocsMarkdown implements NodeRendererInterface
 {
   /** Bump when the HTML for the same Markdown changes: the next sync renders every page again. */
-  public const int VERSION = 4;
+  public const int VERSION = 5;
 
   private readonly MarkdownParser $parser;
 
@@ -54,7 +55,7 @@ final class DocsMarkdown implements NodeRendererInterface
   /** Language of the page being rendered, for the bricks it embeds. */
   private string $locale = 'en';
 
-  /** @var array<string, int> media of the sync: path inside media/ => index */
+  /** @var array<string, string> media of the sync: path inside media/ => version (DocsSync::readMedia) */
   private array $media = [];
 
   /** While markdown() runs, the absolute URL of the theme root (`https://share.catrobat.org/app/`): links are absolute. */
@@ -63,11 +64,13 @@ final class DocsMarkdown implements NodeRendererInterface
   /**
    * @param string                                                                    $blob_base    GitHub's page of a file at the synced ref, with trailing slash
    * @param \Closure(string): ?array{name: string, author: string, thumbnail: string} $project_card a public project, or null
+   * @param ?string                                                                   $docs_dir     the docs folder markdown() reads media versions from
    */
   public function __construct(
     private readonly string $blob_base,
     private readonly \Closure $project_card,
     private readonly ?DocsCatalog $catalog = null,
+    private readonly ?string $docs_dir = null,
   ) {
     $environment = new Environment(['html_input' => 'escape', 'allow_unsafe_links' => false]);
     $environment->addExtension(new CommonMarkCoreExtension());
@@ -111,13 +114,22 @@ final class DocsMarkdown implements NodeRendererInterface
   }
 
   /**
-   * @param list<string> $media paths inside media/ (DocsSync::readMedia)
+   * The cache-busting version of a media file: the first 10 hex digits of its SHA-256, null when it is missing.
+   * Static media are cached for a year, so a replaced file needs a new URL.
+   */
+  public static function mediaVersion(string $file): ?string
+  {
+    return is_file($file) ? substr((string) hash_file('sha256', $file), 0, 10) : null;
+  }
+
+  /**
+   * @param array<string, string> $media path inside media/ => version (DocsSync::readMedia)
    *
    * @return array{front_matter: array<array-key, mixed>, html: string, toc: list<array{id: string, title: string, level: int}>}
    */
   public function convert(string $markdown, string $file, array $media = []): array
   {
-    $this->media = array_flip($media);
+    $this->media = $media;
     $input = $this->front_matter->parse($markdown);
     $front_matter = $input->getFrontMatter();
     $location = self::locate($file);
@@ -286,8 +298,15 @@ final class DocsMarkdown implements NodeRendererInterface
       return $this->blob_base.$encoded;
     }
 
-    // A missing media file keeps its link; user-docs/check.sh reports it. markdown() does not know the media.
-    return null !== $this->root || isset($this->media[substr($resolved, 6)]) ? '/docs-'.$encoded : $url;
+    // A missing media file keeps its link; user-docs/check.sh reports it. markdown() reads the versions from disk.
+    $path = substr($resolved, 6);
+    if (null !== $this->root) {
+      $version = null === $this->docs_dir ? null : self::mediaVersion(rtrim($this->docs_dir, '/').'/'.$resolved);
+
+      return '/docs-'.$encoded.(null === $version ? '' : '?v='.$version);
+    }
+
+    return isset($this->media[$path]) ? '/docs-'.$encoded.'?v='.$this->media[$path] : $url;
   }
 
   /** A link to a page relative to the theme root: absolute in markdown(), else relative to the rendered page. */

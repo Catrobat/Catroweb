@@ -87,6 +87,19 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertNull($this->pages->findOneBy(['path' => 'getting-started']));
   }
 
+  public function testAReplacedImageReRendersThePagesNamingIt(): void
+  {
+    $files = DocsSync::readDirectory(self::FIXTURES);
+    $files['en/picture.md'] = "---\ntitle: Picture\n---\n![Jump](../media/tutorials/jump.png)\n";
+    $this->sync->import($files, ['tutorials/jump.png' => '1111111111']);
+    $this->assertStringContainsString('src="/docs-media/tutorials/jump.png?v=1111111111"', $this->page('picture', 'en')->getHtml());
+
+    // Only the page embedding a project and the one showing the replaced image are rendered again.
+    $this->assertSame(['created' => 0, 'updated' => 2, 'deleted' => 0, 'skipped' => []], $this->sync->import($files, ['tutorials/jump.png' => '2222222222']));
+    $this->entity_manager->clear();
+    $this->assertStringContainsString('src="/docs-media/tutorials/jump.png?v=2222222222"', $this->page('picture', 'en')->getHtml());
+  }
+
   public function testRefusesAnImportWithoutStartPage(): void
   {
     $this->sync->import(DocsSync::readDirectory(self::FIXTURES));
@@ -161,7 +174,7 @@ final class DocsSyncTest extends KernelTestCase
 
   public function testReadsTheMedia(): void
   {
-    $this->assertSame(['tutorials/jump.png'], DocsSync::readMedia(self::FIXTURES));
+    $this->assertSame(['tutorials/jump.png' => '6b7fa434f9'], DocsSync::readMedia(self::FIXTURES));
     $this->assertSame([], DocsSync::readMedia(self::FIXTURES.'/en'));
   }
 
