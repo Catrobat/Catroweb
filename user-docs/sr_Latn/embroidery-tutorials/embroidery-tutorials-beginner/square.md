@@ -1,0 +1,33 @@
+---
+title: Kvadrat
+description: "U ovom vodiču naučićeš kako da izvezeš kvadrat (60 x 60 mm)."
+order: 4
+flavors: [embroidery]
+source_hash: '32ad73b468750c8bdd30fa1f4d58407e8f85045cc83f5fa6f01833c3751afad7'
+---
+
+U ovom vodiču naučićeš kako da izvezeš kvadrat (60 x 60 mm).
+
+![Kvadrat (3)](../../../media/embroidery-tutorials/image-3.png)
+
+Već treba da znaš kako da napraviš novi objekat i ubaciš blokove u njega. Ako ti još treba pomoć, pogledaj vodiče u [seriji za početnike](../../game-tutorials/starter-tutorials/index.md). Osim toga, blokovi za vez moraju već da budu aktivirani. Kako se to radi, saznaćeš u vodiču **[Aktiviraj blokove za vez](activate-embroidery-bricks.md)**.
+
+Za više informacija ili predloge za dizajn pogledaj ostale vodiče.
+
+*Ovde možeš da preuzmeš vodič u PDF formatu*:
+
+[Kvadrat](../../../media/embroidery-tutorials/Square.pdf)
+
+### 1. Napravi novi objekat za vez (pogledaj [Pravljenje objekata za vez](create-embroidery-objects.md)).
+
+### 2. Sada pokreni i ubacuj blokove korak po korak u svoju skriptu.
+
+![Kvadrat](../../../media/embroidery-tutorials/Square.png)
+
+Kvadrat se sastoji od četiri linije koje se spajaju pod uglom od 90°.
+
+Prvo skripta izvodi pravi bod. Posle toga pomera iglu za 300 koraka i okreće se za 90°. To se ponavlja 4 puta.
+
+Šta će se desiti ako promeniš ugao ili korake? **Probaj!**
+
+### 3. Dodirni dugme za pokretanje da pokreneš svoj dizajn!
