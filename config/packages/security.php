@@ -60,6 +60,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'pattern' => '^/debug',
           'security' => false,
         ],
+        // The docs as Markdown and llms.txt are the same for everyone: no session, so a CDN may cache them.
+        'docs_markdown' => [
+          'pattern' => '^/(llms\.txt|[a-z]+/docs/[A-Za-z0-9_/-]+\.md)$',
+          'security' => false,
+        ],
         'main' => [
           'pattern' => '^/(?!(api/))',
           'provider' => 'user_provider',

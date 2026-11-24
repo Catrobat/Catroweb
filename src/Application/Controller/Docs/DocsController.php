@@ -90,7 +90,88 @@ class DocsController extends AbstractController
       'canonical_url' => $url($path, $explicit ? $page->getLocale() : null),
       'alternates' => array_map(static fn (string $alternate): array => ['locale' => $alternate, 'url' => $url($path, $alternate)], $this->library->translations($path)),
       'x_default_url' => $url($path),
+      'markdown_url' => $this->generateUrl('docs_markdown', ['path' => $path] + ($explicit ? ['locale' => $locale] : [])),
     ]);
+  }
+
+  /** A guide as Markdown, for readers that want text (docs/operations/User-Docs.md, "Markdown and llms.txt"). */
+  #[Route(path: '/docs/{path}.md', name: 'docs_markdown', requirements: ['path' => '[A-Za-z0-9_/-]+'], methods: ['GET'], priority: 1)]
+  public function pageMarkdown(Request $request, string $path): Response
+  {
+    [$locale, $explicit] = $this->locale($request);
+    $page = $this->library->page($path, $locale);
+    $body = null === $page ? null : $this->sync->markdown($page, $this->themeRoot());
+    if (null === $page || null === $body) {
+      throw $this->createNotFoundException('Docs page not found.');
+    }
+    $description = $page->getDescription();
+
+    return $this->markdownResponse('# '.$page->getTitle()."\n\n".(null === $description ? '' : '> '.$description."\n\n").$body, $explicit);
+  }
+
+  /** A brick's reference page as Markdown: its text, categories and explanation. */
+  #[Route(path: '/docs/reference/bricks/{type}.md', name: 'docs_brick_markdown', requirements: ['type' => '[A-Za-z][A-Za-z0-9_]{0,99}'], methods: ['GET'], priority: 2)]
+  public function brickMarkdown(Request $request, string $type): Response
+  {
+    [$locale, $explicit] = $this->locale($request);
+    $brick = $this->catalog->brick($type, $locale);
+    if (null === $brick) {
+      throw $this->createNotFoundException('Unknown brick.');
+    }
+    $prose = $this->library->brickProse($type, $locale);
+    $body = null === $prose ? null : $this->sync->markdown($prose, $this->themeRoot());
+
+    return $this->markdownResponse(
+      '# '.$this->catalog->title($brick['brick'])."\n\n"
+      .'Catrobat brick `'.$type.'`, in '.implode(', ', array_column($brick['categories'], 'name')).".\n"
+      .(null === $body ? '' : "\n".$body),
+      $explicit,
+    );
+  }
+
+  /**
+   * llms.txt (llmstxt.org) at the site root (config/routes/routes.php): the English docs as links to their Markdown,
+   * section by section, then every brick.
+   */
+  public function llmsTxt(): Response
+  {
+    $root = $this->themeRoot();
+    $home = $this->library->page('index', 'en');
+    $lines = [
+      '# '.($home?->getTitle() ?? 'Catrobat documentation'),
+      '',
+      '> '.($home?->getDescription() ?? 'Learn to make games, animations and apps with Pocket Code.'),
+      '',
+      'User documentation of Pocket Code and the other Catrobat apps. Every page is Markdown at the linked URL; without `.md` it is the web page. Add `?locale=<language>` (de, es, ...) for a translation.',
+      '',
+      '- [Catrobat documentation]('.$root.'docs/index.md)',
+    ];
+    foreach ($this->library->navigation('en') as $section) {
+      if ('index' === $section['path']) {
+        continue;
+      }
+      $lines[] = '';
+      $lines[] = '## '.$section['title'];
+      $lines[] = '';
+      foreach (DocsLibrary::flatten([$section]) as $item) {
+        $lines[] = '- ['.$item['title'].']('.$root.'docs/'.$item['path'].'.md)';
+      }
+    }
+    $lines[] = '';
+    $lines[] = '## '.$this->translator->trans('docs.reference.title', [], 'catroweb', 'en');
+    $lines[] = '';
+    $listed = [];
+    foreach ($this->catalog->catalog('en')['categories'] as $category) {
+      foreach ($category['bricks'] as $brick) {
+        $type = (string) $brick['type'];
+        if (!isset($listed[$type])) {
+          $listed[$type] = true;
+          $lines[] = '- ['.$this->catalog->title($brick).']('.$root.'docs/reference/bricks/'.$type.'.md): '.$category['name'];
+        }
+      }
+    }
+
+    return $this->markdownResponse(implode("\n", $lines), true, 'text/plain; charset=utf-8');
   }
 
   /** The brick reference: every category with its bricks, and the formula elements. */
@@ -164,6 +245,7 @@ class DocsController extends AbstractController
       'prose' => $prose,
       'fallback' => null !== $prose && DocsLibrary::isFallback($prose, $locale),
       'edit_url' => $this->sync->brickEditUrl($type, null !== $this->library->brickProse($type, 'en')),
+      'markdown_url' => $this->generateUrl('docs_brick_markdown', ['type' => $type] + ($explicit ? ['locale' => $locale] : [])),
       'docs_nav' => $this->docsNav(
         $this->sections($this->navigation($request, $locale), 'reference'),
         [...$this->referenceCrumbs(), ['title' => $category['name'], 'url' => $category_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
@@ -259,6 +341,23 @@ class DocsController extends AbstractController
   private function referenceCrumbs(): array
   {
     return [$this->home(), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference'), 'current' => false]];
+  }
+
+  /** The absolute URL of the canonical theme root (`https://share.catrobat.org/app/`), for links in Markdown. */
+  private function themeRoot(): string
+  {
+    return $this->generateUrl('index', ['theme' => 'app'], UrlGeneratorInterface::ABSOLUTE_URL);
+  }
+
+  /** Like the docs API: a CDN may only share a response that depends on the URL alone, not on Accept-Language. */
+  private function markdownResponse(string $text, bool $shared, string $type = 'text/markdown; charset=utf-8'): Response
+  {
+    return new Response($text."\n", Response::HTTP_OK, [
+      'Content-Type' => $type,
+      'Cache-Control' => ($shared ? 'public' : 'private').', max-age=300',
+      // The source may contain raw HTML: never let a browser run it.
+      'X-Content-Type-Options' => 'nosniff',
+    ]);
   }
 
   private function guideUrl(string $path): string

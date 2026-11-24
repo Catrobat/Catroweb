@@ -49,7 +49,8 @@ class ExceptionEventListener
       }
     }
 
-    if (!$applicationRequest) {
+    // Markdown docs are read by tools, not people: a missing page stays a plain 404.
+    if (!$applicationRequest || str_ends_with($request->getPathInfo(), '.md')) {
       return $event->getResponse();
     }
 

@@ -57,6 +57,9 @@ final class DocsMarkdown implements NodeRendererInterface
   /** @var array<string, int> media of the sync: path inside media/ => index */
   private array $media = [];
 
+  /** While markdown() runs, the absolute URL of the theme root (`https://share.catrobat.org/app/`): links are absolute. */
+  private ?string $root = null;
+
   /**
    * @param string                                                                    $blob_base    GitHub's page of a file at the synced ref, with trailing slash
    * @param \Closure(string): ?array{name: string, author: string, thumbnail: string} $project_card a public project, or null
@@ -152,6 +155,31 @@ final class DocsMarkdown implements NodeRendererInterface
     ];
   }
 
+  /**
+   * A file as Markdown for readers that want text (the `.md` URLs, docs/operations/User-Docs.md): without its front
+   * matter, links and images absolute, embeds as links. ponytail: links are found by a regex, so a link in a code block
+   * is rewritten too; parse with the AST when the docs show Markdown source.
+   *
+   * @param string $root absolute URL of the theme root, with trailing slash
+   */
+  public function markdown(string $markdown, string $file, string $root): string
+  {
+    $origin = (string) preg_replace('#^([a-z]+://[^/]+).*$#i', '$1', $root);
+    $this->root = $root;
+    $this->locale = self::locate($file)['locale'] ?? 'en';
+    try {
+      $text = (string) preg_replace_callback('/(\]\(\s*<?)([^)\s>]+)/', function (array $m) use ($file, $origin): string {
+        $url = $this->rewriteUrl($m[2], $file);
+
+        return $m[1].(1 === preg_match('#^/(?!/)#', $url) ? $origin.$url : $url);
+      }, $this->front_matter->parse($markdown)->getContent());
+
+      return trim((string) preg_replace_callback('/^[ \t]*::(\w+)\{([^}]*)\}[ \t]*$/m', fn (array $m): string => $this->embedLink($m[1], $m[2]) ?? $m[0], $text));
+    } finally {
+      $this->root = null;
+    }
+  }
+
   #[\Override]
   public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
   {
@@ -194,6 +222,29 @@ final class DocsMarkdown implements NodeRendererInterface
       .htmlspecialchars($element['label'] ?? $name, ENT_QUOTES).'</span></a>';
   }
 
+  /** An embed line as a Markdown link (markdown()), null when EmbedParser would not take it either. */
+  private function embedLink(string $kind, string $arguments): ?string
+  {
+    $spec = EmbedParser::KINDS[$kind] ?? null;
+    if (null === $spec || 1 !== preg_match('/(?:^|\s)'.$spec[0].'=(\S+)/', $arguments, $arg) || 1 !== preg_match($spec[1], $arg[1])) {
+      return null;
+    }
+    $value = $arg[1];
+    $title = $value;
+    $catalog = $this->catalog;
+    if ('brick' === $kind && null !== $catalog) {
+      $brick = $catalog->brick($value, $this->locale);
+      $title = null === $brick ? $value : $catalog->title($brick['brick']);
+    }
+
+    return match ($kind) {
+      'brick' => '['.$title.']('.$this->root.self::brickUrl($value).')',
+      'formula' => '['.($this->catalog?->formula($value, $this->locale)['label'] ?? $value).']('.$this->root.'docs/reference/formula/'.$value.')',
+      'video' => '[YouTube](https://www.youtube.com/watch?v='.$value.')',
+      default => '['.(($this->project_card)($value)['name'] ?? $value).']('.$this->root.'project/'.$value.')',
+    };
+  }
+
   private function renderProject(string $id): string
   {
     $card = ($this->project_card)($id);
@@ -222,21 +273,27 @@ final class DocsMarkdown implements NodeRendererInterface
     }
     // The reference folder is the reference: [Bricks](../reference/#category_looks).
     if (1 === preg_match('#^(?:[a-z]{2,3}(?:[_-][A-Za-z0-9]{2,8})?/)?reference$#', $resolved)) {
-      return self::relativeUrl($this->page_url, 'docs/reference').(null === $fragment ? '' : '#'.$fragment);
+      return $this->link('docs/reference').(null === $fragment ? '' : '#'.$fragment);
     }
     $location = self::locate($resolved);
     if (null !== $location) {
       $to = DocPage::GUIDE === $location['kind'] ? self::pageUrl($location['path']) : self::brickUrl($location['path']);
 
-      return self::relativeUrl($this->page_url, $to).(null === $fragment ? '' : '#'.$fragment);
+      return $this->link($to).(null === $fragment ? '' : '#'.$fragment);
     }
     $encoded = implode('/', array_map(rawurlencode(...), explode('/', $resolved)));
     if (!str_starts_with($resolved, 'media/')) {
       return $this->blob_base.$encoded;
     }
 
-    // A missing media file keeps its link; user-docs/check.sh reports it.
-    return isset($this->media[substr($resolved, 6)]) ? '/docs-'.$encoded : $url;
+    // A missing media file keeps its link; user-docs/check.sh reports it. markdown() does not know the media.
+    return null !== $this->root || isset($this->media[substr($resolved, 6)]) ? '/docs-'.$encoded : $url;
+  }
+
+  /** A link to a page relative to the theme root: absolute in markdown(), else relative to the rendered page. */
+  private function link(string $to): string
+  {
+    return null === $this->root ? self::relativeUrl($this->page_url, $to) : $this->root.$to;
   }
 
   /** `en/tutorials` + `../media/a.png` = `media/a.png`; null when it leaves the repo. */
