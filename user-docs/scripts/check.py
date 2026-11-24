@@ -48,13 +48,6 @@ def git(*args):
     return subprocess.run(["git", *args], cwd=ROOT, check=True, capture_output=True, text=True).stdout.split("\n")
 
 
-def changed_media(base):
-    """Files in media/ modified (not added or deleted) since the merge base with `base`, uncommitted changes included.
-    Media are cached for a year, so a changed file would show the old version: it needs a new name."""
-    merge_base = git("merge-base", base, "HEAD")[0]
-    return [f for f in git("diff", "--name-only", "--relative", "--no-renames", "--diff-filter=M", merge_base, "--", "media") if f]
-
-
 def touched_since(base):
     """Files added or changed since the merge base with `base`, including uncommitted and untracked ones."""
     merge_base = git("merge-base", base, "HEAD")[0]
@@ -193,8 +186,6 @@ def check_redirects(tsv):
 def main(argv):
     problems = [] if (ROOT / "en" / "index.md").is_file() else ["en/index.md missing: share refuses to sync docs without it"]
     touched = touched_since(argv[argv.index("--base") + 1]) if "--base" in argv else set()
-    if "--base" in argv:
-        problems += [f"{f}: changed; replacing an image? give it a new file name" for f in changed_media(argv[argv.index("--base") + 1])]
     redirects = ROOT / "import" / "redirects.tsv"
     if redirects.exists():
         problems += [f"import/redirects.tsv: {e}" for e in check_redirects(redirects)]

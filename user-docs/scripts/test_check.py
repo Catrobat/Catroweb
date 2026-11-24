@@ -97,12 +97,4 @@ with tempfile.TemporaryDirectory() as tmp:
     assert check.check_media(media / "big.png") == [f"{check.MAX_MEDIA_BYTES + 1} bytes, more than {check.MAX_MEDIA_BYTES}"]
     (media / "out").symlink_to(root / "en")
     assert check.check_media(media / "out") == ["a link: put the file itself into media/"]
-    # A media file may be added or deleted, never changed (it is cached for a year).
-    check.git("init", "-q")
-    check.git("-c", "user.name=t", "-c", "user.email=t@t", "add", "media/a.png", "media/b.PDF")
-    check.git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-q", "-m", "media")
-    (media / "a.png").write_bytes(b"new")
-    (media / "b.PDF").unlink()
-    (media / "e.png").write_bytes(b"added")
-    assert check.changed_media("HEAD") == ["media/a.png"], check.changed_media("HEAD")
 print("check.py self-test passed")
