@@ -2,7 +2,7 @@
 title: "Aktoreak eta objektuak gehitu"
 description: "Sakatu gehien botoia zure proiektuari figura edo objektu berri bat gehitzeko."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Sakatu gehien botoia zure proiektuari figura edo objektu berri bat gehitzeko.
@@ -11,7 +11,7 @@ Sakatu gehien botoia zure proiektuari figura edo objektu berri bat gehitzeko.
 
 Pocket Code -n, zure proiektuari pertsonaia edo objektu bat gehitu ahal izango duzu hainbat era:
 
-**Marraztu**: Zure pertsonaia propioa sortzeko ahal izango duzu **Pocket Paint**. Pocket Paint marrazketa programa da ([Gehiago Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Marraztu**: Zure pertsonaia propioa sortzeko ahal izango duzu **Pocket Paint**. Pocket Paint marrazketa programa da ([Gehiago Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Itxurak**: Aukeratu bat aurretik egindako aktore eta objektuen bilduma batetik ([Informazio gehiago](../elements/medialibrary.md)).
 

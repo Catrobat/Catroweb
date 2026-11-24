@@ -2,7 +2,7 @@
 title: Pridanie postáv a objektov
 description: Klepni na tlačidlo plus, ak chceš do projektu pridať novú postavu alebo objekt.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Klepni na tlačidlo plus, ak chceš do projektu pridať novú postavu alebo objekt.
@@ -11,7 +11,7 @@ Klepni na tlačidlo plus, ak chceš do projektu pridať novú postavu alebo obje
 
 V aplikácii Pocket Code môžeš do projektu pridať postavu alebo objekt rôznymi spôsobmi:
 
-**Nakresliť**: Vlastnú postavu si môžeš nakresliť v aplikácii **Pocket Paint**. Pocket Paint je kresliaci program ([viac o Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Nakresliť**: Vlastnú postavu si môžeš nakresliť v aplikácii **Pocket Paint**. Pocket Paint je kresliaci program ([viac o Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Vzhľady**: Vyber si z kolekcie hotových postáv a objektov ([viac o knižnici médií](../elements/medialibrary.md)).
 

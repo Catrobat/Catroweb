@@ -2,7 +2,7 @@
 title: "Përshkrimi i aktorëve dhe objekteve"
 description: "Shtypni butonin plus për të shtuar një figurë ose objekt të ri në projektin tuaj."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Shtypni butonin plus për të shtuar një figurë ose objekt të ri në projektin tuaj.
@@ -11,7 +11,7 @@ Shtypni butonin plus për të shtuar një figurë ose objekt të ri në projekti
 
 Në Pocket Code, mund të shtoni një karakter ose objekt në projektin tuaj në mënyra të ndryshme:
 
-**Vizato**: Ju mund të krijoni karakterin tuaj me **Pocket Paint**. Pocket Paint është një program vizatimi ([më shumë rreth Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Vizato**: Ju mund të krijoni karakterin tuaj me **Pocket Paint**. Pocket Paint është një program vizatimi ([më shumë rreth Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Pamje**: Zgjidhni një nga një koleksion i aktorëve dhe objekteve të përgatitura para ([më shumë për bibliotekën e mediave](../elements/medialibrary.md)).
 

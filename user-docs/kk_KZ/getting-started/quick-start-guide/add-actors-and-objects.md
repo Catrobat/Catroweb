@@ -2,7 +2,7 @@
 title: "Актерлер мен нысандарды қосу"
 description: "Жобаңызға жаңа фигура немесе нысанды қосу үшін плюс батырмасын бас."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Жобаңызға жаңа фигура немесе нысанды қосу үшін плюс батырмасын бас.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 Pocket Code дегенді таңда:
 
-**Салу**: Сен өзіңіздің таңбашыңызды жасай аласың **Pocket Paint**. Pocket Paint - бұл сурет салу бағдарламасы ([туралы көбірек Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Салу**: Сен өзіңіздің таңбашыңызды жасай аласың **Pocket Paint**. Pocket Paint - бұл сурет салу бағдарламасы ([туралы көбірек Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Суреттер**: Алдын-ала жасалған актерлер мен заттар жинағынан бірін таңда ([БАҚ кітапханасы туралы көбірек](../elements/medialibrary.md)).
 

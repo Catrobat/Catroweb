@@ -2,7 +2,7 @@
 title: Добави фон
 description: Можеш да добавиш фон към проекта си в Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Можеш да добавиш фон към проекта си в Catrobat.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 Можеш да качиш собствени изображения, да използваш готови фонове или да създадеш фон сам.
 
-**Рисувай**: Можеш да създадеш собствен фон с **Pocket Paint**. Pocket Paint е програма за рисуване ([още за Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Рисувай**: Можеш да създадеш собствен фон с **Pocket Paint**. Pocket Paint е програма за рисуване ([още за Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Облици**: Избери един от колекцията с готови фонове ([още за медийната библиотека](../elements/medialibrary.md)).
 

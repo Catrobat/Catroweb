@@ -2,7 +2,7 @@
 title: "Atzeko planoak gehitu"
 description: "Zure proiektuari atzeko plano bat gehitu ahal izango diozu Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Zure proiektuari atzeko plano bat gehitu ahal izango diozu Catrobat.
@@ -23,7 +23,7 @@ Atzeko plano bat gehitzeko, sakatu «Atzeko planoa» proiektuaren ikuspegian.
 
 Zure irudiak igo ditzakezu, aurrez definitutako atzeko planoak erabili edo zurea sortu.
 
-**Marraztu**: Zure propioa sortu ahal izango duzu, **Pocket Paint**. Pocket Paint marrazketa programa da ([Gehiago Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Marraztu**: Zure propioa sortu ahal izango duzu, **Pocket Paint**. Pocket Paint marrazketa programa da ([Gehiago Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Itxurak**: Aukeratu bat aurrez egindako atzeko planoen bilduma batetik ([Informazio gehiago Media liburutegiari buruz](../elements/medialibrary.md)).
 

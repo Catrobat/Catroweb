@@ -2,7 +2,7 @@
 title: Tilføj baggrund
 description: Du kan tilføje en baggrund til dit projekt i Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Du kan tilføje en baggrund til dit projekt i Catrobat.
@@ -23,7 +23,7 @@ I **kostumeafsnittet (1)** tilføjer du en baggrund. Det gør du ved at trykke p
 
 Du kan uploade dine egne billeder, bruge færdiglavede baggrunde eller lave en baggrund selv.
 
-**Tegn**: Du kan tegne din egen baggrund med **Pocket Paint**. Pocket Paint er et tegneprogram ([mere om Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Tegn**: Du kan tegne din egen baggrund med **Pocket Paint**. Pocket Paint er et tegneprogram ([mere om Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Kostumer**: Vælg en baggrund fra en samling af færdiglavede baggrunde ([mere om mediebiblioteket](../elements/medialibrary.md)).
 

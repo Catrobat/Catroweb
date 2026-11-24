@@ -2,7 +2,7 @@
 title: Adaugă fundal
 description: Poți adăuga un fundal în proiectul tău în Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Poți adăuga un fundal în proiectul tău în Catrobat.
@@ -23,7 +23,7 @@ Ca să adaugi un fundal, apasă pe „Fundal” în vizualizarea proiectului.
 
 Poți încărca propriile imagini, poți folosi fundaluri predefinite sau poți crea singur un fundal.
 
-**Desenează**: Poți crea propriul tău fundal cu **Pocket Paint**. Pocket Paint este un program de desen ([mai multe despre Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Desenează**: Poți crea propriul tău fundal cu **Pocket Paint**. Pocket Paint este un program de desen ([mai multe despre Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Costume**: Alege unul dintr-o colecție de fundaluri gata făcute ([mai multe despre biblioteca media](../elements/medialibrary.md)).
 

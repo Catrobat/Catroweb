@@ -2,7 +2,7 @@
 title: 添加角色和对象
 description: 点击加号按钮，向你的项目添加新的角色或对象。
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 点击加号按钮，向你的项目添加新的角色或对象。
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 在 Pocket Code 中，你可以用多种方式向项目添加角色或对象：
 
-**绘制**：你可以用 **Pocket Paint** 画出自己的角色。Pocket Paint 是一款绘图程序（[关于 Pocket Paint 的更多信息](https://catrobat.org/docs/pocket-paint/)）。
+**绘制**：你可以用 **Pocket Paint** 画出自己的角色。Pocket Paint 是一款绘图程序（[关于 Pocket Paint 的更多信息](https://catrobat.org/pocket-paint/)）。
 
 **造型**：从预先做好的角色和对象中选一个（[关于媒体库的更多信息](../elements/medialibrary.md)）。
 

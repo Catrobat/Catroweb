@@ -2,7 +2,7 @@
 title: "Voeg agtergrond by"
 description: "Jy kan 'n agtergrond by jou projek voeg in Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Jy kan 'n agtergrond by jou projek voeg in Catrobat.
@@ -23,7 +23,7 @@ In die **lyk afdeling(1)** voeg jy 'n agtergrond by. Om dit te doen, tik op die 
 
 Jy kan jou eie beelde oplaai, vooraf gedefinieerde agtergronde gebruik of 'n agtergrond self skep.
 
-**Teken**: Jy kan jou eie agtergrond te skep met **Pocket Paint**. Pocket Paint is 'n tekening program ([meer oor Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Teken**: Jy kan jou eie agtergrond te skep met **Pocket Paint**. Pocket Paint is 'n tekening program ([meer oor Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Kostuums**: Kies een uit 'n versameling vooraf gemaakte agtergronde ([meer oor Media-biblioteek](../elements/medialibrary.md)).
 

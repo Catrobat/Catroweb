@@ -2,7 +2,7 @@
 title: "Ongeza Historia"
 description: "Unaweza kuongeza background kwa mradi wako katika Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Unaweza kuongeza background kwa mradi wako katika Catrobat.
@@ -23,7 +23,7 @@ Katika **inaonekana sehemu ((1)**, wewe kuongeza background. Kufanya hivyo, bony
 
 Unaweza kupakia picha zako mwenyewe, kutumia mandhari zilizowekwa mapema, au kuunda mandhari yako mwenyewe.
 
-**Chora**: Unaweza kuunda yako mwenyewe background na **Pocket Paint**. Pocket Paint ni programu ya kuchora ([zaidi kuhusu Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Chora**: Unaweza kuunda yako mwenyewe background na **Pocket Paint**. Pocket Paint ni programu ya kuchora ([zaidi kuhusu Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Mionekano**: Chagua moja kutoka ukusanyaji wa asili pre-kufanywa ([zaidi kuhusu Media library](../elements/medialibrary.md)).
 

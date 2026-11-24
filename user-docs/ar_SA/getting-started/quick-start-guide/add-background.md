@@ -2,7 +2,7 @@
 title: 'إضافة خلفية'
 description: 'يمكنك إضافة خلفية إلى مشروعك في Catrobat.'
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 يمكنك إضافة خلفية إلى مشروعك في Catrobat.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 يمكنك رفع صورك الخاصة، أو استخدام الخلفيات الجاهزة، أو إنشاء خلفية بنفسك.
 
-**رسم**: يمكنك إنشاء خلفيتك بنفسك باستخدام **Pocket Paint**. Pocket Paint برنامج رسم ([المزيد عن Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**رسم**: يمكنك إنشاء خلفيتك بنفسك باستخدام **Pocket Paint**. Pocket Paint برنامج رسم ([المزيد عن Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **المظاهر**: اختر خلفية من مجموعة خلفيات جاهزة ([المزيد عن مكتبة الوسائط](../elements/medialibrary.md)).
 

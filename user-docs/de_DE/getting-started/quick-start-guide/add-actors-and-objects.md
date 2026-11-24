@@ -3,7 +3,7 @@ title: Figuren und Objekte hinzufügen
 description: "Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Projekt hinzuzufügen."
 order: 2
 reviewed: true
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Projekt hinzuzufügen.
@@ -12,7 +12,7 @@ Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Proje
 
 In Pocket Code kannst du auf verschiedene Arten eine Figur oder ein Objekt zu deinem Projekt hinzufügen:
 
-**Neues Bild erstellen**: Du kannst deine eigene Figur mit **Pocket Paint** erstellen. Pocket Paint ist ein Zeichenprogramm ([mehr zu Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Neues Bild erstellen**: Du kannst deine eigene Figur mit **Pocket Paint** erstellen. Pocket Paint ist ein Zeichenprogramm ([mehr zu Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Medienbibliothek**: Wähle aus einer Sammlung von vorgefertigten Figuren eine aus ([mehr zur Medienbibliothek)](../elements/medialibrary.md).
 

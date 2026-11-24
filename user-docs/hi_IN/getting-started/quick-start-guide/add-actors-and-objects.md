@@ -2,7 +2,7 @@
 title: पात्र और ऑब्जेक्ट जोड़ें
 description: "अपने प्रोजेक्ट में नया पात्र या ऑब्जेक्ट जोड़ने के लिए प्लस बटन दबाओ।"
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 अपने प्रोजेक्ट में नया पात्र या ऑब्जेक्ट जोड़ने के लिए प्लस बटन दबाओ।
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 Pocket Code में तुम अलग-अलग तरीकों से अपने प्रोजेक्ट में कोई पात्र या ऑब्जेक्ट जोड़ सकते हो:
 
-**बनाएँ**: **Pocket Paint** से अपना खुद का पात्र बनाओ। Pocket Paint एक ड्रॉइंग प्रोग्राम है ([Pocket Paint के बारे में ज़्यादा](https://catrobat.org/docs/pocket-paint/))
+**बनाएँ**: **Pocket Paint** से अपना खुद का पात्र बनाओ। Pocket Paint एक ड्रॉइंग प्रोग्राम है ([Pocket Paint के बारे में ज़्यादा](https://catrobat.org/pocket-paint/))
 
 **रूप**: पहले से बने पात्रों और ऑब्जेक्ट के संग्रह में से कोई चुनो ([मीडिया लाइब्रेरी के बारे में ज़्यादा](../elements/medialibrary.md)).
 

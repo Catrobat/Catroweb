@@ -2,7 +2,7 @@
 title: Додати акторів і об’єкти
 description: "Натисни кнопку «плюс», щоб додати до свого проєкту нову фігуру або об’єкт."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Натисни кнопку «плюс», щоб додати до свого проєкту нову фігуру або об’єкт.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 У Pocket Code ти можеш додати персонажа або об’єкт до свого проєкту різними способами:
 
-**Намалювати**: Можна створити свого персонажа в **Pocket Paint**. Pocket Paint — це програма для малювання ([більше про Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Намалювати**: Можна створити свого персонажа в **Pocket Paint**. Pocket Paint — це програма для малювання ([більше про Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Вигляди**: Вибери один із готової колекції акторів і об’єктів ([більше про медіатеку](../elements/medialibrary.md)).
 

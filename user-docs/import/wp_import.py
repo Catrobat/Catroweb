@@ -788,6 +788,8 @@ def write_maps(pages, by_id, lang, title, empty, old_url, path, en_twin, is_bric
         "",
         "Legacy attachment permalinks and `?attachment_id=` URLs from the imported HTML map to full Share media URLs in [`attachment-redirects.tsv`](attachment-redirects.tsv). Apply this mapping alongside the page redirects.",
         "",
+        "The old WordPress figures, backgrounds and sounds download pages, including slashless URLs, map to the live Share category pages in [`site-redirects.tsv`](site-redirects.tsv). Apply this hand-maintained map with the page and attachment maps at cutover. A signed-out visitor can select and download assets from each category. The old figures page also lists `broom2.png`, and the old sounds page lists `Typing.mp3`; neither appears in the corresponding Share catalog.",
+        "",
         "## Media",
         "",
         f"**{len(refs)}/{len(refs)}** referenced uploads accounted for: {len(refs) - len(missing)} stored in `media/`, {len(missing)} missing on the server (404; the pages keep the original URL).",

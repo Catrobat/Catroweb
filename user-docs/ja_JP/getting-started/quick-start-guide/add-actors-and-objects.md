@@ -2,7 +2,7 @@
 title: オブジェクトを追加する
 description: "「+」ボタンをタップして、プロジェクトに新しいキャラクターやものを追加します。"
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 「+」ボタンをタップして、プロジェクトに新しいキャラクターやものを追加します。
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 Pocket Code では、いくつかの方法で、プロジェクトにキャラクターやものを追加できます。
 
-**かく**: **Pocket Paint** で、自分のキャラクターを描けます。Pocket Paint は、お絵かきのアプリです（[Pocket Paint について](https://catrobat.org/docs/pocket-paint/)）。
+**かく**: **Pocket Paint** で、自分のキャラクターを描けます。Pocket Paint は、お絵かきのアプリです（[Pocket Paint について](https://catrobat.org/pocket-paint/)）。
 
 **見た目**: あらかじめ作られたオブジェクトやものの中から、好きなものを選べます（[メディアライブラリについて](../elements/medialibrary.md)）。
 

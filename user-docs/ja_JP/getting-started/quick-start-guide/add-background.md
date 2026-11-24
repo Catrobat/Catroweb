@@ -2,7 +2,7 @@
 title: 背景を追加する
 description: Catrobat のプロジェクトに、背景を追加できます。
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Catrobat のプロジェクトに、背景を追加できます。
@@ -23,7 +23,7 @@ Catrobat のプロジェクトに、背景を追加できます。
 
 自分の画像をアップロードしたり、あらかじめ用意された背景を使ったり、自分で背景を作ったりできます。
 
-**かく**: **Pocket Paint** で、自分の背景を描けます。Pocket Paint は、お絵かきのアプリです（[Pocket Paint について](https://catrobat.org/docs/pocket-paint/)）。
+**かく**: **Pocket Paint** で、自分の背景を描けます。Pocket Paint は、お絵かきのアプリです（[Pocket Paint について](https://catrobat.org/pocket-paint/)）。
 
 **見た目**: あらかじめ作られた背景の中から、好きなものを選べます（[メディアライブラリについて](../elements/medialibrary.md)）。
 

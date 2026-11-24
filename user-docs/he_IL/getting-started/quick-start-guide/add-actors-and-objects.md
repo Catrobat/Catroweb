@@ -2,7 +2,7 @@
 title: הוספת דמויות ואובייקטים
 description: הקישו על כפתור הפלוס כדי להוסיף דמות או אובייקט חדשים לפרויקט שלכם.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 הקישו על כפתור הפלוס כדי להוסיף דמות או אובייקט חדשים לפרויקט שלכם.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 ב־Pocket Code אפשר להוסיף דמות או אובייקט לפרויקט שלכם בכמה דרכים:
 
-**ציור**: אפשר ליצור דמות משלכם עם **Pocket Paint**. Pocket Paint היא תוכנת ציור ([מידע נוסף על Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**ציור**: אפשר ליצור דמות משלכם עם **Pocket Paint**. Pocket Paint היא תוכנת ציור ([מידע נוסף על Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **מראות**: בחרו אחת מתוך אוסף של דמויות ואובייקטים מוכנים ([מידע נוסף על הספרייה למדיה](../elements/medialibrary.md)).
 

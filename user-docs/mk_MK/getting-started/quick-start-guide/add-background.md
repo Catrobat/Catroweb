@@ -2,7 +2,7 @@
 title: "Додадете позадина"
 description: "Можеш да додадете позадина на твојот проект во Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Можеш да додадете позадина на твојот проект во Catrobat.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 Можеш да ги надополните твоите слики, да користите претходно дефинирани фондови или сами да создадете позадина.
 
-**Цртај**: Можеш да создадете свој позадинок со **Pocket Paint**. Pocket Paint е цртеж програма ([повеќе за Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Цртај**: Можеш да создадете свој позадинок со **Pocket Paint**. Pocket Paint е цртеж програма ([повеќе за Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Изгледи**: Избери еден од колекцијата на претходно направени фондови ([повеќе за Медиа библиотека](../elements/medialibrary.md)).
 

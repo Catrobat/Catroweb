@@ -2,7 +2,7 @@
 title: Adaugă personaje și obiecte
 description: Apasă butonul plus ca să adaugi o figură sau un obiect nou în proiectul tău.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Apasă butonul plus ca să adaugi o figură sau un obiect nou în proiectul tău.
@@ -11,7 +11,7 @@ Apasă butonul plus ca să adaugi o figură sau un obiect nou în proiectul tău
 
 În Pocket Code, poți adăuga un personaj sau un obiect în proiectul tău în mai multe moduri:
 
-**Desenează**: Poți crea propriul tău personaj cu **Pocket Paint**. Pocket Paint este un program de desen ([mai multe despre Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Desenează**: Poți crea propriul tău personaj cu **Pocket Paint**. Pocket Paint este un program de desen ([mai multe despre Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Costume**: Alege unul dintr-o colecție de personaje și obiecte gata făcute ([mai multe despre biblioteca media](../elements/medialibrary.md)).
 

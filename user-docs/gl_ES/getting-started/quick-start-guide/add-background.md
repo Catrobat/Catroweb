@@ -2,7 +2,7 @@
 title: "Adición de fondo"
 description: "Pode engadir un fondo ao seu proxecto en Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Pode engadir un fondo ao seu proxecto en Catrobat.
@@ -23,7 +23,7 @@ No **aspecto sección(1)**, engade un fondo. Para facelo, toque o símbolo +.
 
 Podes cargar as túas propias imaxes, usar fondos predefinidos ou crear un fondo por ti mesmo.
 
-**Debuxar**: Pode crear o seu propio fondo con **Pocket Paint**. Pocket Paint é un programa de debuxo ([Máis información sobre Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Debuxar**: Pode crear o seu propio fondo con **Pocket Paint**. Pocket Paint é un programa de debuxo ([Máis información sobre Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Aparencias**: Escoller unha dunha colección de fondos prefabricados ([Máis información sobre Media library](../elements/medialibrary.md)).
 

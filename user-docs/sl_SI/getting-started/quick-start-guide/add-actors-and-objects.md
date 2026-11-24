@@ -2,7 +2,7 @@
 title: Dodaj like in predmete
 description: Dotakni se gumba plus, da v svoj projekt dodaš nov lik ali predmet.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Dotakni se gumba plus, da v svoj projekt dodaš nov lik ali predmet.
@@ -11,7 +11,7 @@ Dotakni se gumba plus, da v svoj projekt dodaš nov lik ali predmet.
 
 V Pocket Code lahko na več načinov dodaš lik ali predmet v svoj projekt:
 
-**Nariši**: Svojega lika lahko ustvariš s programom **Pocket Paint**. Pocket Paint je program za risanje ([več o Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Nariši**: Svojega lika lahko ustvariš s programom **Pocket Paint**. Pocket Paint je program za risanje ([več o Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Videzi**: Izberi enega iz zbirke pripravljenih likov in predmetov ([več o medijski knjižnici](../elements/medialibrary.md)).
 

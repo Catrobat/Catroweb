@@ -2,7 +2,7 @@
 title: Dodaj likove i objekte
 description: "Dodirni dugme plus da dodaš novog lika ili objekat u svoj projekat."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Dodirni dugme plus da dodaš novog lika ili objekat u svoj projekat.
@@ -11,7 +11,7 @@ Dodirni dugme plus da dodaš novog lika ili objekat u svoj projekat.
 
 U Pocket Code-u možeš da dodaš lik ili objekat u svoj projekat na više načina:
 
-**Nacrtaj**: Sopstveni lik možeš da napraviš u **Pocket Paint**-u. Pocket Paint je program za crtanje ([više o Pocket Paint-u](https://catrobat.org/docs/pocket-paint/))
+**Nacrtaj**: Sopstveni lik možeš da napraviš u **Pocket Paint**-u. Pocket Paint je program za crtanje ([više o Pocket Paint-u](https://catrobat.org/pocket-paint/))
 
 **Izgledi**: Izaberi jedan iz zbirke unapred napravljenih likova i objekata ([više o medijskoj biblioteci](../elements/medialibrary.md)).
 

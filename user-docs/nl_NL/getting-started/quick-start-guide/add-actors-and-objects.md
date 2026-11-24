@@ -2,7 +2,7 @@
 title: Figuren en objecten toevoegen
 description: Tik op de plusknop om een nieuwe figuur of een nieuw object aan je project toe te voegen.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Tik op de plusknop om een nieuwe figuur of een nieuw object aan je project toe te voegen.
@@ -11,7 +11,7 @@ Tik op de plusknop om een nieuwe figuur of een nieuw object aan je project toe t
 
 In Pocket Code kun je op verschillende manieren een personage of een object aan je project toevoegen:
 
-**Tekenen**: Je kunt je eigen personage maken met **Pocket Paint**. Pocket Paint is een tekenprogramma ([meer over Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Tekenen**: Je kunt je eigen personage maken met **Pocket Paint**. Pocket Paint is een tekenprogramma ([meer over Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Uiterlijken**: Kies er één uit een verzameling kant-en-klare figuren en objecten ([meer over de mediabibliotheek](../elements/medialibrary.md)).
 

@@ -2,7 +2,7 @@
 title: 오브젝트 추가하기
 description: 더하기 버튼을 눌러 프로젝트에 새 캐릭터나 오브젝트를 추가하세요.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 더하기 버튼을 눌러 프로젝트에 새 캐릭터나 오브젝트를 추가하세요.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 Pocket Code에서는 여러 방법으로 프로젝트에 캐릭터나 오브젝트를 추가할 수 있어요.
 
-**그리기**: **Pocket Paint**로 나만의 캐릭터를 그릴 수 있어요. Pocket Paint는 그림 그리기 프로그램이에요 ([Pocket Paint에 대해 더 알아보기](https://catrobat.org/docs/pocket-paint/))
+**그리기**: **Pocket Paint**로 나만의 캐릭터를 그릴 수 있어요. Pocket Paint는 그림 그리기 프로그램이에요 ([Pocket Paint에 대해 더 알아보기](https://catrobat.org/pocket-paint/))
 
 **모양**: 미리 만들어진 오브젝트 모음에서 하나를 고르세요 ([미디어 라이브러리에 대해 더 알아보기](../elements/medialibrary.md)).
 

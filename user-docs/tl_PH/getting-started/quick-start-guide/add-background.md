@@ -2,7 +2,7 @@
 title: "Magdagdag ng Background"
 description: "Maaari mong magdagdag ng background sa iyong proyekto sa Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Maaari mong magdagdag ng background sa iyong proyekto sa Catrobat.
@@ -23,7 +23,7 @@ Sa **hitsura seksyon(1)**, magdagdag ka ng background. Upang gawin ito, pindutin
 
 Maaari mong i-upload ang iyong sariling mga imahe, gamitin ang mga pre-defined na background, o lumikha ng isang background sa iyong sarili.
 
-**Gumuhit**: Maaari mong lumikha ng iyong sariling background sa **Pocket Paint**. Pocket Paint ay isang drawing program ([higit pa tungkol sa Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Gumuhit**: Maaari mong lumikha ng iyong sariling background sa **Pocket Paint**. Pocket Paint ay isang drawing program ([higit pa tungkol sa Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Mga itsura**: Pumili ng isa mula sa isang koleksyon ng mga pre-made background ([higit pa tungkol sa Media library](../elements/medialibrary.md)).
 

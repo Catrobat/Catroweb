@@ -2,7 +2,7 @@
 title: Thêm nhân vật và đối tượng
 description: Chạm vào nút dấu cộng để thêm nhân vật hoặc đối tượng mới vào dự án của bạn.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Chạm vào nút dấu cộng để thêm nhân vật hoặc đối tượng mới vào dự án của bạn.
@@ -11,7 +11,7 @@ Chạm vào nút dấu cộng để thêm nhân vật hoặc đối tượng m�
 
 Trong Pocket Code, bạn có thể thêm nhân vật hoặc đối tượng vào dự án theo nhiều cách:
 
-**Vẽ**: Bạn có thể tự vẽ nhân vật bằng **Pocket Paint**. Pocket Paint là một chương trình vẽ ([tìm hiểu thêm về Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Vẽ**: Bạn có thể tự vẽ nhân vật bằng **Pocket Paint**. Pocket Paint là một chương trình vẽ ([tìm hiểu thêm về Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Diện mạo**: Chọn một nhân vật hoặc đối tượng từ bộ sưu tập có sẵn ([tìm hiểu thêm về thư viện phương tiện](../elements/medialibrary.md)).
 

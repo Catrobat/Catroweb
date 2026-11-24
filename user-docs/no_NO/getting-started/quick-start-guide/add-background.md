@@ -2,7 +2,7 @@
 title: Legg til bakgrunn
 description: Du kan legge til en bakgrunn i prosjektet ditt i Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Du kan legge til en bakgrunn i prosjektet ditt i Catrobat.
@@ -23,7 +23,7 @@ I **drakt-delen (1)** legger du til en bakgrunn. Gjør dette ved å trykke på p
 
 Du kan laste opp egne bilder, bruke ferdiglagde bakgrunner eller lage en bakgrunn selv.
 
-**Tegn**: Du kan lage din egen bakgrunn med **Pocket Paint**. Pocket Paint er et tegneprogram ([mer om Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Tegn**: Du kan lage din egen bakgrunn med **Pocket Paint**. Pocket Paint er et tegneprogram ([mer om Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Drakter**: Velg én fra en samling ferdiglagde bakgrunner ([mer om mediebiblioteket](../elements/medialibrary.md)).
 

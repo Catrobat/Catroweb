@@ -2,7 +2,7 @@
 title: Dodavanje likova i objekata
 description: Dodirni gumb s plusom da dodaš novi lik ili objekt u svoj projekt.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Dodirni gumb s plusom da dodaš novi lik ili objekt u svoj projekt.
@@ -11,7 +11,7 @@ Dodirni gumb s plusom da dodaš novi lik ili objekt u svoj projekt.
 
 U Pocket Codeu možeš dodati lik ili objekt u svoj projekt na više načina:
 
-**Nacrtaj**: Možeš stvoriti vlastiti lik pomoću **Pocket Painta**. Pocket Paint je program za crtanje ([više o Pocket Paintu](https://catrobat.org/docs/pocket-paint/))
+**Nacrtaj**: Možeš stvoriti vlastiti lik pomoću **Pocket Painta**. Pocket Paint je program za crtanje ([više o Pocket Paintu](https://catrobat.org/pocket-paint/))
 
 **Izgledi**: Odaberi jedan iz zbirke gotovih likova i objekata ([više o medijskoj knjižnici](../elements/medialibrary.md)).
 

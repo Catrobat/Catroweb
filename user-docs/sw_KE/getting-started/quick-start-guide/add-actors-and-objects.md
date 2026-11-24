@@ -2,7 +2,7 @@
 title: "Ongeza Watendaji na Vitu"
 description: "Bonyeza kitufe cha kuongeza ili uongeze kipimo au kifaa kipya kwenye mradi wako."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Bonyeza kitufe cha kuongeza ili uongeze kipimo au kifaa kipya kwenye mradi wako.
@@ -11,7 +11,7 @@ Bonyeza kitufe cha kuongeza ili uongeze kipimo au kifaa kipya kwenye mradi wako.
 
 Katika Pocket Code, unaweza kuongeza tabia au kitu kwa mradi wako kwa njia mbalimbali:
 
-**Chora**: Unaweza kuunda tabia yako mwenyewe na **Pocket Paint**. Pocket Paint ni programu ya kuchora ([zaidi kuhusu Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Chora**: Unaweza kuunda tabia yako mwenyewe na **Pocket Paint**. Pocket Paint ni programu ya kuchora ([zaidi kuhusu Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Mionekano**: Chagua moja kutoka mkusanyiko wa watendaji na vitu tayari kufanywa ([zaidi kuhusu maktaba ya vyombo vya habari](../elements/medialibrary.md)).
 

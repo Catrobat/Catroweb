@@ -2,7 +2,7 @@
 title: Añadir actores y objetos
 description: Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.
@@ -11,7 +11,7 @@ Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.
 
 En Pocket Code puedes añadir un personaje o un objeto a tu proyecto de varias formas:
 
-**Dibujar**: Crea tu propio personaje con **Pocket Paint**. Pocket Paint es un programa de dibujo ([más sobre Pocket Paint](https://catrobat.org/docs/pocket-paint/)).
+**Dibujar**: Crea tu propio personaje con **Pocket Paint**. Pocket Paint es un programa de dibujo ([más sobre Pocket Paint](https://catrobat.org/pocket-paint/)).
 
 **Libreria de medios**: Elige uno de los actores y objetos que ya están hechos ([más sobre la librería de medios](../elements/medialibrary.md)).
 
