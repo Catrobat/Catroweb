@@ -1,0 +1,28 @@
+---
+title: "Kujenga mradi mpya"
+description: "Fungua programu kwenye simu yako ya mkononi au kompyuta kibao."
+order: 1
+source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+---
+
+Fungua programu kwenye simu yako ya mkononi au kompyuta kibao. Bonyeza alama + ili kuunda mradi mpya.
+
+![Main Screen Mradi Mpya](../../../media/getting-started/MainScreen_NewProject.png)
+
+Upe mradi wako jina (1). Chagua kama mchezo utatumia skrini wima au mlalo (2). Kisha gusa alama ya tiki ili kuthibitisha (3).
+
+![Mradi Mpya](../../../media/getting-started/NewProject.png)
+
+Sasa una maoni ya mradi wako. Juu, unaona jina la mchezo wako.
+
+Chini unaweza kuona **Mandharinyuma** - kwa sasa, background ni tupu. Ikiwa unataka kuibadilisha, bonyeza.
+
+Chini ya background, unaona eneo kwa ajili yako **Watendaji na vitu** kwamba umeongeza mchezo wako. Kwa sasa, eneo hilo bado ni tupu.
+
+Hapo chini kulia, unaona vifungo viwili muhimu:
+
+![Kuanza](../../../media/getting-started/Start.png) Kwa kifungo cha **Cheza**, wewe kuanza mchezo wako.
+
+![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png) Kwa kifungo cha **Na zaidi**, wewe kuongeza tabia mpya / kitu kwa mchezo wako.
+
+![Screen Project](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
