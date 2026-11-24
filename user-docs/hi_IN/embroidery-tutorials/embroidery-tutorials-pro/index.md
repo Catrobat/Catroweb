@@ -1,0 +1,6 @@
+---
+title: कढ़ाई ट्यूटोरियल प्रो
+order: 3
+flavors: [embroidery]
+source_hash: '389f69459ab119a76eb1a6906bb7064756c50d516315ac0e575b4319c8e13fb5'
+---
