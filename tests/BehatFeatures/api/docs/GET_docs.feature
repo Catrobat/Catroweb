@@ -86,3 +86,7 @@ Feature: GET /api/docs and /api/docs/pages/{path} serve the synced user docs
     Then the response status code should be "200"
     And the client response should contain "# Catrobat documentation"
     And the client response should contain "/app/docs/getting-started/first-project.md"
+
+  Scenario: A missing Markdown page is a plain 404, not a redirect to the homepage
+    When I request "GET" "/app/docs/does-not-exist.md"
+    Then the response status code should be "404"
