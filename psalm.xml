@@ -41,6 +41,11 @@
             <errorLevel type="info">
                 <directory name="tests" />
             </errorLevel>
+            <!-- psalm/plugin-phpunit 1.3 makes test code internal; BearerAuthenticationTrait in src/ calls the
+                 override in its test double, so that one call is reported from outside tests/. -->
+            <errorLevel type="info">
+                <referencedMethod name="Tests\PhpUnit\Api\Services\Base\BearerAuthenticationTraitTestClass::getCurrentRequest" />
+            </errorLevel>
         </InternalMethod>
         <InvalidArgument>
             <errorLevel type="info">
