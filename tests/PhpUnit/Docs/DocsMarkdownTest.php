@@ -61,6 +61,61 @@ final class DocsMarkdownTest extends TestCase
     $this->assertSame('../../project/42', DocsMarkdown::relativeUrl('docs/tutorials/jump', 'project/42'));
   }
 
+  public function testCarriesAnExplicitLocaleOnlyToDocsLinks(): void
+  {
+    $html = <<<'HTML'
+      <p><a href="../quick-start-guide/add-actors-and-objects#object">Relative</a>
+      <a href="/app/docs/reference?mode=compact&amp;view=list#category_motion">Root-relative</a>
+      <a href="https://share.catrobat.org/app/docs">Same site</a>
+      <a href="?view=full#heading">Same page with a query</a>
+      <a href="other?locale=fr">Chosen locale</a>
+      <a href="#on-this-page">Jump</a>
+      <a href="https://catrobat.org/app/docs">Other site</a>
+      <a href="//example.org/app/docs">Other host</a>
+      <a href="/app/docs-preview">Similar prefix</a>
+      <a href="../../../project/123">Project</a>
+      <a href="/docs-media/tutorial.png?v=abc"><img src="/docs-media/tutorial.png?v=abc"></a></p>
+      HTML;
+    $page = 'https://share.catrobat.org/app/docs/getting-started/elements/medialibrary';
+    $this->assertSame($html, DocsMarkdown::withLinkLocale($html, $page, '/app/docs', null));
+    $localized = DocsMarkdown::withLinkLocale($html, $page, '/app/docs', 'de_DE');
+    $this->assertStringContainsString('href="../quick-start-guide/add-actors-and-objects?locale=de_DE#object"', $localized);
+    $this->assertStringContainsString('href="/app/docs/reference?mode=compact&amp;view=list&amp;locale=de_DE#category_motion"', $localized);
+    $this->assertStringContainsString('href="https://share.catrobat.org/app/docs?locale=de_DE"', $localized);
+    $this->assertStringContainsString('href="?view=full&amp;locale=de_DE#heading"', $localized);
+    $this->assertSame(4, substr_count($localized, 'locale=de_DE'));
+    foreach (['other?locale=fr', '#on-this-page', 'https://catrobat.org/app/docs', '//example.org/app/docs', '/app/docs-preview', '../../../project/123', '/docs-media/tutorial.png?v=abc'] as $unchanged) {
+      $this->assertStringContainsString('href="'.$unchanged.'"', $localized);
+    }
+    $this->assertStringContainsString('src="/docs-media/tutorial.png?v=abc"', $localized);
+  }
+
+  public function testKeepsOldMediaLibraryBookmarksAlongsideTheCurrentHeadings(): void
+  {
+    $english = <<<'MARKDOWN'
+      ### Add a new actor from the media library
+      ### Add a background from the media library
+      ### Add a sound from the media library
+      ### Add an object from the media library
+      MARKDOWN;
+    $german = <<<'MARKDOWN'
+      ### Füge eine neue Figur aus der Medienbibliothek hinzu
+      ### Füge einen Hintergrund aus der Medienbibliothek hinzu
+      ### Füge einen Sound aus der Medienbibliothek hinzu
+      ### Füge ein Objekt aus der Medienbibliothek hinzu
+      MARKDOWN;
+    foreach ([
+      ['en', $english, ['Actor', 'Background', 'Sound', 'Object']],
+      ['de_DE', $german, ['Figur-Medienbibliothek', 'Hintergrund-Medienbibliothek', 'Sound-Medienbibliothek', 'Objekt-Medienbibliothek']],
+    ] as [$locale, $markdown, $old_ids]) {
+      $result = $this->markdown()->convert($markdown, $locale.'/getting-started/elements/medialibrary.md');
+      $this->assertCount(4, $result['toc']);
+      foreach ($old_ids as $index => $old_id) {
+        $this->assertStringContainsString('<h3 id="'.$result['toc'][$index]['id'].'"><span id="'.$old_id.'"></span>', $result['html']);
+      }
+    }
+  }
+
   public function testRendersAPageSafely(): void
   {
     $result = $this->markdown()->convert($this->fixture('en/getting-started/first-project.md'), 'en/getting-started/first-project.md', ['tutorials/jump.png' => '6b7fa434f9']);

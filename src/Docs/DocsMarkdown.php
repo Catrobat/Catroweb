@@ -7,6 +7,7 @@ namespace App\Docs;
 use App\DB\Entity\Docs\DocPage;
 use App\Docs\Markdown\Embed;
 use App\Docs\Markdown\EmbedParser;
+use Dom\HTMLDocument;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
@@ -23,6 +24,7 @@ use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\HtmlRenderer;
 use League\CommonMark\Renderer\NodeRendererInterface;
+use Uri\Rfc3986\Uri;
 
 /**
  * Renders one file of the docs repo: front matter, Markdown (raw HTML escaped, unsafe links dropped), the embeds,
@@ -41,7 +43,23 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 final class DocsMarkdown implements NodeRendererInterface
 {
   /** Bump when the HTML for the same Markdown changes: the next sync renders every page again. */
-  public const int VERSION = 5;
+  public const int VERSION = 6;
+
+  /** WordPress bookmarks for the four Media Library sections, by the current generated heading ID. */
+  private const array MEDIA_LIBRARY_BOOKMARKS = [
+    'en' => [
+      'add-a-new-actor-from-the-media-library' => 'Actor',
+      'add-a-background-from-the-media-library' => 'Background',
+      'add-a-sound-from-the-media-library' => 'Sound',
+      'add-an-object-from-the-media-library' => 'Object',
+    ],
+    'de_DE' => [
+      'füge-eine-neue-figur-aus-der-medienbibliothek-hinzu' => 'Figur-Medienbibliothek',
+      'füge-einen-hintergrund-aus-der-medienbibliothek-hinzu' => 'Hintergrund-Medienbibliothek',
+      'füge-einen-sound-aus-der-medienbibliothek-hinzu' => 'Sound-Medienbibliothek',
+      'füge-ein-objekt-aus-der-medienbibliothek-hinzu' => 'Objekt-Medienbibliothek',
+    ],
+  ];
 
   private readonly MarkdownParser $parser;
 
@@ -160,11 +178,58 @@ final class DocsMarkdown implements NodeRendererInterface
       }
     }
 
+    $html = trim($this->renderer->renderDocument($document)->getContent());
+    if ('docs/getting-started/elements/medialibrary' === $this->page_url) {
+      $aliases = [];
+      foreach (self::MEDIA_LIBRARY_BOOKMARKS[$this->locale] ?? [] as $id => $old_id) {
+        $heading = '<h3 id="'.$id.'">';
+        $aliases[$heading] = $heading.'<span id="'.$old_id.'"></span>';
+      }
+      $html = strtr($html, $aliases);
+    }
+
     return [
       'front_matter' => \is_array($front_matter) ? $front_matter : [],
-      'html' => trim($this->renderer->renderDocument($document)->getContent()),
+      'html' => $html,
       'toc' => $toc,
     ];
+  }
+
+  /** Carry an explicit language to docs links in shared, locale-neutral HTML at request time. */
+  public static function withLinkLocale(string $html, string $page_url, string $docs_path, ?string $locale): string
+  {
+    if (null === $locale || !str_contains($html, '<a ')) {
+      return $html;
+    }
+
+    $base = new Uri($page_url);
+    $document = HTMLDocument::createFromString('<!DOCTYPE html><body>'.$html, LIBXML_NOERROR, 'UTF-8');
+    $changed = false;
+    foreach ($document->getElementsByTagName('a') as $anchor) {
+      $href = $anchor->getAttribute('href') ?? '';
+      if ('' === $href || str_starts_with($href, '#') || null === ($uri = Uri::parse($href))) {
+        continue;
+      }
+      $target = $base->resolve($href);
+      $path = $target->getPath();
+      if ($target->getScheme() !== $base->getScheme() || $target->getHost() !== $base->getHost()
+        || $target->getPort() !== $base->getPort() || ($path !== $docs_path && !str_starts_with($path, $docs_path.'/'))) {
+        continue;
+      }
+      $query = $uri->getRawQuery() ?? '';
+      parse_str($query, $params);
+      if (\array_key_exists('locale', $params)) {
+        continue;
+      }
+      $anchor->setAttribute('href', $uri->withQuery(('' === $query ? '' : $query.'&').'locale='.rawurlencode($locale))->toRawString());
+      $changed = true;
+    }
+
+    if (!$changed || null === $document->body) {
+      return $html;
+    }
+
+    return $document->body->innerHTML;
   }
 
   /**

@@ -110,6 +110,10 @@ Readers can leave comments and tips below a page (`templates/Docs/Comments.html.
 
 Tests: `tests/PhpUnit/Docs/`, Behat suites `api-docs` and `web-docs`. Both use `tests/TestData/Docs/`, a small folder with the same layout (`catrobat.user_docs.dir` in the test environment).
 
+An explicit `?locale=` follows links to other docs pages in articles, the sidebar, breadcrumbs, and previous/next navigation. Fragment-only jumps stay on the current page, and links that already choose a locale keep their own choice. This is applied when Share renders the page, including English fallback articles. Canonical and hreflang URLs keep their existing rules.
+
+The English and German Media Library articles keep their four original WordPress bookmarks alongside the current heading IDs. An edge redirect for either article should omit a destination fragment so the browser can carry the original bookmark over.
+
 ## Brick reference
 
 The reference is generated, nothing in it is kept by hand. The player build writes `code-export/catalog.json` ([player/README.md](../../player/README.md), "Brick catalog"): every category of Catroid's brick picker with its bricks, written like the code export, and the formula editor's functions, sensors and operators. Its strings are markers, so `DocsCatalog` localises it with the code view's `CodeViewLocalizer` and `CodeTreeBuilder` and Catroid's own `strings/<locale>.json`: one catalog serves every language. It reads the catalog next to the deployed code export (`catrobat.code_export.dir`) and caches each language's copy (`cache.app`) until a new `catalog.json` is deployed. Without a player build the reference is empty.

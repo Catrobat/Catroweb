@@ -13,7 +13,7 @@
     <h1 class="docs-article__title">{{ element.label ?? element.name }}</h1>
     <p class="docs-reference__meta">
       <code>{{ element.name }}</code>
-      <a class="docs-reference__category-link" href="{{ path('docs_reference') }}#formula">{{ kinds[element.kind] }}</a>
+      <a class="docs-reference__category-link" href="{{ path('docs_reference', docs_locale_query) }}#formula">{{ kinds[element.kind] }}</a>
     </p>
   </article>
 {% endblock %}

@@ -93,6 +93,17 @@ Feature: User docs pages, synced from user-docs/
     And I wait for the page to be loaded
     Then the element ".docs-article__title" should contain "Catrobat-Dokumentation"
 
+  Scenario: Article and navigation links keep an explicitly chosen language
+    Given I use a 1280 x 900 viewport
+    When I go to "/app/docs/getting-started/first-project?locale=de_DE"
+    And I wait for the page to be loaded
+    Then I should see a ".docs-content a[href='../tutorials/jump?locale=de_DE#jump-higher']" element
+    And I should see a ".docs-pager a[href$='?locale=de_DE']" element
+    And I should see a "#sidebar .sidebar-docs-sections a[href$='?locale=de_DE']" element
+    When I click ".docs-content a[href='../../docs?locale=de_DE']"
+    And I wait for the page to be loaded
+    Then the element ".docs-article__title" should contain "Catrobat-Dokumentation"
+
   Scenario: A missing page is not found
     When I go to "/app/docs/does-not-exist"
     Then I should not see a ".docs-article" element

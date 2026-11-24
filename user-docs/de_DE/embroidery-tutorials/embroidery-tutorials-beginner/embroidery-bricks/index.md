@@ -22,15 +22,15 @@ Klicke auf die verschiedenen Bausteine, um mehr über sie zu erfahren:
 
 *Lässt die Stickmaschine einmal in den Stoff sticken.*
 
-[![](https://catrobat.org/wp-content/uploads/2024/08/Starte_Laufstich_mit_Lange_10-2.png)](running-stitch.md)
+[![](../../../../media/bricks/Starte_Laufstich_mit_Lange_10.png)](running-stitch.md)
 
 *Lässt die Stickmaschine laufend mit einer variablen Länge sticken.*
 
-[![](https://catrobat.org/wp-content/uploads/2024/08/Starte_Zickzack_Stich_mit_Lange_2__und_Breite_10-1.png)](zigzag-stitch.md)
+[![](../../../../media/bricks/Starte_Zickzack_Stich_mit_Lange_2__und_Breite_10.png)](zigzag-stitch.md)
 
 *Lässt mit einer variablen Länge und Breite im Zickzack sticken.*
 
-[![](https://catrobat.org/wp-content/uploads/2024/08/Starte_Dreifachstich_mit_Lange_10-1.png)](triple-stitch.md)
+[![](../../../../media/bricks/Starte_Dreifachstich_mit_Lange_10.png)](triple-stitch.md)
 
 *Funktioniert wie der Laufstich, vernäht aber jeden Stich dreimal.*
 
