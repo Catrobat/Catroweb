@@ -57,6 +57,9 @@ class DocsCatalog implements ResetInterface
     'category_raspi' => ['preference_title_enable_raspi_bricks'],
   ];
 
+  /** The gated categories whose bricks Device also lists when they are on (CategoryBricksFactory setupDeviceCategoryList). */
+  private const array DEVICE_APPENDS = ['category_arduino', 'category_cast', 'category_drone', 'category_embroidery', 'category_jumping_sumo', 'category_lego_ev3', 'category_lego_nxt', 'category_phiro', 'category_raspi'];
+
   /** Bricks of the other categories that a setting shows (CategoryBricksFactory), as in CATEGORY_SETTINGS. */
   private const array BRICK_SETTINGS = [
     'AskSpeechBrick' => ['preference_title_ai', 'preference_title_ai_speech_recognition'],
@@ -158,7 +161,9 @@ class DocsCatalog implements ResetInterface
     $names = self::BRICK_SETTINGS[$type] ?? null;
     if (null === $names) {
       $gated = array_values(array_intersect($categories, array_keys(self::CATEGORY_SETTINGS)));
-      if ([] === $gated || [] !== array_diff($categories, $gated, ['category_device'])) {
+      // Device lists the bricks of the extensions it appends, so it counts as gated only for those.
+      $device = [] !== array_intersect($gated, self::DEVICE_APPENDS) ? ['category_device'] : [];
+      if ([] === $gated || [] !== array_diff($categories, $gated, $device)) {
         return null;
       }
       $names = self::CATEGORY_SETTINGS[$gated[0]];

@@ -105,6 +105,17 @@
             }
           ],
           "category": "test"
+        },
+        {
+          "type": "ResetTimerBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_reset_timer\u0002"
+            }
+          ],
+          "category": "assertions"
         }
       ]
     },

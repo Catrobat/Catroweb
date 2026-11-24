@@ -71,7 +71,7 @@ final class DocsCatalogTest extends TestCase
     $this->assertSame("RobotixEdu's Phiro extension", $setting('PhiroMotorMoveForwardBrick'), 'by its type: also listed under Motion');
     $this->assertNull($setting('SetXBrick'), 'also listed under Motion, which is always shown');
     $this->assertNull($setting('SetVariableBrick'), 'listed under Phiro but also under Data');
-    $this->assertNull($setting('ResetTimerBrick'), 'only under Device, which is always shown');
+    $this->assertNull($setting('ResetTimerBrick'), 'under Device and Assertions: Device does not append Assertions, so it is always shown (like TapAtBrick)');
   }
 
   public function testEveryBrickIsLocalizedInEveryLanguage(): void
