@@ -2,7 +2,7 @@
 title: İlk bloklar
 description: "Bu eğitimde bir nesneyi programlamak için farklı blokları nerede bulacağını öğreneceksin."
 order: 0
-source_hash: '2c21c4e57a1fb21192af99053f6655a1afdde16e6c793806049b43bf520cf2fa'
+source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ---
 
 Bu eğitimde bir nesneyi programlamak için farklı blokları nerede bulacağını öğreneceksin. Ayrıca bu eğitim blok kategorilerini de güzelce gösterir.
@@ -19,7 +19,7 @@ Blok ekleyip nesneni programlamak için önce bir nesnesi olan bir proje yapmı�
 
 Önce projeni açman gerekir. Bir nesne yapmış olmalısın (yapmadıysan **[Yeni nesne](new-object.md)** eğitimine bak). Şimdi nesnenin adına dokunabilirsin.
 
-### 2. Var olan nesneyi aç
+### 2. Var olan bloklar
 
 Sonra orada zaten bazı bloklar olduğunu görürsün. Bu bloklar, nesneyi ekranda yerleştirdiğimizde yapıldı.
 
@@ -48,8 +48,6 @@ Bloğu programının en sonuna koy ve programını ilk kez çalıştır. Bunu sa
 ![İlk bloklar (3)](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Başardın! İlk bloğunu ekledin.
-
-Artık ilk nesneni programladın!
 
 Artık ilk nesneni programladın!
 

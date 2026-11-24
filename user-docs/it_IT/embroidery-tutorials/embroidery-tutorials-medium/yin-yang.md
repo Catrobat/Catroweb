@@ -3,7 +3,7 @@ title: "Yin & Yang"
 description: "In questo tutorial impari a ricamare lo Yin e Yang (78.4 x 78.4mm)."
 order: 8
 flavors: [embroidery]
-source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
+source_hash: 'd827b82ffeb1251d6ce5dd5e2c51642e0af9fb57dea7bd5627ecb176790bb955'
 ---
 
 In questo tutorial impari a ricamare lo Yin e Yang (78.4 x 78.4mm).
@@ -42,7 +42,7 @@ Crea un nuovo oggetto da ricamo e aggiungi questo script:
 
 ![Yin e Yang (3)](../../../media/embroidery-tutorials/Yin-and-Yang-3.png)
 
-### 5. Cerchio piccolo in basso
+### 5. Copia il cerchio piccolo
 
 Puoi semplicemente copiare l’oggetto del passo 4:
 
@@ -50,6 +50,8 @@ Puoi semplicemente copiare l’oggetto del passo 4:
 
 ### 6. Cerchio piccolo in basso
 
-Devi cambiare la posizione del secondo cerchio:![Yin e Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
+Devi cambiare la posizione del secondo cerchio:
+
+![Yin e Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
 
 ### 7. Tocca play per avviare il tuo disegno!

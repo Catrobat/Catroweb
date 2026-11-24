@@ -3,7 +3,7 @@ title: Piruleta
 description: "En este tutorial aprendes a bordar una piruleta (124,6 x 65,6 mm)."
 order: 0
 flavors: [embroidery]
-source_hash: '2b7b6f093d64566e2fbac912661eb2e1496bd4b95f583ae7c9ff27989d236ae4'
+source_hash: 'b1f94157915891aa8397cc32586f313656aa1cd2bb883f0b5a1757d5dddda7ff'
 ---
 
 En este tutorial aprendes a bordar una piruleta (124,6 x 65,6 mm).
@@ -30,7 +30,7 @@ Si quieres más información o ideas para diseños, mira los otros tutoriales.
 
 ### 3. Círculos
 
-Esta parte se ejecuta cada vez que se envía el mensaje del semicírculo. Añádela también a tu script.
+Esta parte se ejecuta cada vez que se envía el mensaje del círculo. Añádela también a tu script.
 
 ![Piruleta (6)](../../../media/embroidery-tutorials/Lollipop-6.png)
 

@@ -3,7 +3,7 @@ title: "Инь и Ян"
 description: "В этом уроке ты узнаешь, как вышить Инь и Ян (78,4 x 78,4 мм)."
 order: 8
 flavors: [embroidery]
-source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
+source_hash: 'd827b82ffeb1251d6ce5dd5e2c51642e0af9fb57dea7bd5627ecb176790bb955'
 ---
 
 В этом уроке ты узнаешь, как вышить Инь и Ян (78,4 x 78,4 мм).
@@ -42,7 +42,7 @@ source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
 
 ![Инь и Ян (3)](../../../media/embroidery-tutorials/Yin-and-Yang-3.png)
 
-### 5. Маленький круг снизу
+### 5. Скопируй маленький круг
 
 Можно просто скопировать объект из шага 4:
 
@@ -50,6 +50,8 @@ source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
 
 ### 6. Маленький круг снизу
 
-Поменяй место второго круга:![Инь и Ян (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
+Поменяй место второго круга:
+
+![Инь и Ян (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
 
 ### 7. Нажми «Запуск», чтобы начать свой узор!

@@ -3,7 +3,7 @@ title: Erste Bausteine
 description: "In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren."
 order: 0
 reviewed: true
-source_hash: '2c21c4e57a1fb21192af99053f6655a1afdde16e6c793806049b43bf520cf2fa'
+source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ---
 
 In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren. Außerdem gibt dir dieses Tutorial einen guten Überblick über die Baustein-Kategorien.
@@ -20,7 +20,7 @@ Damit du Bausteine einfügen und dein Objekt programmieren kannst, solltest du b
 
 Zuerst musst du dein Projekt öffnen. Du solltest bereits ein Objekt erstellt haben (falls nicht, schau dir das Tutorial **[Neues Objekt](new-object.md)** an). Jetzt kannst du auf den Namen des Objekts klicken.
 
-### 2. Öffne existierendes Objekt
+### 2. Vorhandene Bausteine
 
 Danach wirst du sehen, dass bereits einige Bausteine vorhanden sind. Diese Bausteine wurden erstellt, als wir das Objekt visuell platziert haben. Diese Bausteine tun nichts weiter, als unser Objekt an genau der Position zu platzieren, die wir am Anfang ausgewählt haben, sobald du das Projekt startest. Du kannst diese Position auch jederzeit hier ändern.
 

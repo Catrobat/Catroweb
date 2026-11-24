@@ -3,7 +3,7 @@ title: Cielo notturno
 description: "In questo tutorial impari a ricamare un cielo notturno (48.5 x 96.1mm)."
 order: 7
 flavors: [embroidery]
-source_hash: '3f0da383f72687df710f8b32a8618b97a678b7575849b1f8a3d1796eed75acb6'
+source_hash: '1dcc244271b94bbe296c4a745795bcf68f6284a1ec40861a95c2a7e42cb72306'
 ---
 
 In questo tutorial impari a ricamare un cielo notturno (48.5 x 96.1mm).
@@ -32,7 +32,7 @@ Per altre informazioni o idee per i disegni, guarda gli altri tutorial.
 
 ### 3. Una stella
 
-Questa parte viene eseguita ogni volta che viene inviato il messaggio semicerchio. Aggiungi anche questa al tuo script.
+Questa parte viene eseguita ogni volta che viene inviato il messaggio stella. Aggiungi anche questa al tuo script.
 
 ![Cielo notturno (1)](../../../media/embroidery-tutorials/Night-Sky-1.png)
 

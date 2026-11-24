@@ -2,7 +2,7 @@
 title: Premières briques
 description: "Dans ce tutoriel, tu apprends où trouver les différentes briques pour programmer un objet."
 order: 0
-source_hash: '2c21c4e57a1fb21192af99053f6655a1afdde16e6c793806049b43bf520cf2fa'
+source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ---
 
 Dans ce tutoriel, tu apprends où trouver les différentes briques pour programmer un objet. Tu vois aussi un bon aperçu des catégories de briques.
@@ -19,7 +19,7 @@ Pour ajouter des briques et programmer ton objet, tu dois déjà avoir créé un
 
 D’abord, ouvre ton projet. Tu dois déjà avoir créé un objet (sinon, regarde le tutoriel **[Nouvel objet](new-object.md)**). Maintenant, touche le nom de l’objet.
 
-### 2. Ouvrir un objet
+### 2. Briques déjà présentes
 
 Ensuite, tu vois qu’il y a déjà quelques briques. Ces briques ont été créées quand nous avons placé l’objet sur l’écran.
 
@@ -48,8 +48,6 @@ Place la brique tout à la fin de ton programme et lance ton programme pour la p
 ![Premières briques (3)](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Bravo ! Tu as ajouté ta première brique.
-
-Tu as programmé ton premier objet !
 
 Tu as programmé ton premier objet !
 

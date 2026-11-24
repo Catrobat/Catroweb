@@ -3,7 +3,7 @@ title: Lolipop
 description: "Bu eğitimde bir lolipop (124.6 x 65.6mm) nakışlamayı öğreneceksin."
 order: 0
 flavors: [embroidery]
-source_hash: '2b7b6f093d64566e2fbac912661eb2e1496bd4b95f583ae7c9ff27989d236ae4'
+source_hash: 'b1f94157915891aa8397cc32586f313656aa1cd2bb883f0b5a1757d5dddda7ff'
 ---
 
 Bu eğitimde bir lolipop (124.6 x 65.6mm) nakışlamayı öğreneceksin.
@@ -30,7 +30,7 @@ Daha fazla bilgi veya tasarım fikirleri için diğer eğitimlere de göz at.
 
 ### 3. Daireler
 
-Bu bölüm, yarım daire mesajı her gönderildiğinde çalışır. Onu da betiğine ekle.
+Bu bölüm, daire mesajı her gönderildiğinde çalışır. Onu da betiğine ekle.
 
 ![Lolipop (6)](../../../media/embroidery-tutorials/Lollipop-6.png)
 

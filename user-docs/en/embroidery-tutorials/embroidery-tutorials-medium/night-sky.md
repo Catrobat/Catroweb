@@ -31,7 +31,7 @@ For more information or design suggestions check out the other tutorials.
 
 ### 3. One Star
 
-This part is called every time the semicircle message is sent. Add it to your script too.
+This part is called every time the star message is sent. Add it to your script too.
 
 ![Night Sky (1)](../../../media/embroidery-tutorials/Night-Sky-1.png)
 

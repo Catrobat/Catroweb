@@ -18,7 +18,7 @@ To insert bricks and program your object, you should already have created a proj
 
 At first, you need to open your project. You should already have created an object (if not, check the **[New Object](new-object.md)**-tutorial out). Now you can click on the object´s name.
 
-### 2. Open Existing Object
+### 2. Existing Bricks
 
 After that you will see that there are already some bricks. Those bricks were created when we visually placed the object.
 
@@ -32,7 +32,7 @@ Now you can create more bricks by clicking on the yellow plus-button on the bott
 
 ### 4. Brick Categories
 
-This are the different brick categories:
+These are the different brick categories:
 
 ![First Bricks (2)](../../../media/game-tutorials/First-Bricks-2.png)
 
@@ -48,9 +48,7 @@ Place the brick at the last position of your program and run your program for th
 
 ### 7. You made it! You inserted your first brick.
 
-Now you have programed you first Object!
-
-Now you have programed you first Object!
+Now you have programmed your first object!
 
 If you want to share your project with your friends, you can check out the **[Upload and Share](upload-and-share.md)**-tutorial, where it will be explained exactly how it works. Otherwise, you can already start with your first own project. If you need help or inspiration, feel free to check out our tutorials from the Beginner series.
 
