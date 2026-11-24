@@ -46,7 +46,7 @@ A visitor's language comes from the `hl` cookie or Accept-Language (`de`, `de_AT
 - **Embeds**, each on a line of its own:
   - `::brick{type=SetXBrick}` and `::formula{name=SIN}`: the brick or formula element as the reference shows it, in the page's language, linked to its reference page. A type or name the catalog does not know shows as its name.
   - `::project{id=…}`: a card with the project's name, author and thumbnail, linking to the project page; a hidden or missing project shows a plain link.
-  - `::video{youtube=…}`: a link to the video. The page's Stimulus controller swaps in a `youtube-nocookie.com` player only when the reader clicks it, so nothing loads from YouTube before (CSP `frame-src`).
+  - `::video{youtube=…}`: a link to the video. The page's Stimulus controller swaps in a `youtube-nocookie.com` player only when the reader clicks it, so nothing loads from YouTube before (CSP `frame-src`). The iframe uses `strict-origin-when-cross-origin` so YouTube receives the page origin needed to configure its player, even if the site's document policy suppresses the referrer.
   - An embed with an unknown kind or invalid value stays visible as text.
 
 ## Media
