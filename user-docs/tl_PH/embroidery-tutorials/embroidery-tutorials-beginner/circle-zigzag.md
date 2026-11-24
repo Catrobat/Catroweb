@@ -16,13 +16,13 @@ Para sa karagdagang impormasyon o mga suhestiyon para sa disenyo, tingnan ang ib
 
 *Dito maaari mong i-download ang tutorial sa PDF -format*:
 
-[Circle Zigzag](../../../media/embroidery-tutorials/Circle-Zigzag.pdf)
+[Bilog na Zigzag](../../../media/embroidery-tutorials/Circle-Zigzag.pdf)
 
 ### 1. Gumawa ng isang bagong bagay sa pagsusuot (tingnan ang [Gumawa ng mga bagay na mag-embroidery](create-embroidery-objects.md)).
 
 ### 2. Ngayon magsimula at ipasok ang mga block ng code hakbang sa iyong script.
 
-![Circle Zigzag](../../../media/embroidery-tutorials/Circle-Zigzag.png)
+![Bilog na Zigzag](../../../media/embroidery-tutorials/Circle-Zigzag.png)
 
 ### 3. I-tap ang play upang simulan ang iyong disenyo!
 
