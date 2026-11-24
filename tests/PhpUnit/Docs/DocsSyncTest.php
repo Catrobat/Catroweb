@@ -140,8 +140,8 @@ final class DocsSyncTest extends KernelTestCase
       try {
         $get($missing);
         $this->fail($missing.' should not be found');
-      } catch (NotFoundHttpException) {
-        $this->addToAssertionCount(1);
+      } catch (NotFoundHttpException $notFoundHttpException) {
+        $this->assertSame(404, $notFoundHttpException->getStatusCode());
       }
     }
 
