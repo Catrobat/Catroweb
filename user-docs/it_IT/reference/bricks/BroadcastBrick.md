@@ -10,7 +10,7 @@ Manda un messaggio alle altre parti del tuo progetto e dice loro di far partire 
 
 Con i messaggi gli oggetti di una scena possono parlare tra loro e lavorare insieme. Un oggetto può mandare un messaggio a tutti gli altri oggetti. Gli oggetti che lo ricevono possono poi reagire a quel messaggio.
 
-Questi messaggi **non si vedono** sullo schermo! Se vuoi mostrare dei messaggi, usa i mattoncini della categoria “Aspetti”!
+Questi messaggi **non si vedono** sullo schermo! Se vuoi mostrare dei messaggi, usa i blocchi della categoria “Aspetti”!
 
 **Come funziona?**
 

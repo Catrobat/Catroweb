@@ -4,7 +4,7 @@ source_hash: '31caf79280f6cf580617c426cec2eda42bc4a6391d098e09c4f37190127add32'
 
 ![Set_pen_colour_to__red_0_green_0_blue_255_](../../../media/bricks/Set_pen_colour_to__red_0_green_0_blue_255_.png)
 
-Questo mattoncino cambia il colore della penna dell'attore. È come prendere una penna di un altro colore mentre disegni.
+Questo blocco cambia il colore della penna dell'attore. È come prendere una penna di un altro colore mentre disegni.
 
 **Rosso, verde, blu (RGB)**: il modello di colore RGB mescola luce rossa, verde e blu più o meno forte e così crea tantissimi colori. Ogni parte del colore (rosso, verde e blu) può avere un valore da 0 a 255:
 

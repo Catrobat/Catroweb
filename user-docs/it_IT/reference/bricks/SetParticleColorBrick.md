@@ -4,7 +4,7 @@ source_hash: 'f59fe963d22959f01b6b52114a000b84b3ea10677929561e0f4c48c8bfd78a0b'
 
 ![Set_particle_colour_to_’#ff0000′](../../../media/bricks/Set_particle_colour_to_ff0000.png)
 
-Questo mattoncino cambia il colore delle particelle che escono dall'attore. È come cambiare il colore dei coriandoli in uno sparacoriandoli.
+Questo blocco cambia il colore delle particelle che escono dall'attore. È come cambiare il colore dei coriandoli in uno sparacoriandoli.
 
 Un codice colore esadecimale è un modo per scrivere i colori con valori esadecimali. È fatto di sei caratteri, che possono essere numeri (0-9) o lettere (A-F). Di solito il codice inizia con un "#", così: `#RRGGBB`.
 
