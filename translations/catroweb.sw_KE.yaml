@@ -1057,4 +1057,5 @@ docs:
     operators: "Viendeshaji"
     examples: "Miradi ya mfano"
     no_prose: "Bado hakuna aliyeeleza tofali hili. Unaweza kuandika maelezo ya kwanza."
+    setting: "Ili kuona tofali hili kwenye programu, washa “%setting%” kwenye mipangilio."
     empty: "Marejeo ya matofali hayapatikani sasa hivi."

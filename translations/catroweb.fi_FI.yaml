@@ -1079,4 +1079,5 @@ docs:
     operators: "Operaattorit"
     examples: "Esimerkkiprojektit"
     no_prose: "Kukaan ei ole vielä selittänyt tätä palikkaa. Voit kirjoittaa ensimmäisen selityksen."
+    setting: "Jotta näet tämän palikan sovelluksessa, ota asetuksista käyttöön ”%setting%”."
     empty: "Palikkahakemisto ei ole juuri nyt saatavilla."

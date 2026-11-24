@@ -1080,4 +1080,5 @@ docs:
     operators: "Toán tử"
     examples: "Dự án mẫu"
     no_prose: "Chưa ai giải thích khối lệnh này. Bạn có thể viết lời giải thích đầu tiên."
+    setting: "Để thấy khối lệnh này trong ứng dụng, hãy bật “%setting%” trong phần cài đặt."
     empty: "Tài liệu tra cứu khối lệnh hiện không khả dụng."

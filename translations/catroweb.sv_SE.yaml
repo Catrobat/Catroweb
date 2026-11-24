@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatorer"
     examples: "Exempelprojekt"
     no_prose: "Ingen har förklarat det här blocket än. Du kan skriva den första förklaringen."
+    setting: "Slå på ”%setting%” i inställningarna för att se det här blocket i appen."
     empty: "Blocköversikten är inte tillgänglig just nu."

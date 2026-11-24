@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatory"
     examples: "Przykładowe projekty"
     no_prose: "Nikt jeszcze nie objaśnił tego klocka. Możesz napisać pierwsze objaśnienie."
+    setting: "Aby zobaczyć ten klocek w aplikacji, włącz „%setting%” w ustawieniach."
     empty: "Spis klocków jest teraz niedostępny."

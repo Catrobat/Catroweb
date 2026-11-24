@@ -1079,4 +1079,5 @@ docs:
     operators: "Műveleti jelek"
     examples: "Példaprojektek"
     no_prose: "Ezt a blokkot még senki sem magyarázta el. Megírhatod az első magyarázatot."
+    setting: "Hogy lásd ezt a blokkot az alkalmazásban, kapcsold be a beállításokban: „%setting%”."
     empty: "A blokkleírás most nem érhető el."

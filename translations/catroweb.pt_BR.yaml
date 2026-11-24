@@ -1079,4 +1079,5 @@ docs:
     operators: "Operadores"
     examples: "Projetos de exemplo"
     no_prose: "Ninguém explicou este bloco ainda. Você pode escrever a primeira explicação."
+    setting: "Para ver este bloco no aplicativo, ative “%setting%” nas configurações."
     empty: "A referência de blocos não está disponível no momento."

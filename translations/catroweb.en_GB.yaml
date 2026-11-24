@@ -1079,4 +1079,5 @@ docs:
     operators: "Operators"
     examples: "Example projects"
     no_prose: "Nobody has explained this brick yet. You can write the first explanation."
+    setting: "To see this brick in the app, turn on “%setting%” in the settings."
     empty: "The brick reference is not available right now."

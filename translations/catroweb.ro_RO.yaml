@@ -1057,4 +1057,5 @@ docs:
     operators: "Operatori"
     examples: "Proiecte exemplu"
     no_prose: "Nimeni nu a explicat încă acest bloc. Poți scrie prima explicație."
+    setting: "Ca să vezi acest bloc în aplicație, activează „%setting%” în setări."
     empty: "Referința blocurilor nu este disponibilă acum."

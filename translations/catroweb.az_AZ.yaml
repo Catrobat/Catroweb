@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatorlar"
     examples: "Nümunə layihələr"
     no_prose: "Bu bloku hələ heç kim izah etməyib. İlk izahı sən yaza bilərsən."
+    setting: "Bu bloku tətbiqdə görmək üçün ayarlarda “%setting%” seçimini aç."
     empty: "Blok sorğu kitabçası hazırda əlçatan deyil."

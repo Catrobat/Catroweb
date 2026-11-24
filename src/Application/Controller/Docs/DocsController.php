@@ -124,6 +124,7 @@ class DocsController extends AbstractController
     return $this->markdownResponse(
       '# '.$this->catalog->title($brick['brick'])."\n\n"
       .'Catrobat brick `'.$type.'`, in '.implode(', ', array_column($brick['categories'], 'name')).".\n"
+      .(null === $brick['setting'] ? '' : "\n> ".$this->settingHint($brick['setting'], $locale)."\n")
       .(null === $body ? '' : "\n".$body),
       $explicit,
     );
@@ -242,6 +243,7 @@ class DocsController extends AbstractController
       'title' => $title,
       'brick_html' => $this->catalog->html($brick['brick']),
       'categories' => $brick['categories'],
+      'setting_hint' => null === $brick['setting'] ? null : $this->settingHint($brick['setting'], $locale),
       'prose' => $prose,
       'fallback' => null !== $prose && DocsLibrary::isFallback($prose, $locale),
       'edit_url' => $this->sync->brickEditUrl($type, null !== $this->library->brickProse($type, 'en')),
@@ -365,6 +367,18 @@ class DocsController extends AbstractController
     return $this->generateUrl('docs', ['path' => 'index' === $path ? '' : $path]);
   }
 
+  /** "To see this brick, turn on …": in the page's language, which ?locale= may set apart from the request's. */
+  private function settingHint(string $setting, string $locale): string
+  {
+    return $this->translator->trans('docs.reference.setting', ['%setting%' => $setting], 'catroweb', $this->shareLocale($locale));
+  }
+
+  /** Share's own locale of a language (?locale=de and ?locale=de_DE: de_DE), English when share does not speak it. */
+  private function shareLocale(string $locale): string
+  {
+    return array_values(array_intersect($this->library->locales($locale), $this->library->getSupportedLanguageCodes()))[0] ?? 'en';
+  }
+
   /**
    * The language of the view and whether the URL chose it: `?locale=` when it is one, else the visitor's.
    *
@@ -404,7 +418,7 @@ class DocsController extends AbstractController
 
     $supported = $this->library->getSupportedLanguageCodes();
     // ?locale=de and ?locale=de_DE show the same page: the canonical one is share's own locale.
-    $canonical = $explicit ? (array_values(array_intersect($this->library->locales($locale), $supported))[0] ?? 'en') : null;
+    $canonical = $explicit ? $this->shareLocale($locale) : null;
 
     return [
       'canonical_url' => $url($canonical),

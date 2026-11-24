@@ -1080,4 +1080,5 @@ docs:
     operators: "Operátory"
     examples: "Ukážkové projekty"
     no_prose: "Tento blok zatiaľ nikto nevysvetlil. Môžeš napísať prvé vysvetlenie."
+    setting: "Aby sa ti tento blok v aplikácii zobrazil, zapni v nastaveniach „%setting%“."
     empty: "Prehľad blokov teraz nie je dostupný."

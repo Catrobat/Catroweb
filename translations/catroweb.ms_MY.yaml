@@ -1079,4 +1079,5 @@ docs:
     operators: "Operator"
     examples: "Contoh projek"
     no_prose: "Belum ada sesiapa yang menerangkan blok ini. Anda boleh menulis penerangan pertama."
+    setting: "Untuk melihat blok ini dalam aplikasi, hidupkan “%setting%” dalam tetapan."
     empty: "Rujukan blok tidak tersedia sekarang."

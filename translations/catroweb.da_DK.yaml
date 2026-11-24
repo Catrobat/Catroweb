@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatorer"
     examples: "Eksempelprojekter"
     no_prose: "Ingen har forklaret denne klods endnu. Du kan skrive den første forklaring."
+    setting: "For at se denne klods i appen skal du slå »%setting%« til i indstillingerne."
     empty: "Klodsoversigten er ikke tilgængelig lige nu."

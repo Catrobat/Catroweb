@@ -1078,4 +1078,5 @@ docs:
     operators: "Operatörler"
     examples: "Örnek projeler"
     no_prose: "Bu bloğu henüz kimse açıklamadı. İlk açıklamayı sen yazabilirsin."
+    setting: "Bu bloğu uygulamada görmek için ayarlarda “%setting%” seçeneğini aç."
     empty: "Blok başvuru kılavuzu şu anda kullanılamıyor."

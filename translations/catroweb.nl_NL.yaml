@@ -1079,4 +1079,5 @@ docs:
     operators: "Operatoren"
     examples: "Voorbeeldprojecten"
     no_prose: "Niemand heeft dit blok nog uitgelegd. Jij kunt de eerste uitleg schrijven."
+    setting: "Zet “%setting%” aan in de instellingen om dit blok in de app te zien."
     empty: "Het blokkenoverzicht is nu niet beschikbaar."

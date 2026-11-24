@@ -1059,4 +1059,5 @@ docs:
     operators: "Operator"
     examples: "Contoh proyek"
     no_prose: "Belum ada yang menjelaskan balok ini. Kamu bisa menulis penjelasan pertama."
+    setting: "Agar balok ini muncul di aplikasi, aktifkan “%setting%” di pengaturan."
     empty: "Referensi balok tidak tersedia saat ini."
