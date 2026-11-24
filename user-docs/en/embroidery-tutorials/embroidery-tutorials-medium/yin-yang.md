@@ -41,7 +41,7 @@ Create a new Embroidery-Object and insert the following script:
 
 ![Yin and Yang (3)](../../../media/embroidery-tutorials/Yin-and-Yang-3.png)
 
-### 5. Little Circle Bottom
+### 5. Copy the Little Circle
 
 You can simply copy the object from step 4:
 
@@ -49,6 +49,8 @@ You can simply copy the object from step 4:
 
 ### 6. Little Circle Bottom
 
-You have to change the position of the second circle:![Yin and Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
+You have to change the position of the second circle:
+
+![Yin and Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
 
 ### 7. Tap play to start your design!

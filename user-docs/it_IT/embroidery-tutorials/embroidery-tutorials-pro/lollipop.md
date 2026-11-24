@@ -3,7 +3,7 @@ title: Lecca-lecca
 description: "In questo tutorial impari a ricamare un lecca-lecca (124.6 x 65.6mm)."
 order: 0
 flavors: [embroidery]
-source_hash: '2b7b6f093d64566e2fbac912661eb2e1496bd4b95f583ae7c9ff27989d236ae4'
+source_hash: 'b1f94157915891aa8397cc32586f313656aa1cd2bb883f0b5a1757d5dddda7ff'
 ---
 
 In questo tutorial impari a ricamare un lecca-lecca (124.6 x 65.6mm).
@@ -30,7 +30,7 @@ Per altre informazioni o idee per i disegni, guarda gli altri tutorial.
 
 ### 3. Cerchi
 
-Questa parte viene eseguita ogni volta che viene inviato il messaggio semicerchio. Aggiungi anche questa al tuo script.
+Questa parte viene eseguita ogni volta che viene inviato il messaggio cerchio. Aggiungi anche questa al tuo script.
 
 ![Lecca-lecca (6)](../../../media/embroidery-tutorials/Lollipop-6.png)
 

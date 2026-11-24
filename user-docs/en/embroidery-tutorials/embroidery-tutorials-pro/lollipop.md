@@ -29,7 +29,7 @@ For more information or design suggestions check out the other tutorials.
 
 ### 3. Circles
 
-This part is called every time the semicircle message is sent. Add it to your script too.
+This part is called every time the circle message is sent. Add it to your script too.
 
 ![Lollipop (6)](../../../media/embroidery-tutorials/Lollipop-6.png)
 

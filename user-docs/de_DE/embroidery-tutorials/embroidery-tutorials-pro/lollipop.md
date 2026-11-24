@@ -3,6 +3,7 @@ title: Lollipop
 description: "In diesem Tutorial erfährst du, wie du einen Lollipop (124,6 x 65,6mm) sticken kannst."
 order: 0
 reviewed: true
+source_hash: 'b1f94157915891aa8397cc32586f313656aa1cd2bb883f0b5a1757d5dddda7ff'
 ---
 
 In diesem Tutorial erfährst du, wie du einen Lollipop (124,6 x 65,6mm) sticken kannst.
@@ -29,7 +30,7 @@ Für mehr Informationen oder Designvorschläge schau dir doch auch die anderen T
 
 ### 3. Kreise
 
-Dieser Teil wird jedesmal aufgerufen, wenn die Nachricht Halbkreis verschickt wird. Füge ihn zu deinem Skript hinzu.
+Dieser Teil wird jedesmal aufgerufen, wenn die Nachricht Kreis verschickt wird. Füge ihn zu deinem Skript hinzu.
 
 ![Lollipop (4)](../../../media/embroidery-tutorials/Lollipop-4.png)
 

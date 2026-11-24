@@ -3,7 +3,7 @@ title: "Yin & Yang"
 description: "Neste tutorial, você vai aprender a bordar o Yin e Yang (78,4 x 78,4 mm)."
 order: 8
 flavors: [embroidery]
-source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
+source_hash: 'd827b82ffeb1251d6ce5dd5e2c51642e0af9fb57dea7bd5627ecb176790bb955'
 ---
 
 Neste tutorial, você vai aprender a bordar o Yin e Yang (78,4 x 78,4 mm).
@@ -42,7 +42,7 @@ Crie um novo objeto de bordado e coloque este script:
 
 ![Yin e Yang (3)](../../../media/embroidery-tutorials/Yin-and-Yang-3.png)
 
-### 5. Círculo pequeno de baixo
+### 5. Copiar o círculo pequeno
 
 Você pode simplesmente copiar o objeto do passo 4:
 
@@ -50,6 +50,8 @@ Você pode simplesmente copiar o objeto do passo 4:
 
 ### 6. Círculo pequeno de baixo
 
-Você precisa mudar a posição do segundo círculo:![Yin e Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
+Você precisa mudar a posição do segundo círculo:
+
+![Yin e Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
 
 ### 7. Toque em Executar para começar o seu desenho!

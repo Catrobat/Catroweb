@@ -3,7 +3,7 @@ title: Pirulito
 description: "Neste tutorial, você vai aprender a bordar um pirulito (124,6 x 65,6 mm)."
 order: 0
 flavors: [embroidery]
-source_hash: '2b7b6f093d64566e2fbac912661eb2e1496bd4b95f583ae7c9ff27989d236ae4'
+source_hash: 'b1f94157915891aa8397cc32586f313656aa1cd2bb883f0b5a1757d5dddda7ff'
 ---
 
 Neste tutorial, você vai aprender a bordar um pirulito (124,6 x 65,6 mm).
@@ -30,7 +30,7 @@ Para mais informações ou ideias de desenhos, veja os outros tutoriais.
 
 ### 3. Círculos
 
-Esta parte roda toda vez que a mensagem do semicírculo é enviada. Coloque ela no seu script também.
+Esta parte roda toda vez que a mensagem do círculo é enviada. Coloque ela no seu script também.
 
 ![Pirulito (6)](../../../media/embroidery-tutorials/Lollipop-6.png)
 

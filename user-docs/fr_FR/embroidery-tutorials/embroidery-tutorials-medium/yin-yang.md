@@ -3,7 +3,7 @@ title: "Yin & Yang"
 description: "Dans ce tutoriel, tu apprends à broder le Yin et le Yang (78.4 x 78.4mm)."
 order: 8
 flavors: [embroidery]
-source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
+source_hash: 'd827b82ffeb1251d6ce5dd5e2c51642e0af9fb57dea7bd5627ecb176790bb955'
 ---
 
 Dans ce tutoriel, tu apprends à broder le Yin et le Yang (78.4 x 78.4mm).
@@ -42,7 +42,7 @@ Crée un nouvel objet de broderie et ajoute le script suivant :
 
 ![Yin et Yang (3)](../../../media/embroidery-tutorials/Yin-and-Yang-3.png)
 
-### 5. Petit cercle en bas
+### 5. Copier le petit cercle
 
 Tu peux simplement copier l’objet de l’étape 4 :
 
@@ -50,6 +50,8 @@ Tu peux simplement copier l’objet de l’étape 4 :
 
 ### 6. Petit cercle en bas
 
-Tu dois changer la position du deuxième cercle :![Yin et Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
+Tu dois changer la position du deuxième cercle :
+
+![Yin et Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
 
 ### 7. Appuie sur « Jouer » pour lancer ton motif !

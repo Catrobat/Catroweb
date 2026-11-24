@@ -3,7 +3,7 @@ title: "Yin ve Yang"
 description: "Bu eğitimde Yin ve Yang’ı (78.4 x 78.4mm) nakışlamayı öğreneceksin."
 order: 8
 flavors: [embroidery]
-source_hash: '51248502451080eb052acf05cf2584c84cb80bd2d9d0b8ada4aebae0d88f8584'
+source_hash: 'd827b82ffeb1251d6ce5dd5e2c51642e0af9fb57dea7bd5627ecb176790bb955'
 ---
 
 Bu eğitimde Yin ve Yang’ı (78.4 x 78.4mm) nakışlamayı öğreneceksin.
@@ -42,7 +42,7 @@ Yeni bir nakış nesnesi oluştur ve şu betiği ekle:
 
 ![Yin ve Yang (3)](../../../media/embroidery-tutorials/Yin-and-Yang-3.png)
 
-### 5. Alttaki küçük daire
+### 5. Küçük daireyi kopyala
 
 4. adımdaki nesneyi kopyalaman yeterli:
 
@@ -50,6 +50,8 @@ Yeni bir nakış nesnesi oluştur ve şu betiği ekle:
 
 ### 6. Alttaki küçük daire
 
-İkinci dairenin yerini değiştirmen gerekiyor:![Yin ve Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
+İkinci dairenin yerini değiştirmen gerekiyor:
+
+![Yin ve Yang (5)](../../../media/embroidery-tutorials/Yin-and-Yang-5.png)
 
 ### 7. Tasarımını başlatmak için oynat düğmesine dokun!

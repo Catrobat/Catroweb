@@ -3,7 +3,7 @@ title: Cielo nocturno
 description: "En este tutorial aprendes a bordar un cielo nocturno (48,5 x 96,1 mm)."
 order: 7
 flavors: [embroidery]
-source_hash: '3f0da383f72687df710f8b32a8618b97a678b7575849b1f8a3d1796eed75acb6'
+source_hash: '1dcc244271b94bbe296c4a745795bcf68f6284a1ec40861a95c2a7e42cb72306'
 ---
 
 En este tutorial aprendes a bordar un cielo nocturno (48,5 x 96,1 mm).
@@ -32,7 +32,7 @@ Si quieres más información o ideas para diseños, mira los otros tutoriales.
 
 ### 3. Una estrella
 
-Esta parte se ejecuta cada vez que se envía el mensaje del semicírculo. Añádela también a tu script.
+Esta parte se ejecuta cada vez que se envía el mensaje de la estrella. Añádela también a tu script.
 
 ![Cielo nocturno (1)](../../../media/embroidery-tutorials/Night-Sky-1.png)
 

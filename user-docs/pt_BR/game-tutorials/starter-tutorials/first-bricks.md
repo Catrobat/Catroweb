@@ -2,7 +2,7 @@
 title: Primeiros blocos
 description: "Neste tutorial, você aprende onde encontrar os vários blocos para programar um objeto."
 order: 0
-source_hash: '2c21c4e57a1fb21192af99053f6655a1afdde16e6c793806049b43bf520cf2fa'
+source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ---
 
 Neste tutorial, você aprende onde encontrar os vários blocos para programar um objeto. Ele também mostra bem as categorias de blocos.
@@ -19,7 +19,7 @@ Para colocar blocos e programar o seu objeto, você já precisa ter criado um pr
 
 Primeiro, abra o seu projeto. Você já deve ter criado um objeto (se não, veja o tutorial **[Novo objeto](new-object.md)**). Agora toque no nome do objeto.
 
-### 2. Abrir um objeto que já existe
+### 2. Blocos que já existem
 
 Depois disso, você vê que já tem alguns blocos. Esses blocos foram criados quando colocamos o objeto na tela.
 
@@ -48,8 +48,6 @@ Coloque o bloco no fim do seu programa e execute o programa pela primeira vez. P
 ![Primeiros blocos (3)](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Você conseguiu! Você colocou o seu primeiro bloco.
-
-Agora você programou o seu primeiro objeto!
 
 Agora você programou o seu primeiro objeto!
 

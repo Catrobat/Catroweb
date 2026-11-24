@@ -3,6 +3,7 @@ title: "Yin & Yang"
 description: "In diesem Tutorial erfährst du, wie du Yin und Yang (78,4 x 78,4mm) sticken kannst."
 order: 9
 reviewed: true
+source_hash: 'd827b82ffeb1251d6ce5dd5e2c51642e0af9fb57dea7bd5627ecb176790bb955'
 ---
 
 In diesem Tutorial erfährst du, wie du Yin und Yang (78,4 x 78,4mm) sticken kannst.
@@ -41,7 +42,7 @@ Erstelle ein neues Stick-Objekt und erstelle darin folgendes Skript:
 
 ![Yin und Yang (4)](../../../media/embroidery-tutorials/Yin-und-Yang-4.png)
 
-### 5. Kleiner Kreis unten
+### 5. Kleinen Kreis kopieren
 
 Dafür kannst du das Objekt von Schritt 4 einfach kopieren:
 
