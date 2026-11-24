@@ -1,0 +1,6 @@
+---
+source_hash: 'c9bccd95c4037124853a02748ac4f24b615d334e748ca446d08e5d135e96edea'
+---
+![Stel snelheid op x y](../../../media/bricks/set_velocity_to_x__y__brick.png)
+
+Stel die spoed en rigting waarop die voorwerp beweeg. Dit is soos om jou karakter te vertel hoe vinnig en in watter rigting jy moet gaan vanaf die begin.
