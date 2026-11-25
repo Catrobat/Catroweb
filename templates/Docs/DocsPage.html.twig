@@ -24,7 +24,9 @@
 
     <div class="docs-content">{{ body_html|raw }}</div>
 
-    {% if docs_nav.pages is not empty %}
+    {% if page.path == 'index' %}
+      {{ include('Docs/DocsHomeCards.html.twig') }}
+    {% elseif docs_nav.pages is not empty %}
       <ul class="docs-pages">
         {% for item in docs_nav.pages %}
           <li><a class="docs-pages__link" href="{{ item.url }}">{{ item.title }}</a></li>
