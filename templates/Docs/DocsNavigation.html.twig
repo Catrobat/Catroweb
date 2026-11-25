@@ -1,0 +1,26 @@
+{% macro breadcrumb(crumbs) %}
+  <nav class="docs-breadcrumb" aria-label="{{ 'docs.breadcrumb'|trans({}, 'catroweb') }}">
+    <ol class="docs-breadcrumb__list">
+      {% for crumb in crumbs %}
+        <li class="docs-breadcrumb__item">
+          {% if crumb.current %}
+            <span aria-current="page">{{ crumb.title }}</span>
+          {% else %}
+            <a href="{{ crumb.url }}">{{ crumb.title }}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endmacro %}
+
+{% macro toc(entries, title_id) %}
+  <nav class="docs-toc" aria-labelledby="{{ title_id }}">
+    <h2 class="docs-toc__title" id="{{ title_id }}">{{ 'docs.on_this_page'|trans({}, 'catroweb') }}</h2>
+    <ul class="docs-toc__list">
+      {% for entry in entries %}
+        <li class="docs-toc__entry docs-toc__entry--level-{{ entry.level }}"><a href="#{{ entry.id }}">{{ entry.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endmacro %}

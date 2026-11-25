@@ -61,13 +61,17 @@ Feature: User docs pages, synced from user-docs/
     And the element ".docs-section__link--current[aria-current='page']" should contain "Your first project"
     And I should not see a ".docs-section__all" element
 
-  Scenario: On a phone "In this section" starts closed
+  Scenario: A phone lesson shows its goal and puts section navigation behind one control
     Given I use a 390 x 844 viewport
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded
     Then I should see a "details.docs-section:not([open])" element
     And I should not see a ".docs-section__summary[tabindex]" element
-    And I should see a ".docs-breadcrumb" element
+    And the element ".docs-lesson-goal" should contain "Make an object move."
+    When I activate the button ".docs-section__summary"
+    Then I should see a "details.docs-section[open]" element
+    And the element ".docs-section .docs-breadcrumb" should contain "Getting started"
+    And the element ".docs-section .docs-toc" should contain "Move the cat"
 
   Scenario: A section's page lists its pages, the docs home lists the sections
     Given I use a 1280 x 900 viewport

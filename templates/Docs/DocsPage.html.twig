@@ -2,6 +2,11 @@
 
 {% from 'Docs/DocsLayout.html.twig' import translation_note %}
 
+{% from 'Docs/DocsNavigation.html.twig' import toc %}
+
+{% set compact_lesson = '/' in page.path and docs_nav.pages is empty and page.toc is not empty %}
+{% set opening_has_goal = compact_lesson and page.description and (body_html|striptags|trim) starts with page.description %}
+
 {% block title %}{{ page.title }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
 {% block meta_description %}{{ page.description }}{% endblock %}
 
@@ -27,17 +32,14 @@
     {% endif %}
 
     {% if page.toc|length > 1 %}
-      <nav class="docs-toc" aria-labelledby="docs-toc-title">
-        <h2 class="docs-toc__title" id="docs-toc-title">{{ 'docs.on_this_page'|trans({}, 'catroweb') }}</h2>
-        <ul class="docs-toc__list">
-          {% for entry in page.toc %}
-            <li class="docs-toc__entry docs-toc__entry--level-{{ entry.level }}"><a href="#{{ entry.id }}">{{ entry.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </nav>
+      {{ toc(page.toc, 'docs-toc-title') }}
     {% endif %}
 
-    <div class="docs-content">{{ body_html|raw }}</div>
+    {% if compact_lesson and page.description and not opening_has_goal %}
+      <p class="docs-lesson-goal" dir="auto">{{ page.description }}</p>
+    {% endif %}
+
+    <div class="docs-content{% if opening_has_goal %} docs-content--opening-goal{% endif %}">{{ body_html|raw }}</div>
 
     {% if page.path == 'index' %}
       {{ include('Docs/DocsHomeCards.html.twig') }}

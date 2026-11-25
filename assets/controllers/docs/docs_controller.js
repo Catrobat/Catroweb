@@ -22,13 +22,16 @@ export default class extends Controller {
     this.wide?.removeEventListener('change', this.fixSection)
   }
 
-  fixSection = () => {
+  fixSection = (breakpointChange) => {
     const summary = this.sectionTarget.querySelector('summary')
     if (this.wide.matches) {
       this.sectionTarget.open = true
       summary.tabIndex = -1
       summary.setAttribute('aria-hidden', 'true')
     } else {
+      if (breakpointChange && this.element.classList.contains('docs--compact-lesson')) {
+        this.sectionTarget.open = false
+      }
       summary.removeAttribute('tabindex')
       summary.removeAttribute('aria-hidden')
     }

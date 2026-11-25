@@ -7,13 +7,13 @@
 
 /* On a wide screen the section's pages stand left of the breadcrumb and the article */
 @media (min-width: 992px) {
-  .docs:has(.docs-section) {
+  .docs:has(.docs-section:not(.docs-section--phone-only)) {
     grid-template-columns: 15rem minmax(0, 1fr);
     grid-template-rows: auto 1fr;
     align-items: start;
   }
 
-  .docs:has(.docs-section) > :not(.docs-section) {
+  .docs:has(.docs-section:not(.docs-section--phone-only)) > :not(.docs-section) {
     grid-column: 2;
   }
 
@@ -80,6 +80,92 @@
 .docs-home-search :is(input, button):focus-visible {
   outline: 3px solid var(--primary);
   outline-offset: 2px;
+}
+
+/* Keep the desktop guide and section sidebar unchanged. */
+.docs-section__phone,
+.docs-lesson-goal {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .docs-section--phone-only {
+    display: none;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .docs--compact-lesson .docs-section {
+    padding-block: 0;
+  }
+
+  .docs--compact-lesson .docs-section__summary {
+    min-block-size: 44px;
+    align-content: center;
+  }
+
+  .docs--compact-lesson .docs-section:has(.docs-section__phone:dir(rtl)) {
+    direction: rtl;
+  }
+
+  .docs--compact-lesson .docs-section__summary:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  .docs-section__phone,
+  .docs-lesson-goal {
+    display: block;
+  }
+
+  .docs-section__phone .docs-toc {
+    margin-block: 0.5rem;
+  }
+
+  .docs-section__phone .docs-toc__list {
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 0;
+  }
+
+  .docs-section__phone .docs-toc__entry--level-3 {
+    margin-inline-start: 1rem;
+    margin-inline-end: 0;
+  }
+
+  .docs--compact-lesson > .docs-breadcrumb,
+  .docs--compact-lesson .docs-article > .docs-toc {
+    display: none;
+  }
+
+  .docs--compact-lesson .docs-section__link,
+  .docs--compact-lesson .docs-section__all,
+  .docs-section__phone a {
+    display: flex;
+    min-block-size: 44px;
+    align-items: center;
+  }
+
+  .docs--compact-lesson .docs-section__list {
+    padding-inline: 0;
+  }
+
+  .docs-section__phone .docs-breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .docs-lesson-goal,
+  .docs-content--opening-goal > p:first-child {
+    padding-inline-start: 0.65rem;
+    border-inline-start: 3px solid light-dark(#2a6475, #84cad8);
+  }
+
+  /* The overview images stay readable without pushing the first action off-screen. */
+  .docs--compact-lesson .docs-content > p:not(:is(h2, h3, h4, h5, h6) ~ *) img {
+    inline-size: auto;
+    max-block-size: 9rem;
+    object-fit: contain;
+  }
 }
 
 .docs-breadcrumb__list {
