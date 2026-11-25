@@ -826,6 +826,7 @@
 .docs-project-preview img {
   display: block;
   inline-size: 100%;
+  block-size: auto;
   max-block-size: 9rem;
   object-fit: contain;
 }

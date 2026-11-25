@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Docs;
 
 use App\DB\Entity\Docs\DocPage;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Docs\DocPageRepository;
 use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Storage\ScreenshotRepository;
@@ -248,7 +249,7 @@ class DocsSync
     return null !== $english_hash && \strlen($source_hash) >= 7 && str_starts_with($english_hash, $source_hash) ? DocPage::STATE_CURRENT : DocPage::STATE_STALE;
   }
 
-  /** @return array{name: string, author: string, thumbnail: string}|null */
+  /** @return array{name: string, author: string, thumbnail: string, playable: bool}|null */
   private function projectCard(string $id): ?array
   {
     $project = $this->projects->find($id);
@@ -260,6 +261,7 @@ class DocsSync
       'name' => $project->getName(),
       'author' => (string) $project->getUser()?->getUsername(),
       'thumbnail' => '/'.$this->screenshots->getThumbnailWebPath($id),
+      'playable' => $project->getLanguageVersion() >= Project::PLAYER_MIN_LANGUAGE_VERSION,
     ];
   }
 }

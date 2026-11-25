@@ -2,12 +2,10 @@
 title: 第一批積木
 description: "在這個教學中，你會學到去哪裡找到各種積木，來為一個物件寫程式。"
 order: 0
-source_hash: '1ceec718cd386b20debff8a7997b3d72d6dda93bb26cbbf39e4286df298c353a'
+source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ---
 
 在這個教學中，你會學到去哪裡找到各種積木，來為一個物件寫程式。此外，這個教學也能讓你快速了解各種積木類別。
-
-::project{id=6ac78173-445a-4280-8b8a-ea6b1e8e4af5}
 
 ![第一批積木](../../../media/game-tutorials/First-Bricks.png)
 

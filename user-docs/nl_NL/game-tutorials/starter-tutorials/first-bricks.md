@@ -2,12 +2,10 @@
 title: Eerste bricks
 description: "In deze tutorial leer je waar je verschillende bricks vindt om een object te programmeren."
 order: 0
-source_hash: '1ceec718cd386b20debff8a7997b3d72d6dda93bb26cbbf39e4286df298c353a'
+source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ---
 
 In deze tutorial leer je waar je verschillende bricks vindt om een object te programmeren. Ook krijg je een goed overzicht van de categorieën van bricks.
-
-::project{id=6ac78173-445a-4280-8b8a-ea6b1e8e4af5}
 
 ![Eerste bricks](../../../media/game-tutorials/First-Bricks.png)
 

@@ -81,9 +81,9 @@ final class DocsMarkdown implements NodeRendererInterface
   private ?string $root = null;
 
   /**
-   * @param string                                                                    $blob_base    GitHub's page of a file at the synced ref, with trailing slash
-   * @param \Closure(string): ?array{name: string, author: string, thumbnail: string} $project_card a public project, or null
-   * @param ?string                                                                   $docs_dir     the docs folder markdown() reads media versions from
+   * @param string                                                                                    $blob_base    GitHub's page of a file at the synced ref, with trailing slash
+   * @param \Closure(string): ?array{name: string, author: string, thumbnail: string, playable: bool} $project_card a public project, or null
+   * @param ?string                                                                                   $docs_dir     the docs folder markdown() reads media versions from
    */
   public function __construct(
     private readonly string $blob_base,
@@ -333,12 +333,12 @@ final class DocsMarkdown implements NodeRendererInterface
     }
 
     $frame = 'game-tutorials/examples/'.$id.'.webp';
-    if (isset($this->media[$frame])) {
+    if ($card['playable'] && isset($this->media[$frame])) {
       $image = htmlspecialchars('/docs-media/'.$frame.'?v='.$this->media[$frame], ENT_QUOTES);
       $name = htmlspecialchars($card['name'], ENT_QUOTES);
       $label = htmlspecialchars($this->translator?->trans('docs.play_example', [], 'catroweb', $this->locale) ?? 'Play an example', ENT_QUOTES);
 
-      return '<figure class="docs-project-preview"><img src="'.$image.'" alt="" loading="lazy">'
+      return '<figure class="docs-project-preview"><img src="'.$image.'" alt="" width="480" height="480" loading="lazy">'
         .'<figcaption><a class="docs-project-preview__play" href="'.$href.'" data-docs-project-id="'.htmlspecialchars($id, ENT_QUOTES).'">'
         .'<span class="material-icons" aria-hidden="true">play_circle</span>'.$label.'</a><span dir="auto">'.$name.'</span></figcaption></figure>';
     }
