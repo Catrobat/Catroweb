@@ -82,6 +82,28 @@ Feature: User docs pages, synced from user-docs/
     And the element ".docs-pages" should contain "Bricks and formulas"
     And I should not see a ".docs-breadcrumb" element
 
+  Scenario: The docs home offers four clear choices on a phone
+    Given I use a 390 x 844 viewport
+    When I go to "/app/docs"
+    And I wait for the page to be loaded
+    Then the element ".docs-home__featured" should contain "Make your first game"
+    And I should see a ".docs-home__featured a[href$='/docs/game-tutorials/starter-tutorials'] img" element
+    And I should see a ".docs-home__cards li:nth-child(2) a[href$='/docs/reference']" element
+    And I should see a ".docs-home__cards li:nth-child(3) a[href$='/docs/embroidery-tutorials']" element
+    And I should see a ".docs-home__cards li:nth-child(4) a[href$='/docs/plot-tutorials']" element
+
+  Scenario: Home cards keep the other sections and use the selected docs language
+    When I go to "/app/docs?locale=de"
+    And I wait for the page to be loaded
+    Then the element ".docs-home__featured" should contain "Mach dein erstes Spiel"
+    And I should see a ".docs-home__other a[href$='/docs/tutorials/jump?locale=de']" element
+
+  Scenario: The embroidery docs feature the embroidery card
+    When I go to "/embroidery/docs"
+    And I wait for the page to be loaded
+    Then the element ".docs-home__featured" should contain "Embroidery"
+    And I should see a ".docs-home__featured a[href$='/docs/embroidery-tutorials']" element
+
   Scenario: An untranslated page falls back to English and says so
     When I go to "/app/docs/getting-started?locale=de"
     And I wait for the page to be loaded
