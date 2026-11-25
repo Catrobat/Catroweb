@@ -12,7 +12,7 @@
     </div>
   {% endif %}
 
-  <div id="search-results"{% if docs_only %} dir="auto"{% endif %}
+  <div id="search-results"{% if docs_only %} class="search-docs-only" dir="auto"{% endif %}
        data-query="{{ q }}"
        data-theme="{{ theme() }}"
        data-base-url="{{ app.request.getBaseURL() }}"

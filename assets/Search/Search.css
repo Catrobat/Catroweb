@@ -796,7 +796,8 @@ button.search-card {
 }
 
 /* Docs results (renderDocs in SearchPage.js): links with a snippet, grouped */
-.search-section--docs {
+.search-section--docs,
+.search-docs-only .search-section {
   background: light-dark(
     linear-gradient(135deg, #f4f8fb 0%, #eaf2f8 100%),
     linear-gradient(135deg, #14222e 0%, #182834 100%)
@@ -845,21 +846,21 @@ button.search-card {
   font-weight: 500;
 }
 
-[data-docs-only='true'] .search-section--docs .search-section__items {
+.search-docs-only .search-section__items {
   display: block;
   padding: 0.25rem 1rem 0.75rem;
   overflow: visible;
 }
 
-[data-docs-only='true'] :is(.search-docs__group, .search-docs__list) {
+.search-docs-only :is(.search-docs__group, .search-docs__list) {
   padding-inline: 0;
 }
 
-[data-docs-only='true'] .search-docs__list li + li {
+.search-docs-only .search-docs__list li + li {
   border-block-start: 1px solid var(--bs-border-color);
 }
 
-[data-docs-only='true'] .search-docs__snippet {
+.search-docs-only .search-docs__snippet {
   max-inline-size: 70ch;
   padding-inline: 0.25rem;
 }
