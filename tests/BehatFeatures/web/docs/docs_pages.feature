@@ -18,13 +18,14 @@ Feature: User docs pages, synced from user-docs/
       | /app/docs/tutorials/jump            | Make your cat jump     |
 
   Scenario: The embeds render
+    Given I use a 1280 x 900 viewport
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded
     Then I should see a ".docs-embed--brick[data-brick-type='SetXBrick']" element
     And I should see a ".docs-embed--formula[data-formula-name='SIN']" element
     And I should see a ".docs-video[data-youtube-id='dQw4w9WgXcQ']" element
     And I should see a ".docs-embed--project-missing" element
-    And the element ".docs-toc" should contain "Move the cat"
+    And the element ".docs-article > .docs-toc" should contain "Move the cat"
     And the element ".docs-pager" should contain "Make your cat jump"
 
   Scenario: A video loads from YouTube only after a click
@@ -61,13 +62,17 @@ Feature: User docs pages, synced from user-docs/
     And the element ".docs-section__link--current[aria-current='page']" should contain "Your first project"
     And I should not see a ".docs-section__all" element
 
-  Scenario: On a phone "In this section" starts closed
+  Scenario: A phone lesson shows its goal and puts section navigation behind one control
     Given I use a 390 x 844 viewport
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded
     Then I should see a "details.docs-section:not([open])" element
     And I should not see a ".docs-section__summary[tabindex]" element
-    And I should see a ".docs-breadcrumb" element
+    And the element ".docs-lesson-goal" should contain "Make an object move."
+    When I activate the button ".docs-section__summary"
+    Then I should see a "details.docs-section[open]" element
+    And the element ".docs-section .docs-breadcrumb" should contain "Getting started"
+    And the element ".docs-section .docs-toc" should contain "Move the cat"
 
   Scenario: A section's page lists its pages, the docs home lists the sections
     Given I use a 1280 x 900 viewport

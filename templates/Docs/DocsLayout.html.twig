@@ -3,6 +3,8 @@
    alternates, x_default_url (and canonical_url, markdown_url). #}
 {% extends 'Layout/Base.html.twig' %}
 
+{% from 'Docs/DocsNavigation.html.twig' import breadcrumb, toc %}
+
 {# Whether the shown text is English standing in, an outdated or an automatic translation. #}
 {% macro translation_note(page, fallback) %}
   {% if fallback %}
@@ -35,41 +37,39 @@
 {% endblock %}
 
 {% block body %}
-  <div class="docs" {{ stimulus_controller('docs') }} data-action="click->docs#playVideo"
+  <div class="docs{% if compact_lesson|default(false) %} docs--compact-lesson{% endif %}" {{ stimulus_controller('docs') }} data-action="click->docs#playVideo"
        data-trans-video="{{ 'docs.video'|trans({}, 'catroweb')|e('html_attr') }}">
     {% if docs_nav.crumbs is not empty %}
-      <nav class="docs-breadcrumb" aria-label="{{ 'docs.breadcrumb'|trans({}, 'catroweb')|e('html_attr') }}">
-        <ol class="docs-breadcrumb__list">
-          {% for crumb in docs_nav.crumbs %}
-            <li class="docs-breadcrumb__item">
-              {% if crumb.current %}
-                <span aria-current="page">{{ crumb.title }}</span>
-              {% else %}
-                <a href="{{ crumb.url }}">{{ crumb.title }}</a>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ol>
-      </nav>
+      {{ breadcrumb(docs_nav.crumbs) }}
     {% endif %}
 
-    {% if docs_nav.siblings is not empty %}
+    {% if docs_nav.siblings is not empty or compact_lesson|default(false) %}
       {# Closed on a phone so it does not push the page down, shown beside the page on a wide screen (DocsPage.css). #}
-      <details class="docs-section" {{ stimulus_target('docs', 'section') }} data-action="toggle->docs#keepSectionOpen">
+      <details class="docs-section{% if docs_nav.siblings is empty %} docs-section--phone-only{% endif %}" {{ stimulus_target('docs', 'section') }} data-action="toggle->docs#keepSectionOpen">
         <summary class="docs-section__summary">{{ 'docs.in_section'|trans({}, 'catroweb') }}</summary>
-        <nav aria-label="{{ 'docs.in_section'|trans({}, 'catroweb')|e('html_attr') }}">
-          <ul class="docs-section__list">
-            {% for item in docs_nav.siblings %}
-              <li>
-                <a class="docs-section__link{% if item.current %} docs-section__link--current{% endif %}" href="{{ item.url }}"
-                   {% if item.current %}aria-current="page"{% endif %}>{{ item.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-          {% if docs_nav.all_url %}
-            <a class="docs-section__all" href="{{ docs_nav.all_url }}">{{ 'docs.all_in_section'|trans({}, 'catroweb') }}</a>
-          {% endif %}
-        </nav>
+        {% if compact_lesson|default(false) %}
+          <div class="docs-section__phone" dir="auto">
+            {{ breadcrumb(docs_nav.crumbs) }}
+            {% if page.toc is not empty %}
+              {{ toc(page.toc, 'docs-toc-phone-title') }}
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if docs_nav.siblings is not empty %}
+          <nav aria-label="{{ 'docs.in_section'|trans({}, 'catroweb')|e('html_attr') }}">
+            <ul class="docs-section__list">
+              {% for item in docs_nav.siblings %}
+                <li>
+                  <a class="docs-section__link{% if item.current %} docs-section__link--current{% endif %}" href="{{ item.url }}"
+                     {% if item.current %}aria-current="page"{% endif %}>{{ item.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+            {% if docs_nav.all_url %}
+              <a class="docs-section__all" href="{{ docs_nav.all_url }}">{{ 'docs.all_in_section'|trans({}, 'catroweb') }}</a>
+            {% endif %}
+          </nav>
+        {% endif %}
       </details>
     {% endif %}
 
