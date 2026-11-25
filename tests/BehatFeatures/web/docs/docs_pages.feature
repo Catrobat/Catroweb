@@ -98,11 +98,16 @@ Feature: User docs pages, synced from user-docs/
     When I go to "/app/docs/getting-started/first-project?locale=en"
     And I wait for the page to be loaded
     Then the element ".docs-pager--lesson .docs-pager__link--next strong" should contain "Make your cat jump"
-    And I should see a ".docs-pager__link--previous[rel='prev']" element
+    And I should see a ".docs-pager > :first-child[rel='prev']" element
     When I click ".docs-pager__link--next"
     And I wait for the page to be loaded
     Then the element ".docs-article__title" should contain "Make your cat jump"
     And I should see a ".docs-pager__link--previous[href$='/docs/getting-started/first-project?locale=en']" element
+
+  Scenario: The pager translates its label for a short docs locale
+    When I go to "/app/docs/getting-started/first-project?locale=de"
+    And I wait for the page to be loaded
+    Then the element ".docs-pager__link--next .docs-pager__label" should contain "Weiter"
 
   Scenario: Article and navigation links keep an explicitly chosen language
     Given I use a 1280 x 900 viewport
