@@ -2,7 +2,7 @@
 title: Legg til figurer og objekter
 description: Trykk på pluss-knappen for å legge til en ny figur eller et nytt objekt i prosjektet ditt.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Trykk på pluss-knappen for å legge til en ny figur eller et nytt objekt i prosjektet ditt.
@@ -11,7 +11,7 @@ Trykk på pluss-knappen for å legge til en ny figur eller et nytt objekt i pros
 
 I Pocket Code kan du legge til en figur eller et objekt i prosjektet ditt på ulike måter:
 
-**Tegn**: Du kan lage din egen figur med **Pocket Paint**. Pocket Paint er et tegneprogram ([mer om Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Tegn**: Du kan lage din egen figur med **Pocket Paint**. Pocket Paint er et tegneprogram ([mer om Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Drakter**: Velg én fra en samling ferdiglagde figurer og objekter ([mer om mediebiblioteket](../elements/medialibrary.md)).
 

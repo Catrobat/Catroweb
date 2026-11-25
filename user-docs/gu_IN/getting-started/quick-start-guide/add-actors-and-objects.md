@@ -2,7 +2,7 @@
 title: "અભિનેતાઓ અને વસ્તુઓ ઉમેરો"
 description: "તારા પ્રોજેક્ટમાં એક નવો આંકડો અથવા ઑબ્જેક્ટ ઉમેરવા માટે વત્તા બટન પર દબાવો."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 તારા પ્રોજેક્ટમાં એક નવો આંકડો અથવા ઑબ્જેક્ટ ઉમેરવા માટે વત્તા બટન પર દબાવો.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 Pocket Code માં, તું તારા પ્રોજેક્ટમાં વિવિધ રીતે પાત્ર અથવા ઑબ્જેક્ટ ઉમેરી શકો છોઃ:
 
-**દોરો**: તું તારા પોતાના પાત્ર બનાવી શકો છો સાથે **Pocket Paint**. Pocket Paint એક ચિત્ર કાર્યક્રમ ([વિશે વધુ Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**દોરો**: તું તારા પોતાના પાત્ર બનાવી શકો છો સાથે **Pocket Paint**. Pocket Paint એક ચિત્ર કાર્યક્રમ ([વિશે વધુ Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **દેખાવ**: પૂર્વ-નિર્માણ કરાયેલા અભિનેતાઓ અને પદાર્થોના સંગ્રહમાંથી એક પસંદ કરો ([મીડિયા લાઇબ્રેરી વિશે વધુ](../elements/medialibrary.md)).
 

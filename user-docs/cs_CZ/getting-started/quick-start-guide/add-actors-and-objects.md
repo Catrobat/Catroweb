@@ -1,7 +1,7 @@
 ---
 title: Přidej postavy a objekty
 description: Klepni na tlačítko plus a přidej do projektu novou postavu nebo objekt.
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 order: 2
 ---
 
@@ -11,7 +11,7 @@ Klepni na tlačítko plus a přidej do projektu novou postavu nebo objekt.
 
 V Pocket Code můžeš do projektu přidat postavu nebo objekt několika způsoby:
 
-**Nakresli**: Vlastní postavu si nakreslíš v **Pocket Paint**. Pocket Paint je kreslicí program ([více o Pocket Paint](https://catrobat.org/docs/pocket-paint/)).
+**Nakresli**: Vlastní postavu si nakreslíš v **Pocket Paint**. Pocket Paint je kreslicí program ([více o Pocket Paint](https://catrobat.org/pocket-paint/)).
 
 **Vzhledy**: Vyber si jednu z hotových postav a objektů ([více o knihovně médií](../elements/medialibrary.md)).
 

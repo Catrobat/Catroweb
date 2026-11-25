@@ -2,7 +2,7 @@
 title: "شالید ورزیات کړه"
 description: "په Catrobat کې خپل کار ته شالید ورزیاتولی شې."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 په Catrobat کې خپل کار ته شالید ورزیاتولی شې.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 خپل انځورونه پورته کولی شې، له مخکې جوړ شوی شالید کارولی شې، یا خپل شالید جوړولی شې.
 
-**رسم**: په **Pocket Paint** کې خپل شالید رسمولی شې. Pocket Paint د انځور رسمولو پروګرام دی ([د Pocket Paint په اړه نور معلومات](https://catrobat.org/docs/pocket-paint/))
+**رسم**: په **Pocket Paint** کې خپل شالید رسمولی شې. Pocket Paint د انځور رسمولو پروګرام دی ([د Pocket Paint په اړه نور معلومات](https://catrobat.org/pocket-paint/))
 
 **بڼې**: له چمتو شالیدونو څخه یو شالید وټاکه ([د رسنیو د زېرمتون په اړه نور معلومات](../elements/medialibrary.md)).
 

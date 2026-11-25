@@ -2,7 +2,7 @@
 title: Додај ликове и објекте
 description: Додирни дугме плус да додаш нови лик или објекат у свој пројекат.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Додирни дугме плус да додаш нови лик или објекат у свој пројекат.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 У Pocket Code-у можеш да додаш лик или објекат у свој пројекат на више начина:
 
-**Нацртај**: Можеш сам да направиш свог лика помоћу **Pocket Paint**-а. Pocket Paint је програм за цртање ([више о Pocket Paint-у](https://catrobat.org/docs/pocket-paint/))
+**Нацртај**: Можеш сам да направиш свог лика помоћу **Pocket Paint**-а. Pocket Paint је програм за цртање ([више о Pocket Paint-у](https://catrobat.org/pocket-paint/))
 
 **Изгледи**: Изабери једног из збирке унапред направљених ликова и објеката ([више о медијатеци](../elements/medialibrary.md)).
 

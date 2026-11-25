@@ -2,7 +2,7 @@
 title: 新增角色和物件
 description: 輕觸加號按鈕，就能在專案中新增角色或物件。
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 輕觸加號按鈕，就能在專案中新增角色或物件。
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 在 Pocket Code 中，你可以用很多方式在專案裡新增角色或物件：
 
-**繪圖**：你可以用 **Pocket Paint** 畫出自己的角色。Pocket Paint 是一款繪圖程式（[更多關於 Pocket Paint](https://catrobat.org/docs/pocket-paint/)）。
+**繪圖**：你可以用 **Pocket Paint** 畫出自己的角色。Pocket Paint 是一款繪圖程式（[更多關於 Pocket Paint](https://catrobat.org/pocket-paint/)）。
 
 **造型**：從預先做好的角色和物件中選一個（[更多關於素材庫](../elements/medialibrary.md)）。
 

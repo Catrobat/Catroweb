@@ -2,7 +2,7 @@
 title: Lägg till figurer och objekt
 description: Tryck på plusknappen för att lägga till en ny figur eller ett nytt objekt i ditt projekt.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Tryck på plusknappen för att lägga till en ny figur eller ett nytt objekt i ditt projekt.
@@ -11,7 +11,7 @@ Tryck på plusknappen för att lägga till en ny figur eller ett nytt objekt i d
 
 I Pocket Code kan du lägga till en karaktär eller ett objekt i ditt projekt på flera sätt:
 
-**Rita**: Du kan skapa en egen karaktär med **Pocket Paint**. Pocket Paint är ett ritprogram ([mer om Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Rita**: Du kan skapa en egen karaktär med **Pocket Paint**. Pocket Paint är ett ritprogram ([mer om Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Utseenden**: Välj en av de färdiga figurerna och objekten i en samling ([mer om mediebiblioteket](../elements/medialibrary.md)).
 

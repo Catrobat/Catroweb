@@ -2,7 +2,7 @@
 title: افزودن بازیگرها و اشیا
 description: روی دکمه‌ی + ضربه بزن تا یک شخصیت یا شیء جدید به پروژه‌ات اضافه کنی.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 روی دکمه‌ی + ضربه بزن تا یک شخصیت یا شیء جدید به پروژه‌ات اضافه کنی.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 در Pocket Code می‌توانی به چند روش یک شخصیت یا شیء به پروژه‌ات اضافه کنی:
 
-**نقاشی**: می‌توانی شخصیت خودت را با **Pocket Paint** بکشی. Pocket Paint یک برنامه‌ی نقاشی است ([درباره‌ی Pocket Paint بیشتر بخوان](https://catrobat.org/docs/pocket-paint/))
+**نقاشی**: می‌توانی شخصیت خودت را با **Pocket Paint** بکشی. Pocket Paint یک برنامه‌ی نقاشی است ([درباره‌ی Pocket Paint بیشتر بخوان](https://catrobat.org/pocket-paint/))
 
 **ظاهرها**: یکی از مجموعه‌ی بازیگرها و اشیای آماده را انتخاب کن ([درباره‌ی کتابخانه‌ی رسانه بیشتر بخوان](../elements/medialibrary.md)).
 

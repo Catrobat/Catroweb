@@ -2,7 +2,7 @@
 title: Ajouter un arrière-plan
 description: Tu peux ajouter un arrière-plan à ton projet dans Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Tu peux ajouter un arrière-plan à ton projet dans Catrobat.
@@ -23,7 +23,7 @@ Dans la **partie des apparences (1)**, tu ajoutes un arrière-plan. Pour cela, t
 
 Tu peux utiliser tes propres images, prendre des arrière-plans déjà prêts ou dessiner un arrière-plan toi-même.
 
-**Dessiner** : tu peux créer ton propre arrière-plan avec **Pocket Paint**. Pocket Paint est un programme de dessin ([plus d’infos sur Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Dessiner** : tu peux créer ton propre arrière-plan avec **Pocket Paint**. Pocket Paint est un programme de dessin ([plus d’infos sur Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Apparences** : choisis-en un dans une collection d’arrière-plans déjà prêts ([plus d’infos sur la médiathèque](../elements/medialibrary.md)).
 

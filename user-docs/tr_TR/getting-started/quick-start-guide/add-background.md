@@ -2,7 +2,7 @@
 title: Arka plan ekle
 description: Catrobat’ta projene bir arka plan ekleyebilirsin.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Catrobat’ta projene bir arka plan ekleyebilirsin.
@@ -23,7 +23,7 @@ Arka plan eklemek için proje görünümünde “Arka plan”a dokun.
 
 Kendi resimlerini yükleyebilir, hazır arka planları kullanabilir veya kendin bir arka plan çizebilirsin.
 
-**Çiz**: **Pocket Paint** ile kendi arka planını çizebilirsin. Pocket Paint bir çizim programıdır ([Pocket Paint hakkında daha fazla bilgi](https://catrobat.org/docs/pocket-paint/))
+**Çiz**: **Pocket Paint** ile kendi arka planını çizebilirsin. Pocket Paint bir çizim programıdır ([Pocket Paint hakkında daha fazla bilgi](https://catrobat.org/pocket-paint/))
 
 **Görünümler**: Hazır arka planlardan birini seç ([medya kütüphanesi hakkında daha fazla bilgi](../elements/medialibrary.md)).
 

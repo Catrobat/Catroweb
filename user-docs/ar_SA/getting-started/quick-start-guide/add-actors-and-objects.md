@@ -2,7 +2,7 @@
 title: 'إضافة الشخصيات والكائنات'
 description: 'اضغط على زر الزائد لإضافة شخصية أو كائن جديد إلى مشروعك.'
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 اضغط على زر الزائد لإضافة شخصية أو كائن جديد إلى مشروعك.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 في Pocket Code يمكنك إضافة شخصية أو كائن إلى مشروعك بطرق متعددة:
 
-**رسم**: يمكنك إنشاء شخصيتك بنفسك باستخدام **Pocket Paint**. Pocket Paint برنامج رسم ([المزيد عن Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**رسم**: يمكنك إنشاء شخصيتك بنفسك باستخدام **Pocket Paint**. Pocket Paint برنامج رسم ([المزيد عن Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **المظاهر**: اختر واحدة من مجموعة شخصيات وكائنات جاهزة ([المزيد عن مكتبة الوسائط](../elements/medialibrary.md)).
 

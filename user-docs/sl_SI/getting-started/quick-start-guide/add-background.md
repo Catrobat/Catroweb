@@ -2,7 +2,7 @@
 title: Dodaj ozadje
 description: V Catrobat lahko svojemu projektu dodaš ozadje.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 V Catrobat lahko svojemu projektu dodaš ozadje.
@@ -23,7 +23,7 @@ V **razdelku videzov (1)** dodaš ozadje. To storiš tako, da se dotakneš simbo
 
 Svoje slike lahko naložiš, uporabiš vnaprej pripravljena ozadja ali pa ustvariš ozadje sam.
 
-**Nariši**: Svoje ozadje lahko ustvariš s **Pocket Paint**. Pocket Paint je program za risanje ([več o Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Nariši**: Svoje ozadje lahko ustvariš s **Pocket Paint**. Pocket Paint je program za risanje ([več o Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Videzi**: Izberi enega iz zbirke pripravljenih ozadij ([več o medijski knjižnici](../elements/medialibrary.md)).
 

@@ -2,7 +2,7 @@
 title: Dodawanie tła
 description: Możesz dodać tło do swojego projektu w Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Możesz dodać tło do swojego projektu w Catrobat.
@@ -23,7 +23,7 @@ W **sekcji wyglądów (1)** dodajesz tło. W tym celu dotknij symbolu +.
 
 Możesz wgrać własne obrazy, użyć gotowych teł albo stworzyć tło samodzielnie.
 
-**Rysuj**: Możesz stworzyć własne tło w **Pocket Paint**. Pocket Paint to program do rysowania ([więcej o Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Rysuj**: Możesz stworzyć własne tło w **Pocket Paint**. Pocket Paint to program do rysowania ([więcej o Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Wygląd**: Wybierz jedno z gotowych teł ([więcej o bibliotece mediów](../elements/medialibrary.md)).
 

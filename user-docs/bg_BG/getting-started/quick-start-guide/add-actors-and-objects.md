@@ -2,7 +2,7 @@
 title: Добави персонажи и обекти
 description: Натисни бутона с плюс, за да добавиш нова фигура или обект в проекта си.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Натисни бутона с плюс, за да добавиш нова фигура или обект в проекта си.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 В Pocket Code можеш да добавиш персонаж или обект в проекта си по различни начини:
 
-**Рисувай**: Можеш да създадеш собствен персонаж с **Pocket Paint**. Pocket Paint е програма за рисуване ([още за Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Рисувай**: Можеш да създадеш собствен персонаж с **Pocket Paint**. Pocket Paint е програма за рисуване ([още за Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Облици**: Избери един от колекцията с готови персонажи и обекти ([още за медийната библиотека](../elements/medialibrary.md)).
 

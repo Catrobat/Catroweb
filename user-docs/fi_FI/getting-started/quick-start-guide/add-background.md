@@ -2,7 +2,7 @@
 title: Lisää tausta
 description: Voit lisätä projektiisi taustan Catrobatissa.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Voit lisätä projektiisi taustan Catrobatissa.
@@ -23,7 +23,7 @@ Lisää tausta napauttamalla projektinäkymässä „Tausta“.
 
 Voit ladata omia kuvia, käyttää valmiita taustoja tai luoda taustan itse.
 
-**Piirrä**: Voit luoda oman taustan **Pocket Paintilla**. Pocket Paint on piirto-ohjelma ([lisää Pocket Paintista](https://catrobat.org/docs/pocket-paint/)).
+**Piirrä**: Voit luoda oman taustan **Pocket Paintilla**. Pocket Paint on piirto-ohjelma ([lisää Pocket Paintista](https://catrobat.org/pocket-paint/)).
 
 **Asusteet**: Valitse valmiista taustoista koostuvasta kokoelmasta ([lisää medianäkymästä](../elements/medialibrary.md)).
 

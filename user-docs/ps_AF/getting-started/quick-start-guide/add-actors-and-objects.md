@@ -2,7 +2,7 @@
 title: "کرکټرونه او څیزونه ورزیات کړه"
 description: "د + تڼۍ کېکاږه، څو خپلې پروژې ته نوی کرکټر یا څیز ورزیات کړې."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 د + تڼۍ کېکاږه، څو خپلې پروژې ته نوی کرکټر یا څیز ورزیات کړې.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 په Pocket Code کې پروژې ته په څو لارو کرکټر یا څیز ورزیاتولی شې:
 
-**رسم**: خپل کرکټر په **Pocket Paint** کې رسمولی شې. Pocket Paint د انځور رسمولو پروګرام دی ([د Pocket Paint په اړه نور معلومات](https://catrobat.org/docs/pocket-paint/))
+**رسم**: خپل کرکټر په **Pocket Paint** کې رسمولی شې. Pocket Paint د انځور رسمولو پروګرام دی ([د Pocket Paint په اړه نور معلومات](https://catrobat.org/pocket-paint/))
 
 **بڼې**: له چمتو کرکټرونو او څیزونو څخه یو وټاکه ([د رسنیو د زېرمتون په اړه نور معلومات](../elements/medialibrary.md)).
 

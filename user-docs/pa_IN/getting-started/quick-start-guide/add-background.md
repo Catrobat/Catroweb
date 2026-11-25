@@ -2,7 +2,7 @@
 title: "ਪਿਛੋਕੜ ਜੋੜੋ"
 description: "ਤੂੰ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਇੱਕ ਪਿਛੋਕੜ ਜੋੜ ਸਕਦੇ ਹੋ Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 ਤੂੰ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਇੱਕ ਪਿਛੋਕੜ ਜੋੜ ਸਕਦੇ ਹੋ Catrobat.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 ਤੂੰ ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਅਪਲੋਡ ਕਰ ਸਕਦਾ ਹੈਂ, ਪਹਿਲਾਂ ਤੋਂ ਪਰਿਭਾਸ਼ਿਤ ਪਿਛੋਕੜ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦਾ ਹੈਂ ਜਾਂ ਆਪਣੇ ਆਪ ਪਿਛੋਕੜ ਬਣਾ ਸਕਦੇ ਹੋ।
 
-**ਚਿੱਤਰ ਬਣਾਓ**: ਤੈਨੂੰ ਆਪਣੇ ਹੀ ਪਿਛੋਕੜ ਬਣਾ ਸਕਦੇ ਹੋ ਨਾਲ **Pocket Paint**. Pocket Paint ਇੱਕ ਡਰਾਇੰਗ ਪ੍ਰੋਗਰਾਮ ([ਬਾਰੇ ਹੋਰ Pocket Paint](https://catrobat.org/docs/pocket-paint/)) ਹੈ
+**ਚਿੱਤਰ ਬਣਾਓ**: ਤੈਨੂੰ ਆਪਣੇ ਹੀ ਪਿਛੋਕੜ ਬਣਾ ਸਕਦੇ ਹੋ ਨਾਲ **Pocket Paint**. Pocket Paint ਇੱਕ ਡਰਾਇੰਗ ਪ੍ਰੋਗਰਾਮ ([ਬਾਰੇ ਹੋਰ Pocket Paint](https://catrobat.org/pocket-paint/)) ਹੈ
 
 **ਦਿੱਖਾਂ**: ਪ੍ਰੀ-ਮੇਡ ਬੈਕਗ੍ਰਾਉਂਡਾਂ ਦੇ ਸੰਗ੍ਰਹਿ ਵਿੱਚੋਂ ਇੱਕ ਚੁਣੋ ([ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਬਾਰੇ ਹੋਰ](../elements/medialibrary.md)).
 

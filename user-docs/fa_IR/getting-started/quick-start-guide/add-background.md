@@ -2,7 +2,7 @@
 title: افزودن پس‌زمینه
 description: در Catrobat می‌توانی یک پس‌زمینه به پروژه‌ات اضافه کنی.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 در Catrobat می‌توانی یک پس‌زمینه به پروژه‌ات اضافه کنی.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 می‌توانی تصویر خودت را آپلود کنی، از پس‌زمینه‌های آماده استفاده کنی یا خودت یک پس‌زمینه بسازی.
 
-**نقاشی**: می‌توانی پس‌زمینه‌ی خودت را با **Pocket Paint** بکشی. Pocket Paint یک برنامه‌ی نقاشی است ([درباره‌ی Pocket Paint بیشتر بخوان](https://catrobat.org/docs/pocket-paint/))
+**نقاشی**: می‌توانی پس‌زمینه‌ی خودت را با **Pocket Paint** بکشی. Pocket Paint یک برنامه‌ی نقاشی است ([درباره‌ی Pocket Paint بیشتر بخوان](https://catrobat.org/pocket-paint/))
 
 **ظاهرها**: یکی از مجموعه‌ی پس‌زمینه‌های آماده را انتخاب کن ([درباره‌ی کتابخانه‌ی رسانه بیشتر بخوان](../elements/medialibrary.md)).
 

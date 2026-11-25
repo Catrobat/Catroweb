@@ -2,7 +2,7 @@
 title: "ਅਦਾਕਾਰਾਂ ਅਤੇ ਵਸਤੂਆਂ ਨੂੰ ਜੋੜੋ"
 description: "ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਇੱਕ ਨਵਾਂ ਅੰਕੜਾ ਜਾਂ ਵਸਤੂ ਜੋੜਨ ਲਈ ਪਲੱਸ ਬਟਨ ਤੇ ਦਬਾ."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਇੱਕ ਨਵਾਂ ਅੰਕੜਾ ਜਾਂ ਵਸਤੂ ਜੋੜਨ ਲਈ ਪਲੱਸ ਬਟਨ ਤੇ ਦਬਾ.
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 Pocket Code ਵਿੱਚ, ਤੂੰ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਇੱਕ ਅੱਖਰ ਜਾਂ ਇੱਕ ਵਸਤੂ ਨੂੰ ਕਈ ਤਰੀਕਿਆਂ ਨਾਲ ਜੋੜ ਸਕਦੇ ਹੋਃ:
 
-**ਚਿੱਤਰ ਬਣਾਓ**: ਤੈਨੂੰ ਆਪਣੇ ਹੀ ਅੱਖਰ ਬਣਾ ਸਕਦੇ ਹੋ ਨਾਲ **Pocket Paint**. Pocket Paint ਇੱਕ ਡਰਾਇੰਗ ਪ੍ਰੋਗਰਾਮ ([ਬਾਰੇ ਹੋਰ Pocket Paint](https://catrobat.org/docs/pocket-paint/)) ਹੈ
+**ਚਿੱਤਰ ਬਣਾਓ**: ਤੈਨੂੰ ਆਪਣੇ ਹੀ ਅੱਖਰ ਬਣਾ ਸਕਦੇ ਹੋ ਨਾਲ **Pocket Paint**. Pocket Paint ਇੱਕ ਡਰਾਇੰਗ ਪ੍ਰੋਗਰਾਮ ([ਬਾਰੇ ਹੋਰ Pocket Paint](https://catrobat.org/pocket-paint/)) ਹੈ
 
 **ਦਿੱਖਾਂ**: ਪ੍ਰੀ-ਮੇਡ ਐਕਟਰਾਂ ਅਤੇ ਵਸਤੂਆਂ ਦੇ ਸੰਗ੍ਰਹਿ ਵਿੱਚੋਂ ਇੱਕ ਚੁਣੋ ([ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਬਾਰੇ ਹੋਰ](../elements/medialibrary.md)).
 

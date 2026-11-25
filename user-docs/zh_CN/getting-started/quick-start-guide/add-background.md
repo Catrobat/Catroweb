@@ -2,7 +2,7 @@
 title: 添加背景
 description: 你可以在 Catrobat 中为项目添加背景。
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 你可以在 Catrobat 中为项目添加背景。
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 你可以上传自己的图片，使用预设的背景，或者自己制作背景。
 
-**绘制**：你可以用 **Pocket Paint** 画出自己的背景。Pocket Paint 是一款绘图程序（[关于 Pocket Paint 的更多信息](https://catrobat.org/docs/pocket-paint/)）。
+**绘制**：你可以用 **Pocket Paint** 画出自己的背景。Pocket Paint 是一款绘图程序（[关于 Pocket Paint 的更多信息](https://catrobat.org/pocket-paint/)）。
 
 **造型**：从预先做好的背景中选一个（[关于媒体库的更多信息](../elements/medialibrary.md)）。
 

@@ -2,7 +2,7 @@
 title: Afegeix actors i objectes
 description: Toca el botó més per afegir una figura o un objecte al teu projecte.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Toca el botó més per afegir una figura o un objecte al teu projecte.
@@ -11,7 +11,7 @@ Toca el botó més per afegir una figura o un objecte al teu projecte.
 
 A Pocket Code pots afegir un personatge o un objecte al teu projecte de diverses maneres:
 
-**Dibuixa**: Pots crear el teu propi personatge amb **Pocket Paint**. Pocket Paint és un programa de dibuix ([més informació sobre Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Dibuixa**: Pots crear el teu propi personatge amb **Pocket Paint**. Pocket Paint és un programa de dibuix ([més informació sobre Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Aparences**: Tria-ne un de la col·lecció d'actors i objectes preparats ([més informació sobre la biblioteca multimèdia](../elements/medialibrary.md)).
 

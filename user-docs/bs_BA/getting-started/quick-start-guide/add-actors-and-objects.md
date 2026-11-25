@@ -2,7 +2,7 @@
 title: "Dodavanje glumaca i objekata"
 description: "Klikni dugme plus da biste dodali novu figuru ili predmet projektu."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Klikni dugme plus da biste dodali novu figuru ili predmet projektu.
@@ -11,7 +11,7 @@ Klikni dugme plus da biste dodali novu figuru ili predmet projektu.
 
 U Pocket Code možeš da dodajte karakter ili objekt u svoj projekat na različite načine:
 
-**Nacrtaj**: Možeš da kreirate svoj lik sa **Pocket Paint**. Pocket Paint je program za crtanje ([više o Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Nacrtaj**: Možeš da kreirate svoj lik sa **Pocket Paint**. Pocket Paint je program za crtanje ([više o Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Izgledi**: Izaberi jedan iz zbirke preduredenih glumaca i objekata ([Više o medijskoj biblioteci](../elements/medialibrary.md)).
 

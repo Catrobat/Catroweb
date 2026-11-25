@@ -2,7 +2,7 @@
 title: Aggiungi uno sfondo
 description: In Catrobat puoi aggiungere uno sfondo al tuo progetto.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 In Catrobat puoi aggiungere uno sfondo al tuo progetto.
@@ -23,7 +23,7 @@ Nella **parte degli aspetti (1)** aggiungi uno sfondo. Per farlo, tocca il simbo
 
 Puoi caricare le tue immagini, usare sfondi già pronti o creare tu uno sfondo.
 
-**Disegna**: puoi creare il tuo sfondo con **Pocket Paint**. Pocket Paint è un programma per disegnare ([altre informazioni su Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Disegna**: puoi creare il tuo sfondo con **Pocket Paint**. Pocket Paint è un programma per disegnare ([altre informazioni su Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Aspetti**: scegli uno sfondo da una raccolta di sfondi già pronti ([altre informazioni sulla libreria multimediale](../elements/medialibrary.md)).
 

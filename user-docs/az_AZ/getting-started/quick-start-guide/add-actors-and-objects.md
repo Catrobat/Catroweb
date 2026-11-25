@@ -2,7 +2,7 @@
 title: "Aktyorları və obyektləri əlavə edin"
 description: "Layihənizə yeni bir rəqəm və ya obyekt əlavə etmək üçün plus düyməsini basın."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Layihənizə yeni bir rəqəm və ya obyekt əlavə etmək üçün plus düyməsini basın.
@@ -11,7 +11,7 @@ Layihənizə yeni bir rəqəm və ya obyekt əlavə etmək üçün plus düyməs
 
 Pocket Code -də layihənizə bir xarakter və ya obyekt əlavə edə bilərsən:
 
-**Çək**: Öz xarakterinizi yarada bilərsən **Pocket Paint**. Pocket Paint bir cizgi proqramı ([haqqında daha çox Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Çək**: Öz xarakterinizi yarada bilərsən **Pocket Paint**. Pocket Paint bir cizgi proqramı ([haqqında daha çox Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Görünüşlər**: Əvvəlcədən hazırlanmış aktyor və obyektlər toplusundan birini seç ([Media kitabxanası haqqında daha çox məlumat](../elements/medialibrary.md)).
 

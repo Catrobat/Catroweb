@@ -21,7 +21,11 @@ English twins translated from German-only pages: 6 (`translated_from: de`).
 EN/DE pairs mapped (both sides have a file): 198. Every pair is in `pages.tsv`.
 
 Every page with its status, old URL, new path and EN/DE pair: [`pages.tsv`](pages.tsv).
-Old URL to new docs path for the redirects (M9): [`redirects.tsv`](redirects.tsv). Paths are relative to the docs root (`/getting-started/what-is-catrobat`, `/de_DE/…` for German, `/reference/bricks/<Type>` for bricks); an empty page redirects to its nearest ancestor with a page, or to the docs home.
+Old URL to new docs path for the redirects (M9): [`redirects.tsv`](redirects.tsv). Append paths to the Share docs root, keeping the locale query before any fragment. For example, German reference pages use `/reference?locale=de_DE#category_looks`. An empty page redirects to its nearest ancestor with a page, or to the docs home.
+
+Legacy attachment permalinks and `?attachment_id=` URLs from the imported HTML map to full Share media URLs in [`attachment-redirects.tsv`](attachment-redirects.tsv). Apply this mapping alongside the page redirects.
+
+The old WordPress figures, backgrounds and sounds download pages, including slashless URLs, map to the live Share category pages in [`site-redirects.tsv`](site-redirects.tsv). Apply this hand-maintained map with the page and attachment maps at cutover. A signed-out visitor can select and download assets from each category. The old figures page also lists `broom2.png`, and the old sounds page lists `Typing.mp3`; neither appears in the corresponding Share catalog.
 
 ## Media
 

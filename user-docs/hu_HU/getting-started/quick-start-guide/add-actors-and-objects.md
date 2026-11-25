@@ -2,7 +2,7 @@
 title: Szereplők és objektumok hozzáadása
 description: Koppints a plusz gombra, hogy új figurát vagy objektumot adj a projektedhez.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Koppints a plusz gombra, hogy új figurát vagy objektumot adj a projektedhez.
@@ -11,7 +11,7 @@ Koppints a plusz gombra, hogy új figurát vagy objektumot adj a projektedhez.
 
 A Pocket Code-ban többféleképpen adhatsz szereplőt vagy objektumot a projektedhez:
 
-**Rajzolás**: A **Pocket Paint** segítségével saját szereplőt rajzolhatsz. A Pocket Paint egy rajzprogram ([továbbiak a Pocket Paintről](https://catrobat.org/docs/pocket-paint/))
+**Rajzolás**: A **Pocket Paint** segítségével saját szereplőt rajzolhatsz. A Pocket Paint egy rajzprogram ([továbbiak a Pocket Paintről](https://catrobat.org/pocket-paint/))
 
 **Kinézetek**: Válassz egyet az előre elkészített szereplők és objektumok gyűjteményéből ([továbbiak a médiakönyvtárról](../elements/medialibrary.md)).
 

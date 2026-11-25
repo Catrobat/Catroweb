@@ -2,7 +2,7 @@
 title: "დამატება ფონზე"
 description: "შეგიძლია დაამატოთ შენი პროექტის ფონზე Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 შეგიძლია დაამატოთ შენი პროექტის ფონზე Catrobat.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 შეგიძლია ატვირთოთ საკუთარი სურათები, გამოიყენოთ წინასწარ განსაზღვრული ფონები ან შექმნათ ფონი თავად.
 
-**დახატვა**: შეგიძლია შექმნათ შენი საკუთარი ფონი **Pocket Paint**. Pocket Paint არის ხატვის პროგრამა ([მეტი ინფორმაცია Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**დახატვა**: შეგიძლია შექმნათ შენი საკუთარი ფონი **Pocket Paint**. Pocket Paint არის ხატვის პროგრამა ([მეტი ინფორმაცია Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **იერსახეები**: აირჩიე ერთი წინასწარ დამზადებული ფონების კოლექციიდან ([მეტი მედია ბიბლიოთეკაზე](../elements/medialibrary.md)).
 

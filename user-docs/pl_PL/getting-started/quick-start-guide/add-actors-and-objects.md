@@ -2,7 +2,7 @@
 title: Dodawanie postaci i obiektów
 description: Dotknij przycisku plus, żeby dodać nową postać albo obiekt do swojego projektu.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Dotknij przycisku plus, żeby dodać nową postać albo obiekt do swojego projektu.
@@ -11,7 +11,7 @@ Dotknij przycisku plus, żeby dodać nową postać albo obiekt do swojego projek
 
 W Pocket Code możesz dodać postać albo obiekt do swojego projektu na różne sposoby:
 
-**Rysuj**: Możesz stworzyć własną postać w **Pocket Paint**. Pocket Paint to program do rysowania ([więcej o Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Rysuj**: Możesz stworzyć własną postać w **Pocket Paint**. Pocket Paint to program do rysowania ([więcej o Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Wygląd**: Wybierz jedną z gotowych postaci i obiektów ([więcej o bibliotece mediów](../elements/medialibrary.md)).
 

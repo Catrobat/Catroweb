@@ -2,7 +2,7 @@
 title: Pridėk veikėjus ir objektus
 description: Paspausk pliuso mygtuką, kad pridėtum naują figūrėlę ar objektą į savo projektą.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Paspausk pliuso mygtuką, kad pridėtum naują figūrėlę ar objektą į savo projektą.
@@ -11,7 +11,7 @@ Paspausk pliuso mygtuką, kad pridėtum naują figūrėlę ar objektą į savo p
 
 Pocket Code veikėją ar objektą į savo projektą gali pridėti įvairiais būdais:
 
-**Piešti**: Savo veikėją gali nupiešti su **Pocket Paint**. Pocket Paint yra piešimo programa ([daugiau apie Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Piešti**: Savo veikėją gali nupiešti su **Pocket Paint**. Pocket Paint yra piešimo programa ([daugiau apie Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Išvaizdos**: Pasirink vieną iš iš anksto paruoštų veikėjų ir objektų rinkinio ([daugiau apie medijų biblioteką](../elements/medialibrary.md)).
 

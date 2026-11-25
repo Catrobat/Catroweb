@@ -2,7 +2,7 @@
 title: पृष्ठभूमि जोड़ें
 description: "तुम Catrobat में अपने प्रोजेक्ट में पृष्ठभूमि जोड़ सकते हो।"
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 तुम Catrobat में अपने प्रोजेक्ट में पृष्ठभूमि जोड़ सकते हो।
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 तुम अपनी खुद की चित्र अपलोड कर सकते हो, बने-बनाए पृष्ठभूमि इस्तेमाल कर सकते हो, या खुद पृष्ठभूमि बना सकते हो।
 
-**बनाएँ**: **Pocket Paint** से अपनी खुद की पृष्ठभूमि बनाओ। Pocket Paint एक ड्रॉइंग प्रोग्राम है ([Pocket Paint के बारे में ज़्यादा](https://catrobat.org/docs/pocket-paint/))
+**बनाएँ**: **Pocket Paint** से अपनी खुद की पृष्ठभूमि बनाओ। Pocket Paint एक ड्रॉइंग प्रोग्राम है ([Pocket Paint के बारे में ज़्यादा](https://catrobat.org/pocket-paint/))
 
 **रूप**: पहले से बनी पृष्ठभूमियों के संग्रह में से कोई चुनो ([मीडिया लाइब्रेरी के बारे में ज़्यादा](../elements/medialibrary.md)).
 

@@ -2,7 +2,7 @@
 title: 배경 추가하기
 description: Catrobat에서 프로젝트에 배경을 추가할 수 있어요.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Catrobat에서 프로젝트에 배경을 추가할 수 있어요.
@@ -23,7 +23,7 @@ Catrobat에서 프로젝트에 배경을 추가할 수 있어요.
 
 직접 올린 이미지를 쓸 수도 있고, 미리 준비된 배경을 쓸 수도 있고, 직접 배경을 만들 수도 있어요.
 
-**그리기**: **Pocket Paint**로 나만의 배경을 그릴 수 있어요. Pocket Paint는 그림 그리기 프로그램이에요 ([Pocket Paint에 대해 더 알아보기](https://catrobat.org/docs/pocket-paint/))
+**그리기**: **Pocket Paint**로 나만의 배경을 그릴 수 있어요. Pocket Paint는 그림 그리기 프로그램이에요 ([Pocket Paint에 대해 더 알아보기](https://catrobat.org/pocket-paint/))
 
 **모양**: 미리 만들어진 배경 모음에서 하나를 고르세요 ([미디어 라이브러리에 대해 더 알아보기](../elements/medialibrary.md)).
 

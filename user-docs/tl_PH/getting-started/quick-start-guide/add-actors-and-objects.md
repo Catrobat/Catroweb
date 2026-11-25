@@ -2,7 +2,7 @@
 title: "Magdagdag ng mga Aktor at Objekto"
 description: "I-tap ang pindutan ng plus upang magdagdag ng bagong numero o bagay sa iyong proyekto."
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 I-tap ang pindutan ng plus upang magdagdag ng bagong numero o bagay sa iyong proyekto.
@@ -11,7 +11,7 @@ I-tap ang pindutan ng plus upang magdagdag ng bagong numero o bagay sa iyong pro
 
 Sa Pocket Code, maaari mong idagdag ang isang character o isang bagay sa iyong proyekto sa iba't ibang paraan:
 
-**Gumuhit**: Maaari mong lumikha ng iyong sariling character sa pamamagitan ng **Pocket Paint**. Pocket Paint ay isang drawing program ([higit pa tungkol sa Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Gumuhit**: Maaari mong lumikha ng iyong sariling character sa pamamagitan ng **Pocket Paint**. Pocket Paint ay isang drawing program ([higit pa tungkol sa Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Mga itsura**: Pumili ng isa mula sa isang koleksyon ng mga actor at bagay na binuo nang maaga ([higit pa tungkol sa media library](../elements/medialibrary.md)).
 

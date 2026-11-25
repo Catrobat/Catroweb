@@ -2,7 +2,7 @@
 title: Tambah pelakon dan objek
 description: Ketik butang tambah untuk menambah watak atau objek baharu ke dalam projek kamu.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Ketik butang tambah untuk menambah watak atau objek baharu ke dalam projek kamu.
@@ -11,7 +11,7 @@ Ketik butang tambah untuk menambah watak atau objek baharu ke dalam projek kamu.
 
 Dalam Pocket Code, kamu boleh menambah watak atau objek ke dalam projek kamu dengan pelbagai cara:
 
-**Lukis**: Kamu boleh mencipta watak sendiri dengan **Pocket Paint**. Pocket Paint ialah program lukisan ([maklumat lanjut tentang Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Lukis**: Kamu boleh mencipta watak sendiri dengan **Pocket Paint**. Pocket Paint ialah program lukisan ([maklumat lanjut tentang Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Rupa**: Pilih satu daripada koleksi pelakon dan objek sedia buat ([maklumat lanjut tentang pustaka media](../elements/medialibrary.md)).
 

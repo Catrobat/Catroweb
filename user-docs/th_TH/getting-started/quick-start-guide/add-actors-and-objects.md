@@ -2,7 +2,7 @@
 title: เพิ่มตัวละครและวัตถุ
 description: กดปุ่มบวกเพื่อเพิ่มตัวละครหรือวัตถุใหม่ให้โปรเจกต์ของคุณ
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 กดปุ่มบวกเพื่อเพิ่มตัวละครหรือวัตถุใหม่ให้โปรเจกต์ของคุณ
@@ -11,7 +11,7 @@ source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
 
 ใน Pocket Code คุณเพิ่มตัวละครหรือวัตถุให้โปรเจกต์ได้หลายวิธี:
 
-**วาดรูป**: คุณสร้างตัวละครของตัวเองด้วย **Pocket Paint** ได้ Pocket Paint คือโปรแกรมวาดรูป ([ดูเพิ่มเติมเกี่ยวกับ Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**วาดรูป**: คุณสร้างตัวละครของตัวเองด้วย **Pocket Paint** ได้ Pocket Paint คือโปรแกรมวาดรูป ([ดูเพิ่มเติมเกี่ยวกับ Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **รูปลักษณ์**: เลือกจากชุดตัวละครและวัตถุที่เตรียมไว้ ([ดูเพิ่มเติมเกี่ยวกับคลังสื่อ](../elements/medialibrary.md))
 

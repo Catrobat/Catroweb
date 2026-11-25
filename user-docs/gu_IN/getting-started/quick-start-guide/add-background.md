@@ -2,7 +2,7 @@
 title: "પૃષ્ઠભૂમિ ઉમેરો"
 description: "તું તારા પ્રોજેક્ટમાં પૃષ્ઠભૂમિ ઉમેરી શકો છો Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 તું તારા પ્રોજેક્ટમાં પૃષ્ઠભૂમિ ઉમેરી શકો છો Catrobat.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 તું તારી પોતાની છબીઓ અપલોડ કરી શકે છે, પૂર્વવ્યાખ્યાયિત પૃષ્ઠભૂમિનો ઉપયોગ કરી શકે છે અથવા જાતે પૃષ્ઠભૂમિ બનાવી શકો છો.
 
-**દોરો**: તું તારી પોતાની પૃષ્ઠભૂમિ બનાવી શકો છો સાથે **Pocket Paint**. Pocket Paint એક ચિત્ર કાર્યક્રમ ([વિશે વધુ Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**દોરો**: તું તારી પોતાની પૃષ્ઠભૂમિ બનાવી શકો છો સાથે **Pocket Paint**. Pocket Paint એક ચિત્ર કાર્યક્રમ ([વિશે વધુ Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **દેખાવ**: પૂર્વ-નિર્માણ પૃષ્ઠભૂમિ ([મીડિયા લાઇબ્રેરી વિશે વધુ](../elements/medialibrary.md)) ની સંગ્રહમાંથી એક પસંદ કર.
 

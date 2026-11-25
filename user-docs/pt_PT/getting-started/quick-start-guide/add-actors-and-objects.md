@@ -2,7 +2,7 @@
 title: Adicionar atores e objetos
 description: Carrega no botão de mais para adicionar uma nova figura ou objeto ao teu projeto.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Carrega no botão de mais para adicionar uma nova figura ou objeto ao teu projeto.
@@ -11,7 +11,7 @@ Carrega no botão de mais para adicionar uma nova figura ou objeto ao teu projet
 
 No Pocket Code, podes adicionar uma personagem ou um objeto ao teu projeto de várias formas:
 
-**Desenhar**: Podes criar a tua própria personagem com o **Pocket Paint**. O Pocket Paint é um programa de desenho ([mais sobre o Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Desenhar**: Podes criar a tua própria personagem com o **Pocket Paint**. O Pocket Paint é um programa de desenho ([mais sobre o Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Aparências**: Escolhe uma entre uma coleção de atores e objetos pré-feitos ([mais sobre a biblioteca de multimédia](../elements/medialibrary.md)).
 

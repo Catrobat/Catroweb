@@ -2,7 +2,7 @@
 title: Afegeix un fons
 description: Pots afegir un fons al teu projecte de Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Pots afegir un fons al teu projecte de Catrobat.
@@ -23,7 +23,7 @@ A la **secció d'aparences (1)** afegeixes un fons. Per fer-ho, toca el símbol 
 
 Pots pujar les teves pròpies imatges, fer servir fons predefinits o crear-ne un tu mateix.
 
-**Dibuixa**: Pots crear el teu propi fons amb **Pocket Paint**. Pocket Paint és un programa de dibuix ([més informació sobre Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Dibuixa**: Pots crear el teu propi fons amb **Pocket Paint**. Pocket Paint és un programa de dibuix ([més informació sobre Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Aparences**: Tria-ne un de la col·lecció de fons preparats ([més informació sobre la biblioteca multimèdia](../elements/medialibrary.md)).
 

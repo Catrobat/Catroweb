@@ -2,7 +2,7 @@
 title: "Arxa plan əlavə edin"
 description: "Layihənizə bir arxa plan əlavə edə bilərsən Catrobat."
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 Layihənizə bir arxa plan əlavə edə bilərsən Catrobat.
@@ -23,7 +23,7 @@ Arxa plan əlavə etmək üçün layihə görünüşündə «Arxa fon» vur.
 
 Öz şəkillərinizi yükləyə bilərsiniz, əvvəlcədən müəyyən edilmiş fonlardan istifadə edə və ya özünüz bir fon yarada bilərsən.
 
-**Çək**: Sən öz təməl yaradmaq bilər **Pocket Paint**. Pocket Paint bir cizgi proqramı ([haqqında daha çox Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**Çək**: Sən öz təməl yaradmaq bilər **Pocket Paint**. Pocket Paint bir cizgi proqramı ([haqqında daha çox Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **Görünüşlər**: Əvvəlcədən hazırlanmış fonlar toplusundan birini seç ([Media kitabxanası haqqında daha çox məlumat](../elements/medialibrary.md)).
 

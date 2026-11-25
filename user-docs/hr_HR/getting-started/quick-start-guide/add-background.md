@@ -2,7 +2,7 @@
 title: Dodavanje pozadine
 description: U Catrobatu možeš dodati pozadinu svom projektu.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 U Catrobatu možeš dodati pozadinu svom projektu.
@@ -23,7 +23,7 @@ U **odjeljku izgleda (1)** dodaješ pozadinu. Za to dodirni simbol +.
 
 Možeš učitati vlastite slike, koristiti unaprijed pripremljene pozadine ili sam stvoriti pozadinu.
 
-**Nacrtaj**: Možeš stvoriti vlastitu pozadinu pomoću **Pocket Painta**. Pocket Paint je program za crtanje ([više o Pocket Paintu](https://catrobat.org/docs/pocket-paint/))
+**Nacrtaj**: Možeš stvoriti vlastitu pozadinu pomoću **Pocket Painta**. Pocket Paint je program za crtanje ([više o Pocket Paintu](https://catrobat.org/pocket-paint/))
 
 **Izgledi**: Odaberi jednu iz zbirke gotovih pozadina ([više o medijskoj knjižnici](../elements/medialibrary.md)).
 

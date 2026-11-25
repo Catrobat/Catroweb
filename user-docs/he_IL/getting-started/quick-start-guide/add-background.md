@@ -2,7 +2,7 @@
 title: הוספת רקע
 description: אפשר להוסיף רקע לפרויקט שלכם ב־Catrobat.
 order: 3
-source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
+source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
 ---
 
 אפשר להוסיף רקע לפרויקט שלכם ב־Catrobat.
@@ -23,7 +23,7 @@ source_hash: '2c7e352ad7f03f497050d0307223593bda7d08bbaac235551431b631d77c71a7'
 
 אפשר להעלות תמונות משלכם, להשתמש ברקעים מוכנים, או ליצור רקע בעצמכם.
 
-**ציור**: אפשר ליצור רקע משלכם עם **Pocket Paint**. Pocket Paint היא תוכנת ציור ([מידע נוסף על Pocket Paint](https://catrobat.org/docs/pocket-paint/))
+**ציור**: אפשר ליצור רקע משלכם עם **Pocket Paint**. Pocket Paint היא תוכנת ציור ([מידע נוסף על Pocket Paint](https://catrobat.org/pocket-paint/))
 
 **מראות**: בחרו אחד מתוך אוסף של רקעים מוכנים ([מידע נוסף על הספרייה למדיה](../elements/medialibrary.md)).
 

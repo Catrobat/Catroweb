@@ -2,7 +2,7 @@
 title: Karakter ve nesne ekle
 description: Projene yeni bir karakter veya nesne eklemek için artı düğmesine dokun.
 order: 2
-source_hash: '5492a5c1cbdc8c7975796b80eb87d5cfb8927ff400021a9b68da3de499d2d928'
+source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 ---
 
 Projene yeni bir karakter veya nesne eklemek için artı düğmesine dokun.
@@ -11,7 +11,7 @@ Projene yeni bir karakter veya nesne eklemek için artı düğmesine dokun.
 
 Pocket Code’da projene bir karakter veya nesne eklemenin birkaç yolu var:
 
-**Çiz**: **Pocket Paint** ile kendi karakterini çizebilirsin. Pocket Paint bir çizim programıdır ([Pocket Paint hakkında daha fazla bilgi](https://catrobat.org/docs/pocket-paint/))
+**Çiz**: **Pocket Paint** ile kendi karakterini çizebilirsin. Pocket Paint bir çizim programıdır ([Pocket Paint hakkında daha fazla bilgi](https://catrobat.org/pocket-paint/))
 
 **Görünümler**: Hazır karakter ve nesnelerden birini seç ([medya kütüphanesi hakkında daha fazla bilgi](../elements/medialibrary.md)).
 
