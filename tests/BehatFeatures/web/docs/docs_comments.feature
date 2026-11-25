@@ -51,7 +51,7 @@ Feature: Comments and tips below a docs page, moderated like every comment
     Then I wait for the element ".docs-comments__list" to contain "my new tip"
     When I click "#comment-00000000-0000-0000-0000-000000000010 .comment-reply-button"
     And I fill in the element ".docs-comments__input" with "my reply"
-    And I click ".docs-comments__send"
+    And I activate the button ".docs-comments__send"
     And I wait for AJAX to finish
     Then I wait for the element "#comment-00000000-0000-0000-0000-000000000010 .docs-comments__replies" to contain "my reply"
 
