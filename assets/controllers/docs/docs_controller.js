@@ -3,6 +3,7 @@ import { Controller } from '@hotwired/stimulus'
 // Docs page: "In this section" and the YouTube embeds (`::video`), which load nothing from YouTube until clicked.
 export default class extends Controller {
   static targets = ['section']
+  static values = { playerOrigin: String }
 
   connect() {
     // "In this section" is closed on a phone. Beside the page it is always open and not a toggle (DocsPage.css shows it
@@ -42,6 +43,25 @@ export default class extends Controller {
     if (this.wide.matches && !this.sectionTarget.open) {
       this.sectionTarget.open = true
     }
+  }
+
+  playProject(event) {
+    const link = event.target.closest('[data-docs-project-id]')
+    if (!link || !this.playerOriginValue || !document.createElement('canvas').getContext('webgl')) {
+      return
+    }
+    const preview = link.closest('.docs-project-preview')
+    event.preventDefault()
+    const player = document.createElement('div')
+    player.className = 'ratio ratio-4x3'
+    const iframe = document.createElement('iframe')
+    iframe.src = `${this.playerOriginValue}/#${encodeURIComponent(link.dataset.docsProjectId)}`
+    iframe.title = preview.querySelector('figcaption > span').textContent
+    iframe.allow = 'fullscreen; autoplay'
+    iframe.allowFullscreen = true
+    player.append(iframe)
+    preview.replaceWith(player)
+    iframe.focus()
   }
 
   playVideo(event) {

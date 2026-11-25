@@ -1036,6 +1036,7 @@ inactiveAccount:
   button: 'Masuk untuk menyimpan akunku'
 
 docs:
+  play_example: "Mainkan contoh"
   home_search: "Cari blok atau tutorial"
   home_search_submit: "Cari di dokumentasi"
   search_guides: "Panduan"

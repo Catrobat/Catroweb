@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Conectează-te ca să-ți păstrezi contul'
 
 docs:
+  play_example: "Joacă un exemplu"
   home_search: "Găsește un bloc sau un tutorial"
   home_search_submit: "Caută în documentație"
   search_guides: "Ghiduri"

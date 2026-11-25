@@ -1055,6 +1055,7 @@ inactiveAccount:
   button: 'Hesabımı tutmak için giriş yap'
 
 docs:
+  play_example: "Bir örnek oyna"
   home_search: "Bir blok veya ders bul"
   home_search_submit: "Belgelerde ara"
   search_guides: "Kılavuzlar"

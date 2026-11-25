@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Log masuk untuk simpan akaun saya'
 
 docs:
+  play_example: "Mainkan contoh"
   home_search: "Cari blok atau tutorial"
   home_search_submit: "Cari dalam dokumentasi"
   search_guides: "Panduan"

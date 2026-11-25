@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Anmelden und Konto behalten'
 
 docs:
+  play_example: "Spiele ein Beispiel"
   home_search: "Finde einen Baustein oder eine Anleitung"
   home_search_submit: "Dokumentation durchsuchen"
   search_guides: "Anleitungen"

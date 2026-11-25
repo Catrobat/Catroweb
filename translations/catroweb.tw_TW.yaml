@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Wura mu na kora m''akawnt so'
 
 docs:
+  play_example: "Di nhwɛso bi"
   home_search: "Hwehwɛ ahyɛde anaa adesua"
   home_search_submit: "Hwehwɛ wɔ akwankyerɛ no mu"
   search_guides: "Akwankyerɛ"

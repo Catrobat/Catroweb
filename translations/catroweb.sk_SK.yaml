@@ -1057,6 +1057,7 @@ inactiveAccount:
   button: 'Prihlásiť sa a ponechať si účet'
 
 docs:
+  play_example: "Spusť ukážku"
   home_search: "Nájdi blok alebo návod"
   home_search_submit: "Hľadaj v dokumentácii"
   search_guides: "Návody"

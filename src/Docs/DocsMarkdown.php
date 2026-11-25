@@ -24,6 +24,7 @@ use League\CommonMark\Parser\MarkdownParser;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\HtmlRenderer;
 use League\CommonMark\Renderer\NodeRendererInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Uri\Rfc3986\Uri;
 
 /**
@@ -43,7 +44,7 @@ use Uri\Rfc3986\Uri;
 final class DocsMarkdown implements NodeRendererInterface
 {
   /** Bump when the HTML for the same Markdown changes: the next sync renders every page again. */
-  public const int VERSION = 6;
+  public const int VERSION = 7;
 
   /** WordPress bookmarks for the four Media Library sections, by the current generated heading ID. */
   private const array MEDIA_LIBRARY_BOOKMARKS = [
@@ -89,6 +90,7 @@ final class DocsMarkdown implements NodeRendererInterface
     private readonly \Closure $project_card,
     private readonly ?DocsCatalog $catalog = null,
     private readonly ?string $docs_dir = null,
+    private readonly ?TranslatorInterface $translator = null,
   ) {
     $environment = new Environment(['html_input' => 'escape', 'allow_unsafe_links' => false]);
     $environment->addExtension(new CommonMarkCoreExtension());
@@ -328,6 +330,17 @@ final class DocsMarkdown implements NodeRendererInterface
     $href = htmlspecialchars(self::relativeUrl($this->page_url, 'project/'.$id), ENT_QUOTES);
     if (null === $card) {
       return '<p class="docs-embed docs-embed--project-missing"><a href="'.$href.'">'.htmlspecialchars($id, ENT_QUOTES).'</a></p>';
+    }
+
+    $frame = 'game-tutorials/examples/'.$id.'.webp';
+    if (isset($this->media[$frame])) {
+      $image = htmlspecialchars('/docs-media/'.$frame.'?v='.$this->media[$frame], ENT_QUOTES);
+      $name = htmlspecialchars($card['name'], ENT_QUOTES);
+      $label = htmlspecialchars($this->translator?->trans('docs.play_example', [], 'catroweb', $this->locale) ?? 'Play an example', ENT_QUOTES);
+
+      return '<figure class="docs-project-preview"><img src="'.$image.'" alt="" loading="lazy">'
+        .'<figcaption><a class="docs-project-preview__play" href="'.$href.'" data-docs-project-id="'.htmlspecialchars($id, ENT_QUOTES).'">'
+        .'<span class="material-icons" aria-hidden="true">play_circle</span>'.$label.'</a><span dir="auto">'.$name.'</span></figcaption></figure>';
     }
 
     return '<a class="docs-embed docs-embed--project" href="'.$href.'">'

@@ -2,10 +2,12 @@
 title: 第一批积木
 description: "在本教程中，你将学会在哪里找到各种积木，用来为一个角色编程。"
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '1ceec718cd386b20debff8a7997b3d72d6dda93bb26cbbf39e4286df298c353a'
 ---
 
 在本教程中，你将学会在哪里找到各种积木，用来为一个角色编程。此外，本教程还能让你大致了解各个积木类别。
+
+::project{id=6ac78173-445a-4280-8b8a-ea6b1e8e4af5}
 
 ![第一批积木](../../../media/game-tutorials/First-Bricks.png)
 

@@ -31,6 +31,8 @@ export function staticCopy(targets, { rootDir }) {
 // (Bootstrap, SweetAlert, MDC), so they're never present in the static content
 // scan.
 const PURGE_SAFELIST = [
+  'docs-project-preview',
+  'docs-project-preview__play',
   /^swal2/,
   /^modal/,
   /^mdc/,

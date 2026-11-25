@@ -150,6 +150,20 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('<span class="docs-embed__name">Jump &amp; Run</span>', $html);
   }
 
+  public function testProjectWithLocalFrameDoesNotLoadThePlayer(): void
+  {
+    $html = $this->markdown()->convert(
+      "::project{id=docs-example-project}\n",
+      'en/tutorials/jump.md',
+      ['game-tutorials/examples/docs-example-project.webp' => '0123456789'],
+    )['html'];
+
+    $this->assertStringContainsString('src="/docs-media/game-tutorials/examples/docs-example-project.webp?v=0123456789"', $html);
+    $this->assertStringContainsString('data-docs-project-id="docs-example-project"', $html);
+    $this->assertStringContainsString('Play an example', $html);
+    $this->assertStringNotContainsString('<iframe', $html);
+  }
+
   public function testEmbedsMayBeIndentedLikeOtherBlocks(): void
   {
     $html = $this->markdown()->convert("  ::video{youtube=dQw4w9WgXcQ}\n\n- ::video{youtube=dQw4w9WgXcQ}\n", 'en/index.md')['html'];

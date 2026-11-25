@@ -2,10 +2,12 @@
 title: Primers blocs
 description: "En aquest tutorial aprendràs on trobar diferents blocs per programar un objecte."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '1ceec718cd386b20debff8a7997b3d72d6dda93bb26cbbf39e4286df298c353a'
 ---
 
 En aquest tutorial aprendràs on trobar diferents blocs per programar un objecte. A més, aquest tutorial et donarà una bona visió general de les categories de blocs.
+
+::project{id=6ac78173-445a-4280-8b8a-ea6b1e8e4af5}
 
 ![Primers blocs](../../../media/game-tutorials/First-Bricks.png)
 

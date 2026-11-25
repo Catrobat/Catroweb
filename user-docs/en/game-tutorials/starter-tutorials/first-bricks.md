@@ -6,6 +6,8 @@ order: 0
 
 In this tutorial, you will learn where to find various bricks to program an object. Additionally, this tutorial provides a good overview of the brick categories.
 
+::project{id=6ac78173-445a-4280-8b8a-ea6b1e8e4af5}
+
 ![First Bricks](../../../media/game-tutorials/First-Bricks.png)
 
 To insert bricks and program your object, you should already have created a project with an object. If you need help with this, you can have a look at the **[New Object](new-object.md)**-tutorial.

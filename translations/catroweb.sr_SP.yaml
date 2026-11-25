@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Пријави се и задржи налог'
 
 docs:
+  play_example: "Покрени пример"
   home_search: "Нађи блок или упутство"
   home_search_submit: "Претражи документацију"
   search_guides: "Водичи"

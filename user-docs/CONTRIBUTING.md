@@ -43,6 +43,10 @@ Show real bricks instead of screenshots. They are rendered by Catroid itself, in
 
 `type` is the brick's type in a project's `code.xml` (e.g. `SetXBrick`, `IfLogicBeginBrick`). A brick that starts a script uses the type of that script, as it appears in `code.xml`: "When scene starts" is `StartScript`, "When tapped" is `WhenScript`, "When you receive" is `BroadcastScript`. A brick explanation in `reference/bricks/SetXBrick.md` needs no title: the brick page provides it. Its translations in `<locale>/reference/bricks/` have no title either; their front matter holds only the translation state, such as `reviewed: true`.
 
+To feature a finished example in a game tutorial, put its `::project{id=…}` line before the steps and save a WebP frame in
+`media/game-tutorials/examples/<project-id>.webp`. Use a public Share project that demonstrates the lesson. Readers see
+the local frame and can choose to load the browser player. The ordinary project card is used when there is no local frame.
+
 ## Style
 
 - Short sentences. One idea per paragraph. Say "you".

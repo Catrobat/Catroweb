@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Me connecter pour garder mon compte'
 
 docs:
+  play_example: "Joue à un exemple"
   home_search: "Trouve un bloc ou un tutoriel"
   home_search_submit: "Chercher dans la documentation"
   search_guides: "Guides"

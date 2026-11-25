@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Inloggen om mijn account te houden'
 
 docs:
+  play_example: "Speel een voorbeeld"
   home_search: "Zoek een blok of les"
   home_search_submit: "Zoek in de documentatie"
   search_guides: "Handleidingen"

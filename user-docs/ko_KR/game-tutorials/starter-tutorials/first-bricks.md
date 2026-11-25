@@ -2,10 +2,12 @@
 title: 첫 블록
 description: "이 튜토리얼에서는 오브젝트를 프로그래밍하는 여러 블록을 어디에서 찾는지 배워요."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '1ceec718cd386b20debff8a7997b3d72d6dda93bb26cbbf39e4286df298c353a'
 ---
 
 이 튜토리얼에서는 오브젝트를 프로그래밍하는 여러 블록을 어디에서 찾는지 배워요. 또한 블록 분류를 한눈에 볼 수 있어요.
+
+::project{id=6ac78173-445a-4280-8b8a-ea6b1e8e4af5}
 
 ![First Bricks](../../../media/game-tutorials/First-Bricks.png)
 

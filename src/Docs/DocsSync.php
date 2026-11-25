@@ -10,6 +10,7 @@ use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Imports the user docs (`user-docs/` in this repo, the same layout the Catrobat/docs repo had) into doc_page: renders
@@ -39,8 +40,9 @@ class DocsSync
     #[Autowire('%catrobat.user_docs.dir%')]
     public readonly string $docs_dir,
     DocsCatalog $catalog,
+    TranslatorInterface $translator,
   ) {
-    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...), $catalog, $docs_dir);
+    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...), $catalog, $docs_dir, $translator);
   }
 
   /** "Improve this page": the English file in GitHub's editor (translations are generated from it). */
