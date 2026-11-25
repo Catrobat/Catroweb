@@ -7,12 +7,12 @@
 {% block body %}
 
   {% if docs_only %}
-    <div class="search-results__title">
+    <div class="search-results__title" dir="auto">
       <h1>{{ 'search.results'|trans({}, 'catroweb', docs_locale) }}{% if q %} <bdi>“{{ q }}”</bdi>{% endif %}</h1>
     </div>
   {% endif %}
 
-  <div id="search-results"
+  <div id="search-results"{% if docs_only %} dir="auto"{% endif %}
        data-query="{{ q }}"
        data-theme="{{ theme() }}"
        data-base-url="{{ app.request.getBaseURL() }}"

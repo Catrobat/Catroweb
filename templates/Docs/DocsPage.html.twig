@@ -12,7 +12,7 @@
     <h1 class="docs-article__title">{{ page.title }}</h1>
 
     {% if page.path == 'index' %}
-      <form class="docs-home-search" role="search" action="{{ path('empty_search')|trim('/', 'right') }}" method="get">
+      <form class="docs-home-search" dir="auto" role="search" action="{{ path('empty_search')|trim('/', 'right') }}" method="get">
         {% set locale = docs_locale_query.locale|default(app.request.locale) %}
         <label for="docs-search-query">{{ 'docs.home_search'|trans({}, 'catroweb', locale) }}</label>
         <div class="docs-home-search__control">
