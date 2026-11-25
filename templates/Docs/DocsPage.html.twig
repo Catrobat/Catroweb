@@ -33,11 +33,12 @@
     {% endif %}
 
     {% if previous or next %}
-      <nav class="docs-pager{% if page.path != 'index' and docs_nav.pages is empty %} docs-pager--lesson{% endif %}" aria-label="{{ ('previous'|trans({}, 'catroweb') ~ ' / ' ~ 'next'|trans({}, 'catroweb'))|e('html_attr') }}">
+      {% set pager_locale = docs_locale_query.locale|default(app.request.locale) %}
+      <nav dir="auto" class="docs-pager{% if page.path != 'index' and docs_nav.pages is empty %} docs-pager--lesson{% endif %}" aria-label="{{ ('previous'|trans({}, 'catroweb', pager_locale) ~ ' / ' ~ 'next'|trans({}, 'catroweb', pager_locale))|e('html_attr') }}">
         {% if next %}
           <a class="docs-pager__link docs-pager__link--next" rel="next" href="{{ path('docs', {path: next.path == 'index' ? '' : next.path}|merge(docs_locale_query)) }}">
             <span>
-              <span class="docs-pager__label">{{ 'next'|trans({}, 'catroweb') }}</span>
+              <span class="docs-pager__label">{{ 'next'|trans({}, 'catroweb', pager_locale) }}</span>
               <strong>{{ next.title }}</strong>
             </span>
             <span class="docs-pager__arrow material-icons" aria-hidden="true">arrow_forward</span>
@@ -46,7 +47,7 @@
         {% if previous %}
           <a class="docs-pager__link docs-pager__link--previous" rel="prev" href="{{ path('docs', {path: previous.path == 'index' ? '' : previous.path}|merge(docs_locale_query)) }}">
             <span class="docs-pager__arrow material-icons" aria-hidden="true">arrow_back</span>
-            <span>{{ 'previous'|trans({}, 'catroweb') }} · {{ previous.title }}</span>
+            <span>{{ 'previous'|trans({}, 'catroweb', pager_locale) }} · {{ previous.title }}</span>
           </a>
         {% endif %}
       </nav>
