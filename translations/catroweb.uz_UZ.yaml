@@ -1051,6 +1051,12 @@ docs:
   video: "Videoni ijro etish (YouTube'dan yuklanadi)"
   comments: "Izohlar va maslahatlar"
   comments_empty: "Hali izohlar yo‘q. Biror narsa tushunarsizmi yoki maslahatingiz bormi? Shu yerga yozing."
+  reference_jump:
+    start: "Boshla"
+    move: "Harakatlantir"
+    looks: "Ko‘rinishni o‘zgartir"
+    sound: "Ovoz chiqar"
+    more: "Ko‘proq guruhlar"
   reference:
     title: "Bloklar va formulalar"
     formula: "Formula elementlari"

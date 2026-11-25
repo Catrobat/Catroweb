@@ -356,6 +356,89 @@
       "name": "\u0001s:category_device\u0002",
       "bricks": [
         {
+          "type": "SetXBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_x\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "DroneTakeOffLandBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_drone_takeoff_land\u0002"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "SetYBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_y\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "200"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "PlaceAtBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_place_at\u0002"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:x_label\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            },
+            {
+              "kind": "label",
+              "text": "\u0001s:y_label\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "200"
+            }
+          ],
+          "category": "motion"
+        },
+        {
+          "type": "ChangeYByNBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_change_y_by\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "10"
+            }
+          ],
+          "category": "motion"
+        },
+        {
           "type": "ResetTimerBrick",
           "commented_out": false,
           "parts": [

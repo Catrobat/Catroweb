@@ -27,6 +27,19 @@ class DocsController extends AbstractController
    */
   private const array OLD_BRICK_CATEGORIES = ['yourbricks' => 'user_bricks'];
 
+  /** Common groups in learning order. Catroid-only extensions follow in the catalog's order. */
+  private const array COMMON_CATEGORIES = [
+    'category_event' => 'start',
+    'category_motion' => 'move',
+    'category_looks' => 'looks',
+    'category_sound' => 'sound',
+    'category_control' => null,
+    'category_pen' => null,
+    'category_data' => null,
+    'category_user_bricks' => null,
+    'category_device' => null,
+  ];
+
   public function __construct(
     private readonly DocsLibrary $library,
     private readonly DocsSync $sync,
@@ -187,13 +200,18 @@ class DocsController extends AbstractController
     [$locale, $explicit] = $this->locale($request);
     $query = $explicit ? ['locale' => $locale] : [];
     $catalog = $this->catalog->catalog($locale);
-    foreach ($catalog['categories'] as &$category) {
+    $categories = $catalog['categories'];
+    $order = array_flip(array_keys(self::COMMON_CATEGORIES));
+    usort($categories, static fn (array $a, array $b): int => ($order[$a['key']] ?? PHP_INT_MAX) <=> ($order[$b['key']] ?? PHP_INT_MAX));
+    foreach ($categories as &$category) {
+      $category['common'] = \array_key_exists($category['key'], self::COMMON_CATEGORIES);
+      $category['jump_label'] = self::COMMON_CATEGORIES[$category['key']] ?? null;
       $category['html'] = array_map($this->catalog->html(...), $category['bricks']);
     }
     unset($category);
 
     return $this->render('Docs/DocsReference.html.twig', [
-      'categories' => $catalog['categories'],
+      'categories' => $categories,
       'formula' => $catalog['formula'],
       'docs_locale_query' => $query,
       'docs_ui_locale' => $this->library->shareLocale($locale),
@@ -242,8 +260,9 @@ class DocsController extends AbstractController
     }
     $prose = $this->library->brickProse($type, $locale);
     $title = $this->catalog->title($brick['brick']);
-    // Its section is its own category, the first one (DocsCatalog::brick).
-    $category = $brick['categories'][0];
+    // A brick can be opened from several groups. Use the group the reader followed when it contains this brick.
+    $memberships = array_column($brick['categories'], null, 'key');
+    $category = $memberships[$request->query->getString('category')] ?? $brick['categories'][0];
     $bricks = array_values(array_filter($this->catalog->catalog($locale)['categories'], static fn (array $listed): bool => $listed['key'] === $category['key']))[0]['bricks'] ?? [];
     $category_url = $this->generateUrl('docs_reference', $query).'#'.$category['key'];
 
@@ -251,7 +270,7 @@ class DocsController extends AbstractController
       'type' => $type,
       'title' => $title,
       'brick_html' => $this->catalog->html($brick['brick']),
-      'categories' => $brick['categories'],
+      'categories' => [$category['key'] => $category] + $memberships,
       'setting_hint' => null === $brick['setting'] ? null : $this->settingHint($brick['setting'], $locale),
       'prose' => $prose,
       'body_html' => null === $prose ? '' : DocsMarkdown::withLinkLocale($prose->getHtml(), $request->getUri(), $this->generateUrl('docs'), $query['locale'] ?? null),
@@ -265,7 +284,7 @@ class DocsController extends AbstractController
         [...$this->referenceCrumbs($query), ['title' => $category['name'], 'url' => $category_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
         array_map(fn (array $listed): array => [
           'title' => $this->catalog->title($listed),
-          'url' => $this->generateUrl('docs_brick', ['type' => $listed['type']] + $query),
+          'url' => $this->generateUrl('docs_brick', ['type' => $listed['type']] + $query + ['category' => $category['key']]),
           'current' => $listed['type'] === $type,
         ], $bricks),
         $category_url,

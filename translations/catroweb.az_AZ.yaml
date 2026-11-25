@@ -1073,6 +1073,12 @@ docs:
   video: "Videonu oynat (YouTube-dan yüklənir)"
   comments: "Şərhlər və məsləhətlər"
   comments_empty: "Hələ şərh yoxdur. Nəsə aydın deyil, yoxsa məsləhətin var? Buraya yaz."
+  reference_jump:
+    start: "Başla"
+    move: "Hərəkət et"
+    looks: "Görünüşü dəyiş"
+    sound: "Səs çıxar"
+    more: "Daha çox qrup"
   reference:
     title: "Bloklar və düsturlar"
     formula: "Düstur elementləri"

@@ -10,7 +10,7 @@ Feature: Brick and formula reference pages, generated from Catroid's catalog
     And I wait for the page to be loaded
     Then the element ".docs-article__title" should contain "Bricks and formulas"
     And I should see a "#category_motion .docs-reference__heading.cv-block--motion" element
-    And I should see a "#category_motion a[href$='/docs/reference/bricks/SetXBrick'] .cv-block--motion" element
+    And I should see a "#category_motion a[href$='/docs/reference/bricks/SetXBrick?category=category_motion'] .cv-block--motion" element
     And I should see a "#formula a[href$='/docs/reference/formula/SIN']" element
     And the element "#sidebar .sidebar-docs-section--current[aria-current='page']" should contain "Bricks and formulas"
     And the element ".docs-breadcrumb [aria-current='page']" should contain "Bricks and formulas"
@@ -78,3 +78,21 @@ Feature: Brick and formula reference pages, generated from Catroid's catalog
     Then I should see a "a.docs-embed--brick[href='../reference/bricks/SetXBrick'] .cv-block--motion" element
     And the element ".docs-embed--brick" should contain "Set x to"
     And I should see a "a.docs-embed--formula[href='../reference/formula/SIN']" element
+
+  Scenario: Common jump links come first and a brick keeps the group it was opened from
+    Given I use a 390 x 844 viewport
+    When I go to "/app/docs/reference"
+    And I wait for the page to be loaded
+    Then the element ".docs-reference__jump-list li:first-child" should contain "Start"
+    And I should see a ".docs-reference__jump-list a[href='#category_motion']" element
+    And I should see a ".docs-reference__jump details:not([open])" element
+    When I click "#category_device a[href$='/docs/reference/bricks/SetXBrick?category=category_device']"
+    And I wait for the page to be loaded
+    Then the element ".docs-reference__category-link--primary" should contain "Device"
+    And I should see a ".docs-reference__category-link--primary[href$='/docs/reference#category_device']" element
+
+  Scenario: The reference uses the chosen locale for the title and jump links
+    When I go to "/app/docs/reference?locale=de"
+    And I wait for the page to be loaded
+    Then the element ".docs-article__title" should contain "Bausteine und Formeln"
+    And the element ".docs-reference__jump summary" should contain "Weitere Gruppen"

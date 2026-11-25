@@ -141,7 +141,8 @@ class DocsCatalog implements ResetInterface
     // device and embroidery.
     $own = $this->colorClass((string) $found['category']);
     $score = fn (array $category): int => \count(array_filter($category['bricks'], fn (array $brick): bool => $this->colorClass((string) $brick['category']) === $own));
-    usort($listed, static fn (array $a, array $b): int => $score($b) <=> $score($a));
+    // Device also lists every brick of the extensions it appends, so it never outranks a category of the brick's own.
+    usort($listed, static fn (array $a, array $b): int => ['category_device' === $a['key'], $score($b)] <=> ['category_device' === $b['key'], $score($a)]);
 
     return [
       'brick' => $found,

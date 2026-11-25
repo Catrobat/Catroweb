@@ -1073,6 +1073,12 @@ docs:
   video: "Video afspelen (laadt van YouTube)"
   comments: "Reacties en tips"
   comments_empty: "Nog geen reacties. Is iets onduidelijk, of heb je een tip? Schrijf het hier."
+  reference_jump:
+    start: "Start"
+    move: "Beweeg"
+    looks: "Verander het uiterlijk"
+    sound: "Maak een geluid"
+    more: "Meer groepen"
   reference:
     title: "Blokken en formules"
     formula: "Formule-elementen"

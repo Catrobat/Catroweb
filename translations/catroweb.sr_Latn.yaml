@@ -1073,6 +1073,12 @@ docs:
   video: "Pusti video (učitava se sa YouTube-a)"
   comments: "Komentari i saveti"
   comments_empty: "Još nema komentara. Da li je nešto nejasno ili imaš savet? Napiši ga ovde."
+  reference_jump:
+    start: "Počni"
+    move: "Pomeri"
+    looks: "Promeni izgled"
+    sound: "Pusti zvuk"
+    more: "Još grupa"
   reference:
     title: "Blokovi i formule"
     formula: "Elementi formula"

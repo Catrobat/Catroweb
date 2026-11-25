@@ -1073,6 +1073,12 @@ docs:
   video: "تشغيل الفيديو (يُحمَّل من YouTube)"
   comments: "التعليقات والنصائح"
   comments_empty: "لا توجد تعليقات بعد. هل هناك شيء غير واضح، أو لديك نصيحة؟ اكتبها هنا."
+  reference_jump:
+    start: "ابدأ"
+    move: "تحرّك"
+    looks: "غيّر المظهر"
+    sound: "أصدر صوتًا"
+    more: "مجموعات أخرى"
   reference:
     title: "اللبنات والصيغ"
     formula: "عناصر الصيغ"

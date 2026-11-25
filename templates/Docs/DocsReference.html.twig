@@ -1,19 +1,44 @@
 {% extends 'Docs/DocsLayout.html.twig' %}
 
 {% set kinds = {
-  functions: 'docs.reference.functions'|trans({}, 'catroweb'),
-  sensors: 'docs.reference.sensors'|trans({}, 'catroweb'),
-  operators: 'docs.reference.operators'|trans({}, 'catroweb'),
+  functions: 'docs.reference.functions'|trans({}, 'catroweb', docs_ui_locale),
+  sensors: 'docs.reference.sensors'|trans({}, 'catroweb', docs_ui_locale),
+  operators: 'docs.reference.operators'|trans({}, 'catroweb', docs_ui_locale),
 } %}
 
-{% block title %}{{ 'docs.reference.title'|trans({}, 'catroweb') }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}
+{% block title %}{{ 'docs.reference.title'|trans({}, 'catroweb', docs_ui_locale) }} – {{ 'docs.title'|trans({}, 'catroweb', docs_ui_locale) }}{% endblock %}
 
 {% block docs_article %}
   <article class="docs-article">
-    <h1 class="docs-article__title">{{ 'docs.reference.title'|trans({}, 'catroweb') }}</h1>
+    <h1 class="docs-article__title">{{ 'docs.reference.title'|trans({}, 'catroweb', docs_ui_locale) }}</h1>
 
     {% if categories is empty %}
-      <p class="docs-note">{{ 'docs.reference.empty'|trans({}, 'catroweb') }}</p>
+      <p class="docs-note">{{ 'docs.reference.empty'|trans({}, 'catroweb', docs_ui_locale) }}</p>
+    {% endif %}
+
+    {% set has_formula = formula.functions is not empty or formula.sensors is not empty or formula.operators is not empty %}
+    {% if categories is not empty or has_formula %}
+      <nav class="docs-reference__jump" dir="auto" aria-label="{{ 'docs.on_this_page'|trans({}, 'catroweb', docs_ui_locale) }}">
+        <ul class="docs-reference__jump-list">
+          {% for category in categories|filter(category => category.common) %}
+            <li><a href="#{{ category.key }}">{% if category.jump_label %}{{ ('docs.reference_jump.' ~ category.jump_label)|trans({}, 'catroweb', docs_ui_locale) }}{% else %}{{ category.name }}{% endif %}</a></li>
+          {% endfor %}
+          {% if has_formula %}
+            <li><a href="#formula">{{ 'docs.reference.formula'|trans({}, 'catroweb', docs_ui_locale) }}</a></li>
+          {% endif %}
+        </ul>
+        {% set specialist = categories|filter(category => not category.common) %}
+        {% if specialist is not empty %}
+          <details>
+            <summary>{{ 'docs.reference_jump.more'|trans({}, 'catroweb', docs_ui_locale) }}</summary>
+            <ul class="docs-reference__jump-list">
+              {% for category in specialist %}
+                <li><a href="#{{ category.key }}">{{ category.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% endif %}
+      </nav>
     {% endif %}
 
     {% for category in categories %}
@@ -21,15 +46,15 @@
         <h2 class="docs-reference__heading cv-block cv-block--{{ category.color }}">{{ category.name }}</h2>
         <ul class="docs-reference__bricks">
           {% for brick in category.bricks %}
-            <li><a class="docs-reference__brick" href="{{ path('docs_brick', {type: brick.type}|merge(docs_locale_query)) }}">{{ category.html[loop.index0]|raw }}</a></li>
+            <li><a class="docs-reference__brick" href="{{ path('docs_brick', {type: brick.type, category: category.key}|merge(docs_locale_query)) }}">{{ category.html[loop.index0]|raw }}</a></li>
           {% endfor %}
         </ul>
       </section>
     {% endfor %}
 
-    {% if formula.functions is not empty or formula.sensors is not empty or formula.operators is not empty %}
+    {% if has_formula %}
       <section class="docs-reference__category" id="formula">
-        <h2>{{ 'docs.reference.formula'|trans({}, 'catroweb') }}</h2>
+        <h2>{{ 'docs.reference.formula'|trans({}, 'catroweb', docs_ui_locale) }}</h2>
         {% for kind, label in kinds %}
           <h3>{{ label }}</h3>
           <ul class="docs-reference__formula">

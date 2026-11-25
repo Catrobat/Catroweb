@@ -1074,6 +1074,12 @@ docs:
   video: "Prehrať video (načíta sa z YouTube)"
   comments: "Komentáre a tipy"
   comments_empty: "Zatiaľ žiadne komentáre. Je niečo nejasné, alebo máš tip? Napíš ho sem."
+  reference_jump:
+    start: "Začni"
+    move: "Pohni"
+    looks: "Zmeň vzhľad"
+    sound: "Prehraj zvuk"
+    more: "Ďalšie skupiny"
   reference:
     title: "Bloky a vzorce"
     formula: "Prvky vzorcov"

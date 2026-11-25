@@ -7,10 +7,11 @@
 {% block docs_article %}
   <article class="docs-article">
     <h1 class="docs-article__title">{{ title }}</h1>
-    <p class="docs-reference__meta">
-      <code>{{ type }}</code>
+    {% set brick_language = docs_ui_locale|slice(0, 2)|lower %}
+    <p class="docs-reference__meta" dir="{{ brick_language in ['ar', 'fa', 'he', 'ps', 'sd', 'ur'] ? 'rtl' : 'ltr' }}">
+      <code dir="ltr">{{ type }}</code>
       {% for category in categories %}
-        <a class="docs-reference__category-link" href="{{ path('docs_reference', docs_locale_query) }}#{{ category.key }}">{{ category.name }}</a>
+        <a class="docs-reference__category-link{% if loop.first %} docs-reference__category-link--primary{% endif %}" href="{{ path('docs_reference', docs_locale_query) }}#{{ category.key }}">{{ category.name }}</a>
       {% endfor %}
     </p>
 

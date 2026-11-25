@@ -1073,6 +1073,12 @@ docs:
   video: "وڊيو هلايو (YouTube تان لوڊ ٿئي ٿي)"
   comments: "رايا ۽ صلاحون"
   comments_empty: "اڃا ڪا راءِ ناهي. ڪجهه واضح ناهي، يا توهان وٽ ڪا صلاح آهي؟ هتي لکو."
+  reference_jump:
+    start: "شروع ڪر"
+    move: "چور"
+    looks: "ڏيک مٽاءِ"
+    sound: "آواز ڪر"
+    more: "وڌيڪ گروهه"
   reference:
     title: "بلاڪ ۽ فارمولا"
     formula: "فارمولا جا جزا"

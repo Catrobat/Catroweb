@@ -1051,6 +1051,12 @@ docs:
   video: "Cheza video (inapakiwa kutoka YouTube)"
   comments: "Maoni na vidokezo"
   comments_empty: "Bado hakuna maoni. Kuna kitu kisicho wazi, au una kidokezo? Kiandike hapa."
+  reference_jump:
+    start: "Anza"
+    move: "Sogeza"
+    looks: "Badili mwonekano"
+    sound: "Toa sauti"
+    more: "Vikundi zaidi"
   reference:
     title: "Matofali na fomula"
     formula: "Vipengele vya fomula"

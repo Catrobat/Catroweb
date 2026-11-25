@@ -1060,6 +1060,12 @@ docs:
   video: "動画を再生（YouTube から読み込みます）"
   comments: "コメントとヒント"
   comments_empty: "まだコメントはありません。わかりにくいところや、ヒントはありますか？ここに書いてください。"
+  reference_jump:
+    start: "始める"
+    move: "動かす"
+    looks: "見た目を変える"
+    sound: "音を鳴らす"
+    more: "ほかのグループ"
   reference:
     title: "ブロックと数式"
     formula: "数式の要素"

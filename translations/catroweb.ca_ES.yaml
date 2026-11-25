@@ -1073,6 +1073,12 @@ docs:
   video: "Reprodueix el vídeo (es carrega des de YouTube)"
   comments: "Comentaris i consells"
   comments_empty: "Encara no hi ha comentaris. Hi ha alguna cosa que no és clara o tens un consell? Escriu-lo aquí."
+  reference_jump:
+    start: "Comença"
+    move: "Mou"
+    looks: "Canvia l’aspecte"
+    sound: "Fes sonar"
+    more: "Més grups"
   reference:
     title: "Blocs i fórmules"
     formula: "Elements de fórmula"

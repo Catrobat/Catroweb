@@ -1073,6 +1073,12 @@ docs:
   video: "વીડિયો ચલાવો (YouTube પરથી લોડ થાય છે)"
   comments: "ટિપ્પણીઓ અને સૂચનો"
   comments_empty: "હજી કોઈ ટિપ્પણી નથી. કંઈક અસ્પષ્ટ છે, કે તમારી પાસે કોઈ સૂચન છે? અહીં લખો."
+  reference_jump:
+    start: "શરૂ કર"
+    move: "હલાવ"
+    looks: "દેખાવ બદલ"
+    sound: "અવાજ કર"
+    more: "વધુ જૂથો"
   reference:
     title: "બ્લોક્સ અને સૂત્રો"
     formula: "સૂત્રના ઘટકો"

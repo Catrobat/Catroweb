@@ -158,6 +158,25 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertStringContainsString('rel="alternate" hreflang="x-default" href="http://localhost'.$path.'"', (string) $explicit->getContent());
   }
 
+  public function testReferenceOrdersCommonGroupsAndKeepsTheBricksGroup(): void
+  {
+    $kernel = self::$kernel;
+    $this->assertNotNull($kernel);
+    $get = static fn (string $url): string => (string) $kernel->handle(
+      Request::create($url),
+      HttpKernelInterface::MAIN_REQUEST,
+      false,
+    )->getContent();
+
+    $reference = $get('/app/docs/reference');
+    $this->assertMatchesRegularExpression('/id="category_event".*id="category_motion".*id="category_arduino"/s', $reference);
+    $brick = '/app/docs/reference/bricks/SetXBrick';
+    $this->assertStringContainsString('docs-reference__category-link--primary" href="/app/docs/reference#category_device"', $get($brick.'?category=category_device'));
+    $this->assertStringContainsString('docs-reference__category-link--primary" href="/app/docs/reference#category_motion"', $get($brick.'?category=category_arduino'));
+    // Opened directly, as from search or the app's help: its own category, not Device that appends extensions.
+    $this->assertStringContainsString('docs-reference__category-link--primary" href="/app/docs/reference#category_motion"', $get($brick));
+  }
+
   public function testServesThePagesAsMarkdownAndLlmsTxt(): void
   {
     $this->sync->import(DocsSync::readDirectory(self::FIXTURES));

@@ -1073,6 +1073,12 @@ docs:
   video: "Videó lejátszása (a YouTube-ról töltődik be)"
   comments: "Hozzászólások és tippek"
   comments_empty: "Még nincs hozzászólás. Valami nem világos, vagy van egy tipped? Írd ide."
+  reference_jump:
+    start: "Indítás"
+    move: "Mozgás"
+    looks: "Kinézet módosítása"
+    sound: "Hang lejátszása"
+    more: "További csoportok"
   reference:
     title: "Blokkok és képletek"
     formula: "Képletelemek"

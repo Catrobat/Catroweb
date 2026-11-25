@@ -1073,6 +1073,12 @@ docs:
   video: "Lire la vidéo (chargée depuis YouTube)"
   comments: "Commentaires et astuces"
   comments_empty: "Pas encore de commentaires. Quelque chose n’est pas clair, ou tu as une astuce ? Écris-la ici."
+  reference_jump:
+    start: "Démarrer"
+    move: "Bouger"
+    looks: "Changer l’apparence"
+    sound: "Jouer un son"
+    more: "Plus de groupes"
   reference:
     title: "Briques et formules"
     formula: "Éléments de formule"
