@@ -490,8 +490,11 @@
 }
 
 .docs-reference__category-link {
-  padding: 0.1rem 0.5rem;
-  border: 1px solid var(--bs-border-color);
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid light-dark(#65788c, #879bad);
   border-radius: 1rem;
   font-size: 0.875rem;
   text-decoration: none;
@@ -551,5 +554,12 @@
 }
 
 .docs-reference__category-link--primary {
+  background: light-dark(#eaf3fb, #23394b);
+  color: var(--bs-body-color);
   font-weight: 700;
+}
+
+.docs-reference__category-link:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
 }
