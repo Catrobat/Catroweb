@@ -18,13 +18,14 @@ Feature: User docs pages, synced from user-docs/
       | /app/docs/tutorials/jump            | Make your cat jump     |
 
   Scenario: The embeds render
+    Given I use a 1280 x 900 viewport
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded
     Then I should see a ".docs-embed--brick[data-brick-type='SetXBrick']" element
     And I should see a ".docs-embed--formula[data-formula-name='SIN']" element
     And I should see a ".docs-video[data-youtube-id='dQw4w9WgXcQ']" element
     And I should see a ".docs-embed--project-missing" element
-    And the element ".docs-toc" should contain "Move the cat"
+    And the element ".docs-article > .docs-toc" should contain "Move the cat"
     And the element ".docs-pager" should contain "Make your cat jump"
 
   Scenario: A video loads from YouTube only after a click
