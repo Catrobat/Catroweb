@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f1ca0136fef84e193491219c938dcb9",
+    "content-hash": "658f28355bacf7d5a9c51bd345654426",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -18277,16 +18277,16 @@
         },
         {
             "name": "psalm/plugin-laravel",
-            "version": "v4.22.2",
+            "version": "v4.22.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-laravel.git",
-                "reference": "bbaf61532600b5ffda4f29f25a738543ee993078"
+                "reference": "0ff12588a0cb31c837146255679be5254c034498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-laravel/zipball/bbaf61532600b5ffda4f29f25a738543ee993078",
-                "reference": "bbaf61532600b5ffda4f29f25a738543ee993078",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-laravel/zipball/0ff12588a0cb31c837146255679be5254c034498",
+                "reference": "0ff12588a0cb31c837146255679be5254c034498",
                 "shasum": ""
             },
             "require": {
@@ -18296,7 +18296,7 @@
                 "psalm/psalm-plugin-api": "^0.4.5",
                 "sebastian/diff": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "symfony/console": "^6.4 || ^7.0 || ^8.0",
-                "vimeo/psalm": "^7.9.0@stable"
+                "vimeo/psalm": "^7.10.0@stable"
             },
             "conflict": {
                 "laravel/framework": "<12.27 || 13.0.0 || >=13.1 <13.20",
@@ -18355,7 +18355,7 @@
             ],
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-laravel/issues",
-                "source": "https://github.com/psalm/psalm-plugin-laravel/tree/v4.22.2"
+                "source": "https://github.com/psalm/psalm-plugin-laravel/tree/v4.22.3"
             },
             "funding": [
                 {
@@ -18363,7 +18363,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-17T23:49:06+00:00"
+            "time": "2026-11-18T00:59:25+00:00"
         },
         {
             "name": "psalm/plugin-mockery",
@@ -18428,16 +18428,16 @@
         },
         {
             "name": "psalm/plugin-phpunit",
-            "version": "1.3.2",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
-                "reference": "e160c6311d7b83f8e52268bc9edc2834d0536958"
+                "reference": "9971f924f1ab8323fdeff42a00b2b4f484788af6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/e160c6311d7b83f8e52268bc9edc2834d0536958",
-                "reference": "e160c6311d7b83f8e52268bc9edc2834d0536958",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/9971f924f1ab8323fdeff42a00b2b4f484788af6",
+                "reference": "9971f924f1ab8323fdeff42a00b2b4f484788af6",
                 "shasum": ""
             },
             "require": {
@@ -18483,9 +18483,9 @@
             "description": "Psalm plugin for PHPUnit",
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-phpunit/issues",
-                "source": "https://github.com/psalm/psalm-plugin-phpunit/tree/1.3.2"
+                "source": "https://github.com/psalm/psalm-plugin-phpunit/tree/1.3.4"
             },
-            "time": "2026-11-19T12:38:00+00:00"
+            "time": "2026-11-24T11:04:53+00:00"
         },
         {
             "name": "psalm/plugin-symfony",
@@ -21045,16 +21045,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "7.9.0",
+            "version": "7.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "6b439ac5947fccc105ec83faf60568d15e24d2a9"
+                "reference": "2d8a48d1611508108eaa653ef599010da65eff3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/6b439ac5947fccc105ec83faf60568d15e24d2a9",
-                "reference": "6b439ac5947fccc105ec83faf60568d15e24d2a9",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/2d8a48d1611508108eaa653ef599010da65eff3f",
+                "reference": "2d8a48d1611508108eaa653ef599010da65eff3f",
                 "shasum": ""
             },
             "require": {
@@ -21162,7 +21162,7 @@
                 "issues": "https://github.com/vimeo/psalm/issues",
                 "source": "https://github.com/vimeo/psalm"
             },
-            "time": "2026-11-16T23:00:17+00:00"
+            "time": "2026-11-18T00:08:31+00:00"
         },
         {
             "name": "vincentlanglet/twig-cs-fixer",
