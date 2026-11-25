@@ -49,18 +49,26 @@
       </ul>
     {% endif %}
 
-    <nav class="docs-pager" aria-label="{{ ('previous'|trans({}, 'catroweb') ~ ' / ' ~ 'next'|trans({}, 'catroweb'))|e('html_attr') }}">
-      {% if previous %}
-        <a class="docs-pager__link docs-pager__link--previous" rel="prev" href="{{ path('docs', {path: previous.path == 'index' ? '' : previous.path}|merge(docs_locale_query)) }}">
-          <span class="docs-pager__label">{{ 'previous'|trans({}, 'catroweb') }}</span>{{ previous.title }}
-        </a>
-      {% endif %}
-      {% if next %}
-        <a class="docs-pager__link docs-pager__link--next" rel="next" href="{{ path('docs', {path: next.path == 'index' ? '' : next.path}|merge(docs_locale_query)) }}">
-          <span class="docs-pager__label">{{ 'next'|trans({}, 'catroweb') }}</span>{{ next.title }}
-        </a>
-      {% endif %}
-    </nav>
+    {% if previous or next %}
+      {% set pager_language = docs_ui_locale|slice(0, 2)|lower %}
+      <nav dir="{{ pager_language in ['ar', 'fa', 'he', 'ps', 'sd', 'ur'] ? 'rtl' : 'ltr' }}" class="docs-pager{% if page.path != 'index' and docs_nav.pages is empty %} docs-pager--lesson{% endif %}" aria-label="{{ ('previous'|trans({}, 'catroweb', docs_ui_locale) ~ ' / ' ~ 'next'|trans({}, 'catroweb', docs_ui_locale))|e('html_attr') }}">
+        {% if previous %}
+          <a class="docs-pager__link docs-pager__link--previous" rel="prev" href="{{ path('docs', {path: previous.path == 'index' ? '' : previous.path}|merge(docs_locale_query)) }}">
+            <span class="docs-pager__arrow material-icons" aria-hidden="true">arrow_back</span>
+            <span>{{ 'previous'|trans({}, 'catroweb', docs_ui_locale) }} · {{ previous.title }}</span>
+          </a>
+        {% endif %}
+        {% if next %}
+          <a class="docs-pager__link docs-pager__link--next" rel="next" href="{{ path('docs', {path: next.path == 'index' ? '' : next.path}|merge(docs_locale_query)) }}">
+            <span>
+              <span class="docs-pager__label">{{ 'next'|trans({}, 'catroweb', docs_ui_locale) }}</span>
+              <strong>{{ next.title }}</strong>
+            </span>
+            <span class="docs-pager__arrow material-icons" aria-hidden="true">arrow_forward</span>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
 
     <p class="docs-improve">
       <a href="{{ edit_url }}" target="_blank" rel="noopener noreferrer">
