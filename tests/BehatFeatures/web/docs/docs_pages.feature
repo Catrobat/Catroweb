@@ -96,7 +96,7 @@ Feature: User docs pages, synced from user-docs/
     When I go to "/app/docs?locale=de"
     And I wait for the page to be loaded
     Then the element ".docs-home__featured" should contain "Mach dein erstes Spiel"
-    And I should see a ".docs-home__other a[href$='/docs/tutorials?locale=de']" element
+    And I should see a ".docs-home__other a[href$='/docs/tutorials/jump?locale=de']" element
 
   Scenario: The embroidery docs feature the embroidery card
     When I go to "/embroidery/docs"
