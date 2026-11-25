@@ -2,7 +2,7 @@
 title: Novi objekat
 description: "U ovom vodiču naučićeš kako da napraviš novi objekat u svom projektu i koje su sve mogućnosti za to."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 U ovom vodiču naučićeš kako da napraviš novi objekat u svom projektu i koje sve mogućnosti za to postoje.
@@ -46,6 +46,8 @@ Sada treba da daš svojoj slici ime.
 Posle toga treba da je postaviš vizuelno, tako što ćeš prstom pomeriti sliku levo/desno ili gore/dole. Sačuvaj je dugmetom u gornjem desnom uglu.
 
 ![Novi objekat (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Uspeo si! Napravio si svoj novi objekat.
 

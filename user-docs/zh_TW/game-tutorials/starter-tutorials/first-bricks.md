@@ -2,12 +2,10 @@
 title: 第一批積木
 description: "在這個教學中，你會學到去哪裡找到各種積木，來為一個物件寫程式。"
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 在這個教學中，你會學到去哪裡找到各種積木，來為一個物件寫程式。此外，這個教學也能讓你快速了解各種積木類別。
-
-![第一批積木](../../../media/game-tutorials/First-Bricks.png)
 
 若要加入積木並為物件寫程式，你應該已經建立了一個含有物件的專案。如果你不知道怎麼做，可以看看**[新增物件](new-object.md)**教學。
 
@@ -23,13 +21,17 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 接著你會看到，裡面已經有一些積木了。這些積木是在我們用視覺方式放置物件時自動建立的。
 
-這些積木的作用，只是在專案開始時，把我們物件放在一開始選好的位置。你隨時都可以在這裡更改這個位置。
+這些積木的作用，只是在場景開始時，把我們物件放在一開始選好的位置。你隨時都可以在這裡更改這個位置。
 
-![第一批積木（1）](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. 加入積木
 
 現在，點一下右下角的黃色加號按鈕，就能建立更多積木。你會看到一個新視窗，裡面有好幾個積木類別。下一個步驟會說明這些類別。
+
+![第一批積木（1）](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. 積木類別
 
@@ -40,6 +42,8 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ### 5. 加入第一個積木
 
 我們的第一個積木要使用「滑行 1 秒到 X: Y:」積木。你可以在動作類別中找到它。使用公式編輯器，就能編輯秒數以及 X 和 Y 的位置。
+
+::brick{type=GlideToBrick}
 
 ### 6. 放置積木
 

@@ -2,12 +2,10 @@
 title: Első blokkok
 description: "Ebben az oktatóanyagban megtudod, hol találod a különböző blokkokat egy szereplő programozásához."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Ebben az oktatóanyagban megtudod, hol találod a különböző blokkokat egy szereplő programozásához. Emellett átfogó képet kapsz a blokkkategóriákról is.
-
-![Első blokkok](../../../media/game-tutorials/First-Bricks.png)
 
 Ahhoz, hogy blokkokat illessz be és programozd a szereplődet, már létre kell hoznod egy projektet egy szereplővel. Ha ebben segítségre van szükséged, nézd meg a **[Új szereplő](new-object.md)** oktatóanyagot.
 
@@ -23,13 +21,17 @@ Először meg kell nyitnod a projektedet. Már létre kell hoznod egy szereplőt
 
 Ezután látni fogod, hogy már vannak blokkok. Ezeket a blokkokat akkor hoztuk létre, amikor vizuálisan elhelyeztük a szereplőt.
 
-Ezek a blokkok csak arra valók, hogy a projekt indulásakor a szereplőt a kezdeti helyzetben, a kiválasztott pontra tegyék. Ezt a pozíciót bármikor módosíthatod itt.
+Ezek a blokkok csak arra valók, hogy a jelenet indulásakor a szereplőt a kezdeti helyzetben, a kiválasztott pontra tegyék. Ezt a pozíciót bármikor módosíthatod itt.
 
-![Első blokkok (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Blokkok beillesztése
 
 Most újabb blokkokat hozhatsz létre: koppints a jobb alsó sarokban lévő sárga plusz gombra. Megjelenik egy új ablak, amely több blokkkategóriát kínál. Ezeket a kategóriákat a következő lépésben ismertetjük.
+
+![Első blokkok (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Blokkkategóriák
 
@@ -40,6 +42,8 @@ Ezek a különböző blokkkategóriák:
 ### 5. Az első blokk beillesztése
 
 Az első blokkjainkhoz a „Csússz 1 másodperc alatt ide: x: y:” blokkot használjuk. A mozgás kategóriában találod. A képletszerkesztővel módosíthatod a másodpercek számát, valamint az X és Y pozíciót.
+
+::brick{type=GlideToBrick}
 
 ### 6. A blokk elhelyezése
 

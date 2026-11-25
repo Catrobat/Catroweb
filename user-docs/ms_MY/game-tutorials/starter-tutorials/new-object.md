@@ -2,7 +2,7 @@
 title: Objek Baharu
 description: "Dalam tutorial ini, kamu akan belajar cara mencipta objek baharu dalam projek kamu dan pelbagai pilihan yang ada untuk ini."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 Dalam tutorial ini, kamu akan belajar cara mencipta objek baharu dalam projek kamu dan pelbagai pilihan yang ada untuk ini.
@@ -46,6 +46,8 @@ Sekarang kamu perlu memberi nama kepada gambar kamu.
 Selepas itu kamu perlu meletakkannya secara visual dengan mengalihkannya ke kiri/kanan atau ke atas/bawah menggunakan jari kamu. Kamu perlu menyimpannya dengan butang di sudut kanan atas.
 
 ![Objek Baharu (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Berjaya! Kamu telah mencipta objek baharu kamu sendiri.
 

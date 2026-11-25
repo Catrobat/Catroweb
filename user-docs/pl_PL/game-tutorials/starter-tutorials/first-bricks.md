@@ -2,12 +2,10 @@
 title: Pierwsze klocki
 description: "W tym samouczku dowiesz się, gdzie znaleźć różne klocki, żeby zaprogramować obiekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 W tym samouczku dowiesz się, gdzie znaleźć różne klocki, żeby zaprogramować obiekt. Dostaniesz też dobry przegląd kategorii klocków.
-
-![Pierwsze klocki](../../../media/game-tutorials/First-Bricks.png)
 
 Żeby wstawić klocki i zaprogramować obiekt, musisz już mieć projekt z obiektem. Jeśli nie wiesz, jak to zrobić, zajrzyj do samouczka **[Nowy obiekt](new-object.md)**.
 
@@ -23,13 +21,17 @@ Najpierw otwórz swój projekt. Powinieneś już mieć obiekt (jeśli nie, zajrz
 
 Zobaczysz, że są już jakieś klocki. Zostały utworzone, kiedy ustawialiśmy obiekt na ekranie.
 
-Te klocki robią tylko tyle, że na początku projektu ustawiają obiekt w wybranym przez nas miejscu. Możesz tu w każdej chwili zmienić to położenie.
+Te klocki robią tylko tyle, że gdy plansza się rozpoczyna ustawiają obiekt w wybranym przez nas miejscu. Możesz tu w każdej chwili zmienić to położenie.
 
-![Pierwsze klocki (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Wstaw klocki
 
 Teraz możesz dodać więcej klocków, klikając żółty przycisk plus w prawym dolnym rogu. Pojawi się nowe okno z kilkoma kategoriami klocków. Kategorie opisujemy w następnym kroku.
+
+![Pierwsze klocki (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Kategorie klocków
 
@@ -40,6 +42,8 @@ To są różne kategorie klocków:
 ### 5. Wstaw pierwszy klocek
 
 Do naszego pierwszego klocka użyjemy klocka „Leć przez 1 sekundę do x: y:”. Znajdziesz go w kategorii Ruch. W edytorze formuł możesz zmienić liczbę sekund oraz pozycję X i Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Umieść klocek
 

@@ -2,12 +2,10 @@
 title: Primeiros blocos
 description: "Neste tutorial, você aprende onde encontrar os vários blocos para programar um objeto."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Neste tutorial, você aprende onde encontrar os vários blocos para programar um objeto. Ele também mostra bem as categorias de blocos.
-
-![Primeiros blocos](../../../media/game-tutorials/First-Bricks.png)
 
 Para colocar blocos e programar o seu objeto, você já precisa ter criado um projeto com um objeto. Se precisar de ajuda, veja o tutorial **[Novo objeto](new-object.md)**.
 
@@ -23,13 +21,17 @@ Primeiro, abra o seu projeto. Você já deve ter criado um objeto (se não, veja
 
 Depois disso, você vê que já tem alguns blocos. Esses blocos foram criados quando colocamos o objeto na tela.
 
-Esses blocos só colocam o nosso objeto exatamente no lugar que escolhemos no começo, quando o projeto começa. Aqui você também pode mudar esse lugar quando quiser.
+Esses blocos só colocam o nosso objeto exatamente no lugar que escolhemos no começo, quando a cena começa. Aqui você também pode mudar esse lugar quando quiser.
 
-![Primeiros blocos (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Colocar blocos
 
 Agora você pode criar mais blocos tocando no botão amarelo de mais, no canto de baixo à direita. Vai abrir uma janela nova com várias categorias de blocos. Essas categorias são explicadas no próximo passo.
+
+![Primeiros blocos (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Categorias de blocos
 
@@ -40,6 +42,8 @@ Estas são as categorias de blocos:
 ### 5. Colocar o primeiro bloco
 
 Para o nosso primeiro bloco, vamos usar o bloco “Deslizar 1 segundo para x: y:”. Ele fica na categoria “Movimento”. Com o “Editor de fórmulas”, você pode mudar os segundos e a posição x e y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Colocar o bloco no lugar
 

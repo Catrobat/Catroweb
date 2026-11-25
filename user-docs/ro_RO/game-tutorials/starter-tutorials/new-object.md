@@ -2,7 +2,7 @@
 title: Obiect nou
 description: "În acest tutorial vei învăța cum să creezi un obiect nou în proiectul tău și ce posibilități ai pentru asta."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 În acest tutorial vei învăța cum să creezi un obiect nou în proiectul tău și ce posibilități ai pentru asta.
@@ -46,6 +46,8 @@ Acum trebuie să dai imaginii tale un nume.
 După aceea, trebuie s-o plasezi vizual, mutând-o cu degetul stânga/dreapta sau sus/jos. Trebuie să o salvezi cu butonul din colțul din dreapta sus.
 
 ![Obiect nou (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Ai reușit! Ai creat propriul tău obiect nou.
 

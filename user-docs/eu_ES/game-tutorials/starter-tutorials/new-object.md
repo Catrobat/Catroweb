@@ -2,7 +2,7 @@
 title: "Objektu berria"
 description: "Tutorial honetan, ikasiko duzu nola sortu objektu berri bat zure proiektuan eta horretarako aukera desberdinak."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 Tutorial honetan, ikasiko duzu nola sortu objektu berri bat zure proiektuan eta horretarako aukera desberdinak.
@@ -46,6 +46,8 @@ Orain zure argazkiari izena eman behar diozu.
 Gero, ezkerrera/eskuinera edo behatza gora/beherantz mugituz jarri behar da. Gorde egin behar duzu goiko eskuineko izkinan dagoen botoiarekin.
 
 ![Objektu berria (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Zure objektu berria sortu duzu.
 

@@ -2,12 +2,10 @@
 title: Primers blocs
 description: "En aquest tutorial aprendràs on trobar diferents blocs per programar un objecte."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 En aquest tutorial aprendràs on trobar diferents blocs per programar un objecte. A més, aquest tutorial et donarà una bona visió general de les categories de blocs.
-
-![Primers blocs](../../../media/game-tutorials/First-Bricks.png)
 
 Per inserir blocs i programar el teu objecte, ja hauries d'haver creat un projecte amb un objecte. Si necessites ajuda amb això, pots mirar el tutorial **[Objecte nou](new-object.md)**.
 
@@ -23,13 +21,17 @@ Primer, has d'obrir el teu projecte. Ja hauries d'haver creat un objecte (si no,
 
 Després veuràs que ja hi ha alguns blocs. Aquests blocs es van crear quan vam col·locar visualment l'objecte.
 
-Aquests blocs només col·loquen el nostre objecte a la posició exacta que vam escollir al principi quan comença el projecte. També pots canviar aquesta posició en qualsevol moment aquí.
+Aquests blocs només col·loquen el nostre objecte a la posició exacta que vam escollir al principi quan comença l’escena. També pots canviar aquesta posició en qualsevol moment aquí.
 
-![Primers blocs (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Insereix blocs
 
 Ara pots crear més blocs tocant el botó groc més de la cantonada inferior dreta. Veuràs una finestra nova amb diverses categories de blocs. Aquestes categories es descriuen al pas següent.
+
+![Primers blocs (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Categories de blocs
 
@@ -40,6 +42,8 @@ Aquestes són les diferents categories de blocs:
 ### 5. Insereix el primer bloc
 
 Pel nostre primer bloc, volem fer servir el bloc «Llisca durant 1 segon fins a x: y:». El trobaràs a la categoria de moviment. Amb l'editor de fórmules pots canviar la quantitat de segons i la posició x i y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Col·loca el bloc
 

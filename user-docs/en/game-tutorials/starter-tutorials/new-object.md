@@ -46,6 +46,8 @@ After that you have to place it visually by shifting it to the left/right or up/
 
 ![New Object (3)](../../../media/game-tutorials/New-Object-3.png)
 
+::brick{type=PlaceAtBrick}
+
 ### 7. You made it! You created your own new object.
 
 Now you have a project with an object that you can program!

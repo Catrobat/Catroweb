@@ -76,7 +76,7 @@ Feature: Brick and formula reference pages, generated from Catroid's catalog
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded
     Then I should see a "a.docs-embed--brick[href='../reference/bricks/SetXBrick'] .cv-block--motion" element
-    And the element ".docs-embed--brick" should contain "Set x to"
+    And the element "a.docs-embed--brick" should contain "Set x to 100"
     And I should see a "a.docs-embed--formula[href='../reference/formula/SIN']" element
 
   Scenario: Common jump links come first and a brick keeps the group it was opened from

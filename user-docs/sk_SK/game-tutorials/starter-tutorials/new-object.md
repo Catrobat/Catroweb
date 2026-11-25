@@ -2,7 +2,7 @@
 title: Nový objekt
 description: "V tomto návode sa naučíš, ako vytvoriť nový objekt v svojom projekte a aké máš na to možnosti."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 V tomto návode sa naučíš, ako vytvoriť nový objekt v svojom projekte a aké máš na to možnosti.
@@ -46,6 +46,8 @@ Teraz musíš svojmu obrázku dať názov.
 Potom ho musíš umiestniť vizuálne tak, že ho prstom posunieš doľava/doprava alebo hore/dole. Ulož ho tlačidlom v pravom hornom rohu.
 
 ![Nový objekt (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Zvládol si to! Vytvoril si svoj vlastný nový objekt.
 

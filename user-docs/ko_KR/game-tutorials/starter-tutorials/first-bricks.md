@@ -2,12 +2,10 @@
 title: 첫 블록
 description: "이 튜토리얼에서는 오브젝트를 프로그래밍하는 여러 블록을 어디에서 찾는지 배워요."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 이 튜토리얼에서는 오브젝트를 프로그래밍하는 여러 블록을 어디에서 찾는지 배워요. 또한 블록 분류를 한눈에 볼 수 있어요.
-
-![First Bricks](../../../media/game-tutorials/First-Bricks.png)
 
 블록을 넣고 오브젝트를 프로그래밍하려면 이미 오브젝트가 있는 프로젝트가 필요해요. 도움이 필요하면 **[새 오브젝트](new-object.md)** 튜토리얼을 확인해 보세요.
 
@@ -23,13 +21,17 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 그러면 이미 블록이 몇 개 있는 것을 볼 수 있어요. 이 블록들은 오브젝트를 화면에 배치할 때 만들어졌어요.
 
-이 블록들은 프로젝트가 시작될 때 오브젝트를 처음에 고른 정확한 위치에 놓는 역할만 해요. 이 위치는 언제든지 여기에서 바꿀 수 있어요.
+이 블록들은 장면이 시작될 때 오브젝트를 처음에 고른 정확한 위치에 놓는 역할만 해요. 이 위치는 언제든지 여기에서 바꿀 수 있어요.
 
-![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. 블록 넣기
 
 이제 오른쪽 아래 모서리의 노란색 더하기 버튼을 누르면 블록을 더 만들 수 있어요. 블록 분류를 여러 개 보여 주는 새 창이 나와요. 이 분류들은 다음 단계에서 설명할게요.
+
+![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. 블록 분류
 
@@ -40,6 +42,8 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ### 5. 첫 블록 넣기
 
 첫 블록으로는 “1초 동안 x: y: 위치로 미끄러지듯 이동하기” 블록을 써 볼게요. “동작” 분류에서 찾을 수 있어요. 수식 편집기로 초 수와 x, y 위치를 바꿀 수 있어요.
+
+::brick{type=GlideToBrick}
 
 ### 6. 블록 놓기
 

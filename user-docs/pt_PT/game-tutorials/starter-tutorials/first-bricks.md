@@ -2,12 +2,10 @@
 title: Primeiros blocos
 description: "Neste tutorial, vais aprender onde encontrar vários blocos para programar um objeto."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Neste tutorial, vais aprender onde encontrar vários blocos para programar um objeto. Além disso, este tutorial dá uma boa visão geral das categorias de blocos.
-
-![Primeiros blocos](../../../media/game-tutorials/First-Bricks.png)
 
 Para inserir blocos e programar o teu objeto, deves já ter criado um projeto com um objeto. Se precisares de ajuda com isto, podes ver o tutorial **[Objeto novo](new-object.md)**.
 
@@ -23,13 +21,17 @@ Primeiro, tens de abrir o teu projeto. Deves já ter criado um objeto (se não, 
 
 Depois vais ver que já existem alguns blocos. Esses blocos foram criados quando colocámos visualmente o objeto.
 
-Estes blocos servem apenas para colocar o nosso objeto na posição exata que escolhemos no início, quando o projeto começa. Também podes mudar esta posição a qualquer momento aqui.
+Estes blocos servem apenas para colocar o nosso objeto na posição exata que escolhemos no início, quando a cena começa. Também podes mudar esta posição a qualquer momento aqui.
 
-![Primeiros blocos (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Inserir blocos
 
 Agora podes criar mais blocos carregando no botão amarelo de mais, no canto inferior direito. Vai aparecer uma nova janela com várias categorias de blocos. Estas categorias são descritas no próximo passo.
+
+![Primeiros blocos (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Categorias de blocos
 
@@ -40,6 +42,8 @@ Estas são as diferentes categorias de blocos:
 ### 5. Inserir o primeiro bloco
 
 Para os nossos primeiros blocos, queremos usar o bloco “Deslizar em 1 segundo para x: y:”. Podes encontrá-lo na categoria de movimento. Com o Editor de fórmulas podes editar o número de segundos e a posição X e Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Colocar o bloco
 

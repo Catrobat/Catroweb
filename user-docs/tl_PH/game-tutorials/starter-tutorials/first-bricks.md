@@ -2,12 +2,10 @@
 title: "Unang mga block ng code"
 description: "Sa tutorial na ito, matututunan mo kung saan makahanap ng iba't ibang mga bloke ng code upang mag-program ng isang bagay."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Sa tutorial na ito, matututunan mo kung saan makahanap ng iba't ibang mga bloke ng code upang mag-program ng isang bagay. Bilang karagdagan, ang tutorial na ito ay nagbibigay ng isang mahusay na pangkalahatang-ideya sa mga kategorya ng block code.
-
-![Unang mga block ng code](../../../media/game-tutorials/First-Bricks.png)
 
 Upang isulud ang mga bloke ng code at i-program ang iyong bagay, dapat mong lumikha na ng isang proyekto na may isang bagay. Kung kailangan mo ng tulong sa bagay na ito, maaari mong tingnan ang tutorial **[Bagong Objekto](new-object.md)**.
 
@@ -23,13 +21,17 @@ Sa simula, kailangan mong buksan ang iyong proyekto. Dapat mong lumikha ng isang
 
 Pagkatapos nito makikita mo na may ilang code blocks. Ang mga bloke ng code ay nilikha nang visual na inilagay namin ang bagay.
 
-Ang mga bloke ng code na ito ay hindi lamang naglalagay sa eksaktong posisyon ng ating bagay noong simula nang magsimula ang proyekto. Maaari mo ring baguhin ang posisyon na ito sa anumang oras dito.
+Kapag nagsimula ang eksena, inilalagay ng mga blokeng ito ang bagay sa mismong puwestong pinili mo sa simula. Maaari mo ring baguhin ang posisyon na ito sa anumang oras dito.
 
-![Unang mga bloke ng code (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. I-insert code blocks
 
 Ngayon maaari mong lumikha ng higit pang mga bloke code sa pamamagitan ng pag-click sa yellow plus-button sa kanang sulok sa ibaba. Makikita mo ang isang bagong bintana na nagbibigay sa iyo ng ilang mga kategorya para sa code blocks. Ang mga kategorya na ito ay inilarawan sa susunod na hakbang.
+
+![Unang mga bloke ng code (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. block ng code Mga kategorya
 
@@ -40,6 +42,8 @@ Ito ang iba't ibang mga kategorya ng block code:
 ### 5. I-insert ang unang block ng code
 
 Para sa aming unang mga bloke ng code, nais naming gamitin ang block ng code “Dumausdos nang 1 segundo papunta sa x: Y:”. Makikita mo ito sa kategorya ng paggalaw. Sa Formula editor maaari mong i-edit ang halaga ng segundo at ang posisyon X at Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. I-install ang block ng code
 

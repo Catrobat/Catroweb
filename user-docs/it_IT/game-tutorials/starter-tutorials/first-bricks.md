@@ -2,12 +2,10 @@
 title: I primi blocchi
 description: "In questo tutorial impari dove trovare i vari blocchi per programmare un oggetto."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 In questo tutorial impari dove trovare i vari blocchi per programmare un oggetto. Inoltre, questo tutorial ti dà una buona panoramica delle categorie di blocchi.
-
-![I primi blocchi](../../../media/game-tutorials/First-Bricks.png)
 
 Per inserire i blocchi e programmare il tuo oggetto, devi aver già creato un progetto con un oggetto. Se ti serve aiuto, guarda il tutorial **[Nuovo oggetto](new-object.md)**.
 
@@ -23,13 +21,17 @@ Per prima cosa apri il tuo progetto. Dovresti aver già creato un oggetto (se no
 
 Poi vedi che ci sono già alcuni blocchi. Questi blocchi sono stati creati quando hai messo l'oggetto al suo posto sullo schermo.
 
-Questi blocchi fanno solo una cosa: quando il progetto parte, mettono l'oggetto proprio nel punto che hai scelto all'inizio. Qui puoi cambiare questo punto quando vuoi.
+Questi blocchi fanno solo una cosa: quando si avvia la scena, mettono l'oggetto proprio nel punto che hai scelto all'inizio. Qui puoi cambiare questo punto quando vuoi.
 
-![I primi blocchi (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Inserisci dei blocchi
 
 Ora puoi aggiungere altri blocchi. Tocca il pulsante giallo con il più in basso a destra. Si apre una nuova finestra con diverse categorie di blocchi. Le categorie sono spiegate nel prossimo passo.
+
+![I primi blocchi (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Le categorie di blocchi
 
@@ -40,6 +42,8 @@ Queste sono le diverse categorie di blocchi:
 ### 5. Inserisci il primo blocco
 
 Come primo blocco usiamo “Scivola in 1 secondo a x: y:”. Lo trovi nella categoria “Movimento”. Con l'editor delle formule puoi cambiare i secondi e la posizione x e y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Metti il blocco al suo posto
 

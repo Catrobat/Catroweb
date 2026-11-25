@@ -2,7 +2,7 @@
 title: "O novo obxecto"
 description: "Neste tutorial, aprenderás como crear un novo obxecto no teu proxecto e as diferentes posibilidades que tes para isto."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 Neste tutorial, aprenderás como crear un novo obxecto no teu proxecto e as diferentes posibilidades que tes para isto.
@@ -46,6 +46,8 @@ Agora ten que darlle un nome á súa imaxe.
 Despois de iso, ten que colocá-lo visualmente movéndoo á esquerda/dereita ou cara arriba/abaixo co dedo. Ten que gardalo co botón na esquina superior dereita.
 
 ![O novo obxecto (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Creou o seu novo obxecto.
 

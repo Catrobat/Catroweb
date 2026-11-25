@@ -2,7 +2,7 @@
 title: "Nuwe voorwerp"
 description: "In hierdie handleiding sal jy leer hoe om 'n nuwe voorwerp in jou projek te skep en die verskillende moontlikhede wat jy het vir dit."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 In hierdie handleiding sal jy leer hoe om 'n nuwe voorwerp in jou projek te skep en die verskillende moontlikhede wat jy het vir dit.
@@ -46,6 +46,8 @@ Jy moet jou foto 'n naam gee.
 Daarna moet jy dit visueel plaas deur dit links/regs of op/af met jou vinger te skuif. Jy moet dit spaar met die knoppie in die boonste regterhoek.
 
 ![Nuwe voorwerp (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Jy het jou eie nuwe voorwerp geskep.
 

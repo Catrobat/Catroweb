@@ -2,12 +2,10 @@
 title: Ensimmäiset palikat
 description: "Tässä ohjeessa opit, mistä löydät erilaisia palikoita objektin ohjelmoimiseen."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Tässä ohjeessa opit, mistä löydät erilaisia palikoita objektin ohjelmoimiseen. Lisäksi ohje antaa hyvän yleiskuvan palikkakategorioista.
-
-![Ensimmäiset palikat](../../../media/game-tutorials/First-Bricks.png)
 
 Jotta voit lisätä palikoita ja ohjelmoida objektisi, sinulla pitää jo olla projekti, jossa on objekti. Jos tarvitset apua, katso ohje **[Uusi objekti](new-object.md)**.
 
@@ -23,13 +21,17 @@ Ensin sinun pitää avata projektisi. Sinulla pitää jo olla objekti (jos ei ol
 
 Sen jälkeen näet, että palikoita on jo valmiina. Ne syntyivät, kun asetimme objektin näytölle visuaalisesti.
 
-Nämä palikat sijoittavat objektimme projektin alkaessa juuri siihen kohtaan, jonka valitsimme alussa. Voit myös muuttaa tätä sijaintia milloin tahansa täältä.
+Nämä palikat sijoittavat objektimme kohtauksen alkaessa juuri siihen kohtaan, jonka valitsimme alussa. Voit myös muuttaa tätä sijaintia milloin tahansa täältä.
 
-![Ensimmäiset palikat (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Lisää palikoita
 
 Voit nyt luoda lisää palikoita napauttamalla oikeassa alakulmassa olevaa keltaista plus-painiketta. Näet uuden ikkunan, jossa on useita palikkakategorioita. Kategorioista kerrotaan seuraavassa vaiheessa.
+
+![Ensimmäiset palikat (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Palikkakategoriat
 
@@ -40,6 +42,8 @@ Nämä ovat eri palikkakategoriat:
 ### 5. Lisää ensimmäinen palikka
 
 Ensimmäisiin palikoihimme haluamme käyttää palikkaa „Liu’u 1 sekunnissa kohtaan x: y:“. Löydät sen liikkeen kategoriasta. Kaavaeditorilla voit muokata sekuntien määrää sekä sijaintia X ja Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Sijoita palikka
 

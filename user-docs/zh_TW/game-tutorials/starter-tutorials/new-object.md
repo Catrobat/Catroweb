@@ -2,7 +2,7 @@
 title: 新增物件
 description: "在這個教學中，你會學到如何在專案中建立新物件，以及你有哪些不同的方式可以做到。"
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 在這個教學中，你會學到如何在專案中建立新物件，以及你有哪些不同的方式可以做到。
@@ -46,6 +46,8 @@ source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
 接著，你要用手指把它往左右或上下移動，以視覺方式放好。然後按右上角的按鈕來儲存。
 
 ![新增物件（3）](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. 你做到了！你建立了自己的新物件。
 

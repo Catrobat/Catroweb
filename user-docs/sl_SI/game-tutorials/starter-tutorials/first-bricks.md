@@ -2,12 +2,10 @@
 title: Prvi bloki
 description: "V tej vadnici se boš naučil, kje najdeš različne bloke, s katerimi programiraš predmet."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 V tej vadnici se boš naučil, kje najdeš različne bloke, s katerimi programiraš predmet. Poleg tega ti vadnica dobro pokaže kategorije blokov.
-
-![Prvi bloki](../../../media/game-tutorials/First-Bricks.png)
 
 Da vstaviš bloke in programiraš svoj predmet, moraš že imeti ustvarjen projekt s predmetom. Če ti pri tem treba pomoč, poglej vadnico **[Nov predmet](new-object.md)**.
 
@@ -23,13 +21,17 @@ Najprej moraš odpreti svoj projekt. Predmet že moraš imeti ustvarjen (če ga 
 
 Nato boš videl, da so že nekateri bloki. Ti bloki so nastali, ko si predmet vizualno postavil.
 
-Ti bloki samo postavijo naš predmet na točen položaj, ki smo ga izbrali na začetku, ko se projekt zažene. Ta položaj lahko kadar koli spremeniš tudi tukaj.
+Ti bloki samo postavijo naš predmet na točen položaj, ki smo ga izbrali na začetku, ko se scena začne. Ta položaj lahko kadar koli spremeniš tudi tukaj.
 
-![Prvi bloki (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Vstavi bloke
 
 Zdaj lahko ustvariš nove bloke, tako da klikneš na rumeni gumb plus v spodnjem desnem kotu. Prikaže se novo okno z več kategorijami blokov. Te kategorije so opisane v naslednjem koraku.
+
+![Prvi bloki (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Kategorije blokov
 
@@ -40,6 +42,8 @@ To so različne kategorije blokov:
 ### 5. Vstavi prvi blok
 
 Za prve bloke bomo uporabili blok „Drsi 1 sekundo do x: y:“. Najdeš ga v kategoriji gibanja. S Urejevalnikom formul lahko urediš število sekund ter položaj x in y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Postavi blok
 

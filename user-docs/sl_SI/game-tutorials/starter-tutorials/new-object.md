@@ -2,7 +2,7 @@
 title: Nov predmet
 description: "V tej vadnici se boš naučil, kako v svojem projektu ustvariš nov predmet, in spoznal možnosti, ki jih imaš za to."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 V tej vadnici se boš naučil, kako v svojem projektu ustvariš nov predmet, in spoznal možnosti, ki jih imaš za to.
@@ -46,6 +46,8 @@ Zdaj moraš svoji sliki dati ime.
 Nato jo moraš vizualno postaviti tako, da jo s prstom premakneš levo/desno ali gor/dol. Shrani jo z gumbom v zgornjem desnem kotu.
 
 ![Nov predmet (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Uspelo ti je! Ustvaril si svoj novi predmet.
 

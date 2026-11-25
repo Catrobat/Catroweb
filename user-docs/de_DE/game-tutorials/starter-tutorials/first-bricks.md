@@ -3,12 +3,10 @@ title: Erste Bausteine
 description: "In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren."
 order: 0
 reviewed: true
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren. Außerdem gibt dir dieses Tutorial einen guten Überblick über die Baustein-Kategorien.
-
-![Erste Bausteine](../../../media/game-tutorials/Erste-Bausteine.png)
 
 Damit du Bausteine einfügen und dein Objekt programmieren kannst, solltest du bereits ein Projekt mit einem Objekt erstellt haben. Falls du dabei noch Hilfe benötigst, kannst du dir das Tutorial **[Neues Objekt](new-object.md)** anschauen.
 
@@ -22,13 +20,17 @@ Zuerst musst du dein Projekt öffnen. Du solltest bereits ein Objekt erstellt ha
 
 ### 2. Vorhandene Bausteine
 
-Danach wirst du sehen, dass bereits einige Bausteine vorhanden sind. Diese Bausteine wurden erstellt, als wir das Objekt visuell platziert haben. Diese Bausteine tun nichts weiter, als unser Objekt an genau der Position zu platzieren, die wir am Anfang ausgewählt haben, sobald du das Projekt startest. Du kannst diese Position auch jederzeit hier ändern.
+Danach wirst du sehen, dass bereits einige Bausteine vorhanden sind. Diese Bausteine wurden erstellt, als wir das Objekt visuell platziert haben. Diese Bausteine tun nichts weiter, als unser Objekt an genau der Position zu platzieren, die wir am Anfang ausgewählt haben, sobald die Szene startet. Du kannst diese Position auch jederzeit hier ändern.
 
-![Erste Bausteine (1)](../../../media/game-tutorials/Erste-Bausteine-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Bausteine einfügen
 
 Jetzt kannst du weitere Bausteine erstellen, indem du auf den gelben Plus-Button in der unteren rechten Ecke klickst. Du wirst ein neues Fenster sehen, das dir verschiedene Kategorien für Bausteine anzeigt. Diese Kategorien werden im nächsten Schritt beschrieben.
+
+![Erste Bausteine (1)](../../../media/game-tutorials/Erste-Bausteine-1.png)
 
 ### 4. Baustein Kategorien
 
@@ -39,6 +41,8 @@ Das sind die verschiedenen Baustein Kategorien:
 ### 5. Ersten Baustein einfügen
 
 Für unsere ersten Bausteine möchten wir den Baustein “Gleite 1 Sekunde zu X: Y:” verwenden. Du findest ihn in der Kategorie “Bewegung”. Mit dem Formeleditor kannst du die Anzahl der Sekunden sowie die Position X und Y bearbeiten.
+
+::brick{type=GlideToBrick}
 
 ### 6. Baustein platzieren
 

@@ -2,12 +2,10 @@
 title: "Lehenengo kode blokeak"
 description: "Tutorial honetan, objektu bat programatzeko hainbat kode bloke non aurkituko dituzun ikasiko duzu."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Tutorial honetan, objektu bat programatzeko hainbat kode bloke non aurkituko dituzun ikasiko duzu. Gainera, tutoriala honek kode blokeetako kategorien ikuspegi orokorra ematen du.
-
-![Lehenengo kode blokeak](../../../media/game-tutorials/First-Bricks.png)
 
 Kode blokeak sartzeko eta zure objektuaren programazioa egiteko, proiektu bat sortu beharko zenuke. Laguntza behar baduzu, begiratu **[Objektu berria](new-object.md)** tutoriala.
 
@@ -23,13 +21,17 @@ Hasieran, zure proiektua ireki behar duzu. Objektu bat sortu behar zenuen (ez ba
 
 Gero ikusiko duzu dagoeneko kode bloke batzuk daudela. Kode bloke horiek objektuaren kokapena ikusita sortu ziren.
 
-Kode bloke horiek ez dute ezer egiten gure objektuak hasieran aukeratu genuen posizioan kokatzea baino gehiago proiektua hastean. Eta hemen edozein unetan aldatu dezakezu posizioa.
+Kode bloke horiek ez dute ezer egiten gure objektuak hasieran aukeratu genuen posizioan kokatzea baino gehiago eszena hastean. Eta hemen edozein unetan aldatu dezakezu posizioa.
 
-![Lehenengo kode blokeak (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Sartu kode blokeak
 
 Orain, kode bloke gehiago sor ditzakezu eskuineko beheko txokoan dagoen botoi horia sakatuz. Leiho berri bat ikusiko duzu, zenbait kategoriatan azaltzen dena kode blokeentzat. Kategoria horiek hurrengo urratsan azalduko dira.
+
+![Lehenengo kode blokeak (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Kodea blokeatzeko kategoriak
 
@@ -40,6 +42,8 @@ Hauek dira kode blokeetako kategoriak:
 ### 5. Sartu lehenengo kode-blokea
 
 Gure lehenengo kode blokeetarako, «Irristatu 1 segundo posizio honetara: x: Y:» kode blokea erabili nahi dugu. Mugimendu kategorian aurkituko duzu. Formula-editorea bidez, segundu kopurua eta kokapena X eta Y editatzen ahal izango dituzu.
+
+::brick{type=GlideToBrick}
 
 ### 6. Jarri kode-blokea
 

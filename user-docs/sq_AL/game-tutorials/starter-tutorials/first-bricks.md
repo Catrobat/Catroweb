@@ -2,12 +2,10 @@
 title: "Blloqet e para të kodit"
 description: "Në këtë mësimdhënie, do të mësoni ku të gjeni blloqe të ndryshme kod për të programuar një objekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Në këtë mësimdhënie, do të mësoni ku të gjeni blloqe të ndryshme kod për të programuar një objekt. Përveç kësaj, ky mësimdhënës ofron një përmbledhje të mirë të kategorive të bllokut të kodit.
-
-![Blloqet e para të kodit](../../../media/game-tutorials/First-Bricks.png)
 
 Për të futur bloket e kodit dhe programuar objektin tuaj, duhet të keni krijuar tashmë një projekt me një objekt. Nëse keni nevojë për ndihmë me këtë, mund të shikoni në **[Objekti i ri](new-object.md)** - tutorial.
 
@@ -23,13 +21,17 @@ Në fillim, duhet të hapësh projektin tënd. Ju duhet të keni krijuar tashmë
 
 Pas kësaj do të shihni se tashmë ka disa blokë kodesh. Këto blloqe kod janë krijuar kur vendosëm objektin vizualisht.
 
-Këto blloqe kod nuk bëjnë asgjë tjetër përveç se të vendosin objektin tonë në pozicionin e saktë që kemi zgjedhur në fillim kur projekti fillon. Mund ta ndryshoni këtë pozicion në çdo kohë këtu.
+Këto blloqe kod nuk bëjnë asgjë tjetër përveç se të vendosin objektin tonë në pozicionin e saktë që kemi zgjedhur në fillim kur fillon episodi. Mund ta ndryshoni këtë pozicion në çdo kohë këtu.
 
-![Blloqet e para të kodit (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Shpejtni blloqet e kodit
 
 Tani ju mund të krijoni më shumë blloqe kod duke klikuar në butonin e verdhë plus në qoshen e djathtë të poshtme. Do të shihni një dritare të re që ju jep disa kategori për blloqet e kodit. Këto kategori janë të përshkruara në hapin e ardhshëm.
+
+![Blloqet e para të kodit (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. blloku kod Kategoritë
 
@@ -40,6 +42,8 @@ Këto janë kategoritë e ndryshme të blokit të kodit:
 ### 5. Shpejtni bllokun e parë të kodit
 
 Për blloqet tona të para të kodit, ne duam të përdorim bllokun e kodeve «Rrëshqit për 1 sekondë te x: Y:». Mund ta gjeni në kategorinë e lëvizjes. Me Redaktori i formulave ju mund të modifikojnë sasinë e sekondave dhe pozicionin X dhe Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Vendosni bllokun e kodit
 

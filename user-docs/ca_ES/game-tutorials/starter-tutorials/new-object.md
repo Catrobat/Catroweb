@@ -2,7 +2,7 @@
 title: Objecte nou
 description: "En aquest tutorial aprendràs a crear un objecte nou al teu projecte i les diferents possibilitats que tens per fer-ho."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 En aquest tutorial aprendràs a crear un objecte nou al teu projecte i les diferents possibilitats que tens per fer-ho.
@@ -46,6 +46,8 @@ Ara has de posar un nom a la teva imatge.
 Després has de col·locar-la visualment movent-la a l'esquerra, a la dreta, amunt o avall amb el dit. Has de desar-la amb el botó de la cantonada superior dreta.
 
 ![Objecte nou (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Ho has aconseguit! Has creat el teu objecte nou.
 
