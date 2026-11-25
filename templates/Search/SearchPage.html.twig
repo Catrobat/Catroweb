@@ -7,7 +7,11 @@
 {% block body %}
 
   {% if docs_only %}
-    <h1 dir="auto">{{ 'search.results'|trans({}, 'catroweb', docs_ui_locale) }}{% if q %} <bdi>“{{ q }}”</bdi>{% endif %}</h1>
+    {% if q is empty %}
+      <h1 dir="auto">{{ 'docs.title'|trans({}, 'catroweb', docs_ui_locale) }}</h1>
+    {% else %}
+      <h1 dir="auto">{{ 'search.results'|trans({}, 'catroweb', docs_ui_locale) }} <bdi>“{{ q }}”</bdi></h1>
+    {% endif %}
   {% endif %}
 
   <div id="search-results"{% if docs_only %} class="search-docs-only" dir="auto"{% endif %}

@@ -30,4 +30,12 @@ final class SearchControllerTest extends KernelTestCase
     $this->assertStringContainsString('data-docs-only="false"', (string) $general->getContent());
     $this->assertStringContainsString('data-query="cat"', (string) $general->getContent());
   }
+
+  public function testEmptyDocsSearchUsesTheDocsTitle(): void
+  {
+    $response = self::bootKernel()->handle(Request::create('/app/search/?q=+++&context=docs&scope=docs&locale=de'));
+
+    $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+    $this->assertStringContainsString('<h1 dir="auto">Dokumentation</h1>', (string) $response->getContent());
+  }
 }

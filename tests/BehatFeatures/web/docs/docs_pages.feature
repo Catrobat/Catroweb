@@ -136,6 +136,26 @@ Feature: User docs pages, synced from user-docs/
     And I wait for the page to be loaded
     Then the element ".docs-pager__link--next .docs-pager__label" should contain "Weiter"
 
+  Scenario: An explicit docs language also applies to the guide and brick interface
+    Given I use a 1280 x 900 viewport
+    And I am on the page "/app/docs/tutorials/jump?locale=de" with header "Accept-Language" equal to "en-US"
+    And I wait for the page to be loaded
+    Then I should see an "html[lang|='de']" element
+    And the element ".docs-breadcrumb li:first-child" should contain "Dokumentation"
+    And the element "#sidebar .sidebar-docs-sections" should contain "Bausteine und Formeln"
+    And the element ".docs-article > .docs-toc .docs-toc__title" should contain "Auf dieser Seite"
+    And I should see "Kommentare und Tipps"
+    And I should not see "Bricks and formulas"
+    And I should not see "On this page"
+    And I should not see "Comments and tips"
+    When I am on the page "/app/docs/reference/bricks/SetXBrick?locale=de" with header "Accept-Language" equal to "en-US"
+    And I wait for the page to be loaded
+    Then I should see an "html[lang|='de']" element
+    And the element ".docs-breadcrumb" should contain "Bausteine und Formeln"
+    And I should see "Kommentare und Tipps"
+    And I should not see "Bricks and formulas"
+    And I should not see "Comments and tips"
+
   Scenario: Article and navigation links keep an explicitly chosen language
     Given I use a 1280 x 900 viewport
     When I go to "/app/docs/getting-started/first-project?locale=de_DE"

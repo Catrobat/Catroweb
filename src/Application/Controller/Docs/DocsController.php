@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\LocaleSwitcher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /** The user docs, rendered from doc_page in the language of the visitor (or `?locale=`), English when untranslated. */
@@ -45,6 +46,7 @@ class DocsController extends AbstractController
     private readonly DocsSync $sync,
     private readonly DocsCatalog $catalog,
     private readonly TranslatorInterface $translator,
+    private readonly LocaleSwitcher $locale_switcher,
   ) {
   }
 
@@ -60,6 +62,7 @@ class DocsController extends AbstractController
     $path = '' === $path ? 'index' : trim($path, '/');
     [$locale, $explicit] = $this->locale($request);
     $query = $explicit ? ['locale' => $locale] : [];
+    $ui_locale = $this->library->shareLocale($locale);
     // Also with the language in the path, as the import's redirects name a translation (de_DE/bricks/looks).
     if (1 === preg_match('#^(?:([a-z]{2,3}(?:_[A-Za-z0-9]{2,8})?)/)?bricks(?:/([a-z]+))?(?:/|$)#', $path, $m)) {
       return $this->oldBrickPage($m[2] ?? '', $explicit ? $locale : ('' === ($m[1] ?? '') ? null : $m[1]));
@@ -76,7 +79,7 @@ class DocsController extends AbstractController
     $trail = DocsLibrary::trail($navigation, $path);
     $parent = $trail[\count($trail) - 2] ?? null;
     $link = fn (array $item): array => ['title' => $item['title'], 'url' => $this->guideUrl($item['path'], $query), 'current' => $item['path'] === $path];
-    $sections = $this->sections($navigation, $trail[0]['path'] ?? '', $query);
+    $sections = $this->sections($navigation, $trail[0]['path'] ?? '', $query, $ui_locale);
     /** @var list<array{path: string, title: string, children: array<mixed>}> $children */
     $children = ([] === $trail ? [] : $trail[\count($trail) - 1]['children']);
     /** @var list<array{path: string, title: string, children: array<mixed>}> $siblings */
@@ -87,14 +90,13 @@ class DocsController extends AbstractController
       UrlGeneratorInterface::ABSOLUTE_URL,
     );
 
-    return $this->render('Docs/DocsPage.html.twig', [
+    return $this->renderDocs('Docs/DocsPage.html.twig', $ui_locale, [
       'page' => $page,
       'body_html' => DocsMarkdown::withLinkLocale($page->getHtml(), $request->getUri(), $this->generateUrl('docs'), $query['locale'] ?? null),
       'docs_locale_query' => $query,
-      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
         $sections,
-        'index' === $path ? [] : [$this->home($query), ...array_map($link, $trail)],
+        'index' === $path ? [] : [$this->home($query, $ui_locale), ...array_map($link, $trail)],
         array_map($link, $siblings),
         null === $parent ? null : $this->guideUrl($parent['path'], $query),
         // The docs home lists the sections; on a phone the app sidebar that also lists them is closed.
@@ -199,6 +201,7 @@ class DocsController extends AbstractController
   {
     [$locale, $explicit] = $this->locale($request);
     $query = $explicit ? ['locale' => $locale] : [];
+    $ui_locale = $this->library->shareLocale($locale);
     $catalog = $this->catalog->catalog($locale);
     $categories = $catalog['categories'];
     $order = array_flip(array_keys(self::COMMON_CATEGORIES));
@@ -210,14 +213,13 @@ class DocsController extends AbstractController
     }
     unset($category);
 
-    return $this->render('Docs/DocsReference.html.twig', [
+    return $this->renderDocs('Docs/DocsReference.html.twig', $ui_locale, [
       'categories' => $categories,
       'formula' => $catalog['formula'],
       'docs_locale_query' => $query,
-      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
-        $this->sections($this->navigation($request, $locale), 'reference', $query),
-        [$this->home($query), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference', $query), 'current' => true]],
+        $this->sections($this->navigation($request, $locale), 'reference', $query, $ui_locale),
+        [$this->home($query, $ui_locale), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb', $ui_locale), 'url' => $this->generateUrl('docs_reference', $query), 'current' => true]],
       ),
     ] + $this->alternates('docs_reference', [], $locale, $explicit));
   }
@@ -254,6 +256,7 @@ class DocsController extends AbstractController
   {
     [$locale, $explicit] = $this->locale($request);
     $query = $explicit ? ['locale' => $locale] : [];
+    $ui_locale = $this->library->shareLocale($locale);
     $brick = $this->catalog->brick($type, $locale);
     if (null === $brick) {
       throw $this->createNotFoundException('Unknown brick.');
@@ -266,7 +269,7 @@ class DocsController extends AbstractController
     $bricks = array_values(array_filter($this->catalog->catalog($locale)['categories'], static fn (array $listed): bool => $listed['key'] === $category['key']))[0]['bricks'] ?? [];
     $category_url = $this->generateUrl('docs_reference', $query).'#'.$category['key'];
 
-    return $this->render('Docs/DocsBrick.html.twig', [
+    return $this->renderDocs('Docs/DocsBrick.html.twig', $ui_locale, [
       'type' => $type,
       'title' => $title,
       'brick_html' => $this->catalog->html($brick['brick']),
@@ -278,10 +281,9 @@ class DocsController extends AbstractController
       'edit_url' => $this->sync->brickEditUrl($type, null !== $this->library->brickProse($type, 'en')),
       'markdown_url' => $this->generateUrl('docs_brick_markdown', ['type' => $type] + $query),
       'docs_locale_query' => $query,
-      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
-        $this->sections($this->navigation($request, $locale), 'reference', $query),
-        [...$this->referenceCrumbs($query), ['title' => $category['name'], 'url' => $category_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
+        $this->sections($this->navigation($request, $locale), 'reference', $query, $ui_locale),
+        [...$this->referenceCrumbs($query, $ui_locale), ['title' => $category['name'], 'url' => $category_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
         array_map(fn (array $listed): array => [
           'title' => $this->catalog->title($listed),
           'url' => $this->generateUrl('docs_brick', ['type' => $listed['type']] + $query + ['category' => $category['key']]),
@@ -297,6 +299,7 @@ class DocsController extends AbstractController
   {
     [$locale, $explicit] = $this->locale($request);
     $query = $explicit ? ['locale' => $locale] : [];
+    $ui_locale = $this->library->shareLocale($locale);
     $element = $this->catalog->formula($name, $locale);
     if (null === $element) {
       throw $this->createNotFoundException('Unknown formula element.');
@@ -305,13 +308,12 @@ class DocsController extends AbstractController
     $title = $element['label'] ?? $element['name'];
     $kind_url = $this->generateUrl('docs_reference', $query).'#formula';
 
-    return $this->render('Docs/DocsFormula.html.twig', [
+    return $this->renderDocs('Docs/DocsFormula.html.twig', $ui_locale, [
       'element' => $element,
       'docs_locale_query' => $query,
-      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
-        $this->sections($this->navigation($request, $locale), 'reference', $query),
-        [...$this->referenceCrumbs($query), ['title' => $this->translator->trans('docs.reference.'.$element['kind'], [], 'catroweb'), 'url' => $kind_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
+        $this->sections($this->navigation($request, $locale), 'reference', $query, $ui_locale),
+        [...$this->referenceCrumbs($query, $ui_locale), ['title' => $this->translator->trans('docs.reference.'.$element['kind'], [], 'catroweb', $ui_locale), 'url' => $kind_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
         array_map(fn (array $listed): array => [
           'title' => $listed['label'] ?? $listed['name'],
           'url' => $this->generateUrl('docs_formula', ['name' => $listed['name']] + $query),
@@ -355,7 +357,7 @@ class DocsController extends AbstractController
    *
    * @return list<array{title: string, url: string, current: bool}>
    */
-  private function sections(array $navigation, string $current, array $query): array
+  private function sections(array $navigation, string $current, array $query, string $ui_locale): array
   {
     $sections = [];
     foreach ($navigation as $item) {
@@ -363,7 +365,7 @@ class DocsController extends AbstractController
         $sections[] = ['title' => $item['title'], 'url' => $this->guideUrl($item['path'], $query), 'current' => $item['path'] === $current];
       }
     }
-    $sections[] = ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference', $query), 'current' => 'reference' === $current];
+    $sections[] = ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb', $ui_locale), 'url' => $this->generateUrl('docs_reference', $query), 'current' => 'reference' === $current];
 
     return $sections;
   }
@@ -373,9 +375,9 @@ class DocsController extends AbstractController
    *
    * @return array{title: string, url: string, current: bool}
    */
-  private function home(array $query): array
+  private function home(array $query, string $ui_locale): array
   {
-    return ['title' => $this->translator->trans('docs.title', [], 'catroweb'), 'url' => $this->guideUrl('index', $query), 'current' => false];
+    return ['title' => $this->translator->trans('docs.title', [], 'catroweb', $ui_locale), 'url' => $this->guideUrl('index', $query), 'current' => false];
   }
 
   /**
@@ -383,9 +385,22 @@ class DocsController extends AbstractController
    *
    * @return list<array{title: string, url: string, current: bool}>
    */
-  private function referenceCrumbs(array $query): array
+  private function referenceCrumbs(array $query, string $ui_locale): array
   {
-    return [$this->home($query), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference', $query), 'current' => false]];
+    return [$this->home($query, $ui_locale), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb', $ui_locale), 'url' => $this->generateUrl('docs_reference', $query), 'current' => false]];
+  }
+
+  /**
+   * Use the same UI language throughout rendering, including the shared app chrome.
+   *
+   * @param array<string, mixed> $parameters
+   */
+  private function renderDocs(string $template, string $ui_locale, array $parameters): Response
+  {
+    return $this->locale_switcher->runWithLocale($ui_locale, fn (): Response => $this->render($template, [
+      'docs_ui_locale' => $ui_locale,
+      'docs_ui_direction' => \in_array(substr($ui_locale, 0, 2), ['ar', 'fa', 'he', 'ps', 'sd', 'ur'], true) ? 'rtl' : 'ltr',
+    ] + $parameters));
   }
 
   /** The absolute URL of the canonical theme root (`https://share.catrobat.org/app/`), for links in Markdown. */
