@@ -1071,6 +1071,11 @@ docs:
   video: "Odtwórz wideo (ładuje się z YouTube)"
   comments: "Komentarze i wskazówki"
   comments_empty: "Nie ma jeszcze komentarzy. Coś jest niejasne albo masz wskazówkę? Napisz ją tutaj."
+  reference_jump:
+    start: "Zacznij"
+    move: "Ruszaj"
+    looks: "Zmień wygląd"
+    sound: "Odtwórz dźwięk"
   reference:
     title: "Klocki i formuły"
     formula: "Elementy formuł"

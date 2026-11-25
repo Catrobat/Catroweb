@@ -1071,6 +1071,11 @@ docs:
   video: "Erreproduzitu bideoa (YouTubetik kargatzen da)"
   comments: "Iruzkinak eta aholkuak"
   comments_empty: "Oraindik ez dago iruzkinik. Zerbait ez dago argi, ala aholkuren bat duzu? Idatzi hemen."
+  reference_jump:
+    start: "Hasi"
+    move: "Mugitu"
+    looks: "Aldatu itxura"
+    sound: "Egin soinu bat"
   reference:
     title: "Blokeak eta formulak"
     formula: "Formula-elementuak"

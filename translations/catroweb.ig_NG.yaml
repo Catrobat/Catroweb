@@ -1049,6 +1049,11 @@ docs:
   video: "Kpọọ vidiyo (na-ebunye site na YouTube)"
   comments: "Nkọwa na ndụmọdụ"
   comments_empty: "Enweghị nkọwa ọ bụla ugbu a. Ọ dị ihe na-edoghị anya, ka ị nwere ndụmọdụ? Dee ya ebe a."
+  reference_jump:
+    start: "Malite"
+    move: "Megharịa"
+    looks: "Gbanwee ọdịdị"
+    sound: "Mee ụda"
   reference:
     title: "Blọọkụ na usoro"
     formula: "Akụkụ usoro"

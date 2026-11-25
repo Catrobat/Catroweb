@@ -1071,6 +1071,11 @@ docs:
   video: "Video abspielen (lädt von YouTube)"
   comments: "Kommentare und Tipps"
   comments_empty: "Noch keine Kommentare. Ist etwas unklar, oder hast du einen Tipp? Schreib ihn hier."
+  reference_jump:
+    start: "Starten"
+    move: "Bewegen"
+    looks: "Aussehen ändern"
+    sound: "Einen Ton abspielen"
   reference:
     title: "Bausteine und Formeln"
     formula: "Formelelemente"

@@ -1071,6 +1071,11 @@ docs:
   video: "Paleisti vaizdo įrašą (įkeliamas iš YouTube)"
   comments: "Komentarai ir patarimai"
   comments_empty: "Komentarų dar nėra. Kažkas neaišku, ar turi patarimą? Parašyk jį čia."
+  reference_jump:
+    start: "Pradėk"
+    move: "Judėk"
+    looks: "Keisk išvaizdą"
+    sound: "Paleisk garsą"
   reference:
     title: "Blokai ir formulės"
     formula: "Formulių elementai"

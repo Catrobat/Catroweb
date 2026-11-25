@@ -1071,6 +1071,11 @@ docs:
   video: "Play video (loads from YouTube)"
   comments: "Comments and tips"
   comments_empty: "No comments yet. Is something unclear, or do you have a tip? Write it here."
+  reference_jump:
+    start: "Start"
+    move: "Move"
+    looks: "Change looks"
+    sound: "Make a sound"
   reference:
     title: "Bricks and formulas"
     formula: "Formula elements"

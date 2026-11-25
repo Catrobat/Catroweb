@@ -356,6 +356,21 @@
       "name": "\u0001s:category_device\u0002",
       "bricks": [
         {
+          "type": "SetXBrick",
+          "commented_out": false,
+          "parts": [
+            {
+              "kind": "label",
+              "text": "\u0001s:brick_set_x\u0002"
+            },
+            {
+              "kind": "formula",
+              "text": "100"
+            }
+          ],
+          "category": "motion"
+        },
+        {
           "type": "ResetTimerBrick",
           "commented_out": false,
           "parts": [

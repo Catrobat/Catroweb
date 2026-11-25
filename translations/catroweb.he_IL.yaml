@@ -1071,6 +1071,11 @@ docs:
   video: "הפעל וידאו (נטען מ-YouTube)"
   comments: "תגובות וטיפים"
   comments_empty: "עדיין אין תגובות. משהו לא ברור, או שיש לך טיפ? כתבו אותו כאן."
+  reference_jump:
+    start: "להתחיל"
+    move: "לזוז"
+    looks: "לשנות מראה"
+    sound: "להשמיע צליל"
   reference:
     title: "לבנים ונוסחאות"
     formula: "רכיבי נוסחה"

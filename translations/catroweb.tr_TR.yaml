@@ -1070,6 +1070,11 @@ docs:
   video: "Videoyu oynat (YouTube'dan yüklenir)"
   comments: "Yorumlar ve ipuçları"
   comments_empty: "Henüz yorum yok. Anlaşılmayan bir şey mi var, yoksa bir ipucun mu var? Buraya yaz."
+  reference_jump:
+    start: "Başla"
+    move: "Hareket et"
+    looks: "Görünümü değiştir"
+    sound: "Ses çıkar"
   reference:
     title: "Bloklar ve formüller"
     formula: "Formül öğeleri"

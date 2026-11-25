@@ -1071,6 +1071,11 @@ docs:
   video: "Spela upp video (laddas från YouTube)"
   comments: "Kommentarer och tips"
   comments_empty: "Inga kommentarer än. Är något oklart, eller har du ett tips? Skriv det här."
+  reference_jump:
+    start: "Starta"
+    move: "Flytta"
+    looks: "Byt utseende"
+    sound: "Spela ett ljud"
   reference:
     title: "Block och formler"
     formula: "Formelelement"

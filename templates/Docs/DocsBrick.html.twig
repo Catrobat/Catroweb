@@ -10,7 +10,7 @@
     <p class="docs-reference__meta">
       <code>{{ type }}</code>
       {% for category in categories %}
-        <a class="docs-reference__category-link" href="{{ path('docs_reference', docs_locale_query) }}#{{ category.key }}">{{ category.name }}</a>
+        <a class="docs-reference__category-link{% if loop.first %} docs-reference__category-link--primary{% endif %}" href="{{ path('docs_reference', docs_locale_query) }}#{{ category.key }}">{{ category.name }}</a>
       {% endfor %}
     </p>
 

@@ -1071,6 +1071,11 @@ docs:
   video: "Afspil video (indlæses fra YouTube)"
   comments: "Kommentarer og tips"
   comments_empty: "Ingen kommentarer endnu. Er noget uklart, eller har du et tip? Skriv det her."
+  reference_jump:
+    start: "Start"
+    move: "Flyt"
+    looks: "Skift udseende"
+    sound: "Lav en lyd"
   reference:
     title: "Klodser og formler"
     formula: "Formelelementer"

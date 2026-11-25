@@ -1071,6 +1071,11 @@ docs:
   video: "Reproducir vídeo (cárgase desde YouTube)"
   comments: "Comentarios e consellos"
   comments_empty: "Aínda non hai comentarios. Hai algo que non está claro ou tes un consello? Escríbeo aquí."
+  reference_jump:
+    start: "Comeza"
+    move: "Move"
+    looks: "Cambia o aspecto"
+    sound: "Fai un son"
   reference:
     title: "Bloques e fórmulas"
     formula: "Elementos de fórmula"

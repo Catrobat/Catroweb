@@ -1071,6 +1071,11 @@ docs:
   video: "Pokreni video (učitava se s YouTubea)"
   comments: "Komentari i savjeti"
   comments_empty: "Još nema komentara. Je li nešto nejasno ili imaš savjet? Napiši ga ovdje."
+  reference_jump:
+    start: "Počni"
+    move: "Pomakni"
+    looks: "Promijeni izgled"
+    sound: "Pusti zvuk"
   reference:
     title: "Blokovi i formule"
     formula: "Elementi formula"

@@ -1071,6 +1071,11 @@ docs:
   video: "I-play ang video (naglo-load mula sa YouTube)"
   comments: "Mga komento at tip"
   comments_empty: "Wala pang komento. May hindi ba malinaw, o may tip ka? Isulat mo rito."
+  reference_jump:
+    start: "Magsimula"
+    move: "Gumalaw"
+    looks: "Palitan ang hitsura"
+    sound: "Magpatunog"
   reference:
     title: "Mga brick at formula"
     formula: "Mga elemento ng formula"

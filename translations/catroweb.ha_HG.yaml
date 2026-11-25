@@ -1049,6 +1049,11 @@ docs:
   video: "Kunna bidiyo (yana lodawa daga YouTube)"
   comments: "Sharhi da shawarwari"
   comments_empty: "Babu sharhi tukuna. Akwai abin da bai fito fili ba, ko kana da shawara? Rubuta shi a nan."
+  reference_jump:
+    start: "Fara"
+    move: "Motsa"
+    looks: "Canja kamanni"
+    sound: "Yi sauti"
   reference:
     title: "Bulo-bulo da dabaru"
     formula: "Abubuwan dabara"

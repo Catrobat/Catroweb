@@ -1074,6 +1074,11 @@ docs:
   video: "پخش ویدیو (از YouTube بارگذاری می‌شود)"
   comments: "نظرها و نکته‌ها"
   comments_empty: "هنوز نظری نیست. چیزی واضح نیست یا نکته‌ای داری؟ اینجا بنویس."
+  reference_jump:
+    start: "شروع کن"
+    move: "حرکت بده"
+    looks: "ظاهر را تغییر بده"
+    sound: "یک صدا پخش کن"
   reference:
     title: "بلاک‌ها و فرمول‌ها"
     formula: "اجزای فرمول"

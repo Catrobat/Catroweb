@@ -1071,6 +1071,11 @@ docs:
   video: "Predvajaj video (naloži se z YouTuba)"
   comments: "Komentarji in nasveti"
   comments_empty: "Še ni komentarjev. Je kaj nejasno ali imaš nasvet? Napiši ga sem."
+  reference_jump:
+    start: "Začni"
+    move: "Premakni"
+    looks: "Spremeni videz"
+    sound: "Predvajaj zvok"
   reference:
     title: "Bloki in formule"
     formula: "Elementi formul"

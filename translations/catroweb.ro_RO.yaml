@@ -1049,6 +1049,11 @@ docs:
   video: "Redă videoclipul (se încarcă de pe YouTube)"
   comments: "Comentarii și sfaturi"
   comments_empty: "Încă nu există comentarii. E ceva neclar sau ai un sfat? Scrie-l aici."
+  reference_jump:
+    start: "Începe"
+    move: "Mișcă"
+    looks: "Schimbă aspectul"
+    sound: "Redă un sunet"
   reference:
     title: "Blocuri și formule"
     formula: "Elemente de formulă"

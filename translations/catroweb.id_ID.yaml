@@ -1051,6 +1051,11 @@ docs:
   video: "Putar video (dimuat dari YouTube)"
   comments: "Komentar dan tips"
   comments_empty: "Belum ada komentar. Ada yang kurang jelas, atau punya tips? Tulis di sini."
+  reference_jump:
+    start: "Mulai"
+    move: "Gerakkan"
+    looks: "Ubah tampilan"
+    sound: "Bunyikan"
   reference:
     title: "Balok dan rumus"
     formula: "Elemen rumus"

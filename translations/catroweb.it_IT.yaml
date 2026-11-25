@@ -1071,6 +1071,11 @@ docs:
   video: "Riproduci video (caricato da YouTube)"
   comments: "Commenti e suggerimenti"
   comments_empty: "Ancora nessun commento. Qualcosa non è chiaro o hai un suggerimento? Scrivilo qui."
+  reference_jump:
+    start: "Inizia"
+    move: "Muovi"
+    looks: "Cambia aspetto"
+    sound: "Fai un suono"
   reference:
     title: "Mattoncini e formule"
     formula: "Elementi delle formule"

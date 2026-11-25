@@ -1072,6 +1072,11 @@ docs:
   video: "Speel video (laai van YouTube)"
   comments: "Kommentaar en wenke"
   comments_empty: "Nog geen kommentaar nie. Is iets onduidelik, of het jy 'n wenk? Skryf dit hier."
+  reference_jump:
+    start: "Begin"
+    move: "Beweeg"
+    looks: "Verander die voorkoms"
+    sound: "Maak ’n geluid"
   reference:
     title: "Blokke en formules"
     formula: "Formule-elemente"

@@ -1071,6 +1071,11 @@ docs:
   video: "Toista video (ladataan YouTubesta)"
   comments: "Kommentit ja vinkit"
   comments_empty: "Ei vielä kommentteja. Onko jokin epäselvää, vai onko sinulla vinkki? Kirjoita se tähän."
+  reference_jump:
+    start: "Aloita"
+    move: "Liiku"
+    looks: "Muuta ulkonäköä"
+    sound: "Tee ääni"
   reference:
     title: "Palikat ja kaavat"
     formula: "Kaavan osat"

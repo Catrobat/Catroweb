@@ -1049,6 +1049,11 @@ docs:
   video: "Ṣe fídíò (ó ń gbé wọlé láti YouTube)"
   comments: "Àwọn àsọyé àti ìmọ̀ràn"
   comments_empty: "Kò sí àsọyé kankan síbẹ̀. Ṣé ohun kan kò yé ọ, tàbí o ní ìmọ̀ràn kan? Kọ ọ́ síbí."
+  reference_jump:
+    start: "Bẹ̀rẹ̀"
+    move: "Gbé"
+    looks: "Yí ìrísí padà"
+    sound: "Mú ohùn jáde"
   reference:
     title: "Àwọn búlọ́ọ̀kù àti àgbékalẹ̀"
     formula: "Àwọn ẹ̀yà àgbékalẹ̀"

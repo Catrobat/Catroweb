@@ -1071,6 +1071,11 @@ docs:
   video: "Main video (dimuatkan dari YouTube)"
   comments: "Komen dan petua"
   comments_empty: "Belum ada komen. Ada yang kurang jelas, atau ada petua? Tulis di sini."
+  reference_jump:
+    start: "Mula"
+    move: "Gerak"
+    looks: "Ubah rupa"
+    sound: "Buat bunyi"
   reference:
     title: "Blok dan formula"
     formula: "Elemen formula"

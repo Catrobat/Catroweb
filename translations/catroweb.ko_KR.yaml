@@ -1051,6 +1051,11 @@ docs:
   video: "동영상 재생 (YouTube에서 불러옴)"
   comments: "댓글과 팁"
   comments_empty: "아직 댓글이 없어요. 이해하기 어려운 부분이 있거나 팁이 있나요? 여기에 적어 주세요."
+  reference_jump:
+    start: "시작하기"
+    move: "움직이기"
+    looks: "모양 바꾸기"
+    sound: "소리 내기"
   reference:
     title: "블록과 수식"
     formula: "수식 요소"
