@@ -18,7 +18,7 @@
 
     {% set has_formula = formula.functions is not empty or formula.sensors is not empty or formula.operators is not empty %}
     {% if categories is not empty or has_formula %}
-      <nav class="docs-reference__jump" aria-label="{{ 'docs.on_this_page'|trans({}, 'catroweb', docs_reference_locale) }}">
+      <nav class="docs-reference__jump" dir="auto" aria-label="{{ 'docs.on_this_page'|trans({}, 'catroweb', docs_reference_locale) }}">
         <ul class="docs-reference__jump-list">
           {% for category in categories|filter(category => category.common) %}
             <li><a href="#{{ category.key }}">{% if category.jump_label %}{{ ('docs.reference_jump.' ~ category.jump_label)|trans({}, 'catroweb', docs_reference_locale) }}{% else %}{{ category.name }}{% endif %}</a></li>
