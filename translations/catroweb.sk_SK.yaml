@@ -1077,6 +1077,7 @@ docs:
     move: "Pohni"
     looks: "Zmeň vzhľad"
     sound: "Prehraj zvuk"
+    more: "Ďalšie skupiny"
   reference:
     title: "Bloky a vzorce"
     formula: "Prvky vzorcov"

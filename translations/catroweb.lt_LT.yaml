@@ -1076,6 +1076,7 @@ docs:
     move: "Judėk"
     looks: "Keisk išvaizdą"
     sound: "Paleisk garsą"
+    more: "Daugiau grupių"
   reference:
     title: "Blokai ir formulės"
     formula: "Formulių elementai"

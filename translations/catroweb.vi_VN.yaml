@@ -1077,6 +1077,7 @@ docs:
     move: "Di chuyển"
     looks: "Đổi vẻ ngoài"
     sound: "Phát âm thanh"
+    more: "Thêm nhóm"
   reference:
     title: "Khối lệnh và công thức"
     formula: "Thành phần công thức"

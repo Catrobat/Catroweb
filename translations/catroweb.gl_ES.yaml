@@ -1076,6 +1076,7 @@ docs:
     move: "Move"
     looks: "Cambia o aspecto"
     sound: "Fai un son"
+    more: "Máis grupos"
   reference:
     title: "Bloques e fórmulas"
     formula: "Elementos de fórmula"

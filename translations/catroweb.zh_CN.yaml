@@ -1059,6 +1059,7 @@ docs:
     move: "移动"
     looks: "改变外观"
     sound: "发出声音"
+    more: "更多分组"
   reference:
     title: "积木和公式"
     formula: "公式元素"

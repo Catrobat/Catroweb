@@ -1076,6 +1076,7 @@ docs:
     move: "Mugitu"
     looks: "Aldatu itxura"
     sound: "Egin soinu bat"
+    more: "Talde gehiago"
   reference:
     title: "Blokeak eta formulak"
     formula: "Formula-elementuak"

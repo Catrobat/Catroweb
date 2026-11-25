@@ -1076,6 +1076,7 @@ docs:
     move: "تحرّك"
     looks: "غيّر المظهر"
     sound: "أصدر صوتًا"
+    more: "مجموعات أخرى"
   reference:
     title: "اللبنات والصيغ"
     formula: "عناصر الصيغ"

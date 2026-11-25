@@ -1076,6 +1076,7 @@ docs:
     move: "Flytta"
     looks: "Byt utseende"
     sound: "Spela ett ljud"
+    more: "Fler grupper"
   reference:
     title: "Block och formler"
     formula: "Formelelement"

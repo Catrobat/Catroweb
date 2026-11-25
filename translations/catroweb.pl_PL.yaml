@@ -1076,6 +1076,7 @@ docs:
     move: "Ruszaj"
     looks: "Zmień wygląd"
     sound: "Odtwórz dźwięk"
+    more: "Więcej grup"
   reference:
     title: "Klocki i formuły"
     formula: "Elementy formuł"

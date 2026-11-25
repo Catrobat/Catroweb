@@ -1076,6 +1076,7 @@ docs:
     move: "Pomeri"
     looks: "Promeni izgled"
     sound: "Pusti zvuk"
+    more: "Još grupa"
   reference:
     title: "Blokovi i formule"
     formula: "Elementi formula"

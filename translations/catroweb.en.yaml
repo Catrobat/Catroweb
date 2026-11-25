@@ -1160,6 +1160,7 @@ docs:
     move: "Move"
     looks: "Change looks"
     sound: "Make a sound"
+    more: "More groups"
   reference:
     title: "Bricks and formulas"
     formula: "Formula elements"

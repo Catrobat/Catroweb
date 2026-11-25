@@ -1076,6 +1076,7 @@ docs:
     move: "Bewegen"
     looks: "Aussehen ändern"
     sound: "Einen Ton abspielen"
+    more: "Weitere Gruppen"
   reference:
     title: "Bausteine und Formeln"
     formula: "Formelelemente"

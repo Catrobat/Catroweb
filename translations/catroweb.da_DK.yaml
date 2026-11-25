@@ -1076,6 +1076,7 @@ docs:
     move: "Flyt"
     looks: "Skift udseende"
     sound: "Lav en lyd"
+    more: "Flere grupper"
   reference:
     title: "Klodser og formler"
     formula: "Formelelementer"

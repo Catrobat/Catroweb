@@ -1054,6 +1054,7 @@ docs:
     move: "Mișcă"
     looks: "Schimbă aspectul"
     sound: "Redă un sunet"
+    more: "Mai multe grupuri"
   reference:
     title: "Blocuri și formule"
     formula: "Elemente de formulă"

@@ -212,7 +212,6 @@ class DocsController extends AbstractController
 
     return $this->render('Docs/DocsReference.html.twig', [
       'categories' => $categories,
-      'docs_reference_locale' => $this->shareLocale($locale),
       'formula' => $catalog['formula'],
       'docs_locale_query' => $query,
       'docs_ui_locale' => $this->library->shareLocale($locale),

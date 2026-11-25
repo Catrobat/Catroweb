@@ -1075,6 +1075,7 @@ docs:
     move: "Hareket et"
     looks: "Görünümü değiştir"
     sound: "Ses çıkar"
+    more: "Diğer gruplar"
   reference:
     title: "Bloklar ve formüller"
     formula: "Formül öğeleri"

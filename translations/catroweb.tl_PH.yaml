@@ -1076,6 +1076,7 @@ docs:
     move: "Gumalaw"
     looks: "Palitan ang hitsura"
     sound: "Magpatunog"
+    more: "Iba pang grupo"
   reference:
     title: "Mga brick at formula"
     formula: "Mga elemento ng formula"

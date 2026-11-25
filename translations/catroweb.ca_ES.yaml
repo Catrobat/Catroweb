@@ -1076,6 +1076,7 @@ docs:
     move: "Mou"
     looks: "Canvia l’aspecte"
     sound: "Fes sonar"
+    more: "Més grups"
   reference:
     title: "Blocs i fórmules"
     formula: "Elements de fórmula"

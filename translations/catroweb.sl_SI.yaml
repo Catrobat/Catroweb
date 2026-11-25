@@ -1076,6 +1076,7 @@ docs:
     move: "Premakni"
     looks: "Spremeni videz"
     sound: "Predvajaj zvok"
+    more: "Več skupin"
   reference:
     title: "Bloki in formule"
     formula: "Elementi formul"

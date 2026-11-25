@@ -1050,10 +1050,11 @@ docs:
   comments: "留言與小技巧"
   comments_empty: "還沒有留言。有不清楚的地方，或是有小技巧嗎？寫在這裡吧。"
   reference_jump:
-    start: "開始"
-    move: "移動"
-    looks: "改變外觀"
-    sound: "發出聲音"
+    start: "Fi ase"
+    move: "Fa kɔ baabi foforo"
+    looks: "Sesa sɛnea ɛte"
+    sound: "Yɛ nnyigyei"
+    more: "Akuw afoforo"
   reference:
     title: "Blɔk ne fɔmula"
     formula: "Fɔmula mu nneɛma"

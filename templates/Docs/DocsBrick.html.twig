@@ -7,7 +7,7 @@
 {% block docs_article %}
   <article class="docs-article">
     <h1 class="docs-article__title">{{ title }}</h1>
-    {% set brick_language = docs_locale_query.locale|default(app.request.locale)|slice(0, 2)|lower %}
+    {% set brick_language = docs_ui_locale|slice(0, 2)|lower %}
     <p class="docs-reference__meta" dir="{{ brick_language in ['ar', 'fa', 'he', 'ps', 'sd', 'ur'] ? 'rtl' : 'ltr' }}">
       <code dir="ltr">{{ type }}</code>
       {% for category in categories %}

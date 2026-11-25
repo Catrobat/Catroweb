@@ -1076,6 +1076,7 @@ docs:
     move: "Liiku"
     looks: "Muuta ulkonäköä"
     sound: "Tee ääni"
+    more: "Lisää ryhmiä"
   reference:
     title: "Palikat ja kaavat"
     formula: "Kaavan osat"

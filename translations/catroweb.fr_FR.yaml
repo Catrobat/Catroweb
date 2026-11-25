@@ -1076,6 +1076,7 @@ docs:
     move: "Bouger"
     looks: "Changer l’apparence"
     sound: "Jouer un son"
+    more: "Plus de groupes"
   reference:
     title: "Briques et formules"
     formula: "Éléments de formule"

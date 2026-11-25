@@ -90,3 +90,9 @@ Feature: Brick and formula reference pages, generated from Catroid's catalog
     And I wait for the page to be loaded
     Then the element ".docs-reference__category-link--primary" should contain "Device"
     And I should see a ".docs-reference__category-link--primary[href$='/docs/reference#category_device']" element
+
+  Scenario: The reference uses the chosen locale for the title and jump links
+    When I go to "/app/docs/reference?locale=de"
+    And I wait for the page to be loaded
+    Then the element ".docs-article__title" should contain "Bausteine und Formeln"
+    And the element ".docs-reference__jump summary" should contain "Weitere Gruppen"

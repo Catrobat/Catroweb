@@ -1076,6 +1076,7 @@ docs:
     move: "Lëviz"
     looks: "Ndrysho pamjen"
     sound: "Bëj një tingull"
+    more: "Më shumë grupe"
   reference:
     title: "Blloqe dhe formula"
     formula: "Elementet e formulave"

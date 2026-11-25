@@ -1076,6 +1076,7 @@ docs:
     move: "Muovi"
     looks: "Cambia aspetto"
     sound: "Fai un suono"
+    more: "Altri gruppi"
   reference:
     title: "Mattoncini e formule"
     formula: "Elementi delle formule"

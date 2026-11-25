@@ -1076,6 +1076,7 @@ docs:
     move: "حرکت دو"
     looks: "شکل بدلو"
     sound: "آواز نکالو"
+    more: "مزید گروپ"
   reference:
     title: "بلاکس اور فارمولے"
     formula: "فارمولے کے اجزا"

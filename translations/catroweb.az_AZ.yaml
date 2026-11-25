@@ -1076,6 +1076,7 @@ docs:
     move: "Hərəkət et"
     looks: "Görünüşü dəyiş"
     sound: "Səs çıxar"
+    more: "Daha çox qrup"
   reference:
     title: "Bloklar və düsturlar"
     formula: "Düstur elementləri"

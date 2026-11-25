@@ -1076,6 +1076,7 @@ docs:
     move: "নড়াচড়া করো"
     looks: "চেহারা বদলাও"
     sound: "শব্দ করো"
+    more: "আরও বিভাগ"
   reference:
     title: "ব্লক ও সূত্র"
     formula: "সূত্রের উপাদান"

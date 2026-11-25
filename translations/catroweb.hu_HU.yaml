@@ -1076,6 +1076,7 @@ docs:
     move: "Mozgás"
     looks: "Kinézet módosítása"
     sound: "Hang lejátszása"
+    more: "További csoportok"
   reference:
     title: "Blokkok és képletek"
     formula: "Képletelemek"

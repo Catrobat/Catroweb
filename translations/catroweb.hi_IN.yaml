@@ -1058,6 +1058,7 @@ docs:
     move: "चलाओ"
     looks: "रूप बदलो"
     sound: "आवाज़ करो"
+    more: "और समूह"
   reference:
     title: "ब्लॉक और सूत्र"
     formula: "सूत्र के तत्व"

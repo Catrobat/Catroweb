@@ -1077,6 +1077,7 @@ docs:
     move: "Beweeg"
     looks: "Verander die voorkoms"
     sound: "Maak ’n geluid"
+    more: "Meer groepe"
   reference:
     title: "Blokke en formules"
     formula: "Formule-elemente"

@@ -1076,6 +1076,7 @@ docs:
     move: "Gerak"
     looks: "Ubah rupa"
     sound: "Buat bunyi"
+    more: "Kumpulan lain"
   reference:
     title: "Blok dan formula"
     formula: "Elemen formula"

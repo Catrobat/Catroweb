@@ -1054,6 +1054,7 @@ docs:
     move: "Harakatlantir"
     looks: "Ko‘rinishni o‘zgartir"
     sound: "Ovoz chiqar"
+    more: "Ko‘proq guruhlar"
   reference:
     title: "Bloklar va formulalar"
     formula: "Formula elementlari"
