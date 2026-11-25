@@ -138,7 +138,7 @@ Feature: User docs pages, synced from user-docs/
     Then I should see an "html[lang|='de']" element
     And the element ".docs-breadcrumb li:first-child" should contain "Dokumentation"
     And the element "#sidebar .sidebar-docs-sections" should contain "Bausteine und Formeln"
-    And the element ".docs-toc__title" should contain "Auf dieser Seite"
+    And the element ".docs-article > .docs-toc .docs-toc__title" should contain "Auf dieser Seite"
     And I should see "Kommentare und Tipps"
     And I should not see "Bricks and formulas"
     And I should not see "On this page"
