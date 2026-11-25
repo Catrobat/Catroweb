@@ -284,6 +284,7 @@
   align-items: center;
   gap: 0.75rem;
   min-block-size: 44px;
+  padding-inline: 0.25rem;
   border-radius: 0.75rem;
   overflow-wrap: anywhere;
 }
@@ -293,7 +294,7 @@
   outline-offset: 3px;
 }
 
-.docs-pager__link--next {
+.docs-pager--lesson .docs-pager__link--next {
   justify-content: space-between;
   justify-self: stretch;
   min-block-size: 5rem;
@@ -311,7 +312,6 @@
 }
 
 .docs-pager__link--previous {
-  padding-inline: 0.25rem;
   font-size: 0.95rem;
 }
 

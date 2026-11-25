@@ -33,7 +33,7 @@
     {% endif %}
 
     {% if previous or next %}
-      <nav class="docs-pager" aria-label="{{ ('previous'|trans({}, 'catroweb') ~ ' / ' ~ 'next'|trans({}, 'catroweb'))|e('html_attr') }}">
+      <nav class="docs-pager{% if page.path != 'index' and docs_nav.pages is empty %} docs-pager--lesson{% endif %}" aria-label="{{ ('previous'|trans({}, 'catroweb') ~ ' / ' ~ 'next'|trans({}, 'catroweb'))|e('html_attr') }}">
         {% if next %}
           <a class="docs-pager__link docs-pager__link--next" rel="next" href="{{ path('docs', {path: next.path == 'index' ? '' : next.path}|merge(docs_locale_query)) }}">
             <span>

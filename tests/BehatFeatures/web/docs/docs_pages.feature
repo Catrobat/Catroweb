@@ -97,7 +97,7 @@ Feature: User docs pages, synced from user-docs/
     Given I use a 390 x 844 viewport
     When I go to "/app/docs/getting-started/first-project?locale=en"
     And I wait for the page to be loaded
-    Then the element ".docs-pager__link--next strong" should contain "Make your cat jump"
+    Then the element ".docs-pager--lesson .docs-pager__link--next strong" should contain "Make your cat jump"
     And I should see a ".docs-pager__link--previous[rel='prev']" element
     When I click ".docs-pager__link--next"
     And I wait for the page to be loaded
