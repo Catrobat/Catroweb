@@ -22,7 +22,7 @@
       </nav>
     {% endif %}
 
-    <div class="docs-content">{{ page.html|raw }}</div>
+    <div class="docs-content">{{ body_html|raw }}</div>
 
     {% if docs_nav.pages is not empty %}
       <ul class="docs-pages">
@@ -34,12 +34,12 @@
 
     <nav class="docs-pager" aria-label="{{ ('previous'|trans({}, 'catroweb') ~ ' / ' ~ 'next'|trans({}, 'catroweb'))|e('html_attr') }}">
       {% if previous %}
-        <a class="docs-pager__link docs-pager__link--previous" rel="prev" href="{{ path('docs', {path: previous.path == 'index' ? '' : previous.path}) }}">
+        <a class="docs-pager__link docs-pager__link--previous" rel="prev" href="{{ path('docs', {path: previous.path == 'index' ? '' : previous.path}|merge(docs_locale_query)) }}">
           <span class="docs-pager__label">{{ 'previous'|trans({}, 'catroweb') }}</span>{{ previous.title }}
         </a>
       {% endif %}
       {% if next %}
-        <a class="docs-pager__link docs-pager__link--next" rel="next" href="{{ path('docs', {path: next.path == 'index' ? '' : next.path}) }}">
+        <a class="docs-pager__link docs-pager__link--next" rel="next" href="{{ path('docs', {path: next.path == 'index' ? '' : next.path}|merge(docs_locale_query)) }}">
           <span class="docs-pager__label">{{ 'next'|trans({}, 'catroweb') }}</span>{{ next.title }}
         </a>
       {% endif %}

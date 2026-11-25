@@ -10,7 +10,7 @@
     <p class="docs-reference__meta">
       <code>{{ type }}</code>
       {% for category in categories %}
-        <a class="docs-reference__category-link" href="{{ path('docs_reference') }}#{{ category.key }}">{{ category.name }}</a>
+        <a class="docs-reference__category-link" href="{{ path('docs_reference', docs_locale_query) }}#{{ category.key }}">{{ category.name }}</a>
       {% endfor %}
     </p>
 
@@ -22,7 +22,7 @@
 
     {% if prose %}
       {{ translation_note(prose, fallback) }}
-      <div class="docs-content" lang="{{ prose.locale|replace({_: '-'}) }}">{{ prose.html|raw }}</div>
+      <div class="docs-content" lang="{{ prose.locale|replace({_: '-'}) }}">{{ body_html|raw }}</div>
     {% else %}
       <p class="docs-note docs-note--quiet">{{ 'docs.reference.no_prose'|trans({}, 'catroweb') }}</p>
     {% endif %}

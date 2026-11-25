@@ -3,11 +3,12 @@ title: Laufstich
 description: Lässt die Stickmaschine laufend mit einer variablen Länge sticken.
 order: 0
 reviewed: true
+source_hash: 'd99b4a144069087dbe728b87f02266f53d7251471379bd08cee96ca67d584dbc'
 ---
 
 Lässt die Stickmaschine laufend mit einer variablen Länge sticken.
 
-![](https://catrobat.org/wp-content/uploads/2024/08/Starte_Laufstich_mit_Lange_10-2.png)
+![](../../../../media/bricks/Starte_Laufstich_mit_Lange_10.png)
 
 Die Maschine startet einen Laufstich der **alle 10 Schritte** sticht.
 

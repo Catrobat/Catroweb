@@ -126,6 +126,28 @@ final class DocsSyncTest extends KernelTestCase
     }
   }
 
+  public function testDocsHtmlKeepsExplicitLanguageSeparateFromCanonicalUrls(): void
+  {
+    $this->sync->import(DocsSync::readDirectory(self::FIXTURES));
+    $kernel = self::$kernel;
+    $this->assertNotNull($kernel);
+    $path = '/app/docs/getting-started/first-project';
+    $get = static fn (string $url): Response => $kernel->handle(
+      Request::create($url, server: ['HTTP_ACCEPT_LANGUAGE' => 'de']),
+      HttpKernelInterface::MAIN_REQUEST,
+      false,
+    );
+
+    $implicit = $get($path);
+    $explicit = $get($path.'?locale=de_DE');
+    $this->assertSame(Response::HTTP_OK, $implicit->getStatusCode());
+    $this->assertSame(Response::HTTP_OK, $explicit->getStatusCode());
+    $this->assertStringContainsString('href="../tutorials/jump#jump-higher"', (string) $implicit->getContent());
+    $this->assertStringContainsString('href="../tutorials/jump?locale=de_DE#jump-higher"', (string) $explicit->getContent());
+    $this->assertStringContainsString('rel="canonical" href="http://localhost'.$path.'"', (string) $explicit->getContent());
+    $this->assertStringContainsString('rel="alternate" hreflang="x-default" href="http://localhost'.$path.'"', (string) $explicit->getContent());
+  }
+
   public function testServesThePagesAsMarkdownAndLlmsTxt(): void
   {
     $this->sync->import(DocsSync::readDirectory(self::FIXTURES));

@@ -138,7 +138,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ path('docs') }}" id="btn-docs"
+      <a class="nav-link" href="{{ path('docs', docs_locale_query|default({})) }}" id="btn-docs"
          {% if docs_nav is defined and docs_nav.crumbs is empty %}aria-current="page"{% endif %}>
         <span class="sidebar-link-icon material-icons">menu_book</span>
         <span class="sidebar-link-text">{{ 'docs.title'|trans({}, 'catroweb') }}</span>

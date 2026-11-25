@@ -21,7 +21,7 @@
         <h2 class="docs-reference__heading cv-block cv-block--{{ category.color }}">{{ category.name }}</h2>
         <ul class="docs-reference__bricks">
           {% for brick in category.bricks %}
-            <li><a class="docs-reference__brick" href="{{ path('docs_brick', {type: brick.type}) }}">{{ category.html[loop.index0]|raw }}</a></li>
+            <li><a class="docs-reference__brick" href="{{ path('docs_brick', {type: brick.type}|merge(docs_locale_query)) }}">{{ category.html[loop.index0]|raw }}</a></li>
           {% endfor %}
         </ul>
       </section>
@@ -34,7 +34,7 @@
           <h3>{{ label }}</h3>
           <ul class="docs-reference__formula">
             {% for element in formula[kind] %}
-              <li><a href="{{ path('docs_formula', {name: element.name}) }}"><span class="cv-field">{{ element.label ?? element.name }}</span></a></li>
+              <li><a href="{{ path('docs_formula', {name: element.name}|merge(docs_locale_query)) }}"><span class="cv-field">{{ element.label ?? element.name }}</span></a></li>
             {% endfor %}
           </ul>
         {% endfor %}
