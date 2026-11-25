@@ -92,26 +92,15 @@ final class DocsMarkdownTest extends TestCase
 
   public function testKeepsOldMediaLibraryBookmarksAlongsideTheCurrentHeadings(): void
   {
-    $english = <<<'MARKDOWN'
-      ### Add a new actor from the media library
-      ### Add a background from the media library
-      ### Add a sound from the media library
-      ### Add an object from the media library
-      MARKDOWN;
-    $german = <<<'MARKDOWN'
-      ### Füge eine neue Figur aus der Medienbibliothek hinzu
-      ### Füge einen Hintergrund aus der Medienbibliothek hinzu
-      ### Füge einen Sound aus der Medienbibliothek hinzu
-      ### Füge ein Objekt aus der Medienbibliothek hinzu
-      MARKDOWN;
     foreach ([
-      ['en', $english, ['Actor', 'Background', 'Sound', 'Object']],
-      ['de_DE', $german, ['Figur-Medienbibliothek', 'Hintergrund-Medienbibliothek', 'Sound-Medienbibliothek', 'Objekt-Medienbibliothek']],
-    ] as [$locale, $markdown, $old_ids]) {
-      $result = $this->markdown()->convert($markdown, $locale.'/getting-started/elements/medialibrary.md');
-      $this->assertCount(4, $result['toc']);
-      foreach ($old_ids as $index => $old_id) {
-        $this->assertStringContainsString('<h3 id="'.$result['toc'][$index]['id'].'"><span id="'.$old_id.'"></span>', $result['html']);
+      ['en', ['Actor', 'Background', 'Sound', 'Object']],
+      ['de_DE', ['Figur-Medienbibliothek', 'Hintergrund-Medienbibliothek', 'Sound-Medienbibliothek', 'Objekt-Medienbibliothek']],
+    ] as [$locale, $old_ids]) {
+      // The real pages: a reworded heading must fail here, not silently drop a bookmark.
+      $file = $locale.'/getting-started/elements/medialibrary.md';
+      $html = $this->markdown()->convert((string) file_get_contents(__DIR__.'/../../../user-docs/'.$file), $file)['html'];
+      foreach ($old_ids as $old_id) {
+        $this->assertMatchesRegularExpression('/<h3 id="[^"]+"><span id="'.$old_id.'"><\/span>/', $html);
       }
     }
   }
