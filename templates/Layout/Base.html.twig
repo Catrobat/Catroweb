@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: https://ogp.me/ns#" lang="{{ app.request.locale|slice(0, 2) }}">
+<html prefix="og: https://ogp.me/ns#" lang="{{ docs_ui_locale is defined and (docs_only is not defined or docs_only) ? docs_ui_locale|replace({_: '-'}) : app.request.locale|slice(0, 2) }}">
 <head>
   <meta charset="UTF-8">
   <script>

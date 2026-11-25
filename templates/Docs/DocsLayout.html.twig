@@ -4,13 +4,13 @@
 {% extends 'Layout/Base.html.twig' %}
 
 {# Whether the shown text is English standing in, an outdated or an automatic translation. #}
-{% macro translation_note(page, fallback) %}
+{% macro translation_note(page, fallback, ui_locale) %}
   {% if fallback %}
-    <p class="docs-note" lang="{{ app.request.locale|slice(0, 2) }}">{{ 'docs.fallback'|trans({}, 'catroweb') }}</p>
+    <p class="docs-note" lang="{{ ui_locale|replace({_: '-'}) }}">{{ 'docs.fallback'|trans({}, 'catroweb') }}</p>
   {% elseif page.translationState == 'stale' %}
-    <p class="docs-note" lang="{{ app.request.locale|slice(0, 2) }}">{{ 'docs.stale'|trans({}, 'catroweb') }}</p>
+    <p class="docs-note" lang="{{ ui_locale|replace({_: '-'}) }}">{{ 'docs.stale'|trans({}, 'catroweb') }}</p>
   {% elseif page.translationState == 'current' and not page.reviewed %}
-    <p class="docs-note docs-note--quiet" lang="{{ app.request.locale|slice(0, 2) }}">{{ 'docs.machine_translated'|trans({}, 'catroweb') }}</p>
+    <p class="docs-note docs-note--quiet" lang="{{ ui_locale|replace({_: '-'}) }}">{{ 'docs.machine_translated'|trans({}, 'catroweb') }}</p>
   {% endif %}
 {% endmacro %}
 

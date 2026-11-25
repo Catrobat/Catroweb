@@ -9,3 +9,7 @@ reviewed: true
 ## Höher springen
 
 Ändere die Zahl in „Ändere Y um“.
+
+## Probiere es aus
+
+Tippe auf Start und sieh dir den Sprung an.
