@@ -93,6 +93,17 @@ Feature: User docs pages, synced from user-docs/
     And I wait for the page to be loaded
     Then the element ".docs-article__title" should contain "Catrobat-Dokumentation"
 
+  Scenario: A phone reader can follow the next lesson card and go back
+    Given I use a 390 x 844 viewport
+    When I go to "/app/docs/getting-started/first-project?locale=en"
+    And I wait for the page to be loaded
+    Then the element ".docs-pager__link--next strong" should contain "Make your cat jump"
+    And I should see a ".docs-pager__link--previous[rel='prev']" element
+    When I click ".docs-pager__link--next"
+    And I wait for the page to be loaded
+    Then the element ".docs-article__title" should contain "Make your cat jump"
+    And I should see a ".docs-pager__link--previous[href$='/docs/getting-started/first-project?locale=en']" element
+
   Scenario: Article and navigation links keep an explicitly chosen language
     Given I use a 1280 x 900 viewport
     When I go to "/app/docs/getting-started/first-project?locale=de_DE"
