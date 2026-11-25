@@ -4,7 +4,7 @@
 
 {% from 'Docs/DocsNavigation.html.twig' import toc %}
 
-{% set compact_lesson = '/' in page.path and docs_nav.pages is empty and page.toc is not empty %}
+{% set compact_lesson = '/' in page.path and docs_nav.pages is empty and (page.toc is not empty or page.description) %}
 {% set opening_has_goal = compact_lesson and page.description and (body_html|striptags|trim) starts with page.description %}
 
 {% block title %}{{ page.title }} – {{ 'docs.title'|trans({}, 'catroweb') }}{% endblock %}

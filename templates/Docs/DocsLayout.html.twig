@@ -50,7 +50,9 @@
         {% if compact_lesson|default(false) %}
           <div class="docs-section__phone" dir="auto">
             {{ breadcrumb(docs_nav.crumbs) }}
-            {{ toc(page.toc, 'docs-toc-phone-title') }}
+            {% if page.toc is not empty %}
+              {{ toc(page.toc, 'docs-toc-phone-title') }}
+            {% endif %}
           </div>
         {% endif %}
         {% if docs_nav.siblings is not empty %}

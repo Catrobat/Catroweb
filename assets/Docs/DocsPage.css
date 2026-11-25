@@ -161,7 +161,7 @@
   }
 
   /* The overview images stay readable without pushing the first action off-screen. */
-  .docs--compact-lesson .docs-content > p:not(:is(h2, h3, h4, h5, h6) ~ *) img {
+  .docs--compact-lesson .docs-content:has(> :is(h2, h3, h4, h5, h6)) > p:not(:is(h2, h3, h4, h5, h6) ~ *) img {
     inline-size: auto;
     max-block-size: 9rem;
     object-fit: contain;
