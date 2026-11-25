@@ -5,7 +5,7 @@
   {path: 'embroidery-tutorials', title: 'docs.home_cards.embroidery', outcome: 'docs.home_cards.embroidery_outcome', icon: 'gesture'},
   {path: 'plot-tutorials', title: 'docs.home_cards.plot', outcome: 'docs.home_cards.plot_outcome', icon: 'content_cut'},
 ] %}
-<div class="docs-pages docs-home">
+<div class="docs-pages docs-home" dir="auto">
   <ul class="docs-home__cards">
     {% for card in cards %}
       {% set url = card.path == 'reference' ? path('docs_reference', docs_locale_query) : path('docs', {path: card.path}|merge(docs_locale_query)) %}
