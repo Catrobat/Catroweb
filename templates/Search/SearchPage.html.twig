@@ -6,6 +6,12 @@
 
 {% block body %}
 
+  {% if docs_only %}
+    <div class="search-results__title">
+      <h1>{{ 'search.results'|trans({}, 'catroweb', docs_locale) }}{% if q %} <bdi>“{{ q }}”</bdi>{% endif %}</h1>
+    </div>
+  {% endif %}
+
   <div id="search-results"
        data-query="{{ q }}"
        data-theme="{{ theme() }}"
@@ -24,13 +30,16 @@
        data-trans-scratch-converting="{{ 'search.scratchConverting'|trans({'%app%': getThemeDisplayName()}, 'catroweb') }}"
        data-trans-scratch-converting-snackbar="{{ 'search.scratchConvertingSnackbar'|trans({}, 'catroweb') }}"
        data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
-       data-locale="{{ app.request.locale }}"
+       data-locale="{{ docs_locale }}"
+       data-docs-only="{{ docs_only ? 'true' : 'false' }}"
+       data-docs-explicit-locale="{{ docs_explicit_locale }}"
+       data-docs-sections="{{ docs_sections|json_encode|e('html_attr') }}"
        data-docs-first="{{ app.request.query.get('context', '') == 'docs' ? 'true' : 'false' }}"
-       data-trans-docs="{{ 'docs.title'|trans({}, 'catroweb') }}"
-       data-trans-no-docs="{{ 'search.noDocs'|trans({}, 'catroweb') }}"
-       data-trans-docs-guides="{{ 'docs.search_guides'|trans({}, 'catroweb') }}"
-       data-trans-docs-bricks="{{ 'docs.search_bricks'|trans({}, 'catroweb') }}"
-       data-trans-docs-formula="{{ 'docs.search_formula'|trans({}, 'catroweb') }}"
+       data-trans-docs="{{ 'docs.title'|trans({}, 'catroweb', docs_locale) }}"
+       data-trans-no-docs="{{ 'search.noDocs'|trans({}, 'catroweb', docs_locale) }}"
+       data-trans-docs-guides="{{ 'docs.search_guides'|trans({}, 'catroweb', docs_locale) }}"
+       data-trans-docs-bricks="{{ 'docs.search_bricks'|trans({}, 'catroweb', docs_locale) }}"
+       data-trans-docs-formula="{{ 'docs.search_formula'|trans({}, 'catroweb', docs_locale) }}"
   >
   </div>
 

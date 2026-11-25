@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Hasi saioa nire kontua gordetzeko'
 
 docs:
+  home_search: "Bilatu bloke edo tutorial bat"
   search_guides: "Gidak"
   search_bricks: "Blokeak"
   search_formula: "Formula-elementuak"

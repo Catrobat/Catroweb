@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'منهنجو کاتو رکڻ لاءِ لاگ ان ڪر'
 
 docs:
+  home_search: "بلاڪ يا سبق ڳول"
   search_guides: "رهنمائون"
   search_bricks: "بلاڪ"
   search_formula: "فارمولا جا جزا"

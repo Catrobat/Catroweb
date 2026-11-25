@@ -1140,6 +1140,7 @@ Reports: Reports
 members: members
 
 docs:
+  home_search: "Find a brick or tutorial"
   search_guides: "Guides"
   search_bricks: "Bricks"
   search_formula: "Formula elements"

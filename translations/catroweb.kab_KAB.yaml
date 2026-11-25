@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Qqen akken ad ḥerzeɣ amiḍan-iw'
 
 docs:
+  home_search: "Af iḥric neɣ tamsirt"
   search_guides: "Imniren"
   search_bricks: "Iblokan"
   search_formula: "Iferdisen n tasemselt"

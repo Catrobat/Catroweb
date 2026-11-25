@@ -1036,6 +1036,7 @@ inactiveAccount:
   button: 'என் கணக்கை வைத்திருக்க உள்நுழை'
 
 docs:
+  home_search: "கட்டளைக் கட்டை அல்லது பாடத்தைத் தேடு"
   search_guides: "வழிகாட்டிகள்"
   search_bricks: "பிரிக்குகள்"
   search_formula: "சூத்திரக் கூறுகள்"

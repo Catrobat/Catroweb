@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Logg på for å beholde kontoen min'
 
 docs:
+  home_search: "Finn en blokk eller veiledning"
   search_guides: "Veiledninger"
   search_bricks: "Klosser"
   search_formula: "Formelelementer"

@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Bejelentkezés a fiókom megtartásához'
 
 docs:
+  home_search: "Keress blokkot vagy útmutatót"
   search_guides: "Útmutatók"
   search_bricks: "Blokkok"
   search_formula: "Képletelemek"

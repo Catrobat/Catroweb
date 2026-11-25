@@ -1057,6 +1057,7 @@ inactiveAccount:
   button: 'Аккаунтымды сақтау үшін кіру'
 
 docs:
+  home_search: "Блок немесе сабақ тап"
   search_guides: "Нұсқаулықтар"
   search_bricks: "Блоктар"
   search_formula: "Формула элементтері"

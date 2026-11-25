@@ -1058,6 +1058,7 @@ inactiveAccount:
   button: 'నా ఖాతాను ఉంచుకోవడానికి లాగిన్ అవ్వు'
 
 docs:
+  home_search: "బ్లాక్ లేదా పాఠం వెతుకు"
   search_guides: "గైడ్‌లు"
   search_bricks: "బ్రిక్‌లు"
   search_formula: "ఫార్ములా అంశాలు"

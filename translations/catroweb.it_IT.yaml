@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Accedi per tenere il mio account'
 
 docs:
+  home_search: "Trova un blocco o un tutorial"
   search_guides: "Guide"
   search_bricks: "Mattoncini"
   search_formula: "Elementi della formula"

@@ -53,3 +53,15 @@ Feature: The search (top bar) finds the user docs
     And I wait for AJAX to finish
     Then I wait for the element "#search-docs-guides" to contain "Your first project"
     And the element "#search-results .search-section:not(.d-none)" should contain "Your first project"
+
+  Scenario: The home search shows a result title and its section on a phone
+    Given I use a 390 x 844 viewport
+    When I go to "/app/docs"
+    And I wait for the page to be loaded
+    And I should see a ".docs-home-search[action$='/app/search']" element
+    And I enter "first project" into visible "#docs-search-query"
+    And I click ".docs-home-search button"
+    And I wait for the page to be loaded
+    Then I wait for the element "#search-docs-guides .search-docs__link" to contain "Your first project"
+    And the element "#search-docs-guides .search-docs__section" should contain "Getting started"
+    And I should not see a "#search-projects" element

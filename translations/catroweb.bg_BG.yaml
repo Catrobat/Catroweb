@@ -1057,6 +1057,7 @@ inactiveAccount:
   button: 'Влез, за да запазиш акаунта си'
 
 docs:
+  home_search: "Намери блокче или урок"
   search_guides: "Ръководства"
   search_bricks: "Блокове"
   search_formula: "Елементи на формули"

@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Me connecter pour garder mon compte'
 
 docs:
+  home_search: "Trouve un bloc ou un tutoriel"
   search_guides: "Guides"
   search_bricks: "Briques"
   search_formula: "Éléments de formule"

@@ -1036,6 +1036,7 @@ inactiveAccount:
   button: 'Masuk untuk menyimpan akunku'
 
 docs:
+  home_search: "Cari blok atau tutorial"
   search_guides: "Panduan"
   search_bricks: "Balok"
   search_formula: "Elemen rumus"

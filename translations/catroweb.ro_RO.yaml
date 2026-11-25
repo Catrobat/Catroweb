@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Conectează-te ca să-ți păstrezi contul'
 
 docs:
+  home_search: "Găsește un bloc sau un tutorial"
   search_guides: "Ghiduri"
   search_bricks: "Blocuri"
   search_formula: "Elemente de formulă"

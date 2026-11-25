@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Hisobimni saqlash uchun kirish'
 
 docs:
+  home_search: "Blok yoki dars top"
   search_guides: "Qoʻllanmalar"
   search_bricks: "Bloklar"
   search_formula: "Formula elementlari"

@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const docs = {
     locale: container.dataset.locale || '',
     first: container.dataset.docsFirst === 'true',
+    only: container.dataset.docsOnly === 'true',
+    explicitLocale: container.dataset.docsExplicitLocale,
+    sections: JSON.parse(container.dataset.docsSections || '{}'),
   }
 
   const searchInput = document.querySelector('#top-app-bar__search-input')
@@ -49,11 +52,42 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.value = query
   }
 
-  showTopBarSearch()
-  controlTopBarSearchClearButton()
+  if (!docs.only) {
+    showTopBarSearch()
+    controlTopBarSearchClearButton()
+  }
 
+  if (docs.only) {
+    renderDocsOnly(container, query, theme, baseUrl, trans, docs)
+    return
+  }
   renderPage(container, query, theme, baseUrl, trans, docs)
 })
+
+function fetchDocs(baseUrl, query, locale) {
+  return fetch(
+    `${baseUrl}/api/docs/search?${new URLSearchParams({ q: query.slice(0, 200), locale })}`,
+  ).then((response) => {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    return response.json()
+  })
+}
+
+async function renderDocsOnly(container, query, theme, baseUrl, trans, docs) {
+  const section = createSection('search-docs', 'docs', trans.docs, trans.showMore)
+  const status = document.createElement('p')
+  status.className = 'search-section__empty'
+  status.setAttribute('role', 'status')
+  container.append(section, status)
+  try {
+    const data = query ? await fetchDocs(baseUrl, query, docs.locale) : null
+    if (!renderDocs(section, data, baseUrl, theme, trans, docs)) {
+      status.textContent = trans.noDocs
+    }
+  } catch {
+    status.textContent = trans.error
+  }
+}
 
 function renderPage(container, query, theme, baseUrl, trans, docs) {
   container.innerHTML = ''
@@ -146,11 +180,7 @@ function renderPage(container, query, theme, baseUrl, trans, docs) {
   }
 
   // The docs search is optional: when it fails, the rest is still shown.
-  const docsSearch = fetch(
-    `${baseUrl}/api/docs/search?${new URLSearchParams({ q: query.slice(0, 200), locale: docs.locale })}`,
-  )
-    .then((response) => (response.ok ? response.json() : null))
-    .catch(() => null)
+  const docsSearch = fetchDocs(baseUrl, query, docs.locale).catch(() => null)
 
   Promise.all([search('all'), docsSearch])
     .then(([data, docsData]) => {
@@ -357,7 +387,7 @@ function createSection(id, variant, title, showMoreText) {
 }
 
 // Docs results in groups (guides, bricks, formula elements), each a link with its snippet. True when there are any.
-function renderDocs(section, data, baseUrl, theme, trans) {
+function renderDocs(section, data, baseUrl, theme, trans, docs) {
   const items = section.querySelector('.search-section__items')
   items.replaceChildren()
   let found = false
@@ -375,7 +405,19 @@ function renderDocs(section, data, baseUrl, theme, trans) {
       const link = document.createElement('a')
       link.className = 'search-docs__link'
       link.href = `${baseUrl}/${theme}/docs${result.path === 'index' ? '' : `/${result.path}`}`
-      link.textContent = result.title
+      const label = document.createElement('span')
+      label.dir = 'auto'
+      label.textContent = result.title
+      link.append(label)
+      if (docs?.only) {
+        if (docs.explicitLocale) link.href += `?locale=${encodeURIComponent(docs.explicitLocale)}`
+        const sectionLabel = document.createElement('span')
+        sectionLabel.className = 'search-docs__section'
+        sectionLabel.dir = 'auto'
+        sectionLabel.textContent =
+          (group === 'guides' && docs.sections[result.path.split('/')[0]]) || title
+        link.append(sectionLabel)
+      }
       const snippet = document.createElement('p')
       snippet.className = 'search-docs__snippet'
       snippet.textContent = result.snippet

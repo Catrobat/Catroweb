@@ -824,3 +824,23 @@ button.search-card {
   margin: 0.15rem 0 0;
   color: light-dark(#5a6374, #a0aec0);
 }
+
+.search-docs__link:has(.search-docs__section) {
+  display: grid;
+  align-content: center;
+  gap: 0.15rem;
+  min-block-size: 48px;
+  padding: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.search-docs__link:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.search-docs__section {
+  color: light-dark(#47576a, #bfd1e3);
+  font-size: 0.875rem;
+  font-weight: 500;
+}

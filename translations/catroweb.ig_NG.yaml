@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Banye iji debe akaụntụ m'
 
 docs:
+  home_search: "Chọta blọk ma ọ bụ ihe ọmụmụ"
   search_guides: "Ntụziaka"
   search_bricks: "Brik"
   search_formula: "Akụkụ usoro"

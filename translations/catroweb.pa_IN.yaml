@@ -1035,6 +1035,7 @@ inactiveAccount:
   button: 'ਮੇਰਾ ਖਾਤਾ ਰੱਖਣ ਲਈ ਲਾਗਿਨ ਕਰ'
 
 docs:
+  home_search: "ਬਲਾਕ ਜਾਂ ਪਾਠ ਲੱਭੋ"
   search_guides: "ਗਾਈਡਾਂ"
   search_bricks: "ਬ੍ਰਿਕਸ"
   search_formula: "ਫਾਰਮੂਲੇ ਦੇ ਤੱਤ"
