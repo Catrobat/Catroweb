@@ -793,8 +793,12 @@ export class ProjectList {
     if (pctHorizontal >= 0.8) {
       this.fetchMore()
     }
-    this.$chevronLeft.style.display = pctHorizontal === 0 ? 'none' : 'block'
-    this.$chevronRight.style.display = pctHorizontal >= 1 ? 'none' : 'block'
+    if (this.$chevronLeft) {
+      this.$chevronLeft.style.display = pctHorizontal === 0 ? 'none' : 'block'
+    }
+    if (this.$chevronRight) {
+      this.$chevronRight.style.display = pctHorizontal >= 1 ? 'none' : 'block'
+    }
   }
 
   handleVerticalScroll() {
