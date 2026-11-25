@@ -1,19 +1,23 @@
-{% set locale = docs_locale_query.locale|default(app.request.locale) %}
-{% set cards = [
-  {path: 'game-tutorials/starter-tutorials', title: 'docs.home_cards.game', outcome: 'docs.home_cards.game_outcome', image: 'images/logo/logo_catrobat_text.svg'},
-  {path: 'reference', title: 'docs.reference.title', outcome: 'docs.home_cards.bricks_outcome', icon: 'extension'},
-  {path: 'embroidery-tutorials', title: 'docs.home_cards.embroidery', outcome: 'docs.home_cards.embroidery_outcome', icon: 'gesture'},
-  {path: 'plot-tutorials', title: 'docs.home_cards.plot', outcome: 'docs.home_cards.plot_outcome', icon: 'content_cut'},
-] %}
+{% set cards = {
+  game: {path: 'game-tutorials/starter-tutorials', title: 'docs.home_cards.game', outcome: 'docs.home_cards.game_outcome', image: 'images/logo/logo_catrobat_text.svg'},
+  bricks: {path: 'reference', title: 'docs.reference.title', outcome: 'docs.home_cards.bricks_outcome', icon: 'extension'},
+  embroidery: {path: 'embroidery-tutorials', title: 'docs.home_cards.embroidery', outcome: 'docs.home_cards.embroidery_outcome', icon: 'gesture'},
+  plot: {path: 'plot-tutorials', title: 'docs.home_cards.plot', outcome: 'docs.home_cards.plot_outcome', icon: 'content_cut'},
+} %}
+{% if app.request.attributes.get('flavor') == 'embroidery' %}
+  {% set cards = [cards.embroidery, cards.game, cards.bricks, cards.plot] %}
+{% endif %}
+{% set card_urls = [] %}
 <div class="docs-pages docs-home" dir="auto">
   <ul class="docs-home__cards">
     {% for card in cards %}
       {% set url = card.path == 'reference' ? path('docs_reference', docs_locale_query) : path('docs', {path: card.path}|merge(docs_locale_query)) %}
+      {% set card_urls = card_urls|merge([url]) %}
       <li{% if loop.first %} class="docs-home__featured"{% endif %}>
         <a class="docs-home__card" href="{{ url }}">
           <span class="docs-home__text">
-            <strong>{{ card.title|trans({}, 'catroweb', locale) }}</strong>
-            <span>{{ card.outcome|trans({}, 'catroweb', locale) }}</span>
+            <strong>{{ card.title|trans({}, 'catroweb', docs_ui_locale) }}</strong>
+            <span>{{ card.outcome|trans({}, 'catroweb', docs_ui_locale) }}</span>
           </span>
           {% if card.image is defined %}
             <img src="{{ asset(card.image) }}" alt="" width="72" height="72">
@@ -24,11 +28,12 @@
       </li>
     {% endfor %}
   </ul>
-  <ul class="docs-home__other">
-    {% for item in docs_nav.pages %}
-      {% if item.url in [path('docs', {path: 'getting-started'}|merge(docs_locale_query)), path('docs', {path: 'educators'}|merge(docs_locale_query))] %}
+  {% set other = docs_nav.pages|filter(item => item.url not in card_urls) %}
+  {% if other is not empty %}
+    <ul class="docs-home__other">
+      {% for item in other %}
         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </div>
