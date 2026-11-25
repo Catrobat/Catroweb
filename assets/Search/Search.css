@@ -796,7 +796,8 @@ button.search-card {
 }
 
 /* Docs results (renderDocs in SearchPage.js): links with a snippet, grouped */
-.search-section--docs {
+.search-section--docs,
+.search-docs-only .search-section {
   background: light-dark(
     linear-gradient(135deg, #f4f8fb 0%, #eaf2f8 100%),
     linear-gradient(135deg, #14222e 0%, #182834 100%)
@@ -823,4 +824,43 @@ button.search-card {
 .search-docs__snippet {
   margin: 0.15rem 0 0;
   color: light-dark(#5a6374, #a0aec0);
+}
+
+.search-docs__link:has(.search-docs__section) {
+  display: grid;
+  align-content: center;
+  gap: 0.15rem;
+  min-block-size: 48px;
+  padding: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.search-docs__link:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.search-docs__section {
+  color: light-dark(#47576a, #bfd1e3);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.search-docs-only .search-section__items {
+  display: block;
+  padding: 0.25rem 1rem 0.75rem;
+  overflow: visible;
+}
+
+.search-docs-only :is(.search-docs__group, .search-docs__list) {
+  padding-inline: 0;
+}
+
+.search-docs-only .search-docs__list li + li {
+  border-block-start: 1px solid var(--bs-border-color);
+}
+
+.search-docs-only .search-docs__snippet {
+  max-inline-size: 70ch;
+  padding-inline: 0.25rem;
 }

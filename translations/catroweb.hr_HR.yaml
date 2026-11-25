@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Prijavi se i zadrži račun'
 
 docs:
+  home_search: "Pronađi blok ili upute"
+  home_search_submit: "Pretraži dokumentaciju"
   search_guides: "Vodiči"
   search_bricks: "Blokovi"
   search_formula: "Elementi formule"

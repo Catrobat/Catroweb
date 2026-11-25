@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'התחבר כדי לשמור את החשבון שלי'
 
 docs:
+  home_search: "לחפש לבנה או מדריך"
+  home_search_submit: "חיפוש במדריכים"
   search_guides: "מדריכים"
   search_bricks: "לבנים"
   search_formula: "רכיבי נוסחה"

@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Přihlásit se a ponechat si účet'
 
 docs:
+  home_search: "Najdi blok nebo návod"
+  home_search_submit: "Hledej v dokumentaci"
   search_guides: "Návody"
   search_bricks: "Bloky"
   search_formula: "Prvky vzorců"

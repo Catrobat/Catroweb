@@ -6,7 +6,11 @@
 
 {% block body %}
 
-  <div id="search-results"
+  {% if docs_only %}
+    <h1 dir="auto">{{ 'search.results'|trans({}, 'catroweb', docs_ui_locale) }}{% if q %} <bdi>“{{ q }}”</bdi>{% endif %}</h1>
+  {% endif %}
+
+  <div id="search-results"{% if docs_only %} class="search-docs-only" dir="auto"{% endif %}
        data-query="{{ q }}"
        data-theme="{{ theme() }}"
        data-base-url="{{ app.request.getBaseURL() }}"
@@ -23,14 +27,17 @@
        data-trans-scratch-projects="{{ 'search.scratchProjects'|trans({}, 'catroweb') }}"
        data-trans-scratch-converting="{{ 'search.scratchConverting'|trans({'%app%': getThemeDisplayName()}, 'catroweb') }}"
        data-trans-scratch-converting-snackbar="{{ 'search.scratchConvertingSnackbar'|trans({}, 'catroweb') }}"
-       data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
-       data-locale="{{ app.request.locale }}"
+       data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb', docs_ui_locale) }}"
+       data-locale="{{ docs_locale }}"
+       data-docs-only="{{ docs_only ? 'true' : 'false' }}"
+       data-docs-explicit-locale="{{ docs_explicit_locale }}"
+       data-docs-sections="{{ docs_sections|json_encode|e('html_attr') }}"
        data-docs-first="{{ app.request.query.get('context', '') == 'docs' ? 'true' : 'false' }}"
-       data-trans-docs="{{ 'docs.title'|trans({}, 'catroweb') }}"
-       data-trans-no-docs="{{ 'search.noDocs'|trans({}, 'catroweb') }}"
-       data-trans-docs-guides="{{ 'docs.search_guides'|trans({}, 'catroweb') }}"
-       data-trans-docs-bricks="{{ 'docs.search_bricks'|trans({}, 'catroweb') }}"
-       data-trans-docs-formula="{{ 'docs.search_formula'|trans({}, 'catroweb') }}"
+       data-trans-docs="{{ 'docs.title'|trans({}, 'catroweb', docs_ui_locale) }}"
+       data-trans-no-docs="{{ 'search.noDocs'|trans({}, 'catroweb', docs_ui_locale) }}"
+       data-trans-docs-guides="{{ 'docs.search_guides'|trans({}, 'catroweb', docs_ui_locale) }}"
+       data-trans-docs-bricks="{{ 'docs.search_bricks'|trans({}, 'catroweb', docs_ui_locale) }}"
+       data-trans-docs-formula="{{ 'docs.search_formula'|trans({}, 'catroweb', docs_ui_locale) }}"
   >
   </div>
 

@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Σύνδεση για να κρατήσω τον λογαριασμό μου'
 
 docs:
+  home_search: "Βρες ένα μπλοκ ή ένα μάθημα"
+  home_search_submit: "Αναζήτηση στην τεκμηρίωση"
   search_guides: "Οδηγοί"
   search_bricks: "Τουβλάκια"
   search_formula: "Στοιχεία τύπων"

@@ -34,6 +34,12 @@ class DocsLibrary
     return array_values(array_unique([$locale, $underscore, str_replace('_', '-', $underscore), $language, $share_locale, 'en']));
   }
 
+  /** The locale used by Share's UI files, with the same language fallbacks as the docs. */
+  public function shareLocale(string $locale): string
+  {
+    return array_values(array_intersect($this->locales($locale), $this->getSupportedLanguageCodes()))[0] ?? 'en';
+  }
+
   public function page(string $path, string $locale): ?DocPage
   {
     return $this->pages->findGuide($path, $this->locales($locale));

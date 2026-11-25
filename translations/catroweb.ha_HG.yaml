@@ -1034,6 +1034,8 @@ inactiveAccount:
   button: 'Shiga don riƙe asusuna'
 
 docs:
+  home_search: "Nemi bulon umarni ko darasi"
+  home_search_submit: "Nema a cikin jagora"
   search_guides: "Jagorori"
   search_bricks: "Tubali"
   search_formula: "Abubuwan dabara"

@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'เข้าสู่ระบบเพื่อเก็บบัญชีไว้'
 
 docs:
+  home_search: "ค้นหาบล็อกหรือบทเรียน"
+  home_search_submit: "ค้นหาในคู่มือ"
   search_guides: "คู่มือ"
   search_bricks: "บล็อก"
   search_formula: "องค์ประกอบสูตร"

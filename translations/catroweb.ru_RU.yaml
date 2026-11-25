@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Войти и сохранить аккаунт'
 
 docs:
+  home_search: "Найди блок или урок"
+  home_search_submit: "Поиск в документации"
   search_guides: "Руководства"
   search_bricks: "Блоки"
   search_formula: "Элементы формул"

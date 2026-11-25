@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'اپنا اکاؤنٹ رکھنے کے لیے لاگ اِن کرو'
 
 docs:
+  home_search: "کوئی بلاک یا سبق ڈھونڈو"
+  home_search_submit: "رہنما دستاویزات میں تلاش کرو"
   search_guides: "رہنما"
   search_bricks: "بلاکس"
   search_formula: "فارمولے کے اجزاء"

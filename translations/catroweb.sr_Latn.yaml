@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Prijavi se i zadrži nalog'
 
 docs:
+  home_search: "Nađi blok ili uputstvo"
+  home_search_submit: "Pretraži dokumentaciju"
   search_guides: "Vodiči"
   search_bricks: "Blokovi"
   search_formula: "Elementi formule"

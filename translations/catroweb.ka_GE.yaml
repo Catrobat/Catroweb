@@ -1034,6 +1034,8 @@ inactiveAccount:
   button: 'შედი, რომ ანგარიში შეინარჩუნო'
 
 docs:
+  home_search: "იპოვე ბლოკი ან გაკვეთილი"
+  home_search_submit: "მოძებნე დოკუმენტაციაში"
   search_guides: "სახელმძღვანელოები"
   search_bricks: "ბლოკები"
   search_formula: "ფორმულის ელემენტები"

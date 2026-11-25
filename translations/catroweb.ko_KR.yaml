@@ -1036,6 +1036,8 @@ inactiveAccount:
   button: '로그인해서 계정 유지하기'
 
 docs:
+  home_search: "블록이나 튜토리얼 찾기"
+  home_search_submit: "문서 검색"
   search_guides: "가이드"
   search_bricks: "블록"
   search_formula: "수식 요소"

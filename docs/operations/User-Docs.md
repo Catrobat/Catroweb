@@ -96,6 +96,8 @@ Try it: `bin/console catrobat:docs:search "make my cat jump" --locale=de` prints
 
 Tests use `FakeDocsEmbedder` (test environment): deterministic vectors in which "jump", "springen" and "y" share a meaning, so Behat proves the hybrid path without the model.
 
+The docs home search submits to the normal Search route with `context=docs&scope=docs`. That view requests the existing docs search endpoint only. Guide results show their top-level docs section, while brick and formula results show their result group. When the home page has an explicit locale, the search request and result links carry it through. The global search still shows its usual result groups.
+
 ## Comments
 
 Readers can leave comments and tips below a page (`templates/Docs/Comments.html.twig`, Stimulus controller `docs--comments`); good tips go into the guides by a docs pull request.

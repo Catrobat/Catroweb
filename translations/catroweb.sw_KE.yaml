@@ -1034,6 +1034,8 @@ inactiveAccount:
   button: 'Ingia ili kuweka akaunti yangu'
 
 docs:
+  home_search: "Tafuta kizuizi au somo"
+  home_search_submit: "Tafuta kwenye mwongozo"
   search_guides: "Miongozo"
   search_bricks: "Matofali"
   search_formula: "Vipengele vya fomula"

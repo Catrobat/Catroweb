@@ -1039,6 +1039,8 @@ inactiveAccount:
   button: '登录以保留我的帐户'
 
 docs:
+  home_search: "查找积木或教程"
+  home_search_submit: "搜索文档"
   search_guides: "指南"
   search_bricks: "积木"
   search_formula: "公式元素"

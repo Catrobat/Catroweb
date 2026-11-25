@@ -1057,6 +1057,8 @@ inactiveAccount:
   button: 'ನನ್ನ ಖಾತೆ ಉಳಿಸಲು ಲಾಗಿನ್ ಮಾಡು'
 
 docs:
+  home_search: "ಬ್ಲಾಕ್ ಅಥವಾ ಪಾಠ ಹುಡುಕು"
+  home_search_submit: "ದಾಖಲೆಗಳಲ್ಲಿ ಹುಡುಕು"
   search_guides: "ಮಾರ್ಗದರ್ಶಿಗಳು"
   search_bricks: "ಬ್ರಿಕ್‌ಗಳು"
   search_formula: "ಸೂತ್ರದ ಅಂಶಗಳು"

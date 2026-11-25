@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Log in to keep my account'
 
 docs:
+  home_search: "Find a brick or tutorial"
+  home_search_submit: "Search documentation"
   search_guides: "Guides"
   search_bricks: "Bricks"
   search_formula: "Formula elements"

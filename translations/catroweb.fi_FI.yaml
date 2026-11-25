@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Kirjaudu sisään ja säilytä tilini'
 
 docs:
+  home_search: "Etsi palikka tai ohje"
+  home_search_submit: "Hae ohjeista"
   search_guides: "Oppaat"
   search_bricks: "Palikat"
   search_formula: "Kaavan osat"

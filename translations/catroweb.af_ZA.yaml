@@ -1057,6 +1057,8 @@ inactiveAccount:
   button: 'Teken aan om my rekening te hou'
 
 docs:
+  home_search: "Soek ’n blok of les"
+  home_search_submit: "Soek in die dokumentasie"
   search_guides: "Gidse"
   search_bricks: "Blokke"
   search_formula: "Formule-elemente"

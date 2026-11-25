@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Iniciar sesión para conservar mi cuenta'
 
 docs:
+  home_search: "Busca un bloque o tutorial"
+  home_search_submit: "Buscar en la documentación"
   search_guides: "Guías"
   search_bricks: "Bloques"
   search_formula: "Elementos de fórmula"

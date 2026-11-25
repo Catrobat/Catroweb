@@ -1057,6 +1057,8 @@ inactiveAccount:
   button: 'Увійти, щоб зберегти обліковий запис'
 
 docs:
+  home_search: "Знайди блок або урок"
+  home_search_submit: "Шукай у документації"
   search_guides: "Посібники"
   search_bricks: "Блоки"
   search_formula: "Елементи формул"

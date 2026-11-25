@@ -78,6 +78,7 @@ class DocsController extends AbstractController
       'page' => $page,
       'body_html' => DocsMarkdown::withLinkLocale($page->getHtml(), $request->getUri(), $this->generateUrl('docs'), $query['locale'] ?? null),
       'docs_locale_query' => $query,
+      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
         $sections,
         'index' === $path ? [] : [$this->home($query), ...array_map($link, $trail)],
@@ -195,6 +196,7 @@ class DocsController extends AbstractController
       'categories' => $catalog['categories'],
       'formula' => $catalog['formula'],
       'docs_locale_query' => $query,
+      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
         $this->sections($this->navigation($request, $locale), 'reference', $query),
         [$this->home($query), ['title' => $this->translator->trans('docs.reference.title', [], 'catroweb'), 'url' => $this->generateUrl('docs_reference', $query), 'current' => true]],
@@ -257,6 +259,7 @@ class DocsController extends AbstractController
       'edit_url' => $this->sync->brickEditUrl($type, null !== $this->library->brickProse($type, 'en')),
       'markdown_url' => $this->generateUrl('docs_brick_markdown', ['type' => $type] + $query),
       'docs_locale_query' => $query,
+      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
         $this->sections($this->navigation($request, $locale), 'reference', $query),
         [...$this->referenceCrumbs($query), ['title' => $category['name'], 'url' => $category_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
@@ -286,6 +289,7 @@ class DocsController extends AbstractController
     return $this->render('Docs/DocsFormula.html.twig', [
       'element' => $element,
       'docs_locale_query' => $query,
+      'docs_ui_locale' => $this->library->shareLocale($locale),
       'docs_nav' => $this->docsNav(
         $this->sections($this->navigation($request, $locale), 'reference', $query),
         [...$this->referenceCrumbs($query), ['title' => $this->translator->trans('docs.reference.'.$element['kind'], [], 'catroweb'), 'url' => $kind_url, 'current' => false], ['title' => $title, 'url' => '', 'current' => true]],
@@ -391,13 +395,7 @@ class DocsController extends AbstractController
   /** "To see this brick, turn on …": in the page's language, which ?locale= may set apart from the request's. */
   private function settingHint(string $setting, string $locale): string
   {
-    return $this->translator->trans('docs.reference.setting', ['%setting%' => $setting], 'catroweb', $this->shareLocale($locale));
-  }
-
-  /** Share's own locale of a language (?locale=de and ?locale=de_DE: de_DE), English when share does not speak it. */
-  private function shareLocale(string $locale): string
-  {
-    return array_values(array_intersect($this->library->locales($locale), $this->library->getSupportedLanguageCodes()))[0] ?? 'en';
+    return $this->translator->trans('docs.reference.setting', ['%setting%' => $setting], 'catroweb', $this->library->shareLocale($locale));
   }
 
   /**
@@ -439,7 +437,7 @@ class DocsController extends AbstractController
 
     $supported = $this->library->getSupportedLanguageCodes();
     // ?locale=de and ?locale=de_DE show the same page: the canonical one is share's own locale.
-    $canonical = $explicit ? $this->shareLocale($locale) : null;
+    $canonical = $explicit ? $this->library->shareLocale($locale) : null;
 
     return [
       'canonical_url' => $url($canonical),

@@ -1056,6 +1056,8 @@ inactiveAccount:
   button: 'Anmelden und Konto behalten'
 
 docs:
+  home_search: "Finde einen Baustein oder eine Anleitung"
+  home_search_submit: "Dokumentation durchsuchen"
   search_guides: "Anleitungen"
   search_bricks: "Bausteine"
   search_formula: "Formelelemente"

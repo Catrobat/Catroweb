@@ -49,6 +49,7 @@ const PURGE_SAFELIST = [
   /^carousel/,
   // Synced docs HTML is rendered in PHP (DocsMarkdown), not in templates: its classes and Markdown's elements
   /^docs-/,
+  /^search-docs__section$/,
   /^(table|thead|tbody|tr|th|td|pre|blockquote|img)$/,
 ]
 

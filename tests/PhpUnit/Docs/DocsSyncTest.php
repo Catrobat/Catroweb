@@ -7,6 +7,7 @@ namespace Tests\PhpUnit\Docs;
 use App\Application\Controller\Docs\DocsController;
 use App\DB\Entity\Docs\DocPage;
 use App\DB\EntityRepository\Docs\DocPageRepository;
+use App\Docs\DocsLibrary;
 use App\Docs\DocsSync;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -124,6 +125,15 @@ final class DocsSyncTest extends KernelTestCase
       $explicit = $kernel->handle(Request::create($url.'?locale=de'), HttpKernelInterface::MAIN_REQUEST, false);
       $this->assertTrue($explicit->headers->getCacheControlDirective('public'), $url.'?locale=de');
     }
+  }
+
+  public function testShareUiLocaleSupportsTheDocsLocaleAliases(): void
+  {
+    $library = self::getContainer()->get(DocsLibrary::class);
+    $this->assertInstanceOf(DocsLibrary::class, $library);
+    $this->assertSame('de_DE', $library->shareLocale('de'));
+    $this->assertSame('de_DE', $library->shareLocale('de-DE'));
+    $this->assertSame('en', $library->shareLocale('xyz'));
   }
 
   public function testDocsHtmlKeepsExplicitLanguageSeparateFromCanonicalUrls(): void

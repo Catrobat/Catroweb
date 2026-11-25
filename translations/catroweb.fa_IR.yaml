@@ -1059,6 +1059,8 @@ inactiveAccount:
   button: 'ورود برای نگه داشتن حسابم'
 
 docs:
+  home_search: "یک بلوک یا آموزش پیدا کن"
+  home_search_submit: "جست‌وجو در راهنما"
   search_guides: "راهنماها"
   search_bricks: "بلوک‌ها"
   search_formula: "اجزای فرمول"

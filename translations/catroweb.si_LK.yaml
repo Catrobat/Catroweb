@@ -1057,6 +1057,8 @@ inactiveAccount:
   button: 'මගේ ගිණුම තියාගන්න පුරනය වෙන්න'
 
 docs:
+  home_search: "බ්ලොක් එකක් හෝ පාඩමක් හොයන්න"
+  home_search_submit: "උපදෙස්වල සොයන්න"
   search_guides: "මාර්ගෝපදේශ"
   search_bricks: "බ්‍රික්ස්"
   search_formula: "සූත්‍ර මූලද්‍රව්‍ය"
