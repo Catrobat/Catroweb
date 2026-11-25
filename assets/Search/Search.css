@@ -844,3 +844,22 @@ button.search-card {
   font-size: 0.875rem;
   font-weight: 500;
 }
+
+[data-docs-only='true'] .search-section--docs .search-section__items {
+  display: block;
+  padding: 0.25rem 1rem 0.75rem;
+  overflow: visible;
+}
+
+[data-docs-only='true'] :is(.search-docs__group, .search-docs__list) {
+  padding-inline: 0;
+}
+
+[data-docs-only='true'] .search-docs__list li + li {
+  border-block-start: 1px solid var(--bs-border-color);
+}
+
+[data-docs-only='true'] .search-docs__snippet {
+  max-inline-size: 70ch;
+  padding-inline: 0.25rem;
+}
