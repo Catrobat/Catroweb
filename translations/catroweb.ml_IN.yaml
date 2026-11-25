@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "ഒരു ബ്ലോക്കോ പാഠമോ കണ്ടെത്തൂ"
+  home_search_submit: "സഹായരേഖകളിൽ തിരയൂ"
   search_guides: "ഗൈഡുകൾ"
   search_bricks: "ബ്രിക്കുകൾ"
   search_formula: "ഫോർമുല ഘടകങ്ങൾ"

@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "બ્લોક કે પાઠ શોધ"
+  home_search_submit: "માર્ગદર્શિકામાં શોધ"
   search_guides: "માર્ગદર્શિકાઓ"
   search_bricks: "બ્રિક્સ"
   search_formula: "સૂત્રના ઘટકો"

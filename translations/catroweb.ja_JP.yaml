@@ -1044,6 +1044,7 @@ inactiveAccount:
 
 docs:
   home_search: "ブロックやガイドを探そう"
+  home_search_submit: "ガイドを検索"
   search_guides: "ガイド"
   search_bricks: "ブロック"
   search_formula: "数式の要素"

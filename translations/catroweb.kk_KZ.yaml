@@ -1058,6 +1058,7 @@ inactiveAccount:
 
 docs:
   home_search: "Блок немесе сабақ тап"
+  home_search_submit: "Нұсқаулықтан ізде"
   search_guides: "Нұсқаулықтар"
   search_bricks: "Блоктар"
   search_formula: "Формула элементтері"

@@ -1034,7 +1034,8 @@ inactiveAccount:
   button: 'Wura mu na kora m''akawnt so'
 
 docs:
-  home_search: "找積木或教學"
+  home_search: "Hwehwɛ ahyɛde anaa adesua"
+  home_search_submit: "Hwehwɛ wɔ akwankyerɛ no mu"
   search_guides: "Akwankyerɛ"
   search_bricks: "Bricks"
   search_formula: "Formula mu nneɛma"

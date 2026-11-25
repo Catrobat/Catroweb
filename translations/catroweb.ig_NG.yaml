@@ -1035,6 +1035,7 @@ inactiveAccount:
 
 docs:
   home_search: "Chọta blọk ma ọ bụ ihe ọmụmụ"
+  home_search_submit: "Chọọ n’akwụkwọ ntuziaka"
   search_guides: "Ntụziaka"
   search_bricks: "Brik"
   search_formula: "Akụkụ usoro"

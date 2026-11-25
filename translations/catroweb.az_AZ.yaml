@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "Blok və ya dərs tap"
+  home_search_submit: "Sənədlərdə axtar"
   search_guides: "Bələdçilər"
   search_bricks: "Bloklar"
   search_formula: "Düstur elementləri"

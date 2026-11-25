@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "ابحث عن لبنة أو درس"
+  home_search_submit: "ابحث في دليل الاستخدام"
   search_guides: "أدلة"
   search_bricks: "اللبنات"
   search_formula: "عناصر الصيغة"

@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "Keress blokkot vagy útmutatót"
+  home_search_submit: "Keress az útmutatókban"
   search_guides: "Útmutatók"
   search_bricks: "Blokkok"
   search_formula: "Képletelemek"

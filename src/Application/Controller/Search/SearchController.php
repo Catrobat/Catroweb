@@ -12,8 +12,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class SearchController extends AbstractController
 {
+  #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'], priority: 1)]
   #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
-  #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]
   public function search(Request $request, DocsLibrary $library, ?string $q = null): Response
   {
     $docs_only = 'docs' === $request->query->getString('context') && 'docs' === $request->query->getString('scope');
@@ -26,6 +26,7 @@ class SearchController extends AbstractController
       'q' => $q,
       'docs_only' => $docs_only,
       'docs_locale' => $locale,
+      'docs_ui_locale' => $library->shareLocale($locale),
       'docs_explicit_locale' => $explicit_locale,
       'docs_sections' => $docs_only ? array_column($library->navigation($locale), 'title', 'path') : [],
     ]);

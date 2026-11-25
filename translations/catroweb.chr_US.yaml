@@ -1035,6 +1035,7 @@ inactiveAccount:
 
 docs:
   home_search: "ᎯᏩᏛᎯ ᎠᏓᏁᎸ ᎠᎴ ᎠᏕᎶᏆᏍᎩ"
+  home_search_submit: "ᎯᏩᏛᎯ ᎪᏪᎵᎯ"
   search_guides: "Guides"
   search_bricks: "Bricks"
   search_formula: "Formula elements"

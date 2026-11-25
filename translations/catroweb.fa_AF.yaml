@@ -1060,6 +1060,7 @@ inactiveAccount:
 
 docs:
   home_search: "یک بلوک یا درس پیدا کن"
+  home_search_submit: "در راهنما جستجو کن"
   search_guides: "راهنماها"
   search_bricks: "بلوک‌ها"
   search_formula: "اجزای فرمول"

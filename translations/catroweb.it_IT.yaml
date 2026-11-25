@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "Trova un blocco o un tutorial"
+  home_search_submit: "Cerca nella documentazione"
   search_guides: "Guide"
   search_bricks: "Mattoncini"
   search_formula: "Elementi della formula"

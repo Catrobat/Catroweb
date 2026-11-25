@@ -1037,6 +1037,7 @@ inactiveAccount:
 
 docs:
   home_search: "Cari blok atau tutorial"
+  home_search_submit: "Cari di dokumentasi"
   search_guides: "Panduan"
   search_bricks: "Balok"
   search_formula: "Elemen rumus"

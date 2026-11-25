@@ -1056,6 +1056,7 @@ inactiveAccount:
 
 docs:
   home_search: "Bir blok veya ders bul"
+  home_search_submit: "Belgelerde ara"
   search_guides: "Kılavuzlar"
   search_bricks: "Bloklar"
   search_formula: "Formül öğeleri"

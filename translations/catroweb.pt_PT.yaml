@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "Procura um bloco ou tutorial"
+  home_search_submit: "Pesquisar na documentação"
   search_guides: "Guias"
   search_bricks: "Blocos"
   search_formula: "Elementos de fórmula"

@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "Finn en blokk eller veiledning"
+  home_search_submit: "Søk i dokumentasjonen"
   search_guides: "Veiledninger"
   search_bricks: "Klosser"
   search_formula: "Formelelementer"

@@ -1037,6 +1037,7 @@ inactiveAccount:
 
 docs:
   home_search: "கட்டளைக் கட்டை அல்லது பாடத்தைத் தேடு"
+  home_search_submit: "வழிகாட்டியில் தேடு"
   search_guides: "வழிகாட்டிகள்"
   search_bricks: "பிரிக்குகள்"
   search_formula: "சூத்திரக் கூறுகள்"

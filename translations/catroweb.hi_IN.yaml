@@ -1039,6 +1039,7 @@ members: "सदस्य"
 
 docs:
   home_search: "ब्लॉक या पाठ ढूँढो"
+  home_search_submit: "मदद के दस्तावेज़ों में खोजो"
   search_guides: "गाइड"
   search_bricks: "ब्रिक्स"
   search_formula: "सूत्र के तत्व"

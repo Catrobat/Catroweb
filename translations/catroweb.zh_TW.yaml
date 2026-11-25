@@ -1037,6 +1037,7 @@ inactiveAccount:
 
 docs:
   home_search: "搜尋積木或教學"
+  home_search_submit: "搜尋文件"
   search_guides: "指南"
   search_bricks: "積木"
   search_formula: "公式元素"

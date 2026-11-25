@@ -1058,6 +1058,7 @@ inactiveAccount:
 
 docs:
   home_search: "Tìm khối lệnh hoặc bài hướng dẫn"
+  home_search_submit: "Tìm trong tài liệu"
   search_guides: "Hướng dẫn"
   search_bricks: "Khối lệnh"
   search_formula: "Thành phần công thức"

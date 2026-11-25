@@ -1035,6 +1035,7 @@ inactiveAccount:
 
 docs:
   home_search: "Најди блок или лекција"
+  home_search_submit: "Пребарај во документацијата"
   search_guides: "Водичи"
   search_bricks: "Блокови"
   search_formula: "Елементи на формула"

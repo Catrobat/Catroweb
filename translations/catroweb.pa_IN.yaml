@@ -1036,6 +1036,7 @@ inactiveAccount:
 
 docs:
   home_search: "ਬਲਾਕ ਜਾਂ ਪਾਠ ਲੱਭੋ"
+  home_search_submit: "ਮਦਦ ਗਾਈਡ ਵਿੱਚ ਲੱਭੋ"
   search_guides: "ਗਾਈਡਾਂ"
   search_bricks: "ਬ੍ਰਿਕਸ"
   search_formula: "ਫਾਰਮੂਲੇ ਦੇ ਤੱਤ"

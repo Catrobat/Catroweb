@@ -1059,6 +1059,7 @@ inactiveAccount:
 
 docs:
   home_search: "بلاک یا درس پیدا کړه"
+  home_search_submit: "په لارښود کې ولټوه"
   search_guides: "لارښودونه"
   search_bricks: "بلاکونه"
   search_formula: "د فورمول توکي"

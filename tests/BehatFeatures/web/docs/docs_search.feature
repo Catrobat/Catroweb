@@ -58,10 +58,17 @@ Feature: The search (top bar) finds the user docs
     Given I use a 390 x 844 viewport
     When I go to "/app/docs"
     And I wait for the page to be loaded
-    And I should see a ".docs-home-search[action$='/app/search']" element
+    And I should see a ".docs-home-search[action$='/app/search/']" element
+    And I should see a ".docs-home-search button[aria-label='Search documentation']" element
     And I enter "first project" into visible "#docs-search-query"
     And I click ".docs-home-search button"
     And I wait for the page to be loaded
     Then I wait for the element "#search-docs-guides .search-docs__link" to contain "Your first project"
     And the element "#search-docs-guides .search-docs__section" should contain "Getting started"
     And I should not see a "#search-projects" element
+
+  Scenario: The home search labels follow a short docs locale
+    When I go to "/app/docs?locale=de"
+    And I wait for the page to be loaded
+    Then the element ".docs-home-search label" should contain "Finde einen Baustein oder eine Anleitung"
+    And I should see a ".docs-home-search button[aria-label='Dokumentation durchsuchen']" element

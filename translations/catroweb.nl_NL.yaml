@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "Zoek een blok of les"
+  home_search_submit: "Zoek in de documentatie"
   search_guides: "Handleidingen"
   search_bricks: "Blokken"
   search_formula: "Formule-elementen"

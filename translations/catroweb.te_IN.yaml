@@ -1059,6 +1059,7 @@ inactiveAccount:
 
 docs:
   home_search: "బ్లాక్ లేదా పాఠం వెతుకు"
+  home_search_submit: "మార్గదర్శినిలో వెతుకు"
   search_guides: "గైడ్‌లు"
   search_bricks: "బ్రిక్‌లు"
   search_formula: "ఫార్ములా అంశాలు"

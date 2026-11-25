@@ -1057,6 +1057,7 @@ inactiveAccount:
 
 docs:
   home_search: "Poišči blok ali vodič"
+  home_search_submit: "Išči po dokumentaciji"
   search_guides: "Vodniki"
   search_bricks: "Bloki"
   search_formula: "Elementi formule"

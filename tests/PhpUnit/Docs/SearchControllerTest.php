@@ -17,11 +17,13 @@ final class SearchControllerTest extends KernelTestCase
   public function testTheDocsHomeFormUsesTheExistingSearchResultsPage(): void
   {
     $kernel = self::bootKernel();
-    $docs = $kernel->handle(Request::create('/app/search?q=+cat+jump+&context=docs&scope=docs&locale=de_DE'));
+    $docs = $kernel->handle(Request::create('/app/search/?q=+cat+jump+&context=docs&scope=docs&locale=de'));
     $this->assertSame(Response::HTTP_OK, $docs->getStatusCode());
     $this->assertStringContainsString('data-query="cat jump"', (string) $docs->getContent());
     $this->assertStringContainsString('data-docs-only="true"', (string) $docs->getContent());
-    $this->assertStringContainsString('data-docs-explicit-locale="de_DE"', (string) $docs->getContent());
+    $this->assertStringContainsString('data-docs-explicit-locale="de"', (string) $docs->getContent());
+
+    $this->assertStringContainsString('data-trans-docs="Dokumentation"', (string) $docs->getContent());
 
     $general = $kernel->handle(Request::create('/app/search/cat?context=docs'));
     $this->assertSame(Response::HTTP_OK, $general->getStatusCode());

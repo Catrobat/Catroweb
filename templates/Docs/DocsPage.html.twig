@@ -12,9 +12,8 @@
     <h1 class="docs-article__title">{{ page.title }}</h1>
 
     {% if page.path == 'index' %}
-      <form class="docs-home-search" dir="auto" role="search" action="{{ path('empty_search')|trim('/', 'right') }}" method="get">
-        {% set locale = docs_locale_query.locale|default(app.request.locale) %}
-        <label for="docs-search-query">{{ 'docs.home_search'|trans({}, 'catroweb', locale) }}</label>
+      <form class="docs-home-search" dir="auto" role="search" action="{{ path('empty_search') }}" method="get">
+        <label for="docs-search-query">{{ 'docs.home_search'|trans({}, 'catroweb', docs_ui_locale) }}</label>
         <div class="docs-home-search__control">
           <input type="hidden" name="context" value="docs">
           <input type="hidden" name="scope" value="docs">
@@ -22,7 +21,7 @@
             <input type="hidden" name="locale" value="{{ docs_locale_query.locale }}">
           {% endif %}
           <input type="search" id="docs-search-query" name="q" maxlength="200" required>
-          <button type="submit" aria-label="{{ 'search.search'|trans({}, 'catroweb', locale) }}"><span class="material-icons" aria-hidden="true">search</span></button>
+          <button type="submit" aria-label="{{ 'docs.home_search_submit'|trans({}, 'catroweb', docs_ui_locale) }}"><span class="material-icons" aria-hidden="true">search</span></button>
         </div>
       </form>
     {% endif %}

@@ -1035,6 +1035,7 @@ inactiveAccount:
 
 docs:
   home_search: "Găsește un bloc sau un tutorial"
+  home_search_submit: "Caută în documentație"
   search_guides: "Ghiduri"
   search_bricks: "Blocuri"
   search_formula: "Elemente de formulă"

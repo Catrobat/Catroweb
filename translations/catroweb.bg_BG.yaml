@@ -1058,6 +1058,7 @@ inactiveAccount:
 
 docs:
   home_search: "Намери блокче или урок"
+  home_search_submit: "Търси в документацията"
   search_guides: "Ръководства"
   search_bricks: "Блокове"
   search_formula: "Елементи на формули"
