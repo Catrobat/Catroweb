@@ -2,12 +2,12 @@
 title: 오브젝트 추가하기
 description: 더하기 버튼을 눌러 프로젝트에 새 캐릭터나 오브젝트를 추가하세요.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-더하기 버튼을 눌러 프로젝트에 새 캐릭터나 오브젝트를 추가하세요.
-
-![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)
+![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)\
+더하기 버튼을 눌러 프로젝트에 새 캐릭터나 오브젝트를 추가하세요.\
+[이미지 열기](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Code에서는 여러 방법으로 프로젝트에 캐릭터나 오브젝트를 추가할 수 있어요.
 
@@ -29,4 +29,6 @@ Pocket Code에서는 여러 방법으로 프로젝트에 캐릭터나 오브젝�
 
 **로컬 프로젝트**: 어떤 프로젝트에서 첫 번째 오브젝트와 스크립트를 가져와서 내 프로젝트에 넣을지 골라요.
 
-![New Actor](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![New Actor](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Code에서는 여러 방법으로 프로젝트에 캐릭터나 오브젝트를 추가할 수 있어요.\
+[이미지 열기](../../../media/getting-started/NewActor-e1732794461668.jpg)

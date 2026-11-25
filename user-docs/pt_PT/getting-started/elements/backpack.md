@@ -2,7 +2,7 @@
 title: Mochila
 description: "A funcionalidade da mochila no Pocket Code é uma função prática que te permite guardar e reutilizar elementos como atores (objetos), scripts, aparências ou sons em vários projetos."
 order: 0
-source_hash: '331e082e4ebc8d246985323b3ea757069e6e7cfd896bf51da6af07b54d7bd66e'
+source_hash: 'c0242d01d71d7fc962d0908c8e2492b7d13cd5e6df51e05b68ed6368ee83508d'
 ---
 
 A funcionalidade da **mochila** no Pocket Code é uma função prática que te permite **guardar e reutilizar** elementos como atores (objetos), scripts, aparências ou sons **em vários projetos**. Ajuda-te a poupar tempo e a tornar os teus projetos mais eficientes.
@@ -15,11 +15,11 @@ A mochila é como um espaço de armazenamento digital onde podes guardar vários
 
 Vai à vista do projeto de onde queres colocar uma figura na mochila.
 
-Carrega nos três pontos ao lado da figura para abrir o menu de contexto e seleciona “Colocar na mochila”.
-
 A figura (incluindo as suas aparências, sons e scripts) será colocada na mochila.
 
-![Colocar ator na mochila](../../../media/getting-started/grafik-7.png)
+![Colocar ator na mochila](../../../media/getting-started/grafik-7.png)\
+Carrega nos três pontos ao lado da figura para abrir o menu de contexto e seleciona “Colocar na mochila”.\
+[Abrir imagem](../../../media/getting-started/grafik-7.png)
 
 **Adicionar figuras da mochila**
 
@@ -27,9 +27,11 @@ Abre o projeto onde queres inserir a figura.
 
 Na vista do projeto, carrega no símbolo de mais e seleciona “Mochila”.
 
-Vais ver agora todas as figuras e objetos que guardaste na tua mochila. Carrega nos três pontos e seleciona “Tirar da mochila”.
+Vais ver agora todas as figuras e objetos que guardaste na tua mochila.
 
-![Tirar ator da mochila](../../../media/getting-started/grafik-8-e1732702791199.png)
+![Tirar ator da mochila](../../../media/getting-started/grafik-8-e1732702791199.png)\
+Carrega nos três pontos e seleciona “Tirar da mochila”.\
+[Abrir imagem](../../../media/getting-started/grafik-8-e1732702791199.png)
 
 ***
 
@@ -39,29 +41,33 @@ Vais ver agora todas as figuras e objetos que guardaste na tua mochila. Carrega 
 
 Vai à figura que contém o script. Mantém premido o script desejado no editor de scripts.
 
-Seleciona “Adicionar à mochila” no menu de contexto.
+![Adicionar à mochila](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)\
+Seleciona “Adicionar à mochila” no menu de contexto.\
+[Abrir imagem](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
 
-![Adicionar à mochila](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
+![Guardar ator na mochila](../../../media/getting-started/grafik-9.png)\
+Dá um nome ao script e confirma com OK.\
+[Abrir imagem](../../../media/getting-started/grafik-9.png)
 
-Dá um nome ao script e confirma com OK.
-
-![Guardar ator na mochila](../../../media/getting-started/grafik-9.png)
-
-O script fica guardado e pode ser usado noutros projetos.
-
-![A tua mochila](../../../media/getting-started/grafik-10.png)
+![A tua mochila](../../../media/getting-started/grafik-10.png)\
+O script fica guardado e pode ser usado noutros projetos.\
+[Abrir imagem](../../../media/getting-started/grafik-10.png)
 
 **Adicionar scripts da mochila:**
 
-Carrega no ator onde queres inserir o script. Vais ver a área de scripts. Carrega nos três pontos para abrir o menu de contexto e carrega em “Mochila”.
+Carrega no ator onde queres inserir o script. Vais ver a área de scripts.
 
-![TirarScript](../../../media/getting-started/grafik-11.png)
+![TirarScript](../../../media/getting-started/grafik-11.png)\
+Carrega nos três pontos para abrir o menu de contexto e carrega em “Mochila”.\
+[Abrir imagem](../../../media/getting-started/grafik-11.png)
 
-Agora podes ver todos os scripts que já estão na tua mochila. Carrega nos três pontos ao lado do script desejado e seleciona “Tirar da mochila” no menu de contexto.
+Agora podes ver todos os scripts que já estão na tua mochila.
 
 No menu de contexto, podes eliminar os scripts de que já não precisas na tua mochila.
 
-![TirarScriptMochila](../../../media/getting-started/grafik-12.png)
+![TirarScriptMochila](../../../media/getting-started/grafik-12.png)\
+Carrega nos três pontos ao lado do script desejado e seleciona “Tirar da mochila” no menu de contexto.\
+[Abrir imagem](../../../media/getting-started/grafik-12.png)
 
 ***
 

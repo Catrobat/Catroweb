@@ -2,16 +2,20 @@
 title: יצירת פרויקט חדש
 description: פתחו את האפליקציה בסמארטפון או בטאבלט שלכם.
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-פתחו את האפליקציה בסמארטפון או בטאבלט שלכם. הקישו על סימן ה־+ כדי ליצור פרויקט חדש.
+פתחו את האפליקציה בסמארטפון או בטאבלט שלכם.
 
-![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)
+![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)\
+הקישו על סימן ה־+ כדי ליצור פרויקט חדש.\
+[פתיחת תמונה](../../../media/getting-started/MainScreen_NewProject.png)
 
-תנו שם לפרויקט (1), ובחרו אם תרצו ליצור משחק בפורמט לאורך (אנכי) או לרוחב (אופקי) (2). אחר כך אשרו עם סימן ה־V (3).
+תנו שם לפרויקט (1), ובחרו אם תרצו ליצור משחק בפורמט לאורך (אנכי) או לרוחב (אופקי) (2).
 
-![NewProject](../../../media/getting-started/NewProject.png)
+![NewProject](../../../media/getting-started/NewProject.png)\
+אחר כך אשרו עם סימן ה־V (3).\
+[פתיחת תמונה](../../../media/getting-started/NewProject.png)
 
 עכשיו אתם נמצאים בתצוגת הפרויקט. למעלה תראו את שם המשחק שלכם.
 
@@ -21,8 +25,12 @@ source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
 
 בפינה הימנית התחתונה תראו שני כפתורים חשובים:
 
-![Start](../../../media/getting-started/Start.png) בעזרת כפתור **ההפעלה** מתחילים את המשחק שלכם.
+![Start](../../../media/getting-started/Start.png)\
+בעזרת כפתור **ההפעלה** מתחילים את המשחק שלכם.
 
-![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png) בעזרת כפתור **הפלוס** מוסיפים דמות או אובייקט חדשים למשחק.
+![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+בעזרת כפתור **הפלוס** מוסיפים דמות או אובייקט חדשים למשחק.
 
-![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+עכשיו אתם נמצאים בתצוגת הפרויקט.\
+[פתיחת תמונה](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

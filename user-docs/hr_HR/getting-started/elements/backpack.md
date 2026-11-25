@@ -2,7 +2,7 @@
 title: Ruksak
 description: "Funkcija ruksaka u aplikaciji Pocket Code praktična je značajka koja ti omogućuje spremanje i ponovno korištenje elemenata poput likova (objekata), skripti, izgleda ili zvukova u različitim projektima."
 order: 0
-source_hash: '331e082e4ebc8d246985323b3ea757069e6e7cfd896bf51da6af07b54d7bd66e'
+source_hash: 'c0242d01d71d7fc962d0908c8e2492b7d13cd5e6df51e05b68ed6368ee83508d'
 ---
 
 Funkcija **ruksak** u aplikaciji Pocket Code praktična je značajka koja ti omogućuje da **spremiš i ponovno koristiš** elemente poput likova (objekata), skripti, izgleda ili zvukova **u različitim projektima**. Pomaže ti uštedjeti vrijeme i učiniti tvoje projekte učinkovitijima.
@@ -15,11 +15,11 @@ Ruksak je kao digitalni prostor za pohranu u koji možeš spremiti razne element
 
 Idi u prikaz projekta iz kojeg želiš spremiti lik u ruksak.
 
-Klikni na tri točkice pored lika da otvoriš kontekstni izbornik i odaberi „Spremi u ruksak”.
-
 Lik (uključujući njegove izglede, zvukove i skripte) bit će spremljen u ruksak.
 
-![Spremi lik](../../../media/getting-started/grafik-7.png)
+![Spremi lik](../../../media/getting-started/grafik-7.png)\
+Klikni na tri točkice pored lika da otvoriš kontekstni izbornik i odaberi „Spremi u ruksak”.\
+[Otvori sliku](../../../media/getting-started/grafik-7.png)
 
 **Dodaj likove iz ruksaka**
 
@@ -27,9 +27,11 @@ Otvori projekt u koji želiš umetnuti lik.
 
 U prikazu projekta dodirni simbol plusa i odaberi „Ruksak”.
 
-Sada ćeš vidjeti sve likove i objekte koje si spremio u ruksak. Dodirni tri točkice i odaberi „Raspakiraj”.
+Sada ćeš vidjeti sve likove i objekte koje si spremio u ruksak.
 
-![Raspakiraj lik](../../../media/getting-started/grafik-8-e1732702791199.png)
+![Raspakiraj lik](../../../media/getting-started/grafik-8-e1732702791199.png)\
+Dodirni tri točkice i odaberi „Raspakiraj”.\
+[Otvori sliku](../../../media/getting-started/grafik-8-e1732702791199.png)
 
 ***
 
@@ -39,29 +41,33 @@ Sada ćeš vidjeti sve likove i objekte koje si spremio u ruksak. Dodirni tri to
 
 Idi na lik koji sadrži skriptu. Pritisni i zadrži željenu skriptu u uređivaču skripti.
 
-Odaberi „Dodaj u ruksak” iz kontekstnog izbornika.
+![Dodaj u ruksak](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)\
+Odaberi „Dodaj u ruksak” iz kontekstnog izbornika.\
+[Otvori sliku](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
 
-![Dodaj u ruksak](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
+![Spremi lik u ruksak](../../../media/getting-started/grafik-9.png)\
+Daj skripti naziv i potvrdi s OK.\
+[Otvori sliku](../../../media/getting-started/grafik-9.png)
 
-Daj skripti naziv i potvrdi s OK.
-
-![Spremi lik u ruksak](../../../media/getting-started/grafik-9.png)
-
-Skripta je spremljena i može se koristiti u drugim projektima.
-
-![Tvoj ruksak](../../../media/getting-started/grafik-10.png)
+![Tvoj ruksak](../../../media/getting-started/grafik-10.png)\
+Skripta je spremljena i može se koristiti u drugim projektima.\
+[Otvori sliku](../../../media/getting-started/grafik-10.png)
 
 **Dodaj skripte iz ruksaka:**
 
-Dodirni lik u koji želiš umetnuti skriptu. Vidjet ćeš područje skripti. Dodirni tri točkice da otvoriš kontekstni izbornik i dodirni „Ruksak”.
+Dodirni lik u koji želiš umetnuti skriptu. Vidjet ćeš područje skripti.
 
-![Raspakiraj skriptu](../../../media/getting-started/grafik-11.png)
+![Raspakiraj skriptu](../../../media/getting-started/grafik-11.png)\
+Dodirni tri točkice da otvoriš kontekstni izbornik i dodirni „Ruksak”.\
+[Otvori sliku](../../../media/getting-started/grafik-11.png)
 
-Sada možeš vidjeti sve skripte koje su već u tvom ruksaku. Dodirni tri točkice pored željene skripte i odaberi „Raspakiraj” iz kontekstnog izbornika.
+Sada možeš vidjeti sve skripte koje su već u tvom ruksaku.
 
 Kroz kontekstni izbornik možeš izbrisati skripte koje ti više nisu potrebne u ruksaku.
 
-![Raspakiraj skriptu iz ruksaka](../../../media/getting-started/grafik-12.png)
+![Raspakiraj skriptu iz ruksaka](../../../media/getting-started/grafik-12.png)\
+Dodirni tri točkice pored željene skripte i odaberi „Raspakiraj” iz kontekstnog izbornika.\
+[Otvori sliku](../../../media/getting-started/grafik-12.png)
 
 ***
 

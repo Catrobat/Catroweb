@@ -2,18 +2,20 @@
 title: Obiect nou
 description: "În acest tutorial vei învăța cum să creezi un obiect nou în proiectul tău și ce posibilități ai pentru asta."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 În acest tutorial vei învăța cum să creezi un obiect nou în proiectul tău și ce posibilități ai pentru asta.
 
-![Obiect nou](../../../media/game-tutorials/New-Object.png)
+![Obiect nou](../../../media/game-tutorials/New-Object.png)\
+În acest tutorial vei învăța cum să creezi un obiect nou în proiectul tău și ce posibilități ai pentru asta.\
+[Deschide imaginea](../../../media/game-tutorials/New-Object.png)
 
 Pentru asta, ar trebui deja să fi descărcat aplicația Pocket Code și să știi cum să creezi un proiect nou. Dacă ai nevoie de ajutor cu asta, uită-te cu încredere la tutorialul **[Proiect nou](new-project.md)**.
 
 *Aici poți descărca tutorialul în format PDF:*
 
-[Obiect nou](../../../media/game-tutorials/New-Object.pdf)
+[Deschide PDF-ul](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Creează un obiect nou
 
@@ -23,15 +25,17 @@ Mai întâi, trebuie să deschizi proiectul tău nou.
 
 ### 2. Creează un obiect nou
 
-Acum ești gata să creezi un obiect nou. Pentru asta, apasă pe butonul galben cu plus din colțul din dreapta jos. Vei vedea o fereastră nouă cu șapte posibilități din care poți alege.
+Acum ești gata să creezi un obiect nou. Vei vedea o fereastră nouă cu șapte posibilități din care poți alege.
 
-![Obiect nou (1)](../../../media/game-tutorials/New-Object-1.png)
+![Obiect nou (1)](../../../media/game-tutorials/New-Object-1.png)\
+Pentru asta, apasă pe butonul galben cu plus din colțul din dreapta jos.\
+[Deschide imaginea](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Moduri de a crea
 
-Acestea sunt posibilitățile din care poți alege:
-
-![Obiect nou (2)](../../../media/game-tutorials/New-Object-2.png)
+![Obiect nou (2)](../../../media/game-tutorials/New-Object-2.png)\
+Acestea sunt posibilitățile din care poți alege.\
+[Deschide imaginea](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Desenează o imagine
 
@@ -43,9 +47,11 @@ Acum trebuie să dai imaginii tale un nume.
 
 ### 6. Plasează-o
 
-După aceea, trebuie s-o plasezi vizual, mutând-o cu degetul stânga/dreapta sau sus/jos. Trebuie să o salvezi cu butonul din colțul din dreapta sus.
+După aceea, trebuie s-o plasezi vizual, mutând-o cu degetul stânga/dreapta sau sus/jos.
 
-![Obiect nou (3)](../../../media/game-tutorials/New-Object-3.png)
+![Obiect nou (3)](../../../media/game-tutorials/New-Object-3.png)\
+Trebuie să o salvezi cu butonul din colțul din dreapta sus.\
+[Deschide imaginea](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Ai reușit! Ai creat propriul tău obiect nou.
 

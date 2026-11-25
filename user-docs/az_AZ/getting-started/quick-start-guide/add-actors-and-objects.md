@@ -2,12 +2,12 @@
 title: "Aktyorları və obyektləri əlavə edin"
 description: "Layihənizə yeni bir rəqəm və ya obyekt əlavə etmək üçün plus düyməsini basın."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Layihənizə yeni bir rəqəm və ya obyekt əlavə etmək üçün plus düyməsini basın.
-
-![Aktyor əlavə edin](../../../media/getting-started/FigurHinzufuegen.png)
+![Aktyor əlavə edin](../../../media/getting-started/FigurHinzufuegen.png)\
+Layihənizə yeni bir rəqəm və ya obyekt əlavə etmək üçün plus düyməsini basın.\
+[Şəkli aç](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Code -də layihənizə bir xarakter və ya obyekt əlavə edə bilərsən:
 
@@ -29,4 +29,6 @@ Pocket Code -də layihənizə bir xarakter və ya obyekt əlavə edə bilərsən
 
 **Cihazdakı layihələr**: İlk aktyoru və ssenariyi layihənizə daxil etmək istədiyiniz bir layihəni seç.
 
-![Yeni aktyor](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Yeni aktyor](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Code -də layihənizə bir xarakter və ya obyekt əlavə edə bilərsən.\
+[Şəkli aç](../../../media/getting-started/NewActor-e1732794461668.jpg)

@@ -2,18 +2,20 @@
 title: Đối tượng mới
 description: "Trong hướng dẫn này, bạn sẽ học cách tạo một đối tượng mới trong dự án và những cách khác nhau để làm điều đó."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Trong hướng dẫn này, bạn sẽ học cách tạo một đối tượng mới trong dự án và những cách khác nhau để làm điều đó.
 
-![Đối tượng mới](../../../media/game-tutorials/New-Object.png)
+![Đối tượng mới](../../../media/game-tutorials/New-Object.png)\
+Trong hướng dẫn này, bạn sẽ học cách tạo một đối tượng mới trong dự án và những cách khác nhau để làm điều đó.\
+[Mở hình ảnh](../../../media/game-tutorials/New-Object.png)
 
 Để làm theo, bạn cần đã tải ứng dụng Pocket Code và biết cách tạo dự án mới. Nếu cần hỗ trợ, hãy xem hướng dẫn **[Dự án mới](new-project.md)**.
 
 *Bạn có thể tải hướng dẫn này ở định dạng PDF tại đây:*
 
-[Đối tượng mới](../../../media/game-tutorials/New-Object.pdf)
+[Mở PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Tạo đối tượng mới
 
@@ -23,15 +25,17 @@ Bạn sẽ tìm thấy dự án trên màn hình chính của ứng dụng Pocke
 
 ### 2. Tạo đối tượng mới
 
-Bây giờ bạn đã sẵn sàng tạo đối tượng mới. Chỉ cần nhấn nút dấu cộng màu vàng ở góc dưới bên phải. Bạn sẽ thấy một cửa sổ mới với bảy cách để chọn.
+Bây giờ bạn đã sẵn sàng tạo đối tượng mới. Bạn sẽ thấy một cửa sổ mới với bảy cách để chọn.
 
-![Đối tượng mới (1)](../../../media/game-tutorials/New-Object-1.png)
+![Đối tượng mới (1)](../../../media/game-tutorials/New-Object-1.png)\
+Chỉ cần nhấn nút dấu cộng màu vàng ở góc dưới bên phải.\
+[Mở hình ảnh](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Các cách tạo
 
-Đây là các cách bạn có thể chọn:
-
-![Đối tượng mới (2)](../../../media/game-tutorials/New-Object-2.png)
+![Đối tượng mới (2)](../../../media/game-tutorials/New-Object-2.png)\
+Đây là các cách bạn có thể chọn.\
+[Mở hình ảnh](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Vẽ hình
 
@@ -43,9 +47,11 @@ Bây giờ bạn cần đặt tên cho hình của mình.
 
 ### 6. Đặt vị trí
 
-Sau đó, bạn cần đặt hình ở vị trí mong muốn bằng cách kéo sang trái/phải hoặc lên/xuống bằng ngón tay. Hãy lưu lại bằng nút ở góc trên bên phải.
+Sau đó, bạn cần đặt hình ở vị trí mong muốn bằng cách kéo sang trái/phải hoặc lên/xuống bằng ngón tay.
 
-![Đối tượng mới (3)](../../../media/game-tutorials/New-Object-3.png)
+![Đối tượng mới (3)](../../../media/game-tutorials/New-Object-3.png)\
+Hãy lưu lại bằng nút ở góc trên bên phải.\
+[Mở hình ảnh](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Xong rồi! Bạn đã tạo đối tượng mới của riêng mình.
 

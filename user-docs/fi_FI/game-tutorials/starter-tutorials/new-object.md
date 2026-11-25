@@ -2,18 +2,20 @@
 title: Uusi objekti
 description: "Tässä ohjeessa opit luomaan uuden objektin projektiisi ja näet, mitä vaihtoehtoja sinulla on."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Tässä ohjeessa opit luomaan uuden objektin projektiisi ja näet, mitä vaihtoehtoja sinulla on.
 
-![Uusi objekti](../../../media/game-tutorials/New-Object.png)
+![Uusi objekti](../../../media/game-tutorials/New-Object.png)\
+Tässä ohjeessa opit luomaan uuden objektin projektiisi ja näet, mitä vaihtoehtoja sinulla on.\
+[Avaa kuva](../../../media/game-tutorials/New-Object.png)
 
 Tätä varten sinulla pitää jo olla ladattuna Pocket Code -sovellus ja tiedettävä, miten luodaan uusi projekti. Jos tarvitset apua, katso ohje **[Uusi projekti](new-project.md)**.
 
 *Voit ladata tämän ohjeen PDF-muodossa:*
 
-[Uusi objekti](../../../media/game-tutorials/New-Object.pdf)
+[Avaa PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Luo uusi objekti
 
@@ -23,15 +25,17 @@ Löydät sen Pocket Coden aloitusnäytöltä. Jos sinulla on useampia projekteja
 
 ### 2. Luo uusi objekti
 
-Nyt voit luoda uuden objektin. Napauta siihen oikeassa alakulmassa olevaa keltaista plus-painiketta. Näet uuden ikkunan, jossa on seitsemän vaihtoehtoa.
+Nyt voit luoda uuden objektin. Näet uuden ikkunan, jossa on seitsemän vaihtoehtoa.
 
-![Uusi objekti (1)](../../../media/game-tutorials/New-Object-1.png)
+![Uusi objekti (1)](../../../media/game-tutorials/New-Object-1.png)\
+Napauta siihen oikeassa alakulmassa olevaa keltaista plus-painiketta.\
+[Avaa kuva](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Luontitavat
 
-Nämä ovat vaihtoehdot, joista voit valita:
-
-![Uusi objekti (2)](../../../media/game-tutorials/New-Object-2.png)
+![Uusi objekti (2)](../../../media/game-tutorials/New-Object-2.png)\
+Nämä ovat vaihtoehdot, joista voit valita.\
+[Avaa kuva](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Piirrä kuva
 
@@ -43,9 +47,11 @@ Nyt sinun pitää antaa kuvallesi nimi.
 
 ### 6. Sijoita objekti
 
-Sen jälkeen sinun pitää sijoittaa objekti visuaalisesti siirtämällä sitä sormella vasemmalle, oikealle, ylös tai alas. Tallenna se painamalla oikeassa yläkulmassa olevaa painiketta.
+Sen jälkeen sinun pitää sijoittaa objekti visuaalisesti siirtämällä sitä sormella vasemmalle, oikealle, ylös tai alas.
 
-![Uusi objekti (3)](../../../media/game-tutorials/New-Object-3.png)
+![Uusi objekti (3)](../../../media/game-tutorials/New-Object-3.png)\
+Tallenna se painamalla oikeassa yläkulmassa olevaa painiketta.\
+[Avaa kuva](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Onnistuit! Loit oman uuden objektin.
 

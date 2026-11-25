@@ -2,12 +2,12 @@
 title: Pridanie postáv a objektov
 description: Klepni na tlačidlo plus, ak chceš do projektu pridať novú postavu alebo objekt.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Klepni na tlačidlo plus, ak chceš do projektu pridať novú postavu alebo objekt.
-
-![Pridanie postavy](../../../media/getting-started/FigurHinzufuegen.png)
+![Pridanie postavy](../../../media/getting-started/FigurHinzufuegen.png)\
+Klepni na tlačidlo plus, ak chceš do projektu pridať novú postavu alebo objekt.\
+[Otvor obrázok](../../../media/getting-started/FigurHinzufuegen.png)
 
 V aplikácii Pocket Code môžeš do projektu pridať postavu alebo objekt rôznymi spôsobmi:
 
@@ -29,4 +29,6 @@ V aplikácii Pocket Code môžeš do projektu pridať postavu alebo objekt rôzn
 
 **Miestne projekty**: Vyber projekt, z ktorého chceš do svojho projektu vložiť prvú postavu spolu so skriptom.
 
-![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+V aplikácii Pocket Code môžeš do projektu pridať postavu alebo objekt rôznymi spôsobmi.\
+[Otvor obrázok](../../../media/getting-started/NewActor-e1732794461668.jpg)

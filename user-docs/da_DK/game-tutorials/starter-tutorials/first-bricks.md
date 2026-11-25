@@ -2,18 +2,20 @@
 title: Første klodser
 description: "I denne vejledning lærer du, hvor du finder forskellige klodser til at programmere et objekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 I denne vejledning lærer du, hvor du finder forskellige klodser til at programmere et objekt. Desuden får du et godt overblik over klodskategorierne.
 
-![Første klodser](../../../media/game-tutorials/First-Bricks.png)
+![Første klodser](../../../media/game-tutorials/First-Bricks.png)\
+Desuden får du et godt overblik over klodskategorierne.\
+[Åbn billedet](../../../media/game-tutorials/First-Bricks.png)
 
 For at indsætte klodser og programmere dit objekt skal du allerede have lavet et projekt med et objekt. Hvis du har brug for hjælp til det, kan du kigge på vejledningen **[Nyt objekt](new-object.md)**.
 
 *Her kan du downloade vejledningen i PDF-format:*
 
-[Første klodser](../../../media/game-tutorials/First-Bricks.pdf)
+[Åbn PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Åbn et eksisterende objekt
 
@@ -23,9 +25,11 @@ Først skal du åbne dit projekt. Du skal allerede have lavet et objekt (hvis ik
 
 Herefter ser du, at der allerede er nogle klodser. Disse klodser blev lavet, da vi placerede objektet visuelt.
 
-Klodserne gør ikke mere, end at placere vores objekt præcis der, hvor vi valgte det i starten, når projektet begynder. Du kan også ændre denne position her, når som helst.
+Klodserne gør ikke mere, end at placere vores objekt præcis der, hvor vi valgte det i starten, når projektet begynder.
 
-![Første klodser (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Første klodser (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Du kan også ændre denne position her, når som helst.\
+[Åbn billedet](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Indsæt klodser
 
@@ -33,9 +37,9 @@ Nu kan du lave flere klodser ved at trykke på den gule plusknap nederst i højr
 
 ### 4. Klodskategorier
 
-Dette er de forskellige klodskategorier:
-
-![Første klodser (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Første klodser (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Dette er de forskellige klodskategorier.\
+[Åbn billedet](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Indsæt den første klods
 
@@ -43,9 +47,11 @@ Til vores første klodser vil vi bruge klodsen “Glid 1 sekund til x: y:”. Du
 
 ### 6. Placér klodsen
 
-Placér klodsen på den sidste plads i dit program, og kør dit program for første gang. Det gør du med den gule afspilningsknap.
+Placér klodsen på den sidste plads i dit program, og kør dit program for første gang.
 
-![Første klodser (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Første klodser (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Det gør du med den gule afspilningsknap.\
+[Åbn billedet](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Du klarede det! Du har indsat din første klods.
 

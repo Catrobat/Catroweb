@@ -2,18 +2,20 @@
 title: Pierwsze klocki
 description: "W tym samouczku dowiesz się, gdzie znaleźć różne klocki, żeby zaprogramować obiekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 W tym samouczku dowiesz się, gdzie znaleźć różne klocki, żeby zaprogramować obiekt. Dostaniesz też dobry przegląd kategorii klocków.
 
-![Pierwsze klocki](../../../media/game-tutorials/First-Bricks.png)
+![Pierwsze klocki](../../../media/game-tutorials/First-Bricks.png)\
+Dostaniesz też dobry przegląd kategorii klocków.\
+[Otwórz obraz](../../../media/game-tutorials/First-Bricks.png)
 
 Żeby wstawić klocki i zaprogramować obiekt, musisz już mieć projekt z obiektem. Jeśli nie wiesz, jak to zrobić, zajrzyj do samouczka **[Nowy obiekt](new-object.md)**.
 
 *Tutaj możesz pobrać samouczek w formacie PDF:*
 
-[Pierwsze klocki](../../../media/game-tutorials/First-Bricks.pdf)
+[Otwórz PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Otwórz istniejący obiekt
 
@@ -23,9 +25,11 @@ Najpierw otwórz swój projekt. Powinieneś już mieć obiekt (jeśli nie, zajrz
 
 Zobaczysz, że są już jakieś klocki. Zostały utworzone, kiedy ustawialiśmy obiekt na ekranie.
 
-Te klocki robią tylko tyle, że na początku projektu ustawiają obiekt w wybranym przez nas miejscu. Możesz tu w każdej chwili zmienić to położenie.
+Te klocki robią tylko tyle, że na początku projektu ustawiają obiekt w wybranym przez nas miejscu.
 
-![Pierwsze klocki (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Pierwsze klocki (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Możesz tu w każdej chwili zmienić to położenie.\
+[Otwórz obraz](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Wstaw klocki
 
@@ -33,9 +37,9 @@ Teraz możesz dodać więcej klocków, klikając żółty przycisk plus w prawym
 
 ### 4. Kategorie klocków
 
-To są różne kategorie klocków:
-
-![Pierwsze klocki (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Pierwsze klocki (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+To są różne kategorie klocków.\
+[Otwórz obraz](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Wstaw pierwszy klocek
 
@@ -43,9 +47,11 @@ Do naszego pierwszego klocka użyjemy klocka „Leć przez 1 sekundę do x: y:�
 
 ### 6. Umieść klocek
 
-Umieść klocek na ostatnim miejscu w swoim programie i uruchom program po raz pierwszy. Zrobisz to żółtym przyciskiem play.
+Umieść klocek na ostatnim miejscu w swoim programie i uruchom program po raz pierwszy.
 
-![Pierwsze klocki (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Pierwsze klocki (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Zrobisz to żółtym przyciskiem play.\
+[Otwórz obraz](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Udało się! Wstawiłeś swój pierwszy klocek.
 

@@ -2,7 +2,7 @@
 title: "Magdagdag ng Background"
 description: "Maaari mong magdagdag ng background sa iyong proyekto sa Catrobat."
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Maaari mong magdagdag ng background sa iyong proyekto sa Catrobat.
@@ -11,15 +11,17 @@ Ang mga background ay maaaring gamitin sa iba't ibang paraan. Sa Pocket Code, ma
 
 Para sa mga aparato ng makerspace tulad ng **mga planner** o **mga makina ng pag-uukit**, ang mga background ay nagsisilbing template ng disenyo, gaya ng para sa mga cut o pattern ng embroidery.
 
-Upang magdagdag ng background, pindutin ang “Background” sa paningin ng proyekto.
-
-![Tip sa Pag-aaral](../../../media/getting-started/grafik-16.png)
+![Tip sa Pag-aaral](../../../media/getting-started/grafik-16.png)\
+Upang magdagdag ng background, pindutin ang “Background” sa paningin ng proyekto.\
+[Buksan ang larawan](../../../media/getting-started/grafik-16.png)
 
 Sa **bahagi ng script(2)**, maaari mong i-program ang iyong background - gayunpaman, hindi lahat ng mga bloke ay magagamit para dito. Ang mga sumusunod na dalawang bloke ay partikular na mahalaga: ![I-set ang transparency sa 50 pct](../../../media/bricks/Set_transparency_to_50_pct_.png) at ![Set size sa 60 pct](../../../media/bricks/Set_size_to_60_pct_.png)
 
-Sa **hitsura seksyon(1)**, magdagdag ka ng background. Upang gawin ito, pindutin ang + simbolo.
+Sa **hitsura seksyon(1)**, magdagdag ka ng background.
 
-![Magdagdag ng background](../../../media/getting-started/grafik-14.png)
+![Magdagdag ng background](../../../media/getting-started/grafik-14.png)\
+Upang gawin ito, pindutin ang + simbolo.\
+[Buksan ang larawan](../../../media/getting-started/grafik-14.png)
 
 Maaari mong i-upload ang iyong sariling mga imahe, gamitin ang mga pre-defined na background, o lumikha ng isang background sa iyong sarili.
 
@@ -31,6 +33,8 @@ Maaari mong i-upload ang iyong sariling mga imahe, gamitin ang mga pre-defined n
 
 **Camera**: Maaari mong gamitin ang kamera ng iyong aparato upang kumuha ng isang larawan at magdagdag nito bilang background.
 
-![Pumili mula sa media library](../../../media/getting-started/grafik-17.png)
+![Pumili mula sa media library](../../../media/getting-started/grafik-17.png)\
+I-click ang likod na pana sa tuktok kanan upang bumalik sa **Pagtingin ng Proyekto**.\
+[Buksan ang larawan](../../../media/getting-started/grafik-17.png)
 
-Nagdagdag ka na ng background. I-click ang likod na pana sa tuktok kanan upang bumalik sa **Pagtingin ng Proyekto**.
+Nagdagdag ka na ng background.

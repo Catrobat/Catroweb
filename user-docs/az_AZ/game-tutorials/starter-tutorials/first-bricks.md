@@ -2,18 +2,20 @@
 title: "İlk kod blokları"
 description: "Bu dərslikdə bir obyektin proqramlaşdırılması üçün müxtəlif kod bloklarını harada tapmağı öyrənəcəksiniz."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Bu dərslikdə bir obyektin proqramlaşdırılması üçün müxtəlif kod bloklarını harada tapmağı öyrənəcəksiniz. Bundan əlavə, bu təlimat kod blokları kateqoriyasının yaxşı bir ümumgörüsü təmin edir.
 
-![İlk kod blokları](../../../media/game-tutorials/First-Bricks.png)
+![İlk kod blokları](../../../media/game-tutorials/First-Bricks.png)\
+Bundan əlavə, bu təlimat kod blokları kateqoriyasının yaxşı bir ümumgörüsü təmin edir.\
+[Şəkli aç](../../../media/game-tutorials/First-Bricks.png)
 
 Kod bloklarını daxil etmək və obyektinizi proqramlaşdırmaq üçün bir obyektlə layihə yaratmalısan. Əgər bu işdə kömək lazımdırsa, **[Yeni obyekt](new-object.md)**- Təlimat.
 
 *Burada PDF formatında dərslik yükləyə bilərsiniz:*
 
-[İlk kod blokları](../../../media/game-tutorials/First-Bricks.pdf)
+[PDF-i aç](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Mövcud obyekt açın
 
@@ -23,9 +25,11 @@ Kod bloklarını daxil etmək və obyektinizi proqramlaşdırmaq üçün bir oby
 
 Bundan sonra görərsən ki, artıq bəzi kod blokları var. Bu kod blokları obyektin vizual olaraq yerləşdirilməsində yaradılmışdır.
 
-Bu kod blokları obyektimizi layihənin başlanğıcında seçdiyimiz dəqiq mövqeyə qoymaqdan başqa bir şey etmir. Bu mövqeyini hər an dəyişə bilərsiniz.
+Bu kod blokları obyektimizi layihənin başlanğıcında seçdiyimiz dəqiq mövqeyə qoymaqdan başqa bir şey etmir.
 
-![İlk kod blokları (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![İlk kod blokları (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Bu mövqeyini hər an dəyişə bilərsiniz.\
+[Şəkli aç](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Kod bloklarını daxil edin
 
@@ -33,9 +37,9 @@ Bu kod blokları obyektimizi layihənin başlanğıcında seçdiyimiz dəqiq mö
 
 ### 4. kod blokları Kategoriyalar
 
-Bunlar müxtəlif kod blokları kateqoriyasıdır:
-
-![İlk kod blokları (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![İlk kod blokları (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Bunlar müxtəlif kod blokları kateqoriyasıdır.\
+[Şəkli aç](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. İlk kod blokunu daxil edin
 
@@ -43,9 +47,11 @@ Bunlar müxtəlif kod blokları kateqoriyasıdır:
 
 ### 6. Kod blokunu yerləşdirin
 
-Kodu proqramınızın son mövqeyində qoyun və ilk dəfə proqramınızı çalışdırın. Sarı oynamaq düyməsi ilə bunu edə bilərsən.
+Kodu proqramınızın son mövqeyində qoyun və ilk dəfə proqramınızı çalışdırın.
 
-![İlk kod blokları (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![İlk kod blokları (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Sarı oynamaq düyməsi ilə bunu edə bilərsən.\
+[Şəkli aç](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. İlk kod blokunu daxil etdin.
 

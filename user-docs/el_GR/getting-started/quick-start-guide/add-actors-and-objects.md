@@ -2,12 +2,12 @@
 title: Πρόσθεσε χαρακτήρες και αντικείμενα
 description: Πάτα το κουμπί + για να προσθέσεις νέα μορφή ή αντικείμενο στο έργο σου.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Πάτα το κουμπί + για να προσθέσεις νέα μορφή ή αντικείμενο στο έργο σου.
-
-![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)
+![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)\
+Πάτα το κουμπί + για να προσθέσεις νέα μορφή ή αντικείμενο στο έργο σου.\
+[Άνοιξε την εικόνα](../../../media/getting-started/FigurHinzufuegen.png)
 
 Στο Pocket Code μπορείς να προσθέσεις έναν χαρακτήρα ή ένα αντικείμενο στο έργο σου με διάφορους τρόπους:
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **Τοπικά έργα**: Διάλεξε ένα έργο από το οποίο θέλεις να εισάγεις τον πρώτο χαρακτήρα μαζί με το σενάριό του στο δικό σου έργο.
 
-![Νέος χαρακτήρας](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Νέος χαρακτήρας](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Στο Pocket Code μπορείς να προσθέσεις έναν χαρακτήρα ή ένα αντικείμενο στο έργο σου με διάφορους τρόπους.\
+[Άνοιξε την εικόνα](../../../media/getting-started/NewActor-e1732794461668.jpg)

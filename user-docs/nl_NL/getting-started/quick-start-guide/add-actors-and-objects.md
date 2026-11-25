@@ -2,12 +2,12 @@
 title: Figuren en objecten toevoegen
 description: Tik op de plusknop om een nieuwe figuur of een nieuw object aan je project toe te voegen.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Tik op de plusknop om een nieuwe figuur of een nieuw object aan je project toe te voegen.
-
-![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)
+![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)\
+Tik op de plusknop om een nieuwe figuur of een nieuw object aan je project toe te voegen.\
+[Afbeelding openen](../../../media/getting-started/FigurHinzufuegen.png)
 
 In Pocket Code kun je op verschillende manieren een personage of een object aan je project toevoegen:
 
@@ -29,4 +29,6 @@ In Pocket Code kun je op verschillende manieren een personage of een object aan 
 
 **Lokale projecten**: Kies een project waaruit je de eerste figuur samen met het script in je project wilt zetten.
 
-![Nieuwe figuur](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nieuwe figuur](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+In Pocket Code kun je op verschillende manieren een personage of een object aan je project toevoegen.\
+[Afbeelding openen](../../../media/getting-started/NewActor-e1732794461668.jpg)

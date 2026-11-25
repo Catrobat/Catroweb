@@ -2,18 +2,20 @@
 title: 新对象
 description: "在本教程中，你将学会如何在项目中创建新对象，以及你有哪些不同的方法。"
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 在本教程中，你将学会如何在项目中创建新对象，以及你有哪些不同的方法。
 
-![新对象](../../../media/game-tutorials/New-Object.png)
+![新对象](../../../media/game-tutorials/New-Object.png)\
+在本教程中，你将学会如何在项目中创建新对象，以及你有哪些不同的方法。\
+[打开图片](../../../media/game-tutorials/New-Object.png)
 
 要做到这一点，你应该已经下载了 Pocket Code 应用，并且知道如何创建新项目。如果你需要帮助，可以看看**[新项目](new-project.md)**教程。
 
 *你可以在这里下载 PDF 格式的教程：*
 
-[新对象](../../../media/game-tutorials/New-Object.pdf)
+[打开 PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. 创建新对象
 
@@ -23,15 +25,17 @@ source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
 
 ### 2. 创建新对象
 
-现在你可以创建新对象了。点击右下角的黄色加号按钮。会出现一个新窗口，里面有七种可以选择的方式。
+现在你可以创建新对象了。 会出现一个新窗口，里面有七种可以选择的方式。
 
-![新对象（1）](../../../media/game-tutorials/New-Object-1.png)
+![新对象（1）](../../../media/game-tutorials/New-Object-1.png)\
+点击右下角的黄色加号按钮。\
+[打开图片](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. 创建方式
 
-以下是你可以选择的方式：
-
-![新对象（2）](../../../media/game-tutorials/New-Object-2.png)
+![新对象（2）](../../../media/game-tutorials/New-Object-2.png)\
+以下是你可以选择的方式：\
+[打开图片](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. 绘制图片
 
@@ -43,9 +47,11 @@ source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
 
 ### 6. 放置图片
 
-之后，你需要用手指把它向左右或上下移动，直观地放置它。然后点击右上角的按钮保存。
+之后，你需要用手指把它向左右或上下移动，直观地放置它。
 
-![新对象（3）](../../../media/game-tutorials/New-Object-3.png)
+![新对象（3）](../../../media/game-tutorials/New-Object-3.png)\
+然后点击右上角的按钮保存。\
+[打开图片](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. 你做到了！你创建了自己的新对象。
 

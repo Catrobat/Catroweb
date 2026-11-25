@@ -10,15 +10,17 @@ Backgrounds can be used in various ways. In Pocket Code, they can be utilized to
 
 For makerspace devices like **plotters** or **embroidery machines**, backgrounds serve as design templates, such as for cuts or embroidery patterns.
 
-To add a background, tap on “Background” in the project view.
-
-![Tipp on Background](../../../media/getting-started/grafik-16.png)
+![Tipp on Background](../../../media/getting-started/grafik-16.png)\
+To add a background, tap on “Background” in the project view.\
+[Open image](../../../media/getting-started/grafik-16.png)
 
 In the **script section(2)**, you can program your background – however, not all blocks are available for this. The following two blocks are particularly important: ![Set_transparency_to_50_pct_](../../../media/bricks/Set_transparency_to_50_pct_.png) and ![Set_size_to_60_pct_](../../../media/bricks/Set_size_to_60_pct_.png)
 
-In the **looks section(1)**, you add a background. To do this, tap the + symbol.
+In the **looks section(1)**, you add a background.
 
-![Hintergrund hinzufügen](../../../media/getting-started/grafik-14.png)
+![Hintergrund hinzufügen](../../../media/getting-started/grafik-14.png)\
+To do this, tap the + symbol.\
+[Open image](../../../media/getting-started/grafik-14.png)
 
 You can upload your own images, use predefined backgrounds, or create a background yourself.
 
@@ -30,6 +32,8 @@ You can upload your own images, use predefined backgrounds, or create a backgrou
 
 **Camera**: You can use your device’s camera to take a photo and add it as a background.
 
-![grafik](../../../media/getting-started/grafik-17.png)
+![grafik](../../../media/getting-started/grafik-17.png)\
+Click the back arrow in the top right to return to the **Project View**.\
+[Open image](../../../media/getting-started/grafik-17.png)
 
-You have now added a background. Click the back arrow in the top right to return to the **Project View**.
+You have now added a background.

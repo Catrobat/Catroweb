@@ -2,7 +2,7 @@
 title: 背包
 description: "Pocket Code 的背包功能很實用，讓你可以儲存角色（物件）、腳本、造型或音效等元素，並在不同專案之間重複使用。"
 order: 0
-source_hash: '331e082e4ebc8d246985323b3ea757069e6e7cfd896bf51da6af07b54d7bd66e'
+source_hash: 'c0242d01d71d7fc962d0908c8e2492b7d13cd5e6df51e05b68ed6368ee83508d'
 ---
 
 Pocket Code 的**背包**功能很實用，讓你可以把角色（物件）、腳本、造型或音效等元素**儲存起來，並在不同專案之間重複使用**。它能幫你節省時間，讓你的專案更有效率。
@@ -15,11 +15,11 @@ Pocket Code 的**背包**功能很實用，讓你可以把角色（物件）、�
 
 前往你想把角色放進背包的專案的專案畫面。
 
-輕觸角色旁邊的三個點，打開選單，然後選擇「放進背包」。
-
 角色（包括它的造型、音效和腳本）就會被放進背包。
 
-![放進背包的角色](../../../media/getting-started/grafik-7.png)
+![放進背包的角色](../../../media/getting-started/grafik-7.png)\
+輕觸角色旁邊的三個點，打開選單，然後選擇「放進背包」。\
+[開啟圖片](../../../media/getting-started/grafik-7.png)
 
 **從背包新增角色**
 
@@ -27,9 +27,11 @@ Pocket Code 的**背包**功能很實用，讓你可以把角色（物件）、�
 
 在專案畫面中，輕觸加號，然後選擇「背包」。
 
-現在你會看到背包裡所有已儲存的角色和物件。輕觸三個點，然後選擇「從背包取出」。
+現在你會看到背包裡所有已儲存的角色和物件。
 
-![從背包取出角色](../../../media/getting-started/grafik-8-e1732702791199.png)
+![從背包取出角色](../../../media/getting-started/grafik-8-e1732702791199.png)\
+輕觸三個點，然後選擇「從背包取出」。\
+[開啟圖片](../../../media/getting-started/grafik-8-e1732702791199.png)
 
 ***
 
@@ -39,29 +41,33 @@ Pocket Code 的**背包**功能很實用，讓你可以把角色（物件）、�
 
 前往含有腳本的角色。在腳本編輯區中，按住你想要的腳本。
 
-從選單中選擇「放進背包」。
+![放進背包](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)\
+從選單中選擇「放進背包」。\
+[開啟圖片](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
 
-![放進背包](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
+![把角色放進背包](../../../media/getting-started/grafik-9.png)\
+為腳本取一個名字，然後按「確定」。\
+[開啟圖片](../../../media/getting-started/grafik-9.png)
 
-為腳本取一個名字，然後按「確定」。
-
-![把角色放進背包](../../../media/getting-started/grafik-9.png)
-
-腳本就會被儲存，之後可以在其他專案中使用。
-
-![你的背包](../../../media/getting-started/grafik-10.png)
+![你的背包](../../../media/getting-started/grafik-10.png)\
+腳本就會被儲存，之後可以在其他專案中使用。\
+[開啟圖片](../../../media/getting-started/grafik-10.png)
 
 **從背包新增腳本：**
 
-輕觸你想放入腳本的角色，就會看到腳本區。輕觸三個點打開選單，然後輕觸「背包」。
+輕觸你想放入腳本的角色，就會看到腳本區。
 
-![取出腳本](../../../media/getting-started/grafik-11.png)
+![取出腳本](../../../media/getting-started/grafik-11.png)\
+輕觸三個點打開選單，然後輕觸「背包」。\
+[開啟圖片](../../../media/getting-started/grafik-11.png)
 
-現在你可以看到背包裡所有的腳本。輕觸想要的腳本旁邊的三個點，然後從選單中選擇「從背包取出」。
+現在你可以看到背包裡所有的腳本。
 
 你也可以透過選單，刪除背包中不再需要的腳本。
 
-![背包中的腳本](../../../media/getting-started/grafik-12.png)
+![背包中的腳本](../../../media/getting-started/grafik-12.png)\
+輕觸想要的腳本旁邊的三個點，然後從選單中選擇「從背包取出」。\
+[開啟圖片](../../../media/getting-started/grafik-12.png)
 
 ***
 

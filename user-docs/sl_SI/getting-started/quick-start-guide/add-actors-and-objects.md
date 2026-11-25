@@ -2,12 +2,12 @@
 title: Dodaj like in predmete
 description: Dotakni se gumba plus, da v svoj projekt dodaš nov lik ali predmet.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Dotakni se gumba plus, da v svoj projekt dodaš nov lik ali predmet.
-
-![Dodaj lik](../../../media/getting-started/FigurHinzufuegen.png)
+![Dodaj lik](../../../media/getting-started/FigurHinzufuegen.png)\
+Dotakni se gumba plus, da v svoj projekt dodaš nov lik ali predmet.\
+[Odpri sliko](../../../media/getting-started/FigurHinzufuegen.png)
 
 V Pocket Code lahko na več načinov dodaš lik ali predmet v svoj projekt:
 
@@ -29,4 +29,6 @@ V Pocket Code lahko na več načinov dodaš lik ali predmet v svoj projekt:
 
 **Lokalni projekti**: Izberi projekt, iz katerega želiš v svoj projekt vstaviti prvi lik skupaj s skripto.
 
-![Nov lik](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nov lik](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+V Pocket Code lahko na več načinov dodaš lik ali predmet v svoj projekt.\
+[Odpri sliko](../../../media/getting-started/NewActor-e1732794461668.jpg)

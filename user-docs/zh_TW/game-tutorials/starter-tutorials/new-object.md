@@ -2,18 +2,20 @@
 title: 新增物件
 description: "在這個教學中，你會學到如何在專案中建立新物件，以及你有哪些不同的方式可以做到。"
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 在這個教學中，你會學到如何在專案中建立新物件，以及你有哪些不同的方式可以做到。
 
-![新增物件](../../../media/game-tutorials/New-Object.png)
+![新增物件](../../../media/game-tutorials/New-Object.png)\
+在這個教學中，你會學到如何在專案中建立新物件，以及你有哪些不同的方式可以做到。\
+[開啟圖片](../../../media/game-tutorials/New-Object.png)
 
 若要這樣做，你應該已經下載 Pocket Code 應用程式，並且知道怎麼建立新專案。如果需要協助，歡迎看看**[新增專案](new-project.md)**教學。
 
 *你可以在這裡下載 PDF 格式的教學：*
 
-[新增物件](../../../media/game-tutorials/New-Object.pdf)
+[開啟 PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. 建立新物件
 
@@ -23,15 +25,17 @@ source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
 
 ### 2. 建立新物件
 
-現在你已經準備好建立新物件了。點一下右下角的黃色加號按鈕，就會出現一個新視窗，裡面有七種可以選擇的方式。
+現在你已經準備好建立新物件了。
 
-![新增物件（1）](../../../media/game-tutorials/New-Object-1.png)
+![新增物件（1）](../../../media/game-tutorials/New-Object-1.png)\
+點一下右下角的黃色加號按鈕，就會出現一個新視窗，裡面有七種可以選擇的方式。\
+[開啟圖片](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. 建立方式
 
-以下是你可以選擇的方式：
-
-![新增物件（2）](../../../media/game-tutorials/New-Object-2.png)
+![新增物件（2）](../../../media/game-tutorials/New-Object-2.png)\
+以下是你可以選擇的方式：\
+[開啟圖片](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. 繪製圖片
 
@@ -43,9 +47,11 @@ source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
 
 ### 6. 放置物件
 
-接著，你要用手指把它往左右或上下移動，以視覺方式放好。然後按右上角的按鈕來儲存。
+接著，你要用手指把它往左右或上下移動，以視覺方式放好。
 
-![新增物件（3）](../../../media/game-tutorials/New-Object-3.png)
+![新增物件（3）](../../../media/game-tutorials/New-Object-3.png)\
+然後按右上角的按鈕來儲存。\
+[開啟圖片](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. 你做到了！你建立了自己的新物件。
 

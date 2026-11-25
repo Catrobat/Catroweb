@@ -2,7 +2,7 @@
 title: "Mediabiblioteek"
 description: "Die Catrobat mediabiblioteek is 'n versameling van akteurs, agtergronde, klanke en voorwerpe wat jy kan gebruik in jou projekte."
 order: 1
-source_hash: '033e4596481d0050d8912025b0b5c56ea1298d0aa5b1c34b7e2e2e09efb04561'
+source_hash: 'a1d83b2b73d79f59ca1b02a52aaf4f2949d9dfb47368c71110f513c40a2b0f22'
 ---
 
 Die Catrobat mediabiblioteek is 'n versameling van **akteurs**, **agtergronde**, klanke, en voorwerpe wat jy kan gebruik in jou projekte. Jy kan alles aanpas om jou idees te pas!
@@ -19,21 +19,27 @@ Die Catrobat mediabiblioteek is 'n versameling van **akteurs**, **agtergronde**,
 
 ### Voeg 'n nuwe akteur uit die mediabiblioteek
 
-In die projekskerm, tik op die + simbool [(Meer inligting)](../quick-start-guide/add-actors-and-objects.md) om 'n nuwe akteur of voorwerp by te voeg. Kies “Kostuums”.
+In die projekskerm, tik op die + simbool [(Meer inligting)](../quick-start-guide/add-actors-and-objects.md) om 'n nuwe akteur of voorwerp by te voeg.
 
-![Nuwe akteur](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nuwe akteur](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Kies “Kostuums”.\
+[Maak prent oop](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-Kies 'n akteur wat jy in jou program wil gebruik. Tik op die akteur (1) en laai dit af (2).
+Kies 'n akteur wat jy in jou program wil gebruik.
 
-![Mediabiblioteek](../../../media/getting-started/grafik-19.png)
+![Mediabiblioteek](../../../media/getting-started/grafik-19.png)\
+Tik op die akteur (1) en laai dit af (2).\
+[Maak prent oop](../../../media/getting-started/grafik-19.png)
 
-Jy kan nou die akteur 'n nuwe naam gee (1) en dit visueel in jou spel plaas (2). Dit beteken dat jy jou akteur direk op die skerm kan beweeg. Jy sal dadelik sien waar dit in die projek geplaas word. Bevestig met “OK”.
+Jy kan nou die akteur 'n nuwe naam gee (1) en dit visueel in jou spel plaas (2). Dit beteken dat jy jou akteur direk op die skerm kan beweeg. Jy sal dadelik sien waar dit in die projek geplaas word.
 
-![nuwe akteur of voorwerp](../../../media/getting-started/grafik-29.png)
+![nuwe akteur of voorwerp](../../../media/getting-started/grafik-29.png)\
+Bevestig met “OK”.\
+[Maak prent oop](../../../media/getting-started/grafik-29.png)
 
-Plaas jou akteur (1) en bevestig met die regmerkie (2).
-
-![Plaas die akteur op die skerm](../../../media/getting-started/grafik-21.png)
+![Plaas die akteur op die skerm](../../../media/getting-started/grafik-21.png)\
+Plaas jou akteur (1) en bevestig met die regmerkie (2).\
+[Maak prent oop](../../../media/getting-started/grafik-21.png)
 
 ***
 
@@ -41,25 +47,31 @@ Plaas jou akteur (1) en bevestig met die regmerkie (2).
 
 Gaan na die agtergrond in die projekskerm. Draai na die voorkoms afdeling en voeg 'n nuwe voorkoms ([Meer inligting](../quick-start-guide/add-background.md)). Tik op “Kostuums”.
 
-Kies 'n geskikte agtergrond wat jy in jou program wil gebruik. Tik op die agtergrond (1) en laai dit af (2).
+Kies 'n geskikte agtergrond wat jy in jou program wil gebruik.
 
-![Kies 'n agtergrond uit die mediabiblioteek](../../../media/getting-started/grafik-22.png)
+![Kies 'n agtergrond uit die mediabiblioteek](../../../media/getting-started/grafik-22.png)\
+Tik op die agtergrond (1) en laai dit af (2).\
+[Maak prent oop](../../../media/getting-started/grafik-22.png)
 
 ***
 
 ### Voeg 'n klank uit die mediabiblioteek
 
-Klank kan aan jou agtergrond en aan jou akteurs of voorwerpe bygevoeg word. Tik op die akteur of agtergrond waar jy die klank wil byvoeg. Gaan na die klank-weergawe en tik op die + simbool.
+Klank kan aan jou agtergrond en aan jou akteurs of voorwerpe bygevoeg word. Tik op die akteur of agtergrond waar jy die klank wil byvoeg.
 
-![Klank skerm](../../../media/getting-started/grafik-23.png)
+![Klank skerm](../../../media/getting-started/grafik-23.png)\
+Gaan na die klank-weergawe en tik op die + simbool.\
+[Maak prent oop](../../../media/getting-started/grafik-23.png)
 
-Tik op “Klanke” om toegang tot die mediabiblioteek.
+![Kies uit die mediabiblioteek](../../../media/getting-started/grafik-30.png)\
+Tik op “Klanke” om toegang tot die mediabiblioteek.\
+[Maak prent oop](../../../media/getting-started/grafik-30.png)
 
-![Kies uit die mediabiblioteek](../../../media/getting-started/grafik-30.png)
+Kies 'n geskikte klank wat jy in jou program wil gebruik.
 
-Kies 'n geskikte klank wat jy in jou program wil gebruik. Tik op die klank (1) en laai dit af (2).
-
-![Kies 'n klank](../../../media/getting-started/grafik-25.png)
+![Kies 'n klank](../../../media/getting-started/grafik-25.png)\
+Tik op die klank (1) en laai dit af (2).\
+[Maak prent oop](../../../media/getting-started/grafik-25.png)
 
 ***
 
@@ -71,16 +83,20 @@ Jy voeg voorwerpe by wat soortgelyk is aan akteurs.
 
 In die projekskerm, tik op die + simbool ([Meer inligting](../quick-start-guide/add-actors-and-objects.md)) om 'n nuwe voorwerp by te voeg.
 
-Kies “Biblioteek”.
+![Nuwe akteur](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Kies “Biblioteek”.\
+[Maak prent oop](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-![Nuwe akteur](../../../media/getting-started/NewActor-e1732794461668.jpg)
+Soek vir 'n voorwerp wat jy in jou program wil gebruik.
 
-Soek vir 'n voorwerp wat jy in jou program wil gebruik. Tik op die voorwerp (1) en laai dit af (2).
+![Voorwerpe in die mediabiblioteek](../../../media/getting-started/grafik-27.png)\
+Tik op die voorwerp (1) en laai dit af (2).\
+[Maak prent oop](../../../media/getting-started/grafik-27.png)
 
-![Voorwerpe in die mediabiblioteek](../../../media/getting-started/grafik-27.png)
+Jy kan nou die voorwerp 'n nuwe naam gee (1) en dit visueel in jou spel plaas (2). Dit beteken dat jy jou voorwerp direk op die skerm kan beweeg. Jy kan dadelik sien waar dit in die projek staan.
 
-Jy kan nou die voorwerp 'n nuwe naam gee (1) en dit visueel in jou spel plaas (2). Dit beteken dat jy jou voorwerp direk op die skerm kan beweeg. Jy kan dadelik sien waar dit in die projek staan. Bevestig met “OK”.
-
-![nuwe akteur of voorwerp](../../../media/getting-started/grafik-29.png)
+![nuwe akteur of voorwerp](../../../media/getting-started/grafik-29.png)\
+Bevestig met “OK”.\
+[Maak prent oop](../../../media/getting-started/grafik-29.png)
 
 Plaas jou voorwerp (1) en bevestig met die regmerkie (2).

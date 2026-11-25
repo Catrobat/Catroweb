@@ -2,12 +2,12 @@
 title: 新增角色和物件
 description: 輕觸加號按鈕，就能在專案中新增角色或物件。
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-輕觸加號按鈕，就能在專案中新增角色或物件。
-
-![新增角色](../../../media/getting-started/FigurHinzufuegen.png)
+![新增角色](../../../media/getting-started/FigurHinzufuegen.png)\
+輕觸加號按鈕，就能在專案中新增角色或物件。\
+[開啟圖片](../../../media/getting-started/FigurHinzufuegen.png)
 
 在 Pocket Code 中，你可以用很多方式在專案裡新增角色或物件：
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **本機專案**：選擇一個專案，把它的第一個角色連同腳本一起加進你的專案。
 
-![新增角色](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![新增角色](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+在 Pocket Code 中，你可以用很多方式在專案裡新增角色或物件：\
+[開啟圖片](../../../media/getting-started/NewActor-e1732794461668.jpg)

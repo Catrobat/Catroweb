@@ -4,9 +4,9 @@ description: Tap the plus button to add a new figure or object to your project.
 order: 2
 ---
 
-Tap the plus button to add a new figure or object to your project.
-
-![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)
+![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)\
+Tap the plus button to add a new figure or object to your project.\
+[Open image](../../../media/getting-started/FigurHinzufuegen.png)
 
 In Pocket Code, you can add a character or an object to your project in various ways:
 
@@ -28,4 +28,6 @@ In Pocket Code, you can add a character or an object to your project in various 
 
 **Local Projects**: Select a project from which you want to insert the first actor along with the script into your project.
 
-![New Actor](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![New Actor](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+In Pocket Code, you can add a character or an object to your project in various ways.\
+[Open image](../../../media/getting-started/NewActor-e1732794461668.jpg)

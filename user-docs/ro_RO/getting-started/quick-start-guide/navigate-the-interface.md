@@ -2,23 +2,38 @@
 title: Navighează în interfață
 description: "Când pornești Pocket Code, vezi următorul ecran principal."
 order: 0
-source_hash: 'cbf2480bf8013b4cd90c15ef9dbb7914d7a1afbd0771cbc3261b60af493a8c2c'
+source_hash: 'feacd530be149adbad71da0264c3c7400343c4e083937d891b7cc442e6c6bff5'
 ---
 
 Când pornești Pocket Code, vezi următorul ecran principal.
 
-![Ecranul principal](../../../media/getting-started/MainScreen-e1732269599192.jpg)
+![Ecranul principal](../../../media/getting-started/MainScreen-e1732269599192.jpg)\
+Când pornești Pocket Code, vezi următorul ecran principal.\
+[Deschide imaginea](../../../media/getting-started/MainScreen-e1732269599192.jpg)
 
-În colțul din dreapta sus există un simbol de ajutor ![Ajutor](../../../media/getting-started/Screenshot-2024-11-22-111748.png) care te duce la documentația Catrobat, unde găsești sfaturi utile pentru tine.
+![Ajutor](../../../media/getting-started/Screenshot-2024-11-22-111748.png)\
+În colțul din dreapta sus există un simbol de ajutor care te duce la documentația Catrobat, unde găsești sfaturi utile pentru tine.
 
-Lângă el este meniul ![Meniu](../../../media/getting-started/Screenshot-2024-11-22-111804.png). De acolo poți ajunge ușor la setări, unde poți schimba limba sau poți activa extensii, cum ar fi blocurile pentru plotter și altele.
+![Meniu](../../../media/getting-started/Screenshot-2024-11-22-111804.png)\
+Lângă el este meniul.
 
-Mai jos vezi proiectul tău editat cel mai recent. Apasă pe iconița de editare ![Iconița de editare](../../../media/getting-started/Screenshot-2024-11-22-111825.png) ca să accesezi ecranul proiectului, unde poți continua să îți dezvolți proiectul.
+De acolo poți ajunge ușor la setări, unde poți schimba limba sau poți activa extensii, cum ar fi blocurile pentru plotter și altele.
 
-Folosește butonul de play ![Pornește proiectul](../../../media/getting-started/Screenshot-2024-11-22-111818.png) ca să îți pornești proiectul.
+![Iconița de editare](../../../media/getting-started/Screenshot-2024-11-22-111825.png)\
+Apasă pe iconița de editare ca să accesezi ecranul proiectului, unde poți continua să îți dezvolți proiectul.
 
-Apăsând pe Proiecte pe dispozitiv, poți accesa proiectele tale salvate. ![Proiecte pe dispozitiv](../../../media/getting-started/Screenshot-2024-11-22-111832.png)
+Mai jos vezi proiectul tău editat cel mai recent.
 
-Dacă vrei să cunoști și să lucrezi la mai multe proiecte ale altor utilizatori, apasă pe Comunitatea Catrobat de pe Share. Acolo vei găsi multe proiecte minunate. ![Comunitatea Catrobat](../../../media/getting-started/Screenshot-2024-11-22-111847.png)
+![Pornește proiectul](../../../media/getting-started/Screenshot-2024-11-22-111818.png)\
+Folosește butonul de play ca să îți pornești proiectul.
 
-Dacă vrei să creezi un proiect nou, apasă pe iconița plus. ![Adaugă](../../../media/getting-started/Screenshot-2024-11-22-143219.png)
+![Proiecte pe dispozitiv](../../../media/getting-started/Screenshot-2024-11-22-111832.png)\
+Apăsând pe Proiecte pe dispozitiv, poți accesa proiectele tale salvate.
+
+![Comunitatea Catrobat](../../../media/getting-started/Screenshot-2024-11-22-111847.png)\
+Dacă vrei să cunoști și să lucrezi la mai multe proiecte ale altor utilizatori, apasă pe Comunitatea Catrobat de pe Share.
+
+Acolo vei găsi multe proiecte minunate.
+
+![Adaugă](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Dacă vrei să creezi un proiect nou, apasă pe iconița plus.

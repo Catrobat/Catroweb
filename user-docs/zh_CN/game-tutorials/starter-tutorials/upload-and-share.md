@@ -2,32 +2,34 @@
 title: 上传和分享
 description: "在本教程中，你将学会如何与朋友或整个 Catrobat 社区分享你创建的项目。"
 order: 0
-source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
+source_hash: '0f8f89297b780f68cbac1e965c2d8e73b4e3dfdf753cc1eb7c8e8d86c14be2f9'
 ---
 
 在本教程中，你将学会如何与朋友或整个 Catrobat 社区分享你创建的项目。
 
-![上传和分享](../../../media/game-tutorials/Upload-and-Share.png)
+![上传和分享](../../../media/game-tutorials/Upload-and-Share.png)\
+在本教程中，你将学会如何与朋友或整个 Catrobat 社区分享你创建的项目。\
+[打开图片](../../../media/game-tutorials/Upload-and-Share.png)
 
 在本教程中，你需要已经有一个想要分享的项目。如果你还不知道如何创建项目，请看看**[新项目](new-project.md)**教程，了解它是怎么做的。
 
 *你可以在这里下载 PDF 格式的教程：*
 
-[上传和分享](../../../media/game-tutorials/Upload-and-Share.pdf)
+[打开 PDF](../../../media/game-tutorials/Upload-and-Share.pdf)
 
 ### 1. 项目选项
 
-如果你想上传或分享你的项目，请打开你的项目，然后点击右上角的三个点，再点击“项目选项”。
-
-![上传和分享](../../../media/game-tutorials/Upload-and-Share.png)
+![上传和分享](../../../media/game-tutorials/Upload-and-Share.png)\
+如果你想上传或分享你的项目，请打开你的项目，然后点击右上角的三个点，再点击“项目选项”。\
+[打开图片](../../../media/game-tutorials/Upload-and-Share.png)
 
 ### 2. 项目选项
 
 现在你可以更改名称、添加描述，并进行各种设置。
 
-这里还有两个选项：“上传项目”和“导出项目”，我们将在接下来的步骤中讲解它们。
-
-![上传和分享（1）](../../../media/game-tutorials/Upload-and-Share-1.png)
+![上传和分享（1）](../../../media/game-tutorials/Upload-and-Share-1.png)\
+这里还有两个选项：“上传项目”和“导出项目”，我们将在接下来的步骤中讲解它们。\
+[打开图片](../../../media/game-tutorials/Upload-and-Share-1.png)
 
 ### 3. 上传项目
 
@@ -37,9 +39,9 @@ source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
 
 如果你点击这个按钮，把项目上传到分享平台，你需要注册一个账户（如果你还没有的话）。你也可以使用 Google 账户登录。登录后，你需要给你的项目起一个名字，并写一段描述。然后，你最多要选择三个最符合你的项目的类别。
 
-然后点击“下一步”来上传你的项目。
-
-![上传和分享（2）](../../../media/game-tutorials/Upload-and-Share-2.png)
+![上传和分享（2）](../../../media/game-tutorials/Upload-and-Share-2.png)\
+然后点击“下一步”来上传你的项目。\
+[打开图片](../../../media/game-tutorials/Upload-and-Share-2.png)
 
 ### 5. 导出项目
 
@@ -47,9 +49,11 @@ source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
 
 ### 6. 导出项目
 
-点击这个按钮，可以保存一个 .catrobat 文件，你可以私下分享给你的朋友。你可以把它保存在设备的文件管理器中，然后用这种方式分享。
+点击这个按钮，可以保存一个 .catrobat 文件，你可以私下分享给你的朋友。
 
-![上传和分享（3）](../../../media/game-tutorials/Upload-and-Share-3.png)
+![上传和分享（3）](../../../media/game-tutorials/Upload-and-Share-3.png)\
+你可以把它保存在设备的文件管理器中，然后用这种方式分享。\
+[打开图片](../../../media/game-tutorials/Upload-and-Share-3.png)
 
 你做到了！你分享了你的第一个程序！
 

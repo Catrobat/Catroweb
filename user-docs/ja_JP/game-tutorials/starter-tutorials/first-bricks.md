@@ -2,18 +2,20 @@
 title: 最初のブロック
 description: "このチュートリアルでは、オブジェクトをプログラムするためのいろいろなブロックが、どこにあるかを学びます。"
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 このチュートリアルでは、オブジェクトをプログラムするためのいろいろなブロックが、どこにあるかを学びます。また、ブロックのカテゴリーの、よい全体像もわかります。
 
-![最初のブロック](../../../media/game-tutorials/First-Bricks.png)
+![最初のブロック](../../../media/game-tutorials/First-Bricks.png)\
+また、ブロックのカテゴリーの、よい全体像もわかります。\
+[画像を開く](../../../media/game-tutorials/First-Bricks.png)
 
 ブロックを入れて、オブジェクトをプログラムするには、オブジェクトのあるプロジェクトを、もう作っている必要があります。やり方がわからないときは、**[新しいオブジェクト](new-object.md)**のチュートリアルを見てください。
 
 *このチュートリアルは、PDF 形式でダウンロードできます:*
 
-[最初のブロック](../../../media/game-tutorials/First-Bricks.pdf)
+[PDFを開く](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. 今あるオブジェクトを開く
 
@@ -23,9 +25,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 すると、もうブロックがいくつか入っているのが見えます。これらのブロックは、オブジェクトを見た目の位置に置いたときに、自動で作られたものです。
 
-これらのブロックは、プロジェクトが始まったときに、オブジェクトを最初に選んだ正確な位置に置くだけのものです。この位置は、いつでもここで変えられます。
+これらのブロックは、プロジェクトが始まったときに、オブジェクトを最初に選んだ正確な位置に置くだけのものです。
 
-![最初のブロック (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![最初のブロック (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+この位置は、いつでもここで変えられます。\
+[画像を開く](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. ブロックを入れる
 
@@ -33,9 +37,9 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 4. ブロックのカテゴリー
 
-ブロックのカテゴリーは、次のとおりです:
-
-![最初のブロック (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![最初のブロック (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+ブロックのカテゴリーは、次のとおりです.\
+[画像を開く](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. 最初のブロックを入れる
 
@@ -43,9 +47,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 6. ブロックを置く
 
-ブロックを、プログラムの一番最後の位置に置いて、初めてプログラムを動かしてみましょう。黄色い再生ボタンで動かせます。
+ブロックを、プログラムの一番最後の位置に置いて、初めてプログラムを動かしてみましょう。
 
-![最初のブロック (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![最初のブロック (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+黄色い再生ボタンで動かせます。\
+[画像を開く](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. できました！ 最初のブロックを入れられました。
 

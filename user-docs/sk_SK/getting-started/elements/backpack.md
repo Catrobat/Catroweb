@@ -2,7 +2,7 @@
 title: Batoh
 description: "Batoh v aplikácii Pocket Code je praktická funkcia, ktorá ti umožní ukladať a znovu používať prvky, ako sú postavy (objekty), skripty, vzhľady alebo zvuky, naprieč projektmi."
 order: 0
-source_hash: '331e082e4ebc8d246985323b3ea757069e6e7cfd896bf51da6af07b54d7bd66e'
+source_hash: 'c0242d01d71d7fc962d0908c8e2492b7d13cd5e6df51e05b68ed6368ee83508d'
 ---
 
 Funkcia **batoh** v aplikácii Pocket Code je praktická funkcia, ktorá ti umožní **ukladať a znovu používať** prvky, ako sú postavy (objekty), skripty, vzhľady alebo zvuky, **naprieč projektmi**. Pomáha ušetriť čas a robí tvoje projekty efektívnejšími.
@@ -15,11 +15,11 @@ Batoh je ako digitálny úložný priestor, kam môžeš uložiť rôzne prvky z
 
 Choď do zobrazenia projektu, z ktorého chceš zabaliť postavu do batoha.
 
-Klikni na tri bodky vedľa postavy, aby sa otvorila kontextová ponuka, a vyber „Zabaliť“.
-
 Postava (vrátane jej vzhľadov, zvukov a skriptov) sa zabalí do batoha.
 
-![Zabaľ postavu](../../../media/getting-started/grafik-7.png)
+![Zabaľ postavu](../../../media/getting-started/grafik-7.png)\
+Klikni na tri bodky vedľa postavy, aby sa otvorila kontextová ponuka, a vyber „Zabaliť“.\
+[Otvor obrázok](../../../media/getting-started/grafik-7.png)
 
 **Pridaj postavy z batoha**
 
@@ -27,9 +27,11 @@ Otvor projekt, do ktorého chceš postavu vložiť.
 
 V zobrazení projektu klepni na symbol plus a vyber „Batoh“.
 
-Teraz uvidíš všetky postavy a objekty, ktoré máš uložené v batohu. Klepni na tri bodky a vyber „Vybaliť“.
+Teraz uvidíš všetky postavy a objekty, ktoré máš uložené v batohu.
 
-![Vybaľ postavu](../../../media/getting-started/grafik-8-e1732702791199.png)
+![Vybaľ postavu](../../../media/getting-started/grafik-8-e1732702791199.png)\
+Klepni na tri bodky a vyber „Vybaliť“.\
+[Otvor obrázok](../../../media/getting-started/grafik-8-e1732702791199.png)
 
 ***
 
@@ -39,29 +41,33 @@ Teraz uvidíš všetky postavy a objekty, ktoré máš uložené v batohu. Klepn
 
 Choď k postave, ktorá obsahuje skript. Podrž prst na požadovanom skripte v editore skriptov.
 
-Z kontextovej ponuky vyber „Pridať do batoha“.
+![Pridať do batoha](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)\
+Z kontextovej ponuky vyber „Pridať do batoha“.\
+[Otvor obrázok](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
 
-![Pridať do batoha](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
+![Uložiť postavu do batoha](../../../media/getting-started/grafik-9.png)\
+Daj skriptu názov a potvrď tlačidlom OK.\
+[Otvor obrázok](../../../media/getting-started/grafik-9.png)
 
-Daj skriptu názov a potvrď tlačidlom OK.
-
-![Uložiť postavu do batoha](../../../media/getting-started/grafik-9.png)
-
-Skript je uložený a dá sa použiť v iných projektoch.
-
-![Tvoj batoh](../../../media/getting-started/grafik-10.png)
+![Tvoj batoh](../../../media/getting-started/grafik-10.png)\
+Skript je uložený a dá sa použiť v iných projektoch.\
+[Otvor obrázok](../../../media/getting-started/grafik-10.png)
 
 **Pridanie skriptov z batoha:**
 
-Klepni na postavu, do ktorej chceš skript vložiť. Uvidíš oblasť skriptov. Klepni na tri bodky, aby sa otvorila kontextová ponuka, a klepni na „Batoh“.
+Klepni na postavu, do ktorej chceš skript vložiť. Uvidíš oblasť skriptov.
 
-![Vybaliť skript](../../../media/getting-started/grafik-11.png)
+![Vybaliť skript](../../../media/getting-started/grafik-11.png)\
+Klepni na tri bodky, aby sa otvorila kontextová ponuka, a klepni na „Batoh“.\
+[Otvor obrázok](../../../media/getting-started/grafik-11.png)
 
-Teraz vidíš všetky skripty, ktoré už máš v batohu. Klepni na tri bodky vedľa požadovaného skriptu a z kontextovej ponuky vyber „Vybaliť“.
+Teraz vidíš všetky skripty, ktoré už máš v batohu.
 
 Cez kontextovú ponuku môžeš odstrániť skripty, ktoré už v batohu nepotrebuješ.
 
-![Vybaliť skript z batoha](../../../media/getting-started/grafik-12.png)
+![Vybaliť skript z batoha](../../../media/getting-started/grafik-12.png)\
+Klepni na tri bodky vedľa požadovaného skriptu a z kontextovej ponuky vyber „Vybaliť“.\
+[Otvor obrázok](../../../media/getting-started/grafik-12.png)
 
 ***
 

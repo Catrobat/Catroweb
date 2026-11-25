@@ -2,12 +2,12 @@
 title: "Voeg akteurs en voorwerpe by"
 description: "Tik op die plusknoppie om 'n nuwe figuur of voorwerp by jou projek te voeg."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Tik op die plusknoppie om 'n nuwe figuur of voorwerp by jou projek te voeg.
-
-![Voeg 'n akteur by](../../../media/getting-started/FigurHinzufuegen.png)
+![Voeg 'n akteur by](../../../media/getting-started/FigurHinzufuegen.png)\
+Tik op die plusknoppie om 'n nuwe figuur of voorwerp by jou projek te voeg.\
+[Maak prent oop](../../../media/getting-started/FigurHinzufuegen.png)
 
 In Pocket Code kan jy 'n karakter of voorwerp by jou projek voeg op verskillende maniere:
 
@@ -29,4 +29,6 @@ In Pocket Code kan jy 'n karakter of voorwerp by jou projek voeg op verskillende
 
 **Plaaslike projekte**: Kies 'n projek waaruit jy die eerste akteur saam met die skrif in jou projek wil insit.
 
-![Nuwe akteur](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nuwe akteur](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+In Pocket Code kan jy 'n karakter of voorwerp by jou projek voeg op verskillende maniere.\
+[Maak prent oop](../../../media/getting-started/NewActor-e1732794461668.jpg)

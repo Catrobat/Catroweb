@@ -2,12 +2,12 @@
 title: Adaugă personaje și obiecte
 description: Apasă butonul plus ca să adaugi o figură sau un obiect nou în proiectul tău.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Apasă butonul plus ca să adaugi o figură sau un obiect nou în proiectul tău.
-
-![Adaugă figură](../../../media/getting-started/FigurHinzufuegen.png)
+![Adaugă figură](../../../media/getting-started/FigurHinzufuegen.png)\
+Apasă butonul plus ca să adaugi o figură sau un obiect nou în proiectul tău.\
+[Deschide imaginea](../../../media/getting-started/FigurHinzufuegen.png)
 
 În Pocket Code, poți adăuga un personaj sau un obiect în proiectul tău în mai multe moduri:
 
@@ -29,4 +29,6 @@ Apasă butonul plus ca să adaugi o figură sau un obiect nou în proiectul tău
 
 **Proiecte locale**: Selectează un proiect din care vrei să introduci primul personaj împreună cu scriptul în proiectul tău.
 
-![Personaj nou](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Personaj nou](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+În Pocket Code, poți adăuga un personaj sau un obiect în proiectul tău în mai multe moduri.\
+[Deschide imaginea](../../../media/getting-started/NewActor-e1732794461668.jpg)

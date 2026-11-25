@@ -2,18 +2,20 @@
 title: "Birinchi kod bloklari"
 description: "Ushbu darsda sen bir ob'ektni dasturlash uchun turli xil kod bloklarini qaerdan topish mumkinligini bilib olasan."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Ushbu darsda sen bir ob'ektni dasturlash uchun turli xil kod bloklarini qaerdan topish mumkinligini bilib olasan. Bundan tashqari, ushbu qo'llanma kod bloklari toifasining yaxshi ko'rinishini taqdim etadi.
 
-![Birinchi kod bloklari](../../../media/game-tutorials/First-Bricks.png)
+![Birinchi kod bloklari](../../../media/game-tutorials/First-Bricks.png)\
+Bundan tashqari, ushbu qo'llanma kod bloklari toifasining yaxshi ko'rinishini taqdim etadi.\
+[Rasmni och](../../../media/game-tutorials/First-Bricks.png)
 
 Kod bloklarini qo'shish va ob'ektni dasturlash uchun sen allaqachon bir ob'ekt bilan loyiha yaratgan bo'lishingiz kerak. Agar senga bu borada yordam kerak bo'lsa, **[Yangi ob'ekt](new-object.md)** -o'quv qo'llanmasiga qarang.
 
 *Bu yerda PDF formatida o'quvni yuklab olishingiz mumkin:*
 
-[Birinchi kod bloklari](../../../media/game-tutorials/First-Bricks.pdf)
+[PDF faylini och](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. mavjud ob'ektni och
 
@@ -23,9 +25,11 @@ Avval, sen o'zingizning loyihangizni ochishingiz kerak. Sen allaqachon ob'ekt ya
 
 Keyin sen ko'rasiz, u erda allaqachon ba'zi kod bloklari mavjud. Ushbu kod bloklari ob'ektni vizual ravishda joylashtirganimizda yaratilgan.
 
-Ushbu kod bloklari faqat ob'ektni biz boshlangandan so'ng tanlagan joyga joylashtiradi. Sen ham bu pozitsiyani istalgan vaqtda o'zgartirishingiz mumkin.
+Ushbu kod bloklari faqat ob'ektni biz boshlangandan so'ng tanlagan joyga joylashtiradi.
 
-![Birinchi kod bloklari (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Birinchi kod bloklari (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Sen ham bu pozitsiyani istalgan vaqtda o'zgartirishingiz mumkin.\
+[Rasmni och](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Kod bloklarini qoʻshish
 
@@ -33,9 +37,9 @@ Endi sen o'ng burchakdagi sariq qo'shimcha tugmani bosish orqali ko'proq kod blo
 
 ### 4. kod bloklari Kategoriyalar
 
-Bular turli xil kod bloklari toifalari:
-
-![Birinchi kod bloklari (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Birinchi kod bloklari (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Bular turli xil kod bloklari toifalari.\
+[Rasmni och](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Birinchi kod blokini qoʻshish
 
@@ -43,9 +47,11 @@ Birinchi kod bloklarimiz uchun biz “Sirpan: 1 soniya nuqtaga x: Y:” kod blok
 
 ### 6. Kod blokini joylashtiring
 
-Kod blokini dasturingizning oxirgi joyida joylashtiring va dasturiy ta'minotingizni birinchi marta ishga tushiring. Buni sariq o'ynash tugmasi bilan qilish mumkin.
+Kod blokini dasturingizning oxirgi joyida joylashtiring va dasturiy ta'minotingizni birinchi marta ishga tushiring.
 
-![Birinchi kod bloklari (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Birinchi kod bloklari (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Buni sariq o'ynash tugmasi bilan qilish mumkin.\
+[Rasmni och](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Sen birinchi kod blokingizni kiritgansiz.
 

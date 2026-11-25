@@ -2,12 +2,12 @@
 title: "Përshkrimi i aktorëve dhe objekteve"
 description: "Shtypni butonin plus për të shtuar një figurë ose objekt të ri në projektin tuaj."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Shtypni butonin plus për të shtuar një figurë ose objekt të ri në projektin tuaj.
-
-![Shtoj një aktor](../../../media/getting-started/FigurHinzufuegen.png)
+![Shtoj një aktor](../../../media/getting-started/FigurHinzufuegen.png)\
+Shtypni butonin plus për të shtuar një figurë ose objekt të ri në projektin tuaj.\
+[Hap figurën](../../../media/getting-started/FigurHinzufuegen.png)
 
 Në Pocket Code, mund të shtoni një karakter ose objekt në projektin tuaj në mënyra të ndryshme:
 
@@ -29,4 +29,6 @@ Në Pocket Code, mund të shtoni një karakter ose objekt në projektin tuaj në
 
 **Projektet në pajisje**: Zgjidhni një projekt nga i cili dëshironi të futni aktorin e parë së bashku me skenarin në projektin tuaj.
 
-![Aktor i ri](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Aktor i ri](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Në Pocket Code, mund të shtoni një karakter ose objekt në projektin tuaj në mënyra të ndryshme.\
+[Hap figurën](../../../media/getting-started/NewActor-e1732794461668.jpg)

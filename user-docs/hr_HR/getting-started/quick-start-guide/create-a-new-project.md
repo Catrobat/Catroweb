@@ -2,16 +2,20 @@
 title: Stvaranje novog projekta
 description: Otvori aplikaciju na svom pametnom telefonu ili tabletu.
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-Otvori aplikaciju na svom pametnom telefonu ili tabletu. Dodirni simbol + da stvoriš novi projekt.
+Otvori aplikaciju na svom pametnom telefonu ili tabletu.
 
-![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)
+![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)\
+Dodirni simbol + da stvoriš novi projekt.\
+[Otvori sliku](../../../media/getting-started/MainScreen_NewProject.png)
 
-Daj projektu naziv (1) i odluči želiš li napraviti igru u okomitom (portret) ili vodoravnom (landscape) formatu (2). Zatim potvrdi kvačicom (3).
+Daj projektu naziv (1) i odluči želiš li napraviti igru u okomitom (portret) ili vodoravnom (landscape) formatu (2).
 
-![NewProject](../../../media/getting-started/NewProject.png)
+![NewProject](../../../media/getting-started/NewProject.png)\
+Zatim potvrdi kvačicom (3).\
+[Otvori sliku](../../../media/getting-started/NewProject.png)
 
 Sada si u prikazu projekta. Na vrhu vidiš naziv svoje igre.
 
@@ -21,8 +25,12 @@ Ispod pozadine vidiš područje za **likove i objekte** koje si dodao u svoju ig
 
 U donjem desnom kutu vidiš dva važna gumba:
 
-![Start](../../../media/getting-started/Start.png) Gumbom **Play** pokrećeš svoju igru.
+![Start](../../../media/getting-started/Start.png)\
+Gumbom **Play** pokrećeš svoju igru.
 
-![Gumb plus](../../../media/getting-started/Screenshot-2024-11-22-143219.png) Gumbom **Plus** dodaješ novi lik ili objekt u svoju igru.
+![Gumb plus](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Gumbom **Plus** dodaješ novi lik ili objekt u svoju igru.
 
-![Zaslon projekta](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Zaslon projekta](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+Sada si u prikazu projekta.\
+[Otvori sliku](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

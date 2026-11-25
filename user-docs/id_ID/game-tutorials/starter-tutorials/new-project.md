@@ -2,12 +2,14 @@
 title: Proyek Baru
 description: "Dalam tutorial ini, kamu akan belajar semua yang perlu kamu ketahui tentang Pocket Code untuk mulai membuat proyek pertamamu."
 order: 0
-source_hash: '0e69f05eca9642a458814816058c6467702dd6f7c60b32d799758d7b35c1c216'
+source_hash: '548786f962e254dddae93d24d60dd0b6dc9e635ae29802897ad53511f9e3bcf7'
 ---
 
 Dalam tutorial ini, kamu akan belajar semua yang perlu kamu ketahui tentang Pocket Code untuk mulai membuat proyek pertamamu. Kami akan memandu langkah demi langkah cara mengunduh aplikasi, membukanya, dan membuat proyek baru.
 
-![Program Baru](../../../media/game-tutorials/New-Program.png)
+![Program Baru](../../../media/game-tutorials/New-Program.png)\
+Kami akan memandu langkah demi langkah cara mengunduh aplikasi, membukanya, dan membuat proyek baru.\
+[Buka gambar](../../../media/game-tutorials/New-Program.png)
 
 Ini adalah tutorial pertama, dan kamu tidak perlu pengetahuan apa pun sebelumnya.
 
@@ -15,27 +17,31 @@ Jadi, tunggu apa lagi? Ambil ponselmu dan mulai sekarang!
 
 *Di sini kamu bisa mengunduh tutorial dalam format PDF:*
 
-[Program Baru](../../../media/game-tutorials/New-Program.pdf)
+[Buka PDF](../../../media/game-tutorials/New-Program.pdf)
 
 ### 1. Instal Pocket Code
 
-Pertama, kamu perlu memasang aplikasi Pocket Code di perangkatmu. Kamu bisa menemukan aplikasi dengan mencari “Pocket Code” di Google Play Store dan mengunduhnya dengan mengetuk “instal”. Untuk langkah ini, kamu perlu Akun Google. Sekarang perangkatmu akan mengunduh dan memasang aplikasi. Langkah ini bisa memakan waktu, tergantung koneksi internetmu.
+Pertama, kamu perlu memasang aplikasi Pocket Code di perangkatmu. Untuk langkah ini, kamu perlu Akun Google. Sekarang perangkatmu akan mengunduh dan memasang aplikasi. Langkah ini bisa memakan waktu, tergantung koneksi internetmu.
 
-![Program Baru (2)](../../../media/game-tutorials/New-Program-2.png)
+![Program Baru (2)](../../../media/game-tutorials/New-Program-2.png)\
+Kamu bisa menemukan aplikasi dengan mencari “Pocket Code” di Google Play Store dan mengunduhnya dengan mengetuk “instal”.\
+[Buka gambar](../../../media/game-tutorials/New-Program-2.png)
 
 Setelah Pocket Code berhasil diunduh dan dipasang, kamu bisa menemukan aplikasinya di laci aplikasi atau di layar utama, tergantung perangkatmu. Kamu bisa memindahkan aplikasi ke mana saja sesuka hatimu.
 
 ### 2. Buka aplikasi
 
-Saat kamu membuka aplikasi, kamu melihat berbagai kategori:
-
-![Program Baru (1)](../../../media/game-tutorials/New-Program-1.png)
+![Program Baru (1)](../../../media/game-tutorials/New-Program-1.png)\
+Saat kamu membuka aplikasi, kamu melihat berbagai kategori.\
+[Buka gambar](../../../media/game-tutorials/New-Program-1.png)
 
 ### 3. Buat proyek baru
 
-Langkah berikutnya adalah benar-benar membuat proyek baru. Caranya, tekan tombol plus kuning di pojok kanan bawah. Sekarang kamu harus memasukkan nama proyek dan memilih apakah proyekmu akan berformat lanskap atau tidak. Dengan menekan “OK”, proyek akan dibuat.
+Langkah berikutnya adalah benar-benar membuat proyek baru. Sekarang kamu harus memasukkan nama proyek dan memilih apakah proyekmu akan berformat lanskap atau tidak. Dengan menekan “OK”, proyek akan dibuat.
 
-![Program Baru](../../../media/game-tutorials/New-Program.png)
+![Program Baru](../../../media/game-tutorials/New-Program.png)\
+Caranya, tekan tombol plus kuning di pojok kanan bawah.\
+[Buka gambar](../../../media/game-tutorials/New-Program.png)
 
 ### 4. Berhasil! Kamu sudah membuat proyek barumu sendiri.
 

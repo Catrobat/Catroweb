@@ -2,7 +2,7 @@
 title: "Çantë e dorës"
 description: "Karakteristika e çantës në Pocket Code është një funksion praktik që ju lejon të ruani dhe ripërdorni elemente si aktorë (objekte), skripte, pamje ose tinguj nëpër projekte."
 order: 0
-source_hash: '331e082e4ebc8d246985323b3ea757069e6e7cfd896bf51da6af07b54d7bd66e'
+source_hash: 'c0242d01d71d7fc962d0908c8e2492b7d13cd5e6df51e05b68ed6368ee83508d'
 ---
 
 Karakteristika **Çanta** në Pocket Code është një funksion praktik që ju lejon të **ruajtje dhe ripërdorim** elementet si aktorët (objektet), skenat, pamjet ose tingujt **në të gjitha projektet**. Kjo ju ndihmon të kurseni kohë dhe të bëni projektet tuaja më efikase.
@@ -15,11 +15,11 @@ Karakteristika **Çanta** në Pocket Code është një funksion praktik që ju l
 
 Shkoni në pamjen e projektit të projektit nga i cili dëshironi të mbani një figurë në çantë.
 
-Klikoni në tre pikët pranë figurës për të hapur menunë kontekstuale dhe zgjidhni «Fut në çantë».
-
 Figura (përfshirë pamjen, tingujt dhe shkrimet e saj) do të mbështjellë në xhakar.
 
-![Aktor i paketave](../../../media/getting-started/grafik-7.png)
+![Aktor i paketave](../../../media/getting-started/grafik-7.png)\
+Klikoni në tre pikët pranë figurës për të hapur menunë kontekstuale dhe zgjidhni «Fut në çantë».\
+[Hap figurën](../../../media/getting-started/grafik-7.png)
 
 **Shtojni figura nga çantë**
 
@@ -27,9 +27,11 @@ Hapni projektin ku doni të futni figurën.
 
 Në pamjen e projektit, prekni simbolin plus dhe zgjidhni «Çanta».
 
-Tani do të shihni të gjitha figurat dhe objektet që keni ruajtur në çantën tuaj. Shtypni në tre pikët dhe zgjidhni «Nxirr nga çanta».
+Tani do të shihni të gjitha figurat dhe objektet që keni ruajtur në çantën tuaj.
 
-![Aktor i Çlirimit](../../../media/getting-started/grafik-8-e1732702791199.png)
+![Aktor i Çlirimit](../../../media/getting-started/grafik-8-e1732702791199.png)\
+Shtypni në tre pikët dhe zgjidhni «Nxirr nga çanta».\
+[Hap figurën](../../../media/getting-started/grafik-8-e1732702791199.png)
 
 ***
 
@@ -39,29 +41,33 @@ Tani do të shihni të gjitha figurat dhe objektet që keni ruajtur në çantën
 
 Shko tek figura që përmban skenarin. Mbajeni poshtë skriptin e dëshiruar në redaktorin e skenarëve.
 
-Zgjidhni «Shto në çantë» nga menuja e kontekstit.
+![shtoj në çantë](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)\
+Zgjidhni «Shto në çantë» nga menuja e kontekstit.\
+[Hap figurën](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
 
-![shtoj në çantë](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
+![Shpëto aktorin në çantë](../../../media/getting-started/grafik-9.png)\
+Jepini një emër të skriptit dhe konfirmoni me OK.\
+[Hap figurën](../../../media/getting-started/grafik-9.png)
 
-Jepini një emër të skriptit dhe konfirmoni me OK.
-
-![Shpëto aktorin në çantë](../../../media/getting-started/grafik-9.png)
-
-Skripti ruhet dhe mund të përdoret në projekte të tjera.
-
-![çantën tënde](../../../media/getting-started/grafik-10.png)
+![çantën tënde](../../../media/getting-started/grafik-10.png)\
+Skripti ruhet dhe mund të përdoret në projekte të tjera.\
+[Hap figurën](../../../media/getting-started/grafik-10.png)
 
 **Shtojni skripte nga çantë:**
 
-Shtypni në aktorin ku doni të vendosni skenarin. Do ta shihni zonën e skenarit. Shtypni në tre pikët për të hapur menunë kontekstual dhe shtytni në «Çanta».
+Shtypni në aktorin ku doni të vendosni skenarin. Do ta shihni zonën e skenarit.
 
-![Shkarko Skript](../../../media/getting-started/grafik-11.png)
+![Shkarko Skript](../../../media/getting-started/grafik-11.png)\
+Shtypni në tre pikët për të hapur menunë kontekstual dhe shtytni në «Çanta».\
+[Hap figurën](../../../media/getting-started/grafik-11.png)
 
-Tani mund të shihni të gjitha skenat që janë tashmë në çantën tuaj. Shtypni në tre pikët pranë skriptit të dëshiruar dhe zgjidhni «Nxirr nga çanta» nga menuja e kontekstit.
+Tani mund të shihni të gjitha skenat që janë tashmë në çantën tuaj.
 
 Përmes menus së kontekstit, mund të fshini skripte që nuk i nevojiten më në çantë.
 
-![Shkarko Skripti Çartëkë](../../../media/getting-started/grafik-12.png)
+![Shkarko Skripti Çartëkë](../../../media/getting-started/grafik-12.png)\
+Shtypni në tre pikët pranë skriptit të dëshiruar dhe zgjidhni «Nxirr nga çanta» nga menuja e kontekstit.\
+[Hap figurën](../../../media/getting-started/grafik-12.png)
 
 ***
 

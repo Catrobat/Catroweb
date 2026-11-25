@@ -2,12 +2,12 @@
 title: "بازیگران و اشیاء را اضافه کنید"
 description: "برای اضافه کردن یک عدد یا شی جدید به پروژه تان روی دکمه جمع بزنید."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-برای اضافه کردن یک عدد یا شی جدید به پروژه تان روی دکمه جمع بزنید.
-
-![یک بازیگر اضافه کنید](../../../media/getting-started/FigurHinzufuegen.png)
+![یک بازیگر اضافه کنید](../../../media/getting-started/FigurHinzufuegen.png)\
+برای اضافه کردن یک عدد یا شی جدید به پروژه تان روی دکمه جمع بزنید.\
+[تصویر را باز کن](../../../media/getting-started/FigurHinzufuegen.png)
 
 در Pocket Code می‌توانی یک شخصیت یا یک شی را به پروژه خود به روش های مختلف اضافه کنید:
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **پروژه‌های روی دستگاه**: یک پروژه را انتخاب کن که از آن می خواهید اولین بازیگر را همراه با سیناریو در پروژه خود قرار دهید.
 
-![بازیگر جدید](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![بازیگر جدید](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+در Pocket Code می‌توانی یک شخصیت یا یک شی را به پروژه خود به روش های مختلف اضافه کنید.\
+[تصویر را باز کن](../../../media/getting-started/NewActor-e1732794461668.jpg)

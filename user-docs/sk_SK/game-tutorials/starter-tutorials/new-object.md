@@ -2,18 +2,20 @@
 title: Nový objekt
 description: "V tomto návode sa naučíš, ako vytvoriť nový objekt v svojom projekte a aké máš na to možnosti."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 V tomto návode sa naučíš, ako vytvoriť nový objekt v svojom projekte a aké máš na to možnosti.
 
-![Nový objekt](../../../media/game-tutorials/New-Object.png)
+![Nový objekt](../../../media/game-tutorials/New-Object.png)\
+V tomto návode sa naučíš, ako vytvoriť nový objekt v svojom projekte a aké máš na to možnosti.\
+[Otvor obrázok](../../../media/game-tutorials/New-Object.png)
 
 Na to by si už mal mať stiahnutú aplikáciu Pocket Code a vedieť vytvoriť nový projekt. Ak potrebuješ pomoc, pozri si návod **[Nový projekt](new-project.md)**.
 
 *Tento návod si tu môžeš stiahnuť vo formáte PDF:*
 
-[Nový objekt](../../../media/game-tutorials/New-Object.pdf)
+[Otvor PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Vytvor nový objekt
 
@@ -23,15 +25,17 @@ Nájdeš ho na domovskej obrazovke aplikácie Pocket Code. Ak máš viac projekt
 
 ### 2. Vytvor nový objekt
 
-Teraz môžeš vytvoriť nový objekt. Stačí kliknúť na žlté tlačidlo plus v pravom dolnom rohu. Otvorí sa nové okno so siedmimi možnosťami na výber.
+Teraz môžeš vytvoriť nový objekt. Otvorí sa nové okno so siedmimi možnosťami na výber.
 
-![Nový objekt (1)](../../../media/game-tutorials/New-Object-1.png)
+![Nový objekt (1)](../../../media/game-tutorials/New-Object-1.png)\
+Stačí kliknúť na žlté tlačidlo plus v pravom dolnom rohu.\
+[Otvor obrázok](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Spôsoby vytvorenia
 
-Toto sú možnosti, z ktorých môžeš vyberať:
-
-![Nový objekt (2)](../../../media/game-tutorials/New-Object-2.png)
+![Nový objekt (2)](../../../media/game-tutorials/New-Object-2.png)\
+Toto sú možnosti, z ktorých môžeš vyberať.\
+[Otvor obrázok](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Nakresli obrázok
 
@@ -43,9 +47,11 @@ Teraz musíš svojmu obrázku dať názov.
 
 ### 6. Umiestni ho
 
-Potom ho musíš umiestniť vizuálne tak, že ho prstom posunieš doľava/doprava alebo hore/dole. Ulož ho tlačidlom v pravom hornom rohu.
+Potom ho musíš umiestniť vizuálne tak, že ho prstom posunieš doľava/doprava alebo hore/dole.
 
-![Nový objekt (3)](../../../media/game-tutorials/New-Object-3.png)
+![Nový objekt (3)](../../../media/game-tutorials/New-Object-3.png)\
+Ulož ho tlačidlom v pravom hornom rohu.\
+[Otvor obrázok](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Zvládol si to! Vytvoril si svoj vlastný nový objekt.
 

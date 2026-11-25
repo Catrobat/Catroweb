@@ -2,7 +2,7 @@
 title: Medya kütüphanesi
 description: "Catrobat medya kütüphanesi, projelerinde kullanabileceğin karakterler, arka planlar, sesler ve nesnelerden oluşan bir koleksiyondur."
 order: 1
-source_hash: '033e4596481d0050d8912025b0b5c56ea1298d0aa5b1c34b7e2e2e09efb04561'
+source_hash: 'a1d83b2b73d79f59ca1b02a52aaf4f2949d9dfb47368c71110f513c40a2b0f22'
 ---
 
 Catrobat medya kütüphanesi, projelerinde kullanabileceğin **karakterler**, **arka planlar**, sesler ve nesnelerden oluşan bir koleksiyondur. Her şeyi kendi fikirlerine göre değiştirebilirsin!
@@ -19,21 +19,27 @@ Catrobat medya kütüphanesi, projelerinde kullanabileceğin **karakterler**, **
 
 ### Medya kütüphanesinden yeni bir karakter ekle
 
-Yeni bir karakter veya nesne eklemek için proje görünümünde + simgesine dokun [(daha fazla bilgi](../quick-start-guide/add-actors-and-objects.md)). “Görünümler”i seç.
+Yeni bir karakter veya nesne eklemek için proje görünümünde + simgesine dokun [(daha fazla bilgi](../quick-start-guide/add-actors-and-objects.md)).
 
-![Yeni karakter](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Yeni karakter](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+“Görünümler”i seç.\
+[Resmi aç](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-Programında kullanmak istediğin bir karakter seç. Karaktere dokun (1) ve onu indir (2).
+Programında kullanmak istediğin bir karakter seç.
 
-![Medya kütüphanesi](../../../media/getting-started/grafik-19.png)
+![Medya kütüphanesi](../../../media/getting-started/grafik-19.png)\
+Karaktere dokun (1) ve onu indir (2).\
+[Resmi aç](../../../media/getting-started/grafik-19.png)
 
-Şimdi karaktere yeni bir ad verebilir (1) ve onu oyununda yerleştirebilirsin (2). Yani karakterini doğrudan ekranda hareket ettirebilirsin. Projede nerede durduğunu hemen görürsün. “Tamam” ile onayla.
+Şimdi karaktere yeni bir ad verebilir (1) ve onu oyununda yerleştirebilirsin (2). Yani karakterini doğrudan ekranda hareket ettirebilirsin. Projede nerede durduğunu hemen görürsün.
 
-![Yeni karakter veya nesne](../../../media/getting-started/grafik-29.png)
+![Yeni karakter veya nesne](../../../media/getting-started/grafik-29.png)\
+“Tamam” ile onayla.\
+[Resmi aç](../../../media/getting-started/grafik-29.png)
 
-Karakterini yerleştir (1) ve onay işaretiyle onayla (2).
-
-![Karakteri ekranda yerleştir](../../../media/getting-started/grafik-21.png)
+![Karakteri ekranda yerleştir](../../../media/getting-started/grafik-21.png)\
+Karakterini yerleştir (1) ve onay işaretiyle onayla (2).\
+[Resmi aç](../../../media/getting-started/grafik-21.png)
 
 ***
 
@@ -41,25 +47,31 @@ Karakterini yerleştir (1) ve onay işaretiyle onayla (2).
 
 Proje görünümünde arka plana git. Görünümler bölümüne geç ve yeni bir görünüm ekle ([daha fazla bilgi](../quick-start-guide/add-background.md)). “Görünümler”e dokun.
 
-Programında kullanmak istediğin uygun bir arka plan seç. Arka plana dokun (1) ve onu indir (2).
+Programında kullanmak istediğin uygun bir arka plan seç.
 
-![Medya kütüphanesinden arka plan seç](../../../media/getting-started/grafik-22.png)
+![Medya kütüphanesinden arka plan seç](../../../media/getting-started/grafik-22.png)\
+Arka plana dokun (1) ve onu indir (2).\
+[Resmi aç](../../../media/getting-started/grafik-22.png)
 
 ***
 
 ### Medya kütüphanesinden ses ekle
 
-Sesleri hem arka planına hem de karakterlerine veya nesnelerine ekleyebilirsin. Sesi eklemek istediğin karaktere veya arka plana dokun. Ses görünümüne git ve + simgesine dokun.
+Sesleri hem arka planına hem de karakterlerine veya nesnelerine ekleyebilirsin. Sesi eklemek istediğin karaktere veya arka plana dokun.
 
-![Ses görünümü](../../../media/getting-started/grafik-23.png)
+![Ses görünümü](../../../media/getting-started/grafik-23.png)\
+Ses görünümüne git ve + simgesine dokun.\
+[Resmi aç](../../../media/getting-started/grafik-23.png)
 
-Medya kütüphanesini açmak için “Sesler”e dokun.
+![grafik](../../../media/getting-started/grafik-30.png)\
+Medya kütüphanesini açmak için “Sesler”e dokun.\
+[Resmi aç](../../../media/getting-started/grafik-30.png)
 
-![grafik](../../../media/getting-started/grafik-30.png)
+Programında kullanmak istediğin uygun bir ses seç.
 
-Programında kullanmak istediğin uygun bir ses seç. Sese dokun (1) ve onu indir (2).
-
-![Ses seç](../../../media/getting-started/grafik-25.png)
+![Ses seç](../../../media/getting-started/grafik-25.png)\
+Sese dokun (1) ve onu indir (2).\
+[Resmi aç](../../../media/getting-started/grafik-25.png)
 
 ***
 
@@ -71,16 +83,20 @@ Nesneleri karakterlere benzer şekilde eklersin.
 
 Yeni bir nesne eklemek için proje görünümünde + simgesine dokun ([daha fazla bilgi](../quick-start-guide/add-actors-and-objects.md)).
 
-“Kütüphane”yi seç.
+![Yeni karakter](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+“Kütüphane”yi seç.\
+[Resmi aç](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-![Yeni karakter](../../../media/getting-started/NewActor-e1732794461668.jpg)
+Programında kullanmak istediğin bir nesne ara.
 
-Programında kullanmak istediğin bir nesne ara. Nesneye dokun (1) ve onu indir (2).
+![Medya kütüphanesindeki nesneler](../../../media/getting-started/grafik-27.png)\
+Nesneye dokun (1) ve onu indir (2).\
+[Resmi aç](../../../media/getting-started/grafik-27.png)
 
-![Medya kütüphanesindeki nesneler](../../../media/getting-started/grafik-27.png)
+Şimdi nesneye yeni bir ad verebilir (1) ve onu oyununda yerleştirebilirsin (2). Yani nesneni doğrudan ekranda hareket ettirebilirsin. Projede nerede durduğunu hemen görürsün.
 
-Şimdi nesneye yeni bir ad verebilir (1) ve onu oyununda yerleştirebilirsin (2). Yani nesneni doğrudan ekranda hareket ettirebilirsin. Projede nerede durduğunu hemen görürsün. “Tamam” ile onayla.
-
-![Yeni karakter veya nesne](../../../media/getting-started/grafik-29.png)
+![Yeni karakter veya nesne](../../../media/getting-started/grafik-29.png)\
+“Tamam” ile onayla.\
+[Resmi aç](../../../media/getting-started/grafik-29.png)
 
 Nesneni yerleştir (1) ve onay işaretiyle onayla (2).

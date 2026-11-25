@@ -2,12 +2,12 @@
 title: "Aktyorlar va ob'ektlarni qo'shish"
 description: "Loyihaga yangi raqam yoki ob'ekt qo'shish uchun \"ko'p\" tugmasini bos."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Loyihaga yangi raqam yoki ob'ekt qo'shish uchun "ko'p" tugmasini bos.
-
-![Aktyor qoʻshish](../../../media/getting-started/FigurHinzufuegen.png)
+![Aktyor qoʻshish](../../../media/getting-started/FigurHinzufuegen.png)\
+Loyihaga yangi raqam yoki ob'ekt qo'shish uchun "ko'p" tugmasini bos.\
+[Rasmni och](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Code da sen loyihaingizga har xil usullar bilan belgi yoki ob'ekt qo'shishingiz mumkin:
 
@@ -29,4 +29,6 @@ Pocket Code da sen loyihaingizga har xil usullar bilan belgi yoki ob'ekt qo'shis
 
 **Qurilmadagi loyihalar**: Loyihaga dastlabki aktyorni va ssenariyni qo'shmoqchi bo'lgan loyihani tanla.
 
-![Yangi aktyor](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Yangi aktyor](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Code da sen loyihaingizga har xil usullar bilan belgi yoki ob'ekt qo'shishingiz mumkin.\
+[Rasmni och](../../../media/getting-started/NewActor-e1732794461668.jpg)

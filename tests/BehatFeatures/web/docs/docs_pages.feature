@@ -28,6 +28,14 @@ Feature: User docs pages, synced from user-docs/
     And the element ".docs-article > .docs-toc" should contain "Move the cat"
     And the element ".docs-pager" should contain "Make your cat jump"
 
+  Scenario: A screenshot puts the instruction and the full-size image link under it
+    Given I use a 390 x 844 viewport
+    When I go to "/app/docs/getting-started/first-project"
+    And I wait for the page to be loaded
+    Then I should see a ".docs-content p > img + br" element
+    And the element ".docs-content p:has(img)" should contain "Tap the cat to jump."
+    And the element ".docs-content p:has(img) > a[href^='/docs-media/tutorials/jump.png']" should contain "Open image"
+
   Scenario: A video loads from YouTube only after a click
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded

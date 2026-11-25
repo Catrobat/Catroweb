@@ -2,12 +2,12 @@
 title: "Актерлер мен нысандарды қосу"
 description: "Жобаңызға жаңа фигура немесе нысанды қосу үшін плюс батырмасын бас."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Жобаңызға жаңа фигура немесе нысанды қосу үшін плюс батырмасын бас.
-
-![Актерді қосу](../../../media/getting-started/FigurHinzufuegen.png)
+![Актерді қосу](../../../media/getting-started/FigurHinzufuegen.png)\
+Жобаңызға жаңа фигура немесе нысанды қосу үшін плюс батырмасын бас.\
+[Суретті аш](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Code дегенді таңда:
 
@@ -29,4 +29,6 @@ Pocket Code дегенді таңда:
 
 **Жергілікті жобалар**: Жобаңызда сценариймен бірге бірінші актерді қосуға болатын жобаны таңда.
 
-![Жаңа актер](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Жаңа актер](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Code дегенді таңда.\
+[Суретті аш](../../../media/getting-started/NewActor-e1732794461668.jpg)

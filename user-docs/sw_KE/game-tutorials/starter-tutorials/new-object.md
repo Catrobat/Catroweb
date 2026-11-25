@@ -2,18 +2,20 @@
 title: "Kitu Kipya"
 description: "Katika mafunzo haya, utajifunza jinsi ya kujenga kitu kipya katika mradi wako na uwezekano mbalimbali una kwa ajili ya hili."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Katika mafunzo haya, utajifunza jinsi ya kujenga kitu kipya katika mradi wako na uwezekano mbalimbali una kwa ajili ya hili.
 
-![Kitu Kipya](../../../media/game-tutorials/New-Object.png)
+![Kitu Kipya](../../../media/game-tutorials/New-Object.png)\
+Katika mafunzo haya, utajifunza jinsi ya kujenga kitu kipya katika mradi wako na uwezekano mbalimbali una kwa ajili ya hili.\
+[Fungua picha](../../../media/game-tutorials/New-Object.png)
 
 Ili kufanya hivyo, unapaswa tayari kupakua programu Pocket Code na kujua jinsi ya kuunda mradi mpya. Ikiwa unahitaji msaada katika hili, jisikie huru kuangalia mafunzo ya **[Mradi Mpya](new-project.md)**.
 
 *Hapa unaweza kupakua mafunzo katika PDF-format:*
 
-[Kitu Kipya](../../../media/game-tutorials/New-Object.pdf)
+[Fungua PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Unda Kitu Kipya
 
@@ -23,15 +25,17 @@ Utaipata kwenye skrini ya nyumbani ya programu Pocket Code. Ikiwa una miradi zai
 
 ### 2. Unda Kitu Kipya
 
-Sasa uko tayari kuunda kitu kipya. Ili kufanya hivyo tu bonyeza kwenye kijani plus kifungo kwenye kona ya chini kulia. Utaona dirisha jipya ambalo litakupa fursa saba za kuchagua.
+Sasa uko tayari kuunda kitu kipya. Utaona dirisha jipya ambalo litakupa fursa saba za kuchagua.
 
-![Kitu Kipya (1)](../../../media/game-tutorials/New-Object-1.png)
+![Kitu Kipya (1)](../../../media/game-tutorials/New-Object-1.png)\
+Ili kufanya hivyo tu bonyeza kwenye kijani plus kifungo kwenye kona ya chini kulia.\
+[Fungua picha](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Njia za Kuumba
 
-Hizi ni uwezekano unaweza kuchagua:
-
-![Kitu Kipya (2)](../../../media/game-tutorials/New-Object-2.png)
+![Kitu Kipya (2)](../../../media/game-tutorials/New-Object-2.png)\
+Hizi ni uwezekano unaweza kuchagua.\
+[Fungua picha](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Picha
 
@@ -43,9 +47,11 @@ Sasa lazima upate jina la picha yako.
 
 ### 6. Weka hiyo
 
-Baada ya hapo lazima uweke kipaji kwa kuibadilisha kushoto/kulia au juu/chini na kidole chako. Lazima uweke kwenye kitufe cha kulia juu.
+Baada ya hapo lazima uweke kipaji kwa kuibadilisha kushoto/kulia au juu/chini na kidole chako.
 
-![Kitu Kipya (3)](../../../media/game-tutorials/New-Object-3.png)
+![Kitu Kipya (3)](../../../media/game-tutorials/New-Object-3.png)\
+Lazima uweke kwenye kitufe cha kulia juu.\
+[Fungua picha](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Umefanya hivyo!
 

@@ -2,12 +2,12 @@
 title: "کرکټرونه او څیزونه ورزیات کړه"
 description: "د + تڼۍ کېکاږه، څو خپلې پروژې ته نوی کرکټر یا څیز ورزیات کړې."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-د + تڼۍ کېکاږه، څو خپلې پروژې ته نوی کرکټر یا څیز ورزیات کړې.
-
-![کرکټر ورزیات کړه](../../../media/getting-started/FigurHinzufuegen.png)
+![کرکټر ورزیات کړه](../../../media/getting-started/FigurHinzufuegen.png)\
+د + تڼۍ کېکاږه، څو خپلې پروژې ته نوی کرکټر یا څیز ورزیات کړې.\
+[انځور پرانیزه](../../../media/getting-started/FigurHinzufuegen.png)
 
 په Pocket Code کې پروژې ته په څو لارو کرکټر یا څیز ورزیاتولی شې:
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **محلي پروژې**: بله پروژه وټاکه. د هغې لومړی کرکټر او د کوډ لړۍ به ستا پروژې ته راشي.
 
-![نوی کرکټر](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![نوی کرکټر](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+په Pocket Code کې پروژې ته په څو لارو کرکټر یا څیز ورزیاتولی شې.\
+[انځور پرانیزه](../../../media/getting-started/NewActor-e1732794461668.jpg)

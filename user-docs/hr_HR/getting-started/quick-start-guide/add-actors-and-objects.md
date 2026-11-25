@@ -2,12 +2,12 @@
 title: Dodavanje likova i objekata
 description: Dodirni gumb s plusom da dodaš novi lik ili objekt u svoj projekt.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Dodirni gumb s plusom da dodaš novi lik ili objekt u svoj projekt.
-
-![Dodavanje lika](../../../media/getting-started/FigurHinzufuegen.png)
+![Dodavanje lika](../../../media/getting-started/FigurHinzufuegen.png)\
+Dodirni gumb s plusom da dodaš novi lik ili objekt u svoj projekt.\
+[Otvori sliku](../../../media/getting-started/FigurHinzufuegen.png)
 
 U Pocket Codeu možeš dodati lik ili objekt u svoj projekt na više načina:
 
@@ -29,4 +29,6 @@ U Pocket Codeu možeš dodati lik ili objekt u svoj projekt na više načina:
 
 **Lokalni projekti**: Odaberi projekt iz kojeg želiš umetnuti prvi lik zajedno sa skriptom u svoj projekt.
 
-![Novi lik](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Novi lik](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+U Pocket Codeu možeš dodati lik ili objekt u svoj projekt na više načina.\
+[Otvori sliku](../../../media/getting-started/NewActor-e1732794461668.jpg)

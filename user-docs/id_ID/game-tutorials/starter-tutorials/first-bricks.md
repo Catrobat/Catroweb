@@ -2,18 +2,20 @@
 title: Blok Pertama
 description: "Dalam tutorial ini, kamu akan belajar di mana menemukan berbagai blok untuk memprogram sebuah objek."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Dalam tutorial ini, kamu akan belajar di mana menemukan berbagai blok untuk memprogram sebuah objek. Tutorial ini juga memberi gambaran yang baik tentang kategori blok.
 
-![Blok Pertama](../../../media/game-tutorials/First-Bricks.png)
+![Blok Pertama](../../../media/game-tutorials/First-Bricks.png)\
+Tutorial ini juga memberi gambaran yang baik tentang kategori blok.\
+[Buka gambar](../../../media/game-tutorials/First-Bricks.png)
 
 Untuk memasukkan blok dan memprogram objekmu, kamu sebaiknya sudah membuat proyek dengan sebuah objek. Kalau kamu butuh bantuan, kamu bisa melihat tutorial **[Objek Baru](new-object.md)**.
 
 *Di sini kamu bisa mengunduh tutorial dalam format PDF:*
 
-[Blok Pertama](../../../media/game-tutorials/First-Bricks.pdf)
+[Buka PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Buka objek yang sudah ada
 
@@ -23,9 +25,11 @@ Pertama, kamu perlu membuka proyekmu. Kamu seharusnya sudah membuat objek (kalau
 
 Setelah itu kamu akan melihat bahwa sudah ada beberapa blok. Blok-blok itu dibuat saat kita menempatkan objek secara visual.
 
-Blok-blok ini hanya menempatkan objek kita di posisi tepat yang kita pilih di awal, saat proyek mulai. Kamu juga bisa mengubah posisi ini kapan saja di sini.
+Blok-blok ini hanya menempatkan objek kita di posisi tepat yang kita pilih di awal, saat proyek mulai.
 
-![Blok Pertama (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Blok Pertama (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Kamu juga bisa mengubah posisi ini kapan saja di sini.\
+[Buka gambar](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Masukkan blok
 
@@ -33,9 +37,9 @@ Sekarang kamu bisa membuat blok lagi dengan mengetuk tombol plus kuning di pojok
 
 ### 4. Kategori blok
 
-Ini adalah kategori blok yang berbeda:
-
-![Blok Pertama (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Blok Pertama (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Ini adalah kategori blok yang berbeda.\
+[Buka gambar](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Masukkan blok pertama
 
@@ -43,9 +47,11 @@ Untuk blok pertama kita, kita ingin memakai blok “Meluncur 1 detik ke x: y:”
 
 ### 6. Letakkan blok
 
-Letakkan blok di posisi terakhir programmu dan jalankan programmu untuk pertama kali. Kamu bisa melakukannya dengan tombol play kuning.
+Letakkan blok di posisi terakhir programmu dan jalankan programmu untuk pertama kali.
 
-![Blok Pertama (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Blok Pertama (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Kamu bisa melakukannya dengan tombol play kuning.\
+[Buka gambar](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Berhasil! Kamu sudah memasukkan blok pertamamu.
 

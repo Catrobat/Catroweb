@@ -2,18 +2,20 @@
 title: "Lehenengo kode blokeak"
 description: "Tutorial honetan, objektu bat programatzeko hainbat kode bloke non aurkituko dituzun ikasiko duzu."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Tutorial honetan, objektu bat programatzeko hainbat kode bloke non aurkituko dituzun ikasiko duzu. Gainera, tutoriala honek kode blokeetako kategorien ikuspegi orokorra ematen du.
 
-![Lehenengo kode blokeak](../../../media/game-tutorials/First-Bricks.png)
+![Lehenengo kode blokeak](../../../media/game-tutorials/First-Bricks.png)\
+Gainera, tutoriala honek kode blokeetako kategorien ikuspegi orokorra ematen du.\
+[Ireki irudia](../../../media/game-tutorials/First-Bricks.png)
 
 Kode blokeak sartzeko eta zure objektuaren programazioa egiteko, proiektu bat sortu beharko zenuke. Laguntza behar baduzu, begiratu **[Objektu berria](new-object.md)** tutoriala.
 
 *Hemen, tutoriala deskarga dezakezu PDF formatua:*
 
-[Lehenengo kode blokeak](../../../media/game-tutorials/First-Bricks.pdf)
+[Ireki PDFa](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Zabaldu dagoeneko dagoen objektu bat
 
@@ -23,9 +25,11 @@ Hasieran, zure proiektua ireki behar duzu. Objektu bat sortu behar zenuen (ez ba
 
 Gero ikusiko duzu dagoeneko kode bloke batzuk daudela. Kode bloke horiek objektuaren kokapena ikusita sortu ziren.
 
-Kode bloke horiek ez dute ezer egiten gure objektuak hasieran aukeratu genuen posizioan kokatzea baino gehiago proiektua hastean. Eta hemen edozein unetan aldatu dezakezu posizioa.
+Kode bloke horiek ez dute ezer egiten gure objektuak hasieran aukeratu genuen posizioan kokatzea baino gehiago proiektua hastean.
 
-![Lehenengo kode blokeak (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Lehenengo kode blokeak (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Eta hemen edozein unetan aldatu dezakezu posizioa.\
+[Ireki irudia](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Sartu kode blokeak
 
@@ -33,9 +37,9 @@ Orain, kode bloke gehiago sor ditzakezu eskuineko beheko txokoan dagoen botoi ho
 
 ### 4. Kodea blokeatzeko kategoriak
 
-Hauek dira kode blokeetako kategoriak:
-
-![Lehenengo kode blokeak (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Lehenengo kode blokeak (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Hauek dira kode blokeetako kategoriak.\
+[Ireki irudia](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Sartu lehenengo kode-blokea
 
@@ -43,9 +47,11 @@ Gure lehenengo kode blokeetarako, Â«Irristatu 1 segundo posizio honetara: x: Y:Â
 
 ### 6. Jarri kode-blokea
 
-Jarri kode-blokea zure programaren azken posizioan eta exekuta ezazu zure programa lehen aldiz. Hori egin dezakezu jolas botoi horia erabiliz.
+Jarri kode-blokea zure programaren azken posizioan eta exekuta ezazu zure programa lehen aldiz.
 
-![Lehenengo kode blokeak (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Lehenengo kode blokeak (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Hori egin dezakezu jolas botoi horia erabiliz.\
+[Ireki irudia](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Lortu duzu, lehenengo kode blokea sartu duzu.
 

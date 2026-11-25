@@ -2,23 +2,38 @@
 title: "Navigeer die koppelvlak"
 description: "Wanneer jy begin Pocket Code, sien jy die volgende hoofskerm."
 order: 0
-source_hash: 'cbf2480bf8013b4cd90c15ef9dbb7914d7a1afbd0771cbc3261b60af493a8c2c'
+source_hash: 'feacd530be149adbad71da0264c3c7400343c4e083937d891b7cc442e6c6bff5'
 ---
 
 Wanneer jy begin Pocket Code, sien jy die volgende hoofskerm.
 
-![Hoofskerm](../../../media/getting-started/MainScreen-e1732269599192.jpg)
+![Hoofskerm](../../../media/getting-started/MainScreen-e1732269599192.jpg)\
+Wanneer jy begin Pocket Code, sien jy die volgende hoofskerm.\
+[Maak prent oop](../../../media/getting-started/MainScreen-e1732269599192.jpg)
 
-In die boonste regterhoek is daar 'n ![Hulp](../../../media/getting-started/Screenshot-2024-11-22-111748.png) simbool wat jou na die Catrobat dokumentasie lei, wat nuttige wenke vir jou het.
+![Hulp](../../../media/getting-started/Screenshot-2024-11-22-111748.png)\
+In die boonste regterhoek is daar 'n simbool wat jou na die Catrobat dokumentasie lei, wat nuttige wenke vir jou het.
 
-Naby dit is die spyskaart ![Menu](../../../media/getting-started/Screenshot-2024-11-22-111804.png). Van daar af kan jy maklik gaan na die instellings, waar jy die taal kan verander of uitbreidings soos plot blokke en meer in te skakel.
+![Menu](../../../media/getting-started/Screenshot-2024-11-22-111804.png)\
+Naby dit is die spyskaart.
 
-Hieronder kan jy jou nuutste bewerkte projekskerm. Klik op die wysig ikoon ![Bewerk ikoon](../../../media/getting-started/Screenshot-2024-11-22-111825.png) om toegang te verkry tot die projekskerm, waar jy kan voortgaan om jou projek te ontwikkel.
+Van daar af kan jy maklik gaan na die instellings, waar jy die taal kan verander of uitbreidings soos plot blokke en meer in te skakel.
 
-Gebruik die speelknoppie ![Begin jou projek](../../../media/getting-started/Screenshot-2024-11-22-111818.png) om jou projek te begin.
+![Bewerk ikoon](../../../media/getting-started/Screenshot-2024-11-22-111825.png)\
+Klik op die wysig ikoon om toegang te verkry tot die projekskerm, waar jy kan voortgaan om jou projek te ontwikkel.
 
-Met 'n klik op ProjekteJy kan toegang tot jou gestoor projekte. ![Projekte oor toestel](../../../media/getting-started/Screenshot-2024-11-22-111832.png)
+Hieronder kan jy jou nuutste bewerkte projekskerm.
 
-As jy meer projekte van ander gebruikers wil leer ken en daaraan werk, klik eenvoudig op Catrobat Gemeenskap op die Deel. Daar sal jy baie goeie projekte vind. ![Catrobat Gemeenskap](../../../media/getting-started/Screenshot-2024-11-22-111847.png)
+![Begin jou projek](../../../media/getting-started/Screenshot-2024-11-22-111818.png)\
+Gebruik die speelknoppie om jou projek te begin.
 
-As jy wil 'n nuwe projek te skep, kliek op die plus ikoon. ![Voeg by](../../../media/getting-started/Screenshot-2024-11-22-143219.png)
+![Projekte oor toestel](../../../media/getting-started/Screenshot-2024-11-22-111832.png)\
+Met 'n klik op ProjekteJy kan toegang tot jou gestoor projekte.
+
+![Catrobat Gemeenskap](../../../media/getting-started/Screenshot-2024-11-22-111847.png)\
+As jy meer projekte van ander gebruikers wil leer ken en daaraan werk, klik eenvoudig op Catrobat Gemeenskap op die Deel.
+
+Daar sal jy baie goeie projekte vind.
+
+![Voeg by](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+As jy wil 'n nuwe projek te skep, kliek op die plus ikoon.

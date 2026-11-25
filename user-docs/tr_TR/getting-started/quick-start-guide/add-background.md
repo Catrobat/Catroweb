@@ -2,7 +2,7 @@
 title: Arka plan ekle
 description: Catrobat’ta projene bir arka plan ekleyebilirsin.
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Catrobat’ta projene bir arka plan ekleyebilirsin.
@@ -11,15 +11,17 @@ Arka planları farklı şekillerde kullanabilirsin. Pocket Code’da **oyunları
 
 **Plotter** veya **nakış makinesi** gibi makerspace cihazlarında arka planlar tasarım şablonu olur, örneğin kesimler veya nakış desenleri için.
 
-Arka plan eklemek için proje görünümünde “Arka plan”a dokun.
-
-![Arka plana dokun](../../../media/getting-started/grafik-16.png)
+![Arka plana dokun](../../../media/getting-started/grafik-16.png)\
+Arka plan eklemek için proje görünümünde “Arka plan”a dokun.\
+[Resmi aç](../../../media/getting-started/grafik-16.png)
 
 **Betik bölümünde (2)** arka planını programlayabilirsin. Ama burada her blok kullanılamaz. Şu iki blok özellikle önemlidir: ![Saydamlığı yüzde 50 yap](../../../media/bricks/Set_transparency_to_50_pct_.png) ve ![Boyutu yüzde 60 yap](../../../media/bricks/Set_size_to_60_pct_.png)
 
-**Görünümler bölümünde (1)** bir arka plan eklersin. Bunun için + simgesine dokun.
+**Görünümler bölümünde (1)** bir arka plan eklersin.
 
-![Arka plan ekle](../../../media/getting-started/grafik-14.png)
+![Arka plan ekle](../../../media/getting-started/grafik-14.png)\
+Bunun için + simgesine dokun.\
+[Resmi aç](../../../media/getting-started/grafik-14.png)
 
 Kendi resimlerini yükleyebilir, hazır arka planları kullanabilir veya kendin bir arka plan çizebilirsin.
 
@@ -31,6 +33,8 @@ Kendi resimlerini yükleyebilir, hazır arka planları kullanabilir veya kendin 
 
 **Kamera**: Cihazının kamerasıyla bir fotoğraf çekip onu arka plan olarak ekleyebilirsin.
 
-![grafik](../../../media/getting-started/grafik-17.png)
+![grafik](../../../media/getting-started/grafik-17.png)\
+**Proje görünümüne** dönmek için sağ üstteki geri okuna dokun.\
+[Resmi aç](../../../media/getting-started/grafik-17.png)
 
-Artık bir arka plan ekledin. **Proje görünümüne** dönmek için sağ üstteki geri okuna dokun.
+Artık bir arka plan ekledin.

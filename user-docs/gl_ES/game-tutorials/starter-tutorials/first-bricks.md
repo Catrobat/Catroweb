@@ -2,18 +2,20 @@
 title: "Primeiro bloque de código"
 description: "Neste tutorial, aprenderás onde atopar varios bloques de código para programar un obxecto."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Neste tutorial, aprenderás onde atopar varios bloques de código para programar un obxecto. Ademais, este tutorial proporciona unha boa visión xeral das categorías de bloques de código.
 
-![Primeiro bloque de código](../../../media/game-tutorials/First-Bricks.png)
+![Primeiro bloque de código](../../../media/game-tutorials/First-Bricks.png)\
+Ademais, este tutorial proporciona unha boa visión xeral das categorías de bloques de código.\
+[Abrir a imaxe](../../../media/game-tutorials/First-Bricks.png)
 
 Para inserir bloques de código e programar o seu obxecto, xa debería ter creado un proxecto con un obxecto. Se necesitas axuda con isto, podes ver o tutorial **[O novo obxecto](new-object.md)**.
 
 *Aquí podes descargar o tutorial en PDF-formato:*
 
-[Primeiro bloque de código](../../../media/game-tutorials/First-Bricks.pdf)
+[Abrir o PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Abre obxecto existente
 
@@ -23,9 +25,11 @@ Ao principio, debes abrir o teu proxecto. Debería ter creado un obxecto (se non
 
 Despois de iso verás que xa hai algúns bloques de código. Estes bloques de código foron creados cando colocamos visualmente o obxecto.
 
-Estes bloques de código non fan nada máis que colocar o noso obxecto na posición exacta seleccionada no comezo dunha vez que o proxecto comeza. Tamén podes cambiar esta posición en calquera momento aquí.
+Estes bloques de código non fan nada máis que colocar o noso obxecto na posición exacta seleccionada no comezo dunha vez que o proxecto comeza.
 
-![Primeiro bloque de código (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Primeiro bloque de código (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Tamén podes cambiar esta posición en calquera momento aquí.\
+[Abrir a imaxe](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Insertar bloques de código
 
@@ -33,9 +37,9 @@ Agora podes crear máis bloques de código clicando no botón amarelo do canto i
 
 ### 4. bloque de código Categorías
 
-Estas son as diferentes categorías de bloques de código:
-
-![Primeiro bloque de código (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Primeiro bloque de código (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Estas son as diferentes categorías de bloques de código.\
+[Abrir a imaxe](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Insertar o primeiro bloque de código
 
@@ -43,9 +47,11 @@ Para os nosos primeiros bloques de código, queremos usar o bloque de código «
 
 ### 6. Colocar o bloque de código
 
-Coloque o bloque de código na última posición do seu programa e execute o seu programa pola primeira vez. Podes facelo co botón amarelo.
+Coloque o bloque de código na última posición do seu programa e execute o seu programa pola primeira vez.
 
-![Primeiro bloque de código (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Primeiro bloque de código (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Podes facelo co botón amarelo.\
+[Abrir a imaxe](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Fixeste o teu primeiro bloque de código.
 

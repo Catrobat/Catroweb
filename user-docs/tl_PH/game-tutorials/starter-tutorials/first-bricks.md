@@ -2,18 +2,20 @@
 title: "Unang mga block ng code"
 description: "Sa tutorial na ito, matututunan mo kung saan makahanap ng iba't ibang mga bloke ng code upang mag-program ng isang bagay."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Sa tutorial na ito, matututunan mo kung saan makahanap ng iba't ibang mga bloke ng code upang mag-program ng isang bagay. Bilang karagdagan, ang tutorial na ito ay nagbibigay ng isang mahusay na pangkalahatang-ideya sa mga kategorya ng block code.
 
-![Unang mga block ng code](../../../media/game-tutorials/First-Bricks.png)
+![Unang mga block ng code](../../../media/game-tutorials/First-Bricks.png)\
+Bilang karagdagan, ang tutorial na ito ay nagbibigay ng isang mahusay na pangkalahatang-ideya sa mga kategorya ng block code.\
+[Buksan ang larawan](../../../media/game-tutorials/First-Bricks.png)
 
 Upang isulud ang mga bloke ng code at i-program ang iyong bagay, dapat mong lumikha na ng isang proyekto na may isang bagay. Kung kailangan mo ng tulong sa bagay na ito, maaari mong tingnan ang tutorial **[Bagong Objekto](new-object.md)**.
 
 *Dito maaari mong i-download ang tutorial sa PDF -format:*
 
-[Unang mga block ng code](../../../media/game-tutorials/First-Bricks.pdf)
+[Buksan ang PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Buksan ang May-ari na Objekto
 
@@ -23,9 +25,11 @@ Sa simula, kailangan mong buksan ang iyong proyekto. Dapat mong lumikha ng isang
 
 Pagkatapos nito makikita mo na may ilang code blocks. Ang mga bloke ng code ay nilikha nang visual na inilagay namin ang bagay.
 
-Ang mga bloke ng code na ito ay hindi lamang naglalagay sa eksaktong posisyon ng ating bagay noong simula nang magsimula ang proyekto. Maaari mo ring baguhin ang posisyon na ito sa anumang oras dito.
+Ang mga bloke ng code na ito ay hindi lamang naglalagay sa eksaktong posisyon ng ating bagay noong simula nang magsimula ang proyekto.
 
-![Unang mga bloke ng code (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Unang mga bloke ng code (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Maaari mo ring baguhin ang posisyon na ito sa anumang oras dito.\
+[Buksan ang larawan](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. I-insert code blocks
 
@@ -33,9 +37,9 @@ Ngayon maaari mong lumikha ng higit pang mga bloke code sa pamamagitan ng pag-cl
 
 ### 4. block ng code Mga kategorya
 
-Ito ang iba't ibang mga kategorya ng block code:
-
-![Unang mga bloke ng code (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Unang mga bloke ng code (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Ito ang iba't ibang mga kategorya ng block code.\
+[Buksan ang larawan](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. I-insert ang unang block ng code
 
@@ -43,9 +47,11 @@ Para sa aming unang mga bloke ng code, nais naming gamitin ang block ng code “
 
 ### 6. I-install ang block ng code
 
-I-install ang block ng code sa huling posisyon ng iyong programa at magpatakbo ng iyong programa para sa unang pagkakataon. Maaari mong gawin iyon sa bulaklak na pindutan ng paglalaro.
+I-install ang block ng code sa huling posisyon ng iyong programa at magpatakbo ng iyong programa para sa unang pagkakataon.
 
-![Unang mga bloke ng code (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Unang mga bloke ng code (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Maaari mong gawin iyon sa bulaklak na pindutan ng paglalaro.\
+[Buksan ang larawan](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Nagbigay ka ng unang block code.
 

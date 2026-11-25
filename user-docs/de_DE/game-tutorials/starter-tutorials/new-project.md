@@ -3,11 +3,14 @@ title: Neues Projekt
 description: "In diesem Tutorial erfährst du alles, was du über Pocket Code wissen musst, um mit deinem ersten Projekt zu starten."
 order: 0
 reviewed: true
+source_hash: '548786f962e254dddae93d24d60dd0b6dc9e635ae29802897ad53511f9e3bcf7'
 ---
 
 In diesem Tutorial erfährst du alles, was du über Pocket Code wissen musst, um mit deinem ersten Projekt zu starten. Wir zeigen dir Schritt für Schritt, wie du die App herunterlädst, öffnest und ein neues Projekt erstellst.
 
-![Neues Projekt (3)](../../../media/game-tutorials/Neues-Projekt-3.png)
+![Neues Projekt (3)](../../../media/game-tutorials/Neues-Projekt-3.png)\
+Wir zeigen dir Schritt für Schritt, wie du die App herunterlädst, öffnest und ein neues Projekt erstellst.\
+[Bild öffnen](../../../media/game-tutorials/Neues-Projekt-3.png)
 
 Dies ist das allererste Tutorial und du benötigst keinerlei Vorkenntnisse.
 
@@ -15,27 +18,31 @@ Also, worauf wartest du noch? Hol dein Handy raus und leg gleich los!
 
 *Hier kannst du das Tutorial im PDF-Format herunterladen:*
 
-[Neues Projekt](../../../media/game-tutorials/Neues-Projekt.pdf)
+[PDF öffnen](../../../media/game-tutorials/Neues-Projekt.pdf)
 
 ### 1. Installation von Pocket Code
 
-Zuerst musst du die Pocket Code App auf deinem Gerät installieren. Du findest die App, indem du im Google Play Store nach “Pocket Code” suchst und auf “Installieren” klickst. Für diesen Schritt ist ein Google-Konto erforderlich. Dein Gerät wird jetzt die App herunterladen und installieren. Dieser Schritt kann je nach Internetverbindung einige Zeit in Anspruch nehmen.
+Zuerst musst du die Pocket Code App auf deinem Gerät installieren. Für diesen Schritt ist ein Google-Konto erforderlich. Dein Gerät wird jetzt die App herunterladen und installieren. Dieser Schritt kann je nach Internetverbindung einige Zeit in Anspruch nehmen.
 
-![Neues Projekt (1)](../../../media/game-tutorials/Neues-Projekt-1.png)
+![Neues Projekt (1)](../../../media/game-tutorials/Neues-Projekt-1.png)\
+Du findest die App, indem du im Google Play Store nach “Pocket Code” suchst und auf “Installieren” klickst.\
+[Bild öffnen](../../../media/game-tutorials/Neues-Projekt-1.png)
 
 Nachdem du Pocket Code erfolgreich heruntergeladen und installiert hast, findest du die App im App-Drawer oder auf deinem Startbildschirm, je nachdem, welches Gerät du verwendest. Du kannst die App ganz einfach nehmen und sie an die Stelle deiner Wahl platzieren.
 
 ### 2. Starten der App
 
-Wenn du die App öffnest, siehst du verschiedene Kategorien:
-
-![Neues Projekt (2)](../../../media/game-tutorials/Neues-Projekt-2.png)
+![Neues Projekt (2)](../../../media/game-tutorials/Neues-Projekt-2.png)\
+Wenn du die App öffnest, siehst du verschiedene Kategorien.\
+[Bild öffnen](../../../media/game-tutorials/Neues-Projekt-2.png)
 
 ### 3. Neues Projekt erstellen
 
-Der nächste Schritt ist tatsächlich ein neues Projekt zu erstellen. Dazu kannst du auf den gelben Plus-Button in der unteren rechten Ecke drücken. Jetzt musst du einen Projektnamen eingeben und auswählen, ob dein Projekt im Querformat sein soll oder nicht. Durch Drücken von “OK” wird das Projekt erstellt.
+Der nächste Schritt ist tatsächlich ein neues Projekt zu erstellen. Jetzt musst du einen Projektnamen eingeben und auswählen, ob dein Projekt im Querformat sein soll oder nicht. Durch Drücken von “OK” wird das Projekt erstellt.
 
-![Neues Projekt (3)](../../../media/game-tutorials/Neues-Projekt-3.png)
+![Neues Projekt (3)](../../../media/game-tutorials/Neues-Projekt-3.png)\
+Dazu kannst du auf den gelben Plus-Button in der unteren rechten Ecke drücken.\
+[Bild öffnen](../../../media/game-tutorials/Neues-Projekt-3.png)
 
 ### 4. Du hast es geschafft! Du hast ein eigenes neues Projekt erstellt.
 

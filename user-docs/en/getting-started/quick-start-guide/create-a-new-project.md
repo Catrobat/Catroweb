@@ -4,13 +4,17 @@ description: Open the app on your smartphone or tablet.
 order: 1
 ---
 
-Open the app on your smartphone or tablet. Tap the + symbol to create a new project.
+Open the app on your smartphone or tablet.
 
-![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)
+![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)\
+Tap the + symbol to create a new project.\
+[Open image](../../../media/getting-started/MainScreen_NewProject.png)
 
-Give the project a name (1) and decide whether you want to create a game in portrait (vertical) or landscape (horizontal) format (2). Then confirm with the checkmark (3).
+Give the project a name (1) and decide whether you want to create a game in portrait (vertical) or landscape (horizontal) format (2).
 
-![NewProject](../../../media/getting-started/NewProject.png)
+![NewProject](../../../media/getting-started/NewProject.png)\
+Then confirm with the checkmark (3).\
+[Open image](../../../media/getting-started/NewProject.png)
 
 You are now in your project view. At the top, you see the name of your game.
 
@@ -20,8 +24,12 @@ Under the background, you see the area for your **actors and objects** that you 
 
 At the bottom right, you see two important buttons:
 
-![Start](../../../media/getting-started/Start.png) With the **Play** button, you start your game.
+![Start](../../../media/getting-started/Start.png)\
+With the **Play** button, you start your game.
 
-![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png) With the **Plus** button, you add a new character/object to your game.
+![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+With the **Plus** button, you add a new character/object to your game.
 
-![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+You are now in your project view.\
+[Open image](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

@@ -2,7 +2,7 @@
 title: Biblioteca de multimédia
 description: "A biblioteca de multimédia da Catrobat é uma coleção de atores, fundos, sons e objetos que podes usar nos teus projetos."
 order: 1
-source_hash: '033e4596481d0050d8912025b0b5c56ea1298d0aa5b1c34b7e2e2e09efb04561'
+source_hash: 'a1d83b2b73d79f59ca1b02a52aaf4f2949d9dfb47368c71110f513c40a2b0f22'
 ---
 
 A biblioteca de multimédia da Catrobat é uma coleção de **atores**, **fundos**, sons e objetos que podes usar nos teus projetos. Podes personalizar tudo para se adaptar às tuas ideias!
@@ -19,21 +19,27 @@ A biblioteca de multimédia da Catrobat é uma coleção de **atores**, **fundos
 
 ### Adicionar um ator novo a partir da biblioteca de multimédia
 
-Na vista do projeto, carrega no símbolo + [(mais informações](../quick-start-guide/add-actors-and-objects.md)) para adicionar um ator ou objeto novo. Seleciona “Aparências”.
+Na vista do projeto, carrega no símbolo + [(mais informações](../quick-start-guide/add-actors-and-objects.md)) para adicionar um ator ou objeto novo.
 
-![Ator novo](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Ator novo](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Seleciona “Aparências”.\
+[Abrir imagem](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-Escolhe um ator que queres usar no teu programa. Carrega no ator (1) e descarrega-o (2).
+Escolhe um ator que queres usar no teu programa.
 
-![Biblioteca de multimédia](../../../media/getting-started/grafik-19.png)
+![Biblioteca de multimédia](../../../media/getting-started/grafik-19.png)\
+Carrega no ator (1) e descarrega-o (2).\
+[Abrir imagem](../../../media/getting-started/grafik-19.png)
 
-Agora podes dar um novo nome ao ator (1) e colocá-lo visualmente no teu jogo (2). Isto significa que podes mover o ator diretamente no ecrã. Vais ver imediatamente onde está posicionado no projeto. Confirma com “OK”.
+Agora podes dar um novo nome ao ator (1) e colocá-lo visualmente no teu jogo (2). Isto significa que podes mover o ator diretamente no ecrã. Vais ver imediatamente onde está posicionado no projeto.
 
-![Ator ou objeto novo](../../../media/getting-started/grafik-29.png)
+![Ator ou objeto novo](../../../media/getting-started/grafik-29.png)\
+Confirma com “OK”.\
+[Abrir imagem](../../../media/getting-started/grafik-29.png)
 
-Coloca o teu ator (1) e confirma com o visto (2).
-
-![Colocar a figura visualmente](../../../media/getting-started/grafik-21.png)
+![Colocar a figura visualmente](../../../media/getting-started/grafik-21.png)\
+Coloca o teu ator (1) e confirma com o visto (2).\
+[Abrir imagem](../../../media/getting-started/grafik-21.png)
 
 ***
 
@@ -41,25 +47,31 @@ Coloca o teu ator (1) e confirma com o visto (2).
 
 Vai ao fundo na vista do projeto. Muda para a secção de aparências e adiciona uma aparência nova ([mais informações](../quick-start-guide/add-background.md)). Carrega em “Aparências”.
 
-Escolhe um fundo adequado que queres usar no teu programa. Carrega no fundo (1) e descarrega-o (2).
+Escolhe um fundo adequado que queres usar no teu programa.
 
-![Escolher fundo da biblioteca de multimédia](../../../media/getting-started/grafik-22.png)
+![Escolher fundo da biblioteca de multimédia](../../../media/getting-started/grafik-22.png)\
+Carrega no fundo (1) e descarrega-o (2).\
+[Abrir imagem](../../../media/getting-started/grafik-22.png)
 
 ***
 
 ### Adicionar um som a partir da biblioteca de multimédia
 
-Os sons podem ser adicionados tanto ao teu fundo como aos teus atores ou objetos. Carrega no ator ou fundo onde queres adicionar o som. Vai à vista de sons e carrega no símbolo de mais.
+Os sons podem ser adicionados tanto ao teu fundo como aos teus atores ou objetos. Carrega no ator ou fundo onde queres adicionar o som.
 
-![Vista de som](../../../media/getting-started/grafik-23.png)
+![Vista de som](../../../media/getting-started/grafik-23.png)\
+Vai à vista de sons e carrega no símbolo de mais.\
+[Abrir imagem](../../../media/getting-started/grafik-23.png)
 
-Carrega em “Sons” para aceder à biblioteca de multimédia.
+![Imagem](../../../media/getting-started/grafik-30.png)\
+Carrega em “Sons” para aceder à biblioteca de multimédia.\
+[Abrir imagem](../../../media/getting-started/grafik-30.png)
 
-![Imagem](../../../media/getting-started/grafik-30.png)
+Escolhe um som adequado que queres usar no teu programa.
 
-Escolhe um som adequado que queres usar no teu programa. Carrega no som (1) e descarrega-o (2).
-
-![Escolher som](../../../media/getting-started/grafik-25.png)
+![Escolher som](../../../media/getting-started/grafik-25.png)\
+Carrega no som (1) e descarrega-o (2).\
+[Abrir imagem](../../../media/getting-started/grafik-25.png)
 
 ***
 
@@ -71,16 +83,20 @@ Adicionas objetos de forma semelhante aos atores.
 
 Na vista do projeto, carrega no símbolo + ([mais informações](../quick-start-guide/add-actors-and-objects.md)) para adicionar um objeto novo.
 
-Seleciona “Biblioteca”.
+![Ator novo](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Seleciona “Biblioteca”.\
+[Abrir imagem](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-![Ator novo](../../../media/getting-started/NewActor-e1732794461668.jpg)
+Procura um objeto que queres usar no teu programa.
 
-Procura um objeto que queres usar no teu programa. Carrega no objeto (1) e descarrega-o (2).
+![Objetos na biblioteca de multimédia](../../../media/getting-started/grafik-27.png)\
+Carrega no objeto (1) e descarrega-o (2).\
+[Abrir imagem](../../../media/getting-started/grafik-27.png)
 
-![Objetos na biblioteca de multimédia](../../../media/getting-started/grafik-27.png)
+Agora podes dar um novo nome ao objeto (1) e colocá-lo visualmente no teu jogo (2). Isto significa que podes mover o objeto diretamente no ecrã. Vais ver imediatamente onde está posicionado no projeto.
 
-Agora podes dar um novo nome ao objeto (1) e colocá-lo visualmente no teu jogo (2). Isto significa que podes mover o objeto diretamente no ecrã. Vais ver imediatamente onde está posicionado no projeto. Confirma com “OK”.
-
-![Ator ou objeto novo](../../../media/getting-started/grafik-29.png)
+![Ator ou objeto novo](../../../media/getting-started/grafik-29.png)\
+Confirma com “OK”.\
+[Abrir imagem](../../../media/getting-started/grafik-29.png)
 
 Coloca o teu objeto (1) e confirma com o visto (2).

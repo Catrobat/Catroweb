@@ -2,18 +2,20 @@
 title: "Yangi ob'ekt"
 description: "Ushbu darsda sen loyihaingizda yangi ob'ektni qanday yaratish kerakligini va buning turli imkoniyatlarini o'rganasiz."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Ushbu darsda sen loyihaingizda yangi ob'ektni qanday yaratish kerakligini va buning turli imkoniyatlarini o'rganasiz.
 
-![Yangi ob'ekt](../../../media/game-tutorials/New-Object.png)
+![Yangi ob'ekt](../../../media/game-tutorials/New-Object.png)\
+Ushbu darsda sen loyihaingizda yangi ob'ektni qanday yaratish kerakligini va buning turli imkoniyatlarini o'rganasiz.\
+[Rasmni och](../../../media/game-tutorials/New-Object.png)
 
 Buning uchun sen allaqachon Pocket Code dasturini yuklab olishingiz va yangi loyiha yaratish usulini bilishingiz kerak. Agar senga bu borada yordam kerak bo'lsa, **[Yangi loyiha](new-project.md)** -o'quv qo'llanmasiga qarang.
 
 *Bu yerda PDF formatida o'quvni yuklab olishingiz mumkin:*
 
-[Yangi ob'ekt](../../../media/game-tutorials/New-Object.pdf)
+[PDF faylini och](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Yangi obʼekt yaratish
 
@@ -23,15 +25,17 @@ Sen uni Pocket Code dasturining uy ekranning ustida topasiz. Agar sizda birdan o
 
 ### 2. Yangi obʼekt yaratish
 
-Endi sen yangi ob'ekt yaratishga tayyorsiz. Buni qilish uchun o'ng burchakdagi sariq qo'shimcha tugmani bos. Sen yangi oynani ko'rasiz va senga tanlash uchun yetti imkoniyat beriladi.
+Endi sen yangi ob'ekt yaratishga tayyorsiz. Sen yangi oynani ko'rasiz va senga tanlash uchun yetti imkoniyat beriladi.
 
-![Yangi ob'ekt (1)](../../../media/game-tutorials/New-Object-1.png)
+![Yangi ob'ekt (1)](../../../media/game-tutorials/New-Object-1.png)\
+Buni qilish uchun o'ng burchakdagi sariq qo'shimcha tugmani bos.\
+[Rasmni och](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Yaratuv usullari
 
-Sen quyidagi imkoniyatlardan tanlashingiz mumkin:
-
-![Yangi ob'ekt (2)](../../../media/game-tutorials/New-Object-2.png)
+![Yangi ob'ekt (2)](../../../media/game-tutorials/New-Object-2.png)\
+Sen quyidagi imkoniyatlardan tanlashingiz mumkin.\
+[Rasmni och](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Rasm chizish
 
@@ -43,9 +47,11 @@ Endi rasmingizga ism berishingiz kerak.
 
 ### 6. Uni joylashtiring
 
-Keyin uni o'ngga yoki chapga yoki barmog'ingiz bilan yuqorida yoki pastga ko'tarish orqali vizual ravishda joylashtirishingiz kerak. Uni yuqori o'ng burchakdagi tugma bilan saqlashingiz kerak.
+Keyin uni o'ngga yoki chapga yoki barmog'ingiz bilan yuqorida yoki pastga ko'tarish orqali vizual ravishda joylashtirishingiz kerak.
 
-![Yangi ob'ekt (3)](../../../media/game-tutorials/New-Object-3.png)
+![Yangi ob'ekt (3)](../../../media/game-tutorials/New-Object-3.png)\
+Uni yuqori o'ng burchakdagi tugma bilan saqlashingiz kerak.\
+[Rasmni och](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Sen uni yaratdingiz, o'zingizning yangi ob'ektingizni yaratdingiz.
 

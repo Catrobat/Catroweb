@@ -2,18 +2,20 @@
 title: "Prvi blokovi koda"
 description: "U ovom nastavku, naučit ćeš gde pronaći različite blokove koda za programiranje objekta."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 U ovom nastavku, naučit ćeš gde pronaći različite blokove koda za programiranje objekta. Pored toga, ovaj tutorial pruža dobar pregled kategorija blokova koda.
 
-![Prvi blokovi koda](../../../media/game-tutorials/First-Bricks.png)
+![Prvi blokovi koda](../../../media/game-tutorials/First-Bricks.png)\
+Pored toga, ovaj tutorial pruža dobar pregled kategorija blokova koda.\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks.png)
 
 Da biste uveli blokove koda i programirali svoj objekt, već bi trebalo da kreirate projekat sa predmetom. Ako vam je potrebna pomoć, pogledajte u nastavnik **[Novi objekat](new-object.md)**.
 
 *Ovde možeš preuzeti tutorijal u PDF-formatu:*
 
-[Prvi blokovi koda](../../../media/game-tutorials/First-Bricks.pdf)
+[Otvori PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Otvori postojećeg objekta
 
@@ -23,9 +25,11 @@ Prvo, moraš da otvoriš svoj projekat. Trebali ste već da kreirate objekt (ako
 
 Nakon toga ćeš videti da postoje neki blokovi koda. Ovi blokovi koda su stvoreni kada smo vizuelno postavili predmet.
 
-Ovi blokovi koda ne rade ništa više nego staviti naš objekt na tačno mjesto koje smo odabrali na početku kada projekat počne. Takođe možeš da promenite ovu poziciju u bilo kom trenutku.
+Ovi blokovi koda ne rade ništa više nego staviti naš objekt na tačno mjesto koje smo odabrali na početku kada projekat počne.
 
-![Prvi blokovi koda (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Prvi blokovi koda (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Takođe možeš da promenite ovu poziciju u bilo kom trenutku.\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Ustaviti blokove koda
 
@@ -33,9 +37,9 @@ Sada možeš da kreirate više blokova koda klikom na žuti plus dugme u donjem 
 
 ### 4. blok koda Kategorije
 
-Ovo su različite kategorije blokova koda:
-
-![Prvi blokovi koda (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Prvi blokovi koda (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Ovo su različite kategorije blokova koda.\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Ustaviti prvi blok koda
 
@@ -43,9 +47,11 @@ Za naše prve blokove koda, želimo koristiti blok kode „Klizi 1 sekundu do x:
 
 ### 6. Stavi blok kod
 
-Stavi blok koda na poslednju poziciju programa i pokrenite svoj program prvi put. Možeš to uraditi sa žutom dugmom za igranje.
+Stavi blok koda na poslednju poziciju programa i pokrenite svoj program prvi put.
 
-![Prvi blokovi koda (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Prvi blokovi koda (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Možeš to uraditi sa žutom dugmom za igranje.\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Ušao si svoj prvi blok koda.
 

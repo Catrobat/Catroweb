@@ -2,16 +2,20 @@
 title: 建立新專案
 description: 在你的智慧型手機或平板上打開應用程式。
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-在你的智慧型手機或平板上打開應用程式。輕觸加號來建立新專案。
+在你的智慧型手機或平板上打開應用程式。
 
-![主畫面，新增專案](../../../media/getting-started/MainScreen_NewProject.png)
+![主畫面，新增專案](../../../media/getting-started/MainScreen_NewProject.png)\
+輕觸加號來建立新專案。\
+[開啟圖片](../../../media/getting-started/MainScreen_NewProject.png)
 
-為專案取一個名字（1），並決定你要用直式（垂直）或橫式（水平）的格式來製作遊戲（2）。然後按勾勾符號確認（3）。
+為專案取一個名字（1），並決定你要用直式（垂直）或橫式（水平）的格式來製作遊戲（2）。
 
-![新增專案](../../../media/getting-started/NewProject.png)
+![新增專案](../../../media/getting-started/NewProject.png)\
+然後按勾勾符號確認（3）。\
+[開啟圖片](../../../media/getting-started/NewProject.png)
 
 現在你已經進入專案畫面。在最上面，你可以看到你遊戲的名字。
 
@@ -21,8 +25,12 @@ source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
 
 在右下角，你會看到兩個重要的按鈕：
 
-![開始](../../../media/getting-started/Start.png) 按**播放**按鈕，就能開始你的遊戲。
+![開始](../../../media/getting-started/Start.png)\
+按**播放**按鈕，就能開始你的遊戲。
 
-![加號按鈕](../../../media/getting-started/Screenshot-2024-11-22-143219.png) 按**加號**按鈕，就能在遊戲中新增角色或物件。
+![加號按鈕](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+按**加號**按鈕，就能在遊戲中新增角色或物件。
 
-![專案畫面](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![專案畫面](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+現在你已經進入專案畫面。\
+[開啟圖片](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

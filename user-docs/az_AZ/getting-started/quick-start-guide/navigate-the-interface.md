@@ -2,23 +2,38 @@
 title: "Araşdırma interfeysini idarə etmək"
 description: "Başladığınızda Pocket Code aşağıdakı əsas ekran görünür."
 order: 0
-source_hash: 'cbf2480bf8013b4cd90c15ef9dbb7914d7a1afbd0771cbc3261b60af493a8c2c'
+source_hash: 'feacd530be149adbad71da0264c3c7400343c4e083937d891b7cc442e6c6bff5'
 ---
 
 Başladığınızda Pocket Code aşağıdakı əsas ekran görünür.
 
-![Əsas ekran](../../../media/getting-started/MainScreen-e1732269599192.jpg)
+![Əsas ekran](../../../media/getting-started/MainScreen-e1732269599192.jpg)\
+Başladığınızda Pocket Code aşağıdakı əsas ekran görünür.\
+[Şəkli aç](../../../media/getting-started/MainScreen-e1732269599192.jpg)
 
-Sağ üst küncdə bir ![Yardım](../../../media/getting-started/Screenshot-2024-11-22-111748.png) Sizi Catrobat sənədlər, sənə faydalı məsləhətlər var.
+![Yardım](../../../media/getting-started/Screenshot-2024-11-22-111748.png)\
+Sağ üst küncdə bir Sizi Catrobat sənədlər, sənə faydalı məsləhətlər var.
 
-Yanında menyü ![Menü](../../../media/getting-started/Screenshot-2024-11-22-111804.png) var. Oradan asanlıqla parametrlərə gedə bilərsiniz, burada dil dəyişdirə və ya plan blokları kimi uzantıları aça bilərsiniz.
+![Menü](../../../media/getting-started/Screenshot-2024-11-22-111804.png)\
+Yanında menyü var.
 
-Aşağıda son redaktə olunan layihənizi görə bilərsiniz. Layihənizi inkişaf etdirməyə davam edə biləcəyiniz layihə ekranına daxil olmaq üçün edit ikonuna ![İkonun redaktə edilməsi](../../../media/getting-started/Screenshot-2024-11-22-111825.png) tıklayın.
+Oradan asanlıqla parametrlərə gedə bilərsiniz, burada dil dəyişdirə və ya plan blokları kimi uzantıları aça bilərsiniz.
 
-Layihənizi başlamaq üçün play düyməsini istifadə edin ![Layihənizi başlatın](../../../media/getting-started/Screenshot-2024-11-22-111818.png).
+![İkonun redaktə edilməsi](../../../media/getting-started/Screenshot-2024-11-22-111825.png)\
+Layihənizi inkişaf etdirməyə davam edə biləcəyiniz layihə ekranına daxil olmaq üçün edit ikonuna tıklayın.
 
-Bir kliklə LayihələrSağladılmış layihələrinizə daxil ola bilərsiniz. ![Cihaz layihələri](../../../media/getting-started/Screenshot-2024-11-22-111832.png)
+Aşağıda son redaktə olunan layihənizi görə bilərsiniz.
 
-Digər istifadəçilərdən daha çox layihə ilə tanış olmaq və işləmək istəyirsənsə, sadəcə Paylaşmada Catrobat Cəmiyyətə vur. Orada bir çox böyük layihə tapacaqsınız. ![Catrobat İctimai](../../../media/getting-started/Screenshot-2024-11-22-111847.png)
+![Layihənizi başlatın](../../../media/getting-started/Screenshot-2024-11-22-111818.png)\
+Layihənizi başlamaq üçün play düyməsini istifadə edin.
 
-Yeni bir layihə yaratmaq istəyirsənsə, əlavə simvolu üzərində basın. ![Əlavə etmək](../../../media/getting-started/Screenshot-2024-11-22-143219.png)
+![Cihaz layihələri](../../../media/getting-started/Screenshot-2024-11-22-111832.png)\
+Bir kliklə LayihələrSağladılmış layihələrinizə daxil ola bilərsiniz.
+
+![Catrobat İctimai](../../../media/getting-started/Screenshot-2024-11-22-111847.png)\
+Digər istifadəçilərdən daha çox layihə ilə tanış olmaq və işləmək istəyirsənsə, sadəcə Paylaşmada Catrobat Cəmiyyətə vur.
+
+Orada bir çox böyük layihə tapacaqsınız.
+
+![Əlavə etmək](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Yeni bir layihə yaratmaq istəyirsənsə, əlavə simvolu üzərində basın.

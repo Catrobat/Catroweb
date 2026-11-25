@@ -6,13 +6,15 @@ order: 0
 
 In this tutorial, you will learn where to find various bricks to program an object. Additionally, this tutorial provides a good overview of the brick categories.
 
-![First Bricks](../../../media/game-tutorials/First-Bricks.png)
+![First Bricks](../../../media/game-tutorials/First-Bricks.png)\
+Additionally, this tutorial provides a good overview of the brick categories.\
+[Open image](../../../media/game-tutorials/First-Bricks.png)
 
 To insert bricks and program your object, you should already have created a project with an object. If you need help with this, you can have a look at the **[New Object](new-object.md)**-tutorial.
 
 *Here you can download the tutorial in PDF-format:*
 
-[First Bricks](../../../media/game-tutorials/First-Bricks.pdf)
+[Open PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Open Existing Object
 
@@ -22,9 +24,11 @@ At first, you need to open your project. You should already have created an obje
 
 After that you will see that there are already some bricks. Those bricks were created when we visually placed the object.
 
-These bricks do nothing more than place our object at the exact position we selected at the beginning once the project starts. You can also change this position at any time here.
+These bricks do nothing more than place our object at the exact position we selected at the beginning once the project starts.
 
-![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+You can also change this position at any time here.\
+[Open image](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Insert Bricks
 
@@ -32,9 +36,9 @@ Now you can create more bricks by clicking on the yellow plus-button on the bott
 
 ### 4. Brick Categories
 
-These are the different brick categories:
-
-![First Bricks (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![First Bricks (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+These are the different brick categories.\
+[Open image](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Insert First Brick
 
@@ -42,9 +46,11 @@ For our first bricks, we want to use the “Glide 1 second to X: Y:” brick. Yo
 
 ### 6. Place the brick
 
-Place the brick at the last position of your program and run your program for the first time. You can do that with the yellow play-button.
+Place the brick at the last position of your program and run your program for the first time.
 
-![First Bricks (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![First Bricks (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+You can do that with the yellow play-button.\
+[Open image](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. You made it! You inserted your first brick.
 

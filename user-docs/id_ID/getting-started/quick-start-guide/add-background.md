@@ -2,7 +2,7 @@
 title: Tambahkan latar belakang
 description: Kamu bisa menambahkan latar belakang ke proyekmu di Catrobat.
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Kamu bisa menambahkan latar belakang ke proyekmu di Catrobat.
@@ -11,15 +11,17 @@ Latar belakang bisa dipakai dengan berbagai cara. Di Pocket Code, latar belakang
 
 Untuk perangkat makerspace seperti **plotter** atau **mesin bordir**, latar belakang berfungsi sebagai template desain, misalnya untuk pola potong atau bordir.
 
-Untuk menambahkan latar belakang, ketuk “Latar belakang” di tampilan proyek.
-
-![Ketuk Latar belakang](../../../media/getting-started/grafik-16.png)
+![Ketuk Latar belakang](../../../media/getting-started/grafik-16.png)\
+Untuk menambahkan latar belakang, ketuk “Latar belakang” di tampilan proyek.\
+[Buka gambar](../../../media/getting-started/grafik-16.png)
 
 Di **bagian skrip (2)**, kamu bisa memprogram latar belakangmu – tetapi tidak semua blok tersedia. Dua blok berikut sangat penting: ![Set_transparency_to_50_pct_](../../../media/bricks/Set_transparency_to_50_pct_.png) dan ![Set_size_to_60_pct_](../../../media/bricks/Set_size_to_60_pct_.png)
 
-Di **bagian tampilan (1)**, kamu menambahkan latar belakang. Caranya, ketuk simbol +.
+Di **bagian tampilan (1)**, kamu menambahkan latar belakang.
 
-![Tambahkan latar belakang](../../../media/getting-started/grafik-14.png)
+![Tambahkan latar belakang](../../../media/getting-started/grafik-14.png)\
+Caranya, ketuk simbol +.\
+[Buka gambar](../../../media/getting-started/grafik-14.png)
 
 Kamu bisa mengunggah gambarmu sendiri, memakai latar belakang yang sudah ada, atau membuat latar belakang sendiri.
 
@@ -31,6 +33,8 @@ Kamu bisa mengunggah gambarmu sendiri, memakai latar belakang yang sudah ada, at
 
 **Kamera**: Kamu bisa memakai kamera perangkatmu untuk mengambil foto dan menambahkannya sebagai latar belakang.
 
-![grafik](../../../media/getting-started/grafik-17.png)
+![grafik](../../../media/getting-started/grafik-17.png)\
+Ketuk panah kembali di kanan atas untuk kembali ke **Tampilan Proyek**.\
+[Buka gambar](../../../media/getting-started/grafik-17.png)
 
-Kamu sudah menambahkan latar belakang. Ketuk panah kembali di kanan atas untuk kembali ke **Tampilan Proyek**.
+Kamu sudah menambahkan latar belakang.

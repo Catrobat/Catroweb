@@ -2,12 +2,12 @@
 title: Добави персонажи и обекти
 description: Натисни бутона с плюс, за да добавиш нова фигура или обект в проекта си.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Натисни бутона с плюс, за да добавиш нова фигура или обект в проекта си.
-
-![Добавяне на фигура](../../../media/getting-started/FigurHinzufuegen.png)
+![Добавяне на фигура](../../../media/getting-started/FigurHinzufuegen.png)\
+Натисни бутона с плюс, за да добавиш нова фигура или обект в проекта си.\
+[Отвори изображението](../../../media/getting-started/FigurHinzufuegen.png)
 
 В Pocket Code можеш да добавиш персонаж или обект в проекта си по различни начини:
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **Проекти на устройството**: Избери проект, от който искаш да вмъкнеш първия персонаж заедно със скрипта му в проекта си.
 
-![Нов персонаж](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Нов персонаж](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+В Pocket Code можеш да добавиш персонаж или обект в проекта си по различни начини.\
+[Отвори изображението](../../../media/getting-started/NewActor-e1732794461668.jpg)

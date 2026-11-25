@@ -2,12 +2,12 @@
 title: Додај ликове и објекте
 description: Додирни дугме плус да додаш нови лик или објекат у свој пројекат.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Додирни дугме плус да додаш нови лик или објекат у свој пројекат.
-
-![Додавање лика](../../../media/getting-started/FigurHinzufuegen.png)
+![Додавање лика](../../../media/getting-started/FigurHinzufuegen.png)\
+Додирни дугме плус да додаш нови лик или објекат у свој пројекат.\
+[Отвори слику](../../../media/getting-started/FigurHinzufuegen.png)
 
 У Pocket Code-у можеш да додаш лик или објекат у свој пројекат на више начина:
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **Локални пројекти**: Изабери пројекат из којег хоћеш да убациш први лик заједно са скриптом у свој пројекат.
 
-![Нови лик](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Нови лик](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+У Pocket Code-у можеш да додаш лик или објекат у свој пројекат на више начина.\
+[Отвори слику](../../../media/getting-started/NewActor-e1732794461668.jpg)

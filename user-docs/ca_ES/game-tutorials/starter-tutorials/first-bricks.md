@@ -2,18 +2,20 @@
 title: Primers blocs
 description: "En aquest tutorial aprendràs on trobar diferents blocs per programar un objecte."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 En aquest tutorial aprendràs on trobar diferents blocs per programar un objecte. A més, aquest tutorial et donarà una bona visió general de les categories de blocs.
 
-![Primers blocs](../../../media/game-tutorials/First-Bricks.png)
+![Primers blocs](../../../media/game-tutorials/First-Bricks.png)\
+A més, aquest tutorial et donarà una bona visió general de les categories de blocs.\
+[Obre la imatge](../../../media/game-tutorials/First-Bricks.png)
 
 Per inserir blocs i programar el teu objecte, ja hauries d'haver creat un projecte amb un objecte. Si necessites ajuda amb això, pots mirar el tutorial **[Objecte nou](new-object.md)**.
 
 *Aquí pots descarregar el tutorial en format PDF:*
 
-[Primers blocs](../../../media/game-tutorials/First-Bricks.pdf)
+[Obre el PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Obre un objecte existent
 
@@ -23,9 +25,11 @@ Primer, has d'obrir el teu projecte. Ja hauries d'haver creat un objecte (si no,
 
 Després veuràs que ja hi ha alguns blocs. Aquests blocs es van crear quan vam col·locar visualment l'objecte.
 
-Aquests blocs només col·loquen el nostre objecte a la posició exacta que vam escollir al principi quan comença el projecte. També pots canviar aquesta posició en qualsevol moment aquí.
+Aquests blocs només col·loquen el nostre objecte a la posició exacta que vam escollir al principi quan comença el projecte.
 
-![Primers blocs (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Primers blocs (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+També pots canviar aquesta posició en qualsevol moment aquí.\
+[Obre la imatge](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Insereix blocs
 
@@ -33,9 +37,9 @@ Ara pots crear més blocs tocant el botó groc més de la cantonada inferior dre
 
 ### 4. Categories de blocs
 
-Aquestes són les diferents categories de blocs:
-
-![Primers blocs (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Primers blocs (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Aquestes són les diferents categories de blocs.\
+[Obre la imatge](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Insereix el primer bloc
 
@@ -43,9 +47,11 @@ Pel nostre primer bloc, volem fer servir el bloc «Llisca durant 1 segon fins a 
 
 ### 6. Col·loca el bloc
 
-Col·loca el bloc a l'última posició del teu programa i executa el programa per primera vegada. Pots fer-ho amb el botó groc d'executar.
+Col·loca el bloc a l'última posició del teu programa i executa el programa per primera vegada.
 
-![Primers blocs (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Primers blocs (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Pots fer-ho amb el botó groc d'executar.\
+[Obre la imatge](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Ho has aconseguit! Has inserit el teu primer bloc.
 

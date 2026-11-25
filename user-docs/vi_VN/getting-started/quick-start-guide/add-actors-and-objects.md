@@ -2,12 +2,12 @@
 title: Thêm nhân vật và đối tượng
 description: Chạm vào nút dấu cộng để thêm nhân vật hoặc đối tượng mới vào dự án của bạn.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Chạm vào nút dấu cộng để thêm nhân vật hoặc đối tượng mới vào dự án của bạn.
-
-![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)
+![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)\
+Chạm vào nút dấu cộng để thêm nhân vật hoặc đối tượng mới vào dự án của bạn.\
+[Mở hình ảnh](../../../media/getting-started/FigurHinzufuegen.png)
 
 Trong Pocket Code, bạn có thể thêm nhân vật hoặc đối tượng vào dự án theo nhiều cách:
 
@@ -29,4 +29,6 @@ Trong Pocket Code, bạn có thể thêm nhân vật hoặc đối tượng vào
 
 **Dự án trên thiết bị**: Chọn một dự án mà từ đó bạn muốn đưa nhân vật đầu tiên cùng kịch bản của nó vào dự án của mình.
 
-![Nhân vật mới](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nhân vật mới](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Trong Pocket Code, bạn có thể thêm nhân vật hoặc đối tượng vào dự án theo nhiều cách.\
+[Mở hình ảnh](../../../media/getting-started/NewActor-e1732794461668.jpg)

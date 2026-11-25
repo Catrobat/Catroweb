@@ -2,18 +2,20 @@
 title: Prvi blokovi
 description: "U ovom vodiču naučit ćeš gdje pronaći različite blokove za programiranje objekta."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 U ovom vodiču naučit ćeš gdje pronaći različite blokove za programiranje objekta. Osim toga, ovaj vodič daje dobar pregled kategorija blokova.
 
-![Prvi blokovi](../../../media/game-tutorials/First-Bricks.png)
+![Prvi blokovi](../../../media/game-tutorials/First-Bricks.png)\
+Osim toga, ovaj vodič daje dobar pregled kategorija blokova.\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks.png)
 
 Da bi umetnuo blokove i programirao svoj objekt, trebao bi već imati napravljen projekt s objektom. Ako ti treba pomoć s tim, pogledaj vodič **[Novi objekt](new-object.md)**.
 
 *Ovdje možeš preuzeti vodič u PDF formatu:*
 
-[Prvi blokovi](../../../media/game-tutorials/First-Bricks.pdf)
+[Otvori PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Otvori postojeći objekt
 
@@ -23,9 +25,11 @@ Najprije moraš otvoriti svoj projekt. Već bi trebao imati napravljen objekt (a
 
 Nakon toga vidjet ćeš da već postoje neki blokovi. Te su blokove stvorili kad smo objekt vizualno postavili.
 
-Ti blokovi samo postavljaju naš objekt na točno ono mjesto koje smo na početku odabrali kada projekt počne. Ovdje u bilo kojem trenutku možeš promijeniti taj položaj.
+Ti blokovi samo postavljaju naš objekt na točno ono mjesto koje smo na početku odabrali kada projekt počne.
 
-![Prvi blokovi (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Prvi blokovi (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Ovdje u bilo kojem trenutku možeš promijeniti taj položaj.\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Umetni blokove
 
@@ -33,9 +37,9 @@ Sada možeš stvoriti više blokova klikom na žuti gumb s plusom u donjem desno
 
 ### 4. Kategorije blokova
 
-Ovo su različite kategorije blokova:
-
-![Prvi blokovi (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Prvi blokovi (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Ovo su različite kategorije blokova.\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Umetni prvi blok
 
@@ -43,9 +47,11 @@ Za naše prve blokove želimo koristiti blok „Kliži 1 sekundu do x: y:”. Na
 
 ### 6. Postavi blok
 
-Postavi blok na zadnje mjesto svog programa i prvi put pokreni program. To možeš učiniti žutim gumbom za pokretanje (play).
+Postavi blok na zadnje mjesto svog programa i prvi put pokreni program.
 
-![Prvi blokovi (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Prvi blokovi (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+To možeš učiniti žutim gumbom za pokretanje (play).\
+[Otvori sliku](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Gotovo je! Umetnuo si svoj prvi blok.
 

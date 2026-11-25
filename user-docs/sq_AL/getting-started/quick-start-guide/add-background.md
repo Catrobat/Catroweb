@@ -2,7 +2,7 @@
 title: "Përshkrimi i sfondit"
 description: "Mund të shtoni një sfond në projektin tuaj në Catrobat."
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Mund të shtoni një sfond në projektin tuaj në Catrobat.
@@ -11,15 +11,17 @@ Arsyeja mund të përdoret në mënyra të ndryshme. Në Pocket Code, ato mund t
 
 Për pajisjet e hapësirës së prodhimit si **plotës** ose **makina të bordurave**, sfondet shërbejnë si shablota të dizajnit, siç janë prerjet ose modelet e bordurave.
 
-Për të shtuar një sfond, prekni «Sfondi» në pamjen e projektit.
-
-![Këshillë për historinë](../../../media/getting-started/grafik-16.png)
+![Këshillë për historinë](../../../media/getting-started/grafik-16.png)\
+Për të shtuar një sfond, prekni «Sfondi» në pamjen e projektit.\
+[Hap figurën](../../../media/getting-started/grafik-16.png)
 
 Në **seksion i shkrimit(2)**, ju mund të programoni sfondin tuaj - megjithatë, jo të gjitha blloqet janë në dispozicion për këtë. Dy blloqet e mëposhtme janë veçanërisht të rëndësishme: ![Vendosni transparencën në 50 pct](../../../media/bricks/Set_transparency_to_50_pct_.png) dhe ![Madhësia e vendosur në 60 pct](../../../media/bricks/Set_size_to_60_pct_.png)
 
-Në **duket seksion(1)**, ju shton një sfond. Për ta bërë këtë, prekni simbolin +.
+Në **duket seksion(1)**, ju shton një sfond.
 
-![Shtojni një sfond](../../../media/getting-started/grafik-14.png)
+![Shtojni një sfond](../../../media/getting-started/grafik-14.png)\
+Për ta bërë këtë, prekni simbolin +.\
+[Hap figurën](../../../media/getting-started/grafik-14.png)
 
 Ju mund të ngarkoni imazhet tuaja, përdorni sfondet e paracaktuara ose krijoni vetë një sfond.
 
@@ -31,6 +33,8 @@ Ju mund të ngarkoni imazhet tuaja, përdorni sfondet e paracaktuara ose krijoni
 
 **Kamera**: Mund të përdorni kamerën e pajisjes tuaj për të marrë një fotografi dhe ta shtoni atë si sfond.
 
-![Zgjidhni nga biblioteka e mediave](../../../media/getting-started/grafik-17.png)
+![Zgjidhni nga biblioteka e mediave](../../../media/getting-started/grafik-17.png)\
+Klikoni fletën e pasme në të djathtë lart për të kthyer në **Pamje e projektit**.\
+[Hap figurën](../../../media/getting-started/grafik-17.png)
 
-Tani keni shtuar një sfond. Klikoni fletën e pasme në të djathtë lart për të kthyer në **Pamje e projektit**.
+Tani keni shtuar një sfond.
