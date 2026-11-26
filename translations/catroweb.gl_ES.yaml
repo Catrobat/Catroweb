@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Iniciar sesión para conservar a miña conta'
 
 docs:
+  play_example: "Xoga cun exemplo"
   home_search: "Atopa un bloque ou un tutorial"
   home_search_submit: "Buscar na documentación"
   search_guides: "Guías"

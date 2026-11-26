@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Wọlé láti pa àkáǹtì mi mọ́'
 
 docs:
+  play_example: "Ṣeré àpẹẹrẹ kan"
   home_search: "Wá búlọọ̀kì tàbí ẹ̀kọ́ kan"
   home_search_submit: "Wá nínú ìtọ́sọ́nà"
   search_guides: "Àwọn ìtọ́sọ́nà"

@@ -1038,6 +1038,7 @@ Reports: "रिपोर्ट"
 members: "सदस्य"
 
 docs:
+  play_example: "एक उदाहरण चलाओ"
   home_search: "ब्लॉक या पाठ ढूँढो"
   home_search_submit: "मदद के दस्तावेज़ों में खोजो"
   search_guides: "गाइड"

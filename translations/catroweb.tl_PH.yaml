@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Mag-log in para panatilihin ang account ko'
 
 docs:
+  play_example: "Maglaro ng halimbawa"
   home_search: "Humanap ng bloke o gabay"
   home_search_submit: "Maghanap sa dokumentasyon"
   search_guides: "Mga gabay"

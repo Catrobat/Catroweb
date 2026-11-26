@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Prijavi se in obdrži račun'
 
 docs:
+  play_example: "Zaženi primer"
   home_search: "Poišči blok ali vodič"
   home_search_submit: "Išči po dokumentaciji"
   search_guides: "Vodniki"

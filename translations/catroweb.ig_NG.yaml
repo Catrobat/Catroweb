@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Banye iji debe akaụntụ m'
 
 docs:
+  play_example: "Gwuo otu ihe atụ"
   home_search: "Chọta blọk ma ọ bụ ihe ọmụmụ"
   home_search_submit: "Chọọ n’akwụkwọ ntuziaka"
   search_guides: "Ntụziaka"

@@ -1036,6 +1036,7 @@ inactiveAccount:
   button: 'என் கணக்கை வைத்திருக்க உள்நுழை'
 
 docs:
+  play_example: "ஓர் எடுத்துக்காட்டை இயக்கு"
   home_search: "கட்டளைக் கட்டை அல்லது பாடத்தைத் தேடு"
   home_search_submit: "வழிகாட்டியில் தேடு"
   search_guides: "வழிகாட்டிகள்"

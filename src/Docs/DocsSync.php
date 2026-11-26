@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Docs;
 
 use App\DB\Entity\Docs\DocPage;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Docs\DocPageRepository;
 use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Imports the user docs (`user-docs/` in this repo, the same layout the Catrobat/docs repo had) into doc_page: renders
@@ -39,8 +41,9 @@ class DocsSync
     #[Autowire('%catrobat.user_docs.dir%')]
     public readonly string $docs_dir,
     DocsCatalog $catalog,
+    TranslatorInterface $translator,
   ) {
-    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...), $catalog, $docs_dir);
+    $this->markdown = new DocsMarkdown(self::GITHUB.'blob/main/user-docs/', $this->projectCard(...), $catalog, $docs_dir, $translator);
   }
 
   /** "Improve this page": the English file in GitHub's editor (translations are generated from it). */
@@ -246,7 +249,7 @@ class DocsSync
     return null !== $english_hash && \strlen($source_hash) >= 7 && str_starts_with($english_hash, $source_hash) ? DocPage::STATE_CURRENT : DocPage::STATE_STALE;
   }
 
-  /** @return array{name: string, author: string, thumbnail: string}|null */
+  /** @return array{name: string, author: string, thumbnail: string, playable: bool}|null */
   private function projectCard(string $id): ?array
   {
     $project = $this->projects->find($id);
@@ -258,6 +261,7 @@ class DocsSync
       'name' => $project->getName(),
       'author' => (string) $project->getUser()?->getUsername(),
       'thumbnail' => '/'.$this->screenshots->getThumbnailWebPath($id),
+      'playable' => $project->getLanguageVersion() >= Project::PLAYER_MIN_LANGUAGE_VERSION,
     ];
   }
 }

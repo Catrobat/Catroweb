@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'ᏫᏴᎭ ᏕᏥᏙᎥ ᎦᏍᏆᏂᎪᏙᏗ'
 
 docs:
+  play_example: "ᎯᏁᏍᎨᎢ"
   home_search: "ᎯᏩᏛᎯ ᎠᏓᏁᎸ ᎠᎴ ᎠᏕᎶᏆᏍᎩ"
   home_search_submit: "ᎯᏩᏛᎯ ᎪᏪᎵᎯ"
   search_guides: "Guides"

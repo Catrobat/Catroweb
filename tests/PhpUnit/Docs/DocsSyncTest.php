@@ -74,15 +74,15 @@ final class DocsSyncTest extends KernelTestCase
     $this->assertSame(DocPage::STATE_CURRENT, $german_brick?->getTranslationState());
     $this->assertSame('https://github.com/Catrobat/Catroweb/edit/main/user-docs/en/tutorials/jump.md', $this->sync->editUrl($stale));
 
-    // Nothing changed: nothing is rewritten except the page embedding a project.
-    $this->assertSame(['created' => 0, 'updated' => 1, 'deleted' => 0, 'skipped' => []], $this->sync->import($files));
+    // Nothing changed: nothing is rewritten except the two pages embedding a project.
+    $this->assertSame(['created' => 0, 'updated' => 2, 'deleted' => 0, 'skipped' => []], $this->sync->import($files));
 
     // The English index changes (the German translation goes stale), a page goes, a broken page is skipped.
     $files['en/index.md'] .= "\nMore.\n";
     unset($files['en/getting-started/index.md']);
     $files['en/broken.md'] = "---\ndescription: no title\n---\nText\n";
     $result = $this->sync->import($files);
-    $this->assertSame(['created' => 0, 'updated' => 2, 'deleted' => 1, 'skipped' => ['en/broken.md: front matter has no title']], $result);
+    $this->assertSame(['created' => 0, 'updated' => 3, 'deleted' => 1, 'skipped' => ['en/broken.md: front matter has no title']], $result);
     $this->entity_manager->clear();
     $this->assertSame(DocPage::STATE_STALE, $this->page('index', 'de_DE')->getTranslationState());
     $this->assertNull($this->pages->findOneBy(['path' => 'getting-started']));
@@ -95,8 +95,8 @@ final class DocsSyncTest extends KernelTestCase
     $this->sync->import($files, ['tutorials/jump.png' => '1111111111']);
     $this->assertStringContainsString('src="/docs-media/tutorials/jump.png?v=1111111111"', $this->page('picture', 'en')->getHtml());
 
-    // Only the page embedding a project and the one showing the replaced image are rendered again.
-    $this->assertSame(['created' => 0, 'updated' => 2, 'deleted' => 0, 'skipped' => []], $this->sync->import($files, ['tutorials/jump.png' => '2222222222']));
+    // Only the pages embedding projects and the one showing the replaced image are rendered again.
+    $this->assertSame(['created' => 0, 'updated' => 3, 'deleted' => 0, 'skipped' => []], $this->sync->import($files, ['tutorials/jump.png' => '2222222222']));
     $this->entity_manager->clear();
     $this->assertStringContainsString('src="/docs-media/tutorials/jump.png?v=2222222222"', $this->page('picture', 'en')->getHtml());
   }
@@ -227,7 +227,10 @@ final class DocsSyncTest extends KernelTestCase
 
   public function testReadsTheMedia(): void
   {
-    $this->assertSame(['tutorials/jump.png' => '6b7fa434f9'], DocsSync::readMedia(self::FIXTURES));
+    $this->assertSame([
+      'game-tutorials/examples/11111111-1111-4111-8111-111111111111.webp' => 'c989ec10e2',
+      'tutorials/jump.png' => '6b7fa434f9',
+    ], DocsSync::readMedia(self::FIXTURES));
     $this->assertSame([], DocsSync::readMedia(self::FIXTURES.'/en'));
   }
 

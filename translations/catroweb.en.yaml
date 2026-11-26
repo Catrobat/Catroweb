@@ -1140,6 +1140,7 @@ Reports: Reports
 members: members
 
 docs:
+  play_example: "Play an example"
   home_search: "Find a brick or tutorial"
   home_search_submit: "Search documentation"
   search_guides: "Guides"

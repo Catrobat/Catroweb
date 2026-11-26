@@ -1043,6 +1043,7 @@ inactiveAccount:
   button: 'ログインしてアカウントを残す'
 
 docs:
+  play_example: "サンプルで遊ぶ"
   home_search: "ブロックやガイドを探そう"
   home_search_submit: "ガイドを検索"
   search_guides: "ガイド"
