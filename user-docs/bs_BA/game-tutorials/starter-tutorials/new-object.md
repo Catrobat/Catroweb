@@ -2,18 +2,20 @@
 title: "Novi objekat"
 description: "U ovom nastavku naučit ćeš kako kreirati novi objekat u projektu i različite mogućnosti koje imaš za to."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 U ovom nastavku naučit ćeš kako kreirati novi objekat u projektu i različite mogućnosti koje imaš za to.
 
-![Novi objekat](../../../media/game-tutorials/New-Object.png)
+![Novi objekat](../../../media/game-tutorials/New-Object.png)\
+U ovom nastavku naučit ćeš kako kreirati novi objekat u projektu i različite mogućnosti koje imaš za to.\
+[Otvori sliku](../../../media/game-tutorials/New-Object.png)
 
 Da biste to uradili, trebalo bi da ste već preuzimali aplikaciju Pocket Code i znali kako kreirati novi projekat. Ako vam je potrebna pomoć, pogledajte u nastavnik **[Novi projekat](new-project.md)**.
 
 *Ovde možeš preuzeti tutorijal u PDF-formatu:*
 
-[Novi objekat](../../../media/game-tutorials/New-Object.pdf)
+[Otvori PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Stvorite novi objekat
 
@@ -23,15 +25,17 @@ Naći ćeš ga na kućnom ekranu aplikacije Pocket Code. Ako imaš više projeka
 
 ### 2. Stvorite novi objekat
 
-Sada si spreman da kreiraš novi objekat. Da bi to uradili, klikni na žuti plus dugme u donjem desnom uglu. Vidjet ćeš novi prozor koji vam daje sedam mogućnosti izbora.
+Sada si spreman da kreiraš novi objekat. Vidjet ćeš novi prozor koji vam daje sedam mogućnosti izbora.
 
-![Novi objekat (1)](../../../media/game-tutorials/New-Object-1.png)
+![Novi objekat (1)](../../../media/game-tutorials/New-Object-1.png)\
+Da bi to uradili, klikni na žuti plus dugme u donjem desnom uglu.\
+[Otvori sliku](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Način stvaranja
 
-Ovo su mogućnosti koje možeš izabrati:
-
-![Novi objekat (2)](../../../media/game-tutorials/New-Object-2.png)
+![Novi objekat (2)](../../../media/game-tutorials/New-Object-2.png)\
+Ovo su mogućnosti koje možeš izabrati.\
+[Otvori sliku](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Slikaj sliku
 
@@ -43,9 +47,11 @@ Sad moraš dati ime svojoj slici.
 
 ### 6. Stavi ga
 
-Nakon toga morate ga vizuelno postaviti pomeranjem u lijevo/desno ili gore/dole prstom. Moraš da ga sačuvaš sa dugmom u gornjem desnom uglu.
+Nakon toga morate ga vizuelno postaviti pomeranjem u lijevo/desno ili gore/dole prstom.
 
-![Novi objekat (3)](../../../media/game-tutorials/New-Object-3.png)
+![Novi objekat (3)](../../../media/game-tutorials/New-Object-3.png)\
+Moraš da ga sačuvaš sa dugmom u gornjem desnom uglu.\
+[Otvori sliku](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Stvorio si svoj novi objekat.
 

@@ -2,16 +2,20 @@
 title: Створити новий проєкт
 description: "Відкрий застосунок на смартфоні або планшеті."
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-Відкрий застосунок на смартфоні або планшеті. Натисни символ +, щоб створити новий проєкт.
+Відкрий застосунок на смартфоні або планшеті.
 
-![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)
+![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)\
+Натисни символ +, щоб створити новий проєкт.\
+[Відкрити зображення](../../../media/getting-started/MainScreen_NewProject.png)
 
-Дай проєкту назву (1) і вибери, хочеш ти створити гру у вертикальному (портретному) чи горизонтальному (альбомному) форматі (2). Потім підтверди галочкою (3).
+Дай проєкту назву (1) і вибери, хочеш ти створити гру у вертикальному (портретному) чи горизонтальному (альбомному) форматі (2).
 
-![NewProject](../../../media/getting-started/NewProject.png)
+![NewProject](../../../media/getting-started/NewProject.png)\
+Потім підтверди галочкою (3).\
+[Відкрити зображення](../../../media/getting-started/NewProject.png)
 
 Тепер ти в перегляді проєкту. Угорі ти бачиш назву своєї гри.
 
@@ -21,8 +25,12 @@ source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
 
 Унизу праворуч є дві важливі кнопки:
 
-![Старт](../../../media/getting-started/Start.png) Кнопкою **«Запустити»** ти запускаєш свою гру.
+![Старт](../../../media/getting-started/Start.png)\
+Кнопкою **«Запустити»** ти запускаєш свою гру.
 
-![Кнопка плюс](../../../media/getting-started/Screenshot-2024-11-22-143219.png) Кнопкою **«плюс»** ти додаєш до гри нового персонажа або об’єкт.
+![Кнопка плюс](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Кнопкою **«плюс»** ти додаєш до гри нового персонажа або об’єкт.
 
-![Екран проєкту](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Екран проєкту](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+Тепер ти в перегляді проєкту.\
+[Відкрити зображення](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

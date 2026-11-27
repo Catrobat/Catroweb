@@ -1,13 +1,13 @@
 ---
 title: Přidej postavy a objekty
 description: Klepni na tlačítko plus a přidej do projektu novou postavu nebo objekt.
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 order: 2
 ---
 
-Klepni na tlačítko plus a přidej do projektu novou postavu nebo objekt.
-
-![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)
+![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)\
+Klepni na tlačítko plus a přidej do projektu novou postavu nebo objekt.\
+[Otevři obrázek](../../../media/getting-started/FigurHinzufuegen.png)
 
 V Pocket Code můžeš do projektu přidat postavu nebo objekt několika způsoby:
 
@@ -29,4 +29,6 @@ V Pocket Code můžeš do projektu přidat postavu nebo objekt několika způsob
 
 **Projekty v zařízení**: Vyber projekt, ze kterého chceš do svého projektu vložit první postavu i se skriptem.
 
-![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+V Pocket Code můžeš do projektu přidat postavu nebo objekt několika způsoby.\
+[Otevři obrázek](../../../media/getting-started/NewActor-e1732794461668.jpg)

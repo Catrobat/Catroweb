@@ -2,18 +2,20 @@
 title: "Yeni obyekt"
 description: "Bu dərslikdə layihənizdə yeni bir obyekt yaratmağı və bunun üçün müxtəlif imkanları öyrənəcəksiniz."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Bu dərslikdə layihənizdə yeni bir obyekt yaratmağı və bunun üçün müxtəlif imkanları öyrənəcəksiniz.
 
-![Yeni obyekt](../../../media/game-tutorials/New-Object.png)
+![Yeni obyekt](../../../media/game-tutorials/New-Object.png)\
+Bu dərslikdə layihənizdə yeni bir obyekt yaratmağı və bunun üçün müxtəlif imkanları öyrənəcəksiniz.\
+[Şəkli aç](../../../media/game-tutorials/New-Object.png)
 
 Bunu etmək üçün artıq Pocket Code tətbiqini yükləməli və yeni bir layihə yaratmağı bilməlisiniz. Əgər bu məsələdə sənə kömək lazımdırsa, **[Yeni layihə](new-project.md)**- Təlimat.
 
 *Burada PDF formatında dərslik yükləyə bilərsiniz:*
 
-[Yeni obyekt](../../../media/game-tutorials/New-Object.pdf)
+[PDF-i aç](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Yeni bir obyekt yaratın
 
@@ -23,15 +25,17 @@ Bunu Pocket Code tətbiqetməsinin ev ekranında tapa bilərsiniz. Birdən çox 
 
 ### 2. Yeni bir obyekt yaratın
 
-İndi yeni bir obyekt yaratmağa hazırsınız. Bunu etmək üçün sağ alt köşədəki sarı plus düyməsinə basın. Yeni bir pəncərə görəcəksiniz ki, seçmək üçün yeddi seçim imkanı verir.
+İndi yeni bir obyekt yaratmağa hazırsınız. Yeni bir pəncərə görəcəksiniz ki, seçmək üçün yeddi seçim imkanı verir.
 
-![Yeni obyekt (1)](../../../media/game-tutorials/New-Object-1.png)
+![Yeni obyekt (1)](../../../media/game-tutorials/New-Object-1.png)\
+Bunu etmək üçün sağ alt köşədəki sarı plus düyməsinə basın.\
+[Şəkli aç](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Yaradılışın yolları
 
-Seçə biləcəyiniz imkanlar:
-
-![Yeni obyekt (2)](../../../media/game-tutorials/New-Object-2.png)
+![Yeni obyekt (2)](../../../media/game-tutorials/New-Object-2.png)\
+Seçə biləcəyiniz imkanlar.\
+[Şəkli aç](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Şəkil çəkin
 
@@ -43,9 +47,11 @@ Başlanğıc üçün mümkün qədər asanlaşdırmaq üçün «Çək» funksiya
 
 ### 6. Yerləşdirin
 
-Sonra onu barmaqla sol / sağ və ya yuxarı / aşağıya çevirərək vizual şəkildə yerləşdirməlisiniz. Bunu yuxarı sağ küncdəki düymə ilə saxlamalısınız.
+Sonra onu barmaqla sol / sağ və ya yuxarı / aşağıya çevirərək vizual şəkildə yerləşdirməlisiniz.
 
-![Yeni obyekt (3)](../../../media/game-tutorials/New-Object-3.png)
+![Yeni obyekt (3)](../../../media/game-tutorials/New-Object-3.png)\
+Bunu yuxarı sağ küncdəki düymə ilə saxlamalısınız.\
+[Şəkli aç](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Öz yeni obyektini yaratdın.
 

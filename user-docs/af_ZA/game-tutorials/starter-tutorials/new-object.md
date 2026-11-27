@@ -2,18 +2,20 @@
 title: "Nuwe voorwerp"
 description: "In hierdie handleiding sal jy leer hoe om 'n nuwe voorwerp in jou projek te skep en die verskillende moontlikhede wat jy het vir dit."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 In hierdie handleiding sal jy leer hoe om 'n nuwe voorwerp in jou projek te skep en die verskillende moontlikhede wat jy het vir dit.
 
-![Nuwe voorwerp](../../../media/game-tutorials/New-Object.png)
+![Nuwe voorwerp](../../../media/game-tutorials/New-Object.png)\
+In hierdie handleiding sal jy leer hoe om 'n nuwe voorwerp in jou projek te skep en die verskillende moontlikhede wat jy het vir dit.\
+[Maak prent oop](../../../media/game-tutorials/New-Object.png)
 
 Om dit te doen, moet jy reeds die Pocket Code app afgelaai het en weet hoe om 'n nuwe projek te skep. As jy hulp hiermee nodig het, kan jy die **[Nuwe projek](new-project.md)**-tutoriaal sien.
 
 *Hier kan jy die handleiding aflaai in PDF-formaat:*
 
-[Nuwe voorwerp](../../../media/game-tutorials/New-Object.pdf)
+[Maak PDF oop](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Skep 'n nuwe voorwerp
 
@@ -23,15 +25,17 @@ Jy sal dit op die tuisskerm van die Pocket Code app vind. As jy meer as een proj
 
 ### 2. Skep 'n nuwe voorwerp
 
-Nou is jy gereed om 'n nuwe voorwerp te skep. Om dit te doen, klik net op die geel plus-knoppie in die onderste regterhoek. Jy sal 'n nuwe venster sien wat jou sewe moontlikhede bied om uit te kies.
+Nou is jy gereed om 'n nuwe voorwerp te skep. Jy sal 'n nuwe venster sien wat jou sewe moontlikhede bied om uit te kies.
 
-![Nuwe voorwerp (1)](../../../media/game-tutorials/New-Object-1.png)
+![Nuwe voorwerp (1)](../../../media/game-tutorials/New-Object-1.png)\
+Om dit te doen, klik net op die geel plus-knoppie in die onderste regterhoek.\
+[Maak prent oop](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Maniere om te skep
 
-Dit is die moontlikheids wat jy kan kies:
-
-![Nuwe voorwerp (2)](../../../media/game-tutorials/New-Object-2.png)
+![Nuwe voorwerp (2)](../../../media/game-tutorials/New-Object-2.png)\
+Dit is die moontlikheids wat jy kan kies.\
+[Maak prent oop](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Beeld teken
 
@@ -43,9 +47,11 @@ Jy moet jou foto 'n naam gee.
 
 ### 6. Plaas dit
 
-Daarna moet jy dit visueel plaas deur dit links/regs of op/af met jou vinger te skuif. Jy moet dit spaar met die knoppie in die boonste regterhoek.
+Daarna moet jy dit visueel plaas deur dit links/regs of op/af met jou vinger te skuif.
 
-![Nuwe voorwerp (3)](../../../media/game-tutorials/New-Object-3.png)
+![Nuwe voorwerp (3)](../../../media/game-tutorials/New-Object-3.png)\
+Jy moet dit spaar met die knoppie in die boonste regterhoek.\
+[Maak prent oop](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Jy het jou eie nuwe voorwerp geskep.
 

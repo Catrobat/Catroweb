@@ -2,18 +2,20 @@
 title: Nieuw object
 description: "In deze tutorial leer je hoe je een nieuw object in je project maakt en welke mogelijkheden je daarvoor hebt."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 In deze tutorial leer je hoe je een nieuw object in je project maakt en welke mogelijkheden je daarvoor hebt.
 
-![Nieuw object](../../../media/game-tutorials/New-Object.png)
+![Nieuw object](../../../media/game-tutorials/New-Object.png)\
+In deze tutorial leer je hoe je een nieuw object in je project maakt en welke mogelijkheden je daarvoor hebt.\
+[Afbeelding openen](../../../media/game-tutorials/New-Object.png)
 
 Hiervoor moet je de Pocket Code-app al hebben gedownload en weten hoe je een nieuw project maakt. Hulp nodig? Bekijk dan de tutorial **[Nieuw project](new-project.md)**.
 
 *Hier kun je de tutorial als PDF downloaden:*
 
-[Nieuw object](../../../media/game-tutorials/New-Object.pdf)
+[PDF openen](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Een nieuw object maken
 
@@ -23,15 +25,17 @@ Je vindt het op het startscherm van de Pocket Code-app. Heb je meer dan één pr
 
 ### 2. Een nieuw object maken
 
-Nu kun je een nieuw object maken. Tik daarvoor op de gele plusknop rechtsonder. Er verschijnt een nieuw venster met zeven mogelijkheden om uit te kiezen.
+Nu kun je een nieuw object maken. Er verschijnt een nieuw venster met zeven mogelijkheden om uit te kiezen.
 
-![Nieuw object (1)](../../../media/game-tutorials/New-Object-1.png)
+![Nieuw object (1)](../../../media/game-tutorials/New-Object-1.png)\
+Tik daarvoor op de gele plusknop rechtsonder.\
+[Afbeelding openen](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Manieren om te maken
 
-Dit zijn de mogelijkheden waaruit je kunt kiezen:
-
-![Nieuw object (2)](../../../media/game-tutorials/New-Object-2.png)
+![Nieuw object (2)](../../../media/game-tutorials/New-Object-2.png)\
+Dit zijn de mogelijkheden waaruit je kunt kiezen.\
+[Afbeelding openen](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Afbeelding tekenen
 
@@ -43,9 +47,11 @@ Nu moet je je afbeelding een naam geven.
 
 ### 6. Plaatsen
 
-Daarna moet je hem visueel plaatsen. Dat doe je door hem met je vinger naar links of rechts of omhoog of omlaag te schuiven. Sla hem op met de knop rechtsboven.
+Daarna moet je hem visueel plaatsen. Dat doe je door hem met je vinger naar links of rechts of omhoog of omlaag te schuiven.
 
-![Nieuw object (3)](../../../media/game-tutorials/New-Object-3.png)
+![Nieuw object (3)](../../../media/game-tutorials/New-Object-3.png)\
+Sla hem op met de knop rechtsboven.\
+[Afbeelding openen](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Gelukt! Je hebt je eigen nieuwe object gemaakt.
 

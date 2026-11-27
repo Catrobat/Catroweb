@@ -2,32 +2,38 @@
 title: アップロードと共有
 description: "このチュートリアルでは、作ったプロジェクトを、友だちや Catrobat コミュニティ全体と共有する方法を学びます。"
 order: 0
-source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
+source_hash: '0f8f89297b780f68cbac1e965c2d8e73b4e3dfdf753cc1eb7c8e8d86c14be2f9'
 ---
 
 このチュートリアルでは、作ったプロジェクトを、友だちや Catrobat コミュニティ全体と共有する方法を学びます。
 
-![アップロードと共有](../../../media/game-tutorials/Upload-and-Share.png)
+![アップロードと共有](../../../media/game-tutorials/Upload-and-Share.png)\
+このチュートリアルでは、作ったプロジェクトを、友だちや Catrobat コミュニティ全体と共有する方法を学びます。\
+[画像を開く](../../../media/game-tutorials/Upload-and-Share.png)
 
 このチュートリアルでは、共有したい自分のプロジェクトが、すでに必要です。プロジェクトの作り方がまだわからないときは、**[新しいプロジェクト](new-project.md)**のチュートリアルで、使い方を学べます。
 
 *このチュートリアルは、PDF 形式でダウンロードできます:*
 
-[アップロードと共有](../../../media/game-tutorials/Upload-and-Share.pdf)
+[PDFを開く](../../../media/game-tutorials/Upload-and-Share.pdf)
 
 ### 1. プロジェクトのオプション
 
-プロジェクトをアップロードしたり、共有したりしたいときは、プロジェクトを開いて、右上の3つの点をタップします。そして「プロジェクトオプション」をタップします。
+プロジェクトをアップロードしたり、共有したりしたいときは、プロジェクトを開いて、右上の3つの点をタップします。
 
-![アップロードと共有](../../../media/game-tutorials/Upload-and-Share.png)
+![アップロードと共有](../../../media/game-tutorials/Upload-and-Share.png)\
+そして「プロジェクトオプション」をタップします。\
+[画像を開く](../../../media/game-tutorials/Upload-and-Share.png)
 
 ### 2. プロジェクトのオプション
 
 これで、名前を変えたり、説明を追加したり、いろいろな設定をしたりできます。
 
-また、「プログラムをアップロード」と「プロジェクトをエクスポート」という2つの選択肢があります。どちらも、次のステップで説明します。
+また、「プログラムをアップロード」と「プロジェクトをエクスポート」という2つの選択肢があります。
 
-![アップロードと共有 (1)](../../../media/game-tutorials/Upload-and-Share-1.png)
+![アップロードと共有 (1)](../../../media/game-tutorials/Upload-and-Share-1.png)\
+どちらも、次のステップで説明します。\
+[画像を開く](../../../media/game-tutorials/Upload-and-Share-1.png)
 
 ### 3. プログラムをアップロードする
 
@@ -37,9 +43,9 @@ source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
 
 プロジェクトを Share にアップロードするためのボタンをタップすると、まだアカウントを作っていない場合は、アカウントを作る必要があります。または、Google でサインインできます。サインインしたら、プロジェクトに名前を付けて、説明を書きます。そして、プログラムにいちばん合う、カテゴリーを3つまで選びます。
 
-それから「次へ」をタップして、プログラムをアップロードします。
-
-![アップロードと共有 (2)](../../../media/game-tutorials/Upload-and-Share-2.png)
+![アップロードと共有 (2)](../../../media/game-tutorials/Upload-and-Share-2.png)\
+それから「次へ」をタップして、プログラムをアップロードします。\
+[画像を開く](../../../media/game-tutorials/Upload-and-Share-2.png)
 
 ### 5. プロジェクトをエクスポートする
 
@@ -47,9 +53,11 @@ source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
 
 ### 6. プロジェクトをエクスポートする
 
-このボタンで、.catrobat ファイルを保存できます。このファイルは、友だちと個別に共有できます。機器のファイルの管理アプリで保存して、そのように共有できます。
+このボタンで、.catrobat ファイルを保存できます。 このファイルは、友だちと個別に共有できます。
 
-![アップロードと共有 (3)](../../../media/game-tutorials/Upload-and-Share-3.png)
+![アップロードと共有 (3)](../../../media/game-tutorials/Upload-and-Share-3.png)\
+機器のファイルの管理アプリで保存して、そのように共有できます。\
+[画像を開く](../../../media/game-tutorials/Upload-and-Share-3.png)
 
 できました！ 最初のプログラムを共有できました！
 

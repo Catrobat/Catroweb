@@ -2,16 +2,20 @@
 title: Tạo dự án mới
 description: Mở ứng dụng trên điện thoại hoặc máy tính bảng của bạn.
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-Mở ứng dụng trên điện thoại hoặc máy tính bảng của bạn. Chạm vào dấu + để tạo dự án mới.
+Mở ứng dụng trên điện thoại hoặc máy tính bảng của bạn.
 
-![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)
+![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)\
+Chạm vào dấu + để tạo dự án mới.\
+[Mở hình ảnh](../../../media/getting-started/MainScreen_NewProject.png)
 
-Đặt tên cho dự án (1) và chọn xem bạn muốn tạo trò chơi theo chiều dọc (portrait) hay chiều ngang (landscape) (2). Sau đó xác nhận bằng dấu tích (3).
+Đặt tên cho dự án (1) và chọn xem bạn muốn tạo trò chơi theo chiều dọc (portrait) hay chiều ngang (landscape) (2).
 
-![NewProject](../../../media/getting-started/NewProject.png)
+![NewProject](../../../media/getting-started/NewProject.png)\
+Sau đó xác nhận bằng dấu tích (3).\
+[Mở hình ảnh](../../../media/getting-started/NewProject.png)
 
 Bây giờ bạn đang ở chế độ xem dự án. Ở trên cùng, bạn thấy tên trò chơi của mình.
 
@@ -21,8 +25,12 @@ Dưới phông nền là khu vực **nhân vật và đối tượng** mà bạn
 
 Ở góc dưới bên phải có hai nút quan trọng:
 
-![Start](../../../media/getting-started/Start.png) Với nút **Chạy**, bạn bắt đầu trò chơi của mình.
+![Start](../../../media/getting-started/Start.png)\
+Với nút **Chạy**, bạn bắt đầu trò chơi của mình.
 
-![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png) Với nút **Dấu cộng**, bạn thêm một nhân vật/đối tượng mới vào trò chơi.
+![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Với nút **Dấu cộng**, bạn thêm một nhân vật/đối tượng mới vào trò chơi.
 
-![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+Bây giờ bạn đang ở chế độ xem dự án.\
+[Mở hình ảnh](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

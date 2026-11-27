@@ -2,18 +2,20 @@
 title: İlk bloklar
 description: "Bu eğitimde bir nesneyi programlamak için farklı blokları nerede bulacağını öğreneceksin."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Bu eğitimde bir nesneyi programlamak için farklı blokları nerede bulacağını öğreneceksin. Ayrıca bu eğitim blok kategorilerini de güzelce gösterir.
 
-![İlk bloklar](../../../media/game-tutorials/First-Bricks.png)
+![İlk bloklar](../../../media/game-tutorials/First-Bricks.png)\
+Ayrıca bu eğitim blok kategorilerini de güzelce gösterir.\
+[Resmi aç](../../../media/game-tutorials/First-Bricks.png)
 
 Blok ekleyip nesneni programlamak için önce bir nesnesi olan bir proje yapmış olmalısın. Bunun için yardıma ihtiyacın varsa **[Yeni nesne](new-object.md)** eğitimine bakabilirsin.
 
 *Eğitimi buradan PDF olarak indirebilirsin:*
 
-[İlk bloklar](../../../media/game-tutorials/First-Bricks.pdf)
+[PDF’yi aç](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Var olan nesneyi aç
 
@@ -23,9 +25,11 @@ Blok ekleyip nesneni programlamak için önce bir nesnesi olan bir proje yapmı�
 
 Sonra orada zaten bazı bloklar olduğunu görürsün. Bu bloklar, nesneyi ekranda yerleştirdiğimizde yapıldı.
 
-Bu bloklar sadece bir şey yapar: Proje başlayınca nesnemizi en başta seçtiğimiz yere koyarlar. Bu yeri burada istediğin zaman değiştirebilirsin.
+Bu bloklar sadece bir şey yapar: Proje başlayınca nesnemizi en başta seçtiğimiz yere koyarlar.
 
-![İlk bloklar (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![İlk bloklar (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Bu yeri burada istediğin zaman değiştirebilirsin.\
+[Resmi aç](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Blok ekle
 
@@ -33,9 +37,9 @@ Bu bloklar sadece bir şey yapar: Proje başlayınca nesnemizi en başta seçti�
 
 ### 4. Blok kategorileri
 
-Bunlar farklı blok kategorileridir:
-
-![İlk bloklar (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![İlk bloklar (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Bunlar farklı blok kategorileridir.\
+[Resmi aç](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. İlk bloğu ekle
 
@@ -43,9 +47,11 @@ Bunlar farklı blok kategorileridir:
 
 ### 6. Bloğu yerleştir
 
-Bloğu programının en sonuna koy ve programını ilk kez çalıştır. Bunu sarı oynat düğmesiyle yaparsın.
+Bloğu programının en sonuna koy ve programını ilk kez çalıştır.
 
-![İlk bloklar (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![İlk bloklar (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Bunu sarı oynat düğmesiyle yaparsın.\
+[Resmi aç](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Başardın! İlk bloğunu ekledin.
 

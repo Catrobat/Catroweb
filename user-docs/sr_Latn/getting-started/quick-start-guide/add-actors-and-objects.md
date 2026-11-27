@@ -2,12 +2,12 @@
 title: Dodaj likove i objekte
 description: "Dodirni dugme plus da dodaš novog lika ili objekat u svoj projekat."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Dodirni dugme plus da dodaš novog lika ili objekat u svoj projekat.
-
-![Dodaj lika](../../../media/getting-started/FigurHinzufuegen.png)
+![Dodaj lika](../../../media/getting-started/FigurHinzufuegen.png)\
+Dodirni dugme plus da dodaš novog lika ili objekat u svoj projekat.\
+[Otvori sliku](../../../media/getting-started/FigurHinzufuegen.png)
 
 U Pocket Code-u možeš da dodaš lik ili objekat u svoj projekat na više načina:
 
@@ -29,4 +29,6 @@ U Pocket Code-u možeš da dodaš lik ili objekat u svoj projekat na više nači
 
 **Projekti na uređaju**: Izaberi projekat iz kog želiš da ubaciš prvog lika zajedno sa skriptom u svoj projekat.
 
-![Novi lik](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Novi lik](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+U Pocket Code-u možeš da dodaš lik ili objekat u svoj projekat na više načina.\
+[Otvori sliku](../../../media/getting-started/NewActor-e1732794461668.jpg)

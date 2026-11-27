@@ -2,18 +2,20 @@
 title: 第一批積木
 description: "在這個教學中，你會學到去哪裡找到各種積木，來為一個物件寫程式。"
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 在這個教學中，你會學到去哪裡找到各種積木，來為一個物件寫程式。此外，這個教學也能讓你快速了解各種積木類別。
 
-![第一批積木](../../../media/game-tutorials/First-Bricks.png)
+![第一批積木](../../../media/game-tutorials/First-Bricks.png)\
+此外，這個教學也能讓你快速了解各種積木類別。\
+[開啟圖片](../../../media/game-tutorials/First-Bricks.png)
 
 若要加入積木並為物件寫程式，你應該已經建立了一個含有物件的專案。如果你不知道怎麼做，可以看看**[新增物件](new-object.md)**教學。
 
 *你可以在這裡下載 PDF 格式的教學：*
 
-[第一批積木](../../../media/game-tutorials/First-Bricks.pdf)
+[開啟 PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. 打開現有的物件
 
@@ -23,9 +25,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 接著你會看到，裡面已經有一些積木了。這些積木是在我們用視覺方式放置物件時自動建立的。
 
-這些積木的作用，只是在專案開始時，把我們物件放在一開始選好的位置。你隨時都可以在這裡更改這個位置。
+這些積木的作用，只是在專案開始時，把我們物件放在一開始選好的位置。
 
-![第一批積木（1）](../../../media/game-tutorials/First-Bricks-1.png)
+![第一批積木（1）](../../../media/game-tutorials/First-Bricks-1.png)\
+你隨時都可以在這裡更改這個位置。\
+[開啟圖片](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. 加入積木
 
@@ -33,9 +37,9 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 4. 積木類別
 
-以下是不同的積木類別：
-
-![第一批積木（2）](../../../media/game-tutorials/First-Bricks-2.png)
+![第一批積木（2）](../../../media/game-tutorials/First-Bricks-2.png)\
+以下是不同的積木類別：\
+[開啟圖片](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. 加入第一個積木
 
@@ -43,9 +47,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 6. 放置積木
 
-把積木放在程式的最後面，然後第一次執行你的程式。你可以按黃色的開始按鈕來執行。
+把積木放在程式的最後面，然後第一次執行你的程式。
 
-![第一批積木（3）](../../../media/game-tutorials/First-Bricks-3.png)
+![第一批積木（3）](../../../media/game-tutorials/First-Bricks-3.png)\
+你可以按黃色的開始按鈕來執行。\
+[開啟圖片](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. 你做到了！你加入了第一個積木。
 

@@ -2,18 +2,20 @@
 title: Khối lệnh đầu tiên
 description: "Trong hướng dẫn này, bạn sẽ học cách tìm các khối lệnh khác nhau để lập trình cho một đối tượng."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Trong hướng dẫn này, bạn sẽ học cách tìm các khối lệnh khác nhau để lập trình cho một đối tượng. Ngoài ra, hướng dẫn này cũng cho bạn cái nhìn tổng quan tốt về các nhóm khối lệnh.
 
-![Khối lệnh đầu tiên](../../../media/game-tutorials/First-Bricks.png)
+![Khối lệnh đầu tiên](../../../media/game-tutorials/First-Bricks.png)\
+Ngoài ra, hướng dẫn này cũng cho bạn cái nhìn tổng quan tốt về các nhóm khối lệnh.\
+[Mở hình ảnh](../../../media/game-tutorials/First-Bricks.png)
 
 Để thêm khối lệnh và lập trình cho đối tượng, bạn cần đã tạo một dự án có đối tượng. Nếu cần hỗ trợ, bạn có thể xem hướng dẫn **[Đối tượng mới](new-object.md)**.
 
 *Bạn có thể tải hướng dẫn này ở định dạng PDF tại đây:*
 
-[Khối lệnh đầu tiên](../../../media/game-tutorials/First-Bricks.pdf)
+[Mở PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Mở đối tượng có sẵn
 
@@ -23,9 +25,11 @@ Trước hết, bạn cần mở dự án của mình. Bạn cần đã tạo m�
 
 Sau đó bạn sẽ thấy đã có sẵn một vài khối lệnh. Những khối này được tạo ra khi bạn đặt đối tượng bằng cách kéo thả trực quan.
 
-Các khối này chỉ làm nhiệm vụ đặt đối tượng vào đúng vị trí bạn đã chọn ở đầu khi dự án bắt đầu. Bạn cũng có thể thay đổi vị trí này bất cứ lúc nào ngay tại đây.
+Các khối này chỉ làm nhiệm vụ đặt đối tượng vào đúng vị trí bạn đã chọn ở đầu khi dự án bắt đầu.
 
-![Khối lệnh đầu tiên (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Khối lệnh đầu tiên (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Bạn cũng có thể thay đổi vị trí này bất cứ lúc nào ngay tại đây.\
+[Mở hình ảnh](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Thêm khối lệnh
 
@@ -33,9 +37,9 @@ Bây giờ bạn có thể tạo thêm khối lệnh bằng cách nhấn nút d�
 
 ### 4. Các nhóm khối lệnh
 
-Đây là các nhóm khối lệnh khác nhau:
-
-![Khối lệnh đầu tiên (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Khối lệnh đầu tiên (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Đây là các nhóm khối lệnh khác nhau.\
+[Mở hình ảnh](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Thêm khối lệnh đầu tiên
 
@@ -43,9 +47,11 @@ Với khối lệnh đầu tiên, chúng ta sẽ dùng khối “Lướt trong 1
 
 ### 6. Đặt khối lệnh
 
-Đặt khối lệnh ở vị trí cuối cùng của chương trình và chạy chương trình lần đầu tiên. Bạn làm việc đó bằng nút chạy màu vàng.
+Đặt khối lệnh ở vị trí cuối cùng của chương trình và chạy chương trình lần đầu tiên.
 
-![Khối lệnh đầu tiên (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Khối lệnh đầu tiên (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Bạn làm việc đó bằng nút chạy màu vàng.\
+[Mở hình ảnh](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Xong rồi! Bạn đã thêm khối lệnh đầu tiên.
 

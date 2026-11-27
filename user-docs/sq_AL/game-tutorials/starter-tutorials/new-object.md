@@ -2,18 +2,20 @@
 title: "Objekti i ri"
 description: "Në këtë mësimdhënës, do të mësoni se si të krijoni një objekt të ri në projektin tuaj dhe mundësitë e ndryshme që keni për këtë."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Në këtë mësimdhënës, do të mësoni se si të krijoni një objekt të ri në projektin tuaj dhe mundësitë e ndryshme që keni për këtë.
 
-![Objekti i ri](../../../media/game-tutorials/New-Object.png)
+![Objekti i ri](../../../media/game-tutorials/New-Object.png)\
+Në këtë mësimdhënës, do të mësoni se si të krijoni një objekt të ri në projektin tuaj dhe mundësitë e ndryshme që keni për këtë.\
+[Hap figurën](../../../media/game-tutorials/New-Object.png)
 
 Për ta bërë këtë, duhet të keni shkarkuar tashmë aplikacionin Pocket Code dhe të dini si të krijoni një projekt të ri. Nëse keni nevojë për ndihmë me këtë, ndiqni lirshëm të shikoni në **[Projekti i ri](new-project.md)** - tutorial.
 
 *Këtu mund të shkarkoni mësimin në formatin PDF:*
 
-[Objekti i ri](../../../media/game-tutorials/New-Object.pdf)
+[Hap PDF-në](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Krijoni një objekt të ri
 
@@ -23,15 +25,17 @@ Ju do ta gjeni atë në ekranin e shtëpisë të aplikacionit Pocket Code. Nëse
 
 ### 2. Krijoni një objekt të ri
 
-Tani je gati të krijosh një objekt të ri. Për ta bërë këtë thjesht klikoni në butonin e verdhë plus në qoshen e djathtë të poshtme. Do të shihni një dritare të re që ju jep shtatë mundësi për të zgjedhur.
+Tani je gati të krijosh një objekt të ri. Do të shihni një dritare të re që ju jep shtatë mundësi për të zgjedhur.
 
-![Objekti i ri (1)](../../../media/game-tutorials/New-Object-1.png)
+![Objekti i ri (1)](../../../media/game-tutorials/New-Object-1.png)\
+Për ta bërë këtë thjesht klikoni në butonin e verdhë plus në qoshen e djathtë të poshtme.\
+[Hap figurën](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Mënyrat për të krijuar
 
-Këto janë mundësitë që mund të zgjidhni:
-
-![Objekti i ri (2)](../../../media/game-tutorials/New-Object-2.png)
+![Objekti i ri (2)](../../../media/game-tutorials/New-Object-2.png)\
+Këto janë mundësitë që mund të zgjidhni.\
+[Hap figurën](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Përshkruaj imazh
 
@@ -43,9 +47,11 @@ Tani duhet t'i jepësh një emër fotës tënde.
 
 ### 6. Vendoseni
 
-Pastaj duhet ta vendosni vizualisht duke e zhvendosur në të majtë/djathtën ose lart/ poshtë me gishtin tuaj. Duhet ta ruani me butonin në qoshe të djathtë.
+Pastaj duhet ta vendosni vizualisht duke e zhvendosur në të majtë/djathtën ose lart/ poshtë me gishtin tuaj.
 
-![Objekti i ri (3)](../../../media/game-tutorials/New-Object-3.png)
+![Objekti i ri (3)](../../../media/game-tutorials/New-Object-3.png)\
+Duhet ta ruani me butonin në qoshe të djathtë.\
+[Hap figurën](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Ti e ke krijuar objektin tënd të ri.
 

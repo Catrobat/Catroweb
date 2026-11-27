@@ -2,18 +2,20 @@
 title: 첫 블록
 description: "이 튜토리얼에서는 오브젝트를 프로그래밍하는 여러 블록을 어디에서 찾는지 배워요."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 이 튜토리얼에서는 오브젝트를 프로그래밍하는 여러 블록을 어디에서 찾는지 배워요. 또한 블록 분류를 한눈에 볼 수 있어요.
 
-![First Bricks](../../../media/game-tutorials/First-Bricks.png)
+![First Bricks](../../../media/game-tutorials/First-Bricks.png)\
+또한 블록 분류를 한눈에 볼 수 있어요.\
+[이미지 열기](../../../media/game-tutorials/First-Bricks.png)
 
 블록을 넣고 오브젝트를 프로그래밍하려면 이미 오브젝트가 있는 프로젝트가 필요해요. 도움이 필요하면 **[새 오브젝트](new-object.md)** 튜토리얼을 확인해 보세요.
 
 *여기에서 튜토리얼을 PDF 형식으로 내려받을 수 있어요:*
 
-[First Bricks](../../../media/game-tutorials/First-Bricks.pdf)
+[PDF 열기](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. 기존 오브젝트 열기
 
@@ -23,9 +25,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 그러면 이미 블록이 몇 개 있는 것을 볼 수 있어요. 이 블록들은 오브젝트를 화면에 배치할 때 만들어졌어요.
 
-이 블록들은 프로젝트가 시작될 때 오브젝트를 처음에 고른 정확한 위치에 놓는 역할만 해요. 이 위치는 언제든지 여기에서 바꿀 수 있어요.
+이 블록들은 프로젝트가 시작될 때 오브젝트를 처음에 고른 정확한 위치에 놓는 역할만 해요.
 
-![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+이 위치는 언제든지 여기에서 바꿀 수 있어요.\
+[이미지 열기](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. 블록 넣기
 
@@ -33,9 +37,9 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 4. 블록 분류
 
-다음은 여러 블록 분류예요:
-
-![First Bricks (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![First Bricks (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+다음은 여러 블록 분류예요.\
+[이미지 열기](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. 첫 블록 넣기
 
@@ -43,9 +47,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 6. 블록 놓기
 
-블록을 프로그램의 맨 마지막 위치에 놓고, 프로그램을 처음으로 실행해 보세요. 노란색 실행 버튼으로 실행할 수 있어요.
+블록을 프로그램의 맨 마지막 위치에 놓고, 프로그램을 처음으로 실행해 보세요.
 
-![First Bricks (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![First Bricks (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+노란색 실행 버튼으로 실행할 수 있어요.\
+[이미지 열기](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. 해냈어요! 첫 블록을 넣었어요.
 

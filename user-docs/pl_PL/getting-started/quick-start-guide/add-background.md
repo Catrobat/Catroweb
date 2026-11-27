@@ -2,7 +2,7 @@
 title: Dodawanie tła
 description: Możesz dodać tło do swojego projektu w Catrobat.
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Możesz dodać tło do swojego projektu w Catrobat.
@@ -11,15 +11,17 @@ Tła można używać na różne sposoby. W Pocket Code mogą służyć do tego, 
 
 Dla urządzeń do pracowni makerspace, takich jak **plotery** albo **maszyny do haftu**, tła służą jako szablony projektów, na przykład do wycinania albo wzorów haftu.
 
-Żeby dodać tło, dotknij „Tło” w widoku projektu.
-
-![Dotknij Tło](../../../media/getting-started/grafik-16.png)
+![Dotknij Tło](../../../media/getting-started/grafik-16.png)\
+Żeby dodać tło, dotknij „Tło” w widoku projektu.\
+[Otwórz obraz](../../../media/getting-started/grafik-16.png)
 
 W **sekcji skryptów (2)** możesz zaprogramować tło, ale nie wszystkie klocki są dostępne. Dwa poniższe klocki są szczególnie ważne: ![Ustaw przezroczystość na 50 %](../../../media/bricks/Set_transparency_to_50_pct_.png) i ![Ustaw rozmiar na 60 %](../../../media/bricks/Set_size_to_60_pct_.png)
 
-W **sekcji wyglądów (1)** dodajesz tło. W tym celu dotknij symbolu +.
+W **sekcji wyglądów (1)** dodajesz tło.
 
-![Dodaj tło](../../../media/getting-started/grafik-14.png)
+![Dodaj tło](../../../media/getting-started/grafik-14.png)\
+W tym celu dotknij symbolu +.\
+[Otwórz obraz](../../../media/getting-started/grafik-14.png)
 
 Możesz wgrać własne obrazy, użyć gotowych teł albo stworzyć tło samodzielnie.
 
@@ -31,6 +33,8 @@ Możesz wgrać własne obrazy, użyć gotowych teł albo stworzyć tło samodzie
 
 **Kamera**: Możesz użyć aparatu w swoim urządzeniu, żeby zrobić zdjęcie i dodać je jako tło.
 
-![grafika](../../../media/getting-started/grafik-17.png)
+![grafika](../../../media/getting-started/grafik-17.png)\
+Kliknij strzałkę wstecz w prawym górnym rogu, żeby wrócić do **widoku projektu**.\
+[Otwórz obraz](../../../media/getting-started/grafik-17.png)
 
-Dodałeś już tło. Kliknij strzałkę wstecz w prawym górnym rogu, żeby wrócić do **widoku projektu**.
+Dodałeś już tło.

@@ -2,7 +2,7 @@
 title: 背包
 description: "Pocket Code 的背包功能很实用，可以让你把角色（对象）、脚本、造型或声音保存下来，在不同项目中重复使用。"
 order: 0
-source_hash: '331e082e4ebc8d246985323b3ea757069e6e7cfd896bf51da6af07b54d7bd66e'
+source_hash: 'c0242d01d71d7fc962d0908c8e2492b7d13cd5e6df51e05b68ed6368ee83508d'
 ---
 
 Pocket Code 中的**背包**是一个很实用的功能，让你可以把角色（对象）、脚本、造型或声音**保存下来，在不同项目中重复使用**。它能帮你节省时间，让项目做得更快。
@@ -15,11 +15,11 @@ Pocket Code 中的**背包**是一个很实用的功能，让你可以把角色�
 
 打开你想放入背包的角色所在的项目视图。
 
-点击角色旁边的三个点，打开菜单，然后选择“放入背包”。
-
 角色（包括它的造型、声音和脚本）会被放进背包。
 
-![放入背包的角色](../../../media/getting-started/grafik-7.png)
+![放入背包的角色](../../../media/getting-started/grafik-7.png)\
+点击角色旁边的三个点，打开菜单，然后选择“放入背包”。\
+[打开图片](../../../media/getting-started/grafik-7.png)
 
 **从背包中添加角色**
 
@@ -27,9 +27,11 @@ Pocket Code 中的**背包**是一个很实用的功能，让你可以把角色�
 
 在项目视图中，点击加号，然后选择“背包”。
 
-这时你会看到背包里保存的所有角色和对象。点击三个点，然后选择“取出”。
+这时你会看到背包里保存的所有角色和对象。
 
-![取出角色](../../../media/getting-started/grafik-8-e1732702791199.png)
+![取出角色](../../../media/getting-started/grafik-8-e1732702791199.png)\
+点击三个点，然后选择“取出”。\
+[打开图片](../../../media/getting-started/grafik-8-e1732702791199.png)
 
 ***
 
@@ -39,29 +41,33 @@ Pocket Code 中的**背包**是一个很实用的功能，让你可以把角色�
 
 打开含有脚本的角色。在脚本编辑区按住你想要的脚本。
 
-在弹出的菜单中选择“添加到背包”。
+![添加到背包](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)\
+在弹出的菜单中选择“添加到背包”。\
+[打开图片](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
 
-![添加到背包](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
+![把角色保存到背包](../../../media/getting-started/grafik-9.png)\
+给脚本起个名字，然后点“确定”。\
+[打开图片](../../../media/getting-started/grafik-9.png)
 
-给脚本起个名字，然后点“确定”。
-
-![把角色保存到背包](../../../media/getting-started/grafik-9.png)
-
-脚本就保存好了，可以在其他项目中使用。
-
-![你的背包](../../../media/getting-started/grafik-10.png)
+![你的背包](../../../media/getting-started/grafik-10.png)\
+脚本就保存好了，可以在其他项目中使用。\
+[打开图片](../../../media/getting-started/grafik-10.png)
 
 **从背包中添加脚本：**
 
-点击你想放入脚本的角色，这时你会看到脚本区。点击三个点打开菜单，然后点“背包”。
+点击你想放入脚本的角色，这时你会看到脚本区。
 
-![取出脚本](../../../media/getting-started/grafik-11.png)
+![取出脚本](../../../media/getting-started/grafik-11.png)\
+点击三个点打开菜单，然后点“背包”。\
+[打开图片](../../../media/getting-started/grafik-11.png)
 
-现在你可以看到背包里所有的脚本。点击你想要的脚本旁边的三个点，然后在菜单中选择“取出”。
+现在你可以看到背包里所有的脚本。
 
 在菜单中，你还可以删除背包里不再需要的脚本。
 
-![背包中的脚本](../../../media/getting-started/grafik-12.png)
+![背包中的脚本](../../../media/getting-started/grafik-12.png)\
+点击你想要的脚本旁边的三个点，然后在菜单中选择“取出”。\
+[打开图片](../../../media/getting-started/grafik-12.png)
 
 ***
 

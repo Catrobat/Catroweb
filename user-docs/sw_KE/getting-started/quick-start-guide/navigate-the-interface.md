@@ -2,23 +2,38 @@
 title: "Kuzunguka interface"
 description: "Wakati wewe kuanza Pocket Code, unaona screen kuu yafuatayo."
 order: 0
-source_hash: 'cbf2480bf8013b4cd90c15ef9dbb7914d7a1afbd0771cbc3261b60af493a8c2c'
+source_hash: 'feacd530be149adbad71da0264c3c7400343c4e083937d891b7cc442e6c6bff5'
 ---
 
 Wakati wewe kuanza Pocket Code, unaona screen kuu yafuatayo.
 
-![Screen kuu](../../../media/getting-started/MainScreen-e1732269599192.jpg)
+![Screen kuu](../../../media/getting-started/MainScreen-e1732269599192.jpg)\
+Wakati wewe kuanza Pocket Code, unaona screen kuu yafuatayo.\
+[Fungua picha](../../../media/getting-started/MainScreen-e1732269599192.jpg)
 
-Katika kona ya juu kulia, kuna alama ![Msaada](../../../media/getting-started/Screenshot-2024-11-22-111748.png) ambayo inakupeleka kwa nyaraka Catrobat, ambayo ina tips muhimu kwa ajili yenu.
+![Msaada](../../../media/getting-started/Screenshot-2024-11-22-111748.png)\
+Katika kona ya juu kulia, kuna alama ambayo inakupeleka kwa nyaraka Catrobat, ambayo ina tips muhimu kwa ajili yenu.
 
-Jirani yake kuna orodha ya chakula ![Makala](../../../media/getting-started/Screenshot-2024-11-22-111804.png). Kutoka hapo, unaweza kwenda kwa urahisi kwenye mipangilio, ambapo unaweza kubadilisha lugha au kuwasha viongezeo kama vile vitalu vya njama na zaidi.
+![Makala](../../../media/getting-started/Screenshot-2024-11-22-111804.png)\
+Jirani yake kuna orodha ya chakula.
 
-Chini, unaweza kuona mradi wako wa hivi karibuni uliochapishwa. Bonyeza kwenye icon ya kuhariri ![Hariri icon](../../../media/getting-started/Screenshot-2024-11-22-111825.png) ili kufikia screen mradi, ambapo unaweza kuendelea kuendeleza mradi wako.
+Kutoka hapo, unaweza kwenda kwa urahisi kwenye mipangilio, ambapo unaweza kubadilisha lugha au kuwasha viongezeo kama vile vitalu vya njama na zaidi.
 
-Tumia kitufe cha kucheza ![Anza Mradi wako](../../../media/getting-started/Screenshot-2024-11-22-111818.png) kuanza mradi wako.
+![Hariri icon](../../../media/getting-started/Screenshot-2024-11-22-111825.png)\
+Bonyeza kwenye icon ya kuhariri ili kufikia screen mradi, ambapo unaweza kuendelea kuendeleza mradi wako.
 
-Kwa bonyeza Miradi, unaweza kupata miradi yako kuokolewa. ![Miradi ya Vifaa](../../../media/getting-started/Screenshot-2024-11-22-111832.png)
+Chini, unaweza kuona mradi wako wa hivi karibuni uliochapishwa.
 
-Kama unataka kujua na kufanya kazi juu ya miradi zaidi kutoka watumiaji wengine, bonyeza tu Catrobat Jumuiya kwenye Kushiriki. Huko utapata miradi mingi ya ajabu. ![Catrobat Jumuiya](../../../media/getting-started/Screenshot-2024-11-22-111847.png)
+![Anza Mradi wako](../../../media/getting-started/Screenshot-2024-11-22-111818.png)\
+Tumia kitufe cha kucheza kuanza mradi wako.
 
-Kama unataka kujenga mradi mpya, bonyeza kwenye ikoni pamoja. ![Ongeza](../../../media/getting-started/Screenshot-2024-11-22-143219.png)
+![Miradi ya Vifaa](../../../media/getting-started/Screenshot-2024-11-22-111832.png)\
+Kwa bonyeza Miradi, unaweza kupata miradi yako kuokolewa.
+
+![Catrobat Jumuiya](../../../media/getting-started/Screenshot-2024-11-22-111847.png)\
+Kama unataka kujua na kufanya kazi juu ya miradi zaidi kutoka watumiaji wengine, bonyeza tu Catrobat Jumuiya kwenye Kushiriki.
+
+Huko utapata miradi mingi ya ajabu.
+
+![Ongeza](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Kama unataka kujenga mradi mpya, bonyeza kwenye ikoni pamoja.

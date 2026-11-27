@@ -2,12 +2,12 @@
 title: "Aktoreak eta objektuak gehitu"
 description: "Sakatu gehien botoia zure proiektuari figura edo objektu berri bat gehitzeko."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Sakatu gehien botoia zure proiektuari figura edo objektu berri bat gehitzeko.
-
-![Aktore bat gehitu](../../../media/getting-started/FigurHinzufuegen.png)
+![Aktore bat gehitu](../../../media/getting-started/FigurHinzufuegen.png)\
+Sakatu gehien botoia zure proiektuari figura edo objektu berri bat gehitzeko.\
+[Ireki irudia](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Code -n, zure proiektuari pertsonaia edo objektu bat gehitu ahal izango duzu hainbat era:
 
@@ -29,4 +29,6 @@ Pocket Code -n, zure proiektuari pertsonaia edo objektu bat gehitu ahal izango d
 
 **Gailuko proiektuak**: Aukeratu zure proiektuan lehen aktorea eta gidoia sartu nahi dituzun proiektu bat.
 
-![Aktore berria](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Aktore berria](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Code -n, zure proiektuari pertsonaia edo objektu bat gehitu ahal izango duzu hainbat era.\
+[Ireki irudia](../../../media/getting-started/NewActor-e1732794461668.jpg)

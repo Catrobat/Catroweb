@@ -2,16 +2,20 @@
 title: ساخت پروژه‌ی جدید
 description: برنامه را روی گوشی یا تبلتت باز کن.
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-برنامه را روی گوشی یا تبلتت باز کن. روی نماد + ضربه بزن تا یک پروژه‌ی جدید بسازی.
+برنامه را روی گوشی یا تبلتت باز کن.
 
-![صفحه‌ی اصلی_پروژه‌ی جدید](../../../media/getting-started/MainScreen_NewProject.png)
+![صفحه‌ی اصلی_پروژه‌ی جدید](../../../media/getting-started/MainScreen_NewProject.png)\
+روی نماد + ضربه بزن تا یک پروژه‌ی جدید بسازی.\
+[تصویر را باز کن](../../../media/getting-started/MainScreen_NewProject.png)
 
-یک نام برای پروژه بگذار (۱) و انتخاب کن که می‌خواهی بازی را به شکل عمودی یا افقی بسازی (۲). بعد با علامت تیک تأیید کن (۳).
+یک نام برای پروژه بگذار (۱) و انتخاب کن که می‌خواهی بازی را به شکل عمودی یا افقی بسازی (۲).
 
-![پروژه‌ی جدید](../../../media/getting-started/NewProject.png)
+![پروژه‌ی جدید](../../../media/getting-started/NewProject.png)\
+بعد با علامت تیک تأیید کن (۳).\
+[تصویر را باز کن](../../../media/getting-started/NewProject.png)
 
 حالا در نمای پروژه هستی. در بالا نام بازی‌ات را می‌بینی.
 
@@ -21,8 +25,12 @@ source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
 
 پایین و سمت راست دو دکمه‌ی مهم می‌بینی:
 
-![شروع](../../../media/getting-started/Start.png) با دکمه‌ی **اجرا** بازی‌ات را شروع می‌کنی.
+![شروع](../../../media/getting-started/Start.png)\
+با دکمه‌ی **اجرا** بازی‌ات را شروع می‌کنی.
 
-![دکمه‌ی مثبت](../../../media/getting-started/Screenshot-2024-11-22-143219.png) با دکمه‌ی **مثبت** یک شخصیت یا شیء جدید به بازی‌ات اضافه می‌کنی.
+![دکمه‌ی مثبت](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+با دکمه‌ی **مثبت** یک شخصیت یا شیء جدید به بازی‌ات اضافه می‌کنی.
 
-![صفحه‌ی پروژه](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![صفحه‌ی پروژه](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+حالا در نمای پروژه هستی.\
+[تصویر را باز کن](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

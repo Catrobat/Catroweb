@@ -2,32 +2,34 @@
 title: Įkelk ir bendrink
 description: "Šioje pamokoje sužinosi, kaip bendrinti savo sukurtus projektus su draugais ar visa Catrobat bendruomene."
 order: 0
-source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
+source_hash: '0f8f89297b780f68cbac1e965c2d8e73b4e3dfdf753cc1eb7c8e8d86c14be2f9'
 ---
 
 Šioje pamokoje sužinosi, kaip bendrinti savo sukurtus projektus su draugais ar visa Catrobat bendruomene.
 
-![Įkelk ir bendrink](../../../media/game-tutorials/Upload-and-Share.png)
+![Įkelk ir bendrink](../../../media/game-tutorials/Upload-and-Share.png)\
+Šioje pamokoje sužinosi, kaip bendrinti savo sukurtus projektus su draugais ar visa Catrobat bendruomene.\
+[Atverk paveikslėlį](../../../media/game-tutorials/Upload-and-Share.png)
 
 Šiai pamokai jau turi turėti savo projektą, kuriuo nori pasidalyti. Jei dar nemoki kurti projekto, pažvelk į pamoką **[Naujas projektas](new-project.md)** ir sužinok, kaip tai veikia.
 
 *Čia gali atsisiųsti pamoką PDF formatu:*
 
-[Įkelk ir bendrink](../../../media/game-tutorials/Upload-and-Share.pdf)
+[Atverk PDF](../../../media/game-tutorials/Upload-and-Share.pdf)
 
 ### 1. Projekto parinktys
 
-Jei nori įkelti arba bendrinti savo projektą, turi atidaryti projektą, tada paspausti tris taškus viršutiniame dešiniajame kampe ir paspausti „Projekto parinktys“.
-
-![Įkelk ir bendrink](../../../media/game-tutorials/Upload-and-Share.png)
+![Įkelk ir bendrink](../../../media/game-tutorials/Upload-and-Share.png)\
+Jei nori įkelti arba bendrinti savo projektą, turi atidaryti projektą, tada paspausti tris taškus viršutiniame dešiniajame kampe ir paspausti „Projekto parinktys“.\
+[Atverk paveikslėlį](../../../media/game-tutorials/Upload-and-Share.png)
 
 ### 2. Projekto parinktys
 
 Dabar gali pakeisti pavadinimą, pridėti aprašymą ir atlikti įvairius nustatymus.
 
-Taip pat turi dvi parinktis: „Įkelti projektą“ ir „Eksportuoti projektą“, kurios paaiškintos tolesniuose žingsniuose.
-
-![Įkelk ir bendrink (1)](../../../media/game-tutorials/Upload-and-Share-1.png)
+![Įkelk ir bendrink (1)](../../../media/game-tutorials/Upload-and-Share-1.png)\
+Taip pat turi dvi parinktis: „Įkelti projektą“ ir „Eksportuoti projektą“, kurios paaiškintos tolesniuose žingsniuose.\
+[Atverk paveikslėlį](../../../media/game-tutorials/Upload-and-Share-1.png)
 
 ### 3. Įkelti programą
 
@@ -37,9 +39,9 @@ Jei nori įkelti savo projektą į Catrobat Share, kad jį galėtų pasiekti vis
 
 Jei paspausi šį mygtuką, kad įkeltum projektą į Share, turi susikurti paskyrą, jei dar to nepadarei. Taip pat gali prisijungti su Google. Prisijungęs turi suteikti projektui pavadinimą ir parašyti aprašymą. Tada turi pasirinkti iki trijų kategorijų, kurios geriausiai tinka tavo programai.
 
-Tada paspausk „Toliau“, kad įkeltum savo programą.
-
-![Įkelk ir bendrink (2)](../../../media/game-tutorials/Upload-and-Share-2.png)
+![Įkelk ir bendrink (2)](../../../media/game-tutorials/Upload-and-Share-2.png)\
+Tada paspausk „Toliau“, kad įkeltum savo programą.\
+[Atverk paveikslėlį](../../../media/game-tutorials/Upload-and-Share-2.png)
 
 ### 5. Eksportuoti projektą
 
@@ -47,9 +49,11 @@ Jei nori pasidalyti projektu su draugais, pasirink *Eksportuoti projektą*.
 
 ### 6. Eksportuoti projektą
 
-Šiuo mygtuku gali išsaugoti .catrobat failą, kuriuo privačiai dalijiesi su draugais. Gali jį išsaugoti įrenginio failų tvarkyklėje ir taip juo pasidalyti.
+Šiuo mygtuku gali išsaugoti .catrobat failą, kuriuo privačiai dalijiesi su draugais.
 
-![Įkelk ir bendrink (3)](../../../media/game-tutorials/Upload-and-Share-3.png)
+![Įkelk ir bendrink (3)](../../../media/game-tutorials/Upload-and-Share-3.png)\
+Gali jį išsaugoti įrenginio failų tvarkyklėje ir taip juo pasidalyti.\
+[Atverk paveikslėlį](../../../media/game-tutorials/Upload-and-Share-3.png)
 
 Pavyko! Tu pasidalijai savo pirmąja programa!
 

@@ -2,23 +2,40 @@
 title: A felület használata
 description: "Amikor elindítod a Pocket Code-ot, ezt a főképernyőt látod."
 order: 0
-source_hash: 'cbf2480bf8013b4cd90c15ef9dbb7914d7a1afbd0771cbc3261b60af493a8c2c'
+source_hash: 'feacd530be149adbad71da0264c3c7400343c4e083937d891b7cc442e6c6bff5'
 ---
 
 Amikor elindítod a Pocket Code-ot, ezt a főképernyőt látod.
 
-![Főképernyő](../../../media/getting-started/MainScreen-e1732269599192.jpg)
+![Főképernyő](../../../media/getting-started/MainScreen-e1732269599192.jpg)\
+Amikor elindítod a Pocket Code-ot, ezt a főképernyőt látod.\
+[Nyisd meg a képet](../../../media/getting-started/MainScreen-e1732269599192.jpg)
 
-A jobb felső sarokban található a ![Súgó](../../../media/getting-started/Screenshot-2024-11-22-111748.png) jel, amely a Catrobat dokumentációjához visz. Ott hasznos tippeket találsz.
+![Súgó](../../../media/getting-started/Screenshot-2024-11-22-111748.png)\
+A jobb felső sarokban található a jel, amely a Catrobat dokumentációjához visz.
 
-Mellette van a menü ![Menü](../../../media/getting-started/Screenshot-2024-11-22-111804.png). Innen könnyen eljutsz a beállításokhoz, ahol megváltoztathatod a nyelvet, vagy bekapcsolhatsz kiegészítőket, például a rajzgép blokkjait és egyebeket.
+Ott hasznos tippeket találsz.
 
-Alatta látod a legutobb szerkesztett projektedet. Kattints a szerkesztés ikonra ![Szerkesztés ikon](../../../media/getting-started/Screenshot-2024-11-22-111825.png), hogy megnyisd a projekt képernyőt, ahol tovább fejlesztheted a projektedet.
+![Menü](../../../media/getting-started/Screenshot-2024-11-22-111804.png)\
+Mellette van a menü.
 
-A lejátszás gombbal ![Projekt indítása](../../../media/getting-started/Screenshot-2024-11-22-111818.png) indíthatod el a projektedet.
+Innen könnyen eljutsz a beállításokhoz, ahol megváltoztathatod a nyelvet, vagy bekapcsolhatsz kiegészítőket, például a rajzgép blokkjait és egyebeket.
 
-Az Eszközön lévő projektek gombra kattintva érheted el a mentett projektjeidet. ![Eszközön lévő projektek](../../../media/getting-started/Screenshot-2024-11-22-111832.png)
+![Szerkesztés ikon](../../../media/getting-started/Screenshot-2024-11-22-111825.png)\
+Kattints a szerkesztés ikonra, hogy megnyisd a projekt képernyőt, ahol tovább fejlesztheted a projektedet.
 
-Ha más felhasználók projektjeit is megismernéd és dolgozhatnál rajtuk, kattints a Megosztás alatti Catrobat közösségre. Ott sok szuper projektet találsz. ![Catrobat közösség](../../../media/getting-started/Screenshot-2024-11-22-111847.png)
+Alatta látod a legutobb szerkesztett projektedet.
 
-Ha új projektet szeretnél létrehozni, kattints a plusz ikonra. ![Hozzáadás](../../../media/getting-started/Screenshot-2024-11-22-143219.png)
+![Projekt indítása](../../../media/getting-started/Screenshot-2024-11-22-111818.png)\
+A lejátszás gombbal indíthatod el a projektedet.
+
+![Eszközön lévő projektek](../../../media/getting-started/Screenshot-2024-11-22-111832.png)\
+Az Eszközön lévő projektek gombra kattintva érheted el a mentett projektjeidet.
+
+![Catrobat közösség](../../../media/getting-started/Screenshot-2024-11-22-111847.png)\
+Ha más felhasználók projektjeit is megismernéd és dolgozhatnál rajtuk, kattints a Megosztás alatti Catrobat közösségre.
+
+Ott sok szuper projektet találsz.
+
+![Hozzáadás](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Ha új projektet szeretnél létrehozni, kattints a plusz ikonra.

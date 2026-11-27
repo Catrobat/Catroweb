@@ -2,12 +2,12 @@
 title: 'إضافة الشخصيات والكائنات'
 description: 'اضغط على زر الزائد لإضافة شخصية أو كائن جديد إلى مشروعك.'
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-اضغط على زر الزائد لإضافة شخصية أو كائن جديد إلى مشروعك.
-
-![إضافة شخصية](../../../media/getting-started/FigurHinzufuegen.png)
+![إضافة شخصية](../../../media/getting-started/FigurHinzufuegen.png)\
+اضغط على زر الزائد لإضافة شخصية أو كائن جديد إلى مشروعك.\
+[افتح الصورة](../../../media/getting-started/FigurHinzufuegen.png)
 
 في Pocket Code يمكنك إضافة شخصية أو كائن إلى مشروعك بطرق متعددة:
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **المشاريع المحلية**: اختر مشروعًا تريد إدخال أول شخصية منه مع برنامجها النصي إلى مشروعك.
 
-![شخصية جديدة](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![شخصية جديدة](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+في Pocket Code يمكنك إضافة شخصية أو كائن إلى مشروعك بطرق متعددة.\
+[افتح الصورة](../../../media/getting-started/NewActor-e1732794461668.jpg)

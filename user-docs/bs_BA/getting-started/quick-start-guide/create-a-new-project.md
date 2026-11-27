@@ -2,16 +2,20 @@
 title: "Napravi novi projekat"
 description: "Otvori aplikaciju na telefonu ili tabletu."
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-Otvori aplikaciju na telefonu ili tabletu. Dodirni znak + da napraviš novi projekat.
+Otvori aplikaciju na telefonu ili tabletu.
 
-![Glavni ekran Novi projekat](../../../media/getting-started/MainScreen_NewProject.png)
+![Glavni ekran Novi projekat](../../../media/getting-started/MainScreen_NewProject.png)\
+Dodirni znak + da napraviš novi projekat.\
+[Otvori sliku](../../../media/getting-started/MainScreen_NewProject.png)
 
-Daj projektu ime (1). Izaberi hoće li ekran igre biti uspravan (portret) ili položen (pejzaž) (2). Zatim dodirni kvačicu da potvrdiš (3).
+Daj projektu ime (1). Izaberi hoće li ekran igre biti uspravan (portret) ili položen (pejzaž) (2).
 
-![Novi projekat](../../../media/getting-started/NewProject.png)
+![Novi projekat](../../../media/getting-started/NewProject.png)\
+Zatim dodirni kvačicu da potvrdiš (3).\
+[Otvori sliku](../../../media/getting-started/NewProject.png)
 
 Sad si u svom projektu. Na vrhu, vidiš ime svoje igre.
 
@@ -21,8 +25,12 @@ U pozadini vidite područje za svoj **akteri i objekti** koji ste dodali u svoju
 
 U donjem desnom dijelu vidite dva važna dugmeta:
 
-![Počnite](../../../media/getting-started/Start.png) Sa dugmom **Pokreni** počinješ igru.
+![Počnite](../../../media/getting-started/Start.png)\
+Sa dugmom **Pokreni** počinješ igru.
 
-![Plus dugme](../../../media/getting-started/Screenshot-2024-11-22-143219.png) Sa dugmom **Plus,** dodate novi lik/objekt u igru.
+![Plus dugme](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Sa dugmom **Plus,** dodate novi lik/objekt u igru.
 
-![Ekran projekta](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Ekran projekta](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+Sad si u svom projektu.\
+[Otvori sliku](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

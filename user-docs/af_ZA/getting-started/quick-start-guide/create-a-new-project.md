@@ -2,16 +2,20 @@
 title: "Skep 'n nuwe projek"
 description: "Maak die app op jou slimfoon of tablet oop."
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-Maak die app op jou slimfoon of tablet oop. Tik op die + simbool om 'n nuwe projek te skep.
+Maak die app op jou slimfoon of tablet oop.
 
-![Hoofskerm Nuwe projek](../../../media/getting-started/MainScreen_NewProject.png)
+![Hoofskerm Nuwe projek](../../../media/getting-started/MainScreen_NewProject.png)\
+Tik op die + simbool om 'n nuwe projek te skep.\
+[Maak prent oop](../../../media/getting-started/MainScreen_NewProject.png)
 
-Gee jou projek 'n naam (1). Kies of jy 'n speletjie in portretformaat (vertikaal) of landskapformaat (horisontaal) wil maak (2). Bevestig dan met die regmerkie (3).
+Gee jou projek 'n naam (1). Kies of jy 'n speletjie in portretformaat (vertikaal) of landskapformaat (horisontaal) wil maak (2).
 
-![Nuwe projek](../../../media/getting-started/NewProject.png)
+![Nuwe projek](../../../media/getting-started/NewProject.png)\
+Bevestig dan met die regmerkie (3).\
+[Maak prent oop](../../../media/getting-started/NewProject.png)
 
 Jy is nou in jou projekbeskouing. Aan die top sien jy jou spel.
 
@@ -21,8 +25,12 @@ Onder die agtergrond sien jy die area vir jou **akteurs en voorwerpe** wat jy by
 
 Hieronder sien jy twee belangrike knoppies:
 
-![Begin](../../../media/getting-started/Start.png) Met die **Speel** knoppie, jy begin jou spel.
+![Begin](../../../media/getting-started/Start.png)\
+Met die **Speel** knoppie, jy begin jou spel.
 
-![Plus knoppie](../../../media/getting-started/Screenshot-2024-11-22-143219.png) Met die knoppie **Plus** voeg jy 'n nuwe karakter / voorwerp by jou spel.
+![Plus knoppie](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Met die knoppie **Plus** voeg jy 'n nuwe karakter / voorwerp by jou spel.
 
-![Projekskerm](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Projekskerm](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+Jy is nou in jou projekbeskouing.\
+[Maak prent oop](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

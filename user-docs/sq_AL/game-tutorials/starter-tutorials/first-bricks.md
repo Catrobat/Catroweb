@@ -2,18 +2,20 @@
 title: "Blloqet e para të kodit"
 description: "Në këtë mësimdhënie, do të mësoni ku të gjeni blloqe të ndryshme kod për të programuar një objekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Në këtë mësimdhënie, do të mësoni ku të gjeni blloqe të ndryshme kod për të programuar një objekt. Përveç kësaj, ky mësimdhënës ofron një përmbledhje të mirë të kategorive të bllokut të kodit.
 
-![Blloqet e para të kodit](../../../media/game-tutorials/First-Bricks.png)
+![Blloqet e para të kodit](../../../media/game-tutorials/First-Bricks.png)\
+Përveç kësaj, ky mësimdhënës ofron një përmbledhje të mirë të kategorive të bllokut të kodit.\
+[Hap figurën](../../../media/game-tutorials/First-Bricks.png)
 
 Për të futur bloket e kodit dhe programuar objektin tuaj, duhet të keni krijuar tashmë një projekt me një objekt. Nëse keni nevojë për ndihmë me këtë, mund të shikoni në **[Objekti i ri](new-object.md)** - tutorial.
 
 *Këtu mund të shkarkoni mësimin në formatin PDF:*
 
-[Blloqet e para të kodit](../../../media/game-tutorials/First-Bricks.pdf)
+[Hap PDF-në](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Hapni objektin ekzistues
 
@@ -23,9 +25,11 @@ Në fillim, duhet të hapësh projektin tënd. Ju duhet të keni krijuar tashmë
 
 Pas kësaj do të shihni se tashmë ka disa blokë kodesh. Këto blloqe kod janë krijuar kur vendosëm objektin vizualisht.
 
-Këto blloqe kod nuk bëjnë asgjë tjetër përveç se të vendosin objektin tonë në pozicionin e saktë që kemi zgjedhur në fillim kur projekti fillon. Mund ta ndryshoni këtë pozicion në çdo kohë këtu.
+Këto blloqe kod nuk bëjnë asgjë tjetër përveç se të vendosin objektin tonë në pozicionin e saktë që kemi zgjedhur në fillim kur projekti fillon.
 
-![Blloqet e para të kodit (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Blloqet e para të kodit (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Mund ta ndryshoni këtë pozicion në çdo kohë këtu.\
+[Hap figurën](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Shpejtni blloqet e kodit
 
@@ -33,9 +37,9 @@ Tani ju mund të krijoni më shumë blloqe kod duke klikuar në butonin e verdh�
 
 ### 4. blloku kod Kategoritë
 
-Këto janë kategoritë e ndryshme të blokit të kodit:
-
-![Blloqet e para të kodit (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Blloqet e para të kodit (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Këto janë kategoritë e ndryshme të blokit të kodit.\
+[Hap figurën](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Shpejtni bllokun e parë të kodit
 
@@ -43,9 +47,11 @@ Për blloqet tona të para të kodit, ne duam të përdorim bllokun e kodeve «R
 
 ### 6. Vendosni bllokun e kodit
 
-Vendosni bllokun e kodit në pozitën e fundit të programit tuaj dhe drejtojeni programin tuaj për herë të parë. Mund ta bësh këtë me butonin e verdhë të luanit.
+Vendosni bllokun e kodit në pozitën e fundit të programit tuaj dhe drejtojeni programin tuaj për herë të parë.
 
-![Blloqet e para të kodit (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Blloqet e para të kodit (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Mund ta bësh këtë me butonin e verdhë të luanit.\
+[Hap figurën](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. E ke bërë, e ke futur kodin tënd të parë.
 

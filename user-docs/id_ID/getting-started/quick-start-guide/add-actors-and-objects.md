@@ -2,12 +2,12 @@
 title: Tambahkan aktor dan objek
 description: Ketuk tombol plus untuk menambahkan figur atau objek baru ke proyekmu.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Ketuk tombol plus untuk menambahkan figur atau objek baru ke proyekmu.
-
-![TambahFigur](../../../media/getting-started/FigurHinzufuegen.png)
+![TambahFigur](../../../media/getting-started/FigurHinzufuegen.png)\
+Ketuk tombol plus untuk menambahkan figur atau objek baru ke proyekmu.\
+[Buka gambar](../../../media/getting-started/FigurHinzufuegen.png)
 
 Di Pocket Code, kamu bisa menambahkan karakter atau objek ke proyekmu dengan berbagai cara:
 
@@ -29,4 +29,6 @@ Di Pocket Code, kamu bisa menambahkan karakter atau objek ke proyekmu dengan ber
 
 **Proyek lokal**: Pilih proyek yang ingin kamu ambil aktor pertamanya beserta skripnya untuk dimasukkan ke proyekmu.
 
-![Aktor Baru](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Aktor Baru](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Di Pocket Code, kamu bisa menambahkan karakter atau objek ke proyekmu dengan berbagai cara.\
+[Buka gambar](../../../media/getting-started/NewActor-e1732794461668.jpg)

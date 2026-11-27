@@ -2,18 +2,20 @@
 title: Yeni nesne
 description: "Bu eğitimde projende yeni bir nesne yapmayı ve bunun için hangi yolların olduğunu öğreneceksin."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Bu eğitimde projende yeni bir nesne yapmayı ve bunun için hangi yolların olduğunu öğreneceksin.
 
-![Yeni nesne](../../../media/game-tutorials/New-Object.png)
+![Yeni nesne](../../../media/game-tutorials/New-Object.png)\
+Bu eğitimde projende yeni bir nesne yapmayı ve bunun için hangi yolların olduğunu öğreneceksin.\
+[Resmi aç](../../../media/game-tutorials/New-Object.png)
 
 Bunun için Pocket Code uygulamasını indirmiş olmalı ve yeni bir proje yapmayı biliyor olmalısın. Bunun için yardıma ihtiyacın varsa **[Yeni proje](new-project.md)** eğitimine bakabilirsin.
 
 *Eğitimi buradan PDF olarak indirebilirsin:*
 
-[Yeni nesne](../../../media/game-tutorials/New-Object.pdf)
+[PDF’yi aç](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Yeni bir nesne yap
 
@@ -23,15 +25,17 @@ Onu Pocket Code uygulamasının ana ekranında bulursun. Birden fazla projen var
 
 ### 2. Yeni bir nesne yap
 
-Artık yeni bir nesne yapmaya hazırsın. Bunun için sağ alt köşedeki sarı artı düğmesine dokun. Yedi seçeneğin olduğu yeni bir pencere açılır.
+Artık yeni bir nesne yapmaya hazırsın. Yedi seçeneğin olduğu yeni bir pencere açılır.
 
-![Yeni nesne (1)](../../../media/game-tutorials/New-Object-1.png)
+![Yeni nesne (1)](../../../media/game-tutorials/New-Object-1.png)\
+Bunun için sağ alt köşedeki sarı artı düğmesine dokun.\
+[Resmi aç](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Nesne yapmanın yolları
 
-Seçebileceğin yollar şunlardır:
-
-![Yeni nesne (2)](../../../media/game-tutorials/New-Object-2.png)
+![Yeni nesne (2)](../../../media/game-tutorials/New-Object-2.png)\
+Seçebileceğin yollar şunlardır.\
+[Resmi aç](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Resim çiz
 
@@ -43,9 +47,11 @@ Başlangıçta her şey çok kolay olsun diye “Çiz” seçeneğini kullanıp 
 
 ### 6. Yerleştir
 
-Sonra parmağınla resmi sola/sağa veya yukarı/aşağı kaydırarak yerleştir. Sağ üst köşedeki düğmeyle kaydet.
+Sonra parmağınla resmi sola/sağa veya yukarı/aşağı kaydırarak yerleştir.
 
-![Yeni nesne (3)](../../../media/game-tutorials/New-Object-3.png)
+![Yeni nesne (3)](../../../media/game-tutorials/New-Object-3.png)\
+Sağ üst köşedeki düğmeyle kaydet.\
+[Resmi aç](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Başardın! Kendi yeni nesneni yaptın.
 

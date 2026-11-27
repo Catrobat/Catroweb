@@ -2,12 +2,12 @@
 title: Dodawanie postaci i obiektów
 description: Dotknij przycisku plus, żeby dodać nową postać albo obiekt do swojego projektu.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Dotknij przycisku plus, żeby dodać nową postać albo obiekt do swojego projektu.
-
-![Dodawanie figury](../../../media/getting-started/FigurHinzufuegen.png)
+![Dodawanie figury](../../../media/getting-started/FigurHinzufuegen.png)\
+Dotknij przycisku plus, żeby dodać nową postać albo obiekt do swojego projektu.\
+[Otwórz obraz](../../../media/getting-started/FigurHinzufuegen.png)
 
 W Pocket Code możesz dodać postać albo obiekt do swojego projektu na różne sposoby:
 
@@ -29,4 +29,6 @@ W Pocket Code możesz dodać postać albo obiekt do swojego projektu na różne 
 
 **Projekty lokalne**: Wybierz projekt, z którego chcesz wstawić pierwszą postać razem ze skryptem do swojego projektu.
 
-![Nowa postać](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nowa postać](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+W Pocket Code możesz dodać postać albo obiekt do swojego projektu na różne sposoby.\
+[Otwórz obraz](../../../media/getting-started/NewActor-e1732794461668.jpg)

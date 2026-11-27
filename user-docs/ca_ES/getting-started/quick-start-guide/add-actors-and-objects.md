@@ -2,12 +2,12 @@
 title: Afegeix actors i objectes
 description: Toca el botó més per afegir una figura o un objecte al teu projecte.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Toca el botó més per afegir una figura o un objecte al teu projecte.
-
-![Afegeix una figura](../../../media/getting-started/FigurHinzufuegen.png)
+![Afegeix una figura](../../../media/getting-started/FigurHinzufuegen.png)\
+Toca el botó més per afegir una figura o un objecte al teu projecte.\
+[Obre la imatge](../../../media/getting-started/FigurHinzufuegen.png)
 
 A Pocket Code pots afegir un personatge o un objecte al teu projecte de diverses maneres:
 
@@ -29,4 +29,6 @@ A Pocket Code pots afegir un personatge o un objecte al teu projecte de diverses
 
 **Projectes locals**: Selecciona un projecte del qual vols inserir el primer actor juntament amb el script al teu projecte.
 
-![Actor nou](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Actor nou](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+A Pocket Code pots afegir un personatge o un objecte al teu projecte de diverses maneres.\
+[Obre la imatge](../../../media/getting-started/NewActor-e1732794461668.jpg)

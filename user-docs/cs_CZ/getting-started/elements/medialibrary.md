@@ -1,7 +1,7 @@
 ---
 title: Knihovna médií
 description: "Knihovna médií Catrobatu je sbírka postav, pozadí, zvuků a objektů, které můžeš použít ve svých projektech."
-source_hash: '033e4596481d0050d8912025b0b5c56ea1298d0aa5b1c34b7e2e2e09efb04561'
+source_hash: 'a1d83b2b73d79f59ca1b02a52aaf4f2949d9dfb47368c71110f513c40a2b0f22'
 order: 1
 ---
 
@@ -19,21 +19,27 @@ Knihovna médií Catrobatu je sbírka **postav**, **pozadí**, zvuků a objektů
 
 ### Přidej novou postavu z knihovny médií
 
-V zobrazení projektu klepni na symbol + ([více info](../quick-start-guide/add-actors-and-objects.md)) a přidej novou postavu nebo objekt. Vyber „Vzhledy“.
+V zobrazení projektu klepni na symbol + ([více info](../quick-start-guide/add-actors-and-objects.md)) a přidej novou postavu nebo objekt.
 
-![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Vyber „Vzhledy“.\
+[Otevři obrázek](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-Vyber postavu, kterou chceš použít ve svém programu. Klepni na postavu (1) a stáhni ji (2).
+Vyber postavu, kterou chceš použít ve svém programu.
 
-![Knihovna médií](../../../media/getting-started/grafik-19.png)
+![Knihovna médií](../../../media/getting-started/grafik-19.png)\
+Klepni na postavu (1) a stáhni ji (2).\
+[Otevři obrázek](../../../media/getting-started/grafik-19.png)
 
-Teď můžeš postavě dát nové jméno (1) a umístit ji do své hry (2). To znamená, že postavu můžeš přesouvat přímo na obrazovce. Hned uvidíš, kde je v projektu. Potvrď tlačítkem „OK“.
+Teď můžeš postavě dát nové jméno (1) a umístit ji do své hry (2). To znamená, že postavu můžeš přesouvat přímo na obrazovce. Hned uvidíš, kde je v projektu.
 
-![nová postava nebo objekt](../../../media/getting-started/grafik-29.png)
+![nová postava nebo objekt](../../../media/getting-started/grafik-29.png)\
+Potvrď tlačítkem „OK“.\
+[Otevři obrázek](../../../media/getting-started/grafik-29.png)
 
-Umísti svou postavu (1) a potvrď zaškrtnutím (2).
-
-![Vizuální umístění postavy](../../../media/getting-started/grafik-21.png)
+![Vizuální umístění postavy](../../../media/getting-started/grafik-21.png)\
+Umísti svou postavu (1) a potvrď zaškrtnutím (2).\
+[Otevři obrázek](../../../media/getting-started/grafik-21.png)
 
 ***
 
@@ -41,25 +47,31 @@ Umísti svou postavu (1) a potvrď zaškrtnutím (2).
 
 Přejdi do pozadí v zobrazení projektu. Přepni do části vzhledů a přidej nový vzhled ([více info](../quick-start-guide/add-background.md)). Klepni na „Vzhledy“.
 
-Vyber vhodné pozadí, které chceš použít ve svém programu. Klepni na pozadí (1) a stáhni ho (2).
+Vyber vhodné pozadí, které chceš použít ve svém programu.
 
-![Výběr pozadí z knihovny médií](../../../media/getting-started/grafik-22.png)
+![Výběr pozadí z knihovny médií](../../../media/getting-started/grafik-22.png)\
+Klepni na pozadí (1) a stáhni ho (2).\
+[Otevři obrázek](../../../media/getting-started/grafik-22.png)
 
 ***
 
 ### Přidej zvuk z knihovny médií
 
-Zvuky můžeš přidat jak k pozadí, tak k postavám nebo objektům. Klepni na postavu nebo pozadí, kam chceš zvuk přidat. Přejdi do zobrazení zvuků a klepni na symbol +.
+Zvuky můžeš přidat jak k pozadí, tak k postavám nebo objektům. Klepni na postavu nebo pozadí, kam chceš zvuk přidat.
 
-![Zobrazení zvuku](../../../media/getting-started/grafik-23.png)
+![Zobrazení zvuku](../../../media/getting-started/grafik-23.png)\
+Přejdi do zobrazení zvuků a klepni na symbol +.\
+[Otevři obrázek](../../../media/getting-started/grafik-23.png)
 
-Klepnutím na „Zvuky“ otevřeš knihovnu médií.
+![obrázek](../../../media/getting-started/grafik-30.png)\
+Klepnutím na „Zvuky“ otevřeš knihovnu médií.\
+[Otevři obrázek](../../../media/getting-started/grafik-30.png)
 
-![obrázek](../../../media/getting-started/grafik-30.png)
+Vyber vhodný zvuk, který chceš použít ve svém programu.
 
-Vyber vhodný zvuk, který chceš použít ve svém programu. Klepni na zvuk (1) a stáhni ho (2).
-
-![Výběr zvuku](../../../media/getting-started/grafik-25.png)
+![Výběr zvuku](../../../media/getting-started/grafik-25.png)\
+Klepni na zvuk (1) a stáhni ho (2).\
+[Otevři obrázek](../../../media/getting-started/grafik-25.png)
 
 ***
 
@@ -71,16 +83,20 @@ Objekty přidáváš podobně jako postavy.
 
 V zobrazení projektu klepni na symbol + ([více info](../quick-start-guide/add-actors-and-objects.md)) a přidej nový objekt.
 
-Vyber „Knihovna“.
+![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Vyber „Knihovna“.\
+[Otevři obrázek](../../../media/getting-started/NewActor-e1732794461668.jpg)
 
-![Nová postava](../../../media/getting-started/NewActor-e1732794461668.jpg)
+Vyhledej objekt, který chceš použít ve svém programu.
 
-Vyhledej objekt, který chceš použít ve svém programu. Klepni na objekt (1) a stáhni ho (2).
+![Objekty v knihovně médií](../../../media/getting-started/grafik-27.png)\
+Klepni na objekt (1) a stáhni ho (2).\
+[Otevři obrázek](../../../media/getting-started/grafik-27.png)
 
-![Objekty v knihovně médií](../../../media/getting-started/grafik-27.png)
+Teď můžeš objektu dát nové jméno (1) a umístit ho do své hry (2). To znamená, že objekt můžeš přesouvat přímo na obrazovce. Hned uvidíš, kde v projektu stojí.
 
-Teď můžeš objektu dát nové jméno (1) a umístit ho do své hry (2). To znamená, že objekt můžeš přesouvat přímo na obrazovce. Hned uvidíš, kde v projektu stojí. Potvrď tlačítkem „OK“.
-
-![nová postava nebo objekt](../../../media/getting-started/grafik-29.png)
+![nová postava nebo objekt](../../../media/getting-started/grafik-29.png)\
+Potvrď tlačítkem „OK“.\
+[Otevři obrázek](../../../media/getting-started/grafik-29.png)
 
 Umísti svůj objekt (1) a potvrď zaškrtnutím (2).

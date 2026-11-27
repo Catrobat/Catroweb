@@ -2,18 +2,20 @@
 title: Új szereplő
 description: "Ebben az oktatóanyagban megtanulod, hogyan hozhatsz létre új szereplőt a projektedben, és milyen lehetőségeid vannak erre."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Ebben az oktatóanyagban megtanulod, hogyan hozhatsz létre új szereplőt a projektedben, és milyen lehetőségeid vannak erre.
 
-![Új szereplő](../../../media/game-tutorials/New-Object.png)
+![Új szereplő](../../../media/game-tutorials/New-Object.png)\
+Ebben az oktatóanyagban megtanulod, hogyan hozhatsz létre új szereplőt a projektedben, és milyen lehetőségeid vannak erre.\
+[Nyisd meg a képet](../../../media/game-tutorials/New-Object.png)
 
 Ehhez már le kell töltened a Pocket Code appot, és tudnod kell, hogyan hozz létre új projektet. Ha ebben segítségre van szükséged, nézd meg az **[Új projekt](new-project.md)** oktatóanyagot.
 
 *Az oktatóanyagot PDF-formátumban is letöltheted itt:*
 
-[Új szereplő](../../../media/game-tutorials/New-Object.pdf)
+[Nyisd meg a PDF-et](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Új szereplő létrehozása
 
@@ -23,15 +25,17 @@ Ez a Pocket Code főképernyőjén található. Ha több projekted van, koppints
 
 ### 2. Új szereplő létrehozása
 
-Most már készen állsz új szereplő létrehozására. Ehhez koppints a jobb alsó sarokban lévő sárga plusz gombra. Megjelenik egy új ablak, amelyben hét lehetőség közül választhatsz.
+Most már készen állsz új szereplő létrehozására. Megjelenik egy új ablak, amelyben hét lehetőség közül választhatsz.
 
-![Új szereplő (1)](../../../media/game-tutorials/New-Object-1.png)
+![Új szereplő (1)](../../../media/game-tutorials/New-Object-1.png)\
+Ehhez koppints a jobb alsó sarokban lévő sárga plusz gombra.\
+[Nyisd meg a képet](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Létrehozási módok
 
-Ezek a lehetőségek közül választhatsz:
-
-![Új szereplő (2)](../../../media/game-tutorials/New-Object-2.png)
+![Új szereplő (2)](../../../media/game-tutorials/New-Object-2.png)\
+Ezek a lehetőségek közül választhatsz.\
+[Nyisd meg a képet](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Kép rajzolása
 
@@ -43,9 +47,11 @@ Most adj nevet a képednek.
 
 ### 6. Helyezd el
 
-Ezután vizuálisan kell elhelyezned: ujjaddal balra-jobbra vagy fel-le mozgasd. A jobb felső sarokban lévő gombbal mentsd el.
+Ezután vizuálisan kell elhelyezned: ujjaddal balra-jobbra vagy fel-le mozgasd.
 
-![Új szereplő (3)](../../../media/game-tutorials/New-Object-3.png)
+![Új szereplő (3)](../../../media/game-tutorials/New-Object-3.png)\
+A jobb felső sarokban lévő gombbal mentsd el.\
+[Nyisd meg a képet](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Sikerült! Létrehoztad az első saját szereplődet.
 

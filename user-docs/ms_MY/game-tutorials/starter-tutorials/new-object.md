@@ -2,18 +2,20 @@
 title: Objek Baharu
 description: "Dalam tutorial ini, kamu akan belajar cara mencipta objek baharu dalam projek kamu dan pelbagai pilihan yang ada untuk ini."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Dalam tutorial ini, kamu akan belajar cara mencipta objek baharu dalam projek kamu dan pelbagai pilihan yang ada untuk ini.
 
-![Objek Baharu](../../../media/game-tutorials/New-Object.png)
+![Objek Baharu](../../../media/game-tutorials/New-Object.png)\
+Dalam tutorial ini, kamu akan belajar cara mencipta objek baharu dalam projek kamu dan pelbagai pilihan yang ada untuk ini.\
+[Buka gambar](../../../media/game-tutorials/New-Object.png)
 
 Untuk ini, kamu seharusnya sudah memuat turun aplikasi Pocket Code dan tahu cara mencipta projek baharu. Jika kamu perlukan bantuan, jangan segan lihat tutorial **[Projek Baharu](new-project.md)**.
 
 *Di sini kamu boleh muat turun tutorial dalam format PDF:*
 
-[Objek Baharu](../../../media/game-tutorials/New-Object.pdf)
+[Buka PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Cipta objek baharu
 
@@ -23,15 +25,17 @@ Kamu akan jumpanya di skrin utama aplikasi Pocket Code. Jika kamu ada lebih dari
 
 ### 2. Cipta objek baharu
 
-Sekarang kamu sudah bersedia untuk mencipta objek baharu. Untuk itu, klik sahaja pada butang tambah kuning di sudut kanan bawah. Kamu akan nampak tetingkap baharu yang memberi kamu tujuh pilihan untuk dipilih.
+Sekarang kamu sudah bersedia untuk mencipta objek baharu. Kamu akan nampak tetingkap baharu yang memberi kamu tujuh pilihan untuk dipilih.
 
-![Objek Baharu (1)](../../../media/game-tutorials/New-Object-1.png)
+![Objek Baharu (1)](../../../media/game-tutorials/New-Object-1.png)\
+Untuk itu, klik sahaja pada butang tambah kuning di sudut kanan bawah.\
+[Buka gambar](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Cara mencipta
 
-Inilah pilihan yang boleh kamu pilih:
-
-![Objek Baharu (2)](../../../media/game-tutorials/New-Object-2.png)
+![Objek Baharu (2)](../../../media/game-tutorials/New-Object-2.png)\
+Inilah pilihan yang boleh kamu pilih.\
+[Buka gambar](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Lukis imej
 
@@ -43,9 +47,11 @@ Sekarang kamu perlu memberi nama kepada gambar kamu.
 
 ### 6. Letakkannya
 
-Selepas itu kamu perlu meletakkannya secara visual dengan mengalihkannya ke kiri/kanan atau ke atas/bawah menggunakan jari kamu. Kamu perlu menyimpannya dengan butang di sudut kanan atas.
+Selepas itu kamu perlu meletakkannya secara visual dengan mengalihkannya ke kiri/kanan atau ke atas/bawah menggunakan jari kamu.
 
-![Objek Baharu (3)](../../../media/game-tutorials/New-Object-3.png)
+![Objek Baharu (3)](../../../media/game-tutorials/New-Object-3.png)\
+Kamu perlu menyimpannya dengan butang di sudut kanan atas.\
+[Buka gambar](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Berjaya! Kamu telah mencipta objek baharu kamu sendiri.
 

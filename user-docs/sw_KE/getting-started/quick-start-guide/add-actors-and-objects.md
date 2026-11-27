@@ -2,12 +2,12 @@
 title: "Ongeza Watendaji na Vitu"
 description: "Bonyeza kitufe cha kuongeza ili uongeze kipimo au kifaa kipya kwenye mradi wako."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Bonyeza kitufe cha kuongeza ili uongeze kipimo au kifaa kipya kwenye mradi wako.
-
-![Ongeza mchezaji](../../../media/getting-started/FigurHinzufuegen.png)
+![Ongeza mchezaji](../../../media/getting-started/FigurHinzufuegen.png)\
+Bonyeza kitufe cha kuongeza ili uongeze kipimo au kifaa kipya kwenye mradi wako.\
+[Fungua picha](../../../media/getting-started/FigurHinzufuegen.png)
 
 Katika Pocket Code, unaweza kuongeza tabia au kitu kwa mradi wako kwa njia mbalimbali:
 
@@ -29,4 +29,6 @@ Katika Pocket Code, unaweza kuongeza tabia au kitu kwa mradi wako kwa njia mbali
 
 **Miradi ya kifaa**: Chagua mradi ambao unataka kuingiza mchezaji wa kwanza pamoja na hati katika mradi wako.
 
-![Mchezaji Mpya](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Mchezaji Mpya](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Katika Pocket Code, unaweza kuongeza tabia au kitu kwa mradi wako kwa njia mbalimbali.\
+[Fungua picha](../../../media/getting-started/NewActor-e1732794461668.jpg)

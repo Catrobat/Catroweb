@@ -2,16 +2,20 @@
 title: 'إنشاء مشروع جديد'
 description: 'افتح التطبيق على هاتفك الذكي أو جهازك اللوحي.'
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-افتح التطبيق على هاتفك الذكي أو جهازك اللوحي. انقر على رمز + لإنشاء مشروع جديد.
+افتح التطبيق على هاتفك الذكي أو جهازك اللوحي.
 
-![الشاشة الرئيسية_مشروع جديد](../../../media/getting-started/MainScreen_NewProject.png)
+![الشاشة الرئيسية_مشروع جديد](../../../media/getting-started/MainScreen_NewProject.png)\
+انقر على رمز + لإنشاء مشروع جديد.\
+[افتح الصورة](../../../media/getting-started/MainScreen_NewProject.png)
 
-أعطِ المشروع اسمًا (1)، وقرّر إن كنت تريد إنشاء لعبة بالوضع العمودي (الطولي) أو الأفقي (العرضي) (2). ثم أكّد بعلامة الصح (3).
+أعطِ المشروع اسمًا (1)، وقرّر إن كنت تريد إنشاء لعبة بالوضع العمودي (الطولي) أو الأفقي (العرضي) (2).
 
-![مشروع جديد](../../../media/getting-started/NewProject.png)
+![مشروع جديد](../../../media/getting-started/NewProject.png)\
+ثم أكّد بعلامة الصح (3).\
+[افتح الصورة](../../../media/getting-started/NewProject.png)
 
 أنت الآن في عرض المشروع. في الأعلى ترى اسم لعبتك.
 
@@ -21,8 +25,12 @@ source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
 
 في الزاوية اليمنى السفلى، ترى زرين مهمين:
 
-![ابدأ](../../../media/getting-started/Start.png) بزر **التشغيل** تبدأ لعبتك.
+![ابدأ](../../../media/getting-started/Start.png)\
+بزر **التشغيل** تبدأ لعبتك.
 
-![زر الزائد](../../../media/getting-started/Screenshot-2024-11-22-143219.png) وبزر **الزائد** تضيف شخصية/كائنًا جديدًا إلى لعبتك.
+![زر الزائد](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+وبزر **الزائد** تضيف شخصية/كائنًا جديدًا إلى لعبتك.
 
-![شاشة المشروع](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![شاشة المشروع](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+أنت الآن في عرض المشروع.\
+[افتح الصورة](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

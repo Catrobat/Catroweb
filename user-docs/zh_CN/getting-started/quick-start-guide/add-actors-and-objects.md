@@ -2,12 +2,12 @@
 title: 添加角色和对象
 description: 点击加号按钮，向你的项目添加新的角色或对象。
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-点击加号按钮，向你的项目添加新的角色或对象。
-
-![添加角色](../../../media/getting-started/FigurHinzufuegen.png)
+![添加角色](../../../media/getting-started/FigurHinzufuegen.png)\
+点击加号按钮，向你的项目添加新的角色或对象。\
+[打开图片](../../../media/getting-started/FigurHinzufuegen.png)
 
 在 Pocket Code 中，你可以用多种方式向项目添加角色或对象：
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **本地项目**：选择一个项目，把它的第一个角色连同脚本一起插入到你的项目中。
 
-![新角色](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![新角色](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+在 Pocket Code 中，你可以用多种方式向项目添加角色或对象：\
+[打开图片](../../../media/getting-started/NewActor-e1732794461668.jpg)

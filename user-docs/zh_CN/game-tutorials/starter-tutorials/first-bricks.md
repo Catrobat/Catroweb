@@ -2,18 +2,20 @@
 title: 第一批积木
 description: "在本教程中，你将学会在哪里找到各种积木，用来为一个角色编程。"
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 在本教程中，你将学会在哪里找到各种积木，用来为一个角色编程。此外，本教程还能让你大致了解各个积木类别。
 
-![第一批积木](../../../media/game-tutorials/First-Bricks.png)
+![第一批积木](../../../media/game-tutorials/First-Bricks.png)\
+此外，本教程还能让你大致了解各个积木类别。\
+[打开图片](../../../media/game-tutorials/First-Bricks.png)
 
 要插入积木并为你的角色编程，你应该已经创建了一个带有角色的项目。如果你需要帮助，可以看看**[新对象](new-object.md)**教程。
 
 *你可以在这里下载 PDF 格式的教程：*
 
-[第一批积木](../../../media/game-tutorials/First-Bricks.pdf)
+[打开 PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. 打开已有的角色
 
@@ -23,9 +25,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 之后你会发现，角色上已经有一些积木了。这些积木是我们在可视化放置角色时自动生成的。
 
-这些积木的作用，只是在项目开始时把角色放到我们一开始选好的位置。你也可以随时在这里更改这个位置。
+这些积木的作用，只是在项目开始时把角色放到我们一开始选好的位置。
 
-![第一批积木（1）](../../../media/game-tutorials/First-Bricks-1.png)
+![第一批积木（1）](../../../media/game-tutorials/First-Bricks-1.png)\
+你也可以随时在这里更改这个位置。\
+[打开图片](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. 插入积木
 
@@ -33,9 +37,9 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 4. 积木类别
 
-下面是各个积木类别：
-
-![第一批积木（2）](../../../media/game-tutorials/First-Bricks-2.png)
+![第一批积木（2）](../../../media/game-tutorials/First-Bricks-2.png)\
+下面是各个积木类别：\
+[打开图片](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. 插入第一块积木
 
@@ -43,9 +47,11 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 ### 6. 放置积木
 
-把积木放到程序的最后一个位置，然后第一次运行你的程序。你可以点击黄色的运行按钮来运行。
+把积木放到程序的最后一个位置，然后第一次运行你的程序。
 
-![第一批积木（3）](../../../media/game-tutorials/First-Bricks-3.png)
+![第一批积木（3）](../../../media/game-tutorials/First-Bricks-3.png)\
+你可以点击黄色的运行按钮来运行。\
+[打开图片](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. 你做到了！你插入了第一块积木。
 

@@ -2,16 +2,20 @@
 title: Skapa ett nytt projekt
 description: Öppna appen på din smartphone eller surfplatta.
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-Öppna appen på din smartphone eller surfplatta. Tryck på plustecknet för att skapa ett nytt projekt.
+Öppna appen på din smartphone eller surfplatta.
 
-![Huvudskärm, nytt projekt](../../../media/getting-started/MainScreen_NewProject.png)
+![Huvudskärm, nytt projekt](../../../media/getting-started/MainScreen_NewProject.png)\
+Tryck på plustecknet för att skapa ett nytt projekt.\
+[Öppna bilden](../../../media/getting-started/MainScreen_NewProject.png)
 
-Ge projektet ett namn (1) och välj om du vill skapa ditt spel i stående (vertikalt) eller liggande (horisontellt) format (2). Bekräfta sedan med bockmarkeringen (3).
+Ge projektet ett namn (1) och välj om du vill skapa ditt spel i stående (vertikalt) eller liggande (horisontellt) format (2).
 
-![Nytt projekt](../../../media/getting-started/NewProject.png)
+![Nytt projekt](../../../media/getting-started/NewProject.png)\
+Bekräfta sedan med bockmarkeringen (3).\
+[Öppna bilden](../../../media/getting-started/NewProject.png)
 
 Nu är du i projektvyn. Överst ser du namnet på ditt spel.
 
@@ -21,8 +25,12 @@ Under bakgrunden ser du området för dina **figurer och objekt** som du har lag
 
 Längst ner till höger ser du två viktiga knappar:
 
-![Starta](../../../media/getting-started/Start.png) Med knappen **Spela** startar du ditt spel.
+![Starta](../../../media/getting-started/Start.png)\
+Med knappen **Spela** startar du ditt spel.
 
-![Plusknapp](../../../media/getting-started/Screenshot-2024-11-22-143219.png) Med knappen **Plus** lägger du till en ny karaktär eller ett nytt objekt i ditt spel.
+![Plusknapp](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Med knappen **Plus** lägger du till en ny karaktär eller ett nytt objekt i ditt spel.
 
-![Projektvy](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Projektvy](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+Nu är du i projektvyn.\
+[Öppna bilden](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

@@ -1,19 +1,21 @@
 ---
 title: První bloky
 description: "V tomto návodu se naučíš, kde najít různé bloky pro naprogramování objektu."
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 order: 0
 ---
 
 V tomto návodu se naučíš, kde najdeš různé bloky pro naprogramování objektu. Zároveň dostaneš dobrý přehled o kategoriích bloků.
 
-![První bloky](../../../media/game-tutorials/First-Bricks.png)
+![První bloky](../../../media/game-tutorials/First-Bricks.png)\
+Zároveň dostaneš dobrý přehled o kategoriích bloků.\
+[Otevři obrázek](../../../media/game-tutorials/First-Bricks.png)
 
 Abys mohl vkládat bloky a programovat objekt, měl bys už mít vytvořený projekt s objektem. Pokud s tím potřebuješ pomoct, podívej se na návod **[Nový objekt](new-object.md)**.
 
 *Tady si můžeš stáhnout návod ve formátu PDF:*
 
-[První bloky](../../../media/game-tutorials/First-Bricks.pdf)
+[Otevři PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Otevři existující objekt
 
@@ -23,9 +25,11 @@ Nejdřív musíš otevřít svůj projekt. Objekt už bys měl mít vytvořený 
 
 Potom uvidíš, že tam už nějaké bloky jsou. Ty vznikly, když jsi objekt vizuálně umisťoval.
 
-Tyto bloky dělají jen to, že postaví objekt na přesné místo, které jsi na začátku vybral, až se projekt spustí. Tuto pozici tady můžeš kdykoli změnit.
+Tyto bloky dělají jen to, že postaví objekt na přesné místo, které jsi na začátku vybral, až se projekt spustí.
 
-![První bloky (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![První bloky (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Tuto pozici tady můžeš kdykoli změnit.\
+[Otevři obrázek](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Vložení bloků
 
@@ -33,9 +37,9 @@ Nové bloky vytvoříš klepnutím na žluté tlačítko plus v pravém dolním 
 
 ### 4. Kategorie bloků
 
-Toto jsou různé kategorie bloků:
-
-![První bloky (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![První bloky (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Toto jsou různé kategorie bloků.\
+[Otevři obrázek](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Vlož první blok
 
@@ -43,9 +47,11 @@ Pro náš první blok použijeme blok „Klouzej 1 sekundu do X: Y:“. Najdeš 
 
 ### 6. Umísti blok
 
-Blok umísti na poslední místo svého programu a poprvé ho spusť. Uděláš to žlutým tlačítkem přehrát.
+Blok umísti na poslední místo svého programu a poprvé ho spusť.
 
-![První bloky (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![První bloky (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Uděláš to žlutým tlačítkem přehrát.\
+[Otevři obrázek](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Zvládl jsi to! Vložil jsi svůj první blok.
 

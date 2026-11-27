@@ -2,12 +2,12 @@
 title: Tilføj figurer og objekter
 description: Tryk på plusknappen for at tilføje en ny figur eller et nyt objekt til dit projekt.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Tryk på plusknappen for at tilføje en ny figur eller et nyt objekt til dit projekt.
-
-![Tilføj figur](../../../media/getting-started/FigurHinzufuegen.png)
+![Tilføj figur](../../../media/getting-started/FigurHinzufuegen.png)\
+Tryk på plusknappen for at tilføje en ny figur eller et nyt objekt til dit projekt.\
+[Åbn billedet](../../../media/getting-started/FigurHinzufuegen.png)
 
 I Pocket Code kan du tilføje en figur eller et objekt til dit projekt på forskellige måder:
 
@@ -29,4 +29,6 @@ I Pocket Code kan du tilføje en figur eller et objekt til dit projekt på forsk
 
 **Lokale projekter**: Vælg et projekt, hvorfra du vil indsætte den første figur sammen med scriptet i dit projekt.
 
-![Ny figur](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Ny figur](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+I Pocket Code kan du tilføje en figur eller et objekt til dit projekt på forskellige måder.\
+[Åbn billedet](../../../media/getting-started/NewActor-e1732794461668.jpg)

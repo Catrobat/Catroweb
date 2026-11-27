@@ -2,18 +2,20 @@
 title: Nyt objekt
 description: "I denne vejledning lærer du at lave et nyt objekt i dit projekt og de forskellige muligheder, du har for det."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 I denne vejledning lærer du at lave et nyt objekt i dit projekt og de forskellige muligheder, du har for det.
 
-![Nyt objekt](../../../media/game-tutorials/New-Object.png)
+![Nyt objekt](../../../media/game-tutorials/New-Object.png)\
+I denne vejledning lærer du at lave et nyt objekt i dit projekt og de forskellige muligheder, du har for det.\
+[Åbn billedet](../../../media/game-tutorials/New-Object.png)
 
 For at gøre dette skal du allerede have hentet Pocket Code-appen og vide, hvordan du laver et nyt projekt. Hvis du har brug for hjælp til det, kan du kigge på vejledningen **[Nyt projekt](new-project.md)**.
 
 *Her kan du downloade vejledningen i PDF-format:*
 
-[Nyt objekt](../../../media/game-tutorials/New-Object.pdf)
+[Åbn PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Lav et nyt objekt
 
@@ -23,15 +25,17 @@ Du finder det på startskærmen i Pocket Code-appen. Hvis du har mere end ét pr
 
 ### 2. Lav et nyt objekt
 
-Nu er du klar til at lave et nyt objekt. Det gør du ved at trykke på den gule plusknap nederst i højre hjørne. Du ser et nyt vindue med syv muligheder at vælge imellem.
+Nu er du klar til at lave et nyt objekt. Du ser et nyt vindue med syv muligheder at vælge imellem.
 
-![Nyt objekt (1)](../../../media/game-tutorials/New-Object-1.png)
+![Nyt objekt (1)](../../../media/game-tutorials/New-Object-1.png)\
+Det gør du ved at trykke på den gule plusknap nederst i højre hjørne.\
+[Åbn billedet](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Måder at lave et objekt på
 
-Dette er de muligheder, du kan vælge imellem:
-
-![Nyt objekt (2)](../../../media/game-tutorials/New-Object-2.png)
+![Nyt objekt (2)](../../../media/game-tutorials/New-Object-2.png)\
+Dette er de muligheder, du kan vælge imellem.\
+[Åbn billedet](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Tegn et billede
 
@@ -43,9 +47,11 @@ Nu skal du give dit billede et navn.
 
 ### 6. Placér det
 
-Derefter skal du placere det visuelt ved at flytte det til venstre/højre eller op/ned med fingeren. Du skal gemme det med knappen øverst i højre hjørne.
+Derefter skal du placere det visuelt ved at flytte det til venstre/højre eller op/ned med fingeren.
 
-![Nyt objekt (3)](../../../media/game-tutorials/New-Object-3.png)
+![Nyt objekt (3)](../../../media/game-tutorials/New-Object-3.png)\
+Du skal gemme det med knappen øverst i højre hjørne.\
+[Åbn billedet](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Du klarede det! Du har lavet dit eget nye objekt.
 

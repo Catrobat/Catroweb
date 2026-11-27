@@ -2,18 +2,20 @@
 title: Nuovo oggetto
 description: "In questo tutorial impari a creare un nuovo oggetto nel tuo progetto e scopri i diversi modi per farlo."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 In questo tutorial impari a creare un nuovo oggetto nel tuo progetto e scopri i diversi modi per farlo.
 
-![Nuovo oggetto](../../../media/game-tutorials/New-Object.png)
+![Nuovo oggetto](../../../media/game-tutorials/New-Object.png)\
+In questo tutorial impari a creare un nuovo oggetto nel tuo progetto e scopri i diversi modi per farlo.\
+[Apri l’immagine](../../../media/game-tutorials/New-Object.png)
 
 Per farlo devi aver già scaricato l'app Pocket Code e sapere come si crea un nuovo progetto. Se ti serve aiuto, guarda il tutorial **[Nuovo progetto](new-project.md)**.
 
 *Qui puoi scaricare il tutorial in formato PDF:*
 
-[Nuovo oggetto](../../../media/game-tutorials/New-Object.pdf)
+[Apri il PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Crea un nuovo oggetto
 
@@ -23,15 +25,17 @@ Lo trovi nella schermata principale dell'app Pocket Code. Se hai più di un prog
 
 ### 2. Crea un nuovo oggetto
 
-Ora puoi creare un nuovo oggetto. Tocca il pulsante giallo con il più in basso a destra. Si apre una nuova finestra con sette possibilità tra cui scegliere.
+Ora puoi creare un nuovo oggetto. Si apre una nuova finestra con sette possibilità tra cui scegliere.
 
-![Nuovo oggetto (1)](../../../media/game-tutorials/New-Object-1.png)
+![Nuovo oggetto (1)](../../../media/game-tutorials/New-Object-1.png)\
+Tocca il pulsante giallo con il più in basso a destra.\
+[Apri l’immagine](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Modi per creare
 
-Queste sono le possibilità tra cui puoi scegliere:
-
-![Nuovo oggetto (2)](../../../media/game-tutorials/New-Object-2.png)
+![Nuovo oggetto (2)](../../../media/game-tutorials/New-Object-2.png)\
+Queste sono le possibilità tra cui puoi scegliere.\
+[Apri l’immagine](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Disegna un'immagine
 
@@ -43,9 +47,11 @@ Ora dai un nome alla tua immagine.
 
 ### 6. Mettilo al suo posto
 
-Poi mettilo al suo posto: spostalo con il dito a sinistra o a destra, in su o in giù. Salvalo con il pulsante in alto a destra.
+Poi mettilo al suo posto: spostalo con il dito a sinistra o a destra, in su o in giù.
 
-![Nuovo oggetto (3)](../../../media/game-tutorials/New-Object-3.png)
+![Nuovo oggetto (3)](../../../media/game-tutorials/New-Object-3.png)\
+Salvalo con il pulsante in alto a destra.\
+[Apri l’immagine](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Ce l'hai fatta! Hai creato il tuo nuovo oggetto.
 

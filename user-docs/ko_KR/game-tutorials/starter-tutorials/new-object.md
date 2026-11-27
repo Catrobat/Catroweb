@@ -2,18 +2,20 @@
 title: 새 오브젝트
 description: "이 튜토리얼에서는 프로젝트에 새 오브젝트를 만드는 법과 그 방법들을 배워요."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 이 튜토리얼에서는 프로젝트에 새 오브젝트를 만드는 법과 그 방법들을 배워요.
 
-![New Object](../../../media/game-tutorials/New-Object.png)
+![New Object](../../../media/game-tutorials/New-Object.png)\
+이 튜토리얼에서는 프로젝트에 새 오브젝트를 만드는 법과 그 방법들을 배워요.\
+[이미지 열기](../../../media/game-tutorials/New-Object.png)
 
 이 튜토리얼을 하려면 Pocket Code 앱을 이미 내려받았고 새 프로젝트를 만들 줄 알아야 해요. 도움이 필요하면 **[새 프로젝트](new-project.md)** 튜토리얼을 확인해 보세요.
 
 *여기에서 튜토리얼을 PDF 형식으로 내려받을 수 있어요:*
 
-[New Object](../../../media/game-tutorials/New-Object.pdf)
+[PDF 열기](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. 새 오브젝트 만들기
 
@@ -23,15 +25,17 @@ Pocket Code 앱의 홈 화면에서 찾을 수 있어요. 프로젝트가 여러
 
 ### 2. 새 오브젝트 만들기
 
-이제 새 오브젝트를 만들 준비가 됐어요. 오른쪽 아래 모서리의 노란색 더하기 버튼을 누르세요. 일곱 가지 방법을 고를 수 있는 새 창이 보일 거예요.
+이제 새 오브젝트를 만들 준비가 됐어요. 일곱 가지 방법을 고를 수 있는 새 창이 보일 거예요.
 
-![New Object (1)](../../../media/game-tutorials/New-Object-1.png)
+![New Object (1)](../../../media/game-tutorials/New-Object-1.png)\
+오른쪽 아래 모서리의 노란색 더하기 버튼을 누르세요.\
+[이미지 열기](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. 만드는 방법
 
-다음은 고를 수 있는 방법들이에요:
-
-![New Object (2)](../../../media/game-tutorials/New-Object-2.png)
+![New Object (2)](../../../media/game-tutorials/New-Object-2.png)\
+다음은 고를 수 있는 방법들이에요.\
+[이미지 열기](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. 그림 그리기
 
@@ -43,9 +47,11 @@ Pocket Code 앱의 홈 화면에서 찾을 수 있어요. 프로젝트가 여러
 
 ### 6. 위치 정하기
 
-그다음에는 손가락으로 왼쪽/오른쪽이나 위/아래로 옮겨서 화면에서 위치를 정해야 해요. 오른쪽 위 모서리의 버튼으로 저장하세요.
+그다음에는 손가락으로 왼쪽/오른쪽이나 위/아래로 옮겨서 화면에서 위치를 정해야 해요.
 
-![New Object (3)](../../../media/game-tutorials/New-Object-3.png)
+![New Object (3)](../../../media/game-tutorials/New-Object-3.png)\
+오른쪽 위 모서리의 버튼으로 저장하세요.\
+[이미지 열기](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. 해냈어요! 나만의 새 오브젝트를 만들었어요.
 

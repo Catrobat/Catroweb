@@ -2,18 +2,20 @@
 title: "Objektu berria"
 description: "Tutorial honetan, ikasiko duzu nola sortu objektu berri bat zure proiektuan eta horretarako aukera desberdinak."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Tutorial honetan, ikasiko duzu nola sortu objektu berri bat zure proiektuan eta horretarako aukera desberdinak.
 
-![Objektu berria](../../../media/game-tutorials/New-Object.png)
+![Objektu berria](../../../media/game-tutorials/New-Object.png)\
+Tutorial honetan, ikasiko duzu nola sortu objektu berri bat zure proiektuan eta horretarako aukera desberdinak.\
+[Ireki irudia](../../../media/game-tutorials/New-Object.png)
 
 Horretarako, Pocket Code aplikazioa deskargatu behar duzu eta proiektu berria nola sortu jakin. Laguntza behar baduzu, begiratu **[Proiektu berria](new-project.md)** tutoriala.
 
 *Hemen, tutoriala deskarga dezakezu PDF formatua:*
 
-[Objektu berria](../../../media/game-tutorials/New-Object.pdf)
+[Ireki PDFa](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Objektu berria sortzea
 
@@ -23,15 +25,17 @@ Pocket Code aplikazioaren etxeko pantailan aurkituko duzu. Proiektu bat baino ge
 
 ### 2. Objektu berria sortzea
 
-Orain objektu berri bat sortzeko prest zaude. Hori egiteko, sakatu botoi horia eskuineko beheko txokoan. Leiho berri bat ikusiko duzu, zazpi aukerarekin.
+Orain objektu berri bat sortzeko prest zaude. Leiho berri bat ikusiko duzu, zazpi aukerarekin.
 
-![Objektu berria (1)](../../../media/game-tutorials/New-Object-1.png)
+![Objektu berria (1)](../../../media/game-tutorials/New-Object-1.png)\
+Hori egiteko, sakatu botoi horia eskuineko beheko txokoan.\
+[Ireki irudia](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Sortzeko moduak
 
-Aukera hauek dituzu:
-
-![Objektu berria (2)](../../../media/game-tutorials/New-Object-2.png)
+![Objektu berria (2)](../../../media/game-tutorials/New-Object-2.png)\
+Aukera hauek dituzu.\
+[Ireki irudia](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Marraztu irudia
 
@@ -43,9 +47,11 @@ Orain zure argazkiari izena eman behar diozu.
 
 ### 6. Jarri
 
-Gero, ezkerrera/eskuinera edo behatza gora/beherantz mugituz jarri behar da. Gorde egin behar duzu goiko eskuineko izkinan dagoen botoiarekin.
+Gero, ezkerrera/eskuinera edo behatza gora/beherantz mugituz jarri behar da.
 
-![Objektu berria (3)](../../../media/game-tutorials/New-Object-3.png)
+![Objektu berria (3)](../../../media/game-tutorials/New-Object-3.png)\
+Gorde egin behar duzu goiko eskuineko izkinan dagoen botoiarekin.\
+[Ireki irudia](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Zure objektu berria sortu duzu.
 

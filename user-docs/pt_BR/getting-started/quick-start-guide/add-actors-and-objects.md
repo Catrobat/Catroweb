@@ -2,12 +2,12 @@
 title: Adicionar atores e objetos
 description: Toque no botão de mais para adicionar uma nova figura ou um novo objeto ao seu projeto.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Toque no botão de mais para adicionar uma nova figura ou um novo objeto ao seu projeto.
-
-![Adicionar figura](../../../media/getting-started/FigurHinzufuegen.png)
+![Adicionar figura](../../../media/getting-started/FigurHinzufuegen.png)\
+Toque no botão de mais para adicionar uma nova figura ou um novo objeto ao seu projeto.\
+[Abrir imagem](../../../media/getting-started/FigurHinzufuegen.png)
 
 No Pocket Code, você pode adicionar um personagem ou um objeto ao seu projeto de vários jeitos:
 
@@ -29,4 +29,6 @@ No Pocket Code, você pode adicionar um personagem ou um objeto ao seu projeto d
 
 **Projetos locais**: Escolha um projeto. O primeiro ator dele vai para o seu projeto, junto com o script.
 
-![Novo ator](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Novo ator](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+No Pocket Code, você pode adicionar um personagem ou um objeto ao seu projeto de vários jeitos.\
+[Abrir imagem](../../../media/getting-started/NewActor-e1732794461668.jpg)

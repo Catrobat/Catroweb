@@ -2,12 +2,12 @@
 title: Pridėk veikėjus ir objektus
 description: Paspausk pliuso mygtuką, kad pridėtum naują figūrėlę ar objektą į savo projektą.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Paspausk pliuso mygtuką, kad pridėtum naują figūrėlę ar objektą į savo projektą.
-
-![Pridėti figūrėlę](../../../media/getting-started/FigurHinzufuegen.png)
+![Pridėti figūrėlę](../../../media/getting-started/FigurHinzufuegen.png)\
+Paspausk pliuso mygtuką, kad pridėtum naują figūrėlę ar objektą į savo projektą.\
+[Atverk paveikslėlį](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Code veikėją ar objektą į savo projektą gali pridėti įvairiais būdais:
 
@@ -29,4 +29,6 @@ Pocket Code veikėją ar objektą į savo projektą gali pridėti įvairiais bū
 
 **Vietiniai projektai**: Pasirink projektą, iš kurio nori įterpti pirmąjį veikėją kartu su scenarijumi į savo projektą.
 
-![Naujas veikėjas](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Naujas veikėjas](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Code veikėją ar objektą į savo projektą gali pridėti įvairiais būdais.\
+[Atverk paveikslėlį](../../../media/getting-started/NewActor-e1732794461668.jpg)

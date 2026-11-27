@@ -6,13 +6,15 @@ order: 0
 
 In this tutorial, you will learn how to create a new object in your project and the different possibilities you have for this.
 
-![New Object](../../../media/game-tutorials/New-Object.png)
+![New Object](../../../media/game-tutorials/New-Object.png)\
+In this tutorial, you will learn how to create a new object in your project and the different possibilities you have for this.\
+[Open image](../../../media/game-tutorials/New-Object.png)
 
 To do this, you should already have downloaded the Pocket Code app and know how to create a new project. If you need assistance with this, feel free to have a look at the **[New Project](new-project.md)**-tutorial.
 
 *Here you can download the tutorial in PDF-format:*
 
-[New Object](../../../media/game-tutorials/New-Object.pdf)
+[Open PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Create a new Object
 
@@ -22,15 +24,17 @@ You will find it on the homescreen of the Pocket Code app. If you have more than
 
 ### 2. Create a new Object
 
-Now you are ready to create a new object. To do that just click on the yellow plus-button on the bottom right corner. You will see a new window giving you seven possibilities to choose from.
+Now you are ready to create a new object. You will see a new window giving you seven possibilities to choose from.
 
-![New Object (1)](../../../media/game-tutorials/New-Object-1.png)
+![New Object (1)](../../../media/game-tutorials/New-Object-1.png)\
+To do that just click on the yellow plus-button on the bottom right corner.\
+[Open image](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Ways to Create
 
-This are the possibilities you can choose from:
-
-![New Object (2)](../../../media/game-tutorials/New-Object-2.png)
+![New Object (2)](../../../media/game-tutorials/New-Object-2.png)\
+This are the possibilities you can choose from.\
+[Open image](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Draw Image
 
@@ -42,9 +46,11 @@ Now you have to give your picture a name.
 
 ### 6. Place it
 
-After that you have to place it visually by shifting it to the left/right or up/down with your finger. You have to save it with the button in the top right corner.
+After that you have to place it visually by shifting it to the left/right or up/down with your finger.
 
-![New Object (3)](../../../media/game-tutorials/New-Object-3.png)
+![New Object (3)](../../../media/game-tutorials/New-Object-3.png)\
+You have to save it with the button in the top right corner.\
+[Open image](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. You made it! You created your own new object.
 

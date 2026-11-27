@@ -2,12 +2,12 @@
 title: Añadir actores y objetos
 description: Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.
-
-![Añadir personaje](../../../media/getting-started/FigurHinzufuegen.png)
+![Añadir personaje](../../../media/getting-started/FigurHinzufuegen.png)\
+Toca el botón + para añadir un personaje u objeto nuevo a tu proyecto.\
+[Abrir imagen](../../../media/getting-started/FigurHinzufuegen.png)
 
 En Pocket Code puedes añadir un personaje o un objeto a tu proyecto de varias formas:
 
@@ -29,4 +29,6 @@ En Pocket Code puedes añadir un personaje o un objeto a tu proyecto de varias f
 
 **Proyectos locales**: Elige un proyecto. Su primer actor pasa a tu proyecto junto con su script.
 
-![Actor nuevo](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Actor nuevo](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+En Pocket Code puedes añadir un personaje o un objeto a tu proyecto de varias formas.\
+[Abrir imagen](../../../media/getting-started/NewActor-e1732794461668.jpg)

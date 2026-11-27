@@ -2,12 +2,12 @@
 title: הוספת דמויות ואובייקטים
 description: הקישו על כפתור הפלוס כדי להוסיף דמות או אובייקט חדשים לפרויקט שלכם.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-הקישו על כפתור הפלוס כדי להוסיף דמות או אובייקט חדשים לפרויקט שלכם.
-
-![הוספת דמות](../../../media/getting-started/FigurHinzufuegen.png)
+![הוספת דמות](../../../media/getting-started/FigurHinzufuegen.png)\
+הקישו על כפתור הפלוס כדי להוסיף דמות או אובייקט חדשים לפרויקט שלכם.\
+[פתיחת תמונה](../../../media/getting-started/FigurHinzufuegen.png)
 
 ב־Pocket Code אפשר להוסיף דמות או אובייקט לפרויקט שלכם בכמה דרכים:
 
@@ -29,4 +29,6 @@ source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
 
 **פרויקטים מקומיים**: בחרו פרויקט שממנו תרצו להכניס את הדמות הראשונה יחד עם התסריט שלה לפרויקט שלכם.
 
-![דמות חדשה](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![דמות חדשה](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+ב־Pocket Code אפשר להוסיף דמות או אובייקט לפרויקט שלכם בכמה דרכים.\
+[פתיחת תמונה](../../../media/getting-started/NewActor-e1732794461668.jpg)

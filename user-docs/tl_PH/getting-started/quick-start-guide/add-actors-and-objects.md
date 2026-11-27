@@ -2,12 +2,12 @@
 title: "Magdagdag ng mga Aktor at Objekto"
 description: "I-tap ang pindutan ng plus upang magdagdag ng bagong numero o bagay sa iyong proyekto."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-I-tap ang pindutan ng plus upang magdagdag ng bagong numero o bagay sa iyong proyekto.
-
-![Magdagdag ng isang aktor](../../../media/getting-started/FigurHinzufuegen.png)
+![Magdagdag ng isang aktor](../../../media/getting-started/FigurHinzufuegen.png)\
+I-tap ang pindutan ng plus upang magdagdag ng bagong numero o bagay sa iyong proyekto.\
+[Buksan ang larawan](../../../media/getting-started/FigurHinzufuegen.png)
 
 Sa Pocket Code, maaari mong idagdag ang isang character o isang bagay sa iyong proyekto sa iba't ibang paraan:
 
@@ -29,4 +29,6 @@ Sa Pocket Code, maaari mong idagdag ang isang character o isang bagay sa iyong p
 
 **Mga proyekto sa device**: Pumili ng isang proyekto mula sa kung saan nais mong isulud ang unang aktor kasama ang manuskrito sa iyong proyekto.
 
-![Bagong Aktor](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Bagong Aktor](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Sa Pocket Code, maaari mong idagdag ang isang character o isang bagay sa iyong proyekto sa iba't ibang paraan.\
+[Buksan ang larawan](../../../media/getting-started/NewActor-e1732794461668.jpg)

@@ -2,12 +2,12 @@
 title: Lägg till figurer och objekt
 description: Tryck på plusknappen för att lägga till en ny figur eller ett nytt objekt i ditt projekt.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Tryck på plusknappen för att lägga till en ny figur eller ett nytt objekt i ditt projekt.
-
-![Lägg till figur](../../../media/getting-started/FigurHinzufuegen.png)
+![Lägg till figur](../../../media/getting-started/FigurHinzufuegen.png)\
+Tryck på plusknappen för att lägga till en ny figur eller ett nytt objekt i ditt projekt.\
+[Öppna bilden](../../../media/getting-started/FigurHinzufuegen.png)
 
 I Pocket Code kan du lägga till en karaktär eller ett objekt i ditt projekt på flera sätt:
 
@@ -29,4 +29,6 @@ I Pocket Code kan du lägga till en karaktär eller ett objekt i ditt projekt p�
 
 **Lokala projekt**: Välj ett projekt som du vill infoga den första figuren från, tillsammans med skriptet, i ditt projekt.
 
-![Ny figur](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Ny figur](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+I Pocket Code kan du lägga till en karaktär eller ett objekt i ditt projekt på flera sätt.\
+[Öppna bilden](../../../media/getting-started/NewActor-e1732794461668.jpg)

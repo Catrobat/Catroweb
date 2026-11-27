@@ -2,7 +2,7 @@
 title: Dodaj ozadje
 description: V Catrobat lahko svojemu projektu dodaš ozadje.
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 V Catrobat lahko svojemu projektu dodaš ozadje.
@@ -11,15 +11,17 @@ Ozadja lahko uporabiš na različne načine. V Pocket Code jih lahko uporabiš z
 
 Za delavniške naprave, kot so **ploterji** ali **stroji za vezenje**, so ozadja predloge za načrte, na primer za reze ali vzorce vezenja.
 
-Če želiš dodati ozadje, se v pregledu projekta dotakni „Ozadje“.
-
-![Dotik ozadja](../../../media/getting-started/grafik-16.png)
+![Dotik ozadja](../../../media/getting-started/grafik-16.png)\
+Če želiš dodati ozadje, se v pregledu projekta dotakni „Ozadje“.\
+[Odpri sliko](../../../media/getting-started/grafik-16.png)
 
 V **razdelku skript (2)** lahko programiraš svoje ozadje – vendar niso na voljo vsi bloki. Zelo pomembna sta naslednja dva bloka: ![Nastavi prosojnost na 50 %](../../../media/bricks/Set_transparency_to_50_pct_.png) in ![Nastavi velikost na 60 %](../../../media/bricks/Set_size_to_60_pct_.png)
 
-V **razdelku videzov (1)** dodaš ozadje. To storiš tako, da se dotakneš simbola +.
+V **razdelku videzov (1)** dodaš ozadje.
 
-![Dodaj ozadje](../../../media/getting-started/grafik-14.png)
+![Dodaj ozadje](../../../media/getting-started/grafik-14.png)\
+To storiš tako, da se dotakneš simbola +.\
+[Odpri sliko](../../../media/getting-started/grafik-14.png)
 
 Svoje slike lahko naložiš, uporabiš vnaprej pripravljena ozadja ali pa ustvariš ozadje sam.
 
@@ -31,6 +33,8 @@ Svoje slike lahko naložiš, uporabiš vnaprej pripravljena ozadja ali pa ustvar
 
 **Kamera**: Z kamero naprave lahko posnameš fotografijo in jo dodaš kot ozadje.
 
-![grafika](../../../media/getting-started/grafik-17.png)
+![grafika](../../../media/getting-started/grafik-17.png)\
+Klikni puščico nazaj v zgornjem desnem kotu, da se vrneš na **pregled projekta**.\
+[Odpri sliko](../../../media/getting-started/grafik-17.png)
 
-Ozadje si zdaj dodal. Klikni puščico nazaj v zgornjem desnem kotu, da se vrneš na **pregled projekta**.
+Ozadje si zdaj dodal.

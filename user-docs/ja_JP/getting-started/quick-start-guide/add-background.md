@@ -2,7 +2,7 @@
 title: 背景を追加する
 description: Catrobat のプロジェクトに、背景を追加できます。
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Catrobat のプロジェクトに、背景を追加できます。
@@ -11,15 +11,17 @@ Catrobat のプロジェクトに、背景を追加できます。
 
 **プロッター**や**刺しゅうマシン**のような、ものづくりの機械では、背景は、切りぬきや刺しゅうの模様のひな形になります。
 
-背景を追加するには、プロジェクト画面で「背景」をタップします。
-
-![背景をタップする](../../../media/getting-started/grafik-16.png)
+![背景をタップする](../../../media/getting-started/grafik-16.png)\
+背景を追加するには、プロジェクト画面で「背景」をタップします。\
+[画像を開く](../../../media/getting-started/grafik-16.png)
 
 **スクリプトの部分（2）**で、背景をプログラムできます。ただし、使えるブロックは一部だけです。特に大切な、次の2つのブロックがあります。![50% の透明度に設定](../../../media/bricks/Set_transparency_to_50_pct_.png) と ![60% の大きさに設定](../../../media/bricks/Set_size_to_60_pct_.png)
 
-**見た目の部分（1）**で、背景を追加します。そのためには、「+」の記号をタップします。
+**見た目の部分（1）**で、背景を追加します。
 
-![背景を追加する](../../../media/getting-started/grafik-14.png)
+![背景を追加する](../../../media/getting-started/grafik-14.png)\
+そのためには、「+」の記号をタップします。\
+[画像を開く](../../../media/getting-started/grafik-14.png)
 
 自分の画像をアップロードしたり、あらかじめ用意された背景を使ったり、自分で背景を作ったりできます。
 
@@ -31,6 +33,8 @@ Catrobat のプロジェクトに、背景を追加できます。
 
 **カメラ**: 機器のカメラで写真を撮って、背景として追加できます。
 
-![背景を選ぶ](../../../media/getting-started/grafik-17.png)
+![背景を選ぶ](../../../media/getting-started/grafik-17.png)\
+右上の戻る矢印をタップして、**プロジェクト画面**にもどります。\
+[画像を開く](../../../media/getting-started/grafik-17.png)
 
-これで背景が追加されました。右上の戻る矢印をタップして、**プロジェクト画面**にもどります。
+これで背景が追加されました。

@@ -2,16 +2,20 @@
 title: नया प्रोजेक्ट बनाएँ
 description: "ऐप को अपने स्मार्टफ़ोन या टैबलेट पर खोलो।"
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-ऐप को अपने स्मार्टफ़ोन या टैबलेट पर खोलो। नया प्रोजेक्ट बनाने के लिए + चिह्न पर टैप करो।
+ऐप को अपने स्मार्टफ़ोन या टैबलेट पर खोलो।
 
-![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)
+![MainScreen_NewProject](../../../media/getting-started/MainScreen_NewProject.png)\
+नया प्रोजेक्ट बनाने के लिए + चिह्न पर टैप करो।\
+[चित्र खोलो](../../../media/getting-started/MainScreen_NewProject.png)
 
-प्रोजेक्ट को एक नाम दो (1) और तय करो कि तुम्हारा गेम पोर्ट्रेट (खड़ा) फ़ॉर्मैट में हो या लैंडस्केप (आड़ा) में (2)। फिर चेकमार्क (3) से पक्का करो।
+प्रोजेक्ट को एक नाम दो (1) और तय करो कि तुम्हारा गेम पोर्ट्रेट (खड़ा) फ़ॉर्मैट में हो या लैंडस्केप (आड़ा) में (2)।
 
-![NewProject](../../../media/getting-started/NewProject.png)
+![NewProject](../../../media/getting-started/NewProject.png)\
+फिर चेकमार्क (3) से पक्का करो।\
+[चित्र खोलो](../../../media/getting-started/NewProject.png)
 
 अब तुम अपने प्रोजेक्ट व्यू में हो। सबसे ऊपर तुम्हें अपने गेम का नाम दिखता है।
 
@@ -21,8 +25,12 @@ source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
 
 नीचे दाएँ कोने में तुम्हें दो ज़रूरी बटन दिखते हैं:
 
-![Start](../../../media/getting-started/Start.png) **चलाएँ** बटन से तुम अपना गेम शुरू करते हो।
+![Start](../../../media/getting-started/Start.png)\
+**चलाएँ** बटन से तुम अपना गेम शुरू करते हो।
 
-![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png) **प्लस** बटन से तुम अपने गेम में नया पात्र या ऑब्जेक्ट जोड़ते हो।
+![Plus Button](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+**प्लस** बटन से तुम अपने गेम में नया पात्र या ऑब्जेक्ट जोड़ते हो।
 
-![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![Project Screen](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+अब तुम अपने प्रोजेक्ट व्यू में हो।\
+[चित्र खोलो](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

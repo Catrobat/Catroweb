@@ -2,7 +2,7 @@
 title: Kuprinė
 description: "Kuprinė Pocket Code yra praktiška funkcija, kuri leidžia išsaugoti ir pakartotinai naudoti elementus, pavyzdžiui, veikėjus (objektus), scenarijus, išvaizdas ar garsus, įvairiuose projektuose."
 order: 0
-source_hash: '331e082e4ebc8d246985323b3ea757069e6e7cfd896bf51da6af07b54d7bd66e'
+source_hash: 'c0242d01d71d7fc962d0908c8e2492b7d13cd5e6df51e05b68ed6368ee83508d'
 ---
 
 **Kuprinė** Pocket Code yra praktiška funkcija, kuri leidžia **išsaugoti ir pakartotinai naudoti** elementus, pavyzdžiui, veikėjus (objektus), scenarijus, išvaizdas ar garsus, **įvairiuose projektuose**. Ji padeda sutaupyti laiko ir daro tavo projektus efektyvesnius.
@@ -15,11 +15,11 @@ Kuprinė yra tarsi skaitmeninė saugykla, kurioje gali laikyti įvairius savo da
 
 Eik į projekto vaizdą to projekto, iš kurio nori įdėti figūrą į kuprinę.
 
-Paspausk tris taškus šalia figūros, kad atidarytum kontekstinį meniu, ir pasirink „Įdėti į kuprinę“.
-
 Figūra (įskaitant jos išvaizdas, garsus ir scenarijus) bus įdėta į kuprinę.
 
-![Įdėti veikėją](../../../media/getting-started/grafik-7.png)
+![Įdėti veikėją](../../../media/getting-started/grafik-7.png)\
+Paspausk tris taškus šalia figūros, kad atidarytum kontekstinį meniu, ir pasirink „Įdėti į kuprinę“.\
+[Atverk paveikslėlį](../../../media/getting-started/grafik-7.png)
 
 **Pridėk figūras iš kuprinės**
 
@@ -27,9 +27,11 @@ Atidaryk projektą, į kurį nori įterpti figūrą.
 
 Projekto vaizde paspausk pliuso simbolį ir pasirink „Kuprinė“.
 
-Dabar matysi visas figūras ir objektus, kuriuos išsaugojai kuprinėje. Paspausk tris taškus ir pasirink „Išimti iš kuprinės“.
+Dabar matysi visas figūras ir objektus, kuriuos išsaugojai kuprinėje.
 
-![Išimti veikėją](../../../media/getting-started/grafik-8-e1732702791199.png)
+![Išimti veikėją](../../../media/getting-started/grafik-8-e1732702791199.png)\
+Paspausk tris taškus ir pasirink „Išimti iš kuprinės“.\
+[Atverk paveikslėlį](../../../media/getting-started/grafik-8-e1732702791199.png)
 
 ***
 
@@ -39,29 +41,33 @@ Dabar matysi visas figūras ir objektus, kuriuos išsaugojai kuprinėje. Paspaus
 
 Eik į figūrą, kuri turi scenarijų. Laikyk paspaudęs norimą scenarijų scenarijų redaktoriuje.
 
-Kontekstiniame meniu pasirink „Įdėti į kuprinę“.
+![Įdėti į kuprinę](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)\
+Kontekstiniame meniu pasirink „Įdėti į kuprinę“.\
+[Atverk paveikslėlį](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
 
-![Įdėti į kuprinę](../../../media/getting-started/WhatsApp-Bild-2024-11-27-um-11.09.00_bec028aa.jpg)
+![Išsaugoti veikėją kuprinėje](../../../media/getting-started/grafik-9.png)\
+Suteik scenarijui pavadinimą ir patvirtink su OK.\
+[Atverk paveikslėlį](../../../media/getting-started/grafik-9.png)
 
-Suteik scenarijui pavadinimą ir patvirtink su OK.
-
-![Išsaugoti veikėją kuprinėje](../../../media/getting-started/grafik-9.png)
-
-Scenarijus išsaugotas ir gali būti naudojamas kituose projektuose.
-
-![Tavo kuprinė](../../../media/getting-started/grafik-10.png)
+![Tavo kuprinė](../../../media/getting-started/grafik-10.png)\
+Scenarijus išsaugotas ir gali būti naudojamas kituose projektuose.\
+[Atverk paveikslėlį](../../../media/getting-started/grafik-10.png)
 
 **Pridėk scenarijus iš kuprinės:**
 
-Paspausk veikėją, į kurį nori įterpti scenarijų. Matysi scenarijaus sritį. Paspausk tris taškus, kad atidarytum kontekstinį meniu, ir paspausk „Kuprinė“.
+Paspausk veikėją, į kurį nori įterpti scenarijų. Matysi scenarijaus sritį.
 
-![Išimti scenarijų](../../../media/getting-started/grafik-11.png)
+![Išimti scenarijų](../../../media/getting-started/grafik-11.png)\
+Paspausk tris taškus, kad atidarytum kontekstinį meniu, ir paspausk „Kuprinė“.\
+[Atverk paveikslėlį](../../../media/getting-started/grafik-11.png)
 
-Dabar matysi visus scenarijus, kurie jau yra tavo kuprinėje. Paspausk tris taškus šalia norimo scenarijaus ir kontekstiniame meniu pasirink „Išimti iš kuprinės“.
+Dabar matysi visus scenarijus, kurie jau yra tavo kuprinėje.
 
 Per kontekstinį meniu gali ištrinti scenarijus, kurių nebereikia kuprinėje.
 
-![Išimti scenarijų iš kuprinės](../../../media/getting-started/grafik-12.png)
+![Išimti scenarijų iš kuprinės](../../../media/getting-started/grafik-12.png)\
+Paspausk tris taškus šalia norimo scenarijaus ir kontekstiniame meniu pasirink „Išimti iš kuprinės“.\
+[Atverk paveikslėlį](../../../media/getting-started/grafik-12.png)
 
 ***
 

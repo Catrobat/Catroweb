@@ -2,12 +2,12 @@
 title: Tambah pelakon dan objek
 description: Ketik butang tambah untuk menambah watak atau objek baharu ke dalam projek kamu.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Ketik butang tambah untuk menambah watak atau objek baharu ke dalam projek kamu.
-
-![Tambah Figura](../../../media/getting-started/FigurHinzufuegen.png)
+![Tambah Figura](../../../media/getting-started/FigurHinzufuegen.png)\
+Ketik butang tambah untuk menambah watak atau objek baharu ke dalam projek kamu.\
+[Buka gambar](../../../media/getting-started/FigurHinzufuegen.png)
 
 Dalam Pocket Code, kamu boleh menambah watak atau objek ke dalam projek kamu dengan pelbagai cara:
 
@@ -29,4 +29,6 @@ Dalam Pocket Code, kamu boleh menambah watak atau objek ke dalam projek kamu den
 
 **Projek setempat**: Pilih projek daripada mana kamu mahu memasukkan pelakon pertama bersama skripnya ke dalam projek kamu.
 
-![Pelakon Baharu](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Pelakon Baharu](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Dalam Pocket Code, kamu boleh menambah watak atau objek ke dalam projek kamu dengan pelbagai cara.\
+[Buka gambar](../../../media/getting-started/NewActor-e1732794461668.jpg)

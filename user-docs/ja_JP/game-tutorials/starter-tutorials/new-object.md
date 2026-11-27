@@ -2,18 +2,20 @@
 title: 新しいオブジェクト
 description: "このチュートリアルでは、プロジェクトに新しいオブジェクトを作る方法と、そのためのいろいろな方法を学びます。"
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 このチュートリアルでは、プロジェクトに新しいオブジェクトを作る方法と、そのためのいろいろな方法を学びます。
 
-![新しいオブジェクト](../../../media/game-tutorials/New-Object.png)
+![新しいオブジェクト](../../../media/game-tutorials/New-Object.png)\
+このチュートリアルでは、プロジェクトに新しいオブジェクトを作る方法と、そのためのいろいろな方法を学びます。\
+[画像を開く](../../../media/game-tutorials/New-Object.png)
 
 このチュートリアルの前に、Pocket Code アプリをダウンロードして、新しいプロジェクトを作れるようになっている必要があります。手伝いが必要なときは、**[新しいプロジェクト](new-project.md)**のチュートリアルを見てください。
 
 *このチュートリアルは、PDF 形式でダウンロードできます:*
 
-[新しいオブジェクト](../../../media/game-tutorials/New-Object.pdf)
+[PDFを開く](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. 新しいオブジェクトを作る
 
@@ -23,15 +25,17 @@ Pocket Code アプリのホーム画面にあります。プロジェクトが1�
 
 ### 2. 新しいオブジェクトを作る
 
-これで、新しいオブジェクトを作る準備ができました。右下の黄色い「+」ボタンをタップするだけです。7つの方法から選べる、新しい画面が出てきます。
+これで、新しいオブジェクトを作る準備ができました。 7つの方法から選べる、新しい画面が出てきます。
 
-![新しいオブジェクト (1)](../../../media/game-tutorials/New-Object-1.png)
+![新しいオブジェクト (1)](../../../media/game-tutorials/New-Object-1.png)\
+右下の黄色い「+」ボタンをタップするだけです。\
+[画像を開く](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. 作る方法
 
-選べる方法は、次のとおりです:
-
-![新しいオブジェクト (2)](../../../media/game-tutorials/New-Object-2.png)
+![新しいオブジェクト (2)](../../../media/game-tutorials/New-Object-2.png)\
+選べる方法は、次のとおりです.\
+[画像を開く](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. 絵を描く
 
@@ -43,9 +47,11 @@ Pocket Code アプリのホーム画面にあります。プロジェクトが1�
 
 ### 6. 置く
 
-そのあと、指で左右や上下にずらして、見た目どおりに置きます。右上のボタンをおして、保存します。
+そのあと、指で左右や上下にずらして、見た目どおりに置きます。
 
-![新しいオブジェクト (3)](../../../media/game-tutorials/New-Object-3.png)
+![新しいオブジェクト (3)](../../../media/game-tutorials/New-Object-3.png)\
+右上のボタンをおして、保存します。\
+[画像を開く](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. できました！ 自分の新しいオブジェクトを作れました。
 

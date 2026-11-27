@@ -2,7 +2,7 @@
 title: Lägg till bakgrund
 description: Du kan lägga till en bakgrund till ditt projekt i Catrobat.
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Du kan lägga till en bakgrund till ditt projekt i Catrobat.
@@ -11,15 +11,17 @@ Bakgrunder kan användas på många sätt. I Pocket Code kan de göra **spel** v
 
 För makerspace-enheter som **plottrar** eller **broderimaskiner** fungerar bakgrunder som designmallar, till exempel för klipp eller broderimönster.
 
-Om du vill lägga till en bakgrund trycker du på ”Bakgrund” i projektvyn.
-
-![Tryck på Bakgrund](../../../media/getting-started/grafik-16.png)
+![Tryck på Bakgrund](../../../media/getting-started/grafik-16.png)\
+Om du vill lägga till en bakgrund trycker du på ”Bakgrund” i projektvyn.\
+[Öppna bilden](../../../media/getting-started/grafik-16.png)
 
 I **skriptdelen (2)** kan du programmera din bakgrund – men inte alla block finns tillgängliga här. Följande två block är särskilt viktiga: ![Sätt genomskinlighet till 50 %](../../../media/bricks/Set_transparency_to_50_pct_.png) och ![Sätt storleken till 60 %](../../../media/bricks/Set_size_to_60_pct_.png)
 
-I **utseendedelen (1)** lägger du till en bakgrund. Gör det genom att trycka på plustecknet.
+I **utseendedelen (1)** lägger du till en bakgrund.
 
-![Lägg till bakgrund](../../../media/getting-started/grafik-14.png)
+![Lägg till bakgrund](../../../media/getting-started/grafik-14.png)\
+Gör det genom att trycka på plustecknet.\
+[Öppna bilden](../../../media/getting-started/grafik-14.png)
 
 Du kan ladda upp egna bilder, använda färdiga bakgrunder eller skapa en bakgrund själv.
 
@@ -31,6 +33,8 @@ Du kan ladda upp egna bilder, använda färdiga bakgrunder eller skapa en bakgru
 
 **Kamera**: Du kan använda enhetens kamera för att ta ett foto och lägga till det som bakgrund.
 
-![Bild](../../../media/getting-started/grafik-17.png)
+![Bild](../../../media/getting-started/grafik-17.png)\
+Klicka på pilen tillbaka uppe till höger för att gå tillbaka till **projektvyn**.\
+[Öppna bilden](../../../media/getting-started/grafik-17.png)
 
-Nu har du lagt till en bakgrund. Klicka på pilen tillbaka uppe till höger för att gå tillbaka till **projektvyn**.
+Nu har du lagt till en bakgrund.

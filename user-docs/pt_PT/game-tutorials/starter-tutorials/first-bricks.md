@@ -2,18 +2,20 @@
 title: Primeiros blocos
 description: "Neste tutorial, vais aprender onde encontrar vários blocos para programar um objeto."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 Neste tutorial, vais aprender onde encontrar vários blocos para programar um objeto. Além disso, este tutorial dá uma boa visão geral das categorias de blocos.
 
-![Primeiros blocos](../../../media/game-tutorials/First-Bricks.png)
+![Primeiros blocos](../../../media/game-tutorials/First-Bricks.png)\
+Além disso, este tutorial dá uma boa visão geral das categorias de blocos.\
+[Abrir imagem](../../../media/game-tutorials/First-Bricks.png)
 
 Para inserir blocos e programar o teu objeto, deves já ter criado um projeto com um objeto. Se precisares de ajuda com isto, podes ver o tutorial **[Objeto novo](new-object.md)**.
 
 *Aqui podes descarregar o tutorial em formato PDF:*
 
-[Primeiros blocos](../../../media/game-tutorials/First-Bricks.pdf)
+[Abrir PDF](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Abre um objeto existente
 
@@ -23,9 +25,11 @@ Primeiro, tens de abrir o teu projeto. Deves já ter criado um objeto (se não, 
 
 Depois vais ver que já existem alguns blocos. Esses blocos foram criados quando colocámos visualmente o objeto.
 
-Estes blocos servem apenas para colocar o nosso objeto na posição exata que escolhemos no início, quando o projeto começa. Também podes mudar esta posição a qualquer momento aqui.
+Estes blocos servem apenas para colocar o nosso objeto na posição exata que escolhemos no início, quando o projeto começa.
 
-![Primeiros blocos (1)](../../../media/game-tutorials/First-Bricks-1.png)
+![Primeiros blocos (1)](../../../media/game-tutorials/First-Bricks-1.png)\
+Também podes mudar esta posição a qualquer momento aqui.\
+[Abrir imagem](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 3. Inserir blocos
 
@@ -33,9 +37,9 @@ Agora podes criar mais blocos carregando no botão amarelo de mais, no canto inf
 
 ### 4. Categorias de blocos
 
-Estas são as diferentes categorias de blocos:
-
-![Primeiros blocos (2)](../../../media/game-tutorials/First-Bricks-2.png)
+![Primeiros blocos (2)](../../../media/game-tutorials/First-Bricks-2.png)\
+Estas são as diferentes categorias de blocos.\
+[Abrir imagem](../../../media/game-tutorials/First-Bricks-2.png)
 
 ### 5. Inserir o primeiro bloco
 
@@ -43,9 +47,11 @@ Para os nossos primeiros blocos, queremos usar o bloco “Deslizar em 1 segundo 
 
 ### 6. Colocar o bloco
 
-Coloca o bloco na última posição do teu programa e executa o programa pela primeira vez. Podes fazê-lo com o botão amarelo de play.
+Coloca o bloco na última posição do teu programa e executa o programa pela primeira vez.
 
-![Primeiros blocos (3)](../../../media/game-tutorials/First-Bricks-3.png)
+![Primeiros blocos (3)](../../../media/game-tutorials/First-Bricks-3.png)\
+Podes fazê-lo com o botão amarelo de play.\
+[Abrir imagem](../../../media/game-tutorials/First-Bricks-3.png)
 
 ### 7. Conseguiste! Inseriste o teu primeiro bloco.
 

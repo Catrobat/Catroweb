@@ -2,16 +2,20 @@
 title: "نوې پروژه جوړه کړه"
 description: "اپ په خپل موبایل یا ټابلیټ کې پرانیزه."
 order: 1
-source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
+source_hash: 'f3059487f88aa4c938fe53cc292bdd71c8e10d1fd63dea0507aa707a6ba7a0ec'
 ---
 
-اپ په خپل موبایل یا ټابلیټ کې پرانیزه. د نوې پروژې د جوړولو لپاره د + نښه کېکاږه.
+اپ په خپل موبایل یا ټابلیټ کې پرانیزه.
 
-![پر اصلي پرده نوې پروژه](../../../media/getting-started/MainScreen_NewProject.png)
+![پر اصلي پرده نوې پروژه](../../../media/getting-started/MainScreen_NewProject.png)\
+د نوې پروژې د جوړولو لپاره د + نښه کېکاږه.\
+[انځور پرانیزه](../../../media/getting-started/MainScreen_NewProject.png)
 
-پروژې ته نوم ورکړه (1). وټاکه چې د لوبې پرده به ولاړه (عمودي) وي که پرته (افقي) (2). بیا د سم نښه کېکاږه (3).
+پروژې ته نوم ورکړه (1). وټاکه چې د لوبې پرده به ولاړه (عمودي) وي که پرته (افقي) (2).
 
-![نوې پروژه](../../../media/getting-started/NewProject.png)
+![نوې پروژه](../../../media/getting-started/NewProject.png)\
+بیا د سم نښه کېکاږه (3).\
+[انځور پرانیزه](../../../media/getting-started/NewProject.png)
 
 اوس د خپلې پروژې پر پرده یې. په سر کې د لوبې نوم وینې.
 
@@ -21,8 +25,12 @@ source_hash: '38f03830862d2e001954d19172202e93a8b123f6dab89f7b990b88dec0a25ab5'
 
 په لاندې ښي کونج کې دوه مهمې تڼۍ دي:
 
-![د پیل تڼۍ](../../../media/getting-started/Start.png) د **چلول** تڼۍ لوبه پیلوي.
+![د پیل تڼۍ](../../../media/getting-started/Start.png)\
+د **چلول** تڼۍ لوبه پیلوي.
 
-![د + تڼۍ](../../../media/getting-started/Screenshot-2024-11-22-143219.png) د **+** تڼۍ لوبې ته نوی کرکټر یا څیز ورزیاتوي.
+![د + تڼۍ](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+د **+** تڼۍ لوبې ته نوی کرکټر یا څیز ورزیاتوي.
 
-![د پروژې پرده](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)
+![د پروژې پرده](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)\
+اوس د خپلې پروژې پر پرده یې.\
+[انځور پرانیزه](../../../media/getting-started/ProjectScreen-1-e1732694778782.jpg)

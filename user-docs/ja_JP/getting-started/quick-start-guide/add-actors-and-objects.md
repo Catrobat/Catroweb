@@ -2,12 +2,12 @@
 title: オブジェクトを追加する
 description: "「+」ボタンをタップして、プロジェクトに新しいキャラクターやものを追加します。"
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-「+」ボタンをタップして、プロジェクトに新しいキャラクターやものを追加します。
-
-![キャラクターを追加する](../../../media/getting-started/FigurHinzufuegen.png)
+![キャラクターを追加する](../../../media/getting-started/FigurHinzufuegen.png)\
+「+」ボタンをタップして、プロジェクトに新しいキャラクターやものを追加します。\
+[画像を開く](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Code では、いくつかの方法で、プロジェクトにキャラクターやものを追加できます。
 
@@ -29,4 +29,6 @@ Pocket Code では、いくつかの方法で、プロジェクトにキャラ�
 
 **ローカルプロジェクト**: 最初のオブジェクトを、スクリプトといっしょに取り出して、プロジェクトに入れたいプロジェクトを選びます。
 
-![新しいオブジェクト](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![新しいオブジェクト](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Code では、いくつかの方法で、プロジェクトにキャラクターやものを追加できます。\
+[画像を開く](../../../media/getting-started/NewActor-e1732794461668.jpg)

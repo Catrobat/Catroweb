@@ -2,32 +2,34 @@
 title: 上傳與分享
 description: "在這個教學中，你會學到如何和朋友分享你做好的專案，或是分享給整個 Catrobat 社群。"
 order: 0
-source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
+source_hash: '0f8f89297b780f68cbac1e965c2d8e73b4e3dfdf753cc1eb7c8e8d86c14be2f9'
 ---
 
 在這個教學中，你會學到如何和朋友分享你做好的專案，或是分享給整個 Catrobat 社群。
 
-![上傳與分享](../../../media/game-tutorials/Upload-and-Share.png)
+![上傳與分享](../../../media/game-tutorials/Upload-and-Share.png)\
+在這個教學中，你會學到如何和朋友分享你做好的專案，或是分享給整個 Catrobat 社群。\
+[開啟圖片](../../../media/game-tutorials/Upload-and-Share.png)
 
 這個教學需要你已經有一個想分享的專案。如果你還不知道怎麼建立專案，請看看**[新增專案](new-project.md)**教學，了解它是怎麼運作的。
 
 *你可以在這裡下載 PDF 格式的教學：*
 
-[上傳與分享](../../../media/game-tutorials/Upload-and-Share.pdf)
+[開啟 PDF](../../../media/game-tutorials/Upload-and-Share.pdf)
 
 ### 1. 專案選項
 
-如果你想上傳或分享你的專案，請先打開專案，然後點右上角的三個點，接著點選「專案選項」。
-
-![上傳與分享](../../../media/game-tutorials/Upload-and-Share.png)
+![上傳與分享](../../../media/game-tutorials/Upload-and-Share.png)\
+如果你想上傳或分享你的專案，請先打開專案，然後點右上角的三個點，接著點選「專案選項」。\
+[開啟圖片](../../../media/game-tutorials/Upload-and-Share.png)
 
 ### 2. 專案選項
 
 現在你可以更改名稱、新增說明，並進行各種設定。
 
-另外還有兩個選項：「上傳程式」和「匯出專案」，下面的步驟會說明這兩個選項。
-
-![上傳與分享（1）](../../../media/game-tutorials/Upload-and-Share-1.png)
+![上傳與分享（1）](../../../media/game-tutorials/Upload-and-Share-1.png)\
+另外還有兩個選項：「上傳程式」和「匯出專案」，下面的步驟會說明這兩個選項。\
+[開啟圖片](../../../media/game-tutorials/Upload-and-Share-1.png)
 
 ### 3. 上傳程式
 
@@ -37,9 +39,9 @@ source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
 
 點一下這個按鈕，把專案上傳到分享平台時，如果你還沒有帳號，就需要先註冊。你也可以用 Google 登入。登入後，你要為專案取一個名稱，並寫下說明。接著，請選擇最多三個最符合你的程式的類別。
 
-然後點「下一步」來上傳你的程式。
-
-![上傳與分享（2）](../../../media/game-tutorials/Upload-and-Share-2.png)
+![上傳與分享（2）](../../../media/game-tutorials/Upload-and-Share-2.png)\
+然後點「下一步」來上傳你的程式。\
+[開啟圖片](../../../media/game-tutorials/Upload-and-Share-2.png)
 
 ### 5. 匯出專案
 
@@ -47,9 +49,11 @@ source_hash: '9ea06335b527f86838736f8eaa7afa2ad9b5e3339858b68691665a178498b859'
 
 ### 6. 匯出專案
 
-用這個按鈕可以儲存一個 .catrobat 檔案，你可以私下傳給朋友。你可以把它存在裝置的檔案管理員中，再用這種方式分享。
+用這個按鈕可以儲存一個 .catrobat 檔案，你可以私下傳給朋友。
 
-![上傳與分享（3）](../../../media/game-tutorials/Upload-and-Share-3.png)
+![上傳與分享（3）](../../../media/game-tutorials/Upload-and-Share-3.png)\
+你可以把它存在裝置的檔案管理員中，再用這種方式分享。\
+[開啟圖片](../../../media/game-tutorials/Upload-and-Share-3.png)
 
 你做到了！你分享了你的第一個程式！
 

@@ -3,18 +3,20 @@ title: Erste Bausteine
 description: "In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren."
 order: 0
 reviewed: true
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: 'b42d97aea1c123cfaed1c64fe423b84c21382caabfaeff167bfe814a0c0ff7bd'
 ---
 
 In diesem Tutorial erfährst du, wo du die verschiedensten Bausteine findest, um ein Objekt zu programmieren. Außerdem gibt dir dieses Tutorial einen guten Überblick über die Baustein-Kategorien.
 
-![Erste Bausteine](../../../media/game-tutorials/Erste-Bausteine.png)
+![Erste Bausteine](../../../media/game-tutorials/Erste-Bausteine.png)\
+Außerdem gibt dir dieses Tutorial einen guten Überblick über die Baustein-Kategorien.\
+[Bild öffnen](../../../media/game-tutorials/Erste-Bausteine.png)
 
 Damit du Bausteine einfügen und dein Objekt programmieren kannst, solltest du bereits ein Projekt mit einem Objekt erstellt haben. Falls du dabei noch Hilfe benötigst, kannst du dir das Tutorial **[Neues Objekt](new-object.md)** anschauen.
 
 *Hier kannst du das Tutorial im PDF-Format herunterladen:*
 
-[Erste Bausteine](../../../media/game-tutorials/Erste-Bausteine.pdf)
+[PDF öffnen](../../../media/game-tutorials/Erste-Bausteine.pdf)
 
 ### 1. Öffne existierendes Objekt
 
@@ -22,9 +24,11 @@ Zuerst musst du dein Projekt öffnen. Du solltest bereits ein Objekt erstellt ha
 
 ### 2. Vorhandene Bausteine
 
-Danach wirst du sehen, dass bereits einige Bausteine vorhanden sind. Diese Bausteine wurden erstellt, als wir das Objekt visuell platziert haben. Diese Bausteine tun nichts weiter, als unser Objekt an genau der Position zu platzieren, die wir am Anfang ausgewählt haben, sobald du das Projekt startest. Du kannst diese Position auch jederzeit hier ändern.
+Danach wirst du sehen, dass bereits einige Bausteine vorhanden sind. Diese Bausteine wurden erstellt, als wir das Objekt visuell platziert haben. Diese Bausteine tun nichts weiter, als unser Objekt an genau der Position zu platzieren, die wir am Anfang ausgewählt haben, sobald du das Projekt startest.
 
-![Erste Bausteine (1)](../../../media/game-tutorials/Erste-Bausteine-1.png)
+![Erste Bausteine (1)](../../../media/game-tutorials/Erste-Bausteine-1.png)\
+Du kannst diese Position auch jederzeit hier ändern.\
+[Bild öffnen](../../../media/game-tutorials/Erste-Bausteine-1.png)
 
 ### 3. Bausteine einfügen
 
@@ -32,9 +36,9 @@ Jetzt kannst du weitere Bausteine erstellen, indem du auf den gelben Plus-Button
 
 ### 4. Baustein Kategorien
 
-Das sind die verschiedenen Baustein Kategorien:
-
-![Erste Bausteine (2)](../../../media/game-tutorials/Erste-Bausteine-2.png)
+![Erste Bausteine (2)](../../../media/game-tutorials/Erste-Bausteine-2.png)\
+Das sind die verschiedenen Baustein Kategorien.\
+[Bild öffnen](../../../media/game-tutorials/Erste-Bausteine-2.png)
 
 ### 5. Ersten Baustein einfügen
 
@@ -42,9 +46,11 @@ Für unsere ersten Bausteine möchten wir den Baustein “Gleite 1 Sekunde zu X:
 
 ### 6. Baustein platzieren
 
-Platziere den Baustein an der letzten Stelle deines Programms und führe dein Programm zum ersten Mal aus. Das kannst du mit dem gelben Play-Button tun.
+Platziere den Baustein an der letzten Stelle deines Programms und führe dein Programm zum ersten Mal aus.
 
-![Erste Bausteine (3)](../../../media/game-tutorials/Erste-Bausteine-3.png)
+![Erste Bausteine (3)](../../../media/game-tutorials/Erste-Bausteine-3.png)\
+Das kannst du mit dem gelben Play-Button tun.\
+[Bild öffnen](../../../media/game-tutorials/Erste-Bausteine-3.png)
 
 ### 7. Du hast es geschafft! Du hast deinen ersten Baustein eingefügt.
 

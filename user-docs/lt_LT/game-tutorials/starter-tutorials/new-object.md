@@ -2,18 +2,20 @@
 title: Naujas objektas
 description: "Šioje pamokoje sužinosi, kaip sukurti naują objektą savo projekte ir kokias galimybes tam turi."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '09487118ffafc8726edb89d90bb308a10bf4a91c8db87f262ea93a75f1ce3879'
 ---
 
 Šioje pamokoje sužinosi, kaip sukurti naują objektą savo projekte ir kokias galimybes tam turi.
 
-![Naujas objektas](../../../media/game-tutorials/New-Object.png)
+![Naujas objektas](../../../media/game-tutorials/New-Object.png)\
+Šioje pamokoje sužinosi, kaip sukurti naują objektą savo projekte ir kokias galimybes tam turi.\
+[Atverk paveikslėlį](../../../media/game-tutorials/New-Object.png)
 
 Tam pirmiausia turi būti atsisiuntęs Pocket Code programėlę ir žinoti, kaip sukurti naują projektą. Jei reikia pagalbos, pažvelk į pamoką **[Naujas projektas](new-project.md)**.
 
 *Čia gali atsisiųsti pamoką PDF formatu:*
 
-[Naujas objektas](../../../media/game-tutorials/New-Object.pdf)
+[Atverk PDF](../../../media/game-tutorials/New-Object.pdf)
 
 ### 1. Sukurk naują objektą
 
@@ -23,15 +25,17 @@ Jį rasi Pocket Code programėlės pradiniame ekrane. Jei turi daugiau nei vien�
 
 ### 2. Sukurk naują objektą
 
-Dabar esi pasiruošęs sukurti naują objektą. Tam tiesiog paspausk geltoną pliuso mygtuką apatiniame dešiniajame kampe. Pasirodys naujas langas, kuriame gali pasirinkti vieną iš septynių galimybių.
+Dabar esi pasiruošęs sukurti naują objektą. Pasirodys naujas langas, kuriame gali pasirinkti vieną iš septynių galimybių.
 
-![Naujas objektas (1)](../../../media/game-tutorials/New-Object-1.png)
+![Naujas objektas (1)](../../../media/game-tutorials/New-Object-1.png)\
+Tam tiesiog paspausk geltoną pliuso mygtuką apatiniame dešiniajame kampe.\
+[Atverk paveikslėlį](../../../media/game-tutorials/New-Object-1.png)
 
 ### 3. Kūrimo būdai
 
-Štai galimybės, iš kurių gali rinktis:
-
-![Naujas objektas (2)](../../../media/game-tutorials/New-Object-2.png)
+![Naujas objektas (2)](../../../media/game-tutorials/New-Object-2.png)\
+Štai galimybės, iš kurių gali rinktis.\
+[Atverk paveikslėlį](../../../media/game-tutorials/New-Object-2.png)
 
 ### 4. Nupiešti paveikslėlį
 
@@ -43,9 +47,11 @@ Dabar turi suteikti savo paveikslėliui pavadinimą.
 
 ### 6. Padėk jį
 
-Po to turi vizualiai jį padėti, pastumdamas pirštu į kairę ar dešinę arba aukštyn ar žemyn. Išsaugok jį mygtuku viršutiniame dešiniajame kampe.
+Po to turi vizualiai jį padėti, pastumdamas pirštu į kairę ar dešinę arba aukštyn ar žemyn.
 
-![Naujas objektas (3)](../../../media/game-tutorials/New-Object-3.png)
+![Naujas objektas (3)](../../../media/game-tutorials/New-Object-3.png)\
+Išsaugok jį mygtuku viršutiniame dešiniajame kampe.\
+[Atverk paveikslėlį](../../../media/game-tutorials/New-Object-3.png)
 
 ### 7. Pavyko! Tu sukūrei savo naują objektą.
 

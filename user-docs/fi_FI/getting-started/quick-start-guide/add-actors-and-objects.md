@@ -2,12 +2,12 @@
 title: Lisää hahmoja ja objekteja
 description: Napauta plus-painiketta lisätäksesi projektiisi uuden hahmon tai objektin.
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Napauta plus-painiketta lisätäksesi projektiisi uuden hahmon tai objektin.
-
-![Hahmon lisääminen](../../../media/getting-started/FigurHinzufuegen.png)
+![Hahmon lisääminen](../../../media/getting-started/FigurHinzufuegen.png)\
+Napauta plus-painiketta lisätäksesi projektiisi uuden hahmon tai objektin.\
+[Avaa kuva](../../../media/getting-started/FigurHinzufuegen.png)
 
 Pocket Codessa voit lisätä projektiisi hahmon tai objektin monella tavalla:
 
@@ -29,4 +29,6 @@ Pocket Codessa voit lisätä projektiisi hahmon tai objektin monella tavalla:
 
 **Laitteen projektit**: Valitse projekti, josta haluat lisätä ensimmäisen hahmon skriptinsä kanssa projektiisi.
 
-![Uusi hahmo](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![Uusi hahmo](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+Pocket Codessa voit lisätä projektiisi hahmon tai objektin monella tavalla.\
+[Avaa kuva](../../../media/getting-started/NewActor-e1732794461668.jpg)

@@ -2,7 +2,7 @@
 title: Adicionar um fundo
 description: Podes adicionar um fundo ao teu projeto na Catrobat.
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Podes adicionar um fundo ao teu projeto na Catrobat.
@@ -11,15 +11,17 @@ Os fundos podem ser usados de várias formas. No Pocket Code, servem para melhor
 
 Para dispositivos de makerspace, como **plotters** ou **máquinas de bordar**, os fundos servem de modelos de desenho, como para cortes ou padrões de bordado.
 
-Para adicionar um fundo, carrega em “Fundo” na vista do projeto.
-
-![Carregar em Fundo](../../../media/getting-started/grafik-16.png)
+![Carregar em Fundo](../../../media/getting-started/grafik-16.png)\
+Para adicionar um fundo, carrega em “Fundo” na vista do projeto.\
+[Abrir imagem](../../../media/getting-started/grafik-16.png)
 
 Na **secção de scripts (2)**, podes programar o teu fundo — mas nem todos os blocos estão disponíveis. Os dois blocos seguintes são especialmente importantes: ![Definir transparência para 50%](../../../media/bricks/Set_transparency_to_50_pct_.png) e ![Definir tamanho para 60%](../../../media/bricks/Set_size_to_60_pct_.png)
 
-Na **secção de aparências (1)**, adicionas um fundo. Para isso, carrega no símbolo de mais.
+Na **secção de aparências (1)**, adicionas um fundo.
 
-![Adicionar fundo](../../../media/getting-started/grafik-14.png)
+![Adicionar fundo](../../../media/getting-started/grafik-14.png)\
+Para isso, carrega no símbolo de mais.\
+[Abrir imagem](../../../media/getting-started/grafik-14.png)
 
 Podes carregar as tuas próprias imagens, usar fundos predefinidos ou criar um fundo tu próprio.
 
@@ -31,6 +33,8 @@ Podes carregar as tuas próprias imagens, usar fundos predefinidos ou criar um f
 
 **Câmara**: Podes usar a câmara do teu dispositivo para tirar uma fotografia e adicioná-la como fundo.
 
-![grafik](../../../media/getting-started/grafik-17.png)
+![grafik](../../../media/getting-started/grafik-17.png)\
+Carrega na seta para trás no canto superior direito para voltar à **vista do projeto**.\
+[Abrir imagem](../../../media/getting-started/grafik-17.png)
 
-Agora já adicionaste um fundo. Carrega na seta para trás no canto superior direito para voltar à **vista do projeto**.
+Agora já adicionaste um fundo.

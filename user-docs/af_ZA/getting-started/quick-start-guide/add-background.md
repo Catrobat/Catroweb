@@ -2,7 +2,7 @@
 title: "Voeg agtergrond by"
 description: "Jy kan 'n agtergrond by jou projek voeg in Catrobat."
 order: 3
-source_hash: 'ae74ec831f71b2a7f35088a8b7e43074d876a5fa351ed722ed6c44d198b5b342'
+source_hash: '8a46fc41b2d9b97eac44081ba17c4b555e3cbe789a09f5fe7ec5ac82d17eddaf'
 ---
 
 Jy kan 'n agtergrond by jou projek voeg in Catrobat.
@@ -11,15 +11,17 @@ Agtergronde kan op verskillende maniere gebruik word. In Pocket Code kan hulle g
 
 Vir makerspace-toestelle soos **plotters** of **borduurmasjiene**, dien agtergronde as ontwerpvorms, soos vir sny of bordure patrone.
 
-Om 'n agtergrond by te voeg, tik op “Agtergrond” in die projekskerm.
-
-![Wenk oor agtergrond](../../../media/getting-started/grafik-16.png)
+![Wenk oor agtergrond](../../../media/getting-started/grafik-16.png)\
+Om 'n agtergrond by te voeg, tik op “Agtergrond” in die projekskerm.\
+[Maak prent oop](../../../media/getting-started/grafik-16.png)
 
 In die **skrif gedeelte(2)** kan jy jou agtergrond programmeer - egter nie alle blokke is beskikbaar vir hierdie. Die volgende twee blokke is veral belangrik: ![Stel deursigtigheid op 50 persent](../../../media/bricks/Set_transparency_to_50_pct_.png) en ![Stel grootte tot 60 pct](../../../media/bricks/Set_size_to_60_pct_.png)
 
-In die **lyk afdeling(1)** voeg jy 'n agtergrond by. Om dit te doen, tik op die + simbool.
+In die **lyk afdeling(1)** voeg jy 'n agtergrond by.
 
-![Voeg 'n agtergrond by](../../../media/getting-started/grafik-14.png)
+![Voeg 'n agtergrond by](../../../media/getting-started/grafik-14.png)\
+Om dit te doen, tik op die + simbool.\
+[Maak prent oop](../../../media/getting-started/grafik-14.png)
 
 Jy kan jou eie beelde oplaai, vooraf gedefinieerde agtergronde gebruik of 'n agtergrond self skep.
 
@@ -31,6 +33,8 @@ Jy kan jou eie beelde oplaai, vooraf gedefinieerde agtergronde gebruik of 'n agt
 
 **Kamera**: Jy kan die kamera van jou toestel gebruik om 'n foto te neem en dit as agtergrond by te voeg.
 
-![Kies uit die mediabiblioteek](../../../media/getting-started/grafik-17.png)
+![Kies uit die mediabiblioteek](../../../media/getting-started/grafik-17.png)\
+Klik op die agterste pyl in die boonste regterkant om terug te keer na die **Projekskerm**.\
+[Maak prent oop](../../../media/getting-started/grafik-17.png)
 
-Jy het nou 'n agtergrond bygevoeg. Klik op die agterste pyl in die boonste regterkant om terug te keer na die **Projekskerm**.
+Jy het nou 'n agtergrond bygevoeg.

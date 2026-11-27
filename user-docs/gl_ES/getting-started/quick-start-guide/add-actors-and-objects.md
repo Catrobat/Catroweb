@@ -2,12 +2,12 @@
 title: "Adición de actores e obxectos"
 description: "Pulse o botón máis para engadir unha nova figura ou obxecto ao seu proxecto."
 order: 2
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Pulse o botón máis para engadir unha nova figura ou obxecto ao seu proxecto.
-
-![Engadir un actor](../../../media/getting-started/FigurHinzufuegen.png)
+![Engadir un actor](../../../media/getting-started/FigurHinzufuegen.png)\
+Pulse o botón máis para engadir unha nova figura ou obxecto ao seu proxecto.\
+[Abrir a imaxe](../../../media/getting-started/FigurHinzufuegen.png)
 
 En Pocket Code, pode engadir un carácter ou obxecto ao seu proxecto de varias maneiras:
 
@@ -29,4 +29,6 @@ En Pocket Code, pode engadir un carácter ou obxecto ao seu proxecto de varias m
 
 **Proxectos locais**: Seleccione un proxecto do que desexe inserir o primeiro actor xunto co guión no seu proxecto.
 
-![O novo actor](../../../media/getting-started/NewActor-e1732794461668.jpg)
+![O novo actor](../../../media/getting-started/NewActor-e1732794461668.jpg)\
+En Pocket Code, pode engadir un carácter ou obxecto ao seu proxecto de varias maneiras.\
+[Abrir a imaxe](../../../media/getting-started/NewActor-e1732794461668.jpg)

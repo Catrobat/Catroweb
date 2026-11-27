@@ -2,23 +2,40 @@
 title: Liiku käyttöliittymässä
 description: "Kun käynnistät Pocket Coden, näet tämän päänäkymän."
 order: 0
-source_hash: 'cbf2480bf8013b4cd90c15ef9dbb7914d7a1afbd0771cbc3261b60af493a8c2c'
+source_hash: 'feacd530be149adbad71da0264c3c7400343c4e083937d891b7cc442e6c6bff5'
 ---
 
 Kun käynnistät Pocket Coden, näet tämän päänäkymän.
 
-![Päänäkymä](../../../media/getting-started/MainScreen-e1732269599192.jpg)
+![Päänäkymä](../../../media/getting-started/MainScreen-e1732269599192.jpg)\
+Kun käynnistät Pocket Coden, näet tämän päänäkymän.\
+[Avaa kuva](../../../media/getting-started/MainScreen-e1732269599192.jpg)
 
-Oikeassa yläkulmassa on ![Ohje](../../../media/getting-started/Screenshot-2024-11-22-111748.png)-merkki. Sen kautta pääset Catrobat-dokumentaatioon, jossa on hyödyllisiä vinkkejä sinulle.
+![Ohje](../../../media/getting-started/Screenshot-2024-11-22-111748.png)\
+Oikeassa yläkulmassa on -merkki.
 
-Sen vieressä on ![Valikko](../../../media/getting-started/Screenshot-2024-11-22-111804.png)-valikko. Sieltä pääset helposti asetuksiin, joissa voit vaihtaa kieltä tai ottaa käyttöön lisäominaisuuksia, kuten piirturipalikat ja muuta.
+Sen kautta pääset Catrobat-dokumentaatioon, jossa on hyödyllisiä vinkkejä sinulle.
 
-Alla näet viimeksi muokkaamasi projektin. Napsauta ![Muokkauskuvaketta](../../../media/getting-started/Screenshot-2024-11-22-111825.png), jotta pääset projektinäkymään ja voit jatkaa projektisi kehittämistä.
+![Valikko](../../../media/getting-started/Screenshot-2024-11-22-111804.png)\
+Sen vieressä on -valikko.
 
-Käynnistä projektisi toistopainikkeella ![Käynnistä projekti](../../../media/getting-started/Screenshot-2024-11-22-111818.png).
+Sieltä pääset helposti asetuksiin, joissa voit vaihtaa kieltä tai ottaa käyttöön lisäominaisuuksia, kuten piirturipalikat ja muuta.
 
-Napsauttamalla kohtaa Laitteen projektit pääset tallennettuihin projekteihisi. ![Laitteen projektit](../../../media/getting-started/Screenshot-2024-11-22-111832.png)
+![Muokkauskuvaketta](../../../media/getting-started/Screenshot-2024-11-22-111825.png)\
+Napsauta, jotta pääset projektinäkymään ja voit jatkaa projektisi kehittämistä.
 
-Jos haluat tutustua muiden käyttäjien projekteihin ja työstää niitä, napsauta Share-palvelussa kohtaa Catrobat Community. Sieltä löydät paljon hienoja projekteja. ![Catrobat Community](../../../media/getting-started/Screenshot-2024-11-22-111847.png)
+Alla näet viimeksi muokkaamasi projektin.
 
-Jos haluat luoda uuden projektin, napsauta plus-kuvaketta. ![Lisää](../../../media/getting-started/Screenshot-2024-11-22-143219.png)
+![Käynnistä projekti](../../../media/getting-started/Screenshot-2024-11-22-111818.png)\
+Käynnistä projektisi toistopainikkeella.
+
+![Laitteen projektit](../../../media/getting-started/Screenshot-2024-11-22-111832.png)\
+Napsauttamalla kohtaa Laitteen projektit pääset tallennettuihin projekteihisi.
+
+![Catrobat Community](../../../media/getting-started/Screenshot-2024-11-22-111847.png)\
+Jos haluat tutustua muiden käyttäjien projekteihin ja työstää niitä, napsauta Share-palvelussa kohtaa Catrobat Community.
+
+Sieltä löydät paljon hienoja projekteja.
+
+![Lisää](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Jos haluat luoda uuden projektin, napsauta plus-kuvaketta.

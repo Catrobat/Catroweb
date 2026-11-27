@@ -2,23 +2,40 @@
 title: Ekranda gezinmek
 description: "Pocket Code’u açtığında şu ana ekranı görürsün."
 order: 0
-source_hash: 'cbf2480bf8013b4cd90c15ef9dbb7914d7a1afbd0771cbc3261b60af493a8c2c'
+source_hash: 'feacd530be149adbad71da0264c3c7400343c4e083937d891b7cc442e6c6bff5'
 ---
 
 Pocket Code’u açtığında şu ana ekranı görürsün.
 
-![Ana ekran](../../../media/getting-started/MainScreen-e1732269599192.jpg)
+![Ana ekran](../../../media/getting-started/MainScreen-e1732269599192.jpg)\
+Pocket Code’u açtığında şu ana ekranı görürsün.\
+[Resmi aç](../../../media/getting-started/MainScreen-e1732269599192.jpg)
 
-Sağ üst köşede bir ![Yardım](../../../media/getting-started/Screenshot-2024-11-22-111748.png) simgesi var. Bu simge seni Catrobat belgelerine götürür. Orada sana yardımcı olacak ipuçları bulursun.
+![Yardım](../../../media/getting-started/Screenshot-2024-11-22-111748.png)\
+Sağ üst köşede bir simgesi var.
 
-Onun yanında menü ![Menü](../../../media/getting-started/Screenshot-2024-11-22-111804.png) var. Oradan kolayca ayarlara gidebilirsin. Ayarlarda dili değiştirebilir veya çizici blokları gibi eklentileri açabilirsin.
+Bu simge seni Catrobat belgelerine götürür. Orada sana yardımcı olacak ipuçları bulursun.
 
-Altında en son düzenlediğin projeyi görürsün. Düzenleme simgesine ![Düzenleme simgesi](../../../media/getting-started/Screenshot-2024-11-22-111825.png) dokun. Böylece proje ekranına gidersin ve projen üzerinde çalışmaya devam edebilirsin.
+![Menü](../../../media/getting-started/Screenshot-2024-11-22-111804.png)\
+Onun yanında menü var.
 
-Projeni başlatmak için oynat düğmesini ![Projeni başlat](../../../media/getting-started/Screenshot-2024-11-22-111818.png) kullan.
+Oradan kolayca ayarlara gidebilirsin. Ayarlarda dili değiştirebilir veya çizici blokları gibi eklentileri açabilirsin.
 
-Cihazdaki projelere dokunursan kayıtlı projelerini görürsün. ![Cihazdaki projeler](../../../media/getting-started/Screenshot-2024-11-22-111832.png)
+![Düzenleme simgesi](../../../media/getting-started/Screenshot-2024-11-22-111825.png)\
+Düzenleme simgesine dokun.
 
-Başka kullanıcıların projelerini tanımak ve onlar üzerinde çalışmak istiyorsan, Share’de Catrobat Topluluğu’na dokun. Orada birçok harika proje bulursun. ![Catrobat Topluluğu](../../../media/getting-started/Screenshot-2024-11-22-111847.png)
+Altında en son düzenlediğin projeyi görürsün. Böylece proje ekranına gidersin ve projen üzerinde çalışmaya devam edebilirsin.
 
-Yeni bir proje yapmak istiyorsan artı simgesine dokun. ![Ekle](../../../media/getting-started/Screenshot-2024-11-22-143219.png)
+![Projeni başlat](../../../media/getting-started/Screenshot-2024-11-22-111818.png)\
+Projeni başlatmak için oynat düğmesini kullan.
+
+![Cihazdaki projeler](../../../media/getting-started/Screenshot-2024-11-22-111832.png)\
+Cihazdaki projelere dokunursan kayıtlı projelerini görürsün.
+
+![Catrobat Topluluğu](../../../media/getting-started/Screenshot-2024-11-22-111847.png)\
+Başka kullanıcıların projelerini tanımak ve onlar üzerinde çalışmak istiyorsan, Share’de Catrobat Topluluğu’na dokun.
+
+Orada birçok harika proje bulursun.
+
+![Ekle](../../../media/getting-started/Screenshot-2024-11-22-143219.png)\
+Yeni bir proje yapmak istiyorsan artı simgesine dokun.

@@ -3,12 +3,12 @@ title: Figuren und Objekte hinzufügen
 description: "Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Projekt hinzuzufügen."
 order: 2
 reviewed: true
-source_hash: '9b0a7c834b27afe0966e855a61d70da9da4e88afc6f5b809c78c11c8f811e2f2'
+source_hash: 'eb44ab034386dcd8a2d2428a9a0b42d7d01a74aa5fcb2f9d038e2f99d5c8d09f'
 ---
 
-Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Projekt hinzuzufügen.
-
-![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)
+![FigurHinzufuegen](../../../media/getting-started/FigurHinzufuegen.png)\
+Tippe auf den Plus-Button, um eine neue Figur oder ein neues Objekt deinem Projekt hinzuzufügen.\
+[Bild öffnen](../../../media/getting-started/FigurHinzufuegen.png)
 
 In Pocket Code kannst du auf verschiedene Arten eine Figur oder ein Objekt zu deinem Projekt hinzufügen:
 
@@ -30,4 +30,6 @@ In Pocket Code kannst du auf verschiedene Arten eine Figur oder ein Objekt zu de
 
 **Lokale Projekte**: Wähle ein Projekt aus, von dem du die erste Figur samt Skript in dein Projekt einfügst.
 
-![Figur Hinzufügen](../../../media/getting-started/FigurHinzufuegen-e1732695815199.jpg)
+![Figur Hinzufügen](../../../media/getting-started/FigurHinzufuegen-e1732695815199.jpg)\
+In Pocket Code kannst du auf verschiedene Arten eine Figur oder ein Objekt zu deinem Projekt hinzufügen.\
+[Bild öffnen](../../../media/getting-started/FigurHinzufuegen-e1732695815199.jpg)
