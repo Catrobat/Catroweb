@@ -24,15 +24,13 @@ class MediaCategoryRepository extends ServiceEntityRepository
   #[\Override]
   public function findAll(): array
   {
-    /** @var list<MediaCategory> $categories */
-    $categories = $this->createQueryBuilder('c')
-      ->orderBy('c.priority', \SortDirection::Ascending)
-      ->addOrderBy('c.name', \SortDirection::Ascending)
-      ->getQuery()
-      ->getResult()
-    ;
-
-    return $categories;
+    return array_values(
+      $this->createQueryBuilder('c')
+        ->orderBy('c.priority', \SortDirection::Ascending)
+        ->addOrderBy('c.name', \SortDirection::Ascending)
+        ->getQuery()
+        ->getResult()
+    );
   }
 
   /**
