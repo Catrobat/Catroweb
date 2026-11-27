@@ -844,6 +844,7 @@ class DataFixturesContext implements Context
   public function theProjectShouldBeMarkedWithExtensionsInTheDatabase(string $id, string $count): void
   {
     $project = $this->getProjectManager()->find($id);
+    Assert::assertNotNull($project, 'Project not found');
     $this->getManager()->refresh($project);
     $project_extensions = $project->getExtensions();
     Assert::assertCount((int) $count, $project_extensions, 'Too much or too less extensions found!');
@@ -2105,6 +2106,7 @@ class DataFixturesContext implements Context
   public function thereShouldBeStatistics(string $user_count, string $project_count): void
   {
     $statistic = $this->getStatisticsRepository()->findOneBy(['id' => 1]);
+    Assert::assertNotNull($statistic, 'Statistics not found');
     $this->getManager()->refresh($statistic);
     Assert::assertSame($user_count, $statistic->getUsers(), 'Expected user count check failed');
     Assert::assertSame($project_count, $statistic->getProjects(), 'Expected project count check failed');
