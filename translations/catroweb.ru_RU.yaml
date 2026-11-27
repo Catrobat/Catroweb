@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Войти и сохранить аккаунт'
 
 docs:
+  play_example: "Запусти пример"
   home_search: "Найди блок или урок"
   home_search_submit: "Поиск в документации"
   search_guides: "Руководства"

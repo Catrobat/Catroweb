@@ -36,6 +36,33 @@ Feature: User docs pages, synced from user-docs/
     And the element ".docs-content p:has(img)" should contain "Tap the cat to jump."
     And the element ".docs-content p:has(img) > a[href^='/docs-media/tutorials/jump.png']" should contain "Open image"
 
+  Scenario: A curated project has a local preview and starts with the player unloaded
+    Given there are users:
+      | id | name     |
+      | 1  | Catrobat |
+    And there are projects:
+      | id                                   | name         | owned by | language version |
+      | 11111111-1111-4111-8111-111111111111 | Glide sample | Catrobat | 0.9              |
+    And the docs are synced from the test docs folder
+    When I go to "/app/docs/tutorials/jump"
+    And I wait for the page to be loaded
+    Then I should see a ".docs-project-preview img[src^='/docs-media/'][width='480'][height='480']" element
+    And the element ".docs-project-preview__play" should contain "Play an example"
+    And I should not see a ".docs-content iframe" element
+
+  Scenario: A curated project below the minimum language version keeps the ordinary project card
+    Given there are users:
+      | id | name     |
+      | 1  | Catrobat |
+    And there are projects:
+      | id                                   | name         | owned by | language version |
+      | 11111111-1111-4111-8111-111111111111 | Glide sample | Catrobat | 0.89             |
+    And the docs are synced from the test docs folder
+    When I go to "/app/docs/tutorials/jump"
+    And I wait for the page to be loaded
+    Then the element ".docs-embed--project" should contain "Glide sample"
+    And I should not see a ".docs-project-preview__play" element
+
   Scenario: A video loads from YouTube only after a click
     When I go to "/app/docs/getting-started/first-project"
     And I wait for the page to be loaded

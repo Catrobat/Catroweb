@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Qqen akken ad ḥerzeɣ amiḍan-iw'
 
 docs:
+  play_example: "Urar s umedya"
   home_search: "Af iḥric neɣ tamsirt"
   home_search_submit: "Nadi deg isemliyen"
   search_guides: "Imniren"

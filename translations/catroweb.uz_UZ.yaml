@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Hisobimni saqlash uchun kirish'
 
 docs:
+  play_example: "Namunani o‘yna"
   home_search: "Blok yoki dars top"
   home_search_submit: "Qo‘llanmalardan izla"
   search_guides: "Qoʻllanmalar"

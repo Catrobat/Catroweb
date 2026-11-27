@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'എന്റെ അക്കൗണ്ട് നിലനിർത്താൻ ലോഗിൻ ചെയ്യുക'
 
 docs:
+  play_example: "ഒരു ഉദാഹരണം കളിക്കൂ"
   home_search: "ഒരു ബ്ലോക്കോ പാഠമോ കണ്ടെത്തൂ"
   home_search_submit: "സഹായരേഖകളിൽ തിരയൂ"
   search_guides: "ഗൈഡുകൾ"

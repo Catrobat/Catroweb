@@ -37,7 +37,8 @@
 {% endblock %}
 
 {% block body %}
-  <div class="docs{% if compact_lesson|default(false) %} docs--compact-lesson{% endif %}" {{ stimulus_controller('docs') }} data-action="click->docs#playVideo"
+  <div class="docs{% if compact_lesson|default(false) %} docs--compact-lesson{% endif %}" {{ stimulus_controller('docs') }} data-action="click->docs#playVideo click->docs#playProject"
+       data-docs-player-origin-value="{{ isWebview() ? '' : player_origin }}"
        data-trans-video="{{ 'docs.video'|trans({}, 'catroweb')|e('html_attr') }}">
     {% if docs_nav.crumbs is not empty %}
       {{ breadcrumb(docs_nav.crumbs) }}

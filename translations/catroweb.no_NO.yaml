@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Logg på for å beholde kontoen min'
 
 docs:
+  play_example: "Spill et eksempel"
   home_search: "Finn en blokk eller veiledning"
   home_search_submit: "Søk i dokumentasjonen"
   search_guides: "Veiledninger"

@@ -1056,6 +1056,7 @@ inactiveAccount:
   button: 'Hasi saioa nire kontua gordetzeko'
 
 docs:
+  play_example: "Jokatu adibide batekin"
   home_search: "Bilatu bloke edo tutorial bat"
   home_search_submit: "Bilatu dokumentazioan"
   search_guides: "Gidak"

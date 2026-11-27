@@ -1058,6 +1058,7 @@ inactiveAccount:
   button: 'ننوځه چې حساب مې پاتې شي'
 
 docs:
+  play_example: "یوه بېلګه وچلوه"
   home_search: "بلاک یا درس پیدا کړه"
   home_search_submit: "په لارښود کې ولټوه"
   search_guides: "لارښودونه"

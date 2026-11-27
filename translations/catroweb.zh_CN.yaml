@@ -1039,6 +1039,7 @@ inactiveAccount:
   button: '登录以保留我的帐户'
 
 docs:
+  play_example: "玩一个示例"
   home_search: "查找积木或教程"
   home_search_submit: "搜索文档"
   search_guides: "指南"

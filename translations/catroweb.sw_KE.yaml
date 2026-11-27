@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Ingia ili kuweka akaunti yangu'
 
 docs:
+  play_example: "Cheza mfano"
   home_search: "Tafuta kizuizi au somo"
   home_search_submit: "Tafuta kwenye mwongozo"
   search_guides: "Miongozo"

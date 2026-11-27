@@ -531,12 +531,10 @@
       <code><![CDATA[$project]]></code>
       <code><![CDATA[$project]]></code>
       <code><![CDATA[$project]]></code>
-      <code><![CDATA[$project]]></code>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getUser()]]></code>
       <code><![CDATA[$project->getUser()]]></code>
       <code><![CDATA[$project->getUser()]]></code>
-      <code><![CDATA[$statistic]]></code>
       <code><![CDATA[$studio]]></code>
       <code><![CDATA[$studio]]></code>
       <code><![CDATA[$studio]]></code>

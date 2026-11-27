@@ -1057,6 +1057,7 @@ inactiveAccount:
   button: 'Teken aan om my rekening te hou'
 
 docs:
+  play_example: "Speel ’n voorbeeld"
   home_search: "Soek ’n blok of les"
   home_search_submit: "Soek in die dokumentasie"
   search_guides: "Gidse"

@@ -1034,6 +1034,7 @@ inactiveAccount:
   button: 'Најави се за да ја задржиш сметката'
 
 docs:
+  play_example: "Пушти пример"
   home_search: "Најди блок или лекција"
   home_search_submit: "Пребарај во документацијата"
   search_guides: "Водичи"

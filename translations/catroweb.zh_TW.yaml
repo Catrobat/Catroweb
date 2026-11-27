@@ -1036,6 +1036,7 @@ inactiveAccount:
   button: '登入以保留我的帳號'
 
 docs:
+  play_example: "玩一個範例"
   home_search: "搜尋積木或教學"
   home_search_submit: "搜尋文件"
   search_guides: "指南"

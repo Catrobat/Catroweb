@@ -334,13 +334,13 @@ class ScratchToCatrobatConverter
     }
 
     foreach ($target['scratchMonitors'] ?? [] as $monitor) {
-      $variable = $target['variables'][$monitor['id'] ?? ''] ?? null;
-      if (!isset($monitor['display']) || null === $variable) {
+      $name = (string) ($target['variables'][$monitor['id'] ?? ''][0] ?? '');
+      if (!isset($monitor['display']) || '' === $name) {
         continue;
       }
 
       $scripts[] = $c->script('StartScript', [$c->brick('ForeverBrick', [], [$c->list('loopBricks', [
-        $c->brick('SetVariableBrick', ['VARIABLE' => Formula::fn('JOIN', Formula::string($variable[0].': '), Formula::variable($variable[0]))], [], [$model->variableElement($key, $monitor['display'])]),
+        $c->brick('SetVariableBrick', ['VARIABLE' => Formula::fn('JOIN', Formula::string($name.': '), Formula::variable($name))], [], [$model->variableElement($key, $monitor['display'])]),
       ])])]);
     }
 

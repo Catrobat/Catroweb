@@ -1059,6 +1059,7 @@ inactiveAccount:
   button: 'ورود برای نگه داشتن حسابم'
 
 docs:
+  play_example: "یک نمونه را اجرا کن"
   home_search: "یک بلوک یا آموزش پیدا کن"
   home_search_submit: "جست‌وجو در راهنما"
   search_guides: "راهنماها"

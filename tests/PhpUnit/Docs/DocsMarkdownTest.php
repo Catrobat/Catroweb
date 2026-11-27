@@ -150,6 +150,33 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringContainsString('<span class="docs-embed__name">Jump &amp; Run</span>', $html);
   }
 
+  public function testProjectWithLocalFrameDoesNotLoadThePlayer(): void
+  {
+    $html = $this->markdown()->convert(
+      "::project{id=docs-example-project}\n",
+      'en/tutorials/jump.md',
+      ['game-tutorials/examples/docs-example-project.webp' => '0123456789'],
+    )['html'];
+
+    $this->assertStringContainsString('src="/docs-media/game-tutorials/examples/docs-example-project.webp?v=0123456789"', $html);
+    $this->assertStringContainsString('width="480" height="480"', $html);
+    $this->assertStringContainsString('data-docs-project-id="docs-example-project"', $html);
+    $this->assertStringContainsString('Play an example', $html);
+    $this->assertStringNotContainsString('<iframe', $html);
+  }
+
+  public function testProjectWithoutPlayerSupportKeepsTheOrdinaryCard(): void
+  {
+    $html = $this->markdown(false)->convert(
+      "::project{id=docs-example-project}\n",
+      'en/tutorials/jump.md',
+      ['game-tutorials/examples/docs-example-project.webp' => '0123456789'],
+    )['html'];
+
+    $this->assertStringContainsString('class="docs-embed docs-embed--project"', $html);
+    $this->assertStringNotContainsString('data-docs-project-id', $html);
+  }
+
   public function testEmbedsMayBeIndentedLikeOtherBlocks(): void
   {
     $html = $this->markdown()->convert("  ::video{youtube=dQw4w9WgXcQ}\n\n- ::video{youtube=dQw4w9WgXcQ}\n", 'en/index.md')['html'];
@@ -248,10 +275,10 @@ final class DocsMarkdownTest extends TestCase
     $this->assertStringNotContainsString('share.example', $html);
   }
 
-  private function markdown(): DocsMarkdown
+  private function markdown(bool $playable = true): DocsMarkdown
   {
     return new DocsMarkdown('https://blob.example/', static fn (string $id): ?array => 'docs-example-project' === $id
-      ? ['name' => 'Jump & Run', 'author' => 'Catrobat', 'thumbnail' => '/thumb.png'] : null);
+      ? ['name' => 'Jump & Run', 'author' => 'Catrobat', 'thumbnail' => '/thumb.png', 'playable' => $playable] : null);
   }
 
   private function fixture(string $file): string

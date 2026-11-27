@@ -1057,6 +1057,7 @@ inactiveAccount:
   button: 'ನನ್ನ ಖಾತೆ ಉಳಿಸಲು ಲಾಗಿನ್ ಮಾಡು'
 
 docs:
+  play_example: "ಒಂದು ಉದಾಹರಣೆಯನ್ನು ಚಲಾಯಿಸು"
   home_search: "ಬ್ಲಾಕ್ ಅಥವಾ ಪಾಠ ಹುಡುಕು"
   home_search_submit: "ದಾಖಲೆಗಳಲ್ಲಿ ಹುಡುಕು"
   search_guides: "ಮಾರ್ಗದರ್ಶಿಗಳು"
