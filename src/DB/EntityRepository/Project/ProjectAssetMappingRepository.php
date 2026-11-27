@@ -21,13 +21,16 @@ class ProjectAssetMappingRepository extends ServiceEntityRepository
   /** @return list<ProjectAssetMapping> */
   public function findByProjectId(string $projectId): array
   {
-    return $this->createQueryBuilder('m')
+    /** @var list<ProjectAssetMapping> $mappings */
+    $mappings = $this->createQueryBuilder('m')
       ->join('m.project', 'p')
       ->where('p.id = :projectId')
       ->setParameter('projectId', $projectId)
       ->getQuery()
       ->getResult()
     ;
+
+    return $mappings;
   }
 
   public function hasAnyForProject(string $projectId): bool
