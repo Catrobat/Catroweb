@@ -2,12 +2,10 @@
 title: Første klosser
 description: "I denne veiledningen lærer du hvor du finner ulike klosser for å programmere et objekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 I denne veiledningen lærer du hvor du finner ulike klosser for å programmere et objekt. I tillegg får du en god oversikt over kategoriene av klosser.
-
-![Første klosser](../../../media/game-tutorials/First-Bricks.png)
 
 For å sette inn klosser og programmere objektet ditt, bør du allerede ha laget et prosjekt med et objekt. Hvis du trenger hjelp med dette, kan du se på veiledningen **[Nytt objekt](new-object.md)**.
 
@@ -23,13 +21,17 @@ Først må du åpne prosjektet ditt. Du bør allerede ha laget et objekt (hvis i
 
 Deretter ser du at det allerede finnes noen klosser. Disse klossene ble laget da vi plasserte objektet visuelt.
 
-Disse klossene gjør ikke mer enn å plassere objektet vårt akkurat der vi valgte i begynnelsen, når prosjektet starter. Du kan også endre denne posisjonen når som helst her.
+Disse klossene gjør ikke mer enn å plassere objektet vårt akkurat der vi valgte i begynnelsen, når scenen starter. Du kan også endre denne posisjonen når som helst her.
 
-![Første klosser (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Sett inn klosser
 
 Nå kan du lage flere klosser ved å trykke på den gule pluss-knappen nederst til høyre. Du ser da et nytt vindu med flere kategorier av klosser. Disse kategoriene forklares i neste steg.
+
+![Første klosser (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Kategorier av klosser
 
@@ -40,6 +42,8 @@ Dette er de ulike kategoriene av klosser:
 ### 5. Sett inn den første klossen
 
 Til våre første klosser vil vi bruke klossen «Gli 1 sekund til x: y:». Du finner den i kategorien «Bevegelse». Med formelredigeringen kan du endre antall sekunder og posisjonen X og Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Plasser klossen
 

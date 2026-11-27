@@ -2,12 +2,10 @@
 title: Pirmieji blokai
 description: "Šioje pamokoje sužinosi, kur rasti įvairius blokus objektui programuoti."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Šioje pamokoje sužinosi, kur rasti įvairius blokus objektui programuoti. Be to, ši pamoka suteikia gerą apžvalgą apie blokų kategorijas.
-
-![Pirmieji blokai](../../../media/game-tutorials/First-Bricks.png)
 
 Norėdamas įdėti blokus ir užprogramuoti savo objektą, turi jau būti sukūręs projektą su objektu. Jei reikia pagalbos, gali pažvelgti į pamoką **[Naujas objektas](new-object.md)**.
 
@@ -23,13 +21,17 @@ Pirmiausia turi atidaryti savo projektą. Objektą jau turėtum būti sukūręs 
 
 Po to pamatysi, kad jau yra keli blokai. Šie blokai buvo sukurti tada, kai vizualiai padėjai objektą.
 
-Šie blokai tik padeda mūsų objektą į tikslią vietą, kurią pasirinkome pradžioje, kai projektas prasideda. Šią vietą taip pat gali bet kada pakeisti.
+Šie blokai tik padeda mūsų objektą į tikslią vietą, kurią pasirinkome pradžioje, kai epizodas prasideda. Šią vietą taip pat gali bet kada pakeisti.
 
-![Pirmieji blokai (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Įdėk blokus
 
 Dabar gali sukurti daugiau blokų paspausdamas geltoną pliuso mygtuką apatiniame dešiniajame kampe. Pasirodys naujas langas su keliomis blokų kategorijomis. Šios kategorijos aprašytos kitame žingsnyje.
+
+![Pirmieji blokai (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Blokų kategorijos
 
@@ -40,6 +42,8 @@ Dabar gali sukurti daugiau blokų paspausdamas geltoną pliuso mygtuką apatinia
 ### 5. Įdėk pirmąjį bloką
 
 Savo pirmiesiems blokams naudosime bloką „Slinkti per 1 sekundę iki x: y:“. Jį rasi kategorijoje „Judėjimas“. Su formulių redaktoriumi gali keisti sekundžių skaičių ir padėtį X bei Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Padėk bloką
 

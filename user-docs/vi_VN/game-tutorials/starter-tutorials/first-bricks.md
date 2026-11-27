@@ -2,12 +2,10 @@
 title: Khối lệnh đầu tiên
 description: "Trong hướng dẫn này, bạn sẽ học cách tìm các khối lệnh khác nhau để lập trình cho một đối tượng."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Trong hướng dẫn này, bạn sẽ học cách tìm các khối lệnh khác nhau để lập trình cho một đối tượng. Ngoài ra, hướng dẫn này cũng cho bạn cái nhìn tổng quan tốt về các nhóm khối lệnh.
-
-![Khối lệnh đầu tiên](../../../media/game-tutorials/First-Bricks.png)
 
 Để thêm khối lệnh và lập trình cho đối tượng, bạn cần đã tạo một dự án có đối tượng. Nếu cần hỗ trợ, bạn có thể xem hướng dẫn **[Đối tượng mới](new-object.md)**.
 
@@ -23,13 +21,17 @@ Trước hết, bạn cần mở dự án của mình. Bạn cần đã tạo m�
 
 Sau đó bạn sẽ thấy đã có sẵn một vài khối lệnh. Những khối này được tạo ra khi bạn đặt đối tượng bằng cách kéo thả trực quan.
 
-Các khối này chỉ làm nhiệm vụ đặt đối tượng vào đúng vị trí bạn đã chọn ở đầu khi dự án bắt đầu. Bạn cũng có thể thay đổi vị trí này bất cứ lúc nào ngay tại đây.
+Các khối này chỉ làm nhiệm vụ đặt đối tượng vào đúng vị trí bạn đã chọn ở đầu khi cảnh bắt đầu. Bạn cũng có thể thay đổi vị trí này bất cứ lúc nào ngay tại đây.
 
-![Khối lệnh đầu tiên (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Thêm khối lệnh
 
 Bây giờ bạn có thể tạo thêm khối lệnh bằng cách nhấn nút dấu cộng màu vàng ở góc dưới bên phải. Bạn sẽ thấy một cửa sổ mới với nhiều nhóm khối lệnh. Các nhóm này được mô tả ở bước tiếp theo.
+
+![Khối lệnh đầu tiên (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Các nhóm khối lệnh
 
@@ -40,6 +42,8 @@ Bây giờ bạn có thể tạo thêm khối lệnh bằng cách nhấn nút d�
 ### 5. Thêm khối lệnh đầu tiên
 
 Với khối lệnh đầu tiên, chúng ta sẽ dùng khối “Lướt trong 1 giây đến X: Y:”. Bạn có thể tìm thấy nó trong nhóm Chuyển động. Với Trình soạn thảo công thức, bạn có thể chỉnh số giây và vị trí X, Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Đặt khối lệnh
 

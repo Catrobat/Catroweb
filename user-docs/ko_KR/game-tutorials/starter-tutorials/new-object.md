@@ -2,7 +2,7 @@
 title: 새 오브젝트
 description: "이 튜토리얼에서는 프로젝트에 새 오브젝트를 만드는 법과 그 방법들을 배워요."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 이 튜토리얼에서는 프로젝트에 새 오브젝트를 만드는 법과 그 방법들을 배워요.
@@ -46,6 +46,8 @@ Pocket Code 앱의 홈 화면에서 찾을 수 있어요. 프로젝트가 여러
 그다음에는 손가락으로 왼쪽/오른쪽이나 위/아래로 옮겨서 화면에서 위치를 정해야 해요. 오른쪽 위 모서리의 버튼으로 저장하세요.
 
 ![New Object (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. 해냈어요! 나만의 새 오브젝트를 만들었어요.
 

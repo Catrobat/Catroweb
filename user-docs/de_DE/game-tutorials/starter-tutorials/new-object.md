@@ -3,6 +3,7 @@ title: Neues Objekt
 description: "In diesem Tutorial erfährst du, wie du ein neues Objekt in deinem Projekt erstellst und welche verschiedenen Möglichkeiten dir dabei zur Verfügung stehen."
 order: 0
 reviewed: true
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 In diesem Tutorial erfährst du, wie du ein neues Objekt in deinem Projekt erstellst und welche verschiedenen Möglichkeiten dir dabei zur Verfügung stehen.
@@ -46,6 +47,8 @@ Nun musst du deinem Bild einen Namen geben.
 Danach musst du es visuell platzieren, indem du es mit deinem Finger nach links/rechts oder oben/unten verschiebst. Du musst es mit dem Button in der oberen rechten Ecke speichern.
 
 ![Neues Objekt (3)](../../../media/game-tutorials/Neues-Objekt-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Du hast es geschafft! Du hast ein eigenes neues Objekt erstellt.
 

@@ -2,12 +2,10 @@
 title: Primele blocuri
 description: "În acest tutorial vei învăța unde să găsești diferite blocuri ca să programezi un obiect."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 În acest tutorial vei învăța unde să găsești diferite blocuri ca să programezi un obiect. În plus, tutorialul îți oferă o imagine de ansamblu bună asupra categoriilor de blocuri.
-
-![Primele blocuri](../../../media/game-tutorials/First-Bricks.png)
 
 Ca să introduci blocuri și să îți programezi obiectul, trebuie deja să ai un proiect cu un obiect. Dacă ai nevoie de ajutor cu asta, poți arunca o privire la tutorialul **[Obiect nou](new-object.md)**.
 
@@ -23,13 +21,17 @@ Mai întâi, trebuie să deschizi proiectul tău. Ar trebui să ai deja un obiec
 
 După aceea vei vedea că există deja niște blocuri. Blocurile acestea au fost create când am plasat obiectul vizual.
 
-Aceste blocuri nu fac altceva decât să pună obiectul nostru exact în poziția pe care am ales-o la început, când pornește proiectul. Poți schimba și această poziție oricând, chiar aici.
+Aceste blocuri nu fac altceva decât să pună obiectul nostru exact în poziția pe care am ales-o la început, când pornește scena. Poți schimba și această poziție oricând, chiar aici.
 
-![Primele blocuri (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Introdu blocuri
 
 Acum poți crea mai multe blocuri apăsând pe butonul galben cu plus din colțul din dreapta jos. Vei vedea o fereastră nouă cu mai multe categorii de blocuri. Aceste categorii sunt descrise în pasul următor.
+
+![Primele blocuri (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Categoriile de blocuri
 
@@ -40,6 +42,8 @@ Acestea sunt diferitele categorii de blocuri:
 ### 5. Introdu primul bloc
 
 Pentru primele blocuri, vrem să folosim blocul „Alunecă 1 secundă la x: y:”. Îl găsești în categoria Mișcare. Cu ajutorul Editorului de formule poți modifica numărul de secunde și poziția X și Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Plasează blocul
 

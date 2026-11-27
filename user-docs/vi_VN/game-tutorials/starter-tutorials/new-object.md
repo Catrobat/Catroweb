@@ -2,7 +2,7 @@
 title: Đối tượng mới
 description: "Trong hướng dẫn này, bạn sẽ học cách tạo một đối tượng mới trong dự án và những cách khác nhau để làm điều đó."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 Trong hướng dẫn này, bạn sẽ học cách tạo một đối tượng mới trong dự án và những cách khác nhau để làm điều đó.
@@ -46,6 +46,8 @@ Bây giờ bạn cần đặt tên cho hình của mình.
 Sau đó, bạn cần đặt hình ở vị trí mong muốn bằng cách kéo sang trái/phải hoặc lên/xuống bằng ngón tay. Hãy lưu lại bằng nút ở góc trên bên phải.
 
 ![Đối tượng mới (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Xong rồi! Bạn đã tạo đối tượng mới của riêng mình.
 

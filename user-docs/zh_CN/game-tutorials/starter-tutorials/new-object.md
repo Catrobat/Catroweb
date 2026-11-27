@@ -2,7 +2,7 @@
 title: 新对象
 description: "在本教程中，你将学会如何在项目中创建新对象，以及你有哪些不同的方法。"
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 在本教程中，你将学会如何在项目中创建新对象，以及你有哪些不同的方法。
@@ -46,6 +46,8 @@ source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
 之后，你需要用手指把它向左右或上下移动，直观地放置它。然后点击右上角的按钮保存。
 
 ![新对象（3）](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. 你做到了！你创建了自己的新对象。
 

@@ -2,7 +2,7 @@
 title: Nytt objekt
 description: "I denne veiledningen lærer du hvordan du lager et nytt objekt i prosjektet ditt, og hvilke muligheter du har for det."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 I denne veiledningen lærer du hvordan du lager et nytt objekt i prosjektet ditt, og hvilke muligheter du har for det.
@@ -46,6 +46,8 @@ Nå må du gi bildet ditt et navn.
 Deretter må du plassere det visuelt ved å flytte det til venstre/høyre eller opp/ned med fingeren. Du må lagre det med knappen øverst til høyre.
 
 ![Nytt objekt (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Du klarte det! Du lagde ditt eget nye objekt.
 

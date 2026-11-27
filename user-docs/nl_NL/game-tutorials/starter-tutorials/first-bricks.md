@@ -2,12 +2,10 @@
 title: Eerste bricks
 description: "In deze tutorial leer je waar je verschillende bricks vindt om een object te programmeren."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 In deze tutorial leer je waar je verschillende bricks vindt om een object te programmeren. Ook krijg je een goed overzicht van de categorieën van bricks.
-
-![Eerste bricks](../../../media/game-tutorials/First-Bricks.png)
 
 Om bricks toe te voegen en je object te programmeren, moet je al een project met een object hebben gemaakt. Hulp nodig? Bekijk dan de tutorial **[Nieuw object](new-object.md)**.
 
@@ -23,13 +21,17 @@ Eerst moet je je project openen. Je hebt al een object gemaakt (anders bekijk je
 
 Daarna zie je dat er al een paar bricks staan. Die bricks zijn gemaakt toen we het object visueel plaatsten.
 
-Deze bricks doen niets anders dan het object zetten op de exacte plek die we aan het begin hebben gekozen, zodra het project start. Je kunt deze positie hier ook altijd veranderen.
+Deze bricks doen niets anders dan het object zetten op de exacte plek die we aan het begin hebben gekozen, zodra de scène start. Je kunt deze positie hier ook altijd veranderen.
 
-![Eerste bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Bricks toevoegen
 
 Je kunt nu meer bricks maken door op de gele plusknop rechtsonder te tikken. Er verschijnt een nieuw venster met verschillende categorieën bricks. Deze categorieën worden in de volgende stap uitgelegd.
+
+![Eerste bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Categorieën van bricks
 
@@ -40,6 +42,8 @@ Dit zijn de verschillende categorieën van bricks:
 ### 5. Je eerste brick toevoegen
 
 Voor onze eerste brick gebruiken we de brick “Glijd 1 seconde naar x: y:”. Je vindt hem in de categorie Beweging. Met de formule-editor kun je het aantal seconden en de positie X en Y aanpassen.
+
+::brick{type=GlideToBrick}
 
 ### 6. De brick plaatsen
 

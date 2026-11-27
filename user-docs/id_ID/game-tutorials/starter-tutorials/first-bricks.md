@@ -2,12 +2,10 @@
 title: Blok Pertama
 description: "Dalam tutorial ini, kamu akan belajar di mana menemukan berbagai blok untuk memprogram sebuah objek."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Dalam tutorial ini, kamu akan belajar di mana menemukan berbagai blok untuk memprogram sebuah objek. Tutorial ini juga memberi gambaran yang baik tentang kategori blok.
-
-![Blok Pertama](../../../media/game-tutorials/First-Bricks.png)
 
 Untuk memasukkan blok dan memprogram objekmu, kamu sebaiknya sudah membuat proyek dengan sebuah objek. Kalau kamu butuh bantuan, kamu bisa melihat tutorial **[Objek Baru](new-object.md)**.
 
@@ -23,13 +21,17 @@ Pertama, kamu perlu membuka proyekmu. Kamu seharusnya sudah membuat objek (kalau
 
 Setelah itu kamu akan melihat bahwa sudah ada beberapa blok. Blok-blok itu dibuat saat kita menempatkan objek secara visual.
 
-Blok-blok ini hanya menempatkan objek kita di posisi tepat yang kita pilih di awal, saat proyek mulai. Kamu juga bisa mengubah posisi ini kapan saja di sini.
+Blok-blok ini hanya menempatkan objek kita di posisi tepat yang kita pilih di awal, saat adegan dimulai. Kamu juga bisa mengubah posisi ini kapan saja di sini.
 
-![Blok Pertama (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Masukkan blok
 
 Sekarang kamu bisa membuat blok lagi dengan mengetuk tombol plus kuning di pojok kanan bawah. Kamu akan melihat jendela baru yang berisi beberapa kategori blok. Kategori ini dijelaskan di langkah berikutnya.
+
+![Blok Pertama (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Kategori blok
 
@@ -40,6 +42,8 @@ Ini adalah kategori blok yang berbeda:
 ### 5. Masukkan blok pertama
 
 Untuk blok pertama kita, kita ingin memakai blok “Meluncur 1 detik ke x: y:”. Kamu bisa menemukannya di kategori gerak. Dengan Editor Formula, kamu bisa mengubah jumlah detik serta posisi X dan Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Letakkan blok
 

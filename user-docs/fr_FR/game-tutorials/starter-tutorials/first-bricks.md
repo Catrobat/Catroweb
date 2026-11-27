@@ -2,12 +2,10 @@
 title: Premières briques
 description: "Dans ce tutoriel, tu apprends où trouver les différentes briques pour programmer un objet."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Dans ce tutoriel, tu apprends où trouver les différentes briques pour programmer un objet. Tu vois aussi un bon aperçu des catégories de briques.
-
-![Premières briques](../../../media/game-tutorials/First-Bricks.png)
 
 Pour ajouter des briques et programmer ton objet, tu dois déjà avoir créé un projet avec un objet. Si tu as besoin d’aide, regarde le tutoriel **[Nouvel objet](new-object.md)**.
 
@@ -23,13 +21,17 @@ D’abord, ouvre ton projet. Tu dois déjà avoir créé un objet (sinon, regard
 
 Ensuite, tu vois qu’il y a déjà quelques briques. Ces briques ont été créées quand nous avons placé l’objet sur l’écran.
 
-Ces briques font une seule chose : quand le projet démarre, elles placent notre objet exactement à l’endroit choisi au début. Tu peux changer cette position ici quand tu veux.
+Ces briques font une seule chose : quand la scène démarre, elles placent notre objet exactement à l’endroit choisi au début. Tu peux changer cette position ici quand tu veux.
 
-![Premières briques (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Ajouter des briques
 
 Maintenant, tu peux ajouter d’autres briques. Touche le bouton plus jaune en bas à droite. Une nouvelle fenêtre s’ouvre avec plusieurs catégories de briques. Ces catégories sont expliquées à l’étape suivante.
+
+![Premières briques (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Catégories de briques
 
@@ -40,6 +42,8 @@ Voici les différentes catégories de briques :
 ### 5. Ajouter ta première brique
 
 Pour nos premières briques, nous utilisons la brique « Glisser en 1 seconde jusqu’à x : y : ». Tu la trouves dans la catégorie « Mouvement ». Avec l’éditeur de formules, tu peux changer le nombre de secondes et la position x et y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Placer la brique
 

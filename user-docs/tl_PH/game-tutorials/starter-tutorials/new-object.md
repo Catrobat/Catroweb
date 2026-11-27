@@ -2,7 +2,7 @@
 title: "Bagong Objekto"
 description: "Sa tutorial na ito, matututunan mo kung paano lumikha ng isang bagong bagay sa iyong proyekto at ang iba't ibang mga posibilidad na mayroon kang para dito."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 Sa tutorial na ito, matututunan mo kung paano lumikha ng isang bagong bagay sa iyong proyekto at ang iba't ibang mga posibilidad na mayroon kang para dito.
@@ -46,6 +46,8 @@ Ngayon kailangan mong bigyan ng pangalan ang iyong larawan.
 Pagkatapos nito kailangan mong ilagay ito sa visual na paraan sa pamamagitan ng paglilipat nito sa kaliwa/haking o up/down sa iyong daliri. Kailangan mong i-save ito sa pindutan sa kanang tuktok ng itaas.
 
 ![Bagong Object (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Naglikha ka ng iyong sariling bagong bagay.
 

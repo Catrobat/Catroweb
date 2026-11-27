@@ -2,7 +2,7 @@
 title: Nouvel objet
 description: "Dans ce tutoriel, tu apprends à créer un nouvel objet dans ton projet et tu découvres les différentes façons de le faire."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 Dans ce tutoriel, tu apprends à créer un nouvel objet dans ton projet et tu découvres les différentes façons de le faire.
@@ -46,6 +46,8 @@ Maintenant, donne un nom à ton image.
 Ensuite, place l’image sur l’écran : fais-la glisser avec ton doigt vers la gauche, la droite, le haut ou le bas. Enregistre avec le bouton en haut à droite.
 
 ![Nouvel objet (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Bravo ! Tu as créé ton propre nouvel objet.
 

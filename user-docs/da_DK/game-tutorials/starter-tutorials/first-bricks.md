@@ -2,12 +2,10 @@
 title: Første klodser
 description: "I denne vejledning lærer du, hvor du finder forskellige klodser til at programmere et objekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 I denne vejledning lærer du, hvor du finder forskellige klodser til at programmere et objekt. Desuden får du et godt overblik over klodskategorierne.
-
-![Første klodser](../../../media/game-tutorials/First-Bricks.png)
 
 For at indsætte klodser og programmere dit objekt skal du allerede have lavet et projekt med et objekt. Hvis du har brug for hjælp til det, kan du kigge på vejledningen **[Nyt objekt](new-object.md)**.
 
@@ -23,13 +21,17 @@ Først skal du åbne dit projekt. Du skal allerede have lavet et objekt (hvis ik
 
 Herefter ser du, at der allerede er nogle klodser. Disse klodser blev lavet, da vi placerede objektet visuelt.
 
-Klodserne gør ikke mere, end at placere vores objekt præcis der, hvor vi valgte det i starten, når projektet begynder. Du kan også ændre denne position her, når som helst.
+Klodserne gør ikke mere, end at placere vores objekt præcis der, hvor vi valgte det i starten, når scenen starter. Du kan også ændre denne position her, når som helst.
 
-![Første klodser (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Indsæt klodser
 
 Nu kan du lave flere klodser ved at trykke på den gule plusknap nederst i højre hjørne. Du ser et nyt vindue med flere kategorier af klodser. Kategorierne forklares i næste trin.
+
+![Første klodser (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Klodskategorier
 
@@ -40,6 +42,8 @@ Dette er de forskellige klodskategorier:
 ### 5. Indsæt den første klods
 
 Til vores første klodser vil vi bruge klodsen “Glid 1 sekund til x: y:”. Du finder den i kategorien Bevægelse. Med formeleditoren kan du ændre antallet af sekunder og positionen x og y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Placér klodsen
 

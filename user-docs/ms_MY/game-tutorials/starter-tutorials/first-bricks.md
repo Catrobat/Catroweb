@@ -2,12 +2,10 @@
 title: Blok Pertama
 description: "Dalam tutorial ini, kamu akan belajar di mana hendak mencari pelbagai blok untuk mengaturcara sesuatu objek."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Dalam tutorial ini, kamu akan belajar di mana hendak mencari pelbagai blok untuk mengaturcara sesuatu objek. Selain itu, tutorial ini memberi gambaran yang baik tentang kategori blok.
-
-![Blok Pertama](../../../media/game-tutorials/First-Bricks.png)
 
 Untuk memasukkan blok dan mengaturcara objek kamu, kamu seharusnya sudah mencipta projek dengan objek. Jika kamu perlukan bantuan, kamu boleh lihat tutorial **[Objek Baharu](new-object.md)**.
 
@@ -23,13 +21,17 @@ Pertama, kamu perlu membuka projek kamu. Kamu sepatutnya sudah mencipta objek (j
 
 Selepas itu kamu akan nampak bahawa sudah ada beberapa blok. Blok-blok itu dicipta apabila kita meletakkan objek secara visual.
 
-Blok-blok ini hanya meletakkan objek kita di kedudukan tepat yang kita pilih pada permulaan apabila projek bermula. Kamu juga boleh menukar kedudukan ini pada bila-bila masa di sini.
+Blok-blok ini hanya meletakkan objek kita di kedudukan tepat yang kita pilih pada permulaan apabila babak bermula. Kamu juga boleh menukar kedudukan ini pada bila-bila masa di sini.
 
-![Blok Pertama (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Masukkan blok
 
 Sekarang kamu boleh mencipta lebih banyak blok dengan mengklik butang tambah kuning di sudut kanan bawah. Kamu akan nampak tetingkap baharu yang memberi beberapa kategori blok. Kategori ini diterangkan dalam langkah seterusnya.
+
+![Blok Pertama (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Kategori blok
 
@@ -40,6 +42,8 @@ Inilah kategori blok yang berbeza:
 ### 5. Masukkan blok pertama
 
 Untuk blok pertama kita, kita mahu guna blok “Gelongsor 1 saat ke X: Y:”. Kamu boleh jumpanya dalam kategori gerakan. Dengan Editor Formula, kamu boleh mengedit jumlah saat dan kedudukan X dan Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Letakkan blok
 

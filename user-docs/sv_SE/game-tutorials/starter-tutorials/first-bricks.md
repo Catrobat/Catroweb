@@ -2,12 +2,10 @@
 title: Första blocken
 description: "I den här tutorialen lär du dig var du hittar olika block för att programmera ett objekt."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 I den här tutorialen lär du dig var du hittar olika block för att programmera ett objekt. Dessutom får du en bra överblick över blockkategorierna.
-
-![Första blocken](../../../media/game-tutorials/First-Bricks.png)
 
 För att lägga till block och programmera ditt objekt behöver du redan ha skapat ett projekt med ett objekt. Om du behöver hjälp med det kan du titta på tutorialen **[Nytt objekt](new-object.md)**.
 
@@ -23,13 +21,17 @@ Först behöver du öppna ditt projekt. Du borde redan ha skapat ett objekt (om 
 
 Efter det ser du att det redan finns några block. De här blocken skapades när vi placerade objektet visuellt.
 
-De här blocken gör inget annat än att placera vårt objekt på exakt den position vi valde i början när projektet startar. Du kan också ändra positionen här när du vill.
+De här blocken gör inget annat än att placera vårt objekt på exakt den position vi valde i början när scenen startar. Du kan också ändra positionen här när du vill.
 
-![Första blocken (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Lägg till block
 
 Nu kan du skapa fler block genom att klicka på den gula plusknappen längst ner till höger. Då öppnas ett nytt fönster med flera kategorier av block. Kategorierna beskrivs i nästa steg.
+
+![Första blocken (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Blockkategorier
 
@@ -40,6 +42,8 @@ Det här är de olika blockkategorierna:
 ### 5. Lägg till första blocket
 
 För vårt första block vill vi använda blocket ”Glid 1 sekund till x: y:”. Du hittar det i kategorin för rörelse. Med formelredigeraren kan du ändra antalet sekunder och positionen X och Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Placera blocket
 

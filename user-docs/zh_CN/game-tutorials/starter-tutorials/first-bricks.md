@@ -2,12 +2,10 @@
 title: 第一批积木
 description: "在本教程中，你将学会在哪里找到各种积木，用来为一个角色编程。"
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 在本教程中，你将学会在哪里找到各种积木，用来为一个角色编程。此外，本教程还能让你大致了解各个积木类别。
-
-![第一批积木](../../../media/game-tutorials/First-Bricks.png)
 
 要插入积木并为你的角色编程，你应该已经创建了一个带有角色的项目。如果你需要帮助，可以看看**[新对象](new-object.md)**教程。
 
@@ -23,13 +21,17 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 
 之后你会发现，角色上已经有一些积木了。这些积木是我们在可视化放置角色时自动生成的。
 
-这些积木的作用，只是在项目开始时把角色放到我们一开始选好的位置。你也可以随时在这里更改这个位置。
+这些积木的作用，只是在场景开始时把角色放到我们一开始选好的位置。你也可以随时在这里更改这个位置。
 
-![第一批积木（1）](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. 插入积木
 
 现在，你可以点击右下角的黄色加号按钮，来创建更多积木。会出现一个新窗口，里面有几个积木类别。这些类别会在下一步介绍。
+
+![第一批积木（1）](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. 积木类别
 
@@ -40,6 +42,8 @@ source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
 ### 5. 插入第一块积木
 
 对于我们的第一批积木，我们要使用“滑行 1 秒到 x：y：”积木。你可以在**运动**类别中找到它。使用公式编辑器，你可以修改秒数，以及 X 和 Y 的位置。
+
+::brick{type=GlideToBrick}
 
 ### 6. 放置积木
 

@@ -2,7 +2,7 @@
 title: Naujas objektas
 description: "Šioje pamokoje sužinosi, kaip sukurti naują objektą savo projekte ir kokias galimybes tam turi."
 order: 0
-source_hash: 'b9e1f0e0915275f1dfb3d5f3765e5c448a480cc56ae8c72f75fa7e100610bece'
+source_hash: '79db672668b087e399c74f5efb4ebf4342a2c56ea85d2f9f69a6a3b4ddc6ddd4'
 ---
 
 Šioje pamokoje sužinosi, kaip sukurti naują objektą savo projekte ir kokias galimybes tam turi.
@@ -46,6 +46,8 @@ Dabar turi suteikti savo paveikslėliui pavadinimą.
 Po to turi vizualiai jį padėti, pastumdamas pirštu į kairę ar dešinę arba aukštyn ar žemyn. Išsaugok jį mygtuku viršutiniame dešiniajame kampe.
 
 ![Naujas objektas (3)](../../../media/game-tutorials/New-Object-3.png)
+
+::brick{type=PlaceAtBrick}
 
 ### 7. Pavyko! Tu sukūrei savo naują objektą.
 

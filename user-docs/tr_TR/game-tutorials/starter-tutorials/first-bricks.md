@@ -2,12 +2,10 @@
 title: İlk bloklar
 description: "Bu eğitimde bir nesneyi programlamak için farklı blokları nerede bulacağını öğreneceksin."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Bu eğitimde bir nesneyi programlamak için farklı blokları nerede bulacağını öğreneceksin. Ayrıca bu eğitim blok kategorilerini de güzelce gösterir.
-
-![İlk bloklar](../../../media/game-tutorials/First-Bricks.png)
 
 Blok ekleyip nesneni programlamak için önce bir nesnesi olan bir proje yapmış olmalısın. Bunun için yardıma ihtiyacın varsa **[Yeni nesne](new-object.md)** eğitimine bakabilirsin.
 
@@ -23,13 +21,17 @@ Blok ekleyip nesneni programlamak için önce bir nesnesi olan bir proje yapmı�
 
 Sonra orada zaten bazı bloklar olduğunu görürsün. Bu bloklar, nesneyi ekranda yerleştirdiğimizde yapıldı.
 
-Bu bloklar sadece bir şey yapar: Proje başlayınca nesnemizi en başta seçtiğimiz yere koyarlar. Bu yeri burada istediğin zaman değiştirebilirsin.
+Bu bloklar sadece bir şey yapar: Bölüm başladığında nesnemizi en başta seçtiğimiz yere koyarlar. Bu yeri burada istediğin zaman değiştirebilirsin.
 
-![İlk bloklar (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Blok ekle
 
 Şimdi sağ alt köşedeki sarı artı düğmesine dokunarak yeni bloklar ekleyebilirsin. Blok kategorilerinin olduğu yeni bir pencere açılır. Bu kategorileri bir sonraki adımda anlatıyoruz.
+
+![İlk bloklar (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Blok kategorileri
 
@@ -40,6 +42,8 @@ Bunlar farklı blok kategorileridir:
 ### 5. İlk bloğu ekle
 
 İlk bloğumuz için “Kay 1 saniye hedef x: Y:” bloğunu kullanmak istiyoruz. Onu Hareket kategorisinde bulursun. Formül düzenleyici ile saniye sayısını ve X ile Y konumunu değiştirebilirsin.
+
+::brick{type=GlideToBrick}
 
 ### 6. Bloğu yerleştir
 

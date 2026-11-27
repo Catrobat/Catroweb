@@ -1,13 +1,11 @@
 ---
 title: První bloky
 description: "V tomto návodu se naučíš, kde najít různé bloky pro naprogramování objektu."
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 order: 0
 ---
 
 V tomto návodu se naučíš, kde najdeš různé bloky pro naprogramování objektu. Zároveň dostaneš dobrý přehled o kategoriích bloků.
-
-![První bloky](../../../media/game-tutorials/First-Bricks.png)
 
 Abys mohl vkládat bloky a programovat objekt, měl bys už mít vytvořený projekt s objektem. Pokud s tím potřebuješ pomoct, podívej se na návod **[Nový objekt](new-object.md)**.
 
@@ -23,13 +21,17 @@ Nejdřív musíš otevřít svůj projekt. Objekt už bys měl mít vytvořený 
 
 Potom uvidíš, že tam už nějaké bloky jsou. Ty vznikly, když jsi objekt vizuálně umisťoval.
 
-Tyto bloky dělají jen to, že postaví objekt na přesné místo, které jsi na začátku vybral, až se projekt spustí. Tuto pozici tady můžeš kdykoli změnit.
+Tyto bloky dělají jen to, že postaví objekt na přesné místo, které jsi na začátku vybral, až se scéna spustí. Tuto pozici tady můžeš kdykoli změnit.
 
-![První bloky (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Vložení bloků
 
 Nové bloky vytvoříš klepnutím na žluté tlačítko plus v pravém dolním rohu. Otevře se nové okno s několika kategoriemi bloků. Těmto kategoriím se věnujeme v dalším kroku.
+
+![První bloky (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Kategorie bloků
 
@@ -40,6 +42,8 @@ Toto jsou různé kategorie bloků:
 ### 5. Vlož první blok
 
 Pro náš první blok použijeme blok „Klouzej 1 sekundu do X: Y:“. Najdeš ho v kategorii Pohyb. Pomocí editoru vzorců můžeš upravit počet sekund a pozici X a Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Umísti blok
 

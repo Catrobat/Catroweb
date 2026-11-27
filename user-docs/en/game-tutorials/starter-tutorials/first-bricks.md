@@ -6,8 +6,6 @@ order: 0
 
 In this tutorial, you will learn where to find various bricks to program an object. Additionally, this tutorial provides a good overview of the brick categories.
 
-![First Bricks](../../../media/game-tutorials/First-Bricks.png)
-
 To insert bricks and program your object, you should already have created a project with an object. If you need help with this, you can have a look at the **[New Object](new-object.md)**-tutorial.
 
 *Here you can download the tutorial in PDF-format:*
@@ -22,13 +20,17 @@ At first, you need to open your project. You should already have created an obje
 
 After that you will see that there are already some bricks. Those bricks were created when we visually placed the object.
 
-These bricks do nothing more than place our object at the exact position we selected at the beginning once the project starts. You can also change this position at any time here.
+When the scene starts, these bricks put our object in the exact spot we chose earlier. You can also change this position at any time here.
 
-![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Insert Bricks
 
 Now you can create more bricks by clicking on the yellow plus-button on the bottom right corner. You will see a new window giving you several categories for bricks. These categories are described in the next step.
+
+![First Bricks (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. Brick Categories
 
@@ -39,6 +41,8 @@ These are the different brick categories:
 ### 5. Insert First Brick
 
 For our first bricks, we want to use the “Glide 1 second to X: Y:” brick. You can find it in the motion category. With the Formula Editor you can edit the amount of seconds and the position X and Y.
+
+::brick{type=GlideToBrick}
 
 ### 6. Place the brick
 

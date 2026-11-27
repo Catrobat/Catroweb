@@ -2,12 +2,10 @@
 title: "İlk kod blokları"
 description: "Bu dərslikdə bir obyektin proqramlaşdırılması üçün müxtəlif kod bloklarını harada tapmağı öyrənəcəksiniz."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
 Bu dərslikdə bir obyektin proqramlaşdırılması üçün müxtəlif kod bloklarını harada tapmağı öyrənəcəksiniz. Bundan əlavə, bu təlimat kod blokları kateqoriyasının yaxşı bir ümumgörüsü təmin edir.
-
-![İlk kod blokları](../../../media/game-tutorials/First-Bricks.png)
 
 Kod bloklarını daxil etmək və obyektinizi proqramlaşdırmaq üçün bir obyektlə layihə yaratmalısan. Əgər bu işdə kömək lazımdırsa, **[Yeni obyekt](new-object.md)**- Təlimat.
 
@@ -23,13 +21,17 @@ Kod bloklarını daxil etmək və obyektinizi proqramlaşdırmaq üçün bir oby
 
 Bundan sonra görərsən ki, artıq bəzi kod blokları var. Bu kod blokları obyektin vizual olaraq yerləşdirilməsində yaradılmışdır.
 
-Bu kod blokları obyektimizi layihənin başlanğıcında seçdiyimiz dəqiq mövqeyə qoymaqdan başqa bir şey etmir. Bu mövqeyini hər an dəyişə bilərsiniz.
+Bu kod blokları obyektimizi epizod başlayanda əvvəldən seçdiyimiz dəqiq mövqeyə qoymaqdan başqa bir şey etmir. Bu mövqeyini hər an dəyişə bilərsiniz.
 
-![İlk kod blokları (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
+
+::brick{type=PlaceAtBrick}
 
 ### 3. Kod bloklarını daxil edin
 
 İndi sağ alt köşədəki sarı plus düyməsini vuraraq daha çox kod blokunu yarada bilərsən. Yeni bir pəncərə görəcəksiniz ki, kod blokları üçün bir neçə kateqoriya veriləcəkdir. Bu kateqoriyalar növbəti addımda təsvir olunur.
+
+![İlk kod blokları (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
 ### 4. kod blokları Kategoriyalar
 
@@ -40,6 +42,8 @@ Bunlar müxtəlif kod blokları kateqoriyasıdır:
 ### 5. İlk kod blokunu daxil edin
 
 İlk kod bloklarımız üçün «Sürüş: 1 saniyə hədəf x: Y:» kod blokundan istifadə etmək istəyirik. Onu hərəkət kateqoriyasında tapa bilərsiniz. Düstur redaktoru ilə saniyələrin miqdarını və mövqeyini X və Y redaktə edə bilərsən.
+
+::brick{type=GlideToBrick}
 
 ### 6. Kod blokunu yerləşdirin
 

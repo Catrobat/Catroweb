@@ -1,56 +1,60 @@
 ---
-title: "Kwanza block code"
-description: "Katika mafunzo haya, utajifunza ambapo kupata mbalimbali block code kwa ajili ya programu kitu."
+title: "Matofali ya kwanza"
+description: "Katika mafunzo haya, utajifunza mahali pa kupata matofali ya kupanga jinsi kitu chako kitakavyofanya kazi."
 order: 0
-source_hash: '4fff2cedf6a300b82a3ea5e1c5a8539a45b44bd5c67624a85693f1fc0a3fe6d1'
+source_hash: '3a65314c7a31d22d5594e3e8ebcf1ffcb71eca420d3292c792d00ff1381ee559'
 ---
 
-Katika mafunzo haya, utajifunza ambapo kupata mbalimbali block code kwa ajili ya programu kitu. Kwa kuongezea, mafunzo haya hutoa muhtasari mzuri wa makundi ya block code.
+Katika mafunzo haya, utajifunza mahali pa kupata matofali ya kupanga jinsi kitu chako kitakavyofanya kazi. Pia utajifunza kuhusu makundi ya matofali.
 
-![Kwanza block code](../../../media/game-tutorials/First-Bricks.png)
-
-Ili kuingiza blocks code na programu kitu yako, unapaswa tayari kuwa umefanya mradi na kitu. Ikiwa unahitaji msaada na hii, unaweza kuangalia mafunzo ya **[Kitu Kipya](new-object.md)**.
+Kabla ya kuongeza matofali, hakikisha una mradi wenye kitu. Ikiwa unahitaji msaada, soma mafunzo ya **[Kitu Kipya](new-object.md)**.
 
 *Hapa unaweza kupakua mafunzo katika PDF-format:*
 
-[Kwanza block code](../../../media/game-tutorials/First-Bricks.pdf)
+[Matofali ya kwanza](../../../media/game-tutorials/First-Bricks.pdf)
 
 ### 1. Fungua Kitu Kinachotokea
 
 Kwanza, unahitaji kufungua mradi wako. Unapaswa tayari kuunda kitu (kama si, kuangalia **[Kitu Kipya](new-object.md)**-mtuzo nje). Sasa unaweza kubonyeza jina la kitu hicho.
 
-### 2. Block zilizopo za code
+### 2. Matofali yaliyopo
 
-Baada ya hapo utaona kwamba kuna tayari baadhi ya block code. Vifungu hivyo viliundwa wakati tulipoweka kifaa hicho kwa macho.
+Utaona matofali ambayo tayari yapo. Yaliundwa ulipoweka kitu chako mahali pake kwenye skrini.
 
-Hizi blocks code kufanya kitu chochote zaidi ya kuweka kitu yetu katika nafasi halisi sisi kuchagua mwanzoni mara tu mradi kuanza. Unaweza pia kubadilisha msimamo huu wakati wowote hapa.
+Onyesho linapoanza, matofali haya huweka kitu chako mahali ulipochagua mwanzoni. Unaweza kubadilisha mahali hapo hapa wakati wowote.
 
-![Vifungu vya kwanza vya nambari (1)](../../../media/game-tutorials/First-Bricks-1.png)
+::brick{type=StartScript}
 
-### 3. Ingiza vifungo vya nambari
+::brick{type=PlaceAtBrick}
 
-Sasa unaweza kuunda zaidi block code kwa kubofya kwenye yellow plus kifungo katika kona ya chini kulia. Utaona dirisha mpya ambayo inakupa makundi kadhaa kwa ajili ya vitalu code. Makundi hayo yataelezwa katika hatua inayofuata.
+### 3. Ongeza matofali
 
-### 4. block code Categories
+Gusa kitufe cha manjano chenye alama ya + kwenye kona ya chini kulia ili kuongeza matofali. Kidirisha kitafunguka na kukuonyesha makundi ya matofali. Utayaona katika hatua inayofuata.
 
-Hizi ni aina mbalimbali za block code:
+![Matofali ya kwanza (1)](../../../media/game-tutorials/First-Bricks-1.png)
 
-![Vifungu vya kwanza vya nambari (2)](../../../media/game-tutorials/First-Bricks-2.png)
+### 4. Makundi ya matofali
 
-### 5. Ingiza kifungu cha kwanza cha nambari
+Haya ndiyo makundi ya matofali:
 
-Kwa ajili ya kuzuia yetu ya kwanza code, tunataka kutumia block code “Teleza kwa 1 sekunde hadi x: Y:”. Unaweza kupata katika jamii ya harakati. Kwa Kihariri cha fomula unaweza kuhariri kiasi cha sekunde na nafasi X na Y.
+![Matofali ya kwanza (2)](../../../media/game-tutorials/First-Bricks-2.png)
 
-### 6. Weka block code
+### 5. Ongeza tofali la kwanza
 
-Weka block code katika nafasi ya mwisho ya programu yako na kuendesha programu yako kwa mara ya kwanza. Unaweza kufanya hivyo kwa kutumia kitufe cha kucheza kijani.
+Tumia tofali “Teleza kwa 1 sekunde hadi x: 100 y: 200”. Utalipata katika kundi la Mwendo. Katika Kihariri cha fomula, unaweza kubadili muda kwa sekunde na nafasi ya x na y.
 
-![Vifungu vya kwanza vya nambari (3)](../../../media/game-tutorials/First-Bricks-3.png)
+::brick{type=GlideToBrick}
 
-### 7. Umefanikiwa, umeingiza kipande chako cha kwanza cha nambari.
+### 6. Weka tofali
+
+Weka tofali mwishoni mwa programu yako. Kisha gusa kitufe cha manjano cha kucheza ili kujaribu programu yako kwa mara ya kwanza.
+
+![Matofali ya kwanza (3)](../../../media/game-tutorials/First-Bricks-3.png)
+
+### 7. Umefanikiwa! Umeongeza tofali lako la kwanza.
 
 Sasa umepanga programu yako ya kwanza!
 
 Ikiwa unataka kushiriki mradi wako na marafiki zako, unaweza kuangalia mafunzo ya **[Pakia na Kushiriki](upload-and-share.md)**, ambapo itaelezwa jinsi inavyofanya kazi. La sivyo, unaweza kuanza na mradi wako wa kwanza. Ikiwa unahitaji msaada au msukumo, tafadhali soma mafunzo yetu kutoka mfululizo wa Waanzaji.
 
-Unaweza kupata habari zaidi kuhusu kila block code [hapa](../../../reference/)!
+Unaweza kupata habari zaidi kuhusu kila tofali [hapa](../../../reference/)!
