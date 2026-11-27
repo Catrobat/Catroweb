@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class TextSanitizer
 {
   private const string REPLACEMENT_CONTACT = '[contact removed]';
+  private const string REPLACEMENT_LINK = '[link removed]';
 
   private const string CONTACT_LINKS_PATTERN = '/('
     .'https?:\/\/(?:www\.)?discord(?:app)?(?:\.gg|\.com\/invite)\/[a-zA-Z0-9\-]+'
@@ -66,13 +67,24 @@ class TextSanitizer
   /** @var array<string, non-empty-string[]> */
   private array $spacedPatterns = [];
 
+  /** @var string[] */
+  private array $allowlistedHosts = [];
+
   public function __construct(
     private readonly RequestStack $requestStack,
     #[Autowire('%kernel.project_dir%/config/moderation/wordlists')]
     private readonly string $wordListDir,
     #[Autowire('%env(bool:TEXT_SANITIZER_ENABLED)%')]
     private readonly bool $enabled = true,
+    #[Autowire('%env(bool:TEXT_SANITIZER_LINK_ALLOWLIST_ENABLED)%')]
+    private readonly bool $linkAllowlistEnabled = false,
+    #[Autowire('%kernel.project_dir%/config/moderation/link_allowlist.php')]
+    private readonly string $linkAllowlistPath = '',
   ) {
+    if ($this->linkAllowlistEnabled && '' !== $this->linkAllowlistPath && is_file($this->linkAllowlistPath)) {
+      $list = require $this->linkAllowlistPath;
+      $this->allowlistedHosts = is_array($list) ? array_map('strtolower', $list) : [];
+    }
   }
 
   public function sanitize(?string $text): ?string
@@ -94,6 +106,9 @@ class TextSanitizer
     $text = $this->redactContactLinks($text);
     $text = $this->redactMessengerHandles($text);
     $text = $this->redactUriSchemes($text);
+    if ($this->linkAllowlistEnabled && [] !== $this->allowlistedHosts) {
+      $text = $this->redactNonAllowlistedLinks($text);
+    }
 
     return $this->filterProfanity($text, $locale);
   }
@@ -110,7 +125,7 @@ class TextSanitizer
   private function redactEmails(string $text): string
   {
     return preg_replace(
-      '/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/',
+      '/(?<![\w\/.])[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/',
       self::REPLACEMENT_CONTACT,
       $text
     ) ?? $text;
@@ -148,6 +163,56 @@ class TextSanitizer
     return preg_replace(
       '/(?:skype|tg|whatsapp|viber|line|kakaoopen|fb-messenger):\/\/[^\s]+/i',
       self::REPLACEMENT_CONTACT,
+      $text
+    ) ?? $text;
+  }
+
+  /**
+   * Replaces any link whose host is not in the allowlist with [link removed].
+   *
+   * Security properties:
+   *  - Bare domains and scheme URLs are detected using LinkDetector's pattern (no space around the dot).
+   *  - Host is extracted via parse_url() so userinfo tricks (https://trusted@evil.com) resolve to 'evil.com'.
+   *  - Matching is exact on the parsed host (lowercased, trailing dot and leading www. stripped).
+   *  - No wildcard subdomain matching: a subdomain only passes if it is on the list itself.
+   *  - Unparseable URLs are removed as a safe default.
+   *
+   * @see https://github.com/Catrobat/Catroweb/issues/7388
+   */
+  private function redactNonAllowlistedLinks(string $text): string
+  {
+    return preg_replace_callback(
+      LinkDetector::LINK_PATTERN,
+      function (array $m): string {
+        $rawUrl = $m[0];
+        $trailing = '';
+        if (preg_match('/[.,;:!?)]+$/', $rawUrl, $punct)) {
+          $trailing = $punct[0];
+          $url = substr($rawUrl, 0, -strlen($trailing));
+        } else {
+          $url = $rawUrl;
+        }
+
+        $parseTarget = preg_match('/^[a-zA-Z][a-zA-Z0-9+.\-]*:\/\//', $url)
+          ? $url
+          : 'http://'.$url;
+
+        $host = parse_url($parseTarget, PHP_URL_HOST);
+        if (!is_string($host) || '' === $host) {
+          return self::REPLACEMENT_LINK.$trailing;
+        }
+
+        $host = strtolower(rtrim($host, '.'));
+        if (str_starts_with($host, 'www.')) {
+          $host = substr($host, 4);
+        }
+
+        if (in_array($host, $this->allowlistedHosts, true)) {
+          return $url.$trailing;
+        }
+
+        return self::REPLACEMENT_LINK.$trailing;
+      },
       $text
     ) ?? $text;
   }

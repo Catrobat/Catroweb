@@ -44,7 +44,6 @@ class LinkDetectorTest extends TestCase
       'bare domain' => ['youtube.com/@someone'],
       'short link' => ['youtu.be/abc'],
       'domain inside a name' => ['CoolGamer_twitch.tv'],
-      'spaced dot' => ['youtube . com'],
       'upper case' => ['VISIT MYSITE.NET'],
       'zero-width space in domain' => ["youtube\u{200B}.com"],
       'country domain' => ['meinshop.de'],
@@ -72,6 +71,8 @@ class LinkDetectorTest extends TestCase
       'version number' => ['Gamer 2.0'],
       'handle without domain' => ['@test24710'],
       'umlauts' => ['Jürgen.Müller'],
+      'spaced dot' => ['youtube . com'],
+      'sentence ending with period' => ['I finished it. At home'],
     ];
   }
 }
